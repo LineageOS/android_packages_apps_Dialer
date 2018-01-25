@@ -26,8 +26,7 @@ import android.os.Build.VERSION_CODES;
 import android.support.v4.content.pm.ShortcutInfoCompat;
 import android.support.v4.content.pm.ShortcutManagerCompat;
 import android.support.v4.graphics.drawable.IconCompat;
-import com.android.dialer.buildtype.BuildType;
-import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.main.Main;
 import javax.inject.Inject;
 
@@ -40,7 +39,7 @@ final class MainImpl implements Main {
 
   @Override
   public boolean isNewUiEnabled(Context context) {
-    return BuildType.get() == BuildType.BUGFOOD || LogUtil.isDebugEnabled();
+    return ConfigProviderBindings.get(context).getBoolean("is_nui_shortcut_enabled", false);
   }
 
   @Override

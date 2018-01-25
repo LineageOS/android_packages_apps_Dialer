@@ -44,6 +44,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.contactphoto.NumberAttributeConverter;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.menu.NewVoicemailMenu;
@@ -201,14 +202,13 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     }
   }
 
-  // TODO(uabdullah): Consider/Implement TYPE (e.g Spam, TYPE_VOICEMAIL)
   private void setPhoto(VoicemailEntry voicemailEntry) {
     ContactPhotoManager.getInstance(context)
         .loadDialerThumbnailOrPhoto(
             quickContactBadge,
             parseUri(voicemailEntry.numberAttributes().getLookupUri()),
             voicemailEntry.numberAttributes().getPhotoId(),
-            parseUri(voicemailEntry.numberAttributes().getPhotoUri()),
+            NumberAttributeConverter.getPhotoUri(context, voicemailEntry.numberAttributes()),
             VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntry),
             LetterTileDrawable.TYPE_DEFAULT);
   }

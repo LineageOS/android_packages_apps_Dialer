@@ -20,6 +20,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
+import com.android.dialer.contactphoto.NumberAttributeConverter;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
@@ -39,7 +40,9 @@ final class PrimaryAction {
         .setPhotoInfo(
             PhotoInfo.builder()
                 .setPhotoId(voicemailEntry.numberAttributes().getPhotoId())
-                .setPhotoUri(voicemailEntry.numberAttributes().getPhotoUri())
+                .setPhotoUri(
+                    NumberAttributeConverter.getPhotoUri(
+                        context, voicemailEntry.numberAttributes()))
                 .setIsVideo(false)
                 .setContactType(
                     LetterTileDrawable.TYPE_DEFAULT) // TODO(uabdullah): Use proper type.

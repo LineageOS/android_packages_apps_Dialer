@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.LinearInterpolator;
 
 /** Controller for showing and hiding bubble bottom action view. */
@@ -157,10 +158,14 @@ final class BottomActionViewController {
 
     // Scale unhighlight target back to 1x
     if (!shouldHighlightDismiss && dismissHighlighted) {
+      // A11y
+      dismissView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_HOVER_EXIT);
       // Unhighlight dismiss
       dismissView.animate().scaleX(1f).scaleY(1f).setDuration(HIGHLIGHT_TARGET_DURATION).start();
       dismissHighlighted = false;
     } else if (!shouldHighlightEndCall && endCallHighlighted) {
+      // A11y
+      endCallView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_HOVER_EXIT);
       // Unhighlight end call
       endCallView.animate().scaleX(1f).scaleY(1f).setDuration(HIGHLIGHT_TARGET_DURATION).start();
       endCallHighlighted = false;
@@ -168,6 +173,8 @@ final class BottomActionViewController {
 
     // Scale highlight target larger
     if (shouldHighlightDismiss && !dismissHighlighted) {
+      // A11y
+      dismissView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_HOVER_ENTER);
       // Highlight dismiss
       dismissView.setPivotY(dismissView.getHeight() / 2 + textOffsetSize);
       dismissView
@@ -184,6 +191,8 @@ final class BottomActionViewController {
           .start();
       dismissHighlighted = true;
     } else if (shouldHighlightEndCall && !endCallHighlighted) {
+      // A11y
+      endCallView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_HOVER_ENTER);
       // Highlight end call
       endCallView.setPivotY(dismissView.getHeight() / 2 + textOffsetSize);
       endCallView
