@@ -80,6 +80,10 @@ public class TelephonyManagerCompat {
    */
   public static final Integer FEATURES_ASSISTED_DIALING = 1 << 4;
 
+  /** The {@link android.content.Intent} action used to show the assisted dialing settings. */
+  public static final String ACTION_SHOW_ASSISTED_DIALING_SETTINGS =
+      "android.telecom.action.SHOW_ASSISTED_DIALING_SETTINGS";
+
   /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
    * functionality) Returns 2 for Dual standby mode.(Dual SIM functionality)

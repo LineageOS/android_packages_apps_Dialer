@@ -28,6 +28,9 @@
   reset state of the app. -->
   <uses-permission android:name="android.permission.STATUS_BAR"/>
   <uses-permission android:name="android.permission.CAMERA"/>
+
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
   <!-- Warning: setting the required boolean to true would prevent installation of Dialer on
        devices which do not support a camera. -->
   <uses-feature
