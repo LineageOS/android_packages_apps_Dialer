@@ -107,6 +107,7 @@
     android:icon="@mipmap/ic_launcher_phone"
     android:label="@string/applicationLabel"
     android:name="com.android.dialer.binary.aosp.AospDialerApplication"
+    android:appCategory="social"
     android:supportsRtl="true"
     android:usesCleartextTraffic="false">
   </application>
