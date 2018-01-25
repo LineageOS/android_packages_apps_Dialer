@@ -131,22 +131,29 @@ public class SpecialCharSequenceMgr {
   }
 
   /**
-   * Handles secret codes to launch arbitrary activities in the form of *#*#<code>#*#*.
+   * Handles secret codes to launch arbitrary activities in the form of
+   * *#*#<code>#*#* or *#<code_starting_with_number>#.
    *
    * @param context the context to use
    * @param input the text to check for a secret code in
    * @return true if a secret code was encountered and handled
    */
   static boolean handleSecretCode(Context context, String input) {
-    // Secret codes are accessed by dialing *#*#<code>#*#*
-
-    int len = input.length();
-    if (len <= 8 || !input.startsWith("*#*#") || !input.endsWith("#*#*")) {
-      return false;
+    // Secret codes are accessed by dialing *#*#<code>#*#* or "*#<code_starting_with_number>#"
+    if (input.length() > 8 && input.startsWith("*#*#") && input.endsWith("#*#*")) {
+      String secretCode = input.substring(4, input.length() - 4);
+      TelephonyManagerCompat.handleSecretCode(context, secretCode);
+      return true;
     }
-    String secretCode = input.substring(4, len - 4);
-    TelephonyManagerCompat.handleSecretCode(context, secretCode);
-    return true;
+    if (input.length() >= 4
+        && input.startsWith("*#")
+        && input.endsWith("#")
+        && Character.isDigit(input.charAt(2))) {
+      String secretCode = input.substring(2, input.length() - 1);
+      TelephonyManagerCompat.handleSecretCode(context, secretCode);
+      return true;
+    }
+    return false;
   }
 
   /**
