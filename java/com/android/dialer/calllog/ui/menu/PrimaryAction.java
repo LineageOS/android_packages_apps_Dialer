@@ -24,6 +24,7 @@ import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
+import com.android.dialer.contactphoto.NumberAttributeConverter;
 
 /** Configures the primary action row (top row) for the bottom sheet. */
 final class PrimaryAction {
@@ -35,7 +36,7 @@ final class PrimaryAction {
         .setPhotoInfo(
             PhotoInfo.builder()
                 .setPhotoId(row.numberAttributes().getPhotoId())
-                .setPhotoUri(row.numberAttributes().getPhotoUri())
+                .setPhotoUri(NumberAttributeConverter.getPhotoUri(context, row.numberAttributes()))
                 .setLookupUri(row.numberAttributes().getLookupUri())
                 .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
                 .setContactType(CallLogContactTypes.getContactType(row))

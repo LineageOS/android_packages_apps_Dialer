@@ -75,7 +75,6 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
   }
 
   private AnnotatedCallLogDatabaseHelper databaseHelper;
-  private Coalescer coalescer;
 
   private final ThreadLocal<Boolean> applyingBatch = new ThreadLocal<>();
 
@@ -87,7 +86,12 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
   @Override
   public boolean onCreate() {
     databaseHelper = new AnnotatedCallLogDatabaseHelper(getContext(), MAX_ROWS);
-    coalescer = CallLogDatabaseComponent.get(getContext()).coalescer();
+
+    // Note: As this method is called before Application#onCreate, we must *not* initialize objects
+    // that require preparation work done in Application#onCreate.
+    // One example is to avoid obtaining an instance that depends on Google's proprietary config,
+    // which is initialized in Application#onCreate.
+
     return true;
   }
 
@@ -158,7 +162,10 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
                 null,
                 null,
                 AnnotatedCallLog.TIMESTAMP + " DESC")) {
-          Cursor coalescedRows = coalescer.coalesce(allAnnotatedCallLogRows);
+          Cursor coalescedRows =
+              CallLogDatabaseComponent.get(getContext())
+                  .coalescer()
+                  .coalesce(allAnnotatedCallLogRows);
           coalescedRows.setNotificationUri(
               getContext().getContentResolver(), CoalescedAnnotatedCallLog.CONTENT_URI);
           return coalescedRows;

@@ -40,7 +40,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.notification \
 	com.android.dialer.oem \
 	com.android.dialer.phonelookup.database \
-	com.android.dialer.phonelookup.consolidator \
 	com.android.dialer.phonenumberutil \
 	com.android.dialer.postcall \
 	com.android.dialer.precall.impl \
