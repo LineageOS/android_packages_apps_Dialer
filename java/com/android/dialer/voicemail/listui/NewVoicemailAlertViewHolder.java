@@ -18,19 +18,43 @@ package com.android.dialer.voicemail.listui;
 
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
 
 /** ViewHolder for {@link NewVoicemailAdapter} to display voicemail error states. */
 final class NewVoicemailAlertViewHolder extends ViewHolder {
 
-  private final TextView errorTextView;
+  private final TextView voicemailErrorTitleTextView;
+  private final TextView voicemailErrorDetailsTextView;
+  private final Button primaryButton;
+  private final Button secondaryButton;
 
   NewVoicemailAlertViewHolder(View view) {
     super(view);
-    errorTextView = view.findViewById(R.id.new_voicemail_alert_text);
+    voicemailErrorTitleTextView = view.findViewById(R.id.voicemail_alert_header);
+    voicemailErrorDetailsTextView = view.findViewById(R.id.voicemail_alert_details);
+    primaryButton = view.findViewById(R.id.voicemail_alert_primary_button);
+    secondaryButton = view.findViewById(R.id.voicemail_alert_primary_button);
   }
 
-  void setHeader(String error) {
-    errorTextView.setText(error);
+  void setTitle(CharSequence error) {
+    voicemailErrorTitleTextView.setText(error);
+  }
+
+  void setDescription(CharSequence error) {
+    voicemailErrorDetailsTextView.setText(error);
+  }
+
+  void setPrimaryButton(Action action) {
+    primaryButton.setVisibility(View.VISIBLE);
+    primaryButton.setText(action.getText());
+    primaryButton.setOnClickListener(action.getListener());
+  }
+
+  void setSecondaryButton(Action action) {
+    secondaryButton.setVisibility(View.VISIBLE);
+    secondaryButton.setText(action.getText());
+    secondaryButton.setOnClickListener(action.getListener());
   }
 }
