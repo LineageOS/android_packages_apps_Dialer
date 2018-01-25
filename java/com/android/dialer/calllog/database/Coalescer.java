@@ -27,10 +27,10 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Preconditions;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -144,11 +144,11 @@ public class Coalescer {
       DialerPhoneNumberUtil dialerPhoneNumberUtil, ContentValues row1, ContentValues row2) {
     // Don't combine rows which don't use the same phone account.
     PhoneAccountHandle phoneAccount1 =
-        PhoneAccountUtils.getAccount(
+        TelecomUtil.composePhoneAccountHandle(
             row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
             row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
     PhoneAccountHandle phoneAccount2 =
-        PhoneAccountUtils.getAccount(
+        TelecomUtil.composePhoneAccountHandle(
             row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
             row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
 

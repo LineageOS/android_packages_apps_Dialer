@@ -44,7 +44,6 @@ import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
@@ -215,7 +214,7 @@ public class SpecialCharSequenceMgr {
         sc.progressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
         List<PhoneAccountHandle> subscriptionAccountHandles =
-            PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
+            TelecomUtil.getSubscriptionPhoneAccounts(context);
         Context applicationContext = context.getApplicationContext();
         boolean hasUserSelectedDefault =
             subscriptionAccountHandles.contains(
@@ -272,7 +271,7 @@ public class SpecialCharSequenceMgr {
   static boolean handlePinEntry(final Context context, final String input) {
     if ((input.startsWith("**04") || input.startsWith("**05")) && input.endsWith("#")) {
       List<PhoneAccountHandle> subscriptionAccountHandles =
-          PhoneAccountUtils.getSubscriptionPhoneAccounts(context);
+          TelecomUtil.getSubscriptionPhoneAccounts(context);
       boolean hasUserSelectedDefault =
           subscriptionAccountHandles.contains(
               TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL));

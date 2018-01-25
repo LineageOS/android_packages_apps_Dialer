@@ -66,7 +66,6 @@ import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -91,6 +90,7 @@ import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.Map;
@@ -1020,7 +1020,7 @@ public class CallLogAdapter extends GroupingListAdapter
     }
 
     final PhoneAccountHandle accountHandle =
-        PhoneAccountUtils.getAccount(details.accountComponentName, details.accountId);
+        TelecomUtil.composePhoneAccountHandle(details.accountComponentName, details.accountId);
 
     final boolean isVoicemailNumber = callLogCache.isVoicemailNumber(accountHandle, details.number);
 
