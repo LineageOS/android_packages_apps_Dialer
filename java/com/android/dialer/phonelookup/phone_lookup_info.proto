@@ -82,6 +82,7 @@ message PhoneLookupInfo {
   optional Cp2Info cp2_remote_info = 6;
 
   // Message for spam info.
+  // SpamPhoneLookup is responsible for populating this message.
   message SpamInfo {
     optional bool is_spam = 1;
   }
