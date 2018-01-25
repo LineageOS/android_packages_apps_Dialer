@@ -414,20 +414,32 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
       // No photo is needed
       defaultProvider.applyDefaultImage(view, requestedExtent, darkTheme, defaultImageRequest);
       pendingRequests.remove(view);
-    } else {
-      if (DEBUG) {
-        LogUtil.d("ContactPhotoManagerImpl.loadPhoto", "loadPhoto request: " + photoUri);
-      }
-      if (isDefaultImageUri(photoUri)) {
-        createAndApplyDefaultImageForUri(
-            view, photoUri, requestedExtent, darkTheme, isCircular, defaultProvider);
-      } else {
-        loadPhotoByIdOrUri(
-            view,
-            Request.createFromUri(
-                photoUri, requestedExtent, darkTheme, isCircular, defaultProvider));
-      }
+      return;
     }
+    if (isDrawableUri(photoUri)) {
+      view.setImageURI(photoUri);
+      pendingRequests.remove(view);
+      return;
+    }
+    if (DEBUG) {
+      LogUtil.d("ContactPhotoManagerImpl.loadPhoto", "loadPhoto request: " + photoUri);
+    }
+
+    if (isDefaultImageUri(photoUri)) {
+      createAndApplyDefaultImageForUri(
+          view, photoUri, requestedExtent, darkTheme, isCircular, defaultProvider);
+    } else {
+      loadPhotoByIdOrUri(
+          view,
+          Request.createFromUri(photoUri, requestedExtent, darkTheme, isCircular, defaultProvider));
+    }
+  }
+
+  private static boolean isDrawableUri(Uri uri) {
+    if (!ContentResolver.SCHEME_ANDROID_RESOURCE.equals(uri.getScheme())) {
+      return false;
+    }
+    return uri.getPathSegments().get(0).equals("drawable");
   }
 
   private void createAndApplyDefaultImageForUri(

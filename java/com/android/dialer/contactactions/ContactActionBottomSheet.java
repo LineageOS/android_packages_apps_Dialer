@@ -91,7 +91,7 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
             contactView.findViewById(R.id.quick_contact_photo),
             !TextUtils.isEmpty(photoInfo.lookupUri()) ? Uri.parse(photoInfo.lookupUri()) : null,
             photoInfo.photoId(),
-            !TextUtils.isEmpty(photoInfo.photoUri()) ? Uri.parse(photoInfo.photoUri()) : null,
+            photoInfo.photoUri(),
             photoInfo.displayName(),
             photoInfo.contactType());
 

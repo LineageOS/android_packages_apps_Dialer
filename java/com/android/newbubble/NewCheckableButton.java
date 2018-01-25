@@ -45,22 +45,28 @@ public class NewCheckableButton extends AppCompatButton implements Checkable {
 
   public NewCheckableButton(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
+  }
 
+  public void setCheckable(boolean checkable) {
     ViewCompat.setAccessibilityDelegate(
         this,
         new AccessibilityDelegateCompat() {
           @Override
           public void onInitializeAccessibilityEvent(View host, AccessibilityEvent event) {
             super.onInitializeAccessibilityEvent(host, event);
-            event.setChecked(isChecked());
+            if (checkable) {
+              event.setChecked(isChecked());
+            }
           }
 
           @Override
           public void onInitializeAccessibilityNodeInfo(
               View host, AccessibilityNodeInfoCompat info) {
             super.onInitializeAccessibilityNodeInfo(host, info);
-            info.setCheckable(true);
-            info.setChecked(isChecked());
+            info.setCheckable(checkable);
+            if (checkable) {
+              info.setChecked(isChecked());
+            }
           }
         });
   }

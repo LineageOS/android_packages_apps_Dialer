@@ -822,7 +822,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   public boolean isDialpadVisible() {
     DialpadFragment dialpadFragment = getDialpadFragment();
-    return dialpadFragment != null && dialpadFragment.getUserVisibleHint();
+    return dialpadFragment != null
+        && dialpadFragment.isAdded()
+        && !dialpadFragment.isHidden()
+        && dialpadFragment.getView() != null
+        && dialpadFragment.getUserVisibleHint();
   }
 
   /** Returns the {@link DialpadFragment} that's shown by this activity, or {@code null} */

@@ -136,4 +136,7 @@
 
   <!-- String used to display calls from unknown numbers in the call log.  [CHAR LIMIT=30] -->
   <string name="new_call_log_unknown">Unknown</string>
+
+  <!-- String used to display calls from blocked numbers in the call log.   [CHAR LIMIT=30] -->
+  <string name="new_call_log_secondary_blocked">Blocked</string>
 </resources>

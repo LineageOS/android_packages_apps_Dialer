@@ -58,4 +58,7 @@ message NumberAttributes {
   // True if the CP2 information is incomplete and needs to be queried at
   // display time.
   optional bool is_cp2_info_incomplete = 9;
+
+  // The number is blocked.
+  optional bool is_blocked = 10;
 }

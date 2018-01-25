@@ -21,6 +21,9 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.time.Clock;
+import com.google.common.collect.Collections2;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Computes the primary text and secondary text for call log entries.
@@ -52,7 +55,7 @@ public final class CallLogEntryText {
   /**
    * The secondary text to show in the main call log entry list.
    *
-   * <p>Rules: (Duo video, )?$Label|$Location • Date
+   * <p>Rules: (Blocked • )?(Duo video, )?$Label|$Location • Date
    *
    * <p>Examples:
    *
@@ -68,14 +71,16 @@ public final class CallLogEntryText {
    */
   public static CharSequence buildSecondaryTextForEntries(
       Context context, Clock clock, CoalescedRow row) {
-    StringBuilder secondaryText = secondaryTextPrefix(context, row);
-
-    if (secondaryText.length() > 0) {
-      secondaryText.append(" • ");
+    List<CharSequence> components = new ArrayList<>();
+    if (row.numberAttributes().getIsBlocked()) {
+      components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
-    secondaryText.append(
+
+    components.add(getNumberTypeLabel(context, row));
+
+    components.add(
         CallLogDates.newCallLogTimestampLabel(context, clock.currentTimeMillis(), row.timestamp()));
-    return secondaryText.toString();
+    return joinSecondaryTextComponents(components);
   }
 
   /**
@@ -85,9 +90,9 @@ public final class CallLogEntryText {
    * CoalescedRow)} except that instead of suffixing with the time of the call, we suffix with the
    * formatted number.
    */
-  public static String buildSecondaryTextForBottomSheet(Context context, CoalescedRow row) {
+  public static CharSequence buildSecondaryTextForBottomSheet(Context context, CoalescedRow row) {
     /*
-     * Rules: (Duo video, )?$Label|$Location [• NumberIfNoName]?
+     * Rules: (Blocked • )(Duo video, )?$Label|$Location [• NumberIfNoName]?
      *
      * The number is shown at the end if there is no name for the entry. (It is shown in primary
      * text otherwise.)
@@ -96,25 +101,27 @@ public final class CallLogEntryText {
      *   Duo Video, Mobile • 555-1234
      *   Duo Video • 555-1234
      *   Mobile • 555-1234
+     *   Blocked • Mobile • 555-1234
      *   Mobile • 555-1234
      *   Brooklyn, NJ
      */
-    StringBuilder secondaryText = secondaryTextPrefix(context, row);
+    List<CharSequence> components = new ArrayList<>();
+    if (row.numberAttributes().getIsBlocked()) {
+      components.add(context.getText(R.string.new_call_log_secondary_blocked));
+    }
+
+    components.add(getNumberTypeLabel(context, row));
 
     if (TextUtils.isEmpty(row.numberAttributes().getName())) {
       // If the name is empty the number is shown as the primary text and there's nothing to add.
-      return secondaryText.toString();
+      return joinSecondaryTextComponents(components);
     }
     if (TextUtils.isEmpty(row.formattedNumber())) {
       // If there's no number, don't append anything.
-      return secondaryText.toString();
+      return joinSecondaryTextComponents(components);
     }
-    // Otherwise append the number.
-    if (secondaryText.length() > 0) {
-      secondaryText.append(" • ");
-    }
-    secondaryText.append(row.formattedNumber());
-    return secondaryText.toString();
+    components.add(row.formattedNumber());
+    return joinSecondaryTextComponents(components);
   }
 
   /**
@@ -125,7 +132,7 @@ public final class CallLogEntryText {
    * time of the call, and when it is shown in a bottom sheet, it is suffixed with the formatted
    * number.
    */
-  private static StringBuilder secondaryTextPrefix(Context context, CoalescedRow row) {
+  private static CharSequence getNumberTypeLabel(Context context, CoalescedRow row) {
     StringBuilder secondaryText = new StringBuilder();
     if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       // TODO(zachh): Add "Duo" prefix?
@@ -147,5 +154,10 @@ public final class CallLogEntryText {
       }
     }
     return secondaryText;
+  }
+
+  private static CharSequence joinSecondaryTextComponents(List<CharSequence> components) {
+    return TextUtils.join(
+        " • ", Collections2.filter(components, (text) -> !TextUtils.isEmpty(text)));
   }
 }
