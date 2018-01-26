@@ -34,17 +34,18 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int TIMESTAMP = 1;
   private static final int NUMBER = 2;
   private static final int FORMATTED_NUMBER = 3;
-  private static final int IS_READ = 4;
-  private static final int NEW = 5;
-  private static final int GEOCODED_LOCATION = 6;
-  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 7;
-  private static final int PHONE_ACCOUNT_ID = 8;
-  private static final int PHONE_ACCOUNT_LABEL = 9;
-  private static final int PHONE_ACCOUNT_COLOR = 10;
-  private static final int FEATURES = 11;
-  private static final int NUMBER_ATTRIBUTES = 12;
-  private static final int CALL_TYPE = 13;
-  private static final int COALESCED_IDS = 14;
+  private static final int NUMBER_PRESENTATION = 4;
+  private static final int IS_READ = 5;
+  private static final int NEW = 6;
+  private static final int GEOCODED_LOCATION = 7;
+  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 8;
+  private static final int PHONE_ACCOUNT_ID = 9;
+  private static final int PHONE_ACCOUNT_LABEL = 10;
+  private static final int PHONE_ACCOUNT_COLOR = 11;
+  private static final int FEATURES = 12;
+  private static final int NUMBER_ATTRIBUTES = 13;
+  private static final int CALL_TYPE = 14;
+  private static final int COALESCED_IDS = 15;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -86,6 +87,7 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
         .setTimestamp(cursor.getLong(TIMESTAMP))
         .setNumber(number)
         .setFormattedNumber(cursor.getString(FORMATTED_NUMBER))
+        .setNumberPresentation(cursor.getInt(NUMBER_PRESENTATION))
         .setIsRead(cursor.getInt(IS_READ) == 1)
         .setIsNew(cursor.getInt(NEW) == 1)
         .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
