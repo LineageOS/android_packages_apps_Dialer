@@ -79,6 +79,7 @@ public class AssistedDialAction implements PreCallAction {
           .putBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS, assistedDialingExtras);
       builder.setUri(
           CallUtil.getCallUri(Assert.isNotNull(transformedNumber.get().transformedNumber())));
+      LogUtil.i("AssistedDialAction.runWithoutUi", "assisted dialing was used.");
     }
   }
 
