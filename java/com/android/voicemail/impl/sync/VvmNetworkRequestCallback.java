@@ -56,6 +56,7 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   private final VoicemailStatus.Editor status;
   private boolean requestSent = false;
   private boolean resultReceived = false;
+  private boolean released = false;
 
   public VvmNetworkRequestCallback(
       Context context, PhoneAccountHandle phoneAccount, VoicemailStatus.Editor status) {
@@ -112,7 +113,7 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   @Override
   @CallSuper
   public void onLost(Network network) {
-    VvmLog.d(TAG, "onLost");
+    VvmLog.i(TAG, "onLost");
     resultReceived = true;
     onFailed(NETWORK_REQUEST_FAILED_LOST);
   }
@@ -126,7 +127,7 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
 
   @CallSuper
   public void onUnavailable() {
-    // TODO(twyen): a bug this is hidden, do we really need this?
+    VvmLog.i(TAG, "onUnavailable");
     resultReceived = true;
     onFailed(NETWORK_REQUEST_FAILED_TIMEOUT);
   }
@@ -156,8 +157,13 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   }
 
   public void releaseNetwork() {
-    VvmLog.d(TAG, "releaseNetwork");
-    getConnectivityManager().unregisterNetworkCallback(this);
+    VvmLog.i(TAG, "releaseNetwork");
+    if (!released) {
+      getConnectivityManager().unregisterNetworkCallback(this);
+      released = true;
+    } else {
+      VvmLog.w(TAG, "already released");
+    }
   }
 
   public ConnectivityManager getConnectivityManager() {
@@ -170,7 +176,7 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
 
   @CallSuper
   public void onFailed(String reason) {
-    VvmLog.d(TAG, "onFailed: " + reason);
+    VvmLog.i(TAG, "onFailed: " + reason);
     if (carrierConfigHelper.isCellularDataRequired()) {
       carrierConfigHelper.handleEvent(status, OmtpEvents.DATA_NO_CONNECTION_CELLULAR_REQUIRED);
     } else {
