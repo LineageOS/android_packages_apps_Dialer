@@ -59,6 +59,13 @@ public class AnnotatedCallLogContract {
     String FORMATTED_NUMBER = "formatted_number";
 
     /**
+     * See {@link android.provider.CallLog.Calls#NUMBER_PRESENTATION}.
+     *
+     * <p>Type: INTEGER (int)
+     */
+    String NUMBER_PRESENTATION = "presentation";
+
+    /**
      * See {@link android.provider.CallLog.Calls#IS_READ}.
      *
      * <p>TYPE: INTEGER (boolean)
@@ -136,6 +143,7 @@ public class AnnotatedCallLogContract {
           TIMESTAMP,
           NUMBER,
           FORMATTED_NUMBER,
+          NUMBER_PRESENTATION,
           IS_READ,
           NEW,
           GEOCODED_LOCATION,
@@ -145,7 +153,7 @@ public class AnnotatedCallLogContract {
           PHONE_ACCOUNT_COLOR,
           FEATURES,
           NUMBER_ATTRIBUTES,
-          CALL_TYPE,
+          CALL_TYPE
         };
   }
 
