@@ -25,7 +25,9 @@ import javax.inject.Inject;
 
 /** The entry point for the simulator feature. */
 final class SimulatorImpl implements Simulator {
-  
+
+  private boolean simulatorMode = false;
+
   @Inject
   public SimulatorImpl() {}
 
@@ -37,5 +39,20 @@ final class SimulatorImpl implements Simulator {
   @Override
   public ActionProvider getActionProvider(AppCompatActivity activity) {
     return SimulatorMainMenu.getActionProvider(activity);
+  }
+
+  @Override
+  public boolean isSimulatorMode() {
+    return simulatorMode;
+  }
+
+  @Override
+  public void enableSimulatorMode() {
+    simulatorMode = true;
+  }
+
+  @Override
+  public void disableSimulatorMode() {
+    simulatorMode = false;
   }
 }

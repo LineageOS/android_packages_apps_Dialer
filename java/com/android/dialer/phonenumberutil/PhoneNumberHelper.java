@@ -341,7 +341,7 @@ public class PhoneNumberHelper {
    * PRESENTATION_RESTRICTED. For Verizon we want this to be displayed as "Restricted". For all
    * other carriers we want this to be be displayed as "Private number".
    */
-  public static CharSequence getDisplayNameForRestrictedNumber(Context context) {
+  public static String getDisplayNameForRestrictedNumber(Context context) {
     if (isVerizon(context)) {
       return context.getString(R.string.private_num_verizon);
     } else {

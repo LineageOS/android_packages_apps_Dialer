@@ -181,6 +181,7 @@ public class DialerPhoneNumberUtil {
   @WorkerThread
   public String normalizeNumber(DialerPhoneNumber number) {
     Assert.isWorkerThread();
+    // TODO(zachh): This loses country info when number is not valid.
     return formatToValidE164(number)
         .or(PhoneNumberUtils.normalizeNumber(number.getRawInput().getNumber()));
   }

@@ -156,6 +156,11 @@ public class Coalescer {
       return false;
     }
 
+    if (!row1.getAsInteger(AnnotatedCallLog.NUMBER_PRESENTATION)
+        .equals(row2.getAsInteger(AnnotatedCallLog.NUMBER_PRESENTATION))) {
+      return false;
+    }
+
     if (!meetsAssistedDialingCriteria(row1, row2)) {
       return false;
     }
