@@ -19,6 +19,7 @@
   <dimen name="bubble_size">56dp</dimen>
   <dimen name="bubble_icon_padding">16dp</dimen>
   <dimen name="bubble_dragging_elevation_change">6dp</dimen>
+  <dimen name="bubble_dragging_elevation">12dp</dimen>
 
   <dimen name="bubble_button_height">36dp</dimen>
   <dimen name="bubble_button_icon_padding">16dp</dimen>
