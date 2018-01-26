@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.provider.VoicemailContract;
@@ -61,6 +62,8 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
   private ImageButton deleteButton;
   private TextView currentSeekBarPosition;
   private SeekBar seekBarView;
+  private Drawable voicemailSeekHandleDisabled;
+
   private TextView totalDurationView;
   private TextView voicemailLoadingStatusView;
   private Uri voicemailUri;
@@ -96,6 +99,11 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     deleteButton = findViewById(R.id.deleteButton);
     totalDurationView = findViewById(R.id.playback_seek_total_duration);
     voicemailLoadingStatusView = findViewById(R.id.playback_state_text);
+
+    voicemailSeekHandleDisabled =
+        getContext()
+            .getResources()
+            .getDrawable(R.drawable.ic_voicemail_seek_handle_disabled, getContext().getTheme());
   }
 
   private void setupListenersForMediaPlayerButtons() {
@@ -166,6 +174,10 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     // Not sure if these are needed, but it'll ensure that onInflate() has atleast happened.
     initializeMediaPlayerButtonsAndViews();
     setupListenersForMediaPlayerButtons();
+
+    // TODO(uabdullah): Handle seekbar seeking properly (a bug)
+    seekBarView.setEnabled(false);
+    seekBarView.setThumb(voicemailSeekHandleDisabled);
 
     // During the binding we only send a request to the adapter to tell us what the
     // state of the media player should be and call that function.
