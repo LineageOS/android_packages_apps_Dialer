@@ -21,6 +21,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
@@ -452,6 +453,19 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
               "NewVoicemailMediaPlayer.speakerButtonListener",
               "speaker request for voicemailUri: %s",
               voicemailUri.toString());
+          AudioManager audioManager =
+              (AudioManager) getContext().getSystemService(AudioManager.class);
+          audioManager.setMode(AudioManager.STREAM_MUSIC);
+          if (audioManager.isSpeakerphoneOn()) {
+            LogUtil.i(
+                "NewVoicemailMediaPlayer.phoneButtonListener", "speaker was on, turning it off");
+            audioManager.setSpeakerphoneOn(false);
+          } else {
+            LogUtil.i(
+                "NewVoicemailMediaPlayer.phoneButtonListener", "speaker was off, turning it on");
+            audioManager.setSpeakerphoneOn(true);
+          }
+          // TODO(uabdullah): Handle colors of speaker icon when speaker is on and off.
         }
       };
 
