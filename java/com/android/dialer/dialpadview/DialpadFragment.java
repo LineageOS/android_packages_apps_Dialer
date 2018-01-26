@@ -77,7 +77,6 @@ import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
@@ -967,7 +966,7 @@ public class DialpadFragment extends Fragment
         removePreviousDigitIfPossible('1');
 
         List<PhoneAccountHandle> subscriptionAccountHandles =
-            PhoneAccountUtils.getSubscriptionPhoneAccounts(getActivity());
+            TelecomUtil.getSubscriptionPhoneAccounts(getActivity());
         boolean hasUserSelectedDefault =
             subscriptionAccountHandles.contains(
                 TelecomUtil.getDefaultOutgoingPhoneAccount(

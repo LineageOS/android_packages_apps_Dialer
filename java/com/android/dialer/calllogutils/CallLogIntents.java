@@ -24,6 +24,7 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.telecom.TelecomUtil;
 
 /** Provides intents related to call log entries. */
 public final class CallLogIntents {
@@ -51,7 +52,8 @@ public final class CallLogIntents {
         context,
         new CallIntentBuilder(originalNumber, CallInitiationType.Type.CALL_LOG)
             .setPhoneAccountHandle(
-                PhoneAccountUtils.getAccount(row.phoneAccountComponentName(), row.phoneAccountId()))
+                TelecomUtil.composePhoneAccountHandle(
+                    row.phoneAccountComponentName(), row.phoneAccountId()))
             .setIsVideoCall((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO));
   }
 }
