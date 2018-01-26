@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -27,7 +28,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
@@ -117,6 +120,16 @@ public final class MainActivity extends AppCompatActivity
   }
 
   @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
+      searchController.onVoiceResults(resultCode, data);
+    } else {
+      LogUtil.e("MainActivity.onActivityResult", "Unknown request code: " + requestCode);
+    }
+  }
+
+  @Override
   public void onContactSelected(ImageView photo, Uri contactUri, long contactId) {
     // TODO(calderwoodra): Add impression logging
     QuickContact.showQuickContact(
@@ -130,7 +143,13 @@ public final class MainActivity extends AppCompatActivity
 
   @Override // DialpadListener
   public void getLastOutgoingCall(LastOutgoingCallCallback callback) {
-    // TODO(calderwoodra): migrate CallLogAsync class outside of dialer/app and call it here.
+    DialerExecutorComponent.get(this)
+        .dialerExecutorFactory()
+        .createUiTaskBuilder(
+            getFragmentManager(), "Query last phone number", Calls::getLastOutgoingCall)
+        .onSuccess(output -> callback.lastOutgoingCall(output))
+        .build()
+        .executeParallel(this);
   }
 
   @Override // DialpadListener
