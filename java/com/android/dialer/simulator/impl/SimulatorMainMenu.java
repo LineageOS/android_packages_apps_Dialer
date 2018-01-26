@@ -32,6 +32,7 @@ import com.android.dialer.databasepopulator.VoicemailPopulator;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
+import com.android.dialer.simulator.SimulatorComponent;
 import com.android.incallui.rtt.impl.RttChatActivity;
 import com.android.incallui.speakeasy.SpeakEasy;
 import com.android.incallui.speakeasy.SpeakEasyActivity;
@@ -65,7 +66,19 @@ final class SimulatorMainMenu {
             "Enriched call simulator",
             () ->
                 activity.startActivity(
-                    EnrichedCallSimulatorActivity.newIntent(activity.getApplicationContext())));
+                    EnrichedCallSimulatorActivity.newIntent(activity.getApplicationContext())))
+        .addItem(
+            "Enable simulator mode",
+            () ->
+                SimulatorComponent.get(activity.getApplicationContext())
+                    .getSimulator()
+                    .enableSimulatorMode())
+        .addItem(
+            "Disable simulator mode",
+            () ->
+                SimulatorComponent.get(activity.getApplicationContext())
+                    .getSimulator()
+                    .disableSimulatorMode());
     SpeakEasy speakEasy = SpeakEasyComponent.get(activity.getApplicationContext()).speakEasy();
     if (speakEasy.isEnabled()) {
       simulatorSubMenu.addItem(
