@@ -17,7 +17,6 @@
 package com.android.dialer.voicemail.listui;
 
 import android.app.FragmentManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,6 +27,7 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,12 +36,15 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import com.android.dialer.callintent.CallInitiationType.Type;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.voicemail.listui.NewVoicemailViewHolder.NewVoicemailViewHolderListener;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import java.util.Locale;
@@ -61,6 +64,7 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
   private TextView totalDurationView;
   private TextView voicemailLoadingStatusView;
   private Uri voicemailUri;
+  private String numberVoicemailFrom;
   private FragmentManager fragmentManager;
   private NewVoicemailViewHolder newVoicemailViewHolder;
   private NewVoicemailMediaPlayer mediaPlayer;
@@ -104,9 +108,12 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
   }
 
   public void reset() {
-    LogUtil.i("NewVoicemailMediaPlayer.reset", "the uri for this is " + voicemailUri);
+    LogUtil.i(
+        "NewVoicemailMediaPlayer.reset",
+        "the uri for this is " + voicemailUri + " and number is " + numberVoicemailFrom);
     voicemailUri = null;
     voicemailLoadingStatusView.setVisibility(GONE);
+    numberVoicemailFrom = null;
   }
 
   /**
@@ -135,6 +142,7 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
 
     Assert.isNotNull(voicemailEntryFromAdapter);
     Uri uri = Uri.parse(voicemailEntryFromAdapter.voicemailUri());
+    numberVoicemailFrom = voicemailEntryFromAdapter.number().getRawInput().getNumber();
     Assert.isNotNull(viewHolder);
     Assert.isNotNull(uri);
     Assert.isNotNull(listener);
@@ -469,28 +477,24 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
+  // TODO(uabdullah): Add phone account handle (a bug)
+  // TODO(uabdullah): If the call cannot be made then the phone icon should be greyed out
+  // (a bug)
   private final View.OnClickListener phoneButtonListener =
       new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           LogUtil.i(
               "NewVoicemailMediaPlayer.phoneButtonListener",
-              "speaker request for voicemailUri: %s",
-              voicemailUri.toString());
-          ContentValues contentValues = new ContentValues();
-          contentValues.put("has_content", 0);
-          // TODO(uabdullah): It only sets the has_content to 0, to allow the annotated call log to
-          // change, and refresh the fragment. This is used to demo and test the downloading of
-          // voicemails from the server. This will be removed once we implement this listener.
-          try {
-            getContext().getContentResolver().update(voicemailUri, contentValues, "type = 4", null);
-          } catch (Exception e) {
-            LogUtil.i(
-                "NewVoicemailMediaPlayer.deleteButtonListener",
-                "update has content of voicemailUri %s caused an error: %s",
-                voicemailUri.toString(),
-                e.toString());
-          }
+              "phone request for voicemailUri: %s with number:%s",
+              voicemailUri.toString(),
+              numberVoicemailFrom);
+
+          Assert.checkArgument(
+              !TextUtils.isEmpty(numberVoicemailFrom),
+              "number cannot be empty:" + numberVoicemailFrom);
+          PreCall.start(
+              getContext(), new CallIntentBuilder(numberVoicemailFrom, Type.VOICEMAIL_LOG));
         }
       };
 
