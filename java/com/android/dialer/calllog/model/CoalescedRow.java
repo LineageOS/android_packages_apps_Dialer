@@ -32,6 +32,7 @@ public abstract class CoalescedRow {
         .setId(0)
         .setTimestamp(0)
         .setNumber(DialerPhoneNumber.getDefaultInstance())
+        .setNumberPresentation(0)
         .setIsRead(false)
         .setIsNew(false)
         .setPhoneAccountColor(0)
@@ -51,6 +52,8 @@ public abstract class CoalescedRow {
 
   @Nullable
   public abstract String formattedNumber();
+
+  public abstract int numberPresentation();
 
   public abstract boolean isRead();
 
@@ -90,6 +93,8 @@ public abstract class CoalescedRow {
     public abstract Builder setNumber(DialerPhoneNumber number);
 
     public abstract Builder setFormattedNumber(@Nullable String formattedNumber);
+
+    public abstract Builder setNumberPresentation(int presentation);
 
     public abstract Builder setIsRead(boolean isRead);
 

@@ -23,6 +23,7 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.google.common.base.Optional;
 
 /** Helper for formatting and managing the display of phone numbers. */
 public class PhoneNumberDisplayUtil {
@@ -30,14 +31,9 @@ public class PhoneNumberDisplayUtil {
   /** Returns the string to display for the given phone number if there is no matching contact. */
   public static CharSequence getDisplayName(
       Context context, CharSequence number, int presentation, boolean isVoicemail) {
-    if (presentation == Calls.PRESENTATION_UNKNOWN) {
-      return context.getResources().getString(R.string.unknown);
-    }
-    if (presentation == Calls.PRESENTATION_RESTRICTED) {
-      return PhoneNumberHelper.getDisplayNameForRestrictedNumber(context);
-    }
-    if (presentation == Calls.PRESENTATION_PAYPHONE) {
-      return context.getResources().getString(R.string.payphone);
+    Optional<String> presentationString = getNameForPresentation(context, presentation);
+    if (presentationString.isPresent()) {
+      return presentationString.get();
     }
     if (isVoicemail) {
       return context.getResources().getString(R.string.voicemail_string);
@@ -48,13 +44,27 @@ public class PhoneNumberDisplayUtil {
     return "";
   }
 
+  /** Returns the string associated with the given presentation. */
+  public static Optional<String> getNameForPresentation(Context appContext, int presentation) {
+    if (presentation == Calls.PRESENTATION_UNKNOWN) {
+      return Optional.of(appContext.getResources().getString(R.string.unknown));
+    }
+    if (presentation == Calls.PRESENTATION_RESTRICTED) {
+      return Optional.of(PhoneNumberHelper.getDisplayNameForRestrictedNumber(appContext));
+    }
+    if (presentation == Calls.PRESENTATION_PAYPHONE) {
+      return Optional.of(appContext.getResources().getString(R.string.payphone));
+    }
+    return Optional.absent();
+  }
+
   /**
    * Returns the string to display for the given phone number.
    *
    * @param number the number to display
    * @param formattedNumber the formatted number if available, may be null
    */
-  public static CharSequence getDisplayNumber(
+  static CharSequence getDisplayNumber(
       Context context,
       CharSequence number,
       int presentation,

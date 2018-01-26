@@ -29,7 +29,7 @@ public class CallLogContactTypes {
     boolean isVoicemail = false;
     boolean isSpam = false;
     boolean isBusiness = false;
-    int numberPresentation = 0;
+    int numberPresentation = row.numberPresentation();
     boolean isConference = false;
 
     return LetterTileDrawable.getContactTypeFromPrimitives(

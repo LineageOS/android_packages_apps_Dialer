@@ -24,12 +24,15 @@ import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogContactTypes;
+import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
 import com.android.dialer.contactactions.ContactActionModule;
 import com.android.dialer.contactactions.DividerModule;
 import com.android.dialer.contactactions.IntentModule;
 import com.android.dialer.contactactions.SharedModules;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,16 +46,23 @@ final class Modules {
     // Conditionally add each module, which are items in the bottom sheet's menu.
     List<ContactActionModule> modules = new ArrayList<>();
 
-    maybeAddModuleForVideoOrAudioCall(context, modules, row);
-    SharedModules.maybeAddModuleForAddingToContacts(
-        context,
-        modules,
-        row.number(),
-        row.numberAttributes().getName(),
-        row.numberAttributes().getLookupUri());
+    // TODO(zach): Don't use raw input.
+    String normalizedNumber = row.number().getRawInput().getNumber();
+    boolean canPlaceCalls =
+        PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation());
 
-    String originalNumber = row.number().getRawInput().getNumber();
-    SharedModules.maybeAddModuleForSendingTextMessage(context, modules, originalNumber);
+    if (canPlaceCalls) {
+      addModuleForVideoOrAudioCall(context, modules, row, normalizedNumber);
+
+      SharedModules.maybeAddModuleForAddingToContacts(
+          context,
+          modules,
+          row.number(),
+          row.numberAttributes().getName(),
+          row.numberAttributes().getLookupUri());
+
+      SharedModules.maybeAddModuleForSendingTextMessage(context, modules, normalizedNumber);
+    }
 
     if (!modules.isEmpty()) {
       modules.add(new DividerModule());
@@ -62,7 +72,9 @@ final class Modules {
     // TODO(zachh): Module for blocking/unblocking spam.
     // TODO(zachh): Module for CallComposer.
 
-    SharedModules.maybeAddModuleForCopyingNumber(context, modules, originalNumber);
+    if (canPlaceCalls) {
+      SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
+    }
 
     // TODO(zachh): Revisit if DialerContact is the best thing to pass to CallDetails; could
     // it use a ContactPrimaryActionInfo instead?
@@ -73,14 +85,11 @@ final class Modules {
     return modules;
   }
 
-  private static void maybeAddModuleForVideoOrAudioCall(
-      Context context, List<ContactActionModule> modules, CoalescedRow row) {
-    String originalNumber = row.number().getRawInput().getNumber();
-    if (TextUtils.isEmpty(originalNumber)) {
-      // Skip adding the menu item if the phone number is unknown.
-      return;
-    }
-
+  private static void addModuleForVideoOrAudioCall(
+      Context context,
+      List<ContactActionModule> modules,
+      CoalescedRow row,
+      String normalizedNumber) {
     PhoneAccountHandle phoneAccountHandle =
         TelecomUtil.composePhoneAccountHandle(
             row.phoneAccountComponentName(), row.phoneAccountId());
@@ -90,14 +99,14 @@ final class Modules {
       // trigger a video call.
       modules.add(
           IntentModule.newCallModule(
-              context, originalNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
     } else {
       // Add a video call item for audio calls. Click the top entry on the bottom sheet will
       // trigger an audio call.
       // TODO(zachh): Only show video option if video capabilities present?
       modules.add(
           IntentModule.newVideoCallModule(
-              context, originalNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
     }
   }
 
@@ -112,20 +121,28 @@ final class Modules {
             CallDetailsActivity.newInstance(
                 context,
                 row.coalescedIds(),
-                createDialerContactFromRow(row),
+                createDialerContactFromRow(context, row),
                 canReportAsInvalidNumber,
                 canSupportAssistedDialing),
             R.string.call_details_menu_label,
             R.drawable.quantum_ic_info_outline_vd_theme_24));
   }
 
-  private static DialerContact createDialerContactFromRow(CoalescedRow row) {
-    // TODO(zachh): Do something with parsed values to make more dialable?
-    String originalNumber = row.number().getRawInput().getNumber();
+  private static DialerContact createDialerContactFromRow(Context context, CoalescedRow row) {
+    Optional<String> presentationName =
+        PhoneNumberDisplayUtil.getNameForPresentation(context, row.numberPresentation());
+    if (presentationName.isPresent()) {
+      return DialerContact.newBuilder()
+          .setNameOrNumber(presentationName.get())
+          .setContactType(CallLogContactTypes.getContactType(row))
+          .build();
+    }
 
+    // TODO(zachh): Don't use raw input.
+    String normalizedNumber = row.number().getRawInput().getNumber();
     DialerContact.Builder dialerContactBuilder =
         DialerContact.newBuilder()
-            .setNumber(originalNumber)
+            .setNumber(normalizedNumber)
             .setContactType(CallLogContactTypes.getContactType(row))
             .setPhotoId(row.numberAttributes().getPhotoId());
 
