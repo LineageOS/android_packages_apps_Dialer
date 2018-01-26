@@ -102,7 +102,7 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
     try {
       SimSuggestionComponent.get(context)
           .getSuggestionProvider()
-          .reportIncorrectSuggestion(context, number);
+          .reportIncorrectSuggestion(context, number, otherAccount);
 
       if (!PermissionsUtil.hasPhonePermissions(context)) {
         LogUtil.e("SwapSimWorker.doInBackground", "missing phone permission");

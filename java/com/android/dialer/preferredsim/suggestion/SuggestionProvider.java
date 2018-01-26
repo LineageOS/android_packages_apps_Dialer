@@ -62,8 +62,10 @@ public interface SuggestionProvider {
   void reportUserSelection(
       @NonNull Context context,
       @NonNull String number,
-      @NonNull PhoneAccountHandle phoneAccountHandle);
+      @NonNull PhoneAccountHandle phoneAccountHandle,
+      boolean rememberSelection);
 
   @WorkerThread
-  void reportIncorrectSuggestion(@NonNull Context context, @NonNull String number);
+  void reportIncorrectSuggestion(
+      @NonNull Context context, @NonNull String number, @NonNull PhoneAccountHandle newAccount);
 }

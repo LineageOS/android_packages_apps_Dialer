@@ -18,6 +18,7 @@ package com.android.dialer.telecom;
 
 import android.Manifest;
 import android.Manifest.permission;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -49,6 +50,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * perform the required check and return the fallback default if the permission is missing,
  * otherwise return the value from TelecomManager.
  */
+@SuppressWarnings("MissingPermission")
 public abstract class TelecomUtil {
 
   private static final String TAG = "TelecomUtil";
@@ -146,6 +148,34 @@ public abstract class TelecomUtil {
       return getTelecomManager(context).getCallCapablePhoneAccounts();
     }
     return new ArrayList<>();
+  }
+
+  /** Return a list of phone accounts that are subscription/SIM accounts. */
+  public static List<PhoneAccountHandle> getSubscriptionPhoneAccounts(Context context) {
+    List<PhoneAccountHandle> subscriptionAccountHandles = new ArrayList<>();
+    final List<PhoneAccountHandle> accountHandles =
+        TelecomUtil.getCallCapablePhoneAccounts(context);
+    for (PhoneAccountHandle accountHandle : accountHandles) {
+      PhoneAccount account = TelecomUtil.getPhoneAccount(context, accountHandle);
+      if (account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+        subscriptionAccountHandles.add(accountHandle);
+      }
+    }
+    return subscriptionAccountHandles;
+  }
+
+  /** Compose {@link PhoneAccountHandle} object from component name and account id. */
+  @Nullable
+  public static PhoneAccountHandle composePhoneAccountHandle(
+      @Nullable String componentString, @Nullable String accountId) {
+    if (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) {
+      return null;
+    }
+    final ComponentName componentName = ComponentName.unflattenFromString(componentString);
+    if (componentName == null) {
+      return null;
+    }
+    return new PhoneAccountHandle(componentName, accountId);
   }
 
   /**

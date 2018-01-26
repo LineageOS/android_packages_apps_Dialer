@@ -40,8 +40,10 @@ public class StubSuggestionProvider implements SuggestionProvider {
   public void reportUserSelection(
       @NonNull Context context,
       @NonNull String number,
-      @NonNull PhoneAccountHandle phoneAccountHandle) {}
+      @NonNull PhoneAccountHandle phoneAccountHandle,
+      boolean rememberSelection) {}
 
   @Override
-  public void reportIncorrectSuggestion(@NonNull Context context, @NonNull String number) {}
+  public void reportIncorrectSuggestion(
+      @NonNull Context context, @NonNull String number, PhoneAccountHandle newAccount) {}
 }
