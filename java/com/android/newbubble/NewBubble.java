@@ -25,7 +25,6 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent.CanceledException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Outline;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
@@ -47,7 +46,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -525,7 +523,7 @@ public class NewBubble {
   public void updateAvatar(@NonNull Drawable avatar) {
     if (!avatar.equals(currentInfo.getAvatar())) {
       currentInfo = NewBubbleInfo.from(currentInfo).setAvatar(avatar).build();
-      viewHolder.getPrimaryAvatar().setImageDrawable(currentInfo.getAvatar());
+      viewHolder.getPrimaryAvatar().setBackground(currentInfo.getAvatar());
     }
   }
 
@@ -560,7 +558,7 @@ public class NewBubble {
     savedYPosition = -1;
 
     viewHolder
-        .getPrimaryButton()
+        .getPrimaryAvatar()
         .animate()
         .translationZ(
             context
@@ -569,7 +567,7 @@ public class NewBubble {
   }
 
   void onMoveFinish() {
-    viewHolder.getPrimaryButton().animate().translationZ(0);
+    viewHolder.getPrimaryAvatar().animate().translationZ(0);
   }
 
   void primaryButtonClick() {
@@ -669,17 +667,9 @@ public class NewBubble {
     primaryIconMoveDistance =
         context.getResources().getDimensionPixelSize(R.dimen.bubble_size)
             - context.getResources().getDimensionPixelSize(R.dimen.bubble_small_icon_size);
-    // Set boundary for primary button to show elevation (background is transparent)
-    viewHolder
-        .getPrimaryButton()
-        .setOutlineProvider(
-            new ViewOutlineProvider() {
-              @Override
-              public void getOutline(View view, Outline outline) {
-                ViewOutlineProvider.BACKGROUND.getOutline(view, outline);
-                outline.setAlpha(1);
-              }
-            });
+
+    // Avatar
+    viewHolder.getPrimaryAvatar().setBackground(currentInfo.getAvatar());
 
     // Small icon
     Drawable smallIconBackgroundCircle =
@@ -689,7 +679,6 @@ public class NewBubble {
     smallIconBackgroundCircle.setTint(context.getColor(R.color.bubble_button_color_blue));
     viewHolder.getPrimaryIcon().setBackground(smallIconBackgroundCircle);
     viewHolder.getPrimaryIcon().setImageIcon(currentInfo.getPrimaryIcon());
-    viewHolder.getPrimaryAvatar().setImageDrawable(currentInfo.getAvatar());
 
     updatePrimaryIconAnimation();
     updateButtonStates();
@@ -873,6 +862,9 @@ public class NewBubble {
     xValueAnimator.setInterpolator(new LinearOutSlowInInterpolator());
     xValueAnimator.addUpdateListener(
         (valueAnimator) -> {
+          if (windowParams == null) {
+            return;
+          }
           // Update windowParams and the root layout.
           // We can't do ViewPropertyAnimation since it clips children.
           float newX = (float) valueAnimator.getAnimatedValue();
