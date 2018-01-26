@@ -51,6 +51,7 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.Iterables;
@@ -363,7 +364,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       String phoneAccountComponentName,
       String phoneAccountId) {
     PhoneAccountHandle phoneAccountHandle =
-        PhoneAccountUtils.getAccount(phoneAccountComponentName, phoneAccountId);
+        TelecomUtil.composePhoneAccountHandle(phoneAccountComponentName, phoneAccountId);
     if (phoneAccountHandle == null) {
       return;
     }
