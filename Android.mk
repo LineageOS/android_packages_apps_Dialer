@@ -133,12 +133,14 @@ LOCAL_ANNOTATION_PROCESSORS := \
 	dialer-dagger2 \
 	dialer-dagger2-compiler \
 	dialer-dagger2-producers \
+	dialer-glide-compiler \
+	dialer-glide-annotation \
 	dialer-guava \
 	dialer-javax-annotation-api \
 	dialer-javax-inject \
 
 LOCAL_ANNOTATION_PROCESSOR_CLASSES := \
-  com.google.auto.value.processor.AutoValueProcessor,dagger.internal.codegen.ComponentProcessor
+  com.google.auto.value.processor.AutoValueProcessor,dagger.internal.codegen.ComponentProcessor,com.bumptech.glide.annotation.compiler.GlideAnnotationProcessor
 
 
 # Begin Bug: 37077388
@@ -186,6 +188,8 @@ LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
     dialer-dagger2-compiler:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-compiler/2.7/dagger-compiler-2.7.jar \
     dialer-dagger2:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger/2.7/dagger-2.7.jar \
     dialer-dagger2-producers:../../../prebuilts/tools/common/m2/repository/com/google/dagger/dagger-producers/2.7/dagger-producers-2.7.jar \
+    dialer-glide-annotation:../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/annotation/SNAPSHOT/annotation-SNAPSHOT.jar \
+    dialer-glide-compiler:../../../prebuilts/maven_repo/bumptech/com/github/bumptech/glide/compiler/SNAPSHOT/compiler-SNAPSHOT.jar \
     dialer-grpc-all:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-all/1.0.3/grpc-all-1.0.3.jar \
     dialer-grpc-core:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-core/1.0.3/grpc-core-1.0.3.jar \
     dialer-grpc-okhttp:../../../prebuilts/tools/common/m2/repository/io/grpc/grpc-okhttp/1.0.3/grpc-okhttp-1.0.3.jar \
