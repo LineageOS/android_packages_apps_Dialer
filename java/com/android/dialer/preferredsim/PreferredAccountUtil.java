@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.precall.impl;
+package com.android.dialer.preferredsim;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -64,7 +64,7 @@ public class PreferredAccountUtil {
     return Optional.absent();
   }
 
-  private static boolean isPhoneAccountValid(
+  public static boolean isPhoneAccountValid(
       Context context, PhoneAccountHandle phoneAccountHandle) {
     if (VERSION.SDK_INT >= VERSION_CODES.O) {
       return context

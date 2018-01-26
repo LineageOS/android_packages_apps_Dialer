@@ -24,12 +24,12 @@ import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogContactTypes;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.contactactions.ContactActionModule;
 import com.android.dialer.contactactions.DividerModule;
 import com.android.dialer.contactactions.IntentModule;
 import com.android.dialer.contactactions.SharedModules;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +82,8 @@ final class Modules {
     }
 
     PhoneAccountHandle phoneAccountHandle =
-        PhoneAccountUtils.getAccount(row.phoneAccountComponentName(), row.phoneAccountId());
+        TelecomUtil.composePhoneAccountHandle(
+            row.phoneAccountComponentName(), row.phoneAccountId());
 
     if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       // Add an audio call item for video calls. Clicking the top entry on the bottom sheet will

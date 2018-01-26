@@ -31,11 +31,11 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.app.R;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.telecom.TelecomUtil;
 
 /** Shows a notification in the status bar for legacy vociemail. */
 @TargetApi(VERSION_CODES.O)
@@ -137,7 +137,7 @@ public final class LegacyVoicemailNotifier {
   @NonNull
   private static String getNotificationText(
       @NonNull Context context, PhoneAccountHandle handle, String voicemailNumber) {
-    if (PhoneAccountUtils.getSubscriptionPhoneAccounts(context).size() > 1) {
+    if (TelecomUtil.getCallCapablePhoneAccounts(context).size() > 1) {
       TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
       PhoneAccount phoneAccount = telecomManager.getPhoneAccount(handle);
       return phoneAccount.getShortDescription().toString();
