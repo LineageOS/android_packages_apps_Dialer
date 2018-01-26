@@ -40,14 +40,13 @@
         android:layout_marginTop="@dimen/bubble_shadow_padding_size_vertical"
         android:layout_marginBottom="@dimen/bubble_shadow_padding_size_vertical"
         android:contentDescription="@string/a11y_bubble_description"
-        android:background="@drawable/bubble_shape_circle"
-        android:measureAllChildren="false"
-        android:elevation="@dimen/bubble_elevation">
+        android:measureAllChildren="false">
       <ImageView
           android:id="@+id/bubble_icon_avatar"
           android:layout_width="@dimen/bubble_size"
           android:layout_height="@dimen/bubble_size"
-          tools:src="@android:drawable/ic_btn_speak_now"/>
+          android:background="@android:drawable/ic_btn_speak_now"
+          android:elevation="@dimen/bubble_elevation"/>
       <ImageView
           android:id="@+id/bubble_icon_primary"
           android:layout_width="@dimen/bubble_small_icon_size"
@@ -59,7 +58,8 @@
           android:background="@drawable/bubble_shape_circle_small"
           android:measureAllChildren="false"
           tools:backgroundTint="#FF0000AA"
-          tools:src="@android:drawable/ic_btn_speak_now"/>
+          tools:src="@android:drawable/ic_btn_speak_now"
+          android:elevation="@dimen/bubble_dragging_elevation"/>
     </FrameLayout>
   </RelativeLayout>
   <!-- The RelativeLayout below serves as boundary for @id/bubble_expanded_layout during animation -->
