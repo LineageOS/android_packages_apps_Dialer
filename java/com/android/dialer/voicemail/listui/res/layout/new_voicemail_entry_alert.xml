@@ -14,17 +14,96 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<RelativeLayout
+
+<!-- TODO(uabdullah): Use a relative layout instead of nested linear layouts.-->
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="48dp"
+    android:id="@+id/voicemail_alert_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-  <!-- TODO(uabdullah): Confirm with UX on mocks -->
-  <TextView
-      android:id="@+id/new_voicemail_alert_text"
-      style="@style/SecondaryText"
-      android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+  <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/voicemail_header_margin_start"
-      android:layout_centerVertical="true"/>
-</RelativeLayout>
+      android:paddingTop="@dimen/alert_main_padding"
+      android:paddingBottom="@dimen/alert_main_padding"
+      android:paddingStart="@dimen/alert_main_padding"
+      android:paddingEnd="@dimen/alert_main_padding"
+      android:gravity="top"
+      android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/voicemail_alert_icon"
+        android:layout_width="@dimen/voicemail_promo_card_icon_size"
+        android:layout_height="@dimen/voicemail_promo_card_icon_size"
+        android:layout_gravity="top"
+        android:src="@drawable/ic_voicemail_error_24px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/voicemail_promo_card_main_padding"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/voicemail_alert_header"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/voicemail_promo_card_title_padding"
+          android:layout_gravity="center_vertical"
+          android:singleLine="false"
+          android:text="Voicemail Alert"
+          android:textSize="@dimen/voicemail_promo_card_title_text_size"/>
+
+      <TextView
+          android:id="@+id/voicemail_alert_details"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:lineSpacingExtra="@dimen/voicemail_promo_card_line_spacing"
+          android:singleLine="false"
+          android:text="This is a voicemail alert message."
+          android:textSize="@dimen/voicemail_promo_card_message_size"/>
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/voicemail_alert_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:paddingTop="10dp"
+      android:paddingBottom="10dp"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:gravity="end"
+      android:minHeight="56dp"
+      android:orientation="horizontal">
+    <Button
+        android:id="@+id/voicemail_alert_secondary_button"
+        style="@style/TosButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dialer_theme_color"/>
+
+    <Button
+        android:id="@+id/voicemail_alert_primary_button"
+        style="@style/TosButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dialer_theme_color"/>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="0dip"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:layout_gravity="center"
+      android:divider="?android:dividerHorizontal"
+      android:gravity="center"
+      android:orientation="vertical"
+      android:showDividers="middle">
+  </LinearLayout>
+</LinearLayout>

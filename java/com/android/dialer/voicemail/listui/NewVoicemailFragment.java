@@ -28,11 +28,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.database.CallLogQueryHandler;
+import com.android.dialer.database.CallLogQueryHandler.Listener;
 
+// TODO(uabdullah): Register content observer for VoicemailContract.Status.CONTENT_URI in onStart
 /** Fragment for Dialer Voicemail Tab. */
 public final class NewVoicemailFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
   private RecyclerView recyclerView;
+  private CallLogQueryHandler callLogQueryHandler;
 
   @Nullable
   @Override
@@ -71,6 +75,31 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
           recyclerView.getAdapter());
       ((NewVoicemailAdapter) recyclerView.getAdapter()).updateCursor(data);
       ((NewVoicemailAdapter) recyclerView.getAdapter()).checkAndPlayVoicemail();
+    }
+    callLogQueryHandler =
+        new CallLogQueryHandler(
+            getContext(), getContext().getContentResolver(), new NewVoicemailFragmentListener());
+    callLogQueryHandler.fetchVoicemailStatus();
+  }
+
+  private final class NewVoicemailFragmentListener implements Listener {
+
+    @Override
+    public void onVoicemailStatusFetched(Cursor statusCursor) {
+      LogUtil.enterBlock("NewVoicemailFragmentListener.onVoicemailStatusFetched");
+      ((NewVoicemailAdapter) recyclerView.getAdapter()).setVoicemailStatusCursor(statusCursor);
+      ((NewVoicemailAdapter) recyclerView.getAdapter()).updateAlert(getContext());
+    }
+
+    @Override
+    public void onVoicemailUnreadCountFetched(Cursor cursor) {}
+
+    @Override
+    public void onMissedCallsUnreadCountFetched(Cursor cursor) {}
+
+    @Override
+    public boolean onCallsFetched(Cursor combinedCursor) {
+      return false;
     }
   }
 
