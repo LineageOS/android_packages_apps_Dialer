@@ -150,7 +150,9 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
 
     Assert.isNotNull(voicemailEntryFromAdapter);
     Uri uri = Uri.parse(voicemailEntryFromAdapter.voicemailUri());
+
     numberVoicemailFrom = voicemailEntryFromAdapter.number().getRawInput().getNumber();
+
     Assert.isNotNull(viewHolder);
     Assert.isNotNull(uri);
     Assert.isNotNull(listener);
@@ -178,6 +180,8 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     // TODO(uabdullah): Handle seekbar seeking properly (a bug)
     seekBarView.setEnabled(false);
     seekBarView.setThumb(voicemailSeekHandleDisabled);
+
+    updatePhoneIcon(numberVoicemailFrom);
 
     // During the binding we only send a request to the adapter to tell us what the
     // state of the media player should be and call that function.
@@ -228,6 +232,23 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
       seekBarView.setProgress(0);
       seekBarView.setMax(100);
       currentSeekBarPosition.setText(formatAsMinutesAndSeconds(0));
+    }
+  }
+
+  /**
+   * Updates the phone icon depending if we can dial it or not.
+   *
+   * <p>Note: This must be called after the onClickListeners have been set, otherwise isClickable()
+   * state is not maintained.
+   */
+  private void updatePhoneIcon(@Nullable String numberVoicemailFrom) {
+    // TODO(uabdullah): Handle restricted/blocked numbers (a bug)
+    if (TextUtils.isEmpty(numberVoicemailFrom)) {
+      phoneButton.setEnabled(false);
+      phoneButton.setClickable(false);
+    } else {
+      phoneButton.setEnabled(true);
+      phoneButton.setClickable(true);
     }
   }
 
@@ -478,11 +499,11 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
           audioManager.setMode(AudioManager.STREAM_MUSIC);
           if (audioManager.isSpeakerphoneOn()) {
             LogUtil.i(
-                "NewVoicemailMediaPlayer.phoneButtonListener", "speaker was on, turning it off");
+                "NewVoicemailMediaPlayer.speakerButtonListener", "speaker was on, turning it off");
             audioManager.setSpeakerphoneOn(false);
           } else {
             LogUtil.i(
-                "NewVoicemailMediaPlayer.phoneButtonListener", "speaker was off, turning it on");
+                "NewVoicemailMediaPlayer.speakerButtonListener", "speaker was off, turning it on");
             audioManager.setSpeakerphoneOn(true);
           }
           // TODO(uabdullah): Handle colors of speaker icon when speaker is on and off.
@@ -490,8 +511,6 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
       };
 
   // TODO(uabdullah): Add phone account handle (a bug)
-  // TODO(uabdullah): If the call cannot be made then the phone icon should be greyed out
-  // (a bug)
   private final View.OnClickListener phoneButtonListener =
       new View.OnClickListener() {
         @Override
