@@ -56,6 +56,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
+import com.android.dialer.preferredsim.PreferredAccountUtil;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim;
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
@@ -483,7 +484,8 @@ public class CallingAccountSelector implements PreCallAction {
       if (number != null) {
         DialerExecutorComponent.get(coordinator.getActivity())
             .dialerExecutorFactory()
-            .createNonUiTaskBuilder(new UserSelectionReporter(selectedAccountHandle, number))
+            .createNonUiTaskBuilder(
+                new UserSelectionReporter(selectedAccountHandle, number, setDefault))
             .build()
             .executeParallel(coordinator.getActivity());
       }
@@ -505,11 +507,13 @@ public class CallingAccountSelector implements PreCallAction {
 
     private final String number;
     private final PhoneAccountHandle phoneAccountHandle;
+    private final boolean remember;
 
     public UserSelectionReporter(
-        @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number) {
+        @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number, boolean remember) {
       this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
       this.number = Assert.isNotNull(number);
+      this.remember = remember;
     }
 
     @Nullable
@@ -517,7 +521,7 @@ public class CallingAccountSelector implements PreCallAction {
     public Void doInBackground(@NonNull Context context) throws Throwable {
       SimSuggestionComponent.get(context)
           .getSuggestionProvider()
-          .reportUserSelection(context, number, phoneAccountHandle);
+          .reportUserSelection(context, number, phoneAccountHandle, remember);
       return null;
     }
   }
