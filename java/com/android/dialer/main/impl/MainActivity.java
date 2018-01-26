@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
@@ -114,6 +115,16 @@ public final class MainActivity extends AppCompatActivity
     super.onSaveInstanceState(bundle);
     bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
     searchController.onSaveInstanceState(bundle);
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
+      searchController.onVoiceResults(resultCode, data);
+    } else {
+      LogUtil.e("MainActivity.onActivityResult", "Unknown request code: " + requestCode);
+    }
   }
 
   @Override
