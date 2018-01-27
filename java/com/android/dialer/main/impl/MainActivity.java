@@ -25,6 +25,7 @@ import android.provider.ContactsContract.QuickContact;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.LogUtil;
@@ -41,9 +42,11 @@ import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
+import com.android.dialer.postcall.PostCall;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
@@ -60,6 +63,8 @@ public final class MainActivity extends AppCompatActivity
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
+
+  private View snackbarContainer;
 
   /**
    * @param context Context of the application package implementing MainActivity class.
@@ -81,6 +86,8 @@ public final class MainActivity extends AppCompatActivity
   }
 
   private void initLayout(Bundle savedInstanceState) {
+    snackbarContainer = findViewById(R.id.coordinator_layout);
+
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(v -> searchController.showDialpad(true));
 
@@ -110,6 +117,21 @@ public final class MainActivity extends AppCompatActivity
     // language change.
     boolean forceUpdate = !CompatUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
     Database.get(this).getDatabaseHelper(this).startSmartDialUpdateThread(forceUpdate);
+    showPostCallPrompt();
+  }
+
+  private void showPostCallPrompt() {
+    if (TelecomUtil.isInManagedCall(this)) {
+      // No prompt to show if the user is in a call
+      return;
+    }
+
+    if (searchController.isInSearch()) {
+      // Don't show the prompt if we're in the search ui
+      return;
+    }
+
+    PostCall.promptUserForMessageIfNecessary(this, snackbarContainer);
   }
 
   @Override
