@@ -46,8 +46,7 @@ final class Modules {
     // Conditionally add each module, which are items in the bottom sheet's menu.
     List<ContactActionModule> modules = new ArrayList<>();
 
-    // TODO(zach): Don't use raw input.
-    String normalizedNumber = row.number().getRawInput().getNumber();
+    String normalizedNumber = row.number().getNormalizedNumber();
     boolean canPlaceCalls =
         PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation());
 
@@ -138,8 +137,7 @@ final class Modules {
           .build();
     }
 
-    // TODO(zachh): Don't use raw input.
-    String normalizedNumber = row.number().getRawInput().getNumber();
+    String normalizedNumber = row.number().getNormalizedNumber();
     DialerContact.Builder dialerContactBuilder =
         DialerContact.newBuilder()
             .setNumber(normalizedNumber)

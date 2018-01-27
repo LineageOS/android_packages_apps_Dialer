@@ -39,8 +39,7 @@ public final class CallLogIntents {
    */
   @Nullable
   public static Intent getCallBackIntent(Context context, CoalescedRow row) {
-    // TODO(zachh): Don't use raw input.
-    String normalizedNumber = row.number().getRawInput().getNumber();
+    String normalizedNumber = row.number().getNormalizedNumber();
     if (!PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation())) {
       return null;
     }

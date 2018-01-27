@@ -40,7 +40,6 @@ import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
-import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 
@@ -99,7 +98,7 @@ final class MainSearchController implements SearchBarListener {
     // Show Search
     if (getSearchFragment() == null) {
       NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
-      transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
@@ -153,17 +152,11 @@ final class MainSearchController implements SearchBarListener {
   }
 
   private void hideBottomNav() {
-    bottomNav.setVisibility(View.INVISIBLE);
-    if (bottomNav.getHeight() == 0) {
-      ViewUtil.doOnGlobalLayout(bottomNav, v -> fab.setTranslationY(bottomNav.getHeight()));
-    } else {
-      fab.setTranslationY(bottomNav.getHeight());
-    }
+    bottomNav.setVisibility(View.GONE);
   }
 
   private void showBottomNav() {
     bottomNav.setVisibility(View.VISIBLE);
-    fab.setTranslationY(0);
   }
 
   /** Should be called when {@link DialpadListener#onDialpadShown()} is called. */
@@ -255,6 +248,11 @@ final class MainSearchController implements SearchBarListener {
     return fragment != null && fragment.isAdded() && !fragment.isHidden();
   }
 
+  /** Returns true if the search UI is visible. */
+  public boolean isInSearch() {
+    return isSearchVisible();
+  }
+
   /**
    * Opens search in regular/search bar search mode.
    *
@@ -276,7 +274,7 @@ final class MainSearchController implements SearchBarListener {
     // Show Search
     if (getSearchFragment() == null) {
       NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
-      transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
