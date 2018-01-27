@@ -133,7 +133,7 @@ public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> 
               if (subInfo == null) {
                 throw new IllegalStateException(
                     "A sublookup didn't return an info for number: "
-                        + LogUtil.sanitizePhoneNumber(dialerPhoneNumber.getRawInput().getNumber()));
+                        + LogUtil.sanitizePhoneNumber(dialerPhoneNumber.getNormalizedNumber()));
               }
               phoneLookups.get(i).setSubMessage(combinedInfo, subInfo);
             }
