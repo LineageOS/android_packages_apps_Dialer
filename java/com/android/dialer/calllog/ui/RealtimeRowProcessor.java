@@ -44,6 +44,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -77,7 +78,7 @@ public final class RealtimeRowProcessor {
   private final Map<DialerPhoneNumber, PhoneLookupInfo> cache = new ArrayMap<>();
 
   private final Map<DialerPhoneNumber, PhoneLookupInfo> queuedPhoneLookupHistoryWrites =
-      new ArrayMap<>();
+      new LinkedHashMap<>(); // Keep the order so the most recent looked up value always wins
   private final Runnable writePhoneLookupHistoryRunnable = this::writePhoneLookupHistory;
 
   @Inject

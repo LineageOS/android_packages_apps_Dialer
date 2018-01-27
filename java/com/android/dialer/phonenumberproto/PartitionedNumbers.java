@@ -70,7 +70,7 @@ public final class PartitionedNumbers {
         }
         currentNumbers.add(dialerPhoneNumber);
       } else {
-        String invalidNumber = dialerPhoneNumber.getRawInput().getNumber();
+        String invalidNumber = dialerPhoneNumber.getNormalizedNumber();
         Set<DialerPhoneNumber> currentNumbers = invalidMapBuilder.get(invalidNumber);
         if (currentNumbers == null) {
           currentNumbers = new ArraySet<>();
@@ -85,7 +85,7 @@ public final class PartitionedNumbers {
   }
 
   private boolean hasPostDialDigits(DialerPhoneNumber dialerPhoneNumber) {
-    return !PhoneNumberUtils.extractPostDialPortion(dialerPhoneNumber.getRawInput().getNumber())
+    return !PhoneNumberUtils.extractPostDialPortion(dialerPhoneNumber.getNormalizedNumber())
         .isEmpty();
   }
 

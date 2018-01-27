@@ -43,8 +43,8 @@ final class Modules {
         voicemailEntry.numberAttributes().getName(),
         voicemailEntry.numberAttributes().getLookupUri());
 
-    String originalNumber = voicemailEntry.number().getRawInput().getNumber();
-    SharedModules.maybeAddModuleForSendingTextMessage(context, modules, originalNumber);
+    String normalizedNumber = voicemailEntry.number().getNormalizedNumber();
+    SharedModules.maybeAddModuleForSendingTextMessage(context, modules, normalizedNumber);
 
     if (!modules.isEmpty()) {
       modules.add(new DividerModule());
@@ -52,7 +52,7 @@ final class Modules {
 
     // TODO(zachh): Module for blocking/unblocking spam.
     // TODO(zachh): Module for CallComposer.
-    SharedModules.maybeAddModuleForCopyingNumber(context, modules, originalNumber);
+    SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
 
     return modules;
   }

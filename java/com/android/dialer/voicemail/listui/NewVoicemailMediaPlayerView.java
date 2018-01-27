@@ -151,7 +151,7 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     Assert.isNotNull(voicemailEntryFromAdapter);
     Uri uri = Uri.parse(voicemailEntryFromAdapter.voicemailUri());
 
-    numberVoicemailFrom = voicemailEntryFromAdapter.number().getRawInput().getNumber();
+    numberVoicemailFrom = voicemailEntryFromAdapter.number().getNormalizedNumber();
 
     Assert.isNotNull(viewHolder);
     Assert.isNotNull(uri);
