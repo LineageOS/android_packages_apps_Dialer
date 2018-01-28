@@ -51,6 +51,7 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.Iterables;
@@ -195,6 +196,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         // recent one.
         .useMostRecentBlob(AnnotatedCallLog.NUMBER)
         .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
+        .useSingleValueInt(AnnotatedCallLog.NUMBER_PRESENTATION)
         .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
         .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME)
         .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_ID)
@@ -238,6 +240,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.DATE,
                   Calls.LAST_MODIFIED, // TODO(a bug): Not available in M
                   Calls.NUMBER,
+                  Calls.NUMBER_PRESENTATION,
                   Calls.TYPE,
                   Calls.COUNTRY_ISO,
                   Calls.DURATION,
@@ -250,7 +253,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
                   Calls.PHONE_ACCOUNT_COMPONENT_NAME,
                   Calls.PHONE_ACCOUNT_ID,
                   Calls.FEATURES,
-                  Calls.POST_DIAL_DIGITS, // TODO(a bug): Not available in M
+                  Calls.POST_DIAL_DIGITS // TODO(a bug): Not available in M
                 },
                 // TODO(a bug): LAST_MODIFIED not available on M
                 Calls.LAST_MODIFIED + " > ? AND " + Voicemails.DELETED + " = 0",
@@ -272,6 +275,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         int dateColumn = cursor.getColumnIndexOrThrow(Calls.DATE);
         int lastModifiedColumn = cursor.getColumnIndexOrThrow(Calls.LAST_MODIFIED);
         int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
+        int presentationColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER_PRESENTATION);
         int typeColumn = cursor.getColumnIndexOrThrow(Calls.TYPE);
         int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
         int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
@@ -294,10 +298,17 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           long id = cursor.getLong(idColumn);
           long date = cursor.getLong(dateColumn);
           String numberAsStr = cursor.getString(numberColumn);
-          long type;
+          int type;
           if (cursor.isNull(typeColumn) || (type = cursor.getInt(typeColumn)) == 0) {
             // CallLog.Calls#TYPE lists the allowed values, which are non-null and non-zero.
             throw new IllegalStateException("call type is missing");
+          }
+          int presentation;
+          if (cursor.isNull(presentationColumn)
+              || (presentation = cursor.getInt(presentationColumn)) == 0) {
+            // CallLog.Calls#NUMBER_PRESENTATION lists the allowed values, which are non-null and
+            // non-zero.
+            throw new IllegalStateException("presentation is missing");
           }
           String countryIso = cursor.getString(countryIsoColumn);
           int duration = cursor.getInt(durationsColumn);
@@ -332,6 +343,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             contentValues.put(
                 AnnotatedCallLog.NUMBER, DialerPhoneNumber.getDefaultInstance().toByteArray());
           }
+          contentValues.put(AnnotatedCallLog.NUMBER_PRESENTATION, presentation);
           contentValues.put(AnnotatedCallLog.CALL_TYPE, type);
           contentValues.put(AnnotatedCallLog.IS_READ, isRead);
           contentValues.put(AnnotatedCallLog.NEW, isNew);
@@ -363,7 +375,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       String phoneAccountComponentName,
       String phoneAccountId) {
     PhoneAccountHandle phoneAccountHandle =
-        PhoneAccountUtils.getAccount(phoneAccountComponentName, phoneAccountId);
+        TelecomUtil.composePhoneAccountHandle(phoneAccountComponentName, phoneAccountId);
     if (phoneAccountHandle == null) {
       return;
     }

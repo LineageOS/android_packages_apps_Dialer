@@ -17,16 +17,18 @@
 package com.android.dialer.voicemail.listui;
 
 import android.app.FragmentManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,12 +37,15 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import com.android.dialer.callintent.CallInitiationType.Type;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.voicemail.listui.NewVoicemailViewHolder.NewVoicemailViewHolderListener;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import java.util.Locale;
@@ -57,9 +62,12 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
   private ImageButton deleteButton;
   private TextView currentSeekBarPosition;
   private SeekBar seekBarView;
+  private Drawable voicemailSeekHandleDisabled;
+
   private TextView totalDurationView;
   private TextView voicemailLoadingStatusView;
   private Uri voicemailUri;
+  private String numberVoicemailFrom;
   private FragmentManager fragmentManager;
   private NewVoicemailViewHolder newVoicemailViewHolder;
   private NewVoicemailMediaPlayer mediaPlayer;
@@ -91,6 +99,11 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     deleteButton = findViewById(R.id.deleteButton);
     totalDurationView = findViewById(R.id.playback_seek_total_duration);
     voicemailLoadingStatusView = findViewById(R.id.playback_state_text);
+
+    voicemailSeekHandleDisabled =
+        getContext()
+            .getResources()
+            .getDrawable(R.drawable.ic_voicemail_seek_handle_disabled, getContext().getTheme());
   }
 
   private void setupListenersForMediaPlayerButtons() {
@@ -103,9 +116,12 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
   }
 
   public void reset() {
-    LogUtil.i("NewVoicemailMediaPlayer.reset", "the uri for this is " + voicemailUri);
+    LogUtil.i(
+        "NewVoicemailMediaPlayer.reset",
+        "the uri for this is " + voicemailUri + " and number is " + numberVoicemailFrom);
     voicemailUri = null;
     voicemailLoadingStatusView.setVisibility(GONE);
+    numberVoicemailFrom = null;
   }
 
   /**
@@ -134,6 +150,9 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
 
     Assert.isNotNull(voicemailEntryFromAdapter);
     Uri uri = Uri.parse(voicemailEntryFromAdapter.voicemailUri());
+
+    numberVoicemailFrom = voicemailEntryFromAdapter.number().getNormalizedNumber();
+
     Assert.isNotNull(viewHolder);
     Assert.isNotNull(uri);
     Assert.isNotNull(listener);
@@ -157,6 +176,12 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     // Not sure if these are needed, but it'll ensure that onInflate() has atleast happened.
     initializeMediaPlayerButtonsAndViews();
     setupListenersForMediaPlayerButtons();
+
+    // TODO(uabdullah): Handle seekbar seeking properly (a bug)
+    seekBarView.setEnabled(false);
+    seekBarView.setThumb(voicemailSeekHandleDisabled);
+
+    updatePhoneIcon(numberVoicemailFrom);
 
     // During the binding we only send a request to the adapter to tell us what the
     // state of the media player should be and call that function.
@@ -207,6 +232,23 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
       seekBarView.setProgress(0);
       seekBarView.setMax(100);
       currentSeekBarPosition.setText(formatAsMinutesAndSeconds(0));
+    }
+  }
+
+  /**
+   * Updates the phone icon depending if we can dial it or not.
+   *
+   * <p>Note: This must be called after the onClickListeners have been set, otherwise isClickable()
+   * state is not maintained.
+   */
+  private void updatePhoneIcon(@Nullable String numberVoicemailFrom) {
+    // TODO(uabdullah): Handle restricted/blocked numbers (a bug)
+    if (TextUtils.isEmpty(numberVoicemailFrom)) {
+      phoneButton.setEnabled(false);
+      phoneButton.setClickable(false);
+    } else {
+      phoneButton.setEnabled(true);
+      phoneButton.setClickable(true);
     }
   }
 
@@ -452,31 +494,38 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
               "NewVoicemailMediaPlayer.speakerButtonListener",
               "speaker request for voicemailUri: %s",
               voicemailUri.toString());
+          AudioManager audioManager =
+              (AudioManager) getContext().getSystemService(AudioManager.class);
+          audioManager.setMode(AudioManager.STREAM_MUSIC);
+          if (audioManager.isSpeakerphoneOn()) {
+            LogUtil.i(
+                "NewVoicemailMediaPlayer.speakerButtonListener", "speaker was on, turning it off");
+            audioManager.setSpeakerphoneOn(false);
+          } else {
+            LogUtil.i(
+                "NewVoicemailMediaPlayer.speakerButtonListener", "speaker was off, turning it on");
+            audioManager.setSpeakerphoneOn(true);
+          }
+          // TODO(uabdullah): Handle colors of speaker icon when speaker is on and off.
         }
       };
 
+  // TODO(uabdullah): Add phone account handle (a bug)
   private final View.OnClickListener phoneButtonListener =
       new View.OnClickListener() {
         @Override
         public void onClick(View view) {
           LogUtil.i(
               "NewVoicemailMediaPlayer.phoneButtonListener",
-              "speaker request for voicemailUri: %s",
-              voicemailUri.toString());
-          ContentValues contentValues = new ContentValues();
-          contentValues.put("has_content", 0);
-          // TODO(uabdullah): It only sets the has_content to 0, to allow the annotated call log to
-          // change, and refresh the fragment. This is used to demo and test the downloading of
-          // voicemails from the server. This will be removed once we implement this listener.
-          try {
-            getContext().getContentResolver().update(voicemailUri, contentValues, "type = 4", null);
-          } catch (Exception e) {
-            LogUtil.i(
-                "NewVoicemailMediaPlayer.deleteButtonListener",
-                "update has content of voicemailUri %s caused an error: %s",
-                voicemailUri.toString(),
-                e.toString());
-          }
+              "phone request for voicemailUri: %s with number:%s",
+              voicemailUri.toString(),
+              numberVoicemailFrom);
+
+          Assert.checkArgument(
+              !TextUtils.isEmpty(numberVoicemailFrom),
+              "number cannot be empty:" + numberVoicemailFrom);
+          PreCall.start(
+              getContext(), new CallIntentBuilder(numberVoicemailFrom, Type.VOICEMAIL_LOG));
         }
       };
 

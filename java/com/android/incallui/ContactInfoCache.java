@@ -291,7 +291,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       return name;
     } else {
       if (presentation == TelecomManager.PRESENTATION_RESTRICTED) {
-        name = PhoneNumberHelper.getDisplayNameForRestrictedNumber(context).toString();
+        name = PhoneNumberHelper.getDisplayNameForRestrictedNumber(context);
       } else if (presentation == TelecomManager.PRESENTATION_PAYPHONE) {
         name = context.getString(R.string.payphone);
       }

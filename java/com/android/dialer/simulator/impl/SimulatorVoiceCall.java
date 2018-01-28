@@ -26,15 +26,21 @@ import android.telecom.DisconnectCause;
 import android.view.ActionProvider;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.enrichedcall.EnrichedCallComponent;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
+import com.android.dialer.simulator.SimulatorComponent;
+import com.android.dialer.simulator.SimulatorEnrichedCall;
 
 /** Entry point in the simulator to create voice calls. */
 final class SimulatorVoiceCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
   @NonNull private final Context context;
   @Nullable private String connectionTag;
+  private final SimulatorEnrichedCall simulatorEnrichedCall;
 
   static ActionProvider getActionProvider(@NonNull AppCompatActivity activity) {
     return new SimulatorSubMenu(activity.getApplicationContext())
@@ -54,6 +60,12 @@ final class SimulatorVoiceCall
             () ->
                 new SimulatorVoiceCall(activity.getApplicationContext())
                     .addNewOutgoingCall(activity))
+        .addItem(
+            "Incoming enriched call",
+            () -> new SimulatorVoiceCall(activity.getApplicationContext()).incomingEnrichedCall())
+        .addItem(
+            "Outgoing enriched call",
+            () -> new SimulatorVoiceCall(activity.getApplicationContext()).outgoingEnrichedCall())
         .addItem(
             "Spam incoming call",
             () -> new SimulatorVoiceCall(activity.getApplicationContext()).addSpamIncomingCall())
@@ -77,21 +89,45 @@ final class SimulatorVoiceCall
 
   private SimulatorVoiceCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
+    simulatorEnrichedCall = SimulatorComponent.get(context).getSimulatorEnrichedCall();
     SimulatorConnectionService.addListener(this);
     SimulatorConnectionService.addListener(
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
+  }
+
+  private void incomingEnrichedCall() {
+    simulatorEnrichedCall
+        .setupIncomingEnrichedCall(Simulator.ENRICHED_CALL_INCOMING_NUMBER)
+        .addListener(
+            () -> {
+              Bundle extras = new Bundle();
+              extras.putBoolean(Simulator.IS_ENRICHED_CALL, true);
+              connectionTag =
+                  SimulatorSimCallManager.addNewIncomingCall(
+                      context, Simulator.ENRICHED_CALL_INCOMING_NUMBER, false, extras);
+            },
+            DialerExecutorComponent.get(context).uiExecutor());
+  }
+
+  private void outgoingEnrichedCall() {
+    getEnrichedCallManager().registerStateChangedListener(simulatorEnrichedCall);
+    simulatorEnrichedCall
+        .setupOutgoingEnrichedCall(Simulator.ENRICHED_CALL_OUTGOING_NUMBER)
+        .addListener(
+            () -> {
+              Bundle extras = new Bundle();
+              extras.putBoolean(Simulator.IS_ENRICHED_CALL, true);
+              connectionTag =
+                  SimulatorSimCallManager.addNewOutgoingCall(
+                      context, Simulator.ENRICHED_CALL_OUTGOING_NUMBER, false, extras);
+            },
+            DialerExecutorComponent.get(context).uiExecutor());
   }
 
   private void addNewIncomingCall() {
     String callerId = "+44 (0) 20 7031 3000" /* Google London office */;
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
-  }
-
-  private void addNewOutgoingCall() {
-    String callerId = "+55-31-2128-6800"; // Brazil office.
-    connectionTag =
-        SimulatorSimCallManager.addNewOutgoingCall(context, callerId, false /* isVideo */);
   }
 
   private void addNewIncomingCall(AppCompatActivity activity) {
@@ -104,6 +140,12 @@ final class SimulatorVoiceCall
                       context, callerId, false /* isVideo */, extras);
             })
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
+  }
+
+  private void addNewOutgoingCall() {
+    String callerId = "+55-31-2128-6800"; // Brazil office.
+    connectionTag =
+        SimulatorSimCallManager.addNewOutgoingCall(context, callerId, false /* isVideo */);
   }
 
   private void addNewOutgoingCall(AppCompatActivity activity) {
@@ -184,6 +226,9 @@ final class SimulatorVoiceCall
         break;
       case Event.DISCONNECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
+        if (connection.getExtras().getBoolean(Simulator.IS_ENRICHED_CALL)) {
+          getEnrichedCallManager().unregisterStateChangedListener(simulatorEnrichedCall);
+        }
         break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
@@ -194,7 +239,8 @@ final class SimulatorVoiceCall
     }
   }
 
-  private interface DialogCallback {
-    void callback(String callerId, int callerIdPresentation);
+  @NonNull
+  private EnrichedCallManager getEnrichedCallManager() {
+    return EnrichedCallComponent.get(context).getEnrichedCallManager();
   }
 }

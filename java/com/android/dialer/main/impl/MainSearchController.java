@@ -17,16 +17,22 @@
 package com.android.dialer.main.impl;
 
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.widget.Toast;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
@@ -34,8 +40,8 @@ import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
-import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
+import java.util.ArrayList;
 
 /**
  * Search controller for handling all the logic related to entering and exiting the search UI.
@@ -92,7 +98,7 @@ final class MainSearchController implements SearchBarListener {
     // Show Search
     if (getSearchFragment() == null) {
       NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
-      transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
@@ -146,17 +152,11 @@ final class MainSearchController implements SearchBarListener {
   }
 
   private void hideBottomNav() {
-    bottomNav.setVisibility(View.INVISIBLE);
-    if (bottomNav.getHeight() == 0) {
-      ViewUtil.doOnGlobalLayout(bottomNav, v -> fab.setTranslationY(bottomNav.getHeight()));
-    } else {
-      fab.setTranslationY(bottomNav.getHeight());
-    }
+    bottomNav.setVisibility(View.GONE);
   }
 
   private void showBottomNav() {
     bottomNav.setVisibility(View.VISIBLE);
-    fab.setTranslationY(0);
   }
 
   /** Should be called when {@link DialpadListener#onDialpadShown()} is called. */
@@ -248,6 +248,11 @@ final class MainSearchController implements SearchBarListener {
     return fragment != null && fragment.isAdded() && !fragment.isHidden();
   }
 
+  /** Returns true if the search UI is visible. */
+  public boolean isInSearch() {
+    return isSearchVisible();
+  }
+
   /**
    * Opens search in regular/search bar search mode.
    *
@@ -255,8 +260,12 @@ final class MainSearchController implements SearchBarListener {
    */
   @Override
   public void onSearchBarClicked() {
+    openSearch(Optional.absent());
+  }
+
+  private void openSearch(Optional<String> query) {
     fab.hide();
-    toolbar.expand(/* animate=*/ true, Optional.absent());
+    toolbar.expand(/* animate=*/ true, query);
     toolbar.showKeyboard();
     hideBottomNav();
 
@@ -265,7 +274,7 @@ final class MainSearchController implements SearchBarListener {
     // Show Search
     if (getSearchFragment() == null) {
       NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
-      transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
@@ -294,7 +303,28 @@ final class MainSearchController implements SearchBarListener {
   }
 
   @Override
-  public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {}
+  public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {
+    try {
+      Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+      mainActivity.startActivityForResult(voiceIntent, ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);
+    } catch (ActivityNotFoundException e) {
+      Toast.makeText(mainActivity, R.string.voice_search_not_available, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  public void onVoiceResults(int resultCode, Intent data) {
+    if (resultCode == AppCompatActivity.RESULT_OK) {
+      ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+      if (matches.size() > 0) {
+        LogUtil.i("MainSearchController.onVoiceResults", "voice search - match found");
+        openSearch(Optional.of(matches.get(0)));
+      } else {
+        LogUtil.i("MainSearchController.onVoiceResults", "voice search - nothing heard");
+      }
+    } else {
+      LogUtil.e("MainSearchController.onVoiceResults", "voice search failed");
+    }
+  }
 
   @Override
   public void openSettings() {}

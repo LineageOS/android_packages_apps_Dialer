@@ -21,6 +21,7 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.time.Clock;
+import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,16 +41,25 @@ public final class CallLogEntryText {
    * following the primary text.)
    */
   public static CharSequence buildPrimaryText(Context context, CoalescedRow row) {
-    StringBuilder primaryText = new StringBuilder();
-    if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
-      primaryText.append(row.numberAttributes().getName());
-    } else if (!TextUtils.isEmpty(row.formattedNumber())) {
-      primaryText.append(row.formattedNumber());
-    } else {
-      // TODO(zachh): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
-      primaryText.append(context.getText(R.string.new_call_log_unknown));
+    // Always prefer the presentation name, like "Restricted".
+    Optional<String> presentationName =
+        PhoneNumberDisplayUtil.getNameForPresentation(context, row.numberPresentation());
+    if (presentationName.isPresent()) {
+      return presentationName.get();
     }
-    return primaryText.toString();
+
+    // Otherwise prefer the name.
+    if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
+      return row.numberAttributes().getName();
+    }
+
+    // Otherwise prefer the formatted number.
+    if (!TextUtils.isEmpty(row.formattedNumber())) {
+      return row.formattedNumber();
+    }
+
+    // If there's no formatted number, just return "Unknown".
+    return context.getText(R.string.new_call_log_unknown);
   }
 
   /**
@@ -111,6 +121,14 @@ public final class CallLogEntryText {
     }
 
     components.add(getNumberTypeLabel(context, row));
+
+    // If there's a presentation name, we showed it in the primary text and shouldn't show any name
+    // or number here.
+    Optional<String> presentationName =
+        PhoneNumberDisplayUtil.getNameForPresentation(context, row.numberPresentation());
+    if (presentationName.isPresent()) {
+      return joinSecondaryTextComponents(components);
+    }
 
     if (TextUtils.isEmpty(row.numberAttributes().getName())) {
       // If the name is empty the number is shown as the primary text and there's nothing to add.

@@ -26,6 +26,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.strictmode.StrictModeUtils;
 import java.io.IOException;
 
 /** A wrapper around {@link MediaPlayer} */
@@ -45,6 +46,7 @@ public class NewVoicemailMediaPlayer {
     mediaPlayer = Assert.isNotNull(player);
   }
 
+  // TODO(uabdullah): Consider removing the StrictModeUtils.bypass (a bug)
   public void prepareMediaPlayerAndPlayVoicemailWhenReady(Context context, Uri uri)
       throws IOException {
     Assert.checkArgument(uri != null, "Media player cannot play a null uri");
@@ -57,9 +59,23 @@ public class NewVoicemailMediaPlayer {
       voicemailUriLastPreparedOrPreparingToPlay = uri;
       verifyListenersNotNull();
       LogUtil.i("NewVoicemailMediaPlayer", "setData source");
-      mediaPlayer.setDataSource(context, uri);
+      StrictModeUtils.bypass(
+          () -> {
+            try {
+              mediaPlayer.setDataSource(context, uri);
+            } catch (IOException e) {
+              LogUtil.i(
+                  "NewVoicemailMediaPlayer",
+                  "threw an Exception when setting datasource "
+                      + e
+                      + " for uri: "
+                      + uri
+                      + "for context : "
+                      + context);
+            }
+          });
       LogUtil.i("NewVoicemailMediaPlayer", "prepare async");
-      mediaPlayer.prepareAsync();
+      StrictModeUtils.bypass(() -> mediaPlayer.prepareAsync());
     } catch (IllegalStateException e) {
       LogUtil.i(
           "NewVoicemailMediaPlayer", "caught an IllegalStateException state exception : \n" + e);

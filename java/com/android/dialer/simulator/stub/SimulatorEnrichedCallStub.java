@@ -17,6 +17,8 @@
 package com.android.dialer.simulator.stub;
 
 import com.android.dialer.simulator.SimulatorEnrichedCall;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import javax.inject.Inject;
 
 /** Stub implementation of {@link SimulatorEnrichedCall}. */
@@ -26,13 +28,13 @@ public class SimulatorEnrichedCallStub implements SimulatorEnrichedCall {
   public SimulatorEnrichedCallStub() {}
 
   @Override
-  public long setupIncomingEnrichedCall(String number) {
-    return -1;
+  public ListenableFuture<Void> setupIncomingEnrichedCall(String number) {
+    return Futures.immediateFuture(null);
   }
 
   @Override
-  public long setupOutgoingEnrichedCall(String number) {
-    return -1;
+  public ListenableFuture<Void> setupOutgoingEnrichedCall(String number) {
+    return Futures.immediateFuture(null);
   }
 
   @Override

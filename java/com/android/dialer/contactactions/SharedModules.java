@@ -48,14 +48,14 @@ public class SharedModules {
     }
 
     // Skip showing the menu item if there is no number.
-    String originalNumber = number.getRawInput().getNumber();
-    if (TextUtils.isEmpty(originalNumber)) {
+    String normalizedNumber = number.getNormalizedNumber();
+    if (TextUtils.isEmpty(normalizedNumber)) {
       return;
     }
 
     Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
     intent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
-    intent.putExtra(ContactsContract.Intents.Insert.PHONE, originalNumber);
+    intent.putExtra(ContactsContract.Intents.Insert.PHONE, normalizedNumber);
 
     if (!TextUtils.isEmpty(name)) {
       intent.putExtra(ContactsContract.Intents.Insert.NAME, name);

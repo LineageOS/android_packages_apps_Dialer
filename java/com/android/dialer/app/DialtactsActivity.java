@@ -73,7 +73,6 @@ import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.calllog.CallLogAdapter;
-import com.android.dialer.app.calllog.CallLogAsync;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.calllog.IntentProvider;
@@ -99,6 +98,7 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -912,9 +912,13 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void getLastOutgoingCall(LastOutgoingCallCallback callback) {
-    new CallLogAsync()
-        .getLastOutgoingCall(
-            new CallLogAsync.GetLastOutgoingCallArgs(this, callback::lastOutgoingCall));
+    DialerExecutorComponent.get(this)
+        .dialerExecutorFactory()
+        .createUiTaskBuilder(
+            getFragmentManager(), "Query last phone number", Calls::getLastOutgoingCall)
+        .onSuccess(output -> callback.lastOutgoingCall(output))
+        .build()
+        .executeParallel(this);
   }
 
   /** Callback from child DialpadFragment when the dialpad is shown. */

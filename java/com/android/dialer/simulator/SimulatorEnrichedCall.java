@@ -16,13 +16,14 @@
 
 package com.android.dialer.simulator;
 
-import com.android.dialer.enrichedcall.EnrichedCallManager.StateChangedListener;
+import com.android.dialer.enrichedcall.EnrichedCallManager;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** Setup enriched calling environment for {@link Simulator}. */
-public interface SimulatorEnrichedCall extends StateChangedListener {
+public interface SimulatorEnrichedCall extends EnrichedCallManager.StateChangedListener {
   /** Setup a session for an incoming enriched call. */
-  long setupIncomingEnrichedCall(String number);
+  ListenableFuture<Void> setupIncomingEnrichedCall(String number);
 
   /** Setup a session for outgoing enriched call. */
-  long setupOutgoingEnrichedCall(String number);
+  ListenableFuture<Void> setupOutgoingEnrichedCall(String number);
 }

@@ -21,6 +21,7 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -29,11 +30,12 @@ import java.util.Optional;
 /** Responsible for transforming numbers to make them dialable and valid when roaming. */
 final class NumberTransformer {
 
-  private final PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+  private final PhoneNumberUtil phoneNumberUtil;
   private final Constraints constraints;
 
   public NumberTransformer(Constraints constraints) {
     this.constraints = constraints;
+    this.phoneNumberUtil = StrictModeUtils.bypass(() -> PhoneNumberUtil.getInstance());
   }
 
   /**
@@ -68,16 +70,27 @@ final class NumberTransformer {
       return Optional.empty();
     }
 
-    PhoneNumber phoneNumber;
-    try {
-      phoneNumber = phoneNumberUtil.parse(numbertoTransform, userHomeCountryCode);
-    } catch (NumberParseException e) {
-      LogUtil.i("NumberTransformer.doAssistedDialingTransformation", "number failed to parse");
+    PhoneNumber phoneNumber =
+        StrictModeUtils.bypass(
+            () -> {
+              try {
+                return phoneNumberUtil.parse(numbertoTransform, userHomeCountryCode);
+              } catch (NumberParseException e) {
+                LogUtil.i(
+                    "NumberTransformer.doAssistedDialingTransformation", "number failed to parse");
+                return null;
+              }
+            });
+
+    if (phoneNumber == null) {
       return Optional.empty();
     }
 
     String transformedNumber =
-        phoneNumberUtil.formatNumberForMobileDialing(phoneNumber, userRoamingCountryCode, true);
+        StrictModeUtils.bypass(
+            () ->
+                phoneNumberUtil.formatNumberForMobileDialing(
+                    phoneNumber, userRoamingCountryCode, true));
 
     // formatNumberForMobileDialing may return an empty String.
     if (TextUtils.isEmpty(transformedNumber)) {

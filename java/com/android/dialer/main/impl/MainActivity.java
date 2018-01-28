@@ -20,14 +20,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
@@ -38,9 +42,11 @@ import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
+import com.android.dialer.postcall.PostCall;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
@@ -57,6 +63,8 @@ public final class MainActivity extends AppCompatActivity
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
+
+  private View snackbarContainer;
 
   /**
    * @param context Context of the application package implementing MainActivity class.
@@ -78,6 +86,8 @@ public final class MainActivity extends AppCompatActivity
   }
 
   private void initLayout(Bundle savedInstanceState) {
+    snackbarContainer = findViewById(R.id.coordinator_layout);
+
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(v -> searchController.showDialpad(true));
 
@@ -107,6 +117,21 @@ public final class MainActivity extends AppCompatActivity
     // language change.
     boolean forceUpdate = !CompatUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
     Database.get(this).getDatabaseHelper(this).startSmartDialUpdateThread(forceUpdate);
+    showPostCallPrompt();
+  }
+
+  private void showPostCallPrompt() {
+    if (TelecomUtil.isInManagedCall(this)) {
+      // No prompt to show if the user is in a call
+      return;
+    }
+
+    if (searchController.isInSearch()) {
+      // Don't show the prompt if we're in the search ui
+      return;
+    }
+
+    PostCall.promptUserForMessageIfNecessary(this, snackbarContainer);
   }
 
   @Override
@@ -114,6 +139,16 @@ public final class MainActivity extends AppCompatActivity
     super.onSaveInstanceState(bundle);
     bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
     searchController.onSaveInstanceState(bundle);
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
+      searchController.onVoiceResults(resultCode, data);
+    } else {
+      LogUtil.e("MainActivity.onActivityResult", "Unknown request code: " + requestCode);
+    }
   }
 
   @Override
@@ -130,7 +165,13 @@ public final class MainActivity extends AppCompatActivity
 
   @Override // DialpadListener
   public void getLastOutgoingCall(LastOutgoingCallCallback callback) {
-    // TODO(calderwoodra): migrate CallLogAsync class outside of dialer/app and call it here.
+    DialerExecutorComponent.get(this)
+        .dialerExecutorFactory()
+        .createUiTaskBuilder(
+            getFragmentManager(), "Query last phone number", Calls::getLastOutgoingCall)
+        .onSuccess(output -> callback.lastOutgoingCall(output))
+        .build()
+        .executeParallel(this);
   }
 
   @Override // DialpadListener

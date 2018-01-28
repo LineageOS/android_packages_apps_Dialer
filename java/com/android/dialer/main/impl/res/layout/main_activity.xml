@@ -21,13 +21,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <!-- Holds SpeedDial, Call Log, Contacts and Voicemail fragments -->
-  <FrameLayout
-      android:id="@+id/fragment_container"
+  <android.support.design.widget.CoordinatorLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/coordinator_layout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_below="@+id/toolbar"
-      android:layout_above="@+id/bottom_nav_bar"/>
+      android:layout_above="@+id/bottom_nav_bar">
+
+    <!-- Holds SpeedDial, Call Log, Contacts, Voicemail and Search fragments -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_bar"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/quantum_ic_dialpad_white_24"
+        app:backgroundTint="?android:attr/colorAccent"/>
+  </android.support.design.widget.CoordinatorLayout>
 
   <!-- BottomNavBar -->
   <include
@@ -36,13 +54,6 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"/>
-
-  <!-- Holds search fragment -->
-  <FrameLayout
-      android:id="@+id/search_fragment_container"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@+id/toolbar"/>
 
   <!-- Holds Dialpad fragment -->
   <FrameLayout
@@ -55,14 +66,4 @@
   <include
       android:id="@+id/toolbar"
       layout="@layout/toolbar_layout"/>
-
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_above="@+id/bottom_nav_bar"
-      android:layout_alignParentEnd="true"
-      android:layout_margin="16dp"
-      android:src="@drawable/quantum_ic_dialpad_white_24"
-      app:backgroundTint="?android:attr/colorAccent"/>
 </RelativeLayout>
