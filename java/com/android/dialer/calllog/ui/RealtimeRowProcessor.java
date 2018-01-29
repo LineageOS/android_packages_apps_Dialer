@@ -36,13 +36,11 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
-import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -151,9 +149,6 @@ public final class RealtimeRowProcessor {
     ListenableFuture<Integer> applyBatchFuture =
         backgroundExecutor.submit(
             () -> {
-              DialerPhoneNumberUtil dialerPhoneNumberUtil =
-                  new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
-
               ArrayList<ContentProviderOperation> operations = new ArrayList<>();
               long currentTimestamp = System.currentTimeMillis();
               for (Entry<DialerPhoneNumber, PhoneLookupInfo> entry : currentBatch.entrySet()) {
@@ -162,7 +157,8 @@ public final class RealtimeRowProcessor {
 
                 // Note: Multiple DialerPhoneNumbers can map to the same normalized number but we
                 // just write them all and the value for the last one will arbitrarily win.
-                String normalizedNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+                // Note: This loses country info when number is not valid.
+                String normalizedNumber = dialerPhoneNumber.getNormalizedNumber();
 
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(
