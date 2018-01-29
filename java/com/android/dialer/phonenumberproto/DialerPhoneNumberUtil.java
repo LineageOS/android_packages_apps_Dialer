@@ -16,7 +16,6 @@
 
 package com.android.dialer.phonenumberproto;
 
-import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
@@ -25,9 +24,6 @@ import android.text.TextUtils;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.google.common.base.Optional;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.MatchType;
@@ -59,58 +55,30 @@ public class DialerPhoneNumberUtil {
     Assert.isWorkerThread();
 
     DialerPhoneNumber.Builder dialerPhoneNumber = DialerPhoneNumber.newBuilder();
-    // Numbers can be null or empty for incoming "unknown" calls.
-    if (numberToParse != null) {
-      dialerPhoneNumber.setNormalizedNumber(normalizeNumber(numberToParse, defaultRegion));
-    }
+
     if (defaultRegion != null) {
       dialerPhoneNumber.setCountryIso(defaultRegion);
     }
-    return dialerPhoneNumber.build();
-  }
 
-  /**
-   * Parses the provided raw phone number into a Future result of {@link DialerPhoneNumber}.
-   *
-   * <p>Work is run on the provided {@link ListeningExecutorService}.
-   *
-   * @see PhoneNumberUtil#parse(CharSequence, String)
-   */
-  @AnyThread
-  public ListenableFuture<DialerPhoneNumber> parse(
-      @Nullable String numberToParse,
-      @Nullable String defaultRegion,
-      @NonNull ListeningExecutorService service) {
-    return service.submit(() -> parse(numberToParse, defaultRegion));
-  }
-
-  /**
-   * Formats the provided number to E164 format or return a normalized version of the raw number if
-   * the number is not valid according to {@link PhoneNumberUtil#isValidNumber(PhoneNumber)}.
-   *
-   * @see #formatToValidE164(DialerPhoneNumber)
-   * @see PhoneNumberUtils#normalizeNumber(String)
-   */
-  public String normalizeNumber(DialerPhoneNumber number) {
-    // TODO(zachh): Inline this method.
-    // TODO(zachh): This loses country info when number is not valid.
-    return number.getNormalizedNumber();
-  }
-
-  @WorkerThread
-  private String normalizeNumber(@NonNull String rawNumber, @Nullable String defaultRegion) {
-    Assert.isWorkerThread();
+    // Numbers can be null or empty for incoming "unknown" calls.
+    if (numberToParse == null) {
+      return dialerPhoneNumber.build();
+    }
 
     // If the number is a service number, just store the raw number and don't bother trying to parse
     // it. PhoneNumberUtil#parse ignores these characters which can lead to confusing behavior, such
     // as the numbers "#123" and "123" being considered the same. The "#" can appear in the middle
     // of a service number and the "*" can appear at the beginning (see a bug).
-    if (isServiceNumber(rawNumber)) {
-      return rawNumber;
+    if (isServiceNumber(numberToParse)) {
+      return dialerPhoneNumber.setNormalizedNumber(numberToParse).build();
     }
 
-    String postDialPortion = PhoneNumberUtils.extractPostDialPortion(rawNumber);
-    String networkPortion = PhoneNumberUtils.extractNetworkPortion(rawNumber);
+    String postDialPortion = PhoneNumberUtils.extractPostDialPortion(numberToParse);
+    if (!postDialPortion.isEmpty()) {
+      dialerPhoneNumber.setPostDialPortion(postDialPortion);
+    }
+
+    String networkPortion = PhoneNumberUtils.extractNetworkPortion(numberToParse);
 
     try {
       PhoneNumber phoneNumber = phoneNumberUtil.parse(networkPortion, defaultRegion);
@@ -118,18 +86,18 @@ public class DialerPhoneNumberUtil {
         String validNumber = phoneNumberUtil.format(phoneNumber, PhoneNumberFormat.E164);
         if (TextUtils.isEmpty(validNumber)) {
           throw new IllegalStateException(
-              "e164 number should not be empty: " + LogUtil.sanitizePii(rawNumber));
+              "e164 number should not be empty: " + LogUtil.sanitizePii(numberToParse));
         }
         // The E164 representation doesn't contain post-dial digits, but we need to preserve them.
-        if (postDialPortion != null) {
+        if (!postDialPortion.isEmpty()) {
           validNumber += postDialPortion;
         }
-        return validNumber;
+        return dialerPhoneNumber.setNormalizedNumber(validNumber).setIsValid(true).build();
       }
     } catch (NumberParseException e) {
       // fall through
     }
-    return networkPortion + postDialPortion;
+    return dialerPhoneNumber.setNormalizedNumber(networkPortion + postDialPortion).build();
   }
 
   /**
@@ -197,39 +165,7 @@ public class DialerPhoneNumberUtil {
     return (matchType == MatchType.SHORT_NSN_MATCH
             || matchType == MatchType.NSN_MATCH
             || matchType == MatchType.EXACT_MATCH)
-        && samePostDialPortion(firstNumberIn, secondNumberIn);
-  }
-
-  private static boolean samePostDialPortion(DialerPhoneNumber number1, DialerPhoneNumber number2) {
-    return PhoneNumberUtils.extractPostDialPortion(number1.getNormalizedNumber())
-        .equals(PhoneNumberUtils.extractPostDialPortion(number2.getNormalizedNumber()));
-  }
-
-  /**
-   * If the provided number is "valid" (see {@link PhoneNumberUtil#isValidNumber(PhoneNumber)}),
-   * formats it to E.164. Otherwise, returns {@link Optional#absent()}.
-   *
-   * <p>This method is analogous to {@link PhoneNumberUtils#formatNumberToE164(String, String)} (but
-   * works with an already parsed {@link DialerPhoneNumber} object).
-   *
-   * @see PhoneNumberUtil#isValidNumber(PhoneNumber)
-   * @see PhoneNumberUtil#format(PhoneNumber, PhoneNumberFormat)
-   * @see PhoneNumberUtils#formatNumberToE164(String, String)
-   */
-  @WorkerThread
-  public Optional<String> formatToValidE164(DialerPhoneNumber number) {
-    // TODO(zachh): We could do something like store a "valid" bit in DialerPhoneNumber?
-    Assert.isWorkerThread();
-    PhoneNumber phoneNumber;
-    try {
-      phoneNumber = phoneNumberUtil.parse(number.getNormalizedNumber(), number.getCountryIso());
-    } catch (NumberParseException e) {
-      return Optional.absent();
-    }
-    if (phoneNumberUtil.isValidNumber(phoneNumber)) {
-      return Optional.fromNullable(phoneNumberUtil.format(phoneNumber, PhoneNumberFormat.E164));
-    }
-    return Optional.absent();
+        && firstNumberIn.getPostDialPortion().equals(secondNumberIn.getPostDialPortion());
   }
 
   private boolean isServiceNumber(@NonNull String rawNumber) {
