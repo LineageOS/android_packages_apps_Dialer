@@ -32,14 +32,12 @@ import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
-import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -114,9 +112,8 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
       return Futures.immediateFuture(Cp2Info.getDefaultInstance());
     }
 
-    DialerPhoneNumberUtil dialerPhoneNumberUtil =
-        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
-    String number = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+    // Note: This loses country info when number is not valid.
+    String number = dialerPhoneNumber.getNormalizedNumber();
 
     List<ListenableFuture<Cp2Info>> cp2InfoFutures = new ArrayList<>();
     for (long remoteDirectoryId : remoteDirectoryIds) {

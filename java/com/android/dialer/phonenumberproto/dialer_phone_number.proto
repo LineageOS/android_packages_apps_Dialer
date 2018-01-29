@@ -40,6 +40,11 @@ message DialerPhoneNumber {
   //  number is a 7-digit US number (missing an area code) like "456-7890" which
   //  would be stored as "4567890".
   //
+  //  Note: Using this field without country_iso effectively loses country info
+  //  when the number is not valid and no country prefix was prepended. This may
+  //  cause numbers like {"456-7890", "US"} to be treated equivalently to
+  //  {"456-7890", "DE"}, when they are not in fact equivalent.
+  //
   //  See DialerPhoneNumberUtil#parse.
   optional string normalized_number = 1;
 
@@ -47,4 +52,15 @@ message DialerPhoneNumber {
   // CallLog.Calls#COUNTRY: "The ISO 3166-1 two letters country code of the
   // country where the user received or made the call."
   optional string country_iso = 2;
+
+  // True if the number is valid according to libphonenumber.
+  optional bool is_valid = 3;
+
+  // The post dial portion of the number as described by
+  // PhoneNumberUtils#extractPostDialPortion. Note that this is also part of
+  // normalized_number, but this information is duplicated here for convenience.
+  //
+  // This includes pause and wait characters, but strips other characters, so
+  // for example would be ",123;456" given the raw input of "456-7890,123; 456".
+  optional string post_dial_portion = 4;
 }

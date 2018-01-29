@@ -39,18 +39,16 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
-import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.phonenumberproto.PartitionedNumbers;
 import com.android.dialer.storage.Unencrypted;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,27 +94,42 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
   }
 
   private Cp2Info lookupInternal(DialerPhoneNumber dialerPhoneNumber) {
-    DialerPhoneNumberUtil dialerPhoneNumberUtil =
-        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
-    String number = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+    String number = dialerPhoneNumber.getNormalizedNumber();
     if (TextUtils.isEmpty(number)) {
       return Cp2Info.getDefaultInstance();
     }
-    Optional<String> validE164 = dialerPhoneNumberUtil.formatToValidE164(dialerPhoneNumber);
+
     Set<Cp2ContactInfo> cp2ContactInfos = new ArraySet<>();
-    // Note: It would make sense to use PHONE_LOOKUP for E164 numbers as well, but we use PHONE to
-    // ensure consistency when the batch methods are used to update data.
-    try (Cursor cursor =
-        validE164.isPresent()
-            ? queryPhoneTableBasedOnE164(
-                Cp2Projections.getProjectionForPhoneTable(), ImmutableSet.of(validE164.get()))
-            : queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), number)) {
+
+    // Even though this is only a single number, use PartitionedNumbers to mimic the logic used
+    // during getMostRecentInfo.
+    PartitionedNumbers partitionedNumbers =
+        new PartitionedNumbers(ImmutableSet.of(dialerPhoneNumber));
+
+    Cursor cursor = null;
+    try {
+      // Note: It would make sense to use PHONE_LOOKUP for valid numbers as well, but we use PHONE
+      // to ensure consistency when the batch methods are used to update data.
+      if (!partitionedNumbers.validE164Numbers().isEmpty()) {
+        cursor =
+            queryPhoneTableBasedOnE164(
+                Cp2Projections.getProjectionForPhoneTable(), partitionedNumbers.validE164Numbers());
+      } else {
+        cursor =
+            queryPhoneLookup(
+                Cp2Projections.getProjectionForPhoneLookupTable(),
+                Iterables.getOnlyElement(partitionedNumbers.invalidNumbers()));
+      }
       if (cursor == null) {
         LogUtil.w("Cp2LocalPhoneLookup.lookupInternal", "null cursor");
         return Cp2Info.getDefaultInstance();
       }
       while (cursor.moveToNext()) {
         cp2ContactInfos.add(Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
+      }
+    } finally {
+      if (cursor != null) {
+        cursor.close();
       }
     }
     return Cp2Info.newBuilder().addAllCp2ContactInfo(cp2ContactInfos).build();
