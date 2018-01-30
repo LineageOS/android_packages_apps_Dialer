@@ -415,7 +415,8 @@ public class DialpadFragment extends Fragment
               if (isDigitsEmpty()) {
                 if (getActivity() != null) {
                   LogUtil.i("DialpadFragment.onCreateView", "dialpad spacer touched");
-                  return ((HostInterface) getActivity()).onDialpadSpacerTouchWithEmptyQuery();
+                  return FragmentUtils.getParentUnsafe(this, HostInterface.class)
+                      .onDialpadSpacerTouchWithEmptyQuery();
                 }
                 return true;
               }

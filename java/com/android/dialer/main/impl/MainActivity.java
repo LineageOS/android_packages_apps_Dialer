@@ -22,14 +22,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
+import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -48,23 +51,28 @@ import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
-public final class MainActivity extends AppCompatActivity
-    implements OnContactSelectedListener,
-        OnDialpadQueryChangedListener,
-        DialpadListener,
-        DialpadFragment.HostInterface,
-        SearchFragmentListener {
+public final class MainActivity extends AppCompatActivity implements FragmentUtilListener {
 
   private static final String KEY_SAVED_LANGUAGE_CODE = "saved_language_code";
 
+  private final MainOnContactSelectedListener onContactSelectedListener =
+      new MainOnContactSelectedListener(this);
+  private final MainDialpadFragmentHost dialpadFragmentHostInterface =
+      new MainDialpadFragmentHost();
+
   private MainSearchController searchController;
+  private MainOnDialpadQueryChangedListener onDialpadQueryChangedListener;
+  private MainDialpadListener dialpadListener;
+  private MainSearchFragmentListener searchFragmentListener;
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
 
   private View snackbarContainer;
+  private UiListener<String> getLastOutgoingCallListener;
 
   /**
    * @param context Context of the application package implementing MainActivity class.
@@ -81,8 +89,15 @@ public final class MainActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     LogUtil.enterBlock("MainActivity.onCreate");
     setContentView(R.layout.main_activity);
+    initUiListeners();
     initLayout(savedInstanceState);
     SmartDialPrefix.initializeNanpSettings(this);
+  }
+
+  private void initUiListeners() {
+    getLastOutgoingCallListener =
+        DialerExecutorComponent.get(this)
+            .createUiListener(getFragmentManager(), "Query last phone number");
   }
 
   private void initLayout(Bundle savedInstanceState) {
@@ -99,6 +114,10 @@ public final class MainActivity extends AppCompatActivity
 
     searchController = new MainSearchController(this, bottomNav, fab, toolbar);
     toolbar.setSearchBarListener(searchController);
+
+    onDialpadQueryChangedListener = new MainOnDialpadQueryChangedListener(searchController);
+    dialpadListener = new MainDialpadListener(this, searchController, getLastOutgoingCallListener);
+    searchFragmentListener = new MainSearchFragmentListener(searchController);
 
     // Restore our view state if needed, else initialize as if the app opened for the first time
     if (savedInstanceState != null) {
@@ -152,39 +171,6 @@ public final class MainActivity extends AppCompatActivity
   }
 
   @Override
-  public void onContactSelected(ImageView photo, Uri contactUri, long contactId) {
-    // TODO(calderwoodra): Add impression logging
-    QuickContact.showQuickContact(
-        this, photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
-  }
-
-  @Override // OnDialpadQueryChangedListener
-  public void onDialpadQueryChanged(String query) {
-    searchController.onDialpadQueryChanged(query);
-  }
-
-  @Override // DialpadListener
-  public void getLastOutgoingCall(LastOutgoingCallCallback callback) {
-    DialerExecutorComponent.get(this)
-        .dialerExecutorFactory()
-        .createUiTaskBuilder(
-            getFragmentManager(), "Query last phone number", Calls::getLastOutgoingCall)
-        .onSuccess(output -> callback.lastOutgoingCall(output))
-        .build()
-        .executeParallel(this);
-  }
-
-  @Override // DialpadListener
-  public void onDialpadShown() {
-    searchController.onDialpadShown();
-  }
-
-  @Override // DialpadListener
-  public void onCallPlacedFromDialpad() {
-    // TODO(calderwoodra): logging
-  }
-
-  @Override
   public void onBackPressed() {
     if (searchController.onBackPressed()) {
       return;
@@ -192,20 +178,120 @@ public final class MainActivity extends AppCompatActivity
     super.onBackPressed();
   }
 
-  @Override // DialpadFragment.HostInterface
-  public boolean onDialpadSpacerTouchWithEmptyQuery() {
-    // No-op, just let the clicks fall through to the search list
-    return false;
+  @Nullable
+  @Override
+  @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+  public <T> T getImpl(Class<T> callbackInterface) {
+    if (callbackInterface.isInstance(onContactSelectedListener)) {
+      return (T) onContactSelectedListener;
+    } else if (callbackInterface.isInstance(onDialpadQueryChangedListener)) {
+      return (T) onDialpadQueryChangedListener;
+    } else if (callbackInterface.isInstance(dialpadListener)) {
+      return (T) dialpadListener;
+    } else if (callbackInterface.isInstance(dialpadFragmentHostInterface)) {
+      return (T) dialpadFragmentHostInterface;
+    } else if (callbackInterface.isInstance(searchFragmentListener)) {
+      return (T) searchFragmentListener;
+    } else {
+      return null;
+    }
   }
 
-  @Override // SearchFragmentListener
-  public void onSearchListTouch() {
-    searchController.onSearchListTouch();
+  /** @see OnContactSelectedListener */
+  private static final class MainOnContactSelectedListener implements OnContactSelectedListener {
+
+    private final Context context;
+
+    MainOnContactSelectedListener(Context context) {
+      this.context = context;
+    }
+
+    @Override
+    public void onContactSelected(ImageView photo, Uri contactUri, long contactId) {
+      // TODO(calderwoodra): Add impression logging
+      QuickContact.showQuickContact(
+          context, photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
+    }
   }
 
-  @Override // SearchFragmentListener
-  public void onCallPlacedFromSearch() {
-    // TODO(calderwoodra): logging
+  /** @see OnDialpadQueryChangedListener */
+  private static final class MainOnDialpadQueryChangedListener
+      implements OnDialpadQueryChangedListener {
+
+    private final MainSearchController searchController;
+
+    MainOnDialpadQueryChangedListener(MainSearchController searchController) {
+      this.searchController = searchController;
+    }
+
+    @Override
+    public void onDialpadQueryChanged(String query) {
+      searchController.onDialpadQueryChanged(query);
+    }
+  }
+
+  /** @see DialpadListener */
+  private static final class MainDialpadListener implements DialpadListener {
+
+    private final MainSearchController searchController;
+    private final Context context;
+    private final UiListener<String> listener;
+
+    MainDialpadListener(
+        Context context, MainSearchController searchController, UiListener<String> uiListener) {
+      this.context = context;
+      this.searchController = searchController;
+      this.listener = uiListener;
+    }
+
+    @Override
+    public void getLastOutgoingCall(LastOutgoingCallCallback callback) {
+      ListenableFuture<String> listenableFuture =
+          DialerExecutorComponent.get(context)
+              .backgroundExecutor()
+              .submit(() -> Calls.getLastOutgoingCall(context));
+      listener.listen(context, listenableFuture, callback::lastOutgoingCall, throwable -> {});
+    }
+
+    @Override
+    public void onDialpadShown() {
+      searchController.onDialpadShown();
+    }
+
+    @Override
+    public void onCallPlacedFromDialpad() {
+      // TODO(calderwoodra): logging
+    }
+  }
+
+  /** @see SearchFragmentListener */
+  private static final class MainSearchFragmentListener implements SearchFragmentListener {
+
+    private final MainSearchController searchController;
+
+    MainSearchFragmentListener(MainSearchController searchController) {
+      this.searchController = searchController;
+    }
+
+    @Override
+    public void onSearchListTouch() {
+      searchController.onSearchListTouch();
+    }
+
+    @Override
+    public void onCallPlacedFromSearch() {
+      // TODO(calderwoodra): logging
+    }
+  }
+
+  /** @see DialpadFragment.HostInterface */
+  private static final class MainDialpadFragmentHost implements DialpadFragment.HostInterface {
+
+    @Override
+    public boolean onDialpadSpacerTouchWithEmptyQuery() {
+      // No-op, just let the clicks fall through to the search list
+      return false;
+    }
   }
 
   /**
