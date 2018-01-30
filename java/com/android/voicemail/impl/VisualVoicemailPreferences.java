@@ -31,7 +31,7 @@ public class VisualVoicemailPreferences extends PerAccountSharedPreferences {
     super(
         context,
         phoneAccountHandle,
-        PreferenceManager.getDefaultSharedPreferences(context),
+        PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext()),
         "visual_voicemail_");
   }
 }
