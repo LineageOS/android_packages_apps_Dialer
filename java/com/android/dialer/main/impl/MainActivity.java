@@ -16,6 +16,8 @@
 
 package com.android.dialer.main.impl;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,15 +27,24 @@ import android.provider.ContactsContract.QuickContact;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.dialer.app.list.DragDropController;
+import com.android.dialer.app.list.OldSpeedDialFragment;
+import com.android.dialer.app.list.OnDragDropListener;
+import com.android.dialer.app.list.OnListFragmentScrolledListener;
+import com.android.dialer.app.list.PhoneFavoriteSquareTileView;
+import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
@@ -43,18 +54,30 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
+import com.android.dialer.interactions.PhoneNumberInteraction;
+import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDismissedListener;
+import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
+import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
 import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.postcall.PostCall;
+import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
-public final class MainActivity extends AppCompatActivity implements FragmentUtilListener {
+// TODO(calderwoodra): Do not extend TransactionSafeActivity after new SpeedDial is launched
+public final class MainActivity extends TransactionSafeActivity
+    implements FragmentUtilListener,
+        // TODO(calderwoodra): remove these 2 interfaces when we migrate to new speed dial fragment
+        InteractionErrorListener,
+        DisambigDialogDismissedListener {
 
   private static final String KEY_SAVED_LANGUAGE_CODE = "saved_language_code";
 
@@ -67,6 +90,10 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
   private MainOnDialpadQueryChangedListener onDialpadQueryChangedListener;
   private MainDialpadListener dialpadListener;
   private MainSearchFragmentListener searchFragmentListener;
+  private MainOnListFragmentScrolledListener onListFragmentScrolledListener;
+  private MainOnPhoneNumberPickerActionListener onPhoneNumberPickerActionListener;
+  private MainOldSpeedDialFragmentHostInterface oldSpeedDialFragmentHostInterface;
+  private MainOnDragDropListener onDragDropListener;
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
@@ -110,7 +137,10 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     setSupportActionBar(findViewById(R.id.toolbar));
 
     BottomNavBar bottomNav = findViewById(R.id.bottom_nav_bar);
-    bottomNav.setOnTabSelectedListener(new MainBottomNavBarBottomNavTabListener());
+    MainBottomNavBarBottomNavTabListener bottomNavTabListener =
+        new MainBottomNavBarBottomNavTabListener(
+            this, getFragmentManager(), getSupportFragmentManager());
+    bottomNav.setOnTabSelectedListener(bottomNavTabListener);
 
     searchController = new MainSearchController(this, bottomNav, fab, toolbar);
     toolbar.setSearchBarListener(searchController);
@@ -118,6 +148,12 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     onDialpadQueryChangedListener = new MainOnDialpadQueryChangedListener(searchController);
     dialpadListener = new MainDialpadListener(this, searchController, getLastOutgoingCallListener);
     searchFragmentListener = new MainSearchFragmentListener(searchController);
+    onListFragmentScrolledListener = new MainOnListFragmentScrolledListener(snackbarContainer);
+    onPhoneNumberPickerActionListener = new MainOnPhoneNumberPickerActionListener(this);
+    oldSpeedDialFragmentHostInterface =
+        new MainOldSpeedDialFragmentHostInterface(
+            bottomNavTabListener, findViewById(R.id.contact_tile_drag_shadow_overlay));
+    onDragDropListener = new MainOnDragDropListener();
 
     // Restore our view state if needed, else initialize as if the app opened for the first time
     if (savedInstanceState != null) {
@@ -192,9 +228,39 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
       return (T) dialpadFragmentHostInterface;
     } else if (callbackInterface.isInstance(searchFragmentListener)) {
       return (T) searchFragmentListener;
+    } else if (callbackInterface.isInstance(onListFragmentScrolledListener)) {
+      return (T) onListFragmentScrolledListener;
+    } else if (callbackInterface.isInstance(onPhoneNumberPickerActionListener)) {
+      return (T) onPhoneNumberPickerActionListener;
+    } else if (callbackInterface.isInstance(oldSpeedDialFragmentHostInterface)) {
+      return (T) oldSpeedDialFragmentHostInterface;
+    } else if (callbackInterface.isInstance(onDragDropListener)) {
+      return (T) onDragDropListener;
     } else {
       return null;
     }
+  }
+
+  @Override
+  public void interactionError(@InteractionErrorCode int interactionErrorCode) {
+    switch (interactionErrorCode) {
+      case InteractionErrorCode.USER_LEAVING_ACTIVITY:
+        // This is expected to happen if the user exits the activity before the interaction occurs.
+        return;
+      case InteractionErrorCode.CONTACT_NOT_FOUND:
+      case InteractionErrorCode.CONTACT_HAS_NO_NUMBER:
+      case InteractionErrorCode.OTHER_ERROR:
+      default:
+        // All other error codes are unexpected. For example, it should be impossible to start an
+        // interaction with an invalid contact from this activity.
+        throw Assert.createIllegalStateFailException(
+            "PhoneNumberInteraction error: " + interactionErrorCode);
+    }
+  }
+
+  @Override
+  public void onDisambigDialogDismissed() {
+    // Don't do anything; the app will remain open with favorites tiles displayed.
   }
 
   /** @see OnContactSelectedListener */
@@ -294,11 +360,123 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     }
   }
 
+  /** @see OnListFragmentScrolledListener */
+  private static final class MainOnListFragmentScrolledListener
+      implements OnListFragmentScrolledListener {
+
+    private final View parentLayout;
+
+    MainOnListFragmentScrolledListener(View parentLayout) {
+      this.parentLayout = parentLayout;
+    }
+
+    @Override
+    public void onListFragmentScrollStateChange(int scrollState) {
+      DialerUtils.hideInputMethod(parentLayout);
+    }
+
+    @Override
+    public void onListFragmentScroll(
+        int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+      // TODO: No-op for now. This should eventually show/hide the actionBar based on
+      // interactions with the ListsFragments.
+    }
+  }
+
+  /** @see OnPhoneNumberPickerActionListener */
+  private static final class MainOnPhoneNumberPickerActionListener
+      implements OnPhoneNumberPickerActionListener {
+
+    private final TransactionSafeActivity activity;
+
+    MainOnPhoneNumberPickerActionListener(TransactionSafeActivity activity) {
+      this.activity = activity;
+    }
+
+    @Override
+    public void onPickDataUri(
+        Uri dataUri, boolean isVideoCall, CallSpecificAppData callSpecificAppData) {
+      PhoneNumberInteraction.startInteractionForPhoneCall(
+          activity, dataUri, isVideoCall, callSpecificAppData);
+    }
+
+    @Override
+    public void onPickPhoneNumber(
+        String phoneNumber, boolean isVideoCall, CallSpecificAppData callSpecificAppData) {
+      if (phoneNumber == null) {
+        // Invalid phone number, but let the call go through so that InCallUI can show
+        // an error message.
+        phoneNumber = "";
+      }
+      PreCall.start(
+          activity,
+          new CallIntentBuilder(phoneNumber, callSpecificAppData)
+              .setIsVideoCall(isVideoCall)
+              .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing()));
+    }
+
+    @Override
+    public void onHomeInActionBarSelected() {
+      // TODO(calderwoodra): investigate if we need to exit search here
+      // PhoneNumberPickerFragment#onOptionsItemSelected
+    }
+  }
+
+  /** @see OldSpeedDialFragment.HostInterface */
+  private static final class MainOldSpeedDialFragmentHostInterface
+      implements OldSpeedDialFragment.HostInterface {
+
+    private final MainBottomNavBarBottomNavTabListener listener;
+    private final ImageView dragShadowOverlay;
+
+    // TODO(calderwoodra): Use this for drag and drop
+    @SuppressWarnings("unused")
+    private DragDropController dragDropController;
+
+    MainOldSpeedDialFragmentHostInterface(
+        MainBottomNavBarBottomNavTabListener listener, ImageView dragShadowOverlay) {
+      this.listener = listener;
+      this.dragShadowOverlay = dragShadowOverlay;
+    }
+
+    @Override
+    public void setDragDropController(DragDropController dragDropController) {
+      this.dragDropController = dragDropController;
+    }
+
+    @Override
+    public void showAllContactsTab() {
+      listener.onContactsSelected();
+    }
+
+    @Override
+    public ImageView getDragShadowOverlay() {
+      return dragShadowOverlay;
+    }
+  }
+
+  /** @see com.android.dialer.app.list.OnDragDropListener */
+  // TODO(calderwoodra): implement drag and drop
+  private static final class MainOnDragDropListener implements OnDragDropListener {
+
+    @Override
+    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {}
+
+    @Override
+    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {}
+
+    @Override
+    public void onDragFinished(int x, int y) {}
+
+    @Override
+    public void onDroppedOnRemove() {}
+  }
+
   /**
    * Implementation of {@link OnBottomNavTabSelectedListener} that handles logic for showing each of
    * the main tabs.
    */
-  private final class MainBottomNavBarBottomNavTabListener
+  private static final class MainBottomNavBarBottomNavTabListener
       implements OnBottomNavTabSelectedListener {
 
     private static final String SPEED_DIAL_TAG = "speed_dial";
@@ -306,18 +484,37 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     private static final String CONTACTS_TAG = "contacts";
     private static final String VOICEMAIL_TAG = "voicemail";
 
+    private final Context context;
+    private final FragmentManager fragmentManager;
+    private final android.support.v4.app.FragmentManager supportFragmentManager;
+
+    private MainBottomNavBarBottomNavTabListener(
+        Context context,
+        FragmentManager fragmentManager,
+        android.support.v4.app.FragmentManager supportFragmentManager) {
+      this.context = context;
+      this.fragmentManager = fragmentManager;
+      this.supportFragmentManager = supportFragmentManager;
+    }
+
     @Override
     public void onSpeedDialSelected() {
       hideAllFragments();
-      SpeedDialFragment fragment =
-          (SpeedDialFragment) getFragmentManager().findFragmentByTag(SPEED_DIAL_TAG);
+      Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       if (fragment == null) {
-        getFragmentManager()
+        if (ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getBoolean("enable_new_favorites_tab", false)) {
+          fragment = SpeedDialFragment.newInstance();
+        } else {
+          fragment = new OldSpeedDialFragment();
+        }
+        fragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container, SpeedDialFragment.newInstance(), SPEED_DIAL_TAG)
+            .add(R.id.fragment_container, fragment, SPEED_DIAL_TAG)
             .commit();
       } else {
-        getFragmentManager().beginTransaction().show(fragment).commit();
+        fragmentManager.beginTransaction().show(fragment).commit();
       }
     }
 
@@ -325,14 +522,14 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     public void onCallLogSelected() {
       hideAllFragments();
       NewCallLogFragment fragment =
-          (NewCallLogFragment) getSupportFragmentManager().findFragmentByTag(CALL_LOG_TAG);
+          (NewCallLogFragment) supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
       if (fragment == null) {
-        getSupportFragmentManager()
+        supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, new NewCallLogFragment(), CALL_LOG_TAG)
             .commit();
       } else {
-        getSupportFragmentManager().beginTransaction().show(fragment).commit();
+        supportFragmentManager.beginTransaction().show(fragment).commit();
       }
     }
 
@@ -340,9 +537,9 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     public void onContactsSelected() {
       hideAllFragments();
       ContactsFragment fragment =
-          (ContactsFragment) getFragmentManager().findFragmentByTag(CONTACTS_TAG);
+          (ContactsFragment) fragmentManager.findFragmentByTag(CONTACTS_TAG);
       if (fragment == null) {
-        getFragmentManager()
+        fragmentManager
             .beginTransaction()
             .add(
                 R.id.fragment_container,
@@ -350,7 +547,7 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
                 CONTACTS_TAG)
             .commit();
       } else {
-        getFragmentManager().beginTransaction().show(fragment).commit();
+        fragmentManager.beginTransaction().show(fragment).commit();
       }
     }
 
@@ -358,33 +555,33 @@ public final class MainActivity extends AppCompatActivity implements FragmentUti
     public void onVoicemailSelected() {
       hideAllFragments();
       NewVoicemailFragment fragment =
-          (NewVoicemailFragment) getSupportFragmentManager().findFragmentByTag(VOICEMAIL_TAG);
+          (NewVoicemailFragment) supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
       if (fragment == null) {
-        getSupportFragmentManager()
+        supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, new NewVoicemailFragment(), VOICEMAIL_TAG)
             .commit();
       } else {
-        getSupportFragmentManager().beginTransaction().show(fragment).commit();
+        supportFragmentManager.beginTransaction().show(fragment).commit();
       }
     }
 
     private void hideAllFragments() {
-      FragmentTransaction supportTransaction = getSupportFragmentManager().beginTransaction();
-      if (getSupportFragmentManager().findFragmentByTag(CALL_LOG_TAG) != null) {
-        supportTransaction.hide(getSupportFragmentManager().findFragmentByTag(CALL_LOG_TAG));
+      FragmentTransaction supportTransaction = supportFragmentManager.beginTransaction();
+      if (supportFragmentManager.findFragmentByTag(CALL_LOG_TAG) != null) {
+        supportTransaction.hide(supportFragmentManager.findFragmentByTag(CALL_LOG_TAG));
       }
-      if (getSupportFragmentManager().findFragmentByTag(VOICEMAIL_TAG) != null) {
-        supportTransaction.hide(getSupportFragmentManager().findFragmentByTag(VOICEMAIL_TAG));
+      if (supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
+        supportTransaction.hide(supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG));
       }
       supportTransaction.commit();
 
-      android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-      if (getFragmentManager().findFragmentByTag(SPEED_DIAL_TAG) != null) {
-        transaction.hide(getFragmentManager().findFragmentByTag(SPEED_DIAL_TAG));
+      android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+      if (fragmentManager.findFragmentByTag(SPEED_DIAL_TAG) != null) {
+        transaction.hide(fragmentManager.findFragmentByTag(SPEED_DIAL_TAG));
       }
-      if (getFragmentManager().findFragmentByTag(CONTACTS_TAG) != null) {
-        transaction.hide(getFragmentManager().findFragmentByTag(CONTACTS_TAG));
+      if (fragmentManager.findFragmentByTag(CONTACTS_TAG) != null) {
+        transaction.hide(fragmentManager.findFragmentByTag(CONTACTS_TAG));
       }
       transaction.commit();
     }
