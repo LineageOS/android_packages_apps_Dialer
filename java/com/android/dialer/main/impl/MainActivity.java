@@ -30,6 +30,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.dialer.app.calllog.CallLogAdapter;
+import com.android.dialer.app.calllog.CallLogFragment;
+import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.OldSpeedDialFragment;
 import com.android.dialer.app.list.OnDragDropListener;
@@ -90,6 +93,10 @@ public final class MainActivity extends TransactionSafeActivity
   private MainOnDialpadQueryChangedListener onDialpadQueryChangedListener;
   private MainDialpadListener dialpadListener;
   private MainSearchFragmentListener searchFragmentListener;
+  private MainCallLogAdapterOnActionModeStateChangedListener
+      callLogAdapterOnActionModeStateChangedListener;
+  private MainCallLogHost callLogHostInterface;
+  private MainCallLogFragmentListener callLogFragmentListener;
   private MainOnListFragmentScrolledListener onListFragmentScrolledListener;
   private MainOnPhoneNumberPickerActionListener onPhoneNumberPickerActionListener;
   private MainOldSpeedDialFragmentHostInterface oldSpeedDialFragmentHostInterface;
@@ -148,6 +155,10 @@ public final class MainActivity extends TransactionSafeActivity
     onDialpadQueryChangedListener = new MainOnDialpadQueryChangedListener(searchController);
     dialpadListener = new MainDialpadListener(this, searchController, getLastOutgoingCallListener);
     searchFragmentListener = new MainSearchFragmentListener(searchController);
+    callLogAdapterOnActionModeStateChangedListener =
+        new MainCallLogAdapterOnActionModeStateChangedListener();
+    callLogHostInterface = new MainCallLogHost(searchController, fab);
+    callLogFragmentListener = new MainCallLogFragmentListener();
     onListFragmentScrolledListener = new MainOnListFragmentScrolledListener(snackbarContainer);
     onPhoneNumberPickerActionListener = new MainOnPhoneNumberPickerActionListener(this);
     oldSpeedDialFragmentHostInterface =
@@ -228,6 +239,12 @@ public final class MainActivity extends TransactionSafeActivity
       return (T) dialpadFragmentHostInterface;
     } else if (callbackInterface.isInstance(searchFragmentListener)) {
       return (T) searchFragmentListener;
+    } else if (callbackInterface.isInstance(callLogAdapterOnActionModeStateChangedListener)) {
+      return (T) callLogAdapterOnActionModeStateChangedListener;
+    } else if (callbackInterface.isInstance(callLogHostInterface)) {
+      return (T) callLogHostInterface;
+    } else if (callbackInterface.isInstance(callLogFragmentListener)) {
+      return (T) callLogFragmentListener;
     } else if (callbackInterface.isInstance(onListFragmentScrolledListener)) {
       return (T) onListFragmentScrolledListener;
     } else if (callbackInterface.isInstance(onPhoneNumberPickerActionListener)) {
@@ -357,6 +374,60 @@ public final class MainActivity extends TransactionSafeActivity
     public boolean onDialpadSpacerTouchWithEmptyQuery() {
       // No-op, just let the clicks fall through to the search list
       return false;
+    }
+  }
+
+  /** @see CallLogAdapter.OnActionModeStateChangedListener */
+  // TODO(a bug): handle multiselect mode
+  private static final class MainCallLogAdapterOnActionModeStateChangedListener
+      implements CallLogAdapter.OnActionModeStateChangedListener {
+
+    @Override
+    public void onActionModeStateChanged(boolean isEnabled) {}
+
+    @Override
+    public boolean isActionModeStateEnabled() {
+      return false;
+    }
+  }
+
+  /** @see CallLogFragment.HostInterface */
+  private static final class MainCallLogHost implements CallLogFragment.HostInterface {
+
+    private final MainSearchController searchController;
+    private final FloatingActionButton fab;
+
+    MainCallLogHost(MainSearchController searchController, FloatingActionButton fab) {
+      this.searchController = searchController;
+      this.fab = fab;
+    }
+
+    @Override
+    public void showDialpad() {
+      searchController.showDialpad(true);
+    }
+
+    @Override
+    public void enableFloatingButton(boolean enabled) {
+      if (enabled) {
+        fab.show();
+      } else {
+        fab.hide();
+      }
+    }
+  }
+
+  /** @see CallLogFragmentListener */
+  private static final class MainCallLogFragmentListener implements CallLogFragmentListener {
+
+    @Override
+    public void updateTabUnreadCounts() {
+      // TODO(a bug): implement unread counts
+    }
+
+    @Override
+    public void showMultiSelectRemoveView(boolean show) {
+      // TODO(a bug): handle multiselect mode
     }
   }
 
@@ -521,15 +592,30 @@ public final class MainActivity extends TransactionSafeActivity
     @Override
     public void onCallLogSelected() {
       hideAllFragments();
-      NewCallLogFragment fragment =
-          (NewCallLogFragment) supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
-      if (fragment == null) {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, new NewCallLogFragment(), CALL_LOG_TAG)
-            .commit();
+      if (ConfigProviderComponent.get(context)
+          .getConfigProvider()
+          .getBoolean("enable_new_call_log", false)) {
+        NewCallLogFragment fragment =
+            (NewCallLogFragment) supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+        if (fragment == null) {
+          supportFragmentManager
+              .beginTransaction()
+              .add(R.id.fragment_container, new NewCallLogFragment(), CALL_LOG_TAG)
+              .commit();
+        } else {
+          supportFragmentManager.beginTransaction().show(fragment).commit();
+        }
       } else {
-        supportFragmentManager.beginTransaction().show(fragment).commit();
+        CallLogFragment fragment =
+            (CallLogFragment) fragmentManager.findFragmentByTag(CALL_LOG_TAG);
+        if (fragment == null) {
+          fragmentManager
+              .beginTransaction()
+              .add(R.id.fragment_container, new CallLogFragment(), CALL_LOG_TAG)
+              .commit();
+        } else {
+          fragmentManager.beginTransaction().show(fragment).commit();
+        }
       }
     }
 
@@ -569,6 +655,7 @@ public final class MainActivity extends TransactionSafeActivity
     private void hideAllFragments() {
       FragmentTransaction supportTransaction = supportFragmentManager.beginTransaction();
       if (supportFragmentManager.findFragmentByTag(CALL_LOG_TAG) != null) {
+        // NewCallLogFragment
         supportTransaction.hide(supportFragmentManager.findFragmentByTag(CALL_LOG_TAG));
       }
       if (supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
@@ -579,6 +666,10 @@ public final class MainActivity extends TransactionSafeActivity
       android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
       if (fragmentManager.findFragmentByTag(SPEED_DIAL_TAG) != null) {
         transaction.hide(fragmentManager.findFragmentByTag(SPEED_DIAL_TAG));
+      }
+      if (fragmentManager.findFragmentByTag(CALL_LOG_TAG) != null) {
+        // Old CallLogFragment
+        transaction.hide(fragmentManager.findFragmentByTag(CALL_LOG_TAG));
       }
       if (fragmentManager.findFragmentByTag(CONTACTS_TAG) != null) {
         transaction.hide(fragmentManager.findFragmentByTag(CONTACTS_TAG));

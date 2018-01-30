@@ -53,10 +53,10 @@ import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache.OnContactInfoChangedListener;
 import com.android.dialer.app.contactinfo.ExpirableCacheHeadlessFragment;
-import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.database.CallLogQueryHandler.Listener;
@@ -344,9 +344,10 @@ public class CallLogFragment extends Fragment
                 recyclerView,
                 this,
                 this,
-                activityType == CallLogAdapter.ACTIVITY_TYPE_DIALTACTS
-                    ? (CallLogAdapter.OnActionModeStateChangedListener) getActivity()
-                    : null,
+                // We aren't calling getParentUnsafe because CallLogActivity doesn't need to
+                // implement this listener
+                FragmentUtils.getParent(
+                    this, CallLogAdapter.OnActionModeStateChangedListener.class),
                 new CallLogCache(getActivity()),
                 contactInfoCache,
                 getVoicemailPlaybackPresenter(),
@@ -479,7 +480,7 @@ public class CallLogFragment extends Fragment
   public void fetchCalls() {
     callLogQueryHandler.fetchCalls(callTypeFilter, dateLimit);
     if (!isCallLogActivity) {
-      ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
+      FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class).updateTabUnreadCounts();
     }
   }
 
@@ -616,7 +617,8 @@ public class CallLogFragment extends Fragment
   public void onVisible() {
     LogUtil.enterBlock("CallLogFragment.onPageSelected");
     if (getActivity() != null && getActivity() instanceof HostInterface) {
-      ((HostInterface) getActivity()).enableFloatingButton(!isModalAlertVisible());
+      FragmentUtils.getParentUnsafe(this, HostInterface.class)
+          .enableFloatingButton(!isModalAlertVisible());
     }
   }
 
@@ -638,7 +640,7 @@ public class CallLogFragment extends Fragment
         this,
         getUserVisibleHint());
     getAdapter().notifyDataSetChanged();
-    HostInterface hostInterface = (HostInterface) getActivity();
+    HostInterface hostInterface = FragmentUtils.getParent(this, HostInterface.class);
     if (show) {
       recyclerView.setVisibility(View.GONE);
       modalAlertView.setVisibility(View.VISIBLE);
@@ -659,7 +661,8 @@ public class CallLogFragment extends Fragment
     multiSelectUnSelectAllViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
     multiSelectUnSelectAllViewContent.setAlpha(show ? 0 : 1);
     multiSelectUnSelectAllViewContent.animate().alpha(show ? 1 : 0).start();
-    ((ListsFragment) getParentFragment()).showMultiSelectRemoveView(show);
+    FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class)
+        .showMultiSelectRemoveView(show);
   }
 
   @Override
@@ -716,5 +719,17 @@ public class CallLogFragment extends Fragment
     public void onChange(boolean selfChange) {
       refreshDataRequired = true;
     }
+  }
+
+  /** Useful callback for ListsFragment children to use to call into ListsFragment. */
+  public interface CallLogFragmentListener {
+
+    /**
+     * External method to update unread count because the unread count changes when the user expands
+     * a voicemail in the call log or when the user expands an unread call in the call history tab.
+     */
+    void updateTabUnreadCounts();
+
+    void showMultiSelectRemoveView(boolean show);
   }
 }
