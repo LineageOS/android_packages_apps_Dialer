@@ -119,8 +119,6 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
-import com.android.dialer.main.Main;
-import com.android.dialer.main.MainComponent;
 import com.android.dialer.p13n.inference.P13nRanking;
 import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRanker.P13nRefreshCompleteListener;
@@ -798,7 +796,7 @@ public class DialtactsActivity extends TransactionSafeActivity
       Logger.get(this).logScreenView(ScreenEvent.Type.SETTINGS, this);
       return true;
     } else if (resId == R.id.menu_new_ui_launcher_shortcut) {
-      MainComponent.get(this).getMain().createNewUiLauncherShortcut(this);
+      MainComponent.createNewUiLauncherShortcut(this);
       return true;
     }
     return false;
@@ -1752,9 +1750,8 @@ public class DialtactsActivity extends TransactionSafeActivity
         simulatorMenuItem.setVisible(false);
       }
 
-      Main dialtacts = MainComponent.get(context).getMain();
       menu.findItem(R.id.menu_new_ui_launcher_shortcut)
-          .setVisible(dialtacts.isNewUiEnabled(context));
+          .setVisible(MainComponent.isNewUiEnabled(context));
 
       super.show();
     }
