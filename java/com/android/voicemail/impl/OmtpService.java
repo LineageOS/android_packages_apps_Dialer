@@ -197,14 +197,14 @@ public class OmtpService extends VisualVoicemailService {
   }
 
   private static void setShuttingDown(Context context, boolean value) {
-    PreferenceManager.getDefaultSharedPreferences(context)
+    PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
         .edit()
         .putBoolean(IS_SHUTTING_DOWN, value)
         .apply();
   }
 
   private static boolean isShuttingDown(Context context) {
-    return PreferenceManager.getDefaultSharedPreferences(context)
+    return PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
         .getBoolean(IS_SHUTTING_DOWN, false);
   }
 }

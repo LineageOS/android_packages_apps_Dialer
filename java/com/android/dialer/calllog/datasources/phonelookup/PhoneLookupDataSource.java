@@ -42,14 +42,12 @@ import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
-import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -192,11 +190,8 @@ public final class PhoneLookupDataSource
           populateInserts(originalPhoneLookupHistoryDataByAnnotatedCallLogId.build(), mutations);
 
           // Compute and save the PhoneLookupHistory rows which can be deleted in onSuccessfulFill.
-          DialerPhoneNumberUtil dialerPhoneNumberUtil =
-              new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
           phoneLookupHistoryRowsToDelete.addAll(
-              computePhoneLookupHistoryRowsToDelete(
-                  annotatedCallLogIdsByNumber, mutations, dialerPhoneNumberUtil));
+              computePhoneLookupHistoryRowsToDelete(annotatedCallLogIdsByNumber, mutations));
 
           // Now compute the rows to update.
           ImmutableMap.Builder<Long, PhoneLookupInfo> rowsToUpdate = ImmutableMap.builder();
@@ -209,7 +204,8 @@ public final class PhoneLookupDataSource
               }
               // Also save the updated information so that it can be written to PhoneLookupHistory
               // in onSuccessfulFill.
-              String normalizedNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+              // Note: This loses country info when number is not valid.
+              String normalizedNumber = dialerPhoneNumber.getNormalizedNumber();
               phoneLookupHistoryRowsToUpdate.put(normalizedNumber, upToDateInfo);
             }
           }
@@ -417,10 +413,9 @@ public final class PhoneLookupDataSource
   /** Returned map must have same keys as {@code uniqueDialerPhoneNumbers} */
   private ImmutableMap<DialerPhoneNumber, PhoneLookupInfo> queryPhoneLookupHistoryForNumbers(
       Context appContext, Set<DialerPhoneNumber> uniqueDialerPhoneNumbers) {
-    DialerPhoneNumberUtil dialerPhoneNumberUtil =
-        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+    // Note: This loses country info when number is not valid.
     Map<DialerPhoneNumber, String> dialerPhoneNumberToNormalizedNumbers =
-        Maps.asMap(uniqueDialerPhoneNumbers, dialerPhoneNumberUtil::normalizeNumber);
+        Maps.asMap(uniqueDialerPhoneNumbers, DialerPhoneNumber::getNormalizedNumber);
 
     // Convert values to a set to remove any duplicates that are the result of two
     // DialerPhoneNumbers mapping to the same normalized number.
@@ -543,9 +538,7 @@ public final class PhoneLookupDataSource
   }
 
   private Set<String> computePhoneLookupHistoryRowsToDelete(
-      Map<DialerPhoneNumber, Set<Long>> annotatedCallLogIdsByNumber,
-      CallLogMutations mutations,
-      DialerPhoneNumberUtil dialerPhoneNumberUtil) {
+      Map<DialerPhoneNumber, Set<Long>> annotatedCallLogIdsByNumber, CallLogMutations mutations) {
     if (mutations.getDeletes().isEmpty()) {
       return ImmutableSet.of();
     }
@@ -555,7 +548,8 @@ public final class PhoneLookupDataSource
     for (Entry<DialerPhoneNumber, Set<Long>> entry : annotatedCallLogIdsByNumber.entrySet()) {
       DialerPhoneNumber dialerPhoneNumber = entry.getKey();
       Set<Long> idsForDialerPhoneNumber = entry.getValue();
-      String normalizedNumber = dialerPhoneNumberUtil.normalizeNumber(dialerPhoneNumber);
+      // Note: This loses country info when number is not valid.
+      String normalizedNumber = dialerPhoneNumber.getNormalizedNumber();
       Set<Long> idsForNormalizedNumber = idsByNormalizedNumber.get(normalizedNumber);
       if (idsForNormalizedNumber == null) {
         idsForNormalizedNumber = new ArraySet<>();
