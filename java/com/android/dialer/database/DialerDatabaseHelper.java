@@ -42,6 +42,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.database.Selection;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
@@ -76,6 +77,10 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   private static final String DATABASE_LAST_CREATED_SHARED_PREF = "com.android.dialer";
 
   private static final String LAST_UPDATED_MILLIS = "last_updated_millis";
+
+  @VisibleForTesting
+  static final String DEFAULT_LAST_UPDATED_CONFIG_KEY = "smart_dial_default_last_update_millis";
+
   private static final String DATABASE_VERSION_PROPERTY = "database_version";
   private static final int MAX_ENTRIES = 20;
 
@@ -635,12 +640,17 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     /** Gets the last update time on the database. */
     final SharedPreferences databaseLastUpdateSharedPref =
         context.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
-    final String lastUpdateMillis =
-        String.valueOf(
-            forceUpdate ? 0 : databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0));
 
-    LogUtil.v(
-        "DialerDatabaseHelper.updateSmartDialDatabase", "last updated at " + lastUpdateMillis);
+    long defaultLastUpdateMillis =
+        ConfigProviderBindings.get(context).getLong(DEFAULT_LAST_UPDATED_CONFIG_KEY, 0);
+
+    long sharedPrefLastUpdateMillis =
+        databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, defaultLastUpdateMillis);
+
+    final String lastUpdateMillis = String.valueOf(forceUpdate ? 0 : sharedPrefLastUpdateMillis);
+
+    LogUtil.i(
+        "DialerDatabaseHelper.updateSmartDialDatabase", "last updated at %s", lastUpdateMillis);
 
     /** Sets the time after querying the database as the current update time. */
     final Long currentMillis = System.currentTimeMillis();

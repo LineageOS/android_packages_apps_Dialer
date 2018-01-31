@@ -541,7 +541,9 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       hasUpdate = true;
     }
     // Set contact to exist to avoid phone number service lookup.
-    callerInfo.contactExists = hasUpdate;
+    if (hasUpdate) {
+      callerInfo.contactExists = true;
+    }
   }
 
   /**

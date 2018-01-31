@@ -1508,6 +1508,11 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   public void onDroppedOnRemove() {}
 
+  @Override
+  public ImageView getDragShadowOverlay() {
+    return findViewById(R.id.contact_tile_drag_shadow_overlay);
+  }
+
   /**
    * Allows the SpeedDialFragment to attach the drag controller to mRemoveViewContainer once it has
    * been attached to the activity.
