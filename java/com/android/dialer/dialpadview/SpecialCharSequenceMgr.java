@@ -31,6 +31,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -77,6 +78,19 @@ public class SpecialCharSequenceMgr {
 
   private static final String ADN_NAME_COLUMN_NAME = "name";
   private static final int ADN_QUERY_TOKEN = -1;
+
+  @VisibleForTesting
+  static final List<String> TRANSSION_CODES =
+      new ArrayList<String>() {
+        {
+          add("*#07#");
+          add("*#87#");
+          add("#43#");
+          add("*#2727#");
+          add("#88#");
+        }
+      };
+
   /**
    * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to prevent
    * possible crash.
@@ -144,10 +158,7 @@ public class SpecialCharSequenceMgr {
       TelephonyManagerCompat.handleSecretCode(context, secretCode);
       return true;
     }
-    if (input.length() >= 4
-        && input.startsWith("*#")
-        && input.endsWith("#")
-        && Character.isDigit(input.charAt(2))) {
+    if (TRANSSION_CODES.contains(input)) {
       String secretCode = input.substring(2, input.length() - 1);
       TelephonyManagerCompat.handleSecretCode(context, secretCode);
       return true;
