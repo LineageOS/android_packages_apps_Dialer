@@ -119,6 +119,20 @@ final class BottomNavBar extends LinearLayout {
     }
   }
 
+  void setNotificationCount(@TabIndex int tab, int count) {
+    if (tab == TabIndex.SPEED_DIAL) {
+      speedDial.setNotificationCount(count);
+    } else if (tab == TabIndex.HISTORY) {
+      callLog.setNotificationCount(count);
+    } else if (tab == TabIndex.CONTACTS) {
+      contacts.setNotificationCount(count);
+    } else if (tab == TabIndex.VOICEMAIL) {
+      voicemail.setNotificationCount(count);
+    } else {
+      throw new IllegalStateException("Invalid tab: " + tab);
+    }
+  }
+
   void setOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {
     this.listener = listener;
   }

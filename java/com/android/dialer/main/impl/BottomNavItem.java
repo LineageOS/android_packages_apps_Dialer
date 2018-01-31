@@ -22,15 +22,18 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.android.dialer.common.Assert;
 
 /** Navigation item in a bottom nav. */
 final class BottomNavItem extends LinearLayout {
 
   private ImageView image;
   private TextView text;
+  private TextView notificationBadge;
 
   public BottomNavItem(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
@@ -41,6 +44,7 @@ final class BottomNavItem extends LinearLayout {
     super.onFinishInflate();
     image = findViewById(R.id.bottom_nav_item_image);
     text = findViewById(R.id.bottom_nav_item_text);
+    notificationBadge = findViewById(R.id.notification_badge);
   }
 
   @Override
@@ -55,5 +59,15 @@ final class BottomNavItem extends LinearLayout {
   void setup(@StringRes int stringRes, @DrawableRes int drawableRes) {
     text.setText(stringRes);
     image.setImageResource(drawableRes);
+  }
+
+  void setNotificationCount(int count) {
+    Assert.checkArgument(count >= 0, "Invalid count: " + count);
+    if (count == 0) {
+      notificationBadge.setVisibility(View.GONE);
+    } else {
+      notificationBadge.setVisibility(View.VISIBLE);
+      notificationBadge.setText(String.format(Integer.toString(count)));
+    }
   }
 }
