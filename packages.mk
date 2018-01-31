@@ -85,7 +85,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.telecomeventui \
 	com.android.incallui.video.impl \
 	com.android.incallui.video.protocol \
-	com.android.newbubble \
 	com.android.phoneapphelper \
 	com.android.voicemail \
 	com.android.voicemail.impl \
