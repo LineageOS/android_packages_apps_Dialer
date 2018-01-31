@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment;
+import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.common.LogUtil;
@@ -59,7 +60,8 @@ import java.util.ArrayList;
  * Contacts list. This will also eventually contain the logic that allows sliding the ViewPager
  * containing the lists up above the search bar and pin it against the top of the screen.
  */
-public class ListsFragment extends Fragment implements OnPageChangeListener, Listener {
+public class ListsFragment extends Fragment
+    implements OnPageChangeListener, Listener, CallLogFragmentListener {
 
   private static final String TAG = "ListsFragment";
 
@@ -423,10 +425,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
     return true;
   }
 
-  /**
-   * External method to update unread count because the unread count changes when the user expands a
-   * voicemail in the call log or when the user expands an unread call in the call history tab.
-   */
+  @Override
   public void updateTabUnreadCounts() {
     if (callLogQueryHandler != null) {
       callLogQueryHandler.fetchMissedCallsUnreadCount();
@@ -450,6 +449,7 @@ public class ListsFragment extends Fragment implements OnPageChangeListener, Lis
     removeView.animate().alpha(show ? 1 : 0).start();
   }
 
+  @Override
   public void showMultiSelectRemoveView(boolean show) {
     viewPagerTabs.setVisibility(show ? View.GONE : View.VISIBLE);
     viewPager.setEnableSwipingPages(!show);

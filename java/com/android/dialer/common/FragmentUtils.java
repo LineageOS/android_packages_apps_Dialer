@@ -16,13 +16,11 @@
 
 package com.android.dialer.common;
 
-import android.app.Activity;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 /** Utility methods for working with Fragments */
 public class FragmentUtils {
@@ -35,8 +33,8 @@ public class FragmentUtils {
   }
 
   /**
-   * @return The parent of frag that implements the callbackInterface or null if no such parent can
-   *     be found
+   * Returns an instance of the {@code callbackInterface} that is defined in the parent of the
+   * {@code fragment}, or null if no such call back can be found.
    */
   @CheckResult(suggest = "#checkParent(Fragment, Class)}")
   @Nullable
@@ -52,18 +50,22 @@ public class FragmentUtils {
       @SuppressWarnings("unchecked") // Casts are checked using runtime methods
       T parent = (T) parentFragment;
       return parent;
-    } else {
-      FragmentActivity activity = fragment.getActivity();
-      if (callbackInterface.isInstance(activity)) {
-        @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-        T parent = (T) activity;
-        return parent;
-      }
+    } else if (callbackInterface.isInstance(fragment.getActivity())) {
+      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+      T parent = (T) fragment.getActivity();
+      return parent;
+    } else if (fragment.getActivity() instanceof FragmentUtilListener) {
+      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+      T parent = ((FragmentUtilListener) fragment.getActivity()).getImpl(callbackInterface);
+      return parent;
     }
     return null;
   }
 
-  /** Version of {@link #getParent(Fragment, Class)} which supports {@link android.app.Fragment}. */
+  /**
+   * Returns an instance of the {@code callbackInterface} that is defined in the parent of the
+   * {@code fragment}, or null if no such call back can be found.
+   */
   @CheckResult(suggest = "#checkParent(Fragment, Class)}")
   @Nullable
   public static <T> T getParent(
@@ -79,13 +81,14 @@ public class FragmentUtils {
       @SuppressWarnings("unchecked") // Casts are checked using runtime methods
       T parent = (T) parentFragment;
       return parent;
-    } else {
-      Activity activity = fragment.getActivity();
-      if (callbackInterface.isInstance(activity)) {
-        @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-        T parent = (T) activity;
-        return parent;
-      }
+    } else if (callbackInterface.isInstance(fragment.getActivity())) {
+      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+      T parent = (T) fragment.getActivity();
+      return parent;
+    } else if (fragment.getActivity() instanceof FragmentUtilListener) {
+      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
+      T parent = ((FragmentUtilListener) fragment.getActivity()).getImpl(callbackInterface);
+      return parent;
     }
     return null;
   }
@@ -132,5 +135,13 @@ public class FragmentUtils {
               + ". Instead found "
               + parent);
     }
+  }
+
+  /** Useful interface for activities that don't want to implement arbitrary listeners. */
+  public interface FragmentUtilListener {
+
+    /** Returns an implementation of T if parent has one, otherwise null. */
+    @Nullable
+    <T> T getImpl(Class<T> callbackInterface);
   }
 }

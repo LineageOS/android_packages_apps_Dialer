@@ -20,7 +20,6 @@ import static android.Manifest.permission.READ_CONTACTS;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -50,6 +49,7 @@ import com.android.contacts.common.list.ContactTileView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.app.R;
 import com.android.dialer.callintent.CallSpecificAppData;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.util.PermissionsUtil;
@@ -77,22 +77,17 @@ public class OldSpeedDialFragment extends Fragment
   private static final long KEY_REMOVED_ITEM_HEIGHT = Long.MAX_VALUE;
 
   private static final String TAG = "OldSpeedDialFragment";
-  private static final boolean DEBUG = false;
   /** Used with LoaderManager. */
   private static final int LOADER_ID_CONTACT_TILE = 1;
 
   private final LongSparseArray<Integer> itemIdTopMap = new LongSparseArray<>();
   private final LongSparseArray<Integer> itemIdLeftMap = new LongSparseArray<>();
   private final ContactTileView.Listener contactTileAdapterListener =
-      new ContactTileAdapterListener();
-  private final LoaderManager.LoaderCallbacks<Cursor> contactTileLoaderListener =
-      new ContactTileLoaderListener();
-  private final ScrollListener scrollListener = new ScrollListener();
+      new ContactTileAdapterListener(this);
+  private final ScrollListener scrollListener = new ScrollListener(this);
+  private LoaderManager.LoaderCallbacks<Cursor> contactTileLoaderListener;
   private int animationDuration;
-  private OnPhoneNumberPickerActionListener phoneNumberPickerActionListener;
-  private OnListFragmentScrolledListener activityScrollListener;
   private PhoneFavoritesTileAdapter contactTileAdapter;
-  private View parentView;
   private PhoneFavoriteListView listView;
   private View contactTileFrame;
   /** Layout used when there are no favorites. */
@@ -100,9 +95,6 @@ public class OldSpeedDialFragment extends Fragment
 
   @Override
   public void onCreate(Bundle savedState) {
-    if (DEBUG) {
-      LogUtil.d("OldSpeedDialFragment.onCreate", null);
-    }
     Trace.beginSection(TAG + " onCreate");
     super.onCreate(savedState);
 
@@ -110,8 +102,9 @@ public class OldSpeedDialFragment extends Fragment
     // We don't construct the resultant adapter at this moment since it requires LayoutInflater
     // that will be available on onCreateView().
     contactTileAdapter =
-        new PhoneFavoritesTileAdapter(getActivity(), contactTileAdapterListener, this);
-    contactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(getActivity()));
+        new PhoneFavoritesTileAdapter(getContext(), contactTileAdapterListener, this);
+    contactTileAdapter.setPhotoLoader(ContactPhotoManager.getInstance(getContext()));
+    contactTileLoaderListener = new ContactTileLoaderListener(this, contactTileAdapter);
     animationDuration = getResources().getInteger(R.integer.fade_duration);
     Trace.endSection();
   }
@@ -123,7 +116,7 @@ public class OldSpeedDialFragment extends Fragment
     if (contactTileAdapter != null) {
       contactTileAdapter.refreshContactsPreferences();
     }
-    if (PermissionsUtil.hasContactsReadPermissions(getActivity())) {
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
       if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
         getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
 
@@ -144,7 +137,7 @@ public class OldSpeedDialFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     Trace.beginSection(TAG + " onCreateView");
-    parentView = inflater.inflate(R.layout.speed_dial_fragment, container, false);
+    View parentView = inflater.inflate(R.layout.speed_dial_fragment, container, false);
 
     listView = (PhoneFavoriteListView) parentView.findViewById(R.id.contact_tile_list);
     listView.setOnItemClickListener(this);
@@ -152,10 +145,8 @@ public class OldSpeedDialFragment extends Fragment
     listView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
     listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
     listView.getDragDropController().addOnDragDropListener(contactTileAdapter);
-
-    final ImageView dragShadowOverlay =
-        (ImageView) getActivity().findViewById(R.id.contact_tile_drag_shadow_overlay);
-    listView.setDragShadowOverlay(dragShadowOverlay);
+    listView.setDragShadowOverlay(
+        FragmentUtils.getParentUnsafe(this, HostInterface.class).getDragShadowOverlay());
 
     emptyView = (EmptyContentView) parentView.findViewById(R.id.empty_list_view);
     emptyView.setImage(R.drawable.empty_speed_dial);
@@ -165,7 +156,7 @@ public class OldSpeedDialFragment extends Fragment
 
     final LayoutAnimationController controller =
         new LayoutAnimationController(
-            AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+            AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in));
     controller.setDelay(0);
     listView.setLayoutAnimation(controller);
     listView.setAdapter(contactTileAdapter);
@@ -206,36 +197,16 @@ public class OldSpeedDialFragment extends Fragment
   @Override
   public void onStart() {
     super.onStart();
-
-    final Activity activity = getActivity();
-
-    try {
-      activityScrollListener = (OnListFragmentScrolledListener) activity;
-    } catch (ClassCastException e) {
-      throw new ClassCastException(
-          activity.toString() + " must implement OnListFragmentScrolledListener");
-    }
-
-    try {
-      OnDragDropListener listener = (OnDragDropListener) activity;
-      listView.getDragDropController().addOnDragDropListener(listener);
-      ((HostInterface) activity).setDragDropController(listView.getDragDropController());
-    } catch (ClassCastException e) {
-      throw new ClassCastException(
-          activity.toString() + " must implement OnDragDropListener and HostInterface");
-    }
-
-    try {
-      phoneNumberPickerActionListener = (OnPhoneNumberPickerActionListener) activity;
-    } catch (ClassCastException e) {
-      throw new ClassCastException(
-          activity.toString() + " must implement PhoneFavoritesFragment.listener");
-    }
+    listView
+        .getDragDropController()
+        .addOnDragDropListener(FragmentUtils.getParentUnsafe(this, OnDragDropListener.class));
+    FragmentUtils.getParentUnsafe(this, HostInterface.class)
+        .setDragDropController(listView.getDragDropController());
 
     // Use initLoader() instead of restartLoader() to refraining unnecessary reload.
     // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
     // be called, on which we'll check if "all" contacts should be reloaded again or not.
-    if (PermissionsUtil.hasContactsReadPermissions(activity)) {
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
       getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
     } else {
       setEmptyViewVisibility(true);
@@ -268,9 +239,6 @@ public class OldSpeedDialFragment extends Fragment
    */
   private void saveOffsets(int removedItemHeight) {
     final int firstVisiblePosition = listView.getFirstVisiblePosition();
-    if (DEBUG) {
-      LogUtil.d("OldSpeedDialFragment.saveOffsets", "Child count : " + listView.getChildCount());
-    }
     for (int i = 0; i < listView.getChildCount(); i++) {
       final View child = listView.getChildAt(i);
       final int position = firstVisiblePosition + i;
@@ -281,11 +249,6 @@ public class OldSpeedDialFragment extends Fragment
         continue;
       }
       final long itemId = contactTileAdapter.getItemId(position);
-      if (DEBUG) {
-        LogUtil.d(
-            "OldSpeedDialFragment.saveOffsets",
-            "Saving itemId: " + itemId + " for listview child " + i + " Top: " + child.getTop());
-      }
       itemIdTopMap.put(itemId, child.getTop());
       itemIdLeftMap.put(itemId, child.getLeft());
     }
@@ -350,19 +313,6 @@ public class OldSpeedDialFragment extends Fragment
                     animators.add(ObjectAnimator.ofFloat(child, "translationY", deltaY, 0.0f));
                   }
                 }
-
-                if (DEBUG) {
-                  LogUtil.d(
-                      "OldSpeedDialFragment.onPreDraw",
-                      "Found itemId: "
-                          + itemId
-                          + " for listview child "
-                          + i
-                          + " Top: "
-                          + top
-                          + " Delta: "
-                          + deltaY);
-                }
               }
             }
 
@@ -399,11 +349,6 @@ public class OldSpeedDialFragment extends Fragment
 
   @Override
   public void onEmptyViewActionButtonClicked() {
-    final Activity activity = getActivity();
-    if (activity == null) {
-      return;
-    }
-
     String[] deniedPermissions =
         PermissionsUtil.getPermissionsCurrentlyDenied(
             getContext(), PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
@@ -415,7 +360,7 @@ public class OldSpeedDialFragment extends Fragment
           this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     } else {
       // Switch tabs
-      ((HostInterface) activity).showAllContactsTab();
+      FragmentUtils.getParentUnsafe(this, HostInterface.class).showAllContactsTab();
     }
   }
 
@@ -424,79 +369,88 @@ public class OldSpeedDialFragment extends Fragment
       int requestCode, String[] permissions, int[] grantResults) {
     if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE) {
       if (grantResults.length == 1 && PackageManager.PERMISSION_GRANTED == grantResults[0]) {
-        PermissionsUtil.notifyPermissionGranted(getActivity(), READ_CONTACTS);
+        PermissionsUtil.notifyPermissionGranted(getContext(), READ_CONTACTS);
       }
     }
   }
 
+  private static final class ContactTileLoaderListener
+      implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private final OldSpeedDialFragment fragment;
+    private final PhoneFavoritesTileAdapter adapter;
+
+    ContactTileLoaderListener(OldSpeedDialFragment fragment, PhoneFavoritesTileAdapter adapter) {
+      this.fragment = fragment;
+      this.adapter = adapter;
+    }
+
+    @Override
+    public CursorLoader onCreateLoader(int id, Bundle args) {
+      return ContactTileLoaderFactory.createStrequentPhoneOnlyLoader(fragment.getContext());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+      adapter.setContactCursor(data);
+      fragment.setEmptyViewVisibility(adapter.getCount() == 0);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {}
+  }
+
+  private static final class ContactTileAdapterListener implements ContactTileView.Listener {
+
+    private final OldSpeedDialFragment fragment;
+
+    ContactTileAdapterListener(OldSpeedDialFragment fragment) {
+      this.fragment = fragment;
+    }
+
+    @Override
+    public void onContactSelected(
+        Uri contactUri, Rect targetRect, CallSpecificAppData callSpecificAppData) {
+      FragmentUtils.getParentUnsafe(fragment, OnPhoneNumberPickerActionListener.class)
+          .onPickDataUri(contactUri, false /* isVideoCall */, callSpecificAppData);
+    }
+
+    @Override
+    public void onCallNumberDirectly(String phoneNumber, CallSpecificAppData callSpecificAppData) {
+      FragmentUtils.getParentUnsafe(fragment, OnPhoneNumberPickerActionListener.class)
+          .onPickPhoneNumber(phoneNumber, false /* isVideoCall */, callSpecificAppData);
+    }
+  }
+
+  private static class ScrollListener implements ListView.OnScrollListener {
+
+    private final OldSpeedDialFragment fragment;
+
+    ScrollListener(OldSpeedDialFragment fragment) {
+      this.fragment = fragment;
+    }
+
+    @Override
+    public void onScroll(
+        AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+      FragmentUtils.getParentUnsafe(fragment, OnListFragmentScrolledListener.class)
+          .onListFragmentScroll(firstVisibleItem, visibleItemCount, totalItemCount);
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+      FragmentUtils.getParentUnsafe(fragment, OnListFragmentScrolledListener.class)
+          .onListFragmentScrollStateChange(scrollState);
+    }
+  }
+
+  /** Interface for parents of OldSpeedDialFragment to implement. */
   public interface HostInterface {
 
     void setDragDropController(DragDropController controller);
 
     void showAllContactsTab();
-  }
 
-  class ContactTileLoaderListener implements LoaderManager.LoaderCallbacks<Cursor> {
-
-    @Override
-    public CursorLoader onCreateLoader(int id, Bundle args) {
-      if (DEBUG) {
-        LogUtil.d("ContactTileLoaderListener.onCreateLoader", null);
-      }
-      return ContactTileLoaderFactory.createStrequentPhoneOnlyLoader(getActivity());
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-      if (DEBUG) {
-        LogUtil.d("ContactTileLoaderListener.onLoadFinished", null);
-      }
-      contactTileAdapter.setContactCursor(data);
-      setEmptyViewVisibility(contactTileAdapter.getCount() == 0);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-      if (DEBUG) {
-        LogUtil.d("ContactTileLoaderListener.onLoaderReset", null);
-      }
-    }
-  }
-
-  private class ContactTileAdapterListener implements ContactTileView.Listener {
-
-    @Override
-    public void onContactSelected(
-        Uri contactUri, Rect targetRect, CallSpecificAppData callSpecificAppData) {
-      if (phoneNumberPickerActionListener != null) {
-        phoneNumberPickerActionListener.onPickDataUri(
-            contactUri, false /* isVideoCall */, callSpecificAppData);
-      }
-    }
-
-    @Override
-    public void onCallNumberDirectly(String phoneNumber, CallSpecificAppData callSpecificAppData) {
-      if (phoneNumberPickerActionListener != null) {
-        phoneNumberPickerActionListener.onPickPhoneNumber(
-            phoneNumber, false /* isVideoCall */, callSpecificAppData);
-      }
-    }
-  }
-
-  private class ScrollListener implements ListView.OnScrollListener {
-
-    @Override
-    public void onScroll(
-        AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-      if (activityScrollListener != null) {
-        activityScrollListener.onListFragmentScroll(
-            firstVisibleItem, visibleItemCount, totalItemCount);
-      }
-    }
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-      activityScrollListener.onListFragmentScrollStateChange(scrollState);
-    }
+    ImageView getDragShadowOverlay();
   }
 }
