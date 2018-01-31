@@ -25,13 +25,31 @@
     android:paddingStart="12dp"
     android:paddingEnd="12dp"
     android:gravity="center"
+    android:theme="@style/Theme.AppCompat"
     android:background="?android:selectableItemBackgroundBorderless">
 
-  <ImageView
-      android:id="@+id/bottom_nav_item_image"
-      android:layout_width="24dp"
-      android:layout_height="24dp"
-      android:layout_marginBottom="6dp"/>
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="2dp">
+
+    <ImageView
+        android:id="@+id/bottom_nav_item_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="4dp"/>
+
+    <TextView
+        android:id="@+id/notification_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="@color/dialer_primary_text_color_white"
+        android:background="@drawable/notification_badge"
+        android:visibility="gone"/>
+  </FrameLayout>
 
   <TextView
       android:id="@+id/bottom_nav_item_text"
