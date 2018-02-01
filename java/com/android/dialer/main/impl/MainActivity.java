@@ -53,6 +53,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -76,6 +77,7 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TransactionSafeActivity;
@@ -92,6 +94,8 @@ public final class MainActivity extends TransactionSafeActivity
         DisambigDialogDismissedListener {
 
   private static final String KEY_SAVED_LANGUAGE_CODE = "saved_language_code";
+  private static final String KEY_CURRENT_TAB = "current_tab";
+  private static final String KEY_LAST_TAB = "last_tab";
 
   private final MainOnContactSelectedListener onContactSelectedListener =
       new MainOnContactSelectedListener(this);
@@ -114,6 +118,9 @@ public final class MainActivity extends TransactionSafeActivity
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
 
+  private LastTabController lastTabController;
+
+  private BottomNavBar bottomNav;
   private View snackbarContainer;
   private UiListener<String> getLastOutgoingCallListener;
 
@@ -152,7 +159,7 @@ public final class MainActivity extends TransactionSafeActivity
     MainToolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(findViewById(R.id.toolbar));
 
-    BottomNavBar bottomNav = findViewById(R.id.bottom_nav_bar);
+    bottomNav = findViewById(R.id.bottom_nav_bar);
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
         new MainBottomNavBarBottomNavTabListener(
             this, getFragmentManager(), getSupportFragmentManager());
@@ -179,14 +186,22 @@ public final class MainActivity extends TransactionSafeActivity
             bottomNavTabListener, findViewById(R.id.contact_tile_drag_shadow_overlay));
     onDragDropListener = new MainOnDragDropListener();
 
+    lastTabController = new LastTabController(this, bottomNav);
+
     // Restore our view state if needed, else initialize as if the app opened for the first time
     if (savedInstanceState != null) {
       savedLanguageCode = savedInstanceState.getString(KEY_SAVED_LANGUAGE_CODE);
       searchController.onRestoreInstanceState(savedInstanceState);
+      bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
     } else {
-      // TODO(calderwoodra): Implement last tab
-      bottomNav.selectTab(BottomNavBar.TabIndex.SPEED_DIAL);
+      lastTabController.selectLastTab();
     }
+  }
+
+  @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    lastTabController.selectLastTab();
   }
 
   @Override
@@ -203,6 +218,7 @@ public final class MainActivity extends TransactionSafeActivity
   @Override
   protected void onStop() {
     super.onStop();
+    lastTabController.onActivityStop();
     callLogFragmentListener.onActivityStop(
         isChangingConfigurations(), getSystemService(KeyguardManager.class).isKeyguardLocked());
   }
@@ -225,6 +241,7 @@ public final class MainActivity extends TransactionSafeActivity
   protected void onSaveInstanceState(Bundle bundle) {
     super.onSaveInstanceState(bundle);
     bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
+    bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
     searchController.onSaveInstanceState(bundle);
   }
 
@@ -845,6 +862,39 @@ public final class MainActivity extends TransactionSafeActivity
         transaction.hide(fragmentManager.findFragmentByTag(VOICEMAIL_TAG));
       }
       transaction.commit();
+    }
+  }
+
+  private static final class LastTabController {
+
+    private final Context context;
+    private final BottomNavBar bottomNavBar;
+    private final boolean isEnabled;
+
+    public LastTabController(Context context, BottomNavBar bottomNavBar) {
+      this.context = context;
+      this.bottomNavBar = bottomNavBar;
+      isEnabled = ConfigProviderBindings.get(context).getBoolean("last_tab_enabled", false);
+    }
+
+    /** Sets the last tab if the feature is enabled, otherwise defaults to speed dial. */
+    public void selectLastTab() {
+      @TabIndex int tabIndex = TabIndex.SPEED_DIAL;
+      if (isEnabled) {
+        tabIndex =
+            StorageComponent.get(context)
+                .unencryptedSharedPrefs()
+                .getInt(KEY_LAST_TAB, TabIndex.SPEED_DIAL);
+      }
+      bottomNavBar.selectTab(tabIndex);
+    }
+
+    public void onActivityStop() {
+      StorageComponent.get(context)
+          .unencryptedSharedPrefs()
+          .edit()
+          .putInt(KEY_LAST_TAB, bottomNavBar.getSelectedTab())
+          .apply();
     }
   }
 }
