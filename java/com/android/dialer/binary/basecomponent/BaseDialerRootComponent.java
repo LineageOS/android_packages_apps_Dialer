@@ -37,6 +37,7 @@ import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
+import com.android.newbubble.NewBubbleComponent;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -56,6 +57,7 @@ public interface BaseDialerRootComponent
         FeedbackComponent.HasComponent,
         MainComponent.HasComponent,
         MapsComponent.HasComponent,
+        NewBubbleComponent.HasComponent,
         PhoneLookupComponent.HasComponent,
         PhoneNumberGeoUtilComponent.HasComponent,
         PreCallComponent.HasComponent,
