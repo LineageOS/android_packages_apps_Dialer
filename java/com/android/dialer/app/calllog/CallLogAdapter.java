@@ -54,8 +54,8 @@ import android.view.ViewGroup;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
+import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogGroupBuilder.GroupCreator;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache;
@@ -68,6 +68,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
@@ -379,7 +380,18 @@ public class CallLogAdapter extends GroupingListAdapter
             if (viewHolder.callType == CallLog.Calls.MISSED_TYPE) {
               CallLogAsyncTaskUtil.markCallAsRead(activity, viewHolder.callIds);
               if (activityType == ACTIVITY_TYPE_DIALTACTS) {
-                ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
+                if (v.getContext() instanceof CallLogFragmentListener) {
+                  ((CallLogFragmentListener) v.getContext()).updateTabUnreadCounts();
+                } else if (v.getContext() instanceof FragmentUtilListener) {
+                  // This is really bad, but we must do this to prevent a dependency cycle, enforce
+                  // best practices in new code, and avoid refactoring DialtactsActivity.
+                  ((FragmentUtilListener) v.getContext())
+                      .getImpl(CallLogFragmentListener.class)
+                      .updateTabUnreadCounts();
+                } else {
+                  throw Assert.createIllegalStateFailException(
+                      "View parent does not implement CallLogFragmentListener");
+                }
               }
             }
             expandViewHolderActions(viewHolder);

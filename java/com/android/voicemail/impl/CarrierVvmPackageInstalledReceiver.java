@@ -31,6 +31,6 @@ public class CarrierVvmPackageInstalledReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent intent) {
     String packageName = intent.getStringExtra(Intent.EXTRA_PACKAGE_NAME);
     VvmLog.i("CarrierVvmPackageInstalledReceiver.onReceive", "package installed: " + packageName);
-    VvmPackageInstallHandler.handlePackageInstalled(context, packageName);
+    VvmPackageInstallHandler.handlePackageInstalled(context);
   }
 }
