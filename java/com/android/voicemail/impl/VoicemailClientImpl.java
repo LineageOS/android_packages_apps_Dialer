@@ -78,7 +78,8 @@ public class VoicemailClientImpl implements VoicemailClient {
 
   @Override
   public boolean hasCarrierSupport(Context context, PhoneAccountHandle phoneAccountHandle) {
-    return new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle).isValid();
+    OmtpVvmCarrierConfigHelper config = new OmtpVvmCarrierConfigHelper(context, phoneAccountHandle);
+    return config.isValid() && !config.isCarrierAppInstalled();
   }
 
   @Override
