@@ -22,8 +22,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import com.android.dialer.common.Assert;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Dialer Bottom Nav Bar for {@link MainActivity}. */
 final class BottomNavBar extends LinearLayout {
@@ -32,22 +35,23 @@ final class BottomNavBar extends LinearLayout {
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
     TabIndex.SPEED_DIAL,
-    TabIndex.HISTORY,
+    TabIndex.CALL_LOG,
     TabIndex.CONTACTS,
     TabIndex.VOICEMAIL,
   })
   public @interface TabIndex {
     int SPEED_DIAL = 0;
-    int HISTORY = 1;
+    int CALL_LOG = 1;
     int CONTACTS = 2;
     int VOICEMAIL = 3;
   }
+
+  private final List<OnBottomNavTabSelectedListener> listeners = new ArrayList<>();
 
   private BottomNavItem speedDial;
   private BottomNavItem callLog;
   private BottomNavItem contacts;
   private BottomNavItem voicemail;
-  private OnBottomNavTabSelectedListener listener;
   private @TabIndex int selectedTab;
 
   public BottomNavBar(Context context, @Nullable AttributeSet attrs) {
@@ -71,25 +75,25 @@ final class BottomNavBar extends LinearLayout {
         v -> {
           selectedTab = TabIndex.SPEED_DIAL;
           setSelected(speedDial);
-          listener.onSpeedDialSelected();
+          updateListeners(selectedTab);
         });
     callLog.setOnClickListener(
         v -> {
-          selectedTab = TabIndex.HISTORY;
+          selectedTab = TabIndex.CALL_LOG;
           setSelected(callLog);
-          listener.onCallLogSelected();
+          updateListeners(selectedTab);
         });
     contacts.setOnClickListener(
         v -> {
           selectedTab = TabIndex.CONTACTS;
           setSelected(contacts);
-          listener.onContactsSelected();
+          updateListeners(selectedTab);
         });
     voicemail.setOnClickListener(
         v -> {
           selectedTab = TabIndex.VOICEMAIL;
           setSelected(voicemail);
-          listener.onVoicemailSelected();
+          updateListeners(selectedTab);
         });
   }
 
@@ -108,7 +112,7 @@ final class BottomNavBar extends LinearLayout {
   void selectTab(@TabIndex int tab) {
     if (tab == TabIndex.SPEED_DIAL) {
       speedDial.performClick();
-    } else if (tab == TabIndex.HISTORY) {
+    } else if (tab == TabIndex.CALL_LOG) {
       callLog.performClick();
     } else if (tab == TabIndex.CONTACTS) {
       contacts.performClick();
@@ -122,7 +126,7 @@ final class BottomNavBar extends LinearLayout {
   void setNotificationCount(@TabIndex int tab, int count) {
     if (tab == TabIndex.SPEED_DIAL) {
       speedDial.setNotificationCount(count);
-    } else if (tab == TabIndex.HISTORY) {
+    } else if (tab == TabIndex.CALL_LOG) {
       callLog.setNotificationCount(count);
     } else if (tab == TabIndex.CONTACTS) {
       contacts.setNotificationCount(count);
@@ -133,8 +137,29 @@ final class BottomNavBar extends LinearLayout {
     }
   }
 
-  void setOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {
-    this.listener = listener;
+  void addOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {
+    listeners.add(listener);
+  }
+
+  private void updateListeners(@TabIndex int tabIndex) {
+    for (OnBottomNavTabSelectedListener listener : listeners) {
+      switch (tabIndex) {
+        case TabIndex.SPEED_DIAL:
+          listener.onSpeedDialSelected();
+          break;
+        case TabIndex.CALL_LOG:
+          listener.onCallLogSelected();
+          break;
+        case TabIndex.CONTACTS:
+          listener.onContactsSelected();
+          break;
+        case TabIndex.VOICEMAIL:
+          listener.onVoicemailSelected();
+          break;
+        default:
+          throw Assert.createIllegalStateFailException("Invalid tab: " + tabIndex);
+      }
+    }
   }
 
   public int getSelectedTab() {

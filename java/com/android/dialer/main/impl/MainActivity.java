@@ -16,10 +16,14 @@
 
 package com.android.dialer.main.impl;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.KeyguardManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CallLog.Calls;
@@ -33,6 +37,7 @@ import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
+import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.OldSpeedDialFragment;
 import com.android.dialer.app.list.OnDragDropListener;
@@ -52,6 +57,7 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
+import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.database.Database;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
@@ -62,6 +68,7 @@ import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDism
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
 import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
+import com.android.dialer.main.impl.BottomNavBar.TabIndex;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
@@ -73,6 +80,7 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.concurrent.TimeUnit;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
 // TODO(calderwoodra): Do not extend TransactionSafeActivity after new SpeedDial is launched
@@ -147,7 +155,11 @@ public final class MainActivity extends TransactionSafeActivity
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
         new MainBottomNavBarBottomNavTabListener(
             this, getFragmentManager(), getSupportFragmentManager());
-    bottomNav.setOnTabSelectedListener(bottomNavTabListener);
+    bottomNav.addOnTabSelectedListener(bottomNavTabListener);
+
+    callLogFragmentListener =
+        new MainCallLogFragmentListener(this, getContentResolver(), bottomNav);
+    bottomNav.addOnTabSelectedListener(callLogFragmentListener);
 
     searchController = new MainSearchController(this, bottomNav, fab, toolbar);
     toolbar.setSearchBarListener(searchController);
@@ -158,7 +170,7 @@ public final class MainActivity extends TransactionSafeActivity
     callLogAdapterOnActionModeStateChangedListener =
         new MainCallLogAdapterOnActionModeStateChangedListener();
     callLogHostInterface = new MainCallLogHost(searchController, fab);
-    callLogFragmentListener = new MainCallLogFragmentListener();
+
     onListFragmentScrolledListener = new MainOnListFragmentScrolledListener(snackbarContainer);
     onPhoneNumberPickerActionListener = new MainOnPhoneNumberPickerActionListener(this);
     oldSpeedDialFragmentHostInterface =
@@ -179,11 +191,19 @@ public final class MainActivity extends TransactionSafeActivity
   @Override
   protected void onResume() {
     super.onResume();
+    callLogFragmentListener.onActivityResume();
     // Start the thread that updates the smart dial database if the activity is recreated with a
     // language change.
     boolean forceUpdate = !CompatUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
     Database.get(this).getDatabaseHelper(this).startSmartDialUpdateThread(forceUpdate);
     showPostCallPrompt();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    callLogFragmentListener.onActivityStop(
+        isChangingConfigurations(), getSystemService(KeyguardManager.class).isKeyguardLocked());
   }
 
   private void showPostCallPrompt() {
@@ -417,17 +437,146 @@ public final class MainActivity extends TransactionSafeActivity
     }
   }
 
-  /** @see CallLogFragmentListener */
-  private static final class MainCallLogFragmentListener implements CallLogFragmentListener {
+  /**
+   * Handles the logic for callbacks from:
+   *
+   * <ul>
+   *   <li>{@link CallLogFragment}
+   *   <li>{@link CallLogQueryHandler}
+   *   <li>{@link BottomNavBar}
+   * </ul>
+   *
+   * This mainly entails:
+   *
+   * <ul>
+   *   <li>Handling querying for missed calls/unread voicemails.
+   *   <li>Displaying a badge to the user in the bottom nav when there are missed calls/unread
+   *       voicemails present.
+   *   <li>Marking missed calls as read when appropriate. See {@link
+   *       #markMissedCallsAsReadAndRemoveNotification()}
+   *   <li>TODO(calderwoodra): multiselect
+   *   <li>TODO(calderwoodra): voicemail status
+   * </ul>
+   *
+   * @see CallLogFragmentListener
+   * @see CallLogQueryHandler.Listener
+   * @see OnBottomNavTabSelectedListener
+   */
+  private static final class MainCallLogFragmentListener
+      implements CallLogFragmentListener,
+          CallLogQueryHandler.Listener,
+          OnBottomNavTabSelectedListener {
+
+    private final CallLogQueryHandler callLogQueryHandler;
+    private final BottomNavBar bottomNavBar;
+    private final Context context;
+
+    private @TabIndex int currentTab = TabIndex.SPEED_DIAL;
+    private long timeSelected = -1;
+    private boolean activityIsAlive;
+
+    MainCallLogFragmentListener(
+        Context context, ContentResolver contentResolver, BottomNavBar bottomNavBar) {
+      callLogQueryHandler = new CallLogQueryHandler(context, contentResolver, this);
+      this.bottomNavBar = bottomNavBar;
+      this.context = context;
+    }
 
     @Override
     public void updateTabUnreadCounts() {
-      // TODO(a bug): implement unread counts
+      callLogQueryHandler.fetchMissedCallsUnreadCount();
+      callLogQueryHandler.fetchVoicemailUnreadCount();
     }
 
     @Override
     public void showMultiSelectRemoveView(boolean show) {
       // TODO(a bug): handle multiselect mode
+    }
+
+    @Override
+    public void onVoicemailStatusFetched(Cursor statusCursor) {
+      // TODO(calderwoodra): handle this when voicemail is implemented
+    }
+
+    @Override
+    public void onVoicemailUnreadCountFetched(Cursor cursor) {
+      if (activityIsAlive) {
+        bottomNavBar.setNotificationCount(TabIndex.VOICEMAIL, cursor.getCount());
+      }
+      cursor.close();
+    }
+
+    @Override
+    public void onMissedCallsUnreadCountFetched(Cursor cursor) {
+      if (activityIsAlive) {
+        bottomNavBar.setNotificationCount(TabIndex.CALL_LOG, cursor.getCount());
+      }
+      cursor.close();
+    }
+
+    @Override
+    public boolean onCallsFetched(Cursor combinedCursor) {
+      // Return false; did not take ownership of cursor
+      return false;
+    }
+
+    @Override
+    public void onSpeedDialSelected() {
+      setCurrentTab(TabIndex.SPEED_DIAL);
+    }
+
+    @Override
+    public void onCallLogSelected() {
+      setCurrentTab(TabIndex.CALL_LOG);
+    }
+
+    @Override
+    public void onContactsSelected() {
+      setCurrentTab(TabIndex.CONTACTS);
+    }
+
+    @Override
+    public void onVoicemailSelected() {
+      setCurrentTab(TabIndex.VOICEMAIL);
+    }
+
+    private void markMissedCallsAsReadAndRemoveNotification() {
+      callLogQueryHandler.markMissedCallsAsRead();
+      CallLogNotificationsService.cancelAllMissedCalls(context);
+    }
+
+    private void setCurrentTab(@TabIndex int tabIndex) {
+      if (currentTab == TabIndex.CALL_LOG && tabIndex != TabIndex.CALL_LOG) {
+        markMissedCallsAsReadAndRemoveNotification();
+      }
+      currentTab = tabIndex;
+      timeSelected = System.currentTimeMillis();
+    }
+
+    public void onActivityResume() {
+      activityIsAlive = true;
+      callLogQueryHandler.fetchVoicemailStatus();
+      callLogQueryHandler.fetchMissedCallsUnreadCount();
+      // Reset the tab on resume to restart the timer
+      setCurrentTab(bottomNavBar.getSelectedTab());
+    }
+
+    /** Should be called when {@link Activity#onStop()} is called. */
+    public void onActivityStop(boolean changingConfigurations, boolean keyguardLocked) {
+      activityIsAlive = false;
+      if (viewedCallLogTabPastTimeThreshold() && !changingConfigurations && !keyguardLocked) {
+        markMissedCallsAsReadAndRemoveNotification();
+      }
+    }
+
+    /**
+     * Returns true if the user has been (and still is) on the history tab for long than the
+     * threshold.
+     */
+    private boolean viewedCallLogTabPastTimeThreshold() {
+      return currentTab == TabIndex.CALL_LOG
+          && timeSelected != -1
+          && System.currentTimeMillis() - timeSelected > TimeUnit.SECONDS.toMillis(3);
     }
   }
 
