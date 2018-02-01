@@ -22,8 +22,8 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Allows the container application to mark calls as spam. */
@@ -45,12 +45,12 @@ public interface Spam {
   /**
    * Checks if each of numbers in the given list is suspected of being a spam.
    *
-   * @param dialerPhoneNumbers A list of {@link DialerPhoneNumber}.
+   * @param dialerPhoneNumbers A set of {@link DialerPhoneNumber}.
    * @return A {@link ListenableFuture} of a map that maps each number to its spam status
    *     (true/false).
    */
   ListenableFuture<ImmutableMap<DialerPhoneNumber, Boolean>> batchCheckSpamStatus(
-      ImmutableList<DialerPhoneNumber> dialerPhoneNumbers);
+      ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers);
 
   /**
    * Checks if the given number is suspected of being a spam.
