@@ -62,6 +62,7 @@ import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import java.util.ArrayList;
@@ -309,6 +310,12 @@ public class CallingAccountSelector implements PreCallAction {
     public PreferredAccountWorkerResult doInBackground(Context context) throws Throwable {
       PreferredAccountWorkerResult result = new PreferredAccountWorkerResult();
       if (!isPreferredSimEnabled(context)) {
+        return result;
+      }
+      if (!PermissionsUtil.hasContactsReadPermissions(context)) {
+        LogUtil.i(
+            "CallingAccountSelector.PreferredAccountWorker.doInBackground",
+            "missing READ_CONTACTS permission");
         return result;
       }
       result.dataId = getDataId(context, phoneNumber);
