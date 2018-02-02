@@ -23,6 +23,8 @@ import android.support.v4.content.CursorLoader;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -83,6 +85,13 @@ final class VoicemailCursorLoader extends CursorLoader {
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
     }
+
+    // Voicemail numbers should always be valid so the CP2 information should never be incomplete,
+    // and there should be no need to query PhoneLookup at render time.
+    Assert.checkArgument(
+        !numberAttributes.getIsCp2InfoIncomplete(),
+        "CP2 info incomplete for number: %s",
+        LogUtil.sanitizePii(number.getNormalizedNumber()));
 
     return VoicemailEntry.builder()
         .setId(cursor.getInt(ID))
