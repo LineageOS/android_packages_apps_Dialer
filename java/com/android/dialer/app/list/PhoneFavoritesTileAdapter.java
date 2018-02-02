@@ -46,6 +46,7 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutRefresher;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.common.collect.ComparisonChain;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -519,19 +520,24 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
       }
 
       if (changed && dropEntryIndex < PIN_LIMIT) {
-        final ArrayList<ContentProviderOperation> operations =
+        ArrayList<ContentProviderOperation> operations =
             getReflowedPinningOperations(contactEntries, draggedEntryIndex, dropEntryIndex);
-        if (!operations.isEmpty()) {
-          // update the database here with the new pinned positions
-          try {
-            context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
-            Logger.get(context).logInteraction(InteractionEvent.Type.SPEED_DIAL_PIN_CONTACT);
-          } catch (RemoteException | OperationApplicationException e) {
-            LogUtil.e(TAG, "Exception thrown when pinning contacts", e);
-          }
-        }
+        StrictModeUtils.bypass(() -> updateDatabaseWithPinnedPositions(operations));
       }
       draggedEntry = null;
+    }
+  }
+
+  private void updateDatabaseWithPinnedPositions(ArrayList<ContentProviderOperation> operations) {
+    if (operations.isEmpty()) {
+      // Nothing to update
+      return;
+    }
+    try {
+      context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
+      Logger.get(context).logInteraction(InteractionEvent.Type.SPEED_DIAL_PIN_CONTACT);
+    } catch (RemoteException | OperationApplicationException e) {
+      LogUtil.e(TAG, "Exception thrown when pinning contacts", e);
     }
   }
 
@@ -543,7 +549,8 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     final ContentValues values = new ContentValues(2);
     values.put(Contacts.STARRED, false);
     values.put(Contacts.PINNED, PinnedPositions.DEMOTED);
-    context.getContentResolver().update(contactUri, values, null, null);
+    StrictModeUtils.bypass(
+        () -> context.getContentResolver().update(contactUri, values, null, null));
   }
 
   /**
