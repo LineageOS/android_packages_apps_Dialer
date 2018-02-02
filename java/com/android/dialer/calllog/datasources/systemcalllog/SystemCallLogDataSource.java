@@ -24,6 +24,8 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
@@ -32,6 +34,7 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.ColorInt;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccount;
@@ -49,6 +52,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
@@ -58,6 +62,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -235,26 +240,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .getContentResolver()
             .query(
                 Calls.CONTENT_URI_WITH_VOICEMAIL,
-                new String[] {
-                  Calls._ID,
-                  Calls.DATE,
-                  Calls.LAST_MODIFIED, // TODO(a bug): Not available in M
-                  Calls.NUMBER,
-                  Calls.NUMBER_PRESENTATION,
-                  Calls.TYPE,
-                  Calls.COUNTRY_ISO,
-                  Calls.DURATION,
-                  Calls.DATA_USAGE,
-                  Calls.TRANSCRIPTION,
-                  Calls.VOICEMAIL_URI,
-                  Calls.IS_READ,
-                  Calls.NEW,
-                  Calls.GEOCODED_LOCATION,
-                  Calls.PHONE_ACCOUNT_COMPONENT_NAME,
-                  Calls.PHONE_ACCOUNT_ID,
-                  Calls.FEATURES,
-                  Calls.POST_DIAL_DIGITS // TODO(a bug): Not available in M
-                },
+                getProjection(),
                 // TODO(a bug): LAST_MODIFIED not available on M
                 Calls.LAST_MODIFIED + " > ? AND " + Voicemails.DELETED + " = 0",
                 new String[] {String.valueOf(previousTimestampProcessed)},
@@ -358,6 +344,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
           contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
           contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
+          setTranscriptionState(cursor, contentValues);
 
           if (existingAnnotatedCallLogIds.contains(id)) {
             mutations.update(id, contentValues);
@@ -367,6 +354,53 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         } while (cursor.moveToNext());
       } // else no new results, do nothing.
     }
+  }
+
+  private void setTranscriptionState(Cursor cursor, ContentValues contentValues) {
+    if (VERSION.SDK_INT >= VERSION_CODES.O) {
+      int transcriptionStateColumn =
+          cursor.getColumnIndexOrThrow(VoicemailCompat.TRANSCRIPTION_STATE);
+      int transcriptionState = cursor.getInt(transcriptionStateColumn);
+      contentValues.put(VoicemailCompat.TRANSCRIPTION_STATE, transcriptionState);
+    }
+  }
+
+  private static final String[] PROJECTION_PRE_O =
+      new String[] {
+        Calls._ID,
+        Calls.DATE,
+        Calls.LAST_MODIFIED, // TODO(a bug): Not available in M
+        Calls.NUMBER,
+        Calls.NUMBER_PRESENTATION,
+        Calls.TYPE,
+        Calls.COUNTRY_ISO,
+        Calls.DURATION,
+        Calls.DATA_USAGE,
+        Calls.TRANSCRIPTION,
+        Calls.VOICEMAIL_URI,
+        Calls.IS_READ,
+        Calls.NEW,
+        Calls.GEOCODED_LOCATION,
+        Calls.PHONE_ACCOUNT_COMPONENT_NAME,
+        Calls.PHONE_ACCOUNT_ID,
+        Calls.FEATURES,
+        Calls.POST_DIAL_DIGITS // TODO(a bug): Not available in M
+      };
+
+  @RequiresApi(VERSION_CODES.O)
+  private static final String[] PROJECTION_O_AND_LATER;
+
+  static {
+    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_PRE_O));
+    projectionList.add(VoicemailCompat.TRANSCRIPTION_STATE);
+    PROJECTION_O_AND_LATER = projectionList.toArray(new String[projectionList.size()]);
+  }
+
+  private String[] getProjection() {
+    if (VERSION.SDK_INT >= VERSION_CODES.O) {
+      return PROJECTION_O_AND_LATER;
+    }
+    return PROJECTION_PRE_O;
   }
 
   private void populatePhoneAccountLabelAndColor(
