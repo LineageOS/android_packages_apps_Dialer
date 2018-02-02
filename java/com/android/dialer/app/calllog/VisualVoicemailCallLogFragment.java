@@ -29,10 +29,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.app.R;
-import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.voicemail.VoicemailAudioManager;
 import com.android.dialer.app.voicemail.VoicemailErrorManager;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -151,7 +151,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   @Override
   public void fetchCalls() {
     super.fetchCalls();
-    ((ListsFragment) getParentFragment()).updateTabUnreadCounts();
+    FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class).updateTabUnreadCounts();
   }
 
   @Override

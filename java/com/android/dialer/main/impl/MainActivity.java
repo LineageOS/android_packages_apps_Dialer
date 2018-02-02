@@ -38,6 +38,7 @@ import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
+import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.OldSpeedDialFragment;
 import com.android.dialer.app.list.OnDragDropListener;
@@ -789,15 +790,30 @@ public final class MainActivity extends TransactionSafeActivity
     @Override
     public void onVoicemailSelected() {
       hideAllFragments();
-      NewVoicemailFragment fragment =
-          (NewVoicemailFragment) supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
-      if (fragment == null) {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, new NewVoicemailFragment(), VOICEMAIL_TAG)
-            .commit();
+      if (ConfigProviderComponent.get(context)
+          .getConfigProvider()
+          .getBoolean("enable_new_voicemail_fragment", false)) {
+        NewVoicemailFragment fragment =
+            (NewVoicemailFragment) supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+        if (fragment == null) {
+          supportFragmentManager
+              .beginTransaction()
+              .add(R.id.fragment_container, new NewVoicemailFragment(), VOICEMAIL_TAG)
+              .commit();
+        } else {
+          supportFragmentManager.beginTransaction().show(fragment).commit();
+        }
       } else {
-        supportFragmentManager.beginTransaction().show(fragment).commit();
+        VisualVoicemailCallLogFragment fragment =
+            (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+        if (fragment == null) {
+          fragmentManager
+              .beginTransaction()
+              .add(R.id.fragment_container, new VisualVoicemailCallLogFragment(), VOICEMAIL_TAG)
+              .commit();
+        } else {
+          fragmentManager.beginTransaction().show(fragment).commit();
+        }
       }
     }
 
@@ -808,6 +824,7 @@ public final class MainActivity extends TransactionSafeActivity
         supportTransaction.hide(supportFragmentManager.findFragmentByTag(CALL_LOG_TAG));
       }
       if (supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
+        // NewVoicemailFragment
         supportTransaction.hide(supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG));
       }
       supportTransaction.commit();
@@ -822,6 +839,10 @@ public final class MainActivity extends TransactionSafeActivity
       }
       if (fragmentManager.findFragmentByTag(CONTACTS_TAG) != null) {
         transaction.hide(fragmentManager.findFragmentByTag(CONTACTS_TAG));
+      }
+      if (fragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
+        // Old VisualVoicemailFragment
+        transaction.hide(fragmentManager.findFragmentByTag(VOICEMAIL_TAG));
       }
       transaction.commit();
     }

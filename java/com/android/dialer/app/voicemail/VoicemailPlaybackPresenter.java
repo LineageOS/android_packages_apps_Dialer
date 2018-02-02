@@ -57,6 +57,7 @@ import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CallLogQuery;
+import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.io.ByteStreams;
@@ -518,7 +519,10 @@ public class VoicemailPlaybackPresenter
       handleError(new IllegalStateException("Cannot play voicemail when call is in progress"));
       return;
     }
+    StrictModeUtils.bypass(this::prepareMediaPlayer);
+  }
 
+  private void prepareMediaPlayer() {
     try {
       mediaPlayer = new MediaPlayer();
       mediaPlayer.setOnPreparedListener(this);
