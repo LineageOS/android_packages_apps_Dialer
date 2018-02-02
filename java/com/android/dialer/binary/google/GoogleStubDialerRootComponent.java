@@ -37,6 +37,7 @@ import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.impl.CallLocationModule;
 import com.android.incallui.maps.impl.MapsModule;
 import com.android.incallui.speakeasy.StubSpeakEasyModule;
+import com.android.newbubble.stub.StubNewBubbleModule;
 import com.android.voicemail.impl.VoicemailModule;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -64,6 +65,7 @@ import javax.inject.Singleton;
     StubDuoModule.class,
     StubEnrichedCallModule.class,
     StubFeedbackModule.class,
+    StubNewBubbleModule.class,
     StubSimSuggestionModule.class,
     StubSpamModule.class,
     StubSpeakEasyModule.class,

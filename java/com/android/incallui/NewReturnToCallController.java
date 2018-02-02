@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.CallAudioState;
@@ -41,6 +42,7 @@ import com.android.incallui.call.DialerCall;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 import com.android.newbubble.NewBubble;
+import com.android.newbubble.NewBubbleComponent;
 import com.android.newbubble.NewBubbleInfo;
 import com.android.newbubble.NewBubbleInfo.Action;
 import java.lang.ref.WeakReference;
@@ -57,6 +59,8 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   NewBubble bubble;
+
+  private static Boolean canShowBubblesForTesting = null;
 
   private CallAudioState audioState;
 
@@ -132,13 +136,32 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     startContactInfoSearch();
   }
 
+  /**
+   * Determines whether bubbles can be shown based on permissions obtained. This should be checked
+   * before attempting to create a Bubble.
+   *
+   * @return true iff bubbles are able to be shown.
+   * @see Settings#canDrawOverlays(Context)
+   */
+  private static boolean canShowBubbles(@NonNull Context context) {
+    return canShowBubblesForTesting != null
+        ? canShowBubblesForTesting
+        : Settings.canDrawOverlays(context);
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  static void setCanShowBubblesForTesting(boolean canShowBubbles) {
+    canShowBubblesForTesting = canShowBubbles;
+  }
+
   @VisibleForTesting
   public NewBubble startBubble() {
-    if (!NewBubble.canShowBubbles(context)) {
+    if (!canShowBubbles(context)) {
       LogUtil.i("ReturnToCallController.startNewBubble", "can't show bubble, no permission");
       return null;
     }
-    NewBubble returnToCallBubble = NewBubble.createBubble(context, generateBubbleInfo());
+    NewBubble returnToCallBubble = NewBubbleComponent.get(context).getNewBubble();
+    returnToCallBubble.setBubbleInfo(generateBubbleInfo());
     returnToCallBubble.show();
     return returnToCallBubble;
   }
