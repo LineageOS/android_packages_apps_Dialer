@@ -43,6 +43,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactphoto.NumberAttributeConverter;
 import com.android.dialer.lettertile.LetterTileDrawable;
@@ -58,6 +59,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private final TextView primaryTextView;
   private final TextView secondaryTextView;
   private final TextView transcriptionTextView;
+  private final TextView transcriptionBrandingTextView;
   private final QuickContactBadge quickContactBadge;
   private final NewVoicemailMediaPlayerView mediaPlayerView;
   private final ImageView menuButton;
@@ -76,6 +78,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     primaryTextView = view.findViewById(R.id.primary_text);
     secondaryTextView = view.findViewById(R.id.secondary_text);
     transcriptionTextView = view.findViewById(R.id.transcription_text);
+    transcriptionBrandingTextView = view.findViewById(R.id.transcription_branding);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
     mediaPlayerView = view.findViewById(R.id.new_voicemail_media_player);
     menuButton = view.findViewById(R.id.menu_button);
@@ -226,6 +229,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
         String.valueOf(mediaPlayerView.getVoicemailUri()),
         String.valueOf(viewHolderVoicemailUri));
     transcriptionTextView.setMaxLines(1);
+    transcriptionBrandingTextView.setVisibility(GONE);
     isViewHolderExpanded = false;
 
     mediaPlayerView.reset();
@@ -250,6 +254,8 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     primaryTextView.setTypeface(null, Typeface.NORMAL);
     secondaryTextView.setTypeface(null, Typeface.NORMAL);
     transcriptionTextView.setTypeface(null, Typeface.NORMAL);
+
+    transcriptionBrandingTextView.setVisibility(GONE);
 
     mediaPlayerView.reset();
 
@@ -319,6 +325,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
     transcriptionTextView.setMaxLines(999);
     isViewHolderExpanded = true;
+    updateBrandingText(voicemailEntry);
     // Once the media player is visible update its state
     mediaPlayerView.setVisibility(View.VISIBLE);
     mediaPlayerView.bindValuesFromAdapterOfExpandedViewHolderMediaPlayerView(
@@ -331,6 +338,15 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
         isViewHolderExpanded,
         String.valueOf(viewHolderVoicemailUri),
         String.valueOf(mediaPlayerView.getVoicemailUri()));
+  }
+
+  private void updateBrandingText(VoicemailEntry voicemailEntry) {
+    if (voicemailEntry.transcriptionState() == VoicemailCompat.TRANSCRIPTION_AVAILABLE
+        && !TextUtils.isEmpty(voicemailEntry.transcription())) {
+      transcriptionBrandingTextView.setVisibility(VISIBLE);
+    } else {
+      transcriptionBrandingTextView.setVisibility(GONE);
+    }
   }
 
   @WorkerThread
