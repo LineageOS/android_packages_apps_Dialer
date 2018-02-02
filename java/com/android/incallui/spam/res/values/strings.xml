@@ -48,7 +48,7 @@
   <!-- Text for the marking a call as not spam in the after call dialog. [CHAR LIMIT=40] -->
   <string name="spam_notification_dialog_was_not_spam_action_text">Not spam</string>
 
-  <!-- Label for "Dismiss" notification action. [CHAR LIMIT=12] -->
-  <string name="spam_notification_action_dismiss">Decline</string>
+  <!-- Label for "Dismiss" dialog action. [CHAR LIMIT=12] -->
+  <string name="spam_notification_action_dismiss">Dismiss</string>
 
 </resources>
