@@ -80,6 +80,9 @@ public abstract class NewBubbleInfo {
 
     public abstract Drawable getIconDrawable();
 
+    @Nullable
+    public abstract Drawable getSecondaryIconDrawable();
+
     @NonNull
     public abstract CharSequence getName();
 
@@ -100,7 +103,8 @@ public abstract class NewBubbleInfo {
           .setChecked(action.isChecked())
           .setCheckable(action.isCheckable())
           .setName(action.getName())
-          .setIconDrawable(action.getIconDrawable());
+          .setIconDrawable(action.getIconDrawable())
+          .setSecondaryIconDrawable(action.getSecondaryIconDrawable());
     }
 
     /** Builder for {@link Action} */
@@ -108,6 +112,8 @@ public abstract class NewBubbleInfo {
     public abstract static class Builder {
 
       public abstract Builder setIconDrawable(Drawable iconDrawable);
+
+      public abstract Builder setSecondaryIconDrawable(@Nullable Drawable secondaryIconDrawable);
 
       public abstract Builder setName(@NonNull CharSequence name);
 

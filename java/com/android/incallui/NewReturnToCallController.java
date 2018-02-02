@@ -275,6 +275,10 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     actions.add(
         Action.builder()
             .setIconDrawable(context.getDrawable(speakerButtonInfo.icon))
+            .setSecondaryIconDrawable(
+                speakerButtonInfo.checkable
+                    ? null
+                    : context.getDrawable(R.drawable.quantum_ic_arrow_drop_down_vd_theme_24))
             .setName(context.getText(speakerButtonInfo.label))
             .setCheckable(speakerButtonInfo.checkable)
             .setChecked(speakerButtonInfo.isChecked)
