@@ -266,7 +266,7 @@ public class CallingAccountSelector implements PreCallAction {
           hints.add(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
           break;
         default:
-          throw Assert.createAssertionFailException("unexpected reason " + suggestion.reason);
+          LogUtil.w("CallingAccountSelector.buildHint", "unhandled reason " + suggestion.reason);
       }
     }
     return hints;
