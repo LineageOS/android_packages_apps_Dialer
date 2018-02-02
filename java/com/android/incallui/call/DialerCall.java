@@ -173,6 +173,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private List<PhoneAccountHandle> callCapableAccounts;
   private String countryIso;
 
+  private volatile boolean feedbackRequested = false;
+
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
   }
@@ -438,7 +440,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   /* package-private */ Call getTelecomCall() {
     return telecomCall;
   }
-
+  
   public StatusHints getStatusHints() {
     return telecomCall.getDetails().getStatusHints();
   }
@@ -1448,6 +1450,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public com.android.dialer.logging.VideoTech.Type getSelectedAvailableVideoTechType() {
     return selectedAvailableVideoTechType;
+  }
+
+  public void markFeedbackRequested() {
+    feedbackRequested = true;
+  }
+
+  public boolean isFeedbackRequested() {
+    return feedbackRequested;
   }
 
   /**
