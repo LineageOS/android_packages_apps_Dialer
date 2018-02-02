@@ -48,7 +48,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.feedback.FeedbackComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -154,11 +153,6 @@ public class CallCardPresenter
     return !TextUtils.isEmpty(call.getCallSubject());
   }
 
-  private void addCallFeedbackListener(Context context) {
-    LogUtil.d("CallCardPresenter.addCallFeedbackListener", "Adding call feedback listener");
-    CallList.getInstance().addListener(FeedbackComponent.get(context).getCallFeedbackListener());
-  }
-
   @Override
   public void onInCallScreenDelegateInit(InCallScreen inCallScreen) {
     Assert.isNotNull(inCallScreen);
@@ -173,7 +167,6 @@ public class CallCardPresenter
         this.inCallScreen.showNoteSentToast();
       }
       call.addListener(this);
-      addCallFeedbackListener(context);
       // start processing lookups right away.
       if (!call.isConferenceCall()) {
         startContactInfoSearch(call, true, call.getState() == DialerCall.State.INCOMING);
