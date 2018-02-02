@@ -24,6 +24,7 @@ import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.feedback.FeedbackComponent;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.ExternalCallList;
@@ -39,6 +40,7 @@ public class InCallServiceImpl extends InCallService {
 
   private ReturnToCallController returnToCallController;
   private NewReturnToCallController newReturnToCallController;
+  private CallList.Listener feedbackListener;
 
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -102,6 +104,8 @@ public class InCallServiceImpl extends InCallService {
       newReturnToCallController =
           new NewReturnToCallController(this, ContactInfoCache.getInstance(context));
     }
+    feedbackListener = FeedbackComponent.get(context).getCallFeedbackListener();
+    CallList.getInstance().addListener(feedbackListener);
 
     IBinder iBinder = super.onBind(intent);
     Trace.endSection();
@@ -133,6 +137,10 @@ public class InCallServiceImpl extends InCallService {
     if (newReturnToCallController != null) {
       newReturnToCallController.tearDown();
       newReturnToCallController = null;
+    }
+    if (feedbackListener != null) {
+      CallList.getInstance().removeListener(feedbackListener);
+      feedbackListener = null;
     }
     Trace.endSection();
   }

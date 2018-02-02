@@ -36,6 +36,8 @@ public interface SuggestionProvider {
     // The user has select the SIM for this category of calls (contacts from certain accounts,
     // etc.).
     USER_SET,
+    // The user has selected the SIM for all contacts on the account.
+    ACCOUNT,
   }
 
   /** The suggestion. */
