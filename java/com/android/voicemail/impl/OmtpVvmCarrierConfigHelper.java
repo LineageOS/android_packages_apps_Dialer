@@ -178,9 +178,6 @@ public class OmtpVvmCarrierConfigHelper {
     if (protocol == null) {
       return false;
     }
-    if (isCarrierAppPreloaded()) {
-      return false;
-    }
     return true;
   }
 
@@ -248,20 +245,7 @@ public class OmtpVvmCarrierConfigHelper {
     if (!isValid()) {
       return false;
     }
-
-    Set<String> carrierPackages = getCarrierVvmPackageNames();
-    if (carrierPackages == null) {
-      return true;
-    }
-    for (String packageName : carrierPackages) {
-      try {
-        context.getPackageManager().getPackageInfo(packageName, 0);
-        return false;
-      } catch (NameNotFoundException e) {
-        // Do nothing.
-      }
-    }
-    return true;
+    return !isCarrierAppInstalled();
   }
 
   public boolean isCellularDataRequired() {
@@ -511,7 +495,8 @@ public class OmtpVvmCarrierConfigHelper {
     overrideConfigForTest = config;
   }
 
-  private boolean isCarrierAppPreloaded() {
+  /** Checks if the carrier VVM app is installed. */
+  public boolean isCarrierAppInstalled() {
     Set<String> carrierPackages = getCarrierVvmPackageNamesWithoutValidation();
     if (carrierPackages == null) {
       return false;
@@ -522,12 +507,7 @@ public class OmtpVvmCarrierConfigHelper {
         if (!info.enabled) {
           continue;
         }
-        if ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0
-            || (info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
-          VvmLog.i(TAG, packageName + " preloaded, force disabling dialer vvm");
-          return true;
-        }
-
+        return true;
       } catch (NameNotFoundException e) {
         continue;
       }
