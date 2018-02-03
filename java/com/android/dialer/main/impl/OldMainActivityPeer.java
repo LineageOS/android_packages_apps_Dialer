@@ -30,6 +30,7 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -159,7 +160,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
 
     callLogFragmentListener =
-        new MainCallLogFragmentListener(mainActivity, mainActivity.getContentResolver(), bottomNav);
+        new MainCallLogFragmentListener(
+            mainActivity, mainActivity.getContentResolver(), bottomNav, toolbar);
     bottomNav.addOnTabSelectedListener(callLogFragmentListener);
 
     searchController = new MainSearchController(mainActivity, bottomNav, fab, toolbar);
@@ -388,16 +390,20 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   /** @see CallLogAdapter.OnActionModeStateChangedListener */
-  // TODO(a bug): handle multiselect mode
+  // TODO(calderwoodra): What is the purpose of this listener?
   private static final class MainCallLogAdapterOnActionModeStateChangedListener
       implements CallLogAdapter.OnActionModeStateChangedListener {
 
+    private boolean isEnabled;
+
     @Override
-    public void onActionModeStateChanged(boolean isEnabled) {}
+    public void onActionModeStateChanged(boolean isEnabled) {
+      this.isEnabled = isEnabled;
+    }
 
     @Override
     public boolean isActionModeStateEnabled() {
-      return false;
+      return isEnabled;
     }
   }
 
@@ -458,18 +464,23 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
           OnBottomNavTabSelectedListener {
 
     private final CallLogQueryHandler callLogQueryHandler;
-    private final BottomNavBar bottomNavBar;
     private final Context context;
+    private final BottomNavBar bottomNavBar;
+    private final Toolbar toolbar;
 
     private @TabIndex int currentTab = TabIndex.SPEED_DIAL;
     private long timeSelected = -1;
     private boolean activityIsAlive;
 
     MainCallLogFragmentListener(
-        Context context, ContentResolver contentResolver, BottomNavBar bottomNavBar) {
+        Context context,
+        ContentResolver contentResolver,
+        BottomNavBar bottomNavBar,
+        Toolbar toolbar) {
       callLogQueryHandler = new CallLogQueryHandler(context, contentResolver, this);
-      this.bottomNavBar = bottomNavBar;
       this.context = context;
+      this.bottomNavBar = bottomNavBar;
+      this.toolbar = toolbar;
     }
 
     @Override
@@ -480,7 +491,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     @Override
     public void showMultiSelectRemoveView(boolean show) {
-      // TODO(a bug): handle multiselect mode
+      bottomNavBar.setVisibility(show ? View.GONE : View.VISIBLE);
+      toolbar.setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
     @Override
