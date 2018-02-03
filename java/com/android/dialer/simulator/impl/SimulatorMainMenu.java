@@ -34,9 +34,6 @@ import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.incallui.rtt.impl.RttChatActivity;
-import com.android.incallui.speakeasy.SpeakEasy;
-import com.android.incallui.speakeasy.SpeakEasyActivity;
-import com.android.incallui.speakeasy.SpeakEasyComponent;
 
 /** Implements the top level simulator menu. */
 final class SimulatorMainMenu {
@@ -79,21 +76,11 @@ final class SimulatorMainMenu {
                 SimulatorComponent.get(activity.getApplicationContext())
                     .getSimulator()
                     .disableSimulatorMode());
-    SpeakEasy speakEasy = SpeakEasyComponent.get(activity.getApplicationContext()).speakEasy();
-    if (speakEasy.isEnabled()) {
-      simulatorSubMenu.addItem(
-          "SpeakEasy call mock", () -> simulateSpeakEasyCallMock(activity.getApplicationContext()));
-    }
-
     return simulatorSubMenu;
   }
 
   private static void simulateRttCallMock(@NonNull Context context) {
     context.startActivity(new Intent(context, RttChatActivity.class));
-  }
-
-  private static void simulateSpeakEasyCallMock(@NonNull Context context) {
-    context.startActivity(new Intent(context, SpeakEasyActivity.class));
   }
 
   private static void populateDatabase(@NonNull Context context) {

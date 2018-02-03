@@ -20,11 +20,11 @@ import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
 
-/** Dagger component to get SpeakEasy. */
+/** Dagger component to get SpeakEasyCallManager. */
 @Subcomponent
 public abstract class SpeakEasyComponent {
 
-  public abstract SpeakEasy speakEasy();
+  public abstract SpeakEasyCallManager speakEasyCallManager();
 
   public static SpeakEasyComponent get(Context context) {
     return ((SpeakEasyComponent.HasComponent)
