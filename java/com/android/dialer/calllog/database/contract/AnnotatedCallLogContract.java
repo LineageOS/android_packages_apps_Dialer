@@ -17,7 +17,9 @@
 package com.android.dialer.calllog.database.contract;
 
 import android.net.Uri;
+import android.os.Build;
 import android.provider.BaseColumns;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.constants.Constants;
 import java.util.Arrays;
 
@@ -198,6 +200,15 @@ public class AnnotatedCallLogContract {
      * <p>TYPE: TEXT
      */
     public static final String TRANSCRIPTION = "transcription";
+
+    /**
+     * See {@link VoicemailCompat.TRANSCRIPTION_STATE}
+     *
+     * <p>Only populated in {@link Build.VERSION_CODES.O} and above
+     *
+     * <p>TYPE: INTEGER
+     */
+    public static final String TRANSCRIPTION_STATE = "transcription_state";
 
     /**
      * See {@link android.provider.CallLog.Calls#VOICEMAIL_URI}.
