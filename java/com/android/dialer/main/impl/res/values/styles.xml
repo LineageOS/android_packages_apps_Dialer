@@ -22,5 +22,21 @@
 
     <!-- Theme needed for DialpadFragment -->
     <item name="dialpad_style">@style/Dialpad.Light</item>
+
+    <!-- Required for actionmode/multiselect to render properly. -->
+    <!-- TODO(calderwoodra): Check to see if we can remove this after NewVoicemailFragment launches -->
+    <item name="actionModeStyle">@style/ActionModeStyle</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+  </style>
+
+  <!-- Colors our actionbar in action mode to dialer theme color. -->
+  <style name="ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+    <item name="background">@color/dialer_theme_color</item>
+    <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>
+  </style>
+
+  <!-- Colors our actionbar text in action mode to dialer white text color. -->
+  <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
+    <item name="android:textColor">@color/dialer_primary_text_color_white</item>
   </style>
 </resources>
