@@ -16,24 +16,25 @@
 
 package com.android.incallui.speakeasy;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import javax.inject.Inject;
+import android.app.Fragment;
+import android.support.annotation.NonNull;
+import com.android.incallui.call.DialerCall;
+import com.google.common.base.Optional;
 
-/** Default implementation of SpeakEasy. */
-public class SpeakEasyStub implements SpeakEasy {
+/** Provides operations necessary to SpeakEasy. */
+public interface SpeakEasyCallManager {
 
-  @Inject
-  public SpeakEasyStub() {}
+  /**
+   * Returns the Fragment used to display data.
+   *
+   * <p>An absent optional indicates the feature is unavailable.
+   */
+  Optional<Fragment> getSpeakEasyFragment(@NonNull DialerCall call);
 
-  @Override
-  public boolean isEnabled() {
-    return false;
-  }
-
-  @Override
-  public @Nullable Fragment getSpeakEasyFragment(
-      String callId, String nameOrNumber, long sessionStartTimeMillis) {
-    return null;
-  }
+  /**
+   * Indicates a call has been removed.
+   *
+   * @param call The call which has been removed.
+   */
+  void onCallRemoved(@NonNull DialerCall call);
 }

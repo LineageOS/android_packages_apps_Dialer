@@ -16,13 +16,26 @@
 
 package com.android.incallui.speakeasy;
 
-import dagger.Binds;
-import dagger.Module;
+import android.app.Fragment;
+import android.support.annotation.Nullable;
+import com.android.incallui.call.DialerCall;
+import com.google.common.base.Optional;
+import javax.inject.Inject;
 
-/** Module which binds {@link SpeakEasyCallManagerStub}. */
-@Module
-public abstract class StubSpeakEasyModule {
+/** Default implementation of SpeakEasyCallManager. */
+public class SpeakEasyCallManagerStub implements SpeakEasyCallManager {
 
-  @Binds
-  abstract SpeakEasyCallManager bindsSpeakEasy(SpeakEasyCallManagerStub stub);
+  @Inject
+  public SpeakEasyCallManagerStub() {}
+
+  /** Returns an absent optional. */
+  @Override
+  @Nullable
+  public Optional<Fragment> getSpeakEasyFragment(DialerCall call) {
+    return Optional.absent();
+  }
+
+  /** Always inert in the stub. */
+  @Override
+  public void onCallRemoved(DialerCall call) {}
 }
