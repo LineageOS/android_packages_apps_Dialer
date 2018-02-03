@@ -68,6 +68,12 @@ public abstract class VoicemailEntry {
 
   public abstract int transcriptionState();
 
+  @Nullable
+  public abstract String phoneAccountComponentName();
+
+  @Nullable
+  public abstract String phoneAccountId();
+
   /** Builder for {@link VoicemailEntry}. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -95,6 +101,11 @@ public abstract class VoicemailEntry {
     public abstract Builder setNumberAttributes(NumberAttributes numberAttributes);
 
     public abstract Builder setTranscriptionState(int transcriptionState);
+
+    public abstract Builder setPhoneAccountComponentName(
+        @Nullable String phoneAccountComponentName);
+
+    public abstract Builder setPhoneAccountId(@Nullable String phoneAccountId);
 
     public abstract VoicemailEntry build();
   }

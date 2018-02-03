@@ -46,6 +46,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.voicemail.listui.NewVoicemailViewHolder.NewVoicemailViewHolderListener;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import java.util.Locale;
@@ -68,6 +69,8 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
   private TextView voicemailLoadingStatusView;
   private Uri voicemailUri;
   private String numberVoicemailFrom;
+  private String phoneAccountId;
+  private String phoneAccountComponentName;
   private FragmentManager fragmentManager;
   private NewVoicemailViewHolder newVoicemailViewHolder;
   private NewVoicemailMediaPlayer mediaPlayer;
@@ -122,6 +125,8 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     voicemailUri = null;
     voicemailLoadingStatusView.setVisibility(GONE);
     numberVoicemailFrom = null;
+    phoneAccountId = null;
+    phoneAccountComponentName = null;
   }
 
   /**
@@ -152,6 +157,8 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
     Uri uri = Uri.parse(voicemailEntryFromAdapter.voicemailUri());
 
     numberVoicemailFrom = voicemailEntryFromAdapter.number().getNormalizedNumber();
+    phoneAccountId = voicemailEntryFromAdapter.phoneAccountId();
+    phoneAccountComponentName = voicemailEntryFromAdapter.phoneAccountComponentName();
 
     Assert.isNotNull(viewHolder);
     Assert.isNotNull(uri);
@@ -510,7 +517,6 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
         }
       };
 
-  // TODO(uabdullah): Add phone account handle (a bug)
   private final View.OnClickListener phoneButtonListener =
       new View.OnClickListener() {
         @Override
@@ -525,7 +531,11 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
               !TextUtils.isEmpty(numberVoicemailFrom),
               "number cannot be empty:" + numberVoicemailFrom);
           PreCall.start(
-              getContext(), new CallIntentBuilder(numberVoicemailFrom, Type.VOICEMAIL_LOG));
+              getContext(),
+              new CallIntentBuilder(numberVoicemailFrom, Type.VOICEMAIL_LOG)
+                  .setPhoneAccountHandle(
+                      TelecomUtil.composePhoneAccountHandle(
+                          phoneAccountComponentName, phoneAccountId)));
         }
       };
 
