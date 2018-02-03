@@ -55,7 +55,8 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")
           + (AnnotatedCallLog.CALL_TYPE + " integer not null, ")
-          + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob")
+          + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob, ")
+          + (AnnotatedCallLog.TRANSCRIPTION_STATE + " integer")
           + ");";
 
   /**

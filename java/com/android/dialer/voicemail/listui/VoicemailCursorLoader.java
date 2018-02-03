@@ -45,6 +45,7 @@ final class VoicemailCursorLoader extends CursorLoader {
         AnnotatedCallLog.VOICEMAIL_URI,
         AnnotatedCallLog.IS_READ,
         AnnotatedCallLog.NUMBER_ATTRIBUTES,
+        AnnotatedCallLog.TRANSCRIPTION_STATE
       };
 
   // Indexes for VOICEMAIL_COLUMNS
@@ -59,6 +60,7 @@ final class VoicemailCursorLoader extends CursorLoader {
   private static final int VOICEMAIL_URI = 8;
   private static final int IS_READ = 9;
   private static final int NUMBER_ATTRIBUTES = 10;
+  private static final int TRANSCRIPTION_STATE = 11;
 
   // TODO(zachh): Optimize indexes
   VoicemailCursorLoader(Context context) {
@@ -105,6 +107,7 @@ final class VoicemailCursorLoader extends CursorLoader {
         .setCallType(cursor.getInt(CALL_TYPE))
         .setIsRead(cursor.getInt(IS_READ))
         .setNumberAttributes(numberAttributes)
+        .setTranscriptionState(cursor.getInt(TRANSCRIPTION_STATE))
         .build();
   }
 
