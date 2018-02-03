@@ -67,14 +67,14 @@
     <item name="dialpad_elevation">10dp</item>
   </style>
 
-  <style name="AfterCallNotificationTheme" parent="@style/Theme.AppCompat.Light.Dialog.MinWidth">
+  <style name="AfterCallNotificationTheme" parent="@android:style/Theme.Material.Light.Dialog">
     <!-- This colorAccent is to style checkboxes in the dialogs -->
     <item name="colorAccent">@color/dialer_theme_color</item>
     <!-- This is needed to make any alert dialogs in this activity take up minimum space -->
     <item name="android:alertDialogTheme">@style/AfterCallDialogStyle</item>
   </style>
 
-  <style name="AfterCallDialogStyle" parent="@style/Theme.AppCompat.Light.Dialog.MinWidth">
+  <style name="AfterCallDialogStyle" parent="@android:style/Theme.Material.Light.Dialog">
     <!-- This colorAccent is to style text in the dialogs -->
     <item name="android:colorAccent">@color/dialer_theme_color</item>
   </style>
