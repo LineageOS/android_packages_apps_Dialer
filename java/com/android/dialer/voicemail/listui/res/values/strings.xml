@@ -54,4 +54,7 @@ If you do not accept all of these terms and conditions, do not use Visual Voice 
 
   <string translatable="false" name="verizon_terms_and_conditions_accept_english">Turn On</string>
 
+  <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_branding_text">Transcribed by Google</string>
+
 </resources>

@@ -39,4 +39,7 @@
   <string name="settings">Settings</string>
   <!-- Send feedback about the app [CHAR LIMIT=20] -->
   <string name="main_send_feedback">Send feedback</string>
+
+  <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
+  <string name="main_remove_contact">Remove</string>
 </resources>
