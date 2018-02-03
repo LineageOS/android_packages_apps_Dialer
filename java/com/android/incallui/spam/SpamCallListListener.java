@@ -391,14 +391,11 @@ public class SpamCallListListener implements CallList.Listener {
         createAfterCallNotificationBuilder(call)
             .setLargeIcon(Icon.createWithResource(context, R.drawable.spam_notification_icon))
             .setContentText(context.getString(R.string.spam_notification_spam_call_collapsed_text))
-            .setStyle(
-                new Notification.BigTextStyle()
-                    .bigText(context.getString(R.string.spam_notification_spam_call_expanded_text)))
             // Not spam
             .addAction(
                 new Notification.Action.Builder(
                         R.drawable.quantum_ic_close_vd_theme_24,
-                        context.getString(R.string.spam_notification_not_spam_action_text),
+                        context.getString(R.string.spam_notification_was_not_spam_action_text),
                         createNotSpamPendingIntent(call))
                     .build())
             // Block/report spam

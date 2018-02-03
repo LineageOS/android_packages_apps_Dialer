@@ -29,6 +29,8 @@ import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.speakeasy.SpeakEasyCallManager;
+import com.android.incallui.speakeasy.SpeakEasyComponent;
 
 /**
  * Used to receive updates about calls from the Telecom component. This service is bound to Telecom
@@ -41,6 +43,11 @@ public class InCallServiceImpl extends InCallService {
   private ReturnToCallController returnToCallController;
   private NewReturnToCallController newReturnToCallController;
   private CallList.Listener feedbackListener;
+  // We only expect there to be one speakEasyCallManager to be instantiated at a time.
+  // We did not use a singleton SpeakEasyCallManager to avoid holding on to state beyond the
+  // lifecycle of this service, because the singleton is associated with the state of the
+  // Application, not this service.
+  private SpeakEasyCallManager speakEasyCallManager;
 
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -66,6 +73,8 @@ public class InCallServiceImpl extends InCallService {
   @Override
   public void onCallRemoved(Call call) {
     Trace.beginSection("InCallServiceImpl.onCallRemoved");
+    speakEasyCallManager.onCallRemoved(CallList.getInstance().getDialerCallFromTelecomCall(call));
+
     InCallPresenter.getInstance().onCallRemoved(call);
     Trace.endSection();
   }
@@ -75,6 +84,12 @@ public class InCallServiceImpl extends InCallService {
     Trace.beginSection("InCallServiceImpl.onCanAddCallChanged");
     InCallPresenter.getInstance().onCanAddCallChanged(canAddCall);
     Trace.endSection();
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    this.speakEasyCallManager = SpeakEasyComponent.get(this).speakEasyCallManager();
   }
 
   @Override
