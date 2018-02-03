@@ -18,8 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/dialer_theme_color"
     app:contentInsetStart="0dp"
     app:contentInsetEnd="0dp">
@@ -89,4 +88,45 @@
 
     <include layout="@layout/expanded_search_bar"/>
   </com.android.dialer.main.impl.toolbar.SearchBarView>
+
+  <!-- Sets android:importantForAccessibility="no" to avoid being announced when navigating with
+       talkback enabled. It will still be announced when user drag or drop contact onto it.
+       This is required since drag and drop event is only sent to views are visible when drag
+       starts. -->
+  <com.android.dialer.app.list.RemoveView
+      android:id="@+id/remove_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center_vertical"
+      android:layout_margin="@dimen/search_bar_margin"
+      android:contentDescription="@string/main_remove_contact"
+      android:visibility="gone"
+      android:importantForAccessibility="no">
+
+    <LinearLayout
+        android:id="@+id/remove_view_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dialer_theme_color"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+      <ImageView
+          android:id="@+id/remove_view_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          android:src="@drawable/quantum_ic_close_vd_theme_24"
+          android:tint="@color/dialer_primary_text_color_white"/>
+
+      <TextView
+          android:id="@+id/remove_view_text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/main_remove_contact"
+          android:textColor="@color/dialer_primary_text_color_white"
+          android:textSize="16sp"/>
+    </LinearLayout>
+  </com.android.dialer.app.list.RemoveView>
 </com.android.dialer.main.impl.toolbar.MainToolbar>

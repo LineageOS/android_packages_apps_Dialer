@@ -34,6 +34,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
@@ -44,6 +45,7 @@ import com.android.dialer.app.list.OldSpeedDialFragment;
 import com.android.dialer.app.list.OnDragDropListener;
 import com.android.dialer.app.list.OnListFragmentScrolledListener;
 import com.android.dialer.app.list.PhoneFavoriteSquareTileView;
+import com.android.dialer.app.list.RemoveView;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
@@ -112,8 +114,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   // Speed Dial
   private MainOnPhoneNumberPickerActionListener onPhoneNumberPickerActionListener;
-  private MainOldSpeedDialFragmentHostInterface oldSpeedDialFragmentHostInterface;
-  private MainOnDragDropListener onDragDropListener;
+  private MainOldSpeedDialFragmentHost oldSpeedDialFragmentHost;
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
@@ -177,10 +178,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     onListFragmentScrolledListener = new MainOnListFragmentScrolledListener(snackbarContainer);
     onPhoneNumberPickerActionListener = new MainOnPhoneNumberPickerActionListener(mainActivity);
-    oldSpeedDialFragmentHostInterface =
-        new MainOldSpeedDialFragmentHostInterface(
-            bottomNav, mainActivity.findViewById(R.id.contact_tile_drag_shadow_overlay));
-    onDragDropListener = new MainOnDragDropListener();
+    oldSpeedDialFragmentHost =
+        new MainOldSpeedDialFragmentHost(
+            bottomNav,
+            mainActivity.findViewById(R.id.contact_tile_drag_shadow_overlay),
+            mainActivity.findViewById(R.id.remove_view),
+            mainActivity.findViewById(R.id.search_view_container));
 
     lastTabController = new LastTabController(mainActivity, bottomNav);
 
@@ -283,10 +286,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       return (T) onListFragmentScrolledListener;
     } else if (callbackInterface.isInstance(onPhoneNumberPickerActionListener)) {
       return (T) onPhoneNumberPickerActionListener;
-    } else if (callbackInterface.isInstance(oldSpeedDialFragmentHostInterface)) {
-      return (T) oldSpeedDialFragmentHostInterface;
-    } else if (callbackInterface.isInstance(onDragDropListener)) {
-      return (T) onDragDropListener;
+    } else if (callbackInterface.isInstance(oldSpeedDialFragmentHost)) {
+      return (T) oldSpeedDialFragmentHost;
     } else {
       return null;
     }
@@ -644,25 +645,38 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     }
   }
 
-  /** @see OldSpeedDialFragment.HostInterface */
-  private static final class MainOldSpeedDialFragmentHostInterface
-      implements OldSpeedDialFragment.HostInterface {
+  /**
+   * Handles the callbacks for {@link OldSpeedDialFragment} and drag/drop logic for drag to remove.
+   *
+   * @see OldSpeedDialFragment.HostInterface
+   * @see OnDragDropListener
+   */
+  private static final class MainOldSpeedDialFragmentHost
+      implements OldSpeedDialFragment.HostInterface, OnDragDropListener {
 
     private final BottomNavBar bottomNavBar;
     private final ImageView dragShadowOverlay;
+    private final RemoveView removeView;
+    private final View searchViewContainer;
 
     // TODO(calderwoodra): Use this for drag and drop
     @SuppressWarnings("unused")
     private DragDropController dragDropController;
 
-    MainOldSpeedDialFragmentHostInterface(BottomNavBar bottomNavBar, ImageView dragShadowOverlay) {
+    MainOldSpeedDialFragmentHost(
+        BottomNavBar bottomNavBar,
+        ImageView dragShadowOverlay,
+        RemoveView removeView,
+        View searchViewContainer) {
       this.bottomNavBar = bottomNavBar;
       this.dragShadowOverlay = dragShadowOverlay;
+      this.removeView = removeView;
+      this.searchViewContainer = searchViewContainer;
     }
 
     @Override
     public void setDragDropController(DragDropController dragDropController) {
-      this.dragDropController = dragDropController;
+      removeView.setDragDropController(dragDropController);
     }
 
     @Override
@@ -674,23 +688,30 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public ImageView getDragShadowOverlay() {
       return dragShadowOverlay;
     }
-  }
-
-  /** @see com.android.dialer.app.list.OnDragDropListener */
-  // TODO(calderwoodra): implement drag and drop
-  private static final class MainOnDragDropListener implements OnDragDropListener {
 
     @Override
-    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {}
+    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
+      showRemoveView(true);
+    }
 
     @Override
     public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {}
 
     @Override
-    public void onDragFinished(int x, int y) {}
+    public void onDragFinished(int x, int y) {
+      showRemoveView(false);
+    }
 
     @Override
     public void onDroppedOnRemove() {}
+
+    private void showRemoveView(boolean show) {
+      if (show) {
+        AnimUtils.crossFadeViews(removeView, searchViewContainer, 300);
+      } else {
+        AnimUtils.crossFadeViews(searchViewContainer, removeView, 300);
+      }
+    }
   }
 
   /**
