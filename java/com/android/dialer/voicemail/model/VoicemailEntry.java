@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.google.auto.value.AutoValue;
 
 /** Data class containing the contents of a voicemail entry from the AnnotatedCallLog. */
@@ -34,7 +35,8 @@ public abstract class VoicemailEntry {
         .setNumberAttributes(NumberAttributes.getDefaultInstance())
         .setDuration(0)
         .setCallType(0)
-        .setIsRead(0);
+        .setIsRead(0)
+        .setTranscriptionState(VoicemailCompat.TRANSCRIPTION_NOT_STARTED);
   }
 
   public abstract int id();
@@ -43,7 +45,6 @@ public abstract class VoicemailEntry {
 
   @NonNull
   public abstract DialerPhoneNumber number();
-
 
   @Nullable
   public abstract String formattedNumber();
@@ -64,6 +65,8 @@ public abstract class VoicemailEntry {
   public abstract int isRead();
 
   public abstract NumberAttributes numberAttributes();
+
+  public abstract int transcriptionState();
 
   /** Builder for {@link VoicemailEntry}. */
   @AutoValue.Builder
@@ -90,6 +93,8 @@ public abstract class VoicemailEntry {
     public abstract Builder setIsRead(int isRead);
 
     public abstract Builder setNumberAttributes(NumberAttributes numberAttributes);
+
+    public abstract Builder setTranscriptionState(int transcriptionState);
 
     public abstract VoicemailEntry build();
   }
