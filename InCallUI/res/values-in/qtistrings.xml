@@ -60,6 +60,8 @@
   <string name="camera_ready">Kamera siap</string>
   <!-- Message indicating unknown call session event -->
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Penggunaan data Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+  <string name="lte_data_usage_label">Penggunaan data LTE: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
   <string name="modify_call_option_title">Pilih jenis panggilan</string>
   <!-- Modify call error cause -->
@@ -93,6 +95,7 @@
   <!-- Message indicating call failed due to low battery -->
   <!-- VoWifi call quality indicators -->
   <!-- Title for low battery alert dialogue -->
+  <string name="low_battery">Peringatan Baterai Lemah</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->

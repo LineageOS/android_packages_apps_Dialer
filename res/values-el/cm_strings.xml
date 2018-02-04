@@ -92,6 +92,7 @@
   <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
   <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">H γρήγορη κλήση δεν μπορεί να ρυθμιστεί για αυτό το πλήκτρο</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
   <!-- Text displayed when the list of incoming calls is empty -->
@@ -104,20 +105,47 @@
   <string name="no_call_log">Δεν υπάρχει αρχείο καταγραφής κλήσεων</string>
   <string name="clear">Εκκαθάριση</string>
   <string name="description_clear_search">Εκκαθάριση αναζητήσεων</string>
+  <string name="video_call_welcome_title"><b>Καλώς ήρθατε στη νέα λειτουργία Βιντεοκλήσεων</b></string>
+  <string name="video_call_welcome_message">Όλοι αγαπάμε να ακούμε αυτή την οικεία φωνή στο τέλος της γραμμής, αλλά μιλώντας πρόσωπο με πρόσωπο είναι πολύ καλύτερο! Για να αξιοποιήσετε την ζωντανή σύνδεση (ή FaceTime) θα πρέπει να ξέρετε τα παρακάτω:\n
+Πρέπει να είστε σε δίκτυο 4G/LTE ή σε WiFi σύνδεση\n Η συσκευή που καλείτε θα πρέπει να είναι συμβατή με βιντεοκλήση\n Οι βιντεοκλήσεις απαιτούν υψηλές ταχύτητες δεδομένων\n Μπορείτε επίσης να αναβαθμίσετε μία φωνητική κλήση σε βιντεοκλήση\n\n Ελέγξτε το <a>https://support.t-mobile.com/docs/DOC-23574</a> για περισσότερες πληροφορίες.</string>
   <string name="video_call_welcome_message_repeat">Εμφάνιση αυτού του μηνύματος κάθε φορά</string>
   <string name="toast_change_video_call_failed">Δεν μπορεί να γίνει αλλαγή σε βίντεο κλήση, εσφαλμένη μορφή αριθμού</string>
   <string name="toast_make_video_call_failed">Δεν μπορεί να γίνει κλήση βίντεο, εσφαλμένη μορφή αριθμού</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Βιντεοκλήση, εμφάνισέ με</string>
+  <string name="overflowRXCallMenuItemText">Βιντεοκλήση, απέκρυψέ με</string>
+  <string name="overflowVOCallMenuItemText">Φωνητική κλήση</string>
+  <string name="video_call">Βιντεοκλήση</string>
+  <string name="call_data_info_label">Χρονόμετρο χρήσης κλήσεων/δεδομένων</string>
+  <string name="call_data_info_description">Χρόνος χρήσης κλήσης φωνής και χρόνος χρήσης δεδομένων</string>
+  <string name="alert_call_over_wifi">Οι κλήσεις θα γίνουν μέσω Wi-Fi.</string>
+  <string name="alert_call_no_cellular_coverage">Δεν υπάρχει διαθέσιμο δίκτυο κινητής τηλεφωνίας. Συνδεθείτε με διαθέσιμο Wi-Fi για να πραγματοποιήσετε κλήσεις.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Συνδεθείτε με Wi-Fi για να πραγματοποιήσετε κλήσεις.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Πατήστε εδώ για να δείτε τα διαθέσιμα δίκτυα</string>
+  <string name="menu_add_to_4g_conference_call">Προσθήκη σε 4G κλήση συνδιάσκεψης</string>
+  <string name="menu_4g_conference_call">4G κλήση συνδιάσκεψης</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Εισερχόμενη φωνητική κλήση 4G</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Εισερχόμενη βιντεοκλήση 4G</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Εξερχόμενη φωνητική κλήση 4G</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Εξερχόμενη βιντεοκλήση 4G</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Αναπάντητη φωνητική κλήση 4G</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Αναπάντητη βιντεοκλήση 4G</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Εισερχόμενη φωνητική κλήση Wi-Fi</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Εισερχόμενη βιντεοκλήση Wi-Fi</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Εξερχόμενη φωνητική κλήση Wi-Fi</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Εξερχόμενη βιντεοκλήση Wi-Fi</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Αναπάντητη φωνητική κλήση Wi-Fi</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Αναπάντητη βιντεοκλήση Wi-Fi</string>
 </resources>

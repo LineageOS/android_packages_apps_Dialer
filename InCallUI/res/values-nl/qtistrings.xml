@@ -83,7 +83,7 @@
   <string name="qti_description_deflect_error">Nummer niet ingesteld. Vul het nummer in via IMS-instellingen om het opnieuw te proberen.</string>
   <string name="qti_description_deflect_service_error">Gesprek omleiden wordt niet ondersteund.</string>
   <!-- Message indicating call failed due to handover not feasible -->
-  <string name="call_failed_ho_not_feasible">Gesprek beëindigd omdat LTE-naar-3G/2G-overdracht mislukt is.</string>
+  <string name="call_failed_ho_not_feasible">Gesprek beëindigd omdat LTE-naar-3G/2G-overdracht is mislukt.</string>
   <!-- Text for the onscreen "Add Participant" button -->
   <string name="onscreenAddParticipant">Deelnemer toevoegen</string>
   <!-- Title of the IMS to CS redial dialog -->

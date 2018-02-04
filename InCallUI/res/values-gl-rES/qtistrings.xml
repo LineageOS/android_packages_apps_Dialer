@@ -61,6 +61,7 @@
   <!-- Message indicating that camera is ready/available -->
   <string name="camera_ready">Cámara lista</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">Sesión de chamada descoñecida</string>
   <!-- Message indicating data usage -->
   <string name="wlan_data_usage_label">Uso de datos Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
   <string name="lte_data_usage_label">Uso de datos LTE: <xliff:g id="usage">%1$s</xliff:g></string>
@@ -139,6 +140,7 @@
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <string name="low_battery_hangup_msg">Queres colgar a chamada?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">O nivel de batería e inferior ao 15%. Queres continuar coa videochamada ou pasar a voz?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
   <string name="low_battery_convert">Converter</string>
   <!-- International prefix source-->

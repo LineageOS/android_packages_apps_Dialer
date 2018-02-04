@@ -34,51 +34,26 @@
   <!-- Call substate label -->
   <!-- Call substate label for call resumed -->
   <!-- Call substate label for call connected suspended (audio) -->
-  <string name="call_substate_connected_suspended_audio">Connecté, mais l\'audio est suspendu</string>
   <!-- Call substate label for call connected suspended (video) -->
-  <string name="call_substate_connected_suspended_video">Connecté, mais la vidéo est suspendue</string>
   <!-- Call substate label for avp retry -->
-  <string name="call_substate_avp_retry">Détection de la qualité vidéo\u2026</string>
   <!-- Video quality changed message -->
-  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Qualité vidéo changée en <xliff:g id="quality" example="high">%2$s</xliff:g></string>
   <!-- Video quality High -->
-  <string name="video_quality_high">haute</string>
   <!-- Video quality Medium -->
-  <string name="video_quality_medium">moyenne</string>
   <!-- Video quality Low -->
-  <string name="video_quality_low">basse</string>
   <!-- Video quality Unknown -->
-  <string name="video_quality_unknown">inconnue</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <string name="player_stopped">Lecteur arrêté</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
-  <string name="camera_not_ready">L\'appareil photo n\'est pas prêt</string>
   <!-- Message indicating that camera is ready/available -->
-  <string name="camera_ready">L\'appareil photo est prêt</string>
   <!-- Message indicating unknown call session event -->
   <!-- Message indicating data usage -->
-  <string name="wlan_data_usage_label">Consommation des données Wi-Fi : <xliff:g id="usage">%1$s </xliff:g></string>
-  <string name="lte_data_usage_label">Consommation des données mobiles : <xliff:g id="usage">%1$s </xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
-  <string name="modify_call_option_title">Sélectionner le type d\'appel</string>
-  <string name="modify_call_option_vt">Vidéo bidirectionnelle</string>
-  <string name="modify_call_option_vt_tx">Transmission vidéo</string>
-  <string name="modify_call_option_vt_rx">Réception vidéo</string>
-  <string name="modify_call_option_voice">Voix uniquement</string>
   <!-- Modify call error cause -->
-  <string name="modify_call_failed_due_to_low_battery">Échec de la modification de l\'appel pour cause de batterie faible.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
-  <string name="qti_ims_transfer_num_error">Numéro non défini. Fournissez le numéro via les paramètres IMS et réessayez.</string>
-  <string name="qti_ims_transfer_request_error">La demande de transfert d’appel a échoué.</string>
-  <string name="qti_ims_transfer_request_success">La demande de transfert d’appel est réussie.</string>
   <!-- Text for the onscreen "blind transfer" button -->
-  <string name="qti_ims_onscreenBlindTransfer">Transfert en aveugle</string>
   <!-- Text for the onscreen "assured transfer" button -->
-  <string name="qti_ims_onscreenAssuredTransfer">Transfert assuré</string>
   <!-- Text for the onscreen "consultative transfer" button -->
-  <string name="qti_ims_onscreenConsultativeTransfer">Transfert consultatif</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
   <!-- Message indicating call failed due to handover not feasible -->

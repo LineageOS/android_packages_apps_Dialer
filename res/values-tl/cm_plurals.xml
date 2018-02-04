@@ -15,21 +15,4 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="minute">
-    <item quantity="zero">%d mun</item>
-    <item quantity="one">1 mun</item>
-    <item quantity="two">%d fun</item>
-    <item quantity="few">%d mun</item>
-    <item quantity="many">%d mun</item>
-    <item quantity="other">%d mun</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="zero">%d galwadau</item>
-    <item quantity="one">1 galwad</item>
-    <item quantity="two">%d alwad</item>
-    <item quantity="few">%d galwad</item>
-    <item quantity="many">%d galwad</item>
-    <item quantity="other">%d galwad</item>
-  </plurals>
-</resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>

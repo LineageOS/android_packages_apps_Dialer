@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Партијата ги забрани сите дојдовни повици.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Повикај неодговорени и пренасочени</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Пренасочен повик</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Бирање (почекајте\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Повикување преку <xliff:g id="provider_name">%s</xliff:g> (Чекање\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (преку <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Повик на чекање</string>
+  <string name="call_recording_failed_message">Снимањето на повикот не успеа</string>
+  <string name="call_recording_file_location">Снимање на повикот е зачуван во <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Сними повик</string>
+  <string name="onscreenStopCallRecordText">Запри снимање</string>
+  <string name="recording_time_text">Снимање</string>
+  <string name="recording_warning_title">Овозможи снимање повици?</string>
+  <string name="recording_warning_text">Напомена: Вие сте одговорни за усогласеност со сите закони, регулативи и правила кои се однесуваат на користењето на функцијата за снимање повик и употребата или дистрибуцијата на тие снимки.</string>
+  <string name="call_failed_due_to_validate_number">Не може да се прават видео повици, форматот на бројот не е точен</string>
+  <string name="call_state_dialing">Бирање</string>
+  <string name="call_state_holding">На чекање</string>
+  <string name="call_state_active">Активно</string>
+  <string name="call_state_unknown">Непознат</string>
+  <string name="call_state_disconnecting">Исклучување</string>
+  <string name="call_state_disconnected">Исклучен</string>
+  <string name="too_many_recipients">Не можи повеќе од 6 луѓе да учествуваат во 4G конференциски повик.</string>
 </resources>

@@ -21,7 +21,6 @@
   <!-- Title for the activity that dials the phone.  This is the name
          used in the Launcher icon. -->
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
-  <string name="launcherDialpadActivityLabel">Pad Deialu Ffôn</string>
   <!-- The description text for the dialer tab.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -34,66 +33,40 @@
     This is especially valuable for views without textual representation like ImageView.
 
     [CHAR LIMIT=NONE] -->
-  <string name="callHistoryIconLabel">Hanes galwadau</string>
   <!-- Text for a menu item to report a call as having been incorrectly identified. [CHAR LIMIT=48] -->
-  <string name="action_report_number">Rhoi gwybod am rif anghywir</string>
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
-  <string name="action_copy_number_text">Copïo\'r rhif</string>
   <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
-  <string name="copy_transcript_text">Copïo\'r trawsgrifiad</string>
   <!-- Label for action to block a number. [CHAR LIMIT=48] -->
-  <string name="action_block_number">Rhwystro\'r rhif</string>
   <!-- Text for snackbar to undo blocking a number. [CHAR LIMIT=64] -->
-  <string name="snackbar_number_blocked">
-Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei rwystro</string>
   <!-- Label for action to unblock a number [CHAR LIMIT=48]-->
-  <string name="action_unblock_number">Dadrwystro\'r rhif</string>
   <!-- Text for snackbar to undo unblocking a number. [CHAR LIMIT=64] -->
-  <string name="snackbar_number_unblocked">
-Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rwystro.</string>
   <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
-  <string name="block_number_undo">DADWNEUD</string>
   <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
-  <string name="call_details_delete">Dileu</string>
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <!-- Menu item used to remove all calls from the call log -->
-  <string name="call_log_delete_all">Clirio hanes galwadau</string>
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <!-- Menu item used to archive a voicemail. [CHAR LIMIT=30] -->
-  <string name="call_log_archive_voicemail">Archifo\'r neges</string>
   <!-- Menu item used to send a voicemail through other applications [CHAR LIMIT=30] -->
   <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
-  <string name="snackbar_voicemail_deleted">Neges wedi ei dileu</string>
   <!-- Text for snackbar to undo a voicemail archive. [CHAR LIMIT=30] -->
-  <string name="snackbar_voicemail_archived">Neges wedi ei harchifo</string>
   <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
-  <string name="snackbar_voicemail_deleted_undo">DADWNEUD</string>
   <!-- Text for going to archive button in snackbar for voicemail archive. [CHAR LIMIT=10] -->
-  <string name="snackbar_voicemail_archived_goto">MYND I\'R ARCHIF</string>
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
-  <string name="clearCallLogConfirmation_title">Clirio hanes galwadau?</string>
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
-  <string name="clearCallLogProgress_title">Yn clirio hanes galwadau\u2026</string>
   <!-- Title used for the activity for placing a call. This name appears
          in activity disambig dialogs -->
   <!-- Notification strings -->
   <!-- Missed call notification label, used when there's exactly one missed call -->
-  <string name="notification_missedCallTitle">Galwad wedi ei methu</string>
   <!-- Missed call notification label, used when there's exactly one missed call from work contact -->
-  <string name="notification_missedWorkCallTitle">Wedi methu galwad gwaith</string>
   <!-- Missed call notification label, used when there are two or more missed calls -->
-  <string name="notification_missedCallsTitle">Galwadau wedi eu methu</string>
   <!-- Missed call notification message used when there are multiple missed calls -->
-  <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%s</xliff:g> galwad wedi\'u methu</string>
   <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
          The user will be able to call back to the person or the phone number.
          [CHAR LIMIT=18] -->
-  <string name="notification_missedCall_call_back">Galw nôl</string>
   <!-- Message for "reply via sms" action, which is displayed in the missed call notification.
          The user will be able to send text messages using the phone number.
          [CHAR LIMIT=18] -->
-  <string name="notification_missedCall_message">Neges</string>
   <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
@@ -109,19 +82,14 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
   <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
   <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
   <!-- Message to display whilst we are waiting for the content to be archived. [CHAR LIMIT=40] -->
-  <string name="voicemail_archiving_content">Yn archifo\'r neges\u2026</string>
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing voicemail calls. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
-  <string name="call_log_incoming_header">Galwadau i mewn yn unig</string>
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
-  <string name="call_log_outgoing_header">Galwadau allan yn unig</string>
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
-  <string name="call_log_missed_header">Galwadau a methwyd yn unig</string>
   <!-- Title for promo card for visual voicemail. [CHAR LIMIT=40] -->
   <!-- Promo card text for visual voicemail. -->
   <!-- Text for "Settings" link for visual voicemail promo card. [CHAR LIMIT=30] -->
-  <string name="visual_voicemail_settings">Gosodiadau</string>
   <!--  Voicemail status message shown at the top of call log to notify the user that no new
     voicemails are currently available. This can happen when both notification as well as data
     connection to the voicemail server is lost. [CHAR LIMIT=64] -->
@@ -138,22 +106,17 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
     server directly to listen to the voicemails. [CHAR LIMIT=20] -->
   <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
   <!-- Title for the sms disambiguation dialog -->
-  <string name="sms_disambig_title">Dewis rhif</string>
   <!-- Title for the call disambiguation dialog -->
-  <string name="call_disambig_title">Dewis rhif</string>
   <!-- Message next to disamgiguation dialog check box -->
-  <string name="make_primary">Cofio\'r dewis hwn</string>
   <!-- String describing the Search ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
          [CHAR LIMIT=NONE]
     -->
-  <string name="description_search_button">chwilio</string>
   <!-- String describing the Dial ImageButton
 
          Used by AccessibilityService to announce the purpose of the button.
     -->
-  <string name="description_dial_button">deialu</string>
   <!-- String describing the digits text box containing the number to dial.
 
          Used by AccessibilityService to announce the purpose of the view.
@@ -180,29 +143,22 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
     -->
   <!-- Content description for the fake action menu button that brings up the call history
          activity -->
-  <string name="action_menu_call_history_description">Hanes Galwadau</string>
   <!-- Content description for the fake action menu overflow button.
          This should be same as the description for the real action menu
          overflow button available in ActionBar.
          [CHAR LIMIT=NONE] -->
   <!-- Content description for the button that displays the dialpad
          [CHAR LIMIT=NONE] -->
-  <string name="action_menu_dialpad_button">pad deialu</string>
   <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only incoming in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only missed in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only voicemails in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
-  <string name="menu_show_all_calls">Dangos pob galwad</string>
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
-  <string name="dialer_settings_label">Gosodiadau</string>
   <!-- Menu item to create a new contact [CHAR LIMIT=30] -->
-  <string name="menu_newContact">Cyswllt newydd</string>
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
-  <string name="menu_allContacts">Pob cyswllt</string>
   <!-- Title bar for call detail screen -->
-  <string name="callDetailTitle">Manylion yr alwad</string>
   <!-- Toast for call detail screen when couldn't read the requested details -->
   <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
@@ -213,26 +169,16 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
   <!-- Item label: use the Dialer's dialpad to add another call.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
-  <string name="dialer_addAnotherCall">Ychwanegu galwad</string>
   <!-- Title for incoming call type. [CHAR LIMIT=40] -->
-  <string name="type_incoming">Galwad i mewn</string>
   <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
-  <string name="type_outgoing">Galwad allan</string>
   <!-- Title for missed call type. [CHAR LIMIT=40] -->
-  <string name="type_missed">Galwad wedi ei methu</string>
   <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video">Galwad fideo i mewn</string>
   <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video">Galwad fideo allan</string>
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video">Galwad fideo wedi\'i methu</string>
   <!-- Title for voicemail details screen -->
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->
-  <string name="type_rejected">Galwad wedi\'i gwrthod</string>
   <!-- Title for blocked call type. [CHAR LIMIT=40] -->
-  <string name="type_blocked">Galwad wedi\'i rhwystro</string>
   <!-- Description for incoming calls going to voice mail vs. not -->
-  <string name="actionIncomingCall">Galwadau i mewn</string>
   <!-- String describing the icon in the call log used to play a voicemail.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -248,7 +194,6 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
     -->
-  <string name="description_call">Galw <xliff:g id="name">%1$s</xliff:g></string>
   <!-- String describing the button to access the contact details for a name or number.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -265,14 +210,12 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
           This is especially valuable for views without textual representation like ImageView.
           [CHAR LIMIT=NONE]
     -->
-  <string name="description_video_call">Galwad fideo.</string>
   <!-- String describing the button to SMS a number or contact.
 
         Note: AccessibilityServices use this attribute to announce what the view represents.
               This is especially valuable for views without textual representation like ImageView.
               [CHAR LIMIT=NONE]
     -->
-  <string name="description_send_text_message">Anfon SMS at <xliff:g id="name">%1$s </xliff:g></string>
   <!-- String describing the icon in the call log used to represent an unheard voicemail left to
          the user.
 
@@ -282,37 +225,27 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
     -->
   <!-- String describing the icon used to start a voice search -->
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
-  <string name="menu_callNumber">Galw <xliff:g id="number">%s</xliff:g></string>
   <!-- String used to display calls from unknown numbers in the call log -->
-  <string name="unknown">Anhysybys</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <!-- String used to display calls from private numbers in the call log -->
-  <string name="private_num">Rhif preifat</string>
   <!-- String used to display calls from pay phone in the call log -->
   <!-- A nicely formatted call duration displayed when viewing call details for duration less than 1 minute. For example "28 sec" -->
   <!-- A nicely formatted call duration displayed when viewing call details. For example "42 min 28 sec" -->
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
          explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
          current day -->
-  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
   <!-- A format string used for displaying the date and time for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM
          The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
-  <string name="voicemailCallLogDateTimeFormat"><xliff:g id="date" example="Jul 25, 2014">%1$s</xliff:g> am <xliff:g id="time" example="2:49 PM">%2$s</xliff:g></string>
   <!-- Format for duration of voicemails which are displayed when viewing voicemail logs. For example "01:22" -->
-  <string name="voicemailDurationFormat"><xliff:g id="minutes" example="10">%1$02d</xliff:g>:<xliff:g id="seconds" example="20">%2$02d</xliff:g></string>
   <!-- A format string used for displaying the date, time and duration for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM • 00:34 -->
-  <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g id="dateAndTime" example="Jul 25, 2014 at 2:49PM">%1$s</xliff:g> \u2022 <xliff:g id="duration" example="01:22">%2$s</xliff:g></string>
   <!-- Dialog message which is shown when the user tries to make a phone call
          to prohibited phone numbers [CHAR LIMIT=NONE] -->
-  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Methu galw\'r rhif hwn</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system isn't ready for the access. [CHAR LIMIT=NONE] -->
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system is in airplane mode. The user cannot access to
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
-  <string name="dialog_voicemail_airplane_mode_message">Er mwyn galw dy leisbost, diffodda modd awyren.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
-  <string name="contact_list_loading">Yn llwytho\u2026</string>
   <!-- The title of a dialog that displays the IMEI of the phone -->
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
@@ -321,34 +254,24 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <!-- Message displayed when the Phone application has been disabled and a phone call cannot
          be made. [CHAR LIMIT=NONE] -->
-  <string name="call_not_available">Methu gwneud galwad ffôn gan fod yr ap Ffôn wedi ei analluogi.</string>
   <!-- Message displayed when there is no application available to handle a particular action.
          [CHAR LIMIT=NONE] -->
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
          [CHAR LIMIT=30] -->
-  <string name="dialer_hint_find_contact">Chwilio cysylltiadau</string>
   <!-- Hint displayed in add blocked number search box when there is no query typed.
          [CHAR LIMIT=45] -->
-  <string name="block_number_search_hint">Ychwanegu rif neu chwilio cysylltiadau</string>
   <!-- String resource for the font-family to use for the call log activity's title
          Do not translate. -->
   <!-- String resource for the font-family to use for the full call history footer
          Do not translate. -->
-  <string name="view_full_call_history_font_family">sans-serif</string>
   <!-- Text displayed when the call log is empty. -->
-  <string name="call_log_all_empty">Mae dy hanes alwadau yn wag.</string>
   <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
-  <string name="call_log_all_empty_action">Gwneud galwad</string>
   <!-- Text displayed when the list of missed calls is empty -->
-  <string name="call_log_missed_empty">Does dim galwadau wedi eu methu.</string>
   <!-- Text displayed when the list of voicemails is empty -->
   <!-- Text displayed when the list of voicemail archives is empty -->
-  <string name="voicemail_archive_empty">Mae dy archif negeseuon llais yn wag.</string>
   <!--  Menu option to show favorite contacts only -->
   <!--  Title of activity that displays a list of all calls -->
-  <string name="call_log_activity_title">Hanes Galwadau</string>
   <!--  Title of activity that displays a list of all archived voicemails -->
-  <string name="voicemail_archive_activity_title">Archif Negeseuon Llais</string>
   <!-- Title for the call log tab containing the list of all voicemails and calls
          [CHAR LIMIT=30] -->
   <!-- Title for the call log tab containing the list of all missed calls only
@@ -356,88 +279,53 @@ Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> wedi ei ddad-rw
   <!-- Title for the call log tab containing the list of all voicemail calls only
          [CHAR LIMIT=30] -->
   <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
-  <string name="migrate_blocked_numbers_dialog_title">Dull rhwystro newydd a mwy syml</string>
   <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
-  <string name="migrate_blocked_numbers_dialog_message">I dy warchod yn well, mae ar Ffôn angen newid sut mae rhwystro\'n gweithio. Bydd dy rifau sydd wedi\'u rhwystro nawr yn stopio galwadau a negeseuon testun a bydd hefyd yn bosib eu rhannu gydag apiau eraill.</string>
   <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
-  <string name="migrate_blocked_numbers_dialog_allow_button">Caniatáu</string>
   <!-- Do not translate -->
   <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_title">Rhwystro
-<xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
   <!-- Confirmation dialog message for blocking a number with visual voicemail active.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_message_vvm">
-Caiff galwadau o\'r rhif hwn eu rhwystro a bydd negeseuon llais yn cael eu dileu yn awtomatig.
-    </string>
   <!-- Confirmation dialog message for blocking a number with no visual voicemail.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_message_no_vvm">
-Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr adael negeseuon llais.
-    </string>
   <!-- Confirmation dialog message for blocking a number with new filtering enabled.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_message_new_filtering">
-        Ni fyddi bellach yn derbyn galwadau na negeseuon testun o\'r rhif hwn.
-    </string>
   <!-- Block number alert dialog button [CHAR LIMIT=32] -->
-  <string name="block_number_ok">RHWYSTRO</string>
   <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
-  <string name="unblock_number_confirmation_title">Dadrwystro
-<xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
   <!-- Unblock number alert dialog button [CHAR LIMIT=32] -->
-  <string name="unblock_number_ok">DADRWYSTRO</string>
   <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
          [CHAR LIMIT=40] -->
   <!-- Accessibility text for the tab showing the call history. [CHAR LIMIT=40] -->
-  <string name="tab_history">Hanes Galwadau</string>
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
-  <string name="tab_all_contacts">Cysylltiadau</string>
   <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
   <!--  Text displayed when user swipes out a favorite contact -->
-  <string name="favorite_hidden">Tynnwyd o\'r ffefrynnau</string>
   <!--  Text displayed for the undo button to undo removing a favorite contact -->
-  <string name="favorite_hidden_undo">Dadwneud</string>
   <!-- Shortcut item used to call a number directly from search -->
-  <string name="search_shortcut_call_number">Galw
-        <xliff:g id="number">%s</xliff:g>
-    </string>
   <!-- Shortcut item used to add a number directly to a new contact from search.
          [CHAR LIMIT=25] -->
-  <string name="search_shortcut_create_new_contact">Creu cyswllt newydd</string>
   <!-- Shortcut item used to add a number to an existing contact directly from search.
          [CHAR LIMIT=25] -->
-  <string name="search_shortcut_add_to_contact">Ychwanegu at gyswllt</string>
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_send_sms_message">Anfon SMS</string>
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_make_video_call">Gwneud galwad fideo</string>
   <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_block_number">Rhwystro\'r rhif</string>
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
   <!-- Shown when there are no speed dial favorites. -->
   <!-- Shown as an action when there are no speed dial favorites -->
   <!-- Shown when there are no contacts in the all contacts list. -->
   <!-- Shown as an action when the all contacts list is empty -->
-  <string name="all_contacts_empty_add_contact_action">Ychwanegu cyswllt</string>
   <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
          card can be tapped to bring up a list of all numbers, or long pressed to start reordering
          [CHAR LIMIT=NONE]
     -->
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
-  <string name="remove_contact">Tynnu</string>
   <!-- Button text for the "video call" displayed underneath an entry in the call log.
          Tapping causes a video call to be placed to the caller represented by the call log entry.
          [CHAR LIMIT=30] -->
-  <string name="call_log_action_video_call">Galwad fideo</string>
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
          messaging app to send a SMS to the number represented by the call log entry.
          [CHAR LIMIT=30] -->
-  <string name="call_log_action_send_message">Anfon neges</string>
   <!-- Button text for the button displayed underneath an entry in the call log.
          Tapping navigates the user to the call details screen where the user can view details for
          the call log entry. [CHAR LIMIT=30] -->
-  <string name="call_log_action_details">Manylion yr alwad</string>
   <!-- Button text for the button displayed underneath an entry in the call log, which when
          tapped triggers a return call to the named user. [CHAR LIMIT=30] -->
   <!-- String describing an incoming missed call entry in the call log.
@@ -449,15 +337,12 @@ Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr ad
   <!-- String describing an "unread" voicemail entry in the voicemails tab.
          Note: AccessibilityServices use this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_unread_voicemail">Neges llais heb ei glywed gan <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
   <!-- String describing a "read" voicemail entry in the voicemails tab.
      Note: AccessibilityServices use this attribute to announce what the view represents.
      [CHAR LIMIT=NONE] -->
-  <string name="description_read_voicemail">Neges llaisbost gan <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
   <!-- String describing an outgoing call entry in the call log.
          Note: AccessibilityServices uses this attribute to announce what the view represents.
          [CHAR LIMIT=NONE] -->
-  <string name="description_outgoing_call">Galwad i <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
   <!-- String describing the phone account the call was made on or to. This string will be used
          in description_incoming_missed_call, description_incoming_answered_call, and
          description_outgoing_call.
@@ -466,22 +351,17 @@ Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr ad
   <!-- String describing the secondary line number the call was received via.
          Note: AccessibilityServices use this attribute to announce what the view represents.
          [CHAR LIMIT=NONE]-->
-  <string name="description_via_number">o <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
   <!-- TextView text item showing the secondary line number the call was received via.
          [CHAR LIMIT=NONE]-->
-  <string name="call_log_via_number">o <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
   <!-- String describing the PhoneAccount and via number that a call was received on, if both are
          visible.
          Note: AccessibilityServices use this attribute to announce what the view represents.
          [CHAR LIMIT=NONE]-->
-  <string name="description_via_number_phone_account">ar <xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g>, o <xliff:g id="number" example="(555) 555-5555">%2$s</xliff:g></string>
   <!-- The order of the PhoneAccount and via number that a call was received on,
          if both are visible.
          [CHAR LIMIT=NONE]-->
-  <string name="call_log_via_number_phone_account"><xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g> o <xliff:g id="number" example="(555) 555-5555">%2$s</xliff:g></string>
   <!-- String describing the phone icon on a call log list item. When tapped, it will place a
          call to the number represented by that call log entry. [CHAR LIMIT=NONE]-->
-  <string name="description_call_log_call_action">Galw</string>
   <!-- String describing the "call" action for an entry in the call log.  The call back
          action triggers a return call to the named user.
          Note: AccessibilityServices uses this attribute to announce the purpose of the button.
@@ -520,10 +400,8 @@ Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr ad
          [CHAR LIMIT=NONE] -->
   <!-- String used as a header in the call log above calls which occurred today.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_today">Heddiw</string>
   <!-- String used as a header in the call log above calls which occurred yesterday.
          [CHAR LIMIT=65] -->
-  <string name="call_log_header_yesterday">Ddoe</string>
   <!-- String used as a header in the call log above calls which occurred two days or more ago.
          [CHAR LIMIT=65] -->
   <!-- String a header on the call details screen.  Appears above the list calls to or from a
@@ -553,7 +431,6 @@ Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr ad
          [CHAR LIMIT=NONE] -->
   <!-- Delimeter used between each item in a textual list; for example "Alpha, Beta".
          [CHAR LIMIT=3] -->
-  <string name="list_delimeter">", "</string>
   <!-- Dialer settings related strings-->
   <!-- Title for "Display options" category, which controls how contacts are shown.
          [CHAR LIMIT=40] -->
@@ -567,103 +444,58 @@ Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr ad
   <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
   <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
-  <string-array name="dtmf_tone_length_entries">
-    <item>Normal</item>
-    <item>Hir</item>
-  </string-array>
   <!-- Do not translate. -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
-  <string name="respond_via_sms_setting_title">Ymatebion cyflym</string>
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
   <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
-  <string name="manage_blocked_numbers_label">Rhwystro galwadau</string>
   <!-- Label for a section describing that call blocking is temporarily disabled because an
          emergency call was made. [CHAR LIMIT=50] -->
-  <string name="blocked_numbers_disabled_emergency_header_label">
-Rhwystr galwadau wedi\'i diffodd dros dro
-    </string>
   <!-- Description that call blocking is temporarily disabled because the user called an
          emergency number, and explains that call blocking will be re-enabled after a buffer
          period has passed. [CHAR LIMIT=NONE] -->
-  <string name="blocked_numbers_disabled_emergency_desc">
-Mae rhwystro galwadau wedi\'i analluogi gan dy fod wedi cysylltu â\'r gwasanaethau brys o\'r ffôn hwn o fewn y 48 awr ddiwethaf. Caiff ei alluogi eto pan fydd y cyfnod 48 awr wedi pasio.
-    </string>
   <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
          [CHAR_LIMIT=30] -->
-  <string name="import_send_to_voicemail_numbers_label">Mewnforio rhifau</string>
   <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
          This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
          and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
-  <string name="blocked_call_settings_import_description">
-        Rwyt wedi nodi rhai galwyr trwy apiau eraill fel bod eu galwadau yn mynd yn syth i\'r llaisbost.
-    </string>
   <!-- Label for button to view numbers of contacts previous marked to be sent to voicemail.
          [CHAR_LIMIT=20] -->
-  <string name="blocked_call_settings_view_numbers_button">Gweld rhifau</string>
   <!-- Label for button to import settings for sending contacts to voicemail into Dialer's block
          list. [CHAR_LIMIT=20] -->
-  <string name="blocked_call_settings_import_button">Mewnforio</string>
   <!-- Error toast message for when send to voicemail import fails. [CHAR LIMIT=40] -->
-  <string name="send_to_voicemail_import_failed">Methwyd mewnforio</string>
   <!-- Error toast message for when voicemail archive fails. [CHAR LIMIT=40] -->
-  <string name="voicemail_archive_failed">Methwyd archifo\'r neges llais.</string>
   <!-- String describing the delete icon on a blocked number list item.
         When tapped, it will show a dialog confirming the unblocking of the number.
         [CHAR LIMIT=NONE]-->
-  <string name="description_blocked_number_list_delete">Dadrwystro\'r rhif</string>
   <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
-  <string name="addBlockedNumber">Ychwanegu rhif</string>
   <!-- Footer message of number blocking screen with visual voicemail active.
         [CHAR LIMIT=NONE] -->
-  <string name="block_number_footer_message_vvm">
-Caiff galwadau o\'r rhifau hyn eu rhwystro a bydd negeseuon llais yn cael eu dileu yn awtomatig.
-    </string>
   <!-- Footer message of number blocking screen with no visual voicemail.
          [CHAR LIMIT=NONE] -->
-  <string name="block_number_footer_message_no_vvm">
-Caiff galwadau o\'r rhifau hyn eu rhwystro, ond mi fydd dal yn bosib i\'r galwyr adael negeseuon llais.
-    </string>
   <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
-  <string name="block_list">Rhifau wedi eu rhwystro</string>
   <!-- Error message shown when user tries to add invalid number to the block list.
         [CHAR LIMIT=64] -->
-  <string name="invalidNumber">Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> yn annilys.</string>
   <!-- Error message shown when user tries to add a number to the block list that was already
         blocked. [CHAR LIMIT=64] -->
-  <string name="alreadyBlocked">Mae <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g> eisoes wedi ei rwystro.</string>
   <!-- Title of notification telling the user that call blocking has been temporarily disabled.
          [CHAR LIMIT=56] -->
-  <string name="call_blocking_disabled_notification_title">
-Mae rhwystro galwadau wedi ei analluogi am 48 awr.    </string>
   <!-- Text for notification which provides the reason that call blocking has been temporarily
          disabled. Namely, we disable call blocking after an emergency call in case of return
          phone calls made by emergency services. [CHAR LIMIT=64] -->
-  <string name="call_blocking_disabled_notification_text">
-Wedi\'i analluogi gan fod galwad brys wedi ei gwneud.    </string>
   <!-- Label for the phone account settings [CHAR LIMIT=30] -->
   <!-- DO NOT TRANSLATE. Internal key for ringtone preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for vibrate when ringing preference. -->
   <!-- DO NOT TRANSLATE. Internal key for DTMF tone length preference. -->
   <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
-  <string name="permission_single_turn_on">Troi ymlaen</string>
   <!--  The label of the button used to turn on multiple permissions [CHAR LIMIT=30]-->
   <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
-  <string name="permission_no_speeddial">I alluogi deialu cyflym, rho ganiatâd yn yr ap Cysylltiadau.</string>
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
-  <string name="permission_no_calllog">I weld to log galwadau, rho ganiatâd yn yr ap Ffôn.</string>
   <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
-  <string name="permission_no_contacts">I weld dy gysylltiadau, rho ganiatâd yn yr ap Cysylltiadau.</string>
   <!-- Shown as a prompt to turn on the phone permission to show voicemails [CHAR LIMIT=NONE]-->
-  <string name="permission_no_voicemail">I gael mynediad i dy laisbost, rho ganiatâd yn yr ap Ffôn.</string>
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
-  <string name="permission_place_call">I wneud galwad, rho ganiatâd yn yr ap Ffôn.</string>
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
-  <string name="blocked_number_call_log_label">Wedi rhwystro</string>
   <!-- Accessibility announcement to indicate which call is active -->
-  <string name="accessibility_call_is_active">Mae <xliff:g id="nameOrNumber">^1</xliff:g> yn weithredol</string>
-  <string name="missing_account_type">(Dim math)</string>
-  <string name="missing_account_name">(Dim enw)</string>
 </resources>

@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Ο συνομιλητής έχει μπλοκάρει όλες τις εισερχόμενες κλήσεις.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Η κλήση δεν απαντήθηκε και προωθήθηκε</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Προωθημένη κλήση</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Κλήση (αναμονή\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Κλήση μέσω <xliff:g id="provider_name">%s</xliff:g> (Αναμονή\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (μέσω <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Κλήση σε αναμονή</string>
+  <string name="call_recording_failed_message">Αποτυχία έναρξης της ηχογράφησης κλήσης</string>
+  <string name="call_recording_file_location">Η εγγραφή αποθηκεύτηκε στο <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Ηχογράφηση κλήσης</string>
+  <string name="onscreenStopCallRecordText">Διακοπή ηχογράφησης</string>
+  <string name="recording_time_text">Γίνεται εγγραφή</string>
+  <string name="recording_warning_title">Ενεργοποίηση καταγραφής κλήσεων;</string>
+  <string name="recording_warning_text">Προσοχή: Είστε υπεύθυνοι για τη συμμόρφωση με οποιουσδήποτε νόμους, κανονισμούς και κανόνες που ισχύουν για τη χρήση της λειτουργίας καταγραφής κλήσεων και τη χρήση ή διανομή των καταγραφών αυτών.</string>
+  <string name="call_failed_due_to_validate_number">Αδύνατη η πραγματοποίηση βίντεοκλήσης, η μορφή του αριθμού δεν είναι σωστή</string>
+  <string name="call_state_dialing">Κλήση</string>
+  <string name="call_state_holding">Αναμονή</string>
+  <string name="call_state_active">Ενεργή</string>
+  <string name="call_state_unknown">Άγνωστη</string>
+  <string name="call_state_disconnecting">Αποσύνδεση</string>
+  <string name="call_state_disconnected">Αποσυνδέθηκε</string>
+  <string name="too_many_recipients">Δεν μπορούν να συμμετάσχουν περισσότερα από 6 άτομα σε μια κλήση διάσκεψης 4G.</string>
 </resources>

@@ -18,12 +18,34 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Абонент запретил все входящие звонки.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Вызов без ответа и переадресован</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Переадресованный вызов</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Вызов (ожидание\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Вызов через <xliff:g id="provider_name">%s</xliff:g> (Ожидание\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
+  <string name="card_title_active_via_template"><xliff:g id="status" example="Вызов на удержании">%1$s</xliff:g> (через <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Ожидающий вызов</string>
+  <string name="call_recording_failed_message">Не удалось начать запись разговора</string>
+  <string name="call_recording_file_location">Запись разговора сохранена в <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Запись разговора</string>
+  <string name="onscreenStopCallRecordText">Остановить запись</string>
+  <string name="recording_time_text">Запись</string>
+  <string name="recording_warning_title">Включить запись разговоров?</string>
+  <string name="recording_warning_text">Внимание: вы несете ответственность за соблюдение любых законов, положений и правил, которые применяются к использованию функции записи разговоров, а также к использованию и распространению самих записей.</string>
+  <string name="call_failed_due_to_validate_number">Не удается сделать видеозвонок, формат номера неверен</string>
+  <string name="call_state_dialing">Набор номера</string>
+  <string name="call_state_holding">Удержание</string>
+  <string name="call_state_active">Активен</string>
+  <string name="call_state_unknown">Неизвестно</string>
+  <string name="call_state_disconnecting">Разъединение</string>
+  <string name="call_state_disconnected">Разъединен</string>
+  <string name="too_many_recipients">Не более 6 человек могут участвовать в конференц-звонке в сетях 4G.</string>
 </resources>
