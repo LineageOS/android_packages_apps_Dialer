@@ -32,6 +32,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.databasepopulator \
 	com.android.dialer.dialpadview \
 	com.android.dialer.enrichedcall.simulator \
+	com.android.dialer.feedback \
 	com.android.dialer.interactions \
 	com.android.dialer.lettertile \
 	com.android.dialer.location \
@@ -85,7 +86,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.telecomeventui \
 	com.android.incallui.video.impl \
 	com.android.incallui.video.protocol \
-	com.android.newbubble \
 	com.android.phoneapphelper \
 	com.android.voicemail \
 	com.android.voicemail.impl \

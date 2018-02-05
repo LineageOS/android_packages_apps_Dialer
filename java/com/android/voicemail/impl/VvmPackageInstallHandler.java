@@ -42,7 +42,7 @@ public final class VvmPackageInstallHandler {
    * Iterates through all phone account and disable VVM on a account if {@code packageName} is
    * listed as a carrier VVM package.
    */
-  public static void handlePackageInstalled(Context context, String packageName) {
+  public static void handlePackageInstalled(Context context) {
     // This get called every time an app is installed and will be noisy. Don't log until the app
     // is identified as a carrier VVM app.
     for (PhoneAccountHandle phoneAccount :
@@ -52,25 +52,11 @@ public final class VvmPackageInstallHandler {
       if (!carrierConfigHelper.isValid()) {
         continue;
       }
-      if (carrierConfigHelper.getCarrierVvmPackageNames() == null) {
-        continue;
-      }
-      if (!carrierConfigHelper.getCarrierVvmPackageNames().contains(packageName)) {
+      if (!carrierConfigHelper.isCarrierAppInstalled()) {
         continue;
       }
 
-      VvmLog.i("VvmPackageInstallHandler.handlePackageInstalled", "Carrier app installed");
-      if (VisualVoicemailSettingsUtil.isEnabledUserSet(context, phoneAccount)) {
-        // Skip the check if this voicemail source's setting is overridden by the user.
-        VvmLog.i(
-            "VvmPackageInstallHandler.handlePackageInstalled",
-            "VVM enabled by user, not disabling");
-        continue;
-      }
-
-      // Force deactivate the client. The user can re-enable it in the settings.
-      // There is no need to update the settings for deactivation. At this point, if the
-      // default value is used it should be false because a carrier package is present.
+      // Force deactivate the client.
       VvmLog.i(
           "VvmPackageInstallHandler.handlePackageInstalled",
           "Carrier VVM package installed, disabling system VVM client");

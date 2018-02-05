@@ -1,0 +1,60 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
+package com.android.newbubble.stub;
+
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import com.android.newbubble.NewBubble;
+import com.android.newbubble.NewBubbleInfo;
+import com.android.newbubble.NewBubbleInfo.Action;
+import java.util.List;
+import javax.inject.Inject;
+
+public class NewBubbleStub implements NewBubble {
+
+  @Inject
+  public NewBubbleStub() {}
+
+  @Override
+  public void show() {}
+
+  @Override
+  public void hide() {}
+
+  @Override
+  public void hideAndReset() {}
+
+  @Override
+  public boolean isVisible() {
+    return false;
+  }
+
+  @Override
+  public void setBubbleInfo(@NonNull NewBubbleInfo bubbleInfo) {}
+
+  @Override
+  public void updateActions(@NonNull List<Action> actions) {}
+
+  @Override
+  public void updatePhotoAvatar(@NonNull Drawable avatar) {}
+
+  @Override
+  public void updateAvatar(@NonNull Drawable avatar) {}
+
+  @Override
+  public void showText(@NonNull CharSequence text) {}
+}

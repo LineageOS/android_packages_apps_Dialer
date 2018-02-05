@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package com.android.incallui.speakeasy;
+package com.android.newbubble;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
 
-/** Dagger component to get SpeakEasyCallManager. */
 @Subcomponent
-public abstract class SpeakEasyComponent {
+public abstract class NewBubbleComponent {
 
-  public abstract SpeakEasyCallManager speakEasyCallManager();
+  @NonNull
+  public abstract NewBubble getNewBubble();
 
-  public static SpeakEasyComponent get(Context context) {
-    return ((SpeakEasyComponent.HasComponent)
-            ((HasRootComponent) context.getApplicationContext()).component())
-        .speakEasyComponent();
+  public static NewBubbleComponent get(Context context) {
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
+        .newBubbleComponent();
   }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
-    SpeakEasyComponent speakEasyComponent();
+    NewBubbleComponent newBubbleComponent();
   }
 }

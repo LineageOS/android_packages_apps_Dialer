@@ -14,15 +14,31 @@
  * limitations under the License
  */
 
-package com.android.incallui.speakeasy;
+package com.android.dialer.main;
 
-import dagger.Binds;
-import dagger.Module;
+import android.content.Intent;
+import android.os.Bundle;
 
-/** Module which binds {@link SpeakEasyCallManagerStub}. */
-@Module
-public abstract class StubSpeakEasyModule {
+/** Interface for peers of MainActivity. */
+public interface MainActivityPeer {
 
-  @Binds
-  abstract SpeakEasyCallManager bindsSpeakEasy(SpeakEasyCallManagerStub stub);
+  void onActivityCreate(Bundle saveInstanceState);
+
+  void onActivityResume();
+
+  void onActivityStop();
+
+  void onNewIntent(Intent intent);
+
+  void onActivityResult(int requestCode, int resultCode, Intent data);
+
+  void onSaveInstanceState(Bundle bundle);
+
+  boolean onBackPressed();
+
+  /** Supplies the MainActivityPeer */
+  interface PeerSupplier {
+
+    MainActivityPeer getPeer();
+  }
 }

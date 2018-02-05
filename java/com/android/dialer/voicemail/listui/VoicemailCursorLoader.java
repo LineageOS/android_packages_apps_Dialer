@@ -23,6 +23,8 @@ import android.support.v4.content.CursorLoader;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -43,6 +45,9 @@ final class VoicemailCursorLoader extends CursorLoader {
         AnnotatedCallLog.VOICEMAIL_URI,
         AnnotatedCallLog.IS_READ,
         AnnotatedCallLog.NUMBER_ATTRIBUTES,
+        AnnotatedCallLog.TRANSCRIPTION_STATE,
+        AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME,
+        AnnotatedCallLog.PHONE_ACCOUNT_ID,
       };
 
   // Indexes for VOICEMAIL_COLUMNS
@@ -57,6 +62,9 @@ final class VoicemailCursorLoader extends CursorLoader {
   private static final int VOICEMAIL_URI = 8;
   private static final int IS_READ = 9;
   private static final int NUMBER_ATTRIBUTES = 10;
+  private static final int TRANSCRIPTION_STATE = 11;
+  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 12;
+  private static final int PHONE_ACCOUNT_ID = 13;
 
   // TODO(zachh): Optimize indexes
   VoicemailCursorLoader(Context context) {
@@ -84,6 +92,13 @@ final class VoicemailCursorLoader extends CursorLoader {
       throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
     }
 
+    // Voicemail numbers should always be valid so the CP2 information should never be incomplete,
+    // and there should be no need to query PhoneLookup at render time.
+    Assert.checkArgument(
+        !numberAttributes.getIsCp2InfoIncomplete(),
+        "CP2 info incomplete for number: %s",
+        LogUtil.sanitizePii(number.getNormalizedNumber()));
+
     return VoicemailEntry.builder()
         .setId(cursor.getInt(ID))
         .setTimestamp(cursor.getLong(TIMESTAMP))
@@ -96,6 +111,9 @@ final class VoicemailCursorLoader extends CursorLoader {
         .setCallType(cursor.getInt(CALL_TYPE))
         .setIsRead(cursor.getInt(IS_READ))
         .setNumberAttributes(numberAttributes)
+        .setTranscriptionState(cursor.getInt(TRANSCRIPTION_STATE))
+        .setPhoneAccountComponentName(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME))
+        .setPhoneAccountId(cursor.getString(PHONE_ACCOUNT_ID))
         .build();
   }
 

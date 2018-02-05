@@ -16,10 +16,10 @@
 package com.android.dialer.compat.android.provider;
 
 /**
- * Provide access to new API constants before they're publicly available
+ * Provide access to Voicemail Transcription API constants as they won't be publicly available.
  *
- * <p>Copied from android.provider.VoicemailContract.Voicemails. These should become public in O-MR1
- * and these constants can be removed then.
+ * <p>Copied from android.provider.VoicemailContract.Voicemails. These do not plan to become public
+ * in O-MR1 or in the near future.
  */
 public class VoicemailCompat {
 

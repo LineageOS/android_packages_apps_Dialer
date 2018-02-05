@@ -38,7 +38,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
-import android.support.v4.util.ArraySet;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -62,11 +61,11 @@ import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /** PreCallAction to select which phone account to call with. Ignored if there's only one account */
 @SuppressWarnings("MissingPermission")
@@ -265,7 +264,7 @@ public class CallingAccountSelector implements PreCallAction {
           hints.add(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
           break;
         default:
-          throw Assert.createAssertionFailException("unexpected reason " + suggestion.reason);
+          LogUtil.w("CallingAccountSelector.buildHint", "unhandled reason " + suggestion.reason);
       }
     }
     return hints;
@@ -311,6 +310,12 @@ public class CallingAccountSelector implements PreCallAction {
       if (!isPreferredSimEnabled(context)) {
         return result;
       }
+      if (!PermissionsUtil.hasContactsReadPermissions(context)) {
+        LogUtil.i(
+            "CallingAccountSelector.PreferredAccountWorker.doInBackground",
+            "missing READ_CONTACTS permission");
+        return result;
+      }
       result.dataId = getDataId(context, phoneNumber);
       if (result.dataId.isPresent()) {
         result.phoneAccountHandle = getPreferredAccount(context, result.dataId.get());
@@ -346,24 +351,23 @@ public class CallingAccountSelector implements PreCallAction {
         return Optional.absent();
       }
       ImmutableSet<String> validAccountTypes = PreferredAccountUtil.getValidAccountTypes(context);
-      Set<String> result = new ArraySet<>();
+      String result = null;
       while (cursor.moveToNext()) {
         Optional<String> accountType =
             getAccountType(context.getContentResolver(), cursor.getLong(0));
-        if (accountType.isPresent() && validAccountTypes.contains(accountType.get())) {
-          result.add(cursor.getString(0));
-        } else {
+        if (!accountType.isPresent() || !validAccountTypes.contains(accountType.get())) {
           LogUtil.i("CallingAccountSelector.getDataId", "ignoring non-writable " + accountType);
+          continue;
         }
+        if (result != null && !result.equals(cursor.getString(0))) {
+          // TODO(twyen): if there are multiple entries attempt to grab from the contact that
+          // initiated the call.
+          LogUtil.i("CallingAccountSelector.getDataId", "lookup result not unique, ignoring");
+          return Optional.absent();
+        }
+        result = cursor.getString(0);
       }
-      // TODO(twyen): if there are multiples attempt to grab from the contact that initiated the
-      // call.
-      if (result.size() == 1) {
-        return Optional.of(result.iterator().next());
-      } else {
-        LogUtil.i("CallingAccountSelector.getDataId", "lookup result not unique, ignoring");
-        return Optional.absent();
-      }
+      return Optional.fromNullable(result);
     }
   }
 
