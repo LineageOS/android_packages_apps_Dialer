@@ -46,10 +46,9 @@ public interface Spam {
    * Checks if each of numbers in the given list is suspected of being a spam.
    *
    * @param dialerPhoneNumbers A set of {@link DialerPhoneNumber}.
-   * @return A {@link ListenableFuture} of a map that maps each number to its spam status
-   *     (true/false).
+   * @return A {@link ListenableFuture} of a map that maps each number to its {@link SpamStatus}.
    */
-  ListenableFuture<ImmutableMap<DialerPhoneNumber, Boolean>> batchCheckSpamStatus(
+  ListenableFuture<ImmutableMap<DialerPhoneNumber, SpamStatus>> batchCheckSpamStatus(
       ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers);
 
   /**
