@@ -72,13 +72,6 @@ public final class VoicemailPopulator {
         .setDurationSeconds(0)
         .setPhoneAccountComponentName(componentName)
         .setIsRead(true),
-    // Short number.
-    Voicemail.builder()
-        .setPhoneNumber("711")
-        .setTranscription("This is a short voicemail.")
-        .setDurationSeconds(12)
-        .setPhoneAccountComponentName(componentName)
-        .setIsRead(true),
   };
 
   @WorkerThread
