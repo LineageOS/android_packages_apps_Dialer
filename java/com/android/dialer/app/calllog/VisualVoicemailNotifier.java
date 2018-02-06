@@ -34,6 +34,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.DialtactsActivity;
+import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
@@ -272,8 +273,13 @@ final class VisualVoicemailNotifier {
 
   private static PendingIntent newVoicemailIntent(
       @NonNull Context context, @Nullable NewCall voicemail) {
-    Intent intent =
-        DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
+    Intent intent;
+    if (MainComponent.isNuiComponentEnabled(context)) {
+      intent = MainComponent.getShowVoicemailIntent(context);
+    } else {
+      intent =
+          DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
+    }
     // TODO (a bug): scroll to this voicemail
     if (voicemail != null) {
       intent.setData(voicemail.voicemailUri);
