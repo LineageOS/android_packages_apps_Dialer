@@ -16,14 +16,16 @@
   -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minHeight="48dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:height="48dp">
+    android:layout_height="wrap_content">
   <TextView
       android:id="@+id/new_call_log_header_text"
-      style="@style/SecondaryText"
+      style="@style/SubHeader"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/call_log_action_icon_margin_start"
-      android:layout_centerVertical="true"/>
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
+      android:layout_centerVertical="true"
+      android:layout_gravity="center_vertical"/>
 </RelativeLayout>

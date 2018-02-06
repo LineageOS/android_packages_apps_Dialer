@@ -46,6 +46,16 @@ public class MainComponent {
     }
   }
 
+  public static boolean isNuiComponentEnabled(Context context) {
+    if (!isNewUiEnabled(context)) {
+      return false;
+    }
+    return context
+            .getPackageManager()
+            .getComponentEnabledSetting(new ComponentName(context, getComponentName()))
+        == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+  }
+
   /**
    * Enables the NUI activity component. By default the component is disabled and can't be accessed.
    * Once the component has been enabled the user will get an option to use the new UI to handle
@@ -55,7 +65,7 @@ public class MainComponent {
     context
         .getPackageManager()
         .setComponentEnabledSetting(
-            new ComponentName(context, "com.android.dialer.main.impl.MainActivity"),
+            new ComponentName(context, getComponentName()),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP);
   }
@@ -87,9 +97,21 @@ public class MainComponent {
    */
   public static Intent getIntent(Context context) {
     Intent intent = new Intent();
-    intent.setComponent(new ComponentName(context, "com.android.dialer.main.impl.MainActivity"));
+    intent.setComponent(new ComponentName(context, getComponentName()));
     intent.setAction(Intent.ACTION_VIEW);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     return intent;
+  }
+
+  public static Intent getShowCallLogIntent(Context context) {
+    Intent intent = new Intent();
+    intent.setComponent(new ComponentName(context, getComponentName()));
+    intent.setAction("ACTION_SHOW_TAB");
+    intent.putExtra("EXTRA_SHOW_TAB", 1);
+    return intent;
+  }
+
+  private static String getComponentName() {
+    return "com.android.dialer.main.impl.MainActivity";
   }
 }

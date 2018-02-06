@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Dialer Bottom Nav Bar for {@link MainActivity}. */
-final class BottomNavBar extends LinearLayout {
+public final class BottomNavBar extends LinearLayout {
 
   /** Index for each tab in the bottom nav. */
   @Retention(RetentionPolicy.SOURCE)
