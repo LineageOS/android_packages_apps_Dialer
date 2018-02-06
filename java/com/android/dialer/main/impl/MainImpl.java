@@ -66,6 +66,16 @@ final class MainImpl implements Main {
             PackageManager.DONT_KILL_APP);
   }
 
+  @Override
+  public void disableComponentForTesting(Context context) {
+    context
+        .getPackageManager()
+        .setComponentEnabledSetting(
+            new ComponentName(context, MainActivity.class),
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP);
+  }
+
   @TargetApi(VERSION_CODES.O)
   private static void createLauncherShortcutO(Context context) {
     ShortcutInfoCompat shortcutInfo =
