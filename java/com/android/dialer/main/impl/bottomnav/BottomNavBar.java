@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.main.impl;
+package com.android.dialer.main.impl.bottomnav;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
@@ -67,7 +67,7 @@ public final class BottomNavBar extends LinearLayout {
     voicemail = findViewById(R.id.voicemail_tab);
 
     speedDial.setup(R.string.tab_title_speed_dial, R.drawable.quantum_ic_star_vd_theme_24);
-    callLog.setup(R.string.tab_title_call_history, R.drawable.quantum_ic_history_vd_theme_24);
+    callLog.setup(R.string.tab_title_call_history, R.drawable.quantum_ic_access_time_vd_theme_24);
     contacts.setup(R.string.tab_title_contacts, R.drawable.quantum_ic_people_vd_theme_24);
     voicemail.setup(R.string.tab_title_voicemail, R.drawable.quantum_ic_voicemail_vd_theme_24);
 
@@ -109,7 +109,7 @@ public final class BottomNavBar extends LinearLayout {
    *
    * @param tab {@link TabIndex}
    */
-  void selectTab(@TabIndex int tab) {
+  public void selectTab(@TabIndex int tab) {
     if (tab == TabIndex.SPEED_DIAL) {
       speedDial.performClick();
     } else if (tab == TabIndex.CALL_LOG) {
@@ -123,7 +123,7 @@ public final class BottomNavBar extends LinearLayout {
     }
   }
 
-  void setNotificationCount(@TabIndex int tab, int count) {
+  public void setNotificationCount(@TabIndex int tab, int count) {
     if (tab == TabIndex.SPEED_DIAL) {
       speedDial.setNotificationCount(count);
     } else if (tab == TabIndex.CALL_LOG) {
@@ -137,7 +137,7 @@ public final class BottomNavBar extends LinearLayout {
     }
   }
 
-  void addOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {
+  public void addOnTabSelectedListener(OnBottomNavTabSelectedListener listener) {
     listeners.add(listener);
   }
 
