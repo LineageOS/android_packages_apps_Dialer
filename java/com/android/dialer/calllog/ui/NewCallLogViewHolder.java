@@ -17,9 +17,11 @@ package com.android.dialer.calllog.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -32,8 +34,8 @@ import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
-import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactphoto.NumberAttributeConverter;
@@ -49,10 +51,13 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private final Context context;
   private final TextView primaryTextView;
+  private final TextView callCountTextView;
   private final TextView secondaryTextView;
   private final QuickContactBadge quickContactBadge;
-  private final CallTypeIconsView primaryCallTypeIconsView; // Used for Wifi, HD icons
-  private final CallTypeIconsView secondaryCallTypeIconsView; // Used for call types
+  private final ImageView callTypeIcon;
+  private final ImageView hdIcon;
+  private final ImageView wifiIcon;
+  private final ImageView assistedDialIcon;
   private final TextView phoneAccountView;
   private final ImageView menuButton;
 
@@ -66,10 +71,13 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     super(view);
     this.context = view.getContext();
     primaryTextView = view.findViewById(R.id.primary_text);
+    callCountTextView = view.findViewById(R.id.call_count);
     secondaryTextView = view.findViewById(R.id.secondary_text);
     quickContactBadge = view.findViewById(R.id.quick_contact_photo);
-    primaryCallTypeIconsView = view.findViewById(R.id.primary_call_type_icons);
-    secondaryCallTypeIconsView = view.findViewById(R.id.secondary_call_type_icons);
+    callTypeIcon = view.findViewById(R.id.call_type_icon);
+    hdIcon = view.findViewById(R.id.hd_icon);
+    wifiIcon = view.findViewById(R.id.wifi_icon);
+    assistedDialIcon = view.findViewById(R.id.assisted_dial_icon);
     phoneAccountView = view.findViewById(R.id.phone_account);
     menuButton = view.findViewById(R.id.menu_button);
 
@@ -103,27 +111,32 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     if (isNewMissedCall(row)) {
       primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
-      // TODO(zachh): Styling for call type icons when the call is new.
+      callCountTextView.setTextAppearance(R.style.primary_textview_new_call);
       secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
+      phoneAccountView.setTextAppearance(R.style.phoneaccount_textview_new_call);
     } else {
       primaryTextView.setTextAppearance(R.style.primary_textview);
+      callCountTextView.setTextAppearance(R.style.primary_textview);
       secondaryTextView.setTextAppearance(R.style.secondary_textview);
+      phoneAccountView.setTextAppearance(R.style.phoneaccount_textview);
     }
 
     setNumberCalls(row);
     setPhoto(row);
-    setPrimaryCallTypes(row);
-    setSecondaryCallTypes(row);
+    setFeatureIcons(row);
+    setCallTypeIcon(row);
     setPhoneAccounts(row);
     setOnClickListenerForRow(row);
     setOnClickListenerForMenuButon(row);
   }
 
   private void setNumberCalls(CoalescedRow row) {
-    // TODO(zachh): Number of calls shouldn't be text, but a circle with a number inside.
     int numberCalls = row.coalescedIds().getCoalescedIdCount();
     if (numberCalls > 1) {
-      primaryTextView.append(String.format(Locale.getDefault(), " (%d)", numberCalls));
+      callCountTextView.setText(String.format(Locale.getDefault(), "(%d)", numberCalls));
+      callCountTextView.setVisibility(View.VISIBLE);
+    } else {
+      callCountTextView.setVisibility(View.GONE);
     }
   }
 
@@ -149,22 +162,75 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     return TextUtils.isEmpty(uri) ? null : Uri.parse(uri);
   }
 
-  private void setPrimaryCallTypes(CoalescedRow row) {
-    primaryCallTypeIconsView.setShowHd(
-        (row.features() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
-    primaryCallTypeIconsView.setShowWifi(
-        MotorolaUtils.shouldShowWifiIconInCallLog(context, row.features()));
-    primaryCallTypeIconsView.setShowAssistedDialed(
-        (row.features() & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
-            == TelephonyManagerCompat.FEATURES_ASSISTED_DIALING);
+  private void setFeatureIcons(CoalescedRow row) {
+    ColorStateList colorStateList =
+        ColorStateList.valueOf(
+            context.getColor(
+                isNewMissedCall(row)
+                    ? R.color.feature_icon_unread_color
+                    : R.color.feature_icon_read_color));
+
+    // Handle HD Icon
+    if ((row.features() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL) {
+      hdIcon.setVisibility(View.VISIBLE);
+      hdIcon.setImageTintList(colorStateList);
+    } else {
+      hdIcon.setVisibility(View.GONE);
+    }
+
+    // Handle Wifi Icon
+    if (MotorolaUtils.shouldShowWifiIconInCallLog(context, row.features())) {
+      wifiIcon.setVisibility(View.VISIBLE);
+      wifiIcon.setImageTintList(colorStateList);
+    } else {
+      wifiIcon.setVisibility(View.GONE);
+    }
+
+    // Handle Assisted Dialing Icon
+    if ((row.features() & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
+        == TelephonyManagerCompat.FEATURES_ASSISTED_DIALING) {
+      assistedDialIcon.setVisibility(View.VISIBLE);
+      assistedDialIcon.setImageTintList(colorStateList);
+    } else {
+      assistedDialIcon.setVisibility(View.GONE);
+    }
   }
 
-  private void setSecondaryCallTypes(CoalescedRow row) {
-    // Only call type icon is shown before the secondary text.
-    secondaryCallTypeIconsView.clear();
-    secondaryCallTypeIconsView.add(row.callType());
+  private void setCallTypeIcon(CoalescedRow row) {
+    @DrawableRes int resId;
+    switch (row.callType()) {
+      case AppCompatConstants.CALLS_INCOMING_TYPE:
+      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
+        resId = R.drawable.quantum_ic_call_received_vd_theme_24;
+        break;
+      case AppCompatConstants.CALLS_OUTGOING_TYPE:
+        resId = R.drawable.quantum_ic_call_made_vd_theme_24;
+        break;
+      case AppCompatConstants.CALLS_MISSED_TYPE:
+        resId = R.drawable.quantum_ic_call_missed_vd_theme_24;
+        break;
+      case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
+        throw new IllegalStateException("Voicemails not expected in call log");
+      case AppCompatConstants.CALLS_BLOCKED_TYPE:
+        resId = R.drawable.quantum_ic_block_vd_theme_24;
+        break;
+      default:
+        // It is possible for users to end up with calls with unknown call types in their
+        // call history, possibly due to 3rd party call log implementations (e.g. to
+        // distinguish between rejected and missed calls). Instead of crashing, just
+        // assume that all unknown call types are missed calls.
+        resId = R.drawable.quantum_ic_call_missed_vd_theme_24;
+        break;
+    }
+    callTypeIcon.setImageResource(resId);
 
-    // TODO(zachh): Per new mocks, may need to add method to CallTypeIconsView to disable coloring.
+    if (isNewMissedCall(row)) {
+      callTypeIcon.setImageTintList(
+          ColorStateList.valueOf(context.getColor(R.color.call_type_icon_unread_color)));
+    } else {
+      callTypeIcon.setImageTintList(
+          ColorStateList.valueOf(context.getColor(R.color.call_type_icon_read_color)));
+    }
   }
 
   private void setPhoneAccounts(CoalescedRow row) {
@@ -172,6 +238,8 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       phoneAccountView.setText(row.phoneAccountLabel());
       phoneAccountView.setTextColor(row.phoneAccountColor());
       phoneAccountView.setVisibility(View.VISIBLE);
+    } else {
+      phoneAccountView.setVisibility(View.GONE);
     }
   }
 

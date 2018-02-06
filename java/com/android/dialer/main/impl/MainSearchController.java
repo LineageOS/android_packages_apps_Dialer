@@ -84,8 +84,17 @@ final class MainSearchController implements SearchBarListener {
     this.toolbar = toolbar;
   }
 
+  /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
+  public void showDialpadFromNewIntent(boolean animate) {
+    showDialpad(animate, true);
+  }
+
   /** Shows the dialpad, hides the FAB and slides the toolbar off screen. */
   public void showDialpad(boolean animate) {
+    showDialpad(animate, false);
+  }
+
+  private void showDialpad(boolean animate, boolean fromNewIntent) {
     Assert.checkArgument(!isDialpadVisible());
 
     fab.hide();
@@ -106,9 +115,11 @@ final class MainSearchController implements SearchBarListener {
     // Show Dialpad
     if (getDialpadFragment() == null) {
       DialpadFragment dialpadFragment = new DialpadFragment();
+      dialpadFragment.setStartedFromNewIntent(fromNewIntent);
       transaction.add(R.id.dialpad_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG);
     } else {
       DialpadFragment dialpadFragment = getDialpadFragment();
+      dialpadFragment.setStartedFromNewIntent(fromNewIntent);
       transaction.show(dialpadFragment);
     }
     transaction.commit();
