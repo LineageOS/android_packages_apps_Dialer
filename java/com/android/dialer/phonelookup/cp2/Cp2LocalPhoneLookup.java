@@ -495,10 +495,18 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                         } else if (deletedPhoneNumbers.contains(dialerPhoneNumber)) {
                           infoBuilder.clear();
                         } else if (unprocessableNumbers.contains(dialerPhoneNumber)) {
-                          // Don't clear the existing info when the number is unprocessable. It's
-                          // likely that the existing info is up-to-date so keep it in place so that
-                          // the UI doesn't pop when the query is completed at display time.
-                          infoBuilder.setIsIncomplete(true);
+                          // Don't ever set the "incomplete" bit for numbers which are empty; this
+                          // causes unnecessary render time work because there will never be contact
+                          // information for an empty number. It is also required to pass the
+                          // assertion check in the new voicemail fragment, which verifies that no
+                          // voicemails rows are considered "incomplete" (the voicemail fragment
+                          // does not have the ability to fetch information at render time).
+                          if (!dialerPhoneNumber.getNormalizedNumber().isEmpty()) {
+                            // Don't clear the existing info when the number is unprocessable. It's
+                            // likely that the existing info is up-to-date so keep it in place so
+                            // that the UI doesn't pop when the query is completed at display time.
+                            infoBuilder.setIsIncomplete(true);
+                          }
                         }
 
                         // If the DialerPhoneNumber didn't change, add the unchanged existing info.

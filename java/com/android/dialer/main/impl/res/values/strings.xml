@@ -38,15 +38,6 @@
   <!-- A11y announcement to let users know a button will let them view their contacts [CHAR LIMIT=NONE] -->
   <string name="description_contacts">View Contacts</string>
 
-  <!-- Tab text to show users their call log/call history [CHAR LIMIT=10] -->
-  <string name="tab_title_call_history">Call History</string>
-  <!-- Tab text to show users their favorite contacts that they can call in 1 click [CHAR LIMIT=10] -->
-  <string name="tab_title_speed_dial">Speed Dial</string>
-  <!-- Tab text to show users their voicemails  [CHAR LIMIT=10] -->
-  <string name="tab_title_voicemail">Voicemail</string>
-  <!-- Tab text to show users their contacts  [CHAR LIMIT=10] -->
-  <string name="tab_title_contacts">Contacts</string>
-
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <string name="voice_search_not_available">Voice search not available</string>
 </resources>

@@ -16,7 +16,8 @@
   -->
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-  <solid android:color="@color/dialer_secondary_color"/>
-  <size android:height="14dp" android:width="14dp"/>
+    android:shape="rectangle">
+  <solid android:color="@color/dialer_theme_color"/>
+  <corners android:radius="18dp"/>
+  <stroke android:color="@color/background_dialer_white" android:width="2dp"/>
 </shape>

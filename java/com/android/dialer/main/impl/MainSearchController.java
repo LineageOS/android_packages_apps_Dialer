@@ -36,6 +36,7 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
+import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
