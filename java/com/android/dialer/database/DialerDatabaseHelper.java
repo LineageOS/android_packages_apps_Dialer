@@ -374,7 +374,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       }
 
       do {
-        Long deleteContactId = deletedContactCursor.getLong(DeleteContactQuery.DELETED_CONTACT_ID);
+        if (deletedContactCursor.isNull(DeleteContactQuery.DELETED_CONTACT_ID)) {
+          LogUtil.i("DialerDatabaseHelper.removeDeletedContacts", "null contact id, skipping row");
+          continue;
+        }
+
+        long deleteContactId = deletedContactCursor.getLong(DeleteContactQuery.DELETED_CONTACT_ID);
 
         Selection smartDialSelection =
             Selection.column(SmartDialDbColumns.CONTACT_ID).is("=", deleteContactId);
