@@ -25,6 +25,8 @@
   <dimen name="call_log_entry_photo_text_margin">8dp</dimen>
   <dimen name="call_log_entry_menu_button_size">48dp</dimen>
 
+  <dimen name="voicemail_transcription_text_size">14sp</dimen>
+
   <dimen name="voicemail_icon_margin">12dp</dimen>
   <dimen name="voicemail_icon_size">16dp</dimen>
 
