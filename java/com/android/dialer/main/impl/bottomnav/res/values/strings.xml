@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,7 +14,13 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
 <resources>
-  <color name="bubble_primary_background_darken">#33000000</color>
+  <!-- Tab text to show users their call log/call history [CHAR LIMIT=10] -->
+  <string name="tab_title_call_history">Recents</string>
+  <!-- Tab text to show users their favorite contacts that they can call in 1 click [CHAR LIMIT=10] -->
+  <string name="tab_title_speed_dial">Favorites</string>
+  <!-- Tab text to show users their voicemails  [CHAR LIMIT=10] -->
+  <string name="tab_title_voicemail">Voicemail</string>
+  <!-- Tab text to show users their contacts  [CHAR LIMIT=10] -->
+  <string name="tab_title_contacts">Contacts</string>
 </resources>

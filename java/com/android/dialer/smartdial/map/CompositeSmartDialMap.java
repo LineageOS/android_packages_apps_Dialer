@@ -20,7 +20,6 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.util.SimpleArrayMap;
 import com.android.dialer.compat.CompatUtils;
-import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.google.common.base.Optional;
 
 /**
@@ -35,8 +34,6 @@ import com.google.common.base.Optional;
  */
 @SuppressWarnings("Guava")
 public class CompositeSmartDialMap {
-  @VisibleForTesting
-  public static final String FLAG_ENABLE_DUAL_ALPHABETS = "enable_dual_alphabets_on_t9";
 
   private static final SmartDialMap DEFAULT_MAP = LatinSmartDialMap.getInstance();
 
@@ -160,10 +157,6 @@ public class CompositeSmartDialMap {
 
   @VisibleForTesting
   static Optional<SmartDialMap> getExtraMap(Context context) {
-    if (!ConfigProviderBindings.get(context).getBoolean(FLAG_ENABLE_DUAL_ALPHABETS, false)) {
-      return Optional.absent();
-    }
-
     String languageCode = CompatUtils.getLocale(context).getISO3Language();
     return EXTRA_MAPS.containsKey(languageCode)
         ? Optional.of(EXTRA_MAPS.get(languageCode))

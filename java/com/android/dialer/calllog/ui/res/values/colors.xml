@@ -14,9 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<shape
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-  <solid android:color="@color/dialer_secondary_color"/>
-  <size android:height="14dp" android:width="14dp"/>
-</shape>
+
+<resources>
+  <color name="feature_icon_read_color">#9E9E9E</color>
+  <color name="feature_icon_unread_color">#474747</color>
+
+  <color name="call_type_icon_read_color">#757575</color>
+  <color name="call_type_icon_unread_color">#D32F2F</color>
+</resources>

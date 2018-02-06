@@ -75,11 +75,12 @@
     <!-- TODO(a bug): Fix text cropping issue, make text selectable -->
     <TextView
         android:id="@+id/transcription_text"
-        style="@style/SecondaryText"
+        style="@style/PrimaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"
         android:layout_gravity="center_vertical"
+        android:textSize="@dimen/voicemail_transcription_text_size"
         android:visibility="gone"/>
 
     <TextView

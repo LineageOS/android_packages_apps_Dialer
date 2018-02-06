@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,13 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="?android:colorControlHighlight">
-  <item>
-    <shape>
-      <corners android:radius="@dimen/bubble_size"/>
-      <solid android:color="@android:color/white"/>
-    </shape>
-  </item>
-</ripple>
+<resources>
+  <color name="bottom_nav_icon_selected">@color/dialer_theme_color</color>
+  <color name="bottom_nav_icon_deselected">@color/dialer_secondary_text_color</color>
+</resources>

@@ -22,8 +22,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.main.MainActivityPeer;
-import com.android.dialer.main.impl.BottomNavBar.OnBottomNavTabSelectedListener;
-import com.android.dialer.main.impl.BottomNavBar.TabIndex;
+import com.android.dialer.main.impl.bottomnav.BottomNavBar;
+import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
+import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 
 /** MainActivityPeer that implements the new fragments. */
