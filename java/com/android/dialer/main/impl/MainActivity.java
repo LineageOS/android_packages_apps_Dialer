@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDismissedListener;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
@@ -31,7 +31,7 @@ import com.android.dialer.util.TransactionSafeActivity;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
 // TODO(calderwoodra): Do not extend TransactionSafeActivity after new SpeedDial is launched
-public final class MainActivity extends TransactionSafeActivity
+public class MainActivity extends TransactionSafeActivity
     implements MainActivityPeer.PeerSupplier,
         // TODO(calderwoodra): remove these 2 interfaces when we migrate to new speed dial fragment
         InteractionErrorListener,
@@ -45,9 +45,7 @@ public final class MainActivity extends TransactionSafeActivity
 
   /** Returns intent that will open MainActivity to the specified tab. */
   public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
-    if (ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("nui_peer_enabled", false)) {
+    if (ConfigProviderBindings.get(context).getBoolean("nui_peer_enabled", false)) {
       // TODO(calderwoodra): implement this in NewMainActivityPeer
       return null;
     }
@@ -68,14 +66,17 @@ public final class MainActivity extends TransactionSafeActivity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     LogUtil.enterBlock("MainActivity.onCreate");
-    if (ConfigProviderComponent.get(this)
-        .getConfigProvider()
-        .getBoolean("nui_peer_enabled", false)) {
-      activePeer = new NewMainActivityPeer(this);
-    } else {
-      activePeer = new OldMainActivityPeer(this);
-    }
+    // If peer was set by the super, don't reset it.
+    activePeer = getNewPeer();
     activePeer.onActivityCreate(savedInstanceState);
+  }
+
+  protected MainActivityPeer getNewPeer() {
+    if (ConfigProviderBindings.get(this).getBoolean("nui_peer_enabled", false)) {
+      return new NewMainActivityPeer(this);
+    } else {
+      return new OldMainActivityPeer(this);
+    }
   }
 
   @Override
