@@ -388,7 +388,7 @@ public class CallingAccountSelector implements PreCallAction {
       if (cursor == null || !cursor.moveToFirst()) {
         return Optional.absent();
       }
-      return Optional.of(cursor.getString(0));
+      return Optional.fromNullable(cursor.getString(0));
     }
   }
 

@@ -38,6 +38,8 @@ public interface SuggestionProvider {
     USER_SET,
     // The user has selected the SIM for all contacts on the account.
     ACCOUNT,
+    // Unspecified reason.
+    OTHER,
   }
 
   /** The suggestion. */
