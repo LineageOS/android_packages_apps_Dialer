@@ -43,6 +43,7 @@ import android.util.ArraySet;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.app.DialtactsActivity;
+import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
@@ -470,8 +471,13 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
    * @param callUri Uri of the call to jump to. May be null
    */
   private PendingIntent createCallLogPendingIntent(@Nullable Uri callUri) {
-    Intent contentIntent =
-        DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_HISTORY);
+    Intent contentIntent;
+    if (MainComponent.isNuiComponentEnabled(context)) {
+      contentIntent = MainComponent.getShowCallLogIntent(context);
+    } else {
+      contentIntent =
+          DialtactsActivity.getShowTabIntent(context, DialtactsPagerAdapter.TAB_INDEX_HISTORY);
+    }
     // TODO (a bug): scroll to call
     contentIntent.setData(callUri);
     return PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);

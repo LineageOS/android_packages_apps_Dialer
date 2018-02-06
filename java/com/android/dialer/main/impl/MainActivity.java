@@ -26,6 +26,7 @@ import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDism
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
 import com.android.dialer.main.MainActivityPeer;
+import com.android.dialer.main.impl.BottomNavBar.TabIndex;
 import com.android.dialer.util.TransactionSafeActivity;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
@@ -37,6 +38,21 @@ public final class MainActivity extends TransactionSafeActivity
         DisambigDialogDismissedListener {
 
   private MainActivityPeer activePeer;
+
+  public static Intent getShowCallLogIntent(Context context) {
+    return getShowTabIntent(context, TabIndex.CALL_LOG);
+  }
+
+  /** Returns intent that will open MainActivity to the specified tab. */
+  public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
+    if (ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean("nui_peer_enabled", false)) {
+      // TODO(calderwoodra): implement this in NewMainActivityPeer
+      return null;
+    }
+    return OldMainActivityPeer.getShowTabIntent(context, tabIndex);
+  }
 
   /**
    * @param context Context of the application package implementing MainActivity class.

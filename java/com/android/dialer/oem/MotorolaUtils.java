@@ -18,6 +18,7 @@ package com.android.dialer.oem;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
+import android.support.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PackageUtils;
@@ -40,7 +41,7 @@ public class MotorolaUtils {
   private static final String HD_CALL_FEATRURE = "com.motorola.software.sprint.hd_call";
   // This is used to check if a Motorola device supports WiFi call feature, by checking if a certain
   // package is enabled.
-  private static final String WIFI_CALL_PACKAGE_NAME = "com.motorola.sprintwfc";
+  @VisibleForTesting public static final String WIFI_CALL_PACKAGE_NAME = "com.motorola.sprintwfc";
   // Thi is used to check if a Motorola device supports hidden menu feature.
   private static final String HIDDEN_MENU_FEATURE = "com.motorola.software.sprint.hidden_menu";
 
@@ -125,5 +126,11 @@ public class MotorolaUtils {
       hasCheckedSprintWifiCall = true;
     }
     return supportSprintWifiCall;
+  }
+
+  @VisibleForTesting
+  public static void resetForTest() {
+    hasCheckedSprintWifiCall = false;
+    supportSprintWifiCall = false;
   }
 }

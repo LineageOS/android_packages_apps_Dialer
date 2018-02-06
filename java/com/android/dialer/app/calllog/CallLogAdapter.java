@@ -85,6 +85,7 @@ import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
+import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -382,10 +383,11 @@ public class CallLogAdapter extends GroupingListAdapter
               if (activityType == ACTIVITY_TYPE_DIALTACTS) {
                 if (v.getContext() instanceof CallLogFragmentListener) {
                   ((CallLogFragmentListener) v.getContext()).updateTabUnreadCounts();
-                } else if (v.getContext() instanceof FragmentUtilListener) {
+                } else if (v.getContext() instanceof MainActivityPeer.PeerSupplier) {
                   // This is really bad, but we must do this to prevent a dependency cycle, enforce
                   // best practices in new code, and avoid refactoring DialtactsActivity.
-                  ((FragmentUtilListener) v.getContext())
+                  ((FragmentUtilListener)
+                          ((MainActivityPeer.PeerSupplier) v.getContext()).getPeer())
                       .getImpl(CallLogFragmentListener.class)
                       .updateTabUnreadCounts();
                 } else {
