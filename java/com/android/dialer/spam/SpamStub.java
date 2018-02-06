@@ -21,6 +21,7 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
@@ -69,14 +70,26 @@ public class SpamStub implements Spam {
   }
 
   @Override
-  public ListenableFuture<ImmutableMap<DialerPhoneNumber, Boolean>> batchCheckSpamStatus(
+  public ListenableFuture<ImmutableMap<DialerPhoneNumber, SpamStatus>> batchCheckSpamStatus(
       ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers) {
     return backgroundExecutorService.submit(
         () -> {
-          ImmutableMap.Builder<DialerPhoneNumber, Boolean> resultBuilder =
+          ImmutableMap.Builder<DialerPhoneNumber, SpamStatus> resultBuilder =
               new ImmutableMap.Builder<>();
           for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
-            resultBuilder.put(dialerPhoneNumber, false);
+            resultBuilder.put(
+                dialerPhoneNumber,
+                new SpamStatus() {
+                  @Override
+                  public boolean isSpam() {
+                    return false;
+                  }
+
+                  @Override
+                  public Optional<Long> getTimestampMillis() {
+                    return Optional.absent();
+                  }
+                });
           }
           return resultBuilder.build();
         });
