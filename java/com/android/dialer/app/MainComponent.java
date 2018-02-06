@@ -111,6 +111,14 @@ public class MainComponent {
     return intent;
   }
 
+  public static Intent getShowVoicemailIntent(Context context) {
+    Intent intent = new Intent();
+    intent.setComponent(new ComponentName(context, getComponentName()));
+    intent.setAction("ACTION_SHOW_TAB");
+    intent.putExtra("EXTRA_SHOW_TAB", 3);
+    return intent;
+  }
+
   private static String getComponentName() {
     return "com.android.dialer.main.impl.MainActivity";
   }
