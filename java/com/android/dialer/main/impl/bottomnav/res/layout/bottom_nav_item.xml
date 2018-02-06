@@ -14,47 +14,49 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<com.android.dialer.main.impl.BottomNavItem
+<com.android.dialer.main.impl.bottomnav.BottomNavItem
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="80dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="10dp"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp"
+    android:minHeight="56dp"
     android:gravity="center"
-    android:theme="@style/Theme.AppCompat"
     android:background="?android:selectableItemBackgroundBorderless">
 
   <FrameLayout
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="2dp">
+      android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/bottom_nav_item_image"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_margin="4dp"/>
+        android:layout_marginTop="7dp"/>
 
     <TextView
         android:id="@+id/notification_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:minHeight="20dp"
+        android:minWidth="18dp"
         android:gravity="center"
         android:textSize="12sp"
         android:textColor="@color/dialer_primary_text_color_white"
         android:background="@drawable/notification_badge"
-        android:visibility="gone"/>
+        android:fontFamily="sans-serif-medium"
+        android:visibility="invisible"/>
   </FrameLayout>
 
   <TextView
       android:id="@+id/bottom_nav_item_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
       android:textSize="12sp"
+      android:textColor="@color/dialer_theme_color"
       android:gravity="center_horizontal"/>
-</com.android.dialer.main.impl.BottomNavItem>
+</com.android.dialer.main.impl.bottomnav.BottomNavItem>

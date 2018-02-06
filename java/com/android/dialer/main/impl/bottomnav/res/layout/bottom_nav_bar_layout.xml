@@ -14,12 +14,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<com.android.dialer.main.impl.BottomNavBar
+<com.android.dialer.main.impl.bottomnav.BottomNavBar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/dialer_theme_color"
+    android:background="@color/background_dialer_white"
     android:elevation="8dp">
 
   <include
@@ -49,4 +49,4 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       layout="@layout/bottom_nav_item"/>
-</com.android.dialer.main.impl.BottomNavBar>
+</com.android.dialer.main.impl.bottomnav.BottomNavBar>
