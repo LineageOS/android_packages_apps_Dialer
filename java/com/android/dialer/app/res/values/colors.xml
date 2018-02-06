@@ -80,4 +80,7 @@
   <color name="blocked_number_disabled_emergency_background_color">#E0E0E0</color>
   <color name="add_blocked_number_icon_color">#bdbdbd</color>
 
+  <color name="voicemail_donation_promo_positive_button_text_color">#FF2A56C6</color>
+  <color name="voicemail_donation_promo_negative_button_text_color">#FF757575</color>
+
 </resources>

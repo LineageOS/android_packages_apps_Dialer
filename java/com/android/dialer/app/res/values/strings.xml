@@ -675,33 +675,38 @@
        [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_failed_no_speech">Transcript not available. No speech detected.</string>
 
-  <!-- Prompt asking the user to rate the quality of the voicemail transcription [CHAR LIMIT=30]
-       voicemail_transcription_rating, voicemail_transcription_rating_good,
-       voicemail_transcription_rating_separator and voicemail_transcription_rating_bad are
-       used together to form the rating prompt: 'Rate transcription quality   Good or Bad'
-       where 'Good' and 'Bad' are clickable links. -->
+  <!-- Title of voicemail donation promo dialog, show after clicking a 'thumbs up' rating icon
+       [CHAR LIMIT=64] -->
+  <string name="voicemail_donation_promo_good_title">Thanks! Would you like to help us improve transcriptions?</string>
+
+  <!-- Title of voicemail donation promo dialog, show after clicking a 'thumbs up' rating icon
+       [CHAR LIMIT=64] -->
+  <string name="voicemail_donation_promo_bad_title">Sorry. Would you like to help us improve transcriptions?</string>
+
+  <!-- Content of voicemail donation promo dialog
+       [CHAR LIMIT=NONE] -->
+  <string name="voicemail_donation_promo_content">
+    Let Google review your voicemail messages to improve transcription quality. Your
+    voicemail messages will not be tied to your Google Account.
+  </string>
+
+  <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
+  <string name="voicemail_donation_promo_learn_more">Learn&#160;more</string>
+
+  <!-- TODO(mdooley): get real url -->
+  <string translatable="false" name="voicemail_donation_promo_learn_more_url">https:www.google.com</string>
+
+  <!-- Label for the voicemail donation promo dialog opt-in button
+       [CHAR LIMIT=20] -->
+  <string name="voicemail_donation_promo_opt_in">Yes, I\'m in</string>
+
+  <!-- Label for the voicemail donation promo dialog opt-out button
+       [CHAR LIMIT=20] -->
+  <string name="voicemail_donation_promo_opt_out">No thanks</string>
+
+  <!-- Prompt asking the user to rate the quality of the voicemail transcription
+       [CHAR LIMIT=30] -->
   <string name="voicemail_transcription_rating">Rate transcription quality</string>
-
-  <!-- Rating choice indicating that the voicemail transcription was good [CHAR LIMIT=10]
-       voicemail_transcription_rating, voicemail_transcription_rating_good,
-       voicemail_transcription_rating_separator and voicemail_transcription_rating_bad are
-       used together to form the rating prompt: 'Rate transcription quality   Good or Bad'
-       where 'Good' and 'Bad' are clickable links. -->
-  <string name="voicemail_transcription_rating_good">Good</string>
-
-  <!-- Rating choice indicating that the voicemail transcription was bad [CHAR LIMIT=10]
-       voicemail_transcription_rating, voicemail_transcription_rating_good,
-       voicemail_transcription_rating_separator and voicemail_transcription_rating_bad are
-       used together to form the rating prompt: 'Rate transcription quality   Good or Bad'
-       where 'Good' and 'Bad' are clickable links. -->
-  <string name="voicemail_transcription_rating_bad">Bad</string>
-
-  <!-- Separator between the good and bad transcription rating choices [CHAR LIMIT=10]
-       voicemail_transcription_rating, voicemail_transcription_rating_good,
-       voicemail_transcription_rating_separator and voicemail_transcription_rating_bad are
-       used together to form the rating prompt: 'Rate transcription quality   Good or Bad'
-       where 'Good' and 'Bad' are clickable links. -->
-  <string name="voicemail_transcription_rating_separator"> or </string>
 
   <!-- Message displayed after user has rated a voicemail transcription [CHAR LIMIT=30] -->
   <string name="voicemail_transcription_rating_thanks">Thanks for your feedback</string>

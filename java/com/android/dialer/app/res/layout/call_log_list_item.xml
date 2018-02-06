@@ -193,36 +193,27 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
-                  android:gravity="start"
+                  android:gravity="start|center_vertical"
                   android:focusable="true"
                   android:text="@string/voicemail_transcription_rating"/>
 
-              <TextView
-                  style="@style/TranscriptionQualityRatingLink"
+              <ImageView
+                  style="@style/TranscriptionQualityRatingIcon"
                   android:id="@+id/voicemail_transcription_rating_good"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:gravity="end"
+                  android:gravity="end|center_vertical"
                   android:focusable="true"
-                  android:text="@string/voicemail_transcription_rating_good"/>
+                  android:src="@drawable/quantum_ic_thumb_up_grey600_24"/>
 
-              <TextView
-                  style="@style/TranscriptionQualityRating"
-                  android:id="@+id/voicemail_transcription_rating_separator"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:gravity="end"
-                  android:focusable="true"
-                  android:text="@string/voicemail_transcription_rating_separator"/>
-
-              <TextView
-                  style="@style/TranscriptionQualityRatingLink"
+              <ImageView
+                  style="@style/TranscriptionQualityRatingIcon"
                   android:id="@+id/voicemail_transcription_rating_bad"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:gravity="end"
+                  android:gravity="end|center_vertical"
                   android:focusable="true"
-                  android:text="@string/voicemail_transcription_rating_bad"/>
+                  android:src="@drawable/quantum_ic_thumb_down_grey600_24"/>
 
             </LinearLayout>
 
