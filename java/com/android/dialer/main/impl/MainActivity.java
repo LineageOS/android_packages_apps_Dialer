@@ -26,7 +26,7 @@ import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDism
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
 import com.android.dialer.main.MainActivityPeer;
-import com.android.dialer.main.impl.BottomNavBar.TabIndex;
+import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.util.TransactionSafeActivity;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
