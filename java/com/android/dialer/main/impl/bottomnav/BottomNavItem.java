@@ -14,15 +14,17 @@
  * limitations under the License
  */
 
-package com.android.dialer.main.impl;
+package com.android.dialer.main.impl.bottomnav;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.Px;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -64,10 +66,25 @@ final class BottomNavItem extends LinearLayout {
   void setNotificationCount(int count) {
     Assert.checkArgument(count >= 0, "Invalid count: " + count);
     if (count == 0) {
-      notificationBadge.setVisibility(View.GONE);
+      notificationBadge.setVisibility(View.INVISIBLE);
     } else {
+      String countString = count > 99 ? "99+" : String.format(Integer.toString(count));
       notificationBadge.setVisibility(View.VISIBLE);
-      notificationBadge.setText(String.format(Integer.toString(count)));
+      notificationBadge.setText(countString);
+
+      @Px int margin;
+      if (countString.length() == 1) {
+        margin = getContext().getResources().getDimensionPixelSize(R.dimen.badge_margin_length_1);
+      } else if (countString.length() == 2) {
+        margin = getContext().getResources().getDimensionPixelSize(R.dimen.badge_margin_length_2);
+      } else {
+        margin = getContext().getResources().getDimensionPixelSize(R.dimen.badge_margin_length_3);
+      }
+
+      FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) image.getLayoutParams();
+      params.setMarginStart(margin);
+      params.setMarginEnd(margin);
+      image.setLayoutParams(params);
     }
   }
 }
