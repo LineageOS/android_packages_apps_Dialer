@@ -60,7 +60,6 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.ScreenEvent;
@@ -172,11 +171,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   protected void onCreate(Bundle bundle) {
     Trace.beginSection("InCallActivity.onCreate");
     super.onCreate(bundle);
-
-    if (getIntent().getBooleanExtra(ReturnToCallController.RETURN_TO_CALL_EXTRA_KEY, false)) {
-      Logger.get(this).logImpression(DialerImpression.Type.BUBBLE_PRIMARY_BUTTON_RETURN_TO_CALL);
-      getIntent().removeExtra(ReturnToCallController.RETURN_TO_CALL_EXTRA_KEY);
-    }
 
     if (bundle != null) {
       didShowAnswerScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_ANSWER_SCREEN);

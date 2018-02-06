@@ -40,7 +40,6 @@ import com.android.incallui.speakeasy.SpeakEasyComponent;
  */
 public class InCallServiceImpl extends InCallService {
 
-  private ReturnToCallController returnToCallController;
   private NewReturnToCallController newReturnToCallController;
   private CallList.Listener feedbackListener;
   // We only expect there to be one speakEasyCallManager to be instantiated at a time.
@@ -112,9 +111,6 @@ public class InCallServiceImpl extends InCallService {
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
-    if (ReturnToCallController.isEnabled(this)) {
-      returnToCallController = new ReturnToCallController(this);
-    }
     if (NewReturnToCallController.isEnabled(this)) {
       newReturnToCallController =
           new NewReturnToCallController(this, ContactInfoCache.getInstance(context));
@@ -145,10 +141,6 @@ public class InCallServiceImpl extends InCallService {
     // Tear down the InCall system
     InCallPresenter.getInstance().tearDown();
     TelecomAdapter.getInstance().clearInCallService();
-    if (returnToCallController != null) {
-      returnToCallController.tearDown();
-      returnToCallController = null;
-    }
     if (newReturnToCallController != null) {
       newReturnToCallController.tearDown();
       newReturnToCallController = null;
