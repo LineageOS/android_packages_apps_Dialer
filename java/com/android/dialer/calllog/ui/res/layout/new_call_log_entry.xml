@@ -19,33 +19,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/call_log_entry_top_margin"
-    android:paddingTop="@dimen/call_log_entry_padding_top_start"
-    android:paddingBottom="@dimen/call_log_entry_padding_bottom_end"
-    android:paddingStart="@dimen/call_log_entry_padding_top_start"
-    android:paddingEnd="@dimen/call_log_entry_padding_bottom_end"
-    android:gravity="center_vertical">
+    android:minHeight="72dp">
 
   <QuickContactBadge
       android:id="@+id/quick_contact_photo"
-      android:layout_width="@dimen/call_log_entry_photo_size"
-      android:layout_height="@dimen/call_log_entry_photo_size"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
       android:layout_centerVertical="true"
-      android:padding="@dimen/call_log_entry_photo_padding"
       android:focusable="true"/>
 
-  <LinearLayout
+  <!-- The frame layout is necessary to avoid clipping the icons and ellipsize the text when the
+       content is too wide to fit.
+   -->
+  <FrameLayout
+      android:id="@+id/primary_row"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerVertical="true"
       android:layout_toEndOf="@+id/quick_contact_photo"
-      android:layout_toStartOf="@+id/menu_button"
-      android:orientation="vertical">
+      android:layout_toStartOf="@+id/menu_button">
 
-    <!-- TODO(zachh): Optimize this layout -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
         android:orientation="horizontal">
 
       <TextView
@@ -53,57 +51,95 @@
           style="@style/PrimaryText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"/>
+          android:layout_weight="1"
+          android:layout_marginEnd="6dp"
+          android:ellipsize="end"
+          android:lineSpacingMultiplier="1.5"
+          android:singleLine="true"/>
 
-      <!-- HD and Wifi icons are shown adjacent to primary text. Call types are shown adjacent to
-           secondary text (below). -->
-      <com.android.dialer.calllogutils.CallTypeIconsView
-          android:id="@+id/primary_call_type_icons"
+
+      <ImageView
+          android:id="@+id/hd_icon"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="12dp"
-          android:layout_gravity="center_vertical"/>
+          android:layout_height="18dp"
+          android:layout_gravity="center_vertical"
+          android:src="@drawable/quantum_ic_hd_vd_theme_24"
+          />
 
-    </LinearLayout>
-
-    <!-- TODO(zachh): Optimize this layout -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-      <!-- Only call types are shown adjacent to secondary text. HD and Wifi icons are shown
-           adjacent to primary text (above). -->
-      <com.android.dialer.calllogutils.CallTypeIconsView
-          android:id="@+id/secondary_call_type_icons"
+      <ImageView
+          android:id="@+id/wifi_icon"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="12dp"
-          android:layout_gravity="center_vertical"/>
+          android:layout_height="18dp"
+          android:layout_gravity="center_vertical"
+          android:src="@drawable/quantum_ic_signal_wifi_4_bar_vd_theme_24"
+          />
+
+      <ImageView
+          android:id="@+id/assisted_dial_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="18dp"
+          android:layout_gravity="center_vertical"
+          android:src="@drawable/quantum_ic_language_vd_theme_24"
+          />
 
       <TextView
-          android:id="@+id/secondary_text"
-          style="@style/SecondaryText"
+          android:id="@+id/call_count"
+          style="@style/PrimaryText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"/>
+          android:layout_marginEnd="6dp"
+          android:lineSpacingMultiplier="1.5"/>
+
     </LinearLayout>
+  </FrameLayout>
+
+  <LinearLayout
+      android:id="@+id/secondary_row"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/primary_row"
+      android:layout_toEndOf="@+id/quick_contact_photo"
+      android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/call_type_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_gravity="center_vertical"
+        />
 
     <TextView
-        android:id="@+id/phone_account"
+        android:id="@+id/secondary_text"
         style="@style/SecondaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"
-        android:visibility="gone"/>
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.4"
+        android:singleLine="true"/>
   </LinearLayout>
+
+  <TextView
+      android:id="@+id/phone_account"
+      style="@style/SecondaryText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/secondary_row"
+      android:layout_toEndOf="@+id/quick_contact_photo"
+      android:ellipsize="end"
+      android:singleLine="true"
+      android:visibility="gone"/>
 
   <ImageView
       android:id="@+id/menu_button"
-      android:layout_width="@dimen/call_log_entry_menu_button_size"
-      android:layout_height="@dimen/call_log_entry_menu_button_size"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:layout_marginBottom="12dp"
+      android:layout_marginStart="4dp"
+      android:layout_marginEnd="4dp"
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
+      android:padding="12dp"
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_vd_theme_24"

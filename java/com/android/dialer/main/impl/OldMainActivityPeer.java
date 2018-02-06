@@ -31,6 +31,7 @@ import android.provider.ContactsContract.QuickContact;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.telecom.PhoneAccount;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -91,6 +92,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private static final String KEY_CURRENT_TAB = "current_tab";
   private static final String KEY_LAST_TAB = "last_tab";
 
+  /** Action and extra to let the activity know which tab to open up to. */
+  private static final String ACTION_SHOW_TAB = "ACTION_SHOW_TAB";
+
+  private static final String EXTRA_SHOW_TAB = "EXTRA_SHOW_TAB";
+
   private final MainActivity mainActivity;
 
   // Contacts
@@ -124,6 +130,22 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private BottomNavBar bottomNav;
   private View snackbarContainer;
   private UiListener<String> getLastOutgoingCallListener;
+
+  public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
+    Intent intent = new Intent(context, MainActivity.class);
+    intent.setAction(ACTION_SHOW_TAB);
+    intent.putExtra(EXTRA_SHOW_TAB, tabIndex);
+    // TODO(calderwoodra): Do we need to set some URI data here
+    return intent;
+  }
+
+  static boolean isShowTabIntent(Intent intent) {
+    return ACTION_SHOW_TAB.equals(intent.getAction()) && intent.hasExtra(EXTRA_SHOW_TAB);
+  }
+
+  static @TabIndex int getTabFromIntent(Intent intent) {
+    return intent.getIntExtra(EXTRA_SHOW_TAB, -1);
+  }
 
   public OldMainActivityPeer(MainActivity mainActivity) {
     this.mainActivity = mainActivity;
@@ -193,13 +215,52 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       searchController.onRestoreInstanceState(savedInstanceState);
       bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
     } else {
-      lastTabController.selectLastTab();
+      showTabOnIntent(mainActivity.getIntent());
     }
   }
 
   @Override
   public void onNewIntent(Intent intent) {
-    lastTabController.selectLastTab();
+    showTabOnIntent(intent);
+  }
+
+  private void showTabOnIntent(Intent intent) {
+    if (isShowTabIntent(intent)) {
+      bottomNav.selectTab(getTabFromIntent(intent));
+      return;
+    }
+
+    if (isDialIntent(intent)) {
+      searchController.showDialpadFromNewIntent(false);
+      // Dialpad will grab the intent and populate the number
+      return;
+    }
+
+    if (lastTabController.isEnabled) {
+      lastTabController.selectLastTab();
+      return;
+    }
+
+    bottomNav.selectTab(TabIndex.SPEED_DIAL);
+  }
+
+  /** Returns true if the given intent contains a phone number to populate the dialer with */
+  private boolean isDialIntent(Intent intent) {
+    if (intent == null || intent.getData() == null) {
+      return false;
+    }
+
+    if (Intent.ACTION_DIAL.equals(intent.getAction())) {
+      return true;
+    }
+
+    if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+      Uri data = intent.getData();
+      if (data != null && PhoneAccount.SCHEME_TEL.equals(data.getScheme())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
