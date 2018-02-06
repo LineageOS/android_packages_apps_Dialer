@@ -657,8 +657,8 @@ public class StatusBarNotifier
     } else if (call.hasProperty(Details.PROPERTY_HAS_CDMA_VOICE_PRIVACY)) {
       return R.drawable.quantum_ic_phone_locked_vd_theme_24;
     }
-    // If ReturnToCall is enabled, use the static icon. The animated one will show in the bubble.
-    if (ReturnToCallController.isEnabled(context) || NewReturnToCallController.isEnabled(context)) {
+    // If NewReturnToCall is enabled, use the static icon. The animated one will show in the bubble.
+    if (NewReturnToCallController.isEnabled(context)) {
       return R.drawable.quantum_ic_call_vd_theme_24;
     } else {
       return R.drawable.on_going_call;
