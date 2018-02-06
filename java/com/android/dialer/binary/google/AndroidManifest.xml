@@ -106,7 +106,8 @@
     android:label="@string/applicationLabel"
     android:name="com.android.dialer.binary.google.GoogleStubDialerApplication"
     android:supportsRtl="true"
-    android:usesCleartextTraffic="false">
+    android:usesCleartextTraffic="false"
+    android:extractNativeLibs="false">
   </application>
 
 </manifest>
