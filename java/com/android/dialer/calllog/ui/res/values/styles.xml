@@ -31,8 +31,16 @@
     <item name="android:fontFamily">sans-serif</item>
   </style>
 
+  <style name="phoneaccount_textview">
+    <item name="android:fontFamily">sans-serif</item>
+  </style>
+
   <style name="secondary_textview_new_call">
     <item name="android:textColor">@color/missed_call</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="phoneaccount_textview_new_call">
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 
