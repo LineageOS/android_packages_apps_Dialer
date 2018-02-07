@@ -37,9 +37,6 @@ public interface NewBubble {
   /** Hide the bubble. */
   void hide();
 
-  /** Hide the bubble and reset to initial state */
-  void hideAndReset();
-
   /** Returns whether the bubble is currently visible */
   boolean isVisible();
 
