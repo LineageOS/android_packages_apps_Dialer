@@ -20,8 +20,11 @@ import android.content.Context;
 
 /** Used to display the main activity for Dialer. This hosts favorites, dial pad, search, etc... */
 public interface Main {
+
   boolean isNewUiEnabled(Context context);
 
   // TODO(38502365): Remove this when we're ready to launch the new UI. */
   void createNewUiLauncherShortcut(Context context);
+
+  void disableComponentForTesting(Context context);
 }
