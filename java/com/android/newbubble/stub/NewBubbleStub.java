@@ -36,9 +36,6 @@ public class NewBubbleStub implements NewBubble {
   public void hide() {}
 
   @Override
-  public void hideAndReset() {}
-
-  @Override
   public boolean isVisible() {
     return false;
   }
