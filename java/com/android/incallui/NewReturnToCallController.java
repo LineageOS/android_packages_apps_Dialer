@@ -119,14 +119,6 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     }
   }
 
-  private void hideAndReset() {
-    if (bubble != null) {
-      bubble.hideAndReset();
-    } else {
-      LogUtil.i("ReturnToCallController.reset", "reset() called without calling show()");
-    }
-  }
-
   private void show() {
     if (bubble == null) {
       bubble = startBubble();
@@ -189,7 +181,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
       if (!TelecomUtil.isInCall(context) || CallList.getInstance().getIncomingCall() != null) {
         bubble.showText(context.getText(R.string.incall_call_ended));
       }
-      hideAndReset();
+      hide();
     } else {
       startContactInfoSearch();
     }
@@ -258,7 +250,8 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     // Return to call
     actions.add(
         Action.builder()
-            .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_exit_to_app_vd_theme_24))
+            .setIconDrawable(
+                context.getDrawable(R.drawable.quantum_ic_exit_to_app_flip_vd_theme_24))
             .setIntent(fullScreen)
             .setName(context.getText(R.string.bubble_return_to_call))
             .setCheckable(false)
