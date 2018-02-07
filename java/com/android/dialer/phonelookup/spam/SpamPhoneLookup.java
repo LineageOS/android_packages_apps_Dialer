@@ -17,44 +17,115 @@
 package com.android.dialer.phonelookup.spam;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.SpamInfo;
 import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamStatus;
+import com.android.dialer.storage.Unencrypted;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import java.util.Map.Entry;
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for Spam info. */
 public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
 
+  @VisibleForTesting
+  static final String PREF_LAST_TIMESTAMP_PROCESSED = "spamPhoneLookupLastTimestampProcessed";
+
+  private final ListeningExecutorService lightweightExecutorService;
+  private final ListeningExecutorService backgroundExecutorService;
+  private final SharedPreferences sharedPreferences;
   private final Spam spam;
 
+  @Nullable private Long currentLastTimestampProcessed;
+
   @Inject
-  SpamPhoneLookup(Spam spam) {
+  SpamPhoneLookup(
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService,
+      @Unencrypted SharedPreferences sharedPreferences,
+      Spam spam) {
+    this.backgroundExecutorService = backgroundExecutorService;
+    this.lightweightExecutorService = lightweightExecutorService;
+    this.sharedPreferences = sharedPreferences;
     this.spam = spam;
   }
 
   @Override
   public ListenableFuture<SpamInfo> lookup(DialerPhoneNumber dialerPhoneNumber) {
-    // TODO(a bug): Use Spam to look up spam info.
-    return Futures.immediateFuture(SpamInfo.getDefaultInstance());
+    return Futures.transform(
+        spam.batchCheckSpamStatus(ImmutableSet.of(dialerPhoneNumber)),
+        spamStatusMap ->
+            SpamInfo.newBuilder()
+                .setIsSpam(Assert.isNotNull(spamStatusMap.get(dialerPhoneNumber)).isSpam())
+                .build(),
+        lightweightExecutorService);
   }
 
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
-    // TODO(a bug): Use Spam to check if its underlying data have been updated.
-    return Futures.immediateFuture(false);
+    ListenableFuture<Long> lastTimestampProcessedFuture =
+        backgroundExecutorService.submit(
+            () -> sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L));
+
+    return Futures.transformAsync(
+        lastTimestampProcessedFuture, spam::dataUpdatedSince, lightweightExecutorService);
   }
 
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, SpamInfo>> getMostRecentInfo(
       ImmutableMap<DialerPhoneNumber, SpamInfo> existingInfoMap) {
-    // TODO(a bug): Use Spam to retrieve the most recent spam info.
-    return Futures.immediateFuture(existingInfoMap);
+    currentLastTimestampProcessed = null;
+
+    ListenableFuture<ImmutableMap<DialerPhoneNumber, SpamStatus>> spamStatusMapFuture =
+        spam.batchCheckSpamStatus(existingInfoMap.keySet());
+
+    return Futures.transform(
+        spamStatusMapFuture,
+        spamStatusMap -> {
+          ImmutableMap.Builder<DialerPhoneNumber, SpamInfo> mostRecentSpamInfo =
+              new ImmutableMap.Builder<>();
+
+          for (Entry<DialerPhoneNumber, SpamStatus> dialerPhoneNumberAndSpamStatus :
+              spamStatusMap.entrySet()) {
+            DialerPhoneNumber dialerPhoneNumber = dialerPhoneNumberAndSpamStatus.getKey();
+            SpamStatus spamStatus = dialerPhoneNumberAndSpamStatus.getValue();
+            mostRecentSpamInfo.put(
+                dialerPhoneNumber, SpamInfo.newBuilder().setIsSpam(spamStatus.isSpam()).build());
+
+            Optional<Long> timestampMillis = spamStatus.getTimestampMillis();
+            if (timestampMillis.isPresent()) {
+              currentLastTimestampProcessed =
+                  currentLastTimestampProcessed == null
+                      ? timestampMillis.get()
+                      : Math.max(timestampMillis.get(), currentLastTimestampProcessed);
+            }
+          }
+
+          // If currentLastTimestampProcessed is null, it means none of the numbers in
+          // existingInfoMap has spam status in the underlying data source.
+          // We should set currentLastTimestampProcessed to the current timestamp to avoid
+          // triggering the bulk update flow repeatedly.
+          if (currentLastTimestampProcessed == null) {
+            currentLastTimestampProcessed = System.currentTimeMillis();
+          }
+
+          return mostRecentSpamInfo.build();
+        },
+        lightweightExecutorService);
   }
 
   @Override
@@ -69,8 +140,15 @@ public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
 
   @Override
   public ListenableFuture<Void> onSuccessfulBulkUpdate() {
-    // TODO(a bug): Properly implement this method.
-    return Futures.immediateFuture(null);
+    return backgroundExecutorService.submit(
+        () -> {
+          sharedPreferences
+              .edit()
+              .putLong(
+                  PREF_LAST_TIMESTAMP_PROCESSED, Assert.isNotNull(currentLastTimestampProcessed))
+              .apply();
+          return null;
+        });
   }
 
   @Override
