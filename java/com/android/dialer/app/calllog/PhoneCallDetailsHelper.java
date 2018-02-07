@@ -16,7 +16,9 @@
 
 package com.android.dialer.app.calllog;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -25,11 +27,18 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.TextAppearanceSpan;
+import android.text.style.URLSpan;
 import android.text.util.Linkify;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.dialer.app.R;
@@ -41,7 +50,9 @@ import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.DialerUtils;
+import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.transcribe.TranscriptionRatingHelper;
 import com.google.internal.communications.voicemailtranscription.v1.TranscriptionRatingValue;
@@ -55,6 +66,9 @@ public class PhoneCallDetailsHelper
         TranscriptionRatingHelper.FailureListener {
   /** The maximum number of icons will be shown to represent the call types in a group. */
   private static final int MAX_CALL_TYPE_ICONS = 3;
+
+  private static final String PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY =
+      "pref_voicemail_donation_promo_shown_key";
 
   private final Context context;
   private final Resources resources;
@@ -165,15 +179,10 @@ public class PhoneCallDetailsHelper
 
       String transcript = "";
       String branding = "";
-      boolean showRatingPrompt = false;
       if (!TextUtils.isEmpty(details.transcription)) {
         transcript = details.transcription;
 
-        // Show a transcription quality rating prompt or set the branding text if the voicemail was
-        // transcribed by google
-        if (shouldShowTranscriptionRating(details.transcriptionState, details.accountHandle)) {
-          showRatingPrompt = true;
-        } else if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
+        if (details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
             || details.transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE_AND_RATED) {
           branding = resources.getString(R.string.voicemail_transcription_branding_text);
         }
@@ -198,28 +207,25 @@ public class PhoneCallDetailsHelper
       }
 
       views.voicemailTranscriptionView.setText(transcript);
-      if (showRatingPrompt) {
-        views.voicemailTranscriptionBrandingView.setVisibility(View.GONE);
-        views.voicemailTranscriptionBrandingView.setText(branding);
+      views.voicemailTranscriptionBrandingView.setText(branding);
 
-        View ratingView = views.voicemailTranscriptionRatingView;
+      View ratingView = views.voicemailTranscriptionRatingView;
+      if (shouldShowTranscriptionRating(details.transcriptionState, details.accountHandle)) {
         ratingView.setVisibility(View.VISIBLE);
         ratingView
             .findViewById(R.id.voicemail_transcription_rating_good)
             .setOnClickListener(
                 view ->
                     recordTranscriptionRating(
-                        TranscriptionRatingValue.GOOD_TRANSCRIPTION, details));
+                        TranscriptionRatingValue.GOOD_TRANSCRIPTION, details, ratingView));
         ratingView
             .findViewById(R.id.voicemail_transcription_rating_bad)
             .setOnClickListener(
                 view ->
-                    recordTranscriptionRating(TranscriptionRatingValue.BAD_TRANSCRIPTION, details));
+                    recordTranscriptionRating(
+                        TranscriptionRatingValue.BAD_TRANSCRIPTION, details, ratingView));
       } else {
-        views.voicemailTranscriptionRatingView.setVisibility(View.GONE);
-
-        views.voicemailTranscriptionBrandingView.setVisibility(View.VISIBLE);
-        views.voicemailTranscriptionBrandingView.setText(branding);
+        ratingView.setVisibility(View.GONE);
       }
     }
 
@@ -237,22 +243,156 @@ public class PhoneCallDetailsHelper
 
   private boolean shouldShowTranscriptionRating(
       int transcriptionState, PhoneAccountHandle account) {
-    // TODO(mdooley): add a configurable random element here?
-    return transcriptionState == VoicemailCompat.TRANSCRIPTION_AVAILABLE
-        && VoicemailComponent.get(context)
-            .getVoicemailClient()
-            .isVoicemailDonationEnabled(context, account);
+    if (transcriptionState != VoicemailCompat.TRANSCRIPTION_AVAILABLE) {
+      return false;
+    }
+
+    VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
+    if (client.isVoicemailDonationEnabled(context, account)) {
+      return true;
+    }
+
+    // Also show the rating option if voicemail transcription is available (but not enabled)
+    // and the donation promo has not yet been shown.
+    if (client.isVoicemailDonationAvailable(context) && !hasSeenVoicemailDonationPromo(context)) {
+      return true;
+    }
+
+    return false;
   }
 
   private void recordTranscriptionRating(
-      TranscriptionRatingValue ratingValue, PhoneCallDetails details) {
+      TranscriptionRatingValue ratingValue, PhoneCallDetails details, View ratingView) {
     LogUtil.enterBlock("PhoneCallDetailsHelper.recordTranscriptionRating");
-    TranscriptionRatingHelper.sendRating(
-        context,
-        ratingValue,
-        Uri.parse(details.voicemailUri),
-        this::onRatingSuccess,
-        this::onRatingFailure);
+
+    if (shouldShowVoicemailDonationPromo(context)) {
+      showVoicemailDonationPromo(ratingValue, details, ratingView);
+    } else {
+      TranscriptionRatingHelper.sendRating(
+          context,
+          ratingValue,
+          Uri.parse(details.voicemailUri),
+          this::onRatingSuccess,
+          this::onRatingFailure);
+    }
+  }
+
+  static boolean shouldShowVoicemailDonationPromo(Context context) {
+    VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
+    return client.isVoicemailTranscriptionAvailable(context)
+        && client.isVoicemailDonationAvailable(context)
+        && !hasSeenVoicemailDonationPromo(context);
+  }
+
+  static boolean hasSeenVoicemailDonationPromo(Context context) {
+    return StorageComponent.get(context.getApplicationContext())
+        .unencryptedSharedPrefs()
+        .getBoolean(PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY, false);
+  }
+
+  private void showVoicemailDonationPromo(
+      TranscriptionRatingValue ratingValue, PhoneCallDetails details, View ratingView) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    builder.setMessage(getVoicemailDonationPromoContent());
+    builder.setPositiveButton(
+        R.string.voicemail_donation_promo_opt_in,
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(final DialogInterface dialog, final int button) {
+            LogUtil.i("PhoneCallDetailsHelper.showVoicemailDonationPromo", "onClick");
+            dialog.cancel();
+            recordPromoShown(context);
+            VoicemailComponent.get(context)
+                .getVoicemailClient()
+                .setVoicemailDonationEnabled(context, details.accountHandle, true);
+            TranscriptionRatingHelper.sendRating(
+                context,
+                ratingValue,
+                Uri.parse(details.voicemailUri),
+                PhoneCallDetailsHelper.this::onRatingSuccess,
+                PhoneCallDetailsHelper.this::onRatingFailure);
+            ratingView.setVisibility(View.GONE);
+          }
+        });
+    builder.setNegativeButton(
+        R.string.voicemail_donation_promo_opt_out,
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(final DialogInterface dialog, final int button) {
+            dialog.cancel();
+            recordPromoShown(context);
+            ratingView.setVisibility(View.GONE);
+          }
+        });
+    builder.setCancelable(true);
+    AlertDialog dialog = builder.create();
+
+    // Use a custom title to prevent truncation, sigh
+    TextView title = new TextView(context);
+    title.setText(
+        ratingValue == TranscriptionRatingValue.GOOD_TRANSCRIPTION
+            ? R.string.voicemail_donation_promo_good_title
+            : R.string.voicemail_donation_promo_bad_title);
+    title.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+    title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+    title.setTextColor(ContextCompat.getColor(context, R.color.dialer_primary_text_color));
+    title.setPadding(
+        dpsToPixels(context, 24), /* left */
+        dpsToPixels(context, 10), /* top */
+        dpsToPixels(context, 24), /* right */
+        dpsToPixels(context, 0)); /* bottom */
+    dialog.setCustomTitle(title);
+
+    dialog.show();
+
+    // Make the message link clickable and adjust the appearance of the message and buttons
+    TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+    textView.setLineSpacing(0, 1.2f);
+    textView.setMovementMethod(LinkMovementMethod.getInstance());
+    Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+    if (positiveButton != null) {
+      positiveButton.setTextColor(
+          context
+              .getResources()
+              .getColor(R.color.voicemail_donation_promo_positive_button_text_color));
+    }
+    Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+    if (negativeButton != null) {
+      negativeButton.setTextColor(
+          context
+              .getResources()
+              .getColor(R.color.voicemail_donation_promo_negative_button_text_color));
+    }
+  }
+
+  private static int dpsToPixels(Context context, int dps) {
+    return (int)
+        (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dps, context.getResources().getDisplayMetrics()));
+  }
+
+  private static void recordPromoShown(Context context) {
+    StorageComponent.get(context.getApplicationContext())
+        .unencryptedSharedPrefs()
+        .edit()
+        .putBoolean(PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY, true)
+        .apply();
+  }
+
+  private SpannableString getVoicemailDonationPromoContent() {
+    CharSequence content = context.getString(R.string.voicemail_donation_promo_content);
+    CharSequence learnMore = context.getString(R.string.voicemail_donation_promo_learn_more);
+    String learnMoreUrl = context.getString(R.string.voicemail_donation_promo_learn_more_url);
+    SpannableString span = new SpannableString(content + "\n" + learnMore);
+    int end = span.length();
+    int start = end - learnMore.length();
+    span.setSpan(new URLSpan(learnMoreUrl), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    span.setSpan(
+        new TextAppearanceSpan(context, R.style.PromoLinkStyle),
+        start,
+        end,
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    return span;
   }
 
   @Override
