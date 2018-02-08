@@ -30,6 +30,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Toast;
+import com.android.contacts.common.dialog.ClearFrequentsDialog;
+import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -37,6 +39,8 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
+import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
@@ -328,9 +332,13 @@ public class MainSearchController implements SearchBarListener {
   @Override
   public boolean onMenuItemClicked(MenuItem menuItem) {
     if (menuItem.getItemId() == R.id.settings) {
-      // TODO(calderwoodra)
+      mainActivity.startActivity(new Intent(mainActivity, DialerSettingsActivity.class));
+      Logger.get(mainActivity).logScreenView(ScreenEvent.Type.SETTINGS, mainActivity);
+      return true;
     } else if (menuItem.getItemId() == R.id.clear_frequents) {
-      // TODO(calderwoodra)
+      ClearFrequentsDialog.show(mainActivity.getFragmentManager());
+      Logger.get(mainActivity).logScreenView(ScreenEvent.Type.CLEAR_FREQUENTS, mainActivity);
+      return true;
     }
     return false;
   }
