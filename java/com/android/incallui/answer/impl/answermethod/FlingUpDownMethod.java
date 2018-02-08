@@ -370,11 +370,10 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
   public void setHintText(@Nullable CharSequence hintText) {
     if (hintText == null) {
       swipeToAnswerText.setText(R.string.call_incoming_swipe_to_answer);
-      swipeToRejectText.setText(R.string.call_incoming_swipe_to_reject);
     } else {
       swipeToAnswerText.setText(hintText);
-      swipeToRejectText.setText(null);
     }
+    swipeToRejectText.setText(R.string.call_incoming_swipe_to_reject);
   }
 
   @Override
