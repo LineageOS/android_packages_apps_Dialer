@@ -22,18 +22,15 @@ import android.view.Gravity;
 import android.view.View;
 
 /** Popup menu accessible from the search bar */
-final class MainToolbarMenu extends PopupMenu {
+public final class MainToolbarMenu extends PopupMenu {
 
   public MainToolbarMenu(Context context, View anchor) {
-    super(context, anchor, Gravity.TOP);
-    // TODO(calderwoodra): menu should open from the top, not the bottom
+    super(context, anchor, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);
   }
 
   @Override
   public void show() {
     super.show();
-    // TODO(calderwoodra): show/hide clear frequents
-    // TODO(calderwoodra): only show call history item if we have phone permission
     // TODO(calderwoodra): show simulator buttons
   }
 }
