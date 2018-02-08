@@ -37,6 +37,7 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.database.CallLogQueryHandler.Listener;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.google.common.util.concurrent.ListenableFuture;
 
 // TODO(uabdullah): Register content observer for VoicemailContract.Status.CONTENT_URI in onStart
@@ -175,7 +176,10 @@ public final class NewVoicemailFragment extends Fragment
       // TODO(uabdullah): Replace getActivity().getFragmentManager() with getChildFragment()
       recyclerView.setAdapter(
           new NewVoicemailAdapter(
-              data, System::currentTimeMillis, getActivity().getFragmentManager()));
+              data,
+              System::currentTimeMillis,
+              getActivity().getFragmentManager(),
+              GlidePhotoManagerComponent.get(getContext()).glidePhotoManager()));
     } else {
       // This would only be called in cases such as when voicemail has been fetched from the server
       // or a changed occurred in the annotated table changed (e.g deletes). To check if the change

@@ -19,12 +19,10 @@ package com.android.dialer.calllog.ui.menu;
 import android.content.Context;
 import android.provider.CallLog.Calls;
 import com.android.dialer.calllog.model.CoalescedRow;
-import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
+import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo;
-import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
-import com.android.dialer.contactphoto.NumberAttributeConverter;
 
 /** Configures the primary action row (top row) for the bottom sheet. */
 final class PrimaryAction {
@@ -34,13 +32,9 @@ final class PrimaryAction {
     return ContactPrimaryActionInfo.builder()
         .setNumber(row.number())
         .setPhotoInfo(
-            PhotoInfo.builder()
-                .setPhotoId(row.numberAttributes().getPhotoId())
-                .setPhotoUri(NumberAttributeConverter.getPhotoUri(context, row.numberAttributes()))
-                .setLookupUri(row.numberAttributes().getLookupUri())
+            NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
+                .setFormattedNumber(row.formattedNumber())
                 .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-                .setContactType(CallLogContactTypes.getContactType(row))
-                .setDisplayName(primaryText.toString())
                 .build())
         .setPrimaryText(primaryText)
         .setSecondaryText(CallLogEntryText.buildSecondaryTextForBottomSheet(context, row))

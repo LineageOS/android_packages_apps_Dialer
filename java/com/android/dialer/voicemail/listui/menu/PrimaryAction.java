@@ -18,10 +18,8 @@ package com.android.dialer.voicemail.listui.menu;
 
 import android.content.Context;
 import android.text.TextUtils;
+import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.contactactions.ContactPrimaryActionInfo;
-import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
-import com.android.dialer.contactphoto.NumberAttributeConverter;
-import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** Configures the primary action row (top row) for theottom sheet for the Voicemail Tab */
@@ -38,15 +36,8 @@ final class PrimaryAction {
     return ContactPrimaryActionInfo.builder()
         .setNumber(voicemailEntry.number())
         .setPhotoInfo(
-            PhotoInfo.builder()
-                .setPhotoId(voicemailEntry.numberAttributes().getPhotoId())
-                .setPhotoUri(
-                    NumberAttributeConverter.getPhotoUri(
-                        context, voicemailEntry.numberAttributes()))
-                .setIsVideo(false)
-                .setContactType(
-                    LetterTileDrawable.TYPE_DEFAULT) // TODO(uabdullah): Use proper type.
-                .setDisplayName(voicemailEntry.numberAttributes().getName())
+            NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes())
+                .setFormattedNumber(voicemailEntry.formattedNumber())
                 .build())
         .setPrimaryText(buildPrimaryVoicemailText(context, voicemailEntry))
         .setSecondaryText(buildSecondaryVoicemailText(voicemailEntry))

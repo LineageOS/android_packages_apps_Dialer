@@ -17,7 +17,6 @@
 package com.android.dialer.contactactions;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.text.TextUtils;
@@ -29,8 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.contactactions.ContactPrimaryActionInfo.PhotoInfo;
-import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import java.util.List;
 
 /**
@@ -44,23 +42,27 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
 
   private final List<ContactActionModule> modules;
   private final ContactPrimaryActionInfo contactPrimaryActionInfo;
+  private final GlidePhotoManager glidePhotoManager;
 
   private ContactActionBottomSheet(
       Context context,
       ContactPrimaryActionInfo contactPrimaryActionInfo,
-      List<ContactActionModule> modules) {
+      List<ContactActionModule> modules,
+      GlidePhotoManager glidePhotoManager) {
     super(context);
     this.modules = modules;
     this.contactPrimaryActionInfo = contactPrimaryActionInfo;
+    this.glidePhotoManager = glidePhotoManager;
     setContentView(LayoutInflater.from(context).inflate(R.layout.sheet_layout, null));
   }
 
   public static ContactActionBottomSheet show(
       Context context,
       ContactPrimaryActionInfo contactPrimaryActionInfo,
-      List<ContactActionModule> modules) {
+      List<ContactActionModule> modules,
+      GlidePhotoManager glidePhotoManager) {
     ContactActionBottomSheet sheet =
-        new ContactActionBottomSheet(context, contactPrimaryActionInfo, modules);
+        new ContactActionBottomSheet(context, contactPrimaryActionInfo, modules, glidePhotoManager);
     sheet.show();
     return sheet;
   }
@@ -85,15 +87,8 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     View contactView = inflater.inflate(R.layout.contact_layout, container, false);
 
     // TODO(zachh): The contact image should be badged with a video icon if it is for a video call.
-    PhotoInfo photoInfo = contactPrimaryActionInfo.photoInfo();
-    ContactPhotoManager.getInstance(getContext())
-        .loadDialerThumbnailOrPhoto(
-            contactView.findViewById(R.id.quick_contact_photo),
-            !TextUtils.isEmpty(photoInfo.lookupUri()) ? Uri.parse(photoInfo.lookupUri()) : null,
-            photoInfo.photoId(),
-            photoInfo.photoUri(),
-            photoInfo.displayName(),
-            photoInfo.contactType());
+    glidePhotoManager.loadQuickContactBadge(
+        contactView.findViewById(R.id.quick_contact_photo), contactPrimaryActionInfo.photoInfo());
 
     TextView primaryTextView = contactView.findViewById(R.id.primary_text);
     TextView secondaryTextView = contactView.findViewById(R.id.secondary_text);
