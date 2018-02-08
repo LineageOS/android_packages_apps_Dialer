@@ -258,15 +258,22 @@
   <style name="TranscriptionQualityRating">
     <item name="android:textColor">@color/call_log_voicemail_transcript_branding_color</item>
     <item name="android:textSize">@dimen/call_log_voicemail_transcription_text_size</item>
+    <item name="android:textStyle">italic</item>
+    <item name="android:paddingRight">20dp</item>
+    <item name="android:minHeight">56dp</item>
   </style>
 
-  <style name="TranscriptionQualityRatingLink">
-    <item name="android:textColor">@color/call_log_voicemail_transcript_rating_color</item>
-    <item name="android:textSize">@dimen/call_log_voicemail_transcription_text_size</item>
+  <style name="TranscriptionQualityRatingIcon">
     <item name="android:paddingTop">8dp</item>
     <item name="android:paddingBottom">8dp</item>
-    <item name="android:paddingLeft">12dp</item>
-    <item name="android:paddingRight">12dp</item>
-    <item name="android:minHeight">48dp</item>
+    <item name="android:paddingLeft">16dp</item>
+    <item name="android:paddingRight">16dp</item>
+    <item name="android:minHeight">56dp</item>
   </style>
+
+  <style name="PromoLinkStyle">
+    <item name="android:textColor">@color/dialer_theme_color</item>
+    <item name="android:fontFamily">"sans-serif-medium"</item>
+  </style>
+
 </resources>
