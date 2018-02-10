@@ -17,37 +17,86 @@
 package com.android.voicemail.impl;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.voicemail.impl.utils.XmlUtils;
+import com.google.common.collect.ComparisonChain;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/** Load and caches telephony vvm config from res/xml/vvm_config.xml */
-public class TelephonyVvmConfigManager {
+/** Load and caches dialer vvm config from res/xml/vvm_config.xml */
+public class DialerVvmConfigManager {
+  private static class ConfigEntry implements Comparable<ConfigEntry> {
 
-  private static final String TAG = "TelephonyVvmCfgMgr";
+    final CarrierIdentifierMatcher matcher;
+    final PersistableBundle config;
 
-  private static final boolean USE_DEBUG_CONFIG = false;
+    ConfigEntry(CarrierIdentifierMatcher matcher, PersistableBundle config) {
+      this.matcher = matcher;
+      this.config = config;
+    }
+
+    /**
+     * A more specific matcher should return a negative value to have higher priority over generic
+     * matchers.
+     */
+    @Override
+    public int compareTo(@NonNull ConfigEntry other) {
+      ComparisonChain comparisonChain = ComparisonChain.start();
+      if (!(matcher.gid1().isPresent() && other.matcher.gid1().isPresent())) {
+        if (matcher.gid1().isPresent()) {
+          return -1;
+        } else if (other.matcher.gid1().isPresent()) {
+          return 1;
+        } else {
+          return 0;
+        }
+      } else {
+        comparisonChain = comparisonChain.compare(matcher.gid1().get(), other.matcher.gid1().get());
+      }
+
+      return comparisonChain.compare(matcher.mccMnc(), other.matcher.mccMnc()).result();
+    }
+  }
 
   private static final String TAG_PERSISTABLEMAP = "pbundle_as_map";
 
+  /**
+   * A string array of MCCMNC the config applies to. Addtional filters should be appended as the URI
+   * query parameter format.
+   *
+   * <p>For example{@code <string-array name="mccmnc"> <item value="12345?gid1=foo"/> <item
+   * value="67890"/> </string-array> }
+   *
+   * @see #KEY_GID1
+   */
   @VisibleForTesting static final String KEY_MCCMNC = "mccmnc";
+
+  /**
+   * Additional query parameter in {@link #KEY_MCCMNC} to filter by the Group ID level 1.
+   *
+   * @see CarrierIdentifierMatcher#gid1()
+   */
+  private static final String KEY_GID1 = "gid1";
 
   private static final String KEY_FEATURE_FLAG_NAME = "feature_flag_name";
 
-  private static Map<String, PersistableBundle> cachedConfigs;
+  private static Map<String, SortedSet<ConfigEntry>> cachedConfigs;
 
-  private final Map<String, PersistableBundle> configs;
+  private final Map<String, SortedSet<ConfigEntry>> configs;
 
-  public TelephonyVvmConfigManager(Context context) {
+  public DialerVvmConfigManager(Context context) {
     if (cachedConfigs == null) {
       cachedConfigs = loadConfigs(context, context.getResources().getXml(R.xml.vvm_config));
     }
@@ -55,20 +104,26 @@ public class TelephonyVvmConfigManager {
   }
 
   @VisibleForTesting
-  TelephonyVvmConfigManager(Context context, XmlPullParser parser) {
+  DialerVvmConfigManager(Context context, XmlPullParser parser) {
     configs = loadConfigs(context, parser);
   }
 
   @Nullable
-  public PersistableBundle getConfig(String mccMnc) {
-    if (USE_DEBUG_CONFIG) {
-      return configs.get("TEST");
+  public PersistableBundle getConfig(CarrierIdentifier carrierIdentifier) {
+    if (!configs.containsKey(carrierIdentifier.mccMnc())) {
+      return null;
     }
-    return configs.get(mccMnc);
+    for (ConfigEntry configEntry : configs.get(carrierIdentifier.mccMnc())) {
+      if (configEntry.matcher.matches(carrierIdentifier)) {
+        return configEntry.config;
+      }
+    }
+    return null;
   }
 
-  private static Map<String, PersistableBundle> loadConfigs(Context context, XmlPullParser parser) {
-    Map<String, PersistableBundle> configs = new ArrayMap<>();
+  private static Map<String, SortedSet<ConfigEntry>> loadConfigs(
+      Context context, XmlPullParser parser) {
+    Map<String, SortedSet<ConfigEntry>> configs = new ArrayMap<>();
     try {
       ArrayList list = readBundleList(parser);
       for (Object object : list) {
@@ -83,12 +138,27 @@ public class TelephonyVvmConfigManager {
           continue;
         }
 
-        String[] mccMncs = bundle.getStringArray(KEY_MCCMNC);
-        if (mccMncs == null) {
+        String[] identifiers = bundle.getStringArray(KEY_MCCMNC);
+        if (identifiers == null) {
           throw new IllegalArgumentException("MCCMNC is null");
         }
-        for (String mccMnc : mccMncs) {
-          configs.put(mccMnc, bundle);
+        for (String identifier : identifiers) {
+          Uri uri = Uri.parse(identifier);
+          String mccMnc = uri.getPath();
+          SortedSet<ConfigEntry> set;
+          if (configs.containsKey(mccMnc)) {
+            set = configs.get(mccMnc);
+          } else {
+            // Need a SortedSet so matchers will be sorted by priority.
+            set = new TreeSet<>();
+            configs.put(mccMnc, set);
+          }
+          CarrierIdentifierMatcher.Builder matcherBuilder = CarrierIdentifierMatcher.builder();
+          matcherBuilder.setMccMnc(mccMnc);
+          if (uri.getQueryParameterNames().contains(KEY_GID1)) {
+            matcherBuilder.setGid1(uri.getQueryParameter(KEY_GID1));
+          }
+          set.add(new ConfigEntry(matcherBuilder.build(), bundle));
         }
       }
     } catch (IOException | XmlPullParserException e) {

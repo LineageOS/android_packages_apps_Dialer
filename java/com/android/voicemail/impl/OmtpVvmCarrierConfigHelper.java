@@ -55,6 +55,7 @@ import java.util.Set;
  * <p>TODO(twyen): refactor this to an interface.
  */
 @TargetApi(VERSION_CODES.O)
+@SuppressWarnings("missingpermission")
 public class OmtpVvmCarrierConfigHelper {
 
   private static final String TAG = "OmtpVvmCarrierCfgHlpr";
@@ -131,7 +132,8 @@ public class OmtpVvmCarrierConfigHelper {
 
       carrierConfig = getCarrierConfig(telephonyManager);
       telephonyConfig =
-          new TelephonyVvmConfigManager(context).getConfig(telephonyManager.getSimOperator());
+          new DialerVvmConfigManager(context)
+              .getConfig(CarrierIdentifier.forHandle(context, phoneAccountHandle));
     }
 
     vvmType = getVvmType();
@@ -199,12 +201,6 @@ public class OmtpVvmCarrierConfigHelper {
   }
 
   @Nullable
-  public Set<String> getCarrierVvmPackageNames() {
-    Assert.checkArgument(isValid());
-    return getCarrierVvmPackageNamesWithoutValidation();
-  }
-
-  @Nullable
   private Set<String> getCarrierVvmPackageNamesWithoutValidation() {
     Set<String> names = getCarrierVvmPackageNames(overrideConfig);
     if (names != null) {
@@ -215,6 +211,12 @@ public class OmtpVvmCarrierConfigHelper {
       return names;
     }
     return getCarrierVvmPackageNames(telephonyConfig);
+  }
+
+  @Nullable
+  public Set<String> getCarrierVvmPackageNames() {
+    Assert.checkArgument(isValid());
+    return getCarrierVvmPackageNamesWithoutValidation();
   }
 
   private static Set<String> getCarrierVvmPackageNames(@Nullable PersistableBundle bundle) {
