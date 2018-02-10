@@ -33,6 +33,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.dialpadview \
 	com.android.dialer.enrichedcall.simulator \
 	com.android.dialer.feedback \
+	com.android.dialer.glidephotomanager.impl \
 	com.android.dialer.interactions \
 	com.android.dialer.lettertile \
 	com.android.dialer.location \

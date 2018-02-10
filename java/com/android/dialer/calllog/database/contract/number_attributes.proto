@@ -22,6 +22,7 @@ option optimize_for = LITE_RUNTIME;
 package com.android.dialer;
 
 // Information related to the phone number of the call.
+// Next ID: 12
 message NumberAttributes {
   // The name (which may be a person's name or business name, but not a number)
   // formatted exactly as it should appear to the user. If the user's locale or
@@ -59,6 +60,9 @@ message NumberAttributes {
   // display time.
   optional bool is_cp2_info_incomplete = 9;
 
-  // The number is blocked.
+  // Whether the number is blocked.
   optional bool is_blocked = 10;
+
+  // Whether the number is spam.
+  optional bool is_spam = 11;
 }
