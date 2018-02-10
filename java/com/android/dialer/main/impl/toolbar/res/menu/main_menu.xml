@@ -22,7 +22,7 @@
       app:showAsAction="collapseActionView"/>
 
   <item
-      android:id="@+id/feedback"
-      android:title="@string/main_send_feedback"
+      android:id="@+id/clear_frequents"
+      android:title="@string/main_menu_clear_frequents"
       app:showAsAction="collapseActionView"/>
 </menu>
