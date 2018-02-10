@@ -20,14 +20,19 @@ import android.content.Context;
 import android.view.View;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.contactactions.ContactActionBottomSheet;
+import com.android.dialer.glidephotomanager.GlidePhotoManager;
 
 /** Handles configuration of the bottom sheet menus for call log entries. */
 public final class NewCallLogMenu {
 
   /** Creates and returns the OnClickListener which opens the menu for the provided row. */
-  public static View.OnClickListener createOnClickListener(Context context, CoalescedRow row) {
+  public static View.OnClickListener createOnClickListener(
+      Context context, CoalescedRow row, GlidePhotoManager glidePhotoManager) {
     return (view) ->
         ContactActionBottomSheet.show(
-            context, PrimaryAction.fromRow(context, row), Modules.fromRow(context, row));
+            context,
+            PrimaryAction.fromRow(context, row),
+            Modules.fromRow(context, row),
+            glidePhotoManager);
   }
 }
