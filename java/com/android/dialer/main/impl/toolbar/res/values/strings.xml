@@ -37,8 +37,8 @@
 
   <!-- Show users their settings [CHAR LIMIT=20] -->
   <string name="settings">Settings</string>
-  <!-- Send feedback about the app [CHAR LIMIT=20] -->
-  <string name="main_send_feedback">Send feedback</string>
+  <!--  The menu item to clear frequents [CHAR LIMIT=30] -->
+  <string name="main_menu_clear_frequents">Clear frequents</string>
 
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
   <string name="main_remove_contact">Remove</string>

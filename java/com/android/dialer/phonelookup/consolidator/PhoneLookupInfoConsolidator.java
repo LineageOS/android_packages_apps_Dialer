@@ -159,6 +159,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.CP2_REMOTE:
         return Assert.isNotNull(firstCp2RemoteContact).getLookupUri();
       case NameSource.PEOPLE_API:
+        return Assert.isNotNull(phoneLookupInfo.getPeopleApiInfo().getLookupUri());
       case NameSource.NONE:
         return "";
       default:

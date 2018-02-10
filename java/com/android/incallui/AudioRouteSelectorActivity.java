@@ -17,6 +17,7 @@
 package com.android.incallui;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.telecom.CallAudioState;
@@ -26,34 +27,27 @@ import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.CallList;
+import com.android.incallui.call.CallList.Listener;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.TelecomAdapter;
 
 /** Simple activity that just shows the audio route selector fragment */
 public class AudioRouteSelectorActivity extends FragmentActivity
-    implements AudioRouteSelectorPresenter {
-
-  public static final String SHOULD_LOG_BUBBLE_V2_IMPRESSION_EXTRA = "shouldLogBubbleV2Impression";
-
-  private boolean shouldLogBubbleV2Impression;
+    implements AudioRouteSelectorPresenter, Listener {
 
   @Override
   protected void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
-    shouldLogBubbleV2Impression =
-        getIntent().getBooleanExtra(SHOULD_LOG_BUBBLE_V2_IMPRESSION_EXTRA, false);
     AudioRouteSelectorDialogFragment.newInstance(AudioModeProvider.getInstance().getAudioState())
         .show(getSupportFragmentManager(), AudioRouteSelectorDialogFragment.TAG);
+
+    CallList.getInstance().addListener(this);
   }
 
   @Override
   public void onAudioRouteSelected(int audioRoute) {
     TelecomAdapter.getInstance().setAudioRoute(audioRoute);
     finish();
-
-    if (!shouldLogBubbleV2Impression) {
-      return;
-    }
 
     // Log the select action with audio route and call
     DialerImpression.Type impressionType = null;
@@ -68,10 +62,7 @@ public class AudioRouteSelectorActivity extends FragmentActivity
       return;
     }
 
-    DialerCall call = CallList.getInstance().getOutgoingCall();
-    if (call == null) {
-      call = CallList.getInstance().getActiveOrBackgroundCall();
-    }
+    DialerCall call = getCall();
     if (call != null) {
       Logger.get(this)
           .logCallImpression(impressionType, call.getUniqueCallId(), call.getTimeAddedMs());
@@ -102,4 +93,46 @@ public class AudioRouteSelectorActivity extends FragmentActivity
       finish();
     }
   }
+
+  @Override
+  protected void onDestroy() {
+    CallList.getInstance().removeListener(this);
+    super.onDestroy();
+  }
+
+  private DialerCall getCall() {
+    DialerCall dialerCall = CallList.getInstance().getOutgoingCall();
+    if (dialerCall == null) {
+      dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
+    }
+    return dialerCall;
+  }
+
+  @Override
+  public void onDisconnect(DialerCall call) {
+    if (getCall() == null) {
+      finish();
+    }
+  }
+
+  @Override
+  public void onIncomingCall(DialerCall call) {}
+
+  @Override
+  public void onUpgradeToVideo(DialerCall call) {}
+
+  @Override
+  public void onSessionModificationStateChange(DialerCall call) {}
+
+  @Override
+  public void onCallListChange(CallList callList) {}
+
+  @Override
+  public void onWiFiToLteHandover(DialerCall call) {}
+
+  @Override
+  public void onHandoverToWifiFailed(DialerCall call) {}
+
+  @Override
+  public void onInternationalCallOnWifi(@NonNull DialerCall call) {}
 }

@@ -65,6 +65,9 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
   }
 
   private GlideRequest<Drawable> buildRequest(GlideRequests requestManager, PhotoInfo photoInfo) {
+    // Warning: Glide ignores extra attributes on BitmapDrawable such as tint and draw the bitmap
+    // directly so be sure not to set tint in the XML of any drawable referenced below.
+
     // The spam status takes precedence over whether the number is blocked.
     if (photoInfo.isSpam()) {
       return requestManager.load(R.drawable.ic_report_red_48dp);
