@@ -36,6 +36,7 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
 
   private SearchBarView searchBar;
   private SearchBarListener listener;
+  private MainToolbarMenu overflowMenu;
   private boolean isSlideUp;
 
   public MainToolbar(Context context, AttributeSet attrs) {
@@ -46,7 +47,7 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
   protected void onFinishInflate() {
     super.onFinishInflate();
     ImageButton optionsMenuButton = findViewById(R.id.main_options_menu_button);
-    MainToolbarMenu overflowMenu = new MainToolbarMenu(getContext(), optionsMenuButton);
+    overflowMenu = new MainToolbarMenu(getContext(), optionsMenuButton);
     overflowMenu.inflate(R.menu.main_menu);
     overflowMenu.setOnMenuItemClickListener(this);
     optionsMenuButton.setOnClickListener(v -> overflowMenu.show());
@@ -57,12 +58,7 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
 
   @Override
   public boolean onMenuItemClick(MenuItem menuItem) {
-    if (menuItem.getItemId() == R.id.settings) {
-      listener.openSettings();
-    } else if (menuItem.getItemId() == R.id.feedback) {
-      listener.sendFeedback();
-    }
-    return false;
+    return listener.onMenuItemClicked(menuItem);
   }
 
   public void setSearchBarListener(SearchBarListener listener) {
@@ -128,5 +124,9 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
 
   public void showKeyboard() {
     searchBar.showKeyboard();
+  }
+
+  public MainToolbarMenu getOverflowMenu() {
+    return overflowMenu;
   }
 }
