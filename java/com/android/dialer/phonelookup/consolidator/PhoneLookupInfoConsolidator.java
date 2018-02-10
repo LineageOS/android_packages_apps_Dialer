@@ -228,6 +228,14 @@ public final class PhoneLookupInfoConsolidator {
   }
 
   /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns whether the number is spam.
+   */
+  public boolean isSpam() {
+    return phoneLookupInfo.getSpamInfo().getIsSpam();
+  }
+
+  /**
    * Returns true if the {@link PhoneLookupInfo} passed to the constructor has incomplete CP2 local
    * info.
    */

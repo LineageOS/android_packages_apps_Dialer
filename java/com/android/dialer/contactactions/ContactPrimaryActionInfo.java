@@ -16,11 +16,10 @@
 package com.android.dialer.contactactions;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
-import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.google.auto.value.AutoValue;
 
 /**
@@ -34,50 +33,6 @@ public abstract class ContactPrimaryActionInfo {
 
   @Nullable
   public abstract DialerPhoneNumber number();
-
-  /** Information used to construct the photo for the contact. */
-  @AutoValue
-  public abstract static class PhotoInfo {
-    public abstract long photoId();
-
-    @Nullable
-    public abstract Uri photoUri();
-
-    @Nullable
-    public abstract String lookupUri();
-
-    /** Badges the photo with a video icon if true. */
-    public abstract boolean isVideo();
-
-    @LetterTileDrawable.ContactType
-    public abstract int contactType();
-
-    /** Used to generate letter tile if there is no photo. */
-    @Nullable
-    public abstract String displayName();
-
-    /** Builder for {@link PhotoInfo}. */
-    @AutoValue.Builder
-    public abstract static class Builder {
-      public abstract Builder setPhotoId(long photoId);
-
-      public abstract Builder setPhotoUri(@Nullable Uri photoUri);
-
-      public abstract Builder setLookupUri(@Nullable String lookupUri);
-
-      public abstract Builder setIsVideo(boolean isVideo);
-
-      public abstract Builder setContactType(@LetterTileDrawable.ContactType int contactType);
-
-      public abstract Builder setDisplayName(@Nullable String displayName);
-
-      public abstract PhotoInfo build();
-    }
-
-    public static Builder builder() {
-      return new AutoValue_ContactPrimaryActionInfo_PhotoInfo.Builder();
-    }
-  }
 
   @NonNull
   public abstract PhotoInfo photoInfo();

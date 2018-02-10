@@ -65,7 +65,13 @@ public final class CallLogEntryText {
   /**
    * The secondary text to show in the main call log entry list.
    *
-   * <p>Rules: (Blocked • )?(Duo video, )?$Label|$Location • Date
+   * <p>Rules:
+   *
+   * <ul>
+   *   <li>For numbers that are not spam or blocked: (Duo video, )?$Label|$Location • Date
+   *   <li>For blocked non-spam numbers: Blocked • (Duo video, )?$Label|$Location • Date
+   *   <li>For spam numbers: Spam • (Duo video, )?$Label • Date
+   * </ul>
    *
    * <p>Examples:
    *
@@ -74,6 +80,10 @@ public final class CallLogEntryText {
    *   <li>Duo Video • 10 min ago
    *   <li>Mobile • 11:45 PM
    *   <li>Mobile • Sun
+   *   <li>Blocked • Duo Video, Mobile • Now
+   *   <li>Blocked • Brooklyn, NJ • 10 min ago
+   *   <li>Spam • Mobile • Now
+   *   <li>Spam • Now
    *   <li>Brooklyn, NJ • Jan 15
    * </ul>
    *
@@ -82,7 +92,11 @@ public final class CallLogEntryText {
   public static CharSequence buildSecondaryTextForEntries(
       Context context, Clock clock, CoalescedRow row) {
     List<CharSequence> components = new ArrayList<>();
-    if (row.numberAttributes().getIsBlocked()) {
+
+    // If a number is both spam and blocked, only show "Spam".
+    if (row.numberAttributes().getIsSpam()) {
+      components.add(context.getText(R.string.new_call_log_secondary_spam));
+    } else if (row.numberAttributes().getIsBlocked()) {
       components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
 
@@ -102,7 +116,13 @@ public final class CallLogEntryText {
    */
   public static CharSequence buildSecondaryTextForBottomSheet(Context context, CoalescedRow row) {
     /*
-     * Rules: (Blocked • )(Duo video, )?$Label|$Location [• NumberIfNoName]?
+     * Rules:
+     *   For numbers that are not spam or blocked:
+     *     (Duo video, )?$Label|$Location [• NumberIfNoName]?
+     *   For blocked non-spam numbers:
+     *     Blocked • (Duo video, )?$Label|$Location [• NumberIfNoName]?
+     *   For spam numbers:
+     *     Spam • (Duo video, )?$Label [• NumberIfNoName]?
      *
      * The number is shown at the end if there is no name for the entry. (It is shown in primary
      * text otherwise.)
@@ -112,11 +132,17 @@ public final class CallLogEntryText {
      *   Duo Video • 555-1234
      *   Mobile • 555-1234
      *   Blocked • Mobile • 555-1234
+     *   Blocked • Brooklyn, NJ • 555-1234
+     *   Spam • Mobile • 555-1234
      *   Mobile • 555-1234
      *   Brooklyn, NJ
      */
     List<CharSequence> components = new ArrayList<>();
-    if (row.numberAttributes().getIsBlocked()) {
+
+    // If a number is both spam and blocked, only show "Spam".
+    if (row.numberAttributes().getIsSpam()) {
+      components.add(context.getText(R.string.new_call_log_secondary_spam));
+    } else if (row.numberAttributes().getIsBlocked()) {
       components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
 
@@ -162,7 +188,8 @@ public final class CallLogEntryText {
         secondaryText.append(", ");
       }
       secondaryText.append(numberTypeLabel);
-    } else { // If there's a number type label, don't show the location.
+    } else if (!row.numberAttributes().getIsSpam()) {
+      // Don't show the location if there's a number type label or the number is spam.
       String location = row.geocodedLocation();
       if (!TextUtils.isEmpty(location)) {
         if (secondaryText.length() > 0) {

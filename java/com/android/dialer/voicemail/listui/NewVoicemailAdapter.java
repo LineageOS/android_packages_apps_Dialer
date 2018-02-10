@@ -42,6 +42,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.NewVoicemailViewHolder.NewVoicemailViewHolderListener;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage;
@@ -75,6 +76,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
   private Cursor cursor;
   private Cursor voicemailStatusCursor;
   private final Clock clock;
+  private final GlidePhotoManager glidePhotoManager;
 
   /** {@link Integer#MAX_VALUE} when the "Today" header should not be displayed. */
   private int todayHeaderPosition = Integer.MAX_VALUE;
@@ -117,11 +119,16 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       new NewVoicemailMediaPlayer(new MediaPlayer());
 
   /** @param cursor whose projection is {@link VoicemailCursorLoader#VOICEMAIL_COLUMNS} */
-  NewVoicemailAdapter(Cursor cursor, Clock clock, FragmentManager fragmentManager) {
+  NewVoicemailAdapter(
+      Cursor cursor,
+      Clock clock,
+      FragmentManager fragmentManager,
+      GlidePhotoManager glidePhotoManager) {
     LogUtil.enterBlock("NewVoicemailAdapter");
     this.cursor = cursor;
     this.clock = clock;
     this.fragmentManager = fragmentManager;
+    this.glidePhotoManager = glidePhotoManager;
     initializeMediaPlayerListeners();
     updateHeaderPositions();
   }
@@ -223,7 +230,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
       case NewVoicemailAdapter.RowType.VOICEMAIL_ENTRY:
         view = inflater.inflate(R.layout.new_voicemail_entry, viewGroup, false);
         NewVoicemailViewHolder newVoicemailViewHolder =
-            new NewVoicemailViewHolder(view, clock, this);
+            new NewVoicemailViewHolder(view, clock, this, glidePhotoManager);
         newVoicemailViewHolderSet.add(newVoicemailViewHolder);
         return newVoicemailViewHolder;
       default:

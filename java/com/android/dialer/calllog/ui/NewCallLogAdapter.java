@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
+import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -53,6 +55,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private final Clock clock;
   private final RealtimeRowProcessor realtimeRowProcessor;
+  private final GlidePhotoManager glidePhotoManager;
 
   private Cursor cursor;
 
@@ -69,6 +72,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     this.cursor = cursor;
     this.clock = clock;
     this.realtimeRowProcessor = CallLogUiComponent.get(context).realtimeRowProcessor();
+    this.glidePhotoManager = GlidePhotoManagerComponent.get(context).glidePhotoManager();
 
     setHeaderPositions();
   }
@@ -138,7 +142,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
             LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.new_call_log_entry, viewGroup, false),
             clock,
-            realtimeRowProcessor);
+            realtimeRowProcessor,
+            glidePhotoManager);
       default:
         throw Assert.createUnsupportedOperationFailException("Unsupported view type: " + viewType);
     }
