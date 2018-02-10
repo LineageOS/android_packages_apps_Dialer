@@ -28,6 +28,9 @@ public abstract class FeedbackComponent {
   @NonNull
   public abstract CallList.Listener getCallFeedbackListener();
 
+  @NonNull
+  public abstract FeedbackSender getCallFeedbackSender();
+
   public static FeedbackComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .feedbackComponent();
