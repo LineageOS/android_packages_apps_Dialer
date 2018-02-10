@@ -24,6 +24,7 @@ import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
 import com.android.dialer.duo.stub.StubDuoModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.feedback.stub.StubFeedbackModule;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerModule;
 import com.android.dialer.inject.ContextModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
@@ -50,6 +51,7 @@ import javax.inject.Singleton;
     CommandLineModule.class,
     ContextModule.class,
     DialerExecutorModule.class,
+    GlidePhotoManagerModule.class,
     PhoneLookupModule.class,
     PhoneNumberGeoUtilModule.class,
     PreCallModule.class,

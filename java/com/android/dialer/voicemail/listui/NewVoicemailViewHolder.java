@@ -27,7 +27,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -38,15 +37,14 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
+import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.contactphoto.NumberAttributeConverter;
-import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.menu.NewVoicemailMenu;
 import com.android.dialer.voicemail.model.VoicemailEntry;
@@ -69,9 +67,13 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private VoicemailEntry voicemailEntryOfViewHolder;
   @NonNull private Uri viewHolderVoicemailUri;
   private final NewVoicemailViewHolderListener voicemailViewHolderListener;
+  private final GlidePhotoManager glidePhotoManager;
 
   NewVoicemailViewHolder(
-      View view, Clock clock, NewVoicemailViewHolderListener newVoicemailViewHolderListener) {
+      View view,
+      Clock clock,
+      NewVoicemailViewHolderListener newVoicemailViewHolderListener,
+      GlidePhotoManager glidePhotoManager) {
     super(view);
     LogUtil.enterBlock("NewVoicemailViewHolder");
     this.context = view.getContext();
@@ -84,6 +86,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     menuButton = view.findViewById(R.id.menu_button);
     this.clock = clock;
     voicemailViewHolderListener = newVoicemailViewHolderListener;
+    this.glidePhotoManager = glidePhotoManager;
 
     viewHolderId = -1;
     isViewHolderExpanded = false;
@@ -144,7 +147,8 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
     itemView.setOnClickListener(this);
     menuButton.setOnClickListener(
-        NewVoicemailMenu.createOnClickListener(context, voicemailEntryOfViewHolder));
+        NewVoicemailMenu.createOnClickListener(
+            context, voicemailEntryOfViewHolder, glidePhotoManager));
 
     setPhoto(voicemailEntryOfViewHolder);
 
@@ -206,19 +210,11 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   }
 
   private void setPhoto(VoicemailEntry voicemailEntry) {
-    ContactPhotoManager.getInstance(context)
-        .loadDialerThumbnailOrPhoto(
-            quickContactBadge,
-            parseUri(voicemailEntry.numberAttributes().getLookupUri()),
-            voicemailEntry.numberAttributes().getPhotoId(),
-            NumberAttributeConverter.getPhotoUri(context, voicemailEntry.numberAttributes()),
-            VoicemailEntryText.buildPrimaryVoicemailText(context, voicemailEntry),
-            LetterTileDrawable.TYPE_DEFAULT);
-  }
-
-  @Nullable
-  private static Uri parseUri(@Nullable String string) {
-    return TextUtils.isEmpty(string) ? null : Uri.parse(string);
+    glidePhotoManager.loadQuickContactBadge(
+        quickContactBadge,
+        NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes())
+            .setFormattedNumber(voicemailEntry.formattedNumber())
+            .build());
   }
 
   void collapseViewHolder() {

@@ -25,6 +25,7 @@ import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.feedback.FeedbackComponent;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.main.MainComponent;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
@@ -55,6 +56,7 @@ public interface BaseDialerRootComponent
         DuoComponent.HasComponent,
         EnrichedCallComponent.HasComponent,
         FeedbackComponent.HasComponent,
+        GlidePhotoManagerComponent.HasComponent,
         MainComponent.HasComponent,
         MapsComponent.HasComponent,
         NewBubbleComponent.HasComponent,
