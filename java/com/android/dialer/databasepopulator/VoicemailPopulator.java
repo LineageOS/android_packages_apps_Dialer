@@ -27,7 +27,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
-import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
@@ -120,7 +119,7 @@ public final class VoicemailPopulator {
     ContentValues values = new ContentValues();
     values.put(Status.SOURCE_PACKAGE, handle.getComponentName().getPackageName());
     if (VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
-      values.put(Status.SOURCE_TYPE, TelephonyManager.VVM_TYPE_OMTP);
+      values.put(Status.SOURCE_TYPE, "vvm_type_vvm3"); // mark populated voice mail as vvm3
     }
     values.put(Status.PHONE_ACCOUNT_COMPONENT_NAME, handle.getComponentName().flattenToString());
     values.put(Status.PHONE_ACCOUNT_ID, handle.getId());
