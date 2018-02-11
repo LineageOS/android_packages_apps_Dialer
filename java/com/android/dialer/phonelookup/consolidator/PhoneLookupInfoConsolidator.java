@@ -159,6 +159,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.CP2_REMOTE:
         return Assert.isNotNull(firstCp2RemoteContact).getLookupUri();
       case NameSource.PEOPLE_API:
+        return Assert.isNotNull(phoneLookupInfo.getPeopleApiInfo().getLookupUri());
       case NameSource.NONE:
         return "";
       default:
@@ -225,6 +226,14 @@ public final class PhoneLookupInfoConsolidator {
         .getDialerBlockedNumberInfo()
         .getBlockedState()
         .equals(BlockedState.BLOCKED);
+  }
+
+  /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns whether the number is spam.
+   */
+  public boolean isSpam() {
+    return phoneLookupInfo.getSpamInfo().getIsSpam();
   }
 
   /**

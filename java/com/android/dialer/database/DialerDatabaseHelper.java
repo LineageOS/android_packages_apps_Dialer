@@ -375,7 +375,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
       do {
         if (deletedContactCursor.isNull(DeleteContactQuery.DELETED_CONTACT_ID)) {
-          LogUtil.i("DialerDatabaseHelper.removeDeletedContacts", "null contact id, skipping row");
+          LogUtil.i(
+              "DialerDatabaseHelper.removeDeletedContacts",
+              "contact_id column null. Row was deleted during iteration, skipping");
           continue;
         }
 
@@ -455,6 +457,13 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     try {
       updatedContactCursor.moveToPosition(-1);
       while (updatedContactCursor.moveToNext()) {
+        if (updatedContactCursor.isNull(UpdatedContactQuery.UPDATED_CONTACT_ID)) {
+          LogUtil.i(
+              "DialerDatabaseHelper.removeUpdatedContacts",
+              "contact_id column null. Row was deleted during iteration, skipping");
+          continue;
+        }
+
         final Long contactId = updatedContactCursor.getLong(UpdatedContactQuery.UPDATED_CONTACT_ID);
 
         db.delete(Tables.SMARTDIAL_TABLE, SmartDialDbColumns.CONTACT_ID + "=" + contactId, null);
@@ -528,6 +537,13 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       updatedContactCursor.moveToPosition(-1);
       while (updatedContactCursor.moveToNext()) {
         insert.clearBindings();
+
+        if (updatedContactCursor.isNull(PhoneQuery.PHONE_ID)) {
+          LogUtil.i(
+              "DialerDatabaseHelper.insertUpdatedContactsAndNumberPrefix",
+              "_id column null. Row was deleted during iteration, skipping");
+          continue;
+        }
 
         // Handle string columns which can possibly be null first. In the case of certain
         // null columns (due to malformed rows possibly inserted by third-party apps
@@ -607,6 +623,13 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       final SQLiteStatement insert = db.compileStatement(sqlInsert);
 
       while (nameCursor.moveToNext()) {
+        if (nameCursor.isNull(columnIndexContactId)) {
+          LogUtil.i(
+              "DialerDatabaseHelper.insertNamePrefixes",
+              "contact_id column null. Row was deleted during iteration, skipping");
+          continue;
+        }
+
         /** Computes a list of prefixes of a given contact name. */
         final ArrayList<String> namePrefixes =
             SmartDialPrefix.generateNamePrefixes(context, nameCursor.getString(columnIndexName));

@@ -85,9 +85,9 @@ public class SpecialCharSequenceMgr {
         {
           add("*#07#");
           add("*#87#");
-          add("#43#");
+          add("*#43#");
           add("*#2727#");
-          add("#88#");
+          add("*#88#");
         }
       };
 

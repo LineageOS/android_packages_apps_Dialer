@@ -212,6 +212,7 @@ public final class RealtimeRowProcessor {
                 .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
                 .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
                 .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
+                .setIsSpam(phoneLookupInfoConsolidator.isSpam())
                 .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
                 .build())
         .build();

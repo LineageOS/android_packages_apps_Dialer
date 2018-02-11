@@ -11,26 +11,17 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.dialer.main.impl.toolbar;
+package com.android.dialer.glide;
 
-import android.content.Context;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
-import android.view.View;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
 
-/** Popup menu accessible from the search bar */
-public final class MainToolbarMenu extends PopupMenu {
-
-  public MainToolbarMenu(Context context, View anchor) {
-    super(context, anchor, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);
-  }
-
-  @Override
-  public void show() {
-    super.show();
-    // TODO(calderwoodra): show simulator buttons
-  }
-}
+/**
+ * Generates {@link GlideApp}. This class is required for glide annotation processor to generate
+ * generated API, which most documentations are based on.
+ */
+@GlideModule
+public class DialerGlideModule extends AppGlideModule {}

@@ -110,7 +110,6 @@ public class NewReturnToCallActionReceiver extends BroadcastReceiver {
   public void showAudioRouteSelector(Context context) {
     Intent intent = new Intent(context, AudioRouteSelectorActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-    intent.putExtra(AudioRouteSelectorActivity.SHOULD_LOG_BUBBLE_V2_IMPRESSION_EXTRA, true);
     context.startActivity(intent);
   }
 

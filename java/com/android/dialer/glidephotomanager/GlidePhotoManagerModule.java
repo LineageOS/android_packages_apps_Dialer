@@ -11,26 +11,20 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.dialer.main.impl.toolbar;
+package com.android.dialer.glidephotomanager;
 
-import android.content.Context;
-import android.support.v7.widget.PopupMenu;
-import android.view.Gravity;
-import android.view.View;
+import com.android.dialer.glidephotomanager.impl.GlidePhotoManagerImpl;
+import dagger.Binds;
+import dagger.Module;
+import javax.inject.Singleton;
 
-/** Popup menu accessible from the search bar */
-public final class MainToolbarMenu extends PopupMenu {
-
-  public MainToolbarMenu(Context context, View anchor) {
-    super(context, anchor, Gravity.NO_GRAVITY, R.attr.actionOverflowMenuStyle, 0);
-  }
-
-  @Override
-  public void show() {
-    super.show();
-    // TODO(calderwoodra): show simulator buttons
-  }
+/** Module for {@link GlidePhotoManagerComponent} */
+@Module
+public abstract class GlidePhotoManagerModule {
+  @Binds
+  @Singleton
+  public abstract GlidePhotoManager bindGlidePhotoManager(GlidePhotoManagerImpl glidePhotoManager);
 }

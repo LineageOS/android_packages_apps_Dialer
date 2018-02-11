@@ -16,6 +16,8 @@
 
 package com.android.dialer.main.impl.toolbar;
 
+import android.view.MenuItem;
+
 /** Useful callback for {@link SearchBarView} listeners. */
 public interface SearchBarListener {
 
@@ -31,11 +33,8 @@ public interface SearchBarListener {
   /** Called when the voice search button is clicked. */
   void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback);
 
-  /** Called when the settings option is selected from the search menu. */
-  void openSettings();
-
-  /** Called when send feedback is selected from the search menu. */
-  void sendFeedback();
+  /** Called when a toolbar menu item is clicked. */
+  boolean onMenuItemClicked(MenuItem menuItem);
 
   /** Interface for returning voice results to the search bar. */
   interface VoiceSearchResultCallback {
