@@ -72,7 +72,7 @@ public class IntentModule implements ContactActionModule {
             context,
             new CallIntentBuilder(number, initiationType)
                 .setPhoneAccountHandle(phoneAccountHandle)),
-        R.string.call,
+        R.string.voice_call,
         R.drawable.quantum_ic_call_white_24);
   }
 
