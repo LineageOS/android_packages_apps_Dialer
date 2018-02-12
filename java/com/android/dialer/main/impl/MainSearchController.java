@@ -16,6 +16,7 @@
 
 package com.android.dialer.main.impl;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -131,7 +132,15 @@ public class MainSearchController implements SearchBarListener {
     transaction.commit();
   }
 
-  /** Hides the dialpad, reveals the FAB and slides the toolbar back onto the screen. */
+  /**
+   * Hides the dialpad, reveals the FAB and slides the toolbar back onto the screen.
+   *
+   * <p>This method intentionally "hides" and does not "remove" the dialpad in order to preserve its
+   * state (i.e. we call {@link FragmentTransaction#hide(Fragment)} instead of {@link
+   * FragmentTransaction#remove(Fragment)}.
+   *
+   * @see {@link #closeSearch(boolean)} to "remove" the dialpad.
+   */
   private void hideDialpad(boolean animate, boolean bottomNavVisible) {
     Assert.checkArgument(isDialpadVisible());
 
@@ -159,7 +168,7 @@ public class MainSearchController implements SearchBarListener {
           @Override
           public void onAnimationEnd(Animation animation) {
             if (!(mainActivity.isFinishing() || mainActivity.isDestroyed())) {
-              mainActivity.getFragmentManager().beginTransaction().remove(dialpadFragment).commit();
+              mainActivity.getFragmentManager().beginTransaction().hide(dialpadFragment).commit();
             }
           }
 
@@ -227,7 +236,10 @@ public class MainSearchController implements SearchBarListener {
     }
   }
 
-  /** Calls {@link #hideDialpad(boolean, boolean)} and removes the search fragment. */
+  /**
+   * Calls {@link #hideDialpad(boolean, boolean)}, removes the search fragment and clears the
+   * dialpad.
+   */
   private void closeSearch(boolean animate) {
     Assert.checkArgument(isSearchVisible());
     if (isDialpadVisible()) {
@@ -238,9 +250,17 @@ public class MainSearchController implements SearchBarListener {
     showBottomNav();
     toolbar.collapse(animate);
     mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
+
+    // Clear the dialpad so the phone number isn't persisted between search sessions.
+    getDialpadFragment().clearDialpad();
   }
 
-  @Nullable
+  /**
+   * Returns {@link DialpadFragment}.
+   *
+   * <p>Unless this method is being called for the first time in {@link #openSearch(Optional)} or
+   * {@link #showDialpad(boolean)}, it should never return null.
+   */
   private DialpadFragment getDialpadFragment() {
     return (DialpadFragment)
         mainActivity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
@@ -295,6 +315,15 @@ public class MainSearchController implements SearchBarListener {
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
+
+    // Add the dialpad fragment but keep it hidden
+    if (getDialpadFragment() == null) {
+      DialpadFragment dialpadFragment = new DialpadFragment();
+      transaction
+          .add(R.id.dialpad_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG)
+          .hide(dialpadFragment);
+    }
+
     transaction.commit();
   }
 
