@@ -18,7 +18,6 @@ package com.android.dialer.voicemailstatus;
 
 import android.database.Cursor;
 import android.provider.VoicemailContract.Status;
-import com.android.dialer.database.VoicemailStatusQuery;
 
 /**
  * Utility used by the call log UI to determine what user message, if any, related to voicemail

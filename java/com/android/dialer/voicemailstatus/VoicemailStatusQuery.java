@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.database;
+package com.android.dialer.voicemailstatus;
 
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;

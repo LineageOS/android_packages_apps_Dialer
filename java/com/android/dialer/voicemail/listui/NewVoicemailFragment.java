@@ -16,8 +16,10 @@
 
 package com.android.dialer.voicemail.listui;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -35,10 +37,14 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.database.CallLogQueryHandler;
-import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
+import com.android.dialer.voicemail.listui.error.VoicemailStatus;
+import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
+import com.android.voicemail.VoicemailComponent;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO(uabdullah): Register content observer for VoicemailContract.Status.CONTENT_URI in onStart
 /** Fragment for Dialer Voicemail Tab. */
@@ -57,8 +63,9 @@ public final class NewVoicemailFragment extends Fragment
   private UiListener<Void> refreshAnnotatedCallLogListener;
   @Nullable private Runnable refreshAnnotatedCallLogRunnable;
 
+  private UiListener<ImmutableList<VoicemailStatus>> queryVoicemailStatusTableListener;
+
   private RecyclerView recyclerView;
-  private CallLogQueryHandler callLogQueryHandler;
 
   public NewVoicemailFragment() {
     LogUtil.enterBlock("NewVoicemailFragment.NewVoicemailFragment");
@@ -79,6 +86,13 @@ public final class NewVoicemailFragment extends Fragment
         DialerExecutorComponent.get(getContext())
             .createUiListener(
                 getActivity().getFragmentManager(), "NewVoicemailFragment.refreshAnnotatedCallLog");
+
+    queryVoicemailStatusTableListener =
+        DialerExecutorComponent.get(getContext())
+            .createUiListener(
+                getActivity().getFragmentManager(),
+                "NewVoicemailFragment.queryVoicemailStatusTable");
+
     refreshAnnotatedCallLogWorker = component.getRefreshAnnotatedCallLogWorker();
   }
 
@@ -192,31 +206,73 @@ public final class NewVoicemailFragment extends Fragment
       ((NewVoicemailAdapter) recyclerView.getAdapter()).updateCursor(data);
       ((NewVoicemailAdapter) recyclerView.getAdapter()).checkAndPlayVoicemail();
     }
-    callLogQueryHandler =
-        new CallLogQueryHandler(
-            getContext(), getContext().getContentResolver(), new NewVoicemailFragmentListener());
-    callLogQueryHandler.fetchVoicemailStatus();
+
+    queryAndUpdateVoicemailStatusAlert();
   }
 
-  private final class NewVoicemailFragmentListener implements Listener {
+  private void queryAndUpdateVoicemailStatusAlert() {
+    queryVoicemailStatusTableListener.listen(
+        getContext(),
+        queryVoicemailStatus(getContext()),
+        this::updateVoicemailStatusAlert,
+        throwable -> {
+          throw new RuntimeException(throwable);
+        });
+  }
 
-    @Override
-    public void onVoicemailStatusFetched(Cursor statusCursor) {
-      LogUtil.enterBlock("NewVoicemailFragmentListener.onVoicemailStatusFetched");
-      ((NewVoicemailAdapter) recyclerView.getAdapter()).setVoicemailStatusCursor(statusCursor);
-      ((NewVoicemailAdapter) recyclerView.getAdapter()).updateAlert(getContext());
-    }
+  private ListenableFuture<ImmutableList<VoicemailStatus>> queryVoicemailStatus(Context context) {
+    return DialerExecutorComponent.get(context)
+        .backgroundExecutor()
+        .submit(
+            () -> {
+              StringBuilder where = new StringBuilder();
+              List<String> selectionArgs = new ArrayList<>();
 
-    @Override
-    public void onVoicemailUnreadCountFetched(Cursor cursor) {}
+              VoicemailComponent.get(context)
+                  .getVoicemailClient()
+                  .appendOmtpVoicemailStatusSelectionClause(context, where, selectionArgs);
 
-    @Override
-    public void onMissedCallsUnreadCountFetched(Cursor cursor) {}
+              ImmutableList.Builder<VoicemailStatus> statuses = ImmutableList.builder();
 
-    @Override
-    public boolean onCallsFetched(Cursor combinedCursor) {
-      return false;
-    }
+              try (Cursor cursor =
+                  context
+                      .getContentResolver()
+                      .query(
+                          Status.CONTENT_URI,
+                          VoicemailStatusQuery.getProjection(),
+                          where.toString(),
+                          selectionArgs.toArray(new String[selectionArgs.size()]),
+                          null)) {
+                if (cursor == null) {
+                  LogUtil.e(
+                      "NewVoicemailFragment.queryVoicemailStatus", "query failed. Null cursor.");
+                  return statuses.build();
+                }
+
+                LogUtil.i(
+                    "NewVoicemailFragment.queryVoicemailStatus",
+                    "cursor size:%d ",
+                    cursor.getCount());
+
+                while (cursor.moveToNext()) {
+                  VoicemailStatus status = new VoicemailStatus(context, cursor);
+                  if (status.isActive()) {
+                    statuses.add(status);
+                    // TODO(a bug): Handle Service State Listeners
+                  }
+                }
+              }
+              LogUtil.i(
+                  "NewVoicemailFragment.queryVoicemailStatus",
+                  "query returned %d results",
+                  statuses.build().size());
+              return statuses.build();
+            });
+  }
+
+  private void updateVoicemailStatusAlert(ImmutableList<VoicemailStatus> voicemailStatuses) {
+    ((NewVoicemailAdapter) recyclerView.getAdapter())
+        .updateVoicemailAlertWithMostRecentStatus(getContext(), voicemailStatuses);
   }
 
   @Override
