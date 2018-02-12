@@ -104,7 +104,7 @@
 
   <application
     android:hardwareAccelerated="true"
-    android:icon="@mipmap/ic_launcher_phone"
+    android:icon="@mipmap/ic_launcher"
     android:label="@string/applicationLabel"
     android:name="com.android.dialer.binary.aosp.AospDialerApplication"
     android:appCategory="social"
