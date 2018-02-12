@@ -33,7 +33,7 @@ import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.database.VoicemailStatusQuery;
+import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
 
 /** Structured data from {@link android.provider.VoicemailContract.Status} */
 public class VoicemailStatus {
