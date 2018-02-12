@@ -26,8 +26,10 @@ import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -46,6 +48,7 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
   private final TextView nameView;
   private final TextView numberView;
   private final QuickContactBadge photo;
+  private final ImageView workBadge;
 
   private String number;
 
@@ -55,6 +58,7 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
     photo = view.findViewById(R.id.photo);
     nameView = view.findViewById(R.id.primary);
     numberView = view.findViewById(R.id.secondary);
+    workBadge = view.findViewById(R.id.work_icon);
     context = view.getContext();
   }
 
@@ -74,6 +78,10 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
 
     nameView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
     numberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, secondaryInfo, context));
+    workBadge.setVisibility(
+        DirectoryCompat.isOnlyEnterpriseDirectoryId(cursor.getDirectoryId())
+            ? View.VISIBLE
+            : View.GONE);
 
     if (shouldShowPhoto(cursor)) {
       nameView.setVisibility(View.VISIBLE);

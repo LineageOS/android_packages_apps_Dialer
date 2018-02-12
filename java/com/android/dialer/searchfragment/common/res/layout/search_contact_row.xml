@@ -65,4 +65,15 @@
       android:tint="@color/dialer_secondary_text_color"
       android:visibility="gone"
       android:scaleType="center"/>
+
+  <ImageView
+      android:id="@+id/work_icon"
+      android:layout_width="@dimen/search_row_height"
+      android:layout_height="@dimen/search_row_height"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:padding="@dimen/call_to_action_padding"
+      android:src="@drawable/ic_work_profile"
+      android:scaleType="centerInside"
+      android:visibility="gone"/>
 </RelativeLayout>
