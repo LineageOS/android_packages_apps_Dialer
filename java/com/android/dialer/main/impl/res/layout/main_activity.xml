@@ -67,6 +67,13 @@
       android:id="@+id/toolbar"
       layout="@layout/toolbar_layout"/>
 
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:scaleType="fitXY"
+      android:src="@drawable/search_shadow"
+      android:layout_below="@+id/toolbar"/>
+
   <!-- TODO(calderwoodra): investigate what this is for and why we want it. -->
   <!-- Host container for the contact tile drag shadow -->
   <FrameLayout
