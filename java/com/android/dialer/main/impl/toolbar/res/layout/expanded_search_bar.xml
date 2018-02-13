@@ -36,7 +36,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_toEndOf="@+id/search_back_button"
-      android:layout_toStartOf="@+id/search_close_button"
+      android:layout_toStartOf="@+id/search_clear_button"
       android:layout_centerVertical="true"
       android:layout_marginStart="8dp"
       android:minHeight="48dp"
