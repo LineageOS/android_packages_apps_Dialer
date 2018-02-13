@@ -16,16 +16,22 @@
 
 package com.android.dialer.main.impl;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /** MainActivityPeer that implements the new fragments. */
 public class NewMainActivityPeer implements MainActivityPeer {
@@ -40,7 +46,8 @@ public class NewMainActivityPeer implements MainActivityPeer {
   public void onActivityCreate(Bundle saveInstanceState) {
     mainActivity.setContentView(R.layout.main_activity);
     MainBottomNavBarBottomNavTabListener bottomNavBarBottomNavTabListener =
-        new MainBottomNavBarBottomNavTabListener(mainActivity.getSupportFragmentManager());
+        new MainBottomNavBarBottomNavTabListener(
+            mainActivity.getSupportFragmentManager(), mainActivity.getApplicationContext());
     BottomNavBar bottomNav = mainActivity.findViewById(R.id.bottom_nav_bar);
     bottomNav.addOnTabSelectedListener(bottomNavBarBottomNavTabListener);
     bottomNav.selectTab(TabIndex.SPEED_DIAL);
@@ -77,9 +84,12 @@ public class NewMainActivityPeer implements MainActivityPeer {
     private static final String VOICEMAIL_TAG = "voicemail";
 
     private final FragmentManager supportFragmentManager;
+    private final Context appContext;
 
-    private MainBottomNavBarBottomNavTabListener(FragmentManager supportFragmentManager) {
+    private MainBottomNavBarBottomNavTabListener(
+        FragmentManager supportFragmentManager, Context appContext) {
       this.supportFragmentManager = supportFragmentManager;
+      this.appContext = appContext;
     }
 
     @Override
@@ -126,8 +136,18 @@ public class NewMainActivityPeer implements MainActivityPeer {
 
     private void hideAllFragments() {
       FragmentTransaction supportTransaction = supportFragmentManager.beginTransaction();
-      if (supportFragmentManager.findFragmentByTag(CALL_LOG_TAG) != null) {
-        supportTransaction.hide(supportFragmentManager.findFragmentByTag(CALL_LOG_TAG));
+      Fragment callLogFragment = supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      if (callLogFragment != null) {
+        if (callLogFragment.isVisible()) {
+          // If the user taps any bottom nav button and the call log is showing, immediately cancel
+          // missed calls (unbold them and clear their notifications).
+          Futures.addCallback(
+              // TODO(zachh): Use dagger to create Peer and MainBottomNavBarBottomNavTabListener.
+              CallLogComponent.get(appContext).getClearMissedCalls().clearAll(),
+              new DefaultFutureCallback<>(),
+              MoreExecutors.directExecutor());
+        }
+        supportTransaction.hide(callLogFragment);
       }
       if (supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
         supportTransaction.hide(supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG));
