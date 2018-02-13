@@ -13,14 +13,5 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<manifest
-    package="com.android.incallui.rtt.impl"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-  <application android:theme="@style/Theme.AppCompat">
-  <activity
-      android:name=".RttChatActivity"
-      android:exported="false"
-      android:theme="@style/DialerThemeBase.NoActionBar"
-      android:windowSoftInputMode="adjustResize"/>
-  </application>
+<manifest package="com.android.incallui.rtt.impl">
 </manifest>

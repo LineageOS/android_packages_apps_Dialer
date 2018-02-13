@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,31 +14,10 @@
  * limitations under the License
  */
 
-package com.android.incallui.answer.protocol;
+package com.android.incallui.rtt.protocol;
 
-import android.support.v4.app.Fragment;
-import java.util.List;
+/** Callbacks from the module out to the container. */
+public interface RttCallScreenDelegateFactory {
 
-/** Interface for the answer module. */
-public interface AnswerScreen {
-
-  String getCallId();
-
-  boolean isRttCall();
-
-  boolean isVideoCall();
-
-  boolean isVideoUpgradeRequest();
-
-  boolean allowAnswerAndRelease();
-
-  boolean isActionTimeout();
-
-  void setTextResponses(List<String> textResponses);
-
-  boolean hasPendingDialogs();
-
-  void dismissPendingDialogs();
-
-  Fragment getAnswerScreenFragment();
+  RttCallScreenDelegate newRttCallScreenDelegate(RttCallScreen rttCallScreen);
 }

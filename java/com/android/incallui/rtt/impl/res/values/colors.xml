@@ -15,5 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <color name="rtt_status_bar_color">#E0E0E0</color>
+  <color name="rtt_status_bar_color">#03165C</color>
+  <color name="rtt_navigation_bar_color">#FAFAFA</color>
 </resources>
