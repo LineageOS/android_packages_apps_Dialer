@@ -45,6 +45,7 @@ import android.widget.TextView.OnEditorActionListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
@@ -69,8 +70,6 @@ public class RttChatFragment extends Fragment
         InCallButtonUi {
 
   private static final String ARG_CALL_ID = "call_id";
-  private static final String ARG_NAME_OR_NUMBER = "name_or_number";
-  private static final String ARG_SESSION_START_TIME = "session_start_time";
 
   private RecyclerView recyclerView;
   private RttChatAdapter adapter;
@@ -91,6 +90,9 @@ public class RttChatFragment extends Fragment
   private RttCallScreenDelegate rttCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
   private View endCallButton;
+  private TextView nameTextView;
+  private Chronometer chronometer;
+  private boolean isTimerStarted;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -101,8 +103,6 @@ public class RttChatFragment extends Fragment
   public static RttChatFragment newInstance(String callId) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, callId);
-    bundle.putString(ARG_NAME_OR_NUMBER, "Jane Williamson");
-    bundle.putLong(ARG_SESSION_START_TIME, SystemClock.elapsedRealtime());
     RttChatFragment instance = new RttChatFragment();
     instance.setArguments(bundle);
     return instance;
@@ -171,21 +171,8 @@ public class RttChatFragment extends Fragment
           inCallButtonUiDelegate.onEndCallClicked();
         });
 
-    String nameOrNumber = null;
-    Bundle bundle = getArguments();
-    if (bundle != null) {
-      nameOrNumber = bundle.getString(ARG_NAME_OR_NUMBER, getString(R.string.unknown));
-    }
-    TextView nameTextView = view.findViewById(R.id.rtt_name_or_number);
-    nameTextView.setText(nameOrNumber);
-
-    long sessionStartTime = SystemClock.elapsedRealtime();
-    if (bundle != null) {
-      sessionStartTime = bundle.getLong(ARG_SESSION_START_TIME, sessionStartTime);
-    }
-    Chronometer chronometer = view.findViewById(R.id.rtt_timer);
-    chronometer.setBase(sessionStartTime);
-    chronometer.start();
+    nameTextView = view.findViewById(R.id.rtt_name_or_number);
+    chronometer = view.findViewById(R.id.rtt_timer);
     return view;
   }
 
@@ -273,13 +260,26 @@ public class RttChatFragment extends Fragment
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("RttChatFragment.setPrimary", primaryInfo.toString());
+    nameTextView.setText(primaryInfo.name);
   }
 
   @Override
   public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {}
 
   @Override
-  public void setCallState(@NonNull PrimaryCallState primaryCallState) {}
+  public void setCallState(@NonNull PrimaryCallState primaryCallState) {
+    LogUtil.i("RttChatFragment.setCallState", primaryCallState.toString());
+    if (!isTimerStarted && primaryCallState.state == State.ACTIVE) {
+      LogUtil.i(
+          "RttChatFragment.setCallState", "starting timer with base: %d", chronometer.getBase());
+      chronometer.setBase(
+          primaryCallState.connectTimeMillis
+              - System.currentTimeMillis()
+              + SystemClock.elapsedRealtime());
+      chronometer.start();
+      isTimerStarted = true;
+    }
+  }
 
   @Override
   public void setEndCallButtonEnabled(boolean enabled, boolean animate) {}
