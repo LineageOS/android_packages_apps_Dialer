@@ -66,6 +66,8 @@ import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.interactions.PhoneNumberInteraction;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
@@ -154,6 +156,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public void onActivityCreate(Bundle savedInstanceState) {
+    LogUtil.enterBlock("OldMainActivityPeer.onActivityCreate");
     mainActivity.setContentView(R.layout.main_activity);
     initUiListeners();
     initLayout(savedInstanceState);
@@ -173,14 +176,19 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     snackbarContainer = mainActivity.findViewById(R.id.coordinator_layout);
 
     FloatingActionButton fab = mainActivity.findViewById(R.id.fab);
-    fab.setOnClickListener(v -> searchController.showDialpad(true));
+    fab.setOnClickListener(
+        v -> {
+          Logger.get(mainActivity)
+              .logImpression(DialerImpression.Type.NUI_CLICK_FAB_TO_OPEN_DIALPAD);
+          searchController.showDialpad(true);
+        });
 
     MainToolbar toolbar = mainActivity.findViewById(R.id.toolbar);
     mainActivity.setSupportActionBar(mainActivity.findViewById(R.id.toolbar));
 
     bottomNav = mainActivity.findViewById(R.id.bottom_nav_bar);
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
-        new MainBottomNavBarBottomNavTabListener(mainActivity.getFragmentManager());
+        new MainBottomNavBarBottomNavTabListener(mainActivity, mainActivity.getFragmentManager());
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
 
     callLogFragmentListener =
@@ -222,6 +230,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public void onNewIntent(Intent intent) {
+    LogUtil.enterBlock("OldMainActivityPeer.onNewIntent");
     showTabOnIntent(intent);
   }
 
@@ -312,10 +321,15 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    LogUtil.i(
+        "OldMainActivityPeer.onActivityResult",
+        "requestCode:%d, resultCode:%d",
+        requestCode,
+        resultCode);
     if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
       searchController.onVoiceResults(resultCode, data);
     } else {
-      LogUtil.e("MainActivity.onActivityResult", "Unknown request code: " + requestCode);
+      LogUtil.e("OldMainActivityPeer.onActivityResult", "Unknown request code: " + requestCode);
     }
   }
 
@@ -353,6 +367,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       return (T) onPhoneNumberPickerActionListener;
     } else if (callbackInterface.isInstance(oldSpeedDialFragmentHost)) {
       return (T) oldSpeedDialFragmentHost;
+    } else if (callbackInterface.isInstance(searchController)) {
+      return (T) searchController;
     } else {
       return null;
     }
@@ -802,13 +818,20 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private static final String VOICEMAIL_TAG = "voicemail";
 
     private final FragmentManager fragmentManager;
+    private final Context context;
+    @TabIndex private int selectedTab = -1;
 
-    private MainBottomNavBarBottomNavTabListener(FragmentManager fragmentManager) {
+    private MainBottomNavBarBottomNavTabListener(Context context, FragmentManager fragmentManager) {
       this.fragmentManager = fragmentManager;
+      this.context = context;
     }
 
     @Override
     public void onSpeedDialSelected() {
+      if (selectedTab != TabIndex.SPEED_DIAL) {
+        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_FAVORITE);
+        selectedTab = TabIndex.SPEED_DIAL;
+      }
       hideAllFragments();
       Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       if (fragment == null) {
@@ -823,6 +846,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     @Override
     public void onCallLogSelected() {
+      if (selectedTab != TabIndex.CALL_LOG) {
+        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_CALL_LOG);
+        selectedTab = TabIndex.CALL_LOG;
+      }
       hideAllFragments();
       CallLogFragment fragment = (CallLogFragment) fragmentManager.findFragmentByTag(CALL_LOG_TAG);
       if (fragment == null) {
@@ -837,6 +864,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     @Override
     public void onContactsSelected() {
+      if (selectedTab != TabIndex.CONTACTS) {
+        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_CONTACTS);
+        selectedTab = TabIndex.CONTACTS;
+      }
       hideAllFragments();
       ContactsFragment fragment =
           (ContactsFragment) fragmentManager.findFragmentByTag(CONTACTS_TAG);
@@ -855,6 +886,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     @Override
     public void onVoicemailSelected() {
+      if (selectedTab != TabIndex.VOICEMAIL) {
+        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_VOICEMAIL);
+        selectedTab = TabIndex.VOICEMAIL;
+      }
       hideAllFragments();
       VisualVoicemailCallLogFragment fragment =
           (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
