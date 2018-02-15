@@ -77,6 +77,12 @@
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
   <string name="meid">MEID</string>
 
+  <!-- The label for the hex encoding of the device ID -->
+  <string name="hex" translatable="false">HEX:</string>
+
+  <!-- The label for the decimal encoding of the device ID -->
+  <string name="dec" translatable="false">DEC:</string>
+
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
   <string name="simContacts_emptyLoading">Loading from SIM card\u2026</string>
 

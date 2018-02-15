@@ -111,6 +111,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-guava-target \
 	dialer-glide-target \
 	dialer-glide-annotation-target \
+	dialer-zxing-target \
 	jsr305 \
 	libbackup \
 	libphonenumber \
@@ -408,3 +409,14 @@ LOCAL_UNINSTALLABLE_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE := dialer-zxing-target
+LOCAL_SDK_VERSION := current
+LOCAL_SRC_FILES := ../../../external/zxing/core/core.jar
+LOCAL_UNINSTALLABLE_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+
