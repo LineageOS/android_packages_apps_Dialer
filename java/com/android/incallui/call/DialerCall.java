@@ -17,6 +17,7 @@
 package com.android.incallui.call;
 
 import android.Manifest.permission;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
@@ -929,6 +930,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return getVideoTech().isTransmittingOrReceiving() || VideoProfile.isVideo(getVideoState());
   }
 
+  @TargetApi(28)
   public boolean isRttCall() {
     if (BuildCompat.isAtLeastP()) {
       return getTelecomCall().isRttActive();
