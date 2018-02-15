@@ -41,16 +41,25 @@ final class Modules {
         modules,
         voicemailEntry.number(),
         voicemailEntry.numberAttributes().getName(),
-        voicemailEntry.numberAttributes().getLookupUri());
+        voicemailEntry.numberAttributes().getLookupUri(),
+        voicemailEntry.numberAttributes().getIsBlocked(),
+        voicemailEntry.numberAttributes().getIsSpam());
 
     String normalizedNumber = voicemailEntry.number().getNormalizedNumber();
-    SharedModules.maybeAddModuleForSendingTextMessage(context, modules, normalizedNumber);
+    SharedModules.maybeAddModuleForSendingTextMessage(
+        context, modules, normalizedNumber, voicemailEntry.numberAttributes().getIsBlocked());
 
     if (!modules.isEmpty()) {
       modules.add(new DividerModule());
     }
 
-    // TODO(zachh): Module for blocking/unblocking spam.
+    SharedModules.addModulesHandlingBlockedOrSpamNumber(
+        context,
+        modules,
+        normalizedNumber,
+        voicemailEntry.numberAttributes().getIsBlocked(),
+        voicemailEntry.numberAttributes().getIsSpam());
+
     // TODO(zachh): Module for CallComposer.
     SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
 
