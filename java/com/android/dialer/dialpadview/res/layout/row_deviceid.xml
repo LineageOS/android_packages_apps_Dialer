@@ -19,6 +19,7 @@
     android:layout_marginTop="?dialogPreferredPadding"
     android:orientation="vertical">
   <TextView
+      android:id="@+id/deviceid_hex_label"
       style="@style/DeviceIdBody"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
