@@ -269,15 +269,12 @@ public class MainSearchController implements SearchBarListener {
     mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
-    getDialpadFragment().clearDialpad();
+    if (getDialpadFragment() != null) {
+      getDialpadFragment().clearDialpad();
+    }
   }
 
-  /**
-   * Returns {@link DialpadFragment}.
-   *
-   * <p>Unless this method is being called for the first time in {@link #openSearch(Optional)} or
-   * {@link #showDialpad(boolean)}, it should never return null.
-   */
+  @Nullable
   protected DialpadFragment getDialpadFragment() {
     return (DialpadFragment)
         mainActivity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
@@ -332,14 +329,6 @@ public class MainSearchController implements SearchBarListener {
       transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
-    }
-
-    // Add the dialpad fragment but keep it hidden
-    if (getDialpadFragment() == null) {
-      DialpadFragment dialpadFragment = new DialpadFragment();
-      transaction
-          .add(R.id.dialpad_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG)
-          .hide(dialpadFragment);
     }
 
     transaction.commit();
