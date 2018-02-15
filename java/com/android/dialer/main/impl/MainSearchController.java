@@ -261,7 +261,7 @@ public class MainSearchController implements SearchBarListener {
    * <p>Unless this method is being called for the first time in {@link #openSearch(Optional)} or
    * {@link #showDialpad(boolean)}, it should never return null.
    */
-  private DialpadFragment getDialpadFragment() {
+  protected DialpadFragment getDialpadFragment() {
     return (DialpadFragment)
         mainActivity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
   }

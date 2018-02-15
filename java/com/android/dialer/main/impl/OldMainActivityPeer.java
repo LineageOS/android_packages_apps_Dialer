@@ -191,7 +191,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     searchController = getNewMainSearchController(bottomNav, fab, toolbar);
     toolbar.setSearchBarListener(searchController);
 
-    onDialpadQueryChangedListener = new MainOnDialpadQueryChangedListener(searchController);
+    onDialpadQueryChangedListener = getNewOnDialpadQueryChangedListener(searchController);
     dialpadListener =
         new MainDialpadListener(mainActivity, searchController, getLastOutgoingCallListener);
     searchFragmentListener = new MainSearchFragmentListener(searchController);
@@ -285,6 +285,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         mainActivity.getSystemService(KeyguardManager.class).isKeyguardLocked());
   }
 
+  @Override
+  public void onActivityDestroyed() {}
+
   private void showPostCallPrompt() {
     if (TelecomUtil.isInManagedCall(mainActivity)) {
       // No prompt to show if the user is in a call
@@ -360,6 +363,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     return new MainSearchController(mainActivity, bottomNavBar, fab, mainToolbar);
   }
 
+  public MainOnDialpadQueryChangedListener getNewOnDialpadQueryChangedListener(
+      MainSearchController mainSearchController) {
+    return new MainOnDialpadQueryChangedListener(mainSearchController);
+  }
+
   /** @see OnContactSelectedListener */
   private static final class MainOnContactSelectedListener implements OnContactSelectedListener {
 
@@ -378,12 +386,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   /** @see OnDialpadQueryChangedListener */
-  private static final class MainOnDialpadQueryChangedListener
+  protected static class MainOnDialpadQueryChangedListener
       implements OnDialpadQueryChangedListener {
 
     private final MainSearchController searchController;
 
-    MainOnDialpadQueryChangedListener(MainSearchController searchController) {
+    protected MainOnDialpadQueryChangedListener(MainSearchController searchController) {
       this.searchController = searchController;
     }
 

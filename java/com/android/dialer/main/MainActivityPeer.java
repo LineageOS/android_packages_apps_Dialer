@@ -28,6 +28,8 @@ public interface MainActivityPeer {
 
   void onActivityStop();
 
+  void onActivityDestroyed();
+
   void onNewIntent(Intent intent);
 
   void onActivityResult(int requestCode, int resultCode, Intent data);
