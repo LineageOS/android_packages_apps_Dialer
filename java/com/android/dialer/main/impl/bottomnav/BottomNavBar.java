@@ -162,6 +162,7 @@ public final class BottomNavBar extends LinearLayout {
     }
   }
 
+  @TabIndex
   public int getSelectedTab() {
     return selectedTab;
   }

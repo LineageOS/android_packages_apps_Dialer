@@ -48,4 +48,8 @@ public class DirectoryCompat {
   public static boolean isEnterpriseDirectoryId(long directoryId) {
     return VERSION.SDK_INT >= VERSION_CODES.N && Directory.isEnterpriseDirectoryId(directoryId);
   }
+
+  public static boolean isOnlyEnterpriseDirectoryId(long directoryId) {
+    return isEnterpriseDirectoryId(directoryId) && !isRemoteDirectoryId(directoryId);
+  }
 }

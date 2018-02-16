@@ -17,10 +17,15 @@
 package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
+import android.provider.CallLog.Calls;
 import android.view.View;
+import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.contactactions.ContactActionBottomSheet;
 import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /** Handles configuration of the bottom sheet menus for call log entries. */
 public final class NewCallLogMenu {
@@ -28,11 +33,23 @@ public final class NewCallLogMenu {
   /** Creates and returns the OnClickListener which opens the menu for the provided row. */
   public static View.OnClickListener createOnClickListener(
       Context context, CoalescedRow row, GlidePhotoManager glidePhotoManager) {
-    return (view) ->
-        ContactActionBottomSheet.show(
-            context,
-            PrimaryAction.fromRow(context, row),
-            Modules.fromRow(context, row),
-            glidePhotoManager);
+    return view -> {
+      ContactActionBottomSheet.show(
+          context,
+          PrimaryAction.fromRow(context, row),
+          Modules.fromRow(context, row),
+          glidePhotoManager);
+
+      // If the user opens the bottom sheet for a new call, clear the notifications and make the row
+      // not bold immediately. To do this, mark all of the calls in group as not new.
+      if (row.isNew() && row.callType() == Calls.MISSED_TYPE) {
+        Futures.addCallback(
+            CallLogComponent.get(context)
+                .getClearMissedCalls()
+                .clearBySystemCallLogId(row.coalescedIds().getCoalescedIdList()),
+            new DefaultFutureCallback<>(),
+            MoreExecutors.directExecutor());
+      }
+    };
   }
 }

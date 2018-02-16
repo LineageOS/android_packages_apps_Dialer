@@ -31,7 +31,7 @@ import javax.inject.Inject;
 public class UiThreadExecutor extends AbstractListeningExecutorService {
 
   @Inject
-  UiThreadExecutor() {}
+  public UiThreadExecutor() {}
 
   @Override
   public void shutdown() {

@@ -18,6 +18,7 @@ package com.android.dialer.calllog.ui;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -31,10 +32,14 @@ import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.CallLogFramework.CallLogUi;
 import com.android.dialer.calllog.RefreshAnnotatedCallLogWorker;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
+import java.util.concurrent.TimeUnit;
 
 /** The "new" call log fragment implementation, which is built on top of the annotated call log. */
 public final class NewCallLogFragment extends Fragment
@@ -46,12 +51,18 @@ public final class NewCallLogFragment extends Fragment
    * the simulator, using this value results in ~6 refresh cycles (on a release build) to write 120
    * call log entries.
    */
-  private static final long WAIT_MILLIS = 100L;
+  private static final long REFRESH_ANNOTATED_CALL_LOG_WAIT_MILLIS = 100L;
+
+  @VisibleForTesting
+  static final long MARK_ALL_CALLS_READ_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
   private RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
   private UiListener<Void> refreshAnnotatedCallLogListener;
   private RecyclerView recyclerView;
   @Nullable private Runnable refreshAnnotatedCallLogRunnable;
+
+  private boolean shouldMarkCallsRead = false;
+  private final Runnable setShouldMarkCallsReadTrue = () -> shouldMarkCallsRead = true;
 
   public NewCallLogFragment() {
     LogUtil.enterBlock("NewCallLogFragment.NewCallLogFragment");
@@ -103,6 +114,13 @@ public final class NewCallLogFragment extends Fragment
       ((NewCallLogAdapter) recyclerView.getAdapter()).clearCache();
       recyclerView.getAdapter().notifyDataSetChanged();
     }
+
+    // We shouldn't mark the calls as read immediately when the 3 second timer expires because we
+    // don't want to disrupt the UI; instead we set a bit indicating to mark them read when the user
+    // leaves the fragment (in onPause).
+    shouldMarkCallsRead = false;
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(setShouldMarkCallsReadTrue, MARK_ALL_CALLS_READ_WAIT_MILLIS);
   }
 
   @Override
@@ -113,9 +131,17 @@ public final class NewCallLogFragment extends Fragment
 
     // This is pending work that we don't actually need to follow through with.
     ThreadUtil.getUiThreadHandler().removeCallbacks(refreshAnnotatedCallLogRunnable);
+    ThreadUtil.getUiThreadHandler().removeCallbacks(setShouldMarkCallsReadTrue);
 
     CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
     callLogFramework.detachUi();
+
+    if (shouldMarkCallsRead) {
+      Futures.addCallback(
+          CallLogComponent.get(getContext()).getClearMissedCalls().clearAll(),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
+    }
   }
 
   @Override
@@ -159,7 +185,8 @@ public final class NewCallLogFragment extends Fragment
                 throw new RuntimeException(throwable);
               });
         };
-    ThreadUtil.getUiThreadHandler().postDelayed(refreshAnnotatedCallLogRunnable, WAIT_MILLIS);
+    ThreadUtil.getUiThreadHandler()
+        .postDelayed(refreshAnnotatedCallLogRunnable, REFRESH_ANNOTATED_CALL_LOG_WAIT_MILLIS);
   }
 
   @Override
