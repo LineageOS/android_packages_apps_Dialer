@@ -97,7 +97,6 @@ public class RttChatBot {
           break;
         case SEND_MESSAGE:
           String message = (String) msg.obj;
-          LogUtil.w("test", "type: %s, to stream: %s", message, rttTextStream);
           try {
             rttTextStream.write(message);
           } catch (IOException e) {

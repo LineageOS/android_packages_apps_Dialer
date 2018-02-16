@@ -132,7 +132,7 @@ public class RttChatFragment extends Fragment
         FragmentUtils.getParentUnsafe(this, RttCallScreenDelegateFactory.class)
             .newRttCallScreenDelegate(this);
 
-    rttCallScreenDelegate.initRttCallScreenDelegate(getContext(), this);
+    rttCallScreenDelegate.initRttCallScreenDelegate(this);
 
     inCallScreenDelegate.onInCallScreenDelegateInit(this);
     inCallScreenDelegate.onInCallScreenReady();
@@ -193,7 +193,24 @@ public class RttChatFragment extends Fragment
     if (isClearingInput) {
       return;
     }
-    adapter.addLocalMessage(RttChatMessage.getChangedString(s, start, before, count));
+    String messageToAppend = RttChatMessage.getChangedString(s, start, before, count);
+    if (!TextUtils.isEmpty(messageToAppend)) {
+      adapter.addLocalMessage(messageToAppend);
+      rttCallScreenDelegate.onLocalMessage(messageToAppend);
+    }
+  }
+
+  @Override
+  public void onRemoteMessage(String message) {
+    adapter.addRemoteMessage(message);
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    LogUtil.enterBlock("RttChatFragment.onDestroyView");
+    inCallButtonUiDelegate.onInCallButtonUiUnready();
+    inCallScreenDelegate.onInCallScreenUnready();
   }
 
   @Override

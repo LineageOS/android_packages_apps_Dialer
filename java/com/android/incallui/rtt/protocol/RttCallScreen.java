@@ -25,6 +25,8 @@ public interface RttCallScreen {
 
   void onRttScreenStop();
 
+  void onRemoteMessage(String message);
+
   Fragment getRttCallScreenFragment();
 
   String getCallId();

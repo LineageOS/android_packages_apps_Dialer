@@ -182,6 +182,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       didShowAnswerScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_ANSWER_SCREEN);
       didShowInCallScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_IN_CALL_SCREEN);
       didShowVideoCallScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_VIDEO_CALL_SCREEN);
+      didShowRttCallScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_RTT_CALL_SCREEN);
     }
 
     setWindowFlags();
@@ -387,6 +388,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     out.putBoolean(KeysForSavedInstance.DID_SHOW_ANSWER_SCREEN, didShowAnswerScreen);
     out.putBoolean(KeysForSavedInstance.DID_SHOW_IN_CALL_SCREEN, didShowInCallScreen);
     out.putBoolean(KeysForSavedInstance.DID_SHOW_VIDEO_CALL_SCREEN, didShowVideoCallScreen);
+    out.putBoolean(KeysForSavedInstance.DID_SHOW_RTT_CALL_SCREEN, didShowRttCallScreen);
 
     super.onSaveInstanceState(out);
     isVisible = false;
@@ -1593,6 +1595,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String DID_SHOW_ANSWER_SCREEN = "did_show_answer_screen";
     static final String DID_SHOW_IN_CALL_SCREEN = "did_show_in_call_screen";
     static final String DID_SHOW_VIDEO_CALL_SCREEN = "did_show_video_call_screen";
+    static final String DID_SHOW_RTT_CALL_SCREEN = "did_show_rtt_call_screen";
   }
 
   /** Request codes for pending intents. */

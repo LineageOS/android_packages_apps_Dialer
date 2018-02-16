@@ -939,6 +939,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     }
   }
 
+  @TargetApi(28)
+  public RttCall getRttCall() {
+    if (!isRttCall()) {
+      return null;
+    }
+    return getTelecomCall().getRttCall();
+  }
+
   public boolean hasReceivedVideoUpgradeRequest() {
     return VideoUtils.hasReceivedVideoUpgradeRequest(getVideoTech().getSessionModificationState());
   }
@@ -948,7 +956,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public boolean hasSentRttUpgradeRequest() {
-    // TODO(wangqi): Implement this.
     return false;
   }
 
