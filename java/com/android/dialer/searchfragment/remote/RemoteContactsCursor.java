@@ -22,6 +22,7 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader;
@@ -101,7 +102,12 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
 
   private static MatrixCursor createHeaderCursor(Context context, String name, long id) {
     MatrixCursor headerCursor = new MatrixCursor(PROJECTION, 1);
-    headerCursor.addRow(new Object[] {context.getString(R.string.directory, name), id});
+    if (DirectoryCompat.isOnlyEnterpriseDirectoryId(id)) {
+      headerCursor.addRow(
+          new Object[] {context.getString(R.string.directory_search_label_work), id});
+    } else {
+      headerCursor.addRow(new Object[] {context.getString(R.string.directory, name), id});
+    }
     return headerCursor;
   }
 
