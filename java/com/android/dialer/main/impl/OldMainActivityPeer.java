@@ -196,7 +196,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             mainActivity, mainActivity.getContentResolver(), bottomNav, toolbar);
     bottomNav.addOnTabSelectedListener(callLogFragmentListener);
 
-    searchController = getNewMainSearchController(bottomNav, fab, toolbar);
+    searchController =
+        getNewMainSearchController(
+            bottomNav, fab, toolbar, mainActivity.findViewById(R.id.toolbar_shadow));
     toolbar.setSearchBarListener(searchController);
 
     onDialpadQueryChangedListener = getNewOnDialpadQueryChangedListener(searchController);
@@ -284,6 +286,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         .getDatabaseHelper(mainActivity)
         .startSmartDialUpdateThread(forceUpdate);
     showPostCallPrompt();
+
+    if (searchController.isInSearch()
+        || callLogAdapterOnActionModeStateChangedListener.isActionModeStateEnabled()) {
+      bottomNav.setVisibility(View.GONE);
+    } else {
+      bottomNav.setVisibility(View.VISIBLE);
+    }
   }
 
   @Override
@@ -375,8 +384,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   public MainSearchController getNewMainSearchController(
-      BottomNavBar bottomNavBar, FloatingActionButton fab, MainToolbar mainToolbar) {
-    return new MainSearchController(mainActivity, bottomNavBar, fab, mainToolbar);
+      BottomNavBar bottomNavBar,
+      FloatingActionButton fab,
+      MainToolbar mainToolbar,
+      View toolbarShadow) {
+    return new MainSearchController(mainActivity, bottomNavBar, fab, mainToolbar, toolbarShadow);
   }
 
   public MainOnDialpadQueryChangedListener getNewOnDialpadQueryChangedListener(
@@ -482,7 +494,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   /** @see CallLogAdapter.OnActionModeStateChangedListener */
-  // TODO(calderwoodra): What is the purpose of this listener?
   private static final class MainCallLogAdapterOnActionModeStateChangedListener
       implements CallLogAdapter.OnActionModeStateChangedListener {
 

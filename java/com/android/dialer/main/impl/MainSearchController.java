@@ -68,8 +68,7 @@ import java.util.ArrayList;
 public class MainSearchController implements SearchBarListener {
 
   private static final String KEY_IS_FAB_HIDDEN = "is_fab_hidden";
-  private static final String KEY_CURRENT_TAB = "current_tab";
-  private static final String KEY_BOTTOM_NAV_VISIBILITY = "bottom_nav_visibility";
+  private static final String KEY_TOOLBAR_SHADOW_VISIBILITY = "toolbar_shadow_visibility";
   private static final String KEY_IS_TOOLBAR_EXPANDED = "is_toolbar_expanded";
   private static final String KEY_IS_TOOLBAR_SLIDE_UP = "is_toolbar_slide_up";
 
@@ -80,16 +79,19 @@ public class MainSearchController implements SearchBarListener {
   private final BottomNavBar bottomNav;
   private final FloatingActionButton fab;
   private final MainToolbar toolbar;
+  private final View toolbarShadow;
 
   public MainSearchController(
       MainActivity mainActivity,
       BottomNavBar bottomNav,
       FloatingActionButton fab,
-      MainToolbar toolbar) {
+      MainToolbar toolbar,
+      View toolbarShadow) {
     this.mainActivity = mainActivity;
     this.bottomNav = bottomNav;
     this.fab = fab;
     this.toolbar = toolbar;
+    this.toolbarShadow = toolbarShadow;
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
@@ -266,6 +268,7 @@ public class MainSearchController implements SearchBarListener {
     }
     showBottomNav();
     toolbar.collapse(animate);
+    toolbarShadow.setVisibility(View.GONE);
     mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
@@ -319,6 +322,7 @@ public class MainSearchController implements SearchBarListener {
     fab.hide();
     toolbar.expand(/* animate=*/ true, query);
     toolbar.showKeyboard();
+    toolbarShadow.setVisibility(View.VISIBLE);
     hideBottomNav();
 
     FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
@@ -396,15 +400,13 @@ public class MainSearchController implements SearchBarListener {
 
   public void onSaveInstanceState(Bundle bundle) {
     bundle.putBoolean(KEY_IS_FAB_HIDDEN, !fab.isShown());
-    bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
-    bundle.putInt(KEY_BOTTOM_NAV_VISIBILITY, bottomNav.getVisibility());
+    bundle.putInt(KEY_TOOLBAR_SHADOW_VISIBILITY, toolbarShadow.getVisibility());
     bundle.putBoolean(KEY_IS_TOOLBAR_EXPANDED, toolbar.isExpanded());
     bundle.putBoolean(KEY_IS_TOOLBAR_SLIDE_UP, toolbar.isSlideUp());
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState) {
-    bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
-    bottomNav.setVisibility(savedInstanceState.getInt(KEY_BOTTOM_NAV_VISIBILITY));
+    toolbarShadow.setVisibility(savedInstanceState.getInt(KEY_TOOLBAR_SHADOW_VISIBILITY));
     if (savedInstanceState.getBoolean(KEY_IS_FAB_HIDDEN, false)) {
       fab.hide();
     }

@@ -661,8 +661,19 @@ public class CallLogFragment extends Fragment
     multiSelectUnSelectAllViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
     multiSelectUnSelectAllViewContent.setAlpha(show ? 0 : 1);
     multiSelectUnSelectAllViewContent.animate().alpha(show ? 1 : 0).start();
-    FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class)
-        .showMultiSelectRemoveView(show);
+    if (show) {
+      FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class)
+          .showMultiSelectRemoveView(true);
+    } else {
+      // This method is called after onDestroy. In DialtactsActivity, ListsFragment implements this
+      // interface and never goes away with configuration changes so this is safe. MainActivity
+      // removes that extra layer though, so we need to check if the parent is still there.
+      CallLogFragmentListener listener =
+          FragmentUtils.getParent(this, CallLogFragmentListener.class);
+      if (listener != null) {
+        listener.showMultiSelectRemoveView(false);
+      }
+    }
   }
 
   @Override

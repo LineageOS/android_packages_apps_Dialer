@@ -68,11 +68,13 @@
       layout="@layout/toolbar_layout"/>
 
   <ImageView
+      android:id="@+id/toolbar_shadow"
       android:layout_width="match_parent"
       android:layout_height="2dp"
       android:scaleType="fitXY"
       android:src="@drawable/search_shadow"
-      android:layout_below="@+id/toolbar"/>
+      android:layout_below="@+id/toolbar"
+      android:visibility="gone"/>
 
   <!-- TODO(calderwoodra): investigate what this is for and why we want it. -->
   <!-- Host container for the contact tile drag shadow -->
