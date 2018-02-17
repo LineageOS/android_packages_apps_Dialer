@@ -63,6 +63,8 @@
   <!-- Message indicating unknown call session event -->
   <string name="unknown_call_session_event">Onbekende oproepgebeurtenis</string>
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Gegevensgebruik via wifi: <xliff:g id="usage">%1$s</xliff:g></string>
+  <string name="lte_data_usage_label">Gegevensgebruik via LTE: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
   <string name="modify_call_option_title">Soort gesprek</string>
   <string name="modify_call_option_vt">Video verzenden/ontvangen</string>
@@ -74,6 +76,7 @@
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
   <string name="qti_ims_transfer_num_error">Nummer niet ingesteld. Vul het nummer in via IMS-instellingen om het opnieuw te proberen.</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">Direct doorverbinden</string>
   <!-- Text for the onscreen "assured transfer" button -->
   <!-- Text for the onscreen "consultative transfer" button -->
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
@@ -113,20 +116,36 @@
   <!-- Session modify cause code downgrade generic error -->
   <string name="session_modify_cause_downgrade_generic_error">Oproep gedegradeerd als gevolg van algemene fout</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">Inkomende conference call</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">Inkomende videoconference</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Inkomende conference call</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">Inkomende conference call via <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Message indicating call failed due to low battery -->
   <string name="call_failed_due_to_low_battery">Oproep mislukt als gevolg van lage accuspanning</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">Goede spraakkwaliteit</string>
+  <string name="vowifi_call_quality_fair">Redelijk goede spraakkwaliteit</string>
+  <string name="vowifi_call_quality_poor">Slechte spraakkwaliteit</string>
   <!-- Title for low battery alert dialogue -->
+  <string name="low_battery">Waarschuwing bij lage accuspanning</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">Wilt u de verbinding verbreken?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">Accuspanning is minder dan 15%. Wilt u doorgaan met de video-oproep of deze omzetten in een spraakoproep?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">Omzetten</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">Video-oproep</string>
+  <string name="video_call_cannot_upgrade">Kan op dit moment geen video-oproepen aannemen</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">Fotomodus</string>
+  <string name="video_call_picture_mode_preview_video">Cameravoorbeeld</string>
+  <string name="video_call_picture_mode_incoming_video">Inkomend videogesprek</string>
   <string name="video_call_picture_mode_cancel_option">Annuleren</string>
   <string name="video_call_picture_mode_save_option">Opslaan</string>
 </resources>

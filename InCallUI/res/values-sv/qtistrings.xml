@@ -38,18 +38,31 @@
   <!-- Call substate label for avp retry -->
   <!-- Video quality changed message -->
   <!-- Video quality High -->
+  <string name="video_quality_high">hög</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">medel</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">låg</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">okänd</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">Spelaren startad</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">Spelaren stoppad</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">Kameran är inte redo</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">Kameran är redo</string>
   <!-- Message indicating unknown call session event -->
   <!-- Message indicating data usage -->
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">Välj samtalstyp</string>
+  <string name="modify_call_option_vt_tx">Videosändning</string>
+  <string name="modify_call_option_vt_rx">Videomottagning</string>
+  <string name="modify_call_option_voice">Endast röst</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">Det gick inte att ändra samtalet på grund av låg batterinivå.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
   <!-- Text for the onscreen "blind transfer" button -->
   <!-- Text for the onscreen "assured transfer" button -->
@@ -86,4 +99,7 @@
   <!-- International prefix source-->
   <!-- International prefix converted value-->
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_incoming_video">Inkommande videosamtal</string>
+  <string name="video_call_picture_mode_cancel_option">Avbryt</string>
+  <string name="video_call_picture_mode_save_option">Spara</string>
 </resources>

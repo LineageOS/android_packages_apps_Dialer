@@ -106,6 +106,7 @@
   <string name="clear">Bersihkan</string>
   <string name="description_clear_search">Bersihkan pencarian</string>
   <string name="video_call_welcome_title"><b>Selamat datang di Video Calling Dialer baru</b></string>
+  <string name="video_call_welcome_message">Kita semua senang mendengar suara akrab saat berbicara, tetapi berbicara sambil bertatap muka jauh lebih baik! Inilah yang harus Anda ketahui untuk mendapatkan waktu-nyata Anda (atau FaceTime?)\n Anda harus berada di 4G LTE atau koneksi Wi-Fi\n Perangkat yang Anda telepon juga harus kompatibel dengan panggilan video\n Panggilan video menggunakan data dengan kecepatan tinggi\n Anda juga dapat meningkatkan panggilan suara ke panggilan video\n\n Periksa <a>https://support.t-mobile.com/docs/DOC-23574</a> untuk informasi lebih lanjut.</string>
   <string name="video_call_welcome_message_repeat">Selalu tampilkan pesan ini</string>
   <string name="toast_change_video_call_failed">Tidak dapat beralih ke panggilan video, format nomor salah</string>
   <string name="toast_make_video_call_failed">Tidak dapat melakukan panggilan video, format nomor salah</string>

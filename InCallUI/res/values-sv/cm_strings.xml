@@ -20,10 +20,18 @@
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
+  <string name="incall_call_type_label_forwarded">Vidarebefordrat samtal</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Väntande samtal</string>
+  <string name="onscreenCallRecordText">Spela in samtalet</string>
+  <string name="onscreenStopCallRecordText">Stoppa inspelningen</string>
+  <string name="call_state_active">Aktiv</string>
+  <string name="call_state_unknown">Okänt</string>
+  <string name="call_state_disconnecting">Kopplar från</string>
+  <string name="call_state_disconnected">Frånkopplad</string>
 </resources>

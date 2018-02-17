@@ -35,7 +35,16 @@
   <string name="call_recording_failed_message">Gagal memulai perekaman panggilan</string>
   <string name="call_recording_file_location">Rekaman panggilan disimpan ke <xliff:g id="filename">%s</xliff:g></string>
   <string name="onscreenCallRecordText">Rekam panggilan</string>
+  <string name="onscreenStopCallRecordText">Berhenti merekam</string>
   <string name="recording_time_text">Merekam</string>
+  <string name="recording_warning_title">Hidupkan perekam panggilan?</string>
+  <string name="recording_warning_text">Perhatian: Anda akan bertanggung jawab untuk mematuhi setiap hukum, peraturan dan aturan yang berlaku untuk penggunaan fungsi perekaman panggilan dan penggunaan atau distribusi dari rekaman tersebut.</string>
+  <string name="call_failed_due_to_validate_number">Tidak dapat melakukan panggilan video, format nomor tidak benar</string>
+  <string name="call_state_dialing">Memanggil</string>
+  <string name="call_state_holding">Tahan</string>
   <string name="call_state_active">Aktif</string>
+  <string name="call_state_unknown">Tak dikenal</string>
+  <string name="call_state_disconnecting">Memutuskan</string>
   <string name="call_state_disconnected">Terputus</string>
+  <string name="too_many_recipients">Tidak lebih dari 6 orang yang dapat bergabung dalam panggilan konferensi 4G.</string>
 </resources>

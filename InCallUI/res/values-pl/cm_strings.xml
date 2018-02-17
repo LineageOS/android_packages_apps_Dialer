@@ -36,6 +36,7 @@
   <string name="onscreenStopCallRecordText">Zatrzymaj nagrywanie</string>
   <string name="recording_time_text">Nagrywanie</string>
   <string name="recording_warning_title">Włączyć nagrywanie rozmów?</string>
+  <string name="call_state_dialing">Wybieranie numeru</string>
   <string name="call_state_active">Aktywne</string>
   <string name="call_state_unknown">Nieznane</string>
   <string name="call_state_disconnecting">Rozłączanie</string>

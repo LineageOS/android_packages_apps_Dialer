@@ -40,10 +40,12 @@
   <string name="recording_time_text">Opnemen\u2026</string>
   <string name="recording_warning_title">Gespreksopname inschakelen?</string>
   <string name="recording_warning_text">Let op: u bent zelf verantwoordelijk om de wetten, verordeningen en regels na te leven die van toepassing zijn bij het opnemen van gesprekken en het gebruik of verspreiding van zulke opnamen.</string>
+  <string name="call_failed_due_to_validate_number">Videogesprek mislukt, telefoonnummer is onjuist</string>
   <string name="call_state_dialing">Kiezen</string>
   <string name="call_state_holding">In de wacht</string>
   <string name="call_state_active">Actief</string>
   <string name="call_state_unknown">Onbekend</string>
   <string name="call_state_disconnecting">Verbinding verbreken</string>
   <string name="call_state_disconnected">Verbinding verbroken</string>
+  <string name="too_many_recipients">Er kunnen maximaal 6 personen deelnemen aan een telefonische vergadering via 4G.</string>
 </resources>

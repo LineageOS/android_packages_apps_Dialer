@@ -100,6 +100,8 @@
   <string name="clear">Rensa</string>
   <string name="description_clear_search">Rensa sökning</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowVOCallMenuItemText">Röstsamtal</string>
+  <string name="video_call">Videosamtal</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->

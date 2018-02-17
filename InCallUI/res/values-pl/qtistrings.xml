@@ -89,6 +89,7 @@
   <!-- Title for low battery alert dialogue -->
   <string name="low_battery">Ostrzeżenie o niskim poziomie baterii</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">Czy chcesz zakończyć połączenie?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <string name="low_battery_msg">Poziom baterii jest poniżej 15%. Czy chcesz kontynuować rozmowę wideo czy zamienić ją na rozmowę głosową?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
