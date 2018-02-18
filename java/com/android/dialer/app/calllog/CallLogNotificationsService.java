@@ -31,6 +31,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.notification.missedcalls.MissedCallNotificationCanceller;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 
@@ -84,14 +85,6 @@ public class CallLogNotificationsService extends IntentService {
     LogUtil.enterBlock("CallLogNotificationsService.markAllNewVoicemailsAsOld");
     Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
     serviceIntent.setAction(CallLogNotificationsService.ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD);
-    context.startService(serviceIntent);
-  }
-
-  public static void markSingleNewVoicemailAsOld(Context context, @Nullable Uri voicemailUri) {
-    LogUtil.enterBlock("CallLogNotificationsService.markSingleNewVoicemailAsOld");
-    Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-    serviceIntent.setAction(CallLogNotificationsService.ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD);
-    serviceIntent.setData(voicemailUri);
     context.startService(serviceIntent);
   }
 
@@ -175,7 +168,7 @@ public class CallLogNotificationsService extends IntentService {
       case ACTION_CANCEL_SINGLE_MISSED_CALL:
         Uri callUri = intent.getData();
         CallLogNotificationsQueryHelper.markSingleMissedCallInCallLogAsRead(this, callUri);
-        MissedCallNotifier.cancelSingleMissedCallNotification(this, callUri);
+        MissedCallNotificationCanceller.cancelSingle(this, callUri);
         TelecomUtil.cancelMissedCallsNotification(this);
         break;
       case ACTION_CALL_BACK_FROM_MISSED_CALL_NOTIFICATION:
@@ -196,7 +189,7 @@ public class CallLogNotificationsService extends IntentService {
     LogUtil.enterBlock("CallLogNotificationsService.cancelAllMissedCallsBackground");
     Assert.isWorkerThread();
     CallLogNotificationsQueryHelper.markAllMissedCallsInCallLogAsRead(context);
-    MissedCallNotifier.cancelAllMissedCallNotifications(context);
+    MissedCallNotificationCanceller.cancelAll(context);
     TelecomUtil.cancelMissedCallsNotification(context);
   }
 

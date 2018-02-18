@@ -52,15 +52,8 @@ final class Modules {
 
     if (canPlaceCalls) {
       addModuleForVideoOrAudioCall(context, modules, row, normalizedNumber);
-
-      SharedModules.maybeAddModuleForAddingToContacts(
-          context,
-          modules,
-          row.number(),
-          row.numberAttributes().getName(),
-          row.numberAttributes().getLookupUri());
-
-      SharedModules.maybeAddModuleForSendingTextMessage(context, modules, normalizedNumber);
+      SharedModules.maybeAddModuleForSendingTextMessage(
+          context, modules, normalizedNumber, row.numberAttributes().getIsBlocked());
     }
 
     if (!modules.isEmpty()) {
@@ -68,10 +61,23 @@ final class Modules {
     }
 
 
-    // TODO(zachh): Module for blocking/unblocking spam.
     // TODO(zachh): Module for CallComposer.
 
     if (canPlaceCalls) {
+      SharedModules.maybeAddModuleForAddingToContacts(
+          context,
+          modules,
+          row.number(),
+          row.numberAttributes().getName(),
+          row.numberAttributes().getLookupUri(),
+          row.numberAttributes().getIsBlocked(),
+          row.numberAttributes().getIsSpam());
+      SharedModules.addModulesHandlingBlockedOrSpamNumber(
+          context,
+          modules,
+          normalizedNumber,
+          row.numberAttributes().getIsBlocked(),
+          row.numberAttributes().getIsSpam());
       SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
     }
 
@@ -89,9 +95,22 @@ final class Modules {
       List<ContactActionModule> modules,
       CoalescedRow row,
       String normalizedNumber) {
+    // If a number is blocked, skip this menu item.
+    if (row.numberAttributes().getIsBlocked()) {
+      return;
+    }
+
     PhoneAccountHandle phoneAccountHandle =
         TelecomUtil.composePhoneAccountHandle(
             row.phoneAccountComponentName(), row.phoneAccountId());
+
+    // For a spam number, only audio calls are allowed.
+    if (row.numberAttributes().getIsSpam()) {
+      modules.add(
+          IntentModule.newCallModule(
+              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+      return;
+    }
 
     if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       // Add an audio call item for video calls. Clicking the top entry on the bottom sheet will

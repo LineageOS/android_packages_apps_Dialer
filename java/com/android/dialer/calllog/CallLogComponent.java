@@ -27,6 +27,8 @@ public abstract class CallLogComponent {
 
   public abstract RefreshAnnotatedCallLogWorker getRefreshAnnotatedCallLogWorker();
 
+  public abstract ClearMissedCalls getClearMissedCalls();
+
   public static CallLogComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .callLogComponent();

@@ -27,6 +27,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
+import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
@@ -71,7 +72,14 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
       Directory directory = directories.get(i);
 
       // Filter out local directories
-      if (!isRemoteDirectory(directory.getId())) {
+      if (!DirectoryCompat.isRemoteDirectoryId(directory.getId())
+          && !DirectoryCompat.isEnterpriseDirectoryId(directory.getId())) {
+        cursors[i] = null;
+        continue;
+      }
+
+      // Filter out invisible directories
+      if (DirectoryCompat.isInvisibleDirectory(directory.getId())) {
         cursors[i] = null;
         continue;
       }
@@ -91,17 +99,6 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
       cursors[i] = createMatrixCursorFilteringNullNumbers(cursor);
     }
     return RemoteContactsCursor.newInstance(getContext(), cursors, directories);
-  }
-
-  private static boolean isRemoteDirectory(long directoryId) {
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        ? ContactsContract.Directory.isRemoteDirectoryId(directoryId)
-        : (directoryId != ContactsContract.Directory.DEFAULT
-            && directoryId != ContactsContract.Directory.LOCAL_INVISIBLE
-            // Directory.ENTERPRISE_DEFAULT is the default work profile directory for locally stored
-            // contacts
-            && directoryId != ContactsContract.Directory.ENTERPRISE_DEFAULT
-            && directoryId != ContactsContract.Directory.ENTERPRISE_LOCAL_INVISIBLE);
   }
 
   private MatrixCursor createMatrixCursorFilteringNullNumbers(Cursor cursor) {
