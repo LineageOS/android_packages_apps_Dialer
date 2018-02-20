@@ -47,6 +47,7 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
+import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -79,18 +80,21 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
   private final ListeningExecutorService backgroundExecutorService;
+  private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
 
   @Nullable private Long lastTimestampProcessed;
 
   @Inject
-  SystemCallLogDataSource(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+  SystemCallLogDataSource(
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
+      RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
     this.backgroundExecutorService = backgroundExecutorService;
+    this.refreshAnnotatedCallLogNotifier = refreshAnnotatedCallLogNotifier;
   }
 
   @MainThread
   @Override
-  public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  public void registerContentObservers(Context appContext) {
     Assert.isMainThread();
 
     LogUtil.enterBlock("SystemCallLogDataSource.registerContentObservers");
@@ -102,7 +106,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     // TODO(zachh): Need to somehow register observers if user enables permission after launch?
 
     CallLogObserver callLogObserver =
-        new CallLogObserver(ThreadUtil.getUiThreadHandler(), appContext, contentObserverCallbacks);
+        new CallLogObserver(ThreadUtil.getUiThreadHandler(), refreshAnnotatedCallLogNotifier);
 
     appContext
         .getContentResolver()
@@ -524,15 +528,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     return ids;
   }
 
+  // TODO(a bug): Consider replacing it with MarkDirtyObserver.
   private static class CallLogObserver extends ContentObserver {
-    private final Context appContext;
-    private final ContentObserverCallbacks contentObserverCallbacks;
+    private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
 
     CallLogObserver(
-        Handler handler, Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+        Handler handler, RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
       super(handler);
-      this.appContext = appContext;
-      this.contentObserverCallbacks = contentObserverCallbacks;
+      this.refreshAnnotatedCallLogNotifier = refreshAnnotatedCallLogNotifier;
     }
 
     @MainThread
@@ -552,7 +555,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
        * table, which would be too slow. So, we just rely on content observers to trigger rebuilds
        * when any change is made to the system call log.
        */
-      contentObserverCallbacks.markDirtyAndNotify(appContext);
+      refreshAnnotatedCallLogNotifier.markDirtyAndNotify();
     }
   }
 }

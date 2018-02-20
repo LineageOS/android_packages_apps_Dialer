@@ -51,13 +51,16 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
 
   private final Context appContext;
   private final ListeningExecutorService executorService;
+  private final MarkDirtyObserver markDirtyObserver;
 
   @Inject
   DialerBlockedNumberPhoneLookup(
       @ApplicationContext Context appContext,
-      @BackgroundExecutor ListeningExecutorService executorService) {
+      @BackgroundExecutor ListeningExecutorService executorService,
+      MarkDirtyObserver markDirtyObserver) {
     this.appContext = appContext;
     this.executorService = executorService;
+    this.markDirtyObserver = markDirtyObserver;
   }
 
   @Override
@@ -165,13 +168,12 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
   }
 
   @Override
-  public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  public void registerContentObservers(Context appContext) {
     appContext
         .getContentResolver()
         .registerContentObserver(
             FilteredNumber.CONTENT_URI,
             true, // FilteredNumberProvider notifies on the item
-            new MarkDirtyObserver(appContext, contentObserverCallbacks));
+            markDirtyObserver);
   }
 }

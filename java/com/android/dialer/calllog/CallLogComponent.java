@@ -16,6 +16,7 @@
 package com.android.dialer.calllog;
 
 import android.content.Context;
+import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;
 
@@ -24,6 +25,8 @@ import dagger.Subcomponent;
 public abstract class CallLogComponent {
 
   public abstract CallLogFramework callLogFramework();
+
+  public abstract RefreshAnnotatedCallLogNotifier getRefreshAnnotatedCallLogNotifier();
 
   public abstract RefreshAnnotatedCallLogWorker getRefreshAnnotatedCallLogWorker();
 
