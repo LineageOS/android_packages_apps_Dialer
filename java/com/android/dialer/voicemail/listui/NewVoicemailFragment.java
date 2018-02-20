@@ -80,22 +80,66 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   public void onResume() {
     super.onResume();
 
-    LogUtil.enterBlock("NewCallLogFragment.onResume");
+    boolean isHidden = isHidden();
+    LogUtil.i("NewVoicemailFragment.onResume", "isHidden = %s", isHidden);
 
-    registerRefreshAnnotatedCallLogReceiver();
-
-    // TODO(zachh): Consider doing this when fragment becomes visible.
-    CallLogComponent.get(getContext())
-        .getRefreshAnnotatedCallLogNotifier()
-        .notify(/* checkDirty = */ true);
+    // As a fragment's onResume() is tied to the containing Activity's onResume(), being resumed is
+    // not equivalent to becoming visible.
+    // For example, when an activity with a hidden fragment is resumed, the fragment's onResume()
+    // will be called but it is not visible.
+    if (!isHidden) {
+      onFragmentShown();
+    }
   }
 
   @Override
   public void onPause() {
     super.onPause();
-
     LogUtil.enterBlock("NewVoicemailFragment.onPause");
 
+    onFragmentHidden();
+  }
+
+  @Override
+  public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    LogUtil.i("NewVoicemailFragment.onHiddenChanged", "hidden = %s", hidden);
+
+    if (hidden) {
+      onFragmentHidden();
+    } else {
+      onFragmentShown();
+    }
+  }
+
+  /**
+   * To be called when the fragment becomes visible.
+   *
+   * <p>Note that for a fragment, being resumed is not equivalent to becoming visible.
+   *
+   * <p>For example, when an activity with a hidden fragment is resumed, the fragment's onResume()
+   * will be called but it is not visible.
+   */
+  private void onFragmentShown() {
+    registerRefreshAnnotatedCallLogReceiver();
+
+    CallLogComponent.get(getContext())
+        .getRefreshAnnotatedCallLogNotifier()
+        .notify(/* checkDirty = */ true);
+  }
+
+  /**
+   * To be called when the fragment becomes hidden.
+   *
+   * <p>This can happen in the following two cases:
+   *
+   * <ul>
+   *   <li>hide the fragment but keep the parent activity visible (e.g., calling {@link
+   *       android.support.v4.app.FragmentTransaction#hide(Fragment)} in an activity, or
+   *   <li>the parent activity is paused.
+   * </ul>
+   */
+  private void onFragmentHidden() {
     unregisterRefreshAnnotatedCallLogReceiver();
   }
 
