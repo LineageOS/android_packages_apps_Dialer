@@ -14,11 +14,12 @@
  * limitations under the License
  */
 
-package com.android.dialer.phonelookup.blockednumber;
+package com.android.dialer.calllog.observer;
 
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.support.annotation.MainThread;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -29,13 +30,13 @@ import javax.inject.Inject;
  * Mark the annotated call log as dirty and notify that a refresh is in order when the content
  * changes.
  */
-// TODO(a bug): Consider making this class available to all data sources and PhoneLookups.
-class MarkDirtyObserver extends ContentObserver {
+public final class MarkDirtyObserver extends ContentObserver {
 
   private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
 
+  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   @Inject
-  MarkDirtyObserver(RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
+  public MarkDirtyObserver(RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
     super(ThreadUtil.getUiThreadHandler());
     this.refreshAnnotatedCallLogNotifier = refreshAnnotatedCallLogNotifier;
   }
@@ -44,7 +45,9 @@ class MarkDirtyObserver extends ContentObserver {
   @Override
   public void onChange(boolean selfChange, Uri uri) {
     Assert.isMainThread();
-    LogUtil.enterBlock("SystemBlockedNumberPhoneLookup.FilteredNumberObserver.onChange");
+    LogUtil.i(
+        "MarkDirtyObserver.onChange", "Uri:%s, SelfChange:%b", String.valueOf(uri), selfChange);
+
     refreshAnnotatedCallLogNotifier.markDirtyAndNotify();
   }
 }

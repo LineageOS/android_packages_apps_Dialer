@@ -22,6 +22,7 @@ import android.support.annotation.WorkerThread;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.blocking.FilteredNumberCompat;
+import com.android.dialer.calllog.observer.MarkDirtyObserver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;

@@ -20,13 +20,10 @@ import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
@@ -47,12 +44,11 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
-import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
+import com.android.dialer.calllog.observer.MarkDirtyObserver;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.StorageComponent;
@@ -80,16 +76,16 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
   private final ListeningExecutorService backgroundExecutorService;
-  private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
+  private final MarkDirtyObserver markDirtyObserver;
 
   @Nullable private Long lastTimestampProcessed;
 
   @Inject
   SystemCallLogDataSource(
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
+      MarkDirtyObserver markDirtyObserver) {
     this.backgroundExecutorService = backgroundExecutorService;
-    this.refreshAnnotatedCallLogNotifier = refreshAnnotatedCallLogNotifier;
+    this.markDirtyObserver = markDirtyObserver;
   }
 
   @MainThread
@@ -105,12 +101,13 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     }
     // TODO(zachh): Need to somehow register observers if user enables permission after launch?
 
-    CallLogObserver callLogObserver =
-        new CallLogObserver(ThreadUtil.getUiThreadHandler(), refreshAnnotatedCallLogNotifier);
-
+    // The system call log has a last updated timestamp, but deletes are physical (the "deleted"
+    // column is unused). This means that we can't detect deletes without scanning the entire table,
+    // which would be too slow. So, we just rely on content observers to trigger rebuilds when any
+    // change is made to the system call log.
     appContext
         .getContentResolver()
-        .registerContentObserver(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL, true, callLogObserver);
+        .registerContentObserver(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL, true, markDirtyObserver);
 
     if (!PermissionsUtil.hasAddVoicemailPermissions(appContext)) {
       LogUtil.i("SystemCallLogDataSource.registerContentObservers", "no add voicemail permissions");
@@ -119,7 +116,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     // TODO(uabdullah): Need to somehow register observers if user enables permission after launch?
     appContext
         .getContentResolver()
-        .registerContentObserver(VoicemailContract.Status.CONTENT_URI, true, callLogObserver);
+        .registerContentObserver(VoicemailContract.Status.CONTENT_URI, true, markDirtyObserver);
   }
 
   @Override
@@ -526,36 +523,5 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       }
     }
     return ids;
-  }
-
-  // TODO(a bug): Consider replacing it with MarkDirtyObserver.
-  private static class CallLogObserver extends ContentObserver {
-    private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
-
-    CallLogObserver(
-        Handler handler, RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
-      super(handler);
-      this.refreshAnnotatedCallLogNotifier = refreshAnnotatedCallLogNotifier;
-    }
-
-    @MainThread
-    @Override
-    public void onChange(boolean selfChange, Uri uri) {
-      Assert.isMainThread();
-      LogUtil.i(
-          "SystemCallLogDataSource.CallLogObserver.onChange",
-          "Uri:%s, SelfChange:%b",
-          String.valueOf(uri),
-          selfChange);
-      super.onChange(selfChange, uri);
-
-      /*
-       * The system call log has a last updated timestamp, but deletes are physical (the "deleted"
-       * column is unused). This means that we can't detect deletes without scanning the entire
-       * table, which would be too slow. So, we just rely on content observers to trigger rebuilds
-       * when any change is made to the system call log.
-       */
-      refreshAnnotatedCallLogNotifier.markDirtyAndNotify();
-    }
   }
 }
