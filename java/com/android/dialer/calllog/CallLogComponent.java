@@ -30,6 +30,8 @@ public abstract class CallLogComponent {
 
   public abstract RefreshAnnotatedCallLogWorker getRefreshAnnotatedCallLogWorker();
 
+  public abstract AnnotatedCallLogMigrator getAnnotatedCallLogMigrator();
+
   public abstract ClearMissedCalls getClearMissedCalls();
 
   public static CallLogComponent get(Context context) {
