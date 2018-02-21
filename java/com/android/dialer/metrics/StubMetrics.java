@@ -32,5 +32,11 @@ public final class StubMetrics implements Metrics {
   public void stopTimer(String timerEventName) {}
 
   @Override
+  public void startJankRecorder(String eventName) {}
+
+  @Override
+  public void stopJankRecorder(String eventName) {}
+
+  @Override
   public void recordMemory(String memoryEventName) {}
 }

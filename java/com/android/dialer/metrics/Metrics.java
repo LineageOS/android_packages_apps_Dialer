@@ -28,6 +28,12 @@ public interface Metrics {
   /** Stop a timer. */
   void stopTimer(String timerEventName);
 
+  /** Start a jank recorder. */
+  void startJankRecorder(String eventName);
+
+  /** Stop a jank recorder. */
+  void stopJankRecorder(String eventName);
+
   /** Record memory. */
   void recordMemory(String memoryEventName);
 

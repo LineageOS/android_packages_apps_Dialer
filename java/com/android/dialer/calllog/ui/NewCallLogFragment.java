@@ -33,6 +33,9 @@ import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.logging.LoggingBindings;
+import com.android.dialer.metrics.MetricsComponent;
+import com.android.dialer.metrics.jank.RecyclerViewJankLogger;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.util.concurrent.TimeUnit;
@@ -170,6 +173,10 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
 
     View view = inflater.inflate(R.layout.new_call_log_fragment, container, false);
     recyclerView = view.findViewById(R.id.new_call_log_recycler_view);
+    recyclerView.addOnScrollListener(
+        new RecyclerViewJankLogger(
+            MetricsComponent.get(getContext()).metrics(),
+            LoggingBindings.NEW_CALL_LOG_JANK_EVENT_NAME));
 
     getLoaderManager().restartLoader(0, null, this);
 
