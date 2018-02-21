@@ -22,7 +22,7 @@
   <dimen name="call_log_primary_text_size">16sp</dimen>
   <dimen name="call_log_detail_text_size">12sp</dimen>
   <dimen name="call_log_day_group_heading_size">14sp</dimen>
-  <dimen name="call_log_voicemail_transcription_text_size">16sp</dimen>
+  <dimen name="call_log_voicemail_transcription_text_size">14sp</dimen>
   <!-- Height of the call log actions section for each call log entry -->
   <dimen name="call_log_action_height">48dp</dimen>
   <dimen name="call_log_day_group_padding_top">15dp</dimen>
