@@ -16,5 +16,7 @@
   -->
 <resources>
   <dimen name="search_bar_margin">8dp</dimen>
-  <dimen name="expanded_search_bar_height">60dp</dimen>
+  <dimen name="collapsed_search_bar_height">48dp</dimen>
+  <!-- collapsed + margin * 2 -->
+  <dimen name="expanded_search_bar_height">64dp</dimen>
 </resources>
