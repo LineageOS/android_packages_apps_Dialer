@@ -22,7 +22,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.LogUtil;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -30,13 +34,14 @@ import java.util.regex.Pattern;
  */
 public class MotorolaHiddenMenuKeySequence {
   private static final String EXTRA_HIDDEN_MENU_CODE = "HiddenMenuCode";
+
   private static MotorolaHiddenMenuKeySequence instance = null;
 
-  private static String[] hiddenKeySequenceArray = null;
-  private static String[] hiddenKeySequenceIntentArray = null;
-  private static String[] hiddenKeyPatternArray = null;
-  private static String[] hiddenKeyPatternIntentArray = null;
-  private static boolean featureHiddenMenuEnabled = false;
+  @VisibleForTesting final List<String> hiddenKeySequences = new ArrayList<>();
+  @VisibleForTesting final List<String> hiddenKeySequenceIntents = new ArrayList<>();
+  @VisibleForTesting final List<String> hiddenKeyPatterns = new ArrayList<>();
+  @VisibleForTesting final List<String> hiddenKeyPatternIntents = new ArrayList<>();
+  @VisibleForTesting boolean featureHiddenMenuEnabled = false;
 
   /**
    * Handle input char sequence.
@@ -46,8 +51,7 @@ public class MotorolaHiddenMenuKeySequence {
    * @return true if the input matches any pattern
    */
   static boolean handleCharSequence(Context context, String input) {
-    getInstance(context);
-    if (!featureHiddenMenuEnabled) {
+    if (!getInstance(context).featureHiddenMenuEnabled) {
       return false;
     }
     return handleKeySequence(context, input) || handleKeyPattern(context, input);
@@ -66,60 +70,81 @@ public class MotorolaHiddenMenuKeySequence {
     return instance;
   }
 
-  private MotorolaHiddenMenuKeySequence(Context context) {
-    featureHiddenMenuEnabled = MotorolaUtils.isSupportingHiddenMenu(context);
-    // In case we do have a SPN from resource we need to match from service; otherwise we are
-    // free to go
-    if (featureHiddenMenuEnabled) {
+  @VisibleForTesting
+  MotorolaHiddenMenuKeySequence(Context context) {
+    if (MotorolaUtils.isSupportingHiddenMenu(context)) {
+      Collections.addAll(
+          hiddenKeySequences,
+          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_sequence));
+      Collections.addAll(
+          hiddenKeySequenceIntents,
+          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_sequence_intents));
+      Collections.addAll(
+          hiddenKeyPatterns,
+          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_pattern));
+      Collections.addAll(
+          hiddenKeyPatternIntents,
+          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_pattern_intents));
+      featureHiddenMenuEnabled = true;
+    }
 
-      hiddenKeySequenceArray =
-          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_sequence);
-      hiddenKeySequenceIntentArray =
-          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_sequence_intents);
-      hiddenKeyPatternArray =
-          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_pattern);
-      hiddenKeyPatternIntentArray =
-          context.getResources().getStringArray(R.array.motorola_hidden_menu_key_pattern_intents);
+    if ("tracfone".equals(System.getProperty("ro.carrier"))) {
+      addHiddenKeySequence("#83865625#", "com.motorola.extensions.TFUnlock");
+      addHiddenKeySequence("#83782887#", "com.motorola.extensions.TFStatus");
+      featureHiddenMenuEnabled = true;
+    }
 
-      if (hiddenKeySequenceArray.length != hiddenKeySequenceIntentArray.length
-          || hiddenKeyPatternArray.length != hiddenKeyPatternIntentArray.length
-          || (hiddenKeySequenceArray.length == 0 && hiddenKeyPatternArray.length == 0)) {
-        LogUtil.e(
-            "MotorolaHiddenMenuKeySequence",
-            "the key sequence array is not matching, turn off feature."
-                + "key sequence: %d != %d, key pattern %d != %d",
-            hiddenKeySequenceArray.length,
-            hiddenKeySequenceIntentArray.length,
-            hiddenKeyPatternArray.length,
-            hiddenKeyPatternIntentArray.length);
-        featureHiddenMenuEnabled = false;
-      }
+    if (hiddenKeySequences.size() != hiddenKeySequenceIntents.size()
+        || hiddenKeyPatterns.size() != hiddenKeyPatternIntents.size()
+        || (hiddenKeySequences.isEmpty() && hiddenKeyPatterns.isEmpty())) {
+      LogUtil.e(
+          "MotorolaHiddenMenuKeySequence",
+          "the key sequence array is not matching, turn off feature."
+              + "key sequence: %d != %d, key pattern %d != %d",
+          hiddenKeySequences.size(),
+          hiddenKeySequenceIntents.size(),
+          hiddenKeyPatterns.size(),
+          hiddenKeyPatternIntents.size());
+      featureHiddenMenuEnabled = false;
     }
   }
 
+  private void addHiddenKeySequence(String keySequence, String intentAction) {
+    hiddenKeySequences.add(keySequence);
+    hiddenKeySequenceIntents.add(intentAction);
+  }
+
   private static boolean handleKeyPattern(Context context, String input) {
+    MotorolaHiddenMenuKeySequence instance = getInstance(context);
+
     int len = input.length();
-    if (len <= 3 || hiddenKeyPatternArray == null || hiddenKeyPatternIntentArray == null) {
+    if (len <= 3
+        || instance.hiddenKeyPatterns == null
+        || instance.hiddenKeyPatternIntents == null) {
       return false;
     }
 
-    for (int i = 0; i < hiddenKeyPatternArray.length; i++) {
-      if ((Pattern.compile(hiddenKeyPatternArray[i])).matcher(input).matches()) {
-        return sendIntent(context, input, hiddenKeyPatternIntentArray[i]);
+    for (int i = 0; i < instance.hiddenKeyPatterns.size(); i++) {
+      if (Pattern.matches(instance.hiddenKeyPatterns.get(i), input)) {
+        return sendIntent(context, input, instance.hiddenKeyPatternIntents.get(i));
       }
     }
     return false;
   }
 
   private static boolean handleKeySequence(Context context, String input) {
+    MotorolaHiddenMenuKeySequence instance = getInstance(context);
+
     int len = input.length();
-    if (len <= 3 || hiddenKeySequenceArray == null || hiddenKeySequenceIntentArray == null) {
+    if (len <= 3
+        || instance.hiddenKeySequences == null
+        || instance.hiddenKeySequenceIntents == null) {
       return false;
     }
 
-    for (int i = 0; i < hiddenKeySequenceArray.length; i++) {
-      if (hiddenKeySequenceArray[i].equals(input)) {
-        return sendIntent(context, input, hiddenKeySequenceIntentArray[i]);
+    for (int i = 0; i < instance.hiddenKeySequences.size(); i++) {
+      if (instance.hiddenKeySequences.get(i).equals(input)) {
+        return sendIntent(context, input, instance.hiddenKeySequenceIntents.get(i));
       }
     }
     return false;
