@@ -277,7 +277,7 @@ public class RttChatFragment extends Fragment
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("RttChatFragment.setPrimary", primaryInfo.toString());
-    nameTextView.setText(primaryInfo.name);
+    nameTextView.setText(primaryInfo.name());
   }
 
   @Override

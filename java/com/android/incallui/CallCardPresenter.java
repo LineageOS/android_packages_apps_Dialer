@@ -690,7 +690,7 @@ public class CallCardPresenter
 
     if (primary == null) {
       // Clear the primary display info.
-      inCallScreen.setPrimary(PrimaryInfo.createEmptyPrimaryInfo());
+      inCallScreen.setPrimary(PrimaryInfo.empty());
       return;
     }
 
@@ -713,26 +713,22 @@ public class CallCardPresenter
           "update primary display info for conference call.");
 
       inCallScreen.setPrimary(
-          new PrimaryInfo(
-              null /* number */,
-              CallerInfoUtils.getConferenceString(
-                  context, primary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)),
-              false /* nameIsNumber */,
-              null /* location */,
-              null /* label */,
-              null /* photo */,
-              ContactPhotoType.DEFAULT_PLACEHOLDER,
-              false /* isSipCall */,
-              showContactPhoto,
-              hasWorkCallProperty,
-              false /* isSpam */,
-              false /* isLocalContact */,
-              false /* answeringDisconnectsOngoingCall */,
-              shouldShowLocation(),
-              null /* contactInfoLookupKey */,
-              null /* enrichedCallMultimediaData */,
-              true /* showInCallButtonGrid */,
-              primary.getNumberPresentation()));
+          PrimaryInfo.builder()
+              .setName(
+                  CallerInfoUtils.getConferenceString(
+                      context, primary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)))
+              .setNameIsNumber(false)
+              .setPhotoType(ContactPhotoType.DEFAULT_PLACEHOLDER)
+              .setIsSipCall(false)
+              .setIsContactPhotoShown(showContactPhoto)
+              .setIsWorkCall(hasWorkCallProperty)
+              .setIsSpam(false)
+              .setIsLocalContact(false)
+              .setAnsweringDisconnectsOngoingCall(false)
+              .setShouldShowLocation(shouldShowLocation())
+              .setShowInCallButtonGrid(true)
+              .setNumberPresentation(primary.getNumberPresentation())
+              .build());
     } else if (primaryContactInfo != null) {
       LogUtil.v(
           "CallCardPresenter.updatePrimaryDisplayInfo",
@@ -761,30 +757,33 @@ public class CallCardPresenter
       // DialerCall with caller that is a work contact.
       boolean isWorkContact = (primaryContactInfo.userType == ContactsUtils.USER_TYPE_WORK);
       inCallScreen.setPrimary(
-          new PrimaryInfo(
-              number,
-              primary.updateNameIfRestricted(name),
-              nameIsNumber,
-              shouldShowLocationAsLabel(nameIsNumber, primaryContactInfo.shouldShowLocation)
-                  ? primaryContactInfo.location
-                  : null,
-              isChildNumberShown || isCallSubjectShown ? null : primaryContactInfo.label,
-              primaryContactInfo.photo,
-              primaryContactInfo.photoType,
-              primaryContactInfo.isSipCall,
-              showContactPhoto,
-              hasWorkCallProperty || isWorkContact,
-              primary.isSpam(),
-              primaryContactInfo.isLocalContact(),
-              primary.answeringDisconnectsForegroundVideoCall(),
-              shouldShowLocation(),
-              primaryContactInfo.lookupKey,
-              multimediaData,
-              true /* showInCallButtonGrid */,
-              primary.getNumberPresentation()));
+          PrimaryInfo.builder()
+              .setNumber(number)
+              .setName(primary.updateNameIfRestricted(name))
+              .setNameIsNumber(nameIsNumber)
+              .setLabel(
+                  shouldShowLocationAsLabel(nameIsNumber, primaryContactInfo.shouldShowLocation)
+                      ? primaryContactInfo.location
+                      : null)
+              .setLocation(
+                  isChildNumberShown || isCallSubjectShown ? null : primaryContactInfo.label)
+              .setPhoto(primaryContactInfo.photo)
+              .setPhotoType(primaryContactInfo.photoType)
+              .setIsSipCall(primaryContactInfo.isSipCall)
+              .setIsContactPhotoShown(showContactPhoto)
+              .setIsWorkCall(hasWorkCallProperty || isWorkContact)
+              .setIsSpam(primary.isSpam())
+              .setIsLocalContact(primaryContactInfo.isLocalContact())
+              .setAnsweringDisconnectsOngoingCall(primary.answeringDisconnectsForegroundVideoCall())
+              .setShouldShowLocation(shouldShowLocation())
+              .setContactInfoLookupKey(primaryContactInfo.lookupKey)
+              .setMultimediaData(multimediaData)
+              .setShowInCallButtonGrid(true)
+              .setNumberPresentation(primary.getNumberPresentation())
+              .build());
     } else {
       // Clear the primary display info.
-      inCallScreen.setPrimary(PrimaryInfo.createEmptyPrimaryInfo());
+      inCallScreen.setPrimary(PrimaryInfo.empty());
     }
 
     if (isInCallScreenReady) {
@@ -1192,6 +1191,7 @@ public class CallCardPresenter
     return inCallScreen;
   }
 
+  /** Callback for contact lookup. */
   public static class ContactLookupCallback implements ContactInfoCacheCallback {
 
     private final WeakReference<CallCardPresenter> callCardPresenter;
