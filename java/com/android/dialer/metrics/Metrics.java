@@ -17,13 +17,24 @@
 package com.android.dialer.metrics;
 
 import android.app.Application;
-import android.content.Context;
 
 /** Logs metrics. */
 public interface Metrics {
 
+  String APPLICATION_ON_CREATE_EVENT_NAME = "Application.onCreate";
+  String DIALTACTS_ON_CREATE_EVENT_NAME = "GoogleDialtactsActivity.onCreate";
+  String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING =
+      "CallList.onCallAdded_To_InCallActivity.onCreate_Incoming";
+  String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING =
+      "CallList.onCallAdded_To_InCallActivity.onCreate_Outgoing";
+  String DIALTACTS_ON_RESUME_MEMORY_EVENT_NAME = "GoogleDialtactsActivity.onResume";
+  String INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "IncallActivity.OnResume";
+  String INCALL_ACTIVITY_ON_STOP_MEMORY_EVENT_NAME = "IncallActivity.OnStop";
+  String OLD_CALL_LOG_JANK_EVENT_NAME = "OldCallLog.Jank";
+  String NEW_CALL_LOG_JANK_EVENT_NAME = "NewCallLog.Jank";
+
   /** Start a timer. */
-  void startTimer(Context context, String timerEventName);
+  void startTimer(String timerEventName);
 
   /** Stop a timer. */
   void stopTimer(String timerEventName);

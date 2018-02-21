@@ -63,7 +63,7 @@ import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.LoggingBindings;
+import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.metrics.jank.RecyclerViewJankLogger;
 import com.android.dialer.oem.CequintCallerIdManager;
@@ -311,8 +311,7 @@ public class CallLogFragment extends Fragment
     recyclerView.setHasFixedSize(true);
     recyclerView.addOnScrollListener(
         new RecyclerViewJankLogger(
-            MetricsComponent.get(getContext()).metrics(),
-            LoggingBindings.OLD_CALL_LOG_JANK_EVENT_NAME));
+            MetricsComponent.get(getContext()).metrics(), Metrics.OLD_CALL_LOG_JANK_EVENT_NAME));
     layoutManager = new LinearLayoutManager(getActivity());
     recyclerView.setLayoutManager(layoutManager);
     PerformanceReport.logOnScrollStateChange(recyclerView);

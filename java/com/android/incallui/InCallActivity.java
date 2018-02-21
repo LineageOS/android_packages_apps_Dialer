@@ -61,8 +61,9 @@ import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.bindings.AnswerBindings;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -249,10 +250,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
     sendBroadcast(CallPendingActivity.getFinishBroadcast());
     Trace.endSection();
-    Logger.get(this)
-        .logStopLatencyTimer(LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
-    Logger.get(this)
-        .logStopLatencyTimer(LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
+    MetricsComponent.get(this)
+        .metrics()
+        .stopTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
+    MetricsComponent.get(this)
+        .metrics()
+        .stopTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
   }
 
   private void setWindowFlags() {
@@ -470,8 +473,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
     ThreadUtil.postDelayedOnUiThread(
         () ->
-            Logger.get(this)
-                .logRecordMemory(LoggingBindings.INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
+            MetricsComponent.get(this)
+                .metrics()
+                .recordMemory(Metrics.INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
         1000);
   }
 
