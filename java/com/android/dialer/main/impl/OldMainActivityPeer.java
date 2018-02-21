@@ -30,6 +30,9 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -39,10 +42,12 @@ import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
+import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.OldSpeedDialFragment;
@@ -50,6 +55,8 @@ import com.android.dialer.app.list.OnDragDropListener;
 import com.android.dialer.app.list.OnListFragmentScrolledListener;
 import com.android.dialer.app.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.app.list.RemoveView;
+import com.android.dialer.callcomposer.CallComposerActivity;
+import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
@@ -68,6 +75,7 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -304,28 +312,48 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   private void onHandleIntent(Intent intent) {
-    // Two important implementation notes:
+    // Some important implementation notes:
     //  1) If the intent contains extra data to open to a specific screen (e.g. DIAL intent), when
     //     the user leaves that screen, they will return here and add see a blank screen unless we
     //     select a tab here.
     //  2) Don't return early here in case the intent does contain extra data.
-    if (isShowTabIntent(intent)) {
+    //  3) External intents should take priority over other intents (like Calls.CONTENT_TYPE).
+    if (Calls.CONTENT_TYPE.equals(intent.getType())) {
+      Bundle extras = intent.getExtras();
+      if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
+        LogUtil.i("OldMainActivityPeer.onHandleIntent", "Voicemail content type intent");
+        bottomNav.selectTab(TabIndex.VOICEMAIL);
+        Logger.get(mainActivity).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
+      } else {
+        LogUtil.i("OldMainActivityPeer.onHandleIntent", "Call log content type intent");
+        bottomNav.selectTab(TabIndex.CALL_LOG);
+      }
+
+    } else if (isShowTabIntent(intent)) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show tab intent");
       bottomNav.selectTab(getTabFromIntent(intent));
     } else if (lastTabController.isEnabled) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show last tab");
       lastTabController.selectLastTab();
     } else {
       bottomNav.selectTab(TabIndex.SPEED_DIAL);
     }
 
-    if (isDialIntent(intent)) {
+    if (isDialOrAddCallIntent(intent)) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "Dial or add call intent");
       // Dialpad will grab the intent and populate the number
       searchController.showDialpadFromNewIntent();
     }
+
+    if (intent.getBooleanExtra(DialtactsActivity.EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "clearing all new voicemails");
+      CallLogNotificationsService.markAllNewVoicemailsAsOld(mainActivity);
+    }
   }
 
-  /** Returns true if the given intent contains a phone number to populate the dialer with */
-  private boolean isDialIntent(Intent intent) {
-    if (intent == null || intent.getData() == null) {
+  /** Returns true if the given intent is a Dial intent with data or an Add Call intent. */
+  private boolean isDialOrAddCallIntent(Intent intent) {
+    if (intent == null) {
       return false;
     }
 
@@ -339,7 +367,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         return true;
       }
     }
-    return false;
+    return DialpadFragment.isAddCallMode(intent);
   }
 
   @Override
@@ -409,6 +437,44 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         resultCode);
     if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
       searchController.onVoiceResults(resultCode, data);
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_COMPOSER) {
+      if (resultCode == AppCompatActivity.RESULT_FIRST_USER) {
+        LogUtil.i(
+            "OldMainActivityPeer.onActivityResult", "returned from call composer, error occurred");
+        String message =
+            mainActivity.getString(
+                R.string.call_composer_connection_failed,
+                data.getStringExtra(CallComposerActivity.KEY_CONTACT_NAME));
+        Snackbar.make(snackbarContainer, message, Snackbar.LENGTH_LONG).show();
+      } else {
+        LogUtil.i("OldMainActivityPeer.onActivityResult", "returned from call composer, no error");
+      }
+
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
+      if (resultCode == AppCompatActivity.RESULT_OK
+          && data != null
+          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+        int snackbarDurationMillis = 5_000;
+        Snackbar.make(
+                snackbarContainer,
+                mainActivity.getString(R.string.ec_data_deleted),
+                snackbarDurationMillis)
+            .setAction(
+                R.string.view_conversation,
+                v ->
+                    mainActivity.startActivity(
+                        IntentProvider.getSendSmsIntentProvider(number).getIntent(mainActivity)))
+            .setActionTextColor(
+                ContextCompat.getColor(mainActivity, R.color.dialer_snackbar_action_text_color))
+            .show();
+      }
+
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_DUO) {
+      // We just returned from starting Duo for a task. Reload our reachability data since it
+      // may have changed after a user finished activating Duo.
+      DuoComponent.get(mainActivity).getDuo().reloadReachability(mainActivity);
+
     } else {
       LogUtil.e("OldMainActivityPeer.onActivityResult", "Unknown request code: " + requestCode);
     }
