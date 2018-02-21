@@ -32,6 +32,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -81,6 +84,7 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TransactionSafeActivity;
+import com.android.voicemail.VoicemailComponent;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -190,6 +194,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
         new MainBottomNavBarBottomNavTabListener(mainActivity, mainActivity.getFragmentManager());
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
+    // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
+    boolean showVoicemailTab = canVoicemailTabBeShown(mainActivity);
+    bottomNav.showVoicemail(showVoicemailTab);
 
     callLogFragmentListener =
         new MainCallLogFragmentListener(
@@ -218,7 +225,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             mainActivity.findViewById(R.id.remove_view),
             mainActivity.findViewById(R.id.search_view_container));
 
-    lastTabController = new LastTabController(mainActivity, bottomNav);
+    lastTabController = new LastTabController(mainActivity, bottomNav, showVoicemailTab);
 
     // Restore our view state if needed, else initialize as if the app opened for the first time
     if (savedInstanceState != null) {
@@ -228,6 +235,66 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     } else {
       onHandleIntent(mainActivity.getIntent());
     }
+  }
+
+  /**
+   * Check and return whether the voicemail tab should be shown or not. This includes the following
+   * criteria under which we show the voicemail tab:
+   * <li>The voicemail number exists (e.g we are able to dial into listen to voicemail or press and
+   *     hold 1)
+   * <li>Visual voicemail is enabled from the settings tab
+   * <li>Visual voicemail carrier is supported by dialer
+   * <li>There is no voicemail carrier app installed.
+   *
+   * @param context
+   * @return return if voicemail tab should be shown or not depending on what the voicemail state is
+   *     for the carrier.
+   */
+  private static boolean canVoicemailTabBeShown(Context context) {
+    PhoneAccountHandle defaultUserSelectedAccount =
+        TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_VOICEMAIL);
+
+    if (isVoicemailAvailable(context, defaultUserSelectedAccount)) {
+      return true;
+    }
+    if (VoicemailComponent.get(context)
+        .getVoicemailClient()
+        .isVoicemailEnabled(context, defaultUserSelectedAccount)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Check if voicemail is enabled/accessible.
+   *
+   * @return true if voicemail is enabled and accessible. Note that this can be false "temporarily"
+   *     after the app boot e.g if the sim isn't fully recognized. TODO(uabdullah): Possibly add a
+   *     listener of some kind to detect when a sim is recognized. TODO(uabdullah): Move this to a
+   *     utility class or wrap it all in a static inner class.
+   */
+  private static boolean isVoicemailAvailable(
+      Context context, PhoneAccountHandle defaultUserSelectedAccount) {
+
+    if (!TelecomUtil.hasReadPhoneStatePermission(context)) {
+      LogUtil.i(
+          "OldMainActivityPeer.isVoicemailAvailable",
+          "No read phone permisison or not the default dialer.");
+      return false;
+    }
+
+    if (defaultUserSelectedAccount == null) {
+      // In a single-SIM phone, there is no default outgoing phone account selected by
+      // the user, so just call TelephonyManager#getVoicemailNumber directly.
+      return !TextUtils.isEmpty(getTelephonyManager(context).getVoiceMailNumber());
+    } else {
+      return !TextUtils.isEmpty(
+          TelecomUtil.getVoicemailNumber(context, defaultUserSelectedAccount));
+    }
+  }
+
+  private static TelephonyManager getTelephonyManager(Context context) {
+    return context.getSystemService(TelephonyManager.class);
   }
 
   @Override
@@ -947,11 +1014,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private final Context context;
     private final BottomNavBar bottomNavBar;
     private final boolean isEnabled;
+    private final boolean canShowVoicemailTab;
 
-    LastTabController(Context context, BottomNavBar bottomNavBar) {
+    LastTabController(Context context, BottomNavBar bottomNavBar, boolean canShowVoicemailTab) {
       this.context = context;
       this.bottomNavBar = bottomNavBar;
       isEnabled = ConfigProviderBindings.get(context).getBoolean("last_tab_enabled", false);
+      this.canShowVoicemailTab = canShowVoicemailTab;
     }
 
     /** Sets the last tab if the feature is enabled, otherwise defaults to speed dial. */
@@ -963,6 +1032,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
                 .unencryptedSharedPrefs()
                 .getInt(KEY_LAST_TAB, TabIndex.SPEED_DIAL);
       }
+
+      // If the voicemail tab cannot be shown, default to showing speed dial
+      if (tabIndex == TabIndex.VOICEMAIL && !canShowVoicemailTab) {
+        tabIndex = TabIndex.SPEED_DIAL;
+      }
+
       bottomNavBar.selectTab(tabIndex);
     }
 
