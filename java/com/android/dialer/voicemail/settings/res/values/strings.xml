@@ -44,7 +44,7 @@
   <string name="voicemail_change_pin_key" translatable="false">voicemail_change_pin_key</string>
 
   <!-- Visual voicemail on/off title [CHAR LIMIT=40] -->
-  <string name="voicemail_visual_voicemail_switch_title">Visual Voicemail</string>
+  <string name="voicemail_visual_voicemail_switch_title">Visual voicemail</string>
 
   <!-- Visual voicemail archive on/off title [CHAR LIMIT=40] -->
   <string name="voicemail_visual_voicemail_auto_archive_switch_title">Extra backup and storage</string>
@@ -124,5 +124,19 @@
   <string name="confirm_disable_voicemail_dialog_message">This will delete any voicemail and Google transcripts stored within this app. Your carrier may keep its own copies.</string>
   <!-- The label for the confirm-disable-voicemail button [CHAR LIMIT=16] -->
   <string name="confirm_disable_voicemail_accept_dialog_label">TURN OFF</string>
+
+  <!-- Internal preferences key for static instruction text. -->
+  <string name="voicemail_transcription_text_key" translatable="false">voicemail_transcription_text_key</string>
+
+  <!-- Additional information text and links for visual voicemail and voicemail donation setting page
+       [CHAR LIMIT=NONE] -->
+  <string name="voicemail_transcription_instruction_text">
+    Visual voicemail allows you to check voicemail messages without having to call voicemail. Transcripts provided by Google. &lt;a href="<xliff:g example="http://www.google.com" id="url1">%1$s</xliff:g>">Learn&#160;more&lt;/a>
+    &lt;br>&lt;br>
+    For voicemail transcription analysis, your voicemail messages are stored anonymously. &lt;a href="<xliff:g example="http://www.google.com" id="url2">%2$s</xliff:g>">Learn&#160;more&lt;/a>
+  </string>
+
+  <string translatable="false" name="transcription_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
+  <string translatable="false" name="donation_learn_more_url">https://support.google.com/phoneapp/answer/2811844#voicemail_transcript</string>
 
 </resources>
