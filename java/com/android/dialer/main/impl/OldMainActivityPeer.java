@@ -226,34 +226,34 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       searchController.onRestoreInstanceState(savedInstanceState);
       bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
     } else {
-      showTabOnIntent(mainActivity.getIntent());
+      onHandleIntent(mainActivity.getIntent());
     }
   }
 
   @Override
   public void onNewIntent(Intent intent) {
     LogUtil.enterBlock("OldMainActivityPeer.onNewIntent");
-    showTabOnIntent(intent);
+    onHandleIntent(intent);
   }
 
-  private void showTabOnIntent(Intent intent) {
+  private void onHandleIntent(Intent intent) {
+    // Two important implementation notes:
+    //  1) If the intent contains extra data to open to a specific screen (e.g. DIAL intent), when
+    //     the user leaves that screen, they will return here and add see a blank screen unless we
+    //     select a tab here.
+    //  2) Don't return early here in case the intent does contain extra data.
     if (isShowTabIntent(intent)) {
       bottomNav.selectTab(getTabFromIntent(intent));
-      return;
+    } else if (lastTabController.isEnabled) {
+      lastTabController.selectLastTab();
+    } else {
+      bottomNav.selectTab(TabIndex.SPEED_DIAL);
     }
 
     if (isDialIntent(intent)) {
-      searchController.showDialpadFromNewIntent(false);
       // Dialpad will grab the intent and populate the number
-      return;
+      searchController.showDialpadFromNewIntent();
     }
-
-    if (lastTabController.isEnabled) {
-      lastTabController.selectLastTab();
-      return;
-    }
-
-    bottomNav.selectTab(TabIndex.SPEED_DIAL);
   }
 
   /** Returns true if the given intent contains a phone number to populate the dialer with */
@@ -293,6 +293,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     } else {
       bottomNav.setVisibility(View.VISIBLE);
     }
+  }
+
+  @Override
+  public void onUserLeaveHint() {
+    searchController.onUserLeaveHint();
   }
 
   @Override
@@ -344,6 +349,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public boolean onBackPressed() {
+    LogUtil.enterBlock("OldMainActivityPeer.onBackPressed");
     if (searchController.onBackPressed()) {
       return true;
     }
@@ -460,6 +466,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public void onCallPlacedFromDialpad() {
       // TODO(calderwoodra): logging
+      searchController.onCallPlacedFromSearch();
     }
   }
 
@@ -480,6 +487,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public void onCallPlacedFromSearch() {
       // TODO(calderwoodra): logging
+      searchController.onCallPlacedFromSearch();
     }
   }
 

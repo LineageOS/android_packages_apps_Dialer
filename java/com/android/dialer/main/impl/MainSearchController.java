@@ -95,12 +95,14 @@ public class MainSearchController implements SearchBarListener {
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
-  public void showDialpadFromNewIntent(boolean animate) {
-    showDialpad(animate, true);
+  public void showDialpadFromNewIntent() {
+    LogUtil.enterBlock("MainSearchController.showDialpadFromNewIntent");
+    showDialpad(/* animate=*/ false, /* fromNewIntent=*/ true);
   }
 
   /** Shows the dialpad, hides the FAB and slides the toolbar off screen. */
   public void showDialpad(boolean animate) {
+    LogUtil.enterBlock("MainSearchController.showDialpad");
     showDialpad(animate, false);
   }
 
@@ -110,17 +112,22 @@ public class MainSearchController implements SearchBarListener {
     fab.hide();
     toolbar.slideUp(animate);
     toolbar.expand(animate, Optional.absent());
+    toolbarShadow.setVisibility(View.VISIBLE);
     mainActivity.setTitle(R.string.dialpad_activity_title);
 
     FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
+    NewSearchFragment searchFragment = getSearchFragment();
 
     // Show Search
-    if (getSearchFragment() == null) {
-      NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
+    if (searchFragment == null) {
+      // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
+      // places promo to be shown.
+      searchFragment = NewSearchFragment.newInstance(/* showZeroSuggest=*/ true);
       transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
-      transaction.show(getSearchFragment());
+      transaction.show(searchFragment);
     }
+    searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
 
     // Show Dialpad
     if (getDialpadFragment() == null) {
@@ -145,6 +152,7 @@ public class MainSearchController implements SearchBarListener {
    * @see {@link #closeSearch(boolean)} to "remove" the dialpad.
    */
   private void hideDialpad(boolean animate, boolean bottomNavVisible) {
+    LogUtil.enterBlock("MainSearchController.hideDialpad");
     Assert.checkArgument(isDialpadVisible());
 
     fab.show();
@@ -190,6 +198,7 @@ public class MainSearchController implements SearchBarListener {
 
   /** Should be called when {@link DialpadListener#onDialpadShown()} is called. */
   public void onDialpadShown() {
+    LogUtil.enterBlock("MainSearchController.onDialpadShown");
     getDialpadFragment().slideUp(true);
     hideBottomNav();
   }
@@ -205,6 +214,7 @@ public class MainSearchController implements SearchBarListener {
    *     </ol>
    */
   public void onSearchListTouch() {
+    LogUtil.enterBlock("MainSearchController.onSearchListTouched");
     if (isDialpadVisible()) {
       if (TextUtils.isEmpty(getDialpadFragment().getQuery())) {
         Logger.get(mainActivity)
@@ -236,13 +246,13 @@ public class MainSearchController implements SearchBarListener {
    */
   public boolean onBackPressed() {
     if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
-      LogUtil.i("MainSearchController#onBackPressed", "Dialpad visible with query");
+      LogUtil.i("MainSearchController.onBackPressed", "Dialpad visible with query");
       Logger.get(mainActivity)
           .logImpression(DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
       hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       return true;
     } else if (isSearchVisible()) {
-      LogUtil.i("MainSearchController#onBackPressed", "Search is visible");
+      LogUtil.i("MainSearchController.onBackPressed", "Search is visible");
       Logger.get(mainActivity)
           .logImpression(
               isDialpadVisible()
@@ -260,6 +270,7 @@ public class MainSearchController implements SearchBarListener {
    * dialpad.
    */
   private void closeSearch(boolean animate) {
+    LogUtil.enterBlock("MainSearchController.closeSearch");
     Assert.checkArgument(isSearchVisible());
     if (isDialpadVisible()) {
       hideDialpad(animate, /* bottomNavVisible=*/ true);
@@ -314,11 +325,13 @@ public class MainSearchController implements SearchBarListener {
    */
   @Override
   public void onSearchBarClicked() {
+    LogUtil.enterBlock("MainSearchController.onSearchBarClicked");
     Logger.get(mainActivity).logImpression(DialerImpression.Type.NUI_CLICK_SEARCH_BAR);
     openSearch(Optional.absent());
   }
 
   private void openSearch(Optional<String> query) {
+    LogUtil.enterBlock("MainSearchController.openSearch");
     fab.hide();
     toolbar.expand(/* animate=*/ true, query);
     toolbar.showKeyboard();
@@ -326,20 +339,26 @@ public class MainSearchController implements SearchBarListener {
     hideBottomNav();
 
     FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
+    NewSearchFragment searchFragment = getSearchFragment();
 
     // Show Search
-    if (getSearchFragment() == null) {
-      NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
+    if (searchFragment == null) {
+      // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
+      // places promo to be shown.
+      searchFragment = NewSearchFragment.newInstance(true);
       transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
 
+    searchFragment.setQuery(
+        query.isPresent() ? query.get() : "", CallInitiationType.Type.REGULAR_SEARCH);
     transaction.commit();
   }
 
   @Override
   public void onSearchBackButtonClicked() {
+    LogUtil.enterBlock("MainSearchController.onSearchBackButtonClicked");
     closeSearch(true);
   }
 
@@ -382,6 +401,18 @@ public class MainSearchController implements SearchBarListener {
       return true;
     }
     return false;
+  }
+
+  @Override
+  public void onUserLeaveHint() {
+    if (isInSearch()) {
+      closeSearch(false);
+    }
+  }
+
+  @Override
+  public void onCallPlacedFromSearch() {
+    closeSearch(false);
   }
 
   public void onVoiceResults(int resultCode, Intent data) {
