@@ -22,6 +22,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -29,6 +30,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.util.DialerUtils;
@@ -42,14 +44,15 @@ final class SearchBarView extends FrameLayout {
 
   private final float margin;
   private final float animationEndHeight;
+  private final float animationStartHeight;
 
   private SearchBarListener listener;
   private EditText searchBox;
+  private TextView searchBoxTextView;
   // This useful for when the query didn't actually change. We want to avoid making excessive calls
   // where we can since IPCs can take a long time on slow networks.
   private boolean skipLatestTextChange;
 
-  private int initialHeight;
   private boolean isExpanded;
   private View searchBoxCollapsed;
   private View searchBoxExpanded;
@@ -60,6 +63,8 @@ final class SearchBarView extends FrameLayout {
     margin = getContext().getResources().getDimension(R.dimen.search_bar_margin);
     animationEndHeight =
         getContext().getResources().getDimension(R.dimen.expanded_search_bar_height);
+    animationStartHeight =
+        getContext().getResources().getDimension(R.dimen.collapsed_search_bar_height);
   }
 
   @Override
@@ -67,6 +72,7 @@ final class SearchBarView extends FrameLayout {
     super.onFinishInflate();
     clearButton = findViewById(R.id.search_clear_button);
     searchBox = findViewById(R.id.search_view);
+    searchBoxTextView = findViewById(R.id.search_box_start_search);
     searchBoxCollapsed = findViewById(R.id.search_box_collapsed);
     searchBoxExpanded = findViewById(R.id.search_box_expanded);
 
@@ -104,7 +110,6 @@ final class SearchBarView extends FrameLayout {
     if (isExpanded) {
       return;
     }
-    initialHeight = getHeight();
 
     int duration = animate ? ANIMATION_DURATION : 0;
     searchBoxExpanded.setVisibility(VISIBLE);
@@ -177,7 +182,7 @@ final class SearchBarView extends FrameLayout {
     params.leftMargin = margin;
     params.rightMargin = margin;
     searchBoxExpanded.getLayoutParams().height =
-        (int) (animationEndHeight - (animationEndHeight - initialHeight) * fraction);
+        (int) (animationEndHeight - (animationEndHeight - animationStartHeight) * fraction);
     requestLayout();
   }
 
@@ -205,6 +210,11 @@ final class SearchBarView extends FrameLayout {
 
   public void showKeyboard() {
     UiUtil.openKeyboardFrom(getContext(), searchBox);
+  }
+
+  public void setHint(@StringRes int hint) {
+    searchBox.setHint(hint);
+    searchBoxTextView.setText(hint);
   }
 
   /** Handles logic for text changes in the search box. */

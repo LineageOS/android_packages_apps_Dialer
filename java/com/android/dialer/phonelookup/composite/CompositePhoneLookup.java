@@ -179,10 +179,9 @@ public final class CompositePhoneLookup implements PhoneLookup<PhoneLookupInfo> 
 
   @Override
   @MainThread
-  public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  public void registerContentObservers(Context appContext) {
     for (PhoneLookup phoneLookup : phoneLookups) {
-      phoneLookup.registerContentObservers(appContext, contentObserverCallbacks);
+      phoneLookup.registerContentObservers(appContext);
     }
   }
 }

@@ -43,7 +43,8 @@ public class MotorolaUtils {
   // package is enabled.
   @VisibleForTesting public static final String WIFI_CALL_PACKAGE_NAME = "com.motorola.sprintwfc";
   // Thi is used to check if a Motorola device supports hidden menu feature.
-  private static final String HIDDEN_MENU_FEATURE = "com.motorola.software.sprint.hidden_menu";
+  @VisibleForTesting
+  static final String HIDDEN_MENU_FEATURE = "com.motorola.software.sprint.hidden_menu";
 
   private static boolean hasCheckedSprintWifiCall;
   private static boolean supportSprintWifiCall;

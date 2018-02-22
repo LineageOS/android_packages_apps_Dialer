@@ -29,7 +29,7 @@
       android:launchMode="singleTask"
       android:name="com.android.dialer.main.impl.MainActivity"
       android:resizeableActivity="true"
-      android:theme="@style/NuiMainActivityTheme"
+      android:theme="@style/NuiActivityTheme"
       android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
 
 

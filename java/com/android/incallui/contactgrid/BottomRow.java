@@ -82,7 +82,7 @@ public class BottomRow {
     boolean isSpamIconVisible = false;
     boolean shouldPopulateAccessibilityEvent = true;
 
-    if (isIncoming(state) && primaryInfo.isSpam) {
+    if (isIncoming(state) && primaryInfo.isSpam()) {
       label = context.getString(R.string.contact_grid_incoming_suspected_spam);
       isSpamIconVisible = true;
       isHdIconVisible = false;
@@ -99,7 +99,7 @@ public class BottomRow {
       }
     } else {
       label = getLabelForPhoneNumber(primaryInfo);
-      shouldPopulateAccessibilityEvent = primaryInfo.nameIsNumber;
+      shouldPopulateAccessibilityEvent = primaryInfo.nameIsNumber();
     }
 
     return new Info(
@@ -114,15 +114,15 @@ public class BottomRow {
   }
 
   private static CharSequence getLabelForPhoneNumber(PrimaryInfo primaryInfo) {
-    if (primaryInfo.location != null) {
-      return primaryInfo.location;
+    if (primaryInfo.location() != null) {
+      return primaryInfo.location();
     }
-    if (!primaryInfo.nameIsNumber && !TextUtils.isEmpty(primaryInfo.number)) {
-      CharSequence spannedNumber = spanDisplayNumber(primaryInfo.number);
-      if (primaryInfo.label == null) {
+    if (!primaryInfo.nameIsNumber() && !TextUtils.isEmpty(primaryInfo.number())) {
+      CharSequence spannedNumber = spanDisplayNumber(primaryInfo.number());
+      if (primaryInfo.label() == null) {
         return spannedNumber;
       } else {
-        return TextUtils.concat(primaryInfo.label, " ", spannedNumber);
+        return TextUtils.concat(primaryInfo.label(), " ", spannedNumber);
       }
     }
     return null;

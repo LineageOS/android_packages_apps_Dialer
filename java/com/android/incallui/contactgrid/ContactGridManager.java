@@ -85,7 +85,7 @@ public class ContactGridManager {
   private final TextView deviceNumberTextView;
   private final View deviceNumberDivider;
 
-  private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
+  private PrimaryInfo primaryInfo = PrimaryInfo.empty();
   private PrimaryCallState primaryCallState = PrimaryCallState.createEmptyPrimaryCallState();
   private final LetterTileDrawable letterTile;
   private boolean isInMultiWindowMode;
@@ -213,7 +213,7 @@ public class ContactGridManager {
     }
 
     boolean hasPhoto =
-        primaryInfo.photo != null && primaryInfo.photoType == ContactPhotoType.CONTACT;
+        primaryInfo.photo() != null && primaryInfo.photoType() == ContactPhotoType.CONTACT;
     if (!hasPhoto && !showAnonymousAvatar) {
       avatarImageView.setVisibility(View.GONE);
       return false;
@@ -271,17 +271,17 @@ public class ContactGridManager {
    * </ul>
    */
   private void updatePrimaryNameAndPhoto() {
-    if (TextUtils.isEmpty(primaryInfo.name)) {
+    if (TextUtils.isEmpty(primaryInfo.name())) {
       contactNameTextView.setText(null);
     } else {
       contactNameTextView.setText(
-          primaryInfo.nameIsNumber
-              ? PhoneNumberUtilsCompat.createTtsSpannable(primaryInfo.name)
-              : primaryInfo.name);
+          primaryInfo.nameIsNumber()
+              ? PhoneNumberUtilsCompat.createTtsSpannable(primaryInfo.name())
+              : primaryInfo.name());
 
       // Set direction of the name field
       int nameDirection = View.TEXT_DIRECTION_INHERIT;
-      if (primaryInfo.nameIsNumber) {
+      if (primaryInfo.nameIsNumber()) {
         nameDirection = View.TEXT_DIRECTION_LTR;
       }
       contactNameTextView.setTextDirection(nameDirection);
@@ -292,23 +292,23 @@ public class ContactGridManager {
         avatarImageView.setVisibility(View.GONE);
       } else if (avatarSize > 0 && updateAvatarVisibility()) {
         boolean hasPhoto =
-            primaryInfo.photo != null && primaryInfo.photoType == ContactPhotoType.CONTACT;
+            primaryInfo.photo() != null && primaryInfo.photoType() == ContactPhotoType.CONTACT;
         // Contact has a photo, don't render a letter tile.
         if (hasPhoto) {
           avatarImageView.setBackground(
               DrawableConverter.getRoundedDrawable(
-                  context, primaryInfo.photo, avatarSize, avatarSize));
+                  context, primaryInfo.photo(), avatarSize, avatarSize));
           // Contact has a name, that isn't a number.
         } else {
           letterTile.setCanonicalDialerLetterTileDetails(
-              primaryInfo.name,
-              primaryInfo.contactInfoLookupKey,
+              primaryInfo.name(),
+              primaryInfo.contactInfoLookupKey(),
               LetterTileDrawable.SHAPE_CIRCLE,
               LetterTileDrawable.getContactTypeFromPrimitives(
                   primaryCallState.isVoiceMailNumber,
-                  primaryInfo.isSpam,
+                  primaryInfo.isSpam(),
                   primaryCallState.isBusinessNumber,
-                  primaryInfo.numberPresentation,
+                  primaryInfo.numberPresentation(),
                   primaryCallState.isConference));
           // By invalidating the avatarImageView we force a redraw of the letter tile.
           // This is required to properly display the updated letter tile iconography based on the
@@ -413,7 +413,7 @@ public class ContactGridManager {
     deviceNumberTextView.setText(
         context.getString(R.string.contact_grid_callback_number, primaryCallState.callbackNumber));
     deviceNumberTextView.setVisibility(View.VISIBLE);
-    if (primaryInfo.shouldShowLocation) {
+    if (primaryInfo.shouldShowLocation()) {
       deviceNumberDivider.setVisibility(View.VISIBLE);
     }
   }

@@ -34,6 +34,7 @@ final class SimulatorRttCall
 
   @NonNull private final Context context;
   @Nullable private String connectionTag;
+  private RttChatBot rttChatBot;
 
   static ActionProvider getActionProvider(@NonNull Context context) {
     return new SimulatorSubMenu(context)
@@ -112,23 +113,28 @@ final class SimulatorRttCall
     switch (event.type) {
       case Event.NONE:
         throw Assert.createIllegalStateFailException();
-      case Event.ANSWER:
-        connection.setActive();
-        break;
       case Event.REJECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.REJECTED));
         break;
       case Event.HOLD:
         connection.setOnHold();
         break;
+      case Event.ANSWER:
       case Event.UNHOLD:
         connection.setActive();
         break;
       case Event.DISCONNECT:
+        rttChatBot.stop();
         connection.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
         break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
+        break;
+      case Event.STATE_CHANGE:
+        if (Connection.stateToString(Connection.STATE_ACTIVE).equals(event.data2)) {
+          rttChatBot = new RttChatBot(connection.getRttTextStream());
+          rttChatBot.start();
+        }
         break;
       default:
         LogUtil.i("SimulatorRttCall.onEvent", "unexpected event: " + event.type);

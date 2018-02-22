@@ -15,7 +15,6 @@
 package com.android.dialer.phonenumbercache;
 
 import android.annotation.TargetApi;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -299,12 +298,12 @@ public class ContactInfoHelper {
         VERSION.SDK_INT >= VERSION_CODES.N
             ? Directory.ENTERPRISE_CONTENT_URI
             : Directory.CONTENT_URI;
-    ContentResolver cr = context.getContentResolver();
-    Cursor cursor = cr.query(uri, new String[] {Directory._ID}, null, null, null);
-    int idIndex = cursor.getColumnIndex(Directory._ID);
+    Cursor cursor =
+        context.getContentResolver().query(uri, new String[] {Directory._ID}, null, null, null);
     if (cursor == null) {
       return remoteDirectories;
     }
+    int idIndex = cursor.getColumnIndex(Directory._ID);
     try {
       while (cursor.moveToNext()) {
         long directoryId = cursor.getLong(idIndex);

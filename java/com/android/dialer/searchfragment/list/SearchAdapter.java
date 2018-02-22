@@ -31,9 +31,9 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactViewHolder;
+import com.android.dialer.searchfragment.directories.DirectoryContactViewHolder;
 import com.android.dialer.searchfragment.list.SearchCursorManager.RowType;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
-import com.android.dialer.searchfragment.remote.RemoteContactViewHolder;
 import java.util.List;
 
 /** RecyclerView adapter for {@link NewSearchFragment}. */
@@ -77,7 +77,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
         return new HeaderViewHolder(
             LayoutInflater.from(context).inflate(R.layout.header_layout, root, false));
       case RowType.DIRECTORY_ROW:
-        return new RemoteContactViewHolder(
+        return new DirectoryContactViewHolder(
             LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
       case RowType.SEARCH_ACTION:
         return new SearchActionViewHolder(
@@ -104,8 +104,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
       ((SearchContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof NearbyPlaceViewHolder) {
       ((NearbyPlaceViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
-    } else if (holder instanceof RemoteContactViewHolder) {
-      ((RemoteContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
+    } else if (holder instanceof DirectoryContactViewHolder) {
+      ((DirectoryContactViewHolder) holder).bind(searchCursorManager.getCursor(position), query);
     } else if (holder instanceof HeaderViewHolder) {
       String header =
           searchCursorManager.getCursor(position).getString(SearchCursor.HEADER_TEXT_POSITION);
@@ -200,8 +200,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
   }
 
-  public void setRemoteContactsCursor(SearchCursor remoteContactsCursor) {
-    if (searchCursorManager.setCorpDirectoryCursor(remoteContactsCursor)) {
+  void setDirectoryContactsCursor(SearchCursor directoryContactsCursor) {
+    if (searchCursorManager.setCorpDirectoryCursor(directoryContactsCursor)) {
       notifyDataSetChanged();
     }
   }

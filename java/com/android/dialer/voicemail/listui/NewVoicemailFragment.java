@@ -24,18 +24,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
-import com.android.dialer.calllog.CallLogFramework;
-import com.android.dialer.calllog.CallLogFramework.CallLogUi;
-import com.android.dialer.calllog.RefreshAnnotatedCallLogWorker;
+import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.voicemail.listui.error.VoicemailStatus;
@@ -48,24 +46,11 @@ import java.util.List;
 
 // TODO(uabdullah): Register content observer for VoicemailContract.Status.CONTENT_URI in onStart
 /** Fragment for Dialer Voicemail Tab. */
-public final class NewVoicemailFragment extends Fragment
-    implements LoaderCallbacks<Cursor>, CallLogUi {
-
-  /*
-   * This is a reasonable time that it might take between related call log writes, that also
-   * shouldn't slow down single-writes too much. For example, when populating the database using
-   * the simulator, using this value results in ~6 refresh cycles (on a release build) to write 120
-   * call log entries.
-   */
-  private static final long WAIT_MILLIS = 100L;
-
-  private RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
-  private UiListener<Void> refreshAnnotatedCallLogListener;
-  @Nullable private Runnable refreshAnnotatedCallLogRunnable;
-
-  private UiListener<ImmutableList<VoicemailStatus>> queryVoicemailStatusTableListener;
+public final class NewVoicemailFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
   private RecyclerView recyclerView;
+  private RefreshAnnotatedCallLogReceiver refreshAnnotatedCallLogReceiver;
+  private UiListener<ImmutableList<VoicemailStatus>> queryVoicemailStatusTableListener;
 
   public NewVoicemailFragment() {
     LogUtil.enterBlock("NewVoicemailFragment.NewVoicemailFragment");
@@ -77,23 +62,12 @@ public final class NewVoicemailFragment extends Fragment
 
     LogUtil.enterBlock("NewVoicemailFragment.onActivityCreated");
 
-    CallLogComponent component = CallLogComponent.get(getContext());
-    CallLogFramework callLogFramework = component.callLogFramework();
-    callLogFramework.attachUi(this);
-
-    // TODO(zachh): Use support fragment manager and add support for them in executors library.
-    refreshAnnotatedCallLogListener =
-        DialerExecutorComponent.get(getContext())
-            .createUiListener(
-                getActivity().getFragmentManager(), "NewVoicemailFragment.refreshAnnotatedCallLog");
-
+    refreshAnnotatedCallLogReceiver = new RefreshAnnotatedCallLogReceiver(getContext());
     queryVoicemailStatusTableListener =
         DialerExecutorComponent.get(getContext())
             .createUiListener(
                 getActivity().getFragmentManager(),
                 "NewVoicemailFragment.queryVoicemailStatusTable");
-
-    refreshAnnotatedCallLogWorker = component.getRefreshAnnotatedCallLogWorker();
   }
 
   @Override
@@ -106,29 +80,69 @@ public final class NewVoicemailFragment extends Fragment
   public void onResume() {
     super.onResume();
 
-    LogUtil.enterBlock("NewCallLogFragment.onResume");
+    boolean isHidden = isHidden();
+    LogUtil.i("NewVoicemailFragment.onResume", "isHidden = %s", isHidden);
 
-    CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
-    callLogFramework.attachUi(this);
-
-    // TODO(zachh): Consider doing this when fragment becomes visible.
-    refreshAnnotatedCallLog(true /* checkDirty */);
+    // As a fragment's onResume() is tied to the containing Activity's onResume(), being resumed is
+    // not equivalent to becoming visible.
+    // For example, when an activity with a hidden fragment is resumed, the fragment's onResume()
+    // will be called but it is not visible.
+    if (!isHidden) {
+      onFragmentShown();
+    }
   }
 
   @Override
   public void onPause() {
     super.onPause();
-
     LogUtil.enterBlock("NewVoicemailFragment.onPause");
 
-    // This is pending work that we don't actually need to follow through with.
-    ThreadUtil.getUiThreadHandler().removeCallbacks(refreshAnnotatedCallLogRunnable);
-
-    CallLogFramework callLogFramework = CallLogComponent.get(getContext()).callLogFramework();
-    callLogFramework.detachUi();
+    onFragmentHidden();
   }
 
-  @Nullable
+  @Override
+  public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    LogUtil.i("NewVoicemailFragment.onHiddenChanged", "hidden = %s", hidden);
+
+    if (hidden) {
+      onFragmentHidden();
+    } else {
+      onFragmentShown();
+    }
+  }
+
+  /**
+   * To be called when the fragment becomes visible.
+   *
+   * <p>Note that for a fragment, being resumed is not equivalent to becoming visible.
+   *
+   * <p>For example, when an activity with a hidden fragment is resumed, the fragment's onResume()
+   * will be called but it is not visible.
+   */
+  private void onFragmentShown() {
+    registerRefreshAnnotatedCallLogReceiver();
+
+    CallLogComponent.get(getContext())
+        .getRefreshAnnotatedCallLogNotifier()
+        .notify(/* checkDirty = */ true);
+  }
+
+  /**
+   * To be called when the fragment becomes hidden.
+   *
+   * <p>This can happen in the following two cases:
+   *
+   * <ul>
+   *   <li>hide the fragment but keep the parent activity visible (e.g., calling {@link
+   *       android.support.v4.app.FragmentTransaction#hide(Fragment)} in an activity, or
+   *   <li>the parent activity is paused.
+   * </ul>
+   */
+  private void onFragmentHidden() {
+    unregisterRefreshAnnotatedCallLogReceiver();
+  }
+
   @Override
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -137,43 +151,6 @@ public final class NewVoicemailFragment extends Fragment
     recyclerView = view.findViewById(R.id.new_voicemail_call_log_recycler_view);
     getLoaderManager().restartLoader(0, null, this);
     return view;
-  }
-
-  private void refreshAnnotatedCallLog(boolean checkDirty) {
-    LogUtil.enterBlock("NewVoicemailFragment.refreshAnnotatedCallLog");
-
-    // If we already scheduled a refresh, cancel it and schedule a new one so that repeated requests
-    // in quick succession don't result in too much work. For example, if we get 10 requests in
-    // 10ms, and a complete refresh takes a constant 200ms, the refresh will take 300ms (100ms wait
-    // and 1 iteration @200ms) instead of 2 seconds (10 iterations @ 200ms) since the work requests
-    // are serialized in RefreshAnnotatedCallLogWorker.
-    //
-    // We might get many requests in quick succession, for example, when the simulator inserts
-    // hundreds of rows into the system call log, or when the data for a new call is incrementally
-    // written to different columns as it becomes available.
-    ThreadUtil.getUiThreadHandler().removeCallbacks(refreshAnnotatedCallLogRunnable);
-
-    refreshAnnotatedCallLogRunnable =
-        () -> {
-          ListenableFuture<Void> future =
-              checkDirty
-                  ? refreshAnnotatedCallLogWorker.refreshWithDirtyCheck()
-                  : refreshAnnotatedCallLogWorker.refreshWithoutDirtyCheck();
-          refreshAnnotatedCallLogListener.listen(
-              getContext(),
-              future,
-              unused -> {},
-              throwable -> {
-                throw new RuntimeException(throwable);
-              });
-        };
-    ThreadUtil.getUiThreadHandler().postDelayed(refreshAnnotatedCallLogRunnable, WAIT_MILLIS);
-  }
-
-  @Override
-  public void invalidateUi() {
-    LogUtil.enterBlock("NewVoicemailFragment.invalidateUi");
-    refreshAnnotatedCallLog(false /* checkDirty */);
   }
 
   @Override
@@ -208,6 +185,24 @@ public final class NewVoicemailFragment extends Fragment
     }
 
     queryAndUpdateVoicemailStatusAlert();
+  }
+
+  private void registerRefreshAnnotatedCallLogReceiver() {
+    LogUtil.enterBlock("NewVoicemailFragment.registerRefreshAnnotatedCallLogReceiver");
+
+    LocalBroadcastManager.getInstance(getContext())
+        .registerReceiver(
+            refreshAnnotatedCallLogReceiver, RefreshAnnotatedCallLogReceiver.getIntentFilter());
+  }
+
+  private void unregisterRefreshAnnotatedCallLogReceiver() {
+    LogUtil.enterBlock("NewVoicemailFragment.unregisterRefreshAnnotatedCallLogReceiver");
+
+    // Cancel pending work as we don't need it any more.
+    CallLogComponent.get(getContext()).getRefreshAnnotatedCallLogNotifier().cancel();
+
+    LocalBroadcastManager.getInstance(getContext())
+        .unregisterReceiver(refreshAnnotatedCallLogReceiver);
   }
 
   private void queryAndUpdateVoicemailStatusAlert() {

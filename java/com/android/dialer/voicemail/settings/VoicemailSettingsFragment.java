@@ -32,12 +32,14 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.widget.TextViewPreference;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailClient.ActivationStateListener;
 import com.android.voicemail.VoicemailComponent;
@@ -73,6 +75,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   private SwitchPreference donateVoicemailSwitchPreference;
   private Preference voicemailChangePinPreference;
   private PreferenceScreen advancedSettings;
+  private TextViewPreference voicemailTranscriptionInstructionText;
 
   @Override
   public void onCreate(Bundle icicle) {
@@ -209,6 +212,10 @@ public class VoicemailSettingsFragment extends PreferenceFragment
             return false;
           }
         });
+
+    voicemailTranscriptionInstructionText =
+        (TextViewPreference) findPreference(getString(R.string.voicemail_transcription_text_key));
+    voicemailTranscriptionInstructionText.setTitle(getVoicemailTranscriptionInstructionsText());
   }
 
   @Override
@@ -347,5 +354,21 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
     builder.setCancelable(true);
     builder.show();
+  }
+
+  /**
+   * Builds a spannable string containing the voicemail transcription instructions text containing
+   * the appropriate "Learn More" urls.
+   *
+   * @return The voicemail transcription instructions text.
+   */
+  private CharSequence getVoicemailTranscriptionInstructionsText() {
+    String settingText =
+        getString(
+            R.string.voicemail_transcription_instruction_text,
+            getString(R.string.transcription_learn_more_url),
+            getString(R.string.donation_learn_more_url));
+    CharSequence settingSeq = Html.fromHtml(settingText);
+    return settingSeq;
   }
 }
