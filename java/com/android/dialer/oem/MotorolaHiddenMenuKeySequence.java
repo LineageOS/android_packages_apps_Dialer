@@ -65,13 +65,14 @@ public class MotorolaHiddenMenuKeySequence {
    */
   private static synchronized MotorolaHiddenMenuKeySequence getInstance(Context context) {
     if (null == instance) {
-      instance = new MotorolaHiddenMenuKeySequence(context);
+      instance = new MotorolaHiddenMenuKeySequence(context, new SystemPropertiesAccessor());
     }
     return instance;
   }
 
   @VisibleForTesting
-  MotorolaHiddenMenuKeySequence(Context context) {
+  MotorolaHiddenMenuKeySequence(
+      Context context, SystemPropertiesAccessor systemPropertiesAccessor) {
     if (MotorolaUtils.isSupportingHiddenMenu(context)) {
       Collections.addAll(
           hiddenKeySequences,
@@ -88,7 +89,7 @@ public class MotorolaHiddenMenuKeySequence {
       featureHiddenMenuEnabled = true;
     }
 
-    if ("tracfone".equals(System.getProperty("ro.carrier"))) {
+    if ("tracfone".equals(systemPropertiesAccessor.get("ro.carrier"))) {
       addHiddenKeySequence("#83865625#", "com.motorola.extensions.TFUnlock");
       addHiddenKeySequence("#83782887#", "com.motorola.extensions.TFStatus");
       featureHiddenMenuEnabled = true;
