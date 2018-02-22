@@ -17,96 +17,78 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
-import android.telecom.TelecomManager;
-import android.telecom.VideoProfile;
 import android.view.ActionProvider;
-import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
 
-/** Entry point in the simulator to create video calls. */
-final class SimulatorVideoCall
+/** Entry point in the simulator to create voice calls. */
+final class SimulatorRttCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
+
   @NonNull private final Context context;
-  private final int initialVideoCapability;
-  private final int initialVideoState;
   @Nullable private String connectionTag;
 
   static ActionProvider getActionProvider(@NonNull Context context) {
     return new SimulatorSubMenu(context)
-        .addItem(
-            "Incoming one way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_RX_ENABLED).addNewIncomingCall())
-        .addItem(
-            "Incoming two way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_BIDIRECTIONAL)
-                    .addNewIncomingCall())
-        .addItem(
-            "Outgoing one way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_TX_ENABLED).addNewOutgoingCall())
-        .addItem(
-            "Outgoing two way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_BIDIRECTIONAL)
-                    .addNewOutgoingCall());
+        .addItem("Incoming call", () -> new SimulatorRttCall(context).addNewIncomingCall(false))
+        .addItem("Outgoing call", () -> new SimulatorRttCall(context).addNewOutgoingCall())
+        .addItem("Emergency call", () -> new SimulatorRttCall(context).addNewEmergencyCall());
   }
 
-  private SimulatorVideoCall(@NonNull Context context, int initialVideoState) {
+  private SimulatorRttCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
-    this.initialVideoCapability =
-        Connection.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL
-            | Connection.CAPABILITY_SUPPORTS_VT_REMOTE_BIDIRECTIONAL;
-    this.initialVideoState = initialVideoState;
     SimulatorConnectionService.addListener(this);
+    SimulatorConnectionService.addListener(
+        new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
-  private void addNewIncomingCall() {
-    if (!isVideoAccountEnabled()) {
-      showVideoAccountSettings();
-      return;
-    }
-    String callerId = "+44 (0) 20 7031 3000"; // Google London office
+  private void addNewIncomingCall(boolean isSpam) {
+    String callerId =
+        isSpam
+            ? "+1-661-778-3020" /* Blacklisted custom spam number */
+            : "+44 (0) 20 7031 3000" /* Google London office */;
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
-            context, callerId, SimulatorSimCallManager.CALL_TYPE_VIDEO);
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
   }
 
   private void addNewOutgoingCall() {
-    if (!isVideoAccountEnabled()) {
-      showVideoAccountSettings();
-      return;
-    }
-    String phoneNumber = "+44 (0) 20 7031 3000"; // Google London office
+    String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(
-            context, phoneNumber, SimulatorSimCallManager.CALL_TYPE_VIDEO);
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
+  }
+
+  private void addNewEmergencyCall() {
+    String callerId = "911";
+    connectionTag =
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
   }
 
   @Override
   public void onNewOutgoingConnection(@NonNull SimulatorConnection connection) {
-    if (connection.getExtras().getBoolean(connectionTag)) {
-      LogUtil.i("SimulatorVideoCall.onNewOutgoingConnection", "connection created");
+    if (isMyConnection(connection)) {
+      LogUtil.i("SimulatorRttCall.onNewOutgoingConnection", "connection created");
       handleNewConnection(connection);
+
       // Telecom will force the connection to switch to Dialing when we return it. Wait until after
       // we're returned it before changing call state.
-      ThreadUtil.postOnUiThread(() -> connection.setActive());
+      ThreadUtil.postOnUiThread(connection::setActive);
     }
   }
 
   @Override
   public void onNewIncomingConnection(@NonNull SimulatorConnection connection) {
-    if (connection.getExtras().getBoolean(connectionTag)) {
-      LogUtil.i("SimulatorVideoCall.onNewIncomingConnection", "connection created");
+    if (isMyConnection(connection)) {
+      LogUtil.i("SimulatorRttCall.onNewIncomingConnection", "connection created");
       handleNewConnection(connection);
     }
   }
@@ -115,24 +97,14 @@ final class SimulatorVideoCall
   public void onConference(
       @NonNull SimulatorConnection connection1, @NonNull SimulatorConnection connection2) {}
 
-  private boolean isVideoAccountEnabled() {
-    SimulatorSimCallManager.register(context);
-    return context
-        .getSystemService(TelecomManager.class)
-        .getPhoneAccount(SimulatorSimCallManager.getVideoProviderHandle(context))
-        .isEnabled();
-  }
-
-  private void showVideoAccountSettings() {
-    context.startActivity(new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS));
-    Toast.makeText(context, "Please enable simulator video provider", Toast.LENGTH_LONG).show();
-  }
-
   private void handleNewConnection(@NonNull SimulatorConnection connection) {
     connection.addListener(this);
-    connection.setConnectionCapabilities(
-        connection.getConnectionCapabilities() | initialVideoCapability);
-    connection.setVideoState(initialVideoState);
+    connection.setConnectionProperties(
+        connection.getConnectionProperties() | Connection.PROPERTY_IS_RTT);
+  }
+
+  private boolean isMyConnection(@NonNull Connection connection) {
+    return connection.getExtras().getBoolean(connectionTag);
   }
 
   @Override
@@ -141,7 +113,6 @@ final class SimulatorVideoCall
       case Event.NONE:
         throw Assert.createIllegalStateFailException();
       case Event.ANSWER:
-        connection.setVideoState(Integer.parseInt(event.data1));
         connection.setActive();
         break;
       case Event.REJECT:
@@ -160,7 +131,7 @@ final class SimulatorVideoCall
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
         break;
       default:
-        LogUtil.i("SimulatorVideoCall.onEvent", "unexpected event: " + event.type);
+        LogUtil.i("SimulatorRttCall.onEvent", "unexpected event: " + event.type);
         break;
     }
   }

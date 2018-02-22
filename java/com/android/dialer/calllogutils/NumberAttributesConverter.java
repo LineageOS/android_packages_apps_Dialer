@@ -16,13 +16,16 @@
 
 package com.android.dialer.calllogutils;
 
+import android.text.TextUtils;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.glidephotomanager.PhotoInfo;
+import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 
 /** Converts {@link NumberAttributes} to {@link PhotoInfo} */
 public final class NumberAttributesConverter {
 
-  /** Converts to {@link PhotoInfo.Builder} */
+  /** Converts {@link NumberAttributes} to {@link PhotoInfo.Builder} */
   public static PhotoInfo.Builder toPhotoInfoBuilder(NumberAttributes numberAttributes) {
     return PhotoInfo.builder()
         .setName(numberAttributes.getName())
@@ -33,5 +36,26 @@ public final class NumberAttributesConverter {
         .setIsSpam(numberAttributes.getIsSpam())
         .setIsVoicemail(numberAttributes.getIsVoicemail())
         .setIsBlocked(numberAttributes.getIsBlocked());
+  }
+
+  /** Converts {@link PhoneLookupInfo} to {@link NumberAttributes.Builder} */
+  public static NumberAttributes.Builder fromPhoneLookupInfo(PhoneLookupInfo phoneLookupInfo) {
+    PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
+        new PhoneLookupInfoConsolidator(phoneLookupInfo);
+    return NumberAttributes.newBuilder()
+        .setName(phoneLookupInfoConsolidator.getName())
+        .setPhotoUri(
+            !TextUtils.isEmpty(phoneLookupInfoConsolidator.getPhotoThumbnailUri())
+                ? phoneLookupInfoConsolidator.getPhotoThumbnailUri()
+                : phoneLookupInfoConsolidator.getPhotoUri())
+        .setPhotoId(phoneLookupInfoConsolidator.getPhotoId())
+        .setLookupUri(phoneLookupInfoConsolidator.getLookupUri())
+        .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
+        .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
+        .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
+        .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
+        .setIsSpam(phoneLookupInfoConsolidator.isSpam())
+        .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
+        .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isCp2LocalInfoIncomplete());
   }
 }

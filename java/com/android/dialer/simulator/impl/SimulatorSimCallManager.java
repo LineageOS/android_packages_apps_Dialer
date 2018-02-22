@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.telecom.Connection;
 import android.telecom.ConnectionRequest;
@@ -30,6 +31,8 @@ import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.strictmode.StrictModeUtils;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -46,10 +49,20 @@ import java.util.Random;
  */
 public class SimulatorSimCallManager {
 
+  public static final int CALL_TYPE_VOICE = 1;
+  public static final int CALL_TYPE_VIDEO = 2;
+  public static final int CALL_TYPE_RTT = 3;
+
+  /** Call type of a simulator call. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({CALL_TYPE_VOICE, CALL_TYPE_VIDEO, CALL_TYPE_RTT})
+  public @interface CallType {}
+
   private static final String SIM_CALL_MANAGER_ACCOUNT_ID = "SIMULATOR_ACCOUNT_ID";
   private static final String VIDEO_PROVIDER_ACCOUNT_ID = "SIMULATOR_VIDEO_ACCOUNT_ID";
   private static final String EXTRA_IS_SIMULATOR_CONNECTION = "is_simulator_connection";
   private static final String EXTRA_CONNECTION_TAG = "connection_tag";
+  private static final String EXTRA_CONNECTION_CALL_TYPE = "connection_call_type";
 
   static void register(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorSimCallManager.register");
@@ -75,15 +88,15 @@ public class SimulatorSimCallManager {
 
   @NonNull
   public static String addNewOutgoingCall(
-      @NonNull Context context, @NonNull String phoneNumber, boolean isVideo) {
-    return addNewOutgoingCall(context, phoneNumber, isVideo, new Bundle());
+      @NonNull Context context, @NonNull String phoneNumber, @CallType int callType) {
+    return addNewOutgoingCall(context, phoneNumber, callType, new Bundle());
   }
 
   @NonNull
   public static String addNewOutgoingCall(
       @NonNull Context context,
       @NonNull String phoneNumber,
-      boolean isVideo,
+      @CallType int callType,
       @NonNull Bundle extras) {
     LogUtil.enterBlock("SimulatorSimCallManager.addNewOutgoingCall");
     Assert.isNotNull(context);
@@ -94,13 +107,18 @@ public class SimulatorSimCallManager {
     register(context);
 
     extras = new Bundle(extras);
-    extras.putAll(createSimulatorConnectionExtras());
+    extras.putAll(createSimulatorConnectionExtras(callType));
 
     Bundle outgoingCallExtras = new Bundle();
     outgoingCallExtras.putBundle(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, extras);
     outgoingCallExtras.putParcelable(
         TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
-        isVideo ? getVideoProviderHandle(context) : getSystemPhoneAccountHandle(context));
+        callType == CALL_TYPE_VIDEO
+            ? getVideoProviderHandle(context)
+            : getSystemPhoneAccountHandle(context));
+    if (callType == CALL_TYPE_RTT) {
+      outgoingCallExtras.putBoolean(TelecomManager.EXTRA_START_CALL_WITH_RTT, true);
+    }
 
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     try {
@@ -114,13 +132,16 @@ public class SimulatorSimCallManager {
 
   @NonNull
   public static String addNewIncomingCall(
-      @NonNull Context context, @NonNull String callerId, boolean isVideo) {
-    return addNewIncomingCall(context, callerId, isVideo, new Bundle());
+      @NonNull Context context, @NonNull String callerId, @CallType int callType) {
+    return addNewIncomingCall(context, callerId, callType, new Bundle());
   }
 
   @NonNull
   public static String addNewIncomingCall(
-      @NonNull Context context, @NonNull String callerId, boolean isVideo, @NonNull Bundle extras) {
+      @NonNull Context context,
+      @NonNull String callerId,
+      @CallType int callType,
+      @NonNull Bundle extras) {
     LogUtil.enterBlock("SimulatorSimCallManager.addNewIncomingCall");
     Assert.isNotNull(context);
     Assert.isNotNull(callerId);
@@ -130,18 +151,21 @@ public class SimulatorSimCallManager {
 
     extras = new Bundle(extras);
     extras.putString(TelephonyManager.EXTRA_INCOMING_NUMBER, callerId);
-    extras.putAll(createSimulatorConnectionExtras());
+    extras.putAll(createSimulatorConnectionExtras(callType));
 
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     telecomManager.addNewIncomingCall(
-        isVideo ? getVideoProviderHandle(context) : getSystemPhoneAccountHandle(context), extras);
+        callType == CALL_TYPE_VIDEO
+            ? getVideoProviderHandle(context)
+            : getSystemPhoneAccountHandle(context),
+        extras);
     return extras.getString(EXTRA_CONNECTION_TAG);
   }
 
   @NonNull
   private static PhoneAccount buildSimCallManagerAccount(Context context) {
     return new PhoneAccount.Builder(getSimCallManagerHandle(context), "Simulator SIM call manager")
-        .setCapabilities(PhoneAccount.CAPABILITY_CONNECTION_MANAGER)
+        .setCapabilities(PhoneAccount.CAPABILITY_CONNECTION_MANAGER | PhoneAccount.CAPABILITY_RTT)
         .setShortDescription("Simulator SIM call manager")
         .setSupportedUriSchemes(Arrays.asList(PhoneAccount.SCHEME_TEL))
         .build();
@@ -218,12 +242,16 @@ public class SimulatorSimCallManager {
   }
 
   @NonNull
-  static Bundle createSimulatorConnectionExtras() {
+  static Bundle createSimulatorConnectionExtras(@CallType int callType) {
     Bundle extras = new Bundle();
     extras.putBoolean(EXTRA_IS_SIMULATOR_CONNECTION, true);
     String connectionTag = createUniqueConnectionTag();
     extras.putString(EXTRA_CONNECTION_TAG, connectionTag);
     extras.putBoolean(connectionTag, true);
+    extras.putInt(EXTRA_CONNECTION_CALL_TYPE, callType);
+    if (callType == CALL_TYPE_RTT) {
+      extras.putBoolean(TelecomManager.EXTRA_START_CALL_WITH_RTT, true);
+    }
     return extras;
   }
 

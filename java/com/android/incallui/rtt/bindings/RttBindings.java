@@ -14,33 +14,15 @@
  * limitations under the License
  */
 
-package com.android.dialer.main;
+package com.android.incallui.rtt.bindings;
 
-import android.content.Intent;
-import android.os.Bundle;
+import com.android.incallui.rtt.impl.RttChatFragment;
+import com.android.incallui.rtt.protocol.RttCallScreen;
 
-/** Interface for peers of MainActivity. */
-public interface MainActivityPeer {
+/** Bindings for RTT module. */
+public class RttBindings {
 
-  void onActivityCreate(Bundle saveInstanceState);
-
-  void onActivityResume();
-
-  void onActivityStop();
-
-  void onActivityDestroyed();
-
-  void onNewIntent(Intent intent);
-
-  void onActivityResult(int requestCode, int resultCode, Intent data);
-
-  void onSaveInstanceState(Bundle bundle);
-
-  boolean onBackPressed();
-
-  /** Supplies the MainActivityPeer */
-  interface PeerSupplier {
-
-    MainActivityPeer getPeer();
+  public static RttCallScreen createRttCallScreen(String callId) {
+    return RttChatFragment.newInstance(callId);
   }
 }

@@ -40,6 +40,7 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
@@ -204,14 +205,23 @@ public class MainSearchController implements SearchBarListener {
   public void onSearchListTouch() {
     if (isDialpadVisible()) {
       if (TextUtils.isEmpty(getDialpadFragment().getQuery())) {
+        Logger.get(mainActivity)
+            .logImpression(
+                DialerImpression.Type.NUI_TOUCH_DIALPAD_SEARCH_LIST_TO_CLOSE_SEARCH_AND_DIALPAD);
         closeSearch(true);
       } else {
+        Logger.get(mainActivity)
+            .logImpression(DialerImpression.Type.NUI_TOUCH_DIALPAD_SEARCH_LIST_TO_HIDE_DIALPAD);
         hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       }
     } else if (isSearchVisible()) {
       if (TextUtils.isEmpty(toolbar.getQuery())) {
+        Logger.get(mainActivity)
+            .logImpression(DialerImpression.Type.NUI_TOUCH_SEARCH_LIST_TO_CLOSE_SEARCH);
         closeSearch(true);
       } else {
+        Logger.get(mainActivity)
+            .logImpression(DialerImpression.Type.NUI_TOUCH_SEARCH_LIST_TO_HIDE_KEYBOARD);
         toolbar.hideKeyboard();
       }
     }
@@ -225,10 +235,17 @@ public class MainSearchController implements SearchBarListener {
   public boolean onBackPressed() {
     if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
       LogUtil.i("MainSearchController#onBackPressed", "Dialpad visible with query");
+      Logger.get(mainActivity)
+          .logImpression(DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
       hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       return true;
     } else if (isSearchVisible()) {
       LogUtil.i("MainSearchController#onBackPressed", "Search is visible");
+      Logger.get(mainActivity)
+          .logImpression(
+              isDialpadVisible()
+                  ? DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH_AND_DIALPAD
+                  : DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH);
       closeSearch(true);
       return true;
     } else {
@@ -252,16 +269,13 @@ public class MainSearchController implements SearchBarListener {
     mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
-    getDialpadFragment().clearDialpad();
+    if (getDialpadFragment() != null) {
+      getDialpadFragment().clearDialpad();
+    }
   }
 
-  /**
-   * Returns {@link DialpadFragment}.
-   *
-   * <p>Unless this method is being called for the first time in {@link #openSearch(Optional)} or
-   * {@link #showDialpad(boolean)}, it should never return null.
-   */
-  private DialpadFragment getDialpadFragment() {
+  @Nullable
+  protected DialpadFragment getDialpadFragment() {
     return (DialpadFragment)
         mainActivity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
   }
@@ -297,6 +311,7 @@ public class MainSearchController implements SearchBarListener {
    */
   @Override
   public void onSearchBarClicked() {
+    Logger.get(mainActivity).logImpression(DialerImpression.Type.NUI_CLICK_SEARCH_BAR);
     openSearch(Optional.absent());
   }
 
@@ -314,14 +329,6 @@ public class MainSearchController implements SearchBarListener {
       transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
-    }
-
-    // Add the dialpad fragment but keep it hidden
-    if (getDialpadFragment() == null) {
-      DialpadFragment dialpadFragment = new DialpadFragment();
-      transaction
-          .add(R.id.dialpad_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG)
-          .hide(dialpadFragment);
     }
 
     transaction.commit();
@@ -350,6 +357,7 @@ public class MainSearchController implements SearchBarListener {
 
   @Override
   public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {
+    Logger.get(mainActivity).logImpression(DialerImpression.Type.NUI_CLICK_SEARCH_BAR_VOICE_BUTTON);
     try {
       Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
       mainActivity.startActivityForResult(voiceIntent, ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);

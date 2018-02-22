@@ -121,6 +121,24 @@ public final class SimulatorConnection extends Connection {
     onEvent(new Event(Event.DTMF, Character.toString(c), null));
   }
 
+  @Override
+  public void onStartRtt(@NonNull RttTextStream rttTextStream) {
+    LogUtil.enterBlock("SimulatorConnection.onStartRtt");
+    onEvent(new Event(Event.START_RTT));
+  }
+
+  @Override
+  public void onStopRtt() {
+    LogUtil.enterBlock("SimulatorConnection.onStopRtt");
+    onEvent(new Event(Event.STOP_RTT));
+  }
+
+  @Override
+  public void handleRttUpgradeResponse(RttTextStream rttTextStream) {
+    LogUtil.enterBlock("SimulatorConnection.handleRttUpgradeResponse");
+    onEvent(new Event(Event.HANDLE_RTT_UPGRADE_RESPONSE));
+  }
+
   void onEvent(@NonNull Event event) {
     events.add(Assert.isNotNull(event));
     for (Listener listener : new ArrayList<>(listeners)) {
