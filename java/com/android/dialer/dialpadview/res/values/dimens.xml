@@ -43,4 +43,6 @@
 
   <!-- Length of dialpad's shadows in dialer. -->
   <dimen name="shadow_length">10dp</dimen>
+
+  <dimen name="barcode_height">100dp</dimen>
 </resources>
