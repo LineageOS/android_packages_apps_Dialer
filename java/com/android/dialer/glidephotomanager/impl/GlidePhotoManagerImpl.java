@@ -68,12 +68,12 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
     // Warning: Glide ignores extra attributes on BitmapDrawable such as tint and draw the bitmap
     // directly so be sure not to set tint in the XML of any drawable referenced below.
 
-    // The spam status takes precedence over whether the number is blocked.
-    if (photoInfo.isSpam()) {
-      return requestManager.load(R.drawable.ic_report_red_48dp);
-    }
+    // Whether the number is blocked takes precedence over the spam status.
     if (photoInfo.isBlocked()) {
       return requestManager.load(R.drawable.ic_block_grey_48dp);
+    }
+    if (photoInfo.isSpam()) {
+      return requestManager.load(R.drawable.ic_report_red_48dp);
     }
     if (!TextUtils.isEmpty(photoInfo.photoUri())) {
       return requestManager.load(parseUri(photoInfo.photoUri()));

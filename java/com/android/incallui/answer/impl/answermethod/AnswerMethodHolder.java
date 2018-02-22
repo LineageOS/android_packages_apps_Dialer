@@ -46,4 +46,6 @@ public interface AnswerMethodHolder {
   boolean isVideoCall();
 
   boolean isVideoUpgradeRequest();
+
+  boolean isRttCall();
 }

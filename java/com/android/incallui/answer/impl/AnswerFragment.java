@@ -103,6 +103,8 @@ public class AnswerFragment extends Fragment
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
 
+  static final String ARG_IS_RTT_CALL = "is_rtt_call";
+
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_VIDEO_CALL = "is_video_call";
 
@@ -344,6 +346,7 @@ public class AnswerFragment extends Fragment
 
   public static AnswerFragment newInstance(
       String callId,
+      boolean isRttCall,
       boolean isVideoCall,
       boolean isVideoUpgradeRequest,
       boolean isSelfManagedCamera,
@@ -351,6 +354,7 @@ public class AnswerFragment extends Fragment
       boolean hasCallOnHold) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
+    bundle.putBoolean(ARG_IS_RTT_CALL, isRttCall);
     bundle.putBoolean(ARG_IS_VIDEO_CALL, isVideoCall);
     bundle.putBoolean(ARG_IS_VIDEO_UPGRADE_REQUEST, isVideoUpgradeRequest);
     bundle.putBoolean(ARG_IS_SELF_MANAGED_CAMERA, isSelfManagedCamera);
@@ -663,6 +667,7 @@ public class AnswerFragment extends Fragment
     Trace.beginSection("AnswerFragment.onCreateView");
     Bundle arguments = getArguments();
     Assert.checkState(arguments.containsKey(ARG_CALL_ID));
+    Assert.checkState(arguments.containsKey(ARG_IS_RTT_CALL));
     Assert.checkState(arguments.containsKey(ARG_IS_VIDEO_CALL));
     Assert.checkState(arguments.containsKey(ARG_IS_VIDEO_UPGRADE_REQUEST));
 
@@ -833,6 +838,11 @@ public class AnswerFragment extends Fragment
     }
 
     restoreBackgroundMaskColor();
+  }
+
+  @Override
+  public boolean isRttCall() {
+    return getArguments().getBoolean(ARG_IS_RTT_CALL);
   }
 
   @Override

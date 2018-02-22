@@ -18,9 +18,6 @@
   <!-- Content description for submit chat input button. [CHAR LIMIT=NONE] -->
   <string name="content_description_rtt_check_button">Go ahead</string>
 
-  <!-- Content description for navigate back button on RTT chat window. [CHAR LIMIT=NONE] -->
-  <string name="content_description_rtt_back_button">Back</string>
-
   <!-- Hint text for input box. [CHAR LIMIT=NONE] -->
   <string name="rtt_input_hint">Type a message</string>
 

@@ -16,21 +16,25 @@
 
 package com.android.incallui.rtt.impl;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
+import android.telecom.CallAudioState;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
@@ -38,15 +42,34 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
+import com.android.dialer.common.LogUtil;
+import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.incall.protocol.InCallButtonUi;
+import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
+import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
+import com.android.incallui.incall.protocol.InCallScreen;
+import com.android.incallui.incall.protocol.InCallScreenDelegate;
+import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
+import com.android.incallui.incall.protocol.PrimaryCallState;
+import com.android.incallui.incall.protocol.PrimaryInfo;
+import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.rtt.impl.RttChatAdapter.MessageListener;
+import com.android.incallui.rtt.protocol.RttCallScreen;
+import com.android.incallui.rtt.protocol.RttCallScreenDelegate;
+import com.android.incallui.rtt.protocol.RttCallScreenDelegateFactory;
 
 /** RTT chat fragment to show chat bubbles. */
 public class RttChatFragment extends Fragment
-    implements OnClickListener, OnEditorActionListener, TextWatcher, MessageListener {
+    implements OnEditorActionListener,
+        TextWatcher,
+        MessageListener,
+        RttCallScreen,
+        InCallScreen,
+        InCallButtonUi {
 
   private static final String ARG_CALL_ID = "call_id";
-  private static final String ARG_NAME_OR_NUMBER = "name_or_number";
-  private static final String ARG_SESSION_START_TIME = "session_start_time";
 
   private RecyclerView recyclerView;
   private RttChatAdapter adapter;
@@ -63,25 +86,57 @@ public class RttChatFragment extends Fragment
           }
         }
       };
+  private InCallScreenDelegate inCallScreenDelegate;
+  private RttCallScreenDelegate rttCallScreenDelegate;
+  private InCallButtonUiDelegate inCallButtonUiDelegate;
+  private View endCallButton;
+  private TextView nameTextView;
+  private Chronometer chronometer;
+  private boolean isTimerStarted;
 
   /**
    * Create a new instance of RttChatFragment.
    *
    * @param callId call id of the RTT call.
-   * @param nameOrNumber name or number of the caller to be displayed
-   * @param sessionStartTimeMillis start time of RTT session in terms of {@link
-   *     SystemClock#elapsedRealtime}.
    * @return new RttChatFragment
    */
-  public static RttChatFragment newInstance(
-      String callId, String nameOrNumber, long sessionStartTimeMillis) {
+  public static RttChatFragment newInstance(String callId) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, callId);
-    bundle.putString(ARG_NAME_OR_NUMBER, nameOrNumber);
-    bundle.putLong(ARG_SESSION_START_TIME, sessionStartTimeMillis);
     RttChatFragment instance = new RttChatFragment();
     instance.setArguments(bundle);
     return instance;
+  }
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    LogUtil.i("RttChatFragment.onCreate", null);
+    inCallButtonUiDelegate =
+        FragmentUtils.getParent(this, InCallButtonUiDelegateFactory.class)
+            .newInCallButtonUiDelegate();
+    if (savedInstanceState != null) {
+      inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
+    }
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle bundle) {
+    super.onViewCreated(view, bundle);
+    LogUtil.i("RttChatFragment.onViewCreated", null);
+
+    inCallScreenDelegate =
+        FragmentUtils.getParentUnsafe(this, InCallScreenDelegateFactory.class)
+            .newInCallScreenDelegate();
+    rttCallScreenDelegate =
+        FragmentUtils.getParentUnsafe(this, RttCallScreenDelegateFactory.class)
+            .newRttCallScreenDelegate(this);
+
+    rttCallScreenDelegate.initRttCallScreenDelegate(getContext(), this);
+
+    inCallScreenDelegate.onInCallScreenDelegateInit(this);
+    inCallScreenDelegate.onInCallScreenReady();
+    inCallButtonUiDelegate.onInCallButtonUiReady(this);
   }
 
   @Nullable
@@ -101,35 +156,24 @@ public class RttChatFragment extends Fragment
     recyclerView.setAdapter(adapter);
     recyclerView.addOnScrollListener(onScrollListener);
     submitButton = view.findViewById(R.id.rtt_chat_submit_button);
-    submitButton.setOnClickListener(this);
+    submitButton.setOnClickListener(
+        v -> {
+          adapter.submitLocalMessage();
+          isClearingInput = true;
+          editText.setText("");
+          isClearingInput = false;
+        });
     submitButton.setEnabled(false);
+    endCallButton = view.findViewById(R.id.rtt_end_call_button);
+    endCallButton.setOnClickListener(
+        v -> {
+          LogUtil.i("RttChatFragment.onClick", "end call button clicked");
+          inCallButtonUiDelegate.onEndCallClicked();
+        });
 
-    String nameOrNumber = null;
-    Bundle bundle = getArguments();
-    if (bundle != null) {
-      nameOrNumber = bundle.getString(ARG_NAME_OR_NUMBER, getString(R.string.unknown));
-    }
-    TextView nameTextView = view.findViewById(R.id.rtt_name_or_number);
-    nameTextView.setText(nameOrNumber);
-
-    long sessionStartTime = SystemClock.elapsedRealtime();
-    if (bundle != null) {
-      sessionStartTime = bundle.getLong(ARG_SESSION_START_TIME, sessionStartTime);
-    }
-    Chronometer chronometer = view.findViewById(R.id.rtt_timer);
-    chronometer.setBase(sessionStartTime);
-    chronometer.start();
+    nameTextView = view.findViewById(R.id.rtt_name_or_number);
+    chronometer = view.findViewById(R.id.rtt_timer);
     return view;
-  }
-
-  @Override
-  public void onClick(View v) {
-    if (v.getId() == R.id.rtt_chat_submit_button) {
-      adapter.submitLocalMessage();
-      isClearingInput = true;
-      editText.setText("");
-      isClearingInput = false;
-    }
   }
 
   @Override
@@ -166,6 +210,20 @@ public class RttChatFragment extends Fragment
     recyclerView.smoothScrollToPosition(adapter.getItemCount());
   }
 
+  @Override
+  public void onStart() {
+    LogUtil.enterBlock("RttChatFragment.onStart");
+    super.onStart();
+    onRttScreenStart();
+  }
+
+  @Override
+  public void onStop() {
+    LogUtil.enterBlock("RttChatFragment.onStop");
+    super.onStop();
+    onRttScreenStop();
+  }
+
   private void hideKeyboard() {
     InputMethodManager inputMethodManager = getContext().getSystemService(InputMethodManager.class);
     if (inputMethodManager.isAcceptingText()) {
@@ -173,4 +231,129 @@ public class RttChatFragment extends Fragment
           getActivity().getCurrentFocus().getWindowToken(), 0);
     }
   }
+
+  @Override
+  public void onRttScreenStart() {
+    rttCallScreenDelegate.onRttCallScreenUiReady();
+    Activity activity = getActivity();
+    Window window = getActivity().getWindow();
+    window.setStatusBarColor(activity.getColor(R.color.rtt_status_bar_color));
+    window.setNavigationBarColor(activity.getColor(R.color.rtt_navigation_bar_color));
+    window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+  }
+
+  @Override
+  public void onRttScreenStop() {
+    rttCallScreenDelegate.onRttCallScreenUiUnready();
+  }
+
+  @Override
+  public Fragment getRttCallScreenFragment() {
+    return this;
+  }
+
+  @Override
+  public String getCallId() {
+    return Assert.isNotNull(getArguments().getString(ARG_CALL_ID));
+  }
+
+  @Override
+  public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
+    LogUtil.i("RttChatFragment.setPrimary", primaryInfo.toString());
+    nameTextView.setText(primaryInfo.name);
+  }
+
+  @Override
+  public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {}
+
+  @Override
+  public void setCallState(@NonNull PrimaryCallState primaryCallState) {
+    LogUtil.i("RttChatFragment.setCallState", primaryCallState.toString());
+    if (!isTimerStarted && primaryCallState.state == State.ACTIVE) {
+      LogUtil.i(
+          "RttChatFragment.setCallState", "starting timer with base: %d", chronometer.getBase());
+      chronometer.setBase(
+          primaryCallState.connectTimeMillis
+              - System.currentTimeMillis()
+              + SystemClock.elapsedRealtime());
+      chronometer.start();
+      isTimerStarted = true;
+    }
+  }
+
+  @Override
+  public void setEndCallButtonEnabled(boolean enabled, boolean animate) {}
+
+  @Override
+  public void showManageConferenceCallButton(boolean visible) {}
+
+  @Override
+  public boolean isManageConferenceVisible() {
+    return false;
+  }
+
+  @Override
+  public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {}
+
+  @Override
+  public void showNoteSentToast() {}
+
+  @Override
+  public void updateInCallScreenColors() {}
+
+  @Override
+  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {}
+
+  @Override
+  public int getAnswerAndDialpadContainerResourceId() {
+    return 0;
+  }
+
+  @Override
+  public void showLocationUi(Fragment locationUi) {}
+
+  @Override
+  public boolean isShowingLocationUi() {
+    return false;
+  }
+
+  @Override
+  public Fragment getInCallScreenFragment() {
+    return this;
+  }
+
+  @Override
+  public void showButton(int buttonId, boolean show) {}
+
+  @Override
+  public void enableButton(int buttonId, boolean enable) {}
+
+  @Override
+  public void setEnabled(boolean on) {}
+
+  @Override
+  public void setHold(boolean on) {}
+
+  @Override
+  public void setCameraSwitched(boolean isBackFacingCamera) {}
+
+  @Override
+  public void setVideoPaused(boolean isPaused) {}
+
+  @Override
+  public void setAudioState(CallAudioState audioState) {}
+
+  @Override
+  public void updateButtonStates() {}
+
+  @Override
+  public void updateInCallButtonUiColors(int color) {}
+
+  @Override
+  public Fragment getInCallButtonUiFragment() {
+    return this;
+  }
+
+  @Override
+  public void showAudioRouteSelector() {}
 }

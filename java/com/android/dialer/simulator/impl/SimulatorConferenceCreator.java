@@ -97,7 +97,8 @@ final class SimulatorConferenceCreator
       default:
         break;
     }
-    SimulatorSimCallManager.addNewIncomingCall(context, number, false /* isVideo */, extras);
+    SimulatorSimCallManager.addNewIncomingCall(
+        context, number, SimulatorSimCallManager.CALL_TYPE_VOICE, extras);
   }
 
   @Override

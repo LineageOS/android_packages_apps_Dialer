@@ -78,7 +78,8 @@ final class SimulatorMissedCallCreator implements SimulatorConnectionService.Lis
     extras.putInt(EXTRA_CALL_COUNT, callCount - 1);
     extras.putBoolean(EXTRA_IS_MISSED_CALL_CONNECTION, true);
 
-    SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */, extras);
+    SimulatorSimCallManager.addNewIncomingCall(
+        context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE, extras);
   }
 
   private static boolean isMissedCallConnection(@NonNull Connection connection) {

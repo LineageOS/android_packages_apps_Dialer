@@ -14,33 +14,26 @@
  * limitations under the License
  */
 
-package com.android.dialer.main;
+package com.android.dialer.metrics;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.app.Application;
+import android.content.Context;
 
-/** Interface for peers of MainActivity. */
-public interface MainActivityPeer {
+/** Logs metrics. */
+public interface Metrics {
 
-  void onActivityCreate(Bundle saveInstanceState);
+  /** Start a timer. */
+  void startTimer(Context context, String timerEventName);
 
-  void onActivityResume();
+  /** Stop a timer. */
+  void stopTimer(String timerEventName);
 
-  void onActivityStop();
+  /** Record memory. */
+  void recordMemory(String memoryEventName);
 
-  void onActivityDestroyed();
-
-  void onNewIntent(Intent intent);
-
-  void onActivityResult(int requestCode, int resultCode, Intent data);
-
-  void onSaveInstanceState(Bundle bundle);
-
-  boolean onBackPressed();
-
-  /** Supplies the MainActivityPeer */
-  interface PeerSupplier {
-
-    MainActivityPeer getPeer();
+  /** Initiazer for metrics. */
+  interface Initializer {
+    /** Initialize metrics for the application . */
+    void initialize(Application application);
   }
 }

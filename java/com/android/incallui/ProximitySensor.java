@@ -55,6 +55,7 @@ public class ProximitySensor
   private boolean dialpadVisible;
   private boolean isAttemptingVideoCall;
   private boolean isVideoCall;
+  private boolean isRttCall;
 
   public ProximitySensor(
       @NonNull Context context,
@@ -112,10 +113,14 @@ public class ProximitySensor
 
     DialerCall activeCall = callList.getActiveCall();
     boolean isVideoCall = activeCall != null && activeCall.isVideoCall();
+    boolean isRttCall = activeCall != null && activeCall.isRttCall();
 
-    if (isOffhook != isPhoneOffhook || this.isVideoCall != isVideoCall) {
+    if (isOffhook != isPhoneOffhook
+        || this.isVideoCall != isVideoCall
+        || this.isRttCall != isRttCall) {
       isPhoneOffhook = isOffhook;
       this.isVideoCall = isVideoCall;
+      this.isRttCall = isRttCall;
 
       orientation = AccelerometerListener.ORIENTATION_UNKNOWN;
       accelerometerListener.enable(isPhoneOffhook);
@@ -217,7 +222,8 @@ public class ProximitySensor
             || CallAudioState.ROUTE_SPEAKER == audioRoute
             || CallAudioState.ROUTE_BLUETOOTH == audioRoute
             || isAttemptingVideoCall
-            || isVideoCall);
+            || isVideoCall
+            || isRttCall);
 
     // We do not keep the screen off when the user is outside in-call screen and we are
     // horizontal, but we do not force it on when we become horizontal until the

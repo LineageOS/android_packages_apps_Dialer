@@ -32,6 +32,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.Call.Details;
+import android.telecom.Call.RttCall;
 import android.telecom.CallAudioState;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
@@ -259,6 +260,28 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
               "call %s, conferenceable calls: %d",
               call,
               conferenceableCalls.size());
+          update();
+        }
+
+        @Override
+        public void onRttModeChanged(Call call, int mode) {
+          LogUtil.v("TelecomCallCallback.onRttModeChanged", "mode=%d", mode);
+        }
+
+        @Override
+        public void onRttRequest(Call call, int id) {
+          LogUtil.v("TelecomCallCallback.onRttRequest", "id=%d", id);
+        }
+
+        @Override
+        public void onRttInitiationFailure(Call call, int reason) {
+          LogUtil.v("TelecomCallCallback.onRttInitiationFailure", "reason=%d", reason);
+          update();
+        }
+
+        @Override
+        public void onRttStatusChanged(Call call, boolean enabled, RttCall rttCall) {
+          LogUtil.v("TelecomCallCallback.onRttStatusChanged", "enabled=%b", enabled);
           update();
         }
 
@@ -906,12 +929,25 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return getVideoTech().isTransmittingOrReceiving() || VideoProfile.isVideo(getVideoState());
   }
 
+  public boolean isRttCall() {
+    if (BuildCompat.isAtLeastP()) {
+      return getTelecomCall().isRttActive();
+    } else {
+      return false;
+    }
+  }
+
   public boolean hasReceivedVideoUpgradeRequest() {
     return VideoUtils.hasReceivedVideoUpgradeRequest(getVideoTech().getSessionModificationState());
   }
 
   public boolean hasSentVideoUpgradeRequest() {
     return VideoUtils.hasSentVideoUpgradeRequest(getVideoTech().getSessionModificationState());
+  }
+
+  public boolean hasSentRttUpgradeRequest() {
+    // TODO(wangqi): Implement this.
+    return false;
   }
 
   /**
