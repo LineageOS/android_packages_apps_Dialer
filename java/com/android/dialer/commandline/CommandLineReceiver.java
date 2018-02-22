@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import com.android.dialer.buildtype.BuildType;
+import com.android.dialer.buildtype.BuildType.Type;
 import com.android.dialer.commandline.Command.IllegalCommandLineArgumentException;
 import com.android.dialer.common.LogUtil;
 import com.google.common.util.concurrent.FutureCallback;
@@ -44,7 +45,7 @@ public class CommandLineReceiver extends BroadcastReceiver {
       LogUtil.e("CommandLineReceiver", "missing tag");
       return;
     }
-    if (!LogUtil.isDebugEnabled() && BuildType.get() != BuildType.BUGFOOD) {
+    if (!LogUtil.isDebugEnabled() && BuildType.get() != Type.BUGFOOD) {
       LogUtil.i(outputTag, "DISABLED");
       return;
     }

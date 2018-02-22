@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.searchfragment.remote;
+package com.android.dialer.searchfragment.directories;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -25,23 +25,22 @@ import android.support.annotation.VisibleForTesting;
 import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
-import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * {@link MergeCursor} used for combining remote directory cursors into one cursor.
+ * {@link MergeCursor} used for combining directory cursors into one cursor.
  *
- * <p>Usually a device with multiple Google accounts will have multiple remote directories returned
- * by {@link DirectoriesCursorLoader}, each represented as a {@link Directory}.
+ * <p>Usually a device with multiple Google accounts will have multiple directories returned by
+ * {@link DirectoriesCursorLoader}, each represented as a {@link Directory}.
  *
  * <p>This cursor merges them together with a header at the start of each cursor/list using {@link
  * Directory#getDisplayName()} as the header text.
  */
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-public final class RemoteContactsCursor extends MergeCursor implements SearchCursor {
+public final class DirectoryContactsCursor extends MergeCursor implements SearchCursor {
 
   /**
    * {@link SearchCursor#HEADER_PROJECTION} with {@link #COLUMN_DIRECTORY_ID} appended on the end.
@@ -59,7 +58,7 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
    */
   @Nullable
   @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-  public static RemoteContactsCursor newInstance(
+  public static DirectoryContactsCursor newInstance(
       Context context, Cursor[] cursors, List<Directory> directories) {
     Assert.checkArgument(
         cursors.length == directories.size(),
@@ -68,12 +67,12 @@ public final class RemoteContactsCursor extends MergeCursor implements SearchCur
         cursors.length);
     Cursor[] cursorsWithHeaders = insertHeaders(context, cursors, directories);
     if (cursorsWithHeaders.length > 0) {
-      return new RemoteContactsCursor(cursorsWithHeaders);
+      return new DirectoryContactsCursor(cursorsWithHeaders);
     }
     return null;
   }
 
-  private RemoteContactsCursor(Cursor[] cursors) {
+  private DirectoryContactsCursor(Cursor[] cursors) {
     super(cursors);
   }
 

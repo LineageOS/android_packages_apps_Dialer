@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.telecom.Connection;
+import android.telecom.Connection.RttModifyStatus;
 import android.telecom.DisconnectCause;
 import android.view.ActionProvider;
 import com.android.dialer.common.Assert;
@@ -223,15 +224,13 @@ final class SimulatorVoiceCall
     switch (event.type) {
       case Event.NONE:
         throw Assert.createIllegalStateFailException();
-      case Event.ANSWER:
-        connection.setActive();
-        break;
       case Event.REJECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.REJECTED));
         break;
       case Event.HOLD:
         connection.setOnHold();
         break;
+      case Event.ANSWER:
       case Event.UNHOLD:
         connection.setActive();
         break;
@@ -243,6 +242,15 @@ final class SimulatorVoiceCall
         break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
+        break;
+      case Event.START_RTT:
+        // TODO(wangqi): Add random accept/decline.
+        boolean accept = true;
+        if (accept) {
+          connection.sendRttInitiationSuccess();
+        } else {
+          connection.sendRttInitiationFailure(RttModifyStatus.SESSION_MODIFY_REQUEST_FAIL);
+        }
         break;
       default:
         LogUtil.i("SimulatorVoiceCall.onEvent", "unexpected event: " + event.type);

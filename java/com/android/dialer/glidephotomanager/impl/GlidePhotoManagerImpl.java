@@ -51,16 +51,7 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
     Assert.isMainThread();
     badge.assignContactUri(parseUri(photoInfo.lookupUri()));
     badge.setOverlay(null);
-    LetterTileDrawable defaultDrawable = getDefaultDrawable(photoInfo);
-    GlideRequest<Drawable> request =
-        buildRequest(GlideApp.with(badge), photoInfo)
-            .placeholder(defaultDrawable) // when the photo is still loading.
-            .fallback(defaultDrawable); // when there's nothing to load.
-
-    if (photoInfo.isCircular()) {
-      request.circleCrop();
-    }
-
+    GlideRequest<Drawable> request = buildRequest(GlideApp.with(badge), photoInfo);
     request.into(badge);
   }
 
@@ -68,21 +59,39 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
     // Warning: Glide ignores extra attributes on BitmapDrawable such as tint and draw the bitmap
     // directly so be sure not to set tint in the XML of any drawable referenced below.
 
-    // Whether the number is blocked takes precedence over the spam status.
+    GlideRequest<Drawable> request;
+    boolean circleCrop = true; // Photos are cropped to a circle by default.
+
     if (photoInfo.isBlocked()) {
-      return requestManager.load(R.drawable.ic_block_grey_48dp);
+      // Whether the number is blocked takes precedence over the spam status.
+      request = requestManager.load(R.drawable.ic_block_grey_48dp);
+
+    } else if (photoInfo.isSpam()) {
+      request = requestManager.load(R.drawable.quantum_ic_report_vd_red_24);
+      circleCrop = false; // The spam icon is an octagon so we don't crop it.
+
+    } else if (!TextUtils.isEmpty(photoInfo.photoUri())) {
+      request = requestManager.load(parseUri(photoInfo.photoUri()));
+
+    } else if (photoInfo.photoId() != 0) {
+      request =
+          requestManager.load(ContentUris.withAppendedId(Data.CONTENT_URI, photoInfo.photoId()));
+
+    } else {
+      // load null to indicate fallback should be used.
+      request = requestManager.load((Object) null);
     }
-    if (photoInfo.isSpam()) {
-      return requestManager.load(R.drawable.ic_report_red_48dp);
+
+    LetterTileDrawable defaultDrawable = getDefaultDrawable(photoInfo);
+    request
+        .placeholder(defaultDrawable) // when the photo is still loading.
+        .fallback(defaultDrawable); // when there's nothing to load.
+
+    if (circleCrop) {
+      request.circleCrop();
     }
-    if (!TextUtils.isEmpty(photoInfo.photoUri())) {
-      return requestManager.load(parseUri(photoInfo.photoUri()));
-    }
-    if (photoInfo.photoId() != 0) {
-      return requestManager.load(ContentUris.withAppendedId(Data.CONTENT_URI, photoInfo.photoId()));
-    }
-    // load null to indicate fallback should be used.
-    return requestManager.load((Object) null);
+
+    return request;
   }
 
   /**
@@ -108,7 +117,7 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
         LetterTileDrawable.SHAPE_CIRCLE,
         LetterTileDrawable.getContactTypeFromPrimitives(
             photoInfo.isVoicemail(),
-            false, // TODO(twyen):implement
+            photoInfo.isSpam(),
             photoInfo.isBusiness(),
             TelecomManager.PRESENTATION_ALLOWED, // TODO(twyen):implement
             false)); // TODO(twyen):implement

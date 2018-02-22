@@ -16,9 +16,12 @@
 
 package com.android.dialer.simulator.impl;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.os.BuildCompat;
 import android.telecom.Connection;
+import android.telecom.Connection.RttTextStream;
 import android.telecom.ConnectionRequest;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
@@ -31,11 +34,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Represents a single phone call on the device. */
+@TargetApi(28)
 public final class SimulatorConnection extends Connection {
   private final List<Listener> listeners = new ArrayList<>();
   private final List<Event> events = new ArrayList<>();
   private final SimulatorConnectionsBank simulatorConnectionsBank;
   private int currentState = STATE_NEW;
+  private RttTextStream rttTextStream;
+  private RttChatBot rttChatBot;
 
   SimulatorConnection(@NonNull Context context, @NonNull ConnectionRequest request) {
     Assert.isNotNull(context);
@@ -54,6 +60,9 @@ public final class SimulatorConnection extends Connection {
             getConnectionCapabilities() | CAPABILITY_SEPARATE_FROM_CONFERENCE);
       }
     }
+    if (BuildCompat.isAtLeastP()) {
+      rttTextStream = request.getRttTextStream();
+    }
     setVideoProvider(new SimulatorVideoProvider(context, this));
     simulatorConnectionsBank = SimulatorComponent.get(context).getSimulatorConnectionsBank();
   }
@@ -64,6 +73,10 @@ public final class SimulatorConnection extends Connection {
 
   public void removeListener(@NonNull Listener listener) {
     listeners.remove(Assert.isNotNull(listener));
+  }
+
+  RttTextStream getRttTextStream() {
+    return rttTextStream;
   }
 
   @NonNull
@@ -101,6 +114,11 @@ public final class SimulatorConnection extends Connection {
     LogUtil.enterBlock("SimulatorConnection.onDisconnect");
     simulatorConnectionsBank.remove(this);
     onEvent(new Event(Event.DISCONNECT));
+    rttTextStream = null;
+    if (rttChatBot != null) {
+      rttChatBot.stop();
+      rttChatBot = null;
+    }
   }
 
   @Override
@@ -124,12 +142,21 @@ public final class SimulatorConnection extends Connection {
   @Override
   public void onStartRtt(@NonNull RttTextStream rttTextStream) {
     LogUtil.enterBlock("SimulatorConnection.onStartRtt");
+    if (this.rttTextStream != null || rttChatBot != null) {
+      LogUtil.e("SimulatorConnection.onStartRtt", "rttTextStream or rttChatBot is not null!");
+    }
+    this.rttTextStream = rttTextStream;
+    rttChatBot = new RttChatBot(rttTextStream);
+    rttChatBot.start();
     onEvent(new Event(Event.START_RTT));
   }
 
   @Override
   public void onStopRtt() {
     LogUtil.enterBlock("SimulatorConnection.onStopRtt");
+    rttChatBot.stop();
+    rttChatBot = null;
+    rttTextStream = null;
     onEvent(new Event(Event.STOP_RTT));
   }
 
@@ -159,6 +186,4 @@ public final class SimulatorConnection extends Connection {
   public interface Listener {
     void onEvent(@NonNull SimulatorConnection connection, @NonNull Event event);
   }
-
-
 }

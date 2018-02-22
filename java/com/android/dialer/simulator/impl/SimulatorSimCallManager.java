@@ -115,7 +115,7 @@ public class SimulatorSimCallManager {
         TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
         callType == CALL_TYPE_VIDEO
             ? getVideoProviderHandle(context)
-            : getSystemPhoneAccountHandle(context));
+            : getSimCallManagerHandle(context));
     if (callType == CALL_TYPE_RTT) {
       outgoingCallExtras.putBoolean(TelecomManager.EXTRA_START_CALL_WITH_RTT, true);
     }

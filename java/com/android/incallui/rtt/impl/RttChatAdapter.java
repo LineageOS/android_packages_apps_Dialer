@@ -110,7 +110,17 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
       notifyItemInserted(lastIndexOfLocalMessage);
     } else {
       rttChatMessage.append(newMessage);
-      notifyItemChanged(lastIndexOfLocalMessage);
+      // Clear empty message bubble.
+      if (TextUtils.isEmpty(rttChatMessage.getContent())) {
+        rttMessages.remove(lastIndexOfLocalMessage);
+        notifyItemRemoved(lastIndexOfLocalMessage);
+        if (lastIndexOfRemoteMessage > lastIndexOfLocalMessage) {
+          lastIndexOfRemoteMessage -= 1;
+        }
+        lastIndexOfLocalMessage = -1;
+      } else {
+        notifyItemChanged(lastIndexOfLocalMessage);
+      }
     }
   }
 

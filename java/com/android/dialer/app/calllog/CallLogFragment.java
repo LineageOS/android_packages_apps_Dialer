@@ -58,11 +58,15 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
+import com.android.dialer.metrics.jank.RecyclerViewJankLogger;
 import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
@@ -305,7 +309,13 @@ public class CallLogFragment extends Fragment
 
   protected void setupView(View view) {
     recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+    if (ConfigProviderBindings.get(getContext()).getBoolean("is_call_log_item_anim_null", false)) {
+      recyclerView.setItemAnimator(null);
+    }
     recyclerView.setHasFixedSize(true);
+    recyclerView.addOnScrollListener(
+        new RecyclerViewJankLogger(
+            MetricsComponent.get(getContext()).metrics(), Metrics.OLD_CALL_LOG_JANK_EVENT_NAME));
     layoutManager = new LinearLayoutManager(getActivity());
     recyclerView.setLayoutManager(layoutManager);
     PerformanceReport.logOnScrollStateChange(recyclerView);
@@ -661,8 +671,19 @@ public class CallLogFragment extends Fragment
     multiSelectUnSelectAllViewContent.setVisibility(show ? View.VISIBLE : View.GONE);
     multiSelectUnSelectAllViewContent.setAlpha(show ? 0 : 1);
     multiSelectUnSelectAllViewContent.animate().alpha(show ? 1 : 0).start();
-    FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class)
-        .showMultiSelectRemoveView(show);
+    if (show) {
+      FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class)
+          .showMultiSelectRemoveView(true);
+    } else {
+      // This method is called after onDestroy. In DialtactsActivity, ListsFragment implements this
+      // interface and never goes away with configuration changes so this is safe. MainActivity
+      // removes that extra layer though, so we need to check if the parent is still there.
+      CallLogFragmentListener listener =
+          FragmentUtils.getParent(this, CallLogFragmentListener.class);
+      if (listener != null) {
+        listener.showMultiSelectRemoveView(false);
+      }
+    }
   }
 
   @Override

@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.searchfragment.remote;
+package com.android.dialer.searchfragment.directories;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -40,8 +40,8 @@ import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
 import com.android.dialer.searchfragment.common.SearchCursor;
 
-/** ViewHolder for a nearby place row. */
-public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
+/** ViewHolder for a directory contact row. */
+public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
     implements View.OnClickListener {
 
   private final Context context;
@@ -52,7 +52,7 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
 
   private String number;
 
-  public RemoteContactViewHolder(View view) {
+  public DirectoryContactViewHolder(View view) {
     super(view);
     view.setOnClickListener(this);
     photo = view.findViewById(R.id.photo);
@@ -63,8 +63,8 @@ public final class RemoteContactViewHolder extends RecyclerView.ViewHolder
   }
 
   /**
-   * Binds the ViewHolder with a cursor from {@link RemoteContactsCursorLoader} with the data found
-   * at the cursors current position.
+   * Binds the ViewHolder with a cursor from {@link DirectoryContactsCursorLoader} with the data
+   * found at the cursors current position.
    */
   public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);

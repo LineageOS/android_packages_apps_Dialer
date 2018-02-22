@@ -149,7 +149,7 @@ public class AnswerFragment extends Fragment
   private boolean buttonAcceptClicked;
   private boolean buttonRejectClicked;
   private boolean hasAnimatedEntry;
-  private PrimaryInfo primaryInfo = PrimaryInfo.createEmptyPrimaryInfo();
+  private PrimaryInfo primaryInfo = PrimaryInfo.empty();
   private PrimaryCallState primaryCallState;
   private ArrayList<CharSequence> textResponses;
   private SmsBottomSheetFragment textResponsesFragment;
@@ -523,13 +523,13 @@ public class AnswerFragment extends Fragment
       return;
     }
     contactGridManager.setPrimary(primaryInfo);
-    getAnswerMethod().setShowIncomingWillDisconnect(primaryInfo.answeringDisconnectsOngoingCall);
+    getAnswerMethod().setShowIncomingWillDisconnect(primaryInfo.answeringDisconnectsOngoingCall());
     getAnswerMethod()
         .setContactPhoto(
-            primaryInfo.photoType == ContactPhotoType.CONTACT ? primaryInfo.photo : null);
+            primaryInfo.photoType() == ContactPhotoType.CONTACT ? primaryInfo.photo() : null);
     updateDataFragment();
 
-    if (primaryInfo.shouldShowLocation) {
+    if (primaryInfo.shouldShowLocation()) {
       // Hide the avatar to make room for location
       contactGridManager.setAvatarHidden(true);
     }
@@ -562,8 +562,8 @@ public class AnswerFragment extends Fragment
             MultimediaFragment.newInstance(
                 multimediaData,
                 false /* isInteractive */,
-                !primaryInfo.isSpam /* showAvatar */,
-                primaryInfo.isSpam);
+                !primaryInfo.isSpam() /* showAvatar */,
+                primaryInfo.isSpam());
       }
     } else if (shouldShowAvatar()) {
       // Needs Avatar
@@ -1067,7 +1067,7 @@ public class AnswerFragment extends Fragment
       return;
     }
 
-    if (!getResources().getBoolean(R.bool.answer_important_call_allowed) || primaryInfo.isSpam) {
+    if (!getResources().getBoolean(R.bool.answer_important_call_allowed) || primaryInfo.isSpam()) {
       importanceBadge.setVisibility(View.GONE);
       return;
     }
@@ -1088,7 +1088,7 @@ public class AnswerFragment extends Fragment
     if (isVideoUpgradeRequest()) {
       return null;
     }
-    return primaryInfo.multimediaData;
+    return primaryInfo.multimediaData();
   }
 
   /** Shows the Avatar image if available. */

@@ -30,16 +30,24 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
+import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.OldSpeedDialFragment;
@@ -47,6 +55,8 @@ import com.android.dialer.app.list.OnDragDropListener;
 import com.android.dialer.app.list.OnListFragmentScrolledListener;
 import com.android.dialer.app.list.PhoneFavoriteSquareTileView;
 import com.android.dialer.app.list.RemoveView;
+import com.android.dialer.callcomposer.CallComposerActivity;
+import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
@@ -65,6 +75,7 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -81,6 +92,7 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TransactionSafeActivity;
+import com.android.voicemail.VoicemailComponent;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -190,13 +202,18 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
         new MainBottomNavBarBottomNavTabListener(mainActivity, mainActivity.getFragmentManager());
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
+    // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
+    boolean showVoicemailTab = canVoicemailTabBeShown(mainActivity);
+    bottomNav.showVoicemail(showVoicemailTab);
 
     callLogFragmentListener =
         new MainCallLogFragmentListener(
             mainActivity, mainActivity.getContentResolver(), bottomNav, toolbar);
     bottomNav.addOnTabSelectedListener(callLogFragmentListener);
 
-    searchController = getNewMainSearchController(bottomNav, fab, toolbar);
+    searchController =
+        getNewMainSearchController(
+            bottomNav, fab, toolbar, mainActivity.findViewById(R.id.toolbar_shadow));
     toolbar.setSearchBarListener(searchController);
 
     onDialpadQueryChangedListener = getNewOnDialpadQueryChangedListener(searchController);
@@ -216,7 +233,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             mainActivity.findViewById(R.id.remove_view),
             mainActivity.findViewById(R.id.search_view_container));
 
-    lastTabController = new LastTabController(mainActivity, bottomNav);
+    lastTabController = new LastTabController(mainActivity, bottomNav, showVoicemailTab);
 
     // Restore our view state if needed, else initialize as if the app opened for the first time
     if (savedInstanceState != null) {
@@ -224,39 +241,119 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       searchController.onRestoreInstanceState(savedInstanceState);
       bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
     } else {
-      showTabOnIntent(mainActivity.getIntent());
+      onHandleIntent(mainActivity.getIntent());
     }
+  }
+
+  /**
+   * Check and return whether the voicemail tab should be shown or not. This includes the following
+   * criteria under which we show the voicemail tab:
+   * <li>The voicemail number exists (e.g we are able to dial into listen to voicemail or press and
+   *     hold 1)
+   * <li>Visual voicemail is enabled from the settings tab
+   * <li>Visual voicemail carrier is supported by dialer
+   * <li>There is no voicemail carrier app installed.
+   *
+   * @param context
+   * @return return if voicemail tab should be shown or not depending on what the voicemail state is
+   *     for the carrier.
+   */
+  private static boolean canVoicemailTabBeShown(Context context) {
+    PhoneAccountHandle defaultUserSelectedAccount =
+        TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_VOICEMAIL);
+
+    if (isVoicemailAvailable(context, defaultUserSelectedAccount)) {
+      return true;
+    }
+    if (VoicemailComponent.get(context)
+        .getVoicemailClient()
+        .isVoicemailEnabled(context, defaultUserSelectedAccount)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Check if voicemail is enabled/accessible.
+   *
+   * @return true if voicemail is enabled and accessible. Note that this can be false "temporarily"
+   *     after the app boot e.g if the sim isn't fully recognized. TODO(uabdullah): Possibly add a
+   *     listener of some kind to detect when a sim is recognized. TODO(uabdullah): Move this to a
+   *     utility class or wrap it all in a static inner class.
+   */
+  private static boolean isVoicemailAvailable(
+      Context context, PhoneAccountHandle defaultUserSelectedAccount) {
+
+    if (!TelecomUtil.hasReadPhoneStatePermission(context)) {
+      LogUtil.i(
+          "OldMainActivityPeer.isVoicemailAvailable",
+          "No read phone permisison or not the default dialer.");
+      return false;
+    }
+
+    if (defaultUserSelectedAccount == null) {
+      // In a single-SIM phone, there is no default outgoing phone account selected by
+      // the user, so just call TelephonyManager#getVoicemailNumber directly.
+      return !TextUtils.isEmpty(getTelephonyManager(context).getVoiceMailNumber());
+    } else {
+      return !TextUtils.isEmpty(
+          TelecomUtil.getVoicemailNumber(context, defaultUserSelectedAccount));
+    }
+  }
+
+  private static TelephonyManager getTelephonyManager(Context context) {
+    return context.getSystemService(TelephonyManager.class);
   }
 
   @Override
   public void onNewIntent(Intent intent) {
     LogUtil.enterBlock("OldMainActivityPeer.onNewIntent");
-    showTabOnIntent(intent);
+    onHandleIntent(intent);
   }
 
-  private void showTabOnIntent(Intent intent) {
-    if (isShowTabIntent(intent)) {
+  private void onHandleIntent(Intent intent) {
+    // Some important implementation notes:
+    //  1) If the intent contains extra data to open to a specific screen (e.g. DIAL intent), when
+    //     the user leaves that screen, they will return here and add see a blank screen unless we
+    //     select a tab here.
+    //  2) Don't return early here in case the intent does contain extra data.
+    //  3) External intents should take priority over other intents (like Calls.CONTENT_TYPE).
+    if (Calls.CONTENT_TYPE.equals(intent.getType())) {
+      Bundle extras = intent.getExtras();
+      if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
+        LogUtil.i("OldMainActivityPeer.onHandleIntent", "Voicemail content type intent");
+        bottomNav.selectTab(TabIndex.VOICEMAIL);
+        Logger.get(mainActivity).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
+      } else {
+        LogUtil.i("OldMainActivityPeer.onHandleIntent", "Call log content type intent");
+        bottomNav.selectTab(TabIndex.CALL_LOG);
+      }
+
+    } else if (isShowTabIntent(intent)) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show tab intent");
       bottomNav.selectTab(getTabFromIntent(intent));
-      return;
-    }
-
-    if (isDialIntent(intent)) {
-      searchController.showDialpadFromNewIntent(false);
-      // Dialpad will grab the intent and populate the number
-      return;
-    }
-
-    if (lastTabController.isEnabled) {
+    } else if (lastTabController.isEnabled) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show last tab");
       lastTabController.selectLastTab();
-      return;
+    } else {
+      bottomNav.selectTab(TabIndex.SPEED_DIAL);
     }
 
-    bottomNav.selectTab(TabIndex.SPEED_DIAL);
+    if (isDialOrAddCallIntent(intent)) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "Dial or add call intent");
+      // Dialpad will grab the intent and populate the number
+      searchController.showDialpadFromNewIntent();
+    }
+
+    if (intent.getBooleanExtra(DialtactsActivity.EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
+      LogUtil.i("OldMainActivityPeer.onHandleIntent", "clearing all new voicemails");
+      CallLogNotificationsService.markAllNewVoicemailsAsOld(mainActivity);
+    }
   }
 
-  /** Returns true if the given intent contains a phone number to populate the dialer with */
-  private boolean isDialIntent(Intent intent) {
-    if (intent == null || intent.getData() == null) {
+  /** Returns true if the given intent is a Dial intent with data or an Add Call intent. */
+  private boolean isDialOrAddCallIntent(Intent intent) {
+    if (intent == null) {
       return false;
     }
 
@@ -270,7 +367,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         return true;
       }
     }
-    return false;
+    return DialpadFragment.isAddCallMode(intent);
   }
 
   @Override
@@ -284,6 +381,18 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         .getDatabaseHelper(mainActivity)
         .startSmartDialUpdateThread(forceUpdate);
     showPostCallPrompt();
+
+    if (searchController.isInSearch()
+        || callLogAdapterOnActionModeStateChangedListener.isActionModeStateEnabled()) {
+      bottomNav.setVisibility(View.GONE);
+    } else {
+      bottomNav.setVisibility(View.VISIBLE);
+    }
+  }
+
+  @Override
+  public void onUserLeaveHint() {
+    searchController.onUserLeaveHint();
   }
 
   @Override
@@ -328,6 +437,44 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         resultCode);
     if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
       searchController.onVoiceResults(resultCode, data);
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_COMPOSER) {
+      if (resultCode == AppCompatActivity.RESULT_FIRST_USER) {
+        LogUtil.i(
+            "OldMainActivityPeer.onActivityResult", "returned from call composer, error occurred");
+        String message =
+            mainActivity.getString(
+                R.string.call_composer_connection_failed,
+                data.getStringExtra(CallComposerActivity.KEY_CONTACT_NAME));
+        Snackbar.make(snackbarContainer, message, Snackbar.LENGTH_LONG).show();
+      } else {
+        LogUtil.i("OldMainActivityPeer.onActivityResult", "returned from call composer, no error");
+      }
+
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
+      if (resultCode == AppCompatActivity.RESULT_OK
+          && data != null
+          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+        int snackbarDurationMillis = 5_000;
+        Snackbar.make(
+                snackbarContainer,
+                mainActivity.getString(R.string.ec_data_deleted),
+                snackbarDurationMillis)
+            .setAction(
+                R.string.view_conversation,
+                v ->
+                    mainActivity.startActivity(
+                        IntentProvider.getSendSmsIntentProvider(number).getIntent(mainActivity)))
+            .setActionTextColor(
+                ContextCompat.getColor(mainActivity, R.color.dialer_snackbar_action_text_color))
+            .show();
+      }
+
+    } else if (requestCode == ActivityRequestCodes.DIALTACTS_DUO) {
+      // We just returned from starting Duo for a task. Reload our reachability data since it
+      // may have changed after a user finished activating Duo.
+      DuoComponent.get(mainActivity).getDuo().reloadReachability(mainActivity);
+
     } else {
       LogUtil.e("OldMainActivityPeer.onActivityResult", "Unknown request code: " + requestCode);
     }
@@ -335,6 +482,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public boolean onBackPressed() {
+    LogUtil.enterBlock("OldMainActivityPeer.onBackPressed");
     if (searchController.onBackPressed()) {
       return true;
     }
@@ -375,8 +523,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   public MainSearchController getNewMainSearchController(
-      BottomNavBar bottomNavBar, FloatingActionButton fab, MainToolbar mainToolbar) {
-    return new MainSearchController(mainActivity, bottomNavBar, fab, mainToolbar);
+      BottomNavBar bottomNavBar,
+      FloatingActionButton fab,
+      MainToolbar mainToolbar,
+      View toolbarShadow) {
+    return new MainSearchController(mainActivity, bottomNavBar, fab, mainToolbar, toolbarShadow);
   }
 
   public MainOnDialpadQueryChangedListener getNewOnDialpadQueryChangedListener(
@@ -448,6 +599,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public void onCallPlacedFromDialpad() {
       // TODO(calderwoodra): logging
+      searchController.onCallPlacedFromSearch();
     }
   }
 
@@ -468,6 +620,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public void onCallPlacedFromSearch() {
       // TODO(calderwoodra): logging
+      searchController.onCallPlacedFromSearch();
     }
   }
 
@@ -482,7 +635,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   /** @see CallLogAdapter.OnActionModeStateChangedListener */
-  // TODO(calderwoodra): What is the purpose of this listener?
   private static final class MainCallLogAdapterOnActionModeStateChangedListener
       implements CallLogAdapter.OnActionModeStateChangedListener {
 
@@ -928,11 +1080,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private final Context context;
     private final BottomNavBar bottomNavBar;
     private final boolean isEnabled;
+    private final boolean canShowVoicemailTab;
 
-    LastTabController(Context context, BottomNavBar bottomNavBar) {
+    LastTabController(Context context, BottomNavBar bottomNavBar, boolean canShowVoicemailTab) {
       this.context = context;
       this.bottomNavBar = bottomNavBar;
       isEnabled = ConfigProviderBindings.get(context).getBoolean("last_tab_enabled", false);
+      this.canShowVoicemailTab = canShowVoicemailTab;
     }
 
     /** Sets the last tab if the feature is enabled, otherwise defaults to speed dial. */
@@ -944,6 +1098,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
                 .unencryptedSharedPrefs()
                 .getInt(KEY_LAST_TAB, TabIndex.SPEED_DIAL);
       }
+
+      // If the voicemail tab cannot be shown, default to showing speed dial
+      if (tabIndex == TabIndex.VOICEMAIL && !canShowVoicemailTab) {
+        tabIndex = TabIndex.SPEED_DIAL;
+      }
+
       bottomNavBar.selectTab(tabIndex);
     }
 

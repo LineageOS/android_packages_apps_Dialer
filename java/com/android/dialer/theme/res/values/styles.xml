@@ -45,7 +45,7 @@
   </style>
 
   <style name="DialerButtonTextStyle" parent="@android:style/TextAppearance.Material.Widget.Button">
-    <item name="android:textColor">#fff</item>
+    <item name="android:textColor">@color/dialer_primary_text_color_white</item>
   </style>
 
   <style name="DialerActionBarBaseStyle"

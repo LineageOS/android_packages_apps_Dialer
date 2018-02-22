@@ -619,8 +619,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
   }
 
   @Override
-  public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  public void registerContentObservers(Context appContext) {
     // Do nothing since CP2 changes are too noisy.
   }
 

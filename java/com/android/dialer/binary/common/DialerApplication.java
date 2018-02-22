@@ -23,11 +23,14 @@ import android.support.v4.os.BuildCompat;
 import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calllog.CallLogComponent;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.strictmode.StrictModeComponent;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /** A common application subclass for all Dialer build variants. */
 public abstract class DialerApplication extends Application implements HasRootComponent {
@@ -46,6 +49,10 @@ public abstract class DialerApplication extends Application implements HasRootCo
             DialerExecutorComponent.get(this).dialerExecutorFactory())
         .asyncAutoMigrate();
     CallLogComponent.get(this).callLogFramework().registerContentObservers(getApplicationContext());
+    Futures.addCallback(
+        CallLogComponent.get(this).getAnnotatedCallLogMigrator().migrate(),
+        new DefaultFutureCallback<>(),
+        MoreExecutors.directExecutor());
     PersistentLogger.initialize(this);
 
     if (BuildCompat.isAtLeastO()) {
