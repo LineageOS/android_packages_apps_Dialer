@@ -17,7 +17,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dialer_theme_color">
+    android:background="@color/dialer_theme_color"
+    android:fitsSystemWindows="true">
 
   <include layout="@layout/rtt_banner"/>
 
@@ -52,6 +53,8 @@
         android:inputType="textMultiLine|text"
         android:maxLines="4"
         android:minHeight="53dp"
+        android:textColor="#DD000000"
+        android:textColorHint="#757575"
         android:textSize="16sp"/>
     <ImageButton
         android:id="@+id/rtt_chat_submit_button"

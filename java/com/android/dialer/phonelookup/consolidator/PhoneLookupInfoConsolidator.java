@@ -108,6 +108,28 @@ public final class PhoneLookupInfoConsolidator {
 
   /**
    * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns the photo thumbnail URI associated with that number.
+   *
+   * <p>If no photo thumbnail URI can be obtained from the {@link PhoneLookupInfo}, an empty string
+   * will be returned.
+   */
+  public String getPhotoThumbnailUri() {
+    switch (nameSource) {
+      case NameSource.CP2_LOCAL:
+        return Assert.isNotNull(firstCp2LocalContact).getPhotoThumbnailUri();
+      case NameSource.CP2_REMOTE:
+        return Assert.isNotNull(firstCp2RemoteContact).getPhotoThumbnailUri();
+      case NameSource.PEOPLE_API:
+      case NameSource.NONE:
+        return "";
+      default:
+        throw Assert.createUnsupportedOperationFailException(
+            String.format("Unsupported name source: %s", nameSource));
+    }
+  }
+
+  /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
    * returns the photo URI associated with that number.
    *
    * <p>If no photo URI can be obtained from the {@link PhoneLookupInfo}, an empty string will be

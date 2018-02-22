@@ -19,6 +19,7 @@ package com.android.incallui.rtt.impl;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextWatcher;
+import com.android.incallui.rtt.protocol.Constants;
 import com.google.common.base.Splitter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,8 +28,7 @@ import java.util.List;
 /** Message class that holds one RTT chat content. */
 final class RttChatMessage {
 
-  static final String BUBBLE_BREAKER = "\n\n";
-  private static final Splitter SPLITTER = Splitter.on(BUBBLE_BREAKER);
+  private static final Splitter SPLITTER = Splitter.on(Constants.BUBBLE_BREAKER);
 
   boolean isRemote;
   public boolean hasAvatar;
@@ -108,7 +108,7 @@ final class RttChatMessage {
       firstMessage.isRemote = true;
     }
     firstMessage.append(firstMessageContent);
-    if (splitText.hasNext() || text.endsWith(BUBBLE_BREAKER)) {
+    if (splitText.hasNext() || text.endsWith(Constants.BUBBLE_BREAKER)) {
       firstMessage.finish();
     }
     messageList.add(firstMessage);

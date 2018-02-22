@@ -14,33 +14,18 @@
  * limitations under the License
  */
 
-package com.android.dialer.main;
+package com.android.dialer.metrics;
 
-import android.content.Intent;
-import android.os.Bundle;
+import dagger.Binds;
+import dagger.Module;
 
-/** Interface for peers of MainActivity. */
-public interface MainActivityPeer {
+/** Binds stub {@link Metrics}. */
+@Module
+public interface StubMetricsModule {
 
-  void onActivityCreate(Bundle saveInstanceState);
+  @Binds
+  Metrics bindMetrics(StubMetrics stub);
 
-  void onActivityResume();
-
-  void onActivityStop();
-
-  void onActivityDestroyed();
-
-  void onNewIntent(Intent intent);
-
-  void onActivityResult(int requestCode, int resultCode, Intent data);
-
-  void onSaveInstanceState(Bundle bundle);
-
-  boolean onBackPressed();
-
-  /** Supplies the MainActivityPeer */
-  interface PeerSupplier {
-
-    MainActivityPeer getPeer();
-  }
+  @Binds
+  Metrics.Initializer bindMetricsInitializer(StubMetricsInitializer stub);
 }

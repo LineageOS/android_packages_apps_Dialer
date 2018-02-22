@@ -35,12 +35,13 @@ final class Cp2Projections {
       new String[] {
         Phone.DISPLAY_NAME_PRIMARY, // 0
         Phone.PHOTO_THUMBNAIL_URI, // 1
-        Phone.PHOTO_ID, // 2
-        Phone.TYPE, // 3
-        Phone.LABEL, // 4
-        Phone.NORMALIZED_NUMBER, // 5
-        Phone.CONTACT_ID, // 6
-        Phone.LOOKUP_KEY // 7
+        Phone.PHOTO_URI, // 2
+        Phone.PHOTO_ID, // 3
+        Phone.TYPE, // 4
+        Phone.LABEL, // 5
+        Phone.NORMALIZED_NUMBER, // 6
+        Phone.CONTACT_ID, // 7
+        Phone.LOOKUP_KEY // 8
       };
 
   // Projection for performing lookups using the PHONE_LOOKUP table
@@ -48,23 +49,25 @@ final class Cp2Projections {
       new String[] {
         PhoneLookup.DISPLAY_NAME_PRIMARY, // 0
         PhoneLookup.PHOTO_THUMBNAIL_URI, // 1
-        PhoneLookup.PHOTO_ID, // 2
-        PhoneLookup.TYPE, // 3
-        PhoneLookup.LABEL, // 4
-        PhoneLookup.NORMALIZED_NUMBER, // 5
-        PhoneLookup.CONTACT_ID, // 6
-        PhoneLookup.LOOKUP_KEY // 7
+        PhoneLookup.PHOTO_URI, // 2
+        PhoneLookup.PHOTO_ID, // 3
+        PhoneLookup.TYPE, // 4
+        PhoneLookup.LABEL, // 5
+        PhoneLookup.NORMALIZED_NUMBER, // 6
+        PhoneLookup.CONTACT_ID, // 7
+        PhoneLookup.LOOKUP_KEY // 8
       };
 
   // The following indexes should match both PHONE_PROJECTION and PHONE_LOOKUP_PROJECTION above.
   private static final int CP2_INFO_NAME_INDEX = 0;
-  private static final int CP2_INFO_PHOTO_URI_INDEX = 1;
-  private static final int CP2_INFO_PHOTO_ID_INDEX = 2;
-  private static final int CP2_INFO_TYPE_INDEX = 3;
-  private static final int CP2_INFO_LABEL_INDEX = 4;
-  private static final int CP2_INFO_NORMALIZED_NUMBER_INDEX = 5;
-  private static final int CP2_INFO_CONTACT_ID_INDEX = 6;
-  private static final int CP2_INFO_LOOKUP_KEY_INDEX = 7;
+  private static final int CP2_INFO_PHOTO_THUMBNAIL_URI_INDEX = 1;
+  private static final int CP2_INFO_PHOTO_URI_INDEX = 2;
+  private static final int CP2_INFO_PHOTO_ID_INDEX = 3;
+  private static final int CP2_INFO_TYPE_INDEX = 4;
+  private static final int CP2_INFO_LABEL_INDEX = 5;
+  private static final int CP2_INFO_NORMALIZED_NUMBER_INDEX = 6;
+  private static final int CP2_INFO_CONTACT_ID_INDEX = 7;
+  private static final int CP2_INFO_LOOKUP_KEY_INDEX = 8;
 
   private Cp2Projections() {}
 
@@ -82,6 +85,7 @@ final class Cp2Projections {
    */
   static Cp2ContactInfo buildCp2ContactInfoFromCursor(Context appContext, Cursor cursor) {
     String displayName = cursor.getString(CP2_INFO_NAME_INDEX);
+    String photoThumbnailUri = cursor.getString(CP2_INFO_PHOTO_THUMBNAIL_URI_INDEX);
     String photoUri = cursor.getString(CP2_INFO_PHOTO_URI_INDEX);
     int photoId = cursor.getInt(CP2_INFO_PHOTO_ID_INDEX);
     int type = cursor.getInt(CP2_INFO_TYPE_INDEX);
@@ -92,6 +96,9 @@ final class Cp2Projections {
     Cp2ContactInfo.Builder infoBuilder = Cp2ContactInfo.newBuilder();
     if (!TextUtils.isEmpty(displayName)) {
       infoBuilder.setName(displayName);
+    }
+    if (!TextUtils.isEmpty(photoThumbnailUri)) {
+      infoBuilder.setPhotoThumbnailUri(photoThumbnailUri);
     }
     if (!TextUtils.isEmpty(photoUri)) {
       infoBuilder.setPhotoUri(photoUri);

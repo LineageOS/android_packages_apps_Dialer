@@ -60,6 +60,9 @@ public class NewMainActivityPeer implements MainActivityPeer {
   public void onActivityStop() {}
 
   @Override
+  public void onActivityDestroyed() {}
+
+  @Override
   public void onNewIntent(Intent intent) {}
 
   @Override

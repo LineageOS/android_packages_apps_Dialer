@@ -70,7 +70,8 @@ public final class CallLogEntryText {
    * <ul>
    *   <li>For numbers that are not spam or blocked: (Duo video, )?$Label|$Location • Date
    *   <li>For blocked non-spam numbers: Blocked • (Duo video, )?$Label|$Location • Date
-   *   <li>For spam numbers: Spam • (Duo video, )?$Label • Date
+   *   <li>For spam but not blocked numbers: Spam • (Duo video, )?$Label • Date
+   *   <li>For blocked spam numbers: Blocked • Spam • (Duo video, )?$Label • Date
    * </ul>
    *
    * <p>Examples:
@@ -84,6 +85,7 @@ public final class CallLogEntryText {
    *   <li>Blocked • Brooklyn, NJ • 10 min ago
    *   <li>Spam • Mobile • Now
    *   <li>Spam • Now
+   *   <li>Blocked • Spam • Mobile • Now
    *   <li>Brooklyn, NJ • Jan 15
    * </ul>
    *
@@ -93,11 +95,11 @@ public final class CallLogEntryText {
       Context context, Clock clock, CoalescedRow row) {
     List<CharSequence> components = new ArrayList<>();
 
-    // If a number is both spam and blocked, only show "Spam".
+    if (row.numberAttributes().getIsBlocked()) {
+      components.add(context.getText(R.string.new_call_log_secondary_blocked));
+    }
     if (row.numberAttributes().getIsSpam()) {
       components.add(context.getText(R.string.new_call_log_secondary_spam));
-    } else if (row.numberAttributes().getIsBlocked()) {
-      components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
 
     components.add(getNumberTypeLabel(context, row));
@@ -121,8 +123,10 @@ public final class CallLogEntryText {
      *     (Duo video, )?$Label|$Location [• NumberIfNoName]?
      *   For blocked non-spam numbers:
      *     Blocked • (Duo video, )?$Label|$Location [• NumberIfNoName]?
-     *   For spam numbers:
+     *   For spam but not blocked numbers:
      *     Spam • (Duo video, )?$Label [• NumberIfNoName]?
+     *   For blocked spam numbers:
+     *     Blocked • Spam • (Duo video, )?$Label [• NumberIfNoName]?
      *
      * The number is shown at the end if there is no name for the entry. (It is shown in primary
      * text otherwise.)
@@ -139,11 +143,11 @@ public final class CallLogEntryText {
      */
     List<CharSequence> components = new ArrayList<>();
 
-    // If a number is both spam and blocked, only show "Spam".
+    if (row.numberAttributes().getIsBlocked()) {
+      components.add(context.getText(R.string.new_call_log_secondary_blocked));
+    }
     if (row.numberAttributes().getIsSpam()) {
       components.add(context.getText(R.string.new_call_log_secondary_spam));
-    } else if (row.numberAttributes().getIsBlocked()) {
-      components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
 
     components.add(getNumberTypeLabel(context, row));
