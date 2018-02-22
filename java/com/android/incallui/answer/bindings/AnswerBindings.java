@@ -24,6 +24,7 @@ public class AnswerBindings {
 
   public static AnswerScreen createAnswerScreen(
       String callId,
+      boolean isRttCall,
       boolean isVideoCall,
       boolean isVideoUpgradeRequest,
       boolean isSelfManagedCamera,
@@ -31,6 +32,7 @@ public class AnswerBindings {
       boolean hasCallOnHold) {
     return AnswerFragment.newInstance(
         callId,
+        isRttCall,
         isVideoCall,
         isVideoUpgradeRequest,
         isSelfManagedCamera,

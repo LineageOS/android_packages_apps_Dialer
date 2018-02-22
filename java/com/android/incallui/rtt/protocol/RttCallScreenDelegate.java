@@ -14,33 +14,16 @@
  * limitations under the License
  */
 
-package com.android.dialer.main;
+package com.android.incallui.rtt.protocol;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.content.Context;
 
-/** Interface for peers of MainActivity. */
-public interface MainActivityPeer {
+/** Callbacks from the module out to the container. */
+public interface RttCallScreenDelegate {
 
-  void onActivityCreate(Bundle saveInstanceState);
+  void initRttCallScreenDelegate(Context context, RttCallScreen rttCallScreen);
 
-  void onActivityResume();
+  void onRttCallScreenUiReady();
 
-  void onActivityStop();
-
-  void onActivityDestroyed();
-
-  void onNewIntent(Intent intent);
-
-  void onActivityResult(int requestCode, int resultCode, Intent data);
-
-  void onSaveInstanceState(Bundle bundle);
-
-  boolean onBackPressed();
-
-  /** Supplies the MainActivityPeer */
-  interface PeerSupplier {
-
-    MainActivityPeer getPeer();
-  }
+  void onRttCallScreenUiUnready();
 }

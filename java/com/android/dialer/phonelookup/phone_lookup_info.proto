@@ -19,6 +19,7 @@ message PhoneLookupInfo {
   message Cp2Info {
     // Information about a single contact, which can be a local contact or a
     // remote one.
+    // Next ID: 8
     message Cp2ContactInfo {
       // For a local contact:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY
@@ -30,13 +31,19 @@ message PhoneLookupInfo {
       //   android.provider.ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI
       // For a remote contact:
       //   android.provider.ContactsContract.PhoneLookup.PHOTO_THUMBNAIL_URI
-      optional string photo_uri = 2;
+      optional string photo_thumbnail_uri = 2;
+
+      // For a local contact:
+      //   android.provider.ContactsContract.CommonDataKinds.Phone.PHOTO_URI
+      // For a remote contact:
+      //   android.provider.ContactsContract.PhoneLookup.PHOTO_URI
+      optional string photo_uri = 3;
 
       // For a local contact:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.PHOTO_ID
       // For a remote contact:
       //   android.provider.ContactsContract.PhoneLookup.PHOTO_ID
-      optional fixed64 photo_id = 3;
+      optional fixed64 photo_id = 4;
 
       // For a local contact:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.LABEL
@@ -44,13 +51,13 @@ message PhoneLookupInfo {
       //   android.provider.ContactsContract.PhoneLookup.LABEL
       //
       // The value can be "Home", "Mobile", ect.
-      optional string label = 4;
+      optional string label = 5;
 
       // For a local contact:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.CONTACT_ID
       // For a remote contact:
       //   android.provider.ContactsContract.PhoneLookup.CONTACT_ID
-      optional fixed64 contact_id = 5;
+      optional fixed64 contact_id = 6;
 
       // For a local contact:
       //   constructed based on
@@ -58,7 +65,7 @@ message PhoneLookupInfo {
       // For a remote contact:
       //   constructed based on
       //   android.provider.ContactsContract.PhoneLookup.LOOKUP_KEY
-      optional string lookup_uri = 6;
+      optional string lookup_uri = 7;
     }
     // Repeated because one phone number can be associated with multiple CP2
     // contacts.

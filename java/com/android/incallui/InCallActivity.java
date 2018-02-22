@@ -83,6 +83,10 @@ import com.android.incallui.incall.protocol.InCallScreen;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegateFactory;
 import com.android.incallui.incalluilock.InCallUiLock;
+import com.android.incallui.rtt.bindings.RttBindings;
+import com.android.incallui.rtt.protocol.RttCallScreen;
+import com.android.incallui.rtt.protocol.RttCallScreenDelegate;
+import com.android.incallui.rtt.protocol.RttCallScreenDelegateFactory;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.video.bindings.VideoBindings;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -100,6 +104,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         InCallScreenDelegateFactory,
         InCallButtonUiDelegateFactory,
         VideoCallScreenDelegateFactory,
+        RttCallScreenDelegateFactory,
         PseudoScreenState.StateChangedListener {
 
   @Retention(RetentionPolicy.SOURCE)
@@ -136,6 +141,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean didShowAnswerScreen;
   private boolean didShowInCallScreen;
   private boolean didShowVideoCallScreen;
+  private boolean didShowRttCallScreen;
   private boolean dismissKeyguard;
   private boolean isInShowMainInCallFragment;
   private boolean isRecreating; // whether the activity is going to be recreated
@@ -1220,37 +1226,47 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     isInShowMainInCallFragment = true;
     ShouldShowUiResult shouldShowAnswerUi = getShouldShowAnswerUi();
     ShouldShowUiResult shouldShowVideoUi = getShouldShowVideoUi();
+    ShouldShowUiResult shouldShowRttUi = getShouldShowRttUi();
     LogUtil.i(
         "InCallActivity.showMainInCallFragment",
-        "shouldShowAnswerUi: %b, shouldShowVideoUi: %b, "
-            + "didShowAnswerScreen: %b, didShowInCallScreen: %b, didShowVideoCallScreen: %b",
+        "shouldShowAnswerUi: %b, shouldShowRttUi: %b, shouldShowVideoUi: %b "
+            + "didShowAnswerScreen: %b, didShowInCallScreen: %b, didShowRttCallScreen: %b, "
+            + "didShowVideoCallScreen: %b",
         shouldShowAnswerUi.shouldShow,
+        shouldShowRttUi.shouldShow,
         shouldShowVideoUi.shouldShow,
         didShowAnswerScreen,
         didShowInCallScreen,
+        didShowRttCallScreen,
         didShowVideoCallScreen);
     // Only video call ui allows orientation change.
     setAllowOrientationChange(shouldShowVideoUi.shouldShow);
 
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    boolean didChangeInCall;
-    boolean didChangeVideo;
-    boolean didChangeAnswer;
+    boolean didChange;
     if (shouldShowAnswerUi.shouldShow) {
-      didChangeInCall = hideInCallScreenFragment(transaction);
-      didChangeVideo = hideVideoCallScreenFragment(transaction);
-      didChangeAnswer = showAnswerScreenFragment(transaction, shouldShowAnswerUi.call);
+      didChange = hideInCallScreenFragment(transaction);
+      didChange |= hideVideoCallScreenFragment(transaction);
+      didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= showAnswerScreenFragment(transaction, shouldShowAnswerUi.call);
     } else if (shouldShowVideoUi.shouldShow) {
-      didChangeInCall = hideInCallScreenFragment(transaction);
-      didChangeVideo = showVideoCallScreenFragment(transaction, shouldShowVideoUi.call);
-      didChangeAnswer = hideAnswerScreenFragment(transaction);
+      didChange = hideInCallScreenFragment(transaction);
+      didChange |= showVideoCallScreenFragment(transaction, shouldShowVideoUi.call);
+      didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= hideAnswerScreenFragment(transaction);
+    } else if (shouldShowRttUi.shouldShow) {
+      didChange = hideInCallScreenFragment(transaction);
+      didChange |= hideVideoCallScreenFragment(transaction);
+      didChange |= hideAnswerScreenFragment(transaction);
+      didChange |= showRttCallScreenFragment(transaction, shouldShowRttUi.call);
     } else {
-      didChangeInCall = showInCallScreenFragment(transaction);
-      didChangeVideo = hideVideoCallScreenFragment(transaction);
-      didChangeAnswer = hideAnswerScreenFragment(transaction);
+      didChange = showInCallScreenFragment(transaction);
+      didChange |= hideVideoCallScreenFragment(transaction);
+      didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= hideAnswerScreenFragment(transaction);
     }
 
-    if (didChangeInCall || didChangeVideo || didChangeAnswer) {
+    if (didChange) {
       Trace.beginSection("InCallActivity.commitTransaction");
       transaction.commitNow();
       Trace.endSection();
@@ -1308,6 +1324,26 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     return new ShouldShowUiResult(false, null);
   }
 
+  private static ShouldShowUiResult getShouldShowRttUi() {
+    DialerCall call = CallList.getInstance().getFirstCall();
+    if (call == null) {
+      LogUtil.i("InCallActivity.getShouldShowRttUi", "null call");
+      return new ShouldShowUiResult(false, null);
+    }
+
+    if (call.isRttCall()) {
+      LogUtil.i("InCallActivity.getShouldShowRttUi", "found rtt call");
+      return new ShouldShowUiResult(true, call);
+    }
+
+    if (call.hasSentRttUpgradeRequest()) {
+      LogUtil.i("InCallActivity.getShouldShowRttUi", "upgrading to rtt");
+      return new ShouldShowUiResult(true, call);
+    }
+
+    return new ShouldShowUiResult(false, null);
+  }
+
   private boolean showAnswerScreenFragment(FragmentTransaction transaction, DialerCall call) {
     // When rejecting a call the active call can become null in which case we should continue
     // showing the answer screen.
@@ -1347,6 +1383,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     AnswerScreen answerScreen =
         AnswerBindings.createAnswerScreen(
             call.getId(),
+            call.isRttCall(),
             call.isVideoCall(),
             isVideoUpgradeRequest,
             call.getVideoTech().isSelfManagedCamera(),
@@ -1418,6 +1455,33 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     return true;
   }
 
+  private boolean showRttCallScreenFragment(FragmentTransaction transaction, DialerCall call) {
+    if (didShowRttCallScreen) {
+      // This shouldn't happen since only one RTT call is allow at same time.
+      if (!getRttCallScreen().getCallId().equals(call.getId())) {
+        LogUtil.e("InCallActivity.showRttCallScreenFragment", "RTT call id doesn't match");
+      }
+      return false;
+    }
+    RttCallScreen rttCallScreen = RttBindings.createRttCallScreen(call.getId());
+    transaction.add(R.id.main, rttCallScreen.getRttCallScreenFragment(), Tags.RTT_CALL_SCREEN);
+    Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
+    didShowRttCallScreen = true;
+    return true;
+  }
+
+  private boolean hideRttCallScreenFragment(FragmentTransaction transaction) {
+    if (!didShowRttCallScreen) {
+      return false;
+    }
+    RttCallScreen rttCallScreen = getRttCallScreen();
+    if (rttCallScreen != null) {
+      transaction.remove(rttCallScreen.getRttCallScreenFragment());
+    }
+    didShowRttCallScreen = false;
+    return true;
+  }
+
   private boolean showVideoCallScreenFragment(FragmentTransaction transaction, DialerCall call) {
     if (didShowVideoCallScreen) {
       VideoCallScreen videoCallScreen = getVideoCallScreen();
@@ -1467,6 +1531,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     return (VideoCallScreen) getSupportFragmentManager().findFragmentByTag(Tags.VIDEO_CALL_SCREEN);
   }
 
+  private RttCallScreen getRttCallScreen() {
+    return (RttCallScreen) getSupportFragmentManager().findFragmentByTag(Tags.RTT_CALL_SCREEN);
+  }
+
   @Override
   public void onPseudoScreenStateChanged(boolean isOn) {
     LogUtil.i("InCallActivity.onPseudoScreenStateChanged", "isOn: " + isOn);
@@ -1497,6 +1565,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return true;
     }
     return super.dispatchTouchEvent(event);
+  }
+
+  @Override
+  public RttCallScreenDelegate newRttCallScreenDelegate(RttCallScreen videoCallScreen) {
+    return new RttCallPresenter();
   }
 
   private static class ShouldShowUiResult {
@@ -1536,6 +1609,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String INTERNATIONAL_CALL_ON_WIFI = "tag_international_call_on_wifi";
     static final String SELECT_ACCOUNT_FRAGMENT = "tag_select_account_fragment";
     static final String VIDEO_CALL_SCREEN = "tag_video_call_screen";
+    static final String RTT_CALL_SCREEN = "tag_rtt_call_screen";
     static final String POST_CHAR_DIALOG_FRAGMENT = "tag_post_char_dialog_fragment";
   }
 

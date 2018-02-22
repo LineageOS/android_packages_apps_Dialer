@@ -17,19 +17,15 @@
 package com.android.incallui.rtt.impl;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /** Adapter class for holding RTT chat data. */
 public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolder> {
@@ -42,13 +38,11 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   private final List<RttChatMessage> rttMessages = new ArrayList<>();
   private int lastIndexOfLocalMessage = -1;
   private int lastIndexOfRemoteMessage = -1;
-  private final TypeBot typeBot;
   private final MessageListener messageListener;
 
   RttChatAdapter(Context context, MessageListener listener) {
     this.context = context;
     this.messageListener = listener;
-    typeBot = new TypeBot(text -> ThreadUtil.postOnUiThread(() -> addRemoteMessage(text)));
   }
 
   @Override
@@ -133,7 +127,6 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     rttMessages.get(lastIndexOfLocalMessage).finish();
     notifyItemChanged(lastIndexOfLocalMessage);
     lastIndexOfLocalMessage = -1;
-    startChatBot();
   }
 
   void addRemoteMessage(String message) {
@@ -144,75 +137,6 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     updateCurrentRemoteMessage(message);
     if (messageListener != null) {
       messageListener.newMessageAdded();
-    }
-  }
-
-  private void startChatBot() {
-    typeBot.scheduleMessage();
-  }
-
-  // TODO(wangqi): Move this out of this class once a bug is fixed.
-  private static class TypeBot {
-    interface Callback {
-      void type(String text);
-    }
-
-    private static final String[] CANDIDATE_MESSAGES =
-        new String[] {
-          "To RTT or not to RTT, that is the question...",
-          "Making TTY great again!",
-          "I would be more comfortable with real \"Thyme\" chatting."
-              + " I don't know how to end this pun",
-          "お疲れ様でした",
-          "The FCC has mandated that I respond... I will do so begrudgingly",
-          "😂😂😂💯"
-        };
-    private final Random random = new Random();
-    private final Callback callback;
-    private final List<String> messageQueue = new ArrayList<>();
-    private int currentTypingPosition = -1;
-    private String currentTypingMessage = null;
-
-    TypeBot(Callback callback) {
-      this.callback = callback;
-    }
-
-    @MainThread
-    public void scheduleMessage() {
-      Assert.isMainThread();
-      if (random.nextDouble() < 0.5) {
-        return;
-      }
-
-      String text = CANDIDATE_MESSAGES[random.nextInt(CANDIDATE_MESSAGES.length)];
-      messageQueue.add(text);
-      typeMessage();
-    }
-
-    @MainThread
-    private void typeMessage() {
-      Assert.isMainThread();
-      if (currentTypingPosition < 0 || currentTypingMessage == null) {
-        if (messageQueue.size() <= 0) {
-          return;
-        }
-        currentTypingMessage = messageQueue.remove(0);
-        currentTypingPosition = 0;
-      }
-      if (currentTypingPosition < currentTypingMessage.length()) {
-        int size = random.nextInt(currentTypingMessage.length() - currentTypingPosition + 1);
-        callback.type(
-            currentTypingMessage.substring(currentTypingPosition, currentTypingPosition + size));
-        currentTypingPosition = currentTypingPosition + size;
-        // Wait up to 2s between typing.
-        ThreadUtil.postDelayedOnUiThread(this::typeMessage, 200 * random.nextInt(10));
-      } else {
-        callback.type(RttChatMessage.BUBBLE_BREAKER);
-        currentTypingPosition = -1;
-        currentTypingMessage = null;
-        // Wait 1-11s between two messages.
-        ThreadUtil.postDelayedOnUiThread(this::typeMessage, 1000 * (1 + random.nextInt(10)));
-      }
     }
   }
 }

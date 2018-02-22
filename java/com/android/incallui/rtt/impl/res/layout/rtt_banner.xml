@@ -17,79 +17,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:background="#FAFAFA"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#F305228F"
     android:elevation="3dp">
   <ImageButton
-      android:id="@+id/rtt_back"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:id="@+id/rtt_end_call_button"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
       android:layout_marginStart="16dp"
       android:layout_alignParentStart="true"
       android:layout_centerVertical="true"
       android:background="@android:color/transparent"
-      android:contentDescription="@string/content_description_rtt_back_button"
-      android:src="@drawable/quantum_ic_arrow_back_vd_theme_24"
-      android:tint="#DF000000"/>
+      android:contentDescription="@string/incall_content_description_end_call"
+      android:scaleType="fitXY"
+      android:src="@drawable/quantum_ic_call_end_vd_theme_24"
+      android:tint="#FFDF0000"/>
   <LinearLayout
-      android:layout_width="wrap_content"
+      android:layout_width="260dp"
       android:layout_height="match_parent"
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
       android:layout_marginStart="32dp"
-      android:layout_toEndOf="@id/rtt_back"
+      android:layout_toEndOf="@id/rtt_end_call_button"
       android:orientation="vertical">
     <TextView
         android:id="@+id/rtt_name_or_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:fontFamily="sans-serif-medium"
         android:includeFontPadding="false"
-        android:textColor="#DD000000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         tools:text="Bruce Graham"/>
     <Chronometer
         android:id="@+id/rtt_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:fontFamily="sans-serif-medium"
         android:includeFontPadding="false"
-        android:textColor="#DD000000"
+        android:textColor="#FFFFFF"
         android:textSize="14sp"
         tools:text="00:09"/>
   </LinearLayout>
   <ImageButton
-      android:id="@+id/rtt_hang_up_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
+      android:id="@+id/rtt_overflow_button"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_marginEnd="12dp"
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:background="@android:color/transparent"
-      android:contentDescription="@string/incall_content_description_end_call"
-      android:src="@drawable/quantum_ic_call_end_vd_theme_24"
-      android:tint="#FFDF0000"/>
-  <ImageButton
-      android:id="@+id/rtt_speaker_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="24dp"
-      android:layout_centerVertical="true"
-      android:layout_toStartOf="@id/rtt_hang_up_button"
-      android:background="@android:color/transparent"
-      android:contentDescription="@string/incall_content_description_speaker"
-      android:src="@drawable/quantum_ic_volume_up_vd_theme_24"
-      android:tint="#DD000000"/>
-  <ImageButton
-      android:id="@+id/rtt_mic_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="24dp"
-      android:layout_centerVertical="true"
-      android:layout_toStartOf="@id/rtt_speaker_button"
-      android:background="@android:color/transparent"
-      android:contentDescription="@string/incall_content_description_unmuted"
-      android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
-      android:tint="#DD000000"/>
+      android:contentDescription="@string/content_description_overflow"
+      android:scaleType="fitXY"
+      android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
+      android:tint="#FFFFFF"/>
 
 </RelativeLayout>

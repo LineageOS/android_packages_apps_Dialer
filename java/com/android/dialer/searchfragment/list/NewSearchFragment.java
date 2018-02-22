@@ -488,7 +488,9 @@ public final class NewSearchFragment extends Fragment
     if (event.getAction() == MotionEvent.ACTION_UP) {
       v.performClick();
     }
-    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onSearchListTouch();
+    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+      FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onSearchListTouch();
+    }
     return false;
   }
 

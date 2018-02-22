@@ -14,33 +14,23 @@
  * limitations under the License
  */
 
-package com.android.dialer.main;
+package com.android.dialer.metrics;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.content.Context;
+import javax.inject.Inject;
 
-/** Interface for peers of MainActivity. */
-public interface MainActivityPeer {
+/** Stub {@link Metrics}. */
+public final class StubMetrics implements Metrics {
 
-  void onActivityCreate(Bundle saveInstanceState);
+  @Inject
+  StubMetrics() {}
 
-  void onActivityResume();
+  @Override
+  public void startTimer(Context context, String timerEventName) {}
 
-  void onActivityStop();
+  @Override
+  public void stopTimer(String timerEventName) {}
 
-  void onActivityDestroyed();
-
-  void onNewIntent(Intent intent);
-
-  void onActivityResult(int requestCode, int resultCode, Intent data);
-
-  void onSaveInstanceState(Bundle bundle);
-
-  boolean onBackPressed();
-
-  /** Supplies the MainActivityPeer */
-  interface PeerSupplier {
-
-    MainActivityPeer getPeer();
-  }
+  @Override
+  public void recordMemory(String memoryEventName) {}
 }
