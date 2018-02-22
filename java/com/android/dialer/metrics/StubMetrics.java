@@ -16,7 +16,6 @@
 
 package com.android.dialer.metrics;
 
-import android.content.Context;
 import javax.inject.Inject;
 
 /** Stub {@link Metrics}. */
@@ -26,10 +25,16 @@ public final class StubMetrics implements Metrics {
   StubMetrics() {}
 
   @Override
-  public void startTimer(Context context, String timerEventName) {}
+  public void startTimer(String timerEventName) {}
 
   @Override
   public void stopTimer(String timerEventName) {}
+
+  @Override
+  public void startJankRecorder(String eventName) {}
+
+  @Override
+  public void stopJankRecorder(String eventName) {}
 
   @Override
   public void recordMemory(String memoryEventName) {}

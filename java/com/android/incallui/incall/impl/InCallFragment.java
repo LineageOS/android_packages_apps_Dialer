@@ -253,10 +253,10 @@ public class InCallFragment extends Fragment
   @Override
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("InCallFragment.setPrimary", primaryInfo.toString());
-    setAdapterMedia(primaryInfo.multimediaData, primaryInfo.showInCallButtonGrid);
+    setAdapterMedia(primaryInfo.multimediaData(), primaryInfo.showInCallButtonGrid());
     contactGridManager.setPrimary(primaryInfo);
 
-    if (primaryInfo.shouldShowLocation) {
+    if (primaryInfo.shouldShowLocation()) {
       // Hide the avatar to make room for location
       contactGridManager.setAvatarHidden(true);
 

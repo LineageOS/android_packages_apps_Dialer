@@ -16,13 +16,17 @@
 
 package com.android.dialer.main.impl.toolbar;
 
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import com.android.dialer.common.Assert;
 import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
@@ -74,22 +78,40 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
       return;
     }
     isSlideUp = true;
-    animate()
-        .translationY(-getHeight())
-        .setDuration(animate ? SLIDE_DURATION : 0)
-        .setInterpolator(SLIDE_INTERPOLATOR)
-        .start();
+    ValueAnimator animator = ValueAnimator.ofFloat(0, -getHeight());
+    animator.setDuration(animate ? SLIDE_DURATION : 0);
+    animator.setInterpolator(SLIDE_INTERPOLATOR);
+    animator.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animation) {
+            int val = ((Float) animation.getAnimatedValue()).intValue();
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
+            params.topMargin = val;
+            requestLayout();
+          }
+        });
+    animator.start();
   }
 
   /** Slides the toolbar down and back onto the screen. */
   public void slideDown(boolean animate) {
     Assert.checkArgument(isSlideUp);
     isSlideUp = false;
-    animate()
-        .translationY(0)
-        .setDuration(animate ? SLIDE_DURATION : 0)
-        .setInterpolator(SLIDE_INTERPOLATOR)
-        .start();
+    ValueAnimator animator = ValueAnimator.ofFloat(-getHeight(), 0);
+    animator.setDuration(animate ? SLIDE_DURATION : 0);
+    animator.setInterpolator(SLIDE_INTERPOLATOR);
+    animator.addUpdateListener(
+        new AnimatorUpdateListener() {
+          @Override
+          public void onAnimationUpdate(ValueAnimator animation) {
+            int val = ((Float) animation.getAnimatedValue()).intValue();
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
+            params.topMargin = val;
+            requestLayout();
+          }
+        });
+    animator.start();
   }
 
   /** @see SearchBarView#collapse(boolean) */
@@ -128,5 +150,9 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
 
   public MainToolbarMenu getOverflowMenu() {
     return overflowMenu;
+  }
+
+  public void setHint(@StringRes int hint) {
+    searchBar.setHint(hint);
   }
 }

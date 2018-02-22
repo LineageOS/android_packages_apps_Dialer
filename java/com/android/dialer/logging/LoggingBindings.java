@@ -20,15 +20,6 @@ import android.widget.QuickContactBadge;
 /** Allows the container application to gather analytics. */
 public interface LoggingBindings {
 
-  String ON_CREATE_PRIMES_EVENT_NAME = "Application.onCreate";
-  String ACTIVITY_ON_CREATE_PRIMES_EVENT_NAME = "GoogleDialtactsActivity.onCreate";
-  String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING =
-      "CallList.onCallAdded_To_InCallActivity.onCreate_Incoming";
-  String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING =
-      "CallList.onCallAdded_To_InCallActivity.onCreate_Outgoing";
-  String ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "GoogleDialtactsActivity.onResume";
-  String INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "IncallActivity.OnResume";
-  String INCALL_ACTIVITY_ON_STOP_MEMORY_EVENT_NAME = "IncallActivity.OnStop";
   /**
    * Logs an DialerImpression event that's not associated with a specific call.
    *
@@ -96,13 +87,4 @@ public interface LoggingBindings {
 
   /** Logs successful People Api lookup result */
   void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode);
-
-  /** Log start a latency timer */
-  void logStartLatencyTimer(String timerEventName);
-
-  /** Log end a latency timer */
-  void logStopLatencyTimer(String timerEventName);
-
-  /** Log get a memory snapshot */
-  void logRecordMemory(String memoryEventName);
 }

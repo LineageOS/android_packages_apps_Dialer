@@ -237,8 +237,7 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
   }
 
   @Override
-  public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  public void registerContentObservers(Context appContext) {
     // No content observer needed for remote contacts
   }
 }

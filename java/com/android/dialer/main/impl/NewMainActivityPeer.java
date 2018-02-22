@@ -57,6 +57,9 @@ public class NewMainActivityPeer implements MainActivityPeer {
   public void onActivityResume() {}
 
   @Override
+  public void onUserLeaveHint() {}
+
+  @Override
   public void onActivityStop() {}
 
   @Override

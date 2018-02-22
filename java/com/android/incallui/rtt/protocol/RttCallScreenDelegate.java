@@ -16,14 +16,14 @@
 
 package com.android.incallui.rtt.protocol;
 
-import android.content.Context;
-
 /** Callbacks from the module out to the container. */
 public interface RttCallScreenDelegate {
 
-  void initRttCallScreenDelegate(Context context, RttCallScreen rttCallScreen);
+  void initRttCallScreenDelegate(RttCallScreen rttCallScreen);
 
   void onRttCallScreenUiReady();
 
   void onRttCallScreenUiUnready();
+
+  void onLocalMessage(String message);
 }

@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.searchfragment.remote;
+package com.android.dialer.searchfragment.directories;
 
 import android.content.Context;
 import android.content.CursorLoader;
@@ -37,10 +37,10 @@ import java.util.List;
  * Cursor loader to load extended contacts on device.
  *
  * <p>This loader performs several database queries in serial and merges the resulting cursors
- * together into {@link RemoteContactsCursor}. If there are no results, the loader will return a
+ * together into {@link DirectoryContactsCursor}. If there are no results, the loader will return a
  * null cursor.
  */
-public final class RemoteContactsCursorLoader extends CursorLoader {
+public final class DirectoryContactsCursorLoader extends CursorLoader {
 
   private static final Uri ENTERPRISE_CONTENT_FILTER_URI =
       Uri.withAppendedPath(Phone.CONTENT_URI, "filter_enterprise");
@@ -53,7 +53,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
   private final List<Directory> directories;
   private final Cursor[] cursors;
 
-  public RemoteContactsCursorLoader(Context context, String query, List<Directory> directories) {
+  public DirectoryContactsCursorLoader(Context context, String query, List<Directory> directories) {
     super(
         context,
         null,
@@ -71,14 +71,14 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
     for (int i = 0; i < directories.size(); i++) {
       Directory directory = directories.get(i);
 
-      // Filter out local directories
+      // Only load contacts in the enterprise directory & remote directories.
       if (!DirectoryCompat.isRemoteDirectoryId(directory.getId())
           && !DirectoryCompat.isEnterpriseDirectoryId(directory.getId())) {
         cursors[i] = null;
         continue;
       }
 
-      // Filter out invisible directories
+      // Filter out invisible directories.
       if (DirectoryCompat.isInvisibleDirectory(directory.getId())) {
         cursors[i] = null;
         continue;
@@ -98,7 +98,7 @@ public final class RemoteContactsCursorLoader extends CursorLoader {
       // number. In this case just hide the row entirely. See a bug.
       cursors[i] = createMatrixCursorFilteringNullNumbers(cursor);
     }
-    return RemoteContactsCursor.newInstance(getContext(), cursors, directories);
+    return DirectoryContactsCursor.newInstance(getContext(), cursors, directories);
   }
 
   private MatrixCursor createMatrixCursorFilteringNullNumbers(Cursor cursor) {

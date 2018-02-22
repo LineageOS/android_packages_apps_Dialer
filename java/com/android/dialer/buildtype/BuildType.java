@@ -28,15 +28,19 @@ public class BuildType {
   /** The type of build. */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    BUGFOOD, FISHFOOD, DOGFOOD, RELEASE, TEST,
+    Type.BUGFOOD,
+    Type.FISHFOOD,
+    Type.DOGFOOD,
+    Type.RELEASE,
+    Type.TEST,
   })
-  public @interface Type {}
-
-  public static final int BUGFOOD = 1;
-  public static final int FISHFOOD = 2;
-  public static final int DOGFOOD = 3;
-  public static final int RELEASE = 4;
-  public static final int TEST = 5;
+  public @interface Type {
+    int BUGFOOD = 1;
+    int FISHFOOD = 2;
+    int DOGFOOD = 3;
+    int RELEASE = 4;
+    int TEST = 5;
+  }
 
   private static int cachedBuildType;
   private static boolean didInitializeBuildType;

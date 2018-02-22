@@ -68,8 +68,7 @@ import java.util.ArrayList;
 public class MainSearchController implements SearchBarListener {
 
   private static final String KEY_IS_FAB_HIDDEN = "is_fab_hidden";
-  private static final String KEY_CURRENT_TAB = "current_tab";
-  private static final String KEY_BOTTOM_NAV_VISIBILITY = "bottom_nav_visibility";
+  private static final String KEY_TOOLBAR_SHADOW_VISIBILITY = "toolbar_shadow_visibility";
   private static final String KEY_IS_TOOLBAR_EXPANDED = "is_toolbar_expanded";
   private static final String KEY_IS_TOOLBAR_SLIDE_UP = "is_toolbar_slide_up";
 
@@ -80,25 +79,30 @@ public class MainSearchController implements SearchBarListener {
   private final BottomNavBar bottomNav;
   private final FloatingActionButton fab;
   private final MainToolbar toolbar;
+  private final View toolbarShadow;
 
   public MainSearchController(
       MainActivity mainActivity,
       BottomNavBar bottomNav,
       FloatingActionButton fab,
-      MainToolbar toolbar) {
+      MainToolbar toolbar,
+      View toolbarShadow) {
     this.mainActivity = mainActivity;
     this.bottomNav = bottomNav;
     this.fab = fab;
     this.toolbar = toolbar;
+    this.toolbarShadow = toolbarShadow;
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
-  public void showDialpadFromNewIntent(boolean animate) {
-    showDialpad(animate, true);
+  public void showDialpadFromNewIntent() {
+    LogUtil.enterBlock("MainSearchController.showDialpadFromNewIntent");
+    showDialpad(/* animate=*/ false, /* fromNewIntent=*/ true);
   }
 
   /** Shows the dialpad, hides the FAB and slides the toolbar off screen. */
   public void showDialpad(boolean animate) {
+    LogUtil.enterBlock("MainSearchController.showDialpad");
     showDialpad(animate, false);
   }
 
@@ -108,17 +112,22 @@ public class MainSearchController implements SearchBarListener {
     fab.hide();
     toolbar.slideUp(animate);
     toolbar.expand(animate, Optional.absent());
+    toolbarShadow.setVisibility(View.VISIBLE);
     mainActivity.setTitle(R.string.dialpad_activity_title);
 
     FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
+    NewSearchFragment searchFragment = getSearchFragment();
 
     // Show Search
-    if (getSearchFragment() == null) {
-      NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
+    if (searchFragment == null) {
+      // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
+      // places promo to be shown.
+      searchFragment = NewSearchFragment.newInstance(/* showZeroSuggest=*/ true);
       transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
-      transaction.show(getSearchFragment());
+      transaction.show(searchFragment);
     }
+    searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
 
     // Show Dialpad
     if (getDialpadFragment() == null) {
@@ -143,6 +152,7 @@ public class MainSearchController implements SearchBarListener {
    * @see {@link #closeSearch(boolean)} to "remove" the dialpad.
    */
   private void hideDialpad(boolean animate, boolean bottomNavVisible) {
+    LogUtil.enterBlock("MainSearchController.hideDialpad");
     Assert.checkArgument(isDialpadVisible());
 
     fab.show();
@@ -188,6 +198,7 @@ public class MainSearchController implements SearchBarListener {
 
   /** Should be called when {@link DialpadListener#onDialpadShown()} is called. */
   public void onDialpadShown() {
+    LogUtil.enterBlock("MainSearchController.onDialpadShown");
     getDialpadFragment().slideUp(true);
     hideBottomNav();
   }
@@ -203,6 +214,7 @@ public class MainSearchController implements SearchBarListener {
    *     </ol>
    */
   public void onSearchListTouch() {
+    LogUtil.enterBlock("MainSearchController.onSearchListTouched");
     if (isDialpadVisible()) {
       if (TextUtils.isEmpty(getDialpadFragment().getQuery())) {
         Logger.get(mainActivity)
@@ -234,13 +246,13 @@ public class MainSearchController implements SearchBarListener {
    */
   public boolean onBackPressed() {
     if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
-      LogUtil.i("MainSearchController#onBackPressed", "Dialpad visible with query");
+      LogUtil.i("MainSearchController.onBackPressed", "Dialpad visible with query");
       Logger.get(mainActivity)
           .logImpression(DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
       hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       return true;
     } else if (isSearchVisible()) {
-      LogUtil.i("MainSearchController#onBackPressed", "Search is visible");
+      LogUtil.i("MainSearchController.onBackPressed", "Search is visible");
       Logger.get(mainActivity)
           .logImpression(
               isDialpadVisible()
@@ -258,6 +270,7 @@ public class MainSearchController implements SearchBarListener {
    * dialpad.
    */
   private void closeSearch(boolean animate) {
+    LogUtil.enterBlock("MainSearchController.closeSearch");
     Assert.checkArgument(isSearchVisible());
     if (isDialpadVisible()) {
       hideDialpad(animate, /* bottomNavVisible=*/ true);
@@ -266,6 +279,7 @@ public class MainSearchController implements SearchBarListener {
     }
     showBottomNav();
     toolbar.collapse(animate);
+    toolbarShadow.setVisibility(View.GONE);
     mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
@@ -311,31 +325,40 @@ public class MainSearchController implements SearchBarListener {
    */
   @Override
   public void onSearchBarClicked() {
+    LogUtil.enterBlock("MainSearchController.onSearchBarClicked");
     Logger.get(mainActivity).logImpression(DialerImpression.Type.NUI_CLICK_SEARCH_BAR);
     openSearch(Optional.absent());
   }
 
   private void openSearch(Optional<String> query) {
+    LogUtil.enterBlock("MainSearchController.openSearch");
     fab.hide();
     toolbar.expand(/* animate=*/ true, query);
     toolbar.showKeyboard();
+    toolbarShadow.setVisibility(View.VISIBLE);
     hideBottomNav();
 
     FragmentTransaction transaction = mainActivity.getFragmentManager().beginTransaction();
+    NewSearchFragment searchFragment = getSearchFragment();
 
     // Show Search
-    if (getSearchFragment() == null) {
-      NewSearchFragment searchFragment = NewSearchFragment.newInstance(false);
+    if (searchFragment == null) {
+      // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
+      // places promo to be shown.
+      searchFragment = NewSearchFragment.newInstance(true);
       transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
 
+    searchFragment.setQuery(
+        query.isPresent() ? query.get() : "", CallInitiationType.Type.REGULAR_SEARCH);
     transaction.commit();
   }
 
   @Override
   public void onSearchBackButtonClicked() {
+    LogUtil.enterBlock("MainSearchController.onSearchBackButtonClicked");
     closeSearch(true);
   }
 
@@ -380,6 +403,18 @@ public class MainSearchController implements SearchBarListener {
     return false;
   }
 
+  @Override
+  public void onUserLeaveHint() {
+    if (isInSearch()) {
+      closeSearch(false);
+    }
+  }
+
+  @Override
+  public void onCallPlacedFromSearch() {
+    closeSearch(false);
+  }
+
   public void onVoiceResults(int resultCode, Intent data) {
     if (resultCode == AppCompatActivity.RESULT_OK) {
       ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -396,15 +431,13 @@ public class MainSearchController implements SearchBarListener {
 
   public void onSaveInstanceState(Bundle bundle) {
     bundle.putBoolean(KEY_IS_FAB_HIDDEN, !fab.isShown());
-    bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
-    bundle.putInt(KEY_BOTTOM_NAV_VISIBILITY, bottomNav.getVisibility());
+    bundle.putInt(KEY_TOOLBAR_SHADOW_VISIBILITY, toolbarShadow.getVisibility());
     bundle.putBoolean(KEY_IS_TOOLBAR_EXPANDED, toolbar.isExpanded());
     bundle.putBoolean(KEY_IS_TOOLBAR_SLIDE_UP, toolbar.isSlideUp());
   }
 
   public void onRestoreInstanceState(Bundle savedInstanceState) {
-    bottomNav.selectTab(savedInstanceState.getInt(KEY_CURRENT_TAB));
-    bottomNav.setVisibility(savedInstanceState.getInt(KEY_BOTTOM_NAV_VISIBILITY));
+    toolbarShadow.setVisibility(savedInstanceState.getInt(KEY_TOOLBAR_SHADOW_VISIBILITY));
     if (savedInstanceState.getBoolean(KEY_IS_FAB_HIDDEN, false)) {
       fab.hide();
     }

@@ -43,4 +43,8 @@
     android:key="@string/voicemail_advanced_settings_key"
     android:title="@string/voicemail_advanced_settings_title">
     </PreferenceScreen>
+
+  <com.android.dialer.widget.TextViewPreference
+    android:key="@string/voicemail_transcription_text_key"/>
+
 </PreferenceScreen>

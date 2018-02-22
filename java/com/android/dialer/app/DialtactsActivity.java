@@ -116,9 +116,10 @@ import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCo
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.p13n.inference.P13nRanking;
 import com.android.dialer.p13n.inference.protocol.P13nRanker;
 import com.android.dialer.p13n.inference.protocol.P13nRanker.P13nRefreshCompleteListener;
@@ -612,8 +613,9 @@ public class DialtactsActivity extends TransactionSafeActivity
       // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
       ThreadUtil.postDelayedOnUiThread(
           () ->
-              Logger.get(this)
-                  .logRecordMemory(LoggingBindings.ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
+              MetricsComponent.get(this)
+                  .metrics()
+                  .recordMemory(Metrics.DIALTACTS_ON_RESUME_MEMORY_EVENT_NAME),
           1000);
     }
 

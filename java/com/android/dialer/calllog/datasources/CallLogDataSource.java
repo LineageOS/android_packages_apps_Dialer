@@ -104,14 +104,5 @@ public interface CallLogDataSource {
   ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc);
 
   @MainThread
-  void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks);
-
-  /**
-   * Methods which may optionally be called as a result of a data source's content observer firing.
-   */
-  interface ContentObserverCallbacks {
-    @MainThread
-    void markDirtyAndNotify(Context appContext);
-  }
+  void registerContentObservers(Context appContext);
 }

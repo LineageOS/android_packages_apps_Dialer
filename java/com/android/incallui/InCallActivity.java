@@ -61,8 +61,9 @@ import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.bindings.AnswerBindings;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -182,6 +183,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       didShowAnswerScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_ANSWER_SCREEN);
       didShowInCallScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_IN_CALL_SCREEN);
       didShowVideoCallScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_VIDEO_CALL_SCREEN);
+      didShowRttCallScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_RTT_CALL_SCREEN);
     }
 
     setWindowFlags();
@@ -248,10 +250,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
     sendBroadcast(CallPendingActivity.getFinishBroadcast());
     Trace.endSection();
-    Logger.get(this)
-        .logStopLatencyTimer(LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
-    Logger.get(this)
-        .logStopLatencyTimer(LoggingBindings.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
+    MetricsComponent.get(this)
+        .metrics()
+        .stopTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
+    MetricsComponent.get(this)
+        .metrics()
+        .stopTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
   }
 
   private void setWindowFlags() {
@@ -387,6 +391,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     out.putBoolean(KeysForSavedInstance.DID_SHOW_ANSWER_SCREEN, didShowAnswerScreen);
     out.putBoolean(KeysForSavedInstance.DID_SHOW_IN_CALL_SCREEN, didShowInCallScreen);
     out.putBoolean(KeysForSavedInstance.DID_SHOW_VIDEO_CALL_SCREEN, didShowVideoCallScreen);
+    out.putBoolean(KeysForSavedInstance.DID_SHOW_RTT_CALL_SCREEN, didShowRttCallScreen);
 
     super.onSaveInstanceState(out);
     isVisible = false;
@@ -468,8 +473,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
     ThreadUtil.postDelayedOnUiThread(
         () ->
-            Logger.get(this)
-                .logRecordMemory(LoggingBindings.INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
+            MetricsComponent.get(this)
+                .metrics()
+                .recordMemory(Metrics.INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
         1000);
   }
 
@@ -1593,6 +1599,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String DID_SHOW_ANSWER_SCREEN = "did_show_answer_screen";
     static final String DID_SHOW_IN_CALL_SCREEN = "did_show_in_call_screen";
     static final String DID_SHOW_VIDEO_CALL_SCREEN = "did_show_video_call_screen";
+    static final String DID_SHOW_RTT_CALL_SCREEN = "did_show_rtt_call_screen";
   }
 
   /** Request codes for pending intents. */

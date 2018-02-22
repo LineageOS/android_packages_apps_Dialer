@@ -341,11 +341,22 @@ public class SpecialCharSequenceMgr {
         for (int slot = 0; slot < telephonyManager.getPhoneCount(); slot++) {
           String deviceId = telephonyManager.getDeviceId(slot);
           if (!TextUtils.isEmpty(deviceId)) {
-            addDeviceIdRow(holder, deviceId, /* showBarcode */ false);
+            addDeviceIdRow(
+                holder,
+                deviceId,
+                /* showDecimal */
+                context.getResources().getBoolean(R.bool.show_device_id_in_hex_and_decimal),
+                /* showBarcode */ false);
           }
         }
       } else {
-        addDeviceIdRow(holder, telephonyManager.getDeviceId(), /* showBarcode */ true);
+        addDeviceIdRow(
+            holder,
+            telephonyManager.getDeviceId(),
+            /* showDecimal */
+            context.getResources().getBoolean(R.bool.show_device_id_in_hex_and_decimal),
+            /* showBarcode */
+            context.getResources().getBoolean(R.bool.show_device_id_as_barcode));
       }
 
       new AlertDialog.Builder(context)
@@ -361,7 +372,8 @@ public class SpecialCharSequenceMgr {
     return false;
   }
 
-  private static void addDeviceIdRow(ViewGroup holder, String deviceId, boolean showBarcode) {
+  private static void addDeviceIdRow(
+      ViewGroup holder, String deviceId, boolean showDecimal, boolean showBarcode) {
     if (TextUtils.isEmpty(deviceId)) {
       return;
     }
@@ -378,11 +390,12 @@ public class SpecialCharSequenceMgr {
 
     // If this is the valid length IMEI or MEID (14 digits), show it in all formats, otherwise fall
     // back to just showing the raw hex
-    if (hex.length() == 14) {
+    if (hex.length() == 14 && showDecimal) {
       ((TextView) row.findViewById(R.id.deviceid_hex)).setText(hex);
       ((TextView) row.findViewById(R.id.deviceid_dec)).setText(getDecimalFromHex(hex));
       row.findViewById(R.id.deviceid_dec_label).setVisibility(View.VISIBLE);
     } else {
+      row.findViewById(R.id.deviceid_hex_label).setVisibility(View.GONE);
       ((TextView) row.findViewById(R.id.deviceid_hex)).setText(deviceId);
     }
 

@@ -177,25 +177,25 @@ public class CallPendingActivity extends FragmentActivity
     String number = getNumber();
 
     // DialerCall with caller that is a work contact.
-    return new PrimaryInfo(
-        number,
-        name,
-        name != null && name.equals(number),
-        null /* location */,
-        getPhoneLabel(),
-        photo,
-        ContactPhotoType.CONTACT,
-        false /* isSipCall */,
-        true /* isContactPhotoShown */,
-        false /* isWorkCall */,
-        false /* isSpam */,
-        true /* isLocalContact */,
-        false /* answeringDisconnectsOngoingCall */,
-        false /* shouldShowLocation */,
-        getLookupKey(),
-        multimediaData,
-        false /*showInCallButtonGrid */,
-        TelecomManager.PRESENTATION_ALLOWED);
+    return PrimaryInfo.builder()
+        .setNumber(number)
+        .setName(name)
+        .setNameIsNumber(name != null && name.equals(number))
+        .setLabel(getPhoneLabel())
+        .setPhoto(photo)
+        .setPhotoType(ContactPhotoType.CONTACT)
+        .setIsSipCall(false)
+        .setIsContactPhotoShown(true)
+        .setIsWorkCall(false)
+        .setIsSpam(false)
+        .setIsLocalContact(true)
+        .setAnsweringDisconnectsOngoingCall(false)
+        .setShouldShowLocation(false)
+        .setContactInfoLookupKey(getLookupKey())
+        .setMultimediaData(multimediaData)
+        .setShowInCallButtonGrid(false)
+        .setNumberPresentation(TelecomManager.PRESENTATION_ALLOWED)
+        .build();
   }
 
   @Override
