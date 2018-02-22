@@ -61,13 +61,6 @@ public abstract class PhotoInfo {
    */
   public abstract boolean isVideo();
 
-  /**
-   * Should the result be circularized.
-   *
-   * <p>Defaults to true.
-   */
-  public abstract boolean isCircular();
-
   /** Builder for {@link PhotoInfo} */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -92,8 +85,6 @@ public abstract class PhotoInfo {
 
     public abstract Builder setIsVideo(boolean isVideo);
 
-    public abstract Builder setIsCircular(boolean isCircular);
-
     public abstract PhotoInfo build();
   }
 
@@ -104,7 +95,6 @@ public abstract class PhotoInfo {
         .setIsVoicemail(false)
         .setIsBlocked(false)
         .setIsSpam(false)
-        .setIsCircular(true)
         .setIsVideo(false);
   }
 }

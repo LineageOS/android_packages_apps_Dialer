@@ -16,6 +16,7 @@
 
 package com.android.dialer.simulator.impl;
 
+import android.annotation.TargetApi;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.Random;
 
 /** Chat bot to generate remote RTT chat messages. */
+@TargetApi(28)
 public class RttChatBot {
 
   interface Callback {
@@ -95,7 +97,6 @@ public class RttChatBot {
           break;
         case SEND_MESSAGE:
           String message = (String) msg.obj;
-          LogUtil.w("test", "type: %s, to stream: %s", message, rttTextStream);
           try {
             rttTextStream.write(message);
           } catch (IOException e) {

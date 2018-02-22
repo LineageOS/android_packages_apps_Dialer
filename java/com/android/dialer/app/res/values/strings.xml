@@ -686,8 +686,8 @@
   <!-- Content of voicemail donation promo dialog
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">
-    Let Google review your voicemail messages to improve transcription quality. Your
-    voicemail messages will not be tied to your Google Account.
+    Let Google review your voicemail messages to improve transcription quality.
+    For voicemail transcription analysis, your voicemail messages are stored anonymously.
   </string>
 
   <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->

@@ -20,59 +20,26 @@
   <bool name="motorola_sprint_hd_codec">false</bool>
 
   <!-- Hidden menu configuration for Motorola. -->
-  <!-- This defines the specific key seuquence that will be catched in the SpecialCharSequenceMgr
+  <!-- This defines the specific key sequence that will be caught in the SpecialCharSequenceMgr
        such as, ##OMADM# -->
   <string-array name="motorola_hidden_menu_key_sequence">
-    <item>##66236#</item>   <!--##OMADM#-->
-    <item>##2539#</item>    <!--##AKEY#-->
-    <item>##786#</item>     <!--##RTN#-->
-    <item>##72786#</item>   <!--##SCRTN#-->
-    <item>##3282#</item>    <!--##DATA#-->
-    <item>##33284#</item>   <!--##DEBUG#-->
-    <item>##3424#</item>    <!--##DIAG#-->
-    <item>##564#</item>     <!--##LOG#-->
-    <item>##4567257#</item> <!--##GLMSCLR#-->
-    <item>##873283#</item>  <!--##UPDATE#-->
-    <item>##6343#</item>    <!--##MEID#-->
-    <item>##27263#</item>   <!--##BRAND#-->
-    <item>##258#</item>     <!--##BLV#-->
-    <item>##8422#</item>    <!--##UICC#-->
-    <item>##4382#</item>    <!--CMAS/WEA-->
   </string-array>
 
-  <string name="motorola_hidden_menu_intent">com.motorola.intent.action.LAUNCH_HIDDEN_MENU</string>
+  <string name="motorola_hidden_menu_intent"></string>
 
-  <!-- This defines the intents that will be send out when the key quence is matched, this must be
+  <!-- This defines the intents that will be send out when the key sequence is matched, this must be
        in the same order with he KeySequence array. -->
   <string-array name="motorola_hidden_menu_key_sequence_intents">
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>com.motorola.android.intent.action.omadm.sprint.hfa</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
-    <item>@string/motorola_hidden_menu_intent</item>
   </string-array>
 
-  <!-- This defines the specific key patterns that will be catched in the SpecialCharSequenceMgr
+  <!-- This defines the specific key patterns that will be caught in the SpecialCharSequenceMgr
        such as, ##[0-9]{3,7}# -->
   <string-array name="motorola_hidden_menu_key_pattern">
-    <!--##MSL#, here MSL is 6 digits SPC code, ##OTKSL#, OTKSL is also digits code -->
-    <item>##[0-9]{6}#</item>
   </string-array>
 
-  <!-- This defines the intents that will be send out when the key quence is matched, this must be
+  <!-- This defines the intents that will be send out when the key sequence is matched, this must be
        in the same order with he KeyPattern array. -->
   <string-array name="motorola_hidden_menu_key_pattern_intents">
-    <item>@string/motorola_hidden_menu_intent</item>
   </string-array>
 
   <!-- This defines the provider names for cequint callerid applications

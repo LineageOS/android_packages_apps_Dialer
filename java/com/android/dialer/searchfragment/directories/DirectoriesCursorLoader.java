@@ -31,7 +31,12 @@ import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.List;
 
-/** {@link CursorLoader} to load the list of all directories (local and remote). */
+/**
+ * {@link CursorLoader} to load information about all directories (local and remote).
+ *
+ * <p>Information about a directory includes its ID, display name, etc, but doesn't include the
+ * contacts in it.
+ */
 public final class DirectoriesCursorLoader extends CursorLoader {
 
   public static final String[] PROJECTION = {

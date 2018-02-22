@@ -27,6 +27,7 @@ import android.support.annotation.WorkerThread;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.blocking.FilteredNumberCompat;
+import com.android.dialer.calllog.observer.MarkDirtyObserver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -54,13 +55,16 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
 
   private final Context appContext;
   private final ListeningExecutorService executorService;
+  private final MarkDirtyObserver markDirtyObserver;
 
   @Inject
   SystemBlockedNumberPhoneLookup(
       @ApplicationContext Context appContext,
-      @BackgroundExecutor ListeningExecutorService executorService) {
+      @BackgroundExecutor ListeningExecutorService executorService,
+      MarkDirtyObserver markDirtyObserver) {
     this.appContext = appContext;
     this.executorService = executorService;
+    this.markDirtyObserver = markDirtyObserver;
   }
 
   @Override
@@ -166,8 +170,7 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
   }
 
   @Override
-  public void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  public void registerContentObservers(Context appContext) {
     if (VERSION.SDK_INT < VERSION_CODES.N) {
       return;
     }
@@ -176,6 +179,6 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
         .registerContentObserver(
             BlockedNumbers.CONTENT_URI,
             true, // BlockedNumbers notifies on the item
-            new MarkDirtyObserver(appContext, contentObserverCallbacks));
+            markDirtyObserver);
   }
 }

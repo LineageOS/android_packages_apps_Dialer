@@ -123,6 +123,10 @@ public final class BottomNavBar extends LinearLayout {
     }
   }
 
+  public void showVoicemail(boolean showTab) {
+    voicemail.setVisibility(showTab ? View.VISIBLE : View.GONE);
+  }
+
   public void setNotificationCount(@TabIndex int tab, int count) {
     if (tab == TabIndex.SPEED_DIAL) {
       speedDial.setNotificationCount(count);

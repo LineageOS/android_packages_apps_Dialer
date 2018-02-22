@@ -82,6 +82,7 @@ public class MainActivity extends TransactionSafeActivity
   @Override
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
+    setIntent(intent);
     activePeer.onNewIntent(intent);
   }
 
@@ -89,6 +90,12 @@ public class MainActivity extends TransactionSafeActivity
   protected void onResume() {
     super.onResume();
     activePeer.onActivityResume();
+  }
+
+  @Override
+  protected void onUserLeaveHint() {
+    super.onUserLeaveHint();
+    activePeer.onUserLeaveHint();
   }
 
   @Override

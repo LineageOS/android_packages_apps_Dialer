@@ -123,6 +123,21 @@
   </pbundle_as_map>
 
   <pbundle_as_map>
+    <!-- tracfone USA-->
+    <string name="feature_flag_name">vvm_carrier_flag_tracfone_usa</string>
+
+    <string-array name="mccmnc">
+      <item value="310260?gid1=4d4b"/>
+      <item value="310260?gid1=534d"/>
+      <item value="310260?gid1=6134"/>
+      <item value="310260?gid1=ddff"/>
+      <item value="310260?gid1=deff"/>
+    </string-array>
+
+    <string name="vvm_type_string">vvm_type_disable</string>>
+  </pbundle_as_map>
+
+  <pbundle_as_map>
     <!-- Telus Canada -->
     <string name="feature_flag_name">vvm_carrier_flag_302220</string>
     <string-array name="mccmnc">

@@ -16,6 +16,7 @@
 
 package com.android.dialer.buildtype;
 
+import com.android.dialer.buildtype.BuildType.Type;
 import com.android.dialer.proguard.UsedByReflection;
 
 /** Gets the build type. */
@@ -25,6 +26,6 @@ public class BuildTypeAccessorImpl implements BuildTypeAccessor {
   @Override
   @BuildType.Type
   public int getBuildType() {
-    return BuildType.RELEASE;
+    return Type.RELEASE;
   }
 }

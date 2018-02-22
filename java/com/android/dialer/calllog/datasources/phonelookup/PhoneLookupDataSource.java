@@ -61,8 +61,7 @@ import javax.inject.Inject;
  * Responsible for maintaining the columns in the annotated call log which are derived from phone
  * numbers.
  */
-public final class PhoneLookupDataSource
-    implements CallLogDataSource, PhoneLookup.ContentObserverCallbacks {
+public final class PhoneLookupDataSource implements CallLogDataSource {
 
   private final PhoneLookup<PhoneLookupInfo> phoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
@@ -84,8 +83,6 @@ public final class PhoneLookupDataSource
    * #onSuccessfulFill(Context)} operations.
    */
   private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
-
-  private CallLogDataSource.ContentObserverCallbacks dataSourceContentObserverCallbacks;
 
   @Inject
   PhoneLookupDataSource(
@@ -288,17 +285,8 @@ public final class PhoneLookupDataSource
 
   @MainThread
   @Override
-  public void registerContentObservers(
-      Context appContext, CallLogDataSource.ContentObserverCallbacks contentObserverCallbacks) {
-    dataSourceContentObserverCallbacks = contentObserverCallbacks;
-    phoneLookup.registerContentObservers(appContext, this);
-  }
-
-  @MainThread
-  @Override
-  public void markDirtyAndNotify(Context appContext) {
-    Assert.isMainThread();
-    dataSourceContentObserverCallbacks.markDirtyAndNotify(appContext);
+  public void registerContentObservers(Context appContext) {
+    phoneLookup.registerContentObservers(appContext);
   }
 
   private static ImmutableSet<DialerPhoneNumber>

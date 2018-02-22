@@ -51,7 +51,7 @@ final class Modules {
         PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation());
 
     if (canPlaceCalls) {
-      addModuleForVideoOrAudioCall(context, modules, row, normalizedNumber);
+      addModuleForCalls(context, modules, row, normalizedNumber);
       SharedModules.maybeAddModuleForSendingTextMessage(
           context, modules, normalizedNumber, row.numberAttributes().getIsBlocked());
     }
@@ -90,12 +90,12 @@ final class Modules {
     return modules;
   }
 
-  private static void addModuleForVideoOrAudioCall(
+  private static void addModuleForCalls(
       Context context,
       List<ContactActionModule> modules,
       CoalescedRow row,
       String normalizedNumber) {
-    // If a number is blocked, skip this menu item.
+    // Don't add call options if a number is blocked.
     if (row.numberAttributes().getIsBlocked()) {
       return;
     }
@@ -104,28 +104,21 @@ final class Modules {
         TelecomUtil.composePhoneAccountHandle(
             row.phoneAccountComponentName(), row.phoneAccountId());
 
-    // For a spam number, only audio calls are allowed.
-    if (row.numberAttributes().getIsSpam()) {
-      modules.add(
-          IntentModule.newCallModule(
-              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
-      return;
-    }
+    // Add an audio call item
+    modules.add(
+        IntentModule.newCallModule(
+            context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
 
-    if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      // Add an audio call item for video calls. Clicking the top entry on the bottom sheet will
-      // trigger a video call.
-      modules.add(
-          IntentModule.newCallModule(
-              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
-    } else {
-      // Add a video call item for audio calls. Click the top entry on the bottom sheet will
-      // trigger an audio call.
-      // TODO(zachh): Only show video option if video capabilities present?
+    // Add a video item if (1) the call log entry is for a video call, and (2) the call is not spam.
+    if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
+        && !row.numberAttributes().getIsSpam()) {
       modules.add(
           IntentModule.newVideoCallModule(
               context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
     }
+
+    // TODO(zachh): Also show video option if the call log entry is for an audio call but video
+    // capabilities are present?
   }
 
   private static void addModuleForAccessingCallDetails(

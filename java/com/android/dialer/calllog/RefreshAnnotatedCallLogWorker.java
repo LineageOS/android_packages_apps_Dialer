@@ -18,6 +18,7 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.android.dialer.calllog.constants.SharedPrefKeys;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
@@ -95,7 +96,7 @@ public class RefreshAnnotatedCallLogWorker {
               // Default to true. If the pref doesn't exist, the annotated call log hasn't been
               // created and we just skip isDirty checks and force a rebuild.
               boolean forceRebuildPrefValue =
-                  sharedPreferences.getBoolean(CallLogFramework.PREF_FORCE_REBUILD, true);
+                  sharedPreferences.getBoolean(SharedPrefKeys.FORCE_REBUILD, true);
               if (forceRebuildPrefValue) {
                 LogUtil.i(
                     "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
@@ -183,7 +184,7 @@ public class RefreshAnnotatedCallLogWorker {
     return Futures.transform(
         onSuccessfulFillFuture,
         unused -> {
-          sharedPreferences.edit().putBoolean(CallLogFramework.PREF_FORCE_REBUILD, false).apply();
+          sharedPreferences.edit().putBoolean(SharedPrefKeys.FORCE_REBUILD, false).apply();
           return null;
         },
         backgroundExecutorService);

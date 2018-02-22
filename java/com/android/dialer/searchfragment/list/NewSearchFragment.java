@@ -65,9 +65,9 @@ import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.searchfragment.cp2.SearchContactsCursorLoader;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
+import com.android.dialer.searchfragment.directories.DirectoryContactsCursorLoader;
 import com.android.dialer.searchfragment.list.SearchActionViewHolder.Action;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
-import com.android.dialer.searchfragment.remote.RemoteContactsCursorLoader;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
@@ -103,8 +103,11 @@ public final class NewSearchFragment extends Fragment
 
   private static final int CONTACTS_LOADER_ID = 0;
   private static final int NEARBY_PLACES_LOADER_ID = 1;
-  private static final int REMOTE_DIRECTORIES_LOADER_ID = 2;
-  private static final int REMOTE_CONTACTS_LOADER_ID = 3;
+
+  // ID for the loader that loads info about all directories (local & remote).
+  private static final int DIRECTORIES_LOADER_ID = 2;
+
+  private static final int DIRECTORY_CONTACTS_LOADER_ID = 3;
 
   private static final String KEY_QUERY = "key_query";
   private static final String KEY_CALL_INITIATION_TYPE = "key_call_initiation_type";
@@ -117,15 +120,17 @@ public final class NewSearchFragment extends Fragment
   // for actions to add contact or send sms.
   private String rawNumber;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
-  private boolean remoteDirectoriesDisabledForTesting;
+  private boolean directoriesDisabledForTesting;
 
+  // Information about all local & remote directories (including ID, display name, etc, but not
+  // the contacts in them).
   private final List<Directory> directories = new ArrayList<>();
   private final Runnable loaderCp2ContactsRunnable =
       () -> getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
   private final Runnable loadNearbyPlacesRunnable =
       () -> getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
-  private final Runnable loadRemoteContactsRunnable =
-      () -> getLoaderManager().restartLoader(REMOTE_CONTACTS_LOADER_ID, null, this);
+  private final Runnable loadDirectoryContactsRunnable =
+      () -> getLoaderManager().restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
   private final Runnable capabilitiesUpdatedRunnable = () -> adapter.notifyDataSetChanged();
 
   private Runnable updatePositionRunnable;
@@ -184,7 +189,7 @@ public final class NewSearchFragment extends Fragment
 
   private void initLoaders() {
     getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
-    loadRemoteDirectoriesCursor();
+    loadDirectoriesCursor();
   }
 
   @Override
@@ -201,10 +206,10 @@ public final class NewSearchFragment extends Fragment
         directoryIds.add(directory.getId());
       }
       return new NearbyPlacesCursorLoader(getContext(), query, directoryIds);
-    } else if (id == REMOTE_DIRECTORIES_LOADER_ID) {
+    } else if (id == DIRECTORIES_LOADER_ID) {
       return new DirectoriesCursorLoader(getContext());
-    } else if (id == REMOTE_CONTACTS_LOADER_ID) {
-      return new RemoteContactsCursorLoader(getContext(), query, directories);
+    } else if (id == DIRECTORY_CONTACTS_LOADER_ID) {
+      return new DirectoryContactsCursorLoader(getContext(), query, directories);
     } else {
       throw new IllegalStateException("Invalid loader id: " + id);
     }
@@ -225,14 +230,14 @@ public final class NewSearchFragment extends Fragment
     } else if (loader instanceof NearbyPlacesCursorLoader) {
       adapter.setNearbyPlacesCursor((SearchCursor) cursor);
 
-    } else if (loader instanceof RemoteContactsCursorLoader) {
-      adapter.setRemoteContactsCursor((SearchCursor) cursor);
+    } else if (loader instanceof DirectoryContactsCursorLoader) {
+      adapter.setDirectoryContactsCursor((SearchCursor) cursor);
 
     } else if (loader instanceof DirectoriesCursorLoader) {
       directories.clear();
       directories.addAll(DirectoriesCursorLoader.toDirectories(cursor));
       loadNearbyPlacesCursor();
-      loadRemoteContactsCursors();
+      loadDirectoryContactsCursors();
 
     } else {
       throw new IllegalStateException("Invalid loader: " + loader);
@@ -246,8 +251,8 @@ public final class NewSearchFragment extends Fragment
       adapter.setContactsCursor(null);
     } else if (loader instanceof NearbyPlacesCursorLoader) {
       adapter.setNearbyPlacesCursor(null);
-    } else if (loader instanceof RemoteContactsCursorLoader) {
-      adapter.setRemoteContactsCursor(null);
+    } else if (loader instanceof DirectoryContactsCursorLoader) {
+      adapter.setDirectoryContactsCursor(null);
     }
   }
 
@@ -264,7 +269,7 @@ public final class NewSearchFragment extends Fragment
       adapter.setZeroSuggestVisible(isRegularSearch());
       loadCp2ContactsCursor();
       loadNearbyPlacesCursor();
-      loadRemoteContactsCursors();
+      loadDirectoryContactsCursors();
     }
   }
 
@@ -306,7 +311,7 @@ public final class NewSearchFragment extends Fragment
     super.onDestroy();
     ThreadUtil.getUiThreadHandler().removeCallbacks(loaderCp2ContactsRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
-    ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loadDirectoryContactsRunnable);
     ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
   }
 
@@ -342,23 +347,27 @@ public final class NewSearchFragment extends Fragment
     }
   }
 
-  // Loads remote directories.
-  private void loadRemoteDirectoriesCursor() {
-    if (!remoteDirectoriesDisabledForTesting) {
-      getLoaderManager().initLoader(REMOTE_DIRECTORIES_LOADER_ID, null, this);
+  /** Loads info about all directories (local & remote). */
+  private void loadDirectoriesCursor() {
+    if (!directoriesDisabledForTesting) {
+      getLoaderManager().initLoader(DIRECTORIES_LOADER_ID, null, this);
     }
   }
 
-  // Should not be called before remote directories have finished loading.
-  private void loadRemoteContactsCursors() {
-    if (remoteDirectoriesDisabledForTesting) {
+  /**
+   * Loads contacts stored in directories.
+   *
+   * <p>Should not be called before finishing loading info about all directories (local & remote).
+   */
+  private void loadDirectoryContactsCursors() {
+    if (directoriesDisabledForTesting) {
       return;
     }
 
     // Cancel existing load if one exists.
-    ThreadUtil.getUiThreadHandler().removeCallbacks(loadRemoteContactsRunnable);
+    ThreadUtil.getUiThreadHandler().removeCallbacks(loadDirectoryContactsRunnable);
     ThreadUtil.getUiThreadHandler()
-        .postDelayed(loadRemoteContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
+        .postDelayed(loadDirectoryContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
   }
 
   private void loadCp2ContactsCursor() {
@@ -368,7 +377,11 @@ public final class NewSearchFragment extends Fragment
         .postDelayed(loaderCp2ContactsRunnable, NETWORK_SEARCH_DELAY_MILLIS);
   }
 
-  // Should not be called before remote directories (not contacts) have finished loading.
+  /**
+   * Loads nearby places.
+   *
+   * <p>Should not be called before finishing loading info about all directories (local and remote).
+   */
   private void loadNearbyPlacesCursor() {
     if (!PermissionsUtil.hasLocationPermissions(getContext())
         && !StorageComponent.get(getContext())
@@ -443,8 +456,8 @@ public final class NewSearchFragment extends Fragment
   // being untestable while it can query multiple datasources. This is a temporary fix.
   // TODO(a bug): Remove this method and test this fragment with multiple data sources
   @VisibleForTesting
-  public void setRemoteDirectoriesDisabled(boolean disabled) {
-    remoteDirectoriesDisabledForTesting = disabled;
+  public void setDirectoriesDisabled(boolean disabled) {
+    directoriesDisabledForTesting = disabled;
   }
 
   /**

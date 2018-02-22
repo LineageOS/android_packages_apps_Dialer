@@ -16,6 +16,7 @@
 
 package com.android.dialer.main.impl.toolbar;
 
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 /** Useful callback for {@link SearchBarView} listeners. */
@@ -35,6 +36,12 @@ public interface SearchBarListener {
 
   /** Called when a toolbar menu item is clicked. */
   boolean onMenuItemClicked(MenuItem menuItem);
+
+  /** Called when {@link AppCompatActivity#onUserLeaveHint()} is called. */
+  void onUserLeaveHint();
+
+  /** Called when the user places a call from search (regular or dialpad). */
+  void onCallPlacedFromSearch();
 
   /** Interface for returning voice results to the search bar. */
   interface VoiceSearchResultCallback {
