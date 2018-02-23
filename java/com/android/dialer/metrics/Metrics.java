@@ -33,6 +33,20 @@ public interface Metrics {
   String OLD_CALL_LOG_JANK_EVENT_NAME = "OldCallLog.Jank";
   String NEW_CALL_LOG_JANK_EVENT_NAME = "NewCallLog.Jank";
 
+  // Events related to refreshing the annotated call log.
+  String IS_DIRTY_EVENT_NAME = "RefreshAnnotatedCallLog.IsDirty";
+  String FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Fill";
+  String ON_SUCCESSFUL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.OnSuccessfulFill";
+  String APPLY_MUTATIONS_EVENT_NAME = "RefreshAnnotatedCallLog.ApplyMutations";
+
+  // These templates are prefixed with a CallLogDataSource or PhoneLookup simple class name.
+  String IS_DIRTY_TEMPLATE = "%s.IsDirty";
+  String FILL_TEMPLATE = "%s.Fill";
+  String GET_MOST_RECENT_INFO_TEMPLATE = "%s.GetMostRecentInfo";
+  String ON_SUCCESSFUL_FILL_TEMPLATE = "%s.OnSuccessfulFill";
+  String ON_SUCCESSFUL_BULK_UPDATE_TEMPLATE = "%s.OnSuccessfulBulkUpdate";
+  String LOOKUP_TEMPLATE = "%s.Lookup";
+
   /** Start a timer. */
   void startTimer(String timerEventName);
 
