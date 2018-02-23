@@ -57,7 +57,8 @@ public abstract class VisualVoicemailProtocol {
       OmtpVvmCarrierConfigHelper config,
       VoicemailStatus.Editor editor,
       StatusMessage message,
-      Bundle data) {
+      Bundle data,
+      boolean isCarrierInitiated) {
     // Do nothing
   }
 
@@ -78,8 +79,8 @@ public abstract class VisualVoicemailProtocol {
    * Translate an OMTP IMAP command to the protocol specific one. For example, changing the TUI
    * password on OMTP is XCHANGE_TUI_PWD, but on CVVM and VVM3 it is CHANGE_TUI_PWD.
    *
-   * @param command A String command in {@link OmtpConstants}, the exact
-   *     instance should be used instead of its' value.
+   * @param command A String command in {@link OmtpConstants}, the exact instance should be used
+   *     instead of its' value.
    * @returns Translated command, or {@code null} if not available in this protocol
    */
   public String getCommand(String command) {
