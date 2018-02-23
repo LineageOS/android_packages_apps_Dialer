@@ -115,8 +115,17 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
       OmtpVvmCarrierConfigHelper config,
       VoicemailStatus.Editor status,
       StatusMessage message,
-      Bundle data) {
+      Bundle data,
+      boolean isCarrierInitiated) {
     VvmLog.i(TAG, "start vvm3 provisioning");
+
+    if (isCarrierInitiated) {
+      // Carrier can send the "Status UNKNOWN, Can subscribe" status when upgrading to premium VVM.
+      // Ignore so we won't downgrade it back to basic.
+      VvmLog.w(TAG, "carrier initiated, ignoring");
+      return;
+    }
+
     LoggerUtils.logImpressionOnMainThread(
         config.getContext(), DialerImpression.Type.VVM_PROVISIONING_STARTED);
     if (OmtpConstants.SUBSCRIBER_UNKNOWN.equals(message.getProvisioningStatus())) {
