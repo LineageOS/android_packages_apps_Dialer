@@ -501,10 +501,12 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private void updateIsVoiceMailNumber() {
     if (getHandle() != null && PhoneAccount.SCHEME_VOICEMAIL.equals(getHandle().getScheme())) {
       isVoicemailNumber = true;
+      return;
     }
 
     if (!PermissionsUtil.hasPermission(context, permission.READ_PHONE_STATE)) {
       isVoicemailNumber = false;
+      return;
     }
 
     isVoicemailNumber = TelecomUtil.isVoicemailNumber(context, getAccountHandle(), getNumber());
