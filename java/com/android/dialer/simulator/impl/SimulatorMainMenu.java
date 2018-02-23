@@ -65,16 +65,20 @@ final class SimulatorMainMenu {
                     EnrichedCallSimulatorActivity.newIntent(activity.getApplicationContext())))
         .addItem(
             "Enable simulator mode",
-            () ->
-                SimulatorComponent.get(activity.getApplicationContext())
-                    .getSimulator()
-                    .enableSimulatorMode())
+            () -> {
+              SimulatorComponent.get(activity.getApplicationContext())
+                  .getSimulator()
+                  .enableSimulatorMode();
+              SimulatorSimCallManager.register(activity.getApplicationContext());
+            })
         .addItem(
             "Disable simulator mode",
-            () ->
-                SimulatorComponent.get(activity.getApplicationContext())
-                    .getSimulator()
-                    .disableSimulatorMode());
+            () -> {
+              SimulatorComponent.get(activity.getApplicationContext())
+                  .getSimulator()
+                  .disableSimulatorMode();
+              SimulatorSimCallManager.unregister(activity.getApplicationContext());
+            });
     return simulatorSubMenu;
   }
 
