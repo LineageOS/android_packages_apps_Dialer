@@ -36,6 +36,8 @@ final class CequintPackageUtils {
   private static final int SIGNED_2048 = 1;
   private static final int SIGNED_VZW = 2;
   private static final int SIGNED_SPRINT = 3;
+  // TODO(a bug): Add test for this signature.
+  private static final int SIGNED_SPRINT_NEW = 4;
 
   // Known Caller Name ID fingerprints
   private static final List<byte[]> callerIdFingerprints = new ArrayList<>();
@@ -189,6 +191,42 @@ final class CequintPackageUtils {
           (byte) 0xE5,
           (byte) 0x8E,
           (byte) 0x9D
+        });
+    callerIdFingerprints.add(
+        SIGNED_SPRINT_NEW,
+        new byte[] {
+          0x27,
+          (byte) 0xF9,
+          0x6D,
+          (byte) 0xBA,
+          (byte) 0xB7,
+          0x7B,
+          0x31,
+          (byte) 0xF6,
+          (byte) 0x95,
+          0x3E,
+          0x4C,
+          (byte) 0xD2,
+          (byte) 0xC2,
+          (byte) 0xDE,
+          (byte) 0xFE,
+          0x15,
+          (byte) 0xF5,
+          (byte) 0xD7,
+          (byte) 0xC7,
+          (byte) 0x8F,
+          0x07,
+          0x3D,
+          (byte) 0xD7,
+          0x16,
+          0x20,
+          0x18,
+          (byte) 0xEF,
+          0x47,
+          0x6B,
+          0x09,
+          0x7C,
+          0x34
         });
   }
 
