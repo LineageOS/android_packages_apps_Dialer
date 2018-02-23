@@ -693,8 +693,7 @@
   <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
   <string name="voicemail_donation_promo_learn_more">Learn&#160;more</string>
 
-  <!-- TODO(mdooley): get real url -->
-  <string translatable="false" name="voicemail_donation_promo_learn_more_url">https:www.google.com</string>
+  <string translatable="false" name="voicemail_donation_promo_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
 
   <!-- Label for the voicemail donation promo dialog opt-in button
        [CHAR LIMIT=20] -->
