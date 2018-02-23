@@ -399,9 +399,10 @@ public class OmtpVvmCarrierConfigHelper {
       PhoneAccountHandle phone,
       VoicemailStatus.Editor status,
       StatusMessage message,
-      Bundle data) {
+      Bundle data,
+      boolean isCarrierInitiated) {
     Assert.checkArgument(isValid());
-    protocol.startProvisioning(task, phone, this, status, message, data);
+    protocol.startProvisioning(task, phone, this, status, message, data, isCarrierInitiated);
   }
 
   public void requestStatus(@Nullable PendingIntent sentIntent) {
