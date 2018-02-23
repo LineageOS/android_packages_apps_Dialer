@@ -45,7 +45,7 @@ public class MutationApplier {
   private final ListeningExecutorService backgroundExecutorService;
 
   @Inject
-  MutationApplier(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
+  public MutationApplier(@BackgroundExecutor ListeningExecutorService backgroundExecutorService) {
     this.backgroundExecutorService = backgroundExecutorService;
   }
 
