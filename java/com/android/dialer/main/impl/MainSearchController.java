@@ -48,6 +48,7 @@ import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
+import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 
@@ -372,10 +373,12 @@ public class MainSearchController implements SearchBarListener {
 
   /** @see OnDialpadQueryChangedListener#onDialpadQueryChanged(java.lang.String) */
   public void onDialpadQueryChanged(String query) {
+    query = SmartDialNameMatcher.normalizeNumber(/* context = */ mainActivity, query);
     NewSearchFragment fragment = getSearchFragment();
     if (fragment != null) {
       fragment.setQuery(query, CallInitiationType.Type.DIALPAD);
     }
+    getDialpadFragment().process_quote_emergency_unquote(query);
   }
 
   @Override

@@ -16,13 +16,23 @@
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+      android:id="@+id/clear_frequents"
+      android:title="@string/main_menu_clear_frequents"
+      app:showAsAction="collapseActionView"
+      android:visible="false"/>
+
+  <!-- TODO(calderwoodra): add clear call log -->
+
   <item
       android:id="@+id/settings"
       android:title="@string/settings"
       app:showAsAction="collapseActionView"/>
 
   <item
-      android:id="@+id/clear_frequents"
-      android:title="@string/main_menu_clear_frequents"
-      app:showAsAction="collapseActionView"/>
+      android:id="@+id/menu_simulator_submenu"
+      android:title="@string/nui_simulator_submenu_label"
+      app:showAsAction="collapseActionView"
+      android:visible="false"/>
 </menu>
