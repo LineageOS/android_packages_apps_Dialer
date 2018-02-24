@@ -18,7 +18,6 @@ package com.android.dialer.phonelookup;
 
 import com.android.dialer.phonelookup.blockednumber.DialerBlockedNumberPhoneLookup;
 import com.android.dialer.phonelookup.blockednumber.SystemBlockedNumberPhoneLookup;
-import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2LocalPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2RemotePhoneLookup;
 import com.android.dialer.phonelookup.spam.SpamPhoneLookup;
@@ -44,11 +43,5 @@ public abstract class PhoneLookupModule {
         dialerBlockedNumberPhoneLookup,
         systemBlockedNumberPhoneLookup,
         spamPhoneLookup);
-  }
-
-  @Provides
-  static PhoneLookup<PhoneLookupInfo> providePhoneLookup(
-      CompositePhoneLookup compositePhoneLookup) {
-    return compositePhoneLookup;
   }
 }

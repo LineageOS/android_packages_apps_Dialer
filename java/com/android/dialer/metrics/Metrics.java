@@ -34,12 +34,21 @@ public interface Metrics {
   String NEW_CALL_LOG_JANK_EVENT_NAME = "NewCallLog.Jank";
 
   // Events related to refreshing the annotated call log.
+  String INITIAL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.Fill";
+  String INITIAL_ON_SUCCESSFUL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.OnSuccessfulFill";
+  String INITIAL_APPLY_MUTATIONS_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.ApplyMutations";
+
   String IS_DIRTY_EVENT_NAME = "RefreshAnnotatedCallLog.IsDirty";
   String FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Fill";
   String ON_SUCCESSFUL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.OnSuccessfulFill";
   String APPLY_MUTATIONS_EVENT_NAME = "RefreshAnnotatedCallLog.ApplyMutations";
 
   // These templates are prefixed with a CallLogDataSource or PhoneLookup simple class name.
+  String INITIAL_FILL_TEMPLATE = "%s.Initial.Fill";
+  String INITIAL_GET_MOST_RECENT_INFO_TEMPLATE = "%s.Initial.GetMostRecentInfo";
+  String INITIAL_ON_SUCCESSFUL_FILL_TEMPLATE = "%s.Initial.OnSuccessfulFill";
+  String INITIAL_ON_SUCCESSFUL_BULK_UPDATE_TEMPLATE = "%s.Initial.OnSuccessfulBulkUpdate";
+
   String IS_DIRTY_TEMPLATE = "%s.IsDirty";
   String FILL_TEMPLATE = "%s.Fill";
   String GET_MOST_RECENT_INFO_TEMPLATE = "%s.GetMostRecentInfo";
