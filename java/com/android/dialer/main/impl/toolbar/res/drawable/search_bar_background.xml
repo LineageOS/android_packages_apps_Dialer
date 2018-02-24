@@ -14,13 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-
-  <!-- Used on sdk 27 and above -->
-  <style name="NuiActivityTheme" parent="NuiActivityThemeBase">
-    <!-- Used to change the navigation bar color -->
-    <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">@color/background_dialer_white</item>
-    <item name="android:navigationBarDividerColor">#E0E0E0</item>
-  </style>
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+  android:shape="rectangle">
+  <solid android:color="@color/background_dialer_white"/>
+</shape>

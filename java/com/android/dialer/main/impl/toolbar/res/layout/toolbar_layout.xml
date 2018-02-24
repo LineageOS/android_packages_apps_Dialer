@@ -28,7 +28,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/search_bar_margin"
       android:minHeight="@dimen/collapsed_search_bar_height"
-      android:background="@drawable/rounded_corner"
+      android:background="@drawable/search_bar_background_rounded_corners"
       android:elevation="4dp">
 
     <RelativeLayout
