@@ -74,23 +74,14 @@ final class RttChatMessage {
    */
   static String getChangedString(CharSequence s, int start, int before, int count) {
     StringBuilder modify = new StringBuilder();
-    if (before > count) {
-      int deleteStart = start + count;
-      int deleted = before - count;
-      int numberUnModifiedCharsAfterDeleted = s.length() - start - count;
-      char c = '\b';
-      for (int i = 0; i < deleted + numberUnModifiedCharsAfterDeleted; i++) {
-        modify.append(c);
-      }
-      modify.append(s, deleteStart, s.length());
-    } else {
-      int insertStart = start + before;
-      int numberUnModifiedCharsAfterInserted = s.length() - start - count;
-      char c = '\b';
-      for (int i = 0; i < numberUnModifiedCharsAfterInserted; i++) {
-        modify.append(c);
-      }
-      modify.append(s, insertStart, s.length());
+    char c = '\b';
+    int oldLength = s.length() - count + before;
+    for (int i = 0; i < oldLength - start; i++) {
+      modify.append(c);
+    }
+    modify.append(s, start, start + count);
+    if (start + count < s.length()) {
+      modify.append(s, start + count, s.length());
     }
     return modify.toString();
   }
