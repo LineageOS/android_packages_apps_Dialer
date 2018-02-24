@@ -31,8 +31,8 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
@@ -68,7 +68,7 @@ public final class RealtimeRowProcessor {
   @VisibleForTesting static final long BATCH_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
   private final Context appContext;
-  private final PhoneLookup<PhoneLookupInfo> phoneLookup;
+  private final CompositePhoneLookup compositePhoneLookup;
   private final ListeningExecutorService uiExecutor;
   private final ListeningExecutorService backgroundExecutor;
 
@@ -83,11 +83,11 @@ public final class RealtimeRowProcessor {
       @ApplicationContext Context appContext,
       @Ui ListeningExecutorService uiExecutor,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor,
-      PhoneLookup<PhoneLookupInfo> phoneLookup) {
+      CompositePhoneLookup compositePhoneLookup) {
     this.appContext = appContext;
     this.uiExecutor = uiExecutor;
     this.backgroundExecutor = backgroundExecutor;
-    this.phoneLookup = phoneLookup;
+    this.compositePhoneLookup = compositePhoneLookup;
   }
 
   /**
@@ -106,7 +106,8 @@ public final class RealtimeRowProcessor {
       return Futures.immediateFuture(applyPhoneLookupInfoToRow(cachedPhoneLookupInfo, row));
     }
 
-    ListenableFuture<PhoneLookupInfo> phoneLookupInfoFuture = phoneLookup.lookup(row.number());
+    ListenableFuture<PhoneLookupInfo> phoneLookupInfoFuture =
+        compositePhoneLookup.lookup(row.number());
     return Futures.transform(
         phoneLookupInfoFuture,
         phoneLookupInfo -> {
