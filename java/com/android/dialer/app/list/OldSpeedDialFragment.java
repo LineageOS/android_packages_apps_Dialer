@@ -394,6 +394,8 @@ public class OldSpeedDialFragment extends Fragment
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
       adapter.setContactCursor(data);
       fragment.setEmptyViewVisibility(adapter.getCount() == 0);
+      FragmentUtils.getParentUnsafe(fragment, HostInterface.class)
+          .setHasFrequents(adapter.getNumFrequents() > 0);
     }
 
     @Override
@@ -452,5 +454,7 @@ public class OldSpeedDialFragment extends Fragment
     void showAllContactsTab();
 
     ImageView getDragShadowOverlay();
+
+    void setHasFrequents(boolean hasFrequents);
   }
 }

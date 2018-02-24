@@ -20,19 +20,20 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.support.annotation.StringRes;
-import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.MenuItem;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import com.android.dialer.common.Assert;
 import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
 
 /** Toolbar for {@link com.android.dialer.main.impl.MainActivity}. */
-public final class MainToolbar extends Toolbar implements OnMenuItemClickListener {
+public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemClickListener {
 
   private static final int SLIDE_DURATION = 300;
   private static final AccelerateDecelerateInterpolator SLIDE_INTERPOLATOR =
@@ -154,5 +155,13 @@ public final class MainToolbar extends Toolbar implements OnMenuItemClickListene
 
   public void setHint(@StringRes int hint) {
     searchBar.setHint(hint);
+  }
+
+  public void showClearFrequents(boolean show) {
+    overflowMenu.showClearFrequents(show);
+  }
+
+  public void maybeShowSimulator(AppCompatActivity appCompatActivity) {
+    overflowMenu.maybeShowSimulator(appCompatActivity);
   }
 }
