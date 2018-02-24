@@ -56,6 +56,7 @@ import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.rtt.impl.RttChatAdapter.MessageListener;
+import com.android.incallui.rtt.protocol.Constants;
 import com.android.incallui.rtt.protocol.RttCallScreen;
 import com.android.incallui.rtt.protocol.RttCallScreenDelegate;
 import com.android.incallui.rtt.protocol.RttCallScreenDelegateFactory;
@@ -162,6 +163,7 @@ public class RttChatFragment extends Fragment
           isClearingInput = true;
           editText.setText("");
           isClearingInput = false;
+          rttCallScreenDelegate.onLocalMessage(Constants.BUBBLE_BREAKER);
         });
     submitButton.setEnabled(false);
     endCallButton = view.findViewById(R.id.rtt_end_call_button);
