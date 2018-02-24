@@ -39,6 +39,7 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
@@ -63,7 +64,7 @@ import javax.inject.Inject;
  */
 public final class PhoneLookupDataSource implements CallLogDataSource {
 
-  private final PhoneLookup<PhoneLookupInfo> phoneLookup;
+  private final CompositePhoneLookup compositePhoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
 
@@ -86,10 +87,10 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   @Inject
   PhoneLookupDataSource(
-      PhoneLookup<PhoneLookupInfo> phoneLookup,
+      CompositePhoneLookup compositePhoneLookup,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
-    this.phoneLookup = phoneLookup;
+    this.compositePhoneLookup = compositePhoneLookup;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
@@ -99,7 +100,8 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     ListenableFuture<ImmutableSet<DialerPhoneNumber>> phoneNumbers =
         backgroundExecutorService.submit(
             () -> queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext));
-    return Futures.transformAsync(phoneNumbers, phoneLookup::isDirty, lightweightExecutorService);
+    return Futures.transformAsync(
+        phoneNumbers, compositePhoneLookup::isDirty, lightweightExecutorService);
   }
 
   /**
@@ -157,10 +159,13 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
                 queryPhoneLookupHistoryForNumbers(appContext, annotatedCallLogIdsByNumber.keySet()),
             backgroundExecutorService);
 
-    // Use the original info map to generate the updated info map by delegating to phoneLookup.
+    // Use the original info map to generate the updated info map by delegating to
+    // compositePhoneLookup.
     ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> updatedInfoMapFuture =
         Futures.transformAsync(
-            originalInfoMapFuture, phoneLookup::getMostRecentInfo, lightweightExecutorService);
+            originalInfoMapFuture,
+            compositePhoneLookup::getMostRecentInfo,
+            lightweightExecutorService);
 
     // This is the computation that will use the result of all of the above.
     Callable<ImmutableMap<Long, PhoneLookupInfo>> computeRowsToUpdate =
@@ -241,7 +246,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     // the AnnotatedCallLog and PhoneLookupHistory have been successfully updated.
     return Futures.transformAsync(
         writePhoneLookupHistory,
-        unused -> phoneLookup.onSuccessfulBulkUpdate(),
+        unused -> compositePhoneLookup.onSuccessfulBulkUpdate(),
         lightweightExecutorService);
   }
 
@@ -286,7 +291,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   @MainThread
   @Override
   public void registerContentObservers(Context appContext) {
-    phoneLookup.registerContentObservers(appContext);
+    compositePhoneLookup.registerContentObservers(appContext);
   }
 
   private static ImmutableSet<DialerPhoneNumber>
