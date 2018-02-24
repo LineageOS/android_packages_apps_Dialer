@@ -37,9 +37,14 @@
 
   <!-- Show users their settings [CHAR LIMIT=20] -->
   <string name="settings">Settings</string>
+
   <!--  The menu item to clear frequents [CHAR LIMIT=30] -->
   <string name="main_menu_clear_frequents">Clear frequents</string>
 
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
   <string name="main_remove_contact">Remove</string>
+
+  <!-- Label for the simulator submenu. This is used to show actions that are useful for development
+       and testing. [CHAR LIMIT=30]-->
+  <string translatable="false" name="nui_simulator_submenu_label">Simulator</string>
 </resources>
