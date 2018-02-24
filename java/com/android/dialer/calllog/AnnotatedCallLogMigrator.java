@@ -18,6 +18,7 @@ package com.android.dialer.calllog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.inject.ApplicationContext;
@@ -39,7 +40,7 @@ public final class AnnotatedCallLogMigrator {
   private final Context appContext;
   private final SharedPreferences sharedPreferences;
   private final RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
-  private final ListeningExecutorService backgorundExecutor;
+  private final ListeningExecutorService backgroundExecutor;
 
   @Inject
   AnnotatedCallLogMigrator(
@@ -49,7 +50,7 @@ public final class AnnotatedCallLogMigrator {
       RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker) {
     this.appContext = appContext;
     this.sharedPreferences = sharedPreferences;
-    this.backgorundExecutor = backgroundExecutor;
+    this.backgroundExecutor = backgroundExecutor;
     this.refreshAnnotatedCallLogWorker = refreshAnnotatedCallLogWorker;
   }
 
@@ -58,13 +59,13 @@ public final class AnnotatedCallLogMigrator {
    * the latency the first time call log is shown.
    */
   public ListenableFuture<Void> migrate() {
-
     return Futures.transformAsync(
         shouldMigrate(),
         (shouldMigrate) -> {
           if (!shouldMigrate) {
             return Futures.immediateFuture(null);
           }
+          LogUtil.i("AnnotatedCallLogMigrator.migrate", "migrating annotated call log");
           return Futures.transform(
               refreshAnnotatedCallLogWorker.refreshWithoutDirtyCheck(),
               (unused) -> {
@@ -77,7 +78,7 @@ public final class AnnotatedCallLogMigrator {
   }
 
   private ListenableFuture<Boolean> shouldMigrate() {
-    return backgorundExecutor.submit(
+    return backgroundExecutor.submit(
         () -> {
           if (!(ConfigProviderBindings.get(appContext)
               .getBoolean("is_nui_shortcut_enabled", false))) {

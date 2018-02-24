@@ -37,6 +37,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -51,6 +52,7 @@ public class RefreshAnnotatedCallLogWorker {
   private final SharedPreferences sharedPreferences;
   private final MutationApplier mutationApplier;
   private final FutureTimer futureTimer;
+  private final CallLogState callLogState;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
   // Used to ensure that only one refresh flow runs at a time. (Note that
@@ -64,6 +66,7 @@ public class RefreshAnnotatedCallLogWorker {
       @Unencrypted SharedPreferences sharedPreferences,
       MutationApplier mutationApplier,
       FutureTimer futureTimer,
+      CallLogState callLogState,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.appContext = appContext;
@@ -71,17 +74,18 @@ public class RefreshAnnotatedCallLogWorker {
     this.sharedPreferences = sharedPreferences;
     this.mutationApplier = mutationApplier;
     this.futureTimer = futureTimer;
+    this.callLogState = callLogState;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
 
   /** Checks if the annotated call log is dirty and refreshes it if necessary. */
-  public ListenableFuture<Void> refreshWithDirtyCheck() {
+  ListenableFuture<Void> refreshWithDirtyCheck() {
     return refresh(true);
   }
 
   /** Refreshes the annotated call log, bypassing dirty checks. */
-  public ListenableFuture<Void> refreshWithoutDirtyCheck() {
+  ListenableFuture<Void> refreshWithoutDirtyCheck() {
     return refresh(false);
   }
 
@@ -131,7 +135,11 @@ public class RefreshAnnotatedCallLogWorker {
               "RefreshAnnotatedCallLogWorker.checkDirtyAndRebuildIfNecessary",
               "isDirty: %b",
               Preconditions.checkNotNull(isDirty));
-          return isDirty ? rebuild() : Futures.immediateFuture(null);
+          if (isDirty) {
+            return Futures.transformAsync(
+                callLogState.isBuilt(), this::rebuild, MoreExecutors.directExecutor());
+          }
+          return Futures.immediateFuture(null);
         },
         lightweightExecutorService);
   }
@@ -152,14 +160,13 @@ public class RefreshAnnotatedCallLogWorker {
     return isDirtyFuture;
   }
 
-  private ListenableFuture<Void> rebuild() {
+  private ListenableFuture<Void> rebuild(boolean isBuilt) {
     CallLogMutations mutations = new CallLogMutations();
 
     // Start by filling the data sources--the system call log data source must go first!
     CallLogDataSource systemCallLogDataSource = dataSources.getSystemCallLogDataSource();
     ListenableFuture<Void> fillFuture = systemCallLogDataSource.fill(appContext, mutations);
-    String systemEventName =
-        String.format(Metrics.FILL_TEMPLATE, systemCallLogDataSource.getClass().getSimpleName());
+    String systemEventName = eventNameForFill(systemCallLogDataSource, isBuilt);
     futureTimer.applyTiming(fillFuture, systemEventName);
 
     // After the system call log data source is filled, call fill sequentially on each remaining
@@ -171,14 +178,14 @@ public class RefreshAnnotatedCallLogWorker {
               fillFuture,
               unused -> {
                 ListenableFuture<Void> dataSourceFuture = dataSource.fill(appContext, mutations);
-                String eventName =
-                    String.format(Metrics.FILL_TEMPLATE, dataSource.getClass().getSimpleName());
+                String eventName = eventNameForFill(dataSource, isBuilt);
                 futureTimer.applyTiming(dataSourceFuture, eventName);
                 return dataSourceFuture;
               },
               lightweightExecutorService);
     }
-    futureTimer.applyTiming(fillFuture, Metrics.FILL_EVENT_NAME);
+
+    futureTimer.applyTiming(fillFuture, eventNameForOverallFill(isBuilt));
 
     // After all data sources are filled, apply mutations (at this point "fillFuture" is the result
     // of filling the last data source).
@@ -188,7 +195,7 @@ public class RefreshAnnotatedCallLogWorker {
             unused -> {
               ListenableFuture<Void> mutationApplierFuture =
                   mutationApplier.applyToDatabase(mutations, appContext);
-              futureTimer.applyTiming(mutationApplierFuture, Metrics.APPLY_MUTATIONS_EVENT_NAME);
+              futureTimer.applyTiming(mutationApplierFuture, eventNameForApplyMutations(isBuilt));
               return mutationApplierFuture;
             },
             lightweightExecutorService);
@@ -203,13 +210,11 @@ public class RefreshAnnotatedCallLogWorker {
                   dataSources.getDataSourcesIncludingSystemCallLog()) {
                 ListenableFuture<Void> dataSourceFuture = dataSource.onSuccessfulFill(appContext);
                 onSuccessfulFillFutures.add(dataSourceFuture);
-                String eventName =
-                    String.format(
-                        Metrics.ON_SUCCESSFUL_FILL_TEMPLATE, dataSource.getClass().getSimpleName());
+                String eventName = eventNameForOnSuccessfulFill(dataSource, isBuilt);
                 futureTimer.applyTiming(dataSourceFuture, eventName);
               }
               ListenableFuture<List<Void>> allFutures = Futures.allAsList(onSuccessfulFillFutures);
-              futureTimer.applyTiming(allFutures, Metrics.ON_SUCCESSFUL_FILL_EVENT_NAME);
+              futureTimer.applyTiming(allFutures, eventNameForOverallOnSuccessfulFill(isBuilt));
               return allFutures;
             },
             lightweightExecutorService);
@@ -219,8 +224,40 @@ public class RefreshAnnotatedCallLogWorker {
         onSuccessfulFillFuture,
         unused -> {
           sharedPreferences.edit().putBoolean(SharedPrefKeys.FORCE_REBUILD, false).apply();
+          callLogState.markBuilt();
           return null;
         },
         backgroundExecutorService);
+  }
+
+  private static String eventNameForFill(CallLogDataSource dataSource, boolean isBuilt) {
+    return String.format(
+        !isBuilt ? Metrics.INITIAL_FILL_TEMPLATE : Metrics.FILL_TEMPLATE,
+        dataSource.getClass().getSimpleName());
+  }
+
+  private static String eventNameForOverallFill(boolean isBuilt) {
+    return !isBuilt ? Metrics.INITIAL_FILL_EVENT_NAME : Metrics.FILL_EVENT_NAME;
+  }
+
+  private static String eventNameForOnSuccessfulFill(
+      CallLogDataSource dataSource, boolean isBuilt) {
+    return String.format(
+        !isBuilt
+            ? Metrics.INITIAL_ON_SUCCESSFUL_FILL_TEMPLATE
+            : Metrics.ON_SUCCESSFUL_FILL_TEMPLATE,
+        dataSource.getClass().getSimpleName());
+  }
+
+  private static String eventNameForOverallOnSuccessfulFill(boolean isBuilt) {
+    return !isBuilt
+        ? Metrics.INITIAL_ON_SUCCESSFUL_FILL_EVENT_NAME
+        : Metrics.ON_SUCCESSFUL_FILL_EVENT_NAME;
+  }
+
+  private static String eventNameForApplyMutations(boolean isBuilt) {
+    return !isBuilt
+        ? Metrics.INITIAL_APPLY_MUTATIONS_EVENT_NAME
+        : Metrics.APPLY_MUTATIONS_EVENT_NAME;
   }
 }
