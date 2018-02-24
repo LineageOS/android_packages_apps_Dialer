@@ -196,6 +196,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         });
 
     MainToolbar toolbar = mainActivity.findViewById(R.id.toolbar);
+    toolbar.maybeShowSimulator(mainActivity);
     mainActivity.setSupportActionBar(mainActivity.findViewById(R.id.toolbar));
 
     bottomNav = mainActivity.findViewById(R.id.bottom_nav_bar);
@@ -231,7 +232,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             bottomNav,
             mainActivity.findViewById(R.id.contact_tile_drag_shadow_overlay),
             mainActivity.findViewById(R.id.remove_view),
-            mainActivity.findViewById(R.id.search_view_container));
+            mainActivity.findViewById(R.id.search_view_container),
+            toolbar);
 
     lastTabController = new LastTabController(mainActivity, bottomNav, showVoicemailTab);
 
@@ -901,6 +903,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private final ImageView dragShadowOverlay;
     private final RemoveView removeView;
     private final View searchViewContainer;
+    private final MainToolbar toolbar;
 
     // TODO(calderwoodra): Use this for drag and drop
     @SuppressWarnings("unused")
@@ -910,11 +913,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         BottomNavBar bottomNavBar,
         ImageView dragShadowOverlay,
         RemoveView removeView,
-        View searchViewContainer) {
+        View searchViewContainer,
+        MainToolbar toolbar) {
       this.bottomNavBar = bottomNavBar;
       this.dragShadowOverlay = dragShadowOverlay;
       this.removeView = removeView;
       this.searchViewContainer = searchViewContainer;
+      this.toolbar = toolbar;
     }
 
     @Override
@@ -930,6 +935,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public ImageView getDragShadowOverlay() {
       return dragShadowOverlay;
+    }
+
+    @Override
+    public void setHasFrequents(boolean hasFrequents) {
+      toolbar.showClearFrequents(hasFrequents);
     }
 
     @Override
