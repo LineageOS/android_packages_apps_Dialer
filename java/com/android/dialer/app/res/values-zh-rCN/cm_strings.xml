@@ -16,10 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">通话中震动</string>
-  <string name="incall_vibrate_outgoing_title">对方接听时震动</string>
+  <string name="incall_vibration_category_title">通话中振动</string>
+  <string name="incall_vibrate_outgoing_title">对方接听时振动</string>
   <string name="incall_vibrate_call_waiting_title">呼叫等待时振动</string>
-  <string name="incall_vibrate_hangup_title">通话结束时震动</string>
-  <string name="incall_vibrate_45_title">每分钟震动</string>
-  <string name="incall_vibrate_45_summary">呼出通话达到每分钟的 45 秒时震动</string>
+  <string name="incall_vibrate_hangup_title">通话结束时振动</string>
+  <string name="incall_vibrate_45_title">每分钟振动</string>
+  <string name="incall_vibrate_45_summary">呼出通话达到每分钟的 45 秒时振动</string>
 </resources>

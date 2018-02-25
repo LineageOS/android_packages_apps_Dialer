@@ -17,5 +17,17 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Yakın yerler</string>
+  <string name="people">Kişiler</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Telefon numarası arama</string>
+  <string name="enable_forward_lookup_title">Yönlendirme araması</string>
+  <string name="enable_forward_lookup_summary">Çevirici içinde arama yaparken yakınlardaki yerleri göster</string>
+  <string name="enable_people_lookup_title">Kişi araması</string>
+  <string name="enable_people_lookup_summary">Çevirici içinde arama yaparken insanlar için çevrim içi sonuçları göster</string>
+  <string name="enable_reverse_lookup_title">Bilinmeyen numaradan aranma</string>
+  <string name="enable_reverse_lookup_summary">Gelen aramalarda bilinmeyen numaralar için kişi veya yer hakkında bilgi ara</string>
+  <string name="forward_lookup_provider_title">Arama yönlendirme sağlayıcısı</string>
+  <string name="people_lookup_provider_title">Kişi arama sağlayıcısı</string>
+  <string name="reverse_lookup_provider_title">Ters arama sağlayıcısı</string>
 </resources>

@@ -17,5 +17,17 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Miesta v blízkosti</string>
+  <string name="people">Ľudia</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Vyhľadávanie telefónneho čísla</string>
+  <string name="enable_forward_lookup_title">Vyhľadávanie vpred</string>
+  <string name="enable_forward_lookup_summary">Zobraziť miesta v blízkosti pri vyhľadávaní v číselníku</string>
+  <string name="enable_people_lookup_title">Vyhľadávanie ľudí</string>
+  <string name="enable_people_lookup_summary">Zobraziť výsledky ľudí pri vyhľadávaní v číselníku</string>
+  <string name="enable_reverse_lookup_title">Spätné vyhľadávanie</string>
+  <string name="enable_reverse_lookup_summary">Vyhľadať informácie o osobe alebo mieste pre neznáme čísla u prichádzajúcich hovorov</string>
+  <string name="forward_lookup_provider_title">Poskytovateľ vyhľadávania vpred</string>
+  <string name="people_lookup_provider_title">Poskytovateľ pre vyhľadávanie ľudí</string>
+  <string name="reverse_lookup_provider_title">Poskytovateľ pre spätné vyhľadávanie</string>
 </resources>

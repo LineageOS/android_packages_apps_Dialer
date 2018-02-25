@@ -17,5 +17,17 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Lugares cercanos</string>
+  <string name="people">Personas</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Búsqueda de números de teléfono</string>
+  <string name="enable_forward_lookup_title">Búsqueda directa</string>
+  <string name="enable_forward_lookup_summary">Mostrar lugares cercanos al buscar en el marcador</string>
+  <string name="enable_people_lookup_title">Búsqueda de personas</string>
+  <string name="enable_people_lookup_summary">Mostrar resultados en línea para personas al buscar en el marcador</string>
+  <string name="enable_reverse_lookup_title">Búsqueda inversa</string>
+  <string name="enable_reverse_lookup_summary">Buscar información sobre la persona o lugar para números desconocidos en llamadas entrantes</string>
+  <string name="forward_lookup_provider_title">Proveedor de búsqueda directa</string>
+  <string name="people_lookup_provider_title">Proveedor de búsqueda de personas</string>
+  <string name="reverse_lookup_provider_title">Proveedor de búsqueda inversa</string>
 </resources>

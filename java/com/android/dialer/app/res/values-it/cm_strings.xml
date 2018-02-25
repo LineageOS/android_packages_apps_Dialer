@@ -15,4 +15,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_vibration_category_title">Vibrazioni in chiamata</string>
+  <string name="incall_vibrate_outgoing_title">Vibra alla risposta</string>
+  <string name="incall_vibrate_call_waiting_title">Vibra su messa in attesa</string>
+  <string name="incall_vibrate_hangup_title">Vibra al termine chiamata</string>
+  <string name="incall_vibrate_45_title">Vibra ogni minuto</string>
+  <string name="incall_vibrate_45_summary">Vibra al 45esimo secondo di ogni minuto durante le chiamate in uscita</string>
+</resources>
