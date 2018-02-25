@@ -84,14 +84,5 @@ public interface PhoneLookup<T> {
   ListenableFuture<Void> onSuccessfulBulkUpdate();
 
   @MainThread
-  void registerContentObservers(
-      Context appContext, ContentObserverCallbacks contentObserverCallbacks);
-
-  /**
-   * Methods which may optionally be called as a result of a phone lookup's content observer firing.
-   */
-  interface ContentObserverCallbacks {
-    @MainThread
-    void markDirtyAndNotify(Context appContext);
-  }
+  void registerContentObservers(Context appContext);
 }

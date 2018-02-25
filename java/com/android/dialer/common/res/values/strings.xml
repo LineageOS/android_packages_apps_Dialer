@@ -17,4 +17,6 @@
 <resources>
   <string name="network_name_wifi">Wifi</string>
   <string name="network_name_mobile">Mobile</string>
+  <!-- Content description for the overflow menu button. [CHAR LIMIT=NONE] -->
+  <string name="content_description_overflow">More options</string>
 </resources>

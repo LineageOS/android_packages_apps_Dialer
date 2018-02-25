@@ -17,6 +17,7 @@
 package com.android.dialer.simulator.impl;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.telecom.Connection;
 import android.telecom.ConnectionRequest;
@@ -72,7 +73,8 @@ public class SimulatorConnectionService extends ConnectionService {
   public Connection onCreateOutgoingConnection(
       PhoneAccountHandle phoneAccount, ConnectionRequest request) {
     LogUtil.enterBlock("SimulatorConnectionService.onCreateOutgoingConnection");
-    if (!SimulatorSimCallManager.isSimulatorConnectionRequest(request)) {
+    if (!SimulatorComponent.get(this).getSimulator().isSimulatorMode()
+        && !SimulatorSimCallManager.isSimulatorConnectionRequest(request)) {
       LogUtil.i(
           "SimulatorConnectionService.onCreateOutgoingConnection",
           "outgoing call not from simulator, unregistering");
@@ -82,20 +84,29 @@ public class SimulatorConnectionService extends ConnectionService {
       return null;
     }
     SimulatorConnection connection = new SimulatorConnection(this, request);
-    connection.setAddress(
-        request.getAddress(),
-        request
-            .getExtras()
-            .getInt(Simulator.PRESENTATION_CHOICE, TelecomManager.PRESENTATION_ALLOWED));
     connection.setDialing();
-    simulatorConnectionsBank.add(connection);
-    ThreadUtil.postOnUiThread(
-        () ->
-            SimulatorComponent.get(instance)
-                .getSimulatorConnectionsBank()
-                .updateConferenceableConnections());
-    for (Listener listener : listeners) {
-      listener.onNewOutgoingConnection(connection);
+    if (SimulatorSimCallManager.isSimulatorConnectionRequest(request)) {
+      simulatorConnectionsBank.add(connection);
+      connection.setAddress(
+          request.getAddress(),
+          request
+              .getExtras()
+              .getInt(Simulator.PRESENTATION_CHOICE, TelecomManager.PRESENTATION_ALLOWED));
+      ThreadUtil.postOnUiThread(
+          () ->
+              SimulatorComponent.get(instance)
+                  .getSimulatorConnectionsBank()
+                  .updateConferenceableConnections());
+      for (Listener listener : listeners) {
+        listener.onNewOutgoingConnection(connection);
+      }
+    } else {
+      connection.setAddress(request.getAddress(), 1);
+      Bundle extras = connection.getExtras();
+      extras.putString("connection_tag", "SimulatorMode");
+      connection.putExtras(extras);
+      simulatorConnectionsBank.add(connection);
+      connection.addListener(new NonSimulatorConnectionListener());
     }
     return connection;
   }

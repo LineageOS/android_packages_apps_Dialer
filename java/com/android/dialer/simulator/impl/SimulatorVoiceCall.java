@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.telecom.Connection;
+import android.telecom.Connection.RttModifyStatus;
 import android.telecom.DisconnectCause;
 import android.view.ActionProvider;
 import com.android.dialer.common.Assert;
@@ -104,7 +105,10 @@ final class SimulatorVoiceCall
               extras.putBoolean(Simulator.IS_ENRICHED_CALL, true);
               connectionTag =
                   SimulatorSimCallManager.addNewIncomingCall(
-                      context, Simulator.ENRICHED_CALL_INCOMING_NUMBER, false, extras);
+                      context,
+                      Simulator.ENRICHED_CALL_INCOMING_NUMBER,
+                      SimulatorSimCallManager.CALL_TYPE_VOICE,
+                      extras);
             },
             DialerExecutorComponent.get(context).uiExecutor());
   }
@@ -119,7 +123,10 @@ final class SimulatorVoiceCall
               extras.putBoolean(Simulator.IS_ENRICHED_CALL, true);
               connectionTag =
                   SimulatorSimCallManager.addNewOutgoingCall(
-                      context, Simulator.ENRICHED_CALL_OUTGOING_NUMBER, false, extras);
+                      context,
+                      Simulator.ENRICHED_CALL_OUTGOING_NUMBER,
+                      SimulatorSimCallManager.CALL_TYPE_VOICE,
+                      extras);
             },
             DialerExecutorComponent.get(context).uiExecutor());
   }
@@ -127,7 +134,8 @@ final class SimulatorVoiceCall
   private void addNewIncomingCall() {
     String callerId = "+44 (0) 20 7031 3000" /* Google London office */;
     connectionTag =
-        SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
   private void addNewIncomingCall(AppCompatActivity activity) {
@@ -137,7 +145,7 @@ final class SimulatorVoiceCall
               extras.putInt(Simulator.PRESENTATION_CHOICE, callerIdPresentation);
               connectionTag =
                   SimulatorSimCallManager.addNewIncomingCall(
-                      context, callerId, false /* isVideo */, extras);
+                      context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE, extras);
             })
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
   }
@@ -145,7 +153,8 @@ final class SimulatorVoiceCall
   private void addNewOutgoingCall() {
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
-        SimulatorSimCallManager.addNewOutgoingCall(context, callerId, false /* isVideo */);
+        SimulatorSimCallManager.addNewOutgoingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
   private void addNewOutgoingCall(AppCompatActivity activity) {
@@ -155,7 +164,7 @@ final class SimulatorVoiceCall
               extras.putInt(Simulator.PRESENTATION_CHOICE, callerIdPresentation);
               connectionTag =
                   SimulatorSimCallManager.addNewOutgoingCall(
-                      context, callerId, false /* isVideo */, extras);
+                      context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE, extras);
             })
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
   }
@@ -163,12 +172,15 @@ final class SimulatorVoiceCall
   private void addSpamIncomingCall() {
     String callerId = "+1-661-778-3020"; /* Blacklisted custom spam number */
     connectionTag =
-        SimulatorSimCallManager.addNewIncomingCall(context, callerId, false /* isVideo */);
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
   private void addNewEmergencyCallBack() {
     String callerId = "911";
-    connectionTag = SimulatorSimCallManager.addNewIncomingCall(context, callerId, false);
+    connectionTag =
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
   @Override
@@ -212,15 +224,13 @@ final class SimulatorVoiceCall
     switch (event.type) {
       case Event.NONE:
         throw Assert.createIllegalStateFailException();
-      case Event.ANSWER:
-        connection.setActive();
-        break;
       case Event.REJECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.REJECTED));
         break;
       case Event.HOLD:
         connection.setOnHold();
         break;
+      case Event.ANSWER:
       case Event.UNHOLD:
         connection.setActive();
         break;
@@ -232,6 +242,15 @@ final class SimulatorVoiceCall
         break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
+        break;
+      case Event.START_RTT:
+        // TODO(wangqi): Add random accept/decline.
+        boolean accept = true;
+        if (accept) {
+          connection.sendRttInitiationSuccess();
+        } else {
+          connection.sendRttInitiationFailure(RttModifyStatus.SESSION_MODIFY_REQUEST_FAIL);
+        }
         break;
       default:
         LogUtil.i("SimulatorVoiceCall.onEvent", "unexpected event: " + event.type);

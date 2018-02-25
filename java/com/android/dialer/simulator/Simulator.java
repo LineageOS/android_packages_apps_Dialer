@@ -101,6 +101,9 @@ public interface Simulator {
       MERGE,
       SEPARATE,
       SWAP,
+      START_RTT,
+      STOP_RTT,
+      HANDLE_RTT_UPGRADE_RESPONSE,
     })
     public @interface Type {}
 
@@ -118,6 +121,9 @@ public interface Simulator {
     public static final int MERGE = 11;
     public static final int SEPARATE = 12;
     public static final int SWAP = 13;
+    public static final int START_RTT = 14;
+    public static final int STOP_RTT = 15;
+    public static final int HANDLE_RTT_UPGRADE_RESPONSE = 16;
 
     @Type public final int type;
     /** Holds event specific information. For example, for DTMF this could be the keycode. */

@@ -32,7 +32,6 @@ import com.android.dialer.app.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.callintent.SpeedDialContactType;
-import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.logging.InteractionEvent;
@@ -192,21 +191,17 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     this.position = position;
   }
 
+  private ContactLoader loader;
+
   /**
    * Send a notification using a {@link ContactLoader} to inform the sync adapter that we are
    * viewing a particular contact, so that it can download the high-res photo.
    */
-  private static void sendViewNotification(Context context, Uri contactUri) {
-    ContactLoader loader = new ContactLoader(context, contactUri, true /* postViewNotification */);
-    loader.registerListener(
-        0,
-        (loader1, contact) -> {
-          try {
-            loader1.reset();
-          } catch (RuntimeException e) {
-            LogUtil.e("PhoneFavoriteTileView.onLoadComplete", "error resetting loader", e);
-          }
-        });
+  private void sendViewNotification(Context context, Uri contactUri) {
+    if (loader != null) {
+      loader.cancelLoad();
+    }
+    loader = new ContactLoader(context, contactUri, true /* postViewNotification */);
     loader.startLoading();
   }
 }

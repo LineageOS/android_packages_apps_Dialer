@@ -69,7 +69,9 @@ final class PhoneLookupHistoryRecorder {
         Futures.transformAsync(
             numberFuture,
             dialerPhoneNumber ->
-                PhoneLookupComponent.get(appContext).phoneLookup().lookup(dialerPhoneNumber),
+                PhoneLookupComponent.get(appContext)
+                    .compositePhoneLookup()
+                    .lookup(dialerPhoneNumber),
             MoreExecutors.directExecutor());
 
     Futures.addCallback(

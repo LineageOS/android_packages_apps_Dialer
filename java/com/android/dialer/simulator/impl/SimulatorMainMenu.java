@@ -33,7 +33,6 @@ import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import com.android.dialer.simulator.SimulatorComponent;
-import com.android.incallui.rtt.impl.RttChatActivity;
 
 /** Implements the top level simulator menu. */
 final class SimulatorMainMenu {
@@ -42,9 +41,9 @@ final class SimulatorMainMenu {
     SimulatorSubMenu simulatorSubMenu = new SimulatorSubMenu(activity.getApplicationContext());
     simulatorSubMenu
         .addItem("Voice call", SimulatorVoiceCall.getActionProvider(activity))
+        .addItem("Rtt call", SimulatorRttCall.getActionProvider(activity.getApplicationContext()))
         .addItem(
             "IMS video", SimulatorVideoCall.getActionProvider(activity.getApplicationContext()))
-        .addItem("Rtt call mock", () -> simulateRttCallMock(activity.getApplicationContext()))
         .addItem(
             "Notifications",
             SimulatorNotifications.getActionProvider(activity.getApplicationContext()))
@@ -66,21 +65,21 @@ final class SimulatorMainMenu {
                     EnrichedCallSimulatorActivity.newIntent(activity.getApplicationContext())))
         .addItem(
             "Enable simulator mode",
-            () ->
-                SimulatorComponent.get(activity.getApplicationContext())
-                    .getSimulator()
-                    .enableSimulatorMode())
+            () -> {
+              SimulatorComponent.get(activity.getApplicationContext())
+                  .getSimulator()
+                  .enableSimulatorMode();
+              SimulatorSimCallManager.register(activity.getApplicationContext());
+            })
         .addItem(
             "Disable simulator mode",
-            () ->
-                SimulatorComponent.get(activity.getApplicationContext())
-                    .getSimulator()
-                    .disableSimulatorMode());
+            () -> {
+              SimulatorComponent.get(activity.getApplicationContext())
+                  .getSimulator()
+                  .disableSimulatorMode();
+              SimulatorSimCallManager.unregister(activity.getApplicationContext());
+            });
     return simulatorSubMenu;
-  }
-
-  private static void simulateRttCallMock(@NonNull Context context) {
-    context.startActivity(new Intent(context, RttChatActivity.class));
   }
 
   private static void populateDatabase(@NonNull Context context) {

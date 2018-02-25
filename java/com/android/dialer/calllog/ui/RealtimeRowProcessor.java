@@ -23,17 +23,16 @@ import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
-import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
-import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
+import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
@@ -69,7 +68,7 @@ public final class RealtimeRowProcessor {
   @VisibleForTesting static final long BATCH_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
   private final Context appContext;
-  private final PhoneLookup<PhoneLookupInfo> phoneLookup;
+  private final CompositePhoneLookup compositePhoneLookup;
   private final ListeningExecutorService uiExecutor;
   private final ListeningExecutorService backgroundExecutor;
 
@@ -84,11 +83,11 @@ public final class RealtimeRowProcessor {
       @ApplicationContext Context appContext,
       @Ui ListeningExecutorService uiExecutor,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor,
-      PhoneLookup<PhoneLookupInfo> phoneLookup) {
+      CompositePhoneLookup compositePhoneLookup) {
     this.appContext = appContext;
     this.uiExecutor = uiExecutor;
     this.backgroundExecutor = backgroundExecutor;
-    this.phoneLookup = phoneLookup;
+    this.compositePhoneLookup = compositePhoneLookup;
   }
 
   /**
@@ -107,7 +106,8 @@ public final class RealtimeRowProcessor {
       return Futures.immediateFuture(applyPhoneLookupInfoToRow(cachedPhoneLookupInfo, row));
     }
 
-    ListenableFuture<PhoneLookupInfo> phoneLookupInfoFuture = phoneLookup.lookup(row.number());
+    ListenableFuture<PhoneLookupInfo> phoneLookupInfoFuture =
+        compositePhoneLookup.lookup(row.number());
     return Futures.transform(
         phoneLookupInfoFuture,
         phoneLookupInfo -> {
@@ -198,23 +198,8 @@ public final class RealtimeRowProcessor {
 
   private CoalescedRow applyPhoneLookupInfoToRow(
       PhoneLookupInfo phoneLookupInfo, CoalescedRow row) {
-    PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
-        new PhoneLookupInfoConsolidator(phoneLookupInfo);
     return row.toBuilder()
-        .setNumberAttributes(
-            // TODO(zachh): Put this in a common location.
-            NumberAttributes.newBuilder()
-                .setName(phoneLookupInfoConsolidator.getName())
-                .setPhotoUri(phoneLookupInfoConsolidator.getPhotoUri())
-                .setPhotoId(phoneLookupInfoConsolidator.getPhotoId())
-                .setLookupUri(phoneLookupInfoConsolidator.getLookupUri())
-                .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
-                .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
-                .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
-                .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
-                .setIsSpam(phoneLookupInfoConsolidator.isSpam())
-                .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
-                .build())
+        .setNumberAttributes(NumberAttributesConverter.fromPhoneLookupInfo(phoneLookupInfo).build())
         .build();
   }
 }

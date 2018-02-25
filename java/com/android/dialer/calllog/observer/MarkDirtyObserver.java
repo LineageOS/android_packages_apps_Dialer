@@ -14,34 +14,40 @@
  * limitations under the License
  */
 
-package com.android.dialer.phonelookup.blockednumber;
+package com.android.dialer.calllog.observer;
 
-import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.support.annotation.MainThread;
+import android.support.annotation.VisibleForTesting;
+import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.phonelookup.PhoneLookup.ContentObserverCallbacks;
+import javax.inject.Inject;
 
-/** Calls {@link ContentObserverCallbacks#markDirtyAndNotify(Context)} when the content changed */
-class MarkDirtyObserver extends ContentObserver {
+/**
+ * Mark the annotated call log as dirty and notify that a refresh is in order when the content
+ * changes.
+ */
+public final class MarkDirtyObserver extends ContentObserver {
 
-  private final Context appContext;
-  private final ContentObserverCallbacks contentObserverCallbacks;
+  private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
 
-  MarkDirtyObserver(Context appContext, ContentObserverCallbacks contentObserverCallbacks) {
+  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+  @Inject
+  public MarkDirtyObserver(RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
     super(ThreadUtil.getUiThreadHandler());
-    this.appContext = appContext;
-    this.contentObserverCallbacks = contentObserverCallbacks;
+    this.refreshAnnotatedCallLogNotifier = refreshAnnotatedCallLogNotifier;
   }
 
   @MainThread
   @Override
   public void onChange(boolean selfChange, Uri uri) {
     Assert.isMainThread();
-    LogUtil.enterBlock("SystemBlockedNumberPhoneLookup.FilteredNumberObserver.onChange");
-    contentObserverCallbacks.markDirtyAndNotify(appContext);
+    LogUtil.i(
+        "MarkDirtyObserver.onChange", "Uri:%s, SelfChange:%b", String.valueOf(uri), selfChange);
+
+    refreshAnnotatedCallLogNotifier.markDirtyAndNotify();
   }
 }

@@ -17,6 +17,7 @@
 package com.android.incallui.call;
 
 import android.Manifest.permission;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
@@ -32,6 +33,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.Call.Details;
+import android.telecom.Call.RttCall;
 import android.telecom.CallAudioState;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
@@ -263,6 +265,28 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         }
 
         @Override
+        public void onRttModeChanged(Call call, int mode) {
+          LogUtil.v("TelecomCallCallback.onRttModeChanged", "mode=%d", mode);
+        }
+
+        @Override
+        public void onRttRequest(Call call, int id) {
+          LogUtil.v("TelecomCallCallback.onRttRequest", "id=%d", id);
+        }
+
+        @Override
+        public void onRttInitiationFailure(Call call, int reason) {
+          LogUtil.v("TelecomCallCallback.onRttInitiationFailure", "reason=%d", reason);
+          update();
+        }
+
+        @Override
+        public void onRttStatusChanged(Call call, boolean enabled, RttCall rttCall) {
+          LogUtil.v("TelecomCallCallback.onRttStatusChanged", "enabled=%b", enabled);
+          update();
+        }
+
+        @Override
         public void onConnectionEvent(android.telecom.Call call, String event, Bundle extras) {
           LogUtil.v(
               "TelecomCallCallback.onConnectionEvent",
@@ -477,10 +501,12 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private void updateIsVoiceMailNumber() {
     if (getHandle() != null && PhoneAccount.SCHEME_VOICEMAIL.equals(getHandle().getScheme())) {
       isVoicemailNumber = true;
+      return;
     }
 
     if (!PermissionsUtil.hasPermission(context, permission.READ_PHONE_STATE)) {
       isVoicemailNumber = false;
+      return;
     }
 
     isVoicemailNumber = TelecomUtil.isVoicemailNumber(context, getAccountHandle(), getNumber());
@@ -906,12 +932,33 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return getVideoTech().isTransmittingOrReceiving() || VideoProfile.isVideo(getVideoState());
   }
 
+  @TargetApi(28)
+  public boolean isRttCall() {
+    if (BuildCompat.isAtLeastP()) {
+      return getTelecomCall().isRttActive();
+    } else {
+      return false;
+    }
+  }
+
+  @TargetApi(28)
+  public RttCall getRttCall() {
+    if (!isRttCall()) {
+      return null;
+    }
+    return getTelecomCall().getRttCall();
+  }
+
   public boolean hasReceivedVideoUpgradeRequest() {
     return VideoUtils.hasReceivedVideoUpgradeRequest(getVideoTech().getSessionModificationState());
   }
 
   public boolean hasSentVideoUpgradeRequest() {
     return VideoUtils.hasSentVideoUpgradeRequest(getVideoTech().getSessionModificationState());
+  }
+
+  public boolean hasSentRttUpgradeRequest() {
+    return false;
   }
 
   /**

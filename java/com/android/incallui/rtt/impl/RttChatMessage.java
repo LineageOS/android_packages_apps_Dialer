@@ -19,6 +19,7 @@ package com.android.incallui.rtt.impl;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextWatcher;
+import com.android.incallui.rtt.protocol.Constants;
 import com.google.common.base.Splitter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,8 +28,7 @@ import java.util.List;
 /** Message class that holds one RTT chat content. */
 final class RttChatMessage {
 
-  static final String BUBBLE_BREAKER = "\n\n";
-  private static final Splitter SPLITTER = Splitter.on(BUBBLE_BREAKER);
+  private static final Splitter SPLITTER = Splitter.on(Constants.BUBBLE_BREAKER);
 
   boolean isRemote;
   public boolean hasAvatar;
@@ -74,23 +74,14 @@ final class RttChatMessage {
    */
   static String getChangedString(CharSequence s, int start, int before, int count) {
     StringBuilder modify = new StringBuilder();
-    if (before > count) {
-      int deleteStart = start + count;
-      int deleted = before - count;
-      int numberUnModifiedCharsAfterDeleted = s.length() - start - count;
-      char c = '\b';
-      for (int i = 0; i < deleted + numberUnModifiedCharsAfterDeleted; i++) {
-        modify.append(c);
-      }
-      modify.append(s, deleteStart, s.length());
-    } else {
-      int insertStart = start + before;
-      int numberUnModifiedCharsAfterInserted = s.length() - start - count;
-      char c = '\b';
-      for (int i = 0; i < numberUnModifiedCharsAfterInserted; i++) {
-        modify.append(c);
-      }
-      modify.append(s, insertStart, s.length());
+    char c = '\b';
+    int oldLength = s.length() - count + before;
+    for (int i = 0; i < oldLength - start; i++) {
+      modify.append(c);
+    }
+    modify.append(s, start, start + count);
+    if (start + count < s.length()) {
+      modify.append(s, start + count, s.length());
     }
     return modify.toString();
   }
@@ -108,7 +99,7 @@ final class RttChatMessage {
       firstMessage.isRemote = true;
     }
     firstMessage.append(firstMessageContent);
-    if (splitText.hasNext() || text.endsWith(BUBBLE_BREAKER)) {
+    if (splitText.hasNext() || text.endsWith(Constants.BUBBLE_BREAKER)) {
       firstMessage.finish();
     }
     messageList.add(firstMessage);

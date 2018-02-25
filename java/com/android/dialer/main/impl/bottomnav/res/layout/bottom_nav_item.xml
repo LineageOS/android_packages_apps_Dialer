@@ -32,7 +32,7 @@
         android:id="@+id/bottom_nav_item_image"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="7dp"/>
+        android:layout_marginTop="4dp"/>
 
     <TextView
         android:id="@+id/notification_badge"

@@ -20,91 +20,116 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.multimedia.MultimediaData;
+import com.google.auto.value.AutoValue;
 import java.util.Locale;
 
 /** Information about the primary call. */
-public class PrimaryInfo {
-  @Nullable public final String number;
-  @Nullable public final String name;
-  public final boolean nameIsNumber;
-  // This is from contacts and shows the type of number. For example, "Mobile".
-  @Nullable public final String label;
-  @Nullable public final String location;
-  @Nullable public final Drawable photo;
-  @ContactPhotoType public final int photoType;
-  public final boolean isSipCall;
-  public final boolean isContactPhotoShown;
-  public final boolean isWorkCall;
-  public final boolean isSpam;
-  public final boolean isLocalContact;
-  public final boolean answeringDisconnectsOngoingCall;
-  public final boolean shouldShowLocation;
-  // Used for consistent LetterTile coloring.
-  @Nullable public final String contactInfoLookupKey;
-  @Nullable public final MultimediaData multimediaData;
-  public final boolean showInCallButtonGrid;
-  public final int numberPresentation;
+@AutoValue
+public abstract class PrimaryInfo {
+  @Nullable
+  public abstract String number();
 
-  // TODO: Convert to autovalue. a bug
-  public static PrimaryInfo createEmptyPrimaryInfo() {
-    return new PrimaryInfo(
-        null,
-        null,
-        false,
-        null,
-        null,
-        null,
-        ContactPhotoType.DEFAULT_PLACEHOLDER,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        null,
-        null,
-        true,
-        -1);
+  @Nullable
+  public abstract String name();
+
+  public abstract boolean nameIsNumber();
+  // This is from contacts and shows the type of number. For example, "Mobile".
+  @Nullable
+  public abstract String label();
+
+  @Nullable
+  public abstract String location();
+
+  @Nullable
+  public abstract Drawable photo();
+
+  @ContactPhotoType
+  public abstract int photoType();
+
+  public abstract boolean isSipCall();
+
+  public abstract boolean isContactPhotoShown();
+
+  public abstract boolean isWorkCall();
+
+  public abstract boolean isSpam();
+
+  public abstract boolean isLocalContact();
+
+  public abstract boolean answeringDisconnectsOngoingCall();
+
+  public abstract boolean shouldShowLocation();
+  // Used for consistent LetterTile coloring.
+  @Nullable
+  public abstract String contactInfoLookupKey();
+
+  @Nullable
+  public abstract MultimediaData multimediaData();
+
+  public abstract boolean showInCallButtonGrid();
+
+  public abstract int numberPresentation();
+
+  public static Builder builder() {
+    return new AutoValue_PrimaryInfo.Builder();
+  }
+  /** Builder class for primary call info. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setNumber(String number);
+
+    public abstract Builder setName(String name);
+
+    public abstract Builder setNameIsNumber(boolean nameIsNumber);
+
+    public abstract Builder setLabel(String label);
+
+    public abstract Builder setLocation(String location);
+
+    public abstract Builder setPhoto(Drawable photo);
+
+    public abstract Builder setPhotoType(@ContactPhotoType int photoType);
+
+    public abstract Builder setIsSipCall(boolean isSipCall);
+
+    public abstract Builder setIsContactPhotoShown(boolean isContactPhotoShown);
+
+    public abstract Builder setIsWorkCall(boolean isWorkCall);
+
+    public abstract Builder setIsSpam(boolean isSpam);
+
+    public abstract Builder setIsLocalContact(boolean isLocalContact);
+
+    public abstract Builder setAnsweringDisconnectsOngoingCall(
+        boolean answeringDisconnectsOngoingCall);
+
+    public abstract Builder setShouldShowLocation(boolean shouldShowLocation);
+
+    public abstract Builder setContactInfoLookupKey(String contactInfoLookupKey);
+
+    public abstract Builder setMultimediaData(MultimediaData multimediaData);
+
+    public abstract Builder setShowInCallButtonGrid(boolean showInCallButtonGrid);
+
+    public abstract Builder setNumberPresentation(int numberPresentation);
+
+    public abstract PrimaryInfo build();
   }
 
-  public PrimaryInfo(
-      @Nullable String number,
-      @Nullable String name,
-      boolean nameIsNumber,
-      @Nullable String location,
-      @Nullable String label,
-      @Nullable Drawable photo,
-      @ContactPhotoType int phototType,
-      boolean isSipCall,
-      boolean isContactPhotoShown,
-      boolean isWorkCall,
-      boolean isSpam,
-      boolean isLocalContact,
-      boolean answeringDisconnectsOngoingCall,
-      boolean shouldShowLocation,
-      @Nullable String contactInfoLookupKey,
-      @Nullable MultimediaData multimediaData,
-      boolean showInCallButtonGrid,
-      int numberPresentation) {
-    this.number = number;
-    this.name = name;
-    this.nameIsNumber = nameIsNumber;
-    this.location = location;
-    this.label = label;
-    this.photo = photo;
-    this.photoType = phototType;
-    this.isSipCall = isSipCall;
-    this.isContactPhotoShown = isContactPhotoShown;
-    this.isWorkCall = isWorkCall;
-    this.isSpam = isSpam;
-    this.isLocalContact = isLocalContact;
-    this.answeringDisconnectsOngoingCall = answeringDisconnectsOngoingCall;
-    this.shouldShowLocation = shouldShowLocation;
-    this.contactInfoLookupKey = contactInfoLookupKey;
-    this.multimediaData = multimediaData;
-    this.showInCallButtonGrid = showInCallButtonGrid;
-    this.numberPresentation = numberPresentation;
+  public static PrimaryInfo empty() {
+    return PrimaryInfo.builder()
+        .setNameIsNumber(false)
+        .setPhotoType(ContactPhotoType.DEFAULT_PLACEHOLDER)
+        .setIsSipCall(false)
+        .setIsContactPhotoShown(false)
+        .setIsWorkCall(false)
+        .setIsSpam(false)
+        .setIsLocalContact(false)
+        .setAnsweringDisconnectsOngoingCall(false)
+        .setShouldShowLocation(false)
+        .setShowInCallButtonGrid(true)
+        .setNumberPresentation(-1)
+        .build();
   }
 
   @Override
@@ -113,13 +138,13 @@ public class PrimaryInfo {
         Locale.US,
         "PrimaryInfo, number: %s, name: %s, location: %s, label: %s, "
             + "photo: %s, photoType: %d, isPhotoVisible: %b, MultimediaData: %s",
-        LogUtil.sanitizePhoneNumber(number),
-        LogUtil.sanitizePii(name),
-        LogUtil.sanitizePii(location),
-        label,
-        photo,
-        photoType,
-        isContactPhotoShown,
-        multimediaData);
+        LogUtil.sanitizePhoneNumber(number()),
+        LogUtil.sanitizePii(name()),
+        LogUtil.sanitizePii(location()),
+        label(),
+        photo(),
+        photoType(),
+        isContactPhotoShown(),
+        multimediaData());
   }
 }

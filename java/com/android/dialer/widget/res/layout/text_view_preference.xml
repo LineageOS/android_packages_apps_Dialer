@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright (C) 2018 The Android Open Source Project
   ~
@@ -15,22 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-  <item>
-    <shape android:shape="oval">
-      <solid android:color="#A52714"/>
-      <size
-          android:height="48dp"
-          android:width="48dp"/>
-    </shape>
-  </item>
-
-  <item
-      android:drawable="@drawable/quantum_ic_report_vd_theme_24"
-      android:gravity="center"
-      android:height="36dp"
-      android:width="36dp"/>
-
-</layer-list>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/text"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="16dp"
+  android:fontFamily="sans-serif"
+  android:linksClickable="true"
+  android:singleLine="false"/>

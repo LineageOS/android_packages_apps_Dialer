@@ -28,18 +28,18 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
-import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
+import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
-import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
+import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
@@ -62,10 +62,9 @@ import javax.inject.Inject;
  * Responsible for maintaining the columns in the annotated call log which are derived from phone
  * numbers.
  */
-public final class PhoneLookupDataSource
-    implements CallLogDataSource, PhoneLookup.ContentObserverCallbacks {
+public final class PhoneLookupDataSource implements CallLogDataSource {
 
-  private final PhoneLookup<PhoneLookupInfo> phoneLookup;
+  private final CompositePhoneLookup compositePhoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
 
@@ -86,14 +85,12 @@ public final class PhoneLookupDataSource
    */
   private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
 
-  private CallLogDataSource.ContentObserverCallbacks dataSourceContentObserverCallbacks;
-
   @Inject
   PhoneLookupDataSource(
-      PhoneLookup<PhoneLookupInfo> phoneLookup,
+      CompositePhoneLookup compositePhoneLookup,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
-    this.phoneLookup = phoneLookup;
+    this.compositePhoneLookup = compositePhoneLookup;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
@@ -103,7 +100,8 @@ public final class PhoneLookupDataSource
     ListenableFuture<ImmutableSet<DialerPhoneNumber>> phoneNumbers =
         backgroundExecutorService.submit(
             () -> queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext));
-    return Futures.transformAsync(phoneNumbers, phoneLookup::isDirty, lightweightExecutorService);
+    return Futures.transformAsync(
+        phoneNumbers, compositePhoneLookup::isDirty, lightweightExecutorService);
   }
 
   /**
@@ -161,10 +159,13 @@ public final class PhoneLookupDataSource
                 queryPhoneLookupHistoryForNumbers(appContext, annotatedCallLogIdsByNumber.keySet()),
             backgroundExecutorService);
 
-    // Use the original info map to generate the updated info map by delegating to phoneLookup.
+    // Use the original info map to generate the updated info map by delegating to
+    // compositePhoneLookup.
     ListenableFuture<ImmutableMap<DialerPhoneNumber, PhoneLookupInfo>> updatedInfoMapFuture =
         Futures.transformAsync(
-            originalInfoMapFuture, phoneLookup::getMostRecentInfo, lightweightExecutorService);
+            originalInfoMapFuture,
+            compositePhoneLookup::getMostRecentInfo,
+            lightweightExecutorService);
 
     // This is the computation that will use the result of all of the above.
     Callable<ImmutableMap<Long, PhoneLookupInfo>> computeRowsToUpdate =
@@ -245,7 +246,7 @@ public final class PhoneLookupDataSource
     // the AnnotatedCallLog and PhoneLookupHistory have been successfully updated.
     return Futures.transformAsync(
         writePhoneLookupHistory,
-        unused -> phoneLookup.onSuccessfulBulkUpdate(),
+        unused -> compositePhoneLookup.onSuccessfulBulkUpdate(),
         lightweightExecutorService);
   }
 
@@ -289,17 +290,8 @@ public final class PhoneLookupDataSource
 
   @MainThread
   @Override
-  public void registerContentObservers(
-      Context appContext, CallLogDataSource.ContentObserverCallbacks contentObserverCallbacks) {
-    dataSourceContentObserverCallbacks = contentObserverCallbacks;
-    phoneLookup.registerContentObservers(appContext, this);
-  }
-
-  @MainThread
-  @Override
-  public void markDirtyAndNotify(Context appContext) {
-    Assert.isMainThread();
-    dataSourceContentObserverCallbacks.markDirtyAndNotify(appContext);
+  public void registerContentObservers(Context appContext) {
+    compositePhoneLookup.registerContentObservers(appContext);
   }
 
   private static ImmutableSet<DialerPhoneNumber>
@@ -573,23 +565,8 @@ public final class PhoneLookupDataSource
   }
 
   private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
-    PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
-        new PhoneLookupInfoConsolidator(phoneLookupInfo);
     contentValues.put(
         AnnotatedCallLog.NUMBER_ATTRIBUTES,
-        NumberAttributes.newBuilder()
-            .setName(phoneLookupInfoConsolidator.getName())
-            .setPhotoUri(phoneLookupInfoConsolidator.getPhotoUri())
-            .setPhotoId(phoneLookupInfoConsolidator.getPhotoId())
-            .setLookupUri(phoneLookupInfoConsolidator.getLookupUri())
-            .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
-            .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
-            .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
-            .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
-            .setIsSpam(phoneLookupInfoConsolidator.isSpam())
-            .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
-            .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isCp2LocalInfoIncomplete())
-            .build()
-            .toByteArray());
+        NumberAttributesConverter.fromPhoneLookupInfo(phoneLookupInfo).build().toByteArray());
   }
 }

@@ -196,7 +196,8 @@ public class ActivationTask extends BaseTask {
     VisualVoicemailProtocol protocol = helper.getProtocol();
 
     Bundle data;
-    if (messageData != null) {
+    boolean isCarrierInitiated = messageData != null;
+    if (isCarrierInitiated) {
       // The content of STATUS SMS is provided to launch this task, no need to request it
       // again.
       data = messageData;
@@ -237,7 +238,8 @@ public class ActivationTask extends BaseTask {
     } else {
       if (helper.supportsProvisioning()) {
         VvmLog.i(TAG, "Subscriber not ready, start provisioning");
-        helper.startProvisioning(this, phoneAccountHandle, status, message, data);
+        helper.startProvisioning(
+            this, phoneAccountHandle, status, message, data, isCarrierInitiated);
 
       } else if (message.getProvisioningStatus().equals(OmtpConstants.SUBSCRIBER_NEW)) {
         VvmLog.i(TAG, "Subscriber new but provisioning is not supported");

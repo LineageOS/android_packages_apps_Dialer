@@ -77,7 +77,8 @@ final class SimulatorVideoCall
     }
     String callerId = "+44 (0) 20 7031 3000"; // Google London office
     connectionTag =
-        SimulatorSimCallManager.addNewIncomingCall(context, callerId, true /* isVideo */);
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VIDEO);
   }
 
   private void addNewOutgoingCall() {
@@ -87,7 +88,8 @@ final class SimulatorVideoCall
     }
     String phoneNumber = "+44 (0) 20 7031 3000"; // Google London office
     connectionTag =
-        SimulatorSimCallManager.addNewOutgoingCall(context, phoneNumber, true /* isVideo */);
+        SimulatorSimCallManager.addNewOutgoingCall(
+            context, phoneNumber, SimulatorSimCallManager.CALL_TYPE_VIDEO);
   }
 
   @Override

@@ -686,15 +686,14 @@
   <!-- Content of voicemail donation promo dialog
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">
-    Let Google review your voicemail messages to improve transcription quality. Your
-    voicemail messages will not be tied to your Google Account.
+    Let Google review your voicemail messages to improve transcription quality.
+    For voicemail transcription analysis, your voicemail messages are stored anonymously.
   </string>
 
   <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
   <string name="voicemail_donation_promo_learn_more">Learn&#160;more</string>
 
-  <!-- TODO(mdooley): get real url -->
-  <string translatable="false" name="voicemail_donation_promo_learn_more_url">https:www.google.com</string>
+  <string translatable="false" name="voicemail_donation_promo_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
 
   <!-- Label for the voicemail donation promo dialog opt-in button
        [CHAR LIMIT=20] -->
