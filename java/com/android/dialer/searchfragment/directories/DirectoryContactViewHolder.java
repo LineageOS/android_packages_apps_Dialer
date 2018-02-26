@@ -79,6 +79,8 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
     nameView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
     numberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, secondaryInfo, context));
     workBadge.setVisibility(
+        // TODO(a bug): Consider moving DirectoryCompat out of "contacts/common" and share it
+        // with PhoneLookups.
         DirectoryCompat.isOnlyEnterpriseDirectoryId(cursor.getDirectoryId())
             ? View.VISIBLE
             : View.GONE);

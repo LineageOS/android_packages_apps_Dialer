@@ -96,7 +96,7 @@ public final class RealtimeRowProcessor {
    */
   @MainThread
   ListenableFuture<CoalescedRow> applyRealtimeProcessing(final CoalescedRow row) {
-    // Cp2LocalPhoneLookup can not always efficiently process all rows.
+    // Cp2DefaultDirectoryPhoneLookup can not always efficiently process all rows.
     if (!row.numberAttributes().getIsCp2InfoIncomplete()) {
       return Futures.immediateFuture(row);
     }
