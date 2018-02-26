@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.blocking;
+package com.android.dialer.blockreportspam;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,11 +26,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
+import com.android.dialer.blocking.FilteredNumberCompat;
 
-/** Helper class for creating block/report dialog fragments. */
-public class BlockReportSpamDialogs {
+/**
+ * Helper class for creating dialog fragments to block a number and/or report it as spam/not spam.
+ */
+public final class BlockReportSpamDialogs {
 
   public static final String BLOCK_REPORT_SPAM_DIALOG_TAG = "BlockReportSpamDialog";
   public static final String BLOCK_DIALOG_TAG = "BlockDialog";
@@ -42,14 +44,7 @@ public class BlockReportSpamDialogs {
       Activity activity, final DialogFragment fragment) {
     return new AlertDialog.Builder(activity, R.style.AlertDialogTheme)
         .setCancelable(true)
-        .setNegativeButton(
-            android.R.string.cancel,
-            new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                fragment.dismiss();
-              }
-            });
+        .setNegativeButton(android.R.string.cancel, (dialog, which) -> fragment.dismiss());
   }
 
   /**
@@ -58,12 +53,9 @@ public class BlockReportSpamDialogs {
    */
   private static DialogInterface.OnClickListener createGenericOnClickListener(
       final DialogFragment fragment, final OnConfirmListener listener) {
-    return new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
-        fragment.dismiss();
-        listener.onClick();
-      }
+    return (dialog, which) -> {
+      fragment.dismiss();
+      listener.onClick();
     };
   }
 
@@ -98,8 +90,8 @@ public class BlockReportSpamDialogs {
     void onClick();
   }
 
-  /** Contains the common attributes between all block/unblock/report dialog fragments. */
-  private static class CommonDialogsFragment extends DialogFragment {
+  /** Contains the common attributes between all block/unblock/report spam dialog fragments. */
+  private abstract static class CommonDialogsFragment extends DialogFragment {
 
     /** The number to display in the dialog title. */
     protected String displayNumber;
@@ -133,7 +125,7 @@ public class BlockReportSpamDialogs {
   public static class BlockReportSpamDialogFragment extends CommonDialogsFragment {
 
     /** Called when dialog positive button is pressed. */
-    private OnSpamDialogClickListener positiveListener;
+    private OnSpamDialogClickListener onSpamDialogClickListener;
 
     /** Whether the mark as spam checkbox is checked before displaying the dialog. */
     private boolean spamChecked;
@@ -141,12 +133,12 @@ public class BlockReportSpamDialogs {
     public static DialogFragment newInstance(
         String displayNumber,
         boolean spamChecked,
-        OnSpamDialogClickListener positiveListener,
+        OnSpamDialogClickListener onSpamDialogClickListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
       BlockReportSpamDialogFragment fragment = new BlockReportSpamDialogFragment();
       fragment.spamChecked = spamChecked;
       fragment.displayNumber = displayNumber;
-      fragment.positiveListener = positiveListener;
+      fragment.onSpamDialogClickListener = onSpamDialogClickListener;
       fragment.dismissListener = dismissListener;
       return fragment;
     }
@@ -159,34 +151,25 @@ public class BlockReportSpamDialogs {
           (CheckBox) dialogView.findViewById(R.id.report_number_as_spam_action);
       // Listen for changes on the checkbox and update if orientation changes
       isSpamCheckbox.setChecked(spamChecked);
-      isSpamCheckbox.setOnCheckedChangeListener(
-          new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-              spamChecked = isChecked;
-            }
-          });
+      isSpamCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> spamChecked = isChecked);
 
       TextView details = (TextView) dialogView.findViewById(R.id.block_details);
       details.setText(getBlockMessage(getContext()));
 
       AlertDialog.Builder alertDialogBuilder = createDialogBuilder(getActivity(), this);
-      Dialog dialog =
+      Dialog blockReportSpamDialog =
           alertDialogBuilder
               .setView(dialogView)
               .setTitle(getString(R.string.block_report_number_alert_title, displayNumber))
               .setPositiveButton(
                   R.string.block_number_ok,
-                  new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                      dismiss();
-                      positiveListener.onClick(isSpamCheckbox.isChecked());
-                    }
+                  (dialog, which) -> {
+                    dismiss();
+                    onSpamDialogClickListener.onClick(isSpamCheckbox.isChecked());
                   })
               .create();
-      dialog.setCanceledOnTouchOutside(true);
-      return dialog;
+      blockReportSpamDialog.setCanceledOnTouchOutside(true);
+      return blockReportSpamDialog;
     }
   }
 

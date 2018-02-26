@@ -75,7 +75,9 @@ final class Modules {
       SharedModules.addModulesHandlingBlockedOrSpamNumber(
           context,
           modules,
-          normalizedNumber,
+          row.number().getNormalizedNumber(),
+          row.number().getCountryIso(),
+          row.callType(),
           row.numberAttributes().getIsBlocked(),
           row.numberAttributes().getIsSpam());
       SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);

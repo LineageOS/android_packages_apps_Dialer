@@ -56,7 +56,9 @@ final class Modules {
     SharedModules.addModulesHandlingBlockedOrSpamNumber(
         context,
         modules,
-        normalizedNumber,
+        voicemailEntry.number().getNormalizedNumber(),
+        voicemailEntry.number().getCountryIso(),
+        voicemailEntry.callType(),
         voicemailEntry.numberAttributes().getIsBlocked(),
         voicemailEntry.numberAttributes().getIsSpam());
 
