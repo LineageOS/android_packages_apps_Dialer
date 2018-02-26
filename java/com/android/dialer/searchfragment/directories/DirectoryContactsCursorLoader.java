@@ -71,7 +71,8 @@ public final class DirectoryContactsCursorLoader extends CursorLoader {
     for (int i = 0; i < directories.size(); i++) {
       Directory directory = directories.get(i);
 
-      // Only load contacts in the enterprise directory & remote directories.
+      // TODO(a bug): Consider moving DirectoryCompat out of "contacts/common" and share it
+      // with PhoneLookups.
       if (!DirectoryCompat.isRemoteDirectoryId(directory.getId())
           && !DirectoryCompat.isEnterpriseDirectoryId(directory.getId())) {
         cursors[i] = null;

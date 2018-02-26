@@ -42,15 +42,20 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
-/** PhoneLookup implementation for remote contacts. */
-public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
+/**
+ * PhoneLookup implementation for contacts in both local and remote directories other than the
+ * default directory.
+ *
+ * <p>Contacts in these directories are accessible only by specifying a directory ID.
+ */
+public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
 
   @Inject
-  Cp2RemotePhoneLookup(
+  Cp2ExtendedDirectoryPhoneLookup(
       @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
@@ -62,15 +67,15 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
   @Override
   public ListenableFuture<Cp2Info> lookup(DialerPhoneNumber dialerPhoneNumber) {
     return Futures.transformAsync(
-        queryCp2ForRemoteDirectoryIds(),
-        remoteDirectoryIds -> queryCp2ForRemoteContact(dialerPhoneNumber, remoteDirectoryIds),
+        queryCp2ForExtendedDirectoryIds(),
+        directoryIds -> queryCp2ForDirectoryContact(dialerPhoneNumber, directoryIds),
         lightweightExecutorService);
   }
 
-  private ListenableFuture<List<Long>> queryCp2ForRemoteDirectoryIds() {
+  private ListenableFuture<List<Long>> queryCp2ForExtendedDirectoryIds() {
     return backgroundExecutorService.submit(
         () -> {
-          List<Long> remoteDirectoryIds = new ArrayList<>();
+          List<Long> directoryIds = new ArrayList<>();
           try (Cursor cursor =
               appContext
                   .getContentResolver()
@@ -81,34 +86,34 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
                       /* selectionArgs = */ null,
                       /* sortOrder = */ ContactsContract.Directory._ID)) {
             if (cursor == null) {
-              LogUtil.e("Cp2RemotePhoneLookup.queryCp2ForDirectoryIds", "null cursor");
-              return remoteDirectoryIds;
+              LogUtil.e(
+                  "Cp2ExtendedDirectoryPhoneLookup.queryCp2ForExtendedDirectoryIds", "null cursor");
+              return directoryIds;
             }
 
             if (!cursor.moveToFirst()) {
-              LogUtil.i("Cp2RemotePhoneLookup.queryCp2ForDirectoryIds", "empty cursor");
-              return remoteDirectoryIds;
+              LogUtil.i(
+                  "Cp2ExtendedDirectoryPhoneLookup.queryCp2ForExtendedDirectoryIds",
+                  "empty cursor");
+              return directoryIds;
             }
 
             int idColumnIndex = cursor.getColumnIndexOrThrow(ContactsContract.Directory._ID);
             do {
               long directoryId = cursor.getLong(idColumnIndex);
 
-              // Note that IDs of non-remote directories will be included in the result, such as
-              // android.provider.ContactsContract.Directory.DEFAULT (the default directory that
-              // represents locally stored contacts).
-              if (isRemoteDirectory(directoryId)) {
-                remoteDirectoryIds.add(cursor.getLong(idColumnIndex));
+              if (isExtendedDirectory(directoryId)) {
+                directoryIds.add(cursor.getLong(idColumnIndex));
               }
             } while (cursor.moveToNext());
-            return remoteDirectoryIds;
+            return directoryIds;
           }
         });
   }
 
-  private ListenableFuture<Cp2Info> queryCp2ForRemoteContact(
-      DialerPhoneNumber dialerPhoneNumber, List<Long> remoteDirectoryIds) {
-    if (remoteDirectoryIds.isEmpty()) {
+  private ListenableFuture<Cp2Info> queryCp2ForDirectoryContact(
+      DialerPhoneNumber dialerPhoneNumber, List<Long> directoryIds) {
+    if (directoryIds.isEmpty()) {
       return Futures.immediateFuture(Cp2Info.getDefaultInstance());
     }
 
@@ -116,8 +121,8 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
     String number = dialerPhoneNumber.getNormalizedNumber();
 
     List<ListenableFuture<Cp2Info>> cp2InfoFutures = new ArrayList<>();
-    for (long remoteDirectoryId : remoteDirectoryIds) {
-      cp2InfoFutures.add(queryCp2ForRemoteContact(number, remoteDirectoryId));
+    for (long directoryId : directoryIds) {
+      cp2InfoFutures.add(queryCp2ForDirectoryContact(number, directoryId));
     }
 
     return Futures.transform(
@@ -132,8 +137,7 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
         lightweightExecutorService);
   }
 
-  private ListenableFuture<Cp2Info> queryCp2ForRemoteContact(
-      String number, long remoteDirectoryId) {
+  private ListenableFuture<Cp2Info> queryCp2ForDirectoryContact(String number, long directoryId) {
     return backgroundExecutorService.submit(
         () -> {
           Cp2Info.Builder cp2InfoBuilder = Cp2Info.newBuilder();
@@ -141,24 +145,24 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
               appContext
                   .getContentResolver()
                   .query(
-                      getContentUriForContacts(number, remoteDirectoryId),
+                      getContentUriForContacts(number, directoryId),
                       Cp2Projections.getProjectionForPhoneLookupTable(),
                       /* selection = */ null,
                       /* selectionArgs = */ null,
                       /* sortOrder = */ null)) {
             if (cursor == null) {
               LogUtil.e(
-                  "Cp2RemotePhoneLookup.queryCp2ForRemoteContact",
+                  "Cp2ExtendedDirectoryPhoneLookup.queryCp2ForDirectoryContact",
                   "null cursor returned when querying directory %d",
-                  remoteDirectoryId);
+                  directoryId);
               return cp2InfoBuilder.build();
             }
 
             if (!cursor.moveToFirst()) {
               LogUtil.i(
-                  "Cp2RemotePhoneLookup.queryCp2ForRemoteContact",
+                  "Cp2ExtendedDirectoryPhoneLookup.queryCp2ForDirectoryContact",
                   "empty cursor returned when querying directory %d",
-                  remoteDirectoryId);
+                  directoryId);
               return cp2InfoBuilder.build();
             }
 
@@ -199,14 +203,13 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
     return builder.build();
   }
 
-  private static boolean isRemoteDirectory(long directoryId) {
+  private static boolean isExtendedDirectory(long directoryId) {
+    // TODO(a bug): Moving the logic to utility shared with the search fragment.
     return VERSION.SDK_INT >= VERSION_CODES.N
         ? Directory.isRemoteDirectoryId(directoryId)
+            || Directory.isEnterpriseDirectoryId(directoryId)
         : (directoryId != Directory.DEFAULT
             && directoryId != Directory.LOCAL_INVISIBLE
-            // Directory.ENTERPRISE_DEFAULT is the default work profile directory for locally stored
-            // contacts
-            && directoryId != Directory.ENTERPRISE_DEFAULT
             && directoryId != Directory.ENTERPRISE_LOCAL_INVISIBLE);
   }
 
@@ -223,12 +226,12 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
 
   @Override
   public void setSubMessage(PhoneLookupInfo.Builder destination, Cp2Info subMessage) {
-    destination.setCp2RemoteInfo(subMessage);
+    destination.setExtendedCp2Info(subMessage);
   }
 
   @Override
   public Cp2Info getSubMessage(PhoneLookupInfo phoneLookupInfo) {
-    return phoneLookupInfo.getCp2RemoteInfo();
+    return phoneLookupInfo.getExtendedCp2Info();
   }
 
   @Override
@@ -238,6 +241,8 @@ public final class Cp2RemotePhoneLookup implements PhoneLookup<Cp2Info> {
 
   @Override
   public void registerContentObservers(Context appContext) {
-    // No content observer needed for remote contacts
+    // For contacts in remote directories, no content observer can be registered.
+    // For contacts in local (but not default) directories (e.g., the local work directory), we
+    // don't register a content observer for now.
   }
 }
