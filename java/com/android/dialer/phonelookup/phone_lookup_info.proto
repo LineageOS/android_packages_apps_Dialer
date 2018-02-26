@@ -10,59 +10,58 @@ package com.android.dialer.phonelookup;
 // Contains information about a phone number, possibly from many sources.
 //
 // This message is organized into sub-message fields where each one corresponds
-// to an implementation of PhoneLookup. For example, field "cp2_local_info"
-// corresponds to class Cp2LocalPhoneLookup, and class Cp2LocalPhoneLookup
-// alone is responsible for populating it.
-// Next ID: 7
+// to an implementation of PhoneLookup. For example, field
+// "cp2_info_in_default_directory" corresponds to class
+// Cp2DefaultDirectoryPhoneLookup, and class Cp2DefaultDirectoryPhoneLookup
+// alone is responsible for populating it. Next ID: 7
 message PhoneLookupInfo {
   // Information about a PhoneNumber retrieved from CP2.
   message Cp2Info {
-    // Information about a single contact, which can be a local contact or a
-    // remote one.
+    // Information about a single contact.
     // Next ID: 8
     message Cp2ContactInfo {
-      // For a local contact:
+      // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY
-      // For a remote contact:
+      // For a contact in other directories:
       //   android.provider.ContactsContract.PhoneLookup.DISPLAY_NAME_PRIMARY
       optional string name = 1;
 
-      // For a local contact:
+      // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI
-      // For a remote contact:
+      // For a contact in other directories:
       //   android.provider.ContactsContract.PhoneLookup.PHOTO_THUMBNAIL_URI
       optional string photo_thumbnail_uri = 2;
 
-      // For a local contact:
+      // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.PHOTO_URI
-      // For a remote contact:
+      // For a contact in other directories:
       //   android.provider.ContactsContract.PhoneLookup.PHOTO_URI
       optional string photo_uri = 3;
 
-      // For a local contact:
+      // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.PHOTO_ID
-      // For a remote contact:
+      // For a contact in other directories:
       //   android.provider.ContactsContract.PhoneLookup.PHOTO_ID
       optional fixed64 photo_id = 4;
 
-      // For a local contact:
+      // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.LABEL
-      // For a remote contact:
+      // For a contact in other directories:
       //   android.provider.ContactsContract.PhoneLookup.LABEL
       //
       // The value can be "Home", "Mobile", ect.
       optional string label = 5;
 
-      // For a local contact:
+      // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-      // For a remote contact:
+      // For a contact in other directories:
       //   android.provider.ContactsContract.PhoneLookup.CONTACT_ID
       optional fixed64 contact_id = 6;
 
-      // For a local contact:
+      // For a contact in the default directory:
       //   constructed based on
       //   android.provider.ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY
-      // For a remote contact:
+      // For a contact in other directories:
       //   constructed based on
       //   android.provider.ContactsContract.PhoneLookup.LOOKUP_KEY
       optional string lookup_uri = 7;
@@ -80,13 +79,13 @@ message PhoneLookupInfo {
     optional bool is_incomplete = 2;
   }
 
-  // Information about a local contact retrieved via CP2.
-  // Cp2LocalPhoneLookup is responsible for populating this field.
-  optional Cp2Info cp2_local_info = 1;
+  // Information about a contact in the default directory, retrieved via CP2.
+  // Cp2DefaultDirectoryPhoneLookup is responsible for populating this field.
+  optional Cp2Info default_cp2_info = 1;
 
-  // Information about a remote contact retrieved via CP2.
-  // Cp2RemotePhoneLookup is responsible for populating this field.
-  optional Cp2Info cp2_remote_info = 6;
+  // Information about a contact in other directories, retrieved via CP2.
+  // Cp2ExtendedDirectoryPhoneLookup is responsible for populating this field.
+  optional Cp2Info extended_cp2_info = 6;
 
   // Message for spam info.
   // SpamPhoneLookup is responsible for populating this message.

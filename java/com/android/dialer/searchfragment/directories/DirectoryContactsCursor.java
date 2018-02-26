@@ -101,6 +101,8 @@ public final class DirectoryContactsCursor extends MergeCursor implements Search
 
   private static MatrixCursor createHeaderCursor(Context context, String name, long id) {
     MatrixCursor headerCursor = new MatrixCursor(PROJECTION, 1);
+    // TODO(a bug): Consider moving DirectoryCompat out of "contacts/common" and share it
+    // with PhoneLookups.
     if (DirectoryCompat.isOnlyEnterpriseDirectoryId(id)) {
       headerCursor.addRow(
           new Object[] {context.getString(R.string.directory_search_label_work), id});
