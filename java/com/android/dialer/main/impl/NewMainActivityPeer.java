@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
+import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogReceiver;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
@@ -37,9 +39,12 @@ import com.google.common.util.concurrent.MoreExecutors;
 public class NewMainActivityPeer implements MainActivityPeer {
 
   private final MainActivity mainActivity;
+  private final ShowBlockReportSpamDialogReceiver showBlockReportSpamDialogReceiver;
 
   public NewMainActivityPeer(MainActivity mainActivity) {
     this.mainActivity = mainActivity;
+    this.showBlockReportSpamDialogReceiver =
+        new ShowBlockReportSpamDialogReceiver(mainActivity.getFragmentManager());
   }
 
   @Override
@@ -54,10 +59,20 @@ public class NewMainActivityPeer implements MainActivityPeer {
   }
 
   @Override
-  public void onActivityResume() {}
+  public void onActivityResume() {
+    LocalBroadcastManager.getInstance(mainActivity)
+        .registerReceiver(
+            showBlockReportSpamDialogReceiver, ShowBlockReportSpamDialogReceiver.getIntentFilter());
+  }
 
   @Override
   public void onUserLeaveHint() {}
+
+  @Override
+  public void onActivityPause() {
+    LocalBroadcastManager.getInstance(mainActivity)
+        .unregisterReceiver(showBlockReportSpamDialogReceiver);
+  }
 
   @Override
   public void onActivityStop() {}
