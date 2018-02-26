@@ -398,6 +398,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   @Override
+  public void onActivityPause() {}
+
+  @Override
   public void onActivityStop() {
     lastTabController.onActivityStop();
     callLogFragmentListener.onActivityStop(

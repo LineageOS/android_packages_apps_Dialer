@@ -15,7 +15,7 @@
 -->
 <resources>
 
-  <!-- Note, this is also used by InCallUi. -->
-  <color name="blocked_contact_background">#A52714</color>
+  <!-- 87% black -->
+  <color name="block_report_spam_primary_text_color">#de000000</color>
 
 </resources>

@@ -24,6 +24,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogNotifier;
 import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.UriUtils;
@@ -38,7 +39,7 @@ public class SharedModules {
   public static void maybeAddModuleForAddingToContacts(
       Context context,
       List<ContactActionModule> modules,
-      DialerPhoneNumber number,
+      DialerPhoneNumber dialerPhoneNumber,
       String name,
       String lookupUri,
       boolean isBlocked,
@@ -54,7 +55,7 @@ public class SharedModules {
     }
 
     // Skip showing the menu item if there is no number.
-    String normalizedNumber = number.getNormalizedNumber();
+    String normalizedNumber = dialerPhoneNumber.getNormalizedNumber();
     if (TextUtils.isEmpty(normalizedNumber)) {
       return;
     }
@@ -111,17 +112,26 @@ public class SharedModules {
     }
   }
 
+  /**
+   * Add modules related to blocking/unblocking a number and/or reporting it as spam/not spam.
+   *
+   * @param normalizedNumber The number to be blocked / unblocked / marked as spam/not spam
+   * @param countryIso The ISO 3166-1 two letters country code for the number
+   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
+   */
   public static void addModulesHandlingBlockedOrSpamNumber(
       Context context,
       List<ContactActionModule> modules,
       String normalizedNumber,
+      String countryIso,
+      int callType,
       boolean isBlocked,
       boolean isSpam) {
     // For a spam number, add two options:
     // (1) "Not spam" and "Block", or
     // (2) "Not spam" and "Unblock".
     if (isSpam) {
-      addModuleForMarkingNumberAsNonSpam(context, modules, normalizedNumber);
+      addModuleForMarkingNumberAsNonSpam(context, modules, normalizedNumber, countryIso, callType);
       addModuleForBlockingOrUnblockingNumber(context, modules, normalizedNumber, isBlocked);
       return;
     }
@@ -133,11 +143,23 @@ public class SharedModules {
     }
 
     // For a number that is neither a spam number nor blocked, add "Block/Report spam" option.
-    addModuleForBlockingNumberAndOptionallyReportingSpam(context, modules, normalizedNumber);
+    addModuleForBlockingNumberAndOptionallyReportingSpam(
+        context, modules, normalizedNumber, countryIso, callType);
   }
 
+  /**
+   * Add "Not spam" module.
+   *
+   * @param normalizedNumber The number to be marked as not spam
+   * @param countryIso The ISO 3166-1 two letters country code for the number
+   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
+   */
   private static void addModuleForMarkingNumberAsNonSpam(
-      Context context, List<ContactActionModule> modules, String normalizedNumber) {
+      Context context,
+      List<ContactActionModule> modules,
+      String normalizedNumber,
+      String countryIso,
+      int callType) {
     modules.add(
         new ContactActionModule() {
           @Override
@@ -152,12 +174,8 @@ public class SharedModules {
 
           @Override
           public boolean onClick() {
-            // TODO(a bug): implement this method.
-            Toast.makeText(
-                    context,
-                    String.format(Locale.ENGLISH, "TODO: Report %s as non-spam", normalizedNumber),
-                    Toast.LENGTH_SHORT)
-                .show();
+            ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam(
+                context, normalizedNumber, countryIso, callType);
             return true; // Close the bottom sheet.
           }
         });
@@ -198,8 +216,19 @@ public class SharedModules {
         });
   }
 
+  /**
+   * Add "Block/Report spam" module
+   *
+   * @param normalizedNumber The number to be blocked / unblocked / marked as spam/not spam
+   * @param countryIso The ISO 3166-1 two letters country code for the number
+   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
+   */
   private static void addModuleForBlockingNumberAndOptionallyReportingSpam(
-      Context context, List<ContactActionModule> modules, String normalizedNumber) {
+      Context context,
+      List<ContactActionModule> modules,
+      String normalizedNumber,
+      String countryIso,
+      int callType) {
     modules.add(
         new ContactActionModule() {
           @Override
@@ -214,15 +243,8 @@ public class SharedModules {
 
           @Override
           public boolean onClick() {
-            // TODO(a bug): implement this method.
-            Toast.makeText(
-                    context,
-                    String.format(
-                        Locale.ENGLISH,
-                        "TODO: Block and optionally report as spam %s.",
-                        normalizedNumber),
-                    Toast.LENGTH_SHORT)
-                .show();
+            ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam(
+                context, normalizedNumber, countryIso, callType);
             return true; // Close the bottom sheet.
           }
         });

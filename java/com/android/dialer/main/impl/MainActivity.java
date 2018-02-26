@@ -99,6 +99,12 @@ public class MainActivity extends TransactionSafeActivity
   }
 
   @Override
+  protected void onPause() {
+    super.onPause();
+    activePeer.onActivityPause();
+  }
+
+  @Override
   protected void onStop() {
     super.onStop();
     activePeer.onActivityStop();
