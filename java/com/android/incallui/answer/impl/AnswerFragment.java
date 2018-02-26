@@ -858,7 +858,7 @@ public class AnswerFragment extends Fragment
   public void onAnswerProgressUpdate(@FloatRange(from = -1f, to = 1f) float answerProgress) {
     // Don't fade the window background for call waiting or video upgrades. Fading the background
     // shows the system wallpaper which looks bad because on reject we switch to another call.
-    if (primaryCallState.state == State.INCOMING && !isVideoCall()) {
+    if (primaryCallState.state() == State.INCOMING && !isVideoCall()) {
       answerScreenDelegate.updateWindowBackgroundColor(answerProgress);
     }
 
@@ -969,7 +969,7 @@ public class AnswerFragment extends Fragment
         if (hasCallOnHold()) {
           getAnswerMethod()
               .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_third));
-        } else if (primaryCallState.supportsCallOnHold) {
+        } else if (primaryCallState.supportsCallOnHold()) {
           getAnswerMethod()
               .setHintText(getText(R.string.call_incoming_default_label_answer_and_release_second));
         }
@@ -1048,9 +1048,9 @@ public class AnswerFragment extends Fragment
 
   private boolean canRejectCallWithSms() {
     return primaryCallState != null
-        && !(primaryCallState.state == State.DISCONNECTED
-            || primaryCallState.state == State.DISCONNECTING
-            || primaryCallState.state == State.IDLE);
+        && !(primaryCallState.state() == State.DISCONNECTED
+            || primaryCallState.state() == State.DISCONNECTING
+            || primaryCallState.state() == State.IDLE);
   }
 
   private void createInCallScreenDelegate() {

@@ -352,7 +352,7 @@ public class CallCardPresenter
       callState = this.primary.getState();
       updatePrimaryCallState();
     } else {
-      getUi().setCallState(PrimaryCallState.createEmptyPrimaryCallState());
+      getUi().setCallState(PrimaryCallState.empty());
     }
 
     maybeShowManageConferenceCallButton();
@@ -472,34 +472,39 @@ public class CallCardPresenter
           !VideoCallPresenter.showIncomingVideo(primary.getVideoState(), primary.getState());
       getUi()
           .setCallState(
-              new PrimaryCallState(
-                  primary.getState(),
-                  primary.isVideoCall(),
-                  primary.getVideoTech().getSessionModificationState(),
-                  primary.getDisconnectCause(),
-                  getConnectionLabel(),
-                  getCallStateIcon(),
-                  getGatewayNumber(),
-                  shouldShowCallSubject(primary) ? primary.getCallSubject() : null,
-                  PhoneNumberHelper.formatNumber(
-                      primary.getCallbackNumber(), primary.getSimCountryIso()),
-                  primary.hasProperty(Details.PROPERTY_WIFI),
-                  primary.isConferenceCall()
-                      && !primary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE),
-                  isWorkCall,
-                  isAttemptingHdAudioCall,
-                  isHdAudioCall,
-                  !TextUtils.isEmpty(primary.getLastForwardedNumber()) || primary.isCallForwarded(),
-                  shouldShowContactPhoto,
-                  primary.getConnectTimeMillis(),
-                  primary.isVoiceMailNumber(),
-                  primary.isRemotelyHeld(),
-                  isBusiness,
-                  supports2ndCallOnHold(),
-                  getSwapToSecondaryButtonState(),
-                  primary.isAssistedDialed(),
-                  null,
-                  primary.getAssistedDialingExtras()));
+              PrimaryCallState.builder()
+                  .setState(primary.getState())
+                  .setIsVideoCall(primary.isVideoCall())
+                  .setSessionModificationState(primary.getVideoTech().getSessionModificationState())
+                  .setDisconnectCause(primary.getDisconnectCause())
+                  .setConnectionLabel(getConnectionLabel())
+                  .setConnectionIcon(getCallStateIcon())
+                  .setGatewayNumber(getGatewayNumber())
+                  .setCallSubject(shouldShowCallSubject(primary) ? primary.getCallSubject() : null)
+                  .setCallbackNumber(
+                      PhoneNumberHelper.formatNumber(
+                          primary.getCallbackNumber(), primary.getSimCountryIso()))
+                  .setIsWifi(primary.hasProperty(Details.PROPERTY_WIFI))
+                  .setIsConference(
+                      primary.isConferenceCall()
+                          && !primary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE))
+                  .setIsWorkCall(isWorkCall)
+                  .setIsHdAttempting(isAttemptingHdAudioCall)
+                  .setIsHdAudioCall(isHdAudioCall)
+                  .setIsForwardedNumber(
+                      !TextUtils.isEmpty(primary.getLastForwardedNumber())
+                          || primary.isCallForwarded())
+                  .setShouldShowContactPhoto(shouldShowContactPhoto)
+                  .setConnectTimeMillis(primary.getConnectTimeMillis())
+                  .setIsVoiceMailNumber(primary.isVoiceMailNumber())
+                  .setIsRemotelyHeld(primary.isRemotelyHeld())
+                  .setIsBusinessNumber(isBusiness)
+                  .setSupportsCallOnHold(supports2ndCallOnHold())
+                  .setSwapToSecondaryButtonState(getSwapToSecondaryButtonState())
+                  .setIsAssistedDialed(primary.isAssistedDialed())
+                  .setCustomLabel(null)
+                  .setAssistedDialingExtras(primary.getAssistedDialingExtras())
+                  .build());
 
       InCallActivity activity =
           (InCallActivity) (inCallScreen.getInCallScreenFragment().getActivity());
