@@ -20,6 +20,7 @@ import android.content.Context;
 import com.android.dialer.contactactions.ContactActionModule;
 import com.android.dialer.contactactions.DividerModule;
 import com.android.dialer.contactactions.SharedModules;
+import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,8 @@ final class Modules {
         voicemailEntry.number().getCountryIso(),
         voicemailEntry.callType(),
         voicemailEntry.numberAttributes().getIsBlocked(),
-        voicemailEntry.numberAttributes().getIsSpam());
+        voicemailEntry.numberAttributes().getIsSpam(),
+        ReportingLocation.Type.VOICEMAIL_HISTORY);
 
     // TODO(zachh): Module for CallComposer.
     SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
