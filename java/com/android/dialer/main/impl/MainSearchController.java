@@ -32,6 +32,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Toast;
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
+import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
@@ -402,6 +403,9 @@ public class MainSearchController implements SearchBarListener {
       ClearFrequentsDialog.show(mainActivity.getFragmentManager());
       Logger.get(mainActivity).logScreenView(ScreenEvent.Type.CLEAR_FREQUENTS, mainActivity);
       return true;
+    } else if (menuItem.getItemId() == R.id.menu_call_history) {
+      final Intent intent = new Intent(mainActivity, CallLogActivity.class);
+      mainActivity.startActivity(intent);
     }
     return false;
   }

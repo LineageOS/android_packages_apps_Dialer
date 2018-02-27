@@ -18,12 +18,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
+      android:id="@+id/menu_call_history"
+      android:title="@string/main_menu_call_history"
+      app:showAsAction="collapseActionView"/>
+
+  <item
       android:id="@+id/clear_frequents"
       android:title="@string/main_menu_clear_frequents"
       app:showAsAction="collapseActionView"
       android:visible="false"/>
-
-  <!-- TODO(calderwoodra): add clear call log -->
 
   <item
       android:id="@+id/settings"
@@ -31,8 +34,8 @@
       app:showAsAction="collapseActionView"/>
 
   <item
-      android:id="@+id/menu_simulator_submenu"
-      android:title="@string/nui_simulator_submenu_label"
-      app:showAsAction="collapseActionView"
-      android:visible="false"/>
+    android:id="@+id/menu_simulator_submenu"
+    android:title="@string/nui_simulator_submenu_label"
+    app:showAsAction="collapseActionView"
+    android:visible="false"/>
 </menu>

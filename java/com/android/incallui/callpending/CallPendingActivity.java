@@ -147,8 +147,10 @@ public class CallPendingActivity extends FragmentActivity
         (InCallScreen) getSupportFragmentManager().findFragmentByTag(TAG_IN_CALL_SCREEN);
     inCallScreen.setPrimary(createPrimaryInfo());
     inCallScreen.setCallState(
-        PrimaryCallState.createEmptyPrimaryCallStateWithState(
-            State.CALL_PENDING, getCallPendingLabel()));
+        PrimaryCallState.builder()
+            .setState(State.CALL_PENDING)
+            .setCustomLabel(getCallPendingLabel())
+            .build());
     inCallScreen.setEndCallButtonEnabled(true, true);
   }
 

@@ -321,11 +321,12 @@ public class InCallFragment extends Fragment
     LogUtil.i("InCallFragment.setCallState", primaryCallState.toString());
     contactGridManager.setCallState(primaryCallState);
     getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
-        .setAllowed(primaryCallState.swapToSecondaryButtonState != ButtonState.NOT_SUPPORT);
+        .setAllowed(primaryCallState.swapToSecondaryButtonState() != ButtonState.NOT_SUPPORT);
     getButtonController(InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY)
-        .setEnabled(primaryCallState.swapToSecondaryButtonState == ButtonState.ENABLED);
+        .setEnabled(primaryCallState.swapToSecondaryButtonState() == ButtonState.ENABLED);
     buttonChooser =
-        ButtonChooserFactory.newButtonChooser(voiceNetworkType, primaryCallState.isWifi, phoneType);
+        ButtonChooserFactory.newButtonChooser(
+            voiceNetworkType, primaryCallState.isWifi(), phoneType);
     updateButtonStates();
   }
 
