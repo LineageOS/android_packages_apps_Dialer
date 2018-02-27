@@ -158,6 +158,11 @@ public class ContactsFragment extends Fragment
     contactsPrefs.registerChangeListener(this);
     header = getArguments().getInt(EXTRA_HEADER);
     hasPhoneNumbers = getArguments().getBoolean(EXTRA_HAS_PHONE_NUMBERS);
+    if (savedInstanceState == null) {
+      // The onHiddenChanged callback does not get called the first time the fragment is
+      // attached, so call it ourselves here.
+      onHiddenChanged(false);
+    }
   }
 
   @Override
@@ -354,6 +359,16 @@ public class ContactsFragment extends Fragment
     }
   }
 
+  @Override
+  public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    OnContactsFragmentHiddenChangedListener listener =
+        FragmentUtils.getParent(this, OnContactsFragmentHiddenChangedListener.class);
+    if (listener != null) {
+      listener.onContactsFragmentHiddenChanged(hidden);
+    }
+  }
+
   private void loadContacts() {
     getLoaderManager().initLoader(0, null, this);
     recyclerView.setVisibility(View.VISIBLE);
@@ -370,5 +385,10 @@ public class ContactsFragment extends Fragment
 
     /** Called when a contact is selected in {@link ContactsFragment}. */
     void onContactSelected(ImageView photo, Uri contactUri, long contactId);
+  }
+
+  /** Listener for contacts fragment hidden state */
+  public interface OnContactsFragmentHiddenChangedListener {
+    void onContactsFragmentHiddenChanged(boolean hidden);
   }
 }
