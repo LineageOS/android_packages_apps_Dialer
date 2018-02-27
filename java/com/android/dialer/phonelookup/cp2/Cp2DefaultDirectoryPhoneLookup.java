@@ -58,11 +58,11 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
-/** PhoneLookup implementation for local contacts. */
-public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
+/** PhoneLookup implementation for contacts in the default directory. */
+public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private static final String PREF_LAST_TIMESTAMP_PROCESSED =
-      "cp2LocalPhoneLookupLastTimestampProcessed";
+      "cp2DefaultDirectoryPhoneLookupLastTimestampProcessed";
 
   // We cannot efficiently process invalid numbers because batch queries cannot be constructed which
   // accomplish the necessary loose matching. We'll attempt to process a limited number of them,
@@ -77,7 +77,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
   @Nullable private Long currentLastTimestampProcessed;
 
   @Inject
-  Cp2LocalPhoneLookup(
+  Cp2DefaultDirectoryPhoneLookup(
       @ApplicationContext Context appContext,
       @Unencrypted SharedPreferences sharedPreferences,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
@@ -121,7 +121,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                 Iterables.getOnlyElement(partitionedNumbers.invalidNumbers()));
       }
       if (cursor == null) {
-        LogUtil.w("Cp2LocalPhoneLookup.lookupInternal", "null cursor");
+        LogUtil.w("Cp2DefaultDirectoryPhoneLookup.lookupInternal", "null cursor");
         return Cp2Info.getDefaultInstance();
       }
       while (cursor.moveToNext()) {
@@ -144,7 +144,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
       // check, simply return true. The expectation is that this should rarely be the case as the
       // vast majority of numbers in call logs should be valid.
       LogUtil.v(
-          "Cp2LocalPhoneLookup.isDirty",
+          "Cp2DefaultDirectoryPhoneLookup.isDirty",
           "returning true because too many invalid numbers (%d)",
           partitionedNumbers.invalidNumbers().size());
       return Futures.immediateFuture(true);
@@ -164,7 +164,8 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
               anyContactsDeleted -> {
                 if (anyContactsDeleted) {
                   LogUtil.v(
-                      "Cp2LocalPhoneLookup.isDirty", "returning true because contacts deleted");
+                      "Cp2DefaultDirectoryPhoneLookup.isDirty",
+                      "returning true because contacts deleted");
                   return Futures.immediateFuture(true);
                 }
                 // Hopefully the most common case is there are no contacts updated; we can detect
@@ -176,7 +177,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                     noContactsModifiedSince -> {
                       if (noContactsModifiedSince) {
                         LogUtil.v(
-                            "Cp2LocalPhoneLookup.isDirty",
+                            "Cp2DefaultDirectoryPhoneLookup.isDirty",
                             "returning false because no contacts modified since last run");
                         return Futures.immediateFuture(false);
                       }
@@ -194,7 +195,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                           contactsUpdated -> {
                             if (contactsUpdated) {
                               LogUtil.v(
-                                  "Cp2LocalPhoneLookup.isDirty",
+                                  "Cp2DefaultDirectoryPhoneLookup.isDirty",
                                   "returning true because a previously called contact was updated");
                               return Futures.immediateFuture(true);
                             }
@@ -267,7 +268,9 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                       null)) {
 
             if (cursor == null) {
-              LogUtil.w("Cp2LocalPhoneLookup.queryPhoneLookupHistoryForContactIds", "null cursor");
+              LogUtil.w(
+                  "Cp2DefaultDirectoryPhoneLookup.queryPhoneLookupHistoryForContactIds",
+                  "null cursor");
               return contactIds;
             }
 
@@ -283,7 +286,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                   throw new IllegalStateException(e);
                 }
                 for (Cp2ContactInfo info :
-                    phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfoList()) {
+                    phoneLookupInfo.getDefaultCp2Info().getCp2ContactInfoList()) {
                   contactIds.add(info.getContactId());
                 }
               } while (cursor.moveToNext());
@@ -305,7 +308,8 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
               queryPhoneTableBasedOnE164(new String[] {Phone.CONTACT_ID}, validE164Numbers)) {
             if (cursor == null) {
               LogUtil.w(
-                  "Cp2LocalPhoneLookup.queryPhoneTableForContactIdsBasedOnE164", "null cursor");
+                  "Cp2DefaultDirectoryPhoneLookup.queryPhoneTableForContactIdsBasedOnE164",
+                  "null cursor");
               return contactIds;
             }
             while (cursor.moveToNext()) {
@@ -328,7 +332,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
               queryPhoneLookup(new String[] {ContactsContract.PhoneLookup.CONTACT_ID}, rawNumber)) {
             if (cursor == null) {
               LogUtil.w(
-                  "Cp2LocalPhoneLookup.queryPhoneLookupTableForContactIdsBasedOnRawNumber",
+                  "Cp2DefaultDirectoryPhoneLookup.queryPhoneLookupTableForContactIdsBasedOnRawNumber",
                   "null cursor");
               return contactIds;
             }
@@ -391,7 +395,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                       new String[] {Long.toString(lastModified)},
                       Contacts._ID + " limit 1")) {
             if (cursor == null) {
-              LogUtil.w("Cp2LocalPhoneLookup.noContactsModifiedSince", "null cursor");
+              LogUtil.w("Cp2DefaultDirectoryPhoneLookup.noContactsModifiedSince", "null cursor");
               return false;
             }
             return cursor.getCount() == 0;
@@ -413,7 +417,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                       new String[] {Long.toString(lastModified)},
                       DeletedContacts.CONTACT_DELETED_TIMESTAMP + " limit 1")) {
             if (cursor == null) {
-              LogUtil.w("Cp2LocalPhoneLookup.anyContactsDeletedSince", "null cursor");
+              LogUtil.w("Cp2DefaultDirectoryPhoneLookup.anyContactsDeletedSince", "null cursor");
               return false;
             }
             return cursor.getCount() > 0;
@@ -423,12 +427,12 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
 
   @Override
   public void setSubMessage(PhoneLookupInfo.Builder destination, Cp2Info subMessage) {
-    destination.setCp2LocalInfo(subMessage);
+    destination.setDefaultCp2Info(subMessage);
   }
 
   @Override
   public Cp2Info getSubMessage(PhoneLookupInfo phoneLookupInfo) {
-    return phoneLookupInfo.getCp2LocalInfo();
+    return phoneLookupInfo.getDefaultCp2Info();
   }
 
   @Override
@@ -712,7 +716,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
                   map.put(dialerPhoneNumber, ImmutableSet.of());
                 }
                 LogUtil.v(
-                    "Cp2LocalPhoneLookup.buildMapForUpdatedOrAddedContacts",
+                    "Cp2DefaultDirectoryPhoneLookup.buildMapForUpdatedOrAddedContacts",
                     "found %d numbers that may need updating",
                     updatedNumbers.size());
                 return map;
@@ -735,7 +739,7 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
               queryPhoneTableBasedOnE164(
                   Cp2Projections.getProjectionForPhoneTable(), validE164Numbers)) {
             if (cursor == null) {
-              LogUtil.w("Cp2LocalPhoneLookup.batchQueryForValidNumbers", "null cursor");
+              LogUtil.w("Cp2DefaultDirectoryPhoneLookup.batchQueryForValidNumbers", "null cursor");
             } else {
               while (cursor.moveToNext()) {
                 String validE164Number = Cp2Projections.getNormalizedNumberFromCursor(cursor);
@@ -764,7 +768,8 @@ public final class Cp2LocalPhoneLookup implements PhoneLookup<Cp2Info> {
           try (Cursor cursor =
               queryPhoneLookup(Cp2Projections.getProjectionForPhoneLookupTable(), invalidNumber)) {
             if (cursor == null) {
-              LogUtil.w("Cp2LocalPhoneLookup.individualQueryForInvalidNumber", "null cursor");
+              LogUtil.w(
+                  "Cp2DefaultDirectoryPhoneLookup.individualQueryForInvalidNumber", "null cursor");
             } else {
               while (cursor.moveToNext()) {
                 cp2ContactInfos.add(

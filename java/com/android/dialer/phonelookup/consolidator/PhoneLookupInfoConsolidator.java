@@ -40,11 +40,16 @@ public final class PhoneLookupInfoConsolidator {
 
   /** Integers representing {@link PhoneLookup} implementations that can provide a contact's name */
   @Retention(RetentionPolicy.SOURCE)
-  @IntDef({NameSource.NONE, NameSource.CP2_LOCAL, NameSource.CP2_REMOTE, NameSource.PEOPLE_API})
+  @IntDef({
+    NameSource.NONE,
+    NameSource.CP2_DEFAULT_DIRECTORY,
+    NameSource.CP2_EXTENDED_DIRECTORY,
+    NameSource.PEOPLE_API
+  })
   @interface NameSource {
     int NONE = 0; // used when none of the other sources can provide the name
-    int CP2_LOCAL = 1;
-    int CP2_REMOTE = 2;
+    int CP2_DEFAULT_DIRECTORY = 1;
+    int CP2_EXTENDED_DIRECTORY = 2;
     int PEOPLE_API = 3;
   }
 
@@ -53,31 +58,35 @@ public final class PhoneLookupInfoConsolidator {
    *
    * <p>Each source is one of the values in NameSource, as defined above.
    *
-   * <p>Sources are sorted in the order of priority. For example, if source CP2_LOCAL can provide
-   * the name, we will use that name in the UI and ignore all the other sources. If source CP2_LOCAL
-   * can't provide the name, source CP2_REMOTE will be consulted.
+   * <p>Sources are sorted in the order of priority. For example, if source CP2_DEFAULT_DIRECTORY
+   * can provide the name, we will use that name in the UI and ignore all the other sources. If
+   * source CP2_DEFAULT_DIRECTORY can't provide the name, source CP2_EXTENDED_DIRECTORY will be
+   * consulted.
    *
    * <p>The reason for defining a name source is to avoid mixing info from different sub-messages in
    * PhoneLookupInfo proto when we are supposed to stick with only one sub-message. For example, if
-   * a PhoneLookupInfo proto has both cp2_local_info and cp2_remote_info but only cp2_remote_info
-   * has a photo URI, PhoneLookupInfoConsolidator should provide an empty photo URI as CP2_LOCAL has
-   * higher priority and we should not use cp2_remote_info's photo URI to display the contact's
-   * photo.
+   * a PhoneLookupInfo proto has both default_cp2_info and extended_cp2_info but only
+   * extended_cp2_info has a photo URI, PhoneLookupInfoConsolidator should provide an empty photo
+   * URI as CP2_DEFAULT_DIRECTORY has higher priority and we should not use extended_cp2_info's
+   * photo URI to display the contact's photo.
    */
   private static final ImmutableList<Integer> NAME_SOURCES_IN_PRIORITY_ORDER =
-      ImmutableList.of(NameSource.CP2_LOCAL, NameSource.CP2_REMOTE, NameSource.PEOPLE_API);
+      ImmutableList.of(
+          NameSource.CP2_DEFAULT_DIRECTORY,
+          NameSource.CP2_EXTENDED_DIRECTORY,
+          NameSource.PEOPLE_API);
 
   private final @NameSource int nameSource;
   private final PhoneLookupInfo phoneLookupInfo;
 
-  @Nullable private final Cp2ContactInfo firstCp2LocalContact;
-  @Nullable private final Cp2ContactInfo firstCp2RemoteContact;
+  @Nullable private final Cp2ContactInfo firstDefaultCp2Contact;
+  @Nullable private final Cp2ContactInfo firstExtendedCp2Contact;
 
   public PhoneLookupInfoConsolidator(PhoneLookupInfo phoneLookupInfo) {
     this.phoneLookupInfo = phoneLookupInfo;
 
-    this.firstCp2LocalContact = getFirstLocalContact();
-    this.firstCp2RemoteContact = getFirstRemoteContact();
+    this.firstDefaultCp2Contact = getFirstContactInDefaultDirectory();
+    this.firstExtendedCp2Contact = getFirstContactInExtendedDirectories();
     this.nameSource = selectNameSource();
   }
 
@@ -92,10 +101,10 @@ public final class PhoneLookupInfoConsolidator {
    */
   public String getName() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-        return Assert.isNotNull(firstCp2LocalContact).getName();
-      case NameSource.CP2_REMOTE:
-        return Assert.isNotNull(firstCp2RemoteContact).getName();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Assert.isNotNull(firstDefaultCp2Contact).getName();
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return Assert.isNotNull(firstExtendedCp2Contact).getName();
       case NameSource.PEOPLE_API:
         return phoneLookupInfo.getPeopleApiInfo().getDisplayName();
       case NameSource.NONE:
@@ -115,10 +124,10 @@ public final class PhoneLookupInfoConsolidator {
    */
   public String getPhotoThumbnailUri() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-        return Assert.isNotNull(firstCp2LocalContact).getPhotoThumbnailUri();
-      case NameSource.CP2_REMOTE:
-        return Assert.isNotNull(firstCp2RemoteContact).getPhotoThumbnailUri();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Assert.isNotNull(firstDefaultCp2Contact).getPhotoThumbnailUri();
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return Assert.isNotNull(firstExtendedCp2Contact).getPhotoThumbnailUri();
       case NameSource.PEOPLE_API:
       case NameSource.NONE:
         return "";
@@ -137,10 +146,10 @@ public final class PhoneLookupInfoConsolidator {
    */
   public String getPhotoUri() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-        return Assert.isNotNull(firstCp2LocalContact).getPhotoUri();
-      case NameSource.CP2_REMOTE:
-        return Assert.isNotNull(firstCp2RemoteContact).getPhotoUri();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Assert.isNotNull(firstDefaultCp2Contact).getPhotoUri();
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return Assert.isNotNull(firstExtendedCp2Contact).getPhotoUri();
       case NameSource.PEOPLE_API:
       case NameSource.NONE:
         return "";
@@ -156,10 +165,10 @@ public final class PhoneLookupInfoConsolidator {
    */
   public long getPhotoId() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-        return Math.max(Assert.isNotNull(firstCp2LocalContact).getPhotoId(), 0);
-      case NameSource.CP2_REMOTE:
-        return Math.max(Assert.isNotNull(firstCp2RemoteContact).getPhotoId(), 0);
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Math.max(Assert.isNotNull(firstDefaultCp2Contact).getPhotoId(), 0);
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return Math.max(Assert.isNotNull(firstExtendedCp2Contact).getPhotoId(), 0);
       case NameSource.PEOPLE_API:
       case NameSource.NONE:
         return 0;
@@ -176,10 +185,10 @@ public final class PhoneLookupInfoConsolidator {
    */
   public String getLookupUri() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-        return Assert.isNotNull(firstCp2LocalContact).getLookupUri();
-      case NameSource.CP2_REMOTE:
-        return Assert.isNotNull(firstCp2RemoteContact).getLookupUri();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Assert.isNotNull(firstDefaultCp2Contact).getLookupUri();
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return Assert.isNotNull(firstExtendedCp2Contact).getLookupUri();
       case NameSource.PEOPLE_API:
         return Assert.isNotNull(phoneLookupInfo.getPeopleApiInfo().getLookupUri());
       case NameSource.NONE:
@@ -200,10 +209,10 @@ public final class PhoneLookupInfoConsolidator {
    */
   public String getNumberLabel() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-        return Assert.isNotNull(firstCp2LocalContact).getLabel();
-      case NameSource.CP2_REMOTE:
-        return Assert.isNotNull(firstCp2RemoteContact).getLabel();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Assert.isNotNull(firstDefaultCp2Contact).getLabel();
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return Assert.isNotNull(firstExtendedCp2Contact).getLabel();
       case NameSource.PEOPLE_API:
       case NameSource.NONE:
         return "";
@@ -259,11 +268,11 @@ public final class PhoneLookupInfoConsolidator {
   }
 
   /**
-   * Returns true if the {@link PhoneLookupInfo} passed to the constructor has incomplete CP2 local
-   * info.
+   * Returns true if the {@link PhoneLookupInfo} passed to the constructor has incomplete default
+   * CP2 info (info from the default directory).
    */
-  public boolean isCp2LocalInfoIncomplete() {
-    return phoneLookupInfo.getCp2LocalInfo().getIsIncomplete();
+  public boolean isDefaultCp2InfoIncomplete() {
+    return phoneLookupInfo.getDefaultCp2Info().getIsIncomplete();
   }
 
   /**
@@ -275,8 +284,8 @@ public final class PhoneLookupInfoConsolidator {
    */
   public boolean canReportAsInvalidNumber() {
     switch (nameSource) {
-      case NameSource.CP2_LOCAL:
-      case NameSource.CP2_REMOTE:
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+      case NameSource.CP2_EXTENDED_DIRECTORY:
         return false;
       case NameSource.PEOPLE_API:
         PeopleApiInfo peopleApiInfo = phoneLookupInfo.getPeopleApiInfo();
@@ -291,26 +300,26 @@ public final class PhoneLookupInfoConsolidator {
   }
 
   /**
-   * Arbitrarily select the first local CP2 contact. In the future, it may make sense to display
-   * contact information from all contacts with the same number (for example show the name as "Mom,
-   * Dad" or show a synthesized photo containing photos of both "Mom" and "Dad").
+   * Arbitrarily select the first CP2 contact in the default directory. In the future, it may make
+   * sense to display contact information from all contacts with the same number (for example show
+   * the name as "Mom, Dad" or show a synthesized photo containing photos of both "Mom" and "Dad").
    */
   @Nullable
-  private Cp2ContactInfo getFirstLocalContact() {
-    return phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfoCount() > 0
-        ? phoneLookupInfo.getCp2LocalInfo().getCp2ContactInfo(0)
+  private Cp2ContactInfo getFirstContactInDefaultDirectory() {
+    return phoneLookupInfo.getDefaultCp2Info().getCp2ContactInfoCount() > 0
+        ? phoneLookupInfo.getDefaultCp2Info().getCp2ContactInfo(0)
         : null;
   }
 
   /**
-   * Arbitrarily select the first remote CP2 contact. In the future, it may make sense to display
-   * contact information from all contacts with the same number (for example show the name as "Mom,
-   * Dad" or show a synthesized photo containing photos of both "Mom" and "Dad").
+   * Arbitrarily select the first CP2 contact in extended directories. In the future, it may make
+   * sense to display contact information from all contacts with the same number (for example show
+   * the name as "Mom, Dad" or show a synthesized photo containing photos of both "Mom" and "Dad").
    */
   @Nullable
-  private Cp2ContactInfo getFirstRemoteContact() {
-    return phoneLookupInfo.getCp2RemoteInfo().getCp2ContactInfoCount() > 0
-        ? phoneLookupInfo.getCp2RemoteInfo().getCp2ContactInfo(0)
+  private Cp2ContactInfo getFirstContactInExtendedDirectories() {
+    return phoneLookupInfo.getExtendedCp2Info().getCp2ContactInfoCount() > 0
+        ? phoneLookupInfo.getExtendedCp2Info().getCp2ContactInfo(0)
         : null;
   }
 
@@ -318,14 +327,14 @@ public final class PhoneLookupInfoConsolidator {
   private @NameSource int selectNameSource() {
     for (int nameSource : NAME_SOURCES_IN_PRIORITY_ORDER) {
       switch (nameSource) {
-        case NameSource.CP2_LOCAL:
-          if (firstCp2LocalContact != null && !firstCp2LocalContact.getName().isEmpty()) {
-            return NameSource.CP2_LOCAL;
+        case NameSource.CP2_DEFAULT_DIRECTORY:
+          if (firstDefaultCp2Contact != null && !firstDefaultCp2Contact.getName().isEmpty()) {
+            return NameSource.CP2_DEFAULT_DIRECTORY;
           }
           break;
-        case NameSource.CP2_REMOTE:
-          if (firstCp2RemoteContact != null && !firstCp2RemoteContact.getName().isEmpty()) {
-            return NameSource.CP2_REMOTE;
+        case NameSource.CP2_EXTENDED_DIRECTORY:
+          if (firstExtendedCp2Contact != null && !firstExtendedCp2Contact.getName().isEmpty()) {
+            return NameSource.CP2_EXTENDED_DIRECTORY;
           }
           break;
         case NameSource.PEOPLE_API:
