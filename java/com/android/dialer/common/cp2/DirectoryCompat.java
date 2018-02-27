@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.contacts.common.compat;
+package com.android.dialer.common.cp2;
 
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract.Directory;
 
+/** Compatibility utility for {@link Directory}. */
 public class DirectoryCompat {
 
   public static Uri getContentUri() {
@@ -42,7 +43,7 @@ public class DirectoryCompat {
     if (VERSION.SDK_INT >= VERSION_CODES.N) {
       return Directory.isRemoteDirectoryId(directoryId);
     }
-    return !(directoryId == Directory.DEFAULT || directoryId == Directory.LOCAL_INVISIBLE);
+    return directoryId != Directory.DEFAULT && directoryId != Directory.LOCAL_INVISIBLE;
   }
 
   public static boolean isEnterpriseDirectoryId(long directoryId) {
