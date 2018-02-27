@@ -17,4 +17,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Label for a list of contacts stored in a seperate directory [CHAR LIMIT=30]-->
   <string name="directory">Directory <xliff:g example="google.com" id="email">%1$s</xliff:g></string>
+
+  <!-- String used to build a phone number type and phone number string.
+     Example: Mobile 650-555-1212  -->
+  <string name="call_subject_type_and_number">
+    <xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g>
+  </string>
 </resources>

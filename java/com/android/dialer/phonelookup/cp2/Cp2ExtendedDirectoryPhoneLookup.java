@@ -22,12 +22,12 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.Directory;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
@@ -80,7 +80,7 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
               appContext
                   .getContentResolver()
                   .query(
-                      getContentUriForDirectoryIds(),
+                      DirectoryCompat.getContentUri(),
                       /* projection = */ new String[] {ContactsContract.Directory._ID},
                       /* selection = */ null,
                       /* selectionArgs = */ null,
@@ -177,13 +177,6 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
   }
 
   @VisibleForTesting
-  static Uri getContentUriForDirectoryIds() {
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        ? ContactsContract.Directory.ENTERPRISE_CONTENT_URI
-        : ContactsContract.Directory.CONTENT_URI;
-  }
-
-  @VisibleForTesting
   static Uri getContentUriForContacts(String number, long directoryId) {
     Uri baseUri =
         VERSION.SDK_INT >= VERSION_CODES.N
@@ -204,13 +197,8 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
   }
 
   private static boolean isExtendedDirectory(long directoryId) {
-    // TODO(a bug): Moving the logic to utility shared with the search fragment.
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        ? Directory.isRemoteDirectoryId(directoryId)
-            || Directory.isEnterpriseDirectoryId(directoryId)
-        : (directoryId != Directory.DEFAULT
-            && directoryId != Directory.LOCAL_INVISIBLE
-            && directoryId != Directory.ENTERPRISE_LOCAL_INVISIBLE);
+    return DirectoryCompat.isRemoteDirectoryId(directoryId)
+        || DirectoryCompat.isEnterpriseDirectoryId(directoryId);
   }
 
   @Override
