@@ -28,7 +28,8 @@
       android:id="@+id/deviceid_hex"
       style="@style/DeviceIdBody"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_height="wrap_content"
+      android:textIsSelectable="true"/>
   <TextView
       android:id="@+id/deviceid_dec_label"
       style="@style/DeviceIdBody"
@@ -40,7 +41,8 @@
       android:id="@+id/deviceid_dec"
       style="@style/DeviceIdBody"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_height="wrap_content"
+      android:textIsSelectable="true"/>
   <ImageView
       android:id="@+id/deviceid_barcode"
       android:layout_width="match_parent"
