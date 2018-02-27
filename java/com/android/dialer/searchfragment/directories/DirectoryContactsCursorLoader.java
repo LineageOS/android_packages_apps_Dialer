@@ -27,7 +27,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
-import com.android.contacts.common.compat.DirectoryCompat;
+import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
@@ -71,8 +71,6 @@ public final class DirectoryContactsCursorLoader extends CursorLoader {
     for (int i = 0; i < directories.size(); i++) {
       Directory directory = directories.get(i);
 
-      // TODO(a bug): Consider moving DirectoryCompat out of "contacts/common" and share it
-      // with PhoneLookups.
       if (!DirectoryCompat.isRemoteDirectoryId(directory.getId())
           && !DirectoryCompat.isEnterpriseDirectoryId(directory.getId())) {
         cursors[i] = null;
