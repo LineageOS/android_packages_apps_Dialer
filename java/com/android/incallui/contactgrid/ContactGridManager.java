@@ -86,7 +86,7 @@ public class ContactGridManager {
   private final View deviceNumberDivider;
 
   private PrimaryInfo primaryInfo = PrimaryInfo.empty();
-  private PrimaryCallState primaryCallState = PrimaryCallState.createEmptyPrimaryCallState();
+  private PrimaryCallState primaryCallState = PrimaryCallState.empty();
   private final LetterTileDrawable letterTile;
   private boolean isInMultiWindowMode;
 
@@ -305,11 +305,11 @@ public class ContactGridManager {
               primaryInfo.contactInfoLookupKey(),
               LetterTileDrawable.SHAPE_CIRCLE,
               LetterTileDrawable.getContactTypeFromPrimitives(
-                  primaryCallState.isVoiceMailNumber,
+                  primaryCallState.isVoiceMailNumber(),
                   primaryInfo.isSpam(),
-                  primaryCallState.isBusinessNumber,
+                  primaryCallState.isBusinessNumber(),
                   primaryInfo.numberPresentation(),
-                  primaryCallState.isConference));
+                  primaryCallState.isConference()));
           // By invalidating the avatarImageView we force a redraw of the letter tile.
           // This is required to properly display the updated letter tile iconography based on the
           // contact type, because the background drawable reference cached in the view, and the
@@ -381,7 +381,7 @@ public class ContactGridManager {
     if (info.isTimerVisible) {
       bottomTextSwitcher.setDisplayedChild(1);
       bottomTimerView.setBase(
-          primaryCallState.connectTimeMillis
+          primaryCallState.connectTimeMillis()
               - System.currentTimeMillis()
               + SystemClock.elapsedRealtime());
       if (!isTimerStarted) {
@@ -404,14 +404,15 @@ public class ContactGridManager {
     if (deviceNumberTextView == null) {
       return;
     }
-    if (isInMultiWindowMode || TextUtils.isEmpty(primaryCallState.callbackNumber)) {
+    if (isInMultiWindowMode || TextUtils.isEmpty(primaryCallState.callbackNumber())) {
       deviceNumberTextView.setVisibility(View.GONE);
       deviceNumberDivider.setVisibility(View.GONE);
       return;
     }
     // This is used for carriers like Project Fi to show the callback number for emergency calls.
     deviceNumberTextView.setText(
-        context.getString(R.string.contact_grid_callback_number, primaryCallState.callbackNumber));
+        context.getString(
+            R.string.contact_grid_callback_number, primaryCallState.callbackNumber()));
     deviceNumberTextView.setVisibility(View.VISIBLE);
     if (primaryInfo.shouldShowLocation()) {
       deviceNumberDivider.setVisibility(View.VISIBLE);

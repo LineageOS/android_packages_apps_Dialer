@@ -288,11 +288,11 @@ public class RttChatFragment extends Fragment
   @Override
   public void setCallState(@NonNull PrimaryCallState primaryCallState) {
     LogUtil.i("RttChatFragment.setCallState", primaryCallState.toString());
-    if (!isTimerStarted && primaryCallState.state == State.ACTIVE) {
+    if (!isTimerStarted && primaryCallState.state() == State.ACTIVE) {
       LogUtil.i(
           "RttChatFragment.setCallState", "starting timer with base: %d", chronometer.getBase());
       chronometer.setBase(
-          primaryCallState.connectTimeMillis
+          primaryCallState.connectTimeMillis()
               - System.currentTimeMillis()
               + SystemClock.elapsedRealtime());
       chronometer.start();
