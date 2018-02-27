@@ -71,6 +71,11 @@ public final class DirectoriesCursorLoader extends CursorLoader {
    * @return A list of directories.
    */
   public static List<Directory> toDirectories(Cursor cursor) {
+    if (cursor == null) {
+      LogUtil.i("DirectoriesCursorLoader.toDirectories", "Cursor was null");
+      return new ArrayList<>();
+    }
+
     List<Directory> directories = new ArrayList<>();
     cursor.moveToPosition(-1);
     while (cursor.moveToNext()) {
