@@ -63,7 +63,8 @@
         android:resizeableActivity="true"
         android:screenOrientation="nosensor"
         android:taskAffinity="com.android.incallui"
-        android:theme="@style/Theme.InCallScreen">
+        android:theme="@style/Theme.InCallScreen"
+        android:windowSoftInputMode="adjustResize">
     </activity>
 
     <activity
