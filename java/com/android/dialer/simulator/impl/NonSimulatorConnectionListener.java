@@ -30,6 +30,11 @@ final class NonSimulatorConnectionListener implements SimulatorConnection.Listen
   @Override
   public void onEvent(@NonNull SimulatorConnection connection, @NonNull Event event) {
     switch (event.type) {
+      case Event.STATE_CHANGE:
+        LogUtil.i(
+            "SimulatorVoiceCall.onEvent",
+            String.format("state changed from %s to %s ", event.data1, event.data2));
+        break;
       case Event.REJECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.REJECTED));
         break;
