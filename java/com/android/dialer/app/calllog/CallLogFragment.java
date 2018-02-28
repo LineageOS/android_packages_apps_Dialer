@@ -583,7 +583,7 @@ public class CallLogFragment extends Fragment
     } else if (!isCallLogActivity) {
       LogUtil.i("CallLogFragment.onEmptyViewActionButtonClicked", "showing dialpad");
       // Show dialpad if we are not in the call log activity.
-      ((HostInterface) activity).showDialpad();
+      FragmentUtils.getParentUnsafe(this, HostInterface.class).showDialpad();
     }
   }
 
