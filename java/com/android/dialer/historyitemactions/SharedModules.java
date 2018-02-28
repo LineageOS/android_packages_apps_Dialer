@@ -24,9 +24,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogNotifier;
 import com.android.dialer.clipboard.ClipboardUtils;
-import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.UriUtils;
 import com.google.common.base.Optional;
@@ -114,63 +114,42 @@ public class SharedModules {
   }
 
   /**
-   * Add modules related to blocking/unblocking a number and/or reporting it as spam/not spam.
-   *
-   * @param normalizedNumber The number to be blocked / unblocked / marked as spam/not spam
-   * @param countryIso The ISO 3166-1 two letters country code for the number
-   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
-   * @param reportingLocation The location where the number is reported. See {@link
-   *     ReportingLocation.Type}.
+   * Create modules related to blocking/unblocking a number and/or reporting it as spam/not spam.
    */
   public static List<HistoryItemActionModule> createModulesHandlingBlockedOrSpamNumber(
       Context context,
-      String normalizedNumber,
-      String countryIso,
-      int callType,
+      BlockReportSpamDialogInfo blockReportSpamDialogInfo,
       boolean isBlocked,
-      boolean isSpam,
-      ReportingLocation.Type reportingLocation) {
+      boolean isSpam) {
     List<HistoryItemActionModule> modules = new ArrayList<>();
 
     // For a spam number, add two options:
     // (1) "Not spam" and "Block", or
     // (2) "Not spam" and "Unblock".
     if (isSpam) {
+      modules.add(createModuleForMarkingNumberAsNonSpam(context, blockReportSpamDialogInfo));
       modules.add(
-          createModuleForMarkingNumberAsNonSpam(
-              context, normalizedNumber, countryIso, callType, reportingLocation));
-      modules.add(createModuleForBlockingOrUnblockingNumber(context, normalizedNumber, isBlocked));
+          createModuleForBlockingOrUnblockingNumber(context, blockReportSpamDialogInfo, isBlocked));
       return modules;
     }
 
     // For a blocked non-spam number, add "Unblock" option.
     if (isBlocked) {
-      modules.add(createModuleForBlockingOrUnblockingNumber(context, normalizedNumber, isBlocked));
+      modules.add(
+          createModuleForBlockingOrUnblockingNumber(context, blockReportSpamDialogInfo, isBlocked));
       return modules;
     }
 
     // For a number that is neither a spam number nor blocked, add "Block/Report spam" option.
     modules.add(
         createModuleForBlockingNumberAndOptionallyReportingSpam(
-            context, normalizedNumber, countryIso, callType, reportingLocation));
+            context, blockReportSpamDialogInfo));
     return modules;
   }
 
-  /**
-   * Add "Not spam" module.
-   *
-   * @param normalizedNumber The number to be marked as not spam
-   * @param countryIso The ISO 3166-1 two letters country code for the number
-   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
-   * @param reportingLocation The location where the number is reported. See {@link
-   *     ReportingLocation.Type}.
-   */
+  /** Create "Not spam" module. */
   private static HistoryItemActionModule createModuleForMarkingNumberAsNonSpam(
-      Context context,
-      String normalizedNumber,
-      String countryIso,
-      int callType,
-      ReportingLocation.Type reportingLocation) {
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
     return new HistoryItemActionModule() {
       @Override
       public int getStringId() {
@@ -185,14 +164,14 @@ public class SharedModules {
       @Override
       public boolean onClick() {
         ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam(
-            context, normalizedNumber, countryIso, callType, reportingLocation);
+            context, blockReportSpamDialogInfo);
         return true; // Close the bottom sheet.
       }
     };
   }
 
   private static HistoryItemActionModule createModuleForBlockingOrUnblockingNumber(
-      Context context, String normalizedNumber, boolean isBlocked) {
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo, boolean isBlocked) {
     return new HistoryItemActionModule() {
       @Override
       public int getStringId() {
@@ -214,7 +193,7 @@ public class SharedModules {
                 String.format(
                     Locale.ENGLISH,
                     "TODO: " + (isBlocked ? "Unblock " : "Block ") + " number %s.",
-                    normalizedNumber),
+                    blockReportSpamDialogInfo.getNormalizedNumber()),
                 Toast.LENGTH_SHORT)
             .show();
         return true; // Close the bottom sheet.
@@ -222,21 +201,9 @@ public class SharedModules {
     };
   }
 
-  /**
-   * Add "Block/Report spam" module
-   *
-   * @param normalizedNumber The number to be blocked / unblocked / marked as spam/not spam
-   * @param countryIso The ISO 3166-1 two letters country code for the number
-   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
-   * @param reportingLocation The location where the number is reported. See {@link
-   *     ReportingLocation.Type}.
-   */
+  /** Create "Block/Report spam" module */
   private static HistoryItemActionModule createModuleForBlockingNumberAndOptionallyReportingSpam(
-      Context context,
-      String normalizedNumber,
-      String countryIso,
-      int callType,
-      ReportingLocation.Type reportingLocation) {
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
     return new HistoryItemActionModule() {
       @Override
       public int getStringId() {
@@ -251,7 +218,7 @@ public class SharedModules {
       @Override
       public boolean onClick() {
         ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam(
-            context, normalizedNumber, countryIso, callType, reportingLocation);
+            context, blockReportSpamDialogInfo);
         return true; // Close the bottom sheet.
       }
     };

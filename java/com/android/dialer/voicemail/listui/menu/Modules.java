@@ -17,6 +17,7 @@
 package com.android.dialer.voicemail.listui.menu;
 
 import android.content.Context;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.historyitemactions.DividerModule;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.SharedModules;
@@ -64,15 +65,19 @@ final class Modules {
       modules.add(new DividerModule());
     }
 
+    BlockReportSpamDialogInfo blockReportSpamDialogInfo =
+        BlockReportSpamDialogInfo.newBuilder()
+            .setNormalizedNumber(voicemailEntry.number().getNormalizedNumber())
+            .setCountryIso(voicemailEntry.number().getCountryIso())
+            .setCallType(voicemailEntry.callType())
+            .setReportingLocation(ReportingLocation.Type.VOICEMAIL_HISTORY)
+            .build();
     modules.addAll(
         SharedModules.createModulesHandlingBlockedOrSpamNumber(
             context,
-            voicemailEntry.number().getNormalizedNumber(),
-            voicemailEntry.number().getCountryIso(),
-            voicemailEntry.callType(),
+            blockReportSpamDialogInfo,
             voicemailEntry.numberAttributes().getIsBlocked(),
-            voicemailEntry.numberAttributes().getIsSpam(),
-            ReportingLocation.Type.VOICEMAIL_HISTORY));
+            voicemailEntry.numberAttributes().getIsSpam()));
 
     // TODO(zachh): Module for CallComposer.
     Optional<HistoryItemActionModule> moduleForCopyingNumber =
