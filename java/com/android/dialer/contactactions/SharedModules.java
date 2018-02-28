@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogNotifier;
 import com.android.dialer.clipboard.ClipboardUtils;
+import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.UriUtils;
 import java.util.List;
@@ -118,6 +119,8 @@ public class SharedModules {
    * @param normalizedNumber The number to be blocked / unblocked / marked as spam/not spam
    * @param countryIso The ISO 3166-1 two letters country code for the number
    * @param callType Call type defined in {@link android.provider.CallLog.Calls}
+   * @param reportingLocation The location where the number is reported. See {@link
+   *     ReportingLocation.Type}.
    */
   public static void addModulesHandlingBlockedOrSpamNumber(
       Context context,
@@ -126,12 +129,14 @@ public class SharedModules {
       String countryIso,
       int callType,
       boolean isBlocked,
-      boolean isSpam) {
+      boolean isSpam,
+      ReportingLocation.Type reportingLocation) {
     // For a spam number, add two options:
     // (1) "Not spam" and "Block", or
     // (2) "Not spam" and "Unblock".
     if (isSpam) {
-      addModuleForMarkingNumberAsNonSpam(context, modules, normalizedNumber, countryIso, callType);
+      addModuleForMarkingNumberAsNonSpam(
+          context, modules, normalizedNumber, countryIso, callType, reportingLocation);
       addModuleForBlockingOrUnblockingNumber(context, modules, normalizedNumber, isBlocked);
       return;
     }
@@ -144,7 +149,7 @@ public class SharedModules {
 
     // For a number that is neither a spam number nor blocked, add "Block/Report spam" option.
     addModuleForBlockingNumberAndOptionallyReportingSpam(
-        context, modules, normalizedNumber, countryIso, callType);
+        context, modules, normalizedNumber, countryIso, callType, reportingLocation);
   }
 
   /**
@@ -153,13 +158,16 @@ public class SharedModules {
    * @param normalizedNumber The number to be marked as not spam
    * @param countryIso The ISO 3166-1 two letters country code for the number
    * @param callType Call type defined in {@link android.provider.CallLog.Calls}
+   * @param reportingLocation The location where the number is reported. See {@link
+   *     ReportingLocation.Type}.
    */
   private static void addModuleForMarkingNumberAsNonSpam(
       Context context,
       List<ContactActionModule> modules,
       String normalizedNumber,
       String countryIso,
-      int callType) {
+      int callType,
+      ReportingLocation.Type reportingLocation) {
     modules.add(
         new ContactActionModule() {
           @Override
@@ -175,7 +183,7 @@ public class SharedModules {
           @Override
           public boolean onClick() {
             ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam(
-                context, normalizedNumber, countryIso, callType);
+                context, normalizedNumber, countryIso, callType, reportingLocation);
             return true; // Close the bottom sheet.
           }
         });
@@ -222,13 +230,16 @@ public class SharedModules {
    * @param normalizedNumber The number to be blocked / unblocked / marked as spam/not spam
    * @param countryIso The ISO 3166-1 two letters country code for the number
    * @param callType Call type defined in {@link android.provider.CallLog.Calls}
+   * @param reportingLocation The location where the number is reported. See {@link
+   *     ReportingLocation.Type}.
    */
   private static void addModuleForBlockingNumberAndOptionallyReportingSpam(
       Context context,
       List<ContactActionModule> modules,
       String normalizedNumber,
       String countryIso,
-      int callType) {
+      int callType,
+      ReportingLocation.Type reportingLocation) {
     modules.add(
         new ContactActionModule() {
           @Override
@@ -244,7 +255,7 @@ public class SharedModules {
           @Override
           public boolean onClick() {
             ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam(
-                context, normalizedNumber, countryIso, callType);
+                context, normalizedNumber, countryIso, callType, reportingLocation);
             return true; // Close the bottom sheet.
           }
         });

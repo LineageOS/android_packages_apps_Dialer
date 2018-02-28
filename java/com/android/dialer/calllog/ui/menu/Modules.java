@@ -30,6 +30,7 @@ import com.android.dialer.contactactions.DividerModule;
 import com.android.dialer.contactactions.IntentModule;
 import com.android.dialer.contactactions.SharedModules;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Optional;
@@ -79,7 +80,8 @@ final class Modules {
           row.number().getCountryIso(),
           row.callType(),
           row.numberAttributes().getIsBlocked(),
-          row.numberAttributes().getIsSpam());
+          row.numberAttributes().getIsSpam(),
+          ReportingLocation.Type.CALL_LOG_HISTORY);
       SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
     }
 
