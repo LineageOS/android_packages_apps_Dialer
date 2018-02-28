@@ -201,7 +201,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     bottomNav = mainActivity.findViewById(R.id.bottom_nav_bar);
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
-        new MainBottomNavBarBottomNavTabListener(mainActivity, mainActivity.getFragmentManager());
+        new MainBottomNavBarBottomNavTabListener(
+            mainActivity, mainActivity.getFragmentManager(), fab);
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
     // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
     boolean showVoicemailTab = canVoicemailTabBeShown(mainActivity);
@@ -674,6 +675,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     @Override
     public void enableFloatingButton(boolean enabled) {
+      LogUtil.i("MainCallLogHost.enableFloatingButton", "enabled: " + enabled);
       if (enabled) {
         fab.show();
       } else {
@@ -972,7 +974,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   /**
    * Implementation of {@link OnBottomNavTabSelectedListener} that handles logic for showing each of
-   * the main tabs.
+   * the main tabs and FAB.
+   *
+   * <p>TODO(calderwoodra, uabdullah): Rethink the logic for showing/hiding the FAB when new
+   * voicemail is ready.
    */
   private static final class MainBottomNavBarBottomNavTabListener
       implements OnBottomNavTabSelectedListener {
@@ -982,17 +987,22 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private static final String CONTACTS_TAG = "contacts";
     private static final String VOICEMAIL_TAG = "voicemail";
 
-    private final FragmentManager fragmentManager;
     private final Context context;
+    private final FragmentManager fragmentManager;
+    private final FloatingActionButton fab;
+
     @TabIndex private int selectedTab = -1;
 
-    private MainBottomNavBarBottomNavTabListener(Context context, FragmentManager fragmentManager) {
-      this.fragmentManager = fragmentManager;
+    private MainBottomNavBarBottomNavTabListener(
+        Context context, FragmentManager fragmentManager, FloatingActionButton fab) {
       this.context = context;
+      this.fragmentManager = fragmentManager;
+      this.fab = fab;
     }
 
     @Override
     public void onSpeedDialSelected() {
+      LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onSpeedDialSelected");
       if (selectedTab != TabIndex.SPEED_DIAL) {
         Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_FAVORITE);
         selectedTab = TabIndex.SPEED_DIAL;
@@ -1007,10 +1017,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       } else {
         fragmentManager.beginTransaction().show(fragment).commit();
       }
+      fab.show();
     }
 
     @Override
     public void onCallLogSelected() {
+      LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onCallLogSelected");
       if (selectedTab != TabIndex.CALL_LOG) {
         Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_CALL_LOG);
         selectedTab = TabIndex.CALL_LOG;
@@ -1025,10 +1037,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       } else {
         fragmentManager.beginTransaction().show(fragment).commit();
       }
+      fab.show();
     }
 
     @Override
     public void onContactsSelected() {
+      LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onContactsSelected");
       if (selectedTab != TabIndex.CONTACTS) {
         Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_CONTACTS);
         selectedTab = TabIndex.CONTACTS;
@@ -1047,10 +1061,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       } else {
         fragmentManager.beginTransaction().show(fragment).commit();
       }
+      fab.show();
     }
 
     @Override
     public void onVoicemailSelected() {
+      LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onVoicemailSelected");
       if (selectedTab != TabIndex.VOICEMAIL) {
         Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_VOICEMAIL);
         selectedTab = TabIndex.VOICEMAIL;
@@ -1059,13 +1075,16 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       VisualVoicemailCallLogFragment fragment =
           (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
       if (fragment == null) {
+        fragment = new VisualVoicemailCallLogFragment();
         fragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container, new VisualVoicemailCallLogFragment(), VOICEMAIL_TAG)
+            .add(R.id.fragment_container, fragment, VOICEMAIL_TAG)
             .commit();
       } else {
         fragmentManager.beginTransaction().show(fragment).commit();
       }
+      fragment.setUserVisibleHint(true);
+      fragment.onVisible();
     }
 
     private void hideAllFragments() {
@@ -1082,7 +1101,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       }
       if (fragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
         // Old VisualVoicemailFragment
-        transaction.hide(fragmentManager.findFragmentByTag(VOICEMAIL_TAG));
+        VisualVoicemailCallLogFragment fragment =
+            (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+        fragment.setUserVisibleHint(false);
+        fragment.onNotVisible();
+        transaction.hide(fragment);
       }
       transaction.commit();
     }
