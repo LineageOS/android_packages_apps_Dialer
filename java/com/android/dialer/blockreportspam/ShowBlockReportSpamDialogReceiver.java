@@ -29,7 +29,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
 import java.util.Locale;
@@ -43,10 +43,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
   static final String ACTION_SHOW_DIALOG_TO_BLOCK_NUMBER_AND_OPTIONALLY_REPORT_SPAM =
       "show_dialog_to_block_number_and_optionally_report_spam";
   static final String ACTION_SHOW_DIALOG_TO_REPORT_NOT_SPAM = "show_dialog_to_report_not_spam";
-  static final String EXTRA_NUMBER = "number";
-  static final String EXTRA_COUNTRY_ISO = "country_iso";
-  static final String EXTRA_CALL_TYPE = "call_type";
-  static final String EXTRA_REPORTING_LOCATION = "reporting_location";
+  static final String EXTRA_DIALOG_INFO = "dialog_info";
 
   /** {@link FragmentManager} needed to show a {@link android.app.DialogFragment}. */
   private final FragmentManager fragmentManager;
@@ -85,19 +82,10 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     LogUtil.enterBlock(
         "ShowBlockReportSpamDialogReceiver.showDialogToBlockNumberAndOptionallyReportSpam");
 
-    Assert.checkArgument(intent.hasExtra(EXTRA_NUMBER));
-    Assert.checkArgument(intent.hasExtra(EXTRA_COUNTRY_ISO));
-    Assert.checkArgument(intent.hasExtra(EXTRA_CALL_TYPE));
-    Assert.checkArgument(intent.hasExtra(EXTRA_REPORTING_LOCATION));
-
-    String normalizedNumber = intent.getStringExtra(EXTRA_NUMBER);
-    String countryIso = intent.getStringExtra(EXTRA_COUNTRY_ISO);
-    int callType = intent.getIntExtra(EXTRA_CALL_TYPE, 0);
-    ReportingLocation.Type reportingLocation =
-        ReportingLocation.Type.forNumber(
-            intent.getIntExtra(
-                EXTRA_REPORTING_LOCATION,
-                ReportingLocation.Type.UNKNOWN_REPORTING_LOCATION.getNumber()));
+    Assert.checkArgument(intent.hasExtra(EXTRA_DIALOG_INFO));
+    BlockReportSpamDialogInfo dialogInfo =
+        ProtoParsers.getTrusted(
+            intent, EXTRA_DIALOG_INFO, BlockReportSpamDialogInfo.getDefaultInstance());
 
     Spam spam = SpamComponent.get(context).spam();
 
@@ -117,24 +105,27 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
                     DialerImpression.Type
                         .REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG);
             spam.reportSpamFromCallHistory(
-                normalizedNumber,
-                countryIso,
-                callType,
-                reportingLocation,
+                dialogInfo.getNormalizedNumber(),
+                dialogInfo.getCountryIso(),
+                dialogInfo.getCallType(),
+                dialogInfo.getReportingLocation(),
                 ContactSource.Type.UNKNOWN_SOURCE_TYPE /* TODO(a bug): Fix. */);
           }
 
           // TODO(a bug): Block the number.
           Toast.makeText(
                   context,
-                  String.format(Locale.ENGLISH, "TODO: " + "Block number %s.", normalizedNumber),
+                  String.format(
+                      Locale.ENGLISH,
+                      "TODO: " + "Block number %s.",
+                      dialogInfo.getNormalizedNumber()),
                   Toast.LENGTH_SHORT)
               .show();
         };
 
     // Create and show the dialog.
     BlockReportSpamDialogs.BlockReportSpamDialogFragment.newInstance(
-            normalizedNumber,
+            dialogInfo.getNormalizedNumber(),
             spam.isDialogReportSpamCheckedByDefault(),
             onSpamDialogClickListener,
             /* dismissListener = */ null)
@@ -144,19 +135,10 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
   private void showDialogToReportNotSpam(Context context, Intent intent) {
     LogUtil.enterBlock("ShowBlockReportSpamDialogReceiver.showDialogToReportNotSpam");
 
-    Assert.checkArgument(intent.hasExtra(EXTRA_NUMBER));
-    Assert.checkArgument(intent.hasExtra(EXTRA_COUNTRY_ISO));
-    Assert.checkArgument(intent.hasExtra(EXTRA_CALL_TYPE));
-    Assert.checkArgument(intent.hasExtra(EXTRA_REPORTING_LOCATION));
-
-    String normalizedNumber = intent.getStringExtra(EXTRA_NUMBER);
-    String countryIso = intent.getStringExtra(EXTRA_COUNTRY_ISO);
-    int callType = intent.getIntExtra(EXTRA_CALL_TYPE, 0);
-    ReportingLocation.Type reportingLocation =
-        ReportingLocation.Type.forNumber(
-            intent.getIntExtra(
-                EXTRA_REPORTING_LOCATION,
-                ReportingLocation.Type.UNKNOWN_REPORTING_LOCATION.getNumber()));
+    Assert.checkArgument(intent.hasExtra(EXTRA_DIALOG_INFO));
+    BlockReportSpamDialogInfo dialogInfo =
+        ProtoParsers.getTrusted(
+            intent, EXTRA_DIALOG_INFO, BlockReportSpamDialogInfo.getDefaultInstance());
 
     // Set up the positive listener for the dialog.
     OnConfirmListener onConfirmListener =
@@ -168,17 +150,17 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
             Logger.get(context)
                 .logImpression(DialerImpression.Type.DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM);
             spam.reportNotSpamFromCallHistory(
-                normalizedNumber,
-                countryIso,
-                callType,
-                reportingLocation,
+                dialogInfo.getNormalizedNumber(),
+                dialogInfo.getCountryIso(),
+                dialogInfo.getCallType(),
+                dialogInfo.getReportingLocation(),
                 ContactSource.Type.UNKNOWN_SOURCE_TYPE /* TODO(a bug): Fix. */);
           }
         };
 
     // Create & show the dialog.
     BlockReportSpamDialogs.ReportNotSpamDialogFragment.newInstance(
-            normalizedNumber, onConfirmListener, /* dismissListener = */ null)
+            dialogInfo.getNormalizedNumber(), onConfirmListener, /* dismissListener = */ null)
         .show(fragmentManager, BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
   }
 }
