@@ -252,7 +252,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
    * Check and return whether the voicemail tab should be shown or not. This includes the following
    * criteria under which we show the voicemail tab:
    * <li>The voicemail number exists (e.g we are able to dial into listen to voicemail or press and
-   *     hold 1)
+   *     hold 1) (TODO (uabdullah): Handle this case properly)
    * <li>Visual voicemail is enabled from the settings tab
    * <li>Visual voicemail carrier is supported by dialer
    * <li>There is no voicemail carrier app installed.
@@ -265,14 +265,18 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     PhoneAccountHandle defaultUserSelectedAccount =
         TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_VOICEMAIL);
 
-    if (isVoicemailAvailable(context, defaultUserSelectedAccount)) {
-      return true;
+    if (!isVoicemailAvailable(context, defaultUserSelectedAccount)) {
+      LogUtil.i("OldMainActivityPeer.canVoicemailTabBeShown", "Voicemail is not available");
+      return false;
     }
+
     if (VoicemailComponent.get(context)
         .getVoicemailClient()
         .isVoicemailEnabled(context, defaultUserSelectedAccount)) {
+      LogUtil.i("OldMainActivityPeer.canVoicemailTabBeShown", "Voicemail is not enabled");
       return true;
     }
+    LogUtil.i("OldMainActivityPeer.canVoicemailTabBeShown", "returning false");
     return false;
   }
 
