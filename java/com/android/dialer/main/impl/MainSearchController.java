@@ -128,7 +128,9 @@ public class MainSearchController implements SearchBarListener {
       // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
       // places promo to be shown.
       searchFragment = NewSearchFragment.newInstance(/* showZeroSuggest=*/ true);
-      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.replace(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.addToBackStack(null);
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(searchFragment);
     }
@@ -287,11 +289,20 @@ public class MainSearchController implements SearchBarListener {
     showBottomNav();
     toolbar.collapse(animate);
     toolbarShadow.setVisibility(View.GONE);
-    mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
+    mainActivity.getFragmentManager().popBackStack();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
-    if (getDialpadFragment() != null) {
-      getDialpadFragment().clearDialpad();
+    DialpadFragment dialpadFragment = getDialpadFragment();
+    if (dialpadFragment != null) {
+      // Temporarily disable accessibility when we clear the dialpad, since it should be
+      // invisible and should not announce anything.
+      dialpadFragment
+          .getDigitsWidget()
+          .setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+      dialpadFragment.clearDialpad();
+      dialpadFragment
+          .getDigitsWidget()
+          .setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
     }
 
     notifyListenersOnSearchClose();
@@ -355,7 +366,9 @@ public class MainSearchController implements SearchBarListener {
       // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
       // places promo to be shown.
       searchFragment = NewSearchFragment.newInstance(true);
-      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.replace(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.addToBackStack(null);
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
