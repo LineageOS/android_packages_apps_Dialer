@@ -14,5 +14,6 @@ message ReportingLocation {
     UNKNOWN_REPORTING_LOCATION = 0;
     CALL_LOG_HISTORY = 1;
     FEEDBACK_PROMPT = 2;
+    VOICEMAIL_HISTORY = 3;
   }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.contactactions;
+package com.android.dialer.historyitemactions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,9 +28,10 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
 
 /**
- * {@link ContactActionModule} useful for making easy to build modules based on starting an intent.
+ * {@link HistoryItemActionModule} useful for making easy to build modules based on starting an
+ * intent.
  */
-public class IntentModule implements ContactActionModule {
+public class IntentModule implements HistoryItemActionModule {
 
   private final Context context;
   private final Intent intent;

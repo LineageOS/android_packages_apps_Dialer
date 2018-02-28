@@ -52,6 +52,7 @@ import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentLi
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Search controller for handling all the logic related to entering and exiting the search UI.
@@ -82,6 +83,8 @@ public class MainSearchController implements SearchBarListener {
   private final FloatingActionButton fab;
   private final MainToolbar toolbar;
   private final View toolbarShadow;
+
+  private final List<OnSearchShowListener> onSearchShowListenerList = new ArrayList<>();
 
   public MainSearchController(
       MainActivity mainActivity,
@@ -125,7 +128,9 @@ public class MainSearchController implements SearchBarListener {
       // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
       // places promo to be shown.
       searchFragment = NewSearchFragment.newInstance(/* showZeroSuggest=*/ true);
-      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.replace(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.addToBackStack(null);
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(searchFragment);
     }
@@ -142,6 +147,8 @@ public class MainSearchController implements SearchBarListener {
       transaction.show(dialpadFragment);
     }
     transaction.commit();
+
+    notifyListenersOnSearchOpen();
   }
 
   /**
@@ -282,12 +289,23 @@ public class MainSearchController implements SearchBarListener {
     showBottomNav();
     toolbar.collapse(animate);
     toolbarShadow.setVisibility(View.GONE);
-    mainActivity.getFragmentManager().beginTransaction().remove(getSearchFragment()).commit();
+    mainActivity.getFragmentManager().popBackStack();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
-    if (getDialpadFragment() != null) {
-      getDialpadFragment().clearDialpad();
+    DialpadFragment dialpadFragment = getDialpadFragment();
+    if (dialpadFragment != null) {
+      // Temporarily disable accessibility when we clear the dialpad, since it should be
+      // invisible and should not announce anything.
+      dialpadFragment
+          .getDigitsWidget()
+          .setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+      dialpadFragment.clearDialpad();
+      dialpadFragment
+          .getDigitsWidget()
+          .setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
     }
+
+    notifyListenersOnSearchClose();
   }
 
   @Nullable
@@ -348,7 +366,9 @@ public class MainSearchController implements SearchBarListener {
       // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
       // places promo to be shown.
       searchFragment = NewSearchFragment.newInstance(true);
-      transaction.add(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.replace(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+      transaction.addToBackStack(null);
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
     }
@@ -356,6 +376,8 @@ public class MainSearchController implements SearchBarListener {
     searchFragment.setQuery(
         query.isPresent() ? query.get() : "", CallInitiationType.Type.REGULAR_SEARCH);
     transaction.commit();
+
+    notifyListenersOnSearchOpen();
   }
 
   @Override
@@ -454,5 +476,32 @@ public class MainSearchController implements SearchBarListener {
     if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_SLIDE_UP, false)) {
       toolbar.slideUp(false);
     }
+  }
+
+  public void addOnSearchShowListener(OnSearchShowListener listener) {
+    onSearchShowListenerList.add(listener);
+  }
+
+  public void removeOnSearchShowListener(OnSearchShowListener listener) {
+    onSearchShowListenerList.remove(listener);
+  }
+
+  private void notifyListenersOnSearchOpen() {
+    for (OnSearchShowListener listener : onSearchShowListenerList) {
+      listener.onSearchOpen();
+    }
+  }
+
+  private void notifyListenersOnSearchClose() {
+    for (OnSearchShowListener listener : onSearchShowListenerList) {
+      listener.onSearchClose();
+    }
+  }
+
+  /** Listener for search fragment show states change */
+  public interface OnSearchShowListener {
+    void onSearchOpen();
+
+    void onSearchClose();
   }
 }

@@ -14,28 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.dialer.contactactions;
+package com.android.dialer.historyitemactions;
 
-import com.android.dialer.common.Assert;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 
 /**
- * A module that inserts a grey line divider into {@link ContactActionModule}. Layout it provided in
- * R.layout.divider_layout.xml
+ * Modules used to build {@link HistoryItemActionBottomSheet}.
+ *
+ * <p>A history item is one that is displayed in the call log or the voicemail fragment.
  */
-public final class DividerModule implements ContactActionModule {
+public interface HistoryItemActionModule {
 
-  @Override
-  public int getStringId() {
-    throw Assert.createUnsupportedOperationFailException();
-  }
+  @StringRes
+  int getStringId();
 
-  @Override
-  public int getDrawableId() {
-    throw Assert.createUnsupportedOperationFailException();
-  }
+  @DrawableRes
+  int getDrawableId();
 
-  @Override
-  public boolean onClick() {
-    throw Assert.createUnsupportedOperationFailException();
-  }
+  /** @return true if the bottom sheet should close, false otherwise */
+  boolean onClick();
 }

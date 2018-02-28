@@ -29,9 +29,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.contacts.common.compat.DirectoryCompat;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.precall.PreCall;
@@ -73,14 +73,11 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
     String secondaryInfo =
         TextUtils.isEmpty(label)
             ? number
-            : context.getString(
-                com.android.contacts.common.R.string.call_subject_type_and_number, label, number);
+            : context.getString(R.string.call_subject_type_and_number, label, number);
 
     nameView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
     numberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, secondaryInfo, context));
     workBadge.setVisibility(
-        // TODO(a bug): Consider moving DirectoryCompat out of "contacts/common" and share it
-        // with PhoneLookups.
         DirectoryCompat.isOnlyEnterpriseDirectoryId(cursor.getDirectoryId())
             ? View.VISIBLE
             : View.GONE);

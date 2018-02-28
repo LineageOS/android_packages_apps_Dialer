@@ -46,6 +46,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
   static final String EXTRA_NUMBER = "number";
   static final String EXTRA_COUNTRY_ISO = "country_iso";
   static final String EXTRA_CALL_TYPE = "call_type";
+  static final String EXTRA_REPORTING_LOCATION = "reporting_location";
 
   /** {@link FragmentManager} needed to show a {@link android.app.DialogFragment}. */
   private final FragmentManager fragmentManager;
@@ -87,10 +88,16 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     Assert.checkArgument(intent.hasExtra(EXTRA_NUMBER));
     Assert.checkArgument(intent.hasExtra(EXTRA_COUNTRY_ISO));
     Assert.checkArgument(intent.hasExtra(EXTRA_CALL_TYPE));
+    Assert.checkArgument(intent.hasExtra(EXTRA_REPORTING_LOCATION));
 
     String normalizedNumber = intent.getStringExtra(EXTRA_NUMBER);
     String countryIso = intent.getStringExtra(EXTRA_COUNTRY_ISO);
     int callType = intent.getIntExtra(EXTRA_CALL_TYPE, 0);
+    ReportingLocation.Type reportingLocation =
+        ReportingLocation.Type.forNumber(
+            intent.getIntExtra(
+                EXTRA_REPORTING_LOCATION,
+                ReportingLocation.Type.UNKNOWN_REPORTING_LOCATION.getNumber()));
 
     Spam spam = SpamComponent.get(context).spam();
 
@@ -113,7 +120,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
                 normalizedNumber,
                 countryIso,
                 callType,
-                ReportingLocation.Type.UNKNOWN_REPORTING_LOCATION /* TODO(a bug): Fix. */,
+                reportingLocation,
                 ContactSource.Type.UNKNOWN_SOURCE_TYPE /* TODO(a bug): Fix. */);
           }
 
@@ -140,10 +147,16 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     Assert.checkArgument(intent.hasExtra(EXTRA_NUMBER));
     Assert.checkArgument(intent.hasExtra(EXTRA_COUNTRY_ISO));
     Assert.checkArgument(intent.hasExtra(EXTRA_CALL_TYPE));
+    Assert.checkArgument(intent.hasExtra(EXTRA_REPORTING_LOCATION));
 
     String normalizedNumber = intent.getStringExtra(EXTRA_NUMBER);
     String countryIso = intent.getStringExtra(EXTRA_COUNTRY_ISO);
     int callType = intent.getIntExtra(EXTRA_CALL_TYPE, 0);
+    ReportingLocation.Type reportingLocation =
+        ReportingLocation.Type.forNumber(
+            intent.getIntExtra(
+                EXTRA_REPORTING_LOCATION,
+                ReportingLocation.Type.UNKNOWN_REPORTING_LOCATION.getNumber()));
 
     // Set up the positive listener for the dialog.
     OnConfirmListener onConfirmListener =
@@ -158,7 +171,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
                 normalizedNumber,
                 countryIso,
                 callType,
-                ReportingLocation.Type.UNKNOWN_REPORTING_LOCATION /* TODO(a bug): Fix. */,
+                reportingLocation,
                 ContactSource.Type.UNKNOWN_SOURCE_TYPE /* TODO(a bug): Fix. */);
           }
         };

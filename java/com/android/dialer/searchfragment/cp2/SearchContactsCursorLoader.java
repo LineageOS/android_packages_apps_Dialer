@@ -103,7 +103,8 @@ public final class SearchContactsCursorLoader extends CursorLoader {
   static class SmartDialCursor extends MergeCursor implements SearchCursor {
 
     static SmartDialCursor newInstance(Context context, Cursor smartDialCursor) {
-      if (smartDialCursor.getCount() == 0) {
+      if (smartDialCursor == null || smartDialCursor.getCount() == 0) {
+        LogUtil.i("SmartDialCursor.newInstance", "Cursor was null or empty");
         return new SmartDialCursor(new Cursor[] {new MatrixCursor(Projections.CP2_PROJECTION)});
       }
 
@@ -173,7 +174,8 @@ public final class SearchContactsCursorLoader extends CursorLoader {
   static class RegularSearchCursor extends MergeCursor implements SearchCursor {
 
     static RegularSearchCursor newInstance(Context context, Cursor regularSearchCursor) {
-      if (regularSearchCursor.getCount() == 0) {
+      if (regularSearchCursor == null || regularSearchCursor.getCount() == 0) {
+        LogUtil.i("RegularSearchCursor.newInstance", "Cursor was null or empty");
         return new RegularSearchCursor(new Cursor[] {new MatrixCursor(Projections.CP2_PROJECTION)});
       }
 

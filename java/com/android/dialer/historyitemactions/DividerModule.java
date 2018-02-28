@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-package com.android.dialer.contactactions;
+package com.android.dialer.historyitemactions;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+import com.android.dialer.common.Assert;
 
 /**
- * Modules used to build {@link ContactActionBottomSheet}.
- *
- * <p>Contacts as they relate to this class should be thought of as any entity that an action can be
- * performed on like unknown/restricted contacts, along with saved and non-saved contacts.
+ * A module that inserts a grey line divider into {@link HistoryItemActionModule}. Layout it
+ * provided in R.layout.divider_layout.xml
  */
-public interface ContactActionModule {
+public final class DividerModule implements HistoryItemActionModule {
 
-  @StringRes
-  int getStringId();
+  @Override
+  public int getStringId() {
+    throw Assert.createUnsupportedOperationFailException();
+  }
 
-  @DrawableRes
-  int getDrawableId();
+  @Override
+  public int getDrawableId() {
+    throw Assert.createUnsupportedOperationFailException();
+  }
 
-  /** @return true if the bottom sheet should close, false otherwise */
-  boolean onClick();
+  @Override
+  public boolean onClick() {
+    throw Assert.createUnsupportedOperationFailException();
+  }
 }
