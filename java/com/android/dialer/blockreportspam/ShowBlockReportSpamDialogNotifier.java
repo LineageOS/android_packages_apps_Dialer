@@ -20,7 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.protos.ProtoParsers;
 
 /**
  * Notifies that a dialog for blocking a number and/or marking it as spam/not spam should be shown.
@@ -31,20 +31,9 @@ public final class ShowBlockReportSpamDialogNotifier {
 
   /**
    * Notifies that a dialog for blocking a number and optionally report it as spam should be shown.
-   *
-   * @param context Context
-   * @param normalizedNumber The number to be blocked/marked as spam
-   * @param countryIso The ISO 3166-1 two letters country code for the number
-   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
-   * @param reportingLocation The location where the number is reported. See {@link
-   *     ReportingLocation.Type}.
    */
   public static void notifyShowDialogToBlockNumberAndOptionallyReportSpam(
-      Context context,
-      String normalizedNumber,
-      String countryIso,
-      int callType,
-      ReportingLocation.Type reportingLocation) {
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
     LogUtil.enterBlock(
         "ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam");
 
@@ -52,40 +41,21 @@ public final class ShowBlockReportSpamDialogNotifier {
     intent.setAction(
         ShowBlockReportSpamDialogReceiver
             .ACTION_SHOW_DIALOG_TO_BLOCK_NUMBER_AND_OPTIONALLY_REPORT_SPAM);
-
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_NUMBER, normalizedNumber);
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_COUNTRY_ISO, countryIso);
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_CALL_TYPE, callType);
-    intent.putExtra(
-        ShowBlockReportSpamDialogReceiver.EXTRA_REPORTING_LOCATION, reportingLocation.getNumber());
+    ProtoParsers.put(
+        intent, ShowBlockReportSpamDialogReceiver.EXTRA_DIALOG_INFO, blockReportSpamDialogInfo);
 
     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
   }
 
-  /**
-   * Notifies that a dialog for reporting a number as not spam should be shown.
-   *
-   * @param context Context
-   * @param normalizedNumber The number to be reported as not spam
-   * @param countryIso The ISO 3166-1 two letters country code for the number
-   * @param callType Call type defined in {@link android.provider.CallLog.Calls}
-   * @param reportingLocation The location where the number is reported. See {@link
-   *     ReportingLocation.Type}.
-   */
+  /** Notifies that a dialog for reporting a number as not spam should be shown. */
   public static void notifyShowDialogToReportNotSpam(
-      Context context,
-      String normalizedNumber,
-      String countryIso,
-      int callType,
-      ReportingLocation.Type reportingLocation) {
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
     LogUtil.enterBlock("ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam");
 
     Intent intent = new Intent();
     intent.setAction(ShowBlockReportSpamDialogReceiver.ACTION_SHOW_DIALOG_TO_REPORT_NOT_SPAM);
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_NUMBER, normalizedNumber);
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_COUNTRY_ISO, countryIso);
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_CALL_TYPE, callType);
-    intent.putExtra(ShowBlockReportSpamDialogReceiver.EXTRA_REPORTING_LOCATION, reportingLocation);
+    ProtoParsers.put(
+        intent, ShowBlockReportSpamDialogReceiver.EXTRA_DIALOG_INFO, blockReportSpamDialogInfo);
 
     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
   }

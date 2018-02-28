@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
@@ -83,15 +84,19 @@ final class Modules {
         modules.add(moduleForAddingToContacts.get());
       }
 
+      BlockReportSpamDialogInfo blockReportSpamDialogInfo =
+          BlockReportSpamDialogInfo.newBuilder()
+              .setNormalizedNumber(row.number().getNormalizedNumber())
+              .setCountryIso(row.number().getCountryIso())
+              .setCallType(row.callType())
+              .setReportingLocation(ReportingLocation.Type.CALL_LOG_HISTORY)
+              .build();
       modules.addAll(
           SharedModules.createModulesHandlingBlockedOrSpamNumber(
               context,
-              row.number().getNormalizedNumber(),
-              row.number().getCountryIso(),
-              row.callType(),
+              blockReportSpamDialogInfo,
               row.numberAttributes().getIsBlocked(),
-              row.numberAttributes().getIsSpam(),
-              ReportingLocation.Type.CALL_LOG_HISTORY));
+              row.numberAttributes().getIsSpam()));
 
       Optional<HistoryItemActionModule> moduleForCopyingNumber =
           SharedModules.createModuleForCopyingNumber(context, normalizedNumber);
