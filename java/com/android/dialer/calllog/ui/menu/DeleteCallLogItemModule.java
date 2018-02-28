@@ -28,13 +28,13 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.database.Selection;
-import com.android.dialer.contactactions.ContactActionModule;
+import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/** {@link ContactActionModule} for deleting a call log item in the new call log. */
-public final class DeleteCallLogItemModule implements ContactActionModule {
+/** {@link HistoryItemActionModule} for deleting a call log item in the new call log. */
+public final class DeleteCallLogItemModule implements HistoryItemActionModule {
   private static final String TAG = DeleteCallLogItemModule.class.getName();
 
   private final Context context;

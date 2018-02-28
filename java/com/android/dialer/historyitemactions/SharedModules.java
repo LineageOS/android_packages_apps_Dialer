@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.contactactions;
+package com.android.dialer.historyitemactions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,17 +29,19 @@ import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.UriUtils;
+import com.google.common.base.Optional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 /**
  * Modules for the bottom sheet that are shared between NewVoicemailFragment and NewCallLogFragment
  */
+@SuppressWarnings("Guava")
 public class SharedModules {
 
-  public static void maybeAddModuleForAddingToContacts(
+  public static Optional<HistoryItemActionModule> createModuleForAddingToContacts(
       Context context,
-      List<ContactActionModule> modules,
       DialerPhoneNumber dialerPhoneNumber,
       String name,
       String lookupUri,
@@ -47,18 +49,18 @@ public class SharedModules {
       boolean isSpam) {
     // Skip showing the menu item for a spam/blocked number.
     if (isBlocked || isSpam) {
-      return;
+      return Optional.absent();
     }
 
     // Skip showing the menu item for existing contacts.
     if (isExistingContact(lookupUri)) {
-      return;
+      return Optional.absent();
     }
 
     // Skip showing the menu item if there is no number.
     String normalizedNumber = dialerPhoneNumber.getNormalizedNumber();
     if (TextUtils.isEmpty(normalizedNumber)) {
-      return;
+      return Optional.absent();
     }
 
     Intent intent = new Intent(Intent.ACTION_INSERT_OR_EDIT);
@@ -68,7 +70,8 @@ public class SharedModules {
     if (!TextUtils.isEmpty(name)) {
       intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
     }
-    modules.add(
+
+    return Optional.of(
         new IntentModule(
             context,
             intent,
@@ -86,31 +89,28 @@ public class SharedModules {
    * <p>TODO(zachh): We should revisit this once the contact URI is no longer being read from the
    * cached column in the system database, in case we decide not to overload the column.
    */
-  public static boolean isExistingContact(@Nullable String lookupUri) {
+  private static boolean isExistingContact(@Nullable String lookupUri) {
     return !TextUtils.isEmpty(lookupUri) && !UriUtils.isEncodedContactUri(Uri.parse(lookupUri));
   }
 
-  public static void maybeAddModuleForSendingTextMessage(
-      Context context,
-      List<ContactActionModule> modules,
-      String normalizedNumber,
-      boolean isBlocked) {
+  public static Optional<HistoryItemActionModule> createModuleForSendingTextMessage(
+      Context context, String normalizedNumber, boolean isBlocked) {
     // Don't show the option to send a text message if the number is blocked.
     if (isBlocked) {
-      return;
+      return Optional.absent();
     }
 
     // TODO(zachh): There are some conditions where this module should not be shown; consider
     // voicemail, business numbers, etc.
 
-    if (!TextUtils.isEmpty(normalizedNumber)) {
-      modules.add(
-          new IntentModule(
-              context,
-              IntentUtil.getSendSmsIntent(normalizedNumber),
-              R.string.send_a_message,
-              R.drawable.quantum_ic_message_vd_theme_24));
-    }
+    return !TextUtils.isEmpty(normalizedNumber)
+        ? Optional.of(
+            new IntentModule(
+                context,
+                IntentUtil.getSendSmsIntent(normalizedNumber),
+                R.string.send_a_message,
+                R.drawable.quantum_ic_message_vd_theme_24))
+        : Optional.absent();
   }
 
   /**
@@ -122,34 +122,38 @@ public class SharedModules {
    * @param reportingLocation The location where the number is reported. See {@link
    *     ReportingLocation.Type}.
    */
-  public static void addModulesHandlingBlockedOrSpamNumber(
+  public static List<HistoryItemActionModule> createModulesHandlingBlockedOrSpamNumber(
       Context context,
-      List<ContactActionModule> modules,
       String normalizedNumber,
       String countryIso,
       int callType,
       boolean isBlocked,
       boolean isSpam,
       ReportingLocation.Type reportingLocation) {
+    List<HistoryItemActionModule> modules = new ArrayList<>();
+
     // For a spam number, add two options:
     // (1) "Not spam" and "Block", or
     // (2) "Not spam" and "Unblock".
     if (isSpam) {
-      addModuleForMarkingNumberAsNonSpam(
-          context, modules, normalizedNumber, countryIso, callType, reportingLocation);
-      addModuleForBlockingOrUnblockingNumber(context, modules, normalizedNumber, isBlocked);
-      return;
+      modules.add(
+          createModuleForMarkingNumberAsNonSpam(
+              context, normalizedNumber, countryIso, callType, reportingLocation));
+      modules.add(createModuleForBlockingOrUnblockingNumber(context, normalizedNumber, isBlocked));
+      return modules;
     }
 
     // For a blocked non-spam number, add "Unblock" option.
     if (isBlocked) {
-      addModuleForBlockingOrUnblockingNumber(context, modules, normalizedNumber, isBlocked);
-      return;
+      modules.add(createModuleForBlockingOrUnblockingNumber(context, normalizedNumber, isBlocked));
+      return modules;
     }
 
     // For a number that is neither a spam number nor blocked, add "Block/Report spam" option.
-    addModuleForBlockingNumberAndOptionallyReportingSpam(
-        context, modules, normalizedNumber, countryIso, callType, reportingLocation);
+    modules.add(
+        createModuleForBlockingNumberAndOptionallyReportingSpam(
+            context, normalizedNumber, countryIso, callType, reportingLocation));
+    return modules;
   }
 
   /**
@@ -161,67 +165,61 @@ public class SharedModules {
    * @param reportingLocation The location where the number is reported. See {@link
    *     ReportingLocation.Type}.
    */
-  private static void addModuleForMarkingNumberAsNonSpam(
+  private static HistoryItemActionModule createModuleForMarkingNumberAsNonSpam(
       Context context,
-      List<ContactActionModule> modules,
       String normalizedNumber,
       String countryIso,
       int callType,
       ReportingLocation.Type reportingLocation) {
-    modules.add(
-        new ContactActionModule() {
-          @Override
-          public int getStringId() {
-            return R.string.not_spam;
-          }
+    return new HistoryItemActionModule() {
+      @Override
+      public int getStringId() {
+        return R.string.not_spam;
+      }
 
-          @Override
-          public int getDrawableId() {
-            return R.drawable.quantum_ic_report_off_vd_theme_24;
-          }
+      @Override
+      public int getDrawableId() {
+        return R.drawable.quantum_ic_report_off_vd_theme_24;
+      }
 
-          @Override
-          public boolean onClick() {
-            ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam(
-                context, normalizedNumber, countryIso, callType, reportingLocation);
-            return true; // Close the bottom sheet.
-          }
-        });
+      @Override
+      public boolean onClick() {
+        ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam(
+            context, normalizedNumber, countryIso, callType, reportingLocation);
+        return true; // Close the bottom sheet.
+      }
+    };
   }
 
-  private static void addModuleForBlockingOrUnblockingNumber(
-      Context context,
-      List<ContactActionModule> modules,
-      String normalizedNumber,
-      boolean isBlocked) {
-    modules.add(
-        new ContactActionModule() {
-          @Override
-          public int getStringId() {
-            return isBlocked ? R.string.unblock_number : R.string.block_number;
-          }
+  private static HistoryItemActionModule createModuleForBlockingOrUnblockingNumber(
+      Context context, String normalizedNumber, boolean isBlocked) {
+    return new HistoryItemActionModule() {
+      @Override
+      public int getStringId() {
+        return isBlocked ? R.string.unblock_number : R.string.block_number;
+      }
 
-          @Override
-          public int getDrawableId() {
-            return isBlocked
-                ? R.drawable.ic_unblock // TODO(a bug): use a vector icon
-                : R.drawable.quantum_ic_block_vd_theme_24;
-          }
+      @Override
+      public int getDrawableId() {
+        return isBlocked
+            ? R.drawable.ic_unblock // TODO(a bug): use a vector icon
+            : R.drawable.quantum_ic_block_vd_theme_24;
+      }
 
-          @Override
-          public boolean onClick() {
-            // TODO(a bug): implement this method.
-            Toast.makeText(
-                    context,
-                    String.format(
-                        Locale.ENGLISH,
-                        "TODO: " + (isBlocked ? "Unblock " : "Block ") + " number %s.",
-                        normalizedNumber),
-                    Toast.LENGTH_SHORT)
-                .show();
-            return true; // Close the bottom sheet.
-          }
-        });
+      @Override
+      public boolean onClick() {
+        // TODO(a bug): implement this method.
+        Toast.makeText(
+                context,
+                String.format(
+                    Locale.ENGLISH,
+                    "TODO: " + (isBlocked ? "Unblock " : "Block ") + " number %s.",
+                    normalizedNumber),
+                Toast.LENGTH_SHORT)
+            .show();
+        return true; // Close the bottom sheet.
+      }
+    };
   }
 
   /**
@@ -233,41 +231,39 @@ public class SharedModules {
    * @param reportingLocation The location where the number is reported. See {@link
    *     ReportingLocation.Type}.
    */
-  private static void addModuleForBlockingNumberAndOptionallyReportingSpam(
+  private static HistoryItemActionModule createModuleForBlockingNumberAndOptionallyReportingSpam(
       Context context,
-      List<ContactActionModule> modules,
       String normalizedNumber,
       String countryIso,
       int callType,
       ReportingLocation.Type reportingLocation) {
-    modules.add(
-        new ContactActionModule() {
-          @Override
-          public int getStringId() {
-            return R.string.block_and_optionally_report_spam;
-          }
+    return new HistoryItemActionModule() {
+      @Override
+      public int getStringId() {
+        return R.string.block_and_optionally_report_spam;
+      }
 
-          @Override
-          public int getDrawableId() {
-            return R.drawable.quantum_ic_block_vd_theme_24;
-          }
+      @Override
+      public int getDrawableId() {
+        return R.drawable.quantum_ic_block_vd_theme_24;
+      }
 
-          @Override
-          public boolean onClick() {
-            ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam(
-                context, normalizedNumber, countryIso, callType, reportingLocation);
-            return true; // Close the bottom sheet.
-          }
-        });
+      @Override
+      public boolean onClick() {
+        ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam(
+            context, normalizedNumber, countryIso, callType, reportingLocation);
+        return true; // Close the bottom sheet.
+      }
+    };
   }
 
-  public static void maybeAddModuleForCopyingNumber(
-      Context context, List<ContactActionModule> modules, String normalizedNumber) {
+  public static Optional<HistoryItemActionModule> createModuleForCopyingNumber(
+      Context context, String normalizedNumber) {
     if (TextUtils.isEmpty(normalizedNumber)) {
-      return;
+      return Optional.absent();
     }
-    modules.add(
-        new ContactActionModule() {
+    return Optional.of(
+        new HistoryItemActionModule() {
           @Override
           public int getStringId() {
             return R.string.copy_number;

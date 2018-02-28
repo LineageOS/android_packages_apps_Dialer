@@ -17,11 +17,12 @@
 package com.android.dialer.voicemail.listui.menu;
 
 import android.content.Context;
-import com.android.dialer.contactactions.ContactActionModule;
-import com.android.dialer.contactactions.DividerModule;
-import com.android.dialer.contactactions.SharedModules;
+import com.android.dialer.historyitemactions.DividerModule;
+import com.android.dialer.historyitemactions.HistoryItemActionModule;
+import com.android.dialer.historyitemactions.SharedModules;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.voicemail.model.VoicemailEntry;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,43 +30,57 @@ import java.util.List;
  * Configures the modules for the voicemail bottom sheet; these are the rows below the top row
  * (primary action) in the bottom sheet.
  */
+@SuppressWarnings("Guava")
 final class Modules {
 
-  static List<ContactActionModule> fromVoicemailEntry(
+  static List<HistoryItemActionModule> fromVoicemailEntry(
       Context context, VoicemailEntry voicemailEntry) {
     // Conditionally add each module, which are items in the bottom sheet's menu.
-    List<ContactActionModule> modules = new ArrayList<>();
+    List<HistoryItemActionModule> modules = new ArrayList<>();
 
     // TODO(uabdullah): Handle maybeAddModuleForVideoOrAudioCall(context, modules, row);
-    SharedModules.maybeAddModuleForAddingToContacts(
-        context,
-        modules,
-        voicemailEntry.number(),
-        voicemailEntry.numberAttributes().getName(),
-        voicemailEntry.numberAttributes().getLookupUri(),
-        voicemailEntry.numberAttributes().getIsBlocked(),
-        voicemailEntry.numberAttributes().getIsSpam());
+    Optional<HistoryItemActionModule> moduleForAddingContacts =
+        SharedModules.createModuleForAddingToContacts(
+            context,
+            voicemailEntry.number(),
+            voicemailEntry.numberAttributes().getName(),
+            voicemailEntry.numberAttributes().getLookupUri(),
+            voicemailEntry.numberAttributes().getIsBlocked(),
+            voicemailEntry.numberAttributes().getIsSpam());
+    if (moduleForAddingContacts.isPresent()) {
+      modules.add(moduleForAddingContacts.get());
+    }
 
-    String normalizedNumber = voicemailEntry.number().getNormalizedNumber();
-    SharedModules.maybeAddModuleForSendingTextMessage(
-        context, modules, normalizedNumber, voicemailEntry.numberAttributes().getIsBlocked());
+    Optional<HistoryItemActionModule> moduleForSendingTextMessage =
+        SharedModules.createModuleForSendingTextMessage(
+            context,
+            voicemailEntry.number().getNormalizedNumber(),
+            voicemailEntry.numberAttributes().getIsBlocked());
+    if (moduleForSendingTextMessage.isPresent()) {
+      modules.add(moduleForSendingTextMessage.get());
+    }
 
     if (!modules.isEmpty()) {
       modules.add(new DividerModule());
     }
 
-    SharedModules.addModulesHandlingBlockedOrSpamNumber(
-        context,
-        modules,
-        voicemailEntry.number().getNormalizedNumber(),
-        voicemailEntry.number().getCountryIso(),
-        voicemailEntry.callType(),
-        voicemailEntry.numberAttributes().getIsBlocked(),
-        voicemailEntry.numberAttributes().getIsSpam(),
-        ReportingLocation.Type.VOICEMAIL_HISTORY);
+    modules.addAll(
+        SharedModules.createModulesHandlingBlockedOrSpamNumber(
+            context,
+            voicemailEntry.number().getNormalizedNumber(),
+            voicemailEntry.number().getCountryIso(),
+            voicemailEntry.callType(),
+            voicemailEntry.numberAttributes().getIsBlocked(),
+            voicemailEntry.numberAttributes().getIsSpam(),
+            ReportingLocation.Type.VOICEMAIL_HISTORY));
 
     // TODO(zachh): Module for CallComposer.
-    SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
+    Optional<HistoryItemActionModule> moduleForCopyingNumber =
+        SharedModules.createModuleForCopyingNumber(
+            context, voicemailEntry.number().getNormalizedNumber());
+    if (moduleForCopyingNumber.isPresent()) {
+      modules.add(moduleForCopyingNumber.get());
+    }
 
     return modules;
   }
