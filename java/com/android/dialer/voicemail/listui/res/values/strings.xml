@@ -57,4 +57,7 @@ If you do not accept all of these terms and conditions, do not use Visual Voice 
   <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_branding_text">Transcribed by Google</string>
 
+  <!-- Text displayed when the list of voicemails is empty [CHAR LIMIT=NONE] -->
+  <string name="empty_voicemail_tab_text">Your voicemail inbox is empty.</string>
+
 </resources>
