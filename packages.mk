@@ -27,7 +27,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.commandline \
 	com.android.dialer.common \
 	com.android.dialer.configprovider \
-	com.android.dialer.contactactions \
 	com.android.dialer.contactphoto \
 	com.android.dialer.contactsfragment \
 	com.android.dialer.databasepopulator \
@@ -35,6 +34,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.enrichedcall.simulator \
 	com.android.dialer.feedback \
 	com.android.dialer.glidephotomanager.impl \
+  com.android.dialer.historyitemactions \
 	com.android.dialer.interactions \
 	com.android.dialer.lettertile \
 	com.android.dialer.location \

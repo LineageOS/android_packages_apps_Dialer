@@ -19,7 +19,7 @@ package com.android.dialer.voicemail.listui.menu;
 import android.content.Context;
 import android.text.TextUtils;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.contactactions.ContactPrimaryActionInfo;
+import com.android.dialer.historyitemactions.HistoryItemPrimaryActionInfo;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** Configures the primary action row (top row) for theottom sheet for the Voicemail Tab */
@@ -31,9 +31,9 @@ final class PrimaryAction {
   // setIntent - allow video calling
   // setPrimaryText - check in with UX
   // setSecondaryText - check in with UX
-  static ContactPrimaryActionInfo fromVoicemailEntry(
+  static HistoryItemPrimaryActionInfo fromVoicemailEntry(
       Context context, VoicemailEntry voicemailEntry) {
-    return ContactPrimaryActionInfo.builder()
+    return HistoryItemPrimaryActionInfo.builder()
         .setNumber(voicemailEntry.number())
         .setPhotoInfo(
             NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes())
