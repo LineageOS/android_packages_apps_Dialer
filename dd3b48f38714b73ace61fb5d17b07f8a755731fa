@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b2e4169_70dab8f5",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 3671
+      },
+      "writtenOn": "2018-02-28T14:08:29Z",
+      "side": 1,
+      "message": "i\u0027m not really sure what this flag does or if its needed",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 357,
+        "endChar": 29
+      },
+      "revId": "dd3b48f38714b73ace61fb5d17b07f8a755731fa",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
