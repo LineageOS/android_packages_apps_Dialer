@@ -84,7 +84,6 @@ public class SimulatorConnectionService extends ConnectionService {
       return null;
     }
     SimulatorConnection connection = new SimulatorConnection(this, request);
-    connection.setDialing();
     if (SimulatorSimCallManager.isSimulatorConnectionRequest(request)) {
       simulatorConnectionsBank.add(connection);
       connection.setAddress(
@@ -92,6 +91,7 @@ public class SimulatorConnectionService extends ConnectionService {
           request
               .getExtras()
               .getInt(Simulator.PRESENTATION_CHOICE, TelecomManager.PRESENTATION_ALLOWED));
+      connection.setDialing();
       ThreadUtil.postOnUiThread(
           () ->
               SimulatorComponent.get(instance)
@@ -107,6 +107,8 @@ public class SimulatorConnectionService extends ConnectionService {
       connection.putExtras(extras);
       simulatorConnectionsBank.add(connection);
       connection.addListener(new NonSimulatorConnectionListener());
+      connection.setDialing();
+      ThreadUtil.postOnUiThread(connection::setActive);
     }
     return connection;
   }
