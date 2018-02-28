@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.contactactions;
+package com.android.dialer.historyitemactions;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -32,37 +32,38 @@ import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import java.util.List;
 
 /**
- * {@link BottomSheetDialog} used for building a list of contact actions in a bottom sheet menu.
+ * {@link BottomSheetDialog} used to show a list of actions in a bottom sheet menu.
  *
- * <p>{@link #show(Context, ContactPrimaryActionInfo, List)} should be used to create and display
- * the menu. Modules are built using {@link ContactActionModule} and some defaults are provided by
- * {@link IntentModule} and {@link DividerModule}.
+ * <p>{@link #show(Context, HistoryItemPrimaryActionInfo, List, GlidePhotoManager)} should be used
+ * to create and display the menu. Modules are built using {@link HistoryItemActionModule} and some
+ * defaults are provided by {@link IntentModule} and {@link DividerModule}.
  */
-public class ContactActionBottomSheet extends BottomSheetDialog implements OnClickListener {
+public class HistoryItemActionBottomSheet extends BottomSheetDialog implements OnClickListener {
 
-  private final List<ContactActionModule> modules;
-  private final ContactPrimaryActionInfo contactPrimaryActionInfo;
+  private final List<HistoryItemActionModule> modules;
+  private final HistoryItemPrimaryActionInfo historyItemPrimaryActionInfo;
   private final GlidePhotoManager glidePhotoManager;
 
-  private ContactActionBottomSheet(
+  private HistoryItemActionBottomSheet(
       Context context,
-      ContactPrimaryActionInfo contactPrimaryActionInfo,
-      List<ContactActionModule> modules,
+      HistoryItemPrimaryActionInfo historyItemPrimaryActionInfo,
+      List<HistoryItemActionModule> modules,
       GlidePhotoManager glidePhotoManager) {
     super(context);
     this.modules = modules;
-    this.contactPrimaryActionInfo = contactPrimaryActionInfo;
+    this.historyItemPrimaryActionInfo = historyItemPrimaryActionInfo;
     this.glidePhotoManager = glidePhotoManager;
     setContentView(LayoutInflater.from(context).inflate(R.layout.sheet_layout, null));
   }
 
-  public static ContactActionBottomSheet show(
+  public static HistoryItemActionBottomSheet show(
       Context context,
-      ContactPrimaryActionInfo contactPrimaryActionInfo,
-      List<ContactActionModule> modules,
+      HistoryItemPrimaryActionInfo historyItemPrimaryActionInfo,
+      List<HistoryItemActionModule> modules,
       GlidePhotoManager glidePhotoManager) {
-    ContactActionBottomSheet sheet =
-        new ContactActionBottomSheet(context, contactPrimaryActionInfo, modules, glidePhotoManager);
+    HistoryItemActionBottomSheet sheet =
+        new HistoryItemActionBottomSheet(
+            context, historyItemPrimaryActionInfo, modules, glidePhotoManager);
     sheet.show();
     return sheet;
   }
@@ -73,7 +74,7 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     LinearLayout container = Assert.isNotNull(findViewById(R.id.action_container));
     container.addView(getContactView(container));
 
-    for (ContactActionModule module : modules) {
+    for (HistoryItemActionModule module : modules) {
       if (module instanceof DividerModule) {
         container.addView(getDividerView(container));
       } else {
@@ -88,22 +89,23 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
 
     // TODO(zachh): The contact image should be badged with a video icon if it is for a video call.
     glidePhotoManager.loadQuickContactBadge(
-        contactView.findViewById(R.id.quick_contact_photo), contactPrimaryActionInfo.photoInfo());
+        contactView.findViewById(R.id.quick_contact_photo),
+        historyItemPrimaryActionInfo.photoInfo());
 
     TextView primaryTextView = contactView.findViewById(R.id.primary_text);
     TextView secondaryTextView = contactView.findViewById(R.id.secondary_text);
 
-    primaryTextView.setText(contactPrimaryActionInfo.primaryText());
-    if (!TextUtils.isEmpty(contactPrimaryActionInfo.secondaryText())) {
-      secondaryTextView.setText(contactPrimaryActionInfo.secondaryText());
+    primaryTextView.setText(historyItemPrimaryActionInfo.primaryText());
+    if (!TextUtils.isEmpty(historyItemPrimaryActionInfo.secondaryText())) {
+      secondaryTextView.setText(historyItemPrimaryActionInfo.secondaryText());
     } else {
       secondaryTextView.setVisibility(View.GONE);
       secondaryTextView.setText(null);
     }
-    if (contactPrimaryActionInfo.intent() != null) {
+    if (historyItemPrimaryActionInfo.intent() != null) {
       contactView.setOnClickListener(
           (view) -> {
-            getContext().startActivity(contactPrimaryActionInfo.intent());
+            getContext().startActivity(historyItemPrimaryActionInfo.intent());
             dismiss();
           });
     }
@@ -115,7 +117,7 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
     return inflater.inflate(R.layout.divider_layout, container, false);
   }
 
-  private View getModuleView(ViewGroup container, ContactActionModule module) {
+  private View getModuleView(ViewGroup container, HistoryItemActionModule module) {
     LayoutInflater inflater = LayoutInflater.from(getContext());
     View moduleView = inflater.inflate(R.layout.module_layout, container, false);
     ((TextView) moduleView.findViewById(R.id.module_text)).setText(module.getStringId());
@@ -128,7 +130,7 @@ public class ContactActionBottomSheet extends BottomSheetDialog implements OnCli
 
   @Override
   public void onClick(View view) {
-    if (((ContactActionModule) view.getTag()).onClick()) {
+    if (((HistoryItemActionModule) view.getTag()).onClick()) {
       dismiss();
     }
   }

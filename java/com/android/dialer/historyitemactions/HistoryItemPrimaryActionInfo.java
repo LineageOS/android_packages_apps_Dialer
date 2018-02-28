@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.dialer.contactactions;
+package com.android.dialer.historyitemactions;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -23,13 +23,12 @@ import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.google.auto.value.AutoValue;
 
 /**
- * Contains information necessary to construct the primary action for a contact bottom sheet.
+ * Contains information necessary to construct the primary action for a history item's bottom sheet.
  *
- * <p>This may include information about the call, for instance when the bottom sheet is shown from
- * the call log.
+ * <p>A history item is one that is displayed in the call log or the voicemail fragment.
  */
 @AutoValue
-public abstract class ContactPrimaryActionInfo {
+public abstract class HistoryItemPrimaryActionInfo {
 
   @Nullable
   public abstract DialerPhoneNumber number();
@@ -52,7 +51,7 @@ public abstract class ContactPrimaryActionInfo {
 
   // TODO(zachh): Add SIM info here if should be shown in bottom sheet.
 
-  /** Builder for {@link ContactPrimaryActionInfo}. */
+  /** Builder for {@link HistoryItemPrimaryActionInfo}. */
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setNumber(@Nullable DialerPhoneNumber dialerPhoneNumber);
@@ -65,10 +64,10 @@ public abstract class ContactPrimaryActionInfo {
 
     public abstract Builder setIntent(@Nullable Intent intent);
 
-    public abstract ContactPrimaryActionInfo build();
+    public abstract HistoryItemPrimaryActionInfo build();
   }
 
   public static Builder builder() {
-    return new AutoValue_ContactPrimaryActionInfo.Builder();
+    return new AutoValue_HistoryItemPrimaryActionInfo.Builder();
   }
 }

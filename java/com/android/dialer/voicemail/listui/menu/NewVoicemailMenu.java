@@ -18,8 +18,8 @@ package com.android.dialer.voicemail.listui.menu;
 
 import android.content.Context;
 import android.view.View;
-import com.android.dialer.contactactions.ContactActionBottomSheet;
 import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** Handles configuration of the bottom sheet menus for voicemail entries. */
@@ -29,7 +29,7 @@ public final class NewVoicemailMenu {
   public static View.OnClickListener createOnClickListener(
       Context context, VoicemailEntry voicemailEntry, GlidePhotoManager glidePhotoManager) {
     return (view) ->
-        ContactActionBottomSheet.show(
+        HistoryItemActionBottomSheet.show(
             context,
             PrimaryAction.fromVoicemailEntry(context, voicemailEntry),
             Modules.fromVoicemailEntry(context, voicemailEntry),
