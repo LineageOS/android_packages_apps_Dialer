@@ -22,8 +22,8 @@ import android.view.View;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
-import com.android.dialer.contactactions.ContactActionBottomSheet;
 import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
 
@@ -34,7 +34,7 @@ public final class NewCallLogMenu {
   public static View.OnClickListener createOnClickListener(
       Context context, CoalescedRow row, GlidePhotoManager glidePhotoManager) {
     return view -> {
-      ContactActionBottomSheet.show(
+      HistoryItemActionBottomSheet.show(
           context,
           PrimaryAction.fromRow(context, row),
           Modules.fromRow(context, row),

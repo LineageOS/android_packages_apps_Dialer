@@ -25,36 +25,42 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogContactTypes;
 import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
-import com.android.dialer.contactactions.ContactActionModule;
-import com.android.dialer.contactactions.DividerModule;
-import com.android.dialer.contactactions.IntentModule;
-import com.android.dialer.contactactions.SharedModules;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.historyitemactions.DividerModule;
+import com.android.dialer.historyitemactions.HistoryItemActionModule;
+import com.android.dialer.historyitemactions.IntentModule;
+import com.android.dialer.historyitemactions.SharedModules;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Configures the modules for the bottom sheet; these are the rows below the top row (primary
  * action) in the bottom sheet.
  */
+@SuppressWarnings("Guava")
 final class Modules {
 
-  static List<ContactActionModule> fromRow(Context context, CoalescedRow row) {
+  static List<HistoryItemActionModule> fromRow(Context context, CoalescedRow row) {
     // Conditionally add each module, which are items in the bottom sheet's menu.
-    List<ContactActionModule> modules = new ArrayList<>();
+    List<HistoryItemActionModule> modules = new ArrayList<>();
 
     String normalizedNumber = row.number().getNormalizedNumber();
     boolean canPlaceCalls =
         PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation());
 
     if (canPlaceCalls) {
-      addModuleForCalls(context, modules, row, normalizedNumber);
-      SharedModules.maybeAddModuleForSendingTextMessage(
-          context, modules, normalizedNumber, row.numberAttributes().getIsBlocked());
+      modules.addAll(createModulesForCalls(context, row, normalizedNumber));
+      Optional<HistoryItemActionModule> moduleForSendingTextMessage =
+          SharedModules.createModuleForSendingTextMessage(
+              context, normalizedNumber, row.numberAttributes().getIsBlocked());
+      if (moduleForSendingTextMessage.isPresent()) {
+        modules.add(moduleForSendingTextMessage.get());
+      }
     }
 
     if (!modules.isEmpty()) {
@@ -65,45 +71,52 @@ final class Modules {
     // TODO(zachh): Module for CallComposer.
 
     if (canPlaceCalls) {
-      SharedModules.maybeAddModuleForAddingToContacts(
-          context,
-          modules,
-          row.number(),
-          row.numberAttributes().getName(),
-          row.numberAttributes().getLookupUri(),
-          row.numberAttributes().getIsBlocked(),
-          row.numberAttributes().getIsSpam());
-      SharedModules.addModulesHandlingBlockedOrSpamNumber(
-          context,
-          modules,
-          row.number().getNormalizedNumber(),
-          row.number().getCountryIso(),
-          row.callType(),
-          row.numberAttributes().getIsBlocked(),
-          row.numberAttributes().getIsSpam(),
-          ReportingLocation.Type.CALL_LOG_HISTORY);
-      SharedModules.maybeAddModuleForCopyingNumber(context, modules, normalizedNumber);
+      Optional<HistoryItemActionModule> moduleForAddingToContacts =
+          SharedModules.createModuleForAddingToContacts(
+              context,
+              row.number(),
+              row.numberAttributes().getName(),
+              row.numberAttributes().getLookupUri(),
+              row.numberAttributes().getIsBlocked(),
+              row.numberAttributes().getIsSpam());
+      if (moduleForAddingToContacts.isPresent()) {
+        modules.add(moduleForAddingToContacts.get());
+      }
+
+      modules.addAll(
+          SharedModules.createModulesHandlingBlockedOrSpamNumber(
+              context,
+              row.number().getNormalizedNumber(),
+              row.number().getCountryIso(),
+              row.callType(),
+              row.numberAttributes().getIsBlocked(),
+              row.numberAttributes().getIsSpam(),
+              ReportingLocation.Type.CALL_LOG_HISTORY));
+
+      Optional<HistoryItemActionModule> moduleForCopyingNumber =
+          SharedModules.createModuleForCopyingNumber(context, normalizedNumber);
+      if (moduleForCopyingNumber.isPresent()) {
+        modules.add(moduleForCopyingNumber.get());
+      }
     }
 
     // TODO(zachh): Revisit if DialerContact is the best thing to pass to CallDetails; could
-    // it use a ContactPrimaryActionInfo instead?
-    addModuleForAccessingCallDetails(context, modules, row);
+    // it use a HistoryItemPrimaryActionInfo instead?
+    modules.add(createModuleForAccessingCallDetails(context, row));
 
     modules.add(new DeleteCallLogItemModule(context, row.coalescedIds()));
 
     return modules;
   }
 
-  private static void addModuleForCalls(
-      Context context,
-      List<ContactActionModule> modules,
-      CoalescedRow row,
-      String normalizedNumber) {
+  private static List<HistoryItemActionModule> createModulesForCalls(
+      Context context, CoalescedRow row, String normalizedNumber) {
     // Don't add call options if a number is blocked.
     if (row.numberAttributes().getIsBlocked()) {
-      return;
+      return Collections.emptyList();
     }
 
+    List<HistoryItemActionModule> modules = new ArrayList<>();
     PhoneAccountHandle phoneAccountHandle =
         TelecomUtil.composePhoneAccountHandle(
             row.phoneAccountComponentName(), row.phoneAccountId());
@@ -123,24 +136,25 @@ final class Modules {
 
     // TODO(zachh): Also show video option if the call log entry is for an audio call but video
     // capabilities are present?
+
+    return modules;
   }
 
-  private static void addModuleForAccessingCallDetails(
-      Context context, List<ContactActionModule> modules, CoalescedRow row) {
+  private static HistoryItemActionModule createModuleForAccessingCallDetails(
+      Context context, CoalescedRow row) {
     boolean canReportAsInvalidNumber = row.numberAttributes().getCanReportAsInvalidNumber();
     boolean canSupportAssistedDialing = !TextUtils.isEmpty(row.numberAttributes().getLookupUri());
 
-    modules.add(
-        new IntentModule(
+    return new IntentModule(
+        context,
+        CallDetailsActivity.newInstance(
             context,
-            CallDetailsActivity.newInstance(
-                context,
-                row.coalescedIds(),
-                createDialerContactFromRow(context, row),
-                canReportAsInvalidNumber,
-                canSupportAssistedDialing),
-            R.string.call_details_menu_label,
-            R.drawable.quantum_ic_info_outline_vd_theme_24));
+            row.coalescedIds(),
+            createDialerContactFromRow(context, row),
+            canReportAsInvalidNumber,
+            canSupportAssistedDialing),
+        R.string.call_details_menu_label,
+        R.drawable.quantum_ic_info_outline_vd_theme_24);
   }
 
   private static DialerContact createDialerContactFromRow(Context context, CoalescedRow row) {
