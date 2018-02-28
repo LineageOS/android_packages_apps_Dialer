@@ -626,7 +626,7 @@ public class CallLogFragment extends Fragment
   @CallSuper
   public void onVisible() {
     LogUtil.enterBlock("CallLogFragment.onPageSelected");
-    if (getActivity() != null && getActivity() instanceof HostInterface) {
+    if (getActivity() != null && FragmentUtils.getParent(this, HostInterface.class) != null) {
       FragmentUtils.getParentUnsafe(this, HostInterface.class)
           .enableFloatingButton(!isModalAlertVisible());
     }
