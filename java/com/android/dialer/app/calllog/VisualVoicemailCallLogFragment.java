@@ -158,7 +158,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   public void onVisible() {
     LogUtil.enterBlock("VisualVoicemailCallLogFragment.onVisible");
     super.onVisible();
-    if (getActivity() != null) {
+    if (getActivity() != null && preSyncVoicemailStatusCheckExecutor != null) {
       preSyncVoicemailStatusCheckExecutor.executeParallel(getActivity());
       Logger.get(getActivity()).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
       getActivity().setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
