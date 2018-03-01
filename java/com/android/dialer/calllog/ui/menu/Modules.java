@@ -90,6 +90,7 @@ final class Modules {
               .setCountryIso(row.number().getCountryIso())
               .setCallType(row.callType())
               .setReportingLocation(ReportingLocation.Type.CALL_LOG_HISTORY)
+              .setContactSource(row.numberAttributes().getContactSource())
               .build();
       modules.addAll(
           SharedModules.createModulesHandlingBlockedOrSpamNumber(

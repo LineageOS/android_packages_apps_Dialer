@@ -56,6 +56,7 @@ public final class NumberAttributesConverter {
         .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
         .setIsSpam(phoneLookupInfoConsolidator.isSpam())
         .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
-        .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isDefaultCp2InfoIncomplete());
+        .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isDefaultCp2InfoIncomplete())
+        .setContactSource(phoneLookupInfoConsolidator.getContactSource());
   }
 }
