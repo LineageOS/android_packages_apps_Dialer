@@ -329,10 +329,8 @@ public class PhoneCallDetailsHelper
 
     // Use a custom title to prevent truncation, sigh
     TextView title = new TextView(context);
-    title.setText(
-        ratingValue == TranscriptionRatingValue.GOOD_TRANSCRIPTION
-            ? R.string.voicemail_donation_promo_good_title
-            : R.string.voicemail_donation_promo_bad_title);
+    title.setText(R.string.voicemail_donation_promo_title);
+
     title.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
     title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
     title.setTextColor(ContextCompat.getColor(context, R.color.dialer_primary_text_color));
@@ -383,7 +381,7 @@ public class PhoneCallDetailsHelper
     CharSequence content = context.getString(R.string.voicemail_donation_promo_content);
     CharSequence learnMore = context.getString(R.string.voicemail_donation_promo_learn_more);
     String learnMoreUrl = context.getString(R.string.voicemail_donation_promo_learn_more_url);
-    SpannableString span = new SpannableString(content + "\n" + learnMore);
+    SpannableString span = new SpannableString(content + " " + learnMore);
     int end = span.length();
     int start = end - learnMore.length();
     span.setSpan(new URLSpan(learnMoreUrl), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

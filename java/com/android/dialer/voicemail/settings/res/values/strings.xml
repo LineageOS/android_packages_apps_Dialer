@@ -116,7 +116,7 @@
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donate_preference_summary_not_activated">Visual voicemail is not activated yet, please try again later</string>
   <!-- Summary information for visual voicemail donation setting [CHAR LIMIT=NONE] -->
-  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription quality</string>
+  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription accuracy</string>
 
   <!-- Title for disable visual voicemail confirmation dialog [CHAR LIMIT=40] -->
   <string name="confirm_disable_voicemail_dialog_title">Turn off visual voicemail</string>
