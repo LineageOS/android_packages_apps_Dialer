@@ -675,19 +675,15 @@
        [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_failed_no_speech">Transcript not available. No speech detected.</string>
 
-  <!-- Title of voicemail donation promo dialog, show after clicking a 'thumbs up' rating icon
-       [CHAR LIMIT=64] -->
-  <string name="voicemail_donation_promo_good_title">Thanks! Would you like to help us improve transcriptions?</string>
-
-  <!-- Title of voicemail donation promo dialog, show after clicking a 'thumbs up' rating icon
-       [CHAR LIMIT=64] -->
-  <string name="voicemail_donation_promo_bad_title">Sorry. Would you like to help us improve transcriptions?</string>
+  <!-- Title of voicemail donation promo dialog
+      [CHAR LIMIT=64] -->
+  <string name="voicemail_donation_promo_title">Help improve transcription accuracy?</string>
 
   <!-- Content of voicemail donation promo dialog
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">
-    Let Google review your voicemail messages to improve transcription quality.
-    For voicemail transcription analysis, your voicemail messages are stored anonymously.
+    Let Google review this and future voicemail messages with transcripts.
+    They\'ll be stored anonymously. Change Settings any time.
   </string>
 
   <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
