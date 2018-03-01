@@ -222,18 +222,6 @@ public class CallLogFragment extends Fragment
     final Activity activity = getActivity();
     final ContentResolver resolver = activity.getContentResolver();
     callLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, logLimit);
-
-    if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
-      resolver.registerContentObserver(CallLog.CONTENT_URI, true, callLogObserver);
-    } else {
-      LogUtil.w("CallLogFragment.onCreate", "call log permission not available");
-    }
-    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
-      resolver.registerContentObserver(
-          ContactsContract.Contacts.CONTENT_URI, true, contactsObserver);
-    } else {
-      LogUtil.w("CallLogFragment.onCreate", "contacts permission not available.");
-    }
     setHasOptionsMenu(true);
   }
 
@@ -412,6 +400,19 @@ public class CallLogFragment extends Fragment
       updateEmptyMessage(callTypeFilter);
     }
 
+    ContentResolver resolver = getActivity().getContentResolver();
+    if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
+      resolver.registerContentObserver(CallLog.CONTENT_URI, true, callLogObserver);
+    } else {
+      LogUtil.w("CallLogFragment.onCreate", "call log permission not available");
+    }
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      resolver.registerContentObserver(
+          ContactsContract.Contacts.CONTENT_URI, true, contactsObserver);
+    } else {
+      LogUtil.w("CallLogFragment.onCreate", "contacts permission not available.");
+    }
+
     this.hasReadCallLogPermission = hasReadCallLogPermission;
 
     /*
@@ -432,6 +433,8 @@ public class CallLogFragment extends Fragment
   @Override
   public void onPause() {
     LogUtil.enterBlock("CallLogFragment.onPause");
+    getActivity().getContentResolver().unregisterContentObserver(callLogObserver);
+    getActivity().getContentResolver().unregisterContentObserver(contactsObserver);
     if (getUserVisibleHint()) {
       onNotVisible();
     }
@@ -465,9 +468,6 @@ public class CallLogFragment extends Fragment
     if (adapter != null) {
       adapter.changeCursor(null);
     }
-
-    getActivity().getContentResolver().unregisterContentObserver(callLogObserver);
-    getActivity().getContentResolver().unregisterContentObserver(contactsObserver);
     super.onDestroy();
   }
 

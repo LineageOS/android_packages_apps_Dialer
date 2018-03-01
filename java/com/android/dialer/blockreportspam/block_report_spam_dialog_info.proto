@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.blockreportspam";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.blockreportspam;
+
+import "java/com/android/dialer/logging/contact_source.proto";
+import "java/com/android/dialer/logging/reporting_location.proto";
+
+// Contains information needed in dialogs that allow a user to block a number
+// and/or report it as spam/not spam.
+// Next ID: 6
+message BlockReportSpamDialogInfo {
+  // A dialer-normalized version of the number used in the dialogs.
+  // See DialerPhoneNumber#normalized_number.
+  optional string normalized_number = 1;
+
+  // The ISO 3166-1 two letters country code of the number.
+  optional string country_iso = 2;
+
+  // Type of the call to/from the number, as defined in
+  // android.provider.CallLog.Calls
+  optional int32 call_type = 3;
+
+  // The location where the number is reported.
+  optional com.android.dialer.logging.ReportingLocation.Type
+      reporting_location = 4;
+
+  // The source where contact info is associated with the number.
+  optional com.android.dialer.logging.ContactSource.Type contact_source = 5;
+}
