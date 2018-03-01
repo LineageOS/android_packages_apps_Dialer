@@ -18,41 +18,62 @@ package com.android.incallui.incall.protocol;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
+import com.google.auto.value.AutoValue;
 import java.util.Locale;
 
 /** Information about the secondary call. */
-public class SecondaryInfo implements Parcelable {
-  public final boolean shouldShow;
-  public final String name;
-  public final boolean nameIsNumber;
-  public final String label;
-  public final String providerLabel;
-  public final boolean isConference;
-  public final boolean isVideoCall;
-  public final boolean isFullscreen;
+@AutoValue
+public abstract class SecondaryInfo implements Parcelable {
+  public abstract boolean shouldShow();
 
-  public static SecondaryInfo createEmptySecondaryInfo(boolean isFullScreen) {
-    return new SecondaryInfo(false, null, false, null, null, false, false, isFullScreen);
+  @Nullable
+  public abstract String name();
+
+  public abstract boolean nameIsNumber();
+
+  @Nullable
+  public abstract String label();
+
+  @Nullable
+  public abstract String providerLabel();
+
+  public abstract boolean isConference();
+
+  public abstract boolean isVideoCall();
+
+  public abstract boolean isFullscreen();
+
+  public static Builder builder() {
+    return new AutoValue_SecondaryInfo.Builder()
+        .setShouldShow(false)
+        .setNameIsNumber(false)
+        .setIsConference(false)
+        .setIsVideoCall(false)
+        .setIsFullscreen(false);
   }
 
-  public SecondaryInfo(
-      boolean shouldShow,
-      String name,
-      boolean nameIsNumber,
-      String label,
-      String providerLabel,
-      boolean isConference,
-      boolean isVideoCall,
-      boolean isFullscreen) {
-    this.shouldShow = shouldShow;
-    this.name = name;
-    this.nameIsNumber = nameIsNumber;
-    this.label = label;
-    this.providerLabel = providerLabel;
-    this.isConference = isConference;
-    this.isVideoCall = isVideoCall;
-    this.isFullscreen = isFullscreen;
+  /** Builder class for secondary info. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setShouldShow(boolean shouldShow);
+
+    public abstract Builder setName(String name);
+
+    public abstract Builder setNameIsNumber(boolean nameIsNumber);
+
+    public abstract Builder setLabel(String label);
+
+    public abstract Builder setProviderLabel(String providerLabel);
+
+    public abstract Builder setIsConference(boolean isConference);
+
+    public abstract Builder setIsVideoCall(boolean isVideoCall);
+
+    public abstract Builder setIsFullscreen(boolean isFullscreen);
+
+    public abstract SecondaryInfo build();
   }
 
   @Override
@@ -60,28 +81,26 @@ public class SecondaryInfo implements Parcelable {
     return String.format(
         Locale.US,
         "SecondaryInfo, show: %b, name: %s, label: %s, " + "providerLabel: %s",
-        shouldShow,
-        LogUtil.sanitizePii(name),
-        label,
-        providerLabel);
-  }
-
-  protected SecondaryInfo(Parcel in) {
-    shouldShow = in.readByte() != 0;
-    name = in.readString();
-    nameIsNumber = in.readByte() != 0;
-    label = in.readString();
-    providerLabel = in.readString();
-    isConference = in.readByte() != 0;
-    isVideoCall = in.readByte() != 0;
-    isFullscreen = in.readByte() != 0;
+        shouldShow(),
+        LogUtil.sanitizePii(name()),
+        label(),
+        providerLabel());
   }
 
   public static final Creator<SecondaryInfo> CREATOR =
       new Creator<SecondaryInfo>() {
         @Override
         public SecondaryInfo createFromParcel(Parcel in) {
-          return new SecondaryInfo(in);
+          return builder()
+              .setShouldShow(in.readByte() != 0)
+              .setName(in.readString())
+              .setNameIsNumber(in.readByte() != 0)
+              .setLabel(in.readString())
+              .setProviderLabel(in.readString())
+              .setIsConference(in.readByte() != 0)
+              .setIsVideoCall(in.readByte() != 0)
+              .setIsFullscreen(in.readByte() != 0)
+              .build();
         }
 
         @Override
@@ -97,13 +116,13 @@ public class SecondaryInfo implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeByte((byte) (shouldShow ? 1 : 0));
-    dest.writeString(name);
-    dest.writeByte((byte) (nameIsNumber ? 1 : 0));
-    dest.writeString(label);
-    dest.writeString(providerLabel);
-    dest.writeByte((byte) (isConference ? 1 : 0));
-    dest.writeByte((byte) (isVideoCall ? 1 : 0));
-    dest.writeByte((byte) (isFullscreen ? 1 : 0));
+    dest.writeByte((byte) (shouldShow() ? 1 : 0));
+    dest.writeString(name());
+    dest.writeByte((byte) (nameIsNumber() ? 1 : 0));
+    dest.writeString(label());
+    dest.writeString(providerLabel());
+    dest.writeByte((byte) (isConference() ? 1 : 0));
+    dest.writeByte((byte) (isVideoCall() ? 1 : 0));
+    dest.writeByte((byte) (isFullscreen() ? 1 : 0));
   }
 }
