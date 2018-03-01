@@ -651,6 +651,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       // No-op, just let the clicks fall through to the search list
       return false;
     }
+
+    @Override
+    public boolean shouldShowDialpadChooser() {
+      // Never show the dialpad chooser. Ever.
+      return false;
+    }
   }
 
   /** @see CallLogAdapter.OnActionModeStateChangedListener */
