@@ -29,6 +29,7 @@ import android.telecom.CallAudioState;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,8 @@ import android.widget.TextView.OnEditorActionListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
+import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
@@ -68,7 +71,8 @@ public class RttChatFragment extends Fragment
         MessageListener,
         RttCallScreen,
         InCallScreen,
-        InCallButtonUi {
+        InCallButtonUi,
+        AudioRouteSelectorPresenter {
 
   private static final String ARG_CALL_ID = "call_id";
 
@@ -94,6 +98,7 @@ public class RttChatFragment extends Fragment
   private TextView nameTextView;
   private Chronometer chronometer;
   private boolean isTimerStarted;
+  private RttOverflowMenu overflowMenu;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -173,6 +178,10 @@ public class RttChatFragment extends Fragment
           inCallButtonUiDelegate.onEndCallClicked();
         });
 
+    overflowMenu = new RttOverflowMenu(getContext(), inCallButtonUiDelegate);
+    view.findViewById(R.id.rtt_overflow_button)
+        .setOnClickListener(v -> overflowMenu.showAtLocation(v, Gravity.TOP | Gravity.RIGHT, 0, 0));
+
     nameTextView = view.findViewById(R.id.rtt_name_or_number);
     chronometer = view.findViewById(R.id.rtt_timer);
     return view;
@@ -240,6 +249,9 @@ public class RttChatFragment extends Fragment
   public void onStop() {
     LogUtil.enterBlock("RttChatFragment.onStop");
     super.onStop();
+    if (overflowMenu.isShowing()) {
+      overflowMenu.dismiss();
+    }
     onRttScreenStop();
   }
 
@@ -360,7 +372,11 @@ public class RttChatFragment extends Fragment
   public void setVideoPaused(boolean isPaused) {}
 
   @Override
-  public void setAudioState(CallAudioState audioState) {}
+  public void setAudioState(CallAudioState audioState) {
+    LogUtil.i("RttChatFragment.setAudioState", "audioState: " + audioState);
+    overflowMenu.setMuteButtonChecked(audioState.isMuted());
+    overflowMenu.setAudioState(audioState);
+  }
 
   @Override
   public void updateButtonStates() {}
@@ -374,5 +390,16 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
-  public void showAudioRouteSelector() {}
+  public void showAudioRouteSelector() {
+    AudioRouteSelectorDialogFragment.newInstance(inCallButtonUiDelegate.getCurrentAudioState())
+        .show(getChildFragmentManager(), null);
+  }
+
+  @Override
+  public void onAudioRouteSelected(int audioRoute) {
+    inCallButtonUiDelegate.setAudioRoute(audioRoute);
+  }
+
+  @Override
+  public void onAudioRouteSelectorDismiss() {}
 }
