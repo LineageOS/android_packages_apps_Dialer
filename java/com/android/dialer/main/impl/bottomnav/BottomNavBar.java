@@ -23,6 +23,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -123,8 +124,25 @@ public final class BottomNavBar extends LinearLayout {
     }
   }
 
+  /**
+   * Displays or hides the voicemail tab.
+   *
+   * <p>In the event that the voicemail tab was earlier visible but is now no longer visible, we
+   * move to the speed dial tab.
+   *
+   * @param showTab whether to hide or show the voicemail
+   */
   public void showVoicemail(boolean showTab) {
+    LogUtil.i("OldMainActivityPeer.showVoicemail", "showing Tab:%b", showTab);
+    int voicemailpreviousVisibility = voicemail.getVisibility();
     voicemail.setVisibility(showTab ? View.VISIBLE : View.GONE);
+    int voicemailcurrentVisibility = voicemail.getVisibility();
+
+    if (voicemailpreviousVisibility != voicemailcurrentVisibility
+        && voicemailpreviousVisibility == View.VISIBLE) {
+      LogUtil.i("OldMainActivityPeer.showVoicemail", "hid VM tab and moved to speed dial tab");
+      selectTab(TabIndex.SPEED_DIAL);
+    }
   }
 
   public void setNotificationCount(@TabIndex int tab, int count) {
