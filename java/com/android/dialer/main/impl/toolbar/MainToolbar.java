@@ -19,6 +19,7 @@ package com.android.dialer.main.impl.toolbar;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -66,9 +67,9 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
     return listener.onMenuItemClicked(menuItem);
   }
 
-  public void setSearchBarListener(SearchBarListener listener) {
-    this.listener = listener;
-    ((SearchBarView) findViewById(R.id.search_view_container)).setSearchBarListener(listener);
+  public void setSearchBarListener(@NonNull SearchBarListener listener) {
+    this.listener = Assert.isNotNull(listener);
+    searchBar.setSearchBarListener(listener);
   }
 
   /** Slides the toolbar up and off the screen. */

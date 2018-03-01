@@ -21,8 +21,10 @@ option optimize_for = LITE_RUNTIME;
 
 package com.android.dialer;
 
+import "java/com/android/dialer/logging/contact_source.proto";
+
 // Information related to the phone number of the call.
-// Next ID: 12
+// Next ID: 13
 message NumberAttributes {
   // The name (which may be a person's name or business name, but not a number)
   // formatted exactly as it should appear to the user. If the user's locale or
@@ -65,4 +67,7 @@ message NumberAttributes {
 
   // Whether the number is spam.
   optional bool is_spam = 11;
+
+  // Source of the contact associated with the number.
+  optional com.android.dialer.logging.ContactSource.Type contact_source = 12;
 }
