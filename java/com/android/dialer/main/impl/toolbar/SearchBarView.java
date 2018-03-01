@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.util.DialerUtils;
 import com.google.common.base.Optional;
@@ -188,8 +189,8 @@ final class SearchBarView extends FrameLayout {
     requestLayout();
   }
 
-  /* package-private */ void setSearchBarListener(SearchBarListener listener) {
-    this.listener = listener;
+  /* package-private */ void setSearchBarListener(@NonNull SearchBarListener listener) {
+    this.listener = Assert.isNotNull(listener);
   }
 
   public String getQuery() {
@@ -236,7 +237,15 @@ final class SearchBarView extends FrameLayout {
         return;
       }
 
-      listener.onSearchQueryUpdated(s.toString());
+      // afterTextChanged is called each time the device is rotated (or the activity is recreated).
+      // That means that this method could potentially be called before the listener is set and
+      // we should check if it's null. In the case that it is null, assert that the query is empty
+      // because the listener must be notified of non-empty queries.
+      if (listener != null) {
+        listener.onSearchQueryUpdated(s.toString());
+      } else {
+        Assert.checkArgument(TextUtils.isEmpty(s.toString()));
+      }
     }
   }
 }

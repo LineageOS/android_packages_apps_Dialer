@@ -71,6 +71,7 @@ final class Modules {
             .setCountryIso(voicemailEntry.number().getCountryIso())
             .setCallType(voicemailEntry.callType())
             .setReportingLocation(ReportingLocation.Type.VOICEMAIL_HISTORY)
+            .setContactSource(voicemailEntry.numberAttributes().getContactSource())
             .build();
     modules.addAll(
         SharedModules.createModulesHandlingBlockedOrSpamNumber(
