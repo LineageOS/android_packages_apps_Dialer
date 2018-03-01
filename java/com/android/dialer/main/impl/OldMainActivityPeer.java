@@ -23,11 +23,14 @@ import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
+import android.provider.VoicemailContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -91,9 +94,15 @@ import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
+import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler;
+import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler.Source;
+import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
+import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import com.android.voicemail.VoicemailComponent;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -273,7 +282,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     if (VoicemailComponent.get(context)
         .getVoicemailClient()
         .isVoicemailEnabled(context, defaultUserSelectedAccount)) {
-      LogUtil.i("OldMainActivityPeer.canVoicemailTabBeShown", "Voicemail is not enabled");
+      LogUtil.i("OldMainActivityPeer.canVoicemailTabBeShown", "Voicemail is enabled");
       return true;
     }
     LogUtil.i("OldMainActivityPeer.canVoicemailTabBeShown", "returning false");
@@ -706,7 +715,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
    *   <li>Marking missed calls as read when appropriate. See {@link
    *       #markMissedCallsAsReadAndRemoveNotification()}
    *   <li>TODO(calderwoodra): multiselect
-   *   <li>TODO(calderwoodra): voicemail status
    * </ul>
    *
    * @see CallLogFragmentListener
@@ -727,6 +735,15 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private long timeSelected = -1;
     private boolean activityIsAlive;
 
+    private final ContentObserver voicemailStatusObserver =
+        new ContentObserver(new Handler()) {
+          @Override
+          public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            callLogQueryHandler.fetchVoicemailStatus();
+          }
+        };
+
     MainCallLogFragmentListener(
         Context context,
         ContentResolver contentResolver,
@@ -736,6 +753,21 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       this.context = context;
       this.bottomNavBar = bottomNavBar;
       this.toolbar = toolbar;
+    }
+
+    private void registerVoicemailStatusContentObserver(Context context) {
+
+      if (PermissionsUtil.hasReadVoicemailPermissions(context)
+          && PermissionsUtil.hasAddVoicemailPermissions(context)) {
+        context
+            .getContentResolver()
+            .registerContentObserver(
+                VoicemailContract.Status.CONTENT_URI, true, voicemailStatusObserver);
+      } else {
+        LogUtil.w(
+            "MainCallLogFragmentListener.registerVoicemailStatusContentObserver",
+            "no voicemail read/add permissions");
+      }
     }
 
     @Override
@@ -752,7 +784,42 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     @Override
     public void onVoicemailStatusFetched(Cursor statusCursor) {
-      // TODO(calderwoodra): handle this when voicemail is implemented
+      LogUtil.i("OldMainActivityPeer.MainCallLogFragmentListener", "onVoicemailStatusFetched");
+      VoicemailStatusCorruptionHandler.maybeFixVoicemailStatus(
+          context, statusCursor, Source.Activity);
+
+      // Update hasActiveVoicemailProvider, which controls the number of tabs displayed.
+      int numberOfActiveVoicemailSources =
+          VoicemailStatusHelper.getNumberActivityVoicemailSources(statusCursor);
+
+      boolean hasActiveVoicemailProvider = numberOfActiveVoicemailSources > 0;
+      LogUtil.i(
+          "OldMainActivityPeer.onVoicemailStatusFetched",
+          String.format(
+              Locale.US,
+              "hasActiveVoicemailProvider:%b, number of active voicemail sources:%d",
+              hasActiveVoicemailProvider,
+              numberOfActiveVoicemailSources));
+
+      if (hasActiveVoicemailProvider) {
+        // TODO(yueg): Use new logging for VVM_TAB_VISIBLE
+        // Logger.get(context).logImpression(DialerImpression.Type.VVM_TAB_VISIBLE);
+        bottomNavBar.showVoicemail(true);
+        callLogQueryHandler.fetchVoicemailUnreadCount();
+      } else {
+        bottomNavBar.showVoicemail(false);
+      }
+
+      StorageComponent.get(context)
+          .unencryptedSharedPrefs()
+          .edit()
+          .putBoolean(
+              VisualVoicemailEnabledChecker.PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER,
+              hasActiveVoicemailProvider)
+          .apply();
+
+      // TODO(uabdullah): Check if we need to force move to the VM tab (e.g in the event of
+      // clicking a vm notification and a status wasn't yet fetched).
     }
 
     @Override
@@ -812,6 +879,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     public void onActivityResume() {
       activityIsAlive = true;
+      registerVoicemailStatusContentObserver(context);
       callLogQueryHandler.fetchVoicemailStatus();
       callLogQueryHandler.fetchMissedCallsUnreadCount();
       // Reset the tab on resume to restart the timer
@@ -820,6 +888,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     /** Should be called when {@link Activity#onStop()} is called. */
     public void onActivityStop(boolean changingConfigurations, boolean keyguardLocked) {
+      context.getContentResolver().unregisterContentObserver(voicemailStatusObserver);
       activityIsAlive = false;
       if (viewedCallLogTabPastTimeThreshold() && !changingConfigurations && !keyguardLocked) {
         markMissedCallsAsReadAndRemoveNotification();
