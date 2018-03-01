@@ -14,8 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <dimen name="rtt_message_margin_top">16dp</dimen>
-  <dimen name="rtt_same_group_message_margin_top">2dp</dimen>
-  <dimen name="rtt_overflow_menu_width">180dp</dimen>
-</resources>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_checked="true"
+      android:color="@color/rtt_button_selected_color" />
+  <item android:color="@color/rtt_button_unselected_color" />
+</selector>
