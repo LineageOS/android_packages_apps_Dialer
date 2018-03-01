@@ -30,6 +30,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
 import com.android.dialer.common.LogUtil;
@@ -38,6 +39,7 @@ import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.voicemail.listui.error.VoicemailStatus;
 import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
+import com.android.dialer.widget.EmptyContentView;
 import com.android.voicemail.VoicemailComponent;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -51,6 +53,11 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   private RecyclerView recyclerView;
   private RefreshAnnotatedCallLogReceiver refreshAnnotatedCallLogReceiver;
   private UiListener<ImmutableList<VoicemailStatus>> queryVoicemailStatusTableListener;
+
+  // View required to show/hide recycler and empty views
+  FrameLayout fragmentRootFrameLayout;
+
+  private EmptyContentView emptyContentView;
 
   public NewVoicemailFragment() {
     LogUtil.enterBlock("NewVoicemailFragment.NewVoicemailFragment");
@@ -147,10 +154,14 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     LogUtil.enterBlock("NewVoicemailFragment.onCreateView");
-    View view = inflater.inflate(R.layout.new_voicemail_call_log_fragment, container, false);
-    recyclerView = view.findViewById(R.id.new_voicemail_call_log_recycler_view);
+
+    fragmentRootFrameLayout =
+        (FrameLayout) inflater.inflate(R.layout.new_voicemail_call_log_fragment, container, false);
+    recyclerView = fragmentRootFrameLayout.findViewById(R.id.new_voicemail_call_log_recycler_view);
+
+    emptyContentView = fragmentRootFrameLayout.findViewById(R.id.empty_content_view);
     getLoaderManager().restartLoader(0, null, this);
-    return view;
+    return fragmentRootFrameLayout;
   }
 
   @Override
@@ -162,6 +173,12 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     LogUtil.i("NewVoicemailFragment.onLoadFinished", "cursor size is %d", data.getCount());
+    if (data.getCount() == 0) {
+      showEmptyVoicemailFragmentView();
+      return;
+    }
+    showView(recyclerView);
+
     if (recyclerView.getAdapter() == null) {
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       // TODO(uabdullah): Replace getActivity().getFragmentManager() with getChildFragment()
@@ -182,9 +199,24 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
           recyclerView.getAdapter());
       ((NewVoicemailAdapter) recyclerView.getAdapter()).updateCursor(data);
       ((NewVoicemailAdapter) recyclerView.getAdapter()).checkAndPlayVoicemail();
+      queryAndUpdateVoicemailStatusAlert();
     }
+  }
 
-    queryAndUpdateVoicemailStatusAlert();
+  /** Shows the view when there are no voicemails to be displayed * */
+  private void showEmptyVoicemailFragmentView() {
+    LogUtil.enterBlock("NewVoicemailFragmentListener.showEmptyVoicemailFragmentView");
+
+    showView(emptyContentView);
+
+    emptyContentView.setDescription((R.string.empty_voicemail_tab_text));
+    emptyContentView.setImage(R.drawable.quantum_ic_schedule_vd_theme_24);
+  }
+
+  private void showView(View view) {
+    LogUtil.i("NewVoicemailFragmentListener.showView", "Showing view: " + view);
+    emptyContentView.setVisibility(view == emptyContentView ? View.VISIBLE : View.GONE);
+    recyclerView.setVisibility(view == recyclerView ? View.VISIBLE : View.GONE);
   }
 
   private void registerRefreshAnnotatedCallLogReceiver() {
