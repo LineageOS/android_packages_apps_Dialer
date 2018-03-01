@@ -7,11 +7,12 @@ option optimize_for = LITE_RUNTIME;
 
 package com.android.dialer.blockreportspam;
 
+import "java/com/android/dialer/logging/contact_source.proto";
 import "java/com/android/dialer/logging/reporting_location.proto";
 
 // Contains information needed in dialogs that allow a user to block a number
 // and/or report it as spam/not spam.
-// Next ID: 5
+// Next ID: 6
 message BlockReportSpamDialogInfo {
   // A dialer-normalized version of the number used in the dialogs.
   // See DialerPhoneNumber#normalized_number.
@@ -27,4 +28,7 @@ message BlockReportSpamDialogInfo {
   // The location where the number is reported.
   optional com.android.dialer.logging.ReportingLocation.Type
       reporting_location = 4;
+
+  // The source where contact info is associated with the number.
+  optional com.android.dialer.logging.ContactSource.Type contact_source = 5;
 }

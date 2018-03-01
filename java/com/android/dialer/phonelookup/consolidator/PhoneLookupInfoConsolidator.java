@@ -18,6 +18,7 @@ package com.android.dialer.phonelookup.consolidator;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.ContactSource;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.BlockedState;
@@ -88,6 +89,39 @@ public final class PhoneLookupInfoConsolidator {
     this.firstDefaultCp2Contact = getFirstContactInDefaultDirectory();
     this.firstExtendedCp2Contact = getFirstContactInExtendedDirectories();
     this.nameSource = selectNameSource();
+  }
+
+  /**
+   * Returns a {@link com.android.dialer.logging.ContactSource.Type} representing the source from
+   * which info is used to display contact info in the UI.
+   */
+  public ContactSource.Type getContactSource() {
+    switch (nameSource) {
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return ContactSource.Type.SOURCE_TYPE_DIRECTORY;
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+        return ContactSource.Type.SOURCE_TYPE_EXTENDED;
+      case NameSource.PEOPLE_API:
+        return getRefinedPeopleApiSource();
+      case NameSource.NONE:
+        return ContactSource.Type.UNKNOWN_SOURCE_TYPE;
+      default:
+        throw Assert.createUnsupportedOperationFailException(
+            String.format("Unsupported name source: %s", nameSource));
+    }
+  }
+
+  private ContactSource.Type getRefinedPeopleApiSource() {
+    Assert.checkState(nameSource == NameSource.PEOPLE_API);
+
+    switch (phoneLookupInfo.getPeopleApiInfo().getInfoType()) {
+      case CONTACT:
+        return ContactSource.Type.SOURCE_TYPE_PROFILE;
+      case NEARBY_BUSINESS:
+        return ContactSource.Type.SOURCE_TYPE_PLACES;
+      default:
+        return ContactSource.Type.SOURCE_TYPE_REMOTE_OTHER;
+    }
   }
 
   /**

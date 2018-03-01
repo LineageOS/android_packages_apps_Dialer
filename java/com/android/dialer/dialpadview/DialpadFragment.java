@@ -1312,7 +1312,9 @@ public class DialpadFragment extends Fragment
    *     or ringing or dialing, or on hold).
    */
   private boolean isPhoneInUse() {
-    return getContext() != null && TelecomUtil.isInManagedCall(getContext());
+    return getContext() != null
+        && TelecomUtil.isInManagedCall(getContext())
+        && FragmentUtils.getParentUnsafe(this, HostInterface.class).shouldShowDialpadChooser();
   }
 
   /** @return true if the phone is a CDMA phone type */
@@ -1584,6 +1586,9 @@ public class DialpadFragment extends Fragment
      * unless there happens to be content showing.
      */
     boolean onDialpadSpacerTouchWithEmptyQuery();
+
+    /** Returns true if this fragment's parent want the dialpad to show the dialpad chooser. */
+    boolean shouldShowDialpadChooser();
   }
 
   /**

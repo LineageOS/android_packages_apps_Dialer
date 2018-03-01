@@ -26,7 +26,6 @@ import com.android.dialer.blockreportspam.BlockReportSpamDialogs.OnConfirmListen
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.OnSpamDialogClickListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.protos.ProtoParsers;
@@ -109,7 +108,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
                 dialogInfo.getCountryIso(),
                 dialogInfo.getCallType(),
                 dialogInfo.getReportingLocation(),
-                ContactSource.Type.UNKNOWN_SOURCE_TYPE /* TODO(a bug): Fix. */);
+                dialogInfo.getContactSource());
           }
 
           // TODO(a bug): Block the number.
@@ -154,7 +153,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
                 dialogInfo.getCountryIso(),
                 dialogInfo.getCallType(),
                 dialogInfo.getReportingLocation(),
-                ContactSource.Type.UNKNOWN_SOURCE_TYPE /* TODO(a bug): Fix. */);
+                dialogInfo.getContactSource());
           }
         };
 

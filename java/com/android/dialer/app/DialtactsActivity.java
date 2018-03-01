@@ -1454,6 +1454,12 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
+  public boolean shouldShowDialpadChooser() {
+    // Show the dialpad chooser if we're in a call
+    return true;
+  }
+
+  @Override
   public void onSearchListTouch() {
     if (isDialpadShown) {
       PerformanceReport.recordClick(UiAction.Type.CLOSE_DIALPAD);
