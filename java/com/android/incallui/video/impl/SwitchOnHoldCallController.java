@@ -74,7 +74,7 @@ public class SwitchOnHoldCallController implements OnClickListener {
   }
 
   private boolean hasSecondaryInfo() {
-    return secondaryInfo != null && secondaryInfo.shouldShow;
+    return secondaryInfo != null && secondaryInfo.shouldShow();
   }
 
   public void updateButtonState() {
