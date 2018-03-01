@@ -17,6 +17,7 @@
 package com.android.dialer.voicemail.listui;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
@@ -63,6 +64,7 @@ public class NewVoicemailMediaPlayer {
           () -> {
             try {
               mediaPlayer.setDataSource(context, uri);
+              setAudioManagerToNonSpeakerMode(context);
             } catch (IOException e) {
               LogUtil.i(
                   "NewVoicemailMediaPlayer",
@@ -84,6 +86,13 @@ public class NewVoicemailMediaPlayer {
           "NewVoicemailMediaPlayer",
           "threw an Exception " + e + " for uri: " + uri + "for context : " + context);
     }
+  }
+
+  /** We should never start playing voicemails from the speaker mode */
+  private void setAudioManagerToNonSpeakerMode(Context context) {
+    AudioManager audioManager = context.getSystemService(AudioManager.class);
+    audioManager.setMode(AudioManager.STREAM_MUSIC);
+    audioManager.setSpeakerphoneOn(false);
   }
 
   private void verifyListenersNotNull() {
