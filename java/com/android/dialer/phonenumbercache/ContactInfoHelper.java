@@ -475,7 +475,7 @@ public class ContactInfoHelper {
     if (TextUtils.isEmpty(countryIso)) {
       countryIso = currentCountryIso;
     }
-    return PhoneNumberUtils.formatNumber(number, normalizedNumber, countryIso);
+    return PhoneNumberHelper.formatNumber(context, number, normalizedNumber, countryIso);
   }
 
   /**

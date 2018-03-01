@@ -32,6 +32,7 @@ import android.provider.ContactsContract.SearchSnippets;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -50,7 +51,6 @@ import android.widget.TextView;
 import com.android.contacts.common.ContactPresenceIconUtil;
 import com.android.contacts.common.ContactStatusUtil;
 import com.android.contacts.common.R;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.format.TextHighlighter;
 import com.android.contacts.common.list.PhoneNumberListAdapter.Listener;
 import com.android.contacts.common.util.ContactDisplayUtils;
@@ -1111,7 +1111,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
       mSnippetView.setVisibility(VISIBLE);
       if (ContactDisplayUtils.isPossiblePhoneNumber(text)) {
         // Give the text-to-speech engine a hint that it's a phone number
-        mSnippetView.setContentDescription(PhoneNumberUtilsCompat.createTtsSpannable(text));
+        mSnippetView.setContentDescription(PhoneNumberUtils.createTtsSpannable(text));
       } else {
         mSnippetView.setContentDescription(null);
       }
@@ -1232,8 +1232,7 @@ public class ContactListItemView extends ViewGroup implements SelectionBoundsAdj
     if (ContactDisplayUtils.isPossiblePhoneNumber(name)) {
       // Give the text-to-speech engine a hint that it's a phone number
       mNameTextView.setTextDirection(View.TEXT_DIRECTION_LTR);
-      mNameTextView.setContentDescription(
-          PhoneNumberUtilsCompat.createTtsSpannable(name.toString()));
+      mNameTextView.setContentDescription(PhoneNumberUtils.createTtsSpannable(name.toString()));
     } else {
       // Remove span tags of highlighting for talkback to avoid reading highlighting and rest
       // of the name into two separate parts.

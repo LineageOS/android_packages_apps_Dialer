@@ -52,7 +52,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
@@ -1057,7 +1056,7 @@ public class CallLogAdapter extends GroupingListAdapter
     CharSequence formattedNumber =
         info.formattedNumber == null
             ? null
-            : PhoneNumberUtilsCompat.createTtsSpannable(info.formattedNumber);
+            : PhoneNumberUtils.createTtsSpannable(info.formattedNumber);
     details.updateDisplayNumber(activity, formattedNumber, isVoicemailNumber);
 
     views.displayNumber = details.displayNumber;

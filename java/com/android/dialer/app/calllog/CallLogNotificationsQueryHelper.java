@@ -43,6 +43,7 @@ import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -199,7 +200,7 @@ public class CallLogNotificationsQueryHelper {
     number = (number == null) ? "" : number;
     ContactInfo contactInfo = new ContactInfo();
     contactInfo.number = number;
-    contactInfo.formattedNumber = PhoneNumberUtils.formatNumber(number, countryIso);
+    contactInfo.formattedNumber = PhoneNumberHelper.formatNumber(context, number, countryIso);
     // contactInfo.normalizedNumber is not PhoneNumberUtils.normalizeNumber. Read ContactInfo.
     contactInfo.normalizedNumber = PhoneNumberUtils.formatNumberToE164(number, countryIso);
 

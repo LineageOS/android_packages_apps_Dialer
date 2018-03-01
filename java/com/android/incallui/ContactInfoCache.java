@@ -214,7 +214,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         // No name, but we do have a valid CNAP name, so use that.
         displayName = info.cnapName;
         info.name = info.cnapName;
-        displayNumber = PhoneNumberHelper.formatNumber(number, info.countryIso);
+        displayNumber = PhoneNumberHelper.formatNumber(context, number, info.countryIso);
         Log.d(
             TAG,
             "  ==> cnapName available: displayName '"
@@ -227,7 +227,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         // case when an incoming call doesn't match any contact,
         // or if you manually dial an outgoing number using the
         // dialpad.
-        displayNumber = PhoneNumberHelper.formatNumber(number, info.countryIso);
+        displayNumber = PhoneNumberHelper.formatNumber(context, number, info.countryIso);
 
         Log.d(
             TAG,
@@ -252,7 +252,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         // later determine whether to use the name or nameAlternative when presenting
         displayName = info.name;
         cce.nameAlternative = info.nameAlternative;
-        displayNumber = PhoneNumberHelper.formatNumber(number, info.countryIso);
+        displayNumber = PhoneNumberHelper.formatNumber(context, number, info.countryIso);
         label = info.phoneLabel;
         Log.d(
             TAG,
