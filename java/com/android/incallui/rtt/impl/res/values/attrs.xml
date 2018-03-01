@@ -15,7 +15,9 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="rtt_message_margin_top">16dp</dimen>
-  <dimen name="rtt_same_group_message_margin_top">2dp</dimen>
-  <dimen name="rtt_overflow_menu_width">180dp</dimen>
+  <declare-styleable name="RttCheckableButton">
+    <attr name="android:checked"/>
+    <attr name="contentDescriptionChecked" format="reference|string"/>
+    <attr name="contentDescriptionUnchecked" format="reference|string"/>
+  </declare-styleable>
 </resources>
