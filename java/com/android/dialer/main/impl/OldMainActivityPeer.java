@@ -1077,6 +1077,18 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       this.context = context;
       this.fragmentManager = fragmentManager;
       this.fab = fab;
+      preloadCallLogFragment();
+    }
+
+    private void preloadCallLogFragment() {
+      if (ConfigProviderBindings.get(context).getBoolean("nui_preload_call_log", true)) {
+        CallLogFragment fragment = new CallLogFragment();
+        fragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_container, fragment, CALL_LOG_TAG)
+            .hide(fragment)
+            .commit();
+      }
     }
 
     @Override
