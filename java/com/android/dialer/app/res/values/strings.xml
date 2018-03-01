@@ -706,6 +706,14 @@
   <!-- Message displayed after user has rated a voicemail transcription [CHAR LIMIT=30] -->
   <string name="voicemail_transcription_rating_thanks">Thanks for your feedback</string>
 
+  <!-- Describes the thumbs up, 'good' transcription button. Read by TalkBack.
+      [CHAR LIMIT=NONE] -->
+  <string name="description_rating_good">Like</string>
+
+  <!-- Describes the thumbs down, 'bad' transcription button. Read by TalkBack.
+      [CHAR LIMIT=NONE] -->
+  <string name="description_rating_bad">Dislike</string>
+
   <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
   <string name="view_conversation">View</string>
 
