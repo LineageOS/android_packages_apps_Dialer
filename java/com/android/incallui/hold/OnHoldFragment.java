@@ -59,14 +59,14 @@ public class OnHoldFragment extends Fragment {
 
     ((TextView) view.findViewById(R.id.hold_contact_name))
         .setText(
-            secondaryInfo.nameIsNumber
+            secondaryInfo.nameIsNumber()
                 ? PhoneNumberUtils.createTtsSpannable(
                     BidiFormatter.getInstance()
-                        .unicodeWrap(secondaryInfo.name, TextDirectionHeuristics.LTR))
-                : secondaryInfo.name);
+                        .unicodeWrap(secondaryInfo.name(), TextDirectionHeuristics.LTR))
+                : secondaryInfo.name());
     ((ImageView) view.findViewById(R.id.hold_phone_icon))
         .setImageResource(
-            secondaryInfo.isVideoCall
+            secondaryInfo.isVideoCall()
                 ? R.drawable.quantum_ic_videocam_white_18
                 : R.drawable.quantum_ic_phone_paused_vd_theme_24);
     view.addOnAttachStateChangeListener(

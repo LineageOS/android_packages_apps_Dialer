@@ -23,11 +23,13 @@ public interface Metrics {
 
   String APPLICATION_ON_CREATE_EVENT_NAME = "Application.onCreate";
   String DIALTACTS_ON_CREATE_EVENT_NAME = "GoogleDialtactsActivity.onCreate";
+  String MAIN_ACTIVITY_ON_CREATE_EVENT_NAME = "GoogleMainActivity.onCreate";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING =
       "CallList.onCallAdded_To_InCallActivity.onCreate_Incoming";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING =
       "CallList.onCallAdded_To_InCallActivity.onCreate_Outgoing";
   String DIALTACTS_ON_RESUME_MEMORY_EVENT_NAME = "GoogleDialtactsActivity.onResume";
+  String OLD_MAIN_ACTIVITY_PEER_ON_RESUME_MEMORY_EVENT_NAME = "OldMainActivityPeer.onResume";
   String INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "IncallActivity.OnResume";
   String INCALL_ACTIVITY_ON_STOP_MEMORY_EVENT_NAME = "IncallActivity.OnStop";
   String OLD_CALL_LOG_JANK_EVENT_NAME = "OldCallLog.Jank";
