@@ -17,6 +17,10 @@
 package com.android.dialer.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources.Theme;
+import android.support.annotation.ColorRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -84,6 +88,11 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
       imageView.setImageResource(resourceId);
       imageView.setVisibility(View.VISIBLE);
     }
+  }
+
+  public void setImageTint(@ColorRes int color, @Nullable Theme theme) {
+    imageView.setImageTintList(
+        (ColorStateList.valueOf(getContext().getResources().getColor(color, theme))));
   }
 
   public void setActionLabel(@StringRes int resourceId) {
