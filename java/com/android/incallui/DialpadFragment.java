@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -29,7 +30,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadKeyButton.OnPressedListener;
@@ -199,7 +199,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
    * @param text Text to set Dialpad EditText to.
    */
   public void setDtmfText(String text) {
-    dtmfDialerField.setText(PhoneNumberUtilsCompat.createTtsSpannable(text));
+    dtmfDialerField.setText(PhoneNumberUtils.createTtsSpannable(text));
   }
 
   /** Starts the slide up animation for the Dialpad keys when the Dialpad is revealed. */
