@@ -136,6 +136,11 @@ public class MainSearchController implements SearchBarListener {
     }
     searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
 
+    // Split the transactions so that the dialpad fragment isn't popped off the stack when we exit
+    // search. We do this so that the dialpad actually animates down instead of just disappearing.
+    transaction.commit();
+    transaction = mainActivity.getFragmentManager().beginTransaction();
+
     // Show Dialpad
     if (getDialpadFragment() == null) {
       DialpadFragment dialpadFragment = new DialpadFragment();
