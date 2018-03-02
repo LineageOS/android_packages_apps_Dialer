@@ -19,7 +19,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -39,6 +38,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 
 /** TODO(calderwoodra): documentation */
 public class BlockedListSearchFragment extends RegularSearchFragment
@@ -174,7 +174,7 @@ public class BlockedListSearchFragment extends RegularSearchFragment
                   id,
                   number,
                   countryIso,
-                  PhoneNumberUtils.formatNumber(number, countryIso),
+                  PhoneNumberHelper.formatNumber(getContext(), number, countryIso),
                   R.id.blocked_numbers_activity_container,
                   getFragmentManager(),
                   BlockedListSearchFragment.this);

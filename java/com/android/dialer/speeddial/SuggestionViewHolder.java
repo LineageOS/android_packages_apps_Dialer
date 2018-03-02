@@ -23,7 +23,6 @@ import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +31,7 @@ import android.widget.TextView;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 
 /** ViewHolder for displaying suggested contacts in {@link SpeedDialFragment}. */
 public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -56,7 +56,7 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
 
   public void bind(Context context, Cursor cursor) {
     number = cursor.getString(StrequentContactsCursorLoader.PHONE_NUMBER);
-    number = PhoneNumberUtils.formatNumber(number, GeoUtil.getCurrentCountryIso(context));
+    number = PhoneNumberHelper.formatNumber(context, number, GeoUtil.getCurrentCountryIso(context));
 
     String name = cursor.getString(StrequentContactsCursorLoader.PHONE_DISPLAY_NAME);
     String label = getLabel(context.getResources(), cursor);

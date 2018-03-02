@@ -19,15 +19,15 @@ package com.android.contacts.common.model.dataitem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 
 /**
  * Represents a phone data item, wrapping the columns in {@link
- * ContactsContract.CommonDataKinds.Phone}.
+ * android.provider.ContactsContract.CommonDataKinds.Phone}.
  */
 public class PhoneDataItem extends DataItem {
 
-  public static final String KEY_FORMATTED_PHONE_NUMBER = "formattedPhoneNumber";
+  private static final String KEY_FORMATTED_PHONE_NUMBER = "formattedPhoneNumber";
 
   /* package */ PhoneDataItem(ContentValues values) {
     super(values);
@@ -50,12 +50,12 @@ public class PhoneDataItem extends DataItem {
     return getContentValues().getAsString(Phone.LABEL);
   }
 
-  public void computeFormattedPhoneNumber(String defaultCountryIso) {
+  public void computeFormattedPhoneNumber(Context context, String defaultCountryIso) {
     final String phoneNumber = getNumber();
     if (phoneNumber != null) {
       final String formattedPhoneNumber =
-          PhoneNumberUtilsCompat.formatNumber(
-              phoneNumber, getNormalizedNumber(), defaultCountryIso);
+          PhoneNumberHelper.formatNumber(
+              context, phoneNumber, getNormalizedNumber(), defaultCountryIso);
       getContentValues().put(KEY_FORMATTED_PHONE_NUMBER, formattedPhoneNumber);
     }
   }

@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
@@ -30,7 +31,6 @@ import android.widget.ImageView;
 import android.widget.Space;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.lettertile.LetterTileDrawable;
@@ -276,7 +276,7 @@ public class ContactGridManager {
     } else {
       contactNameTextView.setText(
           primaryInfo.nameIsNumber()
-              ? PhoneNumberUtilsCompat.createTtsSpannable(primaryInfo.name())
+              ? PhoneNumberUtils.createTtsSpannable(primaryInfo.name())
               : primaryInfo.name());
 
       // Set direction of the name field

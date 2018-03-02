@@ -18,10 +18,10 @@ package com.android.dialer.calllogutils;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
+import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.google.common.base.Optional;
 
@@ -86,8 +86,8 @@ public class PhoneNumberDisplayUtil {
   }
 
   /** Returns number annotated as phone number in LTR direction. */
-  public static CharSequence getTtsSpannableLtrNumber(CharSequence number) {
-    return PhoneNumberUtilsCompat.createTtsSpannable(
+  private static CharSequence getTtsSpannableLtrNumber(CharSequence number) {
+    return PhoneNumberUtils.createTtsSpannable(
         BidiFormatter.getInstance().unicodeWrap(number.toString(), TextDirectionHeuristics.LTR));
   }
 }

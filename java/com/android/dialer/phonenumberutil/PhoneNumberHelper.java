@@ -35,6 +35,7 @@ import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
+import com.google.common.base.Ascii;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -224,28 +225,50 @@ public class PhoneNumberHelper {
   }
 
   /**
-   * @return Formatted phone number. e.g. 1-123-456-7890. Returns the original number if formatting
-   *     failed.
+   * An enhanced version of {@link PhoneNumberUtils#formatNumber(String, String, String)}.
+   *
+   * <p>The {@link Context} parameter allows us to tweak formatting according to device properties.
+   *
+   * <p>Returns the formatted phone number (e.g, 1-123-456-7890) or the original number if
+   * formatting fails or is intentionally ignored.
    */
-  public static String formatNumber(@Nullable String number, String countryIso) {
+  public static String formatNumber(
+      Context context, @Nullable String number, @Nullable String numberE164, String countryIso) {
     // The number can be null e.g. schema is voicemail and uri content is empty.
     if (number == null) {
       return null;
     }
-    String formattedNumber = PhoneNumberUtils.formatNumber(number, countryIso);
+
+    // Argentina phone number formats are complex and PhoneNumberUtils doesn't format all Argentina
+    // numbers correctly.
+    // To ensure consistent user experience, we disable phone number formatting for all numbers
+    // (not just Argentinian ones) for devices with Argentinian SIMs.
+    TelephonyManager telephonyManager =
+        (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+    if (telephonyManager != null
+        && "AR".equals(Ascii.toUpperCase(telephonyManager.getSimCountryIso()))) {
+      return number;
+    }
+
+    String formattedNumber = PhoneNumberUtils.formatNumber(number, numberE164, countryIso);
     return formattedNumber != null ? formattedNumber : number;
+  }
+
+  /** @see #formatNumber(Context, String, String, String). */
+  public static String formatNumber(Context context, @Nullable String number, String countryIso) {
+    return formatNumber(context, number, /* numberE164 = */ null, countryIso);
   }
 
   @Nullable
   public static CharSequence formatNumberForDisplay(
-      @Nullable String number, @NonNull String countryIso) {
+      Context context, @Nullable String number, @NonNull String countryIso) {
     if (number == null) {
       return null;
     }
 
     return PhoneNumberUtils.createTtsSpannable(
         BidiFormatter.getInstance()
-            .unicodeWrap(formatNumber(number, countryIso), TextDirectionHeuristics.LTR));
+            .unicodeWrap(formatNumber(context, number, countryIso), TextDirectionHeuristics.LTR));
   }
 
   /**
