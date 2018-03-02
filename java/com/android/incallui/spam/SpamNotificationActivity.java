@@ -27,7 +27,6 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.PhoneNumberUtils;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberCompat;
@@ -39,6 +38,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
 import com.android.incallui.call.DialerCall;
 
@@ -109,8 +109,8 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Returns the formatted version of the given number. */
   private static String getFormattedNumber(String number, Context context) {
     String formattedNumber =
-        PhoneNumberUtils.formatNumber(number, GeoUtil.getCurrentCountryIso(context));
-    return PhoneNumberUtilsCompat.createTtsSpannable(formattedNumber).toString();
+        PhoneNumberHelper.formatNumber(context, number, GeoUtil.getCurrentCountryIso(context));
+    return PhoneNumberUtils.createTtsSpannable(formattedNumber).toString();
   }
 
   private void logCallImpression(DialerImpression.Type impression) {

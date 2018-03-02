@@ -21,13 +21,13 @@ import android.content.res.Resources;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.Patterns;
 import com.android.contacts.common.R;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.common.LogUtil;
 import java.util.Objects;
@@ -219,7 +219,7 @@ public class ContactDisplayUtils {
     int start = TextUtils.isEmpty(phoneNumber) ? -1 : message.indexOf(phoneNumber);
     while (start >= 0) {
       final int end = start + phoneNumber.length();
-      final TtsSpan ttsSpan = PhoneNumberUtilsCompat.createTtsSpan(phoneNumber);
+      final TtsSpan ttsSpan = PhoneNumberUtils.createTtsSpan(phoneNumber);
       spannable.setSpan(
           ttsSpan,
           start,

@@ -669,7 +669,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
         final DataItem dataItem = dataItems.get(dataIndex);
         if (dataItem instanceof PhoneDataItem) {
           final PhoneDataItem phoneDataItem = (PhoneDataItem) dataItem;
-          phoneDataItem.computeFormattedPhoneNumber(countryIso);
+          phoneDataItem.computeFormattedPhoneNumber(getContext(), countryIso);
         }
       }
     }

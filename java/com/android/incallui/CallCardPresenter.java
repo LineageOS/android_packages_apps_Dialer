@@ -483,7 +483,7 @@ public class CallCardPresenter
                   .setCallSubject(shouldShowCallSubject(primary) ? primary.getCallSubject() : null)
                   .setCallbackNumber(
                       PhoneNumberHelper.formatNumber(
-                          primary.getCallbackNumber(), primary.getSimCountryIso()))
+                          context, primary.getCallbackNumber(), primary.getSimCountryIso()))
                   .setIsWifi(primary.hasProperty(Details.PROPERTY_WIFI))
                   .setIsConference(
                       primary.isConferenceCall()

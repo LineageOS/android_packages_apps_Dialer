@@ -36,12 +36,12 @@ import android.support.v4.util.Pair;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;
@@ -171,7 +171,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       if (TextUtils.equals(contactInfo.name, contactInfo.formattedNumber)
           || TextUtils.equals(contactInfo.name, contactInfo.number)) {
         expandedText =
-            PhoneNumberUtilsCompat.createTtsSpannable(
+            PhoneNumberUtils.createTtsSpannable(
                 BidiFormatter.getInstance()
                     .unicodeWrap(contactInfo.name, TextDirectionHeuristics.LTR));
       } else {
@@ -328,7 +328,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     if (TextUtils.equals(contactInfo.name, contactInfo.formattedNumber)
         || TextUtils.equals(contactInfo.name, contactInfo.number)) {
       expandedText =
-          PhoneNumberUtilsCompat.createTtsSpannable(
+          PhoneNumberUtils.createTtsSpannable(
               BidiFormatter.getInstance()
                   .unicodeWrap(contactInfo.name, TextDirectionHeuristics.LTR));
     } else {
