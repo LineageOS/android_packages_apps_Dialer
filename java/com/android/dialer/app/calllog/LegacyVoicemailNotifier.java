@@ -27,14 +27,15 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
-import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 
 /** Shows a notification in the status bar for legacy vociemail. */
@@ -144,7 +145,8 @@ public final class LegacyVoicemailNotifier {
     } else {
       return String.format(
           context.getString(R.string.notification_voicemail_text_format),
-          PhoneNumberUtils.formatNumber(voicemailNumber));
+          PhoneNumberHelper.formatNumber(
+              context, voicemailNumber, GeoUtil.getCurrentCountryIso(context)));
     }
   }
 

@@ -52,7 +52,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
@@ -1222,7 +1221,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       menu.setHeaderTitle(context.getResources().getText(R.string.voicemail));
     } else {
       menu.setHeaderTitle(
-          PhoneNumberUtilsCompat.createTtsSpannable(
+          PhoneNumberUtils.createTtsSpannable(
               BidiFormatter.getInstance().unicodeWrap(number, TextDirectionHeuristics.LTR)));
     }
 

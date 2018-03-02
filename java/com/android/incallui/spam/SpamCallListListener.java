@@ -34,7 +34,6 @@ import android.support.v4.os.BuildCompat;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import com.android.contacts.common.compat.PhoneNumberUtilsCompat;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
@@ -47,6 +46,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -267,8 +267,9 @@ public class SpamCallListListener implements CallList.Listener {
 
   private CharSequence getDisplayNumber(DialerCall call) {
     String formattedNumber =
-        PhoneNumberUtils.formatNumber(call.getNumber(), GeoUtil.getCurrentCountryIso(context));
-    return PhoneNumberUtilsCompat.createTtsSpannable(formattedNumber);
+        PhoneNumberHelper.formatNumber(
+            context, call.getNumber(), GeoUtil.getCurrentCountryIso(context));
+    return PhoneNumberUtils.createTtsSpannable(formattedNumber);
   }
 
   /** Display a notification with two actions: "add contact" and "report spam". */
