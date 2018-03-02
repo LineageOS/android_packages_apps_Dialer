@@ -32,7 +32,6 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-import android.support.v4.os.BuildCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,7 +51,6 @@ import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.Duo;
@@ -409,14 +407,8 @@ public class CallDetailsActivity extends AppCompatActivity {
 
     @Override
     public void openAssistedDialingSettings(View unused) {
-      if (BuildCompat.isAtLeastP()) {
-        Intent callSettingsIntent =
-            new Intent(TelephonyManagerCompat.ACTION_SHOW_ASSISTED_DIALING_SETTINGS);
-        getActivity().startActivity(callSettingsIntent);
-      } else {
         Intent intent = new Intent(getActivity(), AssistedDialingSettingActivity.class);
         getActivity().startActivity(intent);
-      }
     }
 
     @Override
