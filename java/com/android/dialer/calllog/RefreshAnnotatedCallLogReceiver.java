@@ -21,10 +21,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.Nullable;
+import com.android.dialer.calllog.RefreshAnnotatedCallLogWorker.RefreshResult;
 import com.android.dialer.calllog.constants.IntentNames;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.metrics.FutureTimer;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
+import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -43,6 +48,7 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   private static final long REFRESH_ANNOTATED_CALL_LOG_WAIT_MILLIS = 100L;
 
   private final RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
+  private final FutureTimer futureTimer;
 
   @Nullable private Runnable refreshAnnotatedCallLogRunnable;
 
@@ -57,6 +63,7 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   public RefreshAnnotatedCallLogReceiver(Context context) {
     refreshAnnotatedCallLogWorker =
         CallLogComponent.get(context).getRefreshAnnotatedCallLogWorker();
+    futureTimer = MetricsComponent.get(context).futureTimer();
   }
 
   @Override
@@ -97,12 +104,14 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
 
     refreshAnnotatedCallLogRunnable =
         () -> {
-          ListenableFuture<Void> future =
+          ListenableFuture<RefreshResult> future =
               checkDirty
                   ? refreshAnnotatedCallLogWorker.refreshWithDirtyCheck()
                   : refreshAnnotatedCallLogWorker.refreshWithoutDirtyCheck();
           Futures.addCallback(
               future, new DefaultFutureCallback<>(), MoreExecutors.directExecutor());
+          futureTimer.applyTiming(future, new EventNameFromResultFunction(checkDirty));
+          // TODO(zachh): Should also log impression counts of RefreshResults.
         };
 
     ThreadUtil.getUiThreadHandler()
@@ -117,5 +126,30 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
     LogUtil.enterBlock("RefreshAnnotatedCallLogReceiver.cancelRefreshingAnnotatedCallLog");
 
     ThreadUtil.getUiThreadHandler().removeCallbacks(refreshAnnotatedCallLogRunnable);
+  }
+
+  private static class EventNameFromResultFunction implements Function<RefreshResult, String> {
+
+    private final boolean checkDirty;
+
+    private EventNameFromResultFunction(boolean checkDirty) {
+      this.checkDirty = checkDirty;
+    }
+
+    @Override
+    public String apply(RefreshResult refreshResult) {
+      switch (refreshResult) {
+        case NOT_DIRTY:
+          return Metrics.REFRESH_NOT_DIRTY; // NOT_DIRTY implies forceRefresh is false
+        case REBUILT_BUT_NO_CHANGES_NEEDED:
+          return checkDirty
+              ? Metrics.REFRESH_NO_CHANGES_NEEDED
+              : Metrics.FORCE_REFRESH_NO_CHANGES_NEEDED;
+        case REBUILT_AND_CHANGES_NEEDED:
+          return checkDirty ? Metrics.REFRESH_CHANGES_NEEDED : Metrics.FORCE_REFRESH_CHANGES_NEEDED;
+        default:
+          throw new IllegalStateException("Unsupported result: " + refreshResult);
+      }
+    }
   }
 }

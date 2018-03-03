@@ -37,6 +37,8 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -153,6 +155,7 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
         Assert.checkArgument(
             selectionArgs == null, "selection args not supported for coalesced call log");
         Assert.checkArgument(sortOrder == null, "sort order not supported for coalesced call log");
+        MetricsComponent.get(getContext()).metrics().startTimer(Metrics.NEW_CALL_LOG_COALESCE);
         try (Cursor allAnnotatedCallLogRows =
             queryBuilder.query(
                 db,
@@ -168,6 +171,7 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
                   .coalesce(allAnnotatedCallLogRows);
           coalescedRows.setNotificationUri(
               getContext().getContentResolver(), CoalescedAnnotatedCallLog.CONTENT_URI);
+          MetricsComponent.get(getContext()).metrics().stopTimer(Metrics.NEW_CALL_LOG_COALESCE);
           return coalescedRows;
         }
       default:
