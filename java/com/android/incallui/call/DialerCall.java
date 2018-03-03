@@ -1136,7 +1136,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    */
   public boolean isAssistedDialed() {
     if (getIntentExtras() != null) {
-      // O_MR1 and below uses the existence of USE_ASSISTED_DIALING to indicate assisted dialing
+      // P and below uses the existence of USE_ASSISTED_DIALING to indicate assisted dialing
       // was used. The Dialer client is responsible for performing assisted dialing before
       // placing the outgoing call.
       //
@@ -1148,34 +1148,12 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       }
     }
 
-    // Starting in P+ USE_ASSISTED_DIALING indicates that the client requested the platform
-    // perform assisted dialing. PROPERTY_ASSISTED_DIALING_USED indicates assisted dialing took
-    // place.
-    if (hasProperty(TelephonyManagerCompat.PROPERTY_ASSISTED_DIALING_USED)
-        && BuildCompat.isAtLeastP()) {
-      return true;
-    }
     return false;
   }
 
   @Nullable
   public TransformationInfo getAssistedDialingExtras() {
     if (getIntentExtras() == null) {
-      return null;
-    }
-
-    if (BuildCompat.isAtLeastP()) {
-      if (getExtras() == null) {
-        return null;
-      }
-
-      if (getExtras()
-              .getParcelable(TelephonyManagerCompat.EXTRA_ASSISTED_DIALING_TRANSFORMATION_INFO)
-          == null) {
-        return null;
-      }
-
-      // TODO(erfanian): Use the framework transformation info when we can link against it
       return null;
     }
 
