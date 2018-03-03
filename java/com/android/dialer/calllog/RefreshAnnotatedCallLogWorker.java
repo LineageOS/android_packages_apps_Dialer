@@ -79,23 +79,30 @@ public class RefreshAnnotatedCallLogWorker {
     this.lightweightExecutorService = lightweightExecutorService;
   }
 
+  /** Result of refreshing the annotated call log. */
+  public enum RefreshResult {
+    NOT_DIRTY,
+    REBUILT_BUT_NO_CHANGES_NEEDED,
+    REBUILT_AND_CHANGES_NEEDED
+  }
+
   /** Checks if the annotated call log is dirty and refreshes it if necessary. */
-  ListenableFuture<Void> refreshWithDirtyCheck() {
+  ListenableFuture<RefreshResult> refreshWithDirtyCheck() {
     return refresh(true);
   }
 
   /** Refreshes the annotated call log, bypassing dirty checks. */
-  ListenableFuture<Void> refreshWithoutDirtyCheck() {
+  ListenableFuture<RefreshResult> refreshWithoutDirtyCheck() {
     return refresh(false);
   }
 
-  private ListenableFuture<Void> refresh(boolean checkDirty) {
+  private ListenableFuture<RefreshResult> refresh(boolean checkDirty) {
     LogUtil.i("RefreshAnnotatedCallLogWorker.refresh", "submitting serialized refresh request");
     return dialerFutureSerializer.submitAsync(
         () -> checkDirtyAndRebuildIfNecessary(checkDirty), lightweightExecutorService);
   }
 
-  private ListenableFuture<Void> checkDirtyAndRebuildIfNecessary(boolean checkDirty) {
+  private ListenableFuture<RefreshResult> checkDirtyAndRebuildIfNecessary(boolean checkDirty) {
     ListenableFuture<Boolean> forceRebuildFuture =
         backgroundExecutorService.submit(
             () -> {
@@ -139,7 +146,7 @@ public class RefreshAnnotatedCallLogWorker {
             return Futures.transformAsync(
                 callLogState.isBuilt(), this::rebuild, MoreExecutors.directExecutor());
           }
-          return Futures.immediateFuture(null);
+          return Futures.immediateFuture(RefreshResult.NOT_DIRTY);
         },
         lightweightExecutorService);
   }
@@ -160,7 +167,7 @@ public class RefreshAnnotatedCallLogWorker {
     return isDirtyFuture;
   }
 
-  private ListenableFuture<Void> rebuild(boolean isBuilt) {
+  private ListenableFuture<RefreshResult> rebuild(boolean isBuilt) {
     CallLogMutations mutations = new CallLogMutations();
 
     // Start by filling the data sources--the system call log data source must go first!
@@ -225,7 +232,9 @@ public class RefreshAnnotatedCallLogWorker {
         unused -> {
           sharedPreferences.edit().putBoolean(SharedPrefKeys.FORCE_REBUILD, false).apply();
           callLogState.markBuilt();
-          return null;
+          return mutations.isEmpty()
+              ? RefreshResult.REBUILT_BUT_NO_CHANGES_NEEDED
+              : RefreshResult.REBUILT_AND_CHANGES_NEEDED;
         },
         backgroundExecutorService);
   }
