@@ -22,11 +22,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.SoundEffectConstants;
+import android.widget.Button;
 import android.widget.Checkable;
-import android.widget.TextView;
 
 /** Image button that maintains a checked state. */
-public class RttCheckableButton extends TextView implements Checkable {
+public class RttCheckableButton extends Button implements Checkable {
 
   private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
 
@@ -47,11 +47,16 @@ public class RttCheckableButton extends TextView implements Checkable {
   }
 
   public RttCheckableButton(Context context, AttributeSet attrs) {
-    this(context, attrs, 0);
+    this(context, attrs, android.R.attr.imageButtonStyle);
   }
 
   public RttCheckableButton(Context context, AttributeSet attrs, int defStyleAttr) {
-    super(context, attrs, defStyleAttr);
+    this(context, attrs, defStyleAttr, 0);
+  }
+
+  public RttCheckableButton(
+      Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
     init(context, attrs);
   }
 
