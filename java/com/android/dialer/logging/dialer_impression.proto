@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1341
+  // Next Tag: 1346
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -675,5 +675,16 @@ message DialerImpression {
     MAIN_CLICK_SEARCH_BAR_VOICE_BUTTON = 1339;
     // NUI FAB
     MAIN_CLICK_FAB_TO_OPEN_DIALPAD = 1340;
+
+    // The call log was not dirty.
+    ANNOTATED_CALL_LOG_NOT_DIRTY = 1341;
+    // The call log was dirty but no changes were needed.
+    ANNOTATED_CALL_LOG_NO_CHANGES_NEEDED = 1342;
+    // The call log was force refreshed but no changes were needed.
+    ANNOTATED_CALL_LOG_FORCE_REFRESH_NO_CHANGES_NEEDED = 1343;
+    // The call log was dirty and changes were needed.
+    ANNOTATED_CALL_LOG_CHANGES_NEEDED = 1344;
+    // The call log was force refreshed and changes were needed.
+    ANNOTATED_CALL_LOG_FORCE_REFRESH_CHANGES_NEEDED = 1345;
   }
 }
