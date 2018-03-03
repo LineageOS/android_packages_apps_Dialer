@@ -28,6 +28,8 @@ public abstract class MetricsComponent {
 
   public abstract Metrics.Initializer metricsInitializer();
 
+  public abstract FutureTimer futureTimer();
+
   public static MetricsComponent get(Context context) {
     return ((MetricsComponent.HasComponent)
             ((HasRootComponent) context.getApplicationContext()).component())

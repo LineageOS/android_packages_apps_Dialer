@@ -21,6 +21,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.google.common.base.Function;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -72,7 +73,7 @@ public final class FutureTimer {
    * of tracking heavyweight operations (which is what this method is intended for).
    */
   public <T> void applyTiming(ListenableFuture<T> future, String eventName) {
-    applyTiming(future, eventName, LogCatMode.DONT_LOG_VALUES);
+    applyTiming(future, unused -> eventName, LogCatMode.DONT_LOG_VALUES);
   }
 
   /**
@@ -81,14 +82,35 @@ public final class FutureTimer {
    */
   public <T> void applyTiming(
       ListenableFuture<T> future, String eventName, @LogCatMode int logCatMode) {
+    applyTiming(future, unused -> eventName, logCatMode);
+  }
+
+  /**
+   * Overload of {@link #applyTiming(ListenableFuture, String)} that accepts a function which
+   * specifies how to compute an event name from the result of the future.
+   *
+   * <p>This is useful when the event name depends on the result of the future.
+   */
+  public <T> void applyTiming(
+      ListenableFuture<T> future, Function<T, String> eventNameFromResultFunction) {
+    applyTiming(future, eventNameFromResultFunction, LogCatMode.DONT_LOG_VALUES);
+  }
+
+  private <T> void applyTiming(
+      ListenableFuture<T> future,
+      Function<T, String> eventNameFromResultFunction,
+      @LogCatMode int logCatMode) {
     long startTime = SystemClock.elapsedRealtime();
-    metrics.startTimer(eventName);
+    Integer timerId = metrics.startUnnamedTimer();
     Futures.addCallback(
         future,
         new FutureCallback<T>() {
           @Override
           public void onSuccess(T result) {
-            metrics.stopTimer(eventName);
+            String eventName = eventNameFromResultFunction.apply(result);
+            if (timerId != null) {
+              metrics.stopUnnamedTimer(timerId, eventName);
+            }
             long operationTime = SystemClock.elapsedRealtime() - startTime;
 
             // If the operation took a long time, do some WARNING logging.
