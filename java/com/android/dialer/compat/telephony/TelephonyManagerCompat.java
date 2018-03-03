@@ -65,9 +65,6 @@ public class TelephonyManagerCompat {
   public static final String ASSISTED_DIALING_EXTRAS =
       "android.telecom.extra.ASSISTED_DIALING_EXTRAS";
 
-  public static final String EXTRA_ASSISTED_DIALING_TRANSFORMATION_INFO =
-      "android.telecom.extra.ASSISTED_DIALING_TRANSFORMATION_INFO";
-
   /** Indicates the Connection/Call used assisted dialing. */
   public static final int PROPERTY_ASSISTED_DIALING_USED = 1 << 9;
 
@@ -79,10 +76,6 @@ public class TelephonyManagerCompat {
    * CallLog.
    */
   public static final Integer FEATURES_ASSISTED_DIALING = 1 << 4;
-
-  /** The {@link android.content.Intent} action used to show the assisted dialing settings. */
-  public static final String ACTION_SHOW_ASSISTED_DIALING_SETTINGS =
-      "android.telecom.action.SHOW_ASSISTED_DIALING_SETTINGS";
 
   /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
