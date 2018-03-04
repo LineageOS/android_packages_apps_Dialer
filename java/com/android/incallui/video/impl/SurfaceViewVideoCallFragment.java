@@ -846,7 +846,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
     updateButtonStates();
     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
     Fragment oldBanner = getChildFragmentManager().findFragmentById(R.id.videocall_on_hold_banner);
-    if (secondaryInfo.shouldShow) {
+    if (secondaryInfo.shouldShow()) {
       OnHoldFragment onHoldFragment = OnHoldFragment.newInstance(secondaryInfo);
       onHoldFragment.setPadTopInset(!isInFullscreenMode);
       transaction.replace(R.id.videocall_on_hold_banner, onHoldFragment);

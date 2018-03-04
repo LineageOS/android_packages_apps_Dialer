@@ -483,7 +483,7 @@ public class CallCardPresenter
                   .setCallSubject(shouldShowCallSubject(primary) ? primary.getCallSubject() : null)
                   .setCallbackNumber(
                       PhoneNumberHelper.formatNumber(
-                          primary.getCallbackNumber(), primary.getSimCountryIso()))
+                          context, primary.getCallbackNumber(), primary.getSimCountryIso()))
                   .setIsWifi(primary.hasProperty(Details.PROPERTY_WIFI))
                   .setIsConference(
                       primary.isConferenceCall()
@@ -907,7 +907,7 @@ public class CallCardPresenter
 
     if (secondary == null) {
       // Clear the secondary display info.
-      inCallScreen.setSecondary(SecondaryInfo.createEmptySecondaryInfo(isFullscreen));
+      inCallScreen.setSecondary(SecondaryInfo.builder().setIsFullscreen(isFullscreen).build());
       return;
     }
 
@@ -915,39 +915,39 @@ public class CallCardPresenter
       LogUtil.i(
           "CallCardPresenter.updateSecondaryDisplayInfo",
           "secondary call is merge in process, clearing info");
-      inCallScreen.setSecondary(SecondaryInfo.createEmptySecondaryInfo(isFullscreen));
+      inCallScreen.setSecondary(SecondaryInfo.builder().setIsFullscreen(isFullscreen).build());
       return;
     }
 
     if (secondary.isConferenceCall()) {
       inCallScreen.setSecondary(
-          new SecondaryInfo(
-              true /* show */,
-              CallerInfoUtils.getConferenceString(
-                  context, secondary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)),
-              false /* nameIsNumber */,
-              null /* label */,
-              secondary.getCallProviderLabel(),
-              true /* isConference */,
-              secondary.isVideoCall(),
-              isFullscreen));
+          SecondaryInfo.builder()
+              .setShouldShow(true)
+              .setName(
+                  CallerInfoUtils.getConferenceString(
+                      context, secondary.hasProperty(Details.PROPERTY_GENERIC_CONFERENCE)))
+              .setProviderLabel(secondary.getCallProviderLabel())
+              .setIsConference(true)
+              .setIsVideoCall(secondary.isVideoCall())
+              .setIsFullscreen(isFullscreen)
+              .build());
     } else if (secondaryContactInfo != null) {
       LogUtil.v("CallCardPresenter.updateSecondaryDisplayInfo", "" + secondaryContactInfo);
       String name = getNameForCall(secondaryContactInfo);
       boolean nameIsNumber = name != null && name.equals(secondaryContactInfo.number);
       inCallScreen.setSecondary(
-          new SecondaryInfo(
-              true /* show */,
-              secondary.updateNameIfRestricted(name),
-              nameIsNumber,
-              secondaryContactInfo.label,
-              secondary.getCallProviderLabel(),
-              false /* isConference */,
-              secondary.isVideoCall(),
-              isFullscreen));
+          SecondaryInfo.builder()
+              .setShouldShow(true)
+              .setName(secondary.updateNameIfRestricted(name))
+              .setNameIsNumber(nameIsNumber)
+              .setLabel(secondaryContactInfo.label)
+              .setProviderLabel(secondary.getCallProviderLabel())
+              .setIsVideoCall(secondary.isVideoCall())
+              .setIsFullscreen(isFullscreen)
+              .build());
     } else {
       // Clear the secondary display info.
-      inCallScreen.setSecondary(SecondaryInfo.createEmptySecondaryInfo(isFullscreen));
+      inCallScreen.setSecondary(SecondaryInfo.builder().setIsFullscreen(isFullscreen).build());
     }
   }
 

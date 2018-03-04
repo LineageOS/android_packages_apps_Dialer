@@ -305,7 +305,7 @@ public class InCallFragment extends Fragment
     savedSecondaryInfo = null;
     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
     Fragment oldBanner = getChildFragmentManager().findFragmentById(R.id.incall_on_hold_banner);
-    if (secondaryInfo.shouldShow) {
+    if (secondaryInfo.shouldShow()) {
       transaction.replace(R.id.incall_on_hold_banner, OnHoldFragment.newInstance(secondaryInfo));
     } else {
       if (oldBanner != null) {

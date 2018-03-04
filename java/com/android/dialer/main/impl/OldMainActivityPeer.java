@@ -65,6 +65,7 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -87,6 +88,8 @@ import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
+import com.android.dialer.metrics.Metrics;
+import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
@@ -200,7 +203,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     fab.setOnClickListener(
         v -> {
           Logger.get(mainActivity)
-              .logImpression(DialerImpression.Type.NUI_CLICK_FAB_TO_OPEN_DIALPAD);
+              .logImpression(DialerImpression.Type.MAIN_CLICK_FAB_TO_OPEN_DIALPAD);
           searchController.showDialpad(true);
         });
 
@@ -404,6 +407,14 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     } else {
       bottomNav.setVisibility(View.VISIBLE);
     }
+
+    // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
+    ThreadUtil.postDelayedOnUiThread(
+        () ->
+            MetricsComponent.get(mainActivity)
+                .metrics()
+                .recordMemory(Metrics.OLD_MAIN_ACTIVITY_PEER_ON_RESUME_MEMORY_EVENT_NAME),
+        1000);
   }
 
   @Override
@@ -1095,7 +1106,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onSpeedDialSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onSpeedDialSelected");
       if (selectedTab != TabIndex.SPEED_DIAL) {
-        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_FAVORITE);
+        Logger.get(context).logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_FAVORITE);
         selectedTab = TabIndex.SPEED_DIAL;
       }
       hideAllFragments();
@@ -1115,7 +1126,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onCallLogSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onCallLogSelected");
       if (selectedTab != TabIndex.CALL_LOG) {
-        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_CALL_LOG);
+        Logger.get(context).logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_CALL_LOG);
         selectedTab = TabIndex.CALL_LOG;
       }
       hideAllFragments();
@@ -1135,7 +1146,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onContactsSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onContactsSelected");
       if (selectedTab != TabIndex.CONTACTS) {
-        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_CONTACTS);
+        Logger.get(context).logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_CONTACTS);
         selectedTab = TabIndex.CONTACTS;
       }
       hideAllFragments();
@@ -1159,7 +1170,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onVoicemailSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onVoicemailSelected");
       if (selectedTab != TabIndex.VOICEMAIL) {
-        Logger.get(context).logImpression(DialerImpression.Type.NUI_SWITCH_TAB_TO_VOICEMAIL);
+        Logger.get(context).logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_VOICEMAIL);
         selectedTab = TabIndex.VOICEMAIL;
       }
       hideAllFragments();

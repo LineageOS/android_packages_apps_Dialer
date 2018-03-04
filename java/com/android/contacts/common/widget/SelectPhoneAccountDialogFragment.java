@@ -325,6 +325,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         holder.numberTextView.setVisibility(View.VISIBLE);
         holder.numberTextView.setText(
             PhoneNumberHelper.formatNumberForDisplay(
+                getContext(),
                 account.getAddress().getSchemeSpecificPart(),
                 getCountryIso(getContext(), accountHandle)));
       }

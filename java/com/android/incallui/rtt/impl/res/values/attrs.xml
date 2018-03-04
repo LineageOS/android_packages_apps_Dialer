@@ -15,6 +15,9 @@
   ~ limitations under the License
   -->
 <resources>
-  <color name="empty_list_text_color">#b2b2b2</color>
-  <color name="empty_voicemail_icon_tint_color">#E1E1E1</color>
+  <declare-styleable name="RttCheckableButton">
+    <attr name="android:checked"/>
+    <attr name="contentDescriptionChecked" format="reference|string"/>
+    <attr name="contentDescriptionUnchecked" format="reference|string"/>
+  </declare-styleable>
 </resources>

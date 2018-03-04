@@ -136,6 +136,11 @@ public class MainSearchController implements SearchBarListener {
     }
     searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
 
+    // Split the transactions so that the dialpad fragment isn't popped off the stack when we exit
+    // search. We do this so that the dialpad actually animates down instead of just disappearing.
+    transaction.commit();
+    transaction = mainActivity.getFragmentManager().beginTransaction();
+
     // Show Dialpad
     if (getDialpadFragment() == null) {
       DialpadFragment dialpadFragment = new DialpadFragment();
@@ -228,21 +233,21 @@ public class MainSearchController implements SearchBarListener {
       if (TextUtils.isEmpty(getDialpadFragment().getQuery())) {
         Logger.get(mainActivity)
             .logImpression(
-                DialerImpression.Type.NUI_TOUCH_DIALPAD_SEARCH_LIST_TO_CLOSE_SEARCH_AND_DIALPAD);
+                DialerImpression.Type.MAIN_TOUCH_DIALPAD_SEARCH_LIST_TO_CLOSE_SEARCH_AND_DIALPAD);
         closeSearch(true);
       } else {
         Logger.get(mainActivity)
-            .logImpression(DialerImpression.Type.NUI_TOUCH_DIALPAD_SEARCH_LIST_TO_HIDE_DIALPAD);
+            .logImpression(DialerImpression.Type.MAIN_TOUCH_DIALPAD_SEARCH_LIST_TO_HIDE_DIALPAD);
         hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       }
     } else if (isSearchVisible()) {
       if (TextUtils.isEmpty(toolbar.getQuery())) {
         Logger.get(mainActivity)
-            .logImpression(DialerImpression.Type.NUI_TOUCH_SEARCH_LIST_TO_CLOSE_SEARCH);
+            .logImpression(DialerImpression.Type.MAIN_TOUCH_SEARCH_LIST_TO_CLOSE_SEARCH);
         closeSearch(true);
       } else {
         Logger.get(mainActivity)
-            .logImpression(DialerImpression.Type.NUI_TOUCH_SEARCH_LIST_TO_HIDE_KEYBOARD);
+            .logImpression(DialerImpression.Type.MAIN_TOUCH_SEARCH_LIST_TO_HIDE_KEYBOARD);
         toolbar.hideKeyboard();
       }
     }
@@ -257,7 +262,7 @@ public class MainSearchController implements SearchBarListener {
     if (isDialpadVisible() && !TextUtils.isEmpty(getDialpadFragment().getQuery())) {
       LogUtil.i("MainSearchController.onBackPressed", "Dialpad visible with query");
       Logger.get(mainActivity)
-          .logImpression(DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
+          .logImpression(DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
       hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
       return true;
     } else if (isSearchVisible()) {
@@ -265,8 +270,8 @@ public class MainSearchController implements SearchBarListener {
       Logger.get(mainActivity)
           .logImpression(
               isDialpadVisible()
-                  ? DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH_AND_DIALPAD
-                  : DialerImpression.Type.NUI_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH);
+                  ? DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH_AND_DIALPAD
+                  : DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH);
       closeSearch(true);
       return true;
     } else {
@@ -346,7 +351,7 @@ public class MainSearchController implements SearchBarListener {
   @Override
   public void onSearchBarClicked() {
     LogUtil.enterBlock("MainSearchController.onSearchBarClicked");
-    Logger.get(mainActivity).logImpression(DialerImpression.Type.NUI_CLICK_SEARCH_BAR);
+    Logger.get(mainActivity).logImpression(DialerImpression.Type.MAIN_CLICK_SEARCH_BAR);
     openSearch(Optional.absent());
   }
 
@@ -406,7 +411,8 @@ public class MainSearchController implements SearchBarListener {
 
   @Override
   public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {
-    Logger.get(mainActivity).logImpression(DialerImpression.Type.NUI_CLICK_SEARCH_BAR_VOICE_BUTTON);
+    Logger.get(mainActivity)
+        .logImpression(DialerImpression.Type.MAIN_CLICK_SEARCH_BAR_VOICE_BUTTON);
     try {
       Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
       mainActivity.startActivityForResult(voiceIntent, ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);

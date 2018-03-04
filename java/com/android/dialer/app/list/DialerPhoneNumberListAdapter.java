@@ -31,6 +31,7 @@ import com.android.contacts.common.list.PhoneNumberListAdapter;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 
 /**
  * {@link PhoneNumberListAdapter} with the following added shortcuts, that are displayed as list
@@ -228,7 +229,8 @@ public class DialerPhoneNumberListAdapter extends PhoneNumberListAdapter {
   @Override
   public void setQueryString(String queryString) {
     formattedQueryString =
-        PhoneNumberUtils.formatNumber(PhoneNumberUtils.normalizeNumber(queryString), countryIso);
+        PhoneNumberHelper.formatNumber(
+            getContext(), PhoneNumberUtils.normalizeNumber(queryString), countryIso);
     super.setQueryString(queryString);
   }
 }

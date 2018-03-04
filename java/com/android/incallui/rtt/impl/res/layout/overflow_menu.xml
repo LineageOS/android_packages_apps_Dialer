@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="180dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:background="@drawable/overflow_menu_background"
+    android:orientation="vertical">
+  <com.android.incallui.rtt.impl.RttCheckableButton
+      android:id="@+id/menu_mute"
+      style="@style/RttButton"
+      android:drawableStart="@drawable/quantum_ic_mic_off_vd_theme_24"
+      android:text="@string/incall_label_mute"
+      app:contentDescriptionChecked="@string/incall_content_description_muted"
+      app:contentDescriptionUnchecked="@string/incall_content_description_unmuted"/>
+  <com.android.incallui.rtt.impl.RttCheckableButton
+      android:id="@+id/menu_speaker"
+      style="@style/RttButton"
+      android:drawableStart="@drawable/quantum_ic_volume_up_vd_theme_24"
+      android:text="@string/incall_label_speaker"
+      app:contentDescriptionChecked="@string/incall_content_description_speaker"
+      app:contentDescriptionUnchecked="@string/incall_content_description_earpiece"/>
+  <com.android.incallui.rtt.impl.RttCheckableButton
+      android:id="@+id/menu_keypad"
+      style="@style/RttButton"
+      android:drawableStart="@drawable/quantum_ic_dialpad_vd_theme_24"
+      android:text="@string/incall_label_dialpad"/>
+  <com.android.incallui.rtt.impl.RttCheckableButton
+      android:id="@+id/menu_add_call"
+      style="@style/RttButton"
+      android:drawableStart="@drawable/quantum_ic_add_call_vd_theme_24"
+      android:text="@string/incall_label_add_call"/>
+</LinearLayout>

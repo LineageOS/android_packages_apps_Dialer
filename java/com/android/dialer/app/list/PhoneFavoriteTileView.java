@@ -199,9 +199,12 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
    */
   private void sendViewNotification(Context context, Uri contactUri) {
     if (loader != null) {
-      loader.cancelLoad();
+      // Cancels the current load if it's running and clears up any memory if it's using any.
+      loader.reset();
     }
     loader = new ContactLoader(context, contactUri, true /* postViewNotification */);
+    // Immediately release anything we're holding in memory
+    loader.registerListener(0, (loader1, contact) -> loader.reset());
     loader.startLoading();
   }
 }

@@ -17,23 +17,35 @@
 package com.android.dialer.metrics;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
 /** Logs metrics. */
 public interface Metrics {
 
   String APPLICATION_ON_CREATE_EVENT_NAME = "Application.onCreate";
   String DIALTACTS_ON_CREATE_EVENT_NAME = "GoogleDialtactsActivity.onCreate";
+  String MAIN_ACTIVITY_ON_CREATE_EVENT_NAME = "GoogleMainActivity.onCreate";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING =
       "CallList.onCallAdded_To_InCallActivity.onCreate_Incoming";
   String ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING =
       "CallList.onCallAdded_To_InCallActivity.onCreate_Outgoing";
   String DIALTACTS_ON_RESUME_MEMORY_EVENT_NAME = "GoogleDialtactsActivity.onResume";
+  String OLD_MAIN_ACTIVITY_PEER_ON_RESUME_MEMORY_EVENT_NAME = "OldMainActivityPeer.onResume";
   String INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME = "IncallActivity.OnResume";
   String INCALL_ACTIVITY_ON_STOP_MEMORY_EVENT_NAME = "IncallActivity.OnStop";
   String OLD_CALL_LOG_JANK_EVENT_NAME = "OldCallLog.Jank";
   String NEW_CALL_LOG_JANK_EVENT_NAME = "NewCallLog.Jank";
 
   // Events related to refreshing the annotated call log.
+  String NEW_CALL_LOG_COALESCE = "NewCallLog.Coalesce";
+  String ANNOTATED_CALL_LOG_NOT_DIRTY = "RefreshAnnotatedCallLogReceiver.NotDirty";
+  String ANNOTATED_CALL_LOG_CHANGES_NEEDED = "RefreshAnnotatedCallLogReceiver.ChangesNeeded";
+  String ANNOTATED_LOG_NO_CHANGES_NEEDED = "RefreshAnnotatedCallLogReceiver.NoChangesNeeded";
+  String ANNOTATED_CALL_LOG_FORCE_REFRESH_CHANGES_NEEDED =
+      "RefreshAnnotatedCallLogReceiver.ForceRefreshChangesNeeded";
+  String NEW_CALL_LOG_FORCE_REFRESH_NO_CHANGES_NEEDED =
+      "RefreshAnnotatedCallLogReceiver.ForceRefreshNoChangesNeeded";
+
   String INITIAL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.Fill";
   String INITIAL_ON_SUCCESSFUL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.OnSuccessfulFill";
   String INITIAL_APPLY_MUTATIONS_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.ApplyMutations";
@@ -58,6 +70,23 @@ public interface Metrics {
 
   /** Start a timer. */
   void startTimer(String timerEventName);
+
+  /**
+   * Starts a timer for which the name is not yet known.
+   *
+   * @return opaque identifier for the event which should be provided back to {@link
+   *     #stopUnnamedTimer(int, String)} to stop the timer. Null if the timer cannot be started, for
+   *     example because the user is locked.
+   */
+  @Nullable
+  Integer startUnnamedTimer();
+
+  /**
+   * Stop a timer which was started with {@link #startUnnamedTimer()}.
+   *
+   * @param timerId the value returned in the corresponding call to {@link #startUnnamedTimer()}
+   */
+  void stopUnnamedTimer(int timerId, String timerEventName);
 
   /** Stop a timer. */
   void stopTimer(String timerEventName);
