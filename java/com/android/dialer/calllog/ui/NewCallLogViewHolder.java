@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
@@ -35,6 +36,7 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
 import com.google.common.util.concurrent.FutureCallback;
@@ -150,11 +152,13 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPhoto(CoalescedRow row) {
-    glidePhotoManager.loadQuickContactBadge(
-        quickContactBadge,
-        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
-            .setFormattedNumber(row.formattedNumber())
-            .build());
+    PhotoInfo.Builder photoInfoBuilder =
+        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes());
+    if (!TextUtils.isEmpty(row.formattedNumber())) {
+      photoInfoBuilder.setFormattedNumber(row.formattedNumber());
+    }
+
+    glidePhotoManager.loadQuickContactBadge(quickContactBadge, photoInfoBuilder.build());
   }
 
   private void setFeatureIcons(CoalescedRow row) {
