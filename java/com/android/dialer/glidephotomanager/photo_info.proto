@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.glidephotomanager";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.glidephotomanager;
+
+// Contains information associated with a number, which is used to create the
+// photo.
+// Next ID: 11
+message PhotoInfo {
+  // The display name of the number.
+  optional string name = 1;
+
+  // The number presented to the user.
+  optional string formatted_number = 2;
+
+  // The URI of the photo.
+  optional string photo_uri = 3;
+
+  // Value of android.provider.ContactsContract.CommonDataKinds.Photo#_ID
+  optional int64 photo_id = 4;
+
+  // The Contacts Provider lookup URI for the contact associated with the
+  // number.
+  optional string lookup_uri = 5;
+
+  // Whether a business icon should be displayed.
+  optional bool is_business = 6;
+
+  // Whether a voicemail icon should be displayed.
+  optional bool is_voicemail = 7;
+
+  // Whether a "blocked" icon should be displayed.
+  optional bool is_blocked = 8;
+
+  // Whether a "spam" icon should be displayed.
+  optional bool is_spam = 9;
+
+  // Whether the photo should be badged as video call.
+  optional bool is_video = 10;
+}
