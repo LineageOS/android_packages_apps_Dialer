@@ -683,7 +683,7 @@
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">
     Let Google review this and future voicemail messages with transcripts.
-    They\'ll be stored anonymously. Change Settings any time.
+    They\'ll be stored anonymously. Change Settings anytime.
   </string>
 
   <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
