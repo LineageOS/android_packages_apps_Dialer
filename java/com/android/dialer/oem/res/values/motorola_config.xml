@@ -47,4 +47,7 @@
   <string-array name="cequint_providers">
     <item>com.cequint.ecid</item>
   </string-array>
+
+  <!-- Flag to control whether to disable phone number formatting -->
+  <bool name="motorola_disable_phone_number_formatting">false</bool>
 </resources>

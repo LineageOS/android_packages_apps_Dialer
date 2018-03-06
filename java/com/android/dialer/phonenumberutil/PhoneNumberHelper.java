@@ -33,16 +33,15 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
-import com.google.common.base.Ascii;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class PhoneNumberHelper {
 
-  private static final String TAG = "PhoneNumberUtil";
   private static final Set<String> LEGACY_UNKNOWN_NUMBERS =
       new HashSet<>(Arrays.asList("-1", "-2", "-3"));
 
@@ -239,14 +238,7 @@ public class PhoneNumberHelper {
       return null;
     }
 
-    // Argentina phone number formats are complex and PhoneNumberUtils doesn't format all Argentina
-    // numbers correctly.
-    // To ensure consistent user experience, we disable phone number formatting for all numbers
-    // (not just Argentinian ones) for devices with Argentinian SIMs.
-    TelephonyManager telephonyManager =
-        (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-    if (telephonyManager != null
-        && "AR".equals(Ascii.toUpperCase(telephonyManager.getSimCountryIso()))) {
+    if (MotorolaUtils.shouldDisablePhoneNumberFormatting(context)) {
       return number;
     }
 
