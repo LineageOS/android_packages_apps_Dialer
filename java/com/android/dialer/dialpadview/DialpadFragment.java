@@ -393,7 +393,9 @@ public class DialpadFragment extends Fragment
     digits.addTextChangedListener(this);
     digits.setElegantTextHeight(false);
 
-    initPhoneNumberFormattingTextWatcherExecutor.executeSerial(getCurrentCountryIso());
+    if (!MotorolaUtils.shouldDisablePhoneNumberFormatting(getContext())) {
+      initPhoneNumberFormattingTextWatcherExecutor.executeSerial(getCurrentCountryIso());
+    }
 
     // Check for the presence of the keypad
     View oneButton = fragmentView.findViewById(R.id.one);
