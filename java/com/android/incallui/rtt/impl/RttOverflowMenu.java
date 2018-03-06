@@ -63,6 +63,7 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
     } else if (button == addCallButton) {
       inCallButtonUiDelegate.addCallClicked();
     }
+    dismiss();
   }
 
   void setMuteButtonChecked(boolean isChecked) {
@@ -73,6 +74,17 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
     SpeakerButtonInfo info = new SpeakerButtonInfo(audioState, IconSize.SIZE_24_DP);
     if (info.checkable) {
       speakerButton.setChecked(info.isChecked);
+      speakerButton.setOnClickListener(null);
+      speakerButton.setOnCheckedChangeListener(this);
+    } else {
+      speakerButton.setText(info.label);
+      speakerButton.setCompoundDrawablesWithIntrinsicBounds(info.icon, 0, 0, 0);
+      speakerButton.setOnClickListener(
+          v -> {
+            inCallButtonUiDelegate.showAudioRouteSelector();
+            dismiss();
+          });
+      speakerButton.setOnCheckedChangeListener(null);
     }
   }
 }
