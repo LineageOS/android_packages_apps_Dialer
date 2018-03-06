@@ -36,6 +36,9 @@ public class MotorolaUtils {
   private static final String CONFIG_WIFI_CALL_SHOW_ICON_IN_CALL_LOG_ENABLED =
       "wifi_call_show_icon_in_call_log_enabled";
 
+  @VisibleForTesting
+  static final String CONFIG_DISABLE_PHONE_NUMBER_FORMATTING = "disable_phone_number_formatting";
+
   // This is used to check if a Motorola device supports HD voice call feature, which comes from
   // system feature setting.
   private static final String HD_CALL_FEATRURE = "com.motorola.software.sprint.hd_call";
@@ -46,6 +49,7 @@ public class MotorolaUtils {
   @VisibleForTesting
   static final String HIDDEN_MENU_FEATURE = "com.motorola.software.sprint.hidden_menu";
 
+  private static Boolean disablePhoneNumberFormattingForTest = null;
   private static boolean hasCheckedSprintWifiCall;
   private static boolean supportSprintWifiCall;
 
@@ -85,6 +89,16 @@ public class MotorolaUtils {
             .getBoolean(CONFIG_WIFI_CALL_SHOW_ICON_IN_CALL_LOG_ENABLED, true)
         && (features & Calls.FEATURES_WIFI) == Calls.FEATURES_WIFI
         && isSupportingSprintWifiCall(context);
+  }
+
+  public static boolean shouldDisablePhoneNumberFormatting(Context context) {
+    if (disablePhoneNumberFormattingForTest != null) {
+      return disablePhoneNumberFormattingForTest;
+    }
+
+    return ConfigProviderBindings.get(context)
+            .getBoolean(CONFIG_DISABLE_PHONE_NUMBER_FORMATTING, true)
+        && context.getResources().getBoolean(R.bool.motorola_disable_phone_number_formatting);
   }
 
   /**
@@ -127,6 +141,11 @@ public class MotorolaUtils {
       hasCheckedSprintWifiCall = true;
     }
     return supportSprintWifiCall;
+  }
+
+  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+  public static void setDisablePhoneNumberFormattingForTest(boolean disablePhoneNumberFormatting) {
+    disablePhoneNumberFormattingForTest = disablePhoneNumberFormatting;
   }
 
   @VisibleForTesting
