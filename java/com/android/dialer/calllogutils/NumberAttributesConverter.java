@@ -27,7 +27,7 @@ public final class NumberAttributesConverter {
 
   /** Converts {@link NumberAttributes} to {@link PhotoInfo.Builder} */
   public static PhotoInfo.Builder toPhotoInfoBuilder(NumberAttributes numberAttributes) {
-    return PhotoInfo.builder()
+    return PhotoInfo.newBuilder()
         .setName(numberAttributes.getName())
         .setPhotoUri(numberAttributes.getPhotoUri())
         .setPhotoId(numberAttributes.getPhotoId())

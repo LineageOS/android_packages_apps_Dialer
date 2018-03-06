@@ -45,6 +45,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.menu.NewVoicemailMenu;
 import com.android.dialer.voicemail.model.VoicemailEntry;
@@ -210,11 +211,13 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   }
 
   private void setPhoto(VoicemailEntry voicemailEntry) {
-    glidePhotoManager.loadQuickContactBadge(
-        quickContactBadge,
-        NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes())
-            .setFormattedNumber(voicemailEntry.formattedNumber())
-            .build());
+    PhotoInfo.Builder photoInfoBuilder =
+        NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes());
+    if (!TextUtils.isEmpty(voicemailEntry.formattedNumber())) {
+      photoInfoBuilder.setFormattedNumber(voicemailEntry.formattedNumber());
+    }
+
+    glidePhotoManager.loadQuickContactBadge(quickContactBadge, photoInfoBuilder.build());
   }
 
   void collapseViewHolder() {
