@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -74,27 +76,35 @@ public final class BottomNavBar extends LinearLayout {
 
     speedDial.setOnClickListener(
         v -> {
-          selectedTab = TabIndex.SPEED_DIAL;
-          setSelected(speedDial);
-          updateListeners(selectedTab);
+          if (selectedTab != TabIndex.SPEED_DIAL) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_FAVORITE);
+          }
+          selectTab(TabIndex.SPEED_DIAL);
         });
     callLog.setOnClickListener(
         v -> {
-          selectedTab = TabIndex.CALL_LOG;
-          setSelected(callLog);
-          updateListeners(selectedTab);
+          if (selectedTab != TabIndex.CALL_LOG) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_CALL_LOG);
+          }
+          selectTab(TabIndex.CALL_LOG);
         });
     contacts.setOnClickListener(
         v -> {
-          selectedTab = TabIndex.CONTACTS;
-          setSelected(contacts);
-          updateListeners(selectedTab);
+          if (selectedTab != TabIndex.CONTACTS) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_CONTACTS);
+          }
+          selectTab(TabIndex.CONTACTS);
         });
     voicemail.setOnClickListener(
         v -> {
-          selectedTab = TabIndex.VOICEMAIL;
-          setSelected(voicemail);
-          updateListeners(selectedTab);
+          if (selectedTab != TabIndex.VOICEMAIL) {
+            Logger.get(getContext())
+                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_VOICEMAIL);
+          }
+          selectTab(TabIndex.VOICEMAIL);
         });
   }
 
@@ -106,22 +116,28 @@ public final class BottomNavBar extends LinearLayout {
   }
 
   /**
-   * Calls {@link View#performClick()} on the desired tab.
+   * Select tab for uesr and non-user click.
    *
    * @param tab {@link TabIndex}
    */
   public void selectTab(@TabIndex int tab) {
     if (tab == TabIndex.SPEED_DIAL) {
-      speedDial.performClick();
+      selectedTab = TabIndex.SPEED_DIAL;
+      setSelected(speedDial);
     } else if (tab == TabIndex.CALL_LOG) {
-      callLog.performClick();
+      selectedTab = TabIndex.CALL_LOG;
+      setSelected(callLog);
     } else if (tab == TabIndex.CONTACTS) {
-      contacts.performClick();
+      selectedTab = TabIndex.CONTACTS;
+      setSelected(contacts);
     } else if (tab == TabIndex.VOICEMAIL) {
-      voicemail.performClick();
+      selectedTab = TabIndex.VOICEMAIL;
+      setSelected(voicemail);
     } else {
       throw new IllegalStateException("Invalid tab: " + tab);
     }
+
+    updateListeners(selectedTab);
   }
 
   /**
