@@ -17,27 +17,11 @@
 package com.android.dialer.precall.impl;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
-import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract.PhoneLookup;
-import android.provider.ContactsContract.QuickContact;
-import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -46,7 +30,6 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
@@ -55,16 +38,11 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
-import com.android.dialer.preferredsim.PreferredAccountUtil;
-import com.android.dialer.preferredsim.PreferredSimFallbackContract;
-import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim;
-import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
+import com.android.dialer.preferredsim.PreferredAccountRecorder;
+import com.android.dialer.preferredsim.PreferredAccountWorker;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.android.dialer.telecom.TelecomUtil;
-import com.android.dialer.util.PermissionsUtil;
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableSet;
-import java.util.ArrayList;
 import java.util.List;
 
 /** PreCallAction to select which phone account to call with. Ignored if there's only one account */
@@ -72,9 +50,6 @@ import java.util.List;
 public class CallingAccountSelector implements PreCallAction {
 
   @VisibleForTesting static final String TAG_CALLING_ACCOUNT_SELECTOR = "CallingAccountSelector";
-
-  @VisibleForTesting
-  static final String METADATA_SUPPORTS_PREFERRED_SIM = "supports_per_number_preferred_account";
 
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
 
@@ -153,10 +128,12 @@ public class CallingAccountSelector implements PreCallAction {
               if (isDiscarding) {
                 return;
               }
-              if (result.phoneAccountHandle.isPresent()) {
+              if (result.getPhoneAccountHandle().isPresent()) {
                 Logger.get(coordinator.getActivity())
                     .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_PREFERRED_USED);
-                coordinator.getBuilder().setPhoneAccountHandle(result.phoneAccountHandle.get());
+                coordinator
+                    .getBuilder()
+                    .setPhoneAccountHandle(result.getPhoneAccountHandle().get());
                 pendingAction.finish();
                 return;
               }
@@ -171,17 +148,17 @@ public class CallingAccountSelector implements PreCallAction {
                 pendingAction.finish();
                 return;
               }
-              if (result.suggestion.isPresent()) {
+              if (result.getSuggestion().isPresent()) {
                 LogUtil.i(
                     "CallingAccountSelector.processPreferredAccount",
-                    "SIM suggested: " + result.suggestion.get().reason);
-                if (result.suggestion.get().shouldAutoSelect) {
+                    "SIM suggested: " + result.getSuggestion().get().reason);
+                if (result.getSuggestion().get().shouldAutoSelect) {
                   Logger.get(coordinator.getActivity())
                       .logImpression(
                           DialerImpression.Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
                   LogUtil.i(
                       "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
-                  builder.setPhoneAccountHandle(result.suggestion.get().phoneAccountHandle);
+                  builder.setPhoneAccountHandle(result.getSuggestion().get().phoneAccountHandle);
                   pendingAction.finish();
                   return;
                 }
@@ -189,9 +166,9 @@ public class CallingAccountSelector implements PreCallAction {
               showDialog(
                   coordinator,
                   pendingAction,
-                  result.dataId.orNull(),
+                  result.getDataId().orNull(),
                   phoneNumber,
-                  result.suggestion.orNull());
+                  result.getSuggestion().orNull());
             }))
         .build()
         .executeParallel(activity);
@@ -235,39 +212,15 @@ public class CallingAccountSelector implements PreCallAction {
             dataId != null /* canSetDefault */,
             R.string.pre_call_select_phone_account_remember,
             phoneAccountHandles,
-            new SelectedListener(coordinator, pendingAction, dataId, number, suggestion),
+            new SelectedListener(
+                coordinator,
+                pendingAction,
+                new PreferredAccountRecorder(number, suggestion, dataId)),
             null /* call ID */,
-            buildHint(coordinator.getActivity(), phoneAccountHandles, suggestion));
+            SuggestionProvider.buildHint(
+                coordinator.getActivity(), phoneAccountHandles, suggestion));
     selectPhoneAccountDialogFragment.show(
         coordinator.getActivity().getFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
-  }
-
-  @Nullable
-  private static List<String> buildHint(
-      Context context,
-      List<PhoneAccountHandle> phoneAccountHandles,
-      @Nullable Suggestion suggestion) {
-    if (suggestion == null) {
-      return null;
-    }
-    List<String> hints = new ArrayList<>();
-    for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
-      if (!phoneAccountHandle.equals(suggestion.phoneAccountHandle)) {
-        hints.add(null);
-        continue;
-      }
-      switch (suggestion.reason) {
-        case INTRA_CARRIER:
-          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_intra_carrier));
-          break;
-        case FREQUENT:
-          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
-          break;
-        default:
-          LogUtil.w("CallingAccountSelector.buildHint", "unhandled reason " + suggestion.reason);
-      }
-    }
-    return hints;
   }
 
   @MainThread
@@ -279,221 +232,27 @@ public class CallingAccountSelector implements PreCallAction {
     }
   }
 
-  private static class PreferredAccountWorkerResult {
-
-    /** The preferred phone account for the number. Absent if not set or invalid. */
-    Optional<PhoneAccountHandle> phoneAccountHandle = Optional.absent();
-
-    /**
-     * {@link android.provider.ContactsContract.Data#_ID} of the row matching the number. If the
-     * preferred account is to be set it should be stored in this row
-     */
-    Optional<String> dataId = Optional.absent();
-
-    Optional<Suggestion> suggestion = Optional.absent();
-  }
-
-  private static class PreferredAccountWorker
-      implements Worker<Context, PreferredAccountWorkerResult> {
-
-    private final String phoneNumber;
-
-    public PreferredAccountWorker(String phoneNumber) {
-      this.phoneNumber = phoneNumber;
-    }
-
-    @NonNull
-    @Override
-    @WorkerThread
-    public PreferredAccountWorkerResult doInBackground(Context context) throws Throwable {
-      PreferredAccountWorkerResult result = new PreferredAccountWorkerResult();
-      if (!isPreferredSimEnabled(context)) {
-        return result;
-      }
-      if (!PermissionsUtil.hasContactsReadPermissions(context)) {
-        LogUtil.i(
-            "CallingAccountSelector.PreferredAccountWorker.doInBackground",
-            "missing READ_CONTACTS permission");
-        return result;
-      }
-      result.dataId = getDataId(context, phoneNumber);
-      if (result.dataId.isPresent()) {
-        result.phoneAccountHandle = getPreferredAccount(context, result.dataId.get());
-      }
-      if (!result.phoneAccountHandle.isPresent()) {
-        result.suggestion =
-            SimSuggestionComponent.get(context)
-                .getSuggestionProvider()
-                .getSuggestion(context, phoneNumber);
-      }
-      return result;
-    }
-  }
-
-  @WorkerThread
-  @NonNull
-  private static Optional<String> getDataId(
-      @NonNull Context context, @Nullable String phoneNumber) {
-    Assert.isWorkerThread();
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return Optional.absent();
-    }
-    try (Cursor cursor =
-        context
-            .getContentResolver()
-            .query(
-                Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber)),
-                new String[] {PhoneLookup.DATA_ID},
-                null,
-                null,
-                null)) {
-      if (cursor == null) {
-        return Optional.absent();
-      }
-      ImmutableSet<String> validAccountTypes = PreferredAccountUtil.getValidAccountTypes(context);
-      String result = null;
-      while (cursor.moveToNext()) {
-        Optional<String> accountType =
-            getAccountType(context.getContentResolver(), cursor.getLong(0));
-        if (accountType.isPresent() && !validAccountTypes.contains(accountType.get())) {
-          // Empty accountType is treated as writable
-          LogUtil.i("CallingAccountSelector.getDataId", "ignoring non-writable " + accountType);
-          continue;
-        }
-        if (result != null && !result.equals(cursor.getString(0))) {
-          // TODO(twyen): if there are multiple entries attempt to grab from the contact that
-          // initiated the call.
-          LogUtil.i("CallingAccountSelector.getDataId", "lookup result not unique, ignoring");
-          return Optional.absent();
-        }
-        result = cursor.getString(0);
-      }
-      return Optional.fromNullable(result);
-    }
-  }
-
-  @WorkerThread
-  private static Optional<String> getAccountType(ContentResolver contentResolver, long dataId) {
-    Assert.isWorkerThread();
-    Optional<Long> rawContactId = getRawContactId(contentResolver, dataId);
-    if (!rawContactId.isPresent()) {
-      return Optional.absent();
-    }
-    try (Cursor cursor =
-        contentResolver.query(
-            ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId.get()),
-            new String[] {RawContacts.ACCOUNT_TYPE},
-            null,
-            null,
-            null)) {
-      if (cursor == null || !cursor.moveToFirst()) {
-        return Optional.absent();
-      }
-      return Optional.fromNullable(cursor.getString(0));
-    }
-  }
-
-  @WorkerThread
-  private static Optional<Long> getRawContactId(ContentResolver contentResolver, long dataId) {
-    Assert.isWorkerThread();
-    try (Cursor cursor =
-        contentResolver.query(
-            ContentUris.withAppendedId(Data.CONTENT_URI, dataId),
-            new String[] {Data.RAW_CONTACT_ID},
-            null,
-            null,
-            null)) {
-      if (cursor == null || !cursor.moveToFirst()) {
-        return Optional.absent();
-      }
-      return Optional.of(cursor.getLong(0));
-    }
-  }
-
-  @WorkerThread
-  @NonNull
-  private static Optional<PhoneAccountHandle> getPreferredAccount(
-      @NonNull Context context, @NonNull String dataId) {
-    Assert.isWorkerThread();
-    Assert.isNotNull(dataId);
-    try (Cursor cursor =
-        context
-            .getContentResolver()
-            .query(
-                PreferredSimFallbackContract.CONTENT_URI,
-                new String[] {
-                  PreferredSim.PREFERRED_PHONE_ACCOUNT_COMPONENT_NAME,
-                  PreferredSim.PREFERRED_PHONE_ACCOUNT_ID
-                },
-                PreferredSim.DATA_ID + " = ?",
-                new String[] {dataId},
-                null)) {
-      if (cursor == null) {
-        return Optional.absent();
-      }
-      if (!cursor.moveToFirst()) {
-        return Optional.absent();
-      }
-      return PreferredAccountUtil.getValidPhoneAccount(
-          context, cursor.getString(0), cursor.getString(1));
-    }
-  }
-
   private class SelectedListener extends SelectPhoneAccountListener {
 
     private final PreCallCoordinator coordinator;
     private final PreCallCoordinator.PendingAction listener;
-    private final String dataId;
-    private final String number;
-    private final Suggestion suggestion;
+    private final PreferredAccountRecorder recorder;
 
     public SelectedListener(
         @NonNull PreCallCoordinator builder,
         @NonNull PreCallCoordinator.PendingAction listener,
-        @Nullable String dataId,
-        @Nullable String number,
-        @Nullable Suggestion suggestion) {
+        @NonNull PreferredAccountRecorder recorder) {
       this.coordinator = Assert.isNotNull(builder);
       this.listener = Assert.isNotNull(listener);
-      this.dataId = dataId;
-      this.number = number;
-      this.suggestion = suggestion;
+      this.recorder = Assert.isNotNull(recorder);
     }
 
     @MainThread
     @Override
     public void onPhoneAccountSelected(
         PhoneAccountHandle selectedAccountHandle, boolean setDefault, @Nullable String callId) {
-      if (suggestion != null) {
-        if (suggestion.phoneAccountHandle.equals(selectedAccountHandle)) {
-          Logger.get(coordinator.getActivity())
-              .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_SUGGESTED_SIM_SELECTED);
-        } else {
-          Logger.get(coordinator.getActivity())
-              .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_NON_SUGGESTED_SIM_SELECTED);
-        }
-      }
       coordinator.getBuilder().setPhoneAccountHandle(selectedAccountHandle);
-
-      if (dataId != null && setDefault) {
-        Logger.get(coordinator.getActivity())
-            .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_PREFERRED_SET);
-        DialerExecutorComponent.get(coordinator.getActivity())
-            .dialerExecutorFactory()
-            .createNonUiTaskBuilder(new WritePreferredAccountWorker())
-            .build()
-            .executeParallel(
-                new WritePreferredAccountWorkerInput(
-                    coordinator.getActivity(), dataId, selectedAccountHandle));
-      }
-      if (number != null) {
-        DialerExecutorComponent.get(coordinator.getActivity())
-            .dialerExecutorFactory()
-            .createNonUiTaskBuilder(
-                new UserSelectionReporter(selectedAccountHandle, number, setDefault))
-            .build()
-            .executeParallel(coordinator.getActivity());
-      }
+      recorder.record(coordinator.getActivity(), selectedAccountHandle, setDefault);
       listener.finish();
     }
 
@@ -506,104 +265,5 @@ public class CallingAccountSelector implements PreCallAction {
       coordinator.abortCall();
       listener.finish();
     }
-  }
-
-  private static class UserSelectionReporter implements Worker<Context, Void> {
-
-    private final String number;
-    private final PhoneAccountHandle phoneAccountHandle;
-    private final boolean remember;
-
-    public UserSelectionReporter(
-        @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number, boolean remember) {
-      this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
-      this.number = Assert.isNotNull(number);
-      this.remember = remember;
-    }
-
-    @Nullable
-    @Override
-    public Void doInBackground(@NonNull Context context) throws Throwable {
-      SimSuggestionComponent.get(context)
-          .getSuggestionProvider()
-          .reportUserSelection(context, number, phoneAccountHandle, remember);
-      return null;
-    }
-  }
-
-  private static class WritePreferredAccountWorkerInput {
-    private final Context context;
-    private final String dataId;
-    private final PhoneAccountHandle phoneAccountHandle;
-
-    WritePreferredAccountWorkerInput(
-        @NonNull Context context,
-        @NonNull String dataId,
-        @NonNull PhoneAccountHandle phoneAccountHandle) {
-      this.context = Assert.isNotNull(context);
-      this.dataId = Assert.isNotNull(dataId);
-      this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
-    }
-  }
-
-  private static class WritePreferredAccountWorker
-      implements Worker<WritePreferredAccountWorkerInput, Void> {
-
-    @Nullable
-    @Override
-    @WorkerThread
-    public Void doInBackground(WritePreferredAccountWorkerInput input) throws Throwable {
-      ContentValues values = new ContentValues();
-      values.put(
-          PreferredSim.PREFERRED_PHONE_ACCOUNT_COMPONENT_NAME,
-          input.phoneAccountHandle.getComponentName().flattenToString());
-      values.put(PreferredSim.PREFERRED_PHONE_ACCOUNT_ID, input.phoneAccountHandle.getId());
-      input
-          .context
-          .getContentResolver()
-          .update(
-              PreferredSimFallbackContract.CONTENT_URI,
-              values,
-              PreferredSim.DATA_ID + " = ?",
-              new String[] {String.valueOf(input.dataId)});
-      return null;
-    }
-  }
-
-  @WorkerThread
-  private static boolean isPreferredSimEnabled(Context context) {
-    Assert.isWorkerThread();
-    if (!ConfigProviderBindings.get(context).getBoolean("preferred_sim_enabled", true)) {
-      return false;
-    }
-
-    Intent quickContactIntent = getQuickContactIntent();
-    ResolveInfo resolveInfo =
-        context
-            .getPackageManager()
-            .resolveActivity(quickContactIntent, PackageManager.GET_META_DATA);
-    if (resolveInfo == null
-        || resolveInfo.activityInfo == null
-        || resolveInfo.activityInfo.applicationInfo == null
-        || resolveInfo.activityInfo.applicationInfo.metaData == null) {
-      LogUtil.e("CallingAccountSelector.isPreferredSimEnabled", "cannot resolve quick contact app");
-      return false;
-    }
-    if (!resolveInfo.activityInfo.applicationInfo.metaData.getBoolean(
-        METADATA_SUPPORTS_PREFERRED_SIM, false)) {
-      LogUtil.i(
-          "CallingAccountSelector.isPreferredSimEnabled",
-          "system contacts does not support preferred SIM");
-      return false;
-    }
-    return true;
-  }
-
-  @VisibleForTesting
-  static Intent getQuickContactIntent() {
-    Intent intent = new Intent(QuickContact.ACTION_QUICK_CONTACT);
-    intent.addCategory(Intent.CATEGORY_DEFAULT);
-    intent.setData(Contacts.CONTENT_URI.buildUpon().appendPath("1").build());
-    return intent;
   }
 }

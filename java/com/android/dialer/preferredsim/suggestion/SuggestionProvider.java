@@ -18,10 +18,14 @@ package com.android.dialer.preferredsim.suggestion;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.google.common.base.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Provides hints to the user when selecting a SIM to make a call. */
 public interface SuggestionProvider {
@@ -72,4 +76,37 @@ public interface SuggestionProvider {
   @WorkerThread
   void reportIncorrectSuggestion(
       @NonNull Context context, @NonNull String number, @NonNull PhoneAccountHandle newAccount);
+
+  /**
+   * Return a list of suggestion strings matching the list position of the {@code
+   * phoneAccountHandles}. The list will contain {@code null} if the PhoneAccountHandle does not
+   * have suggestions.
+   */
+  @Nullable
+  static List<String> buildHint(
+      Context context,
+      List<PhoneAccountHandle> phoneAccountHandles,
+      @Nullable Suggestion suggestion) {
+    if (suggestion == null) {
+      return null;
+    }
+    List<String> hints = new ArrayList<>();
+    for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+      if (!phoneAccountHandle.equals(suggestion.phoneAccountHandle)) {
+        hints.add(null);
+        continue;
+      }
+      switch (suggestion.reason) {
+        case INTRA_CARRIER:
+          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_intra_carrier));
+          break;
+        case FREQUENT:
+          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
+          break;
+        default:
+          LogUtil.w("CallingAccountSelector.buildHint", "unhandled reason " + suggestion.reason);
+      }
+    }
+    return hints;
+  }
 }
