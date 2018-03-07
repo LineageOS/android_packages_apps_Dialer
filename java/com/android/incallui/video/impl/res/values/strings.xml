@@ -29,4 +29,10 @@
   <!-- Text indicates the call is resumed from held by remote party. [CHAR LIMIT=20] -->
   <string name="videocall_remotely_resumed">Call resumed</string>
 
+  <!-- Instruction text to notify user that charges may apply on video calling. [CHAR LIMIT=NONE] -->
+  <string name="videocall_charges_alert_dialog_description">Video calls made over the mobile network use both data and voice minutes. Charges may apply.</string>
+
+  <!-- Option to hide the popup dialog if it is not necessary for the user. [CHAR LIMIT=40] -->
+  <string name="do_not_show_again">Do not show again</string>
+
 </resources>

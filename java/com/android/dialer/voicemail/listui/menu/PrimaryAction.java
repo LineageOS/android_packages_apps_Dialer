@@ -19,6 +19,7 @@ package com.android.dialer.voicemail.listui.menu;
 import android.content.Context;
 import android.text.TextUtils;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.HistoryItemPrimaryActionInfo;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
@@ -33,12 +34,15 @@ final class PrimaryAction {
   // setSecondaryText - check in with UX
   static HistoryItemPrimaryActionInfo fromVoicemailEntry(
       Context context, VoicemailEntry voicemailEntry) {
+    PhotoInfo.Builder photoInfoBuilder =
+        NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes());
+    if (!TextUtils.isEmpty(voicemailEntry.formattedNumber())) {
+      photoInfoBuilder.setFormattedNumber(voicemailEntry.formattedNumber());
+    }
+
     return HistoryItemPrimaryActionInfo.builder()
         .setNumber(voicemailEntry.number())
-        .setPhotoInfo(
-            NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes())
-                .setFormattedNumber(voicemailEntry.formattedNumber())
-                .build())
+        .setPhotoInfo(photoInfoBuilder.build())
         .setPrimaryText(buildPrimaryVoicemailText(context, voicemailEntry))
         .setSecondaryText(buildSecondaryVoicemailText(voicemailEntry))
         .build();

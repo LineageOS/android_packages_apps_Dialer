@@ -49,7 +49,7 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
   @Override
   public void loadQuickContactBadge(QuickContactBadge badge, PhotoInfo photoInfo) {
     Assert.isMainThread();
-    badge.assignContactUri(parseUri(photoInfo.lookupUri()));
+    badge.assignContactUri(parseUri(photoInfo.getLookupUri()));
     badge.setOverlay(null);
     GlideRequest<Drawable> request = buildRequest(GlideApp.with(badge), photoInfo);
     request.into(badge);
@@ -62,20 +62,20 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
     GlideRequest<Drawable> request;
     boolean circleCrop = true; // Photos are cropped to a circle by default.
 
-    if (photoInfo.isBlocked()) {
+    if (photoInfo.getIsBlocked()) {
       // Whether the number is blocked takes precedence over the spam status.
       request = requestManager.load(R.drawable.ic_block_grey_48dp);
 
-    } else if (photoInfo.isSpam()) {
+    } else if (photoInfo.getIsSpam()) {
       request = requestManager.load(R.drawable.quantum_ic_report_vd_red_24);
       circleCrop = false; // The spam icon is an octagon so we don't crop it.
 
-    } else if (!TextUtils.isEmpty(photoInfo.photoUri())) {
-      request = requestManager.load(parseUri(photoInfo.photoUri()));
+    } else if (!TextUtils.isEmpty(photoInfo.getPhotoUri())) {
+      request = requestManager.load(parseUri(photoInfo.getPhotoUri()));
 
-    } else if (photoInfo.photoId() != 0) {
+    } else if (photoInfo.getPhotoId() != 0) {
       request =
-          requestManager.load(ContentUris.withAppendedId(Data.CONTENT_URI, photoInfo.photoId()));
+          requestManager.load(ContentUris.withAppendedId(Data.CONTENT_URI, photoInfo.getPhotoId()));
 
     } else {
       // load null to indicate fallback should be used.
@@ -102,23 +102,25 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
     LetterTileDrawable letterTileDrawable = new LetterTileDrawable(appContext.getResources());
     String displayName;
     String identifier;
-    if (TextUtils.isEmpty(photoInfo.lookupUri())) {
+    if (TextUtils.isEmpty(photoInfo.getLookupUri())) {
       // Use generic avatar instead of letter for non-contacts.
       displayName = null;
       identifier =
-          TextUtils.isEmpty(photoInfo.name()) ? photoInfo.formattedNumber() : photoInfo.name();
+          TextUtils.isEmpty(photoInfo.getName())
+              ? photoInfo.getFormattedNumber()
+              : photoInfo.getName();
     } else {
-      displayName = photoInfo.name();
-      identifier = photoInfo.lookupUri();
+      displayName = photoInfo.getName();
+      identifier = photoInfo.getLookupUri();
     }
     letterTileDrawable.setCanonicalDialerLetterTileDetails(
         displayName,
         identifier,
         LetterTileDrawable.SHAPE_CIRCLE,
         LetterTileDrawable.getContactTypeFromPrimitives(
-            photoInfo.isVoicemail(),
-            photoInfo.isSpam(),
-            photoInfo.isBusiness(),
+            photoInfo.getIsVoicemail(),
+            photoInfo.getIsSpam(),
+            photoInfo.getIsBusiness(),
             TelecomManager.PRESENTATION_ALLOWED, // TODO(twyen):implement
             false)); // TODO(twyen):implement
     return letterTileDrawable;
