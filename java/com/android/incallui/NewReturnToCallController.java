@@ -102,10 +102,13 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
 
   @Override
   public void onUiShowing(boolean showing) {
+    LogUtil.i("ReturnToCallController.onUiShowing", "showing: " + showing);
     if (showing) {
+      LogUtil.i("ReturnToCallController.onUiShowing", "going to hide");
       hide();
     } else {
       if (getCall() != null) {
+        LogUtil.i("ReturnToCallController.onUiShowing", "going to show");
         show();
       }
     }
