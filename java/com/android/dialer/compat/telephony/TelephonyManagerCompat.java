@@ -78,6 +78,13 @@ public class TelephonyManagerCompat {
   public static final Integer FEATURES_ASSISTED_DIALING = 1 << 4;
 
   /**
+   * Flag specifying whether to show an alert dialog for video call charges. By default this value
+   * is {@code false}. TODO(a bug): Replace with public API for these constants when available.
+   */
+  public static final String CARRIER_CONFIG_KEY_SHOW_VIDEO_CALL_CHARGES_ALERT_DIALOG_BOOL =
+      "show_video_call_charges_alert_dialog_bool";
+
+  /**
    * Returns the number of phones available. Returns 1 for Single standby mode (Single SIM
    * functionality) Returns 2 for Dual standby mode.(Dual SIM functionality)
    *

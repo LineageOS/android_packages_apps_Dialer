@@ -99,6 +99,8 @@ public class VideoCallFragment extends Fragment
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
 
+  private static final String TAG_VIDEO_CHARGES_ALERT = "tag_video_charges_alert";
+
   @VisibleForTesting static final float BLUR_PREVIEW_RADIUS = 16.0f;
   @VisibleForTesting static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
   private static final float BLUR_REMOTE_RADIUS = 25.0f;
@@ -108,6 +110,7 @@ public class VideoCallFragment extends Fragment
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
   private static final long CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS = 2000L;
   private static final long VIDEO_OFF_VIEW_FADE_OUT_DELAY_IN_MILLIS = 2000L;
+  private static final long VIDEO_CHARGES_ALERT_DIALOG_DELAY_IN_MILLIS = 500L;
 
   private final ViewOutlineProvider circleOutlineProvider =
       new ViewOutlineProvider() {
@@ -159,6 +162,24 @@ public class VideoCallFragment extends Fragment
             LogUtil.i("VideoCallFragment.cameraPermissionDialogRunnable", "showing dialog");
             checkCameraPermission();
           }
+        }
+      };
+
+  private final Runnable videoChargesAlertDialogRunnable =
+      () -> {
+        VideoChargesAlertDialogFragment existingVideoChargesAlertFragment =
+            (VideoChargesAlertDialogFragment)
+                getChildFragmentManager().findFragmentByTag(TAG_VIDEO_CHARGES_ALERT);
+        if (existingVideoChargesAlertFragment != null) {
+          LogUtil.i(
+              "VideoCallFragment.videoChargesAlertDialogRunnable", "already shown for this call");
+          return;
+        }
+
+        if (VideoChargesAlertDialogFragment.shouldShow(getContext(), getCallId())) {
+          LogUtil.i("VideoCallFragment.videoChargesAlertDialogRunnable", "showing dialog");
+          VideoChargesAlertDialogFragment.newInstance(getCallId())
+              .show(getChildFragmentManager(), TAG_VIDEO_CHARGES_ALERT);
         }
       };
 
@@ -352,6 +373,8 @@ public class VideoCallFragment extends Fragment
     inCallButtonUiDelegate.refreshMuteState();
     videoCallScreenDelegate.onVideoCallScreenUiReady();
     getView().postDelayed(cameraPermissionDialogRunnable, CAMERA_PERMISSION_DIALOG_DELAY_IN_MILLIS);
+    getView()
+        .postDelayed(videoChargesAlertDialogRunnable, VIDEO_CHARGES_ALERT_DIALOG_DELAY_IN_MILLIS);
   }
 
   @Override
@@ -377,6 +400,7 @@ public class VideoCallFragment extends Fragment
 
   @Override
   public void onVideoScreenStop() {
+    getView().removeCallbacks(videoChargesAlertDialogRunnable);
     getView().removeCallbacks(cameraPermissionDialogRunnable);
     videoCallScreenDelegate.onVideoCallScreenUiUnready();
   }
@@ -765,6 +789,11 @@ public class VideoCallFragment extends Fragment
   @NonNull
   public String getCallId() {
     return Assert.isNotNull(getArguments().getString(ARG_CALL_ID));
+  }
+
+  @Override
+  public void onHandoverFromWiFiToLte() {
+    getView().post(videoChargesAlertDialogRunnable);
   }
 
   @Override
