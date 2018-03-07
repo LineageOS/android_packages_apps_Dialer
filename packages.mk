@@ -49,6 +49,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.precall.impl \
 	com.android.dialer.precall.externalreceiver \
 	com.android.dialer.preferredsim.impl \
+	com.android.dialer.preferredsim.suggestion \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \
 	com.android.dialer.searchfragment.directories \

@@ -26,12 +26,4 @@
    same contact and never ask again [CHAR LIMIT=40]-->
   <string name="pre_call_select_phone_account_remember">Remember this choice</string>
 
-  <!-- Hint text under a SIM when selecting SIM to call, indicating the SIM is on the same carrier
-   as the outgoing call.[CHAR LIMIT=40]-->
-  <string name="pre_call_select_phone_account_hint_intra_carrier">Uses same carrier</string>
-
-  <!-- Hint text under a SIM when selecting SIM to call, indicating user often use the SIM to call
-  the contact.[CHAR LIMIT=40]-->
-  <string name="pre_call_select_phone_account_hint_frequent">Recently used</string>
-
 </resources>
