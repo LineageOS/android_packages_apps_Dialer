@@ -39,6 +39,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.ColorUtils;
+import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -56,14 +57,19 @@ import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
+import com.android.dialer.preferredsim.PreferredAccountRecorder;
+import com.android.dialer.preferredsim.PreferredAccountWorker;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.bindings.AnswerBindings;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -124,8 +130,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private final InternationalCallOnWifiCallback internationalCallOnWifiCallback =
       new InternationalCallOnWifiCallback();
-  private final SelectPhoneAccountListener selectPhoneAccountListener =
-      new SelectPhoneAccountListener();
+
+  private SelectPhoneAccountListener selectPhoneAccountListener;
 
   private Animation dialpadSlideInAnimation;
   private Animation dialpadSlideOutAnimation;
@@ -178,6 +184,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   protected void onCreate(Bundle bundle) {
     Trace.beginSection("InCallActivity.onCreate");
     super.onCreate(bundle);
+
+    selectPhoneAccountListener = new SelectPhoneAccountListener(getApplicationContext());
 
     if (bundle != null) {
       didShowAnswerScreen = bundle.getBoolean(KeysForSavedInstance.DID_SHOW_ANSWER_SCREEN);
@@ -358,22 +366,59 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return false;
     }
 
-    Bundle extras = waitingForAccountCall.getIntentExtras();
-    List<PhoneAccountHandle> phoneAccountHandles =
-        extras == null
-            ? new ArrayList<>()
-            : extras.getParcelableArrayList(android.telecom.Call.AVAILABLE_PHONE_ACCOUNTS);
+    DialerExecutorComponent.get(this)
+        .dialerExecutorFactory()
+        .createNonUiTaskBuilder(new PreferredAccountWorker(waitingForAccountCall.getNumber()))
+        .onSuccess(
+            (result -> {
+              if (result.getPhoneAccountHandle().isPresent()) {
+                Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
+                selectPhoneAccountListener.onPhoneAccountSelected(
+                    result.getPhoneAccountHandle().get(), false, waitingForAccountCall.getId());
+                return;
+              }
+              if (result.getSuggestion().isPresent()) {
+                LogUtil.i(
+                    "CallingAccountSelector.processPreferredAccount",
+                    "SIM suggested: " + result.getSuggestion().get().reason);
+                if (result.getSuggestion().get().shouldAutoSelect) {
+                  Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
+                  LogUtil.i(
+                      "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
+                  selectPhoneAccountListener.onPhoneAccountSelected(
+                      result.getSuggestion().get().phoneAccountHandle,
+                      false,
+                      waitingForAccountCall.getId());
+                  return;
+                }
+              }
+              Bundle extras = waitingForAccountCall.getIntentExtras();
+              List<PhoneAccountHandle> phoneAccountHandles =
+                  extras == null
+                      ? new ArrayList<>()
+                      : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
 
-    selectPhoneAccountDialogFragment =
-        SelectPhoneAccountDialogFragment.newInstance(
-            R.string.select_phone_account_for_calls,
-            true /* canSetDefault */,
-            0 /* setDefaultResId */,
-            phoneAccountHandles,
-            selectPhoneAccountListener,
-            waitingForAccountCall.getId(),
-            null /* hints */);
-    selectPhoneAccountDialogFragment.show(getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
+              waitingForAccountCall.setPreferredAccountRecorder(
+                  new PreferredAccountRecorder(
+                      waitingForAccountCall.getNumber(),
+                      result.getSuggestion().orNull(),
+                      result.getDataId().orNull()));
+              selectPhoneAccountDialogFragment =
+                  SelectPhoneAccountDialogFragment.newInstance(
+                      R.string.select_phone_account_for_calls,
+                      result.getDataId().isPresent() /* canSetDefault */,
+                      R.string.select_phone_account_for_calls_remember /* setDefaultResId */,
+                      phoneAccountHandles,
+                      selectPhoneAccountListener,
+                      waitingForAccountCall.getId(),
+                      SuggestionProvider.buildHint(
+                          this, phoneAccountHandles, result.getSuggestion().orNull() /* hints */));
+              selectPhoneAccountDialogFragment.show(
+                  getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
+            }))
+        .build()
+        .executeParallel(this);
+
     return true;
   }
 
@@ -1650,6 +1695,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       extends SelectPhoneAccountDialogFragment.SelectPhoneAccountListener {
     private static final String TAG = SelectPhoneAccountListener.class.getCanonicalName();
 
+    private final Context appContext;
+
+    SelectPhoneAccountListener(Context appContext) {
+      this.appContext = appContext;
+    }
+
     @Override
     public void onPhoneAccountSelected(
         PhoneAccountHandle selectedAccountHandle, boolean setDefault, String callId) {
@@ -1657,7 +1708,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       LogUtil.i(TAG, "Phone account select with call:\n%s", call);
 
       if (call != null) {
-        call.phoneAccountSelected(selectedAccountHandle, setDefault);
+        call.phoneAccountSelected(selectedAccountHandle, false);
+        if (call.getPreferredAccountRecorder() != null) {
+          call.getPreferredAccountRecorder().record(appContext, selectedAccountHandle, setDefault);
+        }
       }
     }
 
