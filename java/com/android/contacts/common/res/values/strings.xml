@@ -372,7 +372,11 @@
   <string name="set_default_account">Always use this for calls</string>
 
   <!-- Title for dialog to select Phone Account for outgoing call.  [CHAR LIMIT=40] -->
-  <string name="select_phone_account_for_calls">Call with</string>
+  <string name="select_phone_account_for_calls">Choose SIM for this call</string>
+
+  <!-- Checkbox label when selecting a SIM when calling a contact, to use the selected SIM for the
+   same contact and never ask again [CHAR LIMIT=40]-->
+  <string name="select_phone_account_for_calls_remember">Remember this choice</string>
 
   <!-- String used for actions in the dialer call log and the quick contact card to initiate
        a call to an individual.  The user is prompted to enter a note which is sent along with
