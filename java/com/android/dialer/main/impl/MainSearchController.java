@@ -114,6 +114,8 @@ public class MainSearchController implements SearchBarListener {
   private void showDialpad(boolean animate, boolean fromNewIntent) {
     Assert.checkArgument(!isDialpadVisible());
 
+    Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_DIALPAD, mainActivity);
+
     fab.hide();
     toolbar.slideUp(animate);
     toolbar.expand(animate, Optional.absent());
@@ -357,6 +359,9 @@ public class MainSearchController implements SearchBarListener {
 
   private void openSearch(Optional<String> query) {
     LogUtil.enterBlock("MainSearchController.openSearch");
+
+    Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_SEARCH, mainActivity);
+
     fab.hide();
     toolbar.expand(/* animate=*/ true, query);
     toolbar.showKeyboard();

@@ -69,5 +69,12 @@ message ScreenEvent {
     BLOCKED_NUMBER_ADD_NUMBER = 19;
 
     CALL_DETAILS = 20;
+
+    MAIN_SPEED_DIAL = 21;
+    MAIN_CALL_LOG = 22;
+    MAIN_CONTACTS = 23;
+    MAIN_VOICEMAIL = 24;
+    MAIN_DIALPAD = 25;
+    MAIN_SEARCH = 26;
   }
 }
