@@ -17,6 +17,7 @@
 package com.android.incallui.call;
 
 import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.camera2.CameraCharacteristics;
@@ -25,6 +26,7 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.Trace;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -156,6 +158,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   @Nullable private Boolean isInGlobalSpamList;
   private boolean didShowCameraPermission;
+  private boolean didDismissVideoChargesAlertDialog;
+  private PersistableBundle carrierConfig;
   private String callProviderLabel;
   private String callbackNumber;
   private int cameraDirection = CameraDirection.CAMERA_DIRECTION_UNKNOWN;
@@ -464,7 +468,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   /* package-private */ Call getTelecomCall() {
     return telecomCall;
   }
-  
+
   public StatusHints getStatusHints() {
     return telecomCall.getDetails().getStatusHints();
   }
@@ -585,6 +589,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         if (phoneAccount != null) {
           isCallSubjectSupported =
               phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_CALL_SUBJECT);
+          if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+            cacheCarrierConfiguration(phoneAccountHandle);
+          }
         }
       }
     }
@@ -594,6 +601,26 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       countryIso = GeoUtil.getCurrentCountryIso(context);
     }
     Trace.endSection();
+  }
+
+  /**
+   * Caches frequently used carrier configuration locally.
+   *
+   * @param accountHandle The PhoneAccount handle.
+   */
+  @SuppressLint("MissingPermission")
+  private void cacheCarrierConfiguration(PhoneAccountHandle accountHandle) {
+    if (!PermissionsUtil.hasPermission(context, permission.READ_PHONE_STATE)) {
+      return;
+    }
+    if (VERSION.SDK_INT < VERSION_CODES.O) {
+      return;
+    }
+    // TODO(a bug): This may take several seconds to complete, revisit it to move it to worker
+    // thread.
+    carrierConfig =
+        TelephonyManagerCompat.getTelephonyManagerForPhoneAccountHandle(context, accountHandle)
+            .getCarrierConfig();
   }
 
   /**
@@ -710,6 +737,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public void setDoNotShowDialogForHandoffToWifiFailure(boolean bool) {
     doNotShowDialogForHandoffToWifiFailure = bool;
+  }
+
+  public boolean showVideoChargesAlertDialog() {
+    if (carrierConfig == null) {
+      return false;
+    }
+    return carrierConfig.getBoolean(
+        TelephonyManagerCompat.CARRIER_CONFIG_KEY_SHOW_VIDEO_CALL_CHARGES_ALERT_DIALOG_BOOL);
   }
 
   public long getTimeAddedMs() {
@@ -1069,6 +1104,14 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public void setDidShowCameraPermission(boolean didShow) {
     didShowCameraPermission = didShow;
+  }
+
+  public boolean didDismissVideoChargesAlertDialog() {
+    return didDismissVideoChargesAlertDialog;
+  }
+
+  public void setDidDismissVideoChargesAlertDialog(boolean didDismiss) {
+    didDismissVideoChargesAlertDialog = didDismiss;
   }
 
   @Nullable
