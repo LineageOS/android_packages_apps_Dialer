@@ -71,6 +71,7 @@ import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactLookupResult.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
@@ -180,6 +181,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String countryIso;
 
   private volatile boolean feedbackRequested = false;
+
+  @Nullable private PreferredAccountRecorder preferredAccountRecorder;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -1526,6 +1529,19 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public boolean isFeedbackRequested() {
     return feedbackRequested;
+  }
+
+  /**
+   * If the in call UI has shown the phone account selection dialog for the call, the {@link
+   * PreferredAccountRecorder} to record the result from the dialog.
+   */
+  @Nullable
+  public PreferredAccountRecorder getPreferredAccountRecorder() {
+    return preferredAccountRecorder;
+  }
+
+  public void setPreferredAccountRecorder(PreferredAccountRecorder preferredAccountRecorder) {
+    this.preferredAccountRecorder = preferredAccountRecorder;
   }
 
   /**

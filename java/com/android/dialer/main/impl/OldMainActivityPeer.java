@@ -19,6 +19,7 @@ package com.android.dialer.main.impl;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -31,6 +32,7 @@ import android.os.Handler;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.VoicemailContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -83,7 +85,6 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
@@ -107,6 +108,7 @@ import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import com.android.voicemail.VoicemailComponent;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -214,8 +216,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     bottomNav = mainActivity.findViewById(R.id.bottom_nav_bar);
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
-        new MainBottomNavBarBottomNavTabListener(
-            mainActivity, mainActivity.getFragmentManager(), fab);
+        new MainBottomNavBarBottomNavTabListener(mainActivity.getFragmentManager(), fab);
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
     // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
     boolean showVoicemailTab = canVoicemailTabBeShown(mainActivity);
@@ -1101,139 +1102,116 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private static final String CONTACTS_TAG = "contacts";
     private static final String VOICEMAIL_TAG = "voicemail";
 
-    private final MainActivity mainActivity;
     private final FragmentManager fragmentManager;
     private final FloatingActionButton fab;
 
     @TabIndex private int selectedTab = -1;
 
     private MainBottomNavBarBottomNavTabListener(
-        MainActivity mainActivity, FragmentManager fragmentManager, FloatingActionButton fab) {
-      this.mainActivity = mainActivity;
+        FragmentManager fragmentManager, FloatingActionButton fab) {
       this.fragmentManager = fragmentManager;
       this.fab = fab;
-      preloadCallLogFragment();
-    }
-
-    private void preloadCallLogFragment() {
-      if (ConfigProviderBindings.get(mainActivity).getBoolean("nui_preload_call_log", true)) {
-        CallLogFragment fragment = new CallLogFragment();
-        fragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, fragment, CALL_LOG_TAG)
-            .hide(fragment)
-            .commit();
-      }
     }
 
     @Override
     public void onSpeedDialSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onSpeedDialSelected");
-      if (selectedTab != TabIndex.SPEED_DIAL) {
-        Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_SPEED_DIAL, mainActivity);
-        selectedTab = TabIndex.SPEED_DIAL;
+      if (selectedTab == TabIndex.SPEED_DIAL) {
+        return;
       }
-      hideAllFragments();
+      selectedTab = TabIndex.SPEED_DIAL;
       Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-      if (fragment == null) {
-        fragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, new OldSpeedDialFragment(), SPEED_DIAL_TAG)
-            .commit();
-      } else {
-        fragmentManager.beginTransaction().show(fragment).commit();
-      }
+      showFragment(fragment == null ? new OldSpeedDialFragment() : fragment, SPEED_DIAL_TAG);
       fab.show();
     }
 
     @Override
     public void onCallLogSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onCallLogSelected");
-      if (selectedTab != TabIndex.CALL_LOG) {
-        Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_CALL_LOG, mainActivity);
-        selectedTab = TabIndex.CALL_LOG;
+      if (selectedTab == TabIndex.CALL_LOG) {
+        return;
       }
-      hideAllFragments();
-      CallLogFragment fragment = (CallLogFragment) fragmentManager.findFragmentByTag(CALL_LOG_TAG);
-      if (fragment == null) {
-        fragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, new CallLogFragment(), CALL_LOG_TAG)
-            .commit();
-      } else {
-        fragmentManager.beginTransaction().show(fragment).commit();
-      }
+      selectedTab = TabIndex.CALL_LOG;
+      Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
       fab.show();
     }
 
     @Override
     public void onContactsSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onContactsSelected");
-      if (selectedTab != TabIndex.CONTACTS) {
-        Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_CONTACTS, mainActivity);
-        selectedTab = TabIndex.CONTACTS;
+      if (selectedTab == TabIndex.CONTACTS) {
+        return;
       }
-      hideAllFragments();
-      ContactsFragment fragment =
-          (ContactsFragment) fragmentManager.findFragmentByTag(CONTACTS_TAG);
-      if (fragment == null) {
-        fragmentManager
-            .beginTransaction()
-            .add(
-                R.id.fragment_container,
-                ContactsFragment.newInstance(Header.ADD_CONTACT),
-                CONTACTS_TAG)
-            .commit();
-      } else {
-        fragmentManager.beginTransaction().show(fragment).commit();
-      }
+      selectedTab = TabIndex.CONTACTS;
+      Fragment fragment = fragmentManager.findFragmentByTag(CONTACTS_TAG);
+      showFragment(
+          fragment == null ? ContactsFragment.newInstance(Header.ADD_CONTACT) : fragment,
+          CONTACTS_TAG);
       fab.show();
     }
 
     @Override
     public void onVoicemailSelected() {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onVoicemailSelected");
-      if (selectedTab != TabIndex.VOICEMAIL) {
-        Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_VOICEMAIL, mainActivity);
-        selectedTab = TabIndex.VOICEMAIL;
+      if (selectedTab == TabIndex.VOICEMAIL) {
+        return;
       }
-      hideAllFragments();
+      selectedTab = TabIndex.VOICEMAIL;
       VisualVoicemailCallLogFragment fragment =
           (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
       if (fragment == null) {
         fragment = new VisualVoicemailCallLogFragment();
-        fragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, fragment, VOICEMAIL_TAG)
-            .commit();
-      } else {
-        fragmentManager.beginTransaction().show(fragment).commit();
       }
+      showFragment(fragment, VOICEMAIL_TAG);
+
       fragment.setUserVisibleHint(true);
       fragment.onVisible();
     }
 
-    private void hideAllFragments() {
-      android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-      if (fragmentManager.findFragmentByTag(SPEED_DIAL_TAG) != null) {
-        transaction.hide(fragmentManager.findFragmentByTag(SPEED_DIAL_TAG));
-      }
-      if (fragmentManager.findFragmentByTag(CALL_LOG_TAG) != null) {
-        // Old CallLogFragment
-        transaction.hide(fragmentManager.findFragmentByTag(CALL_LOG_TAG));
-      }
-      if (fragmentManager.findFragmentByTag(CONTACTS_TAG) != null) {
-        transaction.hide(fragmentManager.findFragmentByTag(CONTACTS_TAG));
-      }
-      if (fragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
-        // Old VisualVoicemailFragment
-        VisualVoicemailCallLogFragment fragment =
-            (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
-        fragment.setUserVisibleHint(false);
-        fragment.onNotVisible();
-        transaction.hide(fragment);
+    /**
+     * Shows the passed in fragment and hides all of the others in one transaction.
+     *
+     * <p>Executes all fragment shows/hides in one transaction with no conflicting transactions
+     * (like showing and hiding the same fragment in the same transaction). See a bug.
+     */
+    private void showFragment(@NonNull Fragment fragment, String tag) {
+      Fragment speedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+      Fragment callLog = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      Fragment contacts = fragmentManager.findFragmentByTag(CONTACTS_TAG);
+      Fragment voicemail = fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+
+      FragmentTransaction transaction = fragmentManager.beginTransaction();
+      boolean fragmentShown = showIfEqualElseHide(transaction, fragment, speedDial);
+      fragmentShown |= showIfEqualElseHide(transaction, fragment, callLog);
+      fragmentShown |= showIfEqualElseHide(transaction, fragment, contacts);
+      fragmentShown |= showIfEqualElseHide(transaction, fragment, voicemail);
+
+      if (!fragmentShown) {
+        transaction.add(R.id.fragment_container, fragment, tag);
       }
       transaction.commit();
+    }
+
+    /**
+     * @param fragment1 will be shown if equal to {@code fragment2}
+     * @param fragment2 will be hidden if unequal to {@code fragment1}
+     * @return {@code true} if {@code fragment1} was shown
+     */
+    private boolean showIfEqualElseHide(
+        FragmentTransaction transaction, Fragment fragment1, Fragment fragment2) {
+      boolean shown = false;
+      if (Objects.equals(fragment1, fragment2)) {
+        transaction.show(fragment1);
+        shown = true;
+      } else if (fragment2 != null) {
+        if (fragment2 instanceof VisualVoicemailCallLogFragment) {
+          fragment2.setUserVisibleHint(false);
+          ((VisualVoicemailCallLogFragment) fragment2).onNotVisible();
+        }
+        transaction.hide(fragment2);
+      }
+      return shown;
     }
   }
 
