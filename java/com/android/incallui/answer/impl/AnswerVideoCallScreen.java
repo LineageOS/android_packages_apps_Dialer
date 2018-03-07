@@ -109,6 +109,9 @@ public class AnswerVideoCallScreen implements VideoCallScreen {
     return callId;
   }
 
+  @Override
+  public void onHandoverFromWiFiToLte() {}
+
   private void updatePreviewVideoScaling() {
     if (textureView.getWidth() == 0 || textureView.getHeight() == 0) {
       LogUtil.i(
