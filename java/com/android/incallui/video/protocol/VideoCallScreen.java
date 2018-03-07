@@ -39,4 +39,6 @@ public interface VideoCallScreen {
   Fragment getVideoCallScreenFragment();
 
   String getCallId();
+
+  void onHandoverFromWiFiToLte();
 }

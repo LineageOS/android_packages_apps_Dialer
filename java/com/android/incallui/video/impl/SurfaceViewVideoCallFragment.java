@@ -725,6 +725,9 @@ public class SurfaceViewVideoCallFragment extends Fragment
   }
 
   @Override
+  public void onHandoverFromWiFiToLte() {}
+
+  @Override
   public void showButton(@InCallButtonIds int buttonId, boolean show) {
     LogUtil.v(
         "SurfaceViewVideoCallFragment.showButton",
