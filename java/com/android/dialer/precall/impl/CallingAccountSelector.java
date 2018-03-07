@@ -355,7 +355,8 @@ public class CallingAccountSelector implements PreCallAction {
       while (cursor.moveToNext()) {
         Optional<String> accountType =
             getAccountType(context.getContentResolver(), cursor.getLong(0));
-        if (!accountType.isPresent() || !validAccountTypes.contains(accountType.get())) {
+        if (accountType.isPresent() && !validAccountTypes.contains(accountType.get())) {
+          // Empty accountType is treated as writable
           LogUtil.i("CallingAccountSelector.getDataId", "ignoring non-writable " + accountType);
           continue;
         }
