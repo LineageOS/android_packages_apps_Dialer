@@ -29,9 +29,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import com.android.dialer.blocking.FilteredNumberCompat;
 
-/**
- * Helper class for creating dialog fragments to block a number and/or report it as spam/not spam.
- */
+/** Creates dialog fragments to block a number and/or report it as spam/not spam. */
 public final class BlockReportSpamDialogs {
 
   public static final String BLOCK_REPORT_SPAM_DIALOG_TAG = "BlockReportSpamDialog";
@@ -39,7 +37,7 @@ public final class BlockReportSpamDialogs {
   public static final String UNBLOCK_DIALOG_TAG = "UnblockDialog";
   public static final String NOT_SPAM_DIALOG_TAG = "NotSpamDialog";
 
-  /** Creates a dialog with the default cancel button listener (dismisses dialog). */
+  /** Creates a dialog with the default cancel button listener (which dismisses the dialog). */
   private static AlertDialog.Builder createDialogBuilder(
       Activity activity, final DialogFragment fragment) {
     return new AlertDialog.Builder(activity, R.style.AlertDialogTheme)
@@ -70,36 +68,36 @@ public final class BlockReportSpamDialogs {
   }
 
   /**
-   * Listener passed to block/report spam dialog for positive click in {@link
-   * BlockReportSpamDialogFragment}.
+   * Positive listener for the "Block/Report spam" dialog {@link
+   * DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam}.
    */
   public interface OnSpamDialogClickListener {
 
     /**
-     * Called when user clicks on positive button in block/report spam dialog.
+     * Called when the user clicks on the positive button of the "Block/Report spam" dialog.
      *
      * @param isSpamChecked Whether the spam checkbox is checked.
      */
     void onClick(boolean isSpamChecked);
   }
 
-  /** Listener passed to all dialogs except the block/report spam dialog for positive click. */
+  /** Positive listener for dialogs other than the "Block/Report spam" dialog. */
   public interface OnConfirmListener {
 
-    /** Called when user clicks on positive button in the dialog. */
+    /** Called when the user clicks on the positive button of the dialog. */
     void onClick();
   }
 
-  /** Contains the common attributes between all block/unblock/report spam dialog fragments. */
+  /** Contains common attributes shared among all dialog fragments. */
   private abstract static class CommonDialogsFragment extends DialogFragment {
 
     /** The number to display in the dialog title. */
     protected String displayNumber;
 
-    /** Called when dialog positive button is pressed. */
+    /** Listener for the positive button. */
     protected OnConfirmListener positiveListener;
 
-    /** Called when dialog is dismissed. */
+    /** Listener for when the dialog is dismissed. */
     @Nullable protected DialogInterface.OnDismissListener dismissListener;
 
     @Override
@@ -121,8 +119,14 @@ public final class BlockReportSpamDialogs {
     }
   }
 
-  /** Dialog for block/report spam with the mark as spam checkbox. */
-  public static class BlockReportSpamDialogFragment extends CommonDialogsFragment {
+  /**
+   * Dialog for blocking a number and optionally reporting it as spam.
+   *
+   * <p>This dialog is for a number that is neither blocked nor marked as spam. It has a checkbox
+   * that allows the user to report a number as spam when they block it.
+   */
+  public static class DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam
+      extends CommonDialogsFragment {
 
     /** Called when dialog positive button is pressed. */
     private OnSpamDialogClickListener onSpamDialogClickListener;
@@ -135,7 +139,8 @@ public final class BlockReportSpamDialogs {
         boolean spamChecked,
         OnSpamDialogClickListener onSpamDialogClickListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
-      BlockReportSpamDialogFragment fragment = new BlockReportSpamDialogFragment();
+      DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam fragment =
+          new DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam();
       fragment.spamChecked = spamChecked;
       fragment.displayNumber = displayNumber;
       fragment.onSpamDialogClickListener = onSpamDialogClickListener;
@@ -173,8 +178,14 @@ public final class BlockReportSpamDialogs {
     }
   }
 
-  /** Dialog for blocking a number. */
-  public static class BlockDialogFragment extends CommonDialogsFragment {
+  /**
+   * Dialog for blocking a number and reporting it as spam.
+   *
+   * <p>This dialog is for the migration of blocked numbers. Its positive action should block a
+   * number, and also marks it as spam if the spam feature is enabled.
+   */
+  public static class DialogFragmentForBlockingNumberAndReportingAsSpam
+      extends CommonDialogsFragment {
 
     private boolean isSpamEnabled;
 
@@ -183,7 +194,8 @@ public final class BlockReportSpamDialogs {
         boolean isSpamEnabled,
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
-      BlockDialogFragment fragment = new BlockDialogFragment();
+      DialogFragmentForBlockingNumberAndReportingAsSpam fragment =
+          new DialogFragmentForBlockingNumberAndReportingAsSpam();
       fragment.displayNumber = displayNumber;
       fragment.positiveListener = positiveListener;
       fragment.dismissListener = dismissListener;
@@ -212,8 +224,51 @@ public final class BlockReportSpamDialogs {
     }
   }
 
-  /** Dialog for unblocking a number. */
-  public static class UnblockDialogFragment extends CommonDialogsFragment {
+  /**
+   * Dialog for blocking a number.
+   *
+   * <p>This dialog is for a spam number that hasn't been blocked. For example, if the user receives
+   * a spam call, this dialog will be shown if they would like to block the number.
+   */
+  public static class DialogFragmentForBlockingNumber extends CommonDialogsFragment {
+
+    public static DialogFragment newInstance(
+        String displayNumber,
+        OnConfirmListener positiveListener,
+        @Nullable DialogInterface.OnDismissListener dismissListener) {
+      DialogFragmentForBlockingNumberAndReportingAsSpam fragment =
+          new DialogFragmentForBlockingNumberAndReportingAsSpam();
+      fragment.displayNumber = displayNumber;
+      fragment.positiveListener = positiveListener;
+      fragment.dismissListener = dismissListener;
+      return fragment;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+      super.onCreateDialog(savedInstanceState);
+      // Return the newly created dialog
+      AlertDialog.Builder alertDialogBuilder = createDialogBuilder(getActivity(), this);
+      Dialog dialog =
+          alertDialogBuilder
+              .setTitle(getString(R.string.block_number_confirmation_title, displayNumber))
+              .setMessage(getString(R.string.block_report_number_alert_details))
+              .setPositiveButton(
+                  R.string.block_number_ok, createGenericOnClickListener(this, positiveListener))
+              .create();
+      dialog.setCanceledOnTouchOutside(true);
+      return dialog;
+    }
+  }
+
+  /**
+   * Dialog for unblocking a number and marking it as not spam.
+   *
+   * <p>This dialog is used in the old call log, where unblocking a number will also marking it as
+   * not spam.
+   */
+  public static class DialogFragmentForUnblockingNumberAndReportingAsNotSpam
+      extends CommonDialogsFragment {
 
     /** Whether or not the number is spam. */
     private boolean isSpam;
@@ -223,7 +278,8 @@ public final class BlockReportSpamDialogs {
         boolean isSpam,
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
-      UnblockDialogFragment fragment = new UnblockDialogFragment();
+      DialogFragmentForUnblockingNumberAndReportingAsNotSpam fragment =
+          new DialogFragmentForUnblockingNumberAndReportingAsNotSpam();
       fragment.displayNumber = displayNumber;
       fragment.isSpam = isSpam;
       fragment.positiveListener = positiveListener;
@@ -255,13 +311,13 @@ public final class BlockReportSpamDialogs {
   }
 
   /** Dialog for reporting a number as not spam. */
-  public static class ReportNotSpamDialogFragment extends CommonDialogsFragment {
+  public static class DialogFragmentForReportingNotSpam extends CommonDialogsFragment {
 
     public static DialogFragment newInstance(
         String displayNumber,
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
-      ReportNotSpamDialogFragment fragment = new ReportNotSpamDialogFragment();
+      DialogFragmentForReportingNotSpam fragment = new DialogFragmentForReportingNotSpam();
       fragment.displayNumber = displayNumber;
       fragment.positiveListener = positiveListener;
       fragment.dismissListener = dismissListener;

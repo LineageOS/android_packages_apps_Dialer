@@ -47,6 +47,19 @@ public final class ShowBlockReportSpamDialogNotifier {
     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
   }
 
+  /** Notifies that a dialog for blocking a number should be shown. */
+  public static void notifyShowDialogToBlockNumber(
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
+    LogUtil.enterBlock("ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumber");
+
+    Intent intent = new Intent();
+    intent.setAction(ShowBlockReportSpamDialogReceiver.ACTION_SHOW_DIALOG_TO_BLOCK_NUMBER);
+    ProtoParsers.put(
+        intent, ShowBlockReportSpamDialogReceiver.EXTRA_DIALOG_INFO, blockReportSpamDialogInfo);
+
+    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+  }
+
   /** Notifies that a dialog for reporting a number as not spam should be shown. */
   public static void notifyShowDialogToReportNotSpam(
       Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
