@@ -46,6 +46,8 @@ public class MissedCallNotificationReceiver extends BroadcastReceiver {
       return;
     }
 
+    LogUtil.enterBlock("MissedCallNotificationReceiver.onReceive");
+
     int count =
         intent.getIntExtra(
             EXTRA_NOTIFICATION_COUNT, CallLogNotificationsService.UNKNOWN_MISSED_CALL_COUNT);
