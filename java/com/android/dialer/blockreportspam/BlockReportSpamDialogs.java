@@ -264,8 +264,8 @@ public final class BlockReportSpamDialogs {
   /**
    * Dialog for unblocking a number and marking it as not spam.
    *
-   * <p>This dialog is used in the old call log, where unblocking a number will also marking it as
-   * not spam.
+   * <p>This dialog is used in the old call log, where unblocking a number will also mark it as not
+   * spam.
    */
   public static class DialogFragmentForUnblockingNumberAndReportingAsNotSpam
       extends CommonDialogsFragment {
@@ -300,6 +300,43 @@ public final class BlockReportSpamDialogs {
         alertDialogBuilder.setMessage(
             getString(R.string.unblock_report_number_alert_title, displayNumber));
       }
+      Dialog dialog =
+          alertDialogBuilder
+              .setPositiveButton(
+                  R.string.unblock_number_ok, createGenericOnClickListener(this, positiveListener))
+              .create();
+      dialog.setCanceledOnTouchOutside(true);
+      return dialog;
+    }
+  }
+
+  /**
+   * Dialog for unblocking a number.
+   *
+   * <p>This dialog is used in the new call log, where unblocking a number will *not* mark it as not
+   * spam.
+   */
+  public static class DialogFragmentForUnblockingNumber extends CommonDialogsFragment {
+
+    public static DialogFragment newInstance(
+        String displayNumber,
+        OnConfirmListener positiveListener,
+        @Nullable DialogInterface.OnDismissListener dismissListener) {
+      DialogFragmentForUnblockingNumberAndReportingAsNotSpam fragment =
+          new DialogFragmentForUnblockingNumberAndReportingAsNotSpam();
+      fragment.displayNumber = displayNumber;
+      fragment.positiveListener = positiveListener;
+      fragment.dismissListener = dismissListener;
+      return fragment;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+      super.onCreateDialog(savedInstanceState);
+      // Return the newly created dialog
+      AlertDialog.Builder alertDialogBuilder = createDialogBuilder(getActivity(), this);
+      alertDialogBuilder.setMessage(
+          getString(R.string.unblock_report_number_alert_title, displayNumber));
       Dialog dialog =
           alertDialogBuilder
               .setPositiveButton(
