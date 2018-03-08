@@ -31,6 +31,8 @@ import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForReportingNotSpam;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
@@ -196,7 +198,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   private void maybeShowNotSpamDialog(
       final String number, final ContactLookupResult.Type contactLookupResultType) {
     if (SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
-      BlockReportSpamDialogs.ReportNotSpamDialogFragment.newInstance(
+      DialogFragmentForReportingNotSpam.newInstance(
               getFormattedNumber(number, this),
               new BlockReportSpamDialogs.OnConfirmListener() {
                 @Override
@@ -220,7 +222,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           new BlockedNumbersMigrator.Listener() {
             @Override
             public void onComplete() {
-              BlockReportSpamDialogs.BlockReportSpamDialogFragment.newInstance(
+              DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
                       displayNumber,
                       SpamComponent.get(SpamNotificationActivity.this)
                           .spam()

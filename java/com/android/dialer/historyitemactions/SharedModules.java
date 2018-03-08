@@ -187,15 +187,20 @@ public class SharedModules {
 
       @Override
       public boolean onClick() {
-        // TODO(a bug): implement this method.
-        Toast.makeText(
-                context,
-                String.format(
-                    Locale.ENGLISH,
-                    "TODO: " + (isBlocked ? "Unblock " : "Block ") + " number %s.",
-                    blockReportSpamDialogInfo.getNormalizedNumber()),
-                Toast.LENGTH_SHORT)
-            .show();
+        if (!isBlocked) {
+          ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumber(
+              context, blockReportSpamDialogInfo);
+        } else {
+          // TODO(a bug): implement this method.
+          Toast.makeText(
+                  context,
+                  String.format(
+                      Locale.ENGLISH,
+                      "TODO: Unblock number %s.",
+                      blockReportSpamDialogInfo.getNormalizedNumber()),
+                  Toast.LENGTH_SHORT)
+              .show();
+        }
         return true; // Close the bottom sheet.
       }
     };
