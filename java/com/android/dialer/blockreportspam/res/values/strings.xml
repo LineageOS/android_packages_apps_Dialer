@@ -18,7 +18,7 @@
 
   <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
   <string name="block_number_confirmation_title">
-    Block<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
+    Block <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
   </string>
 
   <!-- Confirmation dialog message for blocking a number with new filtering enabled.
