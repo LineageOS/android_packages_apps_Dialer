@@ -51,7 +51,13 @@ import java.util.List;
 
 /**
  * Listens for events relevant to the return-to-call bubble and updates the bubble's state as
- * necessary
+ * necessary.
+ *
+ * <p>Bubble shows when one of following happens: 1. a new outgoing/ongoing call appears 2. leave
+ * in-call UI with an outgoing/ongoing call
+ *
+ * <p>Bubble hides when one of following happens: 1. a call disconnect and there is no more
+ * outgoing/ongoing call 2. show in-call UI
  */
 public class NewReturnToCallController implements InCallUiListener, Listener, AudioModeListener {
 
@@ -171,7 +177,14 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   public void onSessionModificationStateChange(DialerCall call) {}
 
   @Override
-  public void onCallListChange(CallList callList) {}
+  public void onCallListChange(CallList callList) {
+    if ((bubble == null || !bubble.isVisible())
+        && getCall() != null
+        && !InCallPresenter.getInstance().isShowingInCallUi()) {
+      LogUtil.i("NewReturnToCallController.onCallListChange", "going to show bubble");
+      show();
+    }
+  }
 
   @Override
   public void onDisconnect(DialerCall call) {
