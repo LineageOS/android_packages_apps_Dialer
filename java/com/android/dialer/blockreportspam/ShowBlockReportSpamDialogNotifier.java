@@ -72,4 +72,17 @@ public final class ShowBlockReportSpamDialogNotifier {
 
     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
   }
+
+  /** Notifies that a dialog for unblocking a number should be shown. */
+  public static void notifyShowDialogToUnblockNumber(
+      Context context, BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
+    LogUtil.enterBlock("ShowBlockReportSpamDialogNotifier.notifyShowDialogToUnblockNumber");
+
+    Intent intent = new Intent();
+    intent.setAction(ShowBlockReportSpamDialogReceiver.ACTION_SHOW_DIALOG_TO_UNBLOCK_NUMBER);
+    ProtoParsers.put(
+        intent, ShowBlockReportSpamDialogReceiver.EXTRA_DIALOG_INFO, blockReportSpamDialogInfo);
+
+    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+  }
 }

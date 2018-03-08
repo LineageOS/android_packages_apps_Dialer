@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.widget.Toast;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogNotifier;
@@ -32,7 +31,6 @@ import com.android.dialer.util.UriUtils;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Modules for the bottom sheet that are shared between NewVoicemailFragment and NewCallLogFragment
@@ -187,19 +185,12 @@ public class SharedModules {
 
       @Override
       public boolean onClick() {
-        if (!isBlocked) {
-          ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumber(
+        if (isBlocked) {
+          ShowBlockReportSpamDialogNotifier.notifyShowDialogToUnblockNumber(
               context, blockReportSpamDialogInfo);
         } else {
-          // TODO(a bug): implement this method.
-          Toast.makeText(
-                  context,
-                  String.format(
-                      Locale.ENGLISH,
-                      "TODO: Unblock number %s.",
-                      blockReportSpamDialogInfo.getNormalizedNumber()),
-                  Toast.LENGTH_SHORT)
-              .show();
+          ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumber(
+              context, blockReportSpamDialogInfo);
         }
         return true; // Close the bottom sheet.
       }
