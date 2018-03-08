@@ -35,13 +35,13 @@ import android.provider.ContactsContract.Directory;
 import android.support.annotation.MainThread;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.WorkerThread;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.strictmode.StrictModeUtils;
 import java.io.IOException;
 import java.io.InputStream;
@@ -166,7 +166,7 @@ public class CallerInfoAsyncQuery {
     cw.countryIso = info.countryIso;
 
     // check to see if these are recognized numbers, and use shortcuts if we can.
-    if (PhoneNumberUtils.isLocalEmergencyNumber(context, info.phoneNumber)) {
+    if (PhoneNumberHelper.isLocalEmergencyNumber(context, info.phoneNumber)) {
       cw.event = EVENT_EMERGENCY_NUMBER;
     } else if (info.isVoiceMailNumber()) {
       cw.event = EVENT_VOICEMAIL_NUMBER;
