@@ -106,6 +106,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   @VisibleForTesting
   @WorkerThread
   void updateMissedCallNotification(int count, @Nullable String number) {
+    LogUtil.enterBlock("MissedCallNotifier.updateMissedCallNotification");
+
     final int titleResId;
     CharSequence expandedText; // The text in the notification's line 1 and 2.
 
@@ -137,6 +139,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     if (count == CallLogNotificationsService.UNKNOWN_MISSED_CALL_COUNT) {
       // If the intent did not contain a count, and we are unable to get a count from the
       // call log, then no notification can be shown.
+      LogUtil.i("MissedCallNotifier.updateMissedCallNotification", "unknown missed call count");
       return;
     }
 
@@ -144,6 +147,9 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     boolean useCallList = newCalls != null;
 
     if (count == 1) {
+      LogUtil.i(
+          "MissedCallNotifier.updateMissedCallNotification",
+          "1 missed call, looking up contact info");
       NewCall call =
           useCallList
               ? newCalls.get(0)
@@ -187,6 +193,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       titleResId = R.string.notification_missedCallsTitle;
       expandedText = context.getString(R.string.notification_missedCallsMsg, count);
     }
+
+    LogUtil.i("MissedCallNotifier.updateMissedCallNotification", "preparing notification");
 
     // Create a public viewable version of the notification, suitable for display when sensitive
     // notification content is hidden.

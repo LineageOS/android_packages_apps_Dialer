@@ -25,6 +25,7 @@ import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -209,7 +210,7 @@ final class Constraints {
     // roaming and out of service.
     boolean result =
         !PhoneNumberUtils.isEmergencyNumber(numberToCheck)
-            && !PhoneNumberUtils.isLocalEmergencyNumber(context, numberToCheck);
+            && !PhoneNumberHelper.isLocalEmergencyNumber(context, numberToCheck);
     LogUtil.i("Constraints.isNotEmergencyNumber", String.valueOf(result));
     return result;
   }
