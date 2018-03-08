@@ -139,6 +139,18 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     lastIndexOfLocalMessage = -1;
   }
 
+  String computeChangeOfLocalMessage(String newMessage) {
+    RttChatMessage rttChatMessage = null;
+    if (lastIndexOfLocalMessage >= 0) {
+      rttChatMessage = rttMessages.get(lastIndexOfLocalMessage);
+    }
+    if (rttChatMessage == null || rttChatMessage.isFinished()) {
+      return newMessage;
+    } else {
+      return RttChatMessage.computeChangedString(rttChatMessage.getContent(), newMessage);
+    }
+  }
+
   void addRemoteMessage(String message) {
     LogUtil.enterBlock("RttChatAdapater.addRemoteMessage");
     if (TextUtils.isEmpty(message)) {
