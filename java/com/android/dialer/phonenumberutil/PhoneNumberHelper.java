@@ -25,6 +25,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -34,10 +35,13 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.oem.PhoneNumberUtilsAccessor;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.telecom.TelecomUtil;
+import com.google.common.base.Optional;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PhoneNumberHelper {
@@ -135,6 +139,39 @@ public class PhoneNumberHelper {
         PhoneNumberUtils.stripSeparators(PhoneNumberUtils.convertKeypadLettersToDigits(number2));
 
     return rawNumber1.equals(rawNumber2);
+  }
+
+  /**
+   * An enhanced version of {@link PhoneNumberUtils#isLocalEmergencyNumber(Context, String)}.
+   *
+   * <p>This methods supports checking the number for all SIMs.
+   *
+   * @param context the context which the number should be checked against
+   * @param number the number to tbe checked
+   * @return true if the specified number is an emergency number for any SIM in the device.
+   */
+  @SuppressWarnings("Guava")
+  public static boolean isLocalEmergencyNumber(Context context, String number) {
+    List<PhoneAccountHandle> phoneAccountHandles =
+        TelecomUtil.getSubscriptionPhoneAccounts(context);
+
+    // If the number of phone accounts with a subscription is no greater than 1, only one SIM is
+    // installed in the device. We hand over the job to PhoneNumberUtils#isLocalEmergencyNumber.
+    if (phoneAccountHandles.size() <= 1) {
+      return PhoneNumberUtils.isLocalEmergencyNumber(context, number);
+    }
+
+    for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+      Optional<SubscriptionInfo> subscriptionInfo =
+          TelecomUtil.getSubscriptionInfo(context, phoneAccountHandle);
+      if (subscriptionInfo.isPresent()
+          && PhoneNumberUtilsAccessor.isLocalEmergencyNumber(
+              context, subscriptionInfo.get().getSubscriptionId(), number)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
