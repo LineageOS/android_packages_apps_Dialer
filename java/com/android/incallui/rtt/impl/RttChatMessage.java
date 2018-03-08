@@ -87,7 +87,7 @@ final class RttChatMessage {
   }
 
   /** Convert remote input text into an array of {@code RttChatMessage}. */
-  static RttChatMessage[] getRemoteRttChatMessage(
+  static List<RttChatMessage> getRemoteRttChatMessage(
       @Nullable RttChatMessage currentMessage, @NonNull String text) {
     Iterator<String> splitText = SPLITTER.split(text).iterator();
     List<RttChatMessage> messageList = new ArrayList<>();
@@ -118,6 +118,6 @@ final class RttChatMessage {
       messageList.add(message);
     }
 
-    return messageList.toArray(new RttChatMessage[0]);
+    return messageList;
   }
 }

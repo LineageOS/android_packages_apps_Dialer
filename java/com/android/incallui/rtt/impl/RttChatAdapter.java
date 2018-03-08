@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /** Adapter class for holding RTT chat data. */
@@ -76,21 +75,22 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     if (lastIndexOfRemoteMessage >= 0) {
       rttChatMessage = rttMessages.get(lastIndexOfRemoteMessage);
     }
-    RttChatMessage[] newMessages = RttChatMessage.getRemoteRttChatMessage(rttChatMessage, newText);
+    List<RttChatMessage> newMessages =
+        RttChatMessage.getRemoteRttChatMessage(rttChatMessage, newText);
 
     if (rttChatMessage == null) {
       lastIndexOfRemoteMessage = rttMessages.size();
-      rttMessages.add(lastIndexOfRemoteMessage, newMessages[0]);
-      rttMessages.addAll(Arrays.asList(newMessages).subList(1, newMessages.length));
-      notifyItemRangeInserted(lastIndexOfRemoteMessage, newMessages.length);
+      rttMessages.add(lastIndexOfRemoteMessage, newMessages.get(0));
+      rttMessages.addAll(newMessages.subList(1, newMessages.size()));
+      notifyItemRangeInserted(lastIndexOfRemoteMessage, newMessages.size());
       lastIndexOfRemoteMessage = rttMessages.size() - 1;
     } else {
-      rttMessages.set(lastIndexOfRemoteMessage, newMessages[0]);
+      rttMessages.set(lastIndexOfRemoteMessage, newMessages.get(0));
       int lastIndex = rttMessages.size();
-      rttMessages.addAll(Arrays.asList(newMessages).subList(1, newMessages.length));
+      rttMessages.addAll(newMessages.subList(1, newMessages.size()));
 
       notifyItemChanged(lastIndexOfRemoteMessage);
-      notifyItemRangeInserted(lastIndex, newMessages.length);
+      notifyItemRangeInserted(lastIndex, newMessages.size());
     }
     if (rttMessages.get(lastIndexOfRemoteMessage).isFinished()) {
       lastIndexOfRemoteMessage = -1;
