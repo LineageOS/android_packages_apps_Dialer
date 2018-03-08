@@ -22,6 +22,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForReportingNotSpam;
+import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForUnblockingNumberAndReportingAsNotSpam;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.DialerImpression;
@@ -58,7 +60,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String countryIso,
       final int callType,
       @NonNull final ContactSource.Type contactSourceType) {
-    BlockReportSpamDialogs.BlockReportSpamDialogFragment.newInstance(
+    BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
             displayNumber,
             spam.isDialogReportSpamCheckedByDefault(),
             isSpamChecked -> {
@@ -95,7 +97,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String countryIso,
       final int callType,
       @NonNull final ContactSource.Type contactSourceType) {
-    BlockReportSpamDialogs.BlockDialogFragment.newInstance(
+    BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndReportingAsSpam.newInstance(
             displayNumber,
             spam.isSpamEnabled(),
             () -> {
@@ -134,7 +136,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final ContactSource.Type contactSourceType,
       final boolean isSpam,
       final Integer blockId) {
-    BlockReportSpamDialogs.UnblockDialogFragment.newInstance(
+    DialogFragmentForUnblockingNumberAndReportingAsNotSpam.newInstance(
             displayNumber,
             isSpam,
             () -> {
@@ -168,7 +170,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       final String countryIso,
       final int callType,
       final ContactSource.Type contactSourceType) {
-    BlockReportSpamDialogs.ReportNotSpamDialogFragment.newInstance(
+    DialogFragmentForReportingNotSpam.newInstance(
             displayNumber,
             () -> {
               LogUtil.i("BlockReportSpamListener.onReportNotSpam", "onClick");
