@@ -3,16 +3,20 @@
 <resources>
   <!-- Internal preferences key for displaying the build version -->
   <!-- Label shown in the About Phone screen for the build version [CHAR LIMIT=40]-->
+  <string name="build_version_label">Versión de compilación</string>
   <!-- Internal preferences key for displaying the open source license
        libraries -->
   <!-- Detail label text shown on the About Phone screen to supplement 
        @string/licenseActivityLabel -->
   <!-- Title for the activity that displays licenses for open source libraries used in the
        application. -->
+  <string name="licenseActivityLabel">Llicencies de códigu abiertu</string>
   <!-- Internal preferences key for displaying the privacy policy -->
   <!-- Label shown on the About Phone screen for the privacy policy option [CHAR LIMIT=40]-->
+  <string name="privacy_policy_label">Política de privacidá</string>
   <!-- URL for privacy policy -->
   <!-- Label shown on the About Phone screen for the terms of service option [CHAR LIMIT=50]-->
+  <string name="terms_of_service_label">Términos del serviciu</string>
   <!-- Internal preferences key for displaying the terms of service-->
   <!-- URL for terms of service -->
 </resources>

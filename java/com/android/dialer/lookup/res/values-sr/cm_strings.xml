@@ -17,5 +17,17 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Места у околини</string>
+  <string name="people">Особе</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Претрага бројева телефона</string>
+  <string name="enable_forward_lookup_title">Напредни преглед</string>
+  <string name="enable_forward_lookup_summary">Прикажи околна места приликом претраге у бројчанику</string>
+  <string name="enable_people_lookup_title">Проналажење људи</string>
+  <string name="enable_people_lookup_summary">Прикажи интернет резултате за људе приликом претраге у бројчанику</string>
+  <string name="enable_reverse_lookup_title">Обрнуто проналажење</string>
+  <string name="enable_reverse_lookup_summary">Потражи информације о особи или месту за непознате бројеве на долазним позивима</string>
+  <string name="forward_lookup_provider_title">Добављач напредне претраге</string>
+  <string name="people_lookup_provider_title">Добављач проналажења људи</string>
+  <string name="reverse_lookup_provider_title">Провајдер обрнутог проналажења</string>
 </resources>

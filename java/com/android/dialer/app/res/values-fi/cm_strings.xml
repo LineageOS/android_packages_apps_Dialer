@@ -15,4 +15,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_vibration_category_title">Värinä puhelun aikana</string>
+  <string name="incall_vibrate_outgoing_title">Värinä vastatessa</string>
+  <string name="incall_vibrate_call_waiting_title">Värinä puhelun odottaessa</string>
+  <string name="incall_vibrate_hangup_title">Värinä puhelun loputtua</string>
+  <string name="incall_vibrate_45_title">Värinä minuutin välein</string>
+  <string name="incall_vibrate_45_summary">Värinä joka minuutti 45 sekunnin kohdalla lähtevien puheluiden aikana</string>
+</resources>

@@ -17,5 +17,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Miejsca w pobliżu</string>
+  <string name="people">Ludzie</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Wyszukiwanie numeru telefonu</string>
 </resources>

@@ -15,4 +15,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_vibration_category_title">Вибрација током позива</string>
+  <string name="incall_vibrate_outgoing_title">Вибрација при јављању</string>
+  <string name="incall_vibrate_call_waiting_title">Вибрација при позиву на чекању</string>
+  <string name="incall_vibrate_hangup_title">Вибрација при прекиду</string>
+  <string name="incall_vibrate_45_title">Вибрација сваког минута</string>
+  <string name="incall_vibrate_45_summary">Вибрира на 45. секунди сваког минута током одлазних позива</string>
+</resources>
