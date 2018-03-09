@@ -333,11 +333,13 @@ public class RttChatFragment extends Fragment
   public void updateInCallScreenColors() {}
 
   @Override
-  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {}
+  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {
+    overflowMenu.setDialpadButtonChecked(isShowing);
+  }
 
   @Override
   public int getAnswerAndDialpadContainerResourceId() {
-    return 0;
+    return R.id.incall_dialpad_container;
   }
 
   @Override
