@@ -87,4 +87,8 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
       speakerButton.setOnCheckedChangeListener(null);
     }
   }
+
+  void setDialpadButtonChecked(boolean isChecked) {
+    dialpadButton.setChecked(isChecked);
+  }
 }
