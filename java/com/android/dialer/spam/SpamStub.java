@@ -50,6 +50,11 @@ public class SpamStub implements Spam {
   }
 
   @Override
+  public boolean isSpamBlockingEnabled() {
+    return false;
+  }
+
+  @Override
   public boolean isDialogEnabledForSpamNotification() {
     return false;
   }
