@@ -204,7 +204,7 @@ public class RttChatFragment extends Fragment
     if (isClearingInput) {
       return;
     }
-    String messageToAppend = RttChatMessage.getChangedString(s, start, before, count);
+    String messageToAppend = adapter.computeChangeOfLocalMessage(s.toString());
     if (!TextUtils.isEmpty(messageToAppend)) {
       adapter.addLocalMessage(messageToAppend);
       rttCallScreenDelegate.onLocalMessage(messageToAppend);
