@@ -32,8 +32,12 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumbercache.ContactInfo;
+import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +48,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
   @Nullable
   @Override
   public Void doInBackground(@NonNull Input input) throws Throwable {
-    updateNotification(input.context, input.queryHelper, input.queryHandler);
+    updateNotification(input.context, input.queryHelper, input.queryHandler, input.spam);
     return null;
   }
 
@@ -58,7 +62,8 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
   private static void updateNotification(
       Context context,
       CallLogNotificationsQueryHelper queryHelper,
-      FilteredNumberAsyncQueryHandler queryHandler) {
+      FilteredNumberAsyncQueryHandler queryHandler,
+      Spam spam) {
     Assert.isWorkerThread();
     LogUtil.enterBlock("VisualVoicemailUpdateTask.updateNotification");
 
@@ -67,7 +72,15 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
       // Query failed, just return
       return;
     }
-    voicemailsToNotify = filterBlockedNumbers(context, queryHandler, voicemailsToNotify);
+
+    if (FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
+      LogUtil.i(
+          "VisualVoicemailUpdateTask.updateNotification",
+          "not filtering due to recent emergency call");
+    } else {
+      voicemailsToNotify = filterBlockedNumbers(context, queryHandler, voicemailsToNotify);
+      voicemailsToNotify = filterSpamNumbers(context, spam, voicemailsToNotify);
+    }
     boolean shouldAlert =
         !voicemailsToNotify.isEmpty()
             && voicemailsToNotify.size() > getExistingNotificationCount(context);
@@ -166,13 +179,6 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
   private static List<NewCall> filterBlockedNumbers(
       Context context, FilteredNumberAsyncQueryHandler queryHandler, List<NewCall> newCalls) {
     Assert.isWorkerThread();
-    if (FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
-      LogUtil.i(
-          "VisualVoicemailUpdateTask.filterBlockedNumbers",
-          "not filtering due to recent emergency call");
-      return newCalls;
-    }
-
     List<NewCall> result = new ArrayList<>();
     for (NewCall newCall : newCalls) {
       if (queryHandler.getBlockedIdSynchronous(newCall.number, newCall.countryIso) != null) {
@@ -183,6 +189,30 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
           // Delete the voicemail.
           CallLogAsyncTaskUtil.deleteVoicemailSynchronous(context, newCall.voicemailUri);
         }
+      } else {
+        result.add(newCall);
+      }
+    }
+    return result;
+  }
+
+  @WorkerThread
+  private static List<NewCall> filterSpamNumbers(
+      Context context, Spam spam, List<NewCall> newCalls) {
+    Assert.isWorkerThread();
+    if (!spam.isSpamBlockingEnabled()) {
+      return newCalls;
+    }
+
+    List<NewCall> result = new ArrayList<>();
+    for (NewCall newCall : newCalls) {
+      Logger.get(context).logImpression(DialerImpression.Type.INCOMING_VOICEMAIL_SCREENED);
+      if (spam.checkSpamStatusSynchronous(newCall.number, newCall.countryIso)) {
+        LogUtil.i(
+            "VisualVoicemailUpdateTask.filterSpamNumbers",
+            "found voicemail from spam number, suppressing notification");
+        Logger.get(context)
+            .logImpression(DialerImpression.Type.INCOMING_VOICEMAIL_AUTO_BLOCKED_AS_SPAM);
       } else {
         result.add(newCall);
       }
@@ -204,7 +234,8 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
         new Input(
             context,
             CallLogNotificationsQueryHelper.getInstance(context),
-            new FilteredNumberAsyncQueryHandler(context));
+            new FilteredNumberAsyncQueryHandler(context),
+            SpamComponent.get(context).spam());
     DialerExecutorComponent.get(context)
         .dialerExecutorFactory()
         .createNonUiTaskBuilder(new VisualVoicemailUpdateTask())
@@ -226,14 +257,17 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
     @NonNull final Context context;
     @NonNull final CallLogNotificationsQueryHelper queryHelper;
     @NonNull final FilteredNumberAsyncQueryHandler queryHandler;
+    @NonNull final Spam spam;
 
     Input(
         Context context,
         CallLogNotificationsQueryHelper queryHelper,
-        FilteredNumberAsyncQueryHandler queryHandler) {
+        FilteredNumberAsyncQueryHandler queryHandler,
+        Spam spam) {
       this.context = context;
       this.queryHelper = queryHelper;
       this.queryHandler = queryHandler;
+      this.spam = spam;
     }
   }
 }
