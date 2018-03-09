@@ -78,9 +78,6 @@
     <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>unblocked
   </string>
 
-  <!-- Text for undo button in snackbar for blocking/unblocking number. [CHAR LIMIT=10] -->
-  <string name="block_number_undo">UNDO</string>
-
   <!-- Error toast message for when send to voicemail import fails. [CHAR LIMIT=40] -->
   <string name="send_to_voicemail_import_failed">Import failed</string>
 
