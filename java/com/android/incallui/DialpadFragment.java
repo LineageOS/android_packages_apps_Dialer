@@ -84,6 +84,8 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   private DtmfKeyListener dtmfKeyListener;
   private DialpadView dialpadView;
   private int currentTextColor;
+  private View endCallSpace;
+  private boolean shouldShowEndCallSpace = true;
 
   @Override
   public void onClick(View v) {
@@ -152,6 +154,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     View backButton = dialpadView.findViewById(R.id.dialpad_back);
     backButton.setVisibility(View.VISIBLE);
     backButton.setOnClickListener(this);
+    endCallSpace = dialpadView.findViewById(R.id.end_call_space);
 
     return parent;
   }
@@ -160,6 +163,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   public void onResume() {
     super.onResume();
     updateColors();
+    endCallSpace.setVisibility(shouldShowEndCallSpace ? View.VISIBLE : View.GONE);
   }
 
   public void updateColors() {
@@ -266,6 +270,10 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
       Log.d(this, "onPressed: " + pressed);
       getPresenter().stopDtmf();
     }
+  }
+
+  public void setShouldShowEndCallSpace(boolean show) {
+    shouldShowEndCallSpace = show;
   }
 
   /**
