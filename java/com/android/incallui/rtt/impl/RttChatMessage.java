@@ -16,6 +16,8 @@
 
 package com.android.incallui.rtt.impl;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.incallui.rtt.protocol.Constants;
@@ -25,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /** Message class that holds one RTT chat content. */
-final class RttChatMessage {
+final class RttChatMessage implements Parcelable {
 
   private static final Splitter SPLITTER = Splitter.on(Constants.BUBBLE_BREAKER);
 
@@ -119,4 +121,41 @@ final class RttChatMessage {
 
     return messageList;
   }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(getContent());
+    boolean[] values = new boolean[2];
+    values[0] = isRemote;
+    values[1] = isFinished;
+    dest.writeBooleanArray(values);
+  }
+
+  public static final Parcelable.Creator<RttChatMessage> CREATOR =
+      new Parcelable.Creator<RttChatMessage>() {
+        @Override
+        public RttChatMessage createFromParcel(Parcel in) {
+          return new RttChatMessage(in);
+        }
+
+        @Override
+        public RttChatMessage[] newArray(int size) {
+          return new RttChatMessage[size];
+        }
+      };
+
+  private RttChatMessage(Parcel in) {
+    content.append(in.readString());
+    boolean[] values = new boolean[2];
+    in.readBooleanArray(values);
+    isRemote = values[0];
+    isFinished = values[1];
+  }
+
+  RttChatMessage() {}
 }

@@ -17,6 +17,9 @@
 package com.android.incallui.rtt.impl;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -33,15 +36,26 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     void newMessageAdded();
   }
 
+  private static final String KEY_MESSAGE_DATA = "key_message_data";
+  private static final String KEY_LAST_REMOTE_MESSAGE = "key_last_remote_message";
+  private static final String KEY_LAST_LOCAL_MESSAGE = "key_last_local_message";
+
   private final Context context;
-  private final List<RttChatMessage> rttMessages = new ArrayList<>();
+  private final List<RttChatMessage> rttMessages;
   private int lastIndexOfLocalMessage = -1;
   private int lastIndexOfRemoteMessage = -1;
   private final MessageListener messageListener;
 
-  RttChatAdapter(Context context, MessageListener listener) {
+  RttChatAdapter(Context context, MessageListener listener, @Nullable Bundle savedInstanceState) {
     this.context = context;
     this.messageListener = listener;
+    if (savedInstanceState == null) {
+      rttMessages = new ArrayList<>();
+    } else {
+      rttMessages = savedInstanceState.getParcelableArrayList(KEY_MESSAGE_DATA);
+      lastIndexOfRemoteMessage = savedInstanceState.getInt(KEY_LAST_REMOTE_MESSAGE);
+      lastIndexOfLocalMessage = savedInstanceState.getInt(KEY_LAST_LOCAL_MESSAGE);
+    }
   }
 
   @Override
@@ -160,5 +174,11 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     if (messageListener != null) {
       messageListener.newMessageAdded();
     }
+  }
+
+  void onSaveInstanceState(@NonNull Bundle bundle) {
+    bundle.putParcelableArrayList(KEY_MESSAGE_DATA, (ArrayList<RttChatMessage>) rttMessages);
+    bundle.putInt(KEY_LAST_REMOTE_MESSAGE, lastIndexOfRemoteMessage);
+    bundle.putInt(KEY_LAST_LOCAL_MESSAGE, lastIndexOfLocalMessage);
   }
 }
