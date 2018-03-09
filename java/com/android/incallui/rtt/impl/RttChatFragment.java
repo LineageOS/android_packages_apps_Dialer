@@ -124,6 +124,8 @@ public class RttChatFragment extends Fragment
     if (savedInstanceState != null) {
       inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
     }
+    // Prevent updating local message until UI is ready.
+    isClearingInput = true;
   }
 
   @Override
@@ -158,7 +160,7 @@ public class RttChatFragment extends Fragment
     layoutManager.setStackFromEnd(true);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(false);
-    adapter = new RttChatAdapter(getContext(), this);
+    adapter = new RttChatAdapter(getContext(), this, savedInstanceState);
     recyclerView.setAdapter(adapter);
     recyclerView.addOnScrollListener(onScrollListener);
     submitButton = view.findViewById(R.id.rtt_chat_submit_button);
@@ -242,13 +244,21 @@ public class RttChatFragment extends Fragment
   public void onStart() {
     LogUtil.enterBlock("RttChatFragment.onStart");
     super.onStart();
+    isClearingInput = false;
     onRttScreenStart();
+  }
+
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle bundle) {
+    super.onSaveInstanceState(bundle);
+    adapter.onSaveInstanceState(bundle);
   }
 
   @Override
   public void onStop() {
     LogUtil.enterBlock("RttChatFragment.onStop");
     super.onStop();
+    isClearingInput = true;
     if (overflowMenu.isShowing()) {
       overflowMenu.dismiss();
     }
