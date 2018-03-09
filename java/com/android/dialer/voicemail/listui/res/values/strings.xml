@@ -60,4 +60,7 @@ If you do not accept all of these terms and conditions, do not use Visual Voice 
   <!-- Text displayed when the list of voicemails is empty [CHAR LIMIT=NONE] -->
   <string name="empty_voicemail_tab_text">Your voicemail inbox is empty.</string>
 
+  <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
+  <string name="snackbar_voicemail_deleted">Voicemail deleted</string>
+
 </resources>

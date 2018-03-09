@@ -114,7 +114,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
                   Snackbar.LENGTH_LONG)
               .setDuration(VOICEMAIL_DELETE_DELAY_MS)
               .setAction(
-                  R.string.snackbar_voicemail_deleted_undo,
+                  R.string.snackbar_undo,
                   new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
