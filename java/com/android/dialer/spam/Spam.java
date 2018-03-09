@@ -33,6 +33,8 @@ public interface Spam {
 
   boolean isSpamNotificationEnabled();
 
+  boolean isSpamBlockingEnabled();
+
   boolean isDialogEnabledForSpamNotification();
 
   boolean isDialogReportSpamCheckedByDefault();
