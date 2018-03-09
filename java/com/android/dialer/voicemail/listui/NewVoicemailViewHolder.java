@@ -94,6 +94,10 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     viewHolderVoicemailUri = null;
   }
 
+  public NewVoicemailMediaPlayerView getMediaPlayerView() {
+    return Assert.isNotNull(mediaPlayerView);
+  }
+
   /**
    * When the {@link RecyclerView} displays voicemail entries, it might recycle the views upon
    * scrolling. In that case we need to ensure that the member variables of this {@link
