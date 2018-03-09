@@ -119,6 +119,8 @@ public class CallLogAdapter extends GroupingListAdapter
   public static final String ENABLE_CALL_LOG_MULTI_SELECT = "enable_call_log_multiselect";
   public static final boolean ENABLE_CALL_LOG_MULTI_SELECT_FLAG = true;
 
+  @VisibleForTesting static final String FILTER_EMERGENCY_CALLS_FLAG = "filter_emergency_calls";
+
   protected final Activity activity;
   protected final VoicemailPlaybackPresenter voicemailPlaybackPresenter;
   /** Cache for repeated requests to Telecom/Telephony. */
@@ -840,13 +842,20 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   private boolean isHiddenRow(@Nullable String number, long rowId) {
-    if (number != null && PhoneNumberUtils.isEmergencyNumber(number)) {
+    if (isHideableEmergencyNumberRow(number)) {
       return true;
     }
     if (hiddenRowIds.contains(rowId)) {
       return true;
     }
     return false;
+  }
+
+  private boolean isHideableEmergencyNumberRow(@Nullable String number) {
+    if (!ConfigProviderBindings.get(activity).getBoolean(FILTER_EMERGENCY_CALLS_FLAG, false)) {
+      return false;
+    }
+    return number != null && PhoneNumberUtils.isEmergencyNumber(number);
   }
 
   private void loadAndRender(
