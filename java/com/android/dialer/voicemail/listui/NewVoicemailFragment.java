@@ -205,7 +205,7 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
 
   /** Shows the view when there are no voicemails to be displayed * */
   private void showEmptyVoicemailFragmentView() {
-    LogUtil.enterBlock("NewVoicemailFragmentListener.showEmptyVoicemailFragmentView");
+    LogUtil.enterBlock("NewVoicemailFragment.showEmptyVoicemailFragmentView");
 
     showView(emptyContentView);
 
@@ -215,7 +215,7 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
   }
 
   private void showView(View view) {
-    LogUtil.i("NewVoicemailFragmentListener.showView", "Showing view: " + view);
+    LogUtil.i("NewVoicemailFragment.showView", "Showing view: " + view);
     emptyContentView.setVisibility(view == emptyContentView ? View.VISIBLE : View.GONE);
     recyclerView.setVisibility(view == recyclerView ? View.VISIBLE : View.GONE);
   }
