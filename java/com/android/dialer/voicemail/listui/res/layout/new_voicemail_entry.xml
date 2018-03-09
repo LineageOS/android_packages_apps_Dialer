@@ -19,24 +19,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/call_log_entry_top_margin"
-    android:paddingTop="@dimen/call_log_entry_padding_top_start"
-    android:paddingBottom="@dimen/call_log_entry_padding_bottom_end"
-    android:paddingStart="@dimen/call_log_entry_padding_top_start"
-    android:paddingEnd="@dimen/call_log_entry_padding_bottom_end"
-    android:gravity="center_vertical">
+    android:minHeight="72dp">
 
   <QuickContactBadge
       android:id="@+id/quick_contact_photo"
-      android:layout_width="@dimen/call_log_entry_photo_size"
-      android:layout_height="@dimen/call_log_entry_photo_size"
-      android:padding="@dimen/call_log_entry_photo_padding"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginTop="14dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
       android:focusable="true"/>
 
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerVertical="true"
       android:layout_toEndOf="@+id/quick_contact_photo"
       android:layout_toStartOf="@+id/menu_button"
       android:orientation="vertical">
@@ -46,8 +42,12 @@
         style="@style/PrimaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"
-        android:layout_gravity="center_vertical"/>
+        android:layout_weight="1"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="14dp"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.5"
+        android:singleLine="true"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -55,9 +55,8 @@
         android:orientation="horizontal">
 
       <ImageView
-          android:layout_width="@dimen/voicemail_icon_size"
-          android:layout_height="@dimen/voicemail_icon_size"
-          android:layout_marginStart="@dimen/voicemail_icon_margin"
+          android:layout_width="wrap_content"
+          android:layout_height="18dp"
           android:layout_gravity="center_vertical"
           android:src="@drawable/quantum_ic_voicemail_vd_theme_24"
           android:tint="@color/dialtacts_theme_color"
@@ -69,7 +68,9 @@
           style="@style/SecondaryText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"/>
+          android:ellipsize="end"
+          android:lineSpacingMultiplier="1.4"
+          android:singleLine="true"/>
     </LinearLayout>
 
     <!-- TODO(a bug): Fix text cropping issue, make text selectable -->
@@ -78,7 +79,6 @@
         style="@style/PrimaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"
         android:layout_gravity="center_vertical"
         android:textSize="@dimen/voicemail_transcription_text_size"
         android:visibility="gone"/>
@@ -88,7 +88,6 @@
         style="@style/SecondaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/call_log_entry_photo_text_margin"
         android:layout_gravity="center_vertical"
         android:text="@string/voicemail_transcription_branding_text"
         android:visibility="gone"/>
