@@ -17,9 +17,10 @@
 package com.android.incallui.rtt.protocol;
 
 import android.support.v4.app.Fragment;
+import com.android.incallui.incall.protocol.InCallScreen;
 
 /** Interface for call RTT call module. */
-public interface RttCallScreen {
+public interface RttCallScreen extends InCallScreen {
 
   void onRttScreenStart();
 
