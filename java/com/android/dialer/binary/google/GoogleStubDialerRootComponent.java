@@ -16,6 +16,7 @@
 
 package com.android.dialer.binary.google;
 
+import com.android.bubble.stub.StubBubbleModule;
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
 import com.android.dialer.commandline.CommandLineModule;
@@ -39,7 +40,6 @@ import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.impl.CallLocationModule;
 import com.android.incallui.maps.impl.MapsModule;
 import com.android.incallui.speakeasy.StubSpeakEasyModule;
-import com.android.newbubble.stub.StubNewBubbleModule;
 import com.android.voicemail.impl.VoicemailModule;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -69,7 +69,7 @@ import javax.inject.Singleton;
     StubEnrichedCallModule.class,
     StubFeedbackModule.class,
     StubMetricsModule.class,
-    StubNewBubbleModule.class,
+    StubBubbleModule.class,
     StubSimSuggestionModule.class,
     StubSpamModule.class,
     StubSpeakEasyModule.class,

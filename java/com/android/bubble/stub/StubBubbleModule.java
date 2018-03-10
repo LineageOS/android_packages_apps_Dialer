@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.newbubble.stub;
+package com.android.bubble.stub;
 
-import com.android.newbubble.NewBubble;
+import com.android.bubble.Bubble;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 @Module
-public abstract class StubNewBubbleModule {
+public abstract class StubBubbleModule {
 
   @Binds
   @Singleton
-  public abstract NewBubble bindsNewBubble(NewBubbleStub newBubbleStub);
+  public abstract Bubble bindsBubble(BubbleStub bubbleStub);
 }
