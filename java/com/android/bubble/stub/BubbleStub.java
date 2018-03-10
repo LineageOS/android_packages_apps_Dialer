@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,19 @@
  * limitations under the License
  */
 
-package com.android.newbubble.stub;
+package com.android.bubble.stub;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import com.android.newbubble.NewBubble;
-import com.android.newbubble.NewBubbleInfo;
-import com.android.newbubble.NewBubbleInfo.Action;
+import com.android.bubble.Bubble;
+import com.android.bubble.BubbleInfo;
 import java.util.List;
 import javax.inject.Inject;
 
-public class NewBubbleStub implements NewBubble {
+public class BubbleStub implements Bubble {
 
   @Inject
-  public NewBubbleStub() {}
+  public BubbleStub() {}
 
   @Override
   public void show() {}
@@ -41,10 +40,10 @@ public class NewBubbleStub implements NewBubble {
   }
 
   @Override
-  public void setBubbleInfo(@NonNull NewBubbleInfo bubbleInfo) {}
+  public void setBubbleInfo(@NonNull BubbleInfo bubbleInfo) {}
 
   @Override
-  public void updateActions(@NonNull List<Action> actions) {}
+  public void updateActions(@NonNull List<BubbleInfo.Action> actions) {}
 
   @Override
   public void updatePhotoAvatar(@NonNull Drawable avatar) {}

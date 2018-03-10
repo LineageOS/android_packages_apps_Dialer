@@ -16,6 +16,7 @@
 
 package com.android.dialer.binary.basecomponent;
 
+import com.android.bubble.BubbleComponent;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.ui.CallLogUiComponent;
@@ -39,7 +40,6 @@ import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
-import com.android.newbubble.NewBubbleComponent;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -61,7 +61,7 @@ public interface BaseDialerRootComponent
         MainComponent.HasComponent,
         MapsComponent.HasComponent,
         MetricsComponent.HasComponent,
-        NewBubbleComponent.HasComponent,
+        BubbleComponent.HasComponent,
         PhoneLookupComponent.HasComponent,
         PhoneNumberGeoUtilComponent.HasComponent,
         PreCallComponent.HasComponent,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.newbubble;
+package com.android.bubble;
 
 import android.app.PendingIntent;
 import android.graphics.drawable.Drawable;
@@ -27,9 +27,9 @@ import com.google.auto.value.AutoValue;
 import java.util.Collections;
 import java.util.List;
 
-/** Info for displaying a {@link NewBubble} */
+/** Info for displaying a {@link Bubble} */
 @AutoValue
-public abstract class NewBubbleInfo {
+public abstract class BubbleInfo {
   @ColorInt
   public abstract int getPrimaryColor();
 
@@ -45,10 +45,10 @@ public abstract class NewBubbleInfo {
   public abstract List<Action> getActions();
 
   public static Builder builder() {
-    return new AutoValue_NewBubbleInfo.Builder().setActions(Collections.emptyList());
+    return new AutoValue_BubbleInfo.Builder().setActions(Collections.emptyList());
   }
 
-  public static Builder from(@NonNull NewBubbleInfo bubbleInfo) {
+  public static Builder from(@NonNull BubbleInfo bubbleInfo) {
     return builder()
         .setPrimaryColor(bubbleInfo.getPrimaryColor())
         .setPrimaryIcon(bubbleInfo.getPrimaryIcon())
@@ -57,7 +57,7 @@ public abstract class NewBubbleInfo {
         .setAvatar(bubbleInfo.getAvatar());
   }
 
-  /** Builder for {@link NewBubbleInfo} */
+  /** Builder for {@link BubbleInfo} */
   @AutoValue.Builder
   public abstract static class Builder {
 
@@ -71,7 +71,7 @@ public abstract class NewBubbleInfo {
 
     public abstract Builder setActions(List<Action> actions);
 
-    public abstract NewBubbleInfo build();
+    public abstract BubbleInfo build();
   }
 
   /** Represents actions to be shown in the bubble when expanded */
@@ -94,7 +94,7 @@ public abstract class NewBubbleInfo {
     public abstract boolean isChecked();
 
     public static Builder builder() {
-      return new AutoValue_NewBubbleInfo_Action.Builder().setCheckable(true).setChecked(false);
+      return new AutoValue_BubbleInfo_Action.Builder().setCheckable(true).setChecked(false);
     }
 
     public static Builder from(@NonNull Action action) {
