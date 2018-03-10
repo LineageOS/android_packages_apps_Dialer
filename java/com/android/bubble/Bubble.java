@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,18 @@
  * limitations under the License
  */
 
-package com.android.newbubble;
+package com.android.bubble;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import com.android.newbubble.NewBubbleInfo.Action;
 import java.util.List;
 
 /**
- * Creates and manages a bubble window from information in a {@link NewBubbleInfo}. Before creating,
- * be sure to check whether bubbles may be shown using {@code Settings.canDrawOverlays(context)} and
+ * Creates and manages a bubble window from information in a {@link BubbleInfo}. Before creating, be
+ * sure to check whether bubbles may be shown using {@code Settings.canDrawOverlays(context)} and
  * request permission if necessary
  */
-public interface NewBubble {
+public interface Bubble {
 
   /**
    * Make the bubble visible. Will show a short entrance animation as it enters. If the bubble is
@@ -45,14 +44,14 @@ public interface NewBubble {
    *
    * @param bubbleInfo the BubbleInfo to display in this Bubble.
    */
-  void setBubbleInfo(@NonNull NewBubbleInfo bubbleInfo);
+  void setBubbleInfo(@NonNull BubbleInfo bubbleInfo);
 
   /**
    * Update the state and behavior of actions.
    *
    * @param actions the new state of the bubble's actions
    */
-  void updateActions(@NonNull List<Action> actions);
+  void updateActions(@NonNull List<BubbleInfo.Action> actions);
 
   /**
    * Update the avatar from photo.

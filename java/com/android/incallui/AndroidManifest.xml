@@ -115,7 +115,7 @@
 
     <receiver
         android:exported="false"
-        android:name=".NewReturnToCallActionReceiver"/>
+        android:name=".ReturnToCallActionReceiver"/>
 
   </application>
 
