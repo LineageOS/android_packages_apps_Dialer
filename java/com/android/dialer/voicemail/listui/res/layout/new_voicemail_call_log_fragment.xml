@@ -26,11 +26,9 @@
       android:id="@+id/new_voicemail_call_log_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
       android:background="@color/background_dialer_light"
-      android:clipToPadding="false"
-      android:visibility="gone"
-      />
+      android:paddingBottom="88dp"
+      android:clipToPadding="false"/>
 
 
   <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
