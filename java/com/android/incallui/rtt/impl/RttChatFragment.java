@@ -37,7 +37,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -46,6 +45,7 @@ import android.widget.TextView.OnEditorActionListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.UiUtil;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
@@ -87,7 +87,7 @@ public class RttChatFragment extends Fragment
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
           if (dy < 0) {
-            hideKeyboard();
+            UiUtil.hideKeyboardFrom(getContext(), editText);
           }
         }
       };
@@ -182,7 +182,13 @@ public class RttChatFragment extends Fragment
 
     overflowMenu = new RttOverflowMenu(getContext(), inCallButtonUiDelegate);
     view.findViewById(R.id.rtt_overflow_button)
-        .setOnClickListener(v -> overflowMenu.showAtLocation(v, Gravity.TOP | Gravity.RIGHT, 0, 0));
+        .setOnClickListener(
+            v -> {
+              // Hide keyboard when opening overflow menu. This is alternative solution since hiding
+              // keyboard after the menu is open or dialpad is shown doesn't work.
+              UiUtil.hideKeyboardFrom(getContext(), editText);
+              overflowMenu.showAtLocation(v, Gravity.TOP | Gravity.RIGHT, 0, 0);
+            });
 
     nameTextView = view.findViewById(R.id.rtt_name_or_number);
     chronometer = view.findViewById(R.id.rtt_timer);
@@ -263,14 +269,6 @@ public class RttChatFragment extends Fragment
       overflowMenu.dismiss();
     }
     onRttScreenStop();
-  }
-
-  private void hideKeyboard() {
-    InputMethodManager inputMethodManager = getContext().getSystemService(InputMethodManager.class);
-    if (inputMethodManager.isAcceptingText()) {
-      inputMethodManager.hideSoftInputFromWindow(
-          getActivity().getCurrentFocus().getWindowToken(), 0);
-    }
   }
 
   @Override

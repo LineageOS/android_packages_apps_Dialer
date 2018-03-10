@@ -30,7 +30,7 @@ import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.TelecomAdapter;
 
 /** Handles clicks on the return-to-call bubble */
-public class NewReturnToCallActionReceiver extends BroadcastReceiver {
+public class ReturnToCallActionReceiver extends BroadcastReceiver {
 
   public static final String ACTION_RETURN_TO_CALL = "returnToCallV2";
   public static final String ACTION_TOGGLE_SPEAKER = "toggleSpeakerV2";
