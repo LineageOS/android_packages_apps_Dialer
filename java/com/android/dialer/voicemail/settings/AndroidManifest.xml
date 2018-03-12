@@ -18,6 +18,11 @@
     package="com.android.dialer.voicemail.settings">
 
   <application>
+    <!-- Causes the "Voicemail" item under "Calls" setting to be hidden. The voicemail module will
+    be handling the settings. Has no effect before OC where dialer cannot provide voicemail
+    settings-->
+    <meta-data android:name="android.telephony.HIDE_VOICEMAIL_SETTINGS_MENU" android:value="true"/>
+
     <activity
         android:exported="false"
         android:label="@string/voicemail_change_pin_preference_title"
