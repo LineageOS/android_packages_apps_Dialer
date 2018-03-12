@@ -830,7 +830,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     // Note:  onInCallScreenDialpadVisibilityChange is called here to ensure that the dialpad FAB
     // repositions itself.
-    getInCallScreen().onInCallScreenDialpadVisibilityChange(show);
+    getInCallOrRttCallScreen().onInCallScreenDialpadVisibilityChange(show);
   }
 
   private void showDialpadFragment() {
@@ -842,11 +842,15 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     FragmentTransaction transaction = dialpadFragmentManager.beginTransaction();
     DialpadFragment dialpadFragment = getDialpadFragment();
     if (dialpadFragment == null) {
-      transaction.add(getDialpadContainerId(), new DialpadFragment(), Tags.DIALPAD_FRAGMENT);
+      dialpadFragment = new DialpadFragment();
+      transaction.add(getDialpadContainerId(), dialpadFragment, Tags.DIALPAD_FRAGMENT);
     } else {
       transaction.show(dialpadFragment);
       dialpadFragment.setUserVisibleHint(true);
     }
+    // RTT call screen doesn't show end call button inside dialpad, thus the space reserved for end
+    // call button should be removed.
+    dialpadFragment.setShouldShowEndCallSpace(didShowInCallScreen);
     transaction.commitAllowingStateLoss();
     dialpadFragmentManager.executePendingTransactions();
 
@@ -967,7 +971,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public boolean getCallCardFragmentVisible() {
-    return didShowInCallScreen || didShowVideoCallScreen;
+    return didShowInCallScreen || didShowVideoCallScreen || didShowRttCallScreen;
   }
 
   public void dismissKeyguard(boolean dismiss) {
@@ -1100,7 +1104,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   @Nullable
   public FragmentManager getDialpadFragmentManager() {
-    InCallScreen inCallScreen = getInCallScreen();
+    InCallScreen inCallScreen = getInCallOrRttCallScreen();
     if (inCallScreen != null) {
       return inCallScreen.getInCallScreenFragment().getChildFragmentManager();
     }
@@ -1108,7 +1112,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public int getDialpadContainerId() {
-    return getInCallScreen().getAnswerAndDialpadContainerResourceId();
+    return getInCallOrRttCallScreen().getAnswerAndDialpadContainerResourceId();
   }
 
   @Override
@@ -1584,6 +1588,17 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private RttCallScreen getRttCallScreen() {
     return (RttCallScreen) getSupportFragmentManager().findFragmentByTag(Tags.RTT_CALL_SCREEN);
+  }
+
+  private InCallScreen getInCallOrRttCallScreen() {
+    InCallScreen inCallScreen = null;
+    if (didShowInCallScreen) {
+      inCallScreen = getInCallScreen();
+    }
+    if (didShowRttCallScreen) {
+      inCallScreen = getRttCallScreen();
+    }
+    return inCallScreen;
   }
 
   @Override

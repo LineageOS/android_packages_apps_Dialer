@@ -244,7 +244,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
                 };
 
             Snackbar.make(parentView, message, Snackbar.LENGTH_LONG)
-                .setAction(R.string.block_number_undo, undoListener)
+                .setAction(R.string.snackbar_undo, undoListener)
                 .setActionTextColor(actionTextColor)
                 .show();
 
@@ -295,7 +295,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
                 };
 
             Snackbar.make(parentView, message, Snackbar.LENGTH_LONG)
-                .setAction(R.string.block_number_undo, undoListener)
+                .setAction(R.string.snackbar_undo, undoListener)
                 .setActionTextColor(actionTextColor)
                 .show();
 

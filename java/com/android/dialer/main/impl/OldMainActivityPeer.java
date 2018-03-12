@@ -85,6 +85,7 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
@@ -216,7 +217,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     bottomNav = mainActivity.findViewById(R.id.bottom_nav_bar);
     MainBottomNavBarBottomNavTabListener bottomNavTabListener =
-        new MainBottomNavBarBottomNavTabListener(mainActivity.getFragmentManager(), fab);
+        new MainBottomNavBarBottomNavTabListener(
+            mainActivity, mainActivity.getFragmentManager(), fab);
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
     // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
     boolean showVoicemailTab = canVoicemailTabBeShown(mainActivity);
@@ -1102,13 +1104,15 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private static final String CONTACTS_TAG = "contacts";
     private static final String VOICEMAIL_TAG = "voicemail";
 
+    private final MainActivity mainActivity;
     private final FragmentManager fragmentManager;
     private final FloatingActionButton fab;
 
     @TabIndex private int selectedTab = -1;
 
     private MainBottomNavBarBottomNavTabListener(
-        FragmentManager fragmentManager, FloatingActionButton fab) {
+        MainActivity mainActivity, FragmentManager fragmentManager, FloatingActionButton fab) {
+      this.mainActivity = mainActivity;
       this.fragmentManager = fragmentManager;
       this.fab = fab;
     }
@@ -1119,6 +1123,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.SPEED_DIAL) {
         return;
       }
+      Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_SPEED_DIAL, mainActivity);
       selectedTab = TabIndex.SPEED_DIAL;
       Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       showFragment(fragment == null ? new OldSpeedDialFragment() : fragment, SPEED_DIAL_TAG);
@@ -1131,6 +1136,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.CALL_LOG) {
         return;
       }
+      Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_CALL_LOG, mainActivity);
       selectedTab = TabIndex.CALL_LOG;
       Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
       showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
@@ -1143,6 +1149,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.CONTACTS) {
         return;
       }
+      Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_CONTACTS, mainActivity);
       selectedTab = TabIndex.CONTACTS;
       Fragment fragment = fragmentManager.findFragmentByTag(CONTACTS_TAG);
       showFragment(
@@ -1157,6 +1164,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.VOICEMAIL) {
         return;
       }
+      Logger.get(mainActivity).logScreenView(ScreenEvent.Type.MAIN_VOICEMAIL, mainActivity);
       selectedTab = TabIndex.VOICEMAIL;
       VisualVoicemailCallLogFragment fragment =
           (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);

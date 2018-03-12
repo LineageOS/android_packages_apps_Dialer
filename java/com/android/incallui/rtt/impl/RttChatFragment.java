@@ -37,7 +37,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -46,6 +45,7 @@ import android.widget.TextView.OnEditorActionListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.UiUtil;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
@@ -87,7 +87,7 @@ public class RttChatFragment extends Fragment
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
           if (dy < 0) {
-            hideKeyboard();
+            UiUtil.hideKeyboardFrom(getContext(), editText);
           }
         }
       };
@@ -124,6 +124,8 @@ public class RttChatFragment extends Fragment
     if (savedInstanceState != null) {
       inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
     }
+    // Prevent updating local message until UI is ready.
+    isClearingInput = true;
   }
 
   @Override
@@ -158,7 +160,7 @@ public class RttChatFragment extends Fragment
     layoutManager.setStackFromEnd(true);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(false);
-    adapter = new RttChatAdapter(getContext(), this);
+    adapter = new RttChatAdapter(getContext(), this, savedInstanceState);
     recyclerView.setAdapter(adapter);
     recyclerView.addOnScrollListener(onScrollListener);
     submitButton = view.findViewById(R.id.rtt_chat_submit_button);
@@ -180,7 +182,13 @@ public class RttChatFragment extends Fragment
 
     overflowMenu = new RttOverflowMenu(getContext(), inCallButtonUiDelegate);
     view.findViewById(R.id.rtt_overflow_button)
-        .setOnClickListener(v -> overflowMenu.showAtLocation(v, Gravity.TOP | Gravity.RIGHT, 0, 0));
+        .setOnClickListener(
+            v -> {
+              // Hide keyboard when opening overflow menu. This is alternative solution since hiding
+              // keyboard after the menu is open or dialpad is shown doesn't work.
+              UiUtil.hideKeyboardFrom(getContext(), editText);
+              overflowMenu.showAtLocation(v, Gravity.TOP | Gravity.RIGHT, 0, 0);
+            });
 
     nameTextView = view.findViewById(R.id.rtt_name_or_number);
     chronometer = view.findViewById(R.id.rtt_timer);
@@ -204,7 +212,7 @@ public class RttChatFragment extends Fragment
     if (isClearingInput) {
       return;
     }
-    String messageToAppend = RttChatMessage.getChangedString(s, start, before, count);
+    String messageToAppend = adapter.computeChangeOfLocalMessage(s.toString());
     if (!TextUtils.isEmpty(messageToAppend)) {
       adapter.addLocalMessage(messageToAppend);
       rttCallScreenDelegate.onLocalMessage(messageToAppend);
@@ -242,25 +250,25 @@ public class RttChatFragment extends Fragment
   public void onStart() {
     LogUtil.enterBlock("RttChatFragment.onStart");
     super.onStart();
+    isClearingInput = false;
     onRttScreenStart();
+  }
+
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle bundle) {
+    super.onSaveInstanceState(bundle);
+    adapter.onSaveInstanceState(bundle);
   }
 
   @Override
   public void onStop() {
     LogUtil.enterBlock("RttChatFragment.onStop");
     super.onStop();
+    isClearingInput = true;
     if (overflowMenu.isShowing()) {
       overflowMenu.dismiss();
     }
     onRttScreenStop();
-  }
-
-  private void hideKeyboard() {
-    InputMethodManager inputMethodManager = getContext().getSystemService(InputMethodManager.class);
-    if (inputMethodManager.isAcceptingText()) {
-      inputMethodManager.hideSoftInputFromWindow(
-          getActivity().getCurrentFocus().getWindowToken(), 0);
-    }
   }
 
   @Override
@@ -333,11 +341,13 @@ public class RttChatFragment extends Fragment
   public void updateInCallScreenColors() {}
 
   @Override
-  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {}
+  public void onInCallScreenDialpadVisibilityChange(boolean isShowing) {
+    overflowMenu.setDialpadButtonChecked(isShowing);
+  }
 
   @Override
   public int getAnswerAndDialpadContainerResourceId() {
-    return 0;
+    return R.id.incall_dialpad_container;
   }
 
   @Override

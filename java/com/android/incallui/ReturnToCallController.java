@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.CallAudioState;
 import android.text.TextUtils;
+import com.android.bubble.Bubble;
+import com.android.bubble.BubbleComponent;
+import com.android.bubble.BubbleInfo;
+import com.android.bubble.BubbleInfo.Action;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -41,24 +45,26 @@ import com.android.incallui.call.CallList.Listener;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
-import com.android.newbubble.NewBubble;
-import com.android.newbubble.NewBubbleComponent;
-import com.android.newbubble.NewBubbleInfo;
-import com.android.newbubble.NewBubbleInfo.Action;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Listens for events relevant to the return-to-call bubble and updates the bubble's state as
- * necessary
+ * necessary.
+ *
+ * <p>Bubble shows when one of following happens: 1. a new outgoing/ongoing call appears 2. leave
+ * in-call UI with an outgoing/ongoing call
+ *
+ * <p>Bubble hides when one of following happens: 1. a call disconnect and there is no more
+ * outgoing/ongoing call 2. show in-call UI
  */
-public class NewReturnToCallController implements InCallUiListener, Listener, AudioModeListener {
+public class ReturnToCallController implements InCallUiListener, Listener, AudioModeListener {
 
   private final Context context;
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  NewBubble bubble;
+  Bubble bubble;
 
   private static Boolean canShowBubblesForTesting = null;
 
@@ -76,16 +82,16 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     return ConfigProviderBindings.get(context).getBoolean("enable_return_to_call_bubble_v2", false);
   }
 
-  public NewReturnToCallController(Context context, ContactInfoCache contactInfoCache) {
+  public ReturnToCallController(Context context, ContactInfoCache contactInfoCache) {
     this.context = context;
     this.contactInfoCache = contactInfoCache;
 
-    toggleSpeaker = createActionIntent(NewReturnToCallActionReceiver.ACTION_TOGGLE_SPEAKER);
+    toggleSpeaker = createActionIntent(ReturnToCallActionReceiver.ACTION_TOGGLE_SPEAKER);
     showSpeakerSelect =
-        createActionIntent(NewReturnToCallActionReceiver.ACTION_SHOW_AUDIO_ROUTE_SELECTOR);
-    toggleMute = createActionIntent(NewReturnToCallActionReceiver.ACTION_TOGGLE_MUTE);
-    endCall = createActionIntent(NewReturnToCallActionReceiver.ACTION_END_CALL);
-    fullScreen = createActionIntent(NewReturnToCallActionReceiver.ACTION_RETURN_TO_CALL);
+        createActionIntent(ReturnToCallActionReceiver.ACTION_SHOW_AUDIO_ROUTE_SELECTOR);
+    toggleMute = createActionIntent(ReturnToCallActionReceiver.ACTION_TOGGLE_MUTE);
+    endCall = createActionIntent(ReturnToCallActionReceiver.ACTION_END_CALL);
+    fullScreen = createActionIntent(ReturnToCallActionReceiver.ACTION_RETURN_TO_CALL);
 
     InCallPresenter.getInstance().addInCallUiListener(this);
     CallList.getInstance().addListener(this);
@@ -150,12 +156,12 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   }
 
   @VisibleForTesting
-  public NewBubble startBubble() {
+  public Bubble startBubble() {
     if (!canShowBubbles(context)) {
-      LogUtil.i("ReturnToCallController.startNewBubble", "can't show bubble, no permission");
+      LogUtil.i("ReturnToCallController.startBubble", "can't show bubble, no permission");
       return null;
     }
-    NewBubble returnToCallBubble = NewBubbleComponent.get(context).getNewBubble();
+    Bubble returnToCallBubble = BubbleComponent.get(context).getBubble();
     returnToCallBubble.setBubbleInfo(generateBubbleInfo());
     returnToCallBubble.show();
     return returnToCallBubble;
@@ -171,7 +177,14 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
   public void onSessionModificationStateChange(DialerCall call) {}
 
   @Override
-  public void onCallListChange(CallList callList) {}
+  public void onCallListChange(CallList callList) {
+    if ((bubble == null || !bubble.isVisible())
+        && getCall() != null
+        && !InCallPresenter.getInstance().isShowingInCallUi()) {
+      LogUtil.i("ReturnToCallController.onCallListChange", "going to show bubble");
+      show();
+    }
+  }
 
   @Override
   public void onDisconnect(DialerCall call) {
@@ -235,8 +248,8 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
     }
   }
 
-  private NewBubbleInfo generateBubbleInfo() {
-    return NewBubbleInfo.builder()
+  private BubbleInfo generateBubbleInfo() {
+    return BubbleInfo.builder()
         .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
         .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
         .setStartingYPosition(
@@ -293,7 +306,7 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
 
   @NonNull
   private PendingIntent createActionIntent(String action) {
-    Intent intent = new Intent(context, NewReturnToCallActionReceiver.class);
+    Intent intent = new Intent(context, ReturnToCallActionReceiver.class);
     intent.setAction(action);
     return PendingIntent.getBroadcast(context, 0, intent, 0);
   }
@@ -326,45 +339,42 @@ public class NewReturnToCallController implements InCallUiListener, Listener, Au
 
   private static class ReturnToCallContactInfoCacheCallback implements ContactInfoCacheCallback {
 
-    private final WeakReference<NewReturnToCallController> newReturnToCallControllerWeakReference;
+    private final WeakReference<ReturnToCallController> returnToCallControllerWeakReference;
 
-    private ReturnToCallContactInfoCacheCallback(
-        NewReturnToCallController newReturnToCallController) {
-      newReturnToCallControllerWeakReference = new WeakReference<>(newReturnToCallController);
+    private ReturnToCallContactInfoCacheCallback(ReturnToCallController returnToCallController) {
+      returnToCallControllerWeakReference = new WeakReference<>(returnToCallController);
     }
 
     @Override
     public void onContactInfoComplete(String callId, ContactCacheEntry entry) {
-      NewReturnToCallController newReturnToCallController =
-          newReturnToCallControllerWeakReference.get();
-      if (newReturnToCallController == null) {
+      ReturnToCallController returnToCallController = returnToCallControllerWeakReference.get();
+      if (returnToCallController == null) {
         return;
       }
       if (entry.photo != null) {
-        newReturnToCallController.onPhotoAvatarReceived(entry.photo);
+        returnToCallController.onPhotoAvatarReceived(entry.photo);
       } else {
         DialerCall dialerCall = CallList.getInstance().getCallById(callId);
         if (dialerCall != null) {
-          newReturnToCallController.onLetterTileAvatarReceived(
-              newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+          returnToCallController.onLetterTileAvatarReceived(
+              returnToCallController.createLettleTileDrawable(dialerCall, entry));
         }
       }
     }
 
     @Override
     public void onImageLoadComplete(String callId, ContactCacheEntry entry) {
-      NewReturnToCallController newReturnToCallController =
-          newReturnToCallControllerWeakReference.get();
-      if (newReturnToCallController == null) {
+      ReturnToCallController returnToCallController = returnToCallControllerWeakReference.get();
+      if (returnToCallController == null) {
         return;
       }
       if (entry.photo != null) {
-        newReturnToCallController.onPhotoAvatarReceived(entry.photo);
+        returnToCallController.onPhotoAvatarReceived(entry.photo);
       } else {
         DialerCall dialerCall = CallList.getInstance().getCallById(callId);
         if (dialerCall != null) {
-          newReturnToCallController.onLetterTileAvatarReceived(
-              newReturnToCallController.createLettleTileDrawable(dialerCall, entry));
+          returnToCallController.onLetterTileAvatarReceived(
+              returnToCallController.createLettleTileDrawable(dialerCall, entry));
         }
       }
     }

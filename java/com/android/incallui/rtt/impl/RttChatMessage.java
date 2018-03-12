@@ -16,9 +16,10 @@
 
 package com.android.incallui.rtt.impl;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextWatcher;
 import com.android.incallui.rtt.protocol.Constants;
 import com.google.common.base.Splitter;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /** Message class that holds one RTT chat content. */
-final class RttChatMessage {
+final class RttChatMessage implements Parcelable {
 
   private static final Splitter SPLITTER = Splitter.on(Constants.BUBBLE_BREAKER);
 
@@ -59,10 +60,7 @@ final class RttChatMessage {
   }
 
   /**
-   * Generates delta change to a text.
-   *
-   * <p>This is used to track text change of input. See more details in {@link
-   * TextWatcher#onTextChanged}
+   * Computes delta change of two string.
    *
    * <p>e.g. "hello world" -> "hello" : "\b\b\b\b\b\b"
    *
@@ -72,22 +70,25 @@ final class RttChatMessage {
    *
    * <p>"hello world" -> "hello new world" : "\b\b\b\b\bnew world"
    */
-  static String getChangedString(CharSequence s, int start, int before, int count) {
+  static String computeChangedString(String oldMessage, String newMesssage) {
     StringBuilder modify = new StringBuilder();
-    char c = '\b';
-    int oldLength = s.length() - count + before;
-    for (int i = 0; i < oldLength - start; i++) {
-      modify.append(c);
+    int indexChangeStart = 0;
+    while (indexChangeStart < oldMessage.length()
+        && indexChangeStart < newMesssage.length()
+        && oldMessage.charAt(indexChangeStart) == newMesssage.charAt(indexChangeStart)) {
+      indexChangeStart++;
     }
-    modify.append(s, start, start + count);
-    if (start + count < s.length()) {
-      modify.append(s, start + count, s.length());
+    for (int i = indexChangeStart; i < oldMessage.length(); i++) {
+      modify.append('\b');
+    }
+    for (int i = indexChangeStart; i < newMesssage.length(); i++) {
+      modify.append(newMesssage.charAt(i));
     }
     return modify.toString();
   }
 
   /** Convert remote input text into an array of {@code RttChatMessage}. */
-  static RttChatMessage[] getRemoteRttChatMessage(
+  static List<RttChatMessage> getRemoteRttChatMessage(
       @Nullable RttChatMessage currentMessage, @NonNull String text) {
     Iterator<String> splitText = SPLITTER.split(text).iterator();
     List<RttChatMessage> messageList = new ArrayList<>();
@@ -118,6 +119,43 @@ final class RttChatMessage {
       messageList.add(message);
     }
 
-    return messageList.toArray(new RttChatMessage[0]);
+    return messageList;
   }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(getContent());
+    boolean[] values = new boolean[2];
+    values[0] = isRemote;
+    values[1] = isFinished;
+    dest.writeBooleanArray(values);
+  }
+
+  public static final Parcelable.Creator<RttChatMessage> CREATOR =
+      new Parcelable.Creator<RttChatMessage>() {
+        @Override
+        public RttChatMessage createFromParcel(Parcel in) {
+          return new RttChatMessage(in);
+        }
+
+        @Override
+        public RttChatMessage[] newArray(int size) {
+          return new RttChatMessage[size];
+        }
+      };
+
+  private RttChatMessage(Parcel in) {
+    content.append(in.readString());
+    boolean[] values = new boolean[2];
+    in.readBooleanArray(values);
+    isRemote = values[0];
+    isFinished = values[1];
+  }
+
+  RttChatMessage() {}
 }

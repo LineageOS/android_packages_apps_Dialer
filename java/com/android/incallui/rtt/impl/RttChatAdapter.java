@@ -17,6 +17,9 @@
 package com.android.incallui.rtt.impl;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -24,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /** Adapter class for holding RTT chat data. */
@@ -34,15 +36,26 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     void newMessageAdded();
   }
 
+  private static final String KEY_MESSAGE_DATA = "key_message_data";
+  private static final String KEY_LAST_REMOTE_MESSAGE = "key_last_remote_message";
+  private static final String KEY_LAST_LOCAL_MESSAGE = "key_last_local_message";
+
   private final Context context;
-  private final List<RttChatMessage> rttMessages = new ArrayList<>();
+  private final List<RttChatMessage> rttMessages;
   private int lastIndexOfLocalMessage = -1;
   private int lastIndexOfRemoteMessage = -1;
   private final MessageListener messageListener;
 
-  RttChatAdapter(Context context, MessageListener listener) {
+  RttChatAdapter(Context context, MessageListener listener, @Nullable Bundle savedInstanceState) {
     this.context = context;
     this.messageListener = listener;
+    if (savedInstanceState == null) {
+      rttMessages = new ArrayList<>();
+    } else {
+      rttMessages = savedInstanceState.getParcelableArrayList(KEY_MESSAGE_DATA);
+      lastIndexOfRemoteMessage = savedInstanceState.getInt(KEY_LAST_REMOTE_MESSAGE);
+      lastIndexOfLocalMessage = savedInstanceState.getInt(KEY_LAST_LOCAL_MESSAGE);
+    }
   }
 
   @Override
@@ -76,21 +89,22 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     if (lastIndexOfRemoteMessage >= 0) {
       rttChatMessage = rttMessages.get(lastIndexOfRemoteMessage);
     }
-    RttChatMessage[] newMessages = RttChatMessage.getRemoteRttChatMessage(rttChatMessage, newText);
+    List<RttChatMessage> newMessages =
+        RttChatMessage.getRemoteRttChatMessage(rttChatMessage, newText);
 
     if (rttChatMessage == null) {
       lastIndexOfRemoteMessage = rttMessages.size();
-      rttMessages.add(lastIndexOfRemoteMessage, newMessages[0]);
-      rttMessages.addAll(Arrays.asList(newMessages).subList(1, newMessages.length));
-      notifyItemRangeInserted(lastIndexOfRemoteMessage, newMessages.length);
+      rttMessages.add(lastIndexOfRemoteMessage, newMessages.get(0));
+      rttMessages.addAll(newMessages.subList(1, newMessages.size()));
+      notifyItemRangeInserted(lastIndexOfRemoteMessage, newMessages.size());
       lastIndexOfRemoteMessage = rttMessages.size() - 1;
     } else {
-      rttMessages.set(lastIndexOfRemoteMessage, newMessages[0]);
+      rttMessages.set(lastIndexOfRemoteMessage, newMessages.get(0));
       int lastIndex = rttMessages.size();
-      rttMessages.addAll(Arrays.asList(newMessages).subList(1, newMessages.length));
+      rttMessages.addAll(newMessages.subList(1, newMessages.size()));
 
       notifyItemChanged(lastIndexOfRemoteMessage);
-      notifyItemRangeInserted(lastIndex, newMessages.length);
+      notifyItemRangeInserted(lastIndex, newMessages.size());
     }
     if (rttMessages.get(lastIndexOfRemoteMessage).isFinished()) {
       lastIndexOfRemoteMessage = -1;
@@ -139,6 +153,18 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     lastIndexOfLocalMessage = -1;
   }
 
+  String computeChangeOfLocalMessage(String newMessage) {
+    RttChatMessage rttChatMessage = null;
+    if (lastIndexOfLocalMessage >= 0) {
+      rttChatMessage = rttMessages.get(lastIndexOfLocalMessage);
+    }
+    if (rttChatMessage == null || rttChatMessage.isFinished()) {
+      return newMessage;
+    } else {
+      return RttChatMessage.computeChangedString(rttChatMessage.getContent(), newMessage);
+    }
+  }
+
   void addRemoteMessage(String message) {
     LogUtil.enterBlock("RttChatAdapater.addRemoteMessage");
     if (TextUtils.isEmpty(message)) {
@@ -148,5 +174,11 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     if (messageListener != null) {
       messageListener.newMessageAdded();
     }
+  }
+
+  void onSaveInstanceState(@NonNull Bundle bundle) {
+    bundle.putParcelableArrayList(KEY_MESSAGE_DATA, (ArrayList<RttChatMessage>) rttMessages);
+    bundle.putInt(KEY_LAST_REMOTE_MESSAGE, lastIndexOfRemoteMessage);
+    bundle.putInt(KEY_LAST_LOCAL_MESSAGE, lastIndexOfLocalMessage);
   }
 }
