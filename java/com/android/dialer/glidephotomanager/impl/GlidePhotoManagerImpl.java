@@ -49,7 +49,10 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
   @Override
   public void loadQuickContactBadge(QuickContactBadge badge, PhotoInfo photoInfo) {
     Assert.isMainThread();
-    badge.assignContactUri(parseUri(photoInfo.getLookupUri()));
+    badge.assignContactUri(
+        TextUtils.isEmpty(photoInfo.getLookupUri())
+            ? DefaultLookupUriGenerator.generateUri(photoInfo)
+            : parseUri(photoInfo.getLookupUri()));
     badge.setOverlay(null);
     GlideRequest<Drawable> request = buildRequest(GlideApp.with(badge), photoInfo);
     request.into(badge);
