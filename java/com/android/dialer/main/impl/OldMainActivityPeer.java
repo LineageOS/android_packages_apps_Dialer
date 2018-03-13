@@ -447,7 +447,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   }
 
   @Override
-  public void onActivityPause() {}
+  public void onActivityPause() {
+    searchController.onActivityPause();
+  }
 
   @Override
   public void onActivityStop() {
@@ -675,6 +677,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onCallPlacedFromSearch() {
       // TODO(calderwoodra): logging
       searchController.onCallPlacedFromSearch();
+    }
+
+    @Override
+    public void requestingPermission() {
+      searchController.requestingPermission();
     }
   }
 
