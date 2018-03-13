@@ -59,14 +59,15 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.common.collect.ImmutableSet;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -93,17 +94,8 @@ public class SpecialCharSequenceMgr {
   private static final String ADN_NAME_COLUMN_NAME = "name";
   private static final int ADN_QUERY_TOKEN = -1;
 
-  @VisibleForTesting
-  static final List<String> TRANSSION_CODES =
-      new ArrayList<String>() {
-        {
-          add("*#07#");
-          add("*#87#");
-          add("*#43#");
-          add("*#2727#");
-          add("*#88#");
-        }
-      };
+  /** Comma separated MMI codes specific to OEM/device. */
+  @VisibleForTesting static final String CONFIG_OEM_MMI_CODES_CSV = "oem_mmi_codes_csv";
 
   /**
    * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to prevent
@@ -172,12 +164,25 @@ public class SpecialCharSequenceMgr {
       TelephonyManagerCompat.handleSecretCode(context, secretCode);
       return true;
     }
-    if (TRANSSION_CODES.contains(input)) {
+
+    if (getOemSecretCodes(context).contains(input)) {
       String secretCode = input.substring(2, input.length() - 1);
       TelephonyManagerCompat.handleSecretCode(context, secretCode);
       return true;
     }
     return false;
+  }
+
+  /**
+   * Get the OEM codes from the config provider. The config provider should be aware of the device
+   * and manufacturer.
+   */
+  private static ImmutableSet<String> getOemSecretCodes(Context context) {
+    String csv = ConfigProviderBindings.get(context).getString(CONFIG_OEM_MMI_CODES_CSV, null);
+    if (TextUtils.isEmpty(csv)) {
+      return ImmutableSet.of();
+    }
+    return ImmutableSet.copyOf(csv.split(","));
   }
 
   /**
