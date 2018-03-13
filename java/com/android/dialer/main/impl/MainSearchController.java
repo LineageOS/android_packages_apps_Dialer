@@ -86,6 +86,14 @@ public class MainSearchController implements SearchBarListener {
 
   private final List<OnSearchShowListener> onSearchShowListenerList = new ArrayList<>();
 
+  /**
+   * True when an action happens that closes search (like leaving the app or placing a call). We
+   * want to wait until onPause is called otherwise the transition will look extremely janky.
+   */
+  private boolean closeSearchOnPause;
+
+  private boolean requestingPermission;
+
   public MainSearchController(
       MainActivity mainActivity,
       BottomNavBar bottomNav,
@@ -444,15 +452,35 @@ public class MainSearchController implements SearchBarListener {
   }
 
   @Override
+  public void onActivityPause() {
+    if (closeSearchOnPause) {
+      closeSearchOnPause = false;
+      if (isInSearch()) {
+        closeSearch(false);
+      }
+    }
+  }
+
+  @Override
   public void onUserLeaveHint() {
     if (isInSearch()) {
-      closeSearch(false);
+      // Requesting a permission causes this to be called and we want search to remain open when
+      // that happens. Otherwise, close search.
+      closeSearchOnPause = !requestingPermission;
+
+      // Always hide the keyboard when the user leaves dialer (including permission requests)
+      toolbar.hideKeyboard();
     }
   }
 
   @Override
   public void onCallPlacedFromSearch() {
-    closeSearch(false);
+    closeSearchOnPause = true;
+  }
+
+  @Override
+  public void requestingPermission() {
+    requestingPermission = true;
   }
 
   public void onVoiceResults(int resultCode, Intent data) {

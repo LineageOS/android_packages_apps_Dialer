@@ -1727,6 +1727,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     clearSearchOnPause = true;
   }
 
+  @Override
+  public void requestingPermission() {}
+
   protected int getPreviouslySelectedTabIndex() {
     return previouslySelectedTabIndex;
   }
