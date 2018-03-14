@@ -152,6 +152,11 @@ public class RttChatFragment extends Fragment
   public View onCreateView(
       LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.frag_rtt_chat, container, false);
+    view.setSystemUiVisibility(
+        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
     editText = view.findViewById(R.id.rtt_chat_input);
     editText.setOnEditorActionListener(this);
     editText.addTextChangedListener(this);
@@ -278,11 +283,14 @@ public class RttChatFragment extends Fragment
     Window window = getActivity().getWindow();
     window.setStatusBarColor(activity.getColor(R.color.rtt_status_bar_color));
     window.setNavigationBarColor(activity.getColor(R.color.rtt_navigation_bar_color));
-    window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
   }
 
   @Override
   public void onRttScreenStop() {
+    Activity activity = getActivity();
+    Window window = getActivity().getWindow();
+    window.setStatusBarColor(activity.getColor(android.R.color.transparent));
+    window.setNavigationBarColor(activity.getColor(android.R.color.transparent));
     rttCallScreenDelegate.onRttCallScreenUiUnready();
   }
 
