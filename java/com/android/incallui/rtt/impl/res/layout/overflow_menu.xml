@@ -46,4 +46,10 @@
       style="@style/RttButton"
       android:drawableStart="@drawable/quantum_ic_add_call_vd_theme_24"
       android:text="@string/incall_label_add_call"/>
+  <com.android.incallui.rtt.impl.RttCheckableButton
+      android:id="@+id/menu_swap_call"
+      style="@style/RttButton"
+      android:drawableStart="@drawable/quantum_ic_swap_calls_vd_theme_24"
+      android:text="@string/incall_label_swap"
+      android:visibility="gone"/>
 </LinearLayout>
