@@ -19,14 +19,14 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-  <include layout="@layout/rtt_banner"/>
-
   <android.support.v7.widget.RecyclerView
       android:id="@+id/rtt_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingBottom="70dp"
       android:clipToPadding="false"/>
+
+  <include layout="@layout/rtt_banner"/>
 
   <LinearLayout
       android:layout_width="match_parent"
