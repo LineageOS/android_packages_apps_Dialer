@@ -155,7 +155,8 @@ public final class BottomNavBar extends LinearLayout {
     int voicemailcurrentVisibility = voicemail.getVisibility();
 
     if (voicemailpreviousVisibility != voicemailcurrentVisibility
-        && voicemailpreviousVisibility == View.VISIBLE) {
+        && voicemailpreviousVisibility == View.VISIBLE
+        && getSelectedTab() == TabIndex.VOICEMAIL) {
       LogUtil.i("OldMainActivityPeer.showVoicemail", "hid VM tab and moved to speed dial tab");
       selectTab(TabIndex.SPEED_DIAL);
     }
