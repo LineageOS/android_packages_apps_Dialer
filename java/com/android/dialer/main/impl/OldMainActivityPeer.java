@@ -1186,8 +1186,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
      *
      * <p>Executes all fragment shows/hides in one transaction with no conflicting transactions
      * (like showing and hiding the same fragment in the same transaction). See a bug.
+     *
+     * <p>Special care should be taken to avoid calling this method several times in a short window
+     * as it can lead to fragments overlapping.
      */
     private void showFragment(@NonNull Fragment fragment, String tag) {
+      LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.showFragment");
       Fragment speedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       Fragment callLog = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
       Fragment contacts = fragmentManager.findFragmentByTag(CONTACTS_TAG);
@@ -1200,6 +1204,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       fragmentShown |= showIfEqualElseHide(transaction, fragment, voicemail);
 
       if (!fragmentShown) {
+        LogUtil.i(
+            "MainBottomNavBarBottomNavTabListener.showFragment", "Not added yet: " + fragment);
         transaction.add(R.id.fragment_container, fragment, tag);
       }
       transaction.commit();
