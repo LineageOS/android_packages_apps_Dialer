@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1358
+  // Next Tag: 1361
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -708,5 +708,12 @@ message DialerImpression {
     AUTO_BLOCKED_SPAM_CALL_REPORTED_AS_SPAM = 1356;
     // User reported auto blocked spam call as not spam
     AUTO_BLOCKED_SPAM_CALL_REPORTED_AS_NOT_SPAM = 1357;
+
+    // User enabled spam blocking through setting page.
+    SPAM_BLOCKING_ENABLED_THROUGH_SETTING = 1358;
+    // User disabled spam blocking through setting page.
+    SPAM_BLOCKING_DISABLED_THROUGH_SETTING = 1359;
+    // Failure happened while modifying spam blocking setting.
+    SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_SETTING = 1360;
   }
 }
