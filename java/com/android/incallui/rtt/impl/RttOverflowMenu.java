@@ -21,6 +21,7 @@ import android.telecom.CallAudioState;
 import android.view.View;
 import android.widget.PopupWindow;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
+import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.rtt.impl.RttCheckableButton.OnCheckedChangeListener;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
@@ -32,11 +33,19 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
   private final RttCheckableButton speakerButton;
   private final RttCheckableButton dialpadButton;
   private final RttCheckableButton addCallButton;
+  private final RttCheckableButton swapCallButton;
   private final InCallButtonUiDelegate inCallButtonUiDelegate;
+  private final InCallScreenDelegate inCallScreenDelegate;
+  private boolean isSwitchToSecondaryButtonEnabled;
+  private boolean isSwapCallButtonEnabled;
 
-  RttOverflowMenu(Context context, InCallButtonUiDelegate inCallButtonUiDelegate) {
+  RttOverflowMenu(
+      Context context,
+      InCallButtonUiDelegate inCallButtonUiDelegate,
+      InCallScreenDelegate inCallScreenDelegate) {
     super(context);
     this.inCallButtonUiDelegate = inCallButtonUiDelegate;
+    this.inCallScreenDelegate = inCallScreenDelegate;
     View view = View.inflate(context, R.layout.overflow_menu, null);
     setContentView(view);
     setOnDismissListener(this::dismiss);
@@ -49,7 +58,18 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
     dialpadButton = view.findViewById(R.id.menu_keypad);
     dialpadButton.setOnCheckedChangeListener(this);
     addCallButton = view.findViewById(R.id.menu_add_call);
-    addCallButton.setOnCheckedChangeListener(this);
+    addCallButton.setOnClickListener(v -> this.inCallButtonUiDelegate.addCallClicked());
+    swapCallButton = view.findViewById(R.id.menu_swap_call);
+    swapCallButton.setOnClickListener(
+        v -> {
+          if (isSwapCallButtonEnabled) {
+            this.inCallButtonUiDelegate.swapClicked();
+          }
+          if (isSwitchToSecondaryButtonEnabled) {
+            this.inCallScreenDelegate.onSecondaryInfoClicked();
+          }
+          dismiss();
+        });
   }
 
   @Override
@@ -60,8 +80,6 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
       inCallButtonUiDelegate.toggleSpeakerphone();
     } else if (button == dialpadButton) {
       inCallButtonUiDelegate.showDialpadClicked(isChecked);
-    } else if (button == addCallButton) {
-      inCallButtonUiDelegate.addCallClicked();
     }
     dismiss();
   }
@@ -90,5 +108,17 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
 
   void setDialpadButtonChecked(boolean isChecked) {
     dialpadButton.setChecked(isChecked);
+  }
+
+  void enableSwapCallButton(boolean enabled) {
+    isSwapCallButtonEnabled = enabled;
+    swapCallButton.setVisibility(
+        isSwapCallButtonEnabled || isSwitchToSecondaryButtonEnabled ? View.VISIBLE : View.GONE);
+  }
+
+  void enableSwitchToSecondaryButton(boolean enabled) {
+    isSwitchToSecondaryButtonEnabled = enabled;
+    swapCallButton.setVisibility(
+        isSwapCallButtonEnabled || isSwitchToSecondaryButtonEnabled ? View.VISIBLE : View.GONE);
   }
 }
