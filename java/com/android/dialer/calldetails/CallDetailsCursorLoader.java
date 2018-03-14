@@ -73,8 +73,8 @@ public final class CallDetailsCursorLoader extends CursorLoader {
     // the data loading but no data can be fetched and we want to ensure the data set is not empty
     // when building CallDetailsEntries proto (see toCallDetailsEntries(Cursor)).
     //
-    // CallDetailsActivity doesn't respond to underlying data changes when launched from the old
-    // call log and we decided to keep it that way when launched from the new call log.
+    // OldCallDetailsActivity doesn't respond to underlying data changes and we decided to keep it
+    // that way in CallDetailsActivity.
   }
 
   /**

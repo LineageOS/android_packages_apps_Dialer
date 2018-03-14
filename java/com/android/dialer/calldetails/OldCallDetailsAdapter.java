@@ -16,6 +16,7 @@
 
 package com.android.dialer.calldetails;
 
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,16 +25,17 @@ import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHea
 import com.android.dialer.dialercontact.DialerContact;
 
 /**
- * A {@link RecyclerView.Adapter} for {@link CallDetailsActivity}.
+ * A {@link RecyclerView.Adapter} for {@link OldCallDetailsActivity}.
  *
  * <p>See {@link CallDetailsAdapterCommon} for logic shared between this adapter and {@link
- * OldCallDetailsAdapter}.
+ * CallDetailsAdapter}.
  */
-final class CallDetailsAdapter extends CallDetailsAdapterCommon {
+final class OldCallDetailsAdapter extends CallDetailsAdapterCommon {
 
+  /** Contains info to be shown in the header. */
   private final DialerContact contact;
 
-  CallDetailsAdapter(
+  OldCallDetailsAdapter(
       Context context,
       DialerContact contact,
       CallDetailsEntries callDetailsEntries,

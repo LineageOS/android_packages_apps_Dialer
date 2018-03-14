@@ -31,7 +31,7 @@ import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 
-/** ViewHolder container for {@link CallDetailsActivity} footer. */
+/** ViewHolder for the footer in {@link OldCallDetailsActivity} or {@link CallDetailsActivity}. */
 final class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
   private final ReportCallIdListener reportCallIdListener;
@@ -91,7 +91,8 @@ final class CallDetailsFooterViewHolder extends RecyclerView.ViewHolder implemen
     } else if (view == delete) {
       deleteCallDetailsListener.delete();
     } else {
-      Assert.fail("View on click not implemented: " + view);
+      throw Assert.createUnsupportedOperationFailException(
+          "View on click not implemented: " + view);
     }
   }
 
