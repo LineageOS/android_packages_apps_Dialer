@@ -19,10 +19,6 @@
 
   <application
     android:supportsRtl="true">
-    <!-- Causes the "Voicemail" item under "Calls" setting to be hidden. The voicemail module will
-      be handling the settings. Has no effect before OC where dialer cannot provide voicemail
-      settings-->
-    <meta-data android:name="android.telephony.HIDE_VOICEMAIL_SETTINGS_MENU" android:value="true"/>
 
     <receiver
       android:name="com.android.voicemail.impl.sms.OmtpMessageReceiver"

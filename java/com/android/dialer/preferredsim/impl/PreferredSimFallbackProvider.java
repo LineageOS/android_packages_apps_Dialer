@@ -21,12 +21,14 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Content provider for preferred SIM columns that is only available in ContactsProvider after P.
@@ -38,6 +40,15 @@ import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim
 public class PreferredSimFallbackProvider extends ContentProvider {
 
   private static final String UPDATE_ID_SELECTION = PreferredSim.DATA_ID + " = ?";
+
+  private static final ImmutableMap<String, String> PROJECTION_MAP =
+      ImmutableMap.of(
+          PreferredSim.DATA_ID,
+          PreferredSim.DATA_ID,
+          PreferredSim.PREFERRED_PHONE_ACCOUNT_COMPONENT_NAME,
+          PreferredSim.PREFERRED_PHONE_ACCOUNT_COMPONENT_NAME,
+          PreferredSim.PREFERRED_PHONE_ACCOUNT_ID,
+          PreferredSim.PREFERRED_PHONE_ACCOUNT_ID);
 
   private PreferredSimDatabaseHelper databaseHelper;
 
@@ -56,16 +67,18 @@ public class PreferredSimFallbackProvider extends ContentProvider {
       @Nullable String[] selectionArgs,
       @Nullable String sortOrder) {
     checkReadContactsPermission();
-    return databaseHelper
-        .getReadableDatabase()
-        .query(
-            PreferredSimDatabaseHelper.TABLE,
-            projection,
-            selection,
-            selectionArgs,
-            null,
-            null,
-            sortOrder);
+    SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+    queryBuilder.setStrict(true);
+    queryBuilder.setProjectionMap(PROJECTION_MAP);
+    queryBuilder.setTables(PreferredSimDatabaseHelper.TABLE);
+    return queryBuilder.query(
+        databaseHelper.getReadableDatabase(),
+        projection,
+        selection,
+        selectionArgs,
+        null,
+        null,
+        sortOrder);
   }
 
   @Nullable

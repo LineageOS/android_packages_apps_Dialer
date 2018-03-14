@@ -489,7 +489,10 @@ public class CallLogFragment extends Fragment
   @Override
   public void fetchCalls() {
     callLogQueryHandler.fetchCalls(callTypeFilter, dateLimit);
-    if (!isCallLogActivity && getActivity() != null && !getActivity().isFinishing()) {
+    if (!isCallLogActivity
+        && getActivity() != null
+        && !getActivity().isFinishing()
+        && FragmentUtils.getParent(this, CallLogFragmentListener.class) != null) {
       FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class).updateTabUnreadCounts();
     }
   }

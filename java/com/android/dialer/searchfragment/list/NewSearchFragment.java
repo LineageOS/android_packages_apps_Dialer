@@ -29,7 +29,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v13.app.FragmentCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.PhoneNumberUtils;
@@ -342,8 +341,8 @@ public final class NewSearchFragment extends Fragment
       LogUtil.i(
           "NewSearchFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      FragmentCompat.requestPermissions(
-          this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+      FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).requestingPermission();
+      requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     }
   }
 
@@ -411,6 +410,7 @@ public final class NewSearchFragment extends Fragment
     String[] deniedPermissions =
         PermissionsUtil.getPermissionsCurrentlyDenied(
             getContext(), PermissionsUtil.allLocationGroupPermissionsUsedInDialer);
+    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).requestingPermission();
     requestPermissions(deniedPermissions, LOCATION_PERMISSION_REQUEST_CODE);
   }
 
@@ -557,5 +557,8 @@ public final class NewSearchFragment extends Fragment
 
     /** Called when a call is placed from the search fragment. */
     void onCallPlacedFromSearch();
+
+    /** Called when a permission is about to be requested. */
+    void requestingPermission();
   }
 }
