@@ -91,7 +91,7 @@ import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.app.widget.ActionBarController;
 import com.android.dialer.app.widget.SearchEditTextLayout;
 import com.android.dialer.callcomposer.CallComposerActivity;
-import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -838,8 +838,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
       if (resultCode == RESULT_OK
           && data != null
-          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
-        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+          && data.getBooleanExtra(OldCallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(OldCallDetailsActivity.EXTRA_PHONE_NUMBER);
         int snackbarDurationMillis = 5_000;
         Snackbar.make(parentLayout, getString(R.string.ec_data_deleted), snackbarDurationMillis)
             .setAction(
