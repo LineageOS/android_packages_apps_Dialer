@@ -27,8 +27,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
-import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
@@ -184,7 +184,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return CallDetailsActivity.newInstance(
+        return OldCallDetailsActivity.newInstance(
             context, callDetailsEntries, contact, canReportCallerId, canSupportAssistedDialing);
       }
     };

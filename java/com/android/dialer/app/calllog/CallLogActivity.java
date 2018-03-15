@@ -33,7 +33,7 @@ import android.view.ViewGroup;
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
-import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.common.Assert;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.CallLogQueryHandler;
@@ -282,8 +282,8 @@ public class CallLogActivity extends TransactionSafeActivity
     if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
       if (resultCode == RESULT_OK
           && data != null
-          && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
-        String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
+          && data.getBooleanExtra(OldCallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
+        String number = data.getStringExtra(OldCallDetailsActivity.EXTRA_PHONE_NUMBER);
         Snackbar.make(findViewById(R.id.calllog_frame), getString(R.string.ec_data_deleted), 5_000)
             .setAction(
                 R.string.view_conversation,
