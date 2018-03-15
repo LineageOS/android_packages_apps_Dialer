@@ -28,12 +28,9 @@ import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
-import android.text.style.TextAppearanceSpan;
-import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -50,6 +47,7 @@ import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.spannable.ContentWithLearnMoreSpanner;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.voicemail.VoicemailClient;
@@ -327,7 +325,6 @@ public class PhoneCallDetailsHelper
     builder.setCancelable(true);
     AlertDialog dialog = builder.create();
 
-    // Use a custom title to prevent truncation, sigh
     TextView title = new TextView(context);
     title.setText(R.string.voicemail_donation_promo_title);
 
@@ -378,19 +375,10 @@ public class PhoneCallDetailsHelper
   }
 
   private SpannableString getVoicemailDonationPromoContent() {
-    CharSequence content = context.getString(R.string.voicemail_donation_promo_content);
-    CharSequence learnMore = context.getString(R.string.voicemail_donation_promo_learn_more);
-    String learnMoreUrl = context.getString(R.string.voicemail_donation_promo_learn_more_url);
-    SpannableString span = new SpannableString(content + " " + learnMore);
-    int end = span.length();
-    int start = end - learnMore.length();
-    span.setSpan(new URLSpan(learnMoreUrl), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    span.setSpan(
-        new TextAppearanceSpan(context, R.style.PromoLinkStyle),
-        start,
-        end,
-        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    return span;
+    return new ContentWithLearnMoreSpanner(context)
+        .create(
+            context.getString(R.string.voicemail_donation_promo_content),
+            context.getString(R.string.voicemail_donation_promo_learn_more_url));
   }
 
   @Override
