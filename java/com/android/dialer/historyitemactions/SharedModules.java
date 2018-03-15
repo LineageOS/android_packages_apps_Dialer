@@ -179,7 +179,7 @@ public class SharedModules {
       @Override
       public int getDrawableId() {
         return isBlocked
-            ? R.drawable.ic_unblock // TODO(a bug): use a vector icon
+            ? R.drawable.bottomsheet_unblock // TODO(a bug): use a vector icon
             : R.drawable.quantum_ic_block_vd_theme_24;
       }
 

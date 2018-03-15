@@ -63,8 +63,7 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
     String secondaryInfo =
         TextUtils.isEmpty(label)
             ? number
-            : context.getString(
-                com.android.contacts.common.R.string.call_subject_type_and_number, label, number);
+            : context.getString(R.string.call_subject_type_and_number, label, number);
 
     nameOrNumberView.setText(name);
     numberView.setText(secondaryInfo);
