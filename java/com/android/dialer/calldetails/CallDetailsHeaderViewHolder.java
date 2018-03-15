@@ -37,6 +37,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 
@@ -178,6 +179,19 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
         networkView.setTextColor(contact.getSimDetails().getColor());
       }
     }
+
+    setCallbackAction(callbackAction);
+  }
+
+  void updateContactInfo(CallDetailsHeaderInfo headerInfo, @CallbackAction int callbackAction) {
+    GlidePhotoManagerComponent.get(context)
+        .glidePhotoManager()
+        .loadQuickContactBadge(contactPhoto, headerInfo.getPhotoInfo());
+
+    nameView.setText(headerInfo.getPrimaryText());
+    numberView.setText(headerInfo.getSecondaryText());
+
+    // TODO(a bug): show SIM info in the TextView returned by getNetworkView().
 
     setCallbackAction(callbackAction);
   }
