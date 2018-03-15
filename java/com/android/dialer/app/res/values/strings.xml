@@ -680,11 +680,8 @@
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">
     Let Google review this and future voicemail messages with transcripts.
-    They\'ll be stored anonymously. Change Settings anytime.
+    They\'ll be stored anonymously. Change Settings any time. <xliff:g example="Learn more">%1$s</xliff:g>
   </string>
-
-  <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
-  <string name="voicemail_donation_promo_learn_more">Learn&#160;more</string>
 
   <string translatable="false" name="voicemail_donation_promo_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
 
