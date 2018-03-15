@@ -19,6 +19,8 @@ package com.android.dialer.main.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogReceiver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
@@ -38,6 +40,12 @@ public class MainActivity extends TransactionSafeActivity
         DisambigDialogDismissedListener {
 
   private MainActivityPeer activePeer;
+
+  /**
+   * {@link android.content.BroadcastReceiver} that shows a dialog to block a number and/or report
+   * it as spam when notified.
+   */
+  private ShowBlockReportSpamDialogReceiver showBlockReportSpamDialogReceiver;
 
   public static Intent getShowCallLogIntent(Context context) {
     return getShowTabIntent(context, TabIndex.CALL_LOG);
@@ -69,6 +77,8 @@ public class MainActivity extends TransactionSafeActivity
     // If peer was set by the super, don't reset it.
     activePeer = getNewPeer();
     activePeer.onActivityCreate(savedInstanceState);
+
+    showBlockReportSpamDialogReceiver = new ShowBlockReportSpamDialogReceiver(getFragmentManager());
   }
 
   protected MainActivityPeer getNewPeer() {
@@ -90,6 +100,10 @@ public class MainActivity extends TransactionSafeActivity
   protected void onResume() {
     super.onResume();
     activePeer.onActivityResume();
+
+    LocalBroadcastManager.getInstance(this)
+        .registerReceiver(
+            showBlockReportSpamDialogReceiver, ShowBlockReportSpamDialogReceiver.getIntentFilter());
   }
 
   @Override
@@ -102,6 +116,8 @@ public class MainActivity extends TransactionSafeActivity
   protected void onPause() {
     super.onPause();
     activePeer.onActivityPause();
+
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(showBlockReportSpamDialogReceiver);
   }
 
   @Override
