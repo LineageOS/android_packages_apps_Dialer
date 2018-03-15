@@ -63,8 +63,8 @@ import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callcomposer.CallComposerActivity;
-import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
+import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.clipboard.ClipboardUtils;
@@ -1037,7 +1037,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     String packageName = intent.getPackage();
     if (DuoConstants.PACKAGE_NAME.equals(packageName)) {
       startDuoActivity(intent);
-    } else if (CallDetailsActivity.isLaunchIntent(intent)) {
+    } else if (OldCallDetailsActivity.isLaunchIntent(intent)) {
       PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
       ((Activity) context)
           .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);

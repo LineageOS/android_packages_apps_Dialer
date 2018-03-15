@@ -40,7 +40,7 @@ import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 
-/** ViewHolder for call entries in {@link CallDetailsActivity}. */
+/** ViewHolder for call entries in {@link OldCallDetailsActivity} or {@link CallDetailsActivity}. */
 public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private final CallTypeIconsView callTypeIcon;
