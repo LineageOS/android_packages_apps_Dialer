@@ -48,7 +48,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
-import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.hold.OnHoldFragment;
@@ -447,8 +446,12 @@ public class RttChatFragment extends Fragment
 
   @Override
   public void showAudioRouteSelector() {
-    AudioRouteSelectorDialogFragment.newInstance(inCallButtonUiDelegate.getCurrentAudioState())
-        .show(getChildFragmentManager(), null);
+    AudioSelectMenu audioSelectMenu =
+        new AudioSelectMenu(
+            getContext(),
+            inCallButtonUiDelegate,
+            () -> overflowMenu.showAtLocation(getView(), Gravity.TOP | Gravity.RIGHT, 0, 0));
+    audioSelectMenu.showAtLocation(getView(), Gravity.TOP | Gravity.RIGHT, 0, 0);
   }
 
   @Override

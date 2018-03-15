@@ -22,11 +22,12 @@ import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.calldetails.CallDetailsHeaderInfo;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
-import com.android.dialer.calllogutils.CallLogContactTypes;
-import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
-import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.calllogutils.CallLogEntryText;
+import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.DividerModule;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.IntentModule;
@@ -106,8 +107,6 @@ final class Modules {
       }
     }
 
-    // TODO(zachh): Revisit if DialerContact is the best thing to pass to CallDetails; could
-    // it use a HistoryItemPrimaryActionInfo instead?
     modules.add(createModuleForAccessingCallDetails(context, row));
 
     modules.add(new DeleteCallLogItemModule(context, row.coalescedIds()));
@@ -156,43 +155,31 @@ final class Modules {
         CallDetailsActivity.newInstance(
             context,
             row.coalescedIds(),
-            createDialerContactFromRow(context, row),
+            createCallDetailsHeaderInfoFromRow(context, row),
             canReportAsInvalidNumber,
             canSupportAssistedDialing),
         R.string.call_details_menu_label,
         R.drawable.quantum_ic_info_outline_vd_theme_24);
   }
 
-  private static DialerContact createDialerContactFromRow(Context context, CoalescedRow row) {
-    Optional<String> presentationName =
-        PhoneNumberDisplayUtil.getNameForPresentation(context, row.numberPresentation());
-    if (presentationName.isPresent()) {
-      return DialerContact.newBuilder()
-          .setNameOrNumber(presentationName.get())
-          .setContactType(CallLogContactTypes.getContactType(row))
-          .build();
+  private static CallDetailsHeaderInfo createCallDetailsHeaderInfoFromRow(
+      Context context, CoalescedRow row) {
+    return CallDetailsHeaderInfo.newBuilder()
+        .setDialerPhoneNumber(row.number())
+        .setPhotoInfo(createPhotoInfoFromRow(row))
+        .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
+        .setSecondaryText(
+            CallLogEntryText.buildSecondaryTextForBottomSheet(context, row).toString())
+        .build();
+  }
+
+  private static PhotoInfo createPhotoInfoFromRow(CoalescedRow row) {
+    PhotoInfo.Builder photoInfoBuilder =
+        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
+            .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+    if (!TextUtils.isEmpty(row.formattedNumber())) {
+      photoInfoBuilder.setFormattedNumber(row.formattedNumber());
     }
-
-    String normalizedNumber = row.number().getNormalizedNumber();
-    DialerContact.Builder dialerContactBuilder =
-        DialerContact.newBuilder()
-            .setNumber(normalizedNumber)
-            .setContactType(CallLogContactTypes.getContactType(row))
-            .setPhotoId(row.numberAttributes().getPhotoId());
-
-    if (!row.numberAttributes().getName().isEmpty()) {
-      dialerContactBuilder.setNameOrNumber(row.numberAttributes().getName());
-      if (row.formattedNumber() != null) {
-        dialerContactBuilder.setDisplayNumber(row.formattedNumber());
-      }
-    } else if (!TextUtils.isEmpty(row.formattedNumber())) {
-      dialerContactBuilder.setNameOrNumber(row.formattedNumber());
-    }
-
-    dialerContactBuilder.setNumberLabel(row.numberAttributes().getNumberTypeLabel());
-    dialerContactBuilder.setPhotoUri(row.numberAttributes().getPhotoUri());
-    dialerContactBuilder.setContactUri(row.numberAttributes().getLookupUri());
-
-    return dialerContactBuilder.build();
+    return photoInfoBuilder.build();
   }
 }

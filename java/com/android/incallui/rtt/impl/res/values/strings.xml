@@ -23,4 +23,8 @@
 
   <!-- Content description for avatar of RTT chat message. [CHAR LIMIT=NONE] -->
   <string name="content_description_rtt_chat_avatar">Avatar</string>
+
+  <!-- Text for back button. [CHAR LIMIT=20] -->
+  <string name="rtt_button_back">Back</string>
+
 </resources>

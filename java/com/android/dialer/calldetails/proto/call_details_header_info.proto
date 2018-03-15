@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.calldetails";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+import "java/com/android/dialer/phonenumberproto/dialer_phone_number.proto";
+import "java/com/android/dialer/glidephotomanager/photo_info.proto";
+
+package com.android.dialer.calldetails;
+
+// Contains information for the header in CallDetailsActivity
+// Next ID: 5
+message CallDetailsHeaderInfo {
+  // The number of all call detail entries.
+  optional com.android.dialer.DialerPhoneNumber dialer_phone_number = 1;
+
+  // Information used to load the contact photo.
+  optional com.android.dialer.glidephotomanager.PhotoInfo photo_info = 2;
+
+  // Primary text of the header, which can be
+  // (1) a presentation name (e.g., "Restricted", "Unknown", etc.),
+  // (2) the contact name, or
+  // (3) the formatted number.
+  optional string primary_text = 3;
+
+  // Secondary test of the header, which describes the number.
+  // Some examples are:
+  //   "Mobile • 555-1234",
+  //   "Blocked • Mobile • 555-1234", and
+  //   "Spam • Mobile • 555-1234".
+  optional string secondary_text = 4;
+
+  // TODO(a bug): Add SIM info.
+}
