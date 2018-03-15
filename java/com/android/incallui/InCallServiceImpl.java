@@ -111,10 +111,8 @@ public class InCallServiceImpl extends InCallService {
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
-    if (ReturnToCallController.isEnabled(this)) {
-      returnToCallController =
-          new ReturnToCallController(this, ContactInfoCache.getInstance(context));
-    }
+    returnToCallController =
+        new ReturnToCallController(this, ContactInfoCache.getInstance(context));
     feedbackListener = FeedbackComponent.get(context).getCallFeedbackListener();
     CallList.getInstance().addListener(feedbackListener);
 
