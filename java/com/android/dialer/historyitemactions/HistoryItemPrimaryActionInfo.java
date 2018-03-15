@@ -49,7 +49,7 @@ public abstract class HistoryItemPrimaryActionInfo {
   @Nullable
   public abstract Intent intent();
 
-  // TODO(zachh): Add SIM info here if should be shown in bottom sheet.
+  // TODO(a bug): Add SIM info.
 
   /** Builder for {@link HistoryItemPrimaryActionInfo}. */
   @AutoValue.Builder

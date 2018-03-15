@@ -28,7 +28,6 @@ import com.android.dialer.calldetails.CallDetailsFooterViewHolder.ReportCallIdLi
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.Assert;
-import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.protos.ProtoParsers;
 
@@ -42,26 +41,27 @@ import com.android.dialer.protos.ProtoParsers;
  */
 public final class CallDetailsActivity extends CallDetailsActivityCommon {
   public static final String EXTRA_COALESCED_CALL_LOG_IDS = "coalesced_call_log_ids";
-  public static final String EXTRA_CONTACT = "contact";
+  public static final String EXTRA_HEADER_INFO = "header_info";
 
   private static final int CALL_DETAILS_LOADER_ID = 0;
 
   /** IDs of call log entries, used to retrieve them from the annotated call log. */
   private CoalescedIds coalescedCallLogIds;
 
-  private DialerContact contact;
+  /** Info to be shown in the header. */
+  private CallDetailsHeaderInfo headerInfo;
 
   /** Returns an {@link Intent} to launch this activity. */
   public static Intent newInstance(
       Context context,
       CoalescedIds coalescedAnnotatedCallLogIds,
-      DialerContact contact,
+      CallDetailsHeaderInfo callDetailsHeaderInfo,
       boolean canReportCallerId,
       boolean canSupportAssistedDialing) {
     Intent intent = new Intent(context, CallDetailsActivity.class);
-    ProtoParsers.put(intent, EXTRA_CONTACT, Assert.isNotNull(contact));
     ProtoParsers.put(
         intent, EXTRA_COALESCED_CALL_LOG_IDS, Assert.isNotNull(coalescedAnnotatedCallLogIds));
+    ProtoParsers.put(intent, EXTRA_HEADER_INFO, Assert.isNotNull(callDetailsHeaderInfo));
     intent.putExtra(EXTRA_CAN_REPORT_CALLER_ID, canReportCallerId);
     intent.putExtra(EXTRA_CAN_SUPPORT_ASSISTED_DIALING, canSupportAssistedDialing);
     return intent;
@@ -70,14 +70,17 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
   @Override
   protected void handleIntent(Intent intent) {
     Assert.checkArgument(intent.hasExtra(EXTRA_COALESCED_CALL_LOG_IDS));
+    Assert.checkArgument(intent.hasExtra(EXTRA_HEADER_INFO));
     Assert.checkArgument(intent.hasExtra(EXTRA_CAN_REPORT_CALLER_ID));
     Assert.checkArgument(intent.hasExtra(EXTRA_CAN_SUPPORT_ASSISTED_DIALING));
 
-    contact = ProtoParsers.getTrusted(intent, EXTRA_CONTACT, DialerContact.getDefaultInstance());
     setCallDetailsEntries(CallDetailsEntries.getDefaultInstance());
     coalescedCallLogIds =
         ProtoParsers.getTrusted(
             intent, EXTRA_COALESCED_CALL_LOG_IDS, CoalescedIds.getDefaultInstance());
+    headerInfo =
+        ProtoParsers.getTrusted(
+            intent, EXTRA_HEADER_INFO, CallDetailsHeaderInfo.getDefaultInstance());
 
     getLoaderManager()
         .initLoader(
@@ -91,7 +94,7 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
       DeleteCallDetailsListener deleteCallDetailsListener) {
     return new CallDetailsAdapter(
         this,
-        contact,
+        headerInfo,
         getCallDetailsEntries(),
         callDetailsHeaderListener,
         reportCallIdListener,
@@ -100,7 +103,7 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
 
   @Override
   protected String getNumber() {
-    return contact.getNumber();
+    return headerInfo.getDialerPhoneNumber().getNormalizedNumber();
   }
 
   /**
