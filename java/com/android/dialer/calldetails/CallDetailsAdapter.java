@@ -16,12 +16,12 @@
 
 package com.android.dialer.calldetails;
 
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
-import com.android.dialer.dialercontact.DialerContact;
 
 /**
  * A {@link RecyclerView.Adapter} for {@link CallDetailsActivity}.
@@ -31,11 +31,12 @@ import com.android.dialer.dialercontact.DialerContact;
  */
 final class CallDetailsAdapter extends CallDetailsAdapterCommon {
 
-  private final DialerContact contact;
+  /** Info to be shown in the header. */
+  private final CallDetailsHeaderInfo headerInfo;
 
   CallDetailsAdapter(
       Context context,
-      DialerContact contact,
+      CallDetailsHeaderInfo calldetailsHeaderInfo,
       CallDetailsEntries callDetailsEntries,
       CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
@@ -46,26 +47,29 @@ final class CallDetailsAdapter extends CallDetailsAdapterCommon {
         callDetailsHeaderListener,
         reportCallIdListener,
         deleteCallDetailsListener);
-    this.contact = contact;
+    this.headerInfo = calldetailsHeaderInfo;
   }
 
   @Override
   protected CallDetailsHeaderViewHolder createCallDetailsHeaderViewHolder(
       View container, CallDetailsHeaderListener callDetailsHeaderListener) {
     return new CallDetailsHeaderViewHolder(
-        container, contact.getNumber(), contact.getPostDialDigits(), callDetailsHeaderListener);
+        container,
+        headerInfo.getDialerPhoneNumber().getNormalizedNumber(),
+        headerInfo.getDialerPhoneNumber().getPostDialPortion(),
+        callDetailsHeaderListener);
   }
 
   @Override
   protected void bindCallDetailsHeaderViewHolder(
       CallDetailsHeaderViewHolder callDetailsHeaderViewHolder, int position) {
-    callDetailsHeaderViewHolder.updateContactInfo(contact, getCallbackAction());
+    callDetailsHeaderViewHolder.updateContactInfo(headerInfo, getCallbackAction());
     callDetailsHeaderViewHolder.updateAssistedDialingInfo(
         getCallDetailsEntries().getEntries(position));
   }
 
   @Override
   protected String getNumber() {
-    return contact.getNumber();
+    return headerInfo.getDialerPhoneNumber().getNormalizedNumber();
   }
 }
