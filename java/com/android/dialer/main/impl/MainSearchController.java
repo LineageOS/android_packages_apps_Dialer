@@ -110,6 +110,15 @@ public class MainSearchController implements SearchBarListener {
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
   public void showDialpadFromNewIntent() {
     LogUtil.enterBlock("MainSearchController.showDialpadFromNewIntent");
+    if (isDialpadVisible()) {
+      // One scenario where this can happen is if the user has the dialpad open when the receive a
+      // call and press add call in the in call ui which calls this method.
+      LogUtil.i("MainSearchController.showDialpadFromNewIntent", "Dialpad is already visible.");
+
+      // Mark started from new intent in case there is a phone number in the intent
+      getDialpadFragment().setStartedFromNewIntent(true);
+      return;
+    }
     showDialpad(/* animate=*/ false, /* fromNewIntent=*/ true);
   }
 
