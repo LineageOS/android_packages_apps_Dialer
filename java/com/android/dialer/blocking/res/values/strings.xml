@@ -29,7 +29,7 @@
   </string>
 
   <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
-  <string name="block_number_confirmation_title">
+  <string name="old_block_number_confirmation_title">
     Block<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
   </string>
 

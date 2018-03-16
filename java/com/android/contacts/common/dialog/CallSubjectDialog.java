@@ -331,7 +331,7 @@ public class CallSubjectDialog extends Activity {
       mNumberView.setText(
           TextUtils.isEmpty(mNumberLabel)
               ? mDisplayNumber
-              : getString(R.string.call_subject_type_and_number, mNumberLabel, mDisplayNumber));
+              : getString(R.string.old_call_subject_type_and_number, mNumberLabel, mDisplayNumber));
     } else {
       mNumberView.setVisibility(View.GONE);
       mNumberView.setText(null);
