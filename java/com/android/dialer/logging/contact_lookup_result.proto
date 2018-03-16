@@ -100,5 +100,8 @@ message ContactLookupResult {
     // Number was found in Dialer's local cache and was originally identified
     // as REMOTE_KNOWLEDGE_GRAPH
     LOCAL_CACHE_REMOTE_KNOWLEDGE_GRAPH = 25;
+
+    // Number was identified via Cequint caller ID.
+    CEQUINT = 26;
   }
 }
