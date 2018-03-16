@@ -680,11 +680,8 @@
        [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">
     Let Google review this and future voicemail messages with transcripts.
-    They\'ll be stored anonymously. Change Settings anytime.
+    They\'ll be stored anonymously. Change Settings any time. <xliff:g example="Learn more">%1$s</xliff:g>
   </string>
-
-  <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
-  <string name="voicemail_donation_promo_learn_more">Learn&#160;more</string>
 
   <string translatable="false" name="voicemail_donation_promo_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
 
@@ -721,8 +718,4 @@
   <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
         to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
   <string name="multiple_ec_data_deleted">Calls deleted. View and delete attachments shared during calls in Messages.</string>
-
-  <!-- Name of launcher shortcut for the new UI main activity.
-       TODO(38502365): Remove this once we're ready to launch the new UI. -->
-  <string translatable="false" name="nui_shortcut_name">Phone NUI</string>
 </resources>

@@ -46,12 +46,12 @@
 
     <!-- Required for actionmode/multiselect to render properly. -->
     <!-- TODO(calderwoodra): Check to see if we can remove this after NewVoicemailFragment launches -->
-    <item name="actionModeStyle">@style/ActionModeStyle</item>
+    <item name="actionModeStyle">@style/NuiActionModeStyle</item>
     <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
   </style>
 
   <!-- Colors our actionbar in action mode to dialer theme color. -->
-  <style name="ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+  <style name="NuiActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
     <item name="background">@color/dialer_theme_color</item>
     <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>
   </style>

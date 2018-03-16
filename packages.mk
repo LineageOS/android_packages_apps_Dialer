@@ -59,6 +59,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.shortcuts \
 	com.android.dialer.simulator.impl \
 	com.android.dialer.speeddial \
+	com.android.dialer.spannable \
 	com.android.dialer.theme \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \

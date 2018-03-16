@@ -17,11 +17,13 @@
 package com.android.incallui.rtt.impl;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
@@ -46,9 +48,10 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
-import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.hold.OnHoldFragment;
+import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegateFactory;
@@ -99,6 +102,7 @@ public class RttChatFragment extends Fragment
   private Chronometer chronometer;
   private boolean isTimerStarted;
   private RttOverflowMenu overflowMenu;
+  private SecondaryInfo savedSecondaryInfo;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -124,6 +128,9 @@ public class RttChatFragment extends Fragment
     if (savedInstanceState != null) {
       inCallButtonUiDelegate.onRestoreInstanceState(savedInstanceState);
     }
+    inCallScreenDelegate =
+        FragmentUtils.getParentUnsafe(this, InCallScreenDelegateFactory.class)
+            .newInCallScreenDelegate();
     // Prevent updating local message until UI is ready.
     isClearingInput = true;
   }
@@ -133,9 +140,6 @@ public class RttChatFragment extends Fragment
     super.onViewCreated(view, bundle);
     LogUtil.i("RttChatFragment.onViewCreated", null);
 
-    inCallScreenDelegate =
-        FragmentUtils.getParentUnsafe(this, InCallScreenDelegateFactory.class)
-            .newInCallScreenDelegate();
     rttCallScreenDelegate =
         FragmentUtils.getParentUnsafe(this, RttCallScreenDelegateFactory.class)
             .newRttCallScreenDelegate(this);
@@ -185,7 +189,7 @@ public class RttChatFragment extends Fragment
           inCallButtonUiDelegate.onEndCallClicked();
         });
 
-    overflowMenu = new RttOverflowMenu(getContext(), inCallButtonUiDelegate);
+    overflowMenu = new RttOverflowMenu(getContext(), inCallButtonUiDelegate, inCallScreenDelegate);
     view.findViewById(R.id.rtt_overflow_button)
         .setOnClickListener(
             v -> {
@@ -311,7 +315,36 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
-  public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {}
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    if (savedSecondaryInfo != null) {
+      setSecondary(savedSecondaryInfo);
+    }
+  }
+
+  @Override
+  public void setSecondary(@NonNull SecondaryInfo secondaryInfo) {
+    LogUtil.i("RttChatFragment.setSecondary", secondaryInfo.toString());
+    if (!isAdded()) {
+      savedSecondaryInfo = secondaryInfo;
+      return;
+    }
+    savedSecondaryInfo = null;
+    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+    Fragment oldBanner = getChildFragmentManager().findFragmentById(R.id.rtt_on_hold_banner);
+    if (secondaryInfo.shouldShow()) {
+      OnHoldFragment onHoldFragment = OnHoldFragment.newInstance(secondaryInfo);
+      onHoldFragment.setPadTopInset(false);
+      transaction.replace(R.id.rtt_on_hold_banner, onHoldFragment);
+    } else {
+      if (oldBanner != null) {
+        transaction.remove(oldBanner);
+      }
+    }
+    transaction.setCustomAnimations(R.anim.abc_slide_in_top, R.anim.abc_slide_out_top);
+    transaction.commitNowAllowingStateLoss();
+    overflowMenu.enableSwitchToSecondaryButton(secondaryInfo.shouldShow());
+  }
 
   @Override
   public void setCallState(@NonNull PrimaryCallState primaryCallState) {
@@ -372,7 +405,11 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
-  public void showButton(int buttonId, boolean show) {}
+  public void showButton(int buttonId, boolean show) {
+    if (buttonId == InCallButtonIds.BUTTON_SWAP) {
+      overflowMenu.enableSwapCallButton(show);
+    }
+  }
 
   @Override
   public void enableButton(int buttonId, boolean enable) {}
@@ -409,8 +446,12 @@ public class RttChatFragment extends Fragment
 
   @Override
   public void showAudioRouteSelector() {
-    AudioRouteSelectorDialogFragment.newInstance(inCallButtonUiDelegate.getCurrentAudioState())
-        .show(getChildFragmentManager(), null);
+    AudioSelectMenu audioSelectMenu =
+        new AudioSelectMenu(
+            getContext(),
+            inCallButtonUiDelegate,
+            () -> overflowMenu.showAtLocation(getView(), Gravity.TOP | Gravity.RIGHT, 0, 0));
+    audioSelectMenu.showAtLocation(getView(), Gravity.TOP | Gravity.RIGHT, 0, 0);
   }
 
   @Override

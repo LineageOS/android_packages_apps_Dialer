@@ -16,120 +16,60 @@
 
 package com.android.dialer.calldetails;
 
+
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import android.view.View;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
-import com.android.dialer.calllogutils.CallTypeHelper;
-import com.android.dialer.calllogutils.CallbackActionHelper;
-import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
-import com.android.dialer.common.Assert;
-import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.duo.DuoComponent;
-import java.util.List;
 
-/** Adapter for RecyclerView in {@link CallDetailsActivity}. */
-final class CallDetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+/**
+ * A {@link RecyclerView.Adapter} for {@link CallDetailsActivity}.
+ *
+ * <p>See {@link CallDetailsAdapterCommon} for logic shared between this adapter and {@link
+ * OldCallDetailsAdapter}.
+ */
+final class CallDetailsAdapter extends CallDetailsAdapterCommon {
 
-  private static final int HEADER_VIEW_TYPE = 1;
-  private static final int CALL_ENTRY_VIEW_TYPE = 2;
-  private static final int FOOTER_VIEW_TYPE = 3;
-
-  private final DialerContact contact;
-  private final CallDetailsHeaderListener callDetailsHeaderListener;
-  private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener;
-  private final DeleteCallDetailsListener deleteCallDetailsListener;
-  private final CallTypeHelper callTypeHelper;
-  private List<CallDetailsEntry> callDetailsEntries;
+  /** Info to be shown in the header. */
+  private final CallDetailsHeaderInfo headerInfo;
 
   CallDetailsAdapter(
       Context context,
-      @NonNull DialerContact contact,
-      @NonNull List<CallDetailsEntry> callDetailsEntries,
+      CallDetailsHeaderInfo calldetailsHeaderInfo,
+      CallDetailsEntries callDetailsEntries,
       CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
-    this.contact = Assert.isNotNull(contact);
-    this.callDetailsEntries = callDetailsEntries;
-    this.callDetailsHeaderListener = callDetailsHeaderListener;
-    this.reportCallIdListener = reportCallIdListener;
-    this.deleteCallDetailsListener = deleteCallDetailsListener;
-    callTypeHelper = new CallTypeHelper(context.getResources(), DuoComponent.get(context).getDuo());
+    super(
+        context,
+        callDetailsEntries,
+        callDetailsHeaderListener,
+        reportCallIdListener,
+        deleteCallDetailsListener);
+    this.headerInfo = calldetailsHeaderInfo;
   }
 
   @Override
-  public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    switch (viewType) {
-      case HEADER_VIEW_TYPE:
-        return new CallDetailsHeaderViewHolder(
-            inflater.inflate(R.layout.contact_container, parent, false), callDetailsHeaderListener);
-      case CALL_ENTRY_VIEW_TYPE:
-        return new CallDetailsEntryViewHolder(
-            inflater.inflate(R.layout.call_details_entry, parent, false));
-      case FOOTER_VIEW_TYPE:
-        return new CallDetailsFooterViewHolder(
-            inflater.inflate(R.layout.call_details_footer, parent, false),
-            reportCallIdListener,
-            deleteCallDetailsListener);
-      default:
-        throw Assert.createIllegalStateFailException(
-            "No ViewHolder available for viewType: " + viewType);
-    }
+  protected CallDetailsHeaderViewHolder createCallDetailsHeaderViewHolder(
+      View container, CallDetailsHeaderListener callDetailsHeaderListener) {
+    return new CallDetailsHeaderViewHolder(
+        container,
+        headerInfo.getDialerPhoneNumber().getNormalizedNumber(),
+        headerInfo.getDialerPhoneNumber().getPostDialPortion(),
+        callDetailsHeaderListener);
   }
 
   @Override
-  public void onBindViewHolder(ViewHolder holder, int position) {
-    if (position == 0) { // Header
-      ((CallDetailsHeaderViewHolder) holder).updateContactInfo(contact, getCallbackAction());
-      ((CallDetailsHeaderViewHolder) holder)
-          .updateAssistedDialingInfo(callDetailsEntries.get(position));
-    } else if (position == getItemCount() - 1) {
-      ((CallDetailsFooterViewHolder) holder).setPhoneNumber(contact.getNumber());
-    } else {
-      CallDetailsEntryViewHolder viewHolder = (CallDetailsEntryViewHolder) holder;
-      CallDetailsEntry entry = callDetailsEntries.get(position - 1);
-      viewHolder.setCallDetails(
-          contact.getNumber(),
-          entry,
-          callTypeHelper,
-          !entry.getHistoryResultsList().isEmpty() && position != getItemCount() - 2);
-    }
+  protected void bindCallDetailsHeaderViewHolder(
+      CallDetailsHeaderViewHolder callDetailsHeaderViewHolder, int position) {
+    callDetailsHeaderViewHolder.updateContactInfo(headerInfo, getCallbackAction());
+    callDetailsHeaderViewHolder.updateAssistedDialingInfo(
+        getCallDetailsEntries().getEntries(position));
   }
 
   @Override
-  public int getItemViewType(int position) {
-    if (position == 0) { // Header
-      return HEADER_VIEW_TYPE;
-    } else if (position == getItemCount() - 1) {
-      return FOOTER_VIEW_TYPE;
-    } else {
-      return CALL_ENTRY_VIEW_TYPE;
-    }
-  }
-
-  @Override
-  public int getItemCount() {
-    return callDetailsEntries.isEmpty()
-        ? 0
-        : callDetailsEntries.size() + 2; // plus header and footer
-  }
-
-  void updateCallDetailsEntries(List<CallDetailsEntry> entries) {
-    callDetailsEntries = entries;
-    notifyDataSetChanged();
-  }
-
-  private @CallbackAction int getCallbackAction() {
-    Assert.checkState(!callDetailsEntries.isEmpty());
-
-    CallDetailsEntry entry = callDetailsEntries.get(0);
-    return CallbackActionHelper.getCallbackAction(
-        contact.getNumber(), entry.getFeatures(), entry.getIsDuoCall());
+  protected String getNumber() {
+    return headerInfo.getDialerPhoneNumber().getNormalizedNumber();
   }
 }
