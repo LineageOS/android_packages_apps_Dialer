@@ -16,23 +16,15 @@
 
 package com.android.dialer.main.impl;
 
-import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
-import android.support.v4.content.pm.ShortcutInfoCompat;
-import android.support.v4.content.pm.ShortcutManagerCompat;
-import android.support.v4.graphics.drawable.IconCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.main.Main;
 import javax.inject.Inject;
 
 /** The entry point for the main feature. */
 final class MainImpl implements Main {
-  private static final String SHORTCUT_KEY = "nui_launcher_shortcut";
 
   @Inject
   MainImpl() {}
@@ -45,11 +37,6 @@ final class MainImpl implements Main {
   @Override
   public void createNewUiLauncherShortcut(Context context) {
     enableComponent(context);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      createLauncherShortcutO(context);
-    } else {
-      createLauncherShortcutPreO(context);
-    }
   }
 
   /**
@@ -74,26 +61,5 @@ final class MainImpl implements Main {
             new ComponentName(context, MainActivity.class),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
             PackageManager.DONT_KILL_APP);
-  }
-
-  @TargetApi(VERSION_CODES.O)
-  private static void createLauncherShortcutO(Context context) {
-    ShortcutInfoCompat shortcutInfo =
-        new ShortcutInfoCompat.Builder(context, SHORTCUT_KEY)
-            .setIcon(IconCompat.createWithResource(context, R.drawable.nui_launcher_icon))
-            .setIntent(MainActivity.getIntent(context))
-            .setShortLabel(context.getString(R.string.nui_shortcut_name))
-            .build();
-    ShortcutManagerCompat.requestPinShortcut(context, shortcutInfo, null);
-  }
-
-  private static void createLauncherShortcutPreO(Context context) {
-    Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-    intent.putExtra(
-        Intent.EXTRA_SHORTCUT_ICON,
-        Intent.ShortcutIconResource.fromContext(context, R.drawable.nui_launcher_icon));
-    intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getString(R.string.nui_shortcut_name));
-    intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, MainActivity.getIntent(context));
-    context.sendBroadcast(intent);
   }
 }
