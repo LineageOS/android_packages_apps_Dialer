@@ -108,6 +108,11 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onUiShowing(boolean showing) {
+    if (!isEnabled(context)) {
+      hide();
+      return;
+    }
+
     LogUtil.i("ReturnToCallController.onUiShowing", "showing: " + showing);
     if (showing) {
       LogUtil.i("ReturnToCallController.onUiShowing", "going to hide");
@@ -155,8 +160,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     canShowBubblesForTesting = canShowBubbles;
   }
 
-  @VisibleForTesting
-  public Bubble startBubble() {
+  private Bubble startBubble() {
     if (!canShowBubbles(context)) {
       LogUtil.i("ReturnToCallController.startBubble", "can't show bubble, no permission");
       return null;
@@ -178,6 +182,11 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onCallListChange(CallList callList) {
+    if (!isEnabled(context)) {
+      hide();
+      return;
+    }
+
     if ((bubble == null || !bubble.isVisible())
         && getCall() != null
         && !InCallPresenter.getInstance().isShowingInCallUi()) {
@@ -188,6 +197,11 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onDisconnect(DialerCall call) {
+    if (!isEnabled(context)) {
+      hide();
+      return;
+    }
+
     LogUtil.enterBlock("ReturnToCallController.onDisconnect");
     if (bubble != null && bubble.isVisible() && (getCall() == null)) {
       // Show "Call ended" and hide bubble when there is no outgoing, active or background call
@@ -214,6 +228,11 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   @Override
   public void onAudioStateChanged(CallAudioState audioState) {
+    if (!isEnabled(context)) {
+      hide();
+      return;
+    }
+
     this.audioState = audioState;
     if (bubble != null) {
       bubble.updateActions(generateActions());
