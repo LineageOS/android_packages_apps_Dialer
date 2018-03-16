@@ -29,15 +29,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
+import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 
 /** ViewHolder for a directory contact row. */
@@ -49,10 +47,12 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
   private final TextView numberView;
   private final QuickContactBadge photo;
   private final ImageView workBadge;
+  private final RowClickListener listener;
 
   private String number;
+  private int position;
 
-  public DirectoryContactViewHolder(View view) {
+  public DirectoryContactViewHolder(View view, RowClickListener listener) {
     super(view);
     view.setOnClickListener(this);
     photo = view.findViewById(R.id.photo);
@@ -60,6 +60,7 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
     numberView = view.findViewById(R.id.secondary);
     workBadge = view.findViewById(R.id.work_icon);
     context = view.getContext();
+    this.listener = listener;
   }
 
   /**
@@ -68,6 +69,7 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
    */
   public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
+    position = cursor.getPosition();
     String name = cursor.getString(Projections.DISPLAY_NAME);
     String label = getLabel(context.getResources(), cursor);
     String secondaryInfo =
@@ -139,6 +141,6 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View v) {
-    PreCall.start(context, new CallIntentBuilder(number, CallInitiationType.Type.REGULAR_SEARCH));
+    listener.placeVoiceCall(number, position);
   }
 }

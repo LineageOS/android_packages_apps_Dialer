@@ -70,7 +70,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
             rowClickListener);
       case RowType.NEARBY_PLACES_ROW:
         return new NearbyPlaceViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
+            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false),
+            rowClickListener);
       case RowType.CONTACT_HEADER:
       case RowType.DIRECTORY_HEADER:
       case RowType.NEARBY_PLACES_HEADER:
@@ -78,7 +79,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
             LayoutInflater.from(context).inflate(R.layout.header_layout, root, false));
       case RowType.DIRECTORY_ROW:
         return new DirectoryContactViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false));
+            LayoutInflater.from(context).inflate(R.layout.search_contact_row, root, false),
+            rowClickListener);
       case RowType.SEARCH_ACTION:
         return new SearchActionViewHolder(
             LayoutInflater.from(context).inflate(R.layout.search_action_layout, root, false));
