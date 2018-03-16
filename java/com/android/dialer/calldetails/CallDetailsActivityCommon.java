@@ -350,6 +350,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     @Override
     public void delete() {
       CallDetailsActivityCommon activity = getActivity();
+      Logger.get(activity).logImpression(DialerImpression.Type.USER_DELETED_CALL_LOG_ITEM);
       DialerExecutorComponent.get(activity)
           .dialerExecutorFactory()
           .createNonUiTaskBuilder(new DeleteCallsWorker(activity))
