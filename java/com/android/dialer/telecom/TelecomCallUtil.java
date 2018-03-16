@@ -22,14 +22,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.telecom.Call;
-import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
-import android.telephony.SubscriptionInfo;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.LogUtil;
+import com.android.dialer.location.GeoUtil;
 import com.google.common.base.Optional;
-import java.util.Locale;
 
 /**
  * Class to provide a standard interface for obtaining information from the underlying
@@ -72,11 +69,12 @@ public class TelecomCallUtil {
   }
 
   /**
-   * Normalizes the number of the {@code call} to E.164. The country of the SIM associated with the
-   * call is used to determine the country.
+   * Normalizes the number of the {@code call} to E.164. If the number for the call does not contain
+   * a country code, then the current location as defined by {@link
+   * GeoUtil#getCurrentCountryIso(Context)} is used.
    *
-   * <p>If the number cannot be formatted (because for example the country cannot be determined),
-   * returns the number with non-dialable digits removed.
+   * <p>If the number cannot be formatted (because for example number is invalid), returns the
+   * number with non-dialable digits removed.
    */
   @WorkerThread
   public static Optional<String> getNormalizedNumber(Context appContext, Call call) {
@@ -94,11 +92,12 @@ public class TelecomCallUtil {
   }
 
   /**
-   * Formats the number of the {@code call} to E.164 if it is valid. The country of the SIM
-   * associated with the call is used to determine the country.
+   * Formats the number of the {@code call} to E.164 if it is valid. If the number for the call does
+   * not contain a country code, then the current location as defined by {@link
+   * GeoUtil#getCurrentCountryIso(Context)} is used.
    *
-   * <p>If the number cannot be formatted (because for example it is invalid or the country cannot
-   * be determined), returns {@link Optional#absent()}.
+   * <p>If the number cannot be formatted (because for example it is invalid), returns {@link
+   * Optional#absent()}.
    */
   @WorkerThread
   public static Optional<String> getValidE164Number(Context appContext, Call call) {
@@ -107,23 +106,7 @@ public class TelecomCallUtil {
     if (TextUtils.isEmpty(rawNumber)) {
       return Optional.absent();
     }
-    Optional<String> countryCode = getCountryCode(appContext, call);
-    if (!countryCode.isPresent()) {
-      LogUtil.w("TelecomCallUtil.getValidE164Number", "couldn't find a country code for call");
-      return Optional.absent();
-    }
-    return Optional.fromNullable(PhoneNumberUtils.formatNumberToE164(rawNumber, countryCode.get()));
-  }
-
-  @WorkerThread
-  public static Optional<String> getCountryCode(Context appContext, Call call) {
-    Assert.isWorkerThread();
-    PhoneAccountHandle phoneAccountHandle = call.getDetails().getAccountHandle();
-    Optional<SubscriptionInfo> subscriptionInfo =
-        TelecomUtil.getSubscriptionInfo(appContext, phoneAccountHandle);
-    if (subscriptionInfo.isPresent() && subscriptionInfo.get().getCountryIso() != null) {
-      return Optional.of(subscriptionInfo.get().getCountryIso().toUpperCase(Locale.US));
-    }
-    return Optional.absent();
+    return Optional.fromNullable(
+        PhoneNumberUtils.formatNumberToE164(rawNumber, GeoUtil.getCurrentCountryIso(appContext)));
   }
 }
