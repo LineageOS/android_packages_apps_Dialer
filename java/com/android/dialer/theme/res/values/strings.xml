@@ -32,4 +32,10 @@
 
   <!-- Label shown on the 'positive' button for the dialog. Indicates that the call will proceed -->
   <string name="call">Call</string>
+
+  <!-- String used to build a phone number type and phone number string.
+     Example: Mobile 650-555-1212  -->
+  <string name="call_subject_type_and_number">
+    <xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g>
+  </string>
 </resources>

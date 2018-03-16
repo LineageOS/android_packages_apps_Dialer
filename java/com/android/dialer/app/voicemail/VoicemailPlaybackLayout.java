@@ -234,7 +234,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
         getResources().getDrawable(R.drawable.ic_voicemail_seek_handle, context.getTheme());
     voicemailSeekHandleDisabled =
         getResources()
-            .getDrawable(R.drawable.ic_voicemail_seek_handle_disabled, context.getTheme());
+            .getDrawable(R.drawable.old_ic_voicemail_seek_handle_disabled, context.getTheme());
   }
 
   @Override

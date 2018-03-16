@@ -16,22 +16,14 @@
 
 package com.android.dialer.app;
 
-import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
-import android.support.v4.content.pm.ShortcutInfoCompat;
-import android.support.v4.content.pm.ShortcutManagerCompat;
-import android.support.v4.graphics.drawable.IconCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 
 /** This class is a copy of dialer.main.impl.MainImpl to get around a dependency issue. */
 public class MainComponent {
-
-  private static final String SHORTCUT_KEY = "nui_launcher_shortcut";
 
   public static boolean isNewUiEnabled(Context context) {
     return ConfigProviderBindings.get(context).getBoolean("is_nui_shortcut_enabled", false);
@@ -39,11 +31,6 @@ public class MainComponent {
 
   public static void createNewUiLauncherShortcut(Context context) {
     enableComponent(context);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      createLauncherShortcutO(context);
-    } else {
-      createLauncherShortcutPreO(context);
-    }
   }
 
   public static boolean isNuiComponentEnabled(Context context) {
@@ -68,27 +55,6 @@ public class MainComponent {
             new ComponentName(context, getComponentName()),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP);
-  }
-
-  @TargetApi(VERSION_CODES.O)
-  private static void createLauncherShortcutO(Context context) {
-    ShortcutInfoCompat shortcutInfo =
-        new ShortcutInfoCompat.Builder(context, SHORTCUT_KEY)
-            .setIcon(IconCompat.createWithResource(context, R.drawable.nui_launcher_icon))
-            .setIntent(getIntent(context))
-            .setShortLabel(context.getString(R.string.nui_shortcut_name))
-            .build();
-    ShortcutManagerCompat.requestPinShortcut(context, shortcutInfo, null);
-  }
-
-  private static void createLauncherShortcutPreO(Context context) {
-    Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-    intent.putExtra(
-        Intent.EXTRA_SHORTCUT_ICON,
-        Intent.ShortcutIconResource.fromContext(context, R.drawable.nui_launcher_icon));
-    intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getString(R.string.nui_shortcut_name));
-    intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, getIntent(context));
-    context.sendBroadcast(intent);
   }
 
   /**
