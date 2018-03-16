@@ -16,10 +16,12 @@
 
 package com.android.dialer.location;
 
+import android.Manifest.permission;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -35,7 +37,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.util.PermissionsUtil;
 import java.util.List;
 import java.util.Locale;
 
@@ -98,8 +99,9 @@ public class CountryDetector {
     }
   }
 
+  @SuppressWarnings("missingPermission")
   private static void registerForLocationUpdates(Context context, LocationManager locationManager) {
-    if (!PermissionsUtil.hasLocationPermissions(context)) {
+    if (!hasLocationPermissions(context)) {
       LogUtil.w(
           "CountryDetector.registerForLocationUpdates",
           "no location permissions, not registering for location updates");
@@ -163,7 +165,7 @@ public class CountryDetector {
   @Nullable
   private String getLocationBasedCountryIso() {
     if (!Geocoder.isPresent()
-        || !PermissionsUtil.hasLocationPermissions(appContext)
+        || !hasLocationPermissions(appContext)
         || !UserManagerCompat.isUserUnlocked(appContext)) {
       return null;
     }
@@ -264,5 +266,10 @@ public class CountryDetector {
       }
       return null;
     }
+  }
+
+  private static boolean hasLocationPermissions(Context context) {
+    return context.checkSelfPermission(permission.ACCESS_FINE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED;
   }
 }

@@ -22,7 +22,12 @@ import android.os.Trace;
 /** Static methods related to Geo. */
 public class GeoUtil {
 
-  /** @return the ISO 3166-1 two letters country code of the country the user is in. */
+  /**
+   * Return the ISO 3166-1 two letters country code of the country the user is in.
+   *
+   * <p>WARNING: {@link CountryDetector} caches TelephonyManager and other system services in a
+   * static. {@link CountryDetector#instance} must be reset in tests.
+   */
   public static String getCurrentCountryIso(Context context) {
     // The {@link CountryDetector} should never return null so this is safe to return as-is.
     Trace.beginSection("GeoUtil.getCurrentCountryIso");
