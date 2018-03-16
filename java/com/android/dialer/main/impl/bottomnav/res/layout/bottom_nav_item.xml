@@ -32,17 +32,19 @@
         android:id="@+id/bottom_nav_item_image"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/notification_badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
+        android:layout_marginTop="2dp"
         android:paddingStart="6dp"
         android:paddingEnd="6dp"
+        android:paddingBottom="1dp"
         android:minHeight="20dp"
-        android:minWidth="18dp"
+        android:minWidth="20dp"
         android:gravity="center"
         android:textSize="12sp"
         android:textColor="@color/dialer_primary_text_color_white"
