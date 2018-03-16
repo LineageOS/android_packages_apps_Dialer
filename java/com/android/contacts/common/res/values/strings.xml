@@ -395,7 +395,7 @@
 
   <!-- String used to build a phone number type and phone number string.
        Example: Mobile 650-555-1212  -->
-  <string name="call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
+  <string name="old_call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
 
   <!-- String format to describe a tab e.g.call history tab. -->
   <string name="tab_title"><xliff:g id="title">%1$s</xliff:g> tab.</string>
