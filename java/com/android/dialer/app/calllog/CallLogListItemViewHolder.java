@@ -441,6 +441,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       blockReportListener.onReportNotSpam(
           displayNumber, number, countryIso, callType, info.sourceType);
     } else if (resId == R.id.context_menu_delete) {
+      Logger.get(context).logImpression(DialerImpression.Type.USER_DELETED_CALL_LOG_ITEM);
       AsyncTaskExecutors.createAsyncTaskExecutor()
           .submit(TASK_DELETE, new DeleteCallTask(context, callIds));
     }
