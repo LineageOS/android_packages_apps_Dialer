@@ -130,9 +130,19 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
   }
 
   private static Uri getContactUri(SearchCursor cursor) {
-    long contactId = cursor.getLong(Projections.ID);
     String lookupKey = cursor.getString(Projections.LOOKUP_KEY);
-    return Contacts.getLookupUri(contactId, lookupKey)
+
+    Uri baseUri;
+    // If the contact is a local work contact, leave the contact id out of the uri since it
+    // isn't valid.
+    if (DirectoryCompat.isOnlyEnterpriseDirectoryId(cursor.getDirectoryId())) {
+      baseUri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, lookupKey);
+    } else {
+      long contactId = cursor.getLong(Projections.ID);
+      baseUri = Contacts.getLookupUri(contactId, lookupKey);
+    }
+
+    return baseUri
         .buildUpon()
         .appendQueryParameter(
             ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(cursor.getDirectoryId()))
