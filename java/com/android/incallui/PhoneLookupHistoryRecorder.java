@@ -24,6 +24,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
@@ -61,8 +62,7 @@ final class PhoneLookupHistoryRecorder {
               DialerPhoneNumberUtil dialerPhoneNumberUtil =
                   new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
               return dialerPhoneNumberUtil.parse(
-                  TelecomCallUtil.getNumber(call),
-                  TelecomCallUtil.getCountryCode(appContext, call).orNull());
+                  TelecomCallUtil.getNumber(call), GeoUtil.getCurrentCountryIso(appContext));
             });
 
     ListenableFuture<PhoneLookupInfo> infoFuture =
