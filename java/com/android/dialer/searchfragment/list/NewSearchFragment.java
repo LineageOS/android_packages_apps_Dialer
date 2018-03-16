@@ -509,28 +509,27 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public void placeVoiceCall(String phoneNumber, int ranking) {
-    placeCall(phoneNumber, ranking, false, true);
+    placeCall(phoneNumber, ranking, false);
   }
 
   @Override
   public void placeVideoCall(String phoneNumber, int ranking) {
-    placeCall(phoneNumber, ranking, true, false);
+    placeCall(phoneNumber, ranking, true);
   }
 
-  private void placeCall(
-      String phoneNumber, int position, boolean isVideoCall, boolean allowAssistedDial) {
+  private void placeCall(String phoneNumber, int position, boolean isVideoCall) {
     CallSpecificAppData callSpecificAppData =
         CallSpecificAppData.newBuilder()
             .setCallInitiationType(callInitiationType)
             .setPositionOfSelectedSearchResult(position)
             .setCharactersInSearchString(query == null ? 0 : query.length())
-            .setAllowAssistedDialing(allowAssistedDial)
+            .setAllowAssistedDialing(true)
             .build();
     PreCall.start(
         getContext(),
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
-            .setAllowAssistedDial(allowAssistedDial));
+            .setAllowAssistedDial(true));
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
   }
 
