@@ -35,6 +35,7 @@ import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.TelephonyManagerUtils;
+import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumbercache.PhoneLookupUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
@@ -110,6 +111,7 @@ public class CallerInfo {
   public int numberPresentation;
   public int namePresentation;
   public boolean contactExists;
+  public ContactLookupResult.Type contactLookupResultType = ContactLookupResult.Type.NOT_FOUND;
   public String phoneLabel;
   /* Split up the phoneLabel into number type and label name */
   public int numberType;
@@ -315,6 +317,7 @@ public class CallerInfo {
     columnIndex = cursor.getColumnIndex(PhoneLookup.SEND_TO_VOICEMAIL);
     info.shouldSendToVoicemail = (columnIndex != -1) && ((cursor.getInt(columnIndex)) == 1);
     info.contactExists = true;
+    info.contactLookupResultType = ContactLookupResult.Type.LOCAL_CONTACT;
 
     // Determine userType by directoryId and contactId
     final String directory =
