@@ -276,7 +276,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     cce.isVoicemailNumber = info.isVoiceMailNumber();
 
     if (info.contactExists) {
-      cce.contactLookupResult = ContactLookupResult.Type.LOCAL_CONTACT;
+      cce.contactLookupResult = info.contactLookupResultType;
     }
   }
 
@@ -543,6 +543,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     // Set contact to exist to avoid phone number service lookup.
     if (hasUpdate) {
       callerInfo.contactExists = true;
+      callerInfo.contactLookupResultType = ContactLookupResult.Type.CEQUINT;
     }
   }
 
