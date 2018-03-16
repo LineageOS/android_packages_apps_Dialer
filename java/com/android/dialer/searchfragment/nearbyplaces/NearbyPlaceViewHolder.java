@@ -25,14 +25,12 @@ import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.contacts.common.util.Constants;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
+import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 
 /** ViewHolder for a nearby place row. */
@@ -43,16 +41,19 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
   private final TextView placeName;
   private final TextView placeAddress;
   private final QuickContactBadge photo;
+  private final RowClickListener listener;
 
   private String number;
+  private int position;
 
-  public NearbyPlaceViewHolder(View view) {
+  public NearbyPlaceViewHolder(View view, RowClickListener listener) {
     super(view);
     view.setOnClickListener(this);
     photo = view.findViewById(R.id.photo);
     placeName = view.findViewById(R.id.primary);
     placeAddress = view.findViewById(R.id.secondary);
     context = view.getContext();
+    this.listener = listener;
   }
 
   /**
@@ -61,6 +62,7 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
    */
   public void bind(SearchCursor cursor, String query) {
     number = cursor.getString(Projections.PHONE_NUMBER);
+    position = cursor.getPosition();
     String name = cursor.getString(Projections.DISPLAY_NAME);
     String address = cursor.getString(Projections.PHONE_LABEL);
 
@@ -93,6 +95,6 @@ public final class NearbyPlaceViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View v) {
-    PreCall.start(context, new CallIntentBuilder(number, CallInitiationType.Type.REGULAR_SEARCH));
+    listener.placeVoiceCall(number, position);
   }
 }
