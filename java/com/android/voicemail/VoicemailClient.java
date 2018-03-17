@@ -30,40 +30,36 @@ import java.util.List;
 public interface VoicemailClient {
 
   /**
-   * Whether the voicemail module is enabled (OS has support and not disabled by flags, etc.). This
-   * does not mean the carrier has support or user has enabled the feature.
-   */
-  boolean isVoicemailModuleEnabled();
-
-  /**
    * Broadcast to tell the client to upload local database changes to the server. Since the dialer
    * UI and the client are in the same package, the {@link
    * android.content.Intent#ACTION_PROVIDER_CHANGED} will always be a self-change even if the UI is
    * external to the client.
    */
   String ACTION_UPLOAD = "com.android.voicemail.VoicemailClient.ACTION_UPLOAD";
-
   /** Common key for passing {@link PhoneAccountHandle} in bundles. */
   String PARAM_PHONE_ACCOUNT_HANDLE = "phone_account_handle";
-
   /**
    * Broadcast from the client to inform the app to show a legacy voicemail notification. This
    * broadcast is same as {@link TelephonyManager#ACTION_SHOW_VOICEMAIL_NOTIFICATION}.
    */
   String ACTION_SHOW_LEGACY_VOICEMAIL =
       "com.android.voicemail.VoicemailClient.ACTION_SHOW_LEGACY_VOICEMAIL";
-
   /**
    * Boolean extra send with {@link #ACTION_SHOW_LEGACY_VOICEMAIL}, indicating that the notification
    * is sent by legacy mode and should not be suppressed even when VVM is activated
    */
   String EXTRA_IS_LEGACY_MODE = "is_legacy_mode";
-
   /**
    * Secret code to launch the voicemail config activity intended for OEMs and Carriers. {@code
    * *#*#VVMCONFIG#*#*}
    */
   String VOICEMAIL_SECRET_CODE = "886266344";
+
+  /**
+   * Whether the voicemail module is enabled (OS has support and not disabled by flags, etc.). This
+   * does not mean the carrier has support or user has enabled the feature.
+   */
+  boolean isVoicemailModuleEnabled();
 
   /**
    * Whether visual voicemail is supported by the carrier for the {@code phoneAccountHandle}. This
@@ -123,16 +119,22 @@ public interface VoicemailClient {
 
   /**
    * @return if the voicemail transcription feature is available on the current device. This depends
-   *     on whether the server side flag is turned on for the feature, and if the OS meets the
-   *     requirement for this feature.
+   *     on whether the server side flag is turned on for the feature, visual voicemail is activated
+   *     and enabled and if the OS meets the requirement for this feature.
    */
-  boolean isVoicemailTranscriptionAvailable(Context context);
+  boolean isVoicemailTranscriptionAvailable(Context context, PhoneAccountHandle account);
+
+  /** @return if the voicemail transcription setting has been enabled by the user. */
+  boolean isVoicemailTranscriptionEnabled(Context context, PhoneAccountHandle account);
 
   /** @return if the voicemail donation feature is available. */
-  boolean isVoicemailDonationAvailable(Context context);
+  boolean isVoicemailDonationAvailable(Context context, PhoneAccountHandle account);
 
   /** @return if the voicemail donation setting has been enabled by the user. */
   boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account);
+
+  void setVoicemailTranscriptionEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled);
 
   void setVoicemailDonationEnabled(
       Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled);
@@ -162,12 +164,6 @@ public interface VoicemailClient {
   @MainThread
   void onShutdown(@NonNull Context context);
 
-  /** Listener for changes in {@link #isActivated(Context, PhoneAccountHandle)} */
-  interface ActivationStateListener {
-    @MainThread
-    void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated);
-  }
-
   @MainThread
   void addActivationStateListener(ActivationStateListener listener);
 
@@ -187,4 +183,10 @@ public interface VoicemailClient {
    */
   @Nullable
   String getCarrierConfigString(Context context, PhoneAccountHandle phoneAccountHandle, String key);
+
+  /** Listener for changes in {@link #isActivated(Context, PhoneAccountHandle)} */
+  interface ActivationStateListener {
+    @MainThread
+    void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated);
+  }
 }

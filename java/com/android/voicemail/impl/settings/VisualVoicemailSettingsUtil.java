@@ -33,6 +33,7 @@ public class VisualVoicemailSettingsUtil {
 
   @VisibleForTesting public static final String IS_ENABLED_KEY = "is_enabled";
   private static final String ARCHIVE_ENABLED_KEY = "archive_is_enabled";
+  private static final String TRANSCRIBE_VOICEMAILS_KEY = "transcribe_voicemails";
   private static final String DONATE_VOICEMAILS_KEY = "donate_voicemails";
 
   public static void setEnabled(
@@ -59,21 +60,6 @@ public class VisualVoicemailSettingsUtil {
     }
   }
 
-  private static class VoicemailDeleteWorker implements Worker<Void, Void> {
-    private final Context context;
-
-    VoicemailDeleteWorker(Context context) {
-      this.context = context;
-    }
-
-    @Override
-    public Void doInBackground(Void unused) {
-      int deleted = VoicemailDatabaseUtil.deleteAll(context);
-      VvmLog.i("VisualVoicemailSettingsUtil.doInBackground", "deleted " + deleted + " voicemails");
-      return null;
-    }
-  }
-
   private static void onSuccess(Void unused) {
     VvmLog.i("VisualVoicemailSettingsUtil.onSuccess", "delete voicemails");
   }
@@ -92,12 +78,24 @@ public class VisualVoicemailSettingsUtil {
         .apply();
   }
 
+  public static void setVoicemailTranscriptionEnabled(
+      Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
+    Assert.checkArgument(
+        VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .isVoicemailTranscriptionAvailable(context, phoneAccount));
+    new VisualVoicemailPreferences(context, phoneAccount)
+        .edit()
+        .putBoolean(TRANSCRIBE_VOICEMAILS_KEY, isEnabled)
+        .apply();
+  }
+
   public static void setVoicemailDonationEnabled(
       Context context, PhoneAccountHandle phoneAccount, boolean isEnabled) {
     Assert.checkArgument(
         VoicemailComponent.get(context)
             .getVoicemailClient()
-            .isVoicemailTranscriptionAvailable(context));
+            .isVoicemailTranscriptionAvailable(context, phoneAccount));
     new VisualVoicemailPreferences(context, phoneAccount)
         .edit()
         .putBoolean(DONATE_VOICEMAILS_KEY, isEnabled)
@@ -125,6 +123,14 @@ public class VisualVoicemailSettingsUtil {
     return prefs.getBoolean(ARCHIVE_ENABLED_KEY, false);
   }
 
+  public static boolean isVoicemailTranscriptionEnabled(
+      Context context, PhoneAccountHandle phoneAccount) {
+    Assert.isNotNull(phoneAccount);
+
+    VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
+    return prefs.getBoolean(TRANSCRIBE_VOICEMAILS_KEY, false);
+  }
+
   public static boolean isVoicemailDonationEnabled(
       Context context, PhoneAccountHandle phoneAccount) {
     Assert.isNotNull(phoneAccount);
@@ -145,5 +151,20 @@ public class VisualVoicemailSettingsUtil {
     }
     VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
     return prefs.contains(IS_ENABLED_KEY);
+  }
+
+  private static class VoicemailDeleteWorker implements Worker<Void, Void> {
+    private final Context context;
+
+    VoicemailDeleteWorker(Context context) {
+      this.context = context;
+    }
+
+    @Override
+    public Void doInBackground(Void unused) {
+      int deleted = VoicemailDatabaseUtil.deleteAll(context);
+      VvmLog.i("VisualVoicemailSettingsUtil.doInBackground", "deleted " + deleted + " voicemails");
+      return null;
+    }
   }
 }
