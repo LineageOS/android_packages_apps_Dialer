@@ -98,6 +98,10 @@ public class TranscriptionService extends JobService {
       return false;
     }
     VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
+    if (!client.isVoicemailTranscriptionEnabled(context, account)) {
+      LogUtil.i("TranscriptionService.canTranscribeVoicemail", "transcription is not enabled");
+      return false;
+    }
     if (!client.hasAcceptedTos(context, account)) {
       LogUtil.i("TranscriptionService.canTranscribeVoicemail", "hasn't accepted TOS");
       return false;

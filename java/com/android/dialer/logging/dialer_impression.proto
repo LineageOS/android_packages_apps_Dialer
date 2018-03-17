@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1361
+  // Next Tag: 1366
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -372,7 +372,7 @@ message DialerImpression {
     VVM_SETTINGS_VIEWED = 1148;
     VVM_CHANGE_PIN_CLICKED = 1149;
     VVM_CHANGE_PIN_COMPLETED = 1150;
-    VVM_CHANGE_RINGTONE_CLICKED = 1151;
+    VVM_CHANGE_RINGTONE_CLICKED = 1151 [deprecated = true];
     VVM_CHANGE_VIBRATION_CLICKED = 1152;
     VVM_USER_ENABLED_IN_SETTINGS = 1153;
     VVM_USER_DISABLED_IN_SETTINGS = 1154;
@@ -594,14 +594,12 @@ message DialerImpression {
     ASSISTED_DIALING_FEATURE_DISABLED_BY_USER = 1292;
 
     // User reports a same prefix call as spam from call history
-    REPORT_SAME_PREFIX_CALL_AS_SPAM_VIA_CALL_HISTORY =
-        1290
+    REPORT_SAME_PREFIX_CALL_AS_SPAM_VIA_CALL_HISTORY = 1290
 
         ;
 
     // User reports a same prefix call as not spam from call history
-    REPORT_SAME_PREFIX_CALL_AS_NOT_SPAM_VIA_CALL_HISTORY =
-        1291
+    REPORT_SAME_PREFIX_CALL_AS_NOT_SPAM_VIA_CALL_HISTORY = 1291
 
         ;
 
@@ -715,5 +713,11 @@ message DialerImpression {
     SPAM_BLOCKING_DISABLED_THROUGH_SETTING = 1359;
     // Failure happened while modifying spam blocking setting.
     SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_SETTING = 1360;
+
+    VVM_NOTIFICATIONS_SETTING_CLICKED = 1361;
+    VVM_USER_TURNED_TRANSCRIBE_ON_FROM_SETTINGS = 1362;
+    VVM_USER_TURNED_TRANSCRIBE_OFF_FROM_SETTINGS = 1363;
+    VVM_USER_TURNED_DONATION_ON_FROM_SETTINGS = 1364;
+    VVM_USER_TURNED_DONATION_OFF_FROM_SETTINGS = 1365;
   }
 }

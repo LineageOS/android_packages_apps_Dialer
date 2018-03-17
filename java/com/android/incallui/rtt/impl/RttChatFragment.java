@@ -206,7 +206,7 @@ public class RttChatFragment extends Fragment
 
   @Override
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-    if (actionId == EditorInfo.IME_ACTION_DONE) {
+    if (actionId == EditorInfo.IME_ACTION_SEND) {
       submitButton.performClick();
       return true;
     }
