@@ -151,7 +151,9 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   @Override
   public void fetchCalls() {
     super.fetchCalls();
-    FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class).updateTabUnreadCounts();
+    if (FragmentUtils.getParent(this, CallLogFragmentListener.class) != null) {
+      FragmentUtils.getParentUnsafe(this, CallLogFragmentListener.class).updateTabUnreadCounts();
+    }
   }
 
   @Override
