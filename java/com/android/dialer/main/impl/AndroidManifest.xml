@@ -22,7 +22,6 @@
     <activity
       android:clearTaskOnLaunch="true"
       android:directBootAware="true"
-      android:enabled="false"
       android:exported="true"
       android:icon="@drawable/nui_launcher_icon"
       android:label="@string/main_activity_label"
