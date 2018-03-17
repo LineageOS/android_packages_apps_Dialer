@@ -71,12 +71,18 @@ public final class StubVoicemailClient implements VoicemailClient {
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value) {}
 
   @Override
-  public boolean isVoicemailTranscriptionAvailable(Context context) {
+  public boolean isVoicemailTranscriptionAvailable(
+      Context context, PhoneAccountHandle phoneAccountHandle) {
     return false;
   }
 
   @Override
-  public boolean isVoicemailDonationAvailable(Context context) {
+  public boolean isVoicemailTranscriptionEnabled(Context context, PhoneAccountHandle account) {
+    return false;
+  }
+
+  @Override
+  public boolean isVoicemailDonationAvailable(Context context, PhoneAccountHandle account) {
     return false;
   }
 
@@ -84,6 +90,10 @@ public final class StubVoicemailClient implements VoicemailClient {
   public boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account) {
     return false;
   }
+
+  @Override
+  public void setVoicemailTranscriptionEnabled(
+      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {}
 
   @Override
   public void setVoicemailDonationEnabled(
