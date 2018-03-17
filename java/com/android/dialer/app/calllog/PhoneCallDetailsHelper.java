@@ -94,6 +94,49 @@ public class PhoneCallDetailsHelper
     calendar = Calendar.getInstance();
   }
 
+  static boolean shouldShowVoicemailDonationPromo(
+      Context context, PhoneAccountHandle accountHandle) {
+    VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
+    return client.isVoicemailDonationAvailable(context, accountHandle)
+        && !hasSeenVoicemailDonationPromo(context);
+  }
+
+  static boolean hasSeenVoicemailDonationPromo(Context context) {
+    return StorageComponent.get(context.getApplicationContext())
+        .unencryptedSharedPrefs()
+        .getBoolean(PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY, false);
+  }
+
+  private static int dpsToPixels(Context context, int dps) {
+    return (int)
+        (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dps, context.getResources().getDisplayMetrics()));
+  }
+
+  private static void recordPromoShown(Context context) {
+    StorageComponent.get(context.getApplicationContext())
+        .unencryptedSharedPrefs()
+        .edit()
+        .putBoolean(PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY, true)
+        .apply();
+  }
+
+  /** Returns true if primary name is empty or the data is from Cequint Caller ID. */
+  private static boolean shouldShowLocation(PhoneCallDetails details) {
+    if (TextUtils.isEmpty(details.geocode)) {
+      return false;
+    }
+    // For caller ID provided by Cequint we want to show the geo location.
+    if (details.sourceType == ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID) {
+      return true;
+    }
+    // Don't bother showing geo location for contacts.
+    if (!TextUtils.isEmpty(details.namePrimary)) {
+      return false;
+    }
+    return true;
+  }
+
   /** Fills the call details views with content. */
   public void setPhoneCallDetails(PhoneCallDetailsViews views, PhoneCallDetails details) {
     // Display up to a given number of icons.
@@ -250,9 +293,10 @@ public class PhoneCallDetailsHelper
       return true;
     }
 
-    // Also show the rating option if voicemail transcription is available (but not enabled)
+    // Also show the rating option if voicemail donation is available (but not enabled)
     // and the donation promo has not yet been shown.
-    if (client.isVoicemailDonationAvailable(context) && !hasSeenVoicemailDonationPromo(context)) {
+    if (client.isVoicemailDonationAvailable(context, account)
+        && !hasSeenVoicemailDonationPromo(context)) {
       return true;
     }
 
@@ -263,7 +307,7 @@ public class PhoneCallDetailsHelper
       TranscriptionRatingValue ratingValue, PhoneCallDetails details, View ratingView) {
     LogUtil.enterBlock("PhoneCallDetailsHelper.recordTranscriptionRating");
 
-    if (shouldShowVoicemailDonationPromo(context)) {
+    if (shouldShowVoicemailDonationPromo(context, details.accountHandle)) {
       showVoicemailDonationPromo(ratingValue, details, ratingView);
     } else {
       TranscriptionRatingHelper.sendRating(
@@ -273,19 +317,6 @@ public class PhoneCallDetailsHelper
           this::onRatingSuccess,
           this::onRatingFailure);
     }
-  }
-
-  static boolean shouldShowVoicemailDonationPromo(Context context) {
-    VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
-    return client.isVoicemailTranscriptionAvailable(context)
-        && client.isVoicemailDonationAvailable(context)
-        && !hasSeenVoicemailDonationPromo(context);
-  }
-
-  static boolean hasSeenVoicemailDonationPromo(Context context) {
-    return StorageComponent.get(context.getApplicationContext())
-        .unencryptedSharedPrefs()
-        .getBoolean(PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY, false);
   }
 
   private void showVoicemailDonationPromo(
@@ -358,20 +389,6 @@ public class PhoneCallDetailsHelper
               .getResources()
               .getColor(R.color.voicemail_donation_promo_negative_button_text_color));
     }
-  }
-
-  private static int dpsToPixels(Context context, int dps) {
-    return (int)
-        (TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, dps, context.getResources().getDisplayMetrics()));
-  }
-
-  private static void recordPromoShown(Context context) {
-    StorageComponent.get(context.getApplicationContext())
-        .unencryptedSharedPrefs()
-        .edit()
-        .putBoolean(PREF_VOICEMAIL_DONATION_PROMO_SHOWN_KEY, true)
-        .apply();
   }
 
   private SpannableString getVoicemailDonationPromoContent() {
@@ -460,22 +477,6 @@ public class PhoneCallDetailsHelper
       numberFormattedLabel = details.displayNumber;
     }
     return numberFormattedLabel;
-  }
-
-  /** Returns true if primary name is empty or the data is from Cequint Caller ID. */
-  private static boolean shouldShowLocation(PhoneCallDetails details) {
-    if (TextUtils.isEmpty(details.geocode)) {
-      return false;
-    }
-    // For caller ID provided by Cequint we want to show the geo location.
-    if (details.sourceType == ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID) {
-      return true;
-    }
-    // Don't bother showing geo location for contacts.
-    if (!TextUtils.isEmpty(details.namePrimary)) {
-      return false;
-    }
-    return true;
   }
 
   public void setPhoneTypeLabelForTest(CharSequence phoneTypeLabel) {
