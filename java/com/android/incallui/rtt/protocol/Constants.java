@@ -20,5 +20,5 @@ package com.android.incallui.rtt.protocol;
 public interface Constants {
 
   /** String used to break bubble, which means one RTT message is complete. */
-  String BUBBLE_BREAKER = "\n\n";
+  String BUBBLE_BREAKER = "\n";
 }
