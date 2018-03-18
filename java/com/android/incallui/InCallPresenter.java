@@ -118,6 +118,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private StatusBarNotifier statusBarNotifier;
   private ExternalCallNotifier externalCallNotifier;
   private InCallVibrationHandler vibrationHandler;
+  private InCallDndHandler dndHandler;
   private ContactInfoCache contactInfoCache;
   private Context context;
   private final OnCheckBlockedListener onCheckBlockedListener =
@@ -352,6 +353,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
     vibrationHandler = new InCallVibrationHandler(context);
     addListener(vibrationHandler);
+
+    dndHandler = new InCallDndHandler(context);
+    addListener(dndHandler);
 
     this.proximitySensor = proximitySensor;
     addListener(this.proximitySensor);
@@ -1475,6 +1479,11 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         removeListener(vibrationHandler);
       }
       vibrationHandler = null;
+
+      if (dndHandler != null) {
+        removeListener(dndHandler);
+      }
+      dndHandler = null;
 
       if (callList != null) {
         callList.removeListener(this);
