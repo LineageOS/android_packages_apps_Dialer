@@ -16,7 +16,11 @@
 
 package com.android.dialer.app.settings;
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -70,6 +74,9 @@ public class SoundSettingsFragment extends PreferenceFragment
   private SwitchPreference vibrateWhenRinging;
   private SwitchPreference playDtmfTone;
   private ListPreference dtmfToneLength;
+  private SwitchPreference enableDndInCall;
+
+  private NotificationManager notificationManager;
 
   @Override
   public Context getContext() {
@@ -92,6 +99,7 @@ public class SoundSettingsFragment extends PreferenceFragment
     dtmfToneLength =
         (ListPreference)
             findPreference(context.getString(R.string.dtmf_tone_length_preference_key));
+    enableDndInCall = (SwitchPreference) findPreference("incall_enable_dnd");
 
     if (hasVibrator()) {
       vibrateWhenRinging.setOnPreferenceChangeListener(this);
@@ -116,6 +124,8 @@ public class SoundSettingsFragment extends PreferenceFragment
     playDtmfTone.setOnPreferenceChangeListener(this);
     playDtmfTone.setChecked(shouldPlayDtmfTone());
 
+    enableDndInCall.setOnPreferenceChangeListener(this);
+
     TelephonyManager telephonyManager =
         (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     if (telephonyManager.canChangeDtmfToneLength()
@@ -130,6 +140,7 @@ public class SoundSettingsFragment extends PreferenceFragment
       getPreferenceScreen().removePreference(dtmfToneLength);
       dtmfToneLength = null;
     }
+    notificationManager = context.getSystemService(NotificationManager.class);
   }
 
   @Override
@@ -178,6 +189,30 @@ public class SoundSettingsFragment extends PreferenceFragment
       int index = dtmfToneLength.findIndexOfValue((String) objValue);
       Settings.System.putInt(
           getActivity().getContentResolver(), Settings.System.DTMF_TONE_TYPE_WHEN_DIALING, index);
+    } else if (preference == enableDndInCall) {
+      boolean newValue = (Boolean) objValue;
+      if (newValue && !notificationManager.isNotificationPolicyAccessGranted()) {
+        new AlertDialog.Builder(getContext())
+            .setMessage(R.string.incall_dnd_dialog_message)
+            .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                startActivity(intent);
+              }
+            })
+            .setNegativeButton(R.string.deny, new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+              }
+            })
+            .show();
+
+        // At this time, it is unknown whether the user granted the permission
+        return false;
+      }
     }
     return true;
   }
