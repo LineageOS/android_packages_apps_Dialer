@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,11 +16,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_vibration_category_key" translatable="false">dialer_general_incall_vibration_category_key</string>
-    <string name="incall_vibration_category_title">In-call vibration</string>
+    <string name="incall_category_key" translatable="false">dialer_general_incall_category_key</string>
+    <string name="incall_category_title">In-call</string>
+    <string name="incall_vibrate_outgoing_key" translatable="false">incall_vibrate_outgoing</string>
     <string name="incall_vibrate_outgoing_title">Vibrate on answer</string>
+    <string name="incall_vibrate_call_waiting_key" translatable="false">incall_vibrate_call_waiting</string>
     <string name="incall_vibrate_call_waiting_title">Vibrate on call waiting</string>
+    <string name="incall_vibrate_hangup_key" translatable="false">incall_vibrate_hangup</string>
     <string name="incall_vibrate_hangup_title">Vibrate on hang up</string>
+    <string name="incall_vibrate_45_key" translatable="false">incall_vibrate_45secs</string>
     <string name="incall_vibrate_45_title">Vibrate every minute</string>
     <string name="incall_vibrate_45_summary">Vibrates at the 45 second mark of every minute during outgoing calls</string>
 </resources>
