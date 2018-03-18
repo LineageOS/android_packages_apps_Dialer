@@ -18,6 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_category_key" translatable="false">dialer_general_incall_category_key</string>
     <string name="incall_category_title">In-call</string>
+    <string name="incall_enable_dnd_title">Enable Do Not Disturb during call</string>
     <string name="incall_vibrate_outgoing_key" translatable="false">incall_vibrate_outgoing</string>
     <string name="incall_vibrate_outgoing_title">Vibrate on answer</string>
     <string name="incall_vibrate_call_waiting_key" translatable="false">incall_vibrate_call_waiting</string>
