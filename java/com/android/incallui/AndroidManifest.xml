@@ -46,6 +46,9 @@
   <!-- Set audio selector window type TYPE_APPLICATION_OVERLAY -->
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
+  <!-- Required when the "Enable Do Not Disturb during call" setting is enabled -->
+  <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
   <!-- Set android:taskAffinity="com.android.incallui" for all activities to ensure proper
   navigation. Otherwise system could bring up MainActivity instead, e.g. when user unmerge a
   call.
