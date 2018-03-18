@@ -44,25 +44,25 @@
     android:title="@string/dtmf_tone_length_title"/>
 
   <PreferenceCategory
-    android:key="@string/incall_vibration_category_key"
-    android:title="@string/incall_vibration_category_title">
+    android:key="@string/incall_category_key"
+    android:title="@string/incall_category_title">
 
-    <CheckBoxPreference
-      android:key="incall_vibrate_outgoing"
+    <SwitchPreference
+      android:key="@string/incall_vibrate_outgoing_key"
       android:title="@string/incall_vibrate_outgoing_title" />
 
-    <CheckBoxPreference
-      android:key="incall_vibrate_call_waiting"
+    <SwitchPreference
+      android:key="@string/incall_vibrate_call_waiting_key"
       android:title="@string/incall_vibrate_call_waiting_title" />
 
-    <CheckBoxPreference
-      android:key="incall_vibrate_hangup"
+    <SwitchPreference
+      android:key="@string/incall_vibrate_hangup_key"
       android:title="@string/incall_vibrate_hangup_title" />
 
-    <CheckBoxPreference
-      android:key="incall_vibrate_45secs"
+    <SwitchPreference
+      android:key="@string/incall_vibrate_45_key"
       android:title="@string/incall_vibrate_45_title"
-     android:summary="@string/incall_vibrate_45_summary" />
+      android:summary="@string/incall_vibrate_45_summary" />
 
   </PreferenceCategory>
 
