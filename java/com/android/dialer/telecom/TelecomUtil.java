@@ -311,6 +311,9 @@ public abstract class TelecomUtil {
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     for (PhoneAccountHandle phoneAccountHandle : telecomManager.getCallCapablePhoneAccounts()) {
       PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
+      if (phoneAccount == null) {
+        continue;
+      }
       if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)
           && !phoneAccountHandle.equals(currentAccount)) {
         return phoneAccountHandle;

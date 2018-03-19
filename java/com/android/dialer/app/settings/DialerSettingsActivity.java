@@ -241,6 +241,9 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
     PhoneAccountHandle result = null;
     for (PhoneAccountHandle phoneAccountHandle : telecomManager.getCallCapablePhoneAccounts()) {
       PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
+      if (phoneAccount == null) {
+        continue;
+      }
       if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
         LogUtil.i(
             "DialerSettingsActivity.getSoleSimAccount", phoneAccountHandle + " is a SIM account");
