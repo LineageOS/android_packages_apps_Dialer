@@ -267,15 +267,6 @@ public final class PhoneLookupInfoConsolidator {
 
   /**
    * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
-   * returns whether the number is a voicemail number.
-   */
-  public boolean isVoicemail() {
-    // TODO(twyen): implement
-    return false;
-  }
-
-  /**
-   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
    * returns whether the number is blocked.
    */
   public boolean isBlocked() {

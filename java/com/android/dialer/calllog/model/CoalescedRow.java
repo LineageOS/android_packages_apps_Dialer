@@ -39,6 +39,7 @@ public abstract class CoalescedRow {
         .setFeatures(0)
         .setCallType(0)
         .setNumberAttributes(NumberAttributes.getDefaultInstance())
+        .setIsVoicemailCall(false)
         .setCoalescedIds(CoalescedIds.getDefaultInstance());
   }
 
@@ -80,6 +81,11 @@ public abstract class CoalescedRow {
 
   public abstract NumberAttributes numberAttributes();
 
+  public abstract boolean isVoicemailCall();
+
+  @Nullable
+  public abstract String voicemailCallTag();
+
   public abstract CoalescedIds coalescedIds();
 
   /** Builder for {@link CoalescedRow}. */
@@ -116,6 +122,10 @@ public abstract class CoalescedRow {
     public abstract Builder setCallType(int callType);
 
     public abstract Builder setNumberAttributes(NumberAttributes numberAttributes);
+
+    public abstract Builder setIsVoicemailCall(boolean isVoicemail);
+
+    public abstract Builder setVoicemailCallTag(@Nullable String tag);
 
     public abstract Builder setCoalescedIds(CoalescedIds coalescedIds);
 

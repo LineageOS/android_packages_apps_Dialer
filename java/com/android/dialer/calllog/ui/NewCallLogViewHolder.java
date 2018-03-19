@@ -153,7 +153,8 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void setPhoto(CoalescedRow row) {
     PhotoInfo.Builder photoInfoBuilder =
-        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes());
+        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
+            .setIsVoicemail(row.isVoicemailCall());
     if (!TextUtils.isEmpty(row.formattedNumber())) {
       photoInfoBuilder.setFormattedNumber(row.formattedNumber());
     }

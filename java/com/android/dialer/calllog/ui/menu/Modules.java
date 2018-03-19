@@ -176,7 +176,8 @@ final class Modules {
   private static PhotoInfo createPhotoInfoFromRow(CoalescedRow row) {
     PhotoInfo.Builder photoInfoBuilder =
         NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
-            .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
+            .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+            .setIsVoicemail(row.isVoicemailCall());
     if (!TextUtils.isEmpty(row.formattedNumber())) {
       photoInfoBuilder.setFormattedNumber(row.formattedNumber());
     }

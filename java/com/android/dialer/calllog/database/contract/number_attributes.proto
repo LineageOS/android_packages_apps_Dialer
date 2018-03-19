@@ -24,7 +24,7 @@ package com.android.dialer;
 import "java/com/android/dialer/logging/contact_source.proto";
 
 // Information related to the phone number of the call.
-// Next ID: 13
+// Next ID: 12
 message NumberAttributes {
   // The name (which may be a person's name or business name, but not a number)
   // formatted exactly as it should appear to the user. If the user's locale or
@@ -52,22 +52,19 @@ message NumberAttributes {
   // The number is a call to a business from nearby places lookup.
   optional bool is_business = 6;
 
-  // The number is a call to the voicemail inbox.
-  optional bool is_voicemail = 7;
-
   // Can the number be reported as invalid through People API
-  optional bool can_report_as_invalid_number = 8;
+  optional bool can_report_as_invalid_number = 7;
 
   // True if the CP2 information is incomplete and needs to be queried at
   // display time.
-  optional bool is_cp2_info_incomplete = 9;
+  optional bool is_cp2_info_incomplete = 8;
 
   // Whether the number is blocked.
-  optional bool is_blocked = 10;
+  optional bool is_blocked = 9;
 
   // Whether the number is spam.
-  optional bool is_spam = 11;
+  optional bool is_spam = 10;
 
   // Source of the contact associated with the number.
-  optional com.android.dialer.logging.ContactSource.Type contact_source = 12;
+  optional com.android.dialer.logging.ContactSource.Type contact_source = 11;
 }
