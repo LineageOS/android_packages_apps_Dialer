@@ -531,6 +531,9 @@ public class CallSubjectDialog extends Activity {
 
     TelecomManager telecomManager = (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
     final PhoneAccount account = telecomManager.getPhoneAccount(mPhoneAccountHandle);
+    if (account == null) {
+      return;
+    }
 
     Bundle phoneAccountExtras = account.getExtras();
     if (phoneAccountExtras == null) {
