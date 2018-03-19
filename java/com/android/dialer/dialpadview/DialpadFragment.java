@@ -764,6 +764,7 @@ public class DialpadFragment extends Fragment
     LogUtil.enterBlock("DialpadFragment.onStop");
     super.onStop();
 
+    floatingActionButtonController.scaleOut();
     synchronized (toneGeneratorLock) {
       if (toneGenerator != null) {
         toneGenerator.release();
