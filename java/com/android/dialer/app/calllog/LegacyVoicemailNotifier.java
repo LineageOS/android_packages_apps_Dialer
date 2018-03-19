@@ -141,13 +141,14 @@ public final class LegacyVoicemailNotifier {
     if (TelecomUtil.getCallCapablePhoneAccounts(context).size() > 1) {
       TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
       PhoneAccount phoneAccount = telecomManager.getPhoneAccount(handle);
-      return phoneAccount.getShortDescription().toString();
-    } else {
+      if (phoneAccount != null) {
+        return phoneAccount.getShortDescription().toString();
+      }
+    }
       return String.format(
           context.getString(R.string.notification_voicemail_text_format),
           PhoneNumberHelper.formatNumber(
               context, voicemailNumber, GeoUtil.getCurrentCountryIso(context)));
-    }
   }
 
   public static void cancelNotification(

@@ -803,6 +803,9 @@ public class StatusBarNotifier
   private CharSequence getMultiSimIncomingText(DialerCall call) {
     PhoneAccount phoneAccount =
         context.getSystemService(TelecomManager.class).getPhoneAccount(call.getAccountHandle());
+    if (phoneAccount == null) {
+      return context.getString(R.string.notification_incoming_call);
+    }
     SpannableString string =
         new SpannableString(
             context.getString(
