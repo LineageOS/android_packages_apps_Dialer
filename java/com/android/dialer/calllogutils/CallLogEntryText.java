@@ -48,6 +48,10 @@ public final class CallLogEntryText {
       return presentationName.get();
     }
 
+    if (row.isVoicemailCall() && !TextUtils.isEmpty(row.voicemailCallTag())) {
+      return row.voicemailCallTag();
+    }
+
     // Otherwise prefer the name.
     if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
       return row.numberAttributes().getName();

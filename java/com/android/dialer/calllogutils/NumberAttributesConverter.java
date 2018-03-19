@@ -34,7 +34,6 @@ public final class NumberAttributesConverter {
         .setLookupUri(numberAttributes.getLookupUri())
         .setIsBusiness(numberAttributes.getIsBusiness())
         .setIsSpam(numberAttributes.getIsSpam())
-        .setIsVoicemail(numberAttributes.getIsVoicemail())
         .setIsBlocked(numberAttributes.getIsBlocked());
   }
 
@@ -52,7 +51,6 @@ public final class NumberAttributesConverter {
         .setLookupUri(phoneLookupInfoConsolidator.getLookupUri())
         .setNumberTypeLabel(phoneLookupInfoConsolidator.getNumberLabel())
         .setIsBusiness(phoneLookupInfoConsolidator.isBusiness())
-        .setIsVoicemail(phoneLookupInfoConsolidator.isVoicemail())
         .setIsBlocked(phoneLookupInfoConsolidator.isBlocked())
         .setIsSpam(phoneLookupInfoConsolidator.isSpam())
         .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())

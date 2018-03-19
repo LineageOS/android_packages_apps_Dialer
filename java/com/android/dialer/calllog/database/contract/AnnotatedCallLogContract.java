@@ -133,6 +133,25 @@ public class AnnotatedCallLogContract {
     String NUMBER_ATTRIBUTES = "number_attributes";
 
     /**
+     * Whether the call is to the voicemail inbox.
+     *
+     * <p>TYPE: INTEGER (boolean)
+     *
+     * @see android.telecom.TelecomManager#isVoiceMailNumber(android.telecom.PhoneAccountHandle,
+     *     String)
+     */
+    String IS_VOICEMAIL_CALL = "is_voicemail_call";
+
+    /**
+     * The "name" of the voicemail inbox. This is provided by the SIM to show as the caller ID
+     *
+     * <p>TYPE: TEXT
+     *
+     * @see android.telephony.TelephonyManager#getVoiceMailAlphaTag()
+     */
+    String VOICEMAIL_CALL_TAG = "voicemail_call_tag";
+
+    /**
      * Copied from {@link android.provider.CallLog.Calls#TYPE}.
      *
      * <p>Type: INTEGER (int)
@@ -155,6 +174,8 @@ public class AnnotatedCallLogContract {
           PHONE_ACCOUNT_COLOR,
           FEATURES,
           NUMBER_ATTRIBUTES,
+          IS_VOICEMAIL_CALL,
+          VOICEMAIL_CALL_TAG,
           CALL_TYPE
         };
   }
