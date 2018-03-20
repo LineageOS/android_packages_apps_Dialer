@@ -39,8 +39,8 @@ public final class CallLogIntents {
    */
   @Nullable
   public static Intent getCallBackIntent(Context context, CoalescedRow row) {
-    String normalizedNumber = row.number().getNormalizedNumber();
-    if (!PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation())) {
+    String normalizedNumber = row.getNumber().getNormalizedNumber();
+    if (!PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.getNumberPresentation())) {
       return null;
     }
 
@@ -50,7 +50,7 @@ public final class CallLogIntents {
         new CallIntentBuilder(normalizedNumber, CallInitiationType.Type.CALL_LOG)
             .setPhoneAccountHandle(
                 TelecomUtil.composePhoneAccountHandle(
-                    row.phoneAccountComponentName(), row.phoneAccountId()))
-            .setIsVideoCall((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO));
+                    row.getPhoneAccountComponentName(), row.getPhoneAccountId()))
+            .setIsVideoCall((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO));
   }
 }

@@ -51,15 +51,15 @@ final class Modules {
     // Conditionally add each module, which are items in the bottom sheet's menu.
     List<HistoryItemActionModule> modules = new ArrayList<>();
 
-    String normalizedNumber = row.number().getNormalizedNumber();
+    String normalizedNumber = row.getNumber().getNormalizedNumber();
     boolean canPlaceCalls =
-        PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.numberPresentation());
+        PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.getNumberPresentation());
 
     if (canPlaceCalls) {
       modules.addAll(createModulesForCalls(context, row, normalizedNumber));
       Optional<HistoryItemActionModule> moduleForSendingTextMessage =
           SharedModules.createModuleForSendingTextMessage(
-              context, normalizedNumber, row.numberAttributes().getIsBlocked());
+              context, normalizedNumber, row.getNumberAttributes().getIsBlocked());
       if (moduleForSendingTextMessage.isPresent()) {
         modules.add(moduleForSendingTextMessage.get());
       }
@@ -76,29 +76,29 @@ final class Modules {
       Optional<HistoryItemActionModule> moduleForAddingToContacts =
           SharedModules.createModuleForAddingToContacts(
               context,
-              row.number(),
-              row.numberAttributes().getName(),
-              row.numberAttributes().getLookupUri(),
-              row.numberAttributes().getIsBlocked(),
-              row.numberAttributes().getIsSpam());
+              row.getNumber(),
+              row.getNumberAttributes().getName(),
+              row.getNumberAttributes().getLookupUri(),
+              row.getNumberAttributes().getIsBlocked(),
+              row.getNumberAttributes().getIsSpam());
       if (moduleForAddingToContacts.isPresent()) {
         modules.add(moduleForAddingToContacts.get());
       }
 
       BlockReportSpamDialogInfo blockReportSpamDialogInfo =
           BlockReportSpamDialogInfo.newBuilder()
-              .setNormalizedNumber(row.number().getNormalizedNumber())
-              .setCountryIso(row.number().getCountryIso())
-              .setCallType(row.callType())
+              .setNormalizedNumber(row.getNumber().getNormalizedNumber())
+              .setCountryIso(row.getNumber().getCountryIso())
+              .setCallType(row.getCallType())
               .setReportingLocation(ReportingLocation.Type.CALL_LOG_HISTORY)
-              .setContactSource(row.numberAttributes().getContactSource())
+              .setContactSource(row.getNumberAttributes().getContactSource())
               .build();
       modules.addAll(
           SharedModules.createModulesHandlingBlockedOrSpamNumber(
               context,
               blockReportSpamDialogInfo,
-              row.numberAttributes().getIsBlocked(),
-              row.numberAttributes().getIsSpam()));
+              row.getNumberAttributes().getIsBlocked(),
+              row.getNumberAttributes().getIsSpam()));
 
       Optional<HistoryItemActionModule> moduleForCopyingNumber =
           SharedModules.createModuleForCopyingNumber(context, normalizedNumber);
@@ -109,7 +109,7 @@ final class Modules {
 
     modules.add(createModuleForAccessingCallDetails(context, row));
 
-    modules.add(new DeleteCallLogItemModule(context, row.coalescedIds()));
+    modules.add(new DeleteCallLogItemModule(context, row.getCoalescedIds()));
 
     return modules;
   }
@@ -117,14 +117,14 @@ final class Modules {
   private static List<HistoryItemActionModule> createModulesForCalls(
       Context context, CoalescedRow row, String normalizedNumber) {
     // Don't add call options if a number is blocked.
-    if (row.numberAttributes().getIsBlocked()) {
+    if (row.getNumberAttributes().getIsBlocked()) {
       return Collections.emptyList();
     }
 
     List<HistoryItemActionModule> modules = new ArrayList<>();
     PhoneAccountHandle phoneAccountHandle =
         TelecomUtil.composePhoneAccountHandle(
-            row.phoneAccountComponentName(), row.phoneAccountId());
+            row.getPhoneAccountComponentName(), row.getPhoneAccountId());
 
     // Add an audio call item
     modules.add(
@@ -132,8 +132,8 @@ final class Modules {
             context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
 
     // Add a video item if (1) the call log entry is for a video call, and (2) the call is not spam.
-    if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-        && !row.numberAttributes().getIsSpam()) {
+    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
+        && !row.getNumberAttributes().getIsSpam()) {
       modules.add(
           IntentModule.newVideoCallModule(
               context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
@@ -147,14 +147,15 @@ final class Modules {
 
   private static HistoryItemActionModule createModuleForAccessingCallDetails(
       Context context, CoalescedRow row) {
-    boolean canReportAsInvalidNumber = row.numberAttributes().getCanReportAsInvalidNumber();
-    boolean canSupportAssistedDialing = !TextUtils.isEmpty(row.numberAttributes().getLookupUri());
+    boolean canReportAsInvalidNumber = row.getNumberAttributes().getCanReportAsInvalidNumber();
+    boolean canSupportAssistedDialing =
+        !TextUtils.isEmpty(row.getNumberAttributes().getLookupUri());
 
     return new IntentModule(
         context,
         CallDetailsActivity.newInstance(
             context,
-            row.coalescedIds(),
+            row.getCoalescedIds(),
             createCallDetailsHeaderInfoFromRow(context, row),
             canReportAsInvalidNumber,
             canSupportAssistedDialing),
@@ -165,7 +166,7 @@ final class Modules {
   private static CallDetailsHeaderInfo createCallDetailsHeaderInfoFromRow(
       Context context, CoalescedRow row) {
     return CallDetailsHeaderInfo.newBuilder()
-        .setDialerPhoneNumber(row.number())
+        .setDialerPhoneNumber(row.getNumber())
         .setPhotoInfo(createPhotoInfoFromRow(row))
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
         .setSecondaryText(
@@ -174,13 +175,10 @@ final class Modules {
   }
 
   private static PhotoInfo createPhotoInfoFromRow(CoalescedRow row) {
-    PhotoInfo.Builder photoInfoBuilder =
-        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
-            .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-            .setIsVoicemail(row.isVoicemailCall());
-    if (!TextUtils.isEmpty(row.formattedNumber())) {
-      photoInfoBuilder.setFormattedNumber(row.formattedNumber());
-    }
-    return photoInfoBuilder.build();
+    return NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
+        .setFormattedNumber(row.getFormattedNumber())
+        .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+        .setIsVoicemail(row.getIsVoicemailCall())
+        .build();
   }
 }

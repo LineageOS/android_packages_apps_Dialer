@@ -1,0 +1,70 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.calllog.model";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.calllog.model;
+
+import "java/com/android/dialer/calllog/database/contract/coalesced_ids.proto";
+import "java/com/android/dialer/calllog/database/contract/number_attributes.proto";
+import "java/com/android/dialer/phonenumberproto/dialer_phone_number.proto";
+
+// Contains the contents of a row from the CoalescedAnnotatedCallLog.
+// Next ID: 19
+message CoalescedRow {
+  // Value in column CoalescedAnnotatedCallLog._ID
+  optional int64 id = 1;
+
+  // Value in column CoalescedAnnotatedCallLog.TIMESTAMP
+  optional int64 timestamp = 2;
+
+  // Value in column CoalescedAnnotatedCallLog.NUMBER
+  optional com.android.dialer.DialerPhoneNumber number = 3;
+
+  // Value in column CoalescedAnnotatedCallLog.FORMATTED_NUMBER
+  optional string formatted_number = 4;
+
+  // Value in column CoalescedAnnotatedCallLog.NUMBER_PRESENTATION
+  optional int32 number_presentation = 5;
+
+  // Value in column CoalescedAnnotatedCallLog.IS_READ
+  optional bool is_read = 6;
+
+  // Value in column CoalescedAnnotatedCallLog.NEW
+  optional bool is_new = 7;
+
+  // Value in column CoalescedAnnotatedCallLog.GEOCODED_LOCATION
+  optional string geocoded_location = 8;
+
+  // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME
+  optional string phone_account_component_name = 9;
+
+  // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_ID
+  optional string phone_account_id = 10;
+
+  // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_LABEL
+  optional string phone_account_label = 11;
+
+  // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COLOR
+  optional int32 phone_account_color = 12;
+
+  // Value in column CoalescedAnnotatedCallLog.FEATURES
+  optional int32 features = 13;
+
+  // Value in column CoalescedAnnotatedCallLog.CALL_TYPE
+  optional int32 call_type = 14;
+
+  // Value in column CoalescedAnnotatedCallLog.NUMBER_ATTRIBUTES
+  optional com.android.dialer.NumberAttributes number_attributes = 15;
+
+  // Value in column CoalescedAnnotatedCallLog.IS_VOICEMAIL_CALL
+  optional bool is_voicemail_call = 16;
+
+  // Value in column CoalescedAnnotatedCallLog.VOICEMAIL_CALL_TAG
+  optional string voicemail_call_tag = 17;
+
+  // Value in column CoalescedAnnotatedCallLog.COALESCED_IDS
+  optional com.android.dialer.CoalescedIds coalesced_ids = 18;
+}

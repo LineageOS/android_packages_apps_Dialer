@@ -18,12 +18,10 @@ package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
-import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.HistoryItemPrimaryActionInfo;
 
 /** Configures the primary action row (top row) for the bottom sheet. */
@@ -32,16 +30,13 @@ final class PrimaryAction {
   static HistoryItemPrimaryActionInfo fromRow(Context context, CoalescedRow row) {
     CharSequence primaryText = CallLogEntryText.buildPrimaryText(context, row);
 
-    PhotoInfo.Builder photoInfoBuilder =
-        NumberAttributesConverter.toPhotoInfoBuilder(row.numberAttributes())
-            .setIsVideo((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO);
-    if (!TextUtils.isEmpty(row.formattedNumber())) {
-      photoInfoBuilder.setFormattedNumber(row.formattedNumber());
-    }
-
     return HistoryItemPrimaryActionInfo.builder()
-        .setNumber(row.number())
-        .setPhotoInfo(photoInfoBuilder.build())
+        .setNumber(row.getNumber())
+        .setPhotoInfo(
+            NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
+                .setFormattedNumber(row.getFormattedNumber())
+                .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+                .build())
         .setPrimaryText(primaryText)
         .setSecondaryText(CallLogEntryText.buildSecondaryTextForBottomSheet(context, row))
         .setIntent(CallLogIntents.getCallBackIntent(context, row))
