@@ -564,6 +564,7 @@ public class CallLogAdapter extends GroupingListAdapter
     blockReportSpamListener =
         new BlockReportSpamListener(
             this.activity,
+            this.activity.findViewById(R.id.call_log_fragment_root),
             ((Activity) this.activity).getFragmentManager(),
             this,
             this.filteredNumberAsyncQueryHandler);

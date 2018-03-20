@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForReportingNotSpam;
@@ -31,26 +32,32 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 
 /** Listener to show dialogs for block and report spam actions. */
 public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClickListener {
 
   private final Context context;
+  private final View rootView;
   private final FragmentManager fragmentManager;
   private final RecyclerView.Adapter adapter;
   private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
   private final Spam spam;
+  private final SpamBlockingPromoHelper spamBlockingPromoHelper;
 
   public BlockReportSpamListener(
       Context context,
+      View rootView,
       FragmentManager fragmentManager,
       RecyclerView.Adapter adapter,
       FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
     this.context = context;
+    this.rootView = rootView;
     this.fragmentManager = fragmentManager;
     this.adapter = adapter;
     this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
     spam = SpamComponent.get(context).spam();
+    spamBlockingPromoHelper = new SpamBlockingPromoHelper(context, spam);
   }
 
   @Override
@@ -85,6 +92,10 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                   },
                   number,
                   countryIso);
+
+              if (isSpamChecked) {
+                spamBlockingPromoHelper.showSpamBlockingPromoDialog(rootView, fragmentManager);
+              }
             },
             null)
         .show(fragmentManager, BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
@@ -122,6 +133,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                   },
                   number,
                   countryIso);
+
+              spamBlockingPromoHelper.showSpamBlockingPromoDialog(rootView, fragmentManager);
             },
             null)
         .show(fragmentManager, BlockReportSpamDialogs.BLOCK_DIALOG_TAG);
