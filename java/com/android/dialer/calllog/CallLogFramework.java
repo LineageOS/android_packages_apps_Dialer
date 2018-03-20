@@ -39,6 +39,12 @@ public final class CallLogFramework {
     this.dataSources = dataSources;
   }
 
+  /** Performs necessary setup work when the application is created. */
+  public void onApplicationCreate(Context appContext) {
+    registerContentObservers(appContext);
+    CallLogConfig.schedulePollingJob(appContext);
+  }
+
   /** Registers the content observers for all data sources. */
   public void registerContentObservers(Context appContext) {
     LogUtil.enterBlock("CallLogFramework.registerContentObservers");
