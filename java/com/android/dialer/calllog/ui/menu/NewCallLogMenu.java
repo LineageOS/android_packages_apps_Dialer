@@ -36,7 +36,7 @@ public final class NewCallLogMenu {
     return view -> {
       HistoryItemActionBottomSheet.show(
           context,
-          PrimaryAction.fromRow(context, row),
+          BottomSheetHeader.fromRow(context, row),
           Modules.fromRow(context, row),
           glidePhotoManager);
 
