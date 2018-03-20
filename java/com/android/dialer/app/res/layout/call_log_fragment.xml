@@ -16,6 +16,7 @@
 
 <!-- Layout parameters are set programmatically. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/call_log_fragment_root"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
