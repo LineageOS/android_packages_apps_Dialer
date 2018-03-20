@@ -19,7 +19,6 @@ package com.android.dialer.voicemail.listui.menu;
 import android.content.Context;
 import android.text.TextUtils;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.HistoryItemPrimaryActionInfo;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
@@ -34,30 +33,27 @@ final class PrimaryAction {
   // setSecondaryText - check in with UX
   static HistoryItemPrimaryActionInfo fromVoicemailEntry(
       Context context, VoicemailEntry voicemailEntry) {
-    PhotoInfo.Builder photoInfoBuilder =
-        NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.numberAttributes());
-    if (!TextUtils.isEmpty(voicemailEntry.formattedNumber())) {
-      photoInfoBuilder.setFormattedNumber(voicemailEntry.formattedNumber());
-    }
-
     return HistoryItemPrimaryActionInfo.builder()
-        .setNumber(voicemailEntry.number())
-        .setPhotoInfo(photoInfoBuilder.build())
+        .setNumber(voicemailEntry.getNumber())
+        .setPhotoInfo(
+            NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.getNumberAttributes())
+                .setFormattedNumber(voicemailEntry.getFormattedNumber())
+                .build())
         .setPrimaryText(buildPrimaryVoicemailText(context, voicemailEntry))
         .setSecondaryText(buildSecondaryVoicemailText(voicemailEntry))
         .build();
   }
 
   private static CharSequence buildSecondaryVoicemailText(VoicemailEntry voicemailEntry) {
-    return voicemailEntry.geocodedLocation();
+    return voicemailEntry.getGeocodedLocation();
   }
 
   public static String buildPrimaryVoicemailText(Context context, VoicemailEntry data) {
     StringBuilder primaryText = new StringBuilder();
-    if (!TextUtils.isEmpty(data.numberAttributes().getName())) {
-      primaryText.append(data.numberAttributes().getName());
-    } else if (!TextUtils.isEmpty(data.formattedNumber())) {
-      primaryText.append(data.formattedNumber());
+    if (!TextUtils.isEmpty(data.getNumberAttributes().getName())) {
+      primaryText.append(data.getNumberAttributes().getName());
+    } else if (!TextUtils.isEmpty(data.getFormattedNumber())) {
+      primaryText.append(data.getFormattedNumber());
     } else {
       // TODO(uabdullah): Handle CallLog.Calls.PRESENTATION_*, including Verizon restricted numbers.
       // primaryText.append(context.getText(R.string.voicemail_unknown));
