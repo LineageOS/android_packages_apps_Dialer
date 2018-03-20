@@ -48,7 +48,7 @@ public final class CallLogConfig {
   private final ListeningExecutorService backgroundExecutor;
 
   @Inject
-  CallLogConfig(
+  public CallLogConfig(
       @Unencrypted SharedPreferences sharedPreferences,
       ConfigProvider configProvider,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
