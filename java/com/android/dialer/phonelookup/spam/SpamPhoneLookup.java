@@ -156,4 +156,7 @@ public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
     // No content observer can be registered as Spam is not based on a content provider.
     // Each Spam implementation should be responsible for notifying any data changes.
   }
+
+  @Override
+  public void unregisterContentObservers(Context appContext) {}
 }

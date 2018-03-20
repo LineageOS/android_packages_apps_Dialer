@@ -222,6 +222,14 @@ public final class CompositePhoneLookup {
     }
   }
 
+  /** Delegates to sub-lookups' {@link PhoneLookup#unregisterContentObservers(Context)}. */
+  @MainThread
+  public void unregisterContentObservers(Context appContext) {
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      phoneLookup.unregisterContentObservers(appContext);
+    }
+  }
+
   private static String getMostRecentInfoEventName(Object classNameSource, boolean isBuilt) {
     return String.format(
         !isBuilt
