@@ -627,6 +627,9 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
     // Do nothing since CP2 changes are too noisy.
   }
 
+  @Override
+  public void unregisterContentObservers(Context appContext) {}
+
   /**
    * 1. get all contact ids. if the id is unset, add the number to the list of contacts to look up.
    * 2. reduce our list of contact ids to those that were updated after lastModified. 3. Now we have

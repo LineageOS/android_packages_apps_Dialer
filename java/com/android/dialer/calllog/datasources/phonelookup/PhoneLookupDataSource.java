@@ -294,6 +294,11 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
     compositePhoneLookup.registerContentObservers(appContext);
   }
 
+  @Override
+  public void unregisterContentObservers(Context appContext) {
+    compositePhoneLookup.unregisterContentObservers(appContext);
+  }
+
   private static ImmutableSet<DialerPhoneNumber>
       queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(Context appContext) {
     ImmutableSet.Builder<DialerPhoneNumber> numbers = ImmutableSet.builder();

@@ -108,4 +108,7 @@ public class VoicemailDataSource implements CallLogDataSource {
 
   @Override
   public void registerContentObservers(Context appContext) {}
+
+  @Override
+  public void unregisterContentObservers(Context appContext) {}
 }
