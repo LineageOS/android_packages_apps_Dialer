@@ -34,36 +34,36 @@ import java.util.List;
 /**
  * {@link BottomSheetDialog} used to show a list of actions in a bottom sheet menu.
  *
- * <p>{@link #show(Context, HistoryItemPrimaryActionInfo, List, GlidePhotoManager)} should be used
- * to create and display the menu. Modules are built using {@link HistoryItemActionModule} and some
- * defaults are provided by {@link IntentModule} and {@link DividerModule}.
+ * <p>{@link #show(Context, HistoryItemBottomSheetHeaderInfo, List, GlidePhotoManager)} should be
+ * used to create and display the menu. Modules are built using {@link HistoryItemActionModule} and
+ * some defaults are provided by {@link IntentModule} and {@link DividerModule}.
  */
 public class HistoryItemActionBottomSheet extends BottomSheetDialog implements OnClickListener {
 
   private final List<HistoryItemActionModule> modules;
-  private final HistoryItemPrimaryActionInfo historyItemPrimaryActionInfo;
+  private final HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo;
   private final GlidePhotoManager glidePhotoManager;
 
   private HistoryItemActionBottomSheet(
       Context context,
-      HistoryItemPrimaryActionInfo historyItemPrimaryActionInfo,
+      HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo,
       List<HistoryItemActionModule> modules,
       GlidePhotoManager glidePhotoManager) {
     super(context);
     this.modules = modules;
-    this.historyItemPrimaryActionInfo = historyItemPrimaryActionInfo;
+    this.historyItemBottomSheetHeaderInfo = historyItemBottomSheetHeaderInfo;
     this.glidePhotoManager = glidePhotoManager;
     setContentView(LayoutInflater.from(context).inflate(R.layout.sheet_layout, null));
   }
 
   public static HistoryItemActionBottomSheet show(
       Context context,
-      HistoryItemPrimaryActionInfo historyItemPrimaryActionInfo,
+      HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo,
       List<HistoryItemActionModule> modules,
       GlidePhotoManager glidePhotoManager) {
     HistoryItemActionBottomSheet sheet =
         new HistoryItemActionBottomSheet(
-            context, historyItemPrimaryActionInfo, modules, glidePhotoManager);
+            context, historyItemBottomSheetHeaderInfo, modules, glidePhotoManager);
     sheet.show();
     return sheet;
   }
@@ -90,24 +90,17 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     // TODO(zachh): The contact image should be badged with a video icon if it is for a video call.
     glidePhotoManager.loadQuickContactBadge(
         contactView.findViewById(R.id.quick_contact_photo),
-        historyItemPrimaryActionInfo.photoInfo());
+        historyItemBottomSheetHeaderInfo.getPhotoInfo());
 
     TextView primaryTextView = contactView.findViewById(R.id.primary_text);
     TextView secondaryTextView = contactView.findViewById(R.id.secondary_text);
 
-    primaryTextView.setText(historyItemPrimaryActionInfo.primaryText());
-    if (!TextUtils.isEmpty(historyItemPrimaryActionInfo.secondaryText())) {
-      secondaryTextView.setText(historyItemPrimaryActionInfo.secondaryText());
+    primaryTextView.setText(historyItemBottomSheetHeaderInfo.getPrimaryText());
+    if (!TextUtils.isEmpty(historyItemBottomSheetHeaderInfo.getSecondaryText())) {
+      secondaryTextView.setText(historyItemBottomSheetHeaderInfo.getSecondaryText());
     } else {
       secondaryTextView.setVisibility(View.GONE);
       secondaryTextView.setText(null);
-    }
-    if (historyItemPrimaryActionInfo.intent() != null) {
-      contactView.setOnClickListener(
-          (view) -> {
-            getContext().startActivity(historyItemPrimaryActionInfo.intent());
-            dismiss();
-          });
     }
     return contactView;
   }

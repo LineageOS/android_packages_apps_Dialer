@@ -16,39 +16,31 @@
 
 package com.android.dialer.voicemail.listui.menu;
 
-import android.content.Context;
 import android.text.TextUtils;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.historyitemactions.HistoryItemPrimaryActionInfo;
+import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
-/** Configures the primary action row (top row) for theottom sheet for the Voicemail Tab */
-final class PrimaryAction {
+/** Configures the top row in the bottom sheet for the Voicemail Tab */
+final class BottomSheetHeader {
 
-  // TODO(uabdullah): Need to do the following:
-  // setIsVideo - check if is passing in voicemailEntry.features() is required
-  // setLookupUri - check if passing in voicemailEntry.lookupUri() is required
-  // setIntent - allow video calling
-  // setPrimaryText - check in with UX
-  // setSecondaryText - check in with UX
-  static HistoryItemPrimaryActionInfo fromVoicemailEntry(
-      Context context, VoicemailEntry voicemailEntry) {
-    return HistoryItemPrimaryActionInfo.builder()
+  static HistoryItemBottomSheetHeaderInfo fromVoicemailEntry(VoicemailEntry voicemailEntry) {
+    return HistoryItemBottomSheetHeaderInfo.newBuilder()
         .setNumber(voicemailEntry.getNumber())
         .setPhotoInfo(
             NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.getNumberAttributes())
                 .setFormattedNumber(voicemailEntry.getFormattedNumber())
                 .build())
-        .setPrimaryText(buildPrimaryVoicemailText(context, voicemailEntry))
+        .setPrimaryText(buildPrimaryVoicemailText(voicemailEntry))
         .setSecondaryText(buildSecondaryVoicemailText(voicemailEntry))
         .build();
   }
 
-  private static CharSequence buildSecondaryVoicemailText(VoicemailEntry voicemailEntry) {
+  private static String buildSecondaryVoicemailText(VoicemailEntry voicemailEntry) {
     return voicemailEntry.getGeocodedLocation();
   }
 
-  public static String buildPrimaryVoicemailText(Context context, VoicemailEntry data) {
+  private static String buildPrimaryVoicemailText(VoicemailEntry data) {
     StringBuilder primaryText = new StringBuilder();
     if (!TextUtils.isEmpty(data.getNumberAttributes().getName())) {
       primaryText.append(data.getNumberAttributes().getName());
