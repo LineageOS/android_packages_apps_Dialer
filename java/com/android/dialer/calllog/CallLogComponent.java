@@ -34,6 +34,8 @@ public abstract class CallLogComponent {
 
   public abstract ClearMissedCalls getClearMissedCalls();
 
+  public abstract CallLogConfig callLogConfig();
+
   public static CallLogComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .callLogComponent();
