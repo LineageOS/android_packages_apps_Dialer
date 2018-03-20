@@ -19,6 +19,7 @@ package com.android.dialer.calllog.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.CursorLoader;
+import android.text.TextUtils;
 import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
@@ -84,26 +85,53 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
       throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
     }
 
-    return CoalescedRow.builder()
-        .setId(cursor.getInt(ID))
-        .setTimestamp(cursor.getLong(TIMESTAMP))
-        .setNumber(number)
-        .setFormattedNumber(cursor.getString(FORMATTED_NUMBER))
-        .setNumberPresentation(cursor.getInt(NUMBER_PRESENTATION))
-        .setIsRead(cursor.getInt(IS_READ) == 1)
-        .setIsNew(cursor.getInt(NEW) == 1)
-        .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
-        .setPhoneAccountComponentName(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME))
-        .setPhoneAccountId(cursor.getString(PHONE_ACCOUNT_ID))
-        .setPhoneAccountLabel(cursor.getString(PHONE_ACCOUNT_LABEL))
-        .setPhoneAccountColor(cursor.getInt(PHONE_ACCOUNT_COLOR))
-        .setFeatures(cursor.getInt(FEATURES))
-        .setCallType(cursor.getInt(CALL_TYPE))
-        .setNumberAttributes(numberAttributes)
-        .setIsVoicemailCall(cursor.getInt(IS_VOICEMAIL_CALL) == 1)
-        .setVoicemailCallTag(cursor.getString(VOICEMAIL_CALL_TAG))
-        .setCoalescedIds(coalescedIds)
-        .build();
+    CoalescedRow.Builder coalescedRowBuilder =
+        CoalescedRow.newBuilder()
+            .setId(cursor.getLong(ID))
+            .setTimestamp(cursor.getLong(TIMESTAMP))
+            .setNumber(number)
+            .setNumberPresentation(cursor.getInt(NUMBER_PRESENTATION))
+            .setIsRead(cursor.getInt(IS_READ) == 1)
+            .setIsNew(cursor.getInt(NEW) == 1)
+            .setPhoneAccountColor(cursor.getInt(PHONE_ACCOUNT_COLOR))
+            .setFeatures(cursor.getInt(FEATURES))
+            .setCallType(cursor.getInt(CALL_TYPE))
+            .setNumberAttributes(numberAttributes)
+            .setIsVoicemailCall(cursor.getInt(IS_VOICEMAIL_CALL) == 1)
+            .setCoalescedIds(coalescedIds);
+
+    String formattedNumber = cursor.getString(FORMATTED_NUMBER);
+    if (!TextUtils.isEmpty(formattedNumber)) {
+      coalescedRowBuilder.setFormattedNumber(formattedNumber);
+    }
+
+    String geocodedLocation = cursor.getString(GEOCODED_LOCATION);
+    if (!TextUtils.isEmpty(geocodedLocation)) {
+      coalescedRowBuilder.setGeocodedLocation(geocodedLocation);
+    }
+
+    String phoneAccountComponentName = cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
+    if (!TextUtils.isEmpty(phoneAccountComponentName)) {
+      coalescedRowBuilder.setPhoneAccountComponentName(
+          cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME));
+    }
+
+    String phoneAccountId = cursor.getString(PHONE_ACCOUNT_ID);
+    if (!TextUtils.isEmpty(phoneAccountId)) {
+      coalescedRowBuilder.setPhoneAccountId(phoneAccountId);
+    }
+
+    String phoneAccountLabel = cursor.getString(PHONE_ACCOUNT_LABEL);
+    if (!TextUtils.isEmpty(phoneAccountLabel)) {
+      coalescedRowBuilder.setPhoneAccountLabel(phoneAccountLabel);
+    }
+
+    String voicemailCallTag = cursor.getString(VOICEMAIL_CALL_TAG);
+    if (!TextUtils.isEmpty(voicemailCallTag)) {
+      coalescedRowBuilder.setVoicemailCallTag(voicemailCallTag);
+    }
+
+    return coalescedRowBuilder.build();
   }
 
   static long getTimestamp(Cursor cursor) {
