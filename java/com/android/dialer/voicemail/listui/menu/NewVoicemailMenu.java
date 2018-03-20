@@ -31,7 +31,7 @@ public final class NewVoicemailMenu {
     return (view) ->
         HistoryItemActionBottomSheet.show(
             context,
-            PrimaryAction.fromVoicemailEntry(context, voicemailEntry),
+            BottomSheetHeader.fromVoicemailEntry(voicemailEntry),
             Modules.fromVoicemailEntry(context, voicemailEntry),
             glidePhotoManager);
   }
