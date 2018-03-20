@@ -84,6 +84,9 @@ public class MainSearchController implements SearchBarListener {
   private final MainToolbar toolbar;
   private final View toolbarShadow;
 
+  /** View located underneath the toolbar that needs to animate with it. */
+  private final View fragmentContainer;
+
   private final List<OnSearchShowListener> onSearchShowListenerList = new ArrayList<>();
 
   /**
@@ -91,7 +94,6 @@ public class MainSearchController implements SearchBarListener {
    * want to wait until onPause is called otherwise the transition will look extremely janky.
    */
   private boolean closeSearchOnPause;
-
   private boolean requestingPermission;
 
   public MainSearchController(
@@ -99,12 +101,14 @@ public class MainSearchController implements SearchBarListener {
       BottomNavBar bottomNav,
       FloatingActionButton fab,
       MainToolbar toolbar,
-      View toolbarShadow) {
+      View toolbarShadow,
+      View fragmentContainer) {
     this.activity = activity;
     this.bottomNav = bottomNav;
     this.fab = fab;
     this.toolbar = toolbar;
     this.toolbarShadow = toolbarShadow;
+    this.fragmentContainer = fragmentContainer;
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
@@ -134,9 +138,10 @@ public class MainSearchController implements SearchBarListener {
     Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_DIALPAD, activity);
 
     fab.hide();
-    toolbar.slideUp(animate);
+    toolbar.slideUp(animate, fragmentContainer);
     toolbar.expand(animate, Optional.absent());
     toolbarShadow.setVisibility(View.VISIBLE);
+
     activity.setTitle(R.string.dialpad_activity_title);
 
     FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
@@ -147,18 +152,12 @@ public class MainSearchController implements SearchBarListener {
       // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
       // places promo to be shown.
       searchFragment = NewSearchFragment.newInstance(/* showZeroSuggest=*/ true);
-      transaction.replace(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
-      transaction.addToBackStack(null);
+      transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
       transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(searchFragment);
     }
     searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
-
-    // Split the transactions so that the dialpad fragment isn't popped off the stack when we exit
-    // search. We do this so that the dialpad actually animates down instead of just disappearing.
-    transaction.commit();
-    transaction = activity.getFragmentManager().beginTransaction();
 
     // Show Dialpad
     if (getDialpadFragment() == null) {
@@ -184,12 +183,12 @@ public class MainSearchController implements SearchBarListener {
    *
    * @see {@link #closeSearch(boolean)} to "remove" the dialpad.
    */
-  private void hideDialpad(boolean animate, boolean bottomNavVisible) {
+  private void hideDialpad(boolean animate) {
     LogUtil.enterBlock("MainSearchController.hideDialpad");
     Assert.checkArgument(isDialpadVisible());
 
     fab.show();
-    toolbar.slideDown(animate);
+    toolbar.slideDown(animate, fragmentContainer);
     toolbar.transferQueryFromDialpad(getDialpadFragment().getQuery());
     activity.setTitle(R.string.main_activity_label);
 
@@ -199,15 +198,7 @@ public class MainSearchController implements SearchBarListener {
         animate,
         new AnimationListener() {
           @Override
-          public void onAnimationStart(Animation animation) {
-            // Slide the bottom nav on animation start so it's (not) visible when the dialpad
-            // finishes animating down.
-            if (bottomNavVisible) {
-              showBottomNav();
-            } else {
-              hideBottomNav();
-            }
-          }
+          public void onAnimationStart(Animation animation) {}
 
           @Override
           public void onAnimationEnd(Animation animation) {
@@ -257,7 +248,7 @@ public class MainSearchController implements SearchBarListener {
       } else {
         Logger.get(activity)
             .logImpression(DialerImpression.Type.MAIN_TOUCH_DIALPAD_SEARCH_LIST_TO_HIDE_DIALPAD);
-        hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
+        hideDialpad(/* animate=*/ true);
       }
     } else if (isSearchVisible()) {
       if (TextUtils.isEmpty(toolbar.getQuery())) {
@@ -282,7 +273,7 @@ public class MainSearchController implements SearchBarListener {
       LogUtil.i("MainSearchController.onBackPressed", "Dialpad visible with query");
       Logger.get(activity)
           .logImpression(DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
-      hideDialpad(/* animate=*/ true, /* bottomNavVisible=*/ false);
+      hideDialpad(/* animate=*/ true);
       return true;
     } else if (isSearchVisible()) {
       LogUtil.i("MainSearchController.onBackPressed", "Search is visible");
@@ -298,22 +289,19 @@ public class MainSearchController implements SearchBarListener {
     }
   }
 
-  /**
-   * Calls {@link #hideDialpad(boolean, boolean)}, removes the search fragment and clears the
-   * dialpad.
-   */
+  /** Calls {@link #hideDialpad(boolean)}, removes the search fragment and clears the dialpad. */
   private void closeSearch(boolean animate) {
     LogUtil.enterBlock("MainSearchController.closeSearch");
     Assert.checkArgument(isSearchVisible());
     if (isDialpadVisible()) {
-      hideDialpad(animate, /* bottomNavVisible=*/ true);
+      hideDialpad(animate);
     } else if (!fab.isShown()) {
       fab.show();
     }
     showBottomNav();
     toolbar.collapse(animate);
     toolbarShadow.setVisibility(View.GONE);
-    activity.getFragmentManager().popBackStack();
+    activity.getFragmentManager().beginTransaction().hide(getSearchFragment()).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
     DialpadFragment dialpadFragment = getDialpadFragment();
@@ -391,8 +379,7 @@ public class MainSearchController implements SearchBarListener {
       // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
       // places promo to be shown.
       searchFragment = NewSearchFragment.newInstance(true);
-      transaction.replace(R.id.fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
-      transaction.addToBackStack(null);
+      transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
       transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(getSearchFragment());
@@ -519,7 +506,7 @@ public class MainSearchController implements SearchBarListener {
       toolbar.expand(false, Optional.absent());
     }
     if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_SLIDE_UP, false)) {
-      toolbar.slideUp(false);
+      toolbar.slideUp(false, fragmentContainer);
     }
   }
 

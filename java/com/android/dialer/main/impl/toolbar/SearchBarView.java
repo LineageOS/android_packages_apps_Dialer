@@ -186,7 +186,6 @@ final class SearchBarView extends FrameLayout {
     params.rightMargin = margin;
     searchBoxExpanded.getLayoutParams().height =
         (int) (animationEndHeight - (animationEndHeight - animationStartHeight) * fraction);
-    requestLayout();
   }
 
   /* package-private */ void setSearchBarListener(@NonNull SearchBarListener listener) {
