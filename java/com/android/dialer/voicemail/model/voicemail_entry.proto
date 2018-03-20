@@ -1,0 +1,56 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.voicemail.model";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.voicemail.model;
+
+import "java/com/android/dialer/calllog/database/contract/number_attributes.proto";
+import "java/com/android/dialer/phonenumberproto/dialer_phone_number.proto";
+
+// Contains contents of a voicemail entry from the AnnotatedCallLog.
+message VoicemailEntry {
+  // Value in column AnnotatedCallLog._ID
+  optional int64 id = 1;
+
+  // Value in column AnnotatedCallLog.TIMESTAMP
+  optional int64 timestamp = 2;
+
+  // Value in column AnnotatedCallLog.NUMBER
+  optional com.android.dialer.DialerPhoneNumber number = 3;
+
+  // Value in column AnnotatedCallLog.FORMATTED_NUMBER
+  optional string formatted_number = 4;
+
+  // Value in column AnnotatedCallLog.GEOCODED_LOCATION
+  optional string geocoded_location = 5;
+
+  // Value in column AnnotatedCallLog.DURATION
+  optional int64 duration = 6;
+
+  // Value in column AnnotatedCallLog.TRANSCRIPTION
+  optional string transcription = 7;
+
+  // Value in column AnnotatedCallLog.VOICEMAIL_URI
+  optional string voicemail_uri = 8;
+
+  // Value in column AnnotatedCallLog.CALL_TYPE
+  optional int32 call_type = 9;
+
+  // Value in column AnnotatedCallLog.IS_READ
+  optional int32 is_read = 10;
+
+  // Value in column AnnotatedCallLog.NUMBER_ATTRIBUTES
+  optional com.android.dialer.NumberAttributes number_attributes = 11;
+
+  // Value in column AnnotatedCallLog.TRANSCRIPTION_STATE
+  optional int32 transcription_state = 12;
+
+  // Value in column AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME
+  optional string phone_account_component_name = 13;
+
+  // Value in column AnnotatedCallLog.PHONE_ACCOUNT_ID
+  optional string phone_account_id = 14;
+}

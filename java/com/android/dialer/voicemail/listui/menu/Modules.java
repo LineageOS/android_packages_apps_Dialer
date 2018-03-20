@@ -43,11 +43,11 @@ final class Modules {
     Optional<HistoryItemActionModule> moduleForAddingContacts =
         SharedModules.createModuleForAddingToContacts(
             context,
-            voicemailEntry.number(),
-            voicemailEntry.numberAttributes().getName(),
-            voicemailEntry.numberAttributes().getLookupUri(),
-            voicemailEntry.numberAttributes().getIsBlocked(),
-            voicemailEntry.numberAttributes().getIsSpam());
+            voicemailEntry.getNumber(),
+            voicemailEntry.getNumberAttributes().getName(),
+            voicemailEntry.getNumberAttributes().getLookupUri(),
+            voicemailEntry.getNumberAttributes().getIsBlocked(),
+            voicemailEntry.getNumberAttributes().getIsSpam());
     if (moduleForAddingContacts.isPresent()) {
       modules.add(moduleForAddingContacts.get());
     }
@@ -55,8 +55,8 @@ final class Modules {
     Optional<HistoryItemActionModule> moduleForSendingTextMessage =
         SharedModules.createModuleForSendingTextMessage(
             context,
-            voicemailEntry.number().getNormalizedNumber(),
-            voicemailEntry.numberAttributes().getIsBlocked());
+            voicemailEntry.getNumber().getNormalizedNumber(),
+            voicemailEntry.getNumberAttributes().getIsBlocked());
     if (moduleForSendingTextMessage.isPresent()) {
       modules.add(moduleForSendingTextMessage.get());
     }
@@ -67,23 +67,23 @@ final class Modules {
 
     BlockReportSpamDialogInfo blockReportSpamDialogInfo =
         BlockReportSpamDialogInfo.newBuilder()
-            .setNormalizedNumber(voicemailEntry.number().getNormalizedNumber())
-            .setCountryIso(voicemailEntry.number().getCountryIso())
-            .setCallType(voicemailEntry.callType())
+            .setNormalizedNumber(voicemailEntry.getNumber().getNormalizedNumber())
+            .setCountryIso(voicemailEntry.getNumber().getCountryIso())
+            .setCallType(voicemailEntry.getCallType())
             .setReportingLocation(ReportingLocation.Type.VOICEMAIL_HISTORY)
-            .setContactSource(voicemailEntry.numberAttributes().getContactSource())
+            .setContactSource(voicemailEntry.getNumberAttributes().getContactSource())
             .build();
     modules.addAll(
         SharedModules.createModulesHandlingBlockedOrSpamNumber(
             context,
             blockReportSpamDialogInfo,
-            voicemailEntry.numberAttributes().getIsBlocked(),
-            voicemailEntry.numberAttributes().getIsSpam()));
+            voicemailEntry.getNumberAttributes().getIsBlocked(),
+            voicemailEntry.getNumberAttributes().getIsSpam()));
 
     // TODO(zachh): Module for CallComposer.
     Optional<HistoryItemActionModule> moduleForCopyingNumber =
         SharedModules.createModuleForCopyingNumber(
-            context, voicemailEntry.number().getNormalizedNumber());
+            context, voicemailEntry.getNumber().getNormalizedNumber());
     if (moduleForCopyingNumber.isPresent()) {
       modules.add(moduleForCopyingNumber.get());
     }

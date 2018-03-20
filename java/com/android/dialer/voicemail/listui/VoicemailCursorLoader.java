@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.v4.content.CursorLoader;
+import android.text.TextUtils;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
@@ -99,22 +100,48 @@ final class VoicemailCursorLoader extends CursorLoader {
         "CP2 info incomplete for number: %s",
         LogUtil.sanitizePii(number.getNormalizedNumber()));
 
-    return VoicemailEntry.builder()
-        .setId(cursor.getInt(ID))
-        .setTimestamp(cursor.getLong(TIMESTAMP))
-        .setNumber(number)
-        .setFormattedNumber(cursor.getString(FORMATTED_NUMBER))
-        .setDuration(cursor.getLong(DURATION))
-        .setTranscription(cursor.getString(TRANSCRIPTION))
-        .setVoicemailUri(cursor.getString(VOICEMAIL_URI))
-        .setGeocodedLocation(cursor.getString(GEOCODED_LOCATION))
-        .setCallType(cursor.getInt(CALL_TYPE))
-        .setIsRead(cursor.getInt(IS_READ))
-        .setNumberAttributes(numberAttributes)
-        .setTranscriptionState(cursor.getInt(TRANSCRIPTION_STATE))
-        .setPhoneAccountComponentName(cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME))
-        .setPhoneAccountId(cursor.getString(PHONE_ACCOUNT_ID))
-        .build();
+    VoicemailEntry.Builder voicemailEntryBuilder =
+        VoicemailEntry.newBuilder()
+            .setId(cursor.getInt(ID))
+            .setTimestamp(cursor.getLong(TIMESTAMP))
+            .setNumber(number)
+            .setDuration(cursor.getLong(DURATION))
+            .setCallType(cursor.getInt(CALL_TYPE))
+            .setIsRead(cursor.getInt(IS_READ))
+            .setNumberAttributes(numberAttributes)
+            .setTranscriptionState(cursor.getInt(TRANSCRIPTION_STATE));
+
+    String formattedNumber = cursor.getString(FORMATTED_NUMBER);
+    if (!TextUtils.isEmpty(formattedNumber)) {
+      voicemailEntryBuilder.setFormattedNumber(formattedNumber);
+    }
+
+    String geocodedLocation = cursor.getString(GEOCODED_LOCATION);
+    if (!TextUtils.isEmpty(geocodedLocation)) {
+      voicemailEntryBuilder.setGeocodedLocation(geocodedLocation);
+    }
+
+    String transcription = cursor.getString(TRANSCRIPTION);
+    if (!TextUtils.isEmpty(transcription)) {
+      voicemailEntryBuilder.setTranscription(transcription);
+    }
+
+    String voicemailUri = cursor.getString(VOICEMAIL_URI);
+    if (!TextUtils.isEmpty(voicemailUri)) {
+      voicemailEntryBuilder.setVoicemailUri(voicemailUri);
+    }
+
+    String phoneAccountComponentName = cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
+    if (!TextUtils.isEmpty(phoneAccountComponentName)) {
+      voicemailEntryBuilder.setPhoneAccountComponentName(phoneAccountComponentName);
+    }
+
+    String phoneAccountId = cursor.getString(PHONE_ACCOUNT_ID);
+    if (!TextUtils.isEmpty(phoneAccountId)) {
+      voicemailEntryBuilder.setPhoneAccountId(phoneAccountId);
+    }
+
+    return voicemailEntryBuilder.build();
   }
 
   static long getTimestamp(Cursor cursor) {

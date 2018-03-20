@@ -92,7 +92,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
   private final FragmentManager fragmentManager;
   /** A valid id for {@link VoicemailEntry} is greater than 0 */
-  private int currentlyExpandedViewHolderId = -1;
+  private long currentlyExpandedViewHolderId = -1;
 
   private VoicemailErrorMessage voicemailErrorMessage;
 
@@ -114,7 +114,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
    * will always ensure there is only (up-to-date) view holder corresponding to a view holder id,
    * unlike the newVoicemailViewHolderSet.
    */
-  private final ArrayMap<Integer, NewVoicemailViewHolder> newVoicemailViewHolderArrayMap =
+  private final ArrayMap<Long, NewVoicemailViewHolder> newVoicemailViewHolderArrayMap =
       new ArrayMap<>();
 
   // A single instance of a media player re-used across the expanded view holders.
@@ -440,7 +440,7 @@ final class NewVoicemailAdapter extends RecyclerView.Adapter<ViewHolder>
 
     if (!newVoicemailViewHolderArrayMap.isEmpty()) {
       String ids = "";
-      for (int id : newVoicemailViewHolderArrayMap.keySet()) {
+      for (long id : newVoicemailViewHolderArrayMap.keySet()) {
         ids = ids + id + " ";
       }
       LogUtil.i("NewVoicemailAdapter.printArrayMap", "ids are " + ids);
