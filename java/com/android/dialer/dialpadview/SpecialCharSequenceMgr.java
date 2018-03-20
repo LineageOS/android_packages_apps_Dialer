@@ -59,11 +59,10 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.Selec
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.oem.TranssionUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
-import com.google.common.collect.ImmutableSet;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -73,15 +72,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Helper class to listen for some magic character sequences that are handled specially by the
- * dialer.
- *
- * <p>Note the Phone app also handles these sequences too (in a couple of relatively obscure places
- * in the UI), so there's a separate version of this class under apps/Phone.
- *
- * <p>TODO: there's lots of duplicated code between this class and the corresponding class under
- * apps/Phone. Let's figure out a way to unify these two classes (in the framework? in a common
- * shared library?)
+ * Helper class to listen for some magic character sequences that are handled specially by Dialer.
  */
 public class SpecialCharSequenceMgr {
   private static final String TAG_SELECT_ACCT_FRAGMENT = "tag_select_acct_fragment";
@@ -93,9 +84,6 @@ public class SpecialCharSequenceMgr {
 
   private static final String ADN_NAME_COLUMN_NAME = "name";
   private static final int ADN_QUERY_TOKEN = -1;
-
-  /** Comma separated MMI codes specific to OEM/device. */
-  @VisibleForTesting static final String CONFIG_OEM_MMI_CODES_CSV = "oem_mmi_codes_csv";
 
   /**
    * Remembers the previous {@link QueryHandler} and cancel the operation when needed, to prevent
@@ -158,6 +146,12 @@ public class SpecialCharSequenceMgr {
    * @return true if a secret code was encountered and handled
    */
   static boolean handleSecretCode(Context context, String input) {
+    // Secret code specific to OEMs should be handled first.
+    if (TranssionUtils.isTranssionSecretCode(input)) {
+      TranssionUtils.handleTranssionSecretCode(context, input);
+      return true;
+    }
+
     // Secret codes are accessed by dialing *#*#<code>#*#* or "*#<code_starting_with_number>#"
     if (input.length() > 8 && input.startsWith("*#*#") && input.endsWith("#*#*")) {
       String secretCode = input.substring(4, input.length() - 4);
@@ -165,24 +159,7 @@ public class SpecialCharSequenceMgr {
       return true;
     }
 
-    if (getOemSecretCodes(context).contains(input)) {
-      String secretCode = input.substring(2, input.length() - 1);
-      TelephonyManagerCompat.handleSecretCode(context, secretCode);
-      return true;
-    }
     return false;
-  }
-
-  /**
-   * Get the OEM codes from the config provider. The config provider should be aware of the device
-   * and manufacturer.
-   */
-  private static ImmutableSet<String> getOemSecretCodes(Context context) {
-    String csv = ConfigProviderBindings.get(context).getString(CONFIG_OEM_MMI_CODES_CSV, null);
-    if (TextUtils.isEmpty(csv)) {
-      return ImmutableSet.of();
-    }
-    return ImmutableSet.copyOf(csv.split(","));
   }
 
   /**
