@@ -44,8 +44,10 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int PHONE_ACCOUNT_COLOR = 11;
   private static final int FEATURES = 12;
   private static final int NUMBER_ATTRIBUTES = 13;
-  private static final int CALL_TYPE = 14;
-  private static final int COALESCED_IDS = 15;
+  private static final int IS_VOICEMAIL_CALL = 14;
+  private static final int VOICEMAIL_CALL_TAG = 15;
+  private static final int CALL_TYPE = 16;
+  private static final int COALESCED_IDS = 17;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -98,6 +100,8 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
         .setFeatures(cursor.getInt(FEATURES))
         .setCallType(cursor.getInt(CALL_TYPE))
         .setNumberAttributes(numberAttributes)
+        .setIsVoicemailCall(cursor.getInt(IS_VOICEMAIL_CALL) == 1)
+        .setVoicemailCallTag(cursor.getString(VOICEMAIL_CALL_TAG))
         .setCoalescedIds(coalescedIds)
         .build();
   }
