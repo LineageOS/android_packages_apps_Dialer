@@ -20,26 +20,23 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
-import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.historyitemactions.HistoryItemPrimaryActionInfo;
+import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 
-/** Configures the primary action row (top row) for the bottom sheet. */
-final class PrimaryAction {
+/** Configures the top row in the bottom sheet. */
+final class BottomSheetHeader {
 
-  static HistoryItemPrimaryActionInfo fromRow(Context context, CoalescedRow row) {
-    CharSequence primaryText = CallLogEntryText.buildPrimaryText(context, row);
-
-    return HistoryItemPrimaryActionInfo.builder()
+  static HistoryItemBottomSheetHeaderInfo fromRow(Context context, CoalescedRow row) {
+    return HistoryItemBottomSheetHeaderInfo.newBuilder()
         .setNumber(row.getNumber())
         .setPhotoInfo(
             NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
                 .setFormattedNumber(row.getFormattedNumber())
                 .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
                 .build())
-        .setPrimaryText(primaryText)
-        .setSecondaryText(CallLogEntryText.buildSecondaryTextForBottomSheet(context, row))
-        .setIntent(CallLogIntents.getCallBackIntent(context, row))
+        .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
+        .setSecondaryText(
+            CallLogEntryText.buildSecondaryTextForBottomSheet(context, row).toString())
         .build();
   }
 }
