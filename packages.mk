@@ -19,6 +19,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.callcomposer.camera.camerafocus \
 	com.android.dialer.callcomposer.cameraui \
 	com.android.dialer.calldetails \
+	com.android.dialer.calllog \
 	com.android.dialer.calllog.database \
 	com.android.dialer.calllog.ui \
 	com.android.dialer.calllog.ui.menu \

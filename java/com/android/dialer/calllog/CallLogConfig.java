@@ -16,12 +16,28 @@
 
 package com.android.dialer.calllog;
 
+import android.annotation.SuppressLint;
+import android.app.job.JobInfo;
+import android.app.job.JobParameters;
+import android.app.job.JobScheduler;
+import android.app.job.JobService;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.os.UserManagerCompat;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProvider;
+import com.android.dialer.constants.ScheduledJobIds;
 import com.android.dialer.storage.Unencrypted;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 /**
@@ -148,5 +164,62 @@ public final class CallLogConfig {
    */
   public boolean isCallLogFrameworkEnabled() {
     return sharedPreferences.getBoolean(NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY, false);
+  }
+
+  static void schedulePollingJob(Context appContext) {
+    if (UserManagerCompat.isUserUnlocked(appContext)) {
+      JobScheduler jobScheduler = Assert.isNotNull(appContext.getSystemService(JobScheduler.class));
+      @SuppressLint("MissingPermission") // Dialer has RECEIVE_BOOT permission
+      JobInfo jobInfo =
+          new JobInfo.Builder(
+                  ScheduledJobIds.CALL_LOG_CONFIG_POLLING_JOB,
+                  new ComponentName(appContext, PollingJob.class))
+              .setPeriodic(TimeUnit.HOURS.toMillis(24))
+              .setPersisted(true)
+              .setRequiresCharging(true)
+              .setRequiresDeviceIdle(true)
+              .build();
+      LogUtil.i("CallLogConfig.schedulePollingJob", "scheduling");
+      jobScheduler.schedule(jobInfo);
+    }
+  }
+
+  /**
+   * Job which periodically force updates the {@link CallLogConfig}. This job is necessary to
+   * support {@link ConfigProvider ConfigProviders} which do not provide a reliable mechanism for
+   * listening to changes and calling {@link CallLogConfig#update()} directly, such as the {@link
+   * com.android.dialer.configprovider.SharedPrefConfigProvider}.
+   */
+  public static final class PollingJob extends JobService {
+
+    @Override
+    public boolean onStartJob(JobParameters params) {
+      LogUtil.enterBlock("PollingJob.onStartJob");
+      Futures.addCallback(
+          CallLogComponent.get(getApplicationContext()).callLogConfig().update(),
+          new FutureCallback<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+              jobFinished(params, false /* needsReschedule */);
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+              ThreadUtil.getUiThreadHandler()
+                  .post(
+                      () -> {
+                        throw new RuntimeException(throwable);
+                      });
+              jobFinished(params, false /* needsReschedule */);
+            }
+          },
+          MoreExecutors.directExecutor());
+      return true;
+    }
+
+    @Override
+    public boolean onStopJob(JobParameters params) {
+      return false;
+    }
   }
 }
