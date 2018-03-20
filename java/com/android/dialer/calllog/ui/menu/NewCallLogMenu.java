@@ -42,11 +42,11 @@ public final class NewCallLogMenu {
 
       // If the user opens the bottom sheet for a new call, clear the notifications and make the row
       // not bold immediately. To do this, mark all of the calls in group as not new.
-      if (row.isNew() && row.callType() == Calls.MISSED_TYPE) {
+      if (row.getIsNew() && row.getCallType() == Calls.MISSED_TYPE) {
         Futures.addCallback(
             CallLogComponent.get(context)
                 .getClearMissedCalls()
-                .clearBySystemCallLogId(row.coalescedIds().getCoalescedIdList()),
+                .clearBySystemCallLogId(row.getCoalescedIds().getCoalescedIdList()),
             new DefaultFutureCallback<>(),
             MoreExecutors.directExecutor());
       }

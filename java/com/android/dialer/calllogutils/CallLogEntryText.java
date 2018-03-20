@@ -43,23 +43,23 @@ public final class CallLogEntryText {
   public static CharSequence buildPrimaryText(Context context, CoalescedRow row) {
     // Always prefer the presentation name, like "Restricted".
     Optional<String> presentationName =
-        PhoneNumberDisplayUtil.getNameForPresentation(context, row.numberPresentation());
+        PhoneNumberDisplayUtil.getNameForPresentation(context, row.getNumberPresentation());
     if (presentationName.isPresent()) {
       return presentationName.get();
     }
 
-    if (row.isVoicemailCall() && !TextUtils.isEmpty(row.voicemailCallTag())) {
-      return row.voicemailCallTag();
+    if (row.getIsVoicemailCall() && !TextUtils.isEmpty(row.getVoicemailCallTag())) {
+      return row.getVoicemailCallTag();
     }
 
     // Otherwise prefer the name.
-    if (!TextUtils.isEmpty(row.numberAttributes().getName())) {
-      return row.numberAttributes().getName();
+    if (!TextUtils.isEmpty(row.getNumberAttributes().getName())) {
+      return row.getNumberAttributes().getName();
     }
 
     // Otherwise prefer the formatted number.
-    if (!TextUtils.isEmpty(row.formattedNumber())) {
-      return row.formattedNumber();
+    if (!TextUtils.isEmpty(row.getFormattedNumber())) {
+      return row.getFormattedNumber();
     }
 
     // If there's no formatted number, just return "Unknown".
@@ -99,17 +99,18 @@ public final class CallLogEntryText {
       Context context, Clock clock, CoalescedRow row) {
     List<CharSequence> components = new ArrayList<>();
 
-    if (row.numberAttributes().getIsBlocked()) {
+    if (row.getNumberAttributes().getIsBlocked()) {
       components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
-    if (row.numberAttributes().getIsSpam()) {
+    if (row.getNumberAttributes().getIsSpam()) {
       components.add(context.getText(R.string.new_call_log_secondary_spam));
     }
 
     components.add(getNumberTypeLabel(context, row));
 
     components.add(
-        CallLogDates.newCallLogTimestampLabel(context, clock.currentTimeMillis(), row.timestamp()));
+        CallLogDates.newCallLogTimestampLabel(
+            context, clock.currentTimeMillis(), row.getTimestamp()));
     return joinSecondaryTextComponents(components);
   }
 
@@ -147,10 +148,10 @@ public final class CallLogEntryText {
      */
     List<CharSequence> components = new ArrayList<>();
 
-    if (row.numberAttributes().getIsBlocked()) {
+    if (row.getNumberAttributes().getIsBlocked()) {
       components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
-    if (row.numberAttributes().getIsSpam()) {
+    if (row.getNumberAttributes().getIsSpam()) {
       components.add(context.getText(R.string.new_call_log_secondary_spam));
     }
 
@@ -159,20 +160,20 @@ public final class CallLogEntryText {
     // If there's a presentation name, we showed it in the primary text and shouldn't show any name
     // or number here.
     Optional<String> presentationName =
-        PhoneNumberDisplayUtil.getNameForPresentation(context, row.numberPresentation());
+        PhoneNumberDisplayUtil.getNameForPresentation(context, row.getNumberPresentation());
     if (presentationName.isPresent()) {
       return joinSecondaryTextComponents(components);
     }
 
-    if (TextUtils.isEmpty(row.numberAttributes().getName())) {
+    if (TextUtils.isEmpty(row.getNumberAttributes().getName())) {
       // If the name is empty the number is shown as the primary text and there's nothing to add.
       return joinSecondaryTextComponents(components);
     }
-    if (TextUtils.isEmpty(row.formattedNumber())) {
+    if (TextUtils.isEmpty(row.getFormattedNumber())) {
       // If there's no number, don't append anything.
       return joinSecondaryTextComponents(components);
     }
-    components.add(row.formattedNumber());
+    components.add(row.getFormattedNumber());
     return joinSecondaryTextComponents(components);
   }
 
@@ -186,19 +187,19 @@ public final class CallLogEntryText {
    */
   private static CharSequence getNumberTypeLabel(Context context, CoalescedRow row) {
     StringBuilder secondaryText = new StringBuilder();
-    if ((row.features() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
+    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       // TODO(zachh): Add "Duo" prefix?
       secondaryText.append(context.getText(R.string.new_call_log_video));
     }
-    String numberTypeLabel = row.numberAttributes().getNumberTypeLabel();
+    String numberTypeLabel = row.getNumberAttributes().getNumberTypeLabel();
     if (!TextUtils.isEmpty(numberTypeLabel)) {
       if (secondaryText.length() > 0) {
         secondaryText.append(", ");
       }
       secondaryText.append(numberTypeLabel);
-    } else if (!row.numberAttributes().getIsSpam()) {
+    } else if (!row.getNumberAttributes().getIsSpam()) {
       // Don't show the location if there's a number type label or the number is spam.
-      String location = row.geocodedLocation();
+      String location = row.getGeocodedLocation();
       if (!TextUtils.isEmpty(location)) {
         if (secondaryText.length() > 0) {
           secondaryText.append(", ");
