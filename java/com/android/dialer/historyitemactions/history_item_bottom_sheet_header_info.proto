@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.historyitemactions";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.historyitemactions;
+
+import "java/com/android/dialer/glidephotomanager/photo_info.proto";
+import "java/com/android/dialer/phonenumberproto/dialer_phone_number.proto";
+
+// Contains information necessary to construct the header for a history item's
+// bottom sheet.
+//
+// A history item is one that is displayed in the call log or the voicemail
+// fragment.
+//
+// Next ID: 5
+message HistoryItemBottomSheetHeaderInfo {
+  // The phone number associated with the item.
+  optional com.android.dialer.DialerPhoneNumber number = 1;
+
+  // Information used to load the contact photo.
+  optional com.android.dialer.glidephotomanager.PhotoInfo photo_info = 2;
+
+  // Primary text of the header, which can be
+  // (1) a presentation name (e.g., "Restricted", "Unknown", etc.),
+  // (2) the contact name, or
+  // (3) the formatted number.
+  optional string primary_text = 3;
+
+  // Secondary test of the header, which describes the number.
+  // Some examples are:
+  //   "Mobile • 555-1234",
+  //   "Blocked • Mobile • 555-1234", and
+  //   "Spam • Mobile • 555-1234".
+  optional string secondary_text = 4;
+
+  // TODO(a bug): Add SIM info.
+}
