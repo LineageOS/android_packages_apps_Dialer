@@ -16,6 +16,8 @@
 
 package com.android.dialer.spam;
 
+import android.content.Context;
+import android.content.Intent;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
@@ -46,6 +48,11 @@ public class SpamStub implements Spam {
 
   @Override
   public boolean isSpamNotificationEnabled() {
+    return false;
+  }
+
+  @Override
+  public boolean isSpamBlockingAvailable() {
     return false;
   }
 
@@ -161,4 +168,14 @@ public class SpamStub implements Spam {
       int callType,
       ReportingLocation.Type from,
       ContactSource.Type contactSourceType) {}
+
+  @Override
+  public void modifySpamBlockingSetting(boolean enabled, ModifySettingListener listener) {
+    listener.onComplete(false);
+  }
+
+  @Override
+  public Intent getSpamBlockingSettingIntent(Context context) {
+    return new Intent();
+  }
 }
