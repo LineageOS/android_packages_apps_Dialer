@@ -120,6 +120,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @Override
+  public void unregisterContentObservers(Context appContext) {
+    appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
+  }
+
+  @Override
   public ListenableFuture<Boolean> isDirty(Context appContext) {
     return backgroundExecutorService.submit(() -> isDirtyInternal(appContext));
   }

@@ -105,4 +105,7 @@ public interface CallLogDataSource {
 
   @MainThread
   void registerContentObservers(Context appContext);
+
+  @MainThread
+  void unregisterContentObservers(Context appContext);
 }

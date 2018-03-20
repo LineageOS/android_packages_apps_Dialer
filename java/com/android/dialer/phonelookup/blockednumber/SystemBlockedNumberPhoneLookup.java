@@ -181,4 +181,9 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
             true, // BlockedNumbers notifies on the item
             markDirtyObserver);
   }
+
+  @Override
+  public void unregisterContentObservers(Context appContext) {
+    appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
+  }
 }
