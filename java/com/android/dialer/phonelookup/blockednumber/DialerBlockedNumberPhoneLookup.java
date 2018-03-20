@@ -177,4 +177,9 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
             true, // FilteredNumberProvider notifies on the item
             markDirtyObserver);
   }
+
+  @Override
+  public void unregisterContentObservers(Context appContext) {
+    appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
+  }
 }
