@@ -85,4 +85,7 @@ public interface PhoneLookup<T> {
 
   @MainThread
   void registerContentObservers(Context appContext);
+
+  @MainThread
+  void unregisterContentObservers(Context appContext);
 }
