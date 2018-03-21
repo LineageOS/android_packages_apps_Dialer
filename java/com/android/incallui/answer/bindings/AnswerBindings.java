@@ -29,7 +29,8 @@ public class AnswerBindings {
       boolean isVideoUpgradeRequest,
       boolean isSelfManagedCamera,
       boolean allowAnswerAndRelease,
-      boolean hasCallOnHold) {
+      boolean hasCallOnHold,
+      boolean allowSpeakEasy) {
     return AnswerFragment.newInstance(
         callId,
         isRttCall,
@@ -37,6 +38,7 @@ public class AnswerBindings {
         isVideoUpgradeRequest,
         isSelfManagedCamera,
         allowAnswerAndRelease,
-        hasCallOnHold);
+        hasCallOnHold,
+        allowSpeakEasy);
   }
 }

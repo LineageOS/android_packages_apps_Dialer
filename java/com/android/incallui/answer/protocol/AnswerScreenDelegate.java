@@ -30,6 +30,8 @@ public interface AnswerScreenDelegate {
 
   void onReject();
 
+  void onSpeakEasyCall();
+
   void onAnswerAndReleaseCall();
 
   void onAnswerAndReleaseButtonEnabled();

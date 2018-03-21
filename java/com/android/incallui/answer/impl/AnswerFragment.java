@@ -118,6 +118,8 @@ public class AnswerFragment extends Fragment
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_SELF_MANAGED_CAMERA = "is_self_managed_camera";
 
+  static final String ARG_ALLOW_SPEAK_EASY = "allow_speak_easy";
+
   private static final String STATE_HAS_ANIMATED_ENTRY = "hasAnimated";
 
   private static final int HINT_SECONDARY_SHOW_DURATION_MILLIS = 5000;
@@ -192,6 +194,17 @@ public class AnswerFragment extends Fragment
       public void performAction(AnswerFragment fragment) {
         fragment.performAnswerAndRelease();
       }
+    },
+
+    SPEAKEASY(
+        R.drawable.quantum_ic_rtt_vd_theme_24,
+        R.string.speakeasy_secondary_button_hint,
+        R.string.speakeasy_secondary_button_hint,
+        R.string.speakeasy_secondary_button_hint) {
+      @Override
+      public void performAction(AnswerFragment fragment) {
+        fragment.performSpeakEasy();
+      }
     };
 
     @DrawableRes public final int icon;
@@ -216,6 +229,12 @@ public class AnswerFragment extends Fragment
       view.setImageResource(icon);
       view.setContentDescription(view.getContext().getText(contentDescription));
     }
+  }
+
+  private void performSpeakEasy() {
+    restoreAnswerAndReleaseButtonAnimation();
+    answerScreenDelegate.onSpeakEasyCall();
+    buttonAcceptClicked = true;
   }
 
   private void performAnswerAndRelease() {
@@ -351,7 +370,8 @@ public class AnswerFragment extends Fragment
       boolean isVideoUpgradeRequest,
       boolean isSelfManagedCamera,
       boolean allowAnswerAndRelease,
-      boolean hasCallOnHold) {
+      boolean hasCallOnHold,
+      boolean allowSpeakEasy) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
     bundle.putBoolean(ARG_IS_RTT_CALL, isRttCall);
@@ -360,6 +380,7 @@ public class AnswerFragment extends Fragment
     bundle.putBoolean(ARG_IS_SELF_MANAGED_CAMERA, isSelfManagedCamera);
     bundle.putBoolean(ARG_ALLOW_ANSWER_AND_RELEASE, allowAnswerAndRelease);
     bundle.putBoolean(ARG_HAS_CALL_ON_HOLD, hasCallOnHold);
+    bundle.putBoolean(ARG_ALLOW_SPEAK_EASY, allowSpeakEasy);
 
     AnswerFragment instance = new AnswerFragment();
     instance.setArguments(bundle);
@@ -427,13 +448,7 @@ public class AnswerFragment extends Fragment
 
     answerAndReleaseBehavior = SecondaryBehavior.ANSWER_AND_RELEASE;
     answerAndReleaseBehavior.applyToView(answerAndReleaseButton);
-    answerAndReleaseButton.setOnClickListener(
-        new OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            performAnswerAndReleaseButtonAction();
-          }
-        });
+
     answerAndReleaseButton.setClickable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
     answerAndReleaseButton.setFocusable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
     answerAndReleaseButton.setAccessibilityDelegate(accessibilityDelegate);
@@ -441,15 +456,32 @@ public class AnswerFragment extends Fragment
     if (allowAnswerAndRelease()) {
       answerAndReleaseButton.setVisibility(View.VISIBLE);
       answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
+    } else if (allowSpeakEasy()) {
+      answerAndReleaseBehavior = SecondaryBehavior.SPEAKEASY;
+      answerAndReleaseBehavior.applyToView(answerAndReleaseButton);
+      answerAndReleaseButton.setVisibility(View.VISIBLE);
+      answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
     } else {
       answerAndReleaseButton.setVisibility(View.INVISIBLE);
       answerScreenDelegate.onAnswerAndReleaseButtonDisabled();
     }
+    answerAndReleaseButton.setOnClickListener(
+        new OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            performAnswerAndReleaseButtonAction();
+          }
+        });
   }
 
   @Override
   public boolean allowAnswerAndRelease() {
     return getArguments().getBoolean(ARG_ALLOW_ANSWER_AND_RELEASE);
+  }
+
+  @Override
+  public boolean allowSpeakEasy() {
+    return getArguments().getBoolean(ARG_ALLOW_SPEAK_EASY);
   }
 
   private boolean hasCallOnHold() {
