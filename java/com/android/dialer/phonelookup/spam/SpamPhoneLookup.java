@@ -159,4 +159,13 @@ public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
 
   @Override
   public void unregisterContentObservers(Context appContext) {}
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return backgroundExecutorService.submit(
+        () -> {
+          sharedPreferences.edit().remove(PREF_LAST_TIMESTAMP_PROCESSED).apply();
+          return null;
+        });
+  }
 }

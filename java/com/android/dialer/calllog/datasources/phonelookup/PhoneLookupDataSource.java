@@ -40,6 +40,7 @@ import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
+import com.android.dialer.phonelookup.database.PhoneLookupHistoryDatabaseHelper;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
@@ -48,6 +49,7 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,14 +87,18 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    */
   private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
 
+  private final PhoneLookupHistoryDatabaseHelper phoneLookupHistoryDatabaseHelper;
+
   @Inject
   PhoneLookupDataSource(
       CompositePhoneLookup compositePhoneLookup,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService,
+      PhoneLookupHistoryDatabaseHelper phoneLookupHistoryDatabaseHelper) {
     this.compositePhoneLookup = compositePhoneLookup;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
+    this.phoneLookupHistoryDatabaseHelper = phoneLookupHistoryDatabaseHelper;
   }
 
   @Override
@@ -297,6 +303,17 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   @Override
   public void unregisterContentObservers(Context appContext) {
     compositePhoneLookup.unregisterContentObservers(appContext);
+  }
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    ListenableFuture<Void> clearDataFuture = compositePhoneLookup.clearData();
+    ListenableFuture<Void> deleteDatabaseFuture = phoneLookupHistoryDatabaseHelper.delete();
+
+    return Futures.transform(
+        Futures.allAsList(clearDataFuture, deleteDatabaseFuture),
+        unused -> null,
+        MoreExecutors.directExecutor());
   }
 
   private static ImmutableSet<DialerPhoneNumber>
