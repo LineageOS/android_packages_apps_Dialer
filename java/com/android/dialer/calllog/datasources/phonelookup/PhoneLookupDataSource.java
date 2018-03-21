@@ -37,6 +37,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
@@ -66,6 +67,7 @@ import javax.inject.Inject;
  */
 public final class PhoneLookupDataSource implements CallLogDataSource {
 
+  private final Context appContext;
   private final CompositePhoneLookup compositePhoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
@@ -73,8 +75,8 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   /**
    * Keyed by normalized number (the primary key for PhoneLookupHistory).
    *
-   * <p>This is state saved between the {@link #fill(Context, CallLogMutations)} and {@link
-   * #onSuccessfulFill(Context)} operations.
+   * <p>This is state saved between the {@link CallLogDataSource#fill(CallLogMutations)} and {@link
+   * CallLogDataSource#onSuccessfulFill()} operations.
    */
   private final Map<String, PhoneLookupInfo> phoneLookupHistoryRowsToUpdate = new ArrayMap<>();
 
@@ -82,8 +84,8 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    * Normalized numbers (the primary key for PhoneLookupHistory) which should be deleted from
    * PhoneLookupHistory.
    *
-   * <p>This is state saved between the {@link #fill(Context, CallLogMutations)} and {@link
-   * #onSuccessfulFill(Context)} operations.
+   * <p>This is state saved between the {@link CallLogDataSource#fill(CallLogMutations)} and {@link
+   * CallLogDataSource#onSuccessfulFill()} operations.
    */
   private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
 
@@ -91,10 +93,12 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   @Inject
   PhoneLookupDataSource(
+      @ApplicationContext Context appContext,
       CompositePhoneLookup compositePhoneLookup,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService,
       PhoneLookupHistoryDatabaseHelper phoneLookupHistoryDatabaseHelper) {
+    this.appContext = appContext;
     this.compositePhoneLookup = compositePhoneLookup;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
@@ -102,7 +106,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(Context appContext) {
+  public ListenableFuture<Boolean> isDirty() {
     ListenableFuture<ImmutableSet<DialerPhoneNumber>> phoneNumbers =
         backgroundExecutorService.submit(
             () -> queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext));
@@ -139,7 +143,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    * </ul>
    */
   @Override
-  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+  public ListenableFuture<Void> fill(CallLogMutations mutations) {
     LogUtil.v(
         "PhoneLookupDataSource.fill",
         "processing mutations (inserts: %d, updates: %d, deletes: %d)",
@@ -243,7 +247,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   }
 
   @Override
-  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+  public ListenableFuture<Void> onSuccessfulFill() {
     // First update and/or delete the appropriate rows in PhoneLookupHistory.
     ListenableFuture<Void> writePhoneLookupHistory =
         backgroundExecutorService.submit(() -> writePhoneLookupHistory(appContext));
@@ -296,13 +300,13 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   @MainThread
   @Override
-  public void registerContentObservers(Context appContext) {
-    compositePhoneLookup.registerContentObservers(appContext);
+  public void registerContentObservers() {
+    compositePhoneLookup.registerContentObservers();
   }
 
   @Override
-  public void unregisterContentObservers(Context appContext) {
-    compositePhoneLookup.unregisterContentObservers(appContext);
+  public void unregisterContentObservers() {
+    compositePhoneLookup.unregisterContentObservers();
   }
 
   @Override

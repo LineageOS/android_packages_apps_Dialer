@@ -228,14 +228,14 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     // For contacts in remote directories, no content observer can be registered.
     // For contacts in local (but not default) directories (e.g., the local work directory), we
     // don't register a content observer for now.
   }
 
   @Override
-  public void unregisterContentObservers(Context appContext) {}
+  public void unregisterContentObservers() {}
 
   @Override
   public ListenableFuture<Void> clearData() {
