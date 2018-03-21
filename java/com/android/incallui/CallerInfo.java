@@ -485,7 +485,7 @@ public class CallerInfo {
    * @return this instance.
    */
   /* package */ CallerInfo markAsEmergency(Context context) {
-    name = context.getString(R.string.emergency_call_dialog_number_for_display);
+    name = context.getString(R.string.emergency_number);
     phoneNumber = null;
 
     isEmergency = true;

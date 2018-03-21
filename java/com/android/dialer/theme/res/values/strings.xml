@@ -26,6 +26,9 @@
   <!-- String used to display calls from pay phone in the call log -->
   <string name="payphone">Payphone</string>
 
+  <!-- String used to display calls from emergency numbers in the call log and incallui -->
+  <string name="emergency_number">Emergency number</string>
+
   <!-- Title for the activity that dials the phone.  This is the name
        used in the Launcher icon. -->
   <string name="launcherActivityLabel">Phone</string>
