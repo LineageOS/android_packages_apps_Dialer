@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,10 +47,12 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
 
   private static final String ADDRESS_DELIMITER = ",";
 
-  // Indexes used to animate fading between views
-  private static final int LOADING_VIEW_INDEX = 0;
+  // Indexes used to animate fading between views, 0 for LOADING_VIEW_INDEX
   private static final int LOCATION_VIEW_INDEX = 1;
-  private static final long TIMEOUT_MILLIS = TimeUnit.SECONDS.toMillis(5);
+  private static final int LOCATION_ERROR_INDEX = 2;
+
+  private static final long FIND_LOCATION_SPINNING_TIMEOUT_MILLIS = TimeUnit.SECONDS.toMillis(5);
+  private static final long LOAD_DATA_TIMEOUT_MILLIS = TimeUnit.SECONDS.toMillis(5);
 
   private ViewAnimator viewAnimator;
   private ImageView locationMap;
@@ -73,6 +75,14 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
             "timed out so animate any future layout changes");
         locationLayout.setLayoutTransition(new LayoutTransition());
         showLocationNow();
+      };
+
+  private final Runnable spinningTimeoutRunnable =
+      () -> {
+        if (!(isAddressSet || isLocationSet || isMapSet)) {
+          // No data received, show error
+          viewAnimator.setDisplayedChild(LOCATION_ERROR_INDEX);
+        }
       };
 
   @Override
@@ -100,9 +110,16 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
   }
 
   @Override
+  public void onStart() {
+    super.onStart();
+    handler.postDelayed(spinningTimeoutRunnable, FIND_LOCATION_SPINNING_TIMEOUT_MILLIS);
+  }
+
+  @Override
   public void onDestroy() {
     super.onDestroy();
     handler.removeCallbacks(dataTimeoutRunnable);
+    handler.removeCallbacks(spinningTimeoutRunnable);
   }
 
   @Override
@@ -167,13 +184,14 @@ public class LocationFragment extends BaseFragment<LocationPresenter, LocationPr
     if (isMapSet && isAddressSet && isLocationSet) {
       showLocationNow();
     } else if (!hasTimeoutStarted) {
-      handler.postDelayed(dataTimeoutRunnable, TIMEOUT_MILLIS);
+      handler.postDelayed(dataTimeoutRunnable, LOAD_DATA_TIMEOUT_MILLIS);
       hasTimeoutStarted = true;
     }
   }
 
   private void showLocationNow() {
     handler.removeCallbacks(dataTimeoutRunnable);
+    handler.removeCallbacks(spinningTimeoutRunnable);
     if (viewAnimator.getDisplayedChild() != LOCATION_VIEW_INDEX) {
       viewAnimator.setDisplayedChild(LOCATION_VIEW_INDEX);
       viewAnimator.setOnClickListener(v -> launchMap());
