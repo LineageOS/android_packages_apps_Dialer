@@ -21,6 +21,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+  <!-- MainToolbar -->
+  <include
+      android:id="@+id/toolbar"
+      layout="@layout/toolbar_layout"/>
+
   <android.support.design.widget.CoordinatorLayout
       xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,8 +39,20 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav_bar"/>
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/search_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/search_shadow"
+        android:visibility="gone"/>
 
     <com.android.dialer.widget.DialerFloatingActionButton
         android:id="@+id/fab"
@@ -62,20 +79,6 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:elevation="10dp"/>
-
-  <!-- MainToolbar -->
-  <include
-      android:id="@+id/toolbar"
-      layout="@layout/toolbar_layout"/>
-
-  <ImageView
-      android:id="@+id/toolbar_shadow"
-      android:layout_width="match_parent"
-      android:layout_height="2dp"
-      android:scaleType="fitXY"
-      android:src="@drawable/search_shadow"
-      android:layout_below="@+id/toolbar"
-      android:visibility="gone"/>
 
   <!-- TODO(calderwoodra): investigate what this is for and why we want it. -->
   <!-- Host container for the contact tile drag shadow -->
