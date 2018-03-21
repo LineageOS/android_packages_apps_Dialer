@@ -67,6 +67,7 @@ import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
+import com.android.incallui.speakeasy.SpeakEasyCallManager;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
@@ -262,6 +263,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private MotorolaInCallUiNotifier motorolaInCallUiNotifier;
 
+  private SpeakEasyCallManager speakEasyCallManager;
+
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
@@ -326,7 +329,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       ExternalCallNotifier externalCallNotifier,
       ContactInfoCache contactInfoCache,
       ProximitySensor proximitySensor,
-      FilteredNumberAsyncQueryHandler filteredNumberQueryHandler) {
+      FilteredNumberAsyncQueryHandler filteredNumberQueryHandler,
+      @NonNull SpeakEasyCallManager speakEasyCallManager) {
     Trace.beginSection("InCallPresenter.setUp");
     if (serviceConnected) {
       LogUtil.i("InCallPresenter.setUp", "New service connection replacing existing one.");
@@ -378,6 +382,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     VideoPauseController.getInstance().setUp(this);
 
     filteredQueryHandler = filteredNumberQueryHandler;
+    this.speakEasyCallManager = speakEasyCallManager;
     this.context
         .getSystemService(TelephonyManager.class)
         .listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
@@ -474,6 +479,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
       this.inCallActivity = inCallActivity;
       this.inCallActivity.setExcludeFromRecents(false);
+      this.inCallActivity.setSpeakEasyCallManager(this.speakEasyCallManager);
 
       // By the time the UI finally comes up, the call may already be disconnected.
       // If that's the case, we may need to show an error dialog.
