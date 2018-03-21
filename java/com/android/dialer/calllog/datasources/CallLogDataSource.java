@@ -108,4 +108,11 @@ public interface CallLogDataSource {
 
   @MainThread
   void unregisterContentObservers(Context appContext);
+
+  /**
+   * Clear any data written by this data source. This is called when the new call log framework has
+   * been disabled (because for example there was a problem with it).
+   */
+  @MainThread
+  ListenableFuture<Void> clearData();
 }

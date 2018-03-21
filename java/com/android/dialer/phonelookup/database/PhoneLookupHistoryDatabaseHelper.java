@@ -21,13 +21,31 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.SystemClock;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /** {@link SQLiteOpenHelper} for the PhoneLookupHistory database. */
-class PhoneLookupHistoryDatabaseHelper extends SQLiteOpenHelper {
+@Singleton
+public class PhoneLookupHistoryDatabaseHelper extends SQLiteOpenHelper {
 
-  PhoneLookupHistoryDatabaseHelper(Context appContext) {
-    super(appContext, "phone_lookup_history.db", null, 1);
+  private static final String FILENAME = "phone_lookup_history.db";
+
+  private final Context appContext;
+  private final ListeningExecutorService backgroundExecutor;
+
+  @Inject
+  PhoneLookupHistoryDatabaseHelper(
+      @ApplicationContext Context appContext,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+    super(appContext, FILENAME, null, 1);
+
+    this.appContext = appContext;
+    this.backgroundExecutor = backgroundExecutor;
   }
 
   // TODO(zachh): LAST_MODIFIED is no longer read and can be deleted.
@@ -62,4 +80,14 @@ class PhoneLookupHistoryDatabaseHelper extends SQLiteOpenHelper {
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+
+  /** Closes the database and deletes it. */
+  public ListenableFuture<Void> delete() {
+    return backgroundExecutor.submit(
+        () -> {
+          close();
+          appContext.deleteDatabase(FILENAME);
+          return null;
+        });
+  }
 }

@@ -30,6 +30,7 @@ import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.main.MainComponent;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
+import com.android.dialer.phonelookup.database.PhoneLookupDatabaseComponent;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
 import com.android.dialer.precall.PreCallComponent;
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
@@ -47,7 +48,8 @@ import com.android.voicemail.VoicemailComponent;
  * from this component.
  */
 public interface BaseDialerRootComponent
-    extends CallLocationComponent.HasComponent,
+    extends BubbleComponent.HasComponent,
+        CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
@@ -61,8 +63,8 @@ public interface BaseDialerRootComponent
         MainComponent.HasComponent,
         MapsComponent.HasComponent,
         MetricsComponent.HasComponent,
-        BubbleComponent.HasComponent,
         PhoneLookupComponent.HasComponent,
+        PhoneLookupDatabaseComponent.HasComponent,
         PhoneNumberGeoUtilComponent.HasComponent,
         PreCallComponent.HasComponent,
         SimSuggestionComponent.HasComponent,

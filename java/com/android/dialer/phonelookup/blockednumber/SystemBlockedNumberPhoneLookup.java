@@ -186,4 +186,9 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
   public void unregisterContentObservers(Context appContext) {
     appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
   }
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return Futures.immediateFuture(null);
+  }
 }

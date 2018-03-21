@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.dialer.calllog.database;
+package com.android.dialer.phonelookup.database;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
@@ -21,20 +21,18 @@ import dagger.Subcomponent;
 
 /** Dagger component for database package. */
 @Subcomponent
-public abstract class CallLogDatabaseComponent {
+public abstract class PhoneLookupDatabaseComponent {
 
-  public abstract Coalescer coalescer();
+  public abstract PhoneLookupHistoryDatabaseHelper phoneLookupHistoryDatabaseHelper();
 
-  public abstract AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper();
-
-  public static CallLogDatabaseComponent get(Context context) {
-    return ((CallLogDatabaseComponent.HasComponent)
+  public static PhoneLookupDatabaseComponent get(Context context) {
+    return ((PhoneLookupDatabaseComponent.HasComponent)
             ((HasRootComponent) context.getApplicationContext()).component())
-        .callLogDatabaseComponent();
+        .phoneLookupDatabaseComponent();
   }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
-    CallLogDatabaseComponent callLogDatabaseComponent();
+    PhoneLookupDatabaseComponent phoneLookupDatabaseComponent();
   }
 }
