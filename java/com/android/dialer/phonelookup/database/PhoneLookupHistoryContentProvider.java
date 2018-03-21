@@ -81,7 +81,8 @@ public class PhoneLookupHistoryContentProvider extends ContentProvider {
 
   @Override
   public boolean onCreate() {
-    databaseHelper = new PhoneLookupHistoryDatabaseHelper(getContext());
+    databaseHelper =
+        PhoneLookupDatabaseComponent.get(getContext()).phoneLookupHistoryDatabaseHelper();
     return true;
   }
 

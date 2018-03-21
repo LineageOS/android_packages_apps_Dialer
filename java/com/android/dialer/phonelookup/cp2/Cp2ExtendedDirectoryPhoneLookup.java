@@ -236,4 +236,9 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
 
   @Override
   public void unregisterContentObservers(Context appContext) {}
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return Futures.immediateFuture(null);
+  }
 }

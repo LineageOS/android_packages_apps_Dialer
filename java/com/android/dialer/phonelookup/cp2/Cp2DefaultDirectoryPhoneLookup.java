@@ -630,6 +630,15 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   @Override
   public void unregisterContentObservers(Context appContext) {}
 
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return backgroundExecutorService.submit(
+        () -> {
+          sharedPreferences.edit().remove(PREF_LAST_TIMESTAMP_PROCESSED).apply();
+          return null;
+        });
+  }
+
   /**
    * 1. get all contact ids. if the id is unset, add the number to the list of contacts to look up.
    * 2. reduce our list of contact ids to those that were updated after lastModified. 3. Now we have
