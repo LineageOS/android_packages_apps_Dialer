@@ -28,6 +28,7 @@ import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.constants.ScheduledJobIds;
@@ -59,18 +60,27 @@ public final class CallLogConfig {
   private static final String NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY =
       "newCallLogFrameworkEnabled";
 
+  private final CallLogFramework callLogFramework;
   private final SharedPreferences sharedPreferences;
   private final ConfigProvider configProvider;
+  private final AnnotatedCallLogMigrator annotatedCallLogMigrator;
   private final ListeningExecutorService backgroundExecutor;
+  private final ListeningExecutorService lightweightExecutor;
 
   @Inject
   public CallLogConfig(
+      CallLogFramework callLogFramework,
       @Unencrypted SharedPreferences sharedPreferences,
       ConfigProvider configProvider,
-      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+      AnnotatedCallLogMigrator annotatedCallLogMigrator,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor,
+      @LightweightExecutor ListeningExecutorService lightweightExecutor) {
+    this.callLogFramework = callLogFramework;
     this.sharedPreferences = sharedPreferences;
     this.configProvider = configProvider;
+    this.annotatedCallLogMigrator = annotatedCallLogMigrator;
     this.backgroundExecutor = backgroundExecutor;
+    this.lightweightExecutor = lightweightExecutor;
   }
 
   /**
@@ -78,24 +88,22 @@ public final class CallLogConfig {
    * example by a scheduled job or broadcast receiver which rarely fires.
    */
   public ListenableFuture<Void> update() {
-    return backgroundExecutor.submit(
-        () -> {
-          boolean newCallLogFragmentEnabledInConfigProvider =
-              configProvider.getBoolean("new_call_log_fragment_enabled", false);
-          boolean newVoicemailFragmentEnabledInConfigProvider =
-              configProvider.getBoolean("new_voicemail_fragment_enabled", false);
-          boolean newPeerEnabledInConfigProvider =
-              configProvider.getBoolean("nui_peer_enabled", false);
+    boolean newCallLogFragmentEnabledInConfigProvider =
+        configProvider.getBoolean("new_call_log_fragment_enabled", false);
+    boolean newVoicemailFragmentEnabledInConfigProvider =
+        configProvider.getBoolean("new_voicemail_fragment_enabled", false);
+    boolean newPeerEnabledInConfigProvider = configProvider.getBoolean("nui_peer_enabled", false);
 
-          boolean isCallLogFrameworkEnabled = isCallLogFrameworkEnabled();
-          boolean callLogFrameworkShouldBeEnabled =
-              newCallLogFragmentEnabledInConfigProvider
-                  || newVoicemailFragmentEnabledInConfigProvider
-                  || newPeerEnabledInConfigProvider;
+    boolean isCallLogFrameworkEnabled = isCallLogFrameworkEnabled();
+    boolean callLogFrameworkShouldBeEnabled =
+        newCallLogFragmentEnabledInConfigProvider
+            || newVoicemailFragmentEnabledInConfigProvider
+            || newPeerEnabledInConfigProvider;
 
-          if (callLogFrameworkShouldBeEnabled && !isCallLogFrameworkEnabled) {
-            enableFramework();
-
+    if (callLogFrameworkShouldBeEnabled && !isCallLogFrameworkEnabled) {
+      return Futures.transform(
+          enableFramework(),
+          unused -> {
             // Reflect the flag changes only after the framework is enabled.
             sharedPreferences
                 .edit()
@@ -108,21 +116,30 @@ public final class CallLogConfig {
                 .putBoolean(NEW_PEER_ENABLED_PREF_KEY, newPeerEnabledInConfigProvider)
                 .putBoolean(NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY, true)
                 .apply();
-
-          } else if (!callLogFrameworkShouldBeEnabled && isCallLogFrameworkEnabled) {
-            // Reflect the flag changes before disabling the framework.
-            sharedPreferences
-                .edit()
-                .putBoolean(NEW_CALL_LOG_FRAGMENT_ENABLED_PREF_KEY, false)
-                .putBoolean(NEW_VOICEMAIL_FRAGMENT_ENABLED_PREF_KEY, false)
-                .putBoolean(NEW_PEER_ENABLED_PREF_KEY, false)
-                .putBoolean(NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY, false)
-                .apply();
-
-            disableFramework();
-          } else {
-            // We didn't need to enable/disable the framework, but we still need to update the
-            // individual flags.
+            return null;
+          },
+          backgroundExecutor);
+    } else if (!callLogFrameworkShouldBeEnabled && isCallLogFrameworkEnabled) {
+      // Reflect the flag changes before disabling the framework.
+      ListenableFuture<Void> writeSharedPrefsFuture =
+          backgroundExecutor.submit(
+              () -> {
+                sharedPreferences
+                    .edit()
+                    .putBoolean(NEW_CALL_LOG_FRAGMENT_ENABLED_PREF_KEY, false)
+                    .putBoolean(NEW_VOICEMAIL_FRAGMENT_ENABLED_PREF_KEY, false)
+                    .putBoolean(NEW_PEER_ENABLED_PREF_KEY, false)
+                    .putBoolean(NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY, false)
+                    .apply();
+                return null;
+              });
+      return Futures.transformAsync(
+          writeSharedPrefsFuture, unused -> disableFramework(), MoreExecutors.directExecutor());
+    } else {
+      // We didn't need to enable/disable the framework, but we still need to update the
+      // individual flags.
+      return backgroundExecutor.submit(
+          () -> {
             sharedPreferences
                 .edit()
                 .putBoolean(
@@ -133,17 +150,30 @@ public final class CallLogConfig {
                     newVoicemailFragmentEnabledInConfigProvider)
                 .putBoolean(NEW_PEER_ENABLED_PREF_KEY, newPeerEnabledInConfigProvider)
                 .apply();
-          }
-          return null;
-        });
+            return null;
+          });
+    }
   }
 
-  private void enableFramework() {
-    // TODO(zachh): Register content observers, etc.
+  private ListenableFuture<Void> enableFramework() {
+    ListenableFuture<Void> registerObserversFuture =
+        lightweightExecutor.submit(
+            () -> {
+              callLogFramework.registerContentObservers();
+              return null;
+            });
+    ListenableFuture<Void> migratorFuture = annotatedCallLogMigrator.migrate();
+    return Futures.transform(
+        Futures.allAsList(registerObserversFuture, migratorFuture),
+        unused -> null,
+        MoreExecutors.directExecutor());
   }
 
-  private void disableFramework() {
-    // TODO(zachh): Unregister content observers, delete databases, etc.
+  private ListenableFuture<Void> disableFramework() {
+    return Futures.transform(
+        Futures.allAsList(callLogFramework.disable(), annotatedCallLogMigrator.clearData()),
+        unused -> null,
+        MoreExecutors.directExecutor());
   }
 
   public boolean isNewCallLogFragmentEnabled() {

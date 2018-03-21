@@ -90,4 +90,17 @@ public final class AnnotatedCallLogMigrator {
           return true;
         });
   }
+
+  /**
+   * Clears data that indicates if migration happened or not. This is necessary if migration needs
+   * to happen again, for example because the call log framework was disabled via flags due to a
+   * problem.
+   */
+  ListenableFuture<Void> clearData() {
+    return backgroundExecutor.submit(
+        () -> {
+          sharedPreferences.edit().remove(PREF_MIGRATED).apply();
+          return null;
+        });
+  }
 }
