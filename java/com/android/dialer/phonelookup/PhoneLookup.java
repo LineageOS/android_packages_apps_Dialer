@@ -88,4 +88,10 @@ public interface PhoneLookup<T> {
 
   @MainThread
   void unregisterContentObservers(Context appContext);
+
+  /**
+   * Clear any data written by this lookup. This is called when the new call log framework has been
+   * disabled (because for example there was a problem with it).
+   */
+  ListenableFuture<Void> clearData();
 }

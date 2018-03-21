@@ -230,6 +230,17 @@ public final class CompositePhoneLookup {
     }
   }
 
+  /** Delegates to sub-lookups' {@link PhoneLookup#clearData()}. */
+  public ListenableFuture<Void> clearData() {
+    List<ListenableFuture<Void>> futures = new ArrayList<>();
+    for (PhoneLookup<?> phoneLookup : phoneLookups) {
+      ListenableFuture<Void> phoneLookupFuture = phoneLookup.clearData();
+      futures.add(phoneLookupFuture);
+    }
+    return Futures.transform(
+        Futures.allAsList(futures), unused -> null, lightweightExecutorService);
+  }
+
   private static String getMostRecentInfoEventName(Object classNameSource, boolean isBuilt) {
     return String.format(
         !isBuilt

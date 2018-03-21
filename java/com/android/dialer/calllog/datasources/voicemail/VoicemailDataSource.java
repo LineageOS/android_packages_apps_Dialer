@@ -111,4 +111,9 @@ public class VoicemailDataSource implements CallLogDataSource {
 
   @Override
   public void unregisterContentObservers(Context appContext) {}
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return Futures.immediateFuture(null);
+  }
 }
