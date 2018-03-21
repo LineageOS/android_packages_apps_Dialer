@@ -130,4 +130,34 @@
 
   </GridLayout>
 
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/location_error_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/location_error_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/quantum_ic_error_outline_vd_theme_36"
+        android:tint="#C53929"/>
+
+    <TextView
+        android:id="@+id/location_error_text"
+        style="@style/LocationErrorTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="24sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/location_error"/>
+
+  </LinearLayout>
+
 </ViewAnimator>
