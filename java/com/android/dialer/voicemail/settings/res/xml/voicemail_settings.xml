@@ -15,37 +15,40 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-  android:title="@string/voicemail_settings_title">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/voicemail_settings_title">
 
   <Preference
       android:key="@string/voicemail_notifications_key"
       android:title="@string/voicemail_notifications_preference_title"/>
 
   <SwitchPreference
-    android:key="@string/voicemail_visual_voicemail_key"
-    android:title="@string/voicemail_visual_voicemail_switch_title"/>"
+      android:key="@string/voicemail_visual_voicemail_key"
+      android:title="@string/voicemail_visual_voicemail_switch_title"/>"
 
   <SwitchPreference
-    android:key="@string/voicemail_visual_voicemail_archive_key"
-    android:dependency="@string/voicemail_visual_voicemail_key"
-    android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"/>"
-
-  <SwitchPreference
-      android:key="@string/voicemail_visual_voicemail_transcription_key"
       android:dependency="@string/voicemail_visual_voicemail_key"
-      android:title="@string/voicemail_visual_voicemail_transcription_switch_title"/>"
+      android:key="@string/voicemail_visual_voicemail_archive_key"
+      android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"/>"
+
   <SwitchPreference
-    android:key="@string/voicemail_visual_voicemail_donation_key"
-    android:dependency="@string/voicemail_visual_voicemail_transcription_key"
-    android:title="@string/voicemail_visual_voicemail_donation_switch_title"/>"
+      android:dependency="@string/voicemail_visual_voicemail_key"
+      android:key="@string/voicemail_visual_voicemail_transcription_key"
+      android:title="@string/voicemail_visual_voicemail_transcription_switch_title"/>"
+
+  <com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary
+      android:dependency="@string/voicemail_visual_voicemail_transcription_key"
+      android:key="@string/voicemail_visual_voicemail_donation_key"
+      android:title="@string/voicemail_visual_voicemail_donation_switch_title"
+      app:urlToOpen="@string/donation_learn_more_url"/>
 
   <Preference
-    android:key="@string/voicemail_change_pin_key"
-    android:title="@string/voicemail_change_pin_preference_title"/>
+      android:key="@string/voicemail_change_pin_key"
+      android:title="@string/voicemail_change_pin_preference_title"/>
 
   <PreferenceScreen
-    android:key="@string/voicemail_advanced_settings_key"
-    android:title="@string/voicemail_advanced_settings_title">
-    </PreferenceScreen>
+      android:key="@string/voicemail_advanced_settings_key"
+      android:title="@string/voicemail_advanced_settings_title">
+  </PreferenceScreen>
 
 </PreferenceScreen>

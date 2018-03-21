@@ -25,6 +25,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
@@ -34,14 +35,18 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.spannable.ContentWithLearnMoreSpanner;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailClient.ActivationStateListener;
 import com.android.voicemail.VoicemailComponent;
 import com.google.common.base.Optional;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Fragment for voicemail settings. Requires {@link VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE} set
@@ -63,19 +68,16 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
   private static final String TAG = "VmSettingsActivity";
   @Nullable private PhoneAccountHandle phoneAccountHandle;
-
   private VoicemailClient voicemailClient;
-
   // Settings that are independent of the carrier configurations
   private Preference voicemailNotificationPreference;
   private PreferenceScreen advancedSettingsPreference;
-
   // Settings that are supported by dialer only if the carrier configurations are valid.
   private SwitchPreference visualVoicemailPreference;
   private SwitchPreference voicemailAutoArchivePreference;
   private SwitchPreference transcribeVoicemailPreference;
   // Voicemail transcription analysis toggle
-  private SwitchPreference donateTranscribedVoicemailPreference;
+  private SwitchPreferenceWithClickableSummary donateTranscribedVoicemailPreference;
   private Preference voicemailChangePinPreference;
 
   @Override
@@ -98,7 +100,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
     addPreferencesFromResource(R.xml.voicemail_settings);
 
-    initializePreferences();
+    initializeXmlPreferences();
 
     setupVisualVoicemailPreferences();
 
@@ -163,13 +165,26 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   }
 
   private void showTranscriptionDonationEnabledPreferences() {
-    donateTranscribedVoicemailPreference.setOnPreferenceChangeListener(this);
+    donateTranscribedVoicemailPreference.setEnabled(true);
     donateTranscribedVoicemailPreference.setChecked(
         voicemailClient.isVoicemailDonationEnabled(getContext(), phoneAccountHandle));
+    donateTranscribedVoicemailPreference.setOnPreferenceChangeListener(this);
     donateTranscribedVoicemailPreference.setSummary(
-        R.string.voicemail_donate_preference_summary_info);
-    donateTranscribedVoicemailPreference.setEnabled(true);
+        getVoicemailTranscriptionDonationInformationalText());
     getPreferenceScreen().addPreference(donateTranscribedVoicemailPreference);
+  }
+
+  /**
+   * Builds a spannable string containing the voicemail donation informational text containing the
+   * appropriate "Learn More" urls.
+   *
+   * @return The voicemail donation information text.
+   */
+  private CharSequence getVoicemailTranscriptionDonationInformationalText() {
+    return new ContentWithLearnMoreSpanner(getContext())
+        .create(
+            getContext().getString(R.string.voicemail_donate_preference_summary_info),
+            getContext().getString(R.string.donation_learn_more_url));
   }
 
   private void removeAllTranscriptionPreferences() {
@@ -196,29 +211,38 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     updateVoicemailSummaryMessage();
   }
 
-  private void initializePreferences() {
+  /** The preferences that are present in the voicemail_settings.xml file are initialized here. */
+  private void initializeXmlPreferences() {
     voicemailNotificationPreference =
         findPreference(getString(R.string.voicemail_notifications_key));
+    voicemailNotificationPreference.setOrder(VMSettingOrdering.NOTIFICATIONS);
 
     advancedSettingsPreference =
         (PreferenceScreen) findPreference(getString(R.string.voicemail_advanced_settings_key));
+    advancedSettingsPreference.setOrder(VMSettingOrdering.ADVANCED_SETTING);
 
     visualVoicemailPreference =
         (SwitchPreference) findPreference(getString(R.string.voicemail_visual_voicemail_key));
+    visualVoicemailPreference.setOrder(VMSettingOrdering.VISUAL_VOICEMAIL);
 
     voicemailAutoArchivePreference =
         (SwitchPreference)
             findPreference(getString(R.string.voicemail_visual_voicemail_archive_key));
+    voicemailAutoArchivePreference.setOrder(VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE);
 
     transcribeVoicemailPreference =
         (SwitchPreference)
             findPreference(getString(R.string.voicemail_visual_voicemail_transcription_key));
+    transcribeVoicemailPreference.setOrder(VMSettingOrdering.VOICEMAIL_TRANSCRIPTION);
 
     donateTranscribedVoicemailPreference =
-        (SwitchPreference)
+        (SwitchPreferenceWithClickableSummary)
             findPreference(getString(R.string.voicemail_visual_voicemail_donation_key));
+    donateTranscribedVoicemailPreference.setOrder(
+        VMSettingOrdering.VOICEMAIL_TRANSCRIPTION_DONATION);
 
     voicemailChangePinPreference = findPreference(getString(R.string.voicemail_change_pin_key));
+    voicemailChangePinPreference.setOrder(VMSettingOrdering.VOICEMAIL_CHANGE_PIN);
   }
 
   /** Removes vvm settings since the carrier setup is not supported by Dialer */
@@ -461,5 +485,26 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
     builder.setCancelable(true);
     builder.show();
+  }
+
+  /** The ordering in which to show the voicemail settings */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    VMSettingOrdering.NOTIFICATIONS,
+    VMSettingOrdering.VISUAL_VOICEMAIL,
+    VMSettingOrdering.VOICEMAIL_TRANSCRIPTION,
+    VMSettingOrdering.VOICEMAIL_TRANSCRIPTION_DONATION,
+    VMSettingOrdering.VOICEMAIL_CHANGE_PIN,
+    VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE,
+    VMSettingOrdering.ADVANCED_SETTING
+  })
+  private @interface VMSettingOrdering {
+    int NOTIFICATIONS = 1;
+    int VISUAL_VOICEMAIL = 2;
+    int VOICEMAIL_TRANSCRIPTION = 3;
+    int VOICEMAIL_TRANSCRIPTION_DONATION = 4;
+    int VOICEMAIL_CHANGE_PIN = 5;
+    int VOICEMAIL_AUTO_ARCHIVE = 6;
+    int ADVANCED_SETTING = 7;
   }
 }
