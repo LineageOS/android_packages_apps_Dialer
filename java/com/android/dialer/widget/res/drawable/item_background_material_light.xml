@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2018 The Android Open Source Project
+  ~ Copyright (C) 2014 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
 
-  <!-- Color of ripples used for views with light backgrounds -->
-  <color name="dialer_ripple_material_light">#30000000</color>
-
-  <color name="empty_list_text_color">#b2b2b2</color>
-  <color name="empty_voicemail_icon_tint_color">#E1E1E1</color>
-</resources>
+<!-- Based on the Theme.Material's default selectableItemBackground -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+  android:color="@color/dialer_ripple_material_light">
+  <item android:id="@android:id/mask">
+    <color android:color="@android:color/white"/>
+  </item>
+</ripple>
