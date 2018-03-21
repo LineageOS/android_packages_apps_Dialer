@@ -136,6 +136,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       new CopyOnWriteArrayList<>();
   private final VideoTechManager videoTechManager;
 
+  private boolean isSpeakEasyCall;
   private boolean isEmergencyCall;
   private Uri handle;
   private int state = State.INVALID;
@@ -1542,6 +1543,25 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public void setPreferredAccountRecorder(PreferredAccountRecorder preferredAccountRecorder) {
     this.preferredAccountRecorder = preferredAccountRecorder;
+  }
+
+  /** Indicates the call is eligible for SpeakEasy */
+  public boolean isSpeakEasyEligible() {
+    // TODO(erfanian): refactor key location
+    return ConfigProviderBindings.get(context).getBoolean("speak_easy_enabled", false);
+  }
+
+  /** Indicates the user has selected SpeakEasy */
+  public boolean isSpeakEasyCall() {
+    if (!isSpeakEasyEligible()) {
+      return false;
+    }
+    return isSpeakEasyCall;
+  }
+
+  /** Sets the user preference for SpeakEasy */
+  public void setIsSpeakEasyCall(boolean isSpeakEasyCall) {
+    this.isSpeakEasyCall = isSpeakEasyCall;
   }
 
   /**
