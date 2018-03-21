@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae4150ae_a7adcd7f",
+        "filename": "java/com/android/incallui/InCallDndHandler.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-03-21T11:55:59Z",
+      "side": 1,
+      "message": "context.getSystemService(NotificationManager.class);",
+      "range": {
+        "startLine": 40,
+        "startChar": 31,
+        "endLine": 40,
+        "endChar": 108
+      },
+      "revId": "5413253761b6cacb68c3679dfff37e1109e7f03e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
