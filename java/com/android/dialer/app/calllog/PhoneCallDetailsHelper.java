@@ -27,6 +27,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -199,20 +200,7 @@ public class PhoneCallDetailsHelper
       views.callAccountLabel.setVisibility(View.GONE);
     }
 
-    final CharSequence nameText;
-    final CharSequence displayNumber = details.displayNumber;
-    if (TextUtils.isEmpty(details.getPreferredName())) {
-      nameText = displayNumber;
-      // We have a real phone number as "nameView" so make it always LTR
-      views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
-    } else {
-      nameText = details.getPreferredName();
-      // "nameView" is updated from phone number to contact name after number matching.
-      // Since TextDirection remains at View.TEXT_DIRECTION_LTR, initialize it.
-      views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
-    }
-
-    views.nameView.setText(nameText);
+    setNameView(views, details);
 
     if (isVoicemail) {
       int relevantLinkTypes = Linkify.EMAIL_ADDRESSES | Linkify.PHONE_NUMBERS | Linkify.WEB_URLS;
@@ -280,6 +268,26 @@ public class PhoneCallDetailsHelper
         ContextCompat.getColor(
             context,
             details.isRead ? R.color.call_log_detail_color : R.color.call_log_unread_text_color));
+  }
+
+  private void setNameView(PhoneCallDetailsViews views, PhoneCallDetails details) {
+    if (!TextUtils.isEmpty(details.getPreferredName())) {
+      views.nameView.setText(details.getPreferredName());
+      // "nameView" is updated from phone number to contact name after number matching.
+      // Since TextDirection remains at View.TEXT_DIRECTION_LTR, initialize it.
+      views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
+      return;
+    }
+
+    if (PhoneNumberUtils.isEmergencyNumber(details.number.toString())) {
+      views.nameView.setText(R.string.emergency_number);
+      views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
+      return;
+    }
+
+    views.nameView.setText(details.displayNumber);
+    // We have a real phone number as "nameView" so make it always LTR
+    views.nameView.setTextDirection(View.TEXT_DIRECTION_LTR);
   }
 
   private boolean shouldShowTranscriptionRating(
@@ -546,24 +554,6 @@ public class PhoneCallDetailsHelper
     int currentYear = calendar.get(Calendar.YEAR);
     calendar.setTimeInMillis(date);
     return currentYear != calendar.get(Calendar.YEAR);
-  }
-
-  /** Sets the text of the header view for the details page of a phone call. */
-  public void setCallDetailsHeader(TextView nameView, PhoneCallDetails details) {
-    final CharSequence nameText;
-    if (!TextUtils.isEmpty(details.namePrimary)) {
-      nameText = details.namePrimary;
-    } else if (!TextUtils.isEmpty(details.displayNumber)) {
-      nameText = details.displayNumber;
-    } else {
-      nameText = resources.getString(R.string.unknown);
-    }
-
-    nameView.setText(nameText);
-  }
-
-  public void setCurrentTimeForTest(long currentTimeMillis) {
-    currentTimeMillisForTest = currentTimeMillis;
   }
 
   /**

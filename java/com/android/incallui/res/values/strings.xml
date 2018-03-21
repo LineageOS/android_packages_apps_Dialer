@@ -172,9 +172,6 @@
   <!-- Label for "Manage conference call" panel [CHAR LIMIT=40] -->
   <string name="manageConferenceLabel" tools:ignore="UnusedResources">Manage conference call</string>
 
-  <!-- This can be used in any application wanting to disable the text "Emergency number" -->
-  <string name="emergency_call_dialog_number_for_display">Emergency number</string>
-
   <!-- Used to inform the user that a call was received via a number other than the primary
       phone number associated with their device. [CHAR LIMIT=16] -->
   <string name="child_number">via <xliff:g example="650-555-1212" id="child_number">%s</xliff:g></string>
