@@ -29,4 +29,7 @@
   <!-- Progress indicator loading text. [CHAR LIMIT=20] -->
   <string name="location_loading">Finding your location&#8230;</string>
 
+  <!-- Error message shown when we can't get device location. [CHAR LIMIT=NONE] -->
+  <string name="location_error">Error, could not retrieve your location</string>
+
 </resources>
