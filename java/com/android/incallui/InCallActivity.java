@@ -35,6 +35,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
@@ -94,6 +95,7 @@ import com.android.incallui.rtt.bindings.RttBindings;
 import com.android.incallui.rtt.protocol.RttCallScreen;
 import com.android.incallui.rtt.protocol.RttCallScreenDelegate;
 import com.android.incallui.rtt.protocol.RttCallScreenDelegateFactory;
+import com.android.incallui.speakeasy.SpeakEasyCallManager;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.video.bindings.VideoBindings;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -149,6 +151,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean didShowInCallScreen;
   private boolean didShowVideoCallScreen;
   private boolean didShowRttCallScreen;
+  private boolean didShowSpeakEasyScreen;
   private boolean dismissKeyguard;
   private boolean isInShowMainInCallFragment;
   private boolean isRecreating; // whether the activity is going to be recreated
@@ -158,6 +161,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean touchDownWhenPseudoScreenOff;
   private int[] backgroundDrawableColors;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
+  private SpeakEasyCallManager speakEasyCallManager;
 
   public static Intent getIntent(
       Context context, boolean showDialpad, boolean newOutgoingCall, boolean isForFullScreen) {
@@ -437,6 +441,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     out.putBoolean(KeysForSavedInstance.DID_SHOW_IN_CALL_SCREEN, didShowInCallScreen);
     out.putBoolean(KeysForSavedInstance.DID_SHOW_VIDEO_CALL_SCREEN, didShowVideoCallScreen);
     out.putBoolean(KeysForSavedInstance.DID_SHOW_RTT_CALL_SCREEN, didShowRttCallScreen);
+    out.putBoolean(KeysForSavedInstance.DID_SHOW_SPEAK_EASY_SCREEN, didShowSpeakEasyScreen);
 
     super.onSaveInstanceState(out);
     isVisible = false;
@@ -971,7 +976,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public boolean getCallCardFragmentVisible() {
-    return didShowInCallScreen || didShowVideoCallScreen || didShowRttCallScreen;
+    return didShowInCallScreen
+        || didShowVideoCallScreen
+        || didShowRttCallScreen
+        || didShowSpeakEasyScreen;
   }
 
   public void dismissKeyguard(boolean dismiss) {
@@ -1282,18 +1290,21 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     ShouldShowUiResult shouldShowAnswerUi = getShouldShowAnswerUi();
     ShouldShowUiResult shouldShowVideoUi = getShouldShowVideoUi();
     ShouldShowUiResult shouldShowRttUi = getShouldShowRttUi();
+    ShouldShowUiResult shouldShowSpeakEasyUi = getShouldShowSpeakEasyUi();
     LogUtil.i(
         "InCallActivity.showMainInCallFragment",
         "shouldShowAnswerUi: %b, shouldShowRttUi: %b, shouldShowVideoUi: %b "
             + "didShowAnswerScreen: %b, didShowInCallScreen: %b, didShowRttCallScreen: %b, "
-            + "didShowVideoCallScreen: %b",
+            + "didShowVideoCallScreen: %b"
+            + "didShowSpeakEasyScreen: %b",
         shouldShowAnswerUi.shouldShow,
         shouldShowRttUi.shouldShow,
         shouldShowVideoUi.shouldShow,
         didShowAnswerScreen,
         didShowInCallScreen,
         didShowRttCallScreen,
-        didShowVideoCallScreen);
+        didShowVideoCallScreen,
+        didShowSpeakEasyScreen);
     // Only video call ui allows orientation change.
     setAllowOrientationChange(shouldShowVideoUi.shouldShow);
 
@@ -1303,21 +1314,31 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       didChange = hideInCallScreenFragment(transaction);
       didChange |= hideVideoCallScreenFragment(transaction);
       didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= hideSpeakEasyFragment(transaction);
       didChange |= showAnswerScreenFragment(transaction, shouldShowAnswerUi.call);
     } else if (shouldShowVideoUi.shouldShow) {
       didChange = hideInCallScreenFragment(transaction);
       didChange |= showVideoCallScreenFragment(transaction, shouldShowVideoUi.call);
       didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= hideSpeakEasyFragment(transaction);
       didChange |= hideAnswerScreenFragment(transaction);
     } else if (shouldShowRttUi.shouldShow) {
       didChange = hideInCallScreenFragment(transaction);
       didChange |= hideVideoCallScreenFragment(transaction);
       didChange |= hideAnswerScreenFragment(transaction);
+      didChange |= hideSpeakEasyFragment(transaction);
       didChange |= showRttCallScreenFragment(transaction, shouldShowRttUi.call);
+    } else if (shouldShowSpeakEasyUi.shouldShow) {
+      didChange = hideInCallScreenFragment(transaction);
+      didChange |= hideVideoCallScreenFragment(transaction);
+      didChange |= hideAnswerScreenFragment(transaction);
+      didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= showSpeakEasyFragment(transaction, shouldShowSpeakEasyUi.call);
     } else {
       didChange = showInCallScreenFragment(transaction);
       didChange |= hideVideoCallScreenFragment(transaction);
       didChange |= hideRttCallScreenFragment(transaction);
+      didChange |= hideSpeakEasyFragment(transaction);
       didChange |= hideAnswerScreenFragment(transaction);
     }
 
@@ -1329,6 +1350,75 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
     isInShowMainInCallFragment = false;
     Trace.endSection();
+  }
+
+  private boolean showSpeakEasyFragment(FragmentTransaction transaction, DialerCall call) {
+
+    // TODO(erfanian): Support multiple speakeasy screens.
+    if (didShowSpeakEasyScreen) {
+      return false;
+    }
+
+    Optional<Fragment> speakEasyFragment = speakEasyCallManager.getSpeakEasyFragment(call);
+    if (speakEasyFragment.isPresent()) {
+      transaction.add(R.id.main, speakEasyFragment.get(), Tags.SPEAK_EASY_SCREEN);
+      didShowSpeakEasyScreen = true;
+      return true;
+    }
+    return false;
+  }
+
+  private Fragment getSpeakEasyScreen() {
+    return getSupportFragmentManager().findFragmentByTag(Tags.SPEAK_EASY_SCREEN);
+  }
+
+  private boolean hideSpeakEasyFragment(FragmentTransaction transaction) {
+    if (!didShowSpeakEasyScreen) {
+      return false;
+    }
+
+    Fragment speakEasyFragment = getSpeakEasyScreen();
+
+    if (speakEasyFragment != null) {
+      transaction.remove(speakEasyFragment);
+      didShowSpeakEasyScreen = false;
+      return true;
+    }
+    return false;
+  }
+
+  public void setSpeakEasyCallManager(SpeakEasyCallManager speakEasyCallManager) {
+    this.speakEasyCallManager = Assert.isNotNull(speakEasyCallManager);
+  }
+
+  public SpeakEasyCallManager getSpeakEasyCallManager() {
+    return speakEasyCallManager;
+  }
+
+  private ShouldShowUiResult getShouldShowSpeakEasyUi() {
+    SpeakEasyCallManager speakEasyCallManager = getSpeakEasyCallManager();
+
+    if (speakEasyCallManager == null) {
+      return new ShouldShowUiResult(false, null);
+    }
+
+    // TODO(erfanian): Get a better call?
+    DialerCall call = CallList.getInstance().getActiveCall();
+
+    if (call == null) {
+      return new ShouldShowUiResult(false, call);
+    }
+
+    if (!call.isSpeakEasyCall() || !call.isSpeakEasyEligible()) {
+      return new ShouldShowUiResult(false, call);
+    }
+
+    Optional<Fragment> speakEasyFragment = speakEasyCallManager.getSpeakEasyFragment(call);
+
+    if (!speakEasyFragment.isPresent()) {
+      return new ShouldShowUiResult(false, call);
+    }
+    return new ShouldShowUiResult(true, call);
   }
 
   private ShouldShowUiResult getShouldShowAnswerUi() {
@@ -1443,7 +1533,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             isVideoUpgradeRequest,
             call.getVideoTech().isSelfManagedCamera(),
             shouldAllowAnswerAndRelease(call),
-            CallList.getInstance().getBackgroundCall() != null);
+            CallList.getInstance().getBackgroundCall() != null,
+            call.isSpeakEasyEligible());
     transaction.add(R.id.main, answerScreen.getAnswerScreenFragment(), Tags.ANSWER_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCOMING_CALL, this);
@@ -1660,6 +1751,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String DID_SHOW_IN_CALL_SCREEN = "did_show_in_call_screen";
     static final String DID_SHOW_VIDEO_CALL_SCREEN = "did_show_video_call_screen";
     static final String DID_SHOW_RTT_CALL_SCREEN = "did_show_rtt_call_screen";
+    static final String DID_SHOW_SPEAK_EASY_SCREEN = "did_show_speak_easy_screen";
   }
 
   /** Request codes for pending intents. */
@@ -1678,6 +1770,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String VIDEO_CALL_SCREEN = "tag_video_call_screen";
     static final String RTT_CALL_SCREEN = "tag_rtt_call_screen";
     static final String POST_CHAR_DIALOG_FRAGMENT = "tag_post_char_dialog_fragment";
+    static final String SPEAK_EASY_SCREEN = "tag_speak_easy_screen";
   }
 
   private static final class ConfigNames {
