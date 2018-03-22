@@ -16,7 +16,6 @@
 
 package com.android.dialer.phonelookup.spam;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -152,13 +151,13 @@ public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     // No content observer can be registered as Spam is not based on a content provider.
     // Each Spam implementation should be responsible for notifying any data changes.
   }
 
   @Override
-  public void unregisterContentObservers(Context appContext) {}
+  public void unregisterContentObservers() {}
 
   @Override
   public ListenableFuture<Void> clearData() {

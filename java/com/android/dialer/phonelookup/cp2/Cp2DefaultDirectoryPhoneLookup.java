@@ -623,12 +623,12 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     // Do nothing since CP2 changes are too noisy.
   }
 
   @Override
-  public void unregisterContentObservers(Context appContext) {}
+  public void unregisterContentObservers() {}
 
   @Override
   public ListenableFuture<Void> clearData() {

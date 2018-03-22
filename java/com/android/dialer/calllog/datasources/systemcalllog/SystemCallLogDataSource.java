@@ -52,6 +52,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.telecom.TelecomUtil;
@@ -79,6 +80,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @VisibleForTesting
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
+  private final Context appContext;
   private final ListeningExecutorService backgroundExecutorService;
   private final MarkDirtyObserver markDirtyObserver;
   private final SharedPreferences sharedPreferences;
@@ -88,10 +90,12 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
   @Inject
   SystemCallLogDataSource(
+      @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       MarkDirtyObserver markDirtyObserver,
       @Unencrypted SharedPreferences sharedPreferences,
       AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper) {
+    this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.markDirtyObserver = markDirtyObserver;
     this.sharedPreferences = sharedPreferences;
@@ -100,7 +104,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
   @MainThread
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     Assert.isMainThread();
 
     LogUtil.enterBlock("SystemCallLogDataSource.registerContentObservers");
@@ -130,7 +134,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @Override
-  public void unregisterContentObservers(Context appContext) {
+  public void unregisterContentObservers() {
     appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
   }
 
@@ -151,17 +155,17 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(Context appContext) {
+  public ListenableFuture<Boolean> isDirty() {
     return backgroundExecutorService.submit(this::isDirtyInternal);
   }
 
   @Override
-  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
-    return backgroundExecutorService.submit(() -> fillInternal(appContext, mutations));
+  public ListenableFuture<Void> fill(CallLogMutations mutations) {
+    return backgroundExecutorService.submit(() -> fillInternal(mutations));
   }
 
   @Override
-  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+  public ListenableFuture<Void> onSuccessfulFill() {
     return backgroundExecutorService.submit(this::onSuccessfulFillInternal);
   }
 
@@ -181,7 +185,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @WorkerThread
-  private Void fillInternal(Context appContext, CallLogMutations mutations) {
+  private Void fillInternal(CallLogMutations mutations) {
     Assert.isWorkerThread();
 
     lastTimestampProcessed = null;
