@@ -48,7 +48,7 @@ public abstract class DialerApplication extends Application implements HasRootCo
             new FilteredNumberAsyncQueryHandler(this),
             DialerExecutorComponent.get(this).dialerExecutorFactory())
         .asyncAutoMigrate();
-    CallLogComponent.get(this).callLogFramework().onApplicationCreate(getApplicationContext());
+    CallLogComponent.get(this).callLogFramework().onApplicationCreate();
     Futures.addCallback(
         CallLogComponent.get(this).getAnnotatedCallLogMigrator().migrate(),
         new DefaultFutureCallback<>(),
