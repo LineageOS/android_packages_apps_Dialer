@@ -170,7 +170,7 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     if (VERSION.SDK_INT < VERSION_CODES.N) {
       return;
     }
@@ -183,7 +183,7 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
   }
 
   @Override
-  public void unregisterContentObservers(Context appContext) {
+  public void unregisterContentObservers() {
     appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
   }
 
