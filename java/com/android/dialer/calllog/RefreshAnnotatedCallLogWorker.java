@@ -154,7 +154,7 @@ public class RefreshAnnotatedCallLogWorker {
   private ListenableFuture<Boolean> isDirty() {
     List<ListenableFuture<Boolean>> isDirtyFutures = new ArrayList<>();
     for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
-      ListenableFuture<Boolean> dataSourceDirty = dataSource.isDirty(appContext);
+      ListenableFuture<Boolean> dataSourceDirty = dataSource.isDirty();
       isDirtyFutures.add(dataSourceDirty);
       String eventName =
           String.format(Metrics.IS_DIRTY_TEMPLATE, dataSource.getClass().getSimpleName());
@@ -172,7 +172,7 @@ public class RefreshAnnotatedCallLogWorker {
 
     // Start by filling the data sources--the system call log data source must go first!
     CallLogDataSource systemCallLogDataSource = dataSources.getSystemCallLogDataSource();
-    ListenableFuture<Void> fillFuture = systemCallLogDataSource.fill(appContext, mutations);
+    ListenableFuture<Void> fillFuture = systemCallLogDataSource.fill(mutations);
     String systemEventName = eventNameForFill(systemCallLogDataSource, isBuilt);
     futureTimer.applyTiming(fillFuture, systemEventName);
 
@@ -184,7 +184,7 @@ public class RefreshAnnotatedCallLogWorker {
           Futures.transformAsync(
               fillFuture,
               unused -> {
-                ListenableFuture<Void> dataSourceFuture = dataSource.fill(appContext, mutations);
+                ListenableFuture<Void> dataSourceFuture = dataSource.fill(mutations);
                 String eventName = eventNameForFill(dataSource, isBuilt);
                 futureTimer.applyTiming(dataSourceFuture, eventName);
                 return dataSourceFuture;
@@ -215,7 +215,7 @@ public class RefreshAnnotatedCallLogWorker {
               List<ListenableFuture<Void>> onSuccessfulFillFutures = new ArrayList<>();
               for (CallLogDataSource dataSource :
                   dataSources.getDataSourcesIncludingSystemCallLog()) {
-                ListenableFuture<Void> dataSourceFuture = dataSource.onSuccessfulFill(appContext);
+                ListenableFuture<Void> dataSourceFuture = dataSource.onSuccessfulFill();
                 onSuccessfulFillFutures.add(dataSourceFuture);
                 String eventName = eventNameForOnSuccessfulFill(dataSource, isBuilt);
                 futureTimer.applyTiming(dataSourceFuture, eventName);
