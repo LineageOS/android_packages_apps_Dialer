@@ -21,6 +21,12 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.inject.ApplicationContext;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -32,21 +38,23 @@ import javax.inject.Singleton;
 @Singleton
 public final class CallLogFramework {
 
+  private final Context appContext;
   private final DataSources dataSources;
 
   @Inject
-  CallLogFramework(DataSources dataSources) {
+  CallLogFramework(@ApplicationContext Context appContext, DataSources dataSources) {
+    this.appContext = appContext;
     this.dataSources = dataSources;
   }
 
   /** Performs necessary setup work when the application is created. */
-  public void onApplicationCreate(Context appContext) {
-    registerContentObservers(appContext);
+  public void onApplicationCreate() {
+    registerContentObservers();
     CallLogConfig.schedulePollingJob(appContext);
   }
 
   /** Registers the content observers for all data sources. */
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     LogUtil.enterBlock("CallLogFramework.registerContentObservers");
 
     // This is the same condition used in MainImpl#isNewUiEnabled. It means that bugfood/debug
@@ -60,5 +68,27 @@ public final class CallLogFramework {
     } else {
       LogUtil.i("CallLogFramework.registerContentObservers", "not registering content observers");
     }
+  }
+
+  /** Disables the framework. */
+  public ListenableFuture<Void> disable() {
+    LogUtil.enterBlock("CallLogFramework.disable");
+
+    if (!ConfigProviderBindings.get(appContext).getBoolean("is_nui_shortcut_enabled", false)) {
+      LogUtil.i("CallLogFramework.disable", "not disabling");
+      return Futures.immediateFuture(null);
+    }
+
+    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
+      dataSource.unregisterContentObservers(appContext);
+    }
+
+    // Clear data only after all content observers have been disabled.
+    List<ListenableFuture<Void>> allFutures = new ArrayList<>();
+    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
+      allFutures.add(dataSource.clearData());
+    }
+    return Futures.transform(
+        Futures.allAsList(allFutures), unused -> null, MoreExecutors.directExecutor());
   }
 }
