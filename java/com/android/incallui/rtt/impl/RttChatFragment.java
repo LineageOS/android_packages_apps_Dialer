@@ -103,6 +103,8 @@ public class RttChatFragment extends Fragment
   private boolean isTimerStarted;
   private RttOverflowMenu overflowMenu;
   private SecondaryInfo savedSecondaryInfo;
+  private TextView statusBanner;
+  private PrimaryInfo primaryInfo;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -221,6 +223,7 @@ public class RttChatFragment extends Fragment
 
     nameTextView = view.findViewById(R.id.rtt_name_or_number);
     chronometer = view.findViewById(R.id.rtt_timer);
+    statusBanner = view.findViewById(R.id.rtt_status_banner);
     return view;
   }
 
@@ -334,6 +337,7 @@ public class RttChatFragment extends Fragment
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("RttChatFragment.setPrimary", primaryInfo.toString());
     nameTextView.setText(primaryInfo.name());
+    this.primaryInfo = primaryInfo;
   }
 
   @Override
@@ -381,6 +385,20 @@ public class RttChatFragment extends Fragment
       chronometer.start();
       isTimerStarted = true;
     }
+    if (primaryCallState.state() == State.DIALING) {
+      showWaitingForJoinBanner();
+    } else {
+      hideWaitingForJoinBanner();
+    }
+  }
+
+  private void showWaitingForJoinBanner() {
+    statusBanner.setText(getString(R.string.rtt_status_banner_text, primaryInfo.name()));
+    statusBanner.setVisibility(View.VISIBLE);
+  }
+
+  private void hideWaitingForJoinBanner() {
+    statusBanner.setVisibility(View.GONE);
   }
 
   @Override
