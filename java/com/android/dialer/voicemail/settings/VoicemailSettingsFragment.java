@@ -193,6 +193,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     visualVoicemailPreference.setOnPreferenceChangeListener(this);
     visualVoicemailPreference.setChecked(
         voicemailClient.isVoicemailEnabled(getContext(), phoneAccountHandle));
+    updateVoicemailSummaryMessage();
   }
 
   private void initializePreferences() {
