@@ -164,6 +164,26 @@ public class RttChatFragment extends Fragment
     editText = view.findViewById(R.id.rtt_chat_input);
     editText.setOnEditorActionListener(this);
     editText.addTextChangedListener(this);
+
+    editText.setOnKeyListener(
+        (v, keyCode, event) -> {
+          // This is only triggered when input method doesn't handle delete key, which means the
+          // current
+          // input box is empty.
+          if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+            String lastMessage = adapter.retrieveLastLocalMessage();
+            if (lastMessage != null) {
+              isClearingInput = true;
+              editText.setText(lastMessage);
+              editText.setSelection(lastMessage.length());
+              isClearingInput = false;
+              rttCallScreenDelegate.onLocalMessage("\b");
+              return true;
+            }
+            return false;
+          }
+          return false;
+        });
     recyclerView = view.findViewById(R.id.rtt_recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     layoutManager.setStackFromEnd(true);
@@ -207,7 +227,9 @@ public class RttChatFragment extends Fragment
   @Override
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
     if (actionId == EditorInfo.IME_ACTION_SEND) {
-      submitButton.performClick();
+      if (!TextUtils.isEmpty(editText.getText())) {
+        submitButton.performClick();
+      }
       return true;
     }
     return false;
