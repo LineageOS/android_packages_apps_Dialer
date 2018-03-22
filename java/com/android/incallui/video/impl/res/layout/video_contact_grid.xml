@@ -30,13 +30,18 @@
 
   <!-- We have to keep deprecated singleLine to allow long text being truncated with ellipses.
        a bug -->
-  <com.android.incallui.autoresizetext.AutoResizeTextView
+  <com.android.incallui.autoresizetext.CustomAutoResizeTextView
     android:id="@id/contactgrid_contact_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:gravity="center"
+    android:ellipsize="end"
+    android:maxLines="2"
+    android:singleLine="false"
     android:textAppearance="@style/Dialer.Incall.TextAppearance.Large"
-    app:autoResizeText_minTextSize="28sp"
+    app:resizing_text_min_size="28sp"
     tools:text="Jake Peralta"
     tools:ignore="Deprecated"/>
 
