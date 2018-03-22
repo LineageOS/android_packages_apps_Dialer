@@ -17,6 +17,6 @@
     package="com.android.dialer.spannable">
 
   <uses-sdk
-      android:minSdkVersion="23"
+      android:minSdkVersion="24"
       android:targetSdkVersion="27"/>
 </manifest>

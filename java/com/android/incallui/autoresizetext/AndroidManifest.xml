@@ -18,7 +18,7 @@
     package="com.android.incallui.autoresizetext">
 
   <uses-sdk
-      android:minSdkVersion="23"
+      android:minSdkVersion="24"
       android:targetSdkVersion="27"/>
 
   <application />

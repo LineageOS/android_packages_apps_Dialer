@@ -25,7 +25,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import java.lang.reflect.InvocationTargetException;
@@ -133,9 +132,6 @@ public class TelephonyManagerCompat {
   @Nullable
   public static Uri getVoicemailRingtoneUri(
       TelephonyManager telephonyManager, PhoneAccountHandle accountHandle) {
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return null;
-    }
     return telephonyManager.getVoicemailRingtoneUri(accountHandle);
   }
 
@@ -149,8 +145,7 @@ public class TelephonyManagerCompat {
    */
   public static boolean isVoicemailVibrationEnabled(
       TelephonyManager telephonyManager, PhoneAccountHandle accountHandle) {
-    return VERSION.SDK_INT < VERSION_CODES.N
-        || telephonyManager.isVoicemailVibrationEnabled(accountHandle);
+    return telephonyManager.isVoicemailVibrationEnabled(accountHandle);
   }
 
   /**
@@ -159,9 +154,6 @@ public class TelephonyManagerCompat {
    */
   public static void setVisualVoicemailEnabled(
       TelephonyManager telephonyManager, PhoneAccountHandle handle, boolean enabled) {
-    if (VERSION.SDK_INT < VERSION_CODES.N_MR1) {
-      Assert.fail("setVisualVoicemailEnabled called on pre-NMR1");
-    }
     try {
       TelephonyManager.class
           .getMethod("setVisualVoicemailEnabled", PhoneAccountHandle.class, boolean.class)
@@ -177,9 +169,6 @@ public class TelephonyManagerCompat {
    */
   public static boolean isVisualVoicemailEnabled(
       TelephonyManager telephonyManager, PhoneAccountHandle handle) {
-    if (VERSION.SDK_INT < VERSION_CODES.N_MR1) {
-      Assert.fail("isVisualVoicemailEnabled called on pre-NMR1");
-    }
     try {
       return (boolean)
           TelephonyManager.class

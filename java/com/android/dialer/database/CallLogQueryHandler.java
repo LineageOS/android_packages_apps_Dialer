@@ -26,7 +26,6 @@ import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -36,7 +35,6 @@ import android.provider.VoicemailContract.Voicemails;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
-import com.android.dialer.compat.SdkVersionOverride;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -157,9 +155,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
     selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
 
     // Ignore voicemails marked as deleted
-    if (SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M) {
-      where.append(" AND (").append(Voicemails.DELETED).append(" = 0)");
-    }
+    where.append(" AND (").append(Voicemails.DELETED).append(" = 0)");
 
     if (newOnly) {
       where.append(" AND (").append(Calls.NEW).append(" = 1)");
