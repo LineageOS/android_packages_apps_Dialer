@@ -63,7 +63,7 @@ public final class CallLogFramework {
     // TODO(zachh): Find a way to access Main#isNewUiEnabled without creating a circular dependency.
     if (ConfigProviderBindings.get(appContext).getBoolean("is_nui_shortcut_enabled", false)) {
       for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
-        dataSource.registerContentObservers(appContext);
+        dataSource.registerContentObservers();
       }
     } else {
       LogUtil.i("CallLogFramework.registerContentObservers", "not registering content observers");
@@ -80,7 +80,7 @@ public final class CallLogFramework {
     }
 
     for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
-      dataSource.unregisterContentObservers(appContext);
+      dataSource.unregisterContentObservers();
     }
 
     // Clear data only after all content observers have been disabled.

@@ -16,7 +16,6 @@
 
 package com.android.dialer.phonelookup;
 
-import android.content.Context;
 import android.support.annotation.MainThread;
 import com.android.dialer.DialerPhoneNumber;
 import com.google.common.collect.ImmutableMap;
@@ -84,10 +83,10 @@ public interface PhoneLookup<T> {
   ListenableFuture<Void> onSuccessfulBulkUpdate();
 
   @MainThread
-  void registerContentObservers(Context appContext);
+  void registerContentObservers();
 
   @MainThread
-  void unregisterContentObservers(Context appContext);
+  void unregisterContentObservers();
 
   /**
    * Clear any data written by this lookup. This is called when the new call log framework has been

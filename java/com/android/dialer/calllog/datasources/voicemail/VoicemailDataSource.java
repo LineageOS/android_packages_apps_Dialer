@@ -28,6 +28,7 @@ import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.util.concurrent.Futures;
@@ -41,15 +42,19 @@ import javax.inject.Inject;
 /** Provide information for whether the call is a call to the voicemail inbox. */
 public class VoicemailDataSource implements CallLogDataSource {
 
+  private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
 
   @Inject
-  VoicemailDataSource(@BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+  VoicemailDataSource(
+      @ApplicationContext Context appContext,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+    this.appContext = appContext;
     this.backgroundExecutor = backgroundExecutor;
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(Context appContext) {
+  public ListenableFuture<Boolean> isDirty() {
     // The isVoicemail status is immutable and permanent. The call will always show as "Voicemail"
     // even if the SIM is swapped. Dialing the row will result in some unexpected number after a SIM
     // swap but this is deemed acceptable.
@@ -58,7 +63,7 @@ public class VoicemailDataSource implements CallLogDataSource {
 
   @Override
   @SuppressWarnings("missingPermission")
-  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+  public ListenableFuture<Void> fill(CallLogMutations mutations) {
     if (!PermissionsUtil.hasReadPhoneStatePermissions(appContext)) {
       return Futures.immediateFuture(null);
     }
@@ -94,7 +99,7 @@ public class VoicemailDataSource implements CallLogDataSource {
   }
 
   @Override
-  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+  public ListenableFuture<Void> onSuccessfulFill() {
     return Futures.immediateFuture(null);
   }
 
@@ -107,10 +112,10 @@ public class VoicemailDataSource implements CallLogDataSource {
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {}
+  public void registerContentObservers() {}
 
   @Override
-  public void unregisterContentObservers(Context appContext) {}
+  public void unregisterContentObservers() {}
 
   @Override
   public ListenableFuture<Void> clearData() {
