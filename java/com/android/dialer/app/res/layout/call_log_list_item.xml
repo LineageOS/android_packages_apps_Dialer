@@ -93,7 +93,7 @@
           android:gravity="center_vertical"
           android:layout_marginStart="@dimen/call_log_list_item_info_margin_start">
 
-          <TextView
+          <com.android.dialer.widget.BidiTextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

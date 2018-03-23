@@ -63,7 +63,7 @@
           android:layout_height="wrap_content"
           android:gravity="center_vertical"
           android:orientation="horizontal">
-        <TextView
+        <com.android.dialer.widget.BidiTextView
             android:id="@+id/contact_tile_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
