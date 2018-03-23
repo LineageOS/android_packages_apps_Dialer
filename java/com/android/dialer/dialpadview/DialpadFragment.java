@@ -16,6 +16,7 @@
 
 package com.android.dialer.dialpadview;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,6 +35,8 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Trace;
 import android.provider.Contacts.People;
@@ -48,6 +51,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
+import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Selection;
@@ -75,6 +79,7 @@ import android.widget.TextView;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.animation.AnimUtils;
+import com.android.dialer.animation.AnimUtils.AnimationCallback;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
@@ -141,7 +146,18 @@ public class DialpadFragment extends Fragment
   private static final String PREF_DIGITS_FILLED_BY_INTENT = "pref_digits_filled_by_intent";
   private static final String PREF_IS_DIALPAD_SLIDE_OUT = "pref_is_dialpad_slide_out";
 
+  /**
+   * Hidden key in carrier config to determine if no emergency call over wifi warning is required.
+   *
+   * <p>"Time delay (in ms) after which we show the notification for emergency calls, while the
+   * device is registered over WFC. Default value is -1, which indicates that this notification is
+   * not pertinent for a particular carrier. We've added a delay to prevent false positives."
+   */
+  @VisibleForTesting
+  static final String KEY_EMERGENCY_NOTIFICATION_DELAY_INT = "emergency_notification_delay_int";
+
   private static Optional<String> currentCountryIsoForTesting = Optional.absent();
+  private static Boolean showEmergencyCallWarningForTest = null;
 
   private final Object toneGeneratorLock = new Object();
   /** Set of dialpad keys that are currently being pressed */
@@ -303,6 +319,7 @@ public class DialpadFragment extends Fragment
         activity.invalidateOptionsMenu();
         updateMenuOverflowButton(wasEmptyBeforeTextChange);
       }
+      updateDialpadHint();
     }
 
     // DTMF Tones do not need to be played here any longer -
@@ -437,6 +454,73 @@ public class DialpadFragment extends Fragment
     Trace.endSection();
     Trace.endSection();
     return fragmentView;
+  }
+
+  /**
+   * The dialpad hint is a TextView overlaid above the digit EditText. {@link EditText#setHint(int)}
+   * is not used because the digits has auto resize and makes setting the size of the hint
+   * difficult.
+   */
+  private void updateDialpadHint() {
+    TextView hint = dialpadView.getDigitsHint();
+    if (!TextUtils.isEmpty(digits.getText())) {
+      hint.setVisibility(View.GONE);
+      return;
+    }
+
+    if (shouldShowEmergencyCallWarning(getContext())) {
+      hint.setText(getContext().getString(R.string.dialpad_hint_emergency_calling_not_available));
+      hint.setVisibility(View.VISIBLE);
+      return;
+    }
+    hint.setVisibility(View.GONE);
+  }
+
+  /**
+   * Only show the "emergency call not available" warning when on wifi call and carrier requires it.
+   *
+   * <p>internal method tested because the conditions cannot be setup in espresso, and the layout
+   * cannot be inflated in robolectric.
+   */
+  @SuppressWarnings("missingPermission")
+  @TargetApi(VERSION_CODES.O)
+  @VisibleForTesting
+  static boolean shouldShowEmergencyCallWarning(Context context) {
+    if (showEmergencyCallWarningForTest != null) {
+      return showEmergencyCallWarningForTest;
+    }
+    if (VERSION.SDK_INT < VERSION_CODES.O) {
+      return false;
+    }
+    if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
+      return false;
+    }
+    TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    // A delay of -1 means wifi emergency call is available/the warning is not required.
+    if (telephonyManager.getCarrierConfig().getInt(KEY_EMERGENCY_NOTIFICATION_DELAY_INT, -1)
+        == -1) {
+      return false;
+    }
+
+    // TelephonyManager.getVoiceNetworkType() Doesn't always return NETWORK_TYPE_IWLAN when on wifi.
+    // other wifi calling checks are hidden API. Emergency calling is not available without service
+    // regardless of the wifi state so this check is omitted.
+
+    switch (telephonyManager.getServiceState().getState()) {
+      case ServiceState.STATE_OUT_OF_SERVICE:
+      case ServiceState.STATE_POWER_OFF:
+        return true;
+      case ServiceState.STATE_EMERGENCY_ONLY:
+      case ServiceState.STATE_IN_SERVICE:
+        return false;
+      default:
+        throw new AssertionError("unknown state " + telephonyManager.getServiceState().getState());
+    }
+  }
+
+  @VisibleForTesting
+  static void setShowEmergencyCallWarningForTest(Boolean value) {
+    showEmergencyCallWarningForTest = value;
   }
 
   @Override
@@ -731,6 +815,8 @@ public class DialpadFragment extends Fragment
     overflowMenuButton.setOnTouchListener(overflowPopupMenu.getDragToOpenListener());
     overflowMenuButton.setOnClickListener(this);
     overflowMenuButton.setVisibility(isDigitsEmpty() ? View.INVISIBLE : View.VISIBLE);
+
+    updateDialpadHint();
 
     if (firstLaunch) {
       // The onHiddenChanged callback does not get called the first time the fragment is
@@ -1392,7 +1478,16 @@ public class DialpadFragment extends Fragment
     if (transitionIn) {
       AnimUtils.fadeIn(overflowMenuButton, AnimUtils.DEFAULT_DURATION);
     } else {
-      AnimUtils.fadeOut(overflowMenuButton, AnimUtils.DEFAULT_DURATION);
+      AnimUtils.fadeOut(
+          overflowMenuButton,
+          AnimUtils.DEFAULT_DURATION,
+          new AnimationCallback() {
+            @Override
+            public void onAnimationEnd() {
+              // AnimUtils will set the visibility to GONE and cause the layout to move around.
+              overflowMenuButton.setVisibility(View.INVISIBLE);
+            }
+          });
     }
   }
 
