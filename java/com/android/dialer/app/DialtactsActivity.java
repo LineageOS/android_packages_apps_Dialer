@@ -725,9 +725,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       handleMenuSettings();
       Logger.get(this).logScreenView(ScreenEvent.Type.SETTINGS, this);
       return true;
-    } else if (resId == R.id.menu_new_ui_launcher_shortcut) {
-      MainComponent.createNewUiLauncherShortcut(this);
-      return true;
     }
     return false;
   }
@@ -1599,10 +1596,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       } else {
         simulatorMenuItem.setVisible(false);
       }
-
-      menu.findItem(R.id.menu_new_ui_launcher_shortcut)
-          .setVisible(MainComponent.isNewUiEnabled(context));
-
       super.show();
     }
   }

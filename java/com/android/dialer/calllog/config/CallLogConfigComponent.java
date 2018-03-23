@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-
-package com.android.dialer.main;
+package com.android.dialer.calllog.config;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
-import com.android.dialer.main.impl.MainModule;
 import dagger.Subcomponent;
 
-/** Subcomponent that can be used to access the main implementation. */
-@Subcomponent(modules = MainModule.class)
-public abstract class MainComponent {
+/** Dagger component for the call log config. */
+@Subcomponent
+public abstract class CallLogConfigComponent {
 
-  public abstract Main getMain();
+  public abstract CallLogConfig callLogConfig();
 
-  public static MainComponent get(Context context) {
+  public static CallLogConfigComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
-        .mainComponent();
+        .callLogConfigComponent();
   }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
-    MainComponent mainComponent();
+    CallLogConfigComponent callLogConfigComponent();
   }
 }
