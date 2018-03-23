@@ -15,8 +15,8 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="answer_contact_name_text_size">24sp</dimen>
-  <dimen name="answer_contact_name_min_size">24sp</dimen>
+  <dimen name="answer_contact_name_text_size">26sp</dimen>
+  <dimen name="answer_contact_name_min_size">18sp</dimen>
   <dimen name="answer_avatar_size">0dp</dimen>
   <dimen name="answer_importance_margin_bottom">0dp</dimen>
   <bool name="answer_important_call_allowed">false</bool>

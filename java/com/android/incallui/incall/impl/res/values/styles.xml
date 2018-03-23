@@ -21,6 +21,5 @@
   <color name="paginator_path">#66FFFFFF</color>
 
   <style name="DialpadContainer">
-    <item name="android:layout_alignParentTop">true</item>
   </style>
 </resources>

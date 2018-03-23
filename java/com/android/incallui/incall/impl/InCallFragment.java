@@ -19,6 +19,8 @@ package com.android.incallui.incall.impl;
 import android.Manifest.permission;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -95,6 +97,7 @@ public class InCallFragment extends Fragment
   private boolean stateRestored;
 
   private static final int REQUEST_CODE_CALL_RECORD_PERMISSION = 1000;
+  private boolean isFullscreenPhoto = false;
 
   // Add animation to educate users. If a call has enriched calling attachments then we'll
   // initially show the attachment page. After a delay seconds we'll animate to the button grid.
@@ -148,10 +151,17 @@ public class InCallFragment extends Fragment
       @Nullable ViewGroup viewGroup,
       @Nullable Bundle bundle) {
     LogUtil.i("InCallFragment.onCreateView", null);
+
+    SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    isFullscreenPhoto = mPrefs.getBoolean("fullscreen_caller_photo", false);
+
+    int res = R.layout.frag_incall_voice;
+    if(isFullscreenPhoto){
+      res = R.layout.frag_incall_voice_fullscreen_photo;
+    }
+
     // Bypass to avoid StrictModeResourceMismatchViolation
-    final View view =
-        StrictModeUtils.bypass(
-            () -> layoutInflater.inflate(R.layout.frag_incall_voice, viewGroup, false));
+    final View view = layoutInflater.inflate(res, viewGroup, false);
     contactGridManager =
         new ContactGridManager(
             view,
@@ -183,8 +193,6 @@ public class InCallFragment extends Fragment
     }
     // TODO(a bug): Change to use corresponding phone type used for current call.
     phoneType = getContext().getSystemService(TelephonyManager.class).getPhoneType();
-    View space = view.findViewById(R.id.navigation_bar_background);
-    space.getLayoutParams().height = ViewUtil.getNavigationBarHeight(getContext());
 
     return view;
   }

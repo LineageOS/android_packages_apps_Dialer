@@ -23,6 +23,12 @@
         android:title="@string/enable_post_call_title"
         android:summary="@string/enable_post_call_summary" />
 
+    <SwitchPreference
+        android:key="fullscreen_caller_photo"
+        android:title="@string/fullscreen_caller_photo_title"
+        android:summary="@string/fullscreen_caller_photo_summary"
+        android:defaultValue="false" />
+				    
   <PreferenceCategory
         android:key="@string/call_recording_category_key"
         android:title="@string/call_recording_category_title">
