@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllog;
 
+import com.android.dialer.calllog.database.CallLogDatabaseModule;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.calllog.datasources.phonelookup.PhoneLookupDataSource;
@@ -26,7 +27,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /** Dagger module which satisfies call log dependencies. */
-@Module
+@Module(includes = CallLogDatabaseModule.class)
 public abstract class CallLogModule {
 
   @Provides

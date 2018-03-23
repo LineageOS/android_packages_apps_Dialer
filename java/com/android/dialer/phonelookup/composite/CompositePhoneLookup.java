@@ -16,7 +16,6 @@
 
 package com.android.dialer.phonelookup.composite;
 
-import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
@@ -214,12 +213,31 @@ public final class CompositePhoneLookup {
         MoreExecutors.directExecutor());
   }
 
-  /** Delegates to sub-lookups' {@link PhoneLookup#registerContentObservers(Context)}. */
+  /** Delegates to sub-lookups' {@link PhoneLookup#registerContentObservers()}. */
   @MainThread
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     for (PhoneLookup phoneLookup : phoneLookups) {
-      phoneLookup.registerContentObservers(appContext);
+      phoneLookup.registerContentObservers();
     }
+  }
+
+  /** Delegates to sub-lookups' {@link PhoneLookup#unregisterContentObservers()}. */
+  @MainThread
+  public void unregisterContentObservers() {
+    for (PhoneLookup phoneLookup : phoneLookups) {
+      phoneLookup.unregisterContentObservers();
+    }
+  }
+
+  /** Delegates to sub-lookups' {@link PhoneLookup#clearData()}. */
+  public ListenableFuture<Void> clearData() {
+    List<ListenableFuture<Void>> futures = new ArrayList<>();
+    for (PhoneLookup<?> phoneLookup : phoneLookups) {
+      ListenableFuture<Void> phoneLookupFuture = phoneLookup.clearData();
+      futures.add(phoneLookupFuture);
+    }
+    return Futures.transform(
+        Futures.allAsList(futures), unused -> null, lightweightExecutorService);
   }
 
   private static String getMostRecentInfoEventName(Object classNameSource, boolean isBuilt) {

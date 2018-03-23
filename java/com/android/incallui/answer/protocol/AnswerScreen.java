@@ -32,6 +32,8 @@ public interface AnswerScreen {
 
   boolean allowAnswerAndRelease();
 
+  boolean allowSpeakEasy();
+
   boolean isActionTimeout();
 
   void setTextResponses(List<String> textResponses);

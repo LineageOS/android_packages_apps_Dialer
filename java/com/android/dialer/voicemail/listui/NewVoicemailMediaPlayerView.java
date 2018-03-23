@@ -154,11 +154,11 @@ public final class NewVoicemailMediaPlayerView extends LinearLayout {
       NewVoicemailViewHolderListener listener) {
 
     Assert.isNotNull(voicemailEntryFromAdapter);
-    Uri uri = Uri.parse(voicemailEntryFromAdapter.voicemailUri());
+    Uri uri = Uri.parse(voicemailEntryFromAdapter.getVoicemailUri());
 
-    numberVoicemailFrom = voicemailEntryFromAdapter.number().getNormalizedNumber();
-    phoneAccountId = voicemailEntryFromAdapter.phoneAccountId();
-    phoneAccountComponentName = voicemailEntryFromAdapter.phoneAccountComponentName();
+    numberVoicemailFrom = voicemailEntryFromAdapter.getNumber().getNormalizedNumber();
+    phoneAccountId = voicemailEntryFromAdapter.getPhoneAccountId();
+    phoneAccountComponentName = voicemailEntryFromAdapter.getPhoneAccountComponentName();
 
     Assert.isNotNull(viewHolder);
     Assert.isNotNull(uri);

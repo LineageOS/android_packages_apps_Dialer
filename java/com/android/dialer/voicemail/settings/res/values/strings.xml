@@ -119,9 +119,9 @@
   <string name="voicemail_activating_summary_info">Activating voicemail</string>
 
   <!-- Summary information for visual voicemail transcription setting [CHAR LIMIT=NONE] -->
-  <string name="voicemail_transcription_preference_summary_info">Get transcripts of your voicemail using Google\'s transcription service</string>
+  <string name="voicemail_transcription_preference_summary_info">Get transcripts of your voicemail using Google\'s transcription service.</string>
   <!-- Summary information for visual voicemail donation setting [CHAR LIMIT=NONE] -->
-  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription accuracy</string>
+  <string name="voicemail_donate_preference_summary_info">Let Google review your voicemail messages to improve transcription accuracy. Your voicemail messages are stored anonymously. <xliff:g example="Learn more">%1$s</xliff:g></string>
 
   <!-- Title for disable visual voicemail confirmation dialog [CHAR LIMIT=40] -->
   <string name="confirm_disable_voicemail_dialog_title">Turn off visual voicemail</string>

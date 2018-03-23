@@ -37,9 +37,11 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
+import com.android.dialer.phonelookup.database.PhoneLookupHistoryDatabaseHelper;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.google.common.collect.ImmutableMap;
@@ -48,6 +50,7 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,6 +67,7 @@ import javax.inject.Inject;
  */
 public final class PhoneLookupDataSource implements CallLogDataSource {
 
+  private final Context appContext;
   private final CompositePhoneLookup compositePhoneLookup;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
@@ -71,8 +75,8 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   /**
    * Keyed by normalized number (the primary key for PhoneLookupHistory).
    *
-   * <p>This is state saved between the {@link #fill(Context, CallLogMutations)} and {@link
-   * #onSuccessfulFill(Context)} operations.
+   * <p>This is state saved between the {@link CallLogDataSource#fill(CallLogMutations)} and {@link
+   * CallLogDataSource#onSuccessfulFill()} operations.
    */
   private final Map<String, PhoneLookupInfo> phoneLookupHistoryRowsToUpdate = new ArrayMap<>();
 
@@ -80,23 +84,29 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    * Normalized numbers (the primary key for PhoneLookupHistory) which should be deleted from
    * PhoneLookupHistory.
    *
-   * <p>This is state saved between the {@link #fill(Context, CallLogMutations)} and {@link
-   * #onSuccessfulFill(Context)} operations.
+   * <p>This is state saved between the {@link CallLogDataSource#fill(CallLogMutations)} and {@link
+   * CallLogDataSource#onSuccessfulFill()} operations.
    */
   private final Set<String> phoneLookupHistoryRowsToDelete = new ArraySet<>();
 
+  private final PhoneLookupHistoryDatabaseHelper phoneLookupHistoryDatabaseHelper;
+
   @Inject
   PhoneLookupDataSource(
+      @ApplicationContext Context appContext,
       CompositePhoneLookup compositePhoneLookup,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService,
+      PhoneLookupHistoryDatabaseHelper phoneLookupHistoryDatabaseHelper) {
+    this.appContext = appContext;
     this.compositePhoneLookup = compositePhoneLookup;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
+    this.phoneLookupHistoryDatabaseHelper = phoneLookupHistoryDatabaseHelper;
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(Context appContext) {
+  public ListenableFuture<Boolean> isDirty() {
     ListenableFuture<ImmutableSet<DialerPhoneNumber>> phoneNumbers =
         backgroundExecutorService.submit(
             () -> queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(appContext));
@@ -133,7 +143,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
    * </ul>
    */
   @Override
-  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
+  public ListenableFuture<Void> fill(CallLogMutations mutations) {
     LogUtil.v(
         "PhoneLookupDataSource.fill",
         "processing mutations (inserts: %d, updates: %d, deletes: %d)",
@@ -237,7 +247,7 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   }
 
   @Override
-  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
+  public ListenableFuture<Void> onSuccessfulFill() {
     // First update and/or delete the appropriate rows in PhoneLookupHistory.
     ListenableFuture<Void> writePhoneLookupHistory =
         backgroundExecutorService.submit(() -> writePhoneLookupHistory(appContext));
@@ -290,8 +300,24 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
 
   @MainThread
   @Override
-  public void registerContentObservers(Context appContext) {
-    compositePhoneLookup.registerContentObservers(appContext);
+  public void registerContentObservers() {
+    compositePhoneLookup.registerContentObservers();
+  }
+
+  @Override
+  public void unregisterContentObservers() {
+    compositePhoneLookup.unregisterContentObservers();
+  }
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    ListenableFuture<Void> clearDataFuture = compositePhoneLookup.clearData();
+    ListenableFuture<Void> deleteDatabaseFuture = phoneLookupHistoryDatabaseHelper.delete();
+
+    return Futures.transform(
+        Futures.allAsList(clearDataFuture, deleteDatabaseFuture),
+        unused -> null,
+        MoreExecutors.directExecutor());
   }
 
   private static ImmutableSet<DialerPhoneNumber>

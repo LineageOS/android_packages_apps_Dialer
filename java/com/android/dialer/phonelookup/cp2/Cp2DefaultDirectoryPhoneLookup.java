@@ -623,8 +623,20 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     // Do nothing since CP2 changes are too noisy.
+  }
+
+  @Override
+  public void unregisterContentObservers() {}
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return backgroundExecutorService.submit(
+        () -> {
+          sharedPreferences.edit().remove(PREF_LAST_TIMESTAMP_PROCESSED).apply();
+          return null;
+        });
   }
 
   /**

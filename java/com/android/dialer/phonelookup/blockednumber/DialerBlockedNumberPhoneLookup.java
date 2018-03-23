@@ -169,12 +169,22 @@ public final class DialerBlockedNumberPhoneLookup implements PhoneLookup<DialerB
   }
 
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     appContext
         .getContentResolver()
         .registerContentObserver(
             FilteredNumber.CONTENT_URI,
             true, // FilteredNumberProvider notifies on the item
             markDirtyObserver);
+  }
+
+  @Override
+  public void unregisterContentObservers() {
+    appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
+  }
+
+  @Override
+  public ListenableFuture<Void> clearData() {
+    return Futures.immediateFuture(null);
   }
 }

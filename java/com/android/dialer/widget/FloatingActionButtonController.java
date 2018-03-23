@@ -26,7 +26,6 @@ import android.support.design.widget.FloatingActionButton.OnVisibilityChangedLis
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import com.android.contacts.common.R;
 import com.android.dialer.common.Assert;
 
 /** Controls the movement and appearance of the FAB (Floating Action Button). */

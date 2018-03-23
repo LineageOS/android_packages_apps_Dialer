@@ -27,6 +27,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.clipboard \
 	com.android.dialer.commandline \
 	com.android.dialer.common \
+	com.android.dialer.common.preference \
 	com.android.dialer.configprovider \
 	com.android.dialer.contactphoto \
 	com.android.dialer.contactsfragment \
@@ -59,6 +60,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.searchfragment.remote \
 	com.android.dialer.shortcuts \
 	com.android.dialer.simulator.impl \
+	com.android.dialer.spam.promo \
 	com.android.dialer.speeddial \
 	com.android.dialer.spannable \
 	com.android.dialer.theme \

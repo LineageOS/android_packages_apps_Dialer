@@ -38,6 +38,9 @@ public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
   public void onReject() {}
 
   @Override
+  public void onSpeakEasyCall() {}
+
+  @Override
   public void onAnswerAndReleaseCall() {}
 
   @Override

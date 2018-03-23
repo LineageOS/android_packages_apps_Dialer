@@ -97,22 +97,22 @@ public final class RealtimeRowProcessor {
   @MainThread
   ListenableFuture<CoalescedRow> applyRealtimeProcessing(final CoalescedRow row) {
     // Cp2DefaultDirectoryPhoneLookup can not always efficiently process all rows.
-    if (!row.numberAttributes().getIsCp2InfoIncomplete()) {
+    if (!row.getNumberAttributes().getIsCp2InfoIncomplete()) {
       return Futures.immediateFuture(row);
     }
 
-    PhoneLookupInfo cachedPhoneLookupInfo = cache.get(row.number());
+    PhoneLookupInfo cachedPhoneLookupInfo = cache.get(row.getNumber());
     if (cachedPhoneLookupInfo != null) {
       return Futures.immediateFuture(applyPhoneLookupInfoToRow(cachedPhoneLookupInfo, row));
     }
 
     ListenableFuture<PhoneLookupInfo> phoneLookupInfoFuture =
-        compositePhoneLookup.lookup(row.number());
+        compositePhoneLookup.lookup(row.getNumber());
     return Futures.transform(
         phoneLookupInfoFuture,
         phoneLookupInfo -> {
-          queuePhoneLookupHistoryWrite(row.number(), phoneLookupInfo);
-          cache.put(row.number(), phoneLookupInfo);
+          queuePhoneLookupHistoryWrite(row.getNumber(), phoneLookupInfo);
+          cache.put(row.getNumber(), phoneLookupInfo);
           return applyPhoneLookupInfoToRow(phoneLookupInfo, row);
         },
         uiExecutor /* ensures the cache is updated on a single thread */);

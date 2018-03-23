@@ -83,7 +83,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.oem.MotorolaUtils;
@@ -648,6 +647,14 @@ public class DialpadFragment extends Fragment
     LogUtil.i("DialpadFragment.onStart", "first launch: %b", firstLaunch);
     Trace.beginSection(TAG + " onStart");
     super.onStart();
+    Resources res = getResources();
+    int iconId = R.drawable.quantum_ic_call_vd_theme_24;
+    if (MotorolaUtils.isWifiCallingAvailable(getContext())) {
+      iconId = R.drawable.ic_wifi_calling;
+    }
+    floatingActionButtonController.changeIcon(
+        getContext(), iconId, res.getString(R.string.description_dial_button));
+
     // if the mToneGenerator creation fails, just continue without it.  It is
     // a local audio signal, and is not as important as the dtmf tone itself.
     final long start = System.currentTimeMillis();
@@ -675,14 +682,6 @@ public class DialpadFragment extends Fragment
     LogUtil.enterBlock("DialpadFragment.onResume");
     Trace.beginSection(TAG + " onResume");
     super.onResume();
-
-    Resources res = getResources();
-    int iconId = R.drawable.quantum_ic_call_vd_theme_24;
-    if (MotorolaUtils.isWifiCallingAvailable(getContext())) {
-      iconId = R.drawable.ic_wifi_calling;
-    }
-    floatingActionButtonController.changeIcon(
-        getContext(), iconId, res.getString(R.string.description_dial_button));
 
     dialpadQueryListener = FragmentUtils.getParentUnsafe(this, OnDialpadQueryChangedListener.class);
 
@@ -1247,19 +1246,14 @@ public class DialpadFragment extends Fragment
       if (dialpadView != null) {
         LogUtil.i("DialpadFragment.showDialpadChooser", "mDialpadView not null");
         dialpadView.setVisibility(View.VISIBLE);
-        floatingActionButtonController.scaleIn();
+        if (isDialpadSlideUp()) {
+          floatingActionButtonController.scaleIn();
+        }
       } else {
         LogUtil.i("DialpadFragment.showDialpadChooser", "mDialpadView null");
         digits.setVisibility(View.VISIBLE);
       }
 
-      // mFloatingActionButtonController must also be 'scaled in', in order to be visible after
-      // 'scaleOut()' hidden method.
-      if (!floatingActionButtonController.isVisible()) {
-        // Just call 'scaleIn()' method if the mFloatingActionButtonController was not already
-        // previously visible.
-        floatingActionButtonController.scaleIn();
-      }
       dialpadChooser.setVisibility(View.GONE);
     }
   }
@@ -1475,18 +1469,8 @@ public class DialpadFragment extends Fragment
       if (animate) {
         dialpadView.animateShow();
       }
-      ThreadUtil.getUiThreadHandler()
-          .postDelayed(
-              () -> {
-                if (!isDialpadChooserVisible()) {
-                  floatingActionButtonController.scaleIn();
-                }
-              },
-              animate ? dialpadSlideInDuration : 0);
       FragmentUtils.getParentUnsafe(this, DialpadListener.class).onDialpadShown();
       digits.requestFocus();
-    } else if (hidden) {
-      floatingActionButtonController.scaleOut();
     }
   }
 
@@ -1549,6 +1533,7 @@ public class DialpadFragment extends Fragment
     slideDown.setAnimationListener(listener);
     slideDown.setDuration(animate ? dialpadSlideInDuration : 0);
     getView().startAnimation(slideDown);
+    floatingActionButtonController.scaleOut();
   }
 
   /** Animate the dialpad up onto the screen. */
@@ -1564,6 +1549,19 @@ public class DialpadFragment extends Fragment
     Animation slideUp = AnimationUtils.loadAnimation(getContext(), animation);
     slideUp.setInterpolator(AnimUtils.EASE_IN);
     slideUp.setDuration(animate ? dialpadSlideInDuration : 0);
+    slideUp.setAnimationListener(
+        new AnimationListener() {
+          @Override
+          public void onAnimationStart(Animation animation) {}
+
+          @Override
+          public void onAnimationEnd(Animation animation) {
+            floatingActionButtonController.scaleIn();
+          }
+
+          @Override
+          public void onAnimationRepeat(Animation animation) {}
+        });
     getView().startAnimation(slideUp);
   }
 

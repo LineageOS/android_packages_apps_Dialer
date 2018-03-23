@@ -22,15 +22,34 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.CallLog.Calls;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.inject.ApplicationContext;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.Locale;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /** {@link SQLiteOpenHelper} for the AnnotatedCallLog database. */
-class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
-  private final int maxRows;
+@Singleton
+public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
-  AnnotatedCallLogDatabaseHelper(Context appContext, int maxRows) {
-    super(appContext, "annotated_call_log.db", null, 1);
+  private static final String FILENAME = "annotated_call_log.db";
+
+  private final Context appContext;
+  private final int maxRows;
+  private final ListeningExecutorService backgroundExecutor;
+
+  @Inject
+  public AnnotatedCallLogDatabaseHelper(
+      @ApplicationContext Context appContext,
+      @AnnotatedCallLogMaxRows int maxRows,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+    super(appContext, FILENAME, null, 1);
+
+    this.appContext = appContext;
     this.maxRows = maxRows;
+    this.backgroundExecutor = backgroundExecutor;
   }
 
   private static final String CREATE_TABLE_SQL =
@@ -127,4 +146,14 @@ class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+
+  /** Closes the database and deletes it. */
+  public ListenableFuture<Void> delete() {
+    return backgroundExecutor.submit(
+        () -> {
+          close();
+          appContext.deleteDatabase(FILENAME);
+          return null;
+        });
+  }
 }

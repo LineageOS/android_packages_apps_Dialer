@@ -107,7 +107,8 @@ public class InCallServiceImpl extends InCallService {
             contactInfoCache,
             new ProximitySensor(
                 context, AudioModeProvider.getInstance(), new AccelerometerListener(context)),
-            new FilteredNumberAsyncQueryHandler(context));
+            new FilteredNumberAsyncQueryHandler(context),
+            speakEasyCallManager);
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);

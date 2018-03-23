@@ -20,6 +20,7 @@ import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Build.VERSION;
@@ -40,6 +41,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.calllog.database.AnnotatedCallLogDatabaseHelper;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
@@ -50,14 +52,17 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
-import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.Iterables;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,22 +80,31 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @VisibleForTesting
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
+  private final Context appContext;
   private final ListeningExecutorService backgroundExecutorService;
   private final MarkDirtyObserver markDirtyObserver;
+  private final SharedPreferences sharedPreferences;
+  private final AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper;
 
   @Nullable private Long lastTimestampProcessed;
 
   @Inject
   SystemCallLogDataSource(
+      @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      MarkDirtyObserver markDirtyObserver) {
+      MarkDirtyObserver markDirtyObserver,
+      @Unencrypted SharedPreferences sharedPreferences,
+      AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper) {
+    this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.markDirtyObserver = markDirtyObserver;
+    this.sharedPreferences = sharedPreferences;
+    this.annotatedCallLogDatabaseHelper = annotatedCallLogDatabaseHelper;
   }
 
   @MainThread
   @Override
-  public void registerContentObservers(Context appContext) {
+  public void registerContentObservers() {
     Assert.isMainThread();
 
     LogUtil.enterBlock("SystemCallLogDataSource.registerContentObservers");
@@ -120,22 +134,43 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @Override
-  public ListenableFuture<Boolean> isDirty(Context appContext) {
-    return backgroundExecutorService.submit(() -> isDirtyInternal(appContext));
+  public void unregisterContentObservers() {
+    appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
   }
 
   @Override
-  public ListenableFuture<Void> fill(Context appContext, CallLogMutations mutations) {
-    return backgroundExecutorService.submit(() -> fillInternal(appContext, mutations));
+  public ListenableFuture<Void> clearData() {
+    ListenableFuture<Void> deleteSharedPref =
+        backgroundExecutorService.submit(
+            () -> {
+              sharedPreferences.edit().remove(PREF_LAST_TIMESTAMP_PROCESSED).apply();
+              return null;
+            });
+
+    // TODO(zachh): Test re-enabling after deleting database like this.
+    return Futures.transform(
+        Futures.allAsList(deleteSharedPref, annotatedCallLogDatabaseHelper.delete()),
+        unused -> null,
+        MoreExecutors.directExecutor());
   }
 
   @Override
-  public ListenableFuture<Void> onSuccessfulFill(Context appContext) {
-    return backgroundExecutorService.submit(() -> onSuccessfulFillInternal(appContext));
+  public ListenableFuture<Boolean> isDirty() {
+    return backgroundExecutorService.submit(this::isDirtyInternal);
+  }
+
+  @Override
+  public ListenableFuture<Void> fill(CallLogMutations mutations) {
+    return backgroundExecutorService.submit(() -> fillInternal(mutations));
+  }
+
+  @Override
+  public ListenableFuture<Void> onSuccessfulFill() {
+    return backgroundExecutorService.submit(this::onSuccessfulFillInternal);
   }
 
   @WorkerThread
-  private boolean isDirtyInternal(Context appContext) {
+  private boolean isDirtyInternal() {
     Assert.isWorkerThread();
 
     /*
@@ -146,13 +181,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
      *
      * Just return false unless the table has never been written to.
      */
-    return !StorageComponent.get(appContext)
-        .unencryptedSharedPrefs()
-        .contains(PREF_LAST_TIMESTAMP_PROCESSED);
+    return !sharedPreferences.contains(PREF_LAST_TIMESTAMP_PROCESSED);
   }
 
   @WorkerThread
-  private Void fillInternal(Context appContext, CallLogMutations mutations) {
+  private Void fillInternal(CallLogMutations mutations) {
     Assert.isWorkerThread();
 
     lastTimestampProcessed = null;
@@ -178,11 +211,10 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @WorkerThread
-  private Void onSuccessfulFillInternal(Context appContext) {
+  private Void onSuccessfulFillInternal() {
     // If a fill operation was a no-op, lastTimestampProcessed could still be null.
     if (lastTimestampProcessed != null) {
-      StorageComponent.get(appContext)
-          .unencryptedSharedPrefs()
+      sharedPreferences
           .edit()
           .putLong(PREF_LAST_TIMESTAMP_PROCESSED, lastTimestampProcessed)
           .apply();
@@ -227,10 +259,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
   private void handleInsertsAndUpdates(
       Context appContext, CallLogMutations mutations, Set<Long> existingAnnotatedCallLogIds) {
-    long previousTimestampProcessed =
-        StorageComponent.get(appContext)
-            .unencryptedSharedPrefs()
-            .getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
+    long previousTimestampProcessed = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
 
     DialerPhoneNumberUtil dialerPhoneNumberUtil =
         new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
