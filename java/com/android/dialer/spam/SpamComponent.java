@@ -26,6 +26,8 @@ public abstract class SpamComponent {
 
   public abstract Spam spam();
 
+  public abstract SpamSettings spamSettings();
+
   public static SpamComponent get(Context context) {
     return ((SpamComponent.HasComponent)
             ((HasRootComponent) context.getApplicationContext()).component())

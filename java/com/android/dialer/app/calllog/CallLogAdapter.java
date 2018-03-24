@@ -682,7 +682,7 @@ public class CallLogAdapter extends GroupingListAdapter
       contactInfoCache.start();
     }
     contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-    isSpamEnabled = SpamComponent.get(activity).spam().isSpamEnabled();
+    isSpamEnabled = SpamComponent.get(activity).spamSettings().isSpamEnabled();
     getDuo().registerListener(this);
     notifyDataSetChanged();
   }
