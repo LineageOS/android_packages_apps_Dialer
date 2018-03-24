@@ -768,12 +768,11 @@ public class CallCardPresenter
               .setNumber(number)
               .setName(primary.updateNameIfRestricted(name))
               .setNameIsNumber(nameIsNumber)
-              .setLabel(
+              .setLocation(
                   shouldShowLocationAsLabel(nameIsNumber, primaryContactInfo.shouldShowLocation)
                       ? primaryContactInfo.location
                       : null)
-              .setLocation(
-                  isChildNumberShown || isCallSubjectShown ? null : primaryContactInfo.label)
+              .setLabel(isChildNumberShown || isCallSubjectShown ? null : primaryContactInfo.label)
               .setPhoto(primaryContactInfo.photo)
               .setPhotoType(primaryContactInfo.photoType)
               .setIsSipCall(primaryContactInfo.isSipCall)
