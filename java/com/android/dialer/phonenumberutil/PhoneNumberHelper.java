@@ -32,8 +32,8 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.oem.PhoneNumberUtilsAccessor;
 import com.android.dialer.phonenumbergeoutil.PhoneNumberGeoUtilComponent;
@@ -249,7 +249,7 @@ public class PhoneNumberHelper {
         TelephonyManagerCompat.getNetworkCountryIsoForPhoneAccountHandle(
             context, phoneAccountHandle);
     if (TextUtils.isEmpty(countryIso)) {
-      countryIso = CompatUtils.getLocale(context).getCountry();
+      countryIso = LocaleUtils.getLocale(context).getCountry();
       LogUtil.i(
           "PhoneNumberHelper.getCurrentCountryIso",
           "No CountryDetector; falling back to countryIso based on locale: " + countryIso);

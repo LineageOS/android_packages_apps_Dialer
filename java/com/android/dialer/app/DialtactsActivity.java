@@ -92,7 +92,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -103,6 +102,7 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.logging.DialerImpression;
@@ -538,7 +538,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     // (1) the activity is not recreated with a new configuration, or
     // (2) the activity is recreated with a new configuration but the change is a language change.
     boolean isLanguageChanged =
-        !CompatUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
+        !LocaleUtils.getLocale(this).getISO3Language().equals(savedLanguageCode);
     if (!wasConfigurationChange || isLanguageChanged) {
       dialerDatabaseHelper.startSmartDialUpdateThread(/* forceUpdate = */ isLanguageChanged);
     }
@@ -638,7 +638,7 @@ public class DialtactsActivity extends TransactionSafeActivity
     super.onSaveInstanceState(outState);
     outState.putString(KEY_SEARCH_QUERY, searchQuery);
     outState.putString(KEY_DIALPAD_QUERY, dialpadQuery);
-    outState.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(this).getISO3Language());
+    outState.putString(KEY_SAVED_LANGUAGE_CODE, LocaleUtils.getLocale(this).getISO3Language());
     outState.putBoolean(KEY_IN_REGULAR_SEARCH_UI, inRegularSearch);
     outState.putBoolean(KEY_IN_DIALPAD_SEARCH_UI, inDialpadSearch);
     outState.putBoolean(KEY_IN_NEW_SEARCH_UI, inNewSearch);
