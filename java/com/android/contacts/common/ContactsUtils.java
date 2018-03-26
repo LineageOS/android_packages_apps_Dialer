@@ -17,8 +17,8 @@
 package com.android.contacts.common;
 
 import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Directory;
 import android.support.annotation.IntDef;
-import com.android.dialer.common.cp2.DirectoryCompat;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -60,9 +60,7 @@ public class ContactsUtils {
   public static @UserType long determineUserType(Long directoryId, Long contactId) {
     // First check directory id
     if (directoryId != null) {
-      return DirectoryCompat.isEnterpriseDirectoryId(directoryId)
-          ? USER_TYPE_WORK
-          : USER_TYPE_CURRENT;
+      return Directory.isEnterpriseDirectoryId(directoryId) ? USER_TYPE_WORK : USER_TYPE_CURRENT;
     }
     // Only check contact id if directory id is null
     if (contactId != null && contactId != 0L && Contacts.isEnterpriseContactId(contactId)) {

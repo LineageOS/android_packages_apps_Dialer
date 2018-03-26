@@ -16,8 +16,6 @@
 
 package com.android.dialer.app.list;
 
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,22 +36,15 @@ public class DragDropController {
 
   /** @return True if the drag is started, false if the drag is cancelled for some reason. */
   boolean handleDragStarted(View v, int x, int y) {
-    int screenX = x;
-    int screenY = y;
-    // The coordinates in dragEvent of DragEvent.ACTION_DRAG_STARTED before NYC is window-related.
-    // This is fixed in NYC.
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      v.getLocationOnScreen(locationOnScreen);
-      screenX = x + locationOnScreen[0];
-      screenY = y + locationOnScreen[1];
-    }
-    final PhoneFavoriteSquareTileView tileView =
-        dragItemContainer.getViewForLocation(screenX, screenY);
+    v.getLocationOnScreen(locationOnScreen);
+    x = x + locationOnScreen[0];
+    y = y + locationOnScreen[1];
+    final PhoneFavoriteSquareTileView tileView = dragItemContainer.getViewForLocation(x, y);
     if (tileView == null) {
       return false;
     }
     for (int i = 0; i < onDragDropListeners.size(); i++) {
-      onDragDropListeners.get(i).onDragStarted(screenX, screenY, tileView);
+      onDragDropListeners.get(i).onDragStarted(x, y, tileView);
     }
 
     return true;

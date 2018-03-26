@@ -107,16 +107,10 @@ public class VoicemailStatus {
     }
     isAirplaneMode =
         Settings.System.getInt(context.getContentResolver(), Global.AIRPLANE_MODE_ON, 0) != 0;
-
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      quotaOccupied =
-          getInt(statusCursor, VoicemailStatusQuery.QUOTA_OCCUPIED_INDEX, Status.QUOTA_UNAVAILABLE);
-      quotaTotal =
-          getInt(statusCursor, VoicemailStatusQuery.QUOTA_TOTAL_INDEX, Status.QUOTA_UNAVAILABLE);
-    } else {
-      quotaOccupied = Status.QUOTA_UNAVAILABLE;
-      quotaTotal = Status.QUOTA_UNAVAILABLE;
-    }
+    quotaOccupied =
+        getInt(statusCursor, VoicemailStatusQuery.QUOTA_OCCUPIED_INDEX, Status.QUOTA_UNAVAILABLE);
+    quotaTotal =
+        getInt(statusCursor, VoicemailStatusQuery.QUOTA_TOTAL_INDEX, Status.QUOTA_UNAVAILABLE);
   }
 
   private VoicemailStatus(Builder builder) {

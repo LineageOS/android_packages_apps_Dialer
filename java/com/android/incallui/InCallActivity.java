@@ -60,7 +60,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression.Type;
@@ -465,8 +464,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       InCallPresenter.getInstance().onUiShowing(true);
     }
 
-    if (ActivityCompat.isInMultiWindowMode(this)
-        && !getResources().getBoolean(R.bool.incall_dialpad_allowed)) {
+    if (isInMultiWindowMode() && !getResources().getBoolean(R.bool.incall_dialpad_allowed)) {
       // Hide the dialpad because there may not be enough room
       showDialpadFragment(false, false);
     }
@@ -926,7 +924,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     @ColorInt int bottom;
     @ColorInt int gray = 0x66000000;
 
-    if (ActivityCompat.isInMultiWindowMode(this)) {
+    if (isInMultiWindowMode()) {
       top = themeColorManager.getBackgroundColorSolid();
       middle = themeColorManager.getBackgroundColorSolid();
       bottom = themeColorManager.getBackgroundColorSolid();
@@ -1236,7 +1234,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   private void updateNavigationBar(boolean isDialpadVisible) {
-    if (ActivityCompat.isInMultiWindowMode(this)) {
+    if (isInMultiWindowMode()) {
       return;
     }
 
