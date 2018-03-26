@@ -100,16 +100,18 @@
       android:layout_gravity="center_vertical"
       android:layout_margin="@dimen/search_bar_margin"
       android:contentDescription="@string/main_remove_contact"
-      android:visibility="gone"
       android:importantForAccessibility="no">
 
+    <!-- We set this view's visibility to gone instead of the parent because if we hide remove
+    view, it won't receive drag and accessibility events. -->
     <LinearLayout
         android:id="@+id/remove_view_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dialer_theme_color"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
       <ImageView
           android:id="@+id/remove_view_icon"
