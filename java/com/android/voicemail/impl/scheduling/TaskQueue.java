@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.scheduling.Task.TaskId;
+import com.android.voicemail.impl.scheduling.Tasks.TaskCreationException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,9 +50,13 @@ class TaskQueue implements Iterable<Task> {
   public void fromBundles(Context context, List<Bundle> pendingTasks) {
     Assert.isTrue(queue.isEmpty());
     for (Bundle pendingTask : pendingTasks) {
-      Task task = Tasks.createTask(context, pendingTask);
-      task.onRestore(pendingTask);
-      add(task);
+      try {
+        Task task = Tasks.createTask(context, pendingTask);
+        task.onRestore(pendingTask);
+        add(task);
+      } catch (TaskCreationException e) {
+        VvmLog.e("TaskQueue.fromBundles", "cannot create task", e);
+      }
     }
   }
 
