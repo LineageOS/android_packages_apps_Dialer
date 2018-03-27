@@ -43,6 +43,7 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -246,6 +247,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     oldSpeedDialFragmentHost =
         new MainOldSpeedDialFragmentHost(
             activity,
+            activity.findViewById(R.id.root_layout),
             bottomNav,
             activity.findViewById(R.id.contact_tile_drag_shadow_overlay),
             activity.findViewById(R.id.remove_view),
@@ -1024,34 +1026,42 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       implements OldSpeedDialFragment.HostInterface, OnDragDropListener {
 
     private final Context context;
+    private final View rootLayout;
     private final BottomNavBar bottomNavBar;
     private final ImageView dragShadowOverlay;
     private final RemoveView removeView;
+    private final View removeViewContent;
     private final View searchViewContainer;
     private final MainToolbar toolbar;
 
-    // TODO(calderwoodra): Use this for drag and drop
-    @SuppressWarnings("unused")
-    private DragDropController dragDropController;
-
     MainOldSpeedDialFragmentHost(
         Context context,
+        View rootLayout,
         BottomNavBar bottomNavBar,
         ImageView dragShadowOverlay,
         RemoveView removeView,
         View searchViewContainer,
         MainToolbar toolbar) {
       this.context = context;
+      this.rootLayout = rootLayout;
       this.bottomNavBar = bottomNavBar;
       this.dragShadowOverlay = dragShadowOverlay;
       this.removeView = removeView;
       this.searchViewContainer = searchViewContainer;
       this.toolbar = toolbar;
+      removeViewContent = removeView.findViewById(R.id.remove_view_content);
     }
 
     @Override
     public void setDragDropController(DragDropController dragDropController) {
       removeView.setDragDropController(dragDropController);
+      rootLayout.setOnDragListener(
+          (v, event) -> {
+            if (event.getAction() == DragEvent.ACTION_DRAG_LOCATION) {
+              dragDropController.handleDragHovered(v, (int) event.getX(), (int) event.getY());
+            }
+            return true;
+          });
     }
 
     @Override
@@ -1088,9 +1098,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     private void showRemoveView(boolean show) {
       if (show) {
-        AnimUtils.crossFadeViews(removeView, searchViewContainer, 300);
+        AnimUtils.crossFadeViews(removeViewContent, searchViewContainer, 300);
       } else {
-        AnimUtils.crossFadeViews(searchViewContainer, removeView, 300);
+        AnimUtils.crossFadeViews(searchViewContainer, removeViewContent, 300);
       }
     }
   }
