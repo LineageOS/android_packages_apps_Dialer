@@ -44,7 +44,7 @@
       android:minHeight="@dimen/call_details_contact_photo_size"
       android:orientation="vertical">
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/contact_name"
         style="@style/PrimaryText"
         android:layout_width="wrap_content"

@@ -40,6 +40,7 @@ import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.widget.BidiTextView;
 
 /**
  * ViewHolder for the header in {@link OldCallDetailsActivity} or {@link CallDetailsActivity}.
@@ -51,7 +52,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
 
   private final CallDetailsHeaderListener callDetailsHeaderListener;
   private final ImageView callbackButton;
-  private final TextView nameView;
+  private final BidiTextView nameView;
   private final TextView numberView;
   private final TextView networkView;
   private final QuickContactBadge contactPhoto;
