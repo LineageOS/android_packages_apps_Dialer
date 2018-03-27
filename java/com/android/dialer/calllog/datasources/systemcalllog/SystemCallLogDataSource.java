@@ -271,7 +271,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .query(
                 Calls.CONTENT_URI_WITH_VOICEMAIL,
                 getProjection(),
-                // TODO(a bug): LAST_MODIFIED not available on M
                 Calls.LAST_MODIFIED + " > ? AND " + Voicemails.DELETED + " = 0",
                 new String[] {String.valueOf(previousTimestampProcessed)},
                 Calls.LAST_MODIFIED + " DESC LIMIT 1000")) {
@@ -399,7 +398,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       new String[] {
         Calls._ID,
         Calls.DATE,
-        Calls.LAST_MODIFIED, // TODO(a bug): Not available in M
+        Calls.LAST_MODIFIED,
         Calls.NUMBER,
         Calls.NUMBER_PRESENTATION,
         Calls.TYPE,
@@ -414,7 +413,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         Calls.PHONE_ACCOUNT_COMPONENT_NAME,
         Calls.PHONE_ACCOUNT_ID,
         Calls.FEATURES,
-        Calls.POST_DIAL_DIGITS // TODO(a bug): Not available in M
+        Calls.POST_DIAL_DIGITS
       };
 
   @RequiresApi(VERSION_CODES.O)
