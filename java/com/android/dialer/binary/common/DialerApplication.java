@@ -23,14 +23,15 @@ import android.support.v4.os.BuildCompat;
 import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calllog.CallLogComponent;
-import com.android.dialer.common.concurrent.DefaultFutureCallback;
+import com.android.dialer.calllog.CallLogFramework;
+import com.android.dialer.calllog.config.CallLogConfig;
+import com.android.dialer.calllog.config.CallLogConfigComponent;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.persistentlog.PersistentLogger;
 import com.android.dialer.strictmode.StrictModeComponent;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.MoreExecutors;
 
 /** A common application subclass for all Dialer build variants. */
 public abstract class DialerApplication extends Application implements HasRootComponent {
@@ -48,17 +49,25 @@ public abstract class DialerApplication extends Application implements HasRootCo
             new FilteredNumberAsyncQueryHandler(this),
             DialerExecutorComponent.get(this).dialerExecutorFactory())
         .asyncAutoMigrate();
-    CallLogComponent.get(this).callLogFramework().onApplicationCreate();
-    Futures.addCallback(
-        CallLogComponent.get(this).getAnnotatedCallLogMigrator().migrate(),
-        new DefaultFutureCallback<>(),
-        MoreExecutors.directExecutor());
+    initializeAnnotatedCallLog();
     PersistentLogger.initialize(this);
 
     if (BuildCompat.isAtLeastO()) {
       NotificationChannelManager.initChannels(this);
     }
     Trace.endSection();
+  }
+
+  private void initializeAnnotatedCallLog() {
+    CallLogConfig callLogConfig = CallLogConfigComponent.get(this).callLogConfig();
+    callLogConfig.schedulePollingJob();
+
+    if (callLogConfig.isCallLogFrameworkEnabled()) {
+      CallLogFramework callLogFramework = CallLogComponent.get(this).callLogFramework();
+      callLogFramework.registerContentObservers();
+    } else {
+      LogUtil.i("DialerApplication.initializeAnnotatedCallLog", "framework not enabled");
+    }
   }
 
   /**

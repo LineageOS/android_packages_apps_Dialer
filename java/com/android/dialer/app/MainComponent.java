@@ -19,43 +19,13 @@ package com.android.dialer.app;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import com.android.dialer.configprovider.ConfigProviderBindings;
 
-/** This class is a copy of dialer.main.impl.MainImpl to get around a dependency issue. */
+/**
+ * Main activity intents.
+ *
+ * <p>TODO(calderwoodra): Move this elsewhere.
+ */
 public class MainComponent {
-
-  public static boolean isNewUiEnabled(Context context) {
-    return ConfigProviderBindings.get(context).getBoolean("is_nui_shortcut_enabled", false);
-  }
-
-  public static void createNewUiLauncherShortcut(Context context) {
-    enableComponent(context);
-  }
-
-  public static boolean isNuiComponentEnabled(Context context) {
-    if (!isNewUiEnabled(context)) {
-      return false;
-    }
-    return context
-            .getPackageManager()
-            .getComponentEnabledSetting(new ComponentName(context, getComponentName()))
-        == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-  }
-
-  /**
-   * Enables the NUI activity component. By default the component is disabled and can't be accessed.
-   * Once the component has been enabled the user will get an option to use the new UI to handle
-   * DIAL (and other) intents.
-   */
-  private static void enableComponent(Context context) {
-    context
-        .getPackageManager()
-        .setComponentEnabledSetting(
-            new ComponentName(context, getComponentName()),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP);
-  }
 
   /**
    * @param context Context of the application package implementing MainActivity class.

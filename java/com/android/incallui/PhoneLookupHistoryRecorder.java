@@ -20,10 +20,10 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
@@ -45,11 +45,11 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 final class PhoneLookupHistoryRecorder {
 
   /**
-   * If the new UI is enabled, fetches the current {@link PhoneLookupInfo} for the provided call and
-   * writes it to the PhoneLookupHistory. Otherwise does nothing.
+   * If the call log framework is enabled, fetches the current {@link PhoneLookupInfo} for the
+   * provided call and writes it to the PhoneLookupHistory. Otherwise does nothing.
    */
   static void recordPhoneLookupInfo(Context appContext, Call call) {
-    if (!(ConfigProviderBindings.get(appContext).getBoolean("is_nui_shortcut_enabled", false))) {
+    if (!CallLogConfigComponent.get(appContext).callLogConfig().isCallLogFrameworkEnabled()) {
       return;
     }
 

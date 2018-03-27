@@ -30,6 +30,8 @@ import java.util.List;
 /** Provides hints to the user when selecting a SIM to make a call. */
 public interface SuggestionProvider {
 
+  String EXTRA_SIM_SUGGESTION_REASON = "sim_suggestion_reason";
+
   /** The reason the suggestion is made. */
   enum Reason {
     UNKNOWN,

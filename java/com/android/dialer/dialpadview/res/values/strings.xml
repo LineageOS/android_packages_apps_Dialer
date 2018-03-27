@@ -97,7 +97,11 @@
        Ignored if empty. -->
   <string name="config_prohibited_phone_number_regexp" translatable="false"></string>
 
+  <!-- Warning hint shown in the dialpad input field when emergency call (911, etc.) cannot be made.
+       [CHAR_LIMIT=60] -->
+  <string name="dialpad_hint_emergency_calling_not_available">Emergency calling not available</string>
+
   <!-- Dialog message which is shown when the user tries to make a phone call
        to prohibited phone numbers [CHAR LIMIT=NONE] -->
-  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Can\'t call this number</string>
+  <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Can\'t call this number</string>
 </resources>

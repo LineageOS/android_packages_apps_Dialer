@@ -244,6 +244,10 @@ public class ContactGridManager {
       statusTextView.setText(info.label);
       statusTextView.setVisibility(View.VISIBLE);
       statusTextView.setSingleLine(info.labelIsSingleLine);
+      // Required to start the marquee
+      // This will send a AccessibilityEvent.TYPE_VIEW_SELECTED, but has no observable effect on
+      // talkback.
+      statusTextView.setSelected(true);
     }
 
     if (info.icon == null) {
