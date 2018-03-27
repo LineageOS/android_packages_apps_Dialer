@@ -133,8 +133,8 @@
   <string name="vvm3_error_imap_error_title">Something Went Wrong</string>
   <string name="vvm3_error_imap_error_message">Please contact Customer Service at <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> and tell them the error code is 9999.</string>
 
-  <string translatable="false" name="verizon_domestic_customer_support_number">+18009220204</string>
-  <string translatable="false" name="verizon_domestic_customer_support_display_number">(800) 922–0204</string>
+  <string name="verizon_domestic_customer_support_number" translatable="false">+18009220204</string>
+  <string name="verizon_domestic_customer_support_display_number" translatable="false">(800) 922–0204</string>
 
   <string name="verizon_terms_and_conditions_title">Turn on visual voicemail</string>
   <string name="verizon_terms_and_conditions_message"><xliff:g>%1$s</xliff:g> By turning on visual voicemail you agree to the Verizon Wireless terms and conditions:\n\n<xliff:g>%2$s</xliff:g></string>
@@ -144,7 +144,7 @@
   <string name="dialer_terms_and_conditions_existing_user_title">New! Read your voicemail</string>
   <string name="dialer_terms_and_conditions_message"><xliff:g>%s</xliff:g></string>
 
-  <string translatable="false" name="verizon_terms_and_conditions_1.1_english">
+  <string name="verizon_terms_and_conditions_1.1_english" translatable="false">
 Visual Voice Mail (VVM) is a service that provides access to voice mail messages directly on the device, without the need to call *86. This service requires traditional Voice Mail but does not support all traditional Voice Mail features, which you can access by dialing *86 from your handset. Use of this feature will be billed on a per-megabyte basis, or according to any data package you have. Mobile to mobile minutes do not apply. Standard rates apply to any calls, emails or messages initiated from Visual Voice Mail.\n
 \n
 You may disable VVM in settings. This will revert you to basic voice mail. In some cases you may need to call customer care to cancel and if you cancel Visual Voice Mail you may lose all stored voice mails and information.\n
@@ -157,7 +157,7 @@ You understand that by selecting ACCEPT, your messages will be stored and anyone
 \n
 If you do not accept all of these terms and conditions, do not use Visual Voice Mail.  </string>
 
-  <string translatable="false" name="verizon_terms_and_conditions_1.1_spanish">
+  <string name="verizon_terms_and_conditions_1.1_spanish" translatable="false">
 El buzón de voz visual (VVM) es un servicio que permite acceder a los mensajes del buzón de voz directamente en el dispositivo, sin necesidad de llamar al *86. Este servicio requiere el buzón de voz tradicional, pero no admite todas las funciones del buzón de voz tradicional, a las que se puede acceder marcando *86 en el teléfono. El uso de esta función se factura por megabyte o conforme a cualquier paquete de datos que tenga. No se aplican los minutos de un dispositivo móvil a otro. Se aplican tarifas estándar a todos los correos electrónicos, las llamadas o los mensajes originados en el buzón de voz visual.\n
 \n
 Puede inhabilitar el VVM en la configuración. Esto le permite volver al buzón de voz básico. En algunos casos, es posible que deba llamar al servicio de atención al cliente para cancelar el buzón de voz visual. Si lo cancela, puede perder la información y los mensajes de voz almacenados.\n
@@ -172,7 +172,7 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   </string>
 
   <string name="dialer_terms_and_conditions_1.0">
-  See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. <xliff:g>%s</xliff:g>
+  See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. You can turn this off at any time. <xliff:g>%s</xliff:g>
   </string>
 
   <string name="dialer_terms_and_conditions_existing_user">
@@ -184,19 +184,19 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   </string>
 
   <string name="dialer_terms_and_conditions_learn_more">Learn&#160;more</string>
-  <string translatable="false" name="dialer_terms_and_conditions_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
+  <string name="dialer_terms_and_conditions_learn_more_url" translatable="false">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
 
-  <string translatable="false" name="verizon_terms_and_conditions_policy_url">http://www.verizon.com/about/privacy/policy/</string>
+  <string name="verizon_terms_and_conditions_policy_url" translatable="false">http://www.verizon.com/about/privacy/policy/</string>
 
-  <string translatable="false" name="verizon_terms_and_conditions_accept_english">Turn On</string>
-  <string translatable="false" name="verizon_terms_and_conditions_accept_spanish">Aceptar</string>
-  <string translatable="false" name="verizon_terms_and_conditions_decline_english">No Thanks</string>
-  <string translatable="false" name="verizon_terms_and_conditions_decline_spanish">Rechazar</string>
+  <string name="verizon_terms_and_conditions_accept_english" translatable="false">Turn On</string>
+  <string name="verizon_terms_and_conditions_accept_spanish" translatable="false">Aceptar</string>
+  <string name="verizon_terms_and_conditions_decline_english" translatable="false">No Thanks</string>
+  <string name="verizon_terms_and_conditions_decline_spanish" translatable="false">Rechazar</string>
 
-  <string translatable="false" name="dialer_terms_and_conditions_accept_english">Turn On</string>
-  <string translatable="false" name="dialer_terms_and_conditions_accept_spanish">Aceptar</string>
-  <string translatable="false" name="dialer_terms_and_conditions_decline_english">No Thanks</string>
-  <string translatable="false" name="dialer_terms_and_conditions_decline_spanish">Rechazar</string>
+  <string name="dialer_terms_and_conditions_accept_english" translatable="false">Turn On</string>
+  <string name="dialer_terms_and_conditions_accept_spanish" translatable="false">Aceptar</string>
+  <string name="dialer_terms_and_conditions_decline_english" translatable="false">No Thanks</string>
+  <string name="dialer_terms_and_conditions_decline_spanish" translatable="false">Rechazar</string>
 
   <string name="dialer_terms_and_conditions_existing_user_ack">Ok, got it</string>
   <string name="dialer_terms_and_conditions_existing_user_setings">Settings</string>
