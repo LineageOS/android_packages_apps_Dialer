@@ -37,16 +37,11 @@
     <!-- The entrance point for Phone UI.
          stateAlwaysHidden is set to suppress keyboard show up on
          dialpad screen. -->
-    <activity
-      android:enabled="false"
-      android:clearTaskOnLaunch="true"
-      android:directBootAware="true"
-      android:label="@string/launcherActivityLabel"
-      android:launchMode="singleTask"
-      android:name="com.android.dialer.app.DialtactsActivity"
-      android:resizeableActivity="true"
-      android:theme="@style/DialtactsActivityTheme"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+    <activity-alias
+        android:exported="true"
+        android:name="com.android.dialer.app.DialtactsActivity"
+        android:targetActivity="com.android.dialer.main.impl.MainActivity">
+
       <intent-filter>
         <action android:name="android.intent.action.DIAL"/>
 
@@ -106,23 +101,17 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.TAB"/>
       </intent-filter>
-      <intent-filter android:label="@string/callHistoryIconLabel">
+      <intent-filter android:label="@string/main_call_history_tab_description">
         <action android:name="com.android.phone.action.RECENT_CALLS"/>
 
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.TAB"/>
       </intent-filter>
-
-      <meta-data
-        android:name="com.android.keyguard.layout"
-        android:resource="@layout/keyguard_preview"/>
-    </activity>
+    </activity-alias>
 
     <activity-alias
         android:exported="true"
         android:name="com.android.dialer.DialtactsActivity"
         android:targetActivity="com.android.dialer.main.impl.MainActivity"/>
-
   </application>
-
 </manifest>

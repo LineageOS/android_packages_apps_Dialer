@@ -53,7 +53,10 @@ public class CallCommand implements Command {
   @NonNull
   @Override
   public String getUsage() {
-    return "call number\n\nuse 'voicemail' to call voicemail";
+    return "call [flags --] number\n"
+        + "\nuse 'voicemail' to call voicemail"
+        + "\n\nflags:"
+        + "\n--direct send intent to telecom instead of pre call";
   }
 
   @Override
@@ -73,11 +76,16 @@ public class CallCommand implements Command {
     } else {
       callIntentBuilder = new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD);
     }
-
-    Intent intent = PreCall.getIntent(appContext, callIntentBuilder);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    appContext.startActivity(intent);
-
+    if (args.getBoolean("direct", false)) {
+      Intent intent = callIntentBuilder.build();
+      appContext
+          .getSystemService(TelecomManager.class)
+          .placeCall(intent.getData(), intent.getExtras());
+    } else {
+      Intent intent = PreCall.getIntent(appContext, callIntentBuilder);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      appContext.startActivity(intent);
+    }
     return Futures.immediateFuture("Calling " + number);
   }
 }

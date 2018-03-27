@@ -20,12 +20,23 @@
      [CHAR LIMIT=40] -->
   <string name="incall_calling_via_template">Calling via <xliff:g id="provider_name">%s</xliff:g></string>
 
+  <!-- Title displayed in the overlay for outgoing calls when the provider is automatically chosen
+         because it is the same provider the callee is using. [CHAR LIMIT=60] -->
+  <string name="incall_calling_on_same_carrier_template">Calling on same carrier <xliff:g id="provider_name">%s</xliff:g></string>
+
+  <!-- Title displayed in the overlay for outgoing calls when the provider is automatically chosen
+         because the user has selected it multiple times.  [CHAR LIMIT=60] -->
+  <string name="incall_calling_on_recent_choice_template">Calling on recent choice <xliff:g id="provider_name">%s</xliff:g></string>
+
   <!-- Displayed above the contact name during an outgoing phone call. Indicates that the call is
        in the connecting stage. -->
   <string name="incall_connecting">Calling…</string>
 
   <!-- Display information related to assisted dialing, for example Calling using +1 (US)… -->
   <string name="incall_connecting_assited_dialed">Calling using +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+
+  <!-- String appended to the outgoing call title for additional information related to assisted dialing, for example "Calling via <CARRIER> • Using +1 (US)… "-->
+  <string name="incall_connecting_assited_dialed_component">Using +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
 
   <!-- Displayed above the contact name when an external call is being pulled to the local
        device. -->
