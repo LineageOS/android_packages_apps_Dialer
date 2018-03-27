@@ -17,8 +17,6 @@
 package com.android.dialer.app.calllog;
 
 import android.database.Cursor;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.PhoneNumberUtils;
@@ -104,10 +102,8 @@ public class CallLogGroupBuilder {
 
     // Instantiate other group values to those of the first call in the cursor.
     String groupAccountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
-    String groupPostDialDigits =
-        (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
-    String groupViaNumbers =
-        (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
+    String groupPostDialDigits = cursor.getString(CallLogQuery.POST_DIAL_DIGITS);
+    String groupViaNumbers = cursor.getString(CallLogQuery.VIA_NUMBER);
     int groupCallType = cursor.getInt(CallLogQuery.CALL_TYPE);
     int groupSize = 1;
 
@@ -123,12 +119,8 @@ public class CallLogGroupBuilder {
     while (cursor.moveToNext()) {
       // Obtain the values for the current call to group.
       number = cursor.getString(CallLogQuery.NUMBER);
-      numberPostDialDigits =
-          (VERSION.SDK_INT >= VERSION_CODES.N)
-              ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS)
-              : "";
-      numberViaNumbers =
-          (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
+      numberPostDialDigits = cursor.getString(CallLogQuery.POST_DIAL_DIGITS);
+      numberViaNumbers = cursor.getString(CallLogQuery.VIA_NUMBER);
       callType = cursor.getInt(CallLogQuery.CALL_TYPE);
       callFeatures = cursor.getInt(CallLogQuery.FEATURES);
       accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);

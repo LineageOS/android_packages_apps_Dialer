@@ -34,6 +34,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -128,6 +129,9 @@ public class PreferredAccountWorker implements Worker<Context, Result> {
   private static Optional<String> getDataId(
       @NonNull Context context, @Nullable String phoneNumber) {
     Assert.isWorkerThread();
+    if (TextUtils.isEmpty(phoneNumber)) {
+      return Optional.absent();
+    }
     try (Cursor cursor =
         context
             .getContentResolver()

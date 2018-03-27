@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.calllog;
+package com.android.dialer.calllog.config;
 
 import android.annotation.SuppressLint;
 import android.app.job.JobInfo;
@@ -25,13 +25,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.os.UserManagerCompat;
+import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
-import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.constants.ScheduledJobIds;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.storage.Unencrypted;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -51,7 +52,7 @@ import javax.inject.Inject;
  * <p>New UI application components should use this class instead of reading flags directly from the
  * {@link ConfigProvider}.
  */
-public final class CallLogConfig {
+public final class CallLogConfigImpl implements CallLogConfig {
 
   private static final String NEW_CALL_LOG_FRAGMENT_ENABLED_PREF_KEY = "newCallLogFragmentEnabled";
   private static final String NEW_VOICEMAIL_FRAGMENT_ENABLED_PREF_KEY =
@@ -60,33 +61,27 @@ public final class CallLogConfig {
   private static final String NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY =
       "newCallLogFrameworkEnabled";
 
+  private final Context appContext;
   private final CallLogFramework callLogFramework;
   private final SharedPreferences sharedPreferences;
   private final ConfigProvider configProvider;
-  private final AnnotatedCallLogMigrator annotatedCallLogMigrator;
   private final ListeningExecutorService backgroundExecutor;
-  private final ListeningExecutorService lightweightExecutor;
 
   @Inject
-  public CallLogConfig(
+  public CallLogConfigImpl(
+      @ApplicationContext Context appContext,
       CallLogFramework callLogFramework,
       @Unencrypted SharedPreferences sharedPreferences,
       ConfigProvider configProvider,
-      AnnotatedCallLogMigrator annotatedCallLogMigrator,
-      @BackgroundExecutor ListeningExecutorService backgroundExecutor,
-      @LightweightExecutor ListeningExecutorService lightweightExecutor) {
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+    this.appContext = appContext;
     this.callLogFramework = callLogFramework;
     this.sharedPreferences = sharedPreferences;
     this.configProvider = configProvider;
-    this.annotatedCallLogMigrator = annotatedCallLogMigrator;
     this.backgroundExecutor = backgroundExecutor;
-    this.lightweightExecutor = lightweightExecutor;
   }
 
-  /**
-   * Updates the config values. This may kick off a lot of work so should be done infrequently, for
-   * example by a scheduled job or broadcast receiver which rarely fires.
-   */
+  @Override
   public ListenableFuture<Void> update() {
     boolean newCallLogFragmentEnabledInConfigProvider =
         configProvider.getBoolean("new_call_log_fragment_enabled", false);
@@ -102,7 +97,7 @@ public final class CallLogConfig {
 
     if (callLogFrameworkShouldBeEnabled && !isCallLogFrameworkEnabled) {
       return Futures.transform(
-          enableFramework(),
+          callLogFramework.enable(),
           unused -> {
             // Reflect the flag changes only after the framework is enabled.
             sharedPreferences
@@ -134,7 +129,9 @@ public final class CallLogConfig {
                 return null;
               });
       return Futures.transformAsync(
-          writeSharedPrefsFuture, unused -> disableFramework(), MoreExecutors.directExecutor());
+          writeSharedPrefsFuture,
+          unused -> callLogFramework.disable(),
+          MoreExecutors.directExecutor());
     } else {
       // We didn't need to enable/disable the framework, but we still need to update the
       // individual flags.
@@ -155,35 +152,17 @@ public final class CallLogConfig {
     }
   }
 
-  private ListenableFuture<Void> enableFramework() {
-    ListenableFuture<Void> registerObserversFuture =
-        lightweightExecutor.submit(
-            () -> {
-              callLogFramework.registerContentObservers();
-              return null;
-            });
-    ListenableFuture<Void> migratorFuture = annotatedCallLogMigrator.migrate();
-    return Futures.transform(
-        Futures.allAsList(registerObserversFuture, migratorFuture),
-        unused -> null,
-        MoreExecutors.directExecutor());
-  }
-
-  private ListenableFuture<Void> disableFramework() {
-    return Futures.transform(
-        Futures.allAsList(callLogFramework.disable(), annotatedCallLogMigrator.clearData()),
-        unused -> null,
-        MoreExecutors.directExecutor());
-  }
-
+  @Override
   public boolean isNewCallLogFragmentEnabled() {
     return sharedPreferences.getBoolean(NEW_CALL_LOG_FRAGMENT_ENABLED_PREF_KEY, false);
   }
 
+  @Override
   public boolean isNewVoicemailFragmentEnabled() {
     return sharedPreferences.getBoolean(NEW_VOICEMAIL_FRAGMENT_ENABLED_PREF_KEY, false);
   }
 
+  @Override
   public boolean isNewPeerEnabled() {
     return sharedPreferences.getBoolean(NEW_PEER_ENABLED_PREF_KEY, false);
   }
@@ -192,11 +171,13 @@ public final class CallLogConfig {
    * Returns true if the new call log framework is enabled, meaning that content observers are
    * firing and PhoneLookupHistory is being populated, etc.
    */
+  @Override
   public boolean isCallLogFrameworkEnabled() {
     return sharedPreferences.getBoolean(NEW_CALL_LOG_FRAMEWORK_ENABLED_PREF_KEY, false);
   }
 
-  static void schedulePollingJob(Context appContext) {
+  @Override
+  public void schedulePollingJob() {
     if (UserManagerCompat.isUserUnlocked(appContext)) {
       JobScheduler jobScheduler = Assert.isNotNull(appContext.getSystemService(JobScheduler.class));
       @SuppressLint("MissingPermission") // Dialer has RECEIVE_BOOT permission
@@ -209,7 +190,7 @@ public final class CallLogConfig {
               .setRequiresCharging(true)
               .setRequiresDeviceIdle(true)
               .build();
-      LogUtil.i("CallLogConfig.schedulePollingJob", "scheduling");
+      LogUtil.i("CallLogConfigImpl.schedulePollingJob", "scheduling");
       jobScheduler.schedule(jobInfo);
     }
   }
@@ -226,7 +207,7 @@ public final class CallLogConfig {
     public boolean onStartJob(JobParameters params) {
       LogUtil.enterBlock("PollingJob.onStartJob");
       Futures.addCallback(
-          CallLogComponent.get(getApplicationContext()).callLogConfig().update(),
+          CallLogConfigComponent.get(getApplicationContext()).callLogConfig().update(),
           new FutureCallback<Void>() {
             @Override
             public void onSuccess(Void unused) {

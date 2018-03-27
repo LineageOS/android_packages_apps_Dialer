@@ -40,6 +40,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:singleLine="true"
+    android:ellipsize="marquee"
+    android:scrollHorizontally="true"
     android:textAppearance="@style/Dialer.Incall.TextAppearance"
     tools:text="Captain Holt"/>
 </LinearLayout>

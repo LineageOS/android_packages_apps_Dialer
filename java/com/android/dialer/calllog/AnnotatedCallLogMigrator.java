@@ -16,12 +16,9 @@
 
 package com.android.dialer.calllog;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
-import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.storage.Unencrypted;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -37,18 +34,15 @@ public final class AnnotatedCallLogMigrator {
 
   private static final String PREF_MIGRATED = "annotatedCallLogMigratorMigrated";
 
-  private final Context appContext;
   private final SharedPreferences sharedPreferences;
   private final RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
   private final ListeningExecutorService backgroundExecutor;
 
   @Inject
   AnnotatedCallLogMigrator(
-      @ApplicationContext Context appContext,
       @Unencrypted SharedPreferences sharedPreferences,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor,
       RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker) {
-    this.appContext = appContext;
     this.sharedPreferences = sharedPreferences;
     this.backgroundExecutor = backgroundExecutor;
     this.refreshAnnotatedCallLogWorker = refreshAnnotatedCallLogWorker;
@@ -78,17 +72,7 @@ public final class AnnotatedCallLogMigrator {
   }
 
   private ListenableFuture<Boolean> shouldMigrate() {
-    return backgroundExecutor.submit(
-        () -> {
-          if (!(ConfigProviderBindings.get(appContext)
-              .getBoolean("is_nui_shortcut_enabled", false))) {
-            return false;
-          }
-          if (sharedPreferences.getBoolean(PREF_MIGRATED, false)) {
-            return false;
-          }
-          return true;
-        });
+    return backgroundExecutor.submit(() -> !sharedPreferences.getBoolean(PREF_MIGRATED, false));
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,14 @@
  * limitations under the License
  */
 
-package com.android.dialer.main.impl;
+package com.android.dialer.calllog.config;
 
-import com.android.dialer.main.Main;
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 
-/** This module provides an instance of {@link Main}. */
+/** Binds {@link CallLogConfigImpl}. */
 @Module
-public final class MainModule {
-  @Provides
-  public static Main provideMain() {
-    return new MainImpl();
-  }
+public abstract class CallLogConfigModule {
+  @Binds
+  abstract CallLogConfig to(CallLogConfigImpl impl);
 }

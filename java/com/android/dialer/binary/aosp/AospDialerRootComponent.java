@@ -19,6 +19,7 @@ package com.android.dialer.binary.aosp;
 import com.android.bubble.stub.StubBubbleModule;
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
+import com.android.dialer.calllog.config.CallLogConfigModule;
 import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
@@ -49,6 +50,7 @@ import javax.inject.Singleton;
 @Component(
   modules = {
     CallLogModule.class,
+    CallLogConfigModule.class,
     CommandLineModule.class,
     ContextModule.class,
     DialerExecutorModule.class,

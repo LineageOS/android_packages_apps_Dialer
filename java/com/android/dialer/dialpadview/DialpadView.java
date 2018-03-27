@@ -82,6 +82,7 @@ public class DialpadView extends LinearLayout {
   private final int translateDistance;
 
   private EditText digits;
+  private TextView digitsHint;
   private ImageButton delete;
   private View overflowMenuButton;
   private ViewGroup rateContainer;
@@ -134,6 +135,7 @@ public class DialpadView extends LinearLayout {
 
     setupKeypad();
     digits = (EditText) findViewById(R.id.digits);
+    digitsHint = findViewById(R.id.digits_hint);
     delete = (ImageButton) findViewById(R.id.deleteButton);
     overflowMenuButton = findViewById(R.id.dialpad_overflow);
     rateContainer = (ViewGroup) findViewById(R.id.rate_container);
@@ -309,6 +311,10 @@ public class DialpadView extends LinearLayout {
 
   public EditText getDigits() {
     return digits;
+  }
+
+  public TextView getDigitsHint() {
+    return digitsHint;
   }
 
   public ImageButton getDeleteButton() {

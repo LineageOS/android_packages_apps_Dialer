@@ -16,12 +16,9 @@
 
 package com.android.dialer.calllog;
 
-import android.content.Context;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.inject.ApplicationContext;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -38,46 +35,39 @@ import javax.inject.Singleton;
 @Singleton
 public final class CallLogFramework {
 
-  private final Context appContext;
   private final DataSources dataSources;
+  private final AnnotatedCallLogMigrator annotatedCallLogMigrator;
 
   @Inject
-  CallLogFramework(@ApplicationContext Context appContext, DataSources dataSources) {
-    this.appContext = appContext;
+  CallLogFramework(DataSources dataSources, AnnotatedCallLogMigrator annotatedCallLogMigrator) {
     this.dataSources = dataSources;
-  }
-
-  /** Performs necessary setup work when the application is created. */
-  public void onApplicationCreate() {
-    registerContentObservers();
-    CallLogConfig.schedulePollingJob(appContext);
+    this.annotatedCallLogMigrator = annotatedCallLogMigrator;
   }
 
   /** Registers the content observers for all data sources. */
   public void registerContentObservers() {
     LogUtil.enterBlock("CallLogFramework.registerContentObservers");
-
-    // This is the same condition used in MainImpl#isNewUiEnabled. It means that bugfood/debug
-    // users will have "new call log" content observers firing. These observers usually do simple
-    // things like writing shared preferences.
-    // TODO(zachh): Find a way to access Main#isNewUiEnabled without creating a circular dependency.
-    if (ConfigProviderBindings.get(appContext).getBoolean("is_nui_shortcut_enabled", false)) {
-      for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
-        dataSource.registerContentObservers();
-      }
-    } else {
-      LogUtil.i("CallLogFramework.registerContentObservers", "not registering content observers");
+    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
+      dataSource.registerContentObservers();
     }
+  }
+
+  /** Enables the framework. */
+  public ListenableFuture<Void> enable() {
+    registerContentObservers();
+    return annotatedCallLogMigrator.migrate();
   }
 
   /** Disables the framework. */
   public ListenableFuture<Void> disable() {
-    LogUtil.enterBlock("CallLogFramework.disable");
+    return Futures.transform(
+        Futures.allAsList(disableDataSources(), annotatedCallLogMigrator.clearData()),
+        unused -> null,
+        MoreExecutors.directExecutor());
+  }
 
-    if (!ConfigProviderBindings.get(appContext).getBoolean("is_nui_shortcut_enabled", false)) {
-      LogUtil.i("CallLogFramework.disable", "not disabling");
-      return Futures.immediateFuture(null);
-    }
+  private ListenableFuture<Void> disableDataSources() {
+    LogUtil.enterBlock("CallLogFramework.disableDataSources");
 
     for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
       dataSource.unregisterContentObservers();
