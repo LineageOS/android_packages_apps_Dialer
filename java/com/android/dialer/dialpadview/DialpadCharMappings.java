@@ -20,7 +20,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
 import com.android.dialer.common.Assert;
-import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.i18n.LocaleUtils;
 
 /** A class containing character mappings for the dialpad. */
 public class DialpadCharMappings {
@@ -133,7 +133,7 @@ public class DialpadCharMappings {
    * null if no character-key map for the language code is defined.
    */
   public static SimpleArrayMap<Character, Character> getCharToKeyMap(@NonNull Context context) {
-    return CHAR_TO_KEY_MAPS.get(CompatUtils.getLocale(context).getISO3Language());
+    return CHAR_TO_KEY_MAPS.get(LocaleUtils.getLocale(context).getISO3Language());
   }
 
   /**
@@ -163,7 +163,7 @@ public class DialpadCharMappings {
    * preference or null if no key-characters map for the language code is defined.
    */
   static String[] getKeyToCharsMap(@NonNull Context context) {
-    return KEY_TO_CHAR_MAPS.get(CompatUtils.getLocale(context).getISO3Language());
+    return KEY_TO_CHAR_MAPS.get(LocaleUtils.getLocale(context).getISO3Language());
   }
 
   /** Returns the default key-characters map (the one that uses the Latin alphabet). */

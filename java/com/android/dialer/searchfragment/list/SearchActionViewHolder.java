@@ -26,13 +26,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.precall.PreCall;
+import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import java.lang.annotation.Retention;
@@ -70,25 +67,25 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
   private final Context context;
   private final ImageView actionImage;
   private final TextView actionText;
+  private final RowClickListener listener;
 
   private @Action int action;
   private int position;
   private String query;
-  private CallInitiationType.Type callInitiationType;
 
-  SearchActionViewHolder(View view) {
+  SearchActionViewHolder(View view, RowClickListener listener) {
     super(view);
     context = view.getContext();
     actionImage = view.findViewById(R.id.search_action_image);
     actionText = view.findViewById(R.id.search_action_text);
+    this.listener = listener;
     view.setOnClickListener(this);
   }
 
-  void setAction(@Action int action, int position, String query, CallInitiationType.Type type) {
+  void setAction(@Action int action, int position, String query) {
     this.action = action;
     this.position = position;
     this.query = query;
-    this.callInitiationType = type;
     switch (action) {
       case Action.ADD_TO_CONTACT:
         actionText.setText(R.string.search_shortcut_add_to_contact);
@@ -113,7 +110,6 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
       case Action.INVALID:
       default:
         throw Assert.createIllegalStateFailException("Invalid action: " + action);
-
     }
   }
 
@@ -140,14 +136,7 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
         break;
 
       case Action.MAKE_VILTE_CALL:
-        CallSpecificAppData videoCallSpecificAppData =
-            CallSpecificAppData.newBuilder()
-                .setCallInitiationType(callInitiationType)
-                .setPositionOfSelectedSearchResult(position)
-                .setCharactersInSearchString(query.length())
-                .build();
-        PreCall.start(
-            context, new CallIntentBuilder(query, videoCallSpecificAppData).setIsVideoCall(true));
+        listener.placeVideoCall(query, position);
         break;
 
       case Action.SEND_SMS:
@@ -156,13 +145,7 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
         break;
 
       case Action.MAKE_VOICE_CALL:
-        CallSpecificAppData voiceCallSpecificAppData =
-            CallSpecificAppData.newBuilder()
-                .setCallInitiationType(callInitiationType)
-                .setPositionOfSelectedSearchResult(position)
-                .setCharactersInSearchString(query.length())
-                .build();
-        PreCall.start(context, new CallIntentBuilder(query, voiceCallSpecificAppData));
+        listener.placeVoiceCall(query, position);
         break;
 
       case Action.INVALID:
