@@ -22,7 +22,6 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
-import android.os.Build;
 import android.provider.VoicemailContract;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ScheduledJobIds;
@@ -37,12 +36,8 @@ public class VoicemailNotificationJobService extends JobService {
    * notification is visible.
    */
   public static void scheduleJob(Context context) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-      LogUtil.i("VoicemailNotificationJobService.scheduleJob", "not supported");
-    } else {
-      context.getSystemService(JobScheduler.class).schedule(getJobInfo(context));
-      LogUtil.i("VoicemailNotificationJobService.scheduleJob", "job scheduled");
-    }
+    context.getSystemService(JobScheduler.class).schedule(getJobInfo(context));
+    LogUtil.i("VoicemailNotificationJobService.scheduleJob", "job scheduled");
   }
 
   /**

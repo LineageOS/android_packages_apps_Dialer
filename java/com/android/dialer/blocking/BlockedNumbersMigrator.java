@@ -35,7 +35,7 @@ import java.util.Objects;
  * Class which should be used to migrate numbers from {@link FilteredNumberContract} blocking to
  * {@link android.provider.BlockedNumberContract} blocking.
  */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class BlockedNumbersMigrator {
 
   private final Context context;

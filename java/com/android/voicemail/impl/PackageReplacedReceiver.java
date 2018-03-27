@@ -91,7 +91,7 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
       this.context = context;
     }
 
-    @TargetApi(android.os.Build.VERSION_CODES.M) // used for try with resources
+    @TargetApi(android.os.Build.VERSION_CODES.N) // used for try with resources
     @Override
     public Void doInBackground(Void arg) throws Throwable {
       LogUtil.i("PackageReplacedReceiver.ExistingVoicemailCheck.doInBackground", "");

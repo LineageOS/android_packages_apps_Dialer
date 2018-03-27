@@ -20,7 +20,7 @@
   android:versionName="19.0">
 
   <uses-sdk
-    android:minSdkVersion="23"
+    android:minSdkVersion="24"
     android:targetSdkVersion="27"/>
 
   <uses-permission android:name="android.permission.CALL_PHONE"/>

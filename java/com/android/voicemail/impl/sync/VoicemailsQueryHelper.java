@@ -256,7 +256,7 @@ public class VoicemailsQueryHelper {
   }
 
   /** Find the oldest voicemails that are on the device, and also on the server. */
-  @TargetApi(VERSION_CODES.M) // used for try with resources
+  @TargetApi(VERSION_CODES.N) // used for try with resources
   public List<Voicemail> oldestVoicemailsOnServer(int numVoicemails) {
     if (numVoicemails <= 0) {
       Assert.fail("Query for remote voicemails cannot be <= 0");

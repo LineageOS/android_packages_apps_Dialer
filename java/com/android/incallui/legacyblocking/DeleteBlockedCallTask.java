@@ -34,7 +34,7 @@ import java.util.Objects;
  * versions of the OS, call blocking is implemented in the system and there's no need to mess with
  * the call log.
  */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class DeleteBlockedCallTask extends AsyncTask<Void, Void, Long> {
 
   public static final String IDENTIFIER = "DeleteBlockedCallTask";

@@ -92,7 +92,7 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
     return true;
   }
 
-  @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
+  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   @Nullable
   @Override
   public Cursor query(
