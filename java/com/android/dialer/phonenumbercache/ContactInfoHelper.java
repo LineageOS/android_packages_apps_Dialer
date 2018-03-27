@@ -35,7 +35,6 @@ import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.Constants;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.oem.CequintCallerIdManager;
 import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
@@ -107,12 +106,12 @@ public class ContactInfoHelper {
 
     if (directoryId != null) {
       // Query {@link Contacts#CONTENT_LOOKUP_URI} with work lookup key is not allowed.
-      if (DirectoryCompat.isEnterpriseDirectoryId(directoryId)) {
+      if (Directory.isEnterpriseDirectoryId(directoryId)) {
         return null;
       }
 
       // Skip this to avoid an extra remote network call for alternative name
-      if (DirectoryCompat.isRemoteDirectoryId(directoryId)) {
+      if (Directory.isRemoteDirectoryId(directoryId)) {
         return null;
       }
     }
@@ -289,7 +288,7 @@ public class ContactInfoHelper {
     try {
       while (cursor.moveToNext()) {
         long directoryId = cursor.getLong(idIndex);
-        if (DirectoryCompat.isRemoteDirectoryId(directoryId)) {
+        if (Directory.isRemoteDirectoryId(directoryId)) {
           remoteDirectories.add(directoryId);
         }
       }
@@ -323,7 +322,7 @@ public class ContactInfoHelper {
             .getContentResolver()
             .query(
                 uri,
-                PhoneQuery.getPhoneLookupProjection(uri),
+                PhoneQuery.getPhoneLookupProjection(),
                 null /* selection */,
                 null /* selectionArgs */,
                 null /* sortOrder */)) {

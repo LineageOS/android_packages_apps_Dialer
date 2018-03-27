@@ -197,7 +197,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Creates and displays the dialog for whitelisting a number. */
   private void maybeShowNotSpamDialog(
       final String number, final ContactLookupResult.Type contactLookupResultType) {
-    if (SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
+    if (SpamComponent.get(this).spamSettings().isDialogEnabledForSpamNotification()) {
       DialogFragmentForReportingNotSpam.newInstance(
               getFormattedNumber(number, this),
               new BlockReportSpamDialogs.OnConfirmListener() {
@@ -216,7 +216,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Creates and displays the dialog for blocking/reporting a number as spam. */
   private void maybeShowBlockReportSpamDialog(
       final String number, final ContactLookupResult.Type contactLookupResultType) {
-    if (SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
+    if (SpamComponent.get(this).spamSettings().isDialogEnabledForSpamNotification()) {
       String displayNumber = getFormattedNumber(number, this);
       maybeShowBlockNumberMigrationDialog(
           new BlockedNumbersMigrator.Listener() {
@@ -225,7 +225,7 @@ public class SpamNotificationActivity extends FragmentActivity {
               DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
                       displayNumber,
                       SpamComponent.get(SpamNotificationActivity.this)
-                          .spam()
+                          .spamSettings()
                           .isDialogReportSpamCheckedByDefault(),
                       new BlockReportSpamDialogs.OnSpamDialogClickListener() {
                         @Override
@@ -319,7 +319,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   }
 
   private void assertDialogsEnabled() {
-    if (!SpamComponent.get(this).spam().isDialogEnabledForSpamNotification()) {
+    if (!SpamComponent.get(this).spamSettings().isDialogEnabledForSpamNotification()) {
       throw new IllegalStateException(
           "Cannot start this activity with given action because dialogs are not enabled.");
     }

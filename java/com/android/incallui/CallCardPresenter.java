@@ -46,7 +46,6 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -836,7 +835,7 @@ public class CallCardPresenter
       LogUtil.i("CallCardPresenter.getLocationFragment", "low battery.");
       return false;
     }
-    if (ActivityCompat.isInMultiWindowMode(inCallScreen.getInCallScreenFragment().getActivity())) {
+    if (inCallScreen.getInCallScreenFragment().getActivity().isInMultiWindowMode()) {
       LogUtil.i("CallCardPresenter.getLocationFragment", "in multi-window mode");
       return false;
     }

@@ -25,4 +25,7 @@ public abstract class StubSpamModule {
 
   @Binds
   public abstract Spam bindSpam(SpamStub stub);
+
+  @Binds
+  public abstract SpamSettings bindSpamSettings(SpamSettingsStub stub);
 }
