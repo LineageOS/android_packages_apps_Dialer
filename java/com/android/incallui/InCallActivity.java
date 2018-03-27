@@ -60,7 +60,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
@@ -321,9 +320,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
       // InCallActivity is responsible for disconnecting a new outgoing call if there is no way of
       // making it (i.e. no valid call capable accounts).
-      // If the version is not MSIM compatible, ignore this code.
-      if (CompatUtils.isMSIMCompatible()
-          && InCallPresenter.isCallWithNoValidAccounts(outgoingCall)) {
+      if (InCallPresenter.isCallWithNoValidAccounts(outgoingCall)) {
         LogUtil.i(
             "InCallActivity.internalResolveIntent", "Call with no valid accounts, disconnecting");
         outgoingCall.disconnect();

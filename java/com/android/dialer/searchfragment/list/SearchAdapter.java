@@ -26,7 +26,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
@@ -48,7 +47,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
   // Raw query number from dialpad, which may contain special character such as "+". This is used
   // for actions to add contact or send sms.
   private String rawNumber;
-  private CallInitiationType.Type callInitiationType;
   private OnClickListener allowClickListener;
   private OnClickListener dismissClickListener;
   private RowClickListener rowClickListener;
@@ -83,7 +81,8 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
             rowClickListener);
       case RowType.SEARCH_ACTION:
         return new SearchActionViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.search_action_layout, root, false));
+            LayoutInflater.from(context).inflate(R.layout.search_action_layout, root, false),
+            rowClickListener);
       case RowType.LOCATION_REQUEST:
         return new LocationPermissionViewHolder(
             LayoutInflater.from(context).inflate(R.layout.location_permission_row, root, false),
@@ -117,8 +116,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
           .setAction(
               searchCursorManager.getSearchAction(position),
               position,
-              TextUtils.isEmpty(rawNumber) ? query : rawNumber,
-              callInitiationType);
+              TextUtils.isEmpty(rawNumber) ? query : rawNumber);
     } else if (holder instanceof LocationPermissionViewHolder) {
       // No-op
     } else {
@@ -148,17 +146,16 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   /**
    * @param visible If true and query is empty, the adapter won't show any list elements.
-   * @see #setQuery(String, String, CallInitiationType.Type)
+   * @see #setQuery(String, String)
    * @see #getItemCount()
    */
   public void setZeroSuggestVisible(boolean visible) {
     showZeroSuggest = visible;
   }
 
-  public void setQuery(String query, @Nullable String rawNumber, CallInitiationType.Type type) {
+  public void setQuery(String query, @Nullable String rawNumber) {
     this.query = query;
     this.rawNumber = rawNumber;
-    this.callInitiationType = type;
     if (searchCursorManager.setQuery(query)) {
       notifyDataSetChanged();
     }

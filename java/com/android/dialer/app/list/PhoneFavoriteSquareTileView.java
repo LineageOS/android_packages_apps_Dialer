@@ -25,7 +25,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.app.R;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.widget.BidiTextView;
@@ -64,21 +63,12 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
   }
 
   private void launchQuickContact() {
-    if (CompatUtils.hasPrioritizedMimeType()) {
-      QuickContact.showQuickContact(
-          getContext(),
-          PhoneFavoriteSquareTileView.this,
-          getLookupUri(),
-          null,
-          Phone.CONTENT_ITEM_TYPE);
-    } else {
-      QuickContact.showQuickContact(
-          getContext(),
-          PhoneFavoriteSquareTileView.this,
-          getLookupUri(),
-          QuickContact.MODE_LARGE,
-          null);
-    }
+    QuickContact.showQuickContact(
+        getContext(),
+        PhoneFavoriteSquareTileView.this,
+        getLookupUri(),
+        null,
+        Phone.CONTENT_ITEM_TYPE);
   }
 
   @Override
