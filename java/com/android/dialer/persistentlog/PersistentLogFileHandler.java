@@ -53,7 +53,7 @@ import java.util.List;
  * worker thread.
  */
 @SuppressWarnings("AndroidApiChecker") // lambdas
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 final class PersistentLogFileHandler {
 
   private static final String LOG_DIRECTORY = "persistent_log";

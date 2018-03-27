@@ -23,13 +23,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telecom.VideoProfile;
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Activity that forwards to {@link PreCall#start(Context, CallIntentBuilder)} so the pre-call flow
@@ -49,6 +52,17 @@ public class LaunchPreCallActivity extends Activity {
   public static final String EXTRA_CALL_SUBJECT = "call_subject";
 
   public static final String EXTRA_ALLOW_ASSISTED_DIAL = "allow_assisted_dial";
+
+  private static final ImmutableList<String> HANDLED_INTENT_EXTRAS =
+      ImmutableList.of(
+          TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE,
+          TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS,
+          TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE,
+          TelecomManager.EXTRA_CALL_SUBJECT,
+          EXTRA_PHONE_ACCOUNT_HANDLE,
+          EXTRA_IS_VIDEO_CALL,
+          EXTRA_CALL_SUBJECT,
+          EXTRA_ALLOW_ASSISTED_DIAL);
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +86,62 @@ public class LaunchPreCallActivity extends Activity {
             intent.getBooleanExtra(
                 EXTRA_ALLOW_ASSISTED_DIAL,
                 configProvider.getBoolean("assisted_dialing_default_precall_state", false)));
+    filterExtras(intent.getExtras(), builder);
     PreCall.start(this, builder);
     finish();
+  }
+
+  /**
+   * Move key-value pairs that {@link CallIntentBuilder} can handle from {@code intentExtras} to
+   * {@code builder}
+   */
+  private void filterExtras(@Nullable Bundle intentExtras, CallIntentBuilder builder) {
+    if (intentExtras == null) {
+      return;
+    }
+    Bundle bundle = new Bundle();
+    bundle.putAll(intentExtras);
+
+    if (intentExtras.containsKey(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE)) {
+      int videoState = intentExtras.getInt(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE);
+      switch (videoState) {
+        case VideoProfile.STATE_BIDIRECTIONAL:
+          builder.setIsVideoCall(true);
+          break;
+        case VideoProfile.STATE_AUDIO_ONLY:
+          builder.setIsVideoCall(false);
+          break;
+        case VideoProfile.STATE_RX_ENABLED:
+        case VideoProfile.STATE_TX_ENABLED:
+          LogUtil.w(
+              "LaunchPreCallActivity.filterExtras",
+              "unsupported video state " + videoState + ", overriding to STATE_BIDIRECTIONAL");
+          builder.setIsVideoCall(true);
+          break;
+        default:
+          LogUtil.w("LaunchPreCallActivity.filterExtras", "unknown video state " + videoState);
+          builder.setIsVideoCall(false);
+      }
+    }
+
+    if (intentExtras.containsKey(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+      builder
+          .getInCallUiIntentExtras()
+          .putAll(intentExtras.getBundle(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS));
+    }
+
+    if (intentExtras.containsKey(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE)) {
+      builder.setPhoneAccountHandle(
+          intentExtras.getParcelable(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE));
+    }
+
+    if (intentExtras.containsKey(TelecomManager.EXTRA_CALL_SUBJECT)) {
+      builder.setCallSubject(intentExtras.getString(TelecomManager.EXTRA_CALL_SUBJECT));
+    }
+
+    for (String handledKey : HANDLED_INTENT_EXTRAS) {
+      bundle.remove(handledKey);
+    }
+    builder.getPlaceCallExtras().putAll(bundle);
   }
 }

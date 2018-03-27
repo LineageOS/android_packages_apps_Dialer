@@ -69,10 +69,12 @@ public class AssistedDialAction implements PreCallAction {
     Optional<TransformationInfo> transformedNumber =
         assistedDialingMediator.attemptAssistedDial(phoneNumber);
     if (transformedNumber.isPresent()) {
-      builder.getOutgoingCallExtras().putBoolean(TelephonyManagerCompat.USE_ASSISTED_DIALING, true);
+      builder
+          .getInCallUiIntentExtras()
+          .putBoolean(TelephonyManagerCompat.USE_ASSISTED_DIALING, true);
       Bundle assistedDialingExtras = transformedNumber.get().toBundle();
       builder
-          .getOutgoingCallExtras()
+          .getInCallUiIntentExtras()
           .putBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS, assistedDialingExtras);
       builder.setUri(
           CallUtil.getCallUri(Assert.isNotNull(transformedNumber.get().transformedNumber())));
