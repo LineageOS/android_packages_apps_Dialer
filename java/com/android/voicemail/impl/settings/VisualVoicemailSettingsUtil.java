@@ -23,9 +23,11 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.database.Selection;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
@@ -130,6 +132,7 @@ public class VisualVoicemailSettingsUtil {
 
   public static boolean isEnabled(Context context, PhoneAccountHandle phoneAccount) {
     if (phoneAccount == null) {
+      LogUtil.i("VisualVoicemailSettingsUtil.isEnabled", "phone account is null");
       return false;
     }
 
@@ -213,9 +216,10 @@ public class VisualVoicemailSettingsUtil {
 
     @Override
     public Void doInBackground(Void unused) {
-
       ContentValues contentValues = new ContentValues();
-      contentValues.put(Voicemails.TRANSCRIPTION, "");
+      contentValues.putNull(Voicemails.TRANSCRIPTION);
+      contentValues.put(
+          VoicemailCompat.TRANSCRIPTION_STATE, VoicemailCompat.TRANSCRIPTION_NOT_STARTED);
 
       Selection selection =
           Selection.builder()
