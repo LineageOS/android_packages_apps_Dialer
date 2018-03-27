@@ -160,7 +160,7 @@ public class CallingAccountSelector implements PreCallAction {
                       "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
                   builder.setPhoneAccountHandle(result.getSuggestion().get().phoneAccountHandle);
                   builder
-                      .getOutgoingCallExtras()
+                      .getInCallUiIntentExtras()
                       .putString(
                           SuggestionProvider.EXTRA_SIM_SUGGESTION_REASON,
                           result.getSuggestion().get().reason.name());

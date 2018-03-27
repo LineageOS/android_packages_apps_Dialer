@@ -89,7 +89,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * calls into this class from outside must be done from the main UI thread.
  */
 @NotThreadSafe
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class VoicemailPlaybackPresenter
     implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnCompletionListener,
