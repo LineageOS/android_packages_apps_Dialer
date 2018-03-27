@@ -19,8 +19,6 @@ package com.android.dialer.calllogutils;
 import android.content.Context;
 import android.icu.lang.UCharacter;
 import android.icu.text.BreakIterator;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.text.format.DateUtils;
 import java.util.Calendar;
 import java.util.Locale;
@@ -145,12 +143,6 @@ public final class CallLogDates {
     // of the string is not usually capitalized. For example, "Wednesdsay" in Uzbek is "chorshanba”
     // (not capitalized). To handle this issue we apply title casing to the start of the sentence so
     // that "chorshanba, 2016 may 25,20:02" becomes "Chorshanba, 2016 may 25,20:02".
-    //
-    // The ICU library was not available in Android until N, so we can only do this in N+ devices.
-    // Pre-N devices will still see incorrect capitalization in some languages.
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return value;
-    }
 
     // Using the ICU library is safer than just applying toUpperCase() on the first letter of the
     // word because in some languages, there can be multiple starting characters which should be

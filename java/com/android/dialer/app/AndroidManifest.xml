@@ -55,7 +55,7 @@
   <uses-permission android:name="android.permission.STOP_APP_SWITCHES"/>
 
   <uses-sdk
-    android:minSdkVersion="23"
+    android:minSdkVersion="24"
     android:targetSdkVersion="27"/>
 
   <application android:theme="@style/Theme.AppCompat">
