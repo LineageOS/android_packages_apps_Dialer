@@ -69,7 +69,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -82,6 +81,7 @@ import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -419,7 +419,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     // Start the thread that updates the smart dial database if the activity is recreated with a
     // language change.
     boolean forceUpdate =
-        !CompatUtils.getLocale(activity).getISO3Language().equals(savedLanguageCode);
+        !LocaleUtils.getLocale(activity).getISO3Language().equals(savedLanguageCode);
     Database.get(activity).getDatabaseHelper(activity).startSmartDialUpdateThread(forceUpdate);
     showPostCallPrompt();
 
@@ -476,7 +476,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public void onSaveInstanceState(Bundle bundle) {
-    bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(activity).getISO3Language());
+    bundle.putString(KEY_SAVED_LANGUAGE_CODE, LocaleUtils.getLocale(activity).getISO3Language());
     bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
     searchController.onSaveInstanceState(bundle);
   }
