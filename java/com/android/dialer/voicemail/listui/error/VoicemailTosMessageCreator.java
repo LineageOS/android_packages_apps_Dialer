@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -40,11 +39,9 @@ import android.view.View.OnClickListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
-import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -129,19 +126,16 @@ public class VoicemailTosMessageCreator {
             getExistingUserTosTitle(),
             getExistingUserTosMessageText(),
             new Action(
-                context.getString(R.string.dialer_terms_and_conditions_existing_user_setings),
+                context.getString(R.string.dialer_terms_and_conditions_existing_user_decline),
                 new OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    LogUtil.i("VoicemailTosMessageCreator.getPromoMessage", "open settings");
-                    Intent intent =
-                        new Intent(Intent.ACTION_VIEW)
-                            .setComponent(
-                                new ComponentName(context, Constants.get().getSettingsActivity()))
-                            .setData(
-                                Uri.fromParts(
-                                    "header", VoicemailSettingsFragment.class.getName(), null));
-                    context.startActivity(intent);
+                    LogUtil.i(
+                        "VoicemailTosMessageCreator.getPromoMessage", "declined transcription");
+                    VoicemailClient voicemailClient =
+                        VoicemailComponent.get(context).getVoicemailClient();
+                    voicemailClient.setVoicemailTranscriptionEnabled(
+                        context, status.getPhoneAccountHandle(), false);
                   }
                 }),
             new Action(
