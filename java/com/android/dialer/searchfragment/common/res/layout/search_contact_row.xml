@@ -39,7 +39,7 @@
       android:layout_centerVertical="true"
       android:layout_marginStart="8dp">
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         android:fontFamily="sans-serif"
         style="@style/PrimaryText"/>
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
