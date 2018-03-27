@@ -41,7 +41,7 @@ import java.util.List;
    * unbundled notifications, the system displays all notifications until a global maximum of 50 is
    * reached.
    */
-  private static final int MAX_NOTIFICATIONS_PER_TAG = 10;
+  private static final int MAX_NOTIFICATIONS_PER_TAG = 8;
 
   private static final int HIGH_GLOBAL_NOTIFICATION_COUNT = 45;
 
