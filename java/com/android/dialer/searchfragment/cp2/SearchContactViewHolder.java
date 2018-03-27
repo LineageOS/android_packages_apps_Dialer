@@ -30,7 +30,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
-import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
@@ -44,6 +43,7 @@ import com.android.dialer.searchfragment.common.QueryBoldingUtil;
 import com.android.dialer.searchfragment.common.R;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
+import com.android.dialer.widget.BidiTextView;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -67,8 +67,8 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
 
   private final RowClickListener listener;
   private final QuickContactBadge photo;
-  private final TextView nameOrNumberView;
-  private final TextView numberView;
+  private final BidiTextView nameOrNumberView;
+  private final BidiTextView numberView;
   private final ImageView callToActionView;
   private final Context context;
 

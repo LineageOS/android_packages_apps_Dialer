@@ -83,5 +83,15 @@
       android:id="@id/rtt_on_hold_banner"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>
+  <TextView
+      android:id="@+id/rtt_status_banner"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      android:background="@android:color/white"
+      android:gravity="center_vertical"
+      android:textColor="#DD000000"
+      android:textSize="14sp"/>
 
 </LinearLayout>
