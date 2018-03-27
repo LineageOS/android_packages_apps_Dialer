@@ -24,8 +24,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
@@ -130,9 +128,6 @@ public class PreferredAccountWorker implements Worker<Context, Result> {
   private static Optional<String> getDataId(
       @NonNull Context context, @Nullable String phoneNumber) {
     Assert.isWorkerThread();
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return Optional.absent();
-    }
     try (Cursor cursor =
         context
             .getContentResolver()

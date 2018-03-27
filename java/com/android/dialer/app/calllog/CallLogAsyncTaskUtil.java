@@ -34,7 +34,8 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.voicemail.VoicemailClient;
 
-@TargetApi(VERSION_CODES.M)
+/** TODO(calderwoodra): documentation */
+@TargetApi(VERSION_CODES.N)
 public class CallLogAsyncTaskUtil {
 
   private static final String TAG = "CallLogAsyncTaskUtil";
@@ -155,6 +156,7 @@ public class CallLogAsyncTaskUtil {
     UPDATE_DURATION,
   }
 
+  /** TODO(calderwoodra): documentation */
   public interface CallLogAsyncTaskListener {
     void onDeleteVoicemail();
   }

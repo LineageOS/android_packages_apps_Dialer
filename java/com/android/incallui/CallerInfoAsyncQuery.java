@@ -53,7 +53,7 @@ import java.util.Arrays;
  *
  * @see CallerInfo
  */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class CallerInfoAsyncQuery {
 
   /** Interface for a CallerInfoAsyncQueryHandler result return. */

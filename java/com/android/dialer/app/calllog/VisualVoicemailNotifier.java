@@ -233,9 +233,6 @@ final class VisualVoicemailNotifier {
   @Nullable
   private static Uri getVoicemailRingtoneUri(
       @NonNull Context context, @Nullable PhoneAccountHandle handle) {
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return null;
-    }
     if (handle == null) {
       LogUtil.i("VisualVoicemailNotifier.getVoicemailRingtoneUri", "null handle, getting fallback");
       handle = getFallbackAccount(context);
@@ -251,9 +248,6 @@ final class VisualVoicemailNotifier {
 
   private static int getNotificationDefaultFlags(
       @NonNull Context context, @Nullable PhoneAccountHandle handle) {
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return Notification.DEFAULT_ALL;
-    }
     if (handle == null) {
       LogUtil.i(
           "VisualVoicemailNotifier.getNotificationDefaultFlags", "null handle, getting fallback");

@@ -37,7 +37,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /** Task for copying and resizing images to be shared with RCS process. */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 class CopyAndResizeImageWorker implements Worker<Uri, Pair<File, String>> {
   private static final String MIME_TYPE = "image/jpeg";
 

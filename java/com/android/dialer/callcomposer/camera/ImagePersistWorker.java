@@ -38,7 +38,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /** Persisting image routine. */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class ImagePersistWorker implements Worker<Void, Result> {
   private int width;
   private int height;

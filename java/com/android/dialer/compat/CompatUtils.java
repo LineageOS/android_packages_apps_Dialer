@@ -16,17 +16,17 @@
 package com.android.dialer.compat;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.LocaleList;
 import java.util.Locale;
 
+/** TODO(calderwoodra): documentation */
 public final class CompatUtils {
 
   /** PrioritizedMimeType is added in API level 23. */
   public static boolean hasPrioritizedMimeType() {
-    return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) >= Build.VERSION_CODES.M;
+    return true;
   }
 
   /**
@@ -36,8 +36,7 @@ public final class CompatUtils {
    * @return {@code true} if multi-SIM capability is available, {@code false} otherwise.
    */
   public static boolean isMSIMCompatible() {
-    return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP)
-        >= Build.VERSION_CODES.LOLLIPOP_MR1;
+    return true;
   }
 
   /**
@@ -47,7 +46,7 @@ public final class CompatUtils {
    * @return {@code true} if video calling is allowed, {@code false} otherwise.
    */
   public static boolean isVideoCompatible() {
-    return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP) >= Build.VERSION_CODES.M;
+    return true;
   }
 
   /**
@@ -57,7 +56,7 @@ public final class CompatUtils {
    * @return {@code true} if video presence checking is allowed, {@code false} otherwise.
    */
   public static boolean isVideoPresenceCompatible() {
-    return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.M) > Build.VERSION_CODES.M;
+    return true;
   }
 
   /**
@@ -67,7 +66,7 @@ public final class CompatUtils {
    * @return {@code true} if call subject is a feature on this device, {@code false} otherwise.
    */
   public static boolean isCallSubjectCompatible() {
-    return SdkVersionOverride.getSdkVersion(Build.VERSION_CODES.LOLLIPOP) >= Build.VERSION_CODES.M;
+    return true;
   }
 
   /** Returns locale of the device. */
