@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
@@ -144,6 +143,12 @@ public class VoicemailTosMessageCreator {
                   @Override
                   public void onClick(View v) {
                     LogUtil.i("VoicemailTosMessageCreator.getPromoMessage", "acknowledge clicked");
+                    if (isVoicemailTranscriptionAvailable()) {
+                      VoicemailComponent.get(context)
+                          .getVoicemailClient()
+                          .setVoicemailTranscriptionEnabled(
+                              context, status.getPhoneAccountHandle(), true);
+                    }
                     // Feature acknowledgement also means accepting TOS
                     recordTosAcceptance();
                     recordFeatureAcknowledgement();
@@ -222,9 +227,9 @@ public class VoicemailTosMessageCreator {
   }
 
   private boolean isVoicemailTranscriptionAvailable() {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderBindings.get(context)
-            .getBoolean("voicemail_transcription_available", false);
+    return VoicemailComponent.get(context)
+        .getVoicemailClient()
+        .isVoicemailTranscriptionAvailable(context, status.getPhoneAccountHandle());
   }
 
   private void showDeclineTosDialog(final PhoneAccountHandle handle) {
