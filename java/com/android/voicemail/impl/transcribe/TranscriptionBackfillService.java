@@ -22,6 +22,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.JobIntentService;
 import android.support.v4.os.BuildCompat;
@@ -66,6 +67,10 @@ public class TranscriptionBackfillService extends JobIntentService {
   protected void onHandleWork(Intent intent) {
     LogUtil.enterBlock("TranscriptionBackfillService.onHandleWork");
 
+    Bundle bundle = intent.getExtras();
+    final PhoneAccountHandle account =
+        (PhoneAccountHandle) bundle.get(TranscriptionService.EXTRA_ACCOUNT_HANDLE);
+
     TranscriptionDbHelper dbHelper = new TranscriptionDbHelper(this);
     List<Uri> untranscribed = dbHelper.getUntranscribedVoicemails();
     LogUtil.i(
@@ -75,7 +80,7 @@ public class TranscriptionBackfillService extends JobIntentService {
     for (Uri uri : untranscribed) {
       ThreadUtil.postOnUiThread(
           () -> {
-            TranscriptionService.scheduleNewVoicemailTranscriptionJob(this, uri, null, false);
+            TranscriptionService.scheduleNewVoicemailTranscriptionJob(this, uri, account, false);
           });
     }
   }
