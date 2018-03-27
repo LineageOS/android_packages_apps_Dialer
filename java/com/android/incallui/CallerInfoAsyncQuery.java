@@ -24,7 +24,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
-import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,7 +35,6 @@ import android.support.annotation.MainThread;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
-import com.android.dialer.common.cp2.DirectoryCompat;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
@@ -174,7 +172,7 @@ public class CallerInfoAsyncQuery {
       cw.event = EVENT_NEW_QUERY;
     }
 
-    String[] proejection = CallerInfo.getDefaultPhoneLookupProjection(contactRef);
+    String[] proejection = CallerInfo.getDefaultPhoneLookupProjection();
     handler.startQuery(
         token,
         cw, // cookie
@@ -223,10 +221,7 @@ public class CallerInfoAsyncQuery {
   private static long[] getDirectoryIds(Context context) {
     ArrayList<Long> results = new ArrayList<>();
 
-    Uri uri = Directory.CONTENT_URI;
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      uri = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "directories_enterprise");
-    }
+    Uri uri = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "directories_enterprise");
 
     ContentResolver cr = context.getContentResolver();
     Cursor cursor = cr.query(uri, DIRECTORY_PROJECTION, null, null, null);
@@ -244,7 +239,7 @@ public class CallerInfoAsyncQuery {
       int idIndex = cursor.getColumnIndex(Directory._ID);
       while (cursor.moveToNext()) {
         long id = cursor.getLong(idIndex);
-        if (DirectoryCompat.isRemoteDirectoryId(id)) {
+        if (Directory.isRemoteDirectoryId(id)) {
           results.add(id);
         }
       }

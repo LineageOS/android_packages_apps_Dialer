@@ -144,7 +144,7 @@ public class CallList implements DialerCallDelegate {
     Trace.beginSection("checkSpam");
     call.addListener(new DialerCallListenerImpl(call));
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
-    if (SpamComponent.get(context).spam().isSpamEnabled()) {
+    if (SpamComponent.get(context).spamSettings().isSpamEnabled()) {
       String number = TelecomCallUtil.getNumber(telecomCall);
       SpamComponent.get(context)
           .spam()

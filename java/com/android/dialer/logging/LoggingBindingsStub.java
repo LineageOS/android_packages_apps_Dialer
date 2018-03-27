@@ -61,4 +61,7 @@ public class LoggingBindingsStub implements LoggingBindings {
 
   @Override
   public void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode) {}
+
+  @Override
+  public void logAutoBlockedCall(String phoneNumber) {}
 }

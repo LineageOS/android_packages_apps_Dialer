@@ -71,6 +71,11 @@ public class MotorolaHiddenMenuKeySequence {
   }
 
   @VisibleForTesting
+  static void setInstanceForTest(MotorolaHiddenMenuKeySequence instance) {
+    MotorolaHiddenMenuKeySequence.instance = instance;
+  }
+
+  @VisibleForTesting
   MotorolaHiddenMenuKeySequence(
       Context context, SystemPropertiesAccessor systemPropertiesAccessor) {
     if (MotorolaUtils.isSupportingHiddenMenu(context)) {

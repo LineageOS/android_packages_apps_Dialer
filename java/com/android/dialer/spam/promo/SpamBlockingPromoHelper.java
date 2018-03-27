@@ -25,7 +25,7 @@ import android.view.View;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamSettings;
 
 /** Helper class for showing spam blocking on-boarding promotions. */
 public class SpamBlockingPromoHelper {
@@ -34,11 +34,11 @@ public class SpamBlockingPromoHelper {
   static final String SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS = "spam_blocking_promo_last_show_millis";
 
   private final Context context;
-  private final Spam spam;
+  private final SpamSettings spamSettings;
 
-  public SpamBlockingPromoHelper(Context context, Spam spam) {
+  public SpamBlockingPromoHelper(Context context, SpamSettings spamSettings) {
     this.context = context;
-    this.spam = spam;
+    this.spamSettings = spamSettings;
   }
 
   /** Shows a spam blocking promo dialog with on complete snackbar if all the prerequisites meet. */
@@ -54,7 +54,7 @@ public class SpamBlockingPromoHelper {
               Logger.get(context)
                   .logImpression(
                       DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_CALL_LOG_PROMO);
-              spam.modifySpamBlockingSetting(
+              spamSettings.modifySpamBlockingSetting(
                   true, success -> showModifySettingOnCompleteSnackbar(view, success));
             })
         .show(fragmentManager, SpamBlockingPromoDialogFragment.SPAM_BLOCKING_PROMO_DIALOG_TAG);
@@ -71,7 +71,9 @@ public class SpamBlockingPromoHelper {
    */
   @VisibleForTesting
   boolean shouldShowSpamBlockingPromo() {
-    if (!spam.isSpamEnabled() || !spam.isSpamBlockingAvailable() || spam.isSpamBlockingEnabled()) {
+    if (!spamSettings.isSpamEnabled()
+        || !spamSettings.isSpamBlockingEnabledByFlag()
+        || spamSettings.isSpamBlockingEnabledByUser()) {
       return false;
     }
 
@@ -109,7 +111,7 @@ public class SpamBlockingPromoHelper {
     Snackbar.make(view, snackBarText, Snackbar.LENGTH_LONG)
         .setAction(
             R.string.spam_blocking_setting_prompt,
-            v -> context.startActivity(spam.getSpamBlockingSettingIntent(context)))
+            v -> context.startActivity(spamSettings.getSpamBlockingSettingIntent(context)))
         .setActionTextColor(
             context.getResources().getColor(R.color.dialer_snackbar_action_text_color))
         .show();

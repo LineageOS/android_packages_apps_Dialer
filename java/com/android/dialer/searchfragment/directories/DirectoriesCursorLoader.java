@@ -20,9 +20,6 @@ package com.android.dialer.searchfragment.directories;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
@@ -51,7 +48,13 @@ public final class DirectoriesCursorLoader extends CursorLoader {
   private static final int PHOTO_SUPPORT = 2;
 
   public DirectoriesCursorLoader(Context context) {
-    super(context, getContentUri(), PROJECTION, null, null, ContactsContract.Directory._ID);
+    super(
+        context,
+        ContactsContract.Directory.ENTERPRISE_CONTENT_URI,
+        PROJECTION,
+        null,
+        null,
+        ContactsContract.Directory._ID);
   }
 
   @Override
@@ -86,12 +89,6 @@ public final class DirectoriesCursorLoader extends CursorLoader {
               /* supportsPhotos = */ cursor.getInt(PHOTO_SUPPORT) != 0));
     }
     return directories;
-  }
-
-  private static Uri getContentUri() {
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        ? ContactsContract.Directory.ENTERPRISE_CONTENT_URI
-        : ContactsContract.Directory.CONTENT_URI;
   }
 
   /** POJO representing the results returned from {@link DirectoriesCursorLoader}. */

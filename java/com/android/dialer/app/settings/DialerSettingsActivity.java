@@ -128,7 +128,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       callSettingsHeader.titleRes = R.string.call_settings_label;
       callSettingsHeader.intent = callSettingsIntent;
       target.add(callSettingsHeader);
-    } else if ((VERSION.SDK_INT >= VERSION_CODES.N) || isPrimaryUser) {
+    } else if (isPrimaryUser) {
       Header phoneAccountSettingsHeader = new Header();
       Intent phoneAccountSettingsIntent = new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
       phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -22,8 +22,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -641,10 +639,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       cce.photo = null;
     }
 
-    // Support any contact id in N because QuickContacts in N starts supporting enterprise
-    // contact id
-    if (info.lookupKeyOrNull != null
-        && (VERSION.SDK_INT >= VERSION_CODES.N || info.contactIdOrZero != 0)) {
+    if (info.lookupKeyOrNull != null && info.contactIdOrZero != 0) {
       cce.lookupUri = Contacts.getLookupUri(info.contactIdOrZero, info.lookupKeyOrNull);
     } else {
       Log.v(TAG, "lookup key is null or contact ID is 0 on M. Don't create a lookup uri.");

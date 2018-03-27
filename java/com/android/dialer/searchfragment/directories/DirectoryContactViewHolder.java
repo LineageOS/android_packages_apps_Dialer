@@ -29,7 +29,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.dialer.common.cp2.DirectoryCompat;
+import com.android.dialer.common.cp2.DirectoryUtils;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.searchfragment.common.Projections;
@@ -80,7 +80,7 @@ public final class DirectoryContactViewHolder extends RecyclerView.ViewHolder
     nameView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, name, context));
     numberView.setText(QueryBoldingUtil.getNameWithQueryBolded(query, secondaryInfo, context));
     workBadge.setVisibility(
-        DirectoryCompat.isOnlyEnterpriseDirectoryId(cursor.getDirectoryId())
+        DirectoryUtils.isLocalEnterpriseDirectoryId(cursor.getDirectoryId())
             ? View.VISIBLE
             : View.GONE);
 
