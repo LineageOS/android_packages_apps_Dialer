@@ -37,13 +37,11 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   }
 
   private static final String KEY_MESSAGE_DATA = "key_message_data";
-  private static final String KEY_LAST_REMOTE_MESSAGE = "key_last_remote_message";
   private static final String KEY_LAST_LOCAL_MESSAGE = "key_last_local_message";
 
   private final Context context;
   private final List<RttChatMessage> rttMessages;
   private int lastIndexOfLocalMessage = -1;
-  private int lastIndexOfRemoteMessage = -1;
   private final MessageListener messageListener;
 
   RttChatAdapter(Context context, MessageListener listener, @Nullable Bundle savedInstanceState) {
@@ -53,7 +51,6 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
       rttMessages = new ArrayList<>();
     } else {
       rttMessages = savedInstanceState.getParcelableArrayList(KEY_MESSAGE_DATA);
-      lastIndexOfRemoteMessage = savedInstanceState.getInt(KEY_LAST_REMOTE_MESSAGE);
       lastIndexOfLocalMessage = savedInstanceState.getInt(KEY_LAST_LOCAL_MESSAGE);
     }
   }
@@ -84,33 +81,6 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     return rttMessages.size();
   }
 
-  private void updateCurrentRemoteMessage(String newText) {
-    RttChatMessage rttChatMessage = null;
-    if (lastIndexOfRemoteMessage >= 0) {
-      rttChatMessage = rttMessages.get(lastIndexOfRemoteMessage);
-    }
-    List<RttChatMessage> newMessages =
-        RttChatMessage.getRemoteRttChatMessage(rttChatMessage, newText);
-
-    if (rttChatMessage == null) {
-      lastIndexOfRemoteMessage = rttMessages.size();
-      rttMessages.add(lastIndexOfRemoteMessage, newMessages.get(0));
-      rttMessages.addAll(newMessages.subList(1, newMessages.size()));
-      notifyItemRangeInserted(lastIndexOfRemoteMessage, newMessages.size());
-      lastIndexOfRemoteMessage = rttMessages.size() - 1;
-    } else {
-      rttMessages.set(lastIndexOfRemoteMessage, newMessages.get(0));
-      int lastIndex = rttMessages.size();
-      rttMessages.addAll(newMessages.subList(1, newMessages.size()));
-
-      notifyItemChanged(lastIndexOfRemoteMessage);
-      notifyItemRangeInserted(lastIndex, newMessages.size());
-    }
-    if (rttMessages.get(lastIndexOfRemoteMessage).isFinished()) {
-      lastIndexOfRemoteMessage = -1;
-    }
-  }
-
   private void updateCurrentLocalMessage(String newMessage) {
     RttChatMessage rttChatMessage = null;
     if (lastIndexOfLocalMessage >= 0) {
@@ -128,9 +98,6 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
       if (TextUtils.isEmpty(rttChatMessage.getContent())) {
         rttMessages.remove(lastIndexOfLocalMessage);
         notifyItemRemoved(lastIndexOfLocalMessage);
-        if (lastIndexOfRemoteMessage > lastIndexOfLocalMessage) {
-          lastIndexOfRemoteMessage -= 1;
-        }
         lastIndexOfLocalMessage = -1;
       } else {
         notifyItemChanged(lastIndexOfLocalMessage);
@@ -138,8 +105,13 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     }
   }
 
+  private void updateCurrentRemoteMessage(String newMessage) {
+    RttChatMessage.updateRemoteRttChatMessage(rttMessages, newMessage);
+    lastIndexOfLocalMessage = RttChatMessage.getLastIndexLocalMessage(rttMessages);
+    notifyDataSetChanged();
+  }
+
   void addLocalMessage(String message) {
-    LogUtil.enterBlock("RttChatAdapater.addLocalMessage");
     updateCurrentLocalMessage(message);
     if (messageListener != null) {
       messageListener.newMessageAdded();
@@ -166,7 +138,6 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   }
 
   void addRemoteMessage(String message) {
-    LogUtil.enterBlock("RttChatAdapater.addRemoteMessage");
     if (TextUtils.isEmpty(message)) {
       return;
     }
@@ -176,9 +147,24 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     }
   }
 
+  /**
+   * Retrieve last local message and update the index. This is used when deleting to previous
+   * message bubble.
+   */
+  @Nullable
+  String retrieveLastLocalMessage() {
+    lastIndexOfLocalMessage = RttChatMessage.getLastIndexLocalMessage(rttMessages);
+    if (lastIndexOfLocalMessage >= 0) {
+      RttChatMessage rttChatMessage = rttMessages.get(lastIndexOfLocalMessage);
+      rttChatMessage.unfinish();
+      return rttChatMessage.getContent();
+    } else {
+      return null;
+    }
+  }
+
   void onSaveInstanceState(@NonNull Bundle bundle) {
     bundle.putParcelableArrayList(KEY_MESSAGE_DATA, (ArrayList<RttChatMessage>) rttMessages);
-    bundle.putInt(KEY_LAST_REMOTE_MESSAGE, lastIndexOfRemoteMessage);
     bundle.putInt(KEY_LAST_LOCAL_MESSAGE, lastIndexOfLocalMessage);
   }
 }

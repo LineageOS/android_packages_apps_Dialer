@@ -21,11 +21,12 @@ import android.view.View;
 import android.widget.TextView;
 import com.android.dialer.app.R;
 import com.android.dialer.calllogutils.CallTypeIconsView;
+import com.android.dialer.widget.BidiTextView;
 
 /** Encapsulates the views that are used to display the details of a phone call in the call log. */
 public final class PhoneCallDetailsViews {
 
-  public final TextView nameView;
+  public final BidiTextView nameView;
   public final View callTypeView;
   public final CallTypeIconsView callTypeIcons;
   public final TextView callLocationAndDate;
@@ -36,7 +37,7 @@ public final class PhoneCallDetailsViews {
   public final TextView callAccountLabel;
 
   private PhoneCallDetailsViews(
-      TextView nameView,
+      BidiTextView nameView,
       View callTypeView,
       CallTypeIconsView callTypeIcons,
       TextView callLocationAndDate,
@@ -65,7 +66,7 @@ public final class PhoneCallDetailsViews {
    */
   public static PhoneCallDetailsViews fromView(View view) {
     return new PhoneCallDetailsViews(
-        (TextView) view.findViewById(R.id.name),
+        (BidiTextView) view.findViewById(R.id.name),
         view.findViewById(R.id.call_type),
         (CallTypeIconsView) view.findViewById(R.id.call_type_icons),
         (TextView) view.findViewById(R.id.call_location_and_date),
@@ -78,7 +79,7 @@ public final class PhoneCallDetailsViews {
 
   public static PhoneCallDetailsViews createForTest(Context context) {
     return new PhoneCallDetailsViews(
-        new TextView(context),
+        new BidiTextView(context),
         new View(context),
         new CallTypeIconsView(context),
         new TextView(context),

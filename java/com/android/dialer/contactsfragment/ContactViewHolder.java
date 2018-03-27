@@ -28,12 +28,13 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.widget.BidiTextView;
 
 /** View holder for a contact. */
 final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
   private final TextView header;
-  private final TextView name;
+  private final BidiTextView name;
   private final QuickContactBadge photo;
   private final Context context;
   private final OnContactSelectedListener onContactSelectedListener;
