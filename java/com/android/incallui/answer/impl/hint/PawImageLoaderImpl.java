@@ -29,7 +29,7 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.incallui.answer.impl.hint.PawSecretCodeListener.PawType;
 
 /** Decrypt the event payload to be shown if in a specific time range and the key is received. */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public final class PawImageLoaderImpl implements PawImageLoader {
 
   @Override

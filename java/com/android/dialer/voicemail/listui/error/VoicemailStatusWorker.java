@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Worker for {@link com.android.dialer.common.concurrent.DialerExecutors} to fetch voicemail status
  */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class VoicemailStatusWorker implements Worker<Context, List<VoicemailStatus>> {
 
   @Nullable

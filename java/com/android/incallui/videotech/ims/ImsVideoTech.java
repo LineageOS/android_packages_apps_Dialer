@@ -17,7 +17,6 @@
 package com.android.incallui.videotech.ims;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -61,10 +60,6 @@ public class ImsVideoTech implements VideoTech {
 
   @Override
   public boolean isAvailable(Context context, PhoneAccountHandle phoneAccountHandle) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-      return false;
-    }
-
     if (call.getVideoCall() == null) {
       return false;
     }

@@ -41,7 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Cequint Caller ID. It also caches any information fetched in static map, which lives through
  * whole application lifecycle.
  */
-@TargetApi(VERSION_CODES.M)
+@TargetApi(VERSION_CODES.N)
 public class CequintCallerIdManager {
 
   private static final String CONFIG_CALLER_ID_ENABLED = "config_caller_id_enabled";

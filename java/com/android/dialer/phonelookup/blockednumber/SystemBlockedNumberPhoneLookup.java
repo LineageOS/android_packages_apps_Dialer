@@ -16,11 +16,8 @@
 
 package com.android.dialer.phonelookup.blockednumber;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
@@ -72,10 +69,7 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
     if (!FilteredNumberCompat.useNewFiltering(appContext)) {
       return Futures.immediateFuture(SystemBlockedNumberInfo.getDefaultInstance());
     }
-    return executorService.submit(
-        () -> {
-          return queryNumbers(ImmutableSet.of(number)).get(number);
-        });
+    return executorService.submit(() -> queryNumbers(ImmutableSet.of(number)).get(number));
   }
 
   @Override
@@ -96,7 +90,6 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
   }
 
   @WorkerThread
-  @TargetApi(VERSION_CODES.N)
   private ImmutableMap<DialerPhoneNumber, SystemBlockedNumberInfo> queryNumbers(
       ImmutableSet<DialerPhoneNumber> numbers) {
     Assert.isWorkerThread();
@@ -171,9 +164,6 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
 
   @Override
   public void registerContentObservers() {
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return;
-    }
     appContext
         .getContentResolver()
         .registerContentObserver(

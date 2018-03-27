@@ -14,14 +14,11 @@
 
 package com.android.dialer.phonenumbercache;
 
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteFullException;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -53,8 +50,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /** Utility class to look up the contact information for a given number. */
-// This class uses Java 7 language features, so it must target M+
-@TargetApi(VERSION_CODES.M)
 public class ContactInfoHelper {
 
   private static final String TAG = ContactInfoHelper.class.getSimpleName();
@@ -153,15 +148,6 @@ public class ContactInfoHelper {
     // Get URI for the number in the PhoneLookup table, with a parameter to indicate whether
     // the number is a SIP number.
     Uri uri = PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI;
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      if (directoryId != -1) {
-        // ENTERPRISE_CONTENT_FILTER_URI in M doesn't support directory lookup
-        uri = PhoneLookup.CONTENT_FILTER_URI;
-      } else {
-        // a bug in M. PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, encodes twice.
-        number = Uri.encode(number);
-      }
-    }
     Uri.Builder builder =
         uri.buildUpon()
             .appendPath(number)
@@ -187,8 +173,7 @@ public class ContactInfoHelper {
     info.type = c.getInt(CallLogQuery.CACHED_NUMBER_TYPE);
     info.label = c.getString(CallLogQuery.CACHED_NUMBER_LABEL);
     String matchedNumber = c.getString(CallLogQuery.CACHED_MATCHED_NUMBER);
-    String postDialDigits =
-        (VERSION.SDK_INT >= VERSION_CODES.N) ? c.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
+    String postDialDigits = c.getString(CallLogQuery.POST_DIAL_DIGITS);
     info.number =
         (matchedNumber == null) ? c.getString(CallLogQuery.NUMBER) + postDialDigits : matchedNumber;
 
@@ -294,10 +279,7 @@ public class ContactInfoHelper {
 
   private List<Long> getRemoteDirectories(Context context) {
     List<Long> remoteDirectories = new ArrayList<>();
-    Uri uri =
-        VERSION.SDK_INT >= VERSION_CODES.N
-            ? Directory.ENTERPRISE_CONTENT_URI
-            : Directory.CONTENT_URI;
+    Uri uri = Directory.ENTERPRISE_CONTENT_URI;
     Cursor cursor =
         context.getContentResolver().query(uri, new String[] {Directory._ID}, null, null, null);
     if (cursor == null) {

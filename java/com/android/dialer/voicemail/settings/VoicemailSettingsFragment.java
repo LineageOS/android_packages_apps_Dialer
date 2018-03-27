@@ -75,7 +75,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   // Settings that are supported by dialer only if the carrier configurations are valid.
   private SwitchPreference visualVoicemailPreference;
   private SwitchPreference voicemailAutoArchivePreference;
-  private SwitchPreference transcribeVoicemailPreference;
+  private SwitchPreferenceWithClickableSummary transcribeVoicemailPreference;
   // Voicemail transcription analysis toggle
   private SwitchPreferenceWithClickableSummary donateTranscribedVoicemailPreference;
   private Preference voicemailChangePinPreference;
@@ -148,10 +148,22 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     transcribeVoicemailPreference.setOnPreferenceChangeListener(this);
     transcribeVoicemailPreference.setChecked(
         voicemailClient.isVoicemailTranscriptionEnabled(getContext(), phoneAccountHandle));
-    transcribeVoicemailPreference.setSummary(
-        R.string.voicemail_transcription_preference_summary_info);
+    transcribeVoicemailPreference.setSummary(getVoicemailTranscriptionInformationalText());
     transcribeVoicemailPreference.setEnabled(true);
     getPreferenceScreen().addPreference(transcribeVoicemailPreference);
+  }
+
+  /**
+   * Builds a spannable string containing the voicemail transcription informational text containing
+   * the appropriate "Learn More" urls.
+   *
+   * @return The voicemail transcription information text.
+   */
+  private CharSequence getVoicemailTranscriptionInformationalText() {
+    return new ContentWithLearnMoreSpanner(getContext())
+        .create(
+            getContext().getString(R.string.voicemail_transcription_preference_summary_info),
+            getContext().getString(R.string.transcription_learn_more_url));
   }
 
   private void updateTranscriptionDonationPreference() {
@@ -231,7 +243,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     voicemailAutoArchivePreference.setOrder(VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE);
 
     transcribeVoicemailPreference =
-        (SwitchPreference)
+        (SwitchPreferenceWithClickableSummary)
             findPreference(getString(R.string.voicemail_visual_voicemail_transcription_key));
     transcribeVoicemailPreference.setOrder(VMSettingOrdering.VOICEMAIL_TRANSCRIPTION);
 

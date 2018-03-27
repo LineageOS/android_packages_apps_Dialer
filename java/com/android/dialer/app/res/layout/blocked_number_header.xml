@@ -166,46 +166,6 @@
 
       </LinearLayout>
 
-      <LinearLayout
-        android:id="@+id/add_number_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/blocked_number_add_top_margin"
-        android:paddingBottom="@dimen/blocked_number_add_bottom_margin"
-        android:paddingStart="@dimen/blocked_number_horizontal_margin"
-        android:background="?android:attr/selectableItemBackground"
-        android:baselineAligned="false"
-        android:clickable="true"
-        android:contentDescription="@string/addBlockedNumber"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-          android:id="@+id/add_number_icon"
-          android:layout_width="@dimen/contact_photo_size"
-          android:layout_height="@dimen/contact_photo_size"
-          android:importantForAccessibility="no"/>
-        <LinearLayout
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:layout_marginStart="@dimen/blocked_number_horizontal_margin"
-          android:gravity="center_vertical"
-          android:orientation="vertical">
-
-          <TextView
-            android:id="@+id/add_number_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="@string/addBlockedNumber"
-            android:textColor="@color/blocked_number_primary_text_color"
-            android:textSize="@dimen/blocked_number_primary_text_size"/>
-        </LinearLayout>
-
-      </LinearLayout>
-
       <View
         android:id="@+id/blocked_number_list_divider"
         android:layout_width="match_parent"

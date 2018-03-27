@@ -19,17 +19,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import com.android.dialer.app.R;
-import com.android.dialer.app.list.BlockedListSearchFragment;
-import com.android.dialer.app.list.SearchFragment;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 
 /** TODO(calderwoodra): documentation */
-public class BlockedNumbersSettingsActivity extends AppCompatActivity
-    implements SearchFragment.HostInterface {
+public class BlockedNumbersSettingsActivity extends AppCompatActivity {
 
   private static final String TAG_BLOCKED_MANAGEMENT_FRAGMENT = "blocked_management";
-  private static final String TAG_BLOCKED_SEARCH_FRAGMENT = "blocked_search";
   private static final String TAG_VIEW_NUMBERS_TO_IMPORT_FRAGMENT = "view_numbers_to_import";
 
   @Override
@@ -58,27 +54,6 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
         .commit();
 
     Logger.get(this).logScreenView(ScreenEvent.Type.BLOCKED_NUMBER_MANAGEMENT, this);
-  }
-
-  /** Shows fragment with search UI for browsing/finding numbers to block. */
-  public void showSearchUi() {
-    BlockedListSearchFragment fragment =
-        (BlockedListSearchFragment)
-            getFragmentManager().findFragmentByTag(TAG_BLOCKED_SEARCH_FRAGMENT);
-    if (fragment == null) {
-      fragment = new BlockedListSearchFragment();
-      fragment.setHasOptionsMenu(false);
-      fragment.setShowEmptyListForNullQuery(true);
-      fragment.setDirectorySearchEnabled(false);
-    }
-
-    getFragmentManager()
-        .beginTransaction()
-        .replace(R.id.blocked_numbers_activity_container, fragment, TAG_BLOCKED_SEARCH_FRAGMENT)
-        .addToBackStack(null)
-        .commit();
-
-    Logger.get(this).logScreenView(ScreenEvent.Type.BLOCKED_NUMBER_ADD_NUMBER, this);
   }
 
   /**
@@ -118,25 +93,5 @@ public class BlockedNumbersSettingsActivity extends AppCompatActivity
     } else {
       super.onBackPressed();
     }
-  }
-
-  @Override
-  public boolean isActionBarShowing() {
-    return false;
-  }
-
-  @Override
-  public boolean isDialpadShown() {
-    return false;
-  }
-
-  @Override
-  public int getDialpadHeight() {
-    return 0;
-  }
-
-  @Override
-  public int getActionBarHeight() {
-    return 0;
   }
 }
