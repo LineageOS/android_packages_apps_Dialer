@@ -46,7 +46,8 @@ public class CallIntentBuilder implements Parcelable {
   private String callSubject;
   private boolean allowAssistedDial;
 
-  private final Bundle outgoingCallExtras = new Bundle();
+  private final Bundle inCallUiIntentExtras = new Bundle();
+  private final Bundle placeCallExtras = new Bundle();
 
   private static int lightbringerButtonAppearInExpandedCallLogItemCount = 0;
   private static int lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
@@ -110,7 +111,7 @@ public class CallIntentBuilder implements Parcelable {
     isVideoCall = parcel.readInt() != 0;
     callSubject = parcel.readString();
     allowAssistedDial = parcel.readInt() != 0;
-    outgoingCallExtras.putAll(parcel.readBundle(classLoader));
+    inCallUiIntentExtras.putAll(parcel.readBundle(classLoader));
   }
 
   public static CallIntentBuilder forVoicemail(
@@ -170,8 +171,16 @@ public class CallIntentBuilder implements Parcelable {
   }
 
   /** Additional data the in call UI can read with {@link Details#getIntentExtras()} */
-  public Bundle getOutgoingCallExtras() {
-    return outgoingCallExtras;
+  public Bundle getInCallUiIntentExtras() {
+    return inCallUiIntentExtras;
+  }
+
+  /**
+   * Other extras that should be used with {@link TelecomManager#placeCall(Uri, Bundle)}. This will
+   * override everything set by the CallIntentBuilder
+   */
+  public Bundle getPlaceCallExtras() {
+    return placeCallExtras;
   }
 
   /**
@@ -186,11 +195,11 @@ public class CallIntentBuilder implements Parcelable {
         TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE,
         isVideoCall ? VideoProfile.STATE_BIDIRECTIONAL : VideoProfile.STATE_AUDIO_ONLY);
 
-    outgoingCallExtras.putLong(
+    inCallUiIntentExtras.putLong(
         Constants.EXTRA_CALL_CREATED_TIME_MILLIS, SystemClock.elapsedRealtime());
-    CallIntentParser.putCallSpecificAppData(outgoingCallExtras, callSpecificAppData);
+    CallIntentParser.putCallSpecificAppData(inCallUiIntentExtras, callSpecificAppData);
 
-    intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, outgoingCallExtras);
+    intent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS, inCallUiIntentExtras);
 
     if (phoneAccountHandle != null) {
       intent.putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
@@ -199,6 +208,8 @@ public class CallIntentBuilder implements Parcelable {
     if (!TextUtils.isEmpty(callSubject)) {
       intent.putExtra(TelecomManager.EXTRA_CALL_SUBJECT, callSubject);
     }
+
+    intent.putExtras(placeCallExtras);
 
     return intent;
   }
@@ -257,7 +268,7 @@ public class CallIntentBuilder implements Parcelable {
     dest.writeInt(isVideoCall ? 1 : 0);
     dest.writeString(callSubject);
     dest.writeInt(allowAssistedDial ? 1 : 0);
-    dest.writeBundle(outgoingCallExtras);
+    dest.writeBundle(inCallUiIntentExtras);
   }
 
   public static final Creator<CallIntentBuilder> CREATOR =
