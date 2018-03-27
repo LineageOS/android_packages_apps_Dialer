@@ -87,7 +87,14 @@ public class TranscriptionDbHelper {
     Assert.isWorkerThread();
     List<Uri> untranscribed = new ArrayList<>();
     String whereClause =
-        Voicemails.TRANSCRIPTION + " is NULL AND " + VoicemailCompat.TRANSCRIPTION_STATE + "=?";
+        "("
+            + Voicemails.TRANSCRIPTION
+            + " is NULL OR "
+            + Voicemails.TRANSCRIPTION
+            + " = '')"
+            + " AND "
+            + VoicemailCompat.TRANSCRIPTION_STATE
+            + "=?";
     String[] whereArgs = {String.valueOf(VoicemailCompat.TRANSCRIPTION_NOT_STARTED)};
     try (Cursor cursor = contentResolver.query(uri, PROJECTION, whereClause, whereArgs, null)) {
       if (cursor == null) {

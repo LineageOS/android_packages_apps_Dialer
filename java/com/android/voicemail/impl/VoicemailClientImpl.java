@@ -125,6 +125,11 @@ public class VoicemailClientImpl implements VoicemailClient {
   @Override
   public boolean isVoicemailTranscriptionAvailable(
       Context context, PhoneAccountHandle phoneAccountHandle) {
+    if (phoneAccountHandle == null) {
+      LogUtil.i(
+          "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "phone account handle is null");
+    }
+
     if (!BuildCompat.isAtLeastO()) {
       LogUtil.i(
           "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "not running on O or later");
@@ -198,6 +203,9 @@ public class VoicemailClientImpl implements VoicemailClient {
         "transcription must be available before enabling/disabling it");
     VisualVoicemailSettingsUtil.setVoicemailTranscriptionEnabled(
         context, phoneAccountHandle, enabled);
+    if (enabled) {
+      TranscriptionBackfillService.scheduleTask(context, phoneAccountHandle);
+    }
   }
 
   @Override
