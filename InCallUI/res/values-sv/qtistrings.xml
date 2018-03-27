@@ -88,6 +88,7 @@
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Inkommande konferenssamtal</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
   <!-- Message indicating call failed due to low battery -->

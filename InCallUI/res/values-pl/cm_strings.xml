@@ -24,18 +24,22 @@
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
   <string name="incall_call_type_label_forwarded">Połączenie przekazane</string>
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
+  <string name="card_title_dialing_waiting">Wybieranie (oczekiwanie\u2026)</string>
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
          provider (e.g. MSIM) and is waiting for the busy remote side -->
+  <string name="calling_via_waiting_template">Nawiązywanie połączenia przez <xliff:g id="provider_name">%s</xliff:g> (Oczekiwanie\u2026)</string>
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
   <string name="card_title_active_via_template"><xliff:g id="status" example="Połączenie wstrzymane">%1$s </xliff:g> (przez <xliff:g id="provider_name">%2$s </xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
   <string name="card_title_waiting_call">Połączenie oczekujące</string>
+  <string name="call_recording_failed_message">Nie udało się rozpocząć nagrywania rozmowy</string>
   <string name="call_recording_file_location">Zapisano nagranie rozmowy do <xliff:g id="filename">%s</xliff:g></string>
   <string name="onscreenCallRecordText">Nagraj rozmowę</string>
   <string name="onscreenStopCallRecordText">Zatrzymaj nagrywanie</string>
   <string name="recording_time_text">Nagrywanie</string>
   <string name="recording_warning_title">Włączyć nagrywanie rozmów?</string>
+  <string name="call_failed_due_to_validate_number">Nie można nawiązać połączenia wideo, format numeru jest nieprawidłowy</string>
   <string name="call_state_dialing">Wybieranie numeru</string>
   <string name="call_state_active">Aktywne</string>
   <string name="call_state_unknown">Nieznane</string>

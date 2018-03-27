@@ -23,7 +23,7 @@
   <string name="incall_vibrate_45_title">Bibratu minutuero</string>
   <string name="incall_vibrate_45_summary">Irteera deietan minutuero bibratzen du 45. segundoan</string>
   <!-- Forward lookup -->
-  <string name="nearby_places">Kokaleku hurbilak</string>
+  <string name="nearby_places">Inguruko tokiak</string>
   <string name="people">Jendea</string>
   <!-- dialpad t9 search -->
   <string name="preference_category_t9_dialpad_search">Bilatu T9 markadorean</string>
@@ -37,7 +37,7 @@
   <string name="enable_people_lookup_summary">Erakutsi sareko emaitzak pertsonak markatzailean bilatzean</string>
   <string name="enable_reverse_lookup_title">Bilaketa alderantzikatua</string>
   <string name="enable_reverse_lookup_summary">Bilatu pertsona edo lekuko informazioa zenbaki ezezagunen deientzako</string>
-  <string name="forward_lookup_provider_title">Lekuen bilaketarako hornitzailea</string>
+  <string name="forward_lookup_provider_title">Tokien bilaketarako hornitzailea</string>
   <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
   <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
   <!-- Chinese Reverse Lookup Provider -->

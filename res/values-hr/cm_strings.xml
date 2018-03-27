@@ -90,23 +90,61 @@
   <string name="speed_dial_delete">Obriši</string>
   <string name="speed_dial_unassigned_dialog_title">Tipka nije dodijeljena</string>
   <string name="speed_dial_unassigned_dialog_message">Tipki \"<xliff:g id="number">%s</xliff:g>\" nije dodijeljena akcija brzog biranja. Želite li joj sada dodijeliti akciju?</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Da biste se koristili brzim biranjem morate isključiti zrakoplovni način rada.</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
+  <string name="speed_dial_can_not_be_set">Brzo biranje ne može se postaviti za ovaj ključ</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
   <!-- Text displayed when the list of incoming calls is empty -->
+  <string name="recentIncoming_empty">Nemate dolaznih poziva.</string>
   <!-- Text displayed when the list of outgoing calls is empty -->
+  <string name="recentOutgoing_empty">Nemate odlaznih poziva.</string>
   <!-- Text displayed when the call log is empty. -->
+  <string name="recentCalls_empty">Vaš popis poziva je prazan</string>
+  <string name="calllog_search_hint">Pretraži popis poziva</string>
+  <string name="no_call_log">Nema popisa poziva</string>
+  <string name="clear">Izbriši</string>
+  <string name="description_clear_search">Izbriši pretraživanje</string>
+  <string name="video_call_welcome_title"><b>Dobro došli u novi Birač videopoziva</b></string>
+  <string name="video_call_welcome_message">Svi volimo čuti taj poznati glas na drugom kraju linije, ali razgovor licem u lice je mnogo bolji! Evo što biste trebali znati da biste dobili vezu u stvarnom vremenu (ili FaceTime?):\n Morate biti na 4G LTE ili Wi-Fi vezi\n Uređaj kojeg zovete mora podržavati videopozive\n Video pozivi koriste velike brzine podataka\n Također možete nadograditi glasovni poziv u videopoziv\n\n Provjerite <a>https://support.t-mobile.com/docs/DOC-23574</a> za više informacija.</string>
+  <string name="video_call_welcome_message_repeat">Uvijek prikaži ovu poruku</string>
+  <string name="toast_change_video_call_failed">Ne mogu promijeniti na videopoziv, netočan format broja</string>
+  <string name="toast_make_video_call_failed">Ne mogu napraviti videopoziv, netočan format broja</string>
   <!-- Add for enhance videocall ui -->
+  <string name="overflowBothCallMenuItemText">Videopoziv, pokaži me</string>
+  <string name="overflowRXCallMenuItemText">Videopoziv, sakrij me</string>
+  <string name="overflowVOCallMenuItemText">Glasovni poziv</string>
+  <string name="video_call">Video poziv</string>
+  <string name="call_data_info_label">Timeri poziva/korištenja podataka</string>
+  <string name="call_data_info_description">Vrijeme korištenja glasovnog poziva i korištenja podataka</string>
+  <string name="alert_call_over_wifi">Pozivi će se izvršiti putem Wi-Fi-ja.</string>
+  <string name="alert_call_no_cellular_coverage">Mobilne mreže nisu dostupne. Povežite se s dostupnom Wi-Fi mrežom da možete zvati.</string>
+  <string name="alert_user_connect_to_wifi_for_call">Povežite se s Wi-Fi da možete obavljati pozive.</string>
+  <string name="alert_user_connect_to_wifi_for_call_text">Dodirnite ovdje za prikaz dostupnih mreža</string>
+  <string name="menu_add_to_4g_conference_call">Dodaj 4G konferencijskom pozivu</string>
+  <string name="menu_4g_conference_call">4G konferencijski poziv</string>
   <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_volte">Dolazni 4G glasovni poziv</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_lte">Dolazni 4G video poziv</string>
   <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_volte">Odlazni 4G glasovni poziv</string>
   <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_lte">Odlazni 4G glasovni poziv</string>
   <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_volte">Propušteni 4G glasovni poziv</string>
   <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_lte">Propušteni 4G video poziv</string>
   <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_vowifi">Dolazni Wi-Fi video poziv</string>
   <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_incoming_video_wifi">Dolazni Wi-Fi video poziv</string>
   <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_vowifi">Odlazni Wi-Fi glasovni poziv</string>
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_outgoing_video_wifi">Odlazni Wi-Fi glasovni poziv</string>
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_vowifi">Propušteni Wi-Fi glasovni poziv</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video_wifi">Propušteni Wi-Fi video poziv</string>
 </resources>

@@ -15,17 +15,4 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="other">%d سائەت</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="other">%d مىنۇت</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="other">%d سېكۇنت</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="other">%d چاقىرىش</item>
-  </plurals>
-</resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>

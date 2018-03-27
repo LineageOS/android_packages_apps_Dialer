@@ -74,9 +74,6 @@
          [CHAR LIMIT=18] -->
   <!-- DO NOT TRANSLATE. Hardcoded number used for restricted incoming phone numbers. -->
   <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
-  <plurals name="notification_voicemail_title">
-    <item quantity="other">ئۈنخەت</item>
-  </plurals>
   <!-- Used in the notification of a new voicemail for the action to play the voicemail. -->
   <string name="notification_action_voicemail_play">چال</string>
   <!-- Used to build a list of names or phone numbers, to indicate the callers who left

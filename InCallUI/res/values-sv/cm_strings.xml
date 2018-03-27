@@ -30,6 +30,9 @@
   <string name="card_title_waiting_call">Väntande samtal</string>
   <string name="onscreenCallRecordText">Spela in samtalet</string>
   <string name="onscreenStopCallRecordText">Stoppa inspelningen</string>
+  <string name="recording_time_text">Spelar in</string>
+  <string name="recording_warning_title">Aktivera samtalsinspelning?</string>
+  <string name="call_state_dialing">Ringer</string>
   <string name="call_state_active">Aktiv</string>
   <string name="call_state_unknown">Okänt</string>
   <string name="call_state_disconnecting">Kopplar från</string>
