@@ -59,9 +59,14 @@ public class MotorolaUtils {
    */
   private static boolean isSpnMatched(Context context) {
     try {
-      String spnResource = context.getResources().getString(R.string.motorola_enabled_spn);
-      return spnResource.equalsIgnoreCase(
-          context.getSystemService(TelephonyManager.class).getSimOperatorName());
+      for (String spnResource :
+          context.getResources().getStringArray(R.array.motorola_enabled_spn)) {
+        if (spnResource.equalsIgnoreCase(
+            context.getSystemService(TelephonyManager.class).getSimOperatorName())) {
+          return true;
+        }
+      }
+      return false;
     } catch (Resources.NotFoundException exception) {
       // If SPN is not specified we consider as not necessary to enable/disable the feature.
       return true;
@@ -69,7 +74,8 @@ public class MotorolaUtils {
   }
 
   static boolean isSupportingHiddenMenu(Context context) {
-    return context.getPackageManager().hasSystemFeature(HIDDEN_MENU_FEATURE);
+    return context.getPackageManager().hasSystemFeature(HIDDEN_MENU_FEATURE)
+        && context.getResources().getBoolean(R.bool.motorola_hidden_menu_enabled);
   }
 
   public static boolean shouldBlinkHdIconWhenConnectingCall(Context context) {

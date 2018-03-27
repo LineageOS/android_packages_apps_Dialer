@@ -32,6 +32,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.spam.SpamSettings;
 import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 
 /** Listener to show dialogs for block and report spam actions. */
@@ -43,6 +44,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
   private final RecyclerView.Adapter adapter;
   private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
   private final Spam spam;
+  private final SpamSettings spamSettings;
   private final SpamBlockingPromoHelper spamBlockingPromoHelper;
 
   public BlockReportSpamListener(
@@ -57,7 +59,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
     this.adapter = adapter;
     this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
     spam = SpamComponent.get(context).spam();
-    spamBlockingPromoHelper = new SpamBlockingPromoHelper(context, spam);
+    spamSettings = SpamComponent.get(context).spamSettings();
+    spamBlockingPromoHelper = new SpamBlockingPromoHelper(context, spamSettings);
   }
 
   @Override
@@ -69,10 +72,10 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
             displayNumber,
-            spam.isDialogReportSpamCheckedByDefault(),
+            spamSettings.isDialogReportSpamCheckedByDefault(),
             isSpamChecked -> {
               LogUtil.i("BlockReportSpamListener.onBlockReportSpam", "onClick");
-              if (isSpamChecked && spam.isSpamEnabled()) {
+              if (isSpamChecked && spamSettings.isSpamEnabled()) {
                 Logger.get(context)
                     .logImpression(
                         DialerImpression.Type
@@ -110,10 +113,10 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndReportingAsSpam.newInstance(
             displayNumber,
-            spam.isSpamEnabled(),
+            spamSettings.isSpamEnabled(),
             () -> {
               LogUtil.i("BlockReportSpamListener.onBlock", "onClick");
-              if (spam.isSpamEnabled()) {
+              if (spamSettings.isSpamEnabled()) {
                 Logger.get(context)
                     .logImpression(
                         DialerImpression.Type
@@ -154,7 +157,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
             isSpam,
             () -> {
               LogUtil.i("BlockReportSpamListener.onUnblock", "onClick");
-              if (isSpam && spam.isSpamEnabled()) {
+              if (isSpam && spamSettings.isSpamEnabled()) {
                 Logger.get(context)
                     .logImpression(DialerImpression.Type.REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER);
                 spam.reportNotSpamFromCallHistory(
@@ -187,7 +190,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
             displayNumber,
             () -> {
               LogUtil.i("BlockReportSpamListener.onReportNotSpam", "onClick");
-              if (spam.isSpamEnabled()) {
+              if (spamSettings.isSpamEnabled()) {
                 Logger.get(context)
                     .logImpression(DialerImpression.Type.DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM);
                 spam.reportNotSpamFromCallHistory(

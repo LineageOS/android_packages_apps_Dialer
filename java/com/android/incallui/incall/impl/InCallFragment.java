@@ -17,10 +17,9 @@
 package com.android.incallui.incall.impl;
 
 import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
@@ -44,7 +43,6 @@ import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -141,6 +139,7 @@ public class InCallFragment extends Fragment
 
   @Nullable
   @Override
+  @SuppressLint("MissingPermission")
   public View onCreateView(
       @NonNull LayoutInflater layoutInflater,
       @Nullable ViewGroup viewGroup,
@@ -156,7 +155,7 @@ public class InCallFragment extends Fragment
             (ImageView) view.findViewById(R.id.contactgrid_avatar),
             getResources().getDimensionPixelSize(R.dimen.incall_avatar_size),
             true /* showAnonymousAvatar */);
-    contactGridManager.onMultiWindowModeChanged(ActivityCompat.isInMultiWindowMode(getActivity()));
+    contactGridManager.onMultiWindowModeChanged(getActivity().isInMultiWindowMode());
 
     paginator = (InCallPaginator) view.findViewById(R.id.incall_paginator);
     pager = (LockableViewPager) view.findViewById(R.id.incall_pager);
@@ -173,11 +172,8 @@ public class InCallFragment extends Fragment
         != PackageManager.PERMISSION_GRANTED) {
       voiceNetworkType = TelephonyManager.NETWORK_TYPE_UNKNOWN;
     } else {
-
       voiceNetworkType =
-          VERSION.SDK_INT >= VERSION_CODES.N
-              ? getContext().getSystemService(TelephonyManager.class).getVoiceNetworkType()
-              : TelephonyManager.NETWORK_TYPE_UNKNOWN;
+          getContext().getSystemService(TelephonyManager.class).getVoiceNetworkType();
     }
     // TODO(a bug): Change to use corresponding phone type used for current call.
     phoneType = getContext().getSystemService(TelephonyManager.class).getPhoneType();

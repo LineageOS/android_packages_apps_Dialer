@@ -17,5 +17,9 @@
 
 <resources>
   <bool name="motorola_sprint_hd_codec">true</bool>
-  <string name="motorola_enabled_spn">Sprint</string>
+  <bool name="motorola_hidden_menu_enabled">true</bool>
+  <string-array name="motorola_enabled_spn">
+    <item>Sprint</item>
+    <item>moto</item>
+  </string-array>
 </resources>

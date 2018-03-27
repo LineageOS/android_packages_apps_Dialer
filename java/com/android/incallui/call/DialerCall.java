@@ -1018,13 +1018,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    * <p>An external call is one which does not exist locally for the {@link
    * android.telecom.ConnectionService} it is associated with.
    *
-   * <p>External calls are only supported in N and higher.
-   *
    * @return {@code true} if the call is an external call, {@code false} otherwise.
    */
-  public boolean isExternalCall() {
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        && hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
+  boolean isExternalCall() {
+    return hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
   }
 
   /**

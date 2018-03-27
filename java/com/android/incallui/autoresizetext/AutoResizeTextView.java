@@ -19,8 +19,6 @@ package com.android.incallui.autoresizetext;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.RectF;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
@@ -52,9 +50,6 @@ public class AutoResizeTextView extends TextView {
   private float minTextSize = DEFAULT_MIN_TEXT_SIZE;
   private float maxTextSize;
   private int maxWidth;
-  private int maxLines;
-  private float lineSpacingMultiplier = 1.0f;
-  private float lineSpacingExtra = 0.0f;
 
   public AutoResizeTextView(Context context) {
     super(context, null, 0);
@@ -84,53 +79,6 @@ public class AutoResizeTextView extends TextView {
     readAttrs(typedArray);
     typedArray.recycle();
     textPaint.set(getPaint());
-  }
-
-  /** Overridden because getMaxLines is only defined in JB+. */
-  @Override
-  public final int getMaxLines() {
-    if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-      return super.getMaxLines();
-    } else {
-      return maxLines;
-    }
-  }
-
-  /** Overridden because getMaxLines is only defined in JB+. */
-  @Override
-  public final void setMaxLines(int maxLines) {
-    super.setMaxLines(maxLines);
-    this.maxLines = maxLines;
-  }
-
-  /** Overridden because getLineSpacingMultiplier is only defined in JB+. */
-  @Override
-  public final float getLineSpacingMultiplier() {
-    if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-      return super.getLineSpacingMultiplier();
-    } else {
-      return lineSpacingMultiplier;
-    }
-  }
-
-  /** Overridden because getLineSpacingExtra is only defined in JB+. */
-  @Override
-  public final float getLineSpacingExtra() {
-    if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-      return super.getLineSpacingExtra();
-    } else {
-      return lineSpacingExtra;
-    }
-  }
-
-  /**
-   * Overridden because getLineSpacingMultiplier and getLineSpacingExtra are only defined in JB+.
-   */
-  @Override
-  public final void setLineSpacing(float add, float mult) {
-    super.setLineSpacing(add, mult);
-    lineSpacingMultiplier = mult;
-    lineSpacingExtra = add;
   }
 
   /**

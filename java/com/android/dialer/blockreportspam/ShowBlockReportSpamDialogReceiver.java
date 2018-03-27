@@ -38,6 +38,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.spam.SpamSettings;
 import com.google.auto.value.AutoValue;
 
 /**
@@ -104,6 +105,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
             intent, EXTRA_DIALOG_INFO, BlockReportSpamDialogInfo.getDefaultInstance());
 
     Spam spam = SpamComponent.get(context).spam();
+    SpamSettings spamSettings = SpamComponent.get(context).spamSettings();
     FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler =
         new FilteredNumberAsyncQueryHandler(context);
 
@@ -114,7 +116,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
               "ShowBlockReportSpamDialogReceiver.showDialogToBlockNumberAndOptionallyReportSpam",
               "confirmed");
 
-          if (reportSpam && spam.isSpamEnabled()) {
+          if (reportSpam && spamSettings.isSpamEnabled()) {
             LogUtil.i(
                 "ShowBlockReportSpamDialogReceiver.showDialogToBlockNumberAndOptionallyReportSpam",
                 "report spam");
@@ -141,7 +143,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     // Create and show the dialog.
     DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
             dialogInfo.getNormalizedNumber(),
-            spam.isDialogReportSpamCheckedByDefault(),
+            spamSettings.isDialogReportSpamCheckedByDefault(),
             onSpamDialogClickListener,
             /* dismissListener = */ null)
         .show(fragmentManager, BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
@@ -189,16 +191,17 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
         () -> {
           LogUtil.i("ShowBlockReportSpamDialogReceiver.showDialogToReportNotSpam", "confirmed");
 
-          Spam spam = SpamComponent.get(context).spam();
-          if (spam.isSpamEnabled()) {
+          if (SpamComponent.get(context).spamSettings().isSpamEnabled()) {
             Logger.get(context)
                 .logImpression(DialerImpression.Type.DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM);
-            spam.reportNotSpamFromCallHistory(
-                dialogInfo.getNormalizedNumber(),
-                dialogInfo.getCountryIso(),
-                dialogInfo.getCallType(),
-                dialogInfo.getReportingLocation(),
-                dialogInfo.getContactSource());
+            SpamComponent.get(context)
+                .spam()
+                .reportNotSpamFromCallHistory(
+                    dialogInfo.getNormalizedNumber(),
+                    dialogInfo.getCountryIso(),
+                    dialogInfo.getCallType(),
+                    dialogInfo.getReportingLocation(),
+                    dialogInfo.getContactSource());
           }
         };
 

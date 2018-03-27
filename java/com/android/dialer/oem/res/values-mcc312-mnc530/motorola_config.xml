@@ -17,4 +17,5 @@
 
 <resources>
   <bool name="motorola_sprint_hd_codec">true</bool>
+  <bool name="motorola_hidden_menu_enabled">true</bool>
 </resources>

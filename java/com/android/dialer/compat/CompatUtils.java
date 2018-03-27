@@ -16,15 +16,14 @@
 package com.android.dialer.compat;
 
 import android.content.Context;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.LocaleList;
 import java.util.Locale;
 
-/** TODO(calderwoodra): documentation */
+/** TODO(linyuh): Remove deprecated methods and rename this class. */
 public final class CompatUtils {
 
   /** PrioritizedMimeType is added in API level 23. */
+  @Deprecated
   public static boolean hasPrioritizedMimeType() {
     return true;
   }
@@ -35,6 +34,7 @@ public final class CompatUtils {
    *
    * @return {@code true} if multi-SIM capability is available, {@code false} otherwise.
    */
+  @Deprecated
   public static boolean isMSIMCompatible() {
     return true;
   }
@@ -45,6 +45,7 @@ public final class CompatUtils {
    *
    * @return {@code true} if video calling is allowed, {@code false} otherwise.
    */
+  @Deprecated
   public static boolean isVideoCompatible() {
     return true;
   }
@@ -55,6 +56,7 @@ public final class CompatUtils {
    *
    * @return {@code true} if video presence checking is allowed, {@code false} otherwise.
    */
+  @Deprecated
   public static boolean isVideoPresenceCompatible() {
     return true;
   }
@@ -65,20 +67,17 @@ public final class CompatUtils {
    *
    * @return {@code true} if call subject is a feature on this device, {@code false} otherwise.
    */
+  @Deprecated
   public static boolean isCallSubjectCompatible() {
     return true;
   }
 
   /** Returns locale of the device. */
   public static Locale getLocale(Context context) {
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      LocaleList localList = context.getResources().getConfiguration().getLocales();
-      if (!localList.isEmpty()) {
-        return localList.get(0);
-      }
-      return Locale.getDefault();
-    } else {
-      return context.getResources().getConfiguration().locale;
+    LocaleList localList = context.getResources().getConfiguration().getLocales();
+    if (!localList.isEmpty()) {
+      return localList.get(0);
     }
+    return Locale.getDefault();
   }
 }

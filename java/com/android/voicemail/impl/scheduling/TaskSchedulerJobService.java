@@ -33,6 +33,7 @@ import com.android.dialer.constants.ScheduledJobIds;
 import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.VvmLog;
+import com.android.voicemail.impl.scheduling.Tasks.TaskCreationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,7 +111,11 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
         TaskQueue queue = new TaskQueue();
         queue.fromBundles(context, existingTasks);
         for (Bundle pendingTask : pendingTasks) {
-          queue.add(Tasks.createTask(context, pendingTask));
+          try {
+            queue.add(Tasks.createTask(context, pendingTask));
+          } catch (TaskCreationException e) {
+            VvmLog.e(TAG, "cannot create task", e);
+          }
         }
         pendingTasks = queue.toBundles();
       }
