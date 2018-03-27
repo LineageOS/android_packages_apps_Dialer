@@ -16,13 +16,13 @@
 
 package com.android.dialer.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import java.util.List;
 
@@ -62,9 +62,9 @@ public class CallUtil {
    * @param context The context
    * @return A bit-mask describing the current video capabilities.
    */
+  @SuppressLint("MissingPermission")
   public static int getVideoCallingAvailability(Context context) {
-    if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)
-        || !CompatUtils.isVideoCompatible()) {
+    if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)) {
       return VIDEO_CALLING_DISABLED;
     }
     TelecomManager telecommMgr = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
@@ -77,11 +77,6 @@ public class CallUtil {
       PhoneAccount account = telecommMgr.getPhoneAccount(accountHandle);
       if (account != null) {
         if (account.hasCapabilities(PhoneAccount.CAPABILITY_VIDEO_CALLING)) {
-          // Builds prior to N do not have presence support.
-          if (!CompatUtils.isVideoPresenceCompatible()) {
-            return VIDEO_CALLING_ENABLED;
-          }
-
           int videoCapabilities = VIDEO_CALLING_ENABLED;
           if (account.hasCapabilities(PhoneAccount.CAPABILITY_VIDEO_CALLING_RELIES_ON_PRESENCE)) {
             videoCapabilities |= VIDEO_CALLING_PRESENCE;
@@ -128,9 +123,9 @@ public class CallUtil {
    * @return {@code true} if one of the call capable phone accounts supports calling with a subject
    *     specified, {@code false} otherwise.
    */
+  @SuppressLint("MissingPermission")
   public static boolean isCallWithSubjectSupported(Context context) {
-    if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)
-        || !CompatUtils.isCallSubjectCompatible()) {
+    if (!PermissionsUtil.hasPermission(context, android.Manifest.permission.READ_PHONE_STATE)) {
       return false;
     }
     TelecomManager telecommMgr = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);

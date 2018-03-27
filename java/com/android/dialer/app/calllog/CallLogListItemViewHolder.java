@@ -71,7 +71,6 @@ import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -309,9 +308,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
 
     quickContactView.setOverlay(null);
-    if (CompatUtils.hasPrioritizedMimeType()) {
-      quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
-    }
+    quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
     primaryActionButtonView.setOnClickListener(this);
     primaryActionView.setOnClickListener(this.expandCollapseListener);
     if (this.voicemailPlaybackPresenter != null

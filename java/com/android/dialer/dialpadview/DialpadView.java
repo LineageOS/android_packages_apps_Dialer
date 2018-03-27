@@ -41,7 +41,7 @@ import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.i18n.LocaleUtils;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -234,7 +234,7 @@ public class DialpadView extends LinearLayout {
   }
 
   private NumberFormat getNumberFormat() {
-    Locale locale = CompatUtils.getLocale(getContext());
+    Locale locale = LocaleUtils.getLocale(getContext());
 
     // Return the Persian number format if the current language is Persian.
     return "fas".equals(locale.getISO3Language())
