@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,23 +14,19 @@
   ~ limitations under the License
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.android.dialer.main.impl">
+    package="com.android.dialer.calllog.config">
+
+  <uses-sdk
+      android:minSdkVersion="24"
+      android:targetSdkVersion="27"/>
 
   <application>
 
-    <activity
-      android:clearTaskOnLaunch="true"
-      android:directBootAware="true"
-      android:label="@string/main_activity_label"
-      android:launchMode="singleTask"
-      android:name="com.android.dialer.main.impl.MainActivity"
-      android:resizeableActivity="true"
-      android:theme="@style/NuiActivityTheme"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+    <service
+        android:exported="false"
+        android:name=".CallLogConfigImpl$PollingJob"
+        android:permission="android.permission.BIND_JOB_SERVICE"/>
 
-      <meta-data
-        android:name="com.android.keyguard.layout"
-        android:resource="@layout/keyguard_preview"/>
-    </activity>
   </application>
+
 </manifest>

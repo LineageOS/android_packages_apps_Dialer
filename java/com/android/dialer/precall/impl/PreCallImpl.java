@@ -39,7 +39,11 @@ public class PreCallImpl implements PreCall {
   @Override
   public ImmutableList<PreCallAction> getActions() {
     return ImmutableList.of(
-        new PermissionCheckAction(), new CallingAccountSelector(), new AssistedDialAction());
+        new PermissionCheckAction(),
+        new MalformedNumberRectifier(
+            ImmutableList.of(new UkRegionPrefixInInternationalFormatHandler())),
+        new CallingAccountSelector(),
+        new AssistedDialAction());
   }
 
   @NonNull

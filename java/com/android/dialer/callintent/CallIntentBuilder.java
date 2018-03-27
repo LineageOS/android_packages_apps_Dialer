@@ -25,6 +25,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -168,6 +169,7 @@ public class CallIntentBuilder implements Parcelable {
     return callSubject;
   }
 
+  /** Additional data the in call UI can read with {@link Details#getIntentExtras()} */
   public Bundle getOutgoingCallExtras() {
     return outgoingCallExtras;
   }
