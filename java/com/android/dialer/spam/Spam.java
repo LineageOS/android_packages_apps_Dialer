@@ -16,8 +16,6 @@
 
 package com.android.dialer.spam;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
@@ -30,23 +28,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 /** Allows the container application to mark calls as spam. */
 public interface Spam {
-
-  boolean isSpamEnabled();
-
-  boolean isSpamNotificationEnabled();
-
-  boolean isSpamBlockingAvailable();
-
-  boolean isSpamBlockingEnabled();
-
-  boolean isDialogEnabledForSpamNotification();
-
-  boolean isDialogReportSpamCheckedByDefault();
-
-  /** @return what percentage of aftercall notifications to show to the user */
-  int percentOfSpamNotificationsToShow();
-
-  int percentOfNonSpamNotificationsToShow();
 
   /**
    * Checks if each of numbers in the given list is suspected of being a spam.
@@ -184,28 +165,10 @@ public interface Spam {
       ReportingLocation.Type from,
       ContactSource.Type contactSourceType);
 
-  /**
-   * Modifies spam blocking setting.
-   *
-   * @param enabled Whether to enable or disable the setting.
-   * @param listener The callback to be invoked after setting change is done.
-   */
-  void modifySpamBlockingSetting(boolean enabled, ModifySettingListener listener);
-
-  /** Returns an intent to start spam blocking setting */
-  Intent getSpamBlockingSettingIntent(Context context);
-
   /** Callback to be invoked when data is fetched. */
   interface Listener {
 
     /** Called when data is fetched. */
     void onComplete(boolean isSpam);
-  }
-
-  /** Callback to be invoked when setting change completes. */
-  interface ModifySettingListener {
-
-    /** Called when setting change completes. */
-    void onComplete(boolean success);
   }
 }

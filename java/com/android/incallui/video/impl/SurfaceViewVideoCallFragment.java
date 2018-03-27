@@ -50,7 +50,6 @@ import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
@@ -187,8 +186,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
         new ContactGridManager(view, null /* no avatar */, 0, false /* showAnonymousAvatar */);
 
     controls = view.findViewById(R.id.videocall_video_controls);
-    controls.setVisibility(
-        ActivityCompat.isInMultiWindowMode(getActivity()) ? View.GONE : View.VISIBLE);
+    controls.setVisibility(getActivity().isInMultiWindowMode() ? View.GONE : View.VISIBLE);
     controlsContainer = view.findViewById(R.id.videocall_video_controls_container);
     speakerButton = (CheckableImageButton) view.findViewById(R.id.videocall_speaker_button);
     muteButton = (CheckableImageButton) view.findViewById(R.id.videocall_mute_button);
@@ -200,8 +198,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
     swapCameraButton = (ImageButton) view.findViewById(R.id.videocall_switch_video);
     swapCameraButton.setOnClickListener(this);
     view.findViewById(R.id.videocall_switch_controls)
-        .setVisibility(
-            ActivityCompat.isInMultiWindowMode(getActivity()) ? View.GONE : View.VISIBLE);
+        .setVisibility(getActivity().isInMultiWindowMode() ? View.GONE : View.VISIBLE);
     switchOnHoldButton = view.findViewById(R.id.videocall_switch_on_hold);
     onHoldContainer = view.findViewById(R.id.videocall_on_hold_banner);
     remoteVideoOff = (TextView) view.findViewById(R.id.videocall_remote_video_off);
@@ -478,7 +475,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
 
   private Point getPreviewOffsetStartShown() {
     // No insets in multiwindow mode, and rootWindowInsets will get the display's insets.
-    if (ActivityCompat.isInMultiWindowMode(getActivity())) {
+    if (getActivity().isInMultiWindowMode()) {
       return new Point();
     }
     if (isLandscape()) {
@@ -690,7 +687,7 @@ public class SurfaceViewVideoCallFragment extends Fragment
     isInGreenScreenMode = shouldShowGreenScreen;
     isInFullscreenMode = shouldShowFullscreen;
 
-    if (getView().isAttachedToWindow() && !ActivityCompat.isInMultiWindowMode(getActivity())) {
+    if (getView().isAttachedToWindow() && !getActivity().isInMultiWindowMode()) {
       controlsContainer.onApplyWindowInsets(getView().getRootWindowInsets());
     }
     if (shouldShowGreenScreen) {

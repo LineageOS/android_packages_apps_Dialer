@@ -63,7 +63,7 @@ public final class CallLogQuery {
   @RequiresApi(VERSION_CODES.O)
   public static final int TRANSCRIPTION_STATE = 26;
 
-  private static final String[] PROJECTION_M =
+  private static final String[] PROJECTION_N =
       new String[] {
         Calls._ID, // 0
         Calls.NUMBER, // 1
@@ -89,16 +89,9 @@ public final class CallLogQuery {
         Calls.DATA_USAGE, // 21
         Calls.TRANSCRIPTION, // 22
         Calls.CACHED_PHOTO_URI, // 23
+        CallLog.Calls.POST_DIAL_DIGITS, // 24
+        CallLog.Calls.VIA_NUMBER // 25
       };
-
-  private static final String[] PROJECTION_N;
-
-  static {
-    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_M));
-    projectionList.add(CallLog.Calls.POST_DIAL_DIGITS);
-    projectionList.add(CallLog.Calls.VIA_NUMBER);
-    PROJECTION_N = projectionList.toArray(new String[projectionList.size()]);
-  }
 
   private static final String[] PROJECTION_O;
 
@@ -114,12 +107,6 @@ public final class CallLogQuery {
 
   @NonNull
   public static String[] getProjection() {
-    if (VERSION.SDK_INT >= VERSION_CODES.O) {
-      return PROJECTION_O;
-    }
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      return PROJECTION_N;
-    }
-    return PROJECTION_M;
+    return VERSION.SDK_INT >= VERSION_CODES.O ? PROJECTION_O : PROJECTION_N;
   }
 }

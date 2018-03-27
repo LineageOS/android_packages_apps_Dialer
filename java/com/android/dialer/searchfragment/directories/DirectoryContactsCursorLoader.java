@@ -21,13 +21,11 @@ import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
-import com.android.dialer.common.cp2.DirectoryCompat;
+import com.android.dialer.common.cp2.DirectoryUtils;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
 import java.util.ArrayList;
@@ -71,14 +69,14 @@ public final class DirectoryContactsCursorLoader extends CursorLoader {
     for (int i = 0; i < directories.size(); i++) {
       Directory directory = directories.get(i);
 
-      if (!DirectoryCompat.isRemoteDirectoryId(directory.getId())
-          && !DirectoryCompat.isEnterpriseDirectoryId(directory.getId())) {
+      if (!ContactsContract.Directory.isRemoteDirectoryId(directory.getId())
+          && !ContactsContract.Directory.isEnterpriseDirectoryId(directory.getId())) {
         cursors[i] = null;
         continue;
       }
 
       // Filter out invisible directories.
-      if (DirectoryCompat.isInvisibleDirectory(directory.getId())) {
+      if (DirectoryUtils.isInvisibleDirectoryId(directory.getId())) {
         cursors[i] = null;
         continue;
       }
@@ -145,12 +143,7 @@ public final class DirectoryContactsCursorLoader extends CursorLoader {
 
   @VisibleForTesting
   static Uri getContentFilterUri(String query, long directoryId) {
-    Uri baseUri =
-        VERSION.SDK_INT >= VERSION_CODES.N
-            ? ENTERPRISE_CONTENT_FILTER_URI
-            : Phone.CONTENT_FILTER_URI;
-
-    return baseUri
+    return ENTERPRISE_CONTENT_FILTER_URI
         .buildUpon()
         .appendPath(query)
         .appendQueryParameter(ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(directoryId))
