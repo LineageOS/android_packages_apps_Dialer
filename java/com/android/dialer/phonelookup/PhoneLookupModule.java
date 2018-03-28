@@ -16,7 +16,6 @@
 
 package com.android.dialer.phonelookup;
 
-import com.android.dialer.phonelookup.blockednumber.DialerBlockedNumberPhoneLookup;
 import com.android.dialer.phonelookup.blockednumber.SystemBlockedNumberPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2DefaultDirectoryPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2ExtendedDirectoryPhoneLookup;
@@ -34,13 +33,11 @@ public abstract class PhoneLookupModule {
   static ImmutableList<PhoneLookup> providePhoneLookupList(
       Cp2DefaultDirectoryPhoneLookup cp2DefaultDirectoryPhoneLookup,
       Cp2ExtendedDirectoryPhoneLookup cp2ExtendedDirectoryPhoneLookup,
-      DialerBlockedNumberPhoneLookup dialerBlockedNumberPhoneLookup,
       SystemBlockedNumberPhoneLookup systemBlockedNumberPhoneLookup,
       SpamPhoneLookup spamPhoneLookup) {
     return ImmutableList.of(
         cp2DefaultDirectoryPhoneLookup,
         cp2ExtendedDirectoryPhoneLookup,
-        dialerBlockedNumberPhoneLookup,
         systemBlockedNumberPhoneLookup,
         spamPhoneLookup);
   }
