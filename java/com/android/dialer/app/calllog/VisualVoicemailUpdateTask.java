@@ -198,7 +198,6 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
   private static List<NewCall> filterSpamNumbers(Context context, List<NewCall> newCalls) {
     Assert.isWorkerThread();
     if (!SpamComponent.get(context).spamSettings().isSpamBlockingEnabled()) {
-      LogUtil.w("VisualVoicemailUpdateTask.wwwwwwwwwwwww", "NOT ENABLED");
       return newCalls;
     }
 
@@ -214,7 +213,6 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
         Logger.get(context)
             .logImpression(DialerImpression.Type.INCOMING_VOICEMAIL_AUTO_BLOCKED_AS_SPAM);
       } else {
-        LogUtil.w("VisualVoicemailUpdateTask.wwwwwwwwwwwww", "NOT SPAM NUMBER");
         result.add(newCall);
       }
     }
