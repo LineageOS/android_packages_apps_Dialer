@@ -54,6 +54,15 @@ public final class CallLogState {
   }
 
   /**
+   * Clear the call log state. This is useful for example if the annotated call log needs to be
+   * disabled because there was a problem.
+   */
+  @AnyThread
+  public void clearData() {
+    sharedPreferences.edit().remove(ANNOTATED_CALL_LOG_BUILT_PREF).apply();
+  }
+
+  /**
    * Returns true if the annotated call log has been built at least once.
    *
    * <p>It may not yet have been built if the user was just upgraded to the new call log, or they
