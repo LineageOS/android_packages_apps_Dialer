@@ -30,4 +30,7 @@
     <string name="forward_lookup_provider_title">Forward lookup provider</string>
     <string name="people_lookup_provider_title">People lookup provider</string>
     <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
+
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Lookups may send queries over a secure protocol (https) to remote websites to gather information. The query may include the other party\'s phone number or the search query</string>
 </resources>
