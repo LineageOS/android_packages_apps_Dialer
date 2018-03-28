@@ -187,4 +187,6 @@
     <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
     <string name="type_missed_video_wifi">Missed Wi-Fi video call</string>
 
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Lookups may send queries over a secure protocol (https) to remote websites to gather information. The query may include the other party\'s phone number or the search query</string>
 </resources>

@@ -53,17 +53,17 @@ public final class LookupSettings {
 
     public static boolean isForwardLookupEnabled(Context context) {
         return CMSettings.System.getInt(context.getContentResolver(),
-                CMSettings.System.ENABLE_FORWARD_LOOKUP, 1) != 0;
+                CMSettings.System.ENABLE_FORWARD_LOOKUP, 0) != 0;
     }
 
     public static boolean isPeopleLookupEnabled(Context context) {
         return CMSettings.System.getInt(context.getContentResolver(),
-                CMSettings.System.ENABLE_PEOPLE_LOOKUP, 1) != 0;
+                CMSettings.System.ENABLE_PEOPLE_LOOKUP, 0) != 0;
     }
 
     public static boolean isReverseLookupEnabled(Context context) {
         return CMSettings.System.getInt(context.getContentResolver(),
-                CMSettings.System.ENABLE_REVERSE_LOOKUP, 1) != 0;
+                CMSettings.System.ENABLE_REVERSE_LOOKUP, 0) != 0;
     }
 
     public static String getForwardLookupProvider(Context context) {
