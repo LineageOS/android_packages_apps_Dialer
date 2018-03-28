@@ -65,5 +65,6 @@
         android:summary="%s"
         android:persistent="false" />
 
+    <Preference android:summary="@string/lookup_disclaimer" />
 </PreferenceScreen>
 
