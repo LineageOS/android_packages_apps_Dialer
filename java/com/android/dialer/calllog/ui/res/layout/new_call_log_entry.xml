@@ -21,43 +21,13 @@
     android:layout_height="wrap_content"
     android:minHeight="72dp">
 
-  <!-- Contact photo (including the optional video icon) -->
-  <FrameLayout
-    android:id="@+id/contact_photo_container"
-    android:layout_width="52dp"
-    android:layout_height="44dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_centerVertical="true"
-    android:focusable="false">
-
-    <QuickContactBadge
-        android:id="@+id/quick_contact_photo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:focusable="true"/>
-
-    <FrameLayout
-        android:id="@+id/contact_badge_container"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_gravity="bottom|end">
-
-      <ImageView
-          android:id="@+id/contact_badge_background"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:src="@drawable/contact_photo_badge_background"/>
-
-      <ImageView
-          android:id="@+id/video_call_icon"
-          android:layout_width="13dp"
-          android:layout_height="13dp"
-          android:layout_gravity="center"
-          android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
-    </FrameLayout>
-  </FrameLayout>
+  <com.android.dialer.widget.ContactPhotoView
+      android:id="@+id/contact_photo_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
+      android:layout_centerVertical="true"/>
 
   <!-- The frame layout is necessary to avoid clipping the icons and ellipsize the text when the
        content is too wide to fit.
@@ -66,7 +36,7 @@
       android:id="@+id/primary_row"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_toEndOf="@+id/contact_photo_container"
+      android:layout_toEndOf="@+id/contact_photo_view"
       android:layout_toStartOf="@+id/menu_button">
 
     <LinearLayout
@@ -127,7 +97,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/primary_row"
-      android:layout_toEndOf="@+id/contact_photo_container"
+      android:layout_toEndOf="@+id/contact_photo_view"
       android:orientation="horizontal">
 
     <ImageView
@@ -153,7 +123,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/secondary_row"
-      android:layout_toEndOf="@+id/contact_photo_container"
+      android:layout_toEndOf="@+id/contact_photo_view"
       android:ellipsize="end"
       android:singleLine="true"
       android:visibility="gone"/>
