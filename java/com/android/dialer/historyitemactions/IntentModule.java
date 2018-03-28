@@ -91,6 +91,6 @@ public class IntentModule implements HistoryItemActionModule {
                 .setPhoneAccountHandle(phoneAccountHandle)
                 .setIsVideoCall(true)),
         R.string.video_call,
-        R.drawable.quantum_ic_videocam_white_24);
+        R.drawable.quantum_ic_videocam_vd_white_24);
   }
 }
