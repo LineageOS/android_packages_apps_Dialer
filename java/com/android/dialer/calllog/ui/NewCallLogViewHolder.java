@@ -24,6 +24,7 @@ import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -50,7 +51,8 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final TextView primaryTextView;
   private final TextView callCountTextView;
   private final TextView secondaryTextView;
-  private final QuickContactBadge quickContactBadge;
+  private final QuickContactBadge contactPhoto;
+  private final FrameLayout contactBadgeContainer;
   private final ImageView callTypeIcon;
   private final ImageView hdIcon;
   private final ImageView wifiIcon;
@@ -76,7 +78,8 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     primaryTextView = view.findViewById(R.id.primary_text);
     callCountTextView = view.findViewById(R.id.call_count);
     secondaryTextView = view.findViewById(R.id.secondary_text);
-    quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    contactPhoto = view.findViewById(R.id.quick_contact_photo);
+    contactBadgeContainer = view.findViewById(R.id.contact_badge_container);
     callTypeIcon = view.findViewById(R.id.call_type_icon);
     hdIcon = view.findViewById(R.id.hd_icon);
     wifiIcon = view.findViewById(R.id.wifi_icon);
@@ -152,11 +155,19 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void setPhoto(CoalescedRow row) {
     glidePhotoManager.loadQuickContactBadge(
-        quickContactBadge,
+        contactPhoto,
         NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
             .setFormattedNumber(row.getFormattedNumber())
             .setIsVoicemail(row.getIsVoicemailCall())
             .build());
+
+    contactBadgeContainer.setVisibility(
+        shouldShowVideoCallIcon(row) ? View.VISIBLE : View.INVISIBLE);
+  }
+
+  private static boolean shouldShowVideoCallIcon(CoalescedRow row) {
+    return (row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
+        && !row.getNumberAttributes().getIsSpam();
   }
 
   private void setFeatureIcons(CoalescedRow row) {
