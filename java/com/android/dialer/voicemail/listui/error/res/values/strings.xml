@@ -199,7 +199,7 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   <string name="dialer_terms_and_conditions_decline_spanish" translatable="false">Rechazar</string>
 
   <string name="dialer_terms_and_conditions_existing_user_ack">Ok, got it</string>
-  <string name="dialer_terms_and_conditions_existing_user_setings">Settings</string>
+  <string name="dialer_terms_and_conditions_existing_user_decline">No Thanks</string>
 
   <string name="terms_and_conditions_decline_dialog_title">Disable visual voicemail?</string>
 

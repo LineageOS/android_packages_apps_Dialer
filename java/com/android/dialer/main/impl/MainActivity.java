@@ -21,9 +21,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogReceiver;
+import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDismissedListener;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
@@ -53,7 +53,7 @@ public class MainActivity extends TransactionSafeActivity
 
   /** Returns intent that will open MainActivity to the specified tab. */
   public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
-    if (ConfigProviderBindings.get(context).getBoolean("nui_peer_enabled", false)) {
+    if (CallLogConfigComponent.get(context).callLogConfig().isNewPeerEnabled()) {
       // TODO(calderwoodra): implement this in NewMainActivityPeer
       return null;
     }
@@ -82,7 +82,7 @@ public class MainActivity extends TransactionSafeActivity
   }
 
   protected MainActivityPeer getNewPeer() {
-    if (ConfigProviderBindings.get(this).getBoolean("nui_peer_enabled", false)) {
+    if (CallLogConfigComponent.get(this).callLogConfig().isNewPeerEnabled()) {
       return new NewMainActivityPeer(this);
     } else {
       return new OldMainActivityPeer(this);

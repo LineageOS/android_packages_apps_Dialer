@@ -23,8 +23,8 @@ import android.content.SharedPreferences.Editor;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.storage.Unencrypted;
 import com.android.dialer.strictmode.StrictModeUtils;
 import javax.inject.Inject;
 
@@ -49,14 +49,14 @@ import javax.inject.Inject;
  *     /data/user_de/0/com.android.dialer/shared_prefs/com.android.dialer_preferences.xml
  * </pre>
  */
-class SharedPrefConfigProvider implements ConfigProvider {
+public class SharedPrefConfigProvider implements ConfigProvider {
   private static final String PREF_PREFIX = "config_provider_prefs_";
 
-  private final Context appContext;
+  private final SharedPreferences sharedPreferences;
 
   @Inject
-  SharedPrefConfigProvider(@ApplicationContext Context appContext) {
-    this.appContext = appContext;
+  SharedPrefConfigProvider(@Unencrypted SharedPreferences sharedPreferences) {
+    this.sharedPreferences = sharedPreferences;
   }
 
   /** Service to write values into {@link SharedPrefConfigProvider} using adb. */
@@ -93,25 +93,29 @@ class SharedPrefConfigProvider implements ConfigProvider {
     }
   }
 
+  /** Set a boolean config value. */
+  public void putBoolean(String key, boolean value) {
+    sharedPreferences.edit().putBoolean(PREF_PREFIX + key, value).apply();
+  }
+
   @Override
   public String getString(String key, String defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.
     return StrictModeUtils.bypass(
-        () -> getSharedPrefs(appContext).getString(PREF_PREFIX + key, defaultValue));
+        () -> sharedPreferences.getString(PREF_PREFIX + key, defaultValue));
   }
 
   @Override
   public long getLong(String key, long defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.
-    return StrictModeUtils.bypass(
-        () -> getSharedPrefs(appContext).getLong(PREF_PREFIX + key, defaultValue));
+    return StrictModeUtils.bypass(() -> sharedPreferences.getLong(PREF_PREFIX + key, defaultValue));
   }
 
   @Override
   public boolean getBoolean(String key, boolean defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.
     return StrictModeUtils.bypass(
-        () -> getSharedPrefs(appContext).getBoolean(PREF_PREFIX + key, defaultValue));
+        () -> sharedPreferences.getBoolean(PREF_PREFIX + key, defaultValue));
   }
 
   private static SharedPreferences getSharedPrefs(Context appContext) {
