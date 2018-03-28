@@ -30,7 +30,6 @@ import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.ColorInt;
-import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
@@ -102,11 +101,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     this.annotatedCallLogDatabaseHelper = annotatedCallLogDatabaseHelper;
   }
 
-  @MainThread
   @Override
   public void registerContentObservers() {
-    Assert.isMainThread();
-
     LogUtil.enterBlock("SystemCallLogDataSource.registerContentObservers");
 
     if (!PermissionsUtil.hasCallLogReadPermissions(appContext)) {
