@@ -34,7 +34,6 @@ import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
 import com.android.dialer.widget.ContactPhotoView;
@@ -62,15 +61,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final ExecutorService uiExecutorService;
 
-  private final GlidePhotoManager glidePhotoManager;
-
   private long currentRowId;
 
-  NewCallLogViewHolder(
-      View view,
-      Clock clock,
-      RealtimeRowProcessor realtimeRowProcessor,
-      GlidePhotoManager glidePhotoManager) {
+  NewCallLogViewHolder(View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor) {
     super(view);
     this.context = view.getContext();
     contactPhotoView = view.findViewById(R.id.contact_photo_view);
@@ -86,7 +79,6 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     this.clock = clock;
     this.realtimeRowProcessor = realtimeRowProcessor;
-    this.glidePhotoManager = glidePhotoManager;
     uiExecutorService = DialerExecutorComponent.get(context).uiExecutor();
   }
 
@@ -251,8 +243,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setOnClickListenerForMenuButon(CoalescedRow row) {
-    menuButton.setOnClickListener(
-        NewCallLogMenu.createOnClickListener(context, row, glidePhotoManager));
+    menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(context, row));
   }
 
   private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {

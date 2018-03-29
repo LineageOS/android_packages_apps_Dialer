@@ -19,6 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="52dp"
     android:layout_height="44dp"
+    android:layout_gravity="center"
     android:focusable="false">
 
   <QuickContactBadge
