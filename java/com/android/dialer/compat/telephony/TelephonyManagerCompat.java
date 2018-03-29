@@ -35,6 +35,8 @@ public class TelephonyManagerCompat {
   // TODO(maxwelb): Use public API for these constants when available
   public static final String EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE =
       "android.telephony.event.EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE";
+  public static final String EVENT_HANDOVER_VIDEO_FROM_LTE_TO_WIFI =
+      "android.telephony.event.EVENT_HANDOVER_VIDEO_FROM_LTE_TO_WIFI";
   public static final String EVENT_HANDOVER_TO_WIFI_FAILED =
       "android.telephony.event.EVENT_HANDOVER_TO_WIFI_FAILED";
   public static final String EVENT_CALL_REMOTELY_HELD = "android.telecom.event.CALL_REMOTELY_HELD";
