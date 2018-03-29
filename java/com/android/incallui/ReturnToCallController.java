@@ -44,7 +44,6 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.CallList.Listener;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
-import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -280,7 +279,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   @NonNull
   private List<Action> generateActions() {
     List<Action> actions = new ArrayList<>();
-    SpeakerButtonInfo speakerButtonInfo = new SpeakerButtonInfo(audioState, IconSize.SIZE_24_DP);
+    SpeakerButtonInfo speakerButtonInfo = new SpeakerButtonInfo(audioState);
 
     // Return to call
     actions.add(
@@ -294,7 +293,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     // Mute/unmute
     actions.add(
         Action.builder()
-            .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_mic_off_white_24))
+            .setIconDrawable(context.getDrawable(R.drawable.quantum_ic_mic_off_vd_theme_24))
             .setChecked(audioState.isMuted())
             .setIntent(toggleMute)
             .setName(context.getText(R.string.incall_label_mute))
