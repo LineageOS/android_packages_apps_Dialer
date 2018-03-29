@@ -19,7 +19,6 @@ package com.android.dialer.calllogutils;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
@@ -297,7 +296,7 @@ public class CallTypeIconsView extends View {
       blocked = drawable.mutate();
       blocked.setColorFilter(r.getColor(R.color.blocked_call), PorterDuff.Mode.MULTIPLY);
 
-      iconId = R.drawable.quantum_ic_videocam_white_24;
+      iconId = R.drawable.quantum_ic_videocam_vd_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       videoCall = drawable.mutate();
       videoCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
@@ -324,7 +323,14 @@ public class CallTypeIconsView extends View {
     // Gets the icon, scaled to the height of the call type icons. This helps display all the
     // icons to be the same height, while preserving their width aspect ratio.
     private Drawable getScaledBitmap(Context context, int resourceId) {
-      Bitmap icon = BitmapFactory.decodeResource(context.getResources(), resourceId);
+      Drawable drawable = context.getDrawable(resourceId);
+      Bitmap icon =
+          Bitmap.createBitmap(
+              drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+      Canvas canvas = new Canvas(icon);
+      drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+      drawable.draw(canvas);
+
       int scaledHeight = context.getResources().getDimensionPixelSize(R.dimen.call_type_icon_size);
       int scaledWidth =
           (int) ((float) icon.getWidth() * ((float) scaledHeight / (float) icon.getHeight()));

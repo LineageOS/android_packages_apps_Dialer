@@ -50,7 +50,7 @@
           android:layout_width="24dp"
           android:layout_height="24dp"
           android:layout_gravity="center"
-          android:src="@drawable/quantum_ic_videocam_white_24"/>
+          android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
     </FrameLayout>
   </FrameLayout>
 
