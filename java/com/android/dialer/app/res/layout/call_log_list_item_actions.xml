@@ -64,7 +64,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_videocam_white_24"/>
+      android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -78,7 +78,7 @@
 
     <ImageView
         style="@style/CallLogActionIconStyle"
-        android:src="@drawable/quantum_ic_videocam_white_24"/>
+        android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
 
     <TextView
         style="@style/CallLogActionTextStyle"
@@ -92,7 +92,7 @@
 
     <ImageView
         style="@style/CallLogActionIconStyle"
-        android:src="@drawable/quantum_ic_videocam_white_24"/>
+        android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
 
     <TextView
         style="@style/CallLogActionTextStyle"
