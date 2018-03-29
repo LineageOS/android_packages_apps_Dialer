@@ -151,8 +151,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
 
     itemView.setOnClickListener(this);
     menuButton.setOnClickListener(
-        NewVoicemailMenu.createOnClickListener(
-            context, voicemailEntryOfViewHolder, glidePhotoManager));
+        NewVoicemailMenu.createOnClickListener(context, voicemailEntryOfViewHolder));
 
     setPhoto(voicemailEntryOfViewHolder);
 
