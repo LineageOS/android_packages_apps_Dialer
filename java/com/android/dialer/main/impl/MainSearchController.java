@@ -149,25 +149,24 @@ public class MainSearchController implements SearchBarListener {
 
     // Show Search
     if (searchFragment == null) {
-      // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
-      // places promo to be shown.
-      searchFragment = NewSearchFragment.newInstance(/* showZeroSuggest=*/ true);
+      searchFragment = NewSearchFragment.newInstance();
       transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
       transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
       transaction.show(searchFragment);
     }
-    searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
 
     // Show Dialpad
     if (getDialpadFragment() == null) {
       DialpadFragment dialpadFragment = new DialpadFragment();
       dialpadFragment.setStartedFromNewIntent(fromNewIntent);
       transaction.add(R.id.dialpad_fragment_container, dialpadFragment, DIALPAD_FRAGMENT_TAG);
+      searchFragment.setQuery("", CallInitiationType.Type.DIALPAD);
     } else {
       DialpadFragment dialpadFragment = getDialpadFragment();
       dialpadFragment.setStartedFromNewIntent(fromNewIntent);
       transaction.show(dialpadFragment);
+      searchFragment.setQuery(dialpadFragment.getQuery(), CallInitiationType.Type.DIALPAD);
     }
     transaction.commit();
 
@@ -258,7 +257,7 @@ public class MainSearchController implements SearchBarListener {
       } else {
         Logger.get(activity)
             .logImpression(DialerImpression.Type.MAIN_TOUCH_SEARCH_LIST_TO_HIDE_KEYBOARD);
-        toolbar.hideKeyboard();
+        closeKeyboard();
       }
     }
   }
@@ -348,6 +347,14 @@ public class MainSearchController implements SearchBarListener {
     return isSearchVisible();
   }
 
+  /** Closes the keyboard if necessary. */
+  private void closeKeyboard() {
+    NewSearchFragment fragment = getSearchFragment();
+    if (fragment != null && fragment.isAdded()) {
+      toolbar.hideKeyboard();
+    }
+  }
+
   /**
    * Opens search in regular/search bar search mode.
    *
@@ -376,9 +383,7 @@ public class MainSearchController implements SearchBarListener {
 
     // Show Search
     if (searchFragment == null) {
-      // TODO(a bug): zero suggest results aren't actually shown but this enabled the nearby
-      // places promo to be shown.
-      searchFragment = NewSearchFragment.newInstance(true);
+      searchFragment = NewSearchFragment.newInstance();
       transaction.add(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
       transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     } else if (!isSearchVisible()) {
@@ -446,6 +451,9 @@ public class MainSearchController implements SearchBarListener {
 
   @Override
   public void onActivityPause() {
+    LogUtil.enterBlock("MainSearchController.onActivityPause");
+    closeKeyboard();
+
     if (closeSearchOnPause) {
       closeSearchOnPause = false;
       if (isInSearch()) {
@@ -462,7 +470,7 @@ public class MainSearchController implements SearchBarListener {
       closeSearchOnPause = !requestingPermission;
 
       // Always hide the keyboard when the user leaves dialer (including permission requests)
-      toolbar.hideKeyboard();
+      closeKeyboard();
     }
   }
 
@@ -473,6 +481,7 @@ public class MainSearchController implements SearchBarListener {
 
   @Override
   public void requestingPermission() {
+    LogUtil.enterBlock("MainSearchController.requestingPermission");
     requestingPermission = true;
   }
 
