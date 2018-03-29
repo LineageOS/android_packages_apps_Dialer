@@ -24,7 +24,7 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_marginStart="8dp"
-      android:layout_gravity="center_vertical"
+      android:layout_gravity="center_vertical|start"
       android:padding="12dp"
       android:tint="@color/dialer_theme_color"/>
 
