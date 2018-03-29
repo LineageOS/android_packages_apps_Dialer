@@ -334,7 +334,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
       return;
     }
     if (getParent().isVideoCall() || getParent().isVideoUpgradeRequest()) {
-      contactPuckIcon.setImageResource(R.drawable.quantum_ic_videocam_white_24);
+      contactPuckIcon.setImageResource(R.drawable.quantum_ic_videocam_vd_white_24);
     } else if (getParent().isRttCall()) {
       contactPuckIcon.setImageResource(R.drawable.quantum_ic_rtt_vd_theme_24);
     } else {
