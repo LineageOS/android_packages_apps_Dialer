@@ -174,7 +174,7 @@ public class AnswerFragment extends Fragment
     },
 
     ANSWER_VIDEO_AS_AUDIO(
-        R.drawable.quantum_ic_videocam_off_white_24,
+        R.drawable.quantum_ic_videocam_off_vd_theme_24,
         R.string.a11y_description_incoming_call_answer_video_as_audio,
         R.string.a11y_incoming_call_answer_video_as_audio,
         R.string.call_incoming_swipe_to_answer_video_as_audio) {

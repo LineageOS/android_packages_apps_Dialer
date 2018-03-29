@@ -23,4 +23,5 @@
   <dimen name="videocall_preview_margin_end">24dp</dimen>
   <dimen name="videocall_button_spacing">8dp</dimen>
   <dimen name="videocall_button_size">60dp</dimen>
+  <dimen name="videocall_button_padding">12dp</dimen>
 </resources>

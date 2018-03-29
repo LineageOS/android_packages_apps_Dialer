@@ -36,7 +36,7 @@ public class SpeakerButtonController implements OnCheckedChangeListener, OnClick
 
   @NonNull private CheckableImageButton button;
 
-  @DrawableRes private int icon = R.drawable.quantum_ic_volume_up_white_36;
+  @DrawableRes private int icon = R.drawable.quantum_ic_volume_up_vd_theme_24;
 
   private boolean isChecked;
   private boolean checkable;
@@ -77,24 +77,24 @@ public class SpeakerButtonController implements OnCheckedChangeListener, OnClick
 
       if ((audioState.getRoute() & CallAudioState.ROUTE_BLUETOOTH)
           == CallAudioState.ROUTE_BLUETOOTH) {
-        icon = R.drawable.quantum_ic_bluetooth_audio_white_36;
+        icon = R.drawable.quantum_ic_bluetooth_audio_vd_theme_24;
         contentDescriptionResId = R.string.incall_content_description_bluetooth;
       } else if ((audioState.getRoute() & CallAudioState.ROUTE_SPEAKER)
           == CallAudioState.ROUTE_SPEAKER) {
-        icon = R.drawable.quantum_ic_volume_up_white_36;
+        icon = R.drawable.quantum_ic_volume_up_vd_theme_24;
         contentDescriptionResId = R.string.incall_content_description_speaker;
       } else if ((audioState.getRoute() & CallAudioState.ROUTE_WIRED_HEADSET)
           == CallAudioState.ROUTE_WIRED_HEADSET) {
-        icon = R.drawable.quantum_ic_headset_white_36;
+        icon = R.drawable.quantum_ic_headset_vd_theme_24;
         contentDescriptionResId = R.string.incall_content_description_headset;
       } else {
-        icon = R.drawable.quantum_ic_phone_in_talk_white_36;
+        icon = R.drawable.quantum_ic_phone_in_talk_vd_theme_24;
         contentDescriptionResId = R.string.incall_content_description_earpiece;
       }
     } else {
       checkable = true;
       isChecked = audioState.getRoute() == CallAudioState.ROUTE_SPEAKER;
-      icon = R.drawable.quantum_ic_volume_up_white_36;
+      icon = R.drawable.quantum_ic_volume_up_vd_theme_24;
       contentDescriptionResId = R.string.incall_content_description_speaker;
     }
 
