@@ -24,7 +24,6 @@ import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.rtt.impl.RttCheckableButton.OnCheckedChangeListener;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
-import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 
 /** Overflow menu for RTT call. */
 public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListener {
@@ -89,7 +88,7 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
   }
 
   void setAudioState(CallAudioState audioState) {
-    SpeakerButtonInfo info = new SpeakerButtonInfo(audioState, IconSize.SIZE_24_DP);
+    SpeakerButtonInfo info = new SpeakerButtonInfo(audioState);
     if (info.checkable) {
       speakerButton.setChecked(info.isChecked);
       speakerButton.setOnClickListener(null);

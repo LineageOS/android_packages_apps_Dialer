@@ -31,7 +31,6 @@ import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
-import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 
 /** Manages a single button. */
 interface ButtonController {
@@ -379,7 +378,7 @@ interface ButtonController {
     }
 
     public void setAudioState(CallAudioState audioState) {
-      SpeakerButtonInfo info = new SpeakerButtonInfo(audioState, IconSize.SIZE_36_DP);
+      SpeakerButtonInfo info = new SpeakerButtonInfo(audioState);
 
       checkable = info.checkable;
       isChecked = info.isChecked;
