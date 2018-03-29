@@ -42,7 +42,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
   private final SearchCursorManager searchCursorManager;
   private final Context context;
 
-  private boolean showZeroSuggest;
   private String query;
   // Raw query number from dialpad, which may contain special character such as "+". This is used
   // for actions to add contact or send sms.
@@ -138,19 +137,7 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   @Override
   public int getItemCount() {
-    if (TextUtils.isEmpty(query) && !showZeroSuggest) {
-      return 0;
-    }
     return searchCursorManager.getCount();
-  }
-
-  /**
-   * @param visible If true and query is empty, the adapter won't show any list elements.
-   * @see #setQuery(String, String)
-   * @see #getItemCount()
-   */
-  public void setZeroSuggestVisible(boolean visible) {
-    showZeroSuggest = visible;
   }
 
   public void setQuery(String query, @Nullable String rawNumber) {

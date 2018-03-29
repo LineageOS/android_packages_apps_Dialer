@@ -67,7 +67,6 @@ import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Dir
 import com.android.dialer.searchfragment.directories.DirectoryContactsCursorLoader;
 import com.android.dialer.searchfragment.list.SearchActionViewHolder.Action;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
-import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -94,7 +93,6 @@ public final class NewSearchFragment extends Fragment
   // updates so they are bundled together
   private static final int ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY = 400;
 
-  private static final String KEY_SHOW_ZERO_SUGGEST = "use_zero_suggest";
   private static final String KEY_LOCATION_PROMPT_DISMISSED = "search_location_prompt_dismissed";
 
   @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
@@ -134,12 +132,8 @@ public final class NewSearchFragment extends Fragment
 
   private Runnable updatePositionRunnable;
 
-  public static NewSearchFragment newInstance(boolean showZeroSuggest) {
-    NewSearchFragment fragment = new NewSearchFragment();
-    Bundle args = new Bundle();
-    args.putBoolean(KEY_SHOW_ZERO_SUGGEST, showZeroSuggest);
-    fragment.setArguments(args);
-    return fragment;
+  public static NewSearchFragment newInstance() {
+    return new NewSearchFragment();
   }
 
   @Nullable
@@ -150,7 +144,7 @@ public final class NewSearchFragment extends Fragment
     adapter = new SearchAdapter(getContext(), new SearchCursorManager(), this);
     adapter.setQuery(query, rawNumber);
     adapter.setSearchActions(getActions());
-    adapter.setZeroSuggestVisible(getArguments().getBoolean(KEY_SHOW_ZERO_SUGGEST));
+    showLocationPermission();
     emptyContentView = view.findViewById(R.id.empty_view);
     recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -265,11 +259,29 @@ public final class NewSearchFragment extends Fragment
     if (adapter != null) {
       adapter.setQuery(query, rawNumber);
       adapter.setSearchActions(getActions());
-      adapter.setZeroSuggestVisible(isRegularSearch());
+      showLocationPermission();
       loadCp2ContactsCursor();
       loadNearbyPlacesCursor();
       loadDirectoryContactsCursors();
     }
+  }
+
+  /** Returns true if the location permission was shown. */
+  private boolean showLocationPermission() {
+    if (adapter == null) {
+      return false;
+    }
+
+    if (PermissionsUtil.hasLocationPermissions(getContext())
+        || hasBeenDismissed()
+        || !isRegularSearch()) {
+      adapter.hideLocationPermissionRequest();
+      return false;
+    }
+
+    adapter.showLocationPermissionRequest(
+        v -> requestLocationPermission(), v -> dismissLocationPermission());
+    return true;
   }
 
   /** Translate the search fragment and resize it to fit on the screen. */
@@ -382,16 +394,16 @@ public final class NewSearchFragment extends Fragment
    * <p>Should not be called before finishing loading info about all directories (local and remote).
    */
   private void loadNearbyPlacesCursor() {
-    if (!PermissionsUtil.hasLocationPermissions(getContext())
-        && !StorageComponent.get(getContext())
-            .unencryptedSharedPrefs()
-            .getBoolean(KEY_LOCATION_PROMPT_DISMISSED, false)) {
-      if (adapter != null && isRegularSearch() && !hasBeenDismissed()) {
-        adapter.showLocationPermissionRequest(
-            v -> requestLocationPermission(), v -> dismissLocationPermission());
-      }
+    // If we're requesting the location permission, don't load nearby places cursor.
+    if (showLocationPermission()) {
       return;
     }
+
+    // If the user dismissed the prompt without granting us the permission, don't load the cursor.
+    if (!PermissionsUtil.hasLocationPermissions(getContext())) {
+      return;
+    }
+
     // Cancel existing load if one exists.
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadNearbyPlacesRunnable);
 

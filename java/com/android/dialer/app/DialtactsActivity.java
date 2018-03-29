@@ -1130,7 +1130,7 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     NewSearchFragment fragment = (NewSearchFragment) getFragmentManager().findFragmentByTag(tag);
     if (fragment == null) {
-      fragment = NewSearchFragment.newInstance(!isDialpadShown());
+      fragment = NewSearchFragment.newInstance();
       transaction.add(R.id.dialtacts_frame, fragment, tag);
     } else {
       transaction.show(fragment);
