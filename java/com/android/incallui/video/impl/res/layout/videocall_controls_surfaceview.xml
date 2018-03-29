@@ -61,33 +61,25 @@
     <com.android.incallui.video.impl.CheckableImageButton
       android:id="@+id/videocall_speaker_button"
       style="@style/Incall.Button.VideoCall"
-      android:layout_width="@dimen/videocall_button_size"
-      android:layout_height="@dimen/videocall_button_size"
       android:layout_marginBottom="@dimen/videocall_button_spacing"
       android:checked="true"
-      android:src="@drawable/quantum_ic_volume_up_white_36"
+      android:src="@drawable/quantum_ic_volume_up_vd_theme_24"
       app:contentDescriptionChecked="@string/incall_content_description_speaker"
       app:contentDescriptionUnchecked="@string/incall_content_description_earpiece"
       />
     <com.android.incallui.video.impl.CheckableImageButton
       android:id="@+id/videocall_mute_button"
       style="@style/Incall.Button.VideoCall"
-      android:layout_width="@dimen/videocall_button_size"
-      android:layout_height="@dimen/videocall_button_size"
       android:layout_marginBottom="@dimen/videocall_button_spacing"
-      android:scaleType="center"
-      android:src="@drawable/quantum_ic_mic_off_white_36"
+      android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
       app:contentDescriptionChecked="@string/incall_content_description_muted"
       app:contentDescriptionUnchecked="@string/incall_content_description_unmuted"
       />
     <com.android.incallui.video.impl.CheckableImageButton
       android:id="@+id/videocall_mute_video"
       style="@style/Incall.Button.VideoCall"
-      android:layout_width="@dimen/videocall_button_size"
-      android:layout_height="@dimen/videocall_button_size"
       android:layout_marginBottom="@dimen/videocall_button_spacing"
-      android:scaleType="center"
-      android:src="@drawable/quantum_ic_videocam_off_white_36"
+      android:src="@drawable/quantum_ic_videocam_off_vd_theme_24"
       app:contentDescriptionChecked="@string/incall_content_description_video_off"
       app:contentDescriptionUnchecked="@string/incall_content_description_video_on"
       />
@@ -112,7 +104,7 @@
       android:layout_width="@dimen/videocall_button_size"
       android:layout_height="@dimen/videocall_button_size"
       android:contentDescription="@string/incall_content_description_swap_calls"
-      android:src="@drawable/quantum_ic_swap_calls_white_36"
+      android:src="@drawable/quantum_ic_swap_calls_vd_theme_24"
       android:visibility="gone"
       tools:visibility="visible"
       />
