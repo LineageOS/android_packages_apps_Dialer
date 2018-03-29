@@ -916,7 +916,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_TURN_ON_SPEAKER);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_volume_up_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_volume_up_vd_theme_24),
                 context.getText(R.string.notification_action_speaker_on),
                 speakerOnPendingIntent)
             .build());
@@ -930,7 +930,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_TURN_OFF_SPEAKER);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_phone_in_talk_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_phone_in_talk_vd_theme_24),
                 context.getText(R.string.notification_action_speaker_off),
                 speakerOffPendingIntent)
             .build());

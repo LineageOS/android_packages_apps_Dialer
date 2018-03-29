@@ -16,10 +16,13 @@
   -->
 <resources>
   <style name="Incall.Button.VideoCall" parent="Widget.AppCompat.ImageButton">
+    <item name="android:layout_height">@dimen/videocall_button_size</item>
+    <item name="android:layout_width">@dimen/videocall_button_size</item>
     <item name="android:background">@drawable/videocall_video_button_background</item>
-    <item name="android:scaleType">center</item>
     <item name="android:tint">@color/videocall_button_icon_tint</item>
     <item name="android:tintMode">src_atop</item>
+    <item name="android:padding">@dimen/videocall_button_padding</item>
+    <item name="android:scaleType">fitCenter</item>
     <item name="android:stateListAnimator">@animator/disabled_alpha</item>
   </style>
   <style name="VideoPreviewHolder">

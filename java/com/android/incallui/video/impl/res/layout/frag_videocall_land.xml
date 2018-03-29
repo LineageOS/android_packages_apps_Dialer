@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -79,7 +93,7 @@
     android:layout_alignRight="@+id/videocall_video_preview"
     android:layout_alignTop="@+id/videocall_video_preview"
     android:scaleType="center"
-    android:src="@drawable/quantum_ic_videocam_off_white_36"
+    android:src="@drawable/quantum_ic_videocam_off_vd_theme_24"
     android:visibility="gone"
     android:importantForAccessibility="no"
     tools:visibility="visible"/>
@@ -93,7 +107,8 @@
     android:background="@drawable/videocall_background_circle_white"
     android:contentDescription="@string/incall_content_description_muted"
     android:scaleType="center"
-    android:src="@drawable/quantum_ic_mic_off_black_24"
+    android:src="@drawable/quantum_ic_mic_off_vd_theme_24"
+    android:tint="@android:color/black"
     android:visibility="gone"
     tools:visibility="visible"/>
 
