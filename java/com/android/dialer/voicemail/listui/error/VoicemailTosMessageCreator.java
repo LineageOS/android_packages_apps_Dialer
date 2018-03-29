@@ -131,10 +131,23 @@ public class VoicemailTosMessageCreator {
                   public void onClick(View v) {
                     LogUtil.i(
                         "VoicemailTosMessageCreator.getPromoMessage", "declined transcription");
-                    VoicemailClient voicemailClient =
-                        VoicemailComponent.get(context).getVoicemailClient();
-                    voicemailClient.setVoicemailTranscriptionEnabled(
-                        context, status.getPhoneAccountHandle(), false);
+                    if (isVoicemailTranscriptionAvailable()) {
+                      VoicemailClient voicemailClient =
+                          VoicemailComponent.get(context).getVoicemailClient();
+                      voicemailClient.setVoicemailTranscriptionEnabled(
+                          context, status.getPhoneAccountHandle(), false);
+                      // Feature acknowledgement also means accepting TOS, otherwise after removing
+                      // the feature ToS, we'll end up showing the ToS
+                      // TODO(uabdullah): Consider separating the ToS acceptance and feature
+                      // acknowledgment.
+                      recordTosAcceptance();
+                      recordFeatureAcknowledgement();
+                      statusReader.refresh();
+                    } else {
+                      LogUtil.e(
+                          "VoicemailTosMessageCreator.getPromoMessage",
+                          "voicemail transcription not available");
+                    }
                   }
                 }),
             new Action(
