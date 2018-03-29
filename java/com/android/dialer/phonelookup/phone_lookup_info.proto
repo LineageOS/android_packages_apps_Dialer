@@ -145,11 +145,4 @@ message PhoneLookupInfo {
     optional BlockedState blocked_state = 1;
   }
   optional SystemBlockedNumberInfo system_blocked_number_info = 4;
-
-  // Message for the dialer fallback for blocked number. Used in M or when the
-  // migration to the system has not been completed.
-  message DialerBlockedNumberInfo {
-    optional BlockedState blocked_state = 1;
-  }
-  optional DialerBlockedNumberInfo dialer_blocked_number_info = 5;
 }
