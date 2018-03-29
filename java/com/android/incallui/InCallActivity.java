@@ -476,7 +476,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     if (!InCallPresenter.getInstance().isReadyForTearDown()) {
       updateTaskDescription();
-      InCallPresenter.getInstance().updateNotification();
     }
 
     // If there is a pending request to show or hide the dialpad, handle that now.
@@ -533,8 +532,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     if (dialpadFragment != null) {
       dialpadFragment.onDialerKeyUp(null);
     }
-
-    InCallPresenter.getInstance().updateNotification();
 
     InCallPresenter.getInstance().getPseudoScreenState().removeListener(this);
     Trace.endSection();

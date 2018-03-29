@@ -1050,14 +1050,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         "updateIsChangingConfigurations = " + isChangingConfigurations);
   }
 
-  void updateNotification() {
-    // We need to update the notification bar when we leave the UI because that
-    // could trigger it to show again.
-    if (statusBarNotifier != null) {
-      statusBarNotifier.updateNotification();
-    }
-  }
-
   /** Called when the activity goes in/out of the foreground. */
   public void onUiShowing(boolean showing) {
     if (proximitySensor != null) {
@@ -1316,11 +1308,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     //                        know that start-up is complete.
     //
     //          [ AND NOW YOU'RE IN THE CALL. voila! ]
-    //
-    // Our app is started using a fullScreen notification.  We need to do this whenever
-    // we get an incoming call. Depending on the current context of the device, either a
-    // incoming call HUN or the actual InCallActivity will be shown.
-    final boolean startIncomingCallSequence = (InCallState.INCOMING == newState);
 
     // A dialog to show on top of the InCallUI to select a PhoneAccount
     final boolean showAccountPicker = (InCallState.WAITING_FOR_ACCOUNT == newState);
@@ -1387,10 +1374,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     if (showCallUi || showAccountPicker) {
       LogUtil.i("InCallPresenter.startOrFinishUi", "Start in call UI");
       showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
-    } else if (startIncomingCallSequence) {
-      LogUtil.i("InCallPresenter.startOrFinishUi", "Start Full Screen in call UI");
-
-      statusBarNotifier.updateNotification();
     } else if (newState == InCallState.NO_CALLS) {
       // The new state is the no calls state.  Tear everything down.
       attemptFinishActivity();
