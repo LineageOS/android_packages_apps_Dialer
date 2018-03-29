@@ -28,42 +28,37 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.glidephotomanager.GlidePhotoManager;
+import com.android.dialer.widget.ContactPhotoView;
 import java.util.List;
 
 /**
  * {@link BottomSheetDialog} used to show a list of actions in a bottom sheet menu.
  *
- * <p>{@link #show(Context, HistoryItemBottomSheetHeaderInfo, List, GlidePhotoManager)} should be
- * used to create and display the menu. Modules are built using {@link HistoryItemActionModule} and
- * some defaults are provided by {@link IntentModule} and {@link DividerModule}.
+ * <p>{@link #show(Context, HistoryItemBottomSheetHeaderInfo, List)} should be used to create and
+ * display the menu. Modules are built using {@link HistoryItemActionModule} and some defaults are
+ * provided by {@link IntentModule} and {@link DividerModule}.
  */
 public class HistoryItemActionBottomSheet extends BottomSheetDialog implements OnClickListener {
 
   private final List<HistoryItemActionModule> modules;
   private final HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo;
-  private final GlidePhotoManager glidePhotoManager;
 
   private HistoryItemActionBottomSheet(
       Context context,
       HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo,
-      List<HistoryItemActionModule> modules,
-      GlidePhotoManager glidePhotoManager) {
+      List<HistoryItemActionModule> modules) {
     super(context);
     this.modules = modules;
     this.historyItemBottomSheetHeaderInfo = historyItemBottomSheetHeaderInfo;
-    this.glidePhotoManager = glidePhotoManager;
     setContentView(LayoutInflater.from(context).inflate(R.layout.sheet_layout, null));
   }
 
   public static HistoryItemActionBottomSheet show(
       Context context,
       HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo,
-      List<HistoryItemActionModule> modules,
-      GlidePhotoManager glidePhotoManager) {
+      List<HistoryItemActionModule> modules) {
     HistoryItemActionBottomSheet sheet =
-        new HistoryItemActionBottomSheet(
-            context, historyItemBottomSheetHeaderInfo, modules, glidePhotoManager);
+        new HistoryItemActionBottomSheet(context, historyItemBottomSheetHeaderInfo, modules);
     sheet.show();
     return sheet;
   }
@@ -87,10 +82,8 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     LayoutInflater inflater = LayoutInflater.from(getContext());
     View contactView = inflater.inflate(R.layout.contact_layout, container, false);
 
-    // TODO(zachh): The contact image should be badged with a video icon if it is for a video call.
-    glidePhotoManager.loadQuickContactBadge(
-        contactView.findViewById(R.id.quick_contact_photo),
-        historyItemBottomSheetHeaderInfo.getPhotoInfo());
+    ContactPhotoView contactPhotoView = contactView.findViewById(R.id.contact_photo_view);
+    contactPhotoView.setPhoto(historyItemBottomSheetHeaderInfo.getPhotoInfo());
 
     TextView primaryTextView = contactView.findViewById(R.id.primary_text);
     TextView secondaryTextView = contactView.findViewById(R.id.secondary_text);

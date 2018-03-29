@@ -18,7 +18,6 @@ package com.android.dialer.voicemail.listui.menu;
 
 import android.content.Context;
 import android.view.View;
-import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
@@ -27,12 +26,11 @@ public final class NewVoicemailMenu {
 
   /** Creates and returns the OnClickListener which opens the menu for the provided row. */
   public static View.OnClickListener createOnClickListener(
-      Context context, VoicemailEntry voicemailEntry, GlidePhotoManager glidePhotoManager) {
+      Context context, VoicemailEntry voicemailEntry) {
     return (view) ->
         HistoryItemActionBottomSheet.show(
             context,
             BottomSheetHeader.fromVoicemailEntry(voicemailEntry),
-            Modules.fromVoicemailEntry(context, voicemailEntry),
-            glidePhotoManager);
+            Modules.fromVoicemailEntry(context, voicemailEntry));
   }
 }
