@@ -20,7 +20,6 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
-    android:background="@drawable/overflow_menu_background"
     android:orientation="vertical">
   <com.android.incallui.rtt.impl.RttCheckableButton
       android:id="@+id/menu_mute"

@@ -85,15 +85,6 @@ public class RttChatFragment extends Fragment
   private ImageButton submitButton;
   private boolean isClearingInput;
 
-  private final OnScrollListener onScrollListener =
-      new OnScrollListener() {
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-          if (dy < 0) {
-            UiUtil.hideKeyboardFrom(getContext(), editText);
-          }
-        }
-      };
   private InCallScreenDelegate inCallScreenDelegate;
   private RttCallScreenDelegate rttCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
@@ -105,6 +96,8 @@ public class RttChatFragment extends Fragment
   private SecondaryInfo savedSecondaryInfo;
   private TextView statusBanner;
   private PrimaryInfo primaryInfo;
+  private boolean isUserScrolling;
+  private boolean shouldAutoScrolling;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -193,7 +186,27 @@ public class RttChatFragment extends Fragment
     recyclerView.setHasFixedSize(false);
     adapter = new RttChatAdapter(getContext(), this, savedInstanceState);
     recyclerView.setAdapter(adapter);
-    recyclerView.addOnScrollListener(onScrollListener);
+    recyclerView.addOnScrollListener(
+        new OnScrollListener() {
+          @Override
+          public void onScrollStateChanged(RecyclerView recyclerView, int i) {
+            if (i == RecyclerView.SCROLL_STATE_DRAGGING) {
+              isUserScrolling = true;
+            } else if (i == RecyclerView.SCROLL_STATE_IDLE) {
+              isUserScrolling = false;
+              // Auto scrolling for new messages should be resumed if it's scrolled to bottom.
+              shouldAutoScrolling = !recyclerView.canScrollVertically(1);
+            }
+          }
+
+          @Override
+          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (dy < 0 && isUserScrolling) {
+              UiUtil.hideKeyboardFrom(getContext(), editText);
+            }
+          }
+        });
+
     submitButton = view.findViewById(R.id.rtt_chat_submit_button);
     submitButton.setOnClickListener(
         v -> {
@@ -202,6 +215,9 @@ public class RttChatFragment extends Fragment
           editText.setText("");
           isClearingInput = false;
           rttCallScreenDelegate.onLocalMessage(Constants.BUBBLE_BREAKER);
+          // Auto scrolling for new messages should be resumed since user has submit current
+          // message.
+          shouldAutoScrolling = true;
         });
     submitButton.setEnabled(false);
     endCallButton = view.findViewById(R.id.rtt_end_call_button);
@@ -276,8 +292,21 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
-  public void newMessageAdded() {
-    recyclerView.smoothScrollToPosition(adapter.getItemCount());
+  public void onUpdateLocalMessage(int position) {
+    if (position < 0) {
+      return;
+    }
+    recyclerView.smoothScrollToPosition(position);
+  }
+
+  @Override
+  public void onUpdateRemoteMessage(int position) {
+    if (position < 0) {
+      return;
+    }
+    if (shouldAutoScrolling) {
+      recyclerView.smoothScrollToPosition(position);
+    }
   }
 
   @Override

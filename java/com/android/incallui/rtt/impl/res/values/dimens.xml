@@ -18,4 +18,5 @@
   <dimen name="rtt_message_margin_top">16dp</dimen>
   <dimen name="rtt_same_group_message_margin_top">2dp</dimen>
   <dimen name="rtt_overflow_menu_width">180dp</dimen>
+  <dimen name="rtt_overflow_menu_elevation">8dp</dimen>
 </resources>
