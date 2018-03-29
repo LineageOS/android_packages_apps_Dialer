@@ -108,6 +108,12 @@ public class VoicemailTosMessageCreator {
                   @Override
                   public void onClick(View v) {
                     LogUtil.i("VoicemailTosMessageCreator.getTosMessage", "accept clicked");
+                    if (isVoicemailTranscriptionAvailable()) {
+                      VoicemailComponent.get(context)
+                          .getVoicemailClient()
+                          .setVoicemailTranscriptionEnabled(
+                              context, status.getPhoneAccountHandle(), true);
+                    }
                     recordTosAcceptance();
                     // Accepting the TOS also acknowledges the latest features
                     recordFeatureAcknowledgement();
