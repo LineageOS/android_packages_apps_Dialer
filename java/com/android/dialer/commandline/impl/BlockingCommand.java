@@ -18,17 +18,25 @@ package com.android.dialer.commandline.impl;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.blocking.Blocking;
 import com.android.dialer.commandline.Arguments;
 import com.android.dialer.commandline.Command;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.phonelookup.PhoneLookupComponent;
+import com.android.dialer.phonelookup.PhoneLookupInfo;
+import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import javax.inject.Inject;
 
 /** Block or unblock a number. */
-public class Blocking implements Command {
+public class BlockingCommand implements Command {
 
   @NonNull
   @Override
@@ -46,7 +54,7 @@ public class Blocking implements Command {
   private final ListeningExecutorService executorService;
 
   @Inject
-  Blocking(
+  BlockingCommand(
       @ApplicationContext Context context,
       @BackgroundExecutor ListeningExecutorService executorService) {
     this.appContext = context;
@@ -55,42 +63,49 @@ public class Blocking implements Command {
 
   @Override
   public ListenableFuture<String> run(Arguments args) throws IllegalCommandLineArgumentException {
-    // AsyncQueryHandler must be created on a thread with looper.
-    // TODO(a bug): Use blocking version
-    FilteredNumberAsyncQueryHandler asyncQueryHandler =
-        new FilteredNumberAsyncQueryHandler(appContext);
-    return executorService.submit(() -> doInBackground(args, asyncQueryHandler));
-  }
-
-  private String doInBackground(Arguments args, FilteredNumberAsyncQueryHandler asyncQueryHandler) {
     if (args.getPositionals().isEmpty()) {
-      return getUsage();
+      return Futures.immediateFuture(getUsage());
     }
 
     String command = args.getPositionals().get(0);
 
     if ("block".equals(command)) {
       String number = args.getPositionals().get(1);
-      asyncQueryHandler.blockNumber((unused) -> {}, number, null);
-      return "blocked " + number;
+      return Futures.transform(
+          Blocking.block(appContext, executorService, number, null),
+          (unused) -> "blocked " + number,
+          MoreExecutors.directExecutor());
     }
 
     if ("unblock".equals(command)) {
       String number = args.getPositionals().get(1);
-      Integer id = asyncQueryHandler.getBlockedIdSynchronous(number, null);
-      if (id == null) {
-        return number + " is not blocked";
-      }
-      asyncQueryHandler.unblock((unusedRows, unusedValues) -> {}, id);
-      return "unblocked " + number;
+      return Futures.transform(
+          Blocking.unblock(appContext, executorService, number, null),
+          (unused) -> "unblocked " + number,
+          MoreExecutors.directExecutor());
     }
 
     if ("isblocked".equals(command)) {
       String number = args.getPositionals().get(1);
-      Integer id = asyncQueryHandler.getBlockedIdSynchronous(number, null);
-      return id == null ? "false" : "true";
+      ListenableFuture<DialerPhoneNumber> dialerPhoneNumberFuture =
+          executorService.submit(
+              () -> new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance()).parse(number, null));
+
+      ListenableFuture<PhoneLookupInfo> lookupFuture =
+          Futures.transformAsync(
+              dialerPhoneNumberFuture,
+              (dialerPhoneNumber) ->
+                  PhoneLookupComponent.get(appContext)
+                      .compositePhoneLookup()
+                      .lookup(dialerPhoneNumber),
+              executorService);
+
+      return Futures.transform(
+          lookupFuture,
+          (info) -> new PhoneLookupInfoConsolidator(info).isBlocked() ? "true" : "false",
+          MoreExecutors.directExecutor());
     }
 
-    return getUsage();
+    return Futures.immediateFuture(getUsage());
   }
 }

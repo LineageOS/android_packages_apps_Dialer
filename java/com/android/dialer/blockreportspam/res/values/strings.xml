@@ -60,4 +60,9 @@
   <!-- Label for checkbox in the Alert dialog to allow the user to report the number as spam as well.  [CHAR LIMIT=30] -->
   <string name="checkbox_report_as_spam_action">Report call as spam</string>
 
+  <!-- Toast if the user clicked the block button but it failed. [CHAR LIMIT=100] -->
+  <string name="block_number_failed_toast">Problem blocking this number</string>
+
+  <!-- Toast if the user clicked the unblock button but it failed. [CHAR LIMIT=100] -->
+  <string name="unblock_number_failed_toast">Problem unblocking this number</string>
 </resources>

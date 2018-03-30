@@ -41,6 +41,7 @@ import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
  * Fragment for confirming and enacting blocking/unblocking a number. Also invokes snackbar
  * providing undo functionality.
  */
+@Deprecated
 public class BlockNumberDialogFragment extends DialogFragment {
 
   private static final String BLOCK_DIALOG_FRAGMENT = "BlockNumberDialog";
