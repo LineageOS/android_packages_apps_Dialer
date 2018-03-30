@@ -89,6 +89,15 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
   }
 
   @Override
+  public void onStop() {
+    super.onStop();
+
+    if (recyclerView.getAdapter() != null) {
+      ((NewCallLogAdapter) recyclerView.getAdapter()).logMetrics(getContext());
+    }
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
     LogUtil.enterBlock("NewCallLogFragment.onPause");
