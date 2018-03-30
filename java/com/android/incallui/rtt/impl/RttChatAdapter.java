@@ -33,7 +33,9 @@ import java.util.List;
 public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolder> {
 
   interface MessageListener {
-    void newMessageAdded();
+    void onUpdateRemoteMessage(int position);
+
+    void onUpdateLocalMessage(int position);
   }
 
   private static final String KEY_MESSAGE_DATA = "key_message_data";
@@ -114,7 +116,7 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   void addLocalMessage(String message) {
     updateCurrentLocalMessage(message);
     if (messageListener != null) {
-      messageListener.newMessageAdded();
+      messageListener.onUpdateLocalMessage(lastIndexOfLocalMessage);
     }
   }
 
@@ -143,7 +145,7 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     }
     updateCurrentRemoteMessage(message);
     if (messageListener != null) {
-      messageListener.newMessageAdded();
+      messageListener.onUpdateRemoteMessage(RttChatMessage.getLastIndexRemoteMessage(rttMessages));
     }
   }
 
