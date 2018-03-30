@@ -42,7 +42,7 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
   }
 
   @WorkerThread
-  public static void markAllNewVoicemailsAsRead(final @NonNull Context context) {
+  public static void markAllNewVoicemailsAsOld(final @NonNull Context context) {
     ThreadUtil.postOnUiThread(
         () -> {
           new VoicemailQueryHandler(context.getContentResolver())
@@ -51,10 +51,10 @@ public class VoicemailQueryHandler extends AsyncQueryHandler {
   }
 
   @WorkerThread
-  public static void markSingleNewVoicemailAsRead(
+  public static void markSingleNewVoicemailAsOld(
       final @NonNull Context context, final Uri voicemailUri) {
     if (voicemailUri == null) {
-      LogUtil.e("VoicemailQueryHandler.markSingleNewVoicemailAsRead", "voicemail URI is null");
+      LogUtil.e("VoicemailQueryHandler.markSingleNewVoicemailAsOld", "voicemail URI is null");
       return;
     }
     ThreadUtil.postOnUiThread(
