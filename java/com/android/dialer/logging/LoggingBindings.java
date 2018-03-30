@@ -93,4 +93,7 @@ public interface LoggingBindings {
 
   /** Logs annotated call log metrics. */
   void logAnnotatedCallLogMetrics(int invalidNumbersInCallLog);
+
+  /** Logs annotated call log metrics. */
+  void logAnnotatedCallLogMetrics(int numberRowsThatDidPop, int numberRowsThatDidNotPop);
 }
