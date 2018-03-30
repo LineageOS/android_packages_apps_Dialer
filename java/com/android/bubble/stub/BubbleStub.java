@@ -40,6 +40,11 @@ public class BubbleStub implements Bubble {
   }
 
   @Override
+  public boolean isDismissed() {
+    return false;
+  }
+
+  @Override
   public void setBubbleInfo(@NonNull BubbleInfo bubbleInfo) {}
 
   @Override
