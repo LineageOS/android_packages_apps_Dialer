@@ -131,8 +131,11 @@
   <!-- String to be displayed to indicate in the call log that a call just now occurred. -->
   <string name="just_now">Just now</string>
 
-  <!-- Text to show in call log for a video call. [CHAR LIMIT=16] -->
-  <string name="new_call_log_video">Video</string>
+  <!-- Text to show in call log for a carrier video call. [CHAR LIMIT=30] -->
+  <string name="new_call_log_carrier_video">Carrier video</string>
+
+  <!-- Text to show in call log for a duo video call. [CHAR LIMIT=30] -->
+  <string name="new_call_log_duo_video">Duo video</string>
 
   <!-- String used to display calls from unknown numbers in the call log.  [CHAR LIMIT=30] -->
   <string name="new_call_log_unknown">Unknown</string>
