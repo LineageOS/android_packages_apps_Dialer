@@ -21,8 +21,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.annotation.Nullable;
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
+import android.widget.Toast;
+import com.android.dialer.blocking.Blocking;
+import com.android.dialer.blocking.Blocking.BlockingFailedException;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForBlockingNumber;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForReportingNotSpam;
@@ -31,15 +32,16 @@ import com.android.dialer.blockreportspam.BlockReportSpamDialogs.OnConfirmListen
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.OnSpamDialogClickListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.spam.SpamSettings;
-import com.google.auto.value.AutoValue;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
 
 /**
  * A {@link BroadcastReceiver} that shows an appropriate dialog upon receiving notifications from
@@ -106,8 +108,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
 
     Spam spam = SpamComponent.get(context).spam();
     SpamSettings spamSettings = SpamComponent.get(context).spamSettings();
-    FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler =
-        new FilteredNumberAsyncQueryHandler(context);
 
     // Set up the positive listener for the dialog.
     OnSpamDialogClickListener onSpamDialogClickListener =
@@ -132,12 +132,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
                 dialogInfo.getContactSource());
           }
 
-          filteredNumberAsyncQueryHandler.blockNumber(
-              unused ->
-                  Logger.get(context)
-                      .logImpression(DialerImpression.Type.USER_ACTION_BLOCKED_NUMBER),
-              dialogInfo.getNormalizedNumber(),
-              dialogInfo.getCountryIso());
+          blockNumber(context, dialogInfo);
         };
 
     // Create and show the dialog.
@@ -157,19 +152,11 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
         ProtoParsers.getTrusted(
             intent, EXTRA_DIALOG_INFO, BlockReportSpamDialogInfo.getDefaultInstance());
 
-    FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler =
-        new FilteredNumberAsyncQueryHandler(context);
-
     // Set up the positive listener for the dialog.
     OnConfirmListener onConfirmListener =
         () -> {
           LogUtil.i("ShowBlockReportSpamDialogReceiver.showDialogToBlockNumber", "block number");
-          filteredNumberAsyncQueryHandler.blockNumber(
-              unused ->
-                  Logger.get(context)
-                      .logImpression(DialerImpression.Type.USER_ACTION_BLOCKED_NUMBER),
-              dialogInfo.getNormalizedNumber(),
-              dialogInfo.getCountryIso());
+          blockNumber(context, dialogInfo);
         };
 
     // Create and show the dialog.
@@ -219,46 +206,12 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
         ProtoParsers.getTrusted(
             intent, EXTRA_DIALOG_INFO, BlockReportSpamDialogInfo.getDefaultInstance());
 
-    FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler =
-        new FilteredNumberAsyncQueryHandler(context);
-
     // Set up the positive listener for the dialog.
     OnConfirmListener onConfirmListener =
         () -> {
           LogUtil.i("ShowBlockReportSpamDialogReceiver.showDialogToUnblockNumber", "confirmed");
 
-          DialerExecutorComponent.get(context)
-              .dialerExecutorFactory()
-              .createNonUiTaskBuilder(
-                  new GetIdForBlockedNumberWorker(filteredNumberAsyncQueryHandler))
-              .onSuccess(
-                  idForBlockedNumber -> {
-                    LogUtil.i(
-                        "ShowBlockReportSpamDialogReceiver.showDialogToUnblockNumber",
-                        "ID for the blocked number retrieved");
-                    if (idForBlockedNumber == null) {
-                      throw new IllegalStateException("ID for a blocked number is null.");
-                    }
-
-                    LogUtil.i(
-                        "ShowBlockReportSpamDialogReceiver.showDialogToUnblockNumber",
-                        "unblocking number");
-                    filteredNumberAsyncQueryHandler.unblock(
-                        (rows, values) ->
-                            Logger.get(context)
-                                .logImpression(DialerImpression.Type.USER_ACTION_UNBLOCKED_NUMBER),
-                        idForBlockedNumber);
-                  })
-              .onFailure(
-                  throwable -> {
-                    throw new RuntimeException(throwable);
-                  })
-              .build()
-              .executeSerial(
-                  NumberInfo.newBuilder()
-                      .setNormalizedNumber(dialogInfo.getNormalizedNumber())
-                      .setCountryIso(dialogInfo.getCountryIso())
-                      .build());
+          unblockNumber(context, dialogInfo);
         };
 
     // Create & show the dialog.
@@ -267,46 +220,58 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
         .show(fragmentManager, BlockReportSpamDialogs.UNBLOCK_DIALOG_TAG);
   }
 
-  /** A {@link Worker} that retrieves the ID of a blocked number from the database. */
-  private static final class GetIdForBlockedNumberWorker implements Worker<NumberInfo, Integer> {
+  private static void blockNumber(Context context, BlockReportSpamDialogInfo dialogInfo) {
+    Logger.get(context).logImpression(Type.USER_ACTION_BLOCKED_NUMBER);
+    Futures.addCallback(
+        Blocking.block(
+            context,
+            DialerExecutorComponent.get(context).backgroundExecutor(),
+            dialogInfo.getNormalizedNumber(),
+            dialogInfo.getCountryIso()),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void unused) {
+            // Do nothing
+          }
 
-    private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
-
-    GetIdForBlockedNumberWorker(FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler) {
-      this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
-    }
-
-    @Nullable
-    @Override
-    public Integer doInBackground(NumberInfo input) throws Throwable {
-      LogUtil.enterBlock("GetIdForBlockedNumberWorker.doInBackground");
-
-      return filteredNumberAsyncQueryHandler.getBlockedIdSynchronous(
-          input.getNormalizedNumber(), input.getCountryIso());
-    }
+          @Override
+          public void onFailure(Throwable throwable) {
+            if (throwable instanceof BlockingFailedException) {
+              Logger.get(context).logImpression(Type.USER_ACTION_BLOCK_NUMBER_FAILED);
+              Toast.makeText(context, R.string.block_number_failed_toast, Toast.LENGTH_LONG).show();
+            } else {
+              throw new RuntimeException(throwable);
+            }
+          }
+        },
+        DialerExecutorComponent.get(context).uiExecutor());
   }
 
-  /**
-   * Contains information about a number and serves as the input to {@link
-   * GetIdForBlockedNumberWorker}.
-   */
-  @AutoValue
-  abstract static class NumberInfo {
-    static Builder newBuilder() {
-      return new AutoValue_ShowBlockReportSpamDialogReceiver_NumberInfo.Builder();
-    }
+  private static void unblockNumber(Context context, BlockReportSpamDialogInfo dialogInfo) {
+    Logger.get(context).logImpression(Type.USER_ACTION_UNBLOCKED_NUMBER);
+    Futures.addCallback(
+        Blocking.unblock(
+            context,
+            DialerExecutorComponent.get(context).backgroundExecutor(),
+            dialogInfo.getNormalizedNumber(),
+            dialogInfo.getCountryIso()),
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void unused) {
+            // Do nothing
+          }
 
-    abstract String getNormalizedNumber();
-
-    abstract String getCountryIso();
-
-    @AutoValue.Builder
-    abstract static class Builder {
-      abstract Builder setNormalizedNumber(String normalizedNumber);
-
-      abstract Builder setCountryIso(String countryIso);
-
-      abstract NumberInfo build();
-    }
+          @Override
+          public void onFailure(Throwable throwable) {
+            if (throwable instanceof BlockingFailedException) {
+              Logger.get(context).logImpression(Type.USER_ACTION_UNBLOCK_NUMBER_FAILED);
+              Toast.makeText(context, R.string.unblock_number_failed_toast, Toast.LENGTH_LONG)
+                  .show();
+            } else {
+              throw new RuntimeException(throwable);
+            }
+          }
+        },
+        DialerExecutorComponent.get(context).uiExecutor());
   }
 }
