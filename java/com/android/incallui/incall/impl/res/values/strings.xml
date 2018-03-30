@@ -20,6 +20,10 @@
      [CHAR LIMIT=12] -->
   <string name="incall_label_videocall">Video call</string>
 
+  <!-- Button shown during a phone call to upgrade to Real-time Text.
+     [CHAR LIMIT=12] -->
+  <string name="incall_label_rttcall">RTT</string>
+
   <!-- Button shown during a phone call to put the call on hold.
      [CHAR LIMIT=12] -->
   <string name="incall_label_hold">Hold</string>

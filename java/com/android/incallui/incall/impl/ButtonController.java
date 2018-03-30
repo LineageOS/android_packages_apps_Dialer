@@ -519,6 +519,24 @@ interface ButtonController {
     }
   }
 
+  class UpgradeToRttButtonController extends SimpleNonCheckableButtonController {
+
+    public UpgradeToRttButtonController(@NonNull InCallButtonUiDelegate delegate) {
+      super(
+          delegate,
+          InCallButtonIds.BUTTON_UPGRADE_TO_RTT,
+          0,
+          R.string.incall_label_rttcall,
+          R.drawable.quantum_ic_rtt_vd_theme_24);
+      Assert.isNotNull(delegate);
+    }
+
+    @Override
+    public void onClick(View view) {
+      delegate.changeToRttClicked();
+    }
+  }
+
   class ManageConferenceButtonController extends SimpleNonCheckableButtonController {
 
     private final InCallScreenDelegate inCallScreenDelegate;

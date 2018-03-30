@@ -988,7 +988,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   @TargetApi(28)
-  public boolean isRttCall() {
+  public boolean isActiveRttCall() {
     if (BuildCompat.isAtLeastP()) {
       return getTelecomCall().isRttActive();
     } else {
@@ -998,10 +998,39 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   @TargetApi(28)
   public RttCall getRttCall() {
-    if (!isRttCall()) {
+    if (!isActiveRttCall()) {
       return null;
     }
     return getTelecomCall().getRttCall();
+  }
+
+  @TargetApi(28)
+  public boolean canUpgradeToRttCall() {
+    PhoneAccount phoneAccount = getPhoneAccount();
+    if (phoneAccount == null) {
+      return false;
+    }
+    if (!phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_RTT)) {
+      return false;
+    }
+    if (isActiveRttCall()) {
+      return false;
+    }
+    if (isVideoCall()) {
+      return false;
+    }
+    if (isConferenceCall()) {
+      return false;
+    }
+    if (CallList.getInstance().hasActiveRttCall()) {
+      return false;
+    }
+    return true;
+  }
+
+  @TargetApi(28)
+  public void sendRttUpgradeRequest() {
+    getTelecomCall().sendRttRequest();
   }
 
   public boolean hasReceivedVideoUpgradeRequest() {
