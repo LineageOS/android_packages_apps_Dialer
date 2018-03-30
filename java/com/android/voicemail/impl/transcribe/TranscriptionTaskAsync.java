@@ -116,7 +116,9 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     // Generate the transcript id locally if configured to do so, or if voicemail donation is
     // available (because rating donating voicemails requires locally generated voicemail ids).
     if (configProvider.useClientGeneratedVoicemailIds()
-        || configProvider.isVoicemailDonationAvailable()) {
+        || VoicemailComponent.get(context)
+            .getVoicemailClient()
+            .isVoicemailDonationAvailable(context, phoneAccountHandle)) {
       // The server currently can't handle repeated transcription id's so if we add the Uri to the
       // fingerprint (which contains the voicemail id) which is different each time a voicemail is
       // downloaded.  If this becomes a problem then it should be possible to change the server
