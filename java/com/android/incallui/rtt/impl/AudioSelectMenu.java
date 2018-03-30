@@ -39,7 +39,7 @@ public class AudioSelectMenu extends PopupWindow {
       Context context,
       InCallButtonUiDelegate inCallButtonUiDelegate,
       OnButtonClickListener onButtonClickListener) {
-    super(context);
+    super(context, null, 0, R.style.OverflowMenu);
     this.context = context;
     this.inCallButtonUiDelegate = inCallButtonUiDelegate;
     this.onButtonClickListener = onButtonClickListener;
@@ -76,7 +76,6 @@ public class AudioSelectMenu extends PopupWindow {
     }
     item.setOnClickListener(
         (v) -> {
-          dismiss();
           inCallButtonUiDelegate.setAudioRoute(itemRoute);
         });
   }
