@@ -25,7 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
@@ -35,9 +34,9 @@ import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.time.Clock;
+import com.android.dialer.widget.ContactPhotoView;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import java.util.Locale;
@@ -47,10 +46,10 @@ import java.util.concurrent.ExecutorService;
 final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private final Context context;
+  private final ContactPhotoView contactPhotoView;
   private final TextView primaryTextView;
   private final TextView callCountTextView;
   private final TextView secondaryTextView;
-  private final QuickContactBadge quickContactBadge;
   private final ImageView callTypeIcon;
   private final ImageView hdIcon;
   private final ImageView wifiIcon;
@@ -62,21 +61,15 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final ExecutorService uiExecutorService;
 
-  private final GlidePhotoManager glidePhotoManager;
-
   private long currentRowId;
 
-  NewCallLogViewHolder(
-      View view,
-      Clock clock,
-      RealtimeRowProcessor realtimeRowProcessor,
-      GlidePhotoManager glidePhotoManager) {
+  NewCallLogViewHolder(View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor) {
     super(view);
     this.context = view.getContext();
+    contactPhotoView = view.findViewById(R.id.contact_photo_view);
     primaryTextView = view.findViewById(R.id.primary_text);
     callCountTextView = view.findViewById(R.id.call_count);
     secondaryTextView = view.findViewById(R.id.secondary_text);
-    quickContactBadge = view.findViewById(R.id.quick_contact_photo);
     callTypeIcon = view.findViewById(R.id.call_type_icon);
     hdIcon = view.findViewById(R.id.hd_icon);
     wifiIcon = view.findViewById(R.id.wifi_icon);
@@ -86,7 +79,6 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     this.clock = clock;
     this.realtimeRowProcessor = realtimeRowProcessor;
-    this.glidePhotoManager = glidePhotoManager;
     uiExecutorService = DialerExecutorComponent.get(context).uiExecutor();
   }
 
@@ -151,10 +143,10 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPhoto(CoalescedRow row) {
-    glidePhotoManager.loadQuickContactBadge(
-        quickContactBadge,
+    contactPhotoView.setPhoto(
         NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
             .setFormattedNumber(row.getFormattedNumber())
+            .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
             .setIsVoicemail(row.getIsVoicemailCall())
             .build());
   }
@@ -251,8 +243,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setOnClickListenerForMenuButon(CoalescedRow row) {
-    menuButton.setOnClickListener(
-        NewCallLogMenu.createOnClickListener(context, row, glidePhotoManager));
+    menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(context, row));
   }
 
   private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {

@@ -22,8 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
@@ -40,11 +38,9 @@ import android.view.View.OnClickListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
-import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -112,6 +108,12 @@ public class VoicemailTosMessageCreator {
                   @Override
                   public void onClick(View v) {
                     LogUtil.i("VoicemailTosMessageCreator.getTosMessage", "accept clicked");
+                    if (isVoicemailTranscriptionAvailable()) {
+                      VoicemailComponent.get(context)
+                          .getVoicemailClient()
+                          .setVoicemailTranscriptionEnabled(
+                              context, status.getPhoneAccountHandle(), true);
+                    }
                     recordTosAcceptance();
                     // Accepting the TOS also acknowledges the latest features
                     recordFeatureAcknowledgement();
@@ -129,19 +131,29 @@ public class VoicemailTosMessageCreator {
             getExistingUserTosTitle(),
             getExistingUserTosMessageText(),
             new Action(
-                context.getString(R.string.dialer_terms_and_conditions_existing_user_setings),
+                context.getString(R.string.dialer_terms_and_conditions_existing_user_decline),
                 new OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                    LogUtil.i("VoicemailTosMessageCreator.getPromoMessage", "open settings");
-                    Intent intent =
-                        new Intent(Intent.ACTION_VIEW)
-                            .setComponent(
-                                new ComponentName(context, Constants.get().getSettingsActivity()))
-                            .setData(
-                                Uri.fromParts(
-                                    "header", VoicemailSettingsFragment.class.getName(), null));
-                    context.startActivity(intent);
+                    LogUtil.i(
+                        "VoicemailTosMessageCreator.getPromoMessage", "declined transcription");
+                    if (isVoicemailTranscriptionAvailable()) {
+                      VoicemailClient voicemailClient =
+                          VoicemailComponent.get(context).getVoicemailClient();
+                      voicemailClient.setVoicemailTranscriptionEnabled(
+                          context, status.getPhoneAccountHandle(), false);
+                      // Feature acknowledgement also means accepting TOS, otherwise after removing
+                      // the feature ToS, we'll end up showing the ToS
+                      // TODO(uabdullah): Consider separating the ToS acceptance and feature
+                      // acknowledgment.
+                      recordTosAcceptance();
+                      recordFeatureAcknowledgement();
+                      statusReader.refresh();
+                    } else {
+                      LogUtil.e(
+                          "VoicemailTosMessageCreator.getPromoMessage",
+                          "voicemail transcription not available");
+                    }
                   }
                 }),
             new Action(
@@ -150,6 +162,12 @@ public class VoicemailTosMessageCreator {
                   @Override
                   public void onClick(View v) {
                     LogUtil.i("VoicemailTosMessageCreator.getPromoMessage", "acknowledge clicked");
+                    if (isVoicemailTranscriptionAvailable()) {
+                      VoicemailComponent.get(context)
+                          .getVoicemailClient()
+                          .setVoicemailTranscriptionEnabled(
+                              context, status.getPhoneAccountHandle(), true);
+                    }
                     // Feature acknowledgement also means accepting TOS
                     recordTosAcceptance();
                     recordFeatureAcknowledgement();
@@ -228,9 +246,9 @@ public class VoicemailTosMessageCreator {
   }
 
   private boolean isVoicemailTranscriptionAvailable() {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderBindings.get(context)
-            .getBoolean("voicemail_transcription_available", false);
+    return VoicemailComponent.get(context)
+        .getVoicemailClient()
+        .isVoicemailTranscriptionAvailable(context, status.getPhoneAccountHandle());
   }
 
   private void showDeclineTosDialog(final PhoneAccountHandle handle) {

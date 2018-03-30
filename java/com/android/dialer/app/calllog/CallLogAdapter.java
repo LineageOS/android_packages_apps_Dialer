@@ -682,7 +682,7 @@ public class CallLogAdapter extends GroupingListAdapter
       contactInfoCache.start();
     }
     contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-    isSpamEnabled = SpamComponent.get(activity).spam().isSpamEnabled();
+    isSpamEnabled = SpamComponent.get(activity).spamSettings().isSpamEnabled();
     getDuo().registerListener(this);
     notifyDataSetChanged();
   }
@@ -945,10 +945,8 @@ public class CallLogAdapter extends GroupingListAdapter
       Cursor cursor, int count, final CallLogListItemViewHolder views) {
     Assert.isMainThread();
     final String number = cursor.getString(CallLogQuery.NUMBER);
-    final String postDialDigits =
-        (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.POST_DIAL_DIGITS) : "";
-    final String viaNumber =
-        (VERSION.SDK_INT >= VERSION_CODES.N) ? cursor.getString(CallLogQuery.VIA_NUMBER) : "";
+    final String postDialDigits = cursor.getString(CallLogQuery.POST_DIAL_DIGITS);
+    final String viaNumber = cursor.getString(CallLogQuery.VIA_NUMBER);
     final int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(cursor);
     final int transcriptionState =

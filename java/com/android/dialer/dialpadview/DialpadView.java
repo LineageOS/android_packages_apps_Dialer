@@ -41,7 +41,7 @@ import android.widget.TextView;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.CompatUtils;
+import com.android.dialer.i18n.LocaleUtils;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -82,6 +82,7 @@ public class DialpadView extends LinearLayout {
   private final int translateDistance;
 
   private EditText digits;
+  private TextView digitsHint;
   private ImageButton delete;
   private View overflowMenuButton;
   private ViewGroup rateContainer;
@@ -134,6 +135,7 @@ public class DialpadView extends LinearLayout {
 
     setupKeypad();
     digits = (EditText) findViewById(R.id.digits);
+    digitsHint = findViewById(R.id.digits_hint);
     delete = (ImageButton) findViewById(R.id.deleteButton);
     overflowMenuButton = findViewById(R.id.dialpad_overflow);
     rateContainer = (ViewGroup) findViewById(R.id.rate_container);
@@ -232,7 +234,7 @@ public class DialpadView extends LinearLayout {
   }
 
   private NumberFormat getNumberFormat() {
-    Locale locale = CompatUtils.getLocale(getContext());
+    Locale locale = LocaleUtils.getLocale(getContext());
 
     // Return the Persian number format if the current language is Persian.
     return "fas".equals(locale.getISO3Language())
@@ -309,6 +311,10 @@ public class DialpadView extends LinearLayout {
 
   public EditText getDigits() {
     return digits;
+  }
+
+  public TextView getDigitsHint() {
+    return digitsHint;
   }
 
   public ImageButton getDeleteButton() {

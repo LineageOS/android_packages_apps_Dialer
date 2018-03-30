@@ -56,11 +56,9 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
   private final List<Fragment> fragments = new ArrayList<>();
   private final String[] tabTitles;
   private final boolean useNewSpeedDialTab;
-  private final boolean useNewContactsTab;
   private OldSpeedDialFragment oldSpeedDialFragment;
   private SpeedDialFragment speedDialFragment;
   private CallLogFragment callLogFragment;
-  private AllContactsFragment oldContactsFragment;
   private ContactsFragment contactsFragment;
   private CallLogFragment voicemailFragment;
 
@@ -71,8 +69,6 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
     super(fm);
     useNewSpeedDialTab =
         ConfigProviderBindings.get(context).getBoolean("enable_new_favorites_tab", false);
-    useNewContactsTab =
-        ConfigProviderBindings.get(context).getBoolean("enable_new_contacts_tab", true);
     this.tabTitles = tabTitles;
     hasActiveVoicemailProvider = hasVoicemailProvider;
     fragments.addAll(Collections.nCopies(TAB_COUNT_WITH_VOICEMAIL, null));
@@ -105,17 +101,10 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
         }
         return callLogFragment;
       case TAB_INDEX_ALL_CONTACTS:
-        if (useNewContactsTab) {
-          if (contactsFragment == null) {
-            contactsFragment = ContactsFragment.newInstance(Header.ADD_CONTACT);
-          }
-          return contactsFragment;
-        } else {
-          if (oldContactsFragment == null) {
-            oldContactsFragment = new AllContactsFragment();
-          }
-          return oldContactsFragment;
+        if (contactsFragment == null) {
+          contactsFragment = ContactsFragment.newInstance(Header.ADD_CONTACT);
         }
+        return contactsFragment;
       case TAB_INDEX_VOICEMAIL:
         if (voicemailFragment == null) {
           voicemailFragment = new VisualVoicemailCallLogFragment();
@@ -145,8 +134,6 @@ public class DialtactsPagerAdapter extends FragmentPagerAdapter {
       callLogFragment = (CallLogFragment) fragment;
     } else if (fragment instanceof ContactsFragment) {
       contactsFragment = (ContactsFragment) fragment;
-    } else if (fragment instanceof AllContactsFragment) {
-      oldContactsFragment = (AllContactsFragment) fragment;
     } else if (fragment instanceof CallLogFragment && position == TAB_INDEX_VOICEMAIL) {
       voicemailFragment = (CallLogFragment) fragment;
       LogUtil.v("ViewPagerAdapter.instantiateItem", voicemailFragment.toString());

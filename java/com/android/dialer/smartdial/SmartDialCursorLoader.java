@@ -20,7 +20,7 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import com.android.contacts.common.list.PhoneNumberListAdapter.PhoneQuery;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.Database;
 import com.android.dialer.database.DialerDatabaseHelper;
@@ -28,6 +28,8 @@ import com.android.dialer.database.DialerDatabaseHelper.ContactNumber;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /** Implements a Loader<Cursor> class to asynchronously load SmartDial search results. */
 public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
@@ -177,6 +179,62 @@ public class SmartDialCursorLoader extends AsyncTaskLoader<Cursor> {
     showEmptyListForNullQuery = show;
     if (nameMatcher != null) {
       nameMatcher.setShouldMatchEmptyQuery(!show);
+    }
+  }
+
+  /** Moved from contacts/common, contains all of the projections needed for Smart Dial queries. */
+  public static class PhoneQuery {
+
+    public static final String[] PROJECTION_PRIMARY_INTERNAL =
+        new String[] {
+          Phone._ID, // 0
+          Phone.TYPE, // 1
+          Phone.LABEL, // 2
+          Phone.NUMBER, // 3
+          Phone.CONTACT_ID, // 4
+          Phone.LOOKUP_KEY, // 5
+          Phone.PHOTO_ID, // 6
+          Phone.DISPLAY_NAME_PRIMARY, // 7
+          Phone.PHOTO_THUMBNAIL_URI, // 8
+        };
+
+    public static final String[] PROJECTION_PRIMARY;
+    public static final String[] PROJECTION_ALTERNATIVE_INTERNAL =
+        new String[] {
+          Phone._ID, // 0
+          Phone.TYPE, // 1
+          Phone.LABEL, // 2
+          Phone.NUMBER, // 3
+          Phone.CONTACT_ID, // 4
+          Phone.LOOKUP_KEY, // 5
+          Phone.PHOTO_ID, // 6
+          Phone.DISPLAY_NAME_ALTERNATIVE, // 7
+          Phone.PHOTO_THUMBNAIL_URI, // 8
+        };
+    public static final String[] PROJECTION_ALTERNATIVE;
+    public static final int PHONE_ID = 0;
+    public static final int PHONE_TYPE = 1;
+    public static final int PHONE_LABEL = 2;
+    public static final int PHONE_NUMBER = 3;
+    public static final int CONTACT_ID = 4;
+    public static final int LOOKUP_KEY = 5;
+    public static final int PHOTO_ID = 6;
+    public static final int DISPLAY_NAME = 7;
+    public static final int PHOTO_URI = 8;
+    public static final int CARRIER_PRESENCE = 9;
+
+    static {
+      final List<String> projectionList =
+          new ArrayList<>(Arrays.asList(PROJECTION_PRIMARY_INTERNAL));
+      projectionList.add(Phone.CARRIER_PRESENCE); // 9
+      PROJECTION_PRIMARY = projectionList.toArray(new String[projectionList.size()]);
+    }
+
+    static {
+      final List<String> projectionList =
+          new ArrayList<>(Arrays.asList(PROJECTION_ALTERNATIVE_INTERNAL));
+      projectionList.add(Phone.CARRIER_PRESENCE); // 9
+      PROJECTION_ALTERNATIVE = projectionList.toArray(new String[projectionList.size()]);
     }
   }
 }

@@ -450,8 +450,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-javax-annotation-api \
 	dialer-javax-inject
 
-$(info $(LOCAL_STATIC_JAVA_LIBRARIES))
-
 LOCAL_JAVA_LANGUAGE_VERSION := 1.8
 
 include $(BUILD_HOST_JAVA_LIBRARY)

@@ -16,11 +16,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   coreApp="true"
   package="com.google.android.google_stub_dialer"
-  android:versionCode="250000"
-  android:versionName="19.0">
+  android:versionCode="260000"
+  android:versionName="20.0">
 
   <uses-sdk
-    android:minSdkVersion="23"
+    android:minSdkVersion="24"
     android:targetSdkVersion="27"/>
 
   <uses-permission android:name="android.permission.CALL_PHONE"/>

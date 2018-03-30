@@ -18,6 +18,7 @@ package com.android.dialer.binary.basecomponent;
 
 import com.android.bubble.BubbleComponent;
 import com.android.dialer.calllog.CallLogComponent;
+import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.ui.CallLogUiComponent;
 import com.android.dialer.commandline.CommandLineComponent;
@@ -27,7 +28,6 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.feedback.FeedbackComponent;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
-import com.android.dialer.main.MainComponent;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.database.PhoneLookupDatabaseComponent;
@@ -51,6 +51,7 @@ public interface BaseDialerRootComponent
     extends BubbleComponent.HasComponent,
         CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
+        CallLogConfigComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
         ConfigProviderComponent.HasComponent,
@@ -60,7 +61,6 @@ public interface BaseDialerRootComponent
         EnrichedCallComponent.HasComponent,
         FeedbackComponent.HasComponent,
         GlidePhotoManagerComponent.HasComponent,
-        MainComponent.HasComponent,
         MapsComponent.HasComponent,
         MetricsComponent.HasComponent,
         PhoneLookupComponent.HasComponent,

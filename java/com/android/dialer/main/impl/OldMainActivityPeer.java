@@ -21,9 +21,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,12 +39,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -64,12 +68,13 @@ import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
+import com.android.dialer.calllog.config.CallLogConfigComponent;
+import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -82,6 +87,7 @@ import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -109,7 +115,6 @@ import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import com.android.voicemail.VoicemailComponent;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -130,6 +135,23 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   // TODO(calderwoodra): change to AppCompatActivity once new speed dial ships
   private final TransactionSafeActivity activity;
+
+  private final BroadcastReceiver disableNewCallLogReceiver =
+      new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+          if (bottomNavTabListener == null) {
+            return;
+          }
+          /*
+           * Remove the NewCallLogFragment if it is currently attached. If this is not done, user
+           * interaction with the fragment could cause call log framework state to be unexpectedly
+           * written. For example scrolling could cause the AnnotatedCallLog to be read (which would
+           * trigger database creation).
+           */
+          bottomNavTabListener.disableNewCallLogFragment();
+        }
+      };
 
   // Contacts
   private MainOnContactSelectedListener onContactSelectedListener;
@@ -160,6 +182,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private LastTabController lastTabController;
 
   private BottomNavBar bottomNav;
+  private MainBottomNavBarBottomNavTabListener bottomNavTabListener;
   private View snackbarContainer;
   private UiListener<String> getLastOutgoingCallListener;
 
@@ -216,8 +239,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     activity.setSupportActionBar(activity.findViewById(R.id.toolbar));
 
     bottomNav = activity.findViewById(R.id.bottom_nav_bar);
-    MainBottomNavBarBottomNavTabListener bottomNavTabListener =
-        new MainBottomNavBarBottomNavTabListener(activity, activity.getFragmentManager(), fab);
+    bottomNavTabListener =
+        new MainBottomNavBarBottomNavTabListener(
+            activity, activity.getFragmentManager(), activity.getSupportFragmentManager(), fab);
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
     // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
     boolean showVoicemailTab = canVoicemailTabBeShown(activity);
@@ -246,6 +270,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     oldSpeedDialFragmentHost =
         new MainOldSpeedDialFragmentHost(
             activity,
+            activity.findViewById(R.id.root_layout),
             bottomNav,
             activity.findViewById(R.id.contact_tile_drag_shadow_overlay),
             activity.findViewById(R.id.remove_view),
@@ -419,7 +444,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     // Start the thread that updates the smart dial database if the activity is recreated with a
     // language change.
     boolean forceUpdate =
-        !CompatUtils.getLocale(activity).getISO3Language().equals(savedLanguageCode);
+        !LocaleUtils.getLocale(activity).getISO3Language().equals(savedLanguageCode);
     Database.get(activity).getDatabaseHelper(activity).startSmartDialUpdateThread(forceUpdate);
     showPostCallPrompt();
 
@@ -429,6 +454,22 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     } else {
       bottomNav.setVisibility(View.VISIBLE);
     }
+
+    /*
+     * While the activity is running, listen for the call log framework being disabled. If this is
+     * not done, user interaction with the fragment could cause call log framework state to be
+     * unexpectedly written. For example scrolling could cause the AnnotatedCallLog to be read
+     * (which would trigger database creation).
+     */
+    LocalBroadcastManager.getInstance(activity)
+        .registerReceiver(disableNewCallLogReceiver, new IntentFilter("disableNewCallLogFragment"));
+
+    /*
+     * Similar to above, if the new call log is being shown and then the activity is paused, when
+     * the user returns we need to remove the NewCallLogFragment if the framework has been disabled
+     * in the meantime.
+     */
+    bottomNavTabListener.ensureCorrectCallLogShown();
 
     // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
     ThreadUtil.postDelayedOnUiThread(
@@ -447,6 +488,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   @Override
   public void onActivityPause() {
     searchController.onActivityPause();
+    LocalBroadcastManager.getInstance(activity).unregisterReceiver(disableNewCallLogReceiver);
   }
 
   @Override
@@ -476,7 +518,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   @Override
   public void onSaveInstanceState(Bundle bundle) {
-    bundle.putString(KEY_SAVED_LANGUAGE_CODE, CompatUtils.getLocale(activity).getISO3Language());
+    bundle.putString(KEY_SAVED_LANGUAGE_CODE, LocaleUtils.getLocale(activity).getISO3Language());
     bundle.putInt(KEY_CURRENT_TAB, bottomNav.getSelectedTab());
     searchController.onSaveInstanceState(bundle);
   }
@@ -1024,34 +1066,42 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       implements OldSpeedDialFragment.HostInterface, OnDragDropListener {
 
     private final Context context;
+    private final View rootLayout;
     private final BottomNavBar bottomNavBar;
     private final ImageView dragShadowOverlay;
     private final RemoveView removeView;
+    private final View removeViewContent;
     private final View searchViewContainer;
     private final MainToolbar toolbar;
 
-    // TODO(calderwoodra): Use this for drag and drop
-    @SuppressWarnings("unused")
-    private DragDropController dragDropController;
-
     MainOldSpeedDialFragmentHost(
         Context context,
+        View rootLayout,
         BottomNavBar bottomNavBar,
         ImageView dragShadowOverlay,
         RemoveView removeView,
         View searchViewContainer,
         MainToolbar toolbar) {
       this.context = context;
+      this.rootLayout = rootLayout;
       this.bottomNavBar = bottomNavBar;
       this.dragShadowOverlay = dragShadowOverlay;
       this.removeView = removeView;
       this.searchViewContainer = searchViewContainer;
       this.toolbar = toolbar;
+      removeViewContent = removeView.findViewById(R.id.remove_view_content);
     }
 
     @Override
     public void setDragDropController(DragDropController dragDropController) {
       removeView.setDragDropController(dragDropController);
+      rootLayout.setOnDragListener(
+          (v, event) -> {
+            if (event.getAction() == DragEvent.ACTION_DRAG_LOCATION) {
+              dragDropController.handleDragHovered(v, (int) event.getX(), (int) event.getY());
+            }
+            return true;
+          });
     }
 
     @Override
@@ -1088,9 +1138,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     private void showRemoveView(boolean show) {
       if (show) {
-        AnimUtils.crossFadeViews(removeView, searchViewContainer, 300);
+        AnimUtils.crossFadeViews(removeViewContent, searchViewContainer, 300);
       } else {
-        AnimUtils.crossFadeViews(searchViewContainer, removeView, 300);
+        AnimUtils.crossFadeViews(searchViewContainer, removeViewContent, 300);
       }
     }
   }
@@ -1112,14 +1162,19 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     private final AppCompatActivity activity;
     private final FragmentManager fragmentManager;
+    private final android.support.v4.app.FragmentManager supportFragmentManager;
     private final FloatingActionButton fab;
 
     @TabIndex private int selectedTab = -1;
 
     private MainBottomNavBarBottomNavTabListener(
-        AppCompatActivity activity, FragmentManager fragmentManager, FloatingActionButton fab) {
+        AppCompatActivity activity,
+        FragmentManager fragmentManager,
+        android.support.v4.app.FragmentManager supportFragmentManager,
+        FloatingActionButton fab) {
       this.activity = activity;
       this.fragmentManager = fragmentManager;
+      this.supportFragmentManager = supportFragmentManager;
       this.fab = fab;
     }
 
@@ -1144,9 +1199,44 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       }
       Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_CALL_LOG, activity);
       selectedTab = TabIndex.CALL_LOG;
-      Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
-      showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
+
+      if (CallLogConfigComponent.get(activity).callLogConfig().isNewCallLogFragmentEnabled()) {
+        android.support.v4.app.Fragment supportFragment =
+            supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+        showSupportFragment(
+            supportFragment == null ? new NewCallLogFragment() : supportFragment, CALL_LOG_TAG);
+      } else {
+        Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
+        showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
+      }
       fab.show();
+    }
+
+    void disableNewCallLogFragment() {
+      LogUtil.i("MainBottomNavBarBottomNavTabListener.disableNewCallLogFragment", "disabled");
+      android.support.v4.app.Fragment supportFragment =
+          supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      if (supportFragment != null) {
+        supportFragmentManager.beginTransaction().remove(supportFragment).commit();
+        // If the NewCallLogFragment was showing, immediately show the old call log fragment
+        // instead.
+        if (selectedTab == TabIndex.CALL_LOG) {
+          LogUtil.i(
+              "MainBottomNavBarBottomNavTabListener.disableNewCallLogFragment", "showing old");
+          Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
+          showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
+        }
+      }
+    }
+
+    void ensureCorrectCallLogShown() {
+      android.support.v4.app.Fragment supportFragment =
+          supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      if (supportFragment != null
+          && !CallLogConfigComponent.get(activity).callLogConfig().isNewCallLogFragmentEnabled()) {
+        LogUtil.i("MainBottomNavBarBottomNavTabListener.ensureCorrectCallLogShown", "disabling");
+        disableNewCallLogFragment();
+      }
     }
 
     @Override
@@ -1183,8 +1273,14 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       fragment.onVisible();
     }
 
+    private void showFragment(@NonNull Fragment fragment, String tag) {
+      showFragment(fragment, null, tag);
+    }
+
     /**
      * Shows the passed in fragment and hides all of the others in one transaction.
+     *
+     * <p>Exactly one of fragment or supportFragment should be provided.
      *
      * <p>Executes all fragment shows/hides in one transaction with no conflicting transactions
      * (like showing and hiding the same fragment in the same transaction). See a bug.
@@ -1192,25 +1288,50 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
      * <p>Special care should be taken to avoid calling this method several times in a short window
      * as it can lead to fragments overlapping.
      */
-    private void showFragment(@NonNull Fragment fragment, String tag) {
+    private void showFragment(
+        @Nullable Fragment fragment,
+        @Nullable android.support.v4.app.Fragment supportFragment,
+        String tag) {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.showFragment");
       Fragment speedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-      Fragment callLog = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      Fragment oldCallLog = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
       Fragment contacts = fragmentManager.findFragmentByTag(CONTACTS_TAG);
       Fragment voicemail = fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
 
       FragmentTransaction transaction = fragmentManager.beginTransaction();
       boolean fragmentShown = showIfEqualElseHide(transaction, fragment, speedDial);
-      fragmentShown |= showIfEqualElseHide(transaction, fragment, callLog);
+      fragmentShown |= showIfEqualElseHide(transaction, fragment, oldCallLog);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, contacts);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, voicemail);
 
-      if (!fragmentShown) {
+      if (!fragmentShown && fragment != null) {
         LogUtil.i(
             "MainBottomNavBarBottomNavTabListener.showFragment", "Not added yet: " + fragment);
         transaction.add(R.id.fragment_container, fragment, tag);
       }
       transaction.commit();
+
+      // Handle support fragments.
+      // TODO(calderwoodra): Handle other new fragments.
+      android.support.v4.app.Fragment newCallLog =
+          supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+
+      android.support.v4.app.FragmentTransaction supportTransaction =
+          supportFragmentManager.beginTransaction();
+      boolean supportFragmentShown =
+          showIfEqualElseHideSupport(supportTransaction, supportFragment, newCallLog);
+      if (!supportFragmentShown && supportFragment != null) {
+        LogUtil.i(
+            "MainBottomNavBarBottomNavTabListener.showFragment",
+            "Not added yet: " + supportFragment);
+        supportTransaction.add(R.id.fragment_container, supportFragment, tag);
+      }
+      supportTransaction.commit();
+    }
+
+    private void showSupportFragment(
+        @NonNull android.support.v4.app.Fragment supportFragment, String tag) {
+      showFragment(null, supportFragment, tag);
     }
 
     /**
@@ -1221,7 +1342,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private boolean showIfEqualElseHide(
         FragmentTransaction transaction, Fragment fragment1, Fragment fragment2) {
       boolean shown = false;
-      if (Objects.equals(fragment1, fragment2)) {
+      if (fragment1 != null && fragment1.equals(fragment2)) {
         transaction.show(fragment1);
         shown = true;
       } else if (fragment2 != null) {
@@ -1230,6 +1351,25 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
           ((VisualVoicemailCallLogFragment) fragment2).onNotVisible();
         }
         transaction.hide(fragment2);
+      }
+      return shown;
+    }
+
+    /**
+     * @param supportFragment1 will be shown if equal to {@code fragment2}
+     * @param supportFragment2 will be hidden if unequal to {@code fragment1}
+     * @return {@code true} if {@code fragment1} was shown
+     */
+    private boolean showIfEqualElseHideSupport(
+        android.support.v4.app.FragmentTransaction supportTransaction,
+        android.support.v4.app.Fragment supportFragment1,
+        android.support.v4.app.Fragment supportFragment2) {
+      boolean shown = false;
+      if (supportFragment1 != null && supportFragment1.equals(supportFragment2)) {
+        supportTransaction.show(supportFragment1);
+        shown = true;
+      } else if (supportFragment2 != null) {
+        supportTransaction.hide(supportFragment2);
       }
       return shown;
     }

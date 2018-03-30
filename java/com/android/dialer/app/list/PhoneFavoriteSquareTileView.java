@@ -25,14 +25,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.app.R;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.widget.BidiTextView;
 
 /** Displays the contact's picture overlaid with their name and number type in a tile. */
 public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
-
-  private static final String TAG = PhoneFavoriteSquareTileView.class.getSimpleName();
 
   private final float heightToWidthRatio;
 
@@ -50,11 +48,12 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
-    final TextView nameView = (TextView) findViewById(R.id.contact_tile_name);
+    BidiTextView nameView = findViewById(R.id.contact_tile_name);
     nameView.setElegantTextHeight(false);
-    final TextView phoneTypeView = (TextView) findViewById(R.id.contact_tile_phone_type);
+
+    TextView phoneTypeView = findViewById(R.id.contact_tile_phone_type);
     phoneTypeView.setElegantTextHeight(false);
-    secondaryButton = (ImageButton) findViewById(R.id.contact_tile_secondary_button);
+    secondaryButton = findViewById(R.id.contact_tile_secondary_button);
   }
 
   @Override
@@ -64,21 +63,12 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
   }
 
   private void launchQuickContact() {
-    if (CompatUtils.hasPrioritizedMimeType()) {
-      QuickContact.showQuickContact(
-          getContext(),
-          PhoneFavoriteSquareTileView.this,
-          getLookupUri(),
-          null,
-          Phone.CONTENT_ITEM_TYPE);
-    } else {
-      QuickContact.showQuickContact(
-          getContext(),
-          PhoneFavoriteSquareTileView.this,
-          getLookupUri(),
-          QuickContact.MODE_LARGE,
-          null);
-    }
+    QuickContact.showQuickContact(
+        getContext(),
+        PhoneFavoriteSquareTileView.this,
+        getLookupUri(),
+        null,
+        Phone.CONTENT_ITEM_TYPE);
   }
 
   @Override

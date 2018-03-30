@@ -25,7 +25,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import java.lang.reflect.InvocationTargetException;
@@ -36,6 +35,8 @@ public class TelephonyManagerCompat {
   // TODO(maxwelb): Use public API for these constants when available
   public static final String EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE =
       "android.telephony.event.EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE";
+  public static final String EVENT_HANDOVER_VIDEO_FROM_LTE_TO_WIFI =
+      "android.telephony.event.EVENT_HANDOVER_VIDEO_FROM_LTE_TO_WIFI";
   public static final String EVENT_HANDOVER_TO_WIFI_FAILED =
       "android.telephony.event.EVENT_HANDOVER_TO_WIFI_FAILED";
   public static final String EVENT_CALL_REMOTELY_HELD = "android.telecom.event.CALL_REMOTELY_HELD";
@@ -133,9 +134,6 @@ public class TelephonyManagerCompat {
   @Nullable
   public static Uri getVoicemailRingtoneUri(
       TelephonyManager telephonyManager, PhoneAccountHandle accountHandle) {
-    if (VERSION.SDK_INT < VERSION_CODES.N) {
-      return null;
-    }
     return telephonyManager.getVoicemailRingtoneUri(accountHandle);
   }
 
@@ -149,8 +147,7 @@ public class TelephonyManagerCompat {
    */
   public static boolean isVoicemailVibrationEnabled(
       TelephonyManager telephonyManager, PhoneAccountHandle accountHandle) {
-    return VERSION.SDK_INT < VERSION_CODES.N
-        || telephonyManager.isVoicemailVibrationEnabled(accountHandle);
+    return telephonyManager.isVoicemailVibrationEnabled(accountHandle);
   }
 
   /**
@@ -159,9 +156,6 @@ public class TelephonyManagerCompat {
    */
   public static void setVisualVoicemailEnabled(
       TelephonyManager telephonyManager, PhoneAccountHandle handle, boolean enabled) {
-    if (VERSION.SDK_INT < VERSION_CODES.N_MR1) {
-      Assert.fail("setVisualVoicemailEnabled called on pre-NMR1");
-    }
     try {
       TelephonyManager.class
           .getMethod("setVisualVoicemailEnabled", PhoneAccountHandle.class, boolean.class)
@@ -177,9 +171,6 @@ public class TelephonyManagerCompat {
    */
   public static boolean isVisualVoicemailEnabled(
       TelephonyManager telephonyManager, PhoneAccountHandle handle) {
-    if (VERSION.SDK_INT < VERSION_CODES.N_MR1) {
-      Assert.fail("isVisualVoicemailEnabled called on pre-NMR1");
-    }
     try {
       return (boolean)
           TelephonyManager.class

@@ -15,18 +15,24 @@
  */
 package com.android.voicemail.impl.settings;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.provider.CallLog;
+import android.provider.CallLog.Calls;
+import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.database.Selection;
+import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;
 import com.android.voicemail.impl.VisualVoicemailPreferences;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.sync.VvmAccountManager;
-import com.android.voicemail.impl.utils.VoicemailDatabaseUtil;
 
 /** Save whether or not a particular account is enabled in shared to be retrieved later. */
 public class VisualVoicemailSettingsUtil {
@@ -88,6 +94,28 @@ public class VisualVoicemailSettingsUtil {
         .edit()
         .putBoolean(TRANSCRIBE_VOICEMAILS_KEY, isEnabled)
         .apply();
+
+    if (!isEnabled) {
+      VvmLog.i(
+          "VisualVoicemailSettingsUtil.setVoicemailTranscriptionEnabled",
+          "clear all Google transcribed voicemail.");
+      DialerExecutorComponent.get(context)
+          .dialerExecutorFactory()
+          .createNonUiTaskBuilder(new ClearGoogleTranscribedVoicemailTranscriptionWorker(context))
+          .onSuccess(
+              (result) ->
+                  VvmLog.i(
+                      "VisualVoicemailSettingsUtil.setVoicemailTranscriptionEnabled",
+                      "voicemail transciptions cleared successfully"))
+          .onFailure(
+              (throwable) ->
+                  VvmLog.e(
+                      "VisualVoicemailSettingsUtil.setVoicemailTranscriptionEnabled",
+                      "unable to clear Google transcribed voicemails",
+                      throwable))
+          .build()
+          .executeParallel(null);
+    }
   }
 
   public static void setVoicemailDonationEnabled(
@@ -104,6 +132,7 @@ public class VisualVoicemailSettingsUtil {
 
   public static boolean isEnabled(Context context, PhoneAccountHandle phoneAccount) {
     if (phoneAccount == null) {
+      LogUtil.i("VisualVoicemailSettingsUtil.isEnabled", "phone account is null");
       return false;
     }
 
@@ -153,6 +182,7 @@ public class VisualVoicemailSettingsUtil {
     return prefs.contains(IS_ENABLED_KEY);
   }
 
+  /** Delete all the voicemails whose source_package field matches this package */
   private static class VoicemailDeleteWorker implements Worker<Void, Void> {
     private final Context context;
 
@@ -162,8 +192,53 @@ public class VisualVoicemailSettingsUtil {
 
     @Override
     public Void doInBackground(Void unused) {
-      int deleted = VoicemailDatabaseUtil.deleteAll(context);
+      int deleted =
+          context
+              .getContentResolver()
+              .delete(Voicemails.buildSourceUri(context.getPackageName()), null, null);
+
       VvmLog.i("VisualVoicemailSettingsUtil.doInBackground", "deleted " + deleted + " voicemails");
+      return null;
+    }
+  }
+
+  /**
+   * Clears all the voicemail transcripts in the call log whose source_package field matches this
+   * package
+   */
+  private static class ClearGoogleTranscribedVoicemailTranscriptionWorker
+      implements Worker<Void, Void> {
+    private final Context context;
+
+    ClearGoogleTranscribedVoicemailTranscriptionWorker(Context context) {
+      this.context = context;
+    }
+
+    @Override
+    public Void doInBackground(Void unused) {
+      ContentValues contentValues = new ContentValues();
+      contentValues.putNull(Voicemails.TRANSCRIPTION);
+      contentValues.put(
+          VoicemailCompat.TRANSCRIPTION_STATE, VoicemailCompat.TRANSCRIPTION_NOT_STARTED);
+
+      Selection selection =
+          Selection.builder()
+              .and(Selection.column(CallLog.Calls.TYPE).is("=", Calls.VOICEMAIL_TYPE))
+              .and(Selection.column(Voicemails.SOURCE_PACKAGE).is("=", context.getPackageName()))
+              .build();
+
+      int cleared =
+          context
+              .getContentResolver()
+              .update(
+                  Calls.CONTENT_URI_WITH_VOICEMAIL,
+                  contentValues,
+                  selection.getSelection(),
+                  selection.getSelectionArgs());
+
+      VvmLog.i(
+          "VisualVoicemailSettingsUtil.doInBackground",
+          "cleared " + cleared + " voicemail transcription");
       return null;
     }
   }

@@ -46,7 +46,6 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -54,6 +53,7 @@ import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.postcall.PostCall;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallDetailsListener;
@@ -478,6 +478,7 @@ public class CallCardPresenter
                   .setSessionModificationState(primary.getVideoTech().getSessionModificationState())
                   .setDisconnectCause(primary.getDisconnectCause())
                   .setConnectionLabel(getConnectionLabel())
+                  .setSimSuggestionReason(getSimSuggestionReason())
                   .setConnectionIcon(getCallStateIcon())
                   .setGatewayNumber(getGatewayNumber())
                   .setCallSubject(shouldShowCallSubject(primary) ? primary.getCallSubject() : null)
@@ -766,12 +767,11 @@ public class CallCardPresenter
               .setNumber(number)
               .setName(primary.updateNameIfRestricted(name))
               .setNameIsNumber(nameIsNumber)
-              .setLabel(
+              .setLocation(
                   shouldShowLocationAsLabel(nameIsNumber, primaryContactInfo.shouldShowLocation)
                       ? primaryContactInfo.location
                       : null)
-              .setLocation(
-                  isChildNumberShown || isCallSubjectShown ? null : primaryContactInfo.label)
+              .setLabel(isChildNumberShown || isCallSubjectShown ? null : primaryContactInfo.label)
               .setPhoto(primaryContactInfo.photo)
               .setPhotoType(primaryContactInfo.photoType)
               .setIsSipCall(primaryContactInfo.isSipCall)
@@ -835,7 +835,7 @@ public class CallCardPresenter
       LogUtil.i("CallCardPresenter.getLocationFragment", "low battery.");
       return false;
     }
-    if (ActivityCompat.isInMultiWindowMode(inCallScreen.getInCallScreenFragment().getActivity())) {
+    if (inCallScreen.getInCallScreenFragment().getActivity().isInMultiWindowMode()) {
       LogUtil.i("CallCardPresenter.getLocationFragment", "in multi-window mode");
       return false;
     }
@@ -986,6 +986,21 @@ public class CallCardPresenter
       }
     }
     return primary.getCallProviderLabel();
+  }
+
+  @Nullable
+  private SuggestionProvider.Reason getSimSuggestionReason() {
+    String value =
+        primary.getIntentExtras().getString(SuggestionProvider.EXTRA_SIM_SUGGESTION_REASON);
+    if (value == null) {
+      return null;
+    }
+    try {
+      return SuggestionProvider.Reason.valueOf(value);
+    } catch (IllegalArgumentException e) {
+      LogUtil.e("CallCardPresenter.getConnectionLabel", "unknown reason " + value);
+      return null;
+    }
   }
 
   private Drawable getCallStateIcon() {

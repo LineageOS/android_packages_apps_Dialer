@@ -159,6 +159,11 @@ public class CallingAccountSelector implements PreCallAction {
                   LogUtil.i(
                       "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
                   builder.setPhoneAccountHandle(result.getSuggestion().get().phoneAccountHandle);
+                  builder
+                      .getInCallUiIntentExtras()
+                      .putString(
+                          SuggestionProvider.EXTRA_SIM_SUGGESTION_REASON,
+                          result.getSuggestion().get().reason.name());
                   pendingAction.finish();
                   return;
                 }

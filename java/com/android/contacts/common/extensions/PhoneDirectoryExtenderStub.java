@@ -17,17 +17,9 @@ package com.android.contacts.common.extensions;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import com.android.contacts.common.list.DirectoryPartition;
-import java.util.Collections;
-import java.util.List;
 
 /** No-op implementation for phone directory extender. */
 class PhoneDirectoryExtenderStub implements PhoneDirectoryExtender {
-
-  @Override
-  public List<DirectoryPartition> getExtendedDirectories(Context context) {
-    return Collections.emptyList();
-  }
 
   @Override
   public boolean isEnabled(Context context) {

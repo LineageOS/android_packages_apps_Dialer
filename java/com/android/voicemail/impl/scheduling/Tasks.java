@@ -18,6 +18,7 @@ package com.android.voicemail.impl.scheduling;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import com.android.voicemail.impl.VvmLog;
@@ -29,16 +30,30 @@ final class Tasks {
 
   static final String EXTRA_CLASS_NAME = "extra_class_name";
 
+  /** The task cannot be created. */
+  static final class TaskCreationException extends Exception {
+    TaskCreationException(Throwable throwable) {
+      super(throwable);
+    }
+  }
+
   /**
    * Create a task from a bundle. The bundle is created either with {@link #toBundle(Task)} or
    * {@link #createIntent(Context, Class)} from the target {@link Task}
    */
   @NonNull
-  public static Task createTask(Context context, Bundle extras) {
+  public static Task createTask(Context context, Bundle extras) throws TaskCreationException {
     // The extra contains custom parcelables which cannot be unmarshalled by the framework class
     // loader.
     extras.setClassLoader(context.getClassLoader());
-    String className = extras.getString(EXTRA_CLASS_NAME);
+    String className;
+    try {
+      className = extras.getString(EXTRA_CLASS_NAME);
+    } catch (BadParcelableException e) {
+      // BadParcelableException:Parcelable protocol requires that the class implements Parcelable
+      // This happens when the task is submitted before an update, and can no longer be unparceled.
+      throw new TaskCreationException(e);
+    }
     VvmLog.i("Task.createTask", "create task:" + className);
     if (className == null) {
       throw new IllegalArgumentException("EXTRA_CLASS_NAME expected");

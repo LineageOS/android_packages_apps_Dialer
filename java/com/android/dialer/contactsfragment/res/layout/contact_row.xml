@@ -41,7 +41,7 @@
         android:layout_height="@dimen/photo_size"
         android:clickable="false"/>
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/contact_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

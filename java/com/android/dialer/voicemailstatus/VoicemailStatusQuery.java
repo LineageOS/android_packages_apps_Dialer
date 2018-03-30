@@ -51,28 +51,24 @@ public class VoicemailStatusQuery {
   @RequiresApi(VERSION_CODES.N_MR1)
   public static final int SOURCE_TYPE_INDEX = 10;
 
-  private static final String[] PROJECTION_M =
+  @RequiresApi(VERSION_CODES.N)
+  private static final String[] PROJECTION_N =
       new String[] {
         Status.SOURCE_PACKAGE, // 0
         Status.SETTINGS_URI, // 1
         Status.VOICEMAIL_ACCESS_URI, // 2
         Status.CONFIGURATION_STATE, // 3
         Status.DATA_CHANNEL_STATE, // 4
-        Status.NOTIFICATION_CHANNEL_STATE // 5
+        Status.NOTIFICATION_CHANNEL_STATE, // 5
+        Status.QUOTA_OCCUPIED, // 6
+        Status.QUOTA_TOTAL // 7
       };
-
-  @RequiresApi(VERSION_CODES.N)
-  private static final String[] PROJECTION_N;
 
   @RequiresApi(VERSION_CODES.N_MR1)
   private static final String[] PROJECTION_NMR1;
 
   static {
-    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_M));
-    projectionList.add(Status.QUOTA_OCCUPIED); // 6
-    projectionList.add(Status.QUOTA_TOTAL); // 7
-    PROJECTION_N = projectionList.toArray(new String[projectionList.size()]);
-
+    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_N));
     projectionList.add(Status.PHONE_ACCOUNT_COMPONENT_NAME); // 8
     projectionList.add(Status.PHONE_ACCOUNT_ID); // 9
     projectionList.add(Status.SOURCE_TYPE); // 10
@@ -80,12 +76,6 @@ public class VoicemailStatusQuery {
   }
 
   public static String[] getProjection() {
-    if (VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
-      return PROJECTION_NMR1;
-    }
-    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-      return PROJECTION_N;
-    }
-    return PROJECTION_M;
+    return VERSION.SDK_INT >= VERSION_CODES.N_MR1 ? PROJECTION_NMR1 : PROJECTION_N;
   }
 }

@@ -24,7 +24,6 @@ import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.rtt.impl.RttCheckableButton.OnCheckedChangeListener;
 import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo;
-import com.android.incallui.speakerbuttonlogic.SpeakerButtonInfo.IconSize;
 
 /** Overflow menu for RTT call. */
 public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListener {
@@ -43,7 +42,7 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
       Context context,
       InCallButtonUiDelegate inCallButtonUiDelegate,
       InCallScreenDelegate inCallScreenDelegate) {
-    super(context);
+    super(context, null, 0, R.style.OverflowMenu);
     this.inCallButtonUiDelegate = inCallButtonUiDelegate;
     this.inCallScreenDelegate = inCallScreenDelegate;
     View view = View.inflate(context, R.layout.overflow_menu, null);
@@ -68,7 +67,6 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
           if (isSwitchToSecondaryButtonEnabled) {
             this.inCallScreenDelegate.onSecondaryInfoClicked();
           }
-          dismiss();
         });
   }
 
@@ -81,7 +79,6 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
     } else if (button == dialpadButton) {
       inCallButtonUiDelegate.showDialpadClicked(isChecked);
     }
-    dismiss();
   }
 
   void setMuteButtonChecked(boolean isChecked) {
@@ -89,7 +86,7 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
   }
 
   void setAudioState(CallAudioState audioState) {
-    SpeakerButtonInfo info = new SpeakerButtonInfo(audioState, IconSize.SIZE_24_DP);
+    SpeakerButtonInfo info = new SpeakerButtonInfo(audioState);
     if (info.checkable) {
       speakerButton.setChecked(info.isChecked);
       speakerButton.setOnClickListener(null);

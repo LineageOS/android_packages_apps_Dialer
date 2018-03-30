@@ -16,13 +16,16 @@
 
 package com.android.dialer.configprovider;
 
+import com.android.dialer.storage.StorageModule;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 /** Dagger module providing {@link ConfigProvider} based on shared preferences. */
-@Module
+@Module(includes = StorageModule.class)
 public abstract class SharedPrefConfigProviderModule {
+
+  private SharedPrefConfigProviderModule() {}
 
   @Binds
   @Singleton

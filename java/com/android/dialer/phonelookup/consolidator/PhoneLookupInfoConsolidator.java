@@ -278,10 +278,7 @@ public final class PhoneLookupInfoConsolidator {
           .getBlockedState()
           .equals(BlockedState.BLOCKED);
     }
-    return phoneLookupInfo
-        .getDialerBlockedNumberInfo()
-        .getBlockedState()
-        .equals(BlockedState.BLOCKED);
+    return false;
   }
 
   /**

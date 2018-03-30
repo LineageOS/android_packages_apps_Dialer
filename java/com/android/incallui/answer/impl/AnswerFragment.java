@@ -53,7 +53,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.MathUtil;
-import com.android.dialer.compat.ActivityCompat;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -175,7 +174,7 @@ public class AnswerFragment extends Fragment
     },
 
     ANSWER_VIDEO_AS_AUDIO(
-        R.drawable.quantum_ic_videocam_off_white_24,
+        R.drawable.quantum_ic_videocam_off_vd_theme_24,
         R.string.a11y_description_incoming_call_answer_video_as_audio,
         R.string.a11y_incoming_call_answer_video_as_audio,
         R.string.call_incoming_swipe_to_answer_video_as_audio) {
@@ -411,7 +410,7 @@ public class AnswerFragment extends Fragment
       LogUtil.i("AnswerFragment.setTextResponses", "no text responses, hiding secondary button");
       this.textResponses = null;
       secondaryButton.setVisibility(View.INVISIBLE);
-    } else if (ActivityCompat.isInMultiWindowMode(getActivity())) {
+    } else if (getActivity().isInMultiWindowMode()) {
       LogUtil.i("AnswerFragment.setTextResponses", "in multiwindow, hiding secondary button");
       this.textResponses = null;
       secondaryButton.setVisibility(View.INVISIBLE);
@@ -731,7 +730,7 @@ public class AnswerFragment extends Fragment
     updateImportanceBadgeVisibility();
 
     contactGridManager = new ContactGridManager(view, null, 0, false /* showAnonymousAvatar */);
-    boolean isInMultiWindowMode = ActivityCompat.isInMultiWindowMode(getActivity());
+    boolean isInMultiWindowMode = getActivity().isInMultiWindowMode();
     contactGridManager.onMultiWindowModeChanged(isInMultiWindowMode);
 
     Fragment answerMethod =

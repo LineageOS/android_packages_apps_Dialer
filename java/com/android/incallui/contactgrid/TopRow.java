@@ -166,7 +166,22 @@ public class TopRow {
 
   private static CharSequence getLabelForDialing(Context context, PrimaryCallState state) {
     if (!TextUtils.isEmpty(state.connectionLabel()) && !state.isWifi()) {
-      return context.getString(R.string.incall_calling_via_template, state.connectionLabel());
+      CharSequence label = getCallingViaLabel(context, state);
+
+      if (state.isAssistedDialed() && state.assistedDialingExtras() != null) {
+        LogUtil.i("TopRow.getLabelForDialing", "using assisted dialing with via label.");
+        String countryCode =
+            String.valueOf(state.assistedDialingExtras().transformedNumberCountryCallingCode());
+        label =
+            TextUtils.concat(
+                label,
+                " • ",
+                context.getString(
+                    R.string.incall_connecting_assited_dialed_component,
+                    countryCode,
+                    state.assistedDialingExtras().userHomeCountryCode()));
+      }
+      return label;
     } else {
       if (state.isVideoCall()) {
         if (state.isWifi()) {
@@ -187,6 +202,22 @@ public class TopRow {
       }
       return context.getString(R.string.incall_connecting);
     }
+  }
+
+  private static CharSequence getCallingViaLabel(Context context, PrimaryCallState state) {
+    if (state.simSuggestionReason() != null) {
+      switch (state.simSuggestionReason()) {
+        case FREQUENT:
+          return context.getString(
+              R.string.incall_calling_on_recent_choice_template, state.connectionLabel());
+        case INTRA_CARRIER:
+          return context.getString(
+              R.string.incall_calling_on_same_carrier_template, state.connectionLabel());
+        default:
+          break;
+      }
+    }
+    return context.getString(R.string.incall_calling_via_template, state.connectionLabel());
   }
 
   private static CharSequence getConnectionLabel(PrimaryCallState state) {

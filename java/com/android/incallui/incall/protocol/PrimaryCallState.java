@@ -23,6 +23,7 @@ import android.telecom.DisconnectCause;
 import android.text.TextUtils;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.common.Assert;
+import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.videotech.utils.SessionModificationState;
@@ -58,6 +59,9 @@ public abstract class PrimaryCallState {
 
   @Nullable
   public abstract String connectionLabel();
+
+  @Nullable
+  public abstract SuggestionProvider.Reason simSuggestionReason();
 
   @Nullable
   public abstract Drawable connectionIcon();
@@ -140,6 +144,8 @@ public abstract class PrimaryCallState {
     public abstract Builder setDisconnectCause(DisconnectCause disconnectCause);
 
     public abstract Builder setConnectionLabel(String connectionLabel);
+
+    public abstract Builder setSimSuggestionReason(SuggestionProvider.Reason reason);
 
     public abstract Builder setConnectionIcon(Drawable connectionIcon);
 

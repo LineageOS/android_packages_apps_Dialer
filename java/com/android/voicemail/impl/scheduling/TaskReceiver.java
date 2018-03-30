@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import com.android.voicemail.impl.VvmLog;
+import com.android.voicemail.impl.scheduling.Tasks.TaskCreationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +70,12 @@ public class TaskReceiver extends BroadcastReceiver {
         deferredBroadcasts.add(intent);
         return;
       }
-      Task task = Tasks.createTask(context.getApplicationContext(), intent.getExtras());
-      taskExecutor.addTask(task);
+      try {
+        Task task = Tasks.createTask(context.getApplicationContext(), intent.getExtras());
+        taskExecutor.addTask(task);
+      } catch (TaskCreationException e) {
+        VvmLog.e(TAG, "cannot create task", e);
+      }
     } else {
       VvmLog.i(TAG, "scheduling new job");
       List<Bundle> taskList = new ArrayList<>();

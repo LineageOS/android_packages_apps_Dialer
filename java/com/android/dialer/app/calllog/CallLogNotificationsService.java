@@ -150,12 +150,12 @@ public class CallLogNotificationsService extends IntentService {
     LogUtil.i("CallLogNotificationsService.onHandleIntent", "action: " + action);
     switch (action) {
       case ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD:
-        VoicemailQueryHandler.markAllNewVoicemailsAsRead(this);
+        VoicemailQueryHandler.markAllNewVoicemailsAsOld(this);
         VisualVoicemailNotifier.cancelAllVoicemailNotifications(this);
         break;
       case ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD:
         Uri voicemailUri = intent.getData();
-        VoicemailQueryHandler.markSingleNewVoicemailAsRead(this, voicemailUri);
+        VoicemailQueryHandler.markSingleNewVoicemailAsOld(this, voicemailUri);
         VisualVoicemailNotifier.cancelSingleVoicemailNotification(this, voicemailUri);
         break;
       case ACTION_LEGACY_VOICEMAIL_DISMISSED:

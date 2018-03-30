@@ -19,10 +19,9 @@ package com.android.incallui.rtt.impl;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import com.android.dialer.common.Assert;
 import com.android.incallui.rtt.protocol.Constants;
 import com.google.common.base.Splitter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,13 +43,17 @@ final class RttChatMessage implements Parcelable {
     isFinished = true;
   }
 
+  void unfinish() {
+    isFinished = false;
+  }
+
   public void append(String text) {
     for (int i = 0; i < text.length(); i++) {
       char c = text.charAt(i);
-      if (c != '\b') {
-        content.append(c);
-      } else if (content.length() > 0) {
+      if (c == '\b' && content.length() > 0 && content.charAt(content.length() - 1) != '\b') {
         content.deleteCharAt(content.length() - 1);
+      } else {
+        content.append(c);
       }
     }
   }
@@ -87,39 +90,92 @@ final class RttChatMessage implements Parcelable {
     return modify.toString();
   }
 
-  /** Convert remote input text into an array of {@code RttChatMessage}. */
-  static List<RttChatMessage> getRemoteRttChatMessage(
-      @Nullable RttChatMessage currentMessage, @NonNull String text) {
+  /** Update list of {@code RttChatMessage} based on given remote text. */
+  static void updateRemoteRttChatMessage(List<RttChatMessage> messageList, @NonNull String text) {
+    Assert.isNotNull(messageList);
     Iterator<String> splitText = SPLITTER.split(text).iterator();
-    List<RttChatMessage> messageList = new ArrayList<>();
-
-    String firstMessageContent = splitText.next();
-    RttChatMessage firstMessage = currentMessage;
-    if (firstMessage == null) {
-      firstMessage = new RttChatMessage();
-      firstMessage.isRemote = true;
-    }
-    firstMessage.append(firstMessageContent);
-    if (splitText.hasNext() || text.endsWith(Constants.BUBBLE_BREAKER)) {
-      firstMessage.finish();
-    }
-    messageList.add(firstMessage);
 
     while (splitText.hasNext()) {
       String singleMessageContent = splitText.next();
-      if (singleMessageContent.isEmpty()) {
-        continue;
+      RttChatMessage message;
+      int index = getLastIndexUnfinishedRemoteMessage(messageList);
+      if (index < 0) {
+        message = new RttChatMessage();
+        message.append(singleMessageContent);
+        message.isRemote = true;
+        if (splitText.hasNext()) {
+          message.finish();
+        }
+        if (message.content.length() != 0) {
+          messageList.add(message);
+        }
+      } else {
+        message = messageList.get(index);
+        message.append(singleMessageContent);
+        if (splitText.hasNext()) {
+          message.finish();
+        }
+        if (message.content.length() == 0) {
+          messageList.remove(index);
+        }
       }
-      RttChatMessage message = new RttChatMessage();
-      message.append(singleMessageContent);
-      message.isRemote = true;
-      if (splitText.hasNext()) {
-        message.finish();
+      StringBuilder content = message.content;
+      // Delete previous messages.
+      while (content.length() > 0 && content.charAt(0) == '\b') {
+        messageList.remove(message);
+        content.delete(0, 1);
+        int previous = getLastIndexRemoteMessage(messageList);
+        // There are more backspaces than existing characters.
+        if (previous < 0) {
+          while (content.length() > 0 && content.charAt(0) == '\b') {
+            content.deleteCharAt(0);
+          }
+          // Add message if there are still characters after backspaces.
+          if (content.length() > 0) {
+            message = new RttChatMessage();
+            message.append(content.toString());
+            message.isRemote = true;
+            if (splitText.hasNext()) {
+              message.finish();
+            }
+            messageList.add(message);
+          }
+          break;
+        }
+        message = messageList.get(previous);
+        message.unfinish();
+        message.append(content.toString());
+        content = message.content;
       }
-      messageList.add(message);
     }
+    if (text.endsWith(Constants.BUBBLE_BREAKER)) {
+      int lastIndexRemoteMessage = getLastIndexRemoteMessage(messageList);
+      messageList.get(lastIndexRemoteMessage).finish();
+    }
+  }
 
-    return messageList;
+  private static int getLastIndexUnfinishedRemoteMessage(List<RttChatMessage> messageList) {
+    int i = messageList.size() - 1;
+    while (i >= 0 && (!messageList.get(i).isRemote || messageList.get(i).isFinished)) {
+      i--;
+    }
+    return i;
+  }
+
+  static int getLastIndexRemoteMessage(List<RttChatMessage> messageList) {
+    int i = messageList.size() - 1;
+    while (i >= 0 && !messageList.get(i).isRemote) {
+      i--;
+    }
+    return i;
+  }
+
+  static int getLastIndexLocalMessage(List<RttChatMessage> messageList) {
+    int i = messageList.size() - 1;
+    while (i >= 0 && messageList.get(i).isRemote) {
+      i--;
+    }
+    return i;
   }
 
   @Override

@@ -21,14 +21,13 @@
     android:layout_height="wrap_content"
     android:minHeight="72dp">
 
-  <QuickContactBadge
-      android:id="@+id/quick_contact_photo"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      android:layout_centerVertical="true"
-      android:focusable="true"/>
+  <com.android.dialer.widget.ContactPhotoView
+      android:id="@+id/contact_photo_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
+      android:layout_centerVertical="true"/>
 
   <!-- The frame layout is necessary to avoid clipping the icons and ellipsize the text when the
        content is too wide to fit.
@@ -37,7 +36,7 @@
       android:id="@+id/primary_row"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_toEndOf="@+id/quick_contact_photo"
+      android:layout_toEndOf="@+id/contact_photo_view"
       android:layout_toStartOf="@+id/menu_button">
 
     <LinearLayout
@@ -98,7 +97,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/primary_row"
-      android:layout_toEndOf="@+id/quick_contact_photo"
+      android:layout_toEndOf="@+id/contact_photo_view"
       android:orientation="horizontal">
 
     <ImageView
@@ -124,7 +123,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/secondary_row"
-      android:layout_toEndOf="@+id/quick_contact_photo"
+      android:layout_toEndOf="@+id/contact_photo_view"
       android:ellipsize="end"
       android:singleLine="true"
       android:visibility="gone"/>

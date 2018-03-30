@@ -87,4 +87,7 @@ public interface LoggingBindings {
 
   /** Logs successful People Api lookup result */
   void logSuccessfulPeopleApiLookupReport(long latency, int httpResponseCode);
+
+  /** Logs a call auto-blocked in call screening. */
+  void logAutoBlockedCall(String phoneNumber);
 }

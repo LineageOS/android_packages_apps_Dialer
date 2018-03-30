@@ -30,7 +30,6 @@ import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.ColorInt;
-import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
@@ -102,11 +101,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     this.annotatedCallLogDatabaseHelper = annotatedCallLogDatabaseHelper;
   }
 
-  @MainThread
   @Override
   public void registerContentObservers() {
-    Assert.isMainThread();
-
     LogUtil.enterBlock("SystemCallLogDataSource.registerContentObservers");
 
     if (!PermissionsUtil.hasCallLogReadPermissions(appContext)) {
@@ -256,7 +252,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     }
   }
 
-  @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
+  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   private void handleInsertsAndUpdates(
       Context appContext, CallLogMutations mutations, Set<Long> existingAnnotatedCallLogIds) {
     long previousTimestampProcessed = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
@@ -271,7 +267,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
             .query(
                 Calls.CONTENT_URI_WITH_VOICEMAIL,
                 getProjection(),
-                // TODO(a bug): LAST_MODIFIED not available on M
                 Calls.LAST_MODIFIED + " > ? AND " + Voicemails.DELETED + " = 0",
                 new String[] {String.valueOf(previousTimestampProcessed)},
                 Calls.LAST_MODIFIED + " DESC LIMIT 1000")) {
@@ -399,7 +394,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       new String[] {
         Calls._ID,
         Calls.DATE,
-        Calls.LAST_MODIFIED, // TODO(a bug): Not available in M
+        Calls.LAST_MODIFIED,
         Calls.NUMBER,
         Calls.NUMBER_PRESENTATION,
         Calls.TYPE,
@@ -414,7 +409,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         Calls.PHONE_ACCOUNT_COMPONENT_NAME,
         Calls.PHONE_ACCOUNT_ID,
         Calls.FEATURES,
-        Calls.POST_DIAL_DIGITS // TODO(a bug): Not available in M
+        Calls.POST_DIAL_DIGITS
       };
 
   @RequiresApi(VERSION_CODES.O)
@@ -481,7 +476,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     }
   }
 
-  @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
+  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   private static Set<Long> getAnnotatedCallLogIds(Context appContext) {
     ArraySet<Long> ids = new ArraySet<>();
 
@@ -510,7 +505,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     return ids;
   }
 
-  @TargetApi(Build.VERSION_CODES.M) // Uses try-with-resources
+  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   private static Set<Long> getIdsFromSystemCallLogThatMatch(
       Context appContext, Set<Long> matchingIds) {
     ArraySet<Long> ids = new ArraySet<>();

@@ -47,6 +47,7 @@ import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
+import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.assisteddialing.ConcreteCreator;
@@ -142,6 +143,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private int state = State.INVALID;
   private DisconnectCause disconnectCause;
 
+  private boolean hasShownLteToWiFiHandoverToast;
   private boolean hasShownWiFiToLteHandoverToast;
   private boolean doNotShowDialogForHandoffToWifiFailure;
 
@@ -309,6 +311,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
             case TelephonyManagerCompat.EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE:
               notifyWiFiToLteHandover();
               break;
+            case TelephonyManagerCompat.EVENT_HANDOVER_VIDEO_FROM_LTE_TO_WIFI:
+              onLteToWifiHandover();
+              break;
             case TelephonyManagerCompat.EVENT_HANDOVER_TO_WIFI_FAILED:
               notifyHandoverToWifiFailed();
               break;
@@ -446,6 +451,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   public void removeCannedTextResponsesLoadedListener(CannedTextResponsesLoadedListener listener) {
     Assert.isMainThread();
     cannedTextResponsesLoadedListeners.remove(listener);
+  }
+
+  private void onLteToWifiHandover() {
+    LogUtil.enterBlock("DialerCall.onLteToWifiHandover");
+    if (hasShownLteToWiFiHandoverToast) {
+      return;
+    }
+
+    Toast.makeText(context, R.string.video_call_lte_to_wifi_handover_toast, Toast.LENGTH_LONG)
+        .show();
+    hasShownLteToWiFiHandoverToast = true;
   }
 
   public void notifyWiFiToLteHandover() {
@@ -1018,13 +1034,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    * <p>An external call is one which does not exist locally for the {@link
    * android.telecom.ConnectionService} it is associated with.
    *
-   * <p>External calls are only supported in N and higher.
-   *
    * @return {@code true} if the call is an external call, {@code false} otherwise.
    */
-  public boolean isExternalCall() {
-    return VERSION.SDK_INT >= VERSION_CODES.N
-        && hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
+  boolean isExternalCall() {
+    return hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL);
   }
 
   /**

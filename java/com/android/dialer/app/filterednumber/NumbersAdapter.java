@@ -27,7 +27,6 @@ import android.widget.QuickContactBadge;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import com.android.dialer.app.R;
-import com.android.dialer.compat.CompatUtils;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.dialer.lettertile.LetterTileDrawable;
@@ -63,9 +62,7 @@ public class NumbersAdapter extends SimpleCursorAdapter {
     final QuickContactBadge quickContactBadge =
         (QuickContactBadge) view.findViewById(R.id.quick_contact_photo);
     quickContactBadge.setOverlay(null);
-    if (CompatUtils.hasPrioritizedMimeType()) {
-      quickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
-    }
+    quickContactBadge.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
 
     ContactInfo info = contactInfoHelper.lookupNumber(number, countryIso);
     if (info == null) {

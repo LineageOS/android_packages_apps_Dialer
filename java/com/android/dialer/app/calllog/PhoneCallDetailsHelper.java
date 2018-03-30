@@ -356,6 +356,9 @@ public class PhoneCallDetailsHelper
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick(final DialogInterface dialog, final int button) {
+            VoicemailComponent.get(context)
+                .getVoicemailClient()
+                .setVoicemailDonationEnabled(context, details.accountHandle, false);
             dialog.cancel();
             recordPromoShown(context);
             ratingView.setVisibility(View.GONE);

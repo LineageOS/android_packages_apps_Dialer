@@ -85,15 +85,6 @@ public class RttChatFragment extends Fragment
   private ImageButton submitButton;
   private boolean isClearingInput;
 
-  private final OnScrollListener onScrollListener =
-      new OnScrollListener() {
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-          if (dy < 0) {
-            UiUtil.hideKeyboardFrom(getContext(), editText);
-          }
-        }
-      };
   private InCallScreenDelegate inCallScreenDelegate;
   private RttCallScreenDelegate rttCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
@@ -103,6 +94,10 @@ public class RttChatFragment extends Fragment
   private boolean isTimerStarted;
   private RttOverflowMenu overflowMenu;
   private SecondaryInfo savedSecondaryInfo;
+  private TextView statusBanner;
+  private PrimaryInfo primaryInfo;
+  private boolean isUserScrolling;
+  private boolean shouldAutoScrolling;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -164,6 +159,26 @@ public class RttChatFragment extends Fragment
     editText = view.findViewById(R.id.rtt_chat_input);
     editText.setOnEditorActionListener(this);
     editText.addTextChangedListener(this);
+
+    editText.setOnKeyListener(
+        (v, keyCode, event) -> {
+          // This is only triggered when input method doesn't handle delete key, which means the
+          // current
+          // input box is empty.
+          if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+            String lastMessage = adapter.retrieveLastLocalMessage();
+            if (lastMessage != null) {
+              isClearingInput = true;
+              editText.setText(lastMessage);
+              editText.setSelection(lastMessage.length());
+              isClearingInput = false;
+              rttCallScreenDelegate.onLocalMessage("\b");
+              return true;
+            }
+            return false;
+          }
+          return false;
+        });
     recyclerView = view.findViewById(R.id.rtt_recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     layoutManager.setStackFromEnd(true);
@@ -171,7 +186,27 @@ public class RttChatFragment extends Fragment
     recyclerView.setHasFixedSize(false);
     adapter = new RttChatAdapter(getContext(), this, savedInstanceState);
     recyclerView.setAdapter(adapter);
-    recyclerView.addOnScrollListener(onScrollListener);
+    recyclerView.addOnScrollListener(
+        new OnScrollListener() {
+          @Override
+          public void onScrollStateChanged(RecyclerView recyclerView, int i) {
+            if (i == RecyclerView.SCROLL_STATE_DRAGGING) {
+              isUserScrolling = true;
+            } else if (i == RecyclerView.SCROLL_STATE_IDLE) {
+              isUserScrolling = false;
+              // Auto scrolling for new messages should be resumed if it's scrolled to bottom.
+              shouldAutoScrolling = !recyclerView.canScrollVertically(1);
+            }
+          }
+
+          @Override
+          public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (dy < 0 && isUserScrolling) {
+              UiUtil.hideKeyboardFrom(getContext(), editText);
+            }
+          }
+        });
+
     submitButton = view.findViewById(R.id.rtt_chat_submit_button);
     submitButton.setOnClickListener(
         v -> {
@@ -180,6 +215,9 @@ public class RttChatFragment extends Fragment
           editText.setText("");
           isClearingInput = false;
           rttCallScreenDelegate.onLocalMessage(Constants.BUBBLE_BREAKER);
+          // Auto scrolling for new messages should be resumed since user has submit current
+          // message.
+          shouldAutoScrolling = true;
         });
     submitButton.setEnabled(false);
     endCallButton = view.findViewById(R.id.rtt_end_call_button);
@@ -201,13 +239,16 @@ public class RttChatFragment extends Fragment
 
     nameTextView = view.findViewById(R.id.rtt_name_or_number);
     chronometer = view.findViewById(R.id.rtt_timer);
+    statusBanner = view.findViewById(R.id.rtt_status_banner);
     return view;
   }
 
   @Override
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
     if (actionId == EditorInfo.IME_ACTION_SEND) {
-      submitButton.performClick();
+      if (!TextUtils.isEmpty(editText.getText())) {
+        submitButton.performClick();
+      }
       return true;
     }
     return false;
@@ -251,8 +292,21 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
-  public void newMessageAdded() {
-    recyclerView.smoothScrollToPosition(adapter.getItemCount());
+  public void onUpdateLocalMessage(int position) {
+    if (position < 0) {
+      return;
+    }
+    recyclerView.smoothScrollToPosition(position);
+  }
+
+  @Override
+  public void onUpdateRemoteMessage(int position) {
+    if (position < 0) {
+      return;
+    }
+    if (shouldAutoScrolling) {
+      recyclerView.smoothScrollToPosition(position);
+    }
   }
 
   @Override
@@ -312,6 +366,7 @@ public class RttChatFragment extends Fragment
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("RttChatFragment.setPrimary", primaryInfo.toString());
     nameTextView.setText(primaryInfo.name());
+    this.primaryInfo = primaryInfo;
   }
 
   @Override
@@ -359,6 +414,20 @@ public class RttChatFragment extends Fragment
       chronometer.start();
       isTimerStarted = true;
     }
+    if (primaryCallState.state() == State.DIALING) {
+      showWaitingForJoinBanner();
+    } else {
+      hideWaitingForJoinBanner();
+    }
+  }
+
+  private void showWaitingForJoinBanner() {
+    statusBanner.setText(getString(R.string.rtt_status_banner_text, primaryInfo.name()));
+    statusBanner.setVisibility(View.VISIBLE);
+  }
+
+  private void hideWaitingForJoinBanner() {
+    statusBanner.setVisibility(View.GONE);
   }
 
   @Override
