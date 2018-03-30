@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
@@ -72,20 +73,22 @@ public final class CallLogEntryText {
    * <p>Rules:
    *
    * <ul>
-   *   <li>For numbers that are not spam or blocked: (Duo video, )?$Label|$Location • Date
-   *   <li>For blocked non-spam numbers: Blocked • (Duo video, )?$Label|$Location • Date
-   *   <li>For spam but not blocked numbers: Spam • (Duo video, )?$Label • Date
-   *   <li>For blocked spam numbers: Blocked • Spam • (Duo video, )?$Label • Date
+   *   <li>For numbers that are not spam or blocked: $Label(, Duo video|Carrier video)?|$Location •
+   *       Date
+   *   <li>For blocked non-spam numbers: Blocked • $Label(, Duo video|Carrier video)?|$Location •
+   *       Date
+   *   <li>For spam but not blocked numbers: Spam • $Label(, Duo video|Carrier video)? • Date
+   *   <li>For blocked spam numbers: Blocked • Spam • $Label(, Duo video|Carrier video)? • Date
    * </ul>
    *
    * <p>Examples:
    *
    * <ul>
-   *   <li>Duo Video, Mobile • Now
-   *   <li>Duo Video • 10 min ago
+   *   <li>Mobile, Duo video • Now
+   *   <li>Duo video • 10 min ago
    *   <li>Mobile • 11:45 PM
    *   <li>Mobile • Sun
-   *   <li>Blocked • Duo Video, Mobile • Now
+   *   <li>Blocked • Mobile, Duo video • Now
    *   <li>Blocked • Brooklyn, NJ • 10 min ago
    *   <li>Spam • Mobile • Now
    *   <li>Spam • Now
@@ -125,20 +128,20 @@ public final class CallLogEntryText {
     /*
      * Rules:
      *   For numbers that are not spam or blocked:
-     *     (Duo video, )?$Label|$Location [• NumberIfNoName]?
+     *     $Label(, Duo video|Carrier video)?|$Location [• NumberIfNoName]?
      *   For blocked non-spam numbers:
-     *     Blocked • (Duo video, )?$Label|$Location [• NumberIfNoName]?
+     *     Blocked • $Label(, Duo video|Carrier video)?|$Location [• NumberIfNoName]?
      *   For spam but not blocked numbers:
-     *     Spam • (Duo video, )?$Label [• NumberIfNoName]?
+     *     Spam • $Label(, Duo video|Carrier video)? [• NumberIfNoName]?
      *   For blocked spam numbers:
-     *     Blocked • Spam • (Duo video, )?$Label [• NumberIfNoName]?
+     *     Blocked • Spam • $Label(, Duo video|Carrier video)? [• NumberIfNoName]?
      *
      * The number is shown at the end if there is no name for the entry. (It is shown in primary
      * text otherwise.)
      *
      * Examples:
-     *   Duo Video, Mobile • 555-1234
-     *   Duo Video • 555-1234
+     *   Mobile, Duo video • 555-1234
+     *   Duo video • 555-1234
      *   Mobile • 555-1234
      *   Blocked • Mobile • 555-1234
      *   Blocked • Brooklyn, NJ • 555-1234
@@ -178,7 +181,7 @@ public final class CallLogEntryText {
   }
 
   /**
-   * Returns a value such as "Duo Video, Mobile" without the time of the call or formatted number
+   * Returns a value such as "Mobile, Duo video" without the time of the call or formatted number
    * appended.
    *
    * <p>When the secondary text is shown in call log entry list, this prefix is suffixed with the
@@ -187,18 +190,30 @@ public final class CallLogEntryText {
    */
   private static CharSequence getNumberTypeLabel(Context context, CoalescedRow row) {
     StringBuilder secondaryText = new StringBuilder();
-    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      // TODO(zachh): Add "Duo" prefix?
-      secondaryText.append(context.getText(R.string.new_call_log_video));
-    }
+
+    // The number type label comes first (e.g., "Mobile", "Work", "Home", etc).
     String numberTypeLabel = row.getNumberAttributes().getNumberTypeLabel();
-    if (!TextUtils.isEmpty(numberTypeLabel)) {
+    secondaryText.append(numberTypeLabel);
+
+    // Add video call info if applicable.
+    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       if (secondaryText.length() > 0) {
         secondaryText.append(", ");
       }
-      secondaryText.append(numberTypeLabel);
-    } else if (!row.getNumberAttributes().getIsSpam()) {
-      // Don't show the location if there's a number type label or the number is spam.
+
+      boolean isDuoCall =
+          DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+              .flattenToString()
+              .equals(row.getPhoneAccountComponentName());
+      secondaryText.append(
+          context.getText(
+              isDuoCall ? R.string.new_call_log_duo_video : R.string.new_call_log_carrier_video));
+    }
+
+    // Show the location if
+    // (1) there is no number type label, and
+    // (2) the number is not spam.
+    if (TextUtils.isEmpty(numberTypeLabel) && !row.getNumberAttributes().getIsSpam()) {
       String location = row.getGeocodedLocation();
       if (!TextUtils.isEmpty(location)) {
         if (secondaryText.length() > 0) {
@@ -207,6 +222,7 @@ public final class CallLogEntryText {
         secondaryText.append(location);
       }
     }
+
     return secondaryText;
   }
 
