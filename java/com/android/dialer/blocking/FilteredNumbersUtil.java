@@ -42,6 +42,7 @@ import com.android.dialer.util.PermissionsUtil;
 import java.util.concurrent.TimeUnit;
 
 /** Utility to help with tasks related to filtered numbers. */
+@Deprecated
 public class FilteredNumbersUtil {
 
   public static final String CALL_BLOCKING_NOTIFICATION_TAG = "call_blocking";

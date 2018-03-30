@@ -48,6 +48,7 @@ import java.util.Objects;
  * referencing columns from either contract class in situations where both blocking solutions may be
  * used.
  */
+@Deprecated
 public class FilteredNumberCompat {
 
   private static Boolean canAttemptBlockOperationsForTest;
