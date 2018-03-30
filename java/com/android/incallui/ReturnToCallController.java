@@ -92,10 +92,10 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
     endCall = createActionIntent(ReturnToCallActionReceiver.ACTION_END_CALL);
     fullScreen = createActionIntent(ReturnToCallActionReceiver.ACTION_RETURN_TO_CALL);
 
-    InCallPresenter.getInstance().addInCallUiListener(this);
-    CallList.getInstance().addListener(this);
     AudioModeProvider.getInstance().addListener(this);
     audioState = AudioModeProvider.getInstance().getAudioState();
+    InCallPresenter.getInstance().addInCallUiListener(this);
+    CallList.getInstance().addListener(this);
   }
 
   public void tearDown() {
@@ -186,7 +186,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
       return;
     }
 
-    if ((bubble == null || !bubble.isVisible())
+    if ((bubble == null || !(bubble.isVisible() || bubble.isDismissed()))
         && getCall() != null
         && !InCallPresenter.getInstance().isShowingInCallUi()) {
       LogUtil.i("ReturnToCallController.onCallListChange", "going to show bubble");
