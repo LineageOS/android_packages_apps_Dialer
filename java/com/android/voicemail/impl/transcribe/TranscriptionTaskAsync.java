@@ -83,6 +83,16 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
     } else if (uploadResponse == null) {
       VvmLog.i(TAG, "getTranscription, failed to upload voicemail.");
       return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
+    } else if (uploadResponse.isStatusAlreadyExists()) {
+      VvmLog.i(TAG, "getTranscription, transcription already exists.");
+      GetTranscriptReceiver.beginPolling(
+          context,
+          voicemailUri,
+          uploadRequest.getTranscriptionId(),
+          0,
+          configProvider,
+          phoneAccountHandle);
+      return new Pair<>(null, null);
     } else if (uploadResponse.getTranscriptionId() == null) {
       VvmLog.i(TAG, "getTranscription, upload error: " + uploadResponse.status);
       return new Pair<>(null, TranscriptionStatus.FAILED_NO_RETRY);
