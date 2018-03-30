@@ -162,7 +162,7 @@ final class RttChatMessage implements Parcelable {
     return i;
   }
 
-  private static int getLastIndexRemoteMessage(List<RttChatMessage> messageList) {
+  static int getLastIndexRemoteMessage(List<RttChatMessage> messageList) {
     int i = messageList.size() - 1;
     while (i >= 0 && !messageList.get(i).isRemote) {
       i--;

@@ -40,4 +40,10 @@
     <item name="android:theme">@style/ButtonTheme</item>
     <item name="android:background">?attr/selectableItemBackground</item>
   </style>
+
+  <style name="OverflowMenu">
+    <item name="android:popupAnimationStyle">@android:style/Animation.Dialog</item>
+    <item name="android:popupBackground">@drawable/overflow_menu_background</item>
+    <item name="android:popupElevation">@dimen/rtt_overflow_menu_elevation</item>
+  </style>
 </resources>
