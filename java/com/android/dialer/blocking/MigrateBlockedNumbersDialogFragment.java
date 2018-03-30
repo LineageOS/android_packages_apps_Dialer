@@ -30,6 +30,7 @@ import java.util.Objects;
  * Dialog fragment shown to users when they need to migrate to use {@link
  * android.provider.BlockedNumberContract} for blocking.
  */
+@Deprecated
 public class MigrateBlockedNumbersDialogFragment extends DialogFragment {
 
   private BlockedNumbersMigrator blockedNumbersMigrator;

@@ -36,6 +36,7 @@ import java.util.Objects;
  * {@link android.provider.BlockedNumberContract} blocking.
  */
 @TargetApi(VERSION_CODES.N)
+@Deprecated
 public class BlockedNumbersMigrator {
 
   private final Context context;

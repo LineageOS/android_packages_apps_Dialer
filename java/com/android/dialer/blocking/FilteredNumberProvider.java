@@ -34,6 +34,7 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.location.GeoUtil;
 
 /** Filtered number content provider. */
+@Deprecated
 public class FilteredNumberProvider extends ContentProvider {
 
   private static final int FILTERED_NUMBERS_TABLE = 1;

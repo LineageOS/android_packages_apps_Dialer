@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1369
+  // Next Tag: 1371
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -78,8 +78,16 @@ message DialerImpression {
 
         ;
 
+    // User made it to the last step but blocking failed because user is
+    // secondary or dialer is not default
+    USER_ACTION_BLOCK_NUMBER_FAILED = 1369;
+
     // User made it to the last step and actually unblocked the number
     USER_ACTION_UNBLOCKED_NUMBER = 1013;
+
+    // User made it to the last step but unblocking failed because user is
+    // secondary or dialer is not default
+    USER_ACTION_UNBLOCK_NUMBER_FAILED = 1370;
 
     // User blocked a number, does not guarantee if the number was reported as
     // spam or not To compute the number of blocked numbers that were reported
