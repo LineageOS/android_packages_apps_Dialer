@@ -64,4 +64,7 @@ public class LoggingBindingsStub implements LoggingBindings {
 
   @Override
   public void logAutoBlockedCall(String phoneNumber) {}
+
+  @Override
+  public void logAnnotatedCallLogMetrics(int invalidNumbersInCallLog) {}
 }

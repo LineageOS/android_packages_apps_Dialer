@@ -90,4 +90,7 @@ public interface LoggingBindings {
 
   /** Logs a call auto-blocked in call screening. */
   void logAutoBlockedCall(String phoneNumber);
+
+  /** Logs annotated call log metrics. */
+  void logAnnotatedCallLogMetrics(int invalidNumbersInCallLog);
 }
