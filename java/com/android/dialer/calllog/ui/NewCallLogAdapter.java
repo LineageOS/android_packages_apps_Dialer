@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -53,6 +54,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private final Clock clock;
   private final RealtimeRowProcessor realtimeRowProcessor;
+  private final PopCounts popCounts = new PopCounts();
 
   private Cursor cursor;
 
@@ -76,6 +78,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   void updateCursor(Cursor updatedCursor) {
     this.cursor = updatedCursor;
     this.realtimeRowProcessor.clearCache();
+    this.popCounts.reset();
 
     setHeaderPositions();
     notifyDataSetChanged();
@@ -83,6 +86,10 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   void clearCache() {
     this.realtimeRowProcessor.clearCache();
+  }
+
+  void logMetrics(Context context) {
+    Logger.get(context).logAnnotatedCallLogMetrics(popCounts.popped, popCounts.didNotPop);
   }
 
   private void setHeaderPositions() {
@@ -138,7 +145,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
             LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.new_call_log_entry, viewGroup, false),
             clock,
-            realtimeRowProcessor);
+            realtimeRowProcessor,
+            popCounts);
       default:
         throw Assert.createUnsupportedOperationFailException("Unsupported view type: " + viewType);
     }
@@ -206,5 +214,15 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
       numberOfHeaders++;
     }
     return cursor.getCount() + numberOfHeaders;
+  }
+
+  static class PopCounts {
+    int popped;
+    int didNotPop;
+
+    private void reset() {
+      popped = 0;
+      didNotPop = 0;
+    }
   }
 }

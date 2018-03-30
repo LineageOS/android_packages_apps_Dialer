@@ -271,10 +271,10 @@ public class CallCardPresenter
 
       // getCallToDisplay doesn't go through outgoing or incoming calls. It will return the
       // highest priority call to display as the secondary call.
-      secondary = getCallToDisplay(callList, null, true);
+      secondary = InCallPresenter.getCallToDisplay(callList, null, true);
     } else if (newState == InCallState.INCALL) {
-      primary = getCallToDisplay(callList, null, false);
-      secondary = getCallToDisplay(callList, primary, true);
+      primary = InCallPresenter.getCallToDisplay(callList, null, false);
+      secondary = InCallPresenter.getCallToDisplay(callList, primary, true);
     }
 
     LogUtil.v("CallCardPresenter.onStateChange", "primary call: " + primary);
@@ -302,7 +302,6 @@ public class CallCardPresenter
     this.primaryNumber = primaryNumber;
 
     if (this.primary != null) {
-      InCallPresenter.getInstance().onForegroundCallChanged(this.primary);
       inCallScreen.updateInCallScreenColors();
     }
 
@@ -634,54 +633,6 @@ public class CallCardPresenter
       secondaryContactInfo = entry;
       updateSecondaryDisplayInfo();
     }
-  }
-
-  /**
-   * Get the highest priority call to display. Goes through the calls and chooses which to return
-   * based on priority of which type of call to display to the user. Callers can use the "ignore"
-   * feature to get the second best call by passing a previously found primary call as ignore.
-   *
-   * @param ignore A call to ignore if found.
-   */
-  private DialerCall getCallToDisplay(
-      CallList callList, DialerCall ignore, boolean skipDisconnected) {
-    // Active calls come second.  An active call always gets precedent.
-    DialerCall retval = callList.getActiveCall();
-    if (retval != null && retval != ignore) {
-      return retval;
-    }
-
-    // Sometimes there is intemediate state that two calls are in active even one is about
-    // to be on hold.
-    retval = callList.getSecondActiveCall();
-    if (retval != null && retval != ignore) {
-      return retval;
-    }
-
-    // Disconnected calls get primary position if there are no active calls
-    // to let user know quickly what call has disconnected. Disconnected
-    // calls are very short lived.
-    if (!skipDisconnected) {
-      retval = callList.getDisconnectingCall();
-      if (retval != null && retval != ignore) {
-        return retval;
-      }
-      retval = callList.getDisconnectedCall();
-      if (retval != null && retval != ignore) {
-        return retval;
-      }
-    }
-
-    // Then we go to background call (calls on hold)
-    retval = callList.getBackgroundCall();
-    if (retval != null && retval != ignore) {
-      return retval;
-    }
-
-    // Lastly, we go to a second background call.
-    retval = callList.getSecondBackgroundCall();
-
-    return retval;
   }
 
   private void updatePrimaryDisplayInfo() {
