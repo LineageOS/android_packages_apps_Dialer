@@ -33,7 +33,9 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
@@ -64,15 +66,11 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   private static final String PREF_LAST_TIMESTAMP_PROCESSED =
       "cp2DefaultDirectoryPhoneLookupLastTimestampProcessed";
 
-  // We cannot efficiently process invalid numbers because batch queries cannot be constructed which
-  // accomplish the necessary loose matching. We'll attempt to process a limited number of them,
-  // but if there are too many we fall back to querying CP2 at render time.
-  private static final int MAX_SUPPORTED_INVALID_NUMBERS = 5;
-
   private final Context appContext;
   private final SharedPreferences sharedPreferences;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
+  private final ConfigProvider configProvider;
 
   @Nullable private Long currentLastTimestampProcessed;
 
@@ -81,11 +79,13 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
       @ApplicationContext Context appContext,
       @Unencrypted SharedPreferences sharedPreferences,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService,
+      ConfigProvider configProvider) {
     this.appContext = appContext;
     this.sharedPreferences = sharedPreferences;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
+    this.configProvider = configProvider;
   }
 
   @Override
@@ -138,7 +138,7 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
     PartitionedNumbers partitionedNumbers = new PartitionedNumbers(phoneNumbers);
-    if (partitionedNumbers.invalidNumbers().size() > MAX_SUPPORTED_INVALID_NUMBERS) {
+    if (partitionedNumbers.invalidNumbers().size() > getMaxSupportedInvalidNumbers()) {
       // If there are N invalid numbers, we can't determine determine dirtiness without running N
       // queries; since running this many queries is not feasible for the (lightweight) isDirty
       // check, simply return true. The expectation is that this should rarely be the case as the
@@ -234,7 +234,8 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
 
     // Then run a separate query for each invalid number. Separate queries are done to accomplish
     // loose matching which couldn't be accomplished with a batch query.
-    Assert.checkState(partitionedNumbers.invalidNumbers().size() <= MAX_SUPPORTED_INVALID_NUMBERS);
+    Assert.checkState(
+        partitionedNumbers.invalidNumbers().size() <= getMaxSupportedInvalidNumbers());
     for (String invalidNumber : partitionedNumbers.invalidNumbers()) {
       queryFutures.add(queryPhoneLookupTableForContactIdsBasedOnRawNumber(invalidNumber));
     }
@@ -529,7 +530,11 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
       ImmutableMap<DialerPhoneNumber, Cp2Info> existingInfoMap) {
     ArraySet<DialerPhoneNumber> unprocessableNumbers = new ArraySet<>();
     PartitionedNumbers partitionedNumbers = new PartitionedNumbers(existingInfoMap.keySet());
-    if (partitionedNumbers.invalidNumbers().size() > MAX_SUPPORTED_INVALID_NUMBERS) {
+
+    int invalidNumberCount = partitionedNumbers.invalidNumbers().size();
+    Logger.get(appContext).logAnnotatedCallLogMetrics(invalidNumberCount);
+
+    if (invalidNumberCount > getMaxSupportedInvalidNumbers()) {
       for (String invalidNumber : partitionedNumbers.invalidNumbers()) {
         unprocessableNumbers.addAll(partitionedNumbers.dialerPhoneNumbersForInvalid(invalidNumber));
       }
@@ -927,5 +932,14 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
       where.append("?");
     }
     return where.toString();
+  }
+
+  /**
+   * We cannot efficiently process invalid numbers because batch queries cannot be constructed which
+   * accomplish the necessary loose matching. We'll attempt to process a limited number of them, but
+   * if there are too many we fall back to querying CP2 at render time.
+   */
+  private long getMaxSupportedInvalidNumbers() {
+    return configProvider.getLong("cp2_phone_lookup_max_invalid_numbers", 5);
   }
 }

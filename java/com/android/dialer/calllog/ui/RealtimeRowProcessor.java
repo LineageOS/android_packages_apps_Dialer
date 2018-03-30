@@ -198,8 +198,14 @@ public final class RealtimeRowProcessor {
 
   private CoalescedRow applyPhoneLookupInfoToRow(
       PhoneLookupInfo phoneLookupInfo, CoalescedRow row) {
+    // Force the "cp2_info_incomplete" value to the original value so that it is not used when
+    // comparing the original row to the updated row.
+    // TODO(linyuh): Improve the comparison instead.
     return row.toBuilder()
-        .setNumberAttributes(NumberAttributesConverter.fromPhoneLookupInfo(phoneLookupInfo).build())
+        .setNumberAttributes(
+            NumberAttributesConverter.fromPhoneLookupInfo(phoneLookupInfo)
+                .setIsCp2InfoIncomplete(row.getNumberAttributes().getIsCp2InfoIncomplete())
+                .build())
         .build();
   }
 }
