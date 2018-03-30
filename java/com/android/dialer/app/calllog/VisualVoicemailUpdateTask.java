@@ -212,6 +212,10 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
             "found voicemail from spam number, suppressing notification");
         Logger.get(context)
             .logImpression(DialerImpression.Type.INCOMING_VOICEMAIL_AUTO_BLOCKED_AS_SPAM);
+        if (newCall.voicemailUri != null) {
+          // Mark auto blocked voicemail as old so that we don't process it again.
+          VoicemailQueryHandler.markSingleNewVoicemailAsOld(context, newCall.voicemailUri);
+        }
       } else {
         result.add(newCall);
       }
