@@ -304,6 +304,12 @@ public class CallButtonPresenter
   }
 
   @Override
+  public void changeToRttClicked() {
+    LogUtil.enterBlock("CallButtonPresenter.changeToRttClicked");
+    call.sendRttUpgradeRequest();
+  }
+
+  @Override
   public void onEndCallClicked() {
     LogUtil.i("CallButtonPresenter.onEndCallClicked", "call: " + call);
     if (call != null) {
@@ -473,6 +479,8 @@ public class CallButtonPresenter
             // Most devices cannot make calls on 2 SIMs at the same time.
             && InCallPresenter.getInstance().getCallList().getAllCalls().size() == 1;
 
+    boolean showUpgradeToRtt = TelecomUtil.isRttEnabled(context) && call.canUpgradeToRttCall();
+
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_SWAP, showSwap);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_HOLD, showHold);
@@ -482,6 +490,7 @@ public class CallButtonPresenter
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_ADD_CALL, true);
     inCallButtonUi.enableButton(InCallButtonIds.BUTTON_ADD_CALL, showAddCall);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
+    inCallButtonUi.showButton(InCallButtonIds.BUTTON_UPGRADE_TO_RTT, showUpgradeToRtt);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio);
     inCallButtonUi.showButton(
         InCallButtonIds.BUTTON_SWITCH_CAMERA,

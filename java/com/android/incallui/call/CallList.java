@@ -514,6 +514,15 @@ public class CallList implements DialerCallDelegate {
     return call != null && call != getDisconnectingCall() && call != getDisconnectedCall();
   }
 
+  boolean hasActiveRttCall() {
+    for (DialerCall call : getAllCalls()) {
+      if (call.isActiveRttCall()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Returns the first call found in the call map with the upgrade to video modification state.
    *

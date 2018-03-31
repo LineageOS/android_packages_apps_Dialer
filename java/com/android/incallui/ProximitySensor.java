@@ -113,7 +113,7 @@ public class ProximitySensor
 
     DialerCall activeCall = callList.getActiveCall();
     boolean isVideoCall = activeCall != null && activeCall.isVideoCall();
-    boolean isRttCall = activeCall != null && activeCall.isRttCall();
+    boolean isRttCall = activeCall != null && activeCall.isActiveRttCall();
 
     if (isOffhook != isPhoneOffhook
         || this.isVideoCall != isVideoCall
