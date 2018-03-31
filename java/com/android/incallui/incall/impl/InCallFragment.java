@@ -54,6 +54,7 @@ import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRou
 import com.android.incallui.contactgrid.ContactGridManager;
 import com.android.incallui.hold.OnHoldFragment;
 import com.android.incallui.incall.impl.ButtonController.SpeakerButtonController;
+import com.android.incallui.incall.impl.ButtonController.UpgradeToRttButtonController;
 import com.android.incallui.incall.impl.InCallButtonGridFragment.OnButtonGridCreatedListener;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonIdsExtension;
@@ -114,7 +115,8 @@ public class InCallFragment extends Fragment
         || id == InCallButtonIds.BUTTON_ADD_CALL
         || id == InCallButtonIds.BUTTON_MERGE
         || id == InCallButtonIds.BUTTON_MANAGE_VOICE_CONFERENCE
-        || id == InCallButtonIds.BUTTON_SWAP_SIM;
+        || id == InCallButtonIds.BUTTON_SWAP_SIM
+        || id == InCallButtonIds.BUTTON_UPGRADE_TO_RTT;
   }
 
   @Override
@@ -226,6 +228,7 @@ public class InCallFragment extends Fragment
     buttonControllers.add(new ButtonController.SwapSimButtonController(inCallButtonUiDelegate));
     buttonControllers.add(
         new ButtonController.UpgradeToVideoButtonController(inCallButtonUiDelegate));
+    buttonControllers.add(new UpgradeToRttButtonController(inCallButtonUiDelegate));
     buttonControllers.add(
         new ButtonController.ManageConferenceButtonController(inCallScreenDelegate));
     buttonControllers.add(
