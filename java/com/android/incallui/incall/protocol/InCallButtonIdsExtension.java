@@ -56,6 +56,8 @@ public class InCallButtonIdsExtension {
       return "SWITCH_TO_SECONDARY";
     } else if (id == InCallButtonIds.BUTTON_SWAP_SIM) {
       return "SWAP_SIM";
+    } else if (id == InCallButtonIds.BUTTON_UPGRADE_TO_RTT) {
+      return "UPGRADE_TO_RTT";
     } else {
       return "INVALID_BUTTON: " + id;
     }

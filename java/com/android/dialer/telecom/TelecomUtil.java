@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.CallLog.Calls;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
@@ -297,6 +298,11 @@ public abstract class TelecomUtil {
 
   public static boolean isDefaultDialer(Context context) {
     return instance.isDefaultDialer(context);
+  }
+
+  public static boolean isRttEnabled(Context context) {
+    return Settings.System.getInt(context.getContentResolver(), Settings.System.RTT_CALLING_MODE, 0)
+        != 0;
   }
 
   /** @return the other SIM based PhoneAccountHandle that is not {@code currentAccount} */
