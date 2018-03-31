@@ -771,6 +771,22 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         "Phone switching state: " + oldState + " -> " + newState);
     inCallState = newState;
 
+    // Foreground call changed
+    DialerCall primary = null;
+    if (newState == InCallState.INCOMING) {
+      primary = callList.getIncomingCall();
+    } else if (newState == InCallState.PENDING_OUTGOING || newState == InCallState.OUTGOING) {
+      primary = callList.getOutgoingCall();
+      if (primary == null) {
+        primary = callList.getPendingOutgoingCall();
+      }
+    } else if (newState == InCallState.INCALL) {
+      primary = getCallToDisplay(callList, null, false);
+    }
+    if (primary != null) {
+      onForegroundCallChanged(primary);
+    }
+
     // notify listeners of new state
     for (InCallStateListener listener : listeners) {
       LogUtil.d(
@@ -785,6 +801,54 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       inCallActivity.dismissKeyguard(hasCall);
     }
     Trace.endSection();
+  }
+
+  /**
+   * Get the highest priority call to display. Goes through the calls and chooses which to return
+   * based on priority of which type of call to display to the user. Callers can use the "ignore"
+   * feature to get the second best call by passing a previously found primary call as ignore.
+   *
+   * @param ignore A call to ignore if found.
+   */
+  static DialerCall getCallToDisplay(
+      CallList callList, DialerCall ignore, boolean skipDisconnected) {
+    // Active calls come second.  An active call always gets precedent.
+    DialerCall retval = callList.getActiveCall();
+    if (retval != null && retval != ignore) {
+      return retval;
+    }
+
+    // Sometimes there is intemediate state that two calls are in active even one is about
+    // to be on hold.
+    retval = callList.getSecondActiveCall();
+    if (retval != null && retval != ignore) {
+      return retval;
+    }
+
+    // Disconnected calls get primary position if there are no active calls
+    // to let user know quickly what call has disconnected. Disconnected
+    // calls are very short lived.
+    if (!skipDisconnected) {
+      retval = callList.getDisconnectingCall();
+      if (retval != null && retval != ignore) {
+        return retval;
+      }
+      retval = callList.getDisconnectedCall();
+      if (retval != null && retval != ignore) {
+        return retval;
+      }
+    }
+
+    // Then we go to background call (calls on hold)
+    retval = callList.getBackgroundCall();
+    if (retval != null && retval != ignore) {
+      return retval;
+    }
+
+    // Lastly, we go to a second background call.
+    retval = callList.getSecondBackgroundCall();
+
+    return retval;
   }
 
   /** Called when there is a new incoming call. */

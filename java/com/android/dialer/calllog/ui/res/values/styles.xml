@@ -21,7 +21,7 @@
     <item name="android:fontFamily">sans-serif</item>
   </style>
 
-  <style name="primary_textview_new_call">
+  <style name="primary_textview_unread_call">
     <item name="android:textColor">@color/primary_text_color</item>
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
@@ -35,12 +35,12 @@
     <item name="android:fontFamily">sans-serif</item>
   </style>
 
-  <style name="secondary_textview_new_call">
+  <style name="secondary_textview_unread_call">
     <item name="android:textColor">@color/missed_call</item>
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 
-  <style name="phoneaccount_textview_new_call">
+  <style name="phoneaccount_textview_unread_call">
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 

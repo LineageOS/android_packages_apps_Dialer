@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.calllog.ui.NewCallLogAdapter.PopCounts;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
@@ -60,10 +61,12 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final Clock clock;
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final ExecutorService uiExecutorService;
+  private final PopCounts popCounts;
 
   private long currentRowId;
 
-  NewCallLogViewHolder(View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor) {
+  NewCallLogViewHolder(
+      View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor, PopCounts popCounts) {
     super(view);
     this.context = view.getContext();
     contactPhotoView = view.findViewById(R.id.contact_photo_view);
@@ -79,6 +82,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     this.clock = clock;
     this.realtimeRowProcessor = realtimeRowProcessor;
+    this.popCounts = popCounts;
     uiExecutorService = DialerExecutorComponent.get(context).uiExecutor();
   }
 
@@ -105,11 +109,11 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     primaryTextView.setText(CallLogEntryText.buildPrimaryText(context, row));
     secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(context, clock, row));
 
-    if (isNewMissedCall(row)) {
-      primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
-      callCountTextView.setTextAppearance(R.style.primary_textview_new_call);
-      secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
-      phoneAccountView.setTextAppearance(R.style.phoneaccount_textview_new_call);
+    if (isUnreadMissedCall(row)) {
+      primaryTextView.setTextAppearance(R.style.primary_textview_unread_call);
+      callCountTextView.setTextAppearance(R.style.primary_textview_unread_call);
+      secondaryTextView.setTextAppearance(R.style.secondary_textview_unread_call);
+      phoneAccountView.setTextAppearance(R.style.phoneaccount_textview_unread_call);
     } else {
       primaryTextView.setTextAppearance(R.style.primary_textview);
       callCountTextView.setTextAppearance(R.style.primary_textview);
@@ -136,10 +140,11 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     }
   }
 
-  private boolean isNewMissedCall(CoalescedRow row) {
+  private boolean isUnreadMissedCall(CoalescedRow row) {
     // Show missed call styling if the most recent call in the group was missed and it is still
-    // marked as NEW. It is not clear what IS_READ should be used for and it is currently not used.
-    return row.getCallType() == Calls.MISSED_TYPE && row.getIsNew();
+    // marked as not read. The "NEW" column is presumably used for notifications and voicemails
+    // only.
+    return row.getCallType() == Calls.MISSED_TYPE && !row.getIsRead();
   }
 
   private void setPhoto(CoalescedRow row) {
@@ -155,7 +160,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     ColorStateList colorStateList =
         ColorStateList.valueOf(
             context.getColor(
-                isNewMissedCall(row)
+                isUnreadMissedCall(row)
                     ? R.color.feature_icon_unread_color
                     : R.color.feature_icon_read_color));
 
@@ -213,7 +218,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     }
     callTypeIcon.setImageResource(resId);
 
-    if (isNewMissedCall(row)) {
+    if (isUnreadMissedCall(row)) {
       callTypeIcon.setImageTintList(
           ColorStateList.valueOf(context.getColor(R.color.call_type_icon_unread_color)));
     } else {
@@ -258,13 +263,17 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       // If the user scrolled then this ViewHolder may not correspond to the completed task and
       // there's nothing to do.
       if (originalRow.getId() != currentRowId) {
+        popCounts.didNotPop++;
         return;
       }
       // Only update the UI if the updated row differs from the original row (which has already
       // been displayed).
       if (!updatedRow.equals(originalRow)) {
         displayRow(updatedRow);
+        popCounts.popped++;
+        return;
       }
+      popCounts.didNotPop++;
     }
 
     @Override

@@ -1468,7 +1468,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return new ShouldShowUiResult(false, null);
     }
 
-    if (call.isRttCall()) {
+    if (call.isActiveRttCall()) {
       LogUtil.i("InCallActivity.getShouldShowRttUi", "found rtt call");
       return new ShouldShowUiResult(true, call);
     }
@@ -1520,7 +1520,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     AnswerScreen answerScreen =
         AnswerBindings.createAnswerScreen(
             call.getId(),
-            call.isRttCall(),
+            call.isActiveRttCall(),
             call.isVideoCall(),
             isVideoUpgradeRequest,
             call.getVideoTech().isSelfManagedCamera(),
