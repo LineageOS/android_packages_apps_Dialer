@@ -225,6 +225,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     return new RowCombiner(individualRowsSortedByTimestampDesc)
         .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
         .useMostRecentLong(AnnotatedCallLog.NEW)
+        .useMostRecentLong(AnnotatedCallLog.IS_READ)
         // Two different DialerPhoneNumbers could be combined if they are different but considered
         // to be an "exact match" by libphonenumber; in this case we arbitrarily select the most
         // recent one.

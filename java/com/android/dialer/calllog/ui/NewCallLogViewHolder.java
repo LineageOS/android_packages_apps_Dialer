@@ -109,11 +109,11 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     primaryTextView.setText(CallLogEntryText.buildPrimaryText(context, row));
     secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(context, clock, row));
 
-    if (isNewMissedCall(row)) {
-      primaryTextView.setTextAppearance(R.style.primary_textview_new_call);
-      callCountTextView.setTextAppearance(R.style.primary_textview_new_call);
-      secondaryTextView.setTextAppearance(R.style.secondary_textview_new_call);
-      phoneAccountView.setTextAppearance(R.style.phoneaccount_textview_new_call);
+    if (isUnreadMissedCall(row)) {
+      primaryTextView.setTextAppearance(R.style.primary_textview_unread_call);
+      callCountTextView.setTextAppearance(R.style.primary_textview_unread_call);
+      secondaryTextView.setTextAppearance(R.style.secondary_textview_unread_call);
+      phoneAccountView.setTextAppearance(R.style.phoneaccount_textview_unread_call);
     } else {
       primaryTextView.setTextAppearance(R.style.primary_textview);
       callCountTextView.setTextAppearance(R.style.primary_textview);
@@ -140,10 +140,11 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     }
   }
 
-  private boolean isNewMissedCall(CoalescedRow row) {
+  private boolean isUnreadMissedCall(CoalescedRow row) {
     // Show missed call styling if the most recent call in the group was missed and it is still
-    // marked as NEW. It is not clear what IS_READ should be used for and it is currently not used.
-    return row.getCallType() == Calls.MISSED_TYPE && row.getIsNew();
+    // marked as not read. The "NEW" column is presumably used for notifications and voicemails
+    // only.
+    return row.getCallType() == Calls.MISSED_TYPE && !row.getIsRead();
   }
 
   private void setPhoto(CoalescedRow row) {
@@ -159,7 +160,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     ColorStateList colorStateList =
         ColorStateList.valueOf(
             context.getColor(
-                isNewMissedCall(row)
+                isUnreadMissedCall(row)
                     ? R.color.feature_icon_unread_color
                     : R.color.feature_icon_read_color));
 
@@ -217,7 +218,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     }
     callTypeIcon.setImageResource(resId);
 
-    if (isNewMissedCall(row)) {
+    if (isUnreadMissedCall(row)) {
       callTypeIcon.setImageTintList(
           ColorStateList.valueOf(context.getColor(R.color.call_type_icon_unread_color)));
     } else {
