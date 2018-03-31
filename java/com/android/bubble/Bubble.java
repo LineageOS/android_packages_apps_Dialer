@@ -39,6 +39,9 @@ public interface Bubble {
   /** Returns whether the bubble is currently visible */
   boolean isVisible();
 
+  /** Returns whether the bubble is currently dismissed */
+  boolean isDismissed();
+
   /**
    * Set the info for this Bubble to display
    *
