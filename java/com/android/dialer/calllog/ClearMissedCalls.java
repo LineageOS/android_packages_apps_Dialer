@@ -38,8 +38,8 @@ import java.util.Collection;
 import javax.inject.Inject;
 
 /**
- * Clears missed calls. This includes cancelling notifications and updating the "NEW" status in the
- * system call log.
+ * Clears missed calls. This includes cancelling notifications and updating the "IS_READ" status in
+ * the system call log.
  */
 public final class ClearMissedCalls {
 
@@ -58,11 +58,11 @@ public final class ClearMissedCalls {
   }
 
   /**
-   * Cancels all missed call notifications and marks all "new" missed calls in the system call log
-   * as "not new".
+   * Cancels all missed call notifications and marks all "unread" missed calls in the system call
+   * log as "read".
    */
   public ListenableFuture<Void> clearAll() {
-    ListenableFuture<Void> markNewFuture = markNotNew(ImmutableSet.of());
+    ListenableFuture<Void> markReadFuture = markRead(ImmutableSet.of());
     ListenableFuture<Void> cancelNotificationsFuture =
         uiThreadExecutor.submit(
             () -> {
@@ -73,11 +73,11 @@ public final class ClearMissedCalls {
     // Note on this usage of whenAllComplete:
     //   -The returned future completes when all sub-futures complete (whether they fail or not)
     //   -The returned future fails if any sub-future fails
-    return Futures.whenAllComplete(markNewFuture, cancelNotificationsFuture)
+    return Futures.whenAllComplete(markReadFuture, cancelNotificationsFuture)
         .call(
             () -> {
               // Calling get() is necessary to propagate failures.
-              markNewFuture.get();
+              markReadFuture.get();
               cancelNotificationsFuture.get();
               return null;
             },
@@ -86,12 +86,12 @@ public final class ClearMissedCalls {
 
   /**
    * For the provided set of IDs from the system call log, cancels their missed call notifications
-   * and marks them "not new".
+   * and marks them "read".
    *
    * @param ids IDs from the system call log (see {@link Calls#_ID}}.
    */
   public ListenableFuture<Void> clearBySystemCallLogId(Collection<Long> ids) {
-    ListenableFuture<Void> markNewFuture = markNotNew(ids);
+    ListenableFuture<Void> markReadFuture = markRead(ids);
     ListenableFuture<Void> cancelNotificationsFuture =
         uiThreadExecutor.submit(
             () -> {
@@ -105,11 +105,11 @@ public final class ClearMissedCalls {
     // Note on this usage of whenAllComplete:
     //   -The returned future completes when all sub-futures complete (whether they fail or not)
     //   -The returned future fails if any sub-future fails
-    return Futures.whenAllComplete(markNewFuture, cancelNotificationsFuture)
+    return Futures.whenAllComplete(markReadFuture, cancelNotificationsFuture)
         .call(
             () -> {
               // Calling get() is necessary to propagate failures.
-              markNewFuture.get();
+              markReadFuture.get();
               cancelNotificationsFuture.get();
               return null;
             },
@@ -117,28 +117,28 @@ public final class ClearMissedCalls {
   }
 
   /**
-   * Marks all provided system call log IDs as not new, or if the provided collection is empty,
-   * marks all calls as not new.
+   * Marks all provided system call log IDs as read, or if the provided collection is empty, marks
+   * all calls as read.
    */
   @SuppressLint("MissingPermission")
-  private ListenableFuture<Void> markNotNew(Collection<Long> ids) {
+  private ListenableFuture<Void> markRead(Collection<Long> ids) {
     return backgroundExecutor.submit(
         () -> {
           if (!UserManagerCompat.isUserUnlocked(appContext)) {
-            LogUtil.e("ClearMissedCalls.markNotNew", "locked");
+            LogUtil.e("ClearMissedCalls.markRead", "locked");
             return null;
           }
           if (!PermissionsUtil.hasCallLogWritePermissions(appContext)) {
-            LogUtil.e("ClearMissedCalls.markNotNew", "no permission");
+            LogUtil.e("ClearMissedCalls.markRead", "no permission");
             return null;
           }
 
           ContentValues values = new ContentValues();
-          values.put(Calls.NEW, 0);
+          values.put(Calls.IS_READ, 1);
 
           Selection.Builder selectionBuilder =
               Selection.builder()
-                  .and(Selection.column(Calls.NEW).is("=", 1))
+                  .and(Selection.column(Calls.IS_READ).is("=", 0))
                   .and(Selection.column(Calls.TYPE).is("=", Calls.MISSED_TYPE));
           if (!ids.isEmpty()) {
             selectionBuilder.and(Selection.column(Calls._ID).in(toStrings(ids)));
