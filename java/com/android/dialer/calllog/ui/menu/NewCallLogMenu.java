@@ -35,9 +35,9 @@ public final class NewCallLogMenu {
       HistoryItemActionBottomSheet.show(
           context, BottomSheetHeader.fromRow(context, row), Modules.fromRow(context, row));
 
-      // If the user opens the bottom sheet for a new call, clear the notifications and make the row
-      // not bold immediately. To do this, mark all of the calls in group as not new.
-      if (row.getIsNew() && row.getCallType() == Calls.MISSED_TYPE) {
+      // If the user opens the bottom sheet for an unread call, clear the notifications and make the
+      // row not bold immediately. To do this, mark all of the calls in group as read.
+      if (!row.getIsRead() && row.getCallType() == Calls.MISSED_TYPE) {
         Futures.addCallback(
             CallLogComponent.get(context)
                 .getClearMissedCalls()
