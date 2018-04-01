@@ -30,4 +30,6 @@
   <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
   <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
   <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
+  <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Οι αναζητήσεις ενδέχεται να στέλνουν ερωτήματα μέσω ενός ασφαλούς πρωτοκόλλου (https) σε απομακρυσμένους ιστότοπους για τη συλλογή πληροφοριών. Το ερώτημα ενδέχεται να περιλαμβάνει τον αριθμό τηλεφώνου του άλλου μέρους ή το ερώτημα αναζήτησης</string>
 </resources>

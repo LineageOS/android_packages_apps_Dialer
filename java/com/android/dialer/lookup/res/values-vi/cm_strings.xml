@@ -30,4 +30,5 @@
   <string name="forward_lookup_provider_title">Nhà cung cấp tra cứu xuôi</string>
   <string name="people_lookup_provider_title">Nhà cung cấp tra cứu người</string>
   <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
+  <!-- Disclaimer -->
 </resources>

@@ -30,4 +30,5 @@
   <string name="forward_lookup_provider_title">Pružatelj pretraživanja unaprijed</string>
   <string name="people_lookup_provider_title">Pružatelj pretraživanja ljudi</string>
   <string name="reverse_lookup_provider_title">Pružatelj obrnutog pretraživanja</string>
+  <!-- Disclaimer -->
 </resources>

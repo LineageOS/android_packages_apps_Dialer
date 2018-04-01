@@ -30,4 +30,5 @@
   <string name="forward_lookup_provider_title">Proveïdor de cerca directa</string>
   <string name="people_lookup_provider_title">Proveïdor de cerca de persones</string>
   <string name="reverse_lookup_provider_title">Proveïdor de cerca inversa</string>
+  <!-- Disclaimer -->
 </resources>

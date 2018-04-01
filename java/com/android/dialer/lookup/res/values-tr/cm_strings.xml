@@ -30,4 +30,5 @@
   <string name="forward_lookup_provider_title">Arama yönlendirme sağlayıcısı</string>
   <string name="people_lookup_provider_title">Kişi arama sağlayıcısı</string>
   <string name="reverse_lookup_provider_title">Ters arama sağlayıcısı</string>
+  <!-- Disclaimer -->
 </resources>

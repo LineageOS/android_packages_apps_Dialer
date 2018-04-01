@@ -30,4 +30,5 @@
   <string name="forward_lookup_provider_title">Poskytovateľ vyhľadávania vpred</string>
   <string name="people_lookup_provider_title">Poskytovateľ pre vyhľadávanie ľudí</string>
   <string name="reverse_lookup_provider_title">Poskytovateľ pre spätné vyhľadávanie</string>
+  <!-- Disclaimer -->
 </resources>

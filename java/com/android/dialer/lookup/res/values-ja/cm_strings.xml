@@ -18,4 +18,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
   <!-- Number lookup -->
+  <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示します</string>
+  <string name="enable_people_lookup_summary">ダイヤル画面で検索しているときに人物のオンラインの検索結果を表示します</string>
+  <string name="enable_reverse_lookup_summary">着信中の不明な番号の人物または場所の情報を検索します</string>
+  <!-- Disclaimer -->
 </resources>

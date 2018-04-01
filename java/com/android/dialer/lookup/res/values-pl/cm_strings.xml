@@ -21,4 +21,5 @@
   <string name="people">Ludzie</string>
   <!-- Number lookup -->
   <string name="lookup_settings_label">Wyszukiwanie numeru telefonu</string>
+  <!-- Disclaimer -->
 </resources>
