@@ -88,6 +88,7 @@ public class OmtpVvmCarrierConfigHelper {
       "vvm_disabled_capabilities_string_array";
 
   public static final String KEY_VVM_CLIENT_PREFIX_STRING = "vvm_client_prefix_string";
+  private static final String KEY_IGNORE_TRANSCRIPTION_BOOL = "vvm_ignore_transcription";
 
   @Nullable private static PersistableBundle overrideConfigForTest;
 
@@ -516,5 +517,14 @@ public class OmtpVvmCarrierConfigHelper {
       }
     }
     return false;
+  }
+
+  /**
+   * Suppress the behavior of treating any text attachment with MIME "text/*" as transcription,
+   * default to false.
+   */
+  public boolean ignoreTranscription() {
+    Assert.checkArgument(isValid());
+    return (boolean) getValue(KEY_IGNORE_TRANSCRIPTION_BOOL, false);
   }
 }
