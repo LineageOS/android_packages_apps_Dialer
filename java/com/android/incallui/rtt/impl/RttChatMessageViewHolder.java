@@ -17,6 +17,7 @@
 package com.android.incallui.rtt.impl;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.Gravity;
 import android.view.View;
@@ -41,7 +42,7 @@ public class RttChatMessageViewHolder extends ViewHolder {
     resources = view.getResources();
   }
 
-  void setMessage(RttChatMessage message, boolean isSameGroup) {
+  void setMessage(RttChatMessage message, boolean isSameGroup, Drawable imageDrawable) {
     messageTextView.setText(message.getContent());
     LinearLayout.LayoutParams params = (LayoutParams) container.getLayoutParams();
     params.gravity = message.isRemote ? Gravity.START : Gravity.END;
@@ -56,7 +57,7 @@ public class RttChatMessageViewHolder extends ViewHolder {
         avatarImageView.setVisibility(View.INVISIBLE);
       } else {
         avatarImageView.setVisibility(View.VISIBLE);
-        avatarImageView.setImageResource(R.drawable.product_logo_avatar_anonymous_white_color_120);
+        avatarImageView.setImageDrawable(imageDrawable);
       }
     } else {
       avatarImageView.setVisibility(View.GONE);
