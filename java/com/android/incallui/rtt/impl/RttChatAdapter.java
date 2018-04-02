@@ -17,6 +17,7 @@
 package com.android.incallui.rtt.impl;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,8 @@ import java.util.List;
 
 /** Adapter class for holding RTT chat data. */
 public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolder> {
+
+  private Drawable avatarDrawable;
 
   interface MessageListener {
     void onUpdateRemoteMessage(int position);
@@ -75,7 +78,7 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     if (i > 0) {
       isSameGroup = rttMessages.get(i).isRemote == rttMessages.get(i - 1).isRemote;
     }
-    rttChatMessageViewHolder.setMessage(rttMessages.get(i), isSameGroup);
+    rttChatMessageViewHolder.setMessage(rttMessages.get(i), isSameGroup, avatarDrawable);
   }
 
   @Override
@@ -168,5 +171,9 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   void onSaveInstanceState(@NonNull Bundle bundle) {
     bundle.putParcelableArrayList(KEY_MESSAGE_DATA, (ArrayList<RttChatMessage>) rttMessages);
     bundle.putInt(KEY_LAST_LOCAL_MESSAGE, lastIndexOfLocalMessage);
+  }
+
+  void setAvatarDrawable(Drawable drawable) {
+    avatarDrawable = drawable;
   }
 }
