@@ -29,6 +29,8 @@ public interface DialerCallListener {
 
   void onDialerCallUpgradeToVideo();
 
+  default void onDialerCallUpgradeToRtt(int rttRequestId) {}
+
   void onDialerCallSessionModificationStateChange();
 
   void onWiFiToLteHandover();

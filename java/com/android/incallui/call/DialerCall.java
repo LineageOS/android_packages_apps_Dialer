@@ -282,6 +282,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onRttRequest(Call call, int id) {
           LogUtil.v("TelecomCallCallback.onRttRequest", "id=%d", id);
+          for (DialerCallListener listener : listeners) {
+            listener.onDialerCallUpgradeToRtt(id);
+          }
         }
 
         @Override
@@ -1031,6 +1034,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   @TargetApi(28)
   public void sendRttUpgradeRequest() {
     getTelecomCall().sendRttRequest();
+  }
+
+  @TargetApi(28)
+  public void respondToRttRequest(boolean accept, int rttRequestId) {
+    getTelecomCall().respondToRttRequest(rttRequestId, accept);
   }
 
   public boolean hasReceivedVideoUpgradeRequest() {

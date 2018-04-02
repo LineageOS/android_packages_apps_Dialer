@@ -784,6 +784,12 @@ public class CallList implements DialerCallDelegate {
      */
     void onUpgradeToVideo(DialerCall call);
 
+    /**
+     * Called when a new RTT call request comes in This is the only method that gets called for RTT
+     * requests.
+     */
+    default void onUpgradeToRtt(DialerCall call, int rttRequestId) {}
+
     /** Called when the session modification state of a call changes. */
     void onSessionModificationStateChange(DialerCall call);
 
@@ -853,6 +859,13 @@ public class CallList implements DialerCallDelegate {
 
     @Override
     public void onDialerCallLastForwardedNumberChange() {}
+
+    @Override
+    public void onDialerCallUpgradeToRtt(int rttRequestId) {
+      for (Listener listener : listeners) {
+        listener.onUpgradeToRtt(call, rttRequestId);
+      }
+    }
 
     @Override
     public void onDialerCallUpgradeToVideo() {
