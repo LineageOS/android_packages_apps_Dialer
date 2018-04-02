@@ -571,7 +571,7 @@ public class ImapHelper implements Closeable {
 
         if (bodyPartMimeType.startsWith("audio/")) {
           messageStructureWrapper.messageStructure = message;
-        } else if (bodyPartMimeType.startsWith("text/")) {
+        } else if (!config.ignoreTranscription() && bodyPartMimeType.startsWith("text/")) {
           messageStructureWrapper.transcriptionBodyPart = bodyPart;
         } else {
           VvmLog.v(TAG, "Unknown bodyPart MIME: " + bodyPartMimeType);
