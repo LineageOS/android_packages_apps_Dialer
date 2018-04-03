@@ -48,9 +48,12 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
+import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.hold.OnHoldFragment;
+import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
@@ -95,7 +98,8 @@ public class RttChatFragment extends Fragment
   private RttOverflowMenu overflowMenu;
   private SecondaryInfo savedSecondaryInfo;
   private TextView statusBanner;
-  private PrimaryInfo primaryInfo;
+  private PrimaryInfo primaryInfo = PrimaryInfo.empty();
+  private PrimaryCallState primaryCallState = PrimaryCallState.empty();
   private boolean isUserScrolling;
   private boolean shouldAutoScrolling;
 
@@ -366,7 +370,33 @@ public class RttChatFragment extends Fragment
   public void setPrimary(@NonNull PrimaryInfo primaryInfo) {
     LogUtil.i("RttChatFragment.setPrimary", primaryInfo.toString());
     nameTextView.setText(primaryInfo.name());
+    updateAvatar(primaryInfo);
     this.primaryInfo = primaryInfo;
+  }
+
+  private void updateAvatar(PrimaryInfo primaryInfo) {
+    boolean hasPhoto =
+        primaryInfo.photo() != null && primaryInfo.photoType() == ContactPhotoType.CONTACT;
+    // Contact has a photo, don't render a letter tile.
+    if (hasPhoto) {
+      int avatarSize = getResources().getDimensionPixelSize(R.dimen.rtt_avatar_size);
+      adapter.setAvatarDrawable(
+          DrawableConverter.getRoundedDrawable(
+              getContext(), primaryInfo.photo(), avatarSize, avatarSize));
+    } else {
+      LetterTileDrawable letterTile = new LetterTileDrawable(getResources());
+      letterTile.setCanonicalDialerLetterTileDetails(
+          primaryInfo.name(),
+          primaryInfo.contactInfoLookupKey(),
+          LetterTileDrawable.SHAPE_CIRCLE,
+          LetterTileDrawable.getContactTypeFromPrimitives(
+              primaryCallState.isVoiceMailNumber(),
+              primaryInfo.isSpam(),
+              primaryCallState.isBusinessNumber(),
+              primaryInfo.numberPresentation(),
+              primaryCallState.isConference()));
+      adapter.setAvatarDrawable(letterTile);
+    }
   }
 
   @Override
@@ -404,6 +434,7 @@ public class RttChatFragment extends Fragment
   @Override
   public void setCallState(@NonNull PrimaryCallState primaryCallState) {
     LogUtil.i("RttChatFragment.setCallState", primaryCallState.toString());
+    this.primaryCallState = primaryCallState;
     if (!isTimerStarted && primaryCallState.state() == State.ACTIVE) {
       LogUtil.i(
           "RttChatFragment.setCallState", "starting timer with base: %d", chronometer.getBase());

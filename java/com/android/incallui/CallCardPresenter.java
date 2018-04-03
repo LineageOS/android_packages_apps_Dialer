@@ -36,6 +36,8 @@ import android.support.v4.content.ContextCompat;
 import android.telecom.Call.Details;
 import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.View;
@@ -987,7 +989,10 @@ public class CallCardPresenter
         ContactDisplayUtils.getPreferredDisplayName(
             contactInfo.namePrimary, contactInfo.nameAlternative, contactsPreferences);
     if (TextUtils.isEmpty(preferredName)) {
-      return contactInfo.number;
+      return TextUtils.isEmpty(contactInfo.number)
+          ? null
+          : BidiFormatter.getInstance()
+              .unicodeWrap(contactInfo.number, TextDirectionHeuristics.LTR);
     }
     return preferredName;
   }
