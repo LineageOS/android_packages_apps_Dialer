@@ -51,22 +51,28 @@
         android:layout_weight="1"/>
     <Button
         android:id="@+id/rtt_button_decline_request"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:backgroundTint="@android:color/white"
         android:fontFamily="sans-serif-medium"
+        android:stateListAnimator="@null"
         android:text="@string/rtt_button_decline_request"
         android:textColor="#757575"/>
     <Button
         android:id="@+id/rtt_button_accept_request"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:backgroundTint="@color/dialer_theme_color"
         android:fontFamily="sans-serif-medium"
+        android:stateListAnimator="@null"
         android:text="@string/rtt_button_accept_request"
         android:textColor="@android:color/white"/>
   </LinearLayout>
