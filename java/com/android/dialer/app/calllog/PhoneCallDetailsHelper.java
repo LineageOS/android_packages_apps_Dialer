@@ -279,7 +279,7 @@ public class PhoneCallDetailsHelper
       return;
     }
 
-    if (PhoneNumberUtils.isEmergencyNumber(details.number.toString())) {
+    if (PhoneNumberUtils.isEmergencyNumber(details.displayNumber)) {
       views.nameView.setText(R.string.emergency_number);
       views.nameView.setTextDirection(View.TEXT_DIRECTION_INHERIT);
       return;
