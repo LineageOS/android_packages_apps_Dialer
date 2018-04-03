@@ -77,7 +77,7 @@ public class IntentModule implements HistoryItemActionModule {
         R.drawable.quantum_ic_call_white_24);
   }
 
-  public static IntentModule newVideoCallModule(
+  public static IntentModule newCarrierVideoCallModule(
       Context context,
       String number,
       @Nullable PhoneAccountHandle phoneAccountHandle,

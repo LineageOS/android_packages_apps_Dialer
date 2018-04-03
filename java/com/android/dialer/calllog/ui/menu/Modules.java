@@ -27,8 +27,10 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.DividerModule;
+import com.android.dialer.historyitemactions.DuoCallModule;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.IntentModule;
 import com.android.dialer.historyitemactions.SharedModules;
@@ -134,9 +136,15 @@ final class Modules {
     // Add a video item if (1) the call log entry is for a video call, and (2) the call is not spam.
     if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
         && !row.getNumberAttributes().getIsSpam()) {
+      boolean isDuoCall =
+          DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+              .flattenToString()
+              .equals(row.getPhoneAccountComponentName());
       modules.add(
-          IntentModule.newVideoCallModule(
-              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+          isDuoCall
+              ? new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG)
+              : IntentModule.newCarrierVideoCallModule(
+                  context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
     }
 
     // TODO(zachh): Also show video option if the call log entry is for an audio call but video

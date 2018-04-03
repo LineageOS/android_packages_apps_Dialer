@@ -24,6 +24,7 @@ import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogReceiver;
 import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.duo.PlaceDuoCallReceiver;
 import com.android.dialer.interactions.PhoneNumberInteraction.DisambigDialogDismissedListener;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
@@ -46,6 +47,9 @@ public class MainActivity extends TransactionSafeActivity
    * it as spam when notified.
    */
   private ShowBlockReportSpamDialogReceiver showBlockReportSpamDialogReceiver;
+
+  /** {@link android.content.BroadcastReceiver} that starts a Duo call. */
+  private PlaceDuoCallReceiver placeDuoCallReceiver;
 
   public static Intent getShowCallLogIntent(Context context) {
     return getShowTabIntent(context, TabIndex.CALL_LOG);
@@ -79,6 +83,7 @@ public class MainActivity extends TransactionSafeActivity
     activePeer.onActivityCreate(savedInstanceState);
 
     showBlockReportSpamDialogReceiver = new ShowBlockReportSpamDialogReceiver(getFragmentManager());
+    placeDuoCallReceiver = new PlaceDuoCallReceiver(/* activity = */ this);
   }
 
   protected MainActivityPeer getNewPeer() {
@@ -104,6 +109,8 @@ public class MainActivity extends TransactionSafeActivity
     LocalBroadcastManager.getInstance(this)
         .registerReceiver(
             showBlockReportSpamDialogReceiver, ShowBlockReportSpamDialogReceiver.getIntentFilter());
+    LocalBroadcastManager.getInstance(this)
+        .registerReceiver(placeDuoCallReceiver, PlaceDuoCallReceiver.getIntentFilter());
   }
 
   @Override
@@ -118,6 +125,7 @@ public class MainActivity extends TransactionSafeActivity
     activePeer.onActivityPause();
 
     LocalBroadcastManager.getInstance(this).unregisterReceiver(showBlockReportSpamDialogReceiver);
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(placeDuoCallReceiver);
   }
 
   @Override
