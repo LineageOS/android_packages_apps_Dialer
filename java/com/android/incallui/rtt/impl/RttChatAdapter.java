@@ -18,8 +18,6 @@ package com.android.incallui.rtt.impl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -27,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.rtt.RttTranscript;
+import com.android.dialer.rtt.RttTranscriptMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,23 +41,14 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     void onUpdateLocalMessage(int position);
   }
 
-  private static final String KEY_MESSAGE_DATA = "key_message_data";
-  private static final String KEY_LAST_LOCAL_MESSAGE = "key_last_local_message";
-
   private final Context context;
-  private final List<RttChatMessage> rttMessages;
+  private List<RttChatMessage> rttMessages = new ArrayList<>();
   private int lastIndexOfLocalMessage = -1;
   private final MessageListener messageListener;
 
-  RttChatAdapter(Context context, MessageListener listener, @Nullable Bundle savedInstanceState) {
+  RttChatAdapter(Context context, MessageListener listener) {
     this.context = context;
     this.messageListener = listener;
-    if (savedInstanceState == null) {
-      rttMessages = new ArrayList<>();
-    } else {
-      rttMessages = savedInstanceState.getParcelableArrayList(KEY_MESSAGE_DATA);
-      lastIndexOfLocalMessage = savedInstanceState.getInt(KEY_LAST_LOCAL_MESSAGE);
-    }
   }
 
   @Override
@@ -168,12 +159,35 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     }
   }
 
-  void onSaveInstanceState(@NonNull Bundle bundle) {
-    bundle.putParcelableArrayList(KEY_MESSAGE_DATA, (ArrayList<RttChatMessage>) rttMessages);
-    bundle.putInt(KEY_LAST_LOCAL_MESSAGE, lastIndexOfLocalMessage);
-  }
-
   void setAvatarDrawable(Drawable drawable) {
     avatarDrawable = drawable;
+  }
+
+  /**
+   * Restores RTT chat history from {@code RttTranscript}.
+   *
+   * @param rttTranscript transcript saved previously.
+   * @return last unfinished local message, return null if there is no current editing local
+   *     message.
+   */
+  @Nullable
+  String onRestoreRttChat(RttTranscript rttTranscript) {
+    LogUtil.enterBlock("RttChatAdapater.onRestoreRttChat");
+    rttMessages = RttChatMessage.fromTranscript(rttTranscript);
+    lastIndexOfLocalMessage = RttChatMessage.getLastIndexLocalMessage(rttMessages);
+    notifyDataSetChanged();
+    if (lastIndexOfLocalMessage < 0) {
+      return null;
+    }
+    RttChatMessage message = rttMessages.get(lastIndexOfLocalMessage);
+    if (!message.isFinished()) {
+      return message.getContent();
+    } else {
+      return null;
+    }
+  }
+
+  List<RttTranscriptMessage> getRttTranscriptMessageList() {
+    return RttChatMessage.toTranscriptMessageList(rttMessages);
   }
 }
