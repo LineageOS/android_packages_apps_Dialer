@@ -86,12 +86,15 @@ public final class ContactPhotoView extends FrameLayout {
   private void setBadge(PhotoInfo photoInfo) {
     // No badge for spam numbers.
     if (photoInfo.getIsSpam()) {
+      hideBadge();
       return;
     }
 
     if (photoInfo.getIsVideo()) {
       contactBadgeContainer.setVisibility(View.VISIBLE);
       videoCallBadge.setVisibility(View.VISIBLE);
+    } else {
+      hideBadge();
     }
   }
 }
