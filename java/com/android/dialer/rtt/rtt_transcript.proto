@@ -1,0 +1,30 @@
+syntax = "proto2";
+
+option java_package = "com.android.dialer.rtt";
+option java_multiple_files = true;
+option optimize_for = LITE_RUNTIME;
+
+
+package com.android.dialer.rtt;
+
+// RTT transcript which contains chat history of a RTT call.
+message RttTranscript {
+  // Unique ID used for database.
+  optional string id = 1;
+  // Phone number of RTT call.
+  optional string number = 2;
+  // Timestamp when the RTT call is created.
+  optional int64 timestamp = 3;
+  // Chat messages.
+  repeated RttTranscriptMessage messages = 4;
+}
+
+// Single chat message inside a RTT call.
+message RttTranscriptMessage {
+  optional string content = 1;
+  optional int64 timestamp = 2;
+  // Whether this message is sent from local device or received from remote
+  // party.
+  optional bool is_remote = 3;
+  optional bool is_finished = 4;
+}

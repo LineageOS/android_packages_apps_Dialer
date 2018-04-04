@@ -17,7 +17,10 @@
 package com.android.incallui.rtt.protocol;
 
 import android.support.v4.app.Fragment;
+import com.android.dialer.rtt.RttTranscript;
+import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.incallui.incall.protocol.InCallScreen;
+import java.util.List;
 
 /** Interface for call RTT call module. */
 public interface RttCallScreen extends InCallScreen {
@@ -27,6 +30,10 @@ public interface RttCallScreen extends InCallScreen {
   void onRttScreenStop();
 
   void onRemoteMessage(String message);
+
+  void onRestoreRttChat(RttTranscript rttTranscript);
+
+  List<RttTranscriptMessage> getRttTranscriptMessageList();
 
   Fragment getRttCallScreenFragment();
 
