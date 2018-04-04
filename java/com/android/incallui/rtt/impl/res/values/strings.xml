@@ -27,7 +27,7 @@
   <!-- Text for back button. [CHAR LIMIT=20] -->
   <string name="rtt_button_back">Back</string>
 
-  <!-- Text for status banner. [CHAT LIMIT=100] -->
+  <!-- Text for status banner. [CHAR LIMIT=100] -->
   <string name="rtt_status_banner_text">Waiting for <xliff:g id="name">%s</xliff:g> to join RTT call&#8230;</string>
 
 </resources>

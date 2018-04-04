@@ -18,6 +18,7 @@ package com.android.dialer.calllog.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
@@ -151,7 +152,6 @@ public class Coalescer {
         TelecomUtil.composePhoneAccountHandle(
             row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
             row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
-
     if (!Objects.equals(phoneAccount1, phoneAccount2)) {
       return false;
     }
@@ -161,7 +161,7 @@ public class Coalescer {
       return false;
     }
 
-    if (!meetsAssistedDialingCriteria(row1, row2)) {
+    if (!meetsCallFeatureCriteria(row1, row2)) {
       return false;
     }
 
@@ -185,20 +185,25 @@ public class Coalescer {
   }
 
   /**
-   * Returns a boolean indicating whether or not FEATURES_ASSISTED_DIALING is mutually exclusive
-   * between two rows.
+   * Returns true if column {@link AnnotatedCallLog#FEATURES} of the two given rows indicate that
+   * they can be coalesced.
    */
-  private static boolean meetsAssistedDialingCriteria(ContentValues row1, ContentValues row2) {
-    int row1Assisted =
-        row1.getAsInteger(AnnotatedCallLog.FEATURES)
-            & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING;
-    int row2Assisted =
-        row2.getAsInteger(AnnotatedCallLog.FEATURES)
-            & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING;
+  private static boolean meetsCallFeatureCriteria(ContentValues row1, ContentValues row2) {
+    int row1Features = row1.getAsInteger(AnnotatedCallLog.FEATURES);
+    int row2Features = row2.getAsInteger(AnnotatedCallLog.FEATURES);
 
-    // FEATURES_ASSISTED_DIALING should not be combined with calls that are
-    // !FEATURES_ASSISTED_DIALING
-    return row1Assisted == row2Assisted;
+    // A row with FEATURES_ASSISTED_DIALING should not be combined with one without it.
+    if ((row1Features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
+        != (row2Features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)) {
+      return false;
+    }
+
+    // A video call should not be combined with one that is not a video call.
+    if ((row1Features & Calls.FEATURES_VIDEO) != (row2Features & Calls.FEATURES_VIDEO)) {
+      return false;
+    }
+
+    return true;
   }
 
   /**

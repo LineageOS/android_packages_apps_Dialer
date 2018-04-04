@@ -35,6 +35,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -1221,6 +1222,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     fragment.show(getSupportFragmentManager(), Tags.INTERNATIONAL_CALL_ON_WIFI);
   }
 
+  public void showDialogForRttRequest(DialerCall call, int rttRequestId) {
+    LogUtil.enterBlock("InCallActivity.showDialogForRttRequest");
+    DialogFragment fragment = RttRequestDialogFragment.newInstance(call.getId(), rttRequestId);
+    fragment.show(getSupportFragmentManager(), Tags.RTT_REQUEST_DIALOG);
+  }
+
   @Override
   public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
     super.onMultiWindowModeChanged(isInMultiWindowMode);
@@ -1763,6 +1770,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String RTT_CALL_SCREEN = "tag_rtt_call_screen";
     static final String POST_CHAR_DIALOG_FRAGMENT = "tag_post_char_dialog_fragment";
     static final String SPEAK_EASY_SCREEN = "tag_speak_easy_screen";
+    static final String RTT_REQUEST_DIALOG = "tag_rtt_request_dialog";
   }
 
   private static final class ConfigNames {

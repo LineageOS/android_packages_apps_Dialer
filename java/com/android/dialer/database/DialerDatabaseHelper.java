@@ -32,21 +32,23 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
-import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import com.android.contacts.common.R;
 import com.android.contacts.common.util.StopWatch;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutor.Worker;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
@@ -85,6 +87,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   private static final int MAX_ENTRIES = 20;
 
   private final Context context;
+  private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
+
   private boolean isTestInstance = false;
 
   protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
@@ -344,11 +348,19 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    */
   public void startSmartDialUpdateThread(boolean forceUpdate) {
     if (PermissionsUtil.hasContactsReadPermissions(context)) {
-      DialerExecutorComponent.get(context)
-          .dialerExecutorFactory()
-          .createNonUiTaskBuilder(new UpdateSmartDialWorker())
-          .build()
-          .executeParallel(forceUpdate);
+      Futures.addCallback(
+          // Serialize calls to updateSmartDialDatabase. Use FutureSerializer instead of
+          // synchronizing on the method to prevent deadlocking thread pool. FutureSerializer
+          // provides the guarantee that the next AsyncCallable won't even be submitted until the
+          // ListenableFuture returned by the previous one completes. See a bug.
+          dialerFutureSerializer.submit(
+              () -> {
+                updateSmartDialDatabase(forceUpdate);
+                return null;
+              },
+              DialerExecutorComponent.get(context).backgroundExecutor()),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
     }
   }
 
@@ -657,7 +669,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * @param forceUpdate If set to true, update the database by reloading all contacts.
    */
   @WorkerThread
-  public synchronized void updateSmartDialDatabase(boolean forceUpdate) {
+  public void updateSmartDialDatabase(boolean forceUpdate) {
     LogUtil.enterBlock("DialerDatabaseHelper.updateSmartDialDatabase");
 
     final SQLiteDatabase db = getWritableDatabase();
@@ -1294,16 +1306,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
         return Objects.equals(this.lookupKey, that.lookupKey) && Objects.equals(this.id, that.id);
       }
       return false;
-    }
-  }
-
-  private class UpdateSmartDialWorker implements Worker<Boolean, Void> {
-
-    @Nullable
-    @Override
-    public Void doInBackground(Boolean forceUpdate) throws Throwable {
-      updateSmartDialDatabase(forceUpdate);
-      return null;
     }
   }
 }
