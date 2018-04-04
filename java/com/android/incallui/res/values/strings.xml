@@ -202,4 +202,19 @@
   <!-- Text for bubble return-to-call button -->
   <string name="bubble_return_to_call">Back to call</string>
 
+  <!-- Title for RTT request dialog. [CHAR LIMIT=60] -->
+  <string name="rtt_request_dialog_title">Join RTT call?</string>
+
+  <!-- Details for RTT request dialog. [CHAR LIMIT=NONE] -->
+  <string name="rtt_request_dialog_details"><xliff:g id="caller">%1$s</xliff:g> wants to use messaging within your voice call.</string>
+
+  <!-- More information for RTT request dialog. [CHAR LIMIT=NONE] -->
+  <string name="rtt_request_dialog_more_information">RTT assists callers who are deaf, hard of hearing, have a speech disability, or need more than voice alone.</string>
+
+  <!-- Text for button to decline RTT request. [CHAR LIMIT=20] -->
+  <string name="rtt_button_decline_request">No thanks</string>
+
+  <!-- Text for button to accept RTT request. [CHAR LIMIT=20] -->
+  <string name="rtt_button_accept_request">Join RTT</string>
+
 </resources>

@@ -894,6 +894,13 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   }
 
   @Override
+  public void onUpgradeToRtt(DialerCall call, int rttRequestId) {
+    if (inCallActivity != null) {
+      inCallActivity.showDialogForRttRequest(call, rttRequestId);
+    }
+  }
+
+  @Override
   public void onSessionModificationStateChange(DialerCall call) {
     int newState = call.getVideoTech().getSessionModificationState();
     LogUtil.i("InCallPresenter.onSessionModificationStateChange", "state: %d", newState);

@@ -479,7 +479,7 @@ public class CallButtonPresenter
             // Most devices cannot make calls on 2 SIMs at the same time.
             && InCallPresenter.getInstance().getCallList().getAllCalls().size() == 1;
 
-    boolean showUpgradeToRtt = TelecomUtil.isRttEnabled(context) && call.canUpgradeToRttCall();
+    boolean showUpgradeToRtt = call.canUpgradeToRttCall();
 
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_SWAP, showSwap);

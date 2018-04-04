@@ -19,5 +19,5 @@
   <uses-permission android:name="com.cequint.ecid.CALLER_ID_LOOKUP"/>
 
   <!-- This is used by MotorolaInCallUiNotifier to send broadcasts. -->
-  <uses-permission android:name="com.motorola.incallui.action.INCOMING_CALL_VISIBILITY_CHANGED"/>
+  <uses-permission android:name="com.motorola.incallui.permission.INCOMING_CALL_VISIBILITY_CHANGED"/>
 </manifest>
