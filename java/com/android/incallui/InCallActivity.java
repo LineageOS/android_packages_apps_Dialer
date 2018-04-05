@@ -151,6 +151,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean didShowVideoCallScreen;
   private boolean didShowRttCallScreen;
   private boolean didShowSpeakEasyScreen;
+  private String lastShownSpeakEasyScreenUniqueCallid = "";
   private boolean dismissKeyguard;
   private boolean isInShowMainInCallFragment;
   private boolean isRecreating; // whether the activity is going to be recreated
@@ -1353,15 +1354,18 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private boolean showSpeakEasyFragment(FragmentTransaction transaction, DialerCall call) {
 
-    // TODO(erfanian): Support multiple speakeasy screens.
     if (didShowSpeakEasyScreen) {
-      return false;
+      if (lastShownSpeakEasyScreenUniqueCallid.equals(call.getUniqueCallId())) {
+        return false;
+      }
+      hideSpeakEasyFragment(transaction);
     }
 
     Optional<Fragment> speakEasyFragment = speakEasyCallManager.getSpeakEasyFragment(call);
     if (speakEasyFragment.isPresent()) {
       transaction.add(R.id.main, speakEasyFragment.get(), Tags.SPEAK_EASY_SCREEN);
       didShowSpeakEasyScreen = true;
+      lastShownSpeakEasyScreenUniqueCallid = call.getUniqueCallId();
       return true;
     }
     return false;

@@ -16,22 +16,23 @@
 
 package com.android.incallui.rtt.impl;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
+import com.android.dialer.rtt.RttTranscript;
+import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.incallui.rtt.protocol.Constants;
 import com.google.common.base.Splitter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /** Message class that holds one RTT chat content. */
-final class RttChatMessage implements Parcelable {
+final class RttChatMessage {
 
   private static final Splitter SPLITTER = Splitter.on(Constants.BUBBLE_BREAKER);
 
   boolean isRemote;
-  public boolean hasAvatar;
+  long timstamp;
   private final StringBuilder content = new StringBuilder();
   private boolean isFinished;
 
@@ -178,40 +179,39 @@ final class RttChatMessage implements Parcelable {
     return i;
   }
 
-  @Override
-  public int describeContents() {
-    return 0;
+  static List<RttTranscriptMessage> toTranscriptMessageList(List<RttChatMessage> messageList) {
+    List<RttTranscriptMessage> transcriptMessageList = new ArrayList<>();
+    for (RttChatMessage message : messageList) {
+      transcriptMessageList.add(
+          RttTranscriptMessage.newBuilder()
+              .setContent(message.getContent())
+              .setTimestamp(message.timstamp)
+              .setIsRemote(message.isRemote)
+              .setIsFinished(message.isFinished)
+              .build());
+    }
+    return transcriptMessageList;
   }
 
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(getContent());
-    boolean[] values = new boolean[2];
-    values[0] = isRemote;
-    values[1] = isFinished;
-    dest.writeBooleanArray(values);
+  static List<RttChatMessage> fromTranscript(RttTranscript rttTranscript) {
+    List<RttChatMessage> messageList = new ArrayList<>();
+    if (rttTranscript == null) {
+      return messageList;
+    }
+    for (RttTranscriptMessage message : rttTranscript.getMessagesList()) {
+      RttChatMessage chatMessage = new RttChatMessage();
+      chatMessage.append(message.getContent());
+      chatMessage.timstamp = message.getTimestamp();
+      chatMessage.isRemote = message.getIsRemote();
+      if (message.getIsFinished()) {
+        chatMessage.finish();
+      }
+      messageList.add(chatMessage);
+    }
+    return messageList;
   }
 
-  public static final Parcelable.Creator<RttChatMessage> CREATOR =
-      new Parcelable.Creator<RttChatMessage>() {
-        @Override
-        public RttChatMessage createFromParcel(Parcel in) {
-          return new RttChatMessage(in);
-        }
-
-        @Override
-        public RttChatMessage[] newArray(int size) {
-          return new RttChatMessage[size];
-        }
-      };
-
-  private RttChatMessage(Parcel in) {
-    content.append(in.readString());
-    boolean[] values = new boolean[2];
-    in.readBooleanArray(values);
-    isRemote = values[0];
-    isFinished = values[1];
+  RttChatMessage() {
+    timstamp = System.currentTimeMillis();
   }
-
-  RttChatMessage() {}
 }
