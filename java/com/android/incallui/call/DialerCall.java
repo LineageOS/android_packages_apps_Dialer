@@ -73,6 +73,7 @@ import com.android.dialer.logging.ContactLookupResult.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
+import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
@@ -205,6 +206,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    * subject.
    */
   private boolean isCallSubjectSupported;
+
+  public RttTranscript getRttTranscript() {
+    return rttTranscript;
+  }
+
+  public void setRttTranscript(RttTranscript rttTranscript) {
+    this.rttTranscript = rttTranscript;
+  }
+
+  private RttTranscript rttTranscript;
 
   private final Call.Callback telecomCallCallback =
       new Call.Callback() {
@@ -949,6 +960,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   /** Gets the time when the call first became active. */
   public long getConnectTimeMillis() {
     return telecomCall.getDetails().getConnectTimeMillis();
+  }
+
+  /**
+   * Gets the time when the call is created (see {@link Details#getCreationTimeMillis()}). This is
+   * the same time that is logged as the start time in the Call Log (see {@link
+   * android.provider.CallLog.Calls#DATE}).
+   */
+  @TargetApi(26)
+  public long getCreationTimeMillis() {
+    return telecomCall.getDetails().getCreationTimeMillis();
   }
 
   public boolean isConferenceCall() {

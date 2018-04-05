@@ -18,6 +18,7 @@ package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
@@ -123,10 +124,21 @@ final class Modules {
       return Collections.emptyList();
     }
 
-    List<HistoryItemActionModule> modules = new ArrayList<>();
+    boolean isDuoCall =
+        DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+            .flattenToString()
+            .equals(row.getPhoneAccountComponentName());
+
+    // Obtain a PhoneAccountHandle that will be used to start carrier voice/video calls.
+    // If the row is for a Duo call, we should use the default phone account as the one included in
+    // the row is for Duo only.
     PhoneAccountHandle phoneAccountHandle =
-        TelecomUtil.composePhoneAccountHandle(
-            row.getPhoneAccountComponentName(), row.getPhoneAccountId());
+        isDuoCall
+            ? TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL)
+            : TelecomUtil.composePhoneAccountHandle(
+                row.getPhoneAccountComponentName(), row.getPhoneAccountId());
+
+    List<HistoryItemActionModule> modules = new ArrayList<>();
 
     // Add an audio call item
     modules.add(
@@ -136,10 +148,6 @@ final class Modules {
     // Add a video item if (1) the call log entry is for a video call, and (2) the call is not spam.
     if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
         && !row.getNumberAttributes().getIsSpam()) {
-      boolean isDuoCall =
-          DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
-              .flattenToString()
-              .equals(row.getPhoneAccountComponentName());
       modules.add(
           isDuoCall
               ? new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG)
