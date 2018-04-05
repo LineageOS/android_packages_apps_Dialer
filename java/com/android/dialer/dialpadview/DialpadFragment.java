@@ -1050,8 +1050,14 @@ public class DialpadFragment extends Fragment
       digits.clear();
       return true;
     } else if (id == R.id.one) {
-      if (isDigitsEmpty() || TextUtils.equals(this.digits.getText(), "1")) {
+      // For non-talkback users: check for empty
+      // For linear navigation users: check for "1"
+      // For explore by touch users: check for "11"
+      if (isDigitsEmpty()
+          || TextUtils.equals(this.digits.getText(), "1")
+          || TextUtils.equals(this.digits.getText(), "11")) {
         // We'll try to initiate voicemail and thus we want to remove irrelevant string.
+        removePreviousDigitIfPossible('1');
         removePreviousDigitIfPossible('1');
 
         List<PhoneAccountHandle> subscriptionAccountHandles =
@@ -1093,6 +1099,7 @@ public class DialpadFragment extends Fragment
         // If the zero key is currently pressed, then the long press occurred by touch
         // (and not via other means like certain accessibility input methods).
         // Remove the '0' that was input when the key was first pressed.
+        removePreviousDigitIfPossible('0');
         removePreviousDigitIfPossible('0');
       }
       keyPressed(KeyEvent.KEYCODE_PLUS);

@@ -171,6 +171,9 @@ public class DialpadView extends LinearLayout {
       } else if (BUTTON_IDS[i] == R.id.star) {
         numberString = resources.getString(R.string.dialpad_star_number);
         numberContentDescription = numberString;
+      } else if (BUTTON_IDS[i] == R.id.zero) {
+        numberString = numberFormat.format(i);
+        numberContentDescription = numberString;
       } else {
         numberString = numberFormat.format(i);
         // The content description is used for Talkback key presses. The number is
