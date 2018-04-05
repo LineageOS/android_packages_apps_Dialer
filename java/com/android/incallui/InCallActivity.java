@@ -1391,7 +1391,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void setSpeakEasyCallManager(SpeakEasyCallManager speakEasyCallManager) {
-    this.speakEasyCallManager = Assert.isNotNull(speakEasyCallManager);
+    this.speakEasyCallManager = speakEasyCallManager;
   }
 
   public SpeakEasyCallManager getSpeakEasyCallManager() {
