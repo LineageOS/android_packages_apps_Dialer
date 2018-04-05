@@ -19,116 +19,119 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/expanded_search_bar_height"
     android:background="@color/dialer_theme_color"
-    app:contentInsetStart="0dp"
-    app:contentInsetEnd="0dp">
-
-  <com.android.dialer.main.impl.toolbar.SearchBarView
-      android:id="@+id/search_view_container"
+    app:contentInsetEnd="0dp"
+    app:contentInsetStart="0dp">
+  <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/search_bar_margin"
-      android:minHeight="@dimen/collapsed_search_bar_height"
-      android:background="@drawable/search_bar_background_rounded_corners"
-      android:elevation="4dp">
+      android:layout_height="match_parent">
+    <com.android.dialer.main.impl.toolbar.SearchBarView
+        android:id="@+id/search_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/search_bar_margin"
+        android:background="@drawable/search_bar_background_rounded_corners"
+        android:elevation="4dp"
+        android:minHeight="@dimen/collapsed_search_bar_height">
 
-    <RelativeLayout
-      android:id="@+id/search_box_collapsed"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_vertical"
-      android:background="?android:selectableItemBackground"
-      android:gravity="center_vertical">
-
-      <ImageView
-          android:id="@+id/search_magnifying_glass"
-          android:layout_width="48dp"
-          android:layout_height="48dp"
-          android:layout_marginStart="8dp"
-          android:layout_centerVertical="true"
-          android:importantForAccessibility="no"
-          android:scaleType="center"
-          android:src="@drawable/quantum_ic_search_vd_theme_24"
-          android:tint="@color/dialer_secondary_text_color"/>
-
-      <TextView
-          android:id="@+id/search_box_start_search"
-          android:layout_width="wrap_content"
+      <RelativeLayout
+          android:id="@+id/search_box_collapsed"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_toEndOf="@+id/search_magnifying_glass"
-          android:layout_toStartOf="@+id/voice_search_button"
-          android:layout_marginStart="8dp"
-          android:layout_centerVertical="true"
-          android:fontFamily="sans-serif"
-          android:text="@string/dialer_hint_find_contact"
-          android:textColor="@color/dialer_secondary_text_color"
-          android:textSize="16dp"/>
+          android:layout_gravity="center_vertical"
+          android:background="?android:selectableItemBackground"
+          android:gravity="center_vertical">
 
-      <ImageView
-          android:id="@+id/voice_search_button"
-          android:layout_width="48dp"
-          android:layout_height="48dp"
-          android:layout_toStartOf="@+id/main_options_menu_button"
-          android:background="?android:attr/selectableItemBackgroundBorderless"
-          android:contentDescription="@string/description_start_voice_search"
-          android:scaleType="center"
-          android:src="@drawable/quantum_ic_mic_vd_theme_24"
-          android:tint="@color/dialer_secondary_text_color"/>
+        <ImageView
+            android:id="@+id/search_magnifying_glass"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"
+            android:importantForAccessibility="no"
+            android:scaleType="center"
+            android:src="@drawable/quantum_ic_search_vd_theme_24"
+            android:tint="@color/dialer_secondary_text_color"/>
 
-      <ImageButton
-          android:id="@+id/main_options_menu_button"
-          android:layout_width="48dp"
-          android:layout_height="48dp"
-          android:layout_alignParentEnd="true"
-          android:background="?android:attr/selectableItemBackgroundBorderless"
-          android:contentDescription="@string/action_menu_overflow_description"
-          android:scaleType="center"
-          android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-          android:tint="@color/dialer_secondary_text_color"/>
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/search_box_start_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/search_magnifying_glass"
+            android:layout_toStartOf="@+id/voice_search_button"
+            android:fontFamily="sans-serif"
+            android:text="@string/dialer_hint_find_contact"
+            android:textColor="@color/dialer_secondary_text_color"
+            android:textSize="16dp"/>
 
-    <include layout="@layout/expanded_search_bar"/>
-  </com.android.dialer.main.impl.toolbar.SearchBarView>
+        <ImageView
+            android:id="@+id/voice_search_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_toStartOf="@+id/main_options_menu_button"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/description_start_voice_search"
+            android:scaleType="center"
+            android:src="@drawable/quantum_ic_mic_vd_theme_24"
+            android:tint="@color/dialer_secondary_text_color"/>
 
-  <!-- Sets android:importantForAccessibility="no" to avoid being announced when navigating with
-       talkback enabled. It will still be announced when user drag or drop contact onto it.
-       This is required since drag and drop event is only sent to views are visible when drag
-       starts. -->
-  <com.android.dialer.app.list.RemoveView
-      android:id="@+id/remove_view"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_gravity="center_vertical"
-      android:layout_margin="@dimen/search_bar_margin"
-      android:contentDescription="@string/main_remove_contact"
-      android:importantForAccessibility="no">
+        <ImageButton
+            android:id="@+id/main_options_menu_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_menu_overflow_description"
+            android:scaleType="center"
+            android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
+            android:tint="@color/dialer_secondary_text_color"/>
+      </RelativeLayout>
 
-    <!-- We set this view's visibility to gone instead of the parent because if we hide remove
-    view, it won't receive drag and accessibility events. -->
-    <LinearLayout
-        android:id="@+id/remove_view_content"
+      <include layout="@layout/expanded_search_bar"/>
+    </com.android.dialer.main.impl.toolbar.SearchBarView>
+
+    <!-- Sets android:importantForAccessibility="no" to avoid being announced when navigating with
+         talkback enabled. It will still be announced when user drag or drop contact onto it.
+         This is required since drag and drop event is only sent to views are visible when drag
+         starts. -->
+    <com.android.dialer.app.list.RemoveView
+        android:id="@+id/remove_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dialer_theme_color"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_margin="@dimen/search_bar_margin"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/main_remove_contact"
+        android:importantForAccessibility="no">
 
-      <ImageView
-          android:id="@+id/remove_view_icon"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:layout_marginBottom="8dp"
-          android:src="@drawable/quantum_ic_close_vd_theme_24"
-          android:tint="@color/dialer_primary_text_color_white"/>
+      <!-- We set this view's visibility to gone instead of the parent because if we hide remove
+      view, it won't receive drag and accessibility events. -->
+      <LinearLayout
+          android:id="@+id/remove_view_content"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@color/dialer_theme_color"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:visibility="gone">
 
-      <TextView
-          android:id="@+id/remove_view_text"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/main_remove_contact"
-          android:textColor="@color/dialer_primary_text_color_white"
-          android:textSize="16sp"/>
-    </LinearLayout>
-  </com.android.dialer.app.list.RemoveView>
+        <ImageView
+            android:id="@+id/remove_view_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/quantum_ic_close_vd_theme_24"
+            android:tint="@color/dialer_primary_text_color_white"/>
+
+        <TextView
+            android:id="@+id/remove_view_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_remove_contact"
+            android:textColor="@color/dialer_primary_text_color_white"
+            android:textSize="16sp"/>
+      </LinearLayout>
+    </com.android.dialer.app.list.RemoveView>
+  </FrameLayout>
 </com.android.dialer.main.impl.toolbar.MainToolbar>
