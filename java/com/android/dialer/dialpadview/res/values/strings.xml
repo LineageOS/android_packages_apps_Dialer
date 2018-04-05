@@ -30,12 +30,12 @@
   <string name="description_delete_button">backspace</string>
 
   <!--  String describing the button used to add a plus (+) symbol to the dialpad -->
-  <string name="description_image_button_plus">plus</string>
+  <string name="description_image_button_plus">dial plus</string>
 
   <!-- String describing the Voicemail ImageButton.
        Used by AccessibilityService to announce the purpose of the button.
   -->
-  <string name="description_voicemail_button">voicemail</string>
+  <string name="description_voicemail_button">call voicemail</string>
 
   <!-- String describing the Dial ImageButton
 
