@@ -563,9 +563,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
       InCallPresenter.getInstance().onUiShowing(false);
-      if (errorDialog != null) {
-        errorDialog.dismiss();
-      }
+    }
+    if (errorDialog != null) {
+      errorDialog.dismiss();
     }
 
     if (isFinishing()) {
