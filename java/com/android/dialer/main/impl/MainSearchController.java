@@ -184,7 +184,7 @@ public class MainSearchController implements SearchBarListener {
    */
   private void hideDialpad(boolean animate) {
     LogUtil.enterBlock("MainSearchController.hideDialpad");
-    Assert.checkArgument(isDialpadVisible());
+    assertDialpadVisible();
 
     fab.show();
     toolbar.slideDown(animate, fragmentContainer);
@@ -291,7 +291,7 @@ public class MainSearchController implements SearchBarListener {
   /** Calls {@link #hideDialpad(boolean)}, removes the search fragment and clears the dialpad. */
   private void closeSearch(boolean animate) {
     LogUtil.enterBlock("MainSearchController.closeSearch");
-    Assert.checkArgument(isSearchVisible());
+    assertSearchIsVisible();
     if (isDialpadVisible()) {
       hideDialpad(animate);
     } else if (!fab.isShown()) {
@@ -337,9 +337,24 @@ public class MainSearchController implements SearchBarListener {
         && fragment.isDialpadSlideUp();
   }
 
+  private void assertDialpadVisible() {
+    DialpadFragment fragment = getDialpadFragment();
+    Assert.checkArgument(fragment != null, "Dialpad Fragment is null");
+    Assert.checkArgument(fragment.isAdded(), "Dialpad Fragment is no added");
+    Assert.checkArgument(!fragment.isHidden(), "Dialpad Fragment is hidden");
+    Assert.checkArgument(fragment.isDialpadSlideUp(), "Dialpad Fragment is slide down");
+  }
+
   private boolean isSearchVisible() {
     NewSearchFragment fragment = getSearchFragment();
     return fragment != null && fragment.isAdded() && !fragment.isHidden();
+  }
+
+  private void assertSearchIsVisible() {
+    NewSearchFragment fragment = getSearchFragment();
+    Assert.checkArgument(fragment != null, "Search Fragment is null");
+    Assert.checkArgument(fragment.isAdded(), "Search Fragment is not added");
+    Assert.checkArgument(!fragment.isHidden(), "Search Fragment is hidden.");
   }
 
   /** Returns true if the search UI is visible. */
