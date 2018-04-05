@@ -50,6 +50,7 @@ import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
+import com.android.dialer.util.TransactionSafeActivity;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class MainSearchController implements SearchBarListener {
   private static final String DIALPAD_FRAGMENT_TAG = "dialpad_fragment_tag";
   private static final String SEARCH_FRAGMENT_TAG = "search_fragment_tag";
 
-  private final AppCompatActivity activity;
+  private final TransactionSafeActivity activity;
   private final BottomNavBar bottomNav;
   private final FloatingActionButton fab;
   private final MainToolbar toolbar;
@@ -97,7 +98,7 @@ public class MainSearchController implements SearchBarListener {
   private boolean requestingPermission;
 
   public MainSearchController(
-      AppCompatActivity activity,
+      TransactionSafeActivity activity,
       BottomNavBar bottomNav,
       FloatingActionButton fab,
       MainToolbar toolbar,
@@ -201,7 +202,8 @@ public class MainSearchController implements SearchBarListener {
 
           @Override
           public void onAnimationEnd(Animation animation) {
-            if (!(activity.isFinishing() || activity.isDestroyed())) {
+            if (activity.isSafeToCommitTransactions()
+                && !(activity.isFinishing() || activity.isDestroyed())) {
               activity.getFragmentManager().beginTransaction().hide(dialpadFragment).commit();
             }
           }
