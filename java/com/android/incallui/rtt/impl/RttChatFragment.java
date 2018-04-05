@@ -49,6 +49,8 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.rtt.RttTranscript;
+import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
 import com.android.incallui.call.DialerCall.State;
@@ -69,6 +71,7 @@ import com.android.incallui.rtt.protocol.Constants;
 import com.android.incallui.rtt.protocol.RttCallScreen;
 import com.android.incallui.rtt.protocol.RttCallScreenDelegate;
 import com.android.incallui.rtt.protocol.RttCallScreenDelegateFactory;
+import java.util.List;
 
 /** RTT chat fragment to show chat bubbles. */
 public class RttChatFragment extends Fragment
@@ -150,6 +153,11 @@ public class RttChatFragment extends Fragment
     inCallButtonUiDelegate.onInCallButtonUiReady(this);
   }
 
+  @Override
+  public List<RttTranscriptMessage> getRttTranscriptMessageList() {
+    return adapter.getRttTranscriptMessageList();
+  }
+
   @Nullable
   @Override
   public View onCreateView(
@@ -172,10 +180,7 @@ public class RttChatFragment extends Fragment
           if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
             String lastMessage = adapter.retrieveLastLocalMessage();
             if (lastMessage != null) {
-              isClearingInput = true;
-              editText.setText(lastMessage);
-              editText.setSelection(lastMessage.length());
-              isClearingInput = false;
+              resumeInput(lastMessage);
               rttCallScreenDelegate.onLocalMessage("\b");
               return true;
             }
@@ -188,7 +193,7 @@ public class RttChatFragment extends Fragment
     layoutManager.setStackFromEnd(true);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(false);
-    adapter = new RttChatAdapter(getContext(), this, savedInstanceState);
+    adapter = new RttChatAdapter(getContext(), this);
     recyclerView.setAdapter(adapter);
     recyclerView.addOnScrollListener(
         new OnScrollListener() {
@@ -215,9 +220,7 @@ public class RttChatFragment extends Fragment
     submitButton.setOnClickListener(
         v -> {
           adapter.submitLocalMessage();
-          isClearingInput = true;
-          editText.setText("");
-          isClearingInput = false;
+          resumeInput("");
           rttCallScreenDelegate.onLocalMessage(Constants.BUBBLE_BREAKER);
           // Auto scrolling for new messages should be resumed since user has submit current
           // message.
@@ -314,6 +317,21 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
+  public void onRestoreRttChat(RttTranscript rttTranscript) {
+    String unfinishedLocalMessage = adapter.onRestoreRttChat(rttTranscript);
+    if (unfinishedLocalMessage != null) {
+      resumeInput(unfinishedLocalMessage);
+    }
+  }
+
+  private void resumeInput(String input) {
+    isClearingInput = true;
+    editText.setText(input);
+    editText.setSelection(input.length());
+    isClearingInput = false;
+  }
+
+  @Override
   public void onStart() {
     LogUtil.enterBlock("RttChatFragment.onStart");
     super.onStart();
@@ -324,7 +342,6 @@ public class RttChatFragment extends Fragment
   @Override
   public void onSaveInstanceState(@NonNull Bundle bundle) {
     super.onSaveInstanceState(bundle);
-    adapter.onSaveInstanceState(bundle);
   }
 
   @Override
