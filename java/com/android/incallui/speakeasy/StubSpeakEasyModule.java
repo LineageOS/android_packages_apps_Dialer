@@ -16,8 +16,11 @@
 
 package com.android.incallui.speakeasy;
 
+import android.support.v4.app.Fragment;
+import com.google.common.base.Optional;
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 
 /** Module which binds {@link SpeakEasyCallManagerStub}. */
 @Module
@@ -25,4 +28,9 @@ public abstract class StubSpeakEasyModule {
 
   @Binds
   abstract SpeakEasyCallManager bindsSpeakEasy(SpeakEasyCallManagerStub stub);
+
+  @Provides
+  static Optional<Fragment> provideSpeakEasySettingsFragment() {
+    return Optional.absent();
+  }
 }
