@@ -39,7 +39,10 @@ import android.telephony.TelephonyManager;
 import android.util.ArraySet;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
+import com.android.dialer.CallConfiguration;
+import com.android.dialer.Mode;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.blocking.FilteredNumberCompat;
@@ -71,6 +74,7 @@ import com.android.incallui.speakeasy.SpeakEasyCallManager;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
+import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -89,6 +93,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class InCallPresenter implements CallList.Listener, AudioModeProvider.AudioModeListener {
   private static final String PIXEL2017_SYSTEM_FEATURE =
       "com.google.android.feature.PIXEL_2017_EXPERIENCE";
+  private static final String CALL_CONFIGURATION_EXTRA = "call_configuration";
 
   private static final long BLOCK_QUERY_TIMEOUT_MS = 1000;
 
@@ -265,6 +270,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private SpeakEasyCallManager speakEasyCallManager;
 
+  private boolean shouldStartInBubbleMode;
+
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
@@ -330,7 +337,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       ContactInfoCache contactInfoCache,
       ProximitySensor proximitySensor,
       FilteredNumberAsyncQueryHandler filteredNumberQueryHandler,
-      @NonNull SpeakEasyCallManager speakEasyCallManager) {
+      @NonNull SpeakEasyCallManager speakEasyCallManager,
+      Intent intent) {
     Trace.beginSection("InCallPresenter.setUp");
     if (serviceConnected) {
       LogUtil.i("InCallPresenter.setUp", "New service connection replacing existing one.");
@@ -398,8 +406,37 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       addListener(motorolaInCallUiNotifier);
     }
 
+    this.shouldStartInBubbleMode = shouldStartInBubbleMode(intent);
+
     LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
     Trace.endSection();
+  }
+
+  /**
+   * Return whether we should start call in bubble mode and not show InCallActivity. The call mode
+   * should be set in CallConfiguration in EXTRA_OUTGOING_CALL_EXTRAS when starting a call intent.
+   */
+  private boolean shouldStartInBubbleMode(Intent intent) {
+    if (!ReturnToCallController.isEnabled(context)) {
+      return false;
+    }
+    if (!intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+      return false;
+    }
+    Bundle extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
+    byte[] callConfigurationByteArray = extras.getByteArray(CALL_CONFIGURATION_EXTRA);
+    if (callConfigurationByteArray == null) {
+      return false;
+    }
+    try {
+      CallConfiguration callConfiguration = CallConfiguration.parseFrom(callConfigurationByteArray);
+      LogUtil.i(
+          "InCallPresenter.shouldStartInBubbleMode",
+          "call mode: " + callConfiguration.getCallMode());
+      return callConfiguration.getCallMode() == Mode.BUBBLE;
+    } catch (InvalidProtocolBufferException e) {
+      return false;
+    }
   }
 
   /**
@@ -699,15 +736,22 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   @Override
   public void onWiFiToLteHandover(DialerCall call) {
-    if (inCallActivity != null) {
-      inCallActivity.showToastForWiFiToLteHandover(call);
+    if (call.hasShownWiFiToLteHandoverToast()) {
+      return;
     }
+
+    Toast.makeText(context, R.string.video_call_wifi_to_lte_handover_toast, Toast.LENGTH_LONG)
+        .show();
+    call.setHasShownWiFiToLteHandoverToast();
   }
 
   @Override
   public void onHandoverToWifiFailed(DialerCall call) {
     if (inCallActivity != null) {
       inCallActivity.showDialogOrToastForWifiHandoverFailure(call);
+    } else {
+      Toast.makeText(context, R.string.video_call_lte_to_wifi_failed_message, Toast.LENGTH_SHORT)
+          .show();
     }
   }
 
@@ -1327,7 +1371,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   /** Instruct the in-call activity to show an error dialog or toast for a disconnected call. */
   private void showDialogOrToastForDisconnectedCall(DialerCall call) {
-    if (!isActivityStarted() || call.getState() != DialerCall.State.DISCONNECTED) {
+    if (call.getState() != DialerCall.State.DISCONNECTED) {
       return;
     }
 
@@ -1336,8 +1380,15 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       setDisconnectCauseForMissingAccounts(call);
     }
 
-    inCallActivity.showDialogOrToastForDisconnectedCall(
-        new DisconnectMessage(inCallActivity, call));
+    if (isActivityStarted()) {
+      inCallActivity.showDialogOrToastForDisconnectedCall(
+          new DisconnectMessage(inCallActivity, call));
+    } else {
+      CharSequence message = new DisconnectMessage(context, call).toastMessage;
+      if (message != null) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+      }
+    }
   }
 
   /**
@@ -1442,7 +1493,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       inCallActivity.dismissPendingDialogs();
     }
 
-    if (showCallUi || showAccountPicker) {
+    if ((showCallUi || showAccountPicker) && !shouldStartInBubbleMode) {
       LogUtil.i("InCallPresenter.startOrFinishUi", "Start in call UI");
       showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
     } else if (newState == InCallState.NO_CALLS) {
@@ -1501,6 +1552,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       cleanupSurfaces();
 
       isChangingConfigurations = false;
+
+      shouldStartInBubbleMode = false;
 
       // blow away stale contact info so that we get fresh data on
       // the next set of calls
@@ -1590,7 +1643,13 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
     final Point touchPoint = extras.getParcelable(TouchPointManager.TOUCH_POINT);
 
-    InCallPresenter.getInstance().setBoundAndWaitingForOutgoingCall(true, accountHandle);
+    setBoundAndWaitingForOutgoingCall(true, accountHandle);
+
+    if (shouldStartInBubbleMode) {
+      LogUtil.i("InCallPresenter.maybeStartRevealAnimation", "shouldStartInBubbleMode");
+      // Show bubble instead of in call UI
+      return;
+    }
 
     final Intent activityIntent =
         InCallActivity.getIntent(context, false, true, false /* forFullScreen */);
