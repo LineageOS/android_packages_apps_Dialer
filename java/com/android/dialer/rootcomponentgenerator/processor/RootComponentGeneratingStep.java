@@ -22,6 +22,7 @@ import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
 import com.android.dialer.rootcomponentgenerator.annotation.DialerRootComponent;
 import com.android.dialer.rootcomponentgenerator.annotation.DialerVariant;
+import com.android.dialer.rootcomponentgenerator.annotation.IncludeInDialerRoot;
 import com.android.dialer.rootcomponentgenerator.annotation.InstallIn;
 import com.android.dialer.rootcomponentgenerator.annotation.RootComponentGeneratorMetadata;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
@@ -35,7 +36,6 @@ import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.TypeSpec;
 import dagger.Component;
-import dagger.Subcomponent;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,8 +89,7 @@ final class RootComponentGeneratingStep implements ProcessingStep {
             .addModifiers(Modifier.PUBLIC)
             .addAnnotation(Singleton.class);
     for (TypeElement componentWithSuperInterface : componentList) {
-      rootComponentClassBuilder.addSuperinterface(
-          ClassName.get(componentWithSuperInterface).nestedClass("HasComponent"));
+      rootComponentClassBuilder.addSuperinterface(ClassName.get(componentWithSuperInterface));
     }
     AnnotationSpec.Builder componentAnnotation = AnnotationSpec.builder(Component.class);
     for (TypeElement annotatedElement : componentModuleMap.get(dialerVariant)) {
@@ -104,7 +103,7 @@ final class RootComponentGeneratingStep implements ProcessingStep {
 
   private List<TypeElement> generateComponentList() {
     List<TypeElement> list = new ArrayList<>();
-    extractInfoFromMetadata(Subcomponent.class, list::add);
+    extractInfoFromMetadata(IncludeInDialerRoot.class, list::add);
     return list;
   }
 

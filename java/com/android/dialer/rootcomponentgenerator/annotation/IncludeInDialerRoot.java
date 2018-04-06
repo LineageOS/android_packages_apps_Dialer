@@ -20,26 +20,28 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
 /**
- * Annotates a type equivalent to {@link dagger.Subcomponent}.
+ * Annotates a type that should be included in Dialer Root Component. Typically, annotated types are
+ * HasComponent interfaces.
  *
- * <p>The annotation processor will generate a new type file with some prefix, which contains public
- * static XXX get(Context context) method and HasComponent interface like:
- *
- * <p>
+ * <p>An example:
  *
  * <pre>
  * <code>
- *  public static SimulatorComponent get(Context context) {
- *      HasRootComponent hasRootComponent = (HasRootComponent) context.getApplicationContext();
- *      return ((HasComponent)(hasRootComponent.component()).simulatorComponent();
- *  }
- *  public interface HasComponent {
+ * {@literal @}dagger.Subcomponent
+ * public abstract class SimulatorComponent {
+ *   public static SimulatorComponent get(Context context) {
+ *      return ((HasComponent)((HasRootComponent) context.getApplicationContext()).component())
+ *         .simulatorComponent();
+ *   }
+ *   {@literal @}IncludeInDialerRoot
+ *   public interface HasComponent {
  *      SimulatorComponent simulatorComponent();
  *  }
+ * }
  * </code>
  * </pre>
  */
 @Target(ElementType.TYPE)
-public @interface DialerComponent {
+public @interface IncludeInDialerRoot {
   Class<?>[] modules() default {};
 }
