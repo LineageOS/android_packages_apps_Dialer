@@ -42,6 +42,7 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessageCreator;
 import com.android.dialer.voicemail.listui.error.VoicemailStatus;
 import com.android.dialer.voicemail.listui.error.VoicemailStatusWorker;
+import com.android.dialer.widget.EmptyContentView;
 import java.util.List;
 
 public class VisualVoicemailCallLogFragment extends CallLogFragment {
@@ -110,6 +111,9 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
     View view = inflater.inflate(R.layout.call_log_fragment, container, false);
     setupView(view);
+    EmptyContentView emptyContentView = view.findViewById(R.id.empty_list_view);
+    emptyContentView.setImage(R.drawable.quantum_ic_voicemail_vd_theme_24);
+    emptyContentView.setImageTint(R.color.empty_voicemail_icon_tint_color, null);
     return view;
   }
 
