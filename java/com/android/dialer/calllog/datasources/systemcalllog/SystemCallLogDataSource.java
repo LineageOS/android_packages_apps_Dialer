@@ -51,6 +51,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
@@ -277,109 +278,137 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         return;
       }
 
+      if (!cursor.moveToFirst()) {
+        LogUtil.i("SystemCallLogDataSource.handleInsertsAndUpdates", "no entries to insert/update");
+        return;
+      }
+
       LogUtil.i(
           "SystemCallLogDataSource.handleInsertsAndUpdates",
           "found %d entries to insert/update",
           cursor.getCount());
 
-      if (cursor.moveToFirst()) {
-        int idColumn = cursor.getColumnIndexOrThrow(Calls._ID);
-        int dateColumn = cursor.getColumnIndexOrThrow(Calls.DATE);
-        int lastModifiedColumn = cursor.getColumnIndexOrThrow(Calls.LAST_MODIFIED);
-        int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
-        int presentationColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER_PRESENTATION);
-        int typeColumn = cursor.getColumnIndexOrThrow(Calls.TYPE);
-        int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
-        int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
-        int dataUsageColumn = cursor.getColumnIndexOrThrow(Calls.DATA_USAGE);
-        int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
-        int voicemailUriColumn = cursor.getColumnIndexOrThrow(Calls.VOICEMAIL_URI);
-        int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
-        int newColumn = cursor.getColumnIndexOrThrow(Calls.NEW);
-        int geocodedLocationColumn = cursor.getColumnIndexOrThrow(Calls.GEOCODED_LOCATION);
-        int phoneAccountComponentColumn =
-            cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_COMPONENT_NAME);
-        int phoneAccountIdColumn = cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_ID);
-        int featuresColumn = cursor.getColumnIndexOrThrow(Calls.FEATURES);
-        int postDialDigitsColumn = cursor.getColumnIndexOrThrow(Calls.POST_DIAL_DIGITS);
+      int idColumn = cursor.getColumnIndexOrThrow(Calls._ID);
+      int dateColumn = cursor.getColumnIndexOrThrow(Calls.DATE);
+      int lastModifiedColumn = cursor.getColumnIndexOrThrow(Calls.LAST_MODIFIED);
+      int numberColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER);
+      int presentationColumn = cursor.getColumnIndexOrThrow(Calls.NUMBER_PRESENTATION);
+      int typeColumn = cursor.getColumnIndexOrThrow(Calls.TYPE);
+      int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
+      int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
+      int dataUsageColumn = cursor.getColumnIndexOrThrow(Calls.DATA_USAGE);
+      int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
+      int voicemailUriColumn = cursor.getColumnIndexOrThrow(Calls.VOICEMAIL_URI);
+      int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
+      int newColumn = cursor.getColumnIndexOrThrow(Calls.NEW);
+      int geocodedLocationColumn = cursor.getColumnIndexOrThrow(Calls.GEOCODED_LOCATION);
+      int phoneAccountComponentColumn =
+          cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_COMPONENT_NAME);
+      int phoneAccountIdColumn = cursor.getColumnIndexOrThrow(Calls.PHONE_ACCOUNT_ID);
+      int featuresColumn = cursor.getColumnIndexOrThrow(Calls.FEATURES);
+      int postDialDigitsColumn = cursor.getColumnIndexOrThrow(Calls.POST_DIAL_DIGITS);
 
-        // The cursor orders by LAST_MODIFIED DESC, so the first result is the most recent timestamp
-        // processed.
-        lastTimestampProcessed = cursor.getLong(lastModifiedColumn);
-        do {
-          long id = cursor.getLong(idColumn);
-          long date = cursor.getLong(dateColumn);
-          String numberAsStr = cursor.getString(numberColumn);
-          int type;
-          if (cursor.isNull(typeColumn) || (type = cursor.getInt(typeColumn)) == 0) {
-            // CallLog.Calls#TYPE lists the allowed values, which are non-null and non-zero.
-            throw new IllegalStateException("call type is missing");
+      // The cursor orders by LAST_MODIFIED DESC, so the first result is the most recent timestamp
+      // processed.
+      lastTimestampProcessed = cursor.getLong(lastModifiedColumn);
+      do {
+        long id = cursor.getLong(idColumn);
+        long date = cursor.getLong(dateColumn);
+        String numberAsStr = cursor.getString(numberColumn);
+        int type;
+        if (cursor.isNull(typeColumn) || (type = cursor.getInt(typeColumn)) == 0) {
+          // CallLog.Calls#TYPE lists the allowed values, which are non-null and non-zero.
+          throw new IllegalStateException("call type is missing");
+        }
+        int presentation;
+        if (cursor.isNull(presentationColumn)
+            || (presentation = cursor.getInt(presentationColumn)) == 0) {
+          // CallLog.Calls#NUMBER_PRESENTATION lists the allowed values, which are non-null and
+          // non-zero.
+          throw new IllegalStateException("presentation is missing");
+        }
+        String countryIso = cursor.getString(countryIsoColumn);
+        int duration = cursor.getInt(durationsColumn);
+        int dataUsage = cursor.getInt(dataUsageColumn);
+        String transcription = cursor.getString(transcriptionColumn);
+        String voicemailUri = cursor.getString(voicemailUriColumn);
+        int isRead = cursor.getInt(isReadColumn);
+        int isNew = cursor.getInt(newColumn);
+        String geocodedLocation = cursor.getString(geocodedLocationColumn);
+        String phoneAccountComponentName = cursor.getString(phoneAccountComponentColumn);
+        String phoneAccountId = cursor.getString(phoneAccountIdColumn);
+        int features = cursor.getInt(featuresColumn);
+        String postDialDigits = cursor.getString(postDialDigitsColumn);
+
+        // Exclude Duo audio calls.
+        if (isDuoAudioCall(phoneAccountComponentName, features)) {
+          continue;
+        }
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AnnotatedCallLog.TIMESTAMP, date);
+
+        if (!TextUtils.isEmpty(numberAsStr)) {
+          String numberWithPostDialDigits =
+              postDialDigits == null ? numberAsStr : numberAsStr + postDialDigits;
+          DialerPhoneNumber dialerPhoneNumber =
+              dialerPhoneNumberUtil.parse(numberWithPostDialDigits, countryIso);
+
+          contentValues.put(AnnotatedCallLog.NUMBER, dialerPhoneNumber.toByteArray());
+          String formattedNumber =
+              PhoneNumberUtils.formatNumber(numberWithPostDialDigits, countryIso);
+          if (formattedNumber == null) {
+            formattedNumber = numberWithPostDialDigits;
           }
-          int presentation;
-          if (cursor.isNull(presentationColumn)
-              || (presentation = cursor.getInt(presentationColumn)) == 0) {
-            // CallLog.Calls#NUMBER_PRESENTATION lists the allowed values, which are non-null and
-            // non-zero.
-            throw new IllegalStateException("presentation is missing");
-          }
-          String countryIso = cursor.getString(countryIsoColumn);
-          int duration = cursor.getInt(durationsColumn);
-          int dataUsage = cursor.getInt(dataUsageColumn);
-          String transcription = cursor.getString(transcriptionColumn);
-          String voicemailUri = cursor.getString(voicemailUriColumn);
-          int isRead = cursor.getInt(isReadColumn);
-          int isNew = cursor.getInt(newColumn);
-          String geocodedLocation = cursor.getString(geocodedLocationColumn);
-          String phoneAccountComponentName = cursor.getString(phoneAccountComponentColumn);
-          String phoneAccountId = cursor.getString(phoneAccountIdColumn);
-          int features = cursor.getInt(featuresColumn);
-          String postDialDigits = cursor.getString(postDialDigitsColumn);
-
-          ContentValues contentValues = new ContentValues();
-          contentValues.put(AnnotatedCallLog.TIMESTAMP, date);
-
-          if (!TextUtils.isEmpty(numberAsStr)) {
-            String numberWithPostDialDigits =
-                postDialDigits == null ? numberAsStr : numberAsStr + postDialDigits;
-            DialerPhoneNumber dialerPhoneNumber =
-                dialerPhoneNumberUtil.parse(numberWithPostDialDigits, countryIso);
-
-            contentValues.put(AnnotatedCallLog.NUMBER, dialerPhoneNumber.toByteArray());
-            String formattedNumber =
-                PhoneNumberUtils.formatNumber(numberWithPostDialDigits, countryIso);
-            if (formattedNumber == null) {
-              formattedNumber = numberWithPostDialDigits;
-            }
-            contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
-          } else {
-            contentValues.put(
-                AnnotatedCallLog.NUMBER, DialerPhoneNumber.getDefaultInstance().toByteArray());
-          }
-          contentValues.put(AnnotatedCallLog.NUMBER_PRESENTATION, presentation);
-          contentValues.put(AnnotatedCallLog.CALL_TYPE, type);
-          contentValues.put(AnnotatedCallLog.IS_READ, isRead);
-          contentValues.put(AnnotatedCallLog.NEW, isNew);
-          contentValues.put(AnnotatedCallLog.GEOCODED_LOCATION, geocodedLocation);
+          contentValues.put(AnnotatedCallLog.FORMATTED_NUMBER, formattedNumber);
+        } else {
           contentValues.put(
-              AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME, phoneAccountComponentName);
-          contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_ID, phoneAccountId);
-          populatePhoneAccountLabelAndColor(
-              appContext, contentValues, phoneAccountComponentName, phoneAccountId);
-          contentValues.put(AnnotatedCallLog.FEATURES, features);
-          contentValues.put(AnnotatedCallLog.DURATION, duration);
-          contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
-          contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
-          contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
-          setTranscriptionState(cursor, contentValues);
+              AnnotatedCallLog.NUMBER, DialerPhoneNumber.getDefaultInstance().toByteArray());
+        }
+        contentValues.put(AnnotatedCallLog.NUMBER_PRESENTATION, presentation);
+        contentValues.put(AnnotatedCallLog.CALL_TYPE, type);
+        contentValues.put(AnnotatedCallLog.IS_READ, isRead);
+        contentValues.put(AnnotatedCallLog.NEW, isNew);
+        contentValues.put(AnnotatedCallLog.GEOCODED_LOCATION, geocodedLocation);
+        contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME, phoneAccountComponentName);
+        contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_ID, phoneAccountId);
+        populatePhoneAccountLabelAndColor(
+            appContext, contentValues, phoneAccountComponentName, phoneAccountId);
+        contentValues.put(AnnotatedCallLog.FEATURES, features);
+        contentValues.put(AnnotatedCallLog.DURATION, duration);
+        contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
+        contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
+        contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
+        setTranscriptionState(cursor, contentValues);
 
-          if (existingAnnotatedCallLogIds.contains(id)) {
-            mutations.update(id, contentValues);
-          } else {
-            mutations.insert(id, contentValues);
-          }
-        } while (cursor.moveToNext());
-      } // else no new results, do nothing.
+        if (existingAnnotatedCallLogIds.contains(id)) {
+          mutations.update(id, contentValues);
+        } else {
+          mutations.insert(id, contentValues);
+        }
+      } while (cursor.moveToNext());
     }
+  }
+
+  /**
+   * Returns true if the phone account component name and the features belong to a Duo audio call.
+   *
+   * <p>Characteristics of a Duo audio call are as follows.
+   *
+   * <ul>
+   *   <li>The phone account component name is {@link DuoConstants#PHONE_ACCOUNT_COMPONENT_NAME};
+   *       and
+   *   <li>The features don't include {@link Calls#FEATURES_VIDEO}.
+   * </ul>
+   *
+   * <p>It is the caller's responsibility to ensure the phone account component name and the
+   * features come from the same call log entry.
+   */
+  private static boolean isDuoAudioCall(@Nullable String phoneAccountComponentName, int features) {
+    return DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+            .flattenToString()
+            .equals(phoneAccountComponentName)
+        && ((features & Calls.FEATURES_VIDEO) != Calls.FEATURES_VIDEO);
   }
 
   private void setTranscriptionState(Cursor cursor, ContentValues contentValues) {
