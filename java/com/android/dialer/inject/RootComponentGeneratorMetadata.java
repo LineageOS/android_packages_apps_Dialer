@@ -14,31 +14,18 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.annotation;
+package com.android.dialer.inject;
 
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotates the place with this annotation when a RootComponent is needed.
- *
- * <p>Usually users put this annotation on application class that is root of dependencies (the last
- * thing to compile). The annotation processor will figure out what it needs to generate a variant
- * root through dependencies.
- *
- * <p>Example:
- *
- * <pre>
- * <code>
- * @DialerRootComponent(variant = DialerVariant.DIALER_AOSP)
- * public class RootDialerAosp {}
- * </code>
- * </pre>
+ * Only used by rootcomponent generator to store metadata for locating annotated
+ * (@DialerComponent, @InstallIn) class.
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.SOURCE)
-public @interface DialerRootComponent {
-  DialerVariant variant();
+public @interface RootComponentGeneratorMetadata {
+  String tag();
+
+  Class<?> annotatedClass();
 }

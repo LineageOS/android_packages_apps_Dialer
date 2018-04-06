@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.processor;
+package com.android.dialer.rootcomponentgenerator;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
