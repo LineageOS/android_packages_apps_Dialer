@@ -17,7 +17,9 @@
 package com.android.incallui.speakeasy;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import com.android.dialer.inject.HasRootComponent;
+import com.google.common.base.Optional;
 import dagger.Subcomponent;
 
 /** Dagger component to get SpeakEasyCallManager. */
@@ -25,6 +27,8 @@ import dagger.Subcomponent;
 public abstract class SpeakEasyComponent {
 
   public abstract SpeakEasyCallManager speakEasyCallManager();
+
+  public abstract Optional<Fragment> speakEasySettingsFragment();
 
   public static SpeakEasyComponent get(Context context) {
     return ((SpeakEasyComponent.HasComponent)

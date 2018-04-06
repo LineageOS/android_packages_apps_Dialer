@@ -18,10 +18,11 @@ package com.android.dialer.rootcomponentgenerator.processor;
 
 import static javax.tools.Diagnostic.Kind.ERROR;
 
-import com.android.dialer.rootcomponentgenerator.annotation.DialerComponent;
+import com.android.dialer.rootcomponentgenerator.annotation.IncludeInDialerRoot;
 import com.android.dialer.rootcomponentgenerator.annotation.InstallIn;
 import com.android.dialer.rootcomponentgenerator.annotation.RootComponentGeneratorMetadata;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
+import com.google.auto.common.MoreElements;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
 import com.squareup.javapoet.AnnotationSpec;
@@ -31,9 +32,11 @@ import java.util.Collections;
 import java.util.Set;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 
 /**
- * Genereates metadata for every type annotated by {@link InstallIn} and {@link DialerComponent}.
+ * Genereates metadata for every type annotated by {@link InstallIn} and {@link
+ * IncludeInDialerRoot}.
  *
  * <p>The metadata has the information where the annotated types are and it is used by annotation
  * processor when the processor tries to generate root component.
@@ -48,15 +51,15 @@ final class MetadataGeneratingStep implements ProcessingStep {
 
   @Override
   public Set<? extends Class<? extends Annotation>> annotations() {
-    return ImmutableSet.of(DialerComponent.class, InstallIn.class);
+    return ImmutableSet.of(IncludeInDialerRoot.class, InstallIn.class);
   }
 
   @Override
   public Set<? extends Element> process(
       SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
 
-    for (Element element : elementsByAnnotation.get(DialerComponent.class)) {
-      generateMetadataFor(DialerComponent.class, element);
+    for (Element element : elementsByAnnotation.get(IncludeInDialerRoot.class)) {
+      generateMetadataFor(IncludeInDialerRoot.class, MoreElements.asType(element));
     }
     for (Element element : elementsByAnnotation.get(InstallIn.class)) {
       if (element.getAnnotation(InstallIn.class).variants().length == 0) {
@@ -66,16 +69,17 @@ final class MetadataGeneratingStep implements ProcessingStep {
                 ERROR, String.format("@InstallIn %s must have at least one variant", element));
         continue;
       }
-      generateMetadataFor(InstallIn.class, element);
+      generateMetadataFor(InstallIn.class, MoreElements.asType(element));
     }
 
     return Collections.emptySet();
   }
 
   private void generateMetadataFor(
-      Class<? extends Annotation> annotation, Element annotatedElement) {
+      Class<? extends Annotation> annotation, TypeElement annotatedElement) {
     TypeSpec.Builder metadataClassBuilder =
-        TypeSpec.classBuilder(annotatedElement.getSimpleName() + "Metadata");
+        TypeSpec.classBuilder(
+            annotatedElement.getQualifiedName().toString().replace('.', '_') + "Metadata");
     metadataClassBuilder.addAnnotation(
         AnnotationSpec.builder(RootComponentGeneratorMetadata.class)
             .addMember("tag", "$S", annotation.getSimpleName())

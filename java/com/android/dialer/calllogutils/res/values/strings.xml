@@ -131,7 +131,7 @@
   <!-- String to be displayed to indicate in the call log that a call just now occurred. -->
   <string name="just_now">Just now</string>
 
-  <!-- Text to show in call log for a carrier video call. [CHAR LIMIT=30] -->
+  <!-- Text to show in call log for a carrier video call. [CHAR LIMIT=31] -->
   <string name="new_call_log_carrier_video">Carrier video</string>
 
   <!-- Text to show in call log for a duo video call. [CHAR LIMIT=30] -->

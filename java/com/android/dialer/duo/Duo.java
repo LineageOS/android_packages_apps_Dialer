@@ -100,15 +100,49 @@ public interface Duo {
   /** Reachability information for a number. */
   @AutoValue
   abstract class ReachabilityData {
+    public enum Status {
+      UNKNOWN,
+
+      /**
+       * The number is callable. Apps should further look up “AUDIO_CALLABLE” and “VIDEO_CALLABLE”
+       * keys for supported modes.
+       */
+      CALL,
+
+      /** The number is not callable. Apps can send an invite to the contact via INVITE intent. */
+      INVITE,
+
+      /**
+       * Neither Tachystick nor Duo is registered. Apps should show “setup” icon and send REGISTER
+       * intent to.
+       */
+      SETUP,
+
+      /**
+       * Indicates that the number is callable but user needs to set up (Tachystick/Duo) before
+       * calling.
+       */
+      SETUP_AND_CALL
+    }
+
+    public abstract Status status();
+
     public abstract String number();
+
+    public abstract boolean audioCallable();
 
     public abstract boolean videoCallable();
 
     public abstract boolean supportsUpgrade();
 
     public static ReachabilityData create(
-        String number, boolean videoCallable, boolean supportsUpgrade) {
-      return new AutoValue_Duo_ReachabilityData(number, videoCallable, supportsUpgrade);
+        Status status,
+        String number,
+        boolean audioCallable,
+        boolean videoCallable,
+        boolean supportsUpgrade) {
+      return new AutoValue_Duo_ReachabilityData(
+          status, number, audioCallable, videoCallable, supportsUpgrade);
     }
   }
 }

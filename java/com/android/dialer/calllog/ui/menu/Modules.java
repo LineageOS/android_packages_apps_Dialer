@@ -18,6 +18,7 @@ package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
@@ -27,8 +28,10 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.DividerModule;
+import com.android.dialer.historyitemactions.DuoCallModule;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.IntentModule;
 import com.android.dialer.historyitemactions.SharedModules;
@@ -121,10 +124,21 @@ final class Modules {
       return Collections.emptyList();
     }
 
-    List<HistoryItemActionModule> modules = new ArrayList<>();
+    boolean isDuoCall =
+        DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
+            .flattenToString()
+            .equals(row.getPhoneAccountComponentName());
+
+    // Obtain a PhoneAccountHandle that will be used to start carrier voice/video calls.
+    // If the row is for a Duo call, we should use the default phone account as the one included in
+    // the row is for Duo only.
     PhoneAccountHandle phoneAccountHandle =
-        TelecomUtil.composePhoneAccountHandle(
-            row.getPhoneAccountComponentName(), row.getPhoneAccountId());
+        isDuoCall
+            ? TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL)
+            : TelecomUtil.composePhoneAccountHandle(
+                row.getPhoneAccountComponentName(), row.getPhoneAccountId());
+
+    List<HistoryItemActionModule> modules = new ArrayList<>();
 
     // Add an audio call item
     modules.add(
@@ -135,8 +149,10 @@ final class Modules {
     if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
         && !row.getNumberAttributes().getIsSpam()) {
       modules.add(
-          IntentModule.newVideoCallModule(
-              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+          isDuoCall
+              ? new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG)
+              : IntentModule.newCarrierVideoCallModule(
+                  context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
     }
 
     // TODO(zachh): Also show video option if the call log entry is for an audio call but video

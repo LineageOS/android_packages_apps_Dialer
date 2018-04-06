@@ -42,6 +42,7 @@ import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CameraDirection;
+import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUi;
@@ -479,7 +480,8 @@ public class CallButtonPresenter
             // Most devices cannot make calls on 2 SIMs at the same time.
             && InCallPresenter.getInstance().getCallList().getAllCalls().size() == 1;
 
-    boolean showUpgradeToRtt = TelecomUtil.isRttEnabled(context) && call.canUpgradeToRttCall();
+    boolean showUpgradeToRtt = call.canUpgradeToRttCall();
+    boolean enableUpgradeToRtt = showUpgradeToRtt && call.getState() == State.ACTIVE;
 
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_SWAP, showSwap);
@@ -491,6 +493,7 @@ public class CallButtonPresenter
     inCallButtonUi.enableButton(InCallButtonIds.BUTTON_ADD_CALL, showAddCall);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO, showUpgradeToVideo);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_UPGRADE_TO_RTT, showUpgradeToRtt);
+    inCallButtonUi.enableButton(InCallButtonIds.BUTTON_UPGRADE_TO_RTT, enableUpgradeToRtt);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_DOWNGRADE_TO_AUDIO, showDowngradeToAudio);
     inCallButtonUi.showButton(
         InCallButtonIds.BUTTON_SWITCH_CAMERA,

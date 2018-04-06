@@ -68,10 +68,12 @@ import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
+import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.calllog.ui.NewCallLogFragment;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
@@ -96,6 +98,7 @@ import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
+import com.android.dialer.main.impl.bottomnav.MissedCallCountObserver;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
@@ -108,12 +111,15 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
+import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import com.android.voicemail.VoicemailComponent;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -136,7 +142,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   // TODO(calderwoodra): change to AppCompatActivity once new speed dial ships
   private final TransactionSafeActivity activity;
 
-  private final BroadcastReceiver disableNewCallLogReceiver =
+  private final BroadcastReceiver disableCallLogFrameworkReceiver =
       new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -144,12 +150,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             return;
           }
           /*
-           * Remove the NewCallLogFragment if it is currently attached. If this is not done, user
-           * interaction with the fragment could cause call log framework state to be unexpectedly
-           * written. For example scrolling could cause the AnnotatedCallLog to be read (which would
-           * trigger database creation).
+           * Remove the NewCallLogFragment and NewVoicemailFragment if it is currently attached. If
+           * this is not done, user interaction with the fragment could cause call log framework
+           * state to be unexpectedly written. For example scrolling could cause the
+           * AnnotatedCallLog to be read (which would trigger database creation).
            */
           bottomNavTabListener.disableNewCallLogFragment();
+          bottomNavTabListener.disableNewVoicemailFragment();
         }
       };
 
@@ -184,7 +191,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private BottomNavBar bottomNav;
   private MainBottomNavBarBottomNavTabListener bottomNavTabListener;
   private View snackbarContainer;
+  private MissedCallCountObserver missedCallCountObserver;
   private UiListener<String> getLastOutgoingCallListener;
+  private UiListener<Integer> missedCallObserverUiListener;
 
   public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
     Intent intent = new Intent(context, MainActivity.class);
@@ -219,6 +228,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     getLastOutgoingCallListener =
         DialerExecutorComponent.get(activity)
             .createUiListener(activity.getFragmentManager(), "Query last phone number");
+    missedCallObserverUiListener =
+        DialerExecutorComponent.get(activity)
+            .createUiListener(activity.getFragmentManager(), "Missed call observer");
   }
 
   private void initLayout(Bundle savedInstanceState) {
@@ -247,9 +259,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     boolean showVoicemailTab = canVoicemailTabBeShown(activity);
     bottomNav.showVoicemail(showVoicemailTab);
 
+    missedCallCountObserver =
+        new MissedCallCountObserver(
+            activity.getApplicationContext(), bottomNav, missedCallObserverUiListener);
+
     callLogFragmentListener =
         new MainCallLogFragmentListener(
-            activity, activity.getContentResolver(), bottomNav, toolbar);
+            activity, activity.getContentResolver(), bottomNav, toolbar, bottomNavTabListener);
     bottomNav.addOnTabSelectedListener(callLogFragmentListener);
 
     searchController =
@@ -462,14 +478,23 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
      * (which would trigger database creation).
      */
     LocalBroadcastManager.getInstance(activity)
-        .registerReceiver(disableNewCallLogReceiver, new IntentFilter("disableNewCallLogFragment"));
+        .registerReceiver(
+            disableCallLogFrameworkReceiver, new IntentFilter("disableCallLogFramework"));
 
     /*
-     * Similar to above, if the new call log is being shown and then the activity is paused, when
-     * the user returns we need to remove the NewCallLogFragment if the framework has been disabled
-     * in the meantime.
+     * Similar to above, if the new call log/new voicemail is being shown and then the activity is
+     * paused, when the user returns we need to remove the NewCallLogFragment if the framework has
+     * been disabled in the meantime.
      */
     bottomNavTabListener.ensureCorrectCallLogShown();
+    bottomNavTabListener.ensureCorrectVoicemailShown();
+
+    if (bottomNavTabListener.newCallLogFragmentActive()) {
+      missedCallCountObserver.onChange(false); // Set the initial value for the badge
+      activity
+          .getContentResolver()
+          .registerContentObserver(Calls.CONTENT_URI, true, missedCallCountObserver);
+    }
 
     // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
     ThreadUtil.postDelayedOnUiThread(
@@ -488,7 +513,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   @Override
   public void onActivityPause() {
     searchController.onActivityPause();
-    LocalBroadcastManager.getInstance(activity).unregisterReceiver(disableNewCallLogReceiver);
+    LocalBroadcastManager.getInstance(activity).unregisterReceiver(disableCallLogFrameworkReceiver);
+    activity.getContentResolver().unregisterContentObserver(missedCallCountObserver);
   }
 
   @Override
@@ -819,6 +845,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private final Context context;
     private final BottomNavBar bottomNavBar;
     private final Toolbar toolbar;
+    private final MainBottomNavBarBottomNavTabListener bottomNavTabListener;
 
     private @TabIndex int currentTab = TabIndex.SPEED_DIAL;
     private long timeSelected = -1;
@@ -837,11 +864,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         Context context,
         ContentResolver contentResolver,
         BottomNavBar bottomNavBar,
-        Toolbar toolbar) {
+        Toolbar toolbar,
+        MainBottomNavBarBottomNavTabListener bottomNavTabListener) {
       callLogQueryHandler = new CallLogQueryHandler(context, contentResolver, this);
       this.context = context;
       this.bottomNavBar = bottomNavBar;
       this.toolbar = toolbar;
+      this.bottomNavTabListener = bottomNavTabListener;
     }
 
     private void registerVoicemailStatusContentObserver(Context context) {
@@ -953,8 +982,15 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     }
 
     private void markMissedCallsAsReadAndRemoveNotification() {
-      callLogQueryHandler.markMissedCallsAsRead();
-      CallLogNotificationsService.cancelAllMissedCalls(context);
+      if (bottomNavTabListener.newCallLogFragmentActive()) {
+        Futures.addCallback(
+            CallLogComponent.get(context).getClearMissedCalls().clearAll(),
+            new DefaultFutureCallback<>(),
+            MoreExecutors.directExecutor());
+      } else {
+        callLogQueryHandler.markMissedCallsAsRead();
+        CallLogNotificationsService.cancelAllMissedCalls(context);
+      }
     }
 
     private void setCurrentTab(@TabIndex int tabIndex) {
@@ -968,8 +1004,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onActivityResume() {
       activityIsAlive = true;
       registerVoicemailStatusContentObserver(context);
-      callLogQueryHandler.fetchVoicemailStatus();
-      callLogQueryHandler.fetchMissedCallsUnreadCount();
+      if (!bottomNavTabListener.newVoicemailFragmentActive()) {
+        callLogQueryHandler.fetchVoicemailStatus();
+      }
+      if (!bottomNavTabListener.newCallLogFragmentActive()) {
+        callLogQueryHandler.fetchMissedCallsUnreadCount();
+      }
       // Reset the tab on resume to restart the timer
       setCurrentTab(bottomNavBar.getSelectedTab());
     }
@@ -978,7 +1018,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     public void onActivityStop(boolean changingConfigurations, boolean keyguardLocked) {
       context.getContentResolver().unregisterContentObserver(voicemailStatusObserver);
       activityIsAlive = false;
-      if (viewedCallLogTabPastTimeThreshold() && !changingConfigurations && !keyguardLocked) {
+      // The new call log fragment handles this on its own.
+      if (!bottomNavTabListener.newCallLogFragmentActive()
+          && viewedCallLogTabPastTimeThreshold()
+          && !changingConfigurations
+          && !keyguardLocked) {
         markMissedCallsAsReadAndRemoveNotification();
       }
     }
@@ -1229,6 +1273,24 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       }
     }
 
+    void disableNewVoicemailFragment() {
+      LogUtil.i("MainBottomNavBarBottomNavTabListener.disableNewVoicemailFragment", "disabled");
+      android.support.v4.app.Fragment supportFragment =
+          supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+      if (supportFragment != null) {
+        supportFragmentManager.beginTransaction().remove(supportFragment).commit();
+        // If the NewVoicemailFragment was showing, immediately show the old voicemail fragment
+        // instead.
+        if (selectedTab == TabIndex.VOICEMAIL) {
+          LogUtil.i(
+              "MainBottomNavBarBottomNavTabListener.disableNewVoicemailFragment", "showing old");
+          Fragment fragment = fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+          showFragment(
+              fragment == null ? new VisualVoicemailCallLogFragment() : fragment, VOICEMAIL_TAG);
+        }
+      }
+    }
+
     void ensureCorrectCallLogShown() {
       android.support.v4.app.Fragment supportFragment =
           supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
@@ -1237,6 +1299,34 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         LogUtil.i("MainBottomNavBarBottomNavTabListener.ensureCorrectCallLogShown", "disabling");
         disableNewCallLogFragment();
       }
+    }
+
+    void ensureCorrectVoicemailShown() {
+      android.support.v4.app.Fragment supportFragment =
+          supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+      if (supportFragment != null
+          && !CallLogConfigComponent.get(activity)
+              .callLogConfig()
+              .isNewVoicemailFragmentEnabled()) {
+        LogUtil.i("MainBottomNavBarBottomNavTabListener.ensureCorrectVoicemailShown", "disabling");
+        disableNewVoicemailFragment();
+      }
+    }
+
+    boolean newCallLogFragmentActive() {
+      return supportFragmentManager.findFragmentByTag(CALL_LOG_TAG) != null
+          || (fragmentManager.findFragmentByTag(CALL_LOG_TAG) == null
+              && CallLogConfigComponent.get(activity)
+                  .callLogConfig()
+                  .isNewCallLogFragmentEnabled());
+    }
+
+    boolean newVoicemailFragmentActive() {
+      return supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null
+          || (fragmentManager.findFragmentByTag(VOICEMAIL_TAG) == null
+              && CallLogConfigComponent.get(activity)
+                  .callLogConfig()
+                  .isNewVoicemailFragmentEnabled());
     }
 
     @Override
@@ -1262,15 +1352,22 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       }
       Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_VOICEMAIL, activity);
       selectedTab = TabIndex.VOICEMAIL;
-      VisualVoicemailCallLogFragment fragment =
-          (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
-      if (fragment == null) {
-        fragment = new VisualVoicemailCallLogFragment();
-      }
-      showFragment(fragment, VOICEMAIL_TAG);
 
-      fragment.setUserVisibleHint(true);
-      fragment.onVisible();
+      if (CallLogConfigComponent.get(activity).callLogConfig().isNewVoicemailFragmentEnabled()) {
+        android.support.v4.app.Fragment supportFragment =
+            supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+        showSupportFragment(
+            supportFragment == null ? new NewVoicemailFragment() : supportFragment, VOICEMAIL_TAG);
+      } else {
+        VisualVoicemailCallLogFragment fragment =
+            (VisualVoicemailCallLogFragment) fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+        if (fragment == null) {
+          fragment = new VisualVoicemailCallLogFragment();
+        }
+        showFragment(fragment, VOICEMAIL_TAG);
+        fragment.setUserVisibleHint(true);
+        fragment.onVisible();
+      }
     }
 
     private void showFragment(@NonNull Fragment fragment, String tag) {
@@ -1296,13 +1393,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       Fragment speedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       Fragment oldCallLog = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
       Fragment contacts = fragmentManager.findFragmentByTag(CONTACTS_TAG);
-      Fragment voicemail = fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
+      Fragment oldVoicemail = fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
 
       FragmentTransaction transaction = fragmentManager.beginTransaction();
       boolean fragmentShown = showIfEqualElseHide(transaction, fragment, speedDial);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, oldCallLog);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, contacts);
-      fragmentShown |= showIfEqualElseHide(transaction, fragment, voicemail);
+      fragmentShown |= showIfEqualElseHide(transaction, fragment, oldVoicemail);
 
       if (!fragmentShown && fragment != null) {
         LogUtil.i(
@@ -1315,11 +1412,16 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       // TODO(calderwoodra): Handle other new fragments.
       android.support.v4.app.Fragment newCallLog =
           supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
+      android.support.v4.app.Fragment newVoicemail =
+          supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
 
       android.support.v4.app.FragmentTransaction supportTransaction =
           supportFragmentManager.beginTransaction();
       boolean supportFragmentShown =
           showIfEqualElseHideSupport(supportTransaction, supportFragment, newCallLog);
+      supportFragmentShown |=
+          showIfEqualElseHideSupport(supportTransaction, supportFragment, newVoicemail);
+
       if (!supportFragmentShown && supportFragment != null) {
         LogUtil.i(
             "MainBottomNavBarBottomNavTabListener.showFragment",

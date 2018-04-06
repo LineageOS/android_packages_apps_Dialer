@@ -50,6 +50,7 @@ import com.android.dialer.main.impl.toolbar.SearchBarListener;
 import com.android.dialer.searchfragment.list.NewSearchFragment;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
+import com.android.dialer.util.TransactionSafeActivity;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class MainSearchController implements SearchBarListener {
   private static final String DIALPAD_FRAGMENT_TAG = "dialpad_fragment_tag";
   private static final String SEARCH_FRAGMENT_TAG = "search_fragment_tag";
 
-  private final AppCompatActivity activity;
+  private final TransactionSafeActivity activity;
   private final BottomNavBar bottomNav;
   private final FloatingActionButton fab;
   private final MainToolbar toolbar;
@@ -97,7 +98,7 @@ public class MainSearchController implements SearchBarListener {
   private boolean requestingPermission;
 
   public MainSearchController(
-      AppCompatActivity activity,
+      TransactionSafeActivity activity,
       BottomNavBar bottomNav,
       FloatingActionButton fab,
       MainToolbar toolbar,
@@ -184,7 +185,7 @@ public class MainSearchController implements SearchBarListener {
    */
   private void hideDialpad(boolean animate) {
     LogUtil.enterBlock("MainSearchController.hideDialpad");
-    Assert.checkArgument(isDialpadVisible());
+    assertDialpadVisible();
 
     fab.show();
     toolbar.slideDown(animate, fragmentContainer);
@@ -201,7 +202,8 @@ public class MainSearchController implements SearchBarListener {
 
           @Override
           public void onAnimationEnd(Animation animation) {
-            if (!(activity.isFinishing() || activity.isDestroyed())) {
+            if (activity.isSafeToCommitTransactions()
+                && !(activity.isFinishing() || activity.isDestroyed())) {
               activity.getFragmentManager().beginTransaction().hide(dialpadFragment).commit();
             }
           }
@@ -291,7 +293,7 @@ public class MainSearchController implements SearchBarListener {
   /** Calls {@link #hideDialpad(boolean)}, removes the search fragment and clears the dialpad. */
   private void closeSearch(boolean animate) {
     LogUtil.enterBlock("MainSearchController.closeSearch");
-    Assert.checkArgument(isSearchVisible());
+    assertSearchIsVisible();
     if (isDialpadVisible()) {
       hideDialpad(animate);
     } else if (!fab.isShown()) {
@@ -337,9 +339,24 @@ public class MainSearchController implements SearchBarListener {
         && fragment.isDialpadSlideUp();
   }
 
+  private void assertDialpadVisible() {
+    DialpadFragment fragment = getDialpadFragment();
+    Assert.checkArgument(fragment != null, "Dialpad Fragment is null");
+    Assert.checkArgument(fragment.isAdded(), "Dialpad Fragment is no added");
+    Assert.checkArgument(!fragment.isHidden(), "Dialpad Fragment is hidden");
+    Assert.checkArgument(fragment.isDialpadSlideUp(), "Dialpad Fragment is slide down");
+  }
+
   private boolean isSearchVisible() {
     NewSearchFragment fragment = getSearchFragment();
     return fragment != null && fragment.isAdded() && !fragment.isHidden();
+  }
+
+  private void assertSearchIsVisible() {
+    NewSearchFragment fragment = getSearchFragment();
+    Assert.checkArgument(fragment != null, "Search Fragment is null");
+    Assert.checkArgument(fragment.isAdded(), "Search Fragment is not added");
+    Assert.checkArgument(!fragment.isHidden(), "Search Fragment is hidden.");
   }
 
   /** Returns true if the search UI is visible. */

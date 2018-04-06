@@ -35,6 +35,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -150,6 +151,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean didShowVideoCallScreen;
   private boolean didShowRttCallScreen;
   private boolean didShowSpeakEasyScreen;
+  private String lastShownSpeakEasyScreenUniqueCallid = "";
   private boolean dismissKeyguard;
   private boolean isInShowMainInCallFragment;
   private boolean isRecreating; // whether the activity is going to be recreated
@@ -561,9 +563,9 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     InCallPresenter.getInstance().onActivityStopped();
     if (!isRecreating) {
       InCallPresenter.getInstance().onUiShowing(false);
-      if (errorDialog != null) {
-        errorDialog.dismiss();
-      }
+    }
+    if (errorDialog != null) {
+      errorDialog.dismiss();
     }
 
     if (isFinishing()) {
@@ -1160,15 +1162,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     Trace.endSection();
   }
 
-  public void showToastForWiFiToLteHandover(DialerCall call) {
-    if (call.hasShownWiFiToLteHandoverToast()) {
-      return;
-    }
-
-    Toast.makeText(this, R.string.video_call_wifi_to_lte_handover_toast, Toast.LENGTH_LONG).show();
-    call.setHasShownWiFiToLteHandoverToast();
-  }
-
   public void showDialogOrToastForWifiHandoverFailure(DialerCall call) {
     if (call.showWifiHandoverAlertAsToast()) {
       Toast.makeText(this, R.string.video_call_lte_to_wifi_failed_message, Toast.LENGTH_SHORT)
@@ -1219,6 +1212,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         InternationalCallOnWifiDialogFragment.newInstance(
             call.getId(), internationalCallOnWifiCallback);
     fragment.show(getSupportFragmentManager(), Tags.INTERNATIONAL_CALL_ON_WIFI);
+  }
+
+  public void showDialogForRttRequest(DialerCall call, int rttRequestId) {
+    LogUtil.enterBlock("InCallActivity.showDialogForRttRequest");
+    DialogFragment fragment = RttRequestDialogFragment.newInstance(call.getId(), rttRequestId);
+    fragment.show(getSupportFragmentManager(), Tags.RTT_REQUEST_DIALOG);
   }
 
   @Override
@@ -1346,15 +1345,18 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private boolean showSpeakEasyFragment(FragmentTransaction transaction, DialerCall call) {
 
-    // TODO(erfanian): Support multiple speakeasy screens.
     if (didShowSpeakEasyScreen) {
-      return false;
+      if (lastShownSpeakEasyScreenUniqueCallid.equals(call.getUniqueCallId())) {
+        return false;
+      }
+      hideSpeakEasyFragment(transaction);
     }
 
     Optional<Fragment> speakEasyFragment = speakEasyCallManager.getSpeakEasyFragment(call);
     if (speakEasyFragment.isPresent()) {
       transaction.add(R.id.main, speakEasyFragment.get(), Tags.SPEAK_EASY_SCREEN);
       didShowSpeakEasyScreen = true;
+      lastShownSpeakEasyScreenUniqueCallid = call.getUniqueCallId();
       return true;
     }
     return false;
@@ -1380,7 +1382,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void setSpeakEasyCallManager(SpeakEasyCallManager speakEasyCallManager) {
-    this.speakEasyCallManager = Assert.isNotNull(speakEasyCallManager);
+    this.speakEasyCallManager = speakEasyCallManager;
   }
 
   public SpeakEasyCallManager getSpeakEasyCallManager() {
@@ -1763,6 +1765,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     static final String RTT_CALL_SCREEN = "tag_rtt_call_screen";
     static final String POST_CHAR_DIALOG_FRAGMENT = "tag_post_char_dialog_fragment";
     static final String SPEAK_EASY_SCREEN = "tag_speak_easy_screen";
+    static final String RTT_REQUEST_DIALOG = "tag_rtt_request_dialog";
   }
 
   private static final class ConfigNames {

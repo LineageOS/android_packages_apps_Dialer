@@ -16,6 +16,8 @@
 
 package com.android.dialer.spam;
 
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
@@ -37,6 +39,20 @@ public interface Spam {
    */
   ListenableFuture<ImmutableMap<DialerPhoneNumber, SpamStatus>> batchCheckSpamStatus(
       ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers);
+
+  /**
+   * Called as an indication that the Spam implementation should check whether downloading a spam
+   * list needs to occur or not.
+   *
+   * @param isEnabledByUser true if spam is enabled by the user. Generally, this value should be
+   *     passed as {@link SpamSettings#isSpamEnabled()}. In the scenario where the user toggles the
+   *     spam setting isSpamEnabled returns stale data: the SharedPreferences will not have updated
+   *     prior to executing {@link OnPreferenceChangeListener#onPreferenceChange(Preference,
+   *     Object)}. For that case, use the new value provided in the onPreferenceChange callback.
+   * @return a future containing no value. It is only an indication of success or failure of the
+   *     operation.
+   */
+  ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser);
 
   /**
    * Checks if the given number is suspected of being a spam.

@@ -73,6 +73,7 @@ import com.android.dialer.logging.ContactLookupResult.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
+import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
@@ -206,6 +207,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    */
   private boolean isCallSubjectSupported;
 
+  public RttTranscript getRttTranscript() {
+    return rttTranscript;
+  }
+
+  public void setRttTranscript(RttTranscript rttTranscript) {
+    this.rttTranscript = rttTranscript;
+  }
+
+  private RttTranscript rttTranscript;
+
   private final Call.Callback telecomCallCallback =
       new Call.Callback() {
         @Override
@@ -282,6 +293,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onRttRequest(Call call, int id) {
           LogUtil.v("TelecomCallCallback.onRttRequest", "id=%d", id);
+          for (DialerCallListener listener : listeners) {
+            listener.onDialerCallUpgradeToRtt(id);
+          }
         }
 
         @Override
@@ -948,6 +962,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return telecomCall.getDetails().getConnectTimeMillis();
   }
 
+  /**
+   * Gets the time when the call is created (see {@link Details#getCreationTimeMillis()}). This is
+   * the same time that is logged as the start time in the Call Log (see {@link
+   * android.provider.CallLog.Calls#DATE}).
+   */
+  @TargetApi(26)
+  public long getCreationTimeMillis() {
+    return telecomCall.getDetails().getCreationTimeMillis();
+  }
+
   public boolean isConferenceCall() {
     return hasProperty(Call.Details.PROPERTY_CONFERENCE);
   }
@@ -1031,6 +1055,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   @TargetApi(28)
   public void sendRttUpgradeRequest() {
     getTelecomCall().sendRttRequest();
+  }
+
+  @TargetApi(28)
+  public void respondToRttRequest(boolean accept, int rttRequestId) {
+    getTelecomCall().respondToRttRequest(rttRequestId, accept);
   }
 
   public boolean hasReceivedVideoUpgradeRequest() {

@@ -23,6 +23,7 @@ import android.os.Looper;
 import android.telecom.Call.RttCall;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.rtt.RttTranscript;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.call.CallList;
@@ -62,6 +63,10 @@ public class RttCallPresenter implements RttCallScreenDelegate, InCallStateListe
     LogUtil.enterBlock("RttCallPresenter.onRttCallScreenUiReady");
     InCallPresenter.getInstance().addListener(this);
     startListenOnRemoteMessage();
+    DialerCall call = CallList.getInstance().getActiveCall();
+    if (call != null) {
+      rttCallScreen.onRestoreRttChat(call.getRttTranscript());
+    }
   }
 
   @Override
@@ -69,6 +74,21 @@ public class RttCallPresenter implements RttCallScreenDelegate, InCallStateListe
     LogUtil.enterBlock("RttCallPresenter.onRttCallScreenUiUnready");
     InCallPresenter.getInstance().removeListener(this);
     stopListenOnRemoteMessage();
+    DialerCall call = CallList.getInstance().getActiveCall();
+    if (call != null) {
+      saveTranscript(call);
+    }
+  }
+
+  private void saveTranscript(DialerCall dialerCall) {
+    LogUtil.enterBlock("RttCallPresenter.saveTranscript");
+    RttTranscript.Builder builder = RttTranscript.newBuilder();
+    builder
+        .setId(dialerCall.getNumber() + dialerCall.getCreationTimeMillis())
+        .setTimestamp(dialerCall.getCreationTimeMillis())
+        .setNumber(dialerCall.getNumber())
+        .addAllMessages(rttCallScreen.getRttTranscriptMessageList());
+    dialerCall.setRttTranscript(builder.build());
   }
 
   @Override
@@ -82,7 +102,7 @@ public class RttCallPresenter implements RttCallScreenDelegate, InCallStateListe
   private void startListenOnRemoteMessage() {
     DialerCall call = CallList.getInstance().getActiveCall();
     if (call == null) {
-      LogUtil.i("RttCallPresenter.startListenOnRemoteMessage", "call is active yet");
+      LogUtil.i("RttCallPresenter.startListenOnRemoteMessage", "call is not active yet");
       return;
     }
     rttCall = call.getRttCall();

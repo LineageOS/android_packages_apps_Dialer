@@ -66,6 +66,12 @@ public class SpamStub implements Spam {
   }
 
   @Override
+  public ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser) {
+    // no-op
+    return Futures.immediateFuture(null);
+  }
+
+  @Override
   public void checkSpamStatus(String number, String countryIso, Listener listener) {
     listener.onComplete(false);
   }

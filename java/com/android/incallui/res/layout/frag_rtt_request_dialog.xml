@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/details"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="20dp"
+      android:paddingBottom="12dp"
+      android:paddingStart="24dp"
+      android:paddingEnd="24dp"
+      android:textColor="#DE000000"
+      android:textSize="16sp"/>
+
+  <TextView
+      android:id="@+id/more_information"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="16dp"
+      android:paddingStart="24dp"
+      android:paddingEnd="24dp"
+      android:text="@string/rtt_request_dialog_more_information"
+      android:textColor="#8A000000"
+      android:textSize="14sp"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="8dp"
+      android:orientation="horizontal">
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <Button
+        android:id="@+id/rtt_button_decline_request"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:backgroundTint="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:stateListAnimator="@null"
+        android:text="@string/rtt_button_decline_request"
+        android:textColor="#757575"/>
+    <Button
+        android:id="@+id/rtt_button_accept_request"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:backgroundTint="@color/dialer_theme_color"
+        android:fontFamily="sans-serif-medium"
+        android:stateListAnimator="@null"
+        android:text="@string/rtt_button_accept_request"
+        android:textColor="@android:color/white"/>
+  </LinearLayout>
+
+</LinearLayout>
+

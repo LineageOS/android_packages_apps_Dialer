@@ -23,7 +23,7 @@ import static javax.lang.model.element.Modifier.PUBLIC;
 import static javax.lang.model.element.Modifier.STATIC;
 import static javax.lang.model.util.ElementFilter.typesIn;
 
-import com.android.dialer.rootcomponentgenerator.annotation.DialerComponent;
+import com.android.dialer.rootcomponentgenerator.annotation.IncludeInDialerRoot;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.common.MoreElements;
 import com.google.common.base.Optional;
@@ -52,7 +52,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
 /**
- * Generates component for a type annotated with {@link DialerComponent}.
+ * Generates component for a type annotated with {@link IncludeInDialerRoot}.
  *
  * <p>Our components have boilerplate code like:
  *
@@ -67,6 +67,7 @@ import javax.lang.model.type.TypeMirror;
  *      return ((HasComponent)((HasRootComponent) context.getApplicationContext()).component())
  *         .simulatorComponent();
  *   }
+ *   {@literal @}IncludeInDialerRoot
  *   public interface HasComponent {
  *      SimulatorComponent simulatorComponent();
  *  }
@@ -88,13 +89,13 @@ final class ComponentGeneratingStep implements ProcessingStep {
 
   @Override
   public Set<? extends Class<? extends Annotation>> annotations() {
-    return ImmutableSet.of(DialerComponent.class);
+    return ImmutableSet.of(IncludeInDialerRoot.class);
   }
 
   @Override
   public Set<? extends Element> process(
       SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
-    for (TypeElement type : typesIn(elementsByAnnotation.get(DialerComponent.class))) {
+    for (TypeElement type : typesIn(elementsByAnnotation.get(IncludeInDialerRoot.class))) {
       generateComponent(type);
     }
     return Collections.emptySet();
@@ -124,7 +125,7 @@ final class ComponentGeneratingStep implements ProcessingStep {
   private AnnotationSpec makeDaggerSubcomponentAnnotation(TypeElement dialerComponentElement) {
 
     Optional<AnnotationMirror> componentMirror =
-        getAnnotationMirror(dialerComponentElement, DialerComponent.class);
+        getAnnotationMirror(dialerComponentElement, IncludeInDialerRoot.class);
 
     AnnotationSpec.Builder subcomponentBuilder = AnnotationSpec.builder(Subcomponent.class);
     for (AnnotationValue annotationValue :
