@@ -39,7 +39,8 @@ EXCLUDE_FILES += \
 
 # Exclude rootcomponentgenerator
 EXCLUDE_FILES += \
-	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator/processor)
+	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator) \
+	$(call all-java-files-under, $(BASE_DIR)/dialer/inject/demo)
 
 # Exclude build variants for now
 EXCLUDE_FILES += \
@@ -149,7 +150,7 @@ LOCAL_ANNOTATION_PROCESSORS := \
 	dialer-rootcomponentprocessor
 
 LOCAL_ANNOTATION_PROCESSOR_CLASSES := \
-  com.google.auto.value.processor.AutoValueProcessor,dagger.internal.codegen.ComponentProcessor,com.bumptech.glide.annotation.compiler.GlideAnnotationProcessor,com.android.dialer.rootcomponentgenerator.processor.RootComponentProcessor
+  com.google.auto.value.processor.AutoValueProcessor,dagger.internal.codegen.ComponentProcessor,com.bumptech.glide.annotation.compiler.GlideAnnotationProcessor,com.android.dialer.rootcomponentgenerator.RootComponentProcessor
 
 # Begin Bug: 37077388
 LOCAL_DX_FLAGS := --multi-dex
@@ -431,9 +432,13 @@ LOCAL_IS_HOST_MODULE := true
 BASE_DIR := java/com/android
 
 LOCAL_SRC_FILES := \
-	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator/annotation) \
-	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator/processor)
-
+	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator) \
+        $(BASE_DIR)/dialer/inject/DialerRootComponent.java \
+        $(BASE_DIR)/dialer/inject/DialerVariant.java \
+        $(BASE_DIR)/dialer/inject/HasRootComponent.java \
+        $(BASE_DIR)/dialer/inject/IncludeInDialerRoot.java \
+        $(BASE_DIR)/dialer/inject/InstallIn.java \
+        $(BASE_DIR)/dialer/inject/RootComponentGeneratorMetadata.java
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-guava \
