@@ -108,7 +108,8 @@ public class InCallServiceImpl extends InCallService {
             new ProximitySensor(
                 context, AudioModeProvider.getInstance(), new AccelerometerListener(context)),
             new FilteredNumberAsyncQueryHandler(context),
-            speakEasyCallManager);
+            speakEasyCallManager,
+            intent);
     InCallPresenter.getInstance().onServiceBind();
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
