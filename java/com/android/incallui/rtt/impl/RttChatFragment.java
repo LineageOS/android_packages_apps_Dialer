@@ -340,11 +340,6 @@ public class RttChatFragment extends Fragment
   }
 
   @Override
-  public void onSaveInstanceState(@NonNull Bundle bundle) {
-    super.onSaveInstanceState(bundle);
-  }
-
-  @Override
   public void onStop() {
     LogUtil.enterBlock("RttChatFragment.onStop");
     super.onStop();
