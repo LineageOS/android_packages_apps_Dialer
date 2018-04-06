@@ -16,10 +16,7 @@
 
 package com.android.dialer.speeddial;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -27,6 +24,9 @@ import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
@@ -37,7 +37,6 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.precall.PreCall;
 import java.util.ArrayList;
@@ -48,10 +47,14 @@ import java.util.Set;
 public class DisambigDialog extends DialogFragment {
 
   @VisibleForTesting public static final String DISAMBIG_DIALOG_TAG = "disambig_dialog";
+
+  @SuppressWarnings("unused")
   private static final String DISAMBIG_DIALOG_WORKER_TAG = "disambig_dialog_worker";
 
   private final Set<String> phoneNumbers = new ArraySet<>();
   private LinearLayout container;
+
+  @SuppressWarnings("unused")
   private String lookupKey;
 
   /** Show a disambiguation dialog for a starred contact without a favorite communication avenue. */
@@ -71,30 +74,11 @@ public class DisambigDialog extends DialogFragment {
   }
 
   @Override
-  public void onResume() {
-    super.onResume();
-    lookupContactInfo();
-  }
-
-  @Override
   public void onPause() {
     super.onPause();
     // TODO(calderwoodra): for simplicity, just dismiss the dialog on configuration change and
     // consider changing this later.
     dismiss();
-  }
-
-  private void lookupContactInfo() {
-    DialerExecutorComponent.get(getContext())
-        .dialerExecutorFactory()
-        .createUiTaskBuilder(
-            getFragmentManager(),
-            DISAMBIG_DIALOG_WORKER_TAG,
-            new LookupContactInfoWorker(getContext().getContentResolver()))
-        .onSuccess(this::insertOptions)
-        .onFailure(this::onLookupFailed)
-        .build()
-        .executeParallel(lookupKey);
   }
 
   /**
@@ -106,6 +90,7 @@ public class DisambigDialog extends DialogFragment {
    *   <li>Clickable voice option
    * </ul>
    */
+  @SuppressWarnings("unused")
   private void insertOptions(Cursor cursor) {
     if (!cursorIsValid(cursor)) {
       dismiss();
@@ -195,11 +180,6 @@ public class DisambigDialog extends DialogFragment {
       return false;
     }
     return true;
-  }
-
-  private void onLookupFailed(Throwable throwable) {
-    LogUtil.e("DisambigDialog.onLookupFailed", null, throwable);
-    insertOptions(null);
   }
 
   private static class LookupContactInfoWorker implements Worker<String, Cursor> {
