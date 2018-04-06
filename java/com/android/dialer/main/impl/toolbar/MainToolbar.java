@@ -113,9 +113,9 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
     searchBar.collapse(animate);
   }
 
-  /** @see SearchBarView#collapse(boolean) */
-  public void expand(boolean animate, Optional<String> text) {
-    searchBar.expand(animate, text);
+  /** @see SearchBarView#expand(boolean, Optional, boolean) */
+  public void expand(boolean animate, Optional<String> text, boolean requestFocus) {
+    searchBar.expand(animate, text, requestFocus);
   }
 
   public boolean isSlideUp() {
