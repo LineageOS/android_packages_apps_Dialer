@@ -1162,15 +1162,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     Trace.endSection();
   }
 
-  public void showToastForWiFiToLteHandover(DialerCall call) {
-    if (call.hasShownWiFiToLteHandoverToast()) {
-      return;
-    }
-
-    Toast.makeText(this, R.string.video_call_wifi_to_lte_handover_toast, Toast.LENGTH_LONG).show();
-    call.setHasShownWiFiToLteHandoverToast();
-  }
-
   public void showDialogOrToastForWifiHandoverFailure(DialerCall call) {
     if (call.showWifiHandoverAlertAsToast()) {
       Toast.makeText(this, R.string.video_call_lte_to_wifi_failed_message, Toast.LENGTH_SHORT)
