@@ -29,6 +29,7 @@ import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
+import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -89,6 +90,7 @@ public class NewMainActivityPeer implements MainActivityPeer {
   private static final class MainBottomNavBarBottomNavTabListener
       implements OnBottomNavTabSelectedListener {
 
+    private static final String SPEED_DIAL_TAG = "speed_dial";
     private static final String CALL_LOG_TAG = "call_log";
     private static final String VOICEMAIL_TAG = "voicemail";
 
@@ -104,7 +106,16 @@ public class NewMainActivityPeer implements MainActivityPeer {
     @Override
     public void onSpeedDialSelected() {
       hideAllFragments();
-      // TODO(calderwoodra): Implement SpeedDialFragment when FragmentUtils#getParent works
+      SpeedDialFragment fragment =
+          (SpeedDialFragment) supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+      if (fragment == null) {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_container, SpeedDialFragment.newInstance(), SPEED_DIAL_TAG)
+            .commit();
+      } else {
+        supportFragmentManager.beginTransaction().show(fragment).commit();
+      }
     }
 
     @Override
@@ -143,8 +154,14 @@ public class NewMainActivityPeer implements MainActivityPeer {
       }
     }
 
+    // TODO(calderwoodra): fix overlapping fragments issue
     private void hideAllFragments() {
       FragmentTransaction supportTransaction = supportFragmentManager.beginTransaction();
+      Fragment speedDialFragment = supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+      if (speedDialFragment != null) {
+        supportTransaction.hide(speedDialFragment);
+      }
+
       Fragment callLogFragment = supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
       if (callLogFragment != null) {
         if (callLogFragment.isVisible()) {
@@ -158,6 +175,7 @@ public class NewMainActivityPeer implements MainActivityPeer {
         }
         supportTransaction.hide(callLogFragment);
       }
+
       if (supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG) != null) {
         supportTransaction.hide(supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG));
       }
