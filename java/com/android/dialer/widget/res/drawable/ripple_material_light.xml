@@ -15,9 +15,8 @@
   ~ limitations under the License
   -->
 
-<!-- Based on the Theme.Material's default selectableItemBackground -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="@color/dialer_ripple_material_light">
+    android:color="@color/dialer_ripple_material_light">
   <item android:id="@android:id/mask">
     <color android:color="@android:color/white"/>
   </item>
