@@ -45,7 +45,6 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
-import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler;
 import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler.Source;
@@ -199,7 +198,6 @@ public class ListsFragment extends Fragment
     viewPager = (DialerViewPager) parentView.findViewById(R.id.lists_pager);
     adapter =
         new DialtactsPagerAdapter(
-            getContext(),
             getChildFragmentManager(),
             tabTitles,
             prefs.getBoolean(
@@ -456,11 +454,10 @@ public class ListsFragment extends Fragment
   }
 
   public boolean hasFrequents() {
-    Fragment page =
-        adapter.getItem(adapter.getRtlPosition(DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL));
-    return page instanceof OldSpeedDialFragment
-        ? ((OldSpeedDialFragment) page).hasFrequents()
-        : ((SpeedDialFragment) page).hasFrequents();
+    OldSpeedDialFragment page =
+        (OldSpeedDialFragment)
+            adapter.getItem(adapter.getRtlPosition(DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL));
+    return page.hasFrequents();
   }
 
   public RemoveView getRemoveView() {

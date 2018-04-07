@@ -17,13 +17,13 @@
 package com.android.dialer.speeddial;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.support.v4.content.CursorLoader;
 
 /** Cursor Loader for strequent contacts. */
 public final class StrequentContactsCursorLoader extends CursorLoader {
