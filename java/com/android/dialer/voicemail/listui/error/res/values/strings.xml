@@ -172,11 +172,11 @@ Si no acepta todos estos términos y condiciones, no use el buzón de voz visual
   </string>
 
   <string name="dialer_terms_and_conditions_1.0">
-  See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. You can turn this off at any time. <xliff:g>%s</xliff:g>
+  See and listen to your messages, without having to call voicemail. Transcripts of your voicemail are provided by Google’s free transcription service. You can turn either off in Settings any time. <xliff:g>%s</xliff:g>
   </string>
 
   <string name="dialer_terms_and_conditions_existing_user">
-  Transcripts of your voicemail are now provided by Google’s free transcription service. You can turn this off at any time. %s
+  Transcripts of your voicemail are now provided by Google’s free transcription service. You can turn this off in Settings any time. %s
   </string>
 
   <string name="dialer_terms_and_conditions_for_verizon_1.0">
