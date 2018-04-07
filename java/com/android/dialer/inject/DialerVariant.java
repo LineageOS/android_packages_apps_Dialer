@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.annotation;
+package com.android.dialer.inject;
 
 /** Represents all dialer variants. */
 public enum DialerVariant {
@@ -27,7 +27,9 @@ public enum DialerVariant {
 
   // TEST variant will be used in situations where we need create in-test application class which
   // doesn't belong to any variants listed above
-  DIALER_TEST("DialerTest");
+  DIALER_TEST("DialerTest"),
+  // Just for sample code in inject/demo.
+  DIALER_DEMO("DialerDemo");
 
   private final String variant;
 

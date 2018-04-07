@@ -14,27 +14,31 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.annotation;
+package com.android.dialer.inject;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation for {@link dagger.Module dagger.Modules} which causes them to be installed in the
- * specified variants.
+ * Annotates the place with this annotation when a RootComponent is needed.
  *
- * <p>It has a parameter for users to enter on which variants annotated module will be installed and
- * also must be non-empty. Example:
+ * <p>Usually users put this annotation on application class that is root of dependencies (the last
+ * thing to compile). The annotation processor will figure out what it needs to generate a variant
+ * root through dependencies.
+ *
+ * <p>Example:
  *
  * <pre>
  * <code>
- * @InstallIn(variants = {DialerVariant.DIALER_AOSP, DialerVariant.DIALER_TEST})
- * public class Module1 {}
- *
+ * @DialerRootComponent(variant = DialerVariant.DIALER_AOSP)
+ * public class RootDialerAosp {}
  * </code>
  * </pre>
  */
 @Target(ElementType.TYPE)
-public @interface InstallIn {
-  DialerVariant[] variants();
+@Retention(RetentionPolicy.SOURCE)
+public @interface DialerRootComponent {
+  DialerVariant variant();
 }
