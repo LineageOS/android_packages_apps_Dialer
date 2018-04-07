@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.annotation;
+package com.android.dialer.inject;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

@@ -14,13 +14,13 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.processor;
+package com.android.dialer.rootcomponentgenerator;
 
 import static javax.tools.Diagnostic.Kind.ERROR;
 
-import com.android.dialer.rootcomponentgenerator.annotation.IncludeInDialerRoot;
-import com.android.dialer.rootcomponentgenerator.annotation.InstallIn;
-import com.android.dialer.rootcomponentgenerator.annotation.RootComponentGeneratorMetadata;
+import com.android.dialer.inject.IncludeInDialerRoot;
+import com.android.dialer.inject.InstallIn;
+import com.android.dialer.inject.RootComponentGeneratorMetadata;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.common.MoreElements;
 import com.google.common.collect.ImmutableSet;
