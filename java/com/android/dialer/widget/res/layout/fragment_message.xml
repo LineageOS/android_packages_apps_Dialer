@@ -55,7 +55,7 @@
       android:textColor="@color/dialer_primary_text_color"
       android:textColorHint="@color/dialer_edit_text_hint_color"
       android:background="@color/background_dialer_white"
-      android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
+      android:textCursorDrawable="@drawable/edittext_custom_cursor"
       android:layout_toStartOf="@+id/count_and_send_container"
       android:inputType="textShortMessage|textCapSentences"
       android:imeOptions="flagNoExtractUi|actionSend"/>

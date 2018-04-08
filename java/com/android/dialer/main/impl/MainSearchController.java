@@ -140,7 +140,7 @@ public class MainSearchController implements SearchBarListener {
 
     fab.hide();
     toolbar.slideUp(animate, fragmentContainer);
-    toolbar.expand(animate, Optional.absent());
+    toolbar.expand(animate, Optional.absent(), /* requestFocus */ false);
     toolbarShadow.setVisibility(View.VISIBLE);
 
     activity.setTitle(R.string.dialpad_activity_title);
@@ -390,7 +390,7 @@ public class MainSearchController implements SearchBarListener {
     Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_SEARCH, activity);
 
     fab.hide();
-    toolbar.expand(/* animate=*/ true, query);
+    toolbar.expand(/* animate=*/ true, query, /* requestFocus */ true);
     toolbar.showKeyboard();
     toolbarShadow.setVisibility(View.VISIBLE);
     hideBottomNav();
@@ -528,11 +528,14 @@ public class MainSearchController implements SearchBarListener {
     if (savedInstanceState.getBoolean(KEY_IS_FAB_HIDDEN, false)) {
       fab.hide();
     }
-    if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_EXPANDED, false)) {
-      toolbar.expand(false, Optional.absent());
-    }
-    if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_SLIDE_UP, false)) {
+    boolean isSlideUp = savedInstanceState.getBoolean(KEY_IS_TOOLBAR_SLIDE_UP, false);
+    if (isSlideUp) {
       toolbar.slideUp(false, fragmentContainer);
+    }
+    if (savedInstanceState.getBoolean(KEY_IS_TOOLBAR_EXPANDED, false)) {
+      // If the toolbar is slide up, that means the dialpad is showing. Thus we don't want to
+      // request focus or we'll break physical/bluetooth keyboards typing.
+      toolbar.expand(/* animate */ false, Optional.absent(), /* requestFocus */ !isSlideUp);
     }
   }
 

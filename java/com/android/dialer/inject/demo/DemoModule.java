@@ -14,18 +14,22 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.annotation;
+package com.android.dialer.inject.demo;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
+import dagger.Module;
+import dagger.Provides;
 
-/**
- * Only used by rootcomponent generator to store metadata for locating annotated
- * (@DialerComponent, @InstallIn) class.
- */
-@Target(ElementType.TYPE)
-public @interface RootComponentGeneratorMetadata {
-  String tag();
+/** Module for demo dagger application. */
+@Module
+@InstallIn(variants = DialerVariant.DIALER_DEMO)
+public final class DemoModule {
 
-  Class<?> annotatedClass();
+  private DemoModule() {}
+
+  @Provides
+  static DemoObject provide() {
+    return new DemoObject("prod");
+  }
 }

@@ -101,13 +101,17 @@ final class SearchBarView extends FrameLayout {
     listener.onVoiceButtonClicked(
         result -> {
           if (!TextUtils.isEmpty(result)) {
-            expand(true, Optional.of(result));
+            expand(/* animate */ true, Optional.of(result), /* requestFocus */ true);
           }
         });
   }
 
-  /** Expand the search bar and populate it with text if any exists. */
-  /* package-private */ void expand(boolean animate, Optional<String> text) {
+  /**
+   * Expand the search bar and populate it with text if any exists.
+   *
+   * @param requestFocus should be false if showing the dialpad
+   */
+  /* package-private */ void expand(boolean animate, Optional<String> text, boolean requestFocus) {
     if (isExpanded) {
       return;
     }
@@ -133,7 +137,11 @@ final class SearchBarView extends FrameLayout {
             if (text.isPresent()) {
               searchBox.setText(text.get());
             }
-            searchBox.requestFocus();
+            // Don't request focus unless we're actually showing the search box, otherwise
+            // physical/bluetooth keyboards will type into this box when the dialpad is open.
+            if (requestFocus) {
+              searchBox.requestFocus();
+            }
             setBackgroundResource(R.drawable.search_bar_background);
           }
         });

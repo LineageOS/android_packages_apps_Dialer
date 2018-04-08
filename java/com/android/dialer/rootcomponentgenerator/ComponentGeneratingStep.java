@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.rootcomponentgenerator.processor;
+package com.android.dialer.rootcomponentgenerator;
 
 import static com.google.auto.common.AnnotationMirrors.getAnnotationValue;
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
@@ -23,7 +23,7 @@ import static javax.lang.model.element.Modifier.PUBLIC;
 import static javax.lang.model.element.Modifier.STATIC;
 import static javax.lang.model.util.ElementFilter.typesIn;
 
-import com.android.dialer.rootcomponentgenerator.annotation.IncludeInDialerRoot;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.common.MoreElements;
 import com.google.common.base.Optional;
