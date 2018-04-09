@@ -322,6 +322,24 @@ public final class PhoneLookupInfoConsolidator {
   }
 
   /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns whether the number can be reached via carrier video calls.
+   */
+  public boolean canSupportCarrierVideoCall() {
+    switch (nameSource) {
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+        return Assert.isNotNull(firstDefaultCp2Contact).getCanSupportCarrierVideoCall();
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+      case NameSource.PEOPLE_API:
+      case NameSource.NONE:
+        return false;
+      default:
+        throw Assert.createUnsupportedOperationFailException(
+            String.format("Unsupported name source: %s", nameSource));
+    }
+  }
+
+  /**
    * Arbitrarily select the first CP2 contact in the default directory. In the future, it may make
    * sense to display contact information from all contacts with the same number (for example show
    * the name as "Mom, Dad" or show a synthesized photo containing photos of both "Mom" and "Dad").
