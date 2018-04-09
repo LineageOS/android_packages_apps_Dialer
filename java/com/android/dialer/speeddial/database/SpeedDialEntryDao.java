@@ -16,7 +16,7 @@
 
 package com.android.dialer.speeddial.database;
 
-import java.util.List;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Interface that databases support speed dial entries should implement.
@@ -26,19 +26,19 @@ import java.util.List;
 public interface SpeedDialEntryDao {
 
   /** Return all entries in the database */
-  List<SpeedDialEntry> getAllEntries();
+  ImmutableList<SpeedDialEntry> getAllEntries();
 
   /**
    * Insert new entries.
    *
-   * <p>Fails if any of the {@link SpeedDialEntry#id()} already exist.
+   * <p>{@link SpeedDialEntry#id() ids} must be null.
    */
-  void insert(List<SpeedDialEntry> entries);
+  void insert(ImmutableList<SpeedDialEntry> entries);
 
   /**
    * Insert a new entry.
    *
-   * <p>Fails if the {@link SpeedDialEntry#id()} already exists.
+   * <p>{@link SpeedDialEntry#id() ids} must be null.
    */
   long insert(SpeedDialEntry entry);
 
@@ -47,14 +47,26 @@ public interface SpeedDialEntryDao {
    *
    * <p>Fails if the {@link SpeedDialEntry#id()} doesn't exist.
    */
-  void update(List<SpeedDialEntry> entries);
+  void update(ImmutableList<SpeedDialEntry> entries);
 
   /**
    * Delete the passed in entries based on {@link SpeedDialEntry#id}.
    *
    * <p>Fails if the {@link SpeedDialEntry#id()} doesn't exist.
    */
-  void delete(List<Long> entries);
+  void delete(ImmutableList<Long> entries);
+
+  /**
+   * Inserts, updates and deletes rows all in on transaction.
+   *
+   * @see #insert(ImmutableList)
+   * @see #update(ImmutableList)
+   * @see #delete(ImmutableList)
+   */
+  void insertUpdateAndDelete(
+      ImmutableList<SpeedDialEntry> entriesToInsert,
+      ImmutableList<SpeedDialEntry> entriesToUpdate,
+      ImmutableList<Long> entriesToDelete);
 
   /** Delete all entries in the database. */
   void deleteAll();

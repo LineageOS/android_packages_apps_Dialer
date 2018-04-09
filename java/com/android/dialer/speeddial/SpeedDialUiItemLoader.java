@@ -97,15 +97,9 @@ public final class SpeedDialUiItemLoader {
     List<SpeedDialEntry> entriesToUpdate = new ArrayList<>();
     List<Long> entriesToDelete = new ArrayList<>();
 
-    // Track the highest entry ID
-    // TODO(a bug): use auto-generated IDs
-    long maxId = 0L;
-
     // Get all SpeedDialEntries and mark them to be updated or deleted
     List<SpeedDialEntry> entries = db.getAllEntries();
     for (SpeedDialEntry entry : entries) {
-      maxId = Math.max(entry.id(), maxId);
-
       SpeedDialUiItem contact = getSpeedDialContact(entry);
       // Remove contacts that no longer exist or are no longer starred
       if (contact == null || !contact.isStarred()) {
@@ -138,11 +132,8 @@ public final class SpeedDialUiItemLoader {
         speedDialUiItems.add(contact);
 
       } else if (speedDialUiItems.stream().noneMatch(c -> c.contactId() == contact.contactId())) {
-        // Increment the ID so there aren't any collisions
-        maxId += 1;
         entriesToInsert.add(
             SpeedDialEntry.builder()
-                .setId(maxId)
                 .setLookupKey(contact.lookupKey())
                 .setContactId(contact.contactId())
                 .setDefaultChannel(contact.defaultChannel())
@@ -153,10 +144,10 @@ public final class SpeedDialUiItemLoader {
       }
     }
 
-    // TODO(a bug): use a single db transaction
-    db.delete(entriesToDelete);
-    db.update(entriesToUpdate);
-    db.insert(entriesToInsert);
+    db.insertUpdateAndDelete(
+        ImmutableList.copyOf(entriesToInsert),
+        ImmutableList.copyOf(entriesToUpdate),
+        ImmutableList.copyOf(entriesToDelete));
     return ImmutableList.copyOf(speedDialUiItems);
   }
 

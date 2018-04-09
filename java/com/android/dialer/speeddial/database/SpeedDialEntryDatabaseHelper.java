@@ -25,6 +25,7 @@ import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +95,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public List<SpeedDialEntry> getAllEntries() {
+  public ImmutableList<SpeedDialEntry> getAllEntries() {
     List<SpeedDialEntry> entries = new ArrayList<>();
 
     String query = "SELECT * FROM " + TABLE_NAME;
@@ -118,25 +119,24 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
                 .setDefaultChannel(channel)
                 .setContactId(cursor.getLong(POSITION_CONTACT_ID))
                 .setLookupKey(cursor.getString(POSITION_LOOKUP_KEY))
-                .setId(cursor.getInt(POSITION_ID))
+                .setId(cursor.getLong(POSITION_ID))
                 .build();
         entries.add(entry);
       }
     }
-    return entries;
+    return ImmutableList.copyOf(entries);
   }
 
   @Override
-  public void insert(List<SpeedDialEntry> entries) {
+  public void insert(ImmutableList<SpeedDialEntry> entries) {
+    if (entries.isEmpty()) {
+      return;
+    }
+
     SQLiteDatabase db = getWritableDatabase();
     db.beginTransaction();
     try {
-      for (SpeedDialEntry entry : entries) {
-        if (db.insert(TABLE_NAME, null, buildContentValues(entry)) == -1L) {
-          throw Assert.createUnsupportedOperationFailException(
-              "Attempted to insert a row that already exists.");
-        }
-      }
+      insert(db, entries);
       db.setTransactionSuccessful();
     } finally {
       db.endTransaction();
@@ -144,11 +144,21 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     }
   }
 
+  private void insert(SQLiteDatabase writeableDatabase, ImmutableList<SpeedDialEntry> entries) {
+    for (SpeedDialEntry entry : entries) {
+      Assert.checkArgument(entry.id() == null);
+      if (writeableDatabase.insert(TABLE_NAME, null, buildContentValuesWithoutId(entry)) == -1L) {
+        throw Assert.createUnsupportedOperationFailException(
+            "Attempted to insert a row that already exists.");
+      }
+    }
+  }
+
   @Override
   public long insert(SpeedDialEntry entry) {
     long updateRowId;
     try (SQLiteDatabase db = getWritableDatabase()) {
-      updateRowId = db.insert(TABLE_NAME, null, buildContentValues(entry));
+      updateRowId = db.insert(TABLE_NAME, null, buildContentValuesWithoutId(entry));
     }
     if (updateRowId == -1) {
       throw Assert.createUnsupportedOperationFailException(
@@ -158,22 +168,15 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public void update(List<SpeedDialEntry> entries) {
+  public void update(ImmutableList<SpeedDialEntry> entries) {
+    if (entries.isEmpty()) {
+      return;
+    }
+
     SQLiteDatabase db = getWritableDatabase();
     db.beginTransaction();
     try {
-      for (SpeedDialEntry entry : entries) {
-        int count =
-            db.update(
-                TABLE_NAME,
-                buildContentValues(entry),
-                ID + " = ?",
-                new String[] {Long.toString(entry.id())});
-        if (count != 1) {
-          throw Assert.createUnsupportedOperationFailException(
-              "Attempted to update an undetermined number of rows: " + count);
-        }
-      }
+      update(db, entries);
       db.setTransactionSuccessful();
     } finally {
       db.endTransaction();
@@ -181,9 +184,34 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     }
   }
 
-  private ContentValues buildContentValues(SpeedDialEntry entry) {
+  private void update(SQLiteDatabase writeableDatabase, ImmutableList<SpeedDialEntry> entries) {
+    for (SpeedDialEntry entry : entries) {
+      int count =
+          writeableDatabase.update(
+              TABLE_NAME,
+              buildContentValuesWithId(entry),
+              ID + " = ?",
+              new String[] {Long.toString(entry.id())});
+      if (count != 1) {
+        throw Assert.createUnsupportedOperationFailException(
+            "Attempted to update an undetermined number of rows: " + count);
+      }
+    }
+  }
+
+  private ContentValues buildContentValuesWithId(SpeedDialEntry entry) {
+    return buildContentValues(entry, true);
+  }
+
+  private ContentValues buildContentValuesWithoutId(SpeedDialEntry entry) {
+    return buildContentValues(entry, false);
+  }
+
+  private ContentValues buildContentValues(SpeedDialEntry entry, boolean includeId) {
     ContentValues values = new ContentValues();
-    values.put(ID, entry.id());
+    if (includeId) {
+      values.put(ID, entry.id());
+    }
     values.put(CONTACT_ID, entry.contactId());
     values.put(LOOKUP_KEY, entry.lookupKey());
     if (entry.defaultChannel() != null) {
@@ -195,19 +223,50 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public void delete(List<Long> ids) {
+  public void delete(ImmutableList<Long> ids) {
+    if (ids.isEmpty()) {
+      return;
+    }
+
+    try (SQLiteDatabase db = getWritableDatabase()) {
+      delete(db, ids);
+    }
+  }
+
+  private void delete(SQLiteDatabase writeableDatabase, ImmutableList<Long> ids) {
     List<String> idStrings = new ArrayList<>();
     for (Long id : ids) {
       idStrings.add(Long.toString(id));
     }
 
     Selection selection = Selection.builder().and(Selection.column(ID).in(idStrings)).build();
-    try (SQLiteDatabase db = getWritableDatabase()) {
-      int count = db.delete(TABLE_NAME, selection.getSelection(), selection.getSelectionArgs());
-      if (count != ids.size()) {
-        throw Assert.createUnsupportedOperationFailException(
-            "Attempted to delete an undetermined number of rows: " + count);
-      }
+    int count =
+        writeableDatabase.delete(
+            TABLE_NAME, selection.getSelection(), selection.getSelectionArgs());
+    if (count != ids.size()) {
+      throw Assert.createUnsupportedOperationFailException(
+          "Attempted to delete an undetermined number of rows: " + count);
+    }
+  }
+
+  @Override
+  public void insertUpdateAndDelete(
+      ImmutableList<SpeedDialEntry> entriesToInsert,
+      ImmutableList<SpeedDialEntry> entriesToUpdate,
+      ImmutableList<Long> entriesToDelete) {
+    if (entriesToInsert.isEmpty() && entriesToUpdate.isEmpty() && entriesToDelete.isEmpty()) {
+      return;
+    }
+    SQLiteDatabase db = getWritableDatabase();
+    db.beginTransaction();
+    try {
+      insert(db, entriesToInsert);
+      update(db, entriesToUpdate);
+      delete(db, entriesToDelete);
+      db.setTransactionSuccessful();
+    } finally {
+      db.endTransaction();
+      db.close();
     }
   }
 

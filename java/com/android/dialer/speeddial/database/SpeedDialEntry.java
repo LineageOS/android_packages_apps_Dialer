@@ -27,8 +27,13 @@ import java.lang.annotation.RetentionPolicy;
 @AutoValue
 public abstract class SpeedDialEntry {
 
-  /** Unique ID */
-  public abstract long id();
+  /**
+   * Unique ID
+   *
+   * <p>Must be null when inserting, and an ID will be generated and returned after inserting.
+   */
+  @Nullable
+  public abstract Long id();
 
   /** @see {@link Contacts#_ID} */
   public abstract long contactId();
@@ -55,7 +60,7 @@ public abstract class SpeedDialEntry {
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setId(long id);
+    public abstract Builder setId(Long id);
 
     public abstract Builder setContactId(long contactId);
 
