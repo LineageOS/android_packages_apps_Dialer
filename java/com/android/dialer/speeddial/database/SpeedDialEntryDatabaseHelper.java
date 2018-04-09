@@ -28,7 +28,11 @@ import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import java.util.ArrayList;
 import java.util.List;
 
-/** {@link SpeedDialEntryDao} implemented as an SQLite database. */
+/**
+ * {@link SpeedDialEntryDao} implemented as an SQLite database.
+ *
+ * @see SpeedDialEntryDao
+ */
 public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     implements SpeedDialEntryDao {
 
@@ -42,7 +46,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   private static final String LOOKUP_KEY = "lookup_key";
   private static final String PHONE_NUMBER = "phone_number";
   private static final String PHONE_LABEL = "phone_label";
-  private static final String PHONE_TYPE = "phone_type";
+  private static final String PHONE_TECHNOLOGY = "phone_technology";
 
   // Column positions
   private static final int POSITION_ID = 0;
@@ -50,7 +54,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   private static final int POSITION_LOOKUP_KEY = 2;
   private static final int POSITION_PHONE_NUMBER = 3;
   private static final int POSITION_PHONE_LABEL = 4;
-  private static final int POSITION_PHONE_TYPE = 5;
+  private static final int POSITION_PHONE_TECHNOLOGY = 5;
 
   // Create Table Query
   private static final String CREATE_TABLE_SQL =
@@ -62,7 +66,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
           + (LOOKUP_KEY + " text, ")
           + (PHONE_NUMBER + " text, ")
           + (PHONE_LABEL + " text, ")
-          + (PHONE_TYPE + " integer ")
+          + (PHONE_TECHNOLOGY + " integer ")
           + ");";
 
   private static final String DELETE_TABLE_SQL = "drop table if exists " + TABLE_NAME;
@@ -98,15 +102,17 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
         Cursor cursor = db.rawQuery(query, null)) {
       cursor.moveToPosition(-1);
       while (cursor.moveToNext()) {
-        Channel channel =
-            Channel.builder()
-                .setNumber(cursor.getString(POSITION_PHONE_NUMBER))
-                .setLabel(cursor.getString(POSITION_PHONE_LABEL))
-                .setTechnology(cursor.getInt(POSITION_PHONE_TYPE))
-                .build();
-        if (TextUtils.isEmpty(channel.number())) {
-          channel = null;
+        String number = cursor.getString(POSITION_PHONE_NUMBER);
+        Channel channel = null;
+        if (!TextUtils.isEmpty(number)) {
+          channel =
+              Channel.builder()
+                  .setNumber(number)
+                  .setLabel(cursor.getString(POSITION_PHONE_LABEL))
+                  .setTechnology(cursor.getInt(POSITION_PHONE_TECHNOLOGY))
+                  .build();
         }
+
         SpeedDialEntry entry =
             SpeedDialEntry.builder()
                 .setDefaultChannel(channel)
@@ -183,7 +189,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     if (entry.defaultChannel() != null) {
       values.put(PHONE_NUMBER, entry.defaultChannel().number());
       values.put(PHONE_LABEL, entry.defaultChannel().label());
-      values.put(PHONE_TYPE, entry.defaultChannel().technology());
+      values.put(PHONE_TECHNOLOGY, entry.defaultChannel().technology());
     }
     return values;
   }

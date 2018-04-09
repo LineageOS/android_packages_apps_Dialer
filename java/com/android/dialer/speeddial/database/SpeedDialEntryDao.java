@@ -18,7 +18,11 @@ package com.android.dialer.speeddial.database;
 
 import java.util.List;
 
-/** Interface that databases support speed dial entries should implement. */
+/**
+ * Interface that databases support speed dial entries should implement.
+ *
+ * <p>This database is only used for favorite/starred contacts.
+ */
 public interface SpeedDialEntryDao {
 
   /** Return all entries in the database */
