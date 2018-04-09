@@ -18,7 +18,7 @@ message PhoneLookupInfo {
   // Information about a PhoneNumber retrieved from CP2.
   message Cp2Info {
     // Information about a single contact.
-    // Next ID: 8
+    // Next ID: 9
     message Cp2ContactInfo {
       // For a contact in the default directory:
       //   android.provider.ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY
@@ -65,6 +65,15 @@ message PhoneLookupInfo {
       //   constructed based on
       //   android.provider.ContactsContract.PhoneLookup.LOOKUP_KEY
       optional string lookup_uri = 7;
+
+      // For a contact in the default directory:
+      //    value set based on
+      //    android.provider.ContactsContract.CommonDataKinds.Phone.CARRIER_PRESENCE
+      // For a contact in other directories: always false.
+      //    This is because we lookup contacts in other directories via
+      //    android.provider.ContactsContract.PhoneLookup, to which carrier
+      //    presence info is not directly accessible.
+      optional bool can_support_carrier_video_call = 8;
     }
     // Repeated because one phone number can be associated with multiple CP2
     // contacts.
