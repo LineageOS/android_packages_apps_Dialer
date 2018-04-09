@@ -41,7 +41,8 @@ final class Cp2Projections {
         Phone.LABEL, // 5
         Phone.NORMALIZED_NUMBER, // 6
         Phone.CONTACT_ID, // 7
-        Phone.LOOKUP_KEY // 8
+        Phone.LOOKUP_KEY, // 8
+        Phone.CARRIER_PRESENCE
       };
 
   // Projection for performing lookups using the PHONE_LOOKUP table
@@ -58,7 +59,8 @@ final class Cp2Projections {
         PhoneLookup.LOOKUP_KEY // 8
       };
 
-  // The following indexes should match both PHONE_PROJECTION and PHONE_LOOKUP_PROJECTION above.
+  // The following indexes should match the common columns in
+  // PHONE_PROJECTION and PHONE_LOOKUP_PROJECTION above.
   private static final int CP2_INFO_NAME_INDEX = 0;
   private static final int CP2_INFO_PHOTO_THUMBNAIL_URI_INDEX = 1;
   private static final int CP2_INFO_PHOTO_URI_INDEX = 2;
@@ -116,6 +118,16 @@ final class Cp2Projections {
     if (!TextUtils.isEmpty(lookupKey)) {
       infoBuilder.setLookupUri(Contacts.getLookupUri(contactId, lookupKey).toString());
     }
+
+    // Only PHONE_PROJECTION has a column containing carrier presence info.
+    int carrierPresenceColumn = cursor.getColumnIndex(Phone.CARRIER_PRESENCE);
+    if (carrierPresenceColumn != -1) {
+      int carrierPresenceInfo = cursor.getInt(carrierPresenceColumn);
+      infoBuilder.setCanSupportCarrierVideoCall(
+          (carrierPresenceInfo & Phone.CARRIER_PRESENCE_VT_CAPABLE)
+              == Phone.CARRIER_PRESENCE_VT_CAPABLE);
+    }
+
     return infoBuilder.build();
   }
 
