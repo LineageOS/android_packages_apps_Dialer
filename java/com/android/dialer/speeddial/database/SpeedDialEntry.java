@@ -88,6 +88,7 @@ public abstract class SpeedDialEntry {
     public boolean isVideoTechnology() {
       return technology() == IMS_VIDEO || technology() == DUO;
     }
+
     /**
      * Raw phone number as the user entered it.
      *
