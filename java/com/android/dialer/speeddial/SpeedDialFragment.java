@@ -120,7 +120,7 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void onAmbiguousContactClicked(List<Channel> channels) {
-      // TODO(calderwoodra): implement the disambig dialog with channels
+      DisambigDialog.show(channels, getChildFragmentManager());
     }
 
     @Override
