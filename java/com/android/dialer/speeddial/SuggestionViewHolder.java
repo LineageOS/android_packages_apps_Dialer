@@ -17,10 +17,6 @@
 package com.android.dialer.speeddial;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -28,10 +24,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
-import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.common.Assert;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 
 /** ViewHolder for displaying suggested contacts in {@link SpeedDialFragment}. */
 public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -54,46 +52,35 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
     this.listener = listener;
   }
 
-  public void bind(Context context, Cursor cursor) {
-    number = cursor.getString(StrequentContactsCursorLoader.PHONE_NUMBER);
-    number = PhoneNumberHelper.formatNumber(context, number, GeoUtil.getCurrentCountryIso(context));
+  public void bind(Context context, SpeedDialUiItem speedDialUiItem) {
+    Assert.isNotNull(speedDialUiItem.defaultChannel());
+    number =
+        PhoneNumberHelper.formatNumber(
+            context,
+            speedDialUiItem.defaultChannel().number(),
+            GeoUtil.getCurrentCountryIso(context));
 
-    String name = cursor.getString(StrequentContactsCursorLoader.PHONE_DISPLAY_NAME);
-    String label = getLabel(context.getResources(), cursor);
+    String label = speedDialUiItem.defaultChannel().label();
     String secondaryInfo =
         TextUtils.isEmpty(label)
             ? number
             : context.getString(R.string.call_subject_type_and_number, label, number);
 
-    nameOrNumberView.setText(name);
+    nameOrNumberView.setText(speedDialUiItem.name());
     numberView.setText(secondaryInfo);
 
-    long contactId = cursor.getLong(StrequentContactsCursorLoader.PHONE_ID);
-    String lookupKey = cursor.getString(StrequentContactsCursorLoader.PHONE_LOOKUP_KEY);
-    Uri contactUri = Contacts.getLookupUri(contactId, lookupKey);
-
-    String photoUri = cursor.getString(StrequentContactsCursorLoader.PHONE_PHOTO_URI);
-    ContactPhotoManager.getInstance(context)
-        .loadDialerThumbnailOrPhoto(
+    GlidePhotoManagerComponent.get(context)
+        .glidePhotoManager()
+        .loadQuickContactBadge(
             photoView,
-            contactUri,
-            cursor.getLong(StrequentContactsCursorLoader.PHONE_PHOTO_ID),
-            photoUri == null ? null : Uri.parse(photoUri),
-            name,
-            LetterTileDrawable.TYPE_DEFAULT);
-  }
-
-  // TODO(calderwoodra): handle CNAP and cequint types.
-  // TODO(calderwoodra): unify this into a utility method with CallLogAdapter#getNumberType
-  private static String getLabel(Resources resources, Cursor cursor) {
-    int numberType = cursor.getInt(StrequentContactsCursorLoader.PHONE_TYPE);
-    String numberLabel = cursor.getString(StrequentContactsCursorLoader.PHONE_LABEL);
-
-    // Returns empty label instead of "custom" if the custom label is empty.
-    if (numberType == Phone.TYPE_CUSTOM && TextUtils.isEmpty(numberLabel)) {
-      return "";
-    }
-    return (String) Phone.getTypeLabel(resources, numberType, numberLabel);
+            PhotoInfo.newBuilder()
+                .setPhotoId(speedDialUiItem.photoId())
+                .setPhotoUri(speedDialUiItem.photoUri())
+                .setName(speedDialUiItem.name())
+                .setLookupUri(
+                    Contacts.getLookupUri(speedDialUiItem.contactId(), speedDialUiItem.lookupKey())
+                        .toString())
+                .build());
   }
 
   @Override
