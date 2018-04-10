@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.speeddial;
+package com.android.dialer.speeddial.loader;
 
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
