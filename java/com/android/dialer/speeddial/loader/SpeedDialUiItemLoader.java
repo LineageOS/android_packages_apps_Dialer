@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.speeddial;
+package com.android.dialer.speeddial.loader;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -29,6 +29,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
+import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
@@ -40,6 +41,7 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Loads a list of {@link SpeedDialUiItem SpeedDialUiItems}.
@@ -62,10 +64,13 @@ import javax.inject.Inject;
  */
 @SuppressWarnings("AndroidApiChecker")
 @TargetApi(VERSION_CODES.N)
-public final class SpeedDialUiItemLoader {
+@Singleton
+public final class SpeedDialUiItemLoader implements UiItemLoader {
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
+  // Used to ensure that only one refresh flow runs at a time.
+  private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
 
   @Inject
   public SpeedDialUiItemLoader(
@@ -80,8 +85,10 @@ public final class SpeedDialUiItemLoader {
    * list is composed of starred contacts from {@link SpeedDialEntryDatabaseHelper} and suggestions
    * from {@link Contacts#STREQUENT_PHONE_ONLY}.
    */
+  @Override
   public ListenableFuture<ImmutableList<SpeedDialUiItem>> loadSpeedDialUiItems() {
-    return backgroundExecutor.submit(this::doInBackground);
+    return dialerFutureSerializer.submitAsync(
+        () -> backgroundExecutor.submit(this::doInBackground), backgroundExecutor);
   }
 
   @WorkerThread
@@ -128,7 +135,6 @@ public final class SpeedDialUiItemLoader {
     for (SpeedDialUiItem contact : strequentContacts) {
       if (!contact.isStarred()) {
         // Add this contact as a suggestion
-        // TODO(calderwoodra): set the defaults of these automatically
         speedDialUiItems.add(contact);
 
       } else if (speedDialUiItems.stream().noneMatch(c -> c.contactId() == contact.contactId())) {
