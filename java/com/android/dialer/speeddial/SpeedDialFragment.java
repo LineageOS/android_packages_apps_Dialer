@@ -17,23 +17,28 @@
 package com.android.dialer.speeddial;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.common.Assert;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
+import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import com.android.dialer.speeddial.loader.SpeedDialUiItem;
+import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.MoreExecutors;
+import java.util.List;
 
 /**
  * Fragment for displaying:
@@ -47,13 +52,9 @@ import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListen
  */
 public class SpeedDialFragment extends Fragment {
 
-  private static final int STREQUENT_CONTACTS_LOADER_ID = 1;
-
   private final SpeedDialHeaderListener headerListener = new SpeedDialFragmentHeaderListener();
   private final FavoriteContactsListener favoritesListener = new SpeedDialFavoritesListener();
   private final SuggestedContactsListener suggestedListener = new SpeedDialSuggestedListener();
-  private final SpeedDialFragmentLoaderCallback loaderCallback =
-      new SpeedDialFragmentLoaderCallback();
 
   private SpeedDialAdapter adapter;
 
@@ -72,7 +73,6 @@ public class SpeedDialFragment extends Fragment {
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
     recyclerView.setLayoutManager(adapter.getLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
-    getLoaderManager().initLoader(STREQUENT_CONTACTS_LOADER_ID, null /* args */, loaderCallback);
     return view;
   }
 
@@ -84,7 +84,28 @@ public class SpeedDialFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    getLoaderManager().restartLoader(STREQUENT_CONTACTS_LOADER_ID, null, loaderCallback);
+    Futures.addCallback(
+        UiItemLoaderComponent.get(getContext().getApplicationContext())
+            .speedDialUiItemLoader()
+            .loadSpeedDialUiItems(),
+        new FutureCallback<List<SpeedDialUiItem>>() {
+          @Override
+          public void onSuccess(List<SpeedDialUiItem> speedDialUiItems) {
+            // TODO(calderwoodra): this is bad
+            new Handler(Looper.getMainLooper())
+                .post(
+                    () -> {
+                      adapter.setSpeedDialUiItems(speedDialUiItems);
+                      adapter.notifyDataSetChanged();
+                    });
+          }
+
+          @Override
+          public void onFailure(Throwable throwable) {
+            throw new RuntimeException(throwable);
+          }
+        },
+        MoreExecutors.directExecutor());
   }
 
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
@@ -98,8 +119,8 @@ public class SpeedDialFragment extends Fragment {
   private class SpeedDialFavoritesListener implements FavoriteContactsListener {
 
     @Override
-    public void onAmbiguousContactClicked(String lookupKey) {
-      DisambigDialog.show(lookupKey, getFragmentManager());
+    public void onAmbiguousContactClicked(List<Channel> channels) {
+      // TODO(calderwoodra): implement the disambig dialog with channels
     }
 
     @Override
@@ -128,31 +149,6 @@ public class SpeedDialFragment extends Fragment {
     public void onRowClicked(String number) {
       PreCall.start(
           getContext(), new CallIntentBuilder(number, CallInitiationType.Type.SPEED_DIAL));
-    }
-  }
-
-  /**
-   * Loader callback that registers a content observer. {@link #unregisterContentObserver()} needs
-   * to be called during tear down of the fragment.
-   */
-  private class SpeedDialFragmentLoaderCallback implements LoaderCallbacks<Cursor> {
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-      if (id == STREQUENT_CONTACTS_LOADER_ID) {
-        return new StrequentContactsCursorLoader(getContext());
-      }
-      throw Assert.createIllegalStateFailException("Invalid loader id: " + id);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-      adapter.setCursor((SpeedDialCursor) data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-      adapter.setCursor(null);
     }
   }
 }
