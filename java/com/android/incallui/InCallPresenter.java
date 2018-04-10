@@ -266,8 +266,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private VideoSurfaceTexture localVideoSurfaceTexture;
   private VideoSurfaceTexture remoteVideoSurfaceTexture;
 
-  private MotorolaInCallUiNotifier motorolaInCallUiNotifier;
-
   private SpeakEasyCallManager speakEasyCallManager;
 
   private boolean shouldStartInBubbleMode;
@@ -398,14 +396,12 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
     AudioModeProvider.getInstance().addListener(this);
 
-    if (motorolaInCallUiNotifier == null) {
-      // Add listener to notify Telephony process when the incoming call screen is started or
-      // finished. This is for hiding USSD dialog because the incoming call screen should have
-      // higher precedence over this dialog.
-      motorolaInCallUiNotifier = new MotorolaInCallUiNotifier(context);
-      addInCallUiListener(motorolaInCallUiNotifier);
-      addListener(motorolaInCallUiNotifier);
-    }
+    // Add listener to notify Telephony process when the incoming call screen is started or
+    // finished. This is for hiding USSD dialog because the incoming call screen should have
+    // higher precedence over this dialog.
+    MotorolaInCallUiNotifier motorolaInCallUiNotifier = new MotorolaInCallUiNotifier(context);
+    addInCallUiListener(motorolaInCallUiNotifier);
+    addListener(motorolaInCallUiNotifier);
 
     this.shouldStartInBubbleMode = shouldStartInBubbleMode(intent);
 

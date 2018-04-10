@@ -27,8 +27,13 @@ import java.lang.annotation.RetentionPolicy;
 @AutoValue
 public abstract class SpeedDialEntry {
 
-  /** Unique ID */
-  public abstract long id();
+  /**
+   * Unique ID
+   *
+   * <p>Must be null when inserting, and an ID will be generated and returned after inserting.
+   */
+  @Nullable
+  public abstract Long id();
 
   /** @see {@link Contacts#_ID} */
   public abstract long contactId();
@@ -55,7 +60,7 @@ public abstract class SpeedDialEntry {
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setId(long id);
+    public abstract Builder setId(Long id);
 
     public abstract Builder setContactId(long contactId);
 
@@ -72,13 +77,17 @@ public abstract class SpeedDialEntry {
 
     public static final int UNKNOWN = 0;
     public static final int VOICE = 1;
-    public static final int VIDEO = 2;
+    public static final int IMS_VIDEO = 2;
+    public static final int DUO = 3;
 
     /** Whether the Channel is for an audio or video call. */
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({UNKNOWN, VOICE, VIDEO})
+    @IntDef({UNKNOWN, VOICE, IMS_VIDEO, DUO})
     public @interface Technology {}
 
+    public boolean isVideoTechnology() {
+      return technology() == IMS_VIDEO || technology() == DUO;
+    }
     /**
      * Raw phone number as the user entered it.
      *
@@ -95,6 +104,8 @@ public abstract class SpeedDialEntry {
     public abstract String label();
 
     public abstract @Technology int technology();
+
+    public abstract Builder toBuilder();
 
     public static Builder builder() {
       return new AutoValue_SpeedDialEntry_Channel.Builder();
