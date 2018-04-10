@@ -28,6 +28,8 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.DividerModule;
@@ -38,6 +40,7 @@ import com.android.dialer.historyitemactions.SharedModules;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.util.CallUtil;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -145,18 +148,32 @@ final class Modules {
         IntentModule.newCallModule(
             context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
 
-    // Add a video item if (1) the call log entry is for a video call, and (2) the call is not spam.
-    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO
-        && !row.getNumberAttributes().getIsSpam()) {
+    // If the call log entry is for a spam call, nothing more to be done.
+    if (row.getNumberAttributes().getIsSpam()) {
+      return modules;
+    }
+
+    // If the call log entry is for a video call, add the corresponding video call options.
+    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       modules.add(
           isDuoCall
               ? new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG)
               : IntentModule.newCarrierVideoCallModule(
                   context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+      return modules;
     }
 
-    // TODO(zachh): Also show video option if the call log entry is for an audio call but video
-    // capabilities are present?
+    // At this point, the call log entry is for an audio call. We will also show a video call option
+    // if the video capability is present.
+    //
+    // The carrier video call option takes precedence over Duo.
+    if (canPlaceCarrierVideoCall(context, row)) {
+      modules.add(
+          IntentModule.newCarrierVideoCallModule(
+              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+    } else if (canPlaceDuoCall(context, normalizedNumber)) {
+      modules.add(new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG));
+    }
 
     return modules;
   }
@@ -196,5 +213,28 @@ final class Modules {
         .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
         .setIsVoicemail(row.getIsVoicemailCall())
         .build();
+  }
+
+  private static boolean canPlaceDuoCall(Context context, String phoneNumber) {
+    Duo duo = DuoComponent.get(context).getDuo();
+
+    return duo.isInstalled(context)
+        && duo.isEnabled(context)
+        && duo.isActivated(context)
+        && duo.isReachable(context, phoneNumber);
+  }
+
+  private static boolean canPlaceCarrierVideoCall(Context context, CoalescedRow row) {
+    int carrierVideoAvailability = CallUtil.getVideoCallingAvailability(context);
+    boolean isCarrierVideoCallingEnabled =
+        ((carrierVideoAvailability & CallUtil.VIDEO_CALLING_ENABLED)
+            == CallUtil.VIDEO_CALLING_ENABLED);
+    boolean canRelyOnCarrierVideoPresence =
+        ((carrierVideoAvailability & CallUtil.VIDEO_CALLING_PRESENCE)
+            == CallUtil.VIDEO_CALLING_PRESENCE);
+
+    return isCarrierVideoCallingEnabled
+        && canRelyOnCarrierVideoPresence
+        && row.getNumberAttributes().getCanSupportCarrierVideoCall();
   }
 }
