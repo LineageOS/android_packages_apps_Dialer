@@ -49,6 +49,7 @@ public class CallTypeIconsView extends View {
   private boolean showHd;
   private boolean showWifi;
   private boolean showAssistedDialed;
+  private boolean showRtt;
   private int width;
   private int height;
 
@@ -145,6 +146,15 @@ public class CallTypeIconsView extends View {
     }
   }
 
+  public void setShowRtt(boolean showRtt) {
+    this.showRtt = showRtt;
+    if (showRtt) {
+      width += resources.rttCall.getIntrinsicWidth() + resources.iconMargin;
+      height = Math.max(height, resources.rttCall.getIntrinsicHeight());
+      invalidate();
+    }
+  }
+
   public int getCount() {
     return callTypes.size();
   }
@@ -188,7 +198,7 @@ public class CallTypeIconsView extends View {
     // If we are using large icons, we should only show one icon (video, hd or call type) with
     // priority give to HD or Video. So we skip the call type icon if we plan to show them.
 
-    if (!useLargeIcons || !(showHd || showVideo || showWifi || showAssistedDialed)) {
+    if (!useLargeIcons || !(showHd || showVideo || showWifi || showAssistedDialed || showRtt)) {
       for (Integer callType : callTypes) {
         final Drawable drawable = getCallTypeDrawable(callType);
         final int right = left + drawable.getIntrinsicWidth();
@@ -213,6 +223,10 @@ public class CallTypeIconsView extends View {
     // If showing assisted dial call icon, draw it scaled appropriately.
     if (showAssistedDialed) {
       left = addDrawable(canvas, resources.assistedDialedCall, left) + resources.iconMargin;
+    }
+    // If showing RTT call icon, draw it scaled appropriately.
+    if (showRtt) {
+      left = addDrawable(canvas, resources.rttCall, left) + resources.iconMargin;
     }
   }
 
@@ -251,6 +265,9 @@ public class CallTypeIconsView extends View {
 
     // Drawable representing an assisted dialed call.
     final Drawable assistedDialedCall;
+
+    // Drawable representing a RTT call.
+    final Drawable rttCall;
 
     /** The margin to use for icons. */
     final int iconMargin;
@@ -317,6 +334,11 @@ public class CallTypeIconsView extends View {
       assistedDialedCall.setColorFilter(
           r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
+      iconId = R.drawable.quantum_ic_rtt_vd_theme_24;
+      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      rttCall = drawable.mutate();
+      rttCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
+
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
     }
 
@@ -324,18 +346,19 @@ public class CallTypeIconsView extends View {
     // icons to be the same height, while preserving their width aspect ratio.
     private Drawable getScaledBitmap(Context context, int resourceId) {
       Drawable drawable = context.getDrawable(resourceId);
-      Bitmap icon =
-          Bitmap.createBitmap(
-              drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+
+      int scaledHeight = context.getResources().getDimensionPixelSize(R.dimen.call_type_icon_size);
+      int scaledWidth =
+          (int)
+              ((float) drawable.getIntrinsicWidth()
+                  * ((float) scaledHeight / (float) drawable.getIntrinsicHeight()));
+
+      Bitmap icon = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
       Canvas canvas = new Canvas(icon);
       drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
       drawable.draw(canvas);
 
-      int scaledHeight = context.getResources().getDimensionPixelSize(R.dimen.call_type_icon_size);
-      int scaledWidth =
-          (int) ((float) icon.getWidth() * ((float) scaledHeight / (float) icon.getHeight()));
-      Bitmap scaledIcon = Bitmap.createScaledBitmap(icon, scaledWidth, scaledHeight, false);
-      return new BitmapDrawable(context.getResources(), scaledIcon);
+      return new BitmapDrawable(context.getResources(), icon);
     }
   }
 }
