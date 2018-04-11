@@ -32,6 +32,7 @@ public class SpamBlockingPromoHelper {
 
   static final String SPAM_BLOCKING_PROMO_PERIOD_MILLIS = "spam_blocking_promo_period_millis";
   static final String SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS = "spam_blocking_promo_last_show_millis";
+  static final String ENABLE_SPAM_BLOCKING_PROMO = "enable_spam_blocking_promo";
 
   private final Context context;
   private final SpamSettings spamSettings;
@@ -64,14 +65,15 @@ public class SpamBlockingPromoHelper {
    * Returns true if we should show a spam blocking promo.
    *
    * <p>Should show spam blocking promo only when all of the following criteria meet 1. Spam
-   * blocking setting is available. 2. Spam blocking setting is not yet enabled. 3. Time since last
-   * spam blocking promo exceeds the threshold.
+   * blocking promo is enabled by flag. 2. Spam blocking setting is available. 3. Spam blocking
+   * setting is not yet enabled. 4. Time since last spam blocking promo exceeds the threshold.
    *
    * @return true if we should show a spam blocking promo.
    */
   @VisibleForTesting
   boolean shouldShowSpamBlockingPromo() {
-    if (!spamSettings.isSpamEnabled()
+    if (!ConfigProviderBindings.get(context).getBoolean(ENABLE_SPAM_BLOCKING_PROMO, false)
+        || !spamSettings.isSpamEnabled()
         || !spamSettings.isSpamBlockingEnabledByFlag()
         || spamSettings.isSpamBlockingEnabledByUser()) {
       return false;
