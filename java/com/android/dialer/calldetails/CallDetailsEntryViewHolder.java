@@ -22,6 +22,7 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.os.BuildCompat;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
 import android.view.View;
@@ -102,6 +103,9 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         (entry.getFeatures() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     callTypeIcon.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
+    if (BuildCompat.isAtLeastP()) {
+      callTypeIcon.setShowRtt((entry.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT);
+    }
 
     callTypeText.setText(
         callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isDuoCall));
