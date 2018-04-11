@@ -37,6 +37,7 @@ public final class ContactPhotoView extends FrameLayout {
   private final QuickContactBadge contactPhoto;
   private final FrameLayout contactBadgeContainer;
   private final ImageView videoCallBadge;
+  private final ImageView rttCallBadge;
 
   private final GlidePhotoManager glidePhotoManager;
 
@@ -61,6 +62,7 @@ public final class ContactPhotoView extends FrameLayout {
     contactPhoto = findViewById(R.id.quick_contact_photo);
     contactBadgeContainer = findViewById(R.id.contact_badge_container);
     videoCallBadge = findViewById(R.id.video_call_badge);
+    rttCallBadge = findViewById(R.id.rtt_call_badge);
 
     glidePhotoManager = GlidePhotoManagerComponent.get(context).glidePhotoManager();
 
@@ -75,6 +77,7 @@ public final class ContactPhotoView extends FrameLayout {
   private void hideBadge() {
     contactBadgeContainer.setVisibility(View.INVISIBLE);
     videoCallBadge.setVisibility(View.INVISIBLE);
+    rttCallBadge.setVisibility(View.INVISIBLE);
   }
 
   /** Sets the contact photo and its badge to be displayed. */
@@ -93,6 +96,15 @@ public final class ContactPhotoView extends FrameLayout {
     if (photoInfo.getIsVideo()) {
       contactBadgeContainer.setVisibility(View.VISIBLE);
       videoCallBadge.setVisibility(View.VISIBLE);
+      // Normally a video call can't be RTT call and vice versa.
+      // (a bug): In theory a video call could be downgraded to voice and upgraded to RTT call
+      // again, this might end up a call with video and RTT features both set. Update logic here if
+      // that could happen. Also update {@link Coalescer#meetsCallFeatureCriteria}.
+      rttCallBadge.setVisibility(INVISIBLE);
+    } else if (photoInfo.getIsRtt()) {
+      contactBadgeContainer.setVisibility(View.VISIBLE);
+      videoCallBadge.setVisibility(INVISIBLE);
+      rttCallBadge.setVisibility(View.VISIBLE);
     } else {
       hideBadge();
     }

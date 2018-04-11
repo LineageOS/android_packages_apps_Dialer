@@ -9,7 +9,7 @@ package com.android.dialer.glidephotomanager;
 
 // Contains information associated with a number, which is used to create the
 // photo.
-// Next ID: 11
+// Next ID: 12
 message PhotoInfo {
   // The display name of the number.
   optional string name = 1;
@@ -41,4 +41,7 @@ message PhotoInfo {
 
   // Whether the photo should be badged as video call.
   optional bool is_video = 10;
+
+  // Whether the photo should be badged as RTT call.
+  optional bool is_rtt = 11;
 }

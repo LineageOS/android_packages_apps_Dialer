@@ -47,5 +47,13 @@
         android:layout_height="13dp"
         android:layout_gravity="center"
         android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
+
+    <ImageView
+        android:id="@+id/rtt_call_badge"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_gravity="center"
+        android:tint="@android:color/white"
+        android:src="@drawable/quantum_ic_rtt_vd_theme_24"/>
   </FrameLayout>
 </FrameLayout>

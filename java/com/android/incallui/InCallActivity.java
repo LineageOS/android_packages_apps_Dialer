@@ -1396,8 +1396,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return new ShouldShowUiResult(false, null);
     }
 
-    // TODO(erfanian): Get a better call?
-    DialerCall call = CallList.getInstance().getActiveCall();
+    DialerCall call =
+        CallList.getInstance().getIncomingCall() != null
+            ? CallList.getInstance().getIncomingCall()
+            : CallList.getInstance().getActiveCall();
 
     if (call == null) {
       return new ShouldShowUiResult(false, call);
@@ -1417,7 +1419,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private ShouldShowUiResult getShouldShowAnswerUi() {
     DialerCall call = CallList.getInstance().getIncomingCall();
-    if (call != null) {
+    if (call != null && !call.isSpeakEasyCall()) {
       LogUtil.i("InCallActivity.getShouldShowAnswerUi", "found incoming call");
       return new ShouldShowUiResult(true, call);
     }
