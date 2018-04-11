@@ -21,6 +21,7 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.DrawableRes;
+import android.support.v4.os.BuildCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -152,6 +153,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
         NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
             .setFormattedNumber(row.getFormattedNumber())
             .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+            .setIsRtt(
+                BuildCompat.isAtLeastP()
+                    && (row.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT)
             .setIsVoicemail(row.getIsVoicemailCall())
             .build());
   }

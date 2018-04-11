@@ -203,6 +203,11 @@ public class Coalescer {
       return false;
     }
 
+    // A RTT call should not be combined with one that is not a RTT call.
+    if ((row1Features & Calls.FEATURES_RTT) != (row2Features & Calls.FEATURES_RTT)) {
+      return false;
+    }
+
     return true;
   }
 
