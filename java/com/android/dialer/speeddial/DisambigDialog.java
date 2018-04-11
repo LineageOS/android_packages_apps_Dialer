@@ -17,59 +17,47 @@
 package com.android.dialer.speeddial;
 
 import android.app.Dialog;
-import android.content.ContentResolver;
-import android.content.res.Resources;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.precall.PreCall;
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import java.util.List;
 import java.util.Set;
 
 /** Disambiguation dialog for favorite contacts in {@link SpeedDialFragment}. */
 public class DisambigDialog extends DialogFragment {
 
-  @VisibleForTesting public static final String DISAMBIG_DIALOG_TAG = "disambig_dialog";
-
-  @SuppressWarnings("unused")
-  private static final String DISAMBIG_DIALOG_WORKER_TAG = "disambig_dialog_worker";
-
   private final Set<String> phoneNumbers = new ArraySet<>();
-  private LinearLayout container;
 
-  @SuppressWarnings("unused")
-  private String lookupKey;
+  @VisibleForTesting public List<Channel> channels;
+  @VisibleForTesting public LinearLayout container;
 
   /** Show a disambiguation dialog for a starred contact without a favorite communication avenue. */
-  public static DisambigDialog show(String lookupKey, FragmentManager manager) {
+  public static DisambigDialog show(List<Channel> channels, FragmentManager manager) {
     DisambigDialog dialog = new DisambigDialog();
-    dialog.lookupKey = lookupKey;
-    dialog.show(manager, DISAMBIG_DIALOG_TAG);
+    dialog.channels = channels;
+    dialog.show(manager, null);
     return dialog;
   }
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     LayoutInflater inflater = getActivity().getLayoutInflater();
+    // TODO(calderwoodra): set max height of the scrollview. Might need to override onMeasure.
     View view = inflater.inflate(R.layout.disambig_dialog_layout, null, false);
     container = view.findViewById(R.id.communication_avenue_container);
+    insertOptions(container.findViewById(R.id.communication_avenue_container), channels);
     return new AlertDialog.Builder(getActivity()).setView(view).create();
   }
 
@@ -90,135 +78,68 @@ public class DisambigDialog extends DialogFragment {
    *   <li>Clickable voice option
    * </ul>
    */
-  @SuppressWarnings("unused")
-  private void insertOptions(Cursor cursor) {
-    if (!cursorIsValid(cursor)) {
-      dismiss();
-      return;
-    }
-
-    do {
-      String number = cursor.getString(LookupContactInfoWorker.NUMBER_INDEX);
-      // TODO(calderwoodra): improve this to include fuzzy matching
-      if (phoneNumbers.add(number)) {
-        insertOption(
-            number,
-            getLabel(getContext().getResources(), cursor),
-            isVideoReachable(cursor, number));
+  private void insertOptions(LinearLayout container, List<Channel> channels) {
+    for (Channel channel : channels) {
+      // TODO(calderwoodra): use fuzzy number matcher
+      if (phoneNumbers.add(channel.number())) {
+        insertHeader(container, channel.number(), channel.label());
       }
-    } while (cursor.moveToNext());
-    cursor.close();
-    // TODO(calderwoodra): set max height of the scrollview. Might need to override onMeasure.
+      insertOption(container, channel);
+    }
   }
 
-  /** Returns true if the given number is ViLTE reachable or Duo reachable. */
-  private boolean isVideoReachable(Cursor cursor, String number) {
-    boolean isVideoReachable = cursor.getInt(LookupContactInfoWorker.PHONE_PRESENCE_INDEX) == 1;
-    if (!isVideoReachable) {
-      isVideoReachable = DuoComponent.get(getContext()).getDuo().isReachable(getContext(), number);
-    }
-    return isVideoReachable;
+  private void insertHeader(LinearLayout container, String number, String phoneType) {
+    View view =
+        getActivity()
+            .getLayoutInflater()
+            .inflate(R.layout.disambig_option_header_layout, container, false);
+    ((TextView) view.findViewById(R.id.disambig_header_phone_type)).setText(phoneType);
+    ((TextView) view.findViewById(R.id.disambig_header_phone_number)).setText(number);
+    container.addView(view);
   }
 
   /** Inserts a group of options for a specific phone number. */
-  private void insertOption(String number, String phoneType, boolean isVideoReachable) {
+  private void insertOption(LinearLayout container, Channel channel) {
     View view =
         getActivity()
             .getLayoutInflater()
             .inflate(R.layout.disambig_option_layout, container, false);
-    ((TextView) view.findViewById(R.id.phone_type)).setText(phoneType);
-    ((TextView) view.findViewById(R.id.phone_number)).setText(number);
-
-    if (isVideoReachable) {
-      View videoOption = view.findViewById(R.id.video_call_container);
-      videoOption.setOnClickListener(v -> onVideoOptionClicked(number));
-      videoOption.setVisibility(View.VISIBLE);
+    if (channel.isVideoTechnology()) {
+      View videoOption = view.findViewById(R.id.option_container);
+      videoOption.setOnClickListener(v -> onVideoOptionClicked(channel));
+      videoOption.setContentDescription(
+          getActivity().getString(R.string.disambig_option_video_call));
+      ((ImageView) view.findViewById(R.id.disambig_option_image))
+          .setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
+      ((TextView) view.findViewById(R.id.disambig_option_text))
+          .setText(R.string.disambig_option_video_call);
+    } else {
+      View voiceOption = view.findViewById(R.id.option_container);
+      voiceOption.setOnClickListener(v -> onVoiceOptionClicked(channel));
+      voiceOption.setContentDescription(
+          getActivity().getString(R.string.disambig_option_voice_call));
+      ((ImageView) view.findViewById(R.id.disambig_option_image))
+          .setImageResource(R.drawable.quantum_ic_phone_vd_theme_24);
+      ((TextView) view.findViewById(R.id.disambig_option_text))
+          .setText(R.string.disambig_option_voice_call);
     }
-    View voiceOption = view.findViewById(R.id.voice_call_container);
-    voiceOption.setOnClickListener(v -> onVoiceOptionClicked(number));
     container.addView(view);
   }
 
-  private void onVideoOptionClicked(String number) {
+  private void onVideoOptionClicked(Channel channel) {
     // TODO(calderwoodra): save this option if remember is checked
     // TODO(calderwoodra): place a duo call if possible
     PreCall.start(
         getContext(),
-        new CallIntentBuilder(number, CallInitiationType.Type.SPEED_DIAL).setIsVideoCall(true));
+        new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+            .setIsVideoCall(true));
+    dismiss();
   }
 
-  private void onVoiceOptionClicked(String number) {
+  private void onVoiceOptionClicked(Channel channel) {
     // TODO(calderwoodra): save this option if remember is checked
-    PreCall.start(getContext(), new CallIntentBuilder(number, CallInitiationType.Type.SPEED_DIAL));
-  }
-
-  // TODO(calderwoodra): handle CNAP and cequint types.
-  // TODO(calderwoodra): unify this into a utility method with CallLogAdapter#getNumberType
-  private static String getLabel(Resources resources, Cursor cursor) {
-    int numberType = cursor.getInt(LookupContactInfoWorker.PHONE_TYPE_INDEX);
-    String numberLabel = cursor.getString(LookupContactInfoWorker.PHONE_LABEL_INDEX);
-
-    // Returns empty label instead of "custom" if the custom label is empty.
-    if (numberType == Phone.TYPE_CUSTOM && TextUtils.isEmpty(numberLabel)) {
-      return "";
-    }
-    return (String) Phone.getTypeLabel(resources, numberType, numberLabel);
-  }
-
-  // Checks if the cursor is valid and logs an error if there are any issues.
-  private static boolean cursorIsValid(Cursor cursor) {
-    if (cursor == null) {
-      LogUtil.e("DisambigDialog.insertOptions", "cursor null.");
-      return false;
-    } else if (cursor.isClosed()) {
-      LogUtil.e("DisambigDialog.insertOptions", "cursor closed.");
-      cursor.close();
-      return false;
-    } else if (!cursor.moveToFirst()) {
-      LogUtil.e("DisambigDialog.insertOptions", "cursor empty.");
-      cursor.close();
-      return false;
-    }
-    return true;
-  }
-
-  private static class LookupContactInfoWorker implements Worker<String, Cursor> {
-
-    static final int NUMBER_INDEX = 0;
-    static final int PHONE_TYPE_INDEX = 1;
-    static final int PHONE_LABEL_INDEX = 2;
-    static final int PHONE_PRESENCE_INDEX = 3;
-
-    private static final String[] projection =
-        new String[] {Phone.NUMBER, Phone.TYPE, Phone.LABEL, Phone.CARRIER_PRESENCE};
-    private final ContentResolver resolver;
-
-    LookupContactInfoWorker(ContentResolver resolver) {
-      this.resolver = resolver;
-    }
-
-    @Nullable
-    @Override
-    public Cursor doInBackground(@Nullable String lookupKey) throws Throwable {
-      if (TextUtils.isEmpty(lookupKey)) {
-        LogUtil.e("LookupConctactInfoWorker.doInBackground", "contact id unsest.");
-        return null;
-      }
-      return resolver.query(
-          Phone.CONTENT_URI, projection, Phone.LOOKUP_KEY + " = ?", new String[] {lookupKey}, null);
-    }
-  }
-
-  @VisibleForTesting
-  public static String[] getProjectionForTesting() {
-    ArrayList<String> projection =
-        new ArrayList<>(Arrays.asList(LookupContactInfoWorker.projection));
-    projection.add(Phone.LOOKUP_KEY);
-    return projection.toArray(new String[projection.size()]);
-  }
-
-  @VisibleForTesting
-  public LinearLayout getContainer() {
-    return container;
+    PreCall.start(
+        getContext(), new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL));
+    dismiss();
   }
 }
