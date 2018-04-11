@@ -303,13 +303,13 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
         Action.builder()
             .setIconDrawable(context.getDrawable(speakerButtonInfo.icon))
             .setSecondaryIconDrawable(
-                speakerButtonInfo.checkable
+                speakerButtonInfo.nonBluetoothMode
                     ? null
                     : context.getDrawable(R.drawable.quantum_ic_arrow_drop_down_vd_theme_24))
             .setName(context.getText(speakerButtonInfo.label))
-            .setCheckable(speakerButtonInfo.checkable)
+            .setCheckable(speakerButtonInfo.nonBluetoothMode)
             .setChecked(speakerButtonInfo.isChecked)
-            .setIntent(speakerButtonInfo.checkable ? toggleSpeaker : showSpeakerSelect)
+            .setIntent(speakerButtonInfo.nonBluetoothMode ? toggleSpeaker : showSpeakerSelect)
             .build());
     // End call
     actions.add(

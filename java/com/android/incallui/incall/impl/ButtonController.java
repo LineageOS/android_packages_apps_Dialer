@@ -312,10 +312,10 @@ interface ButtonController {
 
     @StringRes private int label = R.string.incall_label_speaker;
     @DrawableRes private int icon = R.drawable.quantum_ic_volume_up_vd_theme_24;
-    private boolean checkable;
+    private boolean nonBluetoothMode;
     private CharSequence contentDescription;
-    private CharSequence checkedContentDescription;
-    private CharSequence uncheckedContentDescription;
+    private CharSequence isOnContentDescription;
+    private CharSequence isOffContentDescription;
 
     public SpeakerButtonController(@NonNull InCallButtonUiDelegate delegate) {
       this.delegate = delegate;
@@ -367,31 +367,31 @@ interface ButtonController {
         button.setEnabled(isEnabled && isAllowed);
         button.setVisibility(View.VISIBLE);
         button.setChecked(isChecked);
-        button.setOnClickListener(checkable ? null : this);
-        button.setOnCheckedChangeListener(checkable ? this : null);
+        button.setOnClickListener(nonBluetoothMode ? null : this);
+        button.setOnCheckedChangeListener(nonBluetoothMode ? this : null);
         button.setLabelText(label);
         button.setIconDrawable(icon);
         button.setContentDescription(
-            isChecked ? checkedContentDescription : uncheckedContentDescription);
-        button.setShouldShowMoreIndicator(!checkable);
+            (nonBluetoothMode && !isChecked) ? isOffContentDescription : isOnContentDescription);
+        button.setShouldShowMoreIndicator(!nonBluetoothMode);
       }
     }
 
     public void setAudioState(CallAudioState audioState) {
       SpeakerButtonInfo info = new SpeakerButtonInfo(audioState);
 
-      checkable = info.checkable;
+      nonBluetoothMode = info.nonBluetoothMode;
       isChecked = info.isChecked;
       label = info.label;
       icon = info.icon;
       @StringRes int contentDescriptionResId = info.contentDescription;
 
       contentDescription = delegate.getContext().getText(contentDescriptionResId);
-      checkedContentDescription =
+      isOnContentDescription =
           TextUtils.concat(
               contentDescription,
               delegate.getContext().getText(R.string.incall_talkback_speaker_on));
-      uncheckedContentDescription =
+      isOffContentDescription =
           TextUtils.concat(
               contentDescription,
               delegate.getContext().getText(R.string.incall_talkback_speaker_off));
@@ -406,7 +406,7 @@ interface ButtonController {
     @Override
     public void onCheckedChanged(CheckableLabeledButton checkableLabeledButton, boolean isChecked) {
       checkableLabeledButton.setContentDescription(
-          isChecked ? checkedContentDescription : uncheckedContentDescription);
+          isChecked ? isOnContentDescription : isOffContentDescription);
       delegate.toggleSpeakerphone();
     }
   }
