@@ -140,7 +140,9 @@ public class AnswerScreenPresenter
       return;
     }
     incomingCall.setIsSpeakEasyCall(true);
-    incomingCall.answer();
+    InCallActivity inCallActivity =
+        (InCallActivity) answerScreen.getAnswerScreenFragment().getActivity();
+    inCallActivity.onPrimaryCallStateChanged();
   }
 
   @Override
