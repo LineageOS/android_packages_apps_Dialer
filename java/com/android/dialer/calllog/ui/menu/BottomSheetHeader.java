@@ -18,6 +18,7 @@ package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
+import android.support.v4.os.BuildCompat;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
@@ -33,6 +34,9 @@ final class BottomSheetHeader {
             NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
                 .setFormattedNumber(row.getFormattedNumber())
                 .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+                .setIsRtt(
+                    BuildCompat.isAtLeastP()
+                        && (row.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT)
                 .build())
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
         .setSecondaryText(
