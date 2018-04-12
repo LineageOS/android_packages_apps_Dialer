@@ -30,7 +30,6 @@ import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
-import java.util.ArrayList;
 import java.util.List;
 
 /** ViewHolder for starred/favorite contacts in {@link SpeedDialFragment}. */
@@ -44,10 +43,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   private final TextView phoneType;
   private final FrameLayout videoCallIcon;
 
-  private boolean hasDefaultNumber;
-  private boolean isVideoCall;
-  private String number;
-  private List<Channel> channels;
+  private SpeedDialUiItem speedDialUiItem;
 
   public FavoritesViewHolder(View view, FavoriteContactsListener listener) {
     super(view);
@@ -62,20 +58,15 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   }
 
   public void bind(Context context, SpeedDialUiItem speedDialUiItem) {
+    this.speedDialUiItem = Assert.isNotNull(speedDialUiItem);
     Assert.checkArgument(speedDialUiItem.isStarred());
 
     nameView.setText(speedDialUiItem.name());
-    hasDefaultNumber = speedDialUiItem.defaultChannel() != null;
-    if (hasDefaultNumber) {
-      channels = new ArrayList<>();
-      isVideoCall = speedDialUiItem.defaultChannel().isVideoTechnology();
-      number = speedDialUiItem.defaultChannel().number();
+    if (speedDialUiItem.defaultChannel() != null) {
       phoneType.setText(speedDialUiItem.defaultChannel().label());
-      videoCallIcon.setVisibility(isVideoCall ? View.VISIBLE : View.GONE);
+      videoCallIcon.setVisibility(
+          speedDialUiItem.defaultChannel().isVideoTechnology() ? View.VISIBLE : View.GONE);
     } else {
-      channels = speedDialUiItem.channels();
-      isVideoCall = false;
-      number = null;
       phoneType.setText("");
       videoCallIcon.setVisibility(View.GONE);
     }
@@ -96,17 +87,18 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public void onClick(View v) {
-    if (hasDefaultNumber) {
-      listener.onClick(number, isVideoCall);
+    if (speedDialUiItem.defaultChannel() != null) {
+      listener.onClick(speedDialUiItem.defaultChannel());
     } else {
-      listener.onAmbiguousContactClicked(channels);
+      listener.onAmbiguousContactClicked(speedDialUiItem.channels());
     }
   }
 
   @Override
-  public boolean onLongClick(View v) {
+  public boolean onLongClick(View view) {
     // TODO(calderwoodra): implement drag and drop logic
-    listener.onLongClick(number);
+    // TODO(calderwoodra): add bounce/sin wave scale animation
+    listener.onLongClick(photoView, speedDialUiItem);
     return true;
   }
 
@@ -117,9 +109,9 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     void onAmbiguousContactClicked(List<Channel> channels);
 
     /** Called when the user clicks on a favorite contact. */
-    void onClick(String number, boolean isVideoCall);
+    void onClick(Channel channel);
 
     /** Called when the user long clicks on a favorite contact. */
-    void onLongClick(String number);
+    void onLongClick(View view, SpeedDialUiItem speedDialUiItem);
   }
 }
