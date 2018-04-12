@@ -135,7 +135,9 @@ public final class SpeedDialUiItemLoader implements UiItemLoader {
     for (SpeedDialUiItem contact : strequentContacts) {
       if (!contact.isStarred()) {
         // Add this contact as a suggestion
-        speedDialUiItems.add(contact);
+        // TODO(77754534): improve suggestions beyond just first channel
+        speedDialUiItems.add(
+            contact.toBuilder().setDefaultChannel(contact.channels().get(0)).build());
 
       } else if (speedDialUiItems.stream().noneMatch(c -> c.contactId() == contact.contactId())) {
         entriesToInsert.add(
