@@ -50,6 +50,15 @@ public abstract class DialerExecutorComponent {
     return UiListener.create(fragmentManager, taskId);
   }
 
+  /**
+   * Version of {@link #createUiListener(FragmentManager, String)} that accepts support fragment
+   * manager.
+   */
+  public <OutputT> SupportUiListener<OutputT> createUiListener(
+      android.support.v4.app.FragmentManager fragmentManager, String taskId) {
+    return SupportUiListener.create(fragmentManager, taskId);
+  }
+
   public static DialerExecutorComponent get(Context context) {
     return ((DialerExecutorComponent.HasComponent)
             ((HasRootComponent) context.getApplicationContext()).component())
