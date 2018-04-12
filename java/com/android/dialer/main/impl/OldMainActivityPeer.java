@@ -106,6 +106,7 @@ import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
+import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.DialerUtils;
@@ -1230,8 +1231,17 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       }
       Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_SPEED_DIAL, activity);
       selectedTab = TabIndex.SPEED_DIAL;
-      Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-      showFragment(fragment == null ? new OldSpeedDialFragment() : fragment, SPEED_DIAL_TAG);
+
+      if (ConfigProviderBindings.get(activity).getBoolean("enable_new_favorites_tab", false)) {
+        android.support.v4.app.Fragment supportFragment =
+            supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+        showSupportFragment(
+            supportFragment == null ? SpeedDialFragment.newInstance() : supportFragment,
+            SPEED_DIAL_TAG);
+      } else {
+        Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+        showFragment(fragment == null ? new OldSpeedDialFragment() : fragment, SPEED_DIAL_TAG);
+      }
       fab.show();
     }
 
@@ -1390,13 +1400,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         @Nullable android.support.v4.app.Fragment supportFragment,
         String tag) {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.showFragment");
-      Fragment speedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+      Fragment oldSpeedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       Fragment oldCallLog = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
       Fragment contacts = fragmentManager.findFragmentByTag(CONTACTS_TAG);
       Fragment oldVoicemail = fragmentManager.findFragmentByTag(VOICEMAIL_TAG);
 
       FragmentTransaction transaction = fragmentManager.beginTransaction();
-      boolean fragmentShown = showIfEqualElseHide(transaction, fragment, speedDial);
+      boolean fragmentShown = showIfEqualElseHide(transaction, fragment, oldSpeedDial);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, oldCallLog);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, contacts);
       fragmentShown |= showIfEqualElseHide(transaction, fragment, oldVoicemail);
@@ -1410,6 +1420,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
       // Handle support fragments.
       // TODO(calderwoodra): Handle other new fragments.
+      android.support.v4.app.Fragment speedDial =
+          supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       android.support.v4.app.Fragment newCallLog =
           supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
       android.support.v4.app.Fragment newVoicemail =
@@ -1418,6 +1430,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       android.support.v4.app.FragmentTransaction supportTransaction =
           supportFragmentManager.beginTransaction();
       boolean supportFragmentShown =
+          showIfEqualElseHideSupport(supportTransaction, supportFragment, speedDial);
+      supportFragmentShown |=
           showIfEqualElseHideSupport(supportTransaction, supportFragment, newCallLog);
       supportFragmentShown |=
           showIfEqualElseHideSupport(supportTransaction, supportFragment, newVoicemail);
