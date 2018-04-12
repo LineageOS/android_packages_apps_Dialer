@@ -14,18 +14,27 @@
  * limitations under the License
  */
 
-package com.android.incallui.rtt.protocol;
+package com.android.dialer.rtt;
 
-/** Callbacks from the module out to the container. */
-public interface RttCallScreenDelegate {
+/** Contract for the RTT transcript database. */
+public final class RttTranscriptContract {
 
-  void initRttCallScreenDelegate(RttCallScreen rttCallScreen);
+  /** Columns for RTT transcript. */
+  static final class RttTranscriptColumn {
 
-  void onRttCallScreenUiReady();
+    /**
+     * Unique key that should match {@link android.provider.CallLog.Calls#DATE} of the data row it
+     * is associated with.
+     *
+     * <p>TYPE: TEXT
+     */
+    static final String TRANSCRIPT_ID = "rtt_transcript_id";
 
-  void onRttCallScreenUiUnready();
-
-  void onLocalMessage(String message);
-
-  void onSaveRttTranscript();
+    /**
+     * Transcript data, encoded as {@link RttTranscript} proto.
+     *
+     * <p>TYPE: BLOB
+     */
+    static final String TRANSCRIPT_DATA = "transcript_data";
+  }
 }

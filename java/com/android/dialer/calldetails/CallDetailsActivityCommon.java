@@ -26,9 +26,11 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.CallSuper;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
+import android.support.annotation.WorkerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +47,7 @@ import com.android.dialer.common.concurrent.DialerExecutor.FailureListener;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.duo.Duo;
@@ -58,7 +61,9 @@ import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.rtt.RttTranscriptUtil;
 import com.google.common.base.Preconditions;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -91,6 +96,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   private CallDetailsAdapterCommon adapter;
   private CallDetailsEntries callDetailsEntries;
+  private UiListener<CallDetailsEntries> checkRttTranscriptAvailabilityListener;
 
   /**
    * Handles the intent that launches {@link OldCallDetailsActivity} or {@link CallDetailsActivity},
@@ -121,6 +127,9 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
         });
     handleIntent(getIntent());
     setupRecyclerViewForEntries();
+    checkRttTranscriptAvailabilityListener =
+        DialerExecutorComponent.get(this)
+            .createUiListener(getFragmentManager(), "Query RTT transcript availability");
   }
 
   @Override
@@ -143,6 +152,40 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     EnrichedCallComponent.get(this)
         .getEnrichedCallManager()
         .requestAllHistoricalData(getNumber(), callDetailsEntries);
+    checkRttTranscriptAvailabilityListener.listen(
+        this,
+        checkRttTranscriptAvailability(),
+        this::setCallDetailsEntries,
+        throwable -> {
+          throw new RuntimeException(throwable);
+        });
+  }
+
+  private ListenableFuture<CallDetailsEntries> checkRttTranscriptAvailability() {
+    return DialerExecutorComponent.get(this)
+        .backgroundExecutor()
+        .submit(() -> checkRttTranscriptAvailabilityInBackground(callDetailsEntries));
+  }
+
+  /**
+   * Check RTT transcript availability.
+   *
+   * @param input the original {@link CallDetailsEntries}
+   * @return {@link CallDetailsEntries} with updated RTT transcript availability.
+   */
+  @WorkerThread
+  private CallDetailsEntries checkRttTranscriptAvailabilityInBackground(
+      @Nullable CallDetailsEntries input) {
+    RttTranscriptUtil rttTranscriptUtil = new RttTranscriptUtil(this);
+
+    CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
+    for (CallDetailsEntry entry : input.getEntriesList()) {
+      CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
+      newEntry.setHasRttTranscript(
+          rttTranscriptUtil.checkRttTranscriptAvailability(String.valueOf(entry.getDate())));
+      mutableCallDetailsEntries.addEntries(newEntry.build());
+    }
+    return mutableCallDetailsEntries.build();
   }
 
   @Override
@@ -185,8 +228,13 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     super.onBackPressed();
   }
 
+  @MainThread
   protected final void setCallDetailsEntries(CallDetailsEntries entries) {
+    Assert.isMainThread();
     this.callDetailsEntries = entries;
+    if (adapter != null) {
+      adapter.updateCallDetailsEntries(entries);
+    }
   }
 
   protected final CallDetailsEntries getCallDetailsEntries() {
@@ -415,7 +463,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
       Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
           getAllHistoricalData(activity.getNumber(), activity.callDetailsEntries);
 
-      activity.adapter.updateCallDetailsEntries(
+      activity.setCallDetailsEntries(
           generateAndMapNewCallDetailsEntriesHistoryResults(
               activity.getNumber(), activity.callDetailsEntries, mappedResults));
     }
