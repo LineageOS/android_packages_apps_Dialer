@@ -166,6 +166,7 @@ public class DialpadFragment extends Fragment
   private OnDialpadQueryChangedListener dialpadQueryListener;
   private DialpadView dialpadView;
   private EditText digits;
+  private TextView digitsHint;
   private int dialpadSlideInDuration;
   /** Remembers if we need to clear digits field when the screen is completely gone. */
   private boolean clearDigitsOnStop;
@@ -402,6 +403,7 @@ public class DialpadFragment extends Fragment
     dialpadView = fragmentView.findViewById(R.id.dialpad_view);
     dialpadView.setCanDigitsBeEdited(true);
     digits = dialpadView.getDigits();
+    digitsHint = dialpadView.getDigitsHint();
     digits.setKeyListener(UnicodeDialerKeyListener.INSTANCE);
     digits.setOnClickListener(this);
     digits.setOnKeyListener(this);
@@ -462,18 +464,18 @@ public class DialpadFragment extends Fragment
    * difficult.
    */
   private void updateDialpadHint() {
-    TextView hint = dialpadView.getDigitsHint();
     if (!TextUtils.isEmpty(digits.getText())) {
-      hint.setVisibility(View.GONE);
+      digitsHint.setVisibility(View.GONE);
       return;
     }
 
     if (shouldShowEmergencyCallWarning(getContext())) {
-      hint.setText(getContext().getString(R.string.dialpad_hint_emergency_calling_not_available));
-      hint.setVisibility(View.VISIBLE);
+      digitsHint.setText(
+          getContext().getString(R.string.dialpad_hint_emergency_calling_not_available));
+      digitsHint.setVisibility(View.VISIBLE);
       return;
     }
-    hint.setVisibility(View.GONE);
+    digitsHint.setVisibility(View.GONE);
   }
 
   /**
