@@ -55,4 +55,10 @@
 
   <!-- A fallback string for the assisted dialing header incase parsing failes.. [CHAR LIMIT=NONE] -->
   <string name="assisted_dialing_country_code_entry_failure">Assisted dialing was used</string>
+
+  <!-- String shown when RTT transcript is not available for any reason. [CHAR LIMIT=NONE] -->
+  <string name="rtt_transcript_not_available">Transcript available only for calls with messaging</string>
+
+  <!-- String shown when RTT transcript is available. [CHAR LIMIT=NONE] -->
+  <string name="rtt_transcript_link">See transcript</string>
 </resources>

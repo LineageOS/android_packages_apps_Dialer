@@ -462,6 +462,9 @@ public class RttChatFragment extends Fragment
     } else {
       hideWaitingForJoinBanner();
     }
+    if (primaryCallState.state() == State.DISCONNECTED) {
+      rttCallScreenDelegate.onSaveRttTranscript();
+    }
   }
 
   private void showWaitingForJoinBanner() {
