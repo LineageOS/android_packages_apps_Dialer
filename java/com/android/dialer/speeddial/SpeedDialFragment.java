@@ -18,8 +18,6 @@ package com.android.dialer.speeddial;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
@@ -35,9 +35,7 @@ import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListen
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 /**
@@ -57,6 +55,7 @@ public class SpeedDialFragment extends Fragment {
   private final SuggestedContactsListener suggestedListener = new SpeedDialSuggestedListener();
 
   private SpeedDialAdapter adapter;
+  private SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
 
   public static SpeedDialFragment newInstance() {
     return new SpeedDialFragment();
@@ -73,6 +72,10 @@ public class SpeedDialFragment extends Fragment {
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
     recyclerView.setLayoutManager(adapter.getLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
+
+    speedDialLoaderListener =
+        DialerExecutorComponent.get(getContext())
+            .createUiListener(getChildFragmentManager(), "speed_dial_loader_listener");
     return view;
   }
 
@@ -84,28 +87,16 @@ public class SpeedDialFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    Futures.addCallback(
-        UiItemLoaderComponent.get(getContext().getApplicationContext())
-            .speedDialUiItemLoader()
-            .loadSpeedDialUiItems(),
-        new FutureCallback<List<SpeedDialUiItem>>() {
-          @Override
-          public void onSuccess(List<SpeedDialUiItem> speedDialUiItems) {
-            // TODO(calderwoodra): this is bad
-            new Handler(Looper.getMainLooper())
-                .post(
-                    () -> {
-                      adapter.setSpeedDialUiItems(speedDialUiItems);
-                      adapter.notifyDataSetChanged();
-                    });
-          }
-
-          @Override
-          public void onFailure(Throwable throwable) {
-            throw new RuntimeException(throwable);
-          }
+    speedDialLoaderListener.listen(
+        getContext(),
+        UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
+        speedDialUiItems -> {
+          adapter.setSpeedDialUiItems(speedDialUiItems);
+          adapter.notifyDataSetChanged();
         },
-        MoreExecutors.directExecutor());
+        throwable -> {
+          throw new RuntimeException(throwable);
+        });
   }
 
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
