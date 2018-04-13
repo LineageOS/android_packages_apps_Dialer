@@ -26,4 +26,6 @@ public interface RttCallScreenDelegate {
   void onRttCallScreenUiUnready();
 
   void onLocalMessage(String message);
+
+  void onSaveRttTranscript();
 }

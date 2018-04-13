@@ -39,34 +39,37 @@ public class SpeakerButtonInfo {
   @DrawableRes public final int icon;
   @StringRes public final int contentDescription;
   @StringRes public final int label;
-  public final boolean checkable;
+  public final boolean nonBluetoothMode;
   public final boolean isChecked;
 
   public SpeakerButtonInfo(CallAudioState audioState) {
     if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
         == CallAudioState.ROUTE_BLUETOOTH) {
-      checkable = false;
-      isChecked = false;
+      nonBluetoothMode = false;
       label = R.string.incall_label_audio;
 
       if ((audioState.getRoute() & CallAudioState.ROUTE_BLUETOOTH)
           == CallAudioState.ROUTE_BLUETOOTH) {
-        icon = R.drawable.quantum_ic_bluetooth_audio_vd_theme_24;
+        icon = R.drawable.volume_bluetooth;
         contentDescription = R.string.incall_content_description_bluetooth;
+        isChecked = true;
       } else if ((audioState.getRoute() & CallAudioState.ROUTE_SPEAKER)
           == CallAudioState.ROUTE_SPEAKER) {
         icon = R.drawable.quantum_ic_volume_up_vd_theme_24;
         contentDescription = R.string.incall_content_description_speaker;
+        isChecked = true;
       } else if ((audioState.getRoute() & CallAudioState.ROUTE_WIRED_HEADSET)
           == CallAudioState.ROUTE_WIRED_HEADSET) {
         icon = R.drawable.quantum_ic_headset_vd_theme_24;
         contentDescription = R.string.incall_content_description_headset;
+        isChecked = true;
       } else {
         icon = R.drawable.quantum_ic_phone_in_talk_vd_theme_24;
         contentDescription = R.string.incall_content_description_earpiece;
+        isChecked = false;
       }
     } else {
-      checkable = true;
+      nonBluetoothMode = true;
       isChecked = audioState.getRoute() == CallAudioState.ROUTE_SPEAKER;
       label = R.string.incall_label_speaker;
       icon = R.drawable.quantum_ic_volume_up_vd_theme_24;

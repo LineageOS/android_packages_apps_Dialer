@@ -57,6 +57,8 @@ import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.duo.DuoComponent;
@@ -74,6 +76,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.rtt.RttTranscript;
+import com.android.dialer.rtt.RttTranscriptUtil;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
@@ -86,6 +89,9 @@ import com.android.incallui.videotech.duo.DuoVideoTech;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
 import com.android.incallui.videotech.utils.VideoUtils;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -534,6 +540,28 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public String getCountryIso() {
     return countryIso;
+  }
+
+  /**
+   * Called when call is disconnected and removed from {@link CallList}, UI may already be destroyed
+   * at this point. This is last chance to do something for the call.
+   */
+  public void onDestroy() {
+    LogUtil.enterBlock("DialerCall.onDestroy");
+    if (rttTranscript != null) {
+      RttTranscript rttTranscriptToSave = rttTranscript;
+      ListenableFuture<Void> future =
+          DialerExecutorComponent.get(context)
+              .backgroundExecutor()
+              .submit(
+                  () -> {
+                    new RttTranscriptUtil(context).saveRttTranscript(rttTranscriptToSave);
+                    return null;
+                  });
+      Futures.addCallback(future, new DefaultFutureCallback<>(), MoreExecutors.directExecutor());
+      // Sets to null so it won't be saved again when called multiple times.
+      rttTranscript = null;
+    }
   }
 
   private void updateIsVoiceMailNumber() {

@@ -27,6 +27,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.clipboard \
 	com.android.dialer.commandline \
 	com.android.dialer.common \
+	com.android.dialer.common.concurrent.testing \
 	com.android.dialer.common.preference \
 	com.android.dialer.configprovider \
 	com.android.dialer.contactphoto \

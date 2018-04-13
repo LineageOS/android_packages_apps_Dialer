@@ -36,6 +36,7 @@ import com.android.dialer.precall.PreCallComponent;
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
@@ -67,6 +68,7 @@ public interface BaseDialerRootComponent
         PhoneLookupDatabaseComponent.HasComponent,
         PhoneNumberGeoUtilComponent.HasComponent,
         PreCallComponent.HasComponent,
+        UiItemLoaderComponent.HasComponent,
         SimSuggestionComponent.HasComponent,
         SimulatorComponent.HasComponent,
         SpamComponent.HasComponent,

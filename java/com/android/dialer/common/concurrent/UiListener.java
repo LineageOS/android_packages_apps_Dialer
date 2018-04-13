@@ -31,6 +31,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
+
 /**
  * A headless fragment for use in UI components that interact with ListenableFutures.
  *
@@ -148,3 +149,4 @@ public class UiListener<OutputT> extends Fragment {
     }
   }
 }
+

@@ -18,6 +18,7 @@ package com.android.dialer.calldetails;
 
 import android.content.Context;
 import android.support.annotation.CallSuper;
+import android.support.annotation.MainThread;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -137,7 +138,9 @@ abstract class CallDetailsAdapterCommon extends RecyclerView.Adapter<RecyclerVie
     return callDetailsEntries;
   }
 
+  @MainThread
   final void updateCallDetailsEntries(CallDetailsEntries entries) {
+    Assert.isMainThread();
     callDetailsEntries = entries;
     notifyDataSetChanged();
   }

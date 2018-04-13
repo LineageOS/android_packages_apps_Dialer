@@ -46,6 +46,8 @@
   <!-- 38% opacity -->
   <color name="dialer_secondary_text_color_hiden">#61000000</color>
 
+  <color name="dialer_link_color">#2A56C6</color>
+
   <!-- Color of the theme of the Dialer app -->
   <color name="dialtacts_theme_color">@color/dialer_theme_color</color>
 
@@ -73,4 +75,7 @@
 
   <!-- Color for bubble -->
   <color name="dialer_end_call_button_color">#BD2A2A</color>
+
+  <!-- Color for list dividers -->
+  <color name="divider_line_color">#D8D8D8</color>
 </resources>

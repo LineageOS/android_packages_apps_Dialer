@@ -22,6 +22,7 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.os.BuildCompat;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
 import android.view.View;
@@ -54,6 +55,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private final TextView multimediaDetails;
   private final TextView postCallNote;
+  private final TextView rttTranscript;
 
   private final ImageView multimediaImage;
 
@@ -80,6 +82,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     multimediaImage = (ImageView) container.findViewById(R.id.multimedia_image);
     multimediaAttachmentsNumber =
         (TextView) container.findViewById(R.id.multimedia_attachments_number);
+    rttTranscript = container.findViewById(R.id.rtt_transcript);
   }
 
   void setCallDetails(
@@ -93,6 +96,9 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
             == Calls.FEATURES_PULLED_EXTERNALLY;
     boolean isDuoCall = entry.getIsDuoCall();
+    boolean isRttCall =
+        BuildCompat.isAtLeastP()
+            && (entry.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT;
 
     callTime.setTextColor(getColorForCallType(context, callType));
     callTypeIcon.clear();
@@ -102,6 +108,9 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         (entry.getFeatures() & Calls.FEATURES_HD_CALL) == Calls.FEATURES_HD_CALL);
     callTypeIcon.setShowWifi(
         MotorolaUtils.shouldShowWifiIconInCallLog(context, entry.getFeatures()));
+    if (BuildCompat.isAtLeastP()) {
+      callTypeIcon.setShowRtt((entry.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT);
+    }
 
     callTypeText.setText(
         callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isDuoCall));
@@ -119,6 +128,18 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
               context, entry.getDuration(), entry.getDataUsage()));
     }
     setMultimediaDetails(number, entry, showMultimediaDivider);
+    if (isRttCall) {
+      if (entry.getHasRttTranscript()) {
+        rttTranscript.setText(R.string.rtt_transcript_link);
+        rttTranscript.setTextAppearance(R.style.RttTranscriptLink);
+        rttTranscript.setClickable(true);
+      } else {
+        rttTranscript.setText(R.string.rtt_transcript_not_available);
+        rttTranscript.setTextAppearance(R.style.RttTranscriptMessage);
+        rttTranscript.setClickable(false);
+      }
+      rttTranscript.setVisibility(View.VISIBLE);
+    }
   }
 
   private void setMultimediaDetails(String number, CallDetailsEntry entry, boolean showDivider) {

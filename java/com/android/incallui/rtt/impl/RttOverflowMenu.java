@@ -87,7 +87,7 @@ public class RttOverflowMenu extends PopupWindow implements OnCheckedChangeListe
 
   void setAudioState(CallAudioState audioState) {
     SpeakerButtonInfo info = new SpeakerButtonInfo(audioState);
-    if (info.checkable) {
+    if (info.nonBluetoothMode) {
       speakerButton.setChecked(info.isChecked);
       speakerButton.setOnClickListener(null);
       speakerButton.setOnCheckedChangeListener(this);
