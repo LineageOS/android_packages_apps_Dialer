@@ -19,6 +19,7 @@ message CallDetailsEntries {
     optional int64 data_usage = 6;
     repeated enrichedcall.historyquery.proto.HistoryResult history_results = 7;
     optional bool is_duo_call = 8;
+    optional bool has_rtt_transcript = 9;
   }
 
   repeated CallDetailsEntry entries = 1;

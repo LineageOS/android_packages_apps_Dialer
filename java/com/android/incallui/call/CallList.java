@@ -745,6 +745,7 @@ public class CallList implements DialerCallDelegate {
     call.setState(DialerCall.State.IDLE);
     updateCallInMap(call);
     notifyGenericListeners();
+    call.onDestroy();
   }
 
   /**
