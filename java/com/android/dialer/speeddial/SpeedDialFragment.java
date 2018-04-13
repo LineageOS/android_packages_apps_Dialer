@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,8 @@ import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback;
+import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.google.common.collect.ImmutableList;
@@ -60,8 +63,10 @@ public class SpeedDialFragment extends Fragment {
   private View rootLayout;
   private ContextMenu contextMenu;
   private FrameLayout contextMenuBackground;
-  private SpeedDialAdapter adapter;
   private ContextMenuItemListener contextMenuItemListener;
+
+  private SpeedDialAdapter adapter;
+  private SpeedDialLayoutManager layoutManager;
   private SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
 
   public static SpeedDialFragment newInstance() {
@@ -74,13 +79,23 @@ public class SpeedDialFragment extends Fragment {
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     LogUtil.enterBlock("SpeedDialFragment.onCreateView");
     rootLayout = inflater.inflate(R.layout.fragment_speed_dial, container, false);
-    RecyclerView recyclerView = rootLayout.findViewById(R.id.speed_dial_recycler_view);
 
+    // Setup our RecyclerView
+    RecyclerView recyclerView = rootLayout.findViewById(R.id.speed_dial_recycler_view);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
-    recyclerView.setLayoutManager(adapter.getLayoutManager(getContext()));
+    layoutManager = new SpeedDialLayoutManager(getContext(), 3 /* spanCount */);
+    layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
+    recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
 
+    // Setup drag and drop touch helper
+    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(adapter);
+    ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+    touchHelper.attachToRecyclerView(recyclerView);
+    adapter.setItemTouchHelper(touchHelper);
+
+    // Setup favorite contact context menu
     contextMenu = rootLayout.findViewById(R.id.favorite_contact_context_menu);
     contextMenuBackground = rootLayout.findViewById(R.id.context_menu_background);
     contextMenuBackground.setOnClickListener(
@@ -141,9 +156,25 @@ public class SpeedDialFragment extends Fragment {
     }
 
     @Override
-    public void onLongClick(View view, SpeedDialUiItem speedDialUiItem) {
-      contextMenuBackground.setVisibility(View.VISIBLE);
+    public void showContextMenu(View view, SpeedDialUiItem speedDialUiItem) {
+      layoutManager.setScrollEnabled(false);
       contextMenu.showMenu(rootLayout, view, speedDialUiItem, contextMenuItemListener);
+    }
+
+    @Override
+    public void onTouchFinished(boolean closeContextMenu) {
+      layoutManager.setScrollEnabled(true);
+
+      if (closeContextMenu) {
+        contextMenu.hideMenu();
+      } else if (contextMenu.isVisible()) {
+        // If we're showing the context menu, show this background surface so that we can intercept
+        // touch events to close the menu
+        // Note: We call this in onTouchFinished because if we show the background before the user
+        // is done, they might try to drag the view and but won't be able to because this view would
+        // intercept all of the touch events.
+        contextMenuBackground.setVisibility(View.VISIBLE);
+      }
     }
   }
 
