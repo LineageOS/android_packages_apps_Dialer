@@ -16,16 +16,21 @@
 package com.android.dialer.calllog.ui;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -33,30 +38,44 @@ import java.lang.annotation.RetentionPolicy;
 /** {@link RecyclerView.Adapter} for the new call log fragment. */
 final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
+  @VisibleForTesting
+  static final String SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED = "duo_disclosure_dismissed";
+
   /** IntDef for the different types of rows that can be shown in the call log. */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
+    RowType.DUO_DISCLOSURE_CARD,
     RowType.HEADER_TODAY,
     RowType.HEADER_YESTERDAY,
     RowType.HEADER_OLDER,
     RowType.CALL_LOG_ENTRY
   })
   @interface RowType {
+    /** The Duo disclosure card. */
+    int DUO_DISCLOSURE_CARD = 1;
+
     /** Header that displays "Today". */
-    int HEADER_TODAY = 1;
+    int HEADER_TODAY = 2;
+
     /** Header that displays "Yesterday". */
-    int HEADER_YESTERDAY = 2;
+    int HEADER_YESTERDAY = 3;
+
     /** Header that displays "Older". */
-    int HEADER_OLDER = 3;
+    int HEADER_OLDER = 4;
+
     /** A row representing a call log entry (which could represent one or more calls). */
-    int CALL_LOG_ENTRY = 4;
+    int CALL_LOG_ENTRY = 5;
   }
 
   private final Clock clock;
+  private final Context context;
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final PopCounts popCounts = new PopCounts();
 
   private Cursor cursor;
+
+  /** Position of the Duo disclosure card. Null when it should not be displayed. */
+  @Nullable private Integer duoDisclosureCardPosition;
 
   /** Position of the "Today" header. Null when it should not be displayed. */
   @Nullable private Integer todayHeaderPosition;
@@ -68,11 +87,12 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   @Nullable private Integer olderHeaderPosition;
 
   NewCallLogAdapter(Context context, Cursor cursor, Clock clock) {
+    this.context = context;
     this.cursor = cursor;
     this.clock = clock;
     this.realtimeRowProcessor = CallLogUiComponent.get(context).realtimeRowProcessor();
 
-    setHeaderPositions();
+    setCardAndHeaderPositions();
   }
 
   void updateCursor(Cursor updatedCursor) {
@@ -80,7 +100,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     this.realtimeRowProcessor.clearCache();
     this.popCounts.reset();
 
-    setHeaderPositions();
+    setCardAndHeaderPositions();
     notifyDataSetChanged();
   }
 
@@ -92,7 +112,15 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     Logger.get(context).logAnnotatedCallLogMetrics(popCounts.popped, popCounts.didNotPop);
   }
 
-  private void setHeaderPositions() {
+  private void setCardAndHeaderPositions() {
+    // Set the position for the Duo disclosure card if it should be shown.
+    duoDisclosureCardPosition = null;
+    int numCards = 0;
+    if (shouldShowDuoDisclosureCard()) {
+      duoDisclosureCardPosition = 0;
+      numCards++;
+    }
+
     // If there are no rows to display, set all header positions to null.
     if (!cursor.moveToFirst()) {
       todayHeaderPosition = null;
@@ -101,6 +129,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
       return;
     }
 
+    // Calculate positions for headers.
     long currentTimeMillis = clock.currentTimeMillis();
 
     int numItemsInToday = 0;
@@ -126,24 +155,42 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     // Set all header positions.
     // A header position will be null if there is no item to be displayed under that header.
-    todayHeaderPosition = numItemsInToday > 0 ? 0 : null;
-    yesterdayHeaderPosition = numItemsInYesterday > 0 ? numItemsInToday : null;
-    olderHeaderPosition = !cursor.isAfterLast() ? numItemsInToday + numItemsInYesterday : null;
+    todayHeaderPosition = numItemsInToday > 0 ? numCards : null;
+    yesterdayHeaderPosition = numItemsInYesterday > 0 ? numItemsInToday + numCards : null;
+    olderHeaderPosition =
+        !cursor.isAfterLast() ? numItemsInToday + numItemsInYesterday + numCards : null;
+  }
+
+  private boolean shouldShowDuoDisclosureCard() {
+    Duo duo = DuoComponent.get(context).getDuo();
+    if (!duo.isEnabled(context) || !duo.isActivated(context)) {
+      return false;
+    }
+
+    SharedPreferences sharedPref = StorageComponent.get(context).unencryptedSharedPrefs();
+    return !sharedPref.getBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, false);
   }
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup viewGroup, @RowType int viewType) {
     switch (viewType) {
+      case RowType.DUO_DISCLOSURE_CARD:
+        return new DuoDisclosureCardViewHolder(
+            LayoutInflater.from(context)
+                .inflate(
+                    R.layout.new_call_log_duo_disclosure_card,
+                    viewGroup,
+                    /* attachToRoot = */ false));
       case RowType.HEADER_TODAY:
       case RowType.HEADER_YESTERDAY:
       case RowType.HEADER_OLDER:
         return new HeaderViewHolder(
-            LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.new_call_log_header, viewGroup, false));
+            LayoutInflater.from(context)
+                .inflate(R.layout.new_call_log_header, viewGroup, /* attachToRoot = */ false));
       case RowType.CALL_LOG_ENTRY:
         return new NewCallLogViewHolder(
-            LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.new_call_log_entry, viewGroup, false),
+            LayoutInflater.from(context)
+                .inflate(R.layout.new_call_log_entry, viewGroup, /* attachToRoot = */ false),
             clock,
             realtimeRowProcessor,
             popCounts);
@@ -156,6 +203,19 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   public void onBindViewHolder(ViewHolder viewHolder, int position) {
     @RowType int viewType = getItemViewType(position);
     switch (viewType) {
+      case RowType.DUO_DISCLOSURE_CARD:
+        ((DuoDisclosureCardViewHolder) viewHolder)
+            .setDismissListener(
+                unused -> {
+                  StorageComponent.get(context)
+                      .unencryptedSharedPrefs()
+                      .edit()
+                      .putBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, true)
+                      .apply();
+                  setCardAndHeaderPositions();
+                  notifyDataSetChanged();
+                });
+        break;
       case RowType.HEADER_TODAY:
         ((HeaderViewHolder) viewHolder).setHeader(R.string.new_call_log_header_today);
         break;
@@ -167,17 +227,20 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
         break;
       case RowType.CALL_LOG_ENTRY:
         NewCallLogViewHolder newCallLogViewHolder = (NewCallLogViewHolder) viewHolder;
-        int previousHeaders = 0;
+        int previousCardAndHeaders = 0;
+        if (duoDisclosureCardPosition != null && position > duoDisclosureCardPosition) {
+          previousCardAndHeaders++;
+        }
         if (todayHeaderPosition != null && position > todayHeaderPosition) {
-          previousHeaders++;
+          previousCardAndHeaders++;
         }
         if (yesterdayHeaderPosition != null && position > yesterdayHeaderPosition) {
-          previousHeaders++;
+          previousCardAndHeaders++;
         }
         if (olderHeaderPosition != null && position > olderHeaderPosition) {
-          previousHeaders++;
+          previousCardAndHeaders++;
         }
-        cursor.moveToPosition(position - previousHeaders);
+        cursor.moveToPosition(position - previousCardAndHeaders);
         newCallLogViewHolder.bind(cursor);
         break;
       default:
@@ -189,6 +252,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   @Override
   @RowType
   public int getItemViewType(int position) {
+    if (duoDisclosureCardPosition != null && position == duoDisclosureCardPosition) {
+      return RowType.DUO_DISCLOSURE_CARD;
+    }
     if (todayHeaderPosition != null && position == todayHeaderPosition) {
       return RowType.HEADER_TODAY;
     }
@@ -203,7 +269,12 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   @Override
   public int getItemCount() {
+    int numberOfCards = 0;
     int numberOfHeaders = 0;
+
+    if (duoDisclosureCardPosition != null) {
+      numberOfCards++;
+    }
     if (todayHeaderPosition != null) {
       numberOfHeaders++;
     }
@@ -213,7 +284,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     if (olderHeaderPosition != null) {
       numberOfHeaders++;
     }
-    return cursor.getCount() + numberOfHeaders;
+    return cursor.getCount() + numberOfHeaders + numberOfCards;
   }
 
   static class PopCounts {
