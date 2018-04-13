@@ -134,7 +134,6 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
 
     private void updateCallDetailsEntries(CallDetailsEntries newEntries) {
       activity.setCallDetailsEntries(newEntries);
-      activity.getAdapter().updateCallDetailsEntries(newEntries);
       EnrichedCallComponent.get(activity)
           .getEnrichedCallManager()
           .requestAllHistoricalData(activity.getNumber(), newEntries);
