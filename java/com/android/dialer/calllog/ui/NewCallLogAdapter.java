@@ -212,8 +212,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
                       .edit()
                       .putBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, true)
                       .apply();
+                  notifyItemRemoved(duoDisclosureCardPosition);
                   setCardAndHeaderPositions();
-                  notifyDataSetChanged();
                 });
         break;
       case RowType.HEADER_TODAY:
