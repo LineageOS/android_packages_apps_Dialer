@@ -81,6 +81,10 @@ public class ContextMenu extends LinearLayout {
     }
   }
 
+  public boolean isVisible() {
+    return getVisibility() == View.VISIBLE;
+  }
+
   /** Listener to report user clicks on menu items. */
   public interface ContextMenuItemListener {
 
