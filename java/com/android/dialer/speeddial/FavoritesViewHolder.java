@@ -19,9 +19,11 @@ package com.android.dialer.speeddial;
 import android.content.Context;
 import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -29,12 +31,14 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import com.android.dialer.speeddial.draghelper.SpeedDialFavoritesViewHolderOnTouchListener;
+import com.android.dialer.speeddial.draghelper.SpeedDialFavoritesViewHolderOnTouchListener.OnTouchFinishCallback;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import java.util.List;
 
 /** ViewHolder for starred/favorite contacts in {@link SpeedDialFragment}. */
 public class FavoritesViewHolder extends RecyclerView.ViewHolder
-    implements OnClickListener, OnLongClickListener {
+    implements OnClickListener, OnLongClickListener, OnTouchFinishCallback {
 
   private final FavoriteContactsListener listener;
 
@@ -45,7 +49,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
   private SpeedDialUiItem speedDialUiItem;
 
-  public FavoritesViewHolder(View view, FavoriteContactsListener listener) {
+  public FavoritesViewHolder(View view, ItemTouchHelper helper, FavoriteContactsListener listener) {
     super(view);
     photoView = view.findViewById(R.id.avatar);
     nameView = view.findViewById(R.id.name);
@@ -53,6 +57,9 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     videoCallIcon = view.findViewById(R.id.video_call_container);
     view.setOnClickListener(this);
     view.setOnLongClickListener(this);
+    view.setOnTouchListener(
+        new SpeedDialFavoritesViewHolderOnTouchListener(
+            ViewConfiguration.get(view.getContext()), helper, this, this));
     photoView.setClickable(false);
     this.listener = listener;
   }
@@ -96,10 +103,14 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
   @Override
   public boolean onLongClick(View view) {
-    // TODO(calderwoodra): implement drag and drop logic
     // TODO(calderwoodra): add bounce/sin wave scale animation
-    listener.onLongClick(photoView, speedDialUiItem);
+    listener.showContextMenu(photoView, speedDialUiItem);
     return true;
+  }
+
+  @Override
+  public void onTouchFinished(boolean closeContextMenu) {
+    listener.onTouchFinished(closeContextMenu);
   }
 
   /** Listener/callback for {@link FavoritesViewHolder} actions. */
@@ -112,6 +123,9 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     void onClick(Channel channel);
 
     /** Called when the user long clicks on a favorite contact. */
-    void onLongClick(View view, SpeedDialUiItem speedDialUiItem);
+    void showContextMenu(View view, SpeedDialUiItem speedDialUiItem);
+
+    /** Called when the user is no longer touching the favorite contact. */
+    void onTouchFinished(boolean closeContextMenu);
   }
 }
