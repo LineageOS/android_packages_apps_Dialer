@@ -21,12 +21,10 @@ import android.content.Context;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -34,10 +32,12 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
+import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback.ItemTouchHelperAdapter;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +55,8 @@ import java.util.Map;
  */
 @SuppressWarnings("AndroidApiChecker")
 @TargetApi(VERSION_CODES.N)
-public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+    implements ItemTouchHelperAdapter {
 
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({RowType.STARRED_HEADER, RowType.SUGGESTION_HEADER, RowType.STARRED, RowType.SUGGESTION})
@@ -73,6 +74,9 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
   private final Map<Integer, Integer> positionToRowTypeMap = new ArrayMap<>();
   private List<SpeedDialUiItem> speedDialUiItems;
+
+  // Needed for FavoriteViewHolder
+  private ItemTouchHelper itemTouchHelper;
 
   public SpeedDialAdapter(
       Context context,
@@ -97,7 +101,9 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     switch (viewType) {
       case RowType.STARRED:
         return new FavoritesViewHolder(
-            inflater.inflate(R.layout.favorite_item_layout, parent, false), favoritesListener);
+            inflater.inflate(R.layout.favorite_item_layout, parent, false),
+            itemTouchHelper,
+            favoritesListener);
       case RowType.SUGGESTION:
         return new SuggestionViewHolder(
             inflater.inflate(R.layout.suggestion_row_layout, parent, false), suggestedListener);
@@ -162,30 +168,46 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
   }
 
-  /* package-private */ LayoutManager getLayoutManager(Context context) {
-    GridLayoutManager layoutManager = new GridLayoutManager(context, 3 /* spanCount */);
-    layoutManager.setSpanSizeLookup(
-        new SpanSizeLookup() {
-          @Override
-          public int getSpanSize(int position) {
-            return SpeedDialAdapter.this.getSpanSize(position);
-          }
-        });
-    return layoutManager;
+  public SpanSizeLookup getSpanSizeLookup() {
+    return new SpanSizeLookup() {
+      @Override
+      public int getSpanSize(int position) {
+        switch (getItemViewType(position)) {
+          case RowType.SUGGESTION:
+          case RowType.STARRED_HEADER:
+          case RowType.SUGGESTION_HEADER:
+            return 3; // span the whole screen
+          case RowType.STARRED:
+            return 1; // span 1/3 of the screen
+          default:
+            throw Assert.createIllegalStateFailException(
+                "Invalid row type: " + positionToRowTypeMap.get(position));
+        }
+      }
+    };
   }
 
-  @VisibleForTesting
-  int getSpanSize(int position) {
-    switch (getItemViewType(position)) {
-      case RowType.SUGGESTION:
-      case RowType.STARRED_HEADER:
-      case RowType.SUGGESTION_HEADER:
-        return 3; // span the whole screen
-      case RowType.STARRED:
-        return 1; // span 1/3 of the screen
-      default:
-        throw Assert.createIllegalStateFailException(
-            "Invalid row type: " + positionToRowTypeMap.get(position));
+  @Override
+  public void onItemMove(int fromPosition, int toPosition) {
+    if (fromPosition < toPosition) {
+      for (int i = fromPosition; i < toPosition && i < speedDialUiItems.size() - 1; i++) {
+        Collections.swap(speedDialUiItems, i, i + 1);
+      }
+    } else {
+      for (int i = fromPosition - 1; i > toPosition; i--) {
+        Collections.swap(speedDialUiItems, i, i - 1);
+      }
     }
+    // TODO(calderwoodra): store pinned positions
+    notifyItemMoved(fromPosition, toPosition);
+  }
+
+  @Override
+  public boolean canDropOver(ViewHolder target) {
+    return target instanceof FavoritesViewHolder;
+  }
+
+  public void setItemTouchHelper(ItemTouchHelper itemTouchHelper) {
+    this.itemTouchHelper = itemTouchHelper;
   }
 }
