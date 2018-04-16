@@ -29,13 +29,10 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
-import android.telecom.PhoneAccount;
-import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -46,7 +43,6 @@ import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.calllog.observer.MarkDirtyObserver;
-import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -55,8 +51,6 @@ import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
-import com.android.dialer.telecom.TelecomUtil;
-import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Futures;
@@ -236,8 +230,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
         .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME)
         .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_ID)
-        .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_LABEL)
-        .useSingleValueLong(AnnotatedCallLog.PHONE_ACCOUNT_COLOR)
         .useMostRecentLong(AnnotatedCallLog.CALL_TYPE)
         // If any call in a group includes a feature (like Wifi/HD), consider the group to have the
         // feature.
@@ -372,8 +364,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         contentValues.put(AnnotatedCallLog.GEOCODED_LOCATION, geocodedLocation);
         contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME, phoneAccountComponentName);
         contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_ID, phoneAccountId);
-        populatePhoneAccountLabelAndColor(
-            appContext, contentValues, phoneAccountComponentName, phoneAccountId);
         contentValues.put(AnnotatedCallLog.FEATURES, features);
         contentValues.put(AnnotatedCallLog.DURATION, duration);
         contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
@@ -456,32 +446,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       return PROJECTION_O_AND_LATER;
     }
     return PROJECTION_PRE_O;
-  }
-
-  private void populatePhoneAccountLabelAndColor(
-      Context appContext,
-      ContentValues contentValues,
-      String phoneAccountComponentName,
-      String phoneAccountId) {
-    PhoneAccountHandle phoneAccountHandle =
-        TelecomUtil.composePhoneAccountHandle(phoneAccountComponentName, phoneAccountId);
-    if (phoneAccountHandle == null) {
-      return;
-    }
-    String label = PhoneAccountUtils.getAccountLabel(appContext, phoneAccountHandle);
-    if (TextUtils.isEmpty(label)) {
-      return;
-    }
-    contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_LABEL, label);
-
-    @ColorInt int color = PhoneAccountUtils.getAccountColor(appContext, phoneAccountHandle);
-    if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
-      color =
-          appContext
-              .getResources()
-              .getColor(R.color.dialer_secondary_text_color, appContext.getTheme());
-    }
-    contentValues.put(AnnotatedCallLog.PHONE_ACCOUNT_COLOR, color);
   }
 
   private static void handleDeletes(
