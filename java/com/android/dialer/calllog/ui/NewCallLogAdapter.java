@@ -34,12 +34,16 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.concurrent.TimeUnit;
 
 /** {@link RecyclerView.Adapter} for the new call log fragment. */
 final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   @VisibleForTesting
   static final String SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED = "duo_disclosure_dismissed";
+
+  private static final String SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS =
+      "duo_disclosure_first_viewed_time_ms";
 
   /** IntDef for the different types of rows that can be shown in the call log. */
   @Retention(RetentionPolicy.SOURCE)
@@ -71,6 +75,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   private final Context context;
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final PopCounts popCounts = new PopCounts();
+  private final SharedPreferences sharedPref;
+  private final OnScrollListenerForRecordingDuoDisclosureFirstViewTime
+      onScrollListenerForRecordingDuoDisclosureFirstViewTime;
 
   private Cursor cursor;
 
@@ -91,6 +98,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     this.cursor = cursor;
     this.clock = clock;
     this.realtimeRowProcessor = CallLogUiComponent.get(context).realtimeRowProcessor();
+    this.sharedPref = StorageComponent.get(context).unencryptedSharedPrefs();
+    this.onScrollListenerForRecordingDuoDisclosureFirstViewTime =
+        new OnScrollListenerForRecordingDuoDisclosureFirstViewTime(sharedPref, clock);
 
     setCardAndHeaderPositions();
   }
@@ -162,13 +172,45 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   private boolean shouldShowDuoDisclosureCard() {
+    // Don't show the Duo disclosure card if
+    // (1) Duo integration is not enabled on the device, or
+    // (2) Duo is not activated.
     Duo duo = DuoComponent.get(context).getDuo();
     if (!duo.isEnabled(context) || !duo.isActivated(context)) {
       return false;
     }
 
-    SharedPreferences sharedPref = StorageComponent.get(context).unencryptedSharedPrefs();
-    return !sharedPref.getBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, false);
+    // Don't show the Duo disclosure card if it has been dismissed.
+    if (sharedPref.getBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, false)) {
+      return false;
+    }
+
+    // At this point, Duo is activated and the disclosure card hasn't been dismissed.
+    // We should show the card if it has never been viewed by the user.
+    if (!sharedPref.contains(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS)) {
+      return true;
+    }
+
+    // At this point, the card has been viewed but not dismissed.
+    // We should not show the card if it has been viewed for more than 1 day.
+    long duoDisclosureFirstViewTimeMillis =
+        sharedPref.getLong(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS, 0);
+    return clock.currentTimeMillis() - duoDisclosureFirstViewTimeMillis
+        <= TimeUnit.DAYS.toMillis(1);
+  }
+
+  @Override
+  public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    super.onAttachedToRecyclerView(recyclerView);
+
+    // Register a OnScrollListener that records the timestamp at which the Duo disclosure is first
+    // viewed if
+    // (1) the Duo disclosure card should be shown, and
+    // (2) it hasn't been viewed yet.
+    if (shouldShowDuoDisclosureCard()
+        && !sharedPref.contains(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS)) {
+      recyclerView.addOnScrollListener(onScrollListenerForRecordingDuoDisclosureFirstViewTime);
+    }
   }
 
   @Override
@@ -285,6 +327,44 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
       numberOfHeaders++;
     }
     return cursor.getCount() + numberOfHeaders + numberOfCards;
+  }
+
+  /**
+   * A {@link RecyclerView.OnScrollListener} that records the timestamp at which the Duo disclosure
+   * card is first viewed.
+   *
+   * <p>We consider the card as viewed if the user scrolls the containing RecyclerView since such
+   * action is a strong proof.
+   */
+  private static final class OnScrollListenerForRecordingDuoDisclosureFirstViewTime
+      extends RecyclerView.OnScrollListener {
+
+    private final SharedPreferences sharedPref;
+    private final Clock clock;
+
+    OnScrollListenerForRecordingDuoDisclosureFirstViewTime(
+        SharedPreferences sharedPref, Clock clock) {
+      this.sharedPref = sharedPref;
+      this.clock = clock;
+    }
+
+    @Override
+    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+      if (!sharedPref.contains(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS)
+          && newState == RecyclerView.SCROLL_STATE_SETTLING) {
+        sharedPref
+            .edit()
+            .putLong(
+                SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS, clock.currentTimeMillis())
+            .apply();
+
+        // Recording the timestamp is this listener's sole responsibility.
+        // We can remove it from the containing RecyclerView after the job is done.
+        recyclerView.removeOnScrollListener(this);
+      }
+
+      super.onScrollStateChanged(recyclerView, newState);
+    }
   }
 
   static class PopCounts {
