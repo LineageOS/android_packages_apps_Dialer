@@ -12,7 +12,7 @@ import "java/com/android/dialer/calllog/database/contract/number_attributes.prot
 import "java/com/android/dialer/phonenumberproto/dialer_phone_number.proto";
 
 // Contains the contents of a row from the CoalescedAnnotatedCallLog.
-// Next ID: 19
+// Next ID: 17
 message CoalescedRow {
   // Value in column CoalescedAnnotatedCallLog._ID
   optional int64 id = 1;
@@ -44,27 +44,21 @@ message CoalescedRow {
   // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_ID
   optional string phone_account_id = 10;
 
-  // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_LABEL
-  optional string phone_account_label = 11;
-
-  // Value in column CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COLOR
-  optional int32 phone_account_color = 12;
-
   // Value in column CoalescedAnnotatedCallLog.FEATURES
-  optional int32 features = 13;
+  optional int32 features = 11;
 
   // Value in column CoalescedAnnotatedCallLog.CALL_TYPE
-  optional int32 call_type = 14;
+  optional int32 call_type = 12;
 
   // Value in column CoalescedAnnotatedCallLog.NUMBER_ATTRIBUTES
-  optional com.android.dialer.NumberAttributes number_attributes = 15;
+  optional com.android.dialer.NumberAttributes number_attributes = 13;
 
   // Value in column CoalescedAnnotatedCallLog.IS_VOICEMAIL_CALL
-  optional bool is_voicemail_call = 16;
+  optional bool is_voicemail_call = 14;
 
   // Value in column CoalescedAnnotatedCallLog.VOICEMAIL_CALL_TAG
-  optional string voicemail_call_tag = 17;
+  optional string voicemail_call_tag = 15;
 
   // Value in column CoalescedAnnotatedCallLog.COALESCED_IDS
-  optional com.android.dialer.CoalescedIds coalesced_ids = 18;
+  optional com.android.dialer.CoalescedIds coalesced_ids = 16;
 }

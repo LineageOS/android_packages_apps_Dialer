@@ -41,14 +41,12 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
   private static final int GEOCODED_LOCATION = 7;
   private static final int PHONE_ACCOUNT_COMPONENT_NAME = 8;
   private static final int PHONE_ACCOUNT_ID = 9;
-  private static final int PHONE_ACCOUNT_LABEL = 10;
-  private static final int PHONE_ACCOUNT_COLOR = 11;
-  private static final int FEATURES = 12;
-  private static final int NUMBER_ATTRIBUTES = 13;
-  private static final int IS_VOICEMAIL_CALL = 14;
-  private static final int VOICEMAIL_CALL_TAG = 15;
-  private static final int CALL_TYPE = 16;
-  private static final int COALESCED_IDS = 17;
+  private static final int FEATURES = 10;
+  private static final int NUMBER_ATTRIBUTES = 11;
+  private static final int IS_VOICEMAIL_CALL = 12;
+  private static final int VOICEMAIL_CALL_TAG = 13;
+  private static final int CALL_TYPE = 14;
+  private static final int COALESCED_IDS = 15;
 
   CoalescedAnnotatedCallLogCursorLoader(Context context) {
     // CoalescedAnnotatedCallLog requires that PROJECTION be ALL_COLUMNS and the following params be
@@ -93,7 +91,6 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
             .setNumberPresentation(cursor.getInt(NUMBER_PRESENTATION))
             .setIsRead(cursor.getInt(IS_READ) == 1)
             .setIsNew(cursor.getInt(NEW) == 1)
-            .setPhoneAccountColor(cursor.getInt(PHONE_ACCOUNT_COLOR))
             .setFeatures(cursor.getInt(FEATURES))
             .setCallType(cursor.getInt(CALL_TYPE))
             .setNumberAttributes(numberAttributes)
@@ -119,11 +116,6 @@ final class CoalescedAnnotatedCallLogCursorLoader extends CursorLoader {
     String phoneAccountId = cursor.getString(PHONE_ACCOUNT_ID);
     if (!TextUtils.isEmpty(phoneAccountId)) {
       coalescedRowBuilder.setPhoneAccountId(phoneAccountId);
-    }
-
-    String phoneAccountLabel = cursor.getString(PHONE_ACCOUNT_LABEL);
-    if (!TextUtils.isEmpty(phoneAccountLabel)) {
-      coalescedRowBuilder.setPhoneAccountLabel(phoneAccountLabel);
     }
 
     String voicemailCallTag = cursor.getString(VOICEMAIL_CALL_TAG);
