@@ -95,6 +95,8 @@ public class MainSearchController implements SearchBarListener {
    * want to wait until onPause is called otherwise the transition will look extremely janky.
    */
   private boolean closeSearchOnPause;
+
+  private boolean callPlacedFromSearch;
   private boolean requestingPermission;
 
   public MainSearchController(
@@ -472,10 +474,11 @@ public class MainSearchController implements SearchBarListener {
     closeKeyboard();
 
     if (closeSearchOnPause) {
-      closeSearchOnPause = false;
-      if (isInSearch()) {
+      if (isInSearch() && (callPlacedFromSearch || !isDialpadVisible())) {
         closeSearch(false);
       }
+      closeSearchOnPause = false;
+      callPlacedFromSearch = false;
     }
   }
 
@@ -494,6 +497,7 @@ public class MainSearchController implements SearchBarListener {
   @Override
   public void onCallPlacedFromSearch() {
     closeSearchOnPause = true;
+    callPlacedFromSearch = true;
   }
 
   @Override

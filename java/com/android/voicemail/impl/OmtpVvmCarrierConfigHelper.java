@@ -369,10 +369,13 @@ public class OmtpVvmCarrierConfigHelper {
 
   public void activateSmsFilter() {
     Assert.checkArgument(isValid());
-    TelephonyMangerCompat.setVisualVoicemailSmsFilterSettings(
-        context,
-        getPhoneAccountHandle(),
-        new VisualVoicemailSmsFilterSettings.Builder().setClientPrefix(getClientPrefix()).build());
+    context
+        .getSystemService(TelephonyManager.class)
+        .createForPhoneAccountHandle(getPhoneAccountHandle())
+        .setVisualVoicemailSmsFilterSettings(
+            new VisualVoicemailSmsFilterSettings.Builder()
+                .setClientPrefix(getClientPrefix())
+                .build());
   }
 
   public void startDeactivation() {
@@ -380,8 +383,10 @@ public class OmtpVvmCarrierConfigHelper {
     VvmLog.i(TAG, "startDeactivation");
     if (!isLegacyModeEnabled()) {
       // SMS should still be filtered in legacy mode
-      TelephonyMangerCompat.setVisualVoicemailSmsFilterSettings(
-          context, getPhoneAccountHandle(), null);
+      context
+          .getSystemService(TelephonyManager.class)
+          .createForPhoneAccountHandle(getPhoneAccountHandle())
+          .setVisualVoicemailSmsFilterSettings(null);
       VvmLog.i(TAG, "filter disabled");
     }
     if (protocol != null) {
