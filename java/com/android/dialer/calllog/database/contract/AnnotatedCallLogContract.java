@@ -103,20 +103,6 @@ public class AnnotatedCallLogContract {
     String PHONE_ACCOUNT_ID = "phone_account_id";
 
     /**
-     * String suitable for display which indicates the phone account used to make the call.
-     *
-     * <p>TYPE: TEXT
-     */
-    String PHONE_ACCOUNT_LABEL = "phone_account_label";
-
-    /**
-     * The color int for the phone account.
-     *
-     * <p>TYPE: INTEGER (int)
-     */
-    String PHONE_ACCOUNT_COLOR = "phone_account_color";
-
-    /**
      * See {@link android.provider.CallLog.Calls#FEATURES}.
      *
      * <p>TYPE: INTEGER (int)
@@ -170,8 +156,6 @@ public class AnnotatedCallLogContract {
           GEOCODED_LOCATION,
           PHONE_ACCOUNT_COMPONENT_NAME,
           PHONE_ACCOUNT_ID,
-          PHONE_ACCOUNT_LABEL,
-          PHONE_ACCOUNT_COLOR,
           FEATURES,
           NUMBER_ATTRIBUTES,
           IS_VOICEMAIL_CALL,
@@ -223,9 +207,9 @@ public class AnnotatedCallLogContract {
     public static final String TRANSCRIPTION = "transcription";
 
     /**
-     * See {@link VoicemailCompat.TRANSCRIPTION_STATE}
+     * See {@link VoicemailCompat#TRANSCRIPTION_STATE}
      *
-     * <p>Only populated in {@link Build.VERSION_CODES.O} and above
+     * <p>Only populated in {@link Build.VERSION_CODES#O} and above
      *
      * <p>TYPE: INTEGER
      */
