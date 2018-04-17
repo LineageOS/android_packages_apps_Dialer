@@ -55,12 +55,14 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.rtt.RttTranscriptActivity;
 import com.android.dialer.rtt.RttTranscriptUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -84,6 +86,8 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   public static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
 
+  private final CallDetailsEntryViewHolder.CallDetailsEntryListener callDetailsEntryListener =
+      new CallDetailsEntryListener(this);
   private final CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener =
       new CallDetailsHeaderListener(this);
   private final CallDetailsFooterViewHolder.DeleteCallDetailsListener deleteCallDetailsListener =
@@ -106,6 +110,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   /** Creates an adapter for {@link OldCallDetailsActivity} or {@link CallDetailsActivity}. */
   protected abstract CallDetailsAdapterCommon createAdapter(
+      CallDetailsEntryViewHolder.CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
       CallDetailsFooterViewHolder.DeleteCallDetailsListener deleteCallDetailsListener);
@@ -212,7 +217,11 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   private void setupRecyclerViewForEntries() {
     adapter =
-        createAdapter(callDetailsHeaderListener, reportCallIdListener, deleteCallDetailsListener);
+        createAdapter(
+            callDetailsEntryListener,
+            callDetailsHeaderListener,
+            reportCallIdListener,
+            deleteCallDetailsListener);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -285,6 +294,26 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
       }
 
       return idStrings;
+    }
+  }
+
+  private static final class CallDetailsEntryListener
+      implements CallDetailsEntryViewHolder.CallDetailsEntryListener {
+    private final WeakReference<CallDetailsActivityCommon> activityWeakReference;
+
+    CallDetailsEntryListener(CallDetailsActivityCommon activity) {
+      this.activityWeakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void showRttTranscript(String transcriptId, String primaryText, PhotoInfo photoInfo) {
+      getActivity()
+          .startActivity(
+              RttTranscriptActivity.getIntent(getActivity(), transcriptId, primaryText, photoInfo));
+    }
+
+    private CallDetailsActivityCommon getActivity() {
+      return Preconditions.checkNotNull(activityWeakReference.get());
     }
   }
 

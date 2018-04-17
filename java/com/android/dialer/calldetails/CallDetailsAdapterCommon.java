@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.ReportCallIdListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
@@ -33,6 +34,7 @@ import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 
 /**
  * Contains common logic shared between {@link OldCallDetailsAdapter} and {@link
@@ -44,6 +46,7 @@ abstract class CallDetailsAdapterCommon extends RecyclerView.Adapter<RecyclerVie
   private static final int CALL_ENTRY_VIEW_TYPE = 2;
   private static final int FOOTER_VIEW_TYPE = 3;
 
+  private final CallDetailsEntryListener callDetailsEntryListener;
   private final CallDetailsHeaderListener callDetailsHeaderListener;
   private final ReportCallIdListener reportCallIdListener;
   private final DeleteCallDetailsListener deleteCallDetailsListener;
@@ -60,13 +63,21 @@ abstract class CallDetailsAdapterCommon extends RecyclerView.Adapter<RecyclerVie
   /** Returns the phone number of the call details. */
   protected abstract String getNumber();
 
+  /** Returns the primary text shown on call details toolbar, usually contact name or number. */
+  protected abstract String getPrimaryText();
+
+  /** Returns {@link PhotoInfo} of the contact. */
+  protected abstract PhotoInfo getPhotoInfo();
+
   CallDetailsAdapterCommon(
       Context context,
       CallDetailsEntries callDetailsEntries,
+      CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderListener callDetailsHeaderListener,
       ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
     this.callDetailsEntries = callDetailsEntries;
+    this.callDetailsEntryListener = callDetailsEntryListener;
     this.callDetailsHeaderListener = callDetailsHeaderListener;
     this.reportCallIdListener = reportCallIdListener;
     this.deleteCallDetailsListener = deleteCallDetailsListener;
@@ -84,7 +95,7 @@ abstract class CallDetailsAdapterCommon extends RecyclerView.Adapter<RecyclerVie
             inflater.inflate(R.layout.contact_container, parent, false), callDetailsHeaderListener);
       case CALL_ENTRY_VIEW_TYPE:
         return new CallDetailsEntryViewHolder(
-            inflater.inflate(R.layout.call_details_entry, parent, false));
+            inflater.inflate(R.layout.call_details_entry, parent, false), callDetailsEntryListener);
       case FOOTER_VIEW_TYPE:
         return new CallDetailsFooterViewHolder(
             inflater.inflate(R.layout.call_details_footer, parent, false),
@@ -108,6 +119,8 @@ abstract class CallDetailsAdapterCommon extends RecyclerView.Adapter<RecyclerVie
       CallDetailsEntry entry = callDetailsEntries.getEntries(position - 1);
       viewHolder.setCallDetails(
           getNumber(),
+          getPrimaryText(),
+          getPhotoInfo(),
           entry,
           callTypeHelper,
           !entry.getHistoryResultsList().isEmpty() && position != getItemCount() - 2);
