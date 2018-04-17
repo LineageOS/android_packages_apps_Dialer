@@ -37,12 +37,21 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 
 /** ViewHolder for call entries in {@link OldCallDetailsActivity} or {@link CallDetailsActivity}. */
 public class CallDetailsEntryViewHolder extends ViewHolder {
+
+  /** Listener for the call details header */
+  interface CallDetailsEntryListener {
+    /** Shows RTT transcript. */
+    void showRttTranscript(String transcriptId, String primaryText, PhotoInfo photoInfo);
+  }
+
+  private final CallDetailsEntryListener callDetailsEntryListener;
 
   private final CallTypeIconsView callTypeIcon;
   private final TextView callTypeText;
@@ -65,7 +74,8 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private final Context context;
 
-  public CallDetailsEntryViewHolder(View container) {
+  public CallDetailsEntryViewHolder(
+      View container, CallDetailsEntryListener callDetailsEntryListener) {
     super(container);
     context = container.getContext();
 
@@ -83,10 +93,13 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     multimediaAttachmentsNumber =
         (TextView) container.findViewById(R.id.multimedia_attachments_number);
     rttTranscript = container.findViewById(R.id.rtt_transcript);
+    this.callDetailsEntryListener = callDetailsEntryListener;
   }
 
   void setCallDetails(
       String number,
+      String primaryText,
+      PhotoInfo photoInfo,
       CallDetailsEntry entry,
       CallTypeHelper callTypeHelper,
       boolean showMultimediaDivider) {
@@ -133,6 +146,10 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         rttTranscript.setText(R.string.rtt_transcript_link);
         rttTranscript.setTextAppearance(R.style.RttTranscriptLink);
         rttTranscript.setClickable(true);
+        rttTranscript.setOnClickListener(
+            v ->
+                callDetailsEntryListener.showRttTranscript(
+                    entry.getCallMappingId(), primaryText, photoInfo));
       } else {
         rttTranscript.setText(R.string.rtt_transcript_not_available);
         rttTranscript.setTextAppearance(R.style.RttTranscriptMessage);

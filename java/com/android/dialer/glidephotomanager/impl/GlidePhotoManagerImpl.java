@@ -25,6 +25,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
+import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import com.android.dialer.common.Assert;
 import com.android.dialer.glide.GlideApp;
@@ -54,8 +55,15 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
             ? DefaultLookupUriGenerator.generateUri(photoInfo)
             : parseUri(photoInfo.getLookupUri()));
     badge.setOverlay(null);
-    GlideRequest<Drawable> request = buildRequest(GlideApp.with(badge), photoInfo);
-    request.into(badge);
+    loadContactPhoto(badge, photoInfo);
+  }
+
+  @MainThread
+  @Override
+  public void loadContactPhoto(ImageView imageView, PhotoInfo photoInfo) {
+    Assert.isMainThread();
+    GlideRequest<Drawable> request = buildRequest(GlideApp.with(imageView), photoInfo);
+    request.into(imageView);
   }
 
   private GlideRequest<Drawable> buildRequest(GlideRequests requestManager, PhotoInfo photoInfo) {

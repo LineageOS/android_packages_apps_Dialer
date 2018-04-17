@@ -90,7 +90,9 @@ public class RttCallPresenter implements RttCallScreenDelegate, InCallStateListe
     LogUtil.enterBlock("RttCallPresenter.saveTranscript");
     RttTranscript.Builder builder = RttTranscript.newBuilder();
     builder
+
         .setId(String.valueOf(dialerCall.getCreationTimeMillis()))
+
         .setTimestamp(dialerCall.getCreationTimeMillis())
         .setNumber(dialerCall.getNumber())
         .addAllMessages(rttCallScreen.getRttTranscriptMessageList());
