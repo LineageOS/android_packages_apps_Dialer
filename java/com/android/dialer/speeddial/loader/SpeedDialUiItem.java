@@ -18,6 +18,7 @@ package com.android.dialer.speeddial.loader;
 
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
@@ -45,9 +46,11 @@ public abstract class SpeedDialUiItem {
   public static final int DISPLAY_NAME = 2;
   public static final int STARRED = 3;
   public static final int NUMBER = 4;
-  public static final int LABEL = 5;
-  public static final int PHOTO_ID = 6;
-  public static final int PHOTO_URI = 7;
+  public static final int TYPE = 5;
+  public static final int LABEL = 6;
+  public static final int PHOTO_ID = 7;
+  public static final int PHOTO_URI = 8;
+  public static final int CARRIER_PRESENCE = 9;
 
   public static final String[] PHONE_PROJECTION = {
     Phone.LOOKUP_KEY,
@@ -55,16 +58,27 @@ public abstract class SpeedDialUiItem {
     Phone.DISPLAY_NAME,
     Phone.STARRED,
     Phone.NUMBER,
+    Phone.TYPE,
     Phone.LABEL,
     Phone.PHOTO_ID,
-    Phone.PHOTO_URI
+    Phone.PHOTO_URI,
+    Phone.CARRIER_PRESENCE
   };
 
   public static Builder builder() {
     return new AutoValue_SpeedDialUiItem.Builder().setChannels(ImmutableList.of());
   }
 
-  /** Convert a cursor with projection {@link #PHONE_PROJECTION} into a {@link SpeedDialUiItem}. */
+  /**
+   * Convert a cursor with projection {@link #PHONE_PROJECTION} into a {@link SpeedDialUiItem}.
+   *
+   * <p>This cursor is structured such that contacts are grouped by contact id and lookup key and
+   * each row that shares the same contact id and lookup key represents a phone number that belongs
+   * to a single contact.
+   *
+   * <p>If the cursor started at row X, this method will advance to row Y s.t. rows X, X + 1, ... Y
+   * - 1 all belong to the same contact (that is, share the same contact id and lookup key).
+   */
   public static SpeedDialUiItem fromCursor(Cursor cursor) {
     Assert.checkArgument(cursor != null);
     Assert.checkArgument(cursor.getCount() != 0);
@@ -84,13 +98,20 @@ public abstract class SpeedDialUiItem {
     // contact's phone numbers.
     List<Channel> channels = new ArrayList<>();
     do {
-      channels.add(
+      Channel channel =
           Channel.builder()
               .setNumber(cursor.getString(NUMBER))
+              .setPhoneType(cursor.getInt(TYPE))
               .setLabel(TextUtils.isEmpty(cursor.getString(LABEL)) ? "" : cursor.getString(LABEL))
-              // TODO(a bug): add another channel for each technology (Duo, ViLTE, ect.)
               .setTechnology(Channel.VOICE)
-              .build());
+              .build();
+      channels.add(channel);
+
+      if ((cursor.getInt(CARRIER_PRESENCE) & Data.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
+        // Add another channel if the number is ViLTE reachable
+        channels.add(channel.toBuilder().setTechnology(Channel.IMS_VIDEO).build());
+      }
+      // TODO(a bug): add another channel for Duo (needs to happen on main thread)
     } while (cursor.moveToNext() && Objects.equals(lookupKey, cursor.getString(LOOKUP_KEY)));
 
     builder.setChannels(ImmutableList.copyOf(channels));
