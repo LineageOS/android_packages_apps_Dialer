@@ -125,11 +125,11 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
           PerformanceReport.recordClick(UiAction.Type.CLOSE_CALL_DETAIL_WITH_CANCEL_BUTTON);
           finish();
         });
-    handleIntent(getIntent());
-    setupRecyclerViewForEntries();
     checkRttTranscriptAvailabilityListener =
         DialerExecutorComponent.get(this)
             .createUiListener(getFragmentManager(), "Query RTT transcript availability");
+    handleIntent(getIntent());
+    setupRecyclerViewForEntries();
   }
 
   @Override
@@ -152,6 +152,9 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     EnrichedCallComponent.get(this)
         .getEnrichedCallManager()
         .requestAllHistoricalData(getNumber(), callDetailsEntries);
+  }
+
+  protected void loadRttTranscriptAvailability() {
     checkRttTranscriptAvailabilityListener.listen(
         this,
         checkRttTranscriptAvailability(),
