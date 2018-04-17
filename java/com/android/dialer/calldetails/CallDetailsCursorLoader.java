@@ -139,7 +139,10 @@ public final class CallDetailsCursorLoader extends CursorLoader {
         .setFeatures(cursor.getInt(FEATURES))
         .setDate(cursor.getLong(TIMESTAMP))
         .setDuration(cursor.getLong(DURATION))
-        .setDataUsage(cursor.getLong(DATA_USAGE));
+        .setDataUsage(cursor.getLong(DATA_USAGE))
+
+        .setCallMappingId(String.valueOf(cursor.getLong(TIMESTAMP)));
+
 
     String phoneAccountComponentName = cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
     entry.setIsDuoCall(

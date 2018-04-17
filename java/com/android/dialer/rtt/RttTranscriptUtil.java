@@ -30,7 +30,13 @@ public final class RttTranscriptUtil {
   private final RttTranscriptDatabaseHelper databaseHelper;
 
   public RttTranscriptUtil(Context context) {
-    databaseHelper = new RttTranscriptDatabaseHelper(context);
+    databaseHelper = new RttTranscriptDatabaseHelper(context.getApplicationContext());
+  }
+
+  @Override
+  protected void finalize() throws Throwable {
+    databaseHelper.close();
+    super.finalize();
   }
 
   /** @return true if there is RTT transcript available. */
