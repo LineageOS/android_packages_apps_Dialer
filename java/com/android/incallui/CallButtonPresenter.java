@@ -16,7 +16,9 @@
 
 package com.android.incallui;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Trace;
 import android.support.v4.app.Fragment;
@@ -441,7 +443,8 @@ public class CallButtonPresenter
    *
    * @param call The active call.
    */
-  @SuppressWarnings("MissingPermission")
+  @TargetApi(VERSION_CODES.N)
+  @SuppressWarnings(value = {"MissingPermission", "AndroidApiChecker"}) // Java 8 APIs.
   private void updateButtonsState(DialerCall call) {
     LogUtil.v("CallButtonPresenter.updateButtonsState", "");
     final boolean isVideo = call.isVideoCall();
@@ -459,7 +462,15 @@ public class CallButtonPresenter
 
     final boolean showAddCall =
         TelecomAdapter.getInstance().canAddCall() && UserManagerCompat.isUserUnlocked(context);
-    final boolean showMerge = call.can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
+    // There can only be two calls so don't show the ability to merge when one of them
+    // is a speak easy call.
+    final boolean showMerge =
+        InCallPresenter.getInstance()
+                .getCallList()
+                .getAllCalls()
+                .stream()
+                .noneMatch(c -> c != null && c.isSpeakEasyCall())
+            && call.can(android.telecom.Call.Details.CAPABILITY_MERGE_CONFERENCE);
     final boolean showUpgradeToVideo = !isVideo && (hasVideoCallCapabilities(call));
     final boolean showDowngradeToAudio = isVideo && isDowngradeToAudioSupported(call);
     final boolean showMute = call.can(android.telecom.Call.Details.CAPABILITY_MUTE);
