@@ -18,6 +18,7 @@ package com.android.dialer.calldetails;
 
 import android.content.Context;
 import android.content.Intent;
+import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.ReportCallIdListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
@@ -76,6 +77,7 @@ public final class OldCallDetailsActivity extends CallDetailsActivityCommon {
 
   @Override
   protected CallDetailsAdapterCommon createAdapter(
+      CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderListener callDetailsHeaderListener,
       ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
@@ -83,6 +85,7 @@ public final class OldCallDetailsActivity extends CallDetailsActivityCommon {
         /* context = */ this,
         contact,
         getCallDetailsEntries(),
+        callDetailsEntryListener,
         callDetailsHeaderListener,
         reportCallIdListener,
         deleteCallDetailsListener);

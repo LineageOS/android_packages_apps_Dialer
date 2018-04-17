@@ -1008,7 +1008,10 @@ public class CallLogAdapter extends GroupingListAdapter
               .setDataUsage(cursor.getLong(CallLogQuery.DATA_USAGE))
               .setDate(cursor.getLong(CallLogQuery.DATE))
               .setDuration(cursor.getLong(CallLogQuery.DURATION))
-              .setFeatures(cursor.getInt(CallLogQuery.FEATURES));
+              .setFeatures(cursor.getInt(CallLogQuery.FEATURES))
+
+              .setCallMappingId(String.valueOf(cursor.getLong(CallLogQuery.DATE)));
+
 
       String phoneAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
       if (DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME

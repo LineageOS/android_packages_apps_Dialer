@@ -23,6 +23,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import com.android.dialer.CoalescedIds;
+import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.ReportCallIdListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
@@ -89,6 +90,7 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
 
   @Override
   protected CallDetailsAdapterCommon createAdapter(
+      CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderListener callDetailsHeaderListener,
       ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
@@ -96,6 +98,7 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
         this,
         headerInfo,
         getCallDetailsEntries(),
+        callDetailsEntryListener,
         callDetailsHeaderListener,
         reportCallIdListener,
         deleteCallDetailsListener);
