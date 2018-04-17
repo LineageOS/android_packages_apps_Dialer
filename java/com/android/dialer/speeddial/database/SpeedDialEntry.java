@@ -92,16 +92,14 @@ public abstract class SpeedDialEntry {
     /**
      * Raw phone number as the user entered it.
      *
-     * @see {@link Phone#NUMBER}
+     * @see Phone#NUMBER
      */
     public abstract String number();
 
-    /**
-     * Label that the user associated with this number like {@link Phone#TYPE_WORK}, {@link
-     * Phone#TYPE_HOME}, ect.
-     *
-     * @see {@link Phone#LABEL}
-     */
+    /** @see Phone#TYPE */
+    public abstract int phoneType();
+
+    /** @see Phone#LABEL */
     public abstract String label();
 
     public abstract @Technology int technology();
@@ -117,6 +115,8 @@ public abstract class SpeedDialEntry {
     public abstract static class Builder {
 
       public abstract Builder setNumber(String number);
+
+      public abstract Builder setPhoneType(int phoneType);
 
       public abstract Builder setLabel(String label);
 
