@@ -83,6 +83,7 @@ import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.latencyreport.LatencyReport;
+import com.android.incallui.speakeasy.runtime.Constraints;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.duo.DuoVideoTech;
@@ -1646,8 +1647,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   /** Indicates the call is eligible for SpeakEasy */
   public boolean isSpeakEasyEligible() {
-    // TODO(erfanian): refactor key location
-    return ConfigProviderBindings.get(context).getBoolean("speak_easy_enabled", false);
+    if (!Constraints.isAvailable(context)) {
+      return false;
+    }
+
+    return !isPotentialEmergencyCallback()
+        && !isEmergencyCall()
+        && !isActiveRttCall()
+        && !isConferenceCall()
+        && !isVideoCall()
+        && !isVoiceMailNumber();
   }
 
   /** Indicates the user has selected SpeakEasy */
