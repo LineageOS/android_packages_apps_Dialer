@@ -20,8 +20,10 @@ package com.android.dialer.calldetails;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 
 /**
  * A {@link RecyclerView.Adapter} for {@link CallDetailsActivity}.
@@ -38,12 +40,14 @@ final class CallDetailsAdapter extends CallDetailsAdapterCommon {
       Context context,
       CallDetailsHeaderInfo calldetailsHeaderInfo,
       CallDetailsEntries callDetailsEntries,
+      CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
     super(
         context,
         callDetailsEntries,
+        callDetailsEntryListener,
         callDetailsHeaderListener,
         reportCallIdListener,
         deleteCallDetailsListener);
@@ -71,5 +75,15 @@ final class CallDetailsAdapter extends CallDetailsAdapterCommon {
   @Override
   protected String getNumber() {
     return headerInfo.getDialerPhoneNumber().getNormalizedNumber();
+  }
+
+  @Override
+  protected String getPrimaryText() {
+    return headerInfo.getPrimaryText();
+  }
+
+  @Override
+  protected PhotoInfo getPhotoInfo() {
+    return headerInfo.getPhotoInfo();
   }
 }
