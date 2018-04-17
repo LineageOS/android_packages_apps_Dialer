@@ -68,8 +68,6 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.GEOCODED_LOCATION + " text, ")
           + (AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME + " text, ")
           + (AnnotatedCallLog.PHONE_ACCOUNT_ID + " text, ")
-          + (AnnotatedCallLog.PHONE_ACCOUNT_LABEL + " text, ")
-          + (AnnotatedCallLog.PHONE_ACCOUNT_COLOR + " integer, ")
           + (AnnotatedCallLog.FEATURES + " integer, ")
           + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")

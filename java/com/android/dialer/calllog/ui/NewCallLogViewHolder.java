@@ -20,9 +20,12 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.v4.os.BuildCompat;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,10 +36,12 @@ import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogIntents;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.time.Clock;
 import com.android.dialer.widget.ContactPhotoView;
 import com.google.common.util.concurrent.FutureCallback;
@@ -232,13 +237,30 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPhoneAccounts(CoalescedRow row) {
-    if (!TextUtils.isEmpty(row.getPhoneAccountLabel())) {
-      phoneAccountView.setText(row.getPhoneAccountLabel());
-      phoneAccountView.setTextColor(row.getPhoneAccountColor());
-      phoneAccountView.setVisibility(View.VISIBLE);
-    } else {
+    PhoneAccountHandle phoneAccountHandle =
+        TelecomUtil.composePhoneAccountHandle(
+            row.getPhoneAccountComponentName(), row.getPhoneAccountId());
+    if (phoneAccountHandle == null) {
       phoneAccountView.setVisibility(View.GONE);
+      return;
     }
+
+    String phoneAccountLabel = PhoneAccountUtils.getAccountLabel(context, phoneAccountHandle);
+    if (TextUtils.isEmpty(phoneAccountLabel)) {
+      phoneAccountView.setVisibility(View.GONE);
+      return;
+    }
+
+    @ColorInt
+    int phoneAccountColor = PhoneAccountUtils.getAccountColor(context, phoneAccountHandle);
+    if (phoneAccountColor == PhoneAccount.NO_HIGHLIGHT_COLOR) {
+      phoneAccountColor =
+          context.getResources().getColor(R.color.dialer_secondary_text_color, context.getTheme());
+    }
+
+    phoneAccountView.setText(phoneAccountLabel);
+    phoneAccountView.setTextColor(phoneAccountColor);
+    phoneAccountView.setVisibility(View.VISIBLE);
   }
 
   private void setOnClickListenerForRow(CoalescedRow row) {

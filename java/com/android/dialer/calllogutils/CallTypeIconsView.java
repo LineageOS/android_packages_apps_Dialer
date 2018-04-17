@@ -335,7 +335,7 @@ public class CallTypeIconsView extends View {
           r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_rtt_vd_theme_24;
-      drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
+      drawable = largeIcons ? r.getDrawable(iconId, null) : getScaledBitmap(context, iconId);
       rttCall = drawable.mutate();
       rttCall.setColorFilter(r.getColor(R.color.icon_color_grey), PorterDuff.Mode.MULTIPLY);
 

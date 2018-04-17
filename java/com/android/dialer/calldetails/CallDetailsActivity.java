@@ -125,6 +125,7 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
       updateCallDetailsEntries(CallDetailsCursorLoader.toCallDetailsEntries(data));
+      activity.loadRttTranscriptAvailability();
     }
 
     @Override
