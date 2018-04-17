@@ -42,6 +42,7 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
   private SearchBarListener listener;
   private MainToolbarMenu overflowMenu;
   private boolean isSlideUp;
+  private boolean hasGlobalLayoutListener;
 
   public MainToolbar(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -72,9 +73,20 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
 
   /** Slides the toolbar up and off the screen. */
   public void slideUp(boolean animate, View container) {
+    if (hasGlobalLayoutListener) {
+      // Return early since we've already scheduled the toolbar to slide up
+      return;
+    }
+
     Assert.checkArgument(!isSlideUp);
     if (getHeight() == 0) {
-      ViewUtil.doOnGlobalLayout(this, view -> slideUp(animate, container));
+      hasGlobalLayoutListener = true;
+      ViewUtil.doOnGlobalLayout(
+          this,
+          view -> {
+            hasGlobalLayoutListener = false;
+            slideUp(animate, container);
+          });
       return;
     }
     isSlideUp = true;
