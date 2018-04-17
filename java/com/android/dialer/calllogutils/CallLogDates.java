@@ -194,6 +194,7 @@ public final class CallLogDates {
     startOfReferenceDay.add(Calendar.HOUR_OF_DAY, -startOfReferenceDay.get(Calendar.HOUR_OF_DAY));
     startOfReferenceDay.add(Calendar.MINUTE, -startOfReferenceDay.get(Calendar.MINUTE));
     startOfReferenceDay.add(Calendar.SECOND, -startOfReferenceDay.get(Calendar.SECOND));
+    startOfReferenceDay.add(Calendar.MILLISECOND, -startOfReferenceDay.get(Calendar.MILLISECOND));
 
     Calendar other = Calendar.getInstance();
     other.setTimeInMillis(firstTimestamp);
