@@ -71,6 +71,7 @@ public final class OldCallDetailsActivity extends CallDetailsActivityCommon {
     setCallDetailsEntries(
         ProtoParsers.getTrusted(
             intent, EXTRA_CALL_DETAILS_ENTRIES, CallDetailsEntries.getDefaultInstance()));
+    loadRttTranscriptAvailability();
   }
 
   @Override
