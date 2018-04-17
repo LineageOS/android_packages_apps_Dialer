@@ -37,7 +37,7 @@ import java.util.List;
 public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     implements SpeedDialEntryDao {
 
-  private static final int DATABASE_VERSION = 1;
+  private static final int DATABASE_VERSION = 2;
   private static final String DATABASE_NAME = "CPSpeedDialEntry";
 
   // Column names
@@ -46,6 +46,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   private static final String CONTACT_ID = "contact_id";
   private static final String LOOKUP_KEY = "lookup_key";
   private static final String PHONE_NUMBER = "phone_number";
+  private static final String PHONE_TYPE = "phone_type";
   private static final String PHONE_LABEL = "phone_label";
   private static final String PHONE_TECHNOLOGY = "phone_technology";
 
@@ -54,8 +55,9 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   private static final int POSITION_CONTACT_ID = 1;
   private static final int POSITION_LOOKUP_KEY = 2;
   private static final int POSITION_PHONE_NUMBER = 3;
-  private static final int POSITION_PHONE_LABEL = 4;
-  private static final int POSITION_PHONE_TECHNOLOGY = 5;
+  private static final int POSITION_PHONE_TYPE = 4;
+  private static final int POSITION_PHONE_LABEL = 5;
+  private static final int POSITION_PHONE_TECHNOLOGY = 6;
 
   // Create Table Query
   private static final String CREATE_TABLE_SQL =
@@ -66,6 +68,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
           + (CONTACT_ID + " integer, ")
           + (LOOKUP_KEY + " text, ")
           + (PHONE_NUMBER + " text, ")
+          + (PHONE_TYPE + " integer, ")
           + (PHONE_LABEL + " text, ")
           + (PHONE_TECHNOLOGY + " integer ")
           + ");";
@@ -109,6 +112,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
           channel =
               Channel.builder()
                   .setNumber(number)
+                  .setPhoneType(cursor.getInt(POSITION_PHONE_TYPE))
                   .setLabel(cursor.getString(POSITION_PHONE_LABEL))
                   .setTechnology(cursor.getInt(POSITION_PHONE_TECHNOLOGY))
                   .build();
@@ -216,6 +220,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     values.put(LOOKUP_KEY, entry.lookupKey());
     if (entry.defaultChannel() != null) {
       values.put(PHONE_NUMBER, entry.defaultChannel().number());
+      values.put(PHONE_TYPE, entry.defaultChannel().phoneType());
       values.put(PHONE_LABEL, entry.defaultChannel().label());
       values.put(PHONE_TECHNOLOGY, entry.defaultChannel().technology());
     }
