@@ -29,6 +29,7 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.MatchType;
 import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import com.google.i18n.phonenumbers.ShortNumberInfo;
 
 /**
  * Wrapper for selected methods in {@link PhoneNumberUtil} which uses the {@link DialerPhoneNumber}
@@ -38,11 +39,13 @@ import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
  */
 public class DialerPhoneNumberUtil {
   private final PhoneNumberUtil phoneNumberUtil;
+  private final ShortNumberInfo shortNumberInfo;
 
   @WorkerThread
-  public DialerPhoneNumberUtil(@NonNull PhoneNumberUtil phoneNumberUtil) {
+  public DialerPhoneNumberUtil() {
     Assert.isWorkerThread();
-    this.phoneNumberUtil = Assert.isNotNull(phoneNumberUtil);
+    this.phoneNumberUtil = PhoneNumberUtil.getInstance();
+    this.shortNumberInfo = ShortNumberInfo.getInstance();
   }
 
   /**
@@ -156,6 +159,13 @@ public class DialerPhoneNumberUtil {
         || isServiceNumber(secondNumberIn.getNormalizedNumber())
         || phoneNumber1 == null
         || phoneNumber2 == null) {
+      return firstNumberIn.getNormalizedNumber().equals(secondNumberIn.getNormalizedNumber());
+    }
+
+    // Both numbers are parseable, first check for short codes to so that a number like "5555"
+    // doesn't match "55555" (due to those being a SHORT_NSN_MATCH below).
+    if (shortNumberInfo.isPossibleShortNumber(phoneNumber1)
+        || shortNumberInfo.isPossibleShortNumber(phoneNumber2)) {
       return firstNumberIn.getNormalizedNumber().equals(secondNumberIn.getNormalizedNumber());
     }
 
