@@ -138,7 +138,12 @@ public final class ClearMissedCalls {
 
           Selection.Builder selectionBuilder =
               Selection.builder()
-                  .and(Selection.column(Calls.IS_READ).is("=", 0))
+                  .and(
+                      Selection.column(Calls.IS_READ)
+                          .is("=", 0)
+                          .buildUpon()
+                          .or(Selection.column(Calls.IS_READ).is("IS NULL"))
+                          .build())
                   .and(Selection.column(Calls.TYPE).is("=", Calls.MISSED_TYPE));
           if (!ids.isEmpty()) {
             selectionBuilder.and(Selection.column(Calls._ID).in(toStrings(ids)));
