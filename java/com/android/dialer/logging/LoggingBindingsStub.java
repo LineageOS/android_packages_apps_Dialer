@@ -16,6 +16,7 @@ package com.android.dialer.logging;
 
 import android.app.Activity;
 import android.widget.QuickContactBadge;
+import java.util.Collection;
 
 /** Default implementation for logging bindings. */
 public class LoggingBindingsStub implements LoggingBindings {
@@ -70,4 +71,7 @@ public class LoggingBindingsStub implements LoggingBindings {
 
   @Override
   public void logAnnotatedCallLogMetrics(int numberRowsThatDidPop, int numberRowsThatDidNotPop) {}
+
+  @Override
+  public void logContactsProviderMetrics(Collection<ContactsProviderMatchInfo> matchInfos) {}
 }
