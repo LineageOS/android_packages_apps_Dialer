@@ -82,8 +82,10 @@ import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.logging.ContactSource;
+import com.android.dialer.logging.ContactSource.Type;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.logging.LoggingBindings.ContactsProviderMatchInfo;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.performancereport.PerformanceReport;
@@ -94,6 +96,9 @@ import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -151,6 +156,13 @@ public class CallLogAdapter extends GroupingListAdapter
   public boolean selectAllMode = false;
   public boolean deselectAllMode = false;
   private final SparseArray<String> selectedItems = new SparseArray<>();
+
+  /**
+   * Maps a raw input number to match info. We only log one MatchInfo per raw input number to reduce
+   * the amount of data logged.
+   */
+  private final Map<String, ContactsProviderMatchInfo> contactsProviderMatchInfos =
+      new ArrayMap<>();
 
   private final ActionMode.Callback actionModeCallback =
       new ActionMode.Callback() {
@@ -678,6 +690,7 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   public void onResume() {
+    contactsProviderMatchInfos.clear();
     if (PermissionsUtil.hasPermission(activity, android.Manifest.permission.READ_CONTACTS)) {
       contactInfoCache.start();
     }
@@ -688,6 +701,11 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   public void onPause() {
+    // The call log can be resumed/paused without loading any contacts. Don't log these events.
+    if (!contactsProviderMatchInfos.isEmpty()) {
+      Logger.get(activity).logContactsProviderMetrics(contactsProviderMatchInfos.values());
+    }
+
     getDuo().unregisterListener(this);
     pauseCache();
     for (Uri uri : hiddenItemUris) {
@@ -1063,6 +1081,7 @@ public class CallLogAdapter extends GroupingListAdapter
               position
                   < ConfigProviderBindings.get(activity)
                       .getLong("number_of_call_to_do_remote_lookup", 5L));
+      logCp2Metrics(details, info);
     }
     CharSequence formattedNumber =
         info.formattedNumber == null
@@ -1465,6 +1484,44 @@ public class CallLogAdapter extends GroupingListAdapter
     selectedItems.clear();
     updateActionBar();
     notifyDataSetChanged();
+  }
+
+  private void logCp2Metrics(PhoneCallDetails details, ContactInfo contactInfo) {
+    if (details == null) {
+      return;
+    }
+    CharSequence inputNumber = details.number;
+    if (inputNumber == null) {
+      return;
+    }
+
+    ContactsProviderMatchInfo.Builder matchInfo =
+        ContactsProviderMatchInfo.builder()
+            .setInputNumberLength(PhoneNumberUtils.normalizeNumber(inputNumber.toString()).length())
+            .setInputNumberHasPostdialDigits(
+                !PhoneNumberUtils.extractPostDialPortion(inputNumber.toString()).isEmpty()
+                    || (details.postDialDigits != null && !details.postDialDigits.isEmpty()));
+
+    PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+    try {
+      PhoneNumber phoneNumber = phoneNumberUtil.parse(inputNumber, details.countryIso);
+      matchInfo.setInputNumberValid(phoneNumberUtil.isValidNumber(phoneNumber));
+    } catch (NumberParseException e) {
+      // Do nothing
+      matchInfo.setInputNumberValid(false);
+    }
+
+    if (contactInfo != null
+        && contactInfo.number != null
+        && contactInfo.sourceType == Type.SOURCE_TYPE_DIRECTORY) {
+      matchInfo
+          .setMatchedContact(true)
+          .setMatchedNumberLength(PhoneNumberUtils.normalizeNumber(contactInfo.number).length())
+          .setMatchedNumberHasPostdialDigits(
+              !PhoneNumberUtils.extractPostDialPortion(contactInfo.number).isEmpty());
+    }
+
+    contactsProviderMatchInfos.put(inputNumber.toString(), matchInfo.build());
   }
 
   /** Interface used to initiate a refresh of the content. */

@@ -16,6 +16,8 @@ package com.android.dialer.logging;
 
 import android.app.Activity;
 import android.widget.QuickContactBadge;
+import com.google.auto.value.AutoValue;
+import java.util.Collection;
 
 /** Allows the container application to gather analytics. */
 public interface LoggingBindings {
@@ -96,4 +98,48 @@ public interface LoggingBindings {
 
   /** Logs annotated call log metrics. */
   void logAnnotatedCallLogMetrics(int numberRowsThatDidPop, int numberRowsThatDidNotPop);
+
+  /** Logs contacts provider metrics. */
+  void logContactsProviderMetrics(Collection<ContactsProviderMatchInfo> matchInfos);
+
+  /** Input type for {@link #logContactsProviderMetrics(Collection)}. */
+  @AutoValue
+  abstract class ContactsProviderMatchInfo {
+    public abstract boolean matchedContact();
+
+    public abstract boolean inputNumberValid();
+
+    public abstract int inputNumberLength();
+
+    public abstract int matchedNumberLength();
+
+    public abstract boolean inputNumberHasPostdialDigits();
+
+    public abstract boolean matchedNumberHasPostdialDigits();
+
+    public static Builder builder() {
+      return new AutoValue_LoggingBindings_ContactsProviderMatchInfo.Builder()
+          .setMatchedContact(false)
+          .setMatchedNumberLength(0)
+          .setMatchedNumberHasPostdialDigits(false);
+    }
+
+    /** Builder. */
+    @AutoValue.Builder
+    public abstract static class Builder {
+      public abstract Builder setMatchedContact(boolean value);
+
+      public abstract Builder setInputNumberValid(boolean value);
+
+      public abstract Builder setInputNumberLength(int value);
+
+      public abstract Builder setMatchedNumberLength(int value);
+
+      public abstract Builder setInputNumberHasPostdialDigits(boolean value);
+
+      public abstract Builder setMatchedNumberHasPostdialDigits(boolean value);
+
+      public abstract ContactsProviderMatchInfo build();
+    }
+  }
 }
