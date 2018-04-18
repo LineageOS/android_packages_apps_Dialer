@@ -17,6 +17,7 @@
 package com.android.dialer.speeddial.loader;
 
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -97,14 +98,61 @@ public final class SpeedDialUiItemLoader {
    * from {@link Contacts#STREQUENT_PHONE_ONLY}.
    */
   public ListenableFuture<ImmutableList<SpeedDialUiItem>> loadSpeedDialUiItems() {
-    return dialerFutureSerializer.submitAsync(
-        () -> backgroundExecutor.submit(this::doInBackground), backgroundExecutor);
+    return dialerFutureSerializer.submit(this::loadSpeedDialUiItemsInternal, backgroundExecutor);
+  }
+
+  /**
+   * Takes a contact uri from {@link Phone#CONTENT_URI} and updates {@link Phone#STARRED} to be
+   * true, if it isn't already or Inserts the contact into the {@link SpeedDialEntryDatabaseHelper}
+   */
+  public ListenableFuture<ImmutableList<SpeedDialUiItem>> starContact(Uri contactUri) {
+    return dialerFutureSerializer.submit(
+        () -> insertNewContactEntry(contactUri), backgroundExecutor);
   }
 
   @WorkerThread
-  private ImmutableList<SpeedDialUiItem> doInBackground() {
+  private ImmutableList<SpeedDialUiItem> insertNewContactEntry(Uri contactUri) {
     Assert.isWorkerThread();
-    SpeedDialEntryDao db = new SpeedDialEntryDatabaseHelper(appContext);
+    try (Cursor cursor =
+        appContext
+            .getContentResolver()
+            .query(contactUri, SpeedDialUiItem.PHONE_PROJECTION, null, null, null)) {
+      if (cursor == null) {
+        LogUtil.e("SpeedDialUiItemLoader.insertNewContactEntry", "Cursor was null");
+        return loadSpeedDialUiItemsInternal();
+      }
+      Assert.checkArgument(cursor.moveToFirst(), "Cursor should never be empty");
+      SpeedDialUiItem item = SpeedDialUiItem.fromCursor(cursor);
+
+      // Star the contact if it isn't starred already, then return.
+      if (!item.isStarred()) {
+        ContentValues values = new ContentValues();
+        values.put(Phone.STARRED, "1");
+        appContext
+            .getContentResolver()
+            .update(
+                Contacts.CONTENT_URI,
+                values,
+                Contacts._ID + " = ?",
+                new String[] {Long.toString(item.contactId())});
+      }
+
+      // Insert a new entry into the SpeedDialEntry database
+      getSpeedDialEntryDao()
+          .insert(
+              SpeedDialEntry.builder()
+                  .setLookupKey(item.lookupKey())
+                  .setContactId(item.contactId())
+                  .setDefaultChannel(item.defaultChannel())
+                  .build());
+    }
+    return loadSpeedDialUiItemsInternal();
+  }
+
+  @WorkerThread
+  private ImmutableList<SpeedDialUiItem> loadSpeedDialUiItemsInternal() {
+    Assert.isWorkerThread();
+    SpeedDialEntryDao db = getSpeedDialEntryDao();
 
     // This is the list of contacts that we will display to the user
     List<SpeedDialUiItem> speedDialUiItems = new ArrayList<>();
@@ -391,5 +439,9 @@ public final class SpeedDialUiItemLoader {
       newChannelsList.add(previousChannel.toBuilder().setTechnology(Channel.DUO).build());
     }
     return item.toBuilder().setChannels(newChannelsList.build()).build();
+  }
+
+  private SpeedDialEntryDao getSpeedDialEntryDao() {
+    return new SpeedDialEntryDatabaseHelper(appContext);
   }
 }
