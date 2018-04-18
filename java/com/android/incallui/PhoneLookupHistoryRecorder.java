@@ -36,7 +36,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
 /**
  * Fetches the current {@link PhoneLookupInfo} for the provided call and writes it to the
@@ -59,8 +58,7 @@ final class PhoneLookupHistoryRecorder {
     ListenableFuture<DialerPhoneNumber> numberFuture =
         backgroundExecutor.submit(
             () -> {
-              DialerPhoneNumberUtil dialerPhoneNumberUtil =
-                  new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+              DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
               return dialerPhoneNumberUtil.parse(
                   TelecomCallUtil.getNumber(call), GeoUtil.getCurrentCountryIso(appContext));
             });

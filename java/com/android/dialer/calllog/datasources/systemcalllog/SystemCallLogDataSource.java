@@ -57,7 +57,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -251,8 +250,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       Context appContext, CallLogMutations mutations, Set<Long> existingAnnotatedCallLogIds) {
     long previousTimestampProcessed = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
 
-    DialerPhoneNumberUtil dialerPhoneNumberUtil =
-        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+    DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
 
     // TODO(zachh): Really should be getting last 1000 by timestamp, not by last modified.
     try (Cursor cursor =
