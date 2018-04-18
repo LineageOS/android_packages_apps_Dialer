@@ -19,10 +19,7 @@ package com.android.dialer.historyitemactions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.telecom.PhoneAccountHandle;
-import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
@@ -61,36 +58,19 @@ public class IntentModule implements HistoryItemActionModule {
     return true;
   }
 
-  public static IntentModule newCallModule(
-      Context context,
-      String number,
-      @Nullable PhoneAccountHandle phoneAccountHandle,
-      Type initiationType) {
-    // TODO(zachh): Support post-dial digits; consider using DialerPhoneNumber.
-    return new IntentModule(
-        context,
-        PreCall.getIntent(
-            context,
-            new CallIntentBuilder(number, initiationType)
-                .setPhoneAccountHandle(phoneAccountHandle)),
-        R.string.voice_call,
-        R.drawable.quantum_ic_call_white_24);
-  }
+  /** Creates a module for starting an outgoing call with a {@link CallIntentBuilder}. */
+  public static IntentModule newCallModule(Context context, CallIntentBuilder callIntentBuilder) {
+    @StringRes int text;
+    @DrawableRes int image;
 
-  public static IntentModule newCarrierVideoCallModule(
-      Context context,
-      String number,
-      @Nullable PhoneAccountHandle phoneAccountHandle,
-      Type initiationType) {
-    // TODO(zachh): Support post-dial digits; consider using DialerPhoneNumber.
-    return new IntentModule(
-        context,
-        PreCall.getIntent(
-            context,
-            new CallIntentBuilder(number, initiationType)
-                .setPhoneAccountHandle(phoneAccountHandle)
-                .setIsVideoCall(true)),
-        R.string.video_call,
-        R.drawable.quantum_ic_videocam_vd_white_24);
+    if (callIntentBuilder.isVideoCall()) {
+      text = R.string.video_call;
+      image = R.drawable.quantum_ic_videocam_vd_white_24;
+    } else {
+      text = R.string.voice_call;
+      image = R.drawable.quantum_ic_call_white_24;
+    }
+
+    return new IntentModule(context, PreCall.getIntent(context, callIntentBuilder), text, image);
   }
 }
