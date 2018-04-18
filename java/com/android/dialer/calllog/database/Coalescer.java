@@ -33,7 +33,6 @@ import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Preconditions;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +72,7 @@ public class Coalescer {
     // Note: This method relies on rowsShouldBeCombined to determine which rows should be combined,
     // but delegates to data sources to actually aggregate column values.
 
-    DialerPhoneNumberUtil dialerPhoneNumberUtil =
-        new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance());
+    DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
 
     MatrixCursor allCoalescedRowsMatrixCursor =
         new MatrixCursor(
