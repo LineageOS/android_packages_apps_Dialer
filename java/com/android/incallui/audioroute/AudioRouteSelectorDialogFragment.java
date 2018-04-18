@@ -17,6 +17,7 @@
 package com.android.incallui.audioroute;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
@@ -29,9 +30,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.incallui.audiomode.BluetoothDeviceProviderComponent;
+import java.util.Set;
 
 /** Shows picker for audio routes */
 public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment {
@@ -75,10 +79,22 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     View view = layoutInflater.inflate(R.layout.audioroute_selector, viewGroup, false);
     CallAudioState audioState = getArguments().getParcelable(ARG_AUDIO_STATE);
 
-    initItem(
-        (TextView) view.findViewById(R.id.audioroute_bluetooth),
-        CallAudioState.ROUTE_BLUETOOTH,
-        audioState);
+    Set<BluetoothDevice> bluetoothDeviceSet =
+        BluetoothDeviceProviderComponent.get(getContext())
+            .bluetoothDeviceProvider()
+            .getConnectedBluetoothDeviceSet();
+    for (BluetoothDevice device : bluetoothDeviceSet) {
+      boolean selected =
+          (audioState.getRoute() == CallAudioState.ROUTE_BLUETOOTH)
+              && (bluetoothDeviceSet.size() == 1
+                  || device.equals(
+                      BluetoothDeviceProviderComponent.get(getContext())
+                          .bluetoothDeviceProvider()
+                          .getActiveBluetoothDevice()));
+      TextView textView = createBluetoothItem(device, selected);
+      ((LinearLayout) view).addView(textView, 0);
+    }
+
     initItem(
         (TextView) view.findViewById(R.id.audioroute_speaker),
         CallAudioState.ROUTE_SPEAKER,
@@ -120,5 +136,31 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
                   AudioRouteSelectorDialogFragment.this, AudioRouteSelectorPresenter.class)
               .onAudioRouteSelected(itemRoute);
         });
+  }
+
+  private TextView createBluetoothItem(BluetoothDevice bluetoothDevice, boolean selected) {
+    int selectedColor = getResources().getColor(R.color.dialer_theme_color);
+    TextView textView =
+        (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
+    textView.setText(bluetoothDevice.getName());
+    if (selected) {
+      textView.setTextColor(selectedColor);
+      textView.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
+      textView.setCompoundDrawableTintMode(Mode.SRC_ATOP);
+    }
+    textView.setOnClickListener(
+        (v) -> {
+          dismiss();
+          // Set Bluetooth audio route
+          FragmentUtils.getParentUnsafe(
+                  AudioRouteSelectorDialogFragment.this, AudioRouteSelectorPresenter.class)
+              .onAudioRouteSelected(CallAudioState.ROUTE_BLUETOOTH);
+          // Set active Bluetooth device
+          BluetoothDeviceProviderComponent.get(getContext())
+              .bluetoothDeviceProvider()
+              .setActiveBluetoothDevice(bluetoothDevice);
+        });
+
+    return textView;
   }
 }

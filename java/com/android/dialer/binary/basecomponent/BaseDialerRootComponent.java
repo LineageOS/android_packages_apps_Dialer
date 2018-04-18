@@ -39,6 +39,7 @@ import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
+import com.android.incallui.audiomode.BluetoothDeviceProviderComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
@@ -49,7 +50,8 @@ import com.android.voicemail.VoicemailComponent;
  * from this component.
  */
 public interface BaseDialerRootComponent
-    extends BubbleComponent.HasComponent,
+    extends BluetoothDeviceProviderComponent.HasComponent,
+        BubbleComponent.HasComponent,
         CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
         CallLogConfigComponent.HasComponent,
