@@ -20,6 +20,7 @@ import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
 import dagger.Module;
 import dagger.Provides;
+import dagger.multibindings.IntoSet;
 
 /** Module for demo dagger application. */
 @Module
@@ -29,7 +30,8 @@ public final class DemoModule {
   private DemoModule() {}
 
   @Provides
+  @IntoSet
   static DemoObject provide() {
-    return new DemoObject("prod");
+    return DemoObject.create("prod");
   }
 }
