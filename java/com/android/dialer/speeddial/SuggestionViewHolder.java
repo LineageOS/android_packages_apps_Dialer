@@ -29,6 +29,7 @@ import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 
 /** ViewHolder for displaying suggested contacts in {@link SpeedDialFragment}. */
@@ -40,7 +41,7 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
   private final TextView nameOrNumberView;
   private final TextView numberView;
 
-  private String number;
+  private SpeedDialUiItem speedDialUiItem;
 
   SuggestionViewHolder(View view, SuggestedContactsListener listener) {
     super(view);
@@ -54,7 +55,8 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
 
   public void bind(Context context, SpeedDialUiItem speedDialUiItem) {
     Assert.isNotNull(speedDialUiItem.defaultChannel());
-    number =
+    this.speedDialUiItem = speedDialUiItem;
+    String number =
         PhoneNumberHelper.formatNumber(
             context,
             speedDialUiItem.defaultChannel().number(),
@@ -77,6 +79,7 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
                 .setPhotoId(speedDialUiItem.photoId())
                 .setPhotoUri(speedDialUiItem.photoUri())
                 .setName(speedDialUiItem.name())
+                .setIsVideo(speedDialUiItem.defaultChannel().isVideoTechnology())
                 .setLookupUri(
                     Contacts.getLookupUri(speedDialUiItem.contactId(), speedDialUiItem.lookupKey())
                         .toString())
@@ -86,18 +89,18 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
   @Override
   public void onClick(View v) {
     if (v.getId() == R.id.overflow) {
-      listener.onOverFlowMenuClicked(number);
+      listener.onOverFlowMenuClicked(speedDialUiItem);
     } else {
-      listener.onRowClicked(number);
+      listener.onRowClicked(speedDialUiItem.defaultChannel());
     }
   }
 
   /** Listener/Callback for {@link SuggestionViewHolder} parents. */
   public interface SuggestedContactsListener {
 
-    void onOverFlowMenuClicked(String number);
+    void onOverFlowMenuClicked(SpeedDialUiItem speedDialUiItem);
 
     /** Called when a suggested contact is clicked. */
-    void onRowClicked(String number);
+    void onRowClicked(Channel channel);
   }
 }
