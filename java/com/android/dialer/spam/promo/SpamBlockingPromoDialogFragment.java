@@ -19,7 +19,9 @@ package com.android.dialer.spam.promo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 /** Dialog for spam blocking on-boarding promotion. */
 public class SpamBlockingPromoDialogFragment extends DialogFragment {
@@ -29,16 +31,32 @@ public class SpamBlockingPromoDialogFragment extends DialogFragment {
   /** Called when dialog positive button is pressed. */
   protected OnEnableListener positiveListener;
 
-  public static DialogFragment newInstance(OnEnableListener positiveListener) {
+  /** Called when the dialog is dismissed. */
+  @Nullable protected DialogInterface.OnDismissListener dismissListener;
+
+  public static DialogFragment newInstance(
+      OnEnableListener positiveListener,
+      @Nullable DialogInterface.OnDismissListener dismissListener) {
     SpamBlockingPromoDialogFragment fragment = new SpamBlockingPromoDialogFragment();
     fragment.positiveListener = positiveListener;
+    fragment.dismissListener = dismissListener;
     return fragment;
+  }
+
+  @Override
+  public void onDismiss(DialogInterface dialog) {
+    if (dismissListener != null) {
+      dismissListener.onDismiss(dialog);
+    }
+    super.onDismiss(dialog);
   }
 
   @Override
   public void onPause() {
     // The dialog is dismissed onPause, i.e. rotation.
     dismiss();
+    dismissListener = null;
+    positiveListener = null;
     super.onPause();
   }
 
