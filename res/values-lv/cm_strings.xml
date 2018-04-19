@@ -90,4 +90,5 @@
   <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
+  <!-- Disclaimer -->
 </resources>

@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Missed Wi-Fi voice call</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Missed Wi-Fi video call</string>
+  <!-- Disclaimer -->
 </resources>

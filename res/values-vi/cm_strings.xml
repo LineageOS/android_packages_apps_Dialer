@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Cuộc gọi thoại WiFi bị nhỡ</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Cuộc gọi video WiFi bị nhỡ</string>
+  <!-- Disclaimer -->
 </resources>

@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Nem fogadott Wi-Fi hanghívás</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Nem fogadott Wi-Fi videohívás</string>
+  <!-- Disclaimer -->
 </resources>

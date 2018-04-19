@@ -147,4 +147,6 @@
   <string name="type_missed_vowifi">Пропущенный звонок по Wi-Fi</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Пропущенный видеозвонок по Wi-Fi</string>
+  <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Поисковые запросы могут отправлять запросы по защищенному протоколу (https) на удаленные веб-сайты для сбора информации. Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
 </resources>

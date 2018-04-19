@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Gemiste spraakoproep via wifi</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Gemiste video-oproep via wifi</string>
+  <!-- Disclaimer -->
 </resources>

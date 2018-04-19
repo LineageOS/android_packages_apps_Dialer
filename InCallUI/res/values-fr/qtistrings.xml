@@ -98,19 +98,33 @@
   <string name="cs_redial_msg">Impossible de réaliser un appel vidéo IMS, recomposer en tant qu\'appel vocal non-IMS ?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">Appel mis à niveau sur demande de l\'utilisateur</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">Appel mis à niveau sur demande de l\'utilisateur distant</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">Appel déclassé sur demande de l\'utilisateur</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">Appel déclassé sur demande de l\'utilisateur distant</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">Appel déclassé en raison du délai RTP dépassé</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">Appel déclassé en raison de la qualité du service</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">Appel déclassé en raison de la perte de paquets</string>
   <!-- Session modify cause code downgrade low thrput -->
+  <string name="session_modify_cause_downgrade_low_thrput">Appel déclassé en raison du faible débit</string>
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">Appel déclassé en raison de l\'atténuation thermique</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">Appel déclassé en raison de la synchronisation de lèvres</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">Appel déclassé en raison d\'une erreur générique</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">Réception d’un appel d\'audio-conférence</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">Réception d’une vidéo-conférence</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Réception d’un appel d\'audio-conférence</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
   <!-- Message indicating call failed due to low battery -->

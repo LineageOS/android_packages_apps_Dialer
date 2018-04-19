@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Ubesvarede Wi-Fi-stemmeopkald</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Ubesvarede Wi-Fi-videoopkald</string>
+  <!-- Disclaimer -->
 </resources>

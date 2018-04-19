@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Galdutako WiFi ahots-deia</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Galdutako WiFi bideo-deia</string>
+  <!-- Disclaimer -->
 </resources>

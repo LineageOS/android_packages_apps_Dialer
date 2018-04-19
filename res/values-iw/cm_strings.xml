@@ -152,4 +152,5 @@
   <string name="type_missed_vowifi">שיחה Wi-Fi קולית לא נענתה</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">שיחת וידאו Wi-Fi לא נענתה</string>
+  <!-- Disclaimer -->
 </resources>

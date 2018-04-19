@@ -147,4 +147,5 @@
   <string name="type_missed_vowifi">Пропущений Wi-Fi голосовий виклик</string>
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Пропущений Wi-Fi відеовиклик</string>
+  <!-- Disclaimer -->
 </resources>

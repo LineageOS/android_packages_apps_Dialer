@@ -39,6 +39,7 @@
   <string name="onscreenStopCallRecordText">Arrêter l\'enregistrement</string>
   <string name="recording_time_text">Enregistrement</string>
   <string name="recording_warning_title">Activer l\'enregistrement des appels ?</string>
+  <string name="recording_warning_text">Avertissement : vous êtes responsable au regard de toutes lois, règlements et règles qui s\'appliquent à la fonctionnalité d\'enregistrement des appels et à l\'utilisation ou la distribution de ces enregistrements.</string>
   <string name="call_failed_due_to_validate_number">Impossible de faire des appels vidéo, le format du numéro n’est pas correct</string>
   <string name="call_state_dialing">Numérotation</string>
   <string name="call_state_holding">En attente</string>
