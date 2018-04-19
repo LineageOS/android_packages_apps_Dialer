@@ -19,30 +19,22 @@ package com.android.dialer.historyitemactions;
 import android.Manifest.permission;
 import android.content.Context;
 import android.support.annotation.RequiresPermission;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.duo.PlaceDuoCallNotifier;
-import com.android.dialer.precall.PreCall;
 
 /** {@link HistoryItemActionModule} for making a Duo call. */
 public class DuoCallModule implements HistoryItemActionModule {
 
   private final Context context;
   private final String phoneNumber;
-  private final CallInitiationType.Type callInitiationType;
 
   /**
    * Creates a module for making a Duo call.
    *
    * @param phoneNumber The number to start a Duo call. It can be of any format.
    */
-  public DuoCallModule(
-      Context context, String phoneNumber, CallInitiationType.Type callInitiationType) {
+  public DuoCallModule(Context context, String phoneNumber) {
     this.context = context;
     this.phoneNumber = phoneNumber;
-    this.callInitiationType = callInitiationType;
   }
 
   @Override
@@ -58,23 +50,7 @@ public class DuoCallModule implements HistoryItemActionModule {
   @Override
   @RequiresPermission(permission.READ_PHONE_STATE)
   public boolean onClick() {
-    if (canPlaceDuoCall(context, phoneNumber)) {
-      PlaceDuoCallNotifier.notify(context, phoneNumber);
-    } else {
-      // If a Duo call can't be placed, fall back to an IMS video call.
-      PreCall.start(
-          context, new CallIntentBuilder(phoneNumber, callInitiationType).setIsVideoCall(true));
-    }
-
+    PlaceDuoCallNotifier.notify(context, phoneNumber);
     return true; // Close the bottom sheet.
-  }
-
-  private boolean canPlaceDuoCall(Context context, String phoneNumber) {
-    Duo duo = DuoComponent.get(context).getDuo();
-
-    return duo.isInstalled(context)
-        && duo.isEnabled(context)
-        && duo.isActivated(context)
-        && duo.isReachable(context, phoneNumber);
   }
 }
