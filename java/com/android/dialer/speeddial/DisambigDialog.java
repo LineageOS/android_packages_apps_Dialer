@@ -17,6 +17,7 @@
 package com.android.dialer.speeddial;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
@@ -30,6 +31,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import java.util.List;
@@ -128,7 +133,16 @@ public class DisambigDialog extends DialogFragment {
 
   private void onVideoOptionClicked(Channel channel) {
     // TODO(calderwoodra): save this option if remember is checked
-    // TODO(calderwoodra): place a duo call if possible
+    if (channel.technology() == Channel.DUO) {
+      Logger.get(getContext())
+          .logImpression(
+              DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT_DISAMBIG);
+      Intent intent =
+          DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+      getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+      return;
+    }
+
     PreCall.start(
         getContext(),
         new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
