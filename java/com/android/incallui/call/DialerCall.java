@@ -541,22 +541,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return countryIso;
   }
 
-  /**
-   * Called when call is disconnected and removed from {@link CallList}, UI may already be destroyed
-   * at this point. This is last chance to do something for the call.
-   */
-  public void onDestroy() {
-    LogUtil.enterBlock("DialerCall.onDestroy");
-    if (rttTranscript != null) {
-      Futures.addCallback(
-          RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
-          new DefaultFutureCallback<>(),
-          MoreExecutors.directExecutor());
-      // Sets to null so it won't be saved again when called multiple times.
-      rttTranscript = null;
-    }
-  }
-
   private void updateIsVoiceMailNumber() {
     if (getHandle() != null && PhoneAccount.SCHEME_VOICEMAIL.equals(getHandle().getScheme())) {
       isVoicemailNumber = true;
@@ -1608,8 +1592,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   void onRemovedFromCallList() {
+    LogUtil.enterBlock("DialerCall.onRemovedFromCallList");
     // Ensure we clean up when this call is removed.
     videoTechManager.dispatchRemovedFromCallList();
+    if (rttTranscript != null) {
+      Futures.addCallback(
+          RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
+      // Sets to null so it won't be saved again when called multiple times.
+      rttTranscript = null;
+    }
   }
 
   public com.android.dialer.logging.VideoTech.Type getSelectedAvailableVideoTechType() {
