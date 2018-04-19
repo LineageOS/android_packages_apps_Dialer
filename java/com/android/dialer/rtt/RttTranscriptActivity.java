@@ -61,7 +61,6 @@ public class RttTranscriptActivity extends AppCompatActivity {
 
     RecyclerView recyclerView = findViewById(R.id.rtt_recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-    layoutManager.setStackFromEnd(true);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setHasFixedSize(true);
     adapter = new RttTranscriptAdapter(this);

@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 
 /** Adapter class for holding RTT chat data. */
@@ -30,6 +31,7 @@ public class RttTranscriptAdapter extends RecyclerView.Adapter<RttTranscriptMess
 
   private final Context context;
   private RttTranscript rttTranscript;
+  private int firstPositionToShowTimestamp;
 
   RttTranscriptAdapter(Context context) {
     this.context = context;
@@ -65,7 +67,9 @@ public class RttTranscriptAdapter extends RecyclerView.Adapter<RttTranscriptMess
       rttChatMessageViewHolder.hideTimestamp();
     } else {
       rttChatMessageViewHolder.showTimestamp(
-          rttTranscriptMessage.getTimestamp(), rttTranscriptMessage.getIsRemote(), i == 0);
+          rttTranscriptMessage.getTimestamp(),
+          rttTranscriptMessage.getIsRemote(),
+          i == firstPositionToShowTimestamp);
     }
   }
 
@@ -78,8 +82,28 @@ public class RttTranscriptAdapter extends RecyclerView.Adapter<RttTranscriptMess
   }
 
   void setRttTranscript(RttTranscript rttTranscript) {
+    if (rttTranscript == null) {
+      LogUtil.w("RttTranscriptAdapter.setRttTranscript", "null RttTranscript");
+      return;
+    }
     this.rttTranscript = rttTranscript;
+    firstPositionToShowTimestamp = findFirstPositionToShowTimestamp(rttTranscript);
+
     notifyDataSetChanged();
+  }
+
+  /**
+   * Returns first position of message that should show time stamp. This is usually the last one of
+   * first grouped messages.
+   */
+  protected static int findFirstPositionToShowTimestamp(RttTranscript rttTranscript) {
+    int i = 0;
+    while (i + 1 < rttTranscript.getMessagesCount()
+        && rttTranscript.getMessages(i).getIsRemote()
+            == rttTranscript.getMessages(i + 1).getIsRemote()) {
+      i++;
+    }
+    return i;
   }
 
   void setPhotoInfo(PhotoInfo photoInfo) {
