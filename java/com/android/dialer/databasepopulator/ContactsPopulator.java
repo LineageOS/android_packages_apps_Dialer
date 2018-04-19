@@ -152,6 +152,7 @@ public final class ContactsPopulator {
     Assert.isWorkerThread();
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     addContact(SIMPLE_CONTACTS[0], operations);
+    addContact(SIMPLE_CONTACTS[3], operations);
     addContact(SIMPLE_CONTACTS[5], operations);
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
