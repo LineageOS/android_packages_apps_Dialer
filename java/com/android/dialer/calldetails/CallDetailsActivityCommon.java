@@ -30,7 +30,6 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-import android.support.annotation.WorkerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,7 +64,7 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.rtt.RttTranscriptActivity;
 import com.android.dialer.rtt.RttTranscriptUtil;
 import com.google.common.base.Preconditions;
-import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.collect.ImmutableSet;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -100,7 +99,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   private CallDetailsAdapterCommon adapter;
   private CallDetailsEntries callDetailsEntries;
-  private UiListener<CallDetailsEntries> checkRttTranscriptAvailabilityListener;
+  private UiListener<ImmutableSet<String>> checkRttTranscriptAvailabilityListener;
 
   /**
    * Handles the intent that launches {@link OldCallDetailsActivity} or {@link CallDetailsActivity},
@@ -160,40 +159,28 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
   }
 
   protected void loadRttTranscriptAvailability() {
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
+      builder.add(entry.getCallMappingId());
+    }
     checkRttTranscriptAvailabilityListener.listen(
         this,
-        checkRttTranscriptAvailability(),
-        this::setCallDetailsEntries,
+        RttTranscriptUtil.getAvailableRttTranscriptIds(this, builder.build()),
+        this::updateCallDetailsEntriesWithRttTranscriptAvailability,
         throwable -> {
           throw new RuntimeException(throwable);
         });
   }
 
-  private ListenableFuture<CallDetailsEntries> checkRttTranscriptAvailability() {
-    return DialerExecutorComponent.get(this)
-        .backgroundExecutor()
-        .submit(() -> checkRttTranscriptAvailabilityInBackground(callDetailsEntries));
-  }
-
-  /**
-   * Check RTT transcript availability.
-   *
-   * @param input the original {@link CallDetailsEntries}
-   * @return {@link CallDetailsEntries} with updated RTT transcript availability.
-   */
-  @WorkerThread
-  private CallDetailsEntries checkRttTranscriptAvailabilityInBackground(
-      @Nullable CallDetailsEntries input) {
-    RttTranscriptUtil rttTranscriptUtil = new RttTranscriptUtil(this);
-
+  private void updateCallDetailsEntriesWithRttTranscriptAvailability(
+      ImmutableSet<String> availableTranscripIds) {
     CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
-    for (CallDetailsEntry entry : input.getEntriesList()) {
+    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
       CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
-      newEntry.setHasRttTranscript(
-          rttTranscriptUtil.checkRttTranscriptAvailability(String.valueOf(entry.getDate())));
+      newEntry.setHasRttTranscript(availableTranscripIds.contains(entry.getCallMappingId()));
       mutableCallDetailsEntries.addEntries(newEntry.build());
     }
-    return mutableCallDetailsEntries.build();
+    setCallDetailsEntries(mutableCallDetailsEntries.build());
   }
 
   @Override
