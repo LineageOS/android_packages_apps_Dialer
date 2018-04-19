@@ -20,12 +20,13 @@ import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
+import java.util.Set;
 
 /** Subcomponent for the demo dagger application. */
 @Subcomponent
 public abstract class DemoSubcomponent {
 
-  abstract DemoObject demoObject();
+  abstract Set<DemoObject> demoObjects();
 
   public static DemoSubcomponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())

@@ -19,6 +19,7 @@ package com.android.dialer.rootcomponentgenerator;
 import static com.google.auto.common.AnnotationMirrors.getAnnotationValue;
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
+import static javax.tools.Diagnostic.Kind.ERROR;
 
 import com.android.dialer.inject.DialerRootComponent;
 import com.android.dialer.inject.DialerVariant;
@@ -61,14 +62,22 @@ final class RootComponentGeneratingStep implements ProcessingStep {
 
   @Override
   public Set<? extends Class<? extends Annotation>> annotations() {
-    return ImmutableSet.of(DialerRootComponent.class);
+    return ImmutableSet.of(DialerRootComponent.class, InstallIn.class, IncludeInDialerRoot.class);
   }
 
   @Override
   public Set<? extends Element> process(
       SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
     for (Element element : elementsByAnnotation.get(DialerRootComponent.class)) {
-      generateRootComponent(MoreElements.asType(element));
+      // defer root components to the next round in case where the current build target contains
+      // elements annotated with @InstallIn. Annotation processor cannot detect metadata files
+      // generated in the same round and the metadata is accessible in the next round.
+      if (elementsByAnnotation.containsKey(InstallIn.class)
+          || elementsByAnnotation.containsKey(IncludeInDialerRoot.class)) {
+        return elementsByAnnotation.get(DialerRootComponent.class);
+      } else {
+        generateRootComponent(MoreElements.asType(element));
+      }
     }
     return Collections.emptySet();
   }
@@ -124,6 +133,15 @@ final class RootComponentGeneratingStep implements ProcessingStep {
       Class<? extends Annotation> annotation, MetadataProcessor metadataProcessor) {
     PackageElement cachePackage =
         processingEnv.getElementUtils().getPackageElement(RootComponentUtils.METADATA_PACKAGE_NAME);
+    if (cachePackage == null) {
+      processingEnv
+          .getMessager()
+          .printMessage(
+              ERROR,
+              "Metadata haven't been generated! do you forget to add modules "
+                  + "or components in dependency of dialer root?");
+      return;
+    }
     for (Element element : cachePackage.getEnclosedElements()) {
       Optional<AnnotationMirror> metadataAnnotation =
           getAnnotationMirror(element, RootComponentGeneratorMetadata.class);
