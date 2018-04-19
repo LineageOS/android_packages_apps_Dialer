@@ -31,6 +31,10 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.speeddial.ContextMenu.ContextMenuItemListener;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
@@ -123,7 +127,10 @@ public class SpeedDialFragment extends Fragment {
         getContext(),
         UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
         speedDialUiItems -> {
-          adapter.setSpeedDialUiItems(speedDialUiItems);
+          adapter.setSpeedDialUiItems(
+              UiItemLoaderComponent.get(getContext())
+                  .speedDialUiItemLoader()
+                  .insertDuoChannels(getContext(), speedDialUiItems));
           adapter.notifyDataSetChanged();
         },
         throwable -> {
@@ -148,7 +155,15 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void onClick(Channel channel) {
-      // TODO(calderwoodra): add logic for duo video calls
+      if (channel.technology() == Channel.DUO) {
+        Logger.get(getContext())
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
+        Intent intent =
+            DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+        getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+        return;
+      }
+
       PreCall.start(
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
@@ -181,14 +196,25 @@ public class SpeedDialFragment extends Fragment {
   private final class SpeedDialSuggestedListener implements SuggestedContactsListener {
 
     @Override
-    public void onOverFlowMenuClicked(String number) {
+    public void onOverFlowMenuClicked(SpeedDialUiItem speedDialUiItem) {
       // TODO(calderwoodra) show overflow menu for suggested contacts
     }
 
     @Override
-    public void onRowClicked(String number) {
+    public void onRowClicked(Channel channel) {
+      if (channel.technology() == Channel.DUO) {
+        Logger.get(getContext())
+            .logImpression(
+                DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_SUGGESTED_CONTACT);
+        Intent intent =
+            DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+        getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+        return;
+      }
       PreCall.start(
-          getContext(), new CallIntentBuilder(number, CallInitiationType.Type.SPEED_DIAL));
+          getContext(),
+          new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setIsVideoCall(channel.isVideoTechnology()));
     }
   }
 

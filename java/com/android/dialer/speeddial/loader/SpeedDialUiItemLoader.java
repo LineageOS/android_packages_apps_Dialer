@@ -24,6 +24,7 @@ import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -33,8 +34,11 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
+import com.android.dialer.duo.Duo;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
+import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.database.SpeedDialEntryDao;
 import com.android.dialer.speeddial.database.SpeedDialEntryDatabaseHelper;
 import com.google.common.collect.ImmutableList;
@@ -71,6 +75,8 @@ import javax.inject.Singleton;
 @TargetApi(VERSION_CODES.N)
 @Singleton
 public final class SpeedDialUiItemLoader {
+
+  private static final int MAX_DUO_SUGGESTIONS = 3;
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
@@ -319,5 +325,71 @@ public final class SpeedDialUiItemLoader {
       }
       return contacts;
     }
+  }
+
+  /**
+   * Returns a new list with duo reachable channels inserted. Duo channels won't replace ViLTE
+   * channels.
+   */
+  @MainThread
+  public ImmutableList<SpeedDialUiItem> insertDuoChannels(
+      Context context, ImmutableList<SpeedDialUiItem> speedDialUiItems) {
+    Assert.isMainThread();
+
+    Duo duo = DuoComponent.get(context).getDuo();
+    int maxDuoSuggestions = MAX_DUO_SUGGESTIONS;
+
+    ImmutableList.Builder<SpeedDialUiItem> newSpeedDialItemList = ImmutableList.builder();
+    // for each existing item
+    for (SpeedDialUiItem item : speedDialUiItems) {
+      // If the item is a suggestion
+      if (!item.isStarred()) {
+        // And duo reachable, insert a duo suggestion
+        if (maxDuoSuggestions > 0 && duo.isReachable(context, item.defaultChannel().number())) {
+          maxDuoSuggestions--;
+          Channel defaultChannel =
+              item.defaultChannel().toBuilder().setTechnology(Channel.DUO).build();
+          newSpeedDialItemList.add(item.toBuilder().setDefaultChannel(defaultChannel).build());
+        }
+        // Insert the voice suggestion too
+        newSpeedDialItemList.add(item);
+      } else if (item.defaultChannel() == null) {
+        // If the contact is starred and doesn't have a default channel, insert duo channels
+        newSpeedDialItemList.add(insertDuoChannelsToStarredContact(context, item));
+      } // if starred and has a default channel, leave it as is, the user knows what they want.
+    }
+    return newSpeedDialItemList.build();
+  }
+
+  @MainThread
+  private SpeedDialUiItem insertDuoChannelsToStarredContact(Context context, SpeedDialUiItem item) {
+    Assert.isMainThread();
+    Assert.checkArgument(item.isStarred());
+
+    // build a new list of channels
+    ImmutableList.Builder<Channel> newChannelsList = ImmutableList.builder();
+    Channel previousChannel = item.channels().get(0);
+    newChannelsList.add(previousChannel);
+
+    for (int i = 1; i < item.channels().size(); i++) {
+      Channel currentChannel = item.channels().get(i);
+      // If the previous and current channel are voice channels, that means the previous number
+      // didn't have a video channel.
+      // If the previous number is duo reachable, insert a duo channel.
+      if (!previousChannel.isVideoTechnology()
+          && !currentChannel.isVideoTechnology()
+          && DuoComponent.get(context).getDuo().isReachable(context, previousChannel.number())) {
+        newChannelsList.add(previousChannel.toBuilder().setTechnology(Channel.DUO).build());
+      }
+      newChannelsList.add(currentChannel);
+      previousChannel = currentChannel;
+    }
+
+    // Check the last channel
+    if (!previousChannel.isVideoTechnology()
+        && DuoComponent.get(context).getDuo().isReachable(context, previousChannel.number())) {
+      newChannelsList.add(previousChannel.toBuilder().setTechnology(Channel.DUO).build());
+    }
+    return item.toBuilder().setChannels(newChannelsList.build()).build();
   }
 }
