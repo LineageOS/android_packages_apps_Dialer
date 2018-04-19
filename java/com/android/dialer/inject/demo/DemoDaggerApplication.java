@@ -50,6 +50,6 @@ public final class DemoDaggerApplication extends Application implements HasRootC
   public void onCreate() {
     super.onCreate();
 
-    DemoSubcomponent.get(this).demoObject();
+    DemoSubcomponent.get(this).demoObjects();
   }
 }
