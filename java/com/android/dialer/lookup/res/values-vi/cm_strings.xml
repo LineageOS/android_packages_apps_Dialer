@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Nhà cung cấp tra cứu người</string>
   <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Tra cứu có thể gửi truy vấn qua giao thức an toàn (https) tới các trang web từ xa để thu thập thông tin. Truy vấn có thể bao gồm số điện thoại của bên kia hoặc truy vấn tìm kiếm</string>
 </resources>

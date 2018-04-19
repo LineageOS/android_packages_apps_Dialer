@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Furnizor de căutare a persoanelor</string>
   <string name="reverse_lookup_provider_title">Furnizor de căutare inversă</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Căutările pot trimite interogări peste un protocol securizat (https) la site-uri web de la distanță pentru a colecta informaţii. Interogarea poate include numărul de telefon al celeilalte părţi sau interogarea căutării</string>
 </resources>

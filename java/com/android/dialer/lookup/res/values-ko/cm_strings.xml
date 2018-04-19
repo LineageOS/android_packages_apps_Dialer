@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">사람 검색 제공자</string>
   <string name="reverse_lookup_provider_title">역방향 검색 제공자</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">검색 기능은 정보 수집을 목적으로 https 보안 프로토콜을 사용하여 원격 웹 사이트에 쿼리를 보낼 수 있습니다. 이 쿼리에는 검색어 또는 상대방의 전화번호가 포함될 수 있습니다.</string>
 </resources>

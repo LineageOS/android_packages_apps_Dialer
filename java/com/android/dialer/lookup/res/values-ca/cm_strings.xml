@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Proveïdor de cerca de persones</string>
   <string name="reverse_lookup_provider_title">Proveïdor de cerca inversa</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Les cerques poden enviar consultes a través d\'un protocol segur (https) a llocs web remots per recopilar informació. La consulta pot incloure el número de telèfon de l\'altra part o la consulta de cerca</string>
 </resources>

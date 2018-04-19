@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Henkilön haun tarjoaja</string>
   <string name="reverse_lookup_provider_title">Käänteisen haun tarjoaja</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Haku voi lähettää kyselyjä suojatun protokollan (https) kautta etäsivustoille tietojen keräämiseksi. Kysely voi sisältää toisen osapuolen puhelinnumeron tai hakukyselyn</string>
 </resources>

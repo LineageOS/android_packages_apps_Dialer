@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
   <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Bilaketek protokolo seguru baten bidez (https) galderak bidali ditzakete urruneko webguneetara informazio bila. Galderek beste partearen telefono zenbakia eraman dezakete</string>
 </resources>

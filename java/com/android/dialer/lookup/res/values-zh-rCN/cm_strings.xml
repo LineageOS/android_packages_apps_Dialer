@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">人名查询提供商</string>
   <string name="reverse_lookup_provider_title">反向查询提供商</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">查询将会发送基于安全协议（https）的请求到远程网站以获取信息。此查询可能会包含第三方的电话号码或搜索查询。</string>
 </resources>

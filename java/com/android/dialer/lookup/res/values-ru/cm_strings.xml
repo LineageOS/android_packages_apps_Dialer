@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Провайдер поиска данных о людях</string>
   <string name="reverse_lookup_provider_title">Провайдер обратного поиска</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Поисковые запросы могут отправлять запросы по защищенному протоколу (https) на удаленные веб-сайты для сбора информации. Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
 </resources>

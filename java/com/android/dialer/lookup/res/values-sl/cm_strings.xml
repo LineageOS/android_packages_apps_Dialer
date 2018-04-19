@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Ponudnik iskanja za osebami</string>
   <string name="reverse_lookup_provider_title">Ponudnik obratnega iskanja</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Iskanja lahko pošiljajo poizvedbe prek varnega protokola (https) oddaljenim spletnim stranem za zbiranje podatkov. Poizvedba lahko vključuje telefonsko številko druge osebe ali poizvedbo iskanja</string>
 </resources>

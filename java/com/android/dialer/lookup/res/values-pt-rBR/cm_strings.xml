@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Provedor de pesquisa de pessoas</string>
   <string name="reverse_lookup_provider_title">Provedor de pesquisa inversa</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">As pesquisas podem enviar consultas usando um protocolo seguro (HTTPS) para obterem informações em sites remotos. A consulta pode incluir o número de telefone da outra pessoa ou o conteúdo da pesquisa</string>
 </resources>

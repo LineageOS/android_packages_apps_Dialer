@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">聯絡人搜尋供應商</string>
   <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">查找可以透過安全協定 (https) 向遠端網站傳送查詢以收集資訊。查詢可能包括對方的電話號碼或搜尋查詢</string>
 </resources>

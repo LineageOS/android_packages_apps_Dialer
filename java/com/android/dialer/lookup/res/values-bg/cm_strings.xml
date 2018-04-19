@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Доставчик на информация за хора</string>
   <string name="reverse_lookup_provider_title">Доставчик на информация при обратно търсене</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Търсенето може да изпраща заявки през защитен протокол (https) до отдалечени уеб сайтове, за да събира информация. Искането на другата страна може да включва телефонен номер или заявка за търсене</string>
 </resources>

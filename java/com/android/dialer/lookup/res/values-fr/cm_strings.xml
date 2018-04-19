@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Moteur de recherche sur les appelants</string>
   <string name="reverse_lookup_provider_title">Moteur de recherche inversée</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Lorsque vous effectuez des recherches, des requêtes sont susceptibles d\'être envoyées à des sites distants via un protocole sécurisé (https) pour recueillir des informations. Elles peuvent inclure le numéro de téléphone d\'un tiers ou la requête de recherche.</string>
 </resources>

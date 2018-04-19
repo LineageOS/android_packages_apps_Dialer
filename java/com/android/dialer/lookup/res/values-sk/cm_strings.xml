@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Poskytovateľ pre vyhľadávanie ľudí</string>
   <string name="reverse_lookup_provider_title">Poskytovateľ pre spätné vyhľadávanie</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Vyhľadávanie môže posielať informácie prostredníctvom zabezpečeného protokolu (https) na vzdialené webové stránky. Dopyt môže obsahovať telefónne číslo druhej strany alebo vyhľadávací dopyt</string>
 </resources>

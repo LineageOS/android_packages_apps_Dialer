@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Dienst für Personensuche</string>
   <string name="reverse_lookup_provider_title">Dienst für Rückwärtssuche</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Suchen können Abfragen an Remote-Websites über ein sicheres Protokoll (https) senden, um Informationen zu sammeln. Die Abfrage kann die Telefonnummer des anderen Teilnehmers oder die Suchanfrage enthalten</string>
 </resources>
