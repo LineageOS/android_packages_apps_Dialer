@@ -303,11 +303,24 @@ public final class SpeedDialUiItemLoader {
         SpeedDialUiItem item = SpeedDialUiItem.fromCursor(cursor);
         for (SpeedDialEntry entry : entries) {
           if (entry.contactId() == item.contactId()) {
+            // Update the id to match it's corresponding SpeedDialEntry.
+            SpeedDialUiItem.Builder entrySpeedDialItem =
+                item.toBuilder().setSpeedDialEntryId(entry.id());
+
+            // Preserve the default channel if it didn't change/still exists
+            Channel defaultChannel = entry.defaultChannel();
+            if (defaultChannel != null) {
+              if (item.channels().contains(defaultChannel)
+                  || isValidDuoDefaultChannel(item.channels(), defaultChannel)) {
+                entrySpeedDialItem.setDefaultChannel(defaultChannel);
+              }
+            }
+
             // It's impossible for two contacts to exist with the same contact id, so if this entry
             // was previously matched to a SpeedDialUiItem and is being matched again, something
             // went horribly wrong.
             Assert.checkArgument(
-                map.put(entry, item) == null,
+                map.put(entry, entrySpeedDialItem.build()) == null,
                 "Each SpeedDialEntry only has one correct SpeedDialUiItem");
           }
         }
@@ -319,6 +332,25 @@ public final class SpeedDialUiItemLoader {
       }
       return map;
     }
+  }
+
+  /**
+   * Since we can't check duo reachabliity on background threads, we have to assume the contact is
+   * still duo reachable. So we just check it is and return true if the Duo number is still
+   * associated with the contact.
+   */
+  private static boolean isValidDuoDefaultChannel(
+      ImmutableList<Channel> channels, Channel defaultChannel) {
+    if (defaultChannel.technology() != Channel.DUO) {
+      return false;
+    }
+
+    for (Channel channel : channels) {
+      if (channel.number().equals(defaultChannel.number())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @WorkerThread

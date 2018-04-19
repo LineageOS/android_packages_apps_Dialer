@@ -48,7 +48,6 @@ import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.google.common.collect.ImmutableList;
-import java.util.List;
 
 /**
  * Fragment for displaying:
@@ -185,8 +184,8 @@ public class SpeedDialFragment extends Fragment {
   private final class SpeedDialFavoritesListener implements FavoriteContactsListener {
 
     @Override
-    public void onAmbiguousContactClicked(List<Channel> channels) {
-      DisambigDialog.show(channels, getChildFragmentManager());
+    public void onAmbiguousContactClicked(SpeedDialUiItem speedDialUiItem) {
+      DisambigDialog.show(speedDialUiItem, getChildFragmentManager());
     }
 
     @Override
