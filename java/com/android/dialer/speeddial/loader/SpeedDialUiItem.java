@@ -118,6 +118,15 @@ public abstract class SpeedDialUiItem {
     return builder.build();
   }
 
+  /**
+   * The id of the corresponding SpeedDialEntry. Null if the UI item does not have an entry, for
+   * example suggested contacts (isStarred() will also be false)
+   *
+   * @see SpeedDialEntry#id()
+   */
+  @Nullable
+  public abstract Long speedDialEntryId();
+
   /** @see android.provider.ContactsContract.Contacts#DISPLAY_NAME */
   public abstract String name();
 
@@ -157,6 +166,9 @@ public abstract class SpeedDialUiItem {
   /** Builder class for speed dial contact. */
   @AutoValue.Builder
   public abstract static class Builder {
+
+    /** Set to null if {@link #isStarred()} is false. */
+    public abstract Builder setSpeedDialEntryId(@Nullable Long id);
 
     public abstract Builder setName(String name);
 

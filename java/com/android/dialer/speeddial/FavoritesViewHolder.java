@@ -34,7 +34,6 @@ import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.draghelper.SpeedDialFavoritesViewHolderOnTouchListener;
 import com.android.dialer.speeddial.draghelper.SpeedDialFavoritesViewHolderOnTouchListener.OnTouchFinishCallback;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
-import java.util.List;
 
 /** ViewHolder for starred/favorite contacts in {@link SpeedDialFragment}. */
 public class FavoritesViewHolder extends RecyclerView.ViewHolder
@@ -97,7 +96,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     if (speedDialUiItem.defaultChannel() != null) {
       listener.onClick(speedDialUiItem.defaultChannel());
     } else {
-      listener.onAmbiguousContactClicked(speedDialUiItem.channels());
+      listener.onAmbiguousContactClicked(speedDialUiItem);
     }
   }
 
@@ -117,7 +116,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   public interface FavoriteContactsListener {
 
     /** Called when the user clicks on a favorite contact that doesn't have a default number. */
-    void onAmbiguousContactClicked(List<Channel> channels);
+    void onAmbiguousContactClicked(SpeedDialUiItem speedDialUiItem);
 
     /** Called when the user clicks on a favorite contact. */
     void onClick(Channel channel);
