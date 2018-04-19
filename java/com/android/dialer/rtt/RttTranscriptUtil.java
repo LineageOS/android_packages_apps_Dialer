@@ -21,50 +21,65 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.database.Selection;
 import com.android.dialer.rtt.RttTranscriptContract.RttTranscriptColumn;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 /** Util class to save and load RTT transcript. */
 public final class RttTranscriptUtil {
 
-  private final RttTranscriptDatabaseHelper databaseHelper;
-
-  public RttTranscriptUtil(Context context) {
-    databaseHelper = new RttTranscriptDatabaseHelper(context.getApplicationContext());
+  public static ListenableFuture<ImmutableSet<String>> getAvailableRttTranscriptIds(
+      Context context, ImmutableSet<String> transcriptIds) {
+    return DialerExecutorComponent.get(context)
+        .backgroundExecutor()
+        .submit(() -> checkRttTranscriptAvailability(context, transcriptIds));
   }
 
-  @Override
-  protected void finalize() throws Throwable {
-    databaseHelper.close();
-    super.finalize();
-  }
-
-  /** @return true if there is RTT transcript available. */
   @WorkerThread
-  public boolean checkRttTranscriptAvailability(String transcriptId) {
+  private static ImmutableSet<String> checkRttTranscriptAvailability(
+      Context context, ImmutableSet<String> transcriptIds) {
     Assert.isWorkerThread();
+    RttTranscriptDatabaseHelper databaseHelper = new RttTranscriptDatabaseHelper(context);
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+    Selection selection =
+        Selection.builder()
+            .and(Selection.column(RttTranscriptColumn.TRANSCRIPT_ID).in(transcriptIds))
+            .build();
+
     try (Cursor cursor =
         databaseHelper
             .getReadableDatabase()
             .query(
                 RttTranscriptDatabaseHelper.TABLE,
                 new String[] {RttTranscriptColumn.TRANSCRIPT_ID},
-                RttTranscriptColumn.TRANSCRIPT_ID + " = ?",
-                new String[] {transcriptId},
+                selection.getSelection(),
+                selection.getSelectionArgs(),
                 null,
                 null,
                 null)) {
-      if (cursor != null && cursor.moveToFirst()) {
-        return true;
-      } else {
-        return false;
+      if (cursor != null) {
+        while (cursor.moveToNext()) {
+          builder.add(cursor.getString(0));
+        }
       }
     }
+    databaseHelper.close();
+    return builder.build();
+  }
+
+  static ListenableFuture<RttTranscript> loadRttTranscript(Context context, String transcriptId) {
+    return DialerExecutorComponent.get(context)
+        .lightweightExecutor()
+        .submit(() -> getRttTranscript(context, transcriptId));
   }
 
   @WorkerThread
-  public RttTranscript getRttTranscript(String transcriptId) {
+  private static RttTranscript getRttTranscript(Context context, String transcriptId) {
     Assert.isWorkerThread();
+    RttTranscriptDatabaseHelper databaseHelper = new RttTranscriptDatabaseHelper(context);
     try (Cursor cursor =
         databaseHelper
             .getReadableDatabase()
@@ -85,17 +100,32 @@ public final class RttTranscriptUtil {
       } else {
         return null;
       }
+    } finally {
+      databaseHelper.close();
     }
   }
 
+  public static ListenableFuture<Void> saveRttTranscript(
+      Context context, RttTranscript rttTranscript) {
+    return DialerExecutorComponent.get(context)
+        .backgroundExecutor()
+        .submit(
+            () -> {
+              save(context, rttTranscript);
+              return null;
+            });
+  }
+
   @WorkerThread
-  public void saveRttTranscript(RttTranscript rttTranscript) {
+  private static void save(Context context, RttTranscript rttTranscript) {
     Assert.isWorkerThread();
+    RttTranscriptDatabaseHelper databaseHelper = new RttTranscriptDatabaseHelper(context);
     ContentValues value = new ContentValues();
     value.put(RttTranscriptColumn.TRANSCRIPT_ID, rttTranscript.getId());
     value.put(RttTranscriptColumn.TRANSCRIPT_DATA, rttTranscript.toByteArray());
     long id =
         databaseHelper.getWritableDatabase().insert(RttTranscriptDatabaseHelper.TABLE, null, value);
+    databaseHelper.close();
     if (id < 0) {
       throw new RuntimeException("Failed to save RTT transcript");
     }
