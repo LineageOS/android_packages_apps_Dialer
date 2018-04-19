@@ -66,7 +66,8 @@ public interface Metrics {
   String GET_MOST_RECENT_INFO_TEMPLATE = "%s.GetMostRecentInfo";
   String ON_SUCCESSFUL_FILL_TEMPLATE = "%s.OnSuccessfulFill";
   String ON_SUCCESSFUL_BULK_UPDATE_TEMPLATE = "%s.OnSuccessfulBulkUpdate";
-  String LOOKUP_TEMPLATE = "%s.Lookup";
+  String LOOKUP_FOR_CALL_TEMPLATE = "%s.LookupForCall";
+  String LOOKUP_FOR_NUMBER_TEMPLATE = "%s.LookupForNumber";
 
   /** Start a timer. */
   void startTimer(String timerEventName);

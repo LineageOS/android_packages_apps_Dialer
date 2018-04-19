@@ -16,13 +16,16 @@
 
 package com.android.dialer.phonelookup.composite;
 
+import android.content.Context;
 import android.support.annotation.MainThread;
 import android.support.annotation.VisibleForTesting;
+import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.CallLogState;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.DialerFutures;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.metrics.FutureTimer;
 import com.android.dialer.metrics.FutureTimer.LogCatMode;
 import com.android.dialer.metrics.Metrics;
@@ -51,6 +54,7 @@ import javax.inject.Inject;
  */
 public final class CompositePhoneLookup {
 
+  private final Context appContext;
   private final ImmutableList<PhoneLookup> phoneLookups;
   private final FutureTimer futureTimer;
   private final CallLogState callLogState;
@@ -59,10 +63,12 @@ public final class CompositePhoneLookup {
   @VisibleForTesting
   @Inject
   public CompositePhoneLookup(
+      @ApplicationContext Context appContext,
       ImmutableList<PhoneLookup> phoneLookups,
       FutureTimer futureTimer,
       CallLogState callLogState,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
+    this.appContext = appContext;
     this.phoneLookups = phoneLookups;
     this.futureTimer = futureTimer;
     this.callLogState = callLogState;
@@ -70,12 +76,37 @@ public final class CompositePhoneLookup {
   }
 
   /**
-   * Delegates to a set of dependent lookups to build a complete {@link PhoneLookupInfo}.
+   * Delegates to a set of dependent lookups to build a complete {@link PhoneLookupInfo} for the
+   * number associated with the provided call.
    *
    * <p>Note: If any of the dependent lookups fails, the returned future will also fail. If any of
    * the dependent lookups does not complete, the returned future will also not complete.
    */
-  @SuppressWarnings({"unchecked", "rawtype"})
+  public ListenableFuture<PhoneLookupInfo> lookup(Call call) {
+    // TODO(zachh): Add short-circuiting logic so that this call is not blocked on low-priority
+    // lookups finishing when a higher-priority one has already finished.
+    List<ListenableFuture<?>> futures = new ArrayList<>();
+    for (PhoneLookup<?> phoneLookup : phoneLookups) {
+      ListenableFuture<?> lookupFuture = phoneLookup.lookup(appContext, call);
+      String eventName =
+          String.format(Metrics.LOOKUP_FOR_CALL_TEMPLATE, phoneLookup.getClass().getSimpleName());
+      futureTimer.applyTiming(lookupFuture, eventName);
+      futures.add(lookupFuture);
+    }
+    ListenableFuture<PhoneLookupInfo> combinedFuture = combineSubMessageFutures(futures);
+    String eventName =
+        String.format(Metrics.LOOKUP_FOR_CALL_TEMPLATE, CompositePhoneLookup.class.getSimpleName());
+    futureTimer.applyTiming(combinedFuture, eventName);
+    return combinedFuture;
+  }
+
+  /**
+   * Delegates to a set of dependent lookups to build a complete {@link PhoneLookupInfo} for the
+   * provided number.
+   *
+   * <p>Note: If any of the dependent lookups fails, the returned future will also fail. If any of
+   * the dependent lookups does not complete, the returned future will also not complete.
+   */
   public ListenableFuture<PhoneLookupInfo> lookup(DialerPhoneNumber dialerPhoneNumber) {
     // TODO(zachh): Add short-circuiting logic so that this call is not blocked on low-priority
     // lookups finishing when a higher-priority one has already finished.
@@ -83,26 +114,33 @@ public final class CompositePhoneLookup {
     for (PhoneLookup<?> phoneLookup : phoneLookups) {
       ListenableFuture<?> lookupFuture = phoneLookup.lookup(dialerPhoneNumber);
       String eventName =
-          String.format(Metrics.LOOKUP_TEMPLATE, phoneLookup.getClass().getSimpleName());
+          String.format(Metrics.LOOKUP_FOR_NUMBER_TEMPLATE, phoneLookup.getClass().getSimpleName());
       futureTimer.applyTiming(lookupFuture, eventName);
       futures.add(lookupFuture);
     }
-    ListenableFuture<PhoneLookupInfo> combinedFuture =
-        Futures.transform(
-            Futures.allAsList(futures),
-            infos -> {
-              Builder mergedInfo = PhoneLookupInfo.newBuilder();
-              for (int i = 0; i < infos.size(); i++) {
-                PhoneLookup phoneLookup = phoneLookups.get(i);
-                phoneLookup.setSubMessage(mergedInfo, infos.get(i));
-              }
-              return mergedInfo.build();
-            },
-            lightweightExecutorService);
+    ListenableFuture<PhoneLookupInfo> combinedFuture = combineSubMessageFutures(futures);
     String eventName =
-        String.format(Metrics.LOOKUP_TEMPLATE, CompositePhoneLookup.class.getSimpleName());
+        String.format(
+            Metrics.LOOKUP_FOR_NUMBER_TEMPLATE, CompositePhoneLookup.class.getSimpleName());
     futureTimer.applyTiming(combinedFuture, eventName);
     return combinedFuture;
+  }
+
+  /** Combines a list of sub-message futures into a future for {@link PhoneLookupInfo}. */
+  @SuppressWarnings({"unchecked", "rawtype"})
+  private ListenableFuture<PhoneLookupInfo> combineSubMessageFutures(
+      List<ListenableFuture<?>> subMessageFutures) {
+    return Futures.transform(
+        Futures.allAsList(subMessageFutures),
+        subMessages -> {
+          Builder mergedInfo = PhoneLookupInfo.newBuilder();
+          for (int i = 0; i < subMessages.size(); i++) {
+            PhoneLookup phoneLookup = phoneLookups.get(i);
+            phoneLookup.setSubMessage(mergedInfo, subMessages.get(i));
+          }
+          return mergedInfo.build();
+        },
+        lightweightExecutorService);
   }
 
   /**
