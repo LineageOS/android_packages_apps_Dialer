@@ -26,6 +26,7 @@ import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsHeaderInfo;
 import com.android.dialer.callintent.CallInitiationType;
+import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
@@ -145,9 +146,11 @@ final class Modules {
     List<HistoryItemActionModule> modules = new ArrayList<>();
 
     // Add an audio call item
-    modules.add(
-        IntentModule.newCallModule(
-            context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+    // TODO(zachh): Support post-dial digits; consider using DialerPhoneNumber.
+    CallIntentBuilder callIntentBuilder =
+        new CallIntentBuilder(normalizedNumber, CallInitiationType.Type.CALL_LOG)
+            .setPhoneAccountHandle(phoneAccountHandle);
+    modules.add(IntentModule.newCallModule(context, callIntentBuilder));
 
     // If the call log entry is for a spam call, nothing more to be done.
     if (row.getNumberAttributes().getIsSpam()) {
@@ -155,12 +158,13 @@ final class Modules {
     }
 
     // If the call log entry is for a video call, add the corresponding video call options.
+    // Note that if the entry is for a Duo video call but Duo is not available, we will fall back to
+    // a carrier video call.
     if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       modules.add(
-          isDuoCall
-              ? new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG)
-              : IntentModule.newCarrierVideoCallModule(
-                  context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+          isDuoCall && canPlaceDuoCall(context, normalizedNumber)
+              ? new DuoCallModule(context, normalizedNumber)
+              : IntentModule.newCallModule(context, callIntentBuilder.setIsVideoCall(true)));
       return modules;
     }
 
@@ -169,11 +173,9 @@ final class Modules {
     //
     // The carrier video call option takes precedence over Duo.
     if (canPlaceCarrierVideoCall(context, row)) {
-      modules.add(
-          IntentModule.newCarrierVideoCallModule(
-              context, normalizedNumber, phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder.setIsVideoCall(true)));
     } else if (canPlaceDuoCall(context, normalizedNumber)) {
-      modules.add(new DuoCallModule(context, normalizedNumber, CallInitiationType.Type.CALL_LOG));
+      modules.add(new DuoCallModule(context, normalizedNumber));
     }
 
     return modules;
