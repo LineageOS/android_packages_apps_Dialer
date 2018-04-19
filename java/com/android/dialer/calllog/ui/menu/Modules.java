@@ -149,7 +149,8 @@ final class Modules {
     // TODO(zachh): Support post-dial digits; consider using DialerPhoneNumber.
     CallIntentBuilder callIntentBuilder =
         new CallIntentBuilder(normalizedNumber, CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(phoneAccountHandle);
+            .setPhoneAccountHandle(phoneAccountHandle)
+            .setAllowAssistedDial(canSupportAssistedDialing(row));
     modules.add(IntentModule.newCallModule(context, callIntentBuilder));
 
     // If the call log entry is for a spam call, nothing more to be done.
@@ -184,8 +185,6 @@ final class Modules {
   private static HistoryItemActionModule createModuleForAccessingCallDetails(
       Context context, CoalescedRow row) {
     boolean canReportAsInvalidNumber = row.getNumberAttributes().getCanReportAsInvalidNumber();
-    boolean canSupportAssistedDialing =
-        !TextUtils.isEmpty(row.getNumberAttributes().getLookupUri());
 
     return new IntentModule(
         context,
@@ -194,7 +193,7 @@ final class Modules {
             row.getCoalescedIds(),
             createCallDetailsHeaderInfoFromRow(context, row),
             canReportAsInvalidNumber,
-            canSupportAssistedDialing),
+            canSupportAssistedDialing(row)),
         R.string.call_details_menu_label,
         R.drawable.quantum_ic_info_outline_vd_theme_24);
   }
@@ -242,5 +241,9 @@ final class Modules {
     return isCarrierVideoCallingEnabled
         && canRelyOnCarrierVideoPresence
         && row.getNumberAttributes().getCanSupportCarrierVideoCall();
+  }
+
+  private static boolean canSupportAssistedDialing(CoalescedRow row) {
+    return !TextUtils.isEmpty(row.getNumberAttributes().getLookupUri());
   }
 }
