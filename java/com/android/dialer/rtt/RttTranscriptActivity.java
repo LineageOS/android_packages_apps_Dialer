@@ -30,7 +30,6 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.protos.ProtoParsers;
-import com.google.common.util.concurrent.ListenableFuture;
 
 /** Activity holds RTT transcript. */
 public class RttTranscriptActivity extends AppCompatActivity {
@@ -80,7 +79,7 @@ public class RttTranscriptActivity extends AppCompatActivity {
     String id = intent.getStringExtra(EXTRA_TRANSCRIPT_ID);
     rttTranscriptUiListener.listen(
         this,
-        getRttTranscript(id),
+        RttTranscriptUtil.loadRttTranscript(this, id),
         adapter::setRttTranscript,
         throwable -> {
           throw new RuntimeException(throwable);
@@ -111,11 +110,5 @@ public class RttTranscriptActivity extends AppCompatActivity {
       return true;
     }
     return super.onOptionsItemSelected(item);
-  }
-
-  private ListenableFuture<RttTranscript> getRttTranscript(String id) {
-    return DialerExecutorComponent.get(this)
-        .backgroundExecutor()
-        .submit(() -> new RttTranscriptUtil(this).getRttTranscript(id));
   }
 }
