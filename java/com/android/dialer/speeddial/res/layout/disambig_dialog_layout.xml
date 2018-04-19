@@ -61,6 +61,7 @@
         android:id="@+id/remember_this_choice_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:text="@string/speed_dial_remember_this_choice"/>
   </FrameLayout>
 </LinearLayout>
