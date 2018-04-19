@@ -13,15 +13,4 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License
  -->
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.dialer.speeddial">
-
-  <application android:theme="@style/Theme.AppCompat">
-    <activity
-        android:name="com.android.dialer.speeddial.AddFavoriteActivity"
-        android:label="@string/add_favorite_activity_title"
-        android:exported="false"
-        android:theme="@style/DialtactsTheme"/>
-  </application>
-</manifest>
+<manifest package="com.android.dialer.speeddial"/>

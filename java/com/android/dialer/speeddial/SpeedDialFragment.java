@@ -18,8 +18,10 @@ package com.android.dialer.speeddial;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -73,6 +75,12 @@ public class SpeedDialFragment extends Fragment {
   private SpeedDialLayoutManager layoutManager;
   private SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
 
+  /**
+   * We update the UI every time the fragment is resumed. This boolean suppresses that functionality
+   * once per onResume call.
+   */
+  private boolean updateSpeedDialItemsOnResume = true;
+
   public static SpeedDialFragment newInstance() {
     return new SpeedDialFragment();
   }
@@ -123,6 +131,11 @@ public class SpeedDialFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
+    if (!updateSpeedDialItemsOnResume) {
+      updateSpeedDialItemsOnResume = true;
+      return;
+    }
+
     speedDialLoaderListener.listen(
         getContext(),
         UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
@@ -138,11 +151,34 @@ public class SpeedDialFragment extends Fragment {
         });
   }
 
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE) {
+      if (resultCode == AppCompatActivity.RESULT_OK && data.getData() != null) {
+        updateSpeedDialItemsOnResume = false;
+        speedDialLoaderListener.listen(
+            getContext(),
+            UiItemLoaderComponent.get(getContext())
+                .speedDialUiItemLoader()
+                .starContact(data.getData()),
+            speedDialUiItems -> {
+              adapter.setSpeedDialUiItems(speedDialUiItems);
+              // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
+              adapter.notifyDataSetChanged();
+            },
+            throwable -> {
+              throw new RuntimeException(throwable);
+            });
+      }
+    }
+  }
+
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
 
     @Override
     public void onAddFavoriteClicked() {
-      startActivity(new Intent(getContext(), AddFavoriteActivity.class));
+      Intent intent = new Intent(Intent.ACTION_PICK, Phone.CONTENT_URI);
+      startActivityForResult(intent, ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE);
     }
   }
 
