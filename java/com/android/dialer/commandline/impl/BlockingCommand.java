@@ -32,7 +32,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import javax.inject.Inject;
 
 /** Block or unblock a number. */
@@ -88,8 +87,7 @@ public class BlockingCommand implements Command {
     if ("isblocked".equals(command)) {
       String number = args.getPositionals().get(1);
       ListenableFuture<DialerPhoneNumber> dialerPhoneNumberFuture =
-          executorService.submit(
-              () -> new DialerPhoneNumberUtil(PhoneNumberUtil.getInstance()).parse(number, null));
+          executorService.submit(() -> new DialerPhoneNumberUtil().parse(number, null));
 
       ListenableFuture<PhoneLookupInfo> lookupFuture =
           Futures.transformAsync(

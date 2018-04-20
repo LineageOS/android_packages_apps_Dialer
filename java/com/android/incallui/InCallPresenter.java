@@ -513,7 +513,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
       this.inCallActivity = inCallActivity;
       this.inCallActivity.setExcludeFromRecents(false);
-      this.inCallActivity.setSpeakEasyCallManager(this.speakEasyCallManager);
 
       // By the time the UI finally comes up, the call may already be disconnected.
       // If that's the case, we may need to show an error dialog.
@@ -567,6 +566,10 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       attemptCleanup();
     }
     Trace.endSection();
+  }
+
+  public SpeakEasyCallManager getSpeakEasyCallManager() {
+    return this.speakEasyCallManager;
   }
 
   public void setManageConferenceActivity(

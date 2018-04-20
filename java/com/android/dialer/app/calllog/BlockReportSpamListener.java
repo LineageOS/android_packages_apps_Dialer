@@ -97,7 +97,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                   countryIso);
 
               if (isSpamChecked) {
-                spamBlockingPromoHelper.showSpamBlockingPromoDialog(rootView, fragmentManager);
+                showSpamBlockingPromoDialog();
               }
             },
             null)
@@ -136,8 +136,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                   },
                   number,
                   countryIso);
-
-              spamBlockingPromoHelper.showSpamBlockingPromoDialog(rootView, fragmentManager);
+              showSpamBlockingPromoDialog();
             },
             null)
         .show(fragmentManager, BlockReportSpamDialogs.BLOCK_DIALOG_TAG);
@@ -204,5 +203,14 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
             },
             null)
         .show(fragmentManager, BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
+  }
+
+  private void showSpamBlockingPromoDialog() {
+    if (spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
+      spamBlockingPromoHelper.showSpamBlockingPromoDialog(
+          fragmentManager,
+          success -> spamBlockingPromoHelper.showModifySettingOnCompleteSnackbar(rootView, success),
+          null /* onDissmissListener */);
+    }
   }
 }

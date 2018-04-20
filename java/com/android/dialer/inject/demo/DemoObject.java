@@ -16,17 +16,15 @@
 
 package com.android.dialer.inject.demo;
 
+import com.google.auto.value.AutoValue;
+
 /** Object used to demonstrate dagger bindings. */
-class DemoObject {
+@AutoValue
+abstract class DemoObject {
 
-  private final String value;
+  abstract String value();
 
-  DemoObject(String value) {
-    this.value = value;
-  }
-
-  @Override
-  public String toString() {
-    return value;
+  static DemoObject create(String value) {
+    return new AutoValue_DemoObject(value);
   }
 }

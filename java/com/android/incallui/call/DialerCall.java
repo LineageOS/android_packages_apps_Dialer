@@ -58,7 +58,6 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
-import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.duo.DuoComponent;
@@ -83,6 +82,7 @@ import com.android.dialer.theme.R;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.latencyreport.LatencyReport;
+import com.android.incallui.speakeasy.runtime.Constraints;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.duo.DuoVideoTech;
@@ -90,7 +90,6 @@ import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
 import com.android.incallui.videotech.utils.VideoUtils;
 import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -540,28 +539,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public String getCountryIso() {
     return countryIso;
-  }
-
-  /**
-   * Called when call is disconnected and removed from {@link CallList}, UI may already be destroyed
-   * at this point. This is last chance to do something for the call.
-   */
-  public void onDestroy() {
-    LogUtil.enterBlock("DialerCall.onDestroy");
-    if (rttTranscript != null) {
-      RttTranscript rttTranscriptToSave = rttTranscript;
-      ListenableFuture<Void> future =
-          DialerExecutorComponent.get(context)
-              .backgroundExecutor()
-              .submit(
-                  () -> {
-                    new RttTranscriptUtil(context).saveRttTranscript(rttTranscriptToSave);
-                    return null;
-                  });
-      Futures.addCallback(future, new DefaultFutureCallback<>(), MoreExecutors.directExecutor());
-      // Sets to null so it won't be saved again when called multiple times.
-      rttTranscript = null;
-    }
   }
 
   private void updateIsVoiceMailNumber() {
@@ -1615,8 +1592,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   void onRemovedFromCallList() {
+    LogUtil.enterBlock("DialerCall.onRemovedFromCallList");
     // Ensure we clean up when this call is removed.
     videoTechManager.dispatchRemovedFromCallList();
+    if (rttTranscript != null) {
+      Futures.addCallback(
+          RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
+      // Sets to null so it won't be saved again when called multiple times.
+      rttTranscript = null;
+    }
   }
 
   public com.android.dialer.logging.VideoTech.Type getSelectedAvailableVideoTechType() {
@@ -1646,8 +1632,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   /** Indicates the call is eligible for SpeakEasy */
   public boolean isSpeakEasyEligible() {
-    // TODO(erfanian): refactor key location
-    return ConfigProviderBindings.get(context).getBoolean("speak_easy_enabled", false);
+    if (!Constraints.isAvailable(context)) {
+      return false;
+    }
+
+    return !isPotentialEmergencyCallback()
+        && !isEmergencyCall()
+        && !isActiveRttCall()
+        && !isConferenceCall()
+        && !isVideoCall()
+        && !isVoiceMailNumber();
   }
 
   /** Indicates the user has selected SpeakEasy */

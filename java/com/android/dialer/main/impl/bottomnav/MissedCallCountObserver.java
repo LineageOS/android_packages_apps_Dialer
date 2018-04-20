@@ -62,7 +62,13 @@ public final class MissedCallCountObserver extends ContentObserver {
                           .query(
                               Calls.CONTENT_URI,
                               new String[] {Calls._ID},
-                              Calls.IS_READ + " = ? AND " + Calls.TYPE + " = ?",
+                              "("
+                                  + Calls.IS_READ
+                                  + " = ? OR "
+                                  + Calls.IS_READ
+                                  + " IS NULL) AND "
+                                  + Calls.TYPE
+                                  + " = ?",
                               new String[] {"0", Integer.toString(Calls.MISSED_TYPE)},
                               /* sortOrder= */ null)) {
                     return cursor == null ? 0 : cursor.getCount();

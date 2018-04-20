@@ -1347,9 +1347,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
     if (didShowSpeakEasyScreen) {
       if (lastShownSpeakEasyScreenUniqueCallid.equals(call.getUniqueCallId())) {
+        LogUtil.i("InCallActivity.showSpeakEasyFragment", "found existing fragment");
         return false;
       }
       hideSpeakEasyFragment(transaction);
+      LogUtil.i("InCallActivity.showSpeakEasyFragment", "hid existing fragment");
     }
 
     Optional<Fragment> speakEasyFragment = speakEasyCallManager.getSpeakEasyFragment(call);
@@ -1357,6 +1359,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       transaction.add(R.id.main, speakEasyFragment.get(), Tags.SPEAK_EASY_SCREEN);
       didShowSpeakEasyScreen = true;
       lastShownSpeakEasyScreenUniqueCallid = call.getUniqueCallId();
+      LogUtil.i(
+          "InCallActivity.showSpeakEasyFragment",
+          "set fragment for call %s",
+          lastShownSpeakEasyScreenUniqueCallid);
       return true;
     }
     return false;
@@ -1381,11 +1387,16 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     return false;
   }
 
+  @VisibleForTesting
   public void setSpeakEasyCallManager(SpeakEasyCallManager speakEasyCallManager) {
     this.speakEasyCallManager = speakEasyCallManager;
   }
 
+  @Nullable
   public SpeakEasyCallManager getSpeakEasyCallManager() {
+    if (this.speakEasyCallManager == null) {
+      this.speakEasyCallManager = InCallPresenter.getInstance().getSpeakEasyCallManager();
+    }
     return speakEasyCallManager;
   }
 

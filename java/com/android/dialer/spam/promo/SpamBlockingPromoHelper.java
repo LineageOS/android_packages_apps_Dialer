@@ -18,14 +18,16 @@ package com.android.dialer.spam.promo;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface.OnDismissListener;
 import android.preference.PreferenceManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Toast;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.spam.SpamSettings;
+import com.android.dialer.spam.SpamSettings.ModifySettingListener;
 
 /** Helper class for showing spam blocking on-boarding promotions. */
 public class SpamBlockingPromoHelper {
@@ -42,25 +44,6 @@ public class SpamBlockingPromoHelper {
     this.spamSettings = spamSettings;
   }
 
-  /** Shows a spam blocking promo dialog with on complete snackbar if all the prerequisites meet. */
-  public void showSpamBlockingPromoDialog(View view, FragmentManager fragmentManager) {
-    if (!shouldShowSpamBlockingPromo()) {
-      return;
-    }
-
-    updateLastShowSpamTimestamp();
-    Logger.get(context).logImpression(DialerImpression.Type.SPAM_BLOCKING_CALL_LOG_PROMO_SHOWN);
-    SpamBlockingPromoDialogFragment.newInstance(
-            () -> {
-              Logger.get(context)
-                  .logImpression(
-                      DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_CALL_LOG_PROMO);
-              spamSettings.modifySpamBlockingSetting(
-                  true, success -> showModifySettingOnCompleteSnackbar(view, success));
-            })
-        .show(fragmentManager, SpamBlockingPromoDialogFragment.SPAM_BLOCKING_PROMO_DIALOG_TAG);
-  }
-
   /**
    * Returns true if we should show a spam blocking promo.
    *
@@ -70,8 +53,7 @@ public class SpamBlockingPromoHelper {
    *
    * @return true if we should show a spam blocking promo.
    */
-  @VisibleForTesting
-  boolean shouldShowSpamBlockingPromo() {
+  public boolean shouldShowSpamBlockingPromo() {
     if (!ConfigProviderBindings.get(context).getBoolean(ENABLE_SPAM_BLOCKING_PROMO, false)
         || !spamSettings.isSpamEnabled()
         || !spamSettings.isSpamBlockingEnabledByFlag()
@@ -88,6 +70,40 @@ public class SpamBlockingPromoHelper {
     return lastShowMillis == 0 || System.currentTimeMillis() - lastShowMillis > showPeriodMillis;
   }
 
+  /**
+   * Shows a spam blocking promo dialog.
+   *
+   * @param fragmentManager the fragment manager to show the dialog.
+   * @param modifySettingListener the listener called after spam blocking setting is modified.
+   * @param onDismissListener the listener called when the dialog is dismissed.
+   */
+  public void showSpamBlockingPromoDialog(
+      FragmentManager fragmentManager,
+      ModifySettingListener modifySettingListener,
+      OnDismissListener onDismissListener) {
+    updateLastShowSpamTimestamp();
+    Logger.get(context).logImpression(DialerImpression.Type.SPAM_BLOCKING_CALL_LOG_PROMO_SHOWN);
+    SpamBlockingPromoDialogFragment.newInstance(
+            () -> {
+              Logger.get(context)
+                  .logImpression(
+                      DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_CALL_LOG_PROMO);
+              spamSettings.modifySpamBlockingSetting(
+                  true,
+                  success -> {
+                    if (!success) {
+                      Logger.get(context)
+                          .logImpression(
+                              DialerImpression.Type
+                                  .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_CALL_LOG_PROMO);
+                    }
+                    modifySettingListener.onComplete(success);
+                  });
+            },
+            onDismissListener)
+        .show(fragmentManager, SpamBlockingPromoDialogFragment.SPAM_BLOCKING_PROMO_DIALOG_TAG);
+  }
+
   private void updateLastShowSpamTimestamp() {
     PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
         .edit()
@@ -96,16 +112,12 @@ public class SpamBlockingPromoHelper {
   }
 
   /**
-   * Shows a modify setting on complete snackbar and a link to redirect to setting page
+   * Shows a modify setting on complete snackbar and a link to redirect to setting page.
    *
-   * @param view the view to attach on-complete notice snackbar
-   * @param success whether the modify setting operation succceeds
+   * @param view the view to attach on-complete notice snackbar.
+   * @param success whether the modify setting operation succceeds.
    */
-  private void showModifySettingOnCompleteSnackbar(View view, boolean success) {
-    if (!success) {
-      Logger.get(context)
-          .logImpression(DialerImpression.Type.SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_CALL_LOG_PROMO);
-    }
+  public void showModifySettingOnCompleteSnackbar(View view, boolean success) {
     String snackBarText =
         success
             ? context.getString(R.string.spam_blocking_settings_enable_complete_text)
@@ -117,5 +129,14 @@ public class SpamBlockingPromoHelper {
         .setActionTextColor(
             context.getResources().getColor(R.color.dialer_snackbar_action_text_color))
         .show();
+  }
+
+  /** Shows a modify setting on complete toast message. */
+  public void showModifySettingOnCompleteToast(boolean success) {
+    String toastText =
+        success
+            ? context.getString(R.string.spam_blocking_settings_enable_complete_text)
+            : context.getString(R.string.spam_blocking_settings_enable_error_text);
+    Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
   }
 }

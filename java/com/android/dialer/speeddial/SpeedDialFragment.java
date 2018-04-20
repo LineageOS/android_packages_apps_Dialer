@@ -18,8 +18,12 @@ package com.android.dialer.speeddial;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -31,6 +35,10 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.speeddial.ContextMenu.ContextMenuItemListener;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
@@ -42,7 +50,6 @@ import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.google.common.collect.ImmutableList;
-import java.util.List;
 
 /**
  * Fragment for displaying:
@@ -57,17 +64,21 @@ import java.util.List;
 public class SpeedDialFragment extends Fragment {
 
   private final SpeedDialHeaderListener headerListener = new SpeedDialFragmentHeaderListener();
-  private final FavoriteContactsListener favoritesListener = new SpeedDialFavoritesListener();
   private final SuggestedContactsListener suggestedListener = new SpeedDialSuggestedListener();
 
-  private View rootLayout;
   private ContextMenu contextMenu;
   private FrameLayout contextMenuBackground;
-  private ContextMenuItemListener contextMenuItemListener;
 
   private SpeedDialAdapter adapter;
-  private SpeedDialLayoutManager layoutManager;
   private SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
+
+  /**
+   * We update the UI every time the fragment is resumed. This boolean suppresses that functionality
+   * once per onResume call.
+   */
+  private boolean updateSpeedDialItemsOnResume = true;
+
+  private FavoriteContactsListener favoritesListener;
 
   public static SpeedDialFragment newInstance() {
     return new SpeedDialFragment();
@@ -78,22 +89,7 @@ public class SpeedDialFragment extends Fragment {
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     LogUtil.enterBlock("SpeedDialFragment.onCreateView");
-    rootLayout = inflater.inflate(R.layout.fragment_speed_dial, container, false);
-
-    // Setup our RecyclerView
-    RecyclerView recyclerView = rootLayout.findViewById(R.id.speed_dial_recycler_view);
-    adapter =
-        new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
-    layoutManager = new SpeedDialLayoutManager(getContext(), 3 /* spanCount */);
-    layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
-    recyclerView.setLayoutManager(layoutManager);
-    recyclerView.setAdapter(adapter);
-
-    // Setup drag and drop touch helper
-    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(adapter);
-    ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-    touchHelper.attachToRecyclerView(recyclerView);
-    adapter.setItemTouchHelper(touchHelper);
+    View rootLayout = inflater.inflate(R.layout.fragment_speed_dial, container, false);
 
     // Setup favorite contact context menu
     contextMenu = rootLayout.findViewById(R.id.favorite_contact_context_menu);
@@ -103,7 +99,31 @@ public class SpeedDialFragment extends Fragment {
           contextMenu.hideMenu();
           contextMenuBackground.setVisibility(View.GONE);
         });
-    contextMenuItemListener = new SpeedDialContextMenuItemListener();
+
+    // Setup our RecyclerView
+    SpeedDialLayoutManager layoutManager =
+        new SpeedDialLayoutManager(getContext(), 3 /* spanCount */);
+    favoritesListener =
+        new SpeedDialFavoritesListener(
+            getActivity(),
+            getChildFragmentManager(),
+            rootLayout,
+            contextMenu,
+            contextMenuBackground,
+            new SpeedDialContextMenuItemListener(),
+            layoutManager);
+    adapter =
+        new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
+    layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
+    RecyclerView recyclerView = rootLayout.findViewById(R.id.speed_dial_recycler_view);
+    recyclerView.setLayoutManager(layoutManager);
+    recyclerView.setAdapter(adapter);
+
+    // Setup drag and drop touch helper
+    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(adapter);
+    ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+    touchHelper.attachToRecyclerView(recyclerView);
+    adapter.setItemTouchHelper(touchHelper);
 
     speedDialLoaderListener =
         DialerExecutorComponent.get(getContext())
@@ -119,11 +139,19 @@ public class SpeedDialFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
+    if (!updateSpeedDialItemsOnResume) {
+      updateSpeedDialItemsOnResume = true;
+      return;
+    }
+
     speedDialLoaderListener.listen(
         getContext(),
         UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
         speedDialUiItems -> {
-          adapter.setSpeedDialUiItems(speedDialUiItems);
+          adapter.setSpeedDialUiItems(
+              UiItemLoaderComponent.get(getContext())
+                  .speedDialUiItemLoader()
+                  .insertDuoChannels(getContext(), speedDialUiItems));
           adapter.notifyDataSetChanged();
         },
         throwable -> {
@@ -131,26 +159,87 @@ public class SpeedDialFragment extends Fragment {
         });
   }
 
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE) {
+      if (resultCode == AppCompatActivity.RESULT_OK && data.getData() != null) {
+        updateSpeedDialItemsOnResume = false;
+        speedDialLoaderListener.listen(
+            getContext(),
+            UiItemLoaderComponent.get(getContext())
+                .speedDialUiItemLoader()
+                .starContact(data.getData()),
+            speedDialUiItems -> {
+              adapter.setSpeedDialUiItems(speedDialUiItems);
+              // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
+              adapter.notifyDataSetChanged();
+            },
+            throwable -> {
+              throw new RuntimeException(throwable);
+            });
+      }
+    }
+  }
+
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
 
     @Override
     public void onAddFavoriteClicked() {
-      startActivity(new Intent(getContext(), AddFavoriteActivity.class));
+      Intent intent = new Intent(Intent.ACTION_PICK, Phone.CONTENT_URI);
+      startActivityForResult(intent, ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE);
     }
   }
 
-  private final class SpeedDialFavoritesListener implements FavoriteContactsListener {
+  private static final class SpeedDialFavoritesListener implements FavoriteContactsListener {
+
+    private final FragmentActivity activity;
+    private final FragmentManager childFragmentManager;
+    private final View rootLayout;
+    private final ContextMenu contextMenu;
+    private final View contextMenuBackground;
+    private final ContextMenuItemListener contextMenuListener;
+    private final SpeedDialLayoutManager layoutManager;
+
+    SpeedDialFavoritesListener(
+        FragmentActivity activity,
+        FragmentManager childFragmentManager,
+        View rootLayout,
+        ContextMenu contextMenu,
+        View contextMenuBackground,
+        ContextMenuItemListener contextMenuListener,
+        SpeedDialLayoutManager layoutManager) {
+      this.activity = activity;
+      this.childFragmentManager = childFragmentManager;
+      this.rootLayout = rootLayout;
+      this.contextMenu = contextMenu;
+      this.contextMenuBackground = contextMenuBackground;
+      this.contextMenuListener = contextMenuListener;
+      this.layoutManager = layoutManager;
+    }
 
     @Override
-    public void onAmbiguousContactClicked(List<Channel> channels) {
-      DisambigDialog.show(channels, getChildFragmentManager());
+    public void onAmbiguousContactClicked(SpeedDialUiItem speedDialUiItem) {
+      // If there is only one channel, skip the menu and place a call directly
+      if (speedDialUiItem.channels().size() == 1) {
+        onClick(speedDialUiItem.channels().get(0));
+        return;
+      }
+
+      DisambigDialog.show(speedDialUiItem, childFragmentManager);
     }
 
     @Override
     public void onClick(Channel channel) {
-      // TODO(calderwoodra): add logic for duo video calls
+      if (channel.technology() == Channel.DUO) {
+        Logger.get(activity)
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
+        Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, channel.number());
+        activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+        return;
+      }
+
       PreCall.start(
-          getContext(),
+          activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
               .setIsVideoCall(channel.isVideoTechnology()));
     }
@@ -158,7 +247,7 @@ public class SpeedDialFragment extends Fragment {
     @Override
     public void showContextMenu(View view, SpeedDialUiItem speedDialUiItem) {
       layoutManager.setScrollEnabled(false);
-      contextMenu.showMenu(rootLayout, view, speedDialUiItem, contextMenuItemListener);
+      contextMenu.showMenu(rootLayout, view, speedDialUiItem, contextMenuListener);
     }
 
     @Override
@@ -181,14 +270,25 @@ public class SpeedDialFragment extends Fragment {
   private final class SpeedDialSuggestedListener implements SuggestedContactsListener {
 
     @Override
-    public void onOverFlowMenuClicked(String number) {
+    public void onOverFlowMenuClicked(SpeedDialUiItem speedDialUiItem) {
       // TODO(calderwoodra) show overflow menu for suggested contacts
     }
 
     @Override
-    public void onRowClicked(String number) {
+    public void onRowClicked(Channel channel) {
+      if (channel.technology() == Channel.DUO) {
+        Logger.get(getContext())
+            .logImpression(
+                DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_SUGGESTED_CONTACT);
+        Intent intent =
+            DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+        getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+        return;
+      }
       PreCall.start(
-          getContext(), new CallIntentBuilder(number, CallInitiationType.Type.SPEED_DIAL));
+          getContext(),
+          new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setIsVideoCall(channel.isVideoTechnology()));
     }
   }
 

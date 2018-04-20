@@ -30,7 +30,6 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-import android.support.annotation.WorkerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,15 +54,17 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.rtt.RttTranscriptActivity;
 import com.android.dialer.rtt.RttTranscriptUtil;
 import com.google.common.base.Preconditions;
-import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.collect.ImmutableSet;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -84,6 +85,8 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   public static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
 
+  private final CallDetailsEntryViewHolder.CallDetailsEntryListener callDetailsEntryListener =
+      new CallDetailsEntryListener(this);
   private final CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener =
       new CallDetailsHeaderListener(this);
   private final CallDetailsFooterViewHolder.DeleteCallDetailsListener deleteCallDetailsListener =
@@ -96,7 +99,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   private CallDetailsAdapterCommon adapter;
   private CallDetailsEntries callDetailsEntries;
-  private UiListener<CallDetailsEntries> checkRttTranscriptAvailabilityListener;
+  private UiListener<ImmutableSet<String>> checkRttTranscriptAvailabilityListener;
 
   /**
    * Handles the intent that launches {@link OldCallDetailsActivity} or {@link CallDetailsActivity},
@@ -106,6 +109,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   /** Creates an adapter for {@link OldCallDetailsActivity} or {@link CallDetailsActivity}. */
   protected abstract CallDetailsAdapterCommon createAdapter(
+      CallDetailsEntryViewHolder.CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderViewHolder.CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
       CallDetailsFooterViewHolder.DeleteCallDetailsListener deleteCallDetailsListener);
@@ -155,40 +159,28 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
   }
 
   protected void loadRttTranscriptAvailability() {
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
+      builder.add(entry.getCallMappingId());
+    }
     checkRttTranscriptAvailabilityListener.listen(
         this,
-        checkRttTranscriptAvailability(),
-        this::setCallDetailsEntries,
+        RttTranscriptUtil.getAvailableRttTranscriptIds(this, builder.build()),
+        this::updateCallDetailsEntriesWithRttTranscriptAvailability,
         throwable -> {
           throw new RuntimeException(throwable);
         });
   }
 
-  private ListenableFuture<CallDetailsEntries> checkRttTranscriptAvailability() {
-    return DialerExecutorComponent.get(this)
-        .backgroundExecutor()
-        .submit(() -> checkRttTranscriptAvailabilityInBackground(callDetailsEntries));
-  }
-
-  /**
-   * Check RTT transcript availability.
-   *
-   * @param input the original {@link CallDetailsEntries}
-   * @return {@link CallDetailsEntries} with updated RTT transcript availability.
-   */
-  @WorkerThread
-  private CallDetailsEntries checkRttTranscriptAvailabilityInBackground(
-      @Nullable CallDetailsEntries input) {
-    RttTranscriptUtil rttTranscriptUtil = new RttTranscriptUtil(this);
-
+  private void updateCallDetailsEntriesWithRttTranscriptAvailability(
+      ImmutableSet<String> availableTranscripIds) {
     CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
-    for (CallDetailsEntry entry : input.getEntriesList()) {
+    for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
       CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
-      newEntry.setHasRttTranscript(
-          rttTranscriptUtil.checkRttTranscriptAvailability(String.valueOf(entry.getDate())));
+      newEntry.setHasRttTranscript(availableTranscripIds.contains(entry.getCallMappingId()));
       mutableCallDetailsEntries.addEntries(newEntry.build());
     }
-    return mutableCallDetailsEntries.build();
+    setCallDetailsEntries(mutableCallDetailsEntries.build());
   }
 
   @Override
@@ -212,7 +204,11 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   private void setupRecyclerViewForEntries() {
     adapter =
-        createAdapter(callDetailsHeaderListener, reportCallIdListener, deleteCallDetailsListener);
+        createAdapter(
+            callDetailsEntryListener,
+            callDetailsHeaderListener,
+            reportCallIdListener,
+            deleteCallDetailsListener);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -285,6 +281,26 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
       }
 
       return idStrings;
+    }
+  }
+
+  private static final class CallDetailsEntryListener
+      implements CallDetailsEntryViewHolder.CallDetailsEntryListener {
+    private final WeakReference<CallDetailsActivityCommon> activityWeakReference;
+
+    CallDetailsEntryListener(CallDetailsActivityCommon activity) {
+      this.activityWeakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    public void showRttTranscript(String transcriptId, String primaryText, PhotoInfo photoInfo) {
+      getActivity()
+          .startActivity(
+              RttTranscriptActivity.getIntent(getActivity(), transcriptId, primaryText, photoInfo));
+    }
+
+    private CallDetailsActivityCommon getActivity() {
+      return Preconditions.checkNotNull(activityWeakReference.get());
     }
   }
 

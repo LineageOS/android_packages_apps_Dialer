@@ -17,37 +17,59 @@
 package com.android.dialer.speeddial;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.constants.ActivityRequestCodes;
+import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import com.android.dialer.speeddial.database.SpeedDialEntryDatabaseHelper;
+import com.android.dialer.speeddial.loader.SpeedDialUiItem;
+import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.util.List;
 import java.util.Set;
 
 /** Disambiguation dialog for favorite contacts in {@link SpeedDialFragment}. */
 public class DisambigDialog extends DialogFragment {
 
+  @VisibleForTesting public static final String FRAGMENT_TAG = "disambig_dialog";
   private final Set<String> phoneNumbers = new ArraySet<>();
 
+  private SpeedDialUiItem speedDialUiItem;
   @VisibleForTesting public List<Channel> channels;
   @VisibleForTesting public LinearLayout container;
+  private CheckBox rememberThisChoice;
 
   /** Show a disambiguation dialog for a starred contact without a favorite communication avenue. */
-  public static DisambigDialog show(List<Channel> channels, FragmentManager manager) {
+  public static DisambigDialog show(SpeedDialUiItem speedDialUiItem, FragmentManager manager) {
     DisambigDialog dialog = new DisambigDialog();
-    dialog.channels = channels;
-    dialog.show(manager, null);
+    dialog.speedDialUiItem = speedDialUiItem;
+    dialog.channels = speedDialUiItem.channels();
+    dialog.show(manager, FRAGMENT_TAG);
     return dialog;
   }
 
@@ -57,6 +79,7 @@ public class DisambigDialog extends DialogFragment {
     // TODO(calderwoodra): set max height of the scrollview. Might need to override onMeasure.
     View view = inflater.inflate(R.layout.disambig_dialog_layout, null, false);
     container = view.findViewById(R.id.communication_avenue_container);
+    rememberThisChoice = view.findViewById(R.id.remember_this_choice_checkbox);
     insertOptions(container.findViewById(R.id.communication_avenue_container), channels);
     return new AlertDialog.Builder(getActivity()).setView(view).create();
   }
@@ -127,8 +150,20 @@ public class DisambigDialog extends DialogFragment {
   }
 
   private void onVideoOptionClicked(Channel channel) {
-    // TODO(calderwoodra): save this option if remember is checked
-    // TODO(calderwoodra): place a duo call if possible
+    if (rememberThisChoice.isChecked()) {
+      setDefaultChannel(getContext().getApplicationContext(), speedDialUiItem, channel);
+    }
+
+    if (channel.technology() == Channel.DUO) {
+      Logger.get(getContext())
+          .logImpression(
+              DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT_DISAMBIG);
+      Intent intent =
+          DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+      getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+      return;
+    }
+
     PreCall.start(
         getContext(),
         new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
@@ -137,9 +172,42 @@ public class DisambigDialog extends DialogFragment {
   }
 
   private void onVoiceOptionClicked(Channel channel) {
-    // TODO(calderwoodra): save this option if remember is checked
+    if (rememberThisChoice.isChecked()) {
+      setDefaultChannel(getContext().getApplicationContext(), speedDialUiItem, channel);
+    }
+
     PreCall.start(
         getContext(), new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL));
     dismiss();
+  }
+
+  private static void setDefaultChannel(Context appContext, SpeedDialUiItem item, Channel channel) {
+    LogUtil.enterBlock("DisambigDialog.setDefaultChannel");
+    ListenableFuture<Void> future =
+        DialerExecutorComponent.get(appContext)
+            .backgroundExecutor()
+            .submit(
+                () -> {
+                  updateDatabaseEntry(appContext, item, channel);
+                  return null;
+                });
+    Futures.addCallback(
+        future,
+        new DefaultFutureCallback<>(),
+        DialerExecutorComponent.get(appContext).backgroundExecutor());
+  }
+
+  @WorkerThread
+  private static void updateDatabaseEntry(
+      Context appContext, SpeedDialUiItem item, Channel channel) {
+    Assert.isWorkerThread();
+    SpeedDialEntry entry =
+        SpeedDialEntry.builder()
+            .setId(item.speedDialEntryId())
+            .setContactId(item.contactId())
+            .setLookupKey(item.lookupKey())
+            .setDefaultChannel(channel)
+            .build();
+    new SpeedDialEntryDatabaseHelper(appContext).update(ImmutableList.of(entry));
   }
 }

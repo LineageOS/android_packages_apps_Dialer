@@ -20,9 +20,12 @@ package com.android.dialer.calldetails;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
 import com.android.dialer.dialercontact.DialerContact;
+import com.android.dialer.glidephotomanager.PhotoInfo;
+import com.android.dialer.lettertile.LetterTileDrawable;
 
 /**
  * A {@link RecyclerView.Adapter} for {@link OldCallDetailsActivity}.
@@ -39,12 +42,14 @@ final class OldCallDetailsAdapter extends CallDetailsAdapterCommon {
       Context context,
       DialerContact contact,
       CallDetailsEntries callDetailsEntries,
+      CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
       DeleteCallDetailsListener deleteCallDetailsListener) {
     super(
         context,
         callDetailsEntries,
+        callDetailsEntryListener,
         callDetailsHeaderListener,
         reportCallIdListener,
         deleteCallDetailsListener);
@@ -69,5 +74,33 @@ final class OldCallDetailsAdapter extends CallDetailsAdapterCommon {
   @Override
   protected String getNumber() {
     return contact.getNumber();
+  }
+
+  @Override
+  protected String getPrimaryText() {
+    return contact.getNameOrNumber();
+  }
+
+  @Override
+  protected PhotoInfo getPhotoInfo() {
+    PhotoInfo.Builder builder =
+        PhotoInfo.newBuilder()
+            .setPhotoUri(contact.getPhotoUri())
+            .setPhotoId(contact.getPhotoId())
+            .setName(contact.getNameOrNumber())
+            .setLookupUri(contact.getContactUri());
+    switch (contact.getContactType()) {
+      case LetterTileDrawable.TYPE_VOICEMAIL:
+        builder.setIsVoicemail(true);
+        break;
+      case LetterTileDrawable.TYPE_BUSINESS:
+        builder.setIsBusiness(true);
+        break;
+      case LetterTileDrawable.TYPE_SPAM:
+        builder.setIsSpam(true);
+        break;
+      default: // fall out
+    }
+    return builder.build();
   }
 }
