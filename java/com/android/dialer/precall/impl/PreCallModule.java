@@ -17,15 +17,31 @@
 package com.android.dialer.precall.impl;
 
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.precall.PreCallAction;
+import com.google.common.collect.ImmutableList;
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import javax.inject.Singleton;
 
 /** Dagger module for {@link PreCall}. */
 @Module
 public abstract class PreCallModule {
 
+  private PreCallModule() {}
+
   @Binds
   @Singleton
-  public abstract PreCall bindPreCall(PreCallImpl simulator);
+  public abstract PreCall to(PreCallImpl impl);
+
+  @Provides
+  @Singleton
+  public static ImmutableList<PreCallAction> provideActions() {
+    return ImmutableList.of(
+        new PermissionCheckAction(),
+        new MalformedNumberRectifier(
+            ImmutableList.of(new UkRegionPrefixInInternationalFormatHandler())),
+        new CallingAccountSelector(),
+        new AssistedDialAction());
+  }
 }

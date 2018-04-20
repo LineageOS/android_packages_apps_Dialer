@@ -19,23 +19,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.telecom.Call;
-import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
-import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * Fetches the current {@link PhoneLookupInfo} for the provided call and writes it to the
@@ -52,25 +47,8 @@ final class PhoneLookupHistoryRecorder {
       return;
     }
 
-    ListeningExecutorService backgroundExecutor =
-        DialerExecutorComponent.get(appContext).backgroundExecutor();
-
-    ListenableFuture<DialerPhoneNumber> numberFuture =
-        backgroundExecutor.submit(
-            () -> {
-              DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
-              return dialerPhoneNumberUtil.parse(
-                  TelecomCallUtil.getNumber(call), GeoUtil.getCurrentCountryIso(appContext));
-            });
-
     ListenableFuture<PhoneLookupInfo> infoFuture =
-        Futures.transformAsync(
-            numberFuture,
-            dialerPhoneNumber ->
-                PhoneLookupComponent.get(appContext)
-                    .compositePhoneLookup()
-                    .lookup(dialerPhoneNumber),
-            MoreExecutors.directExecutor());
+        PhoneLookupComponent.get(appContext).compositePhoneLookup().lookup(call);
 
     Futures.addCallback(
         infoFuture,
@@ -103,6 +81,6 @@ final class PhoneLookupHistoryRecorder {
                 "PhoneLookupHistoryRecorder.onFailure", "could not write PhoneLookupHistory", t);
           }
         },
-        backgroundExecutor);
+        DialerExecutorComponent.get(appContext).backgroundExecutor());
   }
 }

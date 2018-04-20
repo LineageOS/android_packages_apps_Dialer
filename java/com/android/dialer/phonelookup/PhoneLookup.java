@@ -16,11 +16,20 @@
 
 package com.android.dialer.phonelookup;
 
+import android.content.Context;
 import android.support.annotation.MainThread;
+import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.android.dialer.telecom.TelecomCallUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * Provides operations related to retrieving information about phone numbers.
@@ -32,11 +41,44 @@ import com.google.common.util.concurrent.ListenableFuture;
 public interface PhoneLookup<T> {
 
   /**
+   * Returns a future containing a new info for the number associated with the provided call.
+   *
+   * <p>The returned message should contain populated data for the sub-message corresponding to this
+   * {@link PhoneLookup}. For example, the CP2 implementation returns a {@link
+   * PhoneLookupInfo.Cp2Info} sub-message.
+   *
+   * <p>The default implementation is for all {@link PhoneLookup} implementations that don't need
+   * info in the given call, i.e., it simply extracts the phone number from the call and delegates
+   * to {@link #lookup(DialerPhoneNumber)}.
+   *
+   * <p>However, for {@link PhoneLookup} implementations that need info in the call (such as one for
+   * CNAP), they should override this method.
+   */
+  default ListenableFuture<T> lookup(Context appContext, Call call) {
+    ListeningExecutorService backgroundExecutor =
+        DialerExecutorComponent.get(appContext).backgroundExecutor();
+
+    ListenableFuture<DialerPhoneNumber> numberFuture =
+        backgroundExecutor.submit(
+            () -> {
+              DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
+              return dialerPhoneNumberUtil.parse(
+                  TelecomCallUtil.getNumber(call), GeoUtil.getCurrentCountryIso(appContext));
+            });
+
+    return Futures.transformAsync(numberFuture, this::lookup, MoreExecutors.directExecutor());
+  }
+
+  /**
    * Returns a future containing a new info for the provided number.
    *
    * <p>The returned message should contain populated data for the sub-message corresponding to this
    * {@link PhoneLookup}. For example, the CP2 implementation returns a {@link
    * PhoneLookupInfo.Cp2Info} sub-message.
+   *
+   * <p>If the lookup can't be done without info in a {@link Call} (e.g., CNAP), this method is
+   * expected to return existing info saved during the most recent lookup for a call to/from the
+   * provided number ({@link #lookup(Context, Call)}).
    */
   ListenableFuture<T> lookup(DialerPhoneNumber dialerPhoneNumber);
 

@@ -25,7 +25,6 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.precall.PreCallAction;
-import com.android.dialer.precall.PreCallComponent;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.google.common.collect.ImmutableList;
 import javax.inject.Inject;
@@ -33,17 +32,16 @@ import javax.inject.Inject;
 /** Implementation of {@link PreCall} */
 public class PreCallImpl implements PreCall {
 
+  private final ImmutableList<PreCallAction> actions;
+
   @Inject
-  PreCallImpl() {}
+  PreCallImpl(ImmutableList<PreCallAction> actions) {
+    this.actions = actions;
+  }
 
   @Override
   public ImmutableList<PreCallAction> getActions() {
-    return ImmutableList.of(
-        new PermissionCheckAction(),
-        new MalformedNumberRectifier(
-            ImmutableList.of(new UkRegionPrefixInInternationalFormatHandler())),
-        new CallingAccountSelector(),
-        new AssistedDialAction());
+    return actions;
   }
 
   @NonNull
@@ -52,7 +50,7 @@ public class PreCallImpl implements PreCall {
     Logger.get(context).logImpression(DialerImpression.Type.PRECALL_INITIATED);
     if (!requiresUi(context, builder)) {
       LogUtil.i("PreCallImpl.buildIntent", "No UI requested, running pre-call directly");
-      for (PreCallAction action : PreCallComponent.get(context).getPreCall().getActions()) {
+      for (PreCallAction action : actions) {
         action.runWithoutUi(context, builder);
       }
       return builder.build();
@@ -64,7 +62,7 @@ public class PreCallImpl implements PreCall {
   }
 
   private boolean requiresUi(Context context, CallIntentBuilder builder) {
-    for (PreCallAction action : PreCallComponent.get(context).getPreCall().getActions()) {
+    for (PreCallAction action : actions) {
       if (action.requiresUi(context, builder)) {
         LogUtil.i("PreCallImpl.requiresUi", action + " requested UI");
         return true;
