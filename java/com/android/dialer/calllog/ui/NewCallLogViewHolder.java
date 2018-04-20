@@ -15,8 +15,7 @@
  */
 package com.android.dialer.calllog.ui;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
@@ -34,13 +33,14 @@ import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllog.ui.NewCallLogAdapter.PopCounts;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogEntryText;
-import com.android.dialer.calllogutils.CallLogIntents;
+import com.android.dialer.calllogutils.CallLogRowActions;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.time.Clock;
 import com.android.dialer.widget.ContactPhotoView;
@@ -52,7 +52,7 @@ import java.util.concurrent.ExecutorService;
 /** {@link RecyclerView.ViewHolder} for the new call log. */
 final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
-  private final Context context;
+  private final Activity activity;
   private final ContactPhotoView contactPhotoView;
   private final TextView primaryTextView;
   private final TextView callCountTextView;
@@ -74,7 +74,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   NewCallLogViewHolder(
       View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor, PopCounts popCounts) {
     super(view);
-    this.context = view.getContext();
+    this.activity = (Activity) view.getContext();
     contactPhotoView = view.findViewById(R.id.contact_photo_view);
     primaryTextView = view.findViewById(R.id.primary_text);
     callCountTextView = view.findViewById(R.id.call_count);
@@ -89,7 +89,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     this.clock = clock;
     this.realtimeRowProcessor = realtimeRowProcessor;
     this.popCounts = popCounts;
-    uiExecutorService = DialerExecutorComponent.get(context).uiExecutor();
+    uiExecutorService = DialerExecutorComponent.get(activity).uiExecutor();
   }
 
   /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */
@@ -112,8 +112,8 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void displayRow(CoalescedRow row) {
     // TODO(zachh): Handle RTL properly.
-    primaryTextView.setText(CallLogEntryText.buildPrimaryText(context, row));
-    secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(context, clock, row));
+    primaryTextView.setText(CallLogEntryText.buildPrimaryText(activity, row));
+    secondaryTextView.setText(CallLogEntryText.buildSecondaryTextForEntries(activity, clock, row));
 
     if (isUnreadMissedCall(row)) {
       primaryTextView.setTextAppearance(R.style.primary_textview_unread_call);
@@ -168,7 +168,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private void setFeatureIcons(CoalescedRow row) {
     ColorStateList colorStateList =
         ColorStateList.valueOf(
-            context.getColor(
+            activity.getColor(
                 isUnreadMissedCall(row)
                     ? R.color.feature_icon_unread_color
                     : R.color.feature_icon_read_color));
@@ -182,7 +182,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     }
 
     // Handle Wifi Icon
-    if (MotorolaUtils.shouldShowWifiIconInCallLog(context, row.getFeatures())) {
+    if (MotorolaUtils.shouldShowWifiIconInCallLog(activity, row.getFeatures())) {
       wifiIcon.setVisibility(View.VISIBLE);
       wifiIcon.setImageTintList(colorStateList);
     } else {
@@ -229,10 +229,10 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
     if (isUnreadMissedCall(row)) {
       callTypeIcon.setImageTintList(
-          ColorStateList.valueOf(context.getColor(R.color.call_type_icon_unread_color)));
+          ColorStateList.valueOf(activity.getColor(R.color.call_type_icon_unread_color)));
     } else {
       callTypeIcon.setImageTintList(
-          ColorStateList.valueOf(context.getColor(R.color.call_type_icon_read_color)));
+          ColorStateList.valueOf(activity.getColor(R.color.call_type_icon_read_color)));
     }
   }
 
@@ -245,17 +245,19 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       return;
     }
 
-    String phoneAccountLabel = PhoneAccountUtils.getAccountLabel(context, phoneAccountHandle);
+    String phoneAccountLabel = PhoneAccountUtils.getAccountLabel(activity, phoneAccountHandle);
     if (TextUtils.isEmpty(phoneAccountLabel)) {
       phoneAccountView.setVisibility(View.GONE);
       return;
     }
 
     @ColorInt
-    int phoneAccountColor = PhoneAccountUtils.getAccountColor(context, phoneAccountHandle);
+    int phoneAccountColor = PhoneAccountUtils.getAccountColor(activity, phoneAccountHandle);
     if (phoneAccountColor == PhoneAccount.NO_HIGHLIGHT_COLOR) {
       phoneAccountColor =
-          context.getResources().getColor(R.color.dialer_secondary_text_color, context.getTheme());
+          activity
+              .getResources()
+              .getColor(R.color.dialer_secondary_text_color, activity.getTheme());
     }
 
     phoneAccountView.setText(phoneAccountLabel);
@@ -264,17 +266,15 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setOnClickListenerForRow(CoalescedRow row) {
-    itemView.setOnClickListener(
-        (view) -> {
-          Intent callbackIntent = CallLogIntents.getCallBackIntent(context, row);
-          if (callbackIntent != null) {
-            context.startActivity(callbackIntent);
-          }
-        });
+    if (!PhoneNumberHelper.canPlaceCallsTo(
+        row.getNumber().getNormalizedNumber(), row.getNumberPresentation())) {
+      return;
+    }
+    itemView.setOnClickListener(view -> CallLogRowActions.startCallForRow(activity, row));
   }
 
   private void setOnClickListenerForMenuButon(CoalescedRow row) {
-    menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(context, row));
+    menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(activity, row));
   }
 
   private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {

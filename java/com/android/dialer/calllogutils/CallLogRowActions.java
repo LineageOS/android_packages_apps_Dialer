@@ -15,39 +15,29 @@
  */
 package com.android.dialer.calllogutils;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity;
 import android.provider.CallLog.Calls;
-import android.support.annotation.Nullable;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
-import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.telecom.TelecomUtil;
 
-/** Provides intents related to call log entries. */
-public final class CallLogIntents {
+/** Actions which can be performed on a call log row. */
+public final class CallLogRowActions {
 
   /**
-   * Returns an intent which can be used to call back for the provided row.
+   * Places a call to the number in the provided {@link CoalescedRow}.
    *
    * <p>If the call was a video call, a video call will be placed, and if the call was an audio
-   * call, an audio call will be placed.
-   *
-   * @return null if the provided {@code row} doesn't have a number
+   * call, an audio call will be placed. The phone account corresponding to the row is used.
    */
-  @Nullable
-  public static Intent getCallBackIntent(Context context, CoalescedRow row) {
-    String normalizedNumber = row.getNumber().getNormalizedNumber();
-    if (!PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.getNumberPresentation())) {
-      return null;
-    }
-
+  public static void startCallForRow(Activity activity, CoalescedRow row) {
     // TODO(zachh): More granular logging?
-    return PreCall.getIntent(
-        context,
-        new CallIntentBuilder(normalizedNumber, CallInitiationType.Type.CALL_LOG)
+    PreCall.start(
+        activity,
+        new CallIntentBuilder(
+                row.getNumber().getNormalizedNumber(), CallInitiationType.Type.CALL_LOG)
             .setPhoneAccountHandle(
                 TelecomUtil.composePhoneAccountHandle(
                     row.getPhoneAccountComponentName(), row.getPhoneAccountId()))
