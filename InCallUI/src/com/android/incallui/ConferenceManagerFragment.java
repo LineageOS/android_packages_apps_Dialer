@@ -101,12 +101,14 @@ public class ConferenceManagerFragment
         ActionBar actionBar = getActivity().getActionBar();
         boolean isDsdaEnabled = CallList.getInstance().isDsdaEnabled();
         if (isVisible) {
-            actionBar.setTitle(R.string.manageConferenceLabel);
-            actionBar.setElevation(mActionBarElevation);
-            if (!isDsdaEnabled) {
-                actionBar.setHideOffset(0);
+            if (actionBar != null) {
+                actionBar.setTitle(R.string.manageConferenceLabel);
+                actionBar.setElevation(mActionBarElevation);
+                if (!isDsdaEnabled) {
+                    actionBar.setHideOffset(0);
+                }
+                actionBar.show();
             }
-            actionBar.show();
 
             final CallList calls = CallList.getInstance();
             getPresenter().init(getActivity(), calls);
@@ -114,9 +116,11 @@ public class ConferenceManagerFragment
             // that once the list of participants is shown, the first participant is announced.
             mConferenceParticipantList.requestFocus();
         } else {
-            actionBar.setElevation(0);
-            if (!isDsdaEnabled) {
-                actionBar.setHideOffset(actionBar.getHeight());
+            if (actionBar != null) {
+                actionBar.setElevation(0);
+                if (!isDsdaEnabled) {
+                    actionBar.setHideOffset(actionBar.getHeight());
+                }
             }
         }
     }
