@@ -507,7 +507,10 @@ public class CallLogAdapter extends GroupingListAdapter
         }
 
         int count = getGroupSize(position);
-        final String phoneNumber = c.getString(CallLogQuery.NUMBER);
+        String phoneNumber = c.getString(CallLogQuery.NUMBER);
+        if (phoneNumber == null) {
+            phoneNumber = "";
+        }
         Pattern pattern = Pattern.compile("[,;]");
         String[] num = pattern.split(phoneNumber);
         final String countryIso = c.getString(CallLogQuery.COUNTRY_ISO);
