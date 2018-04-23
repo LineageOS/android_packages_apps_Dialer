@@ -13,7 +13,8 @@ package com.android.dialer.phonelookup;
 // to an implementation of PhoneLookup. For example, field
 // "cp2_info_in_default_directory" corresponds to class
 // Cp2DefaultDirectoryPhoneLookup, and class Cp2DefaultDirectoryPhoneLookup
-// alone is responsible for populating it. Next ID: 7
+// alone is responsible for populating it.
+// Next ID: 8
 message PhoneLookupInfo {
   // Information about a PhoneNumber retrieved from CP2.
   message Cp2Info {
@@ -154,4 +155,12 @@ message PhoneLookupInfo {
     optional BlockedState blocked_state = 1;
   }
   optional SystemBlockedNumberInfo system_blocked_number_info = 4;
+
+  // Information obtained via CNAP
+  // (https://en.wikipedia.org/wiki/Calling_Name_Presentation)
+  // Next ID: 2
+  message CnapInfo {
+    optional string name = 1;
+  }
+  optional CnapInfo cnap_info = 7;
 }
