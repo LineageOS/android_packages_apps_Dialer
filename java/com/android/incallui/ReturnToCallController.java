@@ -191,6 +191,9 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
         && !InCallPresenter.getInstance().isShowingInCallUi()) {
       LogUtil.i("ReturnToCallController.onCallListChange", "going to show bubble");
       show();
+    } else {
+      // The call to display might be different for the existing bubble
+      startContactInfoSearch();
     }
   }
 
