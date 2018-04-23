@@ -268,7 +268,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private SpeakEasyCallManager speakEasyCallManager;
 
-  private boolean shouldStartInBubbleMode;
   private boolean audioRouteSetForBubbleMode;
 
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
@@ -336,8 +335,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       ContactInfoCache contactInfoCache,
       ProximitySensor proximitySensor,
       FilteredNumberAsyncQueryHandler filteredNumberQueryHandler,
-      @NonNull SpeakEasyCallManager speakEasyCallManager,
-      Intent intent) {
+      @NonNull SpeakEasyCallManager speakEasyCallManager) {
     Trace.beginSection("InCallPresenter.setUp");
     if (serviceConnected) {
       LogUtil.i("InCallPresenter.setUp", "New service connection replacing existing one.");
@@ -403,8 +401,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     addInCallUiListener(motorolaInCallUiNotifier);
     addListener(motorolaInCallUiNotifier);
 
-    this.shouldStartInBubbleMode = shouldStartInBubbleMode(intent);
-
     LogUtil.d("InCallPresenter.setUp", "Finished InCallPresenter.setUp");
     Trace.endSection();
   }
@@ -413,15 +409,33 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
    * Return whether we should start call in bubble mode and not show InCallActivity. The call mode
    * should be set in CallConfiguration in EXTRA_OUTGOING_CALL_EXTRAS when starting a call intent.
    */
-  private boolean shouldStartInBubbleMode(Intent intent) {
+  private boolean shouldStartInBubbleMode() {
     if (!ReturnToCallController.isEnabled(context)) {
       return false;
     }
-    if (!intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+
+    // We only start in Bubble mode for outgoing call
+    DialerCall dialerCall = callList.getPendingOutgoingCall();
+    if (dialerCall == null) {
+      dialerCall = callList.getOutgoingCall();
+    }
+    if (dialerCall == null) {
       return false;
     }
-    Bundle extras = intent.getParcelableExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
-    byte[] callConfigurationByteArray = extras.getByteArray(CALL_CONFIGURATION_EXTRA);
+
+    Bundle extras = dialerCall.getIntentExtras();
+    return shouldStartInBubbleModeWithExtras(extras);
+  }
+
+  private boolean shouldStartInBubbleModeWithExtras(Bundle outgoingExtras) {
+    if (!ReturnToCallController.isEnabled(context)) {
+      return false;
+    }
+
+    if (outgoingExtras == null) {
+      return false;
+    }
+    byte[] callConfigurationByteArray = outgoingExtras.getByteArray(CALL_CONFIGURATION_EXTRA);
     if (callConfigurationByteArray == null) {
       return false;
     }
@@ -1493,7 +1507,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       inCallActivity.dismissPendingDialogs();
     }
 
-    if ((showCallUi || showAccountPicker) && !shouldStartInBubbleMode) {
+    if ((showCallUi || showAccountPicker) && !shouldStartInBubbleMode()) {
       LogUtil.i("InCallPresenter.startOrFinishUi", "Start in call UI");
       showInCall(false /* showDialpad */, !showAccountPicker /* newOutgoingCall */);
     } else if (newState == InCallState.NO_CALLS) {
@@ -1554,7 +1568,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
       isChangingConfigurations = false;
 
-      shouldStartInBubbleMode = false;
       audioRouteSetForBubbleMode = false;
 
       // blow away stale contact info so that we get fresh data on
@@ -1647,7 +1660,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
     setBoundAndWaitingForOutgoingCall(true, accountHandle);
 
-    if (shouldStartInBubbleMode) {
+    if (shouldStartInBubbleModeWithExtras(extras)) {
       LogUtil.i("InCallPresenter.maybeStartRevealAnimation", "shouldStartInBubbleMode");
       // Show bubble instead of in call UI
       return;
@@ -1838,8 +1851,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   public void onAudioStateChanged(CallAudioState audioState) {
     // Set sensible audio route for bubble mode when we get real audio state for the first time
     // During the first time this function is called, supportedRouteMask is set to
-    // SUPPORTED_AUDIO_ROUTE_ALL, but it's OK since shouldStartInBubbleMode is not set at that time.
-    if (!audioRouteSetForBubbleMode && shouldStartInBubbleMode) {
+    // SUPPORTED_AUDIO_ROUTE_ALL, but it's OK since shouldStartInBubbleMode() is false at that time
+    // (callList not updated yet).
+    if (!audioRouteSetForBubbleMode && shouldStartInBubbleMode()) {
       setAudioRouteForBubbleMode(audioState);
       audioRouteSetForBubbleMode = true;
     }
