@@ -17,8 +17,10 @@
 package com.android.dialer.speeddial;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -49,6 +51,7 @@ import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback;
 import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
+import com.android.dialer.util.IntentUtil;
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -78,8 +81,6 @@ public class SpeedDialFragment extends Fragment {
    */
   private boolean updateSpeedDialItemsOnResume = true;
 
-  private FavoriteContactsListener favoritesListener;
-
   public static SpeedDialFragment newInstance() {
     return new SpeedDialFragment();
   }
@@ -103,14 +104,14 @@ public class SpeedDialFragment extends Fragment {
     // Setup our RecyclerView
     SpeedDialLayoutManager layoutManager =
         new SpeedDialLayoutManager(getContext(), 3 /* spanCount */);
-    favoritesListener =
+    FavoriteContactsListener favoritesListener =
         new SpeedDialFavoritesListener(
             getActivity(),
             getChildFragmentManager(),
             rootLayout,
             contextMenu,
             contextMenuBackground,
-            new SpeedDialContextMenuItemListener(),
+            new SpeedDialContextMenuItemListener(getActivity(), getChildFragmentManager()),
             layoutManager);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
@@ -178,6 +179,22 @@ public class SpeedDialFragment extends Fragment {
               throw new RuntimeException(throwable);
             });
       }
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    contextMenu.hideMenu();
+    contextMenuBackground.setVisibility(View.GONE);
+  }
+
+  @Override
+  public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (hidden) {
+      contextMenu.hideMenu();
+      contextMenuBackground.setVisibility(View.GONE);
     }
   }
 
@@ -294,29 +311,53 @@ public class SpeedDialFragment extends Fragment {
 
   private static final class SpeedDialContextMenuItemListener implements ContextMenuItemListener {
 
-    @Override
-    public void placeVoiceCall(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra)
+    private final FragmentActivity activity;
+    private final FragmentManager childFragmentManager;
+
+    SpeedDialContextMenuItemListener(
+        FragmentActivity activity, FragmentManager childFragmentManager) {
+      this.activity = activity;
+      this.childFragmentManager = childFragmentManager;
     }
 
     @Override
-    public void placeVideoCall(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra)
+    public void disambiguateCall(SpeedDialUiItem speedDialUiItem) {
+      // TODO(calderwoodra): show only video or voice channels in the disambig dialog
+      DisambigDialog.show(speedDialUiItem, childFragmentManager);
     }
 
     @Override
-    public void openSmsConversation(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra)
+    public void placeCall(Channel channel) {
+      if (channel.technology() == Channel.DUO) {
+        Logger.get(activity)
+            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
+        Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, channel.number());
+        activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+        return;
+      }
+      PreCall.start(
+          activity,
+          new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setIsVideoCall(channel.isVideoTechnology()));
+    }
+
+    @Override
+    public void openSmsConversation(String number) {
+      activity.startActivity(IntentUtil.getSendSmsIntent(number));
     }
 
     @Override
     public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra)
+      // TODO(calderwoodra): implement remove
     }
 
     @Override
     public void openContactInfo(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra)
+      activity.startActivity(
+          new Intent(
+              Intent.ACTION_VIEW,
+              Uri.withAppendedPath(
+                  Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
     }
   }
 }
