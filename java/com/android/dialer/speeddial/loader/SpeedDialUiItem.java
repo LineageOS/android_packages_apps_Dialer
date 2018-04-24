@@ -119,6 +119,64 @@ public abstract class SpeedDialUiItem {
   }
 
   /**
+   * Returns a video channel if there is exactly one video channel or the default channel is a video
+   * channel.
+   */
+  @Nullable
+  public Channel getDeterministicVideoChannel() {
+    if (defaultChannel() != null && defaultChannel().isVideoTechnology()) {
+      return defaultChannel();
+    }
+
+    Channel videoChannel = null;
+    for (Channel channel : channels()) {
+      if (channel.isVideoTechnology()) {
+        if (videoChannel != null) {
+          // We found two video channels, so we can't determine which one is correct..
+          return null;
+        }
+        videoChannel = channel;
+      }
+    }
+    // Only found one channel, so return it
+    return videoChannel;
+  }
+
+  /** Returns true if any channels are video channels. */
+  public boolean hasVideoChannels() {
+    for (Channel channel : channels()) {
+      if (channel.isVideoTechnology()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Returns a voice channel if there is exactly one voice channel or the default channel is a voice
+   * channel.
+   */
+  @Nullable
+  public Channel getDeterministicVoiceChannel() {
+    if (defaultChannel() != null && !defaultChannel().isVideoTechnology()) {
+      return defaultChannel();
+    }
+
+    Channel voiceChannel = null;
+    for (Channel channel : channels()) {
+      if (!channel.isVideoTechnology()) {
+        if (voiceChannel != null) {
+          // We found two voice channels, so we can't determine which one is correct..
+          return null;
+        }
+        voiceChannel = channel;
+      }
+    }
+    // Only found one channel, so return it
+    return voiceChannel;
+  }
+
+  /**
    * The id of the corresponding SpeedDialEntry. Null if the UI item does not have an entry, for
    * example suggested contacts (isStarred() will also be false)
    *
