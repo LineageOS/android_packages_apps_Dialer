@@ -14,17 +14,17 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <style name="SpeedDialContextMenuItem" parent="SpeedDialContextMenuItem.NoDrawableTint">
-    <item name="android:drawableTint">@color/secondary_text_color</item>
-  </style>
 
-  <style name="SpeedDialContextMenuItem.NoDrawableTint" parent="SecondaryText">
-    <item name="android:paddingStart">12dp</item>
-    <item name="android:minHeight">48dp</item>
-    <item name="android:gravity">center_vertical</item>
-    <item name="android:drawablePadding">12dp</item>
-    <item name="android:clickable">true</item>
-    <item name="android:background">?android:attr/selectableItemBackground</item>
-  </style>
-</resources>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <shape android:shape="oval">
+      <solid android:color="@color/secondary_text_color"/>
+      <size android:width="24dp" android:height="24dp"/>
+    </shape>
+  </item>
+  <item
+      android:width="24dp"
+      android:height="24dp"
+      android:gravity="center"
+      android:drawable="@drawable/product_logo_avatar_anonymous_white_color_120"/>
+</layer-list>
