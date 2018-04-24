@@ -45,6 +45,30 @@
       "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0f270a9_e121e622",
+        "filename": "java/com/android/incallui/answerproximitysensor/AnswerProximitySensor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-04-24T22:21:15Z",
+      "side": 1,
+      "message": "No, it\u0027s a setting you can set via ADB (or by modifying the settings file using root) but it isn\u0027t surfaced to the user anywhere. My reason for giving it priority over the overlay is that a user is likely to have a good reason for setting it if they figure out how to do so.",
+      "parentUuid": "b4059a26_93d03e8d",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 58
+      },
+      "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
