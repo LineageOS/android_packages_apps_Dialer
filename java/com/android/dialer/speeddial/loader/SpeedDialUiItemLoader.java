@@ -445,7 +445,10 @@ public final class SpeedDialUiItemLoader {
       } else if (item.defaultChannel() == null) {
         // If the contact is starred and doesn't have a default channel, insert duo channels
         newSpeedDialItemList.add(insertDuoChannelsToStarredContact(context, item));
-      } // if starred and has a default channel, leave it as is, the user knows what they want.
+      } else {
+        // if starred and has a default channel, leave it as is, the user knows what they want.
+        newSpeedDialItemList.add(item);
+      }
     }
     return newSpeedDialItemList.build();
   }
