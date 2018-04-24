@@ -28,6 +28,6 @@
 
   <!-- Hint to show under a SIM entry when selecting SIM for call on a multi-SIM device, when the
   call cannot be placed with the SIM because there is already a call on the other SIM,
-  [CHAR LIMIT=40]-->
+  [CHAR LIMIT=NONE]-->
   <string name="pre_call_select_phone_account_hint_other_sim_in_use">Not available while using <xliff:g example="SIM 1" id="other_sim">%1$s</xliff:g></string>
 </resources>
