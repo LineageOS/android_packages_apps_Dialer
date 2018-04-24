@@ -625,16 +625,16 @@ public class ContactInfoHelper {
     if (cequintCallerIdContact == null) {
       return;
     }
-    if (TextUtils.isEmpty(info.name) && !TextUtils.isEmpty(cequintCallerIdContact.name)) {
-      info.name = cequintCallerIdContact.name;
+    if (TextUtils.isEmpty(info.name) && !TextUtils.isEmpty(cequintCallerIdContact.name())) {
+      info.name = cequintCallerIdContact.name();
     }
-    if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
-      info.geoDescription = cequintCallerIdContact.geoDescription;
+    if (!TextUtils.isEmpty(cequintCallerIdContact.geolocation())) {
+      info.geoDescription = cequintCallerIdContact.geolocation();
       info.sourceType = ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID;
     }
     // Only update photo if local lookup has no result.
-    if (!info.contactExists && info.photoUri == null && cequintCallerIdContact.imageUrl != null) {
-      info.photoUri = UriUtils.parseUriOrNull(cequintCallerIdContact.imageUrl);
+    if (!info.contactExists && info.photoUri == null && cequintCallerIdContact.photoUri() != null) {
+      info.photoUri = UriUtils.parseUriOrNull(cequintCallerIdContact.photoUri());
     }
   }
 }

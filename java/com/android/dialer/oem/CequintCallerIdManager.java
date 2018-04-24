@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.google.auto.value.AutoValue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -70,20 +71,37 @@ public class CequintCallerIdManager {
   // TODO(wangqi): Revisit it and maybe remove it if it's not necessary.
   private final ConcurrentHashMap<String, CequintCallerIdContact> callLogCache;
 
-  /** Cequint caller id contact information. */
-  public static class CequintCallerIdContact {
-    public final String name;
-    public final String geoDescription;
-    public final String imageUrl;
+  /** Cequint caller ID contact information. */
+  @AutoValue
+  public abstract static class CequintCallerIdContact {
 
-    private CequintCallerIdContact(String name, String geoDescription, String imageUrl) {
-      this.name = name;
-      this.geoDescription = geoDescription;
-      this.imageUrl = imageUrl;
+    public abstract String name();
+
+    /**
+     * Description of the geolocation (e.g., "Mountain View, CA"), which is for display purpose
+     * only.
+     */
+    public abstract String geolocation();
+
+    public abstract String photoUri();
+
+    static Builder builder() {
+      return new AutoValue_CequintCallerIdManager_CequintCallerIdContact.Builder();
+    }
+
+    @AutoValue.Builder
+    abstract static class Builder {
+      abstract Builder setName(String name);
+
+      abstract Builder setGeolocation(String geolocation);
+
+      abstract Builder setPhotoUri(String photoUri);
+
+      abstract CequintCallerIdContact build();
     }
   }
 
-  /** Check whether Cequint Caller Id provider package is available and enabled. */
+  /** Check whether Cequint Caller ID provider package is available and enabled. */
   @AnyThread
   public static synchronized boolean isCequintCallerIdEnabled(@NonNull Context context) {
     if (!ConfigProviderBindings.get(context).getBoolean(CONFIG_CALLER_ID_ENABLED, true)) {
@@ -175,22 +193,26 @@ public class CequintCallerIdManager {
         String name = getString(cursor, cursor.getColumnIndex(NAME));
         String firstName = getString(cursor, cursor.getColumnIndex(FIRST_NAME));
         String lastName = getString(cursor, cursor.getColumnIndex(LAST_NAME));
-        String imageUrl = getString(cursor, cursor.getColumnIndex(IMAGE));
+        String photoUri = getString(cursor, cursor.getColumnIndex(IMAGE));
         String displayName = getString(cursor, cursor.getColumnIndex(DISPLAY_NAME));
 
         String contactName =
             TextUtils.isEmpty(displayName)
                 ? generateDisplayName(firstName, lastName, company, name)
                 : displayName;
-        String geoDescription = getGeoDescription(city, state, stateAbbr, country);
+        String geolocation = getGeolocation(city, state, stateAbbr, country);
         LogUtil.d(
             "CequintCallerIdManager.lookup",
             "number: %s, contact name: %s, geo: %s, photo url: %s",
             LogUtil.sanitizePhoneNumber(number),
             LogUtil.sanitizePii(contactName),
-            LogUtil.sanitizePii(geoDescription),
-            imageUrl);
-        return new CequintCallerIdContact(contactName, geoDescription, imageUrl);
+            LogUtil.sanitizePii(geolocation),
+            photoUri);
+        return CequintCallerIdContact.builder()
+            .setName(contactName)
+            .setGeolocation(geolocation)
+            .setPhotoUri(photoUri)
+            .build();
       } else {
         LogUtil.d("CequintCallerIdManager.lookup", "No CequintCallerIdContact found");
         return null;
@@ -249,8 +271,8 @@ public class CequintCallerIdManager {
     return null;
   }
 
-  /** Returns geo location information. e.g. Mountain View, CA. */
-  private static String getGeoDescription(
+  /** Returns geolocation information (e.g., "Mountain View, CA"). */
+  private static String getGeolocation(
       String city, String state, String stateAbbr, String country) {
     String geoDescription = null;
 
