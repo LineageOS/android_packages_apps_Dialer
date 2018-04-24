@@ -29,6 +29,7 @@ import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -46,7 +47,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -83,6 +83,7 @@ public final class SpeedDialUiItemLoader {
   private final ListeningExecutorService backgroundExecutor;
   // Used to ensure that only one refresh flow runs at a time.
   private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
+  private final ContactsPreferences contactsPreferences;
 
   @Inject
   public SpeedDialUiItemLoader(
@@ -90,6 +91,7 @@ public final class SpeedDialUiItemLoader {
       @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
     this.appContext = appContext;
     this.backgroundExecutor = backgroundExecutor;
+    this.contactsPreferences = new ContactsPreferences(appContext);
   }
 
   /**
@@ -113,10 +115,16 @@ public final class SpeedDialUiItemLoader {
   @WorkerThread
   private ImmutableList<SpeedDialUiItem> insertNewContactEntry(Uri contactUri) {
     Assert.isWorkerThread();
+    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     try (Cursor cursor =
         appContext
             .getContentResolver()
-            .query(contactUri, SpeedDialUiItem.PHONE_PROJECTION, null, null, null)) {
+            .query(
+                contactUri,
+                SpeedDialUiItem.getPhoneProjection(isPrimaryDisplayNameOrder()),
+                null,
+                null,
+                null)) {
       if (cursor == null) {
         LogUtil.e("SpeedDialUiItemLoader.insertNewContactEntry", "Cursor was null");
         return loadSpeedDialUiItemsInternal();
@@ -152,6 +160,7 @@ public final class SpeedDialUiItemLoader {
   @WorkerThread
   private ImmutableList<SpeedDialUiItem> loadSpeedDialUiItemsInternal() {
     Assert.isWorkerThread();
+    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     SpeedDialEntryDao db = getSpeedDialEntryDao();
 
     // This is the list of contacts that we will display to the user
@@ -280,7 +289,7 @@ public final class SpeedDialUiItemLoader {
       List<SpeedDialEntry> entries) {
     Assert.isWorkerThread();
     // Fetch the contact ids from the SpeedDialEntries
-    Set<String> contactIds = new HashSet<>();
+    Set<String> contactIds = new ArraySet<>();
     entries.forEach(entry -> contactIds.add(Long.toString(entry.contactId())));
     if (contactIds.isEmpty()) {
       return new ArrayMap<>();
@@ -294,7 +303,7 @@ public final class SpeedDialUiItemLoader {
             .getContentResolver()
             .query(
                 Phone.CONTENT_URI,
-                SpeedDialUiItem.PHONE_PROJECTION,
+                SpeedDialUiItem.getPhoneProjection(isPrimaryDisplayNameOrder()),
                 selection.getSelection(),
                 selection.getSelectionArgs(),
                 null)) {
@@ -388,7 +397,7 @@ public final class SpeedDialUiItemLoader {
             .getContentResolver()
             .query(
                 Phone.CONTENT_URI,
-                SpeedDialUiItem.PHONE_PROJECTION,
+                SpeedDialUiItem.getPhoneProjection(isPrimaryDisplayNameOrder()),
                 selection.getSelection(),
                 selection.getSelectionArgs(),
                 null)) {
@@ -475,5 +484,9 @@ public final class SpeedDialUiItemLoader {
 
   private SpeedDialEntryDao getSpeedDialEntryDao() {
     return new SpeedDialEntryDatabaseHelper(appContext);
+  }
+
+  private boolean isPrimaryDisplayNameOrder() {
+    return contactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY;
   }
 }
