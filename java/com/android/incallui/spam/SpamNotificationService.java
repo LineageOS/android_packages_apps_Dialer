@@ -16,6 +16,7 @@
 
 package com.android.incallui.spam;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,8 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.spam.SpamSettings;
+import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 import com.android.incallui.call.DialerCall;
 
 /**
@@ -51,18 +54,29 @@ public class SpamNotificationService extends Service {
   private static final String EXTRA_NOTIFICATION_ID = "service_notification_id";
   private static final String EXTRA_CONTACT_LOOKUP_RESULT_TYPE =
       "service_contact_lookup_result_type";
+
+  private String notificationTag;
+  private int notificationId;
+
   /** Creates an intent to start this service. */
   public static Intent createServiceIntent(
-      Context context, DialerCall call, String action, String notificationTag, int notificationId) {
+      Context context,
+      @Nullable DialerCall call,
+      String action,
+      String notificationTag,
+      int notificationId) {
     Intent intent = new Intent(context, SpamNotificationService.class);
     intent.setAction(action);
-    intent.putExtra(EXTRA_PHONE_NUMBER, call.getNumber());
-    intent.putExtra(EXTRA_CALL_ID, call.getUniqueCallId());
-    intent.putExtra(EXTRA_CALL_START_TIME_MILLIS, call.getTimeAddedMs());
     intent.putExtra(EXTRA_NOTIFICATION_TAG, notificationTag);
     intent.putExtra(EXTRA_NOTIFICATION_ID, notificationId);
-    intent.putExtra(
-        EXTRA_CONTACT_LOOKUP_RESULT_TYPE, call.getLogState().contactLookupResult.getNumber());
+
+    if (call != null) {
+      intent.putExtra(EXTRA_PHONE_NUMBER, call.getNumber());
+      intent.putExtra(EXTRA_CALL_ID, call.getUniqueCallId());
+      intent.putExtra(EXTRA_CALL_START_TIME_MILLIS, call.getTimeAddedMs());
+      intent.putExtra(
+          EXTRA_CONTACT_LOOKUP_RESULT_TYPE, call.getLogState().contactLookupResult.getNumber());
+    }
     return intent;
   }
 
@@ -83,13 +97,17 @@ public class SpamNotificationService extends Service {
       return START_NOT_STICKY;
     }
     String number = intent.getStringExtra(EXTRA_PHONE_NUMBER);
-    String notificationTag = intent.getStringExtra(EXTRA_NOTIFICATION_TAG);
-    int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, 1);
+    notificationTag = intent.getStringExtra(EXTRA_NOTIFICATION_TAG);
+    notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, 1);
     String countryIso = GeoUtil.getCurrentCountryIso(this);
     ContactLookupResult.Type contactLookupResultType =
         ContactLookupResult.Type.forNumber(intent.getIntExtra(EXTRA_CONTACT_LOOKUP_RESULT_TYPE, 0));
 
     DialerNotificationManager.cancel(this, notificationTag, notificationId);
+
+    SpamSettings spamSettings = SpamComponent.get(this).spamSettings();
+    SpamBlockingPromoHelper spamBlockingPromoHelper =
+        new SpamBlockingPromoHelper(this, SpamComponent.get(this).spamSettings());
 
     switch (intent.getAction()) {
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM:
@@ -104,6 +122,13 @@ public class SpamNotificationService extends Service {
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
         new FilteredNumberAsyncQueryHandler(this).blockNumber(null, number, countryIso);
+        if (spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
+          spamBlockingPromoHelper.showSpamBlockingPromoNotification(
+              notificationTag,
+              notificationId,
+              createPromoActivityPendingIntent(),
+              createEnableSpamBlockingPendingIntent());
+        }
         break;
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_NOT_SPAM:
         logCallImpression(
@@ -116,6 +141,22 @@ public class SpamNotificationService extends Service {
                 CallLog.Calls.INCOMING_TYPE,
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
+        break;
+      case SpamNotificationActivity.ACTION_ENABLE_SPAM_BLOCKING:
+        Logger.get(this)
+            .logImpression(
+                DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
+        spamSettings.modifySpamBlockingSetting(
+            true,
+            success -> {
+              if (!success) {
+                Logger.get(this)
+                    .logImpression(
+                        DialerImpression.Type
+                            .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
+              }
+              spamBlockingPromoHelper.showModifySettingOnCompleteToast(success);
+            });
         break;
       default: // fall out
     }
@@ -136,5 +177,29 @@ public class SpamNotificationService extends Service {
             impression,
             intent.getStringExtra(EXTRA_CALL_ID),
             intent.getLongExtra(EXTRA_CALL_START_TIME_MILLIS, 0));
+  }
+
+  private PendingIntent createPromoActivityPendingIntent() {
+    Intent intent =
+        SpamNotificationActivity.createActivityIntent(
+            this,
+            null,
+            SpamNotificationActivity.ACTION_SHOW_SPAM_BLOCKING_PROMO_DIALOG,
+            notificationTag,
+            notificationId);
+    return PendingIntent.getActivity(
+        this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
+  }
+
+  private PendingIntent createEnableSpamBlockingPendingIntent() {
+    Intent intent =
+        SpamNotificationService.createServiceIntent(
+            this,
+            null,
+            SpamNotificationActivity.ACTION_ENABLE_SPAM_BLOCKING,
+            notificationTag,
+            notificationId);
+    return PendingIntent.getService(
+        this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
   }
 }
