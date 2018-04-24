@@ -56,6 +56,11 @@ public class AnswerProximitySensor
       return false;
     }
 
+    if (!context.getResources().getBoolean(R.bool.config_answer_proximity_sensor_enabled)) {
+      LogUtil.i("AnswerProximitySensor.shouldUse", "disabled by overlay");
+      return false;
+    }
+
     if (!context
         .getSystemService(PowerManager.class)
         .isWakeLockLevelSupported(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK)) {
