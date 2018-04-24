@@ -25,6 +25,7 @@ import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.PhoneNumberUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -65,6 +66,10 @@ public class CallingAccountSelector implements PreCallAction {
     if (builder.getPhoneAccountHandle() != null) {
       return false;
     }
+    if (PhoneNumberUtils.isEmergencyNumber(builder.getUri().getSchemeSpecificPart())) {
+      return false;
+    }
+
     TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
     List<PhoneAccountHandle> accounts = telecomManager.getCallCapablePhoneAccounts();
     if (accounts.size() <= 1) {
