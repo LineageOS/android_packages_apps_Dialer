@@ -97,9 +97,9 @@
        Ignored if empty. -->
   <string name="config_prohibited_phone_number_regexp" translatable="false"></string>
 
-  <!-- Warning hint shown in the dialpad input field when emergency call (911, etc.) cannot be made.
+  <!-- Warning hint shown in the dialpad input field when emergency call (911, etc.) cannot be made over wifi.
        [CHAR_LIMIT=60] -->
-  <string name="dialpad_hint_emergency_calling_not_available">Emergency calling not available</string>
+  <string name="dialpad_hint_emergency_calling_not_available">Can\'t make emergency calls over WiFi</string>
 
   <!-- Dialog message which is shown when the user tries to make a phone call
        to prohibited phone numbers [CHAR LIMIT=NONE] -->
