@@ -16,16 +16,23 @@
 
 package com.android.dialer.spam.promo;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
+import android.app.Notification;
+import android.app.Notification.Builder;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.os.BuildCompat;
 import android.view.View;
 import android.widget.Toast;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.notification.DialerNotificationManager;
+import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.SpamSettings;
 import com.android.dialer.spam.SpamSettings.ModifySettingListener;
 
@@ -138,5 +145,59 @@ public class SpamBlockingPromoHelper {
             ? context.getString(R.string.spam_blocking_settings_enable_complete_text)
             : context.getString(R.string.spam_blocking_settings_enable_error_text);
     Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
+  }
+
+  /**
+   * Shows a spam blocking promo notification.
+   *
+   * @param notificationTag a string identifier for this notification.
+   * @param notificationId an identifier for this notification.
+   * @param contentIntent pending intent to be sent when notification is clicked.
+   * @param actionIntent pending intent to be sent when enable-spam-blocking button is clicked.
+   */
+  public void showSpamBlockingPromoNotification(
+      String notificationTag,
+      int notificationId,
+      PendingIntent contentIntent,
+      PendingIntent actionIntent) {
+    updateLastShowSpamTimestamp();
+    Logger.get(context)
+        .logImpression(DialerImpression.Type.SPAM_BLOCKING_AFTER_CALL_NOTIFICATION_PROMO_SHOWN);
+    DialerNotificationManager.notify(
+        context,
+        notificationTag,
+        notificationId,
+        getSpamBlockingPromoNotification(contentIntent, actionIntent));
+  }
+
+  /**
+   * Builds a spam blocking promo notification with given intents.
+   *
+   * @param contentIntent pending intent to be sent when notification is clicked.
+   * @param actionIntent pending intent to be sent when enable-spam-blocking button is clicked.
+   */
+  @SuppressLint("NewApi")
+  private Notification getSpamBlockingPromoNotification(
+      PendingIntent contentIntent, PendingIntent actionIntent) {
+    Notification.Builder builder =
+        new Builder(context)
+            .setContentIntent(contentIntent)
+            .setCategory(Notification.CATEGORY_STATUS)
+            .setPriority(Notification.PRIORITY_DEFAULT)
+            .setColor(context.getColor(R.color.dialer_theme_color))
+            .setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24)
+            .setContentText(context.getString(R.string.spam_blocking_promo_text))
+            .addAction(
+                new Notification.Action.Builder(
+                        R.drawable.quantum_ic_block_vd_theme_24,
+                        context.getString(R.string.spam_blocking_promo_action_filter_spam),
+                        actionIntent)
+                    .build())
+            .setContentTitle(context.getString(R.string.spam_blocking_promo_title));
+
+    if (BuildCompat.isAtLeastO()) {
+      builder.setChannelId(NotificationChannelId.DEFAULT);
+    }
+    return builder.build();
   }
 }
