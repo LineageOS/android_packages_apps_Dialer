@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1382
+  // Next Tag: 1387
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -754,5 +754,15 @@ message DialerImpression {
     // Failure happened while enabling spam blocking through after call
     // notification promo.
     SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_AFTER_CALL_NOTIFICATION_PROMO = 1381;
+
+    // RTT call impressions
+    OUTGOING_RTT_CALL = 1382;
+    INCOMING_RTT_CALL = 1383;
+    // The call turns into RTT call mid call.
+    RTT_MID_CALL_ENABLED = 1384;
+    // Mid call RTT request accepted.
+    RTT_MID_CALL_ACCEPTED = 1385;
+    // Mid call RTT request rejected.
+    RTT_MID_CALL_REJECTED = 1386;
   }
 }
