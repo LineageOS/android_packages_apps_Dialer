@@ -16,6 +16,7 @@
  -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -35,17 +36,18 @@
       android:fontFamily="sans-serif-medium"
       android:background="@android:color/white"/>
 
-  <ScrollView
+  <com.android.dialer.widget.MaxHeightScrollView
       android:id="@+id/disambig_scrollview"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      app:maxHeight="240dp">
 
     <LinearLayout
         android:id="@+id/communication_avenue_container"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-  </ScrollView>
+  </com.android.dialer.widget.MaxHeightScrollView>
 
   <FrameLayout
       android:id="@+id/remember_this_choice_container"
@@ -60,8 +62,7 @@
     <CheckBox
         android:id="@+id/remember_this_choice_checkbox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
+        android:layout_height="48dp"
         android:text="@string/speed_dial_remember_this_choice"/>
   </FrameLayout>
 </LinearLayout>
