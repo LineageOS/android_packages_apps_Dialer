@@ -184,7 +184,8 @@ final class Modules {
 
   private static HistoryItemActionModule createModuleForAccessingCallDetails(
       Context context, CoalescedRow row) {
-    boolean canReportAsInvalidNumber = row.getNumberAttributes().getCanReportAsInvalidNumber();
+    boolean canReportAsInvalidNumber =
+        !row.getIsVoicemailCall() && row.getNumberAttributes().getCanReportAsInvalidNumber();
 
     return new IntentModule(
         context,
