@@ -197,6 +197,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private InCallCameraManager inCallCameraManager;
   private FilteredNumberAsyncQueryHandler filteredQueryHandler;
   private CallList.Listener spamCallListListener;
+  private CallList.Listener activeCallsListener;
   /** Whether or not we are currently bound and waiting for Telecom to send us a new call. */
   private boolean boundAndWaitingForOutgoingCall;
   /** Determines if the InCall UI is in fullscreen mode or not. */
@@ -383,6 +384,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         new SpamCallListListener(
             context, DialerExecutorComponent.get(context).dialerExecutorFactory());
     this.callList.addListener(spamCallListListener);
+    activeCallsListener = new ActiveCallsCallListListener(context);
+    this.callList.addListener(activeCallsListener);
 
     VideoPauseController.getInstance().setUp(this);
 
@@ -858,6 +861,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
           callList.getActiveOrBackgroundCall() != null || callList.getOutgoingCall() != null;
       inCallActivity.dismissKeyguard(hasCall);
     }
+
     Trace.endSection();
   }
 
