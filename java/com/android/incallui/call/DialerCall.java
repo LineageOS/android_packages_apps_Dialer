@@ -312,6 +312,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onRttStatusChanged(Call call, boolean enabled, RttCall rttCall) {
           LogUtil.v("TelecomCallCallback.onRttStatusChanged", "enabled=%b", enabled);
+          if (enabled) {
+            Logger.get(context)
+                .logCallImpression(
+                    DialerImpression.Type.RTT_MID_CALL_ENABLED,
+                    getUniqueCallId(),
+                    getTimeAddedMs());
+          }
           update();
         }
 
@@ -1064,6 +1071,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   @TargetApi(28)
   public void respondToRttRequest(boolean accept, int rttRequestId) {
+    Logger.get(context)
+        .logCallImpression(
+            accept
+                ? DialerImpression.Type.RTT_MID_CALL_ACCEPTED
+                : DialerImpression.Type.RTT_MID_CALL_REJECTED,
+            getUniqueCallId(),
+            getTimeAddedMs());
     getTelecomCall().respondToRttRequest(rttRequestId, accept);
   }
 
