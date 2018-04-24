@@ -44,6 +44,7 @@ import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.database.SpeedDialEntryDao;
 import com.android.dialer.speeddial.database.SpeedDialEntryDatabaseHelper;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
@@ -146,13 +147,7 @@ public final class SpeedDialUiItemLoader {
       }
 
       // Insert a new entry into the SpeedDialEntry database
-      getSpeedDialEntryDao()
-          .insert(
-              SpeedDialEntry.builder()
-                  .setLookupKey(item.lookupKey())
-                  .setContactId(item.contactId())
-                  .setDefaultChannel(item.defaultChannel())
-                  .build());
+      getSpeedDialEntryDao().insert(item.buildSpeedDialEntry());
     }
     return loadSpeedDialUiItemsInternal();
   }
@@ -216,23 +211,55 @@ public final class SpeedDialUiItemLoader {
             contact.toBuilder().setDefaultChannel(contact.channels().get(0)).build());
 
       } else if (speedDialUiItems.stream().noneMatch(c -> c.contactId() == contact.contactId())) {
-        entriesToInsert.add(
-            SpeedDialEntry.builder()
-                .setLookupKey(contact.lookupKey())
-                .setContactId(contact.contactId())
-                .setDefaultChannel(contact.defaultChannel())
-                .build());
+        entriesToInsert.add(contact.buildSpeedDialEntry());
 
         // These are our newly starred contacts
         speedDialUiItems.add(contact);
       }
     }
 
-    db.insertUpdateAndDelete(
-        ImmutableList.copyOf(entriesToInsert),
-        ImmutableList.copyOf(entriesToUpdate),
-        ImmutableList.copyOf(entriesToDelete));
-    return ImmutableList.copyOf(speedDialUiItems);
+    ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap =
+        db.insertUpdateAndDelete(
+            ImmutableList.copyOf(entriesToInsert),
+            ImmutableList.copyOf(entriesToUpdate),
+            ImmutableList.copyOf(entriesToDelete));
+    return speedDialUiItemsWithUpdatedIds(speedDialUiItems, insertedEntriesToIdsMap);
+  }
+
+  /**
+   * Since newly starred contacts sometimes aren't in the SpeedDialEntry database, we couldn't set
+   * their ids when we created our initial list of {@link SpeedDialUiItem speedDialUiItems}. Now
+   * that we've inserted the entries into the database and we have their ids, build a new list of
+   * speedDialUiItems with the now known ids.
+   */
+  private ImmutableList<SpeedDialUiItem> speedDialUiItemsWithUpdatedIds(
+      List<SpeedDialUiItem> speedDialUiItems,
+      ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap) {
+    if (insertedEntriesToIdsMap.isEmpty()) {
+      // There were no newly inserted entries, so all entries ids are set already.
+      return ImmutableList.copyOf(speedDialUiItems);
+    }
+
+    ImmutableList.Builder<SpeedDialUiItem> updatedItems = ImmutableList.builder();
+    for (SpeedDialUiItem speedDialUiItem : speedDialUiItems) {
+      SpeedDialEntry entry = speedDialUiItem.buildSpeedDialEntry();
+      if (insertedEntriesToIdsMap.containsKey(entry)) {
+        // Get the id for newly inserted entry, update our SpeedDialUiItem and add it to our list
+        Long id = Assert.isNotNull(insertedEntriesToIdsMap.get(entry));
+        updatedItems.add(speedDialUiItem.toBuilder().setSpeedDialEntryId(id).build());
+        continue;
+      }
+
+      // Starred contacts that aren't in the map, should already have speed dial entry ids.
+      // Non-starred contacts (suggestions) aren't in the speed dial entry database, so they
+      // shouldn't have speed dial entry ids.
+      Assert.checkArgument(
+          speedDialUiItem.isStarred() == (speedDialUiItem.speedDialEntryId() != null),
+          "Contact must be starred with a speed dial entry id, or not starred with no id "
+              + "(suggested contacts)");
+      updatedItems.add(speedDialUiItem);
+    }
+    return updatedItems.build();
   }
 
   /**
