@@ -45,10 +45,10 @@ message SelectPhoneAccountDialogOptions {
     // The hint to show under the phone account, for example showing the user
     // the account was selected frequently before.
     optional string hint = 3;
-    // Whether the account is actually selectable. Defaults to true Sometimes an
-    // account will be temporarily unusable, for example the user is already in
-    // a call so the other SIM cannot be used. Hint should also be set to inform
-    // the user why the account is unavailable.
-    optional bool enabled = 4;
+    // Whether the account is actually selectable. Defaults to true. Sometimes
+    // an account will be temporarily unusable, for example the user is already
+    // in a call so the other SIM cannot be used. Hint should also be set to
+    // inform the user why the account is unavailable.
+    optional bool enabled = 4 [default = true];
   }
 }

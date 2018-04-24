@@ -30,12 +30,13 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogOptionsUtil;
+import com.android.dialer.activecalls.ActiveCallInfo;
+import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
@@ -43,11 +44,13 @@ import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
+import com.android.dialer.preferredsim.PreferredAccountWorker.Result;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
-import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import java.util.List;
+import java.util.Objects;
 
 /** PreCallAction to select which phone account to call with. Ignored if there's only one account */
 @SuppressWarnings("MissingPermission")
@@ -78,17 +81,6 @@ public class CallingAccountSelector implements PreCallAction {
     if (accounts.size() <= 1) {
       return false;
     }
-
-    if (TelecomUtil.isInManagedCall(context)) {
-      // Most devices are DSDS (dual SIM dual standby) which only one SIM can have active calls at
-      // a time. Telecom will ignore the phone account handle and use the current active SIM, thus
-      // there's no point of selecting SIMs
-      // TODO(a bug): let the user know selections are not available and preferred SIM is not
-      // used
-      // TODO(twyen): support other dual SIM modes when the API is exposed.
-      return false;
-    }
-
     return true;
   }
 
@@ -137,12 +129,7 @@ public class CallingAccountSelector implements PreCallAction {
                 return;
               }
               if (result.getPhoneAccountHandle().isPresent()) {
-                Logger.get(coordinator.getActivity())
-                    .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_PREFERRED_USED);
-                coordinator
-                    .getBuilder()
-                    .setPhoneAccountHandle(result.getPhoneAccountHandle().get());
-                pendingAction.finish();
+                usePreferredAccount(coordinator, pendingAction, result);
                 return;
               }
               PhoneAccountHandle defaultPhoneAccount =
@@ -150,10 +137,7 @@ public class CallingAccountSelector implements PreCallAction {
                       .getSystemService(TelecomManager.class)
                       .getDefaultOutgoingPhoneAccount(builder.getUri().getScheme());
               if (defaultPhoneAccount != null) {
-                Logger.get(coordinator.getActivity())
-                    .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_GLOBAL_USED);
-                builder.setPhoneAccountHandle(defaultPhoneAccount);
-                pendingAction.finish();
+                useDefaultAccount(coordinator, pendingAction, result, defaultPhoneAccount);
                 return;
               }
               if (result.getSuggestion().isPresent()) {
@@ -161,18 +145,7 @@ public class CallingAccountSelector implements PreCallAction {
                     "CallingAccountSelector.processPreferredAccount",
                     "SIM suggested: " + result.getSuggestion().get().reason);
                 if (result.getSuggestion().get().shouldAutoSelect) {
-                  Logger.get(coordinator.getActivity())
-                      .logImpression(
-                          DialerImpression.Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
-                  LogUtil.i(
-                      "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
-                  builder.setPhoneAccountHandle(result.getSuggestion().get().phoneAccountHandle);
-                  builder
-                      .getInCallUiIntentExtras()
-                      .putString(
-                          SuggestionProvider.EXTRA_SIM_SUGGESTION_REASON,
-                          result.getSuggestion().get().reason.name());
-                  pendingAction.finish();
+                  useSuggestedAccount(coordinator, pendingAction, result);
                   return;
                 }
               }
@@ -185,6 +158,120 @@ public class CallingAccountSelector implements PreCallAction {
             }))
         .build()
         .executeParallel(activity);
+  }
+
+  private void usePreferredAccount(
+      PreCallCoordinator coordinator, PendingAction pendingAction, Result result) {
+    String phoneNumber = coordinator.getBuilder().getUri().getSchemeSpecificPart();
+    if (isSelectable(coordinator.getActivity(), result.getPhoneAccountHandle().get())) {
+      Logger.get(coordinator.getActivity()).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
+      coordinator.getBuilder().setPhoneAccountHandle(result.getPhoneAccountHandle().get());
+      pendingAction.finish();
+    } else {
+      Logger.get(coordinator.getActivity())
+          .logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_NOT_SELECTABLE);
+      LogUtil.i("CallingAccountSelector.usePreferredAccount", "preferred account not selectable");
+      showDialog(
+          coordinator,
+          pendingAction,
+          result.getDataId().orNull(),
+          phoneNumber,
+          result.getSuggestion().orNull());
+    }
+  }
+
+  private void useDefaultAccount(
+      PreCallCoordinator coordinator,
+      PendingAction pendingAction,
+      Result result,
+      PhoneAccountHandle defaultPhoneAccount) {
+    CallIntentBuilder builder = coordinator.getBuilder();
+    String phoneNumber = builder.getUri().getSchemeSpecificPart();
+    if (isSelectable(coordinator.getActivity(), defaultPhoneAccount)) {
+      Logger.get(coordinator.getActivity()).logImpression(Type.DUAL_SIM_SELECTION_GLOBAL_USED);
+      builder.setPhoneAccountHandle(defaultPhoneAccount);
+      pendingAction.finish();
+    } else {
+      Logger.get(coordinator.getActivity())
+          .logImpression(Type.DUAL_SIM_SELECTION_GLOBAL_NOT_SELECTABLE);
+      LogUtil.i("CallingAccountSelector.useDefaultAccount", "default account not selectable");
+      showDialog(
+          coordinator,
+          pendingAction,
+          result.getDataId().orNull(),
+          phoneNumber,
+          result.getSuggestion().orNull());
+    }
+  }
+
+  private void useSuggestedAccount(
+      PreCallCoordinator coordinator, PendingAction pendingAction, Result result) {
+    CallIntentBuilder builder = coordinator.getBuilder();
+    String phoneNumber = builder.getUri().getSchemeSpecificPart();
+    if (isSelectable(coordinator.getActivity(), result.getSuggestion().get().phoneAccountHandle)) {
+      Logger.get(coordinator.getActivity())
+          .logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
+      LogUtil.i("CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
+      builder.setPhoneAccountHandle(result.getSuggestion().get().phoneAccountHandle);
+      builder
+          .getInCallUiIntentExtras()
+          .putString(
+              SuggestionProvider.EXTRA_SIM_SUGGESTION_REASON,
+              result.getSuggestion().get().reason.name());
+      pendingAction.finish();
+    } else {
+      LogUtil.i("CallingAccountSelector.useSuggestedAccount", "suggested account not selectable");
+      Logger.get(coordinator.getActivity())
+          .logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_NOT_SELECTABLE);
+      showDialog(
+          coordinator,
+          pendingAction,
+          result.getDataId().orNull(),
+          phoneNumber,
+          result.getSuggestion().orNull());
+    }
+  }
+
+  /**
+   * Most devices are DSDS (dual SIM dual standby) which only one SIM can have active calls at a
+   * time. TODO(twyen): support other dual SIM modes when the API is exposed.
+   */
+  private static boolean isSelectable(Context context, PhoneAccountHandle phoneAccountHandle) {
+    ImmutableList<ActiveCallInfo> activeCalls =
+        ActiveCallsComponent.get(context).activeCalls().getActiveCalls();
+    if (activeCalls.isEmpty()) {
+      return true;
+    }
+    for (ActiveCallInfo activeCall : activeCalls) {
+      if (Objects.equals(phoneAccountHandle, activeCall.phoneAccountHandle().orNull())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static Optional<String> getActiveCallLabel(Context context) {
+    ImmutableList<ActiveCallInfo> activeCalls =
+        ActiveCallsComponent.get(context).activeCalls().getActiveCalls();
+
+    if (activeCalls.isEmpty()) {
+      LogUtil.e("CallingAccountSelector.getActiveCallLabel", "active calls no longer exist");
+      return Optional.absent();
+    }
+    ActiveCallInfo activeCall = activeCalls.get(0);
+    if (!activeCall.phoneAccountHandle().isPresent()) {
+      LogUtil.e("CallingAccountSelector.getActiveCallLabel", "active call has no phone account");
+      return Optional.absent();
+    }
+    PhoneAccount phoneAccount =
+        context
+            .getSystemService(TelecomManager.class)
+            .getPhoneAccount(activeCall.phoneAccountHandle().get());
+    if (phoneAccount == null) {
+      LogUtil.e("CallingAccountSelector.getActiveCallLabel", "phone account not found");
+      return Optional.absent();
+    }
+    return Optional.of(phoneAccount.getLabel().toString());
   }
 
   @MainThread
@@ -228,10 +315,23 @@ public class CallingAccountSelector implements PreCallAction {
       SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
           SelectPhoneAccountDialogOptions.Entry.newBuilder();
       SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(entryBuilder, phoneAccountHandle);
-      Optional<String> hint =
-          SuggestionProvider.getHint(coordinator.getActivity(), phoneAccountHandle, suggestion);
-      if (hint.isPresent()) {
-        entryBuilder.setHint(hint.get());
+      if (isSelectable(coordinator.getActivity(), phoneAccountHandle)) {
+        Optional<String> hint =
+            SuggestionProvider.getHint(coordinator.getActivity(), phoneAccountHandle, suggestion);
+        if (hint.isPresent()) {
+          entryBuilder.setHint(hint.get());
+        }
+      } else {
+        entryBuilder.setEnabled(false);
+        Optional<String> activeCallLabel = getActiveCallLabel(coordinator.getActivity());
+        if (activeCallLabel.isPresent()) {
+          entryBuilder.setHint(
+              coordinator
+                  .getActivity()
+                  .getString(
+                      R.string.pre_call_select_phone_account_hint_other_sim_in_use,
+                      activeCallLabel.get()));
+        }
       }
       optionsBuilder.addEntries(entryBuilder);
     }

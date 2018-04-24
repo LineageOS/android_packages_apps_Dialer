@@ -54,6 +54,7 @@
         android:includeFontPadding="false"
         android:maxLines="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/dialer_secondary_text_color"
         android:visibility="gone"/>
     <TextView
         android:id="@+id/hint"
@@ -62,6 +63,7 @@
         android:includeFontPadding="false"
         android:maxLines="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/dialer_secondary_text_color"
         android:visibility="gone"/>
   </LinearLayout>
 

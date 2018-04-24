@@ -356,7 +356,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     statusTextView.setText(onHoldText);
     statusTextView.setVisibility(View.VISIBLE);
 
-    int onHoldColor = getContext().getColor(R.color.dialer_secondary_text_color_hiden);
+    int onHoldColor = getContext().getColor(R.color.dialer_disabled_text_color);
     nameTextView.setTextColor(onHoldColor);
     numberTextView.setTextColor(onHoldColor);
 

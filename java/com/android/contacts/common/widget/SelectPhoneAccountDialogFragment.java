@@ -57,7 +57,8 @@ import com.google.common.base.Optional;
  */
 public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
-  private static final String ARG_OPTIONS = "options";
+  @VisibleForTesting public static final String ARG_OPTIONS = "options";
+
   private static final String ARG_IS_DEFAULT_CHECKED = "is_default_checked";
 
   private SelectPhoneAccountDialogOptions options =
@@ -221,15 +222,27 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     public void onDialogDismissed(@Nullable String callId) {}
   }
 
-  private static class SelectAccountListAdapter
+  static class SelectAccountListAdapter
       extends ArrayAdapter<SelectPhoneAccountDialogOptions.Entry> {
 
     private int mResId;
+    private final SelectPhoneAccountDialogOptions options;
 
     SelectAccountListAdapter(
         Context context, int resource, SelectPhoneAccountDialogOptions options) {
       super(context, resource, options.getEntriesList());
+      this.options = options;
       mResId = resource;
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+      return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+      return options.getEntries(position).getEnabled();
     }
 
     @Override
@@ -283,7 +296,10 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         holder.hintTextView.setVisibility(View.VISIBLE);
         holder.hintTextView.setText(entry.getHint());
       }
-
+      holder.labelTextView.setEnabled(entry.getEnabled());
+      holder.numberTextView.setEnabled(entry.getEnabled());
+      holder.hintTextView.setEnabled(entry.getEnabled());
+      holder.imageView.setImageAlpha(entry.getEnabled() ? 255 : 97 /* 38%*/);
       return rowView;
     }
 
@@ -297,7 +313,7 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
       return info.get().getCountryIso().toUpperCase();
     }
 
-    private static final class ViewHolder {
+    static final class ViewHolder {
 
       TextView labelTextView;
       TextView numberTextView;
