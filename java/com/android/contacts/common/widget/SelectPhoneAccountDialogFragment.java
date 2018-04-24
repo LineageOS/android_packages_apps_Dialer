@@ -47,10 +47,9 @@ import com.android.contacts.common.R;
 import com.android.contacts.common.compat.PhoneAccountCompat;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Optional;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Dialog that allows the user to select a phone accounts for a given action. Optionally provides
@@ -58,128 +57,73 @@ import java.util.List;
  */
 public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
-  private static final String ARG_TITLE_RES_ID = "title_res_id";
-  private static final String ARG_CAN_SET_DEFAULT = "can_set_default";
-  private static final String ARG_SET_DEFAULT_RES_ID = "set_default_res_id";
-  private static final String ARG_ACCOUNT_HANDLES = "account_handles";
+  private static final String ARG_OPTIONS = "options";
   private static final String ARG_IS_DEFAULT_CHECKED = "is_default_checked";
-  private static final String ARG_LISTENER = "listener";
-  private static final String ARG_CALL_ID = "call_id";
-  private static final String ARG_HINTS = "hints";
 
-  private List<PhoneAccountHandle> mAccountHandles;
-  private List<String> mHints;
-  private boolean mIsSelected;
-  private boolean mIsDefaultChecked;
-  private SelectPhoneAccountListener mListener;
+  private SelectPhoneAccountDialogOptions options =
+      SelectPhoneAccountDialogOptions.getDefaultInstance();
+  private SelectPhoneAccountListener listener;
 
-  public SelectPhoneAccountDialogFragment() {}
+  private boolean isDefaultChecked;
+  private boolean isSelected;
 
-  /**
-   * Create new fragment instance with default title and no option to set as default.
-   *
-   * @param accountHandles The {@code PhoneAccountHandle}s available to select from.
-   * @param listener The listener for the results of the account selection.
-   */
+  /** Create new fragment instance. */
   public static SelectPhoneAccountDialogFragment newInstance(
-      List<PhoneAccountHandle> accountHandles,
-      SelectPhoneAccountListener listener,
-      @Nullable String callId) {
-    return newInstance(
-        R.string.select_account_dialog_title, false, 0, accountHandles, listener, callId, null);
-  }
-
-  /**
-   * Create new fragment instance. This method also allows specifying a custom title and "set
-   * default" checkbox.
-   *
-   * @param titleResId The resource ID for the string to use in the title of the dialog.
-   * @param canSetDefault {@code true} if the dialog should include an option to set the selection
-   *     as the default. False otherwise.
-   * @param setDefaultResId The resource ID for the string to use in the "set as default" checkbox
-   * @param accountHandles The {@code PhoneAccountHandle}s available to select from.
-   * @param listener The listener for the results of the account selection.
-   * @param callId The callId to be passed back to the listener in {@link
-   *     SelectPhoneAccountListener#EXTRA_CALL_ID}
-   * @param hints Additional information to be shown underneath the phone account to help user
-   *     choose. Index must match {@code accountHandles}
-   */
-  public static SelectPhoneAccountDialogFragment newInstance(
-      int titleResId,
-      boolean canSetDefault,
-      int setDefaultResId,
-      List<PhoneAccountHandle> accountHandles,
-      SelectPhoneAccountListener listener,
-      @Nullable String callId,
-      @Nullable List<String> hints) {
-    ArrayList<PhoneAccountHandle> accountHandlesCopy = new ArrayList<>();
-    if (accountHandles != null) {
-      accountHandlesCopy.addAll(accountHandles);
-    }
+      SelectPhoneAccountDialogOptions options, SelectPhoneAccountListener listener) {
     SelectPhoneAccountDialogFragment fragment = new SelectPhoneAccountDialogFragment();
-    final Bundle args = new Bundle();
-    args.putInt(ARG_TITLE_RES_ID, titleResId);
-    args.putBoolean(ARG_CAN_SET_DEFAULT, canSetDefault);
-    if (setDefaultResId != 0) {
-      args.putInt(ARG_SET_DEFAULT_RES_ID, setDefaultResId);
-    }
-    args.putParcelableArrayList(ARG_ACCOUNT_HANDLES, accountHandlesCopy);
-    args.putParcelable(ARG_LISTENER, listener);
-    args.putString(ARG_CALL_ID, callId);
-    if (hints != null) {
-      args.putStringArrayList(ARG_HINTS, new ArrayList<>(hints));
-    }
-    fragment.setArguments(args);
     fragment.setListener(listener);
+    Bundle arguments = new Bundle();
+    ProtoParsers.put(arguments, ARG_OPTIONS, options);
+    fragment.setArguments(arguments);
     return fragment;
   }
 
   public void setListener(SelectPhoneAccountListener listener) {
-    mListener = listener;
+    this.listener = listener;
   }
 
   @Nullable
   @VisibleForTesting
   public SelectPhoneAccountListener getListener() {
-    return mListener;
+    return listener;
   }
 
   @VisibleForTesting
   public boolean canSetDefault() {
-    return getArguments().getBoolean(ARG_CAN_SET_DEFAULT);
+    return options.getCanSetDefault();
   }
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putBoolean(ARG_IS_DEFAULT_CHECKED, mIsDefaultChecked);
+    outState.putBoolean(ARG_IS_DEFAULT_CHECKED, isDefaultChecked);
   }
 
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
-    int titleResId = getArguments().getInt(ARG_TITLE_RES_ID);
-    boolean canSetDefault = getArguments().getBoolean(ARG_CAN_SET_DEFAULT);
-    mAccountHandles = getArguments().getParcelableArrayList(ARG_ACCOUNT_HANDLES);
-    mListener = getArguments().getParcelable(ARG_LISTENER);
-    mHints = getArguments().getStringArrayList(ARG_HINTS);
+    options =
+        ProtoParsers.getTrusted(
+            getArguments(), ARG_OPTIONS, SelectPhoneAccountDialogOptions.getDefaultInstance());
     if (savedInstanceState != null) {
-      mIsDefaultChecked = savedInstanceState.getBoolean(ARG_IS_DEFAULT_CHECKED);
+      isDefaultChecked = savedInstanceState.getBoolean(ARG_IS_DEFAULT_CHECKED);
     }
-    mIsSelected = false;
+    isSelected = false;
 
     final DialogInterface.OnClickListener selectionListener =
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            mIsSelected = true;
-            PhoneAccountHandle selectedAccountHandle = mAccountHandles.get(which);
+            isSelected = true;
+            PhoneAccountHandle selectedAccountHandle =
+                SelectPhoneAccountDialogOptionsUtil.getPhoneAccountHandle(
+                    options.getEntriesList().get(which));
             Bundle result = new Bundle();
             result.putParcelable(
                 SelectPhoneAccountListener.EXTRA_SELECTED_ACCOUNT_HANDLE, selectedAccountHandle);
-            result.putBoolean(SelectPhoneAccountListener.EXTRA_SET_DEFAULT, mIsDefaultChecked);
+            result.putBoolean(SelectPhoneAccountListener.EXTRA_SET_DEFAULT, isDefaultChecked);
             result.putString(SelectPhoneAccountListener.EXTRA_CALL_ID, getCallId());
-            if (mListener != null) {
-              mListener.onReceiveResult(SelectPhoneAccountListener.RESULT_SELECTED, result);
+            if (listener != null) {
+              listener.onReceiveResult(SelectPhoneAccountListener.RESULT_SELECTED, result);
             }
           }
         };
@@ -188,22 +132,23 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         new CompoundButton.OnCheckedChangeListener() {
           @Override
           public void onCheckedChanged(CompoundButton check, boolean isChecked) {
-            mIsDefaultChecked = isChecked;
+            isDefaultChecked = isChecked;
           }
         };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     ListAdapter selectAccountListAdapter =
         new SelectAccountListAdapter(
-            builder.getContext(), R.layout.select_account_list_item, mAccountHandles, mHints);
+            builder.getContext(), R.layout.select_account_list_item, options);
 
     AlertDialog dialog =
         builder
-            .setTitle(titleResId)
+            .setTitle(
+                options.hasTitle() ? options.getTitle() : R.string.select_account_dialog_title)
             .setAdapter(selectAccountListAdapter, selectionListener)
             .create();
 
-    if (canSetDefault) {
+    if (options.getCanSetDefault()) {
       // Generate custom checkbox view, lint suppressed since no appropriate parent (is dialog)
       @SuppressLint("InflateParams")
       LinearLayout checkboxLayout =
@@ -213,11 +158,13 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
       CheckBox checkBox = checkboxLayout.findViewById(R.id.default_account_checkbox_view);
       checkBox.setOnCheckedChangeListener(checkListener);
-      checkBox.setChecked(mIsDefaultChecked);
+      checkBox.setChecked(isDefaultChecked);
 
       TextView textView = checkboxLayout.findViewById(R.id.default_account_checkbox_text);
       int setDefaultResId =
-          getArguments().getInt(ARG_SET_DEFAULT_RES_ID, R.string.set_default_account);
+          options.hasSetDefaultLabel()
+              ? options.getSetDefaultLabel()
+              : R.string.set_default_account;
       textView.setText(setDefaultResId);
       textView.setOnClickListener((view) -> checkBox.performClick());
       checkboxLayout.setOnClickListener((view) -> checkBox.performClick());
@@ -230,17 +177,17 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
   @Override
   public void onCancel(DialogInterface dialog) {
-    if (!mIsSelected && mListener != null) {
+    if (!isSelected && listener != null) {
       Bundle result = new Bundle();
       result.putString(SelectPhoneAccountListener.EXTRA_CALL_ID, getCallId());
-      mListener.onReceiveResult(SelectPhoneAccountListener.RESULT_DISMISSED, result);
+      listener.onReceiveResult(SelectPhoneAccountListener.RESULT_DISMISSED, result);
     }
     super.onCancel(dialog);
   }
 
   @Nullable
   private String getCallId() {
-    return getArguments().getString(ARG_CALL_ID);
+    return options.getCallId();
   }
 
   public static class SelectPhoneAccountListener extends ResultReceiver {
@@ -274,18 +221,14 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
     public void onDialogDismissed(@Nullable String callId) {}
   }
 
-  private static class SelectAccountListAdapter extends ArrayAdapter<PhoneAccountHandle> {
+  private static class SelectAccountListAdapter
+      extends ArrayAdapter<SelectPhoneAccountDialogOptions.Entry> {
 
     private int mResId;
-    private final List<String> mHints;
 
     SelectAccountListAdapter(
-        Context context,
-        int resource,
-        List<PhoneAccountHandle> accountHandles,
-        @Nullable List<String> hints) {
-      super(context, resource, accountHandles);
-      mHints = hints;
+        Context context, int resource, SelectPhoneAccountDialogOptions options) {
+      super(context, resource, options.getEntriesList());
       mResId = resource;
     }
 
@@ -311,7 +254,9 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
         holder = (ViewHolder) rowView.getTag();
       }
 
-      PhoneAccountHandle accountHandle = getItem(position);
+      SelectPhoneAccountDialogOptions.Entry entry = getItem(position);
+      PhoneAccountHandle accountHandle =
+          SelectPhoneAccountDialogOptionsUtil.getPhoneAccountHandle(entry);
       PhoneAccount account =
           getContext().getSystemService(TelecomManager.class).getPhoneAccount(accountHandle);
       if (account == null) {
@@ -331,16 +276,12 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
       }
       holder.imageView.setImageDrawable(
           PhoneAccountCompat.createIconDrawable(account, getContext()));
-      if (mHints != null && position < mHints.size()) {
-        String hint = mHints.get(position);
-        if (TextUtils.isEmpty(hint)) {
-          holder.hintTextView.setVisibility(View.GONE);
-        } else {
-          holder.hintTextView.setVisibility(View.VISIBLE);
-          holder.hintTextView.setText(hint);
-        }
-      } else {
+
+      if (TextUtils.isEmpty(entry.getHint())) {
         holder.hintTextView.setVisibility(View.GONE);
+      } else {
+        holder.hintTextView.setVisibility(View.VISIBLE);
+        holder.hintTextView.setText(entry.getHint());
       }
 
       return rowView;

@@ -28,6 +28,8 @@ import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptionsUtil;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -44,6 +46,7 @@ import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 import com.android.dialer.telecom.TelecomUtil;
+import com.google.common.base.Optional;
 import java.util.List;
 
 /** PreCallAction to select which phone account to call with. Ignored if there's only one account */
@@ -211,24 +214,34 @@ public class CallingAccountSelector implements PreCallAction {
         default:
       }
     }
-    List<PhoneAccountHandle> phoneAccountHandles =
+    SelectPhoneAccountDialogOptions.Builder optionsBuilder =
+        SelectPhoneAccountDialogOptions.newBuilder()
+            .setTitle(R.string.pre_call_select_phone_account)
+            .setCanSetDefault(dataId != null)
+            .setSetDefaultLabel(R.string.pre_call_select_phone_account_remember);
+
+    for (PhoneAccountHandle phoneAccountHandle :
         coordinator
             .getActivity()
             .getSystemService(TelecomManager.class)
-            .getCallCapablePhoneAccounts();
+            .getCallCapablePhoneAccounts()) {
+      SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
+          SelectPhoneAccountDialogOptions.Entry.newBuilder();
+      SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(entryBuilder, phoneAccountHandle);
+      Optional<String> hint =
+          SuggestionProvider.getHint(coordinator.getActivity(), phoneAccountHandle, suggestion);
+      if (hint.isPresent()) {
+        entryBuilder.setHint(hint.get());
+      }
+      optionsBuilder.addEntries(entryBuilder);
+    }
     selectPhoneAccountDialogFragment =
         SelectPhoneAccountDialogFragment.newInstance(
-            R.string.pre_call_select_phone_account,
-            dataId != null /* canSetDefault */,
-            R.string.pre_call_select_phone_account_remember,
-            phoneAccountHandles,
+            optionsBuilder.build(),
             new SelectedListener(
                 coordinator,
                 pendingAction,
-                new PreferredAccountRecorder(number, suggestion, dataId)),
-            null /* call ID */,
-            SuggestionProvider.buildHint(
-                coordinator.getActivity(), phoneAccountHandles, suggestion));
+                new PreferredAccountRecorder(number, suggestion, dataId)));
     selectPhoneAccountDialogFragment.show(
         coordinator.getActivity().getFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
   }

@@ -55,6 +55,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.Toast;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptionsUtil;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.Assert;
@@ -395,16 +397,30 @@ public class InCallActivity extends TransactionSafeFragmentActivity
                       waitingForAccountCall.getNumber(),
                       result.getSuggestion().orNull(),
                       result.getDataId().orNull()));
+              SelectPhoneAccountDialogOptions.Builder optionsBuilder =
+                  SelectPhoneAccountDialogOptions.newBuilder()
+                      .setTitle(R.string.select_phone_account_for_calls)
+                      .setCanSetDefault(result.getDataId().isPresent())
+                      .setSetDefaultLabel(R.string.select_phone_account_for_calls_remember)
+                      .setCallId(waitingForAccountCall.getId());
+
+              for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+                SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
+                    SelectPhoneAccountDialogOptions.Entry.newBuilder();
+                SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(
+                    entryBuilder, phoneAccountHandle);
+                Optional<String> hint =
+                    SuggestionProvider.getHint(
+                        this, phoneAccountHandle, result.getSuggestion().orNull());
+                if (hint.isPresent()) {
+                  entryBuilder.setHint(hint.get());
+                }
+                optionsBuilder.addEntries(entryBuilder);
+              }
+
               selectPhoneAccountDialogFragment =
                   SelectPhoneAccountDialogFragment.newInstance(
-                      R.string.select_phone_account_for_calls,
-                      result.getDataId().isPresent() /* canSetDefault */,
-                      R.string.select_phone_account_for_calls_remember /* setDefaultResId */,
-                      phoneAccountHandles,
-                      selectPhoneAccountListener,
-                      waitingForAccountCall.getId(),
-                      SuggestionProvider.buildHint(
-                          this, phoneAccountHandles, result.getSuggestion().orNull() /* hints */));
+                      optionsBuilder.build(), selectPhoneAccountListener);
               selectPhoneAccountDialogFragment.show(
                   getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
             }))
