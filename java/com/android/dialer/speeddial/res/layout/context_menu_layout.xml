@@ -20,7 +20,6 @@
     android:orientation="vertical"
     android:layout_width="160dp"
     android:layout_height="wrap_content"
-    android:elevation="8dp"
     android:clipChildren="true"
     android:clipToPadding="false">
 
@@ -83,13 +82,12 @@
         android:drawableStart="@drawable/quantum_ic_close_vd_theme_24"
         style="@style/SpeedDialContextMenuItem"/>
 
-    <!-- TODO(calderwoodra): Update this icon to be the contact icon. -->
     <TextView
         android:id="@+id/contact_info_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/context_menu_contact_icon"
         android:text="@string/contact_menu_contact_info"
-        android:drawableStart="@drawable/quantum_ic_call_vd_theme_24"
-        style="@style/SpeedDialContextMenuItem"/>
+        style="@style/SpeedDialContextMenuItem.NoDrawableTint"/>
   </LinearLayout>
 </com.android.dialer.speeddial.ContextMenu>
