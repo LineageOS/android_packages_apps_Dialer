@@ -26,6 +26,8 @@ import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
 
+import com.android.incallui.R;
+
 /**
  * This class prevents users from accidentally answering calls by keeping the screen off until the
  * proximity sensor is unblocked. If the screen is already on or if this is a call waiting call then
@@ -53,6 +55,11 @@ public class AnswerProximitySensor
     if (!ConfigProviderBindings.get(context)
         .getBoolean(CONFIG_ANSWER_PROXIMITY_SENSOR_ENABLED, true)) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "disabled by config");
+      return false;
+    }
+
+    if (!context.getResources().getBoolean(R.bool.config_answer_proximity_sensor_enabled)) {
+      LogUtil.i("AnswerProximitySensor.shouldUse", "disabled by overlay");
       return false;
     }
 
