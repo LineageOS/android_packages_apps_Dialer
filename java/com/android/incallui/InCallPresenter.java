@@ -71,6 +71,8 @@ import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
 import com.android.incallui.speakeasy.SpeakEasyCallManager;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogActivity;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
@@ -775,8 +777,22 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   @Override
   public void onInternationalCallOnWifi(@NonNull DialerCall call) {
     LogUtil.enterBlock("InCallPresenter.onInternationalCallOnWifi");
+
+    if (!InternationalCallOnWifiDialogFragment.shouldShow(context)) {
+      LogUtil.i(
+          "InCallPresenter.onInternationalCallOnWifi",
+          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
+      return;
+    }
+
     if (inCallActivity != null) {
       inCallActivity.showDialogForInternationalCallOnWifi(call);
+    } else {
+      Intent intent = new Intent(context, InternationalCallOnWifiDialogActivity.class);
+      // Prevent showing MainActivity with InternationalCallOnWifiDialogActivity on above
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+      intent.putExtra(InternationalCallOnWifiDialogActivity.EXTRA_CALL_ID, call.getId());
+      context.startActivity(intent);
     }
   }
 

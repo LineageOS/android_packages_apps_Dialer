@@ -129,9 +129,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private static Optional<Integer> audioRouteForTesting = Optional.absent();
 
-  private final InternationalCallOnWifiCallback internationalCallOnWifiCallback =
-      new InternationalCallOnWifiCallback();
-
   private SelectPhoneAccountListener selectPhoneAccountListener;
 
   private Animation dialpadSlideInAnimation;
@@ -243,13 +240,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       if (selectPhoneAccountDialogFragment != null) {
         selectPhoneAccountDialogFragment.setListener(selectPhoneAccountListener);
       }
-    }
-
-    InternationalCallOnWifiDialogFragment existingInternationalCallOnWifiDialogFragment =
-        (InternationalCallOnWifiDialogFragment)
-            getSupportFragmentManager().findFragmentByTag(Tags.INTERNATIONAL_CALL_ON_WIFI);
-    if (existingInternationalCallOnWifiDialogFragment != null) {
-      existingInternationalCallOnWifiDialogFragment.setCallback(internationalCallOnWifiCallback);
     }
 
     inCallOrientationEventListener = new InCallOrientationEventListener(this);
@@ -1201,16 +1191,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void showDialogForInternationalCallOnWifi(@NonNull DialerCall call) {
-    if (!InternationalCallOnWifiDialogFragment.shouldShow(this)) {
-      LogUtil.i(
-          "InCallActivity.showDialogForInternationalCallOnWifi",
-          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
-      return;
-    }
-
     InternationalCallOnWifiDialogFragment fragment =
-        InternationalCallOnWifiDialogFragment.newInstance(
-            call.getId(), internationalCallOnWifiCallback);
+        InternationalCallOnWifiDialogFragment.newInstance(call.getId());
     fragment.show(getSupportFragmentManager(), Tags.INTERNATIONAL_CALL_ON_WIFI);
   }
 
@@ -1783,28 +1765,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private static final class ConfigNames {
     static final String ANSWER_AND_RELEASE_ENABLED = "answer_and_release_enabled";
-  }
-
-  private static final class InternationalCallOnWifiCallback
-      implements InternationalCallOnWifiDialogFragment.Callback {
-    private static final String TAG = InternationalCallOnWifiCallback.class.getCanonicalName();
-
-    @Override
-    public void continueCall(@NonNull String callId) {
-      LogUtil.i(TAG, "Continuing call with ID: %s", callId);
-    }
-
-    @Override
-    public void cancelCall(@NonNull String callId) {
-      DialerCall call = CallList.getInstance().getCallById(callId);
-      if (call == null) {
-        LogUtil.i(TAG, "Call destroyed before the dialog is closed");
-        return;
-      }
-
-      LogUtil.i(TAG, "Disconnecting international call on WiFi");
-      call.disconnect();
-    }
   }
 
   private static final class SelectPhoneAccountListener
