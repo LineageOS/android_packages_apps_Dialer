@@ -213,8 +213,22 @@ public class CallList implements DialerCallDelegate {
 
     if (call.getState() == DialerCall.State.INCOMING
         || call.getState() == DialerCall.State.CALL_WAITING) {
+      if (call.isActiveRttCall()) {
+        Logger.get(context)
+            .logCallImpression(
+                DialerImpression.Type.INCOMING_RTT_CALL,
+                call.getUniqueCallId(),
+                call.getTimeAddedMs());
+      }
       onIncoming(call);
     } else {
+      if (call.isActiveRttCall()) {
+        Logger.get(context)
+            .logCallImpression(
+                DialerImpression.Type.OUTGOING_RTT_CALL,
+                call.getUniqueCallId(),
+                call.getTimeAddedMs());
+      }
       onUpdateCall(call);
       notifyGenericListeners();
     }
