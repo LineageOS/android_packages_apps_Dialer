@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1387
+  // Next Tag: 1389
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -764,5 +764,9 @@ message DialerImpression {
     RTT_MID_CALL_ACCEPTED = 1385;
     // Mid call RTT request rejected.
     RTT_MID_CALL_REJECTED = 1386;
+
+    // Send button clicked in RTT call, this includes send button on keyboard.
+    RTT_SEND_BUTTON_CLICKED = 1387;
+    RTT_KEYBOARD_SEND_BUTTON_CLICKED = 1388;
   }
 }
