@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19dcb8b6_3f392894",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-04-24T22:01:19Z",
+      "side": 1,
+      "message": "I\u0027d rather write:\n\nThis feature can\u0027t be used on devices with proximity sensors which rely on ultrasound technology, since those kind of sensors don\u0027t work when the screen is off. That obviously would result in a black screen with just the status bar showing, instead of the normal incoming call UI.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
