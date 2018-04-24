@@ -22,6 +22,29 @@
       "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4059a26_93d03e8d",
+        "filename": "java/com/android/incallui/answerproximitysensor/AnswerProximitySensor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-04-24T22:03:04Z",
+      "side": 1,
+      "message": "Is this config somewhere in the UI? If that\u0027s so, you should make the overlay priority and simply remove this config to avoid confusion for the users.",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 58
+      },
+      "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
