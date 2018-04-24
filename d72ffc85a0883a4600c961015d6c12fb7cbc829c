@@ -93,6 +93,24 @@
       "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41d516b7_06839e02",
+        "filename": "java/com/android/incallui/answerproximitysensor/AnswerProximitySensor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2018-04-24T23:58:20Z",
+      "side": 1,
+      "message": "The comment in the beginning of the file below basically explains the only official way to set it, as far as I can see.\n\nhttps://github.com/LineageOS/android_packages_apps_Dialer/blob/lineage-15.1/java/com/android/dialer/configprovider/SharedPrefConfigProvider.java",
+      "parentUuid": "b4059a26_93d03e8d",
+      "revId": "d72ffc85a0883a4600c961015d6c12fb7cbc829c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
