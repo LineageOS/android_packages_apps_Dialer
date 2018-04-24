@@ -148,13 +148,7 @@ public class SpeedDialFragment extends Fragment {
     speedDialLoaderListener.listen(
         getContext(),
         UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
-        speedDialUiItems -> {
-          adapter.setSpeedDialUiItems(
-              UiItemLoaderComponent.get(getContext())
-                  .speedDialUiItemLoader()
-                  .insertDuoChannels(getContext(), speedDialUiItems));
-          adapter.notifyDataSetChanged();
-        },
+        this::onSpeedDialUiItemListLoaded,
         throwable -> {
           throw new RuntimeException(throwable);
         });
@@ -170,16 +164,21 @@ public class SpeedDialFragment extends Fragment {
             UiItemLoaderComponent.get(getContext())
                 .speedDialUiItemLoader()
                 .starContact(data.getData()),
-            speedDialUiItems -> {
-              adapter.setSpeedDialUiItems(speedDialUiItems);
-              // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
-              adapter.notifyDataSetChanged();
-            },
+            this::onSpeedDialUiItemListLoaded,
             throwable -> {
               throw new RuntimeException(throwable);
             });
       }
     }
+  }
+
+  private void onSpeedDialUiItemListLoaded(ImmutableList<SpeedDialUiItem> speedDialUiItems) {
+    // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
+    adapter.setSpeedDialUiItems(
+        UiItemLoaderComponent.get(getContext())
+            .speedDialUiItemLoader()
+            .insertDuoChannels(getContext(), speedDialUiItems));
+    adapter.notifyDataSetChanged();
   }
 
   @Override
