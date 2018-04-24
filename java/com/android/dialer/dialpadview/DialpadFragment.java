@@ -470,11 +470,13 @@ public class DialpadFragment extends Fragment
     }
 
     if (shouldShowEmergencyCallWarning(getContext())) {
-      digitsHint.setText(
-          getContext().getString(R.string.dialpad_hint_emergency_calling_not_available));
+      String hint = getContext().getString(R.string.dialpad_hint_emergency_calling_not_available);
+      digits.setContentDescription(hint);
+      digitsHint.setText(hint);
       digitsHint.setVisibility(View.VISIBLE);
       return;
     }
+    digits.setContentDescription(null);
     digitsHint.setVisibility(View.GONE);
   }
 
