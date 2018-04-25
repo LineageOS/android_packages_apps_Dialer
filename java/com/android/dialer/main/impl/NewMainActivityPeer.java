@@ -29,7 +29,6 @@ import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
-import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -106,16 +105,18 @@ public class NewMainActivityPeer implements MainActivityPeer {
     @Override
     public void onSpeedDialSelected() {
       hideAllFragments();
-      SpeedDialFragment fragment =
-          (SpeedDialFragment) supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-      if (fragment == null) {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, SpeedDialFragment.newInstance(), SPEED_DIAL_TAG)
-            .commit();
-      } else {
-        supportFragmentManager.beginTransaction().show(fragment).commit();
-      }
+      // TODO(calderwoodra): Since we aren't using fragment utils in this peer, let's disable
+      // speed dial until we figure out a solution.
+      // SpeedDialFragment fragment =
+      //     (SpeedDialFragment) supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+      // if (fragment == null) {
+      //   supportFragmentManager
+      //       .beginTransaction()
+      //       .add(R.id.fragment_container, SpeedDialFragment.newInstance(), SPEED_DIAL_TAG)
+      //       .commit();
+      // } else {
+      //   supportFragmentManager.beginTransaction().show(fragment).commit();
+      // }
     }
 
     @Override
