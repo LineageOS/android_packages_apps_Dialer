@@ -63,6 +63,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
@@ -71,6 +72,7 @@ import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
+import com.android.dialer.preferredsim.PreferredAccountWorker.Result;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.bindings.AnswerBindings;
@@ -103,6 +105,7 @@ import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.video.protocol.VideoCallScreenDelegateFactory;
 import com.google.common.base.Optional;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -132,6 +135,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private static Optional<Integer> audioRouteForTesting = Optional.absent();
 
   private SelectPhoneAccountListener selectPhoneAccountListener;
+  private UiListener<Result> preferredAccountWorkerResultListener;
 
   private Animation dialpadSlideInAnimation;
   private Animation dialpadSlideOutAnimation;
@@ -187,6 +191,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   protected void onCreate(Bundle bundle) {
     Trace.beginSection("InCallActivity.onCreate");
     super.onCreate(bundle);
+
+    preferredAccountWorkerResultListener =
+        DialerExecutorComponent.get(this)
+            .createUiListener(getFragmentManager(), "preferredAccountWorkerResultListener");
 
     selectPhoneAccountListener = new SelectPhoneAccountListener(getApplicationContext());
 
@@ -360,72 +368,84 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return false;
     }
 
-    DialerExecutorComponent.get(this)
-        .dialerExecutorFactory()
-        .createNonUiTaskBuilder(new PreferredAccountWorker(waitingForAccountCall.getNumber()))
-        .onSuccess(
-            (result -> {
-              if (result.getPhoneAccountHandle().isPresent()) {
-                Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
-                selectPhoneAccountListener.onPhoneAccountSelected(
-                    result.getPhoneAccountHandle().get(), false, waitingForAccountCall.getId());
-                return;
-              }
-              if (result.getSuggestion().isPresent()) {
-                LogUtil.i(
-                    "CallingAccountSelector.processPreferredAccount",
-                    "SIM suggested: " + result.getSuggestion().get().reason);
-                if (result.getSuggestion().get().shouldAutoSelect) {
-                  Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
-                  LogUtil.i(
-                      "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
-                  selectPhoneAccountListener.onPhoneAccountSelected(
-                      result.getSuggestion().get().phoneAccountHandle,
-                      false,
-                      waitingForAccountCall.getId());
-                  return;
-                }
-              }
-              Bundle extras = waitingForAccountCall.getIntentExtras();
-              List<PhoneAccountHandle> phoneAccountHandles =
-                  extras == null
-                      ? new ArrayList<>()
-                      : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
+    ListenableFuture<PreferredAccountWorker.Result> preferredAccountFuture =
+        DialerExecutorComponent.get(this)
+            .backgroundExecutor()
+            .submit(
+                () -> {
+                  try {
+                    return new PreferredAccountWorker(waitingForAccountCall.getNumber())
+                        .doInBackground(getApplicationContext());
+                  } catch (Throwable throwable) {
+                    throw new Exception(throwable);
+                  }
+                });
 
-              waitingForAccountCall.setPreferredAccountRecorder(
-                  new PreferredAccountRecorder(
-                      waitingForAccountCall.getNumber(),
-                      result.getSuggestion().orNull(),
-                      result.getDataId().orNull()));
-              SelectPhoneAccountDialogOptions.Builder optionsBuilder =
-                  SelectPhoneAccountDialogOptions.newBuilder()
-                      .setTitle(R.string.select_phone_account_for_calls)
-                      .setCanSetDefault(result.getDataId().isPresent())
-                      .setSetDefaultLabel(R.string.select_phone_account_for_calls_remember)
-                      .setCallId(waitingForAccountCall.getId());
+    preferredAccountWorkerResultListener.listen(
+        this,
+        preferredAccountFuture,
+        result -> {
+          if (result.getPhoneAccountHandle().isPresent()) {
+            Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
+            selectPhoneAccountListener.onPhoneAccountSelected(
+                result.getPhoneAccountHandle().get(), false, waitingForAccountCall.getId());
+            return;
+          }
+          if (result.getSuggestion().isPresent()) {
+            LogUtil.i(
+                "CallingAccountSelector.processPreferredAccount",
+                "SIM suggested: " + result.getSuggestion().get().reason);
+            if (result.getSuggestion().get().shouldAutoSelect) {
+              Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
+              LogUtil.i(
+                  "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
+              selectPhoneAccountListener.onPhoneAccountSelected(
+                  result.getSuggestion().get().phoneAccountHandle,
+                  false,
+                  waitingForAccountCall.getId());
+              return;
+            }
+          }
+          Bundle extras = waitingForAccountCall.getIntentExtras();
+          List<PhoneAccountHandle> phoneAccountHandles =
+              extras == null
+                  ? new ArrayList<>()
+                  : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
 
-              for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
-                SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
-                    SelectPhoneAccountDialogOptions.Entry.newBuilder();
-                SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(
-                    entryBuilder, phoneAccountHandle);
-                Optional<String> hint =
-                    SuggestionProvider.getHint(
-                        this, phoneAccountHandle, result.getSuggestion().orNull());
-                if (hint.isPresent()) {
-                  entryBuilder.setHint(hint.get());
-                }
-                optionsBuilder.addEntries(entryBuilder);
-              }
+          waitingForAccountCall.setPreferredAccountRecorder(
+              new PreferredAccountRecorder(
+                  waitingForAccountCall.getNumber(),
+                  result.getSuggestion().orNull(),
+                  result.getDataId().orNull()));
+          SelectPhoneAccountDialogOptions.Builder optionsBuilder =
+              SelectPhoneAccountDialogOptions.newBuilder()
+                  .setTitle(R.string.select_phone_account_for_calls)
+                  .setCanSetDefault(result.getDataId().isPresent())
+                  .setSetDefaultLabel(R.string.select_phone_account_for_calls_remember)
+                  .setCallId(waitingForAccountCall.getId());
 
-              selectPhoneAccountDialogFragment =
-                  SelectPhoneAccountDialogFragment.newInstance(
-                      optionsBuilder.build(), selectPhoneAccountListener);
-              selectPhoneAccountDialogFragment.show(
-                  getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
-            }))
-        .build()
-        .executeParallel(this);
+          for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+            SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
+                SelectPhoneAccountDialogOptions.Entry.newBuilder();
+            SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(
+                entryBuilder, phoneAccountHandle);
+            Optional<String> hint =
+                SuggestionProvider.getHint(
+                    this, phoneAccountHandle, result.getSuggestion().orNull());
+            if (hint.isPresent()) {
+              entryBuilder.setHint(hint.get());
+            }
+            optionsBuilder.addEntries(entryBuilder);
+          }
+
+          selectPhoneAccountDialogFragment =
+              SelectPhoneAccountDialogFragment.newInstance(
+                  optionsBuilder.build(), selectPhoneAccountListener);
+          selectPhoneAccountDialogFragment.show(getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
+        },
+        throwable -> {
+          throw new RuntimeException(throwable);
+        });
 
     return true;
   }
