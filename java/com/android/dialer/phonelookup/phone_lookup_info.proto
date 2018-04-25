@@ -14,7 +14,7 @@ package com.android.dialer.phonelookup;
 // "cp2_info_in_default_directory" corresponds to class
 // Cp2DefaultDirectoryPhoneLookup, and class Cp2DefaultDirectoryPhoneLookup
 // alone is responsible for populating it.
-// Next ID: 8
+// Next ID: 9
 message PhoneLookupInfo {
   // Information about a PhoneNumber retrieved from CP2.
   message Cp2Info {
@@ -163,4 +163,16 @@ message PhoneLookupInfo {
     optional string name = 1;
   }
   optional CnapInfo cnap_info = 7;
+
+  // Information obtained via Cequint
+  // Next ID: 4
+  message CequintInfo {
+    optional string name = 1;
+
+    // Description of the geolocation (e.g., "Mountain View, CA")
+    optional string geolocation = 2;
+
+    optional string photo_uri = 3;
+  }
+  optional CequintInfo cequint_info = 8;
 }

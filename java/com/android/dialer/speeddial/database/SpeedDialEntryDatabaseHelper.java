@@ -26,6 +26,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,30 +133,39 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public void insert(ImmutableList<SpeedDialEntry> entries) {
+  public ImmutableMap<SpeedDialEntry, Long> insert(ImmutableList<SpeedDialEntry> entries) {
     if (entries.isEmpty()) {
-      return;
+      return ImmutableMap.of();
     }
 
     SQLiteDatabase db = getWritableDatabase();
     db.beginTransaction();
     try {
-      insert(db, entries);
+      ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap = insert(db, entries);
       db.setTransactionSuccessful();
+      return insertedEntriesToIdsMap;
     } finally {
       db.endTransaction();
       db.close();
     }
   }
 
-  private void insert(SQLiteDatabase writeableDatabase, ImmutableList<SpeedDialEntry> entries) {
+  private ImmutableMap<SpeedDialEntry, Long> insert(
+      SQLiteDatabase writeableDatabase, ImmutableList<SpeedDialEntry> entries) {
+    ImmutableMap.Builder<SpeedDialEntry, Long> insertedEntriesToIdsMap = ImmutableMap.builder();
     for (SpeedDialEntry entry : entries) {
       Assert.checkArgument(entry.id() == null);
-      if (writeableDatabase.insert(TABLE_NAME, null, buildContentValuesWithoutId(entry)) == -1L) {
+      long id = writeableDatabase.insert(TABLE_NAME, null, buildContentValuesWithoutId(entry));
+      if (id == -1L) {
         throw Assert.createUnsupportedOperationFailException(
             "Attempted to insert a row that already exists.");
       }
+      // It's impossible to insert two identical entries but this is an important assumption we need
+      // to verify because there's an assumption that each entry will correspond to exactly one id.
+      // ImmutableMap#put verifies this check for us.
+      insertedEntriesToIdsMap.put(entry, id);
     }
+    return insertedEntriesToIdsMap.build();
   }
 
   @Override
@@ -255,20 +265,21 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public void insertUpdateAndDelete(
+  public ImmutableMap<SpeedDialEntry, Long> insertUpdateAndDelete(
       ImmutableList<SpeedDialEntry> entriesToInsert,
       ImmutableList<SpeedDialEntry> entriesToUpdate,
       ImmutableList<Long> entriesToDelete) {
     if (entriesToInsert.isEmpty() && entriesToUpdate.isEmpty() && entriesToDelete.isEmpty()) {
-      return;
+      return ImmutableMap.of();
     }
     SQLiteDatabase db = getWritableDatabase();
     db.beginTransaction();
     try {
-      insert(db, entriesToInsert);
+      ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap = insert(db, entriesToInsert);
       update(db, entriesToUpdate);
       delete(db, entriesToDelete);
       db.setTransactionSuccessful();
+      return insertedEntriesToIdsMap;
     } finally {
       db.endTransaction();
       db.close();

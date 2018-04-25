@@ -136,6 +136,15 @@ public abstract class SpeedDialUiItem {
     return builder.build();
   }
 
+  public SpeedDialEntry buildSpeedDialEntry() {
+    return SpeedDialEntry.builder()
+        .setId(speedDialEntryId())
+        .setLookupKey(lookupKey())
+        .setContactId(contactId())
+        .setDefaultChannel(defaultChannel())
+        .build();
+  }
+
   /**
    * Returns a video channel if there is exactly one video channel or the default channel is a video
    * channel.
