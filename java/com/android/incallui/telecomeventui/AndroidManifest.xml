@@ -12,4 +12,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<manifest package="com.android.incallui.telecomeventui"/>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.incallui.telecomeventui">
+  <application>
+    <activity
+        android:excludeFromRecents="true"
+        android:exported="true"
+        android:name="com.android.incallui.telecomeventui.InternationalCallOnWifiDialogActivity"
+        android:noHistory="true"
+        android:theme="@style/Theme.Incall.DialogHolder"/>
+  </application>
+</manifest>

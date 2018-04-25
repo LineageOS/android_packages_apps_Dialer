@@ -210,4 +210,9 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
   public void setItemTouchHelper(ItemTouchHelper itemTouchHelper) {
     this.itemTouchHelper = itemTouchHelper;
   }
+
+  /** Returns true if there are suggested contacts. */
+  public boolean hasFrequents() {
+    return !speedDialUiItems.isEmpty() && getItemViewType(getItemCount() - 1) == RowType.SUGGESTION;
+  }
 }
