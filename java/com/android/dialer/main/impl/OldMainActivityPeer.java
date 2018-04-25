@@ -183,6 +183,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   // Speed Dial
   private MainOnPhoneNumberPickerActionListener onPhoneNumberPickerActionListener;
   private MainOldSpeedDialFragmentHost oldSpeedDialFragmentHost;
+  private MainSpeedDialFragmentHost speedDialFragmentHost;
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
   private String savedLanguageCode;
@@ -293,6 +294,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             activity.findViewById(R.id.remove_view),
             activity.findViewById(R.id.search_view_container),
             toolbar);
+    speedDialFragmentHost = new MainSpeedDialFragmentHost(toolbar);
 
     lastTabController = new LastTabController(activity, bottomNav, showVoicemailTab);
 
@@ -639,6 +641,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       return (T) oldSpeedDialFragmentHost;
     } else if (callbackInterface.isInstance(searchController)) {
       return (T) searchController;
+    } else if (callbackInterface.isInstance(speedDialFragmentHost)) {
+      return (T) speedDialFragmentHost;
     } else {
       return null;
     }
@@ -1187,6 +1191,25 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       } else {
         AnimUtils.crossFadeViews(searchViewContainer, removeViewContent, 300);
       }
+    }
+  }
+
+  /**
+   * Handles the callbacks for {@link SpeedDialFragment}.
+   *
+   * @see SpeedDialFragment.HostInterface
+   */
+  private static final class MainSpeedDialFragmentHost implements SpeedDialFragment.HostInterface {
+
+    private final MainToolbar toolbar;
+
+    MainSpeedDialFragmentHost(MainToolbar toolbar) {
+      this.toolbar = toolbar;
+    }
+
+    @Override
+    public void setHasFrequents(boolean hasFrequents) {
+      toolbar.showClearFrequents(hasFrequents);
     }
   }
 
