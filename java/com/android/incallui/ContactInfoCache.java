@@ -522,20 +522,20 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     }
     boolean hasUpdate = false;
 
-    if (TextUtils.isEmpty(callerInfo.name) && !TextUtils.isEmpty(cequintCallerIdContact.name)) {
-      callerInfo.name = cequintCallerIdContact.name;
+    if (TextUtils.isEmpty(callerInfo.name) && !TextUtils.isEmpty(cequintCallerIdContact.name())) {
+      callerInfo.name = cequintCallerIdContact.name();
       hasUpdate = true;
     }
-    if (!TextUtils.isEmpty(cequintCallerIdContact.geoDescription)) {
-      callerInfo.geoDescription = cequintCallerIdContact.geoDescription;
+    if (!TextUtils.isEmpty(cequintCallerIdContact.geolocation())) {
+      callerInfo.geoDescription = cequintCallerIdContact.geolocation();
       callerInfo.shouldShowGeoDescription = true;
       hasUpdate = true;
     }
     // Don't overwrite photo in local contacts.
     if (!callerInfo.contactExists
         && callerInfo.contactDisplayPhotoUri == null
-        && cequintCallerIdContact.imageUrl != null) {
-      callerInfo.contactDisplayPhotoUri = Uri.parse(cequintCallerIdContact.imageUrl);
+        && cequintCallerIdContact.photoUri() != null) {
+      callerInfo.contactDisplayPhotoUri = Uri.parse(cequintCallerIdContact.photoUri());
       hasUpdate = true;
     }
     // Set contact to exist to avoid phone number service lookup.

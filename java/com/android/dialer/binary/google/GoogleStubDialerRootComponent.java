@@ -17,6 +17,7 @@
 package com.android.dialer.binary.google;
 
 import com.android.bubble.stub.StubBubbleModule;
+import com.android.dialer.activecalls.ActiveCallsModule;
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
 import com.android.dialer.calllog.config.CallLogConfigModule;
@@ -52,6 +53,7 @@ import javax.inject.Singleton;
 @Singleton
 @Component(
   modules = {
+    ActiveCallsModule.class,
     CallLocationModule.class,
     CallLogModule.class,
     CallLogConfigModule.class,

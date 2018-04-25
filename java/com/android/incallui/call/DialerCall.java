@@ -157,7 +157,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String lastForwardedNumber;
   private boolean isCallForwarded;
   private String callSubject;
-  private PhoneAccountHandle phoneAccountHandle;
+  @Nullable private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
   private boolean isSpam;
   private boolean isBlocked;

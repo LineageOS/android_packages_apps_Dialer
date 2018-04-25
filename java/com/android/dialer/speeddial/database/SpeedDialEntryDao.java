@@ -17,6 +17,7 @@
 package com.android.dialer.speeddial.database;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Interface that databases support speed dial entries should implement.
@@ -32,8 +33,10 @@ public interface SpeedDialEntryDao {
    * Insert new entries.
    *
    * <p>{@link SpeedDialEntry#id() ids} must be null.
+   *
+   * @return a map of the inserted entries to their new ids.
    */
-  void insert(ImmutableList<SpeedDialEntry> entries);
+  ImmutableMap<SpeedDialEntry, Long> insert(ImmutableList<SpeedDialEntry> entries);
 
   /**
    * Insert a new entry.
@@ -59,11 +62,12 @@ public interface SpeedDialEntryDao {
   /**
    * Inserts, updates and deletes rows all in on transaction.
    *
+   * @return a map of the inserted entries to their new ids.
    * @see #insert(ImmutableList)
    * @see #update(ImmutableList)
    * @see #delete(ImmutableList)
    */
-  void insertUpdateAndDelete(
+  ImmutableMap<SpeedDialEntry, Long> insertUpdateAndDelete(
       ImmutableList<SpeedDialEntry> entriesToInsert,
       ImmutableList<SpeedDialEntry> entriesToUpdate,
       ImmutableList<Long> entriesToDelete);
