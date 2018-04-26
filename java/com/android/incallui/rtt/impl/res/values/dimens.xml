@@ -20,4 +20,7 @@
   <dimen name="rtt_overflow_menu_width">180dp</dimen>
   <dimen name="rtt_overflow_menu_elevation">8dp</dimen>
   <dimen name="rtt_avatar_size">40dp</dimen>
+  <dimen name="rtt_banner_height">56dp</dimen>
+  <!-- This is used to control image size inside the button. -->
+  <dimen name="rtt_banner_button_padding">12dp</dimen>
 </resources>
