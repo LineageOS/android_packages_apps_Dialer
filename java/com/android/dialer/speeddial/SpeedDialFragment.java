@@ -36,6 +36,7 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.constants.ActivityRequestCodes;
@@ -54,6 +55,7 @@ import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.util.IntentUtil;
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.Futures;
 
 /**
  * Fragment for displaying:
@@ -143,7 +145,7 @@ public class SpeedDialFragment extends Fragment {
 
     speedDialLoaderListener.listen(
         getContext(),
-        UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
+        UiItemLoaderComponent.get(getContext()).speedDialUiItemMutator().loadSpeedDialUiItems(),
         this::onSpeedDialUiItemListLoaded,
         throwable -> {
           throw new RuntimeException(throwable);
@@ -158,7 +160,7 @@ public class SpeedDialFragment extends Fragment {
         speedDialLoaderListener.listen(
             getContext(),
             UiItemLoaderComponent.get(getContext())
-                .speedDialUiItemLoader()
+                .speedDialUiItemMutator()
                 .starContact(data.getData()),
             this::onSpeedDialUiItemListLoaded,
             throwable -> {
@@ -173,7 +175,7 @@ public class SpeedDialFragment extends Fragment {
     // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
     adapter.setSpeedDialUiItems(
         UiItemLoaderComponent.get(getContext())
-            .speedDialUiItemLoader()
+            .speedDialUiItemMutator()
             .insertDuoChannels(getContext(), speedDialUiItems));
     adapter.notifyDataSetChanged();
     if (getActivity() != null) {
@@ -187,6 +189,18 @@ public class SpeedDialFragment extends Fragment {
     super.onPause();
     contextMenu.hideMenu();
     contextMenuBackground.setVisibility(View.GONE);
+    Futures.addCallback(
+        DialerExecutorComponent.get(getContext())
+            .backgroundExecutor()
+            .submit(
+                () -> {
+                  UiItemLoaderComponent.get(getContext())
+                      .speedDialUiItemMutator()
+                      .updatePinnedPosition(adapter.getSpeedDialUiItems());
+                  return null;
+                }),
+        new DefaultFutureCallback<>(),
+        DialerExecutorComponent.get(getContext()).backgroundExecutor());
   }
 
   @Override

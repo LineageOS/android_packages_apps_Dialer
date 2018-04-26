@@ -25,6 +25,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,9 @@ public abstract class SpeedDialUiItem {
   }
 
   public static Builder builder() {
-    return new AutoValue_SpeedDialUiItem.Builder().setChannels(ImmutableList.of());
+    return new AutoValue_SpeedDialUiItem.Builder()
+        .setChannels(ImmutableList.of())
+        .setPinnedPosition(Optional.absent());
   }
 
   /**
@@ -139,6 +142,7 @@ public abstract class SpeedDialUiItem {
   public SpeedDialEntry buildSpeedDialEntry() {
     return SpeedDialEntry.builder()
         .setId(speedDialEntryId())
+        .setPinnedPosition(pinnedPosition())
         .setLookupKey(lookupKey())
         .setContactId(contactId())
         .setDefaultChannel(defaultChannel())
@@ -212,6 +216,9 @@ public abstract class SpeedDialUiItem {
   @Nullable
   public abstract Long speedDialEntryId();
 
+  /** @see SpeedDialEntry#pinnedPosition() */
+  public abstract Optional<Integer> pinnedPosition();
+
   /** @see android.provider.ContactsContract.Contacts#DISPLAY_NAME */
   public abstract String name();
 
@@ -254,6 +261,8 @@ public abstract class SpeedDialUiItem {
 
     /** Set to null if {@link #isStarred()} is false. */
     public abstract Builder setSpeedDialEntryId(@Nullable Long id);
+
+    public abstract Builder setPinnedPosition(Optional<Integer> pinnedPosition);
 
     public abstract Builder setName(String name);
 
