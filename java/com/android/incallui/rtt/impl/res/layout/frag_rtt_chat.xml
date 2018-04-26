@@ -54,7 +54,8 @@
         android:minHeight="53dp"
         android:textColor="#DD000000"
         android:textColorHint="#757575"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:visibility="gone"/>
     <ImageButton
         android:id="@+id/rtt_chat_submit_button"
         android:layout_width="55dp"
@@ -65,7 +66,8 @@
         android:backgroundTintMode="multiply"
         android:contentDescription="@string/content_description_rtt_check_button"
         android:src="@drawable/quantum_ic_done_vd_theme_24"
-        android:tint="@color/submit_button_color"/>
+        android:tint="@color/submit_button_color"
+        android:visibility="gone"/>
   </LinearLayout>
 
   <FrameLayout

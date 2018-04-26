@@ -461,6 +461,12 @@ public class RttChatFragment extends Fragment
               + SystemClock.elapsedRealtime());
       chronometer.start();
       isTimerStarted = true;
+      editText.setVisibility(View.VISIBLE);
+      submitButton.setVisibility(View.VISIBLE);
+      editText.setFocusableInTouchMode(true);
+      if (editText.requestFocus()) {
+        UiUtil.openKeyboardFrom(getContext(), editText);
+      }
     }
     if (primaryCallState.state() == State.DIALING) {
       showWaitingForJoinBanner();

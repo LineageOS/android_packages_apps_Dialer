@@ -24,7 +24,7 @@ import dagger.Subcomponent;
 @Subcomponent
 public abstract class UiItemLoaderComponent {
 
-  public abstract SpeedDialUiItemLoader speedDialUiItemLoader();
+  public abstract SpeedDialUiItemMutator speedDialUiItemMutator();
 
   public static UiItemLoaderComponent get(Context context) {
     return ((UiItemLoaderComponent.HasComponent)

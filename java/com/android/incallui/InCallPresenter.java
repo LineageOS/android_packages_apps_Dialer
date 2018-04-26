@@ -1271,8 +1271,22 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   }
 
   public void onPostDialCharWait(String callId, String chars) {
-    if (isActivityStarted()) {
+    // If not visible, inCallActivity is stopped. Starting from P, calling recreate() will destroy
+    // the old activity instance and create a new instance immediately. Previously, the old activity
+    // went through its lifecycle from create to destroy before creating a new instance.
+    // So this case doesn't work now: make a call with char WAIT, leave in call UI, call gets
+    // connected, and go back to in call UI to see the dialog.
+    // So we should show dialog in an empty activity if inCallActivity is not visible. And it also
+    // helps with background calling.
+    if (isActivityStarted() && inCallActivity.isVisible()) {
       inCallActivity.showDialogForPostCharWait(callId, chars);
+    } else {
+      Intent intent = new Intent(context, PostCharDialogActivity.class);
+      // Prevent showing MainActivity with PostCharDialogActivity on above
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+      intent.putExtra(PostCharDialogActivity.EXTRA_CALL_ID, callId);
+      intent.putExtra(PostCharDialogActivity.EXTRA_POST_DIAL_STRING, chars);
+      context.startActivity(intent);
     }
   }
 
