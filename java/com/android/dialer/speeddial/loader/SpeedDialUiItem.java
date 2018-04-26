@@ -18,10 +18,12 @@ package com.android.dialer.speeddial.loader;
 
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.google.auto.value.AutoValue;
@@ -137,6 +139,16 @@ public abstract class SpeedDialUiItem {
 
     builder.setChannels(ImmutableList.copyOf(channels));
     return builder.build();
+  }
+
+  public PhotoInfo getPhotoInfo() {
+    return PhotoInfo.newBuilder()
+        .setPhotoId(photoId())
+        .setPhotoUri(photoUri())
+        .setName(name())
+        .setIsVideo(defaultChannel() != null && defaultChannel().isVideoTechnology())
+        .setLookupUri(Contacts.getLookupUri(contactId(), lookupKey()).toString())
+        .build();
   }
 
   public SpeedDialEntry buildSpeedDialEntry() {
