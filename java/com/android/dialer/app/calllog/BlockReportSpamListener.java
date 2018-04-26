@@ -206,11 +206,28 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
   }
 
   private void showSpamBlockingPromoDialog() {
-    if (spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
-      spamBlockingPromoHelper.showSpamBlockingPromoDialog(
-          fragmentManager,
-          success -> spamBlockingPromoHelper.showModifySettingOnCompleteSnackbar(rootView, success),
-          null /* onDissmissListener */);
+    if (!spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
+      return;
     }
+
+    Logger.get(context).logImpression(DialerImpression.Type.SPAM_BLOCKING_CALL_LOG_PROMO_SHOWN);
+    spamBlockingPromoHelper.showSpamBlockingPromoDialog(
+        fragmentManager,
+        () -> {
+          Logger.get(context)
+              .logImpression(DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_CALL_LOG_PROMO);
+          spamSettings.modifySpamBlockingSetting(
+              true,
+              success -> {
+                if (!success) {
+                  Logger.get(context)
+                      .logImpression(
+                          DialerImpression.Type
+                              .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_CALL_LOG_PROMO);
+                }
+                spamBlockingPromoHelper.showModifySettingOnCompleteSnackbar(rootView, success);
+              });
+        },
+        null /* onDismissListener */);
   }
 }
