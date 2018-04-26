@@ -20,6 +20,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Optional;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -34,6 +35,9 @@ public abstract class SpeedDialEntry {
    */
   @Nullable
   public abstract Long id();
+
+  /** Position the contact is pinned to in the UI. Will be absent if it hasn't be set yet. */
+  public abstract Optional<Integer> pinnedPosition();
 
   /** @see {@link Contacts#_ID} */
   public abstract long contactId();
@@ -53,7 +57,7 @@ public abstract class SpeedDialEntry {
   public abstract Builder toBuilder();
 
   public static Builder builder() {
-    return new AutoValue_SpeedDialEntry.Builder();
+    return new AutoValue_SpeedDialEntry.Builder().setPinnedPosition(Optional.absent());
   }
 
   /** Builder class for speed dial entry. */
@@ -61,6 +65,8 @@ public abstract class SpeedDialEntry {
   public abstract static class Builder {
 
     public abstract Builder setId(Long id);
+
+    public abstract Builder setPinnedPosition(Optional<Integer> pinnedPosition);
 
     public abstract Builder setContactId(long contactId);
 

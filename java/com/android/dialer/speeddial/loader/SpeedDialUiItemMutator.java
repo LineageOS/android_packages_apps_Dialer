@@ -17,11 +17,14 @@
 package com.android.dialer.speeddial.loader;
 
 import android.annotation.TargetApi;
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
+import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -43,6 +46,7 @@ import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.database.SpeedDialEntryDao;
 import com.android.dialer.speeddial.database.SpeedDialEntryDatabaseHelper;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -76,7 +80,7 @@ import javax.inject.Singleton;
 @SuppressWarnings("AndroidApiChecker")
 @TargetApi(VERSION_CODES.N)
 @Singleton
-public final class SpeedDialUiItemLoader {
+public final class SpeedDialUiItemMutator {
 
   private static final int MAX_DUO_SUGGESTIONS = 3;
 
@@ -87,7 +91,7 @@ public final class SpeedDialUiItemLoader {
   private final ContactsPreferences contactsPreferences;
 
   @Inject
-  public SpeedDialUiItemLoader(
+  public SpeedDialUiItemMutator(
       @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
     this.appContext = appContext;
@@ -127,7 +131,7 @@ public final class SpeedDialUiItemLoader {
                 null,
                 null)) {
       if (cursor == null) {
-        LogUtil.e("SpeedDialUiItemLoader.insertNewContactEntry", "Cursor was null");
+        LogUtil.e("SpeedDialUiItemMutator.insertNewContactEntry", "Cursor was null");
         return loadSpeedDialUiItemsInternal();
       }
       Assert.checkArgument(cursor.moveToFirst(), "Cursor should never be empty");
@@ -285,7 +289,7 @@ public final class SpeedDialUiItemLoader {
                   null,
                   null)) {
         if (cursor == null) {
-          LogUtil.e("SpeedDialUiItemLoader.updateContactIdsAndLookupKeys", "null cursor");
+          LogUtil.e("SpeedDialUiItemMutator.updateContactIdsAndLookupKeys", "null cursor");
           return new ArrayList<>();
         }
         if (cursor.getCount() == 0) {
@@ -339,9 +343,11 @@ public final class SpeedDialUiItemLoader {
         SpeedDialUiItem item = SpeedDialUiItem.fromCursor(cursor);
         for (SpeedDialEntry entry : entries) {
           if (entry.contactId() == item.contactId()) {
-            // Update the id to match it's corresponding SpeedDialEntry.
+            // Update the id and pinned position to match it's corresponding SpeedDialEntry.
             SpeedDialUiItem.Builder entrySpeedDialItem =
-                item.toBuilder().setSpeedDialEntryId(entry.id());
+                item.toBuilder()
+                    .setSpeedDialEntryId(entry.id())
+                    .setPinnedPosition(entry.pinnedPosition());
 
             // Preserve the default channel if it didn't change/still exists
             Channel defaultChannel = entry.defaultChannel();
@@ -405,7 +411,7 @@ public final class SpeedDialUiItemLoader {
             .getContentResolver()
             .query(strequentUri, new String[] {Phone.CONTACT_ID}, null, null, null)) {
       if (cursor == null) {
-        LogUtil.e("SpeedDialUiItemLoader.getStrequentContacts", "null cursor");
+        LogUtil.e("SpeedDialUiItemMutator.getStrequentContacts", "null cursor");
         return new ArrayList<>();
       }
       if (cursor.getCount() == 0) {
@@ -430,7 +436,7 @@ public final class SpeedDialUiItemLoader {
                 null)) {
       List<SpeedDialUiItem> contacts = new ArrayList<>();
       if (cursor == null) {
-        LogUtil.e("SpeedDialUiItemLoader.getStrequentContacts", "null cursor");
+        LogUtil.e("SpeedDialUiItemMutator.getStrequentContacts", "null cursor");
         return new ArrayList<>();
       }
       if (cursor.getCount() == 0) {
@@ -440,6 +446,75 @@ public final class SpeedDialUiItemLoader {
         contacts.add(SpeedDialUiItem.fromCursor(cursor));
       }
       return contacts;
+    }
+  }
+
+  /**
+   * Persists the position of the {@link SpeedDialUiItem items} as the pinned position according to
+   * the order they were passed in.
+   */
+  @WorkerThread
+  public void updatePinnedPosition(List<SpeedDialUiItem> speedDialUiItems) {
+    Assert.isWorkerThread();
+    if (speedDialUiItems == null || speedDialUiItems.isEmpty()) {
+      return;
+    }
+
+    // Update the positions in the SpeedDialEntry database
+    ImmutableList.Builder<SpeedDialEntry> entriesToUpdate = ImmutableList.builder();
+    for (int i = 0; i < speedDialUiItems.size(); i++) {
+      SpeedDialUiItem item = speedDialUiItems.get(i);
+      if (item.isStarred()) {
+        entriesToUpdate.add(
+            item.buildSpeedDialEntry().toBuilder().setPinnedPosition(Optional.of(i)).build());
+      }
+    }
+    getSpeedDialEntryDao().update(entriesToUpdate.build());
+
+    // Update the positions in CP2
+    // Build a list of SpeedDialUiItems where each contact is only represented once but the order
+    // is maintained. For example, assume you have a list of contacts with contact ids:
+    //   > { 1, 1, 2, 1, 2, 3 }
+    // This list will be reduced to:
+    //   > { 1, 2, 3 }
+    // and their positions in the resulting list will be written to the CP2 Contacts.PINNED column.
+    List<SpeedDialUiItem> cp2SpeedDialUiItems = new ArrayList<>();
+    Set<Long> contactIds = new ArraySet<>();
+    for (SpeedDialUiItem item : speedDialUiItems) {
+      if (contactIds.add(item.contactId())) {
+        cp2SpeedDialUiItems.add(item);
+      }
+    }
+
+    // Code copied from PhoneFavoritesTileAdapter#handleDrop
+    ArrayList<ContentProviderOperation> operations = new ArrayList<>();
+    for (int i = 0; i < cp2SpeedDialUiItems.size(); i++) {
+      SpeedDialUiItem item = cp2SpeedDialUiItems.get(i);
+      // Pinned positions in the database start from 1 instead of being zero-indexed like
+      // arrays, so offset by 1.
+      int databasePinnedPosition = i + 1;
+      if (item.pinnedPosition().isPresent()
+          && item.pinnedPosition().get() == databasePinnedPosition) {
+        continue;
+      }
+
+      Uri uri = Uri.withAppendedPath(Contacts.CONTENT_URI, String.valueOf(item.contactId()));
+      ContentValues values = new ContentValues();
+      values.put(Contacts.PINNED, databasePinnedPosition);
+      operations.add(ContentProviderOperation.newUpdate(uri).withValues(values).build());
+    }
+    if (operations.isEmpty()) {
+      // Nothing to update
+      return;
+    }
+    try {
+      appContext.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
+      // TODO(calderwoodra): log
+    } catch (RemoteException | OperationApplicationException e) {
+      LogUtil.e(
+          "SpeedDialUiItemMutator.updatePinnedPosition",
+          "Exception thrown when pinning contacts",
+          e);
     }
   }
 
