@@ -145,8 +145,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private View pseudoBlackScreenOverlay;
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
   private String dtmfTextToPrepopulate;
-  private String showPostCharWaitDialogCallId;
-  private String showPostCharWaitDialogChars;
   private boolean allowOrientationChange;
   private boolean animateDialpadOnShow;
   private boolean didShowAnswerScreen;
@@ -160,7 +158,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean isRecreating; // whether the activity is going to be recreated
   private boolean isVisible;
   private boolean needDismissPendingDialogs;
-  private boolean showPostCharWaitDialogOnResume;
   private boolean touchDownWhenPseudoScreenOff;
   private int[] backgroundDrawableColors;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
@@ -530,10 +527,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       showDialpadRequest = DIALPAD_REQUEST_NONE;
     }
     updateNavigationBar(isDialpadVisible());
-
-    if (showPostCharWaitDialogOnResume) {
-      showDialogForPostCharWait(showPostCharWaitDialogCallId, showPostCharWaitDialogChars);
-    }
 
     CallList.getInstance()
         .onInCallUiShown(getIntent().getBooleanExtra(IntentExtraNames.FOR_FULL_SCREEN, false));
@@ -1016,18 +1009,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void showDialogForPostCharWait(String callId, String chars) {
-    if (isVisible) {
-      PostCharDialogFragment fragment = new PostCharDialogFragment(callId, chars);
-      fragment.show(getSupportFragmentManager(), Tags.POST_CHAR_DIALOG_FRAGMENT);
-
-      showPostCharWaitDialogOnResume = false;
-      showPostCharWaitDialogCallId = null;
-      showPostCharWaitDialogChars = null;
-    } else {
-      showPostCharWaitDialogOnResume = true;
-      showPostCharWaitDialogCallId = callId;
-      showPostCharWaitDialogChars = chars;
-    }
+    PostCharDialogFragment fragment = new PostCharDialogFragment(callId, chars);
+    fragment.show(getSupportFragmentManager(), Tags.POST_CHAR_DIALOG_FRAGMENT);
   }
 
   public void showDialogOrToastForDisconnectedCall(DisconnectMessage disconnectMessage) {
