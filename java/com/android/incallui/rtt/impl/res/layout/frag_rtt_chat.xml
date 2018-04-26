@@ -23,7 +23,7 @@
       android:id="@+id/rtt_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingTop="70dp"
+      android:paddingTop="56dp"
       android:paddingBottom="70dp"
       android:clipToPadding="false"/>
 
