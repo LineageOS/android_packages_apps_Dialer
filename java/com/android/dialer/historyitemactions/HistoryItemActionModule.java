@@ -32,6 +32,11 @@ public interface HistoryItemActionModule {
   @DrawableRes
   int getDrawableId();
 
+  /** Returns true if tint can be applied to the drawable. */
+  default boolean tintDrawable() {
+    return true;
+  }
+
   /** @return true if the bottom sheet should close, false otherwise */
   boolean onClick();
 }

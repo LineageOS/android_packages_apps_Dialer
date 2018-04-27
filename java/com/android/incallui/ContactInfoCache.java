@@ -514,7 +514,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
       return;
     }
     CequintCallerIdContact cequintCallerIdContact =
-        CequintCallerIdManager.getCequintCallerIdContactForInCall(
+        CequintCallerIdManager.getCequintCallerIdContactForCall(
             context, callerInfo.phoneNumber, cnapName, isIncoming);
 
     if (cequintCallerIdContact == null) {

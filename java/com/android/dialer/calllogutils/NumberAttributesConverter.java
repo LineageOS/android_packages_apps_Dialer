@@ -56,6 +56,7 @@ public final class NumberAttributesConverter {
         .setCanReportAsInvalidNumber(phoneLookupInfoConsolidator.canReportAsInvalidNumber())
         .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isDefaultCp2InfoIncomplete())
         .setContactSource(phoneLookupInfoConsolidator.getContactSource())
-        .setCanSupportCarrierVideoCall(phoneLookupInfoConsolidator.canSupportCarrierVideoCall());
+        .setCanSupportCarrierVideoCall(phoneLookupInfoConsolidator.canSupportCarrierVideoCall())
+        .setGeolocation(phoneLookupInfoConsolidator.getGeolocation());
   }
 }

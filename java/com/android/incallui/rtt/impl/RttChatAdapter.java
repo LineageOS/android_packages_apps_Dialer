@@ -18,8 +18,10 @@ package com.android.incallui.rtt.impl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +29,29 @@ import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Adapter class for holding RTT chat data. */
-public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolder> {
+public class RttChatAdapter extends RecyclerView.Adapter<ViewHolder> {
+
+  /** IntDef for the different types of rows that can be shown in the call log. */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    RowType.ADVISORY,
+    RowType.MESSAGE,
+  })
+  @interface RowType {
+    /** The transcript advisory message. */
+    int ADVISORY = 1;
+
+    /** RTT chat message. */
+    int MESSAGE = 2;
+  }
+
+  private static final int POSITION_ADVISORY = 0;
 
   private Drawable avatarDrawable;
 
@@ -45,6 +65,7 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   private List<RttChatMessage> rttMessages = new ArrayList<>();
   private int lastIndexOfLocalMessage = -1;
   private final MessageListener messageListener;
+  private boolean shouldShowAdvisory;
 
   RttChatAdapter(Context context, MessageListener listener) {
     this.context = context;
@@ -52,29 +73,54 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   }
 
   @Override
-  public RttChatMessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public ViewHolder onCreateViewHolder(ViewGroup parent, @RowType int viewType) {
     LayoutInflater layoutInflater = LayoutInflater.from(context);
-    View view = layoutInflater.inflate(R.layout.rtt_chat_list_item, parent, false);
-    return new RttChatMessageViewHolder(view);
+    switch (viewType) {
+      case RowType.ADVISORY:
+        View view = layoutInflater.inflate(R.layout.rtt_transcript_advisory, parent, false);
+        return new AdvisoryViewHolder(view);
+      case RowType.MESSAGE:
+        view = layoutInflater.inflate(R.layout.rtt_chat_list_item, parent, false);
+        return new RttChatMessageViewHolder(view);
+      default:
+        throw new RuntimeException("Unknown row type.");
+    }
   }
 
   @Override
   public int getItemViewType(int position) {
-    return super.getItemViewType(position);
+    if (shouldShowAdvisory && position == POSITION_ADVISORY) {
+      return RowType.ADVISORY;
+    } else {
+      return RowType.MESSAGE;
+    }
   }
 
   @Override
-  public void onBindViewHolder(RttChatMessageViewHolder rttChatMessageViewHolder, int i) {
-    boolean isSameGroup = false;
-    if (i > 0) {
-      isSameGroup = rttMessages.get(i).isRemote == rttMessages.get(i - 1).isRemote;
+  public void onBindViewHolder(ViewHolder viewHolder, int itemPosition) {
+    switch (getItemViewType(itemPosition)) {
+      case RowType.ADVISORY:
+        return;
+      case RowType.MESSAGE:
+        RttChatMessageViewHolder rttChatMessageViewHolder = (RttChatMessageViewHolder) viewHolder;
+        int messagePosition = toMessagePosition(itemPosition);
+        boolean isSameGroup = false;
+        if (messagePosition > 0) {
+          isSameGroup =
+              rttMessages.get(messagePosition).isRemote
+                  == rttMessages.get(messagePosition - 1).isRemote;
+        }
+        rttChatMessageViewHolder.setMessage(
+            rttMessages.get(messagePosition), isSameGroup, avatarDrawable);
+        return;
+      default:
+        throw new RuntimeException("Unknown row type.");
     }
-    rttChatMessageViewHolder.setMessage(rttMessages.get(i), isSameGroup, avatarDrawable);
   }
 
   @Override
   public int getItemCount() {
-    return rttMessages.size();
+    return shouldShowAdvisory ? rttMessages.size() + 1 : rttMessages.size();
   }
 
   private void updateCurrentLocalMessage(String newMessage) {
@@ -96,8 +142,28 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
         notifyItemRemoved(lastIndexOfLocalMessage);
         lastIndexOfLocalMessage = -1;
       } else {
-        notifyItemChanged(lastIndexOfLocalMessage);
+        notifyItemChanged(toItemPosition(lastIndexOfLocalMessage));
       }
+    }
+  }
+
+  private int toMessagePosition(int itemPosition) {
+    if (shouldShowAdvisory) {
+      return itemPosition - 1;
+    } else {
+      return itemPosition;
+    }
+  }
+
+  // Converts position in message list into item position in adapter.
+  private int toItemPosition(int messagePosition) {
+    if (messagePosition < 0) {
+      return messagePosition;
+    }
+    if (shouldShowAdvisory) {
+      return messagePosition + 1;
+    } else {
+      return messagePosition;
     }
   }
 
@@ -110,14 +176,14 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
   void addLocalMessage(String message) {
     updateCurrentLocalMessage(message);
     if (messageListener != null) {
-      messageListener.onUpdateLocalMessage(lastIndexOfLocalMessage);
+      messageListener.onUpdateLocalMessage(toItemPosition(lastIndexOfLocalMessage));
     }
   }
 
   void submitLocalMessage() {
     LogUtil.enterBlock("RttChatAdapater.submitLocalMessage");
     rttMessages.get(lastIndexOfLocalMessage).finish();
-    notifyItemChanged(lastIndexOfLocalMessage);
+    notifyItemChanged(toItemPosition(lastIndexOfLocalMessage));
     lastIndexOfLocalMessage = -1;
   }
 
@@ -139,8 +205,19 @@ public class RttChatAdapter extends RecyclerView.Adapter<RttChatMessageViewHolde
     }
     updateCurrentRemoteMessage(message);
     if (messageListener != null) {
-      messageListener.onUpdateRemoteMessage(RttChatMessage.getLastIndexRemoteMessage(rttMessages));
+      messageListener.onUpdateRemoteMessage(
+          toItemPosition(RttChatMessage.getLastIndexRemoteMessage(rttMessages)));
     }
+  }
+
+  void hideAdvisory() {
+    shouldShowAdvisory = false;
+    notifyItemRemoved(POSITION_ADVISORY);
+  }
+
+  void showAdvisory() {
+    shouldShowAdvisory = true;
+    notifyItemInserted(POSITION_ADVISORY);
   }
 
   /**

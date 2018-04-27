@@ -621,7 +621,7 @@ public class ContactInfoHelper {
       return;
     }
     CequintCallerIdContact cequintCallerIdContact =
-        cequintCallerIdManager.getCequintCallerIdContact(context, number);
+        cequintCallerIdManager.getCachedCequintCallerIdContact(context, number);
     if (cequintCallerIdContact == null) {
       return;
     }
