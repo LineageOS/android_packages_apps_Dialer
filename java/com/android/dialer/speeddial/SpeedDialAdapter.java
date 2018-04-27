@@ -34,10 +34,10 @@ import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
 import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback.ItemTouchHelperAdapter;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
+import com.google.common.collect.ImmutableList;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -146,7 +146,13 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
   public void setSpeedDialUiItems(List<SpeedDialUiItem> immutableSpeedDialUiItems) {
     speedDialUiItems = new ArrayList<>();
     speedDialUiItems.addAll(immutableSpeedDialUiItems);
-    speedDialUiItems.sort((o1, o2) -> Boolean.compare(o2.isStarred(), o1.isStarred()));
+    speedDialUiItems.sort(
+        (o1, o2) -> {
+          if (o1.isStarred() && o2.isStarred()) {
+            return Integer.compare(o1.pinnedPosition().or(-1), o2.pinnedPosition().or(-1));
+          }
+          return Boolean.compare(o2.isStarred(), o1.isStarred());
+        });
     positionToRowTypeMap.clear();
     if (speedDialUiItems.isEmpty()) {
       return;
@@ -166,6 +172,13 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     if (!speedDialUiItems.get(speedDialUiItems.size() - 1).isStarred()) {
       positionToRowTypeMap.put(positionOfSuggestionHeader, RowType.SUGGESTION_HEADER);
     }
+  }
+
+  public ImmutableList<SpeedDialUiItem> getSpeedDialUiItems() {
+    if (speedDialUiItems == null || speedDialUiItems.isEmpty()) {
+      return ImmutableList.of();
+    }
+    return ImmutableList.copyOf(speedDialUiItems);
   }
 
   public SpanSizeLookup getSpanSizeLookup() {
@@ -189,16 +202,9 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
   @Override
   public void onItemMove(int fromPosition, int toPosition) {
-    if (fromPosition < toPosition) {
-      for (int i = fromPosition; i < toPosition && i < speedDialUiItems.size() - 1; i++) {
-        Collections.swap(speedDialUiItems, i, i + 1);
-      }
-    } else {
-      for (int i = fromPosition - 1; i > toPosition; i--) {
-        Collections.swap(speedDialUiItems, i, i - 1);
-      }
-    }
-    // TODO(calderwoodra): store pinned positions
+    // fromPosition/toPosition correspond to adapter position, which is off by 1 from the list
+    // position b/c of the favorites header. So subtract 1 here.
+    speedDialUiItems.add(toPosition - 1, speedDialUiItems.remove(fromPosition - 1));
     notifyItemMoved(fromPosition, toPosition);
   }
 
@@ -209,5 +215,10 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
   public void setItemTouchHelper(ItemTouchHelper itemTouchHelper) {
     this.itemTouchHelper = itemTouchHelper;
+  }
+
+  /** Returns true if there are suggested contacts. */
+  public boolean hasFrequents() {
+    return !speedDialUiItems.isEmpty() && getItemViewType(getItemCount() - 1) == RowType.SUGGESTION;
   }
 }

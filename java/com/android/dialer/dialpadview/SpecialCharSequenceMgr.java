@@ -56,6 +56,7 @@ import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptionsUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
@@ -234,10 +235,12 @@ public class SpecialCharSequenceMgr {
         } else {
           SelectPhoneAccountListener callback =
               new HandleAdnEntryAccountSelectedCallback(applicationContext, handler, sc);
-
           DialogFragment dialogFragment =
               SelectPhoneAccountDialogFragment.newInstance(
-                  subscriptionAccountHandles, callback, null);
+                  SelectPhoneAccountDialogOptionsUtil.builderWithAccounts(
+                          subscriptionAccountHandles)
+                      .build(),
+                  callback);
           dialogFragment.show(((Activity) context).getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
         }
 
@@ -292,7 +295,9 @@ public class SpecialCharSequenceMgr {
 
         DialogFragment dialogFragment =
             SelectPhoneAccountDialogFragment.newInstance(
-                subscriptionAccountHandles, listener, null);
+                SelectPhoneAccountDialogOptionsUtil.builderWithAccounts(subscriptionAccountHandles)
+                    .build(),
+                listener);
         dialogFragment.show(((Activity) context).getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
       }
       return true;

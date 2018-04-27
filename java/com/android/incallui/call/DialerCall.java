@@ -157,7 +157,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String lastForwardedNumber;
   private boolean isCallForwarded;
   private String callSubject;
-  private PhoneAccountHandle phoneAccountHandle;
+  @Nullable private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
   private boolean isSpam;
   private boolean isBlocked;
@@ -192,6 +192,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private volatile boolean feedbackRequested = false;
 
   @Nullable private PreferredAccountRecorder preferredAccountRecorder;
+  private boolean isCallRemoved;
 
   public static String getNumberFromHandle(Uri handle) {
     return handle == null ? "" : handle.getSchemeSpecificPart();
@@ -312,6 +313,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onRttStatusChanged(Call call, boolean enabled, RttCall rttCall) {
           LogUtil.v("TelecomCallCallback.onRttStatusChanged", "enabled=%b", enabled);
+          if (enabled) {
+            Logger.get(context)
+                .logCallImpression(
+                    DialerImpression.Type.RTT_MID_CALL_ENABLED,
+                    getUniqueCallId(),
+                    getTimeAddedMs());
+          }
           update();
         }
 
@@ -1064,6 +1072,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   @TargetApi(28)
   public void respondToRttRequest(boolean accept, int rttRequestId) {
+    Logger.get(context)
+        .logCallImpression(
+            accept
+                ? DialerImpression.Type.RTT_MID_CALL_ACCEPTED
+                : DialerImpression.Type.RTT_MID_CALL_REJECTED,
+            getUniqueCallId(),
+            getTimeAddedMs());
     getTelecomCall().respondToRttRequest(rttRequestId, accept);
   }
 
@@ -1594,15 +1609,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   void onRemovedFromCallList() {
     LogUtil.enterBlock("DialerCall.onRemovedFromCallList");
     // Ensure we clean up when this call is removed.
-    videoTechManager.dispatchRemovedFromCallList();
-    if (rttTranscript != null) {
+    if (videoTechManager != null) {
+      videoTechManager.dispatchRemovedFromCallList();
+    }
+    // TODO(a bug): Add tests for it to make sure no crash on subsequent call to this method.
+    if (rttTranscript != null && !isCallRemoved) {
       Futures.addCallback(
           RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
           new DefaultFutureCallback<>(),
           MoreExecutors.directExecutor());
-      // Sets to null so it won't be saved again when called multiple times.
-      rttTranscript = null;
     }
+    isCallRemoved = true;
   }
 
   public com.android.dialer.logging.VideoTech.Type getSelectedAvailableVideoTechType() {

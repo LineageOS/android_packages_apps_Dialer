@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,27 @@
  * limitations under the License
  */
 
-package com.android.dialer.speeddial.loader;
+package com.android.dialer.activecalls;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
-/** Dagger component for the speeddial/loader package. */
+/** Component for {@link ActiveCalls} */
 @Subcomponent
-public abstract class UiItemLoaderComponent {
+public abstract class ActiveCallsComponent {
 
-  public abstract SpeedDialUiItemMutator speedDialUiItemMutator();
+  public abstract ActiveCalls activeCalls();
 
-  public static UiItemLoaderComponent get(Context context) {
-    return ((UiItemLoaderComponent.HasComponent)
-            ((HasRootComponent) context.getApplicationContext()).component())
-        .uiItemLoaderComponent();
+  public static ActiveCallsComponent get(Context context) {
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
+        .activeCallsComponent();
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
-    UiItemLoaderComponent uiItemLoaderComponent();
+    ActiveCallsComponent activeCallsComponent();
   }
 }

@@ -34,7 +34,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.constants.ActivityRequestCodes;
@@ -53,6 +55,7 @@ import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.util.IntentUtil;
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.Futures;
 
 /**
  * Fragment for displaying:
@@ -132,11 +135,6 @@ public class SpeedDialFragment extends Fragment {
     return rootLayout;
   }
 
-  public boolean hasFrequents() {
-    // TODO(calderwoodra)
-    return false;
-  }
-
   @Override
   public void onResume() {
     super.onResume();
@@ -147,7 +145,7 @@ public class SpeedDialFragment extends Fragment {
 
     speedDialLoaderListener.listen(
         getContext(),
-        UiItemLoaderComponent.get(getContext()).speedDialUiItemLoader().loadSpeedDialUiItems(),
+        UiItemLoaderComponent.get(getContext()).speedDialUiItemMutator().loadSpeedDialUiItems(),
         this::onSpeedDialUiItemListLoaded,
         throwable -> {
           throw new RuntimeException(throwable);
@@ -162,7 +160,7 @@ public class SpeedDialFragment extends Fragment {
         speedDialLoaderListener.listen(
             getContext(),
             UiItemLoaderComponent.get(getContext())
-                .speedDialUiItemLoader()
+                .speedDialUiItemMutator()
                 .starContact(data.getData()),
             this::onSpeedDialUiItemListLoaded,
             throwable -> {
@@ -173,12 +171,17 @@ public class SpeedDialFragment extends Fragment {
   }
 
   private void onSpeedDialUiItemListLoaded(ImmutableList<SpeedDialUiItem> speedDialUiItems) {
+    LogUtil.enterBlock("SpeedDialFragment.onSpeedDialUiItemListLoaded");
     // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
     adapter.setSpeedDialUiItems(
         UiItemLoaderComponent.get(getContext())
-            .speedDialUiItemLoader()
+            .speedDialUiItemMutator()
             .insertDuoChannels(getContext(), speedDialUiItems));
     adapter.notifyDataSetChanged();
+    if (getActivity() != null) {
+      FragmentUtils.getParentUnsafe(this, HostInterface.class)
+          .setHasFrequents(adapter.hasFrequents());
+    }
   }
 
   @Override
@@ -186,6 +189,18 @@ public class SpeedDialFragment extends Fragment {
     super.onPause();
     contextMenu.hideMenu();
     contextMenuBackground.setVisibility(View.GONE);
+    Futures.addCallback(
+        DialerExecutorComponent.get(getContext())
+            .backgroundExecutor()
+            .submit(
+                () -> {
+                  UiItemLoaderComponent.get(getContext())
+                      .speedDialUiItemMutator()
+                      .updatePinnedPosition(adapter.getSpeedDialUiItems());
+                  return null;
+                }),
+        new DefaultFutureCallback<>(),
+        DialerExecutorComponent.get(getContext()).backgroundExecutor());
   }
 
   @Override
@@ -358,5 +373,11 @@ public class SpeedDialFragment extends Fragment {
               Uri.withAppendedPath(
                   Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
     }
+  }
+
+  /** Interface for {@link SpeedDialFragment} to communicate with its host/parent. */
+  public interface HostInterface {
+
+    void setHasFrequents(boolean hasFrequents);
   }
 }

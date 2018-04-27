@@ -55,12 +55,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.Toast;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
+import com.android.contacts.common.widget.SelectPhoneAccountDialogOptionsUtil;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
+import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
@@ -69,6 +72,7 @@ import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
+import com.android.dialer.preferredsim.PreferredAccountWorker.Result;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.bindings.AnswerBindings;
@@ -101,6 +105,7 @@ import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.video.protocol.VideoCallScreenDelegateFactory;
 import com.google.common.base.Optional;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -129,10 +134,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private static Optional<Integer> audioRouteForTesting = Optional.absent();
 
-  private final InternationalCallOnWifiCallback internationalCallOnWifiCallback =
-      new InternationalCallOnWifiCallback();
-
   private SelectPhoneAccountListener selectPhoneAccountListener;
+  private UiListener<Result> preferredAccountWorkerResultListener;
 
   private Animation dialpadSlideInAnimation;
   private Animation dialpadSlideOutAnimation;
@@ -142,8 +145,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private View pseudoBlackScreenOverlay;
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
   private String dtmfTextToPrepopulate;
-  private String showPostCharWaitDialogCallId;
-  private String showPostCharWaitDialogChars;
   private boolean allowOrientationChange;
   private boolean animateDialpadOnShow;
   private boolean didShowAnswerScreen;
@@ -157,7 +158,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean isRecreating; // whether the activity is going to be recreated
   private boolean isVisible;
   private boolean needDismissPendingDialogs;
-  private boolean showPostCharWaitDialogOnResume;
   private boolean touchDownWhenPseudoScreenOff;
   private int[] backgroundDrawableColors;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
@@ -188,6 +188,10 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   protected void onCreate(Bundle bundle) {
     Trace.beginSection("InCallActivity.onCreate");
     super.onCreate(bundle);
+
+    preferredAccountWorkerResultListener =
+        DialerExecutorComponent.get(this)
+            .createUiListener(getFragmentManager(), "preferredAccountWorkerResultListener");
 
     selectPhoneAccountListener = new SelectPhoneAccountListener(getApplicationContext());
 
@@ -243,13 +247,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       if (selectPhoneAccountDialogFragment != null) {
         selectPhoneAccountDialogFragment.setListener(selectPhoneAccountListener);
       }
-    }
-
-    InternationalCallOnWifiDialogFragment existingInternationalCallOnWifiDialogFragment =
-        (InternationalCallOnWifiDialogFragment)
-            getSupportFragmentManager().findFragmentByTag(Tags.INTERNATIONAL_CALL_ON_WIFI);
-    if (existingInternationalCallOnWifiDialogFragment != null) {
-      existingInternationalCallOnWifiDialogFragment.setCallback(internationalCallOnWifiCallback);
     }
 
     inCallOrientationEventListener = new InCallOrientationEventListener(this);
@@ -368,58 +365,84 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return false;
     }
 
-    DialerExecutorComponent.get(this)
-        .dialerExecutorFactory()
-        .createNonUiTaskBuilder(new PreferredAccountWorker(waitingForAccountCall.getNumber()))
-        .onSuccess(
-            (result -> {
-              if (result.getPhoneAccountHandle().isPresent()) {
-                Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
-                selectPhoneAccountListener.onPhoneAccountSelected(
-                    result.getPhoneAccountHandle().get(), false, waitingForAccountCall.getId());
-                return;
-              }
-              if (result.getSuggestion().isPresent()) {
-                LogUtil.i(
-                    "CallingAccountSelector.processPreferredAccount",
-                    "SIM suggested: " + result.getSuggestion().get().reason);
-                if (result.getSuggestion().get().shouldAutoSelect) {
-                  Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
-                  LogUtil.i(
-                      "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
-                  selectPhoneAccountListener.onPhoneAccountSelected(
-                      result.getSuggestion().get().phoneAccountHandle,
-                      false,
-                      waitingForAccountCall.getId());
-                  return;
-                }
-              }
-              Bundle extras = waitingForAccountCall.getIntentExtras();
-              List<PhoneAccountHandle> phoneAccountHandles =
-                  extras == null
-                      ? new ArrayList<>()
-                      : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
+    ListenableFuture<PreferredAccountWorker.Result> preferredAccountFuture =
+        DialerExecutorComponent.get(this)
+            .backgroundExecutor()
+            .submit(
+                () -> {
+                  try {
+                    return new PreferredAccountWorker(waitingForAccountCall.getNumber())
+                        .doInBackground(getApplicationContext());
+                  } catch (Throwable throwable) {
+                    throw new Exception(throwable);
+                  }
+                });
 
-              waitingForAccountCall.setPreferredAccountRecorder(
-                  new PreferredAccountRecorder(
-                      waitingForAccountCall.getNumber(),
-                      result.getSuggestion().orNull(),
-                      result.getDataId().orNull()));
-              selectPhoneAccountDialogFragment =
-                  SelectPhoneAccountDialogFragment.newInstance(
-                      R.string.select_phone_account_for_calls,
-                      result.getDataId().isPresent() /* canSetDefault */,
-                      R.string.select_phone_account_for_calls_remember /* setDefaultResId */,
-                      phoneAccountHandles,
-                      selectPhoneAccountListener,
-                      waitingForAccountCall.getId(),
-                      SuggestionProvider.buildHint(
-                          this, phoneAccountHandles, result.getSuggestion().orNull() /* hints */));
-              selectPhoneAccountDialogFragment.show(
-                  getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
-            }))
-        .build()
-        .executeParallel(this);
+    preferredAccountWorkerResultListener.listen(
+        this,
+        preferredAccountFuture,
+        result -> {
+          if (result.getPhoneAccountHandle().isPresent()) {
+            Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
+            selectPhoneAccountListener.onPhoneAccountSelected(
+                result.getPhoneAccountHandle().get(), false, waitingForAccountCall.getId());
+            return;
+          }
+          if (result.getSuggestion().isPresent()) {
+            LogUtil.i(
+                "CallingAccountSelector.processPreferredAccount",
+                "SIM suggested: " + result.getSuggestion().get().reason);
+            if (result.getSuggestion().get().shouldAutoSelect) {
+              Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
+              LogUtil.i(
+                  "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
+              selectPhoneAccountListener.onPhoneAccountSelected(
+                  result.getSuggestion().get().phoneAccountHandle,
+                  false,
+                  waitingForAccountCall.getId());
+              return;
+            }
+          }
+          Bundle extras = waitingForAccountCall.getIntentExtras();
+          List<PhoneAccountHandle> phoneAccountHandles =
+              extras == null
+                  ? new ArrayList<>()
+                  : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
+
+          waitingForAccountCall.setPreferredAccountRecorder(
+              new PreferredAccountRecorder(
+                  waitingForAccountCall.getNumber(),
+                  result.getSuggestion().orNull(),
+                  result.getDataId().orNull()));
+          SelectPhoneAccountDialogOptions.Builder optionsBuilder =
+              SelectPhoneAccountDialogOptions.newBuilder()
+                  .setTitle(R.string.select_phone_account_for_calls)
+                  .setCanSetDefault(result.getDataId().isPresent())
+                  .setSetDefaultLabel(R.string.select_phone_account_for_calls_remember)
+                  .setCallId(waitingForAccountCall.getId());
+
+          for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
+            SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
+                SelectPhoneAccountDialogOptions.Entry.newBuilder();
+            SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(
+                entryBuilder, phoneAccountHandle);
+            Optional<String> hint =
+                SuggestionProvider.getHint(
+                    this, phoneAccountHandle, result.getSuggestion().orNull());
+            if (hint.isPresent()) {
+              entryBuilder.setHint(hint.get());
+            }
+            optionsBuilder.addEntries(entryBuilder);
+          }
+
+          selectPhoneAccountDialogFragment =
+              SelectPhoneAccountDialogFragment.newInstance(
+                  optionsBuilder.build(), selectPhoneAccountListener);
+          selectPhoneAccountDialogFragment.show(getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
+        },
+        throwable -> {
+          throw new RuntimeException(throwable);
+        });
 
     return true;
   }
@@ -504,10 +527,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       showDialpadRequest = DIALPAD_REQUEST_NONE;
     }
     updateNavigationBar(isDialpadVisible());
-
-    if (showPostCharWaitDialogOnResume) {
-      showDialogForPostCharWait(showPostCharWaitDialogCallId, showPostCharWaitDialogChars);
-    }
 
     CallList.getInstance()
         .onInCallUiShown(getIntent().getBooleanExtra(IntentExtraNames.FOR_FULL_SCREEN, false));
@@ -990,18 +1009,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void showDialogForPostCharWait(String callId, String chars) {
-    if (isVisible) {
-      PostCharDialogFragment fragment = new PostCharDialogFragment(callId, chars);
-      fragment.show(getSupportFragmentManager(), Tags.POST_CHAR_DIALOG_FRAGMENT);
-
-      showPostCharWaitDialogOnResume = false;
-      showPostCharWaitDialogCallId = null;
-      showPostCharWaitDialogChars = null;
-    } else {
-      showPostCharWaitDialogOnResume = true;
-      showPostCharWaitDialogCallId = callId;
-      showPostCharWaitDialogChars = chars;
-    }
+    PostCharDialogFragment fragment = new PostCharDialogFragment(callId, chars);
+    fragment.show(getSupportFragmentManager(), Tags.POST_CHAR_DIALOG_FRAGMENT);
   }
 
   public void showDialogOrToastForDisconnectedCall(DisconnectMessage disconnectMessage) {
@@ -1201,16 +1210,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   public void showDialogForInternationalCallOnWifi(@NonNull DialerCall call) {
-    if (!InternationalCallOnWifiDialogFragment.shouldShow(this)) {
-      LogUtil.i(
-          "InCallActivity.showDialogForInternationalCallOnWifi",
-          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
-      return;
-    }
-
     InternationalCallOnWifiDialogFragment fragment =
-        InternationalCallOnWifiDialogFragment.newInstance(
-            call.getId(), internationalCallOnWifiCallback);
+        InternationalCallOnWifiDialogFragment.newInstance(call.getId());
     fragment.show(getSupportFragmentManager(), Tags.INTERNATIONAL_CALL_ON_WIFI);
   }
 
@@ -1783,28 +1784,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private static final class ConfigNames {
     static final String ANSWER_AND_RELEASE_ENABLED = "answer_and_release_enabled";
-  }
-
-  private static final class InternationalCallOnWifiCallback
-      implements InternationalCallOnWifiDialogFragment.Callback {
-    private static final String TAG = InternationalCallOnWifiCallback.class.getCanonicalName();
-
-    @Override
-    public void continueCall(@NonNull String callId) {
-      LogUtil.i(TAG, "Continuing call with ID: %s", callId);
-    }
-
-    @Override
-    public void cancelCall(@NonNull String callId) {
-      DialerCall call = CallList.getInstance().getCallById(callId);
-      if (call == null) {
-        LogUtil.i(TAG, "Call destroyed before the dialog is closed");
-        return;
-      }
-
-      LogUtil.i(TAG, "Disconnecting international call on WiFi");
-      call.disconnect();
-    }
   }
 
   private static final class SelectPhoneAccountListener

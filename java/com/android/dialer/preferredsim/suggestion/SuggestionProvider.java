@@ -24,10 +24,9 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.google.common.base.Optional;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Provides hints to the user when selecting a SIM to make a call. */
+@SuppressWarnings("Guava")
 public interface SuggestionProvider {
 
   String EXTRA_SIM_SUGGESTION_REASON = "sim_suggestion_reason";
@@ -80,35 +79,25 @@ public interface SuggestionProvider {
       @NonNull Context context, @NonNull String number, @NonNull PhoneAccountHandle newAccount);
 
   /**
-   * Return a list of suggestion strings matching the list position of the {@code
-   * phoneAccountHandles}. The list will contain {@code null} if the PhoneAccountHandle does not
-   * have suggestions.
+   * Return the hint for {@code phoneAccountHandle}. Absent if no hint is available for the account.
    */
-  @Nullable
-  static List<String> buildHint(
-      Context context,
-      List<PhoneAccountHandle> phoneAccountHandles,
-      @Nullable Suggestion suggestion) {
+  static Optional<String> getHint(
+      Context context, PhoneAccountHandle phoneAccountHandle, @Nullable Suggestion suggestion) {
     if (suggestion == null) {
-      return null;
+      return Optional.absent();
     }
-    List<String> hints = new ArrayList<>();
-    for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
-      if (!phoneAccountHandle.equals(suggestion.phoneAccountHandle)) {
-        hints.add(null);
-        continue;
-      }
-      switch (suggestion.reason) {
-        case INTRA_CARRIER:
-          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_intra_carrier));
-          break;
-        case FREQUENT:
-          hints.add(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
-          break;
-        default:
-          LogUtil.w("CallingAccountSelector.buildHint", "unhandled reason " + suggestion.reason);
-      }
+    if (!phoneAccountHandle.equals(suggestion.phoneAccountHandle)) {
+      return Optional.absent();
     }
-    return hints;
+    switch (suggestion.reason) {
+      case INTRA_CARRIER:
+        return Optional.of(
+            context.getString(R.string.pre_call_select_phone_account_hint_intra_carrier));
+      case FREQUENT:
+        return Optional.of(context.getString(R.string.pre_call_select_phone_account_hint_frequent));
+      default:
+        LogUtil.w("CallingAccountSelector.getHint", "unhandled reason " + suggestion.reason);
+        return Optional.absent();
+    }
   }
 }

@@ -25,7 +25,9 @@ import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +39,20 @@ import java.util.List;
 public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     implements SpeedDialEntryDao {
 
+  /**
+   * If the pinned position is absent, then we need to write an impossible value in the table like
+   * -1 so that it doesn't default to 0. When we read this value from the table, we'll translate it
+   * to Optional.absent() in the resulting {@link SpeedDialEntry}.
+   */
+  private static final int PINNED_POSITION_ABSENT = -1;
+
   private static final int DATABASE_VERSION = 2;
   private static final String DATABASE_NAME = "CPSpeedDialEntry";
 
   // Column names
   private static final String TABLE_NAME = "speed_dial_entries";
   private static final String ID = "id";
+  private static final String PINNED_POSITION = "pinned_position";
   private static final String CONTACT_ID = "contact_id";
   private static final String LOOKUP_KEY = "lookup_key";
   private static final String PHONE_NUMBER = "phone_number";
@@ -52,12 +62,13 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
 
   // Column positions
   private static final int POSITION_ID = 0;
-  private static final int POSITION_CONTACT_ID = 1;
-  private static final int POSITION_LOOKUP_KEY = 2;
-  private static final int POSITION_PHONE_NUMBER = 3;
-  private static final int POSITION_PHONE_TYPE = 4;
-  private static final int POSITION_PHONE_LABEL = 5;
-  private static final int POSITION_PHONE_TECHNOLOGY = 6;
+  private static final int POSITION_PINNED_POSITION = 1;
+  private static final int POSITION_CONTACT_ID = 2;
+  private static final int POSITION_LOOKUP_KEY = 3;
+  private static final int POSITION_PHONE_NUMBER = 4;
+  private static final int POSITION_PHONE_TYPE = 5;
+  private static final int POSITION_PHONE_LABEL = 6;
+  private static final int POSITION_PHONE_TECHNOLOGY = 7;
 
   // Create Table Query
   private static final String CREATE_TABLE_SQL =
@@ -65,6 +76,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
           + TABLE_NAME
           + " ("
           + (ID + " integer primary key, ")
+          + (PINNED_POSITION + " integer, ")
           + (CONTACT_ID + " integer, ")
           + (LOOKUP_KEY + " text, ")
           + (PHONE_NUMBER + " text, ")
@@ -118,11 +130,17 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
                   .build();
         }
 
+        Optional<Integer> pinnedPosition = Optional.of(cursor.getInt(POSITION_PINNED_POSITION));
+        if (pinnedPosition.or(PINNED_POSITION_ABSENT) == PINNED_POSITION_ABSENT) {
+          pinnedPosition = Optional.absent();
+        }
+
         SpeedDialEntry entry =
             SpeedDialEntry.builder()
                 .setDefaultChannel(channel)
                 .setContactId(cursor.getLong(POSITION_CONTACT_ID))
                 .setLookupKey(cursor.getString(POSITION_LOOKUP_KEY))
+                .setPinnedPosition(pinnedPosition)
                 .setId(cursor.getLong(POSITION_ID))
                 .build();
         entries.add(entry);
@@ -132,30 +150,39 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public void insert(ImmutableList<SpeedDialEntry> entries) {
+  public ImmutableMap<SpeedDialEntry, Long> insert(ImmutableList<SpeedDialEntry> entries) {
     if (entries.isEmpty()) {
-      return;
+      return ImmutableMap.of();
     }
 
     SQLiteDatabase db = getWritableDatabase();
     db.beginTransaction();
     try {
-      insert(db, entries);
+      ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap = insert(db, entries);
       db.setTransactionSuccessful();
+      return insertedEntriesToIdsMap;
     } finally {
       db.endTransaction();
       db.close();
     }
   }
 
-  private void insert(SQLiteDatabase writeableDatabase, ImmutableList<SpeedDialEntry> entries) {
+  private ImmutableMap<SpeedDialEntry, Long> insert(
+      SQLiteDatabase writeableDatabase, ImmutableList<SpeedDialEntry> entries) {
+    ImmutableMap.Builder<SpeedDialEntry, Long> insertedEntriesToIdsMap = ImmutableMap.builder();
     for (SpeedDialEntry entry : entries) {
       Assert.checkArgument(entry.id() == null);
-      if (writeableDatabase.insert(TABLE_NAME, null, buildContentValuesWithoutId(entry)) == -1L) {
+      long id = writeableDatabase.insert(TABLE_NAME, null, buildContentValuesWithoutId(entry));
+      if (id == -1L) {
         throw Assert.createUnsupportedOperationFailException(
             "Attempted to insert a row that already exists.");
       }
+      // It's impossible to insert two identical entries but this is an important assumption we need
+      // to verify because there's an assumption that each entry will correspond to exactly one id.
+      // ImmutableMap#put verifies this check for us.
+      insertedEntriesToIdsMap.put(entry, id);
     }
+    return insertedEntriesToIdsMap.build();
   }
 
   @Override
@@ -216,6 +243,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
     if (includeId) {
       values.put(ID, entry.id());
     }
+    values.put(PINNED_POSITION, entry.pinnedPosition().or(PINNED_POSITION_ABSENT));
     values.put(CONTACT_ID, entry.contactId());
     values.put(LOOKUP_KEY, entry.lookupKey());
     if (entry.defaultChannel() != null) {
@@ -255,20 +283,21 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
   }
 
   @Override
-  public void insertUpdateAndDelete(
+  public ImmutableMap<SpeedDialEntry, Long> insertUpdateAndDelete(
       ImmutableList<SpeedDialEntry> entriesToInsert,
       ImmutableList<SpeedDialEntry> entriesToUpdate,
       ImmutableList<Long> entriesToDelete) {
     if (entriesToInsert.isEmpty() && entriesToUpdate.isEmpty() && entriesToDelete.isEmpty()) {
-      return;
+      return ImmutableMap.of();
     }
     SQLiteDatabase db = getWritableDatabase();
     db.beginTransaction();
     try {
-      insert(db, entriesToInsert);
+      ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap = insert(db, entriesToInsert);
       update(db, entriesToUpdate);
       delete(db, entriesToDelete);
       db.setTransactionSuccessful();
+      return insertedEntriesToIdsMap;
     } finally {
       db.endTransaction();
       db.close();

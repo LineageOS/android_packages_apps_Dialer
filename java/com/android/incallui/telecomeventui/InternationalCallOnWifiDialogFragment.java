@@ -21,16 +21,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.os.UserManagerCompat;
 import android.view.View;
 import android.widget.CheckBox;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.storage.StorageComponent;
+import com.android.incallui.call.CallList;
+import com.android.incallui.call.DialerCall;
 
 /**
  * Dialog that may be shown when users place an outgoing call to an international number while on
@@ -53,23 +55,11 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
       return false;
     }
 
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    SharedPreferences preferences = StorageComponent.get(context).unencryptedSharedPrefs();
     boolean shouldShow = preferences.getBoolean(ALWAYS_SHOW_WARNING_PREFERENCE_KEY, true);
 
     LogUtil.i("InternationalCallOnWifiDialogFragment.shouldShow", "result: %b", shouldShow);
     return shouldShow;
-  }
-
-  /**
-   * Called in response to user interaction with the {@link InternationalCallOnWifiDialogFragment}.
-   */
-  public interface Callback {
-
-    /** Indicates that the user wishes to proceed with the call represented by the given call id. */
-    void continueCall(@NonNull String callId);
-
-    /** Indicates that the user wishes to cancel the call represented by the given call id. */
-    void cancelCall(@NonNull String callId);
   }
 
   /**
@@ -78,10 +68,8 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
    *
    * <p>Prefer this method over the default constructor.
    */
-  public static InternationalCallOnWifiDialogFragment newInstance(
-      @NonNull String callId, @NonNull Callback callback) {
+  public static InternationalCallOnWifiDialogFragment newInstance(@NonNull String callId) {
     InternationalCallOnWifiDialogFragment fragment = new InternationalCallOnWifiDialogFragment();
-    fragment.setCallback(callback);
     Bundle args = new Bundle();
     args.putString(ARG_CALL_ID, Assert.isNotNull(callId));
     fragment.setArguments(args);
@@ -93,30 +81,11 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
    * InternationalCallOnWifiDialogFragment InternationalCallOnWifiDialogFragments}.
    */
   @VisibleForTesting
-  static final String ALWAYS_SHOW_WARNING_PREFERENCE_KEY =
+  public static final String ALWAYS_SHOW_WARNING_PREFERENCE_KEY =
       "ALWAYS_SHOW_INTERNATIONAL_CALL_ON_WIFI_WARNING";
 
   /** Key in the arguments bundle for call id. */
   private static final String ARG_CALL_ID = "call_id";
-
-  /**
-   * Callback which will receive information about user interactions with this dialog.
-   *
-   * <p>This is Nullable in the event that the dialog is destroyed by the framework, but doesn't
-   * have a callback reattached. Ideally, the InCallActivity would implement the callback and we
-   * would use FragmentUtils.getParentUnsafe instead of holding onto the callback here, but that's
-   * not possible with the existing InCallActivity/InCallActivityCommon implementation.
-   */
-  @Nullable private Callback callback;
-
-  /**
-   * Sets the callback for this dialog.
-   *
-   * <p>Used to reset the callback after state changes.
-   */
-  public void setCallback(@NonNull Callback callback) {
-    this.callback = Assert.isNotNull(callback);
-  }
 
   @NonNull
   @Override
@@ -134,7 +103,7 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
 
     CheckBox alwaysWarn = dialogView.findViewById(R.id.always_warn);
 
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    SharedPreferences preferences = StorageComponent.get(getActivity()).unencryptedSharedPrefs();
     // The default is set to false in this case to ensure that the first time the dialog opens,
     // the checkbox is unchecked.
     alwaysWarn.setChecked(preferences.getBoolean(ALWAYS_SHOW_WARNING_PREFERENCE_KEY, false));
@@ -163,7 +132,7 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
     preferences.edit().putBoolean(ALWAYS_SHOW_WARNING_PREFERENCE_KEY, alwaysWarn).apply();
 
     // Neither callback nor callId are null in normal circumstances. See comments on callback
-    callback.continueCall(getArguments().getString(ARG_CALL_ID));
+    continueCall(getArguments().getString(ARG_CALL_ID));
   }
 
   private void onNegativeButtonClick(@NonNull SharedPreferences preferences, boolean alwaysWarn) {
@@ -174,6 +143,37 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
     preferences.edit().putBoolean(ALWAYS_SHOW_WARNING_PREFERENCE_KEY, alwaysWarn).apply();
 
     // Neither callback nor callId are null in normal circumstances. See comments on callback
-    callback.cancelCall(getArguments().getString(ARG_CALL_ID));
+    cancelCall(getArguments().getString(ARG_CALL_ID));
+  }
+
+  private void continueCall(@NonNull String callId) {
+    LogUtil.i(
+        "InternationalCallOnWifiDialogFragment.continueCall",
+        "Continuing call with ID: %s",
+        callId);
+    InternationalCallOnWifiDialogActivity activity =
+        FragmentUtils.getParent(this, InternationalCallOnWifiDialogActivity.class);
+    if (activity != null) {
+      activity.finish();
+    }
+  }
+
+  private void cancelCall(@NonNull String callId) {
+    DialerCall call = CallList.getInstance().getCallById(callId);
+    if (call == null) {
+      LogUtil.i(
+          "InternationalCallOnWifiDialogFragment.cancelCall",
+          "Call destroyed before the dialog is closed");
+    } else {
+      LogUtil.i(
+          "InternationalCallOnWifiDialogFragment.cancelCall",
+          "Disconnecting international call on WiFi");
+      call.disconnect();
+    }
+    InternationalCallOnWifiDialogActivity activity =
+        FragmentUtils.getParent(this, InternationalCallOnWifiDialogActivity.class);
+    if (activity != null) {
+      activity.finish();
+    }
   }
 }

@@ -71,6 +71,8 @@ import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.legacyblocking.BlockedNumberContentObserver;
 import com.android.incallui.spam.SpamCallListListener;
 import com.android.incallui.speakeasy.SpeakEasyCallManager;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogActivity;
+import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogFragment;
 import com.android.incallui.videosurface.bindings.VideoSurfaceBindings;
 import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 import com.android.incallui.videotech.utils.VideoUtils;
@@ -197,6 +199,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private InCallCameraManager inCallCameraManager;
   private FilteredNumberAsyncQueryHandler filteredQueryHandler;
   private CallList.Listener spamCallListListener;
+  private CallList.Listener activeCallsListener;
   /** Whether or not we are currently bound and waiting for Telecom to send us a new call. */
   private boolean boundAndWaitingForOutgoingCall;
   /** Determines if the InCall UI is in fullscreen mode or not. */
@@ -383,6 +386,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
         new SpamCallListListener(
             context, DialerExecutorComponent.get(context).dialerExecutorFactory());
     this.callList.addListener(spamCallListListener);
+    activeCallsListener = new ActiveCallsCallListListener(context);
+    this.callList.addListener(activeCallsListener);
 
     VideoPauseController.getInstance().setUp(this);
 
@@ -772,8 +777,22 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   @Override
   public void onInternationalCallOnWifi(@NonNull DialerCall call) {
     LogUtil.enterBlock("InCallPresenter.onInternationalCallOnWifi");
+
+    if (!InternationalCallOnWifiDialogFragment.shouldShow(context)) {
+      LogUtil.i(
+          "InCallPresenter.onInternationalCallOnWifi",
+          "InternationalCallOnWifiDialogFragment.shouldShow returned false");
+      return;
+    }
+
     if (inCallActivity != null) {
       inCallActivity.showDialogForInternationalCallOnWifi(call);
+    } else {
+      Intent intent = new Intent(context, InternationalCallOnWifiDialogActivity.class);
+      // Prevent showing MainActivity with InternationalCallOnWifiDialogActivity on above
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+      intent.putExtra(InternationalCallOnWifiDialogActivity.EXTRA_CALL_ID, call.getId());
+      context.startActivity(intent);
     }
   }
 
@@ -858,6 +877,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
           callList.getActiveOrBackgroundCall() != null || callList.getOutgoingCall() != null;
       inCallActivity.dismissKeyguard(hasCall);
     }
+
     Trace.endSection();
   }
 
@@ -1251,8 +1271,22 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   }
 
   public void onPostDialCharWait(String callId, String chars) {
-    if (isActivityStarted()) {
+    // If not visible, inCallActivity is stopped. Starting from P, calling recreate() will destroy
+    // the old activity instance and create a new instance immediately. Previously, the old activity
+    // went through its lifecycle from create to destroy before creating a new instance.
+    // So this case doesn't work now: make a call with char WAIT, leave in call UI, call gets
+    // connected, and go back to in call UI to see the dialog.
+    // So we should show dialog in an empty activity if inCallActivity is not visible. And it also
+    // helps with background calling.
+    if (isActivityStarted() && inCallActivity.isVisible()) {
       inCallActivity.showDialogForPostCharWait(callId, chars);
+    } else {
+      Intent intent = new Intent(context, PostCharDialogActivity.class);
+      // Prevent showing MainActivity with PostCharDialogActivity on above
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+      intent.putExtra(PostCharDialogActivity.EXTRA_CALL_ID, callId);
+      intent.putExtra(PostCharDialogActivity.EXTRA_POST_DIAL_STRING, chars);
+      context.startActivity(intent);
     }
   }
 
