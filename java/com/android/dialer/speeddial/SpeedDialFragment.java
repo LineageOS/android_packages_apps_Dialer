@@ -105,6 +105,10 @@ public class SpeedDialFragment extends Fragment {
     LogUtil.enterBlock("SpeedDialFragment.onCreateView");
     View rootLayout = inflater.inflate(R.layout.fragment_speed_dial, container, false);
 
+    speedDialLoaderListener =
+        DialerExecutorComponent.get(getContext())
+            .createUiListener(getChildFragmentManager(), "speed_dial_loader_listener");
+
     // Setup favorite contact context menu
     contextMenu = rootLayout.findViewById(R.id.favorite_contact_context_menu);
     contextMenuBackground = rootLayout.findViewById(R.id.context_menu_background);
@@ -124,7 +128,11 @@ public class SpeedDialFragment extends Fragment {
             rootLayout,
             contextMenu,
             contextMenuBackground,
-            new SpeedDialContextMenuItemListener(getActivity(), getChildFragmentManager()),
+            new SpeedDialContextMenuItemListener(
+                getActivity(),
+                getChildFragmentManager(),
+                new UpdateSpeedDialAdapterListener(),
+                speedDialLoaderListener),
             layoutManager);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
@@ -138,10 +146,6 @@ public class SpeedDialFragment extends Fragment {
     ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
     touchHelper.attachToRecyclerView(recyclerView);
     adapter.setItemTouchHelper(touchHelper);
-
-    speedDialLoaderListener =
-        DialerExecutorComponent.get(getContext())
-            .createUiListener(getChildFragmentManager(), "speed_dial_loader_listener");
     return rootLayout;
   }
 
@@ -437,11 +441,18 @@ public class SpeedDialFragment extends Fragment {
 
     private final FragmentActivity activity;
     private final FragmentManager childFragmentManager;
+    private final SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
+    private final UpdateSpeedDialAdapterListener updateAdapterListener;
 
     SpeedDialContextMenuItemListener(
-        FragmentActivity activity, FragmentManager childFragmentManager) {
+        FragmentActivity activity,
+        FragmentManager childFragmentManager,
+        UpdateSpeedDialAdapterListener updateAdapterListener,
+        SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener) {
       this.activity = activity;
       this.childFragmentManager = childFragmentManager;
+      this.updateAdapterListener = updateAdapterListener;
+      this.speedDialLoaderListener = speedDialLoaderListener;
     }
 
     @Override
@@ -472,7 +483,15 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra): implement remove
+      speedDialLoaderListener.listen(
+          activity,
+          UiItemLoaderComponent.get(activity)
+              .speedDialUiItemMutator()
+              .removeSpeedDialUiItem(speedDialUiItem),
+          updateAdapterListener::updateAdapter,
+          throwable -> {
+            throw new RuntimeException(throwable);
+          });
     }
 
     @Override
@@ -482,6 +501,14 @@ public class SpeedDialFragment extends Fragment {
               Intent.ACTION_VIEW,
               Uri.withAppendedPath(
                   Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
+    }
+  }
+
+  /** Listener for when a SpeedDialUiItem is updated. */
+  private class UpdateSpeedDialAdapterListener {
+
+    void updateAdapter(ImmutableList<SpeedDialUiItem> speedDialUiItems) {
+      onSpeedDialUiItemListLoaded(speedDialUiItems);
     }
   }
 
