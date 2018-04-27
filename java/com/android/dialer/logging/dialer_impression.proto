@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1392
+  // Next Tag: 1397
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -770,5 +770,14 @@ message DialerImpression {
     // Send button clicked in RTT call, this includes send button on keyboard.
     RTT_SEND_BUTTON_CLICKED = 1387;
     RTT_KEYBOARD_SEND_BUTTON_CLICKED = 1388;
+
+    // For background calling
+    START_CALL_IN_BUBBLE_MODE = 1392;
+
+    // Switch audio route
+    IN_CALL_SWITCH_AUDIO_ROUTE_SPEAKER = 1393;
+    IN_CALL_SWITCH_AUDIO_ROUTE_WIRED_HEADSET = 1394;
+    IN_CALL_SWITCH_AUDIO_ROUTE_EARPIECE = 1395;
+    IN_CALL_SWITCH_AUDIO_ROUTE_BLUETOOTH = 1396;
   }
 }

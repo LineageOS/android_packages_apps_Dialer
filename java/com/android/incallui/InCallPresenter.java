@@ -52,6 +52,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.postcall.PostCall;
@@ -429,7 +430,15 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     }
 
     Bundle extras = dialerCall.getIntentExtras();
-    return shouldStartInBubbleModeWithExtras(extras);
+    boolean result = shouldStartInBubbleModeWithExtras(extras);
+    if (result) {
+      Logger.get(context)
+          .logCallImpression(
+              DialerImpression.Type.START_CALL_IN_BUBBLE_MODE,
+              dialerCall.getUniqueCallId(),
+              dialerCall.getTimeAddedMs());
+    }
+    return result;
   }
 
   private boolean shouldStartInBubbleModeWithExtras(Bundle outgoingExtras) {
