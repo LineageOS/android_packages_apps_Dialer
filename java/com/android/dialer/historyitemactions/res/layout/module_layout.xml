@@ -28,7 +28,6 @@
       android:layout_height="@dimen/contact_actions_image_size"
       android:layout_marginStart="@dimen/contact_actions_image_margin"
       android:layout_marginEnd="@dimen/contact_actions_image_margin"
-      android:tint="@color/dialer_secondary_text_color"
       android:scaleType="center"/>
 
   <TextView

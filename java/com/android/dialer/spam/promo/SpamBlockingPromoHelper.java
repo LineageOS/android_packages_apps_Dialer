@@ -34,14 +34,14 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.SpamSettings;
-import com.android.dialer.spam.SpamSettings.ModifySettingListener;
+import com.android.dialer.spam.promo.SpamBlockingPromoDialogFragment.OnEnableListener;
 
 /** Helper class for showing spam blocking on-boarding promotions. */
 public class SpamBlockingPromoHelper {
 
   static final String SPAM_BLOCKING_PROMO_PERIOD_MILLIS = "spam_blocking_promo_period_millis";
   static final String SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS = "spam_blocking_promo_last_show_millis";
-  static final String ENABLE_SPAM_BLOCKING_PROMO = "enable_spam_blocking_promo";
+  public static final String ENABLE_SPAM_BLOCKING_PROMO = "enable_spam_blocking_promo";
 
   private final Context context;
   private final SpamSettings spamSettings;
@@ -81,33 +81,15 @@ public class SpamBlockingPromoHelper {
    * Shows a spam blocking promo dialog.
    *
    * @param fragmentManager the fragment manager to show the dialog.
-   * @param modifySettingListener the listener called after spam blocking setting is modified.
+   * @param onEnableListener the listener called when enable button is clicked.
    * @param onDismissListener the listener called when the dialog is dismissed.
    */
   public void showSpamBlockingPromoDialog(
       FragmentManager fragmentManager,
-      ModifySettingListener modifySettingListener,
+      OnEnableListener onEnableListener,
       OnDismissListener onDismissListener) {
     updateLastShowSpamTimestamp();
-    Logger.get(context).logImpression(DialerImpression.Type.SPAM_BLOCKING_CALL_LOG_PROMO_SHOWN);
-    SpamBlockingPromoDialogFragment.newInstance(
-            () -> {
-              Logger.get(context)
-                  .logImpression(
-                      DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_CALL_LOG_PROMO);
-              spamSettings.modifySpamBlockingSetting(
-                  true,
-                  success -> {
-                    if (!success) {
-                      Logger.get(context)
-                          .logImpression(
-                              DialerImpression.Type
-                                  .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_CALL_LOG_PROMO);
-                    }
-                    modifySettingListener.onComplete(success);
-                  });
-            },
-            onDismissListener)
+    SpamBlockingPromoDialogFragment.newInstance(onEnableListener, onDismissListener)
         .show(fragmentManager, SpamBlockingPromoDialogFragment.SPAM_BLOCKING_PROMO_DIALOG_TAG);
   }
 

@@ -17,27 +17,25 @@
 package com.android.dialer.speeddial;
 
 import android.content.Context;
-import android.provider.ContactsContract.Contacts;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
-import com.android.dialer.glidephotomanager.PhotoInfo;
+import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
+import com.android.dialer.widget.ContactPhotoView;
 
 /** ViewHolder for displaying suggested contacts in {@link SpeedDialFragment}. */
 public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
   private final SuggestedContactsListener listener;
 
-  private final QuickContactBadge photoView;
+  private final ContactPhotoView photoView;
   private final TextView nameOrNumberView;
   private final TextView numberView;
 
@@ -71,34 +69,31 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder implements OnC
     nameOrNumberView.setText(speedDialUiItem.name());
     numberView.setText(secondaryInfo);
 
-    GlidePhotoManagerComponent.get(context)
-        .glidePhotoManager()
-        .loadQuickContactBadge(
-            photoView,
-            PhotoInfo.newBuilder()
-                .setPhotoId(speedDialUiItem.photoId())
-                .setPhotoUri(speedDialUiItem.photoUri())
-                .setName(speedDialUiItem.name())
-                .setIsVideo(speedDialUiItem.defaultChannel().isVideoTechnology())
-                .setLookupUri(
-                    Contacts.getLookupUri(speedDialUiItem.contactId(), speedDialUiItem.lookupKey())
-                        .toString())
-                .build());
+    photoView.setPhoto(speedDialUiItem.getPhotoInfo());
   }
 
   @Override
   public void onClick(View v) {
     if (v.getId() == R.id.overflow) {
-      listener.onOverFlowMenuClicked(speedDialUiItem);
+      listener.onOverFlowMenuClicked(speedDialUiItem, getHeaderInfo());
     } else {
       listener.onRowClicked(speedDialUiItem.defaultChannel());
     }
   }
 
+  private HistoryItemBottomSheetHeaderInfo getHeaderInfo() {
+    return HistoryItemBottomSheetHeaderInfo.newBuilder()
+        .setPhotoInfo(speedDialUiItem.getPhotoInfo())
+        .setPrimaryText(nameOrNumberView.getText().toString())
+        .setSecondaryText(numberView.getText().toString())
+        .build();
+  }
+
   /** Listener/Callback for {@link SuggestionViewHolder} parents. */
   public interface SuggestedContactsListener {
 
-    void onOverFlowMenuClicked(SpeedDialUiItem speedDialUiItem);
+    void onOverFlowMenuClicked(
+        SpeedDialUiItem speedDialUiItem, HistoryItemBottomSheetHeaderInfo headerInfo);
 
     /** Called when a suggested contact is clicked. */
     void onRowClicked(Channel channel);

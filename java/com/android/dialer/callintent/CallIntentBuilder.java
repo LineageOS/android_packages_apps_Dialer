@@ -152,6 +152,7 @@ public class CallIntentBuilder implements Parcelable {
     return isVideoCall;
   }
 
+  /** Default false. Should only be set to true if the number has a lookup URI. */
   public CallIntentBuilder setAllowAssistedDial(boolean allowAssistedDial) {
     this.allowAssistedDial = allowAssistedDial;
     return this;

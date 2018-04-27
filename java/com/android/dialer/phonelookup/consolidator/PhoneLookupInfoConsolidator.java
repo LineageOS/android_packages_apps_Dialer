@@ -46,6 +46,7 @@ public final class PhoneLookupInfoConsolidator {
     NameSource.CP2_DEFAULT_DIRECTORY,
     NameSource.CP2_EXTENDED_DIRECTORY,
     NameSource.PEOPLE_API,
+    NameSource.CEQUINT,
     NameSource.CNAP
   })
   @interface NameSource {
@@ -53,7 +54,8 @@ public final class PhoneLookupInfoConsolidator {
     int CP2_DEFAULT_DIRECTORY = 1;
     int CP2_EXTENDED_DIRECTORY = 2;
     int PEOPLE_API = 3;
-    int CNAP = 4;
+    int CEQUINT = 4;
+    int CNAP = 5;
   }
 
   /**
@@ -78,6 +80,7 @@ public final class PhoneLookupInfoConsolidator {
           NameSource.CP2_DEFAULT_DIRECTORY,
           NameSource.CP2_EXTENDED_DIRECTORY,
           NameSource.PEOPLE_API,
+          NameSource.CEQUINT,
           NameSource.CNAP);
 
   private final @NameSource int nameSource;
@@ -106,6 +109,8 @@ public final class PhoneLookupInfoConsolidator {
         return ContactSource.Type.SOURCE_TYPE_EXTENDED;
       case NameSource.PEOPLE_API:
         return getRefinedPeopleApiSource();
+      case NameSource.CEQUINT:
+        return ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID;
       case NameSource.CNAP:
         return ContactSource.Type.SOURCE_TYPE_CNAP;
       case NameSource.NONE:
@@ -146,6 +151,8 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstExtendedCp2Contact).getName();
       case NameSource.PEOPLE_API:
         return phoneLookupInfo.getPeopleApiInfo().getDisplayName();
+      case NameSource.CEQUINT:
+        return phoneLookupInfo.getCequintInfo().getName();
       case NameSource.CNAP:
         return phoneLookupInfo.getCnapInfo().getName();
       case NameSource.NONE:
@@ -170,6 +177,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Assert.isNotNull(firstExtendedCp2Contact).getPhotoThumbnailUri();
       case NameSource.PEOPLE_API:
+      case NameSource.CEQUINT:
       case NameSource.CNAP:
       case NameSource.NONE:
         return "";
@@ -192,6 +200,8 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstDefaultCp2Contact).getPhotoUri();
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Assert.isNotNull(firstExtendedCp2Contact).getPhotoUri();
+      case NameSource.CEQUINT:
+        return phoneLookupInfo.getCequintInfo().getPhotoUri();
       case NameSource.PEOPLE_API:
       case NameSource.CNAP:
       case NameSource.NONE:
@@ -213,6 +223,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Math.max(Assert.isNotNull(firstExtendedCp2Contact).getPhotoId(), 0);
       case NameSource.PEOPLE_API:
+      case NameSource.CEQUINT:
       case NameSource.CNAP:
       case NameSource.NONE:
         return 0;
@@ -235,6 +246,7 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstExtendedCp2Contact).getLookupUri();
       case NameSource.PEOPLE_API:
         return Assert.isNotNull(phoneLookupInfo.getPeopleApiInfo().getLookupUri());
+      case NameSource.CEQUINT:
       case NameSource.CNAP:
       case NameSource.NONE:
         return "";
@@ -258,6 +270,30 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstDefaultCp2Contact).getLabel();
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Assert.isNotNull(firstExtendedCp2Contact).getLabel();
+      case NameSource.PEOPLE_API:
+      case NameSource.CEQUINT:
+      case NameSource.CNAP:
+      case NameSource.NONE:
+        return "";
+      default:
+        throw Assert.createUnsupportedOperationFailException(
+            String.format("Unsupported name source: %s", nameSource));
+    }
+  }
+
+  /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns the number's geolocation (which is for display purpose only).
+   *
+   * <p>If no geolocation can be obtained from the {@link PhoneLookupInfo}, an empty string will be
+   * returned.
+   */
+  public String getGeolocation() {
+    switch (nameSource) {
+      case NameSource.CEQUINT:
+        return phoneLookupInfo.getCequintInfo().getGeolocation();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+      case NameSource.CP2_EXTENDED_DIRECTORY:
       case NameSource.PEOPLE_API:
       case NameSource.CNAP:
       case NameSource.NONE:
@@ -320,6 +356,7 @@ public final class PhoneLookupInfoConsolidator {
     switch (nameSource) {
       case NameSource.CP2_DEFAULT_DIRECTORY:
       case NameSource.CP2_EXTENDED_DIRECTORY:
+      case NameSource.CEQUINT:
       case NameSource.CNAP:
       case NameSource.NONE:
         return false;
@@ -343,6 +380,7 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstDefaultCp2Contact).getCanSupportCarrierVideoCall();
       case NameSource.CP2_EXTENDED_DIRECTORY:
       case NameSource.PEOPLE_API:
+      case NameSource.CEQUINT:
       case NameSource.CNAP:
       case NameSource.NONE:
         return false;
@@ -394,6 +432,11 @@ public final class PhoneLookupInfoConsolidator {
           if (phoneLookupInfo.hasPeopleApiInfo()
               && !phoneLookupInfo.getPeopleApiInfo().getDisplayName().isEmpty()) {
             return NameSource.PEOPLE_API;
+          }
+          break;
+        case NameSource.CEQUINT:
+          if (!phoneLookupInfo.getCequintInfo().getName().isEmpty()) {
+            return NameSource.CEQUINT;
           }
           break;
         case NameSource.CNAP:
