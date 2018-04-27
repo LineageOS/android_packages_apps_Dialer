@@ -66,6 +66,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.latencyreport.LatencyReport;
@@ -1356,7 +1357,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       LogUtil.v("InCallPresenter.handleCallKey", "heldCall: " + heldCall + ", canHold: " + canHold);
 
       // (4) unhold call
-      if (heldCall.getState() == DialerCall.State.ONHOLD && canHold) {
+      if (heldCall.getState() == DialerCallState.ONHOLD && canHold) {
         heldCall.unhold();
         return true;
       }
@@ -1428,7 +1429,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   /** Instruct the in-call activity to show an error dialog or toast for a disconnected call. */
   private void showDialogOrToastForDisconnectedCall(DialerCall call) {
-    if (call.getState() != DialerCall.State.DISCONNECTED) {
+    if (call.getState() != DialerCallState.DISCONNECTED) {
       return;
     }
 

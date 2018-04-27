@@ -83,8 +83,8 @@ import com.android.incallui.answerproximitysensor.PseudoScreenState;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.callpending.CallPendingActivity;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incall.bindings.InCallBindings;
@@ -348,7 +348,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       // If there's only one line in use, AND it's on hold, then we're sure the user
       // wants to use the dialpad toward the exact line, so un-hold the holding line.
       DialerCall call = CallList.getInstance().getActiveOrBackgroundCall();
-      if (call != null && call.getState() == State.ONHOLD) {
+      if (call != null && call.getState() == DialerCallState.ONHOLD) {
         call.unhold();
       }
     }
@@ -1449,7 +1449,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     if (call == null) {
       call = CallList.getInstance().getBackgroundCall();
     }
-    if (didShowAnswerScreen && (call == null || call.getState() == State.DISCONNECTED)) {
+    if (didShowAnswerScreen && (call == null || call.getState() == DialerCallState.DISCONNECTED)) {
       LogUtil.i("InCallActivity.getShouldShowAnswerUi", "found disconnecting incoming call");
       return new ShouldShowUiResult(true, call);
     }

@@ -22,7 +22,7 @@ import com.android.dialer.activecalls.ActiveCallInfo;
 import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.state.DialerCallState;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
@@ -49,7 +49,7 @@ public class ActiveCallsCallListListener implements CallList.Listener {
   public void onCallListChange(CallList callList) {
     ImmutableList.Builder<ActiveCallInfo> activeCalls = ImmutableList.builder();
     for (DialerCall call : callList.getAllCalls()) {
-      if (call.getState() != State.DISCONNECTED) {
+      if (call.getState() != DialerCallState.DISCONNECTED) {
         activeCalls.add(
             ActiveCallInfo.builder()
                 .setPhoneAccountHandle(Optional.fromNullable(call.getAccountHandle()))

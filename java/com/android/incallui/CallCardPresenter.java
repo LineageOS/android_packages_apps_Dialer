@@ -65,8 +65,8 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.calllocation.CallLocation;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.incall.protocol.ContactPhotoType;
@@ -171,7 +171,7 @@ public class CallCardPresenter
       call.addListener(this);
       // start processing lookups right away.
       if (!call.isConferenceCall()) {
-        startContactInfoSearch(call, true, call.getState() == DialerCall.State.INCOMING);
+        startContactInfoSearch(call, true, call.getState() == DialerCallState.INCOMING);
       } else {
         updateContactEntry(null, true);
       }
@@ -323,7 +323,7 @@ public class CallCardPresenter
 
       primaryContactInfo =
           ContactInfoCache.buildCacheEntryFromCall(
-              context, this.primary, this.primary.getState() == DialerCall.State.INCOMING);
+              context, this.primary, this.primary.getState() == DialerCallState.INCOMING);
       updatePrimaryDisplayInfo();
       maybeStartSearch(this.primary, true);
     }
@@ -341,14 +341,14 @@ public class CallCardPresenter
         // secondary call has changed
         secondaryContactInfo =
             ContactInfoCache.buildCacheEntryFromCall(
-                context, this.secondary, this.secondary.getState() == DialerCall.State.INCOMING);
+                context, this.secondary, this.secondary.getState() == DialerCallState.INCOMING);
         updateSecondaryDisplayInfo();
         maybeStartSearch(this.secondary, false);
       }
     }
 
     // Set the call state
-    int callState = DialerCall.State.IDLE;
+    int callState = DialerCallState.IDLE;
     if (this.primary != null) {
       callState = this.primary.getState();
       updatePrimaryCallState();
@@ -362,7 +362,7 @@ public class CallCardPresenter
     getUi()
         .setEndCallButtonEnabled(
             shouldShowEndCallButton(this.primary, callState),
-            callState != DialerCall.State.INCOMING /* animate */);
+            callState != DialerCallState.INCOMING /* animate */);
 
     maybeSendAccessibilityEvent(oldState, newState, primaryChanged);
     Trace.endSection();
@@ -520,7 +520,7 @@ public class CallCardPresenter
     if (secondary == null) {
       return ButtonState.NOT_SUPPORT;
     }
-    if (primary.getState() == State.ACTIVE) {
+    if (primary.getState() == DialerCallState.ACTIVE) {
       return ButtonState.ENABLED;
     }
     return ButtonState.DISABLED;
@@ -580,7 +580,7 @@ public class CallCardPresenter
   private void maybeStartSearch(DialerCall call, boolean isPrimary) {
     // no need to start search for conference calls which show generic info.
     if (call != null && !call.isConferenceCall()) {
-      startContactInfoSearch(call, isPrimary, call.getState() == DialerCall.State.INCOMING);
+      startContactInfoSearch(call, isPrimary, call.getState() == DialerCallState.INCOMING);
     }
   }
 
@@ -978,7 +978,7 @@ public class CallCardPresenter
     if (primary == null) {
       return false;
     }
-    return DialerCall.State.isDialing(primary.getState())
+    return DialerCallState.isDialing(primary.getState())
         && primary.getGatewayInfo() != null
         && !primary.getGatewayInfo().isEmpty();
   }
@@ -1040,17 +1040,17 @@ public class CallCardPresenter
   }
 
   private boolean isPrimaryCallActive() {
-    return primary != null && primary.getState() == DialerCall.State.ACTIVE;
+    return primary != null && primary.getState() == DialerCallState.ACTIVE;
   }
 
   private boolean shouldShowEndCallButton(DialerCall primary, int callState) {
     if (primary == null) {
       return false;
     }
-    if ((!DialerCall.State.isConnectingOrConnected(callState)
-            && callState != DialerCall.State.DISCONNECTING
-            && callState != DialerCall.State.DISCONNECTED)
-        || callState == DialerCall.State.INCOMING) {
+    if ((!DialerCallState.isConnectingOrConnected(callState)
+            && callState != DialerCallState.DISCONNECTING
+            && callState != DialerCallState.DISCONNECTED)
+        || callState == DialerCallState.INCOMING) {
       return false;
     }
     if (this.primary.getVideoTech().getSessionModificationState()
@@ -1141,8 +1141,8 @@ public class CallCardPresenter
     }
 
     boolean isIncomingOrWaiting =
-        primary.getState() == DialerCall.State.INCOMING
-            || primary.getState() == DialerCall.State.CALL_WAITING;
+        primary.getState() == DialerCallState.INCOMING
+            || primary.getState() == DialerCallState.CALL_WAITING;
     return isIncomingOrWaiting
         && !TextUtils.isEmpty(call.getCallSubject())
         && call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED
@@ -1159,8 +1159,8 @@ public class CallCardPresenter
   private boolean shouldShowNoteSentToast(DialerCall call) {
     return call != null
         && hasCallSubject(call)
-        && (call.getState() == DialerCall.State.DIALING
-            || call.getState() == DialerCall.State.CONNECTING);
+        && (call.getState() == DialerCallState.DIALING
+            || call.getState() == DialerCallState.CONNECTING);
   }
 
   private InCallScreen getUi() {
