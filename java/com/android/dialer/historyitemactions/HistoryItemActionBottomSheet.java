@@ -17,8 +17,10 @@
 package com.android.dialer.historyitemactions;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,6 +111,12 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     ((TextView) moduleView.findViewById(R.id.module_text)).setText(module.getStringId());
     ((ImageView) moduleView.findViewById(R.id.module_image))
         .setImageResource(module.getDrawableId());
+    if (module.tintDrawable()) {
+      ((ImageView) moduleView.findViewById(R.id.module_image))
+          .setImageTintList(
+              ColorStateList.valueOf(
+                  ContextCompat.getColor(getContext(), R.color.secondary_text_color)));
+    }
     moduleView.setOnClickListener(this);
     moduleView.setTag(module);
     return moduleView;

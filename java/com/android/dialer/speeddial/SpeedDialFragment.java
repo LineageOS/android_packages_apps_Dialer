@@ -16,6 +16,7 @@
 
 package com.android.dialer.speeddial;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,6 +42,12 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.historyitemactions.DividerModule;
+import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
+import com.android.dialer.historyitemactions.HistoryItemActionModule;
+import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
+import com.android.dialer.historyitemactions.IntentModule;
+import com.android.dialer.historyitemactions.SharedModules;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
@@ -54,8 +61,11 @@ import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.util.IntentUtil;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment for displaying:
@@ -301,8 +311,61 @@ public class SpeedDialFragment extends Fragment {
   private final class SpeedDialSuggestedListener implements SuggestedContactsListener {
 
     @Override
-    public void onOverFlowMenuClicked(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra) show overflow menu for suggested contacts
+    public void onOverFlowMenuClicked(
+        SpeedDialUiItem speedDialUiItem, HistoryItemBottomSheetHeaderInfo headerInfo) {
+      List<HistoryItemActionModule> modules = new ArrayList<>();
+      Channel defaultChannel = speedDialUiItem.defaultChannel();
+
+      // Add voice call module
+      Channel voiceChannel = speedDialUiItem.getDeterministicVoiceChannel();
+      if (voiceChannel != null) {
+        modules.add(
+            IntentModule.newCallModule(
+                getContext(),
+                new CallIntentBuilder(voiceChannel.number(), CallInitiationType.Type.SPEED_DIAL)
+                    .setAllowAssistedDial(true)));
+      } else {
+        modules.add(new DisambigDialogModule(speedDialUiItem, /* isVideo = */ false));
+      }
+
+      // Add video if we can determine the correct channel
+      Channel videoChannel = speedDialUiItem.getDeterministicVideoChannel();
+      if (videoChannel != null) {
+        modules.add(
+            IntentModule.newCallModule(
+                getContext(),
+                new CallIntentBuilder(videoChannel.number(), CallInitiationType.Type.SPEED_DIAL)
+                    .setIsVideoCall(true)
+                    .setAllowAssistedDial(true)));
+      } else if (speedDialUiItem.hasVideoChannels()) {
+        modules.add(new DisambigDialogModule(speedDialUiItem, /* isVideo = */ true));
+      }
+
+      // Add sms module
+      Optional<HistoryItemActionModule> smsModule =
+          SharedModules.createModuleForSendingTextMessage(
+              getContext(), defaultChannel.number(), false);
+      if (smsModule.isPresent()) {
+        modules.add(smsModule.get());
+      }
+
+      modules.add(new DividerModule());
+
+      // TODO(calderwoodra): add to favorites module
+      // TODO(calderwoodra): remove from strequent module
+
+      // Contact info module
+      modules.add(
+          new ContactInfoModule(
+              getContext(),
+              new Intent(
+                  Intent.ACTION_VIEW,
+                  Uri.withAppendedPath(
+                      Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))),
+              R.string.contact_menu_contact_info,
+              R.drawable.context_menu_contact_icon));
+
+      HistoryItemActionBottomSheet.show(getContext(), headerInfo, modules);
     }
 
     @Override
@@ -320,6 +383,53 @@ public class SpeedDialFragment extends Fragment {
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
               .setIsVideoCall(channel.isVideoTechnology()));
+    }
+
+    private final class ContactInfoModule extends IntentModule {
+
+      public ContactInfoModule(Context context, Intent intent, int text, int image) {
+        super(context, intent, text, image);
+      }
+
+      @Override
+      public boolean tintDrawable() {
+        return false;
+      }
+    }
+
+    private final class DisambigDialogModule implements HistoryItemActionModule {
+
+      private final SpeedDialUiItem speedDialUiItem;
+      private final boolean isVideo;
+
+      DisambigDialogModule(SpeedDialUiItem speedDialUiItem, boolean isVideo) {
+        this.speedDialUiItem = speedDialUiItem;
+        this.isVideo = isVideo;
+      }
+
+      @Override
+      public int getStringId() {
+        if (isVideo) {
+          return R.string.contact_menu_video_call;
+        } else {
+          return R.string.contact_menu_voice_call;
+        }
+      }
+
+      @Override
+      public int getDrawableId() {
+        if (isVideo) {
+          return R.drawable.quantum_ic_videocam_vd_theme_24;
+        } else {
+          return R.drawable.quantum_ic_phone_vd_theme_24;
+        }
+      }
+
+      @Override
+      public boolean onClick() {
+        DisambigDialog.show(speedDialUiItem, getChildFragmentManager());
+        return true;
+      }
     }
   }
 
