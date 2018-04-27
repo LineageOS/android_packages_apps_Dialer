@@ -214,7 +214,12 @@ public final class CallLogEntryText {
     // (1) there is no number type label, and
     // (2) the number is not spam.
     if (TextUtils.isEmpty(numberTypeLabel) && !row.getNumberAttributes().getIsSpam()) {
-      String location = row.getGeocodedLocation();
+      // If number attributes contain a location (obtained from a PhoneLookup), use it instead
+      // of the one from the annotated call log.
+      String location =
+          !TextUtils.isEmpty(row.getNumberAttributes().getGeolocation())
+              ? row.getNumberAttributes().getGeolocation()
+              : row.getGeocodedLocation();
       if (!TextUtils.isEmpty(location)) {
         if (secondaryText.length() > 0) {
           secondaryText.append(", ");

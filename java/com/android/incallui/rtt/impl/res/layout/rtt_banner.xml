@@ -19,30 +19,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-  <RelativeLayout
+  <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="?android:attr/actionBarSize"
+      android:layout_height="@dimen/rtt_banner_height"
       android:background="#F305228F"
-      android:elevation="3dp">
+      android:elevation="3dp"
+      android:orientation="horizontal">
     <ImageButton
         android:id="@+id/rtt_end_call_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_width="@dimen/rtt_banner_height"
+        android:layout_height="@dimen/rtt_banner_height"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:padding="@dimen/rtt_banner_button_padding"
         android:background="@android:color/transparent"
         android:contentDescription="@string/incall_content_description_end_call"
         android:scaleType="fitXY"
         android:src="@drawable/quantum_ic_call_end_vd_theme_24"
         android:tint="#FFDF0000"/>
     <LinearLayout
-        android:layout_width="260dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_toEndOf="@id/rtt_end_call_button"
         android:orientation="vertical">
       <TextView
           android:id="@+id/rtt_name_or_number"
@@ -67,18 +67,17 @@
     </LinearLayout>
     <ImageButton
         android:id="@+id/rtt_overflow_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="12dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_width="@dimen/rtt_banner_height"
+        android:layout_height="@dimen/rtt_banner_height"
+        android:layout_marginStart="8dp"
+        android:padding="@dimen/rtt_banner_button_padding"
         android:background="@android:color/transparent"
         android:contentDescription="@string/content_description_overflow"
         android:scaleType="fitXY"
         android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
         android:tint="#FFFFFF"/>
 
-  </RelativeLayout>
+  </LinearLayout>
   <FrameLayout
       android:id="@id/rtt_on_hold_banner"
       android:layout_width="match_parent"
