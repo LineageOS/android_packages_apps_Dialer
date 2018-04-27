@@ -273,8 +273,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private SpeakEasyCallManager speakEasyCallManager;
 
-  private boolean audioRouteSetForBubbleMode;
-
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
@@ -1612,8 +1610,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
       isChangingConfigurations = false;
 
-      audioRouteSetForBubbleMode = false;
-
       // blow away stale contact info so that we get fresh data on
       // the next set of calls
       if (contactInfoCache != null) {
@@ -1893,39 +1889,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   @Override
   public void onAudioStateChanged(CallAudioState audioState) {
-    // Set sensible audio route for bubble mode when we get real audio state for the first time
-    // During the first time this function is called, supportedRouteMask is set to
-    // SUPPORTED_AUDIO_ROUTE_ALL, but it's OK since shouldStartInBubbleMode() is false at that time
-    // (callList not updated yet).
-    if (!audioRouteSetForBubbleMode && shouldStartInBubbleMode()) {
-      setAudioRouteForBubbleMode(audioState);
-      audioRouteSetForBubbleMode = true;
-    }
-
     if (statusBarNotifier != null) {
       statusBarNotifier.updateNotification();
-    }
-  }
-
-  /**
-   * Set audio route to make audio sensible. According to availability, set audio route to Bluetooth
-   * or wired headset or speaker.
-   */
-  private void setAudioRouteForBubbleMode(CallAudioState audioState) {
-    if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
-        == CallAudioState.ROUTE_BLUETOOTH) {
-      // Use Bluetooth if available
-      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_BLUETOOTH);
-      LogUtil.i("InCallPrenter.setAudioRouteForBubbleMode", "bluetooth");
-    } else if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_WIRED_HEADSET)
-        == CallAudioState.ROUTE_WIRED_HEADSET) {
-      // Use wired headset if available
-      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_WIRED_HEADSET);
-      LogUtil.i("InCallPrenter.setAudioRouteForBubbleMode", "wired headset");
-    } else {
-      // Use speaker
-      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
-      LogUtil.i("InCallPrenter.setAudioRouteForBubbleMode", "speaker");
     }
   }
 
