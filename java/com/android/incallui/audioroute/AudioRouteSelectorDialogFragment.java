@@ -16,6 +16,7 @@
 
 package com.android.incallui.audioroute;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -35,6 +36,8 @@ import android.widget.TextView;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.audiomode.BluetoothDeviceProviderComponent;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Set;
 
 /** Shows picker for audio routes */
@@ -142,7 +145,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     int selectedColor = getResources().getColor(R.color.dialer_theme_color);
     TextView textView =
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
-    textView.setText(bluetoothDevice.getName());
+    textView.setText(getAliasName(bluetoothDevice));
     if (selected) {
       textView.setTextColor(selectedColor);
       textView.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
@@ -162,5 +165,17 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
         });
 
     return textView;
+  }
+
+  @SuppressLint("PrivateApi")
+  private String getAliasName(BluetoothDevice bluetoothDevice) {
+    try {
+      Method getActiveDeviceMethod = bluetoothDevice.getClass().getDeclaredMethod("getAliasName");
+      getActiveDeviceMethod.setAccessible(true);
+      return (String) getActiveDeviceMethod.invoke(bluetoothDevice);
+    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+      e.printStackTrace();
+      return bluetoothDevice.getName();
+    }
   }
 }
