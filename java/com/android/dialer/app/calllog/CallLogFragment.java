@@ -449,7 +449,7 @@ public class CallLogFragment extends Fragment
     super.onStart();
     CequintCallerIdManager cequintCallerIdManager = null;
     if (CequintCallerIdManager.isCequintCallerIdEnabled(getContext())) {
-      cequintCallerIdManager = CequintCallerIdManager.createInstanceForCallLog();
+      cequintCallerIdManager = new CequintCallerIdManager();
     }
     contactInfoCache.setCequintCallerIdManager(cequintCallerIdManager);
   }
