@@ -467,6 +467,7 @@ public class RttChatFragment extends Fragment
       if (editText.requestFocus()) {
         UiUtil.openKeyboardFrom(getContext(), editText);
       }
+      adapter.showAdvisory();
     }
     if (primaryCallState.state() == State.DIALING) {
       showWaitingForJoinBanner();

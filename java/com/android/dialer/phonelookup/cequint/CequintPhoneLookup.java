@@ -18,33 +18,85 @@ package com.android.dialer.phonelookup.cequint;
 
 import android.content.Context;
 import android.telecom.Call;
+import android.text.TextUtils;
 import com.android.dialer.DialerPhoneNumber;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.location.GeoUtil;
+import com.android.dialer.oem.CequintCallerIdManager;
+import com.android.dialer.oem.CequintCallerIdManager.CequintCallerIdContact;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.CequintInfo;
+import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.android.dialer.telecom.TelecomCallUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for Cequint. */
 public class CequintPhoneLookup implements PhoneLookup<CequintInfo> {
 
+  private final Context appContext;
+  private final ListeningExecutorService backgroundExecutorService;
+  private final ListeningExecutorService lightweightExecutorService;
+
   @Inject
-  CequintPhoneLookup() {}
+  CequintPhoneLookup(
+      @ApplicationContext Context appContext,
+      @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
+    this.appContext = appContext;
+    this.backgroundExecutorService = backgroundExecutorService;
+    this.lightweightExecutorService = lightweightExecutorService;
+  }
 
   @Override
   public ListenableFuture<CequintInfo> lookup(Context appContext, Call call) {
-    // TODO(a bug): Override the default implementation in the PhoneLookup interface
-    // as a Cequint lookup requires info in the provided call.
-    return Futures.immediateFuture(CequintInfo.getDefaultInstance());
+    if (!CequintCallerIdManager.isCequintCallerIdEnabled(appContext)) {
+      return Futures.immediateFuture(CequintInfo.getDefaultInstance());
+    }
+
+    ListenableFuture<DialerPhoneNumber> dialerPhoneNumberFuture =
+        backgroundExecutorService.submit(
+            () -> {
+              DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
+              return dialerPhoneNumberUtil.parse(
+                  TelecomCallUtil.getNumber(call), GeoUtil.getCurrentCountryIso(appContext));
+            });
+    String callerDisplayName = call.getDetails().getCallerDisplayName();
+    boolean isIncomingCall = (call.getState() == Call.STATE_RINGING);
+
+    return Futures.transformAsync(
+        dialerPhoneNumberFuture,
+        dialerPhoneNumber ->
+            backgroundExecutorService.submit(
+                () ->
+                    buildCequintInfo(
+                        CequintCallerIdManager.getCequintCallerIdContactForCall(
+                            appContext,
+                            Assert.isNotNull(dialerPhoneNumber).getNormalizedNumber(),
+                            callerDisplayName,
+                            isIncomingCall))),
+        lightweightExecutorService);
   }
 
   @Override
   public ListenableFuture<CequintInfo> lookup(DialerPhoneNumber dialerPhoneNumber) {
-    // TODO(a bug): Implement this method.
-    return Futures.immediateFuture(CequintInfo.getDefaultInstance());
+    if (!CequintCallerIdManager.isCequintCallerIdEnabled(appContext)) {
+      return Futures.immediateFuture(CequintInfo.getDefaultInstance());
+    }
+
+    return backgroundExecutorService.submit(
+        () ->
+            buildCequintInfo(
+                CequintCallerIdManager.getCequintCallerIdContactForNumber(
+                    appContext, dialerPhoneNumber.getNormalizedNumber())));
   }
 
   @Override
@@ -75,16 +127,38 @@ public class CequintPhoneLookup implements PhoneLookup<CequintInfo> {
 
   @Override
   public void registerContentObservers() {
-    // No content observers for Cequint info.
+    // No need to register a content observer as the Cequint content provider doesn't support batch
+    // queries.
   }
 
   @Override
   public void unregisterContentObservers() {
-    // No content observers for Cequint info.
+    // Nothing to be done as no content observer is registered.
   }
 
   @Override
   public ListenableFuture<Void> clearData() {
     return Futures.immediateFuture(null);
+  }
+
+  /**
+   * Builds a {@link CequintInfo} proto based on the given {@link CequintCallerIdContact} returned
+   * by {@link CequintCallerIdManager}.
+   */
+  private static CequintInfo buildCequintInfo(CequintCallerIdContact cequintCallerIdContact) {
+    CequintInfo.Builder cequintInfoBuilder = CequintInfo.newBuilder();
+
+    // Every field in CequintCallerIdContact can be null.
+    if (!TextUtils.isEmpty(cequintCallerIdContact.name())) {
+      cequintInfoBuilder.setName(cequintCallerIdContact.name());
+    }
+    if (!TextUtils.isEmpty(cequintCallerIdContact.geolocation())) {
+      cequintInfoBuilder.setGeolocation(cequintCallerIdContact.geolocation());
+    }
+    if (!TextUtils.isEmpty(cequintCallerIdContact.photoUri())) {
+      cequintInfoBuilder.setPhotoUri(cequintCallerIdContact.photoUri());
+    }
+
+    return cequintInfoBuilder.build();
   }
 }

@@ -43,6 +43,7 @@ import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.spam.SpamSettings;
 import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 import com.android.incallui.call.DialerCall;
 
@@ -86,6 +87,8 @@ public class SpamNotificationActivity extends FragmentActivity {
         }
       };
   private FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
+  private SpamSettings spamSettings;
+  private SpamBlockingPromoHelper spamBlockingPromoHelper;
 
   /**
    * Creates an intent to start this activity.
@@ -160,6 +163,8 @@ public class SpamNotificationActivity extends FragmentActivity {
     super.onCreate(savedInstanceState);
     setFinishOnTouchOutside(true);
     filteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(this);
+    spamSettings = SpamComponent.get(this).spamSettings();
+    spamBlockingPromoHelper = new SpamBlockingPromoHelper(getApplicationContext(), spamSettings);
     cancelNotification();
   }
 
@@ -417,7 +422,7 @@ public class SpamNotificationActivity extends FragmentActivity {
                   dismiss();
                   spamNotificationActivity.maybeShowBlockReportSpamDialog(
                       number, contactLookupResultType);
-                  spamNotificationActivity.showSpamBlockingPromoDialog();
+                  spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
                 }
               })
           .setNegativeButton(
@@ -515,23 +520,43 @@ public class SpamNotificationActivity extends FragmentActivity {
                   dismiss();
                   spamNotificationActivity.maybeShowBlockReportSpamDialog(
                       number, contactLookupResultType);
+                  spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
                 }
               })
           .create();
     }
   }
 
-  private void showSpamBlockingPromoDialog() {
-    SpamBlockingPromoHelper spamBlockingPromoHelper =
-        new SpamBlockingPromoHelper(
-            getApplicationContext(), SpamComponent.get(this).spamSettings());
+  private void maybeShowSpamBlockingPromoAndFinish() {
     if (!spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
       finish();
-    } else {
-      spamBlockingPromoHelper.showSpamBlockingPromoDialog(
-          getFragmentManager(),
-          success -> spamBlockingPromoHelper.showModifySettingOnCompleteToast(success),
-          dialog -> finish());
+      return;
     }
+    Logger.get(this)
+        .logImpression(DialerImpression.Type.SPAM_BLOCKING_AFTER_CALL_NOTIFICATION_PROMO_SHOWN);
+    showSpamBlockingPromoDialog();
+  }
+
+  private void showSpamBlockingPromoDialog() {
+    spamBlockingPromoHelper.showSpamBlockingPromoDialog(
+        getFragmentManager(),
+        () -> {
+          Logger.get(this)
+              .logImpression(
+                  DialerImpression.Type
+                      .SPAM_BLOCKING_ENABLED_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
+          spamSettings.modifySpamBlockingSetting(
+              true,
+              success -> {
+                if (!success) {
+                  Logger.get(this)
+                      .logImpression(
+                          DialerImpression.Type
+                              .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
+                }
+                spamBlockingPromoHelper.showModifySettingOnCompleteToast(success);
+              });
+        },
+        dialog -> finish());
   }
 }
