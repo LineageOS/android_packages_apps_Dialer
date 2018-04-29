@@ -41,6 +41,7 @@ import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
+import com.android.incallui.call.state.DialerCallState;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -223,7 +224,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     if (!participantInfo.isCacheLookupComplete()) {
       cache.findInfo(
           participantInfo.getCall(),
-          participantInfo.getCall().getState() == DialerCall.State.INCOMING,
+          participantInfo.getCall().getState() == DialerCallState.INCOMING,
           new ContactLookupCallback(this));
     }
 
@@ -299,7 +300,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     final View endButton = view.findViewById(R.id.conferenceCallerDisconnect);
     final View separateButton = view.findViewById(R.id.conferenceCallerSeparate);
 
-    if (callState == DialerCall.State.ONHOLD) {
+    if (callState == DialerCallState.ONHOLD) {
       setViewsOnHold(photoView, statusTextView, nameTextView, numberTextView);
     } else {
       setViewsNotOnHold(photoView, statusTextView, nameTextView, numberTextView);
@@ -401,7 +402,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       if (contactCache == null) {
         contactCache =
             ContactInfoCache.buildCacheEntryFromCall(
-                getContext(), call, call.getState() == DialerCall.State.INCOMING);
+                getContext(), call, call.getState() == DialerCallState.INCOMING);
       }
 
       if (participantsByCallId.containsKey(callId)) {

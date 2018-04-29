@@ -457,6 +457,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     return DialpadFragment.isAddCallMode(intent);
   }
 
+  @SuppressLint("MissingPermission")
   @Override
   public void onActivityResume() {
     callLogFragmentListener.onActivityResume();
@@ -492,11 +493,16 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     bottomNavTabListener.ensureCorrectCallLogShown();
     bottomNavTabListener.ensureCorrectVoicemailShown();
 
+    // Config the badge of missed calls for the new call log.
     if (bottomNavTabListener.newCallLogFragmentActive()) {
-      missedCallCountObserver.onChange(false); // Set the initial value for the badge
-      activity
-          .getContentResolver()
-          .registerContentObserver(Calls.CONTENT_URI, true, missedCallCountObserver);
+      if (PermissionsUtil.hasCallLogReadPermissions(activity)) {
+        missedCallCountObserver.onChange(false); // Set the initial value for the badge
+        activity
+            .getContentResolver()
+            .registerContentObserver(Calls.CONTENT_URI, true, missedCallCountObserver);
+      } else {
+        bottomNav.setNotificationCount(TabIndex.CALL_LOG, 0);
+      }
     }
 
     // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.

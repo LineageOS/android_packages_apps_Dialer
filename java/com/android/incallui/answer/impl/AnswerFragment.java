@@ -69,7 +69,7 @@ import com.android.incallui.answer.impl.utils.Interpolators;
 import com.android.incallui.answer.protocol.AnswerScreen;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 import com.android.incallui.answer.protocol.AnswerScreenDelegateFactory;
-import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.contactgrid.ContactGridManager;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallScreen;
@@ -889,7 +889,7 @@ public class AnswerFragment extends Fragment
   public void onAnswerProgressUpdate(@FloatRange(from = -1f, to = 1f) float answerProgress) {
     // Don't fade the window background for call waiting or video upgrades. Fading the background
     // shows the system wallpaper which looks bad because on reject we switch to another call.
-    if (primaryCallState.state() == State.INCOMING && !isVideoCall()) {
+    if (primaryCallState.state() == DialerCallState.INCOMING && !isVideoCall()) {
       answerScreenDelegate.updateWindowBackgroundColor(answerProgress);
     }
 
@@ -1079,9 +1079,9 @@ public class AnswerFragment extends Fragment
 
   private boolean canRejectCallWithSms() {
     return primaryCallState != null
-        && !(primaryCallState.state() == State.DISCONNECTED
-            || primaryCallState.state() == State.DISCONNECTING
-            || primaryCallState.state() == State.IDLE);
+        && !(primaryCallState.state() == DialerCallState.DISCONNECTED
+            || primaryCallState.state() == DialerCallState.DISCONNECTING
+            || primaryCallState.state() == DialerCallState.IDLE);
   }
 
   private void createInCallScreenDelegate() {
