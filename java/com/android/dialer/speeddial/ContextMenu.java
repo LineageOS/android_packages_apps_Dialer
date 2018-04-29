@@ -18,10 +18,12 @@ package com.android.dialer.speeddial;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.android.dialer.common.Assert;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 
@@ -30,13 +32,13 @@ public class ContextMenu extends LinearLayout {
 
   private ContextMenuItemListener listener;
 
+  private TextView voiceView;
   private TextView videoView;
   private TextView smsView;
 
   private SpeedDialUiItem speedDialUiItem;
   private Channel voiceChannel;
   private Channel videoChannel;
-  private Channel smsChannel;
 
   public ContextMenu(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
@@ -50,9 +52,11 @@ public class ContextMenu extends LinearLayout {
     videoView.setOnClickListener(v -> placeVideoCall());
 
     smsView = findViewById(R.id.send_message_container);
-    smsView.setOnClickListener(v -> listener.openSmsConversation(smsChannel.number()));
+    smsView.setOnClickListener(v -> listener.openSmsConversation(voiceChannel.number()));
 
-    findViewById(R.id.voice_call_container).setOnClickListener(v -> placeVoiceCall());
+    voiceView = findViewById(R.id.voice_call_container);
+    voiceView.setOnClickListener(v -> placeVoiceCall());
+
     findViewById(R.id.remove_container)
         .setOnClickListener(v -> listener.removeFavoriteContact(speedDialUiItem));
     findViewById(R.id.contact_info_container)
@@ -76,14 +80,11 @@ public class ContextMenu extends LinearLayout {
     setX((float) (childLocation[0] + .5 * childLayout.getWidth() - .5 * getWidth()));
     setY(childLocation[1] - parentLocation[1] + childLayout.getHeight());
 
-    voiceChannel = speedDialUiItem.getDeterministicVoiceChannel();
-    videoChannel = speedDialUiItem.getDeterministicVideoChannel();
-    videoView.setVisibility(
-        videoChannel == null && !speedDialUiItem.hasVideoChannels() ? View.GONE : View.VISIBLE);
-
-    // TODO(calderwoodra): disambig dialog for texts?
-    smsChannel = voiceChannel;
-    smsView.setVisibility(smsChannel == null ? View.GONE : View.VISIBLE);
+    voiceChannel = speedDialUiItem.getDefaultVoiceChannel();
+    videoChannel = speedDialUiItem.getDefaultVideoChannel();
+    voiceView.setVisibility(videoChannel == null ? View.GONE : View.VISIBLE);
+    videoView.setVisibility(videoChannel == null ? View.GONE : View.VISIBLE);
+    smsView.setVisibility(voiceChannel == null ? View.GONE : View.VISIBLE);
 
     // TODO(calderwoodra): a11y
     // TODO(calderwoodra): animate this similar to the bubble menu
@@ -102,19 +103,11 @@ public class ContextMenu extends LinearLayout {
   }
 
   private void placeVoiceCall() {
-    if (voiceChannel == null) {
-      listener.disambiguateCall(speedDialUiItem);
-    } else {
-      listener.placeCall(voiceChannel);
-    }
+    listener.placeCall(Assert.isNotNull(voiceChannel));
   }
 
   private void placeVideoCall() {
-    if (videoChannel == null) {
-      listener.disambiguateCall(speedDialUiItem);
-    } else {
-      listener.placeCall(videoChannel);
-    }
+    listener.placeCall(Assert.isNotNull(videoChannel));
   }
 
   public boolean isVisible() {
@@ -122,18 +115,11 @@ public class ContextMenu extends LinearLayout {
   }
 
   /** Listener to report user clicks on menu items. */
+  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public interface ContextMenuItemListener {
 
     /** Called when the user selects "voice call" or "video call" option from the context menu. */
     void placeCall(Channel channel);
-
-    /**
-     * Called when the user selects "voice call" or "video call" option from the context menu, but
-     * it's not clear which channel they want to call.
-     *
-     * <p>TODO(calderwoodra): discuss with product how we want to handle these cases
-     */
-    void disambiguateCall(SpeedDialUiItem speedDialUiItem);
 
     /** Called when the user selects "send message" from the context menu. */
     void openSmsConversation(String number);

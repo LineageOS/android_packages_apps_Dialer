@@ -25,7 +25,7 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.videotech.utils.SessionModificationState;
@@ -69,7 +69,8 @@ public class TopRow {
       icon = context.getDrawable(R.drawable.quantum_ic_network_wifi_vd_theme_24);
     }
 
-    if (state.state() == State.INCOMING || state.state() == State.CALL_WAITING) {
+    if (state.state() == DialerCallState.INCOMING
+        || state.state() == DialerCallState.CALL_WAITING) {
       // Call from
       // [Wi-Fi icon] Video call from
       // Hey Jake, pick up!
@@ -87,18 +88,20 @@ public class TopRow {
     } else if (VideoUtils.hasSentVideoUpgradeRequest(state.sessionModificationState())
         || VideoUtils.hasReceivedVideoUpgradeRequest(state.sessionModificationState())) {
       label = getLabelForVideoRequest(context, state);
-    } else if (state.state() == State.PULLING) {
+    } else if (state.state() == DialerCallState.PULLING) {
       label = context.getString(R.string.incall_transferring);
-    } else if (state.state() == State.DIALING || state.state() == State.CONNECTING) {
+    } else if (state.state() == DialerCallState.DIALING
+        || state.state() == DialerCallState.CONNECTING) {
       // [Wi-Fi icon] Calling via Google Guest
       // Calling...
       label = getLabelForDialing(context, state);
-    } else if (state.state() == State.ACTIVE && state.isRemotelyHeld()) {
+    } else if (state.state() == DialerCallState.ACTIVE && state.isRemotelyHeld()) {
       label = context.getString(R.string.incall_remotely_held);
-    } else if (state.state() == State.ACTIVE
+    } else if (state.state() == DialerCallState.ACTIVE
         && shouldShowNumber(primaryInfo, false /* isIncoming */)) {
       label = spanDisplayNumber(primaryInfo.number());
-    } else if (state.state() == State.CALL_PENDING && !TextUtils.isEmpty(state.customLabel())) {
+    } else if (state.state() == DialerCallState.CALL_PENDING
+        && !TextUtils.isEmpty(state.customLabel())) {
       label = state.customLabel();
     } else {
       // Video calling...

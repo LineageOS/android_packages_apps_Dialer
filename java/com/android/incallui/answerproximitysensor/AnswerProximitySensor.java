@@ -24,8 +24,8 @@ import android.view.Display;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.DialerCallListener;
+import com.android.incallui.call.state.DialerCallState;
 
 /**
  * This class prevents users from accidentally answering calls by keeping the screen off until the
@@ -47,7 +47,7 @@ public class AnswerProximitySensor
     Trace.beginSection("AnswerProximitySensor.shouldUse");
     // Don't use the AnswerProximitySensor for call waiting and other states. Those states are
     // handled by the general ProximitySensor code.
-    if (call.getState() != State.INCOMING) {
+    if (call.getState() != DialerCallState.INCOMING) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "call state is not incoming");
       Trace.endSection();
       return false;
@@ -129,7 +129,7 @@ public class AnswerProximitySensor
 
   @Override
   public void onDialerCallUpdate() {
-    if (call.getState() != State.INCOMING) {
+    if (call.getState() != DialerCallState.INCOMING) {
       LogUtil.i("AnswerProximitySensor.onDialerCallUpdate", "no longer incoming, cleaning up");
       cleanup();
     }

@@ -162,61 +162,77 @@ public abstract class SpeedDialUiItem {
   }
 
   /**
-   * Returns a video channel if there is exactly one video channel or the default channel is a video
-   * channel.
+   * Returns one of the following:
+   *
+   * <ul>
+   *   <li>The default channel if it's a video channel.
+   *   <li>A video channel if it has the same attributes as the default channel, OR
+   *   <li>null. (This is a deliberate product decision, even if there is only a single video
+   *       reachable channel, we should still return null if it has different attributes from those
+   *       in the default channel).
+   * </ul>
    */
   @Nullable
-  public Channel getDeterministicVideoChannel() {
-    if (defaultChannel() != null && defaultChannel().isVideoTechnology()) {
+  public Channel getDefaultVideoChannel() {
+    if (defaultChannel() == null) {
+      return null;
+    }
+
+    if (defaultChannel().isVideoTechnology()) {
       return defaultChannel();
     }
 
-    Channel videoChannel = null;
-    for (Channel channel : channels()) {
-      if (channel.isVideoTechnology()) {
-        if (videoChannel != null) {
-          // We found two video channels, so we can't determine which one is correct..
-          return null;
-        }
-        videoChannel = channel;
-      }
+    if (channels().size() == 1) {
+      // If there is only a single channel, it can't be a video channel
+      return null;
     }
-    // Only found one channel, so return it
-    return videoChannel;
-  }
 
-  /** Returns true if any channels are video channels. */
-  public boolean hasVideoChannels() {
-    for (Channel channel : channels()) {
-      if (channel.isVideoTechnology()) {
-        return true;
+    // At this point, the default channel is a *voice* channel and there are more than
+    // one channel in total.
+    //
+    // Our defined assumptions about the channel list include that if a video channel
+    // follows a voice channel, it has the same attributes as that voice channel
+    // (see comments on method channels() for details).
+    //
+    // Therefore, if the default video channel exists, it must be the immediate successor
+    // of the default channel in the list.
+    //
+    // Note that we don't have to check if the last channel in the list is the default
+    // channel because even if it is, there will be no video channel under the assumption
+    // above.
+    for (int i = 0; i < channels().size() - 1; i++) {
+      // Find the default channel
+      if (Objects.equals(defaultChannel(), channels().get(i))) {
+        // Our defined assumptions about the list of channels is that if a video channel follows a
+        // voice channel, it has the same attributes as that voice channel.
+        Channel channel = channels().get(i + 1);
+        if (channel.isVideoTechnology()) {
+          return channel;
+        }
+        // Since the default voice channel isn't video reachable, we can't video call this number
+        return null;
       }
     }
-    return false;
+    throw Assert.createIllegalStateFailException("channels() doesn't contain defaultChannel().");
   }
 
   /**
-   * Returns a voice channel if there is exactly one voice channel or the default channel is a voice
+   * Returns a voice channel if there is exactly one channel or the default channel is a voice
    * channel.
    */
   @Nullable
-  public Channel getDeterministicVoiceChannel() {
+  public Channel getDefaultVoiceChannel() {
     if (defaultChannel() != null && !defaultChannel().isVideoTechnology()) {
       return defaultChannel();
     }
 
-    Channel voiceChannel = null;
-    for (Channel channel : channels()) {
-      if (!channel.isVideoTechnology()) {
-        if (voiceChannel != null) {
-          // We found two voice channels, so we can't determine which one is correct..
-          return null;
-        }
-        voiceChannel = channel;
-      }
+    if (channels().size() == 1) {
+      // If there is only a single channel, it must be a voice channel as per our defined
+      // assumptions (detailed in comments on method channels()).
+      return channels().get(0);
     }
-    // Only found one channel, so return it
-    return voiceChannel;
+
+    return null;
   }
 
   /**
@@ -253,6 +269,21 @@ public abstract class SpeedDialUiItem {
    * Since a contact can have multiple phone numbers and each number can have multiple technologies,
    * enumerate each one here so that the user can choose the correct one. Each channel here
    * represents a row in the {@link com.android.dialer.speeddial.DisambigDialog}.
+   *
+   * <p>These channels have a few very strictly enforced assumption that are used heavily throughout
+   * the codebase. Those assumption are that:
+   *
+   * <ol>
+   *   <li>Each of the contact's numbers are voice reachable. So if a channel has it's technology
+   *       set to anything other than {@link Channel#VOICE}, there is gaurenteed to be another
+   *       channel with the exact same attributes, but technology will be {@link Channel#VOICE}.
+   *   <li>For each of the contact's phone numbers, there will be a voice channel, then the next
+   *       channel will either be the same phone number but a video channel, or a new number.
+   * </ol>
+   *
+   * For example: Say a contact has two phone numbers (A & B) and A is duo reachable. Then you can
+   * assume the list of channels will be ordered as either {A_voice, A_duo, B_voice} or {B_voice,
+   * A_voice, A_duo}.
    *
    * @see com.android.dialer.speeddial.database.SpeedDialEntry.Channel
    */

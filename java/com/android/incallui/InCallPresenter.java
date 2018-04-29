@@ -52,6 +52,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.location.GeoUtil;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.postcall.PostCall;
@@ -65,6 +66,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.latencyreport.LatencyReport;
@@ -271,8 +273,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private SpeakEasyCallManager speakEasyCallManager;
 
-  private boolean audioRouteSetForBubbleMode;
-
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
@@ -429,7 +429,15 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     }
 
     Bundle extras = dialerCall.getIntentExtras();
-    return shouldStartInBubbleModeWithExtras(extras);
+    boolean result = shouldStartInBubbleModeWithExtras(extras);
+    if (result) {
+      Logger.get(context)
+          .logCallImpression(
+              DialerImpression.Type.START_CALL_IN_BUBBLE_MODE,
+              dialerCall.getUniqueCallId(),
+              dialerCall.getTimeAddedMs());
+    }
+    return result;
   }
 
   private boolean shouldStartInBubbleModeWithExtras(Bundle outgoingExtras) {
@@ -1347,7 +1355,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       LogUtil.v("InCallPresenter.handleCallKey", "heldCall: " + heldCall + ", canHold: " + canHold);
 
       // (4) unhold call
-      if (heldCall.getState() == DialerCall.State.ONHOLD && canHold) {
+      if (heldCall.getState() == DialerCallState.ONHOLD && canHold) {
         heldCall.unhold();
         return true;
       }
@@ -1419,7 +1427,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   /** Instruct the in-call activity to show an error dialog or toast for a disconnected call. */
   private void showDialogOrToastForDisconnectedCall(DialerCall call) {
-    if (call.getState() != DialerCall.State.DISCONNECTED) {
+    if (call.getState() != DialerCallState.DISCONNECTED) {
       return;
     }
 
@@ -1601,8 +1609,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       cleanupSurfaces();
 
       isChangingConfigurations = false;
-
-      audioRouteSetForBubbleMode = false;
 
       // blow away stale contact info so that we get fresh data on
       // the next set of calls
@@ -1883,39 +1889,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   @Override
   public void onAudioStateChanged(CallAudioState audioState) {
-    // Set sensible audio route for bubble mode when we get real audio state for the first time
-    // During the first time this function is called, supportedRouteMask is set to
-    // SUPPORTED_AUDIO_ROUTE_ALL, but it's OK since shouldStartInBubbleMode() is false at that time
-    // (callList not updated yet).
-    if (!audioRouteSetForBubbleMode && shouldStartInBubbleMode()) {
-      setAudioRouteForBubbleMode(audioState);
-      audioRouteSetForBubbleMode = true;
-    }
-
     if (statusBarNotifier != null) {
       statusBarNotifier.updateNotification();
-    }
-  }
-
-  /**
-   * Set audio route to make audio sensible. According to availability, set audio route to Bluetooth
-   * or wired headset or speaker.
-   */
-  private void setAudioRouteForBubbleMode(CallAudioState audioState) {
-    if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_BLUETOOTH)
-        == CallAudioState.ROUTE_BLUETOOTH) {
-      // Use Bluetooth if available
-      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_BLUETOOTH);
-      LogUtil.i("InCallPrenter.setAudioRouteForBubbleMode", "bluetooth");
-    } else if ((audioState.getSupportedRouteMask() & CallAudioState.ROUTE_WIRED_HEADSET)
-        == CallAudioState.ROUTE_WIRED_HEADSET) {
-      // Use wired headset if available
-      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_WIRED_HEADSET);
-      LogUtil.i("InCallPrenter.setAudioRouteForBubbleMode", "wired headset");
-    } else {
-      // Use speaker
-      TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
-      LogUtil.i("InCallPrenter.setAudioRouteForBubbleMode", "speaker");
     }
   }
 

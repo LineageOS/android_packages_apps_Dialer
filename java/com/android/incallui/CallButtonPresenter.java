@@ -44,8 +44,8 @@ import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCall.CameraDirection;
-import com.android.incallui.call.DialerCall.State;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonUi;
 import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
@@ -458,7 +458,7 @@ public class CallButtonPresenter
         !showSwap
             && call.can(android.telecom.Call.Details.CAPABILITY_SUPPORT_HOLD)
             && call.can(android.telecom.Call.Details.CAPABILITY_HOLD);
-    final boolean isCallOnHold = call.getState() == DialerCall.State.ONHOLD;
+    final boolean isCallOnHold = call.getState() == DialerCallState.ONHOLD;
 
     final boolean showAddCall =
         TelecomAdapter.getInstance().canAddCall() && UserManagerCompat.isUserUnlocked(context);
@@ -480,20 +480,20 @@ public class CallButtonPresenter
     // Disabling local video doesn't seem to work when dialing. See a bug.
     final boolean showPauseVideo =
         isVideo
-            && call.getState() != DialerCall.State.DIALING
-            && call.getState() != DialerCall.State.CONNECTING;
+            && call.getState() != DialerCallState.DIALING
+            && call.getState() != DialerCallState.CONNECTING;
 
     otherAccount = TelecomUtil.getOtherAccount(getContext(), call.getAccountHandle());
     boolean showSwapSim =
         !call.isEmergencyCall()
             && otherAccount != null
             && !call.isVoiceMailNumber()
-            && DialerCall.State.isDialing(call.getState())
+            && DialerCallState.isDialing(call.getState())
             // Most devices cannot make calls on 2 SIMs at the same time.
             && InCallPresenter.getInstance().getCallList().getAllCalls().size() == 1;
 
     boolean showUpgradeToRtt = call.canUpgradeToRttCall();
-    boolean enableUpgradeToRtt = showUpgradeToRtt && call.getState() == State.ACTIVE;
+    boolean enableUpgradeToRtt = showUpgradeToRtt && call.getState() == DialerCallState.ACTIVE;
 
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
     inCallButtonUi.showButton(InCallButtonIds.BUTTON_SWAP, showSwap);
