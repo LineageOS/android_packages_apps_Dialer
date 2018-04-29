@@ -24,8 +24,7 @@ import android.text.TextUtils;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.common.Assert;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
-import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.videotech.utils.SessionModificationState;
 import com.google.auto.value.AutoValue;
 import java.lang.annotation.Retention;
@@ -111,7 +110,7 @@ public abstract class PrimaryCallState {
 
   public static Builder builder() {
     return new AutoValue_PrimaryCallState.Builder()
-        .setState(DialerCall.State.IDLE)
+        .setState(DialerCallState.IDLE)
         .setIsVideoCall(false)
         .setSessionModificationState(SessionModificationState.NO_REQUEST)
         .setDisconnectCause(new DisconnectCause(DisconnectCause.UNKNOWN))
@@ -193,7 +192,7 @@ public abstract class PrimaryCallState {
     public PrimaryCallState build() {
       PrimaryCallState primaryCallState = autoBuild();
       if (!TextUtils.isEmpty(primaryCallState.customLabel())) {
-        Assert.checkArgument(primaryCallState.state() == State.CALL_PENDING);
+        Assert.checkArgument(primaryCallState.state() == DialerCallState.CALL_PENDING);
       }
       return primaryCallState;
     }

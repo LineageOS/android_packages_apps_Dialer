@@ -24,7 +24,7 @@ import com.android.incallui.InCallPresenter.InCallStateListener;
 import com.android.incallui.InCallPresenter.IncomingCallListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
-import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.state.DialerCallState;
 import java.util.Objects;
 
 /**
@@ -43,7 +43,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    *
    * <p>These values are stored to detect specific changes in state between onStateChange calls.
    */
-  private int prevCallState = State.INVALID;
+  private int prevCallState = DialerCallState.INVALID;
 
   private boolean wasVideoCall = false;
 
@@ -74,8 +74,8 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    */
   private static boolean isIncomingCall(DialerCall call) {
     return call != null
-        && (call.getState() == DialerCall.State.CALL_WAITING
-            || call.getState() == DialerCall.State.INCOMING);
+        && (call.getState() == DialerCallState.CALL_WAITING
+            || call.getState() == DialerCallState.INCOMING);
   }
 
   /**
@@ -84,7 +84,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
    * @return {@code true} if the call is dialing, {@code false} otherwise.
    */
   private boolean wasDialing() {
-    return DialerCall.State.isDialing(prevCallState);
+    return DialerCallState.isDialing(prevCallState);
   }
 
   /**
@@ -115,7 +115,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
   private void clear() {
     inCallPresenter = null;
     primaryCall = null;
-    prevCallState = State.INVALID;
+    prevCallState = DialerCallState.INVALID;
     wasVideoCall = false;
     isInBackground = false;
   }
@@ -237,7 +237,7 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
   private void updatePrimaryCallContext(DialerCall call) {
     if (call == null) {
       primaryCall = null;
-      prevCallState = State.INVALID;
+      prevCallState = DialerCallState.INVALID;
       wasVideoCall = false;
     } else {
       primaryCall = call;
@@ -322,6 +322,6 @@ class VideoPauseController implements InCallStateListener, IncomingCallListener 
   }
 
   private static boolean videoCanPause(DialerCall call) {
-    return call != null && call.isVideoCall() && call.getState() == DialerCall.State.ACTIVE;
+    return call != null && call.isVideoCall() && call.getState() == DialerCallState.ACTIVE;
   }
 }
