@@ -54,6 +54,7 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -106,6 +107,85 @@ public final class SpeedDialUiItemMutator {
    */
   public ListenableFuture<ImmutableList<SpeedDialUiItem>> loadSpeedDialUiItems() {
     return dialerFutureSerializer.submit(this::loadSpeedDialUiItemsInternal, backgroundExecutor);
+  }
+
+  /**
+   * Delete the SpeedDialUiItem.
+   *
+   * <p>If the item is starred, it's entry will be removed from the SpeedDialEntry database.
+   * Additionally, if the contact only has one entry in the database, it will be unstarred.
+   *
+   * <p>If the item isn't starred, it's usage data will be deleted but the suggestion can come back
+   * if the user calls that contact again.
+   *
+   * @return the updated list of SpeedDialUiItems.
+   */
+  public ListenableFuture<ImmutableList<SpeedDialUiItem>> removeSpeedDialUiItem(
+      SpeedDialUiItem speedDialUiItem) {
+    return dialerFutureSerializer.submit(
+        () -> removeSpeedDialUiItemInternal(speedDialUiItem), backgroundExecutor);
+  }
+
+  @WorkerThread
+  private ImmutableList<SpeedDialUiItem> removeSpeedDialUiItemInternal(
+      SpeedDialUiItem speedDialUiItem) {
+    Assert.isWorkerThread();
+    if (speedDialUiItem.isStarred()) {
+      removeStarredSpeedDialUiItem(speedDialUiItem);
+    } else {
+      removeSuggestedSpeedDialUiItem(speedDialUiItem);
+    }
+    return loadSpeedDialUiItemsInternal();
+  }
+
+  /**
+   * Delete the SpeedDialEntry associated with the passed in SpeedDialUiItem. Additionally, if the
+   * entry being deleted is the only entry for that contact, unstar it in the cp2.
+   */
+  @WorkerThread
+  private void removeStarredSpeedDialUiItem(SpeedDialUiItem speedDialUiItem) {
+    Assert.isWorkerThread();
+    Assert.checkArgument(speedDialUiItem.isStarred());
+    SpeedDialEntryDao db = getSpeedDialEntryDao();
+    ImmutableList<SpeedDialEntry> entries = db.getAllEntries();
+
+    SpeedDialEntry entryToDelete = null;
+    int entriesForTheSameContact = 0;
+    for (SpeedDialEntry entry : entries) {
+      if (entry.contactId() == speedDialUiItem.contactId()) {
+        entriesForTheSameContact++;
+      }
+
+      if (Objects.equals(entry.id(), speedDialUiItem.speedDialEntryId())) {
+        Assert.checkArgument(entryToDelete == null);
+        entryToDelete = entry;
+      }
+    }
+    db.delete(ImmutableList.of(entryToDelete.id()));
+    if (entriesForTheSameContact == 1) {
+      unstarContact(speedDialUiItem);
+    }
+  }
+
+  @WorkerThread
+  private void unstarContact(SpeedDialUiItem speedDialUiItem) {
+    Assert.isWorkerThread();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(Phone.STARRED, 0);
+    appContext
+        .getContentResolver()
+        .update(
+            Phone.CONTENT_URI,
+            contentValues,
+            Phone.CONTACT_ID + " = ?",
+            new String[] {Long.toString(speedDialUiItem.contactId())});
+  }
+
+  @WorkerThread
+  @SuppressWarnings("unused")
+  private void removeSuggestedSpeedDialUiItem(SpeedDialUiItem speedDialUiItem) {
+    Assert.isWorkerThread();
+    // TODO(calderwoodra): remove strequent contact
   }
 
   /**

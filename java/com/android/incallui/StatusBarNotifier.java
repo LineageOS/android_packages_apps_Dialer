@@ -85,6 +85,7 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
@@ -117,7 +118,7 @@ public class StatusBarNotifier
   private final DialerRingtoneManager dialerRingtoneManager;
   @Nullable private ContactsPreferences contactsPreferences;
   private int currentNotification = NOTIFICATION_NONE;
-  private int callState = DialerCall.State.INVALID;
+  private int callState = DialerCallState.INVALID;
   private int videoState = VideoProfile.STATE_AUDIO_ONLY;
   private int savedIcon = 0;
   private String savedContent = null;
@@ -244,8 +245,8 @@ public class StatusBarNotifier
   private void showNotification(final DialerCall call) {
     Trace.beginSection("StatusBarNotifier.showNotification");
     final boolean isIncoming =
-        (call.getState() == DialerCall.State.INCOMING
-            || call.getState() == DialerCall.State.CALL_WAITING);
+        (call.getState() == DialerCallState.INCOMING
+            || call.getState() == DialerCallState.CALL_WAITING);
     setStatusBarCallListener(new StatusBarCallListener(call));
 
     // we make a call to the contact info cache to query for supplemental data to what the
@@ -287,8 +288,8 @@ public class StatusBarNotifier
         call.getVideoTech().getSessionModificationState()
             == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
     final int notificationType;
-    if (callState == DialerCall.State.INCOMING
-        || callState == DialerCall.State.CALL_WAITING
+    if (callState == DialerCallState.INCOMING
+        || callState == DialerCallState.CALL_WAITING
         || isVideoUpgradeRequest) {
       if (ConfigProviderBindings.get(context)
           .getBoolean("quiet_incoming_call_if_ui_showing", true)) {
@@ -437,12 +438,12 @@ public class StatusBarNotifier
     setNotificationWhen(call, state, builder);
 
     // Add hang up option for any active calls (active | onhold), outgoing calls (dialing).
-    if (state == DialerCall.State.ACTIVE
-        || state == DialerCall.State.ONHOLD
-        || DialerCall.State.isDialing(state)) {
+    if (state == DialerCallState.ACTIVE
+        || state == DialerCallState.ONHOLD
+        || DialerCallState.isDialing(state)) {
       addHangupAction(builder);
       addSpeakerAction(builder, callAudioState);
-    } else if (state == DialerCall.State.INCOMING || state == DialerCall.State.CALL_WAITING) {
+    } else if (state == DialerCallState.INCOMING || state == DialerCallState.CALL_WAITING) {
       addDismissAction(builder);
       if (call.isVideoCall()) {
         addVideoCallAction(builder);
@@ -458,7 +459,7 @@ public class StatusBarNotifier
    * at which the notification was created.
    */
   private void setNotificationWhen(DialerCall call, int state, Notification.Builder builder) {
-    if (state == DialerCall.State.ACTIVE) {
+    if (state == DialerCallState.ACTIVE) {
       builder.setUsesChronometer(true);
       builder.setWhen(call.getConnectTimeMillis());
     } else {
@@ -642,7 +643,7 @@ public class StatusBarNotifier
     // different calls.  So if both lines are in use, display info
     // from the foreground call.  And if there's a ringing call,
     // display that regardless of the state of the other calls.
-    if (call.getState() == DialerCall.State.ONHOLD) {
+    if (call.getState() == DialerCallState.ONHOLD) {
       return R.drawable.quantum_ic_phone_paused_vd_theme_24;
     } else if (call.getVideoTech().getSessionModificationState()
             == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST
@@ -668,8 +669,8 @@ public class StatusBarNotifier
   /** Returns the message to use with the notification. */
   private CharSequence getContentString(DialerCall call, @UserType long userType) {
     boolean isIncomingOrWaiting =
-        call.getState() == DialerCall.State.INCOMING
-            || call.getState() == DialerCall.State.CALL_WAITING;
+        call.getState() == DialerCallState.INCOMING
+            || call.getState() == DialerCallState.CALL_WAITING;
 
     if (isIncomingOrWaiting
         && call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED) {
@@ -701,14 +702,14 @@ public class StatusBarNotifier
       } else {
         resId = R.string.notification_incoming_call;
       }
-    } else if (call.getState() == DialerCall.State.ONHOLD) {
+    } else if (call.getState() == DialerCallState.ONHOLD) {
       resId = R.string.notification_on_hold;
     } else if (call.isVideoCall()) {
       resId =
           call.getVideoTech().isPaused()
               ? R.string.notification_ongoing_paused_video_call
               : R.string.notification_ongoing_video_call;
-    } else if (DialerCall.State.isDialing(call.getState())) {
+    } else if (DialerCallState.isDialing(call.getState())) {
       resId = R.string.notification_dialing;
     } else if (call.getVideoTech().getSessionModificationState()
         == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {

@@ -105,6 +105,10 @@ public class SpeedDialFragment extends Fragment {
     LogUtil.enterBlock("SpeedDialFragment.onCreateView");
     View rootLayout = inflater.inflate(R.layout.fragment_speed_dial, container, false);
 
+    speedDialLoaderListener =
+        DialerExecutorComponent.get(getContext())
+            .createUiListener(getChildFragmentManager(), "speed_dial_loader_listener");
+
     // Setup favorite contact context menu
     contextMenu = rootLayout.findViewById(R.id.favorite_contact_context_menu);
     contextMenuBackground = rootLayout.findViewById(R.id.context_menu_background);
@@ -124,7 +128,10 @@ public class SpeedDialFragment extends Fragment {
             rootLayout,
             contextMenu,
             contextMenuBackground,
-            new SpeedDialContextMenuItemListener(getActivity(), getChildFragmentManager()),
+            new SpeedDialContextMenuItemListener(
+                getActivity(),
+                new UpdateSpeedDialAdapterListener(),
+                speedDialLoaderListener),
             layoutManager);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
@@ -138,10 +145,6 @@ public class SpeedDialFragment extends Fragment {
     ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
     touchHelper.attachToRecyclerView(recyclerView);
     adapter.setItemTouchHelper(touchHelper);
-
-    speedDialLoaderListener =
-        DialerExecutorComponent.get(getContext())
-            .createUiListener(getChildFragmentManager(), "speed_dial_loader_listener");
     return rootLayout;
   }
 
@@ -317,19 +320,17 @@ public class SpeedDialFragment extends Fragment {
       Channel defaultChannel = speedDialUiItem.defaultChannel();
 
       // Add voice call module
-      Channel voiceChannel = speedDialUiItem.getDeterministicVoiceChannel();
+      Channel voiceChannel = speedDialUiItem.getDefaultVoiceChannel();
       if (voiceChannel != null) {
         modules.add(
             IntentModule.newCallModule(
                 getContext(),
                 new CallIntentBuilder(voiceChannel.number(), CallInitiationType.Type.SPEED_DIAL)
                     .setAllowAssistedDial(true)));
-      } else {
-        modules.add(new DisambigDialogModule(speedDialUiItem, /* isVideo = */ false));
       }
 
       // Add video if we can determine the correct channel
-      Channel videoChannel = speedDialUiItem.getDeterministicVideoChannel();
+      Channel videoChannel = speedDialUiItem.getDefaultVideoChannel();
       if (videoChannel != null) {
         modules.add(
             IntentModule.newCallModule(
@@ -337,8 +338,6 @@ public class SpeedDialFragment extends Fragment {
                 new CallIntentBuilder(videoChannel.number(), CallInitiationType.Type.SPEED_DIAL)
                     .setIsVideoCall(true)
                     .setAllowAssistedDial(true)));
-      } else if (speedDialUiItem.hasVideoChannels()) {
-        modules.add(new DisambigDialogModule(speedDialUiItem, /* isVideo = */ true));
       }
 
       // Add sms module
@@ -396,58 +395,21 @@ public class SpeedDialFragment extends Fragment {
         return false;
       }
     }
-
-    private final class DisambigDialogModule implements HistoryItemActionModule {
-
-      private final SpeedDialUiItem speedDialUiItem;
-      private final boolean isVideo;
-
-      DisambigDialogModule(SpeedDialUiItem speedDialUiItem, boolean isVideo) {
-        this.speedDialUiItem = speedDialUiItem;
-        this.isVideo = isVideo;
-      }
-
-      @Override
-      public int getStringId() {
-        if (isVideo) {
-          return R.string.contact_menu_video_call;
-        } else {
-          return R.string.contact_menu_voice_call;
-        }
-      }
-
-      @Override
-      public int getDrawableId() {
-        if (isVideo) {
-          return R.drawable.quantum_ic_videocam_vd_theme_24;
-        } else {
-          return R.drawable.quantum_ic_phone_vd_theme_24;
-        }
-      }
-
-      @Override
-      public boolean onClick() {
-        DisambigDialog.show(speedDialUiItem, getChildFragmentManager());
-        return true;
-      }
-    }
   }
 
   private static final class SpeedDialContextMenuItemListener implements ContextMenuItemListener {
 
     private final FragmentActivity activity;
-    private final FragmentManager childFragmentManager;
+    private final SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
+    private final UpdateSpeedDialAdapterListener updateAdapterListener;
 
     SpeedDialContextMenuItemListener(
-        FragmentActivity activity, FragmentManager childFragmentManager) {
+        FragmentActivity activity,
+        UpdateSpeedDialAdapterListener updateAdapterListener,
+        SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener) {
       this.activity = activity;
-      this.childFragmentManager = childFragmentManager;
-    }
-
-    @Override
-    public void disambiguateCall(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra): show only video or voice channels in the disambig dialog
-      DisambigDialog.show(speedDialUiItem, childFragmentManager);
+      this.updateAdapterListener = updateAdapterListener;
+      this.speedDialLoaderListener = speedDialLoaderListener;
     }
 
     @Override
@@ -472,7 +434,15 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
-      // TODO(calderwoodra): implement remove
+      speedDialLoaderListener.listen(
+          activity,
+          UiItemLoaderComponent.get(activity)
+              .speedDialUiItemMutator()
+              .removeSpeedDialUiItem(speedDialUiItem),
+          updateAdapterListener::updateAdapter,
+          throwable -> {
+            throw new RuntimeException(throwable);
+          });
     }
 
     @Override
@@ -482,6 +452,14 @@ public class SpeedDialFragment extends Fragment {
               Intent.ACTION_VIEW,
               Uri.withAppendedPath(
                   Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
+    }
+  }
+
+  /** Listener for when a SpeedDialUiItem is updated. */
+  private class UpdateSpeedDialAdapterListener {
+
+    void updateAdapter(ImmutableList<SpeedDialUiItem> speedDialUiItems) {
+      onSpeedDialUiItemListLoaded(speedDialUiItems);
     }
   }
 
