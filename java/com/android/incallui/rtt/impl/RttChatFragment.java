@@ -55,7 +55,7 @@ import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment.AudioRouteSelectorPresenter;
-import com.android.incallui.call.DialerCall.State;
+import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.hold.OnHoldFragment;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.InCallButtonIds;
@@ -452,7 +452,7 @@ public class RttChatFragment extends Fragment
   public void setCallState(@NonNull PrimaryCallState primaryCallState) {
     LogUtil.i("RttChatFragment.setCallState", primaryCallState.toString());
     this.primaryCallState = primaryCallState;
-    if (!isTimerStarted && primaryCallState.state() == State.ACTIVE) {
+    if (!isTimerStarted && primaryCallState.state() == DialerCallState.ACTIVE) {
       LogUtil.i(
           "RttChatFragment.setCallState", "starting timer with base: %d", chronometer.getBase());
       chronometer.setBase(
@@ -469,12 +469,12 @@ public class RttChatFragment extends Fragment
       }
       adapter.showAdvisory();
     }
-    if (primaryCallState.state() == State.DIALING) {
+    if (primaryCallState.state() == DialerCallState.DIALING) {
       showWaitingForJoinBanner();
     } else {
       hideWaitingForJoinBanner();
     }
-    if (primaryCallState.state() == State.DISCONNECTED) {
+    if (primaryCallState.state() == DialerCallState.DISCONNECTED) {
       rttCallScreenDelegate.onSaveRttTranscript();
     }
   }

@@ -16,15 +16,15 @@
 
 package com.android.dialer.main.impl.bottomnav;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
+import android.support.annotation.RequiresPermission;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
-import com.android.dialer.util.PermissionsUtil;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /**
@@ -45,7 +45,7 @@ public final class MissedCallCountObserver extends ContentObserver {
     this.uiListener = uiListener;
   }
 
-  @SuppressLint("MissingPermission")
+  @RequiresPermission(Manifest.permission.READ_CALL_LOG)
   @Override
   public void onChange(boolean selfChange) {
     ListenableFuture<Integer> countFuture =
@@ -53,9 +53,6 @@ public final class MissedCallCountObserver extends ContentObserver {
             .backgroundExecutor()
             .submit(
                 () -> {
-                  if (!PermissionsUtil.hasCallLogReadPermissions(appContext)) {
-                    return 0;
-                  }
                   try (Cursor cursor =
                       appContext
                           .getContentResolver()

@@ -14,31 +14,34 @@
 ~ limitations under the License
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:orientation="vertical"
-  tools:layout_gravity="bottom">
-  <TextView
-    android:id="@+id/audioroute_speaker"
-    style="@style/AudioRouteItem"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawableStart="@drawable/quantum_ic_volume_up_grey600_24"
-    android:text="@string/audioroute_speaker"/>
+    android:orientation="vertical"
+    tools:layout_gravity="bottom">
   <TextView
-    android:id="@+id/audioroute_earpiece"
-    style="@style/AudioRouteItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:drawableStart="@drawable/ic_phone_audio_grey600_24dp"
-    android:text="@string/audioroute_phone"/>
+      android:id="@+id/audioroute_speaker"
+      style="@style/AudioRouteItem"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/quantum_ic_volume_up_grey600_24"
+      android:text="@string/audioroute_speaker"
+      android:textAlignment="viewStart"/>
   <TextView
-    android:id="@+id/audioroute_headset"
-    style="@style/AudioRouteItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:drawableStart="@drawable/quantum_ic_headset_grey600_24"
-    android:text="@string/audioroute_headset"/>
+      android:id="@+id/audioroute_earpiece"
+      style="@style/AudioRouteItem"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/ic_phone_audio_grey600_24dp"
+      android:text="@string/audioroute_phone"
+      android:textAlignment="viewStart"/>
+  <TextView
+      android:id="@+id/audioroute_headset"
+      style="@style/AudioRouteItem"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/quantum_ic_headset_grey600_24"
+      android:text="@string/audioroute_headset"
+      android:textAlignment="viewStart"/>
 
 </LinearLayout>

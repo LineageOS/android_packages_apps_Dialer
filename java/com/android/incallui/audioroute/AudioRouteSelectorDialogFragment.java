@@ -16,6 +16,7 @@
 
 package com.android.incallui.audioroute;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -34,7 +35,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.logging.DialerImpression;
+import com.android.dialer.logging.Logger;
 import com.android.incallui.audiomode.BluetoothDeviceProviderComponent;
+import com.android.incallui.call.CallList;
+import com.android.incallui.call.DialerCall;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Set;
 
 /** Shows picker for audio routes */
@@ -98,15 +105,18 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     initItem(
         (TextView) view.findViewById(R.id.audioroute_speaker),
         CallAudioState.ROUTE_SPEAKER,
-        audioState);
+        audioState,
+        DialerImpression.Type.IN_CALL_SWITCH_AUDIO_ROUTE_SPEAKER);
     initItem(
         (TextView) view.findViewById(R.id.audioroute_headset),
         CallAudioState.ROUTE_WIRED_HEADSET,
-        audioState);
+        audioState,
+        DialerImpression.Type.IN_CALL_SWITCH_AUDIO_ROUTE_WIRED_HEADSET);
     initItem(
         (TextView) view.findViewById(R.id.audioroute_earpiece),
         CallAudioState.ROUTE_EARPIECE,
-        audioState);
+        audioState,
+        DialerImpression.Type.IN_CALL_SWITCH_AUDIO_ROUTE_EARPIECE);
 
     // TODO(a bug): set peak height correctly to fully expand it in landscape mode.
     return view;
@@ -120,7 +130,11 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
         .onAudioRouteSelectorDismiss();
   }
 
-  private void initItem(TextView item, final int itemRoute, CallAudioState audioState) {
+  private void initItem(
+      TextView item,
+      final int itemRoute,
+      CallAudioState audioState,
+      DialerImpression.Type impressionType) {
     int selectedColor = getResources().getColor(R.color.dialer_theme_color);
     if ((audioState.getSupportedRouteMask() & itemRoute) == 0) {
       item.setVisibility(View.GONE);
@@ -131,10 +145,11 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     }
     item.setOnClickListener(
         (v) -> {
-          dismiss();
+          logCallAudioRouteImpression(impressionType);
           FragmentUtils.getParentUnsafe(
                   AudioRouteSelectorDialogFragment.this, AudioRouteSelectorPresenter.class)
               .onAudioRouteSelected(itemRoute);
+          dismiss();
         });
   }
 
@@ -142,7 +157,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     int selectedColor = getResources().getColor(R.color.dialer_theme_color);
     TextView textView =
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
-    textView.setText(bluetoothDevice.getName());
+    textView.setText(getAliasName(bluetoothDevice));
     if (selected) {
       textView.setTextColor(selectedColor);
       textView.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
@@ -150,7 +165,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     }
     textView.setOnClickListener(
         (v) -> {
-          dismiss();
+          logCallAudioRouteImpression(DialerImpression.Type.IN_CALL_SWITCH_AUDIO_ROUTE_BLUETOOTH);
           // Set Bluetooth audio route
           FragmentUtils.getParentUnsafe(
                   AudioRouteSelectorDialogFragment.this, AudioRouteSelectorPresenter.class)
@@ -159,8 +174,36 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
           BluetoothDeviceProviderComponent.get(getContext())
               .bluetoothDeviceProvider()
               .setActiveBluetoothDevice(bluetoothDevice);
+          dismiss();
         });
 
     return textView;
+  }
+
+  @SuppressLint("PrivateApi")
+  private String getAliasName(BluetoothDevice bluetoothDevice) {
+    try {
+      Method getActiveDeviceMethod = bluetoothDevice.getClass().getDeclaredMethod("getAliasName");
+      getActiveDeviceMethod.setAccessible(true);
+      return (String) getActiveDeviceMethod.invoke(bluetoothDevice);
+    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+      e.printStackTrace();
+      return bluetoothDevice.getName();
+    }
+  }
+
+  private void logCallAudioRouteImpression(DialerImpression.Type impressionType) {
+    DialerCall dialerCall = CallList.getInstance().getOutgoingCall();
+    if (dialerCall == null) {
+      dialerCall = CallList.getInstance().getActiveOrBackgroundCall();
+    }
+
+    if (dialerCall != null) {
+      Logger.get(getContext())
+          .logCallImpression(
+              impressionType, dialerCall.getUniqueCallId(), dialerCall.getTimeAddedMs());
+    } else {
+      Logger.get(getContext()).logImpression(impressionType);
+    }
   }
 }

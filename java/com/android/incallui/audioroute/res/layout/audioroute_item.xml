@@ -18,4 +18,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:drawableStart="@drawable/quantum_ic_bluetooth_audio_vd_theme_24"
-    android:drawableTint="@color/material_grey_600"/>
+    android:drawableTint="@color/material_grey_600"
+    android:gravity="start"
+    android:textAlignment="viewStart"/>
