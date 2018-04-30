@@ -414,7 +414,7 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
    * Return whether we should start call in bubble mode and not show InCallActivity. The call mode
    * should be set in CallConfiguration in EXTRA_OUTGOING_CALL_EXTRAS when starting a call intent.
    */
-  private boolean shouldStartInBubbleMode() {
+  public boolean shouldStartInBubbleMode() {
     if (!ReturnToCallController.isEnabled(context)) {
       return false;
     }
