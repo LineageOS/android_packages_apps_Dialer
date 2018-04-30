@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
+import com.android.incallui.rtt.protocol.RttChatMessage;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;

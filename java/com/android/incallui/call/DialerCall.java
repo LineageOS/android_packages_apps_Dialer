@@ -83,6 +83,7 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.latencyreport.LatencyReport;
+import com.android.incallui.rtt.protocol.RttChatMessage;
 import com.android.incallui.speakeasy.runtime.Constraints;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
@@ -92,6 +93,7 @@ import com.android.incallui.videotech.ims.ImsVideoTech;
 import com.android.incallui.videotech.utils.VideoUtils;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -1084,6 +1086,28 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     getTelecomCall().respondToRttRequest(rttRequestId, accept);
   }
 
+  @TargetApi(28)
+  private void saveRttTranscript() {
+    if (!BuildCompat.isAtLeastP()) {
+      return;
+    }
+    // Save any remaining text in the buffer that's not shown by UI yet.
+    // This may happen when the call is switched to background before disconnect.
+    try {
+      String messageLeft = getRttCall().readImmediately();
+      if (!TextUtils.isEmpty(messageLeft)) {
+        rttTranscript =
+            RttChatMessage.getRttTranscriptWithNewRemoteMessage(rttTranscript, messageLeft);
+      }
+    } catch (IOException e) {
+      LogUtil.e("DialerCall.saveRttTranscript", "error when reading remaining message", e);
+    }
+    Futures.addCallback(
+        RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
+        new DefaultFutureCallback<>(),
+        MoreExecutors.directExecutor());
+  }
+
   public boolean hasReceivedVideoUpgradeRequest() {
     return VideoUtils.hasReceivedVideoUpgradeRequest(getVideoTech().getSessionModificationState());
   }
@@ -1615,11 +1639,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       videoTechManager.dispatchRemovedFromCallList();
     }
     // TODO(a bug): Add tests for it to make sure no crash on subsequent call to this method.
+    // TODO(wangqi): Consider moving this to a DialerCallListener.
     if (rttTranscript != null && !isCallRemoved) {
-      Futures.addCallback(
-          RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
-          new DefaultFutureCallback<>(),
-          MoreExecutors.directExecutor());
+      saveRttTranscript();
     }
     isCallRemoved = true;
   }
