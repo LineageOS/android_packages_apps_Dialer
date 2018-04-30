@@ -55,8 +55,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.Toast;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
-import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
-import com.android.contacts.common.widget.SelectPhoneAccountDialogOptionsUtil;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.Assert;
@@ -65,7 +63,6 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.metrics.Metrics;
@@ -73,7 +70,7 @@ import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.PreferredAccountWorker.Result;
-import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
+import com.android.dialer.preferredsim.PreferredSimComponent;
 import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.bindings.AnswerBindings;
 import com.android.incallui.answer.protocol.AnswerScreen;
@@ -365,19 +362,18 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       return false;
     }
 
-    ListenableFuture<PreferredAccountWorker.Result> preferredAccountFuture =
-        DialerExecutorComponent.get(this)
-            .backgroundExecutor()
-            .submit(
-                () -> {
-                  try {
-                    return new PreferredAccountWorker(waitingForAccountCall.getNumber())
-                        .doInBackground(getApplicationContext());
-                  } catch (Throwable throwable) {
-                    throw new Exception(throwable);
-                  }
-                });
+    PreferredAccountWorker preferredAccountWorker =
+        PreferredSimComponent.get(this).preferredAccountWorker();
 
+    Bundle extras = waitingForAccountCall.getIntentExtras();
+    List<PhoneAccountHandle> phoneAccountHandles =
+        extras == null
+            ? new ArrayList<>()
+            : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
+
+    ListenableFuture<PreferredAccountWorker.Result> preferredAccountFuture =
+        preferredAccountWorker.selectAccount(
+            waitingForAccountCall.getNumber(), phoneAccountHandles);
     preferredAccountWorkerResultListener.listen(
         this,
         preferredAccountFuture,
@@ -388,62 +384,22 @@ public class InCallActivity extends TransactionSafeFragmentActivity
                 "activity ended before result returned");
             return;
           }
-          if (result.getPhoneAccountHandle().isPresent()) {
-            Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
+          String callId = waitingForAccountCall.getId();
+          if (result.getSelectedPhoneAccountHandle().isPresent()) {
             selectPhoneAccountListener.onPhoneAccountSelected(
-                result.getPhoneAccountHandle().get(), false, waitingForAccountCall.getId());
+                result.getSelectedPhoneAccountHandle().get(), false, callId);
             return;
           }
-          if (result.getSuggestion().isPresent()) {
-            LogUtil.i(
-                "CallingAccountSelector.processPreferredAccount",
-                "SIM suggested: " + result.getSuggestion().get().reason);
-            if (result.getSuggestion().get().shouldAutoSelect) {
-              Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
-              LogUtil.i(
-                  "CallingAccountSelector.processPreferredAccount", "Auto selected suggestion");
-              selectPhoneAccountListener.onPhoneAccountSelected(
-                  result.getSuggestion().get().phoneAccountHandle,
-                  false,
-                  waitingForAccountCall.getId());
-              return;
-            }
-          }
-          Bundle extras = waitingForAccountCall.getIntentExtras();
-          List<PhoneAccountHandle> phoneAccountHandles =
-              extras == null
-                  ? new ArrayList<>()
-                  : extras.getParcelableArrayList(Call.AVAILABLE_PHONE_ACCOUNTS);
 
           waitingForAccountCall.setPreferredAccountRecorder(
               new PreferredAccountRecorder(
                   waitingForAccountCall.getNumber(),
                   result.getSuggestion().orNull(),
                   result.getDataId().orNull()));
-          SelectPhoneAccountDialogOptions.Builder optionsBuilder =
-              SelectPhoneAccountDialogOptions.newBuilder()
-                  .setTitle(R.string.select_phone_account_for_calls)
-                  .setCanSetDefault(result.getDataId().isPresent())
-                  .setSetDefaultLabel(R.string.select_phone_account_for_calls_remember)
-                  .setCallId(waitingForAccountCall.getId());
-
-          for (PhoneAccountHandle phoneAccountHandle : phoneAccountHandles) {
-            SelectPhoneAccountDialogOptions.Entry.Builder entryBuilder =
-                SelectPhoneAccountDialogOptions.Entry.newBuilder();
-            SelectPhoneAccountDialogOptionsUtil.setPhoneAccountHandle(
-                entryBuilder, phoneAccountHandle);
-            Optional<String> hint =
-                SuggestionProvider.getHint(
-                    this, phoneAccountHandle, result.getSuggestion().orNull());
-            if (hint.isPresent()) {
-              entryBuilder.setHint(hint.get());
-            }
-            optionsBuilder.addEntries(entryBuilder);
-          }
-
           selectPhoneAccountDialogFragment =
               SelectPhoneAccountDialogFragment.newInstance(
-                  optionsBuilder.build(), selectPhoneAccountListener);
+                  result.getDialogOptionsBuilder().get().setCallId(callId).build(),
+                  selectPhoneAccountListener);
           selectPhoneAccountDialogFragment.show(getFragmentManager(), Tags.SELECT_ACCOUNT_FRAGMENT);
         },
         throwable -> {
