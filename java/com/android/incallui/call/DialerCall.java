@@ -1102,6 +1102,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     } catch (IOException e) {
       LogUtil.e("DialerCall.saveRttTranscript", "error when reading remaining message", e);
     }
+    // Don't save transcript if it's empty.
+    if (rttTranscript.getMessagesCount() == 0) {
+      return;
+    }
     Futures.addCallback(
         RttTranscriptUtil.saveRttTranscript(context, rttTranscript),
         new DefaultFutureCallback<>(),
