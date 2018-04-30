@@ -31,6 +31,6 @@
   <string name="rtt_status_banner_text">Waiting for <xliff:g id="name">%s</xliff:g> to join RTT call&#8230;</string>
 
   <!-- Text for RTT transcript advisory. [CHAR LIMIT=NONE] -->
-  <string name="rtt_transcript_advisory">The other party can see you typing. Transcripts stored on your device in the call history.</string>
+  <string name="rtt_transcript_advisory">The other party can see you typing. Transcripts are stored on your device in the call history.</string>
 
 </resources>
