@@ -382,6 +382,12 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         this,
         preferredAccountFuture,
         result -> {
+          if (!isVisible()) {
+            LogUtil.i(
+                "CallingAccountSelector.showPhoneAccountSelectionDialog",
+                "activity ended before result returned");
+            return;
+          }
           if (result.getPhoneAccountHandle().isPresent()) {
             Logger.get(this).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
             selectPhoneAccountListener.onPhoneAccountSelected(
