@@ -145,10 +145,10 @@ public final class LegacyVoicemailNotifier {
         return phoneAccount.getShortDescription().toString();
       }
     }
-      return String.format(
-          context.getString(R.string.notification_voicemail_text_format),
-          PhoneNumberHelper.formatNumber(
-              context, voicemailNumber, GeoUtil.getCurrentCountryIso(context)));
+    return String.format(
+        context.getString(R.string.notification_voicemail_text_format),
+        PhoneNumberHelper.formatNumber(
+            context, voicemailNumber, GeoUtil.getCurrentCountryIso(context)));
   }
 
   public static void cancelNotification(
@@ -156,8 +156,18 @@ public final class LegacyVoicemailNotifier {
     LogUtil.enterBlock("LegacyVoicemailNotifier.cancelNotification");
     Assert.checkArgument(BuildCompat.isAtLeastO());
     Assert.isNotNull(phoneAccountHandle);
-    DialerNotificationManager.cancel(
-        context, getNotificationTag(context, phoneAccountHandle), NOTIFICATION_ID);
+    if ("null".equals(phoneAccountHandle.getId())) {
+      // while PhoneAccountHandle itself will never be null, telephony may still construct a "null"
+      // handle if the SIM is no longer available. Usually both SIM will be removed at the sames
+      // time, so just clear all notifications.
+      LogUtil.i(
+          "LegacyVoicemailNotifier.cancelNotification",
+          "'null' id, canceling all legacy voicemail notifications");
+      DialerNotificationManager.cancelAll(context, NOTIFICATION_TAG);
+    } else {
+      DialerNotificationManager.cancel(
+          context, getNotificationTag(context, phoneAccountHandle), NOTIFICATION_ID);
+    }
   }
 
   @NonNull
