@@ -36,12 +36,13 @@ public abstract class PreCallModule {
 
   @Provides
   @Singleton
-  public static ImmutableList<PreCallAction> provideActions() {
+  public static ImmutableList<PreCallAction> provideActions(
+      CallingAccountSelector callingAccountSelector) {
     return ImmutableList.of(
         new PermissionCheckAction(),
         new MalformedNumberRectifier(
             ImmutableList.of(new UkRegionPrefixInInternationalFormatHandler())),
-        new CallingAccountSelector(),
+        callingAccountSelector,
         new AssistedDialAction());
   }
 }

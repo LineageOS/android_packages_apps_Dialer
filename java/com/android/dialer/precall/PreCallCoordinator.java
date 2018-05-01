@@ -21,6 +21,8 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.function.Consumer;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * Runs {@link PreCallAction} one by one to prepare a {@link
@@ -65,4 +67,9 @@ public interface PreCallCoordinator {
   @MainThread
   @NonNull
   PendingAction startPendingAction();
+
+  <Output> void listen(
+      ListenableFuture<Output> future,
+      Consumer<Output> successListener,
+      Consumer<Throwable> failureListener);
 }
