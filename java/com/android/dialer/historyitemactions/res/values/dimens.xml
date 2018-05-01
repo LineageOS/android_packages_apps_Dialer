@@ -17,4 +17,5 @@
 <resources>
   <dimen name="contact_actions_image_size">48dp</dimen>
   <dimen name="contact_actions_image_margin">12dp</dimen>
+  <dimen name="contact_actions_header_elevation">4dp</dimen>
 </resources>

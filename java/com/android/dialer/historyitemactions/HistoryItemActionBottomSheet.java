@@ -19,13 +19,17 @@ package com.android.dialer.historyitemactions;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetDialog;
+import android.support.annotation.NonNull;
+import android.support.design.bottomsheet.BottomSheetBehavior;
+import android.support.design.bottomsheet.BottomSheetBehavior.BottomSheetCallback;
+import android.support.design.bottomsheet.BottomSheetDialog;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,9 +53,9 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
       Context context,
       HistoryItemBottomSheetHeaderInfo historyItemBottomSheetHeaderInfo,
       List<HistoryItemActionModule> modules) {
-    super(context);
+    super(context, R.style.HistoryItemBottomSheet);
     this.modules = modules;
-    this.historyItemBottomSheetHeaderInfo = historyItemBottomSheetHeaderInfo;
+    this.historyItemBottomSheetHeaderInfo = Assert.isNotNull(historyItemBottomSheetHeaderInfo);
     setContentView(LayoutInflater.from(context).inflate(R.layout.sheet_layout, null));
   }
 
@@ -67,10 +71,10 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
 
   @Override
   protected void onCreate(Bundle bundle) {
-    super.onCreate(bundle);
-    LinearLayout container = Assert.isNotNull(findViewById(R.id.action_container));
-    container.addView(getContactView(container));
+    setupWindow();
+    setupContactLayout();
 
+    LinearLayout container = Assert.isNotNull(findViewById(R.id.action_container));
     for (HistoryItemActionModule module : modules) {
       if (module instanceof DividerModule) {
         container.addView(getDividerView(container));
@@ -80,9 +84,20 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     }
   }
 
-  private View getContactView(ViewGroup container) {
-    LayoutInflater inflater = LayoutInflater.from(getContext());
-    View contactView = inflater.inflate(R.layout.contact_layout, container, false);
+  // Overrwrites the window size since Dialog's don't match parent.
+  private void setupWindow() {
+    Window window = getWindow();
+    if (window == null) {
+      return;
+    }
+    // TODO(calderwoodra): set the nav bar color
+    window.setLayout(
+        /* width = */ ViewGroup.LayoutParams.MATCH_PARENT,
+        /* height = */ ViewGroup.LayoutParams.MATCH_PARENT);
+  }
+
+  private void setupContactLayout() {
+    View contactView = Assert.isNotNull(findViewById(R.id.contact_layout_root));
 
     ContactPhotoView contactPhotoView = contactView.findViewById(R.id.contact_photo_view);
     contactPhotoView.setPhoto(historyItemBottomSheetHeaderInfo.getPhotoInfo());
@@ -97,7 +112,35 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
       secondaryTextView.setVisibility(View.GONE);
       secondaryTextView.setText(null);
     }
-    return contactView;
+
+    View background = findViewById(android.support.design.R.id.touch_outside);
+    BottomSheetBehavior behavior =
+        BottomSheetBehavior.from(findViewById(android.support.design.R.id.design_bottom_sheet));
+    behavior.setBottomSheetCallback(
+        new BottomSheetCallback() {
+          @Override
+          public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+              cancel();
+              return;
+            }
+
+            // If the bottomsheet can expand to full screen, set the header's elevation when it's
+            // fully expanded.
+            if (background.getHeight() == bottomSheet.getHeight()) {
+              contactView.setElevation(
+                  newState == BottomSheetBehavior.STATE_EXPANDED
+                      ? getContext()
+                          .getResources()
+                          .getDimensionPixelSize(R.dimen.contact_actions_header_elevation)
+                      : 0);
+              // TODO(calderwoodra): set the status bar color when expanded, else translucent
+            }
+          }
+
+          @Override
+          public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
+        });
   }
 
   private View getDividerView(ViewGroup container) {
