@@ -17,4 +17,17 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast when the user tried to place a call but has revoked phone permission [CHAR_LIMIT=none]  -->
   <string name="pre_call_permission_check_no_phone_permission">Cannot make call without phone permission</string>
+
+  <!-- Title of the dialog to select which SIM to call with before making a call, if the device has
+  multiple SIMs [CHAR LIMIT=40]-->
+  <string name="pre_call_select_phone_account">Choose SIM for this call</string>
+
+  <!-- Checkbox label when selecting a SIM when calling a contact, to use the selected SIM for the
+   same contact and never ask again [CHAR LIMIT=40]-->
+  <string name="pre_call_select_phone_account_remember">Remember this choice</string>
+
+  <!-- Hint to show under a SIM entry when selecting SIM for call on a multi-SIM device, when the
+  call cannot be placed with the SIM because there is already a call on the other SIM,
+  [CHAR LIMIT=NONE]-->
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Not available while using <xliff:g example="SIM 1" id="other_sim">%1$s</xliff:g></string>
 </resources>

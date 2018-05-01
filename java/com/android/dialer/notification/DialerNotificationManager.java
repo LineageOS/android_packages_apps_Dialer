@@ -83,6 +83,16 @@ public final class DialerNotificationManager {
     notificationManager.cancel(tag, id);
   }
 
+  public static void cancelAll(Context context, String prefix) {
+    NotificationManager notificationManager = getNotificationManager(context);
+    StatusBarNotification[] notifications = notificationManager.getActiveNotifications();
+    for (StatusBarNotification notification : notifications) {
+      if (notification.getTag() != null && notification.getTag().startsWith(prefix)) {
+        notificationManager.cancel(notification.getTag(), notification.getId());
+      }
+    }
+  }
+
   public static StatusBarNotification[] getActiveNotifications(@NonNull Context context) {
     Assert.isNotNull(context);
     return getNotificationManager(context).getActiveNotifications();

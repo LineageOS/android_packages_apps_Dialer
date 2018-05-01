@@ -14,7 +14,7 @@
  ~ limitations under the License
  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.dialer.preferredsim">
+    package="com.android.dialer.preferredsim.impl">
 
   <application>
 
@@ -22,7 +22,7 @@
         android:authorities="com.android.dialer.preferredsimfallback"
         android:exported="true"
         android:multiprocess="false"
-        android:name=".impl.PreferredSimFallbackProvider"
+        android:name=".PreferredSimFallbackProvider"
         android:readPermission="android.permission.READ_CONTACTS"
         android:writePermission="android.permission.WRITE_CONTACTS"/>
 
