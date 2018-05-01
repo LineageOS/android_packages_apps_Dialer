@@ -399,7 +399,7 @@ public class SpeedDialFragment extends Fragment {
 
       @Override
       public int getDrawableId() {
-        return R.drawable.context_menu_contact_icon;
+        return R.drawable.quantum_ic_star_vd_theme_24;
       }
 
       @Override
