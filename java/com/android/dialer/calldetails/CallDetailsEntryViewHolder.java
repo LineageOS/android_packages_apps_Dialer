@@ -156,6 +156,8 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         rttTranscript.setClickable(false);
       }
       rttTranscript.setVisibility(View.VISIBLE);
+    } else {
+      rttTranscript.setVisibility(View.GONE);
     }
   }
 
