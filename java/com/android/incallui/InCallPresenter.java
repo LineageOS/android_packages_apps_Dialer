@@ -427,6 +427,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     if (dialerCall == null) {
       return false;
     }
+    if (dialerCall.isEmergencyCall()) {
+      return false;
+    }
 
     Bundle extras = dialerCall.getIntentExtras();
     boolean result = shouldStartInBubbleModeWithExtras(extras);
