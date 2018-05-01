@@ -350,7 +350,7 @@ public class SpeedDialFragment extends Fragment {
 
       modules.add(new DividerModule());
 
-      // TODO(calderwoodra): add to favorites module
+      modules.add(new StarContactModule(speedDialUiItem));
       // TODO(calderwoodra): remove from strequent module
 
       // Contact info module
@@ -382,6 +382,41 @@ public class SpeedDialFragment extends Fragment {
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
               .setIsVideoCall(channel.isVideoTechnology()));
+    }
+
+    private final class StarContactModule implements HistoryItemActionModule {
+
+      private final SpeedDialUiItem speedDialUiItem;
+
+      StarContactModule(SpeedDialUiItem speedDialUiItem) {
+        this.speedDialUiItem = speedDialUiItem;
+      }
+
+      @Override
+      public int getStringId() {
+        return R.string.suggested_contact_bottom_sheet_add_favorite_option;
+      }
+
+      @Override
+      public int getDrawableId() {
+        return R.drawable.context_menu_contact_icon;
+      }
+
+      @Override
+      public boolean onClick() {
+        speedDialLoaderListener.listen(
+            getContext(),
+            UiItemLoaderComponent.get(getContext())
+                .speedDialUiItemMutator()
+                .starContact(
+                    Uri.withAppendedPath(
+                        Phone.CONTENT_FILTER_URI, speedDialUiItem.defaultChannel().number())),
+            SpeedDialFragment.this::onSpeedDialUiItemListLoaded,
+            throwable -> {
+              throw new RuntimeException(throwable);
+            });
+        return true;
+      }
     }
 
     private final class ContactInfoModule extends IntentModule {

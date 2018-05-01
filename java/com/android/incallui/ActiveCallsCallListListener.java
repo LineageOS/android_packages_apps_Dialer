@@ -49,10 +49,10 @@ public class ActiveCallsCallListListener implements CallList.Listener {
   public void onCallListChange(CallList callList) {
     ImmutableList.Builder<ActiveCallInfo> activeCalls = ImmutableList.builder();
     for (DialerCall call : callList.getAllCalls()) {
-      if (call.getState() != DialerCallState.DISCONNECTED) {
+      if (call.getState() != DialerCallState.DISCONNECTED && call.getAccountHandle() != null) {
         activeCalls.add(
             ActiveCallInfo.builder()
-                .setPhoneAccountHandle(Optional.fromNullable(call.getAccountHandle()))
+                .setPhoneAccountHandle(Optional.of(call.getAccountHandle()))
                 .build());
       }
     }

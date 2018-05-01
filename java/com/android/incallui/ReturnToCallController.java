@@ -37,6 +37,7 @@ import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
+import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallUiListener;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
@@ -76,6 +77,8 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private final PendingIntent fullScreen;
 
   private final ContactInfoCache contactInfoCache;
+
+  private InCallState inCallState;
 
   public static boolean isEnabled(Context context) {
     return ConfigProviderBindings.get(context).getBoolean("enable_return_to_call_bubble_v2", false);
@@ -186,7 +189,19 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
       return;
     }
 
-    if ((bubble == null || !(bubble.isVisible() || bubble.isDismissed()))
+    boolean shouldStartInBubbleMode = InCallPresenter.getInstance().shouldStartInBubbleMode();
+    InCallState newInCallState =
+        InCallPresenter.getInstance().getPotentialStateFromCallList(callList);
+    boolean isNewBackgroundCall =
+        newInCallState != inCallState
+            && newInCallState == InCallState.OUTGOING
+            && shouldStartInBubbleMode;
+    if (bubble != null && isNewBackgroundCall) {
+      // If new outgoing call is in bubble mode, update bubble info.
+      // We don't update if new call is not in bubble mode even if the existing call is.
+      bubble.setBubbleInfo(generateBubbleInfoForBackgroundCalling());
+    }
+    if ((bubble == null || !(bubble.isVisible() || bubble.isDismissed()) || isNewBackgroundCall)
         && getCall() != null
         && !InCallPresenter.getInstance().isShowingInCallUi()) {
       LogUtil.i("ReturnToCallController.onCallListChange", "going to show bubble");
@@ -195,6 +210,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
       // The call to display might be different for the existing bubble
       startContactInfoSearch();
     }
+    inCallState = newInCallState;
   }
 
   @Override
@@ -274,7 +290,20 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
         .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
         .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
         .setStartingYPosition(
-            context.getResources().getDimensionPixelOffset(R.dimen.return_to_call_initial_offset_y))
+            InCallPresenter.getInstance().shouldStartInBubbleMode()
+                ? context.getResources().getDisplayMetrics().heightPixels / 2
+                : context
+                    .getResources()
+                    .getDimensionPixelOffset(R.dimen.return_to_call_initial_offset_y))
+        .setActions(generateActions())
+        .build();
+  }
+
+  private BubbleInfo generateBubbleInfoForBackgroundCalling() {
+    return BubbleInfo.builder()
+        .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
+        .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
+        .setStartingYPosition(context.getResources().getDisplayMetrics().heightPixels / 2)
         .setActions(generateActions())
         .build();
   }
