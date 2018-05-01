@@ -549,7 +549,7 @@ public final class NewSearchFragment extends Fragment
   public void placeDuoCall(String phoneNumber) {
     Logger.get(getContext())
         .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
-    Intent intent = DuoComponent.get(getContext()).getDuo().getIntent(getContext(), phoneNumber);
+    Intent intent = DuoComponent.get(getContext()).getDuo().getCallIntent(phoneNumber).orNull();
     getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
   }

@@ -23,7 +23,7 @@ import com.android.dialer.CoalescedIds;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.Assert;
-import com.android.dialer.duo.DuoConstants;
+import com.android.dialer.duo.DuoComponent;
 
 /**
  * A {@link CursorLoader} that loads call detail entries from {@link AnnotatedCallLog} for {@link
@@ -117,21 +117,21 @@ public final class CallDetailsCursorLoader extends CursorLoader {
    *     the cursor is not null and the data set it points to is not empty.
    * @return A {@link CallDetailsEntries} proto.
    */
-  static CallDetailsEntries toCallDetailsEntries(Cursor cursor) {
+  static CallDetailsEntries toCallDetailsEntries(Context context, Cursor cursor) {
     Assert.isNotNull(cursor);
     Assert.checkArgument(cursor.moveToFirst());
 
     CallDetailsEntries.Builder entries = CallDetailsEntries.newBuilder();
 
     do {
-      entries.addEntries(toCallDetailsEntry(cursor));
+      entries.addEntries(toCallDetailsEntry(context, cursor));
     } while (cursor.moveToNext());
 
     return entries.build();
   }
 
   /** Creates a new {@link CallDetailsEntry} from the provided cursor using its current position. */
-  private static CallDetailsEntry toCallDetailsEntry(Cursor cursor) {
+  private static CallDetailsEntry toCallDetailsEntry(Context context, Cursor cursor) {
     CallDetailsEntry.Builder entry = CallDetailsEntry.newBuilder();
     entry
         .setCallId(cursor.getLong(ID))
@@ -145,10 +145,7 @@ public final class CallDetailsCursorLoader extends CursorLoader {
 
 
     String phoneAccountComponentName = cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
-    entry.setIsDuoCall(
-        DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
-            .flattenToString()
-            .equals(phoneAccountComponentName));
+    entry.setIsDuoCall(DuoComponent.get(context).getDuo().isDuoAccount(phoneAccountComponentName));
 
     return entry.build();
   }
