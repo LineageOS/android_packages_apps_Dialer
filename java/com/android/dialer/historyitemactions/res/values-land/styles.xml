@@ -15,11 +15,7 @@
  ~ limitations under the License
  -->
 <resources>
-  <style name="HistoryItemBottomSheet" parent="HistoryItemBottomSheet.Base">
-    <item name="bottomSheetStyle">@style/HistoryItemBottomSheet.BottomSheetStyle</item>
-  </style>
-
   <style name="HistoryItemBottomSheet.BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-    <item name="behavior_peekHeight">100dp</item>
+    <item name="behavior_peekHeight">206dp</item>
   </style>
 </resources>
