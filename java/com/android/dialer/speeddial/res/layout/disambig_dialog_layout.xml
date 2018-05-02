@@ -26,7 +26,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="center_vertical"
-      android:minHeight="64dp"
+      android:minHeight="56dp"
       android:paddingStart="24dp"
       android:paddingEnd="24dp"
       android:elevation="1dp"
@@ -40,7 +40,8 @@
       android:id="@+id/disambig_scrollview"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:maxHeight="240dp">
+      android:minHeight="168dp"
+      app:maxHeight="256dp">
 
     <LinearLayout
         android:id="@+id/communication_avenue_container"
@@ -54,8 +55,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom"
-      android:minHeight="56dp"
-      android:padding="12dp"
+      android:minHeight="64dp"
       android:elevation="4dp"
       android:background="@android:color/white">
 
@@ -63,6 +63,8 @@
         android:id="@+id/remember_this_choice_checkbox"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/speed_dial_remember_this_choice"/>
+        android:textSize="14sp"
+        android:text="@string/speed_dial_remember_this_choice"
+        style="@style/DialerCheckboxStyle"/>
   </FrameLayout>
 </LinearLayout>

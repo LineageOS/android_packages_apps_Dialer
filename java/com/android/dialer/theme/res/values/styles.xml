@@ -53,4 +53,10 @@
     <item name="android:background">@color/actionbar_background_color</item>
     <item name="background">@color/actionbar_background_color</item>
   </style>
+
+  <!-- This Checkbox style helps align checkboxes with the common list element layout(Image + text) -->
+  <style name="DialerCheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+    <item name="android:layout_marginStart">20dp</item>
+    <item name="android:paddingLeft">12dp</item>
+  </style>
 </resources>

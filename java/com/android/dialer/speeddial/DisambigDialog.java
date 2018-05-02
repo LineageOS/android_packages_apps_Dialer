@@ -25,12 +25,14 @@ import android.support.annotation.WorkerThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -85,6 +87,16 @@ public class DisambigDialog extends DialogFragment {
   }
 
   @Override
+  public void onResume() {
+    super.onResume();
+    getDialog()
+        .getWindow()
+        .setLayout(
+            getContext().getResources().getDimensionPixelSize(R.dimen.disambig_dialog_width),
+            LayoutParams.WRAP_CONTENT);
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
     // TODO(calderwoodra): for simplicity, just dismiss the dialog on configuration change and
@@ -105,19 +117,33 @@ public class DisambigDialog extends DialogFragment {
     for (Channel channel : channels) {
       // TODO(calderwoodra): use fuzzy number matcher
       if (phoneNumbers.add(channel.number())) {
+        if (phoneNumbers.size() != 1) {
+          insertDivider(container);
+        }
         insertHeader(container, channel.number(), channel.label());
       }
       insertOption(container, channel);
     }
   }
 
-  private void insertHeader(LinearLayout container, String number, String phoneType) {
+  private void insertDivider(LinearLayout container) {
+    View view =
+        getActivity()
+            .getLayoutInflater()
+            .inflate(R.layout.disambig_dialog_divider, container, false);
+    container.addView(view);
+  }
+
+  private void insertHeader(LinearLayout container, String number, String label) {
     View view =
         getActivity()
             .getLayoutInflater()
             .inflate(R.layout.disambig_option_header_layout, container, false);
-    ((TextView) view.findViewById(R.id.disambig_header_phone_type)).setText(phoneType);
-    ((TextView) view.findViewById(R.id.disambig_header_phone_number)).setText(number);
+    String secondaryInfo =
+        TextUtils.isEmpty(label)
+            ? number
+            : getContext().getString(R.string.call_subject_type_and_number, label, number);
+    ((TextView) view.findViewById(R.id.disambig_header_phone_label)).setText(secondaryInfo);
     container.addView(view);
   }
 
