@@ -50,7 +50,6 @@ import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
-import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
@@ -117,8 +116,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   public static final int PROPERTY_CODEC_KNOWN = 0x04000000;
 
   private static final String ID_PREFIX = "DialerCall_";
-  private static final String CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS =
+
+  @VisibleForTesting
+  public static final String CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS =
       "emergency_callback_window_millis";
+
   private static int idCounter = 0;
 
   /**
@@ -821,10 +823,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     // We want to treat any incoming call that arrives a short time after an outgoing emergency call
     // as a potential emergency callback.
     if (getExtras() != null
-        && getExtras().getLong(TelecomManagerCompat.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0)
-            > 0) {
+        && getExtras().getLong(Call.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0) > 0) {
       long lastEmergencyCallMillis =
-          getExtras().getLong(TelecomManagerCompat.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0);
+          getExtras().getLong(Call.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0);
       if (isInEmergencyCallbackWindow(lastEmergencyCallMillis)) {
         return true;
       }
