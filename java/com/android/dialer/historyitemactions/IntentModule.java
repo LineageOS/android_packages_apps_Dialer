@@ -23,6 +23,7 @@ import android.support.annotation.StringRes;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
+import com.android.dialer.util.IntentUtil;
 
 /**
  * {@link HistoryItemActionModule} useful for making easy to build modules based on starting an
@@ -72,5 +73,13 @@ public class IntentModule implements HistoryItemActionModule {
     }
 
     return new IntentModule(context, PreCall.getIntent(context, callIntentBuilder), text, image);
+  }
+
+  public static IntentModule newModuleForSendingTextMessage(Context context, String number) {
+    return new IntentModule(
+        context,
+        IntentUtil.getSendSmsIntent(number),
+        R.string.send_a_message,
+        R.drawable.quantum_ic_message_vd_theme_24);
   }
 }

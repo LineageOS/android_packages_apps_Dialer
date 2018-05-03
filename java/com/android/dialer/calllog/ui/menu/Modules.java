@@ -20,152 +20,53 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.v4.os.BuildCompat;
 import android.text.TextUtils;
-import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsHeaderInfo;
-import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
-import com.android.dialer.historyitemactions.DividerModule;
-import com.android.dialer.historyitemactions.DuoCallModule;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
+import com.android.dialer.historyitemactions.HistoryItemActionModuleInfo;
+import com.android.dialer.historyitemactions.HistoryItemActionModulesBuilder;
 import com.android.dialer.historyitemactions.IntentModule;
-import com.android.dialer.historyitemactions.SharedModules;
-import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.util.CallUtil;
-import com.google.common.base.Optional;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * Configures the modules for the bottom sheet; these are the rows below the top row (primary
- * action) in the bottom sheet.
+ * Configures the modules for the bottom sheet; these are the rows below the top row (contact info)
+ * in the bottom sheet.
  */
-@SuppressWarnings("Guava")
 final class Modules {
 
+  /**
+   * Returns a list of {@link HistoryItemActionModule HistoryItemActionModules}, which are items in
+   * the bottom sheet.
+   */
   static List<HistoryItemActionModule> fromRow(Context context, CoalescedRow row) {
-    // Conditionally add each module, which are items in the bottom sheet's menu.
-    List<HistoryItemActionModule> modules = new ArrayList<>();
-
-    String normalizedNumber = row.getNumber().getNormalizedNumber();
-    boolean canPlaceCalls =
-        PhoneNumberHelper.canPlaceCallsTo(normalizedNumber, row.getNumberPresentation());
-
-    if (canPlaceCalls) {
-      modules.addAll(createModulesForCalls(context, row, normalizedNumber));
-      Optional<HistoryItemActionModule> moduleForSendingTextMessage =
-          SharedModules.createModuleForSendingTextMessage(
-              context, normalizedNumber, row.getNumberAttributes().getIsBlocked());
-      if (moduleForSendingTextMessage.isPresent()) {
-        modules.add(moduleForSendingTextMessage.get());
-      }
-    }
-
-    if (!modules.isEmpty()) {
-      modules.add(new DividerModule());
-    }
+    HistoryItemActionModulesBuilder modulesBuilder =
+        new HistoryItemActionModulesBuilder(context, buildModuleInfo(row));
 
 
     // TODO(zachh): Module for CallComposer.
 
-    if (canPlaceCalls) {
-      Optional<HistoryItemActionModule> moduleForAddingToContacts =
-          SharedModules.createModuleForAddingToContacts(
-              context,
-              row.getNumber(),
-              row.getNumberAttributes().getName(),
-              row.getNumberAttributes().getLookupUri(),
-              row.getNumberAttributes().getIsBlocked(),
-              row.getNumberAttributes().getIsSpam());
-      if (moduleForAddingToContacts.isPresent()) {
-        modules.add(moduleForAddingToContacts.get());
-      }
-
-      BlockReportSpamDialogInfo blockReportSpamDialogInfo =
-          BlockReportSpamDialogInfo.newBuilder()
-              .setNormalizedNumber(row.getNumber().getNormalizedNumber())
-              .setCountryIso(row.getNumber().getCountryIso())
-              .setCallType(row.getCallType())
-              .setReportingLocation(ReportingLocation.Type.CALL_LOG_HISTORY)
-              .setContactSource(row.getNumberAttributes().getContactSource())
-              .build();
-      modules.addAll(
-          SharedModules.createModulesHandlingBlockedOrSpamNumber(
-              context,
-              blockReportSpamDialogInfo,
-              row.getNumberAttributes().getIsBlocked(),
-              row.getNumberAttributes().getIsSpam()));
-
-      Optional<HistoryItemActionModule> moduleForCopyingNumber =
-          SharedModules.createModuleForCopyingNumber(context, normalizedNumber);
-      if (moduleForCopyingNumber.isPresent()) {
-        modules.add(moduleForCopyingNumber.get());
-      }
+    if (PhoneNumberHelper.canPlaceCallsTo(
+        row.getNumber().getNormalizedNumber(), row.getNumberPresentation())) {
+      modulesBuilder
+          .addModuleForVoiceCall()
+          .addModuleForVideoCall()
+          .addModuleForSendingTextMessage()
+          .addModuleForDivider()
+          .addModuleForAddingToContacts()
+          .addModuleForBlockedOrSpamNumber()
+          .addModuleForCopyingNumber();
     }
 
+    List<HistoryItemActionModule> modules = modulesBuilder.build();
+
+    // Add modules only available in the call log.
     modules.add(createModuleForAccessingCallDetails(context, row));
-
     modules.add(new DeleteCallLogItemModule(context, row.getCoalescedIds()));
-
-    return modules;
-  }
-
-  private static List<HistoryItemActionModule> createModulesForCalls(
-      Context context, CoalescedRow row, String normalizedNumber) {
-    // Don't add call options if a number is blocked.
-    if (row.getNumberAttributes().getIsBlocked()) {
-      return Collections.emptyList();
-    }
-
-    boolean isDuoCall =
-        DuoComponent.get(context).getDuo().isDuoAccount(row.getPhoneAccountComponentName());
-
-    List<HistoryItemActionModule> modules = new ArrayList<>();
-
-    // Add an audio call item
-    // TODO(zachh): Support post-dial digits; consider using DialerPhoneNumber.
-    CallIntentBuilder callIntentBuilder =
-        new CallIntentBuilder(normalizedNumber, CallInitiationType.Type.CALL_LOG)
-            .setAllowAssistedDial(canSupportAssistedDialing(row));
-    // Leave PhoneAccountHandle blank so regular PreCall logic will be used. The account the call
-    // was made/received in should be ignored for audio and carrier video calls.
-    // TODO(a bug): figure out the correct video call behavior
-    modules.add(IntentModule.newCallModule(context, callIntentBuilder));
-
-    // If the call log entry is for a spam call, nothing more to be done.
-    if (row.getNumberAttributes().getIsSpam()) {
-      return modules;
-    }
-
-    // If the call log entry is for a video call, add the corresponding video call options.
-    // Note that if the entry is for a Duo video call but Duo is not available, we will fall back to
-    // a carrier video call.
-    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      modules.add(
-          isDuoCall && canPlaceDuoCall(context, normalizedNumber)
-              ? new DuoCallModule(context, normalizedNumber)
-              : IntentModule.newCallModule(context, callIntentBuilder.setIsVideoCall(true)));
-      return modules;
-    }
-
-    // At this point, the call log entry is for an audio call. We will also show a video call option
-    // if the video capability is present.
-    //
-    // The carrier video call option takes precedence over Duo.
-    if (canPlaceCarrierVideoCall(context, row)) {
-      modules.add(IntentModule.newCallModule(context, callIntentBuilder.setIsVideoCall(true)));
-    } else if (canPlaceDuoCall(context, normalizedNumber)) {
-      modules.add(new DuoCallModule(context, normalizedNumber));
-    }
-
     return modules;
   }
 
@@ -208,30 +109,27 @@ final class Modules {
         .build();
   }
 
-  private static boolean canPlaceDuoCall(Context context, String phoneNumber) {
-    Duo duo = DuoComponent.get(context).getDuo();
-
-    return duo.isInstalled(context)
-        && duo.isEnabled(context)
-        && duo.isActivated(context)
-        && duo.isReachable(context, phoneNumber);
-  }
-
-  private static boolean canPlaceCarrierVideoCall(Context context, CoalescedRow row) {
-    int carrierVideoAvailability = CallUtil.getVideoCallingAvailability(context);
-    boolean isCarrierVideoCallingEnabled =
-        ((carrierVideoAvailability & CallUtil.VIDEO_CALLING_ENABLED)
-            == CallUtil.VIDEO_CALLING_ENABLED);
-    boolean canRelyOnCarrierVideoPresence =
-        ((carrierVideoAvailability & CallUtil.VIDEO_CALLING_PRESENCE)
-            == CallUtil.VIDEO_CALLING_PRESENCE);
-
-    return isCarrierVideoCallingEnabled
-        && canRelyOnCarrierVideoPresence
-        && row.getNumberAttributes().getCanSupportCarrierVideoCall();
-  }
-
   private static boolean canSupportAssistedDialing(CoalescedRow row) {
     return !TextUtils.isEmpty(row.getNumberAttributes().getLookupUri());
+  }
+
+  private static HistoryItemActionModuleInfo buildModuleInfo(CoalescedRow row) {
+    return HistoryItemActionModuleInfo.newBuilder()
+        .setNormalizedNumber(row.getNumber().getNormalizedNumber())
+        .setCountryIso(row.getNumber().getCountryIso())
+        .setName(row.getNumberAttributes().getName())
+        .setCallType(row.getCallType())
+        .setFeatures(row.getFeatures())
+        .setLookupUri(row.getNumberAttributes().getLookupUri())
+        .setPhoneAccountComponentName(row.getPhoneAccountComponentName())
+        .setCanReportAsInvalidNumber(row.getNumberAttributes().getCanReportAsInvalidNumber())
+        .setCanSupportAssistedDialing(canSupportAssistedDialing(row))
+        .setCanSupportCarrierVideoCall(row.getNumberAttributes().getCanSupportCarrierVideoCall())
+        .setIsBlocked(row.getNumberAttributes().getIsBlocked())
+        .setIsSpam(row.getNumberAttributes().getIsSpam())
+        .setIsVoicemailCall(row.getIsVoicemailCall())
+        .setContactSource(row.getNumberAttributes().getContactSource())
+        .setHost(HistoryItemActionModuleInfo.Host.CALL_LOG)
+        .build();
   }
 }
