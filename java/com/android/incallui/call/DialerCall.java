@@ -86,7 +86,6 @@ import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.rtt.protocol.RttChatMessage;
-import com.android.incallui.speakeasy.runtime.Constraints;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.duo.DuoVideoTech;
@@ -1697,10 +1696,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   /** Indicates the call is eligible for SpeakEasy */
   public boolean isSpeakEasyEligible() {
-    if (!Constraints.isAvailable(context)) {
-      return false;
-    }
-
     return !isPotentialEmergencyCallback()
         && !isEmergencyCall()
         && !isActiveRttCall()
