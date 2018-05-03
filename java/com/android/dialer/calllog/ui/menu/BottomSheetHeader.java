@@ -34,6 +34,7 @@ final class BottomSheetHeader {
             NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
                 .setFormattedNumber(row.getFormattedNumber())
                 .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+                .setIsVoicemail(row.getIsVoicemailCall())
                 .setIsRtt(
                     BuildCompat.isAtLeastP()
                         && (row.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT)
