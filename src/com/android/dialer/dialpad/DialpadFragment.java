@@ -63,6 +63,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -256,6 +257,7 @@ public class DialpadFragment extends Fragment
     private static final String EXTRA_DIAL_CONFERENCE_URI = "org.codeaurora.extra.DIAL_CONFERENCE_URI";
 
     private boolean mAddParticipant = false;
+    private PhoneAccountHandle mSelectedAccount;
 
     /**
      * Identifier for intent extra for sending an empty Flash message for
@@ -1048,6 +1050,34 @@ public class DialpadFragment extends Fragment
                         item.setVisible(CallUtil.isCallWithSubjectSupported(getContext()));
                     }
                 }
+
+                final MenuItem callWithItem = menu.findItem(R.id.call_with);
+                List<PhoneAccount> accounts = CallUtil.getCallCapablePhoneAccounts(getContext(),
+                        PhoneAccount.SCHEME_TEL);
+                if (accounts != null && accounts.size() > 1) {
+                    final PhoneAccountHandle selected;
+                    if (mSelectedAccount != null) {
+                        selected = mSelectedAccount;
+                    } else {
+                        selected = TelecomUtil.getDefaultOutgoingPhoneAccount(getContext(),
+                                PhoneAccount.SCHEME_TEL);
+                    }
+
+                    SubMenu callWithMenu = callWithItem.getSubMenu();
+                    callWithMenu.clear();
+
+                    for (PhoneAccount account : accounts) {
+                        final PhoneAccountHandle handle = account.getAccountHandle();
+                        callWithMenu.add(Menu.FIRST, Menu.NONE, Menu.NONE, account.getLabel())
+                                .setIntent(new Intent().putExtra("account", handle))
+                                .setChecked(handle.equals(selected));
+                    }
+                    callWithMenu.setGroupCheckable(Menu.FIRST, true, true);
+                    callWithItem.setVisible(callWithMenu.hasVisibleItems());
+                } else {
+                    callWithItem.setVisible(false);
+                }
+
                 super.show();
             }
         };
@@ -1432,7 +1462,8 @@ public class DialpadFragment extends Fragment
                     // Clear the digits just in case.
                     clearDialpad();
                 } else {
-                    final Intent intent = CallUtil.getCallIntent(number);
+                    final Intent intent = CallUtil.getCallWithSubjectIntent(number,
+                            mSelectedAccount, null);
                     if (!isDigitsShown) {
                         // must be dial conference add extra
                         intent.putExtra(EXTRA_DIAL_CONFERENCE_URI, true);
@@ -1449,6 +1480,7 @@ public class DialpadFragment extends Fragment
         if (mDigits != null) {
             mDigits.getText().clear();
         }
+        mSelectedAccount = null;
     }
 
     private void handleDialButtonClickWithEmptyDigits() {
@@ -1776,6 +1808,10 @@ public class DialpadFragment extends Fragment
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        if (item.getGroupId() == Menu.FIRST) {
+            mSelectedAccount = item.getIntent().getParcelableExtra("account");
+            return true;
+        }
         int resId = item.getItemId();
         if (resId == R.id.menu_2s_pause) {
             updateDialString(PAUSE);
@@ -2054,7 +2090,8 @@ public class DialpadFragment extends Fragment
         } else {
             final DialtactsActivity activity = getActivity() instanceof DialtactsActivity
                     ? (DialtactsActivity) getActivity() : null;
-            final Intent intent = CallUtil.getCallIntent(phoneNumber);
+            final Intent intent = CallUtil.getCallWithSubjectIntent(phoneNumber,
+                    mSelectedAccount, null);
             DialerUtils.startActivityWithErrorToast(getActivity(), intent);
             hideAndClearDialpad(false);
         }

@@ -293,7 +293,17 @@ public class CallDetailActivity extends AppCompatActivity
                 mContext.startActivity(dialIntent);
             }
         });
-
+        mCallButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = AccountSelectionActivity.createIntent(mContext, mNumber);
+                if (intent != null) {
+                    mContext.startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mBlockNumberActionItem = (TextView) findViewById(R.id.call_detail_action_block);
         updateBlockActionItemVisibility(View.VISIBLE);

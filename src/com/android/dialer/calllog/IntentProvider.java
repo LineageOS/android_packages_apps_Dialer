@@ -27,6 +27,7 @@ import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.CallUtil;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.dialer.AccountSelectionActivity;
 import com.android.dialer.CallDetailActivity;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.IntentUtil.CallIntentBuilder;
@@ -34,6 +35,7 @@ import com.android.dialer.util.TelecomUtil;
 import com.android.incallui.Call.LogState;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used to create an intent to attach to an action in the call log.
@@ -44,7 +46,10 @@ public abstract class IntentProvider {
 
     private static final String TAG = IntentProvider.class.getSimpleName();
 
-    public abstract Intent getIntent(Context context);
+    public abstract Intent getClickIntent(Context context);
+    public Intent getLongClickIntent(Context context) {
+        return null;
+    }
 
     public static IntentProvider getReturnCallIntentProvider(final String number) {
         return getReturnCallIntentProvider(number, null);
@@ -54,7 +59,7 @@ public abstract class IntentProvider {
             final PhoneAccountHandle accountHandle) {
         return new IntentProvider() {
             @Override
-            public Intent getIntent(Context context) {
+            public Intent getClickIntent(Context context) {
                 return new CallIntentBuilder(number)
                         .setPhoneAccountHandle(accountHandle)
                         .setCallInitiationType(LogState.INITIATION_CALL_LOG)
@@ -71,12 +76,17 @@ public abstract class IntentProvider {
             final PhoneAccountHandle accountHandle) {
         return new IntentProvider() {
             @Override
-            public Intent getIntent(Context context) {
+            public Intent getClickIntent(Context context) {
                 return new CallIntentBuilder(number)
                         .setPhoneAccountHandle(accountHandle)
                         .setCallInitiationType(LogState.INITIATION_CALL_LOG)
                         .setIsVideoCall(true)
                         .build();
+            }
+
+            @Override
+            public Intent getLongClickIntent(Context context) {
+                return AccountSelectionActivity.createIntent(context, number);
             }
         };
     }
@@ -84,7 +94,7 @@ public abstract class IntentProvider {
     public static IntentProvider getReturnVoicemailCallIntentProvider() {
         return new IntentProvider() {
             @Override
-            public Intent getIntent(Context context) {
+            public Intent getClickIntent(Context context) {
                 return new CallIntentBuilder(CallUtil.getVoicemailUri())
                         .setCallInitiationType(LogState.INITIATION_CALL_LOG)
                         .build();
@@ -95,7 +105,7 @@ public abstract class IntentProvider {
     public static IntentProvider getSendSmsIntentProvider(final String number) {
         return new IntentProvider() {
             @Override
-            public Intent getIntent(Context context) {
+            public Intent getClickIntent(Context context) {
                 return IntentUtil.getSendSmsIntent(number);
             }
         };
@@ -113,7 +123,7 @@ public abstract class IntentProvider {
             final long id, final long[] extraIds, final String voicemailUri) {
         return new IntentProvider() {
             @Override
-            public Intent getIntent(Context context) {
+            public Intent getClickIntent(Context context) {
                 Intent intent = new Intent(context, CallDetailActivity.class);
                 // Check if the first item is a voicemail.
                 if (voicemailUri != null) {
@@ -144,7 +154,7 @@ public abstract class IntentProvider {
             final boolean isNewContact) {
         return new IntentProvider() {
             @Override
-            public Intent getIntent(Context context) {
+            public Intent getClickIntent(Context context) {
                 Contact contactToSave = null;
 
                 if (lookupUri != null) {

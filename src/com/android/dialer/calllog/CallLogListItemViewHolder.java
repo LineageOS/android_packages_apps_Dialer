@@ -81,7 +81,7 @@ import org.codeaurora.presenceserv.IPresenceService;
  */
 public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener, MenuItem.OnMenuItemClickListener,
-        View.OnCreateContextMenuListener {
+        View.OnLongClickListener, View.OnCreateContextMenuListener {
 
     /** The root view of the call log list item */
     public final View rootView;
@@ -277,6 +277,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             quickContactView.setPrioritizedMimeType(Phone.CONTENT_ITEM_TYPE);
         }
         primaryActionButtonView.setOnClickListener(this);
+        primaryActionButtonView.setOnLongClickListener(this);
         primaryActionView.setOnClickListener(mExpandCollapseListener);
         primaryActionView.setOnCreateContextMenuListener(this);
         mExtendedBlockingButtonRenderer =
@@ -458,6 +459,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 primaryActionButtonView.setContentDescription(TextUtils.expandTemplate(
                         mContext.getString(R.string.description_voicemail_action),
                         nameOrNumber));
+                primaryActionButtonView.setTag(null);
                 primaryActionButtonView.setVisibility(View.VISIBLE);
             } else {
                 primaryActionButtonView.setVisibility(View.GONE);
@@ -708,7 +710,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         } else {
             final IntentProvider intentProvider = (IntentProvider) view.getTag();
             if (intentProvider != null) {
-                final Intent intent = intentProvider.getIntent(mContext);
+                final Intent intent = intentProvider.getClickIntent(mContext);
                 // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
                 if (DialerUtils.isConferenceURICallLog(number, postDialDigits)) {
                     intent.putExtra("org.codeaurora.extra.DIAL_CONFERENCE_URI", true);
@@ -718,6 +720,18 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        final IntentProvider intentProvider = (IntentProvider) view.getTag();
+        final Intent intent = intentProvider != null
+                ? intentProvider.getLongClickIntent(mContext) : null;
+        if (intent != null) {
+            DialerUtils.startActivityWithErrorToast(mContext, intent);
+            return true;
+        }
+        return false;
     }
 
     @NeededForTesting

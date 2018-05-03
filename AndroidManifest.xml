@@ -201,6 +201,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.android.dialer.AccountSelectionActivity"
+            android:theme="@style/TransparentTheme"
+            android:exported="false" />
+
         <activity android:name="com.android.contacts.common.test.FragmentTestActivity">
             <intent-filter>
                 <category android:name="android.intent.category.TEST"/>

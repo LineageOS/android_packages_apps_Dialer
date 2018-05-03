@@ -39,6 +39,7 @@ import com.android.contacts.common.ClipboardUtils;
 import com.android.contacts.common.ContactPhotoManager;
 import com.android.contacts.common.GeoUtil;
 import com.android.contacts.common.util.UriUtils;
+import com.android.dialer.AccountSelectionActivity;
 import com.android.dialer.R;
 import com.android.dialer.calllog.CallTypeIconsView;
 import com.android.dialer.calllog.ContactInfo;
@@ -127,6 +128,18 @@ public class CallStatsDetailActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 startActivity(CallUtil.getCallIntent(mNumber));
+            }
+        });
+        mCallButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = AccountSelectionActivity.createIntent(
+                        CallStatsDetailActivity.this, mNumber);
+                if (intent != null) {
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
             }
         });
 
