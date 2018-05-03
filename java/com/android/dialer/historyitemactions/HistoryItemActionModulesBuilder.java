@@ -115,7 +115,13 @@ public final class HistoryItemActionModulesBuilder {
   /**
    * Adds a module for a carrier video call *or* a Duo video call.
    *
-   * <p>If the number is blocked or marked as spam, this method is a no-op.
+   * <p>This method is a no-op if
+   *
+   * <ul>
+   *   <li>the call is one made to a voicemail box,
+   *   <li>the number is blocked, or
+   *   <li>the number is marked as spam.
+   * </ul>
    *
    * <p>If the provided module info is for a Duo video call and Duo is available, add a Duo video
    * call module.
@@ -132,7 +138,7 @@ public final class HistoryItemActionModulesBuilder {
    * capability, and Duo is available, add a Duo video call module.
    */
   public HistoryItemActionModulesBuilder addModuleForVideoCall() {
-    if (moduleInfo.getIsBlocked() || moduleInfo.getIsSpam()) {
+    if (moduleInfo.getIsVoicemailCall() || moduleInfo.getIsBlocked() || moduleInfo.getIsSpam()) {
       return this;
     }
 
@@ -169,12 +175,20 @@ public final class HistoryItemActionModulesBuilder {
   /**
    * Adds a module for sending text messages.
    *
-   * <p>The method is a no-op if the number is blocked or empty.
+   * <p>The method is a no-op if
+   *
+   * <ul>
+   *   <li>the call is one made to a voicemail box,
+   *   <li>the number is blocked, or
+   *   <li>the number is empty.
+   * </ul>
    */
   public HistoryItemActionModulesBuilder addModuleForSendingTextMessage() {
-    // TODO(zachh): There are other conditions where this module should not be shown; consider
-    // voicemail, business numbers, etc.
-    if (moduleInfo.getIsBlocked() || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
+    // TODO(zachh): There are other conditions where this module should not be shown
+    // (e.g., business numbers).
+    if (moduleInfo.getIsVoicemailCall()
+        || moduleInfo.getIsBlocked()
+        || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
       return this;
     }
 
@@ -203,6 +217,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked,
    *   <li>the number is marked as spam,
    *   <li>the number is empty, or
@@ -210,7 +225,8 @@ public final class HistoryItemActionModulesBuilder {
    * </ul>
    */
   public HistoryItemActionModulesBuilder addModuleForAddingToContacts() {
-    if (moduleInfo.getIsBlocked()
+    if (moduleInfo.getIsVoicemailCall()
+        || moduleInfo.getIsBlocked()
         || moduleInfo.getIsSpam()
         || isExistingContact()
         || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
@@ -237,6 +253,8 @@ public final class HistoryItemActionModulesBuilder {
   /**
    * Add modules for blocking/unblocking a number and/or marking it as spam/not spam.
    *
+   * <p>The method is a no-op if the call is one made to a voicemail box.
+   *
    * <p>If a number is marked as spam, add two modules:
    *
    * <ul>
@@ -249,6 +267,10 @@ public final class HistoryItemActionModulesBuilder {
    * <p>If a number is not blocked or marked as spam, add the "Block/Report spam" module.
    */
   public HistoryItemActionModulesBuilder addModuleForBlockedOrSpamNumber() {
+    if (moduleInfo.getIsVoicemailCall()) {
+      return this;
+    }
+
     BlockReportSpamDialogInfo blockReportSpamDialogInfo =
         BlockReportSpamDialogInfo.newBuilder()
             .setNormalizedNumber(moduleInfo.getNormalizedNumber())
