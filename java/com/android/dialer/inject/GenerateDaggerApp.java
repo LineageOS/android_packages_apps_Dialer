@@ -19,13 +19,12 @@ package com.android.dialer.inject;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-/**
- * Only used by rootcomponent generator to store metadata for locating annotated class with {@link
- * IncludeInDialerRoot}, {@link InstallIn}.
- */
-@Target(ElementType.TYPE)
-public @interface RootComponentGeneratorMetadata {
-  String tag();
+/** Annotates an inner class where an application with dagger instance is needed. */
+@Target({ElementType.TYPE})
+public @interface GenerateDaggerApp {
+  /** Name of the application to be generated. */
+  String name();
 
-  Class<?> annotatedClass();
+  /** Dialer variant of the application to be generated. */
+  DialerVariant variant();
 }
