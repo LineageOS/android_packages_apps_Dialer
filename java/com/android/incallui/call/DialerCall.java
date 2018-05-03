@@ -1058,6 +1058,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   @TargetApi(28)
+  @Nullable
   public RttCall getRttCall() {
     if (!isActiveRttCall()) {
       return null;
@@ -1111,16 +1112,18 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     if (!BuildCompat.isAtLeastP()) {
       return;
     }
-    // Save any remaining text in the buffer that's not shown by UI yet.
-    // This may happen when the call is switched to background before disconnect.
-    try {
-      String messageLeft = getRttCall().readImmediately();
-      if (!TextUtils.isEmpty(messageLeft)) {
-        rttTranscript =
-            RttChatMessage.getRttTranscriptWithNewRemoteMessage(rttTranscript, messageLeft);
+    if (getRttCall() != null) {
+      // Save any remaining text in the buffer that's not shown by UI yet.
+      // This may happen when the call is switched to background before disconnect.
+      try {
+        String messageLeft = getRttCall().readImmediately();
+        if (!TextUtils.isEmpty(messageLeft)) {
+          rttTranscript =
+              RttChatMessage.getRttTranscriptWithNewRemoteMessage(rttTranscript, messageLeft);
+        }
+      } catch (IOException e) {
+        LogUtil.e("DialerCall.saveRttTranscript", "error when reading remaining message", e);
       }
-    } catch (IOException e) {
-      LogUtil.e("DialerCall.saveRttTranscript", "error when reading remaining message", e);
     }
     // Don't save transcript if it's empty.
     if (rttTranscript.getMessagesCount() == 0) {
@@ -1662,7 +1665,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     if (videoTechManager != null) {
       videoTechManager.dispatchRemovedFromCallList();
     }
-    // TODO(a bug): Add tests for it to make sure no crash on subsequent call to this method.
     // TODO(wangqi): Consider moving this to a DialerCallListener.
     if (rttTranscript != null && !isCallRemoved) {
       saveRttTranscript();
