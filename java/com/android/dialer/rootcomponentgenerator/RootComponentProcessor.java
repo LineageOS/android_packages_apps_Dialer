@@ -30,6 +30,7 @@ public class RootComponentProcessor extends BasicAnnotationProcessor {
   protected Iterable<? extends ProcessingStep> initSteps() {
     return ImmutableList.of(
         new MetadataGeneratingStep(processingEnv),
+        new DaggerApplicationGeneratingStep(processingEnv),
         new RootComponentGeneratingStep(processingEnv));
   }
 
