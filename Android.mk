@@ -433,6 +433,7 @@ BASE_DIR := java/com/android
 
 LOCAL_SRC_FILES := \
 	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator) \
+	      $(BASE_DIR)/dialer/inject/GenerateDaggerApp.java \
         $(BASE_DIR)/dialer/inject/DialerRootComponent.java \
         $(BASE_DIR)/dialer/inject/DialerVariant.java \
         $(BASE_DIR)/dialer/inject/HasRootComponent.java \
