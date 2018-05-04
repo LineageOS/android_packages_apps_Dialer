@@ -20,7 +20,7 @@
 
   <!-- String to identify an unknown/restricted callers. ex. "Unknown 1", "Restricted 2", ect. -->
   <string name="unknown_counter">
-    <xliff:g id="unknown">%s</xliff:g> <xliff:g id="id">%d</xliff:g>
+    <xliff:g id="unknown">%1$s</xliff:g> <xliff:g id="id">%2$d</xliff:g>
   </string>
 
   <!-- String used to display calls from pay phone in the call log -->

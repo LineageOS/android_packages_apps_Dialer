@@ -45,7 +45,7 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
       @ApplicationContext Context appContext,
       @AnnotatedCallLogMaxRows int maxRows,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
-    super(appContext, FILENAME, null, 1);
+    super(appContext, FILENAME, null, 2);
 
     this.appContext = appContext;
     this.maxRows = maxRows;
@@ -75,8 +75,23 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob, ")
           + (AnnotatedCallLog.IS_VOICEMAIL_CALL + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_CALL_TAG + " text, ")
-          + (AnnotatedCallLog.TRANSCRIPTION_STATE + " integer")
+          + (AnnotatedCallLog.TRANSCRIPTION_STATE + " integer, ")
+          + (AnnotatedCallLog.CALL_MAPPING_ID + " text")
           + ");";
+
+  private static final String ALTER_TABLE_SQL_ADD_CALL_MAPPING_ID_COLUMN =
+      "alter table "
+          + AnnotatedCallLog.TABLE
+          + " add column "
+          + AnnotatedCallLog.CALL_MAPPING_ID
+          + " text;";
+  private static final String UPDATE_CALL_MAPPING_ID_COLUMN =
+      "update "
+          + AnnotatedCallLog.TABLE
+          + " set "
+          + AnnotatedCallLog.CALL_MAPPING_ID
+          + " = "
+          + AnnotatedCallLog.TIMESTAMP;
 
   /**
    * Deletes all but the first maxRows rows (by timestamp, excluding voicemails) to keep the table a
@@ -143,7 +158,12 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
   }
 
   @Override
-  public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+  public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    if (oldVersion == 1 && newVersion == 2) {
+      db.execSQL(ALTER_TABLE_SQL_ADD_CALL_MAPPING_ID_COLUMN);
+      db.execSQL(UPDATE_CALL_MAPPING_ID_COLUMN);
+    }
+  }
 
   /** Closes the database and deletes it. */
   public ListenableFuture<Void> delete() {
