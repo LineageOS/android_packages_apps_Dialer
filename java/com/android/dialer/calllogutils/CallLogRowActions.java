@@ -21,7 +21,6 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.precall.PreCall;
-import com.android.dialer.telecom.TelecomUtil;
 
 /** Actions which can be performed on a call log row. */
 public final class CallLogRowActions {
@@ -38,9 +37,6 @@ public final class CallLogRowActions {
         activity,
         new CallIntentBuilder(
                 row.getNumber().getNormalizedNumber(), CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(
-                TelecomUtil.composePhoneAccountHandle(
-                    row.getPhoneAccountComponentName(), row.getPhoneAccountId()))
             .setIsVideoCall((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO));
   }
 }

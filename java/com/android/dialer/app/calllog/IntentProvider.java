@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
@@ -33,7 +32,6 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -99,7 +97,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return DuoComponent.get(context).getDuo().getIntent(context, number);
+        return DuoComponent.get(context).getDuo().getCallIntent(number).orNull();
       }
     };
   }
@@ -108,18 +106,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new Intent(
-            Intent.ACTION_VIEW,
-            new Uri.Builder()
-                .scheme("https")
-                .authority("play.google.com")
-                .appendEncodedPath("store/apps/details")
-                .appendQueryParameter("id", DuoConstants.PACKAGE_NAME)
-                .appendQueryParameter(
-                    "referrer",
-                    "utm_source=dialer&utm_medium=text&utm_campaign=product") // This string is from
-                // the Duo team
-                .build());
+        return DuoComponent.get(context).getDuo().getInstallDuoIntent().orNull();
       }
     };
   }
@@ -128,7 +115,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        return new Intent(DuoConstants.DUO_ACTIVATE_ACTION).setPackage(DuoConstants.PACKAGE_NAME);
+        return DuoComponent.get(context).getDuo().getActivateIntent().orNull();
       }
     };
   }
@@ -137,11 +124,7 @@ public abstract class IntentProvider {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
-        Intent intent =
-            new Intent(DuoConstants.DUO_INVITE_ACTION)
-                .setPackage(DuoConstants.PACKAGE_NAME)
-                .setData(Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null /* fragment */));
-        return intent;
+        return DuoComponent.get(context).getDuo().getInviteIntent(number).orNull();
       }
     };
   }

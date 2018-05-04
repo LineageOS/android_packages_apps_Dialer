@@ -72,14 +72,19 @@ final class RootComponentGeneratingStep implements ProcessingStep {
       // defer root components to the next round in case where the current build target contains
       // elements annotated with @InstallIn. Annotation processor cannot detect metadata files
       // generated in the same round and the metadata is accessible in the next round.
-      if (elementsByAnnotation.containsKey(InstallIn.class)
-          || elementsByAnnotation.containsKey(IncludeInDialerRoot.class)) {
+      if (shouldDeferRootComponent(elementsByAnnotation)) {
         return elementsByAnnotation.get(DialerRootComponent.class);
       } else {
         generateRootComponent(MoreElements.asType(element));
       }
     }
     return Collections.emptySet();
+  }
+
+  private boolean shouldDeferRootComponent(
+      SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
+    return elementsByAnnotation.containsKey(InstallIn.class)
+        || elementsByAnnotation.containsKey(IncludeInDialerRoot.class);
   }
 
   /**

@@ -47,7 +47,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.duo.DuoConstants;
+import com.android.dialer.duo.Duo;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.storage.Unencrypted;
@@ -78,6 +78,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   private final MarkDirtyObserver markDirtyObserver;
   private final SharedPreferences sharedPreferences;
   private final AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper;
+  private final Duo duo;
 
   @Nullable private Long lastTimestampProcessed;
 
@@ -87,12 +88,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       MarkDirtyObserver markDirtyObserver,
       @Unencrypted SharedPreferences sharedPreferences,
-      AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper) {
+      AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper,
+      Duo duo) {
     this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.markDirtyObserver = markDirtyObserver;
     this.sharedPreferences = sharedPreferences;
     this.annotatedCallLogDatabaseHelper = annotatedCallLogDatabaseHelper;
+    this.duo = duo;
   }
 
   @Override
@@ -384,18 +387,15 @@ public class SystemCallLogDataSource implements CallLogDataSource {
    * <p>Characteristics of a Duo audio call are as follows.
    *
    * <ul>
-   *   <li>The phone account component name is {@link DuoConstants#PHONE_ACCOUNT_COMPONENT_NAME};
-   *       and
+   *   <li>The phone account is {@link Duo#isDuoAccount(String)}; and
    *   <li>The features don't include {@link Calls#FEATURES_VIDEO}.
    * </ul>
    *
    * <p>It is the caller's responsibility to ensure the phone account component name and the
    * features come from the same call log entry.
    */
-  private static boolean isDuoAudioCall(@Nullable String phoneAccountComponentName, int features) {
-    return DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
-            .flattenToString()
-            .equals(phoneAccountComponentName)
+  private boolean isDuoAudioCall(@Nullable String phoneAccountComponentName, int features) {
+    return duo.isDuoAccount(phoneAccountComponentName)
         && ((features & Calls.FEATURES_VIDEO) != Calls.FEATURES_VIDEO);
   }
 

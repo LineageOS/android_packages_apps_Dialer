@@ -80,7 +80,7 @@ import java.util.List;
 public class SpeedDialFragment extends Fragment {
 
   private final SpeedDialHeaderListener headerListener = new SpeedDialFragmentHeaderListener();
-  private final SuggestedContactsListener suggestedListener = new SpeedDialSuggestedListener();
+  private final SpeedDialSuggestedListener suggestedListener = new SpeedDialSuggestedListener();
 
   private ContextMenu contextMenu;
   private FrameLayout contextMenuBackground;
@@ -129,9 +129,7 @@ public class SpeedDialFragment extends Fragment {
             contextMenu,
             contextMenuBackground,
             new SpeedDialContextMenuItemListener(
-                getActivity(),
-                new UpdateSpeedDialAdapterListener(),
-                speedDialLoaderListener),
+                getActivity(), new UpdateSpeedDialAdapterListener(), speedDialLoaderListener),
             layoutManager);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
@@ -214,6 +212,7 @@ public class SpeedDialFragment extends Fragment {
                 }),
         new DefaultFutureCallback<>(),
         DialerExecutorComponent.get(getContext()).backgroundExecutor());
+    suggestedListener.onPause();
   }
 
   @Override
@@ -277,7 +276,8 @@ public class SpeedDialFragment extends Fragment {
       if (channel.technology() == Channel.DUO) {
         Logger.get(activity)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-        Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, channel.number());
+        Intent intent =
+            DuoComponent.get(activity).getDuo().getCallIntent(channel.number()).orNull();
         activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
         return;
       }
@@ -312,6 +312,8 @@ public class SpeedDialFragment extends Fragment {
   }
 
   private final class SpeedDialSuggestedListener implements SuggestedContactsListener {
+
+    private HistoryItemActionBottomSheet bottomSheet;
 
     @Override
     public void onOverFlowMenuClicked(
@@ -350,7 +352,7 @@ public class SpeedDialFragment extends Fragment {
 
       modules.add(new DividerModule());
 
-      // TODO(calderwoodra): add to favorites module
+      modules.add(new StarContactModule(speedDialUiItem));
       // TODO(calderwoodra): remove from strequent module
 
       // Contact info module
@@ -364,7 +366,7 @@ public class SpeedDialFragment extends Fragment {
               R.string.contact_menu_contact_info,
               R.drawable.context_menu_contact_icon));
 
-      HistoryItemActionBottomSheet.show(getContext(), headerInfo, modules);
+      bottomSheet = HistoryItemActionBottomSheet.show(getContext(), headerInfo, modules);
     }
 
     @Override
@@ -374,7 +376,7 @@ public class SpeedDialFragment extends Fragment {
             .logImpression(
                 DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_SUGGESTED_CONTACT);
         Intent intent =
-            DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+            DuoComponent.get(getContext()).getDuo().getCallIntent(channel.number()).orNull();
         getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
         return;
       }
@@ -382,6 +384,41 @@ public class SpeedDialFragment extends Fragment {
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
               .setIsVideoCall(channel.isVideoTechnology()));
+    }
+
+    private final class StarContactModule implements HistoryItemActionModule {
+
+      private final SpeedDialUiItem speedDialUiItem;
+
+      StarContactModule(SpeedDialUiItem speedDialUiItem) {
+        this.speedDialUiItem = speedDialUiItem;
+      }
+
+      @Override
+      public int getStringId() {
+        return R.string.suggested_contact_bottom_sheet_add_favorite_option;
+      }
+
+      @Override
+      public int getDrawableId() {
+        return R.drawable.quantum_ic_star_vd_theme_24;
+      }
+
+      @Override
+      public boolean onClick() {
+        speedDialLoaderListener.listen(
+            getContext(),
+            UiItemLoaderComponent.get(getContext())
+                .speedDialUiItemMutator()
+                .starContact(
+                    Uri.withAppendedPath(
+                        Phone.CONTENT_FILTER_URI, speedDialUiItem.defaultChannel().number())),
+            SpeedDialFragment.this::onSpeedDialUiItemListLoaded,
+            throwable -> {
+              throw new RuntimeException(throwable);
+            });
+        return true;
+      }
     }
 
     private final class ContactInfoModule extends IntentModule {
@@ -393,6 +430,12 @@ public class SpeedDialFragment extends Fragment {
       @Override
       public boolean tintDrawable() {
         return false;
+      }
+    }
+
+    public void onPause() {
+      if (bottomSheet != null && bottomSheet.isShowing()) {
+        bottomSheet.dismiss();
       }
     }
   }
@@ -417,7 +460,8 @@ public class SpeedDialFragment extends Fragment {
       if (channel.technology() == Channel.DUO) {
         Logger.get(activity)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-        Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, channel.number());
+        Intent intent =
+            DuoComponent.get(activity).getDuo().getCallIntent(channel.number()).orNull();
         activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
         return;
       }

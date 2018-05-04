@@ -14,25 +14,24 @@
  * limitations under the License
  */
 
-package com.android.incallui.rtt.impl;
+package com.android.incallui.rtt.protocol;
 
 import android.support.annotation.NonNull;
 import com.android.dialer.common.Assert;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
-import com.android.incallui.rtt.protocol.Constants;
 import com.google.common.base.Splitter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /** Message class that holds one RTT chat content. */
-final class RttChatMessage {
+public final class RttChatMessage {
 
   private static final Splitter SPLITTER = Splitter.on(Constants.BUBBLE_BREAKER);
 
-  boolean isRemote;
-  long timstamp;
+  public boolean isRemote;
+  private long timstamp;
   private final StringBuilder content = new StringBuilder();
   private boolean isFinished;
 
@@ -44,7 +43,7 @@ final class RttChatMessage {
     isFinished = true;
   }
 
-  void unfinish() {
+  public void unfinish() {
     isFinished = false;
   }
 
@@ -74,7 +73,7 @@ final class RttChatMessage {
    *
    * <p>"hello world" -> "hello new world" : "\b\b\b\b\bnew world"
    */
-  static String computeChangedString(String oldMessage, String newMesssage) {
+  public static String computeChangedString(String oldMessage, String newMesssage) {
     StringBuilder modify = new StringBuilder();
     int indexChangeStart = 0;
     while (indexChangeStart < oldMessage.length()
@@ -91,8 +90,21 @@ final class RttChatMessage {
     return modify.toString();
   }
 
+  public static RttTranscript getRttTranscriptWithNewRemoteMessage(
+      RttTranscript rttTranscript, @NonNull String text) {
+    List<RttChatMessage> messageList = fromTranscript(rttTranscript);
+    updateRemoteRttChatMessage(messageList, text);
+    return RttTranscript.newBuilder()
+        .setId(rttTranscript.getId())
+        .setNumber(rttTranscript.getNumber())
+        .setTimestamp(rttTranscript.getTimestamp())
+        .addAllMessages(toTranscriptMessageList(messageList))
+        .build();
+  }
+
   /** Update list of {@code RttChatMessage} based on given remote text. */
-  static void updateRemoteRttChatMessage(List<RttChatMessage> messageList, @NonNull String text) {
+  public static void updateRemoteRttChatMessage(
+      List<RttChatMessage> messageList, @NonNull String text) {
     Assert.isNotNull(messageList);
     Iterator<String> splitText = SPLITTER.split(text).iterator();
 
@@ -163,7 +175,7 @@ final class RttChatMessage {
     return i;
   }
 
-  static int getLastIndexRemoteMessage(List<RttChatMessage> messageList) {
+  public static int getLastIndexRemoteMessage(List<RttChatMessage> messageList) {
     int i = messageList.size() - 1;
     while (i >= 0 && !messageList.get(i).isRemote) {
       i--;
@@ -171,7 +183,7 @@ final class RttChatMessage {
     return i;
   }
 
-  static int getLastIndexLocalMessage(List<RttChatMessage> messageList) {
+  public static int getLastIndexLocalMessage(List<RttChatMessage> messageList) {
     int i = messageList.size() - 1;
     while (i >= 0 && messageList.get(i).isRemote) {
       i--;
@@ -179,7 +191,8 @@ final class RttChatMessage {
     return i;
   }
 
-  static List<RttTranscriptMessage> toTranscriptMessageList(List<RttChatMessage> messageList) {
+  public static List<RttTranscriptMessage> toTranscriptMessageList(
+      List<RttChatMessage> messageList) {
     List<RttTranscriptMessage> transcriptMessageList = new ArrayList<>();
     for (RttChatMessage message : messageList) {
       transcriptMessageList.add(
@@ -193,7 +206,7 @@ final class RttChatMessage {
     return transcriptMessageList;
   }
 
-  static List<RttChatMessage> fromTranscript(RttTranscript rttTranscript) {
+  public static List<RttChatMessage> fromTranscript(RttTranscript rttTranscript) {
     List<RttChatMessage> messageList = new ArrayList<>();
     if (rttTranscript == null) {
       return messageList;
@@ -211,7 +224,7 @@ final class RttChatMessage {
     return messageList;
   }
 
-  RttChatMessage() {
+  public RttChatMessage() {
     timstamp = System.currentTimeMillis();
   }
 }

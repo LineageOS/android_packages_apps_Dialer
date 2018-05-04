@@ -33,6 +33,7 @@ import com.android.dialer.metrics.StubMetricsModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
 import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
 import com.android.dialer.precall.impl.PreCallModule;
+import com.android.dialer.preferredsim.PreferredSimModule;
 import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.simulator.stub.StubSimulatorEnrichedCallModule;
@@ -60,6 +61,7 @@ import javax.inject.Singleton;
     PhoneLookupModule.class,
     PhoneNumberGeoUtilModule.class,
     PreCallModule.class,
+    PreferredSimModule.class,
     SharedPrefConfigProviderModule.class,
     SimulatorModule.class,
     StubSimulatorEnrichedCallModule.class,

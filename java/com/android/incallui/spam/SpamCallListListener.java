@@ -219,7 +219,7 @@ public class SpamCallListListener implements CallList.Listener {
       return false;
     }
 
-    if (logState.duration <= 0) {
+    if (logState.telecomDurationMillis <= 0) {
       return false;
     }
 

@@ -14,18 +14,16 @@
  * limitations under the License
  */
 
-package com.android.dialer.inject;
+package com.android.dialer.preferredsim;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+import com.android.dialer.preferredsim.impl.PreferredAccountWorkerImpl;
+import dagger.Binds;
+import dagger.Module;
 
-/**
- * Only used by rootcomponent generator to store metadata for locating annotated class with {@link
- * IncludeInDialerRoot}, {@link InstallIn}.
- */
-@Target(ElementType.TYPE)
-public @interface RootComponentGeneratorMetadata {
-  String tag();
+/** Module for preferred SIM */
+@Module
+public abstract class PreferredSimModule {
 
-  Class<?> annotatedClass();
+  @Binds
+  public abstract PreferredAccountWorker to(PreferredAccountWorkerImpl impl);
 }

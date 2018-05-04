@@ -43,6 +43,9 @@
   <!-- Set Bluetooth device -->
   <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
+  <!-- Set audio selector window type TYPE_APPLICATION_OVERLAY -->
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
   <!-- Set android:taskAffinity="com.android.incallui" for all activities to ensure proper
   navigation. Otherwise system could bring up DialtactsActivity instead, e.g. when user unmerge a
   call.
