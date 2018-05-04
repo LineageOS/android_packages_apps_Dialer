@@ -221,6 +221,17 @@ public class AnnotatedCallLogContract {
      * <p>TYPE: TEXT
      */
     public static final String VOICEMAIL_URI = "voicemail_uri";
+
+    /**
+     * An unique id to associate this call log row to a {@link android.telecom.Call}.
+     *
+     * <p>For pre-Q device, this is same as {@link TIMESTAMP}.
+     *
+     * <p>For Q+ device, this will be copied from {@link android.provider.CallLog.Calls}.
+     *
+     * <p>Type: TEXT
+     */
+    public static final String CALL_MAPPING_ID = "call_mapping_id";
   }
 
   /**

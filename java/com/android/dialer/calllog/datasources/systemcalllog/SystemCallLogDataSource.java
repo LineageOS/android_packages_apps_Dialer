@@ -370,6 +370,9 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
         contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
         contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
+
+        contentValues.put(AnnotatedCallLog.CALL_MAPPING_ID, String.valueOf(date));
+
         setTranscriptionState(cursor, contentValues);
 
         if (existingAnnotatedCallLogIds.contains(id)) {

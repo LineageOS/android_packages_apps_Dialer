@@ -26,17 +26,5 @@
       android:clipToPadding="false"
       android:background="@color/background_dialer_light"
       android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"/>
-
-  <FrameLayout
-      android:id="@+id/context_menu_background"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:visibility="invisible"/>
-
-  <!-- This menu is visible when you long click on a favorite contact. -->
-  <include
-      android:id="@+id/favorite_contact_context_menu"
-      layout="@layout/context_menu_layout"
-      android:visibility="invisible"/>
 </FrameLayout>
 

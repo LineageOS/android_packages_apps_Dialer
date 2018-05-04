@@ -465,7 +465,7 @@ public class RttChatFragment extends Fragment
       submitButton.setVisibility(View.VISIBLE);
       editText.setFocusableInTouchMode(true);
       if (editText.requestFocus()) {
-        UiUtil.openKeyboardFrom(getContext(), editText);
+        UiUtil.showKeyboardFrom(getContext(), editText);
       }
       adapter.showAdvisory();
     }
