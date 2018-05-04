@@ -32,6 +32,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.logging.DialerImpression;
@@ -41,10 +42,14 @@ import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
+import com.android.dialer.spam.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.videotech.utils.SessionModificationState;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -146,46 +151,53 @@ public class CallList implements DialerCallDelegate {
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
     if (SpamComponent.get(context).spamSettings().isSpamEnabled()) {
       String number = TelecomCallUtil.getNumber(telecomCall);
-      SpamComponent.get(context)
-          .spam()
-          .checkSpamStatus(
-              number,
-              call.getCountryIso(),
-              new Spam.Listener() {
-                @Override
-                public void onComplete(boolean isSpam) {
-                  boolean isIncomingCall =
-                      call.getState() == DialerCallState.INCOMING
-                          || call.getState() == DialerCallState.CALL_WAITING;
-                  if (isSpam) {
-                    if (!isIncomingCall) {
-                      LogUtil.i(
-                          "CallList.onCallAdded",
-                          "marking spam call as not spam because it's not an incoming call");
-                      isSpam = false;
-                    } else if (isPotentialEmergencyCallback(context, call)) {
-                      LogUtil.i(
-                          "CallList.onCallAdded",
-                          "marking spam call as not spam because an emergency call was made on this"
-                              + " device recently");
-                      isSpam = false;
-                    }
-                  }
+      ListenableFuture<SpamStatus> futureSpamStatus =
+          SpamComponent.get(context).spam().checkSpamStatus(number, call.getCountryIso());
 
-                  if (isIncomingCall) {
-                    Logger.get(context)
-                        .logCallImpression(
-                            isSpam
-                                ? DialerImpression.Type.INCOMING_SPAM_CALL
-                                : DialerImpression.Type.INCOMING_NON_SPAM_CALL,
-                            call.getUniqueCallId(),
-                            call.getTimeAddedMs());
-                  }
-                  call.setSpam(isSpam);
-                  onUpdateCall(call);
-                  notifyGenericListeners();
+      Futures.addCallback(
+          futureSpamStatus,
+          new FutureCallback<SpamStatus>() {
+            @Override
+            public void onSuccess(@Nullable SpamStatus result) {
+              boolean isIncomingCall =
+                  call.getState() == DialerCallState.INCOMING
+                      || call.getState() == DialerCallState.CALL_WAITING;
+              boolean isSpam = result.isSpam();
+              if (isSpam) {
+                if (!isIncomingCall) {
+                  LogUtil.i(
+                      "CallList.onCallAdded",
+                      "marking spam call as not spam because it's not an incoming call");
+                  isSpam = false;
+                } else if (isPotentialEmergencyCallback(context, call)) {
+                  LogUtil.i(
+                      "CallList.onCallAdded",
+                      "marking spam call as not spam because an emergency call was made on this"
+                          + " device recently");
+                  isSpam = false;
                 }
-              });
+              }
+
+              if (isIncomingCall) {
+                Logger.get(context)
+                    .logCallImpression(
+                        isSpam
+                            ? DialerImpression.Type.INCOMING_SPAM_CALL
+                            : DialerImpression.Type.INCOMING_NON_SPAM_CALL,
+                        call.getUniqueCallId(),
+                        call.getTimeAddedMs());
+              }
+              call.setSpam(isSpam);
+              onUpdateCall(call);
+              notifyGenericListeners();
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+              LogUtil.e("CallList.onFailure", "unable to query spam status", t);
+            }
+          },
+          DialerExecutorComponent.get(context).uiExecutor());
 
       Trace.beginSection("updateUserMarkedSpamStatus");
       updateUserMarkedSpamStatus(call, context, number);
