@@ -782,7 +782,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     callComposeButtonView.setVisibility(isCallComposerCapable ? View.VISIBLE : View.GONE);
 
-    updateBlockReportActions(isVoicemailNumber);
+    updateBlockReportActions(canPlaceCallToNumber, isVoicemailNumber);
   }
 
   private boolean isFullyUndialableVoicemail() {
@@ -1172,14 +1172,15 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     }
   }
 
-  private void updateBlockReportActions(boolean isVoicemailNumber) {
+  private void updateBlockReportActions(boolean canPlaceCallToNumber, boolean isVoicemailNumber) {
     // Set block/spam actions.
     blockReportView.setVisibility(View.GONE);
     blockView.setVisibility(View.GONE);
     unblockView.setVisibility(View.GONE);
     reportNotSpamView.setVisibility(View.GONE);
     String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-    if (isVoicemailNumber
+    if (!canPlaceCallToNumber
+        || isVoicemailNumber
         || !FilteredNumbersUtil.canBlockNumber(context, e164Number, number)
         || !FilteredNumberCompat.canAttemptBlockOperations(context)) {
       return;
@@ -1260,7 +1261,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
     boolean isVoicemailNumber = callLogCache.isVoicemailNumber(accountHandle, number);
-    if (!isVoicemailNumber
+    boolean canPlaceCallToNumber = PhoneNumberHelper.canPlaceCallsTo(number, numberPresentation);
+    if (canPlaceCallToNumber
+        && !isVoicemailNumber
         && FilteredNumbersUtil.canBlockNumber(context, e164Number, number)
         && FilteredNumberCompat.canAttemptBlockOperations(context)) {
       boolean isBlocked = blockId != null;
