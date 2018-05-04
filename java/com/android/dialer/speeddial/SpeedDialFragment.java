@@ -80,7 +80,7 @@ import java.util.List;
 public class SpeedDialFragment extends Fragment {
 
   private final SpeedDialHeaderListener headerListener = new SpeedDialFragmentHeaderListener();
-  private final SuggestedContactsListener suggestedListener = new SpeedDialSuggestedListener();
+  private final SpeedDialSuggestedListener suggestedListener = new SpeedDialSuggestedListener();
 
   private ContextMenu contextMenu;
   private FrameLayout contextMenuBackground;
@@ -214,6 +214,7 @@ public class SpeedDialFragment extends Fragment {
                 }),
         new DefaultFutureCallback<>(),
         DialerExecutorComponent.get(getContext()).backgroundExecutor());
+    suggestedListener.onPause();
   }
 
   @Override
@@ -313,6 +314,8 @@ public class SpeedDialFragment extends Fragment {
 
   private final class SpeedDialSuggestedListener implements SuggestedContactsListener {
 
+    private HistoryItemActionBottomSheet bottomSheet;
+
     @Override
     public void onOverFlowMenuClicked(
         SpeedDialUiItem speedDialUiItem, HistoryItemBottomSheetHeaderInfo headerInfo) {
@@ -364,7 +367,7 @@ public class SpeedDialFragment extends Fragment {
               R.string.contact_menu_contact_info,
               R.drawable.context_menu_contact_icon));
 
-      HistoryItemActionBottomSheet.show(getContext(), headerInfo, modules);
+      bottomSheet = HistoryItemActionBottomSheet.show(getContext(), headerInfo, modules);
     }
 
     @Override
@@ -428,6 +431,12 @@ public class SpeedDialFragment extends Fragment {
       @Override
       public boolean tintDrawable() {
         return false;
+      }
+    }
+
+    public void onPause() {
+      if (bottomSheet != null && bottomSheet.isShowing()) {
+        bottomSheet.dismiss();
       }
     }
   }
