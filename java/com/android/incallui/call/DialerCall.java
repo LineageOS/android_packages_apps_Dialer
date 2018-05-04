@@ -27,6 +27,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.os.SystemClock;
 import android.os.Trace;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -79,6 +80,7 @@ import com.android.dialer.rtt.RttTranscriptUtil;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
+import com.android.dialer.time.Clock;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
@@ -193,6 +195,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String countryIso;
 
   private volatile boolean feedbackRequested = false;
+
+  private Clock clock = System::currentTimeMillis;
 
   @Nullable private PreferredAccountRecorder preferredAccountRecorder;
   private boolean isCallRemoved;
@@ -413,18 +417,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     parseCallSpecificAppData();
 
     updateEnrichedCallSession();
-  }
-
-  /** Test only constructor to avoid initializing dependencies. */
-  @VisibleForTesting
-  DialerCall(Context context) {
-    this.context = context;
-    telecomCall = null;
-    latencyReport = null;
-    id = null;
-    hiddenId = 0;
-    dialerCallDelegate = null;
-    videoTechManager = null;
   }
 
   private static int translateState(int state) {
@@ -863,21 +855,49 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   public void setState(int state) {
     if (state == DialerCallState.INCOMING) {
       logState.isIncoming = true;
-    } else if (state == DialerCallState.DISCONNECTED) {
+    }
+    updateCallTiming(state);
+
+    this.state = state;
+  }
+
+  private void updateCallTiming(int newState) {
+    if (newState == DialerCallState.ACTIVE) {
+      if (this.state == DialerCallState.ACTIVE) {
+        LogUtil.i("DialerCall.updateCallTiming", "state is already active");
+        return;
+      }
+      logState.dialerConnectTimeMillis = clock.currentTimeMillis();
+      logState.dialerConnectTimeMillisElapsedRealtime = SystemClock.elapsedRealtime();
+    }
+
+    if (newState == DialerCallState.DISCONNECTED) {
       long newDuration =
-          getConnectTimeMillis() == 0 ? 0 : System.currentTimeMillis() - getConnectTimeMillis();
-      if (this.state != state) {
-        logState.duration = newDuration;
-      } else {
+          getConnectTimeMillis() == 0 ? 0 : clock.currentTimeMillis() - getConnectTimeMillis();
+      if (this.state == DialerCallState.DISCONNECTED) {
         LogUtil.i(
             "DialerCall.setState",
             "ignoring state transition from DISCONNECTED to DISCONNECTED."
                 + " Duration would have changed from %s to %s",
-            logState.duration,
+            logState.telecomDurationMillis,
             newDuration);
+        return;
       }
+      logState.telecomDurationMillis = newDuration;
+      logState.dialerDurationMillis =
+          logState.dialerConnectTimeMillis == 0
+              ? 0
+              : clock.currentTimeMillis() - logState.dialerConnectTimeMillis;
+      logState.dialerDurationMillisElapsedRealtime =
+          logState.dialerConnectTimeMillisElapsedRealtime == 0
+              ? 0
+              : SystemClock.elapsedRealtime() - logState.dialerConnectTimeMillisElapsedRealtime;
     }
-    this.state = state;
+  }
+
+  @VisibleForTesting
+  void setClock(Clock clock) {
+    this.clock = clock;
   }
 
   public int getNumberPresentation() {
@@ -1735,8 +1755,24 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     public CallSpecificAppData callSpecificAppData;
     // If this was a conference call, the total number of calls involved in the conference.
     public int conferencedCalls = 0;
-    public long duration = 0;
     public boolean isLogged = false;
+
+    // Result of subtracting android.telecom.Call.Details#getConnectTimeMillis from the current time
+    public long telecomDurationMillis = 0;
+
+    // Result of a call to System.currentTimeMillis when Dialer sees that a call
+    // moves to the ACTIVE state
+    long dialerConnectTimeMillis = 0;
+
+    // Same as dialer_connect_time_millis, using SystemClock.elapsedRealtime
+    // instead
+    long dialerConnectTimeMillisElapsedRealtime = 0;
+
+    // Result of subtracting dialer_connect_time_millis from System.currentTimeMillis
+    public long dialerDurationMillis = 0;
+
+    // Same as dialerDurationMillis, using SystemClock.elapsedRealtime instead
+    public long dialerDurationMillisElapsedRealtime = 0;
 
     private static String lookupToString(ContactLookupResult.Type lookupType) {
       switch (lookupType) {
@@ -1806,7 +1842,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
           isIncoming,
           lookupToString(contactLookupResult),
           initiationToString(callSpecificAppData),
-          duration);
+          telecomDurationMillis);
     }
   }
 

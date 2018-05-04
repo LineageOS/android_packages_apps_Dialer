@@ -16,6 +16,7 @@
 
 package com.android.dialer.app.calllog;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -27,6 +28,7 @@ import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import java.util.Objects;
@@ -55,10 +57,13 @@ public class CallLogGroupBuilder {
   public static final int DAY_GROUP_OTHER = 2;
   /** Instance of the time object used for time calculations. */
   private static final Time TIME = new Time();
+
+  private final Context appContext;
   /** The object on which the groups are created. */
   private final GroupCreator groupCreator;
 
-  public CallLogGroupBuilder(GroupCreator groupCreator) {
+  public CallLogGroupBuilder(@ApplicationContext Context appContext, GroupCreator groupCreator) {
+    this.appContext = appContext;
     this.groupCreator = groupCreator;
   }
 
@@ -97,7 +102,7 @@ public class CallLogGroupBuilder {
     int groupFeatures = cursor.getInt(CallLogQuery.FEATURES);
     int groupCallbackAction =
         CallbackActionHelper.getCallbackAction(
-            groupNumber, groupFeatures, groupAccountComponentName);
+            appContext, groupNumber, groupFeatures, groupAccountComponentName);
     groupCreator.setCallbackAction(firstRowId, groupCallbackAction);
 
     // Instantiate other group values to those of the first call in the cursor.
@@ -126,7 +131,8 @@ public class CallLogGroupBuilder {
       accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
       accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
       callbackAction =
-          CallbackActionHelper.getCallbackAction(number, callFeatures, accountComponentName);
+          CallbackActionHelper.getCallbackAction(
+              appContext, number, callFeatures, accountComponentName);
 
       final boolean isSameNumber = equalNumbers(groupNumber, number);
       final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);

@@ -129,9 +129,7 @@ public class SpeedDialFragment extends Fragment {
             contextMenu,
             contextMenuBackground,
             new SpeedDialContextMenuItemListener(
-                getActivity(),
-                new UpdateSpeedDialAdapterListener(),
-                speedDialLoaderListener),
+                getActivity(), new UpdateSpeedDialAdapterListener(), speedDialLoaderListener),
             layoutManager);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
@@ -278,7 +276,8 @@ public class SpeedDialFragment extends Fragment {
       if (channel.technology() == Channel.DUO) {
         Logger.get(activity)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-        Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, channel.number());
+        Intent intent =
+            DuoComponent.get(activity).getDuo().getCallIntent(channel.number()).orNull();
         activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
         return;
       }
@@ -377,7 +376,7 @@ public class SpeedDialFragment extends Fragment {
             .logImpression(
                 DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_SUGGESTED_CONTACT);
         Intent intent =
-            DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+            DuoComponent.get(getContext()).getDuo().getCallIntent(channel.number()).orNull();
         getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
         return;
       }
@@ -461,7 +460,8 @@ public class SpeedDialFragment extends Fragment {
       if (channel.technology() == Channel.DUO) {
         Logger.get(activity)
             .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-        Intent intent = DuoComponent.get(activity).getDuo().getIntent(activity, channel.number());
+        Intent intent =
+            DuoComponent.get(activity).getDuo().getCallIntent(channel.number()).orNull();
         activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
         return;
       }

@@ -81,12 +81,46 @@ public class DuoStub implements Duo {
   @Override
   public void reloadReachability(@NonNull Context context) {}
 
+  @Override
+  public Optional<PhoneAccountHandle> getPhoneAccountHandle() {
+    return Optional.absent();
+  }
+
+  @Override
+  public boolean isDuoAccount(PhoneAccountHandle phoneAccountHandle) {
+    return false;
+  }
+
+  @Override
+  public boolean isDuoAccount(String componentName) {
+    return false;
+  }
+
   @MainThread
   @Override
-  public Intent getIntent(@NonNull Context context, @NonNull String number) {
+  public Optional<Intent> getCallIntent(@NonNull String number) {
     Assert.isMainThread();
-    Assert.isNotNull(context);
     Assert.isNotNull(number);
+    return Optional.absent();
+  }
+
+  @Override
+  public Optional<Intent> getActivateIntent() {
+    return Optional.absent();
+  }
+
+  @Override
+  public Optional<Intent> getInviteIntent(String number) {
+    return Optional.absent();
+  }
+
+  @Override
+  public Optional<IntentType> getIntentType(Intent intent) {
+    return Optional.absent();
+  }
+
+  @Override
+  public Optional<Intent> getInstallDuoIntent() {
     return null;
   }
 
