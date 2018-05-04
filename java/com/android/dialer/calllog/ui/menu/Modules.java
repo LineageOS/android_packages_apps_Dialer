@@ -19,8 +19,6 @@ package com.android.dialer.calllog.ui.menu;
 import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.v4.os.BuildCompat;
-import android.telecom.PhoneAccount;
-import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.calldetails.CallDetailsActivity;
@@ -41,7 +39,6 @@ import com.android.dialer.historyitemactions.IntentModule;
 import com.android.dialer.historyitemactions.SharedModules;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
@@ -134,23 +131,16 @@ final class Modules {
             .flattenToString()
             .equals(row.getPhoneAccountComponentName());
 
-    // Obtain a PhoneAccountHandle that will be used to start carrier voice/video calls.
-    // If the row is for a Duo call, we should use the default phone account as the one included in
-    // the row is for Duo only.
-    PhoneAccountHandle phoneAccountHandle =
-        isDuoCall
-            ? TelecomUtil.getDefaultOutgoingPhoneAccount(context, PhoneAccount.SCHEME_TEL)
-            : TelecomUtil.composePhoneAccountHandle(
-                row.getPhoneAccountComponentName(), row.getPhoneAccountId());
-
     List<HistoryItemActionModule> modules = new ArrayList<>();
 
     // Add an audio call item
     // TODO(zachh): Support post-dial digits; consider using DialerPhoneNumber.
     CallIntentBuilder callIntentBuilder =
         new CallIntentBuilder(normalizedNumber, CallInitiationType.Type.CALL_LOG)
-            .setPhoneAccountHandle(phoneAccountHandle)
             .setAllowAssistedDial(canSupportAssistedDialing(row));
+    // Leave PhoneAccountHandle blank so regular PreCall logic will be used. The account the call
+    // was made/received in should be ignored for audio and carrier video calls.
+    // TODO(a bug): figure out the correct video call behavior
     modules.add(IntentModule.newCallModule(context, callIntentBuilder));
 
     // If the call log entry is for a spam call, nothing more to be done.
