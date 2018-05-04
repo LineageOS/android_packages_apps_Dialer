@@ -30,7 +30,6 @@ import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.duo.DuoConstants;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.historyitemactions.DividerModule;
 import com.android.dialer.historyitemactions.DuoCallModule;
@@ -127,9 +126,7 @@ final class Modules {
     }
 
     boolean isDuoCall =
-        DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
-            .flattenToString()
-            .equals(row.getPhoneAccountComponentName());
+        DuoComponent.get(context).getDuo().isDuoAccount(row.getPhoneAccountComponentName());
 
     List<HistoryItemActionModule> modules = new ArrayList<>();
 

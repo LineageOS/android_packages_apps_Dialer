@@ -72,6 +72,6 @@ public final class PlaceDuoCallReceiver extends BroadcastReceiver {
 
     Duo duo = DuoComponent.get(context).getDuo();
     activity.startActivityForResult(
-        duo.getIntent(context, phoneNumber), ActivityRequestCodes.DIALTACTS_DUO);
+        duo.getCallIntent(phoneNumber).orNull(), ActivityRequestCodes.DIALTACTS_DUO);
   }
 }

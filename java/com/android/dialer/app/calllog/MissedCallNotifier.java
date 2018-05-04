@@ -52,7 +52,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.duo.DuoConstants;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.FuzzyPhoneNumberMatcher;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
@@ -275,7 +275,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       if (phoneAccount == null) {
         continue;
       }
-      if (DuoConstants.PHONE_ACCOUNT_HANDLE.equals(phoneAccountHandle)) {
+      if (DuoComponent.get(context).getDuo().isDuoAccount(phoneAccountHandle)) {
         iterator.remove();
         continue;
       }
