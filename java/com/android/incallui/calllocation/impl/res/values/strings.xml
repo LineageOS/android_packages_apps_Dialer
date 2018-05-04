@@ -24,7 +24,7 @@
   <!-- Label for the address and map shown during emergency calls. [CHAR LIMIT=40] -->
   <string name="location_title">Tell emergency services where you are</string>
 
-  <string name="lat_long_format"><xliff:g id="latitude">%f</xliff:g>, <xliff:g id="longitude">%f</xliff:g></string>
+  <string name="lat_long_format"><xliff:g id="latitude">%1$f</xliff:g>, <xliff:g id="longitude">%2$f</xliff:g></string>
 
   <!-- Progress indicator loading text. [CHAR LIMIT=20] -->
   <string name="location_loading">Finding your location&#8230;</string>
