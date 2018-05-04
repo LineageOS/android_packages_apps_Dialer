@@ -19,7 +19,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:minHeight="@dimen/dialer_list_item_min_height">
+    android:minHeight="48dp">
 
   <TextView
       android:id="@+id/speed_dial_header_text"
@@ -36,7 +36,9 @@
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:minHeight="@dimen/dialer_touch_target_min_size"
-      android:minWidth="@dimen/dialer_button_min_width"
+      android:minWidth="48dp"
+      android:paddingStart="8dp"
+      android:paddingEnd="8dp"
       android:text="@string/speed_dial_add_button_text"
       android:textColor="@color/dialer_theme_color"
       style="@style/Widget.AppCompat.Button.Borderless"/>
