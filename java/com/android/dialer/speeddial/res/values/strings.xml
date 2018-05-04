@@ -18,8 +18,9 @@
   <!-- header for a list of contacts that are the users favorites. [CHAR LIMIT=30] -->
   <string name="favorites_header">Favorites</string>
 
-  <!-- header for a list of contacts that are suggestions for the user to place calls to. [CHAR LIMIT=30] -->
-  <string name="suggestions_header">Suggestions</string>
+  <!-- header for a list of contacts that are suggestions for the user to place calls to based on
+    their frequently contacted contacts. [CHAR LIMIT=30] -->
+  <string name="suggestions_header">Frequents</string>
 
   <!-- text for a button that prompts the user to add a contact to their favorites. [CHAR LIMIT=12] -->
   <string name="speed_dial_add_button_text">Add</string>
@@ -28,9 +29,9 @@
     If the user checks this box, we will remember their selection and never ask for it again. [CHAR LIMIT=NONE]-->
   <string name="speed_dial_remember_this_choice">Remember this choice</string>
 
-  <!-- Title of a dialog asking the user to choose their favorite mode of communication for a
+  <!-- Title of a dialog asking the user to choose their the mode/type of communication for a
     specific contact where communication modes are video calling and voice calling. [CHAR LIMIT=NONE]-->
-  <string name="speed_dial_disambig_dialog_title">Choose a Favorite mode</string>
+  <string name="speed_dial_disambig_dialog_title">Choose call type</string>
 
   <!-- Text for a button that places a video call [CHAR LIMIT=15]-->
   <string name="disambig_option_video_call">Video call</string>
