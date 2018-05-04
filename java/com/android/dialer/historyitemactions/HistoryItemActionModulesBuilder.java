@@ -30,6 +30,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.UriUtils;
 import java.util.ArrayList;
@@ -118,6 +119,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>This method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked, or
    *   <li>the number is marked as spam.
@@ -138,7 +140,10 @@ public final class HistoryItemActionModulesBuilder {
    * capability, and Duo is available, add a Duo video call module.
    */
   public HistoryItemActionModulesBuilder addModuleForVideoCall() {
-    if (moduleInfo.getIsVoicemailCall() || moduleInfo.getIsBlocked() || moduleInfo.getIsSpam()) {
+    if (isEmergencyNumber()
+        || moduleInfo.getIsVoicemailCall()
+        || moduleInfo.getIsBlocked()
+        || moduleInfo.getIsSpam()) {
       return this;
     }
 
@@ -178,6 +183,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked, or
    *   <li>the number is empty.
@@ -186,7 +192,8 @@ public final class HistoryItemActionModulesBuilder {
   public HistoryItemActionModulesBuilder addModuleForSendingTextMessage() {
     // TODO(zachh): There are other conditions where this module should not be shown
     // (e.g., business numbers).
-    if (moduleInfo.getIsVoicemailCall()
+    if (isEmergencyNumber()
+        || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
       return this;
@@ -217,6 +224,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked,
    *   <li>the number is marked as spam,
@@ -225,7 +233,8 @@ public final class HistoryItemActionModulesBuilder {
    * </ul>
    */
   public HistoryItemActionModulesBuilder addModuleForAddingToContacts() {
-    if (moduleInfo.getIsVoicemailCall()
+    if (isEmergencyNumber()
+        || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || moduleInfo.getIsSpam()
         || isExistingContact()
@@ -253,7 +262,12 @@ public final class HistoryItemActionModulesBuilder {
   /**
    * Add modules for blocking/unblocking a number and/or marking it as spam/not spam.
    *
-   * <p>The method is a no-op if the call is one made to a voicemail box.
+   * <p>The method is a no-op if
+   *
+   * <ul>
+   *   <li>the call is one made to/received from an emergency number, or
+   *   <li>the call is one made to a voicemail box.
+   * </ul>
    *
    * <p>If a number is marked as spam, add two modules:
    *
@@ -267,7 +281,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>If a number is not blocked or marked as spam, add the "Block/Report spam" module.
    */
   public HistoryItemActionModulesBuilder addModuleForBlockedOrSpamNumber() {
-    if (moduleInfo.getIsVoicemailCall()) {
+    if (isEmergencyNumber() || moduleInfo.getIsVoicemailCall()) {
       return this;
     }
 
@@ -385,6 +399,10 @@ public final class HistoryItemActionModulesBuilder {
   private boolean isExistingContact() {
     return !TextUtils.isEmpty(moduleInfo.getLookupUri())
         && !UriUtils.isEncodedContactUri(Uri.parse(moduleInfo.getLookupUri()));
+  }
+
+  private boolean isEmergencyNumber() {
+    return PhoneNumberHelper.isLocalEmergencyNumber(context, moduleInfo.getNormalizedNumber());
   }
 
   /**

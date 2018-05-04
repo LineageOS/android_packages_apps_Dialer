@@ -21,6 +21,7 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
@@ -42,28 +43,35 @@ public final class CallLogEntryText {
    * following the primary text.)
    */
   public static CharSequence buildPrimaryText(Context context, CoalescedRow row) {
-    // Always prefer the presentation name, like "Restricted".
+    // Calls to emergency services should be shown as "Emergency number".
+    if (PhoneNumberHelper.isLocalEmergencyNumber(context, row.getNumber().getNormalizedNumber())) {
+      return context.getText(R.string.emergency_number);
+    }
+
+    // Otherwise, follow the following order of preferences.
+    // 1st preference: the presentation name, like "Restricted".
     Optional<String> presentationName =
         PhoneNumberDisplayUtil.getNameForPresentation(context, row.getNumberPresentation());
     if (presentationName.isPresent()) {
       return presentationName.get();
     }
 
+    // 2nd preference: the voicemail tag if the call is one made to a voicemail box.
     if (row.getIsVoicemailCall() && !TextUtils.isEmpty(row.getVoicemailCallTag())) {
       return row.getVoicemailCallTag();
     }
 
-    // Otherwise prefer the name.
+    // 3rd preference: the name associated with the number.
     if (!TextUtils.isEmpty(row.getNumberAttributes().getName())) {
       return row.getNumberAttributes().getName();
     }
 
-    // Otherwise prefer the formatted number.
+    // 4th preference: the formatted number.
     if (!TextUtils.isEmpty(row.getFormattedNumber())) {
       return row.getFormattedNumber();
     }
 
-    // If there's no formatted number, just return "Unknown".
+    // Last resort: show "Unknown".
     return context.getText(R.string.new_call_log_unknown);
   }
 
@@ -73,6 +81,7 @@ public final class CallLogEntryText {
    * <p>Rules:
    *
    * <ul>
+   *   <li>For emergency numbers: Date
    *   <li>For numbers that are not spam or blocked: $Label(, Duo video|Carrier video)?|$Location •
    *       Date
    *   <li>For blocked non-spam numbers: Blocked • $Label(, Duo video|Carrier video)?|$Location •
@@ -100,6 +109,12 @@ public final class CallLogEntryText {
    */
   public static CharSequence buildSecondaryTextForEntries(
       Context context, Clock clock, CoalescedRow row) {
+    // For emergency numbers, the secondary text should contain only the timestamp.
+    if (PhoneNumberHelper.isLocalEmergencyNumber(context, row.getNumber().getNormalizedNumber())) {
+      return CallLogDates.newCallLogTimestampLabel(
+          context, clock.currentTimeMillis(), row.getTimestamp());
+    }
+
     List<CharSequence> components = new ArrayList<>();
 
     if (row.getNumberAttributes().getIsBlocked()) {
@@ -127,6 +142,8 @@ public final class CallLogEntryText {
   public static CharSequence buildSecondaryTextForBottomSheet(Context context, CoalescedRow row) {
     /*
      * Rules:
+     *   For emergency numbers:
+     *     Number
      *   For numbers that are not spam or blocked:
      *     $Label(, Duo video|Carrier video)?|$Location [• NumberIfNoName]?
      *   For blocked non-spam numbers:
@@ -149,6 +166,14 @@ public final class CallLogEntryText {
      *   Mobile • 555-1234
      *   Brooklyn, NJ
      */
+
+    // For emergency numbers, the secondary text should contain only the number.
+    if (PhoneNumberHelper.isLocalEmergencyNumber(context, row.getNumber().getNormalizedNumber())) {
+      return !row.getFormattedNumber().isEmpty()
+          ? row.getFormattedNumber()
+          : row.getNumber().getNormalizedNumber();
+    }
+
     List<CharSequence> components = new ArrayList<>();
 
     if (row.getNumberAttributes().getIsBlocked()) {
