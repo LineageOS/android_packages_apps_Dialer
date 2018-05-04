@@ -205,7 +205,7 @@ public final class SpeedDialUiItemMutator {
         return loadSpeedDialUiItemsInternal();
       }
       Assert.checkArgument(cursor.moveToFirst(), "Cursor should never be empty");
-      SpeedDialUiItem item = SpeedDialUiItem.fromCursor(cursor);
+      SpeedDialUiItem item = SpeedDialUiItem.fromCursor(appContext.getResources(), cursor);
 
       // Star the contact if it isn't starred already, then return.
       if (!item.isStarred()) {
@@ -410,7 +410,7 @@ public final class SpeedDialUiItemMutator {
                 null)) {
       Map<SpeedDialEntry, SpeedDialUiItem> map = new ArrayMap<>();
       for (cursor.moveToFirst(); !cursor.isAfterLast(); /* Iterate in the loop */ ) {
-        SpeedDialUiItem item = SpeedDialUiItem.fromCursor(cursor);
+        SpeedDialUiItem item = SpeedDialUiItem.fromCursor(appContext.getResources(), cursor);
         for (SpeedDialEntry entry : entries) {
           if (entry.contactId() == item.contactId()) {
             // Update the id and pinned position to match it's corresponding SpeedDialEntry.
@@ -513,7 +513,7 @@ public final class SpeedDialUiItemMutator {
         return contacts;
       }
       for (cursor.moveToFirst(); !cursor.isAfterLast(); /* Iterate in the loop */ ) {
-        contacts.add(SpeedDialUiItem.fromCursor(cursor));
+        contacts.add(SpeedDialUiItem.fromCursor(appContext.getResources(), cursor));
       }
       return contacts;
     }
