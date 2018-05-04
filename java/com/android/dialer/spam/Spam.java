@@ -60,15 +60,6 @@ public interface Spam {
   ListenableFuture<SpamStatus> checkSpamStatus(String number, @Nullable String defaultCountryIso);
 
   /**
-   * Checks if the given number is suspected of being a spam.
-   *
-   * @param number The phone number of the call.
-   * @param countryIso The country ISO of the call.
-   * @param listener The callback to be invoked after {@code Info} is fetched.
-   */
-  void checkSpamStatus(String number, String countryIso, Listener listener);
-
-  /**
    * Called as an indication that the Spam implementation should check whether downloading a spam
    * list needs to occur or not.
    *
