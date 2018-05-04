@@ -68,10 +68,15 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     Assert.checkArgument(speedDialUiItem.isStarred());
 
     nameView.setText(speedDialUiItem.name());
-    if (speedDialUiItem.defaultChannel() != null) {
-      phoneType.setText(speedDialUiItem.defaultChannel().label());
-      videoCallIcon.setVisibility(
-          speedDialUiItem.defaultChannel().isVideoTechnology() ? View.VISIBLE : View.GONE);
+
+    Channel channel = speedDialUiItem.defaultChannel();
+    if (channel == null) {
+      channel = speedDialUiItem.getDefaultVoiceChannel();
+    }
+
+    if (channel != null) {
+      phoneType.setText(channel.label());
+      videoCallIcon.setVisibility(channel.isVideoTechnology() ? View.VISIBLE : View.GONE);
     } else {
       phoneType.setText("");
       videoCallIcon.setVisibility(View.GONE);

@@ -16,6 +16,7 @@
 
 package com.android.dialer.speeddial.loader;
 
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -102,7 +103,7 @@ public abstract class SpeedDialUiItem {
    * <p>If the cursor started at row X, this method will advance to row Y s.t. rows X, X + 1, ... Y
    * - 1 all belong to the same contact (that is, share the same contact id and lookup key).
    */
-  public static SpeedDialUiItem fromCursor(Cursor cursor) {
+  public static SpeedDialUiItem fromCursor(Resources resources, Cursor cursor) {
     Assert.checkArgument(cursor != null);
     Assert.checkArgument(cursor.getCount() != 0);
     String lookupKey = cursor.getString(LOOKUP_KEY);
@@ -125,7 +126,7 @@ public abstract class SpeedDialUiItem {
           Channel.builder()
               .setNumber(cursor.getString(NUMBER))
               .setPhoneType(cursor.getInt(TYPE))
-              .setLabel(TextUtils.isEmpty(cursor.getString(LABEL)) ? "" : cursor.getString(LABEL))
+              .setLabel(getLabel(resources, cursor))
               .setTechnology(Channel.VOICE)
               .build();
       channels.add(channel);
@@ -139,6 +140,17 @@ public abstract class SpeedDialUiItem {
 
     builder.setChannels(ImmutableList.copyOf(channels));
     return builder.build();
+  }
+
+  private static String getLabel(Resources resources, Cursor cursor) {
+    int numberType = cursor.getInt(TYPE);
+    String numberLabel = cursor.getString(LABEL);
+
+    // Returns empty label instead of "custom" if the custom label is empty.
+    if (numberType == Phone.TYPE_CUSTOM && TextUtils.isEmpty(numberLabel)) {
+      return "";
+    }
+    return (String) Phone.getTypeLabel(resources, numberType, numberLabel);
   }
 
   public PhotoInfo getPhotoInfo() {

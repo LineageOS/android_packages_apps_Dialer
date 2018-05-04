@@ -62,6 +62,10 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
   @Override
   public void loadContactPhoto(ImageView imageView, PhotoInfo photoInfo) {
     Assert.isMainThread();
+    imageView.setContentDescription(
+        appContext.getString(
+            com.android.dialer.contactphoto.R.string.description_quick_contact_for,
+            photoInfo.getName()));
     GlideRequest<Drawable> request = buildRequest(GlideApp.with(imageView), photoInfo);
     request.into(imageView);
   }

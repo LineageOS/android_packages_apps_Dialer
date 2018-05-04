@@ -24,8 +24,10 @@ import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.os.BuildCompat;
 import android.telecom.CallAudioState;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +78,14 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     LogUtil.i("AudioRouteSelectorDialogFragment.onCreateDialog", null);
     Dialog dialog = super.onCreateDialog(savedInstanceState);
     dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+    if (Settings.canDrawOverlays(getContext())) {
+      dialog
+          .getWindow()
+          .setType(
+              BuildCompat.isAtLeastO()
+                  ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+                  : WindowManager.LayoutParams.TYPE_PHONE);
+    }
     return dialog;
   }
 
