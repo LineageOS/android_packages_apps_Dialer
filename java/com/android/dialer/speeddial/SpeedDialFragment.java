@@ -32,7 +32,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.FragmentUtils;
@@ -82,11 +81,9 @@ public class SpeedDialFragment extends Fragment {
   private final SpeedDialHeaderListener headerListener = new SpeedDialFragmentHeaderListener();
   private final SpeedDialSuggestedListener suggestedListener = new SpeedDialSuggestedListener();
 
-  private ContextMenu contextMenu;
-  private FrameLayout contextMenuBackground;
-
   private SpeedDialAdapter adapter;
   private SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
+  private SpeedDialFavoritesListener favoritesListener;
 
   /**
    * We update the UI every time the fragment is resumed. This boolean suppresses that functionality
@@ -109,25 +106,13 @@ public class SpeedDialFragment extends Fragment {
         DialerExecutorComponent.get(getContext())
             .createUiListener(getChildFragmentManager(), "speed_dial_loader_listener");
 
-    // Setup favorite contact context menu
-    contextMenu = rootLayout.findViewById(R.id.favorite_contact_context_menu);
-    contextMenuBackground = rootLayout.findViewById(R.id.context_menu_background);
-    contextMenuBackground.setOnClickListener(
-        v -> {
-          contextMenu.hideMenu();
-          contextMenuBackground.setVisibility(View.GONE);
-        });
-
     // Setup our RecyclerView
     SpeedDialLayoutManager layoutManager =
         new SpeedDialLayoutManager(getContext(), 3 /* spanCount */);
-    FavoriteContactsListener favoritesListener =
+    favoritesListener =
         new SpeedDialFavoritesListener(
             getActivity(),
             getChildFragmentManager(),
-            rootLayout,
-            contextMenu,
-            contextMenuBackground,
             new SpeedDialContextMenuItemListener(
                 getActivity(), new UpdateSpeedDialAdapterListener(), speedDialLoaderListener),
             layoutManager);
@@ -198,8 +183,7 @@ public class SpeedDialFragment extends Fragment {
   @Override
   public void onPause() {
     super.onPause();
-    contextMenu.hideMenu();
-    contextMenuBackground.setVisibility(View.GONE);
+    favoritesListener.hideMenu();
     Futures.addCallback(
         DialerExecutorComponent.get(getContext())
             .backgroundExecutor()
@@ -215,15 +199,6 @@ public class SpeedDialFragment extends Fragment {
     suggestedListener.onPause();
   }
 
-  @Override
-  public void onHiddenChanged(boolean hidden) {
-    super.onHiddenChanged(hidden);
-    if (hidden) {
-      contextMenu.hideMenu();
-      contextMenuBackground.setVisibility(View.GONE);
-    }
-  }
-
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
 
     @Override
@@ -237,25 +212,18 @@ public class SpeedDialFragment extends Fragment {
 
     private final FragmentActivity activity;
     private final FragmentManager childFragmentManager;
-    private final View rootLayout;
-    private final ContextMenu contextMenu;
-    private final View contextMenuBackground;
     private final ContextMenuItemListener contextMenuListener;
     private final SpeedDialLayoutManager layoutManager;
+
+    private ContextMenu contextMenu;
 
     SpeedDialFavoritesListener(
         FragmentActivity activity,
         FragmentManager childFragmentManager,
-        View rootLayout,
-        ContextMenu contextMenu,
-        View contextMenuBackground,
         ContextMenuItemListener contextMenuListener,
         SpeedDialLayoutManager layoutManager) {
       this.activity = activity;
       this.childFragmentManager = childFragmentManager;
-      this.rootLayout = rootLayout;
-      this.contextMenu = contextMenu;
-      this.contextMenuBackground = contextMenuBackground;
       this.contextMenuListener = contextMenuListener;
       this.layoutManager = layoutManager;
     }
@@ -291,7 +259,7 @@ public class SpeedDialFragment extends Fragment {
     @Override
     public void showContextMenu(View view, SpeedDialUiItem speedDialUiItem) {
       layoutManager.setScrollEnabled(false);
-      contextMenu.showMenu(rootLayout, view, speedDialUiItem, contextMenuListener);
+      contextMenu = ContextMenu.show(activity, view, contextMenuListener, speedDialUiItem);
     }
 
     @Override
@@ -299,14 +267,15 @@ public class SpeedDialFragment extends Fragment {
       layoutManager.setScrollEnabled(true);
 
       if (closeContextMenu) {
-        contextMenu.hideMenu();
-      } else if (contextMenu.isVisible()) {
-        // If we're showing the context menu, show this background surface so that we can intercept
-        // touch events to close the menu
-        // Note: We call this in onTouchFinished because if we show the background before the user
-        // is done, they might try to drag the view and but won't be able to because this view would
-        // intercept all of the touch events.
-        contextMenuBackground.setVisibility(View.VISIBLE);
+        contextMenu.hide();
+        contextMenu = null;
+      }
+    }
+
+    public void hideMenu() {
+      if (contextMenu != null) {
+        contextMenu.hide();
+        contextMenu = null;
       }
     }
   }
