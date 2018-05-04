@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- ~ Copyright (C) 2017 The Android Open Source Project
+ ~ Copyright (C) 2018 The Android Open Source Project
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -14,15 +14,10 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License
  -->
-<TextView
+<View
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/disambig_header_phone_label"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:minHeight="48dp"
-    android:paddingStart="24dp"
-    android:paddingEnd="24dp"
-    android:textSize="14sp"
-    android:textColor="#757575"
-    style="@style/PrimaryText"/>
+    android:layout_height="1dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="#12000000"/>
