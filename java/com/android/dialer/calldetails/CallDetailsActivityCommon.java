@@ -63,6 +63,7 @@ import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.rtt.RttTranscriptActivity;
 import com.android.dialer.rtt.RttTranscriptUtil;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -327,15 +328,15 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
       Logger.get(getActivity())
           .logImpression(DialerImpression.Type.CALL_DETAILS_LIGHTBRINGER_CALL_BACK);
       Duo duo = DuoComponent.get(getActivity()).getDuo();
-      if (!duo.isReachable(getActivity(), phoneNumber)) {
+      Optional<Intent> intentOptional = duo.getCallIntent(phoneNumber);
+      if (!duo.isReachable(getActivity(), phoneNumber) || !intentOptional.isPresent()) {
         placeImsVideoCall(phoneNumber);
         return;
       }
 
       try {
         getActivity()
-            .startActivityForResult(
-                duo.getIntent(getActivity(), phoneNumber), ActivityRequestCodes.DIALTACTS_DUO);
+            .startActivityForResult(intentOptional.get(), ActivityRequestCodes.DIALTACTS_DUO);
       } catch (ActivityNotFoundException e) {
         Toast.makeText(getActivity(), R.string.activity_not_available, Toast.LENGTH_SHORT).show();
       }

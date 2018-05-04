@@ -30,6 +30,7 @@ import com.google.common.base.Optional;
 import java.util.List;
 
 /** Interface for Duo video call integration. */
+@SuppressWarnings("Guava")
 public interface Duo {
 
   /** @return true if the Duo integration is enabled on this device. */
@@ -70,11 +71,44 @@ public interface Duo {
   void reloadReachability(@NonNull Context context);
 
   /**
+   * Get the {@link PhoneAccountHandle} used by duo calls in the connection service and call log.
+   */
+  Optional<PhoneAccountHandle> getPhoneAccountHandle();
+
+  boolean isDuoAccount(PhoneAccountHandle phoneAccountHandle);
+
+  boolean isDuoAccount(String componentName);
+
+  /**
    * @return an Intent to start a Duo video call with the parameter number. Must be started using
    *     startActivityForResult.
    */
   @MainThread
-  Intent getIntent(@NonNull Context context, @NonNull String number);
+  Optional<Intent> getCallIntent(@NonNull String number);
+
+  /** @return an Intent to setup duo. Must be started using startActivityForResult. */
+  Optional<Intent> getActivateIntent();
+
+  /**
+   * @return an Intent to invite the parameter number to use duo. Must be started using
+   *     startActivityForResult.
+   */
+  Optional<Intent> getInviteIntent(String number);
+
+  /** Return value of {@link #getIntentType(Intent)} */
+  enum IntentType {
+    /** The intent is returned by {@link #getCallIntent(String)} */
+    CALL,
+    /** The intent is returned by {@link #getActivateIntent()} */
+    ACTIVATE,
+    /** The intent is returned by {@link #getInviteIntent(String)} */
+    INVITE
+  }
+
+  /** Classifies a Duo intent. Absent if the intent is not a Duo intent. */
+  Optional<IntentType> getIntentType(Intent intent);
+
+  Optional<Intent> getInstallDuoIntent();
 
   /** Requests upgrading the parameter ongoing call to a Duo video call. */
   @MainThread

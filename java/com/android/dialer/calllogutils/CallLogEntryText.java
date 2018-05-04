@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
-import com.android.dialer.duo.DuoConstants;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
@@ -202,9 +202,7 @@ public final class CallLogEntryText {
       }
 
       boolean isDuoCall =
-          DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
-              .flattenToString()
-              .equals(row.getPhoneAccountComponentName());
+          DuoComponent.get(context).getDuo().isDuoAccount(row.getPhoneAccountComponentName());
       secondaryText.append(
           context.getText(
               isDuoCall ? R.string.new_call_log_duo_video : R.string.new_call_log_carrier_video));
