@@ -130,11 +130,8 @@ public final class SpeedDialUiItemMutator {
   private ImmutableList<SpeedDialUiItem> removeSpeedDialUiItemInternal(
       SpeedDialUiItem speedDialUiItem) {
     Assert.isWorkerThread();
-    if (speedDialUiItem.isStarred()) {
-      removeStarredSpeedDialUiItem(speedDialUiItem);
-    } else {
-      removeSuggestedSpeedDialUiItem(speedDialUiItem);
-    }
+    Assert.checkArgument(speedDialUiItem.isStarred());
+    removeStarredSpeedDialUiItem(speedDialUiItem);
     return loadSpeedDialUiItemsInternal();
   }
 
@@ -175,17 +172,10 @@ public final class SpeedDialUiItemMutator {
     appContext
         .getContentResolver()
         .update(
-            Phone.CONTENT_URI,
+            Contacts.CONTENT_URI,
             contentValues,
-            Phone.CONTACT_ID + " = ?",
+            Contacts._ID + " = ?",
             new String[] {Long.toString(speedDialUiItem.contactId())});
-  }
-
-  @WorkerThread
-  @SuppressWarnings("unused")
-  private void removeSuggestedSpeedDialUiItem(SpeedDialUiItem speedDialUiItem) {
-    Assert.isWorkerThread();
-    // TODO(calderwoodra): remove strequent contact
   }
 
   /**
