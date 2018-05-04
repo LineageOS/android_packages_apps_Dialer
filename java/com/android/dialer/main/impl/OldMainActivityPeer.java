@@ -1234,7 +1234,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private static final String CONTACTS_TAG = "contacts";
     private static final String VOICEMAIL_TAG = "voicemail";
 
-    private final AppCompatActivity activity;
+    private final TransactionSafeActivity activity;
     private final FragmentManager fragmentManager;
     private final android.support.v4.app.FragmentManager supportFragmentManager;
     private final FloatingActionButton fab;
@@ -1242,7 +1242,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @TabIndex private int selectedTab = -1;
 
     private MainBottomNavBarBottomNavTabListener(
-        AppCompatActivity activity,
+        TransactionSafeActivity activity,
         FragmentManager fragmentManager,
         android.support.v4.app.FragmentManager supportFragmentManager,
         FloatingActionButton fab) {
@@ -1300,7 +1300,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       android.support.v4.app.Fragment supportFragment =
           supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
       if (supportFragment != null) {
-        supportFragmentManager.beginTransaction().remove(supportFragment).commit();
+        supportFragmentManager.beginTransaction().remove(supportFragment).commitAllowingStateLoss();
         // If the NewCallLogFragment was showing, immediately show the old call log fragment
         // instead.
         if (selectedTab == TabIndex.CALL_LOG) {
@@ -1317,7 +1317,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       android.support.v4.app.Fragment supportFragment =
           supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
       if (supportFragment != null) {
-        supportFragmentManager.beginTransaction().remove(supportFragment).commit();
+        supportFragmentManager.beginTransaction().remove(supportFragment).commitAllowingStateLoss();
         // If the NewVoicemailFragment was showing, immediately show the old voicemail fragment
         // instead.
         if (selectedTab == TabIndex.VOICEMAIL) {
@@ -1445,7 +1445,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             "MainBottomNavBarBottomNavTabListener.showFragment", "Not added yet: " + fragment);
         transaction.add(R.id.fragment_container, fragment, tag);
       }
-      transaction.commit();
+      if (activity.isSafeToCommitTransactions()) {
+        transaction.commit();
+      }
 
       // Handle support fragments.
       // TODO(calderwoodra): Handle other new fragments.
@@ -1471,7 +1473,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             "Not added yet: " + supportFragment);
         supportTransaction.add(R.id.fragment_container, supportFragment, tag);
       }
-      supportTransaction.commit();
+      if (activity.isSafeToCommitTransactions()) {
+        supportTransaction.commit();
+      }
     }
 
     private void showSupportFragment(
