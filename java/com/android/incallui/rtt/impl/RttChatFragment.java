@@ -107,6 +107,7 @@ public class RttChatFragment extends Fragment
   private PrimaryCallState primaryCallState = PrimaryCallState.empty();
   private boolean isUserScrolling;
   private boolean shouldAutoScrolling;
+  private AudioSelectMenu audioSelectMenu;
 
   /**
    * Create a new instance of RttChatFragment.
@@ -558,6 +559,9 @@ public class RttChatFragment extends Fragment
     LogUtil.i("RttChatFragment.setAudioState", "audioState: " + audioState);
     overflowMenu.setMuteButtonChecked(audioState.isMuted());
     overflowMenu.setAudioState(audioState);
+    if (audioSelectMenu != null) {
+      audioSelectMenu.setAudioState(audioState);
+    }
   }
 
   @Override
@@ -573,7 +577,7 @@ public class RttChatFragment extends Fragment
 
   @Override
   public void showAudioRouteSelector() {
-    AudioSelectMenu audioSelectMenu =
+    audioSelectMenu =
         new AudioSelectMenu(
             getContext(),
             inCallButtonUiDelegate,
