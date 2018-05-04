@@ -32,7 +32,14 @@ public class UiUtil {
   }
 
   /** Opens the android keyboard. */
-  public static void openKeyboardFrom(Context context, View view) {
+  public static void showKeyboardFrom(Context context, View view) {
+    InputMethodManager inputMethodManager =
+        (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    inputMethodManager.showSoftInput(view, 0);
+  }
+
+  /** Force open the android keyboard. */
+  public static void forceOpenKeyboardFrom(Context context, View view) {
     InputMethodManager inputMethodManager =
         (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
     inputMethodManager.toggleSoftInputFromWindow(

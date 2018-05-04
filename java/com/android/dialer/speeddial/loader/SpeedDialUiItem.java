@@ -234,16 +234,29 @@ public abstract class SpeedDialUiItem {
    */
   @Nullable
   public Channel getDefaultVoiceChannel() {
-    if (defaultChannel() != null && !defaultChannel().isVideoTechnology()) {
-      return defaultChannel();
-    }
-
     if (channels().size() == 1) {
       // If there is only a single channel, it must be a voice channel as per our defined
       // assumptions (detailed in comments on method channels()).
       return channels().get(0);
     }
 
+    if (defaultChannel() == null) {
+      return null;
+    }
+
+    if (!defaultChannel().isVideoTechnology()) {
+      return defaultChannel();
+    }
+
+    // Default channel is a video channel, so find it's corresponding voice channel
+    Channel prevChannel = channels().get(0);
+    for (int i = 1; i < channels().size(); i++) {
+      Channel currentChannel = channels().get(i);
+      if (currentChannel.equals(defaultChannel())) {
+        return prevChannel;
+      }
+      prevChannel = currentChannel;
+    }
     return null;
   }
 
