@@ -41,6 +41,34 @@ public interface Spam {
       ImmutableSet<DialerPhoneNumber> dialerPhoneNumbers);
 
   /**
+   * Checks if the given number is suspected of being spam.
+   *
+   * @param dialerPhoneNumber the phone number.
+   * @return the {@link SpamStatus} for the given number.
+   */
+  ListenableFuture<SpamStatus> checkSpamStatus(DialerPhoneNumber dialerPhoneNumber);
+
+  /**
+   * Checks if the given number is suspected of being spam.
+   *
+   * <p>See {@link #checkSpamStatus(DialerPhoneNumber)}.
+   *
+   * @param number the phone number.
+   * @param defaultCountryIso the default country to use if it's not part of the number.
+   * @return the {@link SpamStatus} for the given number.
+   */
+  ListenableFuture<SpamStatus> checkSpamStatus(String number, @Nullable String defaultCountryIso);
+
+  /**
+   * Checks if the given number is suspected of being a spam.
+   *
+   * @param number The phone number of the call.
+   * @param countryIso The country ISO of the call.
+   * @param listener The callback to be invoked after {@code Info} is fetched.
+   */
+  void checkSpamStatus(String number, String countryIso, Listener listener);
+
+  /**
    * Called as an indication that the Spam implementation should check whether downloading a spam
    * list needs to occur or not.
    *
@@ -53,15 +81,6 @@ public interface Spam {
    *     operation.
    */
   ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser);
-
-  /**
-   * Checks if the given number is suspected of being a spam.
-   *
-   * @param number The phone number of the call.
-   * @param countryIso The country ISO of the call.
-   * @param listener The callback to be invoked after {@code Info} is fetched.
-   */
-  void checkSpamStatus(String number, String countryIso, Listener listener);
 
   /**
    * @param number The number to check if the number is in the user's white list (non spam list)

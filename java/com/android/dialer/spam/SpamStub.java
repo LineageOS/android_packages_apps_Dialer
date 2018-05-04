@@ -16,6 +16,7 @@
 
 package com.android.dialer.spam;
 
+import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
@@ -53,14 +54,25 @@ public class SpamStub implements Spam {
   }
 
   @Override
-  public ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser) {
-    // no-op
-    return Futures.immediateFuture(null);
+  public ListenableFuture<SpamStatus> checkSpamStatus(DialerPhoneNumber dialerPhoneNumber) {
+    return Futures.immediateFuture(SimpleSpamStatus.notSpam());
+  }
+
+  @Override
+  public ListenableFuture<SpamStatus> checkSpamStatus(
+      String number, @Nullable String defaultCountryIso) {
+    return Futures.immediateFuture(SimpleSpamStatus.notSpam());
   }
 
   @Override
   public void checkSpamStatus(String number, String countryIso, Listener listener) {
     listener.onComplete(false);
+  }
+
+  @Override
+  public ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser) {
+    // no-op
+    return Futures.immediateFuture(null);
   }
 
   @Override
