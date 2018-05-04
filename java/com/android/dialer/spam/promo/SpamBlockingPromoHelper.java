@@ -168,7 +168,9 @@ public class SpamBlockingPromoHelper {
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
             .setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24)
-            .setContentText(context.getString(R.string.spam_blocking_promo_text))
+            .setStyle(
+                new Notification.BigTextStyle()
+                    .bigText(context.getString(R.string.spam_blocking_promo_text)))
             .addAction(
                 new Notification.Action.Builder(
                         R.drawable.quantum_ic_block_vd_theme_24,
