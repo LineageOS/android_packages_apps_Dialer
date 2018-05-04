@@ -16,10 +16,11 @@
 
 package com.android.dialer.calllogutils;
 
+import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.annotation.IntDef;
 import android.text.TextUtils;
-import com.android.dialer.duo.DuoConstants;
+import com.android.dialer.duo.DuoComponent;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -46,8 +47,8 @@ public class CallbackActionHelper {
    * @return One of the values in {@link CallbackAction}
    */
   public static @CallbackAction int getCallbackAction(
-      String number, int features, String phoneAccountComponentName) {
-    return getCallbackAction(number, features, isDuoCall(phoneAccountComponentName));
+      Context context, String number, int features, String phoneAccountComponentName) {
+    return getCallbackAction(number, features, isDuoCall(context, phoneAccountComponentName));
   }
 
   /**
@@ -75,9 +76,7 @@ public class CallbackActionHelper {
     return CallbackAction.VOICE;
   }
 
-  private static boolean isDuoCall(String phoneAccountComponentName) {
-    return DuoConstants.PHONE_ACCOUNT_COMPONENT_NAME
-        .flattenToString()
-        .equals(phoneAccountComponentName);
+  private static boolean isDuoCall(Context context, String phoneAccountComponentName) {
+    return DuoComponent.get(context).getDuo().isDuoAccount(phoneAccountComponentName);
   }
 }

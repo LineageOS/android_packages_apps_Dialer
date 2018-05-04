@@ -159,7 +159,7 @@ public class DisambigDialog extends DialogFragment {
           .logImpression(
               DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT_DISAMBIG);
       Intent intent =
-          DuoComponent.get(getContext()).getDuo().getIntent(getContext(), channel.number());
+          DuoComponent.get(getContext()).getDuo().getCallIntent(channel.number()).orNull();
       getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
       return;
     }

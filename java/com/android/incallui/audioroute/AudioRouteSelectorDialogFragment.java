@@ -149,6 +149,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     if ((audioState.getSupportedRouteMask() & itemRoute) == 0) {
       item.setVisibility(View.GONE);
     } else if (audioState.getRoute() == itemRoute) {
+      item.setSelected(true);
       item.setTextColor(selectedColor);
       item.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
       item.setCompoundDrawableTintMode(Mode.SRC_ATOP);
@@ -169,6 +170,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
     textView.setText(getAliasName(bluetoothDevice));
     if (selected) {
+      textView.setSelected(true);
       textView.setTextColor(selectedColor);
       textView.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
       textView.setCompoundDrawableTintMode(Mode.SRC_ATOP);
