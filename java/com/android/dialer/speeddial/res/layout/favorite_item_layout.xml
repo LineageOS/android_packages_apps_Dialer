@@ -24,21 +24,24 @@
 
   <FrameLayout
       android:id="@+id/avatar_container"
-      android:layout_width="104dp"
+      android:layout_width="wrap_content"
       android:layout_height="104dp"
       android:layout_gravity="center_horizontal"
       android:layout_marginBottom="8dp">
 
     <com.android.dialer.speeddial.SquareImageView
         android:id="@+id/avatar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"/>
 
     <FrameLayout
         android:id="@+id/video_call_container"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_gravity="bottom|end">
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="12dp">
 
       <ImageView
           android:layout_width="match_parent"
@@ -60,6 +63,10 @@
       android:layout_gravity="center_horizontal"
       android:layout_marginStart="4dp"
       android:layout_marginEnd="4dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="1dp"
+      android:fontFamily="sans-serif-medium"
+      android:textSize="14sp"
       style="@style/PrimaryText"/>
 
   <TextView
@@ -69,5 +76,6 @@
       android:layout_gravity="center_horizontal"
       android:layout_marginStart="4dp"
       android:layout_marginEnd="4dp"
+      android:layout_marginBottom="17dp"
       style="@style/SecondaryText"/>
 </LinearLayout>

@@ -75,9 +75,9 @@ public final class ContactPhotoView extends FrameLayout {
   }
 
   private void hideBadge() {
-    contactBadgeContainer.setVisibility(View.INVISIBLE);
-    videoCallBadge.setVisibility(View.INVISIBLE);
-    rttCallBadge.setVisibility(View.INVISIBLE);
+    contactBadgeContainer.setVisibility(View.GONE);
+    videoCallBadge.setVisibility(View.GONE);
+    rttCallBadge.setVisibility(View.GONE);
   }
 
   /** Sets the contact photo and its badge to be displayed. */
@@ -100,10 +100,10 @@ public final class ContactPhotoView extends FrameLayout {
       // (a bug): In theory a video call could be downgraded to voice and upgraded to RTT call
       // again, this might end up a call with video and RTT features both set. Update logic here if
       // that could happen. Also update {@link Coalescer#meetsCallFeatureCriteria}.
-      rttCallBadge.setVisibility(INVISIBLE);
+      rttCallBadge.setVisibility(View.GONE);
     } else if (photoInfo.getIsRtt()) {
       contactBadgeContainer.setVisibility(View.VISIBLE);
-      videoCallBadge.setVisibility(INVISIBLE);
+      videoCallBadge.setVisibility(View.GONE);
       rttCallBadge.setVisibility(View.VISIBLE);
     } else {
       hideBadge();
