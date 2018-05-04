@@ -15,6 +15,7 @@
  */
 package com.android.dialer.calllog.ui;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -229,8 +231,11 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
     // TODO(zachh): Handle empty cursor by showing empty view.
     if (recyclerView.getAdapter() == null) {
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+      // Note: It's not clear if this callback can be invoked when there's no associated activity,
+      // but if crashes are observed here it may be possible to use getContext() instead.
+      Activity activity = Assert.isNotNull(getActivity());
       recyclerView.setAdapter(
-          new NewCallLogAdapter(getContext(), newCursor, System::currentTimeMillis));
+          new NewCallLogAdapter(activity, newCursor, System::currentTimeMillis));
     } else {
       ((NewCallLogAdapter) recyclerView.getAdapter()).updateCursor(newCursor);
     }
