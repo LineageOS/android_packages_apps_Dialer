@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- ~ Copyright (C) 2017 The Android Open Source Project
+ ~ Copyright (C) 2018 The Android Open Source Project
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -14,11 +14,10 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License
  -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item
-      android:id="@+id/action_search"
-      android:title="@android:string/search_go"
-      app:showAsAction="always"
-      app:actionViewClass="android.support.v7.widget.SearchView"/>
-</menu>
+<View
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="#12000000"/>

@@ -66,28 +66,28 @@
        This translation may require the variables to be rearranged for grammars different than
        english. [CHAR LIMIT=NONE] -->
   <string name="a11y_call_duration_format">
-    <xliff:g id="minutes">%d</xliff:g> <xliff:g id="minutes_translation">%s</xliff:g> <xliff:g id="seconds">%d</xliff:g> <xliff:g id="seconds_translation">%s</xliff:g>
+    <xliff:g id="minutes">%1$d</xliff:g> <xliff:g id="minutes_translation">%2$s</xliff:g> <xliff:g id="seconds">%3$d</xliff:g> <xliff:g id="seconds_translation">%4$s</xliff:g>
   </string>
 
   <!-- A string to announce a call duration. For example, in english might say 15 seconds.
        This translation may require the variables to be rearranged for grammars different than
        english. [CHAR LIMIT=NONE] -->
   <string name="a11y_call_duration_short_format">
-    <xliff:g id="seconds">%d</xliff:g> <xliff:g id="seconds_translation">%s</xliff:g>
+    <xliff:g id="seconds">%1$d</xliff:g> <xliff:g id="seconds_translation">%2$s</xliff:g>
   </string>
 
   <!-- A pattern to define the layout of a call duration string. for example, in english might
         say 2m 15s. Translation should only rearrange the inputs. minutes_translation and
         seconds_translation should remain in \'quotes\'. [CHAR LIMIT=NONE] -->
   <string name="call_duration_format_pattern">
-    <xliff:g id="minutes_special_character">%s</xliff:g>\'<xliff:g id="minutes_translation">%s</xliff:g>\' <xliff:g id="seconds_special_character">%s</xliff:g>\'<xliff:g id="seconds_translation">%s</xliff:g>\'
+    <xliff:g id="minutes_special_character">%1$s</xliff:g>\'<xliff:g id="minutes_translation">%2$s</xliff:g>\' <xliff:g id="seconds_special_character">%3$s</xliff:g>\'<xliff:g id="seconds_translation">%4$s</xliff:g>\'
   </string>
 
   <!-- A pattern to define the layout of a call duration string. for example, in english might
         say 2m 15s. Translation should only rearrange the inputs. seconds_translation should
         remain in \'quotes\'. [CHAR LIMIT=NONE] -->
   <string name="call_duration_short_format_pattern">
-    <xliff:g id="seconds_special_character">%s</xliff:g>\'<xliff:g id="seconds_translation">%s</xliff:g>\'
+    <xliff:g id="seconds_special_character">%1$s</xliff:g>\'<xliff:g id="seconds_translation">%2$s</xliff:g>\'
   </string>
 
   <!-- A full string for seconds (time). [CHAR LIMIT=NONE] -->

@@ -42,7 +42,8 @@ public final class CallDetailsCursorLoader extends CursorLoader {
         AnnotatedCallLog.TIMESTAMP,
         AnnotatedCallLog.DURATION,
         AnnotatedCallLog.DATA_USAGE,
-        AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME
+        AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME,
+        AnnotatedCallLog.CALL_MAPPING_ID
       };
 
   // Indexes for COLUMNS_FOR_CALL_DETAILS
@@ -53,6 +54,7 @@ public final class CallDetailsCursorLoader extends CursorLoader {
   private static final int DURATION = 4;
   private static final int DATA_USAGE = 5;
   private static final int PHONE_ACCOUNT_COMPONENT_NAME = 6;
+  private static final int CALL_MAPPING_ID = 7;
 
   CallDetailsCursorLoader(Context context, CoalescedIds coalescedIds) {
     super(
@@ -140,9 +142,7 @@ public final class CallDetailsCursorLoader extends CursorLoader {
         .setDate(cursor.getLong(TIMESTAMP))
         .setDuration(cursor.getLong(DURATION))
         .setDataUsage(cursor.getLong(DATA_USAGE))
-
-        .setCallMappingId(String.valueOf(cursor.getLong(TIMESTAMP)));
-
+        .setCallMappingId(cursor.getString(CALL_MAPPING_ID));
 
     String phoneAccountComponentName = cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
     entry.setIsDuoCall(DuoComponent.get(context).getDuo().isDuoAccount(phoneAccountComponentName));

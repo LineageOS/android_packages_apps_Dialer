@@ -219,7 +219,7 @@ final class SearchBarView extends FrameLayout {
   }
 
   public void showKeyboard() {
-    UiUtil.openKeyboardFrom(getContext(), searchBox);
+    UiUtil.forceOpenKeyboardFrom(getContext(), searchBox);
   }
 
   public void setHint(@StringRes int hint) {

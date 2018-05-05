@@ -14,27 +14,15 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License
  -->
-<LinearLayout
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/disambig_header_container"
-    android:orientation="vertical"
+    android:id="@+id/disambig_header_phone_label"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:minHeight="56dp"
     android:gravity="center_vertical"
+    android:minHeight="48dp"
     android:paddingStart="24dp"
-    android:paddingEnd="24dp">
-
-  <TextView
-      android:id="@+id/disambig_header_phone_type"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      style="@style/PrimaryText"/>
-
-  <TextView
-      android:id="@+id/disambig_header_phone_number"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      style="@style/SecondaryText"/>
-</LinearLayout>
+    android:paddingEnd="24dp"
+    android:textSize="14sp"
+    android:textColor="#757575"
+    style="@style/PrimaryText"/>
