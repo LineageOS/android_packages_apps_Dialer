@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Chamada de vídeo Wi-Fi perdida</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">As buscas poden enviar consultas a través dun protocolo seguro (https) a sitios web remotos para recompilar información. A consulta pode incluír o número de teléfono da outra parte ou a consulta de busca</string>
 </resources>

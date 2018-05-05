@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">未接 WiFi 视频来电</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">查询将会发送基于安全协议（https）的请求到远程网站以获取信息。此查询可能会包含第三方的电话号码或搜索查询。</string>
 </resources>

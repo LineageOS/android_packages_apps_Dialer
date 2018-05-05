@@ -26,4 +26,5 @@
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="call_state_unknown">Disconnotu</string>
 </resources>

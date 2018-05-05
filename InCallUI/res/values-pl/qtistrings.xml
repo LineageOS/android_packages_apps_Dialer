@@ -80,8 +80,11 @@
   <!-- Text for the onscreen "blind transfer" button -->
   <string name="qti_ims_onscreenBlindTransfer">Ślepy transfer</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">Pewny transfer</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">Konsultacyjny transfer</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">Proszę wyłączyć tryb TTY, aby uaktualnić do połączeń wideo.</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
   <string name="qti_description_target_deflect">Przekieruj</string>
   <string name="qti_description_deflect_error">Numer nie jest ustawiony. Podaj numer za pomocą ustawień IMS i spróbuj ponownie.</string>
@@ -93,6 +96,7 @@
   <!-- Title of the IMS to CS redial dialog -->
   <string name="cs_redial_option">Opcja ponownego wybierania numeru</string>
   <!-- Message text of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">Nie można nawiązać połączenia wideo IMS, ponowić jako niewykorzystujące IMS połączenie głosowe?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
   <string name="session_modify_cause_upgrade_local_request">Połączenie uaktualnione na żądanie użytkownika</string>

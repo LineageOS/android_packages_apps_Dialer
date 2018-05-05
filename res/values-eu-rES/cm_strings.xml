@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Galdutako WiFi bideo-deia</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Bilaketek protokolo seguru baten bidez (https) galderak bidali ditzakete urruneko webguneetara informazio bila. Galderek beste partearen telefono zenbakia eraman dezakete</string>
 </resources>

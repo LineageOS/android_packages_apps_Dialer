@@ -18,7 +18,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
+  <string name="callFailed_incoming_cb_enabled">Gruppen har sperret alle innkommende oppringinger.</string>
   <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
+  <string name="callUnanswered_forwarded">Ubesvart og videresendt</string>
   <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
   <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
   <!-- In-call screen: status label for an outgoing call that's routed via a specific
@@ -26,4 +28,20 @@
   <!-- In-call screen: status label template for an active call that's routed via a specific
          provider (e.g. MSIM) -->
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Ventende anrop</string>
+  <string name="call_recording_failed_message">Kunne ikke starte opptak av samtalen</string>
+  <string name="call_recording_file_location">Lagret samtaleopptak til <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Ta opp samtale</string>
+  <string name="onscreenStopCallRecordText">Stopp opptak</string>
+  <string name="recording_time_text">Tar opp</string>
+  <string name="recording_warning_title">Aktivere samtaleopptak?</string>
+  <string name="recording_warning_text">Merk: Du er ansvarlig for å overholde alle lover og regler som gjelder for bruk av samtaleopptaks-funksjonaliteten og bruken eller distribusjonen av disse opptakene.</string>
+  <string name="call_failed_due_to_validate_number">Kan ikke foreta videoanrop, nummerformatet er ikke riktig</string>
+  <string name="call_state_dialing">Ringer</string>
+  <string name="call_state_holding">Venter</string>
+  <string name="call_state_active">Aktiv</string>
+  <string name="call_state_unknown">Ukjent</string>
+  <string name="call_state_disconnecting">Kobler fra</string>
+  <string name="call_state_disconnected">Koblet fra</string>
+  <string name="too_many_recipients">Ikke mer enn 6 personer kan delta i en 4G-telefonkonferanse.</string>
 </resources>

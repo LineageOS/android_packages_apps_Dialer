@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Nieodebrane połączenie wideo Wi-Fi</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Wyszukiwania mogą wysyłać zapytania za pomocą protokołu bezpiecznego (https) do zdalnych stron internetowych w celu zbierania informacji. Zapytanie może zawierać numer telefonu lub zapytania wyszukiwania rozmówcy</string>
 </resources>

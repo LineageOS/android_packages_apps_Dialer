@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">不在 Wi-Fi ビデオ通話</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Lookups は情報を収集するために、セキュアなプロトコル (https) 上で外部のウェブサイトにクエリを送信する可能性があります。クエリは相手の電話番号や検索クエリを含むことがあります。</string>
 </resources>

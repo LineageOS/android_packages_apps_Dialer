@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Neodgovorjen video klic Wi-Fi</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Iskanja lahko pošiljajo poizvedbe prek varnega protokola (https) oddaljenim spletnim stranem za zbiranje podatkov. Poizvedba lahko vključuje telefonsko številko druge osebe ali poizvedbo iskanja</string>
 </resources>

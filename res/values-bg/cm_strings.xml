@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Пропуснато Wi-Fi видео повикване</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Търсенето може да изпраща заявки през защитен протокол (https) до отдалечени уеб сайтове, за да събира информация. Искането на другата страна може да включва телефонен номер или заявка за търсене</string>
 </resources>

@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Verpasster WLAN-Videoanruf</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Suchen können Abfragen an Remote-Websites über ein sicheres Protokoll (https) senden, um Informationen zu sammeln. Die Abfrage kann die Telefonnummer des anderen Teilnehmers oder die Suchanfrage enthalten</string>
 </resources>

@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Apel video Wi-Fi nepreluat</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Căutările pot trimite interogări peste un protocol securizat (https) la site-uri web de la distanță pentru a colecta informaţii. Interogarea poate include numărul de telefon al celeilalte părţi sau interogarea căutării</string>
 </resources>

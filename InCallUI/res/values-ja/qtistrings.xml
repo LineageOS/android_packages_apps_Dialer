@@ -131,6 +131,7 @@
   <string name="call_failed_due_to_low_battery">電池の残量が少なくなっているため、通話できませんでした。</string>
   <!-- VoWifi call quality indicators -->
   <!-- Title for low battery alert dialogue -->
+  <string name="low_battery">電池残量低下の警告</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <string name="low_battery_msg">バッテリー残量が15%以下です。ビデオ通話のままにするか音声通話に変更するか選んでください</string>
@@ -139,6 +140,7 @@
   <!-- International prefix converted value-->
   <string name="video_call">ビデオ通話</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">画像モードを選択</string>
   <string name="video_call_picture_mode_preview_video">カメラのプレビュー</string>
   <string name="video_call_picture_mode_cancel_option">キャンセル</string>
   <string name="video_call_picture_mode_save_option">保存</string>

@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Cevapsız Wi-Fi görüntülü arama</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Aramalar, bilgi toplamak için uzak web sitelerine güvenli bir protokol (https) üzerinden sorgu gönderebilir. Sorgu, diğer tarafın telefon numarasını veya arama sorgusunu içerebilir</string>
 </resources>

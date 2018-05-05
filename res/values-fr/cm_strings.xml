@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Appel vidéo WiFi manqué</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Lorsque vous effectuez des recherches, des requêtes sont susceptibles d\'être envoyées à des sites distants via un protocole sécurisé (https) pour recueillir des informations. Elles peuvent inclure le numéro de téléphone d\'un tiers ou la requête de recherche.</string>
 </resources>

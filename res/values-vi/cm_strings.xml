@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Cuộc gọi video WiFi bị nhỡ</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Tra cứu có thể gửi truy vấn qua giao thức an toàn (https) tới các trang web từ xa để thu thập thông tin. Truy vấn có thể bao gồm số điện thoại của bên kia hoặc truy vấn tìm kiếm</string>
 </resources>

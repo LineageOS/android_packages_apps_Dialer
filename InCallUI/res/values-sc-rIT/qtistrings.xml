@@ -86,4 +86,6 @@
   <!-- International prefix source-->
   <!-- International prefix converted value-->
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_cancel_option">Annulla</string>
+  <string name="video_call_picture_mode_save_option">Sarva</string>
 </resources>

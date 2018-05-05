@@ -153,4 +153,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">שיחת וידאו Wi-Fi לא נענתה</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">החיפוש ישלח מידע בפרוטוקול מוצפן (https) לשרת מרוחק לקבלת מידע. השאילתות יכילו את מספר הפלאפון ו\או שאילתות החיפוש</string>
 </resources>

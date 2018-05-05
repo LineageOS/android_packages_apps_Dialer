@@ -39,8 +39,10 @@
   <string name="onscreenStopCallRecordText">Zatrzymaj nagrywanie</string>
   <string name="recording_time_text">Nagrywanie</string>
   <string name="recording_warning_title">Włączyć nagrywanie rozmów?</string>
+  <string name="recording_warning_text">Uwaga: Ponosisz odpowiedzialność za wszelkie komplikacje z prawem związane z nagrywaniem rozmów i ich udostępnianiem bądź rozpowszechnianiem tych nagrań.</string>
   <string name="call_failed_due_to_validate_number">Nie można nawiązać połączenia wideo, format numeru jest nieprawidłowy</string>
   <string name="call_state_dialing">Wybieranie numeru</string>
+  <string name="call_state_holding">Wstrzymywanie</string>
   <string name="call_state_active">Aktywne</string>
   <string name="call_state_unknown">Nieznane</string>
   <string name="call_state_disconnecting">Rozłączanie</string>

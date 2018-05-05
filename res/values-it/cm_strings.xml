@@ -148,4 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Videochiamata Wi-Fi persa</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Le ricerche potrebbero inviare query tramite un protocollo sicuro (https) a siti web in remoto per raccogliere le informazioni necessarie. La query può includere il numero di telefono del corrispondente o il testo della ricerca</string>
 </resources>

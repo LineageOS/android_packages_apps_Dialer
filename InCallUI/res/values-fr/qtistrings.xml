@@ -32,6 +32,7 @@
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g> : Sous-état d\'appel :\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g>\u000a</string>
   <!-- Call substate label for call resumed -->
   <string name="call_substate_call_resumed">Repris</string>
   <!-- Call substate label for call connected suspended (audio) -->
@@ -128,9 +129,11 @@
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">L\'appel a échoué car la batterie est faible</string>
   <!-- VoWifi call quality indicators -->
   <string name="vowifi_call_quality_good">Bonne qualité vocale</string>
   <string name="vowifi_call_quality_fair">Qualité vocale correcte</string>
+  <string name="vowifi_call_quality_poor">Mauvaise qualité vocale</string>
   <!-- Title for low battery alert dialogue -->
   <string name="low_battery">Avertissement de batterie faible</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
