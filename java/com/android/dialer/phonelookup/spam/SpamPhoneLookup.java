@@ -27,7 +27,7 @@ import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.SpamInfo;
 import com.android.dialer.spam.Spam;
-import com.android.dialer.spam.SpamStatus;
+import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.storage.Unencrypted;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;

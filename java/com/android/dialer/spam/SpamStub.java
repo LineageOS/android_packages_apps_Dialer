@@ -22,6 +22,8 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.spam.status.SimpleSpamStatus;
+import com.android.dialer.spam.status.SpamStatus;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;

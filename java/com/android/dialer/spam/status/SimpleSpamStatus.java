@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.spam;
+package com.android.dialer.spam.status;
 
 import android.support.annotation.Nullable;
 import com.google.auto.value.AutoValue;

@@ -42,7 +42,7 @@ import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
-import com.android.dialer.spam.SpamStatus;
+import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.latencyreport.LatencyReport;
