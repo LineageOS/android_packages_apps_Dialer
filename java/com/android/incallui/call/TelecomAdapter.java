@@ -16,7 +16,9 @@
 
 package com.android.incallui.call;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
+import android.bluetooth.BluetoothDevice;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Looper;
@@ -191,6 +193,15 @@ public class TelecomAdapter implements InCallServiceListener {
       LogUtil.e(
           "TelecomAdapter.stopForegroundNotification",
           "no inCallService available for stopping foreground notification");
+    }
+  }
+
+  @TargetApi(28)
+  public void requestBluetoothAudio(BluetoothDevice bluetoothDevice) {
+    if (inCallService != null) {
+      inCallService.requestBluetoothAudio(bluetoothDevice);
+    } else {
+      LogUtil.e("TelecomAdapter.requestBluetoothAudio", "inCallService is null");
     }
   }
 }

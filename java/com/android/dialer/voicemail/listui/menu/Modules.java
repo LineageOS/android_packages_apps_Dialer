@@ -17,77 +17,53 @@
 package com.android.dialer.voicemail.listui.menu;
 
 import android.content.Context;
-import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
-import com.android.dialer.historyitemactions.DividerModule;
+import android.text.TextUtils;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
-import com.android.dialer.historyitemactions.SharedModules;
-import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.historyitemactions.HistoryItemActionModuleInfo;
+import com.android.dialer.historyitemactions.HistoryItemActionModulesBuilder;
 import com.android.dialer.voicemail.model.VoicemailEntry;
-import com.google.common.base.Optional;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Configures the modules for the voicemail bottom sheet; these are the rows below the top row
- * (primary action) in the bottom sheet.
+ * (contact info) in the bottom sheet.
  */
-@SuppressWarnings("Guava")
 final class Modules {
 
   static List<HistoryItemActionModule> fromVoicemailEntry(
       Context context, VoicemailEntry voicemailEntry) {
-    // Conditionally add each module, which are items in the bottom sheet's menu.
-    List<HistoryItemActionModule> modules = new ArrayList<>();
+    return new HistoryItemActionModulesBuilder(context, buildModuleInfo(voicemailEntry))
+        // TODO(uabdullah): add module for calls.
+        .addModuleForAddingToContacts()
+        .addModuleForSendingTextMessage()
+        .addModuleForDivider()
+        .addModuleForBlockedOrSpamNumber()
+        .addModuleForCopyingNumber()
+        // TODO(zachh): Module for CallComposer.
+        .build();
+  }
 
-    // TODO(uabdullah): Handle maybeAddModuleForVideoOrAudioCall(context, modules, row);
-    Optional<HistoryItemActionModule> moduleForAddingContacts =
-        SharedModules.createModuleForAddingToContacts(
-            context,
-            voicemailEntry.getNumber(),
-            voicemailEntry.getNumberAttributes().getName(),
-            voicemailEntry.getNumberAttributes().getLookupUri(),
-            voicemailEntry.getNumberAttributes().getIsBlocked(),
-            voicemailEntry.getNumberAttributes().getIsSpam());
-    if (moduleForAddingContacts.isPresent()) {
-      modules.add(moduleForAddingContacts.get());
-    }
-
-    Optional<HistoryItemActionModule> moduleForSendingTextMessage =
-        SharedModules.createModuleForSendingTextMessage(
-            context,
-            voicemailEntry.getNumber().getNormalizedNumber(),
-            voicemailEntry.getNumberAttributes().getIsBlocked());
-    if (moduleForSendingTextMessage.isPresent()) {
-      modules.add(moduleForSendingTextMessage.get());
-    }
-
-    if (!modules.isEmpty()) {
-      modules.add(new DividerModule());
-    }
-
-    BlockReportSpamDialogInfo blockReportSpamDialogInfo =
-        BlockReportSpamDialogInfo.newBuilder()
-            .setNormalizedNumber(voicemailEntry.getNumber().getNormalizedNumber())
-            .setCountryIso(voicemailEntry.getNumber().getCountryIso())
-            .setCallType(voicemailEntry.getCallType())
-            .setReportingLocation(ReportingLocation.Type.VOICEMAIL_HISTORY)
-            .setContactSource(voicemailEntry.getNumberAttributes().getContactSource())
-            .build();
-    modules.addAll(
-        SharedModules.createModulesHandlingBlockedOrSpamNumber(
-            context,
-            blockReportSpamDialogInfo,
-            voicemailEntry.getNumberAttributes().getIsBlocked(),
-            voicemailEntry.getNumberAttributes().getIsSpam()));
-
-    // TODO(zachh): Module for CallComposer.
-    Optional<HistoryItemActionModule> moduleForCopyingNumber =
-        SharedModules.createModuleForCopyingNumber(
-            context, voicemailEntry.getNumber().getNormalizedNumber());
-    if (moduleForCopyingNumber.isPresent()) {
-      modules.add(moduleForCopyingNumber.get());
-    }
-
-    return modules;
+  private static HistoryItemActionModuleInfo buildModuleInfo(VoicemailEntry voicemailEntry) {
+    return HistoryItemActionModuleInfo.newBuilder()
+        .setNormalizedNumber(voicemailEntry.getNumber().getNormalizedNumber())
+        .setCountryIso(voicemailEntry.getNumber().getCountryIso())
+        .setName(voicemailEntry.getNumberAttributes().getName())
+        .setCallType(voicemailEntry.getCallType())
+        .setLookupUri(voicemailEntry.getNumberAttributes().getLookupUri())
+        .setPhoneAccountComponentName(voicemailEntry.getPhoneAccountComponentName())
+        .setCanReportAsInvalidNumber(
+            voicemailEntry.getNumberAttributes().getCanReportAsInvalidNumber())
+        .setCanSupportAssistedDialing(
+            !TextUtils.isEmpty(voicemailEntry.getNumberAttributes().getLookupUri()))
+        .setCanSupportCarrierVideoCall(
+            voicemailEntry.getNumberAttributes().getCanSupportCarrierVideoCall())
+        .setIsBlocked(voicemailEntry.getNumberAttributes().getIsBlocked())
+        .setIsSpam(voicemailEntry.getNumberAttributes().getIsSpam())
+        // A voicemail call is an outgoing call to the voicemail box.
+        // Voicemail entries are not voicemail calls.
+        .setIsVoicemailCall(false)
+        .setContactSource(voicemailEntry.getNumberAttributes().getContactSource())
+        .setHost(HistoryItemActionModuleInfo.Host.VOICEMAIL)
+        .build();
   }
 }

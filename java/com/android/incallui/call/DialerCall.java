@@ -50,7 +50,6 @@ import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
-import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
@@ -86,7 +85,6 @@ import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.rtt.protocol.RttChatMessage;
-import com.android.incallui.speakeasy.runtime.Constraints;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
 import com.android.incallui.videotech.duo.DuoVideoTech;
@@ -118,8 +116,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   public static final int PROPERTY_CODEC_KNOWN = 0x04000000;
 
   private static final String ID_PREFIX = "DialerCall_";
-  private static final String CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS =
+
+  @VisibleForTesting
+  public static final String CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS =
       "emergency_callback_window_millis";
+
   private static int idCounter = 0;
 
   /**
@@ -822,10 +823,9 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     // We want to treat any incoming call that arrives a short time after an outgoing emergency call
     // as a potential emergency callback.
     if (getExtras() != null
-        && getExtras().getLong(TelecomManagerCompat.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0)
-            > 0) {
+        && getExtras().getLong(Call.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0) > 0) {
       long lastEmergencyCallMillis =
-          getExtras().getLong(TelecomManagerCompat.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0);
+          getExtras().getLong(Call.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS, 0);
       if (isInEmergencyCallbackWindow(lastEmergencyCallMillis)) {
         return true;
       }
@@ -1058,6 +1058,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   @TargetApi(28)
+  @Nullable
   public RttCall getRttCall() {
     if (!isActiveRttCall()) {
       return null;
@@ -1111,16 +1112,18 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     if (!BuildCompat.isAtLeastP()) {
       return;
     }
-    // Save any remaining text in the buffer that's not shown by UI yet.
-    // This may happen when the call is switched to background before disconnect.
-    try {
-      String messageLeft = getRttCall().readImmediately();
-      if (!TextUtils.isEmpty(messageLeft)) {
-        rttTranscript =
-            RttChatMessage.getRttTranscriptWithNewRemoteMessage(rttTranscript, messageLeft);
+    if (getRttCall() != null) {
+      // Save any remaining text in the buffer that's not shown by UI yet.
+      // This may happen when the call is switched to background before disconnect.
+      try {
+        String messageLeft = getRttCall().readImmediately();
+        if (!TextUtils.isEmpty(messageLeft)) {
+          rttTranscript =
+              RttChatMessage.getRttTranscriptWithNewRemoteMessage(rttTranscript, messageLeft);
+        }
+      } catch (IOException e) {
+        LogUtil.e("DialerCall.saveRttTranscript", "error when reading remaining message", e);
       }
-    } catch (IOException e) {
-      LogUtil.e("DialerCall.saveRttTranscript", "error when reading remaining message", e);
     }
     // Don't save transcript if it's empty.
     if (rttTranscript.getMessagesCount() == 0) {
@@ -1662,7 +1665,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     if (videoTechManager != null) {
       videoTechManager.dispatchRemovedFromCallList();
     }
-    // TODO(a bug): Add tests for it to make sure no crash on subsequent call to this method.
     // TODO(wangqi): Consider moving this to a DialerCallListener.
     if (rttTranscript != null && !isCallRemoved) {
       saveRttTranscript();
@@ -1697,10 +1699,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   /** Indicates the call is eligible for SpeakEasy */
   public boolean isSpeakEasyEligible() {
-    if (!Constraints.isAvailable(context)) {
-      return false;
-    }
-
     return !isPotentialEmergencyCallback()
         && !isEmergencyCall()
         && !isActiveRttCall()
