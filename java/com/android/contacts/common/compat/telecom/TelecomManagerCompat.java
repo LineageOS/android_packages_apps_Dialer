@@ -23,11 +23,6 @@ import java.lang.reflect.Field;
 /** Compatibility class for {@link android.telecom.TelecomManager}. */
 public class TelecomManagerCompat {
 
-  // TODO(mdooley): remove once this is available in android.telecom.Call
-  // a bug
-  public static final String EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS =
-      "android.telecom.extra.LAST_EMERGENCY_CALLBACK_TIME_MILLIS";
-
   // Constants from http://cs/android/frameworks/base/telecomm/java/android/telecom/Call.java.
   public static final String EVENT_REQUEST_HANDOVER = "android.telecom.event.REQUEST_HANDOVER";
   public static final String EXTRA_HANDOVER_PHONE_ACCOUNT_HANDLE =

@@ -1504,7 +1504,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             call.getVideoTech().isSelfManagedCamera(),
             shouldAllowAnswerAndRelease(call),
             CallList.getInstance().getBackgroundCall() != null,
-            call.isSpeakEasyEligible());
+            getSpeakEasyCallManager().isAvailable(getApplicationContext())
+                && call.isSpeakEasyEligible());
     transaction.add(R.id.main, answerScreen.getAnswerScreenFragment(), Tags.ANSWER_SCREEN);
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCOMING_CALL, this);

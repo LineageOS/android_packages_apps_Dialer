@@ -36,6 +36,4 @@ message HistoryItemBottomSheetHeaderInfo {
   //   "Blocked • Mobile • 555-1234", and
   //   "Spam • Mobile • 555-1234".
   optional string secondary_text = 4;
-
-  // TODO(a bug): Add SIM info.
 }

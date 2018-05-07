@@ -16,6 +16,7 @@
 
 package com.android.incallui.speakeasy;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import com.android.incallui.call.DialerCall;
@@ -37,4 +38,15 @@ public interface SpeakEasyCallManager {
    * @param call The call which has been removed.
    */
   void onCallRemoved(@NonNull DialerCall call);
+
+  /**
+   * Indicates the feature is available.
+   *
+   * @param context The application context.
+   */
+  boolean isAvailable(@NonNull Context context);
+
+  /** Returns the config provider flag associated with the feature. */
+  @NonNull
+  String getConfigProviderFlag();
 }

@@ -17,8 +17,6 @@
 package com.android.incallui.rtt.impl;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff.Mode;
 import android.telecom.CallAudioState;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -28,8 +26,11 @@ import com.android.incallui.incall.protocol.InCallButtonUiDelegate;
 public class AudioSelectMenu extends PopupWindow {
 
   private final InCallButtonUiDelegate inCallButtonUiDelegate;
-  private final Context context;
   private final OnButtonClickListener onButtonClickListener;
+  private final RttCheckableButton bluetoothButton;
+  private final RttCheckableButton speakerButton;
+  private final RttCheckableButton headsetButton;
+  private final RttCheckableButton earpieceButton;
 
   interface OnButtonClickListener {
     void onBackPressed();
@@ -40,7 +41,6 @@ public class AudioSelectMenu extends PopupWindow {
       InCallButtonUiDelegate inCallButtonUiDelegate,
       OnButtonClickListener onButtonClickListener) {
     super(context, null, 0, R.style.OverflowMenu);
-    this.context = context;
     this.inCallButtonUiDelegate = inCallButtonUiDelegate;
     this.onButtonClickListener = onButtonClickListener;
     View view = View.inflate(context, R.layout.audio_route, null);
@@ -55,28 +55,32 @@ public class AudioSelectMenu extends PopupWindow {
               this.onButtonClickListener.onBackPressed();
             });
     CallAudioState audioState = inCallButtonUiDelegate.getCurrentAudioState();
-    initItem(
-        view.findViewById(R.id.audioroute_bluetooth), CallAudioState.ROUTE_BLUETOOTH, audioState);
-    initItem(view.findViewById(R.id.audioroute_speaker), CallAudioState.ROUTE_SPEAKER, audioState);
-    initItem(
-        view.findViewById(R.id.audioroute_headset), CallAudioState.ROUTE_WIRED_HEADSET, audioState);
-    initItem(
-        view.findViewById(R.id.audioroute_earpiece), CallAudioState.ROUTE_EARPIECE, audioState);
+    bluetoothButton = view.findViewById(R.id.audioroute_bluetooth);
+    speakerButton = view.findViewById(R.id.audioroute_speaker);
+    headsetButton = view.findViewById(R.id.audioroute_headset);
+    earpieceButton = view.findViewById(R.id.audioroute_earpiece);
+    initItem(bluetoothButton, CallAudioState.ROUTE_BLUETOOTH, audioState);
+    initItem(speakerButton, CallAudioState.ROUTE_SPEAKER, audioState);
+    initItem(headsetButton, CallAudioState.ROUTE_WIRED_HEADSET, audioState);
+    initItem(earpieceButton, CallAudioState.ROUTE_EARPIECE, audioState);
   }
 
   private void initItem(RttCheckableButton item, final int itemRoute, CallAudioState audioState) {
-    int selectedColor =
-        context.getColor(com.android.incallui.audioroute.R.color.dialer_theme_color);
     if ((audioState.getSupportedRouteMask() & itemRoute) == 0) {
       item.setVisibility(View.GONE);
     } else if (audioState.getRoute() == itemRoute) {
-      item.setTextColor(selectedColor);
-      item.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
-      item.setCompoundDrawableTintMode(Mode.SRC_ATOP);
+      item.setChecked(true);
     }
     item.setOnClickListener(
         (v) -> {
           inCallButtonUiDelegate.setAudioRoute(itemRoute);
         });
+  }
+
+  void setAudioState(CallAudioState audioState) {
+    bluetoothButton.setChecked(audioState.getRoute() == CallAudioState.ROUTE_BLUETOOTH);
+    speakerButton.setChecked(audioState.getRoute() == CallAudioState.ROUTE_SPEAKER);
+    headsetButton.setChecked(audioState.getRoute() == CallAudioState.ROUTE_WIRED_HEADSET);
+    earpieceButton.setChecked(audioState.getRoute() == CallAudioState.ROUTE_EARPIECE);
   }
 }

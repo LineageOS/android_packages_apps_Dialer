@@ -268,6 +268,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private void setOnClickListenerForRow(CoalescedRow row) {
     if (!PhoneNumberHelper.canPlaceCallsTo(
         row.getNumber().getNormalizedNumber(), row.getNumberPresentation())) {
+      itemView.setOnClickListener(null);
       return;
     }
     itemView.setOnClickListener(view -> CallLogRowActions.startCallForRow(activity, row));
