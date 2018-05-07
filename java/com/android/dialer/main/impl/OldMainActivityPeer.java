@@ -460,6 +460,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   @SuppressLint("MissingPermission")
   @Override
   public void onActivityResume() {
+    LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.onActivityResume");
     callLogFragmentListener.onActivityResume();
     // Start the thread that updates the smart dial database if the activity is recreated with a
     // language change.
@@ -866,6 +867,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         new ContentObserver(new Handler()) {
           @Override
           public void onChange(boolean selfChange) {
+            LogUtil.i(
+                "MainCallLogFragmentListener",
+                "voicemailStatusObserver.onChange selfChange:%b",
+                selfChange);
             super.onChange(selfChange);
             callLogQueryHandler.fetchVoicemailStatus();
           }
@@ -885,9 +890,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     }
 
     private void registerVoicemailStatusContentObserver(Context context) {
-
+      LogUtil.enterBlock("MainCallLogFragmentListener.registerVoicemailStatusContentObserver");
       if (PermissionsUtil.hasReadVoicemailPermissions(context)
           && PermissionsUtil.hasAddVoicemailPermissions(context)) {
+        LogUtil.i("MainCallLogFragmentListener.registerVoicemailStatusContentObserver", "register");
         context
             .getContentResolver()
             .registerContentObserver(
@@ -1013,11 +1019,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     }
 
     public void onActivityResume() {
+      LogUtil.enterBlock("MainCallLogFragmentListener.onActivityResume");
       activityIsAlive = true;
       registerVoicemailStatusContentObserver(context);
-      if (!bottomNavTabListener.newVoicemailFragmentActive()) {
-        callLogQueryHandler.fetchVoicemailStatus();
-      }
+      // TODO(a bug): Don't use callLogQueryHandler
+      callLogQueryHandler.fetchVoicemailStatus();
+
       if (!bottomNavTabListener.newCallLogFragmentActive()) {
         callLogQueryHandler.fetchMissedCallsUnreadCount();
       }

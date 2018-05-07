@@ -112,6 +112,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
         .appendOmtpVoicemailStatusSelectionClause(context, where, selectionArgs);
 
     if (TelecomUtil.hasReadWriteVoicemailPermissions(context)) {
+      LogUtil.i("CallLogQueryHandler.fetchVoicemailStatus", "fetching voicemail status");
       startQuery(
           QUERY_VOICEMAIL_STATUS_TOKEN,
           null,
@@ -120,6 +121,10 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
           where.toString(),
           selectionArgs.toArray(new String[selectionArgs.size()]),
           null);
+    } else {
+      LogUtil.i(
+          "CallLogQueryHandler.fetchVoicemailStatus",
+          "fetching voicemail status failed due to permissions");
     }
   }
 
