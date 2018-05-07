@@ -30,7 +30,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.ReportingLocation;
-import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.UriUtils;
 import java.util.ArrayList;
@@ -140,7 +139,7 @@ public final class HistoryItemActionModulesBuilder {
    * capability, and Duo is available, add a Duo video call module.
    */
   public HistoryItemActionModulesBuilder addModuleForVideoCall() {
-    if (isEmergencyNumber()
+    if (moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || moduleInfo.getIsSpam()) {
@@ -192,7 +191,7 @@ public final class HistoryItemActionModulesBuilder {
   public HistoryItemActionModulesBuilder addModuleForSendingTextMessage() {
     // TODO(zachh): There are other conditions where this module should not be shown
     // (e.g., business numbers).
-    if (isEmergencyNumber()
+    if (moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
@@ -233,7 +232,7 @@ public final class HistoryItemActionModulesBuilder {
    * </ul>
    */
   public HistoryItemActionModulesBuilder addModuleForAddingToContacts() {
-    if (isEmergencyNumber()
+    if (moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || moduleInfo.getIsSpam()
@@ -281,7 +280,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>If a number is not blocked or marked as spam, add the "Block/Report spam" module.
    */
   public HistoryItemActionModulesBuilder addModuleForBlockedOrSpamNumber() {
-    if (isEmergencyNumber() || moduleInfo.getIsVoicemailCall()) {
+    if (moduleInfo.getIsEmergencyNumber() || moduleInfo.getIsVoicemailCall()) {
       return this;
     }
 
@@ -399,10 +398,6 @@ public final class HistoryItemActionModulesBuilder {
   private boolean isExistingContact() {
     return !TextUtils.isEmpty(moduleInfo.getLookupUri())
         && !UriUtils.isEncodedContactUri(Uri.parse(moduleInfo.getLookupUri()));
-  }
-
-  private boolean isEmergencyNumber() {
-    return PhoneNumberHelper.isLocalEmergencyNumber(context, moduleInfo.getNormalizedNumber());
   }
 
   /**

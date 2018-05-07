@@ -21,7 +21,6 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
@@ -44,7 +43,7 @@ public final class CallLogEntryText {
    */
   public static CharSequence buildPrimaryText(Context context, CoalescedRow row) {
     // Calls to emergency services should be shown as "Emergency number".
-    if (PhoneNumberHelper.isLocalEmergencyNumber(context, row.getNumber().getNormalizedNumber())) {
+    if (row.getNumberAttributes().getIsEmergencyNumber()) {
       return context.getText(R.string.emergency_number);
     }
 
@@ -110,7 +109,7 @@ public final class CallLogEntryText {
   public static CharSequence buildSecondaryTextForEntries(
       Context context, Clock clock, CoalescedRow row) {
     // For emergency numbers, the secondary text should contain only the timestamp.
-    if (PhoneNumberHelper.isLocalEmergencyNumber(context, row.getNumber().getNormalizedNumber())) {
+    if (row.getNumberAttributes().getIsEmergencyNumber()) {
       return CallLogDates.newCallLogTimestampLabel(
           context, clock.currentTimeMillis(), row.getTimestamp());
     }
@@ -168,7 +167,7 @@ public final class CallLogEntryText {
      */
 
     // For emergency numbers, the secondary text should contain only the number.
-    if (PhoneNumberHelper.isLocalEmergencyNumber(context, row.getNumber().getNormalizedNumber())) {
+    if (row.getNumberAttributes().getIsEmergencyNumber()) {
       return !row.getFormattedNumber().isEmpty()
           ? row.getFormattedNumber()
           : row.getNumber().getNormalizedNumber();

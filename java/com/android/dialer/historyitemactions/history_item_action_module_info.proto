@@ -10,7 +10,7 @@ package com.android.dialer.historyitemactions;
 import "java/com/android/dialer/logging/contact_source.proto";
 
 // Contains information needed to construct items (modules) in a bottom sheet.
-// Next ID: 16
+// Next ID: 17
 message HistoryItemActionModuleInfo {
   // The dialer-normalized version of a phone number.
   // See DialerPhoneNumber.normalized_number.
@@ -66,4 +66,7 @@ message HistoryItemActionModuleInfo {
     VOICEMAIL = 2;
   }
   optional Host host = 15;
+
+  // Whether the number is an emergency number.
+  optional bool is_emergency_number = 16;
 }
