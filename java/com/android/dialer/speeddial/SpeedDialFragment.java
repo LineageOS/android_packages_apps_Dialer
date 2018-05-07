@@ -29,6 +29,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,6 @@ import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 import com.android.dialer.historyitemactions.IntentModule;
-import com.android.dialer.historyitemactions.SharedModules;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
@@ -60,7 +60,6 @@ import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.util.IntentUtil;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import java.util.ArrayList;
@@ -312,11 +311,9 @@ public class SpeedDialFragment extends Fragment {
       }
 
       // Add sms module
-      Optional<HistoryItemActionModule> smsModule =
-          SharedModules.createModuleForSendingTextMessage(
-              getContext(), defaultChannel.number(), false);
-      if (smsModule.isPresent()) {
-        modules.add(smsModule.get());
+      if (!TextUtils.isEmpty(defaultChannel.number())) {
+        modules.add(
+            IntentModule.newModuleForSendingTextMessage(getContext(), defaultChannel.number()));
       }
 
       modules.add(new DividerModule());
