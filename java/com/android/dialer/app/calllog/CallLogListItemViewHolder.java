@@ -19,7 +19,6 @@ package com.android.dialer.app.calllog;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -51,7 +50,6 @@ import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
@@ -96,7 +94,6 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.UriUtils;
-import com.google.common.base.Optional;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -550,7 +547,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       case CallbackAction.DUO:
         if (showDuoPrimaryButton()) {
           CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
-          primaryActionButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
+          primaryActionButtonView.setTag(
+              IntentProvider.getDuoVideoIntentProvider(number, isNonContactEntry(info)));
         } else {
           primaryActionButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
         }
@@ -684,14 +682,17 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         boolean identifiedSpamCall = isSpamFeatureEnabled && isSpam;
         if (duo.isReachable(context, number)) {
-          videoCallButtonView.setTag(IntentProvider.getDuoVideoIntentProvider(number));
+          videoCallButtonView.setTag(
+              IntentProvider.getDuoVideoIntentProvider(number, isNonContactEntry(info)));
           videoCallButtonView.setVisibility(View.VISIBLE);
+          CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
         } else if (duo.isActivated(context) && !identifiedSpamCall) {
           if (ConfigProviderBindings.get(context)
               .getBoolean("enable_call_log_duo_invite_button", false)) {
             inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
             inviteVideoButtonView.setVisibility(View.VISIBLE);
             Logger.get(context).logImpression(DialerImpression.Type.DUO_CALL_LOG_INVITE_SHOWN);
+            CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
           }
         } else if (duo.isEnabled(context) && !identifiedSpamCall) {
           if (!duo.isInstalled(context)) {
@@ -701,6 +702,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               setUpVideoButtonView.setVisibility(View.VISIBLE);
               Logger.get(context)
                   .logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_INSTALL_SHOWN);
+              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
             }
           } else {
             if (ConfigProviderBindings.get(context)
@@ -709,6 +711,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               setUpVideoButtonView.setVisibility(View.VISIBLE);
               Logger.get(context)
                   .logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_ACTIVATE_SHOWN);
+              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
             }
           }
         }
@@ -1024,20 +1027,13 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (intentProvider == null) {
       return;
     }
-
+    intentProvider.logInteraction(context);
     final Intent intent = intentProvider.getIntent(context);
     // See IntentProvider.getCallDetailIntentProvider() for why this may be null.
     if (intent == null) {
       return;
     }
-
-    // We check to see if we are starting a Duo intent. The reason is Duo
-    // intents need to be started using startActivityForResult instead of the usual startActivity
-    Optional<Duo.IntentType> duoIntentType =
-        DuoComponent.get(context).getDuo().getIntentType(intent);
-    if (duoIntentType.isPresent()) {
-      startDuoActivity(intent, duoIntentType.get());
-    } else if (OldCallDetailsActivity.isLaunchIntent(intent)) {
+    if (OldCallDetailsActivity.isLaunchIntent(intent)) {
       PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_DETAIL);
       ((Activity) context)
           .startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_CALL_DETAILS);
@@ -1046,9 +1042,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           && intent.getIntExtra(TelecomManager.EXTRA_START_CALL_WITH_VIDEO_STATE, -1)
               == VideoProfile.STATE_BIDIRECTIONAL) {
         Logger.get(context).logImpression(DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG);
-      } else if (intent.filterEquals(
-          DuoComponent.get(context).getDuo().getInstallDuoIntent().orNull())) {
-        Logger.get(context).logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_INSTALL);
       }
 
       DialerUtils.startActivityWithErrorToast(context, intent);
@@ -1060,32 +1053,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       return true;
     }
     return false;
-  }
-
-  private void startDuoActivity(Intent intent, Duo.IntentType intentType) {
-    switch (intentType) {
-      case CALL:
-        Logger.get(context)
-            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG);
-        if (isNonContactEntry(info)) {
-          Logger.get(context)
-              .logImpression(
-                  DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG);
-        }
-        break;
-      case INVITE:
-        Logger.get(context).logImpression(DialerImpression.Type.DUO_CALL_LOG_INVITE);
-        break;
-      case ACTIVATE:
-        Logger.get(context).logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_ACTIVATE);
-        break;
-    }
-    try {
-      Activity activity = (Activity) context;
-      activity.startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
-    } catch (ActivityNotFoundException e) {
-      Toast.makeText(context, R.string.activity_not_available, Toast.LENGTH_SHORT).show();
-    }
   }
 
   private DialerContact buildContact() {

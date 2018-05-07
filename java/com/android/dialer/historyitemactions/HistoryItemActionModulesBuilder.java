@@ -149,18 +149,14 @@ public final class HistoryItemActionModulesBuilder {
     // Do not set PhoneAccountHandle so that regular PreCall logic will be used. The account used to
     // place or receive the call should be ignored for carrier video calls.
     // TODO(a bug): figure out the correct video call behavior
-    HistoryItemActionModule carrierVideoCallModule =
-        IntentModule.newCallModule(
-            context,
-            new CallIntentBuilder(moduleInfo.getNormalizedNumber(), getCallInitiationType())
-                .setAllowAssistedDial(moduleInfo.getCanSupportAssistedDialing())
-                .setIsVideoCall(true));
-    HistoryItemActionModule duoVideoCallModule =
-        new DuoCallModule(context, moduleInfo.getNormalizedNumber());
+    CallIntentBuilder callIntentBuilder =
+        new CallIntentBuilder(moduleInfo.getNormalizedNumber(), getCallInitiationType())
+            .setAllowAssistedDial(moduleInfo.getCanSupportAssistedDialing())
+            .setIsVideoCall(true);
 
     // If the module info is for a video call, add an appropriate video call module.
     if ((moduleInfo.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      modules.add(isDuoCall() && canPlaceDuoCall() ? duoVideoCallModule : carrierVideoCallModule);
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder.setIsDuoCall(isDuoCall())));
       return this;
     }
 
@@ -169,9 +165,9 @@ public final class HistoryItemActionModulesBuilder {
     //
     // The carrier video call module takes precedence over the Duo module.
     if (canPlaceCarrierVideoCall()) {
-      modules.add(carrierVideoCallModule);
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder));
     } else if (canPlaceDuoCall()) {
-      modules.add(duoVideoCallModule);
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder.setIsDuoCall(true)));
     }
     return this;
   }
