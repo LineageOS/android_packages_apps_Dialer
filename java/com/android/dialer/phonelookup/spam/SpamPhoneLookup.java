@@ -167,4 +167,9 @@ public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
           return null;
         });
   }
+
+  @Override
+  public String getLoggingName() {
+    return "SpamPhoneLookup";
+  }
 }

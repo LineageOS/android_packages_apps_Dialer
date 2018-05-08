@@ -141,6 +141,11 @@ public class CequintPhoneLookup implements PhoneLookup<CequintInfo> {
     return Futures.immediateFuture(null);
   }
 
+  @Override
+  public String getLoggingName() {
+    return "CequintPhoneLookup";
+  }
+
   /**
    * Builds a {@link CequintInfo} proto based on the given {@link CequintCallerIdContact} returned
    * by {@link CequintCallerIdManager}.

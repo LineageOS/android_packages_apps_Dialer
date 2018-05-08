@@ -320,6 +320,11 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
         MoreExecutors.directExecutor());
   }
 
+  @Override
+  public String getLoggingName() {
+    return "PhoneLookupDataSource";
+  }
+
   private static ImmutableSet<DialerPhoneNumber>
       queryDistinctDialerPhoneNumbersFromAnnotatedCallLog(Context appContext) {
     ImmutableSet.Builder<DialerPhoneNumber> numbers = ImmutableSet.builder();

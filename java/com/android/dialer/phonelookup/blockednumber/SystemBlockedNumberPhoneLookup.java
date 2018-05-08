@@ -181,4 +181,9 @@ public class SystemBlockedNumberPhoneLookup implements PhoneLookup<SystemBlocked
   public ListenableFuture<Void> clearData() {
     return Futures.immediateFuture(null);
   }
+
+  @Override
+  public String getLoggingName() {
+    return "SystemBlockedNumberPhoneLookup";
+  }
 }

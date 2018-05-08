@@ -114,4 +114,9 @@ public class EmergencyPhoneLookup implements PhoneLookup<EmergencyInfo> {
   public ListenableFuture<Void> clearData() {
     return Futures.immediateFuture(null);
   }
+
+  @Override
+  public String getLoggingName() {
+    return "EmergencyPhoneLookup";
+  }
 }
