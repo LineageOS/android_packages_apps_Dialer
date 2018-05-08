@@ -16,6 +16,8 @@
 
 package com.android.incallui.speakeasy;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import com.android.incallui.call.DialerCall;
@@ -38,4 +40,17 @@ public class SpeakEasyCallManagerStub implements SpeakEasyCallManager {
   /** Always inert in the stub. */
   @Override
   public void onCallRemoved(DialerCall call) {}
+
+  /** Always returns false. */
+  @Override
+  public boolean isAvailable(@NonNull Context unused) {
+    return false;
+  }
+
+  /** Always returns a stub string. */
+  @NonNull
+  @Override
+  public String getConfigProviderFlag() {
+    return "not_yet_implmented";
+  }
 }

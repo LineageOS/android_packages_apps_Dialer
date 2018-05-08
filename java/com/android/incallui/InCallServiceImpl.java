@@ -26,7 +26,6 @@ import android.telecom.InCallService;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.feedback.FeedbackComponent;
 import com.android.incallui.audiomode.AudioModeProvider;
-import com.android.incallui.audiomode.BluetoothDeviceProviderComponent;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.ExternalCallList;
 import com.android.incallui.call.TelecomAdapter;
@@ -98,7 +97,6 @@ public class InCallServiceImpl extends InCallService {
     final Context context = getApplicationContext();
     final ContactInfoCache contactInfoCache = ContactInfoCache.getInstance(context);
     AudioModeProvider.getInstance().initializeAudioState(this);
-    BluetoothDeviceProviderComponent.get(context).bluetoothDeviceProvider().setUp();
     InCallPresenter.getInstance()
         .setUp(
             context,
@@ -142,7 +140,6 @@ public class InCallServiceImpl extends InCallService {
     // Tear down the InCall system
     InCallPresenter.getInstance().tearDown();
     TelecomAdapter.getInstance().clearInCallService();
-    BluetoothDeviceProviderComponent.get(this).bluetoothDeviceProvider().tearDown();
     if (returnToCallController != null) {
       returnToCallController.tearDown();
       returnToCallController = null;

@@ -192,8 +192,6 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     nameView.setText(headerInfo.getPrimaryText());
     numberView.setText(headerInfo.getSecondaryText());
 
-    // TODO(a bug): show SIM info in the TextView returned by getNetworkView().
-
     setCallbackAction(callbackAction);
   }
 
