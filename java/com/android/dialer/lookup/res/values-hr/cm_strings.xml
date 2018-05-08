@@ -31,5 +31,5 @@
   <string name="people_lookup_provider_title">Pružatelj pretraživanja ljudi</string>
   <string name="reverse_lookup_provider_title">Pružatelj obrnutog pretraživanja</string>
   <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Pretraživanja mogu slati upute putem sigurnog protokola (https) udaljenim web-stranicama da bi prikupila informacije. Upit može uključivati telefonski broj drugog korisnika ili upit za pretraživanje.</string>
+  <string name="lookup_disclaimer">Pretraživanja mogu slati upite putem sigurnog protokola (https) udaljenim web-stranicama da bi prikupila informacije. Upit može uključivati telefonski broj drugog korisnika ili upit za pretraživanje</string>
 </resources>

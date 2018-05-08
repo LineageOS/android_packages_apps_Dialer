@@ -26,8 +26,10 @@
   <string name="enable_people_lookup_title">Búsqueda de personas</string>
   <string name="enable_people_lookup_summary">Mostrar resultados en línea de personas al buscar en el marcador</string>
   <string name="enable_reverse_lookup_title">Búsqueda inversa</string>
+  <string name="enable_reverse_lookup_summary">Buscar información sobre la persona o lugar para números desconocidos en las llamadas entrantes</string>
   <string name="forward_lookup_provider_title">Proveedor de búsqueda directa</string>
   <string name="people_lookup_provider_title">Proveedor de búsqueda de personas</string>
   <string name="reverse_lookup_provider_title">Proveedor de búsqueda inversa</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Las búsquedas pueden enviar consultas a través de un protocolo seguro (https) a sitios web remotos para recopilar información. La consulta puede incluir el número de teléfono de la otra parte o la consulta de búsqueda</string>
 </resources>
