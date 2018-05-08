@@ -17,6 +17,7 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="72dp">
@@ -43,16 +44,31 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+      <!--
+          Important note:
+
+          The following TextView is the only widget that defines a weight in the containing
+          LinearLayout, of which the purpose is to avoid pushing the widgets after it out of the
+          boundary when the text is too long.
+
+          Generally it is more efficient to assign a width/height of 0dp so that the TextView does
+          not have to measure its own size since it will absorb all the remaining space anyway.
+
+          However, as the TextView is part of an entry in the call log's RecyclerView, we must set
+          layout_width to "wrap_content" so that the TextView can adjust its size when recycled for
+          text of different lengths.
+      -->
       <TextView
           android:id="@+id/primary_text"
           style="@style/PrimaryText"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginEnd="6dp"
           android:ellipsize="end"
           android:lineSpacingMultiplier="1.5"
-          android:singleLine="true"/>
+          android:singleLine="true"
+          tools:ignore="InefficientWeight"/>
 
       <ImageView
           android:id="@+id/hd_icon"
