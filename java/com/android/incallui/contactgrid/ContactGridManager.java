@@ -23,6 +23,8 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.telephony.PhoneNumberUtils;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
@@ -416,7 +418,9 @@ public class ContactGridManager {
     // This is used for carriers like Project Fi to show the callback number for emergency calls.
     deviceNumberTextView.setText(
         context.getString(
-            R.string.contact_grid_callback_number, primaryCallState.callbackNumber()));
+            R.string.contact_grid_callback_number,
+            BidiFormatter.getInstance()
+                .unicodeWrap(primaryCallState.callbackNumber(), TextDirectionHeuristics.LTR)));
     deviceNumberTextView.setVisibility(View.VISIBLE);
     if (primaryInfo.shouldShowLocation()) {
       deviceNumberDivider.setVisibility(View.VISIBLE);
