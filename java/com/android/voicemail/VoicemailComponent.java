@@ -18,6 +18,7 @@ package com.android.voicemail;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Subcomponent that can be used to access the voicemail implementation. */
@@ -32,6 +33,7 @@ public abstract class VoicemailComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     VoicemailComponent voicemailComponent();
   }
