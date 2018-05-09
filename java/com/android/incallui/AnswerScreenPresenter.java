@@ -24,6 +24,7 @@ import android.support.v4.os.UserManagerCompat;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -35,6 +36,9 @@ import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.incalluilock.InCallUiLock;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** Manages changes for an incoming call screen. */
 public class AnswerScreenPresenter
@@ -90,6 +94,39 @@ public class AnswerScreenPresenter
 
   @Override
   public void onAnswer(boolean answerVideoAsAudio) {
+
+    DialerCall incomingCall = CallList.getInstance().getIncomingCall();
+    InCallActivity inCallActivity =
+        (InCallActivity) answerScreen.getAnswerScreenFragment().getActivity();
+    ListenableFuture<Void> answerPrecondition;
+
+    if (incomingCall != null && inCallActivity != null) {
+      answerPrecondition = inCallActivity.getSpeakEasyCallManager().onNewIncomingCall(incomingCall);
+    } else {
+      answerPrecondition = Futures.immediateFuture(null);
+    }
+
+    Futures.addCallback(
+        answerPrecondition,
+        new FutureCallback<Void>() {
+          @Override
+          public void onSuccess(Void result) {
+            onAnswerCallback(answerVideoAsAudio);
+          }
+
+          @Override
+          public void onFailure(Throwable t) {
+            onAnswerCallback(answerVideoAsAudio);
+            // TODO(erfanian): Enumerate all error states and specify recovery strategies.
+            throw new RuntimeException("Failed to successfully complete pre call tasks.", t);
+          }
+        },
+        DialerExecutorComponent.get(context).uiExecutor());
+    addTimeoutCheck();
+  }
+
+  private void onAnswerCallback(boolean answerVideoAsAudio) {
+
     if (answerScreen.isVideoUpgradeRequest()) {
       if (answerVideoAsAudio) {
         Logger.get(context)
@@ -113,7 +150,6 @@ public class AnswerScreenPresenter
         call.answer();
       }
     }
-    addTimeoutCheck();
   }
 
   @Override
