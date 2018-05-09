@@ -36,6 +36,7 @@ import android.provider.ContactsContract.QuickContact;
 import android.provider.VoicemailContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.bottomsheet.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -46,9 +47,11 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.app.DialtactsActivity;
@@ -104,6 +107,8 @@ import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.promotion.Promotion;
+import com.android.dialer.promotion.RttPromotion;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
@@ -196,6 +201,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private MissedCallCountObserver missedCallCountObserver;
   private UiListener<String> getLastOutgoingCallListener;
   private UiListener<Integer> missedCallObserverUiListener;
+  private View bottomSheet;
 
   public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
     Intent intent = new Intent(context, MainActivity.class);
@@ -240,6 +246,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     dialpadFragmentHostInterface = new MainDialpadFragmentHost();
 
     snackbarContainer = activity.findViewById(R.id.coordinator_layout);
+    bottomSheet = activity.findViewById(R.id.promotion_bottom_sheet);
+    BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
     FloatingActionButton fab = activity.findViewById(R.id.fab);
     fab.setOnClickListener(
@@ -255,7 +264,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     bottomNav = activity.findViewById(R.id.bottom_nav_bar);
     bottomNavTabListener =
         new MainBottomNavBarBottomNavTabListener(
-            activity, activity.getFragmentManager(), activity.getSupportFragmentManager(), fab);
+            activity,
+            activity.getFragmentManager(),
+            activity.getSupportFragmentManager(),
+            fab,
+            bottomSheet);
     bottomNav.addOnTabSelectedListener(bottomNavTabListener);
     // TODO(uabdullah): Handle case of when a sim is inserted/removed while the activity is open.
     boolean showVoicemailTab = canVoicemailTabBeShown(activity);
@@ -1245,6 +1258,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private final FragmentManager fragmentManager;
     private final android.support.v4.app.FragmentManager supportFragmentManager;
     private final FloatingActionButton fab;
+    private final View bottomSheet;
 
     @TabIndex private int selectedTab = -1;
 
@@ -1252,11 +1266,13 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         TransactionSafeActivity activity,
         FragmentManager fragmentManager,
         android.support.v4.app.FragmentManager supportFragmentManager,
-        FloatingActionButton fab) {
+        FloatingActionButton fab,
+        View bottomSheet) {
       this.activity = activity;
       this.fragmentManager = fragmentManager;
       this.supportFragmentManager = supportFragmentManager;
       this.fab = fab;
+      this.bottomSheet = bottomSheet;
     }
 
     @Override
@@ -1300,6 +1316,34 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         showFragment(fragment == null ? new CallLogFragment() : fragment, CALL_LOG_TAG);
       }
       fab.show();
+      showPromotionBottomSheet(activity, bottomSheet);
+    }
+
+    private static void showPromotionBottomSheet(Context context, View view) {
+      // TODO(a bug): Use a promotion manager to get promotion to show.
+      Promotion promotion = new RttPromotion(context);
+      BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(view);
+
+      if (!promotion.shouldShow()) {
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        return;
+      }
+      ImageView icon = view.findViewById(R.id.promotion_icon);
+      icon.setImageResource(promotion.getIconRes());
+      TextView details = view.findViewById(R.id.promotion_details);
+      details.setText(promotion.getDetails());
+      // Required to make link clickable.
+      details.setMovementMethod(LinkMovementMethod.getInstance());
+      TextView title = view.findViewById(R.id.promotion_title);
+      title.setText(promotion.getTitle());
+      view.findViewById(R.id.ok_got_it)
+          .setOnClickListener(
+              v -> {
+                promotion.dismiss();
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+              });
+      view.setVisibility(View.VISIBLE);
+      bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
     void disableNewCallLogFragment() {
