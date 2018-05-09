@@ -541,13 +541,13 @@ public class VideoCallFragment extends Fragment
       return new Point();
     }
     if (isLandscape()) {
-      int stableInsetEnd =
+      int systemWindowInsetEnd =
           getView().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL
-              ? getView().getRootWindowInsets().getStableInsetLeft()
-              : -getView().getRootWindowInsets().getStableInsetRight();
-      return new Point(stableInsetEnd, 0);
+              ? getView().getRootWindowInsets().getSystemWindowInsetLeft()
+              : -getView().getRootWindowInsets().getSystemWindowInsetRight();
+      return new Point(systemWindowInsetEnd, 0);
     } else {
-      return new Point(0, -getView().getRootWindowInsets().getStableInsetBottom());
+      return new Point(0, -getView().getRootWindowInsets().getSystemWindowInsetBottom());
     }
   }
 
