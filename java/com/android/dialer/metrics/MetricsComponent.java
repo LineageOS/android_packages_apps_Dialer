@@ -18,6 +18,7 @@ package com.android.dialer.metrics;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Component for metrics. */
@@ -37,6 +38,7 @@ public abstract class MetricsComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     MetricsComponent metricsComponent();
   }

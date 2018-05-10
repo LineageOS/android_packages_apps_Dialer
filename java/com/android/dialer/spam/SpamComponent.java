@@ -18,6 +18,7 @@ package com.android.dialer.spam;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Dagger component to get Spam. */
@@ -35,6 +36,7 @@ public abstract class SpamComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     SpamComponent spamComponent();
   }

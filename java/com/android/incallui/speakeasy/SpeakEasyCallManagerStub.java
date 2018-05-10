@@ -22,6 +22,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import com.android.incallui.call.DialerCall;
 import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import javax.inject.Inject;
 
 /** Default implementation of SpeakEasyCallManager. */
@@ -40,6 +42,11 @@ public class SpeakEasyCallManagerStub implements SpeakEasyCallManager {
   /** Always inert in the stub. */
   @Override
   public void onCallRemoved(DialerCall call) {}
+
+  @Override
+  public ListenableFuture<Void> onNewIncomingCall(@NonNull DialerCall call) {
+    return Futures.immediateFuture(null);
+  }
 
   /** Always returns false. */
   @Override

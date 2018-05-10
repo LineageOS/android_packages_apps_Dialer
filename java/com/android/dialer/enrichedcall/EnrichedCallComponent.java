@@ -19,6 +19,7 @@ package com.android.dialer.enrichedcall;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Subcomponent that can be used to access the enriched call implementation. */
@@ -37,6 +38,7 @@ public abstract class EnrichedCallComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     EnrichedCallComponent enrichedCallComponent();
   }

@@ -64,7 +64,6 @@ import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter.OnVoicemailDe
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
-import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
@@ -407,28 +406,7 @@ public class CallLogAdapter extends GroupingListAdapter
               }
             }
             expandViewHolderActions(viewHolder);
-
-            if (isDuoCallButtonVisible(viewHolder.videoCallButtonView)) {
-              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
-            }
           }
-        }
-
-        private boolean isDuoCallButtonVisible(View videoCallButtonView) {
-          if (videoCallButtonView == null) {
-            return false;
-          }
-          if (videoCallButtonView.getVisibility() != View.VISIBLE) {
-            return false;
-          }
-          IntentProvider intentProvider = (IntentProvider) videoCallButtonView.getTag();
-          if (intentProvider == null) {
-            return false;
-          }
-          return DuoComponent.get(activity)
-              .getDuo()
-              .getIntentType(intentProvider.getIntent(activity))
-              .isPresent();
         }
       };
 

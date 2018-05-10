@@ -68,8 +68,8 @@ public interface PreCallCoordinator {
   @NonNull
   PendingAction startPendingAction();
 
-  <Output> void listen(
-      ListenableFuture<Output> future,
-      Consumer<Output> successListener,
+  <OutputT> void listen(
+      ListenableFuture<OutputT> future,
+      Consumer<OutputT> successListener,
       Consumer<Throwable> failureListener);
 }

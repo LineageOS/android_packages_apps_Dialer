@@ -156,8 +156,7 @@ public class RefreshAnnotatedCallLogWorker {
     for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
       ListenableFuture<Boolean> dataSourceDirty = dataSource.isDirty();
       isDirtyFutures.add(dataSourceDirty);
-      String eventName =
-          String.format(Metrics.IS_DIRTY_TEMPLATE, dataSource.getClass().getSimpleName());
+      String eventName = String.format(Metrics.IS_DIRTY_TEMPLATE, dataSource.getLoggingName());
       futureTimer.applyTiming(dataSourceDirty, eventName, LogCatMode.LOG_VALUES);
     }
     // Simultaneously invokes isDirty on all data sources, returning as soon as one returns true.
@@ -242,7 +241,7 @@ public class RefreshAnnotatedCallLogWorker {
   private static String eventNameForFill(CallLogDataSource dataSource, boolean isBuilt) {
     return String.format(
         !isBuilt ? Metrics.INITIAL_FILL_TEMPLATE : Metrics.FILL_TEMPLATE,
-        dataSource.getClass().getSimpleName());
+        dataSource.getLoggingName());
   }
 
   private static String eventNameForOverallFill(boolean isBuilt) {
@@ -255,7 +254,7 @@ public class RefreshAnnotatedCallLogWorker {
         !isBuilt
             ? Metrics.INITIAL_ON_SUCCESSFUL_FILL_TEMPLATE
             : Metrics.ON_SUCCESSFUL_FILL_TEMPLATE,
-        dataSource.getClass().getSimpleName());
+        dataSource.getLoggingName());
   }
 
   private static String eventNameForOverallOnSuccessfulFill(boolean isBuilt) {

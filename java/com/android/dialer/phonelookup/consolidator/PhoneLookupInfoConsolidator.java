@@ -347,6 +347,14 @@ public final class PhoneLookupInfoConsolidator {
 
   /**
    * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
+   * returns whether the number is an emergency number (e.g., 911 in the U.S.).
+   */
+  public boolean isEmergencyNumber() {
+    return phoneLookupInfo.getEmergencyInfo().getIsEmergencyNumber();
+  }
+
+  /**
+   * The {@link PhoneLookupInfo} passed to the constructor is associated with a number. This method
    * returns whether the number can be reported as invalid.
    *
    * <p>As we currently report invalid numbers via the People API, only numbers from the People API

@@ -20,15 +20,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.telecom.CallAudioState;
 import android.telecom.VideoProfile;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.TelecomAdapter;
+import com.android.incallui.speakeasy.SpeakEasyCallManager;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * Accepts broadcast Intents which will be prepared by {@link StatusBarNotifier} and thus sent from
@@ -72,9 +78,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
     // TODO: Commands of this nature should exist in the CallList.
     if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
-      answerIncomingCall(VideoProfile.STATE_BIDIRECTIONAL);
+      answerIncomingCall(VideoProfile.STATE_BIDIRECTIONAL, context);
     } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
-      answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY);
+      answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY, context);
     } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
       Logger.get(context)
           .logImpression(DialerImpression.Type.REJECT_INCOMING_CALL_FROM_NOTIFICATION);
@@ -140,7 +146,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     }
   }
 
-  private void answerIncomingCall(int videoState) {
+  private void answerIncomingCall(int videoState, @NonNull Context context) {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
       StatusBarNotifier.clearAllCallNotifications();
@@ -148,11 +154,40 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     } else {
       DialerCall call = callList.getIncomingCall();
       if (call != null) {
-        call.answer(videoState);
-        InCallPresenter.getInstance()
-            .showInCall(false /* showDialpad */, false /* newOutgoingCall */);
+
+        SpeakEasyCallManager speakEasyCallManager =
+            InCallPresenter.getInstance().getSpeakEasyCallManager();
+        ListenableFuture<Void> answerPrecondition;
+
+        if (speakEasyCallManager != null) {
+          answerPrecondition = speakEasyCallManager.onNewIncomingCall(call);
+        } else {
+          answerPrecondition = Futures.immediateFuture(null);
+        }
+
+        Futures.addCallback(
+            answerPrecondition,
+            new FutureCallback<Void>() {
+              @Override
+              public void onSuccess(Void result) {
+                answerIncomingCallCallback(call, videoState);
+              }
+
+              @Override
+              public void onFailure(Throwable t) {
+                answerIncomingCallCallback(call, videoState);
+                // TODO(erfanian): Enumerate all error states and specify recovery strategies.
+                throw new RuntimeException("Failed to successfully complete pre call tasks.", t);
+              }
+            },
+            DialerExecutorComponent.get(context).uiExecutor());
       }
     }
+  }
+
+  private void answerIncomingCallCallback(@NonNull DialerCall call, int videoState) {
+    call.answer(videoState);
+    InCallPresenter.getInstance().showInCall(false /* showDialpad */, false /* newOutgoingCall */);
   }
 
   private void declineIncomingCall() {

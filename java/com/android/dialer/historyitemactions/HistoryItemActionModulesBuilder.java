@@ -118,6 +118,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>This method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked, or
    *   <li>the number is marked as spam.
@@ -138,25 +139,24 @@ public final class HistoryItemActionModulesBuilder {
    * capability, and Duo is available, add a Duo video call module.
    */
   public HistoryItemActionModulesBuilder addModuleForVideoCall() {
-    if (moduleInfo.getIsVoicemailCall() || moduleInfo.getIsBlocked() || moduleInfo.getIsSpam()) {
+    if (moduleInfo.getIsEmergencyNumber()
+        || moduleInfo.getIsVoicemailCall()
+        || moduleInfo.getIsBlocked()
+        || moduleInfo.getIsSpam()) {
       return this;
     }
 
     // Do not set PhoneAccountHandle so that regular PreCall logic will be used. The account used to
     // place or receive the call should be ignored for carrier video calls.
     // TODO(a bug): figure out the correct video call behavior
-    HistoryItemActionModule carrierVideoCallModule =
-        IntentModule.newCallModule(
-            context,
-            new CallIntentBuilder(moduleInfo.getNormalizedNumber(), getCallInitiationType())
-                .setAllowAssistedDial(moduleInfo.getCanSupportAssistedDialing())
-                .setIsVideoCall(true));
-    HistoryItemActionModule duoVideoCallModule =
-        new DuoCallModule(context, moduleInfo.getNormalizedNumber());
+    CallIntentBuilder callIntentBuilder =
+        new CallIntentBuilder(moduleInfo.getNormalizedNumber(), getCallInitiationType())
+            .setAllowAssistedDial(moduleInfo.getCanSupportAssistedDialing())
+            .setIsVideoCall(true);
 
     // If the module info is for a video call, add an appropriate video call module.
     if ((moduleInfo.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      modules.add(isDuoCall() && canPlaceDuoCall() ? duoVideoCallModule : carrierVideoCallModule);
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder.setIsDuoCall(isDuoCall())));
       return this;
     }
 
@@ -165,9 +165,9 @@ public final class HistoryItemActionModulesBuilder {
     //
     // The carrier video call module takes precedence over the Duo module.
     if (canPlaceCarrierVideoCall()) {
-      modules.add(carrierVideoCallModule);
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder));
     } else if (canPlaceDuoCall()) {
-      modules.add(duoVideoCallModule);
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder.setIsDuoCall(true)));
     }
     return this;
   }
@@ -178,6 +178,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked, or
    *   <li>the number is empty.
@@ -186,7 +187,8 @@ public final class HistoryItemActionModulesBuilder {
   public HistoryItemActionModulesBuilder addModuleForSendingTextMessage() {
     // TODO(zachh): There are other conditions where this module should not be shown
     // (e.g., business numbers).
-    if (moduleInfo.getIsVoicemailCall()
+    if (moduleInfo.getIsEmergencyNumber()
+        || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
       return this;
@@ -217,6 +219,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked,
    *   <li>the number is marked as spam,
@@ -225,7 +228,8 @@ public final class HistoryItemActionModulesBuilder {
    * </ul>
    */
   public HistoryItemActionModulesBuilder addModuleForAddingToContacts() {
-    if (moduleInfo.getIsVoicemailCall()
+    if (moduleInfo.getIsEmergencyNumber()
+        || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || moduleInfo.getIsSpam()
         || isExistingContact()
@@ -253,7 +257,12 @@ public final class HistoryItemActionModulesBuilder {
   /**
    * Add modules for blocking/unblocking a number and/or marking it as spam/not spam.
    *
-   * <p>The method is a no-op if the call is one made to a voicemail box.
+   * <p>The method is a no-op if
+   *
+   * <ul>
+   *   <li>the call is one made to/received from an emergency number, or
+   *   <li>the call is one made to a voicemail box.
+   * </ul>
    *
    * <p>If a number is marked as spam, add two modules:
    *
@@ -267,7 +276,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>If a number is not blocked or marked as spam, add the "Block/Report spam" module.
    */
   public HistoryItemActionModulesBuilder addModuleForBlockedOrSpamNumber() {
-    if (moduleInfo.getIsVoicemailCall()) {
+    if (moduleInfo.getIsEmergencyNumber() || moduleInfo.getIsVoicemailCall()) {
       return this;
     }
 

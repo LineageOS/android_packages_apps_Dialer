@@ -20,7 +20,8 @@
     android:layout_height="match_parent"
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
-    android:paddingEnd="8dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:background="#FFFFFF">
@@ -29,7 +30,6 @@
       android:id="@+id/contact_photo_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="10dp"
       android:layout_marginEnd="10dp"
       android:minHeight="@dimen/contact_actions_image_size"/>
 

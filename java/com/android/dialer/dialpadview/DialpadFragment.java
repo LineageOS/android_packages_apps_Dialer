@@ -477,7 +477,13 @@ public class DialpadFragment extends Fragment
       return;
     }
     digits.setContentDescription(null);
-    digitsHint.setVisibility(View.GONE);
+
+    // TOOD(77908301): Investigate why this is the case
+    // It's not clear why digitsHint would be null when digits is initialized as the time, so adding
+    // a todo to investigate why.
+    if (digitsHint != null) {
+      digitsHint.setVisibility(View.GONE);
+    }
   }
 
   /**

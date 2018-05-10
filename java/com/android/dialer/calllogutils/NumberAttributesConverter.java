@@ -57,6 +57,7 @@ public final class NumberAttributesConverter {
         .setIsCp2InfoIncomplete(phoneLookupInfoConsolidator.isDefaultCp2InfoIncomplete())
         .setContactSource(phoneLookupInfoConsolidator.getContactSource())
         .setCanSupportCarrierVideoCall(phoneLookupInfoConsolidator.canSupportCarrierVideoCall())
-        .setGeolocation(phoneLookupInfoConsolidator.getGeolocation());
+        .setGeolocation(phoneLookupInfoConsolidator.getGeolocation())
+        .setIsEmergencyNumber(phoneLookupInfoConsolidator.isEmergencyNumber());
   }
 }
