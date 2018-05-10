@@ -26,6 +26,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.function.Consumer;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
@@ -33,6 +34,7 @@ import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallComponent;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.telecom.TelecomUtil;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -101,7 +103,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
     LogUtil.enterBlock("PreCallCoordinatorImpl.runNextAction");
     Assert.checkArgument(currentAction == null);
     if (currentActionIndex >= actions.size()) {
-      TelecomUtil.placeCall(activity, builder.build());
+      placeCall();
       activity.finish();
       return;
     }
@@ -176,5 +178,21 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
         Futures.transform(future, (output) -> (Object) output, MoreExecutors.directExecutor()),
         output -> successListener.accept((OutputT) output),
         failureListener::accept);
+  }
+
+  private void placeCall() {
+    if (builder.isDuoCall()) {
+      Optional<Intent> intent =
+          DuoComponent.get(activity)
+              .getDuo()
+              .getCallIntent(builder.getUri().getSchemeSpecificPart());
+      if (intent.isPresent()) {
+        activity.startActivityForResult(intent.get(), 0);
+        return;
+      } else {
+        LogUtil.e("PreCallCoordinatorImpl.placeCall", "duo.getCallIntent() returned absent");
+      }
+    }
+    TelecomUtil.placeCall(activity, builder.build());
   }
 }

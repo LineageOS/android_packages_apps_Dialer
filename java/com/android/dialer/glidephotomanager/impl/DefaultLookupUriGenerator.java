@@ -48,7 +48,7 @@ final class DefaultLookupUriGenerator {
     try {
       lookupJson.put(Contacts.DISPLAY_NAME, photoInfo.getFormattedNumber());
       // DISPLAY_NAME_SOURCE required by contacts, otherwise the URI will not be recognized.
-      lookupJson.put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.STRUCTURED_NAME);
+      lookupJson.put(Contacts.DISPLAY_NAME_SOURCE, DisplayNameSources.PHONE);
       JSONObject contactRows = new JSONObject();
       JSONObject phone = new JSONObject();
       phone.put(CommonDataKinds.Phone.NUMBER, photoInfo.getFormattedNumber());

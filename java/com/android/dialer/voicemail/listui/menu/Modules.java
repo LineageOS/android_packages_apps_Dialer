@@ -58,6 +58,7 @@ final class Modules {
         .setCanSupportCarrierVideoCall(
             voicemailEntry.getNumberAttributes().getCanSupportCarrierVideoCall())
         .setIsBlocked(voicemailEntry.getNumberAttributes().getIsBlocked())
+        .setIsEmergencyNumber(voicemailEntry.getNumberAttributes().getIsEmergencyNumber())
         .setIsSpam(voicemailEntry.getNumberAttributes().getIsSpam())
         // A voicemail call is an outgoing call to the voicemail box.
         // Voicemail entries are not voicemail calls.

@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import com.android.incallui.call.DialerCall;
 import com.google.common.base.Optional;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** Provides operations necessary to SpeakEasy. */
 public interface SpeakEasyCallManager {
@@ -38,6 +39,13 @@ public interface SpeakEasyCallManager {
    * @param call The call which has been removed.
    */
   void onCallRemoved(@NonNull DialerCall call);
+
+  /**
+   * Indicates there is a new incoming call that is about to be answered.
+   *
+   * @param call The call which is about to become active.
+   */
+  ListenableFuture<Void> onNewIncomingCall(@NonNull DialerCall call);
 
   /**
    * Indicates the feature is available.

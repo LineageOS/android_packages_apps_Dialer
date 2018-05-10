@@ -15,6 +15,7 @@
  */
 package com.android.dialer.calllog.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -72,7 +73,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   private final Clock clock;
-  private final Context context;
+  private final Activity activity;
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final PopCounts popCounts = new PopCounts();
   private final SharedPreferences sharedPref;
@@ -93,12 +94,12 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   /** Position of the "Older" header. Null when it should not be displayed. */
   @Nullable private Integer olderHeaderPosition;
 
-  NewCallLogAdapter(Context context, Cursor cursor, Clock clock) {
-    this.context = context;
+  NewCallLogAdapter(Activity activity, Cursor cursor, Clock clock) {
+    this.activity = activity;
     this.cursor = cursor;
     this.clock = clock;
-    this.realtimeRowProcessor = CallLogUiComponent.get(context).realtimeRowProcessor();
-    this.sharedPref = StorageComponent.get(context).unencryptedSharedPrefs();
+    this.realtimeRowProcessor = CallLogUiComponent.get(activity).realtimeRowProcessor();
+    this.sharedPref = StorageComponent.get(activity).unencryptedSharedPrefs();
     this.onScrollListenerForRecordingDuoDisclosureFirstViewTime =
         new OnScrollListenerForRecordingDuoDisclosureFirstViewTime(sharedPref, clock);
 
@@ -175,8 +176,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     // Don't show the Duo disclosure card if
     // (1) Duo integration is not enabled on the device, or
     // (2) Duo is not activated.
-    Duo duo = DuoComponent.get(context).getDuo();
-    if (!duo.isEnabled(context) || !duo.isActivated(context)) {
+    Duo duo = DuoComponent.get(activity).getDuo();
+    if (!duo.isEnabled(activity) || !duo.isActivated(activity)) {
       return false;
     }
 
@@ -218,7 +219,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     switch (viewType) {
       case RowType.DUO_DISCLOSURE_CARD:
         return new DuoDisclosureCardViewHolder(
-            LayoutInflater.from(context)
+            LayoutInflater.from(activity)
                 .inflate(
                     R.layout.new_call_log_duo_disclosure_card,
                     viewGroup,
@@ -227,11 +228,12 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
       case RowType.HEADER_YESTERDAY:
       case RowType.HEADER_OLDER:
         return new HeaderViewHolder(
-            LayoutInflater.from(context)
+            LayoutInflater.from(activity)
                 .inflate(R.layout.new_call_log_header, viewGroup, /* attachToRoot = */ false));
       case RowType.CALL_LOG_ENTRY:
         return new NewCallLogViewHolder(
-            LayoutInflater.from(context)
+            activity,
+            LayoutInflater.from(activity)
                 .inflate(R.layout.new_call_log_entry, viewGroup, /* attachToRoot = */ false),
             clock,
             realtimeRowProcessor,
@@ -249,7 +251,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
         ((DuoDisclosureCardViewHolder) viewHolder)
             .setDismissListener(
                 unused -> {
-                  StorageComponent.get(context)
+                  StorageComponent.get(activity)
                       .unencryptedSharedPrefs()
                       .edit()
                       .putBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, true)

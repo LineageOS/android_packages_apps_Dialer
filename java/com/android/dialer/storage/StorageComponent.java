@@ -19,6 +19,7 @@ package com.android.dialer.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Dagger component for storage. */
@@ -42,6 +43,7 @@ public abstract class StorageComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     StorageComponent storageComponent();
   }

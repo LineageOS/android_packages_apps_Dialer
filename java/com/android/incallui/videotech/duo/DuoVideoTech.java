@@ -23,6 +23,7 @@ import android.telecom.Call;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoListener;
@@ -33,6 +34,8 @@ import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.utils.SessionModificationState;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.MoreExecutors;
 
 public class DuoVideoTech implements VideoTech, DuoListener {
   private final Duo duo;
@@ -77,7 +80,10 @@ public class DuoVideoTech implements VideoTech, DuoListener {
     if (!isRemoteUpgradeAvailabilityQueried) {
       LogUtil.v("DuoVideoTech.isAvailable", "reachability unknown, starting remote query");
       isRemoteUpgradeAvailabilityQueried = true;
-      duo.updateReachability(context, ImmutableList.of(callingNumber));
+      Futures.addCallback(
+          duo.updateReachability(context, ImmutableList.of(callingNumber)),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
     }
 
     return false;
