@@ -16,6 +16,8 @@
 
 package com.android.dialer.phonelookup;
 
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.android.dialer.phonelookup.blockednumber.SystemBlockedNumberPhoneLookup;
 import com.android.dialer.phonelookup.cequint.CequintPhoneLookup;
 import com.android.dialer.phonelookup.cnap.CnapPhoneLookup;
@@ -28,6 +30,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /** Dagger module which binds the PhoneLookup implementation. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class PhoneLookupModule {
 
