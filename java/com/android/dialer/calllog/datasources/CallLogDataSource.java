@@ -113,4 +113,11 @@ public interface CallLogDataSource {
    */
   @MainThread
   ListenableFuture<Void> clearData();
+
+  /**
+   * The name of this daa source for logging purposes. This is generally the same as the class name
+   * (but should not use methods from {@link Class} because the class names are generally obfuscated
+   * by Proguard.
+   */
+  String getLoggingName();
 }

@@ -234,4 +234,9 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
   public ListenableFuture<Void> clearData() {
     return Futures.immediateFuture(null);
   }
+
+  @Override
+  public String getLoggingName() {
+    return "Cp2ExtendedDirectoryPhoneLookup";
+  }
 }

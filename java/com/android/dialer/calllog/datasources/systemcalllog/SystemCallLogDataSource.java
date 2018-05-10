@@ -148,6 +148,11 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   @Override
+  public String getLoggingName() {
+    return "SystemCallLogDataSource";
+  }
+
+  @Override
   public ListenableFuture<Boolean> isDirty() {
     return backgroundExecutorService.submit(this::isDirtyInternal);
   }

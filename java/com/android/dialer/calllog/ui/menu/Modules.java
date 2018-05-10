@@ -126,6 +126,7 @@ final class Modules {
         .setCanSupportAssistedDialing(canSupportAssistedDialing(row))
         .setCanSupportCarrierVideoCall(row.getNumberAttributes().getCanSupportCarrierVideoCall())
         .setIsBlocked(row.getNumberAttributes().getIsBlocked())
+        .setIsEmergencyNumber(row.getNumberAttributes().getIsEmergencyNumber())
         .setIsSpam(row.getNumberAttributes().getIsSpam())
         .setIsVoicemailCall(row.getIsVoicemailCall())
         .setContactSource(row.getNumberAttributes().getContactSource())

@@ -28,6 +28,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.ViewUtil;
 import com.google.common.base.Optional;
 
@@ -41,7 +42,6 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
   private SearchBarView searchBar;
   private SearchBarListener listener;
   private MainToolbarMenu overflowMenu;
-  private boolean isSlideUp;
   private boolean hasGlobalLayoutListener;
 
   public MainToolbar(Context context, AttributeSet attrs) {
@@ -78,7 +78,6 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
       return;
     }
 
-    Assert.checkArgument(!isSlideUp);
     if (getHeight() == 0) {
       hasGlobalLayoutListener = true;
       ViewUtil.doOnGlobalLayout(
@@ -89,7 +88,12 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
           });
       return;
     }
-    isSlideUp = true;
+
+    if (isSlideUp()) {
+      LogUtil.e("MainToolbar.slideDown", "Already slide up.");
+      return;
+    }
+
     animate()
         .translationY(-getHeight())
         .setDuration(animate ? SLIDE_DURATION : 0)
@@ -105,8 +109,10 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
 
   /** Slides the toolbar down and back onto the screen. */
   public void slideDown(boolean animate, View container) {
-    Assert.checkArgument(isSlideUp);
-    isSlideUp = false;
+    if (getTranslationY() == 0) {
+      LogUtil.e("MainToolbar.slideDown", "Already slide down.");
+      return;
+    }
     animate()
         .translationY(0)
         .setDuration(animate ? SLIDE_DURATION : 0)
@@ -131,7 +137,7 @@ public final class MainToolbar extends Toolbar implements PopupMenu.OnMenuItemCl
   }
 
   public boolean isSlideUp() {
-    return isSlideUp;
+    return getHeight() != 0 && getTranslationY() == -getHeight();
   }
 
   public boolean isExpanded() {

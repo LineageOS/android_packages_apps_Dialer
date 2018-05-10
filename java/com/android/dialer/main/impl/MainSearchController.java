@@ -35,7 +35,6 @@ import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.dialer.app.calllog.CallLogActivity;
 import com.android.dialer.app.settings.DialerSettingsActivity;
 import com.android.dialer.callintent.CallInitiationType;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialpadview.DialpadFragment;
@@ -136,7 +135,10 @@ public class MainSearchController implements SearchBarListener {
   }
 
   private void showDialpad(boolean animate, boolean fromNewIntent) {
-    Assert.checkArgument(!isDialpadVisible());
+    if (isDialpadVisible()) {
+      LogUtil.e("MainSearchController.showDialpad", "Dialpad is already visible.");
+      return;
+    }
 
     Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_DIALPAD, activity);
 
@@ -187,14 +189,32 @@ public class MainSearchController implements SearchBarListener {
    */
   private void hideDialpad(boolean animate) {
     LogUtil.enterBlock("MainSearchController.hideDialpad");
-    assertDialpadVisible();
+    DialpadFragment dialpadFragment = getDialpadFragment();
+    if (dialpadFragment == null) {
+      LogUtil.e("MainSearchController.hideDialpad", "Dialpad fragment is null.");
+      return;
+    }
+
+    if (!dialpadFragment.isAdded()) {
+      LogUtil.e("MainSearchController.hideDialpad", "Dialpad fragment is not added.");
+      return;
+    }
+
+    if (dialpadFragment.isHidden()) {
+      LogUtil.e("MainSearchController.hideDialpad", "Dialpad fragment is already hidden.");
+      return;
+    }
+
+    if (!dialpadFragment.isDialpadSlideUp()) {
+      LogUtil.e("MainSearchController.hideDialpad", "Dialpad fragment is already slide down.");
+      return;
+    }
 
     fab.show();
     toolbar.slideDown(animate, fragmentContainer);
     toolbar.transferQueryFromDialpad(getDialpadFragment().getQuery());
     activity.setTitle(R.string.main_activity_label);
 
-    DialpadFragment dialpadFragment = getDialpadFragment();
     dialpadFragment.setAnimate(animate);
     dialpadFragment.slideDown(
         animate,
@@ -295,7 +315,22 @@ public class MainSearchController implements SearchBarListener {
   /** Calls {@link #hideDialpad(boolean)}, removes the search fragment and clears the dialpad. */
   private void closeSearch(boolean animate) {
     LogUtil.enterBlock("MainSearchController.closeSearch");
-    assertSearchIsVisible();
+    NewSearchFragment searchFragment = getSearchFragment();
+    if (searchFragment == null) {
+      LogUtil.e("MainSearchController.closeSearch", "Search fragment is null.");
+      return;
+    }
+
+    if (!searchFragment.isAdded()) {
+      LogUtil.e("MainSearchController.closeSearch", "Search fragment isn't added.");
+      return;
+    }
+
+    if (searchFragment.isHidden()) {
+      LogUtil.e("MainSearchController.closeSearch", "Search fragment is already hidden.");
+      return;
+    }
+
     if (isDialpadVisible()) {
       hideDialpad(animate);
     } else if (!fab.isShown()) {
@@ -304,7 +339,7 @@ public class MainSearchController implements SearchBarListener {
     showBottomNav();
     toolbar.collapse(animate);
     toolbarShadow.setVisibility(View.GONE);
-    activity.getFragmentManager().beginTransaction().hide(getSearchFragment()).commit();
+    activity.getFragmentManager().beginTransaction().hide(searchFragment).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
     DialpadFragment dialpadFragment = getDialpadFragment();
@@ -341,24 +376,9 @@ public class MainSearchController implements SearchBarListener {
         && fragment.isDialpadSlideUp();
   }
 
-  private void assertDialpadVisible() {
-    DialpadFragment fragment = getDialpadFragment();
-    Assert.checkArgument(fragment != null, "Dialpad Fragment is null");
-    Assert.checkArgument(fragment.isAdded(), "Dialpad Fragment is no added");
-    Assert.checkArgument(!fragment.isHidden(), "Dialpad Fragment is hidden");
-    Assert.checkArgument(fragment.isDialpadSlideUp(), "Dialpad Fragment is slide down");
-  }
-
   private boolean isSearchVisible() {
     NewSearchFragment fragment = getSearchFragment();
     return fragment != null && fragment.isAdded() && !fragment.isHidden();
-  }
-
-  private void assertSearchIsVisible() {
-    NewSearchFragment fragment = getSearchFragment();
-    Assert.checkArgument(fragment != null, "Search Fragment is null");
-    Assert.checkArgument(fragment.isAdded(), "Search Fragment is not added");
-    Assert.checkArgument(!fragment.isHidden(), "Search Fragment is hidden.");
   }
 
   /** Returns true if the search UI is visible. */
