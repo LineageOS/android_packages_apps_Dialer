@@ -23,6 +23,7 @@ import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
 import com.android.dialer.common.concurrent.Annotations.Ui;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import dagger.Subcomponent;
 import java.util.concurrent.ExecutorService;
@@ -66,6 +67,7 @@ public abstract class DialerExecutorComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     DialerExecutorComponent dialerExecutorComponent();
   }

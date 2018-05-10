@@ -196,12 +196,13 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
         newInCallState != inCallState
             && newInCallState == InCallState.OUTGOING
             && shouldStartInBubbleMode;
+    boolean bubbleNeverVisible = (bubble == null || !(bubble.isVisible() || bubble.isDismissed()));
     if (bubble != null && isNewBackgroundCall) {
       // If new outgoing call is in bubble mode, update bubble info.
       // We don't update if new call is not in bubble mode even if the existing call is.
       bubble.setBubbleInfo(generateBubbleInfoForBackgroundCalling());
     }
-    if ((bubble == null || !(bubble.isVisible() || bubble.isDismissed()) || isNewBackgroundCall)
+    if (((bubbleNeverVisible && newInCallState != InCallState.OUTGOING) || isNewBackgroundCall)
         && getCall() != null
         && !InCallPresenter.getInstance().isShowingInCallUi()) {
       LogUtil.i("ReturnToCallController.onCallListChange", "going to show bubble");

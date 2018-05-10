@@ -16,12 +16,14 @@
 
 package com.android.dialer.spam;
 
+import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
-import com.google.common.base.Optional;
+import com.android.dialer.spam.status.SimpleSpamStatus;
+import com.android.dialer.spam.status.SpamStatus;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
@@ -47,33 +49,27 @@ public class SpamStub implements Spam {
           ImmutableMap.Builder<DialerPhoneNumber, SpamStatus> resultBuilder =
               new ImmutableMap.Builder<>();
           for (DialerPhoneNumber dialerPhoneNumber : dialerPhoneNumbers) {
-            resultBuilder.put(
-                dialerPhoneNumber,
-                new SpamStatus() {
-                  @Override
-                  public boolean isSpam() {
-                    return false;
-                  }
-
-                  @Override
-                  public Optional<Long> getTimestampMillis() {
-                    return Optional.absent();
-                  }
-                });
+            resultBuilder.put(dialerPhoneNumber, SimpleSpamStatus.notSpam());
           }
           return resultBuilder.build();
         });
   }
 
   @Override
-  public ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser) {
-    // no-op
-    return Futures.immediateFuture(null);
+  public ListenableFuture<SpamStatus> checkSpamStatus(DialerPhoneNumber dialerPhoneNumber) {
+    return Futures.immediateFuture(SimpleSpamStatus.notSpam());
   }
 
   @Override
-  public void checkSpamStatus(String number, String countryIso, Listener listener) {
-    listener.onComplete(false);
+  public ListenableFuture<SpamStatus> checkSpamStatus(
+      String number, @Nullable String defaultCountryIso) {
+    return Futures.immediateFuture(SimpleSpamStatus.notSpam());
+  }
+
+  @Override
+  public ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser) {
+    // no-op
+    return Futures.immediateFuture(null);
   }
 
   @Override

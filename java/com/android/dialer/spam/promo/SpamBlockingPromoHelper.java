@@ -42,6 +42,8 @@ public class SpamBlockingPromoHelper {
   static final String SPAM_BLOCKING_PROMO_PERIOD_MILLIS = "spam_blocking_promo_period_millis";
   static final String SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS = "spam_blocking_promo_last_show_millis";
   public static final String ENABLE_SPAM_BLOCKING_PROMO = "enable_spam_blocking_promo";
+  public static final String ENABLE_AFTER_CALL_SPAM_BLOCKING_PROMO =
+      "enable_after_call_spam_blocking_promo";
 
   private final Context context;
   private final SpamSettings spamSettings;
@@ -75,6 +77,13 @@ public class SpamBlockingPromoHelper {
         ConfigProviderBindings.get(context)
             .getLong(SPAM_BLOCKING_PROMO_PERIOD_MILLIS, Long.MAX_VALUE);
     return lastShowMillis == 0 || System.currentTimeMillis() - lastShowMillis > showPeriodMillis;
+  }
+
+  /* Returns true if we should show a spam blocking promo in after call notification scenario. */
+  public boolean shouldShowAfterCallSpamBlockingPromo() {
+    return shouldShowSpamBlockingPromo()
+        && ConfigProviderBindings.get(context)
+            .getBoolean(ENABLE_AFTER_CALL_SPAM_BLOCKING_PROMO, false);
   }
 
   /**

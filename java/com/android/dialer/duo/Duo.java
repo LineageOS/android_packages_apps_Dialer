@@ -27,6 +27,8 @@ import android.telecom.Call;
 import android.telecom.PhoneAccountHandle;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.ListenableFuture;
 import java.util.List;
 
 /** Interface for Duo video call integration. */
@@ -61,7 +63,8 @@ public interface Duo {
 
   /** Starts a task to update the reachability of the parameter numbers asynchronously. */
   @MainThread
-  void updateReachability(@NonNull Context context, @NonNull List<String> numbers);
+  ListenableFuture<ImmutableMap<String, ReachabilityData>> updateReachability(
+      @NonNull Context context, @NonNull List<String> numbers);
 
   /**
    * Clears the current reachability data and starts a task to load the latest reachability data
@@ -94,19 +97,6 @@ public interface Duo {
    *     startActivityForResult.
    */
   Optional<Intent> getInviteIntent(String number);
-
-  /** Return value of {@link #getIntentType(Intent)} */
-  enum IntentType {
-    /** The intent is returned by {@link #getCallIntent(String)} */
-    CALL,
-    /** The intent is returned by {@link #getActivateIntent()} */
-    ACTIVATE,
-    /** The intent is returned by {@link #getInviteIntent(String)} */
-    INVITE
-  }
-
-  /** Classifies a Duo intent. Absent if the intent is not a Duo intent. */
-  Optional<IntentType> getIntentType(Intent intent);
 
   Optional<Intent> getInstallDuoIntent();
 

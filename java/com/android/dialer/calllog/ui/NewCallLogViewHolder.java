@@ -72,9 +72,13 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private long currentRowId;
 
   NewCallLogViewHolder(
-      View view, Clock clock, RealtimeRowProcessor realtimeRowProcessor, PopCounts popCounts) {
+      Activity activity,
+      View view,
+      Clock clock,
+      RealtimeRowProcessor realtimeRowProcessor,
+      PopCounts popCounts) {
     super(view);
-    this.activity = (Activity) view.getContext();
+    this.activity = activity;
     contactPhotoView = view.findViewById(R.id.contact_photo_view);
     primaryTextView = view.findViewById(R.id.primary_text);
     callCountTextView = view.findViewById(R.id.call_count);

@@ -14,7 +14,7 @@ package com.android.dialer.phonelookup;
 // "cp2_info_in_default_directory" corresponds to class
 // Cp2DefaultDirectoryPhoneLookup, and class Cp2DefaultDirectoryPhoneLookup
 // alone is responsible for populating it.
-// Next ID: 9
+// Next ID: 10
 message PhoneLookupInfo {
   // Information about a PhoneNumber retrieved from CP2.
   message Cp2Info {
@@ -175,4 +175,11 @@ message PhoneLookupInfo {
     optional string photo_uri = 3;
   }
   optional CequintInfo cequint_info = 8;
+
+  // Message indicating whether a number is an emergency number.
+  // Next ID: 2
+  message EmergencyInfo {
+    optional bool is_emergency_number = 1;
+  }
+  optional EmergencyInfo emergency_info = 9;
 }

@@ -20,6 +20,7 @@ import android.provider.CallLog.Calls;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.model.CoalescedRow;
+import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.precall.PreCall;
 
 /** Actions which can be performed on a call log row. */
@@ -37,6 +38,10 @@ public final class CallLogRowActions {
         activity,
         new CallIntentBuilder(
                 row.getNumber().getNormalizedNumber(), CallInitiationType.Type.CALL_LOG)
-            .setIsVideoCall((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO));
+            .setIsVideoCall((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
+            .setIsDuoCall(
+                DuoComponent.get(activity)
+                    .getDuo()
+                    .isDuoAccount(row.getPhoneAccountComponentName())));
   }
 }
