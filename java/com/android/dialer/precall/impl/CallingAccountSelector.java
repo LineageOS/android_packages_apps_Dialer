@@ -132,6 +132,10 @@ public class CallingAccountSelector implements PreCallAction {
             phoneNumber,
             activity.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts()),
         result -> {
+          if (isDiscarding) {
+            // pendingAction is dropped by the coordinator before onDiscard is triggered.
+            return;
+          }
           if (result.getSelectedPhoneAccountHandle().isPresent()) {
 
             if (result.getSuggestion().isPresent()
