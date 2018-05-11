@@ -19,7 +19,6 @@ package com.android.dialer.calldetails;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +34,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 import com.android.dialer.assisteddialing.ui.AssistedDialingSettingActivity;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
@@ -48,9 +46,6 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.common.database.Selection;
-import com.android.dialer.constants.ActivityRequestCodes;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
@@ -63,7 +58,6 @@ import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.rtt.RttTranscriptActivity;
 import com.android.dialer.rtt.RttTranscriptUtil;
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -327,19 +321,11 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     public void placeDuoVideoCall(String phoneNumber) {
       Logger.get(getActivity())
           .logImpression(DialerImpression.Type.CALL_DETAILS_LIGHTBRINGER_CALL_BACK);
-      Duo duo = DuoComponent.get(getActivity()).getDuo();
-      Optional<Intent> intentOptional = duo.getCallIntent(phoneNumber);
-      if (!duo.isReachable(getActivity(), phoneNumber) || !intentOptional.isPresent()) {
-        placeImsVideoCall(phoneNumber);
-        return;
-      }
-
-      try {
-        getActivity()
-            .startActivityForResult(intentOptional.get(), ActivityRequestCodes.DIALTACTS_DUO);
-      } catch (ActivityNotFoundException e) {
-        Toast.makeText(getActivity(), R.string.activity_not_available, Toast.LENGTH_SHORT).show();
-      }
+      PreCall.start(
+          getActivity(),
+          new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
+              .setIsDuoCall(true)
+              .setIsVideoCall(true));
     }
 
     @Override

@@ -18,12 +18,15 @@ package com.android.dialer.enrichedcall.stub;
 
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.RcsVideoShareFactory;
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
 
 /** Module which binds {@link EnrichedCallManagerStub}. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public class StubEnrichedCallModule {
 

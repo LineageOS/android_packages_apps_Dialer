@@ -24,7 +24,7 @@ package com.android.dialer;
 import "java/com/android/dialer/logging/contact_source.proto";
 
 // Information related to the phone number of the call.
-// Next ID: 14
+// Next ID: 15
 message NumberAttributes {
   // The name (which may be a person's name or business name, but not a number)
   // formatted exactly as it should appear to the user. If the user's locale or
@@ -74,4 +74,7 @@ message NumberAttributes {
   // Description of the number's geolocation (e.g., "Mountain View, CA").
   // This string is for display purpose only.
   optional string geolocation = 13;
+
+  // Whether the number is an emergency number.
+  optional bool is_emergency_number = 14;
 }

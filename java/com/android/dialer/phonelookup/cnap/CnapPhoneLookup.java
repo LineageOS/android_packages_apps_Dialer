@@ -157,4 +157,9 @@ public final class CnapPhoneLookup implements PhoneLookup<CnapInfo> {
   public ListenableFuture<Void> clearData() {
     return Futures.immediateFuture(null);
   }
+
+  @Override
+  public String getLoggingName() {
+    return "CnapPhoneLookup";
+  }
 }

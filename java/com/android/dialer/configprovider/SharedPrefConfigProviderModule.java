@@ -16,12 +16,15 @@
 
 package com.android.dialer.configprovider;
 
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.android.dialer.storage.StorageModule;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 /** Dagger module providing {@link ConfigProvider} based on shared preferences. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module(includes = StorageModule.class)
 public abstract class SharedPrefConfigProviderModule {
 

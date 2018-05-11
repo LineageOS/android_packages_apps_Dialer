@@ -16,10 +16,13 @@
 
 package com.android.dialer.spam;
 
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
 import dagger.Module;
 
 /** Module which binds {@link SpamStub}. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class StubSpamModule {
 

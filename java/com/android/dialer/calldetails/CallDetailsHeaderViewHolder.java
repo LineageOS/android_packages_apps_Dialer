@@ -190,7 +190,13 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
         .loadQuickContactBadge(contactPhoto, headerInfo.getPhotoInfo());
 
     nameView.setText(headerInfo.getPrimaryText());
-    numberView.setText(headerInfo.getSecondaryText());
+    if (!headerInfo.getSecondaryText().isEmpty()) {
+      numberView.setVisibility(View.VISIBLE);
+      numberView.setText(headerInfo.getSecondaryText());
+    } else {
+      numberView.setVisibility(View.GONE);
+      numberView.setText(null);
+    }
 
     setCallbackAction(callbackAction);
   }

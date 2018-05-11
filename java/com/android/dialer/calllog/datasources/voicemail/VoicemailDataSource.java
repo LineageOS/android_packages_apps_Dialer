@@ -121,4 +121,9 @@ public class VoicemailDataSource implements CallLogDataSource {
   public ListenableFuture<Void> clearData() {
     return Futures.immediateFuture(null);
   }
+
+  @Override
+  public String getLoggingName() {
+    return "VoicemailDataSource";
+  }
 }

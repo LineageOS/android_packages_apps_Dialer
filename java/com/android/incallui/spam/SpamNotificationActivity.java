@@ -528,7 +528,7 @@ public class SpamNotificationActivity extends FragmentActivity {
   }
 
   private void maybeShowSpamBlockingPromoAndFinish() {
-    if (!spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
+    if (!spamBlockingPromoHelper.shouldShowAfterCallSpamBlockingPromo()) {
       finish();
       return;
     }

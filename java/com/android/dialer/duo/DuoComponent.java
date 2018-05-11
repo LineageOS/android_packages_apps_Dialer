@@ -19,6 +19,7 @@ package com.android.dialer.duo;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /**
@@ -35,6 +36,7 @@ public abstract class DuoComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     DuoComponent duoComponent();
   }

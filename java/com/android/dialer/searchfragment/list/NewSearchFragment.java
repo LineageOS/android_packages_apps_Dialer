@@ -51,9 +51,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.logging.DialerImpression;
@@ -549,8 +547,11 @@ public final class NewSearchFragment extends Fragment
   public void placeDuoCall(String phoneNumber) {
     Logger.get(getContext())
         .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
-    Intent intent = DuoComponent.get(getContext()).getDuo().getCallIntent(phoneNumber).orNull();
-    getActivity().startActivityForResult(intent, ActivityRequestCodes.DIALTACTS_DUO);
+    PreCall.start(
+        getContext(),
+        new CallIntentBuilder(phoneNumber, CallInitiationType.Type.REGULAR_SEARCH)
+            .setIsVideoCall(true)
+            .setIsDuoCall(true));
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
   }
 

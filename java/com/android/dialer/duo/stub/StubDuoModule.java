@@ -17,10 +17,13 @@
 package com.android.dialer.duo.stub;
 
 import com.android.dialer.duo.Duo;
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class StubDuoModule {
 
