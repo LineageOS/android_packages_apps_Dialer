@@ -33,4 +33,10 @@ public abstract class SimpleSpamStatus implements SpamStatus {
   public static SimpleSpamStatus notSpam() {
     return create(false, null);
   }
+
+  /** Returns an empty {@link SpamMetadata}. */
+  @Override
+  public final SpamMetadata getSpamMetadata() {
+    return SpamMetadata.empty();
+  }
 }

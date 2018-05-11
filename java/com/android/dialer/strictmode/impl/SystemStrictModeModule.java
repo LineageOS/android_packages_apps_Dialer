@@ -16,12 +16,15 @@
 
 package com.android.dialer.strictmode.impl;
 
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.android.dialer.strictmode.DialerStrictMode;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 /** Module which binds {@link SystemDialerStrictMode}. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class SystemStrictModeModule {
 

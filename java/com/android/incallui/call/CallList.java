@@ -39,6 +39,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
+import com.android.dialer.promotion.RttPromotion;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
@@ -226,6 +227,9 @@ public class CallList implements DialerCallDelegate {
     if (call.getState() == DialerCallState.INCOMING
         || call.getState() == DialerCallState.CALL_WAITING) {
       if (call.isActiveRttCall()) {
+        if (!call.isPhoneAccountRttCapable()) {
+          new RttPromotion(context).setShouldShow(true);
+        }
         Logger.get(context)
             .logCallImpression(
                 DialerImpression.Type.INCOMING_RTT_CALL,
@@ -816,6 +820,9 @@ public class CallList implements DialerCallDelegate {
      */
     default void onUpgradeToRtt(DialerCall call, int rttRequestId) {}
 
+    /** Called when the SpeakEasy state of a Dialer call is mutated. */
+    default void onSpeakEasyStateChange() {}
+
     /** Called when the session modification state of a call changes. */
     void onSessionModificationStateChange(DialerCall call);
 
@@ -890,6 +897,13 @@ public class CallList implements DialerCallDelegate {
     public void onDialerCallUpgradeToRtt(int rttRequestId) {
       for (Listener listener : listeners) {
         listener.onUpgradeToRtt(call, rttRequestId);
+      }
+    }
+
+    @Override
+    public void onDialerCallSpeakEasyStateChange() {
+      for (Listener listener : listeners) {
+        listener.onSpeakEasyStateChange();
       }
     }
 

@@ -1247,13 +1247,13 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     ShouldShowUiResult shouldShowSpeakEasyUi = getShouldShowSpeakEasyUi();
     LogUtil.i(
         "InCallActivity.showMainInCallFragment",
-        "shouldShowAnswerUi: %b, shouldShowRttUi: %b, shouldShowVideoUi: %b "
-            + "didShowAnswerScreen: %b, didShowInCallScreen: %b, didShowRttCallScreen: %b, "
-            + "didShowVideoCallScreen: %b"
-            + "didShowSpeakEasyScreen: %b",
+        "shouldShowAnswerUi: %b, shouldShowRttUi: %b, shouldShowVideoUi: %b, "
+            + "shouldShowSpeakEasyUi: %b, didShowAnswerScreen: %b, didShowInCallScreen: %b, "
+            + "didShowRttCallScreen: %b, didShowVideoCallScreen: %b, didShowSpeakEasyScreen: %b",
         shouldShowAnswerUi.shouldShow,
         shouldShowRttUi.shouldShow,
         shouldShowVideoUi.shouldShow,
+        shouldShowSpeakEasyUi.shouldShow,
         didShowAnswerScreen,
         didShowInCallScreen,
         didShowRttCallScreen,
