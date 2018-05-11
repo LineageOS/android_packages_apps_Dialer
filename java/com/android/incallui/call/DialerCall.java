@@ -1726,6 +1726,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   /** Sets the user preference for SpeakEasy */
   public void setIsSpeakEasyCall(boolean isSpeakEasyCall) {
     this.isSpeakEasyCall = isSpeakEasyCall;
+    if (listeners != null) {
+      for (DialerCallListener listener : listeners) {
+        listener.onDialerCallSpeakEasyStateChange();
+      }
+    }
   }
 
   /**
