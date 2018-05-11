@@ -990,6 +990,13 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   }
 
   @Override
+  public void onSpeakEasyStateChange() {
+    if (inCallActivity != null) {
+      inCallActivity.onPrimaryCallStateChanged();
+    }
+  }
+
+  @Override
   public void onSessionModificationStateChange(DialerCall call) {
     int newState = call.getVideoTech().getSessionModificationState();
     LogUtil.i("InCallPresenter.onSessionModificationStateChange", "state: %d", newState);
