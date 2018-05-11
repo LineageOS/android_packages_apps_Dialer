@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
@@ -41,18 +42,26 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.metrics.jank.RecyclerViewJankLogger;
+import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /** The "new" call log fragment implementation, which is built on top of the annotated call log. */
 public final class NewCallLogFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
+  private static final int PHONE_PERMISSIONS_REQUEST_CODE = 1;
+  private static final int LOADER_ID = 0;
+
   @VisibleForTesting
   static final long MARK_ALL_CALLS_READ_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
   private RecyclerView recyclerView;
+  private EmptyContentView emptyContentView;
   private RefreshAnnotatedCallLogReceiver refreshAnnotatedCallLogReceiver;
   private SupportUiListener<Cursor> coalesingAnnotatedCallLogListener;
 
@@ -133,6 +142,22 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
    * will be called but it is not visible.
    */
   private void onFragmentShown() {
+    LoaderManager loaderManager = LoaderManager.getInstance(this);
+    if (!PermissionsUtil.hasCallLogReadPermissions(getContext())) {
+      recyclerView.setVisibility(View.GONE);
+      emptyContentView.setVisibility(View.VISIBLE);
+      loaderManager.destroyLoader(LOADER_ID);
+      return;
+    }
+
+    recyclerView.setVisibility(View.VISIBLE);
+    emptyContentView.setVisibility(View.GONE);
+
+    // This can happen if permissions were not enabled when the fragment was created.
+    if (loaderManager.getLoader(LOADER_ID) == null) {
+      loaderManager.restartLoader(LOADER_ID, null, this);
+    }
+
     registerRefreshAnnotatedCallLogReceiver();
 
     CallLogComponent.get(getContext())
@@ -193,14 +218,51 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
         new RecyclerViewJankLogger(
             MetricsComponent.get(getContext()).metrics(), Metrics.NEW_CALL_LOG_JANK_EVENT_NAME));
 
+    emptyContentView = view.findViewById(R.id.new_call_log_empty_content_view);
+    configureEmptyContentView();
+
     coalesingAnnotatedCallLogListener =
         DialerExecutorComponent.get(getContext())
             .createUiListener(
                 getChildFragmentManager(),
                 /* taskId = */ "NewCallLogFragment.coalescingAnnotatedCallLog");
-    getLoaderManager().restartLoader(0, null, this);
+
+    if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
+      LoaderManager.getInstance(this).restartLoader(LOADER_ID, null, this);
+    }
 
     return view;
+  }
+
+  private void configureEmptyContentView() {
+    emptyContentView.setImage(R.drawable.quantum_ic_query_builder_vd_theme_24);
+    emptyContentView.setImageTint(R.color.empty_call_log_icon_tint_color, null);
+    emptyContentView.setDescription(R.string.new_call_log_permission_no_calllog);
+    emptyContentView.setActionLabel(com.android.dialer.widget.R.string.permission_single_turn_on);
+    emptyContentView.setActionClickedListener(new TurnOnPhonePermissions());
+  }
+
+  private class TurnOnPhonePermissions implements OnEmptyViewActionButtonClickedListener {
+
+    @Override
+    public void onEmptyViewActionButtonClicked() {
+      if (getContext() == null) {
+        LogUtil.w("TurnOnPhonePermissions.onEmptyViewActionButtonClicked", "no context");
+        return;
+      }
+      String[] deniedPermissions =
+          PermissionsUtil.getPermissionsCurrentlyDenied(
+              getContext(), PermissionsUtil.allPhoneGroupPermissionsUsedInDialer);
+      if (deniedPermissions.length > 0) {
+        LogUtil.i(
+            "TurnOnPhonePermissions.onEmptyViewActionButtonClicked",
+            "requesting permissions: %s",
+            Arrays.toString(deniedPermissions));
+        // Don't implement onRequestPermissionsResult; instead rely on views being updated in
+        // #onFragmentShown.
+        requestPermissions(deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
+      }
+    }
   }
 
   private void registerRefreshAnnotatedCallLogReceiver() {
