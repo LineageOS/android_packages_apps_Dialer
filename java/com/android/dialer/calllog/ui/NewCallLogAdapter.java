@@ -31,6 +31,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.promotion.RttPromotion;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
@@ -173,6 +174,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   private boolean shouldShowDuoDisclosureCard() {
+    if (new RttPromotion(activity).shouldShow()) {
+      return false;
+    }
     // Don't show the Duo disclosure card if
     // (1) Duo integration is not enabled on the device, or
     // (2) Duo is not activated.

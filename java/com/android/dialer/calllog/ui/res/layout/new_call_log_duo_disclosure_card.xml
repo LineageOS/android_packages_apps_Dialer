@@ -68,7 +68,7 @@
           android:layout_gravity="end"
           android:paddingLeft="14dp"
           android:paddingRight="14dp"
-          android:text="@string/new_call_log_duo_disclosure_card_ok"
+          android:text="@string/ok_got_it"
           android:textSize="14sp"/>
     </LinearLayout>
   </LinearLayout>

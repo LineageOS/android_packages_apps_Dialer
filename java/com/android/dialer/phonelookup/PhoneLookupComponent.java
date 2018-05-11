@@ -17,6 +17,7 @@ package com.android.dialer.phonelookup;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import com.android.dialer.phonelookup.composite.CompositePhoneLookup;
 import dagger.Subcomponent;
 
@@ -32,6 +33,7 @@ public abstract class PhoneLookupComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     PhoneLookupComponent phoneLookupComponent();
   }

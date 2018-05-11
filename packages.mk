@@ -53,6 +53,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.precall.externalreceiver \
 	com.android.dialer.preferredsim.impl \
 	com.android.dialer.preferredsim.suggestion \
+	com.android.dialer.promotion \
 	com.android.dialer.rtt \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \

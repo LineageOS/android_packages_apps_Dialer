@@ -19,6 +19,7 @@ package com.android.dialer.commandline;
 import android.content.Context;
 import com.android.dialer.function.Supplier;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import com.google.common.collect.ImmutableMap;
 import dagger.Subcomponent;
 
@@ -34,6 +35,7 @@ public abstract class CommandLineComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     CommandLineComponent commandLineComponent();
   }

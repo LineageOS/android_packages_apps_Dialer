@@ -20,6 +20,8 @@ import android.content.Context;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.feedback.FeedbackSender;
 import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.logging.LoggingBindingsFactory;
 import com.android.dialer.logging.LoggingBindingsStub;
@@ -28,6 +30,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /** Module which bind {@link com.android.dialer.feedback.stub.CallFeedbackListenerStub}. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public class StubFeedbackModule {
 

@@ -36,7 +36,4 @@
     Google Duo video calling lets you chat with friends and family face-to-face. Data charges may apply. <xliff:g example="Learn More">%1$s</xliff:g>
   </string>
 
-  <!-- Text on the button on the Duo disclosure card. [CHAR_LIMIT=30] -->
-  <string name="new_call_log_duo_disclosure_card_ok">OK, got it</string>
-
 </resources>

@@ -14,21 +14,26 @@
  * limitations under the License
  */
 
-package com.android.dialer.metrics;
+package com.android.dialer.promotion;
 
-import com.android.dialer.inject.DialerVariant;
-import com.android.dialer.inject.InstallIn;
-import dagger.Binds;
-import dagger.Module;
+import android.support.annotation.DrawableRes;
 
-/** Binds stub {@link Metrics}. */
-@InstallIn(variants = {DialerVariant.DIALER_TEST})
-@Module
-public interface StubMetricsModule {
+/** Interface for promotion bottom sheet. */
+public interface Promotion {
 
-  @Binds
-  Metrics bindMetrics(StubMetrics stub);
+  /** Returns if this promotion should be shown. */
+  boolean shouldShow();
 
-  @Binds
-  Metrics.Initializer bindMetricsInitializer(StubMetricsInitializer stub);
+  /** Sets to show this promotion. */
+  void setShouldShow(boolean shouldShow);
+
+  /** Dismisses this promotion. This is called when user acknowledged the promotion. */
+  void dismiss();
+
+  CharSequence getTitle();
+
+  CharSequence getDetails();
+
+  @DrawableRes
+  int getIconRes();
 }
