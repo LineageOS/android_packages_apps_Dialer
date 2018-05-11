@@ -37,4 +37,7 @@ public interface SpamStatus {
    * </ul>
    */
   Optional<Long> getTimestampMillis();
+
+  /** Returns the {@link SpamMetadata} associated with this status. */
+  SpamMetadata getSpamMetadata();
 }
