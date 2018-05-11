@@ -31,6 +31,7 @@ import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.Futures;
@@ -38,6 +39,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import javax.inject.Inject;
 
 /**
@@ -46,24 +48,31 @@ import javax.inject.Inject;
  *
  * <p>Contacts in these directories are accessible only by specifying a directory ID.
  */
+@SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
 public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
+  private final MissingPermissionsOperations missingPermissionsOperations;
 
   @Inject
   Cp2ExtendedDirectoryPhoneLookup(
       @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
+      @LightweightExecutor ListeningExecutorService lightweightExecutorService,
+      MissingPermissionsOperations missingPermissionsOperations) {
     this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
+    this.missingPermissionsOperations = missingPermissionsOperations;
   }
 
   @Override
   public ListenableFuture<Cp2Info> lookup(DialerPhoneNumber dialerPhoneNumber) {
+    if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
+      return Futures.immediateFuture(Cp2Info.getDefaultInstance());
+    }
     return Futures.transformAsync(
         queryCp2ForExtendedDirectoryIds(),
         directoryIds -> queryCp2ForDirectoryContact(dialerPhoneNumber, directoryIds),
@@ -196,12 +205,23 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
 
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
+    if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
+      Predicate<PhoneLookupInfo> phoneLookupInfoIsDirtyFn =
+          phoneLookupInfo ->
+              !phoneLookupInfo.getExtendedCp2Info().equals(Cp2Info.getDefaultInstance());
+      return missingPermissionsOperations.isDirtyForMissingPermissions(
+          phoneNumbers, phoneLookupInfoIsDirtyFn);
+    }
     return Futures.immediateFuture(false);
   }
 
   @Override
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, Cp2Info>> getMostRecentInfo(
       ImmutableMap<DialerPhoneNumber, Cp2Info> existingInfoMap) {
+    if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
+      LogUtil.w("Cp2ExtendedDirectoryPhoneLookup.getMostRecentInfo", "missing permissions");
+      return missingPermissionsOperations.getMostRecentInfoForMissingPermissions(existingInfoMap);
+    }
     return Futures.immediateFuture(existingInfoMap);
   }
 
