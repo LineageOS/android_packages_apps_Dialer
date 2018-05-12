@@ -26,6 +26,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
@@ -147,7 +148,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     int numItemsInToday = 0;
     int numItemsInYesterday = 0;
     do {
-      long timestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
+      long timestamp = Coalescer.getTimestamp(cursor);
       long dayDifference = CallLogDates.getDayDifference(currentTimeMillis, timestamp);
       if (dayDifference == 0) {
         numItemsInToday++;
