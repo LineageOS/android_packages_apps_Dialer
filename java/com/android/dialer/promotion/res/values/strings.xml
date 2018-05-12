@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <string name="network_name_wifi">Wifi</string>
-  <string name="network_name_mobile">Mobile</string>
-  <!-- Content description for the overflow menu button. [CHAR LIMIT=NONE] -->
-  <string name="content_description_overflow">More options</string>
-  <!-- Text for undo button in snackbar for voicemail deletion/blocking/unblocking number. [CHAR LIMIT=10] -->
-  <string name="snackbar_undo">UNDO</string>
-  <!-- Text on button of "OK, got it". [CHAR_LIMIT=30] -->
-  <string name="ok_got_it">OK, got it</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title for RTT promotion dialog. [CHAR LIMIT=NONE] -->
+  <string name="rtt_promotion_title">Real-time text messaging within a call</string>
+
+  <!-- Details for RTT promotion dialog. [CHAR LIMIT=NONE] -->
+  <string name="rtt_promotion_details">RTT assists callers who are deaf, hard of hearing, have a speech
+    disability, or need more than voice alone. RTT messaging transcripts are stored on your device
+    in the call history. <xliff:g exmaple="Learn More">%1$s</xliff:g></string>
+
 </resources>

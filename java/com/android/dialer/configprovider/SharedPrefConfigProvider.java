@@ -102,6 +102,10 @@ public class SharedPrefConfigProvider implements ConfigProvider {
     sharedPreferences.edit().putLong(PREF_PREFIX + key, value).apply();
   }
 
+  public void putString(String key, String value) {
+    sharedPreferences.edit().putString(PREF_PREFIX + key, value).apply();
+  }
+
   @Override
   public String getString(String key, String defaultValue) {
     // Reading shared prefs on the main thread is generally safe since a single instance is cached.

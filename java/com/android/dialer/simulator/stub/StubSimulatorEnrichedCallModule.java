@@ -16,12 +16,15 @@
 
 package com.android.dialer.simulator.stub;
 
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.android.dialer.simulator.SimulatorEnrichedCall;
 import dagger.Binds;
 import dagger.Module;
 import javax.inject.Singleton;
 
 /** Provides a stub instance of SimulatorEnrichedCall. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class StubSimulatorEnrichedCallModule {
   @Binds

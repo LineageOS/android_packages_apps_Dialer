@@ -26,11 +26,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.promotion.RttPromotion;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
@@ -146,7 +148,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     int numItemsInToday = 0;
     int numItemsInYesterday = 0;
     do {
-      long timestamp = CoalescedAnnotatedCallLogCursorLoader.getTimestamp(cursor);
+      long timestamp = Coalescer.getTimestamp(cursor);
       long dayDifference = CallLogDates.getDayDifference(currentTimeMillis, timestamp);
       if (dayDifference == 0) {
         numItemsInToday++;
@@ -173,6 +175,9 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   private boolean shouldShowDuoDisclosureCard() {
+    if (new RttPromotion(activity).shouldShow()) {
+      return false;
+    }
     // Don't show the Duo disclosure card if
     // (1) Duo integration is not enabled on the device, or
     // (2) Duo is not activated.

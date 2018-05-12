@@ -225,7 +225,7 @@ public class AnnotatedCallLogContract {
     /**
      * An unique id to associate this call log row to a {@link android.telecom.Call}.
      *
-     * <p>For pre-Q device, this is same as {@link TIMESTAMP}.
+     * <p>For pre-Q device, this is same as {@link #TIMESTAMP}.
      *
      * <p>For Q+ device, this will be copied from {@link android.provider.CallLog.Calls}.
      *
@@ -243,16 +243,6 @@ public class AnnotatedCallLogContract {
    * <p>When adding columns be sure to update {@link #COLUMNS_ONLY_IN_COALESCED_CALL_LOG}.
    */
   public static final class CoalescedAnnotatedCallLog implements CommonColumns {
-
-    public static final String TABLE = "CoalescedAnnotatedCallLog";
-
-    /** The content URI for this table. */
-    public static final Uri CONTENT_URI =
-        Uri.withAppendedPath(AnnotatedCallLogContract.CONTENT_URI, TABLE);
-
-    /** The MIME type of a {@link android.content.ContentProvider#getType(Uri)} single entry. */
-    public static final String CONTENT_ITEM_TYPE =
-        "vnd.android.cursor.item/coalesced_annotated_call_log";
 
     /**
      * IDs of rows in {@link AnnotatedCallLog} that are coalesced into one row in {@link

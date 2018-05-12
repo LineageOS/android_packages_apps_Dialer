@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllog.ui.NewCallLogAdapter.PopCounts;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
@@ -96,9 +97,12 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     uiExecutorService = DialerExecutorComponent.get(activity).uiExecutor();
   }
 
-  /** @param cursor a cursor from {@link CoalescedAnnotatedCallLogCursorLoader}. */
+  /**
+   * @param cursor a cursor for {@link
+   *     com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog}.
+   */
   void bind(Cursor cursor) {
-    CoalescedRow row = CoalescedAnnotatedCallLogCursorLoader.toRow(cursor);
+    CoalescedRow row = Coalescer.toRow(cursor);
     currentRowId = row.getId(); // Used to make sure async updates are applied to the correct views
 
     // Even if there is additional real time processing necessary, we still want to immediately show

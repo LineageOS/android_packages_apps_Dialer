@@ -17,12 +17,15 @@
 package com.android.incallui.speakeasy;
 
 import android.support.v4.app.Fragment;
+import com.android.dialer.inject.DialerVariant;
+import com.android.dialer.inject.InstallIn;
 import com.google.common.base.Optional;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
 /** Module which binds {@link SpeakEasyCallManagerStub}. */
+@InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class StubSpeakEasyModule {
 
