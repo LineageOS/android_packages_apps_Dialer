@@ -43,6 +43,7 @@ import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info.Cp2ContactInfo;
 import com.android.dialer.phonelookup.database.contract.PhoneLookupHistoryContract.PhoneLookupHistory;
 import com.android.dialer.phonenumberproto.PartitionedNumbers;
 import com.android.dialer.storage.Unencrypted;
+import com.android.dialer.util.PermissionsUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -58,9 +59,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.function.Predicate;
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for contacts in the default directory. */
+@SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
 public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private static final String PREF_LAST_TIMESTAMP_PROCESSED =
@@ -71,6 +74,7 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
   private final ConfigProvider configProvider;
+  private final MissingPermissionsOperations missingPermissionsOperations;
 
   @Nullable private Long currentLastTimestampProcessed;
 
@@ -80,16 +84,21 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
       @Unencrypted SharedPreferences sharedPreferences,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService,
-      ConfigProvider configProvider) {
+      ConfigProvider configProvider,
+      MissingPermissionsOperations missingPermissionsOperations) {
     this.appContext = appContext;
     this.sharedPreferences = sharedPreferences;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
     this.configProvider = configProvider;
+    this.missingPermissionsOperations = missingPermissionsOperations;
   }
 
   @Override
   public ListenableFuture<Cp2Info> lookup(DialerPhoneNumber dialerPhoneNumber) {
+    if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
+      return Futures.immediateFuture(Cp2Info.getDefaultInstance());
+    }
     return backgroundExecutorService.submit(() -> lookupInternal(dialerPhoneNumber));
   }
 
@@ -137,6 +146,15 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
 
   @Override
   public ListenableFuture<Boolean> isDirty(ImmutableSet<DialerPhoneNumber> phoneNumbers) {
+    if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
+      LogUtil.w("Cp2DefaultDirectoryPhoneLookup.isDirty", "missing permissions");
+      Predicate<PhoneLookupInfo> phoneLookupInfoIsDirtyFn =
+          phoneLookupInfo ->
+              !phoneLookupInfo.getDefaultCp2Info().equals(Cp2Info.getDefaultInstance());
+      return missingPermissionsOperations.isDirtyForMissingPermissions(
+          phoneNumbers, phoneLookupInfoIsDirtyFn);
+    }
+
     PartitionedNumbers partitionedNumbers = new PartitionedNumbers(phoneNumbers);
     if (partitionedNumbers.invalidNumbers().size() > getMaxSupportedInvalidNumbers()) {
       // If there are N invalid numbers, we can't determine determine dirtiness without running N
@@ -440,6 +458,11 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   public ListenableFuture<ImmutableMap<DialerPhoneNumber, Cp2Info>> getMostRecentInfo(
       ImmutableMap<DialerPhoneNumber, Cp2Info> existingInfoMap) {
     currentLastTimestampProcessed = null;
+
+    if (!PermissionsUtil.hasContactsReadPermissions(appContext)) {
+      LogUtil.w("Cp2DefaultDirectoryPhoneLookup.getMostRecentInfo", "missing permissions");
+      return missingPermissionsOperations.getMostRecentInfoForMissingPermissions(existingInfoMap);
+    }
 
     ListenableFuture<Long> lastModifiedFuture =
         backgroundExecutorService.submit(
