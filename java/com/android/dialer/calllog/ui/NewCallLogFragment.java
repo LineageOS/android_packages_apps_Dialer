@@ -31,14 +31,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
+import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.metrics.jank.RecyclerViewJankLogger;
 import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.util.concurrent.TimeUnit;
 
@@ -48,8 +52,9 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
   @VisibleForTesting
   static final long MARK_ALL_CALLS_READ_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
-  private RefreshAnnotatedCallLogReceiver refreshAnnotatedCallLogReceiver;
   private RecyclerView recyclerView;
+  private RefreshAnnotatedCallLogReceiver refreshAnnotatedCallLogReceiver;
+  private SupportUiListener<Cursor> coalesingAnnotatedCallLogListener;
 
   private boolean shouldMarkCallsRead = false;
   private final Runnable setShouldMarkCallsReadTrue = () -> shouldMarkCallsRead = true;
@@ -188,6 +193,11 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
         new RecyclerViewJankLogger(
             MetricsComponent.get(getContext()).metrics(), Metrics.NEW_CALL_LOG_JANK_EVENT_NAME));
 
+    coalesingAnnotatedCallLogListener =
+        DialerExecutorComponent.get(getContext())
+            .createUiListener(
+                getChildFragmentManager(),
+                /* taskId = */ "NewCallLogFragment.coalescingAnnotatedCallLog");
     getLoaderManager().restartLoader(0, null, this);
 
     return view;
@@ -214,7 +224,7 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     LogUtil.enterBlock("NewCallLogFragment.onCreateLoader");
-    return new CoalescedAnnotatedCallLogCursorLoader(getContext());
+    return new AnnotatedCallLogCursorLoader(Assert.isNotNull(getContext()));
   }
 
   @Override
@@ -228,17 +238,38 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
       return;
     }
 
-    // TODO(zachh): Handle empty cursor by showing empty view.
-    if (recyclerView.getAdapter() == null) {
-      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-      // Note: It's not clear if this callback can be invoked when there's no associated activity,
-      // but if crashes are observed here it may be possible to use getContext() instead.
-      Activity activity = Assert.isNotNull(getActivity());
-      recyclerView.setAdapter(
-          new NewCallLogAdapter(activity, newCursor, System::currentTimeMillis));
-    } else {
-      ((NewCallLogAdapter) recyclerView.getAdapter()).updateCursor(newCursor);
-    }
+    // Start combining adjacent rows which should be collapsed for display purposes.
+    // This is a time-consuming process so we will do it in the background.
+    ListenableFuture<Cursor> coalescedCursorFuture =
+        CallLogDatabaseComponent.get(getContext()).coalescer().coalesce(newCursor);
+
+    coalesingAnnotatedCallLogListener.listen(
+        getContext(),
+        coalescedCursorFuture,
+        coalescedCursor -> {
+          LogUtil.i("NewCallLogFragment.onLoadFinished", "coalescing succeeded");
+
+          // TODO(zachh): Handle empty cursor by showing empty view.
+          if (recyclerView.getAdapter() == null) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            // Note: It's not clear if this callback can be invoked when there's no associated
+            // activity, but if crashes are observed here it may be possible to use getContext()
+            // instead.
+            Activity activity = Assert.isNotNull(getActivity());
+            recyclerView.setAdapter(
+                new NewCallLogAdapter(activity, coalescedCursor, System::currentTimeMillis));
+          } else {
+            ((NewCallLogAdapter) recyclerView.getAdapter()).updateCursor(coalescedCursor);
+          }
+        },
+        throwable -> {
+          // Coalescing can fail if the cursor passed to Coalescer is closed by the loader while
+          // the work is still in progress.
+          // This can happen when the loader restarts and finishes loading data before the
+          // coalescing work is completed.
+          // TODO(linyuh): throw an exception here if the failure above can be avoided.
+          LogUtil.e("NewCallLogFragment.onLoadFinished", "coalescing failed", throwable);
+        });
   }
 
   @Override
