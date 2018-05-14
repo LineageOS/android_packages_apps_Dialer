@@ -18,6 +18,7 @@ package com.android.dialer.simulator;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Subcomponent that can be used to access the simulator implementation. */
@@ -36,6 +37,7 @@ public abstract class SimulatorComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     SimulatorComponent simulatorComponent();
   }
