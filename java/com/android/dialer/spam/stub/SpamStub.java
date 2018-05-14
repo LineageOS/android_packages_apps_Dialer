@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.dialer.spam;
+package com.android.dialer.spam.stub;
 
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
@@ -22,6 +22,7 @@ import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.status.SimpleSpamStatus;
 import com.android.dialer.spam.status.SpamStatus;
 import com.google.common.collect.ImmutableMap;
