@@ -82,9 +82,11 @@ import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
+import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.videotech.utils.VideoUtils;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -206,7 +208,7 @@ public class AnswerFragment extends Fragment
       }
     };
 
-    @DrawableRes public final int icon;
+    @DrawableRes public int icon;
     @StringRes public final int contentDescription;
     @StringRes public final int accessibilityLabel;
     @StringRes public final int hintText;
@@ -456,6 +458,11 @@ public class AnswerFragment extends Fragment
       answerAndReleaseButton.setVisibility(View.VISIBLE);
       answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
     } else if (allowSpeakEasy()) {
+      Optional<Integer> alternativeIcon = SpeakEasyComponent.get(getContext()).speakEasyIcon();
+      if (alternativeIcon.isPresent()) {
+        // TODO(erfanian): Replace enum hack when we have a dedicated button.
+        SecondaryBehavior.SPEAKEASY.icon = alternativeIcon.get();
+      }
       answerAndReleaseBehavior = SecondaryBehavior.SPEAKEASY;
       answerAndReleaseBehavior.applyToView(answerAndReleaseButton);
       answerAndReleaseButton.setVisibility(View.VISIBLE);
