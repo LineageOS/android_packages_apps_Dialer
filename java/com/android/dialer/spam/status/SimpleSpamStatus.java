@@ -26,7 +26,11 @@ public abstract class SimpleSpamStatus implements SpamStatus {
 
   /** Returns a SimpleSpamStatus with the given boolean and timestamp. */
   public static SimpleSpamStatus create(boolean isSpam, @Nullable Long timestampMillis) {
-    return new AutoValue_SimpleSpamStatus(isSpam, Optional.fromNullable(timestampMillis));
+    return builder()
+        .setSpam(isSpam)
+        .setTimestampMillis(timestampMillis)
+        .setSpamMetadata(SpamMetadata.empty())
+        .build();
   }
 
   /** Returns a SimpleSpamStatus that's not marked as spam and has no timestamp. */
@@ -34,9 +38,23 @@ public abstract class SimpleSpamStatus implements SpamStatus {
     return create(false, null);
   }
 
-  /** Returns an empty {@link SpamMetadata}. */
-  @Override
-  public final SpamMetadata getSpamMetadata() {
-    return SpamMetadata.empty();
+  public static Builder builder() {
+    return new AutoValue_SimpleSpamStatus.Builder();
+  }
+
+  /** Creates instances of SimpleSpamStatus. */
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder setSpam(boolean isSpam);
+
+    abstract Builder setTimestampMillis(Optional<Long> timestamp);
+
+    public Builder setTimestampMillis(@Nullable Long timestampMillis) {
+      return setTimestampMillis(Optional.fromNullable(timestampMillis));
+    }
+
+    public abstract Builder setSpamMetadata(SpamMetadata spamMetadata);
+
+    public abstract SimpleSpamStatus build();
   }
 }
