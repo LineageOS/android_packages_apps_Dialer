@@ -73,21 +73,6 @@ public class SpamStub implements Spam {
   }
 
   @Override
-  public void checkUserMarkedNonSpamStatus(String number, String countryIso, Listener listener) {
-    listener.onComplete(false);
-  }
-
-  @Override
-  public void checkUserMarkedSpamStatus(String number, String countryIso, Listener listener) {
-    listener.onComplete(false);
-  }
-
-  @Override
-  public void checkGlobalSpamListStatus(String number, String countryIso, Listener listener) {
-    listener.onComplete(false);
-  }
-
-  @Override
   public boolean checkSpamStatusSynchronous(String number, String countryIso) {
     return false;
   }
