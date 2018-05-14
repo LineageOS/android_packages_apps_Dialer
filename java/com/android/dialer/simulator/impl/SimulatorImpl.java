@@ -22,6 +22,7 @@ import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.buildtype.BuildType.Type;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.simulator.Simulator;
+import com.android.dialer.simulator.portal.SimulatorMainPortal;
 import javax.inject.Inject;
 
 /** The entry point for the simulator feature. */
@@ -39,7 +40,7 @@ final class SimulatorImpl implements Simulator {
 
   @Override
   public ActionProvider getActionProvider(AppCompatActivity activity) {
-    return SimulatorMainMenu.getActionProvider(activity);
+    return new SimulatorMainPortal(activity).getActionProvider();
   }
 
   @Override

@@ -30,14 +30,14 @@ import com.android.dialer.common.concurrent.ThreadUtil;
  * notifications instead of writing to the call log directly. This makes the simulator behave more
  * like the real application.
  */
-final class SimulatorMissedCallCreator implements SimulatorConnectionService.Listener {
+public final class SimulatorMissedCallCreator implements SimulatorConnectionService.Listener {
   private static final String EXTRA_CALL_COUNT = "call_count";
   private static final String EXTRA_IS_MISSED_CALL_CONNECTION = "is_missed_call_connection";
   private static final int DISCONNECT_DELAY_MILLIS = 1000;
 
   private final Context context;
 
-  SimulatorMissedCallCreator(@NonNull Context context) {
+  public SimulatorMissedCallCreator(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
   }
 

@@ -21,7 +21,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
-import android.view.ActionProvider;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -29,28 +28,21 @@ import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
 
 /** Entry point in the simulator to create voice calls. */
-final class SimulatorRttCall
+public final class SimulatorRttCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
 
   @NonNull private final Context context;
   @Nullable private String connectionTag;
   private RttChatBot rttChatBot;
 
-  static ActionProvider getActionProvider(@NonNull Context context) {
-    return new SimulatorSubMenu(context)
-        .addItem("Incoming call", () -> new SimulatorRttCall(context).addNewIncomingCall(false))
-        .addItem("Outgoing call", () -> new SimulatorRttCall(context).addNewOutgoingCall())
-        .addItem("Emergency call", () -> new SimulatorRttCall(context).addNewEmergencyCall());
-  }
-
-  private SimulatorRttCall(@NonNull Context context) {
+  public SimulatorRttCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
     SimulatorConnectionService.addListener(this);
     SimulatorConnectionService.addListener(
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
-  private void addNewIncomingCall(boolean isSpam) {
+  public void addNewIncomingCall(boolean isSpam) {
     String callerId =
         isSpam
             ? "+1-661-778-3020" /* Blacklisted custom spam number */
@@ -60,14 +52,14 @@ final class SimulatorRttCall
             context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
   }
 
-  private void addNewOutgoingCall() {
+  public void addNewOutgoingCall() {
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
   }
 
-  private void addNewEmergencyCall() {
+  public void addNewEmergencyCall() {
     String callerId = "911";
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(

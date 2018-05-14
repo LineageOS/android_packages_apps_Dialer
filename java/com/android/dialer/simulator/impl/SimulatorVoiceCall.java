@@ -24,7 +24,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.telecom.Connection;
 import android.telecom.Connection.RttModifyStatus;
 import android.telecom.DisconnectCause;
-import android.view.ActionProvider;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -37,58 +36,13 @@ import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.simulator.SimulatorEnrichedCall;
 
 /** Entry point in the simulator to create voice calls. */
-final class SimulatorVoiceCall
+public final class SimulatorVoiceCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
   @NonNull private final Context context;
   @Nullable private String connectionTag;
   private final SimulatorEnrichedCall simulatorEnrichedCall;
 
-  static ActionProvider getActionProvider(@NonNull AppCompatActivity activity) {
-    return new SimulatorSubMenu(activity.getApplicationContext())
-        .addItem(
-            "Incoming call",
-            () -> new SimulatorVoiceCall(activity.getApplicationContext()).addNewIncomingCall())
-        .addItem(
-            "Outgoing call",
-            () -> new SimulatorVoiceCall(activity.getApplicationContext()).addNewOutgoingCall())
-        .addItem(
-            "Customized incoming call",
-            () ->
-                new SimulatorVoiceCall(activity.getApplicationContext())
-                    .addNewIncomingCall(activity))
-        .addItem(
-            "Customized outgoing call",
-            () ->
-                new SimulatorVoiceCall(activity.getApplicationContext())
-                    .addNewOutgoingCall(activity))
-        .addItem(
-            "Incoming enriched call",
-            () -> new SimulatorVoiceCall(activity.getApplicationContext()).incomingEnrichedCall())
-        .addItem(
-            "Outgoing enriched call",
-            () -> new SimulatorVoiceCall(activity.getApplicationContext()).outgoingEnrichedCall())
-        .addItem(
-            "Spam incoming call",
-            () -> new SimulatorVoiceCall(activity.getApplicationContext()).addSpamIncomingCall())
-        .addItem(
-            "Emergency call back",
-            () ->
-                new SimulatorVoiceCall(activity.getApplicationContext()).addNewEmergencyCallBack())
-        .addItem(
-            "GSM conference",
-            () ->
-                new SimulatorConferenceCreator(
-                        activity.getApplicationContext(), Simulator.CONFERENCE_TYPE_GSM)
-                    .start(5))
-        .addItem(
-            "VoLTE conference",
-            () ->
-                new SimulatorConferenceCreator(
-                        activity.getApplicationContext(), Simulator.CONFERENCE_TYPE_VOLTE)
-                    .start(5));
-  }
-
-  private SimulatorVoiceCall(@NonNull Context context) {
+  public SimulatorVoiceCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
     simulatorEnrichedCall = SimulatorComponent.get(context).getSimulatorEnrichedCall();
     SimulatorConnectionService.addListener(this);
@@ -96,7 +50,7 @@ final class SimulatorVoiceCall
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
-  private void incomingEnrichedCall() {
+  public void incomingEnrichedCall() {
     simulatorEnrichedCall
         .setupIncomingEnrichedCall(Simulator.ENRICHED_CALL_INCOMING_NUMBER)
         .addListener(
@@ -113,7 +67,7 @@ final class SimulatorVoiceCall
             DialerExecutorComponent.get(context).uiExecutor());
   }
 
-  private void outgoingEnrichedCall() {
+  public void outgoingEnrichedCall() {
     getEnrichedCallManager().registerStateChangedListener(simulatorEnrichedCall);
     simulatorEnrichedCall
         .setupOutgoingEnrichedCall(Simulator.ENRICHED_CALL_OUTGOING_NUMBER)
@@ -131,14 +85,14 @@ final class SimulatorVoiceCall
             DialerExecutorComponent.get(context).uiExecutor());
   }
 
-  private void addNewIncomingCall() {
+  public void addNewIncomingCall() {
     String callerId = "+44 (0) 20 7031 3000" /* Google London office */;
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  private void addNewIncomingCall(AppCompatActivity activity) {
+  public void addNewIncomingCall(AppCompatActivity activity) {
     SimulatorDialogFragment.newInstance(
             (callerId, callerIdPresentation) -> {
               Bundle extras = new Bundle();
@@ -150,14 +104,14 @@ final class SimulatorVoiceCall
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
   }
 
-  private void addNewOutgoingCall() {
+  public void addNewOutgoingCall() {
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  private void addNewOutgoingCall(AppCompatActivity activity) {
+  public void addNewOutgoingCall(AppCompatActivity activity) {
     SimulatorDialogFragment.newInstance(
             (callerId, callerIdPresentation) -> {
               Bundle extras = new Bundle();
@@ -169,14 +123,14 @@ final class SimulatorVoiceCall
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
   }
 
-  private void addSpamIncomingCall() {
+  public void addSpamIncomingCall() {
     String callerId = "+1-661-778-3020"; /* Blacklisted custom spam number */
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  private void addNewEmergencyCallBack() {
+  public void addNewEmergencyCallBack() {
     String callerId = "911";
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
