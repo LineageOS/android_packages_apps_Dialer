@@ -142,7 +142,7 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
    * will be called but it is not visible.
    */
   private void onFragmentShown() {
-    LoaderManager loaderManager = LoaderManager.getInstance(this);
+    LoaderManager loaderManager = getLoaderManager();
     if (!PermissionsUtil.hasCallLogReadPermissions(getContext())) {
       recyclerView.setVisibility(View.GONE);
       emptyContentView.setVisibility(View.VISIBLE);
@@ -228,7 +228,7 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
                 /* taskId = */ "NewCallLogFragment.coalescingAnnotatedCallLog");
 
     if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
-      LoaderManager.getInstance(this).restartLoader(LOADER_ID, null, this);
+      getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
     return view;
