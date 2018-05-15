@@ -30,6 +30,8 @@ public abstract class SpeakEasyComponent {
 
   public abstract Optional<Fragment> speakEasySettingsFragment();
 
+  public abstract Optional<Integer> speakEasyIcon();
+
   public static SpeakEasyComponent get(Context context) {
     return ((SpeakEasyComponent.HasComponent)
             ((HasRootComponent) context.getApplicationContext()).component())

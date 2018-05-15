@@ -178,7 +178,7 @@ public class CallLogAdapter extends GroupingListAdapter
           MenuInflater inflater = mode.getMenuInflater();
           inflater.inflate(R.menu.actionbar_delete, menu);
           multiSelectRemoveView.showMultiSelectRemoveView(true);
-          actionModeStateChangedListener.onActionModeStateChanged(true);
+          actionModeStateChangedListener.onActionModeStateChanged(mode, true);
           return true;
         }
 
@@ -216,7 +216,7 @@ public class CallLogAdapter extends GroupingListAdapter
           selectAllMode = false;
           deselectAllMode = false;
           multiSelectRemoveView.showMultiSelectRemoveView(false);
-          actionModeStateChangedListener.onActionModeStateChanged(false);
+          actionModeStateChangedListener.onActionModeStateChanged(null, false);
           notifyDataSetChanged();
         }
       };
@@ -1511,7 +1511,7 @@ public class CallLogAdapter extends GroupingListAdapter
   /** Interface used to allow single tap multi select for contact photos. */
   public interface OnActionModeStateChangedListener {
 
-    void onActionModeStateChanged(boolean isEnabled);
+    void onActionModeStateChanged(ActionMode mode, boolean isEnabled);
 
     boolean isActionModeStateEnabled();
   }

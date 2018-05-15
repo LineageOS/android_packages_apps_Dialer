@@ -36,4 +36,7 @@
     Google Duo video calling lets you chat with friends and family face-to-face. Data charges may apply. <xliff:g example="Learn More">%1$s</xliff:g>
   </string>
 
+  <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
+  <string name="new_call_log_permission_no_calllog">To see your call log, turn on the Phone permission.</string>
+
 </resources>
