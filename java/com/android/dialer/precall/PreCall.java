@@ -22,17 +22,9 @@ import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
-import com.google.common.collect.ImmutableList;
 
 /** Interface to prepare a {@link CallIntentBuilder} before placing the call with telecom. */
 public interface PreCall {
-
-  /**
-   * @return a list of {@link PreCallAction} in execution order for the {@link PreCallCoordinator}
-   *     to run.
-   */
-  @NonNull
-  ImmutableList<PreCallAction> getActions();
 
   /**
    * @return a intent when started as activity, will perform the pre-call actions and then place a
