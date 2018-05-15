@@ -36,4 +36,9 @@ public abstract class StubSpeakEasyModule {
   static Optional<Fragment> provideSpeakEasySettingsFragment() {
     return Optional.absent();
   }
+
+  @Provides
+  static Optional<Integer> provideSpeakEasyIcon() {
+    return Optional.absent();
+  }
 }

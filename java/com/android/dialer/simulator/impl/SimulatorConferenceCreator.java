@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /** Creates a conference with a given number of participants. */
-final class SimulatorConferenceCreator
+public final class SimulatorConferenceCreator
     implements SimulatorConnectionService.Listener,
         SimulatorConnection.Listener,
         SimulatorConference.Listener {
@@ -53,7 +53,12 @@ final class SimulatorConferenceCreator
     simulatorConnectionsBank = SimulatorComponent.get(context).getSimulatorConnectionsBank();
   }
 
-  void start(int callCount) {
+  /**
+   * Starts to create certain number of calls to form a conference call.
+   *
+   * @param callCount the number of calls in conference to create.
+   */
+  public void start(int callCount) {
     onNewIncomingConnectionEnabled = true;
     SimulatorConnectionService.addListener(this);
     if (conferenceType == Simulator.CONFERENCE_TYPE_VOLTE) {

@@ -47,7 +47,8 @@ public final class PhoneLookupInfoConsolidator {
     NameSource.CP2_EXTENDED_DIRECTORY,
     NameSource.PEOPLE_API,
     NameSource.CEQUINT,
-    NameSource.CNAP
+    NameSource.CNAP,
+    NameSource.PHONE_NUMBER_CACHE
   })
   @interface NameSource {
     int NONE = 0; // used when none of the other sources can provide the name
@@ -56,6 +57,7 @@ public final class PhoneLookupInfoConsolidator {
     int PEOPLE_API = 3;
     int CEQUINT = 4;
     int CNAP = 5;
+    int PHONE_NUMBER_CACHE = 6;
   }
 
   /**
@@ -81,7 +83,8 @@ public final class PhoneLookupInfoConsolidator {
           NameSource.CP2_EXTENDED_DIRECTORY,
           NameSource.PEOPLE_API,
           NameSource.CEQUINT,
-          NameSource.CNAP);
+          NameSource.CNAP,
+          NameSource.PHONE_NUMBER_CACHE);
 
   private final @NameSource int nameSource;
   private final PhoneLookupInfo phoneLookupInfo;
@@ -113,6 +116,13 @@ public final class PhoneLookupInfoConsolidator {
         return ContactSource.Type.SOURCE_TYPE_CEQUINT_CALLER_ID;
       case NameSource.CNAP:
         return ContactSource.Type.SOURCE_TYPE_CNAP;
+      case NameSource.PHONE_NUMBER_CACHE:
+        ContactSource.Type sourceType =
+            ContactSource.Type.forNumber(phoneLookupInfo.getMigratedInfo().getSourceType());
+        if (sourceType == null) {
+          sourceType = ContactSource.Type.UNKNOWN_SOURCE_TYPE;
+        }
+        return sourceType;
       case NameSource.NONE:
         return ContactSource.Type.UNKNOWN_SOURCE_TYPE;
       default:
@@ -155,6 +165,8 @@ public final class PhoneLookupInfoConsolidator {
         return phoneLookupInfo.getCequintInfo().getName();
       case NameSource.CNAP:
         return phoneLookupInfo.getCnapInfo().getName();
+      case NameSource.PHONE_NUMBER_CACHE:
+        return phoneLookupInfo.getMigratedInfo().getName();
       case NameSource.NONE:
         return "";
       default:
@@ -176,6 +188,8 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstDefaultCp2Contact).getPhotoThumbnailUri();
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Assert.isNotNull(firstExtendedCp2Contact).getPhotoThumbnailUri();
+      case NameSource.PHONE_NUMBER_CACHE:
+        return phoneLookupInfo.getMigratedInfo().getPhotoUri();
       case NameSource.PEOPLE_API:
       case NameSource.CEQUINT:
       case NameSource.CNAP:
@@ -202,6 +216,8 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstExtendedCp2Contact).getPhotoUri();
       case NameSource.CEQUINT:
         return phoneLookupInfo.getCequintInfo().getPhotoUri();
+      case NameSource.PHONE_NUMBER_CACHE:
+        return phoneLookupInfo.getMigratedInfo().getPhotoUri();
       case NameSource.PEOPLE_API:
       case NameSource.CNAP:
       case NameSource.NONE:
@@ -222,6 +238,7 @@ public final class PhoneLookupInfoConsolidator {
         return Math.max(Assert.isNotNull(firstDefaultCp2Contact).getPhotoId(), 0);
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Math.max(Assert.isNotNull(firstExtendedCp2Contact).getPhotoId(), 0);
+      case NameSource.PHONE_NUMBER_CACHE:
       case NameSource.PEOPLE_API:
       case NameSource.CEQUINT:
       case NameSource.CNAP:
@@ -246,6 +263,7 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstExtendedCp2Contact).getLookupUri();
       case NameSource.PEOPLE_API:
         return Assert.isNotNull(phoneLookupInfo.getPeopleApiInfo().getLookupUri());
+      case NameSource.PHONE_NUMBER_CACHE:
       case NameSource.CEQUINT:
       case NameSource.CNAP:
       case NameSource.NONE:
@@ -270,6 +288,8 @@ public final class PhoneLookupInfoConsolidator {
         return Assert.isNotNull(firstDefaultCp2Contact).getLabel();
       case NameSource.CP2_EXTENDED_DIRECTORY:
         return Assert.isNotNull(firstExtendedCp2Contact).getLabel();
+      case NameSource.PHONE_NUMBER_CACHE:
+        return phoneLookupInfo.getMigratedInfo().getLabel();
       case NameSource.PEOPLE_API:
       case NameSource.CEQUINT:
       case NameSource.CNAP:
@@ -296,6 +316,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.CP2_EXTENDED_DIRECTORY:
       case NameSource.PEOPLE_API:
       case NameSource.CNAP:
+      case NameSource.PHONE_NUMBER_CACHE:
       case NameSource.NONE:
         return "";
       default:
@@ -309,8 +330,21 @@ public final class PhoneLookupInfoConsolidator {
    * returns whether the number belongs to a business place.
    */
   public boolean isBusiness() {
-    return phoneLookupInfo.hasPeopleApiInfo()
-        && phoneLookupInfo.getPeopleApiInfo().getInfoType() == InfoType.NEARBY_BUSINESS;
+    switch (nameSource) {
+      case NameSource.PEOPLE_API:
+        return phoneLookupInfo.getPeopleApiInfo().getInfoType() == InfoType.NEARBY_BUSINESS;
+      case NameSource.PHONE_NUMBER_CACHE:
+        return phoneLookupInfo.getMigratedInfo().getIsBusiness();
+      case NameSource.CP2_DEFAULT_DIRECTORY:
+      case NameSource.CP2_EXTENDED_DIRECTORY:
+      case NameSource.CEQUINT:
+      case NameSource.CNAP:
+      case NameSource.NONE:
+        return false;
+      default:
+        throw Assert.createUnsupportedOperationFailException(
+            String.format("Unsupported name source: %s", nameSource));
+    }
   }
 
   /**
@@ -366,6 +400,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.CP2_EXTENDED_DIRECTORY:
       case NameSource.CEQUINT:
       case NameSource.CNAP:
+      case NameSource.PHONE_NUMBER_CACHE:
       case NameSource.NONE:
         return false;
       case NameSource.PEOPLE_API:
@@ -390,6 +425,7 @@ public final class PhoneLookupInfoConsolidator {
       case NameSource.PEOPLE_API:
       case NameSource.CEQUINT:
       case NameSource.CNAP:
+      case NameSource.PHONE_NUMBER_CACHE:
       case NameSource.NONE:
         return false;
       default:
@@ -450,6 +486,11 @@ public final class PhoneLookupInfoConsolidator {
         case NameSource.CNAP:
           if (!phoneLookupInfo.getCnapInfo().getName().isEmpty()) {
             return NameSource.CNAP;
+          }
+          break;
+        case NameSource.PHONE_NUMBER_CACHE:
+          if (!phoneLookupInfo.getMigratedInfo().getName().isEmpty()) {
+            return NameSource.PHONE_NUMBER_CACHE;
           }
           break;
         default:

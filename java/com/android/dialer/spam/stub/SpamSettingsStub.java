@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.dialer.spam;
+package com.android.dialer.spam.stub;
 
 import android.content.Context;
 import android.content.Intent;
+import com.android.dialer.spam.SpamSettings;
 import javax.inject.Inject;
 
 /** Default implementation of SpamSettings. */

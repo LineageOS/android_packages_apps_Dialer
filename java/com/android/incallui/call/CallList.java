@@ -23,13 +23,11 @@ import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.util.ArrayMap;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -41,7 +39,6 @@ import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.promotion.RttPromotion;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
-import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
@@ -164,20 +161,7 @@ public class CallList implements DialerCallDelegate {
                   call.getState() == DialerCallState.INCOMING
                       || call.getState() == DialerCallState.CALL_WAITING;
               boolean isSpam = result.isSpam();
-              if (isSpam) {
-                if (!isIncomingCall) {
-                  LogUtil.i(
-                      "CallList.onCallAdded",
-                      "marking spam call as not spam because it's not an incoming call");
-                  isSpam = false;
-                } else if (isPotentialEmergencyCallback(context, call)) {
-                  LogUtil.i(
-                      "CallList.onCallAdded",
-                      "marking spam call as not spam because an emergency call was made on this"
-                          + " device recently");
-                  isSpam = false;
-                }
-              }
+              call.setSpamStatus(result);
 
               if (isIncomingCall) {
                 Logger.get(context)
@@ -188,7 +172,6 @@ public class CallList implements DialerCallDelegate {
                         call.getUniqueCallId(),
                         call.getTimeAddedMs());
               }
-              call.setSpam(isSpam);
               onUpdateCall(call);
               notifyGenericListeners();
             }
@@ -201,7 +184,6 @@ public class CallList implements DialerCallDelegate {
           DialerExecutorComponent.get(context).uiExecutor());
 
       Trace.beginSection("updateUserMarkedSpamStatus");
-      updateUserMarkedSpamStatus(call, context, number);
       Trace.endSection();
     }
     Trace.endSection();
@@ -279,58 +261,9 @@ public class CallList implements DialerCallDelegate {
             impression, incomingCall.getUniqueCallId(), incomingCall.getTimeAddedMs());
   }
 
-  private static boolean isPotentialEmergencyCallback(Context context, DialerCall call) {
-    if (BuildCompat.isAtLeastO()) {
-      return call.isPotentialEmergencyCallback();
-    } else {
-      long timestampMillis = FilteredNumbersUtil.getLastEmergencyCallTimeMillis(context);
-      return call.isInEmergencyCallbackWindow(timestampMillis);
-    }
-  }
-
   @Override
   public DialerCall getDialerCallFromTelecomCall(Call telecomCall) {
     return callByTelecomCall.get(telecomCall);
-  }
-
-  private void updateUserMarkedSpamStatus(
-      final DialerCall call, final Context context, String number) {
-
-    SpamComponent.get(context)
-        .spam()
-        .checkUserMarkedNonSpamStatus(
-            number,
-            call.getCountryIso(),
-            new Spam.Listener() {
-              @Override
-              public void onComplete(boolean isInUserWhiteList) {
-                call.setIsInUserWhiteList(isInUserWhiteList);
-              }
-            });
-
-    SpamComponent.get(context)
-        .spam()
-        .checkGlobalSpamListStatus(
-            number,
-            call.getCountryIso(),
-            new Spam.Listener() {
-              @Override
-              public void onComplete(boolean isInGlobalSpamList) {
-                call.setIsInGlobalSpamList(isInGlobalSpamList);
-              }
-            });
-
-    SpamComponent.get(context)
-        .spam()
-        .checkUserMarkedSpamStatus(
-            number,
-            call.getCountryIso(),
-            new Spam.Listener() {
-              @Override
-              public void onComplete(boolean isInUserSpamList) {
-                call.setIsInUserSpamList(isInUserSpamList);
-              }
-            });
   }
 
   public void onCallRemoved(Context context, android.telecom.Call telecomCall) {
