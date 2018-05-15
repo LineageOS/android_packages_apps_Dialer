@@ -48,6 +48,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.view.ActionMode;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -255,6 +256,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         v -> {
           Logger.get(activity).logImpression(DialerImpression.Type.MAIN_CLICK_FAB_TO_OPEN_DIALPAD);
           searchController.showDialpad(true);
+          if (callLogAdapterOnActionModeStateChangedListener.isEnabled) {
+            LogUtil.i("OldMainActivityPeer.onFabClicked", "closing multiselect");
+            callLogAdapterOnActionModeStateChangedListener.actionMode.finish();
+          }
         });
 
     MainToolbar toolbar = activity.findViewById(R.id.toolbar);
@@ -798,9 +803,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       implements CallLogAdapter.OnActionModeStateChangedListener {
 
     private boolean isEnabled;
+    private ActionMode actionMode;
 
     @Override
-    public void onActionModeStateChanged(boolean isEnabled) {
+    public void onActionModeStateChanged(ActionMode actionMode, boolean isEnabled) {
+      this.actionMode = actionMode;
       this.isEnabled = isEnabled;
     }
 

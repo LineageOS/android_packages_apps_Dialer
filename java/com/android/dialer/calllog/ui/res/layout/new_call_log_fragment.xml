@@ -15,11 +15,26 @@
   ~ limitations under the License
   -->
 
-<android.support.v7.widget.RecyclerView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/new_call_log_recycler_view"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dialer_white"
-    android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
-    android:clipToPadding="false"/>
+    android:layout_width="match_parent">
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/new_call_log_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
+      android:background="@color/background_dialer_white"
+      android:clipToPadding="false"/>
+
+  <com.android.dialer.widget.EmptyContentView
+      android:gravity="center_vertical"
+      android:id="@+id/new_call_log_empty_content_view"
+      android:background="@color/background_dialer_white"
+      android:layout_gravity="center"
+      android:layout_height="match_parent"
+      android:layout_width="match_parent"
+      android:visibility="gone"/>
+
+</FrameLayout>

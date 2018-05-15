@@ -46,6 +46,7 @@ import android.telecom.PhoneAccount;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.ActionMode;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.Menu;
@@ -1532,7 +1533,7 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   @Override
-  public void onActionModeStateChanged(boolean isEnabled) {
+  public void onActionModeStateChanged(ActionMode mode, boolean isEnabled) {
     isMultiSelectModeEnabled = isEnabled;
   }
 

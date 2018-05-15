@@ -64,7 +64,7 @@ public class SimulatorSimCallManager {
   private static final String EXTRA_CONNECTION_TAG = "connection_tag";
   private static final String EXTRA_CONNECTION_CALL_TYPE = "connection_call_type";
 
-  static void register(@NonNull Context context) {
+  public static void register(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorSimCallManager.register");
     Assert.isNotNull(context);
     StrictModeUtils.bypass(
@@ -75,7 +75,7 @@ public class SimulatorSimCallManager {
         });
   }
 
-  static void unregister(@NonNull Context context) {
+  public static void unregister(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorSimCallManager.unregister");
     Assert.isNotNull(context);
     StrictModeUtils.bypass(

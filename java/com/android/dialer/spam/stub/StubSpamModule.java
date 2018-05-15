@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.dialer.spam;
+package com.android.dialer.spam.stub;
 
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
+import com.android.dialer.spam.Spam;
+import com.android.dialer.spam.SpamSettings;
 import dagger.Binds;
 import dagger.Module;
 
