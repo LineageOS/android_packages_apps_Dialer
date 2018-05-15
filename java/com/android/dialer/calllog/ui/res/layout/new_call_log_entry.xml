@@ -144,5 +144,6 @@
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"/>
+      android:tint="@color/dialer_secondary_text_color"
+      android:contentDescription="@string/a11y_new_call_log_expand_menu_for_entry"/>
 </RelativeLayout>
