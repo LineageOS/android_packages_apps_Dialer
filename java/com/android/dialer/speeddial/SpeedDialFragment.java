@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -45,6 +46,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.historyitemactions.DividerModule;
 import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
@@ -95,6 +97,16 @@ public class SpeedDialFragment extends Fragment {
       new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+          loadContacts();
+        }
+      };
+
+  /** Listen for changes to the strequents content observer. */
+  private final ContentObserver strequentsContentObserver =
+      new ContentObserver(ThreadUtil.getUiThreadHandler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+          super.onChange(selfChange);
           loadContacts();
         }
       };
@@ -272,6 +284,9 @@ public class SpeedDialFragment extends Fragment {
     super.onStart();
     PermissionsUtil.registerPermissionReceiver(
         getActivity(), readContactsPermissionGrantedReceiver, Manifest.permission.READ_CONTACTS);
+    getContext()
+        .getContentResolver()
+        .registerContentObserver(Contacts.CONTENT_STREQUENT_URI, true, strequentsContentObserver);
   }
 
   @Override
@@ -279,6 +294,7 @@ public class SpeedDialFragment extends Fragment {
     super.onStop();
     PermissionsUtil.unregisterPermissionReceiver(
         getContext(), readContactsPermissionGrantedReceiver);
+    getContext().getContentResolver().unregisterContentObserver(strequentsContentObserver);
   }
 
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
