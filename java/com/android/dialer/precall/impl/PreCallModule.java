@@ -38,7 +38,6 @@ public abstract class PreCallModule {
   public abstract PreCall to(PreCallImpl impl);
 
   @Provides
-  @Singleton
   public static ImmutableList<PreCallAction> provideActions(
       DuoAction duoAction, CallingAccountSelector callingAccountSelector) {
     return ImmutableList.of(
