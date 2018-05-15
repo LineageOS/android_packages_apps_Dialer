@@ -17,13 +17,22 @@
 package com.android.dialer.precall;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import com.android.dialer.inject.HasRootComponent;
+import com.google.common.collect.ImmutableList;
 import dagger.Subcomponent;
 
 /** Daggaer component for {@link PreCall} */
 @Subcomponent
 public abstract class PreCallComponent {
   public abstract PreCall getPreCall();
+
+  /**
+   * @return a list of {@link PreCallAction} in execution order for the {@link PreCallCoordinator}
+   *     to run.
+   */
+  @NonNull
+  public abstract ImmutableList<PreCallAction> createActions();
 
   public static PreCallComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())

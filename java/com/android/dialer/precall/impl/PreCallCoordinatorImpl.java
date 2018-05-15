@@ -82,7 +82,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
   }
 
   void onResume() {
-    actions = PreCallComponent.get(activity).getPreCall().getActions();
+    actions = PreCallComponent.get(activity).createActions();
     runNextAction();
   }
 
