@@ -115,6 +115,11 @@ public class MainSearchController implements SearchBarListener {
     this.toolbar = toolbar;
     this.toolbarShadow = toolbarShadow;
     this.fragmentContainer = fragmentContainer;
+
+    dialpadFragment =
+        (DialpadFragment) activity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
+    searchFragment =
+        (NewSearchFragment) activity.getFragmentManager().findFragmentByTag(SEARCH_FRAGMENT_TAG);
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */

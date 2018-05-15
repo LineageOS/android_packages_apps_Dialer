@@ -52,6 +52,7 @@ import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.TransformationInfo;
+import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -76,6 +77,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptUtil;
+import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.R;
@@ -91,6 +93,7 @@ import com.android.incallui.videotech.duo.DuoVideoTech;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
 import com.android.incallui.videotech.utils.VideoUtils;
+import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.io.IOException;
@@ -165,14 +168,10 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String callSubject;
   @Nullable private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
-  private boolean isSpam;
+
+  @Nullable private SpamStatus spamStatus;
   private boolean isBlocked;
 
-  @Nullable private Boolean isInUserSpamList;
-
-  @Nullable private Boolean isInUserWhiteList;
-
-  @Nullable private Boolean isInGlobalSpamList;
   private boolean didShowCameraPermission;
   private boolean didDismissVideoChargesAlertDialog;
   private PersistableBundle carrierConfig;
@@ -820,6 +819,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     if (hasProperty(Details.PROPERTY_EMERGENCY_CALLBACK_MODE)) {
       return true;
     }
+
+    // Call.EXTRA_LAST_EMERGENCY_CALLBACK_TIME_MILLIS is available starting in O
+    if (VERSION.SDK_INT < VERSION_CODES.O) {
+      long timestampMillis = FilteredNumbersUtil.getLastEmergencyCallTimeMillis(context);
+      return isInEmergencyCallbackWindow(timestampMillis);
+    }
+
     // We want to treat any incoming call that arrives a short time after an outgoing emergency call
     // as a potential emergency callback.
     if (getExtras() != null
@@ -1270,39 +1276,28 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     didDismissVideoChargesAlertDialog = didDismiss;
   }
 
-  @Nullable
-  public Boolean isInGlobalSpamList() {
-    return isInGlobalSpamList;
+  public void setSpamStatus(@Nullable SpamStatus spamStatus) {
+    this.spamStatus = spamStatus;
   }
 
-  public void setIsInGlobalSpamList(boolean inSpamList) {
-    isInGlobalSpamList = inSpamList;
-  }
-
-  @Nullable
-  public Boolean isInUserSpamList() {
-    return isInUserSpamList;
-  }
-
-  public void setIsInUserSpamList(boolean inSpamList) {
-    isInUserSpamList = inSpamList;
-  }
-
-  @Nullable
-  public Boolean isInUserWhiteList() {
-    return isInUserWhiteList;
-  }
-
-  public void setIsInUserWhiteList(boolean inWhiteList) {
-    isInUserWhiteList = inWhiteList;
+  public Optional<SpamStatus> getSpamStatus() {
+    return Optional.fromNullable(spamStatus);
   }
 
   public boolean isSpam() {
-    return isSpam;
-  }
+    if (spamStatus == null || !spamStatus.isSpam()) {
+      return false;
+    }
 
-  public void setSpam(boolean isSpam) {
-    this.isSpam = isSpam;
+    if (!isIncoming()) {
+      return false;
+    }
+
+    if (isPotentialEmergencyCallback()) {
+      return false;
+    }
+
+    return true;
   }
 
   public boolean isBlocked() {

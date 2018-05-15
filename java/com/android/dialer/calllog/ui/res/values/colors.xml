@@ -21,4 +21,6 @@
 
   <color name="call_type_icon_read_color">#757575</color>
   <color name="call_type_icon_unread_color">#D32F2F</color>
+
+  <color name="empty_call_log_icon_tint_color">#E1E1E1</color>
 </resources>

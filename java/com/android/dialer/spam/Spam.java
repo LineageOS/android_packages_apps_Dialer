@@ -18,7 +18,6 @@ package com.android.dialer.spam;
 
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.logging.ContactLookupResult;
@@ -73,30 +72,6 @@ public interface Spam {
    *     operation.
    */
   ListenableFuture<Void> updateSpamListDownload(boolean isEnabledByUser);
-
-  /**
-   * @param number The number to check if the number is in the user's white list (non spam list)
-   * @param countryIso The country ISO of the call.
-   * @param listener The callback to be invoked after {@code Info} is fetched.
-   */
-  void checkUserMarkedNonSpamStatus(
-      String number, @Nullable String countryIso, @NonNull Listener listener);
-
-  /**
-   * @param number The number to check if it is in user's spam list
-   * @param countryIso The country ISO of the call.
-   * @param listener The callback to be invoked after {@code Info} is fetched.
-   */
-  void checkUserMarkedSpamStatus(
-      String number, @Nullable String countryIso, @NonNull Listener listener);
-
-  /**
-   * @param number The number to check if it is in the global spam list
-   * @param countryIso The country ISO of the call.
-   * @param listener The callback to be invoked after {@code Info} is fetched.
-   */
-  void checkGlobalSpamListStatus(
-      String number, @Nullable String countryIso, @NonNull Listener listener);
 
   /**
    * Synchronously checks if the given number is suspected of being a spamer.
@@ -191,11 +166,4 @@ public interface Spam {
       int callType,
       ReportingLocation.Type from,
       ContactSource.Type contactSourceType);
-
-  /** Callback to be invoked when data is fetched. */
-  interface Listener {
-
-    /** Called when data is fetched. */
-    void onComplete(boolean isSpam);
-  }
 }

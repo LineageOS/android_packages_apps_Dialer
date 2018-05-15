@@ -23,8 +23,6 @@ import android.support.annotation.Nullable;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import android.telecom.TelecomManager;
-import android.telecom.VideoProfile;
-import android.view.ActionProvider;
 import android.widget.Toast;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -32,36 +30,14 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.simulator.Simulator.Event;
 
 /** Entry point in the simulator to create video calls. */
-final class SimulatorVideoCall
+public final class SimulatorVideoCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
   @NonNull private final Context context;
   private final int initialVideoCapability;
   private final int initialVideoState;
   @Nullable private String connectionTag;
 
-  static ActionProvider getActionProvider(@NonNull Context context) {
-    return new SimulatorSubMenu(context)
-        .addItem(
-            "Incoming one way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_RX_ENABLED).addNewIncomingCall())
-        .addItem(
-            "Incoming two way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_BIDIRECTIONAL)
-                    .addNewIncomingCall())
-        .addItem(
-            "Outgoing one way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_TX_ENABLED).addNewOutgoingCall())
-        .addItem(
-            "Outgoing two way",
-            () ->
-                new SimulatorVideoCall(context, VideoProfile.STATE_BIDIRECTIONAL)
-                    .addNewOutgoingCall());
-  }
-
-  private SimulatorVideoCall(@NonNull Context context, int initialVideoState) {
+  public SimulatorVideoCall(@NonNull Context context, int initialVideoState) {
     this.context = Assert.isNotNull(context);
     this.initialVideoCapability =
         Connection.CAPABILITY_SUPPORTS_VT_LOCAL_BIDIRECTIONAL
@@ -70,7 +46,7 @@ final class SimulatorVideoCall
     SimulatorConnectionService.addListener(this);
   }
 
-  private void addNewIncomingCall() {
+  public void addNewIncomingCall() {
     if (!isVideoAccountEnabled()) {
       showVideoAccountSettings();
       return;
@@ -81,7 +57,7 @@ final class SimulatorVideoCall
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VIDEO);
   }
 
-  private void addNewOutgoingCall() {
+  public void addNewOutgoingCall() {
     if (!isVideoAccountEnabled()) {
       showVideoAccountSettings();
       return;

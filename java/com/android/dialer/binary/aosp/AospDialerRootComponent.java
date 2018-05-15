@@ -37,7 +37,7 @@ import com.android.dialer.preferredsim.PreferredSimModule;
 import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.simulator.stub.StubSimulatorEnrichedCallModule;
-import com.android.dialer.spam.StubSpamModule;
+import com.android.dialer.spam.stub.StubSpamModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
