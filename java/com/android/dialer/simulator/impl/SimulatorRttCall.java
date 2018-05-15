@@ -28,21 +28,21 @@ import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
 
 /** Entry point in the simulator to create voice calls. */
-public final class SimulatorRttCall
+final class SimulatorRttCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
 
   @NonNull private final Context context;
   @Nullable private String connectionTag;
   private RttChatBot rttChatBot;
 
-  public SimulatorRttCall(@NonNull Context context) {
+  SimulatorRttCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
     SimulatorConnectionService.addListener(this);
     SimulatorConnectionService.addListener(
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
-  public void addNewIncomingCall(boolean isSpam) {
+  void addNewIncomingCall(boolean isSpam) {
     String callerId =
         isSpam
             ? "+1-661-778-3020" /* Blacklisted custom spam number */
@@ -52,14 +52,14 @@ public final class SimulatorRttCall
             context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
   }
 
-  public void addNewOutgoingCall() {
+  void addNewOutgoingCall() {
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_RTT);
   }
 
-  public void addNewEmergencyCall() {
+  void addNewEmergencyCall() {
     String callerId = "911";
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
