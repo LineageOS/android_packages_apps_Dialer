@@ -16,6 +16,13 @@
   -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!--
+    A string to describe available action for accessibility user.
+    It will be read as "expand menu for this call log entry".
+  -->
+  <string name="a11y_new_call_log_expand_menu_for_entry">
+    Expand menu for this call log entry
+  </string>
 
   <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
   <string name="new_call_log_header_today">Today</string>
