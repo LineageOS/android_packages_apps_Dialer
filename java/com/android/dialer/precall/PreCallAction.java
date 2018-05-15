@@ -25,6 +25,9 @@ import com.android.dialer.callintent.CallIntentBuilder;
  * CallIntentBuilder} to generate full information for the call. For example, showing a dialog to
  * select the phone account on a multi-SIM device, ask if RTT should be enabled, or rewrite the
  * number for roaming calls.
+ *
+ * <p>UI actions are discarded when the hosting activity is paused. A new instance of the action
+ * will be created once the activity is resumed again.
  */
 public interface PreCallAction {
 
