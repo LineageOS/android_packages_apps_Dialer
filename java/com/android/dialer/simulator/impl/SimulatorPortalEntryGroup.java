@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.portal;
+package com.android.dialer.simulator.impl;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;

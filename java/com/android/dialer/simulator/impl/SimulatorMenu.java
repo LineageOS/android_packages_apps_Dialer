@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.portal;
+package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -32,7 +32,7 @@ import java.util.Random;
 
 /** Chat bot to generate remote RTT chat messages. */
 @TargetApi(28)
-public class RttChatBot {
+class RttChatBot {
 
   interface Callback {
     void type(String text);
@@ -62,14 +62,14 @@ public class RttChatBot {
   }
 
   @MainThread
-  public void start() {
+  void start() {
     Assert.isMainThread();
     LogUtil.enterBlock("RttChatBot.start");
     messageHandler.sendEmptyMessage(START_SENDING);
   }
 
   @MainThread
-  public void stop() {
+  void stop() {
     Assert.isMainThread();
     LogUtil.enterBlock("RttChatBot.stop");
     if (handlerThread != null && handlerThread.isAlive()) {
