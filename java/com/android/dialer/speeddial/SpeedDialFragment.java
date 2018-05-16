@@ -347,6 +347,7 @@ public class SpeedDialFragment extends Fragment {
       PreCall.start(
           activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setAllowAssistedDial(true)
               .setIsVideoCall(channel.isVideoTechnology())
               .setIsDuoCall(channel.technology() == Channel.DUO));
     }
@@ -441,6 +442,7 @@ public class SpeedDialFragment extends Fragment {
       PreCall.start(
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setAllowAssistedDial(true)
               .setIsVideoCall(channel.isVideoTechnology())
               .setIsDuoCall(channel.technology() == Channel.DUO));
     }
@@ -523,6 +525,7 @@ public class SpeedDialFragment extends Fragment {
       PreCall.start(
           activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setAllowAssistedDial(true)
               .setIsVideoCall(channel.isVideoTechnology())
               .setIsDuoCall(channel.technology() == Channel.DUO));
     }
