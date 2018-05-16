@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.dialer.simulator.portal;
+package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +23,6 @@ import android.view.ActionProvider;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
-import com.android.dialer.simulator.impl.SimulatorConferenceCreator;
-import com.android.dialer.simulator.impl.SimulatorMissedCallCreator;
-import com.android.dialer.simulator.impl.SimulatorRttCall;
-import com.android.dialer.simulator.impl.SimulatorSimCallManager;
-import com.android.dialer.simulator.impl.SimulatorUtils;
-import com.android.dialer.simulator.impl.SimulatorVideoCall;
-import com.android.dialer.simulator.impl.SimulatorVoiceCall;
 import com.google.common.collect.ImmutableMap;
 
 /** Implements the top level simulator menu. */
