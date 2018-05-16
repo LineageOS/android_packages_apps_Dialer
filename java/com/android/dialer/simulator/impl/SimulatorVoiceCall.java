@@ -36,13 +36,13 @@ import com.android.dialer.simulator.SimulatorComponent;
 import com.android.dialer.simulator.SimulatorEnrichedCall;
 
 /** Entry point in the simulator to create voice calls. */
-public final class SimulatorVoiceCall
+final class SimulatorVoiceCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
   @NonNull private final Context context;
   @Nullable private String connectionTag;
   private final SimulatorEnrichedCall simulatorEnrichedCall;
 
-  public SimulatorVoiceCall(@NonNull Context context) {
+  SimulatorVoiceCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
     simulatorEnrichedCall = SimulatorComponent.get(context).getSimulatorEnrichedCall();
     SimulatorConnectionService.addListener(this);
@@ -50,7 +50,7 @@ public final class SimulatorVoiceCall
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
   }
 
-  public void incomingEnrichedCall() {
+  void incomingEnrichedCall() {
     simulatorEnrichedCall
         .setupIncomingEnrichedCall(Simulator.ENRICHED_CALL_INCOMING_NUMBER)
         .addListener(
@@ -67,7 +67,7 @@ public final class SimulatorVoiceCall
             DialerExecutorComponent.get(context).uiExecutor());
   }
 
-  public void outgoingEnrichedCall() {
+  void outgoingEnrichedCall() {
     getEnrichedCallManager().registerStateChangedListener(simulatorEnrichedCall);
     simulatorEnrichedCall
         .setupOutgoingEnrichedCall(Simulator.ENRICHED_CALL_OUTGOING_NUMBER)
@@ -85,14 +85,14 @@ public final class SimulatorVoiceCall
             DialerExecutorComponent.get(context).uiExecutor());
   }
 
-  public void addNewIncomingCall() {
+  void addNewIncomingCall() {
     String callerId = "+44 (0) 20 7031 3000" /* Google London office */;
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  public void addNewIncomingCall(AppCompatActivity activity) {
+  void addNewIncomingCall(AppCompatActivity activity) {
     SimulatorDialogFragment.newInstance(
             (callerId, callerIdPresentation) -> {
               Bundle extras = new Bundle();
@@ -104,14 +104,14 @@ public final class SimulatorVoiceCall
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
   }
 
-  public void addNewOutgoingCall() {
+  void addNewOutgoingCall() {
     String callerId = "+55-31-2128-6800"; // Brazil office.
     connectionTag =
         SimulatorSimCallManager.addNewOutgoingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  public void addNewOutgoingCall(AppCompatActivity activity) {
+  void addNewOutgoingCall(AppCompatActivity activity) {
     SimulatorDialogFragment.newInstance(
             (callerId, callerIdPresentation) -> {
               Bundle extras = new Bundle();
@@ -123,14 +123,14 @@ public final class SimulatorVoiceCall
         .show(activity.getSupportFragmentManager(), "SimulatorDialog");
   }
 
-  public void addSpamIncomingCall() {
+  void addSpamIncomingCall() {
     String callerId = "+1-661-778-3020"; /* Blacklisted custom spam number */
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  public void addNewEmergencyCallBack() {
+  void addNewEmergencyCallBack() {
     String callerId = "911";
     connectionTag =
         SimulatorSimCallManager.addNewIncomingCall(
