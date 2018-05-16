@@ -21,6 +21,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
@@ -67,6 +68,21 @@ public final class ContactPhotoView extends FrameLayout {
     glidePhotoManager = GlidePhotoManagerComponent.get(context).glidePhotoManager();
 
     hideBadge(); // Hide badges by default.
+  }
+
+  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    // We require both the height and the width to be WRAP_CONTENT to prevent users of
+    // this widget from clipping the view (by setting a size that is too small) or altering the
+    // relative position of the contact photo and its badge (by setting a size that is too large).
+    ViewGroup.LayoutParams layoutParams = Assert.isNotNull(getLayoutParams());
+    Assert.checkState(
+        layoutParams.height == LayoutParams.WRAP_CONTENT,
+        "The layout height must be WRAP_CONTENT!");
+    Assert.checkState(
+        layoutParams.width == LayoutParams.WRAP_CONTENT, "The layout width must be WRAP_CONTENT!");
   }
 
   private void inflateLayout() {
