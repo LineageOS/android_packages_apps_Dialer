@@ -186,6 +186,7 @@ public class DisambigDialog extends DialogFragment {
     PreCall.start(
         getContext(),
         new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+            .setAllowAssistedDial(true)
             .setIsVideoCall(true)
             .setIsDuoCall(channel.technology() == Channel.DUO));
     dismiss();
@@ -197,7 +198,9 @@ public class DisambigDialog extends DialogFragment {
     }
 
     PreCall.start(
-        getContext(), new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL));
+        getContext(),
+        new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+            .setAllowAssistedDial(true));
     dismiss();
   }
 
