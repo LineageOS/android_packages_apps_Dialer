@@ -26,14 +26,14 @@
       android:id="@+id/contact_photo_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="10dp"
-      android:layout_marginEnd="10dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
       android:layout_centerVertical="true"/>
 
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="14dp"
+      android:layout_centerVertical="true"
       android:layout_toEndOf="@+id/contact_photo_view"
       android:layout_toStartOf="@+id/menu_button"
       android:orientation="vertical">

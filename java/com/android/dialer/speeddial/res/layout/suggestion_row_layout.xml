@@ -23,10 +23,10 @@
 
   <com.android.dialer.widget.ContactPhotoView
       android:id="@+id/avatar"
-      android:layout_width="48dp"
-      android:layout_height="48dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
       android:layout_centerVertical="true"
-      android:layout_marginStart="16dp"/>
+      android:layout_marginStart="12dp"/>
 
   <LinearLayout
       android:orientation="vertical"
@@ -35,7 +35,7 @@
       android:layout_centerVertical="true"
       android:layout_toEndOf="@+id/avatar"
       android:layout_toStartOf="@+id/overflow"
-      android:layout_marginStart="8dp">
+      android:layout_marginStart="4dp">
 
     <TextView
         android:id="@+id/name"
