@@ -23,6 +23,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
@@ -33,6 +34,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * POJO representation of each speed dial list element.
@@ -121,10 +123,18 @@ public abstract class SpeedDialUiItem {
     // While there are more rows and the lookup keys are the same, add a channel for each of the
     // contact's phone numbers.
     List<Channel> channels = new ArrayList<>();
+    Set<String> numbers = new ArraySet<>();
     do {
+      String number = cursor.getString(NUMBER);
+      // TODO(78492722): consider using lib phone number to compare numbers
+      if (!numbers.add(number)) {
+        // Number is identical to an existing number, skip this number
+        continue;
+      }
+
       Channel channel =
           Channel.builder()
-              .setNumber(cursor.getString(NUMBER))
+              .setNumber(number)
               .setPhoneType(cursor.getInt(TYPE))
               .setLabel(getLabel(resources, cursor))
               .setTechnology(Channel.VOICE)
