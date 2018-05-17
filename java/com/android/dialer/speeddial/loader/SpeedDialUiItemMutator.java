@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.os.RemoteException;
+import android.os.Trace;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
@@ -46,6 +47,7 @@ import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.database.SpeedDialEntryDao;
 import com.android.dialer.speeddial.database.SpeedDialEntryDatabaseHelper;
+import com.android.dialer.util.CallUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -205,7 +207,9 @@ public final class SpeedDialUiItemMutator {
         return loadSpeedDialUiItemsInternal();
       }
       Assert.checkArgument(cursor.moveToFirst(), "Cursor should never be empty");
-      SpeedDialUiItem item = SpeedDialUiItem.fromCursor(appContext.getResources(), cursor);
+      SpeedDialUiItem item =
+          SpeedDialUiItem.fromCursor(
+              appContext.getResources(), cursor, CallUtil.isVideoEnabled(appContext));
 
       // Star the contact if it isn't starred already, then return.
       if (!item.isStarred()) {
@@ -228,9 +232,12 @@ public final class SpeedDialUiItemMutator {
 
   @WorkerThread
   private ImmutableList<SpeedDialUiItem> loadSpeedDialUiItemsInternal() {
+    Trace.beginSection("loadSpeedDialUiItemsInternal");
     Assert.isWorkerThread();
     contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
+    Trace.beginSection("getAllEntries");
     SpeedDialEntryDao db = getSpeedDialEntryDao();
+    Trace.endSection(); // getAllEntries
 
     // This is the list of contacts that we will display to the user
     List<SpeedDialUiItem> speedDialUiItems = new ArrayList<>();
@@ -251,6 +258,7 @@ public final class SpeedDialUiItemMutator {
         "Updated entries are incomplete: " + entries.size() + " != " + entriesToUiItems.size());
 
     // Mark the SpeedDialEntries to be updated or deleted
+    Trace.beginSection("updateOrDeleteEntries");
     for (SpeedDialEntry entry : entries) {
       SpeedDialUiItem contact = entriesToUiItems.get(entry);
       // Remove contacts that no longer exist or are no longer starred
@@ -271,12 +279,14 @@ public final class SpeedDialUiItemMutator {
       // These are our existing starred entries
       speedDialUiItems.add(contact);
     }
+    Trace.endSection(); // updateOrDeleteEntries
 
     // Get all Strequent Contacts
     List<SpeedDialUiItem> strequentContacts = getStrequentContacts();
 
     // For each contact, if it isn't starred, add it as a suggestion.
     // If it is starred and not already accounted for above, then insert into the SpeedDialEntry DB.
+    Trace.beginSection("addSuggestions");
     for (SpeedDialUiItem contact : strequentContacts) {
       if (!contact.isStarred()) {
         // Add this contact as a suggestion
@@ -291,12 +301,16 @@ public final class SpeedDialUiItemMutator {
         speedDialUiItems.add(contact);
       }
     }
+    Trace.endSection(); // addSuggestions
 
+    Trace.beginSection("insertUpdateAndDelete");
     ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap =
         db.insertUpdateAndDelete(
             ImmutableList.copyOf(entriesToInsert),
             ImmutableList.copyOf(entriesToUpdate),
             ImmutableList.copyOf(entriesToDelete));
+    Trace.endSection(); // insertUpdateAndDelete
+    Trace.endSection(); // loadSpeedDialUiItemsInternal
     return speedDialUiItemsWithUpdatedIds(speedDialUiItems, insertedEntriesToIdsMap);
   }
 
@@ -388,11 +402,13 @@ public final class SpeedDialUiItemMutator {
   @WorkerThread
   private Map<SpeedDialEntry, SpeedDialUiItem> getSpeedDialUiItemsFromEntries(
       List<SpeedDialEntry> entries) {
+    Trace.beginSection("getSpeedDialUiItemsFromEntries");
     Assert.isWorkerThread();
     // Fetch the contact ids from the SpeedDialEntries
     Set<String> contactIds = new ArraySet<>();
     entries.forEach(entry -> contactIds.add(Long.toString(entry.contactId())));
     if (contactIds.isEmpty()) {
+      Trace.endSection();
       return new ArrayMap<>();
     }
 
@@ -410,7 +426,9 @@ public final class SpeedDialUiItemMutator {
                 null)) {
       Map<SpeedDialEntry, SpeedDialUiItem> map = new ArrayMap<>();
       for (cursor.moveToFirst(); !cursor.isAfterLast(); /* Iterate in the loop */ ) {
-        SpeedDialUiItem item = SpeedDialUiItem.fromCursor(appContext.getResources(), cursor);
+        SpeedDialUiItem item =
+            SpeedDialUiItem.fromCursor(
+                appContext.getResources(), cursor, CallUtil.isVideoEnabled(appContext));
         for (SpeedDialEntry entry : entries) {
           if (entry.contactId() == item.contactId()) {
             // Update the id and pinned position to match it's corresponding SpeedDialEntry.
@@ -442,6 +460,7 @@ public final class SpeedDialUiItemMutator {
       for (SpeedDialEntry entry : entries) {
         map.putIfAbsent(entry, null);
       }
+      Trace.endSection();
       return map;
     }
   }
@@ -467,6 +486,7 @@ public final class SpeedDialUiItemMutator {
 
   @WorkerThread
   private List<SpeedDialUiItem> getStrequentContacts() {
+    Trace.beginSection("getStrequentContacts");
     Assert.isWorkerThread();
     Set<String> contactIds = new ArraySet<>();
 
@@ -482,9 +502,11 @@ public final class SpeedDialUiItemMutator {
             .query(strequentUri, new String[] {Phone.CONTACT_ID}, null, null, null)) {
       if (cursor == null) {
         LogUtil.e("SpeedDialUiItemMutator.getStrequentContacts", "null cursor");
+        Trace.endSection();
         return new ArrayList<>();
       }
       if (cursor.getCount() == 0) {
+        Trace.endSection();
         return new ArrayList<>();
       }
       for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
@@ -507,14 +529,19 @@ public final class SpeedDialUiItemMutator {
       List<SpeedDialUiItem> contacts = new ArrayList<>();
       if (cursor == null) {
         LogUtil.e("SpeedDialUiItemMutator.getStrequentContacts", "null cursor");
+        Trace.endSection();
         return new ArrayList<>();
       }
       if (cursor.getCount() == 0) {
+        Trace.endSection();
         return contacts;
       }
       for (cursor.moveToFirst(); !cursor.isAfterLast(); /* Iterate in the loop */ ) {
-        contacts.add(SpeedDialUiItem.fromCursor(appContext.getResources(), cursor));
+        contacts.add(
+            SpeedDialUiItem.fromCursor(
+                appContext.getResources(), cursor, CallUtil.isVideoEnabled(appContext)));
       }
+      Trace.endSection();
       return contacts;
     }
   }
