@@ -65,4 +65,10 @@
 
   <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
   <string name="speed_dial_turn_on_contacts_permission">Turn on</string>
+
+  <!-- [CHAR LIMIT=NONE] Shown when there are no contacts in the all contacts list. -->
+  <string name="speed_dial_no_contacts_description">You haven\'t added any favorites yet</string>
+
+  <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
+  <string name="speed_dial_no_contacts_action_text">Add favorite</string>
 </resources>
