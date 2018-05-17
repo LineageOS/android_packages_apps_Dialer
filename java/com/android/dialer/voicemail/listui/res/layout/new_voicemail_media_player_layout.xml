@@ -74,6 +74,7 @@
         android:id="@+id/pauseButton"
         style="@style/voicemail_media_player_buttons"
         android:layout_weight="1"
+        android:contentDescription="@string/a11y_voicemail_entry_pause"
         android:src="@drawable/quantum_ic_pause_vd_theme_24"
         android:visibility="gone"/>
 
@@ -81,6 +82,7 @@
         android:id="@+id/playButton"
         style="@style/voicemail_media_player_buttons"
         android:layout_weight="1"
+        android:contentDescription="@string/a11y_voicemail_entry_play"
         android:src="@drawable/quantum_ic_play_arrow_vd_theme_24"/>
 
 
@@ -88,6 +90,7 @@
         android:id="@+id/speakerButton"
         style="@style/voicemail_media_player_buttons"
         android:layout_weight="1"
+        android:contentDescription="@string/a11y_voicemail_entry_speaker"
         android:src="@drawable/quantum_ic_volume_up_vd_theme_24"/>
 
 
@@ -95,13 +98,14 @@
         android:id="@+id/phoneButton"
         style="@style/voicemail_media_player_buttons"
         android:layout_weight="1"
+        android:contentDescription="@string/a11y_voicemail_entry_call"
         android:src="@drawable/quantum_ic_phone_vd_theme_24"/>
 
     <ImageButton
         android:id="@+id/deleteButton"
         style="@style/voicemail_media_player_buttons"
         android:layout_weight="1"
+        android:contentDescription="@string/a11y_voicemail_entry_delete"
         android:src="@drawable/quantum_ic_delete_vd_theme_24"/>
-
   </LinearLayout>
 </LinearLayout>
