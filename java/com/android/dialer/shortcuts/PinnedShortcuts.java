@@ -106,7 +106,7 @@ final class PinnedShortcuts {
         // setRank is nonsensical for pinned shortcuts and therefore could not be calculated.
         continue;
       }
-      // Exclude shortcuts like the "Phone NUI" shortcut.
+      // Exclude shortcuts not for contacts.
       String action = null;
       if (shortcutInfo.getIntent() != null) {
         action = shortcutInfo.getIntent().getAction();
