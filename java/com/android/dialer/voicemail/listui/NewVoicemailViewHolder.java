@@ -34,7 +34,6 @@ import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllogutils.NumberAttributesConverter;
@@ -44,10 +43,10 @@ import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.time.Clock;
 import com.android.dialer.voicemail.listui.menu.NewVoicemailMenu;
 import com.android.dialer.voicemail.model.VoicemailEntry;
+import com.android.dialer.widget.ContactPhotoView;
 import com.android.voicemail.VoicemailClient;
 
 /** {@link RecyclerView.ViewHolder} for the new voicemail tab. */
@@ -58,7 +57,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private final TextView secondaryTextView;
   private final TextView transcriptionTextView;
   private final TextView transcriptionBrandingTextView;
-  private final QuickContactBadge quickContactBadge;
+  private final ContactPhotoView contactPhotoView;
   private final NewVoicemailMediaPlayerView mediaPlayerView;
   private final ImageView menuButton;
   private final Clock clock;
@@ -67,13 +66,9 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   private VoicemailEntry voicemailEntryOfViewHolder;
   @NonNull private Uri viewHolderVoicemailUri;
   private final NewVoicemailViewHolderListener voicemailViewHolderListener;
-  private final GlidePhotoManager glidePhotoManager;
 
   NewVoicemailViewHolder(
-      View view,
-      Clock clock,
-      NewVoicemailViewHolderListener newVoicemailViewHolderListener,
-      GlidePhotoManager glidePhotoManager) {
+      View view, Clock clock, NewVoicemailViewHolderListener newVoicemailViewHolderListener) {
     super(view);
     LogUtil.enterBlock("NewVoicemailViewHolder");
     this.context = view.getContext();
@@ -81,12 +76,11 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     secondaryTextView = view.findViewById(R.id.secondary_text);
     transcriptionTextView = view.findViewById(R.id.transcription_text);
     transcriptionBrandingTextView = view.findViewById(R.id.transcription_branding);
-    quickContactBadge = view.findViewById(R.id.quick_contact_photo);
+    contactPhotoView = view.findViewById(R.id.contact_photo_view);
     mediaPlayerView = view.findViewById(R.id.new_voicemail_media_player);
     menuButton = view.findViewById(R.id.menu_button);
     this.clock = clock;
     voicemailViewHolderListener = newVoicemailViewHolderListener;
-    this.glidePhotoManager = glidePhotoManager;
 
     viewHolderId = -1;
     isViewHolderExpanded = false;
@@ -213,8 +207,7 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
   }
 
   private void setPhoto(VoicemailEntry voicemailEntry) {
-    glidePhotoManager.loadQuickContactBadge(
-        quickContactBadge,
+    contactPhotoView.setPhoto(
         NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.getNumberAttributes())
             .setFormattedNumber(voicemailEntry.getFormattedNumber())
             .build());
