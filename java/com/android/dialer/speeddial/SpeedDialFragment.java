@@ -56,6 +56,7 @@ import com.android.dialer.historyitemactions.IntentModule;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.shortcuts.ShortcutRefresher;
 import com.android.dialer.speeddial.ContextMenu.ContextMenuItemListener;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
@@ -209,6 +210,9 @@ public class SpeedDialFragment extends Fragment {
                 }),
         new DefaultFutureCallback<>(),
         DialerExecutorComponent.get(getContext()).backgroundExecutor());
+    ShortcutRefresher.refresh(
+        getContext(),
+        ShortcutRefresher.speedDialUiItemsToContactEntries(adapter.getSpeedDialUiItems()));
   }
 
   @Override
