@@ -35,6 +35,9 @@ import android.widget.TextView;
 import android.widget.ViewAnimator;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
+import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.incall.protocol.ContactPhotoType;
@@ -215,7 +218,8 @@ public class ContactGridManager {
     }
 
     boolean hasPhoto =
-        primaryInfo.photo() != null && primaryInfo.photoType() == ContactPhotoType.CONTACT;
+        (primaryInfo.photo() != null || primaryInfo.photoUri() != null)
+            && primaryInfo.photoType() == ContactPhotoType.CONTACT;
     if (!hasPhoto && !showAnonymousAvatar) {
       avatarImageView.setVisibility(View.GONE);
       return false;
@@ -297,36 +301,73 @@ public class ContactGridManager {
       if (hideAvatar) {
         avatarImageView.setVisibility(View.GONE);
       } else if (avatarSize > 0 && updateAvatarVisibility()) {
-        boolean hasPhoto =
-            primaryInfo.photo() != null && primaryInfo.photoType() == ContactPhotoType.CONTACT;
-        // Contact has a photo, don't render a letter tile.
-        if (hasPhoto) {
-          avatarImageView.setBackground(
-              DrawableConverter.getRoundedDrawable(
-                  context, primaryInfo.photo(), avatarSize, avatarSize));
-          // Contact has a name, that isn't a number.
+        if (ConfigProviderBindings.get(context).getBoolean("enable_glide_photo", false)) {
+          loadPhotoWithGlide();
         } else {
-          letterTile.setCanonicalDialerLetterTileDetails(
-              primaryInfo.name(),
-              primaryInfo.contactInfoLookupKey(),
-              LetterTileDrawable.SHAPE_CIRCLE,
-              LetterTileDrawable.getContactTypeFromPrimitives(
-                  primaryCallState.isVoiceMailNumber(),
-                  primaryInfo.isSpam(),
-                  primaryCallState.isBusinessNumber(),
-                  primaryInfo.numberPresentation(),
-                  primaryCallState.isConference()));
-          // By invalidating the avatarImageView we force a redraw of the letter tile.
-          // This is required to properly display the updated letter tile iconography based on the
-          // contact type, because the background drawable reference cached in the view, and the
-          // view is not aware of the mutations made to the background.
-          avatarImageView.invalidate();
-          avatarImageView.setBackground(letterTile);
+          loadPhotoWithLegacy();
         }
       }
     }
   }
 
+  private void loadPhotoWithGlide() {
+    PhotoInfo.Builder photoInfoBuilder =
+        PhotoInfo.newBuilder()
+            .setIsBusiness(primaryInfo.photoType() == ContactPhotoType.BUSINESS)
+            .setIsVoicemail(primaryCallState.isVoiceMailNumber())
+            .setIsSpam(primaryInfo.isSpam());
+
+    // Contact has a name, that is a number.
+    if (primaryInfo.nameIsNumber() && primaryInfo.number() != null) {
+      photoInfoBuilder.setName(primaryInfo.number());
+    } else if (primaryInfo.name() != null) {
+      photoInfoBuilder.setName(primaryInfo.name());
+    }
+
+    if (primaryInfo.number() != null) {
+      photoInfoBuilder.setFormattedNumber(primaryInfo.number());
+    }
+
+    if (primaryInfo.photoUri() != null) {
+      photoInfoBuilder.setPhotoUri(primaryInfo.photoUri().toString());
+    }
+
+    if (primaryInfo.contactInfoLookupKey() != null) {
+      photoInfoBuilder.setLookupUri(primaryInfo.contactInfoLookupKey());
+    }
+
+    GlidePhotoManagerComponent.get(context)
+        .glidePhotoManager()
+        .loadContactPhoto(avatarImageView, photoInfoBuilder.build());
+  }
+
+  private void loadPhotoWithLegacy() {
+    boolean hasPhoto =
+        primaryInfo.photo() != null && primaryInfo.photoType() == ContactPhotoType.CONTACT;
+    if (hasPhoto) {
+      avatarImageView.setBackground(
+          DrawableConverter.getRoundedDrawable(
+              context, primaryInfo.photo(), avatarSize, avatarSize));
+    } else {
+      // Contact has a photo, don't render a letter tile.
+      letterTile.setCanonicalDialerLetterTileDetails(
+          primaryInfo.name(),
+          primaryInfo.contactInfoLookupKey(),
+          LetterTileDrawable.SHAPE_CIRCLE,
+          LetterTileDrawable.getContactTypeFromPrimitives(
+              primaryCallState.isVoiceMailNumber(),
+              primaryInfo.isSpam(),
+              primaryCallState.isBusinessNumber(),
+              primaryInfo.numberPresentation(),
+              primaryCallState.isConference()));
+      // By invalidating the avatarImageView we force a redraw of the letter tile.
+      // This is required to properly display the updated letter tile iconography based on the
+      // contact type, because the background drawable reference cached in the view, and the
+      // view is not aware of the mutations made to the background.
+      avatarImageView.invalidate();
+      avatarImageView.setBackground(letterTile);
+    }
+  }
   /**
    * Updates row 2. For example:
    *

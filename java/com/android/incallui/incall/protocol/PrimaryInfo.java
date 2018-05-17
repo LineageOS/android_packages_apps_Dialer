@@ -17,6 +17,7 @@
 package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.multimedia.MultimediaData;
@@ -42,6 +43,9 @@ public abstract class PrimaryInfo {
 
   @Nullable
   public abstract Drawable photo();
+
+  @Nullable
+  public abstract Uri photoUri();
 
   @ContactPhotoType
   public abstract int photoType();
@@ -73,6 +77,7 @@ public abstract class PrimaryInfo {
   public static Builder builder() {
     return new AutoValue_PrimaryInfo.Builder();
   }
+
   /** Builder class for primary call info. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -87,6 +92,8 @@ public abstract class PrimaryInfo {
     public abstract Builder setLocation(String location);
 
     public abstract Builder setPhoto(Drawable photo);
+
+    public abstract Builder setPhotoUri(Uri photoUri);
 
     public abstract Builder setPhotoType(@ContactPhotoType int photoType);
 
