@@ -36,7 +36,6 @@ import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.voicemail.listui.error.VoicemailStatus;
 import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
 import com.android.dialer.widget.EmptyContentView;
@@ -184,10 +183,7 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
       // TODO(uabdullah): Replace getActivity().getFragmentManager() with getChildFragment()
       recyclerView.setAdapter(
           new NewVoicemailAdapter(
-              data,
-              System::currentTimeMillis,
-              getActivity().getFragmentManager(),
-              GlidePhotoManagerComponent.get(getContext()).glidePhotoManager()));
+              data, System::currentTimeMillis, getActivity().getFragmentManager()));
     } else {
       // This would only be called in cases such as when voicemail has been fetched from the server
       // or a changed occurred in the annotated table changed (e.g deletes). To check if the change

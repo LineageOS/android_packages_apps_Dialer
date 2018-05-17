@@ -28,32 +28,30 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_gravity="center"
-      android:padding="4dp"
-      android:focusable="true"/>
+      android:padding="4dp"/>
 
   <!--
       A container layout that contains a background and badges
       (video call badge, RTT call badge, etc)
 
       The container and its children are too small to meet the accessibility requirement that the
-      touchable area of focusable items should be at least 48dp x 48dp. We have to set all of them
-      to be not focusable.
+      touchable area of focusable items should be at least 48dp x 48dp. We have to mark all of them
+      as not important for accessibility.
   -->
   <FrameLayout
       android:id="@+id/contact_badge_container"
       android:layout_width="22dp"
       android:layout_height="22dp"
-      android:layout_gravity="bottom|end"
-      android:layout_marginEnd="2dp"
       android:layout_marginBottom="2dp"
-      android:focusable="false">
+      android:layout_marginEnd="2dp"
+      android:layout_gravity="bottom|end"
+      android:importantForAccessibility="noHideDescendants">
 
     <ImageView
         android:id="@+id/contact_badge_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/contact_photo_badge_background"
-        android:focusable="false"
         tools:ignore="ContentDescription"/>
 
     <ImageView
@@ -62,7 +60,6 @@
         android:layout_height="13dp"
         android:layout_gravity="center"
         android:src="@drawable/quantum_ic_videocam_vd_white_24"
-        android:focusable="false"
         tools:ignore="ContentDescription"/>
 
     <ImageView
@@ -70,9 +67,8 @@
         android:layout_width="13dp"
         android:layout_height="13dp"
         android:layout_gravity="center"
-        android:tint="@android:color/white"
         android:src="@drawable/quantum_ic_rtt_vd_theme_24"
-        android:focusable="false"
+        android:tint="@android:color/white"
         tools:ignore="ContentDescription"/>
   </FrameLayout>
 </FrameLayout>
