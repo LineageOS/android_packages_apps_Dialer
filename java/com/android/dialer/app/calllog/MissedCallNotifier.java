@@ -229,15 +229,20 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
     if (useCallList) {
       // Do not repost active notifications to prevent erasing post call notes.
-      Set<String> activeTags = new ArraySet<>();
+      Set<String> activeAndThrottledTags = new ArraySet<>();
       for (StatusBarNotification activeNotification :
           DialerNotificationManager.getActiveNotifications(context)) {
-        activeTags.add(activeNotification.getTag());
+        activeAndThrottledTags.add(activeNotification.getTag());
+      }
+      // Do not repost throttled notifications
+      for (StatusBarNotification throttledNotification :
+          DialerNotificationManager.getThrottledNotificationSet()) {
+        activeAndThrottledTags.add(throttledNotification.getTag());
       }
 
       for (NewCall call : newCalls) {
         String callTag = getNotificationTagForCall(call);
-        if (!activeTags.contains(callTag)) {
+        if (!activeAndThrottledTags.contains(callTag)) {
           DialerNotificationManager.notify(
               context,
               callTag,
