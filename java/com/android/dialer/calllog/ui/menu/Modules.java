@@ -17,15 +17,12 @@
 package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
-import android.provider.CallLog.Calls;
-import android.support.v4.os.BuildCompat;
 import android.text.TextUtils;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsHeaderInfo;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
-import com.android.dialer.glidephotomanager.PhotoInfo;
+import com.android.dialer.calllogutils.PhotoInfoBuilder;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.HistoryItemActionModuleInfo;
 import com.android.dialer.historyitemactions.HistoryItemActionModulesBuilder;
@@ -91,21 +88,10 @@ final class Modules {
       Context context, CoalescedRow row) {
     return CallDetailsHeaderInfo.newBuilder()
         .setDialerPhoneNumber(row.getNumber())
-        .setPhotoInfo(createPhotoInfoFromRow(row))
+        .setPhotoInfo(PhotoInfoBuilder.fromCoalescedRow(row))
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
         .setSecondaryText(
             CallLogEntryText.buildSecondaryTextForBottomSheet(context, row).toString())
-        .build();
-  }
-
-  private static PhotoInfo createPhotoInfoFromRow(CoalescedRow row) {
-    return NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
-        .setFormattedNumber(row.getFormattedNumber())
-        .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-        .setIsRtt(
-            BuildCompat.isAtLeastP()
-                && (row.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT)
-        .setIsVoicemail(row.getIsVoicemailCall())
         .build();
   }
 

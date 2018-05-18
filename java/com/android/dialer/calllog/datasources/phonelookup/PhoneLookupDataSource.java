@@ -32,7 +32,7 @@ import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.Ann
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
 import com.android.dialer.calllog.datasources.util.RowCombiner;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.calllogutils.NumberAttributesBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -598,6 +598,6 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
   private void updateContentValues(ContentValues contentValues, PhoneLookupInfo phoneLookupInfo) {
     contentValues.put(
         AnnotatedCallLog.NUMBER_ATTRIBUTES,
-        NumberAttributesConverter.fromPhoneLookupInfo(phoneLookupInfo).build().toByteArray());
+        NumberAttributesBuilder.fromPhoneLookupInfo(phoneLookupInfo).build().toByteArray());
   }
 }

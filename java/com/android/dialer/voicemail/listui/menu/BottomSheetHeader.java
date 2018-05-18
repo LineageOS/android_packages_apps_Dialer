@@ -17,7 +17,7 @@
 package com.android.dialer.voicemail.listui.menu;
 
 import android.text.TextUtils;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.calllogutils.PhotoInfoBuilder;
 import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
@@ -27,10 +27,7 @@ final class BottomSheetHeader {
   static HistoryItemBottomSheetHeaderInfo fromVoicemailEntry(VoicemailEntry voicemailEntry) {
     return HistoryItemBottomSheetHeaderInfo.newBuilder()
         .setNumber(voicemailEntry.getNumber())
-        .setPhotoInfo(
-            NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.getNumberAttributes())
-                .setFormattedNumber(voicemailEntry.getFormattedNumber())
-                .build())
+        .setPhotoInfo(PhotoInfoBuilder.fromVoicemailEntry(voicemailEntry))
         .setPrimaryText(buildPrimaryVoicemailText(voicemailEntry))
         .setSecondaryText(buildSecondaryVoicemailText(voicemailEntry))
         .build();
