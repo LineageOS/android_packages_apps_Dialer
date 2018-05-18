@@ -81,6 +81,7 @@
        used for different carriers-->
   <string-array name="cequint_providers">
     <item>com.cequint.ecid</item>
+    <item>com.vzw.ecid</item>
   </string-array>
 
   <!-- Flag to control whether to disable phone number formatting -->
