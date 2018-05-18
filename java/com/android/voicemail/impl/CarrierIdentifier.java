@@ -19,14 +19,16 @@ package com.android.voicemail.impl;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
 
 /** Identifies a carrier. */
 @AutoValue
 @TargetApi(VERSION_CODES.O)
-@SuppressWarnings("missingpermission")
+@SuppressWarnings({"missingpermission", "AndroidApiChecker"})
 public abstract class CarrierIdentifier {
 
   public abstract String mccMnc();
@@ -52,20 +54,25 @@ public abstract class CarrierIdentifier {
     return new AutoValue_CarrierIdentifier.Builder().setGid1("");
   }
 
-  public static CarrierIdentifier forHandle(
-      Context context, PhoneAccountHandle phoneAccountHandle) {
+  /** Create a identifier for a {@link PhoneAccountHandle}. Absent if the handle is not valid. */
+  public static Optional<CarrierIdentifier> forHandle(
+      Context context, @Nullable PhoneAccountHandle phoneAccountHandle) {
+    if (phoneAccountHandle == null) {
+      return Optional.empty();
+    }
     TelephonyManager telephonyManager =
         context
             .getSystemService(TelephonyManager.class)
             .createForPhoneAccountHandle(phoneAccountHandle);
     if (telephonyManager == null) {
-      throw new IllegalArgumentException("Invalid PhoneAccountHandle");
+      return Optional.empty();
     }
     String gid1 = telephonyManager.getGroupIdLevel1();
     if (gid1 == null) {
       gid1 = "";
     }
 
-    return builder().setMccMnc(telephonyManager.getSimOperator()).setGid1(gid1).build();
+    return Optional.of(
+        builder().setMccMnc(telephonyManager.getSimOperator()).setGid1(gid1).build());
   }
 }

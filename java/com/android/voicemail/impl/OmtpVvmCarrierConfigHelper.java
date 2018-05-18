@@ -39,6 +39,7 @@ import com.android.voicemail.impl.protocol.VisualVoicemailProtocolFactory;
 import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sync.VvmAccountManager;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -55,7 +56,7 @@ import java.util.Set;
  * <p>TODO(twyen): refactor this to an interface.
  */
 @TargetApi(VERSION_CODES.O)
-@SuppressWarnings("missingpermission")
+@SuppressWarnings({"missingpermission", "AndroidApiChecker"})
 public class OmtpVvmCarrierConfigHelper {
 
   private static final String TAG = "OmtpVvmCarrierCfgHlpr";
@@ -105,25 +106,25 @@ public class OmtpVvmCarrierConfigHelper {
   public OmtpVvmCarrierConfigHelper(Context context, @Nullable PhoneAccountHandle handle) {
     this.context = context;
     phoneAccountHandle = handle;
-    TelephonyManager telephonyManager =
-        context
-            .getSystemService(TelephonyManager.class)
-            .createForPhoneAccountHandle(phoneAccountHandle);
-    if (telephonyManager == null) {
-      VvmLog.e(TAG, "PhoneAccountHandle is invalid");
-      carrierConfig = null;
-      telephonyConfig = null;
-      overrideConfig = null;
-      vvmType = null;
-      protocol = null;
-      return;
-    }
-
     if (overrideConfigForTest != null) {
       overrideConfig = overrideConfigForTest;
       carrierConfig = new PersistableBundle();
       telephonyConfig = new PersistableBundle();
     } else {
+      Optional<CarrierIdentifier> carrierIdentifier = CarrierIdentifier.forHandle(context, handle);
+      TelephonyManager telephonyManager =
+          context
+              .getSystemService(TelephonyManager.class)
+              .createForPhoneAccountHandle(phoneAccountHandle);
+      if (telephonyManager == null || !carrierIdentifier.isPresent()) {
+        VvmLog.e(TAG, "PhoneAccountHandle is invalid");
+        carrierConfig = null;
+        telephonyConfig = null;
+        overrideConfig = null;
+        vvmType = null;
+        protocol = null;
+        return;
+      }
       if (ConfigOverrideFragment.isOverridden(context)) {
         overrideConfig = ConfigOverrideFragment.getConfig(context);
         VvmLog.w(TAG, "Config override is activated: " + overrideConfig);
@@ -132,9 +133,7 @@ public class OmtpVvmCarrierConfigHelper {
       }
 
       carrierConfig = getCarrierConfig(telephonyManager);
-      telephonyConfig =
-          new DialerVvmConfigManager(context)
-              .getConfig(CarrierIdentifier.forHandle(context, phoneAccountHandle));
+      telephonyConfig = new DialerVvmConfigManager(context).getConfig(carrierIdentifier.get());
     }
 
     vvmType = getVvmType();
