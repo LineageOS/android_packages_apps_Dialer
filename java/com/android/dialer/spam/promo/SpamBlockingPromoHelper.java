@@ -23,6 +23,7 @@ import android.app.Notification.Builder;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
+import android.graphics.drawable.Icon;
 import android.support.design.widget.Snackbar;
 import android.support.v4.os.BuildCompat;
 import android.view.View;
@@ -179,6 +180,8 @@ public class SpamBlockingPromoHelper {
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
             .setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24)
+            .setLargeIcon(Icon.createWithResource(context, R.drawable.spam_blocking_promo_icon))
+            .setContentText(context.getString(R.string.spam_blocking_promo_text))
             .setStyle(
                 new Notification.BigTextStyle()
                     .bigText(context.getString(R.string.spam_blocking_promo_text)))
@@ -196,3 +199,4 @@ public class SpamBlockingPromoHelper {
     return builder.build();
   }
 }
+
