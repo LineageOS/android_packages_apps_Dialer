@@ -27,12 +27,17 @@ import android.text.TextUtils;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Wrapper around the notification manager APIs. The wrapper ensures that channels are set and that
  * notifications are limited to 10 per group.
  */
 public final class DialerNotificationManager {
+
+  private static final Set<StatusBarNotification> throttledNotificationSet = new HashSet<>();
+
   public static void notify(@NonNull Context context, int id, @NonNull Notification notification) {
     Assert.isNotNull(context);
     Assert.isNotNull(notification);
@@ -50,7 +55,7 @@ public final class DialerNotificationManager {
     }
 
     getNotificationManager(context).notify(tag, id, notification);
-    NotificationThrottler.throttle(context, notification);
+    throttledNotificationSet.addAll(NotificationThrottler.throttle(context, notification));
   }
 
   public static void cancel(@NonNull Context context, int id) {
@@ -129,6 +134,10 @@ public final class DialerNotificationManager {
   @NonNull
   private static NotificationManager getNotificationManager(@NonNull Context context) {
     return context.getSystemService(NotificationManager.class);
+  }
+
+  public static Set<StatusBarNotification> getThrottledNotificationSet() {
+    return throttledNotificationSet;
   }
 
   private DialerNotificationManager() {}
