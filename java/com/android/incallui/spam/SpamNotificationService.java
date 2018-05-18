@@ -103,11 +103,18 @@ public class SpamNotificationService extends Service {
     ContactLookupResult.Type contactLookupResultType =
         ContactLookupResult.Type.forNumber(intent.getIntExtra(EXTRA_CONTACT_LOOKUP_RESULT_TYPE, 0));
 
-    DialerNotificationManager.cancel(this, notificationTag, notificationId);
-
     SpamSettings spamSettings = SpamComponent.get(this).spamSettings();
     SpamBlockingPromoHelper spamBlockingPromoHelper =
         new SpamBlockingPromoHelper(this, SpamComponent.get(this).spamSettings());
+    boolean shouldShowSpamBlockingPromo =
+        SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM.equals(intent.getAction())
+            && spamBlockingPromoHelper.shouldShowAfterCallSpamBlockingPromo();
+
+    // Cancel notification only if we are not showing spam blocking promo. Otherwise we will show
+    // spam blocking promo notification in place.
+    if (!shouldShowSpamBlockingPromo) {
+      DialerNotificationManager.cancel(this, notificationTag, notificationId);
+    }
 
     switch (intent.getAction()) {
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM:
@@ -122,7 +129,7 @@ public class SpamNotificationService extends Service {
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
         new FilteredNumberAsyncQueryHandler(this).blockNumber(null, number, countryIso);
-        if (spamBlockingPromoHelper.shouldShowAfterCallSpamBlockingPromo()) {
+        if (shouldShowSpamBlockingPromo) {
           spamBlockingPromoHelper.showSpamBlockingPromoNotification(
               notificationTag,
               notificationId,
