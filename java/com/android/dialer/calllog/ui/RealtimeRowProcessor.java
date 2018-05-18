@@ -24,7 +24,7 @@ import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.model.CoalescedRow;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.calllogutils.NumberAttributesBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -203,7 +203,7 @@ public final class RealtimeRowProcessor {
     // TODO(linyuh): Improve the comparison instead.
     return row.toBuilder()
         .setNumberAttributes(
-            NumberAttributesConverter.fromPhoneLookupInfo(phoneLookupInfo)
+            NumberAttributesBuilder.fromPhoneLookupInfo(phoneLookupInfo)
                 .setIsCp2InfoIncomplete(row.getNumberAttributes().getIsCp2InfoIncomplete())
                 .build())
         .build();
