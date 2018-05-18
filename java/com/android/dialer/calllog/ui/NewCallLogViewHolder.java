@@ -21,7 +21,6 @@ import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.v4.os.BuildCompat;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -35,8 +34,8 @@ import com.android.dialer.calllog.ui.NewCallLogAdapter.PopCounts;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogRowActions;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
+import com.android.dialer.calllogutils.PhotoInfoBuilder;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
@@ -162,15 +161,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPhoto(CoalescedRow row) {
-    contactPhotoView.setPhoto(
-        NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
-            .setFormattedNumber(row.getFormattedNumber())
-            .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-            .setIsRtt(
-                BuildCompat.isAtLeastP()
-                    && (row.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT)
-            .setIsVoicemail(row.getIsVoicemailCall())
-            .build());
+    contactPhotoView.setPhoto(PhotoInfoBuilder.fromCoalescedRow(row).build());
   }
 
   private void setFeatureIcons(CoalescedRow row) {

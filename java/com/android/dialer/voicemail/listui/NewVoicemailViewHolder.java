@@ -36,7 +36,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.calllogutils.PhotoInfoBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
@@ -147,7 +147,8 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
     menuButton.setOnClickListener(
         NewVoicemailMenu.createOnClickListener(context, voicemailEntryOfViewHolder));
 
-    setPhoto(voicemailEntryOfViewHolder);
+    contactPhotoView.setPhoto(
+        PhotoInfoBuilder.fromVoicemailEntry(voicemailEntryOfViewHolder).build());
 
     // Update the expanded/collapsed state of this view holder
     // Only update the binding of the mediaPlayerView of the expanded view holder
@@ -204,13 +205,6 @@ final class NewVoicemailViewHolder extends RecyclerView.ViewHolder implements On
       secondaryTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
       transcriptionTextView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
     }
-  }
-
-  private void setPhoto(VoicemailEntry voicemailEntry) {
-    contactPhotoView.setPhoto(
-        NumberAttributesConverter.toPhotoInfoBuilder(voicemailEntry.getNumberAttributes())
-            .setFormattedNumber(voicemailEntry.getFormattedNumber())
-            .build());
   }
 
   void collapseViewHolder() {
