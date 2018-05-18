@@ -25,6 +25,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
+import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,20 @@ public final class ShortcutRefresher {
         .createNonUiTaskBuilder(new RefreshWorker(context))
         .build()
         .executeSerial(new ArrayList<>(contacts));
+  }
+
+  public static List<ContactEntry> speedDialUiItemsToContactEntries(List<SpeedDialUiItem> items) {
+    List<ContactEntry> contactEntries = new ArrayList<>();
+    for (SpeedDialUiItem item : items) {
+      ContactEntry entry = new ContactEntry();
+      entry.id = item.contactId();
+      entry.lookupKey = item.lookupKey();
+      // SpeedDialUiItem name's are already configured for alternative display orders, so we don't
+      // need to account for them in these entries.
+      entry.namePrimary = item.name();
+      contactEntries.add(entry);
+    }
+    return contactEntries;
   }
 
   private static final class RefreshWorker implements Worker<List<ContactEntry>, Void> {
