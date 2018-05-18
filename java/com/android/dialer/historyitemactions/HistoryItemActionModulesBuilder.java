@@ -30,6 +30,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.ReportingLocation;
+import com.android.dialer.spam.Spam;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.UriUtils;
 import java.util.ArrayList;
@@ -120,8 +121,8 @@ public final class HistoryItemActionModulesBuilder {
    * <ul>
    *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
-   *   <li>the number is blocked, or
-   *   <li>the number is marked as spam.
+   *   <li>the call should be shown as spam, or
+   *   <li>the number is blocked.
    * </ul>
    *
    * <p>If the provided module info is for a Duo video call and Duo is available, add a Duo video
@@ -141,8 +142,8 @@ public final class HistoryItemActionModulesBuilder {
   public HistoryItemActionModulesBuilder addModuleForVideoCall() {
     if (moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
-        || moduleInfo.getIsBlocked()
-        || moduleInfo.getIsSpam()) {
+        || Spam.shouldShowAsSpam(moduleInfo.getIsSpam(), moduleInfo.getCallType())
+        || moduleInfo.getIsBlocked()) {
       return this;
     }
 
@@ -221,8 +222,8 @@ public final class HistoryItemActionModulesBuilder {
    * <ul>
    *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
+   *   <li>the call should be shown as spam,
    *   <li>the number is blocked,
-   *   <li>the number is marked as spam,
    *   <li>the number is empty, or
    *   <li>the number belongs to an existing contact.
    * </ul>
@@ -230,8 +231,8 @@ public final class HistoryItemActionModulesBuilder {
   public HistoryItemActionModulesBuilder addModuleForAddingToContacts() {
     if (moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
+        || Spam.shouldShowAsSpam(moduleInfo.getIsSpam(), moduleInfo.getCallType())
         || moduleInfo.getIsBlocked()
-        || moduleInfo.getIsSpam()
         || isExistingContact()
         || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
       return this;
@@ -264,16 +265,17 @@ public final class HistoryItemActionModulesBuilder {
    *   <li>the call is one made to a voicemail box.
    * </ul>
    *
-   * <p>If a number is marked as spam, add two modules:
+   * <p>If the call should be shown as spam, add two modules:
    *
    * <ul>
    *   <li>"Not spam" and "Block", or
    *   <li>"Not spam" and "Unblock".
    * </ul>
    *
-   * <p>If a number is blocked but not marked as spam, add the "Unblock" module.
+   * <p>If the number is blocked but the call should not be shown as spam, add the "Unblock" module.
    *
-   * <p>If a number is not blocked or marked as spam, add the "Block/Report spam" module.
+   * <p>If the number is not blocked and the call should not be shown as spam, add the "Block/Report
+   * spam" module.
    */
   public HistoryItemActionModulesBuilder addModuleForBlockedOrSpamNumber() {
     if (moduleInfo.getIsEmergencyNumber() || moduleInfo.getIsVoicemailCall()) {
@@ -289,10 +291,10 @@ public final class HistoryItemActionModulesBuilder {
             .setContactSource(moduleInfo.getContactSource())
             .build();
 
-    // For a spam number, add two modules:
+    // For a call that should be shown as spam, add two modules:
     // (1) "Not spam" and "Block", or
     // (2) "Not spam" and "Unblock".
-    if (moduleInfo.getIsSpam()) {
+    if (Spam.shouldShowAsSpam(moduleInfo.getIsSpam(), moduleInfo.getCallType())) {
       modules.add(
           BlockReportSpamModules.moduleForMarkingNumberAsNotSpam(
               context, blockReportSpamDialogInfo));
@@ -303,14 +305,16 @@ public final class HistoryItemActionModulesBuilder {
       return this;
     }
 
-    // For a blocked non-spam number, add the "Unblock" module.
+    // For a blocked number associated with a call that should not be shown as spam, add the
+    // "Unblock" module.
     if (moduleInfo.getIsBlocked()) {
       modules.add(
           BlockReportSpamModules.moduleForUnblockingNumber(context, blockReportSpamDialogInfo));
       return this;
     }
 
-    // For a number that is neither a spam number nor blocked, add the "Block/Report spam" module.
+    // For a number that is not blocked and is associated with a call that should not be shown as
+    // spam, add the "Block/Report spam" module.
     modules.add(
         BlockReportSpamModules.moduleForBlockingNumberAndOptionallyReportingSpam(
             context, blockReportSpamDialogInfo));

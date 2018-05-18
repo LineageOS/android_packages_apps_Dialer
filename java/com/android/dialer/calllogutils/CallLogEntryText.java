@@ -21,6 +21,7 @@ import android.provider.CallLog.Calls;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.spam.Spam;
 import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
@@ -80,13 +81,15 @@ public final class CallLogEntryText {
    * <p>Rules:
    *
    * <ul>
-   *   <li>For emergency numbers: Date
-   *   <li>For numbers that are not spam or blocked: $Label(, Duo video|Carrier video)?|$Location •
-   *       Date
-   *   <li>For blocked non-spam numbers: Blocked • $Label(, Duo video|Carrier video)?|$Location •
-   *       Date
-   *   <li>For spam but not blocked numbers: Spam • $Label(, Duo video|Carrier video)? • Date
-   *   <li>For blocked spam numbers: Blocked • Spam • $Label(, Duo video|Carrier video)? • Date
+   *   <li>An emergency number: Date
+   *   <li>Number - not blocked, call - not spam:
+   *       <p>$Label(, Duo video|Carrier video)?|$Location • Date
+   *   <li>Number - blocked, call - not spam:
+   *       <p>Blocked • $Label(, Duo video|Carrier video)?|$Location • Date
+   *   <li>Number - not blocked, call - spam:
+   *       <p>Spam • $Label(, Duo video|Carrier video)? • Date
+   *   <li>Number - blocked, call - spam:
+   *       <p>Blocked • Spam • $Label(, Duo video|Carrier video)? • Date
    * </ul>
    *
    * <p>Examples:
@@ -119,7 +122,7 @@ public final class CallLogEntryText {
     if (row.getNumberAttributes().getIsBlocked()) {
       components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
-    if (row.getNumberAttributes().getIsSpam()) {
+    if (Spam.shouldShowAsSpam(row.getNumberAttributes().getIsSpam(), row.getCallType())) {
       components.add(context.getText(R.string.new_call_log_secondary_spam));
     }
 
@@ -141,15 +144,15 @@ public final class CallLogEntryText {
   public static CharSequence buildSecondaryTextForBottomSheet(Context context, CoalescedRow row) {
     /*
      * Rules:
-     *   For emergency numbers:
+     *   For an emergency number:
      *     Number
-     *   For numbers that are not spam or blocked:
+     *   Number - not blocked, call - not spam:
      *     $Label(, Duo video|Carrier video)?|$Location [• NumberIfNoName]?
-     *   For blocked non-spam numbers:
+     *   Number - blocked, call - not spam:
      *     Blocked • $Label(, Duo video|Carrier video)?|$Location [• NumberIfNoName]?
-     *   For spam but not blocked numbers:
+     *   Number - not blocked, call - spam:
      *     Spam • $Label(, Duo video|Carrier video)? [• NumberIfNoName]?
-     *   For blocked spam numbers:
+     *   Number - blocked, call - spam:
      *     Blocked • Spam • $Label(, Duo video|Carrier video)? [• NumberIfNoName]?
      *
      * The number is shown at the end if there is no name for the entry. (It is shown in primary
@@ -178,7 +181,7 @@ public final class CallLogEntryText {
     if (row.getNumberAttributes().getIsBlocked()) {
       components.add(context.getText(R.string.new_call_log_secondary_blocked));
     }
-    if (row.getNumberAttributes().getIsSpam()) {
+    if (Spam.shouldShowAsSpam(row.getNumberAttributes().getIsSpam(), row.getCallType())) {
       components.add(context.getText(R.string.new_call_log_secondary_spam));
     }
 
@@ -234,8 +237,9 @@ public final class CallLogEntryText {
 
     // Show the location if
     // (1) there is no number type label, and
-    // (2) the number is not spam.
-    if (TextUtils.isEmpty(numberTypeLabel) && !row.getNumberAttributes().getIsSpam()) {
+    // (2) the call should not be shown as spam.
+    if (TextUtils.isEmpty(numberTypeLabel)
+        && !Spam.shouldShowAsSpam(row.getNumberAttributes().getIsSpam(), row.getCallType())) {
       // If number attributes contain a location (obtained from a PhoneLookup), use it instead
       // of the one from the annotated call log.
       String location =
