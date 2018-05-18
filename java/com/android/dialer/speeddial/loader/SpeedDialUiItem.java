@@ -18,11 +18,13 @@ package com.android.dialer.speeddial.loader;
 
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.os.Trace;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
@@ -33,6 +35,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * POJO representation of each speed dial list element.
@@ -103,7 +106,9 @@ public abstract class SpeedDialUiItem {
    * <p>If the cursor started at row X, this method will advance to row Y s.t. rows X, X + 1, ... Y
    * - 1 all belong to the same contact (that is, share the same contact id and lookup key).
    */
-  public static SpeedDialUiItem fromCursor(Resources resources, Cursor cursor) {
+  public static SpeedDialUiItem fromCursor(
+      Resources resources, Cursor cursor, boolean isImsEnabled) {
+    Trace.beginSection("fromCursor");
     Assert.checkArgument(cursor != null);
     Assert.checkArgument(cursor.getCount() != 0);
     String lookupKey = cursor.getString(LOOKUP_KEY);
@@ -121,17 +126,26 @@ public abstract class SpeedDialUiItem {
     // While there are more rows and the lookup keys are the same, add a channel for each of the
     // contact's phone numbers.
     List<Channel> channels = new ArrayList<>();
+    Set<String> numbers = new ArraySet<>();
     do {
+      String number = cursor.getString(NUMBER);
+      // TODO(78492722): consider using lib phone number to compare numbers
+      if (!numbers.add(number)) {
+        // Number is identical to an existing number, skip this number
+        continue;
+      }
+
       Channel channel =
           Channel.builder()
-              .setNumber(cursor.getString(NUMBER))
+              .setNumber(number)
               .setPhoneType(cursor.getInt(TYPE))
               .setLabel(getLabel(resources, cursor))
               .setTechnology(Channel.VOICE)
               .build();
       channels.add(channel);
 
-      if ((cursor.getInt(CARRIER_PRESENCE) & Data.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
+      if (isImsEnabled
+          && (cursor.getInt(CARRIER_PRESENCE) & Data.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
         // Add another channel if the number is ViLTE reachable
         channels.add(channel.toBuilder().setTechnology(Channel.IMS_VIDEO).build());
       }
@@ -139,6 +153,7 @@ public abstract class SpeedDialUiItem {
     } while (cursor.moveToNext() && Objects.equals(lookupKey, cursor.getString(LOOKUP_KEY)));
 
     builder.setChannels(ImmutableList.copyOf(channels));
+    Trace.endSection();
     return builder.build();
   }
 

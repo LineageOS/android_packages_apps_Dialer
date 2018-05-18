@@ -46,13 +46,18 @@ final class SimulatorConferenceCreator
 
   @Simulator.ConferenceType private final int conferenceType;
 
-  public SimulatorConferenceCreator(
+  SimulatorConferenceCreator(
       @NonNull Context context, @Simulator.ConferenceType int conferenceType) {
     this.context = Assert.isNotNull(context);
     this.conferenceType = conferenceType;
     simulatorConnectionsBank = SimulatorComponent.get(context).getSimulatorConnectionsBank();
   }
 
+  /**
+   * Starts to create certain number of calls to form a conference call.
+   *
+   * @param callCount the number of calls in conference to create.
+   */
   void start(int callCount) {
     onNewIncomingConnectionEnabled = true;
     SimulatorConnectionService.addListener(this);

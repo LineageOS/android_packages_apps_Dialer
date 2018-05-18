@@ -16,12 +16,17 @@
 
 package com.android.dialer.speeddial;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -35,11 +40,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
+import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.SupportUiListener;
+import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.historyitemactions.DividerModule;
 import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
@@ -49,6 +56,7 @@ import com.android.dialer.historyitemactions.IntentModule;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
+import com.android.dialer.shortcuts.ShortcutRefresher;
 import com.android.dialer.speeddial.ContextMenu.ContextMenuItemListener;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
@@ -59,9 +67,13 @@ import com.android.dialer.speeddial.draghelper.SpeedDialLayoutManager;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.util.IntentUtil;
+import com.android.dialer.util.PermissionsUtil;
+import com.android.dialer.widget.EmptyContentView;
+import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,12 +88,38 @@ import java.util.List;
  */
 public class SpeedDialFragment extends Fragment {
 
+  private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+
+  /**
+   * Listen to broadcast events about permissions in order to be notified if the READ_CONTACTS
+   * permission is granted via the UI in another fragment.
+   */
+  private final BroadcastReceiver readContactsPermissionGrantedReceiver =
+      new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+          loadContacts();
+        }
+      };
+
+  /** Listen for changes to the strequents content observer. */
+  private final ContentObserver strequentsContentObserver =
+      new ContentObserver(ThreadUtil.getUiThreadHandler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+          super.onChange(selfChange);
+          loadContacts();
+        }
+      };
+
   private final SpeedDialHeaderListener headerListener = new SpeedDialFragmentHeaderListener();
   private final SpeedDialSuggestedListener suggestedListener = new SpeedDialSuggestedListener();
 
   private SpeedDialAdapter adapter;
   private SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
   private SpeedDialFavoritesListener favoritesListener;
+
+  private EmptyContentView emptyContentView;
 
   /**
    * We update the UI every time the fragment is resumed. This boolean suppresses that functionality
@@ -99,6 +137,8 @@ public class SpeedDialFragment extends Fragment {
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     LogUtil.enterBlock("SpeedDialFragment.onCreateView");
     View rootLayout = inflater.inflate(R.layout.fragment_speed_dial, container, false);
+    emptyContentView = rootLayout.findViewById(R.id.speed_dial_empty_content_view);
+    emptyContentView.setImage(R.drawable.empty_speed_dial);
 
     speedDialLoaderListener =
         DialerExecutorComponent.get(getContext())
@@ -132,8 +172,67 @@ public class SpeedDialFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
+    loadContacts();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    favoritesListener.hideMenu();
+    suggestedListener.onPause();
+    onHidden();
+  }
+
+  @Override
+  public void onHiddenChanged(boolean hidden) {
+    super.onHiddenChanged(hidden);
+    if (hidden) {
+      onHidden();
+    } else {
+      loadContacts();
+    }
+  }
+
+  private void onHidden() {
+    if (!PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      return;
+    }
+
+    Futures.addCallback(
+        DialerExecutorComponent.get(getContext())
+            .backgroundExecutor()
+            .submit(
+                () -> {
+                  UiItemLoaderComponent.get(getContext())
+                      .speedDialUiItemMutator()
+                      .updatePinnedPosition(adapter.getSpeedDialUiItems());
+                  return null;
+                }),
+        new DefaultFutureCallback<>(),
+        DialerExecutorComponent.get(getContext()).backgroundExecutor());
+    ShortcutRefresher.refresh(
+        getContext(),
+        ShortcutRefresher.speedDialUiItemsToContactEntries(adapter.getSpeedDialUiItems()));
+  }
+
+  @Override
+  public void onRequestPermissionsResult(
+      int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == READ_CONTACTS_PERMISSION_REQUEST_CODE
+        && grantResults.length > 0
+        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+      PermissionsUtil.notifyPermissionGranted(getContext(), Manifest.permission.READ_CONTACTS);
+      loadContacts();
+    }
+  }
+
+  private void loadContacts() {
     if (!updateSpeedDialItemsOnResume) {
       updateSpeedDialItemsOnResume = true;
+      return;
+    }
+
+    if (showContactsPermissionEmptyContentView()) {
       return;
     }
 
@@ -172,29 +271,59 @@ public class SpeedDialFragment extends Fragment {
             .speedDialUiItemMutator()
             .insertDuoChannels(getContext(), speedDialUiItems));
     adapter.notifyDataSetChanged();
+    maybeShowNoContactsEmptyContentView();
+
     if (getActivity() != null) {
       FragmentUtils.getParentUnsafe(this, HostInterface.class)
           .setHasFrequents(adapter.hasFrequents());
     }
   }
 
+  /** Returns true if the empty content view was shown. */
+  private boolean showContactsPermissionEmptyContentView() {
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      emptyContentView.setVisibility(View.GONE);
+      return false;
+    }
+
+    emptyContentView.setVisibility(View.VISIBLE);
+    emptyContentView.setActionLabel(R.string.speed_dial_turn_on_contacts_permission);
+    emptyContentView.setDescription(R.string.speed_dial_contacts_permission_description);
+    emptyContentView.setActionClickedListener(
+        new SpeedDialContactPermissionEmptyViewListener(getContext(), this));
+    return true;
+  }
+
+  private void maybeShowNoContactsEmptyContentView() {
+    if (adapter.getItemCount() != 0) {
+      emptyContentView.setVisibility(View.GONE);
+      return;
+    }
+
+    emptyContentView.setVisibility(View.VISIBLE);
+    emptyContentView.setActionLabel(R.string.speed_dial_no_contacts_action_text);
+    emptyContentView.setDescription(R.string.speed_dial_no_contacts_description);
+    emptyContentView.setActionClickedListener(new SpeedDialNoContactsEmptyViewListener(this));
+  }
+
   @Override
-  public void onPause() {
-    super.onPause();
-    favoritesListener.hideMenu();
-    Futures.addCallback(
-        DialerExecutorComponent.get(getContext())
-            .backgroundExecutor()
-            .submit(
-                () -> {
-                  UiItemLoaderComponent.get(getContext())
-                      .speedDialUiItemMutator()
-                      .updatePinnedPosition(adapter.getSpeedDialUiItems());
-                  return null;
-                }),
-        new DefaultFutureCallback<>(),
-        DialerExecutorComponent.get(getContext()).backgroundExecutor());
-    suggestedListener.onPause();
+  public void onStart() {
+    super.onStart();
+    PermissionsUtil.registerPermissionReceiver(
+        getActivity(), readContactsPermissionGrantedReceiver, Manifest.permission.READ_CONTACTS);
+    if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
+      getContext()
+          .getContentResolver()
+          .registerContentObserver(Contacts.CONTENT_STREQUENT_URI, true, strequentsContentObserver);
+    }
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    PermissionsUtil.unregisterPermissionReceiver(
+        getContext(), readContactsPermissionGrantedReceiver);
+    getContext().getContentResolver().unregisterContentObserver(strequentsContentObserver);
   }
 
   private class SpeedDialFragmentHeaderListener implements SpeedDialHeaderListener {
@@ -247,6 +376,7 @@ public class SpeedDialFragment extends Fragment {
       PreCall.start(
           activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setAllowAssistedDial(true)
               .setIsVideoCall(channel.isVideoTechnology())
               .setIsDuoCall(channel.technology() == Channel.DUO));
     }
@@ -341,6 +471,7 @@ public class SpeedDialFragment extends Fragment {
       PreCall.start(
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setAllowAssistedDial(true)
               .setIsVideoCall(channel.isVideoTechnology())
               .setIsDuoCall(channel.technology() == Channel.DUO));
     }
@@ -423,6 +554,7 @@ public class SpeedDialFragment extends Fragment {
       PreCall.start(
           activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+              .setAllowAssistedDial(true)
               .setIsVideoCall(channel.isVideoTechnology())
               .setIsDuoCall(channel.technology() == Channel.DUO));
     }
@@ -452,6 +584,46 @@ public class SpeedDialFragment extends Fragment {
               Intent.ACTION_VIEW,
               Uri.withAppendedPath(
                   Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
+    }
+  }
+
+  private static final class SpeedDialContactPermissionEmptyViewListener
+      implements OnEmptyViewActionButtonClickedListener {
+
+    private final Context context;
+    private final Fragment fragment;
+
+    private SpeedDialContactPermissionEmptyViewListener(Context context, Fragment fragment) {
+      this.context = context;
+      this.fragment = fragment;
+    }
+
+    @Override
+    public void onEmptyViewActionButtonClicked() {
+      String[] deniedPermissions =
+          PermissionsUtil.getPermissionsCurrentlyDenied(
+              context, PermissionsUtil.allContactsGroupPermissionsUsedInDialer);
+      Assert.checkArgument(deniedPermissions.length > 0);
+      LogUtil.i(
+          "OldSpeedDialFragment.onEmptyViewActionButtonClicked",
+          "Requesting permissions: " + Arrays.toString(deniedPermissions));
+      fragment.requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+    }
+  }
+
+  private static final class SpeedDialNoContactsEmptyViewListener
+      implements OnEmptyViewActionButtonClickedListener {
+
+    private final Fragment fragment;
+
+    SpeedDialNoContactsEmptyViewListener(Fragment fragment) {
+      this.fragment = fragment;
+    }
+
+    @Override
+    public void onEmptyViewActionButtonClicked() {
+      Intent intent = new Intent(Intent.ACTION_PICK, Phone.CONTENT_URI);
+      fragment.startActivityForResult(intent, ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE);
     }
   }
 

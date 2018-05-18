@@ -39,11 +39,6 @@ public class PreCallImpl implements PreCall {
     this.actions = actions;
   }
 
-  @Override
-  public ImmutableList<PreCallAction> getActions() {
-    return actions;
-  }
-
   @NonNull
   @Override
   public Intent buildIntent(Context context, CallIntentBuilder builder) {

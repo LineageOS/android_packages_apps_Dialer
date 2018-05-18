@@ -62,11 +62,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Responsible for defining the rows in the annotated call log and maintaining the columns in it
  * which are derived from the system call log.
  */
+@Singleton
 @SuppressWarnings("MissingPermission")
 public class SystemCallLogDataSource implements CallLogDataSource {
 
@@ -81,6 +83,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   private final Duo duo;
 
   @Nullable private Long lastTimestampProcessed;
+  private boolean isCallLogContentObserverRegistered = false;
 
   @Inject
   SystemCallLogDataSource(
@@ -106,7 +109,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       LogUtil.i("SystemCallLogDataSource.registerContentObservers", "no call log permissions");
       return;
     }
-    // TODO(zachh): Need to somehow register observers if user enables permission after launch?
 
     // The system call log has a last updated timestamp, but deletes are physical (the "deleted"
     // column is unused). This means that we can't detect deletes without scanning the entire table,
@@ -115,6 +117,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     appContext
         .getContentResolver()
         .registerContentObserver(CallLog.Calls.CONTENT_URI_WITH_VOICEMAIL, true, markDirtyObserver);
+    isCallLogContentObserverRegistered = true;
 
     if (!PermissionsUtil.hasAddVoicemailPermissions(appContext)) {
       LogUtil.i("SystemCallLogDataSource.registerContentObservers", "no add voicemail permissions");
@@ -129,6 +132,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   @Override
   public void unregisterContentObservers() {
     appContext.getContentResolver().unregisterContentObserver(markDirtyObserver);
+    isCallLogContentObserverRegistered = false;
   }
 
   @Override
@@ -140,7 +144,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
               return null;
             });
 
-    // TODO(zachh): Test re-enabling after deleting database like this.
     return Futures.transform(
         Futures.allAsList(deleteSharedPref, annotatedCallLogDatabaseHelper.delete()),
         unused -> null,
@@ -154,6 +157,14 @@ public class SystemCallLogDataSource implements CallLogDataSource {
 
   @Override
   public ListenableFuture<Boolean> isDirty() {
+    // This can happen if the call log permission is enabled after the application is started.
+    if (!isCallLogContentObserverRegistered
+        && PermissionsUtil.hasCallLogReadPermissions(appContext)) {
+      registerContentObservers();
+      // Consider the data source dirty because calls could have been missed while the content
+      // observer wasn't registered.
+      return Futures.immediateFuture(true);
+    }
     return backgroundExecutorService.submit(this::isDirtyInternal);
   }
 

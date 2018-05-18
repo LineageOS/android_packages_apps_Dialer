@@ -23,7 +23,7 @@ import android.app.Notification.Builder;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
-import android.preference.PreferenceManager;
+import android.graphics.drawable.Icon;
 import android.support.design.widget.Snackbar;
 import android.support.v4.os.BuildCompat;
 import android.view.View;
@@ -35,6 +35,7 @@ import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.SpamSettings;
 import com.android.dialer.spam.promo.SpamBlockingPromoDialogFragment.OnEnableListener;
+import com.android.dialer.storage.StorageComponent;
 
 /** Helper class for showing spam blocking on-boarding promotions. */
 public class SpamBlockingPromoHelper {
@@ -71,7 +72,8 @@ public class SpamBlockingPromoHelper {
     }
 
     long lastShowMillis =
-        PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+        StorageComponent.get(context)
+            .unencryptedSharedPrefs()
             .getLong(SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS, 0);
     long showPeriodMillis =
         ConfigProviderBindings.get(context)
@@ -103,10 +105,11 @@ public class SpamBlockingPromoHelper {
   }
 
   private void updateLastShowSpamTimestamp() {
-    PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+    StorageComponent.get(context)
+        .unencryptedSharedPrefs()
         .edit()
         .putLong(SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS, System.currentTimeMillis())
-        .commit();
+        .apply();
   }
 
   /**
@@ -177,6 +180,8 @@ public class SpamBlockingPromoHelper {
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(context.getColor(R.color.dialer_theme_color))
             .setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24)
+            .setLargeIcon(Icon.createWithResource(context, R.drawable.spam_blocking_promo_icon))
+            .setContentText(context.getString(R.string.spam_blocking_promo_text))
             .setStyle(
                 new Notification.BigTextStyle()
                     .bigText(context.getString(R.string.spam_blocking_promo_text)))
@@ -194,3 +199,4 @@ public class SpamBlockingPromoHelper {
     return builder.build();
   }
 }
+

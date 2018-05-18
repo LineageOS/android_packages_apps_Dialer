@@ -38,6 +38,7 @@
         android:layout_width="@dimen/voicemail_promo_card_icon_size"
         android:layout_height="@dimen/voicemail_promo_card_icon_size"
         android:layout_gravity="top"
+        android:importantForAccessibility="no"
         android:src="@drawable/ic_voicemail_error_24px"/>
 
     <LinearLayout

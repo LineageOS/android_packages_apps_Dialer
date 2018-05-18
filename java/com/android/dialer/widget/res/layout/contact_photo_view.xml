@@ -17,43 +17,58 @@
 <!-- A FrameLayout for displaying a contact photo and its optional badge -->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="52dp"
-    android:layout_height="44dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="56dp"
+    android:layout_height="48dp"
     android:layout_gravity="center"
     android:focusable="false">
 
   <QuickContactBadge
       android:id="@+id/quick_contact_photo"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
       android:layout_gravity="center"
-      android:focusable="true"/>
+      android:padding="4dp"/>
 
+  <!--
+      A container layout that contains a background and badges
+      (video call badge, RTT call badge, etc)
+
+      The container and its children are too small to meet the accessibility requirement that the
+      touchable area of focusable items should be at least 48dp x 48dp. We have to mark all of them
+      as not important for accessibility.
+  -->
   <FrameLayout
       android:id="@+id/contact_badge_container"
       android:layout_width="22dp"
       android:layout_height="22dp"
-      android:layout_gravity="bottom|end">
+      android:layout_marginBottom="2dp"
+      android:layout_marginEnd="2dp"
+      android:layout_gravity="bottom|end"
+      android:importantForAccessibility="noHideDescendants">
 
     <ImageView
         android:id="@+id/contact_badge_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/contact_photo_badge_background"/>
+        android:src="@drawable/contact_photo_badge_background"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/video_call_badge"
         android:layout_width="13dp"
         android:layout_height="13dp"
         android:layout_gravity="center"
-        android:src="@drawable/quantum_ic_videocam_vd_white_24"/>
+        android:src="@drawable/quantum_ic_videocam_vd_white_24"
+        tools:ignore="ContentDescription"/>
 
     <ImageView
         android:id="@+id/rtt_call_badge"
         android:layout_width="13dp"
         android:layout_height="13dp"
         android:layout_gravity="center"
+        android:src="@drawable/quantum_ic_rtt_vd_theme_24"
         android:tint="@android:color/white"
-        android:src="@drawable/quantum_ic_rtt_vd_theme_24"/>
+        tools:ignore="ContentDescription"/>
   </FrameLayout>
 </FrameLayout>

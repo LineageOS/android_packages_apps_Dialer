@@ -39,7 +39,7 @@ final class SimulatorImpl implements Simulator {
 
   @Override
   public ActionProvider getActionProvider(AppCompatActivity activity) {
-    return SimulatorMainMenu.getActionProvider(activity);
+    return new SimulatorMainPortal(activity).getActionProvider();
   }
 
   @Override

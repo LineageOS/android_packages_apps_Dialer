@@ -27,14 +27,15 @@
       android:layout_width="wrap_content"
       android:layout_height="104dp"
       android:layout_gravity="center_horizontal"
-      android:layout_marginBottom="8dp">
+      android:layout_marginBottom="8dp"
+      android:minWidth="128dp">
 
-    <com.android.dialer.speeddial.SquareImageView
+    <QuickContactBadge
         android:id="@+id/avatar"
         android:layout_width="104dp"
         android:layout_height="104dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"/>
+        android:layout_gravity="center_horizontal"
+        android:clickable="false"/>
 
     <FrameLayout
         android:id="@+id/video_call_container"

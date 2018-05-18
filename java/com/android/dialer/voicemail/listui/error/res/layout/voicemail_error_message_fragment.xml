@@ -41,6 +41,7 @@
           android:layout_width="@dimen/voicemail_promo_card_icon_size"
           android:layout_height="@dimen/voicemail_promo_card_icon_size"
           android:layout_gravity="top"
+          android:importantForAccessibility="no"
           android:src="@drawable/ic_voicemail_error_24px"/>
 
       <LinearLayout
@@ -82,10 +83,10 @@
       <TextView
           android:id="@+id/secondary_action_raised"
           style="@style/RaisedErrorActionStyle"
-          android:paddingEnd="@dimen/alert_action_between_padding"
           android:layout_marginEnd="8dp"
-          android:nextFocusForward="@+id/secondary_action"
-          android:clickable="true"/>
+          android:paddingEnd="@dimen/alert_action_between_padding"
+          android:clickable="true"
+          android:nextFocusForward="@+id/secondary_action"/>
 
       <TextView
           android:id="@+id/secondary_action"
@@ -103,9 +104,8 @@
       <TextView
           android:id="@+id/primary_action_raised"
           style="@style/RaisedErrorActionStyle"
-          android:nextFocusForward="@+id/promo_card"
           android:clickable="true"
-          />
+          android:nextFocusForward="@+id/promo_card"/>
 
     </LinearLayout>
   </LinearLayout>
