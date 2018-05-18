@@ -18,6 +18,7 @@ package com.android.dialer.speeddial.loader;
 
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.os.Trace;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
@@ -105,7 +106,9 @@ public abstract class SpeedDialUiItem {
    * <p>If the cursor started at row X, this method will advance to row Y s.t. rows X, X + 1, ... Y
    * - 1 all belong to the same contact (that is, share the same contact id and lookup key).
    */
-  public static SpeedDialUiItem fromCursor(Resources resources, Cursor cursor) {
+  public static SpeedDialUiItem fromCursor(
+      Resources resources, Cursor cursor, boolean isImsEnabled) {
+    Trace.beginSection("fromCursor");
     Assert.checkArgument(cursor != null);
     Assert.checkArgument(cursor.getCount() != 0);
     String lookupKey = cursor.getString(LOOKUP_KEY);
@@ -141,7 +144,8 @@ public abstract class SpeedDialUiItem {
               .build();
       channels.add(channel);
 
-      if ((cursor.getInt(CARRIER_PRESENCE) & Data.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
+      if (isImsEnabled
+          && (cursor.getInt(CARRIER_PRESENCE) & Data.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
         // Add another channel if the number is ViLTE reachable
         channels.add(channel.toBuilder().setTechnology(Channel.IMS_VIDEO).build());
       }
@@ -149,6 +153,7 @@ public abstract class SpeedDialUiItem {
     } while (cursor.moveToNext() && Objects.equals(lookupKey, cursor.getString(LOOKUP_KEY)));
 
     builder.setChannels(ImmutableList.copyOf(channels));
+    Trace.endSection();
     return builder.build();
   }
 

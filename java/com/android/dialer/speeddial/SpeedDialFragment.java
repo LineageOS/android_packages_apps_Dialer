@@ -183,6 +183,7 @@ public class SpeedDialFragment extends Fragment {
     super.onPause();
     favoritesListener.hideMenu();
     suggestedListener.onPause();
+    onHidden();
   }
 
   @Override
