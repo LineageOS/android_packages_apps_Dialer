@@ -17,9 +17,10 @@
 
 <resources>
   <!-- Title for the spam blocking promo dialog. [CHAR LIMIT=100] -->
-  <string name="spam_blocking_promo_title">Also filter suspected spam calls?</string>
-  <!-- Text for the spam blocking promo dialog. [CHAR LIMIT=100] -->
-  <string name="spam_blocking_promo_text">You won\'t be disturbed by incoming suspected spam calls</string>
+  <string name="spam_blocking_promo_title">Filter all suspected spam calls?</string>
+  <!-- Text for the spam blocking promo dialog. [CHAR LIMIT=NONE] -->
+  <string name="spam_blocking_promo_text">Calls like the one you just blocked will no longer
+      disturb you</string>
   <!-- Label for filter spam dialog action. [CHAR LIMIT=32] -->
   <string name="spam_blocking_promo_action_filter_spam">Filter Spam</string>
   <!-- Label for "Dismiss" dialog action. [CHAR LIMIT=32] -->
