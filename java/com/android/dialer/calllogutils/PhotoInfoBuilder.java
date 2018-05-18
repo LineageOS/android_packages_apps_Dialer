@@ -21,6 +21,7 @@ import android.support.v4.os.BuildCompat;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.glidephotomanager.PhotoInfo;
+import com.android.dialer.spam.Spam;
 import com.android.dialer.voicemail.model.VoicemailEntry;
 
 /** Builds {@link PhotoInfo} from other data types. */
@@ -31,6 +32,9 @@ public final class PhotoInfoBuilder {
     return fromNumberAttributes(coalescedRow.getNumberAttributes())
         .setFormattedNumber(coalescedRow.getFormattedNumber())
         .setIsVoicemail(coalescedRow.getIsVoicemailCall())
+        .setIsSpam(
+            Spam.shouldShowAsSpam(
+                coalescedRow.getNumberAttributes().getIsSpam(), coalescedRow.getCallType()))
         .setIsVideo((coalescedRow.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
         .setIsRtt(
             BuildCompat.isAtLeastP()
@@ -40,7 +44,10 @@ public final class PhotoInfoBuilder {
   /** Returns a {@link PhotoInfo.Builder} with info from {@link VoicemailEntry}. */
   public static PhotoInfo.Builder fromVoicemailEntry(VoicemailEntry voicemailEntry) {
     return fromNumberAttributes(voicemailEntry.getNumberAttributes())
-        .setFormattedNumber(voicemailEntry.getFormattedNumber());
+        .setFormattedNumber(voicemailEntry.getFormattedNumber())
+        .setIsSpam(
+            Spam.shouldShowAsSpam(
+                voicemailEntry.getNumberAttributes().getIsSpam(), voicemailEntry.getCallType()));
   }
 
   /** Returns a {@link PhotoInfo.Builder} with info from {@link NumberAttributes}. */
@@ -51,7 +58,6 @@ public final class PhotoInfoBuilder {
         .setPhotoId(numberAttributes.getPhotoId())
         .setLookupUri(numberAttributes.getLookupUri())
         .setIsBusiness(numberAttributes.getIsBusiness())
-        .setIsBlocked(numberAttributes.getIsBlocked())
-        .setIsSpam(numberAttributes.getIsSpam());
+        .setIsBlocked(numberAttributes.getIsBlocked());
   }
 }
