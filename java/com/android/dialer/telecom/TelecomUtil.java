@@ -50,7 +50,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * perform the required check and return the fallback default if the permission is missing,
  * otherwise return the value from TelecomManager.
  */
-@SuppressWarnings("MissingPermission")
+@SuppressWarnings({"MissingPermission", "Guava"})
 public abstract class TelecomUtil {
 
   private static final String TAG = "TelecomUtil";
@@ -145,7 +145,8 @@ public abstract class TelecomUtil {
 
   public static List<PhoneAccountHandle> getCallCapablePhoneAccounts(Context context) {
     if (hasReadPhoneStatePermission(context)) {
-      return getTelecomManager(context).getCallCapablePhoneAccounts();
+      return Optional.fromNullable(getTelecomManager(context).getCallCapablePhoneAccounts())
+          .or(new ArrayList<>());
     }
     return new ArrayList<>();
   }
