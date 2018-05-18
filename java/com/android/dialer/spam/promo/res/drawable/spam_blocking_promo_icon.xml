@@ -20,7 +20,8 @@
 
   <item>
     <shape android:shape="oval">
-      <solid android:color="@color/incall_call_spam_background_color"/>
+      <!-- Note: Ensure matches incallui and blocking colors. -->
+      <solid android:color="#A52714"/>
       <size
           android:height="@android:dimen/notification_large_icon_height"
           android:width="@android:dimen/notification_large_icon_width"/>
