@@ -251,6 +251,11 @@ public final class NewSearchFragment extends Fragment
     this.rawNumber = rawNumber;
   }
 
+  @VisibleForTesting
+  public String getRawNumber() {
+    return rawNumber;
+  }
+
   public void setQuery(String query, CallInitiationType.Type callInitiationType) {
     this.query = query;
     this.callInitiationType = callInitiationType;

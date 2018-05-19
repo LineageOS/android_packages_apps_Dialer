@@ -18,26 +18,13 @@ package com.android.dialer.calllogutils;
 
 import android.text.TextUtils;
 import com.android.dialer.NumberAttributes;
-import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 
-/** Converts {@link NumberAttributes} to {@link PhotoInfo} */
-public final class NumberAttributesConverter {
+/** Builds {@link NumberAttributes} from other data types. */
+public final class NumberAttributesBuilder {
 
-  /** Converts {@link NumberAttributes} to {@link PhotoInfo.Builder} */
-  public static PhotoInfo.Builder toPhotoInfoBuilder(NumberAttributes numberAttributes) {
-    return PhotoInfo.newBuilder()
-        .setName(numberAttributes.getName())
-        .setPhotoUri(numberAttributes.getPhotoUri())
-        .setPhotoId(numberAttributes.getPhotoId())
-        .setLookupUri(numberAttributes.getLookupUri())
-        .setIsBusiness(numberAttributes.getIsBusiness())
-        .setIsSpam(numberAttributes.getIsSpam())
-        .setIsBlocked(numberAttributes.getIsBlocked());
-  }
-
-  /** Converts {@link PhoneLookupInfo} to {@link NumberAttributes.Builder} */
+  /** Returns a {@link NumberAttributes.Builder} with info from {@link PhoneLookupInfo}. */
   public static NumberAttributes.Builder fromPhoneLookupInfo(PhoneLookupInfo phoneLookupInfo) {
     PhoneLookupInfoConsolidator phoneLookupInfoConsolidator =
         new PhoneLookupInfoConsolidator(phoneLookupInfo);

@@ -17,11 +17,9 @@
 package com.android.dialer.calllog.ui.menu;
 
 import android.content.Context;
-import android.provider.CallLog.Calls;
-import android.support.v4.os.BuildCompat;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogEntryText;
-import com.android.dialer.calllogutils.NumberAttributesConverter;
+import com.android.dialer.calllogutils.PhotoInfoBuilder;
 import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 
 /** Configures the top row in the bottom sheet. */
@@ -30,15 +28,7 @@ final class BottomSheetHeader {
   static HistoryItemBottomSheetHeaderInfo fromRow(Context context, CoalescedRow row) {
     return HistoryItemBottomSheetHeaderInfo.newBuilder()
         .setNumber(row.getNumber())
-        .setPhotoInfo(
-            NumberAttributesConverter.toPhotoInfoBuilder(row.getNumberAttributes())
-                .setFormattedNumber(row.getFormattedNumber())
-                .setIsVideo((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO)
-                .setIsVoicemail(row.getIsVoicemailCall())
-                .setIsRtt(
-                    BuildCompat.isAtLeastP()
-                        && (row.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT)
-                .build())
+        .setPhotoInfo(PhotoInfoBuilder.fromCoalescedRow(row))
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
         .setSecondaryText(
             CallLogEntryText.buildSecondaryTextForBottomSheet(context, row).toString())

@@ -29,13 +29,15 @@ import com.android.dialer.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Utility to ensure that only a certain number of notifications are shown for a particular
  * notification type. Once the limit is reached, older notifications are cancelled.
  */
-/* package */ class NotificationThrottler {
+class NotificationThrottler {
   /**
    * For gropued bundled notifications, the system UI will only display the last 8. For grouped
    * unbundled notifications, the system displays all notifications until a global maximum of 50 is
@@ -47,14 +49,23 @@ import java.util.List;
 
   private static boolean didLogHighGlobalNotificationCountReached;
 
-  /* package */ static void throttle(@NonNull Context context, @NonNull Notification notification) {
+  /**
+   * For all the active notifications in the same group as the provided notification, cancel the
+   * earliest ones until the left ones is under limit.
+   *
+   * @param notification the provided notification to determine group
+   * @return a set of cancelled notification
+   */
+  static Set<StatusBarNotification> throttle(
+      @NonNull Context context, @NonNull Notification notification) {
     Assert.isNotNull(context);
     Assert.isNotNull(notification);
+    Set<StatusBarNotification> throttledNotificationSet = new HashSet<>();
 
     // No limiting for non-grouped notifications.
     String groupKey = notification.getGroup();
     if (TextUtils.isEmpty(groupKey)) {
-      return;
+      return throttledNotificationSet;
     }
 
     NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
@@ -88,8 +99,10 @@ import java.util.List;
       List<StatusBarNotification> notifications = getSortedMatchingNotifications(context, groupKey);
       for (int i = 0; i < (count - MAX_NOTIFICATIONS_PER_TAG); i++) {
         notificationManager.cancel(notifications.get(i).getTag(), notifications.get(i).getId());
+        throttledNotificationSet.add(notifications.get(i));
       }
     }
+    return throttledNotificationSet;
   }
 
   private static List<StatusBarNotification> getSortedMatchingNotifications(
