@@ -444,11 +444,12 @@ public class MainSearchController implements SearchBarListener {
 
   /** @see OnDialpadQueryChangedListener#onDialpadQueryChanged(java.lang.String) */
   public void onDialpadQueryChanged(String query) {
-    query = SmartDialNameMatcher.normalizeNumber(/* context = */ activity, query);
+    String normalizedQuery = SmartDialNameMatcher.normalizeNumber(/* context = */ activity, query);
     if (searchFragment != null) {
-      searchFragment.setQuery(query, CallInitiationType.Type.DIALPAD);
+      searchFragment.setRawNumber(query);
+      searchFragment.setQuery(normalizedQuery, CallInitiationType.Type.DIALPAD);
     }
-    dialpadFragment.process_quote_emergency_unquote(query);
+    dialpadFragment.process_quote_emergency_unquote(normalizedQuery);
   }
 
   @Override
