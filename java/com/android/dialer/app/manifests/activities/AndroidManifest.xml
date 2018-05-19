@@ -19,7 +19,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.app">
 
-  <application android:theme="@style/Theme.AppCompat">
+  <application>
 
     <activity
       android:exported="false"
@@ -101,7 +101,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.TAB"/>
       </intent-filter>
-      <intent-filter android:label="@string/main_call_history_tab_description">
+      <intent-filter>
         <action android:name="com.android.phone.action.RECENT_CALLS"/>
 
         <category android:name="android.intent.category.DEFAULT"/>

@@ -15,13 +15,8 @@
 -->
 
 <resources>
-  <color name="dialer_flat_button_text_color">@color/dialer_theme_color</color>
+  <color name="dialer_flat_button_text_color">?android:attr/colorPrimary</color>
 
-  <!-- Color for the setting text. -->
-  <color name="setting_primary_color">@color/dialer_primary_text_color</color>
-  <!-- Color for the setting description text. -->
-  <color name="setting_secondary_color">@color/dialer_secondary_text_color</color>
-  <color name="setting_disabled_color">#aaaaaa</color>
   <color name="setting_background_color">#ffffff</color>
 
   <!-- 54% black -->
@@ -50,7 +45,7 @@
   <!-- Colour of voicemail progress bar to the right of position indicator. -->
   <color name="voicemail_playback_seek_bar_yet_to_play">#cecece</color>
   <!-- Colour of voicemail progress bar to the left of position indicator. -->
-  <color name="voicemail_playback_seek_bar_already_played">@color/dialer_theme_color</color>
+  <color name="voicemail_playback_seek_bar_already_played">?android:attr/colorPrimary</color>
 
   <!-- Background color for search results and call details -->
   <color name="background_dialer_results">#f9f9f9</color>
@@ -76,7 +71,7 @@
   <color name="blocked_number_icon_tint">#616161</color>
   <color name="blocked_number_background">#FFFFFF</color>
   <color name="blocked_number_block_color">#F44336</color>
-  <color name="blocked_number_header_color">@color/dialer_theme_color</color>
+  <color name="blocked_number_header_color">?android:attr/colorPrimary</color>
   <color name="blocked_number_disabled_emergency_background_color">#E0E0E0</color>
   <color name="add_blocked_number_icon_color">#bdbdbd</color>
 

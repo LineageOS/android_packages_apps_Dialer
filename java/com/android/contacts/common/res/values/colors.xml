@@ -51,7 +51,7 @@
     <item>#424242</item>
   </array>
 
-  <color name="contactscommon_actionbar_background_color">@color/dialer_theme_color</color>
+  <color name="contactscommon_actionbar_background_color">?android:attr/colorPrimary</color>
 
   <color name="tab_ripple_color">#ffffff</color>
   <color name="tab_accent_color">@color/tab_ripple_color</color>
@@ -75,7 +75,7 @@
   <color name="searchbox_hint_text_color">#737373</color>
   <color name="searchbox_icon_tint">@color/searchbox_hint_text_color</color>
 
-  <color name="search_shortcut_icon_color">@color/dialtacts_theme_color</color>
+  <color name="search_shortcut_icon_color">?android:attr/colorPrimary</color>
 
   <!-- Color of the background of the contact detail and editor pages -->
   <color name="background_primary">#f9f9f9</color>

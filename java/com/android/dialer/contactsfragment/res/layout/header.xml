@@ -19,7 +19,7 @@
     android:id="@+id/header"
     android:layout_width="@dimen/header_width"
     android:layout_height="@dimen/row_height"
-    android:textColor="@color/dialer_theme_color"
+    android:textColor="?android:attr/colorPrimary"
     android:gravity="center"
     android:textSize="@dimen/text_size"
     android:textStyle="bold"

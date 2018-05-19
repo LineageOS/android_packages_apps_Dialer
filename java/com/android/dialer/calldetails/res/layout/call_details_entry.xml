@@ -30,7 +30,7 @@
 
   <TextView
       android:id="@+id/call_type"
-      style="@style/PrimaryText"
+      style="@style/Dialer.TextAppearance.Primary"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
@@ -41,7 +41,7 @@
 
   <TextView
       android:id="@+id/call_time"
-      style="@style/SecondaryText"
+      style="@style/Dialer.TextAppearance.Secondary"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/call_entry_bottom_padding"
@@ -50,7 +50,7 @@
 
   <TextView
       android:id="@+id/call_duration"
-      style="@style/PrimaryText"
+      style="@style/Dialer.TextAppearance.Primary"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/call_entry_padding"
@@ -66,7 +66,7 @@
 
   <TextView
       android:id="@+id/post_call_note"
-      style="@style/SecondaryText"
+      style="@style/Dialer.TextAppearance.Secondary"
       android:layout_width="match_parent"
       android:layout_height="@dimen/ec_container_height"
       android:layout_below="@+id/ec_container"
@@ -77,7 +77,7 @@
       android:visibility="gone"/>
   <TextView
       android:id="@+id/rtt_transcript"
-      style="@style/SecondaryText"
+      style="@style/Dialer.TextAppearance.Secondary"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/call_entry_bottom_padding"

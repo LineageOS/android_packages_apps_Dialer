@@ -124,7 +124,7 @@
           android:textAllCaps="true"
           android:textSize="14sp"
           android:textStyle="bold"
-          android:textColor="@color/background_dialer_white"
+          android:textColor="?android:attr/colorBackground"
           android:background="@drawable/urgent_call_background"/>
 
       <FrameLayout

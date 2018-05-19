@@ -85,7 +85,7 @@
         android:contentDescription="@string/location_map_description"
         android:scaleType="centerCrop"
         android:visibility="invisible"
-        tools:src="?android:colorPrimaryDark"
+        tools:src="?android:attr/colorPrimaryDark"
         tools:visibility="visible"/>
 
     <TextView

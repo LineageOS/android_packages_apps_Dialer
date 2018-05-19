@@ -87,14 +87,14 @@
         style="@style/TosButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/dialer_theme_color"/>
+        android:textColor="?android:attr/colorPrimary"/>
 
     <Button
         android:id="@+id/voicemail_alert_primary_button"
         style="@style/TosButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/dialer_theme_color"/>
+        android:textColor="?android:attr/colorPrimary"/>
   </LinearLayout>
 
   <View

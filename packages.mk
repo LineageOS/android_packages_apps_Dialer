@@ -34,6 +34,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.contactsfragment \
 	com.android.dialer.databasepopulator \
 	com.android.dialer.dialpadview \
+	com.android.dialer.dialpadview.theme \
 	com.android.dialer.enrichedcall.simulator \
 	com.android.dialer.feedback \
 	com.android.dialer.glidephotomanager.impl \

@@ -17,7 +17,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_selected="true">
     <shape android:shape="rectangle">
-      <solid android:color="@color/dialer_theme_color"/>
+      <solid android:color="?android:attr/colorPrimary"/>
       <size android:height="32dp" android:width="4dp"/>
       <corners android:radius="2dp"/>
     </shape>

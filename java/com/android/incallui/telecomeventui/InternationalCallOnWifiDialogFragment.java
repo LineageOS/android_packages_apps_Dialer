@@ -109,7 +109,7 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
     alwaysWarn.setChecked(preferences.getBoolean(ALWAYS_SHOW_WARNING_PREFERENCE_KEY, false));
 
     AlertDialog alertDialog =
-        new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
+        new AlertDialog.Builder(getActivity())
             .setCancelable(false)
             .setView(dialogView)
             .setPositiveButton(

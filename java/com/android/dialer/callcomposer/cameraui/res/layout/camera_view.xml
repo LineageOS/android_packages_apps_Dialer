@@ -71,7 +71,7 @@
         android:layout_marginEnd="@dimen/camera_view_button_margin"
         android:layout_marginBottom="@dimen/camera_view_button_margin"
         android:src="@drawable/quantum_ic_fullscreen_white_48"
-        android:background="?android:selectableItemBackgroundBorderless"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/description_camera_switch_full_screen"/>
 
       <ImageButton
@@ -83,7 +83,7 @@
         android:layout_marginBottom="@dimen/camera_view_button_margin"
         android:src="@drawable/quantum_ic_fullscreen_exit_white_48"
         android:visibility="gone"
-        android:background="?android:selectableItemBackgroundBorderless"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/description_camera_switch_preview_screen"/>
 
       <ImageButton
@@ -92,7 +92,7 @@
         android:layout_height="@dimen/capture_button_size"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="@dimen/capture_button_bottom_margin"
-        android:background="?android:selectableItemBackgroundBorderless"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_capture"
         android:scaleType="fitXY"
         android:contentDescription="@string/description_camera_take_picture"/>
