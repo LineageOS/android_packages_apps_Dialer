@@ -86,9 +86,11 @@ public class VoicemailErrorManager implements CallLogQueryHandler.Listener, Voic
     List<VoicemailStatus> statuses = new ArrayList<>();
     while (statusCursor.moveToNext()) {
       VoicemailStatus status = new VoicemailStatus(context, statusCursor);
-      if (status.isActive()) {
+      if (status.isActive(context)) {
         statuses.add(status);
         addServiceStateListener(status);
+      } else {
+        LogUtil.i("VisualVoicemailCallLogFragment.shouldAutoSync", "inactive source ignored");
       }
     }
     alertItem.updateStatus(statuses, this);
