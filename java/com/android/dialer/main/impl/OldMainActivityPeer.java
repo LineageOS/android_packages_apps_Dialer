@@ -372,7 +372,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private static boolean isVoicemailAvailable(
       Context context, PhoneAccountHandle defaultUserSelectedAccount) {
 
-    if (!TelecomUtil.hasReadPhoneStatePermission(context)) {
+    if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
       LogUtil.i(
           "OldMainActivityPeer.isVoicemailAvailable",
           "No read phone permisison or not the default dialer.");
