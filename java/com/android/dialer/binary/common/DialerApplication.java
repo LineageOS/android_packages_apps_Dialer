@@ -42,7 +42,6 @@ public abstract class DialerApplication extends Application implements HasRootCo
   public void onCreate() {
     Trace.beginSection("DialerApplication.onCreate");
     StrictModeComponent.get(this).getDialerStrictMode().onApplicationCreate(this);
-
     super.onCreate();
     new BlockedNumbersAutoMigrator(
             this.getApplicationContext(),

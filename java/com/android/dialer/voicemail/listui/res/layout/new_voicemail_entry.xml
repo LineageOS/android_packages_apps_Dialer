@@ -39,7 +39,7 @@
 
     <TextView
         android:id="@+id/primary_text"
-        style="@style/PrimaryText"
+        style="@style/Dialer.TextAppearance.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -60,12 +60,13 @@
           android:layout_gravity="center_vertical"
           android:importantForAccessibility="no"
           android:src="@drawable/quantum_ic_voicemail_vd_theme_24"
-          android:tint="@color/dialtacts_theme_color"
-          android:tintMode="multiply"/>
+          android:tint="?android:attr/colorPrimary"
+          android:tintMode="multiply"
+          tools:ignore="ContentDescription"/>
 
       <TextView
           android:id="@+id/secondary_text"
-          style="@style/SecondaryText"
+          style="@style/Dialer.TextAppearance.Secondary"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:ellipsize="end"
@@ -76,7 +77,7 @@
     <!-- TODO(a bug): Make text selectable -->
     <TextView
         android:id="@+id/transcription_text"
-        style="@style/PrimaryText"
+        style="@style/Dialer.TextAppearance.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -86,7 +87,7 @@
 
     <TextView
         android:id="@+id/transcription_branding"
-        style="@style/SecondaryText"
+        style="@style/Dialer.TextAppearance.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

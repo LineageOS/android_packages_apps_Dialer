@@ -19,6 +19,7 @@
 
   <application>
 
+    <!-- TODO(a bug): remove activity themes and only have application wide themes -->
     <activity
       android:clearTaskOnLaunch="true"
       android:exported="true"
@@ -27,7 +28,7 @@
       android:launchMode="singleTask"
       android:name="com.android.dialer.main.impl.MainActivity"
       android:resizeableActivity="true"
-      android:theme="@style/NuiActivityTheme"
+      android:theme="@style/MainActivityTheme"
       android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
 
       <meta-data

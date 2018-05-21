@@ -15,6 +15,7 @@
   ~ limitations under the License
   -->
 <resources>
-  <color name="bottom_nav_icon_selected">@color/dialer_theme_color</color>
-  <color name="bottom_nav_icon_deselected">@color/dialer_secondary_text_color</color>
+
+  <!-- Used to style all icons in Dialer. -->
+  <attr name="colorIcon" format="reference"/>
 </resources>

@@ -34,6 +34,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.contactsfragment \
 	com.android.dialer.databasepopulator \
 	com.android.dialer.dialpadview \
+	com.android.dialer.dialpadview.theme \
 	com.android.dialer.enrichedcall.simulator \
 	com.android.dialer.feedback \
 	com.android.dialer.glidephotomanager.impl \
@@ -53,7 +54,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.precall.externalreceiver \
 	com.android.dialer.preferredsim.impl \
 	com.android.dialer.preferredsim.suggestion \
-	com.android.dialer.promotion \
+	com.android.dialer.promotion.impl \
 	com.android.dialer.rtt \
 	com.android.dialer.searchfragment.common \
 	com.android.dialer.searchfragment.cp2 \

@@ -31,10 +31,8 @@
       android:paddingEnd="24dp"
       android:elevation="1dp"
       android:text="@string/speed_dial_disambig_dialog_title"
-      android:textSize="20sp"
-      android:textColor="@color/dialer_primary_text_color"
-      android:fontFamily="sans-serif-medium"
-      android:background="@android:color/white"/>
+      android:background="?android:attr/colorBackgroundFloating"
+      style="@style/Dialer.TextAppearance.Header"/>
 
   <com.android.dialer.widget.MaxHeightScrollView
       android:id="@+id/disambig_scrollview"
@@ -57,7 +55,7 @@
       android:layout_gravity="bottom"
       android:minHeight="64dp"
       android:elevation="4dp"
-      android:background="@android:color/white">
+      android:background="?android:attr/colorBackgroundFloating">
 
     <CheckBox
         android:id="@+id/remember_this_choice_checkbox"

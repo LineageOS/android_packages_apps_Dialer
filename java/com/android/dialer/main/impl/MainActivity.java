@@ -78,7 +78,8 @@ public class MainActivity extends TransactionSafeActivity
     activePeer = getNewPeer();
     activePeer.onActivityCreate(savedInstanceState);
 
-    showBlockReportSpamDialogReceiver = new ShowBlockReportSpamDialogReceiver(getFragmentManager());
+    showBlockReportSpamDialogReceiver =
+        new ShowBlockReportSpamDialogReceiver(getSupportFragmentManager());
   }
 
   protected MainActivityPeer getNewPeer() {

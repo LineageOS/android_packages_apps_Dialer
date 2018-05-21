@@ -31,7 +31,7 @@
     android:id="@+id/search_box_collapsed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:selectableItemBackground"
+    android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical">
 
     <ImageView

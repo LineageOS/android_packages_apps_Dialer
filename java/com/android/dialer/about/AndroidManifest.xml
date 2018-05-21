@@ -14,7 +14,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.dialer.about">
-  <application android:theme="@style/Theme.AppCompat">
+  <application>
     <activity
         android:name="com.android.dialer.about.LicenseMenuActivity"
         android:label="@string/licenseActivityLabel"

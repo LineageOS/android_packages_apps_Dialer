@@ -19,7 +19,7 @@
   android:id="@+id/dialtacts_mainlayout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/background_dialer_light"
+  android:background="?android:attr/colorBackgroundFloating"
   android:clipChildren="false"
   android:clipToPadding="false"
   android:focusable="true"

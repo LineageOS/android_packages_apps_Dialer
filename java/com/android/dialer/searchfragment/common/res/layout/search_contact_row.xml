@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
         android:fontFamily="sans-serif"
-        style="@style/PrimaryText"/>
+        style="@style/Dialer.TextAppearance.Primary"/>
 
     <com.android.dialer.widget.BidiTextView
         android:id="@+id/secondary"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
         android:fontFamily="sans-serif"
-        style="@style/SecondaryText"/>
+        style="@style/Dialer.TextAppearance.Secondary"/>
   </LinearLayout>
 
   <ImageView

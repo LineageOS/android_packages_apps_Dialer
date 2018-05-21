@@ -83,7 +83,7 @@ public class RttRequestDialogFragment extends DialogFragment {
         .setOnClickListener(v -> onPositiveButtonClick());
 
     AlertDialog alertDialog =
-        new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
+        new AlertDialog.Builder(getActivity())
             .setCancelable(false)
             .setView(dialogView)
             .setTitle(R.string.rtt_request_dialog_title)

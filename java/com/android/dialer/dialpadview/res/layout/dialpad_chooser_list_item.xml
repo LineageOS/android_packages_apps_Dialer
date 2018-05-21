@@ -33,6 +33,5 @@
     android:layout_weight="1"
     android:layout_gravity="center_vertical"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="@color/dialpad_primary_text_color"/>
-
+    android:textColor="?android:attr/colorPrimary"/>
 </LinearLayout>

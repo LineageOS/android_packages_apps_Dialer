@@ -35,6 +35,7 @@ import com.android.dialer.phonenumbergeoutil.impl.PhoneNumberGeoUtilModule;
 import com.android.dialer.precall.impl.PreCallModule;
 import com.android.dialer.preferredsim.PreferredSimModule;
 import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
+import com.android.dialer.promotion.impl.PromotionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.simulator.stub.StubSimulatorEnrichedCallModule;
 import com.android.dialer.spam.stub.StubSpamModule;
@@ -53,34 +54,34 @@ import javax.inject.Singleton;
  */
 @Singleton
 @Component(
-  modules = {
-    ActiveCallsModule.class,
-    CallLocationModule.class,
-    CallLogModule.class,
-    CallLogConfigModule.class,
-    CommandLineModule.class,
-    ContextModule.class,
-    DialerExecutorModule.class,
-    GlidePhotoManagerModule.class,
-    MapsModule.class,
-    PhoneLookupModule.class, // TODO(zachh): Module which uses APDL?
-    PhoneNumberGeoUtilModule.class,
-    PreCallModule.class,
-    PreferredSimModule.class,
-    SharedPrefConfigProviderModule.class,
-    SimulatorModule.class,
-    StorageModule.class,
-    StubSimulatorEnrichedCallModule.class,
-    StubDuoModule.class,
-    StubEnrichedCallModule.class,
-    StubFeedbackModule.class,
-    StubMetricsModule.class,
-    StubBubbleModule.class,
-    StubSimSuggestionModule.class,
-    StubSpamModule.class,
-    StubSpeakEasyModule.class,
-    SystemStrictModeModule.class,
-    VoicemailModule.class,
-  }
-)
+    modules = {
+      ActiveCallsModule.class,
+      CallLocationModule.class,
+      CallLogModule.class,
+      CallLogConfigModule.class,
+      CommandLineModule.class,
+      ContextModule.class,
+      DialerExecutorModule.class,
+      GlidePhotoManagerModule.class,
+      MapsModule.class,
+      PhoneLookupModule.class, // TODO(zachh): Module which uses APDL?
+      PhoneNumberGeoUtilModule.class,
+      PreCallModule.class,
+      PreferredSimModule.class,
+      PromotionModule.class,
+      SharedPrefConfigProviderModule.class,
+      SimulatorModule.class,
+      StorageModule.class,
+      StubSimulatorEnrichedCallModule.class,
+      StubDuoModule.class,
+      StubEnrichedCallModule.class,
+      StubFeedbackModule.class,
+      StubMetricsModule.class,
+      StubBubbleModule.class,
+      StubSimSuggestionModule.class,
+      StubSpamModule.class,
+      StubSpeakEasyModule.class,
+      SystemStrictModeModule.class,
+      VoicemailModule.class,
+    })
 public interface GoogleStubDialerRootComponent extends BaseDialerRootComponent {}

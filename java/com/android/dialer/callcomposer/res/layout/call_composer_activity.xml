@@ -45,7 +45,7 @@
         android:paddingBottom="@dimen/call_composer_contact_container_padding_bottom"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:background="@color/dialer_theme_color">
+        android:background="?android:attr/colorPrimary">
 
         <TextView
           android:id="@+id/contact_name"
@@ -54,7 +54,7 @@
           android:gravity="center"
           android:maxLines="1"
           android:ellipsize="end"
-          android:textColor="@color/background_dialer_white"
+          android:textColor="?android:attr/colorBackground"
           android:textSize="@dimen/call_composer_name_text_size"/>
 
         <TextView
@@ -64,7 +64,7 @@
           android:gravity="center"
           android:maxLines="1"
           android:ellipsize="end"
-          android:textColor="@color/background_dialer_white"
+          android:textColor="?android:attr/colorBackground"
           android:textSize="@dimen/call_composer_number_text_size"/>
       </LinearLayout>
 
@@ -105,7 +105,7 @@
         android:layout_height="@dimen/call_composer_media_bar_height"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:background="@color/dialer_theme_color_dark"
+        android:background="?android:attr/colorPrimaryDark"
         android:clickable="true">
 
       <ImageView
@@ -153,7 +153,7 @@
           android:text="@string/share_and_call"
           android:textSize="@dimen/send_and_call_text_size"
           android:fontFamily="sans-serif-medium"
-          android:textColor="@color/background_dialer_white"/>
+          android:textColor="?android:attr/colorBackground"/>
     </FrameLayout>
   </FrameLayout>
 

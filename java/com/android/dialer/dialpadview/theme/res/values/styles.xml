@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <style name="Dialpad">
+    <item name="dialpad_digits_adjustable_height">@dimen/dialpad_digits_height</item>
+    <item name="dialpad_digits_adjustable_text_size">@dimen/dialpad_digits_text_size</item>
+    <item name="dialpad_key_letters_size_for_dual_alphabets">
+      @dimen/dialpad_key_letters_default_size_for_dual_alphabets
+    </item>
+    <item name="dialpad_key_letters_size_for_single_alphabet">
+      @dimen/dialpad_key_letters_default_size_for_single_alphabet
+    </item>
+    <item name="dialpad_key_numbers_size">@dimen/dialpad_key_numbers_default_size</item>
+    <item name="dialpad_key_number_margin_bottom">
+      @dimen/dialpad_key_number_default_margin_bottom
+    </item>
+    <item name="dialpad_end_key_spacing">@dimen/dialpad_bottom_space_height</item>
+    <item name="dialpad_elevation">0dp</item>
+  </style>
+
+  <style name="Dialpad.Light">
+    <item name="dialpad_text_color">?android:attr/textColorSecondary</item>
+    <item name="dialpad_text_color_primary">?android:attr/colorPrimary</item>
+    <item name="dialpad_text_color_secondary">?android:attr/textColorSecondary</item>
+    <item name="dialpad_icon_tint">?colorIcon</item>
+    <item name="dialpad_voicemail_tint">?colorIcon</item>
+    <item name="dialpad_background">?android:attr/colorBackgroundFloating</item>
+  </style>
+
+  <style name="Dialpad.Dark">
+    <item name="dialpad_text_color">@android:color/white</item>
+    <item name="dialpad_text_color_primary">@android:color/white</item>
+    <item name="dialpad_text_color_secondary">#ffd4d6d7</item>
+    <item name="dialpad_icon_tint">@android:color/white</item>
+    <item name="dialpad_background">#00000000</item>
+  </style>
+</resources>

@@ -17,10 +17,11 @@
 <resources>
 
   <!-- Used on sdk 27 and above -->
-  <style name="NuiActivityTheme" parent="NuiActivityThemeBase">
+  <!-- TODO(a bug): refactor into dialer/theme -->
+  <style name="MainActivityTheme" parent="MainActivityThemeBase">
     <!-- Used to change the navigation bar color -->
     <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">@color/background_dialer_white</item>
+    <item name="android:navigationBarColor">?android:attr/colorBackgroundFloating</item>
     <item name="android:navigationBarDividerColor">#E0E0E0</item>
   </style>
 </resources>
