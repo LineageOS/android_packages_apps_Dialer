@@ -357,9 +357,8 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
     statusTextView.setText(onHoldText);
     statusTextView.setVisibility(View.VISIBLE);
 
-    int onHoldColor = getContext().getColor(R.color.dialer_disabled_text_color);
-    nameTextView.setTextColor(onHoldColor);
-    numberTextView.setTextColor(onHoldColor);
+    nameTextView.setEnabled(false);
+    numberTextView.setEnabled(false);
 
     TypedValue alpha = new TypedValue();
     getContext().getResources().getValue(R.dimen.alpha_hiden, alpha, true);
@@ -373,10 +372,8 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       TextView numberTextView) {
     statusTextView.setVisibility(View.GONE);
 
-    nameTextView.setTextColor(
-        getContext().getColor(R.color.conference_call_manager_caller_name_text_color));
-    numberTextView.setTextColor(
-        getContext().getColor(R.color.conference_call_manager_secondary_text_color));
+    nameTextView.setEnabled(true);
+    numberTextView.setEnabled(true);
 
     TypedValue alpha = new TypedValue();
     getContext().getResources().getValue(R.dimen.alpha_enabled, alpha, true);

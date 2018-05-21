@@ -26,7 +26,7 @@
       android:layout_width="match_parent"
       android:layout_height="@dimen/tab_height"
       android:layout_gravity="start"
-      android:background="@color/actionbar_background_color"
+      android:background="?android:attr/colorPrimary"
       android:orientation="horizontal"
       android:visibility="gone">
 

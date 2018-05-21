@@ -16,11 +16,6 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-  <!-- Official label of the phone app, as seen in "Manage Applications"
-       and other settings UIs. -->
-  <string name="phoneAppLabel" product="default">Phone</string>
-
   <!-- MMI dialog strings -->
   <!-- Dialog label when an MMI code starts running -->
 

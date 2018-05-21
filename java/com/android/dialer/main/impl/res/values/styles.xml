@@ -17,47 +17,24 @@
 <resources>
 
   <!-- Activities should use this theme as their style -->
-  <style name="NuiActivityTheme" parent="NuiActivityThemeBase"/>
+  <style name="MainActivityTheme" parent="MainActivityThemeBase"/>
 
   <!-- Used as a procy for values-v27/styles.xml -->
-  <style name="NuiActivityThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- App colors -->
-    <item name="android:colorPrimary">@color/dialtacts_theme_color</item>
-    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_secondary_color</item>
-
-    <!-- TODO(calderwoodra): figure out what this is used for, but I think it's for checkboxes -->
-    <item name="android:colorControlActivated">@color/dialer_theme_color</item>
-
-    <!-- Text colors -->
-    <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
-    <item name="android:textColorSecondary">@color/dialer_secondary_text_color</item>
-    <item name="android:textColorLink">@color/dialer_theme_color</item>
-
-    <!-- Themeing for material buttons and widgets -->
-    <item name="android:colorButtonNormal">@color/dialer_theme_color</item>
-    <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
-
-    <!-- Theme needed for DialpadFragment -->
-    <item name="dialpad_style">@style/Dialpad.Light</item>
-
-    <!-- Custom theme for Alert Dialogs-->
-    <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
-
+  <style name="MainActivityThemeBase" parent="Dialer.ThemeBase.NoActionBar">
     <!-- Required for actionmode/multiselect to render properly. -->
-    <!-- TODO(calderwoodra): Check to see if we can remove this after NewVoicemailFragment launches -->
-    <item name="actionModeStyle">@style/NuiActionModeStyle</item>
+    <!-- TODO(a bug): Check to see if we can remove this after NewVoicemailFragment launches -->
+    <item name="actionModeStyle">@style/MainActionModeStyle</item>
     <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
   </style>
 
   <!-- Colors our actionbar in action mode to dialer theme color. -->
-  <style name="NuiActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
-    <item name="background">@color/dialer_theme_color</item>
+  <style name="MainActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+    <item name="background">?android:attr/colorPrimary</item>
     <item name="titleTextStyle">@style/ActionModeTitleTextStyle</item>
   </style>
 
   <!-- Colors our actionbar text in action mode to dialer white text color. -->
   <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
-    <item name="android:textColor">@color/dialer_primary_text_color_white</item>
+    <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
   </style>
 </resources>

@@ -18,18 +18,18 @@
 <resources>
 
   <style name="Dialer.Incall.TextAppearance" parent="android:TextAppearance.Material">
-    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="android:textSize">18sp</item>
   </style>
 
   <style name="Dialer.Incall.TextAppearance.Large">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">36sp</item>
     <item name="android:fontFamily">sans-serif-light</item>
   </style>
 
   <style name="Dialer.Incall.TextAppearance.Label">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">12sp</item>
   </style>
 
@@ -38,7 +38,7 @@
     <item name="android:layout_width">24dp</item>
     <item name="android:layout_marginEnd">8dp</item>
     <item name="android:scaleType">fitCenter</item>
-    <item name="colorControlNormal">?android:textColorSecondary</item>
+    <item name="colorControlNormal">?android:attr/textColorSecondary</item>
   </style>
 
   <style name="Incall.Button.End" parent="android:Widget.Material.Button">

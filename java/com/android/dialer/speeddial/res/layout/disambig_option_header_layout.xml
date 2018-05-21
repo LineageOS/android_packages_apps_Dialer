@@ -23,6 +23,4 @@
     android:minHeight="48dp"
     android:paddingStart="24dp"
     android:paddingEnd="24dp"
-    android:textSize="14sp"
-    android:textColor="#757575"
-    style="@style/PrimaryText"/>
+    style="@style/Dialer.TextAppearance.Secondary"/>

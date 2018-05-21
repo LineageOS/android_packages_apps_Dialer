@@ -41,13 +41,13 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/PrimaryText"/>
+        style="@style/Dialer.TextAppearance.Primary"/>
 
     <TextView
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/SecondaryText"/>
+        style="@style/Dialer.TextAppearance.Secondary"/>
   </LinearLayout>
 
   <ImageView
@@ -59,6 +59,6 @@
       android:scaleType="center"
       android:tint="@color/secondary_text_color"
       android:src="@drawable/quantum_ic_more_vert_white_24"
-      android:background="?android:selectableItemBackgroundBorderless"
+      android:background="?android:attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/content_description_overflow"/>
 </RelativeLayout>

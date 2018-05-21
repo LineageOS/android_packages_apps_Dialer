@@ -16,11 +16,11 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.dialer.calldetails">
-  <application android:theme="@style/Theme.AppCompat">
-    <activity
+  <application>
+  <activity
         android:label="@string/enriched_call_simulator_activity"
         android:name="com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity"
-        android:theme="@style/DialerThemeBase.NoActionBar">
+        android:theme="@style/Dialer.ThemeBase.NoActionBar">
     </activity>
   </application>
 </manifest>

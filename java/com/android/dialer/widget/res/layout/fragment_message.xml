@@ -18,7 +18,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/background_dialer_white">
+  android:background="?android:attr/colorBackground">
 
   <ScrollView
       android:layout_width="match_parent"
@@ -53,8 +53,8 @@
       android:textSize="@dimen/message_item_text_size"
       android:hint="@string/custom_message_hint"
       android:textColor="@color/dialer_primary_text_color"
-      android:textColorHint="@color/dialer_edit_text_hint_color"
-      android:background="@color/background_dialer_white"
+      android:textColorHint="?android:attr/textColorHint"
+      android:background="?android:attr/colorBackground"
       android:textCursorDrawable="@drawable/edittext_custom_cursor"
       android:layout_toStartOf="@+id/count_and_send_container"
       android:inputType="textShortMessage|textCapSentences"
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:textSize="@dimen/message_remaining_char_text_size"
-        android:textColor="@color/dialer_edit_text_hint_color"/>
+        android:textColor="?android:attr/textColorHint"/>
     </LinearLayout>
   </RelativeLayout>
 </RelativeLayout>

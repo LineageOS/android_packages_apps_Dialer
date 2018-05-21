@@ -21,6 +21,6 @@
       android:topRightRadius="@dimen/speed_dial_context_menu_corner_radius"
       android:bottomLeftRadius="@dimen/speed_dial_context_menu_corner_radius"
       android:topLeftRadius="@dimen/speed_dial_context_menu_corner_radius"/>
-  <solid android:color="@color/background_dialer_white"/>
+  <solid android:color="?android:attr/colorBackground"/>
   <stroke android:color="#0333" android:width="2dp"/>
 </shape>

@@ -117,7 +117,7 @@ public class VideoChargesAlertDialogFragment extends DialogFragment {
 
     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     AlertDialog alertDialog =
-        new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
+        new AlertDialog.Builder(getActivity())
             .setView(dialogView)
             .setPositiveButton(
                 android.R.string.ok,
