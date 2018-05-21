@@ -72,7 +72,7 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:text="@string/nearby_places_dismiss"
-        android:textColor="@color/dialer_theme_color"
+        android:textColor="?android:attr/colorPrimary"
         style="@style/Widget.AppCompat.Button.Borderless"/>
   </RelativeLayout>
 </android.support.v7.widget.CardView>

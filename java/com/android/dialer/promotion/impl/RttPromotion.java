@@ -14,29 +14,45 @@
  * limitations under the License
  */
 
-package com.android.dialer.promotion;
+package com.android.dialer.promotion.impl;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.DrawableRes;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProvider;
+import com.android.dialer.inject.ApplicationContext;
+import com.android.dialer.promotion.Promotion;
 import com.android.dialer.spannable.ContentWithLearnMoreSpanner;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.storage.Unencrypted;
+import javax.inject.Inject;
 
 /** RTT promotion. */
 public final class RttPromotion implements Promotion {
   private static final String SHARED_PREFERENCE_KEY_ENABLED = "rtt_promotion_enabled";
   private static final String SHARED_PREFERENCE_KEY_DISMISSED = "rtt_promotion_dismissed";
   private final Context appContext;
+  private final SharedPreferences sharedPreferences;
+  private final ConfigProvider configProvider;
 
-  public RttPromotion(Context context) {
-    appContext = context.getApplicationContext();
+  @Override
+  public int getType() {
+    return PromotionType.BOTTOM_SHEET;
+  }
+
+  @Inject
+  RttPromotion(
+      @ApplicationContext Context context,
+      @Unencrypted SharedPreferences sharedPreferences,
+      ConfigProvider configProvider) {
+    appContext = context;
+    this.sharedPreferences = sharedPreferences;
+    this.configProvider = configProvider;
   }
 
   @Override
-  public boolean shouldShow() {
-    SharedPreferences sharedPreferences = StorageComponent.get(appContext).unencryptedSharedPrefs();
+  public boolean isEligibleToBeShown() {
     return sharedPreferences.getBoolean(SHARED_PREFERENCE_KEY_ENABLED, false)
         && !sharedPreferences.getBoolean(SHARED_PREFERENCE_KEY_DISMISSED, false);
   }
@@ -51,10 +67,9 @@ public final class RttPromotion implements Promotion {
     return new ContentWithLearnMoreSpanner(appContext)
         .create(
             appContext.getString(R.string.rtt_promotion_details),
-            ConfigProviderBindings.get(appContext)
-                .getString(
-                    "rtt_promo_learn_more_link_full_url",
-                    "http://support.google.com/pixelphone/?p=dialer_rtt"));
+            configProvider.getString(
+                "rtt_promo_learn_more_link_full_url",
+                "http://support.google.com/pixelphone/?p=dialer_rtt"));
   }
 
   @Override
@@ -63,22 +78,17 @@ public final class RttPromotion implements Promotion {
     return R.drawable.quantum_ic_rtt_vd_theme_24;
   }
 
-  @Override
-  public void setShouldShow(boolean shouldShow) {
-    LogUtil.i("RttPromotion.setShouldShow", "shouldShow: %b", shouldShow);
-    StorageComponent.get(appContext)
+  public static void setEnabled(Context context) {
+    LogUtil.enterBlock("RttPromotion.setEnabled");
+    StorageComponent.get(context)
         .unencryptedSharedPrefs()
         .edit()
-        .putBoolean(SHARED_PREFERENCE_KEY_ENABLED, shouldShow)
+        .putBoolean(SHARED_PREFERENCE_KEY_ENABLED, true)
         .apply();
   }
 
   @Override
   public void dismiss() {
-    StorageComponent.get(appContext)
-        .unencryptedSharedPrefs()
-        .edit()
-        .putBoolean(SHARED_PREFERENCE_KEY_DISMISSED, true)
-        .apply();
+    sharedPreferences.edit().putBoolean(SHARED_PREFERENCE_KEY_DISMISSED, true).apply();
   }
 }

@@ -29,7 +29,7 @@
       android:layout_width="24dp"
       android:layout_height="24dp"
       android:layout_gravity="center_vertical"
-      android:tint="@color/dialer_secondary_text_color"/>
+      android:tint="?colorIcon"/>
 
   <TextView
       android:id="@+id/disambig_option_text"
@@ -37,5 +37,5 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
       android:layout_gravity="center_vertical"
-      style="@style/PrimaryText"/>
+      style="@style/Dialer.TextAppearance.Primary"/>
 </LinearLayout>

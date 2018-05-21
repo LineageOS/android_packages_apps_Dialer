@@ -37,7 +37,7 @@ import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
-import com.android.dialer.promotion.RttPromotion;
+import com.android.dialer.promotion.impl.RttPromotion;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.spam.status.SpamStatus;
@@ -210,7 +210,7 @@ public class CallList implements DialerCallDelegate {
         || call.getState() == DialerCallState.CALL_WAITING) {
       if (call.isActiveRttCall()) {
         if (!call.isPhoneAccountRttCapable()) {
-          new RttPromotion(context).setShouldShow(true);
+          RttPromotion.setEnabled(context);
         }
         Logger.get(context)
             .logCallImpression(

@@ -21,9 +21,6 @@
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
   <string name="dialpad_activity_title">Phone Keypad</string>
 
-  <!-- The description text for the call log tab. -->
-  <string name="main_call_history_tab_description" tools:ignore="UnusedResources">Call history</string>
-
   <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
   <string name="search">@android:string/search_go</string>
   <!-- A11y announcement to let users know a button will let them search for contacts and places [CHAR LIMIT=NONE] -->

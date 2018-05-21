@@ -16,11 +16,11 @@
 
 package com.android.dialer.blockreportspam;
 
-import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 import com.android.dialer.blocking.Blocking;
 import com.android.dialer.blocking.Blocking.BlockingFailedException;

@@ -32,7 +32,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_height_large"
-        android:background="@color/actionbar_background_color"
+        android:background="?android:attr/colorPrimary"
         android:elevation="@dimen/tab_elevation"/>
 
     <com.android.contacts.common.list.ViewPagerTabs
@@ -69,7 +69,7 @@
         android:id="@+id/remove_view_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/actionbar_background_color"
+        android:background="?android:attr/colorPrimary"
         android:gravity="center"
         android:orientation="horizontal"
         android:visibility="gone">

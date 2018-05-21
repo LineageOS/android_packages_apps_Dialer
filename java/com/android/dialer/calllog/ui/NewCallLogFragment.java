@@ -42,6 +42,8 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.metrics.jank.RecyclerViewJankLogger;
+import com.android.dialer.promotion.Promotion.PromotionType;
+import com.android.dialer.promotion.PromotionComponent;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
@@ -289,6 +291,7 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
     return new AnnotatedCallLogCursorLoader(Assert.isNotNull(getContext()));
   }
 
+  @SuppressWarnings("AndroidApiChecker") // Use of optional
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
     LogUtil.enterBlock("NewCallLogFragment.onLoadFinished");
@@ -319,7 +322,14 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
             // instead.
             Activity activity = Assert.isNotNull(getActivity());
             recyclerView.setAdapter(
-                new NewCallLogAdapter(activity, coalescedCursor, System::currentTimeMillis));
+                new NewCallLogAdapter(
+                    activity,
+                    coalescedCursor,
+                    System::currentTimeMillis,
+                    PromotionComponent.get(getContext())
+                        .promotionManager()
+                        .getHighestPriorityPromotion(PromotionType.CARD)
+                        .orElse(null)));
           } else {
             ((NewCallLogAdapter) recyclerView.getAdapter()).updateCursor(coalescedCursor);
           }

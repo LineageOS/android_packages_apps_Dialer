@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:textSize="@dimen/toolbar_title_text_size"
-        android:textColor="@color/background_dialer_white"
+        android:textColor="?android:attr/colorBackground"
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:ellipsize="end"/>
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/toolbar_subtitle_text_size"
-        android:textColor="@color/background_dialer_white"
+        android:textColor="?android:attr/colorBackground"
         android:visibility="gone"
         android:maxLines="1"
         android:ellipsize="end"/>
