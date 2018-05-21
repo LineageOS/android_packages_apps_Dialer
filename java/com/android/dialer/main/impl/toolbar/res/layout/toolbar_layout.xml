@@ -18,7 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/expanded_search_bar_height"
-    android:background="@color/dialer_theme_color"
+    android:background="?android:attr/colorPrimary"
     app:contentInsetEnd="0dp"
     app:contentInsetStart="0dp">
   <FrameLayout
@@ -38,7 +38,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
-          android:background="?android:selectableItemBackground"
+          android:background="?android:attr/selectableItemBackground"
           android:gravity="center_vertical">
 
         <ImageView
@@ -110,7 +110,7 @@
           android:id="@+id/remove_view_content"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:background="@color/dialer_theme_color"
+          android:background="?android:attr/colorPrimary"
           android:gravity="center"
           android:orientation="horizontal"
           android:visibility="gone">
@@ -122,14 +122,14 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/quantum_ic_close_vd_theme_24"
-            android:tint="@color/dialer_primary_text_color_white"/>
+            android:tint="?android:attr/textColorPrimaryInverse"/>
 
         <TextView
             android:id="@+id/remove_view_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_remove_contact"
-            android:textColor="@color/dialer_primary_text_color_white"
+            android:textColor="?android:attr/textColorPrimaryInverse"
             android:textSize="16sp"/>
       </LinearLayout>
     </com.android.dialer.app.list.RemoveView>

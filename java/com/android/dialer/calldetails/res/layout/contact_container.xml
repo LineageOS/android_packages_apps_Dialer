@@ -46,21 +46,21 @@
 
     <com.android.dialer.widget.BidiTextView
         android:id="@+id/contact_name"
-        style="@style/PrimaryText"
+        style="@style/Dialer.TextAppearance.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"/>
 
     <TextView
         android:id="@+id/phone_number"
-        style="@style/SecondaryText"
+        style="@style/Dialer.TextAppearance.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"/>
 
     <TextView
         android:id="@+id/network"
-        style="@style/SecondaryText"
+        style="@style/Dialer.TextAppearance.Secondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"
@@ -101,7 +101,7 @@
 
     <TextView
         android:id="@+id/assisted_dialing_text"
-        style="@style/SecondaryText"
+        style="@style/Dialer.TextAppearance.Secondary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ad_text_margin_start"

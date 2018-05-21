@@ -16,8 +16,8 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.incallui.callpending">
-  <application android:theme="@style/Theme.AppCompat">
-    <!-- Identical to .InCallActivity except orientation is locked to portrait -->
+  <application>
+  <!-- Identical to .InCallActivity except orientation is locked to portrait -->
     <activity
         android:directBootAware="true"
         android:excludeFromRecents="true"

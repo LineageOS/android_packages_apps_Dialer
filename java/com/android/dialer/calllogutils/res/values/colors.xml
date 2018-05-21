@@ -19,6 +19,4 @@
   <color name="missed_call">#C53929</color>
   <!-- Color for answered or outgoing call icons. -->
   <color name="answered_call">#00c853</color>
-  <!-- Color for blocked call icons. -->
-  <color name="blocked_call">@color/dialer_secondary_text_color</color>
 </resources>

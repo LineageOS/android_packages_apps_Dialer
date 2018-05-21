@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2018 The Android Open Source Project
   ~
@@ -14,13 +13,4 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Title for RTT promotion dialog. [CHAR LIMIT=NONE] -->
-  <string name="rtt_promotion_title">Real-time text messaging within a call</string>
-
-  <!-- Details for RTT promotion dialog. [CHAR LIMIT=NONE] -->
-  <string name="rtt_promotion_details">RTT assists callers who are deaf, hard of hearing, have a speech
-    disability, or need more than voice alone. RTT messaging transcripts are stored on your device
-    in the call history. <xliff:g exmaple="Learn More">%1$s</xliff:g></string>
-
-</resources>
+<manifest package="com.android.dialer.theme.attributes"/>

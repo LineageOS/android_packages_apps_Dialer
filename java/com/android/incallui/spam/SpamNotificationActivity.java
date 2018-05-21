@@ -16,7 +16,6 @@
 
 package com.android.incallui.spam;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -27,6 +26,7 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneNumberUtils;
 import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
@@ -230,7 +230,7 @@ public class SpamNotificationActivity extends FragmentActivity {
                 }
               },
               dismissListener)
-          .show(getFragmentManager(), BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
+          .show(getSupportFragmentManager(), BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
     } else {
       reportNotSpamAndFinish(number, contactLookupResultType);
     }
@@ -257,7 +257,9 @@ public class SpamNotificationActivity extends FragmentActivity {
                         }
                       },
                       dismissListener)
-                  .show(getFragmentManager(), BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
+                  .show(
+                      getSupportFragmentManager(),
+                      BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
             }
           });
     } else {
@@ -539,7 +541,7 @@ public class SpamNotificationActivity extends FragmentActivity {
 
   private void showSpamBlockingPromoDialog() {
     spamBlockingPromoHelper.showSpamBlockingPromoDialog(
-        getFragmentManager(),
+        getSupportFragmentManager(),
         () -> {
           Logger.get(this)
               .logImpression(

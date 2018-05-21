@@ -36,6 +36,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
@@ -223,7 +224,7 @@ public class CallLogAdapter extends GroupingListAdapter
 
   private void showDeleteSelectedItemsDialog() {
     SparseArray<String> voicemailsToDeleteOnConfirmation = selectedItems.clone();
-    new AlertDialog.Builder(activity, R.style.AlertDialogCustom)
+    new AlertDialog.Builder(activity)
         .setCancelable(true)
         .setTitle(
             activity
@@ -557,7 +558,7 @@ public class CallLogAdapter extends GroupingListAdapter
         new BlockReportSpamListener(
             this.activity,
             this.activity.findViewById(R.id.call_log_fragment_root),
-            ((Activity) this.activity).getFragmentManager(),
+            ((AppCompatActivity) this.activity).getSupportFragmentManager(),
             this,
             this.filteredNumberAsyncQueryHandler);
     setHasStableIds(true);

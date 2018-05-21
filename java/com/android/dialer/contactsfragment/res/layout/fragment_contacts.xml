@@ -23,7 +23,7 @@
       android:id="@+id/recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/background_dialer_light"
+      android:background="?android:attr/colorBackgroundFloating"
       android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
       android:clipToPadding="false"/>
 
@@ -45,7 +45,7 @@
         android:layout_toLeftOf="@+id/fast_scroller_scroll_bar"
         android:gravity="center"
         android:textSize="48sp"
-        android:textColor="@color/background_dialer_white"
+        android:textColor="?android:attr/colorBackground"
         android:visibility="gone"
         android:background="@drawable/fast_scroller_container_background"/>
 

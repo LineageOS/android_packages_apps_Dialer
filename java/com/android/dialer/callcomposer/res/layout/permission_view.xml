@@ -20,7 +20,7 @@
   android:layout_height="match_parent"
   android:gravity="center"
   android:clickable="true"
-  android:background="@color/background_dialer_white">
+  android:background="?android:attr/colorBackground">
 
   <ImageView
     android:id="@+id/permission_icon"
@@ -45,7 +45,7 @@
     android:text="@string/allow"
     android:textAllCaps="true"
     android:textSize="@dimen/allow_permission_text_size"
-    android:textColor="@color/dialer_theme_color"
+    android:textColor="?android:attr/colorPrimary"
     android:background="?android:attr/selectableItemBackground"
     android:padding="@dimen/permission_allow_padding"
     android:theme="@style/Theme.AppCompat.Light"/>

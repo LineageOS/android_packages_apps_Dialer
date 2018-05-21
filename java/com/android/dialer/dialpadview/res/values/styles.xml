@@ -82,43 +82,8 @@
     <item name="android:orientation">vertical</item>
   </style>
 
-  <style name="Dialpad">
-    <item name="dialpad_digits_adjustable_height">@dimen/dialpad_digits_height</item>
-    <item name="dialpad_digits_adjustable_text_size">@dimen/dialpad_digits_text_size</item>
-    <item name="dialpad_key_letters_size_for_dual_alphabets">
-      @dimen/dialpad_key_letters_default_size_for_dual_alphabets
-    </item>
-    <item name="dialpad_key_letters_size_for_single_alphabet">
-      @dimen/dialpad_key_letters_default_size_for_single_alphabet
-    </item>
-    <item name="dialpad_key_numbers_size">@dimen/dialpad_key_numbers_default_size</item>
-    <item name="dialpad_key_number_margin_bottom">
-      @dimen/dialpad_key_number_default_margin_bottom
-    </item>
-    <item name="dialpad_end_key_spacing">@dimen/dialpad_bottom_space_height</item>
-    <item name="dialpad_elevation">0dp</item>
-  </style>
-
-  <style name="Dialpad.Light">
-    <item name="dialpad_text_color">@color/dialpad_digits_text_color</item>
-    <item name="dialpad_text_color_primary">@color/dialpad_primary_text_color</item>
-    <item name="dialpad_text_color_secondary">@color/dialpad_secondary_text_color</item>
-    <item name="dialpad_icon_tint">@color/dialpad_icon_tint</item>
-    <item name="dialpad_voicemail_tint">@color/dialpad_voicemail_tint</item>
-    <item name="dialpad_background">@color/background_dialpad</item>
-  </style>
-
-  <style name="Dialpad.Dark">
-    <item name="dialpad_text_color">@android:color/white</item>
-    <item name="dialpad_text_color_primary">@android:color/white</item>
-    <item name="dialpad_text_color_secondary">#ffd4d6d7</item>
-    <item name="dialpad_icon_tint">@android:color/white</item>
-    <item name="dialpad_voicemail_tint">?attr/dialpad_text_color_secondary</item>
-    <item name="dialpad_background">#00000000</item>
-  </style>
-
   <style name="DeviceIdBody">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">16sp</item>
   </style>
 </resources>

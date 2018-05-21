@@ -35,7 +35,7 @@
       android:id="@+id/always_warn"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:buttonTint="@color/dialer_theme_color"
+      android:buttonTint="?android:attr/colorPrimary"
       android:text="@string/always_warn"
       android:textColor="@color/dialer_primary_text_color"
       android:textSize="14sp"/>
