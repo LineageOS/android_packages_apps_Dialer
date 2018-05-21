@@ -62,7 +62,6 @@
         android:textSize="14sp"/>
     <Button
         android:id="@+id/ok_got_it"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -70,7 +69,6 @@
         android:layout_gravity="end"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:backgroundTint="?android:attr/colorPrimary"
         android:fontFamily="sans-serif-medium"
         android:stateListAnimator="@null"
         android:text="@string/ok_got_it"

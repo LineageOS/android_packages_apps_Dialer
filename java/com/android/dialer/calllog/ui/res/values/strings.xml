@@ -32,17 +32,6 @@
 
   <!-- Header in call log to group calls from before yesterday.  [CHAR LIMIT=30] -->
   <string name="new_call_log_header_older">Older</string>
-
-  <!-- Header on the Duo disclosure card. [CHAR_LIMIT=60] -->
-  <string name="new_call_log_duo_disclosure_card_header">
-    Make video calls with Duo
-  </string>
-
-  <!-- Details on the Duo disclosure card. [CHAR_LIMIT=200] -->
-  <string name="new_call_log_duo_disclosure_card_details">
-    Google Duo video calling lets you chat with friends and family face-to-face. Data charges may apply. <xliff:g example="Learn More">%1$s</xliff:g>
-  </string>
-
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
   <string name="new_call_log_permission_no_calllog">To see your call log, turn on the Phone permission.</string>
 

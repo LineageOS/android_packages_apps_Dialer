@@ -109,7 +109,8 @@ import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.promotion.Promotion;
-import com.android.dialer.promotion.RttPromotion;
+import com.android.dialer.promotion.Promotion.PromotionType;
+import com.android.dialer.promotion.PromotionComponent;
 import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentListener;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
@@ -128,6 +129,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -1326,15 +1328,19 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       showPromotionBottomSheet(activity, bottomSheet);
     }
 
+    @SuppressWarnings("AndroidApiChecker") // Use of optional
     private static void showPromotionBottomSheet(Context context, View view) {
-      // TODO(a bug): Use a promotion manager to get promotion to show.
-      Promotion promotion = new RttPromotion(context);
       BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(view);
-
-      if (!promotion.shouldShow()) {
+      Optional<Promotion> promotionOptional =
+          PromotionComponent.get(context)
+              .promotionManager()
+              .getHighestPriorityPromotion(PromotionType.BOTTOM_SHEET);
+      if (!promotionOptional.isPresent()) {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         return;
       }
+
+      Promotion promotion = promotionOptional.get();
       ImageView icon = view.findViewById(R.id.promotion_icon);
       icon.setImageResource(promotion.getIconRes());
       TextView details = view.findViewById(R.id.promotion_details);
