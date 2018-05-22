@@ -111,7 +111,14 @@ public class CallLogNotificationsQueryHelper {
       return;
     }
     if (!PermissionsUtil.hasPhonePermissions(context)) {
-      LogUtil.e("CallLogNotificationsQueryHelper.markMissedCallsInCallLogAsRead", "no permission");
+      LogUtil.e(
+          "CallLogNotificationsQueryHelper.markMissedCallsInCallLogAsRead", "no phone permission");
+      return;
+    }
+    if (!PermissionsUtil.hasCallLogWritePermissions(context)) {
+      LogUtil.e(
+          "CallLogNotificationsQueryHelper.markMissedCallsInCallLogAsRead",
+          "no call log write permission");
       return;
     }
 

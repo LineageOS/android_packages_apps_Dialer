@@ -182,10 +182,10 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   }
 
   @VisibleForTesting
-  static boolean shouldAutoSync(
+  boolean shouldAutoSync(
       VoicemailErrorMessageCreator errorMessageCreator, List<VoicemailStatus> statuses) {
     for (VoicemailStatus status : statuses) {
-      if (!status.isActive()) {
+      if (!status.isActive(getContext())) {
         continue;
       }
       if (errorMessageCreator.isSyncBlockingError(status)) {

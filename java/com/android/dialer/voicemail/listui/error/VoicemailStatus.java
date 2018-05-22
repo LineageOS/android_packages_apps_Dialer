@@ -34,6 +34,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.voicemailstatus.VoicemailStatusQuery;
+import com.android.voicemail.VoicemailClient;
+import com.android.voicemail.VoicemailComponent;
 
 /** Structured data from {@link android.provider.VoicemailContract.Status} */
 public class VoicemailStatus {
@@ -232,7 +234,22 @@ public class VoicemailStatus {
     }
   }
 
-  public boolean isActive() {
+  public boolean isActive(Context context) {
+    VoicemailClient voicemailClient = VoicemailComponent.get(context).getVoicemailClient();
+    if (context.getPackageName().equals(sourcePackage)) {
+      if (!voicemailClient.isVoicemailModuleEnabled()) {
+        LogUtil.i("VoicemailStatus.isActive", "module disabled");
+        return false;
+      }
+      if (!voicemailClient.hasCarrierSupport(context, getPhoneAccountHandle())) {
+        LogUtil.i("VoicemailStatus.isActive", "carrier not supported");
+        return false;
+      }
+      if (!voicemailClient.isVoicemailEnabled(context, getPhoneAccountHandle())) {
+        LogUtil.i("VoicemailStatus.isActive", "VVM disabled");
+        return false;
+      }
+    }
     switch (configurationState) {
       case Status.CONFIGURATION_STATE_NOT_CONFIGURED:
       case Status.CONFIGURATION_STATE_DISABLED:

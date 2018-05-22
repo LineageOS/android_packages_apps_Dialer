@@ -280,7 +280,9 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
 
                 while (cursor.moveToNext()) {
                   VoicemailStatus status = new VoicemailStatus(context, cursor);
-                  if (status.isActive()) {
+                  if (status.isActive(context)) {
+                    LogUtil.i(
+                        "NewVoicemailFragment.queryVoicemailStatus", "inactive source ignored");
                     statuses.add(status);
                     // TODO(a bug): Handle Service State Listeners
                   }
