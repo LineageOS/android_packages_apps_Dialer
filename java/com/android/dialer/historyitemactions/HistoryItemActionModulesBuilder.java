@@ -32,6 +32,7 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.util.CallUtil;
+import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.UriUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -179,6 +180,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the permission to send SMS is not granted,
    *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the number is blocked, or
@@ -188,7 +190,8 @@ public final class HistoryItemActionModulesBuilder {
   public HistoryItemActionModulesBuilder addModuleForSendingTextMessage() {
     // TODO(zachh): There are other conditions where this module should not be shown
     // (e.g., business numbers).
-    if (moduleInfo.getIsEmergencyNumber()
+    if (!PermissionsUtil.hasSendSmsPermissions(context)
+        || moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
         || moduleInfo.getIsBlocked()
         || TextUtils.isEmpty(moduleInfo.getNormalizedNumber())) {
@@ -220,6 +223,7 @@ public final class HistoryItemActionModulesBuilder {
    * <p>The method is a no-op if
    *
    * <ul>
+   *   <li>the permission to write contacts is not granted,
    *   <li>the call is one made to/received from an emergency number,
    *   <li>the call is one made to a voicemail box,
    *   <li>the call should be shown as spam,
@@ -229,7 +233,8 @@ public final class HistoryItemActionModulesBuilder {
    * </ul>
    */
   public HistoryItemActionModulesBuilder addModuleForAddingToContacts() {
-    if (moduleInfo.getIsEmergencyNumber()
+    if (!PermissionsUtil.hasContactsWritePermissions(context)
+        || moduleInfo.getIsEmergencyNumber()
         || moduleInfo.getIsVoicemailCall()
         || Spam.shouldShowAsSpam(moduleInfo.getIsSpam(), moduleInfo.getCallType())
         || moduleInfo.getIsBlocked()
