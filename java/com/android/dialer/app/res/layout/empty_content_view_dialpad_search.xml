@@ -28,12 +28,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal|top"
-    android:textSize="@dimen/empty_list_message_text_size"
-    android:textColor="@color/empty_list_text_color"
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
     android:paddingTop="8dp"
-    android:paddingBottom="8dp"/>
+    android:paddingBottom="8dp"
+    style="Dialer.TextAppearance.Primary.Ellipsize"/>
 
   <TextView
     android:id="@+id/empty_list_view_action"

@@ -68,6 +68,9 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.speeddial \
 	com.android.dialer.spannable \
 	com.android.dialer.theme \
+	com.android.dialer.theme.base \
+	com.android.dialer.theme.common \
+	com.android.dialer.theme.private \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
 	com.android.dialer.voicemail.listui.error \

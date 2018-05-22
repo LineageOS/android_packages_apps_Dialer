@@ -19,7 +19,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@drawable/view_pager_tab_background"
+  android:background="@drawable/item_background_material_borderless_dark"
   android:layoutDirection="ltr">
   <!-- The tab icon -->
   <ImageView
@@ -42,7 +42,7 @@
     android:layoutDirection="locale"
     android:minWidth="@dimen/tab_unread_count_background_size"
     android:textAlignment="center"
-    android:textColor="@color/tab_accent_color"
+    android:textColor="?android:attr/colorAccent"
     android:textSize="@dimen/tab_unread_count_text_size"/>
 </RelativeLayout>
 

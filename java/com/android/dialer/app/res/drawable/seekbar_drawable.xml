@@ -19,7 +19,7 @@
       <item android:id="@android:id/background">
         <shape android:shape="line">
           <stroke
-            android:color="@color/voicemail_playback_seek_bar_yet_to_play"
+            android:color="@color/dialer_divider_line_color"
             android:width="2dip"
             />
         </shape>
@@ -29,7 +29,7 @@
         <clip>
           <shape android:shape="line">
             <stroke
-              android:color="@color/voicemail_playback_seek_bar_already_played"
+              android:color="?android:attr/colorPrimary"
               android:width="2dip"
               />
           </shape>
@@ -42,7 +42,7 @@
       <item android:id="@android:id/background">
         <shape android:shape="line">
           <stroke
-            android:color="@color/voicemail_playback_seek_bar_yet_to_play"
+            android:color="@color/dialer_divider_line_color"
             android:width="2dip"
             />
         </shape>
@@ -52,7 +52,7 @@
         <clip>
           <shape android:shape="line">
             <stroke
-              android:color="@color/voicemail_playback_seek_bar_yet_to_play"
+              android:color="@color/dialer_divider_line_color"
               android:width="2dip"
               />
           </shape>

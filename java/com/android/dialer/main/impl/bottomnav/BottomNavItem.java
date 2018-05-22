@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.theme.ThemeUtil;
+import com.android.dialer.theme.base.ThemeUtil;
 
 /** Navigation item in a bottom nav. */
 final class BottomNavItem extends LinearLayout {

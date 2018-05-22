@@ -238,7 +238,6 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
 
   private void configureEmptyContentView() {
     emptyContentView.setImage(R.drawable.quantum_ic_query_builder_vd_theme_24);
-    emptyContentView.setImageTint(R.color.empty_call_log_icon_tint_color, null);
     emptyContentView.setDescription(R.string.new_call_log_permission_no_calllog);
     emptyContentView.setActionLabel(com.android.dialer.widget.R.string.permission_single_turn_on);
     emptyContentView.setActionClickedListener(new TurnOnPhonePermissions());

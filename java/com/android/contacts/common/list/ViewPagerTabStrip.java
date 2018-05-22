@@ -24,7 +24,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.android.contacts.common.R;
-import com.android.dialer.theme.ThemeUtil;
+import com.android.dialer.theme.base.ThemeUtil;
 
 public class ViewPagerTabStrip extends LinearLayout {
 

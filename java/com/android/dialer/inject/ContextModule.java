@@ -18,7 +18,7 @@ package com.android.dialer.inject;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import com.android.dialer.theme.ThemeUtil;
+import com.android.dialer.theme.base.ThemeUtil;
 import dagger.Module;
 import dagger.Provides;
 

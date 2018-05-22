@@ -230,7 +230,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         // call history, possibly due to 3rd party call log implementations (e.g. to
         // distinguish between rejected and missed calls). Instead of crashing, just
         // assume that all unknown call types are missed calls.
-        return ContextCompat.getColor(context, R.color.missed_call);
+        return ContextCompat.getColor(context, R.color.dialer_red);
     }
   }
 }

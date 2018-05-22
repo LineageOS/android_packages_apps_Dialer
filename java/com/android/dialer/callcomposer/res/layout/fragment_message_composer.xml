@@ -64,7 +64,7 @@
       android:paddingBottom="64dp"
       android:textSize="@dimen/message_compose_item_text_size"
       android:hint="@string/message_composer_custom_message_hint"
-      android:textColor="@color/dialer_primary_text_color"
+      android:textColor="?android:attr/textColorPrimary"
       android:textColorHint="?android:attr/textColorHint"
       android:background="?android:attr/colorBackground"
       android:textCursorDrawable="@drawable/searchedittext_custom_cursor"

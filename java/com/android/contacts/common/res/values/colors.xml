@@ -15,20 +15,6 @@
   -->
 
 <resources>
-  <!-- Color of ripples used for views with dark backgrounds -->
-  <color name="dialer_ripple_material_dark">#a0ffffff</color>
-
-  <!-- Color of ripples used for views with light backgrounds -->
-  <color name="dialer_ripple_material_light">#30000000</color>
-
-  <!-- Divider color for header separator -->
-  <color name="primary_text_color">#363636</color>
-
-  <color name="secondary_text_color">@color/dialer_secondary_text_color</color>
-
-  <!-- Text color for section header. -->
-  <color name="section_header_text_color">#2A56C6</color>
-
   <!-- Color of the theme of the People app -->
   <color name="people_app_theme_color">#363636</color>
 
@@ -51,36 +37,6 @@
     <item>#424242</item>
   </array>
 
-  <color name="contactscommon_actionbar_background_color">?android:attr/colorPrimary</color>
-
-  <color name="tab_ripple_color">#ffffff</color>
-  <color name="tab_accent_color">@color/tab_ripple_color</color>
-  <color name="tab_selected_underline_color">#f50057</color>
-  <color name="tab_unread_count_background_color">#1C3AA9</color>
-
-  <!-- Color of the title to the Frequently Contacted section -->
-  <color name="frequently_contacted_title_color">@color/contactscommon_actionbar_background_color
-  </color>
-
-  <!-- Color of action bar text. Ensure this stays in sync with packages/Telephony
-  phone_settings_actionbar_text_color-->
-  <color name="actionbar_text_color">#ffffff</color>
-  <color name="actionbar_unselected_text_color">#a6ffffff</color>
-
-  <!-- Text color of the search box text as entered by user  -->
-  <color name="searchbox_text_color">@color/dialer_primary_text_color</color>
-  <!-- Background color of the search box -->
-  <color name="searchbox_background_color">#ffffff</color>
-
-  <color name="searchbox_hint_text_color">#737373</color>
-  <color name="searchbox_icon_tint">@color/searchbox_hint_text_color</color>
-
-  <color name="search_shortcut_icon_color">?android:attr/colorPrimary</color>
-
-  <!-- Color of the background of the contact detail and editor pages -->
-  <color name="background_primary">#f9f9f9</color>
-  <color name="contact_all_list_background_color">#FFFFFF</color>
-
   <!-- Text color used for character counter when the max limit has been exceeded -->
   <color name="call_subject_limit_exceeded">#d1041c</color>
 
@@ -92,8 +48,4 @@
 
   <!-- Text color for the SEND & CALL button on the call subject dialog. -->
   <color name="call_subject_button">#00c853</color>
-
-  <!-- Background color for the call subject history view. -->
-  <color name="call_subject_history_background">#ffffff</color>
-  <color name="search_video_call_icon_tint">@color/searchbox_hint_text_color</color>
 </resources>

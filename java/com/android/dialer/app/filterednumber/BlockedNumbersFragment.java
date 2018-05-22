@@ -39,6 +39,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil.CheckForSendToVoicemailCo
 import com.android.dialer.blocking.FilteredNumbersUtil.ImportSendToVoicemailContactsListener;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.theme.base.ThemeUtil;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 
 /** TODO(calderwoodra): documentation */
@@ -74,8 +75,7 @@ public class BlockedNumbersFragment extends ListFragment
     //replace the icon for add number with LetterTileDrawable(), so it will have identical style
     LetterTileDrawable drawable = new LetterTileDrawable(getResources());
     drawable.setLetter(ADD_BLOCKED_NUMBER_ICON_LETTER);
-    drawable.setColor(
-        ActivityCompat.getColor(getActivity(), R.color.add_blocked_number_icon_color));
+    drawable.setColor(ThemeUtil.getColorIcon());
     drawable.setIsCircular(true);
 
     if (adapter == null) {

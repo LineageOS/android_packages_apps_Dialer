@@ -24,8 +24,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:text="@string/block_report_number_alert_details"
-    android:textColor="@color/block_report_spam_primary_text_color"
-    android:textSize="@dimen/blocked_report_spam_primary_text_size"/>
+    style="@style/Dialer.TextAppearance.Primary"/>
 
   <CheckBox
     android:id="@+id/report_number_as_spam_action"

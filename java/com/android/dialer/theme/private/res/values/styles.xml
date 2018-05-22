@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <!-- Update to Theme.AppCompat.Light.NoActionBar once we no longer depend on ActionBars. -->
+  <style name="Dialer" parent="Theme.AppCompat.Light">
+    <!-- Used to automatically style all buttons in Dialer -->
+    <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
+    <item name="android:colorButtonNormal">?android:attr/colorPrimary</item>
+
+    <!-- Used to style link text -->
+    <item name="android:textColorLink">@color/dialer_theme_color</item>
+
+    <!-- Used to automatically style AlertDialogs -->
+    <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+  </style>
+
+  <style name="Dialer.Dark" parent="Theme.AppCompat">
+    <!-- Used to automatically style all buttons in Dialer -->
+    <item name="android:textAppearanceButton">@style/DialerButtonTextStyle</item>
+    <item name="android:colorButtonNormal">?android:attr/colorPrimary</item>
+
+    <!-- Used to style link text -->
+    <item name="android:textColorLink">@color/dialer_theme_color</item>
+
+    <!-- Used to automatically style AlertDialogs -->
+    <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+  </style>
+
+  <!-- Used to style all Dialer's button's text. Every button is awarded this for free if the parent
+     activity's theme extends from Dialer.ThemeBase(.NoActionBar) or doesn't specify a theme. -->
+  <style name="DialerButtonTextStyle" parent="@android:style/TextAppearance.Material.Widget.Button">
+    <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+  </style>
+
+  <!-- Used to style all Dialer's AlertDialogs. Every button is awarded this for free if the parent
+     activity's theme extends from Dialer.ThemeBase(.NoActionBar) or doesn't specify a theme. -->
+  <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <!-- TODO(a bug): figure out why ?android:attr/colorPrimary doesn't work here -->
+    <item name="colorAccent">@color/dialer_theme_color</item>
+  </style>
+</resources>

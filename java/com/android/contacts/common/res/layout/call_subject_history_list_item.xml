@@ -25,5 +25,5 @@
   android:paddingEnd="@dimen/call_subject_dialog_margin"
   android:gravity="center_vertical"
   android:singleLine="true"
-  android:textColor="@color/dialer_primary_text_color"
+  android:textColor="?android:attr/textColorPrimary"
   android:textSize="@dimen/call_subject_dialog_primary_text_size"/>

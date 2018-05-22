@@ -16,32 +16,19 @@
   -->
 <resources>
 
-  <style name="primary_textview">
-    <item name="android:textColor">@color/primary_text_color</item>
-    <item name="android:fontFamily">sans-serif</item>
-  </style>
+  <style name="primary_textview" parent="Dialer.TextAppearance.Primary"/>
 
-  <style name="primary_textview_unread_call">
-    <item name="android:textColor">@color/primary_text_color</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
-  </style>
+  <style name="primary_textview_unread_call" parent="Dialer.TextAppearance.Header2"/>
 
-  <style name="secondary_textview">
-    <item name="android:textColor">@color/secondary_text_color</item>
-    <item name="android:fontFamily">sans-serif</item>
-  </style>
+  <style name="secondary_textview" parent="Dialer.TextAppearance.Secondary"/>
 
-  <style name="phoneaccount_textview">
-    <item name="android:fontFamily">sans-serif</item>
-  </style>
+  <style name="phoneaccount_textview"/>
 
-  <style name="secondary_textview_unread_call">
-    <item name="android:textColor">@color/missed_call</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
+  <style name="secondary_textview_unread_call" parent="Dialer.TextAppearance.Header2">
+    <item name="android:textColor">@color/dialer_red</item>
   </style>
 
   <style name="phoneaccount_textview_unread_call">
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
-
 </resources>

@@ -60,14 +60,12 @@
       -->
       <TextView
           android:id="@+id/primary_text"
-          style="@style/Dialer.TextAppearance.Primary"
+          style="@style/Dialer.TextAppearance.Primary.Ellipsize"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginEnd="6dp"
-          android:ellipsize="end"
           android:lineSpacingMultiplier="1.5"
-          android:singleLine="true"
           tools:ignore="InefficientWeight"/>
 
       <ImageView
@@ -120,23 +118,19 @@
 
       <TextView
           android:id="@+id/secondary_text"
-          style="@style/Dialer.TextAppearance.Secondary"
+          style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:ellipsize="end"
-          android:lineSpacingMultiplier="1.4"
-          android:singleLine="true"/>
+          android:lineSpacingMultiplier="1.4"/>
 
     </LinearLayout>
 
     <!-- 3rd row: phone account info -->
     <TextView
         android:id="@+id/phone_account"
-        style="@style/Dialer.TextAppearance.Secondary"
+        style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"/>
+        android:layout_height="wrap_content"/>
 
   </LinearLayout>
 
@@ -150,5 +144,5 @@
       android:contentDescription="@string/a11y_new_call_log_expand_menu_for_entry"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"/>
+      android:tint="?colorIcon"/>
 </RelativeLayout>

@@ -99,7 +99,7 @@
           android:focusable="false"
           android:outlineProvider="none"
           android:src="@drawable/quantum_ic_call_white_24"
-          android:tint="@color/incoming_answer_icon"
+          android:tint="@color/dialer_call_green"
           android:tintMode="src_atop"
           tools:outlineProvider="background"/>
 

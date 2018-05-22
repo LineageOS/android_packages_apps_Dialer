@@ -17,7 +17,7 @@
   android:id="@+id/blocked_number_fragment"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/blocked_number_background"
+  android:background="?android:attr/colorBackground"
   android:orientation="vertical">
 
   <ListView

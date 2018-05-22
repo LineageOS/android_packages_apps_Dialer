@@ -27,7 +27,7 @@ import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
 import com.android.dialer.compat.AppCompatConstants;
-import com.android.dialer.theme.ThemeUtil;
+import com.android.dialer.theme.base.ThemeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -289,20 +289,20 @@ public class CallTypeIconsView extends View {
       int iconId = R.drawable.quantum_ic_call_received_white_24;
       Drawable drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       incoming = drawable.mutate();
-      incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+      incoming.setColorFilter(r.getColor(R.color.dialer_call_green), PorterDuff.Mode.MULTIPLY);
 
       // Create a rotated instance of the call arrow for outgoing calls.
       iconId = R.drawable.quantum_ic_call_made_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       outgoing = drawable.mutate();
-      outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+      outgoing.setColorFilter(r.getColor(R.color.dialer_call_green), PorterDuff.Mode.MULTIPLY);
 
       // Need to make a copy of the arrow drawable, otherwise the same instance colored
       // above will be recolored here.
       iconId = R.drawable.quantum_ic_call_missed_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       missed = drawable.mutate();
-      missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
+      missed.setColorFilter(r.getColor(R.color.dialer_red), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_voicemail_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);

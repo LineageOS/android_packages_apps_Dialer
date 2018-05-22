@@ -56,7 +56,7 @@
   </style>
 
   <style name="TosTitleStyle">
-    <item name="android:textColor">@color/primary_text_color</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">20sp</item>
     <item name="android:fontFamily">"sans-serif-medium"</item>
   </style>
@@ -75,7 +75,7 @@
 
   <style name="TosDetailsTextStyle">
     <item name="android:textSize">12sp</item>
-    <item name="android:textColor">@color/dialer_secondary_text_color</item>
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="android:fontFamily">"sans-serif-regular"</item>
     <item name="android:lineSpacingExtra">12sp</item>
   </style>

@@ -49,17 +49,14 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="12dp"
-          android:fontFamily="sans-serif-medium"
-          android:textColor="@color/primary_material_dark"
-          android:textSize="@dimen/call_log_primary_text_size"/>
+          style="@style/Dialer.TextAppearance.Header2"/>
       <TextView
           android:id="@+id/new_call_log_promotion_card_details"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="16dp"
           android:lineSpacingExtra="8dp"
-          android:textColor="@color/primary_material_dark"
-          android:textSize="14sp"/>
+          style="@style/Dialer.TextAppearance.Secondary"/>
       <Button
           android:id="@+id/new_call_log_promotion_card_ok"
           android:layout_width="wrap_content"

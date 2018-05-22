@@ -32,6 +32,7 @@
 
   <!-- Header in call log to group calls from before yesterday.  [CHAR LIMIT=30] -->
   <string name="new_call_log_header_older">Older</string>
+
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
   <string name="new_call_log_permission_no_calllog">To see your call log, turn on the Phone permission.</string>
 

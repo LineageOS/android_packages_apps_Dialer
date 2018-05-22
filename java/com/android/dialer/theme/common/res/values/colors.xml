@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<!-- The colors in this file aren't configured at the theme level. -->
+<resources>
+  <color name="dialer_call_green">#00C853</color>
+  <color name="dialer_end_call_button_color">#BD2A2A</color>
+  <color name="dialer_divider_line_color">#D8D8D8</color>
+  <color name="dialer_link_color">#2A56C6</color>
+
+  <!-- Colors for the notification actions -->
+  <color name="notification_action_accept">#097138</color>
+  <color name="notification_action_dismiss">#A52714</color>
+  <color name="notification_action_answer_video">#097138</color>
+
+  <color name="dialer_red">#C53929</color>
+
+  <!-- Legacy -->
+  <color name="blue_grey_100">#CFD8DC</color>
+</resources>

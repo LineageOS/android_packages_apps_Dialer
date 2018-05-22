@@ -145,7 +145,7 @@
         android:layout_marginBottom="12dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/quantum_ic_error_outline_vd_theme_36"
-        android:tint="#C53929"/>
+        android:tint="@color/dialer_red"/>
 
     <TextView
         android:id="@+id/location_error_text"
