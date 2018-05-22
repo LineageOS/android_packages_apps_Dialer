@@ -18,6 +18,7 @@ package com.android.dialer.phonelookup.cp2;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
@@ -85,7 +86,8 @@ final class Cp2Projections {
    * Builds a {@link Cp2ContactInfo} based on the current row of {@code cursor}, of which the
    * projection is either {@link #PHONE_PROJECTION} or {@link #PHONE_LOOKUP_PROJECTION}.
    */
-  static Cp2ContactInfo buildCp2ContactInfoFromCursor(Context appContext, Cursor cursor) {
+  static Cp2ContactInfo buildCp2ContactInfoFromCursor(
+      Context appContext, Cursor cursor, long directoryId) {
     String displayName = cursor.getString(CP2_INFO_NAME_INDEX);
     String photoThumbnailUri = cursor.getString(CP2_INFO_PHOTO_THUMBNAIL_URI_INDEX);
     String photoUri = cursor.getString(CP2_INFO_PHOTO_URI_INDEX);
@@ -116,7 +118,13 @@ final class Cp2Projections {
     }
     infoBuilder.setContactId(contactId);
     if (!TextUtils.isEmpty(lookupKey)) {
-      infoBuilder.setLookupUri(Contacts.getLookupUri(contactId, lookupKey).toString());
+      infoBuilder.setLookupUri(
+          Contacts.getLookupUri(contactId, lookupKey)
+              .buildUpon()
+              .appendQueryParameter(
+                  ContactsContract.DIRECTORY_PARAM_KEY, String.valueOf(directoryId))
+              .build()
+              .toString());
     }
 
     // Only PHONE_PROJECTION has a column containing carrier presence info.
