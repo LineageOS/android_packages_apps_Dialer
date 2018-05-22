@@ -125,11 +125,4 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="top"/>
-  <FrameLayout
-      android:id="@+id/navigation_bar_background"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_gravity="bottom"
-      android:background="@android:color/background_dark"
-      android:visibility="gone"/>
 </FrameLayout>

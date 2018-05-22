@@ -488,7 +488,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       }
       showDialpadRequest = DIALPAD_REQUEST_NONE;
     }
-    updateNavigationBar(isDialpadVisible());
 
     CallList.getInstance()
         .onInCallUiShown(getIntent().getBooleanExtra(IntentExtraNames.FOR_FULL_SCREEN, false));
@@ -807,10 +806,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       sensor.onDialpadVisible(show);
     }
     showDialpadRequest = DIALPAD_REQUEST_NONE;
-
-    // Note:  onInCallScreenDialpadVisibilityChange is called here to ensure that the dialpad FAB
-    // repositions itself.
-    getInCallOrRttCallScreen().onInCallScreenDialpadVisibilityChange(show);
   }
 
   private void showDialpadFragment() {
@@ -835,7 +830,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     dialpadFragmentManager.executePendingTransactions();
 
     Logger.get(this).logScreenView(ScreenEvent.Type.INCALL_DIALPAD, this);
-    updateNavigationBar(true /* isDialpadVisible */);
+    getInCallOrRttCallScreen().onInCallScreenDialpadVisibilityChange(true);
   }
 
   private void hideDialpadFragment() {
@@ -851,8 +846,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       transaction.commitAllowingStateLoss();
       dialpadFragmentManager.executePendingTransactions();
       dialpadFragment.setUserVisibleHint(false);
+      getInCallOrRttCallScreen().onInCallScreenDialpadVisibilityChange(false);
     }
-    updateNavigationBar(false /* isDialpadVisible */);
   }
 
   public boolean isDialpadVisible() {
@@ -1181,23 +1176,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     LogUtil.enterBlock("InCallActivity.showDialogForRttRequest");
     DialogFragment fragment = RttRequestDialogFragment.newInstance(call.getId(), rttRequestId);
     fragment.show(getSupportFragmentManager(), Tags.RTT_REQUEST_DIALOG);
-  }
-
-  @Override
-  public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
-    super.onMultiWindowModeChanged(isInMultiWindowMode);
-    updateNavigationBar(isDialpadVisible());
-  }
-
-  private void updateNavigationBar(boolean isDialpadVisible) {
-    if (isInMultiWindowMode()) {
-      return;
-    }
-
-    View navigationBarBackground = getWindow().findViewById(R.id.navigation_bar_background);
-    if (navigationBarBackground != null) {
-      navigationBarBackground.setVisibility(isDialpadVisible ? View.VISIBLE : View.GONE);
-    }
   }
 
   public void setAllowOrientationChange(boolean allowOrientationChange) {

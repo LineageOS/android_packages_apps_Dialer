@@ -19,19 +19,16 @@ package com.android.dialer.util;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnPreDrawListener;
-import android.view.WindowManager;
 import android.widget.TextView;
 import java.util.Locale;
 
@@ -141,46 +138,5 @@ public class ViewUtil {
     PowerManager powerManager = context.getSystemService(PowerManager.class);
     return Settings.Global.getFloat(contentResolver, Global.ANIMATOR_DURATION_SCALE, 1.0f) == 0
         || powerManager.isPowerSaveMode();
-  }
-
-  /**
-   * Get navigation bar height by calculating difference between app usable size and real screen
-   * size. Note that this won't work in multi-window mode so it's caller's responsibility to check
-   * if the app is in multi-window mode before using this.
-   *
-   * @param context Context
-   * @return Navigation bar height
-   */
-  public static int getNavigationBarHeight(Context context) {
-    WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-    Display display = windowManager.getDefaultDisplay();
-    Point appUsableSize = getAppUsableScreenSize(display);
-    Point realScreenSize = getRealScreenSize(display);
-
-    // Navigation bar on the right.
-    if (appUsableSize.x < realScreenSize.x) {
-      return appUsableSize.y;
-    }
-
-    // Navigation bar at the bottom.
-    if (appUsableSize.y < realScreenSize.y) {
-      return realScreenSize.y - appUsableSize.y;
-    }
-
-    // Navigation bar is not present.
-    return 0;
-  }
-
-  private static Point getAppUsableScreenSize(Display display) {
-    Point size = new Point();
-    display.getSize(size);
-    return size;
-  }
-
-  private static Point getRealScreenSize(Display display) {
-    Point size = new Point();
-    display.getRealSize(size);
-
-    return size;
   }
 }
