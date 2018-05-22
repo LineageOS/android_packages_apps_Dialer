@@ -17,13 +17,13 @@
 package com.android.dialer.blockreportspam;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -40,7 +40,7 @@ public final class BlockReportSpamDialogs {
   /** Creates a dialog with the default cancel button listener (which dismisses the dialog). */
   private static AlertDialog.Builder createDialogBuilder(
       Activity activity, final DialogFragment fragment) {
-    return new AlertDialog.Builder(activity, R.style.AlertDialogTheme)
+    return new AlertDialog.Builder(activity)
         .setCancelable(true)
         .setNegativeButton(android.R.string.cancel, (dialog, which) -> fragment.dismiss());
   }

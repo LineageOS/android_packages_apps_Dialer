@@ -16,12 +16,12 @@
 
 package com.android.dialer.spam.promo;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 
 /** Dialog for spam blocking on-boarding promotion. */
 public class SpamBlockingPromoDialogFragment extends DialogFragment {
@@ -64,7 +64,7 @@ public class SpamBlockingPromoDialogFragment extends DialogFragment {
   public Dialog onCreateDialog(Bundle savedInstanceState) {
     super.onCreateDialog(savedInstanceState);
     // Return the newly created dialog
-    return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
+    return new AlertDialog.Builder(getActivity())
         .setCancelable(true)
         .setTitle(R.string.spam_blocking_promo_title)
         .setMessage(R.string.spam_blocking_promo_text)

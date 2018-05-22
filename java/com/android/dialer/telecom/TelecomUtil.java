@@ -275,15 +275,21 @@ public abstract class TelecomUtil {
             && hasPermission(context, Manifest.permission.WRITE_VOICEMAIL));
   }
 
+  /** @deprecated use {@link com.android.dialer.util.PermissionsUtil} */
+  @Deprecated
   public static boolean hasModifyPhoneStatePermission(Context context) {
     return isDefaultDialer(context)
         || hasPermission(context, Manifest.permission.MODIFY_PHONE_STATE);
   }
 
+  /** @deprecated use {@link com.android.dialer.util.PermissionsUtil} */
+  @Deprecated
   public static boolean hasReadPhoneStatePermission(Context context) {
     return isDefaultDialer(context) || hasPermission(context, Manifest.permission.READ_PHONE_STATE);
   }
 
+  /** @deprecated use {@link com.android.dialer.util.PermissionsUtil} */
+  @Deprecated
   public static boolean hasCallPhonePermission(Context context) {
     return isDefaultDialer(context) || hasPermission(context, Manifest.permission.CALL_PHONE);
   }

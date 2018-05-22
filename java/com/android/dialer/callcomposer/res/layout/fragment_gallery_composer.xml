@@ -18,7 +18,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/background_dialer_white"
+  android:background="?android:attr/colorBackground"
   android:paddingBottom="@dimen/call_composer_media_bar_height">
 
   <GridView

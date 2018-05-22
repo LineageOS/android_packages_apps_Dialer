@@ -20,7 +20,7 @@
 
   <stroke
     android:width="@dimen/call_composer_contact_photo_border_thickness"
-    android:color="@color/background_dialer_white"/>
+    android:color="?android:attr/colorBackground"/>
 
   <padding
     android:bottom="@dimen/call_composer_contact_photo_border_thickness"

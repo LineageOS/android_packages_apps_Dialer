@@ -70,7 +70,7 @@
         android:layout_gravity="end"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:backgroundTint="@color/dialer_theme_color"
+        android:backgroundTint="?android:attr/colorPrimary"
         android:fontFamily="sans-serif-medium"
         android:stateListAnimator="@null"
         android:text="@string/rtt_button_accept_request"

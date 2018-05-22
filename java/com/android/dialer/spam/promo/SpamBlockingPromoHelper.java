@@ -17,7 +17,6 @@
 package com.android.dialer.spam.promo;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.PendingIntent;
@@ -25,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Icon;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.os.BuildCompat;
 import android.view.View;
 import android.widget.Toast;

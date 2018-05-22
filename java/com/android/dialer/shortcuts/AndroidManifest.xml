@@ -20,9 +20,9 @@
     android:minSdkVersion="24"
     android:targetSdkVersion="28"/>
 
-  <application android:theme="@style/Theme.AppCompat">
+  <application>
 
-    <service
+  <service
       android:exported="false"
       android:name=".PeriodicJobService"
       android:permission="android.permission.BIND_JOB_SERVICE"/>

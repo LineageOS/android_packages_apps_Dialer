@@ -27,6 +27,7 @@
     @dimen/dialpad_key_letters_default_size_for_single_alphabet
   </dimen>
   <dimen name="incall_dialpad_key_numbers_size">36dp</dimen>
+  <dimen name="incall_end_call_spacing">116dp</dimen>
 
   <!-- Dimension used to possibly down-scale high-res photo into what is suitable
        for notification's large icon. -->

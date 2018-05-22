@@ -16,9 +16,9 @@
 
 package com.android.dialer.app.calllog;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;

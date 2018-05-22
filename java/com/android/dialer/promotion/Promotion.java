@@ -17,23 +17,51 @@
 package com.android.dialer.promotion;
 
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** Interface for promotion bottom sheet. */
 public interface Promotion {
 
-  /** Returns if this promotion should be shown. */
-  boolean shouldShow();
+  /**
+   * Type of promotion, which means promotion should be shown as a card in {@link
+   * android.support.v7.widget.RecyclerView} or {@link
+   * android.support.design.bottomsheet.BottomSheetBehavior}.
+   */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({PromotionType.CARD, PromotionType.BOTTOM_SHEET})
+  @interface PromotionType {
+    /** Shown as card in call log or voicemail tab. */
+    int CARD = 1;
 
-  /** Sets to show this promotion. */
-  void setShouldShow(boolean shouldShow);
+    /** Shown as bottom sheet. */
+    int BOTTOM_SHEET = 2;
+  }
+
+  /** Returns {@link PromotionType} for this promotion. */
+  @PromotionType
+  int getType();
+
+  /**
+   * Returns if this promotion should be shown. This usually means the promotion is enabled and not
+   * dismissed yet.
+   */
+  boolean isEligibleToBeShown();
+
+  /** Called when this promotion is first time viewed by user. */
+  default void onViewed() {}
 
   /** Dismisses this promotion. This is called when user acknowledged the promotion. */
   void dismiss();
 
+  /** Returns title text of the promotion. */
   CharSequence getTitle();
 
+  /** Returns details text of the promotion. */
   CharSequence getDetails();
 
+  /** Returns resource id of the icon for the promotion. */
   @DrawableRes
   int getIconRes();
 }

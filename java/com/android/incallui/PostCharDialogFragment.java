@@ -55,8 +55,7 @@ public class PostCharDialogFragment extends DialogFragment {
     buf.append(getResources().getText(R.string.wait_prompt_str));
     buf.append(postDialStr);
 
-    final AlertDialog.Builder builder =
-        new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
+    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     builder.setMessage(buf.toString());
 
     builder.setPositiveButton(

@@ -16,7 +16,6 @@
 
 package com.android.incallui.spam;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -27,6 +26,7 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneNumberUtils;
 import com.android.dialer.blocking.BlockedNumbersMigrator;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
@@ -230,7 +230,7 @@ public class SpamNotificationActivity extends FragmentActivity {
                 }
               },
               dismissListener)
-          .show(getFragmentManager(), BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
+          .show(getSupportFragmentManager(), BlockReportSpamDialogs.NOT_SPAM_DIALOG_TAG);
     } else {
       reportNotSpamAndFinish(number, contactLookupResultType);
     }
@@ -257,7 +257,9 @@ public class SpamNotificationActivity extends FragmentActivity {
                         }
                       },
                       dismissListener)
-                  .show(getFragmentManager(), BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
+                  .show(
+                      getSupportFragmentManager(),
+                      BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
             }
           });
     } else {
@@ -404,7 +406,9 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setCancelable(false)
           .setTitle(
               getString(
-                  R.string.spam_notification_title, getFormattedNumber(number, applicationContext)))
+                  SpamAlternativeExperimentUtil.getResourceIdByName(
+                      "spam_notification_title", applicationContext),
+                  getFormattedNumber(number, applicationContext)))
           .setNeutralButton(
               getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
@@ -426,7 +430,9 @@ public class SpamNotificationActivity extends FragmentActivity {
                 }
               })
           .setNegativeButton(
-              getString(R.string.spam_notification_was_not_spam_action_text),
+              getString(
+                  SpamAlternativeExperimentUtil.getResourceIdByName(
+                      "spam_notification_was_not_spam_action_text", applicationContext)),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -492,7 +498,10 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setTitle(
               getString(R.string.non_spam_notification_title, getFormattedNumber(number, context)))
           .setCancelable(false)
-          .setMessage(getString(R.string.spam_notification_non_spam_call_expanded_text))
+          .setMessage(
+              getString(
+                  SpamAlternativeExperimentUtil.getResourceIdByName(
+                      "spam_notification_non_spam_call_expanded_text", context)))
           .setNeutralButton(
               getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
@@ -512,7 +521,9 @@ public class SpamNotificationActivity extends FragmentActivity {
                 }
               })
           .setNegativeButton(
-              getString(R.string.spam_notification_dialog_block_report_spam_action_text),
+              getString(
+                  SpamAlternativeExperimentUtil.getResourceIdByName(
+                      "spam_notification_dialog_block_report_spam_action_text", context)),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -539,7 +550,7 @@ public class SpamNotificationActivity extends FragmentActivity {
 
   private void showSpamBlockingPromoDialog() {
     spamBlockingPromoHelper.showSpamBlockingPromoDialog(
-        getFragmentManager(),
+        getSupportFragmentManager(),
         () -> {
           Logger.get(this)
               .logImpression(

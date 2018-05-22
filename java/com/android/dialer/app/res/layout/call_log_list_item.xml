@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/call_log_call_account_margin_bottom"
             android:layout_marginEnd="@dimen/call_log_icon_margin"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/call_log_detail_text_size"
             android:visibility="gone"
             android:maxLines="1"/>

@@ -17,11 +17,9 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -29,37 +27,27 @@ import android.view.ViewGroup;
 import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.promotion.RttPromotion;
-import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.promotion.Promotion;
 import com.android.dialer.time.Clock;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.concurrent.TimeUnit;
 
 /** {@link RecyclerView.Adapter} for the new call log fragment. */
 final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-  @VisibleForTesting
-  static final String SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED = "duo_disclosure_dismissed";
-
-  private static final String SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS =
-      "duo_disclosure_first_viewed_time_ms";
-
   /** IntDef for the different types of rows that can be shown in the call log. */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
-    RowType.DUO_DISCLOSURE_CARD,
+    RowType.PROMOTION_CARD,
     RowType.HEADER_TODAY,
     RowType.HEADER_YESTERDAY,
     RowType.HEADER_OLDER,
     RowType.CALL_LOG_ENTRY
   })
   @interface RowType {
-    /** The Duo disclosure card. */
-    int DUO_DISCLOSURE_CARD = 1;
+    /** The promotion card. */
+    int PROMOTION_CARD = 1;
 
     /** Header that displays "Today". */
     int HEADER_TODAY = 2;
@@ -78,14 +66,12 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   private final Activity activity;
   private final RealtimeRowProcessor realtimeRowProcessor;
   private final PopCounts popCounts = new PopCounts();
-  private final SharedPreferences sharedPref;
-  private final OnScrollListenerForRecordingDuoDisclosureFirstViewTime
-      onScrollListenerForRecordingDuoDisclosureFirstViewTime;
+  @Nullable private final Promotion promotion;
 
   private Cursor cursor;
 
-  /** Position of the Duo disclosure card. Null when it should not be displayed. */
-  @Nullable private Integer duoDisclosureCardPosition;
+  /** Position of the promotion card. Null when it should not be displayed. */
+  @Nullable private Integer promotionCardPosition;
 
   /** Position of the "Today" header. Null when it should not be displayed. */
   @Nullable private Integer todayHeaderPosition;
@@ -96,14 +82,12 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   /** Position of the "Older" header. Null when it should not be displayed. */
   @Nullable private Integer olderHeaderPosition;
 
-  NewCallLogAdapter(Activity activity, Cursor cursor, Clock clock) {
+  NewCallLogAdapter(Activity activity, Cursor cursor, Clock clock, @Nullable Promotion promotion) {
     this.activity = activity;
     this.cursor = cursor;
     this.clock = clock;
     this.realtimeRowProcessor = CallLogUiComponent.get(activity).realtimeRowProcessor();
-    this.sharedPref = StorageComponent.get(activity).unencryptedSharedPrefs();
-    this.onScrollListenerForRecordingDuoDisclosureFirstViewTime =
-        new OnScrollListenerForRecordingDuoDisclosureFirstViewTime(sharedPref, clock);
+    this.promotion = promotion;
 
     setCardAndHeaderPositions();
   }
@@ -126,11 +110,11 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   private void setCardAndHeaderPositions() {
-    // Set the position for the Duo disclosure card if it should be shown.
-    duoDisclosureCardPosition = null;
+    // Set the position for the promotion card if it should be shown.
+    promotionCardPosition = null;
     int numCards = 0;
-    if (shouldShowDuoDisclosureCard()) {
-      duoDisclosureCardPosition = 0;
+    if (promotion != null && promotion.isEligibleToBeShown()) {
+      promotionCardPosition = 0;
       numCards++;
     }
 
@@ -174,61 +158,26 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
         !cursor.isAfterLast() ? numItemsInToday + numItemsInYesterday + numCards : null;
   }
 
-  private boolean shouldShowDuoDisclosureCard() {
-    if (new RttPromotion(activity).shouldShow()) {
-      return false;
-    }
-    // Don't show the Duo disclosure card if
-    // (1) Duo integration is not enabled on the device, or
-    // (2) Duo is not activated.
-    Duo duo = DuoComponent.get(activity).getDuo();
-    if (!duo.isEnabled(activity) || !duo.isActivated(activity)) {
-      return false;
-    }
-
-    // Don't show the Duo disclosure card if it has been dismissed.
-    if (sharedPref.getBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, false)) {
-      return false;
-    }
-
-    // At this point, Duo is activated and the disclosure card hasn't been dismissed.
-    // We should show the card if it has never been viewed by the user.
-    if (!sharedPref.contains(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS)) {
-      return true;
-    }
-
-    // At this point, the card has been viewed but not dismissed.
-    // We should not show the card if it has been viewed for more than 1 day.
-    long duoDisclosureFirstViewTimeMillis =
-        sharedPref.getLong(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS, 0);
-    return clock.currentTimeMillis() - duoDisclosureFirstViewTimeMillis
-        <= TimeUnit.DAYS.toMillis(1);
-  }
-
   @Override
   public void onAttachedToRecyclerView(RecyclerView recyclerView) {
     super.onAttachedToRecyclerView(recyclerView);
 
-    // Register a OnScrollListener that records the timestamp at which the Duo disclosure is first
-    // viewed if
-    // (1) the Duo disclosure card should be shown, and
-    // (2) it hasn't been viewed yet.
-    if (shouldShowDuoDisclosureCard()
-        && !sharedPref.contains(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS)) {
-      recyclerView.addOnScrollListener(onScrollListenerForRecordingDuoDisclosureFirstViewTime);
+    // Register a OnScrollListener that records when the promotion is viewed.
+    if (promotion != null && promotion.isEligibleToBeShown()) {
+      recyclerView.addOnScrollListener(
+          new OnScrollListenerForRecordingPromotionCardFirstViewTime(promotion));
     }
   }
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup viewGroup, @RowType int viewType) {
     switch (viewType) {
-      case RowType.DUO_DISCLOSURE_CARD:
-        return new DuoDisclosureCardViewHolder(
+      case RowType.PROMOTION_CARD:
+        return new PromotionCardViewHolder(
             LayoutInflater.from(activity)
                 .inflate(
-                    R.layout.new_call_log_duo_disclosure_card,
-                    viewGroup,
-                    /* attachToRoot = */ false));
+                    R.layout.new_call_log_promotion_card, viewGroup, /* attachToRoot = */ false),
+            promotion);
       case RowType.HEADER_TODAY:
       case RowType.HEADER_YESTERDAY:
       case RowType.HEADER_OLDER:
@@ -252,16 +201,11 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   public void onBindViewHolder(ViewHolder viewHolder, int position) {
     @RowType int viewType = getItemViewType(position);
     switch (viewType) {
-      case RowType.DUO_DISCLOSURE_CARD:
-        ((DuoDisclosureCardViewHolder) viewHolder)
+      case RowType.PROMOTION_CARD:
+        ((PromotionCardViewHolder) viewHolder)
             .setDismissListener(
-                unused -> {
-                  StorageComponent.get(activity)
-                      .unencryptedSharedPrefs()
-                      .edit()
-                      .putBoolean(SHARED_PREF_KEY_DUO_DISCLOSURE_DISMISSED, true)
-                      .apply();
-                  notifyItemRemoved(duoDisclosureCardPosition);
+                () -> {
+                  notifyItemRemoved(promotionCardPosition);
                   setCardAndHeaderPositions();
                 });
         break;
@@ -277,7 +221,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
       case RowType.CALL_LOG_ENTRY:
         NewCallLogViewHolder newCallLogViewHolder = (NewCallLogViewHolder) viewHolder;
         int previousCardAndHeaders = 0;
-        if (duoDisclosureCardPosition != null && position > duoDisclosureCardPosition) {
+        if (promotionCardPosition != null && position > promotionCardPosition) {
           previousCardAndHeaders++;
         }
         if (todayHeaderPosition != null && position > todayHeaderPosition) {
@@ -301,8 +245,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   @Override
   @RowType
   public int getItemViewType(int position) {
-    if (duoDisclosureCardPosition != null && position == duoDisclosureCardPosition) {
-      return RowType.DUO_DISCLOSURE_CARD;
+    if (promotionCardPosition != null && position == promotionCardPosition) {
+      return RowType.PROMOTION_CARD;
     }
     if (todayHeaderPosition != null && position == todayHeaderPosition) {
       return RowType.HEADER_TODAY;
@@ -321,7 +265,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     int numberOfCards = 0;
     int numberOfHeaders = 0;
 
-    if (duoDisclosureCardPosition != null) {
+    if (promotionCardPosition != null) {
       numberOfCards++;
     }
     if (todayHeaderPosition != null) {
@@ -337,35 +281,27 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   /**
-   * A {@link RecyclerView.OnScrollListener} that records the timestamp at which the Duo disclosure
-   * card is first viewed.
+   * A {@link RecyclerView.OnScrollListener} that records the timestamp at which the promotion card
+   * is first viewed.
    *
    * <p>We consider the card as viewed if the user scrolls the containing RecyclerView since such
    * action is a strong proof.
    */
-  private static final class OnScrollListenerForRecordingDuoDisclosureFirstViewTime
+  private static final class OnScrollListenerForRecordingPromotionCardFirstViewTime
       extends RecyclerView.OnScrollListener {
 
-    private final SharedPreferences sharedPref;
-    private final Clock clock;
+    private final Promotion promotion;
 
-    OnScrollListenerForRecordingDuoDisclosureFirstViewTime(
-        SharedPreferences sharedPref, Clock clock) {
-      this.sharedPref = sharedPref;
-      this.clock = clock;
+    OnScrollListenerForRecordingPromotionCardFirstViewTime(Promotion promotion) {
+      this.promotion = promotion;
     }
 
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-      if (!sharedPref.contains(SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS)
-          && newState == RecyclerView.SCROLL_STATE_SETTLING) {
-        sharedPref
-            .edit()
-            .putLong(
-                SHARED_PREF_KEY_DUO_DISCLOSURE_FIRST_VIEW_TIME_MILLIS, clock.currentTimeMillis())
-            .apply();
+      if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
+        promotion.onViewed();
 
-        // Recording the timestamp is this listener's sole responsibility.
+        // Recording promotion is viewed is this listener's sole responsibility.
         // We can remove it from the containing RecyclerView after the job is done.
         recyclerView.removeOnScrollListener(this);
       }

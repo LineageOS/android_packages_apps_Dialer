@@ -54,4 +54,8 @@
   <!-- Padding to be applied to the bottom of lists to make space for the floating action
      button -->
   <dimen name="floating_action_button_list_bottom_padding">88dp</dimen>
+
+  <!-- TODO(a bug): add a comment here -->
+  <dimen name="primary_text_size">16sp</dimen>
+  <dimen name="secondary_text_size">14sp</dimen>
 </resources>
