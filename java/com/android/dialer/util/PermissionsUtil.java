@@ -91,6 +91,10 @@ public class PermissionsUtil {
     return hasPermission(context, permission.READ_CONTACTS);
   }
 
+  public static boolean hasContactsWritePermissions(Context context) {
+    return hasPermission(context, permission.WRITE_CONTACTS);
+  }
+
   public static boolean hasLocationPermissions(Context context) {
     return hasPermission(context, permission.ACCESS_FINE_LOCATION);
   }
@@ -125,6 +129,10 @@ public class PermissionsUtil {
 
   public static boolean hasAddVoicemailPermissions(Context context) {
     return hasPermission(context, permission.ADD_VOICEMAIL);
+  }
+
+  public static boolean hasSendSmsPermissions(Context context) {
+    return hasPermission(context, permission.SEND_SMS);
   }
 
   public static boolean hasPermission(Context context, String permission) {
