@@ -308,6 +308,10 @@ public class ImsVideoTech implements VideoTech {
   @Override
   public void setCamera(@Nullable String cameraId) {
     savedCameraId = cameraId;
+    if (call.getVideoCall() == null) {
+      LogUtil.w("ImsVideoTech.setCamera", "video call no longer exist");
+      return;
+    }
     call.getVideoCall().setCamera(cameraId);
     call.getVideoCall().requestCameraCapabilities();
   }
