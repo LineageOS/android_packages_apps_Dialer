@@ -175,7 +175,7 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
 
             do {
               cp2InfoBuilder.addCp2ContactInfo(
-                  Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
+                  Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor, directoryId));
             } while (cursor.moveToNext());
           }
 
