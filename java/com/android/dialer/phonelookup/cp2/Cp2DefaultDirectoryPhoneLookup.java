@@ -24,6 +24,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DeletedContacts;
+import android.provider.ContactsContract.Directory;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.ArraySet;
@@ -134,7 +135,8 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
         return Cp2Info.getDefaultInstance();
       }
       while (cursor.moveToNext()) {
-        cp2ContactInfos.add(Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
+        cp2ContactInfos.add(
+            Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor, Directory.DEFAULT));
       }
     } finally {
       if (cursor != null) {
@@ -794,7 +796,8 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
                   cp2ContactInfosByNumber.put(validE164Number, cp2ContactInfos);
                 }
                 cp2ContactInfos.add(
-                    Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
+                    Cp2Projections.buildCp2ContactInfoFromCursor(
+                        appContext, cursor, Directory.DEFAULT));
               }
             }
           }
@@ -818,7 +821,8 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
             } else {
               while (cursor.moveToNext()) {
                 cp2ContactInfos.add(
-                    Cp2Projections.buildCp2ContactInfoFromCursor(appContext, cursor));
+                    Cp2Projections.buildCp2ContactInfoFromCursor(
+                        appContext, cursor, Directory.DEFAULT));
               }
             }
           }
