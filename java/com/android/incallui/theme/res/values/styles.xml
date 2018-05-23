@@ -62,9 +62,12 @@
     <item name="dialpad_text_color_secondary">?android:attr/textColorSecondaryInverse</item>
   </style>
 
-  <style name="AfterCallNotificationTheme" parent="@android:style/Theme.Material.Light.Dialog">
-    <!-- This colorAccent is to style checkboxes in the dialogs -->
-    <item name="colorAccent">?android:attr/colorPrimary</item>
+  <style name="AfterCallNotificationTheme" parent="Dialer.ThemeBase.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowAnimationStyle">@android:style/Animation</item>
   </style>
 
   <style name="AfterCallDialogStyle" parent="@android:style/Theme.Material.Light.Dialog">
