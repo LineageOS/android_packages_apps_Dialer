@@ -321,9 +321,7 @@ public class CallCardPresenter
       }
       this.primary.addListener(this);
 
-      primaryContactInfo =
-          ContactInfoCache.buildCacheEntryFromCall(
-              context, this.primary, this.primary.getState() == DialerCallState.INCOMING);
+      primaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(context, this.primary);
       updatePrimaryDisplayInfo();
       maybeStartSearch(this.primary, true);
     }
@@ -339,9 +337,7 @@ public class CallCardPresenter
         updateSecondaryDisplayInfo();
       } else {
         // secondary call has changed
-        secondaryContactInfo =
-            ContactInfoCache.buildCacheEntryFromCall(
-                context, this.secondary, this.secondary.getState() == DialerCallState.INCOMING);
+        secondaryContactInfo = ContactInfoCache.buildCacheEntryFromCall(context, this.secondary);
         updateSecondaryDisplayInfo();
         maybeStartSearch(this.secondary, false);
       }
