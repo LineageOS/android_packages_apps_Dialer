@@ -23,10 +23,10 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.provider.CallLog.Calls;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
-import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.theme.base.ThemeUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,16 +167,16 @@ public class CallTypeIconsView extends View {
   private Drawable getCallTypeDrawable(int callType) {
     Resources resources = useLargeIcons ? largeResouces : CallTypeIconsView.resources;
     switch (callType) {
-      case AppCompatConstants.CALLS_INCOMING_TYPE:
-      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
+      case Calls.INCOMING_TYPE:
+      case Calls.ANSWERED_EXTERNALLY_TYPE:
         return resources.incoming;
-      case AppCompatConstants.CALLS_OUTGOING_TYPE:
+      case Calls.OUTGOING_TYPE:
         return resources.outgoing;
-      case AppCompatConstants.CALLS_MISSED_TYPE:
+      case Calls.MISSED_TYPE:
         return resources.missed;
-      case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
+      case Calls.VOICEMAIL_TYPE:
         return resources.voicemail;
-      case AppCompatConstants.CALLS_BLOCKED_TYPE:
+      case Calls.BLOCKED_TYPE:
         return resources.blocked;
       default:
         // It is possible for users to end up with calls with unknown call types in their

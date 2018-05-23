@@ -37,7 +37,6 @@ import com.android.dialer.calllogutils.CallLogRowActions;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.calllogutils.PhotoInfoBuilder;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
@@ -201,19 +200,19 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private void setCallTypeIcon(CoalescedRow row) {
     @DrawableRes int resId;
     switch (row.getCallType()) {
-      case AppCompatConstants.CALLS_INCOMING_TYPE:
-      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
+      case Calls.INCOMING_TYPE:
+      case Calls.ANSWERED_EXTERNALLY_TYPE:
         resId = R.drawable.quantum_ic_call_received_vd_theme_24;
         break;
-      case AppCompatConstants.CALLS_OUTGOING_TYPE:
+      case Calls.OUTGOING_TYPE:
         resId = R.drawable.quantum_ic_call_made_vd_theme_24;
         break;
-      case AppCompatConstants.CALLS_MISSED_TYPE:
+      case Calls.MISSED_TYPE:
         resId = R.drawable.quantum_ic_call_missed_vd_theme_24;
         break;
-      case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
+      case Calls.VOICEMAIL_TYPE:
         throw new IllegalStateException("Voicemails not expected in call log");
-      case AppCompatConstants.CALLS_BLOCKED_TYPE:
+      case Calls.BLOCKED_TYPE:
         resId = R.drawable.quantum_ic_block_vd_theme_24;
         break;
       default:
