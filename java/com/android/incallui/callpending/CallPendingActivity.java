@@ -166,9 +166,9 @@ public class CallPendingActivity extends FragmentActivity
     }
 
     Drawable photo = null;
+    Uri photoUri = getPhotoUri();
     try {
       // TODO(calderwoodra) move to background thread
-      Uri photoUri = getPhotoUri();
       InputStream is = getContentResolver().openInputStream(photoUri);
       photo = Drawable.createFromStream(is, photoUri.toString());
     } catch (FileNotFoundException e) {
@@ -185,6 +185,7 @@ public class CallPendingActivity extends FragmentActivity
         .setNameIsNumber(name != null && name.equals(number))
         .setLabel(getPhoneLabel())
         .setPhoto(photo)
+        .setPhotoUri(photoUri)
         .setPhotoType(ContactPhotoType.CONTACT)
         .setIsSipCall(false)
         .setIsContactPhotoShown(true)
