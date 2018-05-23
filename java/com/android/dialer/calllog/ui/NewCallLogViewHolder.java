@@ -26,12 +26,16 @@ import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllog.ui.NewCallLogAdapter.PopCounts;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
+import com.android.dialer.calllogutils.CallLogEntryDescriptions;
 import com.android.dialer.calllogutils.CallLogEntryText;
 import com.android.dialer.calllogutils.CallLogRowActions;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
@@ -62,6 +66,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final ImageView assistedDialIcon;
   private final TextView phoneAccountView;
   private final ImageView menuButton;
+  private final View callLogEntryRootView;
 
   private final Clock clock;
   private final RealtimeRowProcessor realtimeRowProcessor;
@@ -78,6 +83,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
       PopCounts popCounts) {
     super(view);
     this.activity = activity;
+    callLogEntryRootView = view;
     contactPhotoView = view.findViewById(R.id.contact_photo_view);
     primaryTextView = view.findViewById(R.id.primary_text);
     callCountTextView = view.findViewById(R.id.call_count);
@@ -107,6 +113,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     // what information we have, rather than an empty card. For example, if CP2 information needs to
     // be queried on the fly, we can still show the phone number until the contact name loads.
     displayRow(row);
+    configA11yForRow(row);
 
     // Note: This leaks the view holder via the callback (which is an inner class), but this is OK
     // because we only create ~10 of them (and they'll be collected assuming all jobs finish).
@@ -140,6 +147,28 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     setPhoneAccounts(row);
     setOnClickListenerForRow(row);
     setOnClickListenerForMenuButon(row);
+  }
+
+  private void configA11yForRow(CoalescedRow row) {
+    callLogEntryRootView.setContentDescription(
+        CallLogEntryDescriptions.buildDescriptionForEntry(activity, clock, row));
+
+    // Inform a11y users that double tapping an entry now makes a call.
+    // This will instruct TalkBack to say "double tap to call" instead of
+    // "double tap to activate".
+    callLogEntryRootView.setAccessibilityDelegate(
+        new AccessibilityDelegate() {
+          @Override
+          public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+            super.onInitializeAccessibilityNodeInfo(host, info);
+            info.addAction(
+                new AccessibilityAction(
+                    AccessibilityNodeInfo.ACTION_CLICK,
+                    activity
+                        .getResources()
+                        .getString(R.string.a11y_new_call_log_entry_tap_action)));
+          }
+        });
   }
 
   private void setNumberCalls(CoalescedRow row) {
@@ -274,6 +303,12 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
 
   private void setOnClickListenerForMenuButon(CoalescedRow row) {
     menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(activity, row));
+    menuButton.setContentDescription(
+        activity
+            .getResources()
+            .getString(
+                R.string.a11y_new_call_log_entry_expand_menu,
+                CallLogEntryText.buildPrimaryText(activity, row)));
   }
 
   private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {

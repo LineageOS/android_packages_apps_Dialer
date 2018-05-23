@@ -16,12 +16,21 @@
   -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
   <!--
-    A string to describe available action for accessibility user.
-    It will be read as "expand menu for this call log entry".
+    A string informing a11y users that activating a call log entry will place a call.
+    Note: the word "call" here is a verb.
+    [CHAR LIMIT=NONE]
   -->
-  <string name="a11y_new_call_log_expand_menu_for_entry">
-    Expand menu for this call log entry
+  <string name="a11y_new_call_log_entry_tap_action">call</string>
+
+  <!--
+    A string describing the menu button of a call log entry for a11y users.
+    An example will be read as "expand call log menu for Jane Smith".
+    [CHAR LIMIT=NONE]
+  -->
+  <string name="a11y_new_call_log_entry_expand_menu">
+    Expand call log menu for <xliff:g example="Jane Smith" id="primaryTextForEntry">%1$s</xliff:g>
   </string>
 
   <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
