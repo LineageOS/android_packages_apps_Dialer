@@ -116,8 +116,8 @@ import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
-import com.android.dialer.theme.base.ThemeUtil;
-import com.android.dialer.theme.base.ThemeUtil.Theme;
+import com.android.dialer.theme.base.Theme;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
@@ -240,15 +240,16 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
   /** should be called before {@link AppCompatActivity#setContentView(int)}. */
   private void setTheme() {
-    @Theme int theme = ThemeUtil.getTheme();
+    @Theme.Type int theme = ThemeComponent.get(activity).theme().getTheme();
     switch (theme) {
-      case ThemeUtil.DARK:
+      case Theme.DARK:
         activity.setTheme(R.style.MainActivityTheme_Dark);
         break;
-      case ThemeUtil.LIGHT:
+      case Theme.LIGHT:
+      case Theme.LIGHT_M2:
         activity.setTheme(R.style.MainActivityTheme);
         break;
-      case ThemeUtil.UNKNOWN:
+      case Theme.UNKNOWN:
       default:
         throw new IllegalArgumentException("Invalid theme.");
     }

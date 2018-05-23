@@ -14,51 +14,39 @@
  * limitations under the License.
  */
 
-package com.android.dialer.theme.base;
+package com.android.dialer.theme.base.impl;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
 import android.support.annotation.StyleRes;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import com.android.dialer.common.Assert;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import com.android.dialer.theme.base.R;
+import com.android.dialer.theme.base.Theme;
+import javax.inject.Singleton;
 
 /** Utility for fetching */
 @SuppressWarnings("unused")
-public class ThemeUtil {
+@Singleton
+public class AospThemeImpl implements Theme {
 
-  /** IntDef for the different themes Dialer supports. */
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({UNKNOWN, LIGHT, DARK})
-  public @interface Theme {}
+  private int colorIcon = -1;
+  private int colorIconSecondary = -1;
+  private int colorPrimary = -1;
+  private int colorPrimaryDark = -1;
+  private int colorAccent = -1;
+  private int textColorPrimary = -1;
+  private int textColorSecondary = -1;
+  private int textColorPrimaryInverse = -1;
+  private int textColorHint = -1;
+  private int colorBackground = -1;
+  private int colorBackgroundFloating = -1;
+  private int colorTextOnUnthemedDarkBackground = -1;
+  private int colorIconOnUnthemedDarkBackground = -1;
 
-  public static final int UNKNOWN = 0;
-  public static final int LIGHT = 1;
-  public static final int DARK = 2;
-
-  private static @Theme int theme = UNKNOWN;
-
-  private static int colorIcon = -1;
-  private static int colorIconSecondary = -1;
-  private static int colorPrimary = -1;
-  private static int colorPrimaryDark = -1;
-  private static int colorAccent = -1;
-  private static int textColorPrimary = -1;
-  private static int textColorSecondary = -1;
-  private static int textColorPrimaryInverse = -1;
-  private static int textColorHint = -1;
-  private static int colorBackground = -1;
-  private static int colorBackgroundFloating = -1;
-  private static int colorTextOnUnthemedDarkBackground = -1;
-  private static int colorIconOnUnthemedDarkBackground = -1;
-
-  public static void initializeTheme(Context context) {
-    // TODO(a bug): add share prefs check to configure this
-    theme = LIGHT;
+  public AospThemeImpl(Context context) {
 
     context = context.getApplicationContext();
     context.setTheme(getApplicationThemeRes());
@@ -102,13 +90,15 @@ public class ThemeUtil {
    * Returns the {@link Theme} that the application is using. Activities should check this value if
    * their custom style needs to customize further based on the application theme.
    */
-  public static @Theme int getTheme() {
-    Assert.checkArgument(theme != UNKNOWN);
-    return theme;
+  @Override
+  public @Type int getTheme() {
+    // TODO(a bug): add share prefs check to configure this
+    return LIGHT;
   }
 
-  public static @StyleRes int getApplicationThemeRes() {
-    switch (theme) {
+  @Override
+  public @StyleRes int getApplicationThemeRes() {
+    switch (getTheme()) {
       case DARK:
         return R.style.Dialer_Dark_ThemeBase_NoActionBar;
       case LIGHT:
@@ -119,50 +109,66 @@ public class ThemeUtil {
     }
   }
 
-  public static Context getThemedContext(Context context) {
+  @Override
+  public Context getThemedContext(Context context) {
     return new ContextThemeWrapper(context, getApplicationThemeRes());
   }
 
-  public static LayoutInflater getThemedLayoutInflator(LayoutInflater inflater) {
+  @Override
+  public LayoutInflater getThemedLayoutInflator(LayoutInflater inflater) {
     return inflater.cloneInContext(getThemedContext(inflater.getContext()));
   }
 
-  public static @ColorInt int getColorIcon() {
+  @Override
+  public @ColorInt int getColorIcon() {
     Assert.checkArgument(colorIcon != -1);
     return colorIcon;
   }
 
-  public static @ColorInt int getColorIconSecondary() {
+  @Override
+  public @ColorInt int getColorIconSecondary() {
     Assert.checkArgument(colorIconSecondary != -1);
     return colorIconSecondary;
   }
 
-  public static @ColorInt int getColorPrimary() {
+  @Override
+  public @ColorInt int getColorPrimary() {
     Assert.checkArgument(colorPrimary != -1);
     return colorPrimary;
   }
 
-  public static @ColorInt int getColorAccent() {
+  @Override
+  public int getColorPrimaryDark() {
+    Assert.checkArgument(colorPrimary != -1);
+    return 0;
+  }
+
+  @Override
+  public @ColorInt int getColorAccent() {
     Assert.checkArgument(colorAccent != -1);
     return colorAccent;
   }
 
-  public static @ColorInt int getTextColorSecondary() {
+  @Override
+  public @ColorInt int getTextColorSecondary() {
     Assert.checkArgument(textColorSecondary != -1);
     return textColorSecondary;
   }
 
-  public static @ColorInt int getTextColorPrimary() {
+  @Override
+  public @ColorInt int getTextColorPrimary() {
     Assert.checkArgument(textColorPrimary != -1);
     return textColorPrimary;
   }
 
-  public static @ColorInt int getColorTextOnUnthemedDarkBackground() {
+  @Override
+  public @ColorInt int getColorTextOnUnthemedDarkBackground() {
     Assert.checkArgument(colorTextOnUnthemedDarkBackground != -1);
     return colorTextOnUnthemedDarkBackground;
   }
 
-  public static @ColorInt int getColorIconOnUnthemedDarkBackground() {
+  @Override
+  public @ColorInt int getColorIconOnUnthemedDarkBackground() {
     Assert.checkArgument(colorIconOnUnthemedDarkBackground != -1);
     return colorIconOnUnthemedDarkBackground;
   }

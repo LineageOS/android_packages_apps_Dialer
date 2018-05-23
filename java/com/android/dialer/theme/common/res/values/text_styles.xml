@@ -31,6 +31,12 @@
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 
+  <style name="Dialer.TextAppearance.SubHeader" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
   <style name="Dialer.TextAppearance.Primary" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">16sp</item>
@@ -55,32 +61,37 @@
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 
-  <style name="Dialer.TextAppearance.Header1.Ellipsize" parent="Dialer.TextAppearance.Header1">
+  <style name="Dialer.TextAppearance.Header1.Ellipsize">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
   </style>
 
-  <style name="Dialer.TextAppearance.Header2.Ellipsize" parent="Dialer.TextAppearance.Header2">
+  <style name="Dialer.TextAppearance.Header2.Ellipsize">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
   </style>
 
-  <style name="Dialer.TextAppearance.Primary.Ellipsize" parent="Dialer.TextAppearance.Primary">
+  <style name="Dialer.TextAppearance.SubHeader.Ellipsize">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
   </style>
 
-  <style name="Dialer.TextAppearance.Secondary.Ellipsize" parent="Dialer.TextAppearance.Secondary">
+  <style name="Dialer.TextAppearance.Primary.Ellipsize">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
   </style>
 
-  <style name="Dialer.TextAppearance.Secondary2.Ellipsize" parent="Dialer.TextAppearance.Secondary">
+  <style name="Dialer.TextAppearance.Secondary.Ellipsize">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
   </style>
 
-  <style name="Dialer.TextAppearance.OVERLINE.Ellipsize" parent="Dialer.TextAppearance.OVERLINE">
+  <style name="Dialer.TextAppearance.Secondary2.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.OVERLINE.Ellipsize">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
   </style>

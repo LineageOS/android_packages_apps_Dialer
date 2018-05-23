@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.configprovider.ConfigProviderBindings;
-import com.android.dialer.theme.base.ThemeUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 
 /** Navigation item in a bottom nav. */
 final class BottomNavItem extends LinearLayout {
@@ -54,7 +54,10 @@ final class BottomNavItem extends LinearLayout {
   @Override
   public void setSelected(boolean selected) {
     super.setSelected(selected);
-    int colorId = selected ? ThemeUtil.getColorPrimary() : ThemeUtil.getTextColorSecondary();
+    int colorId =
+        selected
+            ? ThemeComponent.get(getContext()).theme().getColorPrimary()
+            : ThemeComponent.get(getContext()).theme().getTextColorSecondary();
     image.setImageTintList(ColorStateList.valueOf(colorId));
     text.setTextColor(colorId);
   }

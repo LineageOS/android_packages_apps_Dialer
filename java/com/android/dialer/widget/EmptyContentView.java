@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.android.dialer.theme.base.ThemeUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 
 public class EmptyContentView extends LinearLayout implements View.OnClickListener {
 
@@ -67,7 +67,8 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     actionView = (TextView) findViewById(R.id.empty_list_view_action);
     actionView.setOnClickListener(this);
 
-    imageView.setImageTintList(ColorStateList.valueOf(ThemeUtil.getColorIconSecondary()));
+    imageView.setImageTintList(
+        ColorStateList.valueOf(ThemeComponent.get(context).theme().getColorIconSecondary()));
   }
 
   public void setDescription(int resourceId) {

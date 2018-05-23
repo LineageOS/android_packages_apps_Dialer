@@ -51,7 +51,7 @@ import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spannable.ContentWithLearnMoreSpanner;
 import com.android.dialer.storage.StorageComponent;
-import com.android.dialer.theme.base.ThemeUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
@@ -270,7 +270,9 @@ public class PhoneCallDetailsHelper
     views.voicemailTranscriptionBrandingView.setTypeface(typeface);
     views.callLocationAndDate.setTypeface(typeface);
     views.callLocationAndDate.setTextColor(
-        details.isRead ? ThemeUtil.getTextColorSecondary() : ThemeUtil.getTextColorPrimary());
+        details.isRead
+            ? ThemeComponent.get(context).theme().getTextColorSecondary()
+            : ThemeComponent.get(context).theme().getTextColorPrimary());
   }
 
   private void setNameView(PhoneCallDetailsViews views, PhoneCallDetails details) {
@@ -391,11 +393,11 @@ public class PhoneCallDetailsHelper
     textView.setMovementMethod(LinkMovementMethod.getInstance());
     Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
     if (positiveButton != null) {
-      positiveButton.setTextColor(ThemeUtil.getColorPrimary());
+      positiveButton.setTextColor(ThemeComponent.get(context).theme().getColorPrimary());
     }
     Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
     if (negativeButton != null) {
-      negativeButton.setTextColor(ThemeUtil.getTextColorSecondary());
+      negativeButton.setTextColor(ThemeComponent.get(context).theme().getTextColorSecondary());
     }
   }
 

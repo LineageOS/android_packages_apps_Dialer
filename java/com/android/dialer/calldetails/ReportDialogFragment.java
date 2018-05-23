@@ -37,6 +37,7 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
+import com.android.dialer.theme.base.ThemeComponent;
 
 /** Dialog for reporting an inaccurate caller id information. */
 public class ReportDialogFragment extends DialogFragment {
@@ -92,7 +93,7 @@ public class ReportDialogFragment extends DialogFragment {
   }
 
   private static void onShow(Context context, AlertDialog dialog) {
-    int buttonTextColor = context.getColor(R.color.dialer_theme_color);
+    int buttonTextColor = ThemeComponent.get(context).theme().getColorPrimary();
     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor);
     dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor);
   }

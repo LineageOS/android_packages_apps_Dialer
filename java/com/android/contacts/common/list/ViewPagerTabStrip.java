@@ -24,7 +24,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.android.contacts.common.R;
-import com.android.dialer.theme.base.ThemeUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 
 public class ViewPagerTabStrip extends LinearLayout {
 
@@ -43,8 +43,8 @@ public class ViewPagerTabStrip extends LinearLayout {
     final Resources res = context.getResources();
 
     mSelectedUnderlineThickness = res.getDimensionPixelSize(R.dimen.tab_selected_underline_height);
-    int underlineColor = ThemeUtil.getColorAccent();
-    int backgroundColor = ThemeUtil.getColorPrimary();
+    int underlineColor = ThemeComponent.get(context).theme().getColorAccent();
+    int backgroundColor = ThemeComponent.get(context).theme().getColorPrimary();
 
     mSelectedUnderlinePaint = new Paint();
     mSelectedUnderlinePaint.setColor(underlineColor);

@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.theme.base.ThemeUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.widget.ContactPhotoView;
 import java.util.List;
 
@@ -156,7 +156,8 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
         .setImageResource(module.getDrawableId());
     if (module.tintDrawable()) {
       ((ImageView) moduleView.findViewById(R.id.module_image))
-          .setImageTintList(ColorStateList.valueOf(ThemeUtil.getColorIcon()));
+          .setImageTintList(
+              ColorStateList.valueOf(ThemeComponent.get(getContext()).theme().getColorIcon()));
     }
     moduleView.setOnClickListener(this);
     moduleView.setTag(module);

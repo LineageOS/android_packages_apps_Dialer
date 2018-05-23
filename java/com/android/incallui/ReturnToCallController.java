@@ -35,6 +35,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderBindings;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
 import com.android.incallui.InCallPresenter.InCallState;
@@ -288,7 +289,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   private BubbleInfo generateBubbleInfo() {
     return BubbleInfo.builder()
-        .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
+        .setPrimaryColor(ThemeComponent.get(context).theme().getColorPrimary())
         .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
         .setStartingYPosition(
             InCallPresenter.getInstance().shouldStartInBubbleMode()
@@ -302,7 +303,7 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
 
   private BubbleInfo generateBubbleInfoForBackgroundCalling() {
     return BubbleInfo.builder()
-        .setPrimaryColor(context.getResources().getColor(R.color.dialer_theme_color, null))
+        .setPrimaryColor(ThemeComponent.get(context).theme().getColorPrimary())
         .setPrimaryIcon(Icon.createWithResource(context, R.drawable.on_going_call))
         .setStartingYPosition(context.getResources().getDisplayMetrics().heightPixels / 2)
         .setActions(generateActions())
