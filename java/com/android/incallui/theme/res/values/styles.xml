@@ -72,6 +72,7 @@
       @dimen/incall_end_call_spacing
     </item>
     <item name="dialpad_elevation">10dp</item>
+    <item name="dialpad_text_color">?android:attr/textColorPrimaryInverse</item>
     <item name="dialpad_text_color_secondary">?android:attr/textColorSecondaryInverse</item>
   </style>
 
