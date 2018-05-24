@@ -189,7 +189,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   }
 
   private void setPhoto(CoalescedRow row) {
-    contactPhotoView.setPhoto(PhotoInfoBuilder.fromCoalescedRow(row).build());
+    contactPhotoView.setPhoto(PhotoInfoBuilder.fromCoalescedRow(activity, row).build());
   }
 
   private void setFeatureIcons(CoalescedRow row) {
