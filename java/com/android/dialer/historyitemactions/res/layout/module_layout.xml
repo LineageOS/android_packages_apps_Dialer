@@ -22,12 +22,14 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground">
 
+  <!-- The icon is not important for a11y as it is not clickable. -->
   <ImageView
       android:id="@+id/module_image"
       android:layout_width="@dimen/contact_actions_image_size"
       android:layout_height="@dimen/contact_actions_image_size"
       android:layout_marginStart="@dimen/contact_actions_image_margin"
       android:layout_marginEnd="@dimen/contact_actions_image_margin"
+      android:importantForAccessibility="no"
       android:scaleType="center"/>
 
   <TextView
