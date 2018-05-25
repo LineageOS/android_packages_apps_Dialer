@@ -53,6 +53,13 @@
       android:layout_height="match_parent"
       android:fitsSystemWindows="true">
 
+    <FrameLayout
+        android:id="@+id/answer_method_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"/>
+
     <TextView
         android:id="@+id/videocall_video_off"
         android:layout_width="wrap_content"
@@ -74,8 +81,8 @@
         android:layout_marginTop="24dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:gravity="top|center_horizontal"
         android:focusable="true"
+        android:gravity="top|center_horizontal"
         android:orientation="vertical">
 
       <include
@@ -114,19 +121,19 @@
       <!-- TODO(a bug): textColorPrimary or textColorPrimaryInverse? -->
       <TextView
           android:id="@+id/incall_important_call_badge"
+          android:textStyle="bold"
           android:layout_width="wrap_content"
           android:layout_height="48dp"
           android:layout_marginTop="4dp"
           android:layout_marginBottom="@dimen/answer_importance_margin_bottom"
-          android:gravity="center"
+          android:background="@drawable/urgent_call_background"
           android:elevation="@dimen/answer_data_elevation"
+          android:gravity="center"
           android:maxLines="1"
           android:text="@string/call_incoming_important"
           android:textAllCaps="true"
-          android:textSize="14sp"
-          android:textStyle="bold"
           android:textColor="?android:attr/colorBackground"
-          android:background="@drawable/urgent_call_background"/>
+          android:textSize="14sp"/>
 
       <FrameLayout
           android:id="@+id/incall_location_holder"
@@ -144,7 +151,34 @@
           android:layout_height="0dp"
           android:layout_weight="1"
           android:clipChildren="false"
-          android:clipToPadding="false"/>
+          android:clipToPadding="false">
+        <LinearLayout
+            android:id="@+id/incall_data_container_chip_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/shape_chip_drawable"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:visibility="gone">
+          <ImageView
+              android:id="@+id/incall_data_container_chip_icon"
+              android:layout_width="20dp"
+              android:layout_height="20dp"
+              android:src="@drawable/quantum_ic_rtt_vd_theme_24"
+              android:tint="#1A73E8"/>
+          <TextView
+              android:id="@+id/incall_data_container_chip_text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:layout_marginEnd="8dp"
+              android:fontFamily="sans-serif-medium"
+              android:text="@string/speakeasy_secondary_button_hint"
+              android:textColor="@color/dialer_primary_text_color"
+              android:textSize="14sp"/>
+        </LinearLayout>
+      </FrameLayout>
 
       <!-- Space holder for answer method. This is used to get better scaling to make room for
       incall_data_container on different screen size. -->
@@ -153,14 +187,6 @@
           android:layout_height="220dp"/>
 
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/answer_method_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"/>
-
   </FrameLayout>
 
   <com.android.incallui.answer.impl.affordance.SwipeButtonView
