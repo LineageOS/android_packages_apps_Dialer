@@ -71,7 +71,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.theme.base \
 	com.android.dialer.theme.base.impl \
 	com.android.dialer.theme.common \
-	com.android.dialer.theme.private \
+	com.android.dialer.theme.hidden \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
 	com.android.dialer.voicemail.listui.error \
