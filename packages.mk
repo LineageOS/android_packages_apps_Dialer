@@ -93,7 +93,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.disconnectdialog \
 	com.android.incallui.hold \
 	com.android.incallui.incall.impl \
-	com.android.incallui.maps.impl \
 	com.android.incallui.rtt.impl \
 	com.android.incallui.rtt.protocol \
   com.android.incallui.speakeasy \
