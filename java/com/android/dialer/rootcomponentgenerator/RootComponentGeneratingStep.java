@@ -26,6 +26,7 @@ import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.IncludeInDialerRoot;
 import com.android.dialer.inject.InstallIn;
 import com.android.dialer.inject.RootComponentGeneratorMetadata;
+import com.android.dialer.inject.testing.GenerateTestDaggerApp;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.common.MoreElements;
 import com.google.common.base.Optional;
@@ -35,6 +36,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.SetMultimap;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import dagger.Component;
 import java.lang.annotation.Annotation;
@@ -51,10 +53,35 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
-/** Generates root component for a java type annotated with {@link DialerRootComponent}. */
+/**
+ * Generates root component for a java type annotated with {@link DialerRootComponent}.
+ *
+ * <p>If users use {@link GenerateTestDaggerApp} along with RootComponentGenerator, there's an
+ * optional method that they can use to inject instance in the test.
+ *
+ * <p>Example:
+ *
+ * <p>
+ *
+ * <pre>
+ * <code>
+ * @Inject SomeThing someThing;
+ * @Before
+ * public void setUp() {
+ * ...
+ * TestApplication application = (TestApplication) RuntimeEnvironment.application;
+ * TestComponent component = (TestComponent) application.component();
+ * component.inject(this);
+ * ...
+ * }
+ * </code>
+ * </pre>
+ */
 final class RootComponentGeneratingStep implements ProcessingStep {
 
   private final ProcessingEnvironment processingEnv;
+
+  private TypeElement annotatedTest;
 
   public RootComponentGeneratingStep(ProcessingEnvironment processingEnv) {
     this.processingEnv = processingEnv;
@@ -62,12 +89,19 @@ final class RootComponentGeneratingStep implements ProcessingStep {
 
   @Override
   public Set<? extends Class<? extends Annotation>> annotations() {
-    return ImmutableSet.of(DialerRootComponent.class, InstallIn.class, IncludeInDialerRoot.class);
+    return ImmutableSet.of(
+        DialerRootComponent.class,
+        InstallIn.class,
+        IncludeInDialerRoot.class,
+        GenerateTestDaggerApp.class);
   }
 
   @Override
   public Set<? extends Element> process(
       SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
+    for (Element element : elementsByAnnotation.get(GenerateTestDaggerApp.class)) {
+      annotatedTest = MoreElements.asType(element);
+    }
     for (Element element : elementsByAnnotation.get(DialerRootComponent.class)) {
       // defer root components to the next round in case where the current build target contains
       // elements annotated with @InstallIn. Annotation processor cannot detect metadata files
@@ -110,6 +144,9 @@ final class RootComponentGeneratingStep implements ProcessingStep {
       componentAnnotation.addMember("modules", "$T.class", annotatedElement.asType());
     }
     rootComponentClassBuilder.addAnnotation(componentAnnotation.build());
+    if (annotatedTest != null) {
+      rootComponentClassBuilder.addMethod(generateInjectMethod());
+    }
     TypeSpec rootComponentClass = rootComponentClassBuilder.build();
     RootComponentUtils.writeJavaFile(
         processingEnv, ClassName.get(rootElement).packageName(), rootComponentClass);
@@ -161,6 +198,14 @@ final class RootComponentGeneratingStep implements ProcessingStep {
         metadataProcessor.process(annotatedElement);
       }
     }
+  }
+
+  private MethodSpec generateInjectMethod() {
+    return MethodSpec.methodBuilder("inject")
+        .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
+        .returns(void.class)
+        .addParameter(ClassName.get(annotatedTest), "test")
+        .build();
   }
 
   private interface MetadataProcessor {
