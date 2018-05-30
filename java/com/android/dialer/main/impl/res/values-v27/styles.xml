@@ -24,4 +24,13 @@
     <item name="android:navigationBarColor">?android:attr/colorBackgroundFloating</item>
     <item name="android:navigationBarDividerColor">#E0E0E0</item>
   </style>
+
+  <!-- Used on sdk 27 and above -->
+  <!-- TODO(a bug): refactor into dialer/theme -->
+  <style name="MainActivityTheme.Dark" parent="MainActivityThemeBase.Dark">
+    <!-- Used to change the navigation bar color -->
+    <item name="android:windowLightNavigationBar">true</item>
+    <item name="android:navigationBarColor">?android:attr/colorBackgroundFloating</item>
+    <item name="android:navigationBarDividerColor">#E0E0E0</item>
+  </style>
 </resources>

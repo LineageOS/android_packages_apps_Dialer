@@ -18,9 +18,6 @@ package com.android.dialer.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.content.res.Resources.Theme;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -28,6 +25,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.android.dialer.theme.base.ThemeComponent;
 
 public class EmptyContentView extends LinearLayout implements View.OnClickListener {
 
@@ -68,6 +66,9 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
     descriptionView = (TextView) findViewById(R.id.empty_list_view_message);
     actionView = (TextView) findViewById(R.id.empty_list_view_action);
     actionView.setOnClickListener(this);
+
+    imageView.setImageTintList(
+        ColorStateList.valueOf(ThemeComponent.get(context).theme().getColorIconSecondary()));
   }
 
   public void setDescription(int resourceId) {
@@ -88,11 +89,6 @@ public class EmptyContentView extends LinearLayout implements View.OnClickListen
       imageView.setImageResource(resourceId);
       imageView.setVisibility(View.VISIBLE);
     }
-  }
-
-  public void setImageTint(@ColorRes int color, @Nullable Theme theme) {
-    imageView.setImageTintList(
-        (ColorStateList.valueOf(getContext().getResources().getColor(color, theme))));
   }
 
   public void setActionLabel(@StringRes int resourceId) {

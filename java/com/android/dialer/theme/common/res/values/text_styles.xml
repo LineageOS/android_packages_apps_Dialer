@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <!--
+   - These are official UX approved text styles and all TextViews should inherit from one of these.
+   - If you think you don't see the style you need, double check with your UX designer.
+   -->
+  <style name="Dialer.TextAppearance.Header1" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">18sp</item>
+    <item name="android:fontFamily">sans-serif-regular</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Header2" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.SubHeader" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Primary" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:fontFamily">sans-serif-regular</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Secondary" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:fontFamily">sans-serif-regular</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Secondary2" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:fontFamily">sans-serif-regular</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.OVERLINE" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Header1.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Header2.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.SubHeader.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Primary.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Secondary.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.Secondary2.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+
+  <style name="Dialer.TextAppearance.OVERLINE.Ellipsize">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+  </style>
+</resources>

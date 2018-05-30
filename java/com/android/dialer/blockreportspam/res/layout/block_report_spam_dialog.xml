@@ -16,7 +16,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  android:padding="25dp"
+  android:padding="24dp"
   android:orientation="vertical">
   <TextView
     android:id="@+id/block_details"
@@ -24,13 +24,13 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:text="@string/block_report_number_alert_details"
-    android:textColor="@color/block_report_spam_primary_text_color"
-    android:textSize="@dimen/blocked_report_spam_primary_text_size"/>
+    style="@style/Dialer.TextAppearance.Secondary"/>
 
   <CheckBox
     android:id="@+id/report_number_as_spam_action"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/checkbox_report_as_spam_action"
-    android:textSize="@dimen/blocked_report_spam_primary_text_size"/>
+    android:textSize="@dimen/blocked_report_spam_primary_text_size"
+    style="@style/DialerCheckboxStyle"/>
 </LinearLayout>

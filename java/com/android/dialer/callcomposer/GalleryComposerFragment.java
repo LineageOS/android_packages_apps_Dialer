@@ -29,7 +29,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -44,6 +43,7 @@ import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +94,7 @@ public class GalleryComposerFragment extends CallComposerFragment
       allowPermission.setOnClickListener(this);
       permissionText.setText(R.string.gallery_permission_text);
       permissionImage.setImageResource(R.drawable.quantum_ic_photo_white_48);
-      permissionImage.setColorFilter(
-          ContextCompat.getColor(getContext(), R.color.dialer_theme_color));
+      permissionImage.setColorFilter(ThemeComponent.get(getContext()).theme().getColorPrimary());
       permissionView.setVisibility(View.VISIBLE);
     } else {
       if (bundle != null) {

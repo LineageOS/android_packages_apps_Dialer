@@ -34,7 +34,6 @@ import com.android.dialer.calllogutils.CallLogDurations;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.glidephotomanager.PhotoInfo;
@@ -217,20 +216,20 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private static @ColorInt int getColorForCallType(Context context, int callType) {
     switch (callType) {
-      case AppCompatConstants.CALLS_OUTGOING_TYPE:
-      case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
-      case AppCompatConstants.CALLS_BLOCKED_TYPE:
-      case AppCompatConstants.CALLS_INCOMING_TYPE:
-      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
-      case AppCompatConstants.CALLS_REJECTED_TYPE:
+      case Calls.OUTGOING_TYPE:
+      case Calls.VOICEMAIL_TYPE:
+      case Calls.BLOCKED_TYPE:
+      case Calls.INCOMING_TYPE:
+      case Calls.ANSWERED_EXTERNALLY_TYPE:
+      case Calls.REJECTED_TYPE:
         return ContextCompat.getColor(context, R.color.dialer_secondary_text_color);
-      case AppCompatConstants.CALLS_MISSED_TYPE:
+      case Calls.MISSED_TYPE:
       default:
         // It is possible for users to end up with calls with unknown call types in their
         // call history, possibly due to 3rd party call log implementations (e.g. to
         // distinguish between rejected and missed calls). Instead of crashing, just
         // assume that all unknown call types are missed calls.
-        return ContextCompat.getColor(context, R.color.missed_call);
+        return ContextCompat.getColor(context, R.color.dialer_red);
     }
   }
 }

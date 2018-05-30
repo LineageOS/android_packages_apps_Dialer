@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <!-- Deprecated: ActionBars are clunky and Toolbar (along with Dialer.ThemeBase.NoActionBar)
+      should be used in favor-->
+  <style name="Dialer.ThemeBase.ActionBar">
+    <!-- These are used to style all actionbars in Dialer. These aren't needed in Dialer.ThemeBase.NoActionBar -->
+    <item name="actionBarStyle">@style/DialerActionBarBaseStyle</item>
+    <item name="actionBarSize">@dimen/action_bar_height</item>
+  </style>
+
+  <style name="Dialer.ThemeBase.NoActionBar">
+    <!-- Copied from Theme.AppCompat.Light.NoActionBar. We can remove this and update the Dialer
+        base style once none of our activities depend on ActionBar anymore. -->
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <!-- Activities and Applications should inherit from one of the themes above. -->
+  <style name="Dialer.ThemeBase">
+    <!-- These values should be used to color all backgrounds. -->
+    <item name="android:colorBackground">@color/dialer_background_light</item>
+    <item name="android:colorBackgroundFloating">@color/dialer_background_floating_light</item>
+
+    <!-- These values should be used to set text color. -->
+    <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
+    <item name="android:textColorSecondary">@color/dialer_secondary_text_color</item>
+    <item name="android:textColorPrimaryInverse">@color/dialer_primary_text_color_inverse</item>
+    <item name="android:textColorSecondaryInverse">@color/dialer_secondary_text_color_inverse</item>
+    <item name="android:textColorHint">@color/dialer_text_hint_color</item>
+
+    <!-- These will be automatically used to color most Appcompat/Material widgets. -->
+    <item name="android:colorPrimary">@color/dialer_theme_color</item>
+    <item name="colorPrimary">@color/dialer_theme_color</item>
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="android:colorAccent">@color/dialer_secondary_color</item>
+    <item name="colorAccent">@color/dialer_secondary_color</item>
+
+    <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
+    <item name="colorControlActivated">?android:attr/colorPrimary</item>
+
+    <!-- Dialer specific attributes. -->
+    <item name="colorIcon">@color/dialer_secondary_text_color</item>
+    <item name="colorIconSecondary">@color/dialer_icon_color_secondary</item>
+    <item name="colorTextOnUnthemedDarkBackground">@color/dialer_primary_text_color_inverse</item>
+    <item name="colorIconOnUnthemedDarkBackground">@color/dialer_icon_color_white</item>
+  </style>
+
+  <!-- TODO(a bug): investigate making this style's parent Dialer.ThemeBase.NoActionBar -->
+  <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowAnimationStyle">@android:style/Animation</item>
+  </style>
+
+  <!-- Deprecated: Use Toolbar instead of ActionBar. -->
+  <!-- Used to style all Dialer's action bars. Every actionbar is awarded this for free if the parent
+     activity's theme extends from Dialer.ThemeBase.ActionBar or doesn't specify a theme. -->
+  <style name="DialerActionBarBaseStyle"
+      parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <item name="android:background">?android:attr/colorPrimary</item>
+    <item name="background">?android:attr/colorPrimary</item>
+  </style>
+</resources>

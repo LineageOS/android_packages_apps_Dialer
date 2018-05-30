@@ -16,7 +16,6 @@
 
 package com.android.incallui.bindings;
 
-import android.graphics.Bitmap;
 import com.android.dialer.logging.ContactLookupResult;
 
 /** Provides phone number lookup services. */
@@ -27,13 +26,8 @@ public interface PhoneNumberService {
    *
    * @param phoneNumber The phone number to lookup.
    * @param listener The listener to notify when the phone number lookup is complete.
-   * @param imageListener The listener to notify when the image lookup is complete.
    */
-  void getPhoneNumberInfo(
-      String phoneNumber,
-      NumberLookupListener listener,
-      ImageLookupListener imageListener,
-      boolean isIncoming);
+  void getPhoneNumberInfo(String phoneNumber, NumberLookupListener listener);
 
   interface NumberLookupListener {
 
@@ -43,16 +37,6 @@ public interface PhoneNumberService {
      * @param info The looked up information. Or (@literal null} if there are no results.
      */
     void onPhoneNumberInfoComplete(PhoneNumberInfo info);
-  }
-
-  interface ImageLookupListener {
-
-    /**
-     * Callback when a image has been fetched.
-     *
-     * @param bitmap The fetched image.
-     */
-    void onImageFetchComplete(Bitmap bitmap);
   }
 
   interface PhoneNumberInfo {

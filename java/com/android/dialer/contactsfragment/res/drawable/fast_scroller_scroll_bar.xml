@@ -24,7 +24,7 @@
   </item>
   <item>
     <shape android:shape="rectangle">
-      <solid android:color="@color/dialer_secondary_text_color"/>
+      <solid android:color="?android:attr/textColorSecondary"/>
       <size android:height="32dp" android:width="4dp"/>
       <corners android:radius="2dp"/>
     </shape>

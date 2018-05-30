@@ -29,7 +29,7 @@
   <View
       android:layout_width="match_parent"
       android:layout_height="1dp"
-      android:background="@color/divider_line_color"/>
+      android:background="@color/dialer_divider_line_color"/>
   <com.android.incallui.rtt.impl.RttCheckableButton
       android:id="@+id/audioroute_bluetooth"
       style="@style/RttButton"

@@ -88,7 +88,7 @@ final class Modules {
       Context context, CoalescedRow row) {
     return CallDetailsHeaderInfo.newBuilder()
         .setDialerPhoneNumber(row.getNumber())
-        .setPhotoInfo(PhotoInfoBuilder.fromCoalescedRow(row))
+        .setPhotoInfo(PhotoInfoBuilder.fromCoalescedRow(context, row))
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
         .setSecondaryText(
             CallLogEntryText.buildSecondaryTextForBottomSheet(context, row).toString())

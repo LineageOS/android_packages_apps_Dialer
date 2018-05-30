@@ -36,16 +36,6 @@
     <item name="dialpad_text_color">?android:attr/textColorSecondary</item>
     <item name="dialpad_text_color_primary">?android:attr/colorPrimary</item>
     <item name="dialpad_text_color_secondary">?android:attr/textColorSecondary</item>
-    <item name="dialpad_icon_tint">?colorIcon</item>
-    <item name="dialpad_voicemail_tint">?colorIcon</item>
     <item name="dialpad_background">?android:attr/colorBackgroundFloating</item>
-  </style>
-
-  <style name="Dialpad.Dark">
-    <item name="dialpad_text_color">@android:color/white</item>
-    <item name="dialpad_text_color_primary">@android:color/white</item>
-    <item name="dialpad_text_color_secondary">#ffd4d6d7</item>
-    <item name="dialpad_icon_tint">@android:color/white</item>
-    <item name="dialpad_background">#00000000</item>
   </style>
 </resources>

@@ -138,8 +138,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     return cache;
   }
 
-  static ContactCacheEntry buildCacheEntryFromCall(
-      Context context, DialerCall call, boolean isIncoming) {
+  static ContactCacheEntry buildCacheEntryFromCall(Context context, DialerCall call) {
     final ContactCacheEntry entry = new ContactCacheEntry();
 
     // TODO: get rid of caller info.
@@ -837,7 +836,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         final PhoneNumberServiceListener listener =
             new PhoneNumberServiceListener(callId, queryToken.queryId);
         cacheEntry.hasPendingQuery = true;
-        phoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener, listener, isIncoming);
+        phoneNumberService.getPhoneNumberInfo(cacheEntry.number, listener);
       }
       sendInfoNotifications(callId, cacheEntry);
       if (!cacheEntry.hasPendingQuery) {
@@ -855,8 +854,7 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
     }
   }
 
-  class PhoneNumberServiceListener
-      implements PhoneNumberService.NumberLookupListener, PhoneNumberService.ImageLookupListener {
+  class PhoneNumberServiceListener implements PhoneNumberService.NumberLookupListener {
 
     private final String callId;
     private final int queryIdOfRemoteLookup;
@@ -923,17 +921,6 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
         // We're done, so clear callbacks
         clearCallbacks(callId);
       }
-    }
-
-    @Override
-    public void onImageFetchComplete(Bitmap bitmap) {
-      Log.d(TAG, "PhoneNumberServiceListener.onImageFetchComplete");
-      if (!isWaitingForThisQuery(callId, queryIdOfRemoteLookup)) {
-        return;
-      }
-      CallerInfoQueryToken queryToken = new CallerInfoQueryToken(queryIdOfRemoteLookup, callId);
-      loadImage(null, bitmap, queryToken);
-      onImageLoadComplete(TOKEN_UPDATE_PHOTO_FOR_CALL_STATE, null, bitmap, queryToken);
     }
   }
 

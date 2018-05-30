@@ -57,7 +57,7 @@
         android:layout_gravity="end"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:backgroundTint="@android:color/white"
+        android:backgroundTint="?android:attr/colorBackgroundFloating"
         android:fontFamily="sans-serif-medium"
         android:stateListAnimator="@null"
         android:text="@string/rtt_button_decline_request"

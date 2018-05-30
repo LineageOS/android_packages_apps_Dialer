@@ -24,7 +24,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:clipToPadding="false"
-      android:background="?android:attr/colorBackgroundFloating"
+      android:background="?android:attr/colorBackground"
       android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"/>
 
   <com.android.dialer.widget.EmptyContentView

@@ -23,6 +23,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.widget.TextView;
+import com.android.dialer.theme.base.ThemeComponent;
 
 /** Toolbar widget for Dialer. */
 public class DialerToolbar extends Toolbar {
@@ -37,7 +38,7 @@ public class DialerToolbar extends Toolbar {
     subtitle = (TextView) findViewById(R.id.subtitle);
 
     setElevation(getResources().getDimensionPixelSize(R.dimen.toolbar_elevation));
-    setBackgroundColor(getResources().getColor(R.color.dialer_theme_color));
+    setBackgroundColor(ThemeComponent.get(context).theme().getColorPrimary());
     setNavigationIcon(R.drawable.quantum_ic_close_white_24);
     setNavigationContentDescription(R.string.toolbar_close);
     setNavigationOnClickListener(v -> ((Activity) context).finish());

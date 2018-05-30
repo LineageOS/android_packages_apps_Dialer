@@ -24,7 +24,7 @@
       <size
         android:height="44dp"
         android:width="44dp"/>
-      <solid android:color="@color/shortcut_add_contact_background_color"/>
+      <solid android:color="?android:attr/colorBackgroundFloating"/>
     </shape>
   </item>
 
@@ -34,6 +34,6 @@
     android:right="14dp"
     android:top="12dp">
       <bitmap android:src="@drawable/quantum_ic_person_add_white_24"
-              android:tint="@color/shortcut_add_contact_foreground_color"/>
+              android:tint="?android:attr/colorPrimary"/>
   </item>
 </layer-list>

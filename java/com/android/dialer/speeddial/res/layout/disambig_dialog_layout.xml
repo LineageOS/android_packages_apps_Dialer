@@ -32,7 +32,7 @@
       android:elevation="1dp"
       android:text="@string/speed_dial_disambig_dialog_title"
       android:background="?android:attr/colorBackgroundFloating"
-      style="@style/Dialer.TextAppearance.Header"/>
+      style="@style/Dialer.TextAppearance.Header2"/>
 
   <com.android.dialer.widget.MaxHeightScrollView
       android:id="@+id/disambig_scrollview"

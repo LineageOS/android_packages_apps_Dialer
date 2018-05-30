@@ -15,67 +15,12 @@
 -->
 
 <resources>
-  <color name="dialer_flat_button_text_color">?android:attr/colorPrimary</color>
-
-  <color name="setting_background_color">#ffffff</color>
-
-  <!-- 54% black -->
-  <color name="call_log_icon_tint">#8a000000</color>
-  <!-- 87% black -->
-  <color name="call_log_primary_color">#de000000</color>
-  <!-- 54% black -->
-  <color name="call_log_detail_color">#8a000000</color>
-  <!-- 87% black -->
-  <color name="call_log_voicemail_transcript_color">#de000000</color>
-  <!-- 54% black -->
-  <color name="call_log_voicemail_transcript_branding_color">#8a000000</color>
-  <!-- 100% blue -->
-  <color name="call_log_voicemail_transcript_rating_color">#ff2a56c6</color>
-  <!-- 70% black -->
-  <color name="call_log_action_color">#b3000000</color>
-  <!-- 54% black -->
-  <color name="call_log_day_group_heading_color">#8a000000</color>
-  <!-- 87% black-->
-  <color name="call_log_unread_text_color">#de000000</color>
-  <color name="call_log_list_item_primary_action_icon_tint">@color/call_log_icon_tint</color>
-
-  <color name="voicemail_icon_tint">@color/call_log_icon_tint</color>
   <color name="voicemail_icon_disabled_tint">#80000000</color>
-  <color name="voicemail_playpause_icon_tint">@color/voicemail_icon_tint</color>
-  <!-- Colour of voicemail progress bar to the right of position indicator. -->
-  <color name="voicemail_playback_seek_bar_yet_to_play">#cecece</color>
-  <!-- Colour of voicemail progress bar to the left of position indicator. -->
-  <color name="voicemail_playback_seek_bar_already_played">?android:attr/colorPrimary</color>
-
-  <!-- Background color for search results and call details -->
-  <color name="background_dialer_results">#f9f9f9</color>
-
-  <!-- Color of the contact name in favorite tiles -->
-  <color name="contact_tile_name_color">#ffffff</color>
-
-  <color name="contact_list_name_text_color">@color/dialer_primary_text_color</color>
-
-  <color name="remove_text_color">#ffffff</color>
+  <color name="voicemail_playpause_icon_tint">?colorIcon</color>
 
   <!-- Text color for the "Remove" text when a contact is dragged on top of the remove view -->
   <color name="remove_highlighted_text_color">#FF3F3B</color>
 
-  <color name="dialer_dialpad_touch_tint">@color/dialer_theme_color_20pct</color>
-
-  <color name="call_log_action_divider">#eeeeee</color>
-  <color name="divider_line_color">#D8D8D8</color>
-
   <!--  Colors for blocked numbers list -->
-  <color name="blocked_number_primary_text_color">@color/dialer_primary_text_color</color>
-  <color name="blocked_number_secondary_text_color">@color/dialer_secondary_text_color</color>
-  <color name="blocked_number_icon_tint">#616161</color>
-  <color name="blocked_number_background">#FFFFFF</color>
   <color name="blocked_number_block_color">#F44336</color>
-  <color name="blocked_number_header_color">?android:attr/colorPrimary</color>
-  <color name="blocked_number_disabled_emergency_background_color">#E0E0E0</color>
-  <color name="add_blocked_number_icon_color">#bdbdbd</color>
-
-  <color name="voicemail_donation_promo_positive_button_text_color">#FF2A56C6</color>
-  <color name="voicemail_donation_promo_negative_button_text_color">#FF757575</color>
-
 </resources>

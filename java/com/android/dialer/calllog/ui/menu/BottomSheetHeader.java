@@ -28,7 +28,7 @@ final class BottomSheetHeader {
   static HistoryItemBottomSheetHeaderInfo fromRow(Context context, CoalescedRow row) {
     return HistoryItemBottomSheetHeaderInfo.newBuilder()
         .setNumber(row.getNumber())
-        .setPhotoInfo(PhotoInfoBuilder.fromCoalescedRow(row))
+        .setPhotoInfo(PhotoInfoBuilder.fromCoalescedRow(context, row))
         .setPrimaryText(CallLogEntryText.buildPrimaryText(context, row).toString())
         .setSecondaryText(
             CallLogEntryText.buildSecondaryTextForBottomSheet(context, row).toString())

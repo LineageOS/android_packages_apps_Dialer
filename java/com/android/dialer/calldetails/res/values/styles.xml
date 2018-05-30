@@ -15,7 +15,7 @@
   ~ limitations under the License
   -->
 <resources>
-  <style name="CallDetailsActionItemStyle">
+  <style name="CallDetailsActionItemStyle" parent="Dialer.TextAppearance.Secondary.Ellipsize">
     <item name="android:foreground">?android:attr/selectableItemBackground</item>
     <item name="android:clickable">true</item>
     <item name="android:drawablePadding">28dp</item>
@@ -24,8 +24,6 @@
     <item name="android:paddingEnd">28dp</item>
     <item name="android:paddingTop">16dp</item>
     <item name="android:paddingBottom">16dp</item>
-    <item name="android:textColor">#8A000000</item>
-    <item name="android:textSize">14sp</item>
   </style>
 
   <style name="RttTranscriptLink">
@@ -34,6 +32,7 @@
     <item name="android:textAllCaps">true</item>
     <item name="textAllCaps">true</item>
   </style>
+
   <style name="RttTranscriptMessage" parent="Dialer.TextAppearance.Secondary">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textAllCaps">false</item>

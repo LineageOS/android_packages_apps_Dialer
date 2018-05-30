@@ -74,7 +74,7 @@
             android:fontFamily="sans-serif-medium"
             android:singleLine="true"
             android:textAlignment="viewStart"
-            android:textColor="@color/contact_tile_name_color"
+            android:textColor="?colorTextOnUnthemedDarkBackground"
             android:textSize="15sp"/>
         <ImageView
             android:id="@+id/contact_star_icon"
@@ -95,7 +95,7 @@
           android:gravity="center_vertical"
           android:singleLine="true"
           android:textAlignment="viewStart"
-          android:textColor="@color/contact_tile_name_color"
+          android:textColor="?colorTextOnUnthemedDarkBackground"
           android:textSize="11sp"/>
     </LinearLayout>
 
@@ -103,7 +103,7 @@
         android:id="@+id/contact_tile_push_state"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/item_background_material_dark"
+        android:background="?android:selectableItemBackground"
         android:importantForAccessibility="no"/>
 
     <!-- Wrap the ImageButton in a layout with a transparent background so the ripple has something to draw on -->

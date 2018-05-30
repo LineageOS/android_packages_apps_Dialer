@@ -20,6 +20,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
@@ -35,10 +36,15 @@ import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import java.util.List;
 import javax.inject.Inject;
 
 /** Implementation of {@link GlidePhotoManager} */
 public class GlidePhotoManagerImpl implements GlidePhotoManager {
+
+  private static final int LOOKUP_URI_PATH_SEGMENTS =
+      Contacts.CONTENT_LOOKUP_URI.getPathSegments().size();
+
   private final Context appContext;
 
   @Inject
@@ -126,7 +132,7 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
               : photoInfo.getName();
     } else {
       displayName = photoInfo.getName();
-      identifier = photoInfo.getLookupUri();
+      identifier = getIdentifier(photoInfo.getLookupUri());
     }
     letterTileDrawable.setCanonicalDialerLetterTileDetails(
         displayName,
@@ -144,5 +150,28 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
   @Nullable
   private static Uri parseUri(@Nullable String uri) {
     return TextUtils.isEmpty(uri) ? null : Uri.parse(uri);
+  }
+
+  /**
+   * Return the "lookup key" inside the lookup URI. If the URI does not contain the key (i.e, JSON
+   * based prepopulated URIs for non-contact entries), the URI itself is returned.
+   *
+   * <p>The lookup URI has the format of Contacts.CONTENT_LOOKUP_URI/lookupKey/rowId. For JSON based
+   * URI, it would be Contacts.CONTENT_LOOKUP_URI/encoded#JSON
+   */
+  private static String getIdentifier(String lookupUri) {
+    if (!lookupUri.startsWith(Contacts.CONTENT_LOOKUP_URI.toString())) {
+      return lookupUri;
+    }
+
+    List<String> segments = Uri.parse(lookupUri).getPathSegments();
+    if (segments.size() < LOOKUP_URI_PATH_SEGMENTS) {
+      return lookupUri;
+    }
+    String lookupKey = segments.get(LOOKUP_URI_PATH_SEGMENTS);
+    if ("encoded".equals(lookupKey)) {
+      return lookupUri;
+    }
+    return lookupKey;
   }
 }

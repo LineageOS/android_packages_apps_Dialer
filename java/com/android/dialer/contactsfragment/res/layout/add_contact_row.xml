@@ -44,7 +44,6 @@
       android:paddingStart="@dimen/text_padding_start"
       android:paddingEnd="@dimen/text_padding_end"
       android:gravity="center_vertical"
-      android:fontFamily="sans-serif"
       android:text="@string/all_contacts_empty_add_contact_action"
       style="@style/Dialer.TextAppearance.Primary"/>
 </LinearLayout>

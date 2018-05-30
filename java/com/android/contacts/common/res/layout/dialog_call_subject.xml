@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textColor="@color/dialer_primary_text_color"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/call_subject_dialog_secondary_text_size"/>
 
           <TextView
@@ -77,7 +77,7 @@
             android:layout_marginTop="@dimen/call_subject_dialog_between_line_margin"
             android:layout_gravity="center_vertical"
             android:singleLine="true"
-            android:textColor="@color/dialer_secondary_text_color"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/call_subject_dialog_secondary_text_size"/>
         </LinearLayout>
       </LinearLayout>
@@ -94,7 +94,7 @@
         android:background="@null"
         android:gravity="top"
         android:hint="@string/call_subject_hint"
-        android:textColor="@color/dialer_secondary_text_color"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/call_subject_dialog_secondary_text_size"
         />
 
@@ -107,7 +107,7 @@
         android:layout_marginStart="@dimen/call_subject_dialog_margin"
         android:layout_marginEnd="@dimen/call_subject_dialog_margin"
         android:singleLine="true"
-        android:textColor="@color/dialer_secondary_text_color"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/call_subject_dialog_secondary_text_size"/>
 
       <View
@@ -130,7 +130,7 @@
           android:layout_alignParentStart="true"
           android:layout_centerVertical="true"
           android:src="@drawable/quantum_ic_history_vd_theme_24"
-          android:tint="@color/call_subject_history_icon"/>
+          android:tint="?colorIcon"/>
 
         <TextView
           android:id="@+id/send_and_call_button"
@@ -152,7 +152,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/dialog_view"
-    android:background="@color/call_subject_history_background"
+    android:background="?android:attr/colorBackground"
     android:divider="@null"
     android:elevation="8dp"/>
 

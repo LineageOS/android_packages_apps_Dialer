@@ -19,7 +19,6 @@
   android:id="@+id/selectable_text_view"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:textSize="16sp"
-  android:textColor="@color/dialer_primary_text_color"
+  style="@style/Dialer.TextAppearance.Primary"
   android:padding="16dp"
-  android:background="@drawable/ripple_material_light"/>
+  android:background="?android:selectableItemBackground"/>

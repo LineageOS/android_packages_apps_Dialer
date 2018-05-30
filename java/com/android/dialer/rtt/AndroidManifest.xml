@@ -16,7 +16,6 @@
 <manifest package="com.android.dialer.rtt"
     xmlns:android="http://schemas.android.com/apk/res/android">
   <application>
-    <!-- TODO(a bug): remove the theme here. Needed for espresso test. -->
-    <activity android:name=".RttTranscriptActivity" android:theme="@style/Dialer.ThemeBase"/>
+    <activity android:name=".RttTranscriptActivity"/>
   </application>
 </manifest>

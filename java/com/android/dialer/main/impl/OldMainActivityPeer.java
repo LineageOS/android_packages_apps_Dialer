@@ -116,6 +116,8 @@ import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.speeddial.SpeedDialFragment;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.theme.base.Theme;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
@@ -229,10 +231,28 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   @Override
   public void onActivityCreate(Bundle savedInstanceState) {
     LogUtil.enterBlock("OldMainActivityPeer.onActivityCreate");
+    setTheme();
     activity.setContentView(R.layout.main_activity);
     initUiListeners();
     initLayout(savedInstanceState);
     SmartDialPrefix.initializeNanpSettings(activity);
+  }
+
+  /** should be called before {@link AppCompatActivity#setContentView(int)}. */
+  private void setTheme() {
+    @Theme.Type int theme = ThemeComponent.get(activity).theme().getTheme();
+    switch (theme) {
+      case Theme.DARK:
+        activity.setTheme(R.style.MainActivityTheme_Dark);
+        break;
+      case Theme.LIGHT:
+      case Theme.LIGHT_M2:
+        activity.setTheme(R.style.MainActivityTheme);
+        break;
+      case Theme.UNKNOWN:
+      default:
+        throw new IllegalArgumentException("Invalid theme.");
+    }
   }
 
   private void initUiListeners() {

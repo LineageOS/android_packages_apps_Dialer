@@ -15,7 +15,7 @@
   ~ limitations under the License
   -->
 <resources>
-  <style name="DialtactsTheme" parent="Dialer.ThemeBase">
+  <style name="DialtactsTheme" parent="Dialer.ThemeBase.ActionBar">
     <item name="android:windowLightNavigationBar">true</item>
     <item name="android:navigationBarColor">?android:attr/windowBackground</item>
     <item name="android:navigationBarDividerColor">#E0E0E0</item>

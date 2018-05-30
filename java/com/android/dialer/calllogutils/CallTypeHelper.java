@@ -17,7 +17,7 @@
 package com.android.dialer.calllogutils;
 
 import android.content.res.Resources;
-import com.android.dialer.compat.AppCompatConstants;
+import android.provider.CallLog.Calls;
 import com.android.dialer.duo.Duo;
 
 /** Helper class to perform operations related to call types. */
@@ -87,17 +87,17 @@ public class CallTypeHelper {
   }
 
   public static boolean isMissedCallType(int callType) {
-    return (callType != AppCompatConstants.CALLS_INCOMING_TYPE
-        && callType != AppCompatConstants.CALLS_OUTGOING_TYPE
-        && callType != AppCompatConstants.CALLS_VOICEMAIL_TYPE
-        && callType != AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE);
+    return (callType != Calls.INCOMING_TYPE
+        && callType != Calls.OUTGOING_TYPE
+        && callType != Calls.VOICEMAIL_TYPE
+        && callType != Calls.ANSWERED_EXTERNALLY_TYPE);
   }
 
   /** Returns the text used to represent the given call type. */
   public CharSequence getCallTypeText(
       int callType, boolean isVideoCall, boolean isPulledCall, boolean isDuoCall) {
     switch (callType) {
-      case AppCompatConstants.CALLS_INCOMING_TYPE:
+      case Calls.INCOMING_TYPE:
         if (isVideoCall) {
           if (isPulledCall) {
             return incomingVideoPulledName;
@@ -115,7 +115,7 @@ public class CallTypeHelper {
           }
         }
 
-      case AppCompatConstants.CALLS_OUTGOING_TYPE:
+      case Calls.OUTGOING_TYPE:
         if (isVideoCall) {
           if (isPulledCall) {
             return outgoingVideoPulledName;
@@ -133,23 +133,23 @@ public class CallTypeHelper {
           }
         }
 
-      case AppCompatConstants.CALLS_MISSED_TYPE:
+      case Calls.MISSED_TYPE:
         if (isVideoCall) {
           return missedVideoName;
         } else {
           return missedName;
         }
 
-      case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
+      case Calls.VOICEMAIL_TYPE:
         return voicemailName;
 
-      case AppCompatConstants.CALLS_REJECTED_TYPE:
+      case Calls.REJECTED_TYPE:
         return rejectedName;
 
-      case AppCompatConstants.CALLS_BLOCKED_TYPE:
+      case Calls.BLOCKED_TYPE:
         return blockedName;
 
-      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
+      case Calls.ANSWERED_EXTERNALLY_TYPE:
         return answeredElsewhereName;
 
       default:
