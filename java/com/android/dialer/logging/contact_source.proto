@@ -16,8 +16,6 @@ message ContactSource {
   // number's status at the time they made or received the call.
   // Type definitions are from the CachedContactInfo interface in
   // CachedNumberLookupService.java
-  // When adding new sources here, consider updating the isPeopleApiSource() and
-  // isBusiness() methods in LookupSourceUtils.java if needed.
   enum Type {
     UNKNOWN_SOURCE_TYPE = 0;
 

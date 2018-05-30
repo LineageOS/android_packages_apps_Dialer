@@ -17,4 +17,4 @@
 
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
   android:src="@drawable/ic_scroll_handle"
-  android:tint="@color/dialer_secondary_text_color"/>
+  android:tint="?colorIcon"/>

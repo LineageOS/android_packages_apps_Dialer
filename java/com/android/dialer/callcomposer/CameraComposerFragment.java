@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,6 +48,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.PermissionsUtil;
 
 /** Fragment used to compose call with image from the user's camera. */
@@ -117,8 +117,7 @@ public class CameraComposerFragment extends CallComposerFragment
       allowPermission.setOnClickListener(this);
       permissionText.setText(R.string.camera_permission_text);
       permissionImage.setImageResource(R.drawable.quantum_ic_camera_alt_white_48);
-      permissionImage.setColorFilter(
-          ContextCompat.getColor(getContext(), R.color.dialer_theme_color));
+      permissionImage.setColorFilter(ThemeComponent.get(getContext()).theme().getColorPrimary());
       permissionView.setVisibility(View.VISIBLE);
     } else {
       if (bundle != null) {

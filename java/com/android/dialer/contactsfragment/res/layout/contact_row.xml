@@ -51,7 +51,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:textSize="@dimen/text_size"
-        android:textColor="@color/dialer_primary_text_color"
+        android:textColor="?android:attr/textColorPrimary"
         android:fontFamily="sans-serif"/>
   </LinearLayout>
 </FrameLayout>

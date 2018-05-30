@@ -24,7 +24,7 @@
       android:layout_height="1dp"
       android:layout_marginTop="@dimen/ec_divider_top_bottom_margin"
       android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
-      android:background="#12000000"/>
+      android:background="@color/dialer_divider_line_color"/>
 
   <TextView
       android:id="@+id/call_detail_action_copy"
@@ -32,6 +32,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_content_copy_grey600_24"
+      android:tint="?colorIcon"
       android:text="@string/call_details_copy_number"/>
 
   <TextView
@@ -40,6 +41,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_edit_grey600_24"
+      android:tint="?colorIcon"
       android:text="@string/call_details_edit_number"/>
 
   <TextView
@@ -49,6 +51,7 @@
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_report_grey600_24"
       android:text="@string/call_details_report_call_id"
+      android:tint="?colorIcon"
       android:visibility="gone"/>
 
   <TextView
@@ -57,6 +60,6 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:drawableStart="@drawable/quantum_ic_delete_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"
+      android:tint="?colorIcon"
       android:text="@string/delete"/>
 </LinearLayout>

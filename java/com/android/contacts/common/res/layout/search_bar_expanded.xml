@@ -29,7 +29,7 @@
     android:background="?attr/selectableItemBackgroundBorderless"
     android:contentDescription="@string/action_menu_back_from_search"
     android:src="@drawable/back_arrow"
-    android:tint="@color/contactscommon_actionbar_background_color"/>
+    android:tint="?colorTextOnUnthemedDarkBackground"/>
 
   <EditText
     android:id="@+id/search_view"
@@ -44,8 +44,8 @@
     android:imeOptions="flagNoExtractUi"
     android:inputType="textFilter"
     android:maxLines="1"
-    android:textColor="@color/searchbox_text_color"
-    android:textColorHint="@color/searchbox_hint_text_color"
+    android:textColor="?android:attr/textColorPrimary"
+    android:textColorHint="?android:attr/textColorHint"
     android:textCursorDrawable="@drawable/searchedittext_custom_cursor"
     android:textSize="@dimen/search_text_size"/>
 
@@ -60,5 +60,5 @@
     android:clickable="true"
     android:contentDescription="@string/description_clear_search"
     android:src="@drawable/quantum_ic_close_vd_theme_24"
-    android:tint="@color/searchbox_icon_tint"/>
+    android:tint="?colorIcon"/>
 </RelativeLayout>

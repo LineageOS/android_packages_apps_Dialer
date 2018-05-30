@@ -43,7 +43,7 @@
       android:importantForAccessibility="no"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_search_vd_theme_24"
-      android:tint="@color/searchbox_icon_tint"/>
+      android:tint="?colorIcon"/>
 
     <TextView
       android:id="@+id/search_box_start_search"
@@ -55,7 +55,6 @@
       android:fontFamily="@string/search_font_family"
       android:gravity="center_vertical"
       android:hint="@string/dialer_hint_find_contact"
-      android:textColorHint="@color/searchbox_hint_text_color"
       android:textSize="@dimen/search_collapsed_text_size"/>
 
     <ImageView
@@ -68,7 +67,7 @@
       android:contentDescription="@string/description_start_voice_search"
       android:scaleType="center"
       android:src="@drawable/ic_mic_grey600"
-      android:tint="@color/searchbox_icon_tint"/>
+      android:tint="?colorIcon"/>
 
     <ImageButton
       android:id="@+id/dialtacts_options_menu_button"
@@ -79,7 +78,7 @@
       android:contentDescription="@string/action_menu_overflow_description"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_white_24"
-      android:tint="@color/searchbox_icon_tint"/>
+      android:tint="?colorIcon"/>
   </RelativeLayout>
 
   <include layout="@layout/search_bar_expanded"/>

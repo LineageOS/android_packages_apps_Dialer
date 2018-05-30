@@ -397,9 +397,7 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       newCallIds.add(callId);
       ContactCacheEntry contactCache = cache.getInfo(callId);
       if (contactCache == null) {
-        contactCache =
-            ContactInfoCache.buildCacheEntryFromCall(
-                getContext(), call, call.getState() == DialerCallState.INCOMING);
+        contactCache = ContactInfoCache.buildCacheEntryFromCall(getContext(), call);
       }
 
       if (participantsByCallId.containsKey(callId)) {

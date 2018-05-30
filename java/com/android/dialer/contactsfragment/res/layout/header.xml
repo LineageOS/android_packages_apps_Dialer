@@ -21,6 +21,5 @@
     android:layout_height="@dimen/row_height"
     android:textColor="?android:attr/colorPrimary"
     android:gravity="center"
-    android:textSize="@dimen/text_size"
     android:textStyle="bold"
-    android:fontFamily="sans-serif-medium"/>
+    style="@style/Dialer.TextAppearance.Header2"/>

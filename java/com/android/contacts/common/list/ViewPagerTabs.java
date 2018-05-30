@@ -163,7 +163,7 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
     } else {
       final TextView textView = new TextView(getContext());
       textView.setText(tabTitle);
-      textView.setBackgroundResource(R.drawable.view_pager_tab_background);
+      textView.setClickable(true);
 
       // Assign various text appearance related attributes to child views.
       if (mTextStyle > 0) {

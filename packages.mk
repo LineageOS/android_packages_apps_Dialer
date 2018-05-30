@@ -68,6 +68,10 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.speeddial \
 	com.android.dialer.spannable \
 	com.android.dialer.theme \
+	com.android.dialer.theme.base \
+	com.android.dialer.theme.base.impl \
+	com.android.dialer.theme.common \
+	com.android.dialer.theme.hidden \
 	com.android.dialer.util \
 	com.android.dialer.voicemail.listui \
 	com.android.dialer.voicemail.listui.error \
@@ -89,7 +93,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.disconnectdialog \
 	com.android.incallui.hold \
 	com.android.incallui.incall.impl \
-	com.android.incallui.maps.impl \
 	com.android.incallui.rtt.impl \
 	com.android.incallui.rtt.protocol \
   com.android.incallui.speakeasy \

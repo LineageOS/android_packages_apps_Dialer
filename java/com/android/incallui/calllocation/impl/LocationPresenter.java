@@ -17,7 +17,6 @@
 package com.android.incallui.calllocation.impl;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import com.android.dialer.common.LogUtil;
@@ -38,7 +37,6 @@ public class LocationPresenter extends Presenter<LocationPresenter.LocationUi>
     implements LocationListener {
 
   private Location lastLocation;
-  private AsyncTask downloadMapTask;
   private AsyncTask reverseGeocodeTask;
 
   LocationPresenter() {}
@@ -55,9 +53,6 @@ public class LocationPresenter extends Presenter<LocationPresenter.LocationUi>
     LogUtil.i("LocationPresenter.onUiUnready", "");
     super.onUiUnready(ui);
 
-    if (downloadMapTask != null) {
-      downloadMapTask.cancel(true);
-    }
     if (reverseGeocodeTask != null) {
       reverseGeocodeTask.cancel(true);
     }
@@ -76,7 +71,6 @@ public class LocationPresenter extends Presenter<LocationPresenter.LocationUi>
       int status = LocationHelper.checkLocation(location);
       LocationUi ui = getUi();
       if (status == LocationHelper.LOCATION_STATUS_OK) {
-        downloadMapTask = new DownloadMapImageTask(new WeakReference<>(ui)).execute(location);
         reverseGeocodeTask = new ReverseGeocodeTask(new WeakReference<>(ui)).execute(location);
         if (ui != null) {
           ui.setLocation(location);
@@ -102,8 +96,6 @@ public class LocationPresenter extends Presenter<LocationPresenter.LocationUi>
   public interface LocationUi extends Ui {
 
     void setAddress(String address);
-
-    void setMap(Drawable mapImage);
 
     void setLocation(Location location);
 

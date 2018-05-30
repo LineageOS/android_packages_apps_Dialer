@@ -39,14 +39,12 @@
 
     <TextView
         android:id="@+id/primary_text"
-        style="@style/Dialer.TextAppearance.Primary"
+        style="@style/Dialer.TextAppearance.Primary.Ellipsize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="6dp"
-        android:ellipsize="end"
-        android:lineSpacingMultiplier="1.5"
-        android:singleLine="true"/>
+        android:lineSpacingMultiplier="1.5"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -66,12 +64,10 @@
 
       <TextView
           android:id="@+id/secondary_text"
-          style="@style/Dialer.TextAppearance.Secondary"
+          style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:ellipsize="end"
-          android:lineSpacingMultiplier="1.4"
-          android:singleLine="true"/>
+          android:lineSpacingMultiplier="1.4"/>
     </LinearLayout>
 
     <!-- TODO(a bug): Make text selectable -->
@@ -110,5 +106,5 @@
       android:contentDescription="@string/a11y_voicemail_entry_expand_menu"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"/>
+      android:tint="?colorIcon"/>
 </RelativeLayout>

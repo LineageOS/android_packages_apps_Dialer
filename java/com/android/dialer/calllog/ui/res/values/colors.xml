@@ -16,11 +16,10 @@
   -->
 
 <resources>
+  <!-- TODO(a bug): remove these? -->
   <color name="feature_icon_read_color">#9E9E9E</color>
   <color name="feature_icon_unread_color">#474747</color>
 
   <color name="call_type_icon_read_color">#757575</color>
   <color name="call_type_icon_unread_color">#D32F2F</color>
-
-  <color name="empty_call_log_icon_tint_color">#E1E1E1</color>
 </resources>

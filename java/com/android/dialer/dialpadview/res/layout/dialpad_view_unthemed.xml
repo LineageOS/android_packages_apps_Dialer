@@ -81,7 +81,7 @@
         android:contentDescription="@string/description_dialpad_back"
         android:gravity="center"
         android:src="@drawable/quantum_ic_close_white_24"
-        android:tint="?attr/dialpad_icon_tint"
+        android:tint="?colorIcon"
         android:tintMode="src_in"
         android:visibility="gone"/>
 
@@ -96,7 +96,7 @@
         android:contentDescription="@string/description_dialpad_overflow"
         android:gravity="center"
         android:src="@drawable/quantum_ic_more_vert_white_24"
-        android:tint="?attr/dialpad_icon_tint"
+        android:tint="?colorIcon"
         android:tintMode="src_in"
         android:visibility="gone"/>
       <FrameLayout android:layout_width="0dp"
@@ -108,7 +108,7 @@
             android:focusable="false"
             android:gravity="center"
             android:textSize="14sp"
-            android:textColor="@color/secondary_text_color"
+            android:textColor="?colorIcon"
             android:visibility="gone"
           />
         <com.android.dialer.dialpadview.DigitsEditText
@@ -142,7 +142,7 @@
         android:contentDescription="@string/description_delete_button"
         android:src="@drawable/quantum_ic_backspace_white_24"
         android:state_enabled="false"
-        android:tint="?attr/dialpad_icon_tint"
+        android:tint="?colorIcon"
         android:tintMode="src_in"/>
   </LinearLayout>
 

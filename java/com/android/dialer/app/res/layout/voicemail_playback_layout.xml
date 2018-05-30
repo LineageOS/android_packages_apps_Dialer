@@ -28,7 +28,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:textSize="14sp"/>
+    style="@style/Dialer.TextAppearance.Secondary"/>
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -42,7 +42,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:importantForAccessibility="no"
-      android:textSize="14sp"/>
+      style="@style/Dialer.TextAppearance.Secondary"/>
 
     <SeekBar
       android:id="@+id/playback_seek"
@@ -60,7 +60,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:importantForAccessibility="no"
-      android:textSize="14sp"/>
+      style="@style/Dialer.TextAppearance.Secondary"/>
 
   </LinearLayout>
 
@@ -80,7 +80,7 @@
       style="@style/VoicemailPlaybackLayoutButtonStyle"
       android:contentDescription="@string/description_playback_speakerphone"
       android:src="@drawable/quantum_ic_volume_down_white_24"
-      android:tint="@color/voicemail_icon_tint"/>
+      android:tint="?colorIcon"/>
 
     <Space
       android:layout_width="0dp"
@@ -103,7 +103,7 @@
       style="@style/VoicemailPlaybackLayoutButtonStyle"
       android:contentDescription="@string/call_log_trash_voicemail"
       android:src="@drawable/quantum_ic_delete_white_24"
-      android:tint="@color/voicemail_icon_tint"/>
+      android:tint="?colorIcon"/>
 
     <Space
       android:layout_width="0dp"

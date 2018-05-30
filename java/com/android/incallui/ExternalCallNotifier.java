@@ -45,6 +45,7 @@ import com.android.dialer.contactphoto.BitmapUtil;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.telecom.TelecomCallUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallDelegate;
 import com.android.incallui.call.ExternalCallList;
@@ -239,7 +240,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     builder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
     builder.setContentTitle(info.getContentTitle());
     builder.setLargeIcon(info.getLargeIcon());
-    builder.setColor(context.getResources().getColor(R.color.dialer_theme_color));
+    builder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
     builder.addPerson(info.getPersonReference());
     if (BuildCompat.isAtLeastO()) {
       builder.setChannelId(NotificationChannelId.DEFAULT);
@@ -275,7 +276,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
      */
     Notification.Builder publicBuilder = new Notification.Builder(context);
     publicBuilder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
-    publicBuilder.setColor(context.getResources().getColor(R.color.dialer_theme_color));
+    publicBuilder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
     if (BuildCompat.isAtLeastO()) {
       publicBuilder.setChannelId(NotificationChannelId.DEFAULT);
     }

@@ -16,7 +16,7 @@
   -->
 <resources>
   <style name="SpeedDialContextMenuItem" parent="SpeedDialContextMenuItem.NoDrawableTint">
-    <item name="android:drawableTint">@color/secondary_text_color</item>
+    <item name="android:drawableTint">?colorIcon</item>
   </style>
 
   <style name="SpeedDialContextMenuItem.NoDrawableTint" parent="Dialer.TextAppearance.Secondary">

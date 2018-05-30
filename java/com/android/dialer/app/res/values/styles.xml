@@ -15,7 +15,9 @@
   ~ limitations under the License
   -->
 <resources>
-  <style name="DialtactsTheme" parent="Dialer.ThemeBase"/>
+  <style name="DialtactsTheme" parent="Dialer.ThemeBase.ActionBar">
+    <!-- todo(calderwoodra): fill this in with dialpad theme and call log card theme -->
+  </style>
 
   <style name="DialpadTheme" parent="DialtactsTheme">
     <item name="android:textColorPrimary">?android:attr/textColorPrimaryInverse</item>
@@ -32,13 +34,13 @@
   <!-- Text in the action bar at the top of the screen -->
   <style name="DialtactsActionBarTitleText"
     parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
-    <item name="android:textColor">@color/actionbar_text_color</item>
+    <item name="android:textColor">?colorTextOnUnthemedDarkBackground</item>
   </style>
 
   <!-- Text style for tabs. -->
   <style name="DialtactsActionBarTabTextStyle"
     parent="android:style/Widget.Material.Light.ActionBar.TabText">
-    <item name="android:textColor">@color/tab_text_color</item>
+    <item name="android:textColor">?colorTextOnUnthemedDarkBackground</item>
     <item name="android:textSize">@dimen/tab_text_size</item>
     <item name="android:fontFamily">"sans-serif-medium"</item>
   </style>
@@ -51,29 +53,29 @@
     <item name="android:gravity">center_vertical</item>
   </style>
 
-  <style name="CallLogActionTextStyle">
+  <style name="CallLogActionTextStyle" parent="Dialer.TextAppearance.Primary.Ellipsize">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:paddingStart">@dimen/call_log_action_horizontal_padding</item>
     <item name="android:paddingEnd">@dimen/call_log_action_horizontal_padding</item>
-    <item name="android:textColor">@color/call_log_action_color</item>
-    <item name="android:textSize">@dimen/call_log_primary_text_size</item>
-    <item name="android:fontFamily">"sans-serif"</item>
     <item name="android:focusable">true</item>
-    <item name="android:singleLine">true</item>
     <item name="android:importantForAccessibility">no</item>
   </style>
 
-  <style name="CallLogActionSupportTextStyle" parent="@style/CallLogActionTextStyle">
-    <item name="android:textSize">@dimen/call_log_detail_text_size</item>
-    <item name="android:textColor">@color/call_log_detail_color</item>
+  <style name="CallLogActionSupportTextStyle" parent="Dialer.TextAppearance.Secondary.Ellipsize">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:paddingStart">@dimen/call_log_action_horizontal_padding</item>
+    <item name="android:paddingEnd">@dimen/call_log_action_horizontal_padding</item>
+    <item name="android:focusable">true</item>
+    <item name="android:importantForAccessibility">no</item>
   </style>
 
   <style name="CallLogActionIconStyle">
     <item name="android:layout_width">@dimen/call_log_action_icon_dimen</item>
     <item name="android:layout_height">@dimen/call_log_action_icon_dimen</item>
     <item name="android:layout_marginStart">@dimen/call_log_action_icon_margin_start</item>
-    <item name="android:tint">?android:attr/textColorSecondary</item>
+    <item name="android:tint">?colorIcon</item>
     <item name="android:importantForAccessibility">no</item>
   </style>
 
@@ -122,7 +124,7 @@
     <item name="android:background">?android:attr/selectableItemBackground</item>
     <item name="android:paddingEnd">@dimen/button_horizontal_padding</item>
     <item name="android:paddingStart">@dimen/button_horizontal_padding</item>
-    <item name="android:textColor">@color/dialer_flat_button_text_color</item>
+    <item name="android:textColor">?android:attr/colorPrimary</item>
   </style>
 
   <!-- Style for the 'primary' button in a view. Unlike the DialerFlatButtonStyle, this button -->
@@ -147,9 +149,7 @@
     <item name="android:background">?android:attr/listDivider</item>
   </style>
 
-  <style name="TranscriptionQualityRating">
-    <item name="android:textColor">@color/call_log_voicemail_transcript_branding_color</item>
-    <item name="android:textSize">@dimen/call_log_voicemail_transcription_text_size</item>
+  <style name="TranscriptionQualityRating" parent="Dialer.TextAppearance.Secondary">
     <item name="android:textStyle">italic</item>
     <item name="android:paddingRight">20dp</item>
     <item name="android:minHeight">56dp</item>
@@ -167,5 +167,4 @@
     <item name="android:textColor">?android:attr/colorPrimary</item>
     <item name="android:fontFamily">"sans-serif-medium"</item>
   </style>
-
 </resources>

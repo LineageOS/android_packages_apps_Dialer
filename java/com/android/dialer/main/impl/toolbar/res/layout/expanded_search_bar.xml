@@ -45,7 +45,7 @@
       android:inputType="textFilter"
       android:maxLines="1"
       android:hint="@string/dialer_hint_find_contact"
-      android:textColor="@color/dialer_secondary_text_color"
+      android:textColor="?android:attr/textColorSecondary"
       android:textColorHint="?android:attr/textColorHint"
       android:textCursorDrawable="@drawable/custom_cursor"
       android:textSize="16sp"/>
@@ -60,6 +60,6 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/description_clear_search"
       android:src="@drawable/quantum_ic_close_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"
+      android:tint="?colorIcon"
       android:visibility="gone"/>
 </RelativeLayout>

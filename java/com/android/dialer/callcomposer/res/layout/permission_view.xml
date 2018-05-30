@@ -33,7 +33,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/permission_item_margin"
-    style="@style/TextAppearanceMedium"/>
+    style="@style/Dialer.TextAppearance.Header2"/>
 
   <TextView
     android:id="@+id/allow"
