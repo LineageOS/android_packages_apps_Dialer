@@ -49,7 +49,7 @@
   <style name="Theme.InCallScreen.ManageConference" parent="Dialer.ThemeBase.ActionBar">
   </style>
 
-  <style name="InCallDialpad" parent="Dialpad.Light">
+  <style name="InCallDialpad" parent="Dialpad.Themed">
     <item name="dialpad_key_number_margin_bottom">
       @dimen/incall_dialpad_key_number_margin_bottom
     </item>
@@ -72,8 +72,6 @@
       @dimen/incall_end_call_spacing
     </item>
     <item name="dialpad_elevation">10dp</item>
-    <item name="dialpad_text_color">?android:attr/textColorPrimaryInverse</item>
-    <item name="dialpad_text_color_secondary">?android:attr/textColorSecondaryInverse</item>
   </style>
 
   <style name="AfterCallNotificationTheme" parent="Dialer.ThemeBase.NoActionBar">
