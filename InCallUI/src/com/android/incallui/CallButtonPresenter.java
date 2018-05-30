@@ -194,6 +194,11 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     public void onSupportedAudioMode(int mask) {
         if (getUi() != null) {
             getUi().setSupportedAudio(mask);
+
+            // toggle the visibility of audio button
+            getUi().showButton(BUTTON_AUDIO, shouldAudioButtonShow());
+            getUi().updateButtonStates();
+            getUi().updateColors();
         }
     }
 
@@ -533,6 +538,40 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     /**
+     * Checks if audio route is supported on device
+     *
+     */
+    private boolean isAudioRouteSupported(int route) {
+        return (getSupportedAudio() & route) > 0;
+    }
+
+    /**
+     * Counts number of supported routes and disables audio button if there is only one
+     * route supported (i.e nothing to choose from)
+     */
+    private boolean shouldAudioButtonShow() {
+        int numSupportedRoutes = 0;
+
+        int routes[] = {
+            CallAudioState.ROUTE_BLUETOOTH,
+            CallAudioState.ROUTE_WIRED_OR_EARPIECE,
+            CallAudioState.ROUTE_SPEAKER
+        };
+
+        for (int i = 0; i < routes.length; i++) {
+            if (isAudioRouteSupported(routes[i])) {
+                numSupportedRoutes++;
+            }
+        }
+
+        if (numSupportedRoutes == 0) {
+            Log.e(this, "numSupportedRoutes = 0");
+        }
+
+        return (numSupportedRoutes > 1);
+    }
+
+    /**
      * Updates the buttons applicable for the UI.
      *
      * @param call The active call.
@@ -603,7 +642,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         boolean showCallRecordOption = recorder.isEnabled()
                 && !isVideo && call.getState() == Call.State.ACTIVE;
 
-        ui.showButton(BUTTON_AUDIO, true);
+        ui.showButton(BUTTON_AUDIO, shouldAudioButtonShow());
         ui.showButton(BUTTON_SWAP, showSwap);
         ui.showButton(BUTTON_HOLD, showHold);
         ui.setHold(isCallOnHold);
