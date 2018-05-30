@@ -81,15 +81,15 @@
           android:layout_marginTop="8dp"
           android:layout_marginBottom="8dp"
           android:src="@drawable/ic_remove"
-          android:tint="@color/remove_text_color"/>
+          android:tint="?colorTextOnUnthemedDarkBackground"/>
 
       <TextView
           android:id="@+id/remove_view_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/remove_contact"
-          android:textColor="@color/remove_text_color"
-          android:textSize="@dimen/remove_text_size"/>
+          android:textColor="?colorTextOnUnthemedDarkBackground"
+          style="@style/Dialer.TextAppearance.Primary"/>
 
     </LinearLayout>
 

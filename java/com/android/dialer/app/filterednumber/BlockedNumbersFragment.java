@@ -23,7 +23,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -39,6 +38,7 @@ import com.android.dialer.blocking.FilteredNumbersUtil.CheckForSendToVoicemailCo
 import com.android.dialer.blocking.FilteredNumbersUtil.ImportSendToVoicemailContactsListener;
 import com.android.dialer.database.FilteredNumberContract;
 import com.android.dialer.lettertile.LetterTileDrawable;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 
 /** TODO(calderwoodra): documentation */
@@ -74,8 +74,7 @@ public class BlockedNumbersFragment extends ListFragment
     //replace the icon for add number with LetterTileDrawable(), so it will have identical style
     LetterTileDrawable drawable = new LetterTileDrawable(getResources());
     drawable.setLetter(ADD_BLOCKED_NUMBER_ICON_LETTER);
-    drawable.setColor(
-        ActivityCompat.getColor(getActivity(), R.color.add_blocked_number_icon_color));
+    drawable.setColor(ThemeComponent.get(getContext()).theme().getColorIcon());
     drawable.setIsCircular(true);
 
     if (adapter == null) {
@@ -119,7 +118,7 @@ public class BlockedNumbersFragment extends ListFragment
 
     ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
     ColorDrawable backgroundDrawable =
-        new ColorDrawable(ActivityCompat.getColor(getActivity(), R.color.dialer_theme_color));
+        new ColorDrawable(ThemeComponent.get(getContext()).theme().getColorPrimary());
     actionBar.setBackgroundDrawable(backgroundDrawable);
     actionBar.setDisplayShowCustomEnabled(false);
     actionBar.setDisplayHomeAsUpEnabled(true);

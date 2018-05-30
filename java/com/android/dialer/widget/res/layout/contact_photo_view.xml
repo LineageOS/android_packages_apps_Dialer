@@ -68,7 +68,7 @@
         android:layout_height="13dp"
         android:layout_gravity="center"
         android:src="@drawable/quantum_ic_rtt_vd_theme_24"
-        android:tint="@android:color/white"
+        android:tint="?android:attr/colorBackground"
         tools:ignore="ContentDescription"/>
   </FrameLayout>
 </FrameLayout>

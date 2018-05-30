@@ -24,7 +24,7 @@
   </style>
 
   <style name="TosTitleStyle">
-    <item name="android:textColor">@color/primary_text_color</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">20sp</item>
     <item name="android:fontFamily">"sans-serif-medium"</item>
   </style>

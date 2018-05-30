@@ -30,7 +30,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:gravity="center_horizontal|top"
-    android:textColor="@color/empty_list_text_color"
+    android:textColor="?android:attr/textColorSecondary"
     android:textSize="@dimen/empty_list_message_text_size"/>
 
   <TextView

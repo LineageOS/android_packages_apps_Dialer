@@ -39,6 +39,7 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.TelecomAdapter;
@@ -154,7 +155,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
       final int itemRoute,
       CallAudioState audioState,
       DialerImpression.Type impressionType) {
-    int selectedColor = getResources().getColor(R.color.dialer_theme_color);
+    int selectedColor = ThemeComponent.get(getContext()).theme().getColorPrimary();
     if ((audioState.getSupportedRouteMask() & itemRoute) == 0) {
       item.setVisibility(View.GONE);
     } else if (audioState.getRoute() == itemRoute) {
@@ -174,7 +175,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
   }
 
   private TextView createBluetoothItem(BluetoothDevice bluetoothDevice, boolean selected) {
-    int selectedColor = getResources().getColor(R.color.dialer_theme_color);
+    int selectedColor = ThemeComponent.get(getContext()).theme().getColorPrimary();
     TextView textView =
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
     textView.setText(getAliasName(bluetoothDevice));

@@ -36,13 +36,16 @@ public final class CallLogDates {
    *   if < 1 minute ago: "Just now";
    *   else if < 1 hour ago: time relative to now (e.g., "8 min ago");
    *   else if today: time (e.g., "12:15 PM");
-   *   else if < 7 days: abbreviated day of week (e.g., "Wed");
-   *   else if < 1 year: date with abbreviated month, day, but no year (e.g., "Jan 15");
-   *   else: date with abbreviated month, day, and year (e.g., "Jan 15, 2018").
+   *   else if < 7 days: day of week (e.g., "Wed");
+   *   else if < 1 year: date with month, day, but no year (e.g., "Jan 15");
+   *   else: date with month, day, and year (e.g., "Jan 15, 2018").
    * </pre>
+   *
+   * <p>Callers can decide whether to abbreviate date/time by specifying flag {@code
+   * abbreviateDateTime}.
    */
   public static CharSequence newCallLogTimestampLabel(
-      Context context, long nowMillis, long timestampMillis) {
+      Context context, long nowMillis, long timestampMillis, boolean abbreviateDateTime) {
     // For calls logged less than 1 minute ago, display "Just now".
     if (nowMillis - timestampMillis < TimeUnit.MINUTES.toMillis(1)) {
       return context.getString(R.string.just_now);
@@ -50,16 +53,19 @@ public final class CallLogDates {
 
     // For calls logged less than 1 hour ago, display time relative to now (e.g., "8 min ago").
     if (nowMillis - timestampMillis < TimeUnit.HOURS.toMillis(1)) {
-      return DateUtils.getRelativeTimeSpanString(
-              timestampMillis,
-              nowMillis,
-              DateUtils.MINUTE_IN_MILLIS,
-              DateUtils.FORMAT_ABBREV_RELATIVE)
-          .toString()
-          // The platform method DateUtils#getRelativeTimeSpanString adds a dot ('.') after the
-          // abbreviated time unit for some languages (e.g., "8 min. ago") but we prefer not to have
-          // the dot.
-          .replace(".", "");
+      return abbreviateDateTime
+          ? DateUtils.getRelativeTimeSpanString(
+                  timestampMillis,
+                  nowMillis,
+                  DateUtils.MINUTE_IN_MILLIS,
+                  DateUtils.FORMAT_ABBREV_RELATIVE)
+              .toString()
+              // The platform method DateUtils#getRelativeTimeSpanString adds a dot ('.') after the
+              // abbreviated time unit for some languages (e.g., "8 min. ago") but we prefer not to
+              // have the dot.
+              .replace(".", "")
+          : DateUtils.getRelativeTimeSpanString(
+              timestampMillis, nowMillis, DateUtils.MINUTE_IN_MILLIS);
     }
 
     int dayDifference = getDayDifference(nowMillis, timestampMillis);
@@ -69,19 +75,19 @@ public final class CallLogDates {
       return DateUtils.formatDateTime(context, timestampMillis, DateUtils.FORMAT_SHOW_TIME);
     }
 
-    // For calls logged within a week, display the abbreviated day of week (e.g., "Wed").
+    // For calls logged within a week, display the day of week (e.g., "Wed").
     if (dayDifference < 7) {
-      return formatDayOfWeek(context, timestampMillis);
+      return formatDayOfWeek(context, timestampMillis, abbreviateDateTime);
     }
 
-    // For calls logged within a year, display abbreviated month, day, but no year (e.g., "Jan 15").
+    // For calls logged within a year, display month, day, but no year (e.g., "Jan 15").
     if (isWithinOneYear(nowMillis, timestampMillis)) {
-      return formatAbbreviatedDate(context, timestampMillis, /* showYear = */ false);
+      return formatDate(context, timestampMillis, /* showYear = */ false, abbreviateDateTime);
     }
 
-    // For calls logged no less than one year ago, display abbreviated month, day, and year
+    // For calls logged no less than one year ago, display month, day, and year
     // (e.g., "Jan 15, 2018").
-    return formatAbbreviatedDate(context, timestampMillis, /* showYear = */ true);
+    return formatDate(context, timestampMillis, /* showYear = */ true, abbreviateDateTime);
   }
 
   /**
@@ -106,36 +112,41 @@ public final class CallLogDates {
   }
 
   /**
-   * Formats the provided timestamp (in milliseconds) into abbreviated day of week.
-   *
-   * <p>For example, returns a string like "Wed" or "Chor".
-   *
-   * <p>For pre-N devices, the returned value may not start with a capital if the local convention
-   * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
-   */
-  private static CharSequence formatDayOfWeek(Context context, long timestamp) {
-    return toTitleCase(
-        DateUtils.formatDateTime(
-            context, timestamp, DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY));
-  }
-
-  /**
-   * Formats the provided timestamp (in milliseconds) into the month abbreviation, day, and
-   * optionally, year.
+   * Formats the provided timestamp (in milliseconds) into the month, day, and optionally, year.
    *
    * <p>For example, returns a string like "Jan 15" or "Jan 15, 2018".
    *
    * <p>For pre-N devices, the returned value may not start with a capital if the local convention
    * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
    */
-  private static CharSequence formatAbbreviatedDate(
-      Context context, long timestamp, boolean showYear) {
-    int flags = DateUtils.FORMAT_ABBREV_MONTH;
+  private static CharSequence formatDate(
+      Context context, long timestamp, boolean showYear, boolean abbreviateDateTime) {
+    int formatFlags = 0;
+    if (abbreviateDateTime) {
+      formatFlags |= DateUtils.FORMAT_ABBREV_MONTH;
+    }
     if (!showYear) {
-      flags |= DateUtils.FORMAT_NO_YEAR;
+      formatFlags |= DateUtils.FORMAT_NO_YEAR;
     }
 
-    return toTitleCase(DateUtils.formatDateTime(context, timestamp, flags));
+    return toTitleCase(DateUtils.formatDateTime(context, timestamp, formatFlags));
+  }
+
+  /**
+   * Formats the provided timestamp (in milliseconds) into day of week.
+   *
+   * <p>For example, returns a string like "Wed" or "Chor".
+   *
+   * <p>For pre-N devices, the returned value may not start with a capital if the local convention
+   * is to not capitalize day names. On N+ devices, the returned value is always capitalized.
+   */
+  private static CharSequence formatDayOfWeek(
+      Context context, long timestamp, boolean abbreviateDateTime) {
+    int formatFlags =
+        abbreviateDateTime
+            ? (DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY)
+            : DateUtils.FORMAT_SHOW_WEEKDAY;
+    return toTitleCase(DateUtils.formatDateTime(context, timestamp, formatFlags));
   }
 
   private static CharSequence toTitleCase(CharSequence value) {

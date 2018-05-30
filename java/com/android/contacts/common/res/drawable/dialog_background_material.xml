@@ -18,6 +18,6 @@
   android:inset="16dp">
   <shape android:shape="rectangle">
     <corners android:radius="2dp"/>
-    <solid android:color="@color/call_subject_history_background"/>
+    <solid android:color="?android:attr/colorBackground"/>
   </shape>
 </inset>

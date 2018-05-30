@@ -44,7 +44,7 @@
       android:text="@string/set_default_account"
       android:textAlignment="viewStart"
       android:textAppearance="?android:attr/textAppearanceSmall"
-      android:textColor="@color/dialer_secondary_text_color"
+      android:textColor="?android:attr/textColorSecondary"
       />
 
 </LinearLayout>

@@ -24,25 +24,25 @@
       android:id="@+id/voice_call_container"
       android:title="@string/contact_menu_voice_call"
       android:icon="@drawable/quantum_ic_phone_vd_theme_24"
-      android:iconTint="@color/secondary_text_color"/>
+      android:iconTint="?colorIcon"/>
 
   <item
       android:id="@+id/video_call_container"
       android:title="@string/contact_menu_video_call"
       android:icon="@drawable/quantum_ic_videocam_vd_theme_24"
-      android:iconTint="@color/secondary_text_color"/>
+      android:iconTint="?colorIcon"/>
 
   <item
       android:id="@+id/send_message_container"
       android:title="@string/contact_menu_message"
       android:icon="@drawable/quantum_ic_message_vd_theme_24"
-      android:iconTint="@color/secondary_text_color"/>
+      android:iconTint="?colorIcon"/>
 
   <item
       android:id="@+id/remove_container"
       android:title="@string/contact_menu_remove"
       android:icon="@drawable/quantum_ic_close_vd_theme_24"
-      android:iconTint="@color/secondary_text_color"/>
+      android:iconTint="?colorIcon"/>
 
   <item
       android:id="@+id/contact_info_container"

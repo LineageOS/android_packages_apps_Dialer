@@ -34,7 +34,6 @@ import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -157,7 +156,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
 
     // Always hide blocked calls.
     where.append("(").append(Calls.TYPE).append(" != ?)");
-    selectionArgs.add(Integer.toString(AppCompatConstants.CALLS_BLOCKED_TYPE));
+    selectionArgs.add(Integer.toString(Calls.BLOCKED_TYPE));
 
     // Ignore voicemails marked as deleted
     where.append(" AND (").append(Voicemails.DELETED).append(" = 0)");
@@ -171,7 +170,7 @@ public class CallLogQueryHandler extends NoNullCursorAsyncQueryHandler {
       selectionArgs.add(Integer.toString(callType));
     } else {
       where.append(" AND NOT ");
-      where.append("(" + Calls.TYPE + " = " + AppCompatConstants.CALLS_VOICEMAIL_TYPE + ")");
+      where.append("(" + Calls.TYPE + " = " + Calls.VOICEMAIL_TYPE + ")");
     }
 
     if (newerThan > 0) {
