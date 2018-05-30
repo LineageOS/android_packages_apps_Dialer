@@ -18,6 +18,6 @@
 -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:color="@color/dialer_text_color_disabled" android:state_enabled="false"/>
-  <item android:color="@color/dialer_primary_text_color_enabled"/>
+  <item android:color="@color/google_grey_400" android:state_enabled="false"/>
+  <item android:color="@color/google_grey_900"/>
 </selector>

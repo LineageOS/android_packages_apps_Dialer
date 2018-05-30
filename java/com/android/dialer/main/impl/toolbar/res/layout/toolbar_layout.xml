@@ -61,8 +61,8 @@
             android:layout_toEndOf="@+id/search_magnifying_glass"
             android:layout_toStartOf="@+id/voice_search_button"
             android:text="@string/dialer_hint_find_contact"
-            android:textColor="?android:attr/textColorHint"
-            android:textSize="16dp"/>
+            android:textSize="16dp"
+            style="@style/Dialer.TextAppearance.Secondary"/>
 
         <ImageView
             android:id="@+id/voice_search_button"
