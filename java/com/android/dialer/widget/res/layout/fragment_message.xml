@@ -52,7 +52,7 @@
       android:padding="@dimen/textview_item_padding"
       android:textSize="@dimen/message_item_text_size"
       android:hint="@string/custom_message_hint"
-      android:textColor="@color/dialer_primary_text_color"
+      android:textColor="?android:attr/textColorPrimary"
       android:textColorHint="?android:attr/textColorHint"
       android:background="?android:attr/colorBackground"
       android:textCursorDrawable="@drawable/edittext_custom_cursor"

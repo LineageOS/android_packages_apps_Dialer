@@ -42,6 +42,7 @@ import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
@@ -81,4 +82,5 @@ public interface BaseDialerRootComponent
         SpeakEasyComponent.HasComponent,
         StorageComponent.HasComponent,
         StrictModeComponent.HasComponent,
+        ThemeComponent.HasComponent,
         VoicemailComponent.HasComponent {}

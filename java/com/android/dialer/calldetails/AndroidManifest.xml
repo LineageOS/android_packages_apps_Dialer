@@ -20,14 +20,12 @@
     <activity
       android:label="@string/call_details"
       android:exported="false"
-      android:name="com.android.dialer.calldetails.OldCallDetailsActivity"
-      android:theme="@style/Dialer.ThemeBase.NoActionBar">
+      android:name="com.android.dialer.calldetails.OldCallDetailsActivity">
     </activity>
     <activity
         android:label="@string/call_details"
         android:exported="false"
-        android:name="com.android.dialer.calldetails.CallDetailsActivity"
-        android:theme="@style/Dialer.ThemeBase.NoActionBar">
+        android:name="com.android.dialer.calldetails.CallDetailsActivity">
     </activity>
   </application>
 </manifest>

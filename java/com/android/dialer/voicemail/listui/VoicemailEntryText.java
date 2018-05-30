@@ -80,7 +80,10 @@ public class VoicemailEntryText {
     }
     secondaryText.append(
         CallLogDates.newCallLogTimestampLabel(
-            context, clock.currentTimeMillis(), voicemailEntry.getTimestamp()));
+            context,
+            clock.currentTimeMillis(),
+            voicemailEntry.getTimestamp(),
+            /* abbreviateDateTime = */ true));
 
     long duration = voicemailEntry.getDuration();
     if (duration >= 0) {

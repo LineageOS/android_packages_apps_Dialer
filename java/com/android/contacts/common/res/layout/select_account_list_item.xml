@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/dialer_primary_text_color"/>
+        android:textColor="?android:attr/textColorPrimary"/>
     <TextView
         android:id="@+id/number"
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         android:includeFontPadding="false"
         android:maxLines="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/dialer_secondary_text_color"
+        android:textColor="?android:attr/textColorSecondary"
         android:visibility="gone"/>
     <TextView
         android:id="@+id/hint"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/dialer_secondary_text_color"
+        android:textColor="?android:attr/textColorSecondary"
         android:visibility="gone"/>
   </LinearLayout>
 

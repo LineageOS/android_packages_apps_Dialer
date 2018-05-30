@@ -45,17 +45,13 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:includeFontPadding="false"
-      android:singleLine="true"
-      android:textColor="@color/blocked_number_primary_text_color"
-      android:textSize="@dimen/blocked_number_primary_text_size"/>
+      style="@style/Dialer.TextAppearance.Primary.Ellipsize"/>
 
     <TextView
       android:id="@+id/caller_number"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:singleLine="true"
-      android:textColor="@color/blocked_number_secondary_text_color"
-      android:textSize="@dimen/blocked_number_settings_description_text_size"/>
+      style="@style/Dialer.TextAppearance.Secondary.Ellipsize"/>
   </LinearLayout>
 
   <ImageView
@@ -67,6 +63,5 @@
     android:contentDescription="@string/description_blocked_number_list_delete"
     android:scaleType="center"
     android:src="@drawable/ic_remove"
-    android:tint="@color/blocked_number_icon_tint"/>
-
+    android:tint="?colorIcon"/>
 </LinearLayout>

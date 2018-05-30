@@ -22,7 +22,7 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="@dimen/rtt_banner_height"
-      android:background="#F305228F"
+      android:background="?android:attr/colorPrimaryDark"
       android:elevation="3dp"
       android:orientation="horizontal">
     <ImageButton
@@ -36,7 +36,7 @@
         android:contentDescription="@string/incall_content_description_end_call"
         android:scaleType="fitXY"
         android:src="@drawable/quantum_ic_call_end_vd_theme_24"
-        android:tint="#FFDF0000"/>
+        android:tint="@color/dialer_end_call_button_color"/>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -75,7 +75,7 @@
         android:contentDescription="@string/content_description_overflow"
         android:scaleType="fitXY"
         android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-        android:tint="#FFFFFF"/>
+        android:tint="?colorIconOnUnthemedDarkBackground"/>
 
   </LinearLayout>
   <FrameLayout

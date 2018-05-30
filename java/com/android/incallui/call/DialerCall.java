@@ -80,7 +80,7 @@ import com.android.dialer.rtt.RttTranscriptUtil;
 import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
-import com.android.dialer.theme.R;
+import com.android.dialer.theme.common.R;
 import com.android.dialer.time.Clock;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;

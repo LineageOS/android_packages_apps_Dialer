@@ -36,6 +36,7 @@ import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.spam.SpamSettings;
 import com.android.dialer.spam.promo.SpamBlockingPromoDialogFragment.OnEnableListener;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.theme.base.ThemeComponent;
 
 /** Helper class for showing spam blocking on-boarding promotions. */
 public class SpamBlockingPromoHelper {
@@ -178,7 +179,7 @@ public class SpamBlockingPromoHelper {
             .setContentIntent(contentIntent)
             .setCategory(Notification.CATEGORY_STATUS)
             .setPriority(Notification.PRIORITY_DEFAULT)
-            .setColor(context.getColor(R.color.dialer_theme_color))
+            .setColor(ThemeComponent.get(context).theme().getColorPrimary())
             .setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24)
             .setLargeIcon(Icon.createWithResource(context, R.drawable.spam_blocking_promo_icon))
             .setContentText(context.getString(R.string.spam_blocking_promo_text))

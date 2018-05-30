@@ -30,13 +30,19 @@
       android:layout_marginEnd="8dp"
       android:layout_centerVertical="true"/>
 
+  <!--
+    A vertical linear layout of three rows: primary info, secondary info, and phone account info.
+    It is marked as not important for a11y as we will set a more user-friendly content description
+    for the entire entry view in Java code.
+  -->
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
       android:layout_toEndOf="@+id/contact_photo_view"
       android:layout_toStartOf="@+id/menu_button"
-      android:orientation="vertical">
+      android:orientation="vertical"
+      android:importantForAccessibility="noHideDescendants">
 
     <!-- 1st row: primary info -->
     <LinearLayout
@@ -60,14 +66,12 @@
       -->
       <TextView
           android:id="@+id/primary_text"
-          style="@style/Dialer.TextAppearance.Primary"
+          style="@style/Dialer.TextAppearance.Primary.Ellipsize"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginEnd="6dp"
-          android:ellipsize="end"
           android:lineSpacingMultiplier="1.5"
-          android:singleLine="true"
           tools:ignore="InefficientWeight"/>
 
       <ImageView
@@ -120,26 +124,26 @@
 
       <TextView
           android:id="@+id/secondary_text"
-          style="@style/Dialer.TextAppearance.Secondary"
+          style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:ellipsize="end"
-          android:lineSpacingMultiplier="1.4"
-          android:singleLine="true"/>
+          android:lineSpacingMultiplier="1.4"/>
 
     </LinearLayout>
 
     <!-- 3rd row: phone account info -->
     <TextView
         android:id="@+id/phone_account"
-        style="@style/Dialer.TextAppearance.Secondary"
+        style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"/>
+        android:layout_height="wrap_content"/>
 
   </LinearLayout>
 
+  <!--
+    The button to expand the bottom sheet for an entry.
+    Its content description is set in Java code.
+  -->
   <ImageView
       android:id="@+id/menu_button"
       android:layout_width="56dp"
@@ -147,8 +151,8 @@
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:background="?android:attr/selectableItemBackgroundBorderless"
-      android:contentDescription="@string/a11y_new_call_log_expand_menu_for_entry"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-      android:tint="@color/dialer_secondary_text_color"/>
+      android:tint="?colorIcon"
+      tools:ignore="ContentDescription"/>
 </RelativeLayout>

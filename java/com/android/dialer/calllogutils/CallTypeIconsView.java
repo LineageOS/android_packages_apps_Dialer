@@ -23,11 +23,12 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.provider.CallLog.Calls;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
-import com.android.dialer.compat.AppCompatConstants;
-import com.android.dialer.theme.ThemeUtil;
+import com.android.dialer.theme.base.Theme;
+import com.android.dialer.theme.base.ThemeComponent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,16 +168,16 @@ public class CallTypeIconsView extends View {
   private Drawable getCallTypeDrawable(int callType) {
     Resources resources = useLargeIcons ? largeResouces : CallTypeIconsView.resources;
     switch (callType) {
-      case AppCompatConstants.CALLS_INCOMING_TYPE:
-      case AppCompatConstants.CALLS_ANSWERED_EXTERNALLY_TYPE:
+      case Calls.INCOMING_TYPE:
+      case Calls.ANSWERED_EXTERNALLY_TYPE:
         return resources.incoming;
-      case AppCompatConstants.CALLS_OUTGOING_TYPE:
+      case Calls.OUTGOING_TYPE:
         return resources.outgoing;
-      case AppCompatConstants.CALLS_MISSED_TYPE:
+      case Calls.MISSED_TYPE:
         return resources.missed;
-      case AppCompatConstants.CALLS_VOICEMAIL_TYPE:
+      case Calls.VOICEMAIL_TYPE:
         return resources.voicemail;
-      case AppCompatConstants.CALLS_BLOCKED_TYPE:
+      case Calls.BLOCKED_TYPE:
         return resources.blocked;
       default:
         // It is possible for users to end up with calls with unknown call types in their
@@ -289,55 +290,56 @@ public class CallTypeIconsView extends View {
       int iconId = R.drawable.quantum_ic_call_received_white_24;
       Drawable drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       incoming = drawable.mutate();
-      incoming.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+      incoming.setColorFilter(r.getColor(R.color.dialer_call_green), PorterDuff.Mode.MULTIPLY);
 
       // Create a rotated instance of the call arrow for outgoing calls.
       iconId = R.drawable.quantum_ic_call_made_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       outgoing = drawable.mutate();
-      outgoing.setColorFilter(r.getColor(R.color.answered_call), PorterDuff.Mode.MULTIPLY);
+      outgoing.setColorFilter(r.getColor(R.color.dialer_call_green), PorterDuff.Mode.MULTIPLY);
 
       // Need to make a copy of the arrow drawable, otherwise the same instance colored
       // above will be recolored here.
       iconId = R.drawable.quantum_ic_call_missed_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       missed = drawable.mutate();
-      missed.setColorFilter(r.getColor(R.color.missed_call), PorterDuff.Mode.MULTIPLY);
+      missed.setColorFilter(r.getColor(R.color.dialer_red), PorterDuff.Mode.MULTIPLY);
 
+      Theme theme = ThemeComponent.get(context).theme();
       iconId = R.drawable.quantum_ic_voicemail_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       voicemail = drawable.mutate();
-      voicemail.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      voicemail.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_block_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       blocked = drawable.mutate();
-      blocked.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      blocked.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_videocam_vd_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       videoCall = drawable.mutate();
-      videoCall.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      videoCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_hd_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       hdCall = drawable.mutate();
-      hdCall.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      hdCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_signal_wifi_4_bar_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       wifiCall = drawable.mutate();
-      wifiCall.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      wifiCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_language_white_24;
       drawable = largeIcons ? r.getDrawable(iconId) : getScaledBitmap(context, iconId);
       assistedDialedCall = drawable.mutate();
-      assistedDialedCall.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      assistedDialedCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconId = R.drawable.quantum_ic_rtt_vd_theme_24;
       drawable = largeIcons ? r.getDrawable(iconId, null) : getScaledBitmap(context, iconId);
       rttCall = drawable.mutate();
-      rttCall.setColorFilter(ThemeUtil.getColorIcon(), PorterDuff.Mode.MULTIPLY);
+      rttCall.setColorFilter(theme.getColorIcon(), PorterDuff.Mode.MULTIPLY);
 
       iconMargin = largeIcons ? 0 : r.getDimensionPixelSize(R.dimen.call_log_icon_margin);
     }

@@ -39,7 +39,7 @@
       android:paddingEnd="32dp"
       android:minHeight="108dp"
       android:lineSpacingMultiplier="1.2"
-      android:textColor="?android:attr/colorBackground"
+      android:textColor="?android:attr/textColorPrimaryInverse"
       android:textAppearance="@style/Dialer.Incall.TextAppearance.Message"
       android:background="@drawable/answer_text_only_background"
       app:autoSizeTextType="uniform"

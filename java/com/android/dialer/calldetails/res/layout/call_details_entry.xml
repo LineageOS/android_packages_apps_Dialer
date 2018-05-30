@@ -36,12 +36,11 @@
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
       android:layout_marginEnd="16dp"
       android:layout_toStartOf="@+id/call_duration"
-      android:gravity="start"
-      android:maxLines="100"/>
+      android:gravity="start"/>
 
   <TextView
       android:id="@+id/call_time"
-      style="@style/Dialer.TextAppearance.Secondary"
+      style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/call_entry_bottom_padding"
@@ -50,7 +49,7 @@
 
   <TextView
       android:id="@+id/call_duration"
-      style="@style/Dialer.TextAppearance.Primary"
+      style="@style/Dialer.TextAppearance.Primary.Ellipsize"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/call_entry_padding"
@@ -66,7 +65,7 @@
 
   <TextView
       android:id="@+id/post_call_note"
-      style="@style/Dialer.TextAppearance.Secondary"
+      style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
       android:layout_width="match_parent"
       android:layout_height="@dimen/ec_container_height"
       android:layout_below="@+id/ec_container"
@@ -77,7 +76,7 @@
       android:visibility="gone"/>
   <TextView
       android:id="@+id/rtt_transcript"
-      style="@style/Dialer.TextAppearance.Secondary"
+      style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/call_entry_bottom_padding"
@@ -95,6 +94,6 @@
       android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
       android:layout_below="@id/rtt_transcript"
-      android:background="#12000000"
+      android:background="@color/dialer_divider_line_color"
       android:visibility="gone"/>
 </RelativeLayout>

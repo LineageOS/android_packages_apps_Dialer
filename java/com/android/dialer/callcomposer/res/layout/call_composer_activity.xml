@@ -54,7 +54,7 @@
           android:gravity="center"
           android:maxLines="1"
           android:ellipsize="end"
-          android:textColor="?android:attr/colorBackground"
+          android:textColor="?android:attr/textColorPrimaryInverse"
           android:textSize="@dimen/call_composer_name_text_size"/>
 
         <TextView
@@ -62,10 +62,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
-          android:maxLines="1"
-          android:ellipsize="end"
-          android:textColor="?android:attr/colorBackground"
-          android:textSize="@dimen/call_composer_number_text_size"/>
+          android:textColor="?android:attr/textColorPrimaryInverse"
+          style="@style/Dialer.TextAppearance.Primary"/>
       </LinearLayout>
 
       <QuickContactBadge
@@ -151,9 +149,8 @@
           android:drawablePadding="@dimen/send_and_call_drawable_padding"
           android:textAllCaps="true"
           android:text="@string/share_and_call"
-          android:textSize="@dimen/send_and_call_text_size"
-          android:fontFamily="sans-serif-medium"
-          android:textColor="?android:attr/colorBackground"/>
+          style="@style/Dialer.TextAppearance.Header2"
+          android:textColor="?android:attr/textColorPrimaryInverse"/>
     </FrameLayout>
   </FrameLayout>
 

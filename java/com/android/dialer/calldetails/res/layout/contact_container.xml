@@ -53,14 +53,14 @@
 
     <TextView
         android:id="@+id/phone_number"
-        style="@style/Dialer.TextAppearance.Secondary"
+        style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"/>
 
     <TextView
         android:id="@+id/network"
-        style="@style/Dialer.TextAppearance.Secondary"
+        style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/photo_text_margin"
@@ -78,7 +78,7 @@
       android:contentDescription="@string/call"
       android:scaleType="center"
       android:src="@drawable/quantum_ic_call_white_24"
-      android:tint="@color/secondary_text_color"/>
+      android:tint="?colorIcon"/>
 
 
   <RelativeLayout
@@ -97,11 +97,11 @@
         android:layout_marginStart="@dimen/ad_icon_margin_start_offset"
         android:scaleType="fitCenter"
         android:src="@drawable/quantum_ic_language_vd_theme_24"
-        android:tint="@color/secondary_text_color"/>
+        android:tint="?colorIcon"/>
 
     <TextView
         android:id="@+id/assisted_dialing_text"
-        style="@style/Dialer.TextAppearance.Secondary"
+        style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/ad_text_margin_start"

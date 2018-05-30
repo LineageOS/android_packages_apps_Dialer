@@ -41,8 +41,7 @@
       android:paddingLeft="16dp"
       android:paddingRight="16dp"
       android:gravity="center_horizontal|top"
-      android:textColor="@color/empty_list_text_color"
-      android:textSize="@dimen/empty_list_message_text_size"/>
+      style="Dialer.TextAppearance.Primary"/>
 
     <TextView
       android:id="@+id/empty_list_view_action"

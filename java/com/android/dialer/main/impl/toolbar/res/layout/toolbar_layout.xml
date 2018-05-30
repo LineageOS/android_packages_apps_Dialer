@@ -50,7 +50,7 @@
             android:importantForAccessibility="no"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_search_vd_theme_24"
-            android:tint="@color/dialer_secondary_text_color"/>
+            android:tint="?colorIcon"/>
 
         <TextView
             android:id="@+id/search_box_start_search"
@@ -60,9 +60,8 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/search_magnifying_glass"
             android:layout_toStartOf="@+id/voice_search_button"
-            android:fontFamily="sans-serif"
             android:text="@string/dialer_hint_find_contact"
-            android:textColor="@color/dialer_secondary_text_color"
+            android:textColor="?android:attr/textColorHint"
             android:textSize="16dp"/>
 
         <ImageView
@@ -74,7 +73,7 @@
             android:contentDescription="@string/description_start_voice_search"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_mic_vd_theme_24"
-            android:tint="@color/dialer_secondary_text_color"/>
+            android:tint="?colorIcon"/>
 
         <ImageButton
             android:id="@+id/main_options_menu_button"
@@ -85,7 +84,7 @@
             android:contentDescription="@string/action_menu_overflow_description"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-            android:tint="@color/dialer_secondary_text_color"/>
+            android:tint="?colorIcon"/>
       </RelativeLayout>
 
       <include layout="@layout/expanded_search_bar"/>
@@ -122,14 +121,14 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/quantum_ic_close_vd_theme_24"
-            android:tint="?android:attr/textColorPrimaryInverse"/>
+            android:tint="?colorIconOnUnthemedDarkBackground"/>
 
         <TextView
             android:id="@+id/remove_view_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_remove_contact"
-            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textColor="?colorTextOnUnthemedDarkBackground"
             android:textSize="16sp"/>
       </LinearLayout>
     </com.android.dialer.app.list.RemoveView>

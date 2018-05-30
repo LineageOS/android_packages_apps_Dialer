@@ -43,8 +43,6 @@ public interface CachedNumberLookupService {
 
   void addContact(Context context, CachedContactInfo info);
 
-  boolean isCacheUri(String uri);
-
   boolean isBusiness(ContactSource.Type sourceType);
 
   boolean canReportAsInvalid(ContactSource.Type sourceType, String objectId);
@@ -70,8 +68,6 @@ public interface CachedNumberLookupService {
     void setSource(ContactSource.Type sourceType, String name, long directoryId);
 
     void setDirectorySource(String name, long directoryId);
-
-    void setExtendedSource(String name, long directoryId);
 
     void setLookupKey(String lookupKey);
   }

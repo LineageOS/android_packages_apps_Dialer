@@ -75,6 +75,7 @@ import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.oem.MotorolaUtils;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DrawableConverter;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.ContactInfoCache.ContactInfoCacheCallback;
@@ -333,7 +334,7 @@ public class StatusBarNotifier
     Notification.Builder publicBuilder = new Notification.Builder(context);
     publicBuilder
         .setSmallIcon(iconResId)
-        .setColor(context.getResources().getColor(R.color.dialer_theme_color, context.getTheme()))
+        .setColor(ThemeComponent.get(context).theme().getColorPrimary())
         // Hide work call state for the lock screen notification
         .setContentTitle(getContentString(call, ContactsUtils.USER_TYPE_CURRENT));
     setNotificationWhen(call, callState, publicBuilder);

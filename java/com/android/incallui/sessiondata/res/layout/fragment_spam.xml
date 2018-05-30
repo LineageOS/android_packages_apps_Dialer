@@ -38,14 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="18dp"
         android:src="@drawable/quantum_ic_image_white_24"
-        android:tint="#546e7a"/>
+        android:tint="?colorIcon"/>
 
     <TextView
         android:id="@+id/spam_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/spam_photo_text"
-        android:textColor="#546e7a"
-        android:textSize="12sp"/>
+        style="@style/Dialer.TextAppearance.Secondary2"/>
   </LinearLayout>
 </FrameLayout>

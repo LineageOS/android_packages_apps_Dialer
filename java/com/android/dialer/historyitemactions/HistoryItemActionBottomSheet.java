@@ -23,7 +23,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.widget.ContactPhotoView;
 import java.util.List;
 
@@ -157,8 +157,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     if (module.tintDrawable()) {
       ((ImageView) moduleView.findViewById(R.id.module_image))
           .setImageTintList(
-              ColorStateList.valueOf(
-                  ContextCompat.getColor(getContext(), R.color.secondary_text_color)));
+              ColorStateList.valueOf(ThemeComponent.get(getContext()).theme().getColorIcon()));
     }
     moduleView.setOnClickListener(this);
     moduleView.setTag(module);

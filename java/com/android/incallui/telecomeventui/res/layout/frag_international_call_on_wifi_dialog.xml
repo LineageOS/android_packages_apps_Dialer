@@ -28,7 +28,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
       android:text="@string/details"
-      android:textColor="@color/dialer_primary_text_color"
+      android:textColor="?android:attr/textColorPrimary"
       android:textSize="16sp"/>
 
   <CheckBox
@@ -37,7 +37,7 @@
       android:layout_height="wrap_content"
       android:buttonTint="?android:attr/colorPrimary"
       android:text="@string/always_warn"
-      android:textColor="@color/dialer_primary_text_color"
+      android:textColor="?android:attr/textColorPrimary"
       android:textSize="14sp"/>
 </LinearLayout>
 

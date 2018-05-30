@@ -49,6 +49,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
@@ -82,6 +84,8 @@ import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyIcon;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyText;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -144,6 +148,9 @@ public class AnswerFragment extends Fragment
   private View importanceBadge;
   private SwipeButtonView secondaryButton;
   private SwipeButtonView answerAndReleaseButton;
+  private LinearLayout chipLayout;
+  private ImageView chipIcon;
+  private TextView chipText;
   private AffordanceHolderLayout affordanceHolderLayout;
   // Use these flags to prevent user from clicking accept/reject buttons multiple times.
   // We use separate flags because in some rare cases accepting a call may fail to join the room,
@@ -195,17 +202,6 @@ public class AnswerFragment extends Fragment
       public void performAction(AnswerFragment fragment) {
         fragment.performAnswerAndRelease();
       }
-    },
-
-    SPEAKEASY(
-        R.drawable.quantum_ic_rtt_vd_theme_24,
-        R.string.speakeasy_secondary_button_hint,
-        R.string.speakeasy_secondary_button_hint,
-        R.string.speakeasy_secondary_button_hint) {
-      @Override
-      public void performAction(AnswerFragment fragment) {
-        fragment.performSpeakEasy();
-      }
     };
 
     @DrawableRes public int icon;
@@ -232,8 +228,7 @@ public class AnswerFragment extends Fragment
     }
   }
 
-  private void performSpeakEasy() {
-    restoreAnswerAndReleaseButtonAnimation();
+  private void performSpeakEasy(View unused) {
     answerScreenDelegate.onSpeakEasyCall();
     buttonAcceptClicked = true;
   }
@@ -457,16 +452,6 @@ public class AnswerFragment extends Fragment
     if (allowAnswerAndRelease()) {
       answerAndReleaseButton.setVisibility(View.VISIBLE);
       answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
-    } else if (allowSpeakEasy()) {
-      Optional<Integer> alternativeIcon = SpeakEasyComponent.get(getContext()).speakEasyIcon();
-      if (alternativeIcon.isPresent()) {
-        // TODO(erfanian): Replace enum hack when we have a dedicated button.
-        SecondaryBehavior.SPEAKEASY.icon = alternativeIcon.get();
-      }
-      answerAndReleaseBehavior = SecondaryBehavior.SPEAKEASY;
-      answerAndReleaseBehavior.applyToView(answerAndReleaseButton);
-      answerAndReleaseButton.setVisibility(View.VISIBLE);
-      answerScreenDelegate.onAnswerAndReleaseButtonEnabled();
     } else {
       answerAndReleaseButton.setVisibility(View.INVISIBLE);
       answerScreenDelegate.onAnswerAndReleaseButtonDisabled();
@@ -478,6 +463,27 @@ public class AnswerFragment extends Fragment
             performAnswerAndReleaseButtonAction();
           }
         });
+  }
+
+  /** Initialize chip buttons */
+  private void initChips() {
+    if (!allowSpeakEasy()) {
+      chipLayout.setVisibility(View.GONE);
+      return;
+    }
+    chipLayout.setVisibility(View.VISIBLE);
+    chipLayout.setOnClickListener(this::performSpeakEasy);
+
+    @SpeakEasyIcon
+    Optional<Integer> alternativeIcon = SpeakEasyComponent.get(getContext()).speakEasyIcon();
+    @SpeakEasyText
+    Optional<Integer> alternativeText = SpeakEasyComponent.get(getContext()).speakEasyText();
+    if (alternativeIcon.isPresent() && alternativeText.isPresent()) {
+      chipIcon.setImageDrawable(getContext().getDrawable(alternativeIcon.get()));
+      chipText.setText(alternativeText.get());
+      // The button needs to override normal swipe up/down behavior.
+      chipLayout.bringToFront();
+    }
   }
 
   @Override
@@ -715,6 +721,9 @@ public class AnswerFragment extends Fragment
     View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
     secondaryButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button);
     answerAndReleaseButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button2);
+    chipLayout = view.findViewById(R.id.incall_data_container_chip_container);
+    chipIcon = view.findViewById(R.id.incall_data_container_chip_icon);
+    chipText = view.findViewById(R.id.incall_data_container_chip_text);
 
     affordanceHolderLayout = (AffordanceHolderLayout) view.findViewById(R.id.incoming_container);
     affordanceHolderLayout.setAffordanceCallback(affordanceCallback);
@@ -755,6 +764,7 @@ public class AnswerFragment extends Fragment
             .newAnswerScreenDelegate(this);
 
     initSecondaryButton();
+    initChips();
 
     int flags = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     if (!isInMultiWindowMode

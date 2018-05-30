@@ -29,7 +29,7 @@
     android:paddingBottom="29dp"
     android:paddingStart="@dimen/blocked_number_container_padding"
     android:paddingEnd="44dp"
-    android:background="@color/blocked_number_disabled_emergency_background_color"
+    android:background="?android:attr/colorBackground"
     android:focusable="true"
     android:orientation="vertical"
     android:visibility="gone">
@@ -69,7 +69,7 @@
         android:paddingStart="@dimen/blocked_number_container_padding"
         android:gravity="center_vertical"
         android:text="@string/block_list"
-        android:textColor="@color/blocked_number_header_color"/>
+        android:textColor="?android:attr/textColorPrimary"/>
 
       <RelativeLayout
         android:id="@+id/import_settings"
@@ -88,7 +88,7 @@
           android:paddingStart="@dimen/blocked_number_container_padding"
           android:paddingEnd="@dimen/blocked_number_container_padding"
           android:text="@string/blocked_call_settings_import_description"
-          android:textColor="@color/secondary_text_color"
+          android:textColor="?colorIcon"
           android:textSize="@dimen/blocked_number_settings_description_text_size"/>
 
         <Button
@@ -116,7 +116,7 @@
           android:layout_height="1dp"
           android:layout_marginTop="8dp"
           android:layout_below="@id/import_button"
-          android:background="@color/divider_line_color"/>
+          android:background="@color/dialer_divider_line_color"/>
 
       </RelativeLayout>
 
@@ -138,7 +138,7 @@
           android:paddingEnd="@dimen/blocked_number_container_padding"
           android:gravity="center_vertical"
           android:text="@string/migrate_blocked_numbers_dialog_title"
-          android:textColor="@color/blocked_number_header_color"/>
+          android:textColor="?android:attr/textColorPrimary"/>
 
         <TextView
           android:id="@+id/migrate_promo_description"
@@ -148,7 +148,7 @@
           android:layout_marginStart="@dimen/blocked_number_container_padding"
           android:layout_marginEnd="@dimen/blocked_number_container_padding"
           android:text="@string/migrate_blocked_numbers_dialog_message"
-          android:textColor="@color/secondary_text_color"/>
+          android:textColor="?colorIcon"/>
 
         <Button
           android:id="@+id/migrate_promo_allow_button"
@@ -171,7 +171,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="72dp"
-        android:background="@color/divider_line_color"/>
+        android:background="@color/dialer_divider_line_color"/>
 
     </LinearLayout>
 

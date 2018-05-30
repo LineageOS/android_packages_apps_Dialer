@@ -207,7 +207,6 @@ public final class NewVoicemailFragment extends Fragment implements LoaderCallba
 
     emptyContentView.setDescription((R.string.empty_voicemail_tab_text));
     emptyContentView.setImage(R.drawable.quantum_ic_voicemail_vd_theme_24);
-    emptyContentView.setImageTint(R.color.empty_voicemail_icon_tint_color, null);
   }
 
   private void showView(View view) {

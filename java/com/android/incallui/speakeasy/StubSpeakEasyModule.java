@@ -19,6 +19,9 @@ package com.android.incallui.speakeasy;
 import android.support.v4.app.Fragment;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyIcon;
+import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyText;
 import com.google.common.base.Optional;
 import dagger.Binds;
 import dagger.Module;
@@ -33,12 +36,17 @@ public abstract class StubSpeakEasyModule {
   abstract SpeakEasyCallManager bindsSpeakEasy(SpeakEasyCallManagerStub stub);
 
   @Provides
-  static Optional<Fragment> provideSpeakEasySettingsFragment() {
+  static @SpeakEasySettingsFragment Optional<Fragment> provideSpeakEasySettingsFragment() {
     return Optional.absent();
   }
 
   @Provides
-  static Optional<Integer> provideSpeakEasyIcon() {
+  static @SpeakEasyIcon Optional<Integer> provideSpeakEasyIcon() {
+    return Optional.absent();
+  }
+
+  @Provides
+  static @SpeakEasyText Optional<Integer> provideSpeakEasyText() {
     return Optional.absent();
   }
 }

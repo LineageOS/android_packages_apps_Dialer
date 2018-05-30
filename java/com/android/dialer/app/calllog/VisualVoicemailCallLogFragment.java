@@ -113,7 +113,6 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     setupView(view);
     EmptyContentView emptyContentView = view.findViewById(R.id.empty_list_view);
     emptyContentView.setImage(R.drawable.quantum_ic_voicemail_vd_theme_24);
-    emptyContentView.setImageTint(R.color.empty_voicemail_icon_tint_color, null);
     return view;
   }
 

@@ -19,8 +19,7 @@
   <application>
   <activity
         android:label="@string/enriched_call_simulator_activity"
-        android:name="com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity"
-        android:theme="@style/Dialer.ThemeBase.NoActionBar">
+        android:name="com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity">
     </activity>
   </application>
 </manifest>
