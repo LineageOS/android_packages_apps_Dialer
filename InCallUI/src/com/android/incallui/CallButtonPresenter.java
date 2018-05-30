@@ -533,6 +533,33 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     /**
+     * Counts number of supported routes and disables audio button if there is only one
+     * route supported (i.e nothing to choose from)
+     */
+    private boolean doesAudioButtonNeedShow() {
+        int numSupportedRoutes = 0;
+
+        if (0 != (CallAudioState.ROUTE_BLUETOOTH & getSupportedAudio())) {
+            numSupportedRoutes++;
+        }
+
+        if (0 != (CallAudioState.ROUTE_WIRED_OR_EARPIECE & getSupportedAudio())) {
+            numSupportedRoutes++;
+        }
+
+        if (0 != (CallAudioState.ROUTE_SPEAKER & getSupportedAudio())) {
+            numSupportedRoutes++;
+        }
+
+        if (numSupportedRoutes == 0) {
+            Log.e(this, "numSupportedRoutes = 0");
+            return false;
+        }
+
+        return (numSupportedRoutes > 1);
+    }
+
+    /**
      * Updates the buttons applicable for the UI.
      *
      * @param call The active call.
@@ -603,7 +630,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         boolean showCallRecordOption = recorder.isEnabled()
                 && !isVideo && call.getState() == Call.State.ACTIVE;
 
-        ui.showButton(BUTTON_AUDIO, true);
+        ui.showButton(BUTTON_AUDIO, doesAudioButtonNeedShow());
         ui.showButton(BUTTON_SWAP, showSwap);
         ui.showButton(BUTTON_HOLD, showHold);
         ui.setHold(isCallOnHold);
