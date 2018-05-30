@@ -732,8 +732,12 @@ public class CallButtonFragment
      * are visible based on the supported audio formats.
      */
     private void updateAudioButtons() {
-        final boolean bluetoothSupported = isSupported(CallAudioState.ROUTE_BLUETOOTH);
-        final boolean speakerSupported = isSupported(CallAudioState.ROUTE_SPEAKER);
+        final boolean bluetoothSupported =
+                          isSupported(CallAudioState.ROUTE_BLUETOOTH);
+        final boolean speakerSupported =
+                          isSupported(CallAudioState.ROUTE_SPEAKER);
+        final boolean earpieceOrWiredHeadsetSupported =
+                          isSupported(CallAudioState.ROUTE_WIRED_OR_EARPIECE);
 
         boolean audioButtonEnabled = false;
         boolean audioButtonChecked = false;
@@ -757,7 +761,7 @@ public class CallButtonFragment
                 showBluetoothIcon = true;
             } else if (isAudio(CallAudioState.ROUTE_SPEAKER)) {
                 showSpeakerphoneIcon = true;
-            } else {
+            } else if (earpieceOrWiredHeadsetSupported) {
                 showHandsetIcon = true;
                 // TODO: if a wired headset is plugged in, that takes precedence
                 // over the handset earpiece.  If so, maybe we should show some
@@ -765,7 +769,8 @@ public class CallButtonFragment
                 // earpiece" icon.  (Still need an asset for that, though.)
             }
 
-            // The audio button is NOT a toggle in this state, so set selected to false.
+            // The audio button is NOT a toggle in this state,
+            // so set selected to false.
             mAudioButton.setSelected(false);
         } else if (speakerSupported) {
             Log.d(this, "updateAudioButtons - speaker toggle mode");
@@ -888,8 +893,9 @@ public class CallButtonFragment
         final MenuItem wiredHeadsetItem = menu.findItem(R.id.audio_mode_wired_headset);
 
         final boolean usingHeadset = isSupported(CallAudioState.ROUTE_WIRED_HEADSET);
-        earpieceItem.setVisible(!usingHeadset);
-        earpieceItem.setEnabled(!usingHeadset);
+        final boolean earpieceSupported = isSupported(CallAudioState.ROUTE_EARPIECE);
+        earpieceItem.setVisible(!usingHeadset && earpieceSupported);
+        earpieceItem.setEnabled(!usingHeadset && earpieceSupported);
         wiredHeadsetItem.setVisible(usingHeadset);
         wiredHeadsetItem.setEnabled(usingHeadset);
         // TODO: Show the above item (either earpieceItem or wiredHeadsetItem)

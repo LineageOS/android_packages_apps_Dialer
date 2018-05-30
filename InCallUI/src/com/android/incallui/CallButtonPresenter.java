@@ -227,7 +227,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
      */
     public void toggleSpeakerphone() {
         // this function should not be called if bluetooth is available
-        if (0 != (CallAudioState.ROUTE_BLUETOOTH & getSupportedAudio())) {
+        if (isAudioRouteSupported(CallAudioState.ROUTE_BLUETOOTH)) {
 
             // It's clear the UI is wrong, so update the supported mode once again.
             Log.e(this, "toggling speakerphone not allowed when bluetooth supported.");
@@ -533,6 +533,41 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
     }
 
     /**
+     * Checks if audio route is supported on device
+     *
+     */
+    private boolean isAudioRouteSupported(int route) {
+        return (getSupportedAudio() & route) > 0;
+    }
+
+    /**
+     * Counts number of supported routes and disables audio button if there is only one
+     * route supported (i.e nothing to choose from)
+     */
+    private boolean doesAudioButtonNeedShow() {
+        int numSupportedRoutes = 0;
+
+        int routes[] = {
+            CallAudioState.ROUTE_BLUETOOTH,
+            CallAudioState.ROUTE_WIRED_OR_HEADSET,
+            CallAudioState.ROUTE_SPEAKER
+        };
+
+        for (int i = 0; i < routes.length; i++) {
+            if (isAudioRouteSupported(route)) {
+                numSupportedRoutes++;
+            }
+        }
+
+        if (numSupportedRoutes == 0) {
+            Log.e(this, "numSupportedRoutes = 0");
+            return false;
+        }
+
+        return (numSupportedRoutes > 1);
+    }
+
+    /**
      * Updates the buttons applicable for the UI.
      *
      * @param call The active call.
@@ -603,7 +638,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         boolean showCallRecordOption = recorder.isEnabled()
                 && !isVideo && call.getState() == Call.State.ACTIVE;
 
-        ui.showButton(BUTTON_AUDIO, true);
+        ui.showButton(BUTTON_AUDIO, doesAudioButtonNeedShow());
         ui.showButton(BUTTON_SWAP, showSwap);
         ui.showButton(BUTTON_HOLD, showHold);
         ui.setHold(isCallOnHold);
