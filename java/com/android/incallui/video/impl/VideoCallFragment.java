@@ -696,9 +696,17 @@ public class VideoCallFragment extends Fragment
     videoCallScreenDelegate.getLocalVideoSurfaceTexture().attachToTextureView(previewTextureView);
     videoCallScreenDelegate.getRemoteVideoSurfaceTexture().attachToTextureView(remoteTextureView);
 
-    this.isRemotelyHeld = isRemotelyHeld;
+    boolean updateRemoteOffView = false;
     if (this.shouldShowRemote != shouldShowRemote) {
       this.shouldShowRemote = shouldShowRemote;
+      updateRemoteOffView = true;
+    }
+    if (this.isRemotelyHeld != isRemotelyHeld) {
+      this.isRemotelyHeld = isRemotelyHeld;
+      updateRemoteOffView = true;
+    }
+
+    if (updateRemoteOffView) {
       updateRemoteOffView();
     }
     if (this.shouldShowPreview != shouldShowPreview) {
