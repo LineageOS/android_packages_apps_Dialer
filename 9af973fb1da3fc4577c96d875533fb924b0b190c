@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcd44bed_e72d960b",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-05-31T17:43:36Z",
+      "side": 1,
+      "message": "unrelated. If code were new, ofc this would be good, but now its just a change which just makes it harder to keep track of what has changes / why it has changed",
+      "range": {
+        "startLine": 229,
+        "startChar": 71,
+        "endLine": 230,
+        "endChar": 12
+      },
+      "revId": "9af973fb1da3fc4577c96d875533fb924b0b190c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad8ec0e_3bcb7be3",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-05-31T17:43:36Z",
+      "side": 1,
+      "message": "shouldAudioButtonShow()",
+      "revId": "9af973fb1da3fc4577c96d875533fb924b0b190c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9d4acc9_f7208a8a",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-05-31T17:43:36Z",
+      "side": 1,
+      "message": "not required, next return statement will do the same",
+      "range": {
+        "startLine": 564,
+        "startChar": 12,
+        "endLine": 564,
+        "endChar": 25
+      },
+      "revId": "9af973fb1da3fc4577c96d875533fb924b0b190c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "590c9d69_9f8ade93",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-05-31T17:43:36Z",
+      "side": 1,
+      "message": "shouldAudioButtonShow()",
+      "range": {
+        "startLine": 641,
+        "startChar": 36,
+        "endLine": 641,
+        "endChar": 59
+      },
+      "revId": "9af973fb1da3fc4577c96d875533fb924b0b190c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
