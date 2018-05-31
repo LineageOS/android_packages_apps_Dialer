@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "112eceb2_44d9a1d9",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2018-05-31T03:54:24Z",
+      "side": 1,
+      "message": "Might want to make a note you\u0027re changing this in your commit message too, although I thought wired headset was it\u0027s own thing?",
+      "range": {
+        "startLine": 762,
+        "startChar": 44,
+        "endLine": 762,
+        "endChar": 65
+      },
+      "revId": "14951ded5695dcaf9813e5cc3a96e9d824c875e0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
