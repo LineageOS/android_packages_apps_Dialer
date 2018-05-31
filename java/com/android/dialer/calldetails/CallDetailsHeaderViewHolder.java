@@ -40,6 +40,7 @@ import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.widget.BidiTextView;
 
 /**
@@ -157,20 +158,26 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
             contact.getNameOrNumber(),
             contact.getContactType());
 
-    nameView.setText(contact.getNameOrNumber());
-    if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
-      numberView.setVisibility(View.VISIBLE);
-      String secondaryInfo =
-          TextUtils.isEmpty(contact.getNumberLabel())
-              ? contact.getDisplayNumber()
-              : context.getString(
-                  com.android.contacts.common.R.string.call_subject_type_and_number,
-                  contact.getNumberLabel(),
-                  contact.getDisplayNumber());
-      numberView.setText(secondaryInfo);
+    // Hide the secondary text of the header by default.
+    // We will show it if needed (see below).
+    numberView.setVisibility(View.GONE);
+    numberView.setText(null);
+
+    if (PhoneNumberHelper.isLocalEmergencyNumber(context, contact.getNumber())) {
+      nameView.setText(context.getResources().getString(R.string.emergency_number));
     } else {
-      numberView.setVisibility(View.GONE);
-      numberView.setText(null);
+      nameView.setText(contact.getNameOrNumber());
+      if (!TextUtils.isEmpty(contact.getDisplayNumber())) {
+        numberView.setVisibility(View.VISIBLE);
+        String secondaryInfo =
+            TextUtils.isEmpty(contact.getNumberLabel())
+                ? contact.getDisplayNumber()
+                : context.getString(
+                    com.android.contacts.common.R.string.call_subject_type_and_number,
+                    contact.getNumberLabel(),
+                    contact.getDisplayNumber());
+        numberView.setText(secondaryInfo);
+      }
     }
 
     if (!TextUtils.isEmpty(contact.getSimDetails().getNetwork())) {

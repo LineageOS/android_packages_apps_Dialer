@@ -599,6 +599,29 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     setUpVideoButtonView.setVisibility(View.GONE);
     inviteVideoButtonView.setVisibility(View.GONE);
 
+    // For an emergency number, show "Call details" only.
+    if (PhoneNumberHelper.isLocalEmergencyNumber(context, number)) {
+      createNewContactButtonView.setVisibility(View.GONE);
+      addToExistingContactButtonView.setVisibility(View.GONE);
+      sendMessageView.setVisibility(View.GONE);
+      callWithNoteButtonView.setVisibility(View.GONE);
+      callComposeButtonView.setVisibility(View.GONE);
+      blockReportView.setVisibility(View.GONE);
+      blockView.setVisibility(View.GONE);
+      unblockView.setVisibility(View.GONE);
+      reportNotSpamView.setVisibility(View.GONE);
+      voicemailPlaybackView.setVisibility(View.GONE);
+
+      detailsButtonView.setVisibility(View.VISIBLE);
+      detailsButtonView.setTag(
+          IntentProvider.getCallDetailIntentProvider(
+              callDetailsEntries,
+              buildContact(),
+              /* canReportCallerId = */ false,
+              /* canSupportAssistedDialing = */ false));
+      return;
+    }
+
     if (isFullyUndialableVoicemail()) {
       // Sometimes the voicemail server will report the message is from some non phone number
       // source. If the number does not contains any dialable digit treat it as it is from a unknown
