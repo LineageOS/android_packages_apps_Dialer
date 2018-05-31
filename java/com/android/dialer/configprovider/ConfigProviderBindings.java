@@ -18,35 +18,23 @@ package com.android.dialer.configprovider;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
 
 /** Accessor for getting a {@link ConfigProvider}. */
 public class ConfigProviderBindings {
 
-  private static ConfigProvider configProvider;
   private static ConfigProvider configProviderStub;
 
   public static ConfigProvider get(@NonNull Context context) {
     Assert.isNotNull(context);
-    if (configProvider != null) {
-      return configProvider;
-    }
     if (!UserManagerCompat.isUserUnlocked(context)) {
       if (configProviderStub == null) {
         configProviderStub = new ConfigProviderStub();
       }
       return configProviderStub;
     }
-    configProvider = ConfigProviderComponent.get(context).getConfigProvider();
-    return configProvider;
-  }
-
-  @VisibleForTesting
-  public static void setForTesting(@Nullable ConfigProvider configProviderForTesting) {
-    configProvider = configProviderForTesting;
+    return ConfigProviderComponent.get(context).getConfigProvider();
   }
 
   private static class ConfigProviderStub implements ConfigProvider {
