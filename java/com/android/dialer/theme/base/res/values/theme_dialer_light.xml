@@ -25,7 +25,7 @@
     <!-- Pulled from Theme.AppCompat.Light.DarkActionbar-->
     <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     <item name="actionBarWidgetTheme">@null</item>
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="actionBarTheme">@style/DialerActionBarBaseTheme</item>
     <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
   </style>
 
@@ -88,5 +88,9 @@
       parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
     <item name="android:background">?android:attr/colorPrimary</item>
     <item name="background">?android:attr/colorPrimary</item>
+  </style>
+  <style name="DialerActionBarBaseTheme"
+      parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="colorControlNormal">@android:color/white</item>
   </style>
 </resources>
