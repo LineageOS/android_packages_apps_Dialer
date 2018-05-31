@@ -210,7 +210,6 @@ public class InCallFragment extends Fragment
   @Override
   public void onResume() {
     super.onResume();
-    inCallButtonUiDelegate.refreshMuteState();
     inCallScreenDelegate.onInCallScreenResumed();
   }
 

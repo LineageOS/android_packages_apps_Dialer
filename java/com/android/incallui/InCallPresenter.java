@@ -275,6 +275,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   private SpeakEasyCallManager speakEasyCallManager;
 
+  private boolean addCallClicked = false;
+  private boolean automaticallyMutedByAddCall = false;
+
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
   @VisibleForTesting
   InCallPresenter() {}
@@ -1234,7 +1237,9 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       proximitySensor.onInCallShowing(showing);
     }
 
-    if (!showing) {
+    if (showing) {
+      refreshMuteState();
+    } else {
       updateIsChangingConfigurations();
     }
 
@@ -2049,6 +2054,39 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       LogUtil.i("InCallPresenter.isInCallUiLocked", "still locked by %s", lock);
     }
     return true;
+  }
+
+  public void addCallClicked() {
+    if (addCallClicked) {
+      // Since clicking add call button brings user to MainActivity and coming back refreshes mute
+      // state, add call button should only be clicked once during InCallActivity shows.
+      return;
+    }
+    addCallClicked = true;
+    if (!AudioModeProvider.getInstance().getAudioState().isMuted()) {
+      // Automatically mute the current call
+      TelecomAdapter.getInstance().mute(true);
+      automaticallyMutedByAddCall = true;
+    }
+    TelecomAdapter.getInstance().addCall();
+  }
+
+  /** Refresh mute state after call UI resuming from add call screen. */
+  public void refreshMuteState() {
+    LogUtil.i(
+        "InCallPresenter.refreshMuteState",
+        "refreshMuteStateAfterAddCall: %b addCallClicked: %b",
+        automaticallyMutedByAddCall,
+        addCallClicked);
+    if (!addCallClicked) {
+      return;
+    }
+    if (automaticallyMutedByAddCall) {
+      // Restore the previous mute state
+      TelecomAdapter.getInstance().mute(false);
+      automaticallyMutedByAddCall = false;
+    }
+    addCallClicked = false;
   }
 
   private final Set<InCallUiLock> inCallUiLocks = new ArraySet<>();
