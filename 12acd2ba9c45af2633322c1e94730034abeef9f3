@@ -16,6 +16,23 @@
       "revId": "12acd2ba9c45af2633322c1e94730034abeef9f3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f162378f_8e52d36a",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-05-31T17:12:22Z",
+      "side": 1,
+      "message": "how about another helper function\nprivate boolean isAudioRouteSupported(int route) {\n    return (getSupportedAudio() \u0026 route) \u003e 0;\n}\n\nand using an array?\n\nint routes[] \u003d {\n    CallAudioState.ROUTE_BLUETOOTH,\n    CallAudioState.ROUTE_WIRED_OR_HEADSET,\n    CallAudioState.ROUTE_SPEAKER\n};\nfor (int i \u003d 0; i \u003c routes.length; i++) {\n    if (isAudioRouteSupported(route)) {\n        numSupportedRoutes++;\n    }\n}",
+      "revId": "12acd2ba9c45af2633322c1e94730034abeef9f3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
