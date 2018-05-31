@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27015524_67638b2f",
+        "filename": "InCallUI/src/com/android/incallui/CallButtonFragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-05-31T17:04:55Z",
+      "side": 1,
+      "message": "line length",
+      "revId": "12acd2ba9c45af2633322c1e94730034abeef9f3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
