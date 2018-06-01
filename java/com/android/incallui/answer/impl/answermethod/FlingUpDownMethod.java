@@ -761,19 +761,29 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     rejectTextShow.setStartDelay(SWIPE_TO_DECLINE_FADE_IN_DELAY_MILLIS);
 
     // reject hint text translate in
-    Animator rejectTextTranslate =
+    Animator rejectTextTranslateIn =
         ObjectAnimator.ofFloat(
             swipeToRejectText,
             View.TRANSLATION_Y,
             DpUtil.dpToPx(getContext(), HINT_REJECT_FADE_TRANSLATION_Y_DP),
             0f);
-    rejectTextTranslate.setInterpolator(new FastOutSlowInInterpolator());
-    rejectTextTranslate.setDuration(ANIMATE_DURATION_NORMAL_MILLIS);
+    rejectTextTranslateIn.setInterpolator(new FastOutSlowInInterpolator());
+    rejectTextTranslateIn.setDuration(ANIMATE_DURATION_NORMAL_MILLIS);
 
     // reject hint text fade out
     Animator rejectTextHide = ObjectAnimator.ofFloat(swipeToRejectText, View.ALPHA, 0f);
     rejectTextHide.setInterpolator(new FastOutLinearInInterpolator());
     rejectTextHide.setDuration(ANIMATE_DURATION_SHORT_MILLIS);
+
+    // reject hint text translate out
+    Animator rejectTextTranslateOut =
+        ObjectAnimator.ofFloat(
+            swipeToRejectText,
+            View.TRANSLATION_Y,
+            0f,
+            DpUtil.dpToPx(getContext(), HINT_REJECT_FADE_TRANSLATION_Y_DP));
+    rejectTextTranslateOut.setInterpolator(new FastOutSlowInInterpolator());
+    rejectTextTranslateOut.setDuration(ANIMATE_DURATION_NORMAL_MILLIS);
 
     Interpolator curve =
         PathInterpolatorCompat.create(
@@ -809,6 +819,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     breatheAnimation
         .play(textUp)
         .with(rejectTextHide)
+        .with(rejectTextTranslateOut)
         .with(puckUp)
         .with(puckScaleUp)
         .after(167 /* delay */);
@@ -819,7 +830,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
         .with(textDown)
         .with(puckScaleDown)
         .with(rejectTextShow)
-        .with(rejectTextTranslate)
+        .with(rejectTextTranslateIn)
         .after(puckUp);
 
     // Add vibration animation to the animator set.
