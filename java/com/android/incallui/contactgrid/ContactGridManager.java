@@ -40,6 +40,7 @@ import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.DrawableConverter;
+import com.android.dialer.widget.BidiTextView;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
@@ -77,7 +78,7 @@ public class ContactGridManager {
   private final TextView forwardedNumberView;
   private final ImageView spamIconImageView;
   private final ViewAnimator bottomTextSwitcher;
-  private final TextView bottomTextView;
+  private final BidiTextView bottomTextView;
   private final Chronometer bottomTimerView;
   private final Space topRowSpace;
   private int avatarSize;

@@ -78,6 +78,7 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.UriUtils;
 import com.android.dialer.util.ViewUtil;
+import com.android.dialer.widget.BidiTextView;
 import com.android.dialer.widget.DialerToolbar;
 import com.android.dialer.widget.LockableViewPager;
 import com.android.incallui.callpending.CallPendingActivity;
@@ -135,7 +136,7 @@ public class CallComposerActivity extends AppCompatActivity
   private Long sessionId = Session.NO_SESSION_ID;
 
   private TextView nameView;
-  private TextView numberView;
+  private BidiTextView numberView;
   private QuickContactBadge contactPhoto;
   private RelativeLayout contactContainer;
   private DialerToolbar toolbar;

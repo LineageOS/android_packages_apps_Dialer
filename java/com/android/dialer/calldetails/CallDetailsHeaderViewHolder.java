@@ -54,7 +54,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
   private final CallDetailsHeaderListener callDetailsHeaderListener;
   private final ImageView callbackButton;
   private final BidiTextView nameView;
-  private final TextView numberView;
+  private final BidiTextView numberView;
   private final TextView networkView;
   private final QuickContactBadge contactPhoto;
   private final Context context;
