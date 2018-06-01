@@ -318,7 +318,8 @@ public class ContactGridManager {
         PhotoInfo.newBuilder()
             .setIsBusiness(primaryInfo.photoType() == ContactPhotoType.BUSINESS)
             .setIsVoicemail(primaryCallState.isVoiceMailNumber())
-            .setIsSpam(primaryInfo.isSpam());
+            .setIsSpam(primaryInfo.isSpam())
+            .setIsConference(primaryCallState.isConference());
 
     // Contact has a name, that is a number.
     if (primaryInfo.nameIsNumber() && primaryInfo.number() != null) {
