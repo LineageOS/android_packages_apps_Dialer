@@ -48,7 +48,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -768,7 +768,8 @@ public class CallCardPresenter
   }
 
   private boolean shouldShowLocation() {
-    if (!ConfigProviderBindings.get(context)
+    if (!ConfigProviderComponent.get(context)
+        .getConfigProvider()
         .getBoolean(CONFIG_ENABLE_EMERGENCY_LOCATION, CONFIG_ENABLE_EMERGENCY_LOCATION_DEFAULT)) {
       LogUtil.i("CallCardPresenter.getLocationFragment", "disabled by config.");
       return false;
@@ -840,7 +841,8 @@ public class CallCardPresenter
     int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
     float batteryPercent = (100f * level) / scale;
     long threshold =
-        ConfigProviderBindings.get(context)
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getLong(
                 CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION,
                 CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT);

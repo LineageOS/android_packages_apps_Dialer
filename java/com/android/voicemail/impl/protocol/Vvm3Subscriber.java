@@ -31,7 +31,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.ArrayMap;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.OmtpEvents;
@@ -312,7 +312,8 @@ public class Vvm3Subscriber {
   @VisibleForTesting
   static List<Pattern> getSubscribeLinkPatterns(Context context) {
     String patternsJsonString =
-        ConfigProviderBindings.get(context)
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getString(
                 VVM3_SUBSCRIBE_LINK_PATTERNS_JSON_ARRAY, VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS);
     List<Pattern> patterns = new ArrayList<>();

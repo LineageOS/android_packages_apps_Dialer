@@ -69,7 +69,7 @@ import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
@@ -309,7 +309,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     primaryActionButtonView.setOnClickListener(this);
     primaryActionView.setOnClickListener(this.expandCollapseListener);
     if (this.voicemailPlaybackPresenter != null
-        && ConfigProviderBindings.get(this.context)
+        && ConfigProviderComponent.get(this.context)
+            .getConfigProvider()
             .getBoolean(
                 CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT,
                 CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT_FLAG)) {
@@ -710,7 +711,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           videoCallButtonView.setVisibility(View.VISIBLE);
           CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
         } else if (duo.isActivated(context) && !identifiedSpamCall) {
-          if (ConfigProviderBindings.get(context)
+          if (ConfigProviderComponent.get(context)
+              .getConfigProvider()
               .getBoolean("enable_call_log_duo_invite_button", false)) {
             inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
             inviteVideoButtonView.setVisibility(View.VISIBLE);
@@ -719,7 +721,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           }
         } else if (duo.isEnabled(context) && !identifiedSpamCall) {
           if (!duo.isInstalled(context)) {
-            if (ConfigProviderBindings.get(context)
+            if (ConfigProviderComponent.get(context)
+                .getConfigProvider()
                 .getBoolean("enable_call_log_install_duo_button", false)) {
               setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
               setUpVideoButtonView.setVisibility(View.VISIBLE);
@@ -728,7 +731,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
             }
           } else {
-            if (ConfigProviderBindings.get(context)
+            if (ConfigProviderComponent.get(context)
+                .getConfigProvider()
                 .getBoolean("enable_call_log_activate_duo_button", false)) {
               setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
               setUpVideoButtonView.setVisibility(View.VISIBLE);

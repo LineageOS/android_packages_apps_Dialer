@@ -32,7 +32,7 @@ import com.android.bubble.BubbleInfo;
 import com.android.bubble.BubbleInfo.Action;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.base.ThemeComponent;
@@ -82,7 +82,9 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private InCallState inCallState;
 
   public static boolean isEnabled(Context context) {
-    return ConfigProviderBindings.get(context).getBoolean("enable_return_to_call_bubble_v2", false);
+    return ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean("enable_return_to_call_bubble_v2", false);
   }
 
   public ReturnToCallController(Context context, ContactInfoCache contactInfoCache) {

@@ -31,7 +31,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.configprovider.ConfigProvider;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.telecom.TelecomUtil;
@@ -90,7 +90,7 @@ public class AssistedDialAction implements PreCallAction {
   private TelephonyManager getAssistedDialingTelephonyManager(
       Context context, CallIntentBuilder builder) {
 
-    ConfigProvider configProvider = ConfigProviderBindings.get(context);
+    ConfigProvider configProvider = ConfigProviderComponent.get(context).getConfigProvider();
     TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
     // None of this will be required in the framework because the PhoneAccountHandle
     // is already mapped to the request in the TelecomConnection.

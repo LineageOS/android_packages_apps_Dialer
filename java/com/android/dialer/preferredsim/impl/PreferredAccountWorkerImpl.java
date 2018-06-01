@@ -44,7 +44,7 @@ import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
@@ -357,7 +357,9 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
   @WorkerThread
   private static boolean isPreferredSimEnabled(Context context) {
     Assert.isWorkerThread();
-    if (!ConfigProviderBindings.get(context).getBoolean("preferred_sim_enabled", true)) {
+    if (!ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean("preferred_sim_enabled", true)) {
       return false;
     }
 
