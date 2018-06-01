@@ -18,6 +18,7 @@ package com.android.dialer.app.calllog;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.CallLog.Calls;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.PhoneNumberUtils;
@@ -26,7 +27,6 @@ import android.text.format.Time;
 import com.android.contacts.common.util.DateUtils;
 import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
-import com.android.dialer.compat.AppCompatConstants;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumbercache.CallLogQuery;
@@ -267,18 +267,15 @@ public class CallLogGroupBuilder {
   }
 
   private boolean areBothNotVoicemail(int callType, int groupCallType) {
-    return callType != AppCompatConstants.CALLS_VOICEMAIL_TYPE
-        && groupCallType != AppCompatConstants.CALLS_VOICEMAIL_TYPE;
+    return callType != Calls.VOICEMAIL_TYPE && groupCallType != Calls.VOICEMAIL_TYPE;
   }
 
   private boolean areBothNotBlocked(int callType, int groupCallType) {
-    return callType != AppCompatConstants.CALLS_BLOCKED_TYPE
-        && groupCallType != AppCompatConstants.CALLS_BLOCKED_TYPE;
+    return callType != Calls.BLOCKED_TYPE && groupCallType != Calls.BLOCKED_TYPE;
   }
 
   private boolean areBothBlocked(int callType, int groupCallType) {
-    return callType == AppCompatConstants.CALLS_BLOCKED_TYPE
-        && groupCallType == AppCompatConstants.CALLS_BLOCKED_TYPE;
+    return callType == Calls.BLOCKED_TYPE && groupCallType == Calls.BLOCKED_TYPE;
   }
 
   private boolean meetsAssistedDialingGroupingCriteria(int groupFeatures, int callFeatures) {

@@ -61,29 +61,34 @@ public class ImsVideoTech implements VideoTech {
   @Override
   public boolean isAvailable(Context context, PhoneAccountHandle phoneAccountHandle) {
     if (call.getVideoCall() == null) {
+      LogUtil.i("ImsVideoCall.isAvailable", "null video call");
       return false;
     }
 
     // We are already in an IMS video call
     if (VideoProfile.isVideo(call.getDetails().getVideoState())) {
+      LogUtil.i("ImsVideoCall.isAvailable", "already video call");
       return true;
     }
 
     // The user has disabled IMS video calling in system settings
     if (!CallUtil.isVideoEnabled(context)) {
+      LogUtil.i("ImsVideoCall.isAvailable", "disabled in settings");
       return false;
     }
 
     // The current call doesn't support transmitting video
     if (!call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_LOCAL_TX)) {
+      LogUtil.i("ImsVideoCall.isAvailable", "no TX");
       return false;
     }
 
     // The current call remote device doesn't support receiving video
     if (!call.getDetails().can(Call.Details.CAPABILITY_SUPPORTS_VT_REMOTE_RX)) {
+      LogUtil.i("ImsVideoCall.isAvailable", "no RX");
       return false;
     }
-
+    LogUtil.i("ImsVideoCall.isAvailable", "available");
     return true;
   }
 

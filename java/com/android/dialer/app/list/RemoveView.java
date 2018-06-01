@@ -53,7 +53,7 @@ public class RemoveView extends FrameLayout {
     removeText = (TextView) findViewById(R.id.remove_view_text);
     removeIcon = (ImageView) findViewById(R.id.remove_view_icon);
     final Resources r = getResources();
-    unhighlightedColor = r.getColor(R.color.remove_text_color);
+    unhighlightedColor = r.getColor(android.R.color.white);
     highlightedColor = r.getColor(R.color.remove_highlighted_text_color);
     removeDrawable = r.getDrawable(R.drawable.ic_remove);
   }

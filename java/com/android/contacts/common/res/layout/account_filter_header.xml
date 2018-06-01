@@ -23,7 +23,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/background_primary">
+  android:background="?android:attr/colorBackground">
   <!-- Used to show the touch feedback -->
   <FrameLayout
     android:id="@+id/account_filter_header_container"

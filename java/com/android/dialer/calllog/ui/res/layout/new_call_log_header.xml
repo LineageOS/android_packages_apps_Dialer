@@ -21,7 +21,7 @@
     android:layout_height="wrap_content">
   <TextView
       android:id="@+id/new_call_log_header_text"
-      style="@style/SubHeader"
+      style="@style/Dialer.TextAppearance.Secondary"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"

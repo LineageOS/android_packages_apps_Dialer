@@ -32,7 +32,6 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/block_number_footer_message_vvm"
-      android:textColor="@color/blocked_number_secondary_text_color"
-      android:textSize="@dimen/blocked_number_settings_description_text_size"/>
+      style="@style/Dialer.TextAppearance.Secondary"/>
   </LinearLayout>
 </LinearLayout>

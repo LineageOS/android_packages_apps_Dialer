@@ -53,21 +53,18 @@
 
         <TextView
             android:id="@+id/error_card_header"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/voicemail_promo_card_title_padding"
             android:layout_gravity="center_vertical"
-            android:singleLine="false"
-            android:textSize="@dimen/voicemail_promo_card_title_text_size"/>
+            style="@style/Dialer.TextAppearance.Header2"/>
 
         <TextView
             android:id="@+id/error_card_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="@dimen/voicemail_promo_card_line_spacing"
-            android:singleLine="false"
-            android:textSize="@dimen/voicemail_promo_card_message_size"/>
+            style="@style/Dialer.TextAppearance.Secondary"/>
       </LinearLayout>
     </LinearLayout>
 

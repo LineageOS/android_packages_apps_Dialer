@@ -966,6 +966,12 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       }
       /** Iterates the cursor to find top contact suggestions without duplication. */
       while ((cursor.moveToNext()) && (counter < MAX_ENTRIES)) {
+        if (cursor.isNull(columnDataId)) {
+          LogUtil.i(
+              "DialerDatabaseHelper.getLooseMatches",
+              "_id column null. Row was deleted during iteration, skipping");
+          continue;
+        }
         final long dataID = cursor.getLong(columnDataId);
         final String displayName = cursor.getString(columnDisplayNamePrimary);
         final String phoneNumber = cursor.getString(columnNumber);

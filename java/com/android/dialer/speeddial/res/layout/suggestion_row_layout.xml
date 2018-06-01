@@ -57,7 +57,7 @@
       android:layout_centerVertical="true"
       android:layout_alignParentEnd="true"
       android:scaleType="center"
-      android:tint="@color/secondary_text_color"
+      android:tint="?colorIcon"
       android:src="@drawable/quantum_ic_more_vert_white_24"
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/content_description_overflow"/>

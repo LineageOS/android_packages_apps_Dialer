@@ -26,7 +26,6 @@ import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.calllogutils.PhoneCallDetails;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.AppCompatConstants;
 
 /** Helper class to fill in the views of a call log entry. */
 /* package */ class CallLogListItemHelper {
@@ -224,15 +223,15 @@ import com.android.dialer.compat.AppCompatConstants;
     int lastCallType = getLastCallType(callTypes);
     int stringID;
 
-    if (lastCallType == AppCompatConstants.CALLS_MISSED_TYPE) {
+    if (lastCallType == Calls.MISSED_TYPE) {
       //Message: Missed call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
       //<PhoneAccount>.
       stringID = R.string.description_incoming_missed_call;
-    } else if (lastCallType == AppCompatConstants.CALLS_INCOMING_TYPE) {
+    } else if (lastCallType == Calls.INCOMING_TYPE) {
       //Message: Answered call from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
       //<PhoneAccount>.
       stringID = R.string.description_incoming_answered_call;
-    } else if (lastCallType == AppCompatConstants.CALLS_VOICEMAIL_TYPE) {
+    } else if (lastCallType == Calls.VOICEMAIL_TYPE) {
       //Message: (Unread) [V/v]oicemail from <NameOrNumber>, <TypeOrLocation>, <TimeOfCall>,
       //<PhoneAccount>.
       stringID =

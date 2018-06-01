@@ -16,6 +16,7 @@
 
 package com.android.dialer.calllogutils;
 
+import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.v4.os.BuildCompat;
 import com.android.dialer.NumberAttributes;
@@ -28,8 +29,9 @@ import com.android.dialer.voicemail.model.VoicemailEntry;
 public final class PhotoInfoBuilder {
 
   /** Returns a {@link PhotoInfo.Builder} with info from {@link CoalescedRow}. */
-  public static PhotoInfo.Builder fromCoalescedRow(CoalescedRow coalescedRow) {
+  public static PhotoInfo.Builder fromCoalescedRow(Context context, CoalescedRow coalescedRow) {
     return fromNumberAttributes(coalescedRow.getNumberAttributes())
+        .setName(CallLogEntryText.buildPrimaryText(context, coalescedRow).toString())
         .setFormattedNumber(coalescedRow.getFormattedNumber())
         .setIsVoicemail(coalescedRow.getIsVoicemailCall())
         .setIsSpam(

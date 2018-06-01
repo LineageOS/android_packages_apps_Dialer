@@ -47,8 +47,7 @@
         android:minHeight="40dp"
         android:text="@string/search_location_permission"
         android:lineSpacingMultiplier="1.2"
-        android:textSize="16sp"
-        android:textColor="@color/dialer_secondary_text_color"/>
+        style="@style/Dialer.TextAppearance.Primary"/>
 
     <Button
         android:id="@+id/location_permission_allow"

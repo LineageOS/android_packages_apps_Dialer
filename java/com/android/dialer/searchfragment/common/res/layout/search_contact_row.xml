@@ -62,7 +62,7 @@
       android:layout_height="@dimen/search_row_height"
       android:layout_alignParentEnd="true"
       android:padding="@dimen/call_to_action_padding"
-      android:tint="@color/dialer_secondary_text_color"
+      android:tint="?colorIcon"
       android:visibility="gone"
       android:scaleType="center"/>
 
@@ -74,6 +74,7 @@
       android:layout_centerVertical="true"
       android:padding="@dimen/call_to_action_padding"
       android:src="@drawable/ic_work_profile"
+      android:tint="?colorIcon"
       android:scaleType="centerInside"
       android:visibility="gone"/>
 </RelativeLayout>

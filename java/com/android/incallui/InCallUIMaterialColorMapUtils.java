@@ -16,31 +16,35 @@
 
 package com.android.incallui;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.telecom.PhoneAccount;
 import com.android.contacts.common.util.MaterialColorMapUtils;
+import com.android.dialer.theme.base.ThemeComponent;
 
 public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
 
   private final TypedArray primaryColors;
   private final TypedArray secondaryColors;
   private final Resources resources;
+  private final Context context;
 
-  public InCallUIMaterialColorMapUtils(Resources resources) {
-    super(resources);
+  public InCallUIMaterialColorMapUtils(Context context) {
+    super(context.getResources());
+    this.resources = context.getResources();
+    this.context = context;
     primaryColors = resources.obtainTypedArray(R.array.background_colors);
     secondaryColors = resources.obtainTypedArray(R.array.background_colors_dark);
-    this.resources = resources;
   }
 
   /**
    * {@link Resources#getColor(int) used for compatibility
    */
   @SuppressWarnings("deprecation")
-  public static MaterialPalette getDefaultPrimaryAndSecondaryColors(Resources resources) {
-    final int primaryColor = resources.getColor(R.color.dialer_theme_color);
-    final int secondaryColor = resources.getColor(R.color.dialer_theme_color_dark);
+  public static MaterialPalette getDefaultPrimaryAndSecondaryColors(Context context) {
+    final int primaryColor = ThemeComponent.get(context).theme().getColorPrimary();
+    final int secondaryColor = ThemeComponent.get(context).theme().getColorPrimaryDark();
     return new MaterialPalette(primaryColor, secondaryColor);
   }
 
@@ -52,7 +56,7 @@ public class InCallUIMaterialColorMapUtils extends MaterialColorMapUtils {
   @Override
   public MaterialPalette calculatePrimaryAndSecondaryColor(int color) {
     if (color == PhoneAccount.NO_HIGHLIGHT_COLOR) {
-      return getDefaultPrimaryAndSecondaryColors(resources);
+      return getDefaultPrimaryAndSecondaryColors(context);
     }
 
     for (int i = 0; i < primaryColors.length(); i++) {

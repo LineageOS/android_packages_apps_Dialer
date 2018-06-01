@@ -49,6 +49,7 @@ import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.telecom.TelecomUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -256,7 +257,7 @@ public class SpamCallListListener implements CallList.Listener {
                 createActivityPendingIntent(call, SpamNotificationActivity.ACTION_SHOW_DIALOG))
             .setCategory(Notification.CATEGORY_STATUS)
             .setPriority(Notification.PRIORITY_DEFAULT)
-            .setColor(context.getColor(R.color.dialer_theme_color))
+            .setColor(ThemeComponent.get(context).theme().getColorPrimary())
             .setSmallIcon(R.drawable.quantum_ic_call_end_vd_theme_24)
             .setGroup(GROUP_KEY);
     if (BuildCompat.isAtLeastO()) {
