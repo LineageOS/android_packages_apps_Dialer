@@ -35,6 +35,6 @@ public final class BidiTextView extends TextView {
 
   @Override
   public void setText(CharSequence text, BufferType type) {
-    super.setText(DialerBidiFormatter.unicodeWrap(text), type);
+    super.setText(DialerBidiFormatter.format(text), type);
   }
 }
