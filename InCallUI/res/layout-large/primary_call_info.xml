@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<!-- "Call Banner" for primary call, the foregound or ringing call. The "call banner" is a block
+    of info about a single call, including the contact name, phone number, call time counter, and
+    other status info.  This info is shown as a "banner" overlaid across the top of contact photo.
+    -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/primary_call_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/call_banner_side_padding"
+        android:paddingEnd="@dimen/call_banner_side_padding"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="start"
+        android:breakStrategy="balanced">
+
+    <LinearLayout android:id="@+id/callSubjectLayout"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:clipChildren="false"
+                  android:clipToPadding="false">
+
+        <TextView android:id="@+id/callSubject"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAlignment="viewStart"
+                  android:textAppearance="?android:attr/textAppearanceSmall"
+                  android:textColor="@color/incall_call_banner_background_color"
+                  android:textSize="@dimen/call_label_text_size"
+                  android:background="@drawable/subject_bubble"
+                  android:maxLines="2"
+                  android:ellipsize="end"
+                  android:singleLine="false"
+                  android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/callStateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <ImageView android:id="@+id/workProfileIcon"
+            android:src="@drawable/ic_work_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="8dp"
+            android:baselineAlignBottom="true"
+            android:tint="@color/incall_accent_color"
+            android:scaleType="center"
+            android:visibility="gone" />
+
+        <!-- Subscription provider or WiFi calling icon displayed to the left of the label -->
+        <ImageView android:id="@+id/callStateIcon"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.0"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
+        <ImageView android:id="@+id/videoCallIcon"
+            android:src="@drawable/ic_toolbar_video"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:baselineAlignBottom="true"
+            android:tint="@color/incall_accent_color"
+            android:scaleType="center"
+            android:visibility="gone" />
+
+        <com.android.phone.common.widget.ResizingTextTextView
+            xmlns:ex="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/callStateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/incall_accent_color"
+            android:textSize="@dimen/call_status_text_size"
+            android:alpha="0.7"
+            android:ellipsize="end"
+            ex:resizing_text_min_size="@dimen/call_status_text_min_size" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- Name (or the phone number, if we don't have a name to display). -->
+        <com.android.phone.common.widget.ResizingTextTextView
+            xmlns:ex="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:fontFamily="sans-serif-light"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/call_name_text_size"
+            android:singleLine="false"
+            android:ellipsize="end"
+            ex:resizing_text_min_size="@dimen/call_name_text_min_size" />
+
+        <!-- Contact photo for primary call info -->
+        <ImageView android:id="@+id/photoSmall"
+            android:layout_width="@dimen/contact_context_small_photo_size"
+            android:layout_height="@dimen/contact_context_small_photo_size"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:importantForAccessibility="no"
+            android:src="@drawable/img_no_image_automirrored" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/in_call_layout_height"
+        android:orientation="horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <ImageView android:id="@+id/hdAudioIcon"
+            android:src="@drawable/ic_hd_24dp"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:tint="@color/incall_call_banner_subtext_color"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
+        <ImageView android:id="@+id/forwardIcon"
+            android:src="@drawable/ic_forward_white_24dp"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:tint="@color/incall_call_banner_subtext_color"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Label (like "Mobile" or "Work", if present) and phone number, side by side -->
+        <LinearLayout android:id="@+id/labelAndNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView android:id="@+id/label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/incall_call_banner_subtext_color"
+                android:textSize="@dimen/call_label_text_size"
+                android:singleLine="true"
+                android:textDirection="ltr"
+                android:visibility="gone" />
+
+            <TextView android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/incall_call_banner_subtext_color"
+                android:textSize="@dimen/call_label_text_size"
+                android:singleLine="true"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- Elapsed time indication for a call in progress. -->
+        <TextView android:id="@+id/elapsedTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/incall_call_banner_subtext_color"
+            android:textSize="@dimen/call_label_text_size"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!-- Call type indication: a special label and/or branding
+     for certain kinds of calls (like "SIP call" for a SIP call.) -->
+    <TextView android:id="@+id/callTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/incall_call_banner_text_color"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:visibility="gone" />
+
+</LinearLayout> <!-- End of call_banner -->

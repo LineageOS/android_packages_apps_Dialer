@@ -33,5 +33,6 @@
 
     <dimen name="video_preview_margin">20dp</dimen>
 
-    <dimen name="end_call_button_margin_left">50dp</dimen>
+    <!-- keep in sync with primary_call_info.xml -->
+    <dimen name="end_call_button_margin_left">300dp</dimen>
 </resources>
