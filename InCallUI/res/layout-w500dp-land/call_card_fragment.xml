@@ -151,12 +151,12 @@
         <include layout="@layout/primary_call_info" />
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
             <fragment android:name="com.android.incallui.CallButtonFragment"
                 android:id="@+id/callButtonFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" />
 

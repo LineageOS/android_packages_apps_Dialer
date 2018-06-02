@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Whether to keep caller name, caller number and elapsed time
+         on a single line. Keep in sync with layout/primary_call_info.xml
+    -->
+    <bool name="caller_name_and_elapsed_time_in_one_line">false</bool>
+</resources>
