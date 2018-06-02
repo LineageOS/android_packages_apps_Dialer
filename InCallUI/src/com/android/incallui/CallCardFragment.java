@@ -23,6 +23,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
@@ -630,6 +631,30 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     /**
+     *
+     * Returns true if screen size is large or xlarge
+     *
+     */
+    private boolean IsLargeScreen() {
+        int screenLayout = getResources().getConfiguration().screenLayout;
+        screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        switch (screenLayout) {
+        case Configuration.SCREENLAYOUT_SIZE_SMALL:
+            return false;
+        case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+            return false;
+        case Configuration.SCREENLAYOUT_SIZE_LARGE:
+            return true;
+        case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+            return true;
+        default:
+            Log.e(this, "IsLargeScreen(): screen size is undefined!");
+            return false;
+        }
+    }
+
+    /**
      * Sets the primary caller information.
      *
      * @param number The caller phone number.
@@ -650,13 +675,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         Log.d(this, "Setting primary call");
         // set the name field.
         setPrimaryName(name, nameIsNumber);
+        boolean isScreenLarge = IsLargeScreen();
+
 
         if (TextUtils.isEmpty(number) && TextUtils.isEmpty(label)) {
             mCallNumberAndLabel.setVisibility(View.GONE);
-            mElapsedTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+
+            if (!isScreenLarge) {
+                mElapsedTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+            }
         } else {
             mCallNumberAndLabel.setVisibility(View.VISIBLE);
-            mElapsedTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+
+            if (!isScreenLarge) {
+                mElapsedTime.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+            }
         }
 
         setPrimaryPhoneNumber(number);
