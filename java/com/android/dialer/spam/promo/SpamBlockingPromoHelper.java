@@ -28,7 +28,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.os.BuildCompat;
 import android.view.View;
 import android.widget.Toast;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
@@ -65,7 +65,9 @@ public class SpamBlockingPromoHelper {
    * @return true if we should show a spam blocking promo.
    */
   public boolean shouldShowSpamBlockingPromo() {
-    if (!ConfigProviderBindings.get(context).getBoolean(ENABLE_SPAM_BLOCKING_PROMO, false)
+    if (!ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getBoolean(ENABLE_SPAM_BLOCKING_PROMO, false)
         || !spamSettings.isSpamEnabled()
         || !spamSettings.isSpamBlockingEnabledByFlag()
         || spamSettings.isSpamBlockingEnabledByUser()) {
@@ -77,7 +79,8 @@ public class SpamBlockingPromoHelper {
             .unencryptedSharedPrefs()
             .getLong(SPAM_BLOCKING_PROMO_LAST_SHOW_MILLIS, 0);
     long showPeriodMillis =
-        ConfigProviderBindings.get(context)
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getLong(SPAM_BLOCKING_PROMO_PERIOD_MILLIS, Long.MAX_VALUE);
     return lastShowMillis == 0 || System.currentTimeMillis() - lastShowMillis > showPeriodMillis;
   }
@@ -85,7 +88,8 @@ public class SpamBlockingPromoHelper {
   /* Returns true if we should show a spam blocking promo in after call notification scenario. */
   public boolean shouldShowAfterCallSpamBlockingPromo() {
     return shouldShowSpamBlockingPromo()
-        && ConfigProviderBindings.get(context)
+        && ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getBoolean(ENABLE_AFTER_CALL_SPAM_BLOCKING_PROMO, false);
   }
 

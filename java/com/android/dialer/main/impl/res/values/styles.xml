@@ -27,7 +27,7 @@
     <!-- TODO(a bug): Check to see if we can remove this after NewVoicemailFragment launches -->
     <item name="actionModeStyle">@style/MainActionModeStyle</item>
     <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    <item name="dialpad_style">@style/Dialpad.Light</item>
+    <item name="dialpad_style">@style/Dialpad.Themed</item>
   </style>
 
   <style name="MainActivityThemeBase.Dark" parent="Dialer.Dark.ThemeBase.NoActionBar">
@@ -35,7 +35,7 @@
     <!-- TODO(a bug): Check to see if we can remove this after NewVoicemailFragment launches -->
     <item name="actionModeStyle">@style/MainActionModeStyle</item>
     <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    <item name="dialpad_style">@style/Dialpad.Light</item>
+    <item name="dialpad_style">@style/Dialpad.Themed</item>
   </style>
 
   <!-- Colors our actionbar in action mode to dialer theme color. -->

@@ -40,11 +40,12 @@
 
   <TextView
       android:id="@+id/call_time"
-      style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
+      style="@style/Dialer.TextAppearance.Secondary"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/call_entry_bottom_padding"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
+      android:layout_marginEnd="16dp"
       android:layout_below="@+id/call_type"/>
 
   <TextView

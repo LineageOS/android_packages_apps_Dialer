@@ -93,7 +93,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
@@ -367,7 +367,8 @@ public class DialtactsActivity extends TransactionSafeActivity
     super.onCreate(savedInstanceState);
 
     firstLaunch = true;
-    isLastTabEnabled = ConfigProviderBindings.get(this).getBoolean("last_tab_enabled", false);
+    isLastTabEnabled =
+        ConfigProviderComponent.get(this).getConfigProvider().getBoolean("last_tab_enabled", false);
 
     final Resources resources = getResources();
     actionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height_large);
@@ -1622,6 +1623,8 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   private boolean newFavoritesIsEnabled() {
-    return ConfigProviderBindings.get(this).getBoolean("enable_new_favorites_tab", false);
+    return ConfigProviderComponent.get(this)
+        .getConfigProvider()
+        .getBoolean("enable_new_favorites_tab", false);
   }
 }

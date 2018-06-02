@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +29,7 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.protos.ProtoParsers;
+import com.android.dialer.widget.DialerToolbar;
 
 /** Activity holds RTT transcript. */
 public class RttTranscriptActivity extends AppCompatActivity {
@@ -40,6 +40,7 @@ public class RttTranscriptActivity extends AppCompatActivity {
 
   private RttTranscriptAdapter adapter;
   private UiListener<RttTranscript> rttTranscriptUiListener;
+  private DialerToolbar toolbar;
 
   public static Intent getIntent(
       Context context, String transcriptId, String primaryText, PhotoInfo photoInfo) {
@@ -54,9 +55,9 @@ public class RttTranscriptActivity extends AppCompatActivity {
   protected void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
     setContentView(R.layout.activity_rtt_transcript);
-    ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayShowHomeEnabled(true);
-    actionBar.setDisplayHomeAsUpEnabled(true);
+    toolbar = findViewById(R.id.toolbar);
+    toolbar.setBackgroundColor(getColor(R.color.rtt_transcript_primary_color));
+    getWindow().setStatusBarColor(getColor(R.color.rtt_transcript_primary_color_dark));
 
     RecyclerView recyclerView = findViewById(R.id.rtt_recycler_view);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -86,7 +87,7 @@ public class RttTranscriptActivity extends AppCompatActivity {
         });
 
     String primaryText = intent.getStringExtra(EXTRA_PRIMARY_TEXT);
-    getSupportActionBar().setTitle(primaryText);
+    toolbar.setTitle(primaryText);
 
     PhotoInfo photoInfo =
         ProtoParsers.getTrusted(intent, EXTRA_PHOTO_INFO, PhotoInfo.getDefaultInstance());

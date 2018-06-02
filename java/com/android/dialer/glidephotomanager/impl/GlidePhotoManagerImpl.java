@@ -143,7 +143,7 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
             photoInfo.getIsSpam(),
             photoInfo.getIsBusiness(),
             TelecomManager.PRESENTATION_ALLOWED, // TODO(twyen):implement
-            false)); // TODO(twyen):implement
+            photoInfo.getIsConference()));
     return letterTileDrawable;
   }
 

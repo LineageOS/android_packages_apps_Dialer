@@ -32,7 +32,7 @@
     android:paddingLeft="16dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
-    style="Dialer.TextAppearance.Primary.Ellipsize"/>
+    style="@style/Dialer.TextAppearance.Primary.Ellipsize"/>
 
   <TextView
     android:id="@+id/empty_list_view_action"

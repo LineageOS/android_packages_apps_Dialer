@@ -24,7 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.incallui.util.AccessibilityUtil;
 
@@ -95,7 +95,9 @@ public class AnswerHintFactory {
             .unencryptedSharedPrefs()
             .getInt(ANSWERED_COUNT_PREFERENCE_KEY, 0);
     long threshold =
-        ConfigProviderBindings.get(context).getLong(CONFIG_ANSWER_HINT_ANSWERED_THRESHOLD_KEY, 3);
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getLong(CONFIG_ANSWER_HINT_ANSWERED_THRESHOLD_KEY, 3);
     LogUtil.i(
         "AnswerHintFactory.shouldShowAnswerHint",
         "answerCount: %d, threshold: %d",
@@ -110,7 +112,8 @@ public class AnswerHintFactory {
    *     string.
    */
   private static boolean isDeviceWhitelisted(Context context, String device) {
-    return ConfigProviderBindings.get(context)
+    return ConfigProviderComponent.get(context)
+        .getConfigProvider()
         .getString(CONFIG_ANSWER_HINT_WHITELISTED_DEVICES_KEY, DEFAULT_WHITELISTED_DEVICES_CSV)
         .contains("/" + device + "/");
   }
