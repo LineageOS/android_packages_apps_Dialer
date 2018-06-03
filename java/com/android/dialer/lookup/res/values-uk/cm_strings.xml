@@ -17,6 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Місця поблизу</string>
+  <string name="people">Люди</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Пошук номеру телефона</string>
+  <string name="enable_forward_lookup_title">Прямий пошук</string>
+  <string name="enable_forward_lookup_summary">Показувати найближчі місця при пошуку в номеронабирачі</string>
+  <string name="enable_people_lookup_title">Пошук контактів</string>
+  <string name="enable_people_lookup_summary">Показувати результати з мережі при пошуку в номеронабирачі</string>
+  <string name="enable_reverse_lookup_title">Зворотній пошук</string>
+  <string name="enable_reverse_lookup_summary">Пошук інформації про людину або місце для вхідних з невідомих номерів</string>
+  <string name="forward_lookup_provider_title">Постачальник прямого пошуку</string>
+  <string name="people_lookup_provider_title">Постачальник пошуку даних про людей</string>
+  <string name="reverse_lookup_provider_title">Постачальник зворотнього пошуку</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Пошукові запити можуть відправляти запити за захищеним протоколом (https) на віддалені веб-сайти для збору інформації. Запит може включати телефонний номер іншої сторони або пошуковий запит</string>
 </resources>
