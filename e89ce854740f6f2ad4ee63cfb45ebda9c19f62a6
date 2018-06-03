@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "844689c3_91b6597c",
+        "filename": "InCallUI/src/com/android/incallui/CallCardFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-06-03T12:31:19Z",
+      "side": 1,
+      "message": "All this needs one more indentation;\nAlso you could/should use fallthrough?\ncase a:\ncase b:\n  return false;\ncase c:\ncase d:\n  return true;",
+      "range": {
+        "startLine": 643,
+        "startChar": 0,
+        "endLine": 654,
+        "endChar": 9
+      },
+      "revId": "e89ce854740f6f2ad4ee63cfb45ebda9c19f62a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
