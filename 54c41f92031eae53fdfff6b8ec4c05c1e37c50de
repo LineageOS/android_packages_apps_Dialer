@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6cea4fa_7ea97160",
+        "filename": "InCallUI/src/com/android/incallui/CallCardFragment.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2018-06-04T19:01:27Z",
+      "side": 1,
+      "message": "Alternative suggestion: add a boolean resource (\u0027caller_name_and_elapsed_time_in_one_line\u0027 or something like that) which defaults to true and is set to false for -large, read it into a boolean member variable and use that instead of this method.",
+      "revId": "54c41f92031eae53fdfff6b8ec4c05c1e37c50de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
