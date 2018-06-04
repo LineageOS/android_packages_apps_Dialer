@@ -139,8 +139,8 @@ public class AospThemeImpl implements Theme {
 
   @Override
   public int getColorPrimaryDark() {
-    Assert.checkArgument(colorPrimary != -1);
-    return 0;
+    Assert.checkArgument(colorPrimaryDark != -1);
+    return colorPrimaryDark;
   }
 
   @Override

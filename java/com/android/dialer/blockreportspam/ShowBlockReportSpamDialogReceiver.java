@@ -40,6 +40,7 @@ import com.android.dialer.protos.ProtoParsers;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.spam.SpamSettings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 
@@ -225,8 +226,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     Futures.addCallback(
         Blocking.block(
             context,
-            DialerExecutorComponent.get(context).backgroundExecutor(),
-            dialogInfo.getNormalizedNumber(),
+            ImmutableList.of(dialogInfo.getNormalizedNumber()),
             dialogInfo.getCountryIso()),
         new FutureCallback<Void>() {
           @Override
@@ -252,8 +252,7 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     Futures.addCallback(
         Blocking.unblock(
             context,
-            DialerExecutorComponent.get(context).backgroundExecutor(),
-            dialogInfo.getNormalizedNumber(),
+            ImmutableList.of(dialogInfo.getNormalizedNumber()),
             dialogInfo.getCountryIso()),
         new FutureCallback<Void>() {
           @Override

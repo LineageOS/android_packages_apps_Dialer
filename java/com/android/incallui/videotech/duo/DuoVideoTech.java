@@ -24,7 +24,7 @@ import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoListener;
 import com.android.dialer.logging.DialerImpression;
@@ -60,7 +60,8 @@ public class DuoVideoTech implements VideoTech, DuoListener {
 
   @Override
   public boolean isAvailable(Context context, PhoneAccountHandle phoneAccountHandle) {
-    if (!ConfigProviderBindings.get(context)
+    if (!ConfigProviderComponent.get(context)
+        .getConfigProvider()
         .getBoolean("enable_lightbringer_video_upgrade", true)) {
       LogUtil.v("DuoVideoTech.isAvailable", "upgrade disabled by flag");
       return false;

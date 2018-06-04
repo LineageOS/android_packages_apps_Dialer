@@ -18,7 +18,7 @@ package com.android.incallui.spam;
 
 import android.content.Context;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 
 /** Returns resource id based on experiment number. */
 public final class SpamAlternativeExperimentUtil {
@@ -29,7 +29,9 @@ public final class SpamAlternativeExperimentUtil {
    */
   public static int getResourceIdByName(String resourceName, Context context) {
     long experiment =
-        ConfigProviderBindings.get(context).getLong("experiment_for_alternative_spam_word", 230150);
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getLong("experiment_for_alternative_spam_word", 230150);
     LogUtil.i(
         "SpamAlternativeExperimentUtil.getResourceIdByName", "using experiment %d", experiment);
     String modifiedResourceName = resourceName;

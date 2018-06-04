@@ -39,6 +39,9 @@
   <!-- Displayed when handover from WiFi to Lte occurs during a video call -->
   <string name="video_call_lte_to_wifi_handover_toast">Continuing call using Wi\u2011Fi\u2026</string>
 
+  <!-- Displayed when RTT upgrade request failed -->
+  <string name="rtt_call_not_available_toast">RTT not available for this call</string>
+
   <!-- String used to build a phone number type and phone number string.
      Example: Mobile 650-555-1212  -->
   <string name="call_subject_type_and_number">

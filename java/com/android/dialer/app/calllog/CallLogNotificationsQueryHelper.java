@@ -39,7 +39,7 @@ import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
@@ -167,7 +167,8 @@ public class CallLogNotificationsQueryHelper {
     return newCallsQuery.query(
         Calls.VOICEMAIL_TYPE,
         System.currentTimeMillis()
-            - ConfigProviderBindings.get(context)
+            - ConfigProviderComponent.get(context)
+                .getConfigProvider()
                 .getLong(
                     CONFIG_NEW_VOICEMAIL_NOTIFICATION_THRESHOLD_OFFSET, TimeUnit.DAYS.toMillis(7)));
   }

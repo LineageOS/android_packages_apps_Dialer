@@ -35,11 +35,12 @@ import android.widget.TextView;
 import android.widget.ViewAnimator;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.DrawableConverter;
+import com.android.dialer.widget.BidiTextView;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
@@ -77,7 +78,7 @@ public class ContactGridManager {
   private final TextView forwardedNumberView;
   private final ImageView spamIconImageView;
   private final ViewAnimator bottomTextSwitcher;
-  private final TextView bottomTextView;
+  private final BidiTextView bottomTextView;
   private final Chronometer bottomTimerView;
   private final Space topRowSpace;
   private int avatarSize;
@@ -301,7 +302,9 @@ public class ContactGridManager {
       if (hideAvatar) {
         avatarImageView.setVisibility(View.GONE);
       } else if (avatarSize > 0 && updateAvatarVisibility()) {
-        if (ConfigProviderBindings.get(context).getBoolean("enable_glide_photo", false)) {
+        if (ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getBoolean("enable_glide_photo", false)) {
           loadPhotoWithGlide();
         } else {
           loadPhotoWithLegacy();
@@ -315,7 +318,8 @@ public class ContactGridManager {
         PhotoInfo.newBuilder()
             .setIsBusiness(primaryInfo.photoType() == ContactPhotoType.BUSINESS)
             .setIsVoicemail(primaryCallState.isVoiceMailNumber())
-            .setIsSpam(primaryInfo.isSpam());
+            .setIsSpam(primaryInfo.isSpam())
+            .setIsConference(primaryCallState.isConference());
 
     // Contact has a name, that is a number.
     if (primaryInfo.nameIsNumber() && primaryInfo.number() != null) {

@@ -25,7 +25,7 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.storage.StorageComponent;
@@ -62,7 +62,9 @@ public class PawSecretCodeListener extends BroadcastReceiver {
       return;
     }
     String secretCode =
-        ConfigProviderBindings.get(context).getString(CONFIG_PAW_SECRET_CODE, "729");
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
+            .getString(CONFIG_PAW_SECRET_CODE, "729");
     if (secretCode == null) {
       return;
     }

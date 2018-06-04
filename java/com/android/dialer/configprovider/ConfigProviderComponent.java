@@ -27,7 +27,6 @@ import dagger.Subcomponent;
 public abstract class ConfigProviderComponent {
 
   @NonNull
-  @Deprecated // Use ConfigProviderBindings instead
   public abstract ConfigProvider getConfigProvider();
 
   public static ConfigProviderComponent get(Context context) {

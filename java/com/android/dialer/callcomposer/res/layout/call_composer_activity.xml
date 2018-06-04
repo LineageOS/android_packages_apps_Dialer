@@ -57,7 +57,7 @@
           android:textColor="?android:attr/textColorPrimaryInverse"
           android:textSize="@dimen/call_composer_name_text_size"/>
 
-        <TextView
+        <com.android.dialer.widget.BidiTextView
           android:id="@+id/phone_number"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
