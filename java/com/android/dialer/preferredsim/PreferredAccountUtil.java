@@ -30,7 +30,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 
@@ -102,7 +102,8 @@ public class PreferredAccountUtil {
    */
   public static ImmutableSet<String> getValidAccountTypes(Context context) {
     return ImmutableSet.copyOf(
-        ConfigProviderBindings.get(context)
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getString(
                 "preferred_sim_valid_account_types",
                 "com.google;"

@@ -25,7 +25,7 @@
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
-    <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
+    <item name="dialpad_key_button_touch_tint">?attr/colorPrimary20pct</item>
     <item name="dialpad_style">@style/InCallDialpad</item>
     <item name="android:windowAnimationStyle">@null</item>
 
@@ -34,11 +34,14 @@
   </style>
 
   <style name="Theme.InCallScreen" parent="@style/Dialer.Dark.ThemeBase.NoActionBar">
+    <item name="android:textColorPrimary">@android:color/white</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
 
-    <item name="dialpad_key_button_touch_tint">@color/incall_dialpad_touch_tint</item>
+    <item name="dialpad_key_button_touch_tint">?attr/colorPrimary20pct</item>
     <item name="dialpad_style">@style/InCallDialpad</item>
     <item name="android:windowAnimationStyle">@null</item>
 
@@ -49,7 +52,7 @@
   <style name="Theme.InCallScreen.ManageConference" parent="Dialer.ThemeBase.ActionBar">
   </style>
 
-  <style name="InCallDialpad" parent="Dialpad.Light">
+  <style name="InCallDialpad" parent="Dialpad.Themed">
     <item name="dialpad_key_number_margin_bottom">
       @dimen/incall_dialpad_key_number_margin_bottom
     </item>
@@ -72,8 +75,6 @@
       @dimen/incall_end_call_spacing
     </item>
     <item name="dialpad_elevation">10dp</item>
-    <item name="dialpad_text_color">?android:attr/textColorPrimaryInverse</item>
-    <item name="dialpad_text_color_secondary">?android:attr/textColorSecondaryInverse</item>
   </style>
 
   <style name="AfterCallNotificationTheme" parent="Dialer.ThemeBase.NoActionBar">

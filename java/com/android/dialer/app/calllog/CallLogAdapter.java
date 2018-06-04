@@ -73,7 +73,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.duo.DuoListener;
@@ -287,7 +287,8 @@ public class CallLogAdapter extends GroupingListAdapter
       new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-          if (ConfigProviderBindings.get(v.getContext())
+          if (ConfigProviderComponent.get(v.getContext())
+                  .getConfigProvider()
                   .getBoolean(ENABLE_CALL_LOG_MULTI_SELECT, ENABLE_CALL_LOG_MULTI_SELECT_FLAG)
               && voicemailPlaybackPresenter != null) {
             if (v.getId() == R.id.primary_action_view || v.getId() == R.id.quick_contact_photo) {
@@ -852,7 +853,9 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   private boolean isHideableEmergencyNumberRow(@Nullable String number) {
-    if (!ConfigProviderBindings.get(activity).getBoolean(FILTER_EMERGENCY_CALLS_FLAG, false)) {
+    if (!ConfigProviderComponent.get(activity)
+        .getConfigProvider()
+        .getBoolean(FILTER_EMERGENCY_CALLS_FLAG, false)) {
       return false;
     }
     return number != null && PhoneNumberUtils.isEmergencyNumber(number);
@@ -1058,7 +1061,8 @@ public class CallLogAdapter extends GroupingListAdapter
               details.countryIso,
               details.cachedContactInfo,
               position
-                  < ConfigProviderBindings.get(activity)
+                  < ConfigProviderComponent.get(activity)
+                      .getConfigProvider()
                       .getLong("number_of_call_to_do_remote_lookup", 5L));
       logCp2Metrics(details, info);
     }

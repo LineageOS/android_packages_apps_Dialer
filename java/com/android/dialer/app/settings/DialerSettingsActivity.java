@@ -38,7 +38,7 @@ import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.settings.VoicemailSettingsFragment;
@@ -160,7 +160,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
     boolean isAssistedDialingEnabled =
         ConcreteCreator.isAssistedDialingEnabled(
-            ConfigProviderBindings.get(getApplicationContext()));
+            ConfigProviderComponent.get(getApplicationContext()).getConfigProvider());
     LogUtil.i(
         "DialerSettingsActivity.onBuildHeaders",
         "showing assisted dialing header: " + isAssistedDialingEnabled);

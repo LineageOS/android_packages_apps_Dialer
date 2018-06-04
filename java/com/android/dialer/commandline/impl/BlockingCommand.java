@@ -28,6 +28,7 @@ import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.consolidator.PhoneLookupInfoConsolidator;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -71,7 +72,7 @@ public class BlockingCommand implements Command {
     if ("block".equals(command)) {
       String number = args.getPositionals().get(1);
       return Futures.transform(
-          Blocking.block(appContext, executorService, number, null),
+          Blocking.block(appContext, ImmutableList.of(number), null),
           (unused) -> "blocked " + number,
           MoreExecutors.directExecutor());
     }
@@ -79,7 +80,7 @@ public class BlockingCommand implements Command {
     if ("unblock".equals(command)) {
       String number = args.getPositionals().get(1);
       return Futures.transform(
-          Blocking.unblock(appContext, executorService, number, null),
+          Blocking.unblock(appContext, ImmutableList.of(number), null),
           (unused) -> "unblocked " + number,
           MoreExecutors.directExecutor());
     }

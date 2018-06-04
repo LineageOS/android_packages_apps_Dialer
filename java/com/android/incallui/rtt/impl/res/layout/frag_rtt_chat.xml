@@ -62,11 +62,11 @@
         android:layout_height="53dp"
         android:layout_gravity="bottom"
         android:background="@drawable/input_bubble_background"
-        android:backgroundTint="?colorIcon"
+        android:backgroundTint="@color/submit_button_background_color"
         android:backgroundTintMode="multiply"
         android:contentDescription="@string/content_description_rtt_check_button"
         android:src="@drawable/quantum_ic_done_vd_theme_24"
-        android:tint="?android:attr/colorPrimary"
+        android:tint="@color/submit_button_color"
         android:visibility="gone"/>
   </LinearLayout>
 

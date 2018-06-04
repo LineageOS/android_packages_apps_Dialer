@@ -66,7 +66,7 @@ import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contactphoto.BitmapUtil;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
@@ -292,7 +292,8 @@ public class StatusBarNotifier
     if (callState == DialerCallState.INCOMING
         || callState == DialerCallState.CALL_WAITING
         || isVideoUpgradeRequest) {
-      if (ConfigProviderBindings.get(context)
+      if (ConfigProviderComponent.get(context)
+          .getConfigProvider()
           .getBoolean("quiet_incoming_call_if_ui_showing", true)) {
         notificationType =
             InCallPresenter.getInstance().isShowingInCallUi()

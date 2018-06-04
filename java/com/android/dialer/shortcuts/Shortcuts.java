@@ -18,7 +18,7 @@ package com.android.dialer.shortcuts;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 
 /** Checks if dynamic shortcuts should be enabled. */
 public class Shortcuts {
@@ -27,7 +27,9 @@ public class Shortcuts {
   private static final String DYNAMIC_SHORTCUTS_ENABLED = "dynamic_shortcuts_enabled";
 
   static boolean areDynamicShortcutsEnabled(@NonNull Context context) {
-    return ConfigProviderBindings.get(context).getBoolean(DYNAMIC_SHORTCUTS_ENABLED, true);
+    return ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean(DYNAMIC_SHORTCUTS_ENABLED, true);
   }
 
   private Shortcuts() {}
