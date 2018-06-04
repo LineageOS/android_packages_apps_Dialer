@@ -60,7 +60,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -315,6 +315,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         @Override
         public void onRttInitiationFailure(Call call, int reason) {
           LogUtil.v("TelecomCallCallback.onRttInitiationFailure", "reason=%d", reason);
+          Toast.makeText(context, R.string.rtt_call_not_available_toast, Toast.LENGTH_LONG).show();
           update();
         }
 
@@ -841,7 +842,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   boolean isInEmergencyCallbackWindow(long timestampMillis) {
     long emergencyCallbackWindowMillis =
-        ConfigProviderBindings.get(context)
+        ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getLong(CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS, TimeUnit.MINUTES.toMillis(5));
     return System.currentTimeMillis() - timestampMillis < emergencyCallbackWindowMillis;
   }

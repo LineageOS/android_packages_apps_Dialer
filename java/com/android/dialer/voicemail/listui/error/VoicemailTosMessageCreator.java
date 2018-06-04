@@ -37,7 +37,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
@@ -552,7 +552,8 @@ public class VoicemailTosMessageCreator {
   }
 
   private String getLearnMoreUrl() {
-    return ConfigProviderBindings.get(context)
+    return ConfigProviderComponent.get(context)
+        .getConfigProvider()
         .getString(
             "voicemail_transcription_learn_more_url",
             context.getString(R.string.dialer_terms_and_conditions_learn_more_url));

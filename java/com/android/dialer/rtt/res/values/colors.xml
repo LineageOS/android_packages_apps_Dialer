@@ -16,5 +16,6 @@
   -->
 <resources>
   <color name="rtt_transcript_primary_color">#37474F</color>
+  <color name="rtt_transcript_primary_color_dark">#263238</color>
   <color name="rtt_transcript_background_color">#ECEFF1</color>
 </resources>

@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.theme.base.ThemeComponent;
 
 /** Navigation item in a bottom nav. */
@@ -75,7 +75,9 @@ final class BottomNavItem extends LinearLayout {
       String countString = String.format(Integer.toString(count));
 
       boolean use99PlusCount =
-          ConfigProviderBindings.get(getContext()).getBoolean("use_99_plus", false);
+          ConfigProviderComponent.get(getContext())
+              .getConfigProvider()
+              .getBoolean("use_99_plus", false);
       boolean use9Plus = !use99PlusCount;
 
       if (use99PlusCount && count > 99) {

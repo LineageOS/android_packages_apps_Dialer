@@ -26,6 +26,7 @@ import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * An enhanced version of {@link BidiFormatter} that can recognize a formatted phone number
@@ -39,6 +40,9 @@ import java.util.regex.Matcher;
 public final class DialerBidiFormatter {
 
   private DialerBidiFormatter() {}
+
+  // Regular expression that matches a single space in the beginning or end of a string.
+  private static final String REGEXP_SURROUNDING_SPACE = "^[ ]|[ ]$";
 
   /**
    * Divides the given text into segments, applies {@link BidiFormatter#unicodeWrap(CharSequence)}
@@ -65,19 +69,49 @@ public final class DialerBidiFormatter {
   }
 
   /**
-   * Segments the given text using {@link Patterns#PHONE}.
+   * Segments the given text into a sequence of substrings using the following procedure.
    *
-   * <p>For example, "Mobile, +1 650-253-0000, 20 seconds" will be segmented into {"Mobile, ", "+1
-   * 650-253-0000", ", 20 seconds"}.
+   * <ol>
+   *   <li>Separate text matching {@link Patterns#PHONE} from others.
+   *       <p>For example: "Mobile, +1 650-253-0000, 20 seconds" will be segmented into<br>
+   *       {"Mobile, ", "+1 650-253-0000", ", 20 seconds"}
+   *   <li>For each substring produced by the previous step, separate a single whitespace at the
+   *       start/end of it from the rest of the substring.
+   *       <p>For example, the first substring "Mobile, " will be segmented into {"Mobile,", " "}.
+   * </ol>
+   *
+   * <p>The final result of segmenting "Mobile, +1 650-253-0000, 20 seconds" is<br>
+   * {"Mobile,", " ", "+1 650-253-0000", ", 20 seconds"}.
+   *
+   * <p>The reason for singling out the whitespace at the start/end of a substring is to prevent it
+   * from being misplaced in RTL context.
    */
   @VisibleForTesting
   static List<CharSequence> segmentText(CharSequence text) {
     Assert.checkArgument(!TextUtils.isEmpty(text));
 
+    // Separate text matching the phone number pattern from others.
+    List<CharSequence> segmentsSeparatingPhoneNumbers = segmentText(text, Patterns.PHONE);
+
+    // For each substring, separate a single whitespace at the start/end of it from the rest of the
+    // substring.
+    List<CharSequence> finalSegments = new ArrayList<>();
+    Pattern patternSurroundingSpace = Pattern.compile(REGEXP_SURROUNDING_SPACE);
+    for (CharSequence segment : segmentsSeparatingPhoneNumbers) {
+      finalSegments.addAll(segmentText(segment, patternSurroundingSpace));
+    }
+
+    return finalSegments;
+  }
+
+  /** Segments the given text into a sequence of substrings using the provided pattern. */
+  private static List<CharSequence> segmentText(CharSequence text, Pattern pattern) {
+    Assert.checkArgument(!TextUtils.isEmpty(text));
+
     List<CharSequence> segments = new ArrayList<>();
 
-    // Find the start index and the end index of each segment matching the phone number pattern.
-    Matcher matcher = Patterns.PHONE.matcher(text.toString());
+    // Find the start index and the end index of each segment matching the pattern.
+    Matcher matcher = pattern.matcher(text.toString());
     List<Range> segmentRanges = new ArrayList<>();
     while (matcher.find()) {
       segmentRanges.add(Range.newBuilder().setStart(matcher.start()).setEnd(matcher.end()).build());

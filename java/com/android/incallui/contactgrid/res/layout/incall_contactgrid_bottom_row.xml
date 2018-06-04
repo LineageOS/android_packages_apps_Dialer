@@ -53,7 +53,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="2dp"
       android:measureAllChildren="false">
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/contactgrid_bottom_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

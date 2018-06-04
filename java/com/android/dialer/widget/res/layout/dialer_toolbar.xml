@@ -31,7 +31,7 @@
         android:textColor="?android:attr/textColorPrimaryInverse"
         style="@style/Dialer.TextAppearance.Header2"/>
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

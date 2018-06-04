@@ -27,7 +27,7 @@ import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 
@@ -47,7 +47,9 @@ public class VoicemailStatusCorruptionHandler {
 
   public static void maybeFixVoicemailStatus(Context context, Cursor statusCursor, Source source) {
 
-    if (ConfigProviderBindings.get(context).getBoolean(CONFIG_VVM_STATUS_FIX_DISABLED, false)) {
+    if (ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean(CONFIG_VVM_STATUS_FIX_DISABLED, false)) {
       return;
     }
 

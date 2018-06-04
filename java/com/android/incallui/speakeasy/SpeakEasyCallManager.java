@@ -54,6 +54,16 @@ public interface SpeakEasyCallManager {
    */
   boolean isAvailable(@NonNull Context context);
 
+  /**
+   * Optional: Performs work necessary to happen-before callers use other methods on this interface.
+   *
+   * @apiNote Use of this API is completely optional, and callers are NOT required to invoke this
+   *     method prior to using other methods on the interface.
+   * @implSpec Other members of this interface always promise to do any required initialization work
+   *     at the time they are invoked. This method will always be idempotent.
+   */
+  default void performManualInitialization() {}
+
   /** Returns the config provider flag associated with the feature. */
   @NonNull
   String getConfigProviderFlag();
