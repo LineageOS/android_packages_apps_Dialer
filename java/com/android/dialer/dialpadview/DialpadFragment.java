@@ -38,6 +38,7 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.Trace;
 import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
@@ -501,9 +502,9 @@ public class DialpadFragment extends Fragment
       return false;
     }
     TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+    PersistableBundle config = telephonyManager.getCarrierConfig();
     // A delay of -1 means wifi emergency call is available/the warning is not required.
-    if (telephonyManager.getCarrierConfig().getInt(KEY_EMERGENCY_NOTIFICATION_DELAY_INT, -1)
-        == -1) {
+    if (config == null || config.getInt(KEY_EMERGENCY_NOTIFICATION_DELAY_INT, -1) == -1) {
       return false;
     }
 
