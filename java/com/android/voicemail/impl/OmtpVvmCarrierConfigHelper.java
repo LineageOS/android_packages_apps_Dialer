@@ -458,6 +458,9 @@ public class OmtpVvmCarrierConfigHelper {
     }
 
     PersistableBundle config = telephonyManager.getCarrierConfig();
+    if (config == null) {
+      return null;
+    }
 
     if (TextUtils.isEmpty(config.getString(CarrierConfigManager.KEY_VVM_TYPE_STRING))) {
       return null;
