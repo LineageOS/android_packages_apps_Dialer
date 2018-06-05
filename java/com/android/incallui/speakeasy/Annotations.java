@@ -32,4 +32,8 @@ public final class Annotations {
   /** A Speakeasy settings fragment */
   @Qualifier
   public @interface SpeakEasySettingsFragment {}
+
+  /** A Speakeasy settings object */
+  @Qualifier
+  public @interface SpeakEasySettingsObject {}
 }

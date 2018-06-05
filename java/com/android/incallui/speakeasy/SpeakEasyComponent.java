@@ -17,10 +17,11 @@
 package com.android.incallui.speakeasy;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.preference.PreferenceFragment;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyIcon;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
+import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyText;
 import com.google.common.base.Optional;
 import dagger.Subcomponent;
@@ -31,7 +32,10 @@ public abstract class SpeakEasyComponent {
 
   public abstract SpeakEasyCallManager speakEasyCallManager();
 
-  public abstract @SpeakEasySettingsFragment Optional<Fragment> speakEasySettingsFragment();
+  public abstract @SpeakEasySettingsFragment Optional<PreferenceFragment>
+      speakEasySettingsFragment();
+
+  public abstract @SpeakEasySettingsObject Optional<Object> speakEasySettingsObject();
 
   public abstract @SpeakEasyIcon Optional<Integer> speakEasyIcon();
 
