@@ -159,6 +159,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private int[] backgroundDrawableColors;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
   private SpeakEasyCallManager speakEasyCallManager;
+  private DialogFragment rttRequestDialogFragment;
 
   public static Intent getIntent(
       Context context, boolean showDialpad, boolean newOutgoingCall, boolean isForFullScreen) {
@@ -1175,8 +1176,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   public void showDialogForRttRequest(DialerCall call, int rttRequestId) {
     LogUtil.enterBlock("InCallActivity.showDialogForRttRequest");
-    DialogFragment fragment = RttRequestDialogFragment.newInstance(call.getId(), rttRequestId);
-    fragment.show(getSupportFragmentManager(), Tags.RTT_REQUEST_DIALOG);
+    rttRequestDialogFragment = RttRequestDialogFragment.newInstance(call.getId(), rttRequestId);
+    rttRequestDialogFragment.show(getSupportFragmentManager(), Tags.RTT_REQUEST_DIALOG);
   }
 
   public void setAllowOrientationChange(boolean allowOrientationChange) {
@@ -1564,6 +1565,13 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     transaction.add(R.id.main, rttCallScreen.getRttCallScreenFragment(), Tags.RTT_CALL_SCREEN);
     Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     didShowRttCallScreen = true;
+    // In some cases such as VZW, RTT request will be automatically accepted by modem. So the dialog
+    // won't make any sense and should be dismissed if it's already switched to RTT.
+    if (rttRequestDialogFragment != null) {
+      LogUtil.i("InCallActivity.showRttCallScreenFragment", "dismiss RTT request dialog");
+      rttRequestDialogFragment.dismiss();
+      rttRequestDialogFragment = null;
+    }
     return true;
   }
 
