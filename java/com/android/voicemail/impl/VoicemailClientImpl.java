@@ -30,7 +30,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.voicemail.PinChanger;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
@@ -105,7 +105,9 @@ public class VoicemailClientImpl implements VoicemailClient {
       return false;
     }
 
-    if (!ConfigProviderBindings.get(context).getBoolean(ALLOW_VOICEMAIL_ARCHIVE, false)) {
+    if (!ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean(ALLOW_VOICEMAIL_ARCHIVE, false)) {
       LogUtil.i(
           "VoicemailClientImpl.isVoicemailArchiveAllowed",
           "feature disabled by config: %s",

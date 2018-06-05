@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/call_log_name_margin_bottom"
             android:layout_marginEnd="@dimen/call_log_icon_margin"
-            style="Dialer.TextAppearance.Primary.Ellipsize"/>
+            style="@style/Dialer.TextAppearance.Primary.Ellipsize"/>
 
           <LinearLayout
             android:id="@+id/call_type"

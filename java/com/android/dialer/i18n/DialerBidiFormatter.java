@@ -17,107 +17,75 @@
 package com.android.dialer.i18n;
 
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.text.BidiFormatter;
+import android.telephony.PhoneNumberUtils;
+import android.text.SpannableStringBuilder;
+import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Patterns;
-import com.android.dialer.common.Assert;
-import com.google.auto.value.AutoValue;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 
-/**
- * An enhanced version of {@link BidiFormatter} that can recognize a formatted phone number
- * containing whitespaces.
- *
- * <p>Formatted phone numbers usually contain one or more whitespaces (e.g., "+1 650-253-0000",
- * "(650) 253-0000", etc). {@link BidiFormatter} mistakes such a number for tokens separated by
- * whitespaces. Therefore, these numbers can't be correctly shown in a RTL context (e.g., "+1
- * 650-253-0000" would be shown as "650-253-0000 1+".)
- */
+/** A formatter that applies bidirectional formatting to phone numbers in text. */
 public final class DialerBidiFormatter {
+
+  /** Unicode "Left-To-Right Embedding" (LRE) character. */
+  private static final char LRE = '\u202A';
+
+  /** Unicode "Pop Directional Formatting" (PDF) character. */
+  private static final char PDF = '\u202C';
 
   private DialerBidiFormatter() {}
 
   /**
-   * Divides the given text into segments, applies {@link BidiFormatter#unicodeWrap(CharSequence)}
-   * to each segment, and then reassembles the text.
+   * Divides the given text into segments, applies LTR formatting and adds TTS span to segments that
+   * are phone numbers, then reassembles the text.
    *
-   * <p>A segment of the text is either a substring matching {@link Patterns#PHONE} or one that does
-   * not.
+   * <p>Formatted phone numbers usually contain one or more whitespaces (e.g., "+1 650-253-0000",
+   * "(650) 253-0000", etc). The system mistakes such a number for tokens separated by whitespaces.
+   * Therefore, these numbers can't be correctly shown in a RTL context (e.g., "+1 650-253-0000"
+   * would be shown as "650-253-0000 1+".)
    *
-   * @see BidiFormatter#unicodeWrap(CharSequence)
+   * <p>This method wraps phone numbers with Unicode formatting characters LRE & PDF to ensure phone
+   * numbers are always shown as LTR strings.
+   *
+   * <p>Note that the regex used to find phone numbers ({@link Patterns#PHONE}) will also match any
+   * number. As this method also adds TTS span to segments that match {@link Patterns#PHONE}, extra
+   * actions need to be taken if you don't want a number to be read as a phone number by TalkBack.
    */
-  public static CharSequence unicodeWrap(@Nullable CharSequence text) {
+  public static CharSequence format(@Nullable CharSequence text) {
     if (TextUtils.isEmpty(text)) {
       return text;
     }
 
-    List<CharSequence> segments = segmentText(text);
-
-    StringBuilder formattedText = new StringBuilder();
-    for (CharSequence segment : segments) {
-      formattedText.append(BidiFormatter.getInstance().unicodeWrap(segment));
-    }
-
-    return formattedText.toString();
-  }
-
-  /**
-   * Segments the given text using {@link Patterns#PHONE}.
-   *
-   * <p>For example, "Mobile, +1 650-253-0000, 20 seconds" will be segmented into {"Mobile, ", "+1
-   * 650-253-0000", ", 20 seconds"}.
-   */
-  @VisibleForTesting
-  static List<CharSequence> segmentText(CharSequence text) {
-    Assert.checkArgument(!TextUtils.isEmpty(text));
-
-    List<CharSequence> segments = new ArrayList<>();
+    SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
 
     // Find the start index and the end index of each segment matching the phone number pattern.
     Matcher matcher = Patterns.PHONE.matcher(text.toString());
-    List<Range> segmentRanges = new ArrayList<>();
-    while (matcher.find()) {
-      segmentRanges.add(Range.newBuilder().setStart(matcher.start()).setEnd(matcher.end()).build());
-    }
 
-    // Segment the text.
     int currIndex = 0;
-    for (Range segmentRange : segmentRanges) {
-      if (currIndex < segmentRange.getStart()) {
-        segments.add(text.subSequence(currIndex, segmentRange.getStart()));
+    while (matcher.find()) {
+      int start = matcher.start();
+      int end = matcher.end();
+
+      // Handle the case where the input text doesn't start with a phone number.
+      if (currIndex < start) {
+        spannableStringBuilder.append(text.subSequence(currIndex, start));
       }
 
-      segments.add(text.subSequence(segmentRange.getStart(), segmentRange.getEnd()));
-      currIndex = segmentRange.getEnd();
+      // For a phone number, wrap it with Unicode characters LRE & PDF so that it will always be
+      // shown as a LTR string.
+      spannableStringBuilder.append(
+          PhoneNumberUtils.createTtsSpannable(
+              TextUtils.concat(
+                  String.valueOf(LRE), text.subSequence(start, end), String.valueOf(PDF))));
+
+      currIndex = end;
     }
+
+    // Handle the case where the input doesn't end with a phone number.
     if (currIndex < text.length()) {
-      segments.add(text.subSequence(currIndex, text.length()));
+      spannableStringBuilder.append(text.subSequence(currIndex, text.length()));
     }
 
-    return segments;
-  }
-
-  /** Represents the start index (inclusive) and the end index (exclusive) of a text segment. */
-  @AutoValue
-  abstract static class Range {
-    static Builder newBuilder() {
-      return new AutoValue_DialerBidiFormatter_Range.Builder();
-    }
-
-    abstract int getStart();
-
-    abstract int getEnd();
-
-    @AutoValue.Builder
-    abstract static class Builder {
-      abstract Builder setStart(int start);
-
-      abstract Builder setEnd(int end);
-
-      abstract Range build();
-    }
+    return new SpannedString(spannableStringBuilder);
   }
 }

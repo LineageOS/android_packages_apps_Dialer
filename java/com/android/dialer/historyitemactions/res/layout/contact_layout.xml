@@ -39,13 +39,13 @@
       android:gravity="center_vertical"
       android:orientation="vertical">
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/primary_text"
         style="@style/Dialer.TextAppearance.Primary.Ellipsize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <com.android.dialer.widget.BidiTextView
         android:id="@+id/secondary_text"
         style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
         android:layout_width="wrap_content"

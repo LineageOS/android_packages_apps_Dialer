@@ -27,7 +27,7 @@ import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProvider;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.strictmode.StrictModeUtils;
 
 /**
@@ -55,7 +55,7 @@ public final class ConcreteCreator {
   public static AssistedDialingMediator createNewAssistedDialingMediator(
       @NonNull TelephonyManager telephonyManager, @NonNull Context context) {
 
-    ConfigProvider configProvider = ConfigProviderBindings.get(context);
+    ConfigProvider configProvider = ConfigProviderComponent.get(context).getConfigProvider();
 
     if (telephonyManager == null) {
       LogUtil.i(

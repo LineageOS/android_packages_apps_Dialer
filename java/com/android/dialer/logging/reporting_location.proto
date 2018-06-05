@@ -15,5 +15,6 @@ message ReportingLocation {
     CALL_LOG_HISTORY = 1;
     FEEDBACK_PROMPT = 2;
     VOICEMAIL_HISTORY = 3;
+    CONTACT_DETAILS = 4;
   }
 }

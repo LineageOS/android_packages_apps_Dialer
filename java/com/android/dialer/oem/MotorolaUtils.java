@@ -22,7 +22,7 @@ import android.support.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PackageUtils;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -79,19 +79,22 @@ public class MotorolaUtils {
   }
 
   public static boolean shouldBlinkHdIconWhenConnectingCall(Context context) {
-    return ConfigProviderBindings.get(context)
+    return ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getBoolean(CONFIG_HD_CODEC_BLINKING_ICON_WHEN_CONNECTING_CALL_ENABLED, true)
         && isSupportingSprintHdCodec(context);
   }
 
   public static boolean shouldShowHdIconInNotification(Context context) {
-    return ConfigProviderBindings.get(context)
+    return ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getBoolean(CONFIG_HD_CODEC_SHOW_ICON_IN_NOTIFICATION_ENABLED, true)
         && isSupportingSprintHdCodec(context);
   }
 
   public static boolean shouldShowWifiIconInCallLog(Context context, int features) {
-    return ConfigProviderBindings.get(context)
+    return ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getBoolean(CONFIG_WIFI_CALL_SHOW_ICON_IN_CALL_LOG_ENABLED, true)
         && (features & Calls.FEATURES_WIFI) == Calls.FEATURES_WIFI
         && isSupportingSprintWifiCall(context);
@@ -102,7 +105,8 @@ public class MotorolaUtils {
       return disablePhoneNumberFormattingForTest;
     }
 
-    return ConfigProviderBindings.get(context)
+    return ConfigProviderComponent.get(context)
+            .getConfigProvider()
             .getBoolean(CONFIG_DISABLE_PHONE_NUMBER_FORMATTING, true)
         && context.getResources().getBoolean(R.bool.motorola_disable_phone_number_formatting);
   }

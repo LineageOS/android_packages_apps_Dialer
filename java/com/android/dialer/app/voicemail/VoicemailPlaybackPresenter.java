@@ -52,7 +52,7 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -870,7 +870,9 @@ public class VoicemailPlaybackPresenter
   }
 
   private static boolean isShareVoicemailAllowed(Context context) {
-    return ConfigProviderBindings.get(context).getBoolean(CONFIG_SHARE_VOICEMAIL_ALLOWED, true);
+    return ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean(CONFIG_SHARE_VOICEMAIL_ALLOWED, true);
   }
 
   private static class ShareVoicemailWorker

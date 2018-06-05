@@ -81,7 +81,7 @@ import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
@@ -1313,7 +1313,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_SPEED_DIAL, activity);
       selectedTab = TabIndex.SPEED_DIAL;
 
-      if (ConfigProviderBindings.get(activity).getBoolean("enable_new_favorites_tab", false)) {
+      if (ConfigProviderComponent.get(activity)
+          .getConfigProvider()
+          .getBoolean("enable_new_favorites_tab", false)) {
         android.support.v4.app.Fragment supportFragment =
             supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
         showSupportFragment(
@@ -1618,7 +1620,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     LastTabController(Context context, BottomNavBar bottomNavBar, boolean canShowVoicemailTab) {
       this.context = context;
       this.bottomNavBar = bottomNavBar;
-      isEnabled = ConfigProviderBindings.get(context).getBoolean("last_tab_enabled", false);
+      isEnabled =
+          ConfigProviderComponent.get(context)
+              .getConfigProvider()
+              .getBoolean("last_tab_enabled", false);
       this.canShowVoicemailTab = canShowVoicemailTab;
     }
 

@@ -35,6 +35,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.SetMultimap;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import dagger.Component;
 import java.lang.annotation.Annotation;
@@ -51,7 +52,30 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
-/** Generates root component for a java type annotated with {@link DialerRootComponent}. */
+/**
+ * Generates root component for a java type annotated with {@link DialerRootComponent}.
+ *
+ * <p>If users use {@link GenerateTestDaggerApp} along with RootComponentGenerator, there's an
+ * optional method that they can use to inject instance in the test.
+ *
+ * <p>Example:
+ *
+ * <p>
+ *
+ * <pre>
+ * <code>
+ * @Inject SomeThing someThing;
+ * @Before
+ * public void setUp() {
+ * ...
+ * TestApplication application = (TestApplication) RuntimeEnvironment.application;
+ * TestComponent component = (TestComponent) application.component();
+ * component.inject(this);
+ * ...
+ * }
+ * </code>
+ * </pre>
+ */
 final class RootComponentGeneratingStep implements ProcessingStep {
 
   private final ProcessingEnvironment processingEnv;
@@ -110,6 +134,15 @@ final class RootComponentGeneratingStep implements ProcessingStep {
       componentAnnotation.addMember("modules", "$T.class", annotatedElement.asType());
     }
     rootComponentClassBuilder.addAnnotation(componentAnnotation.build());
+
+    AnnotationMirror dialerRootComponentMirror =
+        getAnnotationMirror(rootElement, DialerRootComponent.class).get();
+
+    TypeMirror annotatedTestClass =
+        (TypeMirror) getAnnotationValue(dialerRootComponentMirror, "injectClass").getValue();
+
+    rootComponentClassBuilder.addMethod(generateInjectMethod(annotatedTestClass));
+
     TypeSpec rootComponentClass = rootComponentClassBuilder.build();
     RootComponentUtils.writeJavaFile(
         processingEnv, ClassName.get(rootElement).packageName(), rootComponentClass);
@@ -161,6 +194,14 @@ final class RootComponentGeneratingStep implements ProcessingStep {
         metadataProcessor.process(annotatedElement);
       }
     }
+  }
+
+  private MethodSpec generateInjectMethod(TypeMirror testClassTypeMirror) {
+    return MethodSpec.methodBuilder("inject")
+        .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
+        .returns(void.class)
+        .addParameter(ClassName.get(testClassTypeMirror), "clazz")
+        .build();
   }
 
   private interface MetadataProcessor {

@@ -62,7 +62,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.configprovider.ConfigProviderBindings;
+import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.metrics.Metrics;
@@ -1506,7 +1506,8 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       LogUtil.i("InCallActivity.shouldAllowAnswerAndRelease", "video call");
       return false;
     }
-    if (!ConfigProviderBindings.get(this)
+    if (!ConfigProviderComponent.get(this)
+        .getConfigProvider()
         .getBoolean(ConfigNames.ANSWER_AND_RELEASE_ENABLED, true)) {
       LogUtil.i("InCallActivity.shouldAllowAnswerAndRelease", "disabled by config");
       return false;

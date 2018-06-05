@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,7 +137,9 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   @Override
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    final View parent = inflater.inflate(R.layout.incall_dialpad_fragment, container, false);
+    Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.Dialer_ThemeBase);
+    LayoutInflater layoutInflater = inflater.cloneInContext(contextThemeWrapper);
+    final View parent = layoutInflater.inflate(R.layout.incall_dialpad_fragment, container, false);
     dialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
     dialpadView.setCanDigitsBeEdited(false);
     dialpadView.setBackgroundResource(R.color.incall_dialpad_background);

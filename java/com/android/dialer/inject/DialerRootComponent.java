@@ -41,4 +41,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 public @interface DialerRootComponent {
   DialerVariant variant();
+
+  Class<?> injectClass() default Object.class;
 }

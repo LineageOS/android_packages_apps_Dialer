@@ -25,9 +25,6 @@
   <!-- Background color for status bar. For portrait this will be ignored. -->
   <color name="statusbar_background_color">?android:attr/colorPrimary</color>
 
-  <!-- 20% opacity, theme color. -->
-  <color name="incall_dialpad_touch_tint">@color/dialer_theme_color_20pct</color>
-
   <!-- Background colors for InCallUI. This is a set of colors which pass WCAG
        AA and all have a contrast ratio over 5:1.
 
