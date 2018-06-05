@@ -19,10 +19,9 @@ package com.android.incallui.speakeasy;
 import android.preference.PreferenceFragment;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyIcon;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyText;
 import com.google.common.base.Optional;
 import dagger.Binds;
 import dagger.Module;
@@ -48,12 +47,7 @@ public abstract class StubSpeakEasyModule {
   }
 
   @Provides
-  static @SpeakEasyIcon Optional<Integer> provideSpeakEasyIcon() {
-    return Optional.absent();
-  }
-
-  @Provides
-  static @SpeakEasyText Optional<Integer> provideSpeakEasyText() {
+  static @SpeakEasyChipResourceId Optional<Integer> provideSpeakEasyChip() {
     return Optional.absent();
   }
 }

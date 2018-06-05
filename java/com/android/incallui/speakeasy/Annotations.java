@@ -21,14 +21,6 @@ import javax.inject.Qualifier;
 /** Annotations for Speakeasy providers. */
 public final class Annotations {
 
-  /** A Speakeasy icon */
-  @Qualifier
-  public @interface SpeakEasyIcon {}
-
-  /** Speakeasy text */
-  @Qualifier
-  public @interface SpeakEasyText {}
-
   /** A Speakeasy settings fragment */
   @Qualifier
   public @interface SpeakEasySettingsFragment {}
@@ -36,4 +28,8 @@ public final class Annotations {
   /** A Speakeasy settings object */
   @Qualifier
   public @interface SpeakEasySettingsObject {}
+
+  /** A Speakeasy chip */
+  @Qualifier
+  public @interface SpeakEasyChipResourceId {}
 }
