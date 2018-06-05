@@ -53,18 +53,18 @@
       <!--
           Important note:
 
-          The following TextView is the only widget that defines a weight in the containing
+          The following BidiTextView is the only widget that defines a weight in the containing
           LinearLayout, of which the purpose is to avoid pushing the widgets after it out of the
           boundary when the text is too long.
 
-          Generally it is more efficient to assign a width/height of 0dp so that the TextView does
-          not have to measure its own size since it will absorb all the remaining space anyway.
+          Generally it is more efficient to assign a width/height of 0dp so that the BidiTextView
+          does not have to measure its own size since it will absorb all the remaining space anyway.
 
-          However, as the TextView is part of an entry in the call log's RecyclerView, we must set
-          layout_width to "wrap_content" so that the TextView can adjust its size when recycled for
-          text of different lengths.
+          However, as the BidiTextView is part of an entry in the call log's RecyclerView, we must
+          set layout_width to "wrap_content" so that the TextView can adjust its size when recycled
+          for text of different lengths.
       -->
-      <TextView
+      <com.android.dialer.widget.BidiTextView
           android:id="@+id/primary_text"
           style="@style/Dialer.TextAppearance.Primary.Ellipsize"
           android:layout_width="wrap_content"
