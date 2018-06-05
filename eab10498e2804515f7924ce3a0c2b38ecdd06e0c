@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2209ba20_611c5747",
+        "filename": "InCallUI/res/values-large/bools.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2018-06-05T06:40:57Z",
+      "side": 1,
+      "message": "That last sentence should rather say something like \u0027Keep in sync with primary_call_info.xml\u0027.",
+      "revId": "eab10498e2804515f7924ce3a0c2b38ecdd06e0c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92ee1fea_49f34365",
+        "filename": "InCallUI/res/values/bools.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2018-06-05T06:40:57Z",
+      "side": 1,
+      "message": "Same thing as in the -large bools.xml comment.",
+      "revId": "eab10498e2804515f7924ce3a0c2b38ecdd06e0c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cc903a1_a368afe7",
+        "filename": "InCallUI/src/com/android/incallui/CallCardFragment.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2018-06-05T06:40:57Z",
+      "side": 1,
+      "message": "This unneeded newline is triggering my OCD ;-)",
+      "revId": "eab10498e2804515f7924ce3a0c2b38ecdd06e0c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
