@@ -157,26 +157,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
-            android:background="@drawable/shape_chip_drawable"
-            android:clickable="true"
             android:orientation="horizontal"
             android:visibility="gone">
-          <ImageView
-              android:id="@+id/incall_data_container_chip_icon"
-              android:layout_width="20dp"
-              android:layout_height="20dp"
-              android:src="@drawable/quantum_ic_rtt_vd_theme_24"
-              android:tint="#1A73E8"/>
-          <TextView
-              android:id="@+id/incall_data_container_chip_text"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="8dp"
-              android:layout_marginEnd="8dp"
-              android:fontFamily="sans-serif-medium"
-              android:text="@string/speakeasy_secondary_button_hint"
-              android:textColor="@color/dialer_primary_text_color"
-              android:textSize="14sp"/>
         </LinearLayout>
       </FrameLayout>
 
