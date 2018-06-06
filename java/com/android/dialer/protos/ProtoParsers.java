@@ -16,6 +16,7 @@
 
 package com.android.dialer.protos;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,14 +44,46 @@ public final class ProtoParsers {
   }
 
   /**
+   * Retrieve a proto from a ContentValues which was not created within the current
+   * executable/version.
+   */
+  @SuppressWarnings("unchecked") // We want to eventually optimize away parser classes, so cast
+  public static <T extends MessageLite> T get(
+      @NonNull ContentValues contentValues, @NonNull String key, @NonNull T defaultInstance)
+      throws InvalidProtocolBufferException {
+
+    Assert.isNotNull(contentValues);
+    Assert.isNotNull(key);
+    Assert.isNotNull(defaultInstance);
+
+    byte[] bytes = contentValues.getAsByteArray(key);
+    return (T) mergeFrom(bytes, defaultInstance.getDefaultInstanceForType());
+  }
+
+  /**
    * Retrieve a proto from a trusted bundle which was created within the current executable/version.
    *
-   * @throws RuntimeException if the proto cannot be parsed
+   * @throws IllegalStateException if the proto cannot be parsed
    */
   public static <T extends MessageLite> T getTrusted(
       @NonNull Bundle bundle, @NonNull String key, @NonNull T defaultInstance) {
     try {
       return get(bundle, key, defaultInstance);
+    } catch (InvalidProtocolBufferException e) {
+      throw Assert.createIllegalStateFailException(e.toString());
+    }
+  }
+
+  /**
+   * Retrieve a proto from a trusted ContentValues which was created within the current
+   * executable/version.
+   *
+   * @throws IllegalStateException if the proto cannot be parsed
+   */
+  public static <T extends MessageLite> T getTrusted(
+      @NonNull ContentValues contentValues, @NonNull String key, @NonNull T defaultInstance) {
+    try {
+      return get(contentValues, key, defaultInstance);
     } catch (InvalidProtocolBufferException e) {
       throw Assert.createIllegalStateFailException(e.toString());
     }
