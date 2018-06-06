@@ -50,7 +50,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
@@ -84,8 +83,7 @@ import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyIcon;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyText;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -148,10 +146,8 @@ public class AnswerFragment extends Fragment
   private View importanceBadge;
   private SwipeButtonView secondaryButton;
   private SwipeButtonView answerAndReleaseButton;
-  private LinearLayout chipLayout;
-  private ImageView chipIcon;
-  private TextView chipText;
   private AffordanceHolderLayout affordanceHolderLayout;
+  private LinearLayout chipContainer;
   // Use these flags to prevent user from clicking accept/reject buttons multiple times.
   // We use separate flags because in some rare cases accepting a call may fail to join the room,
   // and then user is stuck in the incoming call view until it times out. Two flags at least give
@@ -467,22 +463,23 @@ public class AnswerFragment extends Fragment
 
   /** Initialize chip buttons */
   private void initChips() {
+
     if (!allowSpeakEasy()) {
-      chipLayout.setVisibility(View.GONE);
+      chipContainer.setVisibility(View.GONE);
       return;
     }
-    chipLayout.setVisibility(View.VISIBLE);
-    chipLayout.setOnClickListener(this::performSpeakEasy);
+    chipContainer.setVisibility(View.VISIBLE);
 
-    @SpeakEasyIcon
-    Optional<Integer> alternativeIcon = SpeakEasyComponent.get(getContext()).speakEasyIcon();
-    @SpeakEasyText
-    Optional<Integer> alternativeText = SpeakEasyComponent.get(getContext()).speakEasyText();
-    if (alternativeIcon.isPresent() && alternativeText.isPresent()) {
-      chipIcon.setImageDrawable(getContext().getDrawable(alternativeIcon.get()));
-      chipText.setText(alternativeText.get());
-      // The button needs to override normal swipe up/down behavior.
-      chipLayout.bringToFront();
+    @SpeakEasyChipResourceId
+    Optional<Integer> chipLayoutOptional = SpeakEasyComponent.get(getContext()).speakEasyChip();
+    if (chipLayoutOptional.isPresent()) {
+
+      LinearLayout chipLayout =
+          (LinearLayout) getLayoutInflater().inflate(chipLayoutOptional.get(), null);
+
+      chipLayout.setOnClickListener(this::performSpeakEasy);
+
+      chipContainer.addView(chipLayout);
     }
   }
 
@@ -721,12 +718,11 @@ public class AnswerFragment extends Fragment
     View view = inflater.inflate(R.layout.fragment_incoming_call, container, false);
     secondaryButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button);
     answerAndReleaseButton = (SwipeButtonView) view.findViewById(R.id.incoming_secondary_button2);
-    chipLayout = view.findViewById(R.id.incall_data_container_chip_container);
-    chipIcon = view.findViewById(R.id.incall_data_container_chip_icon);
-    chipText = view.findViewById(R.id.incall_data_container_chip_text);
 
     affordanceHolderLayout = (AffordanceHolderLayout) view.findViewById(R.id.incoming_container);
     affordanceHolderLayout.setAffordanceCallback(affordanceCallback);
+
+    chipContainer = view.findViewById(R.id.incall_data_container_chip_container);
 
     importanceBadge = view.findViewById(R.id.incall_important_call_badge);
     importanceBadge
