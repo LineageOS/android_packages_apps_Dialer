@@ -1555,11 +1555,11 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   private boolean showRttCallScreenFragment(FragmentTransaction transaction, DialerCall call) {
     if (didShowRttCallScreen) {
-      // This shouldn't happen since only one RTT call is allow at same time.
-      if (!getRttCallScreen().getCallId().equals(call.getId())) {
-        LogUtil.e("InCallActivity.showRttCallScreenFragment", "RTT call id doesn't match");
+      if (getRttCallScreen().getCallId().equals(call.getId())) {
+        return false;
       }
-      return false;
+      LogUtil.i("InCallActivity.showRttCallScreenFragment", "RTT call id doesn't match");
+      hideRttCallScreenFragment(transaction);
     }
     RttCallScreen rttCallScreen = RttBindings.createRttCallScreen(call.getId());
     transaction.add(R.id.main, rttCallScreen.getRttCallScreenFragment(), Tags.RTT_CALL_SCREEN);
