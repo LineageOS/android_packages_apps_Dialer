@@ -26,6 +26,7 @@ import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.concurrent.DialerFutures;
 import com.android.dialer.inject.ApplicationContext;
@@ -53,6 +54,7 @@ public class RefreshAnnotatedCallLogWorker {
   private final MutationApplier mutationApplier;
   private final FutureTimer futureTimer;
   private final CallLogState callLogState;
+  private final CallLogCacheUpdater callLogCacheUpdater;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
   // Used to ensure that only one refresh flow runs at a time. (Note that
@@ -67,6 +69,7 @@ public class RefreshAnnotatedCallLogWorker {
       MutationApplier mutationApplier,
       FutureTimer futureTimer,
       CallLogState callLogState,
+      CallLogCacheUpdater callLogCacheUpdater,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService) {
     this.appContext = appContext;
@@ -75,6 +78,7 @@ public class RefreshAnnotatedCallLogWorker {
     this.mutationApplier = mutationApplier;
     this.futureTimer = futureTimer;
     this.callLogState = callLogState;
+    this.callLogCacheUpdater = callLogCacheUpdater;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
   }
@@ -205,6 +209,14 @@ public class RefreshAnnotatedCallLogWorker {
               return mutationApplierFuture;
             },
             lightweightExecutorService);
+
+    Futures.addCallback(
+        Futures.transformAsync(
+            applyMutationsFuture,
+            unused -> callLogCacheUpdater.updateCache(mutations),
+            MoreExecutors.directExecutor()),
+        new DefaultFutureCallback<>(),
+        MoreExecutors.directExecutor());
 
     // After mutations applied, call onSuccessfulFill for each data source (in parallel).
     ListenableFuture<List<Void>> onSuccessfulFillFuture =
