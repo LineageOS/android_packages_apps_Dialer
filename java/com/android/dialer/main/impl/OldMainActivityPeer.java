@@ -441,11 +441,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     } else if (isShowTabIntent(intent)) {
       LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show tab intent");
       tabToSelect = getTabFromIntent(intent);
-    } else if (lastTabController.isEnabled) {
+    } else {
       LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show last tab");
       tabToSelect = lastTabController.getLastTab();
-    } else {
-      tabToSelect = TabIndex.SPEED_DIAL;
     }
     logImpressionForSelectedTab(tabToSelect);
     bottomNav.selectTab(tabToSelect);
@@ -1614,29 +1612,26 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     private final Context context;
     private final BottomNavBar bottomNavBar;
-    private final boolean isEnabled;
     private final boolean canShowVoicemailTab;
 
     LastTabController(Context context, BottomNavBar bottomNavBar, boolean canShowVoicemailTab) {
       this.context = context;
       this.bottomNavBar = bottomNavBar;
-      isEnabled =
-          ConfigProviderComponent.get(context)
-              .getConfigProvider()
-              .getBoolean("last_tab_enabled", false);
       this.canShowVoicemailTab = canShowVoicemailTab;
     }
 
-    /** Sets the last tab if the feature is enabled, otherwise defaults to speed dial. */
+    /**
+     * Get the last tab shown to the user, or the speed dial tab if this is the first time the user
+     * has opened the app.
+     */
     @TabIndex
     int getLastTab() {
       @TabIndex int tabIndex = TabIndex.SPEED_DIAL;
-      if (isEnabled) {
-        tabIndex =
-            StorageComponent.get(context)
-                .unencryptedSharedPrefs()
-                .getInt(KEY_LAST_TAB, TabIndex.SPEED_DIAL);
-      }
+
+      tabIndex =
+          StorageComponent.get(context)
+              .unencryptedSharedPrefs()
+              .getInt(KEY_LAST_TAB, TabIndex.SPEED_DIAL);
 
       // If the voicemail tab cannot be shown, default to showing speed dial
       if (tabIndex == TabIndex.VOICEMAIL && !canShowVoicemailTab) {
