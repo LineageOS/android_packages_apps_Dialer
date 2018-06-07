@@ -380,16 +380,17 @@ public class InCallActivity extends TransactionSafeFragmentActivity
         this,
         preferredAccountFuture,
         result -> {
-          if (!isVisible()) {
-            LogUtil.i(
-                "CallingAccountSelector.showPhoneAccountSelectionDialog",
-                "activity ended before result returned");
-            return;
-          }
           String callId = waitingForAccountCall.getId();
           if (result.getSelectedPhoneAccountHandle().isPresent()) {
             selectPhoneAccountListener.onPhoneAccountSelected(
                 result.getSelectedPhoneAccountHandle().get(), false, callId);
+            return;
+          }
+
+          if (!isVisible()) {
+            LogUtil.i(
+                "InCallActivity.showPhoneAccountSelectionDialog",
+                "activity ended before result returned");
             return;
           }
 
