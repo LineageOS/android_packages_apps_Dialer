@@ -25,5 +25,6 @@
       @style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large
     </item>
     <item name="android:textColor">?android:attr/textColorSecondary</item>
+    <item name="android:drawableTint">?android:attr/textColorSecondary</item>
   </style>
 </resources>
