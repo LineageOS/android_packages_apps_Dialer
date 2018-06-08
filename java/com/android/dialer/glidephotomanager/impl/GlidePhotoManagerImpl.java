@@ -34,6 +34,7 @@ import com.android.dialer.glide.GlideRequest;
 import com.android.dialer.glide.GlideRequests;
 import com.android.dialer.glidephotomanager.GlidePhotoManager;
 import com.android.dialer.glidephotomanager.PhotoInfo;
+import com.android.dialer.i18n.DialerBidiFormatter;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import java.util.List;
@@ -69,9 +70,12 @@ public class GlidePhotoManagerImpl implements GlidePhotoManager {
   public void loadContactPhoto(ImageView imageView, PhotoInfo photoInfo) {
     Assert.isMainThread();
     imageView.setContentDescription(
-        appContext.getString(
-            com.android.dialer.contactphoto.R.string.description_quick_contact_for,
-            photoInfo.getName()));
+        TextUtils.expandTemplate(
+            appContext.getText(R.string.a11y_glide_photo_manager_contact_photo_description),
+            // The display name in "photoInfo" can be a contact name, a number, or a mixture of text
+            // and a phone number. We use DialerBidiFormatter to wrap the phone number with TTS
+            // span.
+            DialerBidiFormatter.format(photoInfo.getName())));
     GlideRequest<Drawable> request = buildRequest(GlideApp.with(imageView), photoInfo);
     request.into(imageView);
   }

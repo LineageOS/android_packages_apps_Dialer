@@ -304,11 +304,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private void setOnClickListenerForMenuButon(CoalescedRow row) {
     menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(activity, row));
     menuButton.setContentDescription(
-        activity
-            .getResources()
-            .getString(
-                R.string.a11y_new_call_log_entry_expand_menu,
-                CallLogEntryText.buildPrimaryText(activity, row)));
+        TextUtils.expandTemplate(
+            activity.getResources().getText(R.string.a11y_new_call_log_entry_expand_menu),
+            CallLogEntryText.buildPrimaryText(activity, row)));
   }
 
   private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {

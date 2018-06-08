@@ -21,6 +21,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.Build.VERSION_CODES;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
@@ -98,11 +99,14 @@ public final class LegacyVoicemailNotifier {
         context
             .getResources()
             .getQuantityString(R.plurals.notification_voicemail_title, count, count);
-    boolean isOngoing =
-        pinnedTelephonyManager
-            .getCarrierConfig()
-            .getBoolean(CarrierConfigManager.KEY_VOICEMAIL_NOTIFICATION_PERSISTENT_BOOL);
-
+    PersistableBundle config = pinnedTelephonyManager.getCarrierConfig();
+    boolean isOngoing;
+    if (config == null) {
+      isOngoing = false;
+    } else {
+      isOngoing =
+          config.getBoolean(CarrierConfigManager.KEY_VOICEMAIL_NOTIFICATION_PERSISTENT_BOOL);
+    }
     String contentText;
     PendingIntent contentIntent;
     if (!TextUtils.isEmpty(voicemailNumber) && callVoicemailIntent != null) {

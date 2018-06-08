@@ -19,10 +19,9 @@ package com.android.incallui.speakeasy;
 import android.content.Context;
 import android.preference.PreferenceFragment;
 import com.android.dialer.inject.HasRootComponent;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyIcon;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyText;
 import com.google.common.base.Optional;
 import dagger.Subcomponent;
 
@@ -37,9 +36,7 @@ public abstract class SpeakEasyComponent {
 
   public abstract @SpeakEasySettingsObject Optional<Object> speakEasySettingsObject();
 
-  public abstract @SpeakEasyIcon Optional<Integer> speakEasyIcon();
-
-  public abstract @SpeakEasyText Optional<Integer> speakEasyText();
+  public abstract @SpeakEasyChipResourceId Optional<Integer> speakEasyChip();
 
   public static SpeakEasyComponent get(Context context) {
     return ((SpeakEasyComponent.HasComponent)

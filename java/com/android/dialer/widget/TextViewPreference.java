@@ -108,6 +108,8 @@ public class TextViewPreference extends Preference {
       setTitle(textResourceId);
     } else if (text != null) {
       setTitle(text);
+    } else if (getTitleRes() != 0) {
+      setTitle(getTitleRes());
     }
   }
 
