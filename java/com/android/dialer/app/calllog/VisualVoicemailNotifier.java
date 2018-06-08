@@ -33,7 +33,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
-import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
@@ -273,7 +272,6 @@ final class VisualVoicemailNotifier {
     if (voicemail != null) {
       intent.setData(voicemail.voicemailUri);
     }
-    intent.putExtra(DialtactsActivity.EXTRA_CLEAR_NEW_VOICEMAILS, true);
     return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
   }
 
