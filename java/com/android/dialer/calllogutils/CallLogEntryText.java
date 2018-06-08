@@ -18,6 +18,7 @@ package com.android.dialer.calllogutils;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.duo.DuoComponent;
@@ -69,7 +70,7 @@ public final class CallLogEntryText {
 
     // 4th preference: the formatted number.
     if (!TextUtils.isEmpty(row.getFormattedNumber())) {
-      return row.getFormattedNumber();
+      return PhoneNumberUtils.createTtsSpannable(row.getFormattedNumber());
     }
 
     // Last resort: show "Unknown".
