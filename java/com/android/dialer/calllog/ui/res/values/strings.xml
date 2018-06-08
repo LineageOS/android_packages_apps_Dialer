@@ -30,7 +30,7 @@
     [CHAR LIMIT=NONE]
   -->
   <string name="a11y_new_call_log_entry_expand_menu">
-    Expand call log menu for <xliff:g example="Jane Smith" id="primaryTextForEntry">%1$s</xliff:g>
+    Expand call log menu for <xliff:g example="Jane Smith" id="primaryTextForEntry">^1</xliff:g>
   </string>
 
   <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
