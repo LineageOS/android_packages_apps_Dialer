@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.CallLog.Calls;
 import android.support.annotation.PluralsRes;
 import android.telecom.PhoneAccountHandle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.telecom.TelecomUtil;
@@ -65,13 +66,14 @@ public final class CallLogEntryDescriptions {
     //   (2) For entries containing multiple calls:
     //         "2 calls, the latest is a missed call from Jame Smith".
     CharSequence primaryDescription =
-        context
-            .getResources()
-            .getQuantityString(
-                getPrimaryDescriptionResIdForCallType(row),
-                row.getCoalescedIds().getCoalescedIdCount(),
-                row.getCoalescedIds().getCoalescedIdCount(),
-                CallLogEntryText.buildPrimaryText(context, row));
+        TextUtils.expandTemplate(
+            context
+                .getResources()
+                .getQuantityString(
+                    getPrimaryDescriptionResIdForCallType(row),
+                    row.getCoalescedIds().getCoalescedIdCount()),
+            String.valueOf(row.getCoalescedIds().getCoalescedIdCount()),
+            CallLogEntryText.buildPrimaryText(context, row));
 
     // Build the secondary description.
     // An example: "mobile, 11 minutes ago".
@@ -85,19 +87,20 @@ public final class CallLogEntryDescriptions {
     CharSequence phoneAccountDescription = buildPhoneAccountDescription(context, row);
 
     return TextUtils.isEmpty(phoneAccountDescription)
-        ? context
-            .getResources()
-            .getString(
-                R.string.a11y_new_call_log_entry_full_description_without_phone_account_info,
-                primaryDescription,
-                secondaryDescription)
-        : context
-            .getResources()
-            .getString(
-                R.string.a11y_new_call_log_entry_full_description_with_phone_account_info,
-                primaryDescription,
-                secondaryDescription,
-                phoneAccountDescription);
+        ? TextUtils.expandTemplate(
+            context
+                .getResources()
+                .getText(
+                    R.string.a11y_new_call_log_entry_full_description_without_phone_account_info),
+            primaryDescription,
+            secondaryDescription)
+        : TextUtils.expandTemplate(
+            context
+                .getResources()
+                .getText(R.string.a11y_new_call_log_entry_full_description_with_phone_account_info),
+            primaryDescription,
+            secondaryDescription,
+            phoneAccountDescription);
   }
 
   private static @PluralsRes int getPrimaryDescriptionResIdForCallType(CoalescedRow row) {
@@ -139,12 +142,10 @@ public final class CallLogEntryDescriptions {
       return "";
     }
 
-    return context
-        .getResources()
-        .getString(
-            R.string.a11y_new_call_log_entry_phone_account,
-            phoneAccountLabel,
-            row.getNumber().getNormalizedNumber());
+    return TextUtils.expandTemplate(
+        context.getResources().getText(R.string.a11y_new_call_log_entry_phone_account),
+        phoneAccountLabel,
+        PhoneNumberUtils.createTtsSpannable(row.getNumber().getNormalizedNumber()));
   }
 
   private static CharSequence joinSecondaryTextComponents(List<CharSequence> components) {
