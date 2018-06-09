@@ -31,7 +31,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import com.android.contacts.common.list.ViewPagerTabs;
-import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.common.Assert;
@@ -157,7 +156,7 @@ public class CallLogActivity extends TransactionSafeActivity
 
     if (item.getItemId() == android.R.id.home) {
       PerformanceReport.recordClick(UiAction.Type.CLOSE_CALL_HISTORY_WITH_CANCEL_BUTTON);
-      final Intent intent = new Intent(this, DialtactsActivity.class);
+      final Intent intent = new Intent("com.android.dialer.main.impl.MAIN");
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(intent);
       return true;
