@@ -54,7 +54,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogGroupBuilder.GroupCreator;
@@ -395,16 +394,15 @@ public class CallLogAdapter extends GroupingListAdapter
             if (viewHolder.callType == CallLog.Calls.MISSED_TYPE) {
               CallLogAsyncTaskUtil.markCallAsRead(activity, viewHolder.callIds);
               if (activityType == ACTIVITY_TYPE_DIALTACTS) {
-                if (v.getContext() instanceof MainActivityPeer.PeerSupplier) {
-                  // This is really bad, but we must do this to prevent a dependency cycle, enforce
-                  // best practices in new code, and avoid refactoring DialtactsActivity.
-                  ((FragmentUtilListener)
-                          ((MainActivityPeer.PeerSupplier) v.getContext()).getPeer())
-                      .getImpl(CallLogFragmentListener.class)
-                      .updateTabUnreadCounts();
-                } else {
-                  ((DialtactsActivity) v.getContext()).updateTabUnreadCounts();
-                }
+                Assert.checkState(
+                    v.getContext() instanceof MainActivityPeer.PeerSupplier,
+                    "%s is not a PeerSupplier",
+                    v.getContext().getClass());
+                // This is really bad, but we must do this to prevent a dependency cycle, enforce
+                // best practices in new code, and avoid refactoring DialtactsActivity.
+                ((FragmentUtilListener) ((MainActivityPeer.PeerSupplier) v.getContext()).getPeer())
+                    .getImpl(CallLogFragmentListener.class)
+                    .updateTabUnreadCounts();
               }
             }
             expandViewHolderActions(viewHolder);
