@@ -27,6 +27,8 @@ import android.content.Intent;
  */
 public class MainComponent {
 
+  public static final String EXTRA_CLEAR_NEW_VOICEMAILS = "EXTRA_CLEAR_NEW_VOICEMAILS";
+
   /**
    * @param context Context of the application package implementing MainActivity class.
    * @return intent for MainActivity.class
@@ -52,6 +54,7 @@ public class MainComponent {
     intent.setComponent(new ComponentName(context, getComponentName()));
     intent.setAction("ACTION_SHOW_TAB");
     intent.putExtra("EXTRA_SHOW_TAB", 3);
+    intent.putExtra(EXTRA_CLEAR_NEW_VOICEMAILS, true);
     return intent;
   }
 
