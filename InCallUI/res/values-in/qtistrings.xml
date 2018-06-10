@@ -64,6 +64,7 @@
   <string name="lte_data_usage_label">Penggunaan data LTE: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
   <string name="modify_call_option_title">Pilih jenis panggilan</string>
+  <string name="modify_call_option_voice">Suara saja</string>
   <!-- Modify call error cause -->
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
   <!-- Text for the onscreen "blind transfer" button -->
@@ -93,17 +94,22 @@
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">Panggilan gagal karena daya baterai lemah</string>
   <!-- VoWifi call quality indicators -->
   <!-- Title for low battery alert dialogue -->
   <string name="low_battery">Peringatan Baterai Lemah</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">Apakah anda ingin mengakhiri panggilan?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
   <!-- International prefix source-->
   <!-- International prefix converted value-->
   <string name="video_call">Panggilan Video</string>
+  <string name="video_call_cannot_upgrade">Tidak dapat menerima panggilan video saat ini</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">Pilih modus gambar</string>
   <string name="video_call_picture_mode_preview_video">Pratinjau kamera</string>
+  <string name="video_call_picture_mode_incoming_video">Video masuk</string>
   <string name="video_call_picture_mode_cancel_option">Batal</string>
   <string name="video_call_picture_mode_save_option">Simpan</string>
 </resources>
