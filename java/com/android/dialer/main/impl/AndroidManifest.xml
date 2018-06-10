@@ -15,25 +15,31 @@
   ~ limitations under the License
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.android.dialer.main.impl">
+    package="com.android.dialer.main.impl">
 
   <application>
 
     <!-- TODO(a bug): remove activity themes and only have application wide themes -->
     <activity
-      android:clearTaskOnLaunch="true"
-      android:exported="true"
-      android:directBootAware="true"
-      android:label="@string/main_activity_label"
-      android:launchMode="singleTask"
-      android:name="com.android.dialer.main.impl.MainActivity"
-      android:resizeableActivity="true"
-      android:theme="@style/MainActivityTheme"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+        android:name="com.android.dialer.main.impl.MainActivity"
+        android:clearTaskOnLaunch="true"
+        android:directBootAware="true"
+        android:exported="true"
+        android:label="@string/main_activity_label"
+        android:launchMode="singleTask"
+        android:resizeableActivity="true"
+        android:theme="@style/MainActivityTheme"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
+
+      <intent-filter>
+        <action android:name="com.android.dialer.main.impl.MAIN"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
 
       <meta-data
-        android:name="com.android.keyguard.layout"
-        android:resource="@layout/keyguard_preview"/>
+          android:name="com.android.keyguard.layout"
+          android:resource="@layout/keyguard_preview"/>
+
     </activity>
   </application>
 </manifest>
