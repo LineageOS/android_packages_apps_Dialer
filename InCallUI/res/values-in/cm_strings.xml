@@ -32,6 +32,7 @@
          provider (e.g. MSIM) -->
   <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (melalui <xliff:g id="provider_name">%2$s</xliff:g>)</string>
   <!-- In-call screen: status label for a call that is held remotely  -->
+  <string name="card_title_waiting_call">Panggilan tunggu</string>
   <string name="call_recording_failed_message">Gagal memulai perekaman panggilan</string>
   <string name="call_recording_file_location">Rekaman panggilan disimpan ke <xliff:g id="filename">%s</xliff:g></string>
   <string name="onscreenCallRecordText">Rekam panggilan</string>

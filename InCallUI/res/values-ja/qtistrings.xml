@@ -123,25 +123,34 @@
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
   <string name="card_title_incoming_conf_call">着信電話会議</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">ビデオ会議の着信</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
   <string name="notification_incoming_conf_call">着信電話会議</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template"><xliff:g id="provider_name">%s</xliff:g>を介した電話会議の着信</string>
   <!-- Message indicating call failed due to low battery -->
   <string name="call_failed_due_to_low_battery">電池の残量が少なくなっているため、通話できませんでした。</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">良好な音声品質</string>
+  <string name="vowifi_call_quality_fair">普通の音声品質</string>
+  <string name="vowifi_call_quality_poor">貧弱な音声品質</string>
   <!-- Title for low battery alert dialogue -->
   <string name="low_battery">電池残量低下の警告</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">電話を切りますか？</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
   <string name="low_battery_msg">バッテリー残量が15%以下です。ビデオ通話のままにするか音声通話に変更するか選んでください</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">変換</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
   <string name="video_call">ビデオ通話</string>
+  <string name="video_call_cannot_upgrade">現在はビデオ通話の着信に応答できません</string>
   <!-- Pop up menu options for picture mode -->
   <string name="video_call_picture_mode_menu_title">画像モードを選択</string>
   <string name="video_call_picture_mode_preview_video">カメラのプレビュー</string>
+  <string name="video_call_picture_mode_incoming_video">ビデオ通話の着信</string>
   <string name="video_call_picture_mode_cancel_option">キャンセル</string>
   <string name="video_call_picture_mode_save_option">保存</string>
 </resources>
