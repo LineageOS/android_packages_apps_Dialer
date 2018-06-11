@@ -21,7 +21,6 @@ import android.os.Build;
 import android.provider.BaseColumns;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.constants.Constants;
-import java.util.Arrays;
 
 /** Contract for the AnnotatedCallLog content provider. */
 public class AnnotatedCallLogContract {
@@ -29,11 +28,7 @@ public class AnnotatedCallLogContract {
 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-  /**
-   * Columns shared by {@link AnnotatedCallLog} and {@link CoalescedAnnotatedCallLog}.
-   *
-   * <p>When adding columns be sure to update {@link #ALL_COMMON_COLUMNS}.
-   */
+  /** Columns shared by {@link AnnotatedCallLog} and {@link CoalescedAnnotatedCallLog}. */
   interface CommonColumns extends BaseColumns {
 
     /**
@@ -143,25 +138,6 @@ public class AnnotatedCallLogContract {
      * <p>Type: INTEGER (int)
      */
     String CALL_TYPE = "call_type";
-
-    String[] ALL_COMMON_COLUMNS =
-        new String[] {
-          _ID,
-          TIMESTAMP,
-          NUMBER,
-          FORMATTED_NUMBER,
-          NUMBER_PRESENTATION,
-          IS_READ,
-          NEW,
-          GEOCODED_LOCATION,
-          PHONE_ACCOUNT_COMPONENT_NAME,
-          PHONE_ACCOUNT_ID,
-          FEATURES,
-          NUMBER_ATTRIBUTES,
-          IS_VOICEMAIL_CALL,
-          VOICEMAIL_CALL_TAG,
-          CALL_TYPE
-        };
   }
 
   /**
@@ -239,8 +215,6 @@ public class AnnotatedCallLogContract {
    *
    * <p>This is an in-memory view of the {@link AnnotatedCallLog} with some adjacent entries
    * collapsed.
-   *
-   * <p>When adding columns be sure to update {@link #COLUMNS_ONLY_IN_COALESCED_CALL_LOG}.
    */
   public static final class CoalescedAnnotatedCallLog implements CommonColumns {
 
@@ -251,21 +225,5 @@ public class AnnotatedCallLogContract {
      * <p>Type: BLOB
      */
     public static final String COALESCED_IDS = "coalesced_ids";
-
-    /**
-     * Columns that are only in the {@link CoalescedAnnotatedCallLog} but not the {@link
-     * AnnotatedCallLog}.
-     */
-    private static final String[] COLUMNS_ONLY_IN_COALESCED_CALL_LOG = new String[] {COALESCED_IDS};
-
-    /** All columns in the {@link CoalescedAnnotatedCallLog}. */
-    public static final String[] ALL_COLUMNS =
-        concat(ALL_COMMON_COLUMNS, COLUMNS_ONLY_IN_COALESCED_CALL_LOG);
-  }
-
-  private static String[] concat(String[] first, String[] second) {
-    String[] result = Arrays.copyOf(first, first.length + second.length);
-    System.arraycopy(second, 0, result, first.length, second.length);
-    return result;
   }
 }
