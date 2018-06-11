@@ -35,6 +35,7 @@
 
   <style name="Theme.InCallScreen" parent="@style/Dialer.Dark.ThemeBase.NoActionBar">
     <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="android:textColorSecondary">#DDFFFFFF</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
