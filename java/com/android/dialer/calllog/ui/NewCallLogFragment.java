@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
+import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
@@ -47,6 +48,7 @@ import com.android.dialer.promotion.PromotionComponent;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -65,7 +67,7 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
   private RecyclerView recyclerView;
   private EmptyContentView emptyContentView;
   private RefreshAnnotatedCallLogReceiver refreshAnnotatedCallLogReceiver;
-  private SupportUiListener<Cursor> coalesingAnnotatedCallLogListener;
+  private SupportUiListener<ImmutableList<CoalescedRow>> coalesingAnnotatedCallLogListener;
 
   private boolean shouldMarkCallsRead = false;
   private final Runnable setShouldMarkCallsReadTrue = () -> shouldMarkCallsRead = true;
@@ -304,13 +306,13 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
 
     // Start combining adjacent rows which should be collapsed for display purposes.
     // This is a time-consuming process so we will do it in the background.
-    ListenableFuture<Cursor> coalescedCursorFuture =
+    ListenableFuture<ImmutableList<CoalescedRow>> coalescedRowsFuture =
         CallLogDatabaseComponent.get(getContext()).coalescer().coalesce(newCursor);
 
     coalesingAnnotatedCallLogListener.listen(
         getContext(),
-        coalescedCursorFuture,
-        coalescedCursor -> {
+        coalescedRowsFuture,
+        coalescedRows -> {
           LogUtil.i("NewCallLogFragment.onLoadFinished", "coalescing succeeded");
 
           // TODO(zachh): Handle empty cursor by showing empty view.
@@ -323,14 +325,14 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
             recyclerView.setAdapter(
                 new NewCallLogAdapter(
                     activity,
-                    coalescedCursor,
+                    coalescedRows,
                     System::currentTimeMillis,
                     PromotionComponent.get(getContext())
                         .promotionManager()
                         .getHighestPriorityPromotion(PromotionType.CARD)
                         .orElse(null)));
           } else {
-            ((NewCallLogAdapter) recyclerView.getAdapter()).updateCursor(coalescedCursor);
+            ((NewCallLogAdapter) recyclerView.getAdapter()).updateRows(coalescedRows);
           }
         },
         throwable -> {

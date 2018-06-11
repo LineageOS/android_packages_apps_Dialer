@@ -17,19 +17,19 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.android.dialer.calllog.database.Coalescer;
+import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.common.Assert;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.promotion.Promotion;
 import com.android.dialer.time.Clock;
+import com.google.common.collect.ImmutableList;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -68,7 +68,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   private final PopCounts popCounts = new PopCounts();
   @Nullable private final Promotion promotion;
 
-  private Cursor cursor;
+  private ImmutableList<CoalescedRow> coalescedRows;
 
   /** Position of the promotion card. Null when it should not be displayed. */
   @Nullable private Integer promotionCardPosition;
@@ -82,9 +82,13 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
   /** Position of the "Older" header. Null when it should not be displayed. */
   @Nullable private Integer olderHeaderPosition;
 
-  NewCallLogAdapter(Activity activity, Cursor cursor, Clock clock, @Nullable Promotion promotion) {
+  NewCallLogAdapter(
+      Activity activity,
+      ImmutableList<CoalescedRow> coalescedRows,
+      Clock clock,
+      @Nullable Promotion promotion) {
     this.activity = activity;
-    this.cursor = cursor;
+    this.coalescedRows = coalescedRows;
     this.clock = clock;
     this.realtimeRowProcessor = CallLogUiComponent.get(activity).realtimeRowProcessor();
     this.promotion = promotion;
@@ -92,8 +96,8 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     setCardAndHeaderPositions();
   }
 
-  void updateCursor(Cursor updatedCursor) {
-    this.cursor = updatedCursor;
+  void updateRows(ImmutableList<CoalescedRow> coalescedRows) {
+    this.coalescedRows = coalescedRows;
     this.realtimeRowProcessor.clearCache();
     this.popCounts.reset();
 
@@ -119,7 +123,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     // If there are no rows to display, set all header positions to null.
-    if (!cursor.moveToFirst()) {
+    if (coalescedRows.isEmpty()) {
       todayHeaderPosition = null;
       yesterdayHeaderPosition = null;
       olderHeaderPosition = null;
@@ -131,17 +135,19 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     int numItemsInToday = 0;
     int numItemsInYesterday = 0;
-    do {
-      long timestamp = Coalescer.getTimestamp(cursor);
+    int numItemsInOlder = 0;
+    for (CoalescedRow coalescedRow : coalescedRows) {
+      long timestamp = coalescedRow.getTimestamp();
       long dayDifference = CallLogDates.getDayDifference(currentTimeMillis, timestamp);
       if (dayDifference == 0) {
         numItemsInToday++;
       } else if (dayDifference == 1) {
         numItemsInYesterday++;
       } else {
+        numItemsInOlder = coalescedRows.size() - numItemsInToday - numItemsInYesterday;
         break;
       }
-    } while (cursor.moveToNext());
+    }
 
     if (numItemsInToday > 0) {
       numItemsInToday++; // including the "Today" header;
@@ -149,13 +155,16 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     if (numItemsInYesterday > 0) {
       numItemsInYesterday++; // including the "Yesterday" header;
     }
+    if (numItemsInOlder > 0) {
+      numItemsInOlder++; // include the "Older" header;
+    }
 
     // Set all header positions.
     // A header position will be null if there is no item to be displayed under that header.
     todayHeaderPosition = numItemsInToday > 0 ? numCards : null;
     yesterdayHeaderPosition = numItemsInYesterday > 0 ? numItemsInToday + numCards : null;
     olderHeaderPosition =
-        !cursor.isAfterLast() ? numItemsInToday + numItemsInYesterday + numCards : null;
+        numItemsInOlder > 0 ? numItemsInToday + numItemsInYesterday + numCards : null;
   }
 
   @Override
@@ -233,8 +242,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
         if (olderHeaderPosition != null && position > olderHeaderPosition) {
           previousCardAndHeaders++;
         }
-        cursor.moveToPosition(position - previousCardAndHeaders);
-        newCallLogViewHolder.bind(cursor);
+        newCallLogViewHolder.bind(coalescedRows.get(position - previousCardAndHeaders));
         break;
       default:
         throw Assert.createIllegalStateFailException(
@@ -277,7 +285,7 @@ final class NewCallLogAdapter extends RecyclerView.Adapter<ViewHolder> {
     if (olderHeaderPosition != null) {
       numberOfHeaders++;
     }
-    return cursor.getCount() + numberOfHeaders + numberOfCards;
+    return coalescedRows.size() + numberOfHeaders + numberOfCards;
   }
 
   /**
