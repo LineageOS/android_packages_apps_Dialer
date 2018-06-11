@@ -17,7 +17,6 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Activity;
 import android.content.res.ColorStateList;
-import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -31,7 +30,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllog.ui.NewCallLogAdapter.PopCounts;
 import com.android.dialer.calllog.ui.menu.NewCallLogMenu;
@@ -101,25 +99,21 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     uiExecutorService = DialerExecutorComponent.get(activity).uiExecutor();
   }
 
-  /**
-   * @param cursor a cursor for {@link
-   *     com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog}.
-   */
-  void bind(Cursor cursor) {
-    CoalescedRow row = Coalescer.toRow(cursor);
-    currentRowId = row.getId(); // Used to make sure async updates are applied to the correct views
+  void bind(CoalescedRow coalescedRow) {
+    // The row ID is used to make sure async updates are applied to the correct views.
+    currentRowId = coalescedRow.getId();
 
     // Even if there is additional real time processing necessary, we still want to immediately show
     // what information we have, rather than an empty card. For example, if CP2 information needs to
     // be queried on the fly, we can still show the phone number until the contact name loads.
-    displayRow(row);
-    configA11yForRow(row);
+    displayRow(coalescedRow);
+    configA11yForRow(coalescedRow);
 
     // Note: This leaks the view holder via the callback (which is an inner class), but this is OK
     // because we only create ~10 of them (and they'll be collected assuming all jobs finish).
     Futures.addCallback(
-        realtimeRowProcessor.applyRealtimeProcessing(row),
-        new RealtimeRowFutureCallback(row),
+        realtimeRowProcessor.applyRealtimeProcessing(coalescedRow),
+        new RealtimeRowFutureCallback(coalescedRow),
         uiExecutorService);
   }
 

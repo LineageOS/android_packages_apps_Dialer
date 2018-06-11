@@ -17,9 +17,9 @@ package com.android.dialer.calllog.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
@@ -39,12 +39,12 @@ import com.android.dialer.metrics.Metrics;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 
@@ -55,24 +55,6 @@ import javax.inject.Inject;
  * to each data source to determine how individual columns should be aggregated.
  */
 public class Coalescer {
-
-  // Indexes for CoalescedAnnotatedCallLog.ALL_COLUMNS
-  private static final int ID = 0;
-  private static final int TIMESTAMP = 1;
-  private static final int NUMBER = 2;
-  private static final int FORMATTED_NUMBER = 3;
-  private static final int NUMBER_PRESENTATION = 4;
-  private static final int IS_READ = 5;
-  private static final int NEW = 6;
-  private static final int GEOCODED_LOCATION = 7;
-  private static final int PHONE_ACCOUNT_COMPONENT_NAME = 8;
-  private static final int PHONE_ACCOUNT_ID = 9;
-  private static final int FEATURES = 10;
-  private static final int NUMBER_ATTRIBUTES = 11;
-  private static final int IS_VOICEMAIL_CALL = 12;
-  private static final int VOICEMAIL_CALL_TAG = 13;
-  private static final int CALL_TYPE = 14;
-  private static final int COALESCED_IDS = 15;
 
   private final DataSources dataSources;
   private final FutureTimer futureTimer;
@@ -94,12 +76,12 @@ public class Coalescer {
    *
    * @param allAnnotatedCallLogRowsSortedByTimestampDesc {@link AnnotatedCallLog} rows sorted in
    *     descending order of timestamp.
-   * @return a future of a {@link MatrixCursor} containing the {@link CoalescedAnnotatedCallLog}
-   *     rows to display
+   * @return a future of a list of {@link CoalescedRow coalesced rows}, which will be used to
+   *     display call log entries.
    */
-  public ListenableFuture<Cursor> coalesce(
+  public ListenableFuture<ImmutableList<CoalescedRow>> coalesce(
       @NonNull Cursor allAnnotatedCallLogRowsSortedByTimestampDesc) {
-    ListenableFuture<Cursor> coalescingFuture =
+    ListenableFuture<ImmutableList<CoalescedRow>> coalescingFuture =
         backgroundExecutorService.submit(
             () -> coalesceInternal(Assert.isNotNull(allAnnotatedCallLogRowsSortedByTimestampDesc)));
     futureTimer.applyTiming(coalescingFuture, Metrics.NEW_CALL_LOG_COALESCE);
@@ -108,34 +90,34 @@ public class Coalescer {
 
   /**
    * Reads the entire {@link AnnotatedCallLog} into memory from the provided cursor and then builds
-   * and returns a new {@link MatrixCursor} of {@link CoalescedAnnotatedCallLog}, which is the
-   * result of combining adjacent rows which should be collapsed for display purposes.
+   * and returns a list of {@link CoalescedRow coalesced rows}, which is the result of combining
+   * adjacent rows which should be collapsed for display purposes.
    *
    * @param allAnnotatedCallLogRowsSortedByTimestampDesc {@link AnnotatedCallLog} rows sorted in
    *     descending order of timestamp.
-   * @return a new {@link MatrixCursor} containing the {@link CoalescedAnnotatedCallLog} rows to
-   *     display
+   * @return a list of {@link CoalescedRow coalesced rows}, which will be used to display call log
+   *     entries.
    */
   @WorkerThread
   @NonNull
-  private Cursor coalesceInternal(Cursor allAnnotatedCallLogRowsSortedByTimestampDesc) {
+  private ImmutableList<CoalescedRow> coalesceInternal(
+      Cursor allAnnotatedCallLogRowsSortedByTimestampDesc) {
     Assert.isWorkerThread();
+
+    if (!allAnnotatedCallLogRowsSortedByTimestampDesc.moveToFirst()) {
+      return ImmutableList.of();
+    }
 
     // Note: This method relies on rowsShouldBeCombined to determine which rows should be combined,
     // but delegates to data sources to actually aggregate column values.
 
     DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
 
-    MatrixCursor allCoalescedRowsMatrixCursor =
-        new MatrixCursor(
-            CoalescedAnnotatedCallLog.ALL_COLUMNS,
-            allAnnotatedCallLogRowsSortedByTimestampDesc.getCount());
-
-    if (!allAnnotatedCallLogRowsSortedByTimestampDesc.moveToFirst()) {
-      return allCoalescedRowsMatrixCursor;
-    }
+    ImmutableList.Builder<CoalescedRow> coalescedRowListBuilder = new ImmutableList.Builder<>();
 
     int coalescedRowId = 0;
+
+    // TODO(a bug): Avoid using ContentValues as it doesn't make sense here.
     List<ContentValues> currentRowGroup = new ArrayList<>();
 
     ContentValues firstRow = cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
@@ -157,9 +139,10 @@ public class Coalescer {
 
       // Coalesce the group into a single row
       ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
+      coalescedRow.put(CoalescedAnnotatedCallLog._ID, coalescedRowId++);
       coalescedRow.put(
           CoalescedAnnotatedCallLog.COALESCED_IDS, getCoalescedIds(currentRowGroup).toByteArray());
-      addContentValuesToMatrixCursor(coalescedRow, allCoalescedRowsMatrixCursor, coalescedRowId++);
+      coalescedRowListBuilder.add(toCoalescedRowProto(coalescedRow));
 
       // Clear the current group after the rows are coalesced.
       currentRowGroup.clear();
@@ -170,7 +153,7 @@ public class Coalescer {
       }
     }
 
-    return allCoalescedRowsMatrixCursor;
+    return coalescedRowListBuilder.build();
   }
 
   private static ContentValues cursorRowToContentValues(Cursor cursor) {
@@ -293,34 +276,26 @@ public class Coalescer {
   }
 
   /**
-   * @param contentValues a {@link CoalescedAnnotatedCallLog} row
-   * @param matrixCursor represents {@link CoalescedAnnotatedCallLog}
-   */
-  private static void addContentValuesToMatrixCursor(
-      ContentValues contentValues, MatrixCursor matrixCursor, int rowId) {
-    MatrixCursor.RowBuilder rowBuilder = matrixCursor.newRow();
-    rowBuilder.add(CoalescedAnnotatedCallLog._ID, rowId);
-    for (Map.Entry<String, Object> entry : contentValues.valueSet()) {
-      rowBuilder.add(entry.getKey(), entry.getValue());
-    }
-  }
-
-  /**
-   * Creates a new {@link CoalescedRow} based on the data at the provided cursor's current position.
+   * Creates a new {@link CoalescedRow} proto based on the provided {@link ContentValues}.
    *
-   * <p>The provided cursor should be one for {@link CoalescedAnnotatedCallLog}.
+   * <p>The provided {@link ContentValues} should be one for {@link CoalescedAnnotatedCallLog}.
    */
-  public static CoalescedRow toRow(Cursor coalescedAnnotatedCallLogCursor) {
+  @VisibleForTesting
+  static CoalescedRow toCoalescedRowProto(ContentValues coalescedContentValues) {
     DialerPhoneNumber number;
     try {
-      number = DialerPhoneNumber.parseFrom(coalescedAnnotatedCallLogCursor.getBlob(NUMBER));
+      number =
+          DialerPhoneNumber.parseFrom(
+              coalescedContentValues.getAsByteArray(CoalescedAnnotatedCallLog.NUMBER));
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException("Couldn't parse DialerPhoneNumber bytes");
     }
 
     CoalescedIds coalescedIds;
     try {
-      coalescedIds = CoalescedIds.parseFrom(coalescedAnnotatedCallLogCursor.getBlob(COALESCED_IDS));
+      coalescedIds =
+          CoalescedIds.parseFrom(
+              coalescedContentValues.getAsByteArray(CoalescedAnnotatedCallLog.COALESCED_IDS));
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException("Couldn't parse CoalescedIds bytes");
     }
@@ -328,61 +303,64 @@ public class Coalescer {
     NumberAttributes numberAttributes;
     try {
       numberAttributes =
-          NumberAttributes.parseFrom(coalescedAnnotatedCallLogCursor.getBlob(NUMBER_ATTRIBUTES));
+          NumberAttributes.parseFrom(
+              coalescedContentValues.getAsByteArray(CoalescedAnnotatedCallLog.NUMBER_ATTRIBUTES));
     } catch (InvalidProtocolBufferException e) {
       throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
     }
 
     CoalescedRow.Builder coalescedRowBuilder =
         CoalescedRow.newBuilder()
-            .setId(coalescedAnnotatedCallLogCursor.getLong(ID))
-            .setTimestamp(coalescedAnnotatedCallLogCursor.getLong(TIMESTAMP))
+            .setId(coalescedContentValues.getAsLong(CoalescedAnnotatedCallLog._ID))
+            .setTimestamp(coalescedContentValues.getAsLong(CoalescedAnnotatedCallLog.TIMESTAMP))
             .setNumber(number)
-            .setNumberPresentation(coalescedAnnotatedCallLogCursor.getInt(NUMBER_PRESENTATION))
-            .setIsRead(coalescedAnnotatedCallLogCursor.getInt(IS_READ) == 1)
-            .setIsNew(coalescedAnnotatedCallLogCursor.getInt(NEW) == 1)
-            .setFeatures(coalescedAnnotatedCallLogCursor.getInt(FEATURES))
-            .setCallType(coalescedAnnotatedCallLogCursor.getInt(CALL_TYPE))
+            .setNumberPresentation(
+                coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.NUMBER_PRESENTATION))
+            .setIsRead(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.IS_READ) == 1)
+            .setIsNew(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.NEW) == 1)
+            .setFeatures(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.FEATURES))
+            .setCallType(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.CALL_TYPE))
             .setNumberAttributes(numberAttributes)
-            .setIsVoicemailCall(coalescedAnnotatedCallLogCursor.getInt(IS_VOICEMAIL_CALL) == 1)
             .setCoalescedIds(coalescedIds);
 
-    String formattedNumber = coalescedAnnotatedCallLogCursor.getString(FORMATTED_NUMBER);
+    // TODO(linyuh): none of the boolean columns in the annotated call log should be null.
+    // This is a bug in VoicemailDataSource, but we should also fix the database constraints.
+    Integer isVoicemailCall =
+        coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.IS_VOICEMAIL_CALL);
+    coalescedRowBuilder.setIsVoicemailCall(isVoicemailCall != null && isVoicemailCall == 1);
+
+    String formattedNumber =
+        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.FORMATTED_NUMBER);
     if (!TextUtils.isEmpty(formattedNumber)) {
       coalescedRowBuilder.setFormattedNumber(formattedNumber);
     }
 
-    String geocodedLocation = coalescedAnnotatedCallLogCursor.getString(GEOCODED_LOCATION);
+    String geocodedLocation =
+        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.GEOCODED_LOCATION);
     if (!TextUtils.isEmpty(geocodedLocation)) {
       coalescedRowBuilder.setGeocodedLocation(geocodedLocation);
     }
 
     String phoneAccountComponentName =
-        coalescedAnnotatedCallLogCursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
+        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME);
     if (!TextUtils.isEmpty(phoneAccountComponentName)) {
       coalescedRowBuilder.setPhoneAccountComponentName(
-          coalescedAnnotatedCallLogCursor.getString(PHONE_ACCOUNT_COMPONENT_NAME));
+          coalescedContentValues.getAsString(
+              CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME));
     }
 
-    String phoneAccountId = coalescedAnnotatedCallLogCursor.getString(PHONE_ACCOUNT_ID);
+    String phoneAccountId =
+        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.PHONE_ACCOUNT_ID);
     if (!TextUtils.isEmpty(phoneAccountId)) {
       coalescedRowBuilder.setPhoneAccountId(phoneAccountId);
     }
 
-    String voicemailCallTag = coalescedAnnotatedCallLogCursor.getString(VOICEMAIL_CALL_TAG);
+    String voicemailCallTag =
+        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.VOICEMAIL_CALL_TAG);
     if (!TextUtils.isEmpty(voicemailCallTag)) {
       coalescedRowBuilder.setVoicemailCallTag(voicemailCallTag);
     }
 
     return coalescedRowBuilder.build();
-  }
-
-  /**
-   * Returns the timestamp at the provided cursor's current position.
-   *
-   * <p>The provided cursor should be one for {@link CoalescedAnnotatedCallLog}.
-   */
-  public static long getTimestamp(Cursor coalescedAnnotatedCallLogCursor) {
-    return coalescedAnnotatedCallLogCursor.getLong(TIMESTAMP);
   }
 }
