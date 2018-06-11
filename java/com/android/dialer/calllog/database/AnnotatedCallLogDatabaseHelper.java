@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.CallLog.Calls;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -34,6 +35,8 @@ import javax.inject.Singleton;
 @Singleton
 public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
+  @VisibleForTesting static final int VERSION = 3;
+
   private static final String FILENAME = "annotated_call_log.db";
 
   private final Context appContext;
@@ -45,7 +48,7 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
       @ApplicationContext Context appContext,
       @AnnotatedCallLogMaxRows int maxRows,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
-    super(appContext, FILENAME, null, 2);
+    super(appContext, FILENAME, null, VERSION);
 
     this.appContext = appContext;
     this.maxRows = maxRows;
@@ -73,25 +76,11 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")
           + (AnnotatedCallLog.CALL_TYPE + " integer not null, ")
           + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob, ")
-          + (AnnotatedCallLog.IS_VOICEMAIL_CALL + " integer, ")
+          + (AnnotatedCallLog.IS_VOICEMAIL_CALL + " integer default 0, ")
           + (AnnotatedCallLog.VOICEMAIL_CALL_TAG + " text, ")
           + (AnnotatedCallLog.TRANSCRIPTION_STATE + " integer, ")
           + (AnnotatedCallLog.CALL_MAPPING_ID + " text")
           + ");";
-
-  private static final String ALTER_TABLE_SQL_ADD_CALL_MAPPING_ID_COLUMN =
-      "alter table "
-          + AnnotatedCallLog.TABLE
-          + " add column "
-          + AnnotatedCallLog.CALL_MAPPING_ID
-          + " text;";
-  private static final String UPDATE_CALL_MAPPING_ID_COLUMN =
-      "update "
-          + AnnotatedCallLog.TABLE
-          + " set "
-          + AnnotatedCallLog.CALL_MAPPING_ID
-          + " = "
-          + AnnotatedCallLog.TIMESTAMP;
 
   /**
    * Deletes all but the first maxRows rows (by timestamp, excluding voicemails) to keep the table a
@@ -159,10 +148,40 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    if (oldVersion == 1 && newVersion == 2) {
-      db.execSQL(ALTER_TABLE_SQL_ADD_CALL_MAPPING_ID_COLUMN);
-      db.execSQL(UPDATE_CALL_MAPPING_ID_COLUMN);
+    if (oldVersion < 2) {
+      upgradeToV2(db);
     }
+    if (oldVersion < 3) {
+      upgradeToV3(db);
+    }
+  }
+
+  private static void upgradeToV2(SQLiteDatabase db) {
+    db.execSQL(
+        "alter table "
+            + AnnotatedCallLog.TABLE
+            + " add column "
+            + AnnotatedCallLog.CALL_MAPPING_ID
+            + " text;");
+    db.execSQL(
+        "update "
+            + AnnotatedCallLog.TABLE
+            + " set "
+            + AnnotatedCallLog.CALL_MAPPING_ID
+            + " = "
+            + AnnotatedCallLog.TIMESTAMP);
+  }
+
+  private static void upgradeToV3(SQLiteDatabase db) {
+    db.execSQL(
+        "update "
+            + AnnotatedCallLog.TABLE
+            + " set "
+            + AnnotatedCallLog.IS_VOICEMAIL_CALL
+            + " = 0 "
+            + "where "
+            + AnnotatedCallLog.IS_VOICEMAIL_CALL
+            + " is null");
   }
 
   /** Closes the database and deletes it. */
