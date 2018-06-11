@@ -63,6 +63,8 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
   public static final String ACTION_TURN_ON_SPEAKER = "com.android.incallui.ACTION_TURN_ON_SPEAKER";
   public static final String ACTION_TURN_OFF_SPEAKER =
       "com.android.incallui.ACTION_TURN_OFF_SPEAKER";
+  public static final String ACTION_ANSWER_SPEAKEASY_CALL =
+      "com.android.incallui.ACTION_ANSWER_SPEAKEASY_CALL";
 
   @RequiresApi(VERSION_CODES.N_MR1)
   public static final String ACTION_PULL_EXTERNAL_CALL =
@@ -80,6 +82,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
       answerIncomingCall(VideoProfile.STATE_BIDIRECTIONAL, context);
     } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
+      answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY, context);
+    } else if (action.equals(ACTION_ANSWER_SPEAKEASY_CALL)) {
+      markIncomingCallAsSpeakeasyCall();
       answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY, context);
     } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
       Logger.get(context)
@@ -142,6 +147,19 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
           "NotificationBroadcastReceiver.hangUpOngoingCall", "disconnecting call, call: " + call);
       if (call != null) {
         call.disconnect();
+      }
+    }
+  }
+
+  private void markIncomingCallAsSpeakeasyCall() {
+    CallList callList = InCallPresenter.getInstance().getCallList();
+    if (callList == null) {
+      LogUtil.e(
+          "NotificationBroadcastReceiver.markIncomingCallAsSpeakeasyCall", "call list is empty");
+    } else {
+      DialerCall call = callList.getIncomingCall();
+      if (call != null) {
+        call.setIsSpeakEasyCall(true);
       }
     }
   }
