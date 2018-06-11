@@ -43,7 +43,7 @@ public class SpeakerButtonController implements OnCheckedChangeListener, OnClick
   private boolean isEnabled;
   private CharSequence contentDescription;
 
-  public SpeakerButtonController(
+  SpeakerButtonController(
       @NonNull CheckableImageButton button,
       @NonNull InCallButtonUiDelegate inCallButtonUiDelegate,
       @NonNull VideoCallScreenDelegate videoCallScreenDelegate) {
@@ -54,9 +54,10 @@ public class SpeakerButtonController implements OnCheckedChangeListener, OnClick
 
   public void setEnabled(boolean isEnabled) {
     this.isEnabled = isEnabled;
+    updateButtonState();
   }
 
-  public void updateButtonState() {
+  void updateButtonState() {
     button.setVisibility(View.VISIBLE);
     button.setEnabled(isEnabled);
     button.setChecked(isChecked);
