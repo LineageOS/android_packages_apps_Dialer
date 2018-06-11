@@ -244,4 +244,9 @@ public class OmtpConstants {
   private static final String truncate(String string, int length) {
     return string.substring(0, Math.min(length, string.length()));
   }
+
+  // Alternative form of sync message: MBOXUPDATE?m=<new_message_count>;<key>=<value>;
+
+  public static final String ALTERNATIVE_MAILBOX_UPDATE = "MBOXUPDATE";
+  public static final String ALTERNATIVE_NUM_MESSAGE_COUNT = "m";
 }
