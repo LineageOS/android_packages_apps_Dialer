@@ -22,6 +22,7 @@ import com.android.dialer.inject.InstallIn;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyTextResourceId;
 import com.google.common.base.Optional;
 import dagger.Binds;
 import dagger.Module;
@@ -48,6 +49,11 @@ public abstract class StubSpeakEasyModule {
 
   @Provides
   static @SpeakEasyChipResourceId Optional<Integer> provideSpeakEasyChip() {
+    return Optional.absent();
+  }
+
+  @Provides
+  static @SpeakEasyTextResourceId Optional<Integer> provideSpeakEasyTextResource() {
     return Optional.absent();
   }
 }

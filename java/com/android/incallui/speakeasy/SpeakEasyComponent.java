@@ -22,6 +22,7 @@ import com.android.dialer.inject.HasRootComponent;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyTextResourceId;
 import com.google.common.base.Optional;
 import dagger.Subcomponent;
 
@@ -37,6 +38,8 @@ public abstract class SpeakEasyComponent {
   public abstract @SpeakEasySettingsObject Optional<Object> speakEasySettingsObject();
 
   public abstract @SpeakEasyChipResourceId Optional<Integer> speakEasyChip();
+
+  public abstract @SpeakEasyTextResourceId Optional<Integer> speakEasyTextResource();
 
   public static SpeakEasyComponent get(Context context) {
     return ((SpeakEasyComponent.HasComponent)
