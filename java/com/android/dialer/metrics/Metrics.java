@@ -101,6 +101,9 @@ public interface Metrics {
   /** Record memory. */
   void recordMemory(String memoryEventName);
 
+  /** Record battery. */
+  void recordBattery(String batteryEventName);
+
   /** Initiazer for metrics. */
   interface Initializer {
     /** Initialize metrics for the application . */
