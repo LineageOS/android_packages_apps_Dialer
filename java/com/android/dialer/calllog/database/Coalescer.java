@@ -321,13 +321,10 @@ public class Coalescer {
             .setFeatures(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.FEATURES))
             .setCallType(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.CALL_TYPE))
             .setNumberAttributes(numberAttributes)
+            .setIsVoicemailCall(
+                coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.IS_VOICEMAIL_CALL)
+                    == 1)
             .setCoalescedIds(coalescedIds);
-
-    // TODO(linyuh): none of the boolean columns in the annotated call log should be null.
-    // This is a bug in VoicemailDataSource, but we should also fix the database constraints.
-    Integer isVoicemailCall =
-        coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.IS_VOICEMAIL_CALL);
-    coalescedRowBuilder.setIsVoicemailCall(isVoicemailCall != null && isVoicemailCall == 1);
 
     String formattedNumber =
         coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.FORMATTED_NUMBER);
