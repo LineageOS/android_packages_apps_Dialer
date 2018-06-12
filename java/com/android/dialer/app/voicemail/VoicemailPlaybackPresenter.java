@@ -591,7 +591,6 @@ public class VoicemailPlaybackPresenter
 
     position = 0;
     isPlaying = false;
-    showShareVoicemailButton(false);
   }
 
   /** After done playing the voicemail clip, reset the clip position to the start. */
