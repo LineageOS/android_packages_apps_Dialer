@@ -96,6 +96,11 @@ public final class StubMetrics implements Metrics {
     LogUtil.d("StubMetrics.startJankRecorder", "recorded memory for %s", memoryEventName);
   }
 
+  @Override
+  public void recordBattery(String batteryEventName) {
+    LogUtil.d("StubMetrics.recordBattery", "recorded battery for %s", batteryEventName);
+  }
+
   private static class StubTimerEvent {
     final long startTime;
 
