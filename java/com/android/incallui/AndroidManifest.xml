@@ -47,7 +47,7 @@
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
   <!-- Set android:taskAffinity="com.android.incallui" for all activities to ensure proper
-  navigation. Otherwise system could bring up DialtactsActivity instead, e.g. when user unmerge a
+  navigation. Otherwise system could bring up MainActivity instead, e.g. when user unmerge a
   call.
        Set taskAffinity for application is not working because it will be merged and the result is
   that all activities here still have same taskAffinity as activities under dialer. -->
