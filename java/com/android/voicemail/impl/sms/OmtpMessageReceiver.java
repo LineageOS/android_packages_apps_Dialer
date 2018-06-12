@@ -38,6 +38,7 @@ import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sync.SyncOneTask;
 import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VoicemailsQueryHelper;
+import com.android.voicemail.impl.sync.VvmAccountManager;
 import com.android.voicemail.impl.utils.VoicemailDatabaseUtil;
 
 /** Receive SMS messages and send for processing by the OMTP visual voicemail source. */
@@ -66,6 +67,12 @@ public class OmtpMessageReceiver extends BroadcastReceiver {
       LegacyModeSmsHandler.handle(context, sms);
       // A full sync will happen after the device is unlocked, so nothing else need to be
       // done.
+      return;
+    }
+
+    if (!VvmAccountManager.isAccountActivated(context, phone)) {
+      VvmLog.i(TAG, "Received message on non-activated account");
+      LegacyModeSmsHandler.handle(context, sms);
       return;
     }
 

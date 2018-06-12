@@ -62,11 +62,21 @@ public class LegacyModeSmsHandler {
         case OmtpConstants.NEW_MESSAGE:
         case OmtpConstants.MAILBOX_UPDATE:
           sendLegacyVoicemailNotification(context, handle, message.getNewMessageCount());
-
           break;
         default:
           break;
       }
+    } else if (OmtpConstants.ALTERNATIVE_MAILBOX_UPDATE.equals(eventType)) {
+      VvmLog.w(TAG, "receiving alternative VVM SMS on non-activated account");
+      int messageCount = 0;
+      try {
+        messageCount =
+            Integer.parseInt(
+                sms.getFields().getString(OmtpConstants.ALTERNATIVE_NUM_MESSAGE_COUNT));
+      } catch (NumberFormatException e) {
+        VvmLog.e(TAG, "missing message count");
+      }
+      sendLegacyVoicemailNotification(context, handle, messageCount);
     }
   }
 
