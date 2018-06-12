@@ -260,7 +260,7 @@ public class CallLogNotificationsQueryHelper {
 
     /** Returns a {@link NewCall} pointed by the {@code callsUri} */
     @Nullable
-    NewCall query(Uri callsUri);
+    NewCall queryUnreadVoicemail(Uri callsUri);
   }
 
   /** Information about a new voicemail. */
@@ -415,20 +415,26 @@ public class CallLogNotificationsQueryHelper {
 
     @Nullable
     @Override
-    public NewCall query(Uri callsUri) {
+    @SuppressWarnings("missingPermission")
+    public NewCall queryUnreadVoicemail(Uri voicemailUri) {
       if (!PermissionsUtil.hasPermission(context, Manifest.permission.READ_CALL_LOG)) {
         LogUtil.w(
             "CallLogNotificationsQueryHelper.DefaultNewCallsQuery.query",
             "No READ_CALL_LOG permission, returning null for calls lookup.");
         return null;
       }
-      final String selection = String.format("%s = '%s'", Calls.VOICEMAIL_URI, callsUri.toString());
+      Selection selection =
+          Selection.column(Calls.VOICEMAIL_URI)
+              .is("=", voicemailUri)
+              .buildUpon()
+              .and(Selection.column(Calls.IS_READ).is("IS NOT", 1))
+              .build();
       try (Cursor cursor =
           contentResolver.query(
               Calls.CONTENT_URI_WITH_VOICEMAIL,
               (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) ? PROJECTION_O : PROJECTION,
-              selection,
-              null,
+              selection.getSelection(),
+              selection.getSelectionArgs(),
               null)) {
         if (cursor == null) {
           return null;
