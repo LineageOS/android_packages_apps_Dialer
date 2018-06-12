@@ -16,11 +16,11 @@
 
 package com.android.incallui.speakeasy;
 
-import android.preference.PreferenceFragment;
+import android.support.v7.app.AppCompatActivity;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
-import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
+import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsActivity;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyTextResourceId;
 import com.google.common.base.Optional;
@@ -37,8 +37,7 @@ public abstract class StubSpeakEasyModule {
   abstract SpeakEasyCallManager bindsSpeakEasy(SpeakEasyCallManagerStub stub);
 
   @Provides
-  static @SpeakEasySettingsFragment Optional<PreferenceFragment>
-      provideSpeakEasySettingsFragment() {
+  static @SpeakEasySettingsActivity Optional<AppCompatActivity> provideSpeakEasySettingsActivity() {
     return Optional.absent();
   }
 
