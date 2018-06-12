@@ -19,6 +19,7 @@ package com.android.incallui;
 import static android.telecom.Call.Details.PROPERTY_HIGH_DEF_AUDIO;
 import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENTERPRISE_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
+import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_SPEAKEASY_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VOICE_INCOMING_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_DECLINE_INCOMING_CALL;
@@ -57,6 +58,7 @@ import android.telecom.VideoProfile;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
@@ -90,7 +92,9 @@ import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
+import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.incallui.videotech.utils.SessionModificationState;
+import com.google.common.base.Optional;
 import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
@@ -451,6 +455,7 @@ public class StatusBarNotifier
         addVideoCallAction(builder);
       } else {
         addAnswerAction(builder);
+        addSpeakeasyAnswerAction(builder);
       }
     }
   }
@@ -865,6 +870,44 @@ public class StatusBarNotifier
                 Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24),
                 getActionText(
                     R.string.notification_action_answer, R.color.notification_action_accept),
+                answerVoicePendingIntent)
+            .build());
+  }
+
+  private void addSpeakeasyAnswerAction(Notification.Builder builder) {
+    if (!ConfigProviderComponent.get(context)
+        .getConfigProvider()
+        .getBoolean("enable_speakeasy_notification_button", false)) {
+      return;
+    }
+
+    if (!SpeakEasyComponent.get(context).speakEasyCallManager().isAvailable(context)) {
+      return;
+    }
+
+    Optional<Integer> buttonText = SpeakEasyComponent.get(context).speakEasyTextResource();
+    if (!buttonText.isPresent()) {
+      return;
+    }
+
+    LogUtil.d("StatusBarNotifier.addSpeakeasyAnswerAction", "showing button");
+    PendingIntent answerVoicePendingIntent =
+        createNotificationPendingIntent(context, ACTION_ANSWER_SPEAKEASY_CALL);
+
+    Spannable spannable = new SpannableString(context.getText(buttonText.get()));
+    // TODO(erfanian): Migrate these color values to somewhere more permanent in subsequent
+    // implementation.
+    spannable.setSpan(
+        new ForegroundColorSpan(
+            context.getColor(R.color.DO_NOT_USE_OR_I_WILL_BREAK_YOU_text_span_tertiary_button)),
+        0,
+        spannable.length(),
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+    builder.addAction(
+        new Notification.Action.Builder(
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24),
+                spannable,
                 answerVoicePendingIntent)
             .build());
   }

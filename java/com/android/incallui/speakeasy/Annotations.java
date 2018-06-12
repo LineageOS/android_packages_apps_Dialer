@@ -32,4 +32,8 @@ public final class Annotations {
   /** A Speakeasy chip */
   @Qualifier
   public @interface SpeakEasyChipResourceId {}
+
+  /** A Speakeasy text resource */
+  @Qualifier
+  public @interface SpeakEasyTextResourceId {}
 }
