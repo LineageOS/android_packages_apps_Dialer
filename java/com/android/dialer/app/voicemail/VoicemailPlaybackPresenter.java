@@ -962,7 +962,7 @@ public class VoicemailPlaybackPresenter
       shareIntent.putExtra(Intent.EXTRA_STREAM, voicemailFileUri);
       shareIntent.putExtra(Intent.EXTRA_TEXT, transcription);
       shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-      shareIntent.setType("*/*");
+      shareIntent.setType(context.getContentResolver().getType(voicemailFileUri));
     }
 
     return shareIntent;
