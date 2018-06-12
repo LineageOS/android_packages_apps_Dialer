@@ -17,10 +17,10 @@
 package com.android.incallui.speakeasy;
 
 import android.content.Context;
-import android.preference.PreferenceFragment;
+import android.support.v7.app.AppCompatActivity;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
-import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsFragment;
+import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsActivity;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyTextResourceId;
 import com.google.common.base.Optional;
@@ -30,22 +30,22 @@ import dagger.Subcomponent;
 @Subcomponent
 public abstract class SpeakEasyComponent {
 
+  public static SpeakEasyComponent get(Context context) {
+    return ((SpeakEasyComponent.HasComponent)
+            ((HasRootComponent) context.getApplicationContext()).component())
+        .speakEasyComponent();
+  }
+
   public abstract SpeakEasyCallManager speakEasyCallManager();
 
-  public abstract @SpeakEasySettingsFragment Optional<PreferenceFragment>
-      speakEasySettingsFragment();
+  public abstract @SpeakEasySettingsActivity Optional<AppCompatActivity>
+      speakEasySettingsActivity();
 
   public abstract @SpeakEasySettingsObject Optional<Object> speakEasySettingsObject();
 
   public abstract @SpeakEasyChipResourceId Optional<Integer> speakEasyChip();
 
   public abstract @SpeakEasyTextResourceId Optional<Integer> speakEasyTextResource();
-
-  public static SpeakEasyComponent get(Context context) {
-    return ((SpeakEasyComponent.HasComponent)
-            ((HasRootComponent) context.getApplicationContext()).component())
-        .speakEasyComponent();
-  }
 
   /** Used to refer to the root application component. */
   public interface HasComponent {
