@@ -46,6 +46,6 @@
 
   <!-- Colors our actionbar text in action mode to dialer white text color. -->
   <style name="ActionModeTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionMode.Title">
-    <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
 </resources>
