@@ -977,13 +977,23 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   /** Checks if the call supports the given set of capabilities supplied as a bit mask. */
+  @TargetApi(28)
   public boolean can(int capabilities) {
     int supportedCapabilities = telecomCall.getDetails().getCallCapabilities();
 
     if ((capabilities & Call.Details.CAPABILITY_MERGE_CONFERENCE) != 0) {
+      boolean hasConferenceableCall = false;
+      // RTT call is not conferenceable, it's a bug (a bug) in Telecom and we work around it
+      // here before it's fixed in Telecom.
+      for (Call call : telecomCall.getConferenceableCalls()) {
+        if (!(BuildCompat.isAtLeastP() && call.isRttActive())) {
+          hasConferenceableCall = true;
+          break;
+        }
+      }
       // We allow you to merge if the capabilities allow it or if it is a call with
       // conferenceable calls.
-      if (telecomCall.getConferenceableCalls().isEmpty()
+      if (!hasConferenceableCall
           && ((Call.Details.CAPABILITY_MERGE_CONFERENCE & supportedCapabilities) == 0)) {
         // Cannot merge calls if there are no calls to merge with.
         return false;
