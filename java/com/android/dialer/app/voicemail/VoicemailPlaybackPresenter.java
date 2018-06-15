@@ -591,7 +591,6 @@ public class VoicemailPlaybackPresenter
 
     position = 0;
     isPlaying = false;
-    showShareVoicemailButton(false);
   }
 
   /** After done playing the voicemail clip, reset the clip position to the start. */
@@ -962,7 +961,7 @@ public class VoicemailPlaybackPresenter
       shareIntent.putExtra(Intent.EXTRA_STREAM, voicemailFileUri);
       shareIntent.putExtra(Intent.EXTRA_TEXT, transcription);
       shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-      shareIntent.setType("*/*");
+      shareIntent.setType(context.getContentResolver().getType(voicemailFileUri));
     }
 
     return shareIntent;

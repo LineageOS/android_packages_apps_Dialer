@@ -150,9 +150,7 @@ public class CallList implements DialerCallDelegate {
     if (SpamComponent.get(context).spamSettings().isSpamEnabled()) {
       String number = TelecomCallUtil.getNumber(telecomCall);
       ListenableFuture<SpamStatus> futureSpamStatus =
-          SpamComponent.get(context)
-              .spam()
-              .checkSpamStatusForInCallUi(number, call.getCountryIso());
+          SpamComponent.get(context).spam().checkSpamStatus(number, call.getCountryIso());
 
       Futures.addCallback(
           futureSpamStatus,

@@ -23,7 +23,7 @@ public final class Annotations {
 
   /** A Speakeasy settings fragment */
   @Qualifier
-  public @interface SpeakEasySettingsFragment {}
+  public @interface SpeakEasySettingsActivity {}
 
   /** A Speakeasy settings object */
   @Qualifier
