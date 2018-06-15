@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
+import com.android.dialer.compat.android.support.design.bottomsheet.BottomSheetStateCompat;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.widget.ContactPhotoView;
 import com.google.common.collect.ImmutableSet;
@@ -77,7 +78,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
         // *can* be expanded to full screen.
         contactLayout.setElevation(
             background.getHeight() == bottomSheet.getHeight()
-                    && behavior.getState() == BottomSheetBehavior.STATE_EXPANDED
+                    && behavior.getState() == BottomSheetStateCompat.STATE_EXPANDED
                 ? getContext()
                     .getResources()
                     .getDimensionPixelSize(R.dimen.contact_actions_header_elevation)
@@ -146,7 +147,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     if (isTouchExplorationEnabled()) {
       BottomSheetBehavior<View> behavior =
           BottomSheetBehavior.from(findViewById(android.support.design.R.id.design_bottom_sheet));
-      behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+      behavior.setState(BottomSheetStateCompat.STATE_EXPANDED);
     }
   }
 
@@ -171,10 +172,10 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
             ImmutableSet<Integer> statesToCancelBottomSheet =
                 isTouchExplorationEnabled()
                     ? ImmutableSet.of(
-                        BottomSheetBehavior.STATE_COLLAPSED,
-                        BottomSheetBehavior.STATE_HIDDEN,
-                        BottomSheetBehavior.STATE_HALF_EXPANDED)
-                    : ImmutableSet.of(BottomSheetBehavior.STATE_HIDDEN);
+                        BottomSheetStateCompat.STATE_COLLAPSED,
+                        BottomSheetStateCompat.STATE_HIDDEN,
+                        BottomSheetStateCompat.STATE_HALF_EXPANDED)
+                    : ImmutableSet.of(BottomSheetStateCompat.STATE_HIDDEN);
 
             if (statesToCancelBottomSheet.contains(newState)) {
               cancel();
