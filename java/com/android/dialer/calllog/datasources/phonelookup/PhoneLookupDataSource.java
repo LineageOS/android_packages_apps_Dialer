@@ -31,7 +31,6 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
-import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.calllogutils.NumberAttributesBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -54,7 +53,6 @@ import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -288,14 +286,6 @@ public final class PhoneLookupDataSource implements CallLogDataSource {
             .getContentResolver()
             .applyBatch(PhoneLookupHistoryContract.AUTHORITY, operations));
     return null;
-  }
-
-  @WorkerThread
-  @Override
-  public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useMostRecentBlob(AnnotatedCallLog.NUMBER_ATTRIBUTES)
-        .combine();
   }
 
   @MainThread

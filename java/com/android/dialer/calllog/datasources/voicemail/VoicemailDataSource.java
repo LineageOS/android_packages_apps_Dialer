@@ -25,7 +25,6 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
-import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.inject.ApplicationContext;
@@ -35,7 +34,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.protobuf.InvalidProtocolBufferException;
-import java.util.List;
 import java.util.Map.Entry;
 import javax.inject.Inject;
 
@@ -101,14 +99,6 @@ public class VoicemailDataSource implements CallLogDataSource {
   @Override
   public ListenableFuture<Void> onSuccessfulFill() {
     return Futures.immediateFuture(null);
-  }
-
-  @Override
-  public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useMostRecentInt(AnnotatedCallLog.IS_VOICEMAIL_CALL)
-        .useMostRecentString(AnnotatedCallLog.VOICEMAIL_CALL_TAG)
-        .combine();
   }
 
   @Override
