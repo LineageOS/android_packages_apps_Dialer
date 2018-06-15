@@ -1714,6 +1714,17 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   /** Indicates the call is eligible for SpeakEasy */
   public boolean isSpeakEasyEligible() {
+
+    PhoneAccount phoneAccount = getPhoneAccount();
+
+    if (phoneAccount == null) {
+      return false;
+    }
+
+    if (!phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+      return false;
+    }
+
     return !isPotentialEmergencyCallback()
         && !isEmergencyCall()
         && !isActiveRttCall()
