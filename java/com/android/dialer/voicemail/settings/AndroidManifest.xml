@@ -18,9 +18,10 @@
     package="com.android.dialer.voicemail.settings">
 
   <application>
+
     <!-- Causes the "Voicemail" item under "Calls" setting to be hidden. The voicemail module will
     be handling the settings. Has no effect before OC where dialer cannot provide voicemail
-    settings-->
+    settings -->
     <meta-data android:name="android.telephony.HIDE_VOICEMAIL_SETTINGS_MENU" android:value="true"/>
 
     <activity
@@ -34,6 +35,15 @@
         <action android:name="com.android.dialer.action.CHANGE_PIN"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
+    </activity>
+    <activity
+        android:name=".RecordVoicemailGreetingActivity"
+        android:configChanges="orientation|screenSize|keyboardHidden"
+        android:label="@string/voicemail_change_greeting_preference_title"
+        android:parentActivityName="com.android.dialer.app.settings.DialerSettingsActivity"
+        android:theme="@style/SettingsStyle">
+    </activity>
+    <activity android:name=".CurrentVoicemailGreetingActivity">
     </activity>
   </application>
 </manifest>
