@@ -29,6 +29,22 @@
          which sound to play and whether to vibrate when a voicemail notification is received.
          [CHAR LIMIT=30] -->
   <string name="voicemail_notifications_preference_title">Notifications</string>
+
+  <!-- Internal key for a preference to change greeting -->
+  <string name="voicemail_change_greeting_key" translatable="false">voicemail_change_greeting_key</string>
+
+  <!-- Title for changing voicemail greeting activity [CHAR LIMIT=40] -->
+  <string name="voicemail_change_greeting_preference_title">Voicemail greeting</string>
+
+  <!-- Text shown on the record voicemail activity [CHAR LIMIT=20] -->
+  <string name="change_greeting_text">Tap to Record</string>
+
+  <!-- Text shown on save button in record voicemail activity [CHAR LIMIT=10] -->
+  <string name="save_button_text">Save</string>
+
+  <!-- Text shown on redo button in record voicemail activity [CHAR LIMIT=10] -->
+  <string name="redo_button_text">Try Again</string>
+
   <string name="voicemail_advanced_settings_key" translatable="false">voicemail_advanced_settings_key</string>
 
   <!-- Title for advanced settings in the voicemail settings -->
