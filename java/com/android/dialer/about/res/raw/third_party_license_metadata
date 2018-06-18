@@ -29,32 +29,34 @@
 304646:10693 Compatibility Libraries for Android localbroadcastmanager.
 315386:10693 Compatibility Libraries for Android print.
 326138:10693 Compatibility Libraries for Android slidingpanelayout.
-336891:10693 Compatibility Libraries for Android swiperefreshlayout.
-347635:10693 Compatibility Libraries for Android viewpager.
-358339:11358 Dagger
-369713:11357 Error Prone
-381086:11358 Google Auto
-392459:11358 Guava JDK5
-403832:11362 Guava JDK7
-415205:11358 J2ObjC
-426575:11358 JSR 250
-437945:11365 JSR 330
-449346:11358 Material Components for Android
-460715:11358 OkHttp
-472082:11358 Okio
-483455:11358 OpenCensus
-494824:11358 Volley
-506192:11357 ZXing
-517569:12847 carrierservices
-530428:11358 flexbox
-541800:11358 gRPC Java
-553167:11358 gson
-564543:12847 jibercsclient
-577409:10173 libphonenumber
-587593:18982 mime4j
-606594:10699 shortcutbadger
-617309:16013 Android SDK
-633344:22655 Checker Framework
-656018:1096 Animal Sniffer
-657124:4771 Glide
-661907:1602 JSR 305
+336891:10695 Compatibility Libraries for Android support-slices_core
+347646:10693 Compatibility Libraries for Android swiperefreshlayout.
+358390:10693 Compatibility Libraries for Android viewpager.
+369094:11358 Dagger
+380468:11357 Error Prone
+391841:11358 Google Auto
+403214:11358 Guava JDK5
+414587:11362 Guava JDK7
+425960:11358 J2ObjC
+437330:11358 JSR 250
+448700:11365 JSR 330
+460101:11358 Material Components for Android
+471470:11358 OkHttp
+482837:11358 Okio
+494210:11358 OpenCensus
+505579:11358 Volley
+516947:11357 ZXing
+528316:11358 flexbox
+539688:11358 gRPC Java
+551055:11358 gson
+562432:10173 libphonenumber
+572624:10699 shortcutbadger
+583339:16013 Android SDK
+599371:1096 Animal Sniffer
+600479:1602 JSR 305
+602099:1732 Protobuf Nano
+603865:1846 Checker Framework Annotations
+605721:4771 Glide
+610512:12847 carrierservices
+623377:12847 jibercsclient
+636235:18982 mime4j
