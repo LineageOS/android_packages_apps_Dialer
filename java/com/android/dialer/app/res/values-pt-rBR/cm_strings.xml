@@ -24,6 +24,7 @@
   <string name="incall_vibrate_hangup_title">Vibrar ao terminar a chamada</string>
   <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
   <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas efetuadas</string>
+  <string name="incall_dnd_dialog_message">Para ativar o modo Não Perturbe, o aplicativo Telefone precisa ter permissão para controlar o modo Não Perturbe.\nPor favor, conceda-a.</string>
   <string name="allow">Permitir</string>
   <string name="deny">Negar</string>
 </resources>

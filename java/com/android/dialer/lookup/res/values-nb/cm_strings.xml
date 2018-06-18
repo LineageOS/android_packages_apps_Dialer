@@ -17,6 +17,18 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Forward lookup -->
+  <string name="nearby_places">Nærliggende steder</string>
+  <string name="people">Folk</string>
   <!-- Number lookup -->
+  <string name="lookup_settings_label">Telefonnummeroppleting</string>
+  <string name="enable_forward_lookup_title">Videresendingsoppleting</string>
+  <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefonappen</string>
+  <string name="enable_people_lookup_title">Oppleting av folk</string>
+  <string name="enable_people_lookup_summary">Vis nettresultater for folk når du søker i telefonappen</string>
+  <string name="enable_reverse_lookup_title">Omvendt oppleting</string>
+  <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller stedet når det kommer inn en samtale med ukjent nummer</string>
+  <string name="forward_lookup_provider_title">Tjeneste for oppleting av videresending</string>
+  <string name="people_lookup_provider_title">Tjeneste for oppleting av folk</string>
+  <string name="reverse_lookup_provider_title">Tjeneste for omvendt oppleting</string>
   <!-- Disclaimer -->
 </resources>

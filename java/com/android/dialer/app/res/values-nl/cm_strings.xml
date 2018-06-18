@@ -22,4 +22,5 @@
   <string name="incall_vibrate_hangup_title">Trillen bij ophangen</string>
   <string name="incall_vibrate_45_title">Elke minuut trillen</string>
   <string name="incall_vibrate_45_summary">Elke 45<SUP>e</SUP> seconde van een minuut trillen bij uitgaande gesprekken</string>
+  <string name="allow">Toestaan</string>
 </resources>

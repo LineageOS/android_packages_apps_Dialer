@@ -17,6 +17,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_category_title">En appel</string>
+  <string name="incall_enable_dnd_title">Ne pas déranger pendant les appels</string>
   <string name="incall_vibrate_outgoing_title">Vibrer au décrochage</string>
   <string name="incall_vibrate_call_waiting_title">Vibrer en cas d\'appel en attente</string>
   <string name="incall_vibrate_hangup_title">Vibrer au raccrochage</string>

@@ -17,9 +17,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_category_title">In-call</string>
+  <string name="incall_enable_dnd_title">Enable Do Not Disturb during calls</string>
   <string name="incall_vibrate_outgoing_title">Vibrate on answer</string>
   <string name="incall_vibrate_call_waiting_title">Vibrate on call waiting</string>
   <string name="incall_vibrate_hangup_title">Vibrate on hang up</string>
   <string name="incall_vibrate_45_title">Vibrate every minute</string>
   <string name="incall_vibrate_45_summary">Vibrates at the 45 second mark of every minute during outgoing calls</string>
+  <string name="incall_dnd_dialog_message">In order to enable Do Not Disturb, the Phone app needs to be granted the permission to control the Do Not Disturb status.\nPlease allow it.</string>
+  <string name="allow">Allow</string>
+  <string name="deny">Deny</string>
 </resources>

@@ -31,4 +31,5 @@
   <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
   <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
   <!-- Disclaimer -->
+  <string name="lookup_disclaimer">Pencarian dapat mengirimkan pertanyaan melalui protokol aman (https) ke remote website untuk mengumpulkan informasi. Kueri mungkin termasuk nomor telepon pihak lain atau kueri penelusuran</string>
 </resources>
