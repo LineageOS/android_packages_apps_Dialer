@@ -691,8 +691,12 @@ public class VideoCallPresenter
   }
 
   private void checkForOrientationAllowedChange(@Nullable DialerCall call) {
-    InCallPresenter.getInstance()
-        .setInCallAllowsOrientationChange(isVideoCall(call) || isVideoUpgrade(call));
+    // Call could be null when video call ended. This check could prevent unwanted orientation
+    // change before incall UI gets destroyed.
+    if (call != null) {
+      InCallPresenter.getInstance()
+          .setInCallAllowsOrientationChange(isVideoCall(call) || isVideoUpgrade(call));
+    }
   }
 
   private void updateFullscreenAndGreenScreenMode(
