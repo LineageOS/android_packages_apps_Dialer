@@ -16,12 +16,8 @@
 
 package com.android.dialer.calllog.datasources;
 
-import android.content.ContentValues;
 import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract;
 import com.google.common.util.concurrent.ListenableFuture;
-import java.util.List;
 
 /**
  * A source of data for one or more columns in the annotated call log.
@@ -45,8 +41,6 @@ import java.util.List;
  *
  * <p>The same data source objects may be reused across multiple checkDirtyAndRebuild cycles, so
  * implementors should take care to clear any internal state at the start of a new cycle.
- *
- * <p>{@link #coalesce(List)} may be called from any worker thread at any time.
  */
 public interface CallLogDataSource {
 
@@ -84,22 +78,6 @@ public interface CallLogDataSource {
    * @see CallLogDataSource class doc for complete lifecyle information
    */
   ListenableFuture<Void> onSuccessfulFill();
-
-  /**
-   * Combines raw annotated call log rows into a single coalesced row.
-   *
-   * <p>May be called by any worker thread at any time so implementations should take care to be
-   * threadsafe. (Ideally no state should be required to implement this.)
-   *
-   * @param individualRowsSortedByTimestampDesc group of fully populated rows from {@link
-   *     AnnotatedCallLogContract.AnnotatedCallLog} which need to be combined for display purposes.
-   *     This method should not modify this list.
-   * @return a partial {@link AnnotatedCallLogContract.CoalescedAnnotatedCallLog} row containing
-   *     only columns which this data source is responsible for, which is the result of aggregating
-   *     {@code individualRowsSortedByTimestampDesc}.
-   */
-  @WorkerThread
-  ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc);
 
   @MainThread
   void registerContentObservers();

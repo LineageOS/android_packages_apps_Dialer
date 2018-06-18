@@ -15,11 +15,9 @@
  */
 package com.android.dialer.calllog.database;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
@@ -27,9 +25,6 @@ import com.android.dialer.CoalescedIds;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
-import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.CoalescedAnnotatedCallLog;
-import com.android.dialer.calllog.datasources.CallLogDataSource;
-import com.android.dialer.calllog.datasources.DataSources;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -38,35 +33,24 @@ import com.android.dialer.metrics.FutureTimer;
 import com.android.dialer.metrics.Metrics;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
 import com.android.dialer.telecom.TelecomUtil;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.protobuf.InvalidProtocolBufferException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import javax.inject.Inject;
 
-/**
- * Coalesces rows in {@link AnnotatedCallLog} by combining adjacent rows.
- *
- * <p>Applies the logic that determines which adjacent rows should be coalesced, and then delegates
- * to each data source to determine how individual columns should be aggregated.
- */
+/** Combines adjacent rows in {@link AnnotatedCallLog}. */
 public class Coalescer {
 
-  private final DataSources dataSources;
   private final FutureTimer futureTimer;
   private final ListeningExecutorService backgroundExecutorService;
 
   @Inject
   Coalescer(
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
-      DataSources dataSources,
       FutureTimer futureTimer) {
     this.backgroundExecutorService = backgroundExecutorService;
-    this.dataSources = dataSources;
     this.futureTimer = futureTimer;
   }
 
@@ -108,256 +92,249 @@ public class Coalescer {
       return ImmutableList.of();
     }
 
-    // Note: This method relies on rowsShouldBeCombined to determine which rows should be combined,
-    // but delegates to data sources to actually aggregate column values.
-
-    DialerPhoneNumberUtil dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
-
     ImmutableList.Builder<CoalescedRow> coalescedRowListBuilder = new ImmutableList.Builder<>();
 
-    int coalescedRowId = 0;
+    RowCombiner rowCombiner = new RowCombiner(allAnnotatedCallLogRowsSortedByTimestampDesc);
+    rowCombiner.startNewGroup();
 
-    // TODO(a bug): Avoid using ContentValues as it doesn't make sense here.
-    List<ContentValues> currentRowGroup = new ArrayList<>();
+    long coalescedRowId = 0;
+    do {
+      boolean isRowMerged = rowCombiner.mergeRow(allAnnotatedCallLogRowsSortedByTimestampDesc);
 
-    ContentValues firstRow = cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
-    currentRowGroup.add(firstRow);
-
-    while (!currentRowGroup.isEmpty()) {
-      // Group consecutive rows
-      ContentValues firstRowInGroup = currentRowGroup.get(0);
-      ContentValues currentRow = null;
-      while (allAnnotatedCallLogRowsSortedByTimestampDesc.moveToNext()) {
-        currentRow = cursorRowToContentValues(allAnnotatedCallLogRowsSortedByTimestampDesc);
-
-        if (!rowsShouldBeCombined(dialerPhoneNumberUtil, firstRowInGroup, currentRow)) {
-          break;
-        }
-
-        currentRowGroup.add(currentRow);
+      if (isRowMerged) {
+        allAnnotatedCallLogRowsSortedByTimestampDesc.moveToNext();
       }
 
-      // Coalesce the group into a single row
-      ContentValues coalescedRow = coalesceRowsForAllDataSources(currentRowGroup);
-      coalescedRow.put(CoalescedAnnotatedCallLog._ID, coalescedRowId++);
-      coalescedRow.put(
-          CoalescedAnnotatedCallLog.COALESCED_IDS, getCoalescedIds(currentRowGroup).toByteArray());
-      coalescedRowListBuilder.add(toCoalescedRowProto(coalescedRow));
-
-      // Clear the current group after the rows are coalesced.
-      currentRowGroup.clear();
-
-      // Add the first of the remaining rows to the current group.
-      if (!allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast()) {
-        currentRowGroup.add(currentRow);
+      if (!isRowMerged || allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast()) {
+        coalescedRowListBuilder.add(
+            rowCombiner.combine().toBuilder().setId(coalescedRowId++).build());
+        rowCombiner.startNewGroup();
       }
-    }
+    } while (!allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast());
 
     return coalescedRowListBuilder.build();
   }
 
-  private static ContentValues cursorRowToContentValues(Cursor cursor) {
-    ContentValues values = new ContentValues();
-    String[] columns = cursor.getColumnNames();
-    int length = columns.length;
-    for (int i = 0; i < length; i++) {
-      if (cursor.getType(i) == Cursor.FIELD_TYPE_BLOB) {
-        values.put(columns[i], cursor.getBlob(i));
-      } else {
-        values.put(columns[i], cursor.getString(i));
-      }
+  /** Combines rows from {@link AnnotatedCallLog} into a {@link CoalescedRow}. */
+  private static final class RowCombiner {
+    private final CoalescedRow.Builder coalescedRowBuilder = CoalescedRow.newBuilder();
+    private final CoalescedIds.Builder coalescedIdsBuilder = CoalescedIds.newBuilder();
+
+    // Indexes for columns in AnnotatedCallLog
+    private final int idColumn;
+    private final int timestampColumn;
+    private final int numberColumn;
+    private final int formattedNumberColumn;
+    private final int numberPresentationColumn;
+    private final int isReadColumn;
+    private final int isNewColumn;
+    private final int geocodedLocationColumn;
+    private final int phoneAccountComponentNameColumn;
+    private final int phoneAccountIdColumn;
+    private final int featuresColumn;
+    private final int numberAttributesColumn;
+    private final int isVoicemailCallColumn;
+    private final int voicemailCallTagColumn;
+    private final int callTypeColumn;
+
+    // DialerPhoneNumberUtil will be created lazily as its instantiation is expensive.
+    private DialerPhoneNumberUtil dialerPhoneNumberUtil = null;
+
+    RowCombiner(Cursor annotatedCallLogRow) {
+      idColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog._ID);
+      timestampColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.TIMESTAMP);
+      numberColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.NUMBER);
+      formattedNumberColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.FORMATTED_NUMBER);
+      numberPresentationColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.NUMBER_PRESENTATION);
+      isReadColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.IS_READ);
+      isNewColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.NEW);
+      geocodedLocationColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.GEOCODED_LOCATION);
+      phoneAccountComponentNameColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME);
+      phoneAccountIdColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.PHONE_ACCOUNT_ID);
+      featuresColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.FEATURES);
+      numberAttributesColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.NUMBER_ATTRIBUTES);
+      isVoicemailCallColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.IS_VOICEMAIL_CALL);
+      voicemailCallTagColumn =
+          annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.VOICEMAIL_CALL_TAG);
+      callTypeColumn = annotatedCallLogRow.getColumnIndexOrThrow(AnnotatedCallLog.CALL_TYPE);
     }
-    return values;
-  }
 
-  /**
-   * @param row1 a row from {@link AnnotatedCallLog}
-   * @param row2 a row from {@link AnnotatedCallLog}
-   */
-  private static boolean rowsShouldBeCombined(
-      DialerPhoneNumberUtil dialerPhoneNumberUtil, ContentValues row1, ContentValues row2) {
-    // Don't combine rows which don't use the same phone account.
-    PhoneAccountHandle phoneAccount1 =
-        TelecomUtil.composePhoneAccountHandle(
-            row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
-            row1.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
-    PhoneAccountHandle phoneAccount2 =
-        TelecomUtil.composePhoneAccountHandle(
-            row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME),
-            row2.getAsString(AnnotatedCallLog.PHONE_ACCOUNT_ID));
-    if (!Objects.equals(phoneAccount1, phoneAccount2)) {
-      return false;
+    /**
+     * Prepares {@link RowCombiner} for building a new group of rows by clearing information on all
+     * previously merged rows.
+     */
+    void startNewGroup() {
+      coalescedRowBuilder.clear();
+      coalescedIdsBuilder.clear();
     }
 
-    if (!row1.getAsInteger(AnnotatedCallLog.NUMBER_PRESENTATION)
-        .equals(row2.getAsInteger(AnnotatedCallLog.NUMBER_PRESENTATION))) {
-      return false;
-    }
+    /**
+     * Merge the given {@link AnnotatedCallLog} row into the current group.
+     *
+     * @return true if the given row is merged.
+     */
+    boolean mergeRow(Cursor annotatedCallLogRow) {
+      Assert.checkArgument(annotatedCallLogRow.getInt(callTypeColumn) != Calls.VOICEMAIL_TYPE);
 
-    if (!meetsCallFeatureCriteria(row1, row2)) {
-      return false;
-    }
-
-    DialerPhoneNumber number1;
-    DialerPhoneNumber number2;
-    try {
-      byte[] number1Bytes = row1.getAsByteArray(AnnotatedCallLog.NUMBER);
-      byte[] number2Bytes = row2.getAsByteArray(AnnotatedCallLog.NUMBER);
-
-      if (number1Bytes == null || number2Bytes == null) {
-        // Empty numbers should not be combined.
+      if (!canMergeRow(annotatedCallLogRow)) {
         return false;
       }
 
-      number1 = DialerPhoneNumber.parseFrom(number1Bytes);
-      number2 = DialerPhoneNumber.parseFrom(number2Bytes);
-    } catch (InvalidProtocolBufferException e) {
-      throw Assert.createAssertionFailException("error parsing DialerPhoneNumber proto", e);
-    }
-    return dialerPhoneNumberUtil.isMatch(number1, number2);
-  }
+      // Set fields that don't use the most recent value.
+      //
+      // Currently there is only one such field: "features".
+      // If any call in a group includes a feature (like Wifi/HD), consider the group to have
+      // the feature.
+      coalescedRowBuilder.setFeatures(
+          coalescedRowBuilder.getFeatures() | annotatedCallLogRow.getInt(featuresColumn));
 
-  /**
-   * Returns true if column {@link AnnotatedCallLog#FEATURES} of the two given rows indicate that
-   * they can be coalesced.
-   */
-  private static boolean meetsCallFeatureCriteria(ContentValues row1, ContentValues row2) {
-    int row1Features = row1.getAsInteger(AnnotatedCallLog.FEATURES);
-    int row2Features = row2.getAsInteger(AnnotatedCallLog.FEATURES);
+      // Set fields that use the most recent value.
+      // Rows passed to Coalescer are already sorted in descending order of timestamp. If the
+      // coalesced ID list is not empty, it means RowCombiner has merged the most recent row in a
+      // group and there is no need to continue as we only set fields that use the most recent value
+      // from this point forward.
+      if (!coalescedIdsBuilder.getCoalescedIdList().isEmpty()) {
+        coalescedIdsBuilder.addCoalescedId(annotatedCallLogRow.getInt(idColumn));
+        return true;
+      }
 
-    // A row with FEATURES_ASSISTED_DIALING should not be combined with one without it.
-    if ((row1Features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
-        != (row2Features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)) {
-      return false;
-    }
+      coalescedRowBuilder
+          .setTimestamp(annotatedCallLogRow.getLong(timestampColumn))
+          .setNumberPresentation(annotatedCallLogRow.getInt(numberPresentationColumn))
+          .setIsRead(annotatedCallLogRow.getInt(isReadColumn) == 1)
+          .setIsNew(annotatedCallLogRow.getInt(isNewColumn) == 1)
+          .setIsVoicemailCall(annotatedCallLogRow.getInt(isVoicemailCallColumn) == 1)
+          .setCallType(annotatedCallLogRow.getInt(callTypeColumn));
 
-    // A video call should not be combined with one that is not a video call.
-    if ((row1Features & Calls.FEATURES_VIDEO) != (row2Features & Calls.FEATURES_VIDEO)) {
-      return false;
-    }
+      // Two different DialerPhoneNumbers could be combined if they are different but considered
+      // to be a match by libphonenumber; in this case we arbitrarily select the most recent one.
+      try {
+        coalescedRowBuilder.setNumber(
+            DialerPhoneNumber.parseFrom(annotatedCallLogRow.getBlob(numberColumn)));
+      } catch (InvalidProtocolBufferException e) {
+        throw Assert.createAssertionFailException("Unable to parse DialerPhoneNumber bytes", e);
+      }
 
-    // A RTT call should not be combined with one that is not a RTT call.
-    if ((row1Features & Calls.FEATURES_RTT) != (row2Features & Calls.FEATURES_RTT)) {
-      return false;
-    }
+      String formattedNumber = annotatedCallLogRow.getString(formattedNumberColumn);
+      if (!TextUtils.isEmpty(formattedNumber)) {
+        coalescedRowBuilder.setFormattedNumber(formattedNumber);
+      }
 
-    return true;
-  }
+      String geocodedLocation = annotatedCallLogRow.getString(geocodedLocationColumn);
+      if (!TextUtils.isEmpty(geocodedLocation)) {
+        coalescedRowBuilder.setGeocodedLocation(geocodedLocation);
+      }
 
-  /**
-   * Delegates to data sources to aggregate individual columns to create a new coalesced row.
-   *
-   * @param individualRows {@link AnnotatedCallLog} rows sorted by timestamp descending
-   * @return a {@link CoalescedAnnotatedCallLog} row
-   */
-  private ContentValues coalesceRowsForAllDataSources(List<ContentValues> individualRows) {
-    ContentValues coalescedValues = new ContentValues();
-    for (CallLogDataSource dataSource : dataSources.getDataSourcesIncludingSystemCallLog()) {
-      coalescedValues.putAll(dataSource.coalesce(individualRows));
-    }
-    return coalescedValues;
-  }
+      String phoneAccountComponentName =
+          annotatedCallLogRow.getString(phoneAccountComponentNameColumn);
+      if (!TextUtils.isEmpty(phoneAccountComponentName)) {
+        coalescedRowBuilder.setPhoneAccountComponentName(phoneAccountComponentName);
+      }
 
-  /**
-   * Build a {@link CoalescedIds} proto that contains IDs of the rows in {@link AnnotatedCallLog}
-   * that are coalesced into one row in {@link CoalescedAnnotatedCallLog}.
-   *
-   * @param individualRows {@link AnnotatedCallLog} rows sorted by timestamp descending
-   * @return A {@link CoalescedIds} proto containing IDs of {@code individualRows}.
-   */
-  private CoalescedIds getCoalescedIds(List<ContentValues> individualRows) {
-    CoalescedIds.Builder coalescedIds = CoalescedIds.newBuilder();
+      String phoneAccountId = annotatedCallLogRow.getString(phoneAccountIdColumn);
+      if (!TextUtils.isEmpty(phoneAccountId)) {
+        coalescedRowBuilder.setPhoneAccountId(phoneAccountId);
+      }
 
-    for (ContentValues row : individualRows) {
-      coalescedIds.addCoalescedId(Preconditions.checkNotNull(row.getAsLong(AnnotatedCallLog._ID)));
-    }
+      try {
+        coalescedRowBuilder.setNumberAttributes(
+            NumberAttributes.parseFrom(annotatedCallLogRow.getBlob(numberAttributesColumn)));
+      } catch (InvalidProtocolBufferException e) {
+        throw Assert.createAssertionFailException("Unable to parse NumberAttributes bytes", e);
+      }
 
-    return coalescedIds.build();
-  }
+      String voicemailCallTag = annotatedCallLogRow.getString(voicemailCallTagColumn);
+      if (!TextUtils.isEmpty(voicemailCallTag)) {
+        coalescedRowBuilder.setVoicemailCallTag(voicemailCallTag);
+      }
 
-  /**
-   * Creates a new {@link CoalescedRow} proto based on the provided {@link ContentValues}.
-   *
-   * <p>The provided {@link ContentValues} should be one for {@link CoalescedAnnotatedCallLog}.
-   */
-  @VisibleForTesting
-  static CoalescedRow toCoalescedRowProto(ContentValues coalescedContentValues) {
-    DialerPhoneNumber number;
-    try {
-      number =
-          DialerPhoneNumber.parseFrom(
-              coalescedContentValues.getAsByteArray(CoalescedAnnotatedCallLog.NUMBER));
-    } catch (InvalidProtocolBufferException e) {
-      throw new IllegalStateException("Couldn't parse DialerPhoneNumber bytes");
+      coalescedIdsBuilder.addCoalescedId(annotatedCallLogRow.getInt(idColumn));
+      return true;
     }
 
-    CoalescedIds coalescedIds;
-    try {
-      coalescedIds =
-          CoalescedIds.parseFrom(
-              coalescedContentValues.getAsByteArray(CoalescedAnnotatedCallLog.COALESCED_IDS));
-    } catch (InvalidProtocolBufferException e) {
-      throw new IllegalStateException("Couldn't parse CoalescedIds bytes");
+    /** Builds a {@link CoalescedRow} based on all rows merged into the current group. */
+    CoalescedRow combine() {
+      return coalescedRowBuilder.setCoalescedIds(coalescedIdsBuilder.build()).build();
     }
 
-    NumberAttributes numberAttributes;
-    try {
-      numberAttributes =
-          NumberAttributes.parseFrom(
-              coalescedContentValues.getAsByteArray(CoalescedAnnotatedCallLog.NUMBER_ATTRIBUTES));
-    } catch (InvalidProtocolBufferException e) {
-      throw new IllegalStateException("Couldn't parse NumberAttributes bytes");
+    /**
+     * Returns true if the given {@link AnnotatedCallLog} row can be merged into the current group.
+     */
+    private boolean canMergeRow(Cursor annotatedCallLogRow) {
+      return coalescedIdsBuilder.getCoalescedIdList().isEmpty()
+          || (samePhoneAccount(annotatedCallLogRow)
+              && sameNumberPresentation(annotatedCallLogRow)
+              && meetsCallFeatureCriteria(annotatedCallLogRow)
+              && meetsDialerPhoneNumberCriteria(annotatedCallLogRow));
     }
 
-    CoalescedRow.Builder coalescedRowBuilder =
-        CoalescedRow.newBuilder()
-            .setId(coalescedContentValues.getAsLong(CoalescedAnnotatedCallLog._ID))
-            .setTimestamp(coalescedContentValues.getAsLong(CoalescedAnnotatedCallLog.TIMESTAMP))
-            .setNumber(number)
-            .setNumberPresentation(
-                coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.NUMBER_PRESENTATION))
-            .setIsRead(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.IS_READ) == 1)
-            .setIsNew(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.NEW) == 1)
-            .setFeatures(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.FEATURES))
-            .setCallType(coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.CALL_TYPE))
-            .setNumberAttributes(numberAttributes)
-            .setIsVoicemailCall(
-                coalescedContentValues.getAsInteger(CoalescedAnnotatedCallLog.IS_VOICEMAIL_CALL)
-                    == 1)
-            .setCoalescedIds(coalescedIds);
+    private boolean samePhoneAccount(Cursor annotatedCallLogRow) {
+      PhoneAccountHandle groupPhoneAccountHandle =
+          TelecomUtil.composePhoneAccountHandle(
+              coalescedRowBuilder.getPhoneAccountComponentName(),
+              coalescedRowBuilder.getPhoneAccountId());
+      PhoneAccountHandle rowPhoneAccountHandle =
+          TelecomUtil.composePhoneAccountHandle(
+              annotatedCallLogRow.getString(phoneAccountComponentNameColumn),
+              annotatedCallLogRow.getString(phoneAccountIdColumn));
 
-    String formattedNumber =
-        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.FORMATTED_NUMBER);
-    if (!TextUtils.isEmpty(formattedNumber)) {
-      coalescedRowBuilder.setFormattedNumber(formattedNumber);
+      return Objects.equals(groupPhoneAccountHandle, rowPhoneAccountHandle);
     }
 
-    String geocodedLocation =
-        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.GEOCODED_LOCATION);
-    if (!TextUtils.isEmpty(geocodedLocation)) {
-      coalescedRowBuilder.setGeocodedLocation(geocodedLocation);
+    private boolean sameNumberPresentation(Cursor annotatedCallLogRow) {
+      return coalescedRowBuilder.getNumberPresentation()
+          == annotatedCallLogRow.getInt(numberPresentationColumn);
     }
 
-    String phoneAccountComponentName =
-        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME);
-    if (!TextUtils.isEmpty(phoneAccountComponentName)) {
-      coalescedRowBuilder.setPhoneAccountComponentName(
-          coalescedContentValues.getAsString(
-              CoalescedAnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME));
+    private boolean meetsCallFeatureCriteria(Cursor annotatedCallLogRow) {
+      int groupFeatures = coalescedRowBuilder.getFeatures();
+      int rowFeatures = annotatedCallLogRow.getInt(featuresColumn);
+
+      // A row with FEATURES_ASSISTED_DIALING should not be combined with one without it.
+      if ((groupFeatures & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
+          != (rowFeatures & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)) {
+        return false;
+      }
+
+      // A video call should not be combined with one that is not a video call.
+      if ((groupFeatures & Calls.FEATURES_VIDEO) != (rowFeatures & Calls.FEATURES_VIDEO)) {
+        return false;
+      }
+
+      // A RTT call should not be combined with one that is not a RTT call.
+      if ((groupFeatures & Calls.FEATURES_RTT) != (rowFeatures & Calls.FEATURES_RTT)) {
+        return false;
+      }
+
+      return true;
     }
 
-    String phoneAccountId =
-        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.PHONE_ACCOUNT_ID);
-    if (!TextUtils.isEmpty(phoneAccountId)) {
-      coalescedRowBuilder.setPhoneAccountId(phoneAccountId);
-    }
+    private boolean meetsDialerPhoneNumberCriteria(Cursor annotatedCallLogRow) {
+      DialerPhoneNumber groupPhoneNumber = coalescedRowBuilder.getNumber();
 
-    String voicemailCallTag =
-        coalescedContentValues.getAsString(CoalescedAnnotatedCallLog.VOICEMAIL_CALL_TAG);
-    if (!TextUtils.isEmpty(voicemailCallTag)) {
-      coalescedRowBuilder.setVoicemailCallTag(voicemailCallTag);
-    }
+      DialerPhoneNumber rowPhoneNumber;
+      try {
+        byte[] rowPhoneNumberBytes = annotatedCallLogRow.getBlob(numberColumn);
+        if (rowPhoneNumberBytes == null) {
+          return false; // Empty numbers should not be combined.
+        }
+        rowPhoneNumber = DialerPhoneNumber.parseFrom(rowPhoneNumberBytes);
+      } catch (InvalidProtocolBufferException e) {
+        throw Assert.createAssertionFailException("Unable to parse DialerPhoneNumber bytes", e);
+      }
 
-    return coalescedRowBuilder.build();
+      if (dialerPhoneNumberUtil == null) {
+        dialerPhoneNumberUtil = new DialerPhoneNumberUtil();
+      }
+
+      return dialerPhoneNumberUtil.isMatch(groupPhoneNumber, rowPhoneNumber);
+    }
   }
 }

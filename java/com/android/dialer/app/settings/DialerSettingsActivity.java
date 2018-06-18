@@ -116,9 +116,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
     // "Call Settings" (full settings) is shown if the current user is primary user and there
-    // is only one SIM. Before N, "Calling accounts" setting is shown if the current user is
-    // primary user and there are multiple SIMs. In N+, "Calling accounts" is shown whenever
-    // "Call Settings" is not shown.
+    // is only one SIM. Otherwise, "Calling accounts" is shown.
     boolean isPrimaryUser = isPrimaryUser();
     if (isPrimaryUser && TelephonyManagerCompat.getPhoneCount(telephonyManager) <= 1) {
       Header callSettingsHeader = new Header();
@@ -128,7 +126,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       callSettingsHeader.titleRes = R.string.call_settings_label;
       callSettingsHeader.intent = callSettingsIntent;
       target.add(callSettingsHeader);
-    } else if (isPrimaryUser) {
+    } else {
       Header phoneAccountSettingsHeader = new Header();
       Intent phoneAccountSettingsIntent = new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
       phoneAccountSettingsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
