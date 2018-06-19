@@ -151,9 +151,9 @@ public class SpeedDialFragment extends Fragment {
         new SpeedDialFavoritesListener(
             getActivity(),
             getChildFragmentManager(),
-            new SpeedDialContextMenuItemListener(
-                getActivity(), new UpdateSpeedDialAdapterListener(), speedDialLoaderListener),
-            layoutManager);
+            layoutManager,
+            new UpdateSpeedDialAdapterListener(),
+            speedDialLoaderListener);
     adapter =
         new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
     layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
@@ -339,20 +339,26 @@ public class SpeedDialFragment extends Fragment {
 
     private final FragmentActivity activity;
     private final FragmentManager childFragmentManager;
-    private final ContextMenuItemListener contextMenuListener;
     private final SpeedDialLayoutManager layoutManager;
+    private final UpdateSpeedDialAdapterListener updateAdapterListener;
+    private final SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
+
+    private final SpeedDialContextMenuItemListener speedDialContextMenuItemListener =
+        new SpeedDialContextMenuItemListener();
 
     private ContextMenu contextMenu;
 
     SpeedDialFavoritesListener(
         FragmentActivity activity,
         FragmentManager childFragmentManager,
-        ContextMenuItemListener contextMenuListener,
-        SpeedDialLayoutManager layoutManager) {
+        SpeedDialLayoutManager layoutManager,
+        UpdateSpeedDialAdapterListener updateAdapterListener,
+        SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener) {
       this.activity = activity;
       this.childFragmentManager = childFragmentManager;
-      this.contextMenuListener = contextMenuListener;
       this.layoutManager = layoutManager;
+      this.updateAdapterListener = updateAdapterListener;
+      this.speedDialLoaderListener = speedDialLoaderListener;
     }
 
     @Override
@@ -384,7 +390,8 @@ public class SpeedDialFragment extends Fragment {
     @Override
     public void showContextMenu(View view, SpeedDialUiItem speedDialUiItem) {
       layoutManager.setScrollEnabled(false);
-      contextMenu = ContextMenu.show(activity, view, contextMenuListener, speedDialUiItem);
+      contextMenu =
+          ContextMenu.show(activity, view, speedDialContextMenuItemListener, speedDialUiItem);
     }
 
     @Override
@@ -397,10 +404,64 @@ public class SpeedDialFragment extends Fragment {
       }
     }
 
-    public void hideMenu() {
+    @Override
+    public void onRequestRemove(SpeedDialUiItem speedDialUiItem) {
+      speedDialContextMenuItemListener.removeFavoriteContact(speedDialUiItem);
+    }
+
+    void hideMenu() {
       if (contextMenu != null) {
         contextMenu.hide();
         contextMenu = null;
+      }
+    }
+
+    public SpeedDialContextMenuItemListener getSpeedDialContextMenuItemListener() {
+      return speedDialContextMenuItemListener;
+    }
+
+    class SpeedDialContextMenuItemListener implements ContextMenuItemListener {
+
+      @Override
+      public void placeCall(Channel channel) {
+        if (channel.technology() == Channel.DUO) {
+          Logger.get(activity)
+              .logImpression(
+                  DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
+        }
+        PreCall.start(
+            activity,
+            new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+                .setAllowAssistedDial(true)
+                .setIsVideoCall(channel.isVideoTechnology())
+                .setIsDuoCall(channel.technology() == Channel.DUO));
+      }
+
+      @Override
+      public void openSmsConversation(String number) {
+        activity.startActivity(IntentUtil.getSendSmsIntent(number));
+      }
+
+      @Override
+      public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
+        speedDialLoaderListener.listen(
+            activity,
+            UiItemLoaderComponent.get(activity)
+                .speedDialUiItemMutator()
+                .removeSpeedDialUiItem(speedDialUiItem),
+            updateAdapterListener::updateAdapter,
+            throwable -> {
+              throw new RuntimeException(throwable);
+            });
+      }
+
+      @Override
+      public void openContactInfo(SpeedDialUiItem speedDialUiItem) {
+        activity.startActivity(
+            new Intent(
+                Intent.ACTION_VIEW,
+                Uri.withAppendedPath(
+                    Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
       }
     }
   }
@@ -530,63 +591,6 @@ public class SpeedDialFragment extends Fragment {
     }
   }
 
-  private static final class SpeedDialContextMenuItemListener implements ContextMenuItemListener {
-
-    private final FragmentActivity activity;
-    private final SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener;
-    private final UpdateSpeedDialAdapterListener updateAdapterListener;
-
-    SpeedDialContextMenuItemListener(
-        FragmentActivity activity,
-        UpdateSpeedDialAdapterListener updateAdapterListener,
-        SupportUiListener<ImmutableList<SpeedDialUiItem>> speedDialLoaderListener) {
-      this.activity = activity;
-      this.updateAdapterListener = updateAdapterListener;
-      this.speedDialLoaderListener = speedDialLoaderListener;
-    }
-
-    @Override
-    public void placeCall(Channel channel) {
-      if (channel.technology() == Channel.DUO) {
-        Logger.get(activity)
-            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-      }
-      PreCall.start(
-          activity,
-          new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
-              .setAllowAssistedDial(true)
-              .setIsVideoCall(channel.isVideoTechnology())
-              .setIsDuoCall(channel.technology() == Channel.DUO));
-    }
-
-    @Override
-    public void openSmsConversation(String number) {
-      activity.startActivity(IntentUtil.getSendSmsIntent(number));
-    }
-
-    @Override
-    public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
-      speedDialLoaderListener.listen(
-          activity,
-          UiItemLoaderComponent.get(activity)
-              .speedDialUiItemMutator()
-              .removeSpeedDialUiItem(speedDialUiItem),
-          updateAdapterListener::updateAdapter,
-          throwable -> {
-            throw new RuntimeException(throwable);
-          });
-    }
-
-    @Override
-    public void openContactInfo(SpeedDialUiItem speedDialUiItem) {
-      activity.startActivity(
-          new Intent(
-              Intent.ACTION_VIEW,
-              Uri.withAppendedPath(
-                  Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))));
-    }
-  }
-
   private static final class SpeedDialContactPermissionEmptyViewListener
       implements OnEmptyViewActionButtonClickedListener {
 
@@ -628,7 +632,7 @@ public class SpeedDialFragment extends Fragment {
   }
 
   /** Listener for when a SpeedDialUiItem is updated. */
-  private class UpdateSpeedDialAdapterListener {
+  class UpdateSpeedDialAdapterListener {
 
     void updateAdapter(ImmutableList<SpeedDialUiItem> speedDialUiItems) {
       onSpeedDialUiItemListLoaded(speedDialUiItems);

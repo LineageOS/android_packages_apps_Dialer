@@ -46,6 +46,8 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
   private final TextView phoneType;
   private final FrameLayout videoCallIcon;
 
+  private final FrameLayout avatarContainer;
+
   private SpeedDialUiItem speedDialUiItem;
 
   public FavoritesViewHolder(View view, ItemTouchHelper helper, FavoriteContactsListener listener) {
@@ -54,6 +56,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     nameView = view.findViewById(R.id.name);
     phoneType = view.findViewById(R.id.phone_type);
     videoCallIcon = view.findViewById(R.id.video_call_container);
+    avatarContainer = view.findViewById(R.id.avatar_container);
     view.setOnClickListener(this);
     view.setOnLongClickListener(this);
     view.setOnTouchListener(
@@ -117,6 +120,15 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
     listener.onTouchFinished(closeContextMenu);
   }
 
+  FrameLayout getAvatarContainer() {
+    return avatarContainer;
+  }
+
+  void onSelectedChanged(boolean selected) {
+    nameView.setVisibility(selected ? View.GONE : View.VISIBLE);
+    phoneType.setVisibility(selected ? View.GONE : View.VISIBLE);
+  }
+
   /** Listener/callback for {@link FavoritesViewHolder} actions. */
   public interface FavoriteContactsListener {
 
@@ -131,5 +143,8 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder
 
     /** Called when the user is no longer touching the favorite contact. */
     void onTouchFinished(boolean closeContextMenu);
+
+    /** Called when the user drag the favorite to remove. */
+    void onRequestRemove(SpeedDialUiItem speedDialUiItem);
   }
 }

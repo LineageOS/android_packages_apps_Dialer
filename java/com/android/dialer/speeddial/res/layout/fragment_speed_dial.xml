@@ -17,14 +17,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/speed_dial_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/speed_dial_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginTop="@dimen/expanded_search_bar_height_minus"
       android:clipToPadding="false"
-      android:background="?android:attr/colorBackground"
+      android:background="@android:color/transparent"
       android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"/>
 
   <com.android.dialer.widget.EmptyContentView
