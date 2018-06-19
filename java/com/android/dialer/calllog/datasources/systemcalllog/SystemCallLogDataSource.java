@@ -41,7 +41,6 @@ import com.android.dialer.calllog.database.AnnotatedCallLogDatabaseHelper;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogDataSource;
 import com.android.dialer.calllog.datasources.CallLogMutations;
-import com.android.dialer.calllog.datasources.util.RowCombiner;
 import com.android.dialer.calllog.observer.MarkDirtyObserver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -229,39 +228,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
           .apply();
     }
     return null;
-  }
-
-  @Override
-  public ContentValues coalesce(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    assertNoVoicemailsInRows(individualRowsSortedByTimestampDesc);
-
-    return new RowCombiner(individualRowsSortedByTimestampDesc)
-        .useMostRecentLong(AnnotatedCallLog.TIMESTAMP)
-        .useMostRecentLong(AnnotatedCallLog.NEW)
-        .useMostRecentLong(AnnotatedCallLog.IS_READ)
-        // Two different DialerPhoneNumbers could be combined if they are different but considered
-        // to be an "exact match" by libphonenumber; in this case we arbitrarily select the most
-        // recent one.
-        .useMostRecentBlob(AnnotatedCallLog.NUMBER)
-        .useMostRecentString(AnnotatedCallLog.FORMATTED_NUMBER)
-        .useSingleValueInt(AnnotatedCallLog.NUMBER_PRESENTATION)
-        .useMostRecentString(AnnotatedCallLog.GEOCODED_LOCATION)
-        .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME)
-        .useSingleValueString(AnnotatedCallLog.PHONE_ACCOUNT_ID)
-        .useMostRecentLong(AnnotatedCallLog.CALL_TYPE)
-        // If any call in a group includes a feature (like Wifi/HD), consider the group to have the
-        // feature.
-        .bitwiseOr(AnnotatedCallLog.FEATURES)
-        .combine();
-  }
-
-  private void assertNoVoicemailsInRows(List<ContentValues> individualRowsSortedByTimestampDesc) {
-    for (ContentValues contentValue : individualRowsSortedByTimestampDesc) {
-      if (contentValue.getAsLong(AnnotatedCallLog.CALL_TYPE) != null) {
-        Assert.checkArgument(
-            contentValue.getAsLong(AnnotatedCallLog.CALL_TYPE) != Calls.VOICEMAIL_TYPE);
-      }
-    }
   }
 
   @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources

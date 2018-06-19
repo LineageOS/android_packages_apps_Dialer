@@ -18,6 +18,8 @@ package com.android.dialer.app.list;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Point;
 import android.net.Uri;
 import android.provider.ContactsContract.PinnedPositions;
 import android.text.TextUtils;
@@ -77,15 +79,12 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     shadowOverlay = findViewById(R.id.shadow_overlay);
 
     setOnLongClickListener(
-        new OnLongClickListener() {
-          @Override
-          public boolean onLongClick(View v) {
-            final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
-            // NOTE The drag shadow is handled in the ListView.
-            view.startDrag(
-                EMPTY_CLIP_DATA, new View.DragShadowBuilder(), DRAG_PHONE_FAVORITE_TILE, 0);
-            return true;
-          }
+        (v) -> {
+          final PhoneFavoriteTileView view = (PhoneFavoriteTileView) v;
+          // NOTE The drag shadow is handled in the ListView.
+          view.startDragAndDrop(
+              EMPTY_CLIP_DATA, new EmptyDragShadowBuilder(), DRAG_PHONE_FAVORITE_TILE, 0);
+          return true;
         });
   }
 
@@ -206,5 +205,24 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
     // Immediately release anything we're holding in memory
     loader.registerListener(0, (loader1, contact) -> loader.reset());
     loader.startLoading();
+  }
+
+  /**
+   * A {@link View.DragShadowBuilder} that doesn't draw anything. An object of this class should be
+   * passed to {@link View#startDragAndDrop} to prevent the framework from drawing a drag shadow.
+   */
+  public static class EmptyDragShadowBuilder extends View.DragShadowBuilder {
+
+    @Override
+    public void onProvideShadowMetrics(Point size, Point touch) {
+      // A workaround for P+ not accepting non-positive drag shadow sizes.
+      size.set(1, 1);
+      touch.set(0, 0);
+    }
+
+    @Override
+    public void onDrawShadow(Canvas canvas) {
+      // Don't draw anything
+    }
   }
 }
