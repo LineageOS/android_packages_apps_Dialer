@@ -455,7 +455,7 @@ public class StatusBarNotifier
         addVideoCallAction(builder);
       } else {
         addAnswerAction(builder);
-        addSpeakeasyAnswerAction(builder);
+        addSpeakeasyAnswerAction(builder, call);
       }
     }
   }
@@ -874,7 +874,11 @@ public class StatusBarNotifier
             .build());
   }
 
-  private void addSpeakeasyAnswerAction(Notification.Builder builder) {
+  private void addSpeakeasyAnswerAction(Notification.Builder builder, DialerCall call) {
+    if (!call.isSpeakEasyEligible()) {
+      return;
+    }
+
     if (!ConfigProviderComponent.get(context)
         .getConfigProvider()
         .getBoolean("enable_speakeasy_notification_button", false)) {
