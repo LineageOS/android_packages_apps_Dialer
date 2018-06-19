@@ -22,6 +22,10 @@
       android:key="@string/voicemail_notifications_key"
       android:title="@string/voicemail_notifications_preference_title"/>
 
+  <Preference
+    android:key="@string/voicemail_change_greeting_key"
+    android:title = "@string/voicemail_change_greeting_preference_title"/>
+
   <SwitchPreference
       android:key="@string/voicemail_visual_voicemail_key"
       android:title="@string/voicemail_visual_voicemail_switch_title"/>"
