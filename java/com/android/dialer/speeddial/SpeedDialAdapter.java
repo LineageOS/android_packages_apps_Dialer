@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -28,6 +29,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.animation.AnticipateInterpolator;
+import android.widget.FrameLayout;
 import com.android.dialer.common.Assert;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
@@ -58,13 +61,20 @@ import java.util.Map;
 public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     implements ItemTouchHelperAdapter {
 
+  private static final int NON_CONTACT_ITEM_NUMBER_BEFORE_FAVORITES = 2;
+  private static final int NON_CONTACT_ITEM_NUMBER_BEFORE_SUGGESTION = 3;
+
+  private static final float IN_REMOVE_VIEW_SCALE = 0.5f;
+  private static final float IN_REMOVE_VIEW_ALPHA = 0.5f;
+
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({RowType.STARRED_HEADER, RowType.SUGGESTION_HEADER, RowType.STARRED, RowType.SUGGESTION})
   @interface RowType {
-    int STARRED_HEADER = 0;
-    int SUGGESTION_HEADER = 1;
-    int STARRED = 2;
-    int SUGGESTION = 3;
+    int REMOVE_VIEW = 0;
+    int STARRED_HEADER = 1;
+    int SUGGESTION_HEADER = 2;
+    int STARRED = 3;
+    int SUGGESTION = 4;
   }
 
   private final Context context;
@@ -77,6 +87,9 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
   // Needed for FavoriteViewHolder
   private ItemTouchHelper itemTouchHelper;
+
+  private RemoveViewHolder removeViewHolder;
+  private FavoritesViewHolder draggingFavoritesViewHolder;
 
   public SpeedDialAdapter(
       Context context,
@@ -111,6 +124,11 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
       case RowType.SUGGESTION_HEADER:
         return new HeaderViewHolder(
             inflater.inflate(R.layout.speed_dial_header_layout, parent, false), headerListener);
+      case RowType.REMOVE_VIEW:
+        removeViewHolder =
+            new RemoveViewHolder(
+                inflater.inflate(R.layout.favorite_remove_view_layout, parent, false));
+        return removeViewHolder;
       default:
         throw Assert.createIllegalStateFailException("Invalid viewType: " + viewType);
     }
@@ -128,10 +146,17 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         ((HeaderViewHolder) holder).showAddButton(false);
         return;
       case RowType.STARRED:
-        ((FavoritesViewHolder) holder).bind(context, speedDialUiItems.get(position - 1));
+        ((FavoritesViewHolder) holder).bind(context, speedDialUiItems.get(position - 2));
+        // Removed item might come back
+        FrameLayout avatarContainer = ((FavoritesViewHolder) holder).getAvatarContainer();
+        avatarContainer.setScaleX(1);
+        avatarContainer.setScaleY(1);
+        avatarContainer.setAlpha(1);
         break;
       case RowType.SUGGESTION:
-        ((SuggestionViewHolder) holder).bind(context, speedDialUiItems.get(position - 2));
+        ((SuggestionViewHolder) holder).bind(context, speedDialUiItems.get(position - 3));
+        break;
+      case RowType.REMOVE_VIEW:
         break;
       default:
         throw Assert.createIllegalStateFailException("Invalid view holder: " + holder);
@@ -153,20 +178,25 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
           }
           return Boolean.compare(o2.isStarred(), o1.isStarred());
         });
+    updatePositionToRowTypeMap();
+  }
+
+  private void updatePositionToRowTypeMap() {
     positionToRowTypeMap.clear();
     if (speedDialUiItems.isEmpty()) {
       return;
     }
 
+    positionToRowTypeMap.put(0, RowType.REMOVE_VIEW);
     // Show the add favorites even if there are no favorite contacts
-    positionToRowTypeMap.put(0, RowType.STARRED_HEADER);
-    int positionOfSuggestionHeader = 1;
+    positionToRowTypeMap.put(1, RowType.STARRED_HEADER);
+    int positionOfSuggestionHeader = NON_CONTACT_ITEM_NUMBER_BEFORE_FAVORITES;
     for (int i = 0; i < speedDialUiItems.size(); i++) {
       if (speedDialUiItems.get(i).isStarred()) {
-        positionToRowTypeMap.put(i + 1, RowType.STARRED); // +1 for the header
+        positionToRowTypeMap.put(i + NON_CONTACT_ITEM_NUMBER_BEFORE_FAVORITES, RowType.STARRED);
         positionOfSuggestionHeader++;
       } else {
-        positionToRowTypeMap.put(i + 2, RowType.SUGGESTION); // +2 for both headers
+        positionToRowTypeMap.put(i + NON_CONTACT_ITEM_NUMBER_BEFORE_SUGGESTION, RowType.SUGGESTION);
       }
     }
     if (!speedDialUiItems.get(speedDialUiItems.size() - 1).isStarred()) {
@@ -189,6 +219,7 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
           case RowType.SUGGESTION:
           case RowType.STARRED_HEADER:
           case RowType.SUGGESTION_HEADER:
+          case RowType.REMOVE_VIEW:
             return 3; // span the whole screen
           case RowType.STARRED:
             return 1; // span 1/3 of the screen
@@ -202,15 +233,88 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
   @Override
   public void onItemMove(int fromPosition, int toPosition) {
+    if (toPosition == 0) {
+      // drop to removeView
+      return;
+    }
     // fromPosition/toPosition correspond to adapter position, which is off by 1 from the list
     // position b/c of the favorites header. So subtract 1 here.
-    speedDialUiItems.add(toPosition - 1, speedDialUiItems.remove(fromPosition - 1));
+    speedDialUiItems.add(toPosition - 2, speedDialUiItems.remove(fromPosition - 2));
     notifyItemMoved(fromPosition, toPosition);
   }
 
   @Override
   public boolean canDropOver(ViewHolder target) {
-    return target instanceof FavoritesViewHolder;
+    return target instanceof FavoritesViewHolder || target instanceof RemoveViewHolder;
+  }
+
+  @Override
+  public void onSelectedChanged(@Nullable ViewHolder viewHolder, int actionState) {
+    switch (actionState) {
+      case ItemTouchHelper.ACTION_STATE_DRAG:
+        if (viewHolder != null) {
+          draggingFavoritesViewHolder = (FavoritesViewHolder) viewHolder;
+          draggingFavoritesViewHolder.onSelectedChanged(true);
+          removeViewHolder.show();
+        }
+        break;
+      case ItemTouchHelper.ACTION_STATE_IDLE:
+        // viewHolder is null in this case
+        if (draggingFavoritesViewHolder != null) {
+          draggingFavoritesViewHolder.onSelectedChanged(false);
+          draggingFavoritesViewHolder = null;
+          removeViewHolder.hide();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  @Override
+  public void enterRemoveView() {
+    if (draggingFavoritesViewHolder != null) {
+      draggingFavoritesViewHolder
+          .getAvatarContainer()
+          .animate()
+          .scaleX(IN_REMOVE_VIEW_SCALE)
+          .scaleY(IN_REMOVE_VIEW_SCALE)
+          .alpha(IN_REMOVE_VIEW_ALPHA)
+          .start();
+    }
+  }
+
+  @Override
+  public void leaveRemoveView() {
+    if (draggingFavoritesViewHolder != null) {
+      draggingFavoritesViewHolder
+          .getAvatarContainer()
+          .animate()
+          .scaleX(1)
+          .scaleY(1)
+          .alpha(1)
+          .start();
+    }
+  }
+
+  @Override
+  public void dropOnRemoveView(ViewHolder fromViewHolder) {
+    if (!(fromViewHolder instanceof FavoritesViewHolder)) {
+      return;
+    }
+    int fromPosition = fromViewHolder.getAdapterPosition();
+
+    SpeedDialUiItem removedItem = speedDialUiItems.remove(fromPosition - 2);
+    favoritesListener.onRequestRemove(removedItem);
+    ((FavoritesViewHolder) fromViewHolder)
+        .getAvatarContainer()
+        .animate()
+        .scaleX(0)
+        .scaleY(0)
+        .alpha(0)
+        .setInterpolator(new AnticipateInterpolator())
+        .start();
+    updatePositionToRowTypeMap();
   }
 
   public void setItemTouchHelper(ItemTouchHelper itemTouchHelper) {

@@ -16,7 +16,9 @@
 
 package com.android.dialer.speeddial.draghelper;
 
+import android.graphics.Canvas;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -25,6 +27,12 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
   private final ItemTouchHelperAdapter adapter;
+
+  // When dragged item is in removeView, onMove() and onChildDraw() are called in turn. This
+  // behavior changes when dragged item entering/leaving removeView. The boolean field
+  // movedOverRemoveView is for onMove() and onChildDraw() to flip.
+  private boolean movedOverRemoveView;
+  private boolean inRemoveView;
 
   public SpeedDialItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
     this.adapter = adapter;
@@ -64,8 +72,54 @@ public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
       @NonNull RecyclerView recyclerView,
       @NonNull ViewHolder viewHolder,
       @NonNull ViewHolder target) {
+    if (target.getItemViewType() == 0) { // 0 for RowType.REMOVE_VIEW
+      movedOverRemoveView = true;
+      if (!inRemoveView) {
+        // onMove() first called
+        adapter.enterRemoveView();
+        inRemoveView = true;
+      }
+      return false;
+    } else if (inRemoveView) {
+      // Move out of removeView fast
+      inRemoveView = false;
+      movedOverRemoveView = false;
+      adapter.leaveRemoveView();
+    }
     adapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
     return true;
+  }
+
+  @Override
+  public void onChildDraw(
+      @NonNull Canvas canvas,
+      @NonNull RecyclerView recyclerView,
+      @NonNull ViewHolder viewHolder,
+      float dx,
+      float dy,
+      int i,
+      boolean isCurrentlyActive) {
+    if (inRemoveView) {
+      if (!isCurrentlyActive) {
+        // View animating back to its original state, which means drop in this case
+        inRemoveView = false;
+        adapter.dropOnRemoveView(viewHolder);
+      }
+      if (!movedOverRemoveView) {
+        // when the view is over a droppable target, onMove() will be called before onChildDraw()
+        // thus if onMove() is not called, it is not over a droppable target.
+        inRemoveView = false;
+        adapter.leaveRemoveView();
+      }
+    }
+    movedOverRemoveView = false;
+    super.onChildDraw(canvas, recyclerView, viewHolder, dx, dy, i, isCurrentlyActive);
+  }
+
+  @Override
+  public void onSelectedChanged(@Nullable ViewHolder viewHolder, int actionState) {
+    super.onSelectedChanged(viewHolder, actionState);
+    adapter.onSelectedChanged(viewHolder, actionState);
   }
 
   @Override
@@ -79,5 +133,13 @@ public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
     void onItemMove(int fromPosition, int toPosition);
 
     boolean canDropOver(ViewHolder target);
+
+    void onSelectedChanged(@Nullable ViewHolder viewHolder, int actionState);
+
+    void enterRemoveView();
+
+    void leaveRemoveView();
+
+    void dropOnRemoveView(ViewHolder fromViewHolder);
   }
 }
