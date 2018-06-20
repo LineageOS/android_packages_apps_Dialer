@@ -17,7 +17,7 @@
 package com.android.incallui.speakeasy;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceActivity;
 import com.android.dialer.inject.HasRootComponent;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsActivity;
@@ -38,7 +38,7 @@ public abstract class SpeakEasyComponent {
 
   public abstract SpeakEasyCallManager speakEasyCallManager();
 
-  public abstract @SpeakEasySettingsActivity Optional<AppCompatActivity>
+  public abstract @SpeakEasySettingsActivity Optional<PreferenceActivity>
       speakEasySettingsActivity();
 
   public abstract @SpeakEasySettingsObject Optional<Object> speakEasySettingsObject();
