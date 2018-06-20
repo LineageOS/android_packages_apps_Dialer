@@ -1730,7 +1730,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         && !isActiveRttCall()
         && !isConferenceCall()
         && !isVideoCall()
-        && !isVoiceMailNumber();
+        && !isVoiceMailNumber()
+        && !hasReceivedVideoUpgradeRequest();
   }
 
   /** Indicates the user has selected SpeakEasy */
