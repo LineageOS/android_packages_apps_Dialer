@@ -16,7 +16,7 @@
 
 package com.android.incallui.speakeasy;
 
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceActivity;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
@@ -37,7 +37,8 @@ public abstract class StubSpeakEasyModule {
   abstract SpeakEasyCallManager bindsSpeakEasy(SpeakEasyCallManagerStub stub);
 
   @Provides
-  static @SpeakEasySettingsActivity Optional<AppCompatActivity> provideSpeakEasySettingsActivity() {
+  static @SpeakEasySettingsActivity Optional<PreferenceActivity>
+      provideSpeakEasySettingsActivity() {
     return Optional.absent();
   }
 
