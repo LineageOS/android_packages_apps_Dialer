@@ -71,4 +71,7 @@
 
   <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
   <string name="speed_dial_no_contacts_action_text">Add favorite</string>
+
+  <!-- Text shown on a dragging target that removes the contact from favorites -->
+  <string name="speed_dial_remove_favorites">Remove from favorites</string>
 </resources>
