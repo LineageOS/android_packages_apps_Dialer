@@ -39,10 +39,10 @@
   <!-- Text shown on the record voicemail activity [CHAR LIMIT=20] -->
   <string name="change_greeting_text">Tap to Record</string>
 
-  <!-- Text shown on save button in record voicemail activity [CHAR LIMIT=10] -->
+  <!-- Text shown on save button in record voicemail activity [CHAR LIMIT=20] -->
   <string name="save_button_text">Save</string>
 
-  <!-- Text shown on redo button in record voicemail activity [CHAR LIMIT=10] -->
+  <!-- Text shown on redo button in record voicemail activity [CHAR LIMIT=20] -->
   <string name="redo_button_text">Try Again</string>
 
   <string name="voicemail_advanced_settings_key" translatable="false">voicemail_advanced_settings_key</string>
