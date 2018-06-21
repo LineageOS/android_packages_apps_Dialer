@@ -17,6 +17,7 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.database.StaleDataException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -336,12 +337,18 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
           }
         },
         throwable -> {
-          // Coalescing can fail if the cursor passed to Coalescer is closed by the loader while
-          // the work is still in progress.
-          // This can happen when the loader restarts and finishes loading data before the
-          // coalescing work is completed.
-          // TODO(linyuh): throw an exception here if the failure above can be avoided.
-          LogUtil.e("NewCallLogFragment.onLoadFinished", "coalescing failed", throwable);
+          if (throwable instanceof StaleDataException) {
+            // Coalescing can fail if the cursor passed to Coalescer is closed by the loader while
+            // the work is still in progress.
+            // This can happen when the loader restarts and finishes loading data before the
+            // coalescing work is completed.
+            // This failure doesn't need to be thrown as coalescing will be restarted on the latest
+            // data obtained by the loader.
+            // TODO(linyuh): Also throw an exception if the failure above can be avoided.
+            LogUtil.e("NewCallLogFragment.onLoadFinished", "coalescing failed", throwable);
+          } else {
+            throw new AssertionError(throwable);
+          }
         });
   }
 
