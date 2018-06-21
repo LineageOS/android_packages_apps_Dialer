@@ -18,9 +18,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_call_log_entry_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="72dp">
+    android:minHeight="72dp"
+    android:background="?android:attr/selectableItemBackground">
 
   <com.android.dialer.widget.ContactPhotoView
       android:id="@+id/contact_photo_view"
@@ -40,7 +42,7 @@
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
       android:layout_toEndOf="@+id/contact_photo_view"
-      android:layout_toStartOf="@+id/menu_button"
+      android:layout_toStartOf="@+id/call_button"
       android:orientation="vertical"
       android:importantForAccessibility="noHideDescendants">
 
@@ -141,18 +143,17 @@
   </LinearLayout>
 
   <!--
-    The button to expand the bottom sheet for an entry.
+    The button to make a call.
     Its content description is set in Java code.
   -->
   <ImageView
-      android:id="@+id/menu_button"
+      android:id="@+id/call_button"
       android:layout_width="56dp"
       android:layout_height="72dp"
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:scaleType="center"
-      android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
       android:tint="?colorIcon"
       tools:ignore="ContentDescription"/>
 </RelativeLayout>
