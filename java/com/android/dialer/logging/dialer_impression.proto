@@ -12,7 +12,7 @@ message DialerImpression {
   // Event enums to be used for Impression Logging in Dialer.
   // It's perfectly acceptable for this enum to be large
   // Values should be from 1000 to 100000.
-  // Next Tag: 1399
+  // Next Tag: 1409
   enum Type {
     UNKNOWN_AOSP_EVENT_TYPE = 1000;
 
@@ -783,5 +783,19 @@ message DialerImpression {
     // Impressions for PhoneLookup
     PEOPLE_API_PHONE_LOOKUP_TIMEOUT = 1397;
     CP2_EXTENDED_DIRECTORY_PHONE_LOOKUP_TIMEOUT = 1398;
+
+    // Favorite general
+    FAVORITE_ADD_FAVORITE = 1399;
+    FAVORITE_OPEN_DISAMBIG_DIALOG = 1400;
+    FAVORITE_REMOVE_FAVORITE_BY_DRAG_AND_DROP = 1401;
+    FAVORITE_MOVE_FAVORITE_BY_DRAG_AND_DROP = 1402;
+    // Favorite menu
+    FAVORITE_OPEN_FAVORITE_MENU = 1403;
+    FAVORITE_SEND_MESSAGE = 1404;
+    FAVORITE_OPEN_CONTACT_CARD = 1405;
+    FAVORITE_REMOVE_FAVORITE = 1406;  // Include drag and drop
+    // Favorite disambig
+    FAVORITE_SET_VIDEO_DEFAULT = 1407;
+    FAVORITE_SET_VOICE_DEFAULT = 1408;
   }
 }

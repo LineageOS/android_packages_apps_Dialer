@@ -21,6 +21,7 @@ message CallInitiationType {
     DIALPAD = 2;
 
     SPEED_DIAL = 3;
+    SPEED_DIAL_DISAMBIG_DIALOG = 20;
 
     REMOTE_DIRECTORY = 4;
 
