@@ -63,8 +63,12 @@ public class VoicemailDataSource implements CallLogDataSource {
   @SuppressWarnings("missingPermission")
   public ListenableFuture<Void> fill(CallLogMutations mutations) {
     if (!PermissionsUtil.hasReadPhoneStatePermissions(appContext)) {
+      for (Entry<Long, ContentValues> insert : mutations.getInserts().entrySet()) {
+        insert.getValue().put(AnnotatedCallLog.IS_VOICEMAIL_CALL, 0);
+      }
       return Futures.immediateFuture(null);
     }
+
     return backgroundExecutor.submit(
         () -> {
           TelecomManager telecomManager = appContext.getSystemService(TelecomManager.class);
@@ -90,6 +94,8 @@ public class VoicemailDataSource implements CallLogDataSource {
                       appContext, phoneAccountHandle);
               values.put(
                   AnnotatedCallLog.VOICEMAIL_CALL_TAG, telephonyManager.getVoiceMailAlphaTag());
+            } else {
+              values.put(AnnotatedCallLog.IS_VOICEMAIL_CALL, 0);
             }
           }
           return null;
