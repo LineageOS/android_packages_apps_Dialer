@@ -18,19 +18,28 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
   <!--
-    A string informing a11y users that activating a call log entry will place a call.
-    Note: the word "call" here is a verb.
+    A string informing a11y users that activating a call log entry will expand the menu
+    (a bottom sheet) for it.
     [CHAR LIMIT=NONE]
   -->
-  <string name="a11y_new_call_log_entry_tap_action">call</string>
+  <string name="a11y_new_call_log_entry_tap_action">expand menu</string>
 
   <!--
-    A string describing the menu button of a call log entry for a11y users.
-    An example will be read as "expand call log menu for Jane Smith".
+    A string describing the call button of a call log entry for a11y users.
+    An example will be read as "call Jane Smith".
     [CHAR LIMIT=NONE]
   -->
-  <string name="a11y_new_call_log_entry_expand_menu">
-    Expand call log menu for <xliff:g example="Jane Smith" id="primaryTextForEntry">^1</xliff:g>
+  <string name="a11y_new_call_log_entry_voice_call">
+    call <xliff:g example="Jane Smith" id="primaryTextForEntry">^1</xliff:g>
+  </string>
+
+  <!--
+    A string describing the call button of a call log entry for a11y users.
+    An example will be read as "make a video call to Jane Smith".
+    [CHAR LIMIT=NONE]
+  -->
+  <string name="a11y_new_call_log_entry_video_call">
+    make a video call to <xliff:g example="Jane Smith" id="primaryTextForEntry">^1</xliff:g>
   </string>
 
   <!-- Header in call log to group calls from the current day.  [CHAR LIMIT=30] -->
