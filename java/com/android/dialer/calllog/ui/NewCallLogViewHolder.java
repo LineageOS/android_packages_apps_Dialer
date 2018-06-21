@@ -63,7 +63,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
   private final ImageView wifiIcon;
   private final ImageView assistedDialIcon;
   private final TextView phoneAccountView;
-  private final ImageView menuButton;
+  private final ImageView callButton;
   private final View callLogEntryRootView;
 
   private final Clock clock;
@@ -91,7 +91,7 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     wifiIcon = view.findViewById(R.id.wifi_icon);
     assistedDialIcon = view.findViewById(R.id.assisted_dial_icon);
     phoneAccountView = view.findViewById(R.id.phone_account);
-    menuButton = view.findViewById(R.id.menu_button);
+    callButton = view.findViewById(R.id.call_button);
 
     this.clock = clock;
     this.realtimeRowProcessor = realtimeRowProcessor;
@@ -139,8 +139,9 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     setFeatureIcons(row);
     setCallTypeIcon(row);
     setPhoneAccounts(row);
-    setOnClickListenerForRow(row);
-    setOnClickListenerForMenuButon(row);
+    setCallButon(row);
+
+    itemView.setOnClickListener(NewCallLogMenu.createOnClickListener(activity, row));
   }
 
   private void configA11yForRow(CoalescedRow row) {
@@ -286,21 +287,29 @@ final class NewCallLogViewHolder extends RecyclerView.ViewHolder {
     phoneAccountView.setVisibility(View.VISIBLE);
   }
 
-  private void setOnClickListenerForRow(CoalescedRow row) {
+  private void setCallButon(CoalescedRow row) {
     if (!PhoneNumberHelper.canPlaceCallsTo(
         row.getNumber().getNormalizedNumber(), row.getNumberPresentation())) {
-      itemView.setOnClickListener(null);
+      callButton.setVisibility(View.GONE);
       return;
     }
-    itemView.setOnClickListener(view -> CallLogRowActions.startCallForRow(activity, row));
-  }
 
-  private void setOnClickListenerForMenuButon(CoalescedRow row) {
-    menuButton.setOnClickListener(NewCallLogMenu.createOnClickListener(activity, row));
-    menuButton.setContentDescription(
-        TextUtils.expandTemplate(
-            activity.getResources().getText(R.string.a11y_new_call_log_entry_expand_menu),
-            CallLogEntryText.buildPrimaryText(activity, row)));
+    callButton.setVisibility(View.VISIBLE);
+    if ((row.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
+      callButton.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
+      callButton.setContentDescription(
+          TextUtils.expandTemplate(
+              activity.getResources().getText(R.string.a11y_new_call_log_entry_video_call),
+              CallLogEntryText.buildPrimaryText(activity, row)));
+    } else {
+      callButton.setImageResource(R.drawable.quantum_ic_call_vd_theme_24);
+      callButton.setContentDescription(
+          TextUtils.expandTemplate(
+              activity.getResources().getText(R.string.a11y_new_call_log_entry_voice_call),
+              CallLogEntryText.buildPrimaryText(activity, row)));
+    }
+
+    callButton.setOnClickListener(view -> CallLogRowActions.startCallForRow(activity, row));
   }
 
   private class RealtimeRowFutureCallback implements FutureCallback<CoalescedRow> {
