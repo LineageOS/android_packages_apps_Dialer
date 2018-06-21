@@ -28,6 +28,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -162,7 +163,7 @@ public class SpeedDialFragment extends Fragment {
     recyclerView.setAdapter(adapter);
 
     // Setup drag and drop touch helper
-    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(adapter);
+    ItemTouchHelper.Callback callback = new SpeedDialItemTouchHelperCallback(getContext(), adapter);
     ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
     touchHelper.attachToRecyclerView(recyclerView);
     adapter.setItemTouchHelper(touchHelper);
@@ -249,6 +250,7 @@ public class SpeedDialFragment extends Fragment {
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE) {
       if (resultCode == AppCompatActivity.RESULT_OK && data.getData() != null) {
+        Logger.get(getContext()).logImpression(DialerImpression.Type.FAVORITE_ADD_FAVORITE);
         updateSpeedDialItemsOnResume = false;
         speedDialLoaderListener.listen(
             getContext(),
@@ -335,7 +337,8 @@ public class SpeedDialFragment extends Fragment {
     }
   }
 
-  private static final class SpeedDialFavoritesListener implements FavoriteContactsListener {
+  @VisibleForTesting
+  static final class SpeedDialFavoritesListener implements FavoriteContactsListener {
 
     private final FragmentActivity activity;
     private final FragmentManager childFragmentManager;
@@ -369,6 +372,7 @@ public class SpeedDialFragment extends Fragment {
         return;
       }
 
+      Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_OPEN_DISAMBIG_DIALOG);
       DisambigDialog.show(speedDialUiItem, childFragmentManager);
     }
 
@@ -389,6 +393,7 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void showContextMenu(View view, SpeedDialUiItem speedDialUiItem) {
+      Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_OPEN_FAVORITE_MENU);
       layoutManager.setScrollEnabled(false);
       contextMenu =
           ContextMenu.show(activity, view, speedDialContextMenuItemListener, speedDialUiItem);
@@ -406,6 +411,8 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void onRequestRemove(SpeedDialUiItem speedDialUiItem) {
+      Logger.get(activity)
+          .logImpression(DialerImpression.Type.FAVORITE_REMOVE_FAVORITE_BY_DRAG_AND_DROP);
       speedDialContextMenuItemListener.removeFavoriteContact(speedDialUiItem);
     }
 
@@ -439,11 +446,13 @@ public class SpeedDialFragment extends Fragment {
 
       @Override
       public void openSmsConversation(String number) {
+        Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_SEND_MESSAGE);
         activity.startActivity(IntentUtil.getSendSmsIntent(number));
       }
 
       @Override
       public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
+        Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_REMOVE_FAVORITE);
         speedDialLoaderListener.listen(
             activity,
             UiItemLoaderComponent.get(activity)
@@ -457,6 +466,7 @@ public class SpeedDialFragment extends Fragment {
 
       @Override
       public void openContactInfo(SpeedDialUiItem speedDialUiItem) {
+        Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_OPEN_CONTACT_CARD);
         activity.startActivity(
             new Intent(
                 Intent.ACTION_VIEW,

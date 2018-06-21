@@ -61,7 +61,7 @@ public class DisambigDialog extends DialogFragment {
   private SpeedDialUiItem speedDialUiItem;
   @VisibleForTesting public List<Channel> channels;
   @VisibleForTesting public LinearLayout container;
-  private CheckBox rememberThisChoice;
+  @VisibleForTesting public CheckBox rememberThisChoice;
 
   /** Show a disambiguation dialog for a starred contact without a favorite communication avenue. */
   public static DisambigDialog show(SpeedDialUiItem speedDialUiItem, FragmentManager manager) {
@@ -174,6 +174,7 @@ public class DisambigDialog extends DialogFragment {
 
   private void onVideoOptionClicked(Channel channel) {
     if (rememberThisChoice.isChecked()) {
+      Logger.get(getContext()).logImpression(DialerImpression.Type.FAVORITE_SET_VIDEO_DEFAULT);
       setDefaultChannel(getContext().getApplicationContext(), speedDialUiItem, channel);
     }
 
@@ -185,7 +186,7 @@ public class DisambigDialog extends DialogFragment {
 
     PreCall.start(
         getContext(),
-        new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+        new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL_DISAMBIG_DIALOG)
             .setAllowAssistedDial(true)
             .setIsVideoCall(true)
             .setIsDuoCall(channel.technology() == Channel.DUO));
@@ -194,12 +195,13 @@ public class DisambigDialog extends DialogFragment {
 
   private void onVoiceOptionClicked(Channel channel) {
     if (rememberThisChoice.isChecked()) {
+      Logger.get(getContext()).logImpression(DialerImpression.Type.FAVORITE_SET_VOICE_DEFAULT);
       setDefaultChannel(getContext().getApplicationContext(), speedDialUiItem, channel);
     }
 
     PreCall.start(
         getContext(),
-        new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
+        new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL_DISAMBIG_DIALOG)
             .setAllowAssistedDial(true));
     dismiss();
   }
