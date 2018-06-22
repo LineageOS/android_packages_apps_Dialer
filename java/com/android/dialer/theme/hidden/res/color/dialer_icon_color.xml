@@ -14,7 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-  android:shape="oval">
-  <solid android:color="?android:attr/textColorSecondary"/>
-</shape>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:color="@android:color/white" android:state_checked="true"/>
+  <item android:color="@color/google_grey_400" android:state_enabled="false"/>
+  <item android:color="@color/google_grey_700"/>
+</selector>
