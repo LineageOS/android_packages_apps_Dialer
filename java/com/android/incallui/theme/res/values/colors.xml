@@ -52,16 +52,4 @@
     <item>#B93221</item>
     <item>#841F10</item>
   </array>
-
-  <color name="incall_background_gradient_top">#E91141BB</color>
-  <color name="incall_background_gradient_middle">#E91141BB</color>
-  <color name="incall_background_gradient_bottom">#CC229FEB</color>
-
-  <color name="incall_background_multiwindow">#E91141BB</color>
-
-  <color name="incall_background_gradient_spam_top">#E5A30B0B</color>
-  <color name="incall_background_gradient_spam_middle">#D6C01111</color>
-  <color name="incall_background_gradient_spam_bottom">#B8E55135</color>
-
-  <color name="incall_background_multiwindow_spam">#E9C22E2E</color>
 </resources>
