@@ -31,7 +31,7 @@ public class RecordVoicemailGreetingActivity extends Activity implements OnClick
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
     RECORD_GREETING_INIT,
-    RECORD_GREETING_RECORDED,
+    RECORD_GREETING_RECORDING,
     RECORD_GREETING_RECORDED,
     RECORD_GREETING_PLAYING_BACK
   })
