@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.support.annotation.FloatRange;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 import com.android.incallui.incalluilock.InCallUiLock;
 
@@ -48,9 +47,6 @@ public class AnswerScreenPresenterStub implements AnswerScreenDelegate {
 
   @Override
   public void onAnswerAndReleaseButtonDisabled() {}
-
-  @Override
-  public void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress) {}
 
   @Override
   public boolean isActionTimeout() {

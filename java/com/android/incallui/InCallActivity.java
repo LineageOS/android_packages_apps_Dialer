@@ -25,12 +25,8 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.os.Trace;
-import android.support.annotation.ColorInt;
-import android.support.annotation.FloatRange;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,7 +36,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.graphics.ColorUtils;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
@@ -137,7 +132,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private Animation dialpadSlideInAnimation;
   private Animation dialpadSlideOutAnimation;
   private Dialog errorDialog;
-  private GradientDrawable backgroundDrawable;
   private InCallOrientationEventListener inCallOrientationEventListener;
   private View pseudoBlackScreenOverlay;
   private SelectPhoneAccountDialogFragment selectPhoneAccountDialogFragment;
@@ -156,7 +150,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private boolean isVisible;
   private boolean needDismissPendingDialogs;
   private boolean touchDownWhenPseudoScreenOff;
-  private int[] backgroundDrawableColors;
   @DialpadRequestType private int showDialpadRequest = DIALPAD_REQUEST_NONE;
   private SpeakEasyCallManager speakEasyCallManager;
   private DialogFragment rttRequestDialogFragment;
@@ -874,11 +867,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
 
   public void onForegroundCallChanged(DialerCall newForegroundCall) {
     updateTaskDescription();
-
-    if (newForegroundCall == null || !didShowAnswerScreen) {
-      LogUtil.v("InCallActivity.onForegroundCallChanged", "resetting background color");
-      updateWindowBackgroundColor(0 /* progress */);
-    }
   }
 
   private void updateTaskDescription() {
@@ -890,58 +878,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     setTaskDescription(
         new TaskDescription(
             getResources().getString(R.string.notification_ongoing_call), null /* icon */, color));
-  }
-
-  public void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress) {
-    ThemeColorManager themeColorManager = InCallPresenter.getInstance().getThemeColorManager();
-    @ColorInt int top;
-    @ColorInt int middle;
-    @ColorInt int bottom;
-    @ColorInt int gray = 0x66000000;
-
-    if (isInMultiWindowMode()) {
-      top = themeColorManager.getBackgroundColorSolid();
-      middle = themeColorManager.getBackgroundColorSolid();
-      bottom = themeColorManager.getBackgroundColorSolid();
-    } else {
-      top = themeColorManager.getBackgroundColorTop();
-      middle = themeColorManager.getBackgroundColorMiddle();
-      bottom = themeColorManager.getBackgroundColorBottom();
-    }
-
-    if (progress < 0) {
-      float correctedProgress = Math.abs(progress);
-      top = ColorUtils.blendARGB(top, gray, correctedProgress);
-      middle = ColorUtils.blendARGB(middle, gray, correctedProgress);
-      bottom = ColorUtils.blendARGB(bottom, gray, correctedProgress);
-    }
-
-    boolean backgroundDirty = false;
-    if (backgroundDrawable == null) {
-      backgroundDrawableColors = new int[] {top, middle, bottom};
-      backgroundDrawable = new GradientDrawable(Orientation.TOP_BOTTOM, backgroundDrawableColors);
-      backgroundDirty = true;
-    } else {
-      if (backgroundDrawableColors[0] != top) {
-        backgroundDrawableColors[0] = top;
-        backgroundDirty = true;
-      }
-      if (backgroundDrawableColors[1] != middle) {
-        backgroundDrawableColors[1] = middle;
-        backgroundDirty = true;
-      }
-      if (backgroundDrawableColors[2] != bottom) {
-        backgroundDrawableColors[2] = bottom;
-        backgroundDirty = true;
-      }
-      if (backgroundDirty) {
-        backgroundDrawable.setColors(backgroundDrawableColors);
-      }
-    }
-
-    if (backgroundDirty) {
-      getWindow().setBackgroundDrawable(backgroundDrawable);
-    }
   }
 
   public boolean isVisible() {
