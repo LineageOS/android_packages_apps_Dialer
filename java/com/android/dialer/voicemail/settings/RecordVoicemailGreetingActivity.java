@@ -18,13 +18,83 @@ package com.android.dialer.voicemail.settings;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
+import android.view.View;
+import android.view.View.OnClickListener;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** Activity for recording a new voicemail greeting */
-public class RecordVoicemailGreetingActivity extends Activity {
+public class RecordVoicemailGreetingActivity extends Activity implements OnClickListener {
+
+  /** Possible states of RecordButton and RecordVoicemailGreetingActivity */
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef({
+    RECORD_GREETING_INIT,
+    RECORD_GREETING_RECORDED,
+    RECORD_GREETING_RECORDED,
+    RECORD_GREETING_PLAYING_BACK
+  })
+  public @interface ButtonState {}
+
+  public static final int RECORD_GREETING_INIT = 1;
+  public static final int RECORD_GREETING_RECORDING = 2;
+  public static final int RECORD_GREETING_RECORDED = 3;
+  public static final int RECORD_GREETING_PLAYING_BACK = 4;
+  public static final int MAX_GREETING_DURATION_MS = 45000;
+
+  private int currentState;
+  private int duration;
+  private RecordButton recordButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_record_voicemail_greeting);
+
+    duration = 0;
+    setState(RECORD_GREETING_INIT);
+  }
+
+  @Override
+  public void onClick(View v) {
+    if (v == recordButton) {
+      switch (currentState) {
+        case RECORD_GREETING_INIT:
+          setState(RECORD_GREETING_RECORDING);
+          break;
+        case RECORD_GREETING_RECORDED:
+          setState(RECORD_GREETING_PLAYING_BACK);
+          break;
+        case RECORD_GREETING_RECORDING:
+        case RECORD_GREETING_PLAYING_BACK:
+          setState(RECORD_GREETING_RECORDED);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  private void setState(@ButtonState int state) {
+    currentState = state;
+
+    switch (state) {
+      case RECORD_GREETING_INIT:
+        recordButton.setState(state);
+        recordButton.setTracks(0, 0);
+        break;
+      case RECORD_GREETING_PLAYING_BACK:
+      case RECORD_GREETING_RECORDED:
+        recordButton.setState(state);
+        recordButton.setTracks(0, (float) duration / MAX_GREETING_DURATION_MS);
+        break;
+      case RECORD_GREETING_RECORDING:
+        recordButton.setState(state);
+        recordButton.setTracks(0, 1f);
+        break;
+      default:
+        break;
+    }
   }
 }
