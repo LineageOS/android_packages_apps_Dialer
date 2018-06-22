@@ -35,7 +35,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
-  @VisibleForTesting static final int VERSION = 3;
+  @VisibleForTesting static final int VERSION = 4;
 
   private static final String FILENAME = "annotated_call_log.db";
 
@@ -55,6 +55,18 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     this.backgroundExecutor = backgroundExecutor;
   }
 
+  /**
+   * Important note:
+   *
+   * <p>Do NOT modify/delete columns (e.g., adding constraints, changing column type, etc).
+   *
+   * <p>As SQLite's "ALTER TABLE" statement doesn't support such operations, doing so requires
+   * complex, expensive, and error-prone operations to upgrade the database (see
+   * https://www.sqlite.org/lang_altertable.html "Making Other Kinds Of Table Schema Changes").
+   *
+   * <p>All column constraints are enforced when data are inserted/updated via
+   * AnnotatedCallLogContentProvider. See AnnotatedCallLogConstraints for details.
+   */
   private static final String CREATE_TABLE_SQL =
       "create table if not exists "
           + AnnotatedCallLog.TABLE
@@ -66,17 +78,17 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.NUMBER_PRESENTATION + " integer, ")
           + (AnnotatedCallLog.DURATION + " integer, ")
           + (AnnotatedCallLog.DATA_USAGE + " integer, ")
-          + (AnnotatedCallLog.IS_READ + " integer not null, ")
-          + (AnnotatedCallLog.NEW + " integer not null, ")
+          + (AnnotatedCallLog.IS_READ + " integer, ")
+          + (AnnotatedCallLog.NEW + " integer, ")
           + (AnnotatedCallLog.GEOCODED_LOCATION + " text, ")
           + (AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME + " text, ")
           + (AnnotatedCallLog.PHONE_ACCOUNT_ID + " text, ")
           + (AnnotatedCallLog.FEATURES + " integer, ")
           + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")
-          + (AnnotatedCallLog.CALL_TYPE + " integer not null, ")
+          + (AnnotatedCallLog.CALL_TYPE + " integer, ")
           + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob, ")
-          + (AnnotatedCallLog.IS_VOICEMAIL_CALL + " integer default 0, ")
+          + (AnnotatedCallLog.IS_VOICEMAIL_CALL + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_CALL_TAG + " text, ")
           + (AnnotatedCallLog.TRANSCRIPTION_STATE + " integer, ")
           + (AnnotatedCallLog.CALL_MAPPING_ID + " text")
@@ -151,8 +163,11 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
     if (oldVersion < 2) {
       upgradeToV2(db);
     }
-    if (oldVersion < 3) {
-      upgradeToV3(db);
+
+    // Version 3 upgrade was buggy and didn't make any schema changes.
+    // So we go directly to version 4.
+    if (oldVersion < 4) {
+      upgradeToV4(db);
     }
   }
 
@@ -172,7 +187,21 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
             + AnnotatedCallLog.TIMESTAMP);
   }
 
-  private static void upgradeToV3(SQLiteDatabase db) {
+  private static void upgradeToV4(SQLiteDatabase db) {
+    // Starting from v4, we will enforce column constraints in the AnnotatedCallLogContentProvider
+    // instead of on the database level.
+    // The constraints are as follows (see AnnotatedCallLogConstraints for details).
+    //   IS_READ:           not null, must be 0 or 1;
+    //   NEW:               not null, must be 0 or 1;
+    //   IS_VOICEMAIL_CALL: not null, must be 0 or 1; and
+    //   CALL_TYPE:         not null, must be one of android.provider.CallLog.Calls#TYPE.
+    //
+    // There is no need to update the old schema as the constraints above are more strict than
+    // those in the old schema.
+    //
+    // Version 3 schema defaulted column IS_VOICEMAIL_CALL to 0 but we didn't update the schema in
+    // onUpgrade. As a result, null values can still be inserted if the user has an older version of
+    // the database. For version 4, we need to set all null values to 0.
     db.execSQL(
         "update "
             + AnnotatedCallLog.TABLE

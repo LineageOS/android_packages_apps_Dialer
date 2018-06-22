@@ -16,7 +16,6 @@
 
 package com.android.incallui.answer.protocol;
 
-import android.support.annotation.FloatRange;
 import com.android.incallui.incalluilock.InCallUiLock;
 
 /** Callbacks implemented by the container app for this module. */
@@ -37,16 +36,6 @@ public interface AnswerScreenDelegate {
   void onAnswerAndReleaseButtonEnabled();
 
   void onAnswerAndReleaseButtonDisabled();
-  /**
-   * Sets the window background color based on foreground call's theme and the given progress. This
-   * is called from the answer UI to animate the accept and reject action.
-   *
-   * <p>When the user is rejecting we animate the background color to a mostly transparent gray. The
-   * end effect is that the home screen shows through.
-   *
-   * @param progress float from -1 to 1. -1 is fully rejected, 1 is fully accepted, and 0 is neutral
-   */
-  void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress);
 
   /** Returns true if any answer/reject action timed out. */
   boolean isActionTimeout();

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2018 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+
+<!-- Sets android:importantForAccessibility="no" to avoid being announced when navigating with
+         talkback enabled. It will still be announced when user drag or drop contact onto it.
+         This is required since drag and drop event is only sent to views are visible when drag
+         starts. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/favorite_remove_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/expanded_search_bar_height"
+    android:background="?android:attr/colorPrimary"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:visibility="invisible"
+    android:contentDescription="@string/speed_dial_remove_favorites"
+    android:importantForAccessibility="no">
+
+  <ImageView
+      android:id="@+id/remove_view_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:src="@drawable/quantum_ic_close_vd_theme_24"
+      android:tint="?colorIconOnUnthemedDarkBackground"/>
+
+  <TextView
+      android:id="@+id/remove_view_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/speed_dial_remove_favorites"
+      android:textColor="?colorTextOnUnthemedDarkBackground"
+      android:textSize="16sp"/>
+</LinearLayout>

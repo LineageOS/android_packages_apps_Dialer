@@ -275,7 +275,8 @@ public final class NewSearchFragment extends Fragment
       return false;
     }
 
-    if (PermissionsUtil.hasLocationPermissions(getContext())
+    if (getContext() == null
+        || PermissionsUtil.hasLocationPermissions(getContext())
         || hasBeenDismissed()
         || !isRegularSearch()) {
       adapter.hideLocationPermissionRequest();

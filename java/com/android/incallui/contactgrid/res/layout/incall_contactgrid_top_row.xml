@@ -15,33 +15,34 @@
   ~ limitations under the License
   -->
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:gravity="center"
-  android:orientation="horizontal"
-  tools:showIn="@layout/incall_contact_grid">
-  <ImageView
-    android:id="@id/contactgrid_connection_icon"
-    android:layout_width="24dp"
-    android:layout_height="24dp"
-    android:scaleType="fitCenter"
-    tools:src="@android:drawable/sym_def_app_icon"
-    tools:visibility="visible"
-    />
-  <Space
-      android:id="@id/contactgrid_top_row_space"
-      android:layout_height="match_parent"
-      android:layout_width="@dimen/contactgrid_connection_icon_margin_end"
-    />
-  <TextView
-    android:id="@id/contactgrid_status_text"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:singleLine="true"
-    android:ellipsize="marquee"
-    android:scrollHorizontally="true"
-    android:textAppearance="@style/Dialer.Incall.TextAppearance"
-    tools:text="Captain Holt"/>
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:showIn="@layout/incall_contact_grid">
+  <ImageView
+      android:id="@id/contactgrid_connection_icon"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:scaleType="fitCenter"
+      android:tint="?colorIcon"
+      tools:src="@android:drawable/sym_def_app_icon"
+      tools:visibility="visible"
+      />
+  <Space
+      android:id="@id/contactgrid_top_row_space"
+      android:layout_width="@dimen/contactgrid_connection_icon_margin_end"
+      android:layout_height="match_parent"
+      />
+  <TextView
+      android:id="@id/contactgrid_status_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ellipsize="marquee"
+      android:scrollHorizontally="true"
+      android:singleLine="true"
+      android:textAppearance="@style/Dialer.Incall.TextAppearance"
+      tools:text="Captain Holt"/>
 </LinearLayout>

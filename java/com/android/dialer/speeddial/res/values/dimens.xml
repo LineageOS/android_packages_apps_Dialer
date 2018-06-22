@@ -32,4 +32,6 @@
   <dimen name="speed_dial_context_menu_x_offset">-24dp</dimen>
   <dimen name="speed_dial_context_menu_corner_radius">16dp</dimen>
   <dimen name="disambig_dialog_width">280dp</dimen>
+  <dimen name="expanded_search_bar_height">64dp</dimen>
+  <dimen name="expanded_search_bar_height_minus">-64dp</dimen>
 </resources>
