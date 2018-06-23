@@ -404,7 +404,7 @@ public final class NewSearchFragment extends Fragment
     }
 
     // If the user dismissed the prompt without granting us the permission, don't load the cursor.
-    if (!PermissionsUtil.hasLocationPermissions(getContext())) {
+    if (getContext() == null || !PermissionsUtil.hasLocationPermissions(getContext())) {
       return;
     }
 
