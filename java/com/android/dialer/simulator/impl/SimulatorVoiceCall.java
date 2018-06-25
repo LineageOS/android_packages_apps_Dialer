@@ -92,7 +92,15 @@ final class SimulatorVoiceCall
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  void addNewIncomingCall(AppCompatActivity activity) {
+  void addCustomizedIncomingCall(String callerId, int callerIdPresentation) {
+    Bundle extras = new Bundle();
+    extras.putInt(Simulator.PRESENTATION_CHOICE, callerIdPresentation);
+    connectionTag =
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE, extras);
+  }
+
+  void addCustomizedIncomingCallWithDialog(AppCompatActivity activity) {
     SimulatorDialogFragment.newInstance(
             (callerId, callerIdPresentation) -> {
               Bundle extras = new Bundle();
@@ -111,7 +119,15 @@ final class SimulatorVoiceCall
             context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE);
   }
 
-  void addNewOutgoingCall(AppCompatActivity activity) {
+  void addCustomizedOutgoingCall(String callerId, int callerIdPresentation) {
+    Bundle extras = new Bundle();
+    extras.putInt(Simulator.PRESENTATION_CHOICE, callerIdPresentation);
+    connectionTag =
+        SimulatorSimCallManager.addNewIncomingCall(
+            context, callerId, SimulatorSimCallManager.CALL_TYPE_VOICE, extras);
+  }
+
+  void addCustomizedOutgoingCallWithDialog(AppCompatActivity activity) {
     SimulatorDialogFragment.newInstance(
             (callerId, callerIdPresentation) -> {
               Bundle extras = new Bundle();
