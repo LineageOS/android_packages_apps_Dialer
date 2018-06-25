@@ -26,6 +26,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.dialer.app.AccountSelectionActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
@@ -55,11 +56,17 @@ public abstract class IntentProvider {
       final String number, final PhoneAccountHandle accountHandle) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return PreCall.getIntent(
             context,
             new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
                 .setPhoneAccountHandle(accountHandle));
+      }
+
+      @Override
+      public Intent getLongClickIntent(Context context) {
+        return AccountSelectionActivity.createIntent(context, number,
+            CallInitiationType.Type.CALL_LOG);
       }
     };
   }
@@ -68,12 +75,13 @@ public abstract class IntentProvider {
       final String number, final Context context, final TelephonyManager telephonyManager) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return PreCall.getIntent(
             context,
             new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
                 .setAllowAssistedDial(true));
       }
+
     };
   }
 
@@ -85,7 +93,7 @@ public abstract class IntentProvider {
       final String number, final PhoneAccountHandle accountHandle) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return PreCall.getIntent(
             context,
             new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
@@ -98,7 +106,7 @@ public abstract class IntentProvider {
   public static IntentProvider getDuoVideoIntentProvider(String number, boolean isNonContact) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return PreCall.getIntent(
             context,
             new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
@@ -122,7 +130,7 @@ public abstract class IntentProvider {
   public static IntentProvider getInstallDuoIntentProvider() {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return DuoComponent.get(context).getDuo().getInstallDuoIntent().orNull();
       }
 
@@ -136,7 +144,7 @@ public abstract class IntentProvider {
   public static IntentProvider getSetUpDuoIntentProvider() {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return DuoComponent.get(context).getDuo().getActivateIntent().orNull();
       }
 
@@ -150,7 +158,7 @@ public abstract class IntentProvider {
   public static IntentProvider getDuoInviteIntentProvider(String number) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return DuoComponent.get(context).getDuo().getInviteIntent(number).orNull();
       }
 
@@ -165,7 +173,7 @@ public abstract class IntentProvider {
       @Nullable PhoneAccountHandle phoneAccountHandle) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return PreCall.getIntent(
             context,
             CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
@@ -176,7 +184,7 @@ public abstract class IntentProvider {
   public static IntentProvider getSendSmsIntentProvider(final String number) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return IntentUtil.getSendSmsIntent(number);
       }
     };
@@ -198,7 +206,7 @@ public abstract class IntentProvider {
       boolean canSupportAssistedDialing) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return OldCallDetailsActivity.newInstance(
             context, callDetailsEntries, contact, canReportCallerId, canSupportAssistedDialing);
       }
@@ -214,7 +222,7 @@ public abstract class IntentProvider {
       final boolean isNewContact) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         Contact contactToSave = null;
 
         if (lookupUri != null) {
@@ -275,7 +283,9 @@ public abstract class IntentProvider {
     };
   }
 
-  public abstract Intent getIntent(Context context);
-
+  public abstract Intent getClickIntent(Context context);
+  public Intent getLongClickIntent(Context context) {
+    return null;
+  }
   public void logInteraction(Context context) {}
 }
