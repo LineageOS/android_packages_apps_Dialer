@@ -64,6 +64,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.searchfragment.remote \
 	com.android.dialer.shortcuts \
 	com.android.dialer.simulator.impl \
+	com.android.dialer.simulator.service \
 	com.android.dialer.spam.promo \
 	com.android.dialer.speeddial \
 	com.android.dialer.spannable \
