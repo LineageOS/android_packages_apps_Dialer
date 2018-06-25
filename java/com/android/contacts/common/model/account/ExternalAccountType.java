@@ -30,10 +30,10 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.Xml;
-import com.android.contacts.common.R;
 import com.android.contacts.common.model.dataitem.DataKind;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.contacts.resources.R;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +152,7 @@ public class ExternalAccountType extends BaseAccountType {
       error.append(" for external package ");
       error.append(packageName);
 
-      Log.e(TAG, error.toString(), e);
+      LogUtil.e(TAG, error.toString(), e);
       return;
     } finally {
       if (parser != null) {
@@ -210,13 +210,11 @@ public class ExternalAccountType extends BaseAccountType {
         for (String metadataName : METADATA_CONTACTS_NAMES) {
           final XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm, metadataName);
           if (parser != null) {
-            if (Log.isLoggable(TAG, Log.DEBUG)) {
-              Log.d(
-                  TAG,
-                  String.format(
-                      "Metadata loaded from: %s, %s, %s",
-                      serviceInfo.packageName, serviceInfo.name, metadataName));
-            }
+            LogUtil.d(
+                TAG,
+                String.format(
+                    "Metadata loaded from: %s, %s, %s",
+                    serviceInfo.packageName, serviceInfo.name, metadataName));
             return parser;
           }
         }
@@ -250,7 +248,7 @@ public class ExternalAccountType extends BaseAccountType {
       return -1; // Empty text is okay.
     }
     if (resourceName.charAt(0) != '@') {
-      Log.e(TAG, xmlAttributeName + " must be a resource name beginnig with '@'");
+      LogUtil.e(TAG, xmlAttributeName + " must be a resource name beginnig with '@'");
       return -1;
     }
     final String name = resourceName.substring(1);
@@ -258,12 +256,12 @@ public class ExternalAccountType extends BaseAccountType {
     try {
       res = context.getPackageManager().getResourcesForApplication(packageName);
     } catch (NameNotFoundException e) {
-      Log.e(TAG, "Unable to load package " + packageName);
+      LogUtil.e(TAG, "Unable to load package " + packageName);
       return -1;
     }
     final int resId = res.getIdentifier(name, null, packageName);
     if (resId == 0) {
-      Log.e(TAG, "Unable to load " + resourceName + " from package " + packageName);
+      LogUtil.e(TAG, "Unable to load " + resourceName + " from package " + packageName);
       return -1;
     }
     return resId;
@@ -366,9 +364,7 @@ public class ExternalAccountType extends BaseAccountType {
       for (int i = 0; i < attributeCount; i++) {
         String attr = parser.getAttributeName(i);
         String value = parser.getAttributeValue(i);
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-          Log.d(TAG, attr + "=" + value);
-        }
+        LogUtil.d(TAG, attr + "=" + value);
         if (ATTR_EDIT_CONTACT_ACTIVITY.equals(attr)) {
           mEditContactActivityClassName = value;
         } else if (ATTR_CREATE_CONTACT_ACTIVITY.equals(attr)) {
@@ -394,7 +390,7 @@ public class ExternalAccountType extends BaseAccountType {
         } else if (ATTR_ACCOUNT_ICON.equals(attr)) {
           mAccountTypeIconAttribute = value;
         } else {
-          Log.e(TAG, "Unsupported attribute " + attr);
+          LogUtil.e(TAG, "Unsupported attribute " + attr);
         }
       }
 
