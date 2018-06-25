@@ -21,7 +21,7 @@ import android.content.CursorLoader;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.text.TextUtils;
-import com.android.contacts.common.preference.ContactsPreferences;
+import com.android.dialer.contacts.ContactsComponent;
 
 /** Cursor Loader for {@link ContactsFragment}. */
 final class ContactsCursorLoader extends CursorLoader {
@@ -61,12 +61,13 @@ final class ContactsCursorLoader extends CursorLoader {
   }
 
   private static String[] getProjection(Context context) {
-    ContactsPreferences contactsPrefs = new ContactsPreferences(context);
-    boolean displayOrderPrimary =
-        (contactsPrefs.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY);
-    return displayOrderPrimary
-        ? CONTACTS_PROJECTION_DISPLAY_NAME_PRIMARY
-        : CONTACTS_PROJECTION_DISPLAY_NAME_ALTERNATIVE;
+    switch (ContactsComponent.get(context).contactDisplayPreferences().getDisplayOrder()) {
+      case PRIMARY:
+        return CONTACTS_PROJECTION_DISPLAY_NAME_PRIMARY;
+      case ALTERNATIVE:
+        return CONTACTS_PROJECTION_DISPLAY_NAME_ALTERNATIVE;
+    }
+    throw new AssertionError("exhaustive switch");
   }
 
   private static String getWhere(Context context, boolean hasPhoneNumbers) {
@@ -78,10 +79,14 @@ final class ContactsCursorLoader extends CursorLoader {
   }
 
   private static String getSortKey(Context context) {
-    ContactsPreferences contactsPrefs = new ContactsPreferences(context);
-    boolean sortOrderPrimary =
-        (contactsPrefs.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY);
-    return sortOrderPrimary ? Contacts.SORT_KEY_PRIMARY : Contacts.SORT_KEY_ALTERNATIVE;
+
+    switch (ContactsComponent.get(context).contactDisplayPreferences().getSortOrder()) {
+      case BY_PRIMARY:
+        return Contacts.SORT_KEY_PRIMARY;
+      case BY_ALTERNATIVE:
+        return Contacts.SORT_KEY_ALTERNATIVE;
+    }
+    throw new AssertionError("exhaustive switch");
   }
 
   /** Update cursor loader to filter contacts based on the provided query. */

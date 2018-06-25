@@ -30,9 +30,9 @@ import com.android.bubble.Bubble;
 import com.android.bubble.BubbleComponent;
 import com.android.bubble.BubbleInfo;
 import com.android.bubble.BubbleInfo.Action;
-import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderComponent;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.base.ThemeComponent;
@@ -369,10 +369,9 @@ public class ReturnToCallController implements InCallUiListener, Listener, Audio
   private LetterTileDrawable createLettleTileDrawable(
       DialerCall dialerCall, ContactCacheEntry entry) {
     String preferredName =
-        ContactDisplayUtils.getPreferredDisplayName(
-            entry.namePrimary,
-            entry.nameAlternative,
-            ContactsPreferencesFactory.newContactsPreferences(context));
+        ContactsComponent.get(context)
+            .contactDisplayPreferences()
+            .getDisplayName(entry.namePrimary, entry.nameAlternative);
     if (TextUtils.isEmpty(preferredName)) {
       preferredName = entry.number;
     }
