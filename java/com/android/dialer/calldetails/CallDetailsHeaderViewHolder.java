@@ -17,15 +17,18 @@
 package com.android.dialer.calldetails;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import com.android.contacts.common.ContactPhotoManager;
+import com.android.dialer.app.AccountSelectionActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
@@ -37,7 +40,7 @@ import com.android.dialer.util.DialerUtils;
 
 /** ViewHolder for Header/Contact in {@link CallDetailsActivity}. */
 public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
-    implements OnClickListener {
+    implements OnClickListener, OnLongClickListener {
 
   private final View callBackButton;
   private final TextView nameView;
@@ -58,6 +61,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     contactPhoto = container.findViewById(R.id.quick_contact_photo);
 
     callBackButton.setOnClickListener(this);
+    callBackButton.setOnLongClickListener(this);
     Logger.get(context)
         .logQuickContactOnTouch(
             contactPhoto, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_DETAILS, true);
@@ -114,5 +118,18 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     } else {
       throw Assert.createIllegalStateFailException("View OnClickListener not implemented: " + view);
     }
+  }
+
+  @Override
+  public boolean onLongClick(View view) {
+    if (view == callBackButton) {
+      Intent intent = AccountSelectionActivity.createIntent(view.getContext(),
+          contact.getNumber(), CallInitiationType.Type.CALL_DETAILS);
+      if (intent != null) {
+        DialerUtils.startActivityWithErrorToast(view.getContext(), intent);
+        return true;
+      }
+    }
+    return false;
   }
 }
