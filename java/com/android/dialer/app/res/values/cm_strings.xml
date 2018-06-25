@@ -31,4 +31,5 @@
     <string name="incall_dnd_dialog_message">In order to enable Do Not Disturb, the Phone app needs to be granted the permission to control the Do Not Disturb status.\nPlease allow it.</string>
     <string name="allow">Allow</string>
     <string name="deny">Deny</string>
+    <string name="call_via">Call via</string>
 </resources>
