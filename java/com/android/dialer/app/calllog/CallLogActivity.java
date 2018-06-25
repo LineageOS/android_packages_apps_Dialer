@@ -285,9 +285,10 @@ public class CallLogActivity extends TransactionSafeActivity
           && data.getBooleanExtra(CallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
         String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
         Snackbar.make(findViewById(R.id.calllog_frame), getString(R.string.ec_data_deleted), 5_000)
-            .setAction(
-                R.string.view_conversation,
-                v -> startActivity(IntentProvider.getSendSmsIntentProvider(number).getIntent(this)))
+            .setAction(R.string.view_conversation, v -> {
+                IntentProvider provider = IntentProvider.getSendSmsIntentProvider(number);
+                startActivity(provider.getClickIntent(this));
+            })
             .setActionTextColor(getResources().getColor(R.color.dialer_snackbar_action_text_color))
             .show();
       }
