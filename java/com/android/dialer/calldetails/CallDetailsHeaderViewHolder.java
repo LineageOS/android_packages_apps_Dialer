@@ -17,18 +17,22 @@
 package com.android.dialer.calldetails;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.android.dialer.app.AccountSelectionActivity;
 import com.android.dialer.calldetails.CallDetailsActivity.AssistedDialingNumberParseWorker;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
+import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -39,10 +43,11 @@ import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
+import com.android.dialer.util.DialerUtils;
 
 /** ViewHolder for Header/Contact in {@link CallDetailsActivity}. */
 public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
-    implements OnClickListener, FailureListener {
+    implements OnClickListener, OnLongClickListener, FailureListener {
 
   private final CallDetailsHeaderListener callDetailsHeaderListener;
   private final ImageView callbackButton;
@@ -73,6 +78,7 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
         callDetailsHeaderListener::openAssistedDialingSettings);
 
     callbackButton.setOnClickListener(this);
+    callbackButton.setOnLongClickListener(this);
     this.callDetailsHeaderListener = callDetailsHeaderListener;
     Logger.get(context)
         .logQuickContactOnTouch(
@@ -210,6 +216,19 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     } else {
       throw Assert.createIllegalStateFailException("View OnClickListener not implemented: " + view);
     }
+  }
+
+  @Override
+  public boolean onLongClick(View view) {
+    if (view == callbackButton) {
+      Intent intent = AccountSelectionActivity.createIntent(view.getContext(),
+          contact.getNumber(), CallInitiationType.Type.CALL_DETAILS);
+      if (intent != null) {
+        DialerUtils.startActivityWithErrorToast(view.getContext(), intent);
+        return true;
+      }
+    }
+    return false;
   }
 
   /** Listener for the call details header */
