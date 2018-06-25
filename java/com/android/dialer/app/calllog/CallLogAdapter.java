@@ -390,7 +390,7 @@ public class CallLogAdapter extends GroupingListAdapter
           if (packageName == null) {
             return false;
           }
-          return packageName.equals(intentProvider.getIntent(mActivity).getPackage());
+          return packageName.equals(intentProvider.getClickIntent(mActivity).getPackage());
         }
       };
 

@@ -24,6 +24,7 @@ import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
+import com.android.dialer.app.AccountSelectionActivity;
 import com.android.dialer.calldetails.CallDetailsActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.callintent.CallInitiationType;
@@ -51,10 +52,16 @@ public abstract class IntentProvider {
       final String number, final PhoneAccountHandle accountHandle) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
             .setPhoneAccountHandle(accountHandle)
             .build();
+      }
+
+      @Override
+      public Intent getLongClickIntent(Context context) {
+        return AccountSelectionActivity.createIntent(context, number,
+            CallInitiationType.Type.CALL_LOG);
       }
     };
   }
@@ -67,7 +74,7 @@ public abstract class IntentProvider {
       final String number, final PhoneAccountHandle accountHandle) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
             .setPhoneAccountHandle(accountHandle)
             .setIsVideoCall(true)
@@ -79,7 +86,7 @@ public abstract class IntentProvider {
   public static IntentProvider getLightbringerIntentProvider(String number) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return LightbringerComponent.get(context).getLightbringer().getIntent(context, number);
       }
     };
@@ -88,7 +95,7 @@ public abstract class IntentProvider {
   public static IntentProvider getReturnVoicemailCallIntentProvider() {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return new CallIntentBuilder(CallUtil.getVoicemailUri(), CallInitiationType.Type.CALL_LOG)
             .build();
       }
@@ -98,7 +105,7 @@ public abstract class IntentProvider {
   public static IntentProvider getSendSmsIntentProvider(final String number) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return IntentUtil.getSendSmsIntent(number);
       }
     };
@@ -115,7 +122,7 @@ public abstract class IntentProvider {
       CallDetailsEntries callDetailsEntries, DialerContact contact, boolean canReportCallerId) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         return CallDetailsActivity.newInstance(
             context, callDetailsEntries, contact, canReportCallerId);
       }
@@ -131,7 +138,7 @@ public abstract class IntentProvider {
       final boolean isNewContact) {
     return new IntentProvider() {
       @Override
-      public Intent getIntent(Context context) {
+      public Intent getClickIntent(Context context) {
         Contact contactToSave = null;
 
         if (lookupUri != null) {
@@ -192,5 +199,8 @@ public abstract class IntentProvider {
     };
   }
 
-  public abstract Intent getIntent(Context context);
+  public abstract Intent getClickIntent(Context context);
+  public Intent getLongClickIntent(Context context) {
+    return null;
+  }
 }
