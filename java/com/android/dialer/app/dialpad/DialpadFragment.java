@@ -47,6 +47,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
@@ -60,6 +61,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -177,6 +179,8 @@ public class DialpadFragment extends Fragment
   private boolean mStartedFromNewIntent = false;
   private boolean mFirstLaunch = false;
   private boolean mAnimate = false;
+
+  private PhoneAccountHandle mSelectedAccount;
 
   /**
    * Determines whether an add call operation is requested.
@@ -883,6 +887,37 @@ public class DialpadFragment extends Fragment
                 item.setVisible(CallUtil.isCallWithSubjectSupported(getContext()));
               }
             }
+
+            final MenuItem callWithItem = menu.findItem(R.id.call_with);
+            List<PhoneAccount> accounts =
+                CallUtil.getCallCapablePhoneAccounts(getContext(), PhoneAccount.SCHEME_TEL);
+            if (accounts != null && accounts.size() > 1) {
+              final PhoneAccountHandle selected;
+              if (mSelectedAccount != null) {
+                selected = mSelectedAccount;
+              } else {
+                selected = TelecomUtil.getDefaultOutgoingPhoneAccount(getContext(),
+                    PhoneAccount.SCHEME_TEL);
+              }
+
+              SubMenu callWithMenu = callWithItem.getSubMenu();
+              callWithMenu.clear();
+
+              for (PhoneAccount account : accounts) {
+                final PhoneAccountHandle handle = account.getAccountHandle();
+                final Intent intent = new Intent()
+                    .putExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, handle);
+
+                callWithMenu.add(Menu.FIRST, Menu.NONE, Menu.NONE, account.getLabel())
+                    .setIntent(intent)
+                    .setChecked(handle.equals(selected));
+              }
+              callWithMenu.setGroupCheckable(Menu.FIRST, true, true);
+              callWithItem.setVisible(callWithMenu.hasVisibleItems());
+            } else {
+              callWithItem.setVisible(false);
+            }
+
             super.show();
           }
         };
@@ -1042,8 +1077,9 @@ public class DialpadFragment extends Fragment
         // Clear the digits just in case.
         clearDialpad();
       } else {
-        final Intent intent =
-            new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD).build();
+        final Intent intent = new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD)
+            .setPhoneAccountHandle(mSelectedAccount)
+            .build();
         DialerUtils.startActivityWithErrorToast(getActivity(), intent);
         hideAndClearDialpad(false);
       }
@@ -1054,6 +1090,7 @@ public class DialpadFragment extends Fragment
     if (mDigits != null) {
       mDigits.getText().clear();
     }
+    mSelectedAccount = null;
   }
 
   private void handleDialButtonClickWithEmptyDigits() {
@@ -1282,6 +1319,11 @@ public class DialpadFragment extends Fragment
 
   @Override
   public boolean onMenuItemClick(MenuItem item) {
+    if (item.getGroupId() == Menu.FIRST) {
+      Intent intent = item.getIntent();
+      mSelectedAccount = intent.getParcelableExtra(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE);
+      return true;
+    }
     int resId = item.getItemId();
     if (resId == R.id.menu_2s_pause) {
       updateDialString(PAUSE);
