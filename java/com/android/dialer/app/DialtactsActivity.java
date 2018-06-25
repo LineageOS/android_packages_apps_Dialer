@@ -799,9 +799,10 @@ public class DialtactsActivity extends TransactionSafeActivity
         String number = data.getStringExtra(CallDetailsActivity.EXTRA_PHONE_NUMBER);
         int snackbarDurationMillis = 5_000;
         Snackbar.make(mParentLayout, getString(R.string.ec_data_deleted), snackbarDurationMillis)
-            .setAction(
-                R.string.view_conversation,
-                v -> startActivity(IntentProvider.getSendSmsIntentProvider(number).getIntent(this)))
+            .setAction(R.string.view_conversation, v -> {
+                IntentProvider provider = IntentProvider.getSendSmsIntentProvider(number);
+                startActivity(provider.getClickIntent(this));
+            })
             .setActionTextColor(getResources().getColor(R.color.dialer_snackbar_action_text_color))
             .show();
       }
