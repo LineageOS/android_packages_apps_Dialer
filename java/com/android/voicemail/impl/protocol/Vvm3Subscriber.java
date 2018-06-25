@@ -210,6 +210,7 @@ public class Vvm3Subscriber {
       clickSubscribeLink(subscribeLink);
     } catch (ProvisioningException e) {
       VvmLog.e(TAG, e.toString());
+      helper.handleEvent(status, OmtpEvents.CONFIG_SERVICE_NOT_AVAILABLE);
       task.fail();
     }
   }
