@@ -492,9 +492,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
                 snackbarDurationMillis)
             .setAction(
                 R.string.view_conversation,
-                v ->
-                    mainActivity.startActivity(
-                        IntentProvider.getSendSmsIntentProvider(number).getIntent(mainActivity)))
+                v -> mainActivity.startActivity(
+                    IntentProvider.getSendSmsIntentProvider(number).getClickIntent(mainActivity)))
             .setActionTextColor(
                 ContextCompat.getColor(mainActivity, R.color.dialer_snackbar_action_text_color))
             .show();
