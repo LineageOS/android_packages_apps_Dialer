@@ -23,6 +23,16 @@
     <item name="android:textColorPrimary">?android:attr/textColorPrimaryInverse</item>
   </style>
 
+  <style name="TransparentTheme" parent="DialtactsTheme">
+    <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsFloating">true</item>
+  </style>
+
   <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
     <item name="android:background">?android:attr/colorPrimary</item>
     <item name="background">?android:attr/colorPrimary</item>
