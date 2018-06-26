@@ -128,7 +128,8 @@ final class ContactsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             LetterTileDrawable.TYPE_DEFAULT);
 
     String photoDescription =
-        context.getString(com.android.contacts.common.R.string.description_quick_contact_for, name);
+        context.getString(
+            com.android.dialer.contactphoto.R.string.description_quick_contact_for, name);
     contactViewHolder.getPhoto().setContentDescription(photoDescription);
 
     // Always show the view holder's header if it's the first item in the list. Otherwise, compare

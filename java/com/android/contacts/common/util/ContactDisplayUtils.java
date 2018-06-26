@@ -27,8 +27,8 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.Patterns;
-import com.android.contacts.common.R;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.contacts.resources.R;
 import java.util.Objects;
 
 /** Methods for handling various contact data labels. */
