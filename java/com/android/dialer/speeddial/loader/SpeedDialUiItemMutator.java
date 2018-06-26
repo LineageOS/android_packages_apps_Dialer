@@ -31,13 +31,14 @@ import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.util.ArrayMap;
 import android.util.ArraySet;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
@@ -84,15 +85,16 @@ public final class SpeedDialUiItemMutator {
   private final ListeningExecutorService backgroundExecutor;
   // Used to ensure that only one refresh flow runs at a time.
   private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
-  private final ContactsPreferences contactsPreferences;
+  private final ContactDisplayPreferences contactDisplayPreferences;
 
   @Inject
   public SpeedDialUiItemMutator(
       @ApplicationContext Context appContext,
-      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor,
+      ContactDisplayPreferences contactDisplayPreferences) {
     this.appContext = appContext;
     this.backgroundExecutor = backgroundExecutor;
-    this.contactsPreferences = new ContactsPreferences(appContext);
+    this.contactDisplayPreferences = contactDisplayPreferences;
   }
 
   /**
@@ -183,7 +185,6 @@ public final class SpeedDialUiItemMutator {
   @WorkerThread
   private ImmutableList<SpeedDialUiItem> insertNewContactEntry(Uri contactUri) {
     Assert.isWorkerThread();
-    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     try (Cursor cursor =
         appContext
             .getContentResolver()
@@ -225,7 +226,6 @@ public final class SpeedDialUiItemMutator {
   private ImmutableList<SpeedDialUiItem> loadSpeedDialUiItemsInternal() {
     Trace.beginSection("loadSpeedDialUiItemsInternal");
     Assert.isWorkerThread();
-    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     Trace.beginSection("getAllEntries");
     SpeedDialEntryDao db = getSpeedDialEntryDao();
     Trace.endSection(); // getAllEntries
@@ -663,6 +663,6 @@ public final class SpeedDialUiItemMutator {
   }
 
   private boolean isPrimaryDisplayNameOrder() {
-    return contactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY;
+    return contactDisplayPreferences.getDisplayOrder() == DisplayOrder.PRIMARY;
   }
 }

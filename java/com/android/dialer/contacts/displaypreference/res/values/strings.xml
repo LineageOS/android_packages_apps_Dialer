@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Contact preferences related strings -->
+
+  <!-- Label of the "sort by" display option -->
+  <string name="display_options_sort_list_by">Sort by</string>
+
+  <string translatable="false" name="display_options_sort_list_by_key">android.contacts.SORT_ORDER</string>
+
+  <!-- An allowable value for the "sort list by" contact display option  -->
+  <string name="display_options_sort_by_given_name">First name</string>
+
+  <string translatable="false" name="display_options_sort_by_given_name_value">sort_by_given_name</string>
+
+  <!-- An allowable value for the "sort list by" contact display option  -->
+  <string name="display_options_sort_by_family_name">Last name</string>
+
+  <string translatable="false" name="display_options_sort_by_family_name_value">sort_by_family_name</string>
+
+  <!-- Label of the "name format" display option [CHAR LIMIT=64]-->
+  <string name="display_options_view_names_as">Name format</string>
+  <string translatable="false" name="display_options_view_names_as_key">android.contacts.DISPLAY_ORDER</string>
+
+  <!-- An allowable value for the "view names as" contact display option  -->
+  <string name="display_options_view_given_name_first">First name first</string>
+
+  <string translatable="false" name="display_options_view_given_name_first_value">view_given_name_first</string>
+
+  <!-- An allowable value for the "view names as" contact display option  -->
+  <string name="display_options_view_family_name_first">Last name first</string>
+
+  <string translatable="false" name="display_options_view_family_name_first_value">view_family_name_first</string>
+</resources>

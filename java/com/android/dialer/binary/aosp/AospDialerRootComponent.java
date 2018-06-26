@@ -24,6 +24,7 @@ import com.android.dialer.calllog.config.CallLogConfigModule;
 import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
+import com.android.dialer.contacts.ContactsModule;
 import com.android.dialer.duo.stub.StubDuoModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.feedback.stub.StubFeedbackModule;
@@ -57,6 +58,7 @@ import javax.inject.Singleton;
       CallLogModule.class,
       CallLogConfigModule.class,
       CommandLineModule.class,
+      ContactsModule.class,
       ContextModule.class,
       DialerExecutorModule.class,
       GlidePhotoManagerModule.class,
