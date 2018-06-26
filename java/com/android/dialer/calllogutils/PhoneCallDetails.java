@@ -25,8 +25,8 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.phonenumbercache.ContactInfo;
 
@@ -65,7 +65,7 @@ public class PhoneCallDetails {
    * The user's preference on name display order, last name first or first time first. {@see
    * ContactsPreferences}
    */
-  public int nameDisplayOrder;
+  public DisplayOrder nameDisplayOrder;
   // The type of phone, e.g., {@link Phone#TYPE_HOME}, 0 if not available.
   public int numberType;
   // The custom label associated with the phone number in the contact, or the empty string.
@@ -183,8 +183,7 @@ public class PhoneCallDetails {
    * @return the preferred name
    */
   public CharSequence getPreferredName() {
-    if (nameDisplayOrder == ContactsPreferences.DISPLAY_ORDER_PRIMARY
-        || TextUtils.isEmpty(nameAlternative)) {
+    if (nameDisplayOrder == DisplayOrder.PRIMARY || TextUtils.isEmpty(nameAlternative)) {
       return namePrimary;
     }
     return nameAlternative;

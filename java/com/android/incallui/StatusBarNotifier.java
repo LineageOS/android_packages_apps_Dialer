@@ -64,12 +64,11 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
-import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contactphoto.BitmapUtil;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lettertile.LetterTileDrawable;
@@ -121,7 +120,6 @@ public class StatusBarNotifier
   private final Context context;
   private final ContactInfoCache contactInfoCache;
   private final DialerRingtoneManager dialerRingtoneManager;
-  @Nullable private ContactsPreferences contactsPreferences;
   private int currentNotification = NOTIFICATION_NONE;
   private int callState = DialerCallState.INVALID;
   private int videoState = VideoProfile.STATE_AUDIO_ONLY;
@@ -136,7 +134,6 @@ public class StatusBarNotifier
   public StatusBarNotifier(@NonNull Context context, @NonNull ContactInfoCache contactInfoCache) {
     Trace.beginSection("StatusBarNotifier.Constructor");
     this.context = Assert.isNotNull(context);
-    contactsPreferences = ContactsPreferencesFactory.newContactsPreferences(this.context);
     this.contactInfoCache = contactInfoCache;
     dialerRingtoneManager =
         new DialerRingtoneManager(
@@ -565,8 +562,9 @@ public class StatusBarNotifier
     }
 
     String preferredName =
-        ContactDisplayUtils.getPreferredDisplayName(
-            contactInfo.namePrimary, contactInfo.nameAlternative, contactsPreferences);
+        ContactsComponent.get(context)
+            .contactDisplayPreferences()
+            .getDisplayName(contactInfo.namePrimary, contactInfo.nameAlternative);
     if (TextUtils.isEmpty(preferredName)) {
       return TextUtils.isEmpty(contactInfo.number)
           ? null

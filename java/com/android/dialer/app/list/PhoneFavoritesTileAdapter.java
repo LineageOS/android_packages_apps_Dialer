@@ -37,10 +37,10 @@ import android.widget.BaseAdapter;
 import com.android.contacts.common.ContactTileLoaderFactory;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.contacts.common.list.ContactTileView;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.app.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.InteractionEvent;
@@ -78,11 +78,11 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   private OnDataSetChangedForAnimationListener dataSetChangedListener;
   private Context context;
   private Resources resources;
-  private ContactsPreferences contactsPreferences;
   private final Comparator<ContactEntry> contactEntryComparator =
       new Comparator<ContactEntry>() {
         @Override
         public int compare(ContactEntry lhs, ContactEntry rhs) {
+
           return ComparisonChain.start()
               .compare(lhs.pinned, rhs.pinned)
               .compare(getPreferredSortName(lhs), getPreferredSortName(rhs))
@@ -90,11 +90,9 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
         }
 
         private String getPreferredSortName(ContactEntry contactEntry) {
-          if (contactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY
-              || TextUtils.isEmpty(contactEntry.nameAlternative)) {
-            return contactEntry.namePrimary;
-          }
-          return contactEntry.nameAlternative;
+          return ContactsComponent.get(context)
+              .contactDisplayPreferences()
+              .getSortName(contactEntry.namePrimary, contactEntry.nameAlternative);
         }
       };
   /** Back up of the temporarily removed Contact during dragging. */
@@ -121,7 +119,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     this.listener = listener;
     this.context = context;
     resources = context.getResources();
-    contactsPreferences = new ContactsPreferences(this.context);
     numFrequents = 0;
     contactEntries = new ArrayList<>();
   }
@@ -138,11 +135,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
   private void setInDragging(boolean inDragging) {
     delayCursorUpdates = inDragging;
     this.inDragging = inDragging;
-  }
-
-  void refreshContactsPreferences() {
-    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-    contactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
   }
 
   /**
@@ -256,7 +248,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
             (!TextUtils.isEmpty(nameAlternative))
                 ? nameAlternative
                 : resources.getString(R.string.missing_name);
-        contact.nameDisplayOrder = contactsPreferences.getDisplayOrder();
         contact.photoUri = (photoUri != null ? Uri.parse(photoUri) : null);
         contact.lookupKey = lookupKey;
         contact.lookupUri =

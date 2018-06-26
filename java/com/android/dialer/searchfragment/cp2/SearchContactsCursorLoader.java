@@ -27,8 +27,10 @@ import android.provider.ContactsContract.Directory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.contacts.ContactsComponent;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.SortOrder;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.smartdial.SmartDialCursorLoader;
@@ -55,9 +57,9 @@ public final class SearchContactsCursorLoader extends CursorLoader {
   }
 
   private static String[] getProjection(Context context) {
-    ContactsPreferences contactsPrefs = new ContactsPreferences(context);
     boolean displayOrderPrimary =
-        (contactsPrefs.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY);
+        (ContactsComponent.get(context).contactDisplayPreferences().getDisplayOrder()
+            == DisplayOrder.PRIMARY);
     return displayOrderPrimary
         ? Projections.CP2_PROJECTION
         : Projections.CP2_PROJECTION_ALTERNATIVE;
@@ -70,9 +72,9 @@ public final class SearchContactsCursorLoader extends CursorLoader {
   }
 
   private static String getSortKey(Context context) {
-    ContactsPreferences contactsPrefs = new ContactsPreferences(context);
     boolean sortOrderPrimary =
-        (contactsPrefs.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY);
+        (ContactsComponent.get(context).contactDisplayPreferences().getSortOrder()
+            == SortOrder.BY_PRIMARY);
     return sortOrderPrimary ? Phone.SORT_KEY_PRIMARY : Phone.SORT_KEY_ALTERNATIVE;
   }
 

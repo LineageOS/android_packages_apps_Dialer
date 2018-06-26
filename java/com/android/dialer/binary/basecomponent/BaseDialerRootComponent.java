@@ -25,6 +25,7 @@ import com.android.dialer.calllog.ui.CallLogUiComponent;
 import com.android.dialer.commandline.CommandLineComponent;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.configprovider.ConfigProviderComponent;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.feedback.FeedbackComponent;
@@ -62,6 +63,7 @@ public interface BaseDialerRootComponent
         CallLogUiComponent.HasComponent,
         ConfigProviderComponent.HasComponent,
         CommandLineComponent.HasComponent,
+        ContactsComponent.HasComponent,
         DialerExecutorComponent.HasComponent,
         DuoComponent.HasComponent,
         EnrichedCallComponent.HasComponent,
