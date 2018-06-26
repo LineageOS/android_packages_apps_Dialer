@@ -49,6 +49,7 @@ public class LocationHelper {
   public static final int LOCATION_STATUS_STALE = 2;
   public static final int LOCATION_STATUS_INACCURATE = 3;
   public static final int LOCATION_STATUS_NO_LOCATION = 4;
+  public static final int LOCATION_STATUS_MOCK = 5;
 
   /** Possible return values for {@code checkLocation()} */
   @IntDef({
@@ -56,7 +57,8 @@ public class LocationHelper {
     LOCATION_STATUS_OK,
     LOCATION_STATUS_STALE,
     LOCATION_STATUS_INACCURATE,
-    LOCATION_STATUS_NO_LOCATION
+    LOCATION_STATUS_NO_LOCATION,
+    LOCATION_STATUS_MOCK
   })
   @Retention(RetentionPolicy.SOURCE)
   public @interface LocationStatus {}
@@ -116,6 +118,11 @@ public class LocationHelper {
     if (location.getAccuracy() > LOCATION_ACCURACY_THRESHOLD_METERS) {
       LogUtil.i("LocationHelper.checkLocation", "poor accuracy: " + location.getAccuracy());
       return LOCATION_STATUS_INACCURATE;
+    }
+
+    if (location.isFromMockProvider()) {
+      LogUtil.i("LocationHelper.checkLocation", "from mock provider");
+      return LOCATION_STATUS_MOCK;
     }
 
     return LOCATION_STATUS_OK;

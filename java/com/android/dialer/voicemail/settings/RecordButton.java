@@ -18,10 +18,12 @@ package com.android.dialer.voicemail.settings;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.Button;
@@ -94,11 +96,23 @@ public class RecordButton extends Button {
     recordedDrawable = ContextCompat.getDrawable(getContext(), R.drawable.start_playback_drawable);
     playingDrawable = ContextCompat.getDrawable(getContext(), R.drawable.stop_playback_drawable);
 
+    fixQuantumIconTint(Color.WHITE);
+
     mainTrackPaint = getBasePaint(R.color.dialer_call_green);
     secondaryTrackPaint = getBasePaint(R.color.dialer_call_green);
     secondaryTrackPaint.setAlpha(secondaryTrackAlpha);
 
     setState(RecordVoicemailGreetingActivity.RECORD_GREETING_INIT);
+  }
+
+  private void fixQuantumIconTint(int color) {
+    Drawable playArrow = ((LayerDrawable) recordedDrawable).findDrawableByLayerId(R.id.play_icon);
+    playArrow.mutate().setTint(color);
+    ((LayerDrawable) recordedDrawable).setDrawableByLayerId(R.id.play_icon, playArrow);
+
+    Drawable micIcon = ((LayerDrawable) readyDrawable).findDrawableByLayerId(R.id.record_icon);
+    micIcon.mutate().setTint(color);
+    ((LayerDrawable) readyDrawable).setDrawableByLayerId(R.id.record_icon, micIcon);
   }
 
   /** Returns Paint with base attributes for drawing the main and secondary tracks */
