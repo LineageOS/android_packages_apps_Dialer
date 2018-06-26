@@ -469,6 +469,8 @@ public class CallCardPresenter
                   .setSessionModificationState(primary.getVideoTech().getSessionModificationState())
                   .setDisconnectCause(primary.getDisconnectCause())
                   .setConnectionLabel(getConnectionLabel())
+                  .setPrimaryColor(
+                      InCallPresenter.getInstance().getThemeColorManager().getPrimaryColor())
                   .setSimSuggestionReason(getSimSuggestionReason())
                   .setConnectionIcon(getCallStateIcon())
                   .setGatewayNumber(getGatewayNumber())

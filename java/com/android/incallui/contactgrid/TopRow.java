@@ -21,8 +21,12 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.state.DialerCallState;
@@ -141,13 +145,28 @@ public class TopRow {
     } else if (state.isWifi() && !TextUtils.isEmpty(state.connectionLabel())) {
       return state.connectionLabel();
     } else if (isAccount(state)) {
-      return context.getString(
-          R.string.contact_grid_incoming_via_template, state.connectionLabel());
+      return getColoredConnectionLabel(context, state);
     } else if (state.isWorkCall()) {
       return context.getString(R.string.contact_grid_incoming_work_call);
     } else {
       return context.getString(R.string.contact_grid_incoming_voice_call);
     }
+  }
+
+  private static Spannable getColoredConnectionLabel(Context context, PrimaryCallState state) {
+    Assert.isNotNull(state.connectionLabel());
+    String label =
+        context.getString(R.string.contact_grid_incoming_via_template, state.connectionLabel());
+    Spannable spannable = new SpannableString(label);
+
+    int start = label.indexOf(state.connectionLabel());
+    int end = start + state.connectionLabel().length();
+    spannable.setSpan(
+        new ForegroundColorSpan(state.primaryColor()),
+        start,
+        end,
+        Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+    return spannable;
   }
 
   private static CharSequence getLabelForIncomingVideo(
