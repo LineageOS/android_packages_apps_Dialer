@@ -19,20 +19,19 @@ package com.android.incallui.speakeasy;
 import android.content.Context;
 import android.preference.PreferenceActivity;
 import com.android.dialer.inject.HasRootComponent;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyIconResourceId;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsActivity;
 import com.android.incallui.speakeasy.Annotations.SpeakEasySettingsObject;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyTextResourceId;
-import com.google.common.base.Optional;
 import dagger.Subcomponent;
+import java.util.Optional;
 
 /** Dagger component to get SpeakEasyCallManager. */
 @Subcomponent
 public abstract class SpeakEasyComponent {
 
   public static SpeakEasyComponent get(Context context) {
-    return ((SpeakEasyComponent.HasComponent)
-            ((HasRootComponent) context.getApplicationContext()).component())
+    return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .speakEasyComponent();
   }
 
@@ -43,7 +42,7 @@ public abstract class SpeakEasyComponent {
 
   public abstract @SpeakEasySettingsObject Optional<Object> speakEasySettingsObject();
 
-  public abstract @SpeakEasyChipResourceId Optional<Integer> speakEasyChip();
+  public abstract @SpeakEasyIconResourceId Optional<Integer> speakEasyIconResource();
 
   public abstract @SpeakEasyTextResourceId Optional<Integer> speakEasyTextResource();
 
