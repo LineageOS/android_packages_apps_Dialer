@@ -18,7 +18,6 @@ package com.android.dialer.assisteddialing;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.os.UserManagerCompat;
@@ -36,8 +35,9 @@ import com.android.dialer.strictmode.StrictModeUtils;
  */
 public final class ConcreteCreator {
 
-  // Ceiling set at P because this feature will ship as part of the framework in Q.
-  public static final int BUILD_CODE_CEILING = VERSION_CODES.P;
+  // Ceiling set at P (version code 28) because this feature will ship as part of the framework in
+  // Q.
+  public static final int BUILD_CODE_CEILING = 28;
 
   /**
    * Creates a new AssistedDialingMediator
