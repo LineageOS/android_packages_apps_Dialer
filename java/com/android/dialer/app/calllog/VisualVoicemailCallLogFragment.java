@@ -127,6 +127,12 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   public void onPause() {
     voicemailPlaybackPresenter.onPause();
     voicemailErrorManager.onPause();
+    // Necessary to reset the speaker when leaving otherwise the platform will still remain in
+    // speaker mode
+    AudioManager audioManager = getContext().getSystemService(AudioManager.class);
+    if (audioManager.isSpeakerphoneOn()) {
+      audioManager.setSpeakerphoneOn(false);
+    }
     super.onPause();
   }
 

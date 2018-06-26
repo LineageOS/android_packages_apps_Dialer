@@ -424,7 +424,10 @@ public class MainSearchController implements SearchBarListener {
 
     searchFragment.setQuery(
         query.isPresent() ? query.get() : "", CallInitiationType.Type.REGULAR_SEARCH);
-    transaction.commit();
+
+    if (activity.isSafeToCommitTransactions()) {
+      transaction.commit();
+    }
 
     notifyListenersOnSearchOpen();
   }

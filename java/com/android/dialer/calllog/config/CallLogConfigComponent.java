@@ -17,6 +17,7 @@ package com.android.dialer.calllog.config;
 
 import android.content.Context;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Dagger component for the call log config. */
@@ -31,6 +32,7 @@ public abstract class CallLogConfigComponent {
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     CallLogConfigComponent callLogConfigComponent();
   }

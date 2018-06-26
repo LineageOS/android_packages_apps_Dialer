@@ -17,6 +17,7 @@
 package com.android.dialer.theme.base;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.StyleRes;
@@ -49,6 +50,8 @@ public interface Theme {
 
   @ColorInt
   int getColorIcon();
+
+  ColorStateList getColorIconStateList();
 
   @ColorInt
   int getColorIconSecondary();
