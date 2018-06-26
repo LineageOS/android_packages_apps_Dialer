@@ -18,19 +18,25 @@ package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.view.ActionProvider;
+import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** Implements the top level simulator menu. */
-public final class SimulatorMainPortal {
+public class SimulatorMainPortal {
 
   private final Context context;
   private final AppCompatActivity activity;
-  private SimulatorPortalEntryGroup simulatorMainPortal;
+  private SimulatorPortalEntryGroup simulatorPortalEntryGroup;
+  private String callerId = "";
+  private int presentation = TelecomManager.PRESENTATION_ALLOWED;
+  private int missedCallNum = 1;
 
   public SimulatorMainPortal(AppCompatActivity activity) {
     this.activity = activity;
@@ -38,8 +44,50 @@ public final class SimulatorMainPortal {
     buildMainPortal();
   }
 
+  public SimulatorMainPortal(Context context) {
+    this.activity = null;
+    this.context = context;
+    buildMainPortal();
+  }
+
+  public void setCallerId(String callerId) {
+    this.callerId = callerId;
+  }
+
+  public void setPresentation(int presentation) {
+    this.presentation = presentation;
+  }
+
+  public void setMissedCallNum(int missedCallNum) {
+    this.missedCallNum = missedCallNum;
+  }
+
+  /**
+   * Executes commands sent to this portal.
+   *
+   * @param commands a string array that stores commands that trigger runnable methods stored in the
+   *     portal. For example: ["VoiceCall", "Incoming Call"] triggers "() -> new
+   *     SimulatorVoiceCall(context).addNewIncomingCall()" runnable method.
+   */
+  public void execute(String[] commands) {
+    @SuppressWarnings("unused")
+    ListenableFuture<?> executeCommand =
+        DialerExecutorComponent.get(context)
+            .backgroundExecutor()
+            .submit(() -> execute(simulatorPortalEntryGroup, commands, 0));
+  }
+
+  private void execute(
+      SimulatorPortalEntryGroup simulatorPortalEntryGroup, String[] commands, int index) {
+    if (simulatorPortalEntryGroup.methods().containsKey(commands[index])) {
+      simulatorPortalEntryGroup.methods().get(commands[index]).run();
+    } else if (simulatorPortalEntryGroup.subPortals().containsKey(commands[index])) {
+      execute(simulatorPortalEntryGroup.subPortals().get(commands[index]), commands, index + 1);
+    }
+  }
+
   private void buildMainPortal() {
-    this.simulatorMainPortal =
+    simulatorPortalEntryGroup =
         SimulatorPortalEntryGroup.builder()
             .setMethods(
                 ImmutableMap.<String, Runnable>builder()
@@ -92,11 +140,25 @@ public final class SimulatorMainPortal {
                 .put("Incoming call", () -> new SimulatorVoiceCall(context).addNewIncomingCall())
                 .put("Outgoing call", () -> new SimulatorVoiceCall(context).addNewOutgoingCall())
                 .put(
+                    "Customized incoming call (Dialog)",
+                    () ->
+                        new SimulatorVoiceCall(context)
+                            .addCustomizedIncomingCallWithDialog(activity))
+                .put(
+                    "Customized outgoing call (Dialog)",
+                    () ->
+                        new SimulatorVoiceCall(context)
+                            .addCustomizedOutgoingCallWithDialog(activity))
+                .put(
                     "Customized incoming call",
-                    () -> new SimulatorVoiceCall(context).addNewIncomingCall(activity))
+                    () ->
+                        new SimulatorVoiceCall(context)
+                            .addCustomizedIncomingCall(this.callerId, this.presentation))
                 .put(
                     "Customized outgoing call",
-                    () -> new SimulatorVoiceCall(context).addNewOutgoingCall(activity))
+                    () ->
+                        new SimulatorVoiceCall(context)
+                            .addCustomizedOutgoingCall(this.callerId, this.presentation))
                 .put(
                     "Incoming enriched call",
                     () -> new SimulatorVoiceCall(context).incomingEnrichedCall())
@@ -173,9 +235,7 @@ public final class SimulatorMainPortal {
                             .start(SimulatorUtils.NOTIFICATION_COUNT))
                 .put(
                     "Missed calls (few)",
-                    () ->
-                        new SimulatorMissedCallCreator(context)
-                            .start(SimulatorUtils.NOTIFICATION_COUNT_FEW))
+                    () -> new SimulatorMissedCallCreator(context).start(missedCallNum))
                 .put(
                     "Voicemails",
                     () ->
@@ -186,6 +246,6 @@ public final class SimulatorMainPortal {
   }
 
   public ActionProvider getActionProvider() {
-    return new SimulatorMenu(context, simulatorMainPortal);
+    return new SimulatorMenu(context, simulatorPortalEntryGroup);
   }
 }
