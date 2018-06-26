@@ -17,9 +17,9 @@
 package com.android.contacts.common.model.account;
 
 import android.content.Context;
-import android.util.Log;
-import com.android.contacts.common.R;
 import com.android.contacts.common.model.dataitem.DataKind;
+import com.android.dialer.common.LogUtil;
+import com.android.dialer.contacts.resources.R;
 
 public class FallbackAccountType extends BaseAccountType {
 
@@ -53,7 +53,7 @@ public class FallbackAccountType extends BaseAccountType {
 
       mIsInitialized = true;
     } catch (DefinitionException e) {
-      Log.e(TAG, "Problem building account type", e);
+      LogUtil.e(TAG, "Problem building account type", e);
     }
   }
 

@@ -1293,6 +1293,16 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             : CallList.getInstance().getActiveCall();
 
     if (call == null) {
+      // This is a special case where the first call is not automatically resumed
+      // after the second active call is remotely disconnected.
+      DialerCall backgroundCall = CallList.getInstance().getBackgroundCall();
+      if (backgroundCall != null && backgroundCall.isSpeakEasyCall()) {
+        LogUtil.i("InCallActivity.getShouldShowSpeakEasyUi", "taking call off hold");
+
+        backgroundCall.unhold();
+        return new ShouldShowUiResult(true, backgroundCall);
+      }
+
       return new ShouldShowUiResult(false, call);
     }
 
