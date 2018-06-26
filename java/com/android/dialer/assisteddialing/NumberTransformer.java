@@ -16,9 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.strictmode.StrictModeUtils;
@@ -33,21 +30,9 @@ final class NumberTransformer {
   private final PhoneNumberUtil phoneNumberUtil;
   private final Constraints constraints;
 
-  public NumberTransformer(Constraints constraints) {
+  NumberTransformer(Constraints constraints) {
     this.constraints = constraints;
-    this.phoneNumberUtil = StrictModeUtils.bypass(() -> PhoneNumberUtil.getInstance());
-  }
-
-  /**
-   * Returns a boolean for callers to quickly determine whether or not the AssistedDialingMediator
-   * thinks an attempt at assisted dialing is likely to succeed.
-   */
-  public boolean canDoAssistedDialingTransformation(
-      @NonNull String numberToCheck,
-      @NonNull String userHomeCountryCode,
-      @NonNull String userRoamingCountryCode) {
-    return constraints.meetsPreconditions(
-        numberToCheck, userHomeCountryCode, userRoamingCountryCode);
+    this.phoneNumberUtil = StrictModeUtils.bypass(PhoneNumberUtil::getInstance);
   }
 
   /**
@@ -57,9 +42,7 @@ final class NumberTransformer {
    * transformation fails, we return an empty optional. The operation can be considered a success
    * when the Optional we return has a value set.
    */
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<TransformationInfo> doAssistedDialingTransformation(
+  Optional<TransformationInfo> doAssistedDialingTransformation(
       String numbertoTransform, String userHomeCountryCode, String userRoamingCountryCode) {
 
     if (!constraints.meetsPreconditions(

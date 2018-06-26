@@ -16,8 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
@@ -36,7 +34,7 @@ final class LocationDetector {
   private final TelephonyManager telephonyManager;
   private final String userProvidedHomeCountry;
 
-  public LocationDetector(
+  LocationDetector(
       @NonNull TelephonyManager telephonyManager, @Nullable String userProvidedHomeCountry) {
     if (telephonyManager == null) {
       throw new NullPointerException("Provided TelephonyManager was null");
@@ -53,9 +51,7 @@ final class LocationDetector {
    * Returns what we believe to be the User's home country. This should resolve to
    * PROPERTY_ICC_OPERATOR_ISO_COUNTRY
    */
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<String> getUpperCaseUserHomeCountry() {
+  Optional<String> getUpperCaseUserHomeCountry() {
 
     if (!TextUtils.isEmpty(userProvidedHomeCountry)) {
       LogUtil.i(
@@ -73,9 +69,7 @@ final class LocationDetector {
   }
 
   /** Returns what we believe to be the User's current (roaming) country */
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<String> getUpperCaseUserRoamingCountry() {
+  Optional<String> getUpperCaseUserRoamingCountry() {
     // TODO Increase coverage of location resolution??
     String networkCountryIso = telephonyManager.getNetworkCountryIso();
     if (networkCountryIso != null) {

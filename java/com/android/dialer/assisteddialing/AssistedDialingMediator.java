@@ -16,8 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import java.util.Optional;
 
@@ -25,14 +23,10 @@ import java.util.Optional;
 public interface AssistedDialingMediator {
 
   /** Returns {@code true} if the current client platform supports Assisted Dialing. */
-  public boolean isPlatformEligible();
+  boolean isPlatformEligible();
 
   /** Returns the country code in which the library thinks the user typically resides. */
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<String> userHomeCountryCode();
+  Optional<String> userHomeCountryCode();
 
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
-  public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);
+  Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform);
 }

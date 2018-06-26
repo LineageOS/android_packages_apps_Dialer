@@ -16,13 +16,11 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.LogUtil;
@@ -36,13 +34,10 @@ import com.android.dialer.strictmode.StrictModeUtils;
  * <p>This helps keep the dependencies required by AssistedDialingMediator for assisted dialing
  * explicit.
  */
-@TargetApi(VERSION_CODES.N)
 public final class ConcreteCreator {
 
-  // Floor set at N due to use of Optional.
-  @VisibleForTesting public static final int BUILD_CODE_FLOOR = Build.VERSION_CODES.N;
   // Ceiling set at P because this feature will ship as part of the framework in Q.
-  @VisibleForTesting public static final int BUILD_CODE_CEILING = 28;
+  public static final int BUILD_CODE_CEILING = VERSION_CODES.P;
 
   /**
    * Creates a new AssistedDialingMediator
@@ -105,8 +100,7 @@ public final class ConcreteCreator {
       throw new NullPointerException("Provided configProvider was null");
     }
 
-    return (Build.VERSION.SDK_INT >= BUILD_CODE_FLOOR
-            && Build.VERSION.SDK_INT <= BUILD_CODE_CEILING)
+    return Build.VERSION.SDK_INT <= BUILD_CODE_CEILING
         && configProvider.getBoolean("assisted_dialing_enabled", false);
   }
 
