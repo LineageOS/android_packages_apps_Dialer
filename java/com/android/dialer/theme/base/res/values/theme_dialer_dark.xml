@@ -56,7 +56,7 @@
     <item name="colorControlActivated">?android:attr/colorPrimary</item>
 
     <!-- Dialer specific attributes. -->
-    <item name="colorIcon">@color/google_grey_400</item>
+    <item name="colorIcon">?android:attr/textColorSecondary</item>
     <item name="colorIconSecondary">?android:attr/textColorSecondary</item>
     <item name="colorTextOnUnthemedDarkBackground">@android:color/white</item>
     <item name="colorIconOnUnthemedDarkBackground">@android:color/white</item>

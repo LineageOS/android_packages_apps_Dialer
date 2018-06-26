@@ -17,7 +17,6 @@
 package com.android.incallui.incall.impl;
 
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.ArraySet;
@@ -126,12 +125,6 @@ public class InCallButtonGridFragment extends Fragment {
     }
 
     return numVisibleButtons;
-  }
-
-  public void updateButtonColor(@ColorInt int color) {
-    for (CheckableLabeledButton button : buttons) {
-      button.setCheckedColor(color);
-    }
   }
 
   /** Interface to let the listener know the status of the button grid. */
