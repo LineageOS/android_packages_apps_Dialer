@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -207,6 +208,8 @@ public class VoicemailPlaybackPresenter
       position = savedInstanceState.getInt(CLIP_POSITION_KEY, 0);
       isPlaying = savedInstanceState.getBoolean(IS_PLAYING_STATE_KEY, false);
       isSpeakerphoneOn = savedInstanceState.getBoolean(IS_SPEAKERPHONE_ON_KEY, false);
+      AudioManager audioManager = activity.getSystemService(AudioManager.class);
+      audioManager.setSpeakerphoneOn(isSpeakerphoneOn);
     }
 
     if (mediaPlayer == null) {
