@@ -611,7 +611,7 @@ public class CallComposerActivity extends AppCompatActivity
           TextUtils.isEmpty(contact.getNumberLabel())
               ? contact.getDisplayNumber()
               : getString(
-                  com.android.contacts.common.R.string.call_subject_type_and_number,
+                  com.android.dialer.contacts.resources.R.string.call_subject_type_and_number,
                   contact.getNumberLabel(),
                   contact.getDisplayNumber());
       numberView.setText(secondaryInfo);
