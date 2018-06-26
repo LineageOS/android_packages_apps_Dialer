@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2018 The Android Open Source Project
   ~
@@ -13,10 +14,20 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <!-- Essential theme colors -->
-  <color name="dialer_theme_color">@color/google_blue_600</color>
-  <color name="dialer_theme_color_20pct">#332A56C6</color>
-  <color name="dialer_theme_color_dark">#1C3AA9</color>
-  <color name="dialer_secondary_color">#F50057</color>
-</resources>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/dialer_divider_line_color">
+  <item>
+    <shape>
+      <solid android:color="?android:attr/colorBackgroundFloating"/>
+      <stroke
+          android:width="1dp"
+          android:color="@color/dialer_divider_line_color"/>
+      <padding
+          android:bottom="9dp"
+          android:left="8dp"
+          android:right="8dp"
+          android:top="9dp"/>
+      <corners android:radius="40dp"/>
+    </shape>
+  </item>
+</ripple>
