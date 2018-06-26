@@ -30,6 +30,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.common.concurrent.testing \
 	com.android.dialer.common.preference \
 	com.android.dialer.configprovider \
+	com.android.dialer.contacts.displaypreference \
 	com.android.dialer.contactphoto \
 	com.android.dialer.contactsfragment \
 	com.android.dialer.databasepopulator \

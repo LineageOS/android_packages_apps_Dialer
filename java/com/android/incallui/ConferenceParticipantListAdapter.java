@@ -18,7 +18,6 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
@@ -33,11 +32,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -59,8 +57,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
   private final ListView listView;
   /** Hashmap to make accessing participant info by call Id faster. */
   private final Map<String, ParticipantInfo> participantsByCallId = new ArrayMap<>();
-  /** ContactsPreferences used to lookup displayName preferences */
-  @Nullable private final ContactsPreferences contactsPreferences;
   /** Contact photo manager to retrieve cached contact photo information. */
   private final ContactPhotoManager contactPhotoManager;
   /** Listener used to handle tap of the "disconnect' button for a participant. */
@@ -103,7 +99,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
       ListView listView, ContactPhotoManager contactPhotoManager) {
 
     this.listView = listView;
-    contactsPreferences = ContactsPreferencesFactory.newContactsPreferences(getContext());
     this.contactPhotoManager = contactPhotoManager;
   }
 
@@ -116,10 +111,6 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
    */
   public void updateParticipants(
       List<DialerCall> conferenceParticipants, boolean parentCanSeparate) {
-    if (contactsPreferences != null) {
-      contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-      contactsPreferences.refreshValue(ContactsPreferences.SORT_ORDER_KEY);
-    }
     this.parentCanSeparate = parentCanSeparate;
     updateParticipantInfo(conferenceParticipants);
   }
@@ -235,8 +226,9 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
         call.can(android.telecom.Call.Details.CAPABILITY_DISCONNECT_FROM_CONFERENCE);
 
     String name =
-        ContactDisplayUtils.getPreferredDisplayName(
-            contactCache.namePrimary, contactCache.nameAlternative, contactsPreferences);
+        ContactsComponent.get(getContext())
+            .contactDisplayPreferences()
+            .getDisplayName(contactCache.namePrimary, contactCache.nameAlternative);
 
     setCallerInfoForRow(
         result,
@@ -441,14 +433,16 @@ public class ConferenceParticipantListAdapter extends BaseAdapter {
             // Contact names might be null, so replace with empty string.
             ContactCacheEntry c1 = p1.getContactCacheEntry();
             String p1Name =
-                ContactDisplayUtils.getPreferredSortName(
-                    c1.namePrimary, c1.nameAlternative, contactsPreferences);
+                ContactsComponent.get(getContext())
+                    .contactDisplayPreferences()
+                    .getSortName(c1.namePrimary, c1.nameAlternative);
             p1Name = p1Name != null ? p1Name : "";
 
             ContactCacheEntry c2 = p2.getContactCacheEntry();
             String p2Name =
-                ContactDisplayUtils.getPreferredSortName(
-                    c2.namePrimary, c2.nameAlternative, contactsPreferences);
+                ContactsComponent.get(getContext())
+                    .contactDisplayPreferences()
+                    .getSortName(c2.namePrimary, c2.nameAlternative);
             p2Name = p2Name != null ? p2Name : "";
 
             return p1Name.compareToIgnoreCase(p2Name);
