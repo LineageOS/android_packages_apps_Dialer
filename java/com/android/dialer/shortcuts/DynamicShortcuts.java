@@ -124,7 +124,7 @@ final class DynamicShortcuts {
           DialerShortcut.builder()
               .setContactId(entry.id)
               .setLookupKey(entry.lookupKey)
-              .setDisplayName(entry.getPreferredDisplayName())
+              .setDisplayName(entry.getPreferredDisplayName(context))
               .setRank(rank++)
               .build();
       newDynamicShortcutsById.put(shortcut.getShortcutId(), shortcut);

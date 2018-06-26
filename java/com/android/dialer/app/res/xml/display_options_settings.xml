@@ -18,14 +18,22 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <com.android.contacts.common.preference.SortOrderPreference
-    android:dialogTitle="@string/display_options_sort_list_by"
-    android:key="sortOrder"
-    android:title="@string/display_options_sort_list_by"/>
+  <ListPreference
+      android:dialogTitle="@string/display_options_sort_list_by"
+      android:key="@string/display_options_sort_list_by_key"
+      android:summary="%s"
+      android:entries="@array/contact_sort_order_entries"
+      android:entryValues="@array/contact_sort_order_values"
+      android:title="@string/display_options_sort_list_by"
+      android:defaultValue="1"/>
 
-  <com.android.contacts.common.preference.DisplayOrderPreference
-    android:dialogTitle="@string/display_options_view_names_as"
-    android:key="displayOrder"
-    android:title="@string/display_options_view_names_as"/>
+  <ListPreference
+      android:dialogTitle="@string/display_options_view_names_as"
+      android:key="@string/display_options_view_names_as_key"
+      android:summary="%s"
+      android:entries="@array/contact_display_order_entries"
+      android:entryValues="@array/contact_display_order_values"
+      android:title="@string/display_options_view_names_as"
+      android:defaultValue="1"/>
 
 </PreferenceScreen>

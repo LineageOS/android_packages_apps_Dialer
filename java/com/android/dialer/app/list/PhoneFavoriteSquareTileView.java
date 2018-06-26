@@ -104,7 +104,7 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
 
   @Override
   protected String getNameForView(ContactEntry contactEntry) {
-    return contactEntry.getPreferredDisplayName();
+    return contactEntry.getPreferredDisplayName(getContext());
   }
 
   public ContactEntry getContactEntry() {
