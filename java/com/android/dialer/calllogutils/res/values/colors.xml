@@ -15,4 +15,12 @@
  ~ limitations under the License
  -->
 <resources>
+  <!-- Color for missed call icons. -->
+  <color name="missed_call">#C53929</color>
+  <!-- Color for answered call icons. -->
+  <color name="answered_incoming_call">#00a8ff</color>
+  <!-- Color for outgoing call icons. -->
+  <color name="answered_outgoing_call">#00c853</color>
+  <!-- Color for blocked call icons. -->
+  <color name="blocked_call">@color/dialer_secondary_text_color</color>
 </resources>
