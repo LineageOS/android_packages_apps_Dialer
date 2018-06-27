@@ -18,7 +18,9 @@ package com.android.dialer.contacts;
 
 import android.content.Context;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
+import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
 import com.android.dialer.inject.HasRootComponent;
+import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;
 
 /** Component for contacts related utilities */
@@ -27,12 +29,15 @@ public abstract class ContactsComponent {
 
   public abstract ContactDisplayPreferences contactDisplayPreferences();
 
+  public abstract HighResolutionPhotoRequester highResolutionPhotoLoader();
+
   public static ContactsComponent get(Context context) {
     return ((HasComponent) ((HasRootComponent) context.getApplicationContext()).component())
         .contactsComponent();
   }
 
   /** Used to refer to the root application component. */
+  @IncludeInDialerRoot
   public interface HasComponent {
     ContactsComponent contactsComponent();
   }
