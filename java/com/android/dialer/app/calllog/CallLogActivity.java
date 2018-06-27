@@ -34,6 +34,8 @@ import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.R;
 import com.android.dialer.calldetails.CallDetailsActivity;
+import com.android.dialer.callstats.CallStatsFragment;
+import com.android.dialer.callstats.DoubleDatePickerDialog;
 import com.android.dialer.common.Assert;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.CallLogQueryHandler;
@@ -46,17 +48,19 @@ import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
 
 /** Activity for viewing call history. */
-public class CallLogActivity extends TransactionSafeActivity
-    implements ViewPager.OnPageChangeListener {
+public class CallLogActivity extends TransactionSafeActivity implements
+    ViewPager.OnPageChangeListener, DoubleDatePickerDialog.OnDateSetListener {
 
   @VisibleForTesting static final int TAB_INDEX_ALL = 0;
   @VisibleForTesting static final int TAB_INDEX_MISSED = 1;
-  private static final int TAB_INDEX_COUNT = 2;
+  private static final int TAB_INDEX_STATS = 2;
+  private static final int TAB_INDEX_COUNT = 3;
   private ViewPager viewPager;
   private ViewPagerTabs viewPagerTabs;
   private ViewPagerAdapter viewPagerAdapter;
   private CallLogFragment allCallsFragment;
   private CallLogFragment missedCallsFragment;
+  private CallStatsFragment statsFragment;
   private String[] tabTitles;
   private boolean isResumed;
   private int selectedPageIndex;
@@ -87,6 +91,7 @@ public class CallLogActivity extends TransactionSafeActivity
     tabTitles = new String[TAB_INDEX_COUNT];
     tabTitles[0] = getString(R.string.call_log_all_title);
     tabTitles[1] = getString(R.string.call_log_missed_title);
+    tabTitles[2] = getString(R.string.call_log_stats_title);
 
     viewPager = (ViewPager) findViewById(R.id.call_log_pager);
 
@@ -188,6 +193,15 @@ public class CallLogActivity extends TransactionSafeActivity
     viewPagerTabs.onPageScrollStateChanged(state);
   }
 
+  @Override
+  public void onDateSet(long from, long to) {
+    switch (viewPager.getCurrentItem()) {
+      case TAB_INDEX_STATS:
+        statsFragment.onDateSet(from, to);
+        break;
+    }
+  }
+
   private void sendScreenViewForChildFragment() {
     Logger.get(this).logScreenView(ScreenEvent.Type.CALL_LOG_FILTER, this);
   }
@@ -213,6 +227,8 @@ public class CallLogActivity extends TransactionSafeActivity
         if (missedCallsFragment != null) {
           missedCallsFragment.markMissedCallsAsReadAndRemoveNotifications();
         }
+        break;
+      case TAB_INDEX_STATS:
         break;
       default:
         throw Assert.createIllegalStateFailException("Invalid position: " + position);
@@ -245,6 +261,8 @@ public class CallLogActivity extends TransactionSafeActivity
               CallLogQueryHandler.CALL_TYPE_ALL, true /* isCallLogActivity */);
         case TAB_INDEX_MISSED:
           return new CallLogFragment(Calls.MISSED_TYPE, true /* isCallLogActivity */);
+        case TAB_INDEX_STATS:
+          return new CallStatsFragment();
         default:
           throw new IllegalStateException("No fragment at position " + position);
       }
@@ -252,13 +270,16 @@ public class CallLogActivity extends TransactionSafeActivity
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-      final CallLogFragment fragment = (CallLogFragment) super.instantiateItem(container, position);
+      final Object fragment = super.instantiateItem(container, position);
       switch (getRtlPosition(position)) {
         case TAB_INDEX_ALL:
-          allCallsFragment = fragment;
+          allCallsFragment = (CallLogFragment) fragment;
           break;
         case TAB_INDEX_MISSED:
-          missedCallsFragment = fragment;
+          missedCallsFragment = (CallLogFragment) fragment;
+          break;
+        case TAB_INDEX_STATS:
+          statsFragment = (CallStatsFragment) fragment;
           break;
         default:
           throw Assert.createIllegalStateFailException("Invalid position: " + position);
