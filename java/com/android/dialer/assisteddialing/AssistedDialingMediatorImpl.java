@@ -16,10 +16,7 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import com.android.dialer.common.LogUtil;
 import java.util.Optional;
 
@@ -30,7 +27,6 @@ import java.util.Optional;
  * call is eligible for assisted dialing, and performing the transformation of numbers eligible for
  * assisted dialing.
  */
-@RequiresApi(VERSION_CODES.N)
 final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
 
   private final LocationDetector locationDetector;
@@ -58,8 +54,6 @@ final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
 
   /** Returns the country code in which the library thinks the user typically resides. */
   @Override
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
   public Optional<String> userHomeCountryCode() {
     return locationDetector.getUpperCaseUserHomeCountry();
   }
@@ -69,8 +63,6 @@ final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
    * transformed number should be capable of dialing out of the User's current country and
    * successfully connecting with a contact in the User's home country.
    */
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
   @Override
   public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform) {
     Optional<String> userHomeCountryCode = locationDetector.getUpperCaseUserHomeCountry();

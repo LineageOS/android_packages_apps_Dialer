@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -46,14 +47,21 @@ public class RecordVoicemailGreetingActivity extends Activity implements OnClick
   private int currentState;
   private int duration;
   private RecordButton recordButton;
+  private Button saveButton;
+  private Button redoButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_record_voicemail_greeting);
 
+    recordButton = findViewById(R.id.record_button);
+    saveButton = findViewById(R.id.save_button);
+    redoButton = findViewById(R.id.redo_button);
+
     duration = 0;
     setState(RECORD_GREETING_INIT);
+    recordButton.setOnClickListener(this);
   }
 
   @Override
@@ -83,18 +91,32 @@ public class RecordVoicemailGreetingActivity extends Activity implements OnClick
       case RECORD_GREETING_INIT:
         recordButton.setState(state);
         recordButton.setTracks(0, 0);
+        setSaveRedoButtonsEnabled(false);
         break;
       case RECORD_GREETING_PLAYING_BACK:
       case RECORD_GREETING_RECORDED:
         recordButton.setState(state);
         recordButton.setTracks(0, (float) duration / MAX_GREETING_DURATION_MS);
+        setSaveRedoButtonsEnabled(true);
         break;
       case RECORD_GREETING_RECORDING:
         recordButton.setState(state);
         recordButton.setTracks(0, 1f);
+        setSaveRedoButtonsEnabled(false);
         break;
       default:
         break;
+    }
+  }
+
+  /** Enables/Disables save and redo buttons in the layout */
+  private void setSaveRedoButtonsEnabled(boolean enabled) {
+    if (enabled) {
+      saveButton.setVisibility(View.VISIBLE);
+      redoButton.setVisibility(View.VISIBLE);
+    } else {
+      saveButton.setVisibility(View.GONE);
+      redoButton.setVisibility(View.GONE);
     }
   }
 }
