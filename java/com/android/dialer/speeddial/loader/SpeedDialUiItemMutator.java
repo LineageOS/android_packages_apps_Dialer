@@ -34,11 +34,14 @@ import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
+import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
@@ -49,8 +52,10 @@ import com.android.dialer.util.CallUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -86,15 +91,18 @@ public final class SpeedDialUiItemMutator {
   // Used to ensure that only one refresh flow runs at a time.
   private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
   private final ContactDisplayPreferences contactDisplayPreferences;
+  private final HighResolutionPhotoRequester highResolutionPhotoRequester;
 
   @Inject
   public SpeedDialUiItemMutator(
       @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutor,
-      ContactDisplayPreferences contactDisplayPreferences) {
+      ContactDisplayPreferences contactDisplayPreferences,
+      HighResolutionPhotoRequester highResolutionPhotoRequester) {
     this.appContext = appContext;
     this.backgroundExecutor = backgroundExecutor;
     this.contactDisplayPreferences = contactDisplayPreferences;
+    this.highResolutionPhotoRequester = highResolutionPhotoRequester;
   }
 
   /**
@@ -287,6 +295,7 @@ public final class SpeedDialUiItemMutator {
     Trace.endSection(); // addStarredContact
 
     Trace.beginSection("insertUpdateAndDelete");
+    requestHighResolutionPhoto(entriesToInsert);
     ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap =
         db.insertUpdateAndDelete(
             ImmutableList.copyOf(entriesToInsert),
@@ -295,6 +304,20 @@ public final class SpeedDialUiItemMutator {
     Trace.endSection(); // insertUpdateAndDelete
     Trace.endSection(); // loadSpeedDialUiItemsInternal
     return speedDialUiItemsWithUpdatedIds(speedDialUiItems, insertedEntriesToIdsMap);
+  }
+
+  @WorkerThread
+  private void requestHighResolutionPhoto(List<SpeedDialEntry> newEntries) {
+    ContactsComponent.get(appContext).highResolutionPhotoLoader();
+    for (SpeedDialEntry entry : newEntries) {
+      Uri uri;
+      uri = Contacts.getLookupUri(entry.contactId(), entry.lookupKey());
+
+      Futures.addCallback(
+          highResolutionPhotoRequester.request(uri),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
+    }
   }
 
   /**

@@ -18,6 +18,8 @@ package com.android.dialer.contacts;
 
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferencesImpl;
+import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
+import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequesterImpl;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
@@ -28,5 +30,10 @@ import dagger.Module;
 @Module
 public abstract class ContactsModule {
   @Binds
-  public abstract ContactDisplayPreferences to(ContactDisplayPreferencesImpl impl);
+  public abstract ContactDisplayPreferences toContactDisplayPreferencesImpl(
+      ContactDisplayPreferencesImpl impl);
+
+  @Binds
+  public abstract HighResolutionPhotoRequester toHighResolutionPhotoRequesterImpl(
+      HighResolutionPhotoRequesterImpl impl);
 }
