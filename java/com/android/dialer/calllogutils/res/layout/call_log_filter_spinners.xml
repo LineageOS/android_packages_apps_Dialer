@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
+  android:paddingStart="@dimen/call_log_outer_margin"
+  android:paddingEnd="@dimen/call_log_outer_margin">
+  <Spinner
+    android:id="@+id/filter_account_spinner"
+    android:layout_width="0dip"
+    android:layout_height="@dimen/list_section_divider_min_height"
+    android:layout_weight="1.2"
+    android:layout_marginTop="6dip"
+    android:layout_marginBottom="6dip" />
+  <Spinner
+    android:id="@+id/filter_status_spinner"
+    android:layout_width="0dip"
+    android:layout_height="@dimen/list_section_divider_min_height"
+    android:layout_weight="1.8"
+    android:layout_marginTop="6dip"
+    android:layout_marginBottom="6dip" />
+</LinearLayout>

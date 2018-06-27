@@ -64,7 +64,7 @@ public class PhoneNumberDisplayUtil {
    * @param number the number to display
    * @param formattedNumber the formatted number if available, may be null
    */
-  static CharSequence getDisplayNumber(
+  public static CharSequence getDisplayNumber(
       Context context,
       CharSequence number,
       int presentation,
