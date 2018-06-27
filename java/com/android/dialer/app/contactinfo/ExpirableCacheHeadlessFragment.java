@@ -34,7 +34,8 @@ public class ExpirableCacheHeadlessFragment extends Fragment {
   private static final String FRAGMENT_TAG = "ExpirableCacheHeadlessFragment";
   private static final int CONTACT_INFO_CACHE_SIZE = 100;
 
-  private ExpirableCache<NumberWithCountryIso, ContactInfo> retainedCache;
+  private ExpirableCache<NumberWithCountryIso, ContactInfo> retainedCache =
+      ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
 
   @NonNull
   public static ExpirableCacheHeadlessFragment attach(@NonNull AppCompatActivity parentActivity) {
@@ -57,7 +58,6 @@ public class ExpirableCacheHeadlessFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    retainedCache = ExpirableCache.create(CONTACT_INFO_CACHE_SIZE);
     setRetainInstance(true);
   }
 
