@@ -13,12 +13,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.dialer.voicemail.settings">
 
   <application>
-
     <!-- Causes the "Voicemail" item under "Calls" setting to be hidden. The voicemail module will
     be handling the settings. Has no effect before OC where dialer cannot provide voicemail
     settings -->
@@ -43,7 +41,13 @@
         android:parentActivityName="com.android.dialer.app.settings.DialerSettingsActivity"
         android:theme="@style/SettingsStyle">
     </activity>
-    <activity android:name=".CurrentVoicemailGreetingActivity">
+    <activity
+        android:name=".CurrentVoicemailGreetingActivity"
+        android:label="@string/voicemail_change_greeting_preference_title"
+        android:parentActivityName="com.android.dialer.app.settings.DialerSettingsActivity"
+        android:exported="true">
+    <!-- TODO(a bug): delete android:exported="true" closer to submitting  -->
     </activity>
   </application>
+
 </manifest>
