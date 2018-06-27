@@ -79,6 +79,7 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/calldetails/res \
 	$(BASE_DIR)/dialer/calllog/ui/res \
 	$(BASE_DIR)/dialer/calllogutils/res \
+	$(BASE_DIR)/dialer/callstats/res \
 	$(BASE_DIR)/dialer/common/res \
 	$(BASE_DIR)/dialer/contactactions/res \
 	$(BASE_DIR)/dialer/contactsfragment/res \
@@ -140,6 +141,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/calldetails/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/calllog/ui/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/calllogutils/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/callstats/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/common/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactactions/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
