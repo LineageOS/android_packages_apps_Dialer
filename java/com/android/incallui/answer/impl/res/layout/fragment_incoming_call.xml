@@ -118,9 +118,9 @@
           android:layout_marginStart="24dp"
           android:layout_marginEnd="24dp"/>
 
-      <!-- TODO(a bug): textColorPrimary or textColorPrimaryInverse? -->
       <TextView
           android:id="@+id/incall_important_call_badge"
+          style="@style/Dialer.TextAppearance.SubHeader"
           android:layout_width="wrap_content"
           android:layout_height="32dp"
           android:layout_marginTop="4dp"
@@ -129,7 +129,6 @@
           android:gravity="center"
           android:maxLines="1"
           android:text="@string/call_incoming_important"
-          style="@style/Dialer.TextAppearance.SubHeader"
           android:textColor="?android:attr/colorBackground"/>
 
       <FrameLayout
@@ -138,9 +137,7 @@
           android:layout_height="wrap_content"/>
 
       <include
-          layout="@layout/device_number_row"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
+          layout="@layout/device_number_row"/>
 
       <FrameLayout
           android:id="@+id/incall_data_container"
