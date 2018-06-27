@@ -19,21 +19,19 @@
       android:id="@+id/contactgrid_location_divider"
       android:layout_width="match_parent"
       android:layout_height="1dp"
-      android:layout_gravity="bottom"
-      android:background="#D8D8D8"
+      android:background="@color/dialer_divider_line_color"
       android:visibility="gone"/>
 
   <TextView
       android:id="@+id/contactgrid_device_number_text"
+      style="@style/Dialer.TextAppearance.Primary2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="16dp"
       android:padding="16dp"
-      android:background="@android:color/white"
-      android:elevation="2dp"
+      android:background="?android:attr/colorBackgroundFloating"
+      android:elevation="4dp"
       android:gravity="start"
       android:orientation="vertical"
-      android:textColor="#DD000000"
-      android:textSize="16sp"
       android:visibility="gone"/>
 </merge>
