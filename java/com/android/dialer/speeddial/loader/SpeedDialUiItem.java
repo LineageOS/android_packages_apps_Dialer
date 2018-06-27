@@ -263,14 +263,13 @@ public abstract class SpeedDialUiItem {
       return defaultChannel();
     }
 
-    // Default channel is a video channel, so find it's corresponding voice channel
-    Channel prevChannel = channels().get(0);
-    for (int i = 1; i < channels().size(); i++) {
-      Channel currentChannel = channels().get(i);
-      if (currentChannel.equals(defaultChannel())) {
-        return prevChannel;
+    // Default channel is a video channel, so find it's corresponding voice channel by number since
+    // unreachable channels may not be in the list
+    for (Channel currentChannel : channels()) {
+      if (currentChannel.number().equals(defaultChannel().number())
+          && currentChannel.technology() == Channel.VOICE) {
+        return currentChannel;
       }
-      prevChannel = currentChannel;
     }
     return null;
   }
@@ -306,7 +305,8 @@ public abstract class SpeedDialUiItem {
   public abstract String photoUri();
 
   /**
-   * Since a contact can have multiple phone numbers and each number can have multiple technologies,
+   * Returns a list of channels available. A Duo channel is included iff it is reachable. Since a
+   * contact can have multiple phone numbers and each number can have multiple technologies,
    * enumerate each one here so that the user can choose the correct one. Each channel here
    * represents a row in the {@link com.android.dialer.speeddial.DisambigDialog}.
    *
@@ -330,7 +330,11 @@ public abstract class SpeedDialUiItem {
   public abstract ImmutableList<Channel> channels();
 
   /**
-   * Will be null when the user hasn't chosen a default yet.
+   * Will be null when the user hasn't chosen a default yet. Note that a default channel may not be
+   * in the list returned by {@link #channels()}. This is because that list does not contain an
+   * unreachable Duo channel. When the default channel is a Duo channel and it becomes unreachable,
+   * it will remain as the default channel but disappear in the list returned by {@link
+   * #channels()}.
    *
    * @see com.android.dialer.speeddial.database.SpeedDialEntry#defaultChannel()
    */
