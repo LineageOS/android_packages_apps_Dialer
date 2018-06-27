@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2011 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:ex="http://schemas.android.com/apk/res/com.android.dialer"
+  android:id="@+id/call_stats_info"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingStart="@dimen/call_log_list_item_info_margin_start"
+  android:paddingEnd="@dimen/call_log_list_item_info_margin_start"
+  android:paddingTop="@dimen/call_log_outer_margin"
+  android:paddingBottom="@dimen/call_log_outer_margin">
+
+  <TextView
+    android:id="@+id/date_filter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/SecondaryText" />
+
+  <RelativeLayout
+    android:id="@+id/duration_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/date_filter">
+
+    <TextView
+      android:id="@+id/durations_header"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/call_stats_title_durations"
+      android:layout_marginBottom="@dimen/call_log_vertical_padding"
+      android:textColor="?android:attr/colorAccent"
+      style="@android:style/TextAppearance.Material.Subhead" />
+
+    <TextView
+      android:id="@+id/total_duration_total"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@id/durations_header"
+      style="@style/PrimaryText" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_toStartOf="@id/total_duration_total"
+      android:layout_alignBaseline="@id/total_duration_total"
+      android:text="@string/call_stats_title_of_total"
+      style="@style/PrimaryText" />
+
+    <com.android.dialer.widget.LinearColorBar
+      android:id="@+id/duration_total_percent_bar"
+      android:layout_width="match_parent"
+      android:layout_below="@id/total_duration_total"
+      style="@style/CallStatsBarStyle" />
+
+    <TextView
+      android:id="@+id/total_duration_number"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@id/duration_total_percent_bar"
+      style="@style/PrimaryText" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_toStartOf="@id/total_duration_number"
+      android:layout_alignBaseline="@id/total_duration_number"
+      android:text="@string/call_stats_title_for_number"
+      style="@style/PrimaryText" />
+
+    <com.android.dialer.widget.LinearColorBar
+      android:id="@+id/duration_number_percent_bar"
+      android:layout_width="match_parent"
+      android:layout_below="@id/total_duration_number"
+      style="@style/CallStatsBarStyle" />
+
+    <include
+      android:id="@+id/in_duration"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/duration_number_percent_bar"
+      android:layout_marginBottom="@dimen/call_log_icon_margin"
+      layout="@layout/call_stats_detail_line" />
+
+    <include
+      android:id="@+id/out_duration"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/in_duration"
+      android:layout_marginBottom="@dimen/call_log_icon_margin"
+      layout="@layout/call_stats_detail_line" />
+
+  </RelativeLayout>
+
+  <TextView
+    android:id="@+id/count_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/duration_container"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="@dimen/call_log_vertical_padding"
+    android:text="@string/call_stats_title_count"
+    android:textColor="?android:attr/colorAccent"
+    style="@android:style/TextAppearance.Material.Subhead" />
+
+  <TextView
+    android:id="@+id/total_count_total"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_below="@id/count_header"
+    style="@style/PrimaryText" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_toStartOf="@id/total_count_total"
+    android:layout_alignBaseline="@id/total_count_total"
+    android:text="@string/call_stats_title_of_total"
+    style="@style/PrimaryText" />
+
+  <com.android.dialer.widget.LinearColorBar
+    android:id="@+id/count_total_percent_bar"
+    android:layout_width="match_parent"
+    android:layout_below="@id/total_count_total"
+    style="@style/CallStatsBarStyle" />
+
+  <TextView
+    android:id="@+id/total_count_number"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_below="@id/count_total_percent_bar"
+    style="@style/PrimaryText" />
+
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_toStartOf="@id/total_count_number"
+    android:layout_alignBaseline="@id/total_count_number"
+    android:text="@string/call_stats_title_for_number"
+    style="@style/PrimaryText" />
+
+  <com.android.dialer.widget.LinearColorBar
+    android:id="@+id/count_number_percent_bar"
+    android:layout_width="match_parent"
+    android:layout_below="@id/total_count_number"
+    style="@style/CallStatsBarStyle" />
+
+  <include
+    android:id="@+id/in_count"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/count_number_percent_bar"
+    android:layout_marginBottom="@dimen/call_log_icon_margin"
+    layout="@layout/call_stats_detail_line" />
+
+  <include
+    android:id="@+id/out_count"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/in_count"
+    android:layout_marginBottom="@dimen/call_log_icon_margin"
+    layout="@layout/call_stats_detail_line" />
+
+  <include
+    android:id="@+id/missed_count"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/out_count"
+    android:layout_marginBottom="@dimen/call_log_icon_margin"
+    layout="@layout/call_stats_detail_line" />
+
+  <include
+    android:id="@+id/blocked_count"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/missed_count"
+    android:layout_marginBottom="@dimen/call_log_icon_margin"
+    layout="@layout/call_stats_detail_line" />
+
+  <TextView
+    android:id="@+id/average_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/blocked_count"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="@dimen/call_log_vertical_padding"
+    android:text="@string/call_stats_title_average_duration"
+    android:textColor="?android:attr/colorAccent"
+    style="@android:style/TextAppearance.Material.Subhead" />
+
+  <include
+    android:id="@+id/in_average"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/average_header"
+    android:layout_marginBottom="@dimen/call_log_icon_margin"
+    layout="@layout/call_stats_detail_line" />
+
+  <include
+    android:id="@+id/out_average"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/in_average"
+    android:layout_marginBottom="@dimen/call_log_icon_margin"
+    layout="@layout/call_stats_detail_line" />
+
+</RelativeLayout>
