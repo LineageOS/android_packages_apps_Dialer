@@ -1731,7 +1731,27 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         && !isConferenceCall()
         && !isVideoCall()
         && !isVoiceMailNumber()
-        && !hasReceivedVideoUpgradeRequest();
+        && !hasReceivedVideoUpgradeRequest()
+        && !isVoipCallNotSupportedBySpeakeasy();
+  }
+
+  private boolean isVoipCallNotSupportedBySpeakeasy() {
+    Bundle extras = getIntentExtras();
+
+    if (extras == null) {
+      return false;
+    }
+
+    // Indicates an VOIP call.
+    String callid = extras.getString("callid");
+
+    if (TextUtils.isEmpty(callid)) {
+      LogUtil.i("DialerCall.isVoipCallNotSupportedBySpeakeasy", "callid was empty");
+      return false;
+    }
+
+    LogUtil.i("DialerCall.isVoipCallNotSupportedBySpeakeasy", "call is not eligible");
+    return true;
   }
 
   /** Indicates the user has selected SpeakEasy */
