@@ -16,8 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -32,8 +30,6 @@ import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 /** A class to provide the appropriate country codes related to assisted dialing. */
-@TargetApi(VERSION_CODES.N)
-@SuppressWarnings("AndroidApiChecker") // Java 8 APIs
 public final class CountryCodeProvider {
 
   // TODO(erfanian): Ensure the below standard is consistent between libphonenumber and the

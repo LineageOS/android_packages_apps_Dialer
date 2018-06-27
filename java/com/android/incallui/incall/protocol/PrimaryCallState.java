@@ -17,6 +17,7 @@
 package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.telecom.DisconnectCause;
@@ -58,6 +59,8 @@ public abstract class PrimaryCallState {
 
   @Nullable
   public abstract String connectionLabel();
+
+  public abstract @ColorInt int primaryColor();
 
   @Nullable
   public abstract SuggestionProvider.Reason simSuggestionReason();
@@ -127,7 +130,8 @@ public abstract class PrimaryCallState {
         .setIsBusinessNumber(false)
         .setSupportsCallOnHold(true)
         .setSwapToSecondaryButtonState(ButtonState.NOT_SUPPORT)
-        .setIsAssistedDialed(false);
+        .setIsAssistedDialed(false)
+        .setPrimaryColor(0);
   }
 
   /** Builder class for primary call state info. */
@@ -147,6 +151,8 @@ public abstract class PrimaryCallState {
     public abstract Builder setSimSuggestionReason(SuggestionProvider.Reason reason);
 
     public abstract Builder setConnectionIcon(Drawable connectionIcon);
+
+    public abstract Builder setPrimaryColor(@ColorInt int color);
 
     public abstract Builder setGatewayNumber(String gatewayNumber);
 

@@ -89,7 +89,7 @@
   <string name="contact_grid_incoming_work_call">Work call from</string>
 
   <!-- Displayed in the answer call screen for incoming calls via a phone account. -->
-  <string name="contact_grid_incoming_via_template">Incoming via <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="contact_grid_incoming_via_template">Call via <xliff:g id="provider_name">%s</xliff:g> from</string>
 
   <!-- Displayed in the answer call screen for incoming spam calls. -->
   <string name="contact_grid_incoming_suspected_spam">Suspected spam caller</string>

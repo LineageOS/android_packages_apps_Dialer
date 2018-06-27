@@ -16,9 +16,7 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -35,8 +33,6 @@ import java.util.Locale;
 import java.util.Optional;
 
 /** Ensures that a number is eligible for Assisted Dialing */
-@TargetApi(VERSION_CODES.N)
-@SuppressWarnings("AndroidApiChecker") // Use of optional
 final class Constraints {
   private final PhoneNumberUtil phoneNumberUtil;
   private final Context context;
@@ -46,7 +42,7 @@ final class Constraints {
    * Create a new instance of Constraints.
    *
    * @param context The context used to determine whether or not a number is an emergency number.
-   * @param configProviderCountryCodes A csv of supported country codes, e.g. "US,CA"
+   * @param countryCodeProvider A csv of supported country codes, e.g. "US,CA"
    */
   public Constraints(@NonNull Context context, @NonNull CountryCodeProvider countryCodeProvider) {
     if (context == null) {
@@ -73,7 +69,7 @@ final class Constraints {
    * @return A boolean indicating whether or not the provided values are eligible for assisted
    *     dialing.
    */
-  public boolean meetsPreconditions(
+  boolean meetsPreconditions(
       @NonNull String numberToCheck,
       @NonNull String userHomeCountryCode,
       @NonNull String userRoamingCountryCode) {

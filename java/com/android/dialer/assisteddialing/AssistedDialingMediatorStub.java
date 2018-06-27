@@ -16,8 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.annotation.TargetApi;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import java.util.Optional;
 
@@ -26,16 +24,12 @@ public final class AssistedDialingMediatorStub implements AssistedDialingMediato
 
   /** Always returns an empty Optional. */
   @Override
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
   public Optional<TransformationInfo> attemptAssistedDial(@NonNull String numberToTransform) {
     return Optional.empty();
   }
 
   /** Always returns an empty Optional. */
   @Override
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(VERSION_CODES.N)
   public Optional<String> userHomeCountryCode() {
     return Optional.empty();
   }
