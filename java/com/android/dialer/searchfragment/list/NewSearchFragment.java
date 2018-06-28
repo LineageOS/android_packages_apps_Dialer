@@ -121,11 +121,23 @@ public final class NewSearchFragment extends Fragment
   // the contacts in them).
   private final List<Directory> directories = new ArrayList<>();
   private final Runnable loaderCp2ContactsRunnable =
-      () -> getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
+      () -> {
+        if (getHost() != null) {
+          getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
+        }
+      };
   private final Runnable loadNearbyPlacesRunnable =
-      () -> getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
+      () -> {
+        if (getHost() != null) {
+          getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
+        }
+      };
   private final Runnable loadDirectoryContactsRunnable =
-      () -> getLoaderManager().restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
+      () -> {
+        if (getHost() != null) {
+          getLoaderManager().restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
+        }
+      };
   private final Runnable capabilitiesUpdatedRunnable = () -> adapter.notifyDataSetChanged();
 
   private Runnable updatePositionRunnable;
