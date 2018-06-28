@@ -19,9 +19,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false">
+    android:layout_height="match_parent">
 
   <!-- MainToolbar -->
   <include
@@ -35,17 +33,13 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_below="@+id/toolbar"
-      android:layout_above="@+id/bottom_nav_bar"
-      android:clipChildren="false"
-      android:clipToPadding="false">
+      android:layout_above="@+id/bottom_nav_bar">
 
     <!-- Holds SpeedDial, Call Log, Contacts, Voicemail and Search fragments -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"/>
+        android:layout_height="match_parent"/>
 
     <FrameLayout
         android:id="@+id/search_fragment_container"

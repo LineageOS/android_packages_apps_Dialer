@@ -156,7 +156,12 @@ public class SpeedDialFragment extends Fragment {
             new UpdateSpeedDialAdapterListener(),
             speedDialLoaderListener);
     adapter =
-        new SpeedDialAdapter(getContext(), favoritesListener, suggestedListener, headerListener);
+        new SpeedDialAdapter(
+            getContext(),
+            favoritesListener,
+            suggestedListener,
+            headerListener,
+            FragmentUtils.getParentUnsafe(this, HostInterface.class));
     layoutManager.setSpanSizeLookup(adapter.getSpanSizeLookup());
     RecyclerView recyclerView = rootLayout.findViewById(R.id.speed_dial_recycler_view);
     recyclerView.setLayoutManager(layoutManager);
@@ -653,5 +658,7 @@ public class SpeedDialFragment extends Fragment {
   public interface HostInterface {
 
     void setHasFrequents(boolean hasFrequents);
+
+    void dragFavorite(boolean start);
   }
 }
