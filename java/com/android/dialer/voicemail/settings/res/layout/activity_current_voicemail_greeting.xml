@@ -31,7 +31,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:accessibilityHeading="false"
         android:title="@string/voicemail_change_greeting_preference_title">
     </com.android.dialer.widget.DialerToolbar>
 
