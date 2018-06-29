@@ -17,9 +17,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/speed_dial_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false">
+    android:layout_height="match_parent">
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/speed_dial_recycler_view"

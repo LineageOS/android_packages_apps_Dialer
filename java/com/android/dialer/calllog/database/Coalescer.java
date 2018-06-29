@@ -16,6 +16,7 @@
 package com.android.dialer.calllog.database;
 
 import android.database.Cursor;
+import android.database.StaleDataException;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
@@ -85,34 +86,72 @@ public class Coalescer {
   @WorkerThread
   @NonNull
   private ImmutableList<CoalescedRow> coalesceInternal(
-      Cursor allAnnotatedCallLogRowsSortedByTimestampDesc) {
+      Cursor allAnnotatedCallLogRowsSortedByTimestampDesc) throws ExpectedCoalescerException {
     Assert.isWorkerThread();
-
-    if (!allAnnotatedCallLogRowsSortedByTimestampDesc.moveToFirst()) {
-      return ImmutableList.of();
-    }
 
     ImmutableList.Builder<CoalescedRow> coalescedRowListBuilder = new ImmutableList.Builder<>();
 
-    RowCombiner rowCombiner = new RowCombiner(allAnnotatedCallLogRowsSortedByTimestampDesc);
-    rowCombiner.startNewGroup();
-
-    long coalescedRowId = 0;
-    do {
-      boolean isRowMerged = rowCombiner.mergeRow(allAnnotatedCallLogRowsSortedByTimestampDesc);
-
-      if (isRowMerged) {
-        allAnnotatedCallLogRowsSortedByTimestampDesc.moveToNext();
+    try {
+      if (!allAnnotatedCallLogRowsSortedByTimestampDesc.moveToFirst()) {
+        return ImmutableList.of();
       }
 
-      if (!isRowMerged || allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast()) {
-        coalescedRowListBuilder.add(
-            rowCombiner.combine().toBuilder().setId(coalescedRowId++).build());
-        rowCombiner.startNewGroup();
-      }
-    } while (!allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast());
+      RowCombiner rowCombiner = new RowCombiner(allAnnotatedCallLogRowsSortedByTimestampDesc);
+      rowCombiner.startNewGroup();
 
-    return coalescedRowListBuilder.build();
+      long coalescedRowId = 0;
+      do {
+        boolean isRowMerged = rowCombiner.mergeRow(allAnnotatedCallLogRowsSortedByTimestampDesc);
+
+        if (isRowMerged) {
+          allAnnotatedCallLogRowsSortedByTimestampDesc.moveToNext();
+        }
+
+        if (!isRowMerged || allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast()) {
+          coalescedRowListBuilder.add(
+              rowCombiner.combine().toBuilder().setId(coalescedRowId++).build());
+          rowCombiner.startNewGroup();
+        }
+      } while (!allAnnotatedCallLogRowsSortedByTimestampDesc.isAfterLast());
+
+      return coalescedRowListBuilder.build();
+
+    } catch (Exception exception) {
+      // Coalescing can fail if cursor "allAnnotatedCallLogRowsSortedByTimestampDesc" is closed by
+      // its loader while the work is still in progress.
+      //
+      // This can happen when the loader restarts and finishes loading data before the coalescing
+      // work is completed.
+      //
+      // This kind of failure doesn't have to crash the app as coalescing will be restarted on the
+      // latest data obtained by the loader. Therefore, we inspect the exception here and throw an
+      // ExpectedCoalescerException if it is the case described above.
+      //
+      // The type of expected exception depends on whether AbstractWindowedCursor#checkPosition() is
+      // called when the cursor is closed.
+      //   (1) If it is called before the cursor is closed, we will get IllegalStateException thrown
+      //       by SQLiteClosable when it attempts to acquire a reference to the database.
+      //   (2) Otherwise, we will get StaleDataException thrown by AbstractWindowedCursor's
+      //       checkPosition() method.
+      //
+      // Note that it would be more accurate to inspect the stack trace to locate the origin of the
+      // exception. However, according to the documentation on Throwable#getStackTrace, "some
+      // virtual machines may, under some circumstances, omit one or more stack frames from the
+      // stack trace". "In the extreme case, a virtual machine that has no stack trace information
+      // concerning this throwable is permitted to return a zero-length array from this method."
+      // Therefore, the best we can do is to inspect the message in the exception.
+      // TODO(linyuh): try to avoid the expected failure.
+      String message = exception.getMessage();
+      if (message != null
+          && ((exception instanceof StaleDataException
+                  && message.startsWith("Attempting to access a closed CursorWindow"))
+              || (exception instanceof IllegalStateException
+                  && message.startsWith("attempt to re-open an already-closed object")))) {
+        throw new ExpectedCoalescerException(exception);
+      }
+
+      throw exception;
+    }
   }
 
   /** Combines rows from {@link AnnotatedCallLog} into a {@link CoalescedRow}. */
@@ -335,6 +374,13 @@ public class Coalescer {
       }
 
       return dialerPhoneNumberUtil.isMatch(groupPhoneNumber, rowPhoneNumber);
+    }
+  }
+
+  /** A checked exception thrown when expected failure happens when coalescing is in progress. */
+  public static final class ExpectedCoalescerException extends Exception {
+    ExpectedCoalescerException(Throwable throwable) {
+      super("Expected coalescing exception", throwable);
     }
   }
 }
