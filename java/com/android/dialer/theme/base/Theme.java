@@ -44,6 +44,9 @@ public interface Theme {
   @StyleRes
   int getApplicationThemeRes();
 
+  @StyleRes
+  int getBottomSheetStyleRes();
+
   Context getThemedContext(Context context);
 
   LayoutInflater getThemedLayoutInflator(LayoutInflater inflater);
