@@ -15,48 +15,47 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/call_log_list_item"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:orientation="vertical">
+    android:id="@+id/call_log_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
   <!-- Day group heading. Used to show a "today", "yesterday", "last week" or "other" heading
        above a group of call log entries. -->
   <TextView
-    android:id="@+id/call_log_day_group_label"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start"
-    android:layout_marginStart="@dimen/call_log_start_margin"
-    android:layout_marginEnd="@dimen/call_log_outer_margin"
-    android:paddingTop="@dimen/call_log_day_group_padding_top"
-    android:paddingBottom="@dimen/call_log_day_group_padding_bottom"
-    style="@style/Dialer.TextAppearance.OVERLINE.Ellipsize"/>
+      android:id="@+id/call_log_day_group_label"
+      style="@style/Dialer.TextAppearance.OVERLINE.Ellipsize"
+      android:layout_width="wrap_content"
+      android:layout_height="48dp"
+      android:layout_marginStart="@dimen/call_log_start_margin"
+      android:layout_marginEnd="@dimen/call_log_outer_margin"
+      android:layout_gravity="start"
+      android:gravity="center_vertical"/>
 
   <android.support.v7.widget.CardView
-    android:id="@+id/call_log_row"
-    style="@style/CallLogCardStyle">
+      android:id="@+id/call_log_row"
+      style="@style/CallLogCardStyle">
 
     <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
       <!-- Primary area containing the contact badge and caller information -->
       <LinearLayout
-        android:id="@+id/primary_action_view"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/call_log_start_margin"
-        android:paddingEnd="@dimen/call_log_outer_margin"
-        android:paddingTop="@dimen/call_log_vertical_padding"
-        android:paddingBottom="@dimen/call_log_vertical_padding"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:focusable="true"
-        android:nextFocusRight="@+id/call_back_action"
-        android:nextFocusLeft="@+id/quick_contact_photo">
+          android:id="@+id/primary_action_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="@dimen/call_log_vertical_padding"
+          android:paddingBottom="@dimen/call_log_vertical_padding"
+          android:paddingStart="@dimen/call_log_start_margin"
+          android:paddingEnd="@dimen/call_log_outer_margin"
+          android:background="?android:attr/selectableItemBackground"
+          android:focusable="true"
+          android:gravity="center_vertical"
+          android:nextFocusLeft="@+id/quick_contact_photo"
+          android:nextFocusRight="@+id/call_back_action"
+          android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -68,104 +67,103 @@
               android:id="@+id/quick_contact_photo"
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
-              android:paddingTop="2dp"
-              android:nextFocusRight="@id/primary_action_view"
-              android:focusable="true"/>
+              android:focusable="true"
+              android:nextFocusRight="@id/primary_action_view"/>
 
           <ImageView
               android:id="@+id/quick_contact_checkbox"
-              android:scaleType="fitCenter"
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
-              android:visibility="gone"
-              android:src="@drawable/ic_check_mark_48dp" />
+              android:scaleType="fitCenter"
+              android:src="@drawable/ic_check_mark_48dp"
+              android:visibility="gone"/>
 
         </FrameLayout>
 
 
         <LinearLayout
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:orientation="vertical"
-          android:gravity="center_vertical"
-          android:layout_marginStart="@dimen/call_log_list_item_info_margin_start">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/call_log_list_item_info_margin_start"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
           <com.android.dialer.widget.BidiTextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/call_log_name_margin_bottom"
-            android:layout_marginEnd="@dimen/call_log_icon_margin"
-            style="@style/Dialer.TextAppearance.Primary.Ellipsize"/>
+              android:id="@+id/name"
+              style="@style/Dialer.TextAppearance.Primary.Ellipsize"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/call_log_name_margin_bottom"
+              android:layout_marginEnd="@dimen/call_log_icon_margin"/>
 
           <LinearLayout
-            android:id="@+id/call_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+              android:id="@+id/call_type"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
             <com.android.dialer.calllogutils.CallTypeIconsView
-              android:id="@+id/call_type_icons"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginEnd="@dimen/call_log_icon_margin"
-              android:layout_gravity="center_vertical"/>
+                android:id="@+id/call_type_icons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/call_log_icon_margin"
+                android:layout_gravity="center_vertical"/>
 
             <ImageView
-              android:id="@+id/work_profile_icon"
-              android:src="@drawable/ic_work_profile"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginEnd="@dimen/call_log_icon_margin"
-              android:scaleType="center"
-              android:visibility="gone"/>
+                android:id="@+id/work_profile_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/call_log_icon_margin"
+                android:scaleType="center"
+                android:src="@drawable/ic_work_profile"
+                android:visibility="gone"/>
 
             <TextView
-              android:id="@+id/call_location_and_date"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginEnd="@dimen/call_log_icon_margin"
-              android:layout_gravity="center_vertical"
-              style="Dialer.TextAppearance.Secondary.Ellipsize"/>
+                android:id="@+id/call_location_and_date"
+                style="Dialer.TextAppearance.Secondary.Ellipsize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/call_log_icon_margin"
+                android:layout_gravity="center_vertical"/>
 
           </LinearLayout>
 
           <TextView
-            android:id="@+id/call_account_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/call_log_call_account_margin_bottom"
-            android:layout_marginEnd="@dimen/call_log_icon_margin"
-            android:visibility="gone"
-            style="Dialer.TextAppearance.Secondary2.Ellipsize"/>
+              android:id="@+id/call_account_label"
+              style="Dialer.TextAppearance.Secondary2.Ellipsize"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/call_log_call_account_margin_bottom"
+              android:layout_marginEnd="@dimen/call_log_icon_margin"
+              android:visibility="gone"/>
 
           <LinearLayout
-            android:id="@+id/transcription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/call_log_icon_margin"
-            android:visibility="gone"
-            android:orientation="vertical">
+              android:id="@+id/transcription"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/call_log_icon_margin"
+              android:orientation="vertical"
+              android:visibility="gone">
 
             <TextView
-              android:id="@+id/voicemail_transcription"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:focusable="true"
-              android:nextFocusDown="@+id/voicemail_transcription_branding"
-              android:textIsSelectable="true"
-              style="Dialer.TextAppearance.Secondary2"/>
+                android:id="@+id/voicemail_transcription"
+                style="Dialer.TextAppearance.Secondary2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:nextFocusDown="@+id/voicemail_transcription_branding"
+                android:textIsSelectable="true"/>
 
             <TextView
-              android:id="@+id/voicemail_transcription_branding"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:focusable="true"
-              android:nextFocusUp="@id/voicemail_transcription"
-              android:nextFocusDown="@+id/voicemail_transcription_rating"
-              android:paddingTop="2dp"
-              style="Dialer.TextAppearance.Secondary2"/>
+                android:id="@+id/voicemail_transcription_branding"
+                style="Dialer.TextAppearance.Secondary2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:focusable="true"
+                android:nextFocusDown="@+id/voicemail_transcription_rating"
+                android:nextFocusUp="@id/voicemail_transcription"/>
 
             <LinearLayout
                 android:id="@+id/voicemail_transcription_rating"
@@ -173,38 +171,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/call_log_icon_margin"
                 android:layout_gravity="center_vertical"
-                android:visibility="gone"
                 android:paddingTop="2dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
               <TextView
-                  style="@style/TranscriptionQualityRating"
                   android:id="@+id/voicemail_transcription_rating_text"
+                  style="@style/TranscriptionQualityRating"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
-                  android:gravity="start|center_vertical"
                   android:focusable="true"
+                  android:gravity="start|center_vertical"
                   android:text="@string/voicemail_transcription_rating"/>
 
               <ImageView
-                  style="@style/TranscriptionQualityRatingIcon"
                   android:id="@+id/voicemail_transcription_rating_good"
+                  style="@style/TranscriptionQualityRatingIcon"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:contentDescription="@string/description_rating_good"
-                  android:gravity="end|center_vertical"
                   android:focusable="true"
+                  android:gravity="end|center_vertical"
                   android:src="@drawable/quantum_ic_thumb_up_grey600_24"/>
 
               <ImageView
-                  style="@style/TranscriptionQualityRatingIcon"
                   android:id="@+id/voicemail_transcription_rating_bad"
+                  style="@style/TranscriptionQualityRatingIcon"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:contentDescription="@string/description_rating_bad"
-                  android:gravity="end|center_vertical"
                   android:focusable="true"
+                  android:gravity="end|center_vertical"
                   android:src="@drawable/quantum_ic_thumb_down_grey600_24"/>
 
             </LinearLayout>
@@ -214,25 +212,25 @@
         </LinearLayout>
 
         <ImageView
-          android:id="@+id/primary_action_button"
-          android:layout_width="@dimen/call_log_list_item_primary_action_dimen"
-          android:layout_height="@dimen/call_log_list_item_primary_action_dimen"
-          android:layout_gravity="center_vertical"
-          android:background="?android:attr/selectableItemBackgroundBorderless"
-          android:scaleType="center"
-          android:tint="?colorIcon"
-          android:visibility="gone"/>
+            android:id="@+id/primary_action_button"
+            android:layout_width="@dimen/call_log_list_item_primary_action_dimen"
+            android:layout_height="@dimen/call_log_list_item_primary_action_dimen"
+            android:layout_gravity="center_vertical"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:scaleType="center"
+            android:tint="?colorIcon"
+            android:visibility="gone"/>
 
       </LinearLayout>
 
       <!-- Viewstub with additional expandable actions for a call log entry -->
       <ViewStub
-        android:id="@+id/call_log_entry_actions_stub"
-        android:inflatedId="@+id/call_log_entry_actions"
-        android:layout="@layout/call_log_list_item_actions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+          android:id="@+id/call_log_entry_actions_stub"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          android:inflatedId="@+id/call_log_entry_actions"
+          android:layout="@layout/call_log_list_item_actions"/>
 
     </LinearLayout>
 

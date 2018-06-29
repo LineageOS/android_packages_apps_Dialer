@@ -62,8 +62,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/floating_action_button_list_bottom_padding"
-    android:paddingStart="@dimen/call_log_horizontal_margin"
-    android:paddingEnd="@dimen/call_log_horizontal_margin"
     android:clipToPadding="false"/>
 
   <com.android.dialer.widget.EmptyContentView
