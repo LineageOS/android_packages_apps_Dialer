@@ -198,7 +198,6 @@ public abstract class CallIntent implements Parcelable {
     return intent;
   }
 
-  @SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
   private Bundle createInCallUiIntentExtras() {
     Bundle bundle = new Bundle();
     stringInCallUiIntentExtras().forEach(bundle::putString);
@@ -207,7 +206,6 @@ public abstract class CallIntent implements Parcelable {
     return bundle;
   }
 
-  @SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
   private Bundle createPlaceCallExtras() {
     Bundle bundle = new Bundle();
     stringPlaceCallExtras().forEach(bundle::putString);
@@ -255,7 +253,6 @@ public abstract class CallIntent implements Parcelable {
     return 0;
   }
 
-  @SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(number(), flags);

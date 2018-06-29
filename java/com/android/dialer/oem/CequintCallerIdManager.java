@@ -15,12 +15,10 @@
  */
 package com.android.dialer.oem;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,7 +41,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Cequint Caller ID. It also caches any information fetched in static map, which lives through
  * whole application lifecycle.
  */
-@TargetApi(VERSION_CODES.N)
 public class CequintCallerIdManager {
 
   @VisibleForTesting

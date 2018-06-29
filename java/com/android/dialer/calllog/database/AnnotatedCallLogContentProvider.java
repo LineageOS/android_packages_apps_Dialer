@@ -16,7 +16,6 @@
 
 package com.android.dialer.calllog.database;
 
-import android.annotation.TargetApi;
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
@@ -28,7 +27,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.calllog.database.AnnotatedCallLogConstraints.Operation;
@@ -82,7 +80,6 @@ public class AnnotatedCallLogContentProvider extends ContentProvider {
     return true;
   }
 
-  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   @Nullable
   @Override
   public Cursor query(

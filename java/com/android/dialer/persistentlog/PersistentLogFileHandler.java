@@ -16,10 +16,8 @@
 
 package com.android.dialer.persistentlog;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build.VERSION_CODES;
 import android.preference.PreferenceManager;
 import android.support.annotation.AnyThread;
 import android.support.annotation.MainThread;
@@ -52,8 +50,6 @@ import java.util.List;
  * <p>This class is NOT thread safe. All methods expect the constructor must be called on the same
  * worker thread.
  */
-@SuppressWarnings("AndroidApiChecker") // lambdas
-@TargetApi(VERSION_CODES.N)
 final class PersistentLogFileHandler {
 
   private static final String LOG_DIRECTORY = "persistent_log";
@@ -67,7 +63,7 @@ final class PersistentLogFileHandler {
     public LogCorruptionException(String message) {
       super(message);
     }
-  };
+  }
 
   private File logDirectory;
   private final String subfolder;

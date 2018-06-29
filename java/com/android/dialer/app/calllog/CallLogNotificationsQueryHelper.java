@@ -17,7 +17,6 @@
 package com.android.dialer.app.calllog;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -51,7 +50,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /** Helper class operating on call log notifications. */
-@TargetApi(Build.VERSION_CODES.N)
 public class CallLogNotificationsQueryHelper {
 
   @VisibleForTesting
@@ -349,14 +347,12 @@ public class CallLogNotificationsQueryHelper {
 
     @Override
     @Nullable
-    @TargetApi(Build.VERSION_CODES.N)
     public List<NewCall> query(int type) {
       return query(type, NO_THRESHOLD);
     }
 
     @Override
     @Nullable
-    @TargetApi(Build.VERSION_CODES.N)
     @SuppressWarnings("MissingPermission")
     public List<NewCall> query(int type, long thresholdMillis) {
       if (!PermissionsUtil.hasPermission(context, Manifest.permission.READ_CALL_LOG)) {

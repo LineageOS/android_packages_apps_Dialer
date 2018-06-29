@@ -33,7 +33,6 @@ import java.util.concurrent.Future;
  * Class to retrieve a {@link Network} synchronously. {@link #getNetwork(OmtpVvmCarrierConfigHelper,
  * PhoneAccountHandle)} will block until a suitable network is retrieved or it has failed.
  */
-@SuppressWarnings("AndroidApiChecker") /* CompletableFuture is java8*/
 @TargetApi(VERSION_CODES.O)
 public class VvmNetworkRequest {
 

@@ -16,9 +16,7 @@
 
 package com.android.incallui;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Trace;
 import android.support.v4.app.Fragment;
@@ -445,8 +443,7 @@ public class CallButtonPresenter
    *
    * @param call The active call.
    */
-  @TargetApi(VERSION_CODES.N)
-  @SuppressWarnings(value = {"MissingPermission", "AndroidApiChecker"}) // Java 8 APIs.
+  @SuppressWarnings(value = {"MissingPermission"})
   private void updateButtonsState(DialerCall call) {
     LogUtil.v("CallButtonPresenter.updateButtonsState", "");
     final boolean isVideo = call.isVideoCall();

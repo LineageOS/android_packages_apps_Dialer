@@ -16,7 +16,6 @@
 
 package com.android.dialer.blocking;
 
-import android.annotation.TargetApi;
 import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,7 +23,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
@@ -201,7 +199,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    *
    * @return blocked id.
    */
-  @TargetApi(VERSION_CODES.N)
   @Nullable
   public Integer getBlockedIdSynchronous(@Nullable String number, String countryIso) {
     Assert.isWorkerThread();
