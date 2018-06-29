@@ -27,9 +27,8 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.Patterns;
-import com.android.contacts.common.R;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.contacts.resources.R;
 import java.util.Objects;
 
 /** Methods for handling various contact data labels. */
@@ -243,63 +242,5 @@ public class ContactDisplayUtils {
       Resources resources, int stringId, String number) {
     String msg = resources.getString(stringId, number);
     return ContactDisplayUtils.getTelephoneTtsSpannable(msg, number);
-  }
-
-  /**
-   * Returns either namePrimary or nameAlternative based on the {@link ContactsPreferences}.
-   * Defaults to the name that is non-null.
-   *
-   * @param namePrimary the primary name.
-   * @param nameAlternative the alternative name.
-   * @param contactsPreferences the ContactsPreferences used to determine the preferred display
-   *     name.
-   * @return namePrimary or nameAlternative depending on the value of displayOrderPreference.
-   */
-  public static String getPreferredDisplayName(
-      String namePrimary,
-      String nameAlternative,
-      @Nullable ContactsPreferences contactsPreferences) {
-    if (contactsPreferences == null) {
-      return namePrimary != null ? namePrimary : nameAlternative;
-    }
-    if (contactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY) {
-      return namePrimary;
-    }
-
-    if (contactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_ALTERNATIVE
-        && !TextUtils.isEmpty(nameAlternative)) {
-      return nameAlternative;
-    }
-
-    return namePrimary;
-  }
-
-  /**
-   * Returns either namePrimary or nameAlternative based on the {@link ContactsPreferences}.
-   * Defaults to the name that is non-null.
-   *
-   * @param namePrimary the primary name.
-   * @param nameAlternative the alternative name.
-   * @param contactsPreferences the ContactsPreferences used to determine the preferred sort order.
-   * @return namePrimary or nameAlternative depending on the value of displayOrderPreference.
-   */
-  public static String getPreferredSortName(
-      String namePrimary,
-      String nameAlternative,
-      @Nullable ContactsPreferences contactsPreferences) {
-    if (contactsPreferences == null) {
-      return namePrimary != null ? namePrimary : nameAlternative;
-    }
-
-    if (contactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_PRIMARY) {
-      return namePrimary;
-    }
-
-    if (contactsPreferences.getSortOrder() == ContactsPreferences.SORT_ORDER_ALTERNATIVE
-        && !TextUtils.isEmpty(nameAlternative)) {
-      return nameAlternative;
-    }
-
-    return namePrimary;
   }
 }

@@ -44,11 +44,10 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderComponent;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
@@ -123,7 +122,6 @@ public class CallCardPresenter
   private String secondaryNumber;
   private ContactCacheEntry primaryContactInfo;
   private ContactCacheEntry secondaryContactInfo;
-  @Nullable private ContactsPreferences contactsPreferences;
   private boolean isFullscreen = false;
   private InCallScreen inCallScreen;
   private boolean isInCallScreenReady;
@@ -159,7 +157,6 @@ public class CallCardPresenter
   public void onInCallScreenDelegateInit(InCallScreen inCallScreen) {
     Assert.isNotNull(inCallScreen);
     this.inCallScreen = inCallScreen;
-    contactsPreferences = ContactsPreferencesFactory.newContactsPreferences(context);
 
     // Call may be null if disconnect happened already.
     DialerCall call = CallList.getInstance().getFirstCall();
@@ -184,9 +181,6 @@ public class CallCardPresenter
   public void onInCallScreenReady() {
     LogUtil.i("CallCardPresenter.onInCallScreenReady", null);
     Assert.checkState(!isInCallScreenReady);
-    if (contactsPreferences != null) {
-      contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
-    }
 
     // Contact search may have completed before ui is ready.
     if (primaryContactInfo != null) {
@@ -475,6 +469,8 @@ public class CallCardPresenter
                   .setSessionModificationState(primary.getVideoTech().getSessionModificationState())
                   .setDisconnectCause(primary.getDisconnectCause())
                   .setConnectionLabel(getConnectionLabel())
+                  .setPrimaryColor(
+                      InCallPresenter.getInstance().getThemeColorManager().getPrimaryColor())
                   .setSimSuggestionReason(getSimSuggestionReason())
                   .setConnectionIcon(getCallStateIcon())
                   .setGatewayNumber(getGatewayNumber())
@@ -985,8 +981,9 @@ public class CallCardPresenter
   /** Gets the name to display for the call. */
   private String getNameForCall(ContactCacheEntry contactInfo) {
     String preferredName =
-        ContactDisplayUtils.getPreferredDisplayName(
-            contactInfo.namePrimary, contactInfo.nameAlternative, contactsPreferences);
+        ContactsComponent.get(context)
+            .contactDisplayPreferences()
+            .getDisplayName(contactInfo.namePrimary, contactInfo.nameAlternative);
     if (TextUtils.isEmpty(preferredName)) {
       return TextUtils.isEmpty(contactInfo.number)
           ? null

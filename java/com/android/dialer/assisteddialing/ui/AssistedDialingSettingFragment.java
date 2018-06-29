@@ -15,10 +15,8 @@
  */
 package com.android.dialer.assisteddialing.ui;
 
-import android.annotation.TargetApi;
 import android.icu.util.ULocale;
 import android.icu.util.ULocale.Builder;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -38,8 +36,6 @@ import java.util.List;
 import java.util.Optional;
 
 /** The setting for Assisted Dialing */
-@TargetApi(VERSION_CODES.N)
-@SuppressWarnings("AndroidApiChecker") // Java 8 APIs
 public class AssistedDialingSettingFragment extends PreferenceFragment {
 
   private CountryCodeProvider countryCodeProvider;

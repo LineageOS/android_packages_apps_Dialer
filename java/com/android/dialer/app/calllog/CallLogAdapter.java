@@ -53,7 +53,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.contacts.common.ContactsUtils;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogGroupBuilder.GroupCreator;
@@ -73,6 +72,7 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.configprovider.ConfigProviderComponent;
+import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.duo.DuoListener;
@@ -100,6 +100,8 @@ import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
@@ -158,9 +160,12 @@ public class CallLogAdapter extends GroupingListAdapter
   /**
    * Maps a raw input number to match info. We only log one MatchInfo per raw input number to reduce
    * the amount of data logged.
+   *
+   * <p>Note that this has to be a {@link ConcurrentMap} as the match info for each row in the UI is
+   * loaded in a background thread spawned when the ViewHolder is bound.
    */
-  private final Map<String, ContactsProviderMatchInfo> contactsProviderMatchInfos =
-      new ArrayMap<>();
+  private final ConcurrentMap<String, ContactsProviderMatchInfo> contactsProviderMatchInfos =
+      new ConcurrentHashMap<>();
 
   private final ActionMode.Callback actionModeCallback =
       new ActionMode.Callback() {
@@ -506,7 +511,6 @@ public class CallLogAdapter extends GroupingListAdapter
   private final Map<Long, Integer> dayGroups = new ArrayMap<>();
 
   private boolean loading = true;
-  private ContactsPreferences contactsPreferences;
 
   private boolean isSpamEnabled;
 
@@ -550,8 +554,6 @@ public class CallLogAdapter extends GroupingListAdapter
         new CallLogListItemHelper(phoneCallDetailsHelper, resources, this.callLogCache);
     callLogGroupBuilder = new CallLogGroupBuilder(activity.getApplicationContext(), this);
     this.filteredNumberAsyncQueryHandler = Assert.isNotNull(filteredNumberAsyncQueryHandler);
-
-    contactsPreferences = new ContactsPreferences(this.activity);
 
     blockReportSpamListener =
         new BlockReportSpamListener(
@@ -674,7 +676,6 @@ public class CallLogAdapter extends GroupingListAdapter
     if (PermissionsUtil.hasPermission(activity, android.Manifest.permission.READ_CONTACTS)) {
       contactInfoCache.start();
     }
-    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     isSpamEnabled = SpamComponent.get(activity).spamSettings().isSpamEnabled();
     getDuo().registerListener(this);
     notifyDataSetChanged();
@@ -1078,7 +1079,8 @@ public class CallLogAdapter extends GroupingListAdapter
       details.contactUri = info.lookupUri;
       details.namePrimary = info.name;
       details.nameAlternative = info.nameAlternative;
-      details.nameDisplayOrder = contactsPreferences.getDisplayOrder();
+      details.nameDisplayOrder =
+          ContactsComponent.get(activity).contactDisplayPreferences().getDisplayOrder();
       details.numberType = info.type;
       details.numberLabel = info.label;
       details.photoUri = info.photoUri;
@@ -1467,6 +1469,7 @@ public class CallLogAdapter extends GroupingListAdapter
     notifyDataSetChanged();
   }
 
+  @WorkerThread
   private void logCp2Metrics(PhoneCallDetails details, ContactInfo contactInfo) {
     if (details == null) {
       return;

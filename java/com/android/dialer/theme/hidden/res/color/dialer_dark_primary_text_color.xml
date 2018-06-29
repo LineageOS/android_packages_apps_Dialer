@@ -17,5 +17,5 @@
 <!-- Primary text color in the Phone app -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_enabled="false" android:color="@color/google_grey_700"/>
-  <item android:color="@color/google_grey_400"/>
+  <item android:color="@color/google_grey_100"/>
 </selector>

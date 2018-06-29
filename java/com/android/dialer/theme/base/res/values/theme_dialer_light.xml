@@ -38,8 +38,11 @@
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
   <style name="Dialer.ThemeBase">
+    <item name="android:windowLightStatusBar">true</item>
+    <item name="android:statusBarColor">@android:color/white</item>
+
     <!-- These values should be used to color all backgrounds. -->
-    <item name="android:colorBackground">@color/dialer_background_color</item>
+    <item name="android:colorBackground">@android:color/white</item>
     <item name="android:colorBackgroundFloating">@android:color/white</item>
 
     <!-- These values should be used to set text color. -->
@@ -54,14 +57,14 @@
     <item name="colorPrimary">@color/dialer_theme_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_secondary_color</item>
-    <item name="colorAccent">@color/dialer_secondary_color</item>
+    <item name="android:colorAccent">@color/dialer_theme_color</item>
+    <item name="colorAccent">@color/dialer_theme_color</item>
 
     <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
     <item name="colorControlActivated">?android:attr/colorPrimary</item>
 
     <!-- Dialer specific attributes. -->
-    <item name="colorIcon">@color/google_grey_700</item>
+    <item name="colorIcon">@color/dialer_icon_color</item>
     <item name="colorIconSecondary">@color/google_grey_400</item>
     <item name="colorTextOnUnthemedDarkBackground">@android:color/white</item>
     <item name="colorIconOnUnthemedDarkBackground">@android:color/white</item>

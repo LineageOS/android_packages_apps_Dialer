@@ -177,10 +177,13 @@ public class RttChatFragment extends Fragment
 
     editText.setOnKeyListener(
         (v, keyCode, event) -> {
-          // This is only triggered when input method doesn't handle delete key, which means the
-          // current
-          // input box is empty.
-          if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+          // This is only triggered when input method doesn't handle delete key, which usually means
+          // the current input box is empty.
+          // On non-English keyboard delete key could be passed here so we still need to check if
+          // the input box is empty.
+          if (keyCode == KeyEvent.KEYCODE_DEL
+              && event.getAction() == KeyEvent.ACTION_DOWN
+              && TextUtils.isEmpty(editText.getText())) {
             String lastMessage = adapter.retrieveLastLocalMessage();
             if (lastMessage != null) {
               resumeInput(lastMessage);
@@ -567,9 +570,6 @@ public class RttChatFragment extends Fragment
 
   @Override
   public void updateButtonStates() {}
-
-  @Override
-  public void updateInCallButtonUiColors(int color) {}
 
   @Override
   public Fragment getInCallButtonUiFragment() {

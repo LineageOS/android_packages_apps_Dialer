@@ -34,6 +34,7 @@ import android.widget.FrameLayout;
 import com.android.dialer.common.Assert;
 import com.android.dialer.speeddial.FavoritesViewHolder.FavoriteContactsListener;
 import com.android.dialer.speeddial.HeaderViewHolder.SpeedDialHeaderListener;
+import com.android.dialer.speeddial.SpeedDialFragment.HostInterface;
 import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListener;
 import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback.ItemTouchHelperAdapter;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
@@ -81,6 +82,7 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
   private final FavoriteContactsListener favoritesListener;
   private final SuggestedContactsListener suggestedListener;
   private final SpeedDialHeaderListener headerListener;
+  private final HostInterface hostInterface;
 
   private final Map<Integer, Integer> positionToRowTypeMap = new ArrayMap<>();
   private List<SpeedDialUiItem> speedDialUiItems;
@@ -95,11 +97,13 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
       Context context,
       FavoriteContactsListener favoritesListener,
       SuggestedContactsListener suggestedListener,
-      SpeedDialHeaderListener headerListener) {
+      SpeedDialHeaderListener headerListener,
+      HostInterface hostInterface) {
     this.context = context;
     this.favoritesListener = favoritesListener;
     this.suggestedListener = suggestedListener;
     this.headerListener = headerListener;
+    this.hostInterface = hostInterface;
   }
 
   @Override
@@ -255,6 +259,7 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (viewHolder != null) {
           draggingFavoritesViewHolder = (FavoritesViewHolder) viewHolder;
           draggingFavoritesViewHolder.onSelectedChanged(true);
+          hostInterface.dragFavorite(true);
           removeViewHolder.show();
         }
         break;
@@ -263,6 +268,7 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (draggingFavoritesViewHolder != null) {
           draggingFavoritesViewHolder.onSelectedChanged(false);
           draggingFavoritesViewHolder = null;
+          hostInterface.dragFavorite(false);
           removeViewHolder.hide();
         }
         break;

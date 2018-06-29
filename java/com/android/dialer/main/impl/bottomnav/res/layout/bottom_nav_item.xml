@@ -16,49 +16,41 @@
   -->
 <com.android.dialer.main.impl.bottomnav.BottomNavItem
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="80dp"
+    android:background="?android:attr/selectableItemBackgroundBorderless"
     android:minHeight="56dp"
-    android:gravity="center"
-    android:background="?android:attr/selectableItemBackgroundBorderless">
+    android:minWidth="80dp">
 
-  <FrameLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/bottom_nav_item_image"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="8dp"/>
-
-    <TextView
-        android:id="@+id/notification_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="2dp"
-        android:paddingStart="6dp"
-        android:paddingEnd="6dp"
-        android:paddingBottom="1dp"
-        android:minHeight="20dp"
-        android:minWidth="20dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:background="@drawable/notification_badge"
-        android:fontFamily="sans-serif-medium"
-        android:visibility="invisible"/>
-  </FrameLayout>
+  <ImageView
+      android:id="@+id/bottom_nav_item_image"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_marginTop="8dp"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"/>
 
   <TextView
+      android:id="@+id/notification_badge"
+      style="@style/Dialer.TextAppearance.OVERLINE"
+      android:layout_width="16dp"
+      android:layout_height="16dp"
+      android:layout_marginTop="2dp"
+      android:layout_marginStart="-8dp"
+      android:layout_alignParentTop="true"
+      android:layout_toEndOf="@id/bottom_nav_item_image"
+      android:background="@drawable/notification_badge"
+      android:gravity="center"
+      android:textColor="?android:attr/colorBackgroundFloating"
+      android:textSize="11dp"
+      android:visibility="invisible"/>
+  <TextView
       android:id="@+id/bottom_nav_item_text"
+      style="@style/Dialer.TextAppearance.SubHeader2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="8dp"
-      android:gravity="center_horizontal"
-      android:textSize="12sp"
-      style="@style/Dialer.TextAppearance.Secondary"/>
+      android:layout_below="@id/bottom_nav_item_image"
+      android:layout_centerHorizontal="true"
+      android:gravity="center_horizontal"/>
 </com.android.dialer.main.impl.bottomnav.BottomNavItem>

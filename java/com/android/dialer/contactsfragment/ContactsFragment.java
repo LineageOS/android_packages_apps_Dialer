@@ -41,8 +41,6 @@ import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.contacts.common.preference.ContactsPreferences;
-import com.android.contacts.common.preference.ContactsPreferences.ChangeListener;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
@@ -60,8 +58,7 @@ import java.util.Arrays;
 public class ContactsFragment extends Fragment
     implements LoaderCallbacks<Cursor>,
         OnScrollChangeListener,
-        OnEmptyViewActionButtonClickedListener,
-        ChangeListener {
+        OnEmptyViewActionButtonClickedListener {
 
   /** An enum for the different types of headers that be inserted at position 0 in the list. */
   @Retention(RetentionPolicy.SOURCE)
@@ -98,7 +95,6 @@ public class ContactsFragment extends Fragment
 
   private @Header int header;
 
-  private ContactsPreferences contactsPrefs;
   private boolean hasPhoneNumbers;
   private String query;
 
@@ -154,8 +150,6 @@ public class ContactsFragment extends Fragment
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    contactsPrefs = new ContactsPreferences(getContext());
-    contactsPrefs.registerChangeListener(this);
     header = getArguments().getInt(EXTRA_HEADER);
     hasPhoneNumbers = getArguments().getBoolean(EXTRA_HAS_PHONE_NUMBERS);
     if (savedInstanceState == null) {
@@ -224,7 +218,8 @@ public class ContactsFragment extends Fragment
   }
 
   @Override
-  public void onChange() {
+  public void onResume() {
+    super.onResume();
     if (getActivity() != null
         && isAdded()
         && PermissionsUtil.hasContactsReadPermissions(getContext())) {
@@ -268,7 +263,6 @@ public class ContactsFragment extends Fragment
     recyclerView.setAdapter(null);
     recyclerView.setOnScrollChangeListener(null);
     adapter = null;
-    contactsPrefs.unregisterChangeListener();
   }
 
   /*

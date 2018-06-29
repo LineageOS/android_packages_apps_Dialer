@@ -25,6 +25,7 @@ import android.os.RemoteException;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
@@ -33,6 +34,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.protos.ProtoParsers;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
@@ -49,13 +51,23 @@ public final class CallLogCacheUpdater {
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
+  private final CallLogState callLogState;
+
+  /**
+   * Maximum numbers of operations the updater can do. Each transaction to the system call log will
+   * trigger a call log refresh, so the updater can only do a single batch. If there are more
+   * operations it will be truncated. Under normal circumstances there will only be 1 operation
+   */
+  @VisibleForTesting static final int CACHE_UPDATE_LIMIT = 100;
 
   @Inject
   CallLogCacheUpdater(
       @ApplicationContext Context appContext,
-      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor,
+      CallLogState callLogState) {
     this.appContext = appContext;
     this.backgroundExecutor = backgroundExecutor;
+    this.callLogState = callLogState;
   }
 
   /**
@@ -66,17 +78,27 @@ public final class CallLogCacheUpdater {
    * has changed
    */
   public ListenableFuture<Void> updateCache(CallLogMutations mutations) {
-    return backgroundExecutor.submit(
-        () -> {
+    return Futures.transform(
+        callLogState.isBuilt(),
+        isBuilt -> {
+          if (!isBuilt) {
+            // Initial build might need to update 1000 caches, which may overflow the batch
+            // operation limit. The initial data was already built with the cache, there's no need
+            // to update it.
+            LogUtil.i("CallLogCacheUpdater.updateCache", "not updating cache for initial build");
+            return null;
+          }
           updateCacheInternal(mutations);
           return null;
-        });
+        },
+        backgroundExecutor);
   }
 
   private void updateCacheInternal(CallLogMutations mutations) {
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     Stream.concat(
             mutations.getInserts().entrySet().stream(), mutations.getUpdates().entrySet().stream())
+        .limit(CACHE_UPDATE_LIMIT)
         .forEach(
             entry -> {
               ContentValues values = entry.getValue();

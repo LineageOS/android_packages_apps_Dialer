@@ -21,6 +21,7 @@
     </shape>
   </item>
   <item
+      android:id="@+id/record_icon"
       android:top="24dp"
       android:bottom="24dp"
       android:left="24dp"

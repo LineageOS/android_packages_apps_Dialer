@@ -113,9 +113,6 @@ public class OldSpeedDialFragment extends Fragment
   public void onResume() {
     Trace.beginSection(TAG + " onResume");
     super.onResume();
-    if (contactTileAdapter != null) {
-      contactTileAdapter.refreshContactsPreferences();
-    }
     if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
       if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
         getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);

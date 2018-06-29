@@ -16,14 +16,12 @@
 
 package com.android.dialer.speeddial.loader;
 
-import android.annotation.TargetApi;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.os.RemoteException;
 import android.os.Trace;
 import android.provider.ContactsContract;
@@ -33,14 +31,17 @@ import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
 import android.util.ArrayMap;
 import android.util.ArraySet;
-import com.android.contacts.common.preference.ContactsPreferences;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
+import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
-import com.android.dialer.duo.Duo;
+import com.android.dialer.contacts.ContactsComponent;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
+import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
@@ -51,8 +52,10 @@ import com.android.dialer.util.CallUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,40 +75,39 @@ import javax.inject.Singleton;
  *       <li>Remove any {@link SpeedDialEntry} that is no longer starred or whose contact was
  *           deleted.
  *       <li>Update each {@link SpeedDialEntry} contact id, lookup key and channel.
- *       <li>Build a list of {@link SpeedDialUiItem} from {@link Contacts#STREQUENT_PHONE_ONLY}.
- *       <li>If any starred contacts in that list aren't in the {@link
- *           SpeedDialEntryDatabaseHelper}, insert them now.
+ *       <li>Build a list of {@link SpeedDialUiItem} from starred contacts.
+ *       <li>If any contacts in that list aren't in the {@link SpeedDialEntryDatabaseHelper}, insert
+ *           them now.
  *       <li>Notify the {@link SuccessListener} of the complete list of {@link SpeedDialUiItem
  *           SpeedDialContacts} composed from {@link SpeedDialEntry SpeedDialEntries} and
  *           non-starred {@link Contacts#STREQUENT_PHONE_ONLY}.
  *     </ol>
  */
-@SuppressWarnings("AndroidApiChecker")
-@TargetApi(VERSION_CODES.N)
 @Singleton
 public final class SpeedDialUiItemMutator {
-
-  private static final int MAX_DUO_SUGGESTIONS = 3;
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
   // Used to ensure that only one refresh flow runs at a time.
   private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
-  private final ContactsPreferences contactsPreferences;
+  private final ContactDisplayPreferences contactDisplayPreferences;
+  private final HighResolutionPhotoRequester highResolutionPhotoRequester;
 
   @Inject
   public SpeedDialUiItemMutator(
       @ApplicationContext Context appContext,
-      @BackgroundExecutor ListeningExecutorService backgroundExecutor) {
+      @BackgroundExecutor ListeningExecutorService backgroundExecutor,
+      ContactDisplayPreferences contactDisplayPreferences,
+      HighResolutionPhotoRequester highResolutionPhotoRequester) {
     this.appContext = appContext;
     this.backgroundExecutor = backgroundExecutor;
-    this.contactsPreferences = new ContactsPreferences(appContext);
+    this.contactDisplayPreferences = contactDisplayPreferences;
+    this.highResolutionPhotoRequester = highResolutionPhotoRequester;
   }
 
   /**
    * Returns a {@link ListenableFuture} for a list of {@link SpeedDialUiItem SpeedDialUiItems}. This
-   * list is composed of starred contacts from {@link SpeedDialEntryDatabaseHelper} and suggestions
-   * from {@link Contacts#STREQUENT_PHONE_ONLY}.
+   * list is composed of starred contacts from {@link SpeedDialEntryDatabaseHelper}.
    */
   public ListenableFuture<ImmutableList<SpeedDialUiItem>> loadSpeedDialUiItems() {
     return dialerFutureSerializer.submit(this::loadSpeedDialUiItemsInternal, backgroundExecutor);
@@ -117,8 +119,7 @@ public final class SpeedDialUiItemMutator {
    * <p>If the item is starred, it's entry will be removed from the SpeedDialEntry database.
    * Additionally, if the contact only has one entry in the database, it will be unstarred.
    *
-   * <p>If the item isn't starred, it's usage data will be deleted but the suggestion can come back
-   * if the user calls that contact again.
+   * <p>If the item isn't starred, it's usage data will be deleted.
    *
    * @return the updated list of SpeedDialUiItems.
    */
@@ -192,7 +193,6 @@ public final class SpeedDialUiItemMutator {
   @WorkerThread
   private ImmutableList<SpeedDialUiItem> insertNewContactEntry(Uri contactUri) {
     Assert.isWorkerThread();
-    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     try (Cursor cursor =
         appContext
             .getContentResolver()
@@ -234,7 +234,6 @@ public final class SpeedDialUiItemMutator {
   private ImmutableList<SpeedDialUiItem> loadSpeedDialUiItemsInternal() {
     Trace.beginSection("loadSpeedDialUiItemsInternal");
     Assert.isWorkerThread();
-    contactsPreferences.refreshValue(ContactsPreferences.DISPLAY_ORDER_KEY);
     Trace.beginSection("getAllEntries");
     SpeedDialEntryDao db = getSpeedDialEntryDao();
     Trace.endSection(); // getAllEntries
@@ -281,29 +280,22 @@ public final class SpeedDialUiItemMutator {
     }
     Trace.endSection(); // updateOrDeleteEntries
 
-    // Get all Strequent Contacts
-    List<SpeedDialUiItem> strequentContacts = getStrequentContacts();
-
-    // For each contact, if it isn't starred, add it as a suggestion.
+    // Get all starred contacts
+    List<SpeedDialUiItem> starredContacts = getStarredContacts();
     // If it is starred and not already accounted for above, then insert into the SpeedDialEntry DB.
-    Trace.beginSection("addSuggestions");
-    for (SpeedDialUiItem contact : strequentContacts) {
-      if (!contact.isStarred()) {
-        // Add this contact as a suggestion
-        // TODO(77754534): improve suggestions beyond just first channel
-        speedDialUiItems.add(
-            contact.toBuilder().setDefaultChannel(contact.channels().get(0)).build());
-
-      } else if (speedDialUiItems.stream().noneMatch(c -> c.contactId() == contact.contactId())) {
+    Trace.beginSection("addStarredContact");
+    for (SpeedDialUiItem contact : starredContacts) {
+      if (speedDialUiItems.stream().noneMatch(c -> c.contactId() == contact.contactId())) {
         entriesToInsert.add(contact.buildSpeedDialEntry());
 
         // These are our newly starred contacts
         speedDialUiItems.add(contact);
       }
     }
-    Trace.endSection(); // addSuggestions
+    Trace.endSection(); // addStarredContact
 
     Trace.beginSection("insertUpdateAndDelete");
+    requestHighResolutionPhoto(entriesToInsert);
     ImmutableMap<SpeedDialEntry, Long> insertedEntriesToIdsMap =
         db.insertUpdateAndDelete(
             ImmutableList.copyOf(entriesToInsert),
@@ -312,6 +304,20 @@ public final class SpeedDialUiItemMutator {
     Trace.endSection(); // insertUpdateAndDelete
     Trace.endSection(); // loadSpeedDialUiItemsInternal
     return speedDialUiItemsWithUpdatedIds(speedDialUiItems, insertedEntriesToIdsMap);
+  }
+
+  @WorkerThread
+  private void requestHighResolutionPhoto(List<SpeedDialEntry> newEntries) {
+    ContactsComponent.get(appContext).highResolutionPhotoLoader();
+    for (SpeedDialEntry entry : newEntries) {
+      Uri uri;
+      uri = Contacts.getLookupUri(entry.contactId(), entry.lookupKey());
+
+      Futures.addCallback(
+          highResolutionPhotoRequester.request(uri),
+          new DefaultFutureCallback<>(),
+          MoreExecutors.directExecutor());
+    }
   }
 
   /**
@@ -339,7 +345,7 @@ public final class SpeedDialUiItemMutator {
       }
 
       // Starred contacts that aren't in the map, should already have speed dial entry ids.
-      // Non-starred contacts (suggestions) aren't in the speed dial entry database, so they
+      // Non-starred contacts aren't in the speed dial entry database, so they
       // shouldn't have speed dial entry ids.
       Assert.checkArgument(
           speedDialUiItem.isStarred() == (speedDialUiItem.speedDialEntryId() != null),
@@ -485,23 +491,29 @@ public final class SpeedDialUiItemMutator {
   }
 
   @WorkerThread
-  private List<SpeedDialUiItem> getStrequentContacts() {
+  private List<SpeedDialUiItem> getStarredContacts() {
     Trace.beginSection("getStrequentContacts");
     Assert.isWorkerThread();
     Set<String> contactIds = new ArraySet<>();
 
-    // Fetch the contact ids of all strequent contacts
+    // Fetch the contact ids of all starred contacts
     Uri strequentUri =
         Contacts.CONTENT_STREQUENT_URI
             .buildUpon()
             .appendQueryParameter(ContactsContract.STREQUENT_PHONE_ONLY, "true")
             .build();
+    Selection selection = Selection.column(Phone.STARRED).is("=", 1);
     try (Cursor cursor =
         appContext
             .getContentResolver()
-            .query(strequentUri, new String[] {Phone.CONTACT_ID}, null, null, null)) {
+            .query(
+                strequentUri,
+                new String[] {Phone.CONTACT_ID},
+                selection.getSelection(),
+                selection.getSelectionArgs(),
+                null)) {
       if (cursor == null) {
-        LogUtil.e("SpeedDialUiItemMutator.getStrequentContacts", "null cursor");
+        LogUtil.e("SpeedDialUiItemMutator.getStarredContacts", "null cursor");
         Trace.endSection();
         return new ArrayList<>();
       }
@@ -515,8 +527,7 @@ public final class SpeedDialUiItemMutator {
     }
 
     // Build SpeedDialUiItems from those contact ids
-    Selection selection =
-        Selection.builder().and(Selection.column(Phone.CONTACT_ID).in(contactIds)).build();
+    selection = Selection.builder().and(Selection.column(Phone.CONTACT_ID).in(contactIds)).build();
     try (Cursor cursor =
         appContext
             .getContentResolver()
@@ -624,24 +635,10 @@ public final class SpeedDialUiItemMutator {
       Context context, ImmutableList<SpeedDialUiItem> speedDialUiItems) {
     Assert.isMainThread();
 
-    Duo duo = DuoComponent.get(context).getDuo();
-    int maxDuoSuggestions = MAX_DUO_SUGGESTIONS;
-
     ImmutableList.Builder<SpeedDialUiItem> newSpeedDialItemList = ImmutableList.builder();
     // for each existing item
     for (SpeedDialUiItem item : speedDialUiItems) {
-      // If the item is a suggestion
-      if (!item.isStarred()) {
-        // And duo reachable, insert a duo suggestion
-        if (maxDuoSuggestions > 0 && duo.isReachable(context, item.defaultChannel().number())) {
-          maxDuoSuggestions--;
-          Channel defaultChannel =
-              item.defaultChannel().toBuilder().setTechnology(Channel.DUO).build();
-          newSpeedDialItemList.add(item.toBuilder().setDefaultChannel(defaultChannel).build());
-        }
-        // Insert the voice suggestion too
-        newSpeedDialItemList.add(item);
-      } else if (item.defaultChannel() == null) {
+      if (item.defaultChannel() == null) {
         // If the contact is starred and doesn't have a default channel, insert duo channels
         newSpeedDialItemList.add(insertDuoChannelsToStarredContact(context, item));
       } else {
@@ -689,6 +686,6 @@ public final class SpeedDialUiItemMutator {
   }
 
   private boolean isPrimaryDisplayNameOrder() {
-    return contactsPreferences.getDisplayOrder() == ContactsPreferences.DISPLAY_ORDER_PRIMARY;
+    return contactDisplayPreferences.getDisplayOrder() == DisplayOrder.PRIMARY;
   }
 }
