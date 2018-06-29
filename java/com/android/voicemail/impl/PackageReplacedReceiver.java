@@ -16,7 +16,6 @@
 
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -91,7 +90,6 @@ public class PackageReplacedReceiver extends BroadcastReceiver {
       this.context = context;
     }
 
-    @TargetApi(android.os.Build.VERSION_CODES.N) // used for try with resources
     @Override
     public Void doInBackground(Void arg) throws Throwable {
       LogUtil.i("PackageReplacedReceiver.ExistingVoicemailCheck.doInBackground", "");

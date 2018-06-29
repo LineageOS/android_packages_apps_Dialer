@@ -16,12 +16,10 @@
 
 package com.android.dialer.databasepopulator;
 
-import android.annotation.TargetApi;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
-import android.os.Build.VERSION_CODES;
 import android.os.RemoteException;
 import android.provider.BlockedNumberContract;
 import android.provider.BlockedNumberContract.BlockedNumbers;
@@ -38,7 +36,6 @@ public class BlockedBumberPopulator {
       Arrays.asList(
           createContentValuesWithNumber("123456789"), createContentValuesWithNumber("987654321"));
 
-  @TargetApi(VERSION_CODES.N)
   public static void populateBlockedNumber(@NonNull Context context) {
     ArrayList<ContentProviderOperation> operations = new ArrayList<>();
     for (ContentValues value : values) {
@@ -55,7 +52,6 @@ public class BlockedBumberPopulator {
     }
   }
 
-  @TargetApi(VERSION_CODES.N)
   public static void deleteBlockedNumbers(@NonNull Context context) {
     // clean BlockedNumbers db
     context.getContentResolver().delete(BlockedNumbers.CONTENT_URI, null, null);

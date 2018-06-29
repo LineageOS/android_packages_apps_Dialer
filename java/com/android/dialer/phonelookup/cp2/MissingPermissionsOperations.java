@@ -36,7 +36,6 @@ import java.util.function.Predicate;
 import javax.inject.Inject;
 
 /** Shared logic for handling missing permissions in CP2 lookups. */
-@SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
 final class MissingPermissionsOperations {
 
   private final Context appContext;

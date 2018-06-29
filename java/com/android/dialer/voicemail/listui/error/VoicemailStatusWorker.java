@@ -16,10 +16,8 @@
 
 package com.android.dialer.voicemail.listui.error;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -32,7 +30,6 @@ import java.util.List;
 /**
  * Worker for {@link com.android.dialer.common.concurrent.DialerExecutors} to fetch voicemail status
  */
-@TargetApi(VERSION_CODES.N)
 public class VoicemailStatusWorker implements Worker<Context, List<VoicemailStatus>> {
 
   @Nullable

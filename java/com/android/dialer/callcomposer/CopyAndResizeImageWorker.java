@@ -16,14 +16,12 @@
 
 package com.android.dialer.callcomposer;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
@@ -37,7 +35,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /** Task for copying and resizing images to be shared with RCS process. */
-@TargetApi(VERSION_CODES.N)
 class CopyAndResizeImageWorker implements Worker<Uri, Pair<File, String>> {
   private static final String MIME_TYPE = "image/jpeg";
 

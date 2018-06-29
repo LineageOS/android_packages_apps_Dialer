@@ -15,14 +15,12 @@
  */
 package com.android.voicemail.impl.sync;
 
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
@@ -256,7 +254,6 @@ public class VoicemailsQueryHelper {
   }
 
   /** Find the oldest voicemails that are on the device, and also on the server. */
-  @TargetApi(VERSION_CODES.N) // used for try with resources
   public List<Voicemail> oldestVoicemailsOnServer(int numVoicemails) {
     if (numVoicemails <= 0) {
       Assert.fail("Query for remote voicemails cannot be <= 0");
