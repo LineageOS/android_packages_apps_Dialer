@@ -21,9 +21,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import com.android.incallui.call.DialerCall;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Optional;
 import javax.inject.Inject;
 
 /** Default implementation of SpeakEasyCallManager. */
@@ -36,7 +36,7 @@ public class SpeakEasyCallManagerStub implements SpeakEasyCallManager {
   @Override
   @Nullable
   public Optional<Fragment> getSpeakEasyFragment(DialerCall call) {
-    return Optional.absent();
+    return Optional.empty();
   }
 
   /** Always inert in the stub. */

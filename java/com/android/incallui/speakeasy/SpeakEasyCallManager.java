@@ -20,8 +20,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import com.android.incallui.call.DialerCall;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Optional;
 
 /** Provides operations necessary to SpeakEasy. */
 public interface SpeakEasyCallManager {
