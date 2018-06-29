@@ -51,6 +51,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.ActionMode;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
@@ -334,7 +335,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
             activity.findViewById(R.id.remove_view),
             activity.findViewById(R.id.search_view_container),
             toolbar);
-    speedDialFragmentHost = new MainSpeedDialFragmentHost(toolbar);
+    speedDialFragmentHost =
+        new MainSpeedDialFragmentHost(
+            toolbar,
+            activity.findViewById(R.id.root_layout),
+            activity.findViewById(R.id.coordinator_layout),
+            activity.findViewById(R.id.fragment_container));
 
     lastTabController = new LastTabController(activity, bottomNav, showVoicemailTab);
 
@@ -1255,14 +1261,31 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private static final class MainSpeedDialFragmentHost implements SpeedDialFragment.HostInterface {
 
     private final MainToolbar toolbar;
+    private final ViewGroup rootLayout;
+    private final ViewGroup coordinatorLayout;
+    private final ViewGroup fragmentContainer;
 
-    MainSpeedDialFragmentHost(MainToolbar toolbar) {
+    MainSpeedDialFragmentHost(
+        MainToolbar toolbar,
+        ViewGroup rootLayout,
+        ViewGroup coordinatorLayout,
+        ViewGroup fragmentContainer) {
       this.toolbar = toolbar;
+      this.rootLayout = rootLayout;
+      this.coordinatorLayout = coordinatorLayout;
+      this.fragmentContainer = fragmentContainer;
     }
 
     @Override
     public void setHasFrequents(boolean hasFrequents) {
       toolbar.showClearFrequents(hasFrequents);
+    }
+
+    @Override
+    public void dragFavorite(boolean start) {
+      rootLayout.setClipChildren(!start);
+      coordinatorLayout.setClipChildren(!start);
+      fragmentContainer.setClipChildren(!start);
     }
   }
 
