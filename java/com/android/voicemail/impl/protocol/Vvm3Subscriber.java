@@ -89,7 +89,7 @@ public class Vvm3Subscriber {
   private static final String OPERATION_GET_SPG_URL = "retrieveSPGURL";
   private static final String SPG_URL_TAG = "spgurl";
   private static final String TRANSACTION_ID_TAG = "transactionid";
-  //language=XML
+  // language=XML
   private static final String VMG_XML_REQUEST_FORMAT =
       ""
           + "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -159,6 +159,7 @@ public class Vvm3Subscriber {
   }
 
   @WorkerThread
+  @SuppressWarnings("missingPermission")
   public Vvm3Subscriber(
       ActivationTask task,
       PhoneAccountHandle handle,
@@ -175,11 +176,23 @@ public class Vvm3Subscriber {
     // Assuming getLine1Number() will work with VVM3. For unprovisioned users the IMAP username
     // is not included in the status SMS, thus no other way to get the current phone number.
     number =
-        this.helper
-            .getContext()
-            .getSystemService(TelephonyManager.class)
-            .createForPhoneAccountHandle(this.handle)
-            .getLine1Number();
+        stripInternational(
+            this.helper
+                .getContext()
+                .getSystemService(TelephonyManager.class)
+                .createForPhoneAccountHandle(this.handle)
+                .getLine1Number());
+  }
+
+  /**
+   * Self provisioning gateway expects 10 digit national format, but {@link
+   * TelephonyManager#getLine1Number()} might return e164 with "+1" at front.
+   */
+  private static String stripInternational(String number) {
+    if (number.startsWith("+1")) {
+      number = number.substring(2);
+    }
+    return number;
   }
 
   @WorkerThread
