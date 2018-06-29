@@ -16,11 +16,9 @@
 
 package com.android.incallui.answer.impl.hint;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.android.dialer.common.Assert;
@@ -29,7 +27,6 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.incallui.answer.impl.hint.PawSecretCodeListener.PawType;
 
 /** Decrypt the event payload to be shown if in a specific time range and the key is received. */
-@TargetApi(VERSION_CODES.N)
 public final class PawImageLoaderImpl implements PawImageLoader {
 
   @Override

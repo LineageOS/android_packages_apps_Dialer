@@ -21,14 +21,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.PhoneLookup;
 import android.provider.ContactsContract.RawContacts;
-import android.support.annotation.RequiresApi;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.contacts.common.ContactsUtils;
@@ -46,7 +44,6 @@ public class CallerInfo {
 
   private static final String TAG = "CallerInfo";
 
-  @RequiresApi(VERSION_CODES.N)
   private static final String[] DEFAULT_PHONELOOKUP_PROJECTION =
       new String[] {
         PhoneLookup.CONTACT_ID,

@@ -64,7 +64,6 @@ import java.util.function.Predicate;
 import javax.inject.Inject;
 
 /** PhoneLookup implementation for contacts in the default directory. */
-@SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
 public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
 
   private static final String PREF_LAST_TIMESTAMP_PROCESSED =

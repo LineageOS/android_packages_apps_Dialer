@@ -16,7 +16,6 @@
 
 package com.android.incallui.spam;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.PendingIntent;
@@ -25,7 +24,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Icon;
-import android.os.Build.VERSION_CODES;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
@@ -88,7 +86,6 @@ public class SpamCallListListener implements CallList.Listener {
   }
 
   /** Checks if the number is in the call history. */
-  @TargetApi(VERSION_CODES.N)
   private static final class NumberInCallHistoryWorker implements Worker<Void, Integer> {
 
     private final Context appContext;
