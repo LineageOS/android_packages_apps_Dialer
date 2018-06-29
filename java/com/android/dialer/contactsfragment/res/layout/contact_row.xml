@@ -47,11 +47,7 @@
         android:layout_height="match_parent"
         android:paddingStart="@dimen/text_padding_start"
         android:paddingEnd="@dimen/text_padding_end"
-        android:maxLines="1"
-        android:ellipsize="end"
         android:gravity="center_vertical"
-        android:textSize="@dimen/text_size"
-        android:textColor="?android:attr/textColorPrimary"
-        android:fontFamily="sans-serif"/>
+        style="@style/Dialer.TextAppearance.Primary.Ellipsize"/>
   </LinearLayout>
 </FrameLayout>
