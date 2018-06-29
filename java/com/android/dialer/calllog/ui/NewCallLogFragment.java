@@ -17,7 +17,6 @@ package com.android.dialer.calllog.ui;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.database.StaleDataException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -34,6 +33,7 @@ import android.view.ViewGroup;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.RefreshAnnotatedCallLogReceiver;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
+import com.android.dialer.calllog.database.Coalescer;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -337,16 +337,13 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
           }
         },
         throwable -> {
-          if (throwable instanceof StaleDataException) {
-            // Coalescing can fail if the cursor passed to Coalescer is closed by the loader while
-            // the work is still in progress.
-            // This can happen when the loader restarts and finishes loading data before the
-            // coalescing work is completed.
-            // This failure doesn't need to be thrown as coalescing will be restarted on the latest
-            // data obtained by the loader.
-            // TODO(linyuh): Also throw an exception if the failure above can be avoided.
-            LogUtil.e("NewCallLogFragment.onLoadFinished", "coalescing failed", throwable);
-          } else {
+          // Coalescing can fail if the cursor passed to Coalescer is closed by the loader while
+          // the work is still in progress.
+          // This can happen when the loader restarts and finishes loading data before the
+          // coalescing work is completed.
+          // This failure is identified by ExpectedCoalescerException and doesn't need to be
+          // thrown as coalescing will be restarted on the latest data obtained by the loader.
+          if (!(throwable instanceof Coalescer.ExpectedCoalescerException)) {
             throw new AssertionError(throwable);
           }
         });

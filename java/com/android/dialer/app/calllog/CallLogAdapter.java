@@ -100,6 +100,8 @@ import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
@@ -158,9 +160,12 @@ public class CallLogAdapter extends GroupingListAdapter
   /**
    * Maps a raw input number to match info. We only log one MatchInfo per raw input number to reduce
    * the amount of data logged.
+   *
+   * <p>Note that this has to be a {@link ConcurrentMap} as the match info for each row in the UI is
+   * loaded in a background thread spawned when the ViewHolder is bound.
    */
-  private final Map<String, ContactsProviderMatchInfo> contactsProviderMatchInfos =
-      new ArrayMap<>();
+  private final ConcurrentMap<String, ContactsProviderMatchInfo> contactsProviderMatchInfos =
+      new ConcurrentHashMap<>();
 
   private final ActionMode.Callback actionModeCallback =
       new ActionMode.Callback() {
@@ -1464,6 +1469,7 @@ public class CallLogAdapter extends GroupingListAdapter
     notifyDataSetChanged();
   }
 
+  @WorkerThread
   private void logCp2Metrics(PhoneCallDetails details, ContactInfo contactInfo) {
     if (details == null) {
       return;

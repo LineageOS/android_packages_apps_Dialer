@@ -19,8 +19,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_row_height"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:background="?android:attr/selectableItemBackground">
 
   <QuickContactBadge
@@ -44,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
-        android:fontFamily="sans-serif"
         style="@style/Dialer.TextAppearance.Primary"/>
 
     <com.android.dialer.widget.BidiTextView
@@ -52,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
-        android:fontFamily="sans-serif"
         style="@style/Dialer.TextAppearance.Secondary"/>
   </LinearLayout>
 
