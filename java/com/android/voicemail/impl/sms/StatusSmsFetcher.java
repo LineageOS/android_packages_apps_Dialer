@@ -46,7 +46,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /** Intercepts a incoming STATUS SMS with a blocking call. */
-@SuppressWarnings("AndroidApiChecker") /* CompletableFuture is java8*/
 @TargetApi(VERSION_CODES.O)
 public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
 

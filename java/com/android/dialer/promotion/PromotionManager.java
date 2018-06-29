@@ -49,7 +49,6 @@ public final class PromotionManager {
    *
    * <p>TODO(wangqi): add support for other tabs.
    */
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
   public Optional<Promotion> getHighestPriorityPromotion(@PromotionType int type) {
     for (Promotion promotion : priorityPromotionList) {
       if (promotion.isEligibleToBeShown()) {

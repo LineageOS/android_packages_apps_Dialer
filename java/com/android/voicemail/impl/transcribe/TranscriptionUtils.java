@@ -33,8 +33,6 @@ import java.security.NoSuchAlgorithmException;
 public class TranscriptionUtils {
   static final String AMR_PREFIX = "#!AMR\n";
 
-  // Uses try-with-resource
-  @TargetApi(android.os.Build.VERSION_CODES.N)
   static ByteString getAudioData(Context context, Uri voicemailUri) {
     try (InputStream in = context.getContentResolver().openInputStream(voicemailUri)) {
       return ByteString.readFrom(in);
