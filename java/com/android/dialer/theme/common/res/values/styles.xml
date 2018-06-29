@@ -31,4 +31,13 @@
     <item name="android:layout_marginStart">20dp</item>
     <item name="android:paddingLeft">12dp</item>
   </style>
+
+  <style name="DialerBottomSheetDialogStyle" parent="Theme.Design.BottomSheetDialog">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+  </style>
+
+  <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+    <item name="android:background">@drawable/bottom_sheet_background</item>
+  </style>
 </resources>

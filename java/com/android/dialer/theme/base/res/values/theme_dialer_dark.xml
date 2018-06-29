@@ -64,4 +64,10 @@
     <item name="colorIconOnUnthemedDarkBackground">@android:color/white</item>
     <item name="colorPrimary20pct">@color/dialer_dark_theme_color_20pct</item>
   </style>
+
+  <style name="DialerBottomSheetDialogStyle.Dark">
+    <item name="android:textColorPrimary">@color/dialer_dark_primary_text_color</item>
+    <item name="android:colorBackgroundFloating">@color/google_grey_800</item>
+  </style>
+
 </resources>
