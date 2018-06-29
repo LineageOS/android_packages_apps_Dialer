@@ -46,6 +46,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -364,6 +365,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     PhoneCallDetailsHelper phoneCallDetailsHelper =
         new PhoneCallDetailsHelper(context, resources, callLogCache);
 
+    CardView cardView = new CardView(context);
+    cardView.setLayoutParams(new ViewGroup.MarginLayoutParams(0, 0));
     CallLogListItemViewHolder viewHolder =
         new CallLogListItemViewHolder(
             context,
@@ -378,7 +381,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
             new DialerQuickContactBadge(context),
             new View(context),
             PhoneCallDetailsViews.createForTest(context),
-            new CardView(context),
+            cardView,
             new TextView(context),
             new ImageView(context));
     viewHolder.detailsButtonView = new TextView(context);
@@ -889,12 +892,30 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       bindActionButtons();
       actionsView.setVisibility(View.VISIBLE);
       actionsView.setAlpha(1.0f);
+      ViewGroup.MarginLayoutParams layoutParams =
+          (ViewGroup.MarginLayoutParams) callLogEntryView.getLayoutParams();
+      layoutParams.bottomMargin =
+          context
+              .getResources()
+              .getDimensionPixelSize(R.dimen.call_log_card_margin_bottom_expanded);
+      callLogEntryView.setLayoutParams(layoutParams);
+      callLogEntryView.setCardElevation(
+          context.getResources().getDimension(R.dimen.call_log_card_elevation_expanded));
     } else {
       // When recycling a view, it is possible the actionsView ViewStub was previously
       // inflated so we should hide it in this case.
       if (actionsView != null) {
         actionsView.setVisibility(View.GONE);
       }
+      ViewGroup.MarginLayoutParams layoutParams =
+          (ViewGroup.MarginLayoutParams) callLogEntryView.getLayoutParams();
+      layoutParams.bottomMargin =
+          context
+              .getResources()
+              .getDimensionPixelSize(R.dimen.call_log_card_margin_bottom_collapsed);
+      callLogEntryView.setLayoutParams(layoutParams);
+      callLogEntryView.setCardElevation(
+          context.getResources().getDimension(R.dimen.call_log_card_elevation_collapsed));
     }
 
     updatePrimaryActionButton(show);
