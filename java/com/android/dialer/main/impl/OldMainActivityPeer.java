@@ -1371,7 +1371,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       showPromotionBottomSheet(activity, bottomSheet);
     }
 
-    @SuppressWarnings("AndroidApiChecker") // Use of optional
     private static void showPromotionBottomSheet(Context context, View view) {
       BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(view);
       Optional<Promotion> promotionOptional =

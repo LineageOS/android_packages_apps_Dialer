@@ -32,7 +32,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Map;
 
-@SuppressWarnings("AndroidApiChecker") // Map.getOrDefault() is java8
+/** Utilities for DIGEST-MD5. */
 @TargetApi(VERSION_CODES.O)
 public class DigestMd5Utils {
 

@@ -17,14 +17,12 @@
 package com.android.incallui;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -51,7 +49,6 @@ import java.util.Arrays;
  *
  * @see CallerInfo
  */
-@TargetApi(VERSION_CODES.N)
 public class CallerInfoAsyncQuery {
 
   /** Interface for a CallerInfoAsyncQueryHandler result return. */

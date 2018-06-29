@@ -16,9 +16,7 @@
 
 package com.android.dialer.precall.impl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.telecom.PhoneAccount;
 import android.telephony.SubscriptionInfo;
@@ -46,8 +44,6 @@ public class AssistedDialAction implements PreCallAction {
     return false;
   }
 
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
-  @TargetApi(Build.VERSION_CODES.N)
   @Override
   public void runWithoutUi(Context context, CallIntentBuilder builder) {
     if (!builder.isAssistedDialAllowed()) {
@@ -85,8 +81,6 @@ public class AssistedDialAction implements PreCallAction {
   /**
    * A convenience method to return the proper TelephonyManager in possible multi-sim environments.
    */
-  @SuppressWarnings("AndroidApiChecker") // Use of createForSubscriptionId
-  @TargetApi(Build.VERSION_CODES.N)
   private TelephonyManager getAssistedDialingTelephonyManager(
       Context context, CallIntentBuilder builder) {
 

@@ -17,12 +17,10 @@
 package com.android.dialer.calllog.datasources.systemcalllog;
 
 import android.Manifest.permission;
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.CallLog;
@@ -230,7 +228,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     return null;
   }
 
-  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   private void handleInsertsAndUpdates(
       Context appContext, CallLogMutations mutations, Set<Long> existingAnnotatedCallLogIds) {
     long previousTimestampProcessed = sharedPreferences.getLong(PREF_LAST_TIMESTAMP_PROCESSED, 0L);
@@ -453,7 +450,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     }
   }
 
-  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   private static Set<Long> getAnnotatedCallLogIds(Context appContext) {
     ArraySet<Long> ids = new ArraySet<>();
 
@@ -482,7 +478,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
     return ids;
   }
 
-  @TargetApi(Build.VERSION_CODES.N) // Uses try-with-resources
   private static Set<Long> getIdsFromSystemCallLogThatMatch(
       Context appContext, Set<Long> matchingIds) {
     ArraySet<Long> ids = new ArraySet<>();

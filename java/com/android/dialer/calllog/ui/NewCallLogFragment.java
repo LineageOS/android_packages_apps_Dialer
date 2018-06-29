@@ -293,7 +293,6 @@ public final class NewCallLogFragment extends Fragment implements LoaderCallback
     return new AnnotatedCallLogCursorLoader(Assert.isNotNull(getContext()));
   }
 
-  @SuppressWarnings("AndroidApiChecker") // Use of optional
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor newCursor) {
     LogUtil.enterBlock("NewCallLogFragment.onLoadFinished");

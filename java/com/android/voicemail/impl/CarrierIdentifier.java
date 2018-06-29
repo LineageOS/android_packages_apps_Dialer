@@ -28,7 +28,7 @@ import java.util.Optional;
 /** Identifies a carrier. */
 @AutoValue
 @TargetApi(VERSION_CODES.O)
-@SuppressWarnings({"missingpermission", "AndroidApiChecker"})
+@SuppressWarnings({"missingpermission"})
 public abstract class CarrierIdentifier {
 
   public abstract String mccMnc();

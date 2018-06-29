@@ -1022,7 +1022,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
    * the same time that is logged as the start time in the Call Log (see {@link
    * android.provider.CallLog.Calls#DATE}).
    */
-  @TargetApi(26)
+  @TargetApi(VERSION_CODES.O)
   public long getCreationTimeMillis() {
     return telecomCall.getDetails().getCreationTimeMillis();
   }

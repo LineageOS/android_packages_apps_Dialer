@@ -16,12 +16,10 @@
 
 package com.android.dialer.callcomposer.camera;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import com.android.dialer.callcomposer.camera.ImagePersistWorker.Result;
@@ -38,7 +36,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /** Persisting image routine. */
-@TargetApi(VERSION_CODES.N)
 public class ImagePersistWorker implements Worker<Void, Result> {
   private int width;
   private int height;
