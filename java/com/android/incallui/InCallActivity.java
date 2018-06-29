@@ -96,12 +96,12 @@ import com.android.incallui.video.bindings.VideoBindings;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.video.protocol.VideoCallScreenDelegateFactory;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /** Version of {@link InCallActivity} that shows the new UI */
 public class InCallActivity extends TransactionSafeFragmentActivity
@@ -124,7 +124,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private static final int DIALPAD_REQUEST_SHOW = 2;
   private static final int DIALPAD_REQUEST_HIDE = 3;
 
-  private static Optional<Integer> audioRouteForTesting = Optional.absent();
+  private static Optional<Integer> audioRouteForTesting = Optional.empty();
 
   private SelectPhoneAccountListener selectPhoneAccountListener;
   private UiListener<Result> preferredAccountWorkerResultListener;
