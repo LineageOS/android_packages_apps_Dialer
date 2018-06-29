@@ -36,6 +36,7 @@ import android.widget.TextView;
 import com.android.dialer.common.DpUtil;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
+import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.incalluilock.InCallUiLock;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,8 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
       }
     }
     layout.addView(newTextViewItem(null));
+    int paddingVertical = (int) DpUtil.dpToPx(getContext(), 8);
+    layout.setPadding(0, paddingVertical, 0, paddingVertical);
     layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
     return layout;
   }
@@ -100,11 +103,11 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
 
     TextView textView = new TextView(context);
     textView.setText(text == null ? getString(R.string.call_incoming_message_custom) : text);
-    int padding = (int) DpUtil.dpToPx(context, 16);
-    textView.setPadding(padding, padding, padding, padding);
+    int paddingHorizontal = (int) DpUtil.dpToPx(context, 24);
+    int paddingVertical = (int) DpUtil.dpToPx(context, 12);
+    textView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
     textView.setBackground(background);
-    textView.setTextColor(context.getColor(R.color.blue_grey_100));
-    textView.setTextAppearance(R.style.TextAppearance_AppCompat_Widget_PopupMenu_Large);
+    textView.setTextAppearance(R.style.Dialer_TextAppearance_Primary2);
 
     LayoutParams params =
         new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -124,7 +127,7 @@ public class SmsBottomSheetFragment extends BottomSheetDialogFragment {
 
   @Override
   public int getTheme() {
-    return R.style.Theme_Design_Light_BottomSheetDialog;
+    return ThemeComponent.get(getContext()).theme().getBottomSheetStyleRes();
   }
 
   @Override
