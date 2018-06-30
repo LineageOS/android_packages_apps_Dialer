@@ -16,9 +16,7 @@
 
 package com.android.dialer.speeddial;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,8 +55,6 @@ import java.util.Map;
  *   <li>Suggested contacts
  * </ol>
  */
-@SuppressWarnings("AndroidApiChecker")
-@TargetApi(VERSION_CODES.N)
 public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     implements ItemTouchHelperAdapter {
 

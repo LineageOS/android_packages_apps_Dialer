@@ -53,11 +53,7 @@ public final class CallLogQuery {
   public static final int DATA_USAGE = 21;
   public static final int TRANSCRIPTION = 22;
   public static final int CACHED_PHOTO_URI = 23;
-
-  @RequiresApi(VERSION_CODES.N)
   public static final int POST_DIAL_DIGITS = 24;
-
-  @RequiresApi(VERSION_CODES.N)
   public static final int VIA_NUMBER = 25;
 
   @RequiresApi(VERSION_CODES.O)

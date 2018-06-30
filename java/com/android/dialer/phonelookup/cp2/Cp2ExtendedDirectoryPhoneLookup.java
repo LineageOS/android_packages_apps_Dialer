@@ -55,7 +55,6 @@ import javax.inject.Inject;
  *
  * <p>Contacts in these directories are accessible only by specifying a directory ID.
  */
-@SuppressWarnings("AndroidApiChecker") // Use of Java 8 APIs.
 public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
 
   /** Config flag for timeout (in ms). */

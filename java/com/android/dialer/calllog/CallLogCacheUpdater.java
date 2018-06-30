@@ -46,7 +46,6 @@ import javax.inject.Inject;
  * Update {@link Calls#CACHED_NAME} and other cached columns after the annotated call log has been
  * updated. Dialer does not read these columns but other apps relies on it.
  */
-@SuppressWarnings("AndroidApiChecker")
 public final class CallLogCacheUpdater {
 
   private final Context appContext;

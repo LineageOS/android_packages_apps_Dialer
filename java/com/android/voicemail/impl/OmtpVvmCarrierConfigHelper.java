@@ -56,7 +56,7 @@ import java.util.Set;
  * <p>TODO(twyen): refactor this to an interface.
  */
 @TargetApi(VERSION_CODES.O)
-@SuppressWarnings({"missingpermission", "AndroidApiChecker"})
+@SuppressWarnings({"missingpermission"})
 public class OmtpVvmCarrierConfigHelper {
 
   private static final String TAG = "OmtpVvmCarrierCfgHlpr";

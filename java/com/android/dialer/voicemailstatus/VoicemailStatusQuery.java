@@ -34,11 +34,7 @@ public class VoicemailStatusQuery {
   public static final int CONFIGURATION_STATE_INDEX = 3;
   public static final int DATA_CHANNEL_STATE_INDEX = 4;
   public static final int NOTIFICATION_CHANNEL_STATE_INDEX = 5;
-
-  @RequiresApi(VERSION_CODES.N)
   public static final int QUOTA_OCCUPIED_INDEX = 6;
-
-  @RequiresApi(VERSION_CODES.N)
   public static final int QUOTA_TOTAL_INDEX = 7;
 
   @RequiresApi(VERSION_CODES.N_MR1)

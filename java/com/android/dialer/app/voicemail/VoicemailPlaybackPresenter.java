@@ -16,7 +16,6 @@
 
 package com.android.dialer.app.voicemail;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -28,7 +27,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -90,7 +88,6 @@ import javax.annotation.concurrent.ThreadSafe;
  * calls into this class from outside must be done from the main UI thread.
  */
 @NotThreadSafe
-@TargetApi(VERSION_CODES.N)
 public class VoicemailPlaybackPresenter
     implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnCompletionListener,

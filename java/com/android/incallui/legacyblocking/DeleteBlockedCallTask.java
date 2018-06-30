@@ -17,12 +17,10 @@
 package com.android.incallui.legacyblocking;
 
 import android.Manifest.permission;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.os.Build.VERSION_CODES;
 import android.provider.CallLog;
 import android.support.v4.content.ContextCompat;
 import com.android.dialer.common.LogUtil;
@@ -34,7 +32,6 @@ import java.util.Objects;
  * versions of the OS, call blocking is implemented in the system and there's no need to mess with
  * the call log.
  */
-@TargetApi(VERSION_CODES.N)
 public class DeleteBlockedCallTask extends AsyncTask<Void, Void, Long> {
 
   public static final String IDENTIFIER = "DeleteBlockedCallTask";
