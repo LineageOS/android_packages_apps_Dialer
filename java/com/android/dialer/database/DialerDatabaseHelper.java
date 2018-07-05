@@ -43,8 +43,10 @@ import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.smartdial.SmartDialNameMatcher;
 import com.android.dialer.smartdial.SmartDialPrefix;
 import com.android.dialer.util.PermissionsUtil;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
+import android.util.Log;
 import java.util.Objects;
 import java.util.Set;
 
@@ -74,10 +76,16 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
 
   private static final String LAST_UPDATED_MILLIS = "last_updated_millis";
   private static final String DATABASE_VERSION_PROPERTY = "database_version";
-  private static final int MAX_ENTRIES = 20;
+  private static final int MAX_ENTRIES = 40;
 
   private final Context mContext;
   private boolean mIsTestInstance = false;
+
+  private static DialerDatabaseHelper sSingleton = null;
+
+  private Class mMultiMatchClass;
+  private Object mMultiMatchObject;
+  private Method mMultiMatchMethod;
 
   protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
     super(context, databaseName, null, dbVersion);
@@ -87,6 +95,33 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   public void setIsTestInstance(boolean isTestInstance) {
     mIsTestInstance = isTestInstance;
   }
+
+  private void initMultiLanguageSearch() {
+    try {
+        if (mMultiMatchClass == null) {
+            mMultiMatchClass = Class
+                    .forName("com.qualcomm.qti.smartsearch.SmartMatch");
+            Log.d(TAG, "create multi match success");
+        }
+        if (mMultiMatchObject == null && mMultiMatchClass != null) {
+            mMultiMatchObject = mMultiMatchClass.newInstance();
+        }
+        if (mMultiMatchMethod == null && mMultiMatchClass != null) {
+            mMultiMatchMethod = mMultiMatchClass.getDeclaredMethod(
+                    "getMatchStringIndex", String.class, String.class,
+                    int.class);
+        }
+    } catch (Exception e) {
+    }
+  }
+
+    public Object getMultiMatchObject() {
+        return mMultiMatchObject;
+    }
+
+    public Method getMultiMatchMethod() {
+        return mMultiMatchMethod;
+    }
 
   /**
    * Creates tables in the database when database is created for the first time.
@@ -598,6 +633,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   public synchronized void updateSmartDialDatabase() {
     LogUtil.enterBlock("DialerDatabaseHelper.updateSmartDialDatabase");
 
+    initMultiLanguageSearch();
+
     final SQLiteDatabase db = getWritableDatabase();
 
     LogUtil.v("DialerDatabaseHelper.updateSmartDialDatabase", "starting to update database");
@@ -815,7 +852,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     final SQLiteDatabase db = getReadableDatabase();
 
     /** Uses SQL query wildcard '%' to represent prefix matching. */
-    final String looseQuery = query + "%";
+//    final String looseQuery = query + "%";
 
     final ArrayList<ContactNumber> result = new ArrayList<>();
 
@@ -842,20 +879,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
                 + SmartDialDbColumns.CARRIER_PRESENCE
                 + " FROM "
                 + Tables.SMARTDIAL_TABLE
-                + " WHERE "
-                + SmartDialDbColumns.CONTACT_ID
-                + " IN "
-                + " (SELECT "
-                + PrefixColumns.CONTACT_ID
-                + " FROM "
-                + Tables.PREFIX_TABLE
-                + " WHERE "
-                + Tables.PREFIX_TABLE
-                + "."
-                + PrefixColumns.PREFIX
-                + " LIKE '"
-                + looseQuery
-                + "')"
                 + " ORDER BY "
                 + SmartDialSortingOrder.SORT_ORDER,
             new String[] {currentTimeStamp});
@@ -1197,6 +1220,23 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
       }
       return false;
     }
+  }
+
+  /**
+  * Access function to get the singleton instance of DialerDatabaseHelper.
+  */
+    public static synchronized DialerDatabaseHelper getInstance(Context context) {
+        if (DEBUG) {
+            Log.v(TAG, "Getting Instance");
+        }
+        if (sSingleton == null) {
+            // Use application context instead of activity context because this is a singleton,
+            // and we don't want to leak the activity if the activity is not running but the
+            // dialer database helper is still doing work.
+            sSingleton = new DialerDatabaseHelper(context.getApplicationContext(),
+                    DATABASE_NAME, DATABASE_VERSION);
+        }
+        return sSingleton;
   }
 
   /** Data format for finding duplicated contacts. */
