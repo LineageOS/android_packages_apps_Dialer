@@ -22,4 +22,8 @@
   <files-path
     name="voicemails"
     path="voicemails/"/>
+  <!-- Offer access to saved call recordings -->
+  <external-path
+    name="recordings"
+    path="CallRecordings/"/>
 </paths>

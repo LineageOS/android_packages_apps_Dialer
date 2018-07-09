@@ -37,6 +37,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 import com.android.dialer.app.R;
+import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.util.SettingsUtil;
 
 public class SoundSettingsFragment extends PreferenceFragment
@@ -139,6 +140,10 @@ public class SoundSettingsFragment extends PreferenceFragment
     } else {
       getPreferenceScreen().removePreference(dtmfToneLength);
       dtmfToneLength = null;
+    }
+    if (!CallRecorderService.isEnabled(getActivity())) {
+      getPreferenceScreen().removePreference(
+          findPreference(context.getString(R.string.call_recording_category_key)));
     }
     notificationManager = context.getSystemService(NotificationManager.class);
   }
