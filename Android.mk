@@ -79,6 +79,7 @@ RES_DIRS := \
 	$(BASE_DIR)/dialer/calldetails/res \
 	$(BASE_DIR)/dialer/calllog/ui/res \
 	$(BASE_DIR)/dialer/calllogutils/res \
+	$(BASE_DIR)/dialer/callrecord/res \
 	$(BASE_DIR)/dialer/common/res \
 	$(BASE_DIR)/dialer/contactactions/res \
 	$(BASE_DIR)/dialer/contactsfragment/res \
@@ -140,6 +141,7 @@ DIALER_MANIFEST_FILES += \
 	$(BASE_DIR)/dialer/calldetails/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/calllog/ui/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/calllogutils/AndroidManifest.xml \
+	$(BASE_DIR)/dialer/callrecord/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/common/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactactions/AndroidManifest.xml \
 	$(BASE_DIR)/dialer/contactsfragment/AndroidManifest.xml \
@@ -191,6 +193,7 @@ LOCAL_FULL_LIBS_MANIFEST_FILES := \
 LOCAL_SRC_FILES := $(call all-java-files-under, $(SRC_DIRS))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 LOCAL_SRC_FILES += $(call all-proto-files-under, $(SRC_DIRS))
+LOCAL_SRC_FILES += $(call all-Iaidl-files-under, $(SRC_DIRS))
 
 # Backup Library
 BACKUP_LIB_SRC_DIR := ../../../external/libbackup/src/com/google/android/libraries/backup
@@ -207,6 +210,8 @@ LOCAL_RESOURCE_DIR := \
 	$(support_library_root_dir)/v7/appcompat/res \
 	$(support_library_root_dir)/v7/cardview/res \
 	$(support_library_root_dir)/v7/recyclerview/res
+
+LOCAL_AIDL_INCLUDES := $(LOCAL_PATH)/java
 
 # We specify each package explicitly to glob resource files.
 LOCAL_AAPT_FLAGS := \

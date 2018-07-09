@@ -63,5 +63,7 @@ public interface InCallButtonUiDelegate {
 
   void showAudioRouteSelector();
 
+  void callRecordClicked(boolean checked);
+
   Context getContext();
 }
