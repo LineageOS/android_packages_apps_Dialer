@@ -285,6 +285,9 @@ public class CallPendingActivity extends FragmentActivity
           public void swapSimClicked() {}
 
           @Override
+          public void callRecordClicked(boolean checked) {}
+
+          @Override
           public Context getContext() {
             return CallPendingActivity.this;
           }
