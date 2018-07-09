@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Enable call recording for country: Singapore-->
+<!--
+     Relevant laws and/or legal precedents:
+     Singaporean law does not recognize privacy as a right that can be infringed upon. A party can
+     not be prosecuted or sued for recording a conversation he or she is a part of. The only
+     exception is when said recording contains confidential information, in which case the party may
+     or may not be liable for their actions, if said party makes use of said confidential
+     information in a way that clearly brings him or her gains of any sort, and/or harms the other
+     party in any perceivable way.
+     Legal discussion:
+     https://singaporelegaladvice.com/can-i-record-a-conversation-without-consent/
+     Personal Data Protection Act 2012:
+     https://sso.agc.gov.sg/Act/PDPA2012
+     https://www.pdpc.gov.sg/Legislation-and-Guidelines/Personal-Data-Protection-Act-Overview
+     Copyright Act, Revised Edition 2006:
+     https://sso.agc.gov.sg/Act/CA1987
+-->
+<resources>
+
+</resources>

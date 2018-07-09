@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Enable call recording for country: Armenia-->
+<!--
+     Relevant laws and/or legal precedents:
+     The Armenian Criminal Code discusses the legality and punishment of call recordings, when
+     recorded by a third party, otherwise known as wiretapping. Since the Criminal Code does not
+     specifically mention call recording done by a person that is a party to the call, with or
+     without consent, then the act of doing so is not a criminal offense, as it carries no
+     punishment whatsoever.
+     Criminal Code:
+     https://www.unodc.org/res/cld/document/armenia_criminal_code_html/Armenia_Criminal_Code_of_the_Republic_of_Armenia_2009.pdf
+     Two examples of usage of call recordings, without persecution:
+     https://fip.am/803
+     https://fip.am/4500
+-->
+<resources>
+
+</resources>

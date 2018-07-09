@@ -117,9 +117,10 @@ class ButtonChooserFactory {
     mapping.put(InCallButtonIds.BUTTON_MUTE, MappingInfo.builder(0).build());
     mapping.put(InCallButtonIds.BUTTON_DIALPAD, MappingInfo.builder(1).build());
     mapping.put(InCallButtonIds.BUTTON_AUDIO, MappingInfo.builder(2).build());
-    mapping.put(InCallButtonIds.BUTTON_MERGE, MappingInfo.builder(3).setSlotOrder(5).build());
-    mapping.put(InCallButtonIds.BUTTON_ADD_CALL, MappingInfo.builder(3).build());
-    mapping.put(InCallButtonIds.BUTTON_SWAP_SIM, MappingInfo.builder(4).build());
+    mapping.put(InCallButtonIds.BUTTON_RECORD_CALL, MappingInfo.builder(3).build());
+    mapping.put(InCallButtonIds.BUTTON_MERGE, MappingInfo.builder(4).setSlotOrder(5).build());
+    mapping.put(InCallButtonIds.BUTTON_ADD_CALL, MappingInfo.builder(4).build());
+    mapping.put(InCallButtonIds.BUTTON_SWAP_SIM, MappingInfo.builder(5).build());
     return mapping;
   }
 }

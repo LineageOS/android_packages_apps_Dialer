@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Projectt
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Enable call recording for country: Kosovo-->
+<!--
+     Article 36 of the Constitution of Kosovo defines the Right to Privacy. Article 202 of the
+     Criminal Code of Kosovo covers the infringing of privacy in corresepondence and computer
+     databases, which can be best explained as the act of violating and/or sharing a private
+     document with another person. Article 203 covers the unauthorized disclosure of confidential
+     information, when the person disclosing said information is under legal duty to maintain it as
+     confidential. Said person is not liable when the disclosure of the confidential information is
+     done so in the interest of the public. Paragraph 4 describes public interest as the welfare of
+     the general public outweighing the individual interest. It is also permissible to use this as a
+     defense when the disclosed information 'involves plans, preparation or the commission of crimes
+     against the constitutional order or territorial integrity of the Republic of Kosovo or other
+     criminal offenses that will cause great bodily injury or death to another person'. Article 204
+     covers the unauthorized interception of a conversation or statement. Article 205 covers the
+     unauthorized photographing or video recording of a person 'in his or her personal premises or
+     in any other place where a person has a reasonable expectation of privacy', with paragraph 4
+     offering an exception for liability when the act is done to 'conducted to discover a criminal
+     offence or the perpetrators of a criminal offence, or to present as evidence to the police,
+     prosecution or court, and if the photos or recordings are submitted to these authorities'.
+     It is beyond doubt that none of these articles deal with recording personal conversation
+     between two parties, hence the act of doing so is not explicitly punishable and is not a
+     criminal offense that would warrant a criminal case.
+     Constitution of Kosovo:
+     https://kuvendikosoves.org/?cid=2,1058
+     Criminal Code of Kosovo:
+     https://assembly-kosova.org/common/docs/ligjet/Criminal%20Code.pdf
+-->
+<resources>
+
+</resources>
