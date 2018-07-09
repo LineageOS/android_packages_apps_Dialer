@@ -71,6 +71,7 @@ LOCAL_FULL_LIBS_MANIFEST_FILES := \
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(BASE_DIR))
 LOCAL_SRC_FILES += $(call all-proto-files-under, $(BASE_DIR))
+LOCAL_SRC_FILES += $(call all-Iaidl-files-under, $(SRC_DIRS))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 
 LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
@@ -82,6 +83,8 @@ EXCLUDE_EXTRA_PACKAGES := \
 	com.android.dialer.binary.google \
 	com.android.incallui.calllocation.impl \
 	com.android.incallui.maps.impl \
+
+LOCAL_AIDL_INCLUDES := $(LOCAL_PATH)/java
 
 # We specify each package explicitly to glob resource files.
 include ${LOCAL_PATH}/packages.mk
@@ -426,4 +429,3 @@ LOCAL_UNINSTALLABLE_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-
