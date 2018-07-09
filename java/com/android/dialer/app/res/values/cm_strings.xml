@@ -31,4 +31,11 @@
     <string name="incall_dnd_dialog_message">In order to enable Do Not Disturb, the Phone app needs to be granted the permission to control the Do Not Disturb status.\nPlease allow it.</string>
     <string name="allow">Allow</string>
     <string name="deny">Deny</string>
+
+    <string name="call_recording_category_key" translatable="false">call_recording_category</string>
+    <string name="call_recording_category_title">Call recording</string>
+    <string name="call_recording_format_key" translatable="false">call_recording_format</string>
+    <string name="call_recording_format">Audio format</string>
+    <string name="wb_amr_format" translatable="false">AMR-WB</string>
+    <string name="aac_format" translatable="false">AAC</string>
 </resources>

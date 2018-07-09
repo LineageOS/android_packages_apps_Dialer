@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2015 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,16 +15,9 @@
      limitations under the License.
 -->
 
-<paths xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UnusedResources">
-  <!-- Offer access to files under Context.getCacheDir() -->
-  <cache-path name="my_cache"/>
-  <!-- Offer access to voicemail folder under Context.getFilesDir() -->
-  <files-path
-    name="voicemails"
-    path="voicemails/"/>
-  <!-- Offer access to saved call recordings -->
-  <external-path
-    name="recordings"
-    path="CallRecordings/"/>
-</paths>
+<resources>
+    <bool name="call_recording_enabled">false</bool>
+    <!-- 1 (MIC) for microphone audio source (default)
+         4 (VOICE_CALL) if supported by device for voice call uplink + downlink audio source -->
+    <integer name="call_recording_audio_source">1</integer>
+</resources>
