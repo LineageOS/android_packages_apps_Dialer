@@ -156,6 +156,10 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
     labelView.setText(stringRes);
   }
 
+  public void setLabelText(CharSequence label) {
+    labelView.setText(label);
+  }
+
   /** Shows or hides a little down arrow to indicate that the button will pop up a menu. */
   public void setShouldShowMoreIndicator(boolean shouldShow) {
     iconView.setBackground(shouldShow ? backgroundMore : background);
