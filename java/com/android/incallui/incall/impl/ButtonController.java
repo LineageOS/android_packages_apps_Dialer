@@ -16,12 +16,14 @@
 
 package com.android.incallui.incall.impl;
 
+import android.content.res.Resources;
 import android.support.annotation.CallSuper;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.telecom.CallAudioState;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import com.android.dialer.common.Assert;
@@ -408,6 +410,95 @@ interface ButtonController {
       checkableLabeledButton.setContentDescription(
           isChecked ? checkedContentDescription : uncheckedContentDescription);
       delegate.toggleSpeakerphone();
+    }
+  }
+
+  class CallRecordButtonController implements ButtonController, OnClickListener {
+    @NonNull private final InCallButtonUiDelegate delegate;
+    private boolean isEnabled;
+    private boolean isAllowed;
+    private boolean isChecked;
+    private long recordingSeconds;
+    private CheckableLabeledButton button;
+
+    public CallRecordButtonController(@NonNull InCallButtonUiDelegate delegate) {
+      this.delegate = delegate;
+    }
+
+    @Override
+    public boolean isEnabled() {
+      return isEnabled;
+    }
+
+    @Override
+    public void setEnabled(boolean isEnabled) {
+      this.isEnabled = isEnabled;
+      if (button != null) {
+        button.setEnabled(isEnabled);
+      }
+    }
+
+    @Override
+    public boolean isAllowed() {
+      return isAllowed;
+    }
+
+    @Override
+    public void setAllowed(boolean isAllowed) {
+      this.isAllowed = isAllowed;
+      if (button != null) {
+        button.setVisibility(isAllowed ? View.VISIBLE : View.INVISIBLE);
+      }
+    }
+
+    @Override
+    public void setChecked(boolean isChecked) {
+      this.isChecked = isChecked;
+      if (button != null) {
+        button.setChecked(isChecked);
+      }
+    }
+
+    @Override
+    public int getInCallButtonId() {
+      return InCallButtonIds.BUTTON_RECORD_CALL;
+    }
+
+    @Override
+    public void setButton(CheckableLabeledButton button) {
+      this.button = button;
+      if (button != null) {
+        final Resources res = button.getContext().getResources();
+        if (isChecked) {
+          CharSequence duration = DateUtils.formatElapsedTime(recordingSeconds);
+          button.setLabelText(res.getString(R.string.onscreenCallRecordingText, duration));
+        } else {
+          button.setLabelText(R.string.onscreenCallRecordText);
+        }
+        button.setEnabled(isEnabled);
+        button.setVisibility(isAllowed ? View.VISIBLE : View.INVISIBLE);
+        button.setChecked(isChecked);
+        button.setOnClickListener(this);
+        button.setIconDrawable(R.drawable.quantum_ic_record_white_36);
+        button.setContentDescription(res.getText(
+            isChecked ? R.string.onscreenStopCallRecordText : R.string.onscreenCallRecordText));
+        button.setShouldShowMoreIndicator(false);
+      }
+    }
+
+    public void setRecordingState(boolean recording) {
+      isChecked = recording;
+      setButton(button);
+    }
+
+    public void setRecordingDuration(long durationMs) {
+      recordingSeconds = (durationMs + 500) / 1000;
+      setButton(button);
+    }
+
+    @Override
+    public void onClick(View v) {
+      delegate.callRecordClicked(!isChecked);
     }
   }
 
