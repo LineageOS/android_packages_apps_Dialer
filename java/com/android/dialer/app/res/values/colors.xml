@@ -18,6 +18,8 @@
   <color name="voicemail_icon_disabled_tint">#80000000</color>
   <color name="voicemail_playpause_icon_tint">?colorIcon</color>
 
+  <color name="call_record_playback_icon_color">#8a000000</color>
+
   <!-- Text color for the "Remove" text when a contact is dragged on top of the remove view -->
   <color name="remove_highlighted_text_color">#FF3F3B</color>
 
