@@ -16,29 +16,46 @@
 
 package com.android.dialer.calldetails;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.view.Menu;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllogutils.CallLogDates;
 import com.android.dialer.calllogutils.CallLogDurations;
 import com.android.dialer.calllogutils.CallTypeHelper;
 import com.android.dialer.calllogutils.CallTypeIconsView;
+import com.android.dialer.callrecord.CallRecording;
+import com.android.dialer.callrecord.CallRecordingDataStore;
+import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.AppCompatConstants;
+import com.android.dialer.constants.Constants;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 /** ViewHolder for call entries in {@link CallDetailsActivity}. */
 public class CallDetailsEntryViewHolder extends ViewHolder {
@@ -56,6 +73,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
   private final TextView postCallNote;
 
   private final ImageView multimediaImage;
+  private final TextView playbackButton;
 
   // TODO(maxwelb): Display this when location is stored - a bug
   @SuppressWarnings("unused")
@@ -72,6 +90,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callTime = (TextView) container.findViewById(R.id.call_time);
     callDuration = (TextView) container.findViewById(R.id.call_duration);
 
+    playbackButton = (TextView) container.findViewById(R.id.play_recordings);
     multimediaImageContainer = container.findViewById(R.id.multimedia_image_container);
     multimediaDetailsContainer = container.findViewById(R.id.ec_container);
     multimediaDivider = container.findViewById(R.id.divider);
@@ -86,6 +105,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       String number,
       CallDetailsEntry entry,
       CallTypeHelper callTypeHelper,
+      CallRecordingDataStore callRecordingDataStore,
       boolean showMultimediaDivider) {
     int callType = entry.getCallType();
     boolean isVideoCall = (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
@@ -118,6 +138,22 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
           CallLogDurations.formatDurationAndDataUsageA11y(
               context, entry.getDuration(), entry.getDataUsage()));
     }
+
+    // do this synchronously to prevent recordings from "popping in" after detail item is displayed
+    final List<CallRecording> recordings;
+    if (CallRecorderService.isEnabled(context)) {
+      callRecordingDataStore.open(context); // opens unless already open
+      recordings = callRecordingDataStore.getRecordings(number, entry.getDate());
+    } else {
+      recordings = null;
+    }
+
+    int count = recordings != null ? recordings.size() : 0;
+    playbackButton.setOnClickListener(v -> handleRecordingClick(v, recordings));
+    playbackButton.setText(
+        context.getResources().getQuantityString(R.plurals.play_recordings, count, count));
+    playbackButton.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
+
     setMultimediaDetails(number, entry, showMultimediaDivider);
   }
 
@@ -168,6 +204,46 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private void startSmsIntent(Context context, String number) {
     DialerUtils.startActivityWithErrorToast(context, IntentUtil.getSendSmsIntent(number));
+  }
+
+  private void handleRecordingClick(View v, List<CallRecording> recordings) {
+    final Context context = v.getContext();
+    if (recordings.size() == 1) {
+      playRecording(context, recordings.get(0));
+    } else {
+      PopupMenu menu = new PopupMenu(context, v);
+      String pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(),
+          DateFormat.is24HourFormat(context) ? "Hmss" : "hmssa");
+      SimpleDateFormat format = new SimpleDateFormat(pattern);
+
+      for (int i = 0; i < recordings.size(); i++) {
+        final long startTime = recordings.get(i).startRecordingTime;
+        final String formattedDate = format.format(new Date(startTime));
+        menu.getMenu().add(Menu.NONE, i, i, formattedDate);
+      }
+      menu.setOnMenuItemClickListener(item -> {
+        playRecording(context, recordings.get(item.getItemId()));
+        return true;
+      });
+      menu.show();
+    }
+ }
+
+  private void playRecording(Context context, CallRecording recording) {
+    Uri uri = FileProvider.getUriForFile(context,
+            Constants.get().getFileProviderAuthority(), recording.getFile());
+    String extension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+    String mime = !TextUtils.isEmpty(extension)
+        ? MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension) : "audio/*";
+    try {
+      Intent intent = new Intent(Intent.ACTION_VIEW)
+          .setDataAndType(uri, mime)
+          .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      context.startActivity(intent);
+    } catch (ActivityNotFoundException e) {
+      Toast.makeText(context, R.string.call_playback_no_app_found_toast, Toast.LENGTH_LONG)
+          .show();
+    }
   }
 
   private static boolean isIncoming(@NonNull HistoryResult historyResult) {
