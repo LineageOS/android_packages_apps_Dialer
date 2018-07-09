@@ -23,6 +23,7 @@ import android.view.View;
 import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
 import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHeaderListener;
+import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 
 /**
@@ -43,14 +44,16 @@ final class CallDetailsAdapter extends CallDetailsAdapterCommon {
       CallDetailsEntryListener callDetailsEntryListener,
       CallDetailsHeaderListener callDetailsHeaderListener,
       CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener,
-      DeleteCallDetailsListener deleteCallDetailsListener) {
+      DeleteCallDetailsListener deleteCallDetailsListener,
+      CallRecordingDataStore callRecordingDataStore) {
     super(
         context,
         callDetailsEntries,
         callDetailsEntryListener,
         callDetailsHeaderListener,
         reportCallIdListener,
-        deleteCallDetailsListener);
+        deleteCallDetailsListener,
+        callRecordingDataStore);
     this.headerInfo = calldetailsHeaderInfo;
   }
 
