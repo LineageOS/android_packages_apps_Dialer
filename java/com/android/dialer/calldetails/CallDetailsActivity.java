@@ -44,6 +44,7 @@ import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
+import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
@@ -100,6 +101,7 @@ public class CallDetailsActivity extends AppCompatActivity {
   private CallDetailsEntries entries;
   private DialerContact contact;
   private CallDetailsAdapter adapter;
+  private CallRecordingDataStore callRecordingDataStore;
 
   // This will be present only when the activity is launched from the new call log UI, i.e., a list
   // of coalesced annotated call log IDs is included in the intent.
@@ -158,7 +160,14 @@ public class CallDetailsActivity extends AppCompatActivity {
           PerformanceReport.recordClick(UiAction.Type.CLOSE_CALL_DETAIL_WITH_CANCEL_BUTTON);
           finish();
         });
+    callRecordingDataStore = new CallRecordingDataStore();
     onHandleIntent(getIntent());
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    callRecordingDataStore.close();
   }
 
   @Override
@@ -229,7 +238,8 @@ public class CallDetailsActivity extends AppCompatActivity {
             entries.getEntriesList(),
             callDetailsHeaderListener,
             reportCallIdListener,
-            deleteCallDetailsListener);
+            deleteCallDetailsListener,
+            callRecordingDataStore);
 
     RecyclerView recyclerView = findViewById(R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));

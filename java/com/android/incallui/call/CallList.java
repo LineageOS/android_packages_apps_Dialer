@@ -27,6 +27,7 @@ import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumbersUtil;
@@ -561,6 +562,15 @@ public class CallList implements DialerCallDelegate {
     }
 
     return retval;
+  }
+
+  public DialerCall getCallWithStateAndNumber(int state, String number) {
+    for (DialerCall call : callById.values()) {
+      if (TextUtils.equals(call.getNumber(), number) && call.getState() == state) {
+        return call;
+      }
+    }
+    return null;
   }
 
   /**
