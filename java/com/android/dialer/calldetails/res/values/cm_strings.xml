@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,17 +14,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<paths xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UnusedResources">
-  <!-- Offer access to files under Context.getCacheDir() -->
-  <cache-path name="my_cache"/>
-  <!-- Offer access to voicemail folder under Context.getFilesDir() -->
-  <files-path
-    name="voicemails"
-    path="voicemails/"/>
-  <!-- Offer access to saved call recordings -->
-  <external-path
-    name="recordings"
-    path="CallRecordings/"/>
-</paths>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="play_recordings">
+        <item quantity="one">Play recording</item>
+        <item quantity="other">Play recordings</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
+</resources>
