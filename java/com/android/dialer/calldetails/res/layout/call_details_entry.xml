@@ -19,7 +19,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/call_entry_padding">
+    android:paddingTop="@dimen/call_entry_padding"
+    android:paddingBottom="@dimen/call_entry_bottom_padding">
 
   <com.android.dialer.calllogutils.CallTypeIconsView
       android:id="@+id/call_direction"
@@ -45,7 +46,6 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
       android:layout_below="@+id/call_type"
-      android:layout_marginBottom="@dimen/call_entry_bottom_padding"
       style="@style/SecondaryText"/>
 
   <TextView
@@ -56,12 +56,27 @@
       android:layout_marginEnd="@dimen/call_entry_padding"
       style="@style/PrimaryText"/>
 
+  <TextView
+      android:id="@+id/play_recordings"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/call_time"
+      android:paddingStart="@dimen/call_entry_text_left_margin"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:gravity="center_vertical"
+      android:drawableStart="@drawable/recording_playback_button"
+      android:drawablePadding="4dp"
+      android:background="?attr/selectableItemBackground"
+      android:visibility="gone"
+      style="@style/SecondaryText"/>
+
   <include
       layout="@layout/ec_data_container"
       android:id="@+id/ec_container"
       android:layout_height="@dimen/ec_container_height"
       android:layout_width="match_parent"
-      android:layout_below="@+id/call_time"
+      android:layout_below="@id/play_recordings"
       android:visibility="gone"/>
 
   <TextView
@@ -80,7 +95,7 @@
       android:id="@+id/divider"
       android:layout_width="match_parent"
       android:layout_height="1dp"
-      android:layout_below="@id/post_call_note"
+      android:layout_below="@id/play_recordings"
       android:layout_marginTop="@dimen/ec_divider_top_bottom_margin"
       android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
