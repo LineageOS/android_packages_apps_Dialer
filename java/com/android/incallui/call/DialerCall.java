@@ -787,6 +787,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     return mTelecomCall.getDetails().getConnectTimeMillis();
   }
 
+  /** Gets the time when call was first constructed */
+  public long getCreationTimeMillis() {
+    return mTelecomCall.getDetails().getCreationTimeMillis();
+  }
+
   public boolean isConferenceCall() {
     return hasProperty(Call.Details.PROPERTY_CONFERENCE);
   }
