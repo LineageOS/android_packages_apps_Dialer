@@ -54,6 +54,8 @@ public class InCallButtonIdsExtension {
       return "MANAGE_VOICE_CONFERENCE";
     } else if (id == InCallButtonIds.BUTTON_SWITCH_TO_SECONDARY) {
       return "SWITCH_TO_SECONDARY";
+    } else if (id == InCallButtonIds.BUTTON_RECORD_CALL) {
+      return "RECORD_CALL";
     } else {
       return "INVALID_BUTTON: " + id;
     }
