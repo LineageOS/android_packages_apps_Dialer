@@ -79,7 +79,7 @@ LOCAL_SRC_FILES += $(call all-proto-files-under, $(BASE_DIR))
 LOCAL_SRC_FILES += $(call all-Iaidl-files-under, $(BASE_DIR))
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 
-LOCAL_AIDL_INCLUDES := $(call all-Iaidl-files-under, $(BASE_DIR))
+LOCAL_AIDL_INCLUDES := $(LOCAL_PATH)/java
 
 LOCAL_PROTOC_FLAGS := --proto_path=$(LOCAL_PATH)
 
