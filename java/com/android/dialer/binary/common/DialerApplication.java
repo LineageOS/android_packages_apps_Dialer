@@ -26,6 +26,7 @@ import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.config.CallLogConfig;
 import com.android.dialer.calllog.config.CallLogConfigComponent;
+import com.android.dialer.callrecord.CallRecordingAutoMigrator;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.inject.HasRootComponent;
@@ -46,6 +47,10 @@ public abstract class DialerApplication extends Application implements HasRootCo
     new BlockedNumbersAutoMigrator(
             this.getApplicationContext(),
             new FilteredNumberAsyncQueryHandler(this),
+            DialerExecutorComponent.get(this).dialerExecutorFactory())
+        .asyncAutoMigrate();
+    new CallRecordingAutoMigrator(
+            this.getApplicationContext(),
             DialerExecutorComponent.get(this).dialerExecutorFactory())
         .asyncAutoMigrate();
     initializeAnnotatedCallLog();
