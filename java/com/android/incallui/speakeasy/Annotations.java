@@ -29,9 +29,9 @@ public final class Annotations {
   @Qualifier
   public @interface SpeakEasySettingsObject {}
 
-  /** A Speakeasy icon resource */
+  /** A Speakeasy chip */
   @Qualifier
-  public @interface SpeakEasyIconResourceId {}
+  public @interface SpeakEasyChipResourceId {}
 
   /** A Speakeasy text resource */
   @Qualifier

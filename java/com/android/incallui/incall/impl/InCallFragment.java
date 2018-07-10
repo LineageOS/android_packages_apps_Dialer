@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -492,6 +493,11 @@ public class InCallFragment extends Fragment
         pager.setCurrentItem(adapter.getButtonGridPosition());
       }
     }
+  }
+
+  @Override
+  public void updateInCallButtonUiColors(@ColorInt int color) {
+    inCallButtonGridFragment.updateButtonColor(color);
   }
 
   @Override

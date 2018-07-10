@@ -41,7 +41,8 @@
           android:id="@id/contactgrid_avatar"
           android:layout_width="@dimen/incall_avatar_size"
           android:layout_height="@dimen/incall_avatar_size"
-          android:layout_marginBottom="8dp"/>
+          android:layout_marginBottom="8dp"
+          android:elevation="2dp"/>
 
       <include
           layout="@layout/incall_contactgrid_top_row"
