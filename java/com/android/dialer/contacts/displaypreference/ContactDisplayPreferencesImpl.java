@@ -23,7 +23,10 @@ import android.preference.PreferenceManager;
 import com.android.dialer.inject.ApplicationContext;
 import javax.inject.Inject;
 
-/** Implementation of {@link ContactDisplayPreferences} backed by a {@link SharedPreferences} */
+/**
+ * Implementation of {@link ContactDisplayPreferences} backed by a {@link SharedPreferences}. Can
+ * only be instantiated when the device is unlocked.
+ */
 public final class ContactDisplayPreferencesImpl implements ContactDisplayPreferences {
 
   private final Context appContext;
@@ -35,7 +38,7 @@ public final class ContactDisplayPreferencesImpl implements ContactDisplayPrefer
   ContactDisplayPreferencesImpl(@ApplicationContext Context appContext) {
     this.appContext = appContext;
     // @Unencrypted preference would be a better choice, but Android Preference only supports the
-    // default file. Names cannot be shown on @Unencrypted anyway.
+    // default file. Stub should be used instead when device is locked.
     this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
     displayOrderKey = appContext.getString(R.string.display_options_view_names_as_key);
     sortOrderKey = appContext.getString(R.string.display_options_sort_list_by_key);
