@@ -50,12 +50,11 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.MathUtil;
-import com.android.dialer.logging.DialerImpression.Type;
+import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.telecom.TelecomUtil;
@@ -84,15 +83,15 @@ import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
-import com.android.incallui.sessiondata.MultimediaFragment.Holder;
+import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.videotech.utils.VideoUtils;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /** The new version of the incoming call screen. */
 @SuppressLint("ClickableViewAccessibility")
@@ -102,7 +101,7 @@ public class AnswerFragment extends Fragment
         SmsSheetHolder,
         CreateCustomSmsHolder,
         AnswerMethodHolder,
-        Holder {
+        MultimediaFragment.Holder {
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
@@ -433,11 +432,6 @@ public class AnswerFragment extends Fragment
     secondaryButton.setFocusable(AccessibilityUtil.isAccessibilityEnabled(getContext()));
     secondaryButton.setAccessibilityDelegate(accessibilityDelegate);
 
-    // TODO(wangqi): Remove this when all secondary behavior is migrated to chip button.
-    if (secondaryBehavior.equals(SecondaryBehavior.REJECT_WITH_SMS)) {
-      secondaryButton.setVisibility(View.INVISIBLE);
-    }
-
     if (isVideoUpgradeRequest()) {
       secondaryButton.setVisibility(View.INVISIBLE);
     } else if (isVideoCall()) {
@@ -467,39 +461,26 @@ public class AnswerFragment extends Fragment
         });
   }
 
-  private void addSecondaryActionChip(
-      @DrawableRes int iconRes, @StringRes int textRes, OnClickListener onClickListener) {
-    LinearLayout button =
-        (LinearLayout)
-            getLayoutInflater().inflate(R.layout.secondary_action_chip, chipContainer, false);
-
-    ImageView icon = button.findViewById(R.id.secondary_action_icon);
-    icon.setImageResource(iconRes);
-    TextView text = button.findViewById(R.id.secondary_action_text);
-    text.setText(textRes);
-    button.setOnClickListener(onClickListener);
-    chipContainer.addView(button);
-  }
-
   /** Initialize chip buttons */
   private void initChips() {
-    if (allowSpeakEasy()) {
-      Optional<Integer> speakEasyIconOptional =
-          SpeakEasyComponent.get(getContext()).speakEasyIconResource();
-      Optional<Integer> speakEasyTextOptional =
-          SpeakEasyComponent.get(getContext()).speakEasyTextResource();
-      if (speakEasyIconOptional.isPresent() && speakEasyTextOptional.isPresent()) {
-        addSecondaryActionChip(
-            speakEasyIconOptional.get(), speakEasyTextOptional.get(), this::performSpeakEasy);
-      }
+
+    if (!allowSpeakEasy()) {
+      chipContainer.setVisibility(View.GONE);
+      return;
     }
-    if (!isVideoCall() && !isVideoUpgradeRequest()) {
-      addSecondaryActionChip(
-          R.drawable.quantum_ic_message_white_24,
-          R.string.call_incoming_reply_with_sms,
-          v -> performSecondaryButtonAction());
+    chipContainer.setVisibility(View.VISIBLE);
+
+    @SpeakEasyChipResourceId
+    Optional<Integer> chipLayoutOptional = SpeakEasyComponent.get(getContext()).speakEasyChip();
+    if (chipLayoutOptional.isPresent()) {
+
+      LinearLayout chipLayout =
+          (LinearLayout) getLayoutInflater().inflate(chipLayoutOptional.get(), null);
+
+      chipLayout.setOnClickListener(this::performSpeakEasy);
+
+      chipContainer.addView(chipLayout);
     }
-    chipContainer.setVisibility(chipContainer.getChildCount() > 0 ? View.VISIBLE : View.GONE);
   }
 
   @Override
@@ -1005,7 +986,8 @@ public class AnswerFragment extends Fragment
             "AnswerFragment.rejectCall",
             "Null context when rejecting call. Logger call was skipped");
       } else {
-        Logger.get(context).logImpression(Type.REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN);
+        Logger.get(context)
+            .logImpression(DialerImpression.Type.REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN);
       }
       buttonRejectClicked = true;
       answerScreenDelegate.onReject();
@@ -1156,7 +1138,7 @@ public class AnswerFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle bundle) {
       super.onViewCreated(view, bundle);
       avatarImageView = ((ImageView) view.findViewById(R.id.contactgrid_avatar));
-      FragmentUtils.getParentUnsafe(this, Holder.class).updateAvatar(this);
+      FragmentUtils.getParentUnsafe(this, MultimediaFragment.Holder.class).updateAvatar(this);
     }
 
     @NonNull
