@@ -30,6 +30,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -869,6 +870,9 @@ public class VideoCallFragment extends Fragment
     speakerButtonController.updateButtonState();
     switchOnHoldCallController.updateButtonState();
   }
+
+  @Override
+  public void updateInCallButtonUiColors(@ColorInt int color) {}
 
   @Override
   public Fragment getInCallButtonUiFragment() {
