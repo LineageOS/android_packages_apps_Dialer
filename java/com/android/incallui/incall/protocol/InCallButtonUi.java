@@ -16,6 +16,7 @@
 
 package com.android.incallui.incall.protocol;
 
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.telecom.CallAudioState;
 
@@ -41,6 +42,8 @@ public interface InCallButtonUi {
    * configure the overflow menu appropriately.
    */
   void updateButtonStates();
+
+  void updateInCallButtonUiColors(@ColorInt int color);
 
   Fragment getInCallButtonUiFragment();
 

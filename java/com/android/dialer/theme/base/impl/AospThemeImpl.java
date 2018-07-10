@@ -17,7 +17,6 @@
 package com.android.dialer.theme.base.impl;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.StyleRes;
@@ -34,7 +33,6 @@ import javax.inject.Singleton;
 public class AospThemeImpl implements Theme {
 
   private int colorIcon = -1;
-  private final ColorStateList colorIconStateList;
   private int colorIconSecondary = -1;
   private int colorPrimary = -1;
   private int colorPrimaryDark = -1;
@@ -82,7 +80,6 @@ public class AospThemeImpl implements Theme {
     colorBackground = array.getColor(/* index= */ 7, /* defValue= */ -1);
     colorBackgroundFloating = array.getColor(/* index= */ 8, /* defValue= */ -1);
     colorIcon = array.getColor(/* index= */ 9, /* defValue= */ -1);
-    colorIconStateList = array.getColorStateList(/* index= */ 9);
     colorIconSecondary = array.getColor(/* index= */ 10, /* defValue= */ -1);
     colorTextOnUnthemedDarkBackground = array.getColor(/* index= */ 11, /* defValue= */ -1);
     colorIconOnUnthemedDarkBackground = array.getColor(/* index= */ 12, /* defValue= */ -1);
@@ -126,12 +123,6 @@ public class AospThemeImpl implements Theme {
   public @ColorInt int getColorIcon() {
     Assert.checkArgument(colorIcon != -1);
     return colorIcon;
-  }
-
-  @Override
-  public ColorStateList getColorIconStateList() {
-    Assert.checkArgument(colorIconStateList != null);
-    return colorIconStateList;
   }
 
   @Override
