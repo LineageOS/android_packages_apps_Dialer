@@ -121,16 +121,19 @@
       <!-- TODO(a bug): textColorPrimary or textColorPrimaryInverse? -->
       <TextView
           android:id="@+id/incall_important_call_badge"
+          android:textStyle="bold"
           android:layout_width="wrap_content"
-          android:layout_height="32dp"
+          android:layout_height="48dp"
           android:layout_marginTop="4dp"
           android:layout_marginBottom="@dimen/answer_importance_margin_bottom"
           android:background="@drawable/urgent_call_background"
+          android:elevation="@dimen/answer_data_elevation"
           android:gravity="center"
           android:maxLines="1"
           android:text="@string/call_incoming_important"
-          style="@style/Dialer.TextAppearance.SubHeader"
-          android:textColor="?android:attr/colorBackground"/>
+          android:textAllCaps="true"
+          android:textColor="?android:attr/colorBackground"
+          android:textSize="14sp"/>
 
       <FrameLayout
           android:id="@+id/incall_location_holder"
