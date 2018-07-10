@@ -32,8 +32,6 @@
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
   <style name="Dialer.Dark.ThemeBase">
-    <item name="android:statusBarColor">@color/google_grey_900</item>
-
     <!-- These values should be used to color all backgrounds. -->
     <item name="android:colorBackground">@color/google_grey_900</item>
     <item name="android:colorBackgroundFloating">@color/google_grey_800</item>

@@ -38,9 +38,6 @@
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
   <style name="Dialer.ThemeBase">
-    <item name="android:windowLightStatusBar">true</item>
-    <item name="android:statusBarColor">@android:color/white</item>
-
     <!-- These values should be used to color all backgrounds. -->
     <item name="android:colorBackground">@android:color/white</item>
     <item name="android:colorBackgroundFloating">@android:color/white</item>
