@@ -24,6 +24,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.app.R;
 
 public class OtherSettingsFragment extends PreferenceFragment

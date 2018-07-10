@@ -50,4 +50,7 @@
     <string name="enable_post_call_title">Post call snackbar</string>
     <string name="enable_post_call_summary">Enable post call notifications at the bottom of screen</string>
 
+    <string name="auto_call_recording_title">Auto call recording</string>
+    <string name="auto_call_recording_key" translatable="false">auto_call_recording</string>
+
 </resources>

@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Trace;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.os.UserManagerCompat;
@@ -75,6 +76,7 @@ public class CallButtonPresenter
   private boolean automaticallyMuted = false;
   private boolean previousMuteState = false;
   private boolean isInCallButtonUiReady;
+  private boolean mIsRecording = false;
   private PhoneAccountHandle otherAccount;
 
   private CallRecorder.RecordingProgressListener recordingProgressListener =
@@ -142,11 +144,27 @@ public class CallButtonPresenter
   @Override
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
     Trace.beginSection("CallButtonPresenter.onStateChange");
+
+    CallRecorder recorder = CallRecorder.getInstance();
+    boolean isEnabled = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.auto_call_recording_key), false);
+
     if (newState == InCallState.OUTGOING) {
       call = callList.getOutgoingCall();
     } else if (newState == InCallState.INCALL) {
       call = callList.getActiveOrBackgroundCall();
 
+//     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+//     boolean warningPresented = prefs.getBoolean(KEY_RECORDING_WARNING_PRESENTED, false);
+
+    if (!mIsRecording && isEnabled) {
+                mIsRecording = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        callRecordClicked(true);
+                    }
+                }, 500);
+    }
       // When connected to voice mail, automatically shows the dialpad.
       // (On previous releases we showed it when in-call shows up, before waiting for
       // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
@@ -162,7 +180,13 @@ public class CallButtonPresenter
       }
       call = callList.getIncomingCall();
     } else {
-      call = null;
+	    
+    if (isEnabled) {
+        if (recorder.isRecording()) {
+            recorder.finishRecording();
+        }
+    }
+    call = null;
     }
     updateUi(newState, call);
     Trace.endSection();
