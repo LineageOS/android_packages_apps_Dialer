@@ -16,7 +16,11 @@
   -->
 
 <resources>
-  <style name="Theme.InCallScreen" parent="@style/Dialer.ThemeBase.NoActionBar">
+  <!-- Theme for the InCallActivity activity. Should have a transparent background for the
+       circular reveal animation for a new outgoing call to work correctly. We don't just use
+       Theme.Black.NoTitleBar directly, since we want any popups or dialogs from the
+       InCallActivity to have the correct Material style. -->
+  <style name="Theme.InCallScreen.Light" parent="@style/Dialer.ThemeBase.NoActionBar">
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -25,7 +29,25 @@
     <item name="dialpad_style">@style/InCallDialpad</item>
     <item name="android:windowAnimationStyle">@null</item>
 
-    <item name="android:windowBackground">?android:attr/colorBackground</item>
+    <item name="android:windowBackground">@drawable/incall_background_gradient</item>
+    <item name="android:windowShowWallpaper">true</item>
+  </style>
+
+  <style name="Theme.InCallScreen" parent="@style/Dialer.Dark.ThemeBase.NoActionBar">
+    <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="android:textColorSecondary">#DDFFFFFF</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
+
+    <item name="dialpad_key_button_touch_tint">?attr/colorPrimary20pct</item>
+    <item name="dialpad_style">@style/InCallDialpad</item>
+    <item name="android:windowAnimationStyle">@null</item>
+
+    <item name="android:windowBackground">@drawable/incall_background_gradient</item>
+    <item name="android:windowShowWallpaper">true</item>
     <item name="android:windowLayoutInDisplayCutoutMode">never</item>
   </style>
 

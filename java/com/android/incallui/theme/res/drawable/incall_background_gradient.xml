@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2016 The Android Open Source Project
+  ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
-
-<ImageView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@id/contactgrid_avatar"
-  android:layout_width="@dimen/answer_avatar_size"
-  android:layout_height="@dimen/answer_avatar_size"
-  android:layout_gravity="center"
-  android:elevation="@dimen/answer_data_elevation"/>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <gradient
+    android:angle="270"
+    android:startColor="@color/incall_background_gradient_top"
+    android:centerColor="@color/incall_background_gradient_middle"
+    android:endColor="@color/incall_background_gradient_bottom"/>
+</shape>

@@ -880,6 +880,8 @@ public class AnswerFragment extends Fragment
     if (primaryCallState != null) {
       contactGridManager.setCallState(primaryCallState);
     }
+
+    restoreBackgroundMaskColor();
   }
 
   @Override
@@ -898,6 +900,12 @@ public class AnswerFragment extends Fragment
 
   @Override
   public void onAnswerProgressUpdate(@FloatRange(from = -1f, to = 1f) float answerProgress) {
+    // Don't fade the window background for call waiting or video upgrades. Fading the background
+    // shows the system wallpaper which looks bad because on reject we switch to another call.
+    if (primaryCallState.state() == DialerCallState.INCOMING && !isVideoCall()) {
+      answerScreenDelegate.updateWindowBackgroundColor(answerProgress);
+    }
+
     // Fade and scale contact name and video call text
     float startDelay = .25f;
     // Header progress is zero over positiveAdjustedProgress = [0, startDelay],
@@ -926,6 +934,7 @@ public class AnswerFragment extends Fragment
   @Override
   public void resetAnswerProgress() {
     affordanceHolderLayout.reset(true);
+    restoreBackgroundMaskColor();
   }
 
   private void animateEntry(@NonNull View rootView) {
@@ -992,6 +1001,10 @@ public class AnswerFragment extends Fragment
       buttonRejectClicked = true;
       answerScreenDelegate.onReject();
     }
+  }
+
+  private void restoreBackgroundMaskColor() {
+    answerScreenDelegate.updateWindowBackgroundColor(0);
   }
 
   private void restoreSwipeHintTexts() {

@@ -16,7 +16,7 @@
   -->
 <!-- The colors in this file aren't configured at the theme level. -->
 <resources>
-  <color name="dialer_call_green">#34A853</color>
+  <color name="dialer_call_green">#00C853</color>
   <color name="dialer_end_call_button_color">#BD2A2A</color>
   <color name="dialer_divider_line_color">#D8D8D8</color>
   <color name="dialer_link_color">#2A56C6</color>
