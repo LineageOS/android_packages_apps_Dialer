@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">通話を発信するには、電話へのアクセスを許可する必要があります</string>
+  <string name="pre_call_select_phone_account">この通話で使用する SIM の選択</string>
+  <string name="pre_call_select_phone_account_remember">この設定を記憶する</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">%1$s を使用中のため、ご利用いただけません</string>
+</resources>

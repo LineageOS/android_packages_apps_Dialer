@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Apel vocal</string>
+  <string name="video_call">Apel video</string>
+  <string name="add_to_contacts">Adăugați o persoană de contact</string>
+  <string name="send_a_message">Trimiteți mesaj</string>
+  <string name="not_spam">Nu este spam</string>
+  <string name="block_number">Blocați</string>
+  <string name="unblock_number">Deblocați</string>
+  <string name="block_and_optionally_report_spam">Blocați/Raportați ca spam</string>
+  <string name="copy_number">Copiați numărul</string>
+</resources>

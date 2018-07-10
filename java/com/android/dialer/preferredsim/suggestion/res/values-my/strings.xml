@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">တူညီသောဖုန်းလိုင်းကို အသုံးပြုသည်</string>
+  <string name="pre_call_select_phone_account_hint_frequent">လတ်တလော အသုံးပြုထားသည်</string>
+</resources>

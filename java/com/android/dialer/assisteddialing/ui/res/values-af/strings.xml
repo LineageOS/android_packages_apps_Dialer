@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Bystandoproep</string>
+  <string name="assisted_dialing_setting_summary">Voorspel en voeg \'n landskode by wanneer jy bel terwyl jy oorsee reis</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Outomaties bespeur • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Outomaties bespeur</string>
+  <string name="assisted_dialing_setting_cc_category_title">Land van herkoms</string>
+  <string name="assisted_dialing_setting_cc_title">Verstek land van herkoms</string>
+</resources>

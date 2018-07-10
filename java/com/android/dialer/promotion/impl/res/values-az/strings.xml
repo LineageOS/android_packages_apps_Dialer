@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Zəng daxili real zaman mətn mesajlaşması</string>
+  <string name="rtt_promotion_details">RTT kar və ya eşitmə problemi, danışma qüsuru olan və ya səsdən daha çoxuna ehtiyac duyan şəxslərə dəstək olur. RTT mesajlaşma transkripsiyaları cihazın zəng tarixçəsində saxlanılır.%1$s</string>
+  <string name="duo_disclosure_title">Duo ilə video zənglər edin</string>
+  <string name="duo_disclosure_details">Google Duo video zəngi Sizə dost və ailənizlə üzbəüz danışmaq imkanı verir. Data xərcləri tətbiq edilə bilər. %1$s</string>
+</resources>

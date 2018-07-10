@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Невідомий</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Таксофон</string>
+  <string name="emergency_number">Екстрений номер</string>
+  <string name="launcherActivityLabel">Телефон</string>
+  <string name="call">Виклик</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Продовження виклику за допомогою Wi-Fi…</string>
+  <string name="rtt_call_not_available_toast">Функція RTT недоступна для цього виклику</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

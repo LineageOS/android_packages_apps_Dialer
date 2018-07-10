@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Queres bloquear o %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Xa non recibirás máis chamadas nin mensaxes de texto deste número.</string>
+  <string name="block_number_ok">BLOQUEAR</string>
+  <string name="unblock_number_ok">DESBLOQUEAR</string>
+  <string name="block_report_number_alert_title">Queres bloquear o %1$s?</string>
+  <string name="block_report_number_alert_details">Xa non recibirás máis chamadas deste número.</string>
+  <string name="block_number_alert_details">%1$s Informarase de que esta chamada é spam.</string>
+  <string name="unblock_number_alert_details">Desbloquearase este número e informarase de que non é spam. Aceptaranse as futuras chamadas.</string>
+  <string name="unblock_report_number_alert_title">Queres desbloquear o %1$s?</string>
+  <string name="report_not_spam_alert_button">Informar</string>
+  <string name="report_not_spam_alert_title">Queres informar dun erro?</string>
+  <string name="report_not_spam_alert_details">Xa non se definirán como spam as futuras chamadas do %1$s.</string>
+  <string name="checkbox_report_as_spam_action">Informar: a chamada é spam</string>
+  <string name="block_number_failed_toast">Produciuse un problema ao bloquear este número</string>
+  <string name="unblock_number_failed_toast">Produciuse un problema ao desbloquear este número</string>
+</resources>

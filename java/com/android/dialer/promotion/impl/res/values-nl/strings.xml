@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">In realtime sms\'en in een oproep</string>
+  <string name="rtt_promotion_details">RTT helpt dove en slechthorende bellers en bellers met een spraakbeperking. Deze functie kan ook handig zijn voor bellers die meer dan alleen gesproken communicatie nodig hebben. Transcripts van RTT-berichten worden op je apparaat opgeslagen in de oproepgeschiedenis. %1$s</string>
+  <string name="duo_disclosure_title">Videogesprekken voeren met Duo</string>
+  <string name="duo_disclosure_details">Met videogesprekken via Google Duo kun je je vrienden en familie zien terwijl je hen spreekt. Er kunnen datakosten in rekening worden gebracht. %1$s</string>
+</resources>

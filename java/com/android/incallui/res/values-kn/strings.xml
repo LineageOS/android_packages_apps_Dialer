@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ಫೋನ್"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"ಕೆಳಗಿನ ಟೋನ್‌ಗಳನ್ನು ಕಳುಹಿಸುವುದೇ?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"ಹೌದು"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"ಇಲ್ಲ"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"ಡಯಲ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೀಡಿಯೊ ಕರೆ"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೀಡಿಯೊ ಕರೆ ‑ ವೀಡಿಯೊವನ್ನು ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕೆಲಸದ ಕರೆ"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"ಒಳಬರುವ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"ವೈ-ಫೈ ಕರೆ"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"ವೈ‑ಫೈ ಕೆಲಸದ ಕರೆ"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"ತಡೆಹಿಡಿಯಲಾಗಿದೆ"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"ಒಳಬರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ಫೋಟೋದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ಫೋಟೋ ಮತ್ತು ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ಫೋಟೋ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ಪೋಟೋ, ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"ಲಗತ್ತುಗಳೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ಫೋಟೋದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ಫೋಟೋ ಮತ್ತು ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ಫೋಟೋ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ಪೋಟೋ, ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ಲಗತ್ತುಗಳೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"ಒಳಬರುವ ಕೆಲಸದ ಕರೆ"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ಒಳಬರುವ ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆ"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"ಒಳಬರುವ ವೀಡಿಯೊ ವಿನಂತಿ"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"ಉತ್ತರ"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"ಹ್ಯಾಂಗ್ ಅಪ್ ಮಾಡಿ"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"ವೀಡಿಯೊ"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"ಸಮ್ಮತಿಸು"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"ನಿರಾಕರಿಸಿ"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"ಸ್ಪೀಕರ್ ಆನ್ ಮಾಡಿ"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"ಸ್ಪೀಕರ್ ಆಫ್ ಮಾಡಿ"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"ಮತ್ತೊಂದು ಸಾಧನದಲ್ಲಿ ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"ಮತ್ತೊಂದು ಸಾಧನದಲ್ಲಿ ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೀಡಿಯೊ ಕರೆ"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"ಕರೆ ತೆಗೆದುಕೊಳ್ಳಿ"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"ವೀಡಿಯೊ ಕರೆ ತೆಗೆದುಕೊಳ್ಳಿ"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"ಸೇವೆ ಬೆಂಬಲಿತವಾಗಿಲ್ಲ."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"ಖಾಸಗಿಯಾಗಿ ಹೋಗಿ"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"ಕಾನ್ಫರೆನ್ಸ್ ಕರೆಯನ್ನು ನಿರ್ವಹಿಸಿ"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"ತುರ್ತು ಸಂಖ್ಯೆ"</string>
-    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> ಮೂಲಕ"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"ಯಾವುದೇ ಸಿಮ್‌ ಇಲ್ಲ ಅಥವಾ ಸಿಮ್‌ ದೋಷ"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ಕರೆ ಅಂತ್ಯಗೊಳಿಸಿ"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"ಕಾನ್ಫರೆನ್ಸ್ ಕರೆ"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"ಕರೆಯಲ್ಲಿ"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ಮೊಬೈಲ್ ಡೇಟಾ ಬಳಸಿಕೊಂಡು ಕರೆ ಮುಂದುವರಿಸಲಾಗುತ್ತಿದೆ…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ವೈ-ಫೈ ನೆಟ್‍ವರ್ಕ್‌ಗೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ವೀಡಿಯೊ ಕರೆ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ನಲ್ಲಿ ಹಾಗೆಯೇ ಉಳಿಯುತ್ತದೆ. ಪ್ರಮಾಣಿತ ಡೇಟಾ ಶುಲ್ಕಗಳು ಅನ್ವಯಿಸಬಹುದು."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ಮತ್ತೆ ಇದನ್ನು ತೋರಿಸಬೇಡ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">ಕೆಳಗಿನ ಟೋನ್‌ಗಳನ್ನು ಕಳುಹಿಸುವುದೇ?\n</string>
+  <string name="pause_prompt_yes">ಹೌದು</string>
+  <string name="pause_prompt_no">ಇಲ್ಲ</string>
+  <string name="notification_dialing">ಡಯಲ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
+  <string name="notification_ongoing_call">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ</string>
+  <string name="notification_ongoing_video_call">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="notification_ongoing_paused_video_call">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೀಡಿಯೊ ಕರೆ ‑ ವೀಡಿಯೊವನ್ನು ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ</string>
+  <string name="notification_ongoing_work_call">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕೆಲಸದ ಕರೆ</string>
+  <string name="notification_ongoing_call_wifi_template">ಚಾಲ್ತಿಯಲ್ಲಿರುವ %1$s</string>
+  <string name="notification_incoming_call_wifi_template">ಒಳಬರುವ %1$s</string>
+  <string name="notification_call_wifi_brand">ವೈ-ಫೈ ಕರೆ</string>
+  <string name="notification_call_wifi_work_brand">ವೈ‑ಫೈ ಕೆಲಸದ ಕರೆ</string>
+  <string name="notification_on_hold">ತಡೆಹಿಡಿಯಲಾಗಿದೆ</string>
+  <string name="notification_incoming_call">ಒಳಬರುವ ಕರೆ</string>
+  <string name="notification_incoming_video_call">ಒಳಬರುವ ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="notification_incoming_call_mutli_sim">%1$s ಮೂಲಕ ಒಳಬರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_photo">ಫೋಟೋದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_message">ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_location">ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_photo_message">ಫೋಟೋ ಮತ್ತು ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_photo_location">ಫೋಟೋ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_message_location">ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_with_photo_message_location">ಪೋಟೋ, ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="notification_incoming_call_attachments">ಲಗತ್ತುಗಳೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="important_notification_incoming_call">ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_photo">ಫೋಟೋದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_message">ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_location">ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_photo_message">ಫೋಟೋ ಮತ್ತು ಸಂದೇಶದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_photo_location">ಫೋಟೋ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_message_location">ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">ಪೋಟೋ, ಸಂದೇಶ ಮತ್ತು ಸ್ಥಳದೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="important_notification_incoming_call_attachments">ಲಗತ್ತುಗಳೊಂದಿಗೆ ಒಳಬರುತ್ತಿರುವ ಪ್ರಮುಖ ಕರೆ</string>
+  <string name="notification_incoming_work_call">ಒಳಬರುವ ಕೆಲಸದ ಕರೆ</string>
+  <string name="notification_incoming_spam_call">ಒಳಬರುವ ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆ</string>
+  <string name="notification_requesting_video_call">ಒಳಬರುವ ವೀಡಿಯೊ ವಿನಂತಿ</string>
+  <string name="notification_action_answer">ಉತ್ತರ</string>
+  <string name="notification_action_end_call">ಹ್ಯಾಂಗ್ ಅಪ್ ಮಾಡಿ</string>
+  <string name="notification_action_answer_video">ವೀಡಿಯೊ</string>
+  <string name="notification_action_accept">ಸಮ್ಮತಿಸು</string>
+  <string name="notification_action_dismiss">ನಿರಾಕರಿಸಿ</string>
+  <string name="notification_action_speaker_on">ಸ್ಪೀಕರ್ ಆನ್ ಮಾಡಿ</string>
+  <string name="notification_action_speaker_off">ಸ್ಪೀಕರ್ ಆಫ್ ಮಾಡಿ</string>
+  <string name="notification_external_call">ಮತ್ತೊಂದು ಸಾಧನದಲ್ಲಿ ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆ</string>
+  <string name="notification_external_video_call">ಮತ್ತೊಂದು ಸಾಧನದಲ್ಲಿ ಚಾಲ್ತಿಯಲ್ಲಿರುವ ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="notification_take_call">ಕರೆ ತೆಗೆದುಕೊಳ್ಳಿ</string>
+  <string name="notification_take_video_call">ವೀಡಿಯೊ ಕರೆ ತೆಗೆದುಕೊಳ್ಳಿ</string>
+  <string name="incall_error_supp_service_unknown">ಸೇವೆ ಬೆಂಬಲಿತವಾಗಿಲ್ಲ.</string>
+  <string name="goPrivate">ಖಾಸಗಿಯಾಗಿ ಹೋಗಿ</string>
+  <string name="manageConferenceLabel">ಕಾನ್ಫರೆನ್ಸ್ ಕರೆಯನ್ನು ನಿರ್ವಹಿಸಿ</string>
+  <string name="child_number">%s ಮೂಲಕ</string>
+  <string name="callFailed_simError">ಯಾವುದೇ ಸಿಮ್‌ ಇಲ್ಲ ಅಥವಾ ಸಿಮ್‌ ದೋಷ</string>
+  <string name="conference_caller_disconnect_content_description">ಕರೆ ಅಂತ್ಯಗೊಳಿಸಿ</string>
+  <string name="conference_call_name">ಕಾನ್ಫರೆನ್ಸ್ ಕರೆ</string>
+  <string name="generic_conference_call_name">ಕರೆಯಲ್ಲಿ</string>
+  <string name="video_call_wifi_to_lte_handover_toast">ಮೊಬೈಲ್ ಡೇಟಾ ಬಳಸಿಕೊಂಡು ಕರೆ ಮುಂದುವರಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="video_call_lte_to_wifi_failed_title">ವೈ-ಫೈ ನೆಟ್‍ವರ್ಕ್‌ಗೆ ಬದಲಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
+  <string name="video_call_lte_to_wifi_failed_message">ವೀಡಿಯೊ ಕರೆ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ನಲ್ಲಿ ಹಾಗೆಯೇ ಉಳಿಯುತ್ತದೆ. ಪ್ರಮಾಣಿತ ಡೇಟಾ ಶುಲ್ಕಗಳು ಅನ್ವಯಿಸಬಹುದು.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">ಮತ್ತೆ ಇದನ್ನು ತೋರಿಸಬೇಡ</string>
+  <string name="bubble_return_to_call">ಕರೆಗೆ ಹಿಂತಿರುಗಿ</string>
+  <string name="rtt_request_dialog_title">RTT ಕರೆಗೆ ಸೇರುವುದೇ?</string>
+  <string name="rtt_request_dialog_details">%1$s ಅವರು ನಿಮ್ಮ ಧ್ವನಿ ಕರೆಯೊಂದಿಗೆ ಸಂದೇಶವನ್ನು ಕಳುಹಿಸಲು ಬಯಸಿದ್ದಾರೆ.</string>
+  <string name="rtt_request_dialog_more_information">ಯಾರು ಕಿವುಡರು, ಆಲಿಸಲು ಕಷ್ಟಪಡುವವರು, ಆಲಿಸಲು ಅಸಾಮರ್ಥ್ಯವಾಗಿರುವವರು, ಮಾತಿನ ಸಮಸ್ಯೆಯನ್ನು ಹೊಂದಿರುವವರು ಅಥವಾ ಧ್ವನಿಗಿಂತ ಇನ್ನಷ್ಟು ಬಯಸುವವರು RTT ಸಹಾಯಕ ಕರೆಮಾಡುವವರು.</string>
+  <string name="rtt_button_decline_request">ಬೇಡ</string>
+  <string name="rtt_button_accept_request">RTT ಅನ್ನು ಸೇರಿ</string>
 </resources>

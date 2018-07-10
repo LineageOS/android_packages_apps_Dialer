@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Taleanrop</string>
+  <string name="video_call">Videoanrop</string>
+  <string name="add_to_contacts">Legg til i Kontakter</string>
+  <string name="send_a_message">Melding</string>
+  <string name="not_spam">Ikke useriøs</string>
+  <string name="block_number">Blokkér</string>
+  <string name="unblock_number">Opphev blokkering</string>
+  <string name="block_and_optionally_report_spam">Blokkér/rapportér som useriøs</string>
+  <string name="copy_number">Kopiér nummeret</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Эхлүүлэх</string>
+  <string name="rtt_input_hint">Зурвас бичнэ үү</string>
+  <string name="content_description_rtt_chat_avatar">Аватар</string>
+  <string name="rtt_button_back">Буцах</string>
+  <string name="rtt_status_banner_text">RTT дуудлагад нэгдэхэд %s-г хүлээж байна…</string>
+  <string name="rtt_transcript_advisory">Нөгөө талын хүн та бичиж байгаа гэдгийг харах боломжтой. Сийрүүлгийг таны төхөөрөмж дээр дуудлагын түүхэнд хадгалсан.</string>
+</resources>

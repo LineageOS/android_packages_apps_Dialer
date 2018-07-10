@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Reaaliaikaiset tekstiviestit puhelun aikana</string>
+  <string name="rtt_promotion_details">RTT-toiminto auttaa kuuroja sekä käyttäjiä, joilla on kuulo‑
+    tai puhehäiriöitä tai jotka tarvitsevat muuta tukea pelkän puheen lisäksi. RTT-viestien transkriptiot tallennetaan laitteen
+    puheluhistoriaan. %1$s</string>
+  <string name="duo_disclosure_title">Soita videopuheluja Duolla</string>
+  <string name="duo_disclosure_details">Kun soitat videopuhelun Google Duon kautta, voit keskustella ystävien ja perheenjäsenten kanssa kasvokkain. Tiedonsiirrosta voidaan periä maksu. %1$s</string>
+</resources>

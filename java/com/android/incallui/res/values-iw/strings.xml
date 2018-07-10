@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"טלפון"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"לשלוח את הצלילים הבאים?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"כן"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"לא"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"מחייג"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"שיחה פעילה"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"שיחת וידאו פעילה"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"שיחת וידאו פעילה - הווידאו מושהה"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"שיחת עבודה פעילה"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> פעילה"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> נכנסת"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"‏שיחת Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"‏שיחת עבודה ברשת Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"בהמתנה"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"שיחה נכנסת"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"שיחה נכנסת עם תמונה"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"שיחה נכנסת עם הודעה"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"שיחה נכנסת עם מיקום"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"שיחה נכנסת עם תמונה והודעה"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"שיחה נכנסת עם תמונה ומיקום"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"שיחה נכנסת עם הודעה ומיקום"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"שיחה נכנסת עם תמונה, הודעה ומיקום"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"שיחה נכנסת עם קבצים מצורפים"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"שיחה נכנסת חשובה"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"שיחה נכנסת חשובה עם תמונה"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"שיחה נכנסת חשובה עם הודעה"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"שיחה נכנסת חשובה עם מיקום"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"שיחה נכנסת חשובה עם תמונה והודעה"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"שיחה נכנסת חשובה עם תמונה ומיקום"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"שיחה נכנסת חשובה עם הודעה ומיקום"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"שיחה נכנסת חשובה עם תמונה, הודעה ומיקום"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"שיחה נכנסת חשובה עם קבצים מצורפים"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"שיחת עבודה נכנסת"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"השיחה הנכנסת חשודה כספאם"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"בקשת וידאו נכנסת"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"ענה"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"נתק"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"סרטון"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"קבל"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"דחה"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"הפעלת הרמקול"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"השבתת הרמקול"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"באחד מהמכשירים האחרים מתבצעת שיחה"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"באחד מהמכשירים האחרים מתבצעת שיחת וידאו"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"קבל את השיחה"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"קבל את שיחת הווידאו"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"שירות לא נתמך."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"עבור לשיחה פרטית"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"נהל שיחת ועידה"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"מספר חירום"</string>
-    <string name="child_number" msgid="3398257437107259682">"דרך <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"‏אין SIM או שגיאת SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"סיים שיחה"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"שיחת ועידה"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"בשיחה"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ממשיך את השיחה באמצעות הרשת הסלולרית…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"‏לא ניתן לעבור לרשת Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"שיחת הווידאו תמשיך להיות ברשת הסלולרית. ייתכן שתחויב על שימוש בנתונים."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"אל תציג זאת שוב"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">‏לשלוח את הצלילים הבאים?\n</string>
+  <string name="pause_prompt_yes">כן</string>
+  <string name="pause_prompt_no">לא</string>
+  <string name="notification_dialing">מחייג</string>
+  <string name="notification_ongoing_call">שיחה פעילה</string>
+  <string name="notification_ongoing_video_call">שיחת וידאו פעילה</string>
+  <string name="notification_ongoing_paused_video_call">שיחת וידאו פעילה - הווידאו מושהה</string>
+  <string name="notification_ongoing_work_call">שיחת עבודה פעילה</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s פעילה</string>
+  <string name="notification_incoming_call_wifi_template">%1$s נכנסת</string>
+  <string name="notification_call_wifi_brand">‏שיחת Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">‏שיחת עבודה ברשת Wi-Fi</string>
+  <string name="notification_on_hold">בהמתנה</string>
+  <string name="notification_incoming_call">שיחה נכנסת</string>
+  <string name="notification_incoming_video_call">שיחת וידאו נכנסת</string>
+  <string name="notification_incoming_call_mutli_sim">שיחה נכנסת באמצעות %1$s</string>
+  <string name="notification_incoming_call_with_photo">שיחה נכנסת עם תמונה</string>
+  <string name="notification_incoming_call_with_message">שיחה נכנסת עם הודעה</string>
+  <string name="notification_incoming_call_with_location">שיחה נכנסת עם מיקום</string>
+  <string name="notification_incoming_call_with_photo_message">שיחה נכנסת עם תמונה והודעה</string>
+  <string name="notification_incoming_call_with_photo_location">שיחה נכנסת עם תמונה ומיקום</string>
+  <string name="notification_incoming_call_with_message_location">שיחה נכנסת עם הודעה ומיקום</string>
+  <string name="notification_incoming_call_with_photo_message_location">שיחה נכנסת עם תמונה, הודעה ומיקום</string>
+  <string name="notification_incoming_call_attachments">שיחה נכנסת עם קבצים מצורפים</string>
+  <string name="important_notification_incoming_call">שיחה נכנסת חשובה</string>
+  <string name="important_notification_incoming_call_with_photo">שיחה נכנסת חשובה עם תמונה</string>
+  <string name="important_notification_incoming_call_with_message">שיחה נכנסת חשובה עם הודעה</string>
+  <string name="important_notification_incoming_call_with_location">שיחה נכנסת חשובה עם מיקום</string>
+  <string name="important_notification_incoming_call_with_photo_message">שיחה נכנסת חשובה עם תמונה והודעה</string>
+  <string name="important_notification_incoming_call_with_photo_location">שיחה נכנסת חשובה עם תמונה ומיקום</string>
+  <string name="important_notification_incoming_call_with_message_location">שיחה נכנסת חשובה עם הודעה ומיקום</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">שיחה נכנסת חשובה עם תמונה, הודעה ומיקום</string>
+  <string name="important_notification_incoming_call_attachments">שיחה נכנסת חשובה עם קבצים מצורפים</string>
+  <string name="notification_incoming_work_call">שיחת עבודה נכנסת</string>
+  <string name="notification_incoming_spam_call">השיחה הנכנסת חשודה כספאם</string>
+  <string name="notification_requesting_video_call">בקשת וידאו נכנסת</string>
+  <string name="notification_action_answer">ענה</string>
+  <string name="notification_action_end_call">נתק</string>
+  <string name="notification_action_answer_video">סרטון</string>
+  <string name="notification_action_accept">קבל</string>
+  <string name="notification_action_dismiss">דחה</string>
+  <string name="notification_action_speaker_on">הפעלת הרמקול</string>
+  <string name="notification_action_speaker_off">השבתת הרמקול</string>
+  <string name="notification_external_call">באחד מהמכשירים האחרים מתבצעת שיחה</string>
+  <string name="notification_external_video_call">באחד מהמכשירים האחרים מתבצעת שיחת וידאו</string>
+  <string name="notification_take_call">קבל את השיחה</string>
+  <string name="notification_take_video_call">קבל את שיחת הווידאו</string>
+  <string name="incall_error_supp_service_unknown">שירות לא נתמך.</string>
+  <string name="goPrivate">עבור לשיחה פרטית</string>
+  <string name="manageConferenceLabel">נהל שיחת ועידה</string>
+  <string name="child_number">דרך %s</string>
+  <string name="callFailed_simError">‏אין SIM או שגיאת SIM</string>
+  <string name="conference_caller_disconnect_content_description">סיים שיחה</string>
+  <string name="conference_call_name">שיחת ועידה</string>
+  <string name="generic_conference_call_name">בשיחה</string>
+  <string name="video_call_wifi_to_lte_handover_toast">ממשיך את השיחה באמצעות הרשת הסלולרית…</string>
+  <string name="video_call_lte_to_wifi_failed_title">‏לא ניתן לעבור לרשת Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">שיחת הווידאו תמשיך להיות ברשת הסלולרית. ייתכן שתחויב על שימוש בנתונים.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">אל תציג זאת שוב</string>
+  <string name="bubble_return_to_call">חזרה לשיחה</string>
+  <string name="rtt_request_dialog_title">‏רוצה להצטרף לשיחת RTT?</string>
+  <string name="rtt_request_dialog_details">%1$s רוצה להשתמש בהודעות בשיחה.</string>
+  <string name="rtt_request_dialog_more_information">‏RTT (טקסט בזמן אמת) היא תכונת נגישות שעוזרת לחרשים, לקויי שמיעה, לקויי דיבור או אנשים שלא יכולים להסתפק רק בקול במהלך השיחה.</string>
+  <string name="rtt_button_decline_request">לא תודה</string>
+  <string name="rtt_button_accept_request">‏הצטרפות ל-RTT</string>
 </resources>

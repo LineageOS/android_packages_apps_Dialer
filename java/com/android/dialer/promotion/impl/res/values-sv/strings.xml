@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Meddelanden med realtidstext i samtal</string>
+  <string name="rtt_promotion_details">RTT hjälper döva, hörselskadade, personer med
+    talsvårigheter eller behöver mer än endast röst. Transkriptioner av RTT-meddelanden lagras på enheten
+    i samtalshistoriken. %1$s</string>
+  <string name="duo_disclosure_title">Ring videosamtal med Duo</string>
+  <string name="duo_disclosure_details">Google Duo videosamtal gör det möjligt att chatta ansikte mot ansikte med familj och vänner. Dataavgifter kan tillkomma. %1$s</string>
+</resources>

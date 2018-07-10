@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Noma’lum</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Taksofon</string>
+  <string name="emergency_number">Favqulodda xizmat raqami</string>
+  <string name="launcherActivityLabel">Telefon</string>
+  <string name="call">Telefon</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Chaqiruv Wi‑Fi orqali davom ettirish…</string>
+  <string name="rtt_call_not_available_toast">Ushbu chaqiruvda RTT funksiyasidan foydalanish imkonsiz</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

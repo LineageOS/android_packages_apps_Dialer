@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">ການໂທດ້ວຍສຽງ</string>
+  <string name="video_call">ໂທວິດີໂອ</string>
+  <string name="add_to_contacts">ເພີ່ມລາຍຊື່ຜູ້ຕິດຕໍ່</string>
+  <string name="send_a_message">ຂໍ້ຄວາມ</string>
+  <string name="not_spam">ບໍ່ແມ່ນສະແປມ</string>
+  <string name="block_number">ບລັອກ</string>
+  <string name="unblock_number">ຍົກເລີກການບລັອກ</string>
+  <string name="block_and_optionally_report_spam">ບລັອກ/ລາຍງານສະແປມ</string>
+  <string name="copy_number">ສຳເນົາເບີໂທ</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Фільтраванне ўсіх выклікаў, якія падазраюцца ў спаме</string>
+  <string name="spam_blocking_promo_text">Выклікі, падобныя на той, які вы заблакіравалі, больш не
+      будуць турбаваць вас</string>
+  <string name="spam_blocking_promo_action_filter_spam">Фільтраваць спам</string>
+  <string name="spam_blocking_promo_action_dismiss">Адхіліць</string>
+  <string name="spam_blocking_setting_prompt">Налады</string>
+  <string name="spam_blocking_settings_enable_error_text">Памылка ўключэння фільтра спама</string>
+  <string name="spam_blocking_settings_disable_error_text">Памылка выключэння фільтра спама</string>
+  <string name="spam_blocking_settings_enable_complete_text">Фільтрацыя спама ўключана</string>
+  <string name="spam_blocking_settings_disable_complete_text">Фільтрацыя спама выключана</string>
+</resources>

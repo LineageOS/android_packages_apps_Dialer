@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Дуудлагын тухайн агшины текст зурвас</string>
+  <string name="rtt_promotion_details">ТАТ нь дүлий, сонсголын бэрхшээлтэй, хэл ярианы хөгжлийн бэрхшээлтэй эсвэл хэн нэгний тусламжтай ярьдаг дуудлага хийгчдэд тусладаг. ТАТ зурвас сийрүүлгийг таны төхөөрөмжийн дуудлагын түүх хэсэгт хадгалдаг.%1$s</string>
+  <string name="duo_disclosure_title">Duo ашиглан видео дуудлага хийх</string>
+  <string name="duo_disclosure_details">Google Duo видео дуудлага танд гэр бүлийнхэн, найз нөхөдтэйгээ нүүр нүүрээ харж ярилцах боломжийг олгодог. Дата төлбөр гарч болзошгүй. %1$s</string>
+</resources>

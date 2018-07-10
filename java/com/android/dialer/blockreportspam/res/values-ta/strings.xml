@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$sஐத் தடுக்கவா?</string>
+  <string name="block_number_confirmation_message_new_filtering">இந்த எண்ணிலிருந்து இனி அழைப்புகளையோ உரைச் செய்திகளையோ பெறமாட்டீர்கள்.</string>
+  <string name="block_number_ok">தடு</string>
+  <string name="unblock_number_ok">அனுமதி</string>
+  <string name="block_report_number_alert_title">%1$sஐத் தடுக்கவா?</string>
+  <string name="block_report_number_alert_details">இந்த எண்ணிலிருந்து இனி அழைப்புகளைப் பெறமாட்டீர்கள்.</string>
+  <string name="block_number_alert_details">%1$s இந்த அழைப்பு ஸ்பேம் எனப் புகாரளிக்கப்படும்.</string>
+  <string name="unblock_number_alert_details">இந்த எண் அனுமதிக்கப்பட்டு, ஸ்பேம் இல்லையென தெரிவிக்கப்படும். இனி அழைப்புகள் ஸ்பேமாக குறிக்கப்படாது.</string>
+  <string name="unblock_report_number_alert_title">%1$sஐ அனுமதிக்கவா?</string>
+  <string name="report_not_spam_alert_button">புகாரளி</string>
+  <string name="report_not_spam_alert_title">தவறு எனத் தெரிவிக்கவா?</string>
+  <string name="report_not_spam_alert_details">இனி %1$s இன் அழைப்புகள் ஸ்பேமாகக் குறிக்கப்படாது.</string>
+  <string name="checkbox_report_as_spam_action">அழைப்பை ஸ்பேம் எனப் புகாரளி</string>
+  <string name="block_number_failed_toast">இந்த எண்ணைத் தடுப்பதில் சிக்கல்</string>
+  <string name="unblock_number_failed_toast">இந்த எண்ணை அனுமதிக்கவும்</string>
+</resources>

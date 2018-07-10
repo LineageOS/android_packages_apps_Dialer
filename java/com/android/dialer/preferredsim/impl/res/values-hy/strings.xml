@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Զանգ կատարելու համար անհրաժեշտ է հեռախոսից օգտվելու թույլտվություն</string>
+  <string name="pre_call_select_phone_account">Ընտրեք, թե որ SIM քարտով զանգել</string>
+  <string name="pre_call_select_phone_account_remember">Հիշել այս ընտրությունը</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Հասանելի չէ, երբ օգտագործվում է %1$s քարտը</string>
+</resources>

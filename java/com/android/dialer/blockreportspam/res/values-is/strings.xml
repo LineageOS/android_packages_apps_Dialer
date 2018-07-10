@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Setja %1$s á bannlista?</string>
+  <string name="block_number_confirmation_message_new_filtering">Þú munt ekki lengur fá símtöl eða textaskilaboð úr þessu númeri.</string>
+  <string name="block_number_ok">SETJA Á BANNLISTA</string>
+  <string name="unblock_number_ok">TAKA AF BANNLISTA</string>
+  <string name="block_report_number_alert_title">Setja %1$s á bannlista?</string>
+  <string name="block_report_number_alert_details">Þú munt ekki lengur fá símtöl úr þessu númeri.</string>
+  <string name="block_number_alert_details">%1$s Þetta símtal verður tilkynnt sem úr ruslnúmeri.</string>
+  <string name="unblock_number_alert_details">Þetta númer verður tekið af bannlista og ekki tilkynnt sem ruslnúmer. Ekki er lokað á símtöl.</string>
+  <string name="unblock_report_number_alert_title">Taka %1$s af bannlista?</string>
+  <string name="report_not_spam_alert_button">Tilkynna</string>
+  <string name="report_not_spam_alert_title">Tilkynna mistök?</string>
+  <string name="report_not_spam_alert_details">Frekari símtöl frá %1$s verða ekki lengur tilkynnt sem úr ruslnúmeri.</string>
+  <string name="checkbox_report_as_spam_action">Tilkynna símtal sem úr ruslnúmeri</string>
+  <string name="block_number_failed_toast">Vandamál kom upp við að setja þetta númer á bannlista</string>
+  <string name="unblock_number_failed_toast">Vandamál kom upp við að taka þetta númer af bannlista</string>
+</resources>

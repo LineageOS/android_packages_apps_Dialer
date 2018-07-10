@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Composition assistée</string>
+  <string name="assisted_dialing_setting_summary">Prédire et ajouter un code de pays lorsque vous faites un appel lors d\'un voyage à l\'étranger</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Pays détecté automatiquement • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Pays détecté automatiquement</string>
+  <string name="assisted_dialing_setting_cc_category_title">Pays d\'origine</string>
+  <string name="assisted_dialing_setting_cc_title">Pays d\'origine par défaut</string>
+</resources>

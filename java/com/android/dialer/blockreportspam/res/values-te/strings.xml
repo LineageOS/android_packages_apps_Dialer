@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$sని బ్లాక్ చేయాలా?</string>
+  <string name="block_number_confirmation_message_new_filtering">మీరు ఇకపై ఈ నంబర్ నుండి కాల్‌లు లేదా వచన సందేశాలను స్వీకరించరు.</string>
+  <string name="block_number_ok">బ్లాక్ చేయి</string>
+  <string name="unblock_number_ok">అన్‌బ్లాక్ చేయి</string>
+  <string name="block_report_number_alert_title">%1$sని బ్లాక్ చేయాలా?</string>
+  <string name="block_report_number_alert_details">మీరు ఇకపై ఈ నంబర్ నుండి కాల్‌లు స్వీకరించరు.</string>
+  <string name="block_number_alert_details">%1$s ఈ కాల్ స్పామ్ వలె నివేదించబడుతుంది.</string>
+  <string name="unblock_number_alert_details">ఈ నంబర్ అన్‌బ్లాక్ చేయబడుతుంది మరియు ఇది స్పామ్ కాదని నివేదించబడుతుంది. భవిష్యత్తు కాల్‌లు స్పామ్‌గా గుర్తించబడవు.</string>
+  <string name="unblock_report_number_alert_title">%1$sని అన్‌బ్లాక్ చేయాలా?</string>
+  <string name="report_not_spam_alert_button">నివేదించు</string>
+  <string name="report_not_spam_alert_title">పొరపాటును నివేదించాలా?</string>
+  <string name="report_not_spam_alert_details">ఇప్పటి నుండి %1$s నుండి వచ్చే కాల్‌లు స్పామ్‌గా గుర్తించబడవు.</string>
+  <string name="checkbox_report_as_spam_action">కాల్‌ను స్పామ్‌గా నివేదించు</string>
+  <string name="block_number_failed_toast">ఈ నంబర్‌ని బ్లాక్ చేస్తున్నప్పుడు సమస్య ఏర్పడింది</string>
+  <string name="unblock_number_failed_toast">ఈ నంబర్‌ని అన్‌బ్లాక్ చేస్తున్నప్పుడు సమస్య ఏర్పడింది</string>
+</resources>

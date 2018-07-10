@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Начать голосовой вызов</string>
+  <string name="video_call">Начать видеовстречу</string>
+  <string name="add_to_contacts">Добавить в контакты</string>
+  <string name="send_a_message">Отправить SMS</string>
+  <string name="not_spam">Отметить как не спам</string>
+  <string name="block_number">Заблокировать</string>
+  <string name="unblock_number">Разблокировать</string>
+  <string name="block_and_optionally_report_spam">Заблокировать/сообщить о спаме</string>
+  <string name="copy_number">Скопировать номер</string>
+</resources>

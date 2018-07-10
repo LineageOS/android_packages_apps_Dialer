@@ -1,164 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Текст скопирован"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Вызов:<xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Домашний"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Мобильный"</string>
-    <string name="call_work" msgid="6040550697395300892">"Рабочий"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Рабочий факс"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Домашний факс"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Пейджер"</string>
-    <string name="call_other" msgid="5536385588712587235">"Набор"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Обратный вызов"</string>
-    <string name="call_car" msgid="3197417098027764954">"Телефон в машине"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Телефон офиса"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Номер ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Основной телефон"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Факс"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Радиотелефон"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Телекс"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Телетайп"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Рабочий мобильный"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Рабочий пейджер"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Вызов: <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Номер MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"SMS: <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"SMS: домашний"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"SMS: мобильный"</string>
-    <string name="sms_work" msgid="4158595439553450966">"SMS: рабочий"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"SMS: рабочий факс"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"SMS: домашний факс"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"SMS: пейджер"</string>
-    <string name="sms_other" msgid="1742702947993285933">"SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"SMS: номер обратного вызова"</string>
-    <string name="sms_car" msgid="4314577266154395174">"SMS: телефон в машине"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"SMS: телефон офиса"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"SMS: номер ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"SMS: основной номер"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"SMS: факс"</string>
-    <string name="sms_radio" msgid="855555176531704682">"SMS: радиотелефон"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"SMS: телекс"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"SMS: телетайп"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"SMS: рабочий мобильный"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"SMS: рабочий пейджер"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"SMS: <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"SMS: номер MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Очистить список популярных контактов?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Список популярных контактов в приложениях \"Контакты\" и \"Телефон\" будет очищен, а приложения электронной почты начнут запоминать адреса заново."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Подождите…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Доступен"</string>
-    <string name="status_away" msgid="2298688367552893953">"Отсутствует"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Не беспокоить"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Контакты"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Топ рекомендуемых"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Другое"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Каталог"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Каталог контактов из рабочего профиля"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Все контакты"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Рекомендуемые"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Вы"</string>
-    <string name="missing_name" msgid="978606963362745020">"Имя не указано"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Посмотреть контакт"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Контакты с номерами телефонов"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Контакты из рабочего профиля"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Просмотреть обновления"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Только на устройстве, не синхронизируется"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Имя"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Псевдоним"</string>
-    <string name="full_name" msgid="648186563998465740">"Имя"</string>
-    <string name="name_given" msgid="5096576006314820536">"По имени"</string>
-    <string name="name_family" msgid="6646235805198547467">"По фамилии"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Префикс имени"</string>
-    <string name="name_middle" msgid="703755205331582769">"Отчество"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Суффикс имени"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Транскрипция имени"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Транскрипция имени"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Транскрипция отчества"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Транскрипция фамилии"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Телефон"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Написать письмо"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Адрес"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Чат"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Организация"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Связи"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Определенная дата"</string>
-    <string name="sms" msgid="7574344928185328095">"SMS"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Адрес"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Организация"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Должность"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Примечания"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Веб-сайт"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Группы"</string>
-    <string name="email_home" msgid="889830029388962171">"Написать на личный адрес"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Написать на мобильную эл. почту"</string>
-    <string name="email_work" msgid="4223487303344613528">"Написать на рабочий адрес"</string>
-    <string name="email_other" msgid="4246411900126012062">"Написать письмо"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Написать письмо (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="email" msgid="2807318537887091606">"Написать письмо"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Улица"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Город"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Регион"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Индекс"</string>
-    <string name="postal_country" msgid="232670707458768148">"Страна"</string>
-    <string name="map_home" msgid="4181131107392126938">"Посмотреть домашний адрес"</string>
-    <string name="map_work" msgid="5723471185992684400">"Посмотреть рабочий адрес"</string>
-    <string name="map_other" msgid="2253764780863500516">"Посмотреть адрес"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Посмотреть адрес (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Чат через AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Чат через Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Чат через Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Чат через Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Чат через QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Чат через Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Чат через ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Чат через Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Чат"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Все контакты"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Контакты аккаунта \"<xliff:g id="NAME">%s</xliff:g>\""</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Пользовательский фильтр"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Один контакт"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Сортировка"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"По имени"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"По фамилии"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Формат имени"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Сначала имя"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Сначала фамилия"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Очистить популярные"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"прекратить поиск"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Очистить условия поиска"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Аккаунт"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Всегда использовать для звонков"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Аккаунт для звонка"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Написать сообщение абоненту"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Введите текст…"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ОТПРАВИТЬ И ПОЗВОНИТЬ"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Вкладка \"<xliff:g id="TITLE">%1$s</xliff:g>\"."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one">Вкладка <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> непрочитанный элемент. </item>
-      <item quantity="few">Вкладка <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> непрочитанных элемента. </item>
-      <item quantity="many">Вкладка <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> непрочитанных элементов. </item>
-      <item quantity="other">Вкладка <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> непрочитанного элемента. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Видеовызов"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Поделиться и позвонить"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Вызов:%s</string>
+  <string name="call_home">Домашний</string>
+  <string name="call_mobile">Мобильный</string>
+  <string name="call_work">Рабочий</string>
+  <string name="call_fax_work">Рабочий факс</string>
+  <string name="call_fax_home">Домашний факс</string>
+  <string name="call_pager">Пейджер</string>
+  <string name="call_other">Набор</string>
+  <string name="call_callback">Обратный вызов</string>
+  <string name="call_car">Телефон в машине</string>
+  <string name="call_company_main">Телефон офиса</string>
+  <string name="call_isdn">Номер ISDN</string>
+  <string name="call_main">Основной телефон</string>
+  <string name="call_other_fax">Факс</string>
+  <string name="call_radio">Радиотелефон</string>
+  <string name="call_telex">Телекс</string>
+  <string name="call_tty_tdd">Телетайп</string>
+  <string name="call_work_mobile">Рабочий мобильный</string>
+  <string name="call_work_pager">Рабочий пейджер</string>
+  <string name="call_assistant">Вызов: %s</string>
+  <string name="call_mms">Номер MMS</string>
+  <string name="sms_custom">SMS: %s</string>
+  <string name="sms_home">SMS: домашний</string>
+  <string name="sms_mobile">SMS: мобильный</string>
+  <string name="sms_work">SMS: рабочий</string>
+  <string name="sms_fax_work">SMS: рабочий факс</string>
+  <string name="sms_fax_home">SMS: домашний факс</string>
+  <string name="sms_pager">SMS: пейджер</string>
+  <string name="sms_other">SMS</string>
+  <string name="sms_callback">SMS: номер обратного вызова</string>
+  <string name="sms_car">SMS: телефон в машине</string>
+  <string name="sms_company_main">SMS: телефон офиса</string>
+  <string name="sms_isdn">SMS: номер ISDN</string>
+  <string name="sms_main">SMS: основной номер</string>
+  <string name="sms_other_fax">SMS: факс</string>
+  <string name="sms_radio">SMS: радиотелефон</string>
+  <string name="sms_telex">SMS: телекс</string>
+  <string name="sms_tty_tdd">SMS: телетайп</string>
+  <string name="sms_work_mobile">SMS: рабочий мобильный</string>
+  <string name="sms_work_pager">SMS: рабочий пейджер</string>
+  <string name="sms_assistant">SMS: %s</string>
+  <string name="sms_mms">SMS: номер MMS</string>
+  <string name="clearFrequentsConfirmation_title">Очистить список популярных контактов?</string>
+  <string name="clearFrequentsConfirmation">Список популярных контактов в приложениях \"Контакты\" и \"Телефон\" будет очищен, а приложения электронной почты начнут запоминать адреса заново.</string>
+  <string name="clearFrequentsProgress_title">Подождите…</string>
+  <string name="status_available">Доступен</string>
+  <string name="status_away">Отсутствует</string>
+  <string name="status_busy">Не беспокоить</string>
+  <string name="contactsList">Контакты</string>
+  <string name="contact_suggestions">Топ рекомендуемых</string>
+  <string name="local_invisible_directory">Другое</string>
+  <string name="directory_search_label">Каталог</string>
+  <string name="directory_search_label_work">Каталог контактов из рабочего профиля</string>
+  <string name="local_search_label">Все контакты</string>
+  <string name="local_suggestions_search_label">Рекомендуемые</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Вы</string>
+  <string name="missing_name">Имя не указано</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Посмотреть контакт</string>
+  <string name="list_filter_phones">Контакты с номерами телефонов</string>
+  <string name="list_filter_phones_work">Контакты из рабочего профиля</string>
+  <string name="view_updates_from_group">Просмотреть обновления</string>
+  <string name="account_phone">Только на устройстве, не синхронизируется</string>
+  <string name="nameLabelsGroup">Имя</string>
+  <string name="nicknameLabelsGroup">Псевдоним</string>
+  <string name="full_name">Имя</string>
+  <string name="name_given">По имени</string>
+  <string name="name_family">По фамилии</string>
+  <string name="name_prefix">Префикс имени</string>
+  <string name="name_middle">Отчество</string>
+  <string name="name_suffix">Суффикс имени</string>
+  <string name="name_phonetic">Транскрипция имени</string>
+  <string name="name_phonetic_given">Транскрипция имени</string>
+  <string name="name_phonetic_middle">Транскрипция отчества</string>
+  <string name="name_phonetic_family">Транскрипция фамилии</string>
+  <string name="phoneLabelsGroup">Телефон</string>
+  <string name="emailLabelsGroup">Написать письмо</string>
+  <string name="postalLabelsGroup">Адрес</string>
+  <string name="imLabelsGroup">Чат</string>
+  <string name="organizationLabelsGroup">Организация</string>
+  <string name="relationLabelsGroup">Связи</string>
+  <string name="eventLabelsGroup">Определенная дата</string>
+  <string name="sms">SMS</string>
+  <string name="postal_address">Адрес</string>
+  <string name="ghostData_company">Организация</string>
+  <string name="ghostData_title">Должность</string>
+  <string name="label_notes">Примечания</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Веб-сайт</string>
+  <string name="groupsLabel">Группы</string>
+  <string name="email_home">Написать на личный адрес</string>
+  <string name="email_mobile">Написать на мобильную эл. почту</string>
+  <string name="email_work">Написать на рабочий адрес</string>
+  <string name="email_other">Написать письмо</string>
+  <string name="email_custom">Написать письмо (%s)</string>
+  <string name="email">Написать письмо</string>
+  <string name="postal_street">Улица</string>
+  <string name="postal_city">Город</string>
+  <string name="postal_region">Регион</string>
+  <string name="postal_postcode">Индекс</string>
+  <string name="postal_country">Страна</string>
+  <string name="map_home">Посмотреть домашний адрес</string>
+  <string name="map_work">Посмотреть рабочий адрес</string>
+  <string name="map_other">Посмотреть адрес</string>
+  <string name="map_custom">Посмотреть адрес (%s)</string>
+  <string name="chat_aim">Чат через AIM</string>
+  <string name="chat_msn">Чат через Windows Live</string>
+  <string name="chat_yahoo">Чат через Yahoo</string>
+  <string name="chat_skype">Чат через Skype</string>
+  <string name="chat_qq">Чат через QQ</string>
+  <string name="chat_gtalk">Чат через Google Talk</string>
+  <string name="chat_icq">Чат через ICQ</string>
+  <string name="chat_jabber">Чат через Jabber</string>
+  <string name="chat">Чат</string>
+  <string name="list_filter_all_accounts">Все контакты</string>
+  <string name="listAllContactsInAccount">Контакты аккаунта \"%s\"</string>
+  <string name="listCustomView">Пользовательский фильтр</string>
+  <string name="listSingleContact">Один контакт</string>
+  <string name="display_options_sort_list_by">Сортировка</string>
+  <string name="display_options_sort_by_given_name">По имени</string>
+  <string name="display_options_sort_by_family_name">По фамилии</string>
+  <string name="display_options_view_names_as">Формат имени</string>
+  <string name="display_options_view_given_name_first">Сначала имя</string>
+  <string name="display_options_view_family_name_first">Сначала фамилия</string>
+  <string name="menu_clear_frequents">Очистить популярные</string>
+  <string name="action_menu_back_from_search">прекратить поиск</string>
+  <string name="description_clear_search">Очистить условия поиска</string>
+  <string name="select_account_dialog_title">Аккаунт</string>
+  <string name="set_default_account">Всегда использовать для звонков</string>
+  <string name="select_phone_account_for_calls">Выберите SIM-карту для вызова</string>
+  <string name="select_phone_account_for_calls_remember">Запомнить выбор</string>
+  <string name="call_with_a_note">Написать сообщение абоненту</string>
+  <string name="call_subject_hint">Введите текст…</string>
+  <string name="send_and_call_button">ОТПРАВИТЬ И ПОЗВОНИТЬ</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Вкладка \"%1$s\".</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">Вкладка %1$s. %2$d непрочитанный элемент. </item>
+    <item quantity="few">Вкладка %1$s. %2$d непрочитанных элемента. </item>
+    <item quantity="many">Вкладка %1$s. %2$d непрочитанных элементов. </item>
+    <item quantity="other">Вкладка %1$s. %2$d непрочитанного элемента. </item>
+  </plurals>
+  <string name="description_search_video_call">Видеовызов</string>
+  <string name="description_search_call_and_share">Поделиться и позвонить</string>
 </resources>

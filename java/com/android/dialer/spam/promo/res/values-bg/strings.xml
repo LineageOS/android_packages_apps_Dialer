@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Да се филтрират ли всички обаждания, които са възможен спам?</string>
+  <string name="spam_blocking_promo_text">Повече няма да ви безпокоят обаждания като току-що блокираното от вас</string>
+  <string name="spam_blocking_promo_action_filter_spam">Филтриране на спама</string>
+  <string name="spam_blocking_promo_action_dismiss">Отхвърляне</string>
+  <string name="spam_blocking_setting_prompt">Настройки</string>
+  <string name="spam_blocking_settings_enable_error_text">При включването на филтрирането на спама възникна проблем</string>
+  <string name="spam_blocking_settings_disable_error_text">При изключването на филтрирането на спама възникна проблем</string>
+  <string name="spam_blocking_settings_enable_complete_text">Филтрирането на спама е включено</string>
+  <string name="spam_blocking_settings_disable_complete_text">Филтрирането на спама е изключено</string>
+</resources>

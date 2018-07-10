@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">આગળ વધો</string>
+  <string name="rtt_input_hint">એક સંદેશ લખો</string>
+  <string name="content_description_rtt_chat_avatar">અવતાર</string>
+  <string name="rtt_button_back">પાછળ</string>
+  <string name="rtt_status_banner_text">RTT કૉલ માટે %sની જોડાવાની રાહ જોઈ રહ્યાં છીએ…</string>
+  <string name="rtt_transcript_advisory">અન્ય પક્ષ તમે લખી રહ્યાં છો તે જોઈ શકે છે. ટ્રાન્સક્રિપ્ટને તમારા ઉપકરણ પર કૉલ ઇતિહાસમાં સ્ટોર કરવામાં આવે છે.</string>
+</resources>

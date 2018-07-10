@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Glasovni klic</string>
+  <string name="video_call">Videoklic</string>
+  <string name="add_to_contacts">Dodaj stik</string>
+  <string name="send_a_message">Sporočilo</string>
+  <string name="not_spam">Ni neželeni klic</string>
+  <string name="block_number">Blokiraj</string>
+  <string name="unblock_number">Odblokiraj</string>
+  <string name="block_and_optionally_report_spam">Blokiraj/prijavi neželeni klic</string>
+  <string name="copy_number">Kopiraj številko</string>
+</resources>

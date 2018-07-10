@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Nastavi</string>
+  <string name="rtt_input_hint">Upišite poruku</string>
+  <string name="content_description_rtt_chat_avatar">Avatar</string>
+  <string name="rtt_button_back">Nazad</string>
+  <string name="rtt_status_banner_text">Čekanje na pridruživanje osobe %s RTT pozivu…</string>
+  <string name="rtt_transcript_advisory">Druga strana može vidjeti da pišete. Transkripti se pohranjuju na uređaju u historiji poziva.</string>
+</resources>

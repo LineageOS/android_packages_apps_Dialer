@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">هل تريد حظر %1$s؟</string>
+  <string name="block_number_confirmation_message_new_filtering">لن تتلقي المكالمات أو المراسلات النصية بعد الآن من هذا الرقم.</string>
+  <string name="block_number_ok">حظر</string>
+  <string name="unblock_number_ok">إلغاء الحظر</string>
+  <string name="block_report_number_alert_title">هل تريد حظر %1$s؟</string>
+  <string name="block_report_number_alert_details">لن تتلقى المزيد من المكالمات من هذا الرقم.</string>
+  <string name="block_number_alert_details">%1$s سيتم الإبلاغ عن هذه المكالمة باعتبارها غير مرغوب فيها.</string>
+  <string name="unblock_number_alert_details">سيُزال حظر هذا الرقم والإبلاغ عنه أنه ليس رقمًا غير مرغوب فيه. لن يتم تحديد المكالمات كغير مرغوب فيها في ما بعد.</string>
+  <string name="unblock_report_number_alert_title">هل تريد إزالة حظر %1$s؟</string>
+  <string name="report_not_spam_alert_button">إبلاغ</string>
+  <string name="report_not_spam_alert_title">هل تريد الإبلاغ عن خطأ؟</string>
+  <string name="report_not_spam_alert_details">المكالمات الواردة من %1$s في المستقبل لن يتم تحديدها على أنها غير مرغوب فيها.</string>
+  <string name="checkbox_report_as_spam_action">الإبلاغ عن المكالمة كغير مرغوب فيها</string>
+  <string name="block_number_failed_toast">حدثت مشكلة أثناء حظر هذا الرقم</string>
+  <string name="unblock_number_failed_toast">حدثت مشكلة أثناء إلغاء حظر هذا الرقم</string>
+</resources>

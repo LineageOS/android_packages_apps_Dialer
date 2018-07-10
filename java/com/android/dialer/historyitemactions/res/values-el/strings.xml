@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Φωνητική κλήση</string>
+  <string name="video_call">Βιντεοκλήση</string>
+  <string name="add_to_contacts">Προσθήκη επαφής</string>
+  <string name="send_a_message">Μήνυμα</string>
+  <string name="not_spam">Μη ανεπιθύμητη</string>
+  <string name="block_number">Αποκλεισμός</string>
+  <string name="unblock_number">Κατάργηση αποκλεισμού</string>
+  <string name="block_and_optionally_report_spam">Αποκλεισμός/αναφορά ανεπιθύμ.</string>
+  <string name="copy_number">Αντιγραφή αριθμού</string>
+</resources>

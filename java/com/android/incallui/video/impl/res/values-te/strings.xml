@@ -1,24 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="videocall_remote_video_off" msgid="2959680546745902547">"వారి వీడియో ఆఫ్‌లో ఉంది"</string>
-    <string name="videocall_remote_video_on" msgid="6011817851703181639">"వారి వీడియో ఆన్‌లో ఉంది"</string>
-    <string name="videocall_remotely_held" msgid="1295702896355732947">"కాల్ హోల్డ్‌లో ఉంది"</string>
-    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"కాల్ పునఃప్రారంభించబడింది"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="videocall_remote_video_off">వారి వీడియో ఆఫ్‌లో ఉంది</string>
+  <string name="videocall_remote_video_on">వారి వీడియో ఆన్‌లో ఉంది</string>
+  <string name="videocall_remotely_held">కాల్ హోల్డ్‌లో ఉంది</string>
+  <string name="videocall_remotely_resumed">కాల్ పునఃప్రారంభించబడింది</string>
+  <string name="videocall_charges_alert_dialog_description">మొబైల్ నెట్‌వర్క్‌లో చేసే వీడియో కాల్‌లకు డేటా మరియు వాయిస్ మినిట్స్ రెండూ ఉపయోగించబడతాయి. ఛార్జీలు వర్తించవచ్చు.</string>
+  <string name="do_not_show_again">మళ్లీ చూపవద్దు</string>
 </resources>

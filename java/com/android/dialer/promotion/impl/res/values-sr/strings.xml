@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Размена SMS-ова у реалном времену у позиву</string>
+  <string name="rtt_promotion_details">RTT помаже позиваоцима који су глуви, имају оштећење слуха, тешкоће у
+    говору или им је потребно нешто више од гласа. Транскрипти RTT порука се чувају на уређају
+    у историји позива. %1$s</string>
+  <string name="duo_disclosure_title">Упућујте видео позиве помоћу Duo-а</string>
+  <string name="duo_disclosure_details">Видео позиви у Google Duo-у вам омогућавају да ћаскате са пријатељима и породицом лицем у лице. Важе накнаде за пренос података. %1$s</string>
+</resources>

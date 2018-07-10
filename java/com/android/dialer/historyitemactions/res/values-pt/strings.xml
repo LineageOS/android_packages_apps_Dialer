@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Chamada de voz</string>
+  <string name="video_call">Videochamada</string>
+  <string name="add_to_contacts">Adicionar contato</string>
+  <string name="send_a_message">Mensagem</string>
+  <string name="not_spam">Não é spam</string>
+  <string name="block_number">Bloquear</string>
+  <string name="unblock_number">Desbloquear</string>
+  <string name="block_and_optionally_report_spam">Bloquear/denunciar spam</string>
+  <string name="copy_number">Copiar número</string>
+</resources>

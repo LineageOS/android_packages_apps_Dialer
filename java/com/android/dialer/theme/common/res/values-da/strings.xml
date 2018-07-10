@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Ukendt</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Mønttelefon</string>
+  <string name="emergency_number">Alarmnummer</string>
+  <string name="launcherActivityLabel">Opkald</string>
+  <string name="call">Ring op</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Opkaldet fortsættes via Wi-Fi…</string>
+  <string name="rtt_call_not_available_toast">Sms i realtid er ikke tilgængeligt for dette opkald</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

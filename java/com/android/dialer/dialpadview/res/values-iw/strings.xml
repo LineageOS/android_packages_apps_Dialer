@@ -1,39 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="description_dialpad_back" msgid="6226488105558971135">"ניווט חזרה"</string>
-    <string name="description_dialpad_overflow" msgid="5984341386518189787">"אפשרויות נוספות"</string>
-    <string name="description_delete_button" msgid="8431313818404527096">"Backspace"</string>
-    <string name="description_image_button_plus" msgid="8936338119824589388">"פלוס"</string>
-    <string name="description_voicemail_button" msgid="4187006295368768215">"דואר קולי"</string>
-    <string name="description_dial_button" msgid="6826108965053146374">"חיוג"</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1728176091017802282">"כדי להתקשר לתא הקולי, קודם עליך להשבית את מצב הטיסה."</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4287602816589585704">"כדי להגדיר את התא הקולי, עליך להיכנס לתפריט &gt; הגדרות."</string>
-    <string name="add_2sec_pause" msgid="395591627218789322">"הוספת השהיה של 2 שניות"</string>
-    <string name="add_wait" msgid="2278146476349811062">"הוספת השהיה"</string>
-    <string name="dialer_useDtmfDialpad" msgid="6919241568926709507">"שימוש במקלדת עם צלילי חיוג"</string>
-    <string name="dialer_returnToInCallScreen" msgid="4111111633248125741">"חזרה לשיחה הפעילה"</string>
-    <string name="dialer_addAnotherCall" msgid="6842534741272651900">"הוספת שיחה"</string>
-    <string name="imei" msgid="7961343816043247280">"IMEI"</string>
-    <string name="meid" msgid="5274167198744847659">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="4158651660353159679">"‏אנחנו טוענים מכרטיס ה-SIM…"</string>
-    <string name="simContacts_title" msgid="8972942600800349990">"‏אנשי הקשר בכרטיס ה-SIM"</string>
-    <string name="menu_callNumber" msgid="1898333075466418368">"התקשרות אל <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="4806479823793649894">"לא ניתן להתקשר אל המספר הזה"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="description_dialpad_back">ניווט חזרה</string>
+  <string name="description_dialpad_overflow">אפשרויות נוספות</string>
+  <string name="description_delete_button">Backspace</string>
+  <string name="description_image_button_plus">הוספת סימן פלוס</string>
+  <string name="description_voicemail_button">התקשרות לתא הקולי</string>
+  <string name="description_dial_button">חיוג</string>
+  <string name="dialog_voicemail_airplane_mode_message">כדי להתקשר לתא הקולי, קודם עליך להשבית את מצב הטיסה.</string>
+  <string name="dialog_voicemail_not_ready_message">כדי להגדיר את התא הקולי, עליך להיכנס לתפריט &gt; הגדרות.</string>
+  <string name="add_2sec_pause">הוספת השהיה של 2 שניות</string>
+  <string name="add_wait">הוספת השהיה</string>
+  <string name="dialer_useDtmfDialpad">שימוש במקלדת עם צלילי חיוג</string>
+  <string name="dialer_returnToInCallScreen">חזרה לשיחה הפעילה</string>
+  <string name="dialer_addAnotherCall">הוספת שיחה</string>
+  <string name="imei">IMEI</string>
+  <string name="meid">MEID</string>
+  <string name="simContacts_emptyLoading">‏אנחנו טוענים מכרטיס ה-SIM…</string>
+  <string name="simContacts_title">‏אנשי הקשר בכרטיס ה-SIM</string>
+  <string name="menu_callNumber">התקשרות אל %s</string>
+  <string name="dialpad_hint_emergency_calling_not_available">‏לא ניתן להתקשר לשירותי חירום דרך רשת Wi-Fi</string>
+  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">לא ניתן להתקשר אל המספר הזה</string>
 </resources>

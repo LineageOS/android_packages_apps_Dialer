@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ফোন"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"নিম্নলিখিত টোনগুলি পাঠাবেন?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"হ্যাঁ"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"না"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"ডায়াল করা হচ্ছে"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"চালু থাকা কল"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"ভিডিও কল চলছে"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"ভিডিও কল চলছে - ভিডিও বিরত রাখা হয়েছে"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"চলমান কাজের কল"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> চালু আছে"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"ইনকামিং <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"ওয়াই-ফাই কল"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"অফিসের ওয়াই-ফাই কল"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"সাময়িকভাবে স্থগিত রাখা হয়েছে"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ফটো সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"বার্তা সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"অবস্থান সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ফটো এবং বার্তা সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ফটো এবং অবস্থান সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"বার্তা এবং অবস্থান সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ফটো, বার্তা এবং অবস্থান সহ ইনকামিং কল"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"সংযুক্তিগুলি সহ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ফটো সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"বার্তা সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"অবস্থান সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ফটো এবং বার্তা সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ফটো এবং অবস্থান সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"বার্তা এবং অবস্থান সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ফটো, বার্তা এবং অবস্থান সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"সংযুক্তিগুলি সহ গুরুত্বপূর্ণ ইনকামিং কল"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"আগত কাজের কল"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"আগত সন্দেহভাজন স্প্যাম কল"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"আগত ভিডিও অনুরোধ"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"উত্তর"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"কল নামিয়ে রাখুন"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"ভিডিও"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"স্বীকার করুন"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"প্রত্যাখ্যান"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"স্পিকার চালু করুন"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"স্পিকার বন্ধ করুন"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"অন্য ডিভাইসে চালু থাকা কল"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"অন্য ডিভাইসে চালু থাকা ভিডিও কল"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"কলটি নিন"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"ভিডিও কলটি নিন"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"পরিষেবা সমর্থিত নয়৷"</string>
-    <string name="goPrivate" msgid="5269514638004595378">"ব্যক্তিগতভাবে কাজ করুন"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"কনফারেন্স কল পরিচালনা করুন"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"জরুরি নম্বর"</string>
-    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> এর মাধ্যমে"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"কোনো সিম নেই বা সিম ত্রুটি"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"কল কেটে দিন"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"কনফারেন্স কল"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"কলে থাকাকালীন"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"মোবাইল ডেটা ব্যবহার করে কল করা চালিয়ে যান…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ওয়াই-ফাই নেটওয়ার্কে পাল্টানো গেল না"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ভিডিও কল মোবাইল নেটওয়ার্কেই থাকবে৷ স্ট্যান্ডার্ড ডেটা চার্জ প্রযোজ্য হতে পারে৷"</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"এটি আমাকে আর দেখাবেন না"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">নিম্নলিখিত টোনগুলি পাঠাবেন?\n</string>
+  <string name="pause_prompt_yes">হ্যাঁ</string>
+  <string name="pause_prompt_no">না</string>
+  <string name="notification_dialing">ডায়াল করা হচ্ছে</string>
+  <string name="notification_ongoing_call">চালু থাকা কল</string>
+  <string name="notification_ongoing_video_call">ভিডিও কল চলছে</string>
+  <string name="notification_ongoing_paused_video_call">ভিডিও কল চলছে - ভিডিও বিরত রাখা হয়েছে</string>
+  <string name="notification_ongoing_work_call">চলমান কাজের কল</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s চালু আছে</string>
+  <string name="notification_incoming_call_wifi_template">ইনকামিং %1$s</string>
+  <string name="notification_call_wifi_brand">ওয়াই-ফাই কল</string>
+  <string name="notification_call_wifi_work_brand">অফিসের ওয়াই-ফাই কল</string>
+  <string name="notification_on_hold">সাময়িকভাবে স্থগিত রাখা হয়েছে</string>
+  <string name="notification_incoming_call">ইনকামিং কল</string>
+  <string name="notification_incoming_video_call">ইনকামিং ভিডিও কল</string>
+  <string name="notification_incoming_call_mutli_sim">%1$s এ কল আসছে</string>
+  <string name="notification_incoming_call_with_photo">ফটো সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_with_message">বার্তা সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_with_location">লোকেশন সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_with_photo_message">ফটো এবং বার্তা সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_with_photo_location">ফটো এবং লোকেশন সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_with_message_location">বার্তা এবং লোকেশন সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_with_photo_message_location">ফটো, বার্তা এবং লোকেশন সহ ইনকামিং কল</string>
+  <string name="notification_incoming_call_attachments">সংযুক্তিগুলি সহ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call">গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_photo">ফটো সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_message">বার্তা সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_location">লোকেশন সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_photo_message">ফটো এবং বার্তা সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_photo_location">ফটো এবং লোকেশন সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_message_location">বার্তা এবং লোকেশন সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">ফটো, বার্তা এবং লোকেশন সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="important_notification_incoming_call_attachments">সংযুক্তিগুলি সহ গুরুত্বপূর্ণ ইনকামিং কল</string>
+  <string name="notification_incoming_work_call">আগত কাজের কল</string>
+  <string name="notification_incoming_spam_call">আগত সন্দেহভাজন স্প্যাম কল</string>
+  <string name="notification_requesting_video_call">আগত ভিডিও অনুরোধ</string>
+  <string name="notification_action_answer">উত্তর</string>
+  <string name="notification_action_end_call">কল নামিয়ে রাখুন</string>
+  <string name="notification_action_answer_video">ভিডিও</string>
+  <string name="notification_action_accept">স্বীকার করুন</string>
+  <string name="notification_action_dismiss">প্রত্যাখ্যান</string>
+  <string name="notification_action_speaker_on">স্পিকার চালু করুন</string>
+  <string name="notification_action_speaker_off">স্পিকার বন্ধ করুন</string>
+  <string name="notification_external_call">অন্য ডিভাইসে চালু থাকা কল</string>
+  <string name="notification_external_video_call">অন্য ডিভাইসে চালু থাকা ভিডিও কল</string>
+  <string name="notification_take_call">কলটি নিন</string>
+  <string name="notification_take_video_call">ভিডিও কলটি নিন</string>
+  <string name="incall_error_supp_service_unknown">পরিষেবা সমর্থিত নয়৷</string>
+  <string name="goPrivate">ব্যক্তিগতভাবে কাজ করুন</string>
+  <string name="manageConferenceLabel">কনফারেন্স কল পরিচালনা করুন</string>
+  <string name="child_number">%s এর মাধ্যমে</string>
+  <string name="callFailed_simError">কোনো সিম নেই বা সিম ত্রুটি</string>
+  <string name="conference_caller_disconnect_content_description">কল কেটে দিন</string>
+  <string name="conference_call_name">কনফারেন্স কল</string>
+  <string name="generic_conference_call_name">কলে থাকাকালীন</string>
+  <string name="video_call_wifi_to_lte_handover_toast">মোবাইল ডেটা ব্যবহার করে কল করা চালিয়ে যান…</string>
+  <string name="video_call_lte_to_wifi_failed_title">ওয়াই-ফাই নেটওয়ার্কে পাল্টানো গেল না</string>
+  <string name="video_call_lte_to_wifi_failed_message">ভিডিও কল মোবাইল নেটওয়ার্কেই থাকবে৷ স্ট্যান্ডার্ড ডেটা চার্জ প্রযোজ্য হতে পারে৷</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">এটি আমাকে আর দেখাবেন না</string>
+  <string name="bubble_return_to_call">কলে ফিরে যান</string>
+  <string name="rtt_request_dialog_title">RTT কলে যোগ দেবেন?</string>
+  <string name="rtt_request_dialog_details">%1$s আপনার ভয়েস কলে মেসেজ পাঠাতে চান।</string>
+  <string name="rtt_request_dialog_more_information">যে কলাররা বধির, কানে কম শোনেন, যাদের কথা বলতে অসুবিধা হয় অথবা যারা কণ্ঠস্বরের সাথে অন্য কোনও উপায়ে নিজেদের প্রকাশ করেন, RTT বৈশিষ্ট্যটি তাদের সাহায্য করে।</string>
+  <string name="rtt_button_decline_request">না থাক</string>
+  <string name="rtt_button_accept_request">RTT-তে যোগ দিন</string>
 </resources>

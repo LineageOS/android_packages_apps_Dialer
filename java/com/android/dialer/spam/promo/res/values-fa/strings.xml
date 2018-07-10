@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">همه تماس‌های مشکوک به هرزنامه فیلتر شود؟</string>
+  <string name="spam_blocking_promo_text">تماس‌های مشابه تماسی که همین‌حالا مسدود کردید
+      دیگر برای شما مزاحمت ایجاد نخواهند کرد</string>
+  <string name="spam_blocking_promo_action_filter_spam">فیلتر هرزنامه</string>
+  <string name="spam_blocking_promo_action_dismiss">نپذیرفتن</string>
+  <string name="spam_blocking_setting_prompt">تنظیمات</string>
+  <string name="spam_blocking_settings_enable_error_text">مشکل هنگام روشن کردن فیلتر هرزنامه</string>
+  <string name="spam_blocking_settings_disable_error_text">مشکل هنگام خاموش کردن فیلتر هرزنامه</string>
+  <string name="spam_blocking_settings_enable_complete_text">فیلتر هرزنامه فعال است</string>
+  <string name="spam_blocking_settings_disable_complete_text">فیلتر هرزنامه غیرفعال است</string>
+</resources>

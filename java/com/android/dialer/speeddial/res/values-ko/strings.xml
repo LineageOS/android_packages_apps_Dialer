@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">즐겨찾는 연락처</string>
+  <string name="suggestions_header">자주 연락하는 사람</string>
+  <string name="speed_dial_add_button_text">추가</string>
+  <string name="speed_dial_remember_this_choice">전화번호 선택사항 저장</string>
+  <string name="speed_dial_disambig_dialog_title">통화 유형 선택</string>
+  <string name="disambig_option_video_call">화상 통화 걸기</string>
+  <string name="disambig_option_voice_call">전화 걸기</string>
+  <string name="add_favorite_activity_title">즐겨찾기에 추가</string>
+  <string name="contact_menu_voice_call">음성 통화</string>
+  <string name="contact_menu_video_call">화상 통화</string>
+  <string name="contact_menu_message">메시지</string>
+  <string name="contact_menu_remove">삭제</string>
+  <string name="contact_menu_contact_info">연락처 정보</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">즐겨찾기에 추가</string>
+  <string name="speed_dial_contacts_permission_description">단축번호를 사용하려면 주소록 권한을 사용하도록 설정하세요.</string>
+  <string name="speed_dial_turn_on_contacts_permission">사용</string>
+  <string name="speed_dial_no_contacts_description">아직 즐겨찾기에 연락처를 추가하지 않았습니다.</string>
+  <string name="speed_dial_no_contacts_action_text">즐겨찾기에 추가</string>
+  <string name="speed_dial_remove_favorites">즐겨찾기에서 삭제</string>
 </resources>

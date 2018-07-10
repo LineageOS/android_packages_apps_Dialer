@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">ទៅ​មុខ</string>
+  <string name="rtt_input_hint">សរសេរ​សារ</string>
+  <string name="content_description_rtt_chat_avatar">រូបតំណាង</string>
+  <string name="rtt_button_back">ថយ​ក្រោយ</string>
+  <string name="rtt_status_banner_text">កំពុង​រង់ចាំ %s ចូលរួម​ការហៅ RTT…</string>
+  <string name="rtt_transcript_advisory">ភាគី​ផ្សេង​អាច​មើល​ឃើញ​អ្នក​កំពុង​វាយអក្សរ។ ប្រតិចារឹក​បាន​រក្សាទុក​នៅ​លើ​ឧបករណ៍​របស់​អ្នក​នៅ​ក្នុង​ប្រវត្តិ​ហៅ​ទូរសព្ទ។</string>
+</resources>

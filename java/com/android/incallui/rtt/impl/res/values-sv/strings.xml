@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Sätt igång</string>
+  <string name="rtt_input_hint">Skriv ett meddelande</string>
+  <string name="content_description_rtt_chat_avatar">Avatar</string>
+  <string name="rtt_button_back">Tillbaka</string>
+  <string name="rtt_status_banner_text">Väntar på att %s ska ansluta sig till RTT-samtal …</string>
+  <string name="rtt_transcript_advisory">Den andra parten kan se när du skriver. Transkriptioner lagras i samtalshistoriken på din enhet.</string>
+</resources>

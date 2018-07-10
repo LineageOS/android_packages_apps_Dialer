@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtreer alle verdagte strooiposoproepe?</string>
+  <string name="spam_blocking_promo_text">Oproepe soos die een wat jy pas geblokkeer het, sal jou nie meer
+      steur nie</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtreer strooipos</string>
+  <string name="spam_blocking_promo_action_dismiss">Weier</string>
+  <string name="spam_blocking_setting_prompt">Instellings</string>
+  <string name="spam_blocking_settings_enable_error_text">Sukkel om strooiposfiltrering aan te skakel</string>
+  <string name="spam_blocking_settings_disable_error_text">Sukkel om strooiposfiltrering af te skakel</string>
+  <string name="spam_blocking_settings_enable_complete_text">Strooiposfiltrering is aangeskakel</string>
+  <string name="spam_blocking_settings_disable_complete_text">Strooiposfiltrering is afgeskakel</string>
+</resources>

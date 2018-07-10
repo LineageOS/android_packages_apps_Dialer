@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Téléphone"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Envoyer les tonalités suivantes ?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Oui"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Non"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Appel…"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Appel en cours"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Appel vidéo en cours"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Appel vidéo en cours — vidéo mise en pause"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Appel professionnel en cours"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> en cours"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> entrant"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Appel Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Appel professionnel Wi‑Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"En attente"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Appel entrant"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Appel entrant avec photo"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Appel entrant avec message"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Appel entrant avec position"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Appel entrant avec photo et message"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Appel entrant avec photo et position"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Appel entrant avec message et position"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Appel entrant avec photo, message et position"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Appel entrant avec pièces jointes"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Appel entrant important"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Appel entrant important avec photo"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Appel entrant important avec message"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Appel entrant important avec position"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Appel entrant important avec photo et message"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Appel entrant important avec photo et position"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Appel entrant important avec message et position"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Appel important avec photo, message et position"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Appel entrant important avec pièces jointes"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Appel professionnel entrant"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Appel entrant indésirable suspecté"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Demande de vidéo reçue"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Répondre"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Raccrocher"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Vidéo"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Accepter"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Refuser"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Activer le haut-parleur"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Désactiver le haut-parleur"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Appel en cours sur un autre appareil"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Appel vidéo en cours sur un autre appareil"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Répondre"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Répondre à l\'appel vidéo"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Service non compatible."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"mode privé"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Gérer conférence téléphonique"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Numéro d\'urgence"</string>
-    <string name="child_number" msgid="3398257437107259682">"via le <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Aucune carte SIM ou erreur de carte SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Mettre fin à l\'appel"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Conférence téléphonique"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Appel en cours"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Poursuite de l\'appel via les données mobiles…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Impossible de passer au réseau Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"L\'appel vidéo va continuer sur le réseau mobile. Des frais standards liés à la consommation de données peuvent être facturés."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ne plus afficher"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Envoyer les tonalités suivantes ?\n</string>
+  <string name="pause_prompt_yes">Oui</string>
+  <string name="pause_prompt_no">Non</string>
+  <string name="notification_dialing">Appel…</string>
+  <string name="notification_ongoing_call">Appel en cours</string>
+  <string name="notification_ongoing_video_call">Appel vidéo en cours</string>
+  <string name="notification_ongoing_paused_video_call">Appel vidéo en cours — vidéo mise en pause</string>
+  <string name="notification_ongoing_work_call">Appel professionnel en cours</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s en cours</string>
+  <string name="notification_incoming_call_wifi_template">%1$s entrant</string>
+  <string name="notification_call_wifi_brand">Appel Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">Appel professionnel Wi‑Fi</string>
+  <string name="notification_on_hold">En attente</string>
+  <string name="notification_incoming_call">Appel entrant</string>
+  <string name="notification_incoming_video_call">Appel vidéo entrant</string>
+  <string name="notification_incoming_call_mutli_sim">Appel entrant via %1$s</string>
+  <string name="notification_incoming_call_with_photo">Appel entrant avec photo</string>
+  <string name="notification_incoming_call_with_message">Appel entrant avec message</string>
+  <string name="notification_incoming_call_with_location">Appel entrant avec position</string>
+  <string name="notification_incoming_call_with_photo_message">Appel entrant avec photo et message</string>
+  <string name="notification_incoming_call_with_photo_location">Appel entrant avec photo et position</string>
+  <string name="notification_incoming_call_with_message_location">Appel entrant avec message et position</string>
+  <string name="notification_incoming_call_with_photo_message_location">Appel entrant avec photo, message et position</string>
+  <string name="notification_incoming_call_attachments">Appel entrant avec pièces jointes</string>
+  <string name="important_notification_incoming_call">Appel entrant important</string>
+  <string name="important_notification_incoming_call_with_photo">Appel entrant important avec photo</string>
+  <string name="important_notification_incoming_call_with_message">Appel entrant important avec message</string>
+  <string name="important_notification_incoming_call_with_location">Appel entrant important avec position</string>
+  <string name="important_notification_incoming_call_with_photo_message">Appel entrant important avec photo et message</string>
+  <string name="important_notification_incoming_call_with_photo_location">Appel entrant important avec photo et position</string>
+  <string name="important_notification_incoming_call_with_message_location">Appel entrant important avec message et position</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Appel important avec photo, message et position</string>
+  <string name="important_notification_incoming_call_attachments">Appel entrant important avec pièces jointes</string>
+  <string name="notification_incoming_work_call">Appel professionnel entrant</string>
+  <string name="notification_incoming_spam_call">Appel entrant indésirable suspecté</string>
+  <string name="notification_requesting_video_call">Demande de vidéo reçue</string>
+  <string name="notification_action_answer">Répondre</string>
+  <string name="notification_action_end_call">Raccrocher</string>
+  <string name="notification_action_answer_video">Vidéo</string>
+  <string name="notification_action_accept">Accepter</string>
+  <string name="notification_action_dismiss">Refuser</string>
+  <string name="notification_action_speaker_on">Activer le haut-parleur</string>
+  <string name="notification_action_speaker_off">Désactiver le haut-parleur</string>
+  <string name="notification_external_call">Appel en cours sur un autre appareil</string>
+  <string name="notification_external_video_call">Appel vidéo en cours sur un autre appareil</string>
+  <string name="notification_take_call">Répondre</string>
+  <string name="notification_take_video_call">Répondre à l\'appel vidéo</string>
+  <string name="incall_error_supp_service_unknown">Service non compatible.</string>
+  <string name="goPrivate">mode privé</string>
+  <string name="manageConferenceLabel">Gérer conférence téléphonique</string>
+  <string name="child_number">via le %s</string>
+  <string name="callFailed_simError">Aucune carte SIM ou erreur de carte SIM</string>
+  <string name="conference_caller_disconnect_content_description">Mettre fin à l\'appel</string>
+  <string name="conference_call_name">Conférence téléphonique</string>
+  <string name="generic_conference_call_name">Appel en cours</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Poursuite de l\'appel via les données mobiles…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Impossible de passer au réseau Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">L\'appel vidéo va continuer sur le réseau mobile. Des frais standards liés à la consommation de données peuvent être facturés.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Ne plus afficher</string>
+  <string name="bubble_return_to_call">Retour à l\'appel</string>
+  <string name="rtt_request_dialog_title">Participer à l\'appel texte en temps réel ?</string>
+  <string name="rtt_request_dialog_details">%1$s souhaite échanger des SMS/MMS pendant l\'appel vidéo.</string>
+  <string name="rtt_request_dialog_more_information">Le texte en temps réel (RTT) vient en aide aux personnes sourdes, malentendantes, qui ont un trouble de la parole, ou qui ont besoin d\'une transcription en plus de la voix.</string>
+  <string name="rtt_button_decline_request">Non, merci</string>
+  <string name="rtt_button_accept_request">Accepter l\'appel RTT</string>
 </resources>

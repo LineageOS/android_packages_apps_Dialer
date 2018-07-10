@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Lọc tất cả các cuộc gọi nghi ngờ là spam?</string>
+  <string name="spam_blocking_promo_text">Các cuộc gọi như cuộc gọi bạn vừa chặn sẽ không còn
+      làm phiền bạn nữa</string>
+  <string name="spam_blocking_promo_action_filter_spam">Lọc spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Bỏ qua</string>
+  <string name="spam_blocking_setting_prompt">Cài đặt</string>
+  <string name="spam_blocking_settings_enable_error_text">Đã xảy ra sự cố khi bật tính năng lọc spam</string>
+  <string name="spam_blocking_settings_disable_error_text">Đã xảy ra sự cố khi tắt tính năng lọc spam</string>
+  <string name="spam_blocking_settings_enable_complete_text">Đã bật tính năng lọc spam</string>
+  <string name="spam_blocking_settings_disable_complete_text">Đã tắt tính năng lọc spam</string>
+</resources>

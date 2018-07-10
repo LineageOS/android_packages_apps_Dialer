@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ಕರೆಯಲ್ಲಿರುವಾಗ ನೈಜ ಸಮಯದ ಪಠ್ಯ ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆ</string>
+  <string name="rtt_promotion_details">ಯಾರು ಕಿವುಡರು, ಆಲಿಸಲು ಕಷ್ಟಪಡುವವರು, ಆಲಿಸಲು ಅಸಾಮರ್ಥ್ಯವಾಗಿರುವವರು, ಮಾತಿನ ಸಮಸ್ಯೆಯನ್ನು ಹೊಂದಿರುವವರು ಅಥವಾ ಧ್ವನಿಗಿಂತ ಇನ್ನಷ್ಟು ಬಯಸುವವರು RTT ಸಹಾಯಕ ಕರೆಮಾಡುವವರು. ನಿಮ್ಮ ಸಾಧನದ ಕರೆ ಇತಿಹಾಸದಲ್ಲಿ RTT ಪ್ರತಿಲೇಖನಗಳನ್ನು ಸಂಗ್ರಹಿಸಲಾಗಿದೆ. %1$s</string>
+  <string name="duo_disclosure_title">Duo ಮೂಲಕ ವೀಡಿಯೊ ಕರೆಗಳನ್ನು ಮಾಡಿ</string>
+  <string name="duo_disclosure_details">\"Google Duo ವೀಡಿಯೊ ಕರೆ\"ಯು ಸ್ನೇಹಿತರು ಮತ್ತು ಕುಟುಂಬದೊಂದಿಗೆ ನೀವು ಮುಖಾಮುಖಿಯಾಗಿ ಚಾಟ್ ಮಾಡಲು ಅವಕಾಶ ಮಾಡಿಕೊಡುತ್ತದೆ. ಡೇಟಾ ಶುಲ್ಕಗಳು ಅನ್ವಯವಾಗಬಹುದು. %1$s</string>
+</resources>

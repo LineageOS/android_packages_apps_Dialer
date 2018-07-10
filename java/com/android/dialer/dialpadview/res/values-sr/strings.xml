@@ -1,39 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="description_dialpad_back" msgid="6226488105558971135">"Идите назад"</string>
-    <string name="description_dialpad_overflow" msgid="5984341386518189787">"Још опција"</string>
-    <string name="description_delete_button" msgid="8431313818404527096">"backspace"</string>
-    <string name="description_image_button_plus" msgid="8936338119824589388">"плус"</string>
-    <string name="description_voicemail_button" msgid="4187006295368768215">"говорна пошта"</string>
-    <string name="description_dial_button" msgid="6826108965053146374">"бирајте број"</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1728176091017802282">"Да бисте позвали говорну пошту, прво искључите режим рада у авиону."</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4287602816589585704">"Да бисте подесили говорну пошту, идите у Мени &gt; Подешавања."</string>
-    <string name="add_2sec_pause" msgid="395591627218789322">"Додај паузу од 2 секунде"</string>
-    <string name="add_wait" msgid="2278146476349811062">"Додај чекање"</string>
-    <string name="dialer_useDtmfDialpad" msgid="6919241568926709507">"Користи тастатуру за тонско бирање"</string>
-    <string name="dialer_returnToInCallScreen" msgid="4111111633248125741">"Назад у позив који је у току"</string>
-    <string name="dialer_addAnotherCall" msgid="6842534741272651900">"Додај позив"</string>
-    <string name="imei" msgid="7961343816043247280">"IMEI"</string>
-    <string name="meid" msgid="5274167198744847659">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="4158651660353159679">"Учитава се са SIM картице…"</string>
-    <string name="simContacts_title" msgid="8972942600800349990">"Контакти на SIM картици"</string>
-    <string name="menu_callNumber" msgid="1898333075466418368">"Позови <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="4806479823793649894">"Није могуће позвати овај број"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="description_dialpad_back">Идите назад</string>
+  <string name="description_dialpad_overflow">Још опција</string>
+  <string name="description_delete_button">backspace</string>
+  <string name="description_image_button_plus">унесите плус</string>
+  <string name="description_voicemail_button">позовите говорну пошту</string>
+  <string name="description_dial_button">бирајте број</string>
+  <string name="dialog_voicemail_airplane_mode_message">Да бисте позвали говорну пошту, прво искључите режим рада у авиону.</string>
+  <string name="dialog_voicemail_not_ready_message">Да бисте подесили говорну пошту, идите у Мени &gt; Подешавања.</string>
+  <string name="add_2sec_pause">Додај паузу од 2 секунде</string>
+  <string name="add_wait">Додај чекање</string>
+  <string name="dialer_useDtmfDialpad">Користи тастатуру за тонско бирање</string>
+  <string name="dialer_returnToInCallScreen">Назад у позив који је у току</string>
+  <string name="dialer_addAnotherCall">Додај позив</string>
+  <string name="imei">IMEI</string>
+  <string name="meid">MEID</string>
+  <string name="simContacts_emptyLoading">Учитава се са SIM картице…</string>
+  <string name="simContacts_title">Контакти на SIM картици</string>
+  <string name="menu_callNumber">Позови %s</string>
+  <string name="dialpad_hint_emergency_calling_not_available">Не можете да упућујете хитне позиве преко Wi‑Fi-ја</string>
+  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Није могуће позвати овај број</string>
 </resources>

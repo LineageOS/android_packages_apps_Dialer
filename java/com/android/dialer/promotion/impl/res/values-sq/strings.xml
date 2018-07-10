@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Mesazhet me tekst në kohë reale brenda një telefonate</string>
+  <string name="rtt_promotion_details">Funksioni RTT ndihmon telefonuesit që janë të shurdhër, kanë vështirësi dëgjimi, kanë një aftësi të kufizuar të të folurit ose që kanë nevojë për më shumë se thjesht zërin. Transkriptet e mesazheve të funksionit RTT ruhen në pajisjen tënde në historikun e telefonatave. %1$s</string>
+  <string name="duo_disclosure_title">Bëj telefonata me video me Duo</string>
+  <string name="duo_disclosure_details">Telefonatat me video me Google Duo të lejojnë të bisedosh me shokët dhe familjen tënde ballë për ballë. Mund të zbatohen tarifat për të dhënat. %1$s</string>
+</resources>

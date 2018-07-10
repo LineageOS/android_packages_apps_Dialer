@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefonoa"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Ondorengo tonuak bidali?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Bai"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Ez"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Deitzen"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Abian den deia"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Abian den bideo-deia"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Abian den bideo-deia - Pausatu egin da bideoa"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Laneko dei bat abian da"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Abian den <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Jasotako <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi bidezko deia"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Wi‑Fi bidezko laneko deia"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Zain"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Sarrerako deia"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Jasotako deia, argazkia duena"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Jasoka deia, mezua duena"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Jasotako deia, kokapena duena"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Jasotako deia, argazkia eta mezua dituena"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Jasotako deia, argazkia eta kokapena dituena"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Jasotako deia, mezua eta kokapena dituena"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Jasotako deia, argazkia, mezua eta kokap. dituena"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Jasotako deia, eranskinak dituena"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Jasotako dei garrantzitsua"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Jasotako dei garrantzitsua, argazkia duena"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Jasotako dei garrantzitsua, mezua duena"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Jasotako dei garrantzitsua, kokapena duena"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Jasotako dei garrantz., argazkia eta mezua dituena"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Jasotako dei garrantz., argazkia eta kok. dituena"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Jasotako dei garrantz., mezua eta kokapena dituena"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Jasotako dei garrant., arg., mez. eta kok. dituena"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Jasotako dei garrantzitsua, eranskinak dituena"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Laneko dei bat jaso da"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Ustezko spam-deia jaso duzu"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Sarrerako bideo-eskaera"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Erantzun"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Amaitu deia"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Bideoa"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Onartu"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Baztertu"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Aktibatu bozgorailua"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Desaktibatu bozgorailua"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Dei bat abian da beste gailu batean"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Bideo-dei bat abian da beste gailu batean"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Erantzun deiari"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Erantzun bideo-deiari"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Ez da onartzen."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"bihurtu pribatu"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Kudeatu konferentzia-deia"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Larrialdietarako zenbakia"</string>
-    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> zenbakitik"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Ez dago SIM txartelik edo SIM txartelaren errore bat gertatu da"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Amaitu deia"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konferentzia-deia"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Deia abian da"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Datu-konexiora aldatzen…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Ezin izan da aldatu Wi-Fi sarera"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Datu-konexioaren bidez egiten jarraituko da bideo-deia. Baliteke datuak erabiltzearen ondorioz ohiko kostuak kobratzea."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ez erakutsi berriro"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Ondorengo tonuak bidali?\n</string>
+  <string name="pause_prompt_yes">Bai</string>
+  <string name="pause_prompt_no">Ez</string>
+  <string name="notification_dialing">Deitzen</string>
+  <string name="notification_ongoing_call">Abian den deia</string>
+  <string name="notification_ongoing_video_call">Abian den bideo-deia</string>
+  <string name="notification_ongoing_paused_video_call">Abian den bideo-deia - Pausatu egin da bideoa</string>
+  <string name="notification_ongoing_work_call">Laneko dei bat abian da</string>
+  <string name="notification_ongoing_call_wifi_template">Abian den %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Jasotako %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi bidezko deia</string>
+  <string name="notification_call_wifi_work_brand">Wi‑Fi bidezko laneko deia</string>
+  <string name="notification_on_hold">Zain</string>
+  <string name="notification_incoming_call">Sarrerako deia</string>
+  <string name="notification_incoming_video_call">Sarrerako bideo-deia</string>
+  <string name="notification_incoming_call_mutli_sim">%1$s bidezko sarrerako deia</string>
+  <string name="notification_incoming_call_with_photo">Jasotako deia, argazkia duena</string>
+  <string name="notification_incoming_call_with_message">Jasoka deia, mezua duena</string>
+  <string name="notification_incoming_call_with_location">Jasotako deia, kokapena duena</string>
+  <string name="notification_incoming_call_with_photo_message">Jasotako deia, argazkia eta mezua dituena</string>
+  <string name="notification_incoming_call_with_photo_location">Jasotako deia, argazkia eta kokapena dituena</string>
+  <string name="notification_incoming_call_with_message_location">Jasotako deia, mezua eta kokapena dituena</string>
+  <string name="notification_incoming_call_with_photo_message_location">Jasotako deia, argazkia, mezua eta kokap. dituena</string>
+  <string name="notification_incoming_call_attachments">Jasotako deia, eranskinak dituena</string>
+  <string name="important_notification_incoming_call">Jasotako dei garrantzitsua</string>
+  <string name="important_notification_incoming_call_with_photo">Jasotako dei garrantzitsua, argazkia duena</string>
+  <string name="important_notification_incoming_call_with_message">Jasotako dei garrantzitsua, mezua duena</string>
+  <string name="important_notification_incoming_call_with_location">Jasotako dei garrantzitsua, kokapena duena</string>
+  <string name="important_notification_incoming_call_with_photo_message">Jasotako dei garrantz., argazkia eta mezua dituena</string>
+  <string name="important_notification_incoming_call_with_photo_location">Jasotako dei garrantz., argazkia eta kok. dituena</string>
+  <string name="important_notification_incoming_call_with_message_location">Jasotako dei garrantz., mezua eta kokapena dituena</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Jasotako dei garrant., arg., mez. eta kok. dituena</string>
+  <string name="important_notification_incoming_call_attachments">Jasotako dei garrantzitsua, eranskinak dituena</string>
+  <string name="notification_incoming_work_call">Laneko dei bat jaso da</string>
+  <string name="notification_incoming_spam_call">Ustezko spam-deia jaso duzu</string>
+  <string name="notification_requesting_video_call">Sarrerako bideo-eskaera</string>
+  <string name="notification_action_answer">Erantzun</string>
+  <string name="notification_action_end_call">Amaitu deia</string>
+  <string name="notification_action_answer_video">Bideoa</string>
+  <string name="notification_action_accept">Onartu</string>
+  <string name="notification_action_dismiss">Baztertu</string>
+  <string name="notification_action_speaker_on">Aktibatu bozgorailua</string>
+  <string name="notification_action_speaker_off">Desaktibatu bozgorailua</string>
+  <string name="notification_external_call">Dei bat abian da beste gailu batean</string>
+  <string name="notification_external_video_call">Bideo-dei bat abian da beste gailu batean</string>
+  <string name="notification_take_call">Erantzun deiari</string>
+  <string name="notification_take_video_call">Erantzun bideo-deiari</string>
+  <string name="incall_error_supp_service_unknown">Ez da onartzen.</string>
+  <string name="goPrivate">bihurtu pribatu</string>
+  <string name="manageConferenceLabel">Kudeatu konferentzia-deia</string>
+  <string name="child_number">%s zenbakitik</string>
+  <string name="callFailed_simError">Ez dago SIM txartelik edo SIM txartelaren errore bat gertatu da</string>
+  <string name="conference_caller_disconnect_content_description">Amaitu deia</string>
+  <string name="conference_call_name">Konferentzia-deia</string>
+  <string name="generic_conference_call_name">Deia abian da</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Datu-konexiora aldatzen…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Ezin izan da aldatu Wi-Fi sarera</string>
+  <string name="video_call_lte_to_wifi_failed_message">Datu-konexioaren bidez egiten jarraituko da bideo-deia. Baliteke datuak erabiltzearen ondorioz ohiko kostuak kobratzea.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Ez erakutsi berriro</string>
+  <string name="bubble_return_to_call">Itzuli deira</string>
+  <string name="rtt_request_dialog_title">Testua bidaltzeko eginbidea duen deian sartu nahi duzu?</string>
+  <string name="rtt_request_dialog_details">%1$s erabiltzaileak mezuak erabili nahi ditu ahots-deian.</string>
+  <string name="rtt_request_dialog_more_information">Deietan testua bidaltzeko eginbideak (RTT) deitzaile gorrei, entzumen-arazoak dituztenei, hitz egiteko ezintasunen bat dutenei edota, ahotsaz gain, beste makuluren bat behar dutenei laguntzen die.</string>
+  <string name="rtt_button_decline_request">Ez, eskerrik asko</string>
+  <string name="rtt_button_accept_request">Sartu RTT duen deian</string>
 </resources>

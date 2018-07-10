@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Telefon ruxsatnomasisiz chaqiruvni amalga oshirib bo‘lmaydi</string>
+  <string name="pre_call_select_phone_account">Chaqiruv uchun SIM kartani tanlang</string>
+  <string name="pre_call_select_phone_account_remember">Shu tanlov eslab qolinsin</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">%1$s ishlatilayotgan vaqtda bu amalni bajarish imkonsiz</string>
+</resources>

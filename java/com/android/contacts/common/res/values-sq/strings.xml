@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Teksti u kopjua"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Telefono <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Telefono numrin e shtëpisë"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Telefono numrin celular"</string>
-    <string name="call_work" msgid="6040550697395300892">"Telefono numrin e punës"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Telefono faksin e punës"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Telefono faksin e shtëpisë"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Telefoni numrin e biperit"</string>
-    <string name="call_other" msgid="5536385588712587235">"Telefono"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Telefono numrin e kthimit të telefonatave"</string>
-    <string name="call_car" msgid="3197417098027764954">"Telefono numrin e makinës"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Telefono numrin kryesor të kompanisë"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Telefono numrin ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Telefono numrin kryesor"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Telefono numrin e faksit"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Telefono numrin e radios"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Telefono numrin e teletekstit"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Telefono numrin e TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Telefono numrin celular të punës"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Telefono numrin e biperit të punës"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Telefono <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Telefono numrin MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Dërgo mesazh te <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Dërgo mesazh te numri i shtëpisë"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Dërgo mesazh te numri celular"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Dërgo mesazh te numri i punës"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Dërgo mesazh te faksi i punës"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Dërgo mesazh te faksi i shtëpisë"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Dërgo mesazh te biperi"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Dërgo mesazh"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Dërgo mesazh te numri i kthimit të telefonatave"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Dërgo mesazh te numri i makinës"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Dërgo mesazh te numri kryesor i kompanisë"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Dërgo mesazh te numri ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Dërgo mesazh te numri kryesor"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Dërgo mesazh te faksi"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Dërgo mesazh te numri i radios"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Dërgo mesazh te numri i teletekstit"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Dërgo mesazh te numri TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Dërgo mesazh te numri i celularit"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Dërgo mesazh te numri i biperit"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Dërgo mesazh te <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Dërgo mesazh te numri i MMS-së"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Të pastrohen kontaktet e shpeshta?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Do ta pastrosh listën e kontakteve të shpeshta në aplikacionet \"Kontaktet\" dhe \"Telefoni\" dhe do t\'i detyrosh aplikacionet e mail-it të mësojnë preferencat e tua të adresimit nga e para."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Po pastron kontaktet e shpeshta…"</string>
-    <string name="status_available" msgid="2648156525685472626">"I gatshëm"</string>
-    <string name="status_away" msgid="2298688367552893953">"I larguar"</string>
-    <string name="status_busy" msgid="5990832098713248503">"I zënë"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kontaktet"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Sugjerimet kryesore"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Tjetër"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Direktoria"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Direktoria e punës"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Të gjitha kontaktet"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Sugjerimet"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Unë"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Pa emër)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Shiko kontaktin"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Të gjitha kontaktet me numra telefoni"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Kontaktet e profilit të punës"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Shiko përditësimet"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Vetëm pajisja, e pasinkronizuar"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Emri"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Pseudonimi"</string>
-    <string name="full_name" msgid="648186563998465740">"Emri"</string>
-    <string name="name_given" msgid="5096576006314820536">"Emri"</string>
-    <string name="name_family" msgid="6646235805198547467">"Mbiemri"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Parashtesa e emrit"</string>
-    <string name="name_middle" msgid="703755205331582769">"Emri i dytë"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Prapashtesa e emrit"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Emri fonetik"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Emri fonetik"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Emri i dytë fonetik"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Mbiemri fonetik"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefoni"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Dërgo mail"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adresa"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organizata"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Marrëdhënia"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Data e veçantë"</string>
-    <string name="sms" msgid="7574344928185328095">"Mesazh me tekst"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adresa"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Kompania"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Titulli"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Shënime"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Uebsajti"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Grupet"</string>
-    <string name="email_home" msgid="889830029388962171">"Dërgoji mail shtëpisë"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Dërgoji mail celularit"</string>
-    <string name="email_work" msgid="4223487303344613528">"Dërgoji mail punës"</string>
-    <string name="email_other" msgid="4246411900126012062">"Dërgo mail"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Dërgo mail në <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Dërgo mail"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Rruga"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Qyteti"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Shteti"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Kodi ZIP"</string>
-    <string name="postal_country" msgid="232670707458768148">"Shteti"</string>
-    <string name="map_home" msgid="4181131107392126938">"Shiko adresën e shtëpisë"</string>
-    <string name="map_work" msgid="5723471185992684400">"Shiko adresën e punës"</string>
-    <string name="map_other" msgid="2253764780863500516">"Shiko adresën"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Shiko adresën e <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Bisedo me AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Bisedo me Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Bisedo me Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Bisedo me Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Bisedo me QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Bisedo me \"Bisedo me Google\""</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Bisedo me ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Bisedo me Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Bisedo"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Të gjitha kontaktet"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Kontaktet në <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Pamja e personalizuar"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Një kontakt i vetëm"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Rendit sipas"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Emri"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Mbiemri"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Formati i emrit"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Emri në fillim"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Mbiemri në fillim"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Pastro kontaktet e shpeshta"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ndalo kërkimin"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Pastro kërkimin"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Llogaria"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Përdor gjithmonë këtë për telefonatat"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Telefono me"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Telefono me shënim"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Shkruaj një shënim për të dërguar një telefonatë..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"DËRGO DHE TELEFONO"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Skeda <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> Skeda <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> artikuj të palexuar. </item>
-      <item quantity="one"> Skeda <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> artikull i palexuar. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Telefonatë me video"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Ndaj dhe telefono"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Telefono %s</string>
+  <string name="call_home">Telefono numrin e shtëpisë</string>
+  <string name="call_mobile">Telefono numrin celular</string>
+  <string name="call_work">Telefono numrin e punës</string>
+  <string name="call_fax_work">Telefono faksin e punës</string>
+  <string name="call_fax_home">Telefono faksin e shtëpisë</string>
+  <string name="call_pager">Telefoni numrin e biperit</string>
+  <string name="call_other">Telefono</string>
+  <string name="call_callback">Telefono numrin e kthimit të telefonatave</string>
+  <string name="call_car">Telefono numrin e makinës</string>
+  <string name="call_company_main">Telefono numrin kryesor të kompanisë</string>
+  <string name="call_isdn">Telefono numrin ISDN</string>
+  <string name="call_main">Telefono numrin kryesor</string>
+  <string name="call_other_fax">Telefono numrin e faksit</string>
+  <string name="call_radio">Telefono numrin e radios</string>
+  <string name="call_telex">Telefono numrin e teletekstit</string>
+  <string name="call_tty_tdd">Telefono numrin e TTY/TDD</string>
+  <string name="call_work_mobile">Telefono numrin celular të punës</string>
+  <string name="call_work_pager">Telefono numrin e biperit të punës</string>
+  <string name="call_assistant">Telefono %s</string>
+  <string name="call_mms">Telefono numrin MMS</string>
+  <string name="sms_custom">Dërgo mesazh te %s</string>
+  <string name="sms_home">Dërgo mesazh te numri i shtëpisë</string>
+  <string name="sms_mobile">Dërgo mesazh te numri celular</string>
+  <string name="sms_work">Dërgo mesazh te numri i punës</string>
+  <string name="sms_fax_work">Dërgo mesazh te faksi i punës</string>
+  <string name="sms_fax_home">Dërgo mesazh te faksi i shtëpisë</string>
+  <string name="sms_pager">Dërgo mesazh te biperi</string>
+  <string name="sms_other">Dërgo mesazh</string>
+  <string name="sms_callback">Dërgo mesazh te numri i kthimit të telefonatave</string>
+  <string name="sms_car">Dërgo mesazh te numri i makinës</string>
+  <string name="sms_company_main">Dërgo mesazh te numri kryesor i kompanisë</string>
+  <string name="sms_isdn">Dërgo mesazh te numri ISDN</string>
+  <string name="sms_main">Dërgo mesazh te numri kryesor</string>
+  <string name="sms_other_fax">Dërgo mesazh te faksi</string>
+  <string name="sms_radio">Dërgo mesazh te numri i radios</string>
+  <string name="sms_telex">Dërgo mesazh te numri i teletekstit</string>
+  <string name="sms_tty_tdd">Dërgo mesazh te numri TTY/TDD</string>
+  <string name="sms_work_mobile">Dërgo mesazh te numri i celularit</string>
+  <string name="sms_work_pager">Dërgo mesazh te numri i biperit</string>
+  <string name="sms_assistant">Dërgo mesazh te %s</string>
+  <string name="sms_mms">Dërgo mesazh te numri i MMS-së</string>
+  <string name="clearFrequentsConfirmation_title">Të pastrohen kontaktet e shpeshta?</string>
+  <string name="clearFrequentsConfirmation">Do ta pastrosh listën e kontakteve të shpeshta në aplikacionet \"Kontaktet\" dhe \"Telefoni\" dhe do t\'i detyrosh aplikacionet e mail-it të mësojnë preferencat e tua të adresimit nga e para.</string>
+  <string name="clearFrequentsProgress_title">Po pastron kontaktet e shpeshta…</string>
+  <string name="status_available">I gatshëm</string>
+  <string name="status_away">I larguar</string>
+  <string name="status_busy">I zënë</string>
+  <string name="contactsList">Kontaktet</string>
+  <string name="contact_suggestions">Sugjerimet kryesore</string>
+  <string name="local_invisible_directory">Tjetër</string>
+  <string name="directory_search_label">Direktoria</string>
+  <string name="directory_search_label_work">Direktoria e punës</string>
+  <string name="local_search_label">Të gjitha kontaktet</string>
+  <string name="local_suggestions_search_label">Sugjerimet</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Unë</string>
+  <string name="missing_name">(Pa emër)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Shiko kontaktin</string>
+  <string name="list_filter_phones">Të gjitha kontaktet me numra telefoni</string>
+  <string name="list_filter_phones_work">Kontaktet e profilit të punës</string>
+  <string name="view_updates_from_group">Shiko përditësimet</string>
+  <string name="account_phone">Vetëm pajisja, e pasinkronizuar</string>
+  <string name="nameLabelsGroup">Emri</string>
+  <string name="nicknameLabelsGroup">Pseudonimi</string>
+  <string name="full_name">Emri</string>
+  <string name="name_given">Emri</string>
+  <string name="name_family">Mbiemri</string>
+  <string name="name_prefix">Parashtesa e emrit</string>
+  <string name="name_middle">Emri i dytë</string>
+  <string name="name_suffix">Prapashtesa e emrit</string>
+  <string name="name_phonetic">Emri fonetik</string>
+  <string name="name_phonetic_given">Emri fonetik</string>
+  <string name="name_phonetic_middle">Emri i dytë fonetik</string>
+  <string name="name_phonetic_family">Mbiemri fonetik</string>
+  <string name="phoneLabelsGroup">Telefoni</string>
+  <string name="emailLabelsGroup">Dërgo mail</string>
+  <string name="postalLabelsGroup">Adresa</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Organizata</string>
+  <string name="relationLabelsGroup">Marrëdhënia</string>
+  <string name="eventLabelsGroup">Data e veçantë</string>
+  <string name="sms">Mesazh me tekst</string>
+  <string name="postal_address">Adresa</string>
+  <string name="ghostData_company">Kompania</string>
+  <string name="ghostData_title">Titulli</string>
+  <string name="label_notes">Shënime</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Uebsajti</string>
+  <string name="groupsLabel">Grupet</string>
+  <string name="email_home">Dërgoji mail shtëpisë</string>
+  <string name="email_mobile">Dërgoji mail celularit</string>
+  <string name="email_work">Dërgoji mail punës</string>
+  <string name="email_other">Dërgo mail</string>
+  <string name="email_custom">Dërgo mail në %s</string>
+  <string name="email">Dërgo mail</string>
+  <string name="postal_street">Rruga</string>
+  <string name="postal_city">Qyteti</string>
+  <string name="postal_region">Shteti</string>
+  <string name="postal_postcode">Kodi ZIP</string>
+  <string name="postal_country">Shteti</string>
+  <string name="map_home">Shiko adresën e shtëpisë</string>
+  <string name="map_work">Shiko adresën e punës</string>
+  <string name="map_other">Shiko adresën</string>
+  <string name="map_custom">Shiko adresën e %s</string>
+  <string name="chat_aim">Bisedo me AIM</string>
+  <string name="chat_msn">Bisedo me Windows Live</string>
+  <string name="chat_yahoo">Bisedo me Yahoo</string>
+  <string name="chat_skype">Bisedo me Skype</string>
+  <string name="chat_qq">Bisedo me QQ</string>
+  <string name="chat_gtalk">Bisedo me \"Bisedo me Google\"</string>
+  <string name="chat_icq">Bisedo me ICQ</string>
+  <string name="chat_jabber">Bisedo me Jabber</string>
+  <string name="chat">Bisedo</string>
+  <string name="list_filter_all_accounts">Të gjitha kontaktet</string>
+  <string name="listAllContactsInAccount">Kontaktet në %s</string>
+  <string name="listCustomView">Pamja e personalizuar</string>
+  <string name="listSingleContact">Një kontakt i vetëm</string>
+  <string name="display_options_sort_list_by">Rendit sipas</string>
+  <string name="display_options_sort_by_given_name">Emri</string>
+  <string name="display_options_sort_by_family_name">Mbiemri</string>
+  <string name="display_options_view_names_as">Formati i emrit</string>
+  <string name="display_options_view_given_name_first">Emri në fillim</string>
+  <string name="display_options_view_family_name_first">Mbiemri në fillim</string>
+  <string name="menu_clear_frequents">Pastro kontaktet e shpeshta</string>
+  <string name="action_menu_back_from_search">ndalo kërkimin</string>
+  <string name="description_clear_search">Pastro kërkimin</string>
+  <string name="select_account_dialog_title">Llogaria</string>
+  <string name="set_default_account">Përdor gjithmonë këtë për telefonatat</string>
+  <string name="select_phone_account_for_calls">Zgjidh kartën SIM për këtë telefonatë</string>
+  <string name="select_phone_account_for_calls_remember">Kujtoje këtë zgjedhje</string>
+  <string name="call_with_a_note">Telefono me shënim</string>
+  <string name="call_subject_hint">Shkruaj një shënim për të dërguar një telefonatë...</string>
+  <string name="send_and_call_button">DËRGO DHE TELEFONO</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Skeda %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Skeda %1$s. %2$d artikull i palexuar. </item>
+    <item quantity="other"> Skeda %1$s. %2$d artikuj të palexuar. </item>
+  </plurals>
+  <string name="description_search_video_call">Telefonatë me video</string>
+  <string name="description_search_call_and_share">Ndaj dhe telefono</string>
 </resources>

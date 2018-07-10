@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">통화 중 실시간 문자 메시지</string>
+  <string name="rtt_promotion_details">RTT는 청각 장애, 난청, 언어 장애가 있거나
+    음성 이외의 의사소통 수단이 필요한 발신자에게 도움이 됩니다. RTT 메시지 스크립트는 내 기기의 통화 기록에
+    저장됩니다. %1$s</string>
+  <string name="duo_disclosure_title">Duo로 화상 통화 걸기</string>
+  <string name="duo_disclosure_details">Google Duo 화상 통화를 사용하면 가족, 친구와 얼굴을 마주 보며 채팅할 수 있습니다. 데이터 요금이 부과될 수 있습니다. %1$s</string>
+</resources>

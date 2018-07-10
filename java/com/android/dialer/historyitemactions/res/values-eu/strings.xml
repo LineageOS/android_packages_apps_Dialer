@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Ahots-deia</string>
+  <string name="video_call">Bideo-deia</string>
+  <string name="add_to_contacts">Gehitu kontaktua</string>
+  <string name="send_a_message">Mezua</string>
+  <string name="not_spam">Ez da spama</string>
+  <string name="block_number">Blokeatu</string>
+  <string name="unblock_number">Desblokeatu</string>
+  <string name="block_and_optionally_report_spam">Blokeatu edo salatu spama dela</string>
+  <string name="copy_number">Kopiatu zenbakia</string>
+</resources>

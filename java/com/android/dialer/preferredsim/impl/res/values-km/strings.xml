@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">មិន​អាច​ហៅ​ទូរសព្ទ​ដោយ​មិនមាន​ការអនុញ្ញាត​ក្នុង​ទូរសព្ទ​​បាន​ទេ</string>
+  <string name="pre_call_select_phone_account">ជ្រើសរើសស៊ីមសម្រាប់​ការហៅ​ទូរសព្ទ​នេះ</string>
+  <string name="pre_call_select_phone_account_remember">ចងចាំ​ជម្រើស​នេះ</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">មិន​ដំណើរការ នៅពេល​កំពុង​ប្រើប្រាស់ %1$s</string>
+</resources>

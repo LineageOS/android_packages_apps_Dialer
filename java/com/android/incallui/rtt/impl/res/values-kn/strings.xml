@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">ಮುಂದುವರಿಯಿರಿ</string>
+  <string name="rtt_input_hint">ಸಂದೇಶವನ್ನು ಟೈಪ್‌ ಮಾಡಿ</string>
+  <string name="content_description_rtt_chat_avatar">ಅವತಾರ್</string>
+  <string name="rtt_button_back">ಹಿಂದೆ</string>
+  <string name="rtt_status_banner_text">RTT ಕರೆಗೆ ಸೇರಲು %s ಅವರನ್ನು ನಿರೀಕ್ಷಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="rtt_transcript_advisory">ಇತರ ವ್ಯಕ್ಯಿಯೂ ನೀವು ಟೈಪ್‌ ಮಾಡುವುದನ್ನು ವೀಕ್ಷಿಸಬಹುದು. ನಿಮ್ಮ ಸಾಧನದ ಕರೆ ಇತಿಹಾಸದಲ್ಲಿ ಪ್ರತಿಲೇಖನಗಳನ್ನು ಸಂಗ್ರಹಿಸಲಾಗಿದೆ.</string>
+</resources>

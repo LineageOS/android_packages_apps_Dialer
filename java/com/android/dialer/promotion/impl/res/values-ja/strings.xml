@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">通話音声をリアルタイムでテキスト化（RTT）</string>
+  <string name="rtt_promotion_details">RTT は、聴覚障害や言語障害があるなど、
+    音声だけではコミュニケーションを取ることが困難なユーザーをサポートする機能です。RTT の音声文字変換結果は、ご利用の端末の
+    通話履歴に保存されます。%1$s</string>
+  <string name="duo_disclosure_title">Duo のビデオ通話を発信できます</string>
+  <string name="duo_disclosure_details">Google Duo のビデオ通話なら、家族や友だちとお互いの顔を見ながら会話を楽しむことができます。なお、場合によってはデータ通信料が適用されます。%1$s</string>
+</resources>

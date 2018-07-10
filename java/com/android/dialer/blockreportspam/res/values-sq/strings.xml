@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Të bllokohet %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Nuk do të marrësh më telefonata apo mesazhe me tekst nga ky numër.</string>
+  <string name="block_number_ok">BLLOKO</string>
+  <string name="unblock_number_ok">ZHBLLOKO</string>
+  <string name="block_report_number_alert_title">Të bllokohet %1$s?</string>
+  <string name="block_report_number_alert_details">Nuk do të marrësh më telefonata nga ky numër.</string>
+  <string name="block_number_alert_details">%1$s Kjo telefonatë do të raportohet si e padëshiruar.</string>
+  <string name="unblock_number_alert_details">Ky numër do të zhbllokohet dhe nuk do të raportohet si i padëshiruar. Telefonatat në të ardhmen nuk do të identifikohen si të padëshiruara.</string>
+  <string name="unblock_report_number_alert_title">Të zhbllokohet %1$s?</string>
+  <string name="report_not_spam_alert_button">Raporto</string>
+  <string name="report_not_spam_alert_title">Do të raportosh një gabim?</string>
+  <string name="report_not_spam_alert_details">Telefonatat në të ardhmen nga %1$s nuk do të identifikohen si të padëshiruara.</string>
+  <string name="checkbox_report_as_spam_action">Raporto thirrjen si të padëshiruar</string>
+  <string name="block_number_failed_toast">Problem me bllokimin e këtij numri</string>
+  <string name="unblock_number_failed_toast">Problem me zhbllokimin e këtij numri</string>
+</resources>

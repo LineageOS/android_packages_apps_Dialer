@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">使用相同流動網絡供應商</string>
+  <string name="pre_call_select_phone_account_hint_frequent">最近使用的</string>
+</resources>

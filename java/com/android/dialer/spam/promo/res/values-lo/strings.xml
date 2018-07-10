@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">ກັ່ນຕອງສາຍທີ່ສົງໄສວ່າເປັນສະແປມທັງໝົດບໍ?</string>
+  <string name="spam_blocking_promo_text">ສາຍແບບດຽວກັບທີ່ທ່ານຫາກໍບລັອກໄປຈະບໍ່ສາມາດລົບກວນທ່ານໄດ້ອີກ.</string>
+  <string name="spam_blocking_promo_action_filter_spam">ກັ່ນຕອງສະແປມ</string>
+  <string name="spam_blocking_promo_action_dismiss">ປິດໄວ້</string>
+  <string name="spam_blocking_setting_prompt">ການຕັ້ງຄ່າ</string>
+  <string name="spam_blocking_settings_enable_error_text">ເກີດບັນຫາໃນການເປີດຕົວກັ່ນຕອງສະແປມ</string>
+  <string name="spam_blocking_settings_disable_error_text">ເກີດບັນຫາໃນການປິດຕົວກັ່ນຕອງສະແປມ</string>
+  <string name="spam_blocking_settings_enable_complete_text">ເປີດຕົວກັ່ນຕອງສະແປມແລ້ວ</string>
+  <string name="spam_blocking_settings_disable_complete_text">ປິດຕົວກັ່ນຕອງສະແປມແລ້ວ</string>
+</resources>

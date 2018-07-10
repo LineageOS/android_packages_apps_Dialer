@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">അജ്ഞാതം</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ</string>
+  <string name="emergency_number">അടിയന്തര നമ്പർ</string>
+  <string name="launcherActivityLabel">ഫോണ്‍</string>
+  <string name="call">വിളിക്കുക</string>
+  <string name="video_call_lte_to_wifi_handover_toast">വൈഫൈ ഉപയോഗിച്ച് കോൾ തുടരുന്നു…</string>
+  <string name="rtt_call_not_available_toast">ഈ കോളിന് RTT ലഭ്യമല്ല</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

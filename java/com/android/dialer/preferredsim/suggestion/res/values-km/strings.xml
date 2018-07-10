@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">ប្រើប្រាស់​ក្រុមហ៊ុន​សេវា​ទូរសព្ទ​ដូចគ្នា</string>
+  <string name="pre_call_select_phone_account_hint_frequent">បាន​ប្រើ​ថ្មីៗ</string>
+</resources>

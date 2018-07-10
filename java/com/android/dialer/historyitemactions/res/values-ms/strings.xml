@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Panggilan suara</string>
+  <string name="video_call">Panggilan video</string>
+  <string name="add_to_contacts">Tambah kenalan</string>
+  <string name="send_a_message">Mesej</string>
+  <string name="not_spam">Bukan spam</string>
+  <string name="block_number">Sekat</string>
+  <string name="unblock_number">Nyahsekat</string>
+  <string name="block_and_optionally_report_spam">Sekat/Laporkan spam</string>
+  <string name="copy_number">Salin nombor</string>
+</resources>

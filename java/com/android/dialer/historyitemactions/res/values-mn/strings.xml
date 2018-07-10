@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Дуудлага</string>
+  <string name="video_call">Видео дуудлага</string>
+  <string name="add_to_contacts">Харилцагч нэмэх</string>
+  <string name="send_a_message">Зурвас</string>
+  <string name="not_spam">Спам биш</string>
+  <string name="block_number">Хориглох</string>
+  <string name="unblock_number">Хоригоос гаргах</string>
+  <string name="block_and_optionally_report_spam">Спам гэж мэдээлэх/хориглох</string>
+  <string name="copy_number">Дугаар хуулах</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s blokeatu nahi duzu?</string>
+  <string name="block_number_confirmation_message_new_filtering">Ez duzu deirik edo testu-mezurik jasoko zenbaki horretatik.</string>
+  <string name="block_number_ok">BLOKEATU</string>
+  <string name="unblock_number_ok">DESBLOKEATU</string>
+  <string name="block_report_number_alert_title">%1$s blokeatu nahi duzu?</string>
+  <string name="block_report_number_alert_details">Aurrerantzean, ez duzu jasoko zenbaki horren deirik.</string>
+  <string name="block_number_alert_details">%1$s Dei hau spama dela salatuko da.</string>
+  <string name="unblock_number_alert_details">Desblokeatu egingo da zenbakia. Aurrerantzean, deiak ez dira identifikatuko spam gisa.</string>
+  <string name="unblock_report_number_alert_title">%1$s desblokeatu nahi duzu?</string>
+  <string name="report_not_spam_alert_button">Salatu</string>
+  <string name="report_not_spam_alert_title">Akats baten berri eman nahi duzu?</string>
+  <string name="report_not_spam_alert_details">Aurrerantzean, %1$s zenbakiaren deiak ez dira identifikatuko spam gisa.</string>
+  <string name="checkbox_report_as_spam_action">Salatu deia spama dela</string>
+  <string name="block_number_failed_toast">Arazo bat izan da zenbakia blokeatzean</string>
+  <string name="unblock_number_failed_toast">Arazo bat izan da zenbakia desblokeatzean</string>
+</resources>

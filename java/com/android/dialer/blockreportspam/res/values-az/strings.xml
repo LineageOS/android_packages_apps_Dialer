@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s blok edilsin?</string>
+  <string name="block_number_confirmation_message_new_filtering">Bu nömrədən daha zəng və ya mesaj almayacaqsınız.</string>
+  <string name="block_number_ok">BLOK</string>
+  <string name="unblock_number_ok">BLOKDAN ÇIXARIN</string>
+  <string name="block_report_number_alert_title">%1$s blok edilsin?</string>
+  <string name="block_report_number_alert_details">Bu nömrədən daha zəng almayacaqsınız.</string>
+  <string name="block_number_alert_details">%1$s Bu zəng spam kimi qeyd olunacaq.</string>
+  <string name="unblock_number_alert_details">Bu nömrə blokdan çıxarılacaq və spam kimi qeyd olunmayacaq. Gələcək zənglər spam kimi göstərilməyəcək.</string>
+  <string name="unblock_report_number_alert_title">%1$s blokdan çıxarılsın?</string>
+  <string name="report_not_spam_alert_button">Bildirin</string>
+  <string name="report_not_spam_alert_title">Səhv bildirilsin?</string>
+  <string name="report_not_spam_alert_details">%1$s nömrəsindən gələcək zənglər daha spam kimi qeyd olunmayacaq.</string>
+  <string name="checkbox_report_as_spam_action">Zəngi spam olaraq bildirin</string>
+  <string name="block_number_failed_toast">Bu nömrə blok edilərkən xəta baş verdi</string>
+  <string name="unblock_number_failed_toast">Bu nömrə blokdan çıxarılarkən xəta baş verdi</string>
+</resources>

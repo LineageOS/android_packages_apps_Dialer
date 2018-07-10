@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Endavant</string>
+  <string name="rtt_input_hint">Escriu un missatge</string>
+  <string name="content_description_rtt_chat_avatar">Avatar</string>
+  <string name="rtt_button_back">Enrere</string>
+  <string name="rtt_status_banner_text">S\'està esperant que %s s\'uneixi a la trucada RTT…</string>
+  <string name="rtt_transcript_advisory">Els altres usuaris veuen quan escrius. Les transcripcions es desen a l\'historial de trucades del dispositiu.</string>
+</resources>

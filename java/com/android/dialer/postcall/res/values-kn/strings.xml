@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="post_call_message" msgid="3541277172068556862">"ನೀವು ಏಕೆ ಕರೆ ಮಾಡಿರುವಿರಿ ಎಂದು ಹೇಳಿ"</string>
-    <string name="post_call_message_1" msgid="4827849136801228106">"ತುರ್ತಾಗಿ ನನಗೆ ತಕ್ಷಣ ಕರೆ ಮಾಡಿ."</string>
-    <string name="post_call_message_2" msgid="5310301526176003385">"ನಿಮಗೆ ಸಮಯವಿದ್ದಾಗ ನನಗೆ ಕರೆ ಮಾಡಿ."</string>
-    <string name="post_call_message_3" msgid="3932759658420368056">"ಅವಸರವಿಲ್ಲ, ನಾವು ನಂತರ ಚಾಟ್ ಮಾಡಬಹುದು."</string>
-    <string name="post_call_add_message" msgid="8298853527467080463">"ಸಂದೇಶವನ್ನು ಸೇರಿಸಿ"</string>
-    <string name="post_call_send_message" msgid="8039569617234824873">"ಸಂದೇಶ ಕಳುಹಿಸಿ"</string>
-    <string name="post_call_message_sent" msgid="832757977985265036">"ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ"</string>
-    <string name="view" msgid="8572192949673703830">"ವೀಕ್ಷಿಸಿ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="post_call_message">ನೀವು ಏಕೆ ಕರೆ ಮಾಡಿರುವಿರಿ ಎಂದು ಹೇಳಿ</string>
+  <string name="post_call_message_1">ತುರ್ತಾಗಿ ನನಗೆ ತಕ್ಷಣ ಕರೆ ಮಾಡಿ.</string>
+  <string name="post_call_message_2">ನಿಮಗೆ ಸಮಯವಿದ್ದಾಗ ನನಗೆ ಕರೆ ಮಾಡಿ.</string>
+  <string name="post_call_message_3">ಅವಸರವಿಲ್ಲ, ನಾವು ನಂತರ ಚಾಟ್ ಮಾಡಬಹುದು.</string>
+  <string name="post_call_add_message">ಸಂದೇಶವನ್ನು ಸೇರಿಸಿ</string>
+  <string name="post_call_send_message">ಸಂದೇಶ ಕಳುಹಿಸಿ</string>
+  <string name="post_call_message_sent">ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ</string>
+  <string name="view">ವೀಕ್ಷಿಸಿ</string>
 </resources>

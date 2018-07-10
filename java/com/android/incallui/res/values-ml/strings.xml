@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ഫോണ്‍"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"ഇനിപ്പറയുന്ന ടോണുകൾ അയയ്‌ക്കണോ?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"വേണം"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"വേണ്ട"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"ഡയൽ ചെയ്യുന്നു"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"കോൾ സജീവമാണ്"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ ‑ വീഡിയോ തൽക്കാലം നിർത്തി"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ഓൺഗോയിംഗ് ഔദ്യോഗിക കോൾ"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"തുടർന്നുകൊണ്ടിരിക്കുന്ന <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"ഇൻകമിംഗ് <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"വൈഫൈ കോൾ"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"വൈഫൈ ഔദ്യോഗിക കോൾ"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"ഹോള്‍ഡിലാണ്"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"ഇന്‍കമിംഗ് കോള്‍"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ഫോട്ടോ ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"സന്ദേശം ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"ലൊക്കേഷൻ ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ഫോട്ടോയും സന്ദേശവും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ഫോട്ടോയും ലൊക്കേഷനും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ഫോട്ടോയും സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"അറ്റാച്ച്‌മെന്റുകൾ ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ഫോട്ടോ ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"സന്ദേശം ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"ലൊക്കേഷൻ ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ഫോട്ടോയും സന്ദേശവും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ഫോട്ടോയും ലൊക്കേഷനും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ഫോട്ടോയും സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"അറ്റാച്ച്‌മെന്റുകൾ ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"ഇൻകമിംഗ് ഔദ്യോഗിക കോൾ"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"സംശയാസ്‌പദമായ ഇൻകമിംഗ് സ്‌പാം കോൾ"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"ഇൻകമിംഗ് വീഡിയോ അഭ്യർത്ഥന"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"മറുപടി"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"ഹാംഗ് അപ്പ് ചെയ്യുക"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"വീഡിയോ"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"അംഗീകരിക്കുക"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"നിരസിക്കുക"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"സ്‌പീക്കർ ഓണാക്കുക"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"സ്‌പീക്കർ ഓഫാക്കുക"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന കോൾ"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"കോൾ എടുക്കുക"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"വീഡിയോ കോൾ അറ്റൻഡ് ചെയ്യുക"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"സേവനം പിന്തുണയ്‌ക്കുന്നില്ല."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"സ്വകാര്യം എന്നതിലേക്ക് പോകുക"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"അടിയന്തര നമ്പർ"</string>
-    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> വഴി"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"സിം ഇല്ല അല്ലെങ്കിൽ സിം പിശക്"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"കോള്‍ അവസാനിപ്പിക്കൂ"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"കോൺഫറൻസ് കോൾ"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"കോളിലാണ്"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"മൊബൈൽ ഡാറ്റ ഉപയോഗിച്ച് കോൾ തുടരുന്നു…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"വൈഫൈ നെറ്റ്‌വർക്കിലേക്ക് മാറാനായില്ല"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"മൊബൈൽ നെറ്റ്‌വർക്കിൽത്തന്നെ വീഡിയോ കോൾ തുടരും. സാധാരണ ഡാറ്റ നിരക്കുകൾ ബാധകമാകാം."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ഇത് വീണ്ടും കാണിക്കരുത്"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">ഇനിപ്പറയുന്ന ടോണുകൾ അയയ്‌ക്കണോ?\n</string>
+  <string name="pause_prompt_yes">വേണം</string>
+  <string name="pause_prompt_no">വേണ്ട</string>
+  <string name="notification_dialing">ഡയൽ ചെയ്യുന്നു</string>
+  <string name="notification_ongoing_call">കോൾ സജീവമാണ്</string>
+  <string name="notification_ongoing_video_call">നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ</string>
+  <string name="notification_ongoing_paused_video_call">നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ ‑ വീഡിയോ തൽക്കാലം നിർത്തി</string>
+  <string name="notification_ongoing_work_call">ഓൺഗോയിംഗ് ഔദ്യോഗിക കോൾ</string>
+  <string name="notification_ongoing_call_wifi_template">തുടർന്നുകൊണ്ടിരിക്കുന്ന %1$s</string>
+  <string name="notification_incoming_call_wifi_template">ഇൻകമിംഗ് %1$s</string>
+  <string name="notification_call_wifi_brand">വൈഫൈ കോൾ</string>
+  <string name="notification_call_wifi_work_brand">വൈഫൈ ഔദ്യോഗിക കോൾ</string>
+  <string name="notification_on_hold">ഹോള്‍ഡിലാണ്</string>
+  <string name="notification_incoming_call">ഇന്‍കമിംഗ് കോള്‍</string>
+  <string name="notification_incoming_video_call">ഇൻകമിംഗ് വീഡിയോ കോൾ</string>
+  <string name="notification_incoming_call_mutli_sim">%1$s വഴി കോൾ വരുന്നു</string>
+  <string name="notification_incoming_call_with_photo">ഫോട്ടോ ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_with_message">സന്ദേശം ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_with_location">ലൊക്കേഷൻ ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_with_photo_message">ഫോട്ടോയും സന്ദേശവും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_with_photo_location">ഫോട്ടോയും ലൊക്കേഷനും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_with_message_location">സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_with_photo_message_location">ഫോട്ടോയും സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_call_attachments">അറ്റാച്ച്‌മെന്റുകൾ ഉൾപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call">പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_photo">ഫോട്ടോ ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_message">സന്ദേശം ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_location">ലൊക്കേഷൻ ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_photo_message">ഫോട്ടോയും സന്ദേശവും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_photo_location">ഫോട്ടോയും ലൊക്കേഷനും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_message_location">സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">ഫോട്ടോയും സന്ദേശവും ലൊക്കേഷനും ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="important_notification_incoming_call_attachments">അറ്റാച്ച്‌മെന്റുകൾ ഉൾപ്പെട്ട പ്രധാനപ്പെട്ട ഇൻകമിംഗ് കോൾ</string>
+  <string name="notification_incoming_work_call">ഇൻകമിംഗ് ഔദ്യോഗിക കോൾ</string>
+  <string name="notification_incoming_spam_call">സംശയാസ്‌പദമായ ഇൻകമിംഗ് സ്‌പാം കോൾ</string>
+  <string name="notification_requesting_video_call">ഇൻകമിംഗ് വീഡിയോ അഭ്യർത്ഥന</string>
+  <string name="notification_action_answer">മറുപടി</string>
+  <string name="notification_action_end_call">ഹാംഗ് അപ്പ് ചെയ്യുക</string>
+  <string name="notification_action_answer_video">വീഡിയോ</string>
+  <string name="notification_action_accept">അംഗീകരിക്കുക</string>
+  <string name="notification_action_dismiss">നിരസിക്കുക</string>
+  <string name="notification_action_speaker_on">സ്‌പീക്കർ ഓണാക്കുക</string>
+  <string name="notification_action_speaker_off">സ്‌പീക്കർ ഓഫാക്കുക</string>
+  <string name="notification_external_call">മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന കോൾ</string>
+  <string name="notification_external_video_call">മറ്റൊരു ഉപകരണത്തിൽ നടന്നുകൊണ്ടിരിക്കുന്ന വീഡിയോ കോൾ</string>
+  <string name="notification_take_call">കോൾ എടുക്കുക</string>
+  <string name="notification_take_video_call">വീഡിയോ കോൾ അറ്റൻഡ് ചെയ്യുക</string>
+  <string name="incall_error_supp_service_unknown">സേവനം പിന്തുണയ്‌ക്കുന്നില്ല.</string>
+  <string name="goPrivate">സ്വകാര്യം എന്നതിലേക്ക് പോകുക</string>
+  <string name="manageConferenceLabel">കോൺഫറൻസ് കോൾ നിയന്ത്രിക്കുക</string>
+  <string name="child_number">%s വഴി</string>
+  <string name="callFailed_simError">സിം ഇല്ല അല്ലെങ്കിൽ സിം പിശക്</string>
+  <string name="conference_caller_disconnect_content_description">കോള്‍ അവസാനിപ്പിക്കൂ</string>
+  <string name="conference_call_name">കോൺഫറൻസ് കോൾ</string>
+  <string name="generic_conference_call_name">കോളിലാണ്</string>
+  <string name="video_call_wifi_to_lte_handover_toast">മൊബൈൽ ഡാറ്റ ഉപയോഗിച്ച് കോൾ തുടരുന്നു…</string>
+  <string name="video_call_lte_to_wifi_failed_title">വൈഫൈ നെറ്റ്‌വർക്കിലേക്ക് മാറാനായില്ല</string>
+  <string name="video_call_lte_to_wifi_failed_message">മൊബൈൽ നെറ്റ്‌വർക്കിൽത്തന്നെ വീഡിയോ കോൾ തുടരും. സാധാരണ ഡാറ്റ നിരക്കുകൾ ബാധകമാകാം.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">ഇത് വീണ്ടും കാണിക്കരുത്</string>
+  <string name="bubble_return_to_call">കോളിലേക്ക് മടങ്ങുക</string>
+  <string name="rtt_request_dialog_title">RTT കോളിൽ ചേരണോ?</string>
+  <string name="rtt_request_dialog_details">നിങ്ങളുടെ വോയ്‌സ് കോളിൽ %1$s സന്ദേശമയയ്‌ക്കൽ ഉപയോഗിക്കാൻ ആഗ്രഹിക്കുന്നു.</string>
+  <string name="rtt_request_dialog_more_information">ബധിരർ, കേൾവി ശക്തി കുറഞ്ഞവർ, സംഭാഷണ വൈകല്യമുള്ളവർ അല്ലെങ്കിൽ ശബ്‌ദത്തിന് പുറമേ മറ്റ് സഹായവും ആവശ്യമുള്ള, വിളിക്കുന്ന ആളുകളെ RTT സഹായിക്കുന്നു.</string>
+  <string name="rtt_button_decline_request">വേണ്ട</string>
+  <string name="rtt_button_accept_request">RTT-യിൽ ചേരുക</string>
 </resources>

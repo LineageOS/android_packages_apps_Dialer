@@ -1,181 +1,173 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2202739481132958990">"Телефон"</string>
-    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"Телефонска тастатура"</string>
-    <string name="callHistoryIconLabel" msgid="7493268743411968630">"Историја позива"</string>
-    <string name="action_copy_number_text" msgid="832682558551502319">"Копирај број"</string>
-    <string name="copy_transcript_text" msgid="937904189017310829">"Копирај транскрипцију"</string>
-    <string name="action_edit_number_before_call" msgid="8017492815878473837">"Измени број пре позива"</string>
-    <string name="call_log_delete_all" msgid="7852970926906523784">"Обриши историју позива"</string>
-    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"Избриши говорну поруку"</string>
-    <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"Гов. пошта је избрисана"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"ОПОЗОВИ"</string>
-    <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"Желите да обришете историју позива?"</string>
-    <string name="clearCallLogConfirmation" msgid="6844949465815109166">"Ово ће избрисати све позиве из историје"</string>
-    <string name="clearCallLogProgress_title" msgid="995004835687361977">"Брише се историја позива…"</string>
-    <string name="notification_missedCallTitle" msgid="8283366068539898486">"Пропуштен позив"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Пропуштен позив за Work"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Пропуштени позиви"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"Број пропуштених позива: <xliff:g id="NUM_MISSED_CALLS">%d</xliff:g>"</string>
-    <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Узврати позив"</string>
-    <string name="notification_missedCall_message" msgid="5086910028988305964">"Пошаљи SMS"</string>
-    <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Позови <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Непознат број говорне поште"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
-      <item quantity="one"> <xliff:g id="COUNT">%1$d</xliff:g> говорна порука </item>
-      <item quantity="few"> <xliff:g id="COUNT">%1$d</xliff:g> говорне поруке </item>
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> говорних порука </item>
-    </plurals>
-    <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Нова говорна порука од <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="4384373852257757295">"Пуштање говорне поште није успело"</string>
-    <string name="voicemail_fetching_content" msgid="572320120918636014">"Говорна пошта се учитава…"</string>
-    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"Учитавање говорне поште није успело"</string>
-    <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_playback_speakerphone" msgid="4852027754869750227">"Укључивање или искључивање спикерфона"</string>
-    <string name="description_playback_seek" msgid="1340910573254132520">"Тражење позиције у репродукцији"</string>
-    <string name="action_menu_call_history_description" msgid="8829135306925008546">"Историја позива"</string>
-    <string name="action_menu_overflow_description" msgid="7648679686746517341">"Још опција"</string>
-    <string name="action_menu_dialpad_button" msgid="1970631633457493180">"тастатура"</string>
-    <string name="dialer_settings_label" msgid="4980176284150290175">"Подешавања"</string>
-    <string name="simulator_submenu_label" msgid="186156287346615267">"Симулатор"</string>
-    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Направите пречицу за нови UI"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Улазите у режим групних радњи"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Изашли сте из режима групних радњи"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Изабрано је <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Опозван је избор <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_contact_details" msgid="3341280873855253464">"Детаљи о контакту за <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_spam_contact_details" msgid="5592578752881528368">"Контакт информације потенцијалног непожељног позиваоца <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> позива."</string>
-    <string name="description_video_call" msgid="3738199365585751727">"Видео позив."</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"Покретање гласовне претраге"</string>
-    <string name="voicemail" msgid="8899540969000957954">"Говорна пошта"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Откажите режим групних радњи"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Избриши"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Откажи"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"Изабраних: <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
-      <item quantity="one">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
-      <item quantity="few">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
-      <item quantity="other">"<b>"Желите ли да избришете ове говорне поруке? "</b>"</item>
-    </plurals>
-    <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
-    <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> у <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
-    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Гласовна претрага није доступна"</string>
-    <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Претражи контакте"</string>
-    <string name="block_number_search_hint" msgid="5377706079015099416">"Додајте број или претражите контакте"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Историја позива је празна"</string>
-    <string name="call_log_all_empty_action" msgid="852218280136243014">"Позови"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"Немате ниједан пропуштен позив."</string>
-    <string name="call_log_voicemail_empty" msgid="273623903423275178">"Пријемно сандуче говорне поште је празно."</string>
-    <string name="call_log_activity_title" msgid="1275242727244945527">"Историја позива"</string>
-    <string name="call_log_all_title" msgid="6042262422192020327">"Сви"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"Пропуштени"</string>
-    <string name="tab_speed_dial" msgid="6616404752227561075">"Брзо бирање"</string>
-    <string name="tab_history" msgid="7420269368689503596">"Историја позива"</string>
-    <string name="tab_all_contacts" msgid="5531733977693943015">"Контакти"</string>
-    <string name="tab_voicemail" msgid="2458548090088316246">"Говорна пошта"</string>
-    <string name="search_shortcut_call_number" msgid="8847918845036880688">"Позови <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"Направи нови контакт"</string>
-    <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"Додај у контакт"</string>
-    <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"Пошаљи SMS"</string>
-    <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Упути видео позив"</string>
-    <string name="search_shortcut_block_number" msgid="4587283230665805776">"Блокирај број"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"Немате ниједан контакт на брзом бирању"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Додај омиљен контакт"</string>
-    <string name="remove_contact" msgid="2353580570488923668">"Уклони"</string>
-    <string name="select_all" msgid="408601760696146245">"Изабери све"</string>
-    <string name="call_log_action_video_call" msgid="7565549950343850819">"Видео позив"</string>
-    <string name="call_log_action_send_message" msgid="6948727362660115554">"Пошаљи поруку"</string>
-    <string name="call_log_action_details" msgid="2091370737371449501">"Детаљи позива"</string>
-    <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Пошаљи у…"</string>
-    <string name="call_log_action_call" msgid="682724094251540583">"Позови <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_incoming_missed_call" msgid="8292535799379230029">"Пропуштени позив: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="3920182963103160610">"Примљени позив: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_unread_voicemail" msgid="145170985013419170">"Непрочитана говорна порука од <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_read_voicemail" msgid="5585559881573227732">"Говорна порука од <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="543952487882919924">"Позвали сте: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="call_log_via_number" msgid="1340307109806397650">"преко <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> преко <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="description_call_action" msgid="4042796498169106545">"Позови <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="1237090968588659650">"Упутите видео позив контакту <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="3290143432403538524">"Пусти говорну пошту од <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_create_new_contact_action" msgid="1928282350281564130">"Направите контакт за <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"Додајте <xliff:g id="NAMEORNUMBER">^1</xliff:g> постојећем контакту"</string>
-    <string name="description_details_action" msgid="2061866409737706174">"Детаљи позива за <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="call_log_header_today" msgid="1576119097475845293">"Данас"</string>
-    <string name="call_log_header_yesterday" msgid="5616077776205329563">"Јуче"</string>
-    <string name="call_log_header_other" msgid="4940676886254217644">"Старији"</string>
-    <string name="voicemail_speaker_on" msgid="3151333608926996668">"Укључите звучник."</string>
-    <string name="voicemail_speaker_off" msgid="2530064206962034201">"Искључите звучник."</string>
-    <string name="voicemail_play_start_pause" msgid="3874823480278334664">"Започните или паузирајте репродукцију."</string>
-    <string name="display_options_title" msgid="3880091801055797975">"Опције приказа"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Звуци и вибрација"</string>
-    <string name="accessibility_settings_title" msgid="3329027650429831820">"Приступачност"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"Звук звона телефона"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"Вибрирај и за позиве"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Тонови тастатуре"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Дужина трајања тона тастатуре"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel">Телефон</string>
+  <string name="launcherDialpadActivityLabel">Телефонска тастатура</string>
+  <string name="callHistoryIconLabel">Историја позива</string>
+  <string name="action_copy_number_text">Копирај број</string>
+  <string name="copy_transcript_text">Копирај транскрипцију</string>
+  <string name="action_edit_number_before_call">Измени број пре позива</string>
+  <string name="call_log_delete_all">Обриши историју позива</string>
+  <string name="call_log_trash_voicemail">Избриши говорну поруку</string>
+  <string name="snackbar_voicemail_deleted">Гов. пошта је избрисана</string>
+  <string name="clearCallLogConfirmation_title">Желите да обришете историју позива?</string>
+  <string name="clearCallLogConfirmation">Ово ће избрисати све позиве из историје</string>
+  <string name="clearCallLogProgress_title">Брише се историја позива…</string>
+  <string name="notification_missedCallTitle">Пропуштен позив</string>
+  <string name="notification_missedWorkCallTitle">Пропуштен позив за Work</string>
+  <string name="notification_missedCallsTitle">Пропуштени позиви</string>
+  <string name="notification_missedCallsMsg">Број пропуштених позива: %d</string>
+  <string name="notification_missedCall_call_back">Узврати позив</string>
+  <string name="notification_missedCall_message">Пошаљи SMS</string>
+  <string name="post_call_notification_message">%1$s: %2$s</string>
+  <string name="notification_voicemail_text_format">Позови %s</string>
+  <string name="notification_voicemail_no_vm_number">Непознат број говорне поште</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one"> %1$d говорна порука </item>
+    <item quantity="few"> %1$d говорне поруке </item>
+    <item quantity="other"> %1$d говорних порука </item>
+  </plurals>
+  <string name="notification_voicemail_callers_list">%1$s, %2$s</string>
+  <string name="notification_new_voicemail_ticker">Нова говорна порука од %1$s</string>
+  <string name="voicemail_playback_error">Пуштање говорне поште није успело</string>
+  <string name="voicemail_fetching_content">Говорна пошта се учитава…</string>
+  <string name="voicemail_fetching_timout">Учитавање говорне поште није успело</string>
+  <string name="call_log_item_count_and_date">(%1$d) %2$s</string>
+  <string name="description_playback_speakerphone">Укључивање или искључивање спикерфона</string>
+  <string name="description_playback_seek">Тражење позиције у репродукцији</string>
+  <string name="action_menu_call_history_description">Историја позива</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Још опција</string>
+  <string name="action_menu_dialpad_button">тастатура</string>
+  <string name="dialer_settings_label">Подешавања</string>
+  <string name="simulator_submenu_label">Симулатор</string>
+  <string name="new_ui_launcher_shortcut_label">Направите пречицу за нови UI</string>
+  <string name="description_entering_bulk_action_mode">Улазите у режим групних радњи</string>
+  <string name="description_leaving_bulk_action_mode">Изашли сте из режима групних радњи</string>
+  <string name="description_selecting_bulk_action_mode">Изабрано је %1$s</string>
+  <string name="description_unselecting_bulk_action_mode">Опозван је избор %1$s</string>
+  <string name="description_contact_details">Детаљи о контакту за %1$s</string>
+  <string name="description_spam_contact_details">Контакт информације потенцијалног непожељног позиваоца %1$s</string>
+  <string name="description_num_calls">%1$s позива.</string>
+  <string name="description_video_call">Видео позив.</string>
+  <string name="description_start_voice_search">Покретање гласовне претраге</string>
+  <string name="voicemail">Говорна пошта</string>
+  <string name="description_cancel_multi_select">Откажите режим групних радњи</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Избриши</string>
+  <string name="voicemailMultiSelectDeleteCancel">Откажи</string>
+  <string name="voicemailMultiSelectActionBarTitle">Изабраних: %1$s</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>Желите ли да избришете ове говорне поруке? </b></item>
+    <item quantity="few"><b>Желите ли да избришете ове говорне поруке? </b></item>
+    <item quantity="other"><b>Желите ли да избришете ове говорне поруке? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat">%1$s у %2$s</string>
+  <string name="voicemailDurationFormat">%1$02d:%2$02d</string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
+  <string name="voice_search_not_available">Гласовна претрага није доступна</string>
+  <string name="dialer_hint_find_contact">Претражи контакте</string>
+  <string name="block_number_search_hint">Додајте број или претражите контакте</string>
+  <string name="call_log_all_empty">Историја позива је празна</string>
+  <string name="call_log_all_empty_action">Позови</string>
+  <string name="call_log_missed_empty">Немате ниједан пропуштен позив.</string>
+  <string name="call_log_voicemail_empty">Пријемно сандуче говорне поште је празно.</string>
+  <string name="call_log_activity_title">Историја позива</string>
+  <string name="call_log_all_title">Сви</string>
+  <string name="call_log_missed_title">Пропуштени</string>
+  <string name="tab_speed_dial">Брзо бирање</string>
+  <string name="tab_history">Историја позива</string>
+  <string name="tab_all_contacts">Контакти</string>
+  <string name="tab_voicemail">Говорна пошта</string>
+  <string name="search_shortcut_call_number">Позови %s</string>
+  <string name="search_shortcut_create_new_contact">Направи нови контакт</string>
+  <string name="search_shortcut_add_to_contact">Додај у контакт</string>
+  <string name="search_shortcut_send_sms_message">Пошаљи SMS</string>
+  <string name="search_shortcut_make_video_call">Упути видео позив</string>
+  <string name="search_shortcut_block_number">Блокирај број</string>
+  <string name="speed_dial_empty">Немате ниједан контакт на брзом бирању</string>
+  <string name="speed_dial_empty_add_favorite_action">Додај омиљен контакт</string>
+  <string name="remove_contact">Уклони</string>
+  <string name="select_all">Изабери све</string>
+  <string name="call_log_action_video_call">Видео позив</string>
+  <string name="call_log_action_set_up_video">Подеси видео позиве</string>
+  <string name="call_log_action_invite_video">Позови у видео позив</string>
+  <string name="call_log_action_send_message">Пошаљи поруку</string>
+  <string name="call_log_action_details">Детаљи позива</string>
+  <string name="call_log_action_share_voicemail">Пошаљи у…</string>
+  <string name="call_log_action_call">Позови ^1</string>
+  <string name="description_incoming_missed_call">Пропуштени позив: ^1, ^2, ^3, ^4.</string>
+  <string name="description_incoming_answered_call">Примљени позив: ^1, ^2, ^3, ^4.</string>
+  <string name="description_unread_voicemail">Непрочитана говорна порука од ^1, ^2, ^3, ^4.</string>
+  <string name="description_read_voicemail">Говорна порука од ^1, ^2, ^3, ^4.</string>
+  <string name="description_outgoing_call">Позвали сте: ^1, ^2, ^3, ^4.</string>
+  <string name="call_log_via_number">преко %1$s</string>
+  <string name="call_log_via_number_phone_account">%1$s преко %2$s</string>
+  <string name="description_call_action">Позови ^1</string>
+  <string name="description_video_call_action">Упутите видео позив контакту ^1.</string>
+  <string name="description_voicemail_action">Пусти говорну пошту од ^1</string>
+  <string name="description_create_new_contact_action">Направите контакт за ^1</string>
+  <string name="description_add_to_existing_contact_action">Додајте ^1 постојећем контакту</string>
+  <string name="description_details_action">Детаљи позива за ^1</string>
+  <string name="call_log_header_today">Данас</string>
+  <string name="call_log_header_yesterday">Јуче</string>
+  <string name="call_log_header_other">Старији</string>
+  <string name="voicemail_speaker_on">Укључите звучник.</string>
+  <string name="voicemail_speaker_off">Искључите звучник.</string>
+  <string name="voicemail_play_start_pause">Започните или паузирајте репродукцију.</string>
+  <string name="display_options_title">Опције приказа</string>
+  <string name="sounds_and_vibration_title">Звуци и вибрација</string>
+  <string name="accessibility_settings_title">Приступачност</string>
+  <string name="ringtone_title">Звук звона телефона</string>
+  <string name="vibrate_on_ring_title">Вибрирај и за позиве</string>
+  <string name="dtmf_tone_enable_title">Тонови тастатуре</string>
+  <string name="dtmf_tone_length_title">Дужина трајања тона тастатуре</string>
   <string-array name="dtmf_tone_length_entries">
-    <item msgid="3136353015227162823">"Нормално"</item>
-    <item msgid="5376841175538523822">"Дугачак"</item>
+    <item>Нормално</item>
+    <item>Дугачак</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"Брзи одговори"</string>
-    <string name="call_settings_label" msgid="7824611757200960807">"Позиви"</string>
-    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Блокирање позива"</string>
-    <string name="voicemail_settings_label" msgid="4594299554519920570">"Говорна пошта"</string>
-    <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Блокирање позива је привремено искључено"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Блокирање позива је онемогућено зато што сте контактирали службе за помоћ у хитним случајевима са овог телефона у последњих 48 сати. Аутоматски ће бити поново омогућено када истекне период од 48 сати."</string>
-    <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Увези бројеве"</string>
-    <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"Раније сте означили неке позиваоце које аутоматски треба преусмерити на говорну пошту преко других апликација."</string>
-    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"Прикажи бројеве"</string>
-    <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"Увeзи"</string>
-    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Деблокирај број"</string>
-    <string name="addBlockedNumber" msgid="3053473735238295551">"Додај број"</string>
-    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Позиви са ових бројева ће бити блокирани и поруке говорне поште ће се аутоматски брисати."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Позиви са ових бројева ће бити блокирани, али позиваоци са ових бројева ће и даље моћи да вам остављају поруке говорне поште."</string>
-    <string name="block_list" msgid="4701585783411870782">"Блокирани бројеви"</string>
-    <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> је већ блокиран."</string>
-    <string name="phone_account_settings_label" msgid="8372485478006965920">"Налози за позивање"</string>
-    <string name="permission_no_speeddial" msgid="8487215628510596753">"Да бисте омогућили брзо бирање, укључите дозволу за Контакте."</string>
-    <string name="permission_no_calllog" msgid="4053705651238775784">"Да бисте видели евиденцију позива, укључите дозволу за Телефон."</string>
-    <string name="permission_no_search" msgid="2424710404207193826">"Да бисте претражили контакте, укључите дозволе за Контакте."</string>
-    <string name="permission_place_call" msgid="8686908130349369423">"Да бисте упутили позив, укључите дозволу за Телефон."</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Апликација Телефон нема дозволу за уписивање у системска подешавања."</string>
-    <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Блокирано"</string>
-    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Блокирај/пријави као непожељан"</string>
-    <string name="call_log_action_block_number" msgid="5048188386501998865">"Блокирај број"</string>
-    <string name="call_log_action_remove_spam" msgid="2045319806318398403">"Није непожељан"</string>
-    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Деблокирај број"</string>
-    <string name="spam_number_call_log_label" msgid="2678431398326811131">"Непожељан"</string>
-    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> је офлајн и не можете да га/је контактирате"</string>
-    <string name="about_phone_label" msgid="582991354677973731">"Основни подаци"</string>
-    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Транскрипт је направио Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google прави транскрипт…"</string>
-    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Транскрипт није доступан."</string>
-    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Транскрипт није доступан. Није подржан језик."</string>
-    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Транскрипт није доступан. Није откривен говор."</string>
-    <string name="view_conversation" msgid="7895904782094119702">"Прикажи"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"Позив је избрисан. Прегледајте и избришите прилоге дељене током овог позива у Messages-у."</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Позиви су избрисани. Прегледајте и избришите прилоге дељене током позива у Messages-у."</string>
+  <string name="respond_via_sms_setting_title">Брзи одговори</string>
+  <string name="call_settings_label">Позиви</string>
+  <string name="manage_blocked_numbers_label">Блокирани бројеви</string>
+  <string name="voicemail_settings_label">Говорна пошта</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">Блокирање позива је привремено искључено</string>
+  <string name="blocked_numbers_disabled_emergency_desc">Блокирање позива је онемогућено зато што сте контактирали службе за помоћ у хитним случајевима са овог телефона у последњих 48 сати. Аутоматски ће бити поново омогућено када истекне период од 48 сати.</string>
+  <string name="import_send_to_voicemail_numbers_label">Увези бројеве</string>
+  <string name="blocked_call_settings_import_description">Раније сте означили неке позиваоце које аутоматски треба преусмерити на говорну пошту преко других апликација.</string>
+  <string name="blocked_call_settings_view_numbers_button">Прикажи бројеве</string>
+  <string name="blocked_call_settings_import_button">Увeзи</string>
+  <string name="description_blocked_number_list_delete">Деблокирај број</string>
+  <string name="addBlockedNumber">Додај број</string>
+  <string name="block_number_footer_message_vvm">Позиви са ових бројева ће бити блокирани и поруке говорне поште ће се аутоматски брисати.</string>
+  <string name="block_number_footer_message_no_vvm">Позиви са ових бројева ће бити блокирани, али позиваоци са ових бројева ће и даље моћи да вам остављају поруке говорне поште.</string>
+  <string name="block_list">Блокирани бројеви</string>
+  <string name="alreadyBlocked">%1$s је већ блокиран.</string>
+  <string name="phone_account_settings_label">Налози за позивање</string>
+  <string name="permission_no_speeddial">Да бисте омогућили брзо бирање, укључите дозволу за Контакте.</string>
+  <string name="permission_no_calllog">Да бисте видели евиденцију позива, укључите дозволу за Телефон.</string>
+  <string name="permission_no_search">Да бисте претражили контакте, укључите дозволе за Контакте.</string>
+  <string name="permission_place_call">Да бисте упутили позив, укључите дозволу за Телефон.</string>
+  <string name="toast_cannot_write_system_settings">Апликација Телефон нема дозволу за уписивање у системска подешавања.</string>
+  <string name="blocked_number_call_log_label">Блокирано</string>
+  <string name="call_log_action_block_report_number">Блокирај/пријави као непожељан</string>
+  <string name="call_log_action_block_number">Блокирај број</string>
+  <string name="call_log_action_remove_spam">Није непожељан</string>
+  <string name="call_log_action_unblock_number">Деблокирај број</string>
+  <string name="spam_number_call_log_label">Непожељан</string>
+  <string name="call_composer_connection_failed">%1$s је офлајн и не можете да га/је контактирате</string>
+  <string name="about_phone_label">Основни подаци</string>
+  <string name="voicemail_transcription_branding_text">Транскрипт је направио Google</string>
+  <string name="voicemail_transcription_in_progress">Транскрибује се…</string>
+  <string name="voicemail_transcription_failed">Транскрипт није доступан.</string>
+  <string name="voicemail_transcription_failed_language_not_supported">Транскрипт није доступан. Није подржан језик.</string>
+  <string name="voicemail_transcription_failed_no_speech">Транскрипт није доступан. Није откривен говор.</string>
+  <string name="voicemail_donation_promo_title">Желите ли да нам помогнете да побољшамо тачност транскрипције?</string>
+  <string name="voicemail_donation_promo_content">Дозволите Google-у да прегледа ову и будуће говорне поруке са транскриптима. Чуваће се анонимно. Подешавања увек можете да промените. %1$s</string>
+  <string name="voicemail_donation_promo_opt_in">Да, омогући</string>
+  <string name="voicemail_donation_promo_opt_out">Не, хвала</string>
+  <string name="voicemail_transcription_rating">Оцените квалитет транскрипције</string>
+  <string name="voicemail_transcription_rating_thanks">Хвала вам на оцени квалитета</string>
+  <string name="description_rating_good">Означите да је добро</string>
+  <string name="description_rating_bad">Означите да је лоше</string>
+  <string name="view_conversation">Прикажи</string>
+  <string name="ec_data_deleted">Позив је избрисан. Прегледајте и избришите прилоге дељене током овог позива у Messages-у.</string>
+  <string name="multiple_ec_data_deleted">Позиви су избрисани. Прегледајте и избришите прилоге дељене током позива у Messages-у.</string>
 </resources>

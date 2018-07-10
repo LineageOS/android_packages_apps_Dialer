@@ -1,31 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_details" msgid="5063658079729839605">"Podrobnosti hovoru"</string>
-    <string name="delete" msgid="2141020674108406737">"Odstrániť"</string>
-    <string name="call_details_copy_number" msgid="4265479408878990796">"Kopírovať číslo"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"Pred volaním upraviť číslo"</string>
-    <string name="call_details_report_call_id" msgid="8857541295264421217">"Nahlásiť nesprávne číslo"</string>
-    <string name="sent_a_photo" msgid="3978670717462979502">"Bola odoslaná fotka"</string>
-    <string name="received_a_photo" msgid="3528953225576480505">"Bola prijatá fotka"</string>
-    <string name="message_in_quotes" msgid="3270574830115828365">"„<xliff:g id="MESSAGE">%1$s</xliff:g>“"</string>
-    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"Nahlásenie nesprávneho čísla"</string>
-    <string name="report_caller_id_failed" msgid="1471904930106125702">"Číslo sa nepodarilo nahlásiť"</string>
-    <string name="report_caller_id_toast" msgid="5494870403429969932">"Číslo bolo nahlásené"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">Podrobnosti hovoru</string>
+  <string name="delete">Odstrániť</string>
+  <string name="call_details_copy_number">Kopírovať číslo</string>
+  <string name="call_details_edit_number">Pred volaním upraviť číslo</string>
+  <string name="call_details_report_call_id">Nahlásiť nesprávne číslo</string>
+  <string name="sent_a_photo">Bola odoslaná fotka</string>
+  <string name="received_a_photo">Bola prijatá fotka</string>
+  <string name="message_in_quotes">„%1$s“</string>
+  <string name="report_caller_id_dialog_title">Nahlásenie nesprávneho čísla</string>
+  <string name="report_caller_id_failed">Číslo sa nepodarilo nahlásiť</string>
+  <string name="report_caller_id_toast">Číslo bolo nahlásené</string>
+  <string name="assisted_dialing_country_code_entry">Asistované vytáčanie: bola použitá predvoľba krajiny +%1$s</string>
+  <string name="assisted_dialing_country_code_entry_failure">Bolo použité asistované vytáčanie</string>
+  <string name="rtt_transcript_not_available">Prepisy sú k dispozícii len pri hovoroch s odosielaním správ</string>
+  <string name="rtt_transcript_link">Zobraziť prepis</string>
 </resources>

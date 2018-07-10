@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Alle vermoedelijke spamoproepen filteren?</string>
+  <string name="spam_blocking_promo_text">Je wordt niet meer gestoord door oproepen zoals de oproep die je net hebt geblokkeerd</string>
+  <string name="spam_blocking_promo_action_filter_spam">Spam filteren</string>
+  <string name="spam_blocking_promo_action_dismiss">Sluiten</string>
+  <string name="spam_blocking_setting_prompt">Instellingen</string>
+  <string name="spam_blocking_settings_enable_error_text">Probleem bij inschakelen van spamfilters</string>
+  <string name="spam_blocking_settings_disable_error_text">Probleem bij uitschakelen van spamfilters</string>
+  <string name="spam_blocking_settings_enable_complete_text">Spamfilter ingeschakeld</string>
+  <string name="spam_blocking_settings_disable_complete_text">Spamfilter uitgeschakeld</string>
+</resources>

@@ -1,24 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="nearby_places" msgid="275117539511113867">"సమీప స్థలాలు"</string>
-    <string name="search_location_permission" msgid="5893183045324252816">"మీ సమీపంలోని స్థలాల యొక్క సంప్రదింపు సమాచారం పొందడానికి, మీ స్థానానికి యాక్సెస్‌ను అనుమతించండి."</string>
-    <string name="nearby_places_allow" msgid="4060507469206871903">"అనుమతించు"</string>
-    <string name="nearby_places_dismiss" msgid="3255977972553076907">"విస్మరించు"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="nearby_places">సమీప స్థలాలు</string>
+  <string name="search_location_permission">మీ సమీపంలోని స్థలాల యొక్క సంప్రదింపు సమాచారం పొందడానికి, మీ స్థానానికి యాక్సెస్‌ను అనుమతించండి.</string>
+  <string name="nearby_places_allow">అనుమతించు</string>
+  <string name="nearby_places_dismiss">విస్మరించు</string>
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Nem indíthat hívást telefonálási engedély nélkül</string>
+  <string name="pre_call_select_phone_account">SIM-kártya kiválasztása a híváshoz</string>
+  <string name="pre_call_select_phone_account_remember">Választás megjegyzése</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Nem áll rendelkezésre a következő használatakor: %1$s</string>
+</resources>

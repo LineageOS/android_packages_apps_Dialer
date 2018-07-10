@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Marcatge assistit</string>
+  <string name="assisted_dialing_setting_summary">Predigues i afegeix un codi de país en les trucades des de l\'estranger</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Detectat automàticament • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Detectat automàticament</string>
+  <string name="assisted_dialing_setting_cc_category_title">País de residència</string>
+  <string name="assisted_dialing_setting_cc_title">País de residència predeterminat</string>
+</resources>

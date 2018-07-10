@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Ungependa kuzuia nambari %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Hutapokea simu wala SMS kutoka kwa nambari hii tena.</string>
+  <string name="block_number_ok">ZUIA</string>
+  <string name="unblock_number_ok">ACHA KUZUIA</string>
+  <string name="block_report_number_alert_title">Ungependa kuzuia nambari %1$s?</string>
+  <string name="block_report_number_alert_details">Hutapokea tena simu kutoka kwenye nambari hii.</string>
+  <string name="block_number_alert_details">%1$s Simu hii itaripotiwa kuwa ni taka.</string>
+  <string name="unblock_number_alert_details">Kizuizi kitaondolewa; nambari itaripotiwa kuwa si taka. Simu hazitajumuishwa miongoni mwa taka tena.</string>
+  <string name="unblock_report_number_alert_title">Ungependa kuacha kuzuia nambari %1$s?</string>
+  <string name="report_not_spam_alert_button">Ripoti</string>
+  <string name="report_not_spam_alert_title">Je, ungependa kuripoti tatizo?</string>
+  <string name="report_not_spam_alert_details">Simu kutoka %1$s hazitajumuishwa miongoni mwa taka tena.</string>
+  <string name="checkbox_report_as_spam_action">Ripoti kuwa hii ni simu taka</string>
+  <string name="block_number_failed_toast">Hitilafu imetokea wakati wa kuzuia nambari hii</string>
+  <string name="unblock_number_failed_toast">Hitilafu imetokea wakati wa kuondolea nambari hii kizuizi</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">การโทรด้วยเสียง</string>
+  <string name="video_call">วิดีโอคอล</string>
+  <string name="add_to_contacts">เพิ่มรายชื่อติดต่อ</string>
+  <string name="send_a_message">ข้อความ</string>
+  <string name="not_spam">ไม่ใช่สแปม</string>
+  <string name="block_number">บล็อก</string>
+  <string name="unblock_number">เลิกบล็อก</string>
+  <string name="block_and_optionally_report_spam">บล็อก/รายงานสแปม</string>
+  <string name="copy_number">คัดลอกหมายเลข</string>
+</resources>

@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Maandishi yamenakiliwa"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Pia simu <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Piga simu nyumbani"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Pigia simu ya mkononi"</string>
-    <string name="call_work" msgid="6040550697395300892">"Piga simu kazini"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Ipigie simu kipepesi cha kazini"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Ipigie simu kipepesi cha nyumbani"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Ipigie peja simu"</string>
-    <string name="call_other" msgid="5536385588712587235">"Piga simu"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Mpigie simu aliyepiga"</string>
-    <string name="call_car" msgid="3197417098027764954">"Piga simu ya gari"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Pigia simu kuu ya kampuni"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Piga simu kwa ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Piga simu kuu"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Ipigie kipepesi simu"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Piga simu redioni"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Piga simu kwa teleksi"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Piga simu TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Ipigie simu ya mkononi ya kazini"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Ipigie peja ya kazini"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Piga simu <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Piga simu kwa MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Tumia ujumbe wa maandishi kwa <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Tuma ujumbe wa maandishi nyumbani"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Tumia simu ya mkononi ujumbe wa maandishi"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Tuma ujumbe wa maandishi kazini"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Tumia ujumbe kwenda kipepesi cha kazini"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Tuma ujumbe kwenda kipepesi ch nyumbani"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Tumia peja ujumbe wa maandishi"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Tuma ujumbe wa maandishi"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Tuma ujumbe wa maandishi kwa aliyepiga"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Tuma ujumbe kwa gari"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Tuma ujumbe wa maandishi kwenda simu kuu ya kampuni"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Tumia ISDN ujumbe wa maandishi"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Tumia simu kuu ujumbe wa maandishi"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Tuma ujumbe kwenda katika kipepesi"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Tuma ujumbe wa maandishi redioni"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Tumia teleksi ujumbe wa maandishi"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Tumia TTY/TDD ujumbe wa maandishi"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Itumie simu ya mkononi ya kazini ujumbe"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Itumie peja ya kazini ya kazini ujumbe"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Tuma ujumbe wa maandishi kwa <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Tumia MMS ujmbe wa maandishi"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Futa unaowasiliana nao mara kwa mara?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Utafuta orodha ya unaowasiliana nao mara kwa mara katika programu za Anwani na Simu, na ulazimishe programu za barua pepe zitambue mapendeleo yako ya anwani kutoka mwanzo."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Inafuta unaowasiliana nao mara kwa mara..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Inapatikana"</string>
-    <string name="status_away" msgid="2298688367552893953">"Mbali"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Ana shughuli"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Anwani"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Mapendekezo Maarufu"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Nyingineyo"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Saraka"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Anwani za kazi"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Anwani zote"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Mapendekezo"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Mimi"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Hakuna jina)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Angalia maelezo ya mawasiliano"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Anwani zote zilizo na nambari ya simu"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Anwani za watu wa kazini"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Ona sasisho"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Kwenye kifaa tu, haijasawazishwa"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Jina"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Lakabu"</string>
-    <string name="full_name" msgid="648186563998465740">"Jina"</string>
-    <string name="name_given" msgid="5096576006314820536">"Jina la kwanza"</string>
-    <string name="name_family" msgid="6646235805198547467">"Jina la mwisho"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Herufi za kwanza za jina"</string>
-    <string name="name_middle" msgid="703755205331582769">"Jina la kati"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Herufi za mwisho za jina"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Jina la kifonetiki"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Anza na jina kifonetiki"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Jina la kati kifonetiki"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Jina la mwisho kifonetiki"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Simu"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Tuma barua pepe"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Anwani"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Ujumbe wa Papo Hapo"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Shirika"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Uhusiano"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Tarehe maalum"</string>
-    <string name="sms" msgid="7574344928185328095">"Ujumbe wa maandishi"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Anwani"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Kampuni"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Jina"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Madokezo"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Tovuti"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Vikundi"</string>
-    <string name="email_home" msgid="889830029388962171">"Tuma barua pepe nyumbani"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Tuma barua pepe kwenye simu ya mkononi"</string>
-    <string name="email_work" msgid="4223487303344613528">"Tuma barua pepe kazini"</string>
-    <string name="email_other" msgid="4246411900126012062">"Tuma barua pepe"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Tuma barua pepe kwenye <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Tuma barua pepe"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Barabara"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Mji"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Jimbo"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Msimbo wa posta"</string>
-    <string name="postal_country" msgid="232670707458768148">"Nchi"</string>
-    <string name="map_home" msgid="4181131107392126938">"Tazama anwani ya nyumbani"</string>
-    <string name="map_work" msgid="5723471185992684400">"Tazama anwani ya kazini"</string>
-    <string name="map_other" msgid="2253764780863500516">"Tazama anwani"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Tazama anwani ya <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Piga gumzo kutumia AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Piga gumzo kutumia Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Piga gumzo kutumia Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Piga gumzo kutumia Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Piga gumzo kutumia QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Piga gumzo kutumia Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Piga gumzo kutumia ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Piga gumzo kutumia Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Gumzo"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Anwani zote"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Anwani kwenye <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Anwani katika mwoneko maalum"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Anwani moja"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Panga kulingana na"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Jina la kwanza"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Jina la mwisho"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Mpangilio wa majina"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Anza kwa jina la kwanza"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Anza kwa jina la mwisho"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Futa za mara kwa mara"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"acha kutafuta"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Futa utafutaji"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Akaunti"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Tumia hii kwa simu wakati wote"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Piga simu ukitumia"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Piga simu inayoambatana na dokezo"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Andika dokezo litakaloambatana na simu utakayopiga ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"TUMA na UPIGE SIMU"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Kichupo cha <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> Kichupo cha <xliff:g id="TITLE_2">%1$s</xliff:g>. Vipengee <xliff:g id="COUNT_3">%2$d</xliff:g> havijasomwa. </item>
-      <item quantity="one"> Kichupo cha <xliff:g id="TITLE_0">%1$s</xliff:g>. Kipengee <xliff:g id="COUNT_1">%2$d</xliff:g> hakijasomwa. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Simu ya video"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Shiriki na upige simu"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Pia simu %s</string>
+  <string name="call_home">Piga simu nyumbani</string>
+  <string name="call_mobile">Pigia simu ya mkononi</string>
+  <string name="call_work">Piga simu kazini</string>
+  <string name="call_fax_work">Ipigie simu kipepesi cha kazini</string>
+  <string name="call_fax_home">Ipigie simu kipepesi cha nyumbani</string>
+  <string name="call_pager">Ipigie peja simu</string>
+  <string name="call_other">Piga simu</string>
+  <string name="call_callback">Mpigie simu aliyepiga</string>
+  <string name="call_car">Piga simu ya gari</string>
+  <string name="call_company_main">Pigia simu kuu ya kampuni</string>
+  <string name="call_isdn">Piga simu kwa ISDN</string>
+  <string name="call_main">Piga simu kuu</string>
+  <string name="call_other_fax">Ipigie kipepesi simu</string>
+  <string name="call_radio">Piga simu redioni</string>
+  <string name="call_telex">Piga simu kwa teleksi</string>
+  <string name="call_tty_tdd">Piga simu TTY/TDD</string>
+  <string name="call_work_mobile">Ipigie simu ya mkononi ya kazini</string>
+  <string name="call_work_pager">Ipigie peja ya kazini</string>
+  <string name="call_assistant">Piga simu %s</string>
+  <string name="call_mms">Piga simu kwa MMS</string>
+  <string name="sms_custom">Tumia ujumbe wa maandishi kwa %s</string>
+  <string name="sms_home">Tuma ujumbe wa maandishi nyumbani</string>
+  <string name="sms_mobile">Tumia simu ya mkononi ujumbe wa maandishi</string>
+  <string name="sms_work">Tuma ujumbe wa maandishi kazini</string>
+  <string name="sms_fax_work">Tumia ujumbe kwenda kipepesi cha kazini</string>
+  <string name="sms_fax_home">Tuma ujumbe kwenda kipepesi ch nyumbani</string>
+  <string name="sms_pager">Tumia peja ujumbe wa maandishi</string>
+  <string name="sms_other">Tuma ujumbe wa maandishi</string>
+  <string name="sms_callback">Tuma ujumbe wa maandishi kwa aliyepiga</string>
+  <string name="sms_car">Tuma ujumbe kwa gari</string>
+  <string name="sms_company_main">Tuma ujumbe wa maandishi kwenda simu kuu ya kampuni</string>
+  <string name="sms_isdn">Tumia ISDN ujumbe wa maandishi</string>
+  <string name="sms_main">Tumia simu kuu ujumbe wa maandishi</string>
+  <string name="sms_other_fax">Tuma ujumbe kwenda katika kipepesi</string>
+  <string name="sms_radio">Tuma ujumbe wa maandishi redioni</string>
+  <string name="sms_telex">Tumia teleksi ujumbe wa maandishi</string>
+  <string name="sms_tty_tdd">Tumia TTY/TDD ujumbe wa maandishi</string>
+  <string name="sms_work_mobile">Itumie simu ya mkononi ya kazini ujumbe</string>
+  <string name="sms_work_pager">Itumie peja ya kazini ya kazini ujumbe</string>
+  <string name="sms_assistant">Tuma ujumbe wa maandishi kwa %s</string>
+  <string name="sms_mms">Tumia MMS ujmbe wa maandishi</string>
+  <string name="clearFrequentsConfirmation_title">Futa unaowasiliana nao mara kwa mara?</string>
+  <string name="clearFrequentsConfirmation">Utafuta orodha ya unaowasiliana nao mara kwa mara katika programu za Anwani na Simu, na ulazimishe programu za barua pepe zitambue mapendeleo yako ya anwani kutoka mwanzo.</string>
+  <string name="clearFrequentsProgress_title">Inafuta unaowasiliana nao mara kwa mara...</string>
+  <string name="status_available">Inapatikana</string>
+  <string name="status_away">Mbali</string>
+  <string name="status_busy">Ana shughuli</string>
+  <string name="contactsList">Anwani</string>
+  <string name="contact_suggestions">Mapendekezo Maarufu</string>
+  <string name="local_invisible_directory">Nyingineyo</string>
+  <string name="directory_search_label">Saraka</string>
+  <string name="directory_search_label_work">Anwani za kazi</string>
+  <string name="local_search_label">Anwani zote</string>
+  <string name="local_suggestions_search_label">Mapendekezo</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mimi</string>
+  <string name="missing_name">(Hakuna jina)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Angalia maelezo ya mawasiliano</string>
+  <string name="list_filter_phones">Anwani zote zilizo na nambari ya simu</string>
+  <string name="list_filter_phones_work">Anwani za watu wa kazini</string>
+  <string name="view_updates_from_group">Ona sasisho</string>
+  <string name="account_phone">Kwenye kifaa tu, haijasawazishwa</string>
+  <string name="nameLabelsGroup">Jina</string>
+  <string name="nicknameLabelsGroup">Lakabu</string>
+  <string name="full_name">Jina</string>
+  <string name="name_given">Jina la kwanza</string>
+  <string name="name_family">Jina la mwisho</string>
+  <string name="name_prefix">Herufi za kwanza za jina</string>
+  <string name="name_middle">Jina la kati</string>
+  <string name="name_suffix">Herufi za mwisho za jina</string>
+  <string name="name_phonetic">Jina la kifonetiki</string>
+  <string name="name_phonetic_given">Anza na jina kifonetiki</string>
+  <string name="name_phonetic_middle">Jina la kati kifonetiki</string>
+  <string name="name_phonetic_family">Jina la mwisho kifonetiki</string>
+  <string name="phoneLabelsGroup">Simu</string>
+  <string name="emailLabelsGroup">Tuma barua pepe</string>
+  <string name="postalLabelsGroup">Anwani</string>
+  <string name="imLabelsGroup">Ujumbe wa Papo Hapo</string>
+  <string name="organizationLabelsGroup">Shirika</string>
+  <string name="relationLabelsGroup">Uhusiano</string>
+  <string name="eventLabelsGroup">Tarehe maalum</string>
+  <string name="sms">Ujumbe wa maandishi</string>
+  <string name="postal_address">Anwani</string>
+  <string name="ghostData_company">Kampuni</string>
+  <string name="ghostData_title">Jina</string>
+  <string name="label_notes">Madokezo</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Tovuti</string>
+  <string name="groupsLabel">Vikundi</string>
+  <string name="email_home">Tuma barua pepe nyumbani</string>
+  <string name="email_mobile">Tuma barua pepe kwenye simu ya mkononi</string>
+  <string name="email_work">Tuma barua pepe kazini</string>
+  <string name="email_other">Tuma barua pepe</string>
+  <string name="email_custom">Tuma barua pepe kwenye %s</string>
+  <string name="email">Tuma barua pepe</string>
+  <string name="postal_street">Barabara</string>
+  <string name="postal_city">Mji</string>
+  <string name="postal_region">Jimbo</string>
+  <string name="postal_postcode">Msimbo wa posta</string>
+  <string name="postal_country">Nchi</string>
+  <string name="map_home">Tazama anwani ya nyumbani</string>
+  <string name="map_work">Tazama anwani ya kazini</string>
+  <string name="map_other">Tazama anwani</string>
+  <string name="map_custom">Tazama anwani ya %s</string>
+  <string name="chat_aim">Piga gumzo kutumia AIM</string>
+  <string name="chat_msn">Piga gumzo kutumia Windows Live</string>
+  <string name="chat_yahoo">Piga gumzo kutumia Yahoo</string>
+  <string name="chat_skype">Piga gumzo kutumia Skype</string>
+  <string name="chat_qq">Piga gumzo kutumia QQ</string>
+  <string name="chat_gtalk">Piga gumzo kutumia Google Talk</string>
+  <string name="chat_icq">Piga gumzo kutumia ICQ</string>
+  <string name="chat_jabber">Piga gumzo kutumia Jabber</string>
+  <string name="chat">Gumzo</string>
+  <string name="list_filter_all_accounts">Anwani zote</string>
+  <string name="listAllContactsInAccount">Anwani kwenye %s</string>
+  <string name="listCustomView">Anwani katika mwoneko maalum</string>
+  <string name="listSingleContact">Anwani moja</string>
+  <string name="display_options_sort_list_by">Panga kulingana na</string>
+  <string name="display_options_sort_by_given_name">Jina la kwanza</string>
+  <string name="display_options_sort_by_family_name">Jina la mwisho</string>
+  <string name="display_options_view_names_as">Mpangilio wa majina</string>
+  <string name="display_options_view_given_name_first">Anza kwa jina la kwanza</string>
+  <string name="display_options_view_family_name_first">Anza kwa jina la mwisho</string>
+  <string name="menu_clear_frequents">Futa za mara kwa mara</string>
+  <string name="action_menu_back_from_search">acha kutafuta</string>
+  <string name="description_clear_search">Futa utafutaji</string>
+  <string name="select_account_dialog_title">Akaunti</string>
+  <string name="set_default_account">Tumia hii kwa simu wakati wote</string>
+  <string name="select_phone_account_for_calls">Chagua SIM kwa ajili ya simu hii</string>
+  <string name="select_phone_account_for_calls_remember">Kumbuka chaguo hili</string>
+  <string name="call_with_a_note">Piga simu inayoambatana na dokezo</string>
+  <string name="call_subject_hint">Andika dokezo litakaloambatana na simu utakayopiga ...</string>
+  <string name="send_and_call_button">TUMA na UPIGE SIMU</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Kichupo cha %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Kichupo cha %1$s. Kipengee %2$d hakijasomwa. </item>
+    <item quantity="other"> Kichupo cha %1$s. Vipengee %2$d havijasomwa. </item>
+  </plurals>
+  <string name="description_search_video_call">Simu ya video</string>
+  <string name="description_search_call_and_share">Shiriki na upige simu</string>
 </resources>

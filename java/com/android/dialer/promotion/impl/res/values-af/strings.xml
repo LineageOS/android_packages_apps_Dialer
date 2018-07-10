@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Intydse teksboodskappe binne \'n oproep</string>
+  <string name="rtt_promotion_details">RTT help bellers wat doof is, gehoorgestremd is, \'n spraakgebrek het
+    of meer as net spraak benodig. RTT-boodskaptranskripsies word op jou toestel gestoor
+    in die oproepgeskiedenis. %1$s</string>
+  <string name="duo_disclosure_title">Maak video-oproepe met Duo</string>
+  <string name="duo_disclosure_details">Met Google Duo-video-oproepe kan jy van aangesig tot aangesig met vriende en familie klets. Datakoste kan van toepassing wees. %1$s</string>
+</resources>

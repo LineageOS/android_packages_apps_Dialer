@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">通話內的即時文字訊息</string>
+  <string name="rtt_promotion_details">即時文字訊息功能可為以下類型的來電者提供協助：聽障人士、聽力受損者、語言障礙者，或需要語音服務以外的使用者。系統會將即時文字訊息的留言轉錄儲存在裝置的通話記錄中。%1$s</string>
+  <string name="duo_disclosure_title">使用 Duo 進行視訊通話</string>
+  <string name="duo_disclosure_details">你可以使用 Google Duo 視訊通話服務與親友面對面聊天。使用本服務可能需支付數據傳輸費用。%1$s</string>
+</resources>

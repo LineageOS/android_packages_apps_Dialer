@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Телефон"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Төмөнкү номер жөнөтүлсүнбү?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Ооба"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Жок"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Терилүүдө"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Учурдагы чалуу"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Учурдагы видео чалуу"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Учурдагы видео чалуу ‑ видео тындырылды"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Учурда болуп жаткан чалуу (жумуш боюнча)"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Учурдагы <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Кирүүчү <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi чалуу"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"жумуш боюнча Wi-Fi чалуу"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Күтүлүүдө"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Сүрөтү бар кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Билдирүүсү бар кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Жайгашкан жери бар кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Сүрөт менен билдирүүсү бар кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Сүрөт жана жайгашкан жери бар кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Билдирүү менен жайгашкан жери бар кирүүчү чалуу"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Сүрөт, билдирүү жана жайгашкан жери бар чалуу"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Тиркемеси бар кирүүчү чалуу"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Маанилүү кирүүчү чалуу"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Сүрөтү бар маанилүү кирүүчү чалуу"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Билдирүүсү бар маанилүү кирүүчү чалуу"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Жайгашкан жери бар маанилүү кирүүчү чалуу"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Сүрөт жана билдирүүсү бар маанилүү кирүүчү чалуу"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Сүрөт жана жайгашкан жери бар маанилүү чалуу"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Билдирүү жана жайгашкан жери бар маанилүү чалуу"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Сүрөт, билдирүү жана жайгашкан жер бар маанилүү чалуу"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Тиркемелери бар маанилүү кирүүчү чалуу"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Жумуш боюнча келип жаткан чалуу"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Келип жаткан чалуу спам окшойт"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Келип жаткан видео сурамы"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Жооп берүү"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Телефонду коюу"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Видео"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Кабыл алуу"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Четке кагуу"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Катуу сүйлөткүчтү күйгүзүү"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Катуу сүйлөткүчтү өчүрүү"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Башка түзмөктө сүйлөшүп жатасыз"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Башка түзмөктөгү видео чалууда да катышып жатасыз"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Чалууну кабыл алуу"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Видео чалууну кабыл алуу"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Кызмат колдоого алынбайт."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"купуя режимине өтүү"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Конференц-чалууну башкаруу"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Куткаруучулардын номуру"</string>
-    <string name="child_number" msgid="3398257437107259682">"<xliff:g id="CHILD_NUMBER">%s</xliff:g> аркылуу"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"SIM-карта жок же анда ката кетти"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Чалууну бүтүрүү"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Конференц-чалуу"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Чалууда"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Мобилдик дайындарды пайдалануу менен чалууну улантууда…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi-Fi тармагына туташа албай койдук"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Видео чалуу мобилдик тармак аркылуу аткарылат. Стандарттык тариф боюнча акы алынышы мүмкүн."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Экинчи көрсөтүлбөсүн"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Төмөнкү номер жөнөтүлсүнбү?\n</string>
+  <string name="pause_prompt_yes">Ооба</string>
+  <string name="pause_prompt_no">Жок</string>
+  <string name="notification_dialing">Терилүүдө</string>
+  <string name="notification_ongoing_call">Учурдагы чалуу</string>
+  <string name="notification_ongoing_video_call">Учурдагы видео чалуу</string>
+  <string name="notification_ongoing_paused_video_call">Учурдагы видео чалуу ‑ видео тындырылды</string>
+  <string name="notification_ongoing_work_call">Учурда болуп жаткан чалуу (жумуш боюнча)</string>
+  <string name="notification_ongoing_call_wifi_template">Учурдагы %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Кирүүчү %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi чалуу</string>
+  <string name="notification_call_wifi_work_brand">жумуш боюнча Wi-Fi чалуу</string>
+  <string name="notification_on_hold">Күтүлүүдө</string>
+  <string name="notification_incoming_call">Кирүүчү чалуу</string>
+  <string name="notification_incoming_video_call">Келип жаткан видео чалуу</string>
+  <string name="notification_incoming_call_mutli_sim">%1$s картасы аркылуу кириш чалуу</string>
+  <string name="notification_incoming_call_with_photo">Сүрөтү бар кирүүчү чалуу</string>
+  <string name="notification_incoming_call_with_message">Билдирүүсү бар кирүүчү чалуу</string>
+  <string name="notification_incoming_call_with_location">Жайгашкан жери бар кирүүчү чалуу</string>
+  <string name="notification_incoming_call_with_photo_message">Сүрөт менен билдирүүсү бар кирүүчү чалуу</string>
+  <string name="notification_incoming_call_with_photo_location">Сүрөт жана жайгашкан жери бар кирүүчү чалуу</string>
+  <string name="notification_incoming_call_with_message_location">Билдирүү менен жайгашкан жери бар кирүүчү чалуу</string>
+  <string name="notification_incoming_call_with_photo_message_location">Сүрөт, билдирүү жана жайгашкан жери бар чалуу</string>
+  <string name="notification_incoming_call_attachments">Тиркемеси бар кирүүчү чалуу</string>
+  <string name="important_notification_incoming_call">Маанилүү кирүүчү чалуу</string>
+  <string name="important_notification_incoming_call_with_photo">Сүрөтү бар маанилүү кирүүчү чалуу</string>
+  <string name="important_notification_incoming_call_with_message">Билдирүүсү бар маанилүү кирүүчү чалуу</string>
+  <string name="important_notification_incoming_call_with_location">Жайгашкан жери бар маанилүү кирүүчү чалуу</string>
+  <string name="important_notification_incoming_call_with_photo_message">Сүрөт жана билдирүүсү бар маанилүү кирүүчү чалуу</string>
+  <string name="important_notification_incoming_call_with_photo_location">Сүрөт жана жайгашкан жери бар маанилүү чалуу</string>
+  <string name="important_notification_incoming_call_with_message_location">Билдирүү жана жайгашкан жери бар маанилүү чалуу</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Сүрөт, билдирүү жана жайгашкан жер бар маанилүү чалуу</string>
+  <string name="important_notification_incoming_call_attachments">Тиркемелери бар маанилүү кирүүчү чалуу</string>
+  <string name="notification_incoming_work_call">Жумуш боюнча келип жаткан чалуу</string>
+  <string name="notification_incoming_spam_call">Келип жаткан чалуу спам окшойт</string>
+  <string name="notification_requesting_video_call">Келип жаткан видео сурамы</string>
+  <string name="notification_action_answer">Жооп берүү</string>
+  <string name="notification_action_end_call">Телефонду коюу</string>
+  <string name="notification_action_answer_video">Видео</string>
+  <string name="notification_action_accept">Кабыл алуу</string>
+  <string name="notification_action_dismiss">Четке кагуу</string>
+  <string name="notification_action_speaker_on">Катуу сүйлөткүчтү күйгүзүү</string>
+  <string name="notification_action_speaker_off">Катуу сүйлөткүчтү өчүрүү</string>
+  <string name="notification_external_call">Башка түзмөктө сүйлөшүп жатасыз</string>
+  <string name="notification_external_video_call">Башка түзмөктөгү видео чалууда да катышып жатасыз</string>
+  <string name="notification_take_call">Чалууну кабыл алуу</string>
+  <string name="notification_take_video_call">Видео чалууну кабыл алуу</string>
+  <string name="incall_error_supp_service_unknown">Кызмат колдоого алынбайт.</string>
+  <string name="goPrivate">купуя режимине өтүү</string>
+  <string name="manageConferenceLabel">Конференц-чалууну башкаруу</string>
+  <string name="child_number">%s аркылуу</string>
+  <string name="callFailed_simError">SIM-карта жок же анда ката кетти</string>
+  <string name="conference_caller_disconnect_content_description">Чалууну бүтүрүү</string>
+  <string name="conference_call_name">Конференц-чалуу</string>
+  <string name="generic_conference_call_name">Чалууда</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Мобилдик дайындарды пайдалануу менен чалууну улантууда…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Wi-Fi тармагына туташа албай койдук</string>
+  <string name="video_call_lte_to_wifi_failed_message">Видео чалуу мобилдик тармак аркылуу аткарылат. Стандарттык тариф боюнча акы алынышы мүмкүн.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Экинчи көрсөтүлбөсүн</string>
+  <string name="bubble_return_to_call">Чалууга кайтуу</string>
+  <string name="rtt_request_dialog_title">RTT чалууга кошуласызбы?</string>
+  <string name="rtt_request_dialog_details">%1$s үн чалууңуздун убагында SMS/MMS жазышууну пайдалангысы келип жатат.</string>
+  <string name="rtt_request_dialog_more_information">RTT функциясы угуу жана сүйлөө жөндөмдүүлүгү бузулган адамдарга арналат.</string>
+  <string name="rtt_button_decline_request">Жок, рахмат</string>
+  <string name="rtt_button_accept_request">RTT чалууга кошулуу</string>
 </resources>

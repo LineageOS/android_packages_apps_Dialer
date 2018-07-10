@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">មិន​ស្គាល់</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">ទូរស័ព្ទសាធារណៈ</string>
+  <string name="emergency_number">លេខអាសន្ន</string>
+  <string name="launcherActivityLabel">ទូរស័ព្ទ</string>
+  <string name="call">ហៅ​ទូរសព្ទ</string>
+  <string name="video_call_lte_to_wifi_handover_toast">កំពុង​បន្ត​ការហៅ​ទូរសព្ទ​ដោយ​ប្រើ Wi‑Fi…</string>
+  <string name="rtt_call_not_available_toast">RTT មិន​អាច​ប្រើ​បាន​សម្រាប់​ការហៅ​នេះ​ទេ</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

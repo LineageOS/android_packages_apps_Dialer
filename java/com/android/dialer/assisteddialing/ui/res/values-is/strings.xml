@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Aðstoð við hringingar</string>
+  <string name="assisted_dialing_setting_summary">Bæta réttum landskóða við hringd símtöl þegar þú ferðast erlendis</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Greint sjálfkrafa • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Greint sjálfkrafa</string>
+  <string name="assisted_dialing_setting_cc_category_title">Heimaland</string>
+  <string name="assisted_dialing_setting_cc_title">Sjálfgefið heimaland</string>
+</resources>

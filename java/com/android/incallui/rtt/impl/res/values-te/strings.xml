@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">ముందుకు కొనసాగించండి</string>
+  <string name="rtt_input_hint">సందేశాన్ని టైప్ చేయండి</string>
+  <string name="content_description_rtt_chat_avatar">అవతార్</string>
+  <string name="rtt_button_back">వెనుకకు</string>
+  <string name="rtt_status_banner_text">%s RTT కాల్‌లో చేరడానికి వేచి చూస్తోంది…</string>
+  <string name="rtt_transcript_advisory">మరొక పక్షం మీరు టైప్ చేయడాన్ని చూడగలరు. లిపి మార్పులు మీ పరికరంలోని కాల్ చరిత్రలో నిల్వ చేయబడతాయి.</string>
+</resources>

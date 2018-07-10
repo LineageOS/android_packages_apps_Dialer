@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">עזרה בחיוג</string>
+  <string name="assisted_dialing_setting_summary">חיזוי והוספה של קידומת החיוג למדינה כשמתקשרים מחו\"ל</string>
+  <string name="assisted_dialing_setting_cc_default_summary">זיהוי אוטומטי • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">זיהוי אוטומטי</string>
+  <string name="assisted_dialing_setting_cc_category_title">מדינת הבית</string>
+  <string name="assisted_dialing_setting_cc_title">ברירת המחדל למדינת הבית</string>
+</resources>

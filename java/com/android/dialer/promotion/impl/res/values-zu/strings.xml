@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Ukulayeza kombhalo wesikhathi sangempela ngaphakathi kwekholi</string>
+  <string name="rtt_promotion_details">I-RTT isiza abafonayo abayizithulu, abanenkinga yokuzwa, abanokukhubazeka
+    bokukhuluma, noma abadinga okungaphezulu kwezwi lilodwa. Okulotshiwe kokulayeza kwe-RTT kugcinwa kudivayisi yakho
+    kumlando wekholi. %1$s</string>
+  <string name="duo_disclosure_title">Yenza amakholi evidiyo nge-Duo</string>
+  <string name="duo_disclosure_details">Ukushaya kwevidiyo kwe-Google Duo kukuvumela ukuthi uxoxe nabangani nomndeni ubuso nobuso. izindleko zedatha zingasebenza. %1$s</string>
+</resources>
