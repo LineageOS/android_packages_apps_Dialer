@@ -39,6 +39,7 @@ import com.android.dialer.theme.base.ThemeComponent;
 public class CheckableLabeledButton extends LinearLayout implements Checkable {
 
   private static final int[] CHECKED_STATE_SET = {android.R.attr.state_checked};
+  private static final float DISABLED_STATE_OPACITY = .3f;
   private boolean broadcasting;
   private boolean isChecked;
   private OnCheckedChangeListener onCheckedChangeListener;
@@ -121,6 +122,13 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
     setClickable(true);
     setEnabled(enabled);
     setOutlineProvider(null);
+  }
+
+  @Override
+  public void refreshDrawableState() {
+    super.refreshDrawableState();
+    iconView.setAlpha(isEnabled() ? 1f : DISABLED_STATE_OPACITY);
+    labelView.setAlpha(isEnabled() ? 1f : DISABLED_STATE_OPACITY);
   }
 
   public Drawable getIconDrawable() {
