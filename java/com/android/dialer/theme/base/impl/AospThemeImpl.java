@@ -102,25 +102,10 @@ public class AospThemeImpl implements Theme {
   @Override
   public @StyleRes int getApplicationThemeRes() {
     switch (getTheme()) {
-      case LIGHT:
-      case LIGHT_M2:
-        return R.style.Dialer_ThemeBase_NoActionBar;
       case DARK:
         return R.style.Dialer_Dark_ThemeBase_NoActionBar;
-      case UNKNOWN:
-      default:
-        throw Assert.createIllegalStateFailException("Theme hasn't been set yet.");
-    }
-  }
-
-  @Override
-  public @StyleRes int getBottomSheetStyleRes() {
-    switch (getTheme()) {
       case LIGHT:
-      case LIGHT_M2:
-        return R.style.DialerBottomSheetDialogStyle_Light;
-      case DARK:
-        return R.style.DialerBottomSheetDialogStyle_Dark;
+        return R.style.Dialer_ThemeBase_NoActionBar;
       case UNKNOWN:
       default:
         throw Assert.createIllegalStateFailException("Theme hasn't been set yet.");

@@ -84,11 +84,6 @@
     <item name="android:windowAnimationStyle">@android:style/Animation</item>
   </style>
 
-  <style name="DialerBottomSheetDialogStyle.Light">
-    <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
-    <item name="android:colorBackgroundFloating">@android:color/white</item>
-  </style>
-
   <!-- Deprecated: Use Toolbar instead of ActionBar. -->
   <!-- Used to style all Dialer's action bars. Every actionbar is awarded this for free if the parent
      activity's theme extends from Dialer.ThemeBase.ActionBar or doesn't specify a theme. -->
