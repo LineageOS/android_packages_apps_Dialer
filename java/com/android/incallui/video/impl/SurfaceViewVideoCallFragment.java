@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -802,6 +803,9 @@ public class SurfaceViewVideoCallFragment extends Fragment
     speakerButtonController.updateButtonState();
     switchOnHoldCallController.updateButtonState();
   }
+
+  @Override
+  public void updateInCallButtonUiColors(@ColorInt int color) {}
 
   @Override
   public Fragment getInCallButtonUiFragment() {

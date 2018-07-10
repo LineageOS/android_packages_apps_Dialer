@@ -18,6 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.VideoProfile;
@@ -212,6 +213,14 @@ public class AnswerScreenPresenter
   public void onCannedTextResponsesLoaded(DialerCall call) {
     if (isSmsResponseAllowed(call)) {
       answerScreen.setTextResponses(call.getCannedSmsResponses());
+    }
+  }
+
+  @Override
+  public void updateWindowBackgroundColor(@FloatRange(from = -1f, to = 1.0f) float progress) {
+    InCallActivity activity = (InCallActivity) answerScreen.getAnswerScreenFragment().getActivity();
+    if (activity != null) {
+      activity.updateWindowBackgroundColor(progress);
     }
   }
 

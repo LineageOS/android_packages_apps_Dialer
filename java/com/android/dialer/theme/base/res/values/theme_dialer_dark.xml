@@ -32,8 +32,6 @@
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
   <style name="Dialer.Dark.ThemeBase">
-    <item name="android:statusBarColor">@color/google_grey_900</item>
-
     <!-- These values should be used to color all backgrounds. -->
     <item name="android:colorBackground">@color/google_grey_900</item>
     <item name="android:colorBackgroundFloating">@color/google_grey_800</item>
@@ -51,8 +49,8 @@
     <item name="colorPrimary">@color/dialer_dark_theme_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_dark_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_dark_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_dark_theme_color</item>
-    <item name="colorAccent">@color/dialer_dark_theme_color</item>
+    <item name="android:colorAccent">@color/dialer_dark_secondary_color</item>
+    <item name="colorAccent">@color/dialer_dark_secondary_color</item>
 
     <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
     <item name="colorControlActivated">?android:attr/colorPrimary</item>
@@ -64,10 +62,4 @@
     <item name="colorIconOnUnthemedDarkBackground">@android:color/white</item>
     <item name="colorPrimary20pct">@color/dialer_dark_theme_color_20pct</item>
   </style>
-
-  <style name="DialerBottomSheetDialogStyle.Dark">
-    <item name="android:textColorPrimary">@color/dialer_dark_primary_text_color</item>
-    <item name="android:colorBackgroundFloating">@color/google_grey_800</item>
-  </style>
-
 </resources>
