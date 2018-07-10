@@ -29,7 +29,7 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/action_menu_back_from_search"
       android:src="@drawable/quantum_ic_arrow_back_vd_theme_24"
-      android:tint="?colorIcon"/>
+      android:tint="?android:attr/colorPrimary"/>
 
   <EditText
       android:id="@+id/search_view"
@@ -45,9 +45,10 @@
       android:inputType="textFilter"
       android:maxLines="1"
       android:hint="@string/dialer_hint_find_contact"
+      android:textColor="?android:attr/textColorSecondary"
       android:textColorHint="?android:attr/textColorHint"
       android:textCursorDrawable="@drawable/custom_cursor"
-      style="@style/Dialer.TextAppearance.Primary"/>
+      android:textSize="16sp"/>
 
   <ImageView
       android:id="@+id/search_clear_button"
