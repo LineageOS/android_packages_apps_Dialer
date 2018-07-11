@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">要過濾所有可疑的騷擾/廣告來電嗎？</string>
+  <string name="spam_blocking_promo_text">剛才封鎖的類似來電將不會再打擾你</string>
+  <string name="spam_blocking_promo_action_filter_spam">過濾騷擾/廣告電話</string>
+  <string name="spam_blocking_promo_action_dismiss">關閉</string>
+  <string name="spam_blocking_setting_prompt">設定</string>
+  <string name="spam_blocking_settings_enable_error_text">無法開啟過濾騷擾/廣告電話的功能</string>
+  <string name="spam_blocking_settings_disable_error_text">無法關閉過濾騷擾/廣告電話的功能</string>
+  <string name="spam_blocking_settings_enable_complete_text">已開啟過濾騷擾/廣告電話的功能</string>
+  <string name="spam_blocking_settings_disable_complete_text">已關閉過濾騷擾/廣告電話的功能</string>
+</resources>

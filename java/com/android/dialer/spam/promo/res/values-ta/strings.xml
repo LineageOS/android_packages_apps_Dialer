@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">சந்தேகத்திற்குரிய ஸ்பேம் அழைப்புகளைத் தடுக்கவா?</string>
+  <string name="spam_blocking_promo_text">இப்போது நீங்கள் தடுத்த அழைப்பு போன்று, வேறு எந்த அழைப்புகளும் இனி
+      உங்களைத் தொந்தரவு செய்யாது</string>
+  <string name="spam_blocking_promo_action_filter_spam">ஸ்பேமைத் தடு</string>
+  <string name="spam_blocking_promo_action_dismiss">நிராகரி</string>
+  <string name="spam_blocking_setting_prompt">அமைப்புகள்</string>
+  <string name="spam_blocking_settings_enable_error_text">ஸ்பேம் தடுத்தலை இயக்குவதில் சிக்கல்</string>
+  <string name="spam_blocking_settings_disable_error_text">ஸ்பேம் தடுத்தலை முடக்குவதில் சிக்கல்</string>
+  <string name="spam_blocking_settings_enable_complete_text">ஸ்பேம் தடுத்தல் இயக்கப்பட்டது</string>
+  <string name="spam_blocking_settings_disable_complete_text">ஸ்பேம் தடுத்தல் முடக்கப்பட்டது</string>
+</resources>

@@ -1,38 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"Telezesha kidole ukianzia kwenye aikoni ili utume ujumbe wa kukataa"</string>
-    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"Telezesha kidole ukianzia kwenye aikoni ili uijibu kama simu ya sauti"</string>
-    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"Telezesha kidole ili upokee na usitishe kidogo simu inayoendelea"</string>
-    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"Telezesha kidole ili upokee na ukate simu iliyositishwa"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"Telezesha kidole ukianzia kwenye aikoni ili ujibu na ukate simu inayoendelea"</string>
-    <string name="call_incoming_message_custom" msgid="5819492800418293238">"Andika yako mwenyewe…"</string>
-    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"Andika yako mwenyewe…"</string>
-    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"Ghairi"</string>
-    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"Tuma"</string>
-    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"Kataa simu hii na utume ujumbe wa kueleza"</string>
-    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"Ijibu kama simu ya sauti"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"Jibu na ukate simu inayoendelea"</string>
-    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"Kataa na utume ujumbe"</string>
-    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"Ijibu kama simu ya sauti"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Jibu na ukate simu inayoendelea"</string>
-    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Video imezimwa"</string>
-    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Telezesha juu kwa vidole viwili ili uijibu. Telezesha chini kwa vidole viwili ili uikate."</string>
-    <string name="call_incoming_important" msgid="3762352743365137090">"Muhimu"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">Telezesha kidole ukianzia kwenye aikoni ili utume ujumbe wa kukataa</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">Telezesha kidole ukianzia kwenye aikoni ili uijibu kama simu ya sauti</string>
+  <string name="call_incoming_default_label_answer_and_release_second">Telezesha kidole ili upokee na usitishe kidogo simu inayoendelea</string>
+  <string name="call_incoming_default_label_answer_and_release_third">Telezesha kidole ili upokee na ukate simu iliyositishwa</string>
+  <string name="call_incoming_swipe_to_answer_and_release">Telezesha kidole ukianzia kwenye aikoni ili ujibu na ukate simu inayoendelea</string>
+  <string name="call_incoming_message_custom">Andika yako mwenyewe…</string>
+  <string name="call_incoming_respond_via_sms_custom_message">Andika yako mwenyewe…</string>
+  <string name="call_incoming_custom_message_cancel">Ghairi</string>
+  <string name="call_incoming_custom_message_send">Tuma</string>
+  <string name="a11y_incoming_call_reject_with_sms">Kataa simu hii na utume ujumbe wa kueleza</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Ijibu kama simu ya sauti</string>
+  <string name="a11y_incoming_call_answer_and_release">Jibu na ukate simu inayoendelea</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">Kataa na utume ujumbe</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Ijibu kama simu ya sauti</string>
+  <string name="a11y_description_incoming_call_answer_and_release">Jibu na ukate simu inayoendelea</string>
+  <string name="call_incoming_video_is_off">Video imezimwa</string>
+  <string name="a11y_incoming_call_swipe_gesture_prompt">Telezesha juu kwa vidole viwili ili uijibu. Telezesha chini kwa vidole viwili ili uikate.</string>
+  <string name="call_incoming_important">Muhimu</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Dəstəkli nömrə yığımı</string>
+  <string name="assisted_dialing_setting_summary">Xaricə səyahət edərkən ölkə kodu bildirin və ya əlavə edin</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Avtomatik aşkar edildi • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Avtomatik aşkar edildi</string>
+  <string name="assisted_dialing_setting_cc_category_title">Doğma ölkə</string>
+  <string name="assisted_dialing_setting_cc_title">Defolt doğma ölkə</string>
+</resources>

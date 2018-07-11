@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Real-time text messaging within a call</string>
+  <string name="rtt_promotion_details">RTT assists callers who are deaf, hard of hearing, have a speech
+    disability or need more than voice alone. RTT messaging transcripts are stored on your device
+    in the call history. %1$s</string>
+  <string name="duo_disclosure_title">Make video calls with Duo</string>
+  <string name="duo_disclosure_details">Google Duo video calling lets you chat with friends and family face to face. Data charges may apply. %1$s</string>
+</resources>

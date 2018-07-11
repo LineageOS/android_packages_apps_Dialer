@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">कलभित्रै द्रुत पाठ सन्देश प्रवाह</string>
+  <string name="rtt_promotion_details">RTT ले बहिरा, सुन्नमा कठिन हुने, बोल्न नसक्ने र कल गर्दा आवाजका साथै अरू कुराहरूको आवश्यकता पर्ने मान्छेहरूलाई सहायता गर्छ। तपाईंको यन्त्रको कलसम्बन्धी इतिहासमा RTT सन्देश प्रवाह ट्रान्सक्रिप्सनहरू भण्डारण गरिन्छ। %1$s</string>
+  <string name="duo_disclosure_title">Duo मार्फत भिडियो कलहरू गर्नुहोस्</string>
+  <string name="duo_disclosure_details">Google Duo को भिडियो कल गर्ने सेवामार्फत तपाईं आफ्ना साथी र परिवारका सदस्यहरूसँग आमनेसामने कुराकानी गर्न सक्नुहुन्छ। डेटा शुल्क लाग्न सक्छ। %1$s</string>
+</resources>

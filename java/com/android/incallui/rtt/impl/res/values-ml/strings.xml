@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">മുന്നോട്ടുപോവുക</string>
+  <string name="rtt_input_hint">ഒരു സന്ദേശം ടൈപ്പ് ചെയ്യുക</string>
+  <string name="content_description_rtt_chat_avatar">അവതാർ</string>
+  <string name="rtt_button_back">തിരികെ പോവുക</string>
+  <string name="rtt_status_banner_text">%s RTT കോളിലേക്ക് ചേരാനായി കാത്തിരിക്കുന്നു…</string>
+  <string name="rtt_transcript_advisory">നിങ്ങൾ ടൈപ്പ് ചെയ്യുന്നത് മറ്റേ കക്ഷിക്ക് കാണാനാവും. നിങ്ങളുടെ ഉപകരണത്തിൽ ട്രാൻസ്‌ക്രിപ്‌റ്റുകൾ സംഭരിക്കപ്പെടുന്നത് കോൾ ചരിത്രത്തിലാണ്.</string>
+</resources>

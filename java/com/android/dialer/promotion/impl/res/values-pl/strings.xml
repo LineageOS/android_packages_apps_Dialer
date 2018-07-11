@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Wysyłanie SMS-ów w czasie rzeczywistym podczas rozmowy</string>
+  <string name="rtt_promotion_details">RTT pomaga osobom niesłyszącym, niedosłyszącym, mającym problemy z mówieniem oraz potrzebującym czegoś więcej oprócz głosu. Transkrypcje są przechowywane na urządzeniu w historii połączeń. %1$s</string>
+  <string name="duo_disclosure_title">Prowadź rozmowy wideo w Duo</string>
+  <string name="duo_disclosure_details">Dzięki rozmowom wideo w Google Duo możesz czatować na żywo ze znajomymi i rodziną. Mogą obowiązywać opłaty za transmisję danych. %1$s</string>
+</resources>

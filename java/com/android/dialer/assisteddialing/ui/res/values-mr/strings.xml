@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">साहाय्यक डायलिंग</string>
+  <string name="assisted_dialing_setting_summary">परदेशात प्रवास करत असताना, एखाद्या देशाच्या कोडचा अंदाज लावा आणि तो जोडा</string>
+  <string name="assisted_dialing_setting_cc_default_summary">आपोआप शोधले • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">आपोआप शोधले</string>
+  <string name="assisted_dialing_setting_cc_category_title">मूळ देश</string>
+  <string name="assisted_dialing_setting_cc_title">डीफॉल्ट मूळ देश</string>
+</resources>

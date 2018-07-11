@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Tekstmeldinger i sanntid i anrop</string>
+  <string name="rtt_promotion_details">STT er til hjelp for anropsbrukere som er døve, tunghørte, har talefunksjonshemninger eller trenger mer enn bare tale. Transkripsjoner av STT-meldinger lagres i anropsloggen på enheten din. %1$s</string>
+  <string name="duo_disclosure_title">Ha videosamtaler i Duo</string>
+  <string name="duo_disclosure_details">Med videosamtaler i Google Duo kan du snakke med venner og familie ansikt til ansikt. Datakostnader kan påløpe. %1$s</string>
+</resources>

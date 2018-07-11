@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">फोन परवानगीशिवाय कॉल करू नका</string>
+  <string name="pre_call_select_phone_account">या कॉलसाठी सिम निवडा</string>
+  <string name="pre_call_select_phone_account_remember">ही निवड लक्षात ठेवा</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">%1$s वापरत असताना उपलब्‍ध नसेल</string>
+</resources>

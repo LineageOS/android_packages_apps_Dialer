@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Ανταλλαγή μηνυμάτων με αποστολή κειμένου σε πραγματικό χρόνο εντός μιας κλήσης</string>
+  <string name="rtt_promotion_details">Το RTT υποβοηθά καλούντες που είναι κωφοί ή αντιμετωπίζουν προβλήματα ακοής ή ομιλίας, καθώς και όσους χρειάζονται κάτι περισσότερο από απλή φωνητική επικοινωνία. Οι μεταγραφές μηνυμάτων RTT αποθηκεύονται στη συσκευή σας, στο ιστορικό κλήσεων. %1$s</string>
+  <string name="duo_disclosure_title">Πραγματοποιήστε βιντεοκλήσεις με το Duo</string>
+  <string name="duo_disclosure_details">Οι βιντεοκλήσεις μέσω του Google Duo σάς επιτρέπουν να συνομιλείτε με τους φίλους και την οικογένειά σας πρόσωπο με πρόσωπο. Ενδέχεται να ισχύουν χρεώσεις δεδομένων. %1$s</string>
+</resources>

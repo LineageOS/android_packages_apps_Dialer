@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="event_deactivated" msgid="689994223349549274">"Evcil hayvan modu kapalı"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="event_deactivated">Evcil hayvan modu kapalı</string>
 </resources>

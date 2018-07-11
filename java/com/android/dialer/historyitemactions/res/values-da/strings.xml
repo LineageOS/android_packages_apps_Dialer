@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Foretag et taleopkald</string>
+  <string name="video_call">Foretag et videoopkald</string>
+  <string name="add_to_contacts">Tilføj kontaktperson</string>
+  <string name="send_a_message">Sms-besked</string>
+  <string name="not_spam">Ikke spam</string>
+  <string name="block_number">Bloker</string>
+  <string name="unblock_number">Fjern blokering</string>
+  <string name="block_and_optionally_report_spam">Bloker/rapportér spam</string>
+  <string name="copy_number">Kopiér nummer</string>
+</resources>

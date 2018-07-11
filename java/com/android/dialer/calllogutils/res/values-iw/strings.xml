@@ -1,57 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"שיחה נכנסת"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"השיחה הנכנסת הועברה למכשיר אחר"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"שיחה יוצאת"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"השיחה היוצאת הועברה למכשיר אחר"</string>
-    <string name="type_missed" msgid="2997043831022028176">"שיחה שלא נענתה"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"שיחת וידאו נכנסת"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"שיחת הווידאו הנכנסת הועברה למכשיר אחר"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"שיחת וידאו יוצאת"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"שיחת הווידאו היוצאת הועברה למכשיר אחר"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"שיחת וידאו שלא נענתה"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"דואר קולי"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"שיחה שנדחתה"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"שיחה שנחסמה"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"דק\'"</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"שנ\'"</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> ו-<xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="two">שניות</item>
-      <item quantity="many">שניות</item>
-      <item quantity="other">שניות</item>
-      <item quantity="one">שנייה</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="two">דקות</item>
-      <item quantity="many">דקות</item>
-      <item quantity="other">דקות</item>
-      <item quantity="one">דקה</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"השיחה נענתה במכשיר אחר"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"בחשבון <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"דרך <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"בחשבון <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, דרך <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"דואר קולי"</string>
-    <string name="now" msgid="2599778506439006806">"עכשיו"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">שיחה נכנסת</string>
+  <string name="type_incoming_pulled">השיחה הנכנסת הועברה למכשיר אחר</string>
+  <string name="type_outgoing">שיחה יוצאת</string>
+  <string name="type_outgoing_pulled">השיחה היוצאת הועברה למכשיר אחר</string>
+  <string name="type_missed">שיחה שלא נענתה</string>
+  <string name="type_incoming_video">שיחת וידאו נכנסת</string>
+  <string name="type_incoming_video_pulled">שיחת הווידאו הנכנסת הועברה למכשיר אחר</string>
+  <string name="type_outgoing_video">שיחת וידאו יוצאת</string>
+  <string name="type_outgoing_video_pulled">שיחת הווידאו היוצאת הועברה למכשיר אחר</string>
+  <string name="type_missed_video">שיחת וידאו שלא נענתה</string>
+  <string name="type_voicemail">דואר קולי</string>
+  <string name="type_rejected">שיחה שנדחתה</string>
+  <string name="type_blocked">שיחה שנחסמה</string>
+  <string name="call_details_minutes_abbreviation">דק\'</string>
+  <string name="call_details_seconds_abbreviation">שנ\'</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s\'%2$s\' %3$s\'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s\'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">שנייה</item>
+    <item quantity="two">שניות</item>
+    <item quantity="many">שניות</item>
+    <item quantity="other">שניות</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">דקה</item>
+    <item quantity="two">דקות</item>
+    <item quantity="many">דקות</item>
+    <item quantity="other">דקות</item>
+  </plurals>
+  <string name="type_answered_elsewhere">השיחה נענתה במכשיר אחר</string>
+  <string name="description_phone_account">בחשבון ^1</string>
+  <string name="description_via_number">דרך %1$s</string>
+  <string name="description_via_number_phone_account">בחשבון %1$s, דרך %2$s</string>
+  <string name="voicemail_string">דואר קולי</string>
+  <string name="just_now">הרגע</string>
+  <string name="new_call_log_carrier_video">שיחות וידאו דרך הספק הסלולרי</string>
+  <string name="new_call_log_duo_video">‏שיחות וידאו דרך Duo</string>
+  <string name="new_call_log_unknown">לא ידוע</string>
+  <string name="new_call_log_secondary_blocked">חסום</string>
+  <string name="new_call_log_secondary_spam">ספאם</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">שיחה אחת (^1) לא נענתה. מקור השיחה: ^2</item>
+    <item quantity="two">^1 שיחות. השיחה האחרונה לא נענתה. מקור השיחה: ^2</item>
+    <item quantity="many">^1 שיחות. השיחה האחרונה לא נענתה. מקור השיחה: ^2</item>
+    <item quantity="other">^1 שיחות. השיחה האחרונה לא נענתה. מקור השיחה: ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">שיחה אחת (^1) נענתה. מקור השיחה: ^2</item>
+    <item quantity="two">^1 שיחות. השיחה האחרונה נענתה. מקור השיחה: ^2</item>
+    <item quantity="many">^1 שיחות. השיחה האחרונה נענתה. מקור השיחה: ^2</item>
+    <item quantity="other">^1 שיחות. השיחה האחרונה נענתה. מקור השיחה: ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one">שיחה יוצאת אחת (^1). יעד השיחה: ^2</item>
+    <item quantity="two">^1 שיחות. השיחה האחרונה הייתה שיחה יוצאת. יעד השיחה: ^2</item>
+    <item quantity="many">^1 שיחות. השיחה האחרונה הייתה שיחה יוצאת. יעד השיחה: ^2</item>
+    <item quantity="other">^1 שיחות. השיחה האחרונה הייתה שיחה יוצאת. יעד השיחה: ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">שיחה אחת (^1) נחסמה. מקור השיחה: ^2</item>
+    <item quantity="two">^1 שיחות. השיחה האחרונה נחסמה. מקור השיחה: ^2</item>
+    <item quantity="many">^1 שיחות. השיחה האחרונה נחסמה. מקור השיחה: ^2</item>
+    <item quantity="other">^1 שיחות. השיחה האחרונה נחסמה. מקור השיחה: ^2</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">בחשבון ^1,
+    דרך ^2</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

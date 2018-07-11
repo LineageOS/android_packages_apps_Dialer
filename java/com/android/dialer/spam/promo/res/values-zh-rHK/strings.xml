@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">要過濾所有疑似垃圾來電嗎？</string>
+  <string name="spam_blocking_promo_text">剛封鎖的類似來電不會再
+      打擾您</string>
+  <string name="spam_blocking_promo_action_filter_spam">過濾垃圾來電</string>
+  <string name="spam_blocking_promo_action_dismiss">關閉</string>
+  <string name="spam_blocking_setting_prompt">設定</string>
+  <string name="spam_blocking_settings_enable_error_text">開啟垃圾來電濾除功能時發生錯誤</string>
+  <string name="spam_blocking_settings_disable_error_text">關閉垃圾來電濾除功能時發生錯誤</string>
+  <string name="spam_blocking_settings_enable_complete_text">已開啟垃圾來電過濾功能</string>
+  <string name="spam_blocking_settings_disable_complete_text">已關閉垃圾來電過濾功能</string>
+</resources>

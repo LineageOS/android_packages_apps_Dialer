@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Ki szeretné szűrni az összes gyanús spamhívást?</string>
+  <string name="spam_blocking_promo_text">Az épp letiltotthoz hasonló hívások nem fogják többet zavarni.</string>
+  <string name="spam_blocking_promo_action_filter_spam">Spamszűrés</string>
+  <string name="spam_blocking_promo_action_dismiss">Bezárás</string>
+  <string name="spam_blocking_setting_prompt">Beállítások</string>
+  <string name="spam_blocking_settings_enable_error_text">Hiba történt a spamszűrés bekapcsolásakor</string>
+  <string name="spam_blocking_settings_disable_error_text">Hiba történt a spamszűrés kikapcsolásakor</string>
+  <string name="spam_blocking_settings_enable_complete_text">Spamszűrés bekapcsolva</string>
+  <string name="spam_blocking_settings_disable_complete_text">Spamszűrés kikapcsolva</string>
+</resources>

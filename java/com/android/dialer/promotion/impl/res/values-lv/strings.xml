@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Reāllaika teksta ziņojumapmaiņa zvanā</string>
+  <string name="rtt_promotion_details">RTT funkcionalitāte palīdz nedzirdīgiem un vājdzirdīgiem zvanītājiem, kā arī zvanītājiem, kuriem ir runas traucējumi vai ir nepieciešama ne tikai balss skaņa. RTT ziņojumapmaiņas transkripcijas tiek glabātas zvanu vēsturē jūsu ierīcē. %1$s</string>
+  <string name="duo_disclosure_title">Veiciet videozvanus, izmantojot lietotni Duo</string>
+  <string name="duo_disclosure_details">Google Duo videozvani ļauj jums personiski tērzēt ar draugiem un ģimeni. Var tikt piemērota maksa par datu pārraidi. %1$s</string>
+</resources>

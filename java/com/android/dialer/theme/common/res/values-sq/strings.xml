@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">I panjohur</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Telefon me pagesë</string>
+  <string name="emergency_number">Numri i urgjencës</string>
+  <string name="launcherActivityLabel">Telefoni</string>
+  <string name="call">Telefono</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Po vazhdon telefonatën duke përdorur Wi‑Fi…</string>
+  <string name="rtt_call_not_available_toast">Funksioni RTT nuk ofrohet për këtë telefonatë</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

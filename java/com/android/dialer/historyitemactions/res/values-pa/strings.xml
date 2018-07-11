@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">ਅਵਾਜ਼ੀ ਕਾਲ</string>
+  <string name="video_call">ਵੀਡੀਓ ਕਾਲ</string>
+  <string name="add_to_contacts">ਸੰਪਰਕ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="send_a_message">ਸੁਨੇਹਾ</string>
+  <string name="not_spam">ਸਪੈਮ ਨਹੀਂ</string>
+  <string name="block_number">ਬਲਾਕ ਕਰੋ</string>
+  <string name="unblock_number">ਅਣਬਲਾਕ ਕਰੋ</string>
+  <string name="block_and_optionally_report_spam">ਸਪੈਮ ਬਲਾਕ ਕਰੋ ਜਾਂ ਰਿਪੋਰਟ ਕਰੋ</string>
+  <string name="copy_number">ਨੰਬਰ ਕਾਪੀ ਕਰੋ</string>
+</resources>

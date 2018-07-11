@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆಗಳನ್ನು ಫಿಲ್ಟರ್‌ ಮಾಡುವುದೇ?</string>
+  <string name="spam_blocking_promo_text">ನೀವು ನಿರ್ಬಂಧಿಸಿದಂತಹ ಕರೆಗಳು ಇನ್ನು ಮುಂದೆ ನಿಮಗೆ ತೊಂದರೆ ಉಂಟು ಮಾಡುವುದಿಲ್ಲ</string>
+  <string name="spam_blocking_promo_action_filter_spam">ಸ್ಪ್ಯಾಮ್‌ ಫಿಲ್ಟರ್‌</string>
+  <string name="spam_blocking_promo_action_dismiss">ವಜಾಗೊಳಿಸಿ</string>
+  <string name="spam_blocking_setting_prompt">ಸೆಟ್ಟಿಂಗ್‌ಗಳು</string>
+  <string name="spam_blocking_settings_enable_error_text">ಸ್ಪ್ಯಾಮ್ ಫಿಲ್ಟರಿಂಗ್‌ ಆನ್ ಮಾಡುವಲ್ಲಿ ಸಮಸ್ಯೆ ಎದುರಾಗಿದೆ</string>
+  <string name="spam_blocking_settings_disable_error_text">ಸ್ಪ್ಯಾಮ್ ಫಿಲ್ಟರಿಂಗ್‌ ಆಫ್ ಮಾಡುವಲ್ಲಿ ಸಮಸ್ಯೆ ಎದುರಾಗಿದೆ</string>
+  <string name="spam_blocking_settings_enable_complete_text">ಸ್ಪ್ಯಾಮ್ ಫಿಲ್ಟರಿಂಗ್ ಆನ್ ಮಾಡಲಾಗಿದೆ</string>
+  <string name="spam_blocking_settings_disable_complete_text">ಸ್ಪ್ಯಾಮ್ ಫಿಲ್ಟರಿಂಗ್ ಆಫ್ ಮಾಡಲಾಗಿದೆ</string>
+</resources>

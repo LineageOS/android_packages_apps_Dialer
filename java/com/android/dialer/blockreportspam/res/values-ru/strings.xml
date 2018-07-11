@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Заблокировать номер %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Вызовы и сообщения с этого номера будут блокироваться.</string>
+  <string name="block_number_ok">БЛОКИРОВАТЬ</string>
+  <string name="unblock_number_ok">РАЗБЛОКИРОВАТЬ</string>
+  <string name="block_report_number_alert_title">Заблокировать номер %1$s?</string>
+  <string name="block_report_number_alert_details">Вы больше не будете получать вызовы с этого номера.</string>
+  <string name="block_number_alert_details">%1$s Вы сообщите об этом вызове как о спаме.</string>
+  <string name="unblock_number_alert_details">Этот номер будет разблокирован. Вы сообщите, что это не спам. Вызовы не будут считаться спамом.</string>
+  <string name="unblock_report_number_alert_title">Разблокировать номер %1$s?</string>
+  <string name="report_not_spam_alert_button">Сообщить</string>
+  <string name="report_not_spam_alert_title">Сообщить об ошибке?</string>
+  <string name="report_not_spam_alert_details">Вызовы с номера %1$s больше не будут считаться спамом.</string>
+  <string name="checkbox_report_as_spam_action">Сообщить о вызове как о спаме</string>
+  <string name="block_number_failed_toast">Не удалось заблокировать этот номер</string>
+  <string name="unblock_number_failed_toast">Не удалось разблокировать этот номер</string>
+</resources>

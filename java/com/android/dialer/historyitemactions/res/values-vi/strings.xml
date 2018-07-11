@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Gọi thoại</string>
+  <string name="video_call">Gọi điện video</string>
+  <string name="add_to_contacts">Thêm liên hệ</string>
+  <string name="send_a_message">Tin nhắn</string>
+  <string name="not_spam">Không phải là spam</string>
+  <string name="block_number">Chặn</string>
+  <string name="unblock_number">Bỏ chặn</string>
+  <string name="block_and_optionally_report_spam">Chặn/Báo cáo spam</string>
+  <string name="copy_number">Sao chép số</string>
+</resources>

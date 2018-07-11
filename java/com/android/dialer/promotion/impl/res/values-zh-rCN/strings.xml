@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">通话期间收发实时信息</string>
+  <string name="rtt_promotion_details">RTT 可为以下类型的来电者提供协助：失聪者、听力障碍人士、语言障碍人士或需要语音以外服务的人。实时信息的转录文字会存储在您设备上的通话记录中。%1$s</string>
+  <string name="duo_disclosure_title">使用 Duo 进行视频通话</string>
+  <string name="duo_disclosure_details">借助 Google Duo 视频通话功能，您可与亲朋好友“面对面”地聊天。您可能需要支付流量费。%1$s</string>
+</resources>

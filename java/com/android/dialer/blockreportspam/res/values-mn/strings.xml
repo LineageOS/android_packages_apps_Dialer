@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s-г хориглох уу?</string>
+  <string name="block_number_confirmation_message_new_filtering">Та энэ дугаараас цаашид дуудлага буюу мессеж хүлээж авахгүй.</string>
+  <string name="block_number_ok">БЛОКЛОХ</string>
+  <string name="unblock_number_ok">БЛОКООС ГАРГАХ</string>
+  <string name="block_report_number_alert_title">%1$s-г хориглох уу?</string>
+  <string name="block_report_number_alert_details">Та энэ дугаараас цаашид дуудлага хүлээж авахгүй.</string>
+  <string name="block_number_alert_details">%1$s Энэ дуудлагыг спам гэж мэдээлэх болно.</string>
+  <string name="unblock_number_alert_details">Энэ дугаарын хоригийг авч, спам биш гэж мэдээлэх болно. Цаашид ирэх дуудлагыг спам гэж үзэхгүй.</string>
+  <string name="unblock_report_number_alert_title">%1$s-г хоригоос гаргах уу?</string>
+  <string name="report_not_spam_alert_button">Мэдэгдэх</string>
+  <string name="report_not_spam_alert_title">Алдааг мэдээлэх үү?</string>
+  <string name="report_not_spam_alert_details">%1$s-с цаашид ирэх дуудлагыг спам гэж үзэхгүй.</string>
+  <string name="checkbox_report_as_spam_action">Дуудлагыг спам гэж мэдээлэх</string>
+  <string name="block_number_failed_toast">Энэ дугаарыг хориглоход асуудал гарсан</string>
+  <string name="unblock_number_failed_toast">Энэ дугаарын хоригийг авахад асуудал гарсан</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">குரல் அழைப்பு</string>
+  <string name="video_call">வீடியோ அழைப்பு</string>
+  <string name="add_to_contacts">தொடர்பைச் சேர்</string>
+  <string name="send_a_message">செய்தி அனுப்பு</string>
+  <string name="not_spam">ஸ்பேம் அல்ல</string>
+  <string name="block_number">தடு</string>
+  <string name="unblock_number">தடைநீக்கு</string>
+  <string name="block_and_optionally_report_spam">தடு/ஸ்பேம் எனப் புகாரளி</string>
+  <string name="copy_number">எண்ணை நகலெடு</string>
+</resources>

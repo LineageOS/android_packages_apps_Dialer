@@ -1,46 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2016 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"حظر جديد ومبسط"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"لحمايتك بشكل أفضل، يحتاج الهاتف إلى تغيير آلية تنفيذ الحظر. تؤدي الآن ميزة حظر الأرقام إلى إيقاف كل من المكالمات والرسائل النصية، كما أن ذلك الحظر يمكن أن يمتد إلى تطبيقات أخرى."</string>
-    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"سماح"</string>
-    <string name="block_number_confirmation_title" msgid="2699521227461376076">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"سيتم حظر المكالمات الواردة من هذا الرقم كما سيتم تلقائيًا حذف الرسائل الصوتية."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"سيتم حظر المكالمات من هذا الرقم، إلا أنه سيظل بإمكان المتصل ترك رسائل صوتية."</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"لن تتلقي المكالمات أو المراسلات النصية بعد الآن من هذا الرقم."</string>
-    <string name="block_number_ok" msgid="739786082788038932">"حظر"</string>
-    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"هل تريد إزالة حظر <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
-    <string name="unblock_number_ok" msgid="5089057152966269355">"إلغاء الحظر"</string>
-    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> غير صالح."</string>
-    <string name="snackbar_number_blocked" msgid="5760234822413921845">"تم حظر <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"تم إلغاء حظر <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="block_number_undo" msgid="5158120911892491697">"تراجع"</string>
-    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"تعذّر الاستيراد"</string>
-    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"تم تعطيل حظر المكالمات لمدة 48 ساعة."</string>
-    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"تم التعطيل نظرًا لإجراء مكالمة طوارئ."</string>
-    <string name="block_report_number_alert_title" msgid="2740581989824959611">"هل تريد حظر الرقم <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
-    <string name="block_report_number_alert_details" msgid="2652479394593143562">"لن تتلقى المزيد من المكالمات من هذا الرقم."</string>
-    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> سيتم الإبلاغ عن هذه المكالمة باعتبارها غير مرغوب فيها."</string>
-    <string name="unblock_number_alert_details" msgid="8696070817026870606">"سيُزال حظر هذا الرقم دون الإبلاغ عنه كرقم غير مرغوب. لن تصلك المكالمات فيما بعد كغير مرغوب فيها."</string>
-    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"هل تريد إزالة حظر <xliff:g id="NUMBER">%1$s</xliff:g>؟"</string>
-    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"إبلاغ"</string>
-    <string name="report_not_spam_alert_title" msgid="395961923213504916">"هل تريد الإبلاغ عن خطأ؟"</string>
-    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"المكالمات الواردة من <xliff:g id="NUMBER">%1$s</xliff:g> في المستقبل لن يتم تحديدها على أنها غير مرغوب فيها."</string>
-    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"الإبلاغ عن المكالمة كغير مرغوب فيها"</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="migrate_blocked_numbers_dialog_title">حظر جديد ومبسط</string>
+  <string name="migrate_blocked_numbers_dialog_message">لحمايتك بشكل أفضل، يحتاج الهاتف إلى تغيير آلية تنفيذ الحظر. تؤدي الآن ميزة حظر الأرقام إلى إيقاف كل من المكالمات والرسائل النصية، كما أن ذلك الحظر يمكن أن يمتد إلى تطبيقات أخرى.</string>
+  <string name="migrate_blocked_numbers_dialog_allow_button">سماح</string>
+  <string name="old_block_number_confirmation_title">هل تريد حظر %1$s؟</string>
+  <string name="block_number_confirmation_message_vvm">سيتم حظر المكالمات الواردة من هذا الرقم كما سيتم تلقائيًا حذف الرسائل الصوتية.</string>
+  <string name="block_number_confirmation_message_no_vvm">سيتم حظر المكالمات من هذا الرقم، إلا أنه سيظل بإمكان المتصل ترك رسائل صوتية.</string>
+  <string name="block_number_confirmation_message_new_filtering">لن تتلقي المكالمات أو المراسلات النصية بعد الآن من هذا الرقم.</string>
+  <string name="block_number_ok">حظر</string>
+  <string name="unblock_number_confirmation_title">هل تريد إزالة حظر %1$s؟</string>
+  <string name="unblock_number_ok">إلغاء الحظر</string>
+  <string name="invalidNumber">%1$s غير صالح.</string>
+  <string name="snackbar_number_blocked">تم حظر %1$s</string>
+  <string name="snackbar_number_unblocked">تم إلغاء حظر %1$s</string>
+  <string name="send_to_voicemail_import_failed">تعذّر الاستيراد</string>
+  <string name="call_blocking_disabled_notification_title">تم إيقاف حظر المكالمات لمدة 48 ساعة.</string>
+  <string name="call_blocking_disabled_notification_text">تم الإيقاف نظرًا لإجراء مكالمة طوارئ.</string>
 </resources>

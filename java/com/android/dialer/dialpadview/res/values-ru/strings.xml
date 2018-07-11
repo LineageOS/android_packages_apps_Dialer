@@ -1,39 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="description_dialpad_back" msgid="6226488105558971135">"Вернуться"</string>
-    <string name="description_dialpad_overflow" msgid="5984341386518189787">"Ещё"</string>
-    <string name="description_delete_button" msgid="8431313818404527096">"клавиша Backspace"</string>
-    <string name="description_image_button_plus" msgid="8936338119824589388">"плюс"</string>
-    <string name="description_voicemail_button" msgid="4187006295368768215">"голосовая почта"</string>
-    <string name="description_dial_button" msgid="6826108965053146374">"набор номера"</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1728176091017802282">"Сначала отключите режим полета."</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4287602816589585704">"Чтобы настроить голосовую почту, выберите \"Меню &gt; Настройки\"."</string>
-    <string name="add_2sec_pause" msgid="395591627218789322">"Добавить двухсекундную паузу"</string>
-    <string name="add_wait" msgid="2278146476349811062">"Добавить паузу"</string>
-    <string name="dialer_useDtmfDialpad" msgid="6919241568926709507">"Открыть панель тонального набора"</string>
-    <string name="dialer_returnToInCallScreen" msgid="4111111633248125741">"Вернуться к текущему вызову"</string>
-    <string name="dialer_addAnotherCall" msgid="6842534741272651900">"Добавить вызов"</string>
-    <string name="imei" msgid="7961343816043247280">"IMEI"</string>
-    <string name="meid" msgid="5274167198744847659">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="4158651660353159679">"Загрузка с SIM-карты…"</string>
-    <string name="simContacts_title" msgid="8972942600800349990">"Контакты на SIM-карте"</string>
-    <string name="menu_callNumber" msgid="1898333075466418368">"Позвонить: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="4806479823793649894">"На этот номер нельзя позвонить"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="description_dialpad_back">Вернуться</string>
+  <string name="description_dialpad_overflow">Ещё</string>
+  <string name="description_delete_button">клавиша Backspace</string>
+  <string name="description_image_button_plus">добавить плюс</string>
+  <string name="description_voicemail_button">получить почту</string>
+  <string name="description_dial_button">набор номера</string>
+  <string name="dialog_voicemail_airplane_mode_message">Сначала отключите режим полета.</string>
+  <string name="dialog_voicemail_not_ready_message">Чтобы настроить голосовую почту, выберите \"Меню &gt; Настройки\".</string>
+  <string name="add_2sec_pause">Добавить двухсекундную паузу</string>
+  <string name="add_wait">Добавить паузу</string>
+  <string name="dialer_useDtmfDialpad">Панель тонального набора</string>
+  <string name="dialer_returnToInCallScreen">Вернуться к текущему вызову</string>
+  <string name="dialer_addAnotherCall">Добавить вызов</string>
+  <string name="imei">IMEI</string>
+  <string name="meid">MEID</string>
+  <string name="simContacts_emptyLoading">Загрузка с SIM…</string>
+  <string name="simContacts_title">Контакты на SIM</string>
+  <string name="menu_callNumber">Позвонить: %s</string>
+  <string name="dialpad_hint_emergency_calling_not_available">Экстренные вызовы по Wi‑Fi недоступны.</string>
+  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">На этот номер нельзя позвонить</string>
 </resources>

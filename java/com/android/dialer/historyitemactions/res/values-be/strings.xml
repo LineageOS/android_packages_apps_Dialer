@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Галасавы выклік</string>
+  <string name="video_call">Відэавыклік</string>
+  <string name="add_to_contacts">Дадаць у кантакты</string>
+  <string name="send_a_message">Паведамленне</string>
+  <string name="not_spam">Не спам</string>
+  <string name="block_number">Заблакіраваць</string>
+  <string name="unblock_number">Разблакіраваць</string>
+  <string name="block_and_optionally_report_spam">Заблак. ці паведаміць пра спам</string>
+  <string name="copy_number">Капіраваць нумар</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">அழைப்பை மேற்கொள்வதற்கான உதவி</string>
+  <string name="assisted_dialing_setting_summary">வெளிநாட்டிற்குப் பயணிக்கும் போது, பிறரை அழைத்தால் அந்த நாட்டின் தேசக் குறியீட்டைக் கணித்து, சேர்க்கும்</string>
+  <string name="assisted_dialing_setting_cc_default_summary">தானாகக் கண்டறியப்பட்டது • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">தானாகக் கண்டறியப்பட்டது</string>
+  <string name="assisted_dialing_setting_cc_category_title">சொந்த நாடு</string>
+  <string name="assisted_dialing_setting_cc_title">சொந்த நாடு (இயல்பு)</string>
+</resources>

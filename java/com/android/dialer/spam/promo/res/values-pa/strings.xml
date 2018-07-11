@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">ਕੀ ਸਾਰੀਆਂ ਸ਼ੱਕੀ ਸਪੈਮ ਕਾਲਾਂ ਫਿਲਟਰ ਕਰਨੀਆਂ ਹਨ?</string>
+  <string name="spam_blocking_promo_text">ਜਿਸ ਤਰ੍ਹਾਂ ਦੀਆਂ ਕਾਲਾਂ ਤੁਸੀਂ ਬਲਾਕ ਕੀਤੀਆਂ ਹਨ ਉਹ ਹੁਣ ਤੁਹਾਨੂੰ ਕਦੇ ਵੀ ਪਰੇਸ਼ਾਨ ਨਹੀਂ ਕਰਨਗੀਆਂ</string>
+  <string name="spam_blocking_promo_action_filter_spam">ਸਪੈਮ ਨੂੰ ਫਿਲਟਰ ਕਰੋ</string>
+  <string name="spam_blocking_promo_action_dismiss">ਖਾਰਜ ਕਰੋ</string>
+  <string name="spam_blocking_setting_prompt">ਸੈਟਿੰਗਾਂ</string>
+  <string name="spam_blocking_settings_enable_error_text">ਸਪੈਮ ਫਿਲਟਰ ਕਰਨ ਦਾ ਵਿਕਲਪ ਚਾਲੂ ਕਰਨ ਵੇਲੇ ਸਮੱਸਿਆ ਆਈ</string>
+  <string name="spam_blocking_settings_disable_error_text">ਸਪੈਮ ਫਿਲਟਰ ਕਰਨ ਦਾ ਵਿਕਲਪ ਬੰਦ ਕਰਨ ਵੇਲੇ ਸਮੱਸਿਆ ਆਈ</string>
+  <string name="spam_blocking_settings_enable_complete_text">ਸਪੈਮ ਫਿਲਟਰ ਕਰਨਾ ਚਾਲੂ ਕੀਤਾ ਗਿਆ</string>
+  <string name="spam_blocking_settings_disable_complete_text">ਸਪੈਮ ਫਿਲਟਰ ਕਰਨਾ ਬੰਦ ਕੀਤਾ ਗਿਆ</string>
+</resources>

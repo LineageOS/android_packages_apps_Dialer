@@ -1,31 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_details" msgid="5063658079729839605">"Chi tiết cuộc gọi"</string>
-    <string name="delete" msgid="2141020674108406737">"Xóa"</string>
-    <string name="call_details_copy_number" msgid="4265479408878990796">"Sao chép số"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"Chỉnh sửa số trước khi gọi"</string>
-    <string name="call_details_report_call_id" msgid="8857541295264421217">"Báo cáo số không chính xác"</string>
-    <string name="sent_a_photo" msgid="3978670717462979502">"Đã gửi một ảnh"</string>
-    <string name="received_a_photo" msgid="3528953225576480505">"Đã nhận một ảnh"</string>
-    <string name="message_in_quotes" msgid="3270574830115828365">"\"<xliff:g id="MESSAGE">%1$s</xliff:g>\""</string>
-    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"Báo cáo số không chính xác"</string>
-    <string name="report_caller_id_failed" msgid="1471904930106125702">"Không thể báo cáo số"</string>
-    <string name="report_caller_id_toast" msgid="5494870403429969932">"Đã báo cáo số"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">Chi tiết cuộc gọi</string>
+  <string name="delete">Xóa</string>
+  <string name="call_details_copy_number">Sao chép số</string>
+  <string name="call_details_edit_number">Chỉnh sửa số trước khi gọi</string>
+  <string name="call_details_report_call_id">Báo cáo số không chính xác</string>
+  <string name="sent_a_photo">Đã gửi một ảnh</string>
+  <string name="received_a_photo">Đã nhận một ảnh</string>
+  <string name="message_in_quotes">\"%1$s\"</string>
+  <string name="report_caller_id_dialog_title">Báo cáo số không chính xác</string>
+  <string name="report_caller_id_failed">Không thể báo cáo số</string>
+  <string name="report_caller_id_toast">Đã báo cáo số</string>
+  <string name="assisted_dialing_country_code_entry">Quay số có trợ giúp: Mã quốc gia đã sử dụng +%1$s</string>
+  <string name="assisted_dialing_country_code_entry_failure">Quay số có trợ giúp đã được sử dụng</string>
+  <string name="rtt_transcript_not_available">Bản ghi chỉ có sẵn cho các cuộc gọi hỗ trợ tính năng nhắn tin</string>
+  <string name="rtt_transcript_link">Xem bản ghi</string>
 </resources>

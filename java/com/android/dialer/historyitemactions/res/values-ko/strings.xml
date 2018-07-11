@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">음성 통화</string>
+  <string name="video_call">화상 통화</string>
+  <string name="add_to_contacts">연락처 추가</string>
+  <string name="send_a_message">메시지</string>
+  <string name="not_spam">스팸 해제</string>
+  <string name="block_number">차단</string>
+  <string name="unblock_number">차단 해제</string>
+  <string name="block_and_optionally_report_spam">스팸 차단/신고</string>
+  <string name="copy_number">전화번호 복사</string>
+</resources>

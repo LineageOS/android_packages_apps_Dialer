@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">‏שליחת הודעות טקסט בזמן אמת (RTT) במהלך שיחה</string>
+  <string name="rtt_promotion_details">‏RTT (טקסט בזמן אמת) היא תכונת נגישות שעוזרת לחרשים, לקויי שמיעה, לקויי דיבור או אנשים שלא יכולים להסתפק רק בקול במהלך השיחה. %1$s</string>
+  <string name="duo_disclosure_title">‏ב-Duo אפשר לשוחח בשיחות וידאו</string>
+  <string name="duo_disclosure_details">‏באמצעות Google Duo אפשר לשוחח בשיחות וידאו ולראות את החברים וקרובי המשפחה. השירות עשוי להיות בתשלום, בהתאם לחבילה הסלולרית שלך. %1$s</string>
+</resources>

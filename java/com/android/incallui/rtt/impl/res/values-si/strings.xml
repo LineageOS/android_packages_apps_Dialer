@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">ඉදිරියට යන්න</string>
+  <string name="rtt_input_hint">පණිවිඩයක් ටයිප් කරන්න</string>
+  <string name="content_description_rtt_chat_avatar">ඇවටාර්</string>
+  <string name="rtt_button_back">ආපසු</string>
+  <string name="rtt_status_banner_text">RTT ඇමතුම හා එක් වීමට %s සඳහා රැඳී සිටිමින්…</string>
+  <string name="rtt_transcript_advisory">අනෙක් පාර්ශවයට ඔබ ටයිප් කරනවා දැකිය හැකිය. ඇමතුම් ඉතිහාසය තුළ ඔබගේ උපාංගයේ පිටපත් ගබඩා කෙරේ.</string>
+</resources>

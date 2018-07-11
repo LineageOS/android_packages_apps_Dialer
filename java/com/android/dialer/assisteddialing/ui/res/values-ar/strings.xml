@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">الطلب المساعد</string>
+  <string name="assisted_dialing_setting_summary">توقُع رمز البلد وإضافته عند إجراء مكالمة أثناء السفر خارج البلاد</string>
+  <string name="assisted_dialing_setting_cc_default_summary">تم الكشف تلقائيًا • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">تم الكشف تلقائيًا</string>
+  <string name="assisted_dialing_setting_cc_category_title">الموطن</string>
+  <string name="assisted_dialing_setting_cc_title">الموطن التلقائي</string>
+</resources>

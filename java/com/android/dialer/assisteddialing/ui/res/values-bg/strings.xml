@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Подпомогнато набиране</string>
+  <string name="assisted_dialing_setting_summary">Предвиждане и добавяне на код на държавата, когато пътувате в чужбина</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Автоматично установена • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Автоматично установена</string>
+  <string name="assisted_dialing_setting_cc_category_title">Родна държава</string>
+  <string name="assisted_dialing_setting_cc_title">Родна държава по подразбиране</string>
+</resources>

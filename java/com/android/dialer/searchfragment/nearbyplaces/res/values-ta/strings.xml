@@ -1,24 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="nearby_places" msgid="275117539511113867">"அருகிலுள்ள இடங்கள்"</string>
-    <string name="search_location_permission" msgid="5893183045324252816">"உங்கள் அருகிலுள்ள இடங்களின் தொடர்புத் தகவலைப் பெற, உங்கள் இருப்பிடத்திற்கான அணுகலை வழங்கவும்."</string>
-    <string name="nearby_places_allow" msgid="4060507469206871903">"அனுமதி"</string>
-    <string name="nearby_places_dismiss" msgid="3255977972553076907">"நிராகரி"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="nearby_places">அருகிலுள்ள இடங்கள்</string>
+  <string name="search_location_permission">உங்கள் அருகிலுள்ள இடங்களின் தொடர்புத் தகவலைப் பெற, உங்கள் இருப்பிடத்திற்கான அணுகலை வழங்கவும்.</string>
+  <string name="nearby_places_allow">அனுமதி</string>
+  <string name="nearby_places_dismiss">நிராகரி</string>
 </resources>

@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Արգելափակե՞լ %1$s համարը</string>
+  <string name="block_number_confirmation_message_new_filtering">Այս համարից զանգեր և SMS-ներ այլևս չեք ստանա:</string>
+  <string name="block_number_ok">ԱՐԳԵԼԱՓԱԿԵԼ</string>
+  <string name="unblock_number_ok">ԱՐԳԵԼԱԲԱՑԵԼ</string>
+  <string name="block_report_number_alert_title">Արգելափակե՞լ %1$s համարը</string>
+  <string name="block_report_number_alert_details">Այս համարից այլևս զանգեր չեք ստանա:</string>
+  <string name="block_number_alert_details">%1$s Այս զանգը կնշվի որպես սպամ:</string>
+  <string name="unblock_number_alert_details">Այս համարը կարգելաբացվի և կնշվի որպես ոչ սպամ: Այս համարից եկող զանգերն այլևս չեն նշվի որպես սպամ:</string>
+  <string name="unblock_report_number_alert_title">Արգելաբացե՞լ %1$s համարը</string>
+  <string name="report_not_spam_alert_button">Բողոքել</string>
+  <string name="report_not_spam_alert_title">Հաղորդե՞լ սխալի մասին</string>
+  <string name="report_not_spam_alert_details">%1$s համարից եկող զանգերն այլևս չեն նշվի որպես սպամ:</string>
+  <string name="checkbox_report_as_spam_action">Նշել զանգը որպես սպամ</string>
+  <string name="block_number_failed_toast">Չհաջողվեց արգելափակել այս համարը</string>
+  <string name="unblock_number_failed_toast">Չհաջողվեց արգելաբացել այս համարը</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">אי אפשר להתקשר בלי להעניק הרשאת גישה לטלפון</string>
+  <string name="pre_call_select_phone_account">‏בחירת כרטיס SIM לשיחה הזו</string>
+  <string name="pre_call_select_phone_account_remember">אני רוצה להשתמש באפשרות הזו גם בעתיד</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">אי אפשר להתקשר בזמן השימוש בכרטיס %1$s</string>
+</resources>

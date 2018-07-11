@@ -1,53 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"Մուտքային զանգ"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"Մուտքային զանգը փոխանցվեց մեկ այլ սարքի"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"Ելքային զանգ"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"Ելքային զանգը փոխանցվեց մեկ այլ սարքի"</string>
-    <string name="type_missed" msgid="2997043831022028176">"Բաց թողնված զանգ"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"Մուտքային տեսազանգ"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"Մուտքային տեսազանգը փոխանցվեց մեկ այլ սարքի"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"Ելքային տեսազանգ"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"Ելքային տեսազանգը փոխանցվեց մեկ այլ սարքի"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"Բաց թողնված տեսազանգ"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"Ձայնային փոստ"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"Մերժված զանգ"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"Արգելափակված զանգ"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"ր"</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"վ"</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="one">seconds</item>
-      <item quantity="other">վայրկյան</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="one">minutes</item>
-      <item quantity="other">րոպե</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"Զանգն ընդունվեց մեկ այլ սարքով"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"<xliff:g id="PHONEACCOUNT">^1</xliff:g>-ին"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"<xliff:g id="NUMBER">%1$s</xliff:g> համարից"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>-ին <xliff:g id="NUMBER">%2$s</xliff:g> համարից"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"Ձայնային փոստ"</string>
-    <string name="now" msgid="2599778506439006806">"Հիմա"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">Մուտքային զանգ</string>
+  <string name="type_incoming_pulled">Մուտքային զանգը փոխանցվեց մեկ այլ սարքի</string>
+  <string name="type_outgoing">Ելքային զանգ</string>
+  <string name="type_outgoing_pulled">Ելքային զանգը փոխանցվեց մեկ այլ սարքի</string>
+  <string name="type_missed">Բաց թողնված զանգ</string>
+  <string name="type_incoming_video">Մուտքային տեսազանգ</string>
+  <string name="type_incoming_video_pulled">Մուտքային տեսազանգը փոխանցվեց մեկ այլ սարքի</string>
+  <string name="type_outgoing_video">Ելքային տեսազանգ</string>
+  <string name="type_outgoing_video_pulled">Ելքային տեսազանգը փոխանցվեց մեկ այլ սարքի</string>
+  <string name="type_missed_video">Բաց թողնված տեսազանգ</string>
+  <string name="type_voicemail">Ձայնային փոստ</string>
+  <string name="type_rejected">Մերժված զանգ</string>
+  <string name="type_blocked">Արգելափակված զանգ</string>
+  <string name="call_details_minutes_abbreviation">ր</string>
+  <string name="call_details_seconds_abbreviation">վ</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s\'%2$s\' %3$s\'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s\'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">seconds</item>
+    <item quantity="other">վայրկյան</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">minutes</item>
+    <item quantity="other">րոպե</item>
+  </plurals>
+  <string name="type_answered_elsewhere">Զանգն ընդունվեց մեկ այլ սարքով</string>
+  <string name="description_phone_account">^1-ին</string>
+  <string name="description_via_number">%1$s համարից</string>
+  <string name="description_via_number_phone_account">%1$s-ին %2$s համարից</string>
+  <string name="voicemail_string">Ձայնային փոստ</string>
+  <string name="just_now">Հենց նոր</string>
+  <string name="new_call_log_carrier_video">Տեսազանգ բջջային ցանցով</string>
+  <string name="new_call_log_duo_video">Duo տեսազանգ</string>
+  <string name="new_call_log_unknown">Անհայտ</string>
+  <string name="new_call_log_secondary_blocked">Արգելափակված</string>
+  <string name="new_call_log_secondary_spam">Սպամ</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">^1 բաց թողնված զանգ ^2-ից</item>
+    <item quantity="other">^1 զանգ, որոնցից վերջինը բաց թողնված զանգ է ^2-ից</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">^1 ընդունված զանգ ^2-ից</item>
+    <item quantity="other">^1 զանգ, որոնցից վերջինը ընդունված զանգ է ^2-ից</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one">^1 ելքային զանգ ^2-ին</item>
+    <item quantity="other">^1 զանգ, որոնցից վերջինը ելքային զանգ է ^2-ին</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">^1 արգելափակված զանգ ^2-ից</item>
+    <item quantity="other">^1 զանգ, որոնցից վերջինը արգելափակված զանգ է ^2-ից</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">^1, համարը՝ ^2</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2:</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3:</string>
 </resources>

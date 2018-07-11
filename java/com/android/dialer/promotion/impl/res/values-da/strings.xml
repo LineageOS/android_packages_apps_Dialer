@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Sms i realtid under et opkald</string>
+  <string name="rtt_promotion_details">Sms i realtid hjælper personer, som er døve, hørehæmmede, talehandicappede,
+    eller som har brug for mere end bare tale, med at foretage opkald. Transskriptioner af sms i realtid gemmes på din enhed 
+    i opkaldshistorikken. %1$s</string>
+  <string name="duo_disclosure_title">Foretag videoopkald med Duo</string>
+  <string name="duo_disclosure_details">Med videoopkald i Google Duo kan du tale med venner og familie ansigt til ansigt. Du opkræves muligvis betaling for dataforbruget. %1$s</string>
+</resources>

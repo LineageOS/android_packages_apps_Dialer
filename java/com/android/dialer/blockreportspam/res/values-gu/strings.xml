@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$sને બ્લૉક કરીએ?</string>
+  <string name="block_number_confirmation_message_new_filtering">તમે હવે આ નંબરથી કૉલ્સ અથવા ટેક્સ્ટ પ્રાપ્ત કરશો નહીં.</string>
+  <string name="block_number_ok">અવરોધિત કરો</string>
+  <string name="unblock_number_ok">અનાવરોધિત કરો</string>
+  <string name="block_report_number_alert_title">%1$sને બ્લૉક કરીએ?</string>
+  <string name="block_report_number_alert_details">હવેથી તમે આ નંબર પરથી કૉલ પ્રાપ્ત કરશો નહીં.</string>
+  <string name="block_number_alert_details">%1$s આ કૉલની સ્પામ તરીકે જાણ કરવામાં આવશે.</string>
+  <string name="unblock_number_alert_details">આ નંબરને અનબ્લૉક કરીને સ્પામ નથી તરીકે જાણ કરાશે. ભાવિ કૉલ સ્પામ તરીકે ઓળખવામાં આવશે નહીં.</string>
+  <string name="unblock_report_number_alert_title">%1$s ને અનબ્લૉક કરીએ?</string>
+  <string name="report_not_spam_alert_button">જાણ કરો</string>
+  <string name="report_not_spam_alert_title">ભૂલની જાણ કરીએ?</string>
+  <string name="report_not_spam_alert_details">%1$s તરફથી ભાવિ કૉલ હવેથી સ્પામ તરીકે ઓળખવામાં આવશે નહીં.</string>
+  <string name="checkbox_report_as_spam_action">કૉલની સ્પામ તરીકે જાણ કરો</string>
+  <string name="block_number_failed_toast">આ નંબર બ્લૉક કરવામાં સમસ્યા આવી રહી છે</string>
+  <string name="unblock_number_failed_toast">આ નંબર અનબ્લૉક કરવામાં સમસ્યા આવી રહી છે</string>
+</resources>

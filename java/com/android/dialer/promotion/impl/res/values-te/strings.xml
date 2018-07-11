@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">కాల్‌లో నిజ సమయ వచన సందేశం</string>
+  <string name="rtt_promotion_details">చెవిటివారు, వినికిడి సమస్యలు ఉన్న వారు, మాట్లాడటంలో సమస్యలు ఉన్న వారు లేదా కేవలం వాయిస్‌తో అర్థం చేసుకోలేని కాలర్‌లకు RTT సహాయపడుతుంది. RTT సందేశ
+లిపి మార్పులు మీ పరికరంలోని కాల్ చరిత్రలో నిల్వ చేయబడతాయి. %1$s</string>
+  <string name="duo_disclosure_title">Duoతో వీడియో కాల్‌లను చేయండి</string>
+  <string name="duo_disclosure_details">Google Duo వీడియో కాలింగ్ మీరు మీ స్నేహితులు మరియు కుటుంబ సభ్యులతో ముఖాముఖిగా సంభాషించడానికి వీలు కల్పిస్తుంది. డేటా ఛార్జీలు వర్తించవచ్చు. %1$s</string>
+</resources>

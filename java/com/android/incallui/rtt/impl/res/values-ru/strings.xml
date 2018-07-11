@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Перейти далее</string>
+  <string name="rtt_input_hint">Введите сообщение</string>
+  <string name="content_description_rtt_chat_avatar">Аватар</string>
+  <string name="rtt_button_back">Назад</string>
+  <string name="rtt_status_banner_text">Ждем, когда присоединится %s</string>
+  <string name="rtt_transcript_advisory">Собеседник может видеть, что вы что-то пишете. Расшифровки сохраняются в журнале звонков на вашем устройстве.</string>
+</resources>

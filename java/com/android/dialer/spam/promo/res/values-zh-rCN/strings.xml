@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">要过滤所有疑似骚扰电话吗？</string>
+  <string name="spam_blocking_promo_text">您日后不会再收到与刚刚所屏蔽电话类似的骚扰电话</string>
+  <string name="spam_blocking_promo_action_filter_spam">过滤骚扰电话</string>
+  <string name="spam_blocking_promo_action_dismiss">关闭</string>
+  <string name="spam_blocking_setting_prompt">设置</string>
+  <string name="spam_blocking_settings_enable_error_text">启用骚扰电话过滤功能时出错</string>
+  <string name="spam_blocking_settings_disable_error_text">停用骚扰电话过滤功能时出错</string>
+  <string name="spam_blocking_settings_enable_complete_text">骚扰电话过滤功能已启用</string>
+  <string name="spam_blocking_settings_disable_complete_text">骚扰电话过滤功能已停用</string>
+</resources>

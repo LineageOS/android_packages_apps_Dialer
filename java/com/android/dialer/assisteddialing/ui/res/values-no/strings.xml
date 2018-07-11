@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Hjelp med å slå numre</string>
+  <string name="assisted_dialing_setting_summary">Forutsi og legg til landkode når du ringer mens du er utenlands</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Identifisert automatisk • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Identifisert automatisk</string>
+  <string name="assisted_dialing_setting_cc_category_title">Hjemland</string>
+  <string name="assisted_dialing_setting_cc_title">Standard hjemland</string>
+</resources>

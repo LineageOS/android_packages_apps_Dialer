@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">ກ່ອງຂໍ້ຄວາມແບບຊ່ວຍເຫຼືອ</string>
+  <string name="assisted_dialing_setting_summary">ຄາດເດົາ ແລະ ເພີ່ມລະຫັດປະເທດເມື່ອທ່ານໂທໃນລະຫວ່າງເດີນທາງຢູ່ຕ່າງປະເທດ</string>
+  <string name="assisted_dialing_setting_cc_default_summary">ກວດສອບອັດຕະໂນມັດ• %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">ກວດສອບອັດຕະໂນມັດ</string>
+  <string name="assisted_dialing_setting_cc_category_title">ປະເທດບ້ານເກີດ</string>
+  <string name="assisted_dialing_setting_cc_title">ປະເທດບ້ານເກີດເລີ່ມຕົ້ນ</string>
+</resources>

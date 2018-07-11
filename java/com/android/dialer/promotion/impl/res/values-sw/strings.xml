@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Kutuma SMS katika muda halisi wakati unapiga simu</string>
+  <string name="rtt_promotion_details">RTT huwasaidia wapigaji simu ambao ni viziwi, wenye matatizo ya kusikia, wenye matatizo ya kuzungumza au wanaohitaji kufanya zaidi ya kuzungumza tu. Manukuu ya ujumbe wa RTT huhifadhiwa kwenye kifaa chako katika rekodi ya simu zilizopigwa. %1$s</string>
+  <string name="duo_disclosure_title">Piga simu za video kwa kutumia Duo</string>
+  <string name="duo_disclosure_details">Huduma ya simu ya video ya Google Duo inakuwezesha kuzungumza na marafiki na familia ana kwa ana. Gharama ya kutumia data inaweza kutozwa. %1$s</string>
+</resources>

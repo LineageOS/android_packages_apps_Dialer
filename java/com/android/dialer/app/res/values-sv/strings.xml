@@ -1,179 +1,171 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2202739481132958990">"Telefon"</string>
-    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"Telefonens knappsats"</string>
-    <string name="callHistoryIconLabel" msgid="7493268743411968630">"Samtalshistorik"</string>
-    <string name="action_copy_number_text" msgid="832682558551502319">"Kopiera nummer"</string>
-    <string name="copy_transcript_text" msgid="937904189017310829">"Kopiera transkription"</string>
-    <string name="action_edit_number_before_call" msgid="8017492815878473837">"Redigera nummer före samtal"</string>
-    <string name="call_log_delete_all" msgid="7852970926906523784">"Rensa samtalshistorik"</string>
-    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"Radera röstmeddelande"</string>
-    <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"Röstbrevlåda raderad"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"ÅNGRA"</string>
-    <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"Vill du rensa samtalshistoriken?"</string>
-    <string name="clearCallLogConfirmation" msgid="6844949465815109166">"Alla samtal raderas från historiken"</string>
-    <string name="clearCallLogProgress_title" msgid="995004835687361977">"Rensar samtalshistoriken ..."</string>
-    <string name="notification_missedCallTitle" msgid="8283366068539898486">"Missat samtal"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Missat jobbsamtal"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Missade samtal"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> missade samtal"</string>
-    <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Ring upp"</string>
-    <string name="notification_missedCall_message" msgid="5086910028988305964">"Meddelande"</string>
-    <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Ring <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Numret till röstbrevlådan är okänt"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> röstmeddelanden </item>
-      <item quantity="one">röstmeddelande</item>
-    </plurals>
-    <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Nytt röstmeddelande från <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="4384373852257757295">"Det gick inte att spela upp röstmeddelandet"</string>
-    <string name="voicemail_fetching_content" msgid="572320120918636014">"Läser in röstmeddelande ..."</string>
-    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"Det gick inte att läsa in röstmeddelandet"</string>
-    <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_playback_speakerphone" msgid="4852027754869750227">"Slå på eller av högtalartelefon"</string>
-    <string name="description_playback_seek" msgid="1340910573254132520">"Sök uppspelningsläge"</string>
-    <string name="action_menu_call_history_description" msgid="8829135306925008546">"Samtalshistorik"</string>
-    <string name="action_menu_overflow_description" msgid="7648679686746517341">"Fler alternativ"</string>
-    <string name="action_menu_dialpad_button" msgid="1970631633457493180">"knappsats"</string>
-    <string name="dialer_settings_label" msgid="4980176284150290175">"Inställningar"</string>
-    <string name="simulator_submenu_label" msgid="186156287346615267">"Simulator"</string>
-    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Skapa genväg till anv.gränssn."</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Öppnar läget för massåtgärd"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Stängde läget för massåtgärd"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Markerade <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Avmarkerade <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_contact_details" msgid="3341280873855253464">"Kontaktuppgifter för <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_spam_contact_details" msgid="5592578752881528368">"Kontaktuppgifter för misstänkt spamsamtal <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> samtal."</string>
-    <string name="description_video_call" msgid="3738199365585751727">"Videosamtal."</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"Starta röstsökning"</string>
-    <string name="voicemail" msgid="8899540969000957954">"Röstbrevlåda"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Avbryt läget för massåtgärd"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Radera"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Avbryt"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> har markerats"</string>
-    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
-      <item quantity="other">"<b>"Vill du ta bort dessa röstmeddelanden? "</b>"</item>
-      <item quantity="one">"<b>"Vill du ta bort det här röstmeddelandet? "</b>"</item>
-    </plurals>
-    <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
-    <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> kl. <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
-    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Röstsökning är inte tillgänglig"</string>
-    <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Sök efter kontakter"</string>
-    <string name="block_number_search_hint" msgid="5377706079015099416">"Ange nummer eller kontakt"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Samtalshistoriken är tom"</string>
-    <string name="call_log_all_empty_action" msgid="852218280136243014">"Ring ett samtal"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"Du har inga missade samtal."</string>
-    <string name="call_log_voicemail_empty" msgid="273623903423275178">"Din röstbrevlåda är tom."</string>
-    <string name="call_log_activity_title" msgid="1275242727244945527">"Samtalshistorik"</string>
-    <string name="call_log_all_title" msgid="6042262422192020327">"Alla"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"Missade"</string>
-    <string name="tab_speed_dial" msgid="6616404752227561075">"Kortnummer"</string>
-    <string name="tab_history" msgid="7420269368689503596">"Samtalshistorik"</string>
-    <string name="tab_all_contacts" msgid="5531733977693943015">"Kontakter"</string>
-    <string name="tab_voicemail" msgid="2458548090088316246">"Röstbrevlåda"</string>
-    <string name="search_shortcut_call_number" msgid="8847918845036880688">"Ring <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"Skapa ny kontakt"</string>
-    <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"Lägg till i kontakt"</string>
-    <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"Skicka sms"</string>
-    <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Ring videosamtal"</string>
-    <string name="search_shortcut_block_number" msgid="4587283230665805776">"Blockera nummer"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"Du har ingen kontakt som snabbval ännu"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Lägg till en favorit"</string>
-    <string name="remove_contact" msgid="2353580570488923668">"Ta bort"</string>
-    <string name="select_all" msgid="408601760696146245">"Markera alla"</string>
-    <string name="call_log_action_video_call" msgid="7565549950343850819">"Videosamtal"</string>
-    <string name="call_log_action_send_message" msgid="6948727362660115554">"Skicka ett meddelande"</string>
-    <string name="call_log_action_details" msgid="2091370737371449501">"Samtalsinfo"</string>
-    <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Skicka till …"</string>
-    <string name="call_log_action_call" msgid="682724094251540583">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_incoming_missed_call" msgid="8292535799379230029">"Missat samtal från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="3920182963103160610">"Besvarat samtal från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_unread_voicemail" msgid="145170985013419170">"Nytt röstmeddelande från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_read_voicemail" msgid="5585559881573227732">"Röstmeddelande från <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="543952487882919924">"Ring till <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="call_log_via_number" msgid="1340307109806397650">"med <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> med <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="description_call_action" msgid="4042796498169106545">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="1237090968588659650">"Ring videosamtal till <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="3290143432403538524">"Lyssna på ett röstmeddelande från <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_create_new_contact_action" msgid="1928282350281564130">"Skapa en kontakt för <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"Lägg till <xliff:g id="NAMEORNUMBER">^1</xliff:g> i befintliga kontakter"</string>
-    <string name="description_details_action" msgid="2061866409737706174">"Samtalsinformation för <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="call_log_header_today" msgid="1576119097475845293">"I dag"</string>
-    <string name="call_log_header_yesterday" msgid="5616077776205329563">"I går"</string>
-    <string name="call_log_header_other" msgid="4940676886254217644">"Äldre"</string>
-    <string name="voicemail_speaker_on" msgid="3151333608926996668">"Slå på högtalaren."</string>
-    <string name="voicemail_speaker_off" msgid="2530064206962034201">"Stäng av högtalaren."</string>
-    <string name="voicemail_play_start_pause" msgid="3874823480278334664">"Starta eller pausa uppspelning."</string>
-    <string name="display_options_title" msgid="3880091801055797975">"Visningsalternativ"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Ljud och vibration"</string>
-    <string name="accessibility_settings_title" msgid="3329027650429831820">"Tillgänglighet"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"Ringsignal"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"Vibrera också vid samtal"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Knappsatsljud"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Knappsatsljudets längd"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel">Telefon</string>
+  <string name="launcherDialpadActivityLabel">Telefonens knappsats</string>
+  <string name="callHistoryIconLabel">Samtalshistorik</string>
+  <string name="action_copy_number_text">Kopiera nummer</string>
+  <string name="copy_transcript_text">Kopiera transkription</string>
+  <string name="action_edit_number_before_call">Redigera nummer före samtal</string>
+  <string name="call_log_delete_all">Rensa samtalshistorik</string>
+  <string name="call_log_trash_voicemail">Radera röstmeddelande</string>
+  <string name="snackbar_voicemail_deleted">Röstbrevlåda raderad</string>
+  <string name="clearCallLogConfirmation_title">Vill du rensa samtalshistoriken?</string>
+  <string name="clearCallLogConfirmation">Alla samtal raderas från historiken</string>
+  <string name="clearCallLogProgress_title">Rensar samtalshistoriken ...</string>
+  <string name="notification_missedCallTitle">Missat samtal</string>
+  <string name="notification_missedWorkCallTitle">Missat jobbsamtal</string>
+  <string name="notification_missedCallsTitle">Missade samtal</string>
+  <string name="notification_missedCallsMsg">%d missade samtal</string>
+  <string name="notification_missedCall_call_back">Ring upp</string>
+  <string name="notification_missedCall_message">Meddelande</string>
+  <string name="post_call_notification_message">%1$s: %2$s</string>
+  <string name="notification_voicemail_text_format">Ring %s</string>
+  <string name="notification_voicemail_no_vm_number">Numret till röstbrevlådan är okänt</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">röstmeddelande</item>
+    <item quantity="other"> %1$d röstmeddelanden </item>
+  </plurals>
+  <string name="notification_voicemail_callers_list">%1$s, %2$s</string>
+  <string name="notification_new_voicemail_ticker">Nytt röstmeddelande från %1$s</string>
+  <string name="voicemail_playback_error">Det gick inte att spela upp röstmeddelandet</string>
+  <string name="voicemail_fetching_content">Läser in röstmeddelande ...</string>
+  <string name="voicemail_fetching_timout">Det gick inte att läsa in röstmeddelandet</string>
+  <string name="call_log_item_count_and_date">(%1$d) %2$s</string>
+  <string name="description_playback_speakerphone">Slå på eller av högtalartelefon</string>
+  <string name="description_playback_seek">Sök uppspelningsläge</string>
+  <string name="action_menu_call_history_description">Samtalshistorik</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Fler alternativ</string>
+  <string name="action_menu_dialpad_button">knappsats</string>
+  <string name="dialer_settings_label">Inställningar</string>
+  <string name="simulator_submenu_label">Simulator</string>
+  <string name="new_ui_launcher_shortcut_label">Skapa genväg till anv.gränssn.</string>
+  <string name="description_entering_bulk_action_mode">Öppnar läget för massåtgärd</string>
+  <string name="description_leaving_bulk_action_mode">Stängde läget för massåtgärd</string>
+  <string name="description_selecting_bulk_action_mode">Markerade %1$s</string>
+  <string name="description_unselecting_bulk_action_mode">Avmarkerade %1$s</string>
+  <string name="description_contact_details">Kontaktuppgifter för %1$s</string>
+  <string name="description_spam_contact_details">Kontaktuppgifter för misstänkt spamsamtal %1$s</string>
+  <string name="description_num_calls">%1$s samtal.</string>
+  <string name="description_video_call">Videosamtal.</string>
+  <string name="description_start_voice_search">Starta röstsökning</string>
+  <string name="voicemail">Röstbrevlåda</string>
+  <string name="description_cancel_multi_select">Avbryt läget för massåtgärd</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Radera</string>
+  <string name="voicemailMultiSelectDeleteCancel">Avbryt</string>
+  <string name="voicemailMultiSelectActionBarTitle">%1$s har markerats</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>Vill du ta bort det här röstmeddelandet? </b></item>
+    <item quantity="other"><b>Vill du ta bort dessa röstmeddelanden? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat">%1$s kl. %2$s</string>
+  <string name="voicemailDurationFormat">%1$02d:%2$02d</string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
+  <string name="voice_search_not_available">Röstsökning är inte tillgänglig</string>
+  <string name="dialer_hint_find_contact">Sök efter kontakter</string>
+  <string name="block_number_search_hint">Ange nummer eller kontakt</string>
+  <string name="call_log_all_empty">Samtalshistoriken är tom</string>
+  <string name="call_log_all_empty_action">Ring ett samtal</string>
+  <string name="call_log_missed_empty">Du har inga missade samtal.</string>
+  <string name="call_log_voicemail_empty">Din röstbrevlåda är tom.</string>
+  <string name="call_log_activity_title">Samtalshistorik</string>
+  <string name="call_log_all_title">Alla</string>
+  <string name="call_log_missed_title">Missade</string>
+  <string name="tab_speed_dial">Kortnummer</string>
+  <string name="tab_history">Samtalshistorik</string>
+  <string name="tab_all_contacts">Kontakter</string>
+  <string name="tab_voicemail">Röstbrevlåda</string>
+  <string name="search_shortcut_call_number">Ring %s</string>
+  <string name="search_shortcut_create_new_contact">Skapa ny kontakt</string>
+  <string name="search_shortcut_add_to_contact">Lägg till i kontakt</string>
+  <string name="search_shortcut_send_sms_message">Skicka sms</string>
+  <string name="search_shortcut_make_video_call">Ring videosamtal</string>
+  <string name="search_shortcut_block_number">Blockera nummer</string>
+  <string name="speed_dial_empty">Du har ingen kontakt som snabbval ännu</string>
+  <string name="speed_dial_empty_add_favorite_action">Lägg till en favorit</string>
+  <string name="remove_contact">Ta bort</string>
+  <string name="select_all">Markera alla</string>
+  <string name="call_log_action_video_call">Videosamtal</string>
+  <string name="call_log_action_set_up_video">Konfigurera videosamtal</string>
+  <string name="call_log_action_invite_video">Bjud in till videosamtal</string>
+  <string name="call_log_action_send_message">Skicka ett meddelande</string>
+  <string name="call_log_action_details">Samtalsinfo</string>
+  <string name="call_log_action_share_voicemail">Skicka till …</string>
+  <string name="call_log_action_call">Ring ^1</string>
+  <string name="description_incoming_missed_call">Missat samtal från ^1, ^2, ^3, ^4.</string>
+  <string name="description_incoming_answered_call">Besvarat samtal från ^1, ^2, ^3, ^4.</string>
+  <string name="description_unread_voicemail">Nytt röstmeddelande från ^1, ^2, ^3, ^4.</string>
+  <string name="description_read_voicemail">Röstmeddelande från ^1, ^2, ^3, ^4.</string>
+  <string name="description_outgoing_call">Ring till ^1, ^2, ^3, ^4.</string>
+  <string name="call_log_via_number">med %1$s</string>
+  <string name="call_log_via_number_phone_account">%1$s med %2$s</string>
+  <string name="description_call_action">Ring ^1</string>
+  <string name="description_video_call_action">Ring videosamtal till ^1.</string>
+  <string name="description_voicemail_action">Lyssna på ett röstmeddelande från ^1</string>
+  <string name="description_create_new_contact_action">Skapa en kontakt för ^1</string>
+  <string name="description_add_to_existing_contact_action">Lägg till ^1 i befintliga kontakter</string>
+  <string name="description_details_action">Samtalsinformation för ^1</string>
+  <string name="call_log_header_today">I dag</string>
+  <string name="call_log_header_yesterday">I går</string>
+  <string name="call_log_header_other">Äldre</string>
+  <string name="voicemail_speaker_on">Slå på högtalaren.</string>
+  <string name="voicemail_speaker_off">Stäng av högtalaren.</string>
+  <string name="voicemail_play_start_pause">Starta eller pausa uppspelning.</string>
+  <string name="display_options_title">Visningsalternativ</string>
+  <string name="sounds_and_vibration_title">Ljud och vibration</string>
+  <string name="accessibility_settings_title">Tillgänglighet</string>
+  <string name="ringtone_title">Ringsignal</string>
+  <string name="vibrate_on_ring_title">Vibrera också vid samtal</string>
+  <string name="dtmf_tone_enable_title">Knappsatsljud</string>
+  <string name="dtmf_tone_length_title">Knappsatsljudets längd</string>
   <string-array name="dtmf_tone_length_entries">
-    <item msgid="3136353015227162823">"Normal"</item>
-    <item msgid="5376841175538523822">"Lång"</item>
+    <item>Normal</item>
+    <item>Lång</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"Snabbsvar"</string>
-    <string name="call_settings_label" msgid="7824611757200960807">"Samtal"</string>
-    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Samtalsblockering"</string>
-    <string name="voicemail_settings_label" msgid="4594299554519920570">"Röstbrevlåda"</string>
-    <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blockeringen har inaktiverats tillfälligt"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Samtalsblockering har inaktiverats eftersom du ringde ett larmnummer från den här mobilen under de senaste 48 timmarna. Blockeringen aktiveras igen när 48 timmar har gått."</string>
-    <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importera nummer"</string>
-    <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"Du har tidigare angett via andra appar att vissa inkommande samtal ska skickas till röstbrevlådan automatiskt."</string>
-    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"Visa telefonnummer"</string>
-    <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"Importera"</string>
-    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Häv blockeringen av numret"</string>
-    <string name="addBlockedNumber" msgid="3053473735238295551">"Lägg till telefonnummer"</string>
-    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Samtal från de här numren blockeras och röstmeddelanden raderas automatiskt."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Samtal från de här numren blockeras, men det kan fortfarande gå att lämna ett röstmeddelande."</string>
-    <string name="block_list" msgid="4701585783411870782">"Blockerade nummer"</string>
-    <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> är redan blockerat."</string>
-    <string name="phone_account_settings_label" msgid="8372485478006965920">"Konton för samtal"</string>
-    <string name="permission_no_speeddial" msgid="8487215628510596753">"Du måste aktivera behörigheten Kontakter för att kunna använda snabbuppringning."</string>
-    <string name="permission_no_calllog" msgid="4053705651238775784">"Du måste aktivera behörigheten Telefon för att kunna visa samtalsloggen."</string>
-    <string name="permission_no_search" msgid="2424710404207193826">"Aktivera behörigheter för Kontakter om du vill söka bland kontakterna."</string>
-    <string name="permission_place_call" msgid="8686908130349369423">"Du måste aktivera behörigheten Telefon för att kunna ringa."</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Telefonappen har inte skrivbehörighet i systeminställningarna."</string>
-    <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Blockerad"</string>
-    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Blockera/rapportera spam"</string>
-    <string name="call_log_action_block_number" msgid="5048188386501998865">"Blockera nummer"</string>
-    <string name="call_log_action_remove_spam" msgid="2045319806318398403">"Inte spam"</string>
-    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Häv blockeringen av numret"</string>
-    <string name="spam_number_call_log_label" msgid="2678431398326811131">"Spam"</string>
-    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> är offline och går inte att nå"</string>
-    <string name="about_phone_label" msgid="582991354677973731">"Om"</string>
-    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transkriberat av Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transkriberar …"</string>
-    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transkription inte tillgänglig."</string>
-    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transkription inte tillgänglig. Språket stöds inte."</string>
-    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transkription inte tillgänglig. Inget tal identifierat."</string>
-    <string name="view_conversation" msgid="7895904782094119702">"Visa"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"Samtalet har raderats. Visa och radera bilagor som delats under samtalet i Messages."</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Samtalen har raderats. Visa och radera bilagor som delats under samtal i Messages."</string>
+  <string name="respond_via_sms_setting_title">Snabbsvar</string>
+  <string name="call_settings_label">Samtal</string>
+  <string name="manage_blocked_numbers_label">Blockerade nummer</string>
+  <string name="voicemail_settings_label">Röstbrevlåda</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">Blockeringen har inaktiverats tillfälligt</string>
+  <string name="blocked_numbers_disabled_emergency_desc">Samtalsblockering har inaktiverats eftersom du ringde ett larmnummer från den här mobilen under de senaste 48 timmarna. Blockeringen aktiveras igen när 48 timmar har gått.</string>
+  <string name="import_send_to_voicemail_numbers_label">Importera nummer</string>
+  <string name="blocked_call_settings_import_description">Du har tidigare angett via andra appar att vissa inkommande samtal ska skickas till röstbrevlådan automatiskt.</string>
+  <string name="blocked_call_settings_view_numbers_button">Visa telefonnummer</string>
+  <string name="blocked_call_settings_import_button">Importera</string>
+  <string name="description_blocked_number_list_delete">Häv blockeringen av numret</string>
+  <string name="addBlockedNumber">Lägg till telefonnummer</string>
+  <string name="block_number_footer_message_vvm">Samtal från de här numren blockeras och röstmeddelanden raderas automatiskt.</string>
+  <string name="block_number_footer_message_no_vvm">Samtal från de här numren blockeras, men det kan fortfarande gå att lämna ett röstmeddelande.</string>
+  <string name="block_list">Blockerade nummer</string>
+  <string name="alreadyBlocked">%1$s är redan blockerat.</string>
+  <string name="phone_account_settings_label">Konton för samtal</string>
+  <string name="permission_no_speeddial">Du måste aktivera behörigheten Kontakter för att kunna använda snabbuppringning.</string>
+  <string name="permission_no_calllog">Du måste aktivera behörigheten Telefon för att kunna visa samtalsloggen.</string>
+  <string name="permission_no_search">Aktivera behörigheter för Kontakter om du vill söka bland kontakterna.</string>
+  <string name="permission_place_call">Du måste aktivera behörigheten Telefon för att kunna ringa.</string>
+  <string name="toast_cannot_write_system_settings">Telefonappen har inte skrivbehörighet i systeminställningarna.</string>
+  <string name="blocked_number_call_log_label">Blockerad</string>
+  <string name="call_log_action_block_report_number">Blockera/rapportera spam</string>
+  <string name="call_log_action_block_number">Blockera nummer</string>
+  <string name="call_log_action_remove_spam">Inte spam</string>
+  <string name="call_log_action_unblock_number">Häv blockeringen av numret</string>
+  <string name="spam_number_call_log_label">Spam</string>
+  <string name="call_composer_connection_failed">%1$s är offline och går inte att nå</string>
+  <string name="about_phone_label">Om</string>
+  <string name="voicemail_transcription_branding_text">Transkriberat av Google</string>
+  <string name="voicemail_transcription_in_progress">Transkriberar …</string>
+  <string name="voicemail_transcription_failed">Transkription inte tillgänglig.</string>
+  <string name="voicemail_transcription_failed_language_not_supported">Transkription inte tillgänglig. Språket stöds inte.</string>
+  <string name="voicemail_transcription_failed_no_speech">Transkription inte tillgänglig. Inget tal identifierat.</string>
+  <string name="voicemail_donation_promo_title">Vill du hjälpa till att förbättra transkriptionskvaliteten?</string>
+  <string name="voicemail_donation_promo_content">Låt Google granska denna och framtida röstmeddelanden med transkriptioner. De lagras anonymt. Du kan ändra inställningarna när du vill. %1$s</string>
+  <string name="voicemail_donation_promo_opt_in">OK</string>
+  <string name="voicemail_donation_promo_opt_out">Nej tack</string>
+  <string name="voicemail_transcription_rating">Betygsätt transkriptionskvalitet</string>
+  <string name="voicemail_transcription_rating_thanks">Tack för din feedback</string>
+  <string name="description_rating_good">Gilla</string>
+  <string name="description_rating_bad">Ogilla</string>
+  <string name="view_conversation">Visa</string>
+  <string name="ec_data_deleted">Samtalet har raderats. Visa och radera bilagor som delats under samtalet i Messages.</string>
+  <string name="multiple_ec_data_deleted">Samtalen har raderats. Visa och radera bilagor som delats under samtal i Messages.</string>
 </resources>

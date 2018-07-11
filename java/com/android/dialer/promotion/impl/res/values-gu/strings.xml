@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">કૉલમાં રિઅલ-ટાઇમ ટેક્સ્ટ મેસેજિંગ</string>
+  <string name="rtt_promotion_details">જેઓ બહેરા, ઓછું સાંભળતા, બોલવામાં તકલીફવાળા અથવા જેમને માત્ર વૉઇસ કરતાં પણ
+    કંઈક વધુની જરૂર હોય એવા કૉલરોને RTT સહાય કરે છે. RTT મેસેજિંગ ટ્રાન્સક્રિપ્ટને તમારા ઉપકરણ પર કૉલ ઇતિહાસમાં
+    સ્ટોર કરવામાં આવે છે. %1$s</string>
+  <string name="duo_disclosure_title">Duo વડે વીડિઓ કૉલ કરો</string>
+  <string name="duo_disclosure_details">Google Duo વીડિઓ કૉલિંગ વડે તમે મિત્રો અને કુટુંબ સાથે સામ-સામે ચૅટ કરી શકો છો. ડેટા શુલ્ક લાગુ થઈ શકે છે. %1$s</string>
+</resources>

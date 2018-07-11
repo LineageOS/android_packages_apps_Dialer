@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Spam olabilecek çağrılar filtrelensin mi?</string>
+  <string name="spam_blocking_promo_text">Az önce engellediğiniz gibi çağrılar artık
+      sizi rahatsız edemez</string>
+  <string name="spam_blocking_promo_action_filter_spam">Spam Çağrıları Filtrele</string>
+  <string name="spam_blocking_promo_action_dismiss">Kapat</string>
+  <string name="spam_blocking_setting_prompt">Ayarlar</string>
+  <string name="spam_blocking_settings_enable_error_text">Spam filtresi etkinleştirilirken sorun oluştu</string>
+  <string name="spam_blocking_settings_disable_error_text">Spam filtresi devre dışı bırakılırken sorun oluştu</string>
+  <string name="spam_blocking_settings_enable_complete_text">Spam filtresi etkinleştirildi</string>
+  <string name="spam_blocking_settings_disable_complete_text">Spam filtresi devre dışı bırakıldı</string>
+</resources>

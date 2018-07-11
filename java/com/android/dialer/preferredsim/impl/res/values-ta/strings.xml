@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">ஃபோன் அனுமதி இல்லாமல் அழைக்க முடியாது</string>
+  <string name="pre_call_select_phone_account">இந்த அழைப்பிற்கான சிம்மைத் தேர்வுசெய்க</string>
+  <string name="pre_call_select_phone_account_remember">இந்த விருப்பத்தை நினைவில்கொள்</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">%1$sஐப் பயன்படுத்தும் போது கிடைக்காது</string>
+</resources>

@@ -1,38 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"Przesuń palcem od ikony, aby odrzucić połączenie i wysłać wiadomość"</string>
-    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"Przesuń palcem od ikony, aby odebrać jako połączenie głosowe"</string>
-    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"Przesuń w górę, aby odebrać połączenie i wstrzymać trwającą rozmowę"</string>
-    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"Przesuń w górę, aby odebrać połączenie i zakończyć wstrzymaną rozmowę"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"Przesuń palcem od ikony, aby odebrać połączenie i zakończyć trwającą rozmowę"</string>
-    <string name="call_incoming_message_custom" msgid="5819492800418293238">"Napisz własną…"</string>
-    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"Napisz własną…"</string>
-    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"Anuluj"</string>
-    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"Wyślij"</string>
-    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"Odrzuć to połączenie, wysyłając wiadomość"</string>
-    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"Odbierz jako połączenie głosowe"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"Odbierz połączenie i zakończ trwającą rozmowę"</string>
-    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"Odrzuć, wysyłając wiadomość"</string>
-    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"Odbierz jako połączenie głosowe"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Odbierz połączenie i zakończ trwającą rozmowę"</string>
-    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Wideo jest wyłączone"</string>
-    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Przesuń dwoma palcami w górę, aby odebrać. Przesuń dwoma palcami w dół, aby odrzucić."</string>
-    <string name="call_incoming_important" msgid="3762352743365137090">"Ważne"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">Przesuń palcem od ikony, aby odrzucić połączenie i wysłać wiadomość</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">Przesuń palcem od ikony, aby odebrać jako rozmowę głosową</string>
+  <string name="call_incoming_default_label_answer_and_release_second">Przesuń w górę, aby odebrać połączenie i wstrzymać trwającą rozmowę</string>
+  <string name="call_incoming_default_label_answer_and_release_third">Przesuń w górę, aby odebrać połączenie i zakończyć wstrzymaną rozmowę</string>
+  <string name="call_incoming_swipe_to_answer_and_release">Przesuń palcem od ikony, aby odebrać połączenie i zakończyć trwającą rozmowę</string>
+  <string name="call_incoming_message_custom">Napisz własną…</string>
+  <string name="call_incoming_respond_via_sms_custom_message">Napisz własną…</string>
+  <string name="call_incoming_custom_message_cancel">Anuluj</string>
+  <string name="call_incoming_custom_message_send">Wyślij</string>
+  <string name="a11y_incoming_call_reject_with_sms">Odrzuć to połączenie, wysyłając wiadomość</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Odbierz jako rozmowę głosową</string>
+  <string name="a11y_incoming_call_answer_and_release">Odbierz połączenie i zakończ trwającą rozmowę</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">Odrzuć, wysyłając wiadomość</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Odbierz jako rozmowę głosową</string>
+  <string name="a11y_description_incoming_call_answer_and_release">Odbierz połączenie i zakończ trwającą rozmowę</string>
+  <string name="call_incoming_video_is_off">Wideo jest wyłączone</string>
+  <string name="a11y_incoming_call_swipe_gesture_prompt">Przesuń dwoma palcami w górę, aby odebrać. Przesuń dwoma palcami w dół, aby odrzucić.</string>
+  <string name="call_incoming_important">Ważne</string>
 </resources>

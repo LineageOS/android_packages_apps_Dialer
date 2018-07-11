@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Текстови съобщения в реално време в обаждане</string>
+  <string name="rtt_promotion_details">ТСРВ подпомага обаждащите се, които са глухи, с влошен слух, имат проблеми с говора или се нуждаят от повече от само глас. Преписите на съобщенията с ТСРВ се съхраняват в историята на обажданията на устройството ви. %1$s</string>
+  <string name="duo_disclosure_title">Извършвайте видеообаждания с Duo</string>
+  <string name="duo_disclosure_details">Видеообажданията с Google Duo ви дават възможност да говорите с близки и приятели лице в лице. Възможно е да бъдете таксувани за данни. %1$s</string>
+</resources>

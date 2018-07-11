@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Bütün şübhəli spam zəngləri filtrlənsin?</string>
+  <string name="spam_blocking_promo_text">Yeni blok etdiyiniz kimi zənglər artıq Sizi narahat etməyəcək</string>
+  <string name="spam_blocking_promo_action_filter_spam">Spamı Filtrləyin</string>
+  <string name="spam_blocking_promo_action_dismiss">Kənarlaşdırın</string>
+  <string name="spam_blocking_setting_prompt">Ayarlar</string>
+  <string name="spam_blocking_settings_enable_error_text">Spam filterini aktiv edərkən xəta baş verdi</string>
+  <string name="spam_blocking_settings_disable_error_text">Spam filterini deaktiv edərkən xəta baş verdi</string>
+  <string name="spam_blocking_settings_enable_complete_text">Spam filteri aktivdir</string>
+  <string name="spam_blocking_settings_disable_complete_text">Spam filtri deaktivdir</string>
+</resources>

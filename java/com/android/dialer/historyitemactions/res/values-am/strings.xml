@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">የድምጽ ጥሪ</string>
+  <string name="video_call">የቪዲዮ ጥሪ</string>
+  <string name="add_to_contacts">እውቂያ ያክሉ</string>
+  <string name="send_a_message">መልዕክት</string>
+  <string name="not_spam">አይፈለጌ መልዕክት አይደለም</string>
+  <string name="block_number">አግድ</string>
+  <string name="unblock_number">እገዳውን አንሳ</string>
+  <string name="block_and_optionally_report_spam">አይፈለጌ መልዕክትን አግድ/ሪፖርት አድርግ</string>
+  <string name="copy_number">ቁጥር ቅዳ</string>
+</resources>

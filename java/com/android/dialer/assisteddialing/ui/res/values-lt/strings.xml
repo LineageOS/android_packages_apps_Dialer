@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Pagalbinis numerio rinkimas</string>
+  <string name="assisted_dialing_setting_summary">Numatyti ir pridėti šalies kodą, kai skambinama keliaujant užsienyje</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automatiškai aptikta • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automatiškai aptikta</string>
+  <string name="assisted_dialing_setting_cc_category_title">Gyvenamoji šalis</string>
+  <string name="assisted_dialing_setting_cc_title">Numatytoji gyvenamoji šalis</string>
+</resources>

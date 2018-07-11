@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">רוצה לסנן את כל השיחות שחשודות כספאם?</string>
+  <string name="spam_blocking_promo_text">שיחות כמו השיחה שחסמת לא יטרידו אותך יותר.</string>
+  <string name="spam_blocking_promo_action_filter_spam">סינון ספאם</string>
+  <string name="spam_blocking_promo_action_dismiss">סגירה</string>
+  <string name="spam_blocking_setting_prompt">הגדרות</string>
+  <string name="spam_blocking_settings_enable_error_text">הייתה בעיה בהפעלת הסינון של שיחות ספאם</string>
+  <string name="spam_blocking_settings_disable_error_text">הייתה בעיה בהשבתת הסינון של שיחות ספאם</string>
+  <string name="spam_blocking_settings_enable_complete_text">סינון הספאם הופעל</string>
+  <string name="spam_blocking_settings_disable_complete_text">סינון הספאם הושבת</string>
+</resources>

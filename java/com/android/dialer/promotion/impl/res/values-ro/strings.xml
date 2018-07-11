@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Schimb de mesaje în timp real într-un apel</string>
+  <string name="rtt_promotion_details">TTR oferă asistență apelanților fără auz, cu deficiențe de auz, care au dizabilități
+    de vorbire sau care au nevoie de mai mult decât vocea. Transcrierile mesajelor TTR sunt stocate pe dispozitiv
+    în istoricul apelurilor. %1$s</string>
+  <string name="duo_disclosure_title">Inițiați apeluri video folosind Duo</string>
+  <string name="duo_disclosure_details">Folosind apelarea video din Google Duo, puteți conversa cu prietenii și familia față în față. Se pot aplica taxe pentru date. %1$s</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Сообщения RTT во время вызова</string>
+  <string name="rtt_promotion_details">Функция RTT предназначена для пользователей
+    с нарушениями слуха и речи. Расшифровки сообщений RTT сохраняются в журнале звонков
+    на вашем устройстве. %1$s</string>
+  <string name="duo_disclosure_title">Начинайте видеовстречи с помощью Duo</string>
+  <string name="duo_disclosure_details">Общайтесь с друзьями и родными в видеочатах Google Duo. Может взиматься плата за передачу данных. %1$s</string>
+</resources>

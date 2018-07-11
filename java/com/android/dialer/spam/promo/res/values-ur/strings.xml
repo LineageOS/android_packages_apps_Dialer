@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">کیا تمام مشتبہ اسپام کالز فلٹر کریں؟</string>
+  <string name="spam_blocking_promo_text">کال جس کو آپ نے ابھی مسدود کیا ہے اس طرح کی کالز آپ کو مزید
+      پریشان نہیں کریں گی</string>
+  <string name="spam_blocking_promo_action_filter_spam">سپام فلٹر کریں</string>
+  <string name="spam_blocking_promo_action_dismiss">برخاست کریں</string>
+  <string name="spam_blocking_setting_prompt">ترتیبات</string>
+  <string name="spam_blocking_settings_enable_error_text">اسپام فلٹر کرنے کی سہولت کو آن کرنے میں مسئلہ</string>
+  <string name="spam_blocking_settings_disable_error_text">اسپام فلٹر کرنے کی سہولت کو آف کرنے میں مسئلہ</string>
+  <string name="spam_blocking_settings_enable_complete_text">سپام فلٹر کرنے کی سہولت آن ہے</string>
+  <string name="spam_blocking_settings_disable_complete_text">سپام فلٹر کرنے کی سہولت آف ہے</string>
+</resources>

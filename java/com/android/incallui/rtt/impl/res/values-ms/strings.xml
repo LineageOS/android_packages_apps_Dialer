@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Teruskan</string>
+  <string name="rtt_input_hint">Taip mesej</string>
+  <string name="content_description_rtt_chat_avatar">Avatar</string>
+  <string name="rtt_button_back">Kembali</string>
+  <string name="rtt_status_banner_text">Menunggu %s menyertai panggilan RTT…</string>
+  <string name="rtt_transcript_advisory">Pihak lain dapat melihat anda menaip. Transkrip disimpan pada peranti anda dalam sejarah panggilan.</string>
+</resources>

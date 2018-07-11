@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">ਸਹਾਇਕ ਡਾਇਲਿੰਗ</string>
+  <string name="assisted_dialing_setting_summary">ਵਿਦੇਸ਼ ਯਾਤਰਾ ਦੌਰਾਨ ਕਾਲ ਕਰਨ ਸਮੇਂ ਅਨੁਮਾਨ ਲਗਾਓ ਅਤੇ ਇੱਕ ਦੇਸ਼ ਕੋਡ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="assisted_dialing_setting_cc_default_summary">ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਪਤਾ ਲਗਾਇਆ ਗਿਆ • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਪਤਾ ਲਗਾਇਆ ਗਿਆ</string>
+  <string name="assisted_dialing_setting_cc_category_title">ਮੂਲ ਦੇਸ਼</string>
+  <string name="assisted_dialing_setting_cc_title">ਪੂਰਵ-ਨਿਰਧਾਰਤ ਮੂਲ ਦੇਸ਼</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">अब कॉल में रीयल-टाइम मैसेज भेजने की सुविधा उपलब्ध है</string>
+  <string name="rtt_promotion_details">आरटीटी उन कॉल करने वालों की मदद करता है, जो बधिर हैं, ऊंचा सुनते हैं, जिन्हें बोलने में
+    दिक्कत है या जिनके लिए सिर्फ़ आवाज़ काफ़ी नहीं होती. आरटीटी मैसेज लेख आपके डिवाइस
+    के कॉल इतिहास में सेव किए जाते हैं. %1$s</string>
+  <string name="duo_disclosure_title">Duo के ज़रिए वीडियो कॉल करें</string>
+  <string name="duo_disclosure_details">\'Google Duo\' वीडियो कॉल के ज़रिए आप अपने दोस्तों और परिवार के लोगों के साथ आमने-सामने चैट कर सकते हैं. डेटा शुल्क लागू हो सकते हैं. %1$s</string>
+</resources>

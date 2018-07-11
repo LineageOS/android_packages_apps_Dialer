@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">迷惑電話の疑いがある通話をすべてブロックしますか？</string>
+  <string name="spam_blocking_promo_text">迷惑電話の疑いがある通話はすべて
+      ブロックされます</string>
+  <string name="spam_blocking_promo_action_filter_spam">迷惑電話をフィルタリング</string>
+  <string name="spam_blocking_promo_action_dismiss">閉じる</string>
+  <string name="spam_blocking_setting_prompt">設定</string>
+  <string name="spam_blocking_settings_enable_error_text">迷惑電話のブロックを ON にできませんでした</string>
+  <string name="spam_blocking_settings_disable_error_text">迷惑電話のブロックを OFF にできませんでした</string>
+  <string name="spam_blocking_settings_enable_complete_text">迷惑電話のフィルタリングを ON にしました</string>
+  <string name="spam_blocking_settings_disable_complete_text">迷惑電話のフィルタリングを OFF にしました</string>
+</resources>

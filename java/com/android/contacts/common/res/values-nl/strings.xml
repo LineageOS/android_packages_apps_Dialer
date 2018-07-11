@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Tekst gekopieerd"</string>
-    <string name="call_custom" msgid="3041673234638990874">"<xliff:g id="CUSTOM">%s</xliff:g> bellen"</string>
-    <string name="call_home" msgid="125893483593803791">"Privé bellen"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Mobiel bellen"</string>
-    <string name="call_work" msgid="6040550697395300892">"Werk bellen"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Fax werk bellen"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Fax privé bellen"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Pager bellen"</string>
-    <string name="call_other" msgid="5536385588712587235">"Bellen"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Terugbelnummer bellen"</string>
-    <string name="call_car" msgid="3197417098027764954">"Auto bellen"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Hoofdnummer bedrijf bellen"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"ISDN bellen"</string>
-    <string name="call_main" msgid="3293707608770407814">"Hoofdnummer bellen"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Fax bellen"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Radio bellen"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Telex bellen"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"TTY/TDD bellen"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Mobiel nummer werk bellen"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Pager werk bellen"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"<xliff:g id="ASSISTANT">%s</xliff:g> bellen"</string>
-    <string name="call_mms" msgid="4958811711741872901">"MMS bellen"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Sms\'en naar <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Sms\'en naar huis"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Sms\'en naar mobiel"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Sms\'en naar werk"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Sms\'en naar fax werk"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Sms\'en naar fax privé"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Sms\'en naar pager"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Sms\'en"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Sms\'en naar terugbelnummer"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Sms\'en naar auto"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Sms\'en naar hoofdnummer bedrijf"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Sms\'en naar ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Sms\'en naar hoofdnummer"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Sms\'en naar fax"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Sms\'en naar radio"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Sms\'en naar telex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Sms\'en naar TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Sms\'en naar mobiel nummer werk"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Sms\'en naar pager werk"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Sms\'en naar <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Sms\'en naar MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Lijst regelmatige contacten wissen?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Je wist de lijst met contacten waarmee je regelmatig contact opneemt in de apps Contacten en Telefoon, en e-mailapps moeten je voorkeursadressen weer opnieuw leren."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Regelmatige contacten wissen..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Beschikbaar"</string>
-    <string name="status_away" msgid="2298688367552893953">"Niet beschikbaar"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Bezet"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Contacten"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Populaire suggesties"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Overig"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Directory"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Zakelijke contactenlijst"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Alle contacten"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Suggesties"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Ik"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Geen naam)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Contact weergeven"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Alle contacten met telefoonnummers"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Contacten uit werkprofiel"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Updates bekijken"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Alleen op apparaat, niet gesynchroniseerd"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Naam"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Bijnaam"</string>
-    <string name="full_name" msgid="648186563998465740">"Naam"</string>
-    <string name="name_given" msgid="5096576006314820536">"Voornaam"</string>
-    <string name="name_family" msgid="6646235805198547467">"Achternaam"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Voorvoegsel van naam"</string>
-    <string name="name_middle" msgid="703755205331582769">"Tweede voornaam"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Achtervoegsel van naam"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Fonetische naam"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Fonetische voornaam"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Fonetische tweede voornaam"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Fonetische achternaam"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefoon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"E-mailen"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adres"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organisatie"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Relatie"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Speciale datum"</string>
-    <string name="sms" msgid="7574344928185328095">"Sms-bericht"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adres"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Bedrijf"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Titel"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Notities"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Website"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Groepen"</string>
-    <string name="email_home" msgid="889830029388962171">"E-mailen naar huis"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"E-mailen naar mobiel"</string>
-    <string name="email_work" msgid="4223487303344613528">"E-mailen naar werk"</string>
-    <string name="email_other" msgid="4246411900126012062">"E-mailen"</string>
-    <string name="email_custom" msgid="7246580894327511013">"E-mailen naar <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"E-mailen"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Straat"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Stad"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Staat"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Postcode"</string>
-    <string name="postal_country" msgid="232670707458768148">"Land"</string>
-    <string name="map_home" msgid="4181131107392126938">"Thuisadres weergeven"</string>
-    <string name="map_work" msgid="5723471185992684400">"Werkadres weergeven"</string>
-    <string name="map_other" msgid="2253764780863500516">"Adres weergeven"</string>
-    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> adres weergeven"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Chatten via AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Chatten via Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Chatten via Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Chatten via Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Chatten via QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Chatten via Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Chatten via ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Chatten via Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Chat"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Alle contacten"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Contacten in <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Contacten in aangepaste weergave"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Eén contact"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sorteren op"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Voornaam"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Achternaam"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Naamindeling"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Voornaam eerst"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Achternaam eerst"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Regelmatige contacten wissen"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"stoppen met zoeken"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Zoekopdracht wissen"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Account"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Altijd gebruiken voor oproepen"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Bellen met"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Oproep met een notitie"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Typ een notitie om te verzenden met de oproep..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"VERZENDEN EN BELLEN"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Tabblad <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other">Tabblad <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> ongelezen items. </item>
-      <item quantity="one">Tabblad <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> ongelezen item. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videogesprek"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Delen en bellen"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">%s bellen</string>
+  <string name="call_home">Privé bellen</string>
+  <string name="call_mobile">Mobiel bellen</string>
+  <string name="call_work">Werk bellen</string>
+  <string name="call_fax_work">Fax werk bellen</string>
+  <string name="call_fax_home">Fax privé bellen</string>
+  <string name="call_pager">Pager bellen</string>
+  <string name="call_other">Bellen</string>
+  <string name="call_callback">Terugbelnummer bellen</string>
+  <string name="call_car">Auto bellen</string>
+  <string name="call_company_main">Hoofdnummer bedrijf bellen</string>
+  <string name="call_isdn">ISDN bellen</string>
+  <string name="call_main">Hoofdnummer bellen</string>
+  <string name="call_other_fax">Fax bellen</string>
+  <string name="call_radio">Radio bellen</string>
+  <string name="call_telex">Telex bellen</string>
+  <string name="call_tty_tdd">TTY/TDD bellen</string>
+  <string name="call_work_mobile">Mobiel nummer werk bellen</string>
+  <string name="call_work_pager">Pager werk bellen</string>
+  <string name="call_assistant">%s bellen</string>
+  <string name="call_mms">MMS bellen</string>
+  <string name="sms_custom">Sms\'en naar %s</string>
+  <string name="sms_home">Sms\'en naar huis</string>
+  <string name="sms_mobile">Sms\'en naar mobiel</string>
+  <string name="sms_work">Sms\'en naar werk</string>
+  <string name="sms_fax_work">Sms\'en naar fax werk</string>
+  <string name="sms_fax_home">Sms\'en naar fax privé</string>
+  <string name="sms_pager">Sms\'en naar pager</string>
+  <string name="sms_other">Sms\'en</string>
+  <string name="sms_callback">Sms\'en naar terugbelnummer</string>
+  <string name="sms_car">Sms\'en naar auto</string>
+  <string name="sms_company_main">Sms\'en naar hoofdnummer bedrijf</string>
+  <string name="sms_isdn">Sms\'en naar ISDN</string>
+  <string name="sms_main">Sms\'en naar hoofdnummer</string>
+  <string name="sms_other_fax">Sms\'en naar fax</string>
+  <string name="sms_radio">Sms\'en naar radio</string>
+  <string name="sms_telex">Sms\'en naar telex</string>
+  <string name="sms_tty_tdd">Sms\'en naar TTY/TDD</string>
+  <string name="sms_work_mobile">Sms\'en naar mobiel nummer werk</string>
+  <string name="sms_work_pager">Sms\'en naar pager werk</string>
+  <string name="sms_assistant">Sms\'en naar %s</string>
+  <string name="sms_mms">Sms\'en naar MMS</string>
+  <string name="clearFrequentsConfirmation_title">Lijst regelmatige contacten wissen?</string>
+  <string name="clearFrequentsConfirmation">Je wist de lijst met contacten waarmee je regelmatig contact opneemt in de apps Contacten en Telefoon, en e-mailapps moeten je voorkeursadressen weer opnieuw leren.</string>
+  <string name="clearFrequentsProgress_title">Regelmatige contacten wissen...</string>
+  <string name="status_available">Beschikbaar</string>
+  <string name="status_away">Niet beschikbaar</string>
+  <string name="status_busy">Bezet</string>
+  <string name="contactsList">Contacten</string>
+  <string name="contact_suggestions">Populaire suggesties</string>
+  <string name="local_invisible_directory">Overig</string>
+  <string name="directory_search_label">Directory</string>
+  <string name="directory_search_label_work">Zakelijke contactenlijst</string>
+  <string name="local_search_label">Alle contacten</string>
+  <string name="local_suggestions_search_label">Suggesties</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ik</string>
+  <string name="missing_name">(Geen naam)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Contact weergeven</string>
+  <string name="list_filter_phones">Alle contacten met telefoonnummers</string>
+  <string name="list_filter_phones_work">Contacten uit werkprofiel</string>
+  <string name="view_updates_from_group">Updates bekijken</string>
+  <string name="account_phone">Alleen op apparaat, niet gesynchroniseerd</string>
+  <string name="nameLabelsGroup">Naam</string>
+  <string name="nicknameLabelsGroup">Bijnaam</string>
+  <string name="full_name">Naam</string>
+  <string name="name_given">Voornaam</string>
+  <string name="name_family">Achternaam</string>
+  <string name="name_prefix">Voorvoegsel van naam</string>
+  <string name="name_middle">Tweede voornaam</string>
+  <string name="name_suffix">Achtervoegsel van naam</string>
+  <string name="name_phonetic">Fonetische naam</string>
+  <string name="name_phonetic_given">Fonetische voornaam</string>
+  <string name="name_phonetic_middle">Fonetische tweede voornaam</string>
+  <string name="name_phonetic_family">Fonetische achternaam</string>
+  <string name="phoneLabelsGroup">Telefoon</string>
+  <string name="emailLabelsGroup">E-mailen</string>
+  <string name="postalLabelsGroup">Adres</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Organisatie</string>
+  <string name="relationLabelsGroup">Relatie</string>
+  <string name="eventLabelsGroup">Speciale datum</string>
+  <string name="sms">Sms-bericht</string>
+  <string name="postal_address">Adres</string>
+  <string name="ghostData_company">Bedrijf</string>
+  <string name="ghostData_title">Titel</string>
+  <string name="label_notes">Notities</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Website</string>
+  <string name="groupsLabel">Groepen</string>
+  <string name="email_home">E-mailen naar huis</string>
+  <string name="email_mobile">E-mailen naar mobiel</string>
+  <string name="email_work">E-mailen naar werk</string>
+  <string name="email_other">E-mailen</string>
+  <string name="email_custom">E-mailen naar %s</string>
+  <string name="email">E-mailen</string>
+  <string name="postal_street">Straat</string>
+  <string name="postal_city">Stad</string>
+  <string name="postal_region">Staat</string>
+  <string name="postal_postcode">Postcode</string>
+  <string name="postal_country">Land</string>
+  <string name="map_home">Thuisadres weergeven</string>
+  <string name="map_work">Werkadres weergeven</string>
+  <string name="map_other">Adres weergeven</string>
+  <string name="map_custom">%s adres weergeven</string>
+  <string name="chat_aim">Chatten via AIM</string>
+  <string name="chat_msn">Chatten via Windows Live</string>
+  <string name="chat_yahoo">Chatten via Yahoo</string>
+  <string name="chat_skype">Chatten via Skype</string>
+  <string name="chat_qq">Chatten via QQ</string>
+  <string name="chat_gtalk">Chatten via Google Talk</string>
+  <string name="chat_icq">Chatten via ICQ</string>
+  <string name="chat_jabber">Chatten via Jabber</string>
+  <string name="chat">Chat</string>
+  <string name="list_filter_all_accounts">Alle contacten</string>
+  <string name="listAllContactsInAccount">Contacten in %s</string>
+  <string name="listCustomView">Contacten in aangepaste weergave</string>
+  <string name="listSingleContact">Eén contact</string>
+  <string name="display_options_sort_list_by">Sorteren op</string>
+  <string name="display_options_sort_by_given_name">Voornaam</string>
+  <string name="display_options_sort_by_family_name">Achternaam</string>
+  <string name="display_options_view_names_as">Naamindeling</string>
+  <string name="display_options_view_given_name_first">Voornaam eerst</string>
+  <string name="display_options_view_family_name_first">Achternaam eerst</string>
+  <string name="menu_clear_frequents">Regelmatige contacten wissen</string>
+  <string name="action_menu_back_from_search">stoppen met zoeken</string>
+  <string name="description_clear_search">Zoekopdracht wissen</string>
+  <string name="select_account_dialog_title">Account</string>
+  <string name="set_default_account">Altijd gebruiken voor oproepen</string>
+  <string name="select_phone_account_for_calls">Simkaart voor deze oproep kiezen</string>
+  <string name="select_phone_account_for_calls_remember">Deze keuze onthouden</string>
+  <string name="call_with_a_note">Oproep met een notitie</string>
+  <string name="call_subject_hint">Typ een notitie om te verzenden met de oproep...</string>
+  <string name="send_and_call_button">VERZENDEN EN BELLEN</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Tabblad %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">Tabblad %1$s. %2$d ongelezen item. </item>
+    <item quantity="other">Tabblad %1$s. %2$d ongelezen items. </item>
+  </plurals>
+  <string name="description_search_video_call">Videogesprek</string>
+  <string name="description_search_call_and_share">Delen en bellen</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Φιλτράρισμα όλων των ύποπτων ανεπιθύμητων κλήσεων;</string>
+  <string name="spam_blocking_promo_text">Κλήσεις όπως αυτή που μόλις αποκλείσατε δεν θα σας ενοχλούν πλέον</string>
+  <string name="spam_blocking_promo_action_filter_spam">Φιλτράρισμα ανεπιθύμητων κλήσεων</string>
+  <string name="spam_blocking_promo_action_dismiss">Απόρριψη</string>
+  <string name="spam_blocking_setting_prompt">Ρυθμίσεις</string>
+  <string name="spam_blocking_settings_enable_error_text">Προέκυψε πρόβλημα κατά την ενεργοποίηση του φιλτραρίσματος ανεπιθύμητων μηνυμάτων</string>
+  <string name="spam_blocking_settings_disable_error_text">Προέκυψε πρόβλημα κατά την απενεργοποίηση του φιλτραρίσματος ανεπιθύμητων μηνυμάτων</string>
+  <string name="spam_blocking_settings_enable_complete_text">Το φιλτράρισμα ανεπιθύμητων κλήσεων ενεργοποιήθηκε</string>
+  <string name="spam_blocking_settings_disable_complete_text">Το φιλτράρισμα ανεπιθύμητων κλήσεων απενεργοποιήθηκε</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">يتعذر إجراء مكالمة بدون إذن الهاتف</string>
+  <string name="pre_call_select_phone_account">‏اختيار شريحة SIM لهذه المكالمة</string>
+  <string name="pre_call_select_phone_account_remember">تذكر هذا الاختيار</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">غير متوفر أثناء استخدام %1$s</string>
+</resources>

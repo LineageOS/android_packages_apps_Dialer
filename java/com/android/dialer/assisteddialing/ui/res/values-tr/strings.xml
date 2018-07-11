@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Yardımlı arama</string>
+  <string name="assisted_dialing_setting_summary">Yurt dışı seyahatiniz sırasında telefon ederken ülke kodu tahmin edilip eklenir</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Otomatik olarak algılandı • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Otomatik olarak algılandı</string>
+  <string name="assisted_dialing_setting_cc_category_title">Ana vatan</string>
+  <string name="assisted_dialing_setting_cc_title">Varsayılan ana vatan</string>
+</resources>

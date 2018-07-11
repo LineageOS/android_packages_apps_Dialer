@@ -1,179 +1,171 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2202739481132958990">"電話"</string>
-    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"スマートフォンのキーパッド"</string>
-    <string name="callHistoryIconLabel" msgid="7493268743411968630">"通話履歴"</string>
-    <string name="action_copy_number_text" msgid="832682558551502319">"番号をコピー"</string>
-    <string name="copy_transcript_text" msgid="937904189017310829">"音声文字変換をコピー"</string>
-    <string name="action_edit_number_before_call" msgid="8017492815878473837">"発信前に番号を編集"</string>
-    <string name="call_log_delete_all" msgid="7852970926906523784">"通話履歴を消去"</string>
-    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"ボイスメールを削除"</string>
-    <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"ボイスメールの削除"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"元に戻す"</string>
-    <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"通話履歴を消去しますか？"</string>
-    <string name="clearCallLogConfirmation" msgid="6844949465815109166">"消去すると、すべての通話が履歴から削除されます"</string>
-    <string name="clearCallLogProgress_title" msgid="995004835687361977">"通話履歴の消去中…"</string>
-    <string name="notification_missedCallTitle" msgid="8283366068539898486">"不在着信"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"仕事の通話の不在着信"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"不在着信"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"不在着信 <xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> 件"</string>
-    <string name="notification_missedCall_call_back" msgid="3875698110051973965">"コールバック"</string>
-    <string name="notification_missedCall_message" msgid="5086910028988305964">"メッセージ"</string>
-    <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g> さん: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"<xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g> 宛に発信"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"ボイスメールの番号が不明です"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>件のボイスメール</item>
-      <item quantity="one">1件のボイスメール</item>
-    </plurals>
-    <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>、<xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"<xliff:g id="CALLER">%1$s</xliff:g>から新着ボイスメール"</string>
-    <string name="voicemail_playback_error" msgid="4384373852257757295">"ボイスメールを再生できませんでした"</string>
-    <string name="voicemail_fetching_content" msgid="572320120918636014">"ボイスメールを読み込んでいます…"</string>
-    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"ボイスメールを読み込めませんでした"</string>
-    <string name="call_log_item_count_and_date" msgid="723848797957319181">"（<xliff:g id="COUNT">%1$d</xliff:g>）<xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_playback_speakerphone" msgid="4852027754869750227">"スピーカーフォンのON/OFFを切り替える"</string>
-    <string name="description_playback_seek" msgid="1340910573254132520">"再生位置を探す"</string>
-    <string name="action_menu_call_history_description" msgid="8829135306925008546">"通話履歴"</string>
-    <string name="action_menu_overflow_description" msgid="7648679686746517341">"その他のオプション"</string>
-    <string name="action_menu_dialpad_button" msgid="1970631633457493180">"キーパッド"</string>
-    <string name="dialer_settings_label" msgid="4980176284150290175">"設定"</string>
-    <string name="simulator_submenu_label" msgid="186156287346615267">"シミュレーション"</string>
-    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"新しいUIのショートカットを作成"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"一括操作モードを開始します"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"一括操作モードを終了しました"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> を選択しました"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> を選択解除しました"</string>
-    <string name="description_contact_details" msgid="3341280873855253464">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g>の連絡先の詳細"</string>
-    <string name="description_spam_contact_details" msgid="5592578752881528368">"迷惑電話の疑いがある発信者 <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> の連絡先の詳細"</string>
-    <string name="description_num_calls" msgid="6483594535796216044">"通話回数は<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g>回。"</string>
-    <string name="description_video_call" msgid="3738199365585751727">"ビデオハングアウト"</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"音声検索を開始"</string>
-    <string name="voicemail" msgid="8899540969000957954">"ボイスメール"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"一括操作モードをキャンセルします"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"削除"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"キャンセル"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> 件選択済み"</string>
-    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
-      <item quantity="other">"<b>"これらのボイスメールを削除しますか？"</b>"</item>
-      <item quantity="one">"<b>"このボイスメールを削除しますか？"</b>"</item>
-    </plurals>
-    <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
-    <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g>、<xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g> 分 <xliff:g id="SECONDS">%2$02d</xliff:g> 秒"</string>
-    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g>（<xliff:g id="DURATION">%2$s</xliff:g>）"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"音声検索を利用できません"</string>
-    <string name="dialer_hint_find_contact" msgid="2023214799381149808">"連絡先を検索"</string>
-    <string name="block_number_search_hint" msgid="5377706079015099416">"番号を追加するか連絡先を検索"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"通話履歴はありません"</string>
-    <string name="call_log_all_empty_action" msgid="852218280136243014">"発信"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"不在着信はありません。"</string>
-    <string name="call_log_voicemail_empty" msgid="273623903423275178">"ボイスメール受信トレイは空です。"</string>
-    <string name="call_log_activity_title" msgid="1275242727244945527">"通話履歴"</string>
-    <string name="call_log_all_title" msgid="6042262422192020327">"すべて"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"不在着信"</string>
-    <string name="tab_speed_dial" msgid="6616404752227561075">"クイックアクセス"</string>
-    <string name="tab_history" msgid="7420269368689503596">"通話履歴"</string>
-    <string name="tab_all_contacts" msgid="5531733977693943015">"連絡先"</string>
-    <string name="tab_voicemail" msgid="2458548090088316246">"ボイスメール"</string>
-    <string name="search_shortcut_call_number" msgid="8847918845036880688">"<xliff:g id="NUMBER">%s</xliff:g>に発信"</string>
-    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"新しい連絡先を作成"</string>
-    <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"連絡先に追加"</string>
-    <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"SMSを送信"</string>
-    <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"ビデオハングアウト"</string>
-    <string name="search_shortcut_block_number" msgid="4587283230665805776">"番号をブロック"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"クイックアクセスに登録済みの連絡先はまだありません"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"お気に入りを追加"</string>
-    <string name="remove_contact" msgid="2353580570488923668">"削除"</string>
-    <string name="select_all" msgid="408601760696146245">"すべて選択"</string>
-    <string name="call_log_action_video_call" msgid="7565549950343850819">"ビデオハングアウト"</string>
-    <string name="call_log_action_send_message" msgid="6948727362660115554">"メッセージを送信"</string>
-    <string name="call_log_action_details" msgid="2091370737371449501">"通話の詳細"</string>
-    <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"送信先…"</string>
-    <string name="call_log_action_call" msgid="682724094251540583">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>に発信"</string>
-    <string name="description_incoming_missed_call" msgid="8292535799379230029">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）からの不在着信。"</string>
-    <string name="description_incoming_answered_call" msgid="3920182963103160610">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）からの着信。"</string>
-    <string name="description_unread_voicemail" msgid="145170985013419170">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）からの未読のボイスメール。"</string>
-    <string name="description_read_voicemail" msgid="5585559881573227732">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）からのボイスメール。"</string>
-    <string name="description_outgoing_call" msgid="543952487882919924">"<xliff:g id="TIMEOFCALL">^3</xliff:g>の<xliff:g id="TYPEORLOCATION">^2</xliff:g><xliff:g id="NAMEORNUMBER">^1</xliff:g>（<xliff:g id="PHONEACCOUNT">^4</xliff:g>）への発信。"</string>
-    <string name="call_log_via_number" msgid="1340307109806397650">"<xliff:g id="NUMBER">%1$s</xliff:g> で受信"</string>
-    <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>（<xliff:g id="NUMBER">%2$s</xliff:g>）で受信"</string>
-    <string name="description_call_action" msgid="4042796498169106545">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>に発信します"</string>
-    <string name="description_video_call_action" msgid="1237090968588659650">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>にビデオハングアウト発信します。"</string>
-    <string name="description_voicemail_action" msgid="3290143432403538524">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>からのボイスメールを再生"</string>
-    <string name="description_create_new_contact_action" msgid="1928282350281564130">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>の連絡先を作成します"</string>
-    <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"既存の連絡先に<xliff:g id="NAMEORNUMBER">^1</xliff:g>を追加します"</string>
-    <string name="description_details_action" msgid="2061866409737706174">"<xliff:g id="NAMEORNUMBER">^1</xliff:g>の通話の詳細"</string>
-    <string name="call_log_header_today" msgid="1576119097475845293">"今日"</string>
-    <string name="call_log_header_yesterday" msgid="5616077776205329563">"昨日"</string>
-    <string name="call_log_header_other" msgid="4940676886254217644">"以前の着信"</string>
-    <string name="voicemail_speaker_on" msgid="3151333608926996668">"スピーカーをONにします。"</string>
-    <string name="voicemail_speaker_off" msgid="2530064206962034201">"スピーカーをOFFにします。"</string>
-    <string name="voicemail_play_start_pause" msgid="3874823480278334664">"再生を開始または一時停止します。"</string>
-    <string name="display_options_title" msgid="3880091801055797975">"表示オプション"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"音とバイブレーション"</string>
-    <string name="accessibility_settings_title" msgid="3329027650429831820">"ユーザー補助機能"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"着信音"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"着信時にバイブレーションもON"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"キーパッドの操作音"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"キーパッドの操作音の長さ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel">電話</string>
+  <string name="launcherDialpadActivityLabel">スマートフォンのキーパッド</string>
+  <string name="callHistoryIconLabel">通話履歴</string>
+  <string name="action_copy_number_text">番号をコピー</string>
+  <string name="copy_transcript_text">音声文字変換をコピー</string>
+  <string name="action_edit_number_before_call">発信前に番号を編集</string>
+  <string name="call_log_delete_all">通話履歴を消去</string>
+  <string name="call_log_trash_voicemail">ボイスメールを削除</string>
+  <string name="snackbar_voicemail_deleted">ボイスメールの削除</string>
+  <string name="clearCallLogConfirmation_title">通話履歴を消去しますか？</string>
+  <string name="clearCallLogConfirmation">消去すると、すべての通話が履歴から削除されます</string>
+  <string name="clearCallLogProgress_title">通話履歴の消去中…</string>
+  <string name="notification_missedCallTitle">不在着信</string>
+  <string name="notification_missedWorkCallTitle">仕事の通話の不在着信</string>
+  <string name="notification_missedCallsTitle">不在着信</string>
+  <string name="notification_missedCallsMsg">不在着信 %d 件</string>
+  <string name="notification_missedCall_call_back">コールバック</string>
+  <string name="notification_missedCall_message">メッセージ</string>
+  <string name="post_call_notification_message">%1$s さん: %2$s</string>
+  <string name="notification_voicemail_text_format">%s 宛に発信</string>
+  <string name="notification_voicemail_no_vm_number">ボイスメールの番号が不明です</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">1件のボイスメール</item>
+    <item quantity="other">%1$d件のボイスメール</item>
+  </plurals>
+  <string name="notification_voicemail_callers_list">%1$s、%2$s</string>
+  <string name="notification_new_voicemail_ticker">%1$sから新着ボイスメール</string>
+  <string name="voicemail_playback_error">ボイスメールを再生できませんでした</string>
+  <string name="voicemail_fetching_content">ボイスメールを読み込んでいます…</string>
+  <string name="voicemail_fetching_timout">ボイスメールを読み込めませんでした</string>
+  <string name="call_log_item_count_and_date">（%1$d）%2$s</string>
+  <string name="description_playback_speakerphone">スピーカーフォンのON/OFFを切り替える</string>
+  <string name="description_playback_seek">再生位置を探す</string>
+  <string name="action_menu_call_history_description">通話履歴</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">その他のオプション</string>
+  <string name="action_menu_dialpad_button">キーパッド</string>
+  <string name="dialer_settings_label">設定</string>
+  <string name="simulator_submenu_label">シミュレーション</string>
+  <string name="new_ui_launcher_shortcut_label">新しいUIのショートカットを作成</string>
+  <string name="description_entering_bulk_action_mode">一括操作モードを開始します</string>
+  <string name="description_leaving_bulk_action_mode">一括操作モードを終了しました</string>
+  <string name="description_selecting_bulk_action_mode">%1$s を選択しました</string>
+  <string name="description_unselecting_bulk_action_mode">%1$s を選択解除しました</string>
+  <string name="description_contact_details">%1$sの連絡先の詳細</string>
+  <string name="description_spam_contact_details">迷惑電話の疑いがある発信者 %1$s の連絡先の詳細</string>
+  <string name="description_num_calls">通話回数は%1$s回。</string>
+  <string name="description_video_call">ビデオハングアウト</string>
+  <string name="description_start_voice_search">音声検索を開始</string>
+  <string name="voicemail">ボイスメール</string>
+  <string name="description_cancel_multi_select">一括操作モードをキャンセルします</string>
+  <string name="voicemailMultiSelectDeleteConfirm">削除</string>
+  <string name="voicemailMultiSelectDeleteCancel">キャンセル</string>
+  <string name="voicemailMultiSelectActionBarTitle">%1$s 件選択済み</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>このボイスメールを削除しますか？</b></item>
+    <item quantity="other"><b>これらのボイスメールを削除しますか？</b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat">%1$s、%2$s</string>
+  <string name="voicemailDurationFormat">%1$02d 分 %2$02d 秒</string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s（%2$s）</string>
+  <string name="voice_search_not_available">音声検索を利用できません</string>
+  <string name="dialer_hint_find_contact">連絡先を検索</string>
+  <string name="block_number_search_hint">番号を追加するか連絡先を検索</string>
+  <string name="call_log_all_empty">通話履歴はありません</string>
+  <string name="call_log_all_empty_action">発信</string>
+  <string name="call_log_missed_empty">不在着信はありません。</string>
+  <string name="call_log_voicemail_empty">ボイスメール受信トレイは空です。</string>
+  <string name="call_log_activity_title">通話履歴</string>
+  <string name="call_log_all_title">すべて</string>
+  <string name="call_log_missed_title">不在着信</string>
+  <string name="tab_speed_dial">クイックアクセス</string>
+  <string name="tab_history">通話履歴</string>
+  <string name="tab_all_contacts">連絡先</string>
+  <string name="tab_voicemail">ボイスメール</string>
+  <string name="search_shortcut_call_number">%sに発信</string>
+  <string name="search_shortcut_create_new_contact">新しい連絡先を作成</string>
+  <string name="search_shortcut_add_to_contact">連絡先に追加</string>
+  <string name="search_shortcut_send_sms_message">SMSを送信</string>
+  <string name="search_shortcut_make_video_call">ビデオハングアウト</string>
+  <string name="search_shortcut_block_number">番号をブロック</string>
+  <string name="speed_dial_empty">クイックアクセスに登録済みの連絡先はありません</string>
+  <string name="speed_dial_empty_add_favorite_action">お気に入りを追加</string>
+  <string name="remove_contact">削除</string>
+  <string name="select_all">すべて選択</string>
+  <string name="call_log_action_video_call">ビデオハングアウト</string>
+  <string name="call_log_action_set_up_video">ビデオ通話をセットアップ</string>
+  <string name="call_log_action_invite_video">ビデオ通話に招待</string>
+  <string name="call_log_action_send_message">メッセージを送信</string>
+  <string name="call_log_action_details">通話の詳細</string>
+  <string name="call_log_action_share_voicemail">送信先…</string>
+  <string name="call_log_action_call">^1に発信</string>
+  <string name="description_incoming_missed_call">^3の^2^1（^4）からの不在着信。</string>
+  <string name="description_incoming_answered_call">^3の^2^1（^4）からの着信。</string>
+  <string name="description_unread_voicemail">^3の^2^1（^4）からの未読のボイスメール。</string>
+  <string name="description_read_voicemail">^3の^2^1（^4）からのボイスメール。</string>
+  <string name="description_outgoing_call">^3の^2^1（^4）への発信。</string>
+  <string name="call_log_via_number">%1$s で受信</string>
+  <string name="call_log_via_number_phone_account">%1$s（%2$s）で受信</string>
+  <string name="description_call_action">^1に発信します</string>
+  <string name="description_video_call_action">^1にビデオハングアウト発信します。</string>
+  <string name="description_voicemail_action">^1からのボイスメールを再生</string>
+  <string name="description_create_new_contact_action">^1の連絡先を作成します</string>
+  <string name="description_add_to_existing_contact_action">既存の連絡先に^1を追加します</string>
+  <string name="description_details_action">^1の通話の詳細</string>
+  <string name="call_log_header_today">今日</string>
+  <string name="call_log_header_yesterday">昨日</string>
+  <string name="call_log_header_other">以前の着信</string>
+  <string name="voicemail_speaker_on">スピーカーをONにします。</string>
+  <string name="voicemail_speaker_off">スピーカーをOFFにします。</string>
+  <string name="voicemail_play_start_pause">再生を開始または一時停止します。</string>
+  <string name="display_options_title">表示オプション</string>
+  <string name="sounds_and_vibration_title">音とバイブレーション</string>
+  <string name="accessibility_settings_title">ユーザー補助機能</string>
+  <string name="ringtone_title">着信音</string>
+  <string name="vibrate_on_ring_title">着信時にバイブレーションもON</string>
+  <string name="dtmf_tone_enable_title">キーパッドの操作音</string>
+  <string name="dtmf_tone_length_title">キーパッドの操作音の長さ</string>
   <string-array name="dtmf_tone_length_entries">
-    <item msgid="3136353015227162823">"標準"</item>
-    <item msgid="5376841175538523822">"長め"</item>
+    <item>標準</item>
+    <item>長め</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"クイック返信"</string>
-    <string name="call_settings_label" msgid="7824611757200960807">"通話"</string>
-    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"着信のブロック"</string>
-    <string name="voicemail_settings_label" msgid="4594299554519920570">"ボイスメール"</string>
-    <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"着信のブロックは一時的にOFFです"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、着信のブロックは無効になっています。48時間経過すると、着信のブロックは自動的に有効になります。"</string>
-    <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"番号をインポート"</string>
-    <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"以前に一部の発信者について、他のアプリを通じて自動的にボイスメールに転送するようマークを付けています。"</string>
-    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"番号を表示"</string>
-    <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"インポート"</string>
-    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"番号のブロックを解除"</string>
-    <string name="addBlockedNumber" msgid="3053473735238295551">"電話番号を追加"</string>
-    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。"</string>
-    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"この番号からの着信はブロックされますが、発信者は今後もボイスメールを残すことができます。"</string>
-    <string name="block_list" msgid="4701585783411870782">"ブロックした番号"</string>
-    <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g>は既にブロックしています。"</string>
-    <string name="phone_account_settings_label" msgid="8372485478006965920">"通話アカウント"</string>
-    <string name="permission_no_speeddial" msgid="8487215628510596753">"クイックアクセスを有効にするには、連絡先権限をONにしてください。"</string>
-    <string name="permission_no_calllog" msgid="4053705651238775784">"通話履歴を表示するには、電話権限をONにしてください。"</string>
-    <string name="permission_no_search" msgid="2424710404207193826">"連絡先を検索するには、連絡先権限をONにしてください。"</string>
-    <string name="permission_place_call" msgid="8686908130349369423">"電話をかけるには、電話権限をONにしてください。"</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"電話アプリにはシステム設定への書き込み権限がありません。"</string>
-    <string name="blocked_number_call_log_label" msgid="4212282846299997693">"ブロック済み"</string>
-    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"ブロック / 迷惑電話を報告"</string>
-    <string name="call_log_action_block_number" msgid="5048188386501998865">"番号をブロック"</string>
-    <string name="call_log_action_remove_spam" msgid="2045319806318398403">"迷惑電話ではない"</string>
-    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"番号のブロックを解除"</string>
-    <string name="spam_number_call_log_label" msgid="2678431398326811131">"スパム"</string>
-    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> さんはオフラインのため、通話を受信できません"</string>
-    <string name="about_phone_label" msgid="582991354677973731">"電話アプリについて"</string>
-    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"文字変換: Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google が文字に変換しています…"</string>
-    <string name="voicemail_transcription_failed" msgid="335275303117412706">"文字に変換できません。"</string>
-    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"この言語はサポートされていないため、文字に変換できません。"</string>
-    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"言語音が検出されなかったため、文字に変換できません。"</string>
-    <string name="view_conversation" msgid="7895904782094119702">"表示"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"通話を削除しました。通話中に共有した添付ファイルを、メッセージで確認して削除してください。"</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"通話を削除しました。通話中に共有した添付ファイルを、メッセージで確認して削除してください。"</string>
+  <string name="respond_via_sms_setting_title">クイック返信</string>
+  <string name="call_settings_label">通話</string>
+  <string name="manage_blocked_numbers_label">ブロック中の電話番号</string>
+  <string name="voicemail_settings_label">ボイスメール</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">着信のブロックは一時的にOFFです</string>
+  <string name="blocked_numbers_disabled_emergency_desc">このスマートフォンから緊急通報番号への発信が過去48時間以内に行われているため、着信のブロックは無効になっています。48時間経過すると、着信のブロックは自動的に有効になります。</string>
+  <string name="import_send_to_voicemail_numbers_label">番号をインポート</string>
+  <string name="blocked_call_settings_import_description">以前に一部の発信者について、他のアプリを通じて自動的にボイスメールに転送するようマークを付けています。</string>
+  <string name="blocked_call_settings_view_numbers_button">番号を表示</string>
+  <string name="blocked_call_settings_import_button">インポート</string>
+  <string name="description_blocked_number_list_delete">番号のブロックを解除</string>
+  <string name="addBlockedNumber">電話番号を追加</string>
+  <string name="block_number_footer_message_vvm">この番号からの着信はブロックされ、ボイスメールは自動的に削除されます。</string>
+  <string name="block_number_footer_message_no_vvm">この番号からの着信はブロックされますが、発信者は今後もボイスメールを残すことができます。</string>
+  <string name="block_list">ブロックした番号</string>
+  <string name="alreadyBlocked">%1$sは既にブロックしています。</string>
+  <string name="phone_account_settings_label">通話アカウント</string>
+  <string name="permission_no_speeddial">クイックアクセスを有効にするには、連絡先権限をONにしてください。</string>
+  <string name="permission_no_calllog">通話履歴を表示するには、電話権限をONにしてください。</string>
+  <string name="permission_no_search">連絡先を検索するには、連絡先権限をONにしてください。</string>
+  <string name="permission_place_call">電話をかけるには、電話権限をONにしてください。</string>
+  <string name="toast_cannot_write_system_settings">電話アプリにはシステム設定への書き込み権限がありません。</string>
+  <string name="blocked_number_call_log_label">ブロック済み</string>
+  <string name="call_log_action_block_report_number">ブロック / 迷惑電話を報告</string>
+  <string name="call_log_action_block_number">番号をブロック</string>
+  <string name="call_log_action_remove_spam">迷惑電話ではない</string>
+  <string name="call_log_action_unblock_number">番号のブロックを解除</string>
+  <string name="spam_number_call_log_label">スパム</string>
+  <string name="call_composer_connection_failed">%1$s さんはオフラインのため、通話を受信できません</string>
+  <string name="about_phone_label">電話アプリについて</string>
+  <string name="voicemail_transcription_branding_text">文字変換: Google</string>
+  <string name="voicemail_transcription_in_progress">文字に変換しています…</string>
+  <string name="voicemail_transcription_failed">文字に変換できません。</string>
+  <string name="voicemail_transcription_failed_language_not_supported">この言語はサポートされていないため、文字に変換できません。</string>
+  <string name="voicemail_transcription_failed_no_speech">言語音が検出されなかったため、文字に変換できません。</string>
+  <string name="voicemail_donation_promo_title">音声文字変換機能の精度改善にご協力ください</string>
+  <string name="voicemail_donation_promo_content">よろしければ Google によるボイスメール メッセージと音声文字変換結果の分析にご協力ください。ご協力いただける場合は、今回と以降のメッセージが匿名で保存されます。この設定はいつでも変更していただけます。%1$s</string>
+  <string name="voicemail_donation_promo_opt_in">協力する</string>
+  <string name="voicemail_donation_promo_opt_out">協力しない</string>
+  <string name="voicemail_transcription_rating">文字変換機能を評価してください</string>
+  <string name="voicemail_transcription_rating_thanks">ありがとうございました</string>
+  <string name="description_rating_good">高評価</string>
+  <string name="description_rating_bad">低評価</string>
+  <string name="view_conversation">表示</string>
+  <string name="ec_data_deleted">通話を削除しました。通話中に共有した添付ファイルを、メッセージで確認して削除してください。</string>
+  <string name="multiple_ec_data_deleted">通話を削除しました。通話中に共有した添付ファイルを、メッセージで確認して削除してください。</string>
 </resources>
