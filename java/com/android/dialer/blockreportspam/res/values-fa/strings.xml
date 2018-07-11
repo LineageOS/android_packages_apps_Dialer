@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s مسدود شود؟</string>
+  <string name="block_number_confirmation_message_new_filtering">دیگر از این شماره، تماس یا پیام نوشتاری دریافت نمی‌کنید.</string>
+  <string name="block_number_ok">مسدود کردن</string>
+  <string name="unblock_number_ok">رفع انسداد</string>
+  <string name="block_report_number_alert_title">%1$s مسدود شود؟</string>
+  <string name="block_report_number_alert_details">دیگر از این شماره تماس دریافت نمی‌کنید.</string>
+  <string name="block_number_alert_details">%1$sاین تماس به‌عنوان هرزنامه گزارش خواهد شد.</string>
+  <string name="unblock_number_alert_details">این شماره لغو انسداد می‌شود و به‌عنوان غیرهرزنامه گزارش می‌شود. تماس‌ها و پست‌های صوتی بعدی به‌عنوان هرزنامه شناسایی نمی‌شود.</string>
+  <string name="unblock_report_number_alert_title">%1$s لغو انسداد شود؟</string>
+  <string name="report_not_spam_alert_button">گزارش</string>
+  <string name="report_not_spam_alert_title">اشتباهی را گزارش می‌کنید؟</string>
+  <string name="report_not_spam_alert_details">تماس‌های بعدی از %1$s دیگر به‌عنوان هرزنامه شناسایی نخواهد شد.</string>
+  <string name="checkbox_report_as_spam_action">گزارش تماس به‌عنوان هرزنامه</string>
+  <string name="block_number_failed_toast">مشکل در مسدود کردن این شماره</string>
+  <string name="unblock_number_failed_toast">مشکل در لغو انسداد این شماره</string>
+</resources>

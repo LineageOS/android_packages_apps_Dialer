@@ -1,179 +1,171 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2202739481132958990">"Telefon"</string>
-    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"Telefoni klaviatuur"</string>
-    <string name="callHistoryIconLabel" msgid="7493268743411968630">"Kõneajalugu"</string>
-    <string name="action_copy_number_text" msgid="832682558551502319">"Kopeeri number"</string>
-    <string name="copy_transcript_text" msgid="937904189017310829">"Kopeeri transkribeerimine"</string>
-    <string name="action_edit_number_before_call" msgid="8017492815878473837">"Muuda enne helistamist numbrit"</string>
-    <string name="call_log_delete_all" msgid="7852970926906523784">"Kõneajaloo kustutamine"</string>
-    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"Kustuta kõnepost"</string>
-    <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"Kõnepost kustutati"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"VÕTA TAGASI"</string>
-    <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"Kas kustutada kõneajalugu?"</string>
-    <string name="clearCallLogConfirmation" msgid="6844949465815109166">"See kustutab ajaloost kõik kõned"</string>
-    <string name="clearCallLogProgress_title" msgid="995004835687361977">"Kõneajaloo kustutamine ..."</string>
-    <string name="notification_missedCallTitle" msgid="8283366068539898486">"Vastamata kõne"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Vastamata kõne töölt"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Vastamata kõned"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> vastamata kõnet"</string>
-    <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Helista tagasi"</string>
-    <string name="notification_missedCall_message" msgid="5086910028988305964">"Saada sõnum"</string>
-    <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Valige <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Kõneposti number on teadmata"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
-      <item quantity="other"> <xliff:g id="COUNT">%1$d</xliff:g> kõneposti teadet </item>
-      <item quantity="one">Kõneposti teade</item>
-    </plurals>
-    <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Uus kõnepostisõnum kasutajalt <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="4384373852257757295">"Kõneposti ei õnnestunud esitada"</string>
-    <string name="voicemail_fetching_content" msgid="572320120918636014">"Kõneposti laadimine ..."</string>
-    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"Kõneposti laadimine ebaõnnestus"</string>
-    <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_playback_speakerphone" msgid="4852027754869750227">"Valjuhääldi sisse- või väljalülitamine"</string>
-    <string name="description_playback_seek" msgid="1340910573254132520">"Taasesituse positsiooni otsimine"</string>
-    <string name="action_menu_call_history_description" msgid="8829135306925008546">"Kõneajalugu"</string>
-    <string name="action_menu_overflow_description" msgid="7648679686746517341">"Rohkem valikuid"</string>
-    <string name="action_menu_dialpad_button" msgid="1970631633457493180">"klaviatuur"</string>
-    <string name="dialer_settings_label" msgid="4980176284150290175">"Seaded"</string>
-    <string name="simulator_submenu_label" msgid="186156287346615267">"Simulaator"</string>
-    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Loo uue kasutajaliid. otsetee"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Sisenemine hulgitoimingute režiimi"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Lahkumine hulgitoimingute režiimist"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> on valitud"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"<xliff:g id="NAMEORNUMBER">%1$s</xliff:g> on valimata"</string>
-    <string name="description_contact_details" msgid="3341280873855253464">"Kontakti <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> üksikasjad"</string>
-    <string name="description_spam_contact_details" msgid="5592578752881528368">"Arvatava rämpskõnetegija <xliff:g id="NAMEORNUMBER">%1$s</xliff:g> kontaktandmed"</string>
-    <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> kõnet."</string>
-    <string name="description_video_call" msgid="3738199365585751727">"Videokõne."</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"Häälotsingu alustamine"</string>
-    <string name="voicemail" msgid="8899540969000957954">"Kõnepost"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Mitme toimigu režiimi tühistamine"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Kustuta"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Tühista"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> on valitud"</string>
-    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
-      <item quantity="other">"<b>"Kas kustutada need kõnepostisõnumid? "</b>"</item>
-      <item quantity="one">"<b>"Kas kustutada see kõnepostisõnum? "</b>"</item>
-    </plurals>
-    <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
-    <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> kell <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
-    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Häälotsing ei ole saadaval"</string>
-    <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Otsige kontakte"</string>
-    <string name="block_number_search_hint" msgid="5377706079015099416">"Lisage nr või otsige kontakte"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Teie kõneajalugu on tühi"</string>
-    <string name="call_log_all_empty_action" msgid="852218280136243014">"Helista"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"Vastamata kõnesid pole."</string>
-    <string name="call_log_voicemail_empty" msgid="273623903423275178">"Kõneposti postkast on tühi."</string>
-    <string name="call_log_activity_title" msgid="1275242727244945527">"Kõneajalugu"</string>
-    <string name="call_log_all_title" msgid="6042262422192020327">"Kõik"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"Vastamata"</string>
-    <string name="tab_speed_dial" msgid="6616404752227561075">"Kiirvalimine"</string>
-    <string name="tab_history" msgid="7420269368689503596">"Kõneajalugu"</string>
-    <string name="tab_all_contacts" msgid="5531733977693943015">"Kontaktid"</string>
-    <string name="tab_voicemail" msgid="2458548090088316246">"Kõnepost"</string>
-    <string name="search_shortcut_call_number" msgid="8847918845036880688">"Helista: <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"Loo uus kontakt"</string>
-    <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"Lisa kontaktile"</string>
-    <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"Saada SMS"</string>
-    <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Videokõne tegemine"</string>
-    <string name="search_shortcut_block_number" msgid="4587283230665805776">"Blokeeri number"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"Te pole veel kedagi kiirvalimisse lisanud"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Lisa lemmik"</string>
-    <string name="remove_contact" msgid="2353580570488923668">"Eemalda"</string>
-    <string name="select_all" msgid="408601760696146245">"Vali kõik"</string>
-    <string name="call_log_action_video_call" msgid="7565549950343850819">"Videokõne"</string>
-    <string name="call_log_action_send_message" msgid="6948727362660115554">"Saada sõnum"</string>
-    <string name="call_log_action_details" msgid="2091370737371449501">"Kõne üksikasjad"</string>
-    <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Saada: …"</string>
-    <string name="call_log_action_call" msgid="682724094251540583">"Helistamine: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_incoming_missed_call" msgid="8292535799379230029">"Vastamata kõne: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="3920182963103160610">"Vastati kõnele: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_unread_voicemail" msgid="145170985013419170">"Lugemata kõnepost kasutajalt <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_read_voicemail" msgid="5585559881573227732">"Kõnepost kasutajalt <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="543952487882919924">"Kõne: <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="call_log_via_number" msgid="1340307109806397650">"numbri <xliff:g id="NUMBER">%1$s</xliff:g> kaudu"</string>
-    <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> numbri <xliff:g id="NUMBER">%2$s</xliff:g> kaudu"</string>
-    <string name="description_call_action" msgid="4042796498169106545">"Helistamine: <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="1237090968588659650">"Videokõne kirjele <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="3290143432403538524">"Kontakti <xliff:g id="NAMEORNUMBER">^1</xliff:g> kõneposti kuulamine"</string>
-    <string name="description_create_new_contact_action" msgid="1928282350281564130">"Kontakti loomine kirjele <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"Kirje <xliff:g id="NAMEORNUMBER">^1</xliff:g> lisamine olemasolevale kontaktile"</string>
-    <string name="description_details_action" msgid="2061866409737706174">"Kontakti <xliff:g id="NAMEORNUMBER">^1</xliff:g> kõne üksikasjad"</string>
-    <string name="call_log_header_today" msgid="1576119097475845293">"Täna"</string>
-    <string name="call_log_header_yesterday" msgid="5616077776205329563">"Eile"</string>
-    <string name="call_log_header_other" msgid="4940676886254217644">"Vanem"</string>
-    <string name="voicemail_speaker_on" msgid="3151333608926996668">"Kõlari sisselülitamine."</string>
-    <string name="voicemail_speaker_off" msgid="2530064206962034201">"Kõlari väljalülitamine."</string>
-    <string name="voicemail_play_start_pause" msgid="3874823480278334664">"Esituse alustamine või peatamine."</string>
-    <string name="display_options_title" msgid="3880091801055797975">"Kuvamisvalikud"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Helid ja vibreerimine"</string>
-    <string name="accessibility_settings_title" msgid="3329027650429831820">"Juurdepääsetavus"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"Telefoni helin"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"Vibreeri ka kõnede puhul"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Klaviatuuri toonid"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Klaviatuuri toonide pikkus"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel">Telefon</string>
+  <string name="launcherDialpadActivityLabel">Telefoni klaviatuur</string>
+  <string name="callHistoryIconLabel">Kõneajalugu</string>
+  <string name="action_copy_number_text">Kopeeri number</string>
+  <string name="copy_transcript_text">Kopeeri transkribeerimine</string>
+  <string name="action_edit_number_before_call">Muuda enne helistamist numbrit</string>
+  <string name="call_log_delete_all">Kõneajaloo kustutamine</string>
+  <string name="call_log_trash_voicemail">Kustuta kõnepost</string>
+  <string name="snackbar_voicemail_deleted">Kõnepost kustutati</string>
+  <string name="clearCallLogConfirmation_title">Kas kustutada kõneajalugu?</string>
+  <string name="clearCallLogConfirmation">See kustutab ajaloost kõik kõned</string>
+  <string name="clearCallLogProgress_title">Kõneajaloo kustutamine ...</string>
+  <string name="notification_missedCallTitle">Vastamata kõne</string>
+  <string name="notification_missedWorkCallTitle">Vastamata kõne töölt</string>
+  <string name="notification_missedCallsTitle">Vastamata kõned</string>
+  <string name="notification_missedCallsMsg">%d vastamata kõnet</string>
+  <string name="notification_missedCall_call_back">Helista tagasi</string>
+  <string name="notification_missedCall_message">Saada sõnum</string>
+  <string name="post_call_notification_message">%1$s: %2$s</string>
+  <string name="notification_voicemail_text_format">Valige %s</string>
+  <string name="notification_voicemail_no_vm_number">Kõneposti number on teadmata</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">Kõneposti teade</item>
+    <item quantity="other"> %1$d kõneposti teadet </item>
+  </plurals>
+  <string name="notification_voicemail_callers_list">%1$s, %2$s</string>
+  <string name="notification_new_voicemail_ticker">Uus kõnepostisõnum kasutajalt %1$s</string>
+  <string name="voicemail_playback_error">Kõneposti ei õnnestunud esitada</string>
+  <string name="voicemail_fetching_content">Kõneposti laadimine ...</string>
+  <string name="voicemail_fetching_timout">Kõneposti laadimine ebaõnnestus</string>
+  <string name="call_log_item_count_and_date">(%1$d) %2$s</string>
+  <string name="description_playback_speakerphone">Valjuhääldi sisse- või väljalülitamine</string>
+  <string name="description_playback_seek">Taasesituse positsiooni otsimine</string>
+  <string name="action_menu_call_history_description">Kõneajalugu</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Rohkem valikuid</string>
+  <string name="action_menu_dialpad_button">klaviatuur</string>
+  <string name="dialer_settings_label">Seaded</string>
+  <string name="simulator_submenu_label">Simulaator</string>
+  <string name="new_ui_launcher_shortcut_label">Loo uue kasutajaliid. otsetee</string>
+  <string name="description_entering_bulk_action_mode">Sisenemine hulgitoimingute režiimi</string>
+  <string name="description_leaving_bulk_action_mode">Lahkumine hulgitoimingute režiimist</string>
+  <string name="description_selecting_bulk_action_mode">%1$s on valitud</string>
+  <string name="description_unselecting_bulk_action_mode">%1$s on valimata</string>
+  <string name="description_contact_details">Kontakti %1$s üksikasjad</string>
+  <string name="description_spam_contact_details">Arvatava rämpskõnetegija %1$s kontaktandmed</string>
+  <string name="description_num_calls">%1$s kõnet.</string>
+  <string name="description_video_call">Videokõne.</string>
+  <string name="description_start_voice_search">Häälotsingu alustamine</string>
+  <string name="voicemail">Kõnepost</string>
+  <string name="description_cancel_multi_select">Mitme toimigu režiimi tühistamine</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Kustuta</string>
+  <string name="voicemailMultiSelectDeleteCancel">Tühista</string>
+  <string name="voicemailMultiSelectActionBarTitle">%1$s on valitud</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>Kas kustutada see kõnepostisõnum? </b></item>
+    <item quantity="other"><b>Kas kustutada need kõnepostisõnumid? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat">%1$s kell %2$s</string>
+  <string name="voicemailDurationFormat">%1$02d:%2$02d</string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
+  <string name="voice_search_not_available">Häälotsing ei ole saadaval</string>
+  <string name="dialer_hint_find_contact">Otsige kontakte</string>
+  <string name="block_number_search_hint">Lisage nr või otsige kontakte</string>
+  <string name="call_log_all_empty">Teie kõneajalugu on tühi</string>
+  <string name="call_log_all_empty_action">Helista</string>
+  <string name="call_log_missed_empty">Vastamata kõnesid pole.</string>
+  <string name="call_log_voicemail_empty">Kõneposti postkast on tühi.</string>
+  <string name="call_log_activity_title">Kõneajalugu</string>
+  <string name="call_log_all_title">Kõik</string>
+  <string name="call_log_missed_title">Vastamata</string>
+  <string name="tab_speed_dial">Kiirvalimine</string>
+  <string name="tab_history">Kõneajalugu</string>
+  <string name="tab_all_contacts">Kontaktid</string>
+  <string name="tab_voicemail">Kõnepost</string>
+  <string name="search_shortcut_call_number">Helista: %s</string>
+  <string name="search_shortcut_create_new_contact">Loo uus kontakt</string>
+  <string name="search_shortcut_add_to_contact">Lisa kontaktile</string>
+  <string name="search_shortcut_send_sms_message">Saada SMS</string>
+  <string name="search_shortcut_make_video_call">Videokõne tegemine</string>
+  <string name="search_shortcut_block_number">Blokeeri number</string>
+  <string name="speed_dial_empty">Te pole veel kedagi kiirvalimisse lisanud</string>
+  <string name="speed_dial_empty_add_favorite_action">Lisa lemmik</string>
+  <string name="remove_contact">Eemalda</string>
+  <string name="select_all">Vali kõik</string>
+  <string name="call_log_action_video_call">Videokõne</string>
+  <string name="call_log_action_set_up_video">Videokõne seadistamine</string>
+  <string name="call_log_action_invite_video">Videokõnesse kutsumine</string>
+  <string name="call_log_action_send_message">Saada sõnum</string>
+  <string name="call_log_action_details">Kõne üksikasjad</string>
+  <string name="call_log_action_share_voicemail">Saada: …</string>
+  <string name="call_log_action_call">Helistamine: ^1</string>
+  <string name="description_incoming_missed_call">Vastamata kõne: ^1, ^2, ^3, ^4.</string>
+  <string name="description_incoming_answered_call">Vastati kõnele: ^1, ^2, ^3, ^4.</string>
+  <string name="description_unread_voicemail">Lugemata kõnepost kasutajalt ^1, ^2, ^3, ^4.</string>
+  <string name="description_read_voicemail">Kõnepost kasutajalt ^1, ^2, ^3, ^4.</string>
+  <string name="description_outgoing_call">Kõne: ^1, ^2, ^3, ^4.</string>
+  <string name="call_log_via_number">numbri %1$s kaudu</string>
+  <string name="call_log_via_number_phone_account">%1$s numbri %2$s kaudu</string>
+  <string name="description_call_action">Helistamine: ^1</string>
+  <string name="description_video_call_action">Videokõne kirjele ^1.</string>
+  <string name="description_voicemail_action">Kontakti ^1 kõneposti kuulamine</string>
+  <string name="description_create_new_contact_action">Kontakti loomine kirjele ^1</string>
+  <string name="description_add_to_existing_contact_action">Kirje ^1 lisamine olemasolevale kontaktile</string>
+  <string name="description_details_action">Kontakti ^1 kõne üksikasjad</string>
+  <string name="call_log_header_today">Täna</string>
+  <string name="call_log_header_yesterday">Eile</string>
+  <string name="call_log_header_other">Vanem</string>
+  <string name="voicemail_speaker_on">Kõlari sisselülitamine.</string>
+  <string name="voicemail_speaker_off">Kõlari väljalülitamine.</string>
+  <string name="voicemail_play_start_pause">Esituse alustamine või peatamine.</string>
+  <string name="display_options_title">Kuvamisvalikud</string>
+  <string name="sounds_and_vibration_title">Helid ja vibreerimine</string>
+  <string name="accessibility_settings_title">Juurdepääsetavus</string>
+  <string name="ringtone_title">Telefoni helin</string>
+  <string name="vibrate_on_ring_title">Vibreeri ka kõnede puhul</string>
+  <string name="dtmf_tone_enable_title">Klaviatuuri toonid</string>
+  <string name="dtmf_tone_length_title">Klaviatuuri toonide pikkus</string>
   <string-array name="dtmf_tone_length_entries">
-    <item msgid="3136353015227162823">"Tavaline"</item>
-    <item msgid="5376841175538523822">"Pikk"</item>
+    <item>Tavaline</item>
+    <item>Pikk</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"Kiirvastused"</string>
-    <string name="call_settings_label" msgid="7824611757200960807">"Kõned"</string>
-    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Kõnede blokeerimine"</string>
-    <string name="voicemail_settings_label" msgid="4594299554519920570">"Kõnepost"</string>
-    <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Kõnede blokeerimine on ajutiselt väljas"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Kõnede blokeerimine on keelatud, kuna võtsite sellelt telefonilt viimase 48 tunni jooksul ühendust hädaabiteenustega. See lubatakse 48 tunni möödumisel automaatselt uuesti."</string>
-    <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Impordi numbrid"</string>
-    <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"Märkisite varem, et osad helistajad saadetaks muude rakenduste kaudu automaatselt kõneposti."</string>
-    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"Vaata numbreid"</string>
-    <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"Impordi"</string>
-    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Numbri deblokeerimine"</string>
-    <string name="addBlockedNumber" msgid="3053473735238295551">"Lisa number"</string>
-    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Kõned nendelt numbritelt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Kõned nendelt numbritelt blokeeritakse, kuid helistajad saavad võib-olla siiski teile kõnepostisõnumeid jätta."</string>
-    <string name="block_list" msgid="4701585783411870782">"Blokeeritud numbrid"</string>
-    <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> on juba blokeeritud."</string>
-    <string name="phone_account_settings_label" msgid="8372485478006965920">"Helistamiskontod"</string>
-    <string name="permission_no_speeddial" msgid="8487215628510596753">"Kiirvalimise lubamiseks lülitage sisse kontaktiluba."</string>
-    <string name="permission_no_calllog" msgid="4053705651238775784">"Kõnelogi vaatamiseks lülitage sisse telefoniluba."</string>
-    <string name="permission_no_search" msgid="2424710404207193826">"Kontaktide otsimiseks lülitage sisse kontaktiload."</string>
-    <string name="permission_place_call" msgid="8686908130349369423">"Helistamiseks lülitage sisse telefoniluba."</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Telefonirakendusel pole luba süsteemiseadetesse kirjutada."</string>
-    <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Blokeeritud"</string>
-    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Blokeeri / teavita rämpssisust"</string>
-    <string name="call_log_action_block_number" msgid="5048188386501998865">"Blokeeri number"</string>
-    <string name="call_log_action_remove_spam" msgid="2045319806318398403">"Pole rämpssisu"</string>
-    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Numbri deblokeerimine"</string>
-    <string name="spam_number_call_log_label" msgid="2678431398326811131">"Rämpspost"</string>
-    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> ei ole võrgus ja temaga ei saa ühendust"</string>
-    <string name="about_phone_label" msgid="582991354677973731">"Teave"</string>
-    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Google\'i transkribeeritud"</string>
-    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transkribeerib …"</string>
-    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Transkribeerimine pole saadaval."</string>
-    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Transkribeerimine pole saadaval. Keelt ei toetata."</string>
-    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Transkribeerimine pole saadaval. Kõnet ei tuvastatud."</string>
-    <string name="view_conversation" msgid="7895904782094119702">"Kuva"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"Kõne kustutati. Selle kõne ajal jagatud manuseid saate vaadata ja kustutada rakenduses Messages."</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Kõned kustutati. Nende kõnede ajal jagatud manuseid saate vaadata ja kustutada rakenduses Messages."</string>
+  <string name="respond_via_sms_setting_title">Kiirvastused</string>
+  <string name="call_settings_label">Kõned</string>
+  <string name="manage_blocked_numbers_label">Blokeeritud numbrid</string>
+  <string name="voicemail_settings_label">Kõnepost</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">Kõnede blokeerimine on ajutiselt väljas</string>
+  <string name="blocked_numbers_disabled_emergency_desc">Kõnede blokeerimine on keelatud, kuna võtsite sellelt telefonilt viimase 48 tunni jooksul ühendust hädaabiteenustega. See lubatakse 48 tunni möödumisel automaatselt uuesti.</string>
+  <string name="import_send_to_voicemail_numbers_label">Impordi numbrid</string>
+  <string name="blocked_call_settings_import_description">Märkisite varem, et osad helistajad saadetaks muude rakenduste kaudu automaatselt kõneposti.</string>
+  <string name="blocked_call_settings_view_numbers_button">Vaata numbreid</string>
+  <string name="blocked_call_settings_import_button">Impordi</string>
+  <string name="description_blocked_number_list_delete">Numbri deblokeerimine</string>
+  <string name="addBlockedNumber">Lisa number</string>
+  <string name="block_number_footer_message_vvm">Kõned nendelt numbritelt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt.</string>
+  <string name="block_number_footer_message_no_vvm">Kõned nendelt numbritelt blokeeritakse, kuid helistajad saavad võib-olla siiski teile kõnepostisõnumeid jätta.</string>
+  <string name="block_list">Blokeeritud numbrid</string>
+  <string name="alreadyBlocked">%1$s on juba blokeeritud.</string>
+  <string name="phone_account_settings_label">Helistamiskontod</string>
+  <string name="permission_no_speeddial">Kiirvalimise lubamiseks lülitage sisse kontaktiluba.</string>
+  <string name="permission_no_calllog">Kõnelogi vaatamiseks lülitage sisse telefoniluba.</string>
+  <string name="permission_no_search">Kontaktide otsimiseks lülitage sisse kontaktiload.</string>
+  <string name="permission_place_call">Helistamiseks lülitage sisse telefoniluba.</string>
+  <string name="toast_cannot_write_system_settings">Telefonirakendusel pole luba süsteemiseadetesse kirjutada.</string>
+  <string name="blocked_number_call_log_label">Blokeeritud</string>
+  <string name="call_log_action_block_report_number">Blokeeri / teavita rämpssisust</string>
+  <string name="call_log_action_block_number">Blokeeri number</string>
+  <string name="call_log_action_remove_spam">Pole rämpssisu</string>
+  <string name="call_log_action_unblock_number">Numbri deblokeerimine</string>
+  <string name="spam_number_call_log_label">Rämpspost</string>
+  <string name="call_composer_connection_failed">%1$s ei ole võrgus ja temaga ei saa ühendust</string>
+  <string name="about_phone_label">Teave</string>
+  <string name="voicemail_transcription_branding_text">Google\'i transkribeeritud</string>
+  <string name="voicemail_transcription_in_progress">Transkribeerimine …</string>
+  <string name="voicemail_transcription_failed">Transkribeerimine pole saadaval.</string>
+  <string name="voicemail_transcription_failed_language_not_supported">Transkribeerimine pole saadaval. Keelt ei toetata.</string>
+  <string name="voicemail_transcription_failed_no_speech">Transkribeerimine pole saadaval. Kõnet ei tuvastatud.</string>
+  <string name="voicemail_donation_promo_title">Kas soovite aidata parandada transkriptsiooni täpsust?</string>
+  <string name="voicemail_donation_promo_content">Lubage Google\'il see ja tulevased kõnepostisõnumid transkriptsioonidega üle vaadata. Need salvestatakse anonüümselt. Seadeid saab alati muuta. %1$s</string>
+  <string name="voicemail_donation_promo_opt_in">Jah, sobib</string>
+  <string name="voicemail_donation_promo_opt_out">Tänan, ei</string>
+  <string name="voicemail_transcription_rating">Hinnake transkript. kvaliteeti</string>
+  <string name="voicemail_transcription_rating_thanks">Suur tänu tagasiside eest</string>
+  <string name="description_rating_good">Meeldib</string>
+  <string name="description_rating_bad">Ei meeldi</string>
+  <string name="view_conversation">Kuva</string>
+  <string name="ec_data_deleted">Kõne kustutati. Selle kõne ajal jagatud manuseid saate vaadata ja kustutada rakenduses Messages.</string>
+  <string name="multiple_ec_data_deleted">Kõned kustutati. Nende kõnede ajal jagatud manuseid saate vaadata ja kustutada rakenduses Messages.</string>
 </resources>

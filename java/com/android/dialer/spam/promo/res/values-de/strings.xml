@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Alle Anrufe bei Verdacht auf Spam herausfiltern?</string>
+  <string name="spam_blocking_promo_text">Anrufe wie der, den du gerade blockiert hast,
+      werden dich in Zukunft nicht mehr stören</string>
+  <string name="spam_blocking_promo_action_filter_spam">Spam herausfiltern</string>
+  <string name="spam_blocking_promo_action_dismiss">Schließen</string>
+  <string name="spam_blocking_setting_prompt">Einstellungen</string>
+  <string name="spam_blocking_settings_enable_error_text">Fehler beim Aktivieren des Spamfilters</string>
+  <string name="spam_blocking_settings_disable_error_text">Fehler beim Deaktivieren des Spamfilters</string>
+  <string name="spam_blocking_settings_enable_complete_text">Spamfilter aktiviert</string>
+  <string name="spam_blocking_settings_disable_complete_text">Spamfilter deaktiviert</string>
+</resources>

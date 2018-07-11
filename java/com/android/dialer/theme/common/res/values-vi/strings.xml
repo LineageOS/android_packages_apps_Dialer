@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Không xác định</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Điện thoại công cộng</string>
+  <string name="emergency_number">Số khẩn cấp</string>
+  <string name="launcherActivityLabel">Điện thoại</string>
+  <string name="call">Gọi</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Đang tiếp tục cuộc gọi bằng cách sử dụng Wi‑Fi…</string>
+  <string name="rtt_call_not_available_toast">Không thể sử dụng tin nhắn theo thời gian thực (RTT) cho cuộc gọi này</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

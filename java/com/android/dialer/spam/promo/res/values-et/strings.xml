@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Kas soovite filtreerida kõik arvatavad rämpskõned?</string>
+  <string name="spam_blocking_promo_text">Hiljuti blokeeritud kõnega sarnased kõned
+      ei häiri teid edaspidi</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtreeri rämpskõned</string>
+  <string name="spam_blocking_promo_action_dismiss">Loobu</string>
+  <string name="spam_blocking_setting_prompt">Seaded</string>
+  <string name="spam_blocking_settings_enable_error_text">Rämpskõnede filtreerimise sisselülitamisel tekkis probleem</string>
+  <string name="spam_blocking_settings_disable_error_text">Rämpskõnede filtreerimise väljalülitamisel tekkis probleem</string>
+  <string name="spam_blocking_settings_enable_complete_text">Rämpskõnede filtreerimine on sisse lülitatud</string>
+  <string name="spam_blocking_settings_disable_complete_text">Rämpskõnede filtreerimine on välja lülitatud</string>
+</resources>

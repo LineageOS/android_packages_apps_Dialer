@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Halda áfram</string>
+  <string name="rtt_input_hint">Sláðu inn skilaboð</string>
+  <string name="content_description_rtt_chat_avatar">Notandamynd</string>
+  <string name="rtt_button_back">Til baka</string>
+  <string name="rtt_status_banner_text">Bíður eftir að %s tengist RTT-símtali…</string>
+  <string name="rtt_transcript_advisory">Hinn aðilinn getur séð hvað þú slærð inn. Umritanir eru vistaðar í símtalaferli tækisins þíns.</string>
+</resources>

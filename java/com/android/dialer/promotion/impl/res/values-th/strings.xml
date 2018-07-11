@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">การรับส่งข้อความแบบเรียลไทม์ภายในการโทร</string>
+  <string name="rtt_promotion_details">RTT ช่วยเหลือผู้โทรที่หูหนวก ได้ยินไม่ชัด มีความบกพร่อง
+    ในการพูด หรือต้องการการสื่อสารที่นอกเหนือจากเสียงพูด ระบบจะจัดเก็บการถอดเสียงการรับส่งข้อความ RTT ไว้ในอุปกรณ์ของคุณ
+    ในประวัติการโทร %1$s</string>
+  <string name="duo_disclosure_title">ใช้วิดีโอคอลผ่าน Duo</string>
+  <string name="duo_disclosure_details">วิดีโอคอลจาก Google Duo ช่วยให้คุณแชทกับเพื่อนๆ และครอบครัวแบบเห็นหน้าเห็นตาได้ อาจมีการคิดค่าเน็ตมือถือ %1$s</string>
+</resources>

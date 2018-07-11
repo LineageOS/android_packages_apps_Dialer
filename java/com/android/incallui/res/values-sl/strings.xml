@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Ali želite poslati naslednje tone?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Da"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Ne"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Klicanje"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Aktivni klic"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Aktivni videoklic"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Aktivni videoklic – video je zaustavljen"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Aktivni delovni klic"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Aktivni <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Dohodni <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"klic prek omrežja Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"delovni klic prek omrežja Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Zadržano"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Dohodni klic"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Dohodni klic s fotografijo"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Dohodni klic s sporočilom"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Dohodni klic z lokacijo"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Dohodni klic s fotografijo in sporočilom"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Dohodni klic s fotografijo in lokacijo"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Dohodni klic s sporočilom in lokacijo"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Dohodni klic s fotografijo, sporočilom in lokacijo"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Dohodni klic s prilogami"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Pomemben dohodni klic"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Pomemben dohodni klic s fotografijo"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Pomemben dohodni klic s sporočilom"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Pomemben dohodni klic z lokacijo"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Pomemben dohodni klic s fotografijo in sporočilom"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Pomemben dohodni klic s fotografijo in lokacijo"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Pomemben dohodni klic s sporočilom in lokacijo"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Pomemben klic s fotografijo, sporočilom, lokacijo"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Pomemben dohodni klic s prilogami"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Dohodni delovni klic"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Domnevno neželeni dohodni klic"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Dohodna zahteva za video"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Odgovori"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Prekinite klic"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Videoklic"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Sprejmi"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Zavrni"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Vklopi zvočnik"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Izklopi zvočnik"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Aktivni klic v drugi napravi"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Aktivni videoklic v drugi napravi"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Sprejmi klic"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Sprejmi videoklic"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Storitev ni podprta."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"zasebno"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Upravljaj konferenčne klice"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Številka za klic v sili"</string>
-    <string name="child_number" msgid="3398257437107259682">"prek <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Ni kartice SIM ali napaka kartice SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Končaj klic"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konferenčni klic"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Poteka klic"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Nadaljevanje klica prek prenosa podatkov v mobilnem omrežju …"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Ni bilo mogoče preklopiti v omrežje Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Videoklic bo še naprej potekal v mobilnem omrežju. Morda boste morali plačati standardne stroške prenosa podatkov."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Tega ne kaži več"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Ali želite poslati naslednje tone?\n</string>
+  <string name="pause_prompt_yes">Da</string>
+  <string name="pause_prompt_no">Ne</string>
+  <string name="notification_dialing">Klicanje</string>
+  <string name="notification_ongoing_call">Aktivni klic</string>
+  <string name="notification_ongoing_video_call">Aktivni videoklic</string>
+  <string name="notification_ongoing_paused_video_call">Aktivni videoklic – video je zaustavljen</string>
+  <string name="notification_ongoing_work_call">Aktivni delovni klic</string>
+  <string name="notification_ongoing_call_wifi_template">Aktivni %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Dohodni %1$s</string>
+  <string name="notification_call_wifi_brand">klic prek omrežja Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">delovni klic prek omrežja Wi-Fi</string>
+  <string name="notification_on_hold">Zadržano</string>
+  <string name="notification_incoming_call">Dohodni klic</string>
+  <string name="notification_incoming_video_call">Dohodni videoklic</string>
+  <string name="notification_incoming_call_mutli_sim">Dohodni klic prek kartice SIM %1$s</string>
+  <string name="notification_incoming_call_with_photo">Dohodni klic s fotografijo</string>
+  <string name="notification_incoming_call_with_message">Dohodni klic s sporočilom</string>
+  <string name="notification_incoming_call_with_location">Dohodni klic z lokacijo</string>
+  <string name="notification_incoming_call_with_photo_message">Dohodni klic s fotografijo in sporočilom</string>
+  <string name="notification_incoming_call_with_photo_location">Dohodni klic s fotografijo in lokacijo</string>
+  <string name="notification_incoming_call_with_message_location">Dohodni klic s sporočilom in lokacijo</string>
+  <string name="notification_incoming_call_with_photo_message_location">Dohodni klic s fotografijo, sporočilom in lokacijo</string>
+  <string name="notification_incoming_call_attachments">Dohodni klic s prilogami</string>
+  <string name="important_notification_incoming_call">Pomemben dohodni klic</string>
+  <string name="important_notification_incoming_call_with_photo">Pomemben dohodni klic s fotografijo</string>
+  <string name="important_notification_incoming_call_with_message">Pomemben dohodni klic s sporočilom</string>
+  <string name="important_notification_incoming_call_with_location">Pomemben dohodni klic z lokacijo</string>
+  <string name="important_notification_incoming_call_with_photo_message">Pomemben dohodni klic s fotografijo in sporočilom</string>
+  <string name="important_notification_incoming_call_with_photo_location">Pomemben dohodni klic s fotografijo in lokacijo</string>
+  <string name="important_notification_incoming_call_with_message_location">Pomemben dohodni klic s sporočilom in lokacijo</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Pomemben klic s fotografijo, sporočilom, lokacijo</string>
+  <string name="important_notification_incoming_call_attachments">Pomemben dohodni klic s prilogami</string>
+  <string name="notification_incoming_work_call">Dohodni delovni klic</string>
+  <string name="notification_incoming_spam_call">Domnevno neželeni dohodni klic</string>
+  <string name="notification_requesting_video_call">Dohodna zahteva za video</string>
+  <string name="notification_action_answer">Odgovori</string>
+  <string name="notification_action_end_call">Prekinite klic</string>
+  <string name="notification_action_answer_video">Videoklic</string>
+  <string name="notification_action_accept">Sprejmi</string>
+  <string name="notification_action_dismiss">Zavrni</string>
+  <string name="notification_action_speaker_on">Vklopi zvočnik</string>
+  <string name="notification_action_speaker_off">Izklopi zvočnik</string>
+  <string name="notification_external_call">Aktivni klic v drugi napravi</string>
+  <string name="notification_external_video_call">Aktivni videoklic v drugi napravi</string>
+  <string name="notification_take_call">Sprejmi klic</string>
+  <string name="notification_take_video_call">Sprejmi videoklic</string>
+  <string name="incall_error_supp_service_unknown">Storitev ni podprta.</string>
+  <string name="goPrivate">zasebno</string>
+  <string name="manageConferenceLabel">Upravljaj konferenčne klice</string>
+  <string name="child_number">prek %s</string>
+  <string name="callFailed_simError">Ni kartice SIM ali napaka kartice SIM</string>
+  <string name="conference_caller_disconnect_content_description">Končaj klic</string>
+  <string name="conference_call_name">Konferenčni klic</string>
+  <string name="generic_conference_call_name">Poteka klic</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Nadaljevanje klica prek prenosa podatkov v mobilnem omrežju …</string>
+  <string name="video_call_lte_to_wifi_failed_title">Ni bilo mogoče preklopiti v omrežje Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Videoklic bo še naprej potekal v mobilnem omrežju. Morda boste morali plačati standardne stroške prenosa podatkov.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Tega ne kaži več</string>
+  <string name="bubble_return_to_call">Nazaj na klic</string>
+  <string name="rtt_request_dialog_title">Se želite pridružiti klicu RTT?</string>
+  <string name="rtt_request_dialog_details">%1$s želi uporabljati sporočila v glasovnem klicu.</string>
+  <string name="rtt_request_dialog_more_information">Funkcija RTT pomaga klicateljem, ki so gluhi, naglušni, imajo govorno motnjo ali potrebujejo več kot samo glas.</string>
+  <string name="rtt_button_decline_request">Ne, hvala</string>
+  <string name="rtt_button_accept_request">Pridruži se</string>
 </resources>

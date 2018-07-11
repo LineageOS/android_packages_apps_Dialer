@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">拨打语音电话</string>
+  <string name="video_call">发起视频通话</string>
+  <string name="add_to_contacts">添加联系人</string>
+  <string name="send_a_message">发短信</string>
+  <string name="not_spam">标为非骚扰电话号码</string>
+  <string name="block_number">屏蔽</string>
+  <string name="unblock_number">取消屏蔽</string>
+  <string name="block_and_optionally_report_spam">屏蔽/举报骚扰电话号码</string>
+  <string name="copy_number">复制号码</string>
+</resources>

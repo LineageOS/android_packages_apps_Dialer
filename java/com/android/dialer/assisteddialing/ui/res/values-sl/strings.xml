@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Klicanje s pomočjo</string>
+  <string name="assisted_dialing_setting_summary">Predvidi in dodaj kodo države pri klicih med potovanjem v tujini</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Samodejno zaznano • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Samodejno zaznano</string>
+  <string name="assisted_dialing_setting_cc_category_title">Domača država</string>
+  <string name="assisted_dialing_setting_cc_title">Privzeta domača država</string>
+</resources>

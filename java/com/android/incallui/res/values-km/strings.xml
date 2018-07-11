@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ទូរស័ព្ទ"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"ផ្ញើ​សំឡេង​ដូច​ខាងក្រោម?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"បាទ/ចាស"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"ទេ"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"កំពុងហៅ"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"កំពុង​បន្ត​ការ​ហៅ"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"ការ​ហៅ​ជា​វីដេអូ​កំពុង​បន្ត"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"ការ​ហៅ​ជា​វីដេអូ​កំពុង​បន្ត - បាន​ផ្អាក​វីដេអូ"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ការហៅពីកន្លែងការងារកំពុងដំណើរការ"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> កំពុង​បន្ត"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> ចូល"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"ហៅតាម Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"ការហៅ​តាម Wi‑Fi ពី​កន្លែង​ការងារ"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"រង់ចាំ"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"ការ​ហៅ​ចូល"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ការហៅ​ចូល​​ដែល​មាន​រូបថត"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"ការ​ហោ​ចូល​ដែល​មាន​​សារ"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"ការ​ហៅ​ចូល​ដែល​មាន​​ទីតាំង"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ការ​ហៅ​ចូល​ដែល​មាន​រូបថត និង​សារ"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ការ​ហៅ​ចូល​ដែល​មាន​រូបថត និង​ទីតាំង"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"ការ​ហៅ​ចូល​ដែល​សារ និង​ទីតាំង"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ការ​ហៅ​ចូល​ដែល​មាន​រូបថត សារ និង​ទីតាំង"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"ការ​ហៅ​ចូល​ដែល​មាន​ឯកសារ​ភ្ជាប់"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"ការ​ហៅ​ចូល​ដែល​សំខាន់"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ការ​ហៅ​ចូល​ដែល​សំខាន់​​មាន​រូបថត"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"ការហៅ​ចូល​ដែល​សំខាន់​​​មាន​សារ"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​ទីតាំង"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​រូបថត និង​សារ"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​​រូបថត និង​ទីតាំង"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​សារ និង​ទីតាំង"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​រូបថត សារ និង​ទីតាំង"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ការហៅ​​ចូល​ដែល​សំខាន់​មាន​ឯកសារ​ភ្ជាប់"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"កំពុងហៅចូលពីកន្លែងការងារ"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ការ​ហៅ​បន្លំ​​ចូល​​​ដែល​សង្ស័យ"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"សំណើ​ការ​ហៅ​ជា​វីដេអូ​ចូល"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"ឆ្លើយតប"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"បញ្ចប់​ការ​សន្ទនា"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"វីដេអូ"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"ព្រម​ទទួល"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"បដិសេធ"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"បើកឧបករណ៍បំពងសំំឡេង"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"បិទឧបករណ៍បំពងសំំឡេង"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"ការ​ហៅ​កំពុង​ដំណើរការ​លើ​ឧបករណ៍​ផ្សេង"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"ការ​ហៅ​ជាវីដេអូ​កំពុង​ដំណើរការ​នៅលើឧបករណ៍ផ្សេងទៀត"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"ទទួលយកការហៅ"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"ទទួល​យក​ការ​ហៅ​វីដេអូ"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"សេវាកម្មមិនត្រូវបានគាំទ្រទេ។"</string>
-    <string name="goPrivate" msgid="5269514638004595378">"ទៅ​កាន់​ឯកជន"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"គ្រប់គ្រងការហៅជាក្រុម"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"លេខ​ពេល​អាសន្ន"</string>
-    <string name="child_number" msgid="3398257437107259682">"តាមរយៈ <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"គ្មាន​ស៊ីមកាត ឬ​កំហុស​ស៊ីមកាត"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"បញ្ចប់ការហៅ"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"ហៅជា​សន្និសីទ"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"ស្ថិត​​ក្នុង​ការ​ហៅ"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"កំពុង​បន្ត​ការហៅ​ទូរសព្ទ​ ដោយ​ប្រើប្រាស់​ទិន្នន័យទូរសព្ទ​ចល័ត…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"មិន​អាច​ប្ដូរ​ទៅ​បណ្ដាញ Wi-Fi បាន​ទេ"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ការហៅ​តាម​វីដេអូ​នឹង​នៅតែ​មាន​នៅ​លើ​បណ្ដាញ​ទូរសព្ទចល័ត។ អាច​នឹង​គិតថ្លៃ​ទិន្នន័យ​តាម​តម្លៃ​ស្តង់ដារ។"</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"កុំ​បង្ហាញ​វា​ម្ដង​ទៀត"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">ផ្ញើ​សំឡេង​ដូច​ខាងក្រោម?\n</string>
+  <string name="pause_prompt_yes">បាទ/ចាស</string>
+  <string name="pause_prompt_no">ទេ</string>
+  <string name="notification_dialing">កំពុងហៅ</string>
+  <string name="notification_ongoing_call">កំពុង​បន្ត​ការ​ហៅ</string>
+  <string name="notification_ongoing_video_call">ការ​ហៅ​ជា​វីដេអូ​កំពុង​បន្ត</string>
+  <string name="notification_ongoing_paused_video_call">ការ​ហៅ​ជា​វីដេអូ​កំពុង​បន្ត - បាន​ផ្អាក​វីដេអូ</string>
+  <string name="notification_ongoing_work_call">ការហៅពីកន្លែងការងារកំពុងដំណើរការ</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s កំពុង​បន្ត</string>
+  <string name="notification_incoming_call_wifi_template">%1$s ចូល</string>
+  <string name="notification_call_wifi_brand">ហៅតាម Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">ការហៅ​តាម Wi‑Fi ពី​កន្លែង​ការងារ</string>
+  <string name="notification_on_hold">រង់ចាំ</string>
+  <string name="notification_incoming_call">ការ​ហៅ​ចូល</string>
+  <string name="notification_incoming_video_call">ការ​ហៅចូលជា​វីដេអូ​</string>
+  <string name="notification_incoming_call_mutli_sim">ការហៅ​ចូល​តាមរយៈ %1$s</string>
+  <string name="notification_incoming_call_with_photo">ការហៅ​ចូល​​ដែល​មាន​រូបថត</string>
+  <string name="notification_incoming_call_with_message">ការ​ហោ​ចូល​ដែល​មាន​​សារ</string>
+  <string name="notification_incoming_call_with_location">ការ​ហៅ​ចូល​ដែល​មាន​​ទីតាំង</string>
+  <string name="notification_incoming_call_with_photo_message">ការ​ហៅ​ចូល​ដែល​មាន​រូបថត និង​សារ</string>
+  <string name="notification_incoming_call_with_photo_location">ការ​ហៅ​ចូល​ដែល​មាន​រូបថត និង​ទីតាំង</string>
+  <string name="notification_incoming_call_with_message_location">ការ​ហៅ​ចូល​ដែល​សារ និង​ទីតាំង</string>
+  <string name="notification_incoming_call_with_photo_message_location">ការ​ហៅ​ចូល​ដែល​មាន​រូបថត សារ និង​ទីតាំង</string>
+  <string name="notification_incoming_call_attachments">ការ​ហៅ​ចូល​ដែល​មាន​ឯកសារ​ភ្ជាប់</string>
+  <string name="important_notification_incoming_call">ការ​ហៅ​ចូល​ដែល​សំខាន់</string>
+  <string name="important_notification_incoming_call_with_photo">ការ​ហៅ​ចូល​ដែល​សំខាន់​​មាន​រូបថត</string>
+  <string name="important_notification_incoming_call_with_message">ការហៅ​ចូល​ដែល​សំខាន់​​​មាន​សារ</string>
+  <string name="important_notification_incoming_call_with_location">ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​ទីតាំង</string>
+  <string name="important_notification_incoming_call_with_photo_message">ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​រូបថត និង​សារ</string>
+  <string name="important_notification_incoming_call_with_photo_location">ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​​រូបថត និង​ទីតាំង</string>
+  <string name="important_notification_incoming_call_with_message_location">ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​សារ និង​ទីតាំង</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">ការ​ហៅ​ចូល​ដែល​សំខាន់​មាន​រូបថត សារ និង​ទីតាំង</string>
+  <string name="important_notification_incoming_call_attachments">ការហៅ​​ចូល​ដែល​សំខាន់​មាន​ឯកសារ​ភ្ជាប់</string>
+  <string name="notification_incoming_work_call">កំពុងហៅចូលពីកន្លែងការងារ</string>
+  <string name="notification_incoming_spam_call">ការ​ហៅ​បន្លំ​​ចូល​​​ដែល​សង្ស័យ</string>
+  <string name="notification_requesting_video_call">សំណើ​ការ​ហៅ​ជា​វីដេអូ​ចូល</string>
+  <string name="notification_action_answer">ឆ្លើយតប</string>
+  <string name="notification_action_end_call">បញ្ចប់​ការ​សន្ទនា</string>
+  <string name="notification_action_answer_video">វីដេអូ</string>
+  <string name="notification_action_accept">ព្រម​ទទួល</string>
+  <string name="notification_action_dismiss">បដិសេធ</string>
+  <string name="notification_action_speaker_on">បើកឧបករណ៍បំពងសំំឡេង</string>
+  <string name="notification_action_speaker_off">បិទឧបករណ៍បំពងសំំឡេង</string>
+  <string name="notification_external_call">ការ​ហៅ​កំពុង​ដំណើរការ​លើ​ឧបករណ៍​ផ្សេង</string>
+  <string name="notification_external_video_call">ការ​ហៅ​ជាវីដេអូ​កំពុង​ដំណើរការ​នៅលើឧបករណ៍ផ្សេងទៀត</string>
+  <string name="notification_take_call">ទទួលយកការហៅ</string>
+  <string name="notification_take_video_call">ទទួល​យក​ការ​ហៅ​វីដេអូ</string>
+  <string name="incall_error_supp_service_unknown">សេវាកម្មមិនត្រូវបានគាំទ្រទេ។</string>
+  <string name="goPrivate">ទៅ​កាន់​ឯកជន</string>
+  <string name="manageConferenceLabel">គ្រប់គ្រងការហៅជាក្រុម</string>
+  <string name="child_number">តាមរយៈ %s</string>
+  <string name="callFailed_simError">គ្មាន​ស៊ីមកាត ឬ​កំហុស​ស៊ីមកាត</string>
+  <string name="conference_caller_disconnect_content_description">បញ្ចប់ការហៅ</string>
+  <string name="conference_call_name">ហៅជា​សន្និសីទ</string>
+  <string name="generic_conference_call_name">ស្ថិត​​ក្នុង​ការ​ហៅ</string>
+  <string name="video_call_wifi_to_lte_handover_toast">កំពុង​បន្ត​ការហៅ​ទូរសព្ទ​ ដោយ​ប្រើប្រាស់​ទិន្នន័យទូរសព្ទ​ចល័ត…</string>
+  <string name="video_call_lte_to_wifi_failed_title">មិន​អាច​ប្ដូរ​ទៅ​បណ្ដាញ Wi-Fi បាន​ទេ</string>
+  <string name="video_call_lte_to_wifi_failed_message">ការហៅ​តាម​វីដេអូ​នឹង​នៅតែ​មាន​នៅ​លើ​បណ្ដាញ​ទូរសព្ទចល័ត។ អាច​នឹង​គិតថ្លៃ​ទិន្នន័យ​តាម​តម្លៃ​ស្តង់ដារ។</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">កុំ​បង្ហាញ​វា​ម្ដង​ទៀត</string>
+  <string name="bubble_return_to_call">ហៅ​ទូរសព្ទ​ទៅ​វិញ</string>
+  <string name="rtt_request_dialog_title">ចូលរួម​ការហៅ RTT ?</string>
+  <string name="rtt_request_dialog_details">%1$s ចង់​ប្រើប្រាស់​ការផ្ញើ​សារ​នៅ​ក្នុង​ការហៅ​ជា​សំឡេង​របស់​អ្នក។</string>
+  <string name="rtt_request_dialog_more_information">RTT ជួយ​អ្នក​ហៅ​ទូរសព្ទ​ដែល​​ថ្លង់ ពិបាក​ក្នុង​ការស្ដាប់ មិន​អាច​និយាយ​បាន ឬ​មាន​តម្រូវការ​ក្រៅ​ពី​​សំឡេង។</string>
+  <string name="rtt_button_decline_request">ទេ អរគុណ</string>
+  <string name="rtt_button_accept_request">ចូលរួម RTT</string>
 </resources>

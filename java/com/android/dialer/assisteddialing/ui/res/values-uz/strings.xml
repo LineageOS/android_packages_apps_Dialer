@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Raqamni maslahatlar bilan terish</string>
+  <string name="assisted_dialing_setting_summary">Chet elda chaqiruvlarni amalga oshirishda mamlakat kodi avtomatik aniqlansin va kiritilsin</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Avtomatik aniqlandi • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Avtomatik aniqlandi</string>
+  <string name="assisted_dialing_setting_cc_category_title">Mamlakatingiz</string>
+  <string name="assisted_dialing_setting_cc_title">Birlamchi mamlakatingiz</string>
+</resources>

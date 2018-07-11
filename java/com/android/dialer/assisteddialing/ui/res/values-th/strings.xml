@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">ระบบช่วยโทรออก</string>
+  <string name="assisted_dialing_setting_summary">คาดเดาและเพิ่มรหัสประเทศให้เมื่อคุณโทรศัพท์ขณะอยู่ต่างประเทศ</string>
+  <string name="assisted_dialing_setting_cc_default_summary">ตรวจหาโดยอัตโนมัติ • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">ตรวจหาโดยอัตโนมัติ</string>
+  <string name="assisted_dialing_setting_cc_category_title">ประเทศบ้านเกิด</string>
+  <string name="assisted_dialing_setting_cc_title">ประเทศบ้านเกิดที่เป็นค่าเริ่มต้น</string>
+</resources>

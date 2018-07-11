@@ -1,39 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="description_dialpad_back" msgid="6226488105558971135">"ນຳທາງກັບຄືນ"</string>
-    <string name="description_dialpad_overflow" msgid="5984341386518189787">"ໂຕເລືອກເພີ່ມເຕີມ"</string>
-    <string name="description_delete_button" msgid="8431313818404527096">"ປຸ່ມ backspace"</string>
-    <string name="description_image_button_plus" msgid="8936338119824589388">"ບວກ"</string>
-    <string name="description_voicemail_button" msgid="4187006295368768215">"ຂໍ້ຄວາມສຽງ"</string>
-    <string name="description_dial_button" msgid="6826108965053146374">"ໂທ"</string>
-    <string name="dialog_voicemail_airplane_mode_message" msgid="1728176091017802282">"ທ່ານຕ້ອງປິດໂໝດຢູ່ເທິງຍົນກ່ອນເພື່ອໂທຫາເບີຂໍ້ຄວາມສຽງ."</string>
-    <string name="dialog_voicemail_not_ready_message" msgid="4287602816589585704">"ເພື່ອຕັ້ງຄ່າຂໍ້ຄວາມສຽງ ໃຫ້ໄປທີ່ ເມນູ &gt; ການຕັ້ງຄ່າ."</string>
-    <string name="add_2sec_pause" msgid="395591627218789322">"ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ"</string>
-    <string name="add_wait" msgid="2278146476349811062">"ເພີ່ມການລໍຖ້າ"</string>
-    <string name="dialer_useDtmfDialpad" msgid="6919241568926709507">"ໃຊ້ປຸ່ມກົດສັນຍານສຽງ"</string>
-    <string name="dialer_returnToInCallScreen" msgid="4111111633248125741">"ກັບໄປການໂທທີ່ກຳລັງດຳເນີນຢູ່"</string>
-    <string name="dialer_addAnotherCall" msgid="6842534741272651900">"ເພີ່ມການໂທ"</string>
-    <string name="imei" msgid="7961343816043247280">"IMEI"</string>
-    <string name="meid" msgid="5274167198744847659">"MEID"</string>
-    <string name="simContacts_emptyLoading" msgid="4158651660353159679">"ກຳລັງໂຫລດຈາກ SIM card..."</string>
-    <string name="simContacts_title" msgid="8972942600800349990">"ລາຍຊື່ຜູ້ຕິດຕໍ່ SIM card"</string>
-    <string name="menu_callNumber" msgid="1898333075466418368">"ໂທ​ຫາ <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="dialog_phone_call_prohibited_message" msgid="4806479823793649894">"ບໍ່​ສາ​ມາດ​ໂທ​ຫາ​ເບີ​ນີ້​ໄດ້"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="description_dialpad_back">ນຳທາງກັບຄືນ</string>
+  <string name="description_dialpad_overflow">ໂຕເລືອກເພີ່ມເຕີມ</string>
+  <string name="description_delete_button">ປຸ່ມ backspace</string>
+  <string name="description_image_button_plus">ແປ້ນພິມບວກ</string>
+  <string name="description_voicemail_button">ໂທຫາເບີຂໍ້ຄວາມສຽງ</string>
+  <string name="description_dial_button">ໂທ</string>
+  <string name="dialog_voicemail_airplane_mode_message">ທ່ານຕ້ອງປິດໂໝດຢູ່ເທິງຍົນກ່ອນເພື່ອໂທຫາເບີຂໍ້ຄວາມສຽງ.</string>
+  <string name="dialog_voicemail_not_ready_message">ເພື່ອຕັ້ງຄ່າຂໍ້ຄວາມສຽງ ໃຫ້ໄປທີ່ ເມນູ &gt; ການຕັ້ງຄ່າ.</string>
+  <string name="add_2sec_pause">ເພີ່ມການຂັ້ນເວລາ 2 ວິນາທີ</string>
+  <string name="add_wait">ເພີ່ມການລໍຖ້າ</string>
+  <string name="dialer_useDtmfDialpad">ໃຊ້ປຸ່ມກົດສັນຍານສຽງ</string>
+  <string name="dialer_returnToInCallScreen">ກັບໄປການໂທທີ່ກຳລັງດຳເນີນຢູ່</string>
+  <string name="dialer_addAnotherCall">ເພີ່ມການໂທ</string>
+  <string name="imei">IMEI</string>
+  <string name="meid">MEID</string>
+  <string name="simContacts_emptyLoading">ກຳລັງໂຫລດຈາກ SIM card...</string>
+  <string name="simContacts_title">ລາຍຊື່ຜູ້ຕິດຕໍ່ SIM card</string>
+  <string name="menu_callNumber">ໂທ​ຫາ %s</string>
+  <string name="dialpad_hint_emergency_calling_not_available">ບໍ່ສາມາດໂທສຸກເສີນຜ່ານ Wi‑Fi ໄດ້</string>
+  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">ບໍ່​ສາ​ມາດ​ໂທ​ຫາ​ເບີ​ນີ້​ໄດ້</string>
 </resources>

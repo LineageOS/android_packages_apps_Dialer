@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Unterstützung für Nummerneingabe</string>
+  <string name="assisted_dialing_setting_summary">Hiermit wird eine Landesvorwahl vorgeschlagen und bei deinen Anrufen hinzugefügt, wenn du im Ausland unterwegs bist</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automatisch erkannt • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automatisch erkannt</string>
+  <string name="assisted_dialing_setting_cc_category_title">Heimatland</string>
+  <string name="assisted_dialing_setting_cc_title">Heimatland (Standard)</string>
+</resources>

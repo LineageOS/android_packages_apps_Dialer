@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s ब्‍लॉक करायचा?</string>
+  <string name="block_number_confirmation_message_new_filtering">आपल्याला या नंबर वरून कॉल किंवा मजकूर प्राप्त होणार नाहीत.</string>
+  <string name="block_number_ok">अवरोधित करा</string>
+  <string name="unblock_number_ok">अनावरोधित करा</string>
+  <string name="block_report_number_alert_title">%1$s ब्‍लॉक करायचा?</string>
+  <string name="block_report_number_alert_details">तुम्‍ही या नंबरवरून कॉल घेऊ शकणार नाही.</string>
+  <string name="block_number_alert_details">%1$s या कॉलची स्पॅम म्हणून तक्रार नोंदवली जाईल.</string>
+  <string name="unblock_number_alert_details">हा नंबर अनब्‍लॉक केला जाईल आणि त्याचा स्पॅम नाही म्हणून अहवाल दिला जाईल. भविष्यातील कॉल स्पॅम म्हणून ओळखले जाणार नाहीत.</string>
+  <string name="unblock_report_number_alert_title">%1$s अनब्‍लॉक करायचा?</string>
+  <string name="report_not_spam_alert_button">नोंदवा</string>
+  <string name="report_not_spam_alert_title">चूक झाल्याची तक्रार करायची?</string>
+  <string name="report_not_spam_alert_details">%1$s वरील भविष्यातील कॉल यापुढे स्पॅम म्हणून ओळखले जाणार नाहीत.</string>
+  <string name="checkbox_report_as_spam_action">कॉलची स्पॅम म्हणून तक्रार करा</string>
+  <string name="block_number_failed_toast">हा नंबर ब्‍लॉक करण्‍यात समस्‍या</string>
+  <string name="unblock_number_failed_toast">हा नंबर अनब्‍लॉक करण्‍यात समस्‍या</string>
+</resources>

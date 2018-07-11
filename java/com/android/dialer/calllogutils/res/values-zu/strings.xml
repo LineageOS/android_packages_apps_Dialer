@@ -1,53 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"Ikholi engenayo"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"Ikholi engenayo idluliselwe kwenye idivayisi"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"Ikholi ephumayo"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"Ikholi ephumayo idluliselwe kwenye idivayisi"</string>
-    <string name="type_missed" msgid="2997043831022028176">"Ikholi ephuthiwe"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"Ikholi yevidiyo engenayo"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"Ikholi yevidiyo engenayo idluliselwe kwenye idivayisi"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"Ikholi yevidiyo ephumayo"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"Ikholi yevidiyo ephumayo idluliselwe kwenye idivayisi"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"Ikholi yevidiyo ephuthiwe"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"Ivoyisimeyili"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"Ikholi enqatshelwe"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"Ikholi evinjiwe"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"m"</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"s"</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="one">amasekhondi</item>
-      <item quantity="other">amasekhondi</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="one">amaminithi</item>
-      <item quantity="other">amaminithi</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"Ikholi iphendulwe kwenye idivayisi"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"ku-<xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"nge-<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"ku-<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, nge-<xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"Ivoyisimeyili"</string>
-    <string name="now" msgid="2599778506439006806">"Manje"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">Ikholi engenayo</string>
+  <string name="type_incoming_pulled">Ikholi engenayo idluliselwe kwenye idivayisi</string>
+  <string name="type_outgoing">Ikholi ephumayo</string>
+  <string name="type_outgoing_pulled">Ikholi ephumayo idluliselwe kwenye idivayisi</string>
+  <string name="type_missed">Ikholi ephuthiwe</string>
+  <string name="type_incoming_video">Ikholi yevidiyo engenayo</string>
+  <string name="type_incoming_video_pulled">Ikholi yevidiyo engenayo idluliselwe kwenye idivayisi</string>
+  <string name="type_outgoing_video">Ikholi yevidiyo ephumayo</string>
+  <string name="type_outgoing_video_pulled">Ikholi yevidiyo ephumayo idluliselwe kwenye idivayisi</string>
+  <string name="type_missed_video">Ikholi yevidiyo ephuthiwe</string>
+  <string name="type_voicemail">Ivoyisimeyili</string>
+  <string name="type_rejected">Ikholi enqatshelwe</string>
+  <string name="type_blocked">Ikholi evinjiwe</string>
+  <string name="call_details_minutes_abbreviation">m</string>
+  <string name="call_details_seconds_abbreviation">s</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s\'%2$s\' %3$s\'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s\'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">amasekhondi</item>
+    <item quantity="other">amasekhondi</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">amaminithi</item>
+    <item quantity="other">amaminithi</item>
+  </plurals>
+  <string name="type_answered_elsewhere">Ikholi iphendulwe kwenye idivayisi</string>
+  <string name="description_phone_account">ku-^1</string>
+  <string name="description_via_number">nge-%1$s</string>
+  <string name="description_via_number_phone_account">ku-%1$s, nge-%2$s</string>
+  <string name="voicemail_string">Ivoyisimeyili</string>
+  <string name="just_now">Khona manje</string>
+  <string name="new_call_log_carrier_video">Ividiyo yenkampani yenethiwekhi</string>
+  <string name="new_call_log_duo_video">Ividiyo ye-Duo</string>
+  <string name="new_call_log_unknown">Akwaziwa</string>
+  <string name="new_call_log_secondary_blocked">Ivinjiwe</string>
+  <string name="new_call_log_secondary_spam">Ugaxekile</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">^1 amakholi, okwakamuva ikholi ekuphuthile kusukela ku-^2</item>
+    <item quantity="other">^1 amakholi, okwakamuva ikholi ekuphuthile kusukela ku-^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">^1 amakholi, okwakamuva ikholi ephenduliwe kusukela ku-^2</item>
+    <item quantity="other">^1 amakholi, okwakamuva ikholi ephenduliwe kusukela ku-^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one">^1 amakholi, okwakamuva ikholi ephumayo eya ku-^2</item>
+    <item quantity="other">^1 amakholi, okwakamuva ikholi ephumayo eya ku-^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">^1 amakholi, okwakamuva ikholi evinjelwe kusukela ku-^2</item>
+    <item quantity="other">^1 amakholi, okwakamuva ikholi evinjelwe kusukela ku-^2</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">ku-^1,
+    nge-^2</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

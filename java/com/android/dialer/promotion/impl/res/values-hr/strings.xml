@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Slanje poruka u stvarnom vremenu u pozivu</string>
+  <string name="rtt_promotion_details">RTT pomaže pozivateljima koji su gluhi, nagluhi,
+    imaju govornu manu ili im je potrebno nešto više od glasa. Prijepisi poruka poslanih putem značajke RTT spremaju se na vaš uređaj
+    u povijesti poziva. %1$s</string>
+  <string name="duo_disclosure_title">Upućivanje videopoziva pomoću aplikacije Duo</string>
+  <string name="duo_disclosure_details">Upućivanje videopoziva u aplikaciji Google Duo omogućuje vam da licem u lice chatate s prijateljima i obitelji. Operater može naplatiti podatkovni promet. %1$s</string>
+</resources>

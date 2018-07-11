@@ -1,36 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_content_description_end_call" msgid="8232796487777787200">"Kõne lõpetamine"</string>
-    <string name="incall_content_description_muted" msgid="2130133443150389474">"Vaigistatud"</string>
-    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"Vaigistus on tühistatud"</string>
-    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"Kõne vahetamine"</string>
-    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"Kõnede ühendamine"</string>
-    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"Käsitelefoni kuular"</string>
-    <string name="incall_content_description_speaker" msgid="7837829930201265549">"Kõlar"</string>
-    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"Bluetooth"</string>
-    <string name="incall_content_description_headset" msgid="3170439802944346719">"Juhtmega peakomplekt"</string>
-    <string name="incall_content_description_hold" msgid="3335508251734906019">"Kõne ootele"</string>
-    <string name="incall_content_description_unhold" msgid="3862584118869933593">"Jätka kõnet"</string>
-    <string name="incall_content_description_video_on" msgid="899266487647420613">"Video on sees"</string>
-    <string name="incall_content_description_video_off" msgid="762985912616707076">"Video on väljas"</string>
-    <string name="incall_content_description_swap_video" msgid="297943299827908998">"Video vahetamine"</string>
-    <string name="incall_label_speaker" msgid="1814254833253409394">"Kõlar"</string>
-    <string name="incall_label_audio" msgid="5923781170533336820">"Heli"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="incall_content_description_end_call">Kõne lõpetamine</string>
+  <string name="incall_content_description_muted">Vaigistatud</string>
+  <string name="incall_content_description_unmuted">Vaigistus on tühistatud</string>
+  <string name="incall_content_description_swap_calls">Kõne vahetamine</string>
+  <string name="incall_content_description_swap_sim">SIM-kaardi muutmine</string>
+  <string name="incall_content_description_merge_calls">Kõnede ühendamine</string>
+  <string name="incall_content_description_earpiece">Käsitelefoni kuular</string>
+  <string name="incall_content_description_speaker">Kõlar</string>
+  <string name="incall_content_description_bluetooth">Bluetooth</string>
+  <string name="incall_content_description_headset">Juhtmega peakomplekt</string>
+  <string name="incall_content_description_hold">Kõne ootele</string>
+  <string name="incall_content_description_unhold">Jätka kõnet</string>
+  <string name="incall_content_description_video_on">Video on sees</string>
+  <string name="incall_content_description_video_off">Video on väljas</string>
+  <string name="incall_content_description_swap_video">Video vahetamine</string>
+  <string name="incall_label_speaker">Kõlar</string>
+  <string name="incall_label_audio">Heli</string>
 </resources>

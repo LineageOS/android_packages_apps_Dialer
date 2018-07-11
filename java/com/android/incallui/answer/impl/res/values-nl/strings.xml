@@ -1,38 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"Veeg vanaf pictogram om te weigeren met bericht"</string>
-    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"Veeg vanaf pictogram om te beantwoorden als audiogesprek"</string>
-    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"Veeg omhoog om op te nemen en actieve oproep in de wacht te plaatsen"</string>
-    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"Veeg omhoog om op te nemen en oproep in de wacht te beëindigen"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"Veeg vanaf pictogram om op te nemen en actieve oproep te beëindigen"</string>
-    <string name="call_incoming_message_custom" msgid="5819492800418293238">"Eigen bericht opstellen…"</string>
-    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"Eigen bericht opstellen…"</string>
-    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"Annuleren"</string>
-    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"Verzenden"</string>
-    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"Deze oproep weigeren met een bericht"</string>
-    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"Beantwoorden als audiogesprek"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"Opnemen en actieve oproep beëindigen"</string>
-    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"Weigeren met bericht"</string>
-    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"Beantwoorden als audiogesprek"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Opnemen en actieve oproep beëindigen"</string>
-    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"Video is uit"</string>
-    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Veeg met twee vingers omhoog om te beantwoorden. Veeg met twee vingers omlaag om te weigeren."</string>
-    <string name="call_incoming_important" msgid="3762352743365137090">"Belangrijk"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">Veeg vanaf pictogram om te weigeren met bericht</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">Veeg vanaf pictogram om te beantwoorden als audiogesprek</string>
+  <string name="call_incoming_default_label_answer_and_release_second">Veeg omhoog om op te nemen en actieve oproep in de wacht te plaatsen</string>
+  <string name="call_incoming_default_label_answer_and_release_third">Veeg omhoog om op te nemen en oproep in de wacht te beëindigen</string>
+  <string name="call_incoming_swipe_to_answer_and_release">Veeg vanaf pictogram om op te nemen en actieve oproep te beëindigen</string>
+  <string name="call_incoming_message_custom">Eigen bericht opstellen…</string>
+  <string name="call_incoming_respond_via_sms_custom_message">Eigen bericht opstellen…</string>
+  <string name="call_incoming_custom_message_cancel">Annuleren</string>
+  <string name="call_incoming_custom_message_send">Verzenden</string>
+  <string name="a11y_incoming_call_reject_with_sms">Deze oproep weigeren met een bericht</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Beantwoorden als audiogesprek</string>
+  <string name="a11y_incoming_call_answer_and_release">Opnemen en actieve oproep beëindigen</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">Weigeren met bericht</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Beantwoorden als audiogesprek</string>
+  <string name="a11y_description_incoming_call_answer_and_release">Opnemen en actieve oproep beëindigen</string>
+  <string name="call_incoming_video_is_off">Video is uit</string>
+  <string name="a11y_incoming_call_swipe_gesture_prompt">Veeg met twee vingers omhoog om te beantwoorden. Veeg met twee vingers omlaag om te weigeren.</string>
+  <string name="call_incoming_important">Belangrijk</string>
 </resources>

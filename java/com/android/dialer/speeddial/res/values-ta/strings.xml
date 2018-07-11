@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">பிடித்தவை</string>
+  <string name="suggestions_header">அடிக்கடித் தொடர்புகொண்டவர்கள்</string>
+  <string name="speed_dial_add_button_text">சேர்</string>
+  <string name="speed_dial_remember_this_choice">இந்த விருப்பத்தை நினைவில்கொள்</string>
+  <string name="speed_dial_disambig_dialog_title">அழைப்பு வகையைத் தேர்வுசெய்யவும்</string>
+  <string name="disambig_option_video_call">வீடியோவில் அழை</string>
+  <string name="disambig_option_voice_call">அழை</string>
+  <string name="add_favorite_activity_title">பிடித்தவர்களில் சேர்</string>
+  <string name="contact_menu_voice_call">குரல் அழைப்பு</string>
+  <string name="contact_menu_video_call">வீடியோ அழைப்பு</string>
+  <string name="contact_menu_message">செய்தி</string>
+  <string name="contact_menu_remove">அகற்று</string>
+  <string name="contact_menu_contact_info">தொடர்புத் தகவல்</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">பிடித்தவர்களில் சேர்</string>
+  <string name="speed_dial_contacts_permission_description">விரைவு டயலை இயக்க, தொடர்புகள் அனுமதியை இயக்கவும்.</string>
+  <string name="speed_dial_turn_on_contacts_permission">இயக்கு</string>
+  <string name="speed_dial_no_contacts_description">பிடித்தவர்கள் எவரையும் நீங்கள் இதுவரை சேர்க்கவில்லை</string>
+  <string name="speed_dial_no_contacts_action_text">பிடித்தவர்களில் சேர்</string>
+  <string name="speed_dial_remove_favorites">பிடித்தவையிலிருந்து அகற்றும்</string>
 </resources>

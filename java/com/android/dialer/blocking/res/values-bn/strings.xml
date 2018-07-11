@@ -1,46 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2016 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"নতুন, সরলীকৃত অবরুদ্ধ করার ব্যবস্থা"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"আপনাকে আরও ভালো সুরক্ষা দিতে, \'ফোন\' এর ব্লক করার পদ্ধতি পরিবর্তন করতে হবে৷ আপনার ব্লক করা নম্বরগুলি থেকে আসা কলগুলি এবং পাঠ্যবার্তা উভয়ই থামানো হবে এবং অন্যান্য অ্যাপ্লিকেশানের সাথে শেয়ার করা হতে পারে৷"</string>
-    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"অনুমতি দিন"</string>
-    <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷"</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে, কিন্তু কলার হয়ত এখনও আপনাকে ভয়েসমেলগুলি পাঠাতে পারবে৷"</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"আপনি এই নম্বর থেকে আর কল বা পাঠ্যবার্তাগুলি পাবেন না৷"</string>
-    <string name="block_number_ok" msgid="739786082788038932">"অবরোধ করুন"</string>
-    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করবেন?"</string>
-    <string name="unblock_number_ok" msgid="5089057152966269355">"অবরোধ মুক্ত করুন"</string>
-    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> অবৈধ৷"</string>
-    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করা হয়েছে"</string>
-    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করা হয়েছে"</string>
-    <string name="block_number_undo" msgid="5158120911892491697">"পূর্বাবস্থায় ফিরুন"</string>
-    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"আমদানি ব্যর্থ হয়েছে"</string>
-    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"৪৮ ঘন্টার জন্য কল অবরোধ করা অক্ষম করা হয়েছে"</string>
-    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"কোনো জরুরি কল করার কারণে অক্ষম করা হয়েছে৷"</string>
-    <string name="block_report_number_alert_title" msgid="2740581989824959611">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ করবেন?"</string>
-    <string name="block_report_number_alert_details" msgid="2652479394593143562">"আপনি এই নম্বর থেকে আর কল পাবেন না৷"</string>
-    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> এই কলটিকে স্প্যাম হিসাবে প্রতিবেদন করা হবে৷"</string>
-    <string name="unblock_number_alert_details" msgid="8696070817026870606">"এই নম্বরটিকে অবরোধ মুক্ত করা হবে এবং \'স্প্যাম নয়\' হিসাবে প্রতিবেদ করা হবে৷ এই নম্বর থেকে আসা ভবিষ্যৎ কলকে স্প্যাম হিসাবে সনাক্ত করা হবে না৷"</string>
-    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"<xliff:g id="NUMBER">%1$s</xliff:g> অবরোধ মুক্ত করবেন?"</string>
-    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"অভিযোগ করুন"</string>
-    <string name="report_not_spam_alert_title" msgid="395961923213504916">"একটি ভুল প্রতিবেদন করেছেন?"</string>
-    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"<xliff:g id="NUMBER">%1$s</xliff:g> থেকে আসা ভবিষ্যৎ কলগুলিকে আর স্প্যাম হিসাবে সনাক্ত করা হবে না৷"</string>
-    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"কলটিকে স্প্যাম হিসাবে অভিযোগ করুন"</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="migrate_blocked_numbers_dialog_title">নতুন, সরলীকৃত অবরুদ্ধ করার ব্যবস্থা</string>
+  <string name="migrate_blocked_numbers_dialog_message">আপনাকে আরও ভালো সুরক্ষা দিতে, \'ফোন\' এর ব্লক করার পদ্ধতি পরিবর্তন করতে হবে৷ আপনার ব্লক করা নম্বরগুলি থেকে আসা কলগুলি এবং পাঠ্যবার্তা উভয়ই থামানো হবে এবং অন্যান্য অ্যাপ্লিকেশানের সাথে শেয়ার করা হতে পারে৷</string>
+  <string name="migrate_blocked_numbers_dialog_allow_button">অনুমতি দিন</string>
+  <string name="old_block_number_confirmation_title">%1$s ব্লক করবেন?</string>
+  <string name="block_number_confirmation_message_vvm">এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে এবং ভয়েসমেলগুলি স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে৷</string>
+  <string name="block_number_confirmation_message_no_vvm">এই নম্বর থেকে আসা কলগুলি অবরোধ করা হবে, কিন্তু কলার হয়ত এখনও আপনাকে ভয়েসমেলগুলি পাঠাতে পারবে৷</string>
+  <string name="block_number_confirmation_message_new_filtering">আপনি এই নম্বর থেকে আর কল বা পাঠ্যবার্তাগুলি পাবেন না৷</string>
+  <string name="block_number_ok">অবরোধ করুন</string>
+  <string name="unblock_number_confirmation_title">%1$s আনব্লক করবেন?</string>
+  <string name="unblock_number_ok">অবরোধ মুক্ত করুন</string>
+  <string name="invalidNumber">%1$s নম্বরটি ভুল।</string>
+  <string name="snackbar_number_blocked">%1$s অবরোধ করা হয়েছে</string>
+  <string name="snackbar_number_unblocked">%1$s আনব্লক করা হয়েছে</string>
+  <string name="send_to_voicemail_import_failed">আমদানি ব্যর্থ হয়েছে</string>
+  <string name="call_blocking_disabled_notification_title">৪৮ ঘন্টার জন্য কল অবরোধ করা অক্ষম করা হয়েছে</string>
+  <string name="call_blocking_disabled_notification_text">কোনো জরুরি কল করার কারণে অক্ষম করা হয়েছে৷</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtruoti visus įtartinus šlamšto skambučius?</string>
+  <string name="spam_blocking_promo_text">Tokie skambučiai kaip ką tik užblokuotas
+      nebetrukdys jums</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtruoti šlamštą</string>
+  <string name="spam_blocking_promo_action_dismiss">Atsisakyti</string>
+  <string name="spam_blocking_setting_prompt">Nustatymai</string>
+  <string name="spam_blocking_settings_enable_error_text">Įjungiant šlamšto filtravimą kilo problema</string>
+  <string name="spam_blocking_settings_disable_error_text">Išjungiant šlamšto filtravimą kilo problema</string>
+  <string name="spam_blocking_settings_enable_complete_text">Šlamšto filtravimas įjungtas</string>
+  <string name="spam_blocking_settings_disable_complete_text">Šlamšto filtravimas išjungtas</string>
+</resources>

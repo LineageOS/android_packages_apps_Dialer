@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s අවහිර කරන්නද?</string>
+  <string name="block_number_confirmation_message_new_filtering">ඔබට මෙම අංකයෙන් තවදුරටත් ඇමතුම් හෝ පෙළ පණිවිඩ නොලැබෙනු ඇත.</string>
+  <string name="block_number_ok">අවහිරයි</string>
+  <string name="unblock_number_ok">අවහිර නොකරන්න</string>
+  <string name="block_report_number_alert_title">%1$s අවහිර කරන්නද?</string>
+  <string name="block_report_number_alert_details">ඔබට මෙම අංකයෙන් තවදුරටත් ඇමතුම් නොලැබෙනු ඇත.</string>
+  <string name="block_number_alert_details">%1$s මෙම ඇමතුම අයාචිත තැපෑලක් ලෙස වාර්තා කරනු ඇත.</string>
+  <string name="unblock_number_alert_details">මෙම අංකය අවහිර කිරීම ඉවත් කර අයාචිත නොවන ලෙස වාර්තා කරනු ඇත. අනාගත ඇමතුම් අයාචිත ලෙස හඳුනා නොගනු ඇත.</string>
+  <string name="unblock_report_number_alert_title">%1$s අවහිර කිරීමෙන් ඉවත් කරන්නද?</string>
+  <string name="report_not_spam_alert_button">වාර්තා කරන්න</string>
+  <string name="report_not_spam_alert_title">අත්වැරැද්දක් වාර්තා කරන්නද?</string>
+  <string name="report_not_spam_alert_details">%1$s වෙතින් එන අනාගත ඇමතුම් තවදුරටත් අයාචිත ලෙස හඳුනා නොගනු ඇත.</string>
+  <string name="checkbox_report_as_spam_action">ඇමතුම අයාචිත ලෙස වාර්තා කරන්න</string>
+  <string name="block_number_failed_toast">මෙම අංක අවහිර කිරීමේ ගැටලුවකි</string>
+  <string name="unblock_number_failed_toast">මෙම අංකය අගුලු හැරීමේ ගැටලුවකි</string>
+</resources>

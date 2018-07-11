@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">語音通話</string>
+  <string name="video_call">視像通話</string>
+  <string name="add_to_contacts">新增聯絡人</string>
+  <string name="send_a_message">訊息</string>
+  <string name="not_spam">非垃圾來電</string>
+  <string name="block_number">封鎖</string>
+  <string name="unblock_number">解除封鎖</string>
+  <string name="block_and_optionally_report_spam">封鎖/舉報為垃圾來電</string>
+  <string name="copy_number">複製號碼</string>
+</resources>

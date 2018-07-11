@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">مكالمة صوتية</string>
+  <string name="video_call">مكالمة فيديو</string>
+  <string name="add_to_contacts">إضافة جهة اتصال</string>
+  <string name="send_a_message">رسالة</string>
+  <string name="not_spam">ليست محادثة غير مرغوب فيها.</string>
+  <string name="block_number">حظر</string>
+  <string name="unblock_number">إزالة الحظر</string>
+  <string name="block_and_optionally_report_spam">حظر/إبلاغ عن رقم غير مرغوب فيه</string>
+  <string name="copy_number">نسخ الرقم</string>
+</resources>

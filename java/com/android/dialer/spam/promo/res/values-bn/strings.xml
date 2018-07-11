@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">সন্দেহজনক স্প্যাম কল ফিল্টার করবেন?</string>
+  <string name="spam_blocking_promo_text">আপনি এইমাত্র যে কলটি ব্লক করলেন, সেই ধরনের কল দিয়ে আপনাকে
+      আর বিরক্ত করা হবে না</string>
+  <string name="spam_blocking_promo_action_filter_spam">স্প্যাম ফিল্টার করুন</string>
+  <string name="spam_blocking_promo_action_dismiss">খারিজ</string>
+  <string name="spam_blocking_setting_prompt">সেটিংস</string>
+  <string name="spam_blocking_settings_enable_error_text">স্প্যাম ফিল্টার করার বৈশিষ্ট্য চালু করতে সমস্যা হয়েছে</string>
+  <string name="spam_blocking_settings_disable_error_text">স্প্যাম ফিল্টার করার বৈশিষ্ট্য বন্ধ করতে সমস্যা হয়েছে</string>
+  <string name="spam_blocking_settings_enable_complete_text">স্প্যাম ফিল্টার করার বৈশিষ্ট্য চালু করা হয়েছে</string>
+  <string name="spam_blocking_settings_disable_complete_text">স্প্যাম ফিল্টার করার বৈশিষ্ট্য বন্ধ করা হয়েছে</string>
+</resources>

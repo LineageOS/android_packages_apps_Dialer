@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Lagundutako markatzea</string>
+  <string name="assisted_dialing_setting_summary">Iragarri eta gehitu herrialde-kodea atzerrian nagoenean</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automatikoki detektatu da • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automatikoki detektatu da</string>
+  <string name="assisted_dialing_setting_cc_category_title">Zure herrialdea</string>
+  <string name="assisted_dialing_setting_cc_title">Herrialde lehenetsia</string>
+</resources>

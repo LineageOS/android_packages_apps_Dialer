@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s bloklansinmi?</string>
+  <string name="block_number_confirmation_message_new_filtering">Siz endi bu raqamdan qo‘ng‘iroq va SMS qabul qilmaysiz.</string>
+  <string name="block_number_ok">BLOKLASH</string>
+  <string name="unblock_number_ok">BLOKDAN CHIQARISH</string>
+  <string name="block_report_number_alert_title">%1$s raqami bloklansinmi?</string>
+  <string name="block_report_number_alert_details">Sizga bu raqamdan endi chaqiruv kelmaydi.</string>
+  <string name="block_number_alert_details">%1$s Bu spam chaqiruv deb xabar beriladi.</string>
+  <string name="unblock_number_alert_details">Bu raqam blokdan chiqariladi va undan keluvchi chaqiruvlar spam emas deb aniqlanadi.</string>
+  <string name="unblock_report_number_alert_title">%1$s raqami blokdan chiqarilsinmi?</string>
+  <string name="report_not_spam_alert_button">Xabar berish</string>
+  <string name="report_not_spam_alert_title">Xato haqida xabar berilsinmi?</string>
+  <string name="report_not_spam_alert_details">%1$s raqamidan kiruvchi chaqiruvlar endi spam emas deb aniqlanadi.</string>
+  <string name="checkbox_report_as_spam_action">Spam chaqiruv deb xabar berish</string>
+  <string name="block_number_failed_toast">Raqam bloklanmadi</string>
+  <string name="unblock_number_failed_toast">Raqam blokdan chiqarilmadi</string>
+</resources>

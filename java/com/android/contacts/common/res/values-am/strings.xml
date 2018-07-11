@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"ፅሁፍ ገልብጧል"</string>
-    <string name="call_custom" msgid="3041673234638990874">"ለ<xliff:g id="CUSTOM">%s</xliff:g> ይደውሉ"</string>
-    <string name="call_home" msgid="125893483593803791">"ለቤት ይደውሉ"</string>
-    <string name="call_mobile" msgid="967589404494150813">"ለተንቀሳቃሽ ስልክ ይደውሉ"</string>
-    <string name="call_work" msgid="6040550697395300892">"ለሥራ ይደውሉ"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"ለስራ ፋክስ ይደውሉ"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"ለቤት ፋክስ ይደውሉ"</string>
-    <string name="call_pager" msgid="6814149227741274161">"ለምልክት ማድረጊያ ይደውሉ"</string>
-    <string name="call_other" msgid="5536385588712587235">"ይደውሉ"</string>
-    <string name="call_callback" msgid="6314019862718112786">"የጥሪ መልስ ይደውሉ"</string>
-    <string name="call_car" msgid="3197417098027764954">"ለመኪና ይደውሉ"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"ለዋናው የኩባኒያ ይደውሉ"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"ለISDN ይደውሉ"</string>
-    <string name="call_main" msgid="3293707608770407814">"ለዋናው ይደውሉ"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"ለፋክስ ይደውሉ"</string>
-    <string name="call_radio" msgid="8942441419845057942">"ለሬዲዮ ይደውሉ"</string>
-    <string name="call_telex" msgid="2031514461660668351">"ለቴሌክስ ይደውሉ"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"ለTTY/TDD ይደውሉ"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"ለየስራ ተንቀሳቃሽ ስልክ ይደውሉ"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"ለየሥራ ጥሪ ምልክት ማድረጊያ ይደውሉ"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"ለ<xliff:g id="ASSISTANT">%s</xliff:g> ይደውሉ"</string>
-    <string name="call_mms" msgid="4958811711741872901">"ለኤም ኤም ኤስ ይደውሉ"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"ለ<xliff:g id="CUSTOM">%s</xliff:g> ጽሑፍ ይላኩ"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ለቤት ጽሑፍ ይላኩ"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"ለተንቀሳቃሽ ስልክ ጽሑፍ ይላኩ"</string>
-    <string name="sms_work" msgid="4158595439553450966">"ለስራ ጽሑፍ ይላኩ"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"ለስራ ፋክስ ጽሑፍ ይላኩ"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ለቤት ፋክስ ጽሑፍ ይላኩ"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ለምልክት ማድረጊያ ጽሑፍ ይላኩ"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ጽሑፍ ይላኩ"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ለጥሪ መልስ ጽሑፍ ይላኩ"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ለመኪና ጽሑፍ ይላኩ"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ለዋናው ኩባኒያ ጽሑፍ ይላኩ"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ለISDN ጽሑፍ ይላኩ"</string>
-    <string name="sms_main" msgid="8908087742014140774">"ለዋናው ጽሑፍ ይላኩ"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ለፋክስ ጽሑፍ ይላኩ"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ለሬዲዮ ጽሑፍ ይላኩ"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ለቴለክስ ጽሑፍ ይላኩ"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"ለTTY/TDD ጽሑፍ ይላኩ"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"ለስራ ተንቀሳቃሽ ስልክ ጽሑፍ ይላኩ"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"ለሥራ ምልክት ማድረጊያ ጽሑፍ ይላኩ"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"ለ<xliff:g id="ASSISTANT">%s</xliff:g> ጽሑፍ ይላኩ"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"ለኤም ኤም ኤስ ጽሑፍ ይላኩ"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"በተደጋጋሚ የተገኙ ይጽዱ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"በእውቂያዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን ዝርዝር አጽድተው የኢሜይል መተግበሪያዎች ምርጫዎችዎን ከባዶ ተነስተው እንዲያውቁ ያስገድዱዋቸዋል።"</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"በተደጋጋሚ የተገኙትን በማጽዳት ላይ…"</string>
-    <string name="status_available" msgid="2648156525685472626">"የሚገኝ"</string>
-    <string name="status_away" msgid="2298688367552893953">"ወጣ ብሏል"</string>
-    <string name="status_busy" msgid="5990832098713248503">"ተይዟል"</string>
-    <string name="contactsList" msgid="8806067891419291513">"እውቅያዎች"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"በብዛት የተጠቆሙ"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"ሌላ"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"ማውጫ"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"የሥራ ስልክ ማውጫ"</string>
-    <string name="local_search_label" msgid="907622822323119235">"ሁሉም እውቅያዎች"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"ጥቆማዎች"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"እኔ"</string>
-    <string name="missing_name" msgid="978606963362745020">"(ስም የለም)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"ዕውቂያ ተመልከት"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"የስልክ ቁጥር ያላቸው ሁሉም ዕውቂያዎች"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"የሥራ መገለጫ ዕውቂያዎች"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"ዝማኔዎችን ይመልከቱ"</string>
-    <string name="account_phone" msgid="7067809073194061035">"መሳሪያ-ብቻ፣ አልሰመረም"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"ስም"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"ቅጽል ስም"</string>
-    <string name="full_name" msgid="648186563998465740">"ስም"</string>
-    <string name="name_given" msgid="5096576006314820536">"የመጀመሪያ ስም"</string>
-    <string name="name_family" msgid="6646235805198547467">"የመጨረሻ ስም"</string>
-    <string name="name_prefix" msgid="9215326539658838">"ቅድመ-ስም"</string>
-    <string name="name_middle" msgid="703755205331582769">"የመካከለኛ ስም"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"ድህረ-ስም"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"የድምፀ ልሳን ስም"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"የመጀመሪያ ስም ፎነቲክ"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"የድምፀ ልሳን መካከለኛ ስም"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"የመጨረሻ ስም ፎነቲክ"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"ስልክ"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"ኢሜይል"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"አድራሻ"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"መስርያ ቤት"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"ግንኙነት"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"ልዩ ቀን"</string>
-    <string name="sms" msgid="7574344928185328095">"የፅሁፍ መልዕክት"</string>
-    <string name="postal_address" msgid="1804707930129674200">"አድራሻ"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"ኩባንያ"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"ርዕስ"</string>
-    <string name="label_notes" msgid="2050255313694219786">"ማስታወሻዎች"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"ድረ-ገፅ"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"ቡድኖች"</string>
-    <string name="email_home" msgid="889830029388962171">"ለቤት ኢሜይል ይላኩ"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"ለተንቀሳቃሽ ስልክ ኢሜይል ይላኩ"</string>
-    <string name="email_work" msgid="4223487303344613528">"ለሥራ ኢሜይል ይላኩ"</string>
-    <string name="email_other" msgid="4246411900126012062">"ኢሜይል"</string>
-    <string name="email_custom" msgid="7246580894327511013">"ለ<xliff:g id="CUSTOM">%s</xliff:g> ኢሜይል ይላኩ"</string>
-    <string name="email" msgid="2807318537887091606">"ኢሜይል"</string>
-    <string name="postal_street" msgid="6918171741240802474">"መንገድ"</string>
-    <string name="postal_city" msgid="8674569121430005628">"ከተማ"</string>
-    <string name="postal_region" msgid="1730369286225469192">"ግዛት"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"ዚፕ ኮድ"</string>
-    <string name="postal_country" msgid="232670707458768148">"አገር"</string>
-    <string name="map_home" msgid="4181131107392126938">"የቤት አድራሻ ይመልከቱ"</string>
-    <string name="map_work" msgid="5723471185992684400">"የሥራ አድራሻ ይመልከቱ"</string>
-    <string name="map_other" msgid="2253764780863500516">"አድራሻ ይመልከቱ"</string>
-    <string name="map_custom" msgid="5581743097882436157">"የ<xliff:g id="CUSTOM">%s</xliff:g> አድራሻ ይመልከቱ"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"AIMን በመጠቀም ይወያዩ"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Windows Liveን በመጠቀም ይወያዩ"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Yahooን በመጠቀም ይወያዩ"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Skypeን በመጠቀም ይወያዩ"</string>
-    <string name="chat_qq" msgid="786924280665740019">"QQን በመጠቀም ይወያዩ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Google Talkን በመጠቀም ይወያዩ"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ICQን በመጠቀም ይወያዩ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Jabberን በመጠቀም 271448"</string>
-    <string name="chat" msgid="1020428260359370236">"ውይይት"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"ሁሉም ዕውቂያዎች"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"በ<xliff:g id="NAME">%s</xliff:g> ውስጥ ያሉ ዕውቂያዎች"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"እውቂያዎች በብጁ እይታ"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"ነጠላ እውቂያ"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"ደርድር በ"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"የመጀመሪያ ስም"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"የመጨረሻ ስም"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"የስም ቅርጸት"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"የመጀመሪያ ስም መጀመሪያ"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"የመጨረሻ ስም መጀመሪያ"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"ተደጋጋሚዎችን አጽዳ"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"መፈለግ አቁም"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"ፍለጋን አጽዳ"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"መለያ"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"ለጥሪዎች ሁልጊዜ ይህንን ተጠቀም"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"ይደውሉ ከዚህ ጋር"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"ከማስታወሻ ጋር ደውል"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"ከጥሪ ጋር ለመላክ የማስታወሻ ጽሑፍ ይተይቡ ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ላክ እና ደውል"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g><xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"የ<xliff:g id="TITLE">%1$s</xliff:g> ትር።"</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> የ<xliff:g id="TITLE_2">%1$s</xliff:g> ትር። <xliff:g id="COUNT_3">%2$d</xliff:g> ያልተነበቡ ንጥሎች። </item>
-      <item quantity="other"> የ<xliff:g id="TITLE_2">%1$s</xliff:g> ትር። <xliff:g id="COUNT_3">%2$d</xliff:g> ያልተነበቡ ንጥሎች። </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"የቪዲዮ ጥሪ"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"ያጋሩ እና ይደውሉ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">ለ%s ይደውሉ</string>
+  <string name="call_home">ለቤት ይደውሉ</string>
+  <string name="call_mobile">ለተንቀሳቃሽ ስልክ ይደውሉ</string>
+  <string name="call_work">ለሥራ ይደውሉ</string>
+  <string name="call_fax_work">ለስራ ፋክስ ይደውሉ</string>
+  <string name="call_fax_home">ለቤት ፋክስ ይደውሉ</string>
+  <string name="call_pager">ለምልክት ማድረጊያ ይደውሉ</string>
+  <string name="call_other">ይደውሉ</string>
+  <string name="call_callback">የጥሪ መልስ ይደውሉ</string>
+  <string name="call_car">ለመኪና ይደውሉ</string>
+  <string name="call_company_main">ለዋናው የኩባኒያ ይደውሉ</string>
+  <string name="call_isdn">ለISDN ይደውሉ</string>
+  <string name="call_main">ለዋናው ይደውሉ</string>
+  <string name="call_other_fax">ለፋክስ ይደውሉ</string>
+  <string name="call_radio">ለሬዲዮ ይደውሉ</string>
+  <string name="call_telex">ለቴሌክስ ይደውሉ</string>
+  <string name="call_tty_tdd">ለTTY/TDD ይደውሉ</string>
+  <string name="call_work_mobile">ለየስራ ተንቀሳቃሽ ስልክ ይደውሉ</string>
+  <string name="call_work_pager">ለየሥራ ጥሪ ምልክት ማድረጊያ ይደውሉ</string>
+  <string name="call_assistant">ለ%s ይደውሉ</string>
+  <string name="call_mms">ለኤም ኤም ኤስ ይደውሉ</string>
+  <string name="sms_custom">ለ%s ጽሑፍ ይላኩ</string>
+  <string name="sms_home">ለቤት ጽሑፍ ይላኩ</string>
+  <string name="sms_mobile">ለተንቀሳቃሽ ስልክ ጽሑፍ ይላኩ</string>
+  <string name="sms_work">ለስራ ጽሑፍ ይላኩ</string>
+  <string name="sms_fax_work">ለስራ ፋክስ ጽሑፍ ይላኩ</string>
+  <string name="sms_fax_home">ለቤት ፋክስ ጽሑፍ ይላኩ</string>
+  <string name="sms_pager">ለምልክት ማድረጊያ ጽሑፍ ይላኩ</string>
+  <string name="sms_other">ጽሑፍ ይላኩ</string>
+  <string name="sms_callback">ለጥሪ መልስ ጽሑፍ ይላኩ</string>
+  <string name="sms_car">ለመኪና ጽሑፍ ይላኩ</string>
+  <string name="sms_company_main">ለዋናው ኩባኒያ ጽሑፍ ይላኩ</string>
+  <string name="sms_isdn">ለISDN ጽሑፍ ይላኩ</string>
+  <string name="sms_main">ለዋናው ጽሑፍ ይላኩ</string>
+  <string name="sms_other_fax">ለፋክስ ጽሑፍ ይላኩ</string>
+  <string name="sms_radio">ለሬዲዮ ጽሑፍ ይላኩ</string>
+  <string name="sms_telex">ለቴለክስ ጽሑፍ ይላኩ</string>
+  <string name="sms_tty_tdd">ለTTY/TDD ጽሑፍ ይላኩ</string>
+  <string name="sms_work_mobile">ለስራ ተንቀሳቃሽ ስልክ ጽሑፍ ይላኩ</string>
+  <string name="sms_work_pager">ለሥራ ምልክት ማድረጊያ ጽሑፍ ይላኩ</string>
+  <string name="sms_assistant">ለ%s ጽሑፍ ይላኩ</string>
+  <string name="sms_mms">ለኤም ኤም ኤስ ጽሑፍ ይላኩ</string>
+  <string name="clearFrequentsConfirmation_title">በተደጋጋሚ የተገኙ ይጽዱ?</string>
+  <string name="clearFrequentsConfirmation">በእውቂያዎች እና በስልክ መተግበሪያዎች ውስጥ በተደጋጋሚ ያገኟቸውን ዝርዝር አጽድተው የኢሜይል መተግበሪያዎች ምርጫዎችዎን ከባዶ ተነስተው እንዲያውቁ ያስገድዱዋቸዋል።</string>
+  <string name="clearFrequentsProgress_title">በተደጋጋሚ የተገኙትን በማጽዳት ላይ…</string>
+  <string name="status_available">የሚገኝ</string>
+  <string name="status_away">ወጣ ብሏል</string>
+  <string name="status_busy">ተይዟል</string>
+  <string name="contactsList">እውቅያዎች   </string>
+  <string name="contact_suggestions">በብዛት የተጠቆሙ</string>
+  <string name="local_invisible_directory">ሌላ  </string>
+  <string name="directory_search_label">ማውጫ</string>
+  <string name="directory_search_label_work">የሥራ ስልክ ማውጫ</string>
+  <string name="local_search_label">ሁሉም እውቅያዎች </string>
+  <string name="local_suggestions_search_label">ጥቆማዎች</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">እኔ</string>
+  <string name="missing_name">(ስም የለም)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">ዕውቂያ ተመልከት</string>
+  <string name="list_filter_phones">የስልክ ቁጥር ያላቸው ሁሉም ዕውቂያዎች</string>
+  <string name="list_filter_phones_work">የሥራ መገለጫ ዕውቂያዎች</string>
+  <string name="view_updates_from_group">ዝማኔዎችን ይመልከቱ</string>
+  <string name="account_phone">መሳሪያ-ብቻ፣ አልሰመረም</string>
+  <string name="nameLabelsGroup">ስም</string>
+  <string name="nicknameLabelsGroup">ቅጽል ስም</string>
+  <string name="full_name">ስም   </string>
+  <string name="name_given">የመጀመሪያ ስም</string>
+  <string name="name_family">የመጨረሻ ስም</string>
+  <string name="name_prefix">ቅድመ-ስም</string>
+  <string name="name_middle">የመካከለኛ ስም</string>
+  <string name="name_suffix">ድህረ-ስም</string>
+  <string name="name_phonetic">የድምፀ ልሳን ስም</string>
+  <string name="name_phonetic_given">የመጀመሪያ ስም ፎነቲክ</string>
+  <string name="name_phonetic_middle">የድምፀ ልሳን መካከለኛ ስም</string>
+  <string name="name_phonetic_family">የመጨረሻ ስም ፎነቲክ</string>
+  <string name="phoneLabelsGroup">ስልክ  </string>
+  <string name="emailLabelsGroup">ኢሜይል</string>
+  <string name="postalLabelsGroup">አድራሻ</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">መስርያ ቤት </string>
+  <string name="relationLabelsGroup">ግንኙነት</string>
+  <string name="eventLabelsGroup">ልዩ ቀን</string>
+  <string name="sms">የፅሁፍ መልዕክት</string>
+  <string name="postal_address">አድራሻ</string>
+  <string name="ghostData_company">ኩባንያ</string>
+  <string name="ghostData_title">ርዕስ</string>
+  <string name="label_notes">ማስታወሻዎች</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">ድረ-ገፅ</string>
+  <string name="groupsLabel">ቡድኖች</string>
+  <string name="email_home">ለቤት ኢሜይል ይላኩ</string>
+  <string name="email_mobile">ለተንቀሳቃሽ ስልክ ኢሜይል ይላኩ</string>
+  <string name="email_work">ለሥራ ኢሜይል ይላኩ</string>
+  <string name="email_other">ኢሜይል</string>
+  <string name="email_custom">ለ%s ኢሜይል ይላኩ</string>
+  <string name="email">ኢሜይል</string>
+  <string name="postal_street">መንገድ</string>
+  <string name="postal_city">ከተማ</string>
+  <string name="postal_region">ግዛት</string>
+  <string name="postal_postcode">ዚፕ ኮድ</string>
+  <string name="postal_country">አገር</string>
+  <string name="map_home">የቤት አድራሻ ይመልከቱ</string>
+  <string name="map_work">የሥራ አድራሻ ይመልከቱ</string>
+  <string name="map_other">አድራሻ ይመልከቱ</string>
+  <string name="map_custom">የ%s አድራሻ ይመልከቱ</string>
+  <string name="chat_aim">AIMን በመጠቀም ይወያዩ</string>
+  <string name="chat_msn">Windows Liveን በመጠቀም ይወያዩ</string>
+  <string name="chat_yahoo">Yahooን በመጠቀም ይወያዩ</string>
+  <string name="chat_skype">Skypeን በመጠቀም ይወያዩ</string>
+  <string name="chat_qq">QQን በመጠቀም ይወያዩ</string>
+  <string name="chat_gtalk">Google Talkን በመጠቀም ይወያዩ</string>
+  <string name="chat_icq">ICQን በመጠቀም ይወያዩ</string>
+  <string name="chat_jabber">Jabberን በመጠቀም 271448</string>
+  <string name="chat">ውይይት</string>
+  <string name="list_filter_all_accounts">ሁሉም ዕውቂያዎች</string>
+  <string name="listAllContactsInAccount">በ%s ውስጥ ያሉ ዕውቂያዎች</string>
+  <string name="listCustomView">እውቂያዎች በብጁ እይታ</string>
+  <string name="listSingleContact">ነጠላ እውቂያ</string>
+  <string name="display_options_sort_list_by">ደርድር በ</string>
+  <string name="display_options_sort_by_given_name">የመጀመሪያ ስም</string>
+  <string name="display_options_sort_by_family_name">የመጨረሻ ስም</string>
+  <string name="display_options_view_names_as">የስም ቅርጸት</string>
+  <string name="display_options_view_given_name_first">የመጀመሪያ ስም መጀመሪያ</string>
+  <string name="display_options_view_family_name_first">የመጨረሻ ስም መጀመሪያ</string>
+  <string name="menu_clear_frequents">ተደጋጋሚዎችን አጽዳ</string>
+  <string name="action_menu_back_from_search">መፈለግ አቁም</string>
+  <string name="description_clear_search">ፍለጋን አጽዳ</string>
+  <string name="select_account_dialog_title">መለያ</string>
+  <string name="set_default_account">ለጥሪዎች ሁልጊዜ ይህንን ተጠቀም</string>
+  <string name="select_phone_account_for_calls">ለዚህ ጥሪ ሲም ይምረጡ</string>
+  <string name="select_phone_account_for_calls_remember">ይህን ምርጫ አስታውስ</string>
+  <string name="call_with_a_note">ከማስታወሻ ጋር ደውል</string>
+  <string name="call_subject_hint">ከጥሪ ጋር ለመላክ የማስታወሻ ጽሑፍ ይተይቡ ...</string>
+  <string name="send_and_call_button">ላክ እና ደውል</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">የ%1$s ትር።</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> የ%1$s ትር። %2$d ያልተነበቡ ንጥሎች። </item>
+    <item quantity="other"> የ%1$s ትር። %2$d ያልተነበቡ ንጥሎች። </item>
+  </plurals>
+  <string name="description_search_video_call">የቪዲዮ ጥሪ</string>
+  <string name="description_search_call_and_share">ያጋሩ እና ይደውሉ</string>
 </resources>

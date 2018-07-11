@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">ਕੀ %1$s ਨੂੰ ਬਲਾਕ ਕਰਨਾ ਹੈ?</string>
+  <string name="block_number_confirmation_message_new_filtering">ਤੁਹਾਨੂੰ ਹੁਣ ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਜਾਂ ਲਿਖਤ ਸੁਨੇਹੇ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੋਣਗੇ।</string>
+  <string name="block_number_ok">ਬਲੌਕ ਕਰੋ</string>
+  <string name="unblock_number_ok">ਅਨਬਲੌਕ ਕਰੋ</string>
+  <string name="block_report_number_alert_title">ਕੀ %1$s ਬਲਾਕ ਕਰਨਾ ਹੈ?</string>
+  <string name="block_report_number_alert_details">ਹੁਣ ਤੁਹਾਨੂੰ ਇਸ ਨੰਬਰ ਤੋਂ ਕਾਲਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਹੋਣਗੀਆਂ।</string>
+  <string name="block_number_alert_details">%1$s ਇਸ ਕਾਲ ਨੂੰ ਸਪੈਮ ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤਾ ਜਾਵੇਗਾ।</string>
+  <string name="unblock_number_alert_details">ਇਹ ਨੰਬਰ ਅਣਬਲਾਕ ਕਰਕੇ \'ਸਪੈਮ ਨਹੀਂ\' ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤਾ ਜਾਵੇਗਾ। ਭਵਿੱਖੀ ਕਾਲਾਂ ਨੂੰ \'ਸਪੈਮ ਨਹੀਂ\' ਸਮਝਿਆ ਜਾਵੇਗਾ।</string>
+  <string name="unblock_report_number_alert_title">ਕੀ %1$s ਅਣਬਲਾਕ ਕਰਨਾ ਹੈ?</string>
+  <string name="report_not_spam_alert_button">ਰਿਪੋਰਟ ਕਰੋ</string>
+  <string name="report_not_spam_alert_title">ਕੀ ਕਿਸੇ ਗਲਤੀ ਦੀ ਰਿਪੋਰਟ ਕਰਨੀ ਹੈ?</string>
+  <string name="report_not_spam_alert_details">%1$s ਤੋਂ ਭਵਿੱਖੀ ਕਾਲਾਂ ਨੂੰ ਹੁਣ \'ਸਪੈਮ ਨਹੀਂ\' ਸਮਝਿਆ ਜਾਵੇਗਾ।</string>
+  <string name="checkbox_report_as_spam_action">ਕਾਲ ਨੂੰ ਸਪੈਮ ਵਜੋਂ ਰਿਪੋਰਟ ਕਰੋ</string>
+  <string name="block_number_failed_toast">ਇਹ ਨੰਬਰ ਬਲਾਕ ਕਰਨ ਵਿੱਚ ਸਮੱਸਿਆ ਆਈ</string>
+  <string name="unblock_number_failed_toast">ਇਹ ਨੰਬਰ ਅਣਬਲਾਕ ਕਰਨ ਵਿੱਚ ਸਮੱਸਿਆ ਆਈ</string>
+</resources>

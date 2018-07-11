@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Poziv se ne može uputiti bez odobrenja telefona</string>
+  <string name="pre_call_select_phone_account">Odaberite SIM za ovaj poziv</string>
+  <string name="pre_call_select_phone_account_remember">Zapamti ovaj odabir</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Nedostupno dok se koristi %1$s</string>
+</resources>

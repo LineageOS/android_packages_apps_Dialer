@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Blocați %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Nu veți mai primi apeluri sau mesaje text de la acest număr.</string>
+  <string name="block_number_ok">BLOCAȚI</string>
+  <string name="unblock_number_ok">DEBLOCAȚI</string>
+  <string name="block_report_number_alert_title">Blocați %1$s?</string>
+  <string name="block_report_number_alert_details">Nu veți mai primi apeluri de la acest număr.</string>
+  <string name="block_number_alert_details">%1$s Acest apel va fi raportat ca spam.</string>
+  <string name="unblock_number_alert_details">Acest număr va fi deblocat și raportat ca nefiind spam. Apelurile viitoare nu sunt considerate spam.</string>
+  <string name="unblock_report_number_alert_title">Deblocați %1$s?</string>
+  <string name="report_not_spam_alert_button">Raportați</string>
+  <string name="report_not_spam_alert_title">Raportați o greșeală?</string>
+  <string name="report_not_spam_alert_details">Apelurile viitoare de la %1$s nu vor mai fi identificate ca spam.</string>
+  <string name="checkbox_report_as_spam_action">Raportați apelul ca spam</string>
+  <string name="block_number_failed_toast">Eroare la blocarea numărului</string>
+  <string name="unblock_number_failed_toast">Eroare la deblocarea numărului</string>
+</resources>

@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">ناشناس</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">تلفن عمومی</string>
+  <string name="emergency_number">شماره اضطراری</string>
+  <string name="launcherActivityLabel">تلفن</string>
+  <string name="call">تماس</string>
+  <string name="video_call_lte_to_wifi_handover_toast">‏ادامه تماس با استفاده از Wi‑Fi…</string>
+  <string name="rtt_call_not_available_toast">«نوشتار هم‌زمان» برای این تماس دردسترس نیست</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

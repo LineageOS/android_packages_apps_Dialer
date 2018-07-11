@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Обаждане</string>
+  <string name="video_call">Видеообаждане</string>
+  <string name="add_to_contacts">Добавяне на контакт</string>
+  <string name="send_a_message">Съобщение</string>
+  <string name="not_spam">Не е спам</string>
+  <string name="block_number">Блокиране</string>
+  <string name="unblock_number">Отблокиране</string>
+  <string name="block_and_optionally_report_spam">Блокиране/сигнал за спам</string>
+  <string name="copy_number">Копиране на номера</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s ব্লক করবেন?</string>
+  <string name="block_number_confirmation_message_new_filtering">আপনি এই নম্বর থেকে আর কল বা পাঠ্যবার্তাগুলি পাবেন না৷</string>
+  <string name="block_number_ok">অবরোধ করুন</string>
+  <string name="unblock_number_ok">অবরোধ মুক্ত করুন</string>
+  <string name="block_report_number_alert_title">%1$s ব্লক করবেন?</string>
+  <string name="block_report_number_alert_details">এই নম্বর থেকে আপনার কাছে আর কল আসবে না।</string>
+  <string name="block_number_alert_details">%1$s এই কলটিকে স্প্যাম হিসেবে অভিযোগ করা হবে।</string>
+  <string name="unblock_number_alert_details">এই নম্বরটিকে আনব্লক করা হবে এবং \'স্প্যাম নয়\' হিসেবে জানিয়ে দেওয়া হবে। ভবিষ্যতে এই নম্বর থেকে আসা কোনও কলকে স্প্যাম হিসেবে শনাক্ত করা হবে না।</string>
+  <string name="unblock_report_number_alert_title">%1$s আনব্লক করবেন?</string>
+  <string name="report_not_spam_alert_button">অভিযোগ জানান</string>
+  <string name="report_not_spam_alert_title">কোনও ভুলের বিষয়ে জানাবেন?</string>
+  <string name="report_not_spam_alert_details">ভবিষ্যতে %1$s থেকে আসা কোনও কলকে স্প্যাম হিসেবে শনাক্ত করা হবে না।</string>
+  <string name="checkbox_report_as_spam_action">কলটিকে স্প্যাম হিসেবে অভিযোগ করুন</string>
+  <string name="block_number_failed_toast">এই নম্বরটি ব্লক করতে সমস্যা হচ্ছে</string>
+  <string name="unblock_number_failed_toast">এই নম্বরটি আনব্লক করতে সমস্যা হচ্ছে</string>
+</resources>

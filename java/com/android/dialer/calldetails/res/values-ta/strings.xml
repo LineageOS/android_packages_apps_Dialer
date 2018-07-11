@@ -1,31 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_details" msgid="5063658079729839605">"அழைப்பு விவரங்கள்"</string>
-    <string name="delete" msgid="2141020674108406737">"நீக்கு"</string>
-    <string name="call_details_copy_number" msgid="4265479408878990796">"எண்ணை நகலெடு"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"அழைப்பதற்கு முன் எண்ணைத் திருத்து"</string>
-    <string name="call_details_report_call_id" msgid="8857541295264421217">"துல்லியமற்ற எண் எனப் புகாரளி"</string>
-    <string name="sent_a_photo" msgid="3978670717462979502">"படம் அனுப்பப்பட்டது"</string>
-    <string name="received_a_photo" msgid="3528953225576480505">"படம் பெறப்பட்டது"</string>
-    <string name="message_in_quotes" msgid="3270574830115828365">"\"<xliff:g id="MESSAGE">%1$s</xliff:g>\""</string>
-    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"தவறான எண் எனப் புகாரளி"</string>
-    <string name="report_caller_id_failed" msgid="1471904930106125702">"எண்ணைப் புகாரளிக்க முடியவில்லை"</string>
-    <string name="report_caller_id_toast" msgid="5494870403429969932">"எண் புகாரளிக்கப்பட்டது"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">அழைப்பு விவரங்கள்</string>
+  <string name="delete">நீக்கு</string>
+  <string name="call_details_copy_number">எண்ணை நகலெடு</string>
+  <string name="call_details_edit_number">அழைப்பதற்கு முன் எண்ணைத் திருத்து</string>
+  <string name="call_details_report_call_id">துல்லியமற்ற எண் எனப் புகாரளி</string>
+  <string name="sent_a_photo">படம் அனுப்பப்பட்டது</string>
+  <string name="received_a_photo">படம் பெறப்பட்டது</string>
+  <string name="message_in_quotes">\"%1$s\"</string>
+  <string name="report_caller_id_dialog_title">தவறான எண் எனப் புகாரளி</string>
+  <string name="report_caller_id_failed">எண்ணைப் புகாரளிக்க முடியவில்லை</string>
+  <string name="report_caller_id_toast">எண் புகாரளிக்கப்பட்டது</string>
+  <string name="assisted_dialing_country_code_entry">அழைப்பை மேற்கொள்வதற்கான உதவி: பயன்படுத்திய நாட்டின் குறியீடு +%1$s</string>
+  <string name="assisted_dialing_country_code_entry_failure">அழைப்பை மேற்கொள்வதற்கான உதவி பயன்படுத்தப்பட்டது</string>
+  <string name="rtt_transcript_not_available">செய்தியிடல் வசதியுள்ள அழைப்புகளுக்கு மட்டுமே டிரான்ஸ்கிரிப்ட் கிடைக்கும்</string>
+  <string name="rtt_transcript_link">டிரான்ஸ்கிரிப்ட்டைக் காட்டு</string>
 </resources>

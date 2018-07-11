@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"휴대전화"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"다음 톤을 보내시겠습니까?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"예"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"아니요"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"전화 거는 중"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"현재 통화"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"진행 중인 화상 통화"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"진행 중인 화상 통화 ‑ 화상 통화 일시중지됨"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"발신 업무 전화"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"진행 중인 <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"수신 <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi 통화"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Wi‑Fi 업무 통화"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"대기 중"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"수신전화"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"사진이 있는 수신 전화"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"메시지가 있는 수신 전화"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"위치가 있는 수신 전화"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"사진과 메시지가 있는 수신 전화"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"사진과 위치가 있는 수신 전화"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"메시지와 위치가 있는 수신 전화"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"사진, 메시지, 위치가 있는 수신 전화"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"첨부파일이 있는 수신 전화"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"사진이 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"메시지가 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"위치가 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"사진과 메시지가 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"사진과 위치가 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"메시지와 위치가 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"사진, 메시지, 위치가 있는 중요한 수신 전화"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"첨부파일이 있는 중요한 수신 전화"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"수신 업무 전화"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"의심스러운 스팸 발신자로부터 온 전화"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"수신 동영상 요청"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"통화"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"전화 끊기"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"동영상"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"수락"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"거부"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"스피커 켜기"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"스피커 끄기"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"다른 기기에서 진행 중인 통화"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"다른 기기에서 진행 중인 화상 통화"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"전화 받기"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"화상 통화 받기"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"서비스가 지원되지 않습니다."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"비공개로 실행"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"다자간 통화 관리"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"비상 전화번호"</string>
-    <string name="child_number" msgid="3398257437107259682">"수신 번호: <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"SIM이 없거나 SIM에 오류가 있습니다."</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"통화 종료"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"다자간 통화"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"통화 중"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"모바일 데이터를 사용하여 통화를 계속합니다…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Wi-Fi 네트워크로 전환할 수 없습니다."</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"화상 통화가 모바일 네트워크에서 계속됩니다. 표준 데이터 요금이 부과될 수 있습니다."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"다시 표시하지 않음"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">다음 톤을 보내시겠습니까?\n</string>
+  <string name="pause_prompt_yes">예</string>
+  <string name="pause_prompt_no">아니요</string>
+  <string name="notification_dialing">전화 거는 중</string>
+  <string name="notification_ongoing_call">현재 통화</string>
+  <string name="notification_ongoing_video_call">진행 중인 화상 통화</string>
+  <string name="notification_ongoing_paused_video_call">진행 중인 화상 통화 ‑ 화상 통화 일시중지됨</string>
+  <string name="notification_ongoing_work_call">발신 업무 전화</string>
+  <string name="notification_ongoing_call_wifi_template">진행 중인 %1$s</string>
+  <string name="notification_incoming_call_wifi_template">수신 %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi 통화</string>
+  <string name="notification_call_wifi_work_brand">Wi‑Fi 업무 통화</string>
+  <string name="notification_on_hold">대기 중</string>
+  <string name="notification_incoming_call">수신전화</string>
+  <string name="notification_incoming_video_call">수신 화상 통화</string>
+  <string name="notification_incoming_call_mutli_sim">%1$s을(를) 통해 통화 수신 중</string>
+  <string name="notification_incoming_call_with_photo">사진이 있는 수신 전화</string>
+  <string name="notification_incoming_call_with_message">메시지가 있는 수신 전화</string>
+  <string name="notification_incoming_call_with_location">위치가 있는 수신 전화</string>
+  <string name="notification_incoming_call_with_photo_message">사진과 메시지가 있는 수신 전화</string>
+  <string name="notification_incoming_call_with_photo_location">사진과 위치가 있는 수신 전화</string>
+  <string name="notification_incoming_call_with_message_location">메시지와 위치가 있는 수신 전화</string>
+  <string name="notification_incoming_call_with_photo_message_location">사진, 메시지, 위치가 있는 수신 전화</string>
+  <string name="notification_incoming_call_attachments">첨부파일이 있는 수신 전화</string>
+  <string name="important_notification_incoming_call">중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_photo">사진이 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_message">메시지가 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_location">위치가 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_photo_message">사진과 메시지가 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_photo_location">사진과 위치가 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_message_location">메시지와 위치가 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">사진, 메시지, 위치가 있는 중요한 수신 전화</string>
+  <string name="important_notification_incoming_call_attachments">첨부파일이 있는 중요한 수신 전화</string>
+  <string name="notification_incoming_work_call">수신 업무 전화</string>
+  <string name="notification_incoming_spam_call">의심스러운 스팸 발신자로부터 온 전화</string>
+  <string name="notification_requesting_video_call">수신 동영상 요청</string>
+  <string name="notification_action_answer">통화</string>
+  <string name="notification_action_end_call">전화 끊기</string>
+  <string name="notification_action_answer_video">동영상</string>
+  <string name="notification_action_accept">수락</string>
+  <string name="notification_action_dismiss">거부</string>
+  <string name="notification_action_speaker_on">스피커 켜기</string>
+  <string name="notification_action_speaker_off">스피커 끄기</string>
+  <string name="notification_external_call">다른 기기에서 진행 중인 통화</string>
+  <string name="notification_external_video_call">다른 기기에서 진행 중인 화상 통화</string>
+  <string name="notification_take_call">전화 받기</string>
+  <string name="notification_take_video_call">화상 통화 받기</string>
+  <string name="incall_error_supp_service_unknown">서비스가 지원되지 않습니다.</string>
+  <string name="goPrivate">비공개로 실행</string>
+  <string name="manageConferenceLabel">다자간 통화 관리</string>
+  <string name="child_number">수신 번호: %s</string>
+  <string name="callFailed_simError">SIM이 없거나 SIM에 오류가 있습니다.</string>
+  <string name="conference_caller_disconnect_content_description">통화 종료</string>
+  <string name="conference_call_name">다자간 통화</string>
+  <string name="generic_conference_call_name">통화 중</string>
+  <string name="video_call_wifi_to_lte_handover_toast">모바일 데이터를 사용하여 통화를 계속합니다…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Wi-Fi 네트워크로 전환할 수 없습니다.</string>
+  <string name="video_call_lte_to_wifi_failed_message">화상 통화가 모바일 네트워크에서 계속됩니다. 표준 데이터 요금이 부과될 수 있습니다.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">다시 표시하지 않음</string>
+  <string name="bubble_return_to_call">통화로 돌아가기</string>
+  <string name="rtt_request_dialog_title">RTT 통화에 참여하시겠습니까?</string>
+  <string name="rtt_request_dialog_details">%1$s님이 음성 통화 중에 메시지를 사용하려고 합니다.</string>
+  <string name="rtt_request_dialog_more_information">RTT는 청각 장애, 난청, 언어 장애가 있거나 음성 이외의 의사소통 수단이 필요한 발신자에게 도움이 됩니다.</string>
+  <string name="rtt_button_decline_request">사용 안함</string>
+  <string name="rtt_button_accept_request">RTT에 참여</string>
 </resources>

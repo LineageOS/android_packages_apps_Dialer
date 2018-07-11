@@ -1,24 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="videocall_remote_video_off" msgid="2959680546745902547">"Deras video avstängd"</string>
-    <string name="videocall_remote_video_on" msgid="6011817851703181639">"Andra partens video är på"</string>
-    <string name="videocall_remotely_held" msgid="1295702896355732947">"Parkerat samtal"</string>
-    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"Samtal återupptaget"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="videocall_remote_video_off">Deras video avstängd</string>
+  <string name="videocall_remote_video_on">Andra partens video är på</string>
+  <string name="videocall_remotely_held">Parkerat samtal</string>
+  <string name="videocall_remotely_resumed">Samtal återupptaget</string>
+  <string name="videocall_charges_alert_dialog_description">Videosamtal via mobilnätverket förbrukar både data och röstminuter. Avgifter kan tillkomma.</string>
+  <string name="do_not_show_again">Visa inte igen</string>
 </resources>

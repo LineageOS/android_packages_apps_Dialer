@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s をブロックしますか？</string>
+  <string name="block_number_confirmation_message_new_filtering">今後はこの番号からの通話やテキスト メッセージは受信しなくなります。</string>
+  <string name="block_number_ok">ブロック</string>
+  <string name="unblock_number_ok">ブロックを解除</string>
+  <string name="block_report_number_alert_title">%1$s をブロックしますか？</string>
+  <string name="block_report_number_alert_details">今後この番号から通話を受信することはなくなります。</string>
+  <string name="block_number_alert_details">%1$sこの通話は迷惑電話として報告されます。</string>
+  <string name="unblock_number_alert_details">この番号のブロックが解除され、迷惑電話ではないと報告されます（迷惑電話として識別されなくなります）。</string>
+  <string name="unblock_report_number_alert_title">%1$s のブロックを解除しますか？</string>
+  <string name="report_not_spam_alert_button">報告</string>
+  <string name="report_not_spam_alert_title">誤りを報告しますか？</string>
+  <string name="report_not_spam_alert_details">今後、%1$s からの通話は迷惑電話として識別されなくなります。</string>
+  <string name="checkbox_report_as_spam_action">通話を迷惑電話として報告する</string>
+  <string name="block_number_failed_toast">この電話番号をブロックできませんでした</string>
+  <string name="unblock_number_failed_toast">この電話番号のブロックを解除できませんでした</string>
+</resources>

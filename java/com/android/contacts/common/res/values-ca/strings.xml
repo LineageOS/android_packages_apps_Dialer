@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Text copiat"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Truca al <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Truca a casa"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Truca al mòbil"</string>
-    <string name="call_work" msgid="6040550697395300892">"Truca a la feina"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Truca al fax de la feina"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Truca al fax de casa"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Truca al cercapersones"</string>
-    <string name="call_other" msgid="5536385588712587235">"Truca"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Truca a un número de devolució de trucada"</string>
-    <string name="call_car" msgid="3197417098027764954">"Truca al cotxe"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Truca al telèfon principal de l\'empresa"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Truca a l\'XDSI"</string>
-    <string name="call_main" msgid="3293707608770407814">"Truca al telèfon principal"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Truca al fax"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Truca a la ràdio"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Truca al tèlex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Truca a TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Truca al mòbil de la feina"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Truca al cercapersones de la feina"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Truca al <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Truca al número MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Envia SMS al <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Envia un SMS a casa"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Envia un SMS al mòbil"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Envia un SMS a la feina"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Envia un SMS al fax de la feina"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Envia un SMS al fax de casa"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Envia un SMS al cercapersones"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Envia un SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Envia un SMS a un número de devolució de trucada"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Envia un SMS al cotxe"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Envia un SMS al telèfon principal de l\'empresa"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Envia un SMS a l\'XDSI"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Envia un SMS al telèfon principal"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Envia un SMS al fax"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Envia un SMS a la ràdio"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Envia un SMS al tèlex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Envia un SMS al TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Envia un SMS al telèfon mòbil de la feina"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Envia un SMS al cercapersones de la feina"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Envia un SMS a <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Envia un MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Vols esborrar els contactes freqüents?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"S\'esborrarà la llista de contactes més freqüents a les aplicacions Contactes i Telèfon i es forçarà les aplicacions de correu electrònic a obtenir informació nova sobre les teves preferències pel que fa a adreces."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"S\'estan esborrant contactes freq..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Disponible"</string>
-    <string name="status_away" msgid="2298688367552893953">"Absent"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Ocupat"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Contactes"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Suggeriments principals"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Altres"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Directori"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Directori de la feina"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Tots els contactes"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Suggeriments"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Jo"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Sense nom)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Visualitza el contacte"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Tots els contactes que tenen números de telèfon"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Contactes del perfil professional"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Mostra les actualitzacions"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Només al dispositiu, no se sincronitza"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Nom"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Àlies"</string>
-    <string name="full_name" msgid="648186563998465740">"Nom"</string>
-    <string name="name_given" msgid="5096576006314820536">"Nom"</string>
-    <string name="name_family" msgid="6646235805198547467">"Cognoms"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Prefix del nom"</string>
-    <string name="name_middle" msgid="703755205331582769">"Segon nom"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Sufix del nom"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Nom fonètic"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Nom fonètic"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Segon nom fonètic"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Cognoms fonètics"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telèfon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Correu electrònic"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adreça"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Xat"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organització"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Relació"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Data especial"</string>
-    <string name="sms" msgid="7574344928185328095">"Missatge de text"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adreça"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Empresa"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Càrrec"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Notes"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Lloc web"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Grups"</string>
-    <string name="email_home" msgid="889830029388962171">"Envia un correu electrònic a l\'adreça particular"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Envia un correu electrònic al mòbil"</string>
-    <string name="email_work" msgid="4223487303344613528">"Envia un correu electrònic a la feina"</string>
-    <string name="email_other" msgid="4246411900126012062">"Correu electrònic"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Envia un correu electrònic a <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Correu electrònic"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Carrer"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Ciutat"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Estat"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Codi postal"</string>
-    <string name="postal_country" msgid="232670707458768148">"País"</string>
-    <string name="map_home" msgid="4181131107392126938">"Visualitza l\'adreça particular"</string>
-    <string name="map_work" msgid="5723471185992684400">"Visualitza l\'adreça de la feina"</string>
-    <string name="map_other" msgid="2253764780863500516">"Visualitza l\'adreça"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Visualitza l\'adreça <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Xateja amb AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Xateja amb Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Xateja amb Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Xateja amb Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Xateja amb QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Xateja amb Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Xateja amb ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Xateja amb Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Xat"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Tots els contactes"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Contactes a <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Contactes en visualització personalitzada"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Un sol contacte"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Ordena per"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Nom"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Cognoms"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Format del nom"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Primer el nom"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Primer els cognoms"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Esborra contactes freqüents"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"Atura la cerca."</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Esborra la cerca"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Compte"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Utilitza sempre per a les trucades"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Truca mitjançant"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Trucada amb una nota"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Escriu una nota per enviar-la juntament amb la trucada..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ENVIA I TRUCA"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Pestanya <xliff:g id="TITLE">%1$s</xliff:g>"</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other">Pestanya <xliff:g id="TITLE_2">%1$s</xliff:g>: <xliff:g id="COUNT_3">%2$d</xliff:g> elements no llegits </item>
-      <item quantity="one">Pestanya <xliff:g id="TITLE_0">%1$s</xliff:g>: <xliff:g id="COUNT_1">%2$d</xliff:g> element no llegit </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videotrucada"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Comparteix i truca"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Truca al %s</string>
+  <string name="call_home">Truca a casa</string>
+  <string name="call_mobile">Truca al mòbil</string>
+  <string name="call_work">Truca a la feina</string>
+  <string name="call_fax_work">Truca al fax de la feina</string>
+  <string name="call_fax_home">Truca al fax de casa</string>
+  <string name="call_pager">Truca al cercapersones</string>
+  <string name="call_other">Truca</string>
+  <string name="call_callback">Truca a un número de devolució de trucada</string>
+  <string name="call_car">Truca al cotxe</string>
+  <string name="call_company_main">Truca al telèfon principal de l\'empresa</string>
+  <string name="call_isdn">Truca a l\'XDSI</string>
+  <string name="call_main">Truca al telèfon principal</string>
+  <string name="call_other_fax">Truca al fax</string>
+  <string name="call_radio">Truca a la ràdio</string>
+  <string name="call_telex">Truca al tèlex</string>
+  <string name="call_tty_tdd">Truca a TTY/TDD</string>
+  <string name="call_work_mobile">Truca al mòbil de la feina</string>
+  <string name="call_work_pager">Truca al cercapersones de la feina</string>
+  <string name="call_assistant">Truca al %s</string>
+  <string name="call_mms">Truca al número MMS</string>
+  <string name="sms_custom">Envia SMS al %s</string>
+  <string name="sms_home">Envia un SMS a casa</string>
+  <string name="sms_mobile">Envia un SMS al mòbil</string>
+  <string name="sms_work">Envia un SMS a la feina</string>
+  <string name="sms_fax_work">Envia un SMS al fax de la feina</string>
+  <string name="sms_fax_home">Envia un SMS al fax de casa</string>
+  <string name="sms_pager">Envia un SMS al cercapersones</string>
+  <string name="sms_other">Envia un SMS</string>
+  <string name="sms_callback">Envia un SMS a un número de devolució de trucada</string>
+  <string name="sms_car">Envia un SMS al cotxe</string>
+  <string name="sms_company_main">Envia un SMS al telèfon principal de l\'empresa</string>
+  <string name="sms_isdn">Envia un SMS a l\'XDSI</string>
+  <string name="sms_main">Envia un SMS al telèfon principal</string>
+  <string name="sms_other_fax">Envia un SMS al fax</string>
+  <string name="sms_radio">Envia un SMS a la ràdio</string>
+  <string name="sms_telex">Envia un SMS al tèlex</string>
+  <string name="sms_tty_tdd">Envia un SMS al TTY/TDD</string>
+  <string name="sms_work_mobile">Envia un SMS al telèfon mòbil de la feina</string>
+  <string name="sms_work_pager">Envia un SMS al cercapersones de la feina</string>
+  <string name="sms_assistant">Envia un SMS a %s</string>
+  <string name="sms_mms">Envia un MMS</string>
+  <string name="clearFrequentsConfirmation_title">Vols esborrar els contactes freqüents?</string>
+  <string name="clearFrequentsConfirmation">S\'esborrarà la llista de contactes més freqüents a les aplicacions Contactes i Telèfon i es forçarà les aplicacions de correu electrònic a obtenir informació nova sobre les teves preferències pel que fa a adreces.</string>
+  <string name="clearFrequentsProgress_title">S\'estan esborrant contactes freq...</string>
+  <string name="status_available">Disponible</string>
+  <string name="status_away">Absent</string>
+  <string name="status_busy">Ocupat</string>
+  <string name="contactsList">Contactes</string>
+  <string name="contact_suggestions">Suggeriments principals</string>
+  <string name="local_invisible_directory">Altres</string>
+  <string name="directory_search_label">Directori</string>
+  <string name="directory_search_label_work">Directori de la feina</string>
+  <string name="local_search_label">Tots els contactes</string>
+  <string name="local_suggestions_search_label">Suggeriments</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jo</string>
+  <string name="missing_name">(Sense nom)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Visualitza el contacte</string>
+  <string name="list_filter_phones">Tots els contactes que tenen números de telèfon</string>
+  <string name="list_filter_phones_work">Contactes del perfil professional</string>
+  <string name="view_updates_from_group">Mostra les actualitzacions</string>
+  <string name="account_phone">Només al dispositiu, no se sincronitza</string>
+  <string name="nameLabelsGroup">Nom</string>
+  <string name="nicknameLabelsGroup">Àlies</string>
+  <string name="full_name">Nom</string>
+  <string name="name_given">Nom</string>
+  <string name="name_family">Cognoms</string>
+  <string name="name_prefix">Prefix del nom</string>
+  <string name="name_middle">Segon nom</string>
+  <string name="name_suffix">Sufix del nom</string>
+  <string name="name_phonetic">Nom fonètic</string>
+  <string name="name_phonetic_given">Nom fonètic</string>
+  <string name="name_phonetic_middle">Segon nom fonètic</string>
+  <string name="name_phonetic_family">Cognoms fonètics</string>
+  <string name="phoneLabelsGroup">Telèfon</string>
+  <string name="emailLabelsGroup">Correu electrònic</string>
+  <string name="postalLabelsGroup">Adreça</string>
+  <string name="imLabelsGroup">Xat</string>
+  <string name="organizationLabelsGroup">Organització</string>
+  <string name="relationLabelsGroup">Relació</string>
+  <string name="eventLabelsGroup">Data especial</string>
+  <string name="sms">Missatge de text</string>
+  <string name="postal_address">Adreça</string>
+  <string name="ghostData_company">Empresa</string>
+  <string name="ghostData_title">Càrrec</string>
+  <string name="label_notes">Notes</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Lloc web</string>
+  <string name="groupsLabel">Grups</string>
+  <string name="email_home">Envia un correu electrònic a l\'adreça particular</string>
+  <string name="email_mobile">Envia un correu electrònic al mòbil</string>
+  <string name="email_work">Envia un correu electrònic a la feina</string>
+  <string name="email_other">Correu electrònic</string>
+  <string name="email_custom">Envia un correu electrònic a %s</string>
+  <string name="email">Correu electrònic</string>
+  <string name="postal_street">Carrer</string>
+  <string name="postal_city">Ciutat</string>
+  <string name="postal_region">Estat</string>
+  <string name="postal_postcode">Codi postal</string>
+  <string name="postal_country">País</string>
+  <string name="map_home">Visualitza l\'adreça particular</string>
+  <string name="map_work">Visualitza l\'adreça de la feina</string>
+  <string name="map_other">Visualitza l\'adreça</string>
+  <string name="map_custom">Visualitza l\'adreça %s</string>
+  <string name="chat_aim">Xateja amb AIM</string>
+  <string name="chat_msn">Xateja amb Windows Live</string>
+  <string name="chat_yahoo">Xateja amb Yahoo</string>
+  <string name="chat_skype">Xateja amb Skype</string>
+  <string name="chat_qq">Xateja amb QQ</string>
+  <string name="chat_gtalk">Xateja amb Google Talk</string>
+  <string name="chat_icq">Xateja amb ICQ</string>
+  <string name="chat_jabber">Xateja amb Jabber</string>
+  <string name="chat">Xat</string>
+  <string name="list_filter_all_accounts">Tots els contactes</string>
+  <string name="listAllContactsInAccount">Contactes a %s</string>
+  <string name="listCustomView">Contactes en visualització personalitzada</string>
+  <string name="listSingleContact">Un sol contacte</string>
+  <string name="display_options_sort_list_by">Ordena per</string>
+  <string name="display_options_sort_by_given_name">Nom</string>
+  <string name="display_options_sort_by_family_name">Cognoms</string>
+  <string name="display_options_view_names_as">Format del nom</string>
+  <string name="display_options_view_given_name_first">Primer el nom</string>
+  <string name="display_options_view_family_name_first">Primer els cognoms</string>
+  <string name="menu_clear_frequents">Esborra contactes freqüents</string>
+  <string name="action_menu_back_from_search">Atura la cerca.</string>
+  <string name="description_clear_search">Esborra la cerca</string>
+  <string name="select_account_dialog_title">Compte</string>
+  <string name="set_default_account">Utilitza sempre per a les trucades</string>
+  <string name="select_phone_account_for_calls">Tria la SIM per a aquesta trucada</string>
+  <string name="select_phone_account_for_calls_remember">Recorda aquesta selecció</string>
+  <string name="call_with_a_note">Trucada amb una nota</string>
+  <string name="call_subject_hint">Escriu una nota per enviar-la juntament amb la trucada...</string>
+  <string name="send_and_call_button">ENVIA I TRUCA</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Pestanya %1$s</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">Pestanya %1$s: %2$d element no llegit </item>
+    <item quantity="other">Pestanya %1$s: %2$d elements no llegits </item>
+  </plurals>
+  <string name="description_search_video_call">Videotrucada</string>
+  <string name="description_search_call_and_share">Comparteix i truca</string>
 </resources>

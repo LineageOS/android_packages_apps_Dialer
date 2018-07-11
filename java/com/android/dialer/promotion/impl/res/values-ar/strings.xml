@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">مراسلة نصية في الوقت الفعلي داخل مكالمة</string>
+  <string name="rtt_promotion_details">تساعد ميزة \"المراسلة النصية في الوقت الفعلي\" المتصلين الذين يعانون من فقدان حاسة السمع أو من ضعف في السمع أو ليست لديهم القدرة
+    على التحدث أو يحتاجون إلى ما هو أكثر من الصوت فقط. يتم تخزين نصوص ميزة \"المراسلة النصية في الوقت الفعلي\" على جهازك
+    في سجلّ المكالمات. %1$s</string>
+  <string name="duo_disclosure_title">‏إجراء مكالمات فيديو باستخدام Duo</string>
+  <string name="duo_disclosure_details">‏تتيح لك مكالمات الفيديو من Google Duo إمكانية المحادثة مع أصدقائك وعائلتك وجهًا لوجه. قد يتم فرض رسوم على استخدام البيانات. %1$s</string>
+</resources>

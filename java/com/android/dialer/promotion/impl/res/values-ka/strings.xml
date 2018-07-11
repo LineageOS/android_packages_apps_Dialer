@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ტექსტური შეტყობინებები რეალურ დროში, ზარში</string>
+  <string name="rtt_promotion_details">RTT დახმარებას უწევს ყრუ, სმენადაქვეითებულ, შეზღუდული მეტყველების
+    მქონე აბონენტებს, ან მათ, ვისაც სჭირდება მეტი, ვიდრე მხოლოდ ხმაა. RTT შეტყობინებების ტრანსკრიპტები ინახება თქვენს მოწყობილობაში,
+    ზარების ისტორიაში. %1$s</string>
+  <string name="duo_disclosure_title">განახორციელეთ ვიდეოზარები Duo-თი</string>
+  <string name="duo_disclosure_details">Google Duo ვიდეო დარეკვა საშუალებას გაძლევთ, პირისპირ ესაუბროთ ჩეთში მეგობრებსა და ოჯახის წევრებს. შესაძლოა მოგიწიოთ მობილური ინტერნეტის საფასურის გადახდა. %1$s</string>
+</resources>

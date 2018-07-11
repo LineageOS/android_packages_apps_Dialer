@@ -1,36 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_content_description_end_call" msgid="8232796487777787200">"结束通话"</string>
-    <string name="incall_content_description_muted" msgid="2130133443150389474">"已静音"</string>
-    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"已取消静音"</string>
-    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"切换通话"</string>
-    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"合并通话"</string>
-    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"手机听筒"</string>
-    <string name="incall_content_description_speaker" msgid="7837829930201265549">"免提"</string>
-    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"蓝牙"</string>
-    <string name="incall_content_description_headset" msgid="3170439802944346719">"有线耳机"</string>
-    <string name="incall_content_description_hold" msgid="3335508251734906019">"保持通话"</string>
-    <string name="incall_content_description_unhold" msgid="3862584118869933593">"恢复通话"</string>
-    <string name="incall_content_description_video_on" msgid="899266487647420613">"视频已开启"</string>
-    <string name="incall_content_description_video_off" msgid="762985912616707076">"视频已关闭"</string>
-    <string name="incall_content_description_swap_video" msgid="297943299827908998">"切换视频"</string>
-    <string name="incall_label_speaker" msgid="1814254833253409394">"免提"</string>
-    <string name="incall_label_audio" msgid="5923781170533336820">"音频路径"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="incall_content_description_end_call">结束通话</string>
+  <string name="incall_content_description_muted">已静音</string>
+  <string name="incall_content_description_unmuted">已取消静音</string>
+  <string name="incall_content_description_swap_calls">切换通话</string>
+  <string name="incall_content_description_swap_sim">更改 SIM 卡</string>
+  <string name="incall_content_description_merge_calls">合并通话</string>
+  <string name="incall_content_description_earpiece">手机听筒</string>
+  <string name="incall_content_description_speaker">免提</string>
+  <string name="incall_content_description_bluetooth">蓝牙</string>
+  <string name="incall_content_description_headset">有线耳机</string>
+  <string name="incall_content_description_hold">保持通话</string>
+  <string name="incall_content_description_unhold">恢复通话</string>
+  <string name="incall_content_description_video_on">视频已开启</string>
+  <string name="incall_content_description_video_off">视频已关闭</string>
+  <string name="incall_content_description_swap_video">切换视频</string>
+  <string name="incall_label_speaker">免提</string>
+  <string name="incall_label_audio">音频路径</string>
 </resources>

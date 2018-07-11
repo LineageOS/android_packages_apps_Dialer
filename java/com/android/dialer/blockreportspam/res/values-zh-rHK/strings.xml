@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">要封鎖 %1$s 嗎？</string>
+  <string name="block_number_confirmation_message_new_filtering">您不會再收到這個號碼的來電和短訊。</string>
+  <string name="block_number_ok">封鎖</string>
+  <string name="unblock_number_ok">解除封鎖</string>
+  <string name="block_report_number_alert_title">要封鎖 %1$s 嗎？</string>
+  <string name="block_report_number_alert_details">您不會再收到此號碼的來電。</string>
+  <string name="block_number_alert_details">%1$s 此來電將舉報為垃圾來電。</string>
+  <string name="unblock_number_alert_details">系統會將此號碼解除封鎖，並舉報為非垃圾號碼。此外，系統不會將日後的來電視為垃圾來電。</string>
+  <string name="unblock_report_number_alert_title">要解除封鎖 %1$s 嗎？</string>
+  <string name="report_not_spam_alert_button">舉報</string>
+  <string name="report_not_spam_alert_title">要舉報錯誤嗎？</string>
+  <string name="report_not_spam_alert_details">系統不會再將日後 %1$s 的來電視為垃圾來電。</string>
+  <string name="checkbox_report_as_spam_action">舉報為垃圾來電</string>
+  <string name="block_number_failed_toast">封鎖此號碼時發生問題</string>
+  <string name="unblock_number_failed_toast">解除封鎖此號碼時發生問題</string>
+</resources>

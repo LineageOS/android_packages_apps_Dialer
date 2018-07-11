@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Telefonatë zanore</string>
+  <string name="video_call">Telefonatë me video</string>
+  <string name="add_to_contacts">Shto një kontakt</string>
+  <string name="send_a_message">Dërgo mesazh</string>
+  <string name="not_spam">Nuk është i padëshiruar</string>
+  <string name="block_number">Blloko</string>
+  <string name="unblock_number">Zhblloko</string>
+  <string name="block_and_optionally_report_spam">Blloko/raporto si të padëshiruar</string>
+  <string name="copy_number">Kopjo numrin</string>
+</resources>

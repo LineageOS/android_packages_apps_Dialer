@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Телефон"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Да се изпратят ли следните мелодии? \n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Да"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Не"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Набира се"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Текущо обаждане"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Текущо видеообаждане"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Текущо видеообаждане – видеото е на пауза"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Текущо служебно обаждане"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Текущо <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Входящо <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"обаждане през Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"служебно обаждане през Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Задържане на обаждането"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Вх. обаждане"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Входящо обаждане със снимка"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Входящо обаждане със съобщение"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Входящо обаждане с местоположение"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Входящо обаждане със снимка и съобщение"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Входящо обаждане със снимка и местоположение"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Входящо обаждане със съобщение и местоположение"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Обаждане със снимка, съобщение и местоположение"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Входящо обаждане с прикачени файлове"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Важно входящо обаждане"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Важно входящо обаждане със снимка"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Важно входящо обаждане със съобщение"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Важно входящо обаждане с местоположение"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Важно входящо обаждане със снимка и съобщение"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Важно входящо обаждане със снимка и местоположение"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Важно обаждане със съобщение и местоположение"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Важно обаждане с местоположение, снимка, съобщение"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Важно входящо обаждане с прикачени файлове"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Входящо служебно обаждане"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Входящо обаждане – възможен спам"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Входяща заявка за видеовръзка"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Отговор"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Затваряне"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Видеообаждане"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Приемам"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Отхвърляне"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Включване на високоговорителя"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Изключване на високоговорителя"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Текущо обаждане на друго устройство"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Текущо видеообаждане на друго устройство"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Приемане на обаждането"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Приемане на видеообаждането"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Услугата не се поддържа."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"към частно"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Управление на конф. обаждане"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Спешен номер"</string>
-    <string name="child_number" msgid="3398257437107259682">"чрез <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Няма SIM карта или грешка в SIM картата"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Край на обаждането"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Конферентно обаждане"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"В разговор"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Обаждането продължава през мобилната връзка за данни…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Превключването към Wi-Fi мрежа не бе възможно"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Видеообаждането ще остане в мобилната мрежа. Важат стандартните тарифи за данни."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Това да не се показва отново"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Да се изпратят ли следните мелодии? \n</string>
+  <string name="pause_prompt_yes">Да</string>
+  <string name="pause_prompt_no">Не</string>
+  <string name="notification_dialing">Набира се</string>
+  <string name="notification_ongoing_call">Текущо обаждане</string>
+  <string name="notification_ongoing_video_call">Текущо видеообаждане</string>
+  <string name="notification_ongoing_paused_video_call">Текущо видеообаждане – видеото е на пауза</string>
+  <string name="notification_ongoing_work_call">Текущо служебно обаждане</string>
+  <string name="notification_ongoing_call_wifi_template">Текущо %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Входящо %1$s</string>
+  <string name="notification_call_wifi_brand">обаждане през Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">служебно обаждане през Wi-Fi</string>
+  <string name="notification_on_hold">Задържане на обаждането</string>
+  <string name="notification_incoming_call">Вх. обаждане</string>
+  <string name="notification_incoming_video_call">Входящо видеообаждане</string>
+  <string name="notification_incoming_call_mutli_sim">Входящо обаждане през %1$s</string>
+  <string name="notification_incoming_call_with_photo">Входящо обаждане със снимка</string>
+  <string name="notification_incoming_call_with_message">Входящо обаждане със съобщение</string>
+  <string name="notification_incoming_call_with_location">Входящо обаждане с местоположение</string>
+  <string name="notification_incoming_call_with_photo_message">Входящо обаждане със снимка и съобщение</string>
+  <string name="notification_incoming_call_with_photo_location">Входящо обаждане със снимка и местоположение</string>
+  <string name="notification_incoming_call_with_message_location">Входящо обаждане със съобщение и местоположение</string>
+  <string name="notification_incoming_call_with_photo_message_location">Обаждане със снимка, съобщение и местоположение</string>
+  <string name="notification_incoming_call_attachments">Входящо обаждане с прикачени файлове</string>
+  <string name="important_notification_incoming_call">Важно входящо обаждане</string>
+  <string name="important_notification_incoming_call_with_photo">Важно входящо обаждане със снимка</string>
+  <string name="important_notification_incoming_call_with_message">Важно входящо обаждане със съобщение</string>
+  <string name="important_notification_incoming_call_with_location">Важно входящо обаждане с местоположение</string>
+  <string name="important_notification_incoming_call_with_photo_message">Важно входящо обаждане със снимка и съобщение</string>
+  <string name="important_notification_incoming_call_with_photo_location">Важно входящо обаждане със снимка и местоположение</string>
+  <string name="important_notification_incoming_call_with_message_location">Важно обаждане със съобщение и местоположение</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Важно обаждане с местоположение, снимка, съобщение</string>
+  <string name="important_notification_incoming_call_attachments">Важно входящо обаждане с прикачени файлове</string>
+  <string name="notification_incoming_work_call">Входящо служебно обаждане</string>
+  <string name="notification_incoming_spam_call">Входящо обаждане – възможен спам</string>
+  <string name="notification_requesting_video_call">Входяща заявка за видеовръзка</string>
+  <string name="notification_action_answer">Отговор</string>
+  <string name="notification_action_end_call">Затваряне</string>
+  <string name="notification_action_answer_video">Видеообаждане</string>
+  <string name="notification_action_accept">Приемам</string>
+  <string name="notification_action_dismiss">Отхвърляне</string>
+  <string name="notification_action_speaker_on">Включване на високоговорителя</string>
+  <string name="notification_action_speaker_off">Изключване на високоговорителя</string>
+  <string name="notification_external_call">Текущо обаждане на друго устройство</string>
+  <string name="notification_external_video_call">Текущо видеообаждане на друго устройство</string>
+  <string name="notification_take_call">Приемане на обаждането</string>
+  <string name="notification_take_video_call">Приемане на видеообаждането</string>
+  <string name="incall_error_supp_service_unknown">Услугата не се поддържа.</string>
+  <string name="goPrivate">към частно</string>
+  <string name="manageConferenceLabel">Управление на конф. обаждане</string>
+  <string name="child_number">чрез %s</string>
+  <string name="callFailed_simError">Няма SIM карта или грешка в SIM картата</string>
+  <string name="conference_caller_disconnect_content_description">Край на обаждането</string>
+  <string name="conference_call_name">Конферентно обаждане</string>
+  <string name="generic_conference_call_name">В разговор</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Обаждането продължава през мобилната връзка за данни…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Превключването към Wi-Fi мрежа не бе възможно</string>
+  <string name="video_call_lte_to_wifi_failed_message">Видеообаждането ще остане в мобилната мрежа. Важат стандартните тарифи за данни.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Това да не се показва отново</string>
+  <string name="bubble_return_to_call">Назад към обаждането</string>
+  <string name="rtt_request_dialog_title">Ще се присъедините ли към обаждането с ТСРВ?</string>
+  <string name="rtt_request_dialog_details">%1$s иска да използва съобщения в гласовото ви обаждане.</string>
+  <string name="rtt_request_dialog_more_information">ТСРВ подпомага обаждащите се, които са глухи, с влошен слух, имат проблеми с говора или се нуждаят от повече от само глас.</string>
+  <string name="rtt_button_decline_request">Не, благодаря</string>
+  <string name="rtt_button_accept_request">Присъединяване</string>
 </resources>

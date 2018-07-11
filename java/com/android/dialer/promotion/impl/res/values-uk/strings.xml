@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Текстові повідомлення в реальному часі під час дзвінка</string>
+  <string name="rtt_promotion_details">RTT допомагає користувачам із вадами слуху, мовлення
+    та іншим користувачам, для яких голосового спілкування недостатньо. Транскрипції повідомлень RTT зберігаються на вашому пристрої
+    в історії викликів. %1$s</string>
+  <string name="duo_disclosure_title">Здійснюйте відеодзвінки за допомогою Duo</string>
+  <string name="duo_disclosure_details">Відеодзвінки Google Duo дають змогу спілкуватися з друзями та рідними віч-на-віч. Може стягуватися плата за обмін даними. %1$s</string>
+</resources>

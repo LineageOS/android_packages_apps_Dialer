@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Το κείμενο αντιγράφηκε"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Κλήση <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Κλήση οικίας"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Κλήση κινητής συσκευής"</string>
-    <string name="call_work" msgid="6040550697395300892">"Κλήση εργασίας"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Κλήση φαξ εργασίας"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Κλήση φαξ οικίας"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Κλήση βομβητή"</string>
-    <string name="call_other" msgid="5536385588712587235">"Κλήση"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Κλήση αριθμού επανάκλησης"</string>
-    <string name="call_car" msgid="3197417098027764954">"Κλήση τηλεφώνου αυτοκινήτου"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Κλήση κύριας εταιρικής γραμμής"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Κλήση ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Κλήση κύριου αριθμού"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Κλήση φαξ"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Κλήση πομπού"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Κλήση σε τηλέτυπο"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Κλήση σε τηλέφωνο TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Κλήση κινητού τηλεφώνου εργασίας"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Κλήση βομβητή εργασίας"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Κλήση <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Κλήση MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Αποστολή μηνύματος κειμένου προς <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Αποστολή μηνύματος κειμένου προς οικία"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Αποστολή μηνύματος κειμένου προς κινητή συσκευή"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Αποστολή μηνύματος κειμένου προς εργασία"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Αποστολή μηνύματος κειμένου προς φαξ εργασίας"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Αποστολή μηνύματος κειμένου προς φαξ οικίας"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Αποστολή μηνύματος κειμένου προς βομβητή"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Κείμενο"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Αποστολή μηνύματος κειμένου σε αριθμό επανάκλησης"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Αποστολή μηνύματος κειμένου προς τηλέφωνο αυτοκινήτου"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Αποστολή μηνύματος κειμένου προς κύρια εταιρική γραμμή"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Αποστολή κειμένου σε ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Αποστολή μηνύματος κειμένου προς κύριο αριθμό"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Αποστολή μηνύματος κειμένου σε φαξ"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Αποστολή μηνύματος κειμένου προς πομπό"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Αποστολή μηνύματος κειμένου σε τηλέτυπο"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Αποστολή μηνύματος κειμένου προς τηλέφωνο TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Αποστολή μηνύματος κειμένου προς κινητό τηλέφωνο εργασίας"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Αποστολή μηνύματος κειμένου προς βομβητή εργασίας"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Αποστολή μηνύματος προς <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Αποστολή μηνύματος κειμένου ως MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Διαγραφή ατόμων με συχνή επικοινωνία;"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Θα διαγράψετε τη λίστα συχνών επαφών στις εφαρμογές Επαφές και Τηλέφωνο και θα επιβάλλετε στις εφαρμογές ηλεκτρονικού ταχυδρομείου να μάθουν τις προτιμήσεις διευθύνσεών σας από την αρχή,"</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Διαγρ. ατόμων με συχνή επικοινωνία…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Διαθέσιμος"</string>
-    <string name="status_away" msgid="2298688367552893953">"Μη διαθέσιμος"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Απασχολημένος"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Επαφές"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Κορυφαίες προτάσεις"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Άλλο"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Κατάλογος"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Κατάλογος εργασίας"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Όλες οι επαφές"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Προτάσεις"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Εγώ"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Χωρίς όνομα)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Προβολή επαφής"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Όλες οι επαφές με αριθμούς τηλεφώνου"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Επαφές προφίλ εργασίας"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Προβολή ενημερώσεων"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Μόνο στη συσκευή, χωρίς συγχρονισμό"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Όνομα"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Ψευδώνυμο"</string>
-    <string name="full_name" msgid="648186563998465740">"Όνομα"</string>
-    <string name="name_given" msgid="5096576006314820536">"Όνομα"</string>
-    <string name="name_family" msgid="6646235805198547467">"Επώνυμο"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Πρόθεμα ονόματος"</string>
-    <string name="name_middle" msgid="703755205331582769">"Πατρώνυμο"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Επίθημα ονόματος"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Φωνητικό όνομα"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Φωνητικό όνομα"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Φωνητικό πατρώνυμου"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Φωνητικό επώνυμο"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Τηλέφωνο"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Μήνυμα ηλεκτρονικού ταχυδρομείου"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Διεύθυνση"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Εταιρεία"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Σχέση"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Ειδική ημερομηνία"</string>
-    <string name="sms" msgid="7574344928185328095">"Μήνυμα κειμένου"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Διεύθυνση"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Εταιρεία"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Τίτλος"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Σημειώσεις"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Ιστότοπος"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Ομάδες"</string>
-    <string name="email_home" msgid="889830029388962171">"Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς οικία"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς κινητό"</string>
-    <string name="email_work" msgid="4223487303344613528">"Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς εργασία"</string>
-    <string name="email_other" msgid="4246411900126012062">"Μήνυμα ηλεκτρονικού ταχυδρομείου"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Μήνυμα ηλεκτρονικού ταχυδρομείου"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Οδός"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Πόλη"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Πολιτεία"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Ταχυδρομικός κώδικας"</string>
-    <string name="postal_country" msgid="232670707458768148">"Χώρα"</string>
-    <string name="map_home" msgid="4181131107392126938">"Προβολή διεύθυνσης οικίας"</string>
-    <string name="map_work" msgid="5723471185992684400">"Προβολή διεύθυνσης εργασίας"</string>
-    <string name="map_other" msgid="2253764780863500516">"Προβολή διεύθυνσης"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Προβολή διεύθυνσης <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Συζήτηση μέσω AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Συζήτηση μέσω Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Συζήτηση μέσω Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Συζήτηση μέσω Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Συζήτηση μέσω QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Συζήτηση μέσω Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Συζήτηση μέσω ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Συζήτηση μέσω Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Συζήτηση"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Όλες οι επαφές"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Επαφές στο <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Επαφές σε προσ/νη προβολή"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Μία επαφή"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Ταξινόμηση κατά"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Όνομα"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Επώνυμο"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Μορφή ονόματος"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Πρώτα το όνομα"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Πρώτα το επώνυμο"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Διαγραφή ατόμ. με συχνή επικ."</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"τέλος αναζήτησης"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Διαγραφή αναζητήσεων"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Λογαριασμός"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Χρήση πάντα για κλήσεις"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Κλήση με"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Κλήση με σημείωση"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Πληκτρολογήστε μια σημείωση για αποστολή με την κλήση…"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ΑΠΟΣΤΟΛΗ ΚΑΙ ΚΛΗΣΗ"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Καρτέλα <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> Καρτέλα <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> μη αναγνωσμένα στοιχεία. </item>
-      <item quantity="one"> Καρτέλα <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> μη αναγνωσμένο στοιχείο. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Βιντεοκλήση"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Κοινοποίηση και κλήση"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Κλήση %s</string>
+  <string name="call_home">Κλήση οικίας</string>
+  <string name="call_mobile">Κλήση κινητής συσκευής</string>
+  <string name="call_work">Κλήση εργασίας</string>
+  <string name="call_fax_work">Κλήση φαξ εργασίας</string>
+  <string name="call_fax_home">Κλήση φαξ οικίας</string>
+  <string name="call_pager">Κλήση βομβητή</string>
+  <string name="call_other">Κλήση</string>
+  <string name="call_callback">Κλήση αριθμού επανάκλησης</string>
+  <string name="call_car">Κλήση τηλεφώνου αυτοκινήτου</string>
+  <string name="call_company_main">Κλήση κύριας εταιρικής γραμμής</string>
+  <string name="call_isdn">Κλήση ISDN</string>
+  <string name="call_main">Κλήση κύριου αριθμού</string>
+  <string name="call_other_fax">Κλήση φαξ</string>
+  <string name="call_radio">Κλήση πομπού</string>
+  <string name="call_telex">Κλήση σε τηλέτυπο</string>
+  <string name="call_tty_tdd">Κλήση σε τηλέφωνο TTY/TDD</string>
+  <string name="call_work_mobile">Κλήση κινητού τηλεφώνου εργασίας</string>
+  <string name="call_work_pager">Κλήση βομβητή εργασίας</string>
+  <string name="call_assistant">Κλήση %s</string>
+  <string name="call_mms">Κλήση MMS</string>
+  <string name="sms_custom">Αποστολή μηνύματος κειμένου προς %s</string>
+  <string name="sms_home">Αποστολή μηνύματος κειμένου προς οικία</string>
+  <string name="sms_mobile">Αποστολή μηνύματος κειμένου προς κινητή συσκευή</string>
+  <string name="sms_work">Αποστολή μηνύματος κειμένου προς εργασία</string>
+  <string name="sms_fax_work">Αποστολή μηνύματος κειμένου προς φαξ εργασίας</string>
+  <string name="sms_fax_home">Αποστολή μηνύματος κειμένου προς φαξ οικίας</string>
+  <string name="sms_pager">Αποστολή μηνύματος κειμένου προς βομβητή</string>
+  <string name="sms_other">Κείμενο</string>
+  <string name="sms_callback">Αποστολή μηνύματος κειμένου σε αριθμό επανάκλησης</string>
+  <string name="sms_car">Αποστολή μηνύματος κειμένου προς τηλέφωνο αυτοκινήτου</string>
+  <string name="sms_company_main">Αποστολή μηνύματος κειμένου προς κύρια εταιρική γραμμή</string>
+  <string name="sms_isdn">Αποστολή κειμένου σε ISDN</string>
+  <string name="sms_main">Αποστολή μηνύματος κειμένου προς κύριο αριθμό</string>
+  <string name="sms_other_fax">Αποστολή μηνύματος κειμένου σε φαξ</string>
+  <string name="sms_radio">Αποστολή μηνύματος κειμένου προς πομπό</string>
+  <string name="sms_telex">Αποστολή μηνύματος κειμένου σε τηλέτυπο</string>
+  <string name="sms_tty_tdd">Αποστολή μηνύματος κειμένου προς τηλέφωνο TTY/TDD</string>
+  <string name="sms_work_mobile">Αποστολή μηνύματος κειμένου προς κινητό τηλέφωνο εργασίας</string>
+  <string name="sms_work_pager">Αποστολή μηνύματος κειμένου προς βομβητή εργασίας</string>
+  <string name="sms_assistant">Αποστολή μηνύματος προς %s</string>
+  <string name="sms_mms">Αποστολή μηνύματος κειμένου ως MMS</string>
+  <string name="clearFrequentsConfirmation_title">Διαγραφή ατόμων με συχνή επικοινωνία;</string>
+  <string name="clearFrequentsConfirmation">Θα διαγράψετε τη λίστα συχνών επαφών στις εφαρμογές Επαφές και Τηλέφωνο και θα επιβάλλετε στις εφαρμογές ηλεκτρονικού ταχυδρομείου να μάθουν τις προτιμήσεις διευθύνσεών σας από την αρχή,</string>
+  <string name="clearFrequentsProgress_title">Διαγρ. ατόμων με συχνή επικοινωνία…</string>
+  <string name="status_available">Διαθέσιμος</string>
+  <string name="status_away">Μη διαθέσιμος</string>
+  <string name="status_busy">Απασχολημένος</string>
+  <string name="contactsList">Επαφές</string>
+  <string name="contact_suggestions">Κορυφαίες προτάσεις</string>
+  <string name="local_invisible_directory">Άλλο</string>
+  <string name="directory_search_label">Κατάλογος</string>
+  <string name="directory_search_label_work">Κατάλογος εργασίας</string>
+  <string name="local_search_label">Όλες οι επαφές</string>
+  <string name="local_suggestions_search_label">Προτάσεις</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Εγώ</string>
+  <string name="missing_name">(Χωρίς όνομα)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Προβολή επαφής</string>
+  <string name="list_filter_phones">Όλες οι επαφές με αριθμούς τηλεφώνου</string>
+  <string name="list_filter_phones_work">Επαφές προφίλ εργασίας</string>
+  <string name="view_updates_from_group">Προβολή ενημερώσεων</string>
+  <string name="account_phone">Μόνο στη συσκευή, χωρίς συγχρονισμό</string>
+  <string name="nameLabelsGroup">Όνομα</string>
+  <string name="nicknameLabelsGroup">Ψευδώνυμο</string>
+  <string name="full_name">Όνομα</string>
+  <string name="name_given">Όνομα</string>
+  <string name="name_family">Επώνυμο</string>
+  <string name="name_prefix">Πρόθεμα ονόματος</string>
+  <string name="name_middle">Πατρώνυμο</string>
+  <string name="name_suffix">Επίθημα ονόματος</string>
+  <string name="name_phonetic">Φωνητικό όνομα</string>
+  <string name="name_phonetic_given">Φωνητικό όνομα</string>
+  <string name="name_phonetic_middle">Φωνητικό πατρώνυμου</string>
+  <string name="name_phonetic_family">Φωνητικό επώνυμο</string>
+  <string name="phoneLabelsGroup">Τηλέφωνο</string>
+  <string name="emailLabelsGroup">Μήνυμα ηλεκτρονικού ταχυδρομείου</string>
+  <string name="postalLabelsGroup">Διεύθυνση</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Εταιρεία</string>
+  <string name="relationLabelsGroup">Σχέση</string>
+  <string name="eventLabelsGroup">Ειδική ημερομηνία</string>
+  <string name="sms">Μήνυμα κειμένου</string>
+  <string name="postal_address">Διεύθυνση</string>
+  <string name="ghostData_company">Εταιρεία</string>
+  <string name="ghostData_title">Τίτλος</string>
+  <string name="label_notes">Σημειώσεις</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Ιστότοπος</string>
+  <string name="groupsLabel">Ομάδες</string>
+  <string name="email_home">Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς οικία</string>
+  <string name="email_mobile">Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς κινητό</string>
+  <string name="email_work">Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς εργασία</string>
+  <string name="email_other">Μήνυμα ηλεκτρονικού ταχυδρομείου</string>
+  <string name="email_custom">Αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου προς %s</string>
+  <string name="email">Μήνυμα ηλεκτρονικού ταχυδρομείου</string>
+  <string name="postal_street">Οδός</string>
+  <string name="postal_city">Πόλη</string>
+  <string name="postal_region">Πολιτεία</string>
+  <string name="postal_postcode">Ταχυδρομικός κώδικας</string>
+  <string name="postal_country">Χώρα</string>
+  <string name="map_home">Προβολή διεύθυνσης οικίας</string>
+  <string name="map_work">Προβολή διεύθυνσης εργασίας</string>
+  <string name="map_other">Προβολή διεύθυνσης</string>
+  <string name="map_custom">Προβολή διεύθυνσης %s</string>
+  <string name="chat_aim">Συζήτηση μέσω AIM</string>
+  <string name="chat_msn">Συζήτηση μέσω Windows Live</string>
+  <string name="chat_yahoo">Συζήτηση μέσω Yahoo</string>
+  <string name="chat_skype">Συζήτηση μέσω Skype</string>
+  <string name="chat_qq">Συζήτηση μέσω QQ</string>
+  <string name="chat_gtalk">Συζήτηση μέσω Google Talk</string>
+  <string name="chat_icq">Συζήτηση μέσω ICQ</string>
+  <string name="chat_jabber">Συζήτηση μέσω Jabber</string>
+  <string name="chat">Συζήτηση</string>
+  <string name="list_filter_all_accounts">Όλες οι επαφές</string>
+  <string name="listAllContactsInAccount">Επαφές στο %s</string>
+  <string name="listCustomView">Επαφές σε προσ/νη προβολή</string>
+  <string name="listSingleContact">Μία επαφή</string>
+  <string name="display_options_sort_list_by">Ταξινόμηση κατά</string>
+  <string name="display_options_sort_by_given_name">Όνομα</string>
+  <string name="display_options_sort_by_family_name">Επώνυμο</string>
+  <string name="display_options_view_names_as">Μορφή ονόματος</string>
+  <string name="display_options_view_given_name_first">Πρώτα το όνομα</string>
+  <string name="display_options_view_family_name_first">Πρώτα το επώνυμο</string>
+  <string name="menu_clear_frequents">Διαγραφή ατόμ. με συχνή επικ.</string>
+  <string name="action_menu_back_from_search">τέλος αναζήτησης</string>
+  <string name="description_clear_search">Διαγραφή αναζητήσεων</string>
+  <string name="select_account_dialog_title">Λογαριασμός</string>
+  <string name="set_default_account">Χρήση πάντα για κλήσεις</string>
+  <string name="select_phone_account_for_calls">Επιλέξτε SIM για αυτήν την κλήση</string>
+  <string name="select_phone_account_for_calls_remember">Διατήρηση αυτής της ρύθμισης</string>
+  <string name="call_with_a_note">Κλήση με σημείωση</string>
+  <string name="call_subject_hint">Πληκτρολογήστε μια σημείωση για αποστολή με την κλήση…</string>
+  <string name="send_and_call_button">ΑΠΟΣΤΟΛΗ ΚΑΙ ΚΛΗΣΗ</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Καρτέλα %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Καρτέλα %1$s. %2$d μη αναγνωσμένο στοιχείο. </item>
+    <item quantity="other"> Καρτέλα %1$s. %2$d μη αναγνωσμένα στοιχεία. </item>
+  </plurals>
+  <string name="description_search_video_call">Βιντεοκλήση</string>
+  <string name="description_search_call_and_share">Κοινοποίηση και κλήση</string>
 </resources>

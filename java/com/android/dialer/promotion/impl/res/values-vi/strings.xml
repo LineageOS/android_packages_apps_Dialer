@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Nhắn tin theo thời gian thực trong lúc gọi</string>
+  <string name="rtt_promotion_details">Tin nhắn theo thời gian thực (RTT) hỗ trợ những người gọi khiếm thính, bị suy giảm thính lực, không có
+    khả năng nói hoặc cần thêm hỗ trợ khác ngoài giọng nói. Bản ghi RTT được lưu trữ trên thiết bị
+    trong nhật ký cuộc gọi. %1$s</string>
+  <string name="duo_disclosure_title">Gọi điện video bằng Duo</string>
+  <string name="duo_disclosure_details">Ứng dụng gọi điện video Google Duo cho phép bạn trò chuyện trực diện với bạn bè và gia đình. Có thể mất cước phí dữ liệu. %1$s</string>
+</resources>

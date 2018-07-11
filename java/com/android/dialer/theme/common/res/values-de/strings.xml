@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Unbekannt</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Münztelefon</string>
+  <string name="emergency_number">Notrufnummer</string>
+  <string name="launcherActivityLabel">Telefon</string>
+  <string name="call">Anrufen</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Anruf wird über WLAN fortgesetzt…</string>
+  <string name="rtt_call_not_available_toast">RTT ist für diesen Anruf nicht verfügbar</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

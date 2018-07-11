@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Օգնություն համարհավաքման ժամանակ</string>
+  <string name="assisted_dialing_setting_summary">Արտասահմանում գտնվելու ժամանակ զանգելիս երկրի կոդի կանխագուշակում և ավելացում</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Ավտոմատ որոշված • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Ավտոմատ որոշված</string>
+  <string name="assisted_dialing_setting_cc_category_title">Բնակության երկիրը</string>
+  <string name="assisted_dialing_setting_cc_title">Բնակության կանխադրված երկիրը</string>
+</resources>

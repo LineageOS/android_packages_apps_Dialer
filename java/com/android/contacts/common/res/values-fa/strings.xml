@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"متن کپی شده"</string>
-    <string name="call_custom" msgid="3041673234638990874">"تماس با <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"تماس با منزل"</string>
-    <string name="call_mobile" msgid="967589404494150813">"تماس با تلفن همراه"</string>
-    <string name="call_work" msgid="6040550697395300892">"تماس با محل کار"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"تماس با نمابر محل کار"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"تماس با نمابر منزل"</string>
-    <string name="call_pager" msgid="6814149227741274161">"تماس با پی‌جو"</string>
-    <string name="call_other" msgid="5536385588712587235">"تماس"</string>
-    <string name="call_callback" msgid="6314019862718112786">"تماس با شماره بازگرداندن تماس"</string>
-    <string name="call_car" msgid="3197417098027764954">"تماس با تلفن خودرو"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"تماس با خط اصلی شرکت"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"‏تماس با ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"تماس با خط اصلی"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"تماس با نمابر"</string>
-    <string name="call_radio" msgid="8942441419845057942">"تماس با تلفن رادیویی"</string>
-    <string name="call_telex" msgid="2031514461660668351">"تماس با تلکس"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"‏تماس با TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"تماس با تلفن همراه محل کار"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"تماس با پی‌جوی محل کار"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"تماس با <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"تماس با فراپیام"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"ارسال پیامک به <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ارسال پیامک به تلفن منزل"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"ارسال پیامک به تلفن همراه"</string>
-    <string name="sms_work" msgid="4158595439553450966">"ارسال پیامک به محل کار"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"ارسال پیامک به نمابر محل کار"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ارسال پیامک به نمابر منزل"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ارسال پیامک به پی‌جو"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ارسال پیامک"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ارسال پیامک به شماره برگرداندن تماس"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ارسال پیامک به تلفن خودرو"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ارسال پیامک به خط اصلی شرکت"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"‏ارسال پیامک به ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"ارسال پیامک به شماره اصلی"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ارسال پیامک به نمابر"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ارسال پیامک به تلفن رادیویی"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ارسال پیامک به تلکس"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"‏ارسال پیامک به TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"ارسال پیامک به تلفن همراه محل کار"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"ارسال پیامک به پی‌جوی محل کار"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"ارسال پیامک به <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"ارسال پیامک به خدمات پیام چندرسانه‌ای"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"مکرراً تماس‌گرفته‌ها پاک شود؟"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"فهرست افرادی را که مکرر با آن‌ها تماس گرفته‌اید در برنامه‌های «مخاطبین» و «تلفن» پاک خواهید کرد و برنامه‌های رایانامه مجبور می‌شوند که تنظیمات برگزیده آدرس‌دهی شما را از اول یاد بگیرند."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"درحال پاک کردن مکرراً تماس‌گرفته…"</string>
-    <string name="status_available" msgid="2648156525685472626">"در دسترس"</string>
-    <string name="status_away" msgid="2298688367552893953">"غایب"</string>
-    <string name="status_busy" msgid="5990832098713248503">"مشغول"</string>
-    <string name="contactsList" msgid="8806067891419291513">"مخاطبین"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"پیشنهادهای برتر"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"سایر موارد"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"فهرست"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"فهرست کار"</string>
-    <string name="local_search_label" msgid="907622822323119235">"همه مخاطبین"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"پیشنهادها"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"من"</string>
-    <string name="missing_name" msgid="978606963362745020">"(بدون نام)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"مشاهده مخاطب"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"همه مخاطبین دارای شماره تلفن"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"مخاطبین نمایه کاری"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"مشاهده به‌روزرسانی‌ها"</string>
-    <string name="account_phone" msgid="7067809073194061035">"فقط دستگاه، بدون همگام‌سازی"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"نام"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"نام مستعار"</string>
-    <string name="full_name" msgid="648186563998465740">"نام"</string>
-    <string name="name_given" msgid="5096576006314820536">"نام"</string>
-    <string name="name_family" msgid="6646235805198547467">"نام خانوادگی"</string>
-    <string name="name_prefix" msgid="9215326539658838">"پیشوند نام"</string>
-    <string name="name_middle" msgid="703755205331582769">"نام میانی"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"پسوند نام"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"تلفظ نام"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"تلفظ نام"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"تلفظ نام میانی"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"تلفظ نام خانوادگی"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"تلفن"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"رایانامه"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"آدرس"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"پیام فوری"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"سازمان"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"نسبت"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"تاریخ ویژه"</string>
-    <string name="sms" msgid="7574344928185328095">"پیامک"</string>
-    <string name="postal_address" msgid="1804707930129674200">"آدرس"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"شرکت"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"عنوان"</string>
-    <string name="label_notes" msgid="2050255313694219786">"یادداشت‌ها"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"وب سایت"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"گروه‌ها"</string>
-    <string name="email_home" msgid="889830029388962171">"رایانامه به منزل"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"رایانامه به تلفن همراه"</string>
-    <string name="email_work" msgid="4223487303344613528">"رایانامه به محل کار"</string>
-    <string name="email_other" msgid="4246411900126012062">"رایانامه"</string>
-    <string name="email_custom" msgid="7246580894327511013">"رایانامه به <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"رایانامه"</string>
-    <string name="postal_street" msgid="6918171741240802474">"خیابان"</string>
-    <string name="postal_city" msgid="8674569121430005628">"شهر"</string>
-    <string name="postal_region" msgid="1730369286225469192">"ایالت"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"کد پستی"</string>
-    <string name="postal_country" msgid="232670707458768148">"کشور"</string>
-    <string name="map_home" msgid="4181131107392126938">"مشاهده آدرس منزل"</string>
-    <string name="map_work" msgid="5723471185992684400">"مشاهده آدرس محل کار"</string>
-    <string name="map_other" msgid="2253764780863500516">"مشاهده آدرس"</string>
-    <string name="map_custom" msgid="5581743097882436157">"مشاهده آدرس <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"‏گپ با استفاده از AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"‏گپ با استفاده از Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"‏گپ با استفاده از Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"‏گپ با استفاده از Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"‏گپ با استفاده از QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"‏گپ با استفاده از Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"‏گپ با استفاده از ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"‏گپ با استفاده از Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"گپ"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"همه مخاطبین"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"مخاطبین در <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"مخاطبین در نمای سفارشی"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"مخاطب تکی"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"مرتب‌سازی براساس"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"نام"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"نام خانوادگی"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"قالب نام"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ابتدا نام"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"ابتدا نام خانوادگی"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"پاک کردن مکرراً تماس‌گرفته"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"توقف جستجو"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"پاک کردن جستجو"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"حساب"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"همیشه این سیم برای تماس‌ استفاده شود"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"تماس با"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"تماس به همراه یادداشت"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"یادداشتی بنویسید که همراه تماس ارسال شود…"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ارسال و تماس"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / ‏<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"برگه «<xliff:g id="TITLE">%1$s</xliff:g>»."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> برگه «<xliff:g id="TITLE_2">%1$s</xliff:g>». <xliff:g id="COUNT_3">%2$d</xliff:g> مورد خوانده‌نشده. </item>
-      <item quantity="other"> برگه «<xliff:g id="TITLE_2">%1$s</xliff:g>». <xliff:g id="COUNT_3">%2$d</xliff:g> مورد خوانده‌نشده. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"تماس ویدیویی"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"اشتراک‌گذاری و تماس"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">تماس با %s</string>
+  <string name="call_home">تماس با منزل</string>
+  <string name="call_mobile">تماس با تلفن همراه</string>
+  <string name="call_work">تماس با محل کار</string>
+  <string name="call_fax_work">تماس با نمابر محل کار</string>
+  <string name="call_fax_home">تماس با نمابر منزل</string>
+  <string name="call_pager">تماس با پی‌جو</string>
+  <string name="call_other">تماس</string>
+  <string name="call_callback">تماس با شماره بازگرداندن تماس</string>
+  <string name="call_car">تماس با تلفن خودرو</string>
+  <string name="call_company_main">تماس با خط اصلی شرکت</string>
+  <string name="call_isdn">‏تماس با ISDN</string>
+  <string name="call_main">تماس با خط اصلی</string>
+  <string name="call_other_fax">تماس با نمابر</string>
+  <string name="call_radio">تماس با تلفن رادیویی</string>
+  <string name="call_telex">تماس با تلکس</string>
+  <string name="call_tty_tdd">‏تماس با TTY/TDD</string>
+  <string name="call_work_mobile">تماس با تلفن همراه محل کار</string>
+  <string name="call_work_pager">تماس با پی‌جوی محل کار</string>
+  <string name="call_assistant">تماس با %s</string>
+  <string name="call_mms">تماس با فراپیام</string>
+  <string name="sms_custom">ارسال پیامک به %s</string>
+  <string name="sms_home">ارسال پیامک به تلفن منزل</string>
+  <string name="sms_mobile">ارسال پیامک به تلفن همراه</string>
+  <string name="sms_work">ارسال پیامک به محل کار</string>
+  <string name="sms_fax_work">ارسال پیامک به نمابر محل کار</string>
+  <string name="sms_fax_home">ارسال پیامک به نمابر منزل</string>
+  <string name="sms_pager">ارسال پیامک به پی‌جو</string>
+  <string name="sms_other">ارسال پیامک</string>
+  <string name="sms_callback">ارسال پیامک به شماره برگرداندن تماس</string>
+  <string name="sms_car">ارسال پیامک به تلفن خودرو</string>
+  <string name="sms_company_main">ارسال پیامک به خط اصلی شرکت</string>
+  <string name="sms_isdn">‏ارسال پیامک به ISDN</string>
+  <string name="sms_main">ارسال پیامک به شماره اصلی</string>
+  <string name="sms_other_fax">ارسال پیامک به نمابر</string>
+  <string name="sms_radio">ارسال پیامک به تلفن رادیویی</string>
+  <string name="sms_telex">ارسال پیامک به تلکس</string>
+  <string name="sms_tty_tdd">‏ارسال پیامک به TTY/TDD</string>
+  <string name="sms_work_mobile">ارسال پیامک به تلفن همراه محل کار</string>
+  <string name="sms_work_pager">ارسال پیامک به پی‌جوی محل کار</string>
+  <string name="sms_assistant">ارسال پیامک به %s</string>
+  <string name="sms_mms">ارسال پیامک به خدمات پیام چندرسانه‌ای</string>
+  <string name="clearFrequentsConfirmation_title">مکرراً تماس‌گرفته‌ها پاک شود؟</string>
+  <string name="clearFrequentsConfirmation">فهرست افرادی را که مکرر با آن‌ها تماس گرفته‌اید در برنامه‌های «مخاطبین» و «تلفن» پاک خواهید کرد و برنامه‌های رایانامه مجبور می‌شوند که تنظیمات برگزیده آدرس‌دهی شما را از اول یاد بگیرند.</string>
+  <string name="clearFrequentsProgress_title">درحال پاک کردن مکرراً تماس‌گرفته…</string>
+  <string name="status_available">در دسترس</string>
+  <string name="status_away">غایب</string>
+  <string name="status_busy">مشغول</string>
+  <string name="contactsList">مخاطبین</string>
+  <string name="contact_suggestions">پیشنهادهای برتر</string>
+  <string name="local_invisible_directory">سایر موارد</string>
+  <string name="directory_search_label">فهرست</string>
+  <string name="directory_search_label_work">فهرست کار</string>
+  <string name="local_search_label">همه مخاطبین</string>
+  <string name="local_suggestions_search_label">پیشنهادها</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">من</string>
+  <string name="missing_name">(بدون نام)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">مشاهده مخاطب</string>
+  <string name="list_filter_phones">همه مخاطبین دارای شماره تلفن</string>
+  <string name="list_filter_phones_work">مخاطبین نمایه کاری</string>
+  <string name="view_updates_from_group">مشاهده به‌روزرسانی‌ها</string>
+  <string name="account_phone">فقط دستگاه، بدون همگام‌سازی</string>
+  <string name="nameLabelsGroup">نام</string>
+  <string name="nicknameLabelsGroup">نام مستعار</string>
+  <string name="full_name">نام</string>
+  <string name="name_given">نام</string>
+  <string name="name_family">نام خانوادگی</string>
+  <string name="name_prefix">پیشوند نام</string>
+  <string name="name_middle">نام میانی</string>
+  <string name="name_suffix">پسوند نام</string>
+  <string name="name_phonetic">تلفظ نام</string>
+  <string name="name_phonetic_given">تلفظ نام</string>
+  <string name="name_phonetic_middle">تلفظ نام میانی</string>
+  <string name="name_phonetic_family">تلفظ نام خانوادگی</string>
+  <string name="phoneLabelsGroup">تلفن</string>
+  <string name="emailLabelsGroup">رایانامه</string>
+  <string name="postalLabelsGroup">آدرس</string>
+  <string name="imLabelsGroup">پیام فوری</string>
+  <string name="organizationLabelsGroup">سازمان</string>
+  <string name="relationLabelsGroup">نسبت</string>
+  <string name="eventLabelsGroup">تاریخ ویژه</string>
+  <string name="sms">پیامک</string>
+  <string name="postal_address">آدرس</string>
+  <string name="ghostData_company">شرکت</string>
+  <string name="ghostData_title">عنوان</string>
+  <string name="label_notes">یادداشت‌ها</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">وب سایت</string>
+  <string name="groupsLabel">گروه‌ها</string>
+  <string name="email_home">رایانامه به منزل</string>
+  <string name="email_mobile">رایانامه به تلفن همراه</string>
+  <string name="email_work">رایانامه به محل کار</string>
+  <string name="email_other">رایانامه</string>
+  <string name="email_custom">رایانامه به %s</string>
+  <string name="email">رایانامه</string>
+  <string name="postal_street">خیابان</string>
+  <string name="postal_city">شهر</string>
+  <string name="postal_region">ایالت</string>
+  <string name="postal_postcode">کد پستی</string>
+  <string name="postal_country">کشور</string>
+  <string name="map_home">مشاهده آدرس منزل</string>
+  <string name="map_work">مشاهده آدرس محل کار</string>
+  <string name="map_other">مشاهده آدرس</string>
+  <string name="map_custom">مشاهده آدرس %s</string>
+  <string name="chat_aim">‏گپ با استفاده از AIM</string>
+  <string name="chat_msn">‏گپ با استفاده از Windows Live</string>
+  <string name="chat_yahoo">‏گپ با استفاده از Yahoo</string>
+  <string name="chat_skype">‏گپ با استفاده از Skype</string>
+  <string name="chat_qq">‏گپ با استفاده از QQ</string>
+  <string name="chat_gtalk">‏گپ با استفاده از Google Talk</string>
+  <string name="chat_icq">‏گپ با استفاده از ICQ</string>
+  <string name="chat_jabber">‏گپ با استفاده از Jabber</string>
+  <string name="chat">گپ</string>
+  <string name="list_filter_all_accounts">همه مخاطبین</string>
+  <string name="listAllContactsInAccount">مخاطبین در %s</string>
+  <string name="listCustomView">مخاطبین در نمای سفارشی</string>
+  <string name="listSingleContact">مخاطب تکی</string>
+  <string name="display_options_sort_list_by">مرتب‌سازی براساس</string>
+  <string name="display_options_sort_by_given_name">نام</string>
+  <string name="display_options_sort_by_family_name">نام خانوادگی</string>
+  <string name="display_options_view_names_as">قالب نام</string>
+  <string name="display_options_view_given_name_first">ابتدا نام</string>
+  <string name="display_options_view_family_name_first">ابتدا نام خانوادگی</string>
+  <string name="menu_clear_frequents">پاک کردن مکرراً تماس‌گرفته</string>
+  <string name="action_menu_back_from_search">توقف جستجو</string>
+  <string name="description_clear_search">پاک کردن جستجو</string>
+  <string name="select_account_dialog_title">حساب</string>
+  <string name="set_default_account">همیشه این سیم برای تماس‌ استفاده شود</string>
+  <string name="select_phone_account_for_calls">سیم‌کارتی برای این تماس انتخاب کنید</string>
+  <string name="select_phone_account_for_calls_remember">این گزینه به خاطر سپرده شود</string>
+  <string name="call_with_a_note">تماس به همراه یادداشت</string>
+  <string name="call_subject_hint">یادداشتی بنویسید که همراه تماس ارسال شود…</string>
+  <string name="send_and_call_button">ارسال و تماس</string>
+  <string name="call_subject_limit">%1$s / ‏%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">برگه «%1$s».</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> برگه «%1$s». %2$d مورد خوانده‌نشده. </item>
+    <item quantity="other"> برگه «%1$s». %2$d مورد خوانده‌نشده. </item>
+  </plurals>
+  <string name="description_search_video_call">تماس ویدیویی</string>
+  <string name="description_search_call_and_share">اشتراک‌گذاری و تماس</string>
 </resources>

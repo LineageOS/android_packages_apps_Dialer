@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefoni"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Dëshiron t\'i dërgosh tonet e mëposhtme?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Po"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Jo"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Po formon numrin"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Telefonatë në vazhdim"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Telefonatë me video në vazhdim"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Telefonatë me video në vazhdim - videoja u ndërpre"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Telefonatë pune dalëse"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> në vazhdim"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> në ardhje"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Telefonatë me Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Telefonatë pune me Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Në pritje"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Telefonatë hyrëse"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Telefonatë hyrëse me fotografi"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Telefonatë hyrëse me mesazh"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Telefonatë hyrëse me vendndodhje"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Telefonatë hyrëse me fotografi dhe mesazh"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Telefonatë hyrëse me fotografi dhe vendndodhje"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Telefonatë hyrëse me mesazh dhe vendndodhje"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Telefonatë me fotografi, mesazh dhe vendndodhje"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Telefonatë hyrëse me bashkëngjitje"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Telefonatë hyrëse e rëndësishme"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Telefonatë hyrëse e rëndësishme me fotografi"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Telefonatë hyrëse e rëndësishme me mesazh"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Telefonatë hyrëse e rëndësishme me vendndodhje"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Telefonatë e rëndësishme me fotografi dhe mesazh"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Telefonatë e rëndësishme me foto dhe vendndodhje"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Telefonatë e rëndësishme me mesazh e vendndodhje"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Tel. e rëndësishme me foto, mesazh e vendndodhje"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Telefonatë hyrëse e rëndësishme me bashkëngjitje"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Telefonatë pune hyrëse"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Telefonatë e dyshuar si e padëshiruar"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Kërkesë për video hyrëse"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Përgjigju"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Mbyll"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Prano"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Refuzo"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Aktivizo altoparlantin"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Çaktivizo altoparlantin"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Telefonatë në vazhdim në një pajisje tjetër"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Telefonatë në vazhdim në një pajisje tjetër"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Prano telefonatën"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Prano telefonatën me video"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Shërbimi nuk mbështetet."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"bëje private"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Menaxho telefonatën konferencë"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Numri i urgjencës"</string>
-    <string name="child_number" msgid="3398257437107259682">"përmes <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Nuk ka kartë SIM ose ka gabim në kartën SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Mbylle telefonatën"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Telefonatë konferencë"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Në telefonatë"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Po vazhdon telefonatën duke përdorur të dhënat celulare…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Nuk mund të kalonte në rrjetin Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Telefonata me video do të mbetet në rrjetin celular. Mund të zbatohen tarifat standarde të të dhënave."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Mos e shfaq më këtë"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Dëshiron t\'i dërgosh tonet e mëposhtme?\n</string>
+  <string name="pause_prompt_yes">Po</string>
+  <string name="pause_prompt_no">Jo</string>
+  <string name="notification_dialing">Po formon numrin</string>
+  <string name="notification_ongoing_call">Telefonatë në vazhdim</string>
+  <string name="notification_ongoing_video_call">Telefonatë me video në vazhdim</string>
+  <string name="notification_ongoing_paused_video_call">Telefonatë me video në vazhdim - videoja u ndërpre</string>
+  <string name="notification_ongoing_work_call">Telefonatë pune dalëse</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s në vazhdim</string>
+  <string name="notification_incoming_call_wifi_template">%1$s në ardhje</string>
+  <string name="notification_call_wifi_brand">Telefonatë me Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">Telefonatë pune me Wi-Fi</string>
+  <string name="notification_on_hold">Në pritje</string>
+  <string name="notification_incoming_call">Telefonatë hyrëse</string>
+  <string name="notification_incoming_video_call">Telefonatë me video hyrëse</string>
+  <string name="notification_incoming_call_mutli_sim">Telefonatë hyrëse nëpërmjet %1$s</string>
+  <string name="notification_incoming_call_with_photo">Telefonatë hyrëse me fotografi</string>
+  <string name="notification_incoming_call_with_message">Telefonatë hyrëse me mesazh</string>
+  <string name="notification_incoming_call_with_location">Telefonatë hyrëse me vendndodhje</string>
+  <string name="notification_incoming_call_with_photo_message">Telefonatë hyrëse me fotografi dhe mesazh</string>
+  <string name="notification_incoming_call_with_photo_location">Telefonatë hyrëse me fotografi dhe vendndodhje</string>
+  <string name="notification_incoming_call_with_message_location">Telefonatë hyrëse me mesazh dhe vendndodhje</string>
+  <string name="notification_incoming_call_with_photo_message_location">Telefonatë me fotografi, mesazh dhe vendndodhje</string>
+  <string name="notification_incoming_call_attachments">Telefonatë hyrëse me bashkëngjitje</string>
+  <string name="important_notification_incoming_call">Telefonatë hyrëse e rëndësishme</string>
+  <string name="important_notification_incoming_call_with_photo">Telefonatë hyrëse e rëndësishme me fotografi</string>
+  <string name="important_notification_incoming_call_with_message">Telefonatë hyrëse e rëndësishme me mesazh</string>
+  <string name="important_notification_incoming_call_with_location">Telefonatë hyrëse e rëndësishme me vendndodhje</string>
+  <string name="important_notification_incoming_call_with_photo_message">Telefonatë e rëndësishme me fotografi dhe mesazh</string>
+  <string name="important_notification_incoming_call_with_photo_location">Telefonatë e rëndësishme me foto dhe vendndodhje</string>
+  <string name="important_notification_incoming_call_with_message_location">Telefonatë e rëndësishme me mesazh e vendndodhje</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Tel. e rëndësishme me foto, mesazh e vendndodhje</string>
+  <string name="important_notification_incoming_call_attachments">Telefonatë hyrëse e rëndësishme me bashkëngjitje</string>
+  <string name="notification_incoming_work_call">Telefonatë pune hyrëse</string>
+  <string name="notification_incoming_spam_call">Telefonatë e dyshuar si e padëshiruar</string>
+  <string name="notification_requesting_video_call">Kërkesë për video hyrëse</string>
+  <string name="notification_action_answer">Përgjigju</string>
+  <string name="notification_action_end_call">Mbyll</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Prano</string>
+  <string name="notification_action_dismiss">Refuzo</string>
+  <string name="notification_action_speaker_on">Aktivizo altoparlantin</string>
+  <string name="notification_action_speaker_off">Çaktivizo altoparlantin</string>
+  <string name="notification_external_call">Telefonatë në vazhdim në një pajisje tjetër</string>
+  <string name="notification_external_video_call">Telefonatë në vazhdim në një pajisje tjetër</string>
+  <string name="notification_take_call">Prano telefonatën</string>
+  <string name="notification_take_video_call">Prano telefonatën me video</string>
+  <string name="incall_error_supp_service_unknown">Shërbimi nuk mbështetet.</string>
+  <string name="goPrivate">bëje private</string>
+  <string name="manageConferenceLabel">Menaxho telefonatën konferencë</string>
+  <string name="child_number">përmes %s</string>
+  <string name="callFailed_simError">Nuk ka kartë SIM ose ka gabim në kartën SIM</string>
+  <string name="conference_caller_disconnect_content_description">Mbylle telefonatën</string>
+  <string name="conference_call_name">Telefonatë konferencë</string>
+  <string name="generic_conference_call_name">Në telefonatë</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Po vazhdon telefonatën duke përdorur të dhënat celulare…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Nuk mund të kalonte në rrjetin Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Telefonata me video do të mbetet në rrjetin celular. Mund të zbatohen tarifat standarde të të dhënave.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Mos e shfaq më këtë</string>
+  <string name="bubble_return_to_call">Kthehu te telefonata</string>
+  <string name="rtt_request_dialog_title">Do të bashkohesh në telefonatën RTT?</string>
+  <string name="rtt_request_dialog_details">%1$s dëshiron të përdorë mesazhet brenda telefonatës zanore.</string>
+  <string name="rtt_request_dialog_more_information">Funksioni RTT ndihmon telefonuesit që janë të shurdhër, kanë vështirësi dëgjimi, kanë një aftësi të kufizuar të të folurit ose që kanë nevojë për më shumë se thjesht zërin.</string>
+  <string name="rtt_button_decline_request">Jo</string>
+  <string name="rtt_button_accept_request">Bashkohu në RTT</string>
 </resources>

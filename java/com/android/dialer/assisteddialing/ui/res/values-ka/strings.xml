@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">დახმარება ნომრის აკრეფაში</string>
+  <string name="assisted_dialing_setting_summary">ქვეყნის კოდის პროგნოზირება და დამატება საზღვარგარეთ მგზავრობის დროს დარეკვისას</string>
+  <string name="assisted_dialing_setting_cc_default_summary">ავტომატურად აღმოჩენილი • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">ავტომატურად აღმოჩენილი</string>
+  <string name="assisted_dialing_setting_cc_category_title">მშობლიური ქვეყანა</string>
+  <string name="assisted_dialing_setting_cc_title">ნაგულისხმევი მშობლიური ქვეყანა</string>
+</resources>

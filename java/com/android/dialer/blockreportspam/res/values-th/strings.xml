@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">บล็อก %1$s ไหม</string>
+  <string name="block_number_confirmation_message_new_filtering">คุณจะไม่ได้รับสายเรียกเข้าหรือข้อความจากหมายเลขนี้อีก</string>
+  <string name="block_number_ok">บล็อก</string>
+  <string name="unblock_number_ok">เลิกบล็อก</string>
+  <string name="block_report_number_alert_title">บล็อก %1$s ไหม</string>
+  <string name="block_report_number_alert_details">คุณจะไม่ได้รับสายจากหมายเลขนี้อีกต่อไป</string>
+  <string name="block_number_alert_details">%1$s ระบบจะรายงานสายนี้ว่าเป็นสแปม</string>
+  <string name="unblock_number_alert_details">ระบบจะเลิกบล็อกหมายเลขนี้และรายงานว่าไม่ใช่สแปม การโทรเข้ามาหลังจากนี้จะไม่ถูกระบุว่าเป็นสแปม</string>
+  <string name="unblock_report_number_alert_title">เลิกบล็อก %1$s ไหม</string>
+  <string name="report_not_spam_alert_button">รายงาน</string>
+  <string name="report_not_spam_alert_title">รายงานข้อผิดพลาดไหม</string>
+  <string name="report_not_spam_alert_details">สายที่โทรเข้าจาก %1$s จะไม่ถูกระบุว่าเป็นสแปมหลังจากนี้</string>
+  <string name="checkbox_report_as_spam_action">รายงานสายนี้ว่าเป็นสแปม</string>
+  <string name="block_number_failed_toast">เกิดปัญหาในการบล็อกหมายเลขนี้</string>
+  <string name="unblock_number_failed_toast">เกิดปัญหาในการเลิกบล็อกหมายเลขนี้</string>
+</resources>

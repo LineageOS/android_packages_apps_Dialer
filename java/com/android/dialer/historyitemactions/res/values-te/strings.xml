@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">వాయిస్ కాల్</string>
+  <string name="video_call">వీడియో కాల్</string>
+  <string name="add_to_contacts">పరిచయాన్ని జోడించు</string>
+  <string name="send_a_message">సందేశం పంపు</string>
+  <string name="not_spam">స్పామ్ కాదు</string>
+  <string name="block_number">బ్లాక్ చేయి</string>
+  <string name="unblock_number">అన్‌బ్లాక్ చేయి</string>
+  <string name="block_and_optionally_report_spam">బ్లాక్ చేయి/స్పామ్ నివేదించు</string>
+  <string name="copy_number">నంబర్‌ను కాపీ చేయి</string>
+</resources>

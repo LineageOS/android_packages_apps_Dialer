@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Upigaji simu unaosaidiwa</string>
+  <string name="assisted_dialing_setting_summary">Tabiri na uongeze nambari ya nchi wakati unapiga simu ukiwa unasafiri nje ya nchi</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Imegunduliwa kiotomatiki • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Imegunduliwa kiotomatiki</string>
+  <string name="assisted_dialing_setting_cc_category_title">Nchi yako</string>
+  <string name="assisted_dialing_setting_cc_title">Nchi yako msingi</string>
+</resources>

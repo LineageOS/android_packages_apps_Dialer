@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Bloccare il numero %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Non riceverai più chiamate o SMS da questo numero.</string>
+  <string name="block_number_ok">BLOCCA</string>
+  <string name="unblock_number_ok">SBLOCCA</string>
+  <string name="block_report_number_alert_title">Bloccare il numero %1$s?</string>
+  <string name="block_report_number_alert_details">Non riceverai più chiamate da questo numero.</string>
+  <string name="block_number_alert_details">%1$s Questa chiamata verrà segnalata come spam.</string>
+  <string name="unblock_number_alert_details">Il numero verrà sbloccato e segnalato come non spam. In futuro non sarà più considerato spam.</string>
+  <string name="unblock_report_number_alert_title">Sbloccare il numero %1$s?</string>
+  <string name="report_not_spam_alert_button">Segnala</string>
+  <string name="report_not_spam_alert_title">Vuoi segnalare un errore?</string>
+  <string name="report_not_spam_alert_details">Le chiamate future da %1$s non verranno più identificate come spam.</string>
+  <string name="checkbox_report_as_spam_action">Segnala la chiamata come spam</string>
+  <string name="block_number_failed_toast">Errore durante il blocco del numero</string>
+  <string name="unblock_number_failed_toast">Errore durante lo sblocco del numero</string>
+</resources>

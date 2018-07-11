@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Бүх сэжигтэй спам дуудлагыг шүүх үү?</string>
+  <string name="spam_blocking_promo_text">Таны саяхан блоклосон иймэрхүү дуудлагууд танд цаашид саад болохгүй</string>
+  <string name="spam_blocking_promo_action_filter_spam">Спам шүүлтүүрдэх</string>
+  <string name="spam_blocking_promo_action_dismiss">Хаах</string>
+  <string name="spam_blocking_setting_prompt">Тохиргоо</string>
+  <string name="spam_blocking_settings_enable_error_text">Спамийн шүүлтүүрийг асаахад асуудал гарсан</string>
+  <string name="spam_blocking_settings_disable_error_text">Спамийн шүүлтүүрийг унтраахад асуудал гарсан</string>
+  <string name="spam_blocking_settings_enable_complete_text">Спамын шүүлтүүрийг асаасан</string>
+  <string name="spam_blocking_settings_disable_complete_text">Спамын шүүлтүүрийг унтраасан</string>
+</resources>

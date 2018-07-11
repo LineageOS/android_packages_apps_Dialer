@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Foon"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Stuur die volgende tone?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Ja"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Nee"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Bel"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Oproep aan die gang"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Video-oproep aan die gang"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Video-oproep aan die gang – video gepouseer"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Voortdurende werkoproep"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Deurlopend <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Inkomende <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi-oproep"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Wi‑Fi-werkoproep"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Hou aan"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Inkomende oproep"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Inkomende oproep met foto"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Inkomende oproep met boodskap"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Inkomende oproep met ligging"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Inkomende oproep met foto en boodskap"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Inkomende oproep met foto en ligging"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Inkomende oproep met boodskap en ligging"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Inkomende oproep met foto, boodskap en ligging"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Inkomende oproep met aanhegsels"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Belangrike inkomende oproep"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Belangrike inkomende oproep met foto"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Belangrike inkomende oproep met boodskap"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Belangrike inkomende oproep met ligging"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Belangrike inkomende oproep met foto en boodskap"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Belangrike inkomende oproep met foto en ligging"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Belangrike inkomende oproep met boodskap en ligging"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Belangrike inkomende oproep met foto, boodskap en ligging"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Belangrike inkomende oproep met aanhegsels"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Inkomende werkoproep"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Inkomende verdagte strooipos-oproep"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Inkomende videoversoek"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Antwoord"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Lui af"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Aanvaar"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Wys af"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Skakel luidspreker aan"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Skakel luidspreker af"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Voortgesette oproep op \'n ander toestel"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Voortgesette video-oproep on \'n ander toestel"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Neem oproep"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Neem video-oproep"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Diens word nie gesteun nie."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"gaan privaat"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Bestuur konferensie-oproep"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Noodnommer"</string>
-    <string name="child_number" msgid="3398257437107259682">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Geen SIM of SIM-fout"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Beëindig oproep"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konferensie-oproep"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Besig met oproep"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Gaan voort met oproep deur mobiele data te gebruik ..."</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Kon nie na Wi-Fi-netwerk oorskakel nie"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Video-oproep sal op mobiele netwerk bly. Standaard datakoste kan dalk geld."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Moenie dit weer wys nie"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Stuur die volgende tone?\n</string>
+  <string name="pause_prompt_yes">Ja</string>
+  <string name="pause_prompt_no">Nee</string>
+  <string name="notification_dialing">Bel</string>
+  <string name="notification_ongoing_call">Oproep aan die gang</string>
+  <string name="notification_ongoing_video_call">Video-oproep aan die gang</string>
+  <string name="notification_ongoing_paused_video_call">Video-oproep aan die gang – video gepouseer</string>
+  <string name="notification_ongoing_work_call">Voortdurende werkoproep</string>
+  <string name="notification_ongoing_call_wifi_template">Deurlopend %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Inkomende %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi-oproep</string>
+  <string name="notification_call_wifi_work_brand">Wi‑Fi-werkoproep</string>
+  <string name="notification_on_hold">Hou aan</string>
+  <string name="notification_incoming_call">Inkomende oproep</string>
+  <string name="notification_incoming_video_call">Inkomende video-oproep</string>
+  <string name="notification_incoming_call_mutli_sim">Inkomende oproep via %1$s</string>
+  <string name="notification_incoming_call_with_photo">Inkomende oproep met foto</string>
+  <string name="notification_incoming_call_with_message">Inkomende oproep met boodskap</string>
+  <string name="notification_incoming_call_with_location">Inkomende oproep met ligging</string>
+  <string name="notification_incoming_call_with_photo_message">Inkomende oproep met foto en boodskap</string>
+  <string name="notification_incoming_call_with_photo_location">Inkomende oproep met foto en ligging</string>
+  <string name="notification_incoming_call_with_message_location">Inkomende oproep met boodskap en ligging</string>
+  <string name="notification_incoming_call_with_photo_message_location">Inkomende oproep met foto, boodskap en ligging</string>
+  <string name="notification_incoming_call_attachments">Inkomende oproep met aanhegsels</string>
+  <string name="important_notification_incoming_call">Belangrike inkomende oproep</string>
+  <string name="important_notification_incoming_call_with_photo">Belangrike inkomende oproep met foto</string>
+  <string name="important_notification_incoming_call_with_message">Belangrike inkomende oproep met boodskap</string>
+  <string name="important_notification_incoming_call_with_location">Belangrike inkomende oproep met ligging</string>
+  <string name="important_notification_incoming_call_with_photo_message">Belangrike inkomende oproep met foto en boodskap</string>
+  <string name="important_notification_incoming_call_with_photo_location">Belangrike inkomende oproep met foto en ligging</string>
+  <string name="important_notification_incoming_call_with_message_location">Belangrike inkomende oproep met boodskap en ligging</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Belangrike inkomende oproep met foto, boodskap en ligging</string>
+  <string name="important_notification_incoming_call_attachments">Belangrike inkomende oproep met aanhegsels</string>
+  <string name="notification_incoming_work_call">Inkomende werkoproep</string>
+  <string name="notification_incoming_spam_call">Inkomende verdagte strooipos-oproep</string>
+  <string name="notification_requesting_video_call">Inkomende videoversoek</string>
+  <string name="notification_action_answer">Antwoord</string>
+  <string name="notification_action_end_call">Lui af</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Aanvaar</string>
+  <string name="notification_action_dismiss">Wys af</string>
+  <string name="notification_action_speaker_on">Skakel luidspreker aan</string>
+  <string name="notification_action_speaker_off">Skakel luidspreker af</string>
+  <string name="notification_external_call">Voortgesette oproep op \'n ander toestel</string>
+  <string name="notification_external_video_call">Voortgesette video-oproep on \'n ander toestel</string>
+  <string name="notification_take_call">Neem oproep</string>
+  <string name="notification_take_video_call">Neem video-oproep</string>
+  <string name="incall_error_supp_service_unknown">Diens word nie gesteun nie.</string>
+  <string name="goPrivate">gaan privaat</string>
+  <string name="manageConferenceLabel">Bestuur konferensie-oproep</string>
+  <string name="child_number">via %s</string>
+  <string name="callFailed_simError">Geen SIM of SIM-fout</string>
+  <string name="conference_caller_disconnect_content_description">Beëindig oproep</string>
+  <string name="conference_call_name">Konferensie-oproep</string>
+  <string name="generic_conference_call_name">Besig met oproep</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Gaan voort met oproep deur mobiele data te gebruik ...</string>
+  <string name="video_call_lte_to_wifi_failed_title">Kon nie na Wi-Fi-netwerk oorskakel nie</string>
+  <string name="video_call_lte_to_wifi_failed_message">Video-oproep sal op mobiele netwerk bly. Standaard datakoste kan dalk geld.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Moenie dit weer wys nie</string>
+  <string name="bubble_return_to_call">Terug na oproep</string>
+  <string name="rtt_request_dialog_title">Sluit by RTT-oproep aan?</string>
+  <string name="rtt_request_dialog_details">%1$s wil boodskappe binne jou stemoproep gebruik.</string>
+  <string name="rtt_request_dialog_more_information">RTT help bellers wat doof of gehoorgestremd is, \'n spraakgestremdheid het, of meer as net spraak benodig.</string>
+  <string name="rtt_button_decline_request">Nee, dankie</string>
+  <string name="rtt_button_accept_request">Sluit by RTT aan</string>
 </resources>

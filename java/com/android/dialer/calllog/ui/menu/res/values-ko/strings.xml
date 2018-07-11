@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_details_menu_label">통화 세부정보</string>
+  <string name="delete">삭제</string>
+</resources>

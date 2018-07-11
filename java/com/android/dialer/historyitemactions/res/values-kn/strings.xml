@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">ಧ್ವನಿ ಕರೆ</string>
+  <string name="video_call">ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="add_to_contacts">ಸಂಪರ್ಕ ಸೇರಿಸಿ</string>
+  <string name="send_a_message">ಸಂದೇಶ</string>
+  <string name="not_spam">ಸ್ಪ್ಯಾಮ್‌ ಅಲ್ಲ</string>
+  <string name="block_number">ನಿರ್ಬಂಧಿಸಿ</string>
+  <string name="unblock_number">ನಿರ್ಬಂಧ ತೆಗೆಯಿರಿ</string>
+  <string name="block_and_optionally_report_spam">ಸ್ಪ್ಯಾಮ್ ನಿರ್ಬಂಧಿಸಿ/ವರದಿ ಮಾಡಿ</string>
+  <string name="copy_number">ಸಂಖ್ಯೆಯನ್ನು ನಕಲಿಸಿ</string>
+</resources>

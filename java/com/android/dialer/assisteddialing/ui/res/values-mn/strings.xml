@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Тусламжтай залгах</string>
+  <string name="assisted_dialing_setting_summary">Таныг гадаад оронд аялж байх үед урьдчилан таамаглаж улсын кодыг нэмнэ</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Автоматаар таньсан • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Автоматаар таньсан</string>
+  <string name="assisted_dialing_setting_cc_category_title">Эх орон</string>
+  <string name="assisted_dialing_setting_cc_title">Өгөгдмөл эх орон</string>
+</resources>

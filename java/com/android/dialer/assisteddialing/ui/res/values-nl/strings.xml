@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Ondersteund bellen</string>
+  <string name="assisted_dialing_setting_summary">Een landcode voorspellen en toevoegen wanneer je belt terwijl je in het buitenland bent</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automatisch gedetecteerd • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automatisch gedetecteerd</string>
+  <string name="assisted_dialing_setting_cc_category_title">Thuisland</string>
+  <string name="assisted_dialing_setting_cc_title">Standaard thuisland</string>
+</resources>
