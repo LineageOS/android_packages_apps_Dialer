@@ -25,7 +25,7 @@
       android:entries="@array/contact_sort_order_entries"
       android:entryValues="@array/contact_sort_order_values"
       android:title="@string/display_options_sort_list_by"
-      android:defaultValue="1"/>
+      android:defaultValue="@string/display_options_sort_by_given_name_value"/>
 
   <ListPreference
       android:dialogTitle="@string/display_options_view_names_as"
@@ -34,6 +34,6 @@
       android:entries="@array/contact_display_order_entries"
       android:entryValues="@array/contact_display_order_values"
       android:title="@string/display_options_view_names_as"
-      android:defaultValue="1"/>
+      android:defaultValue="@string/display_options_view_given_name_first_value"/>
 
 </PreferenceScreen>
