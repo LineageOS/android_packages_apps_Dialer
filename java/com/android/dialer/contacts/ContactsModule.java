@@ -16,22 +16,35 @@
 
 package com.android.dialer.contacts;
 
+import android.content.Context;
+import android.os.UserManager;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferencesImpl;
+import com.android.dialer.contacts.displaypreference.ContactDisplayPreferencesStub;
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequesterImpl;
+import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.inject.DialerVariant;
 import com.android.dialer.inject.InstallIn;
 import dagger.Binds;
+import dagger.Lazy;
 import dagger.Module;
+import dagger.Provides;
 
 /** Module for standard {@link ContactsComponent} */
 @InstallIn(variants = {DialerVariant.DIALER_TEST})
 @Module
 public abstract class ContactsModule {
-  @Binds
-  public abstract ContactDisplayPreferences toContactDisplayPreferencesImpl(
-      ContactDisplayPreferencesImpl impl);
+  @Provides
+  public static ContactDisplayPreferences provideContactDisplayPreferences(
+      @ApplicationContext Context appContext,
+      Lazy<ContactDisplayPreferencesImpl> impl,
+      ContactDisplayPreferencesStub stub) {
+    if (appContext.getSystemService(UserManager.class).isUserUnlocked()) {
+      return impl.get();
+    }
+    return stub;
+  }
 
   @Binds
   public abstract HighResolutionPhotoRequester toHighResolutionPhotoRequesterImpl(
