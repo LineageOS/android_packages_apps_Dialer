@@ -427,6 +427,11 @@ public class CallButtonPresenter
       return;
     }
 
+    if (call != null) {
+      inCallButtonUi.updateInCallButtonUiColors(
+          InCallPresenter.getInstance().getThemeColorManager().getSecondaryColor());
+    }
+
     final boolean isEnabled =
         state.isConnectingOrConnected() && !state.isIncoming() && call != null;
     inCallButtonUi.setEnabled(isEnabled);

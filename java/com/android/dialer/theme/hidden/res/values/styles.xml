@@ -51,6 +51,7 @@
   <!-- Used to style all Dialer's AlertDialogs. Every button is awarded this for free if the parent
      activity's theme extends from Dialer.ThemeBase(.NoActionBar) or doesn't specify a theme. -->
   <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
     <!-- TODO(a bug): figure out why ?android:attr/colorPrimary doesn't work here -->
     <item name="android:colorAccent">@color/dialer_theme_color</item>
     <item name="colorAccent">@color/dialer_theme_color</item>
