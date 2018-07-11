@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Tālrunis"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Vai sūtīt tālāk norādītos signālus?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Jā"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Nē"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Notiek numura sastādīšana"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Pašreizējā saruna"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Notiekošs videozvans"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Notiekošs videozvans — video apturēts"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Notiekošs darba zvans"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Notiekošs <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Ienākošs <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi zvans"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Wi‑Fi darba zvans"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Aizturēts"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Ienākošais zvans"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Ienākošais zvans ar fotoattēlu"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Ienākošais zvans ar ziņojumu"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Ienākošais zvans ar atrašanās vietu"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Ienākošais zvans ar fotoattēlu un ziņojumu"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Ienākošais zvans ar fotoattēlu un atrašanās vietu"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Ienākošais zvans ar ziņojumu un atrašanās vietu"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Zvans ar fotoattēlu, ziņojumu un atrašanās vietu"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Ienākošais zvans ar pielikumiem"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Svarīgs ienākošais zvans"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Svarīgs ienākošais zvans ar fotoattēlu"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Svarīgs ienākošais zvans ar ziņojumu"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Svarīgs ienākošais zvans ar atrašanās vietu"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Svarīgs ienākošais zvans ar fotoattēlu un ziņojumu"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Svarīgs zvans ar fotoattēlu un atrašanās vietu"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Svarīgs zvans ar ziņojumu un atrašanās vietu"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Zvans ar fotoattēlu, ziņojumu un atrašanās vietu"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Svarīgs ienākošais zvans ar pielikumiem"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Ienākošs darba zvans"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Ienākošs, iespējams, nevēlams zvans"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Ienākošs video pieprasījums"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Atbildēt"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Pārtraukt"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Pieņemt"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Noraidīt"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Ieslēgt skaļruni"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Izslēgt skaļruni"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Notiekošs zvans citā ierīcē"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Notiekošs videozvans citā ierīcē"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Pārsūtīt zvanu"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Pārsūtīt videozvanu"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Pakalpojums netiek atbalstīts."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"pārslēgt uz privāto režīmu"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Pārvaldīt konferences zvanu"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Ārkārtas numurs"</string>
-    <string name="child_number" msgid="3398257437107259682">"no numura <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Nav SIM, vai SIM kļūda"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Beigt zvanu"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konferences zvans"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Notiek zvans"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Zvans tiek turpināts, izmantojot mobilos datus…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Nevarēja pārslēgt uz Wi-Fi tīklu"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Videozvans tiks turpināts mobilo sakaru tīklā. Var tikt piemērota standarta maksa par datu pārraidi."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Vairs nerādīt šo ziņojumu"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Vai sūtīt tālāk norādītos signālus?\n</string>
+  <string name="pause_prompt_yes">Jā</string>
+  <string name="pause_prompt_no">Nē</string>
+  <string name="notification_dialing">Notiek numura sastādīšana</string>
+  <string name="notification_ongoing_call">Pašreizējā saruna</string>
+  <string name="notification_ongoing_video_call">Notiekošs videozvans</string>
+  <string name="notification_ongoing_paused_video_call">Notiekošs videozvans — video apturēts</string>
+  <string name="notification_ongoing_work_call">Notiekošs darba zvans</string>
+  <string name="notification_ongoing_call_wifi_template">Notiekošs %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Ienākošs %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi zvans</string>
+  <string name="notification_call_wifi_work_brand">Wi‑Fi darba zvans</string>
+  <string name="notification_on_hold">Aizturēts</string>
+  <string name="notification_incoming_call">Ienākošais zvans</string>
+  <string name="notification_incoming_video_call">Ienākošs videozvans</string>
+  <string name="notification_incoming_call_mutli_sim">Ienākošs zvans, izmantojot: %1$s</string>
+  <string name="notification_incoming_call_with_photo">Ienākošais zvans ar fotoattēlu</string>
+  <string name="notification_incoming_call_with_message">Ienākošais zvans ar ziņojumu</string>
+  <string name="notification_incoming_call_with_location">Ienākošais zvans ar atrašanās vietu</string>
+  <string name="notification_incoming_call_with_photo_message">Ienākošais zvans ar fotoattēlu un ziņojumu</string>
+  <string name="notification_incoming_call_with_photo_location">Ienākošais zvans ar fotoattēlu un atrašanās vietu</string>
+  <string name="notification_incoming_call_with_message_location">Ienākošais zvans ar ziņojumu un atrašanās vietu</string>
+  <string name="notification_incoming_call_with_photo_message_location">Zvans ar fotoattēlu, ziņojumu un atrašanās vietu</string>
+  <string name="notification_incoming_call_attachments">Ienākošais zvans ar pielikumiem</string>
+  <string name="important_notification_incoming_call">Svarīgs ienākošais zvans</string>
+  <string name="important_notification_incoming_call_with_photo">Svarīgs ienākošais zvans ar fotoattēlu</string>
+  <string name="important_notification_incoming_call_with_message">Svarīgs ienākošais zvans ar ziņojumu</string>
+  <string name="important_notification_incoming_call_with_location">Svarīgs ienākošais zvans ar atrašanās vietu</string>
+  <string name="important_notification_incoming_call_with_photo_message">Svarīgs ienākošais zvans ar fotoattēlu un ziņojumu</string>
+  <string name="important_notification_incoming_call_with_photo_location">Svarīgs zvans ar fotoattēlu un atrašanās vietu</string>
+  <string name="important_notification_incoming_call_with_message_location">Svarīgs zvans ar ziņojumu un atrašanās vietu</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Zvans ar fotoattēlu, ziņojumu un atrašanās vietu</string>
+  <string name="important_notification_incoming_call_attachments">Svarīgs ienākošais zvans ar pielikumiem</string>
+  <string name="notification_incoming_work_call">Ienākošs darba zvans</string>
+  <string name="notification_incoming_spam_call">Ienākošs, iespējams, nevēlams zvans</string>
+  <string name="notification_requesting_video_call">Ienākošs video pieprasījums</string>
+  <string name="notification_action_answer">Atbildēt</string>
+  <string name="notification_action_end_call">Pārtraukt</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Pieņemt</string>
+  <string name="notification_action_dismiss">Noraidīt</string>
+  <string name="notification_action_speaker_on">Ieslēgt skaļruni</string>
+  <string name="notification_action_speaker_off">Izslēgt skaļruni</string>
+  <string name="notification_external_call">Notiekošs zvans citā ierīcē</string>
+  <string name="notification_external_video_call">Notiekošs videozvans citā ierīcē</string>
+  <string name="notification_take_call">Pārsūtīt zvanu</string>
+  <string name="notification_take_video_call">Pārsūtīt videozvanu</string>
+  <string name="incall_error_supp_service_unknown">Pakalpojums netiek atbalstīts.</string>
+  <string name="goPrivate">pārslēgt uz privāto režīmu</string>
+  <string name="manageConferenceLabel">Pārvaldīt konferences zvanu</string>
+  <string name="child_number">no numura %s</string>
+  <string name="callFailed_simError">Nav SIM, vai SIM kļūda</string>
+  <string name="conference_caller_disconnect_content_description">Beigt zvanu</string>
+  <string name="conference_call_name">Konferences zvans</string>
+  <string name="generic_conference_call_name">Notiek zvans</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Zvans tiek turpināts, izmantojot mobilos datus…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Nevarēja pārslēgt uz Wi-Fi tīklu</string>
+  <string name="video_call_lte_to_wifi_failed_message">Videozvans tiks turpināts mobilo sakaru tīklā. Var tikt piemērota standarta maksa par datu pārraidi.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Vairs nerādīt šo ziņojumu</string>
+  <string name="bubble_return_to_call">Atpakaļ pie zvana</string>
+  <string name="rtt_request_dialog_title">Vai pievienoties RTT zvanam?</string>
+  <string name="rtt_request_dialog_details">%1$s vēlas izmantot ziņojumapmaiņu jūsu balss zvanā.</string>
+  <string name="rtt_request_dialog_more_information">RTT funkcionalitāte palīdz nedzirdīgiem un vājdzirdīgiem zvanītājiem, kā arī zvanītājiem, kuriem ir runas traucējumi vai ir nepieciešama ne tikai balss skaņa.</string>
+  <string name="rtt_button_decline_request">Nē, paldies</string>
+  <string name="rtt_button_accept_request">Pievienoties RTT</string>
 </resources>

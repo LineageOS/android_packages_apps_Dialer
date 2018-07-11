@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">要屏蔽 %1$s 吗？</string>
+  <string name="block_number_confirmation_message_new_filtering">您将不会再收到此号码的来电或短信。</string>
+  <string name="block_number_ok">屏蔽</string>
+  <string name="unblock_number_ok">取消屏蔽</string>
+  <string name="block_report_number_alert_title">要屏蔽 %1$s 吗？</string>
+  <string name="block_report_number_alert_details">您将不会再收到此号码的来电。</string>
+  <string name="block_number_alert_details">%1$s此次来电将被举报为骚扰电话。</string>
+  <string name="unblock_number_alert_details">系统将取消屏蔽此号码，并停止将其列为骚扰电话号码。此号码日后的来电不会再被识别为骚扰电话。</string>
+  <string name="unblock_report_number_alert_title">要取消屏蔽 %1$s 吗？</string>
+  <string name="report_not_spam_alert_button">报告</string>
+  <string name="report_not_spam_alert_title">要报告错误吗？</string>
+  <string name="report_not_spam_alert_details">系统不会再将 %1$s 日后的来电识别为骚扰电话。</string>
+  <string name="checkbox_report_as_spam_action">举报为骚扰电话号码</string>
+  <string name="block_number_failed_toast">屏蔽此号码时出现问题</string>
+  <string name="unblock_number_failed_toast">取消屏蔽此号码时出现问题</string>
+</resources>

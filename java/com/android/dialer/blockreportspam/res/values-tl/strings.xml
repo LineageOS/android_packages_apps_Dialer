@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">I-block ang %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Hindi ka na makakatanggap ng mga tawag o text mula sa numerong ito.</string>
+  <string name="block_number_ok">I-BLOCK</string>
+  <string name="unblock_number_ok">I-UNBLOCK</string>
+  <string name="block_report_number_alert_title">I-block ang %1$s?</string>
+  <string name="block_report_number_alert_details">Hindi ka na makakatanggap ng mga tawag mula sa numerong ito.</string>
+  <string name="block_number_alert_details">%1$s Iuulat ang tawag na ito bilang spam.</string>
+  <string name="unblock_number_alert_details">Ia-unblock ang numerong ito at iuulat na di spam. Di kikilalaning spam ang darating na tawag.</string>
+  <string name="unblock_report_number_alert_title">I-unblock ang %1$s?</string>
+  <string name="report_not_spam_alert_button">Iulat</string>
+  <string name="report_not_spam_alert_title">Iulat ang isang pagkakamali?</string>
+  <string name="report_not_spam_alert_details">Ang mga tawag sa hinaharap mula sa %1$s ay hindi na kikilalanin bilang spam.</string>
+  <string name="checkbox_report_as_spam_action">Iulat ang tawag bilang spam</string>
+  <string name="block_number_failed_toast">Nagkakaproblema sa pag-block ng numerong ito</string>
+  <string name="unblock_number_failed_toast">Nagkakaproblema sa pag-unblock ng numerong ito</string>
+</resources>

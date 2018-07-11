@@ -1,53 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"수신 전화"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"수신 전화가 다른 기기로 전환됨"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"발신 전화"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"발신 전화가 다른 기기로 전환됨"</string>
-    <string name="type_missed" msgid="2997043831022028176">"부재중 전화"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"수신 화상 통화"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"수신 화상 통화가 다른 기기로 전환됨"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"발신 화상 통화"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"발신 화상 통화가 다른 기기로 전환됨"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"부재중 화상 통화"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"음성사서함"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"거부된 통화"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"차단된 통화"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"분"</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"초"</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g><xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g><xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g><xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="other">초</item>
-      <item quantity="one">초</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="other">분</item>
-      <item quantity="one">분</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"다른 기기에서 전화를 받음"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> 계정"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"<xliff:g id="NUMBER">%1$s</xliff:g>번으로 수신"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g>에서 <xliff:g id="NUMBER">%2$s</xliff:g>번으로 수신"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"음성사서함"</string>
-    <string name="now" msgid="2599778506439006806">"조금 전"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">수신 전화</string>
+  <string name="type_incoming_pulled">수신 전화가 다른 기기로 전환됨</string>
+  <string name="type_outgoing">발신 전화</string>
+  <string name="type_outgoing_pulled">발신 전화가 다른 기기로 전환됨</string>
+  <string name="type_missed">부재중 전화</string>
+  <string name="type_incoming_video">수신 화상 통화</string>
+  <string name="type_incoming_video_pulled">수신 화상 통화가 다른 기기로 전환됨</string>
+  <string name="type_outgoing_video">발신 화상 통화</string>
+  <string name="type_outgoing_video_pulled">발신 화상 통화가 다른 기기로 전환됨</string>
+  <string name="type_missed_video">부재중 화상 통화</string>
+  <string name="type_voicemail">음성사서함</string>
+  <string name="type_rejected">거부된 통화</string>
+  <string name="type_blocked">차단된 통화</string>
+  <string name="call_details_minutes_abbreviation">분</string>
+  <string name="call_details_seconds_abbreviation">초</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s\'%2$s\' %3$s\'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s\'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">초</item>
+    <item quantity="other">초</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">분</item>
+    <item quantity="other">분</item>
+  </plurals>
+  <string name="type_answered_elsewhere">다른 기기에서 전화를 받음</string>
+  <string name="description_phone_account">^1 계정</string>
+  <string name="description_via_number">%1$s번으로 수신</string>
+  <string name="description_via_number_phone_account">%1$s에서 %2$s번으로 수신</string>
+  <string name="voicemail_string">음성사서함</string>
+  <string name="just_now">조금 전</string>
+  <string name="new_call_log_carrier_video">이동통신사 동영상</string>
+  <string name="new_call_log_duo_video">Duo 동영상</string>
+  <string name="new_call_log_unknown">알 수 없음</string>
+  <string name="new_call_log_secondary_blocked">차단됨</string>
+  <string name="new_call_log_secondary_spam">스팸</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">^2님의 부재중 전화가 ^1건 있습니다</item>
+    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님의 부재중 전화입니다</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">^2님이 걸어서 받은 전화가 ^1건 있습니다</item>
+    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님이 걸어서 받은 전화입니다</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one">^2님에게 건 전화가 ^1건 있습니다</item>
+    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님에게 건 전화입니다</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">^2님이 걸었지만 차단된 전화가 ^1건 있습니다</item>
+    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님이 걸었지만 차단된 전화입니다</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">전화 계정: ^1,
+    전화번호: ^2</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

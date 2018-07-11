@@ -1,53 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"आगमन कल"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"आगमन कललाई अर्को यन्त्रमा स्थानान्तरण गरियो"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"बहिर्गमन कल"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"बहिर्गमन कललाई अर्को यन्त्रमा स्थानान्तरण गरियो"</string>
-    <string name="type_missed" msgid="2997043831022028176">"छुटेको कल"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"आगमन भिडियो कल"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"आगमन भिडियो कललाई अर्को यन्त्रमा हस्तान्तरण गरियो"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"बहिर्गमन भिडियो कल"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"बहिर्गमन भिडियो कललाई अर्को यन्त्रमा हस्तान्तरण गरियो"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"छुटेको भिडियो कल"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"भ्वाइस मेल"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"अस्वीकार गरिएको कल"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"रोक्का गरिएको कल"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"मिनेट"</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"सेकेन्ड"</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="other">सेकेन्ड</item>
-      <item quantity="one">सेकेन्ड</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="other">मिनेट</item>
-      <item quantity="one">मिनेट</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"कलको जवाफ अर्को यन्त्रमा फर्काइयो"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"<xliff:g id="PHONEACCOUNT">^1</xliff:g> मा"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"<xliff:g id="NUMBER">%1$s</xliff:g> मार्फत"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> मा, <xliff:g id="NUMBER">%2$s</xliff:g> मार्फत"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"भ्वाइस मेल"</string>
-    <string name="now" msgid="2599778506439006806">"अहिले भर्खरै"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">आगमन कल</string>
+  <string name="type_incoming_pulled">आगमन कललाई अर्को यन्त्रमा स्थानान्तरण गरियो</string>
+  <string name="type_outgoing">बहिर्गमन कल</string>
+  <string name="type_outgoing_pulled">बहिर्गमन कललाई अर्को यन्त्रमा स्थानान्तरण गरियो</string>
+  <string name="type_missed">छुटेको कल</string>
+  <string name="type_incoming_video">आगमन भिडियो कल</string>
+  <string name="type_incoming_video_pulled">आगमन भिडियो कललाई अर्को यन्त्रमा हस्तान्तरण गरियो</string>
+  <string name="type_outgoing_video">बहिर्गमन भिडियो कल</string>
+  <string name="type_outgoing_video_pulled">बहिर्गमन भिडियो कललाई अर्को यन्त्रमा हस्तान्तरण गरियो</string>
+  <string name="type_missed_video">छुटेको भिडियो कल</string>
+  <string name="type_voicemail">भ्वाइस मेल</string>
+  <string name="type_rejected">अस्वीकार गरिएको कल</string>
+  <string name="type_blocked">रोक्का गरिएको कल</string>
+  <string name="call_details_minutes_abbreviation">मिनेट</string>
+  <string name="call_details_seconds_abbreviation">सेकेन्ड</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s\'%2$s\' %3$s\'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s\'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">सेकेन्ड</item>
+    <item quantity="other">सेकेन्ड</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">मिनेट</item>
+    <item quantity="other">मिनेट</item>
+  </plurals>
+  <string name="type_answered_elsewhere">कलको जवाफ अर्को यन्त्रमा फर्काइयो</string>
+  <string name="description_phone_account">^1 मा</string>
+  <string name="description_via_number">%1$s मार्फत</string>
+  <string name="description_via_number_phone_account">%1$s मा, %2$s मार्फत</string>
+  <string name="voicemail_string">भ्वाइस मेल</string>
+  <string name="just_now">भर्खरै</string>
+  <string name="new_call_log_carrier_video">सेवा प्रदायकको भिडियो कल</string>
+  <string name="new_call_log_duo_video">Duo को भिडियो कल</string>
+  <string name="new_call_log_unknown">अज्ञात</string>
+  <string name="new_call_log_secondary_blocked">रोक लगाइएको नम्बर</string>
+  <string name="new_call_log_secondary_spam">स्प्याम</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">^2 को ^1 छुटेको कल</item>
+    <item quantity="other">^1 कलहरू, पछिल्लो कल ^2 को छुटेको कल हो</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">^2 को जवाफस्वरूप दिइएको ^1 कल</item>
+    <item quantity="other">^1 कलहरू, पछिल्लो कल ^2 को जवाफस्वरूप दिइएको कल हो</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one"> ^2 ले गरेको ^1 बहिर्गमन कल</item>
+    <item quantity="other">^1 कलहरू, पछिल्लो कल ^2 ले गरेको बहिर्गमन कल हो</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">^2 ले रोक लगाएको ^1 कल</item>
+    <item quantity="other">^1 कलहरू, पछिल्लो कल ^2 ले रोक लगाएको कल हो</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">^1 मा, ^2 मार्फत</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2।</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3।</string>
 </resources>

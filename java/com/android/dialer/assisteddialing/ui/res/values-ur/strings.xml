@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">معاون ڈائلنگ</string>
+  <string name="assisted_dialing_setting_summary">بیرون ملک سفر کرتے وقت جب آپ کال کریں تو ملکی کوڈ کی پیشنگوئی کریں اور شامل کریں</string>
+  <string name="assisted_dialing_setting_cc_default_summary">خودکار طور منتخب شدہ • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">خودکار طور منتخب شدہ</string>
+  <string name="assisted_dialing_setting_cc_category_title">آبائی ملک</string>
+  <string name="assisted_dialing_setting_cc_title">ڈیفالٹ آبائی ملک</string>
+</resources>

@@ -1,164 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"טקסט שהועתק"</string>
-    <string name="call_custom" msgid="3041673234638990874">"התקשר אל <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"התקשר לבית"</string>
-    <string name="call_mobile" msgid="967589404494150813">"התקשר לנייד"</string>
-    <string name="call_work" msgid="6040550697395300892">"התקשר לעבודה"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"התקשר לפקס בעבודה"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"התקשר לפקס בבית"</string>
-    <string name="call_pager" msgid="6814149227741274161">"התקשר לזימונית"</string>
-    <string name="call_other" msgid="5536385588712587235">"התקשר"</string>
-    <string name="call_callback" msgid="6314019862718112786">"התקשר למספר להתקשרות חזרה"</string>
-    <string name="call_car" msgid="3197417098027764954">"התקשר למספר במכונית"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"התקשר למספר הראשי של החברה"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"‏התקשר ל-ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"התקשר למספר הראשי"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"התקשר לפקס"</string>
-    <string name="call_radio" msgid="8942441419845057942">"התקשר לרדיו"</string>
-    <string name="call_telex" msgid="2031514461660668351">"התקשר לטלקס"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"‏התקשר ל-TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"התקשר לנייד של העבודה"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"התקשר לזימונית של העבודה"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"התקשר אל <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"‏התקשר ל-MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"שלח הודעת טקסט אל <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"שלח הודעת טקסט לבית"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"שלח הודעת טקסט לנייד"</string>
-    <string name="sms_work" msgid="4158595439553450966">"שלח הודעת טקסט לעבודה"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"שלח הודעת טקסט לפקס בעבודה"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"שלח הודעת טקסט לפקס בבית"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"שלח הודעת טקסט לזימונית"</string>
-    <string name="sms_other" msgid="1742702947993285933">"שלח הודעת טקסט"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"שלח הודעת טקסט למספר להתקשרות חזרה"</string>
-    <string name="sms_car" msgid="4314577266154395174">"שלח הודעת טקסט למספר במכונית"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"שלח הודעת טקסט למספר הראשי של החברה"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"‏שלח הודעת טקסט ל-ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"שלח הודעת טקסט למספר הראשי"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"שלח הודעת טקסט לפקס"</string>
-    <string name="sms_radio" msgid="855555176531704682">"שלח הודעת טקסט לרדיו"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"שלח הודעת טקסט לטלקס"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"‏שלח הודעת טקסט ל-TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"שלח הודעת טקסט לנייד של עבודה"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"שלח הודעת טקסט לזימונית של עבודה"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"שלח הודעת טקסט אל <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"‏שלח הודעת טקסט ל-MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"האם למחוק אנשי קשר קבועים?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"הפעולה הזו תמחק מהאפליקציות \'אנשים\' ו\'טלפון\' את רשימת אנשי הקשר שאיתם אתה יוצר קשר בתדירות גבוהה, ויהיה עליך ללמד מחדש את אפליקציות האימייל את הכתובות המועדפות עליך."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"מוחק אנשי קשר קבועים…"</string>
-    <string name="status_available" msgid="2648156525685472626">"זמין"</string>
-    <string name="status_away" msgid="2298688367552893953">"לא נמצא"</string>
-    <string name="status_busy" msgid="5990832098713248503">"לא פנוי"</string>
-    <string name="contactsList" msgid="8806067891419291513">"אנשי קשר"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"הצעות מובילות"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"אחר"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"ספריה"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"ספריית עבודה"</string>
-    <string name="local_search_label" msgid="907622822323119235">"כל אנשי הקשר"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"הצעות"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"אני"</string>
-    <string name="missing_name" msgid="978606963362745020">"(ללא שם)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"הצג איש קשר"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"כל אנשי הקשר עם מספרי טלפון"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"אנשי הקשר של פרופיל העבודה"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"הצג עדכונים"</string>
-    <string name="account_phone" msgid="7067809073194061035">"במכשיר בלבד, ללא סנכרון"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"שם"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"כינוי"</string>
-    <string name="full_name" msgid="648186563998465740">"שם"</string>
-    <string name="name_given" msgid="5096576006314820536">"שם פרטי"</string>
-    <string name="name_family" msgid="6646235805198547467">"שם משפחה"</string>
-    <string name="name_prefix" msgid="9215326539658838">"תחילית שם"</string>
-    <string name="name_middle" msgid="703755205331582769">"שם אמצעי"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"סיומת שם"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"שם פונטי"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"שם פרטי פונטי"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"שם אמצעי פונטי"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"שם משפחה פונטי"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"טלפון"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"שלח אימייל"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"כתובת"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"הודעות מיידיות"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"ארגון"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"קשר"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"תאריך מיוחד"</string>
-    <string name="sms" msgid="7574344928185328095">"הודעת טקסט"</string>
-    <string name="postal_address" msgid="1804707930129674200">"כתובת"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"חברה"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"תפקיד"</string>
-    <string name="label_notes" msgid="2050255313694219786">"הערות"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"אתר"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"קבוצות"</string>
-    <string name="email_home" msgid="889830029388962171">"שלח אימייל לבית"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"שלח אימייל לנייד"</string>
-    <string name="email_work" msgid="4223487303344613528">"שלח אימייל לעבודה"</string>
-    <string name="email_other" msgid="4246411900126012062">"שלח אימייל"</string>
-    <string name="email_custom" msgid="7246580894327511013">"שלח אימייל אל <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"שלח אימייל"</string>
-    <string name="postal_street" msgid="6918171741240802474">"רחוב"</string>
-    <string name="postal_city" msgid="8674569121430005628">"עיר"</string>
-    <string name="postal_region" msgid="1730369286225469192">"מדינה"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"מיקוד"</string>
-    <string name="postal_country" msgid="232670707458768148">"מדינה"</string>
-    <string name="map_home" msgid="4181131107392126938">"הצג כתובת בית"</string>
-    <string name="map_work" msgid="5723471185992684400">"הצג כתובת עבודה"</string>
-    <string name="map_other" msgid="2253764780863500516">"הצג כתובת"</string>
-    <string name="map_custom" msgid="5581743097882436157">"הצג כתובת <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"‏שוחח בצ\'אט באמצעות AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"‏שוחח בצ\'אט באמצעות Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"‏שוחח בצ\'אט באמצעות Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"‏שוחח בצ\'אט באמצעות Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"‏שוחח בצ\'אט באמצעות QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"‏שוחח בצ\'אט באמצעות Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"‏שוחח בצ\'אט באמצעות ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"‏שוחח בצ\'אט באמצעות Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"צ\'אט"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"כל אנשי הקשר"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"אנשי קשר ב-<xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"אנשי קשר בתצוגה מותאמת אישית"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"איש קשר יחיד"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"מיון לפי"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"שם פרטי"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"שם משפחה"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"פורמט השם"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"שם פרטי יופיע ראשון"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"שם משפחה יופיע ראשון"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"מחק אנשי קשר קבועים"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"הפסק לחפש"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"נקה חיפוש"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"חשבון"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"השתמש תמיד עבור שיחות"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"התקשר באמצעות"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"התקשר עם הערה"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"הקלד הערה לשליחה עם השיחה..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"שלח והתקשר"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"‎<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>‎"</string>
-    <string name="tab_title" msgid="3387876802026074288">"הכרטיסייה <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="two">הכרטיסייה <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> פריטים שלא נקראו. </item>
-      <item quantity="many">הכרטיסייה <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> פריטים שלא נקראו. </item>
-      <item quantity="other">הכרטיסייה <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> פריטים שלא נקראו. </item>
-      <item quantity="one">הכרטיסייה <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> פריט שלא נקרא. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"שיחת וידאו"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"שיתוף והתקשרות"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">התקשר אל %s</string>
+  <string name="call_home">התקשר לבית</string>
+  <string name="call_mobile">התקשר לנייד</string>
+  <string name="call_work">התקשר לעבודה</string>
+  <string name="call_fax_work">התקשר לפקס בעבודה</string>
+  <string name="call_fax_home">התקשר לפקס בבית</string>
+  <string name="call_pager">התקשר לזימונית</string>
+  <string name="call_other">התקשר</string>
+  <string name="call_callback">התקשר למספר להתקשרות חזרה</string>
+  <string name="call_car">התקשר למספר במכונית</string>
+  <string name="call_company_main">התקשר למספר הראשי של החברה</string>
+  <string name="call_isdn">‏התקשר ל-ISDN</string>
+  <string name="call_main">התקשר למספר הראשי</string>
+  <string name="call_other_fax">התקשר לפקס</string>
+  <string name="call_radio">התקשר לרדיו</string>
+  <string name="call_telex">התקשר לטלקס</string>
+  <string name="call_tty_tdd">‏התקשר ל-TTY/TDD</string>
+  <string name="call_work_mobile">התקשר לנייד של העבודה</string>
+  <string name="call_work_pager">התקשר לזימונית של העבודה</string>
+  <string name="call_assistant">התקשר אל %s</string>
+  <string name="call_mms">‏התקשר ל-MMS</string>
+  <string name="sms_custom">שלח הודעת טקסט אל %s</string>
+  <string name="sms_home">שלח הודעת טקסט לבית</string>
+  <string name="sms_mobile">שלח הודעת טקסט לנייד</string>
+  <string name="sms_work">שלח הודעת טקסט לעבודה</string>
+  <string name="sms_fax_work">שלח הודעת טקסט לפקס בעבודה</string>
+  <string name="sms_fax_home">שלח הודעת טקסט לפקס בבית</string>
+  <string name="sms_pager">שלח הודעת טקסט לזימונית</string>
+  <string name="sms_other">שלח הודעת טקסט</string>
+  <string name="sms_callback">שלח הודעת טקסט למספר להתקשרות חזרה</string>
+  <string name="sms_car">שלח הודעת טקסט למספר במכונית</string>
+  <string name="sms_company_main">שלח הודעת טקסט למספר הראשי של החברה</string>
+  <string name="sms_isdn">‏שלח הודעת טקסט ל-ISDN</string>
+  <string name="sms_main">שלח הודעת טקסט למספר הראשי</string>
+  <string name="sms_other_fax">שלח הודעת טקסט לפקס</string>
+  <string name="sms_radio">שלח הודעת טקסט לרדיו</string>
+  <string name="sms_telex">שלח הודעת טקסט לטלקס</string>
+  <string name="sms_tty_tdd">‏שלח הודעת טקסט ל-TTY/TDD</string>
+  <string name="sms_work_mobile">שלח הודעת טקסט לנייד של עבודה</string>
+  <string name="sms_work_pager">שלח הודעת טקסט לזימונית של עבודה</string>
+  <string name="sms_assistant">שלח הודעת טקסט אל %s</string>
+  <string name="sms_mms">‏שלח הודעת טקסט ל-MMS</string>
+  <string name="clearFrequentsConfirmation_title">האם למחוק אנשי קשר קבועים?</string>
+  <string name="clearFrequentsConfirmation">הפעולה הזו תמחק מהאפליקציות \'אנשים\' ו\'טלפון\' את רשימת אנשי הקשר שאיתם אתה יוצר קשר בתדירות גבוהה, ויהיה עליך ללמד מחדש את אפליקציות האימייל את הכתובות המועדפות עליך.</string>
+  <string name="clearFrequentsProgress_title">מוחק אנשי קשר קבועים…</string>
+  <string name="status_available">זמין</string>
+  <string name="status_away">לא נמצא</string>
+  <string name="status_busy">לא פנוי</string>
+  <string name="contactsList">אנשי קשר</string>
+  <string name="contact_suggestions">הצעות מובילות</string>
+  <string name="local_invisible_directory">אחר</string>
+  <string name="directory_search_label">ספריה</string>
+  <string name="directory_search_label_work">ספריית עבודה</string>
+  <string name="local_search_label">כל אנשי הקשר</string>
+  <string name="local_suggestions_search_label">הצעות</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">אני</string>
+  <string name="missing_name">(ללא שם)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">הצג איש קשר</string>
+  <string name="list_filter_phones">כל אנשי הקשר עם מספרי טלפון</string>
+  <string name="list_filter_phones_work">אנשי הקשר של פרופיל העבודה</string>
+  <string name="view_updates_from_group">הצג עדכונים</string>
+  <string name="account_phone">במכשיר בלבד, ללא סנכרון</string>
+  <string name="nameLabelsGroup">שם</string>
+  <string name="nicknameLabelsGroup">כינוי</string>
+  <string name="full_name">שם</string>
+  <string name="name_given">שם פרטי</string>
+  <string name="name_family">שם משפחה</string>
+  <string name="name_prefix">תחילית שם</string>
+  <string name="name_middle">שם אמצעי</string>
+  <string name="name_suffix">סיומת שם</string>
+  <string name="name_phonetic">שם פונטי</string>
+  <string name="name_phonetic_given">שם פרטי פונטי</string>
+  <string name="name_phonetic_middle">שם אמצעי פונטי</string>
+  <string name="name_phonetic_family">שם משפחה פונטי</string>
+  <string name="phoneLabelsGroup">טלפון</string>
+  <string name="emailLabelsGroup">שלח אימייל</string>
+  <string name="postalLabelsGroup">כתובת</string>
+  <string name="imLabelsGroup">הודעות מיידיות</string>
+  <string name="organizationLabelsGroup">ארגון</string>
+  <string name="relationLabelsGroup">קשר</string>
+  <string name="eventLabelsGroup">תאריך מיוחד</string>
+  <string name="sms">הודעת טקסט</string>
+  <string name="postal_address">כתובת</string>
+  <string name="ghostData_company">חברה</string>
+  <string name="ghostData_title">תפקיד</string>
+  <string name="label_notes">הערות</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">אתר</string>
+  <string name="groupsLabel">קבוצות</string>
+  <string name="email_home">שלח אימייל לבית</string>
+  <string name="email_mobile">שלח אימייל לנייד</string>
+  <string name="email_work">שלח אימייל לעבודה</string>
+  <string name="email_other">שלח אימייל</string>
+  <string name="email_custom">שלח אימייל אל %s</string>
+  <string name="email">שלח אימייל</string>
+  <string name="postal_street">רחוב</string>
+  <string name="postal_city">עיר</string>
+  <string name="postal_region">מדינה</string>
+  <string name="postal_postcode">מיקוד</string>
+  <string name="postal_country">מדינה</string>
+  <string name="map_home">הצג כתובת בית</string>
+  <string name="map_work">הצג כתובת עבודה</string>
+  <string name="map_other">הצג כתובת</string>
+  <string name="map_custom">הצג כתובת %s</string>
+  <string name="chat_aim">‏שוחח בצ\'אט באמצעות AIM</string>
+  <string name="chat_msn">‏שוחח בצ\'אט באמצעות Windows Live</string>
+  <string name="chat_yahoo">‏שוחח בצ\'אט באמצעות Yahoo</string>
+  <string name="chat_skype">‏שוחח בצ\'אט באמצעות Skype</string>
+  <string name="chat_qq">‏שוחח בצ\'אט באמצעות QQ</string>
+  <string name="chat_gtalk">‏שוחח בצ\'אט באמצעות Google Talk</string>
+  <string name="chat_icq">‏שוחח בצ\'אט באמצעות ICQ</string>
+  <string name="chat_jabber">‏שוחח בצ\'אט באמצעות Jabber</string>
+  <string name="chat">צ\'אט</string>
+  <string name="list_filter_all_accounts">כל אנשי הקשר</string>
+  <string name="listAllContactsInAccount">אנשי קשר ב-%s</string>
+  <string name="listCustomView">אנשי קשר בתצוגה מותאמת אישית</string>
+  <string name="listSingleContact">איש קשר יחיד</string>
+  <string name="display_options_sort_list_by">מיון לפי</string>
+  <string name="display_options_sort_by_given_name">שם פרטי</string>
+  <string name="display_options_sort_by_family_name">שם משפחה</string>
+  <string name="display_options_view_names_as">פורמט השם</string>
+  <string name="display_options_view_given_name_first">שם פרטי יופיע ראשון</string>
+  <string name="display_options_view_family_name_first">שם משפחה יופיע ראשון</string>
+  <string name="menu_clear_frequents">מחק אנשי קשר קבועים</string>
+  <string name="action_menu_back_from_search">הפסק לחפש</string>
+  <string name="description_clear_search">נקה חיפוש</string>
+  <string name="select_account_dialog_title">חשבון</string>
+  <string name="set_default_account">השתמש תמיד עבור שיחות</string>
+  <string name="select_phone_account_for_calls">‏בחירת כרטיס SIM לשיחה הזו</string>
+  <string name="select_phone_account_for_calls_remember">אני רוצה להשתמש באפשרות הזו גם בעתיד</string>
+  <string name="call_with_a_note">התקשר עם הערה</string>
+  <string name="call_subject_hint">הקלד הערה לשליחה עם השיחה...</string>
+  <string name="send_and_call_button">שלח והתקשר</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">הכרטיסייה %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">הכרטיסייה %1$s. %2$d פריט שלא נקרא. </item>
+    <item quantity="two">הכרטיסייה %1$s. %2$d פריטים שלא נקראו. </item>
+    <item quantity="many">הכרטיסייה %1$s. %2$d פריטים שלא נקראו. </item>
+    <item quantity="other">הכרטיסייה %1$s. %2$d פריטים שלא נקראו. </item>
+  </plurals>
+  <string name="description_search_video_call">שיחת וידאו</string>
+  <string name="description_search_call_and_share">שיתוף והתקשרות</string>
 </resources>

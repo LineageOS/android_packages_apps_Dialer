@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">ප්‍රියතම</string>
+  <string name="suggestions_header">නිතරම</string>
+  <string name="speed_dial_add_button_text">එක් කරන්න</string>
+  <string name="speed_dial_remember_this_choice">මෙම තේරීම මතක තබා ගන්න</string>
+  <string name="speed_dial_disambig_dialog_title">ඇමතුම් වර්ගය තෝරන්න</string>
+  <string name="disambig_option_video_call">වීඩියෝ ඇමතුම</string>
+  <string name="disambig_option_voice_call">අමතන්න</string>
+  <string name="add_favorite_activity_title">ප්‍රියතම දේ එක් කරන්න</string>
+  <string name="contact_menu_voice_call">හඬ ඇමතුම</string>
+  <string name="contact_menu_video_call">වීඩියෝ ඇමතුම</string>
+  <string name="contact_menu_message">පණිවිඩය</string>
+  <string name="contact_menu_remove">ඉවත් කරන්න</string>
+  <string name="contact_menu_contact_info">සම්බන්ධතා තතු</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">ප්‍රියතම එක් කරන්න</string>
+  <string name="speed_dial_contacts_permission_description">වේග ඩයල් කිරීම සබල කිරීමට, සම්බන්ධතා අවසරය ක්‍රියාත්මක කරන්න.</string>
+  <string name="speed_dial_turn_on_contacts_permission">ක්‍රියාත්මක කරන්න</string>
+  <string name="speed_dial_no_contacts_description">ඔබ තවම ප්‍රියතම එක් කර නැත</string>
+  <string name="speed_dial_no_contacts_action_text">ප්‍රියතම එක් කරන්න</string>
+  <string name="speed_dial_remove_favorites">ප්‍රියතම වෙතින් ඉවත් කරන්න</string>
 </resources>

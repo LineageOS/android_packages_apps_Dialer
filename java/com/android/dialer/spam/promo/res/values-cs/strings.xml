@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtrovat všechny hovory, u kterých je podezření na spam?</string>
+  <string name="spam_blocking_promo_text">Hovory jako ten, který jste právě zablokovali, už vás nebudou rušit</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrovat spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Zavřít</string>
+  <string name="spam_blocking_setting_prompt">Nastavení</string>
+  <string name="spam_blocking_settings_enable_error_text">Filtrování spamu se nepodařilo zapnout</string>
+  <string name="spam_blocking_settings_disable_error_text">Filtrování spamu se nepodařilo vypnout</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtrování spamu je zapnuto</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtrování spamu je vypnuto</string>
+</resources>

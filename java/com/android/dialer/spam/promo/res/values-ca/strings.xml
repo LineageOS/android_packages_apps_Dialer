@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Vols filtrar totes les possibles trucades brossa?</string>
+  <string name="spam_blocking_promo_text">Les trucades com la que acabes de bloquejar ja no
+      t\'interrompran</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtra les trucades brossa</string>
+  <string name="spam_blocking_promo_action_dismiss">Ignora</string>
+  <string name="spam_blocking_setting_prompt">Configuració</string>
+  <string name="spam_blocking_settings_enable_error_text">S\'ha produït un error en activar el filtre de correu brossa</string>
+  <string name="spam_blocking_settings_disable_error_text">S\'ha produït un error en desactivar el filtre de correu brossa</string>
+  <string name="spam_blocking_settings_enable_complete_text">El filtre de trucades brossa s\'ha activat</string>
+  <string name="spam_blocking_settings_disable_complete_text">El filtre de trucades brossa s\'ha desactivat</string>
+</resources>

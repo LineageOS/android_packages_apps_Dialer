@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s бөгөттөлсүнбү?</string>
+  <string name="block_number_confirmation_message_new_filtering">Бул номерден келген чалууларды же SMS билдирүүлөрдү албай каласыз.</string>
+  <string name="block_number_ok">БӨГӨТТӨӨ</string>
+  <string name="unblock_number_ok">БӨГӨТТӨН ЧЫГАРУУ</string>
+  <string name="block_report_number_alert_title">%1$s бөгөттөлсүнбү?</string>
+  <string name="block_report_number_alert_details">Мындан ары бул номерден келген чалуулар кабыл алынбайт.</string>
+  <string name="block_number_alert_details">%1$s Бул чалуу спам деп белгиленет.</string>
+  <string name="unblock_number_alert_details">Номер бөгөттөн чыгарылып, спам эмес деп белгиленет. Кийинки чалуулар спам деп белгиленбейт.</string>
+  <string name="unblock_report_number_alert_title">%1$s бөгөттөн чыгарылсынбы?</string>
+  <string name="report_not_spam_alert_button">Арыздануу</string>
+  <string name="report_not_spam_alert_title">Ката деп билдирилсинби?</string>
+  <string name="report_not_spam_alert_details">%1$s номеринен келген чалуулар мындан ары спам деп белгиленбейт.</string>
+  <string name="checkbox_report_as_spam_action">Чалууну спам катары кабарлоо</string>
+  <string name="block_number_failed_toast">Бул номерди бөгөттөөдө көйгөй чыкты</string>
+  <string name="unblock_number_failed_toast">Бул номерди бөгөттөн чыгарууда көйгөй чыкты</string>
+</resources>

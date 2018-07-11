@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Reaalajas tekstsõnumside kõnes</string>
+  <string name="rtt_promotion_details">RTT aitab kurte, kuulmis- või kõnepuudega helistajaid või neid,
+    kes vajavad lisaks häälele muud abi. RTT sõnumside transkriptsioonid
+    salvestatakse teie seadmes kõneajaloos. %1$s</string>
+  <string name="duo_disclosure_title">Videokõnede tegemine Duoga</string>
+  <string name="duo_disclosure_details">Google Duo videokõned lubavad teil sõprade ja perega näost näkku vestelda. Rakenduda võivad andmesidetasud. %1$s</string>
+</resources>

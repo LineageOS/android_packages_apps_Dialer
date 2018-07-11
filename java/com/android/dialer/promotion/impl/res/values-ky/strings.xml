@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Чалуу учурунда анык убакыттагы SMS билдирүү</string>
+  <string name="rtt_promotion_details">RTT функциясы угуу жана сүйлөө жөндөмдүүлүгү бузулган адамдарга арналат. RTT транскрипциялары түзмөгүңүздөгү чалуу таржымалында сакталат. %1$s</string>
+  <string name="duo_disclosure_title">Duo\'нун жардамы менен видео чалууларды баштаңыз</string>
+  <string name="duo_disclosure_details">Google Duo аркылуу видео режиминде чалып, досторуңуз жана туугандарыңыз менен сүйлөшүңүз. Трафик үчүн акы төлөп калышыңыз мүмкүн. %1$s</string>
+</resources>

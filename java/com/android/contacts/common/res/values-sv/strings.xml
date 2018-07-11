@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Texten har kopierats"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Ring <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Ring hem"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Ring mobilen"</string>
-    <string name="call_work" msgid="6040550697395300892">"Ring arbete"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Ring upp arbetsfax"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Ring upp hemfax"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Ring personsökare"</string>
-    <string name="call_other" msgid="5536385588712587235">"Ring"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Ring upp återuppringningsnummer"</string>
-    <string name="call_car" msgid="3197417098027764954">"Ring bilen"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Ring företag"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Ring upp ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Ring upp primärt nummer"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Ring upp fax"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Ring radio"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Ring upp telex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Ring upp TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Ring upp jobbmobil"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Ring upp jobbpersonsökare"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Ring <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Ring upp MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Skicka SMS till <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Skicka SMS till hem"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Skicka SMS till mobil"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Skicka SMS till arbete"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Skicka SMS till arbetsfax"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Skicka SMS till hemfax"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Skicka SMS till personsökare"</string>
-    <string name="sms_other" msgid="1742702947993285933">"SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Skicka SMS till återuppringningsnummer"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Skicka SMS till bil"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Skicka SMS till företag"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Skicka SMS till ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Skicka SMS till primärt nummer"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Skicka SMS till fax"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Skicka SMS till radio"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Skicka SMS till telex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Skicka SMS till TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Skicka SMS till jobbmobil"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Skicka SMS till jobbpersonsökare"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Skicka SMS till <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Skicka SMS till MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Vill du rensa listan?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Du rensar listan över personer som du kontaktar ofta i apparna Kontakter och Telefon. E-postappar tvingas lära sig dina mottagarinställningar från början."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Listan rensas …"</string>
-    <string name="status_available" msgid="2648156525685472626">"Tillgänglig"</string>
-    <string name="status_away" msgid="2298688367552893953">"Borta"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Upptagen"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kontakter"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Bästa förslagen"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Övrigt"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Katalog"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Jobbkatalog"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Alla kontakter"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Förslag"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Jag"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Inget namn)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Visa kontakten"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Alla kontakter med telefonnummer"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Kontakter i jobbprofilen"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Visa uppdateringar"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Endast enhet, osynkroniserad"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Namn"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Smeknamn"</string>
-    <string name="full_name" msgid="648186563998465740">"Namn"</string>
-    <string name="name_given" msgid="5096576006314820536">"Förnamn"</string>
-    <string name="name_family" msgid="6646235805198547467">"Efternamn"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Namnprefix"</string>
-    <string name="name_middle" msgid="703755205331582769">"Mellannamn"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Namnsuffix"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Fonetiskt namn"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Fonetiskt förnamn"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Fonetiskt mellannamn"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Fonetiskt efternamn"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"E-post"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adress"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Chatt"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organisation"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Relation"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Särskilt datum"</string>
-    <string name="sms" msgid="7574344928185328095">"Sms"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adress"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Företag"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Befattning"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Anteckningar"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Webbplats"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Grupper"</string>
-    <string name="email_home" msgid="889830029388962171">"E-postadress – hem"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Skicka e-post till mobil"</string>
-    <string name="email_work" msgid="4223487303344613528">"E-postadress – arbete"</string>
-    <string name="email_other" msgid="4246411900126012062">"E-post"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Skicka e-post till <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"E-post"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Gatuadress"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Ort"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Delstat"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Postnummer"</string>
-    <string name="postal_country" msgid="232670707458768148">"Land"</string>
-    <string name="map_home" msgid="4181131107392126938">"Visa hemadress"</string>
-    <string name="map_work" msgid="5723471185992684400">"Visa jobbadress"</string>
-    <string name="map_other" msgid="2253764780863500516">"Visa adress"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Visa adress, <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Chatta med AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Chatta med Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Chatta med Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Chatta med Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Chatta med QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Chatta med Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Chatta med ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Chatta med Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Chatt"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Alla kontakter"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Kontakter i <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Kontakter i anpassad vy"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"En kontakt"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sortera efter"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Förnamn"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Efternamn"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Namnformat"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Förnamn först"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Efternamn först"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Rensa listan över kontakter"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"avbryt sökning"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Rensa sökning"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Konto"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Använd alltid för samtal"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Ring med"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Ring med anteckning"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Gör en anteckning som skickas när du ringer …"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"SKICKA OCH RING"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Fliken <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other">Fliken <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> olästa poster. </item>
-      <item quantity="one">Fliken <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> oläst post. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videosamtal"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Dela och ring"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Ring %s</string>
+  <string name="call_home">Ring hem</string>
+  <string name="call_mobile">Ring mobilen</string>
+  <string name="call_work">Ring arbete</string>
+  <string name="call_fax_work">Ring upp arbetsfax</string>
+  <string name="call_fax_home">Ring upp hemfax</string>
+  <string name="call_pager">Ring personsökare</string>
+  <string name="call_other">Ring</string>
+  <string name="call_callback">Ring upp återuppringningsnummer</string>
+  <string name="call_car">Ring bilen</string>
+  <string name="call_company_main">Ring företag</string>
+  <string name="call_isdn">Ring upp ISDN</string>
+  <string name="call_main">Ring upp primärt nummer</string>
+  <string name="call_other_fax">Ring upp fax</string>
+  <string name="call_radio">Ring radio</string>
+  <string name="call_telex">Ring upp telex</string>
+  <string name="call_tty_tdd">Ring upp TTY/TDD</string>
+  <string name="call_work_mobile">Ring upp jobbmobil</string>
+  <string name="call_work_pager">Ring upp jobbpersonsökare</string>
+  <string name="call_assistant">Ring %s</string>
+  <string name="call_mms">Ring upp MMS</string>
+  <string name="sms_custom">Skicka SMS till %s</string>
+  <string name="sms_home">Skicka SMS till hem</string>
+  <string name="sms_mobile">Skicka SMS till mobil</string>
+  <string name="sms_work">Skicka SMS till arbete</string>
+  <string name="sms_fax_work">Skicka SMS till arbetsfax</string>
+  <string name="sms_fax_home">Skicka SMS till hemfax</string>
+  <string name="sms_pager">Skicka SMS till personsökare</string>
+  <string name="sms_other">SMS</string>
+  <string name="sms_callback">Skicka SMS till återuppringningsnummer</string>
+  <string name="sms_car">Skicka SMS till bil</string>
+  <string name="sms_company_main">Skicka SMS till företag</string>
+  <string name="sms_isdn">Skicka SMS till ISDN</string>
+  <string name="sms_main">Skicka SMS till primärt nummer</string>
+  <string name="sms_other_fax">Skicka SMS till fax</string>
+  <string name="sms_radio">Skicka SMS till radio</string>
+  <string name="sms_telex">Skicka SMS till telex</string>
+  <string name="sms_tty_tdd">Skicka SMS till TTY/TDD</string>
+  <string name="sms_work_mobile">Skicka SMS till jobbmobil</string>
+  <string name="sms_work_pager">Skicka SMS till jobbpersonsökare</string>
+  <string name="sms_assistant">Skicka SMS till %s</string>
+  <string name="sms_mms">Skicka SMS till MMS</string>
+  <string name="clearFrequentsConfirmation_title">Vill du rensa listan?</string>
+  <string name="clearFrequentsConfirmation">Du rensar listan över personer som du kontaktar ofta i apparna Kontakter och Telefon. E-postappar tvingas lära sig dina mottagarinställningar från början.</string>
+  <string name="clearFrequentsProgress_title">Listan rensas …</string>
+  <string name="status_available">Tillgänglig</string>
+  <string name="status_away">Borta</string>
+  <string name="status_busy">Upptagen</string>
+  <string name="contactsList">Kontakter</string>
+  <string name="contact_suggestions">Bästa förslagen</string>
+  <string name="local_invisible_directory">Övrigt</string>
+  <string name="directory_search_label">Katalog</string>
+  <string name="directory_search_label_work">Jobbkatalog</string>
+  <string name="local_search_label">Alla kontakter</string>
+  <string name="local_suggestions_search_label">Förslag</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jag</string>
+  <string name="missing_name">(Inget namn)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Visa kontakten</string>
+  <string name="list_filter_phones">Alla kontakter med telefonnummer</string>
+  <string name="list_filter_phones_work">Kontakter i jobbprofilen</string>
+  <string name="view_updates_from_group">Visa uppdateringar</string>
+  <string name="account_phone">Endast enhet, osynkroniserad</string>
+  <string name="nameLabelsGroup">Namn</string>
+  <string name="nicknameLabelsGroup">Smeknamn</string>
+  <string name="full_name">Namn</string>
+  <string name="name_given">Förnamn</string>
+  <string name="name_family">Efternamn</string>
+  <string name="name_prefix">Namnprefix</string>
+  <string name="name_middle">Mellannamn</string>
+  <string name="name_suffix">Namnsuffix</string>
+  <string name="name_phonetic">Fonetiskt namn</string>
+  <string name="name_phonetic_given">Fonetiskt förnamn</string>
+  <string name="name_phonetic_middle">Fonetiskt mellannamn</string>
+  <string name="name_phonetic_family">Fonetiskt efternamn</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">E-post</string>
+  <string name="postalLabelsGroup">Adress</string>
+  <string name="imLabelsGroup">Chatt</string>
+  <string name="organizationLabelsGroup">Organisation</string>
+  <string name="relationLabelsGroup">Relation</string>
+  <string name="eventLabelsGroup">Särskilt datum</string>
+  <string name="sms">Sms</string>
+  <string name="postal_address">Adress</string>
+  <string name="ghostData_company">Företag</string>
+  <string name="ghostData_title">Befattning</string>
+  <string name="label_notes">Anteckningar</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Webbplats</string>
+  <string name="groupsLabel">Grupper</string>
+  <string name="email_home">E-postadress – hem</string>
+  <string name="email_mobile">Skicka e-post till mobil</string>
+  <string name="email_work">E-postadress – arbete</string>
+  <string name="email_other">E-post</string>
+  <string name="email_custom">Skicka e-post till %s</string>
+  <string name="email">E-post</string>
+  <string name="postal_street">Gatuadress</string>
+  <string name="postal_city">Ort</string>
+  <string name="postal_region">Delstat</string>
+  <string name="postal_postcode">Postnummer</string>
+  <string name="postal_country">Land</string>
+  <string name="map_home">Visa hemadress</string>
+  <string name="map_work">Visa jobbadress</string>
+  <string name="map_other">Visa adress</string>
+  <string name="map_custom">Visa adress, %s</string>
+  <string name="chat_aim">Chatta med AIM</string>
+  <string name="chat_msn">Chatta med Windows Live</string>
+  <string name="chat_yahoo">Chatta med Yahoo</string>
+  <string name="chat_skype">Chatta med Skype</string>
+  <string name="chat_qq">Chatta med QQ</string>
+  <string name="chat_gtalk">Chatta med Google Talk</string>
+  <string name="chat_icq">Chatta med ICQ</string>
+  <string name="chat_jabber">Chatta med Jabber</string>
+  <string name="chat">Chatt</string>
+  <string name="list_filter_all_accounts">Alla kontakter</string>
+  <string name="listAllContactsInAccount">Kontakter i %s</string>
+  <string name="listCustomView">Kontakter i anpassad vy</string>
+  <string name="listSingleContact">En kontakt</string>
+  <string name="display_options_sort_list_by">Sortera efter</string>
+  <string name="display_options_sort_by_given_name">Förnamn</string>
+  <string name="display_options_sort_by_family_name">Efternamn</string>
+  <string name="display_options_view_names_as">Namnformat</string>
+  <string name="display_options_view_given_name_first">Förnamn först</string>
+  <string name="display_options_view_family_name_first">Efternamn först</string>
+  <string name="menu_clear_frequents">Rensa listan över kontakter</string>
+  <string name="action_menu_back_from_search">avbryt sökning</string>
+  <string name="description_clear_search">Rensa sökning</string>
+  <string name="select_account_dialog_title">Konto</string>
+  <string name="set_default_account">Använd alltid för samtal</string>
+  <string name="select_phone_account_for_calls">Välj SIM-kort till det här samtalet</string>
+  <string name="select_phone_account_for_calls_remember">Kom ihåg det här valet</string>
+  <string name="call_with_a_note">Ring med anteckning</string>
+  <string name="call_subject_hint">Gör en anteckning som skickas när du ringer …</string>
+  <string name="send_and_call_button">SKICKA OCH RING</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Fliken %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">Fliken %1$s. %2$d oläst post. </item>
+    <item quantity="other">Fliken %1$s. %2$d olästa poster. </item>
+  </plurals>
+  <string name="description_search_video_call">Videosamtal</string>
+  <string name="description_search_call_and_share">Dela och ring</string>
 </resources>

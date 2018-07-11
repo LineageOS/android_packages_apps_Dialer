@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"โทรศัพท์"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"ส่งโทนเสียงต่อไปนี้หรือไม่ \n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"ใช่"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"ไม่"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"กำลังโทรออก"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"โทรต่อเนื่อง"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"กำลังใช้แฮงเอาท์วิดีโออยู่"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"กำลังใช้แฮงเอาท์วิดีโออยู่ ‑ วิดีโอหยุดชั่วคราว"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"กำลังอยู่ในสายจากที่ทำงาน"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"กำลังอยู่ในสายจาก <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"สายเรียกเข้าจาก <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"การโทรผ่าน Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"สายจากที่ทำงานผ่าน Wi‑Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"พักสาย"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"สายเรียกเข้า"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"สายเรียกเข้าพร้อมรูปภาพ"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"สายเรียกเข้าพร้อมข้อความ"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"สายเรียกเข้าพร้อมตำแหน่ง"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"สายเรียกเข้าพร้อมรูปภาพและข้อความ"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"สายเรียกเข้าพร้อมรูปภาพและตำแหน่ง"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"สายเรียกเข้าพร้อมข้อความและตำแหน่ง"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"สายเรียกเข้าพร้อมรูปภาพ ข้อความ และตำแหน่ง"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"สายเรียกเข้าพร้อมไฟล์แนบ"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"สายเรียกเข้าที่สำคัญ"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"สายเรียกเข้าที่สำคัญพร้อมรูปภาพ"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"สายเรียกเข้าที่สำคัญพร้อมข้อความ"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"สายเรียกเข้าที่สำคัญพร้อมตำแหน่ง"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"สายเรียกเข้าที่สำคัญพร้อมรูปภาพและข้อความ"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"สายเรียกเข้าที่สำคัญพร้อมรูปภาพและตำแหน่ง"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"สายเรียกเข้าที่สำคัญพร้อมข้อความและตำแหน่ง"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"สายเรียกเข้าที่สำคัญพร้อมรูปภาพ ข้อความ และตำแหน่ง"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"สายเรียกเข้าที่สำคัญพร้อมไฟล์แนบ"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"มีสายเรียกเข้าจากที่ทำงาน"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"สายเรียกเข้าที่สงสัยว่าเป็นสแปม"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"คำขอโทรเข้าเป็นวิดีโอ"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"รับสาย"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"วางสาย"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"วิดีโอ"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"ยอมรับ"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"ปฏิเสธ"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"เปิดลำโพง"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"ปิดลำโพง"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"กำลังใช้สายบนอุปกรณ์อื่น"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"มีการโทรแฮงเอาท์วิดีโอบนอุปกรณ์อื่น"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"รับสาย"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"รับสายแฮงเอาท์วิดีโอ"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"ไม่สนับสนุนบริการนี้"</string>
-    <string name="goPrivate" msgid="5269514638004595378">"เข้าสู่โหมดส่วนตัว"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"จัดการการประชุมสาย"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"หมายเลขฉุกเฉิน"</string>
-    <string name="child_number" msgid="3398257437107259682">"ผ่านหมายเลข <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"ไม่มีซิมหรือเกิดข้อผิดพลาดกับซิม"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"วางสาย"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"การประชุมสาย"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"อยู่ในสาย"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"โทรต่อโดยใช้อินเทอร์เน็ตมือถือ..."</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ไม่สามารถเปลี่ยนไปใช้เครือข่าย Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"แฮงเอาท์วิดีโอจะยังคงอยู่ในเครือข่ายมือถือ อาจมีการเรียกเก็บค่าบริการข้อมูลมาตรฐาน"</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"อย่าแสดงสิ่งนี้อีก"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">ส่งโทนเสียงต่อไปนี้หรือไม่ \n</string>
+  <string name="pause_prompt_yes">ใช่</string>
+  <string name="pause_prompt_no">ไม่</string>
+  <string name="notification_dialing">กำลังโทรออก</string>
+  <string name="notification_ongoing_call">โทรต่อเนื่อง</string>
+  <string name="notification_ongoing_video_call">กำลังใช้ Hangouts วิดีโออยู่</string>
+  <string name="notification_ongoing_paused_video_call">กำลังใช้ Hangouts วิดีโออยู่ ‑ วิดีโอหยุดชั่วคราว</string>
+  <string name="notification_ongoing_work_call">กำลังอยู่ในสายจากที่ทำงาน</string>
+  <string name="notification_ongoing_call_wifi_template">กำลังอยู่ในสายจาก %1$s</string>
+  <string name="notification_incoming_call_wifi_template">สายเรียกเข้าจาก %1$s</string>
+  <string name="notification_call_wifi_brand">การโทรผ่าน Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">สายจากที่ทำงานผ่าน Wi‑Fi</string>
+  <string name="notification_on_hold">พักสาย</string>
+  <string name="notification_incoming_call">สายเรียกเข้า</string>
+  <string name="notification_incoming_video_call"> Hangouts วิดีโอเรียกเข้า</string>
+  <string name="notification_incoming_call_mutli_sim">สายเรียกเข้าผ่าน %1$s</string>
+  <string name="notification_incoming_call_with_photo">สายเรียกเข้าพร้อมรูปภาพ</string>
+  <string name="notification_incoming_call_with_message">สายเรียกเข้าพร้อมข้อความ</string>
+  <string name="notification_incoming_call_with_location">สายเรียกเข้าพร้อมตำแหน่ง</string>
+  <string name="notification_incoming_call_with_photo_message">สายเรียกเข้าพร้อมรูปภาพและข้อความ</string>
+  <string name="notification_incoming_call_with_photo_location">สายเรียกเข้าพร้อมรูปภาพและตำแหน่ง</string>
+  <string name="notification_incoming_call_with_message_location">สายเรียกเข้าพร้อมข้อความและตำแหน่ง</string>
+  <string name="notification_incoming_call_with_photo_message_location">สายเรียกเข้าพร้อมรูปภาพ ข้อความ และตำแหน่ง</string>
+  <string name="notification_incoming_call_attachments">สายเรียกเข้าพร้อมไฟล์แนบ</string>
+  <string name="important_notification_incoming_call">สายเรียกเข้าที่สำคัญ</string>
+  <string name="important_notification_incoming_call_with_photo">สายเรียกเข้าที่สำคัญพร้อมรูปภาพ</string>
+  <string name="important_notification_incoming_call_with_message">สายเรียกเข้าที่สำคัญพร้อมข้อความ</string>
+  <string name="important_notification_incoming_call_with_location">สายเรียกเข้าที่สำคัญพร้อมตำแหน่ง</string>
+  <string name="important_notification_incoming_call_with_photo_message">สายเรียกเข้าที่สำคัญพร้อมรูปภาพและข้อความ</string>
+  <string name="important_notification_incoming_call_with_photo_location">สายเรียกเข้าที่สำคัญพร้อมรูปภาพและตำแหน่ง</string>
+  <string name="important_notification_incoming_call_with_message_location">สายเรียกเข้าที่สำคัญพร้อมข้อความและตำแหน่ง</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">สายเรียกเข้าที่สำคัญพร้อมรูปภาพ ข้อความ และตำแหน่ง</string>
+  <string name="important_notification_incoming_call_attachments">สายเรียกเข้าที่สำคัญพร้อมไฟล์แนบ</string>
+  <string name="notification_incoming_work_call">มีสายเรียกเข้าจากที่ทำงาน</string>
+  <string name="notification_incoming_spam_call">สายเรียกเข้าที่สงสัยว่าเป็นสแปม</string>
+  <string name="notification_requesting_video_call">คำขอโทรเข้าเป็นวิดีโอ</string>
+  <string name="notification_action_answer">รับสาย</string>
+  <string name="notification_action_end_call">วางสาย</string>
+  <string name="notification_action_answer_video">วิดีโอ</string>
+  <string name="notification_action_accept">ยอมรับ</string>
+  <string name="notification_action_dismiss">ปฏิเสธ</string>
+  <string name="notification_action_speaker_on">เปิดลำโพง</string>
+  <string name="notification_action_speaker_off">ปิดลำโพง</string>
+  <string name="notification_external_call">กำลังใช้สายบนอุปกรณ์อื่น</string>
+  <string name="notification_external_video_call">มีการโทร Hangouts วิดีโอบนอุปกรณ์อื่น</string>
+  <string name="notification_take_call">รับสาย</string>
+  <string name="notification_take_video_call">รับสาย Hangouts วิดีโอ</string>
+  <string name="incall_error_supp_service_unknown">ไม่สนับสนุนบริการนี้</string>
+  <string name="goPrivate">เข้าสู่โหมดส่วนตัว</string>
+  <string name="manageConferenceLabel">จัดการการประชุมสาย</string>
+  <string name="child_number">ผ่านหมายเลข %s</string>
+  <string name="callFailed_simError">ไม่มีซิมหรือเกิดข้อผิดพลาดกับซิม</string>
+  <string name="conference_caller_disconnect_content_description">วางสาย</string>
+  <string name="conference_call_name">การประชุมสาย</string>
+  <string name="generic_conference_call_name">อยู่ในสาย</string>
+  <string name="video_call_wifi_to_lte_handover_toast">โทรต่อโดยใช้อินเทอร์เน็ตมือถือ...</string>
+  <string name="video_call_lte_to_wifi_failed_title">ไม่สามารถเปลี่ยนไปใช้เครือข่าย Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message"> Hangouts วิดีโอจะยังคงอยู่ในเครือข่ายมือถือ อาจมีการเรียกเก็บค่าบริการข้อมูลมาตรฐาน</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">อย่าแสดงสิ่งนี้อีก</string>
+  <string name="bubble_return_to_call">กลับไปที่การโทร</string>
+  <string name="rtt_request_dialog_title">เข้าร่วมการโทรแบบ RTT ใช่ไหม</string>
+  <string name="rtt_request_dialog_details">%1$s ต้องการใช้การรับส่งข้อความภายในการโทรด้วยเสียงของคุณ</string>
+  <string name="rtt_request_dialog_more_information">RTT ช่วยเหลือผู้โทรที่หูหนวก ได้ยินไม่ชัด มีความบกพร่องในการพูด หรือต้องการการสื่อสารที่นอกเหนือจากเสียงพูด</string>
+  <string name="rtt_button_decline_request">ไม่เป็นไร</string>
+  <string name="rtt_button_accept_request">เข้าร่วม RTT</string>
 </resources>

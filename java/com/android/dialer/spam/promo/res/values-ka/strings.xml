@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">გსურთ ყველა სავარაუდოდ სპამი ზარის გაფილტვრა?</string>
+  <string name="spam_blocking_promo_text">ისეთი ზარები, როგორიც ახლახან დაბლოკეთ, აღარ
+      შეგაწუხებთ</string>
+  <string name="spam_blocking_promo_action_filter_spam">სპამის გაფილტვრა</string>
+  <string name="spam_blocking_promo_action_dismiss">დახურვა</string>
+  <string name="spam_blocking_setting_prompt">პარამეტრები</string>
+  <string name="spam_blocking_settings_enable_error_text">სპამის გაფილტვრის ჩართვისას წარმოიშვა პრობლემა</string>
+  <string name="spam_blocking_settings_disable_error_text">სპამის გაფილტვრის გამორთვისას წარმოიშვა პრობლემა</string>
+  <string name="spam_blocking_settings_enable_complete_text">სპამის გაფილტვრა ჩართულია</string>
+  <string name="spam_blocking_settings_disable_complete_text">სპამის გაფილტვრა გამორთულია</string>
+</resources>

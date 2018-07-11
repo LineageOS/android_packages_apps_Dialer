@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Želite filtrirati vse domnevno neželene klice?</string>
+  <string name="spam_blocking_promo_text">Klici kot ta, ki ste ga pravkar blokirali, vas ne bodo več
+      zmotili</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtriraj neželene klice</string>
+  <string name="spam_blocking_promo_action_dismiss">Opusti</string>
+  <string name="spam_blocking_setting_prompt">Nastavitve</string>
+  <string name="spam_blocking_settings_enable_error_text">Težava pri vklopu filtriranja neželenih klicev</string>
+  <string name="spam_blocking_settings_disable_error_text">Težava pri izklopu filtriranja neželenih klicev</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtriranje neželenih klicev je vklopljeno</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtriranje neželenih klicev je izklopljeno</string>
+</resources>

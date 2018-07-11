@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Заблакіраваць нумар %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Вы больш не будзеце атрымліваць выклікі або SMS з гэтага нумара.</string>
+  <string name="block_number_ok">БЛАКІРАВАЦЬ</string>
+  <string name="unblock_number_ok">РАЗБЛАКІРАВАЦЬ</string>
+  <string name="block_report_number_alert_title">Заблакіраваць нумар %1$s?</string>
+  <string name="block_report_number_alert_details">Вы больш не будзеце атрымліваць выклікі з гэтага нумара.</string>
+  <string name="block_number_alert_details">%1$s Гэты выклік будзе заяўлены як спам.</string>
+  <string name="unblock_number_alert_details">Гэты нумар будзе разблакіраваны і заяўлены як не спам. Будучыя выклікі не будуць вызначацца як спам.</string>
+  <string name="unblock_report_number_alert_title">Разблакіраваць нумар %1$s?</string>
+  <string name="report_not_spam_alert_button">Паведаміць</string>
+  <string name="report_not_spam_alert_title">Паведаміць пра памылку?</string>
+  <string name="report_not_spam_alert_details">Будучыя выклікі з нумара %1$s больш не будуць вызначацца як спам.</string>
+  <string name="checkbox_report_as_spam_action">Заявіць выклік як спамерскі</string>
+  <string name="block_number_failed_toast">Праблема з блакіроўкай нумара</string>
+  <string name="unblock_number_failed_toast">Праблема з разблакіроўкай нумара</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Asistované vytáčanie</string>
+  <string name="assisted_dialing_setting_summary">Pri volaní v zahraničí odhadnúť a pridať predvoľbu krajiny</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automaticky rozpoznané • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automaticky rozpoznané</string>
+  <string name="assisted_dialing_setting_cc_category_title">Domovská krajina</string>
+  <string name="assisted_dialing_setting_cc_title">Predvolená domovská krajina</string>
+</resources>

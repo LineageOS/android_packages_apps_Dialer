@@ -1,31 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_details" msgid="5063658079729839605">"કૉલની વિગતો"</string>
-    <string name="delete" msgid="2141020674108406737">"કાઢી નાખો"</string>
-    <string name="call_details_copy_number" msgid="4265479408878990796">"નંબર કૉપિ કરો"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"કૉલ કરતાં પહેલાં નંબર સંપાદિત કરો"</string>
-    <string name="call_details_report_call_id" msgid="8857541295264421217">"અચોક્કસ નંબરની જાણ કરો"</string>
-    <string name="sent_a_photo" msgid="3978670717462979502">"એક ફોટો મોકલ્યો"</string>
-    <string name="received_a_photo" msgid="3528953225576480505">"એક ફોટો પ્રાપ્ત કર્યો"</string>
-    <string name="message_in_quotes" msgid="3270574830115828365">"\"<xliff:g id="MESSAGE">%1$s</xliff:g>\""</string>
-    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"ખોટા નંબરની જાણ કરો"</string>
-    <string name="report_caller_id_failed" msgid="1471904930106125702">"નંબરની જાણ કરી શકાઈ નથી"</string>
-    <string name="report_caller_id_toast" msgid="5494870403429969932">"નંબરની જાણ કરી"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">કૉલની વિગતો</string>
+  <string name="delete">કાઢી નાખો</string>
+  <string name="call_details_copy_number">નંબર કૉપિ કરો</string>
+  <string name="call_details_edit_number">કૉલ કરતાં પહેલાં નંબર સંપાદિત કરો</string>
+  <string name="call_details_report_call_id">અચોક્કસ નંબરની જાણ કરો</string>
+  <string name="sent_a_photo">એક ફોટો મોકલ્યો</string>
+  <string name="received_a_photo">એક ફોટો પ્રાપ્ત કર્યો</string>
+  <string name="message_in_quotes">\"%1$s\"</string>
+  <string name="report_caller_id_dialog_title">ખોટા નંબરની જાણ કરો</string>
+  <string name="report_caller_id_failed">નંબરની જાણ કરી શકાઈ નથી</string>
+  <string name="report_caller_id_toast">નંબરની જાણ કરી</string>
+  <string name="assisted_dialing_country_code_entry">સહાયિત ડાયલિંગ: ઉપયોગ કરેલ દેશ કોડ +%1$s</string>
+  <string name="assisted_dialing_country_code_entry_failure">સહાયિત ડાયલિંગનો ઉપયોગ થયો હતો</string>
+  <string name="rtt_transcript_not_available">માત્ર મેસેજિંગ સાથેના કૉલ માટે જ ટ્રાન્સક્રિપ્ટ ઉપલબ્ધ રહે છે</string>
+  <string name="rtt_transcript_link">ટ્રાન્સક્રિપ્ટ જુઓ</string>
 </resources>

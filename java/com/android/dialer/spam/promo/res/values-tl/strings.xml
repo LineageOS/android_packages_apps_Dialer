@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">I-filter ang lahat ng pinaghihinalaang spam na tawag?</string>
+  <string name="spam_blocking_promo_text">Ang mga tawag na kaka-block mo lang ay hindi 
+      ka na iistorbohin</string>
+  <string name="spam_blocking_promo_action_filter_spam">I-filter ang Spam</string>
+  <string name="spam_blocking_promo_action_dismiss">I-dismiss</string>
+  <string name="spam_blocking_setting_prompt">Mga Setting</string>
+  <string name="spam_blocking_settings_enable_error_text">May problema sa pag-on ng pag-filter ng spam</string>
+  <string name="spam_blocking_settings_disable_error_text">May problema sa pag-off ng pag-filter ng spam</string>
+  <string name="spam_blocking_settings_enable_complete_text">In-on ang pag-filter ng spam</string>
+  <string name="spam_blocking_settings_disable_complete_text">In-off ang pag-filter ng spam</string>
+</resources>

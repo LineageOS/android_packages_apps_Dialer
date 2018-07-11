@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"ಪಠ್ಯವನ್ನು ನಕಲಿಸಲಾಗಿದೆ"</string>
-    <string name="call_custom" msgid="3041673234638990874">"<xliff:g id="CUSTOM">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_home" msgid="125893483593803791">"ಮನೆಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_mobile" msgid="967589404494150813">"ಮೊಬೈಲ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_work" msgid="6040550697395300892">"ಕೆಲಸದ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"ಕೆಲಸದ ಫ್ಯಾಕ್ಸ್‌‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"ಮನೆಯ ಫ್ಯಾಕ್ಸ್‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_pager" msgid="6814149227741274161">"ಪೇಜರ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_other" msgid="5536385588712587235">"ಕರೆ ಮಾಡು"</string>
-    <string name="call_callback" msgid="6314019862718112786">"ಕಾಲ್‌ಬ್ಯಾಕ್‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_car" msgid="3197417098027764954">"ಕಾರ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"ಕಂಪನಿಯ ಪ್ರಮುಖ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"ISDN ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_main" msgid="3293707608770407814">"ಮುಖ್ಯ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"ಫ್ಯಾಕ್ಸ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_radio" msgid="8942441419845057942">"ರೇಡಿಯೋಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_telex" msgid="2031514461660668351">"ಟೆಲೆಕ್ಸ್‌‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"TTY/TDD ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"ಕೆಲಸದ ಮೊಬೈಲ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"ಕೆಲಸದ ಪೇಜರ್‌‌ಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"<xliff:g id="ASSISTANT">%s</xliff:g> ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_mms" msgid="4958811711741872901">"MMS ಕರೆ ಮಾಡಿ"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"<xliff:g id="CUSTOM">%s</xliff:g> ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ನಿವಾಸಕ್ಕೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"ಮೊಬೈಲ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_work" msgid="4158595439553450966">"ಕೆಲಸದ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"ಕೆಲಸದ ಫ್ಯಾಕ್ಸ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ಮನೆಯ ಫ್ಯಾಕ್ಸ್‌‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ಪೇಜರ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ಪಠ್ಯ"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ಕಾಲ್‌ಬ್ಯಾಕ್‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ಕಾರ್‌ನ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ಕಂಪನಿಯ ಮುಖ್ಯ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ISDN ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_main" msgid="8908087742014140774">"ಮುಖ್ಯ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ಫ್ಯಾಕ್ಸ್‌‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ರೇಡಿಯೋ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ಟೆಲೆಕ್ಸ್‌‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"TTY/TDD ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"ಕೆಲಸದದ ಮೊಬೈಲ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"ಕೆಲಸದ ಪೇಜರ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"<xliff:g id="ASSISTANT">%s</xliff:g> ಗೆ ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"MMS ಸಂದೇಶ ಮಾಡಿ"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವುದನ್ನು ತೆರುವುಗೊಳಿಸುವುದೇ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"ಸಂಪರ್ಕಗಳು ಮತ್ತು ಫೋನ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಪದೇ ಪದೇ ಸಂಪರ್ಕಪಡಿಸಿರುವ ಪಟ್ಟಿಯನ್ನು ನೀವು ತೆರುವುಗೊಳಿಸುತ್ತೀರಿ ಮತ್ತು ಮೊದಲಿನಿಂದ ನಿಮ್ಮ ವಿಳಾಸ ಪ್ರಾಶಸ್ತ್ಯಗಳನ್ನು ತಿಳಿಯಲು ಇಮೇಲ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಒತ್ತಾಯಿಸಿ."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವುದನ್ನು ತೆರುವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…"</string>
-    <string name="status_available" msgid="2648156525685472626">"ಲಭ್ಯವಿದೆ"</string>
-    <string name="status_away" msgid="2298688367552893953">"ದೂರ"</string>
-    <string name="status_busy" msgid="5990832098713248503">"ಕಾರ್ಯನಿರತ"</string>
-    <string name="contactsList" msgid="8806067891419291513">"ಸಂಪರ್ಕಗಳು"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"ಉನ್ನತ ಸಲಹೆ"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"ಇತರೆ"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"ಡೈರೆಕ್ಟರಿ"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"ಕೆಲಸದ ಡೈರೆಕ್ಟರಿ"</string>
-    <string name="local_search_label" msgid="907622822323119235">"ಎಲ್ಲಾ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"ಸಲಹೆಗಳು"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ನಾನು"</string>
-    <string name="missing_name" msgid="978606963362745020">"(ಯಾವುದೇ ಹೆಸರಿಲ್ಲ)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"ಸಂಪರ್ಕವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"ಫೋನ್‌ ಸಂಖ್ಯೆಗಳೊಂದಿಗೆ ಎಲ್ಲ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"ನವೀಕರಣಗಳನ್ನು ವೀಕ್ಷಿಸಿ"</string>
-    <string name="account_phone" msgid="7067809073194061035">"ಸಾಧನ-ಮಾತ್ರ, ಸಿಂಕ್ ಮಾಡಲಾಗದಿರುವುದು"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"ಹೆಸರು"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"ಅಡ್ಡಹೆಸರು"</string>
-    <string name="full_name" msgid="648186563998465740">"ಹೆಸರು"</string>
-    <string name="name_given" msgid="5096576006314820536">"ಮೊದಲ ಹೆಸರು"</string>
-    <string name="name_family" msgid="6646235805198547467">"ಕೊನೆಯ ಹೆಸರು"</string>
-    <string name="name_prefix" msgid="9215326539658838">"ಹೆಸರಿನ ಪೂರ್ವಪ್ರತ್ಯಯ"</string>
-    <string name="name_middle" msgid="703755205331582769">"ಮಧ್ಯದ ಹೆಸರು"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"ಹೆಸರಿನ ಪ್ರತ್ಯಯ"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"ಫೋನೆಟಿಕ್‌‌ ಹೆಸರು"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"ಫೋನೆಟಿಕ್‌ ಮೊದಲ ಹೆಸರು"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"ಫೋನೆಟಿಕ್‌‌ ಮಧ್ಯ ಹೆಸರು"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"ಫೋನೆಟಿಕ್‌‌ ಕೊನೆಯ ಹೆಸರು"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"ಫೋನ್"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"ಇಮೇಲ್"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"ವಿಳಾಸ"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"ಸಂಘಟನೆ"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"ಸಂಬಂಧ"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"ವಿಶೇಷ ದಿನಾಂಕ"</string>
-    <string name="sms" msgid="7574344928185328095">"ಪಠ್ಯ ಸಂದೇಶ"</string>
-    <string name="postal_address" msgid="1804707930129674200">"ವಿಳಾಸ"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"ಕಂಪನಿ"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"ಶೀರ್ಷಿಕೆ"</string>
-    <string name="label_notes" msgid="2050255313694219786">"ಟಿಪ್ಪಣಿಗಳು"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"ಎಸ್‌ಐಪಿ"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"ವೆಬ್‌ಸೈಟ್"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"ಗುಂಪುಗಳು"</string>
-    <string name="email_home" msgid="889830029388962171">"ಮನೆಗೆ ಇಮೇಲ್‌ ಮಾಡಿ"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"ಮೊಬೈಲ್‌‌ಗೆ ಇಮೇಲ್‌ ಮಾಡಿ"</string>
-    <string name="email_work" msgid="4223487303344613528">"ಕೆಲಸದ ವಿಳಾಸಕ್ಕೆ ಇಮೇಲ್‌ ಮಾಡಿ"</string>
-    <string name="email_other" msgid="4246411900126012062">"ಇಮೇಲ್"</string>
-    <string name="email_custom" msgid="7246580894327511013">"<xliff:g id="CUSTOM">%s</xliff:g> ಇಮೇಲ್‌ ಮಾಡಿ"</string>
-    <string name="email" msgid="2807318537887091606">"ಇಮೇಲ್"</string>
-    <string name="postal_street" msgid="6918171741240802474">"ಗಲ್ಲಿ"</string>
-    <string name="postal_city" msgid="8674569121430005628">"ನಗರ"</string>
-    <string name="postal_region" msgid="1730369286225469192">"ರಾಜ್ಯ"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"ಪಿನ್ ಕೋಡ್"</string>
-    <string name="postal_country" msgid="232670707458768148">"ದೇಶ"</string>
-    <string name="map_home" msgid="4181131107392126938">"ಮನೆಯ ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
-    <string name="map_work" msgid="5723471185992684400">"ಕೆಲಸದ ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
-    <string name="map_other" msgid="2253764780863500516">"ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
-    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"AIM ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Windows Live ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Yahoo ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Skype ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_qq" msgid="786924280665740019">"QQ ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Google Talk ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ICQ ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Jabber ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ"</string>
-    <string name="chat" msgid="1020428260359370236">"ಚಾಟ್"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"ಎಲ್ಲ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g> ನಲ್ಲಿ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"ಕಸ್ಟಮ್‌ ವೀಕ್ಷಣೆಯಲ್ಲಿನ ಸಂಪರ್ಕಗಳು"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"ಏಕೈಕ ಸಂಪರ್ಕ"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"ಈ ಪ್ರಕಾರ ವಿಂಗಡಿಸು"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"ಮೊದಲ ಹೆಸರು"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"ಕೊನೆಯ ಹೆಸರು"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"ಹೆಸರಿನ ಫಾರ್ಮ್ಯಾಟ್‌"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ಮೊದಲ ಹೆಸರು ಮೊದಲು"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"ಕೊನೆಯ ಹೆಸರು ಮೊದಲು"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"ಪುನರಾವರ್ತನೆಗಳನ್ನು ತೆರುವುಗೊಳಿಸಿ"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ಹುಡುಕಾಟವನ್ನು ನಿಲ್ಲಿಸಿ"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"ಹುಡುಕಾಟವನ್ನು ತೆರವುಗೊಳಿಸಿ"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"ಖಾತೆ"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"ಕರೆಗಳನ್ನು ಮಾಡಲು ಯಾವಾಗಲೂ ಇದನ್ನು ಬಳಸಿ"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"ಇದರೊಂದಿಗೆ ಕರೆ ಮಾಡಿ"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"ಟಿಪ್ಪಣಿಯೊಂದಿಗೆ ಕರೆ"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"ಕರೆ ಕಳುಹಿಸಲು ಟಿಪ್ಪಣಿಯನ್ನು ಟೈಪ್ ಮಾಡಿ ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ಕಳುಹಿಸು ಮತ್ತು ಕರೆಮಾಡು"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> ಟ್ಯಾಬ್."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> <xliff:g id="TITLE_2">%1$s</xliff:g> ಟ್ಯಾಬ್. <xliff:g id="COUNT_3">%2$d</xliff:g> ಓದದಿರುವ ಐಟಂಗಳು. </item>
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ಟ್ಯಾಬ್. <xliff:g id="COUNT_3">%2$d</xliff:g> ಓದದಿರುವ ಐಟಂಗಳು. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"ವೀಡಿಯೊ ಕರೆ"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"ಹಂಚಿಕೊಳ್ಳಿ ಮತ್ತು ಕರೆ ಮಾಡಿ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">%s ಕರೆ ಮಾಡಿ</string>
+  <string name="call_home">ಮನೆಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_mobile">ಮೊಬೈಲ್‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_work">ಕೆಲಸದ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_fax_work">ಕೆಲಸದ ಫ್ಯಾಕ್ಸ್‌‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_fax_home">ಮನೆಯ ಫ್ಯಾಕ್ಸ್‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_pager">ಪೇಜರ್‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_other">ಕರೆ ಮಾಡು</string>
+  <string name="call_callback">ಕಾಲ್‌ಬ್ಯಾಕ್‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_car">ಕಾರ್‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_company_main">ಕಂಪನಿಯ ಪ್ರಮುಖ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_isdn">ISDN ಕರೆ ಮಾಡಿ</string>
+  <string name="call_main">ಮುಖ್ಯ ಸಂಖ್ಯೆಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_other_fax">ಫ್ಯಾಕ್ಸ್‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_radio">ರೇಡಿಯೋಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_telex">ಟೆಲೆಕ್ಸ್‌‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_tty_tdd">TTY/TDD ಕರೆ ಮಾಡಿ</string>
+  <string name="call_work_mobile">ಕೆಲಸದ ಮೊಬೈಲ್‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_work_pager">ಕೆಲಸದ ಪೇಜರ್‌‌ಗೆ ಕರೆ ಮಾಡಿ</string>
+  <string name="call_assistant">%s ಕರೆ ಮಾಡಿ</string>
+  <string name="call_mms">MMS ಕರೆ ಮಾಡಿ</string>
+  <string name="sms_custom">%s ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_home">ನಿವಾಸಕ್ಕೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_mobile">ಮೊಬೈಲ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_work">ಕೆಲಸದ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_fax_work">ಕೆಲಸದ ಫ್ಯಾಕ್ಸ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_fax_home">ಮನೆಯ ಫ್ಯಾಕ್ಸ್‌‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_pager">ಪೇಜರ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_other">ಪಠ್ಯ</string>
+  <string name="sms_callback">ಕಾಲ್‌ಬ್ಯಾಕ್‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_car">ಕಾರ್‌ನ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_company_main">ಕಂಪನಿಯ ಮುಖ್ಯ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_isdn">ISDN ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_main">ಮುಖ್ಯ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_other_fax">ಫ್ಯಾಕ್ಸ್‌‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_radio">ರೇಡಿಯೋ ಸಂಖ್ಯೆಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_telex">ಟೆಲೆಕ್ಸ್‌‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_tty_tdd">TTY/TDD ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_work_mobile">ಕೆಲಸದದ ಮೊಬೈಲ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_work_pager">ಕೆಲಸದ ಪೇಜರ್‌‌ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_assistant">%s ಗೆ ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="sms_mms">MMS ಸಂದೇಶ ಮಾಡಿ</string>
+  <string name="clearFrequentsConfirmation_title">ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವುದನ್ನು ತೆರುವುಗೊಳಿಸುವುದೇ?</string>
+  <string name="clearFrequentsConfirmation">ಸಂಪರ್ಕಗಳು ಮತ್ತು ಫೋನ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಪದೇ ಪದೇ ಸಂಪರ್ಕಪಡಿಸಿರುವ ಪಟ್ಟಿಯನ್ನು ನೀವು ತೆರುವುಗೊಳಿಸುತ್ತೀರಿ ಮತ್ತು ಮೊದಲಿನಿಂದ ನಿಮ್ಮ ವಿಳಾಸ ಪ್ರಾಶಸ್ತ್ಯಗಳನ್ನು ತಿಳಿಯಲು ಇಮೇಲ್‌ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಒತ್ತಾಯಿಸಿ.</string>
+  <string name="clearFrequentsProgress_title">ಪದೇ ಪದೇ ಸಂಪರ್ಕಿಸಿರುವುದನ್ನು ತೆರುವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="status_available">ಲಭ್ಯವಿದೆ</string>
+  <string name="status_away">ದೂರ</string>
+  <string name="status_busy">ಕಾರ್ಯನಿರತ</string>
+  <string name="contactsList">ಸಂಪರ್ಕಗಳು</string>
+  <string name="contact_suggestions">ಉನ್ನತ ಸಲಹೆ</string>
+  <string name="local_invisible_directory">ಇತರೆ</string>
+  <string name="directory_search_label">ಡೈರೆಕ್ಟರಿ</string>
+  <string name="directory_search_label_work">ಕೆಲಸದ ಡೈರೆಕ್ಟರಿ</string>
+  <string name="local_search_label">ಎಲ್ಲಾ ಸಂಪರ್ಕಗಳು</string>
+  <string name="local_suggestions_search_label">ಸಲಹೆಗಳು</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ನಾನು</string>
+  <string name="missing_name">(ಯಾವುದೇ ಹೆಸರಿಲ್ಲ)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">ಸಂಪರ್ಕವನ್ನು ವೀಕ್ಷಿಸಿ</string>
+  <string name="list_filter_phones">ಫೋನ್‌ ಸಂಖ್ಯೆಗಳೊಂದಿಗೆ ಎಲ್ಲ ಸಂಪರ್ಕಗಳು</string>
+  <string name="list_filter_phones_work">ಕೆಲಸದ ಪ್ರೊಫೈಲ್ ಸಂಪರ್ಕಗಳು</string>
+  <string name="view_updates_from_group">ನವೀಕರಣಗಳನ್ನು ವೀಕ್ಷಿಸಿ</string>
+  <string name="account_phone">ಸಾಧನ-ಮಾತ್ರ, ಸಿಂಕ್ ಮಾಡಲಾಗದಿರುವುದು</string>
+  <string name="nameLabelsGroup">ಹೆಸರು</string>
+  <string name="nicknameLabelsGroup">ಅಡ್ಡಹೆಸರು</string>
+  <string name="full_name">ಹೆಸರು</string>
+  <string name="name_given">ಮೊದಲ ಹೆಸರು</string>
+  <string name="name_family">ಕೊನೆಯ ಹೆಸರು</string>
+  <string name="name_prefix">ಹೆಸರಿನ ಪೂರ್ವಪ್ರತ್ಯಯ</string>
+  <string name="name_middle">ಮಧ್ಯದ ಹೆಸರು</string>
+  <string name="name_suffix">ಹೆಸರಿನ ಪ್ರತ್ಯಯ</string>
+  <string name="name_phonetic">ಫೋನೆಟಿಕ್‌‌ ಹೆಸರು</string>
+  <string name="name_phonetic_given">ಫೋನೆಟಿಕ್‌ ಮೊದಲ ಹೆಸರು</string>
+  <string name="name_phonetic_middle">ಫೋನೆಟಿಕ್‌‌ ಮಧ್ಯ ಹೆಸರು</string>
+  <string name="name_phonetic_family">ಫೋನೆಟಿಕ್‌‌ ಕೊನೆಯ ಹೆಸರು</string>
+  <string name="phoneLabelsGroup">ಫೋನ್</string>
+  <string name="emailLabelsGroup">ಇಮೇಲ್</string>
+  <string name="postalLabelsGroup">ವಿಳಾಸ</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">ಸಂಘಟನೆ</string>
+  <string name="relationLabelsGroup">ಸಂಬಂಧ</string>
+  <string name="eventLabelsGroup">ವಿಶೇಷ ದಿನಾಂಕ</string>
+  <string name="sms">ಪಠ್ಯ ಸಂದೇಶ</string>
+  <string name="postal_address">ವಿಳಾಸ</string>
+  <string name="ghostData_company">ಕಂಪನಿ</string>
+  <string name="ghostData_title">ಶೀರ್ಷಿಕೆ</string>
+  <string name="label_notes">ಟಿಪ್ಪಣಿಗಳು</string>
+  <string name="label_sip_address">ಎಸ್‌ಐಪಿ</string>
+  <string name="websiteLabelsGroup">ವೆಬ್‌ಸೈಟ್</string>
+  <string name="groupsLabel">ಗುಂಪುಗಳು</string>
+  <string name="email_home">ಮನೆಗೆ ಇಮೇಲ್‌ ಮಾಡಿ</string>
+  <string name="email_mobile">ಮೊಬೈಲ್‌‌ಗೆ ಇಮೇಲ್‌ ಮಾಡಿ</string>
+  <string name="email_work">ಕೆಲಸದ ವಿಳಾಸಕ್ಕೆ ಇಮೇಲ್‌ ಮಾಡಿ</string>
+  <string name="email_other">ಇಮೇಲ್</string>
+  <string name="email_custom">%s ಇಮೇಲ್‌ ಮಾಡಿ</string>
+  <string name="email">ಇಮೇಲ್</string>
+  <string name="postal_street">ಗಲ್ಲಿ</string>
+  <string name="postal_city">ನಗರ</string>
+  <string name="postal_region">ರಾಜ್ಯ</string>
+  <string name="postal_postcode">ಪಿನ್ ಕೋಡ್</string>
+  <string name="postal_country">ದೇಶ</string>
+  <string name="map_home">ಮನೆಯ ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ</string>
+  <string name="map_work">ಕೆಲಸದ ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ</string>
+  <string name="map_other">ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ</string>
+  <string name="map_custom">%s ವಿಳಾಸವನ್ನು ವೀಕ್ಷಿಸಿ</string>
+  <string name="chat_aim">AIM ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_msn">Windows Live ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_yahoo">Yahoo ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_skype">Skype ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_qq">QQ ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_gtalk">Google Talk ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_icq">ICQ ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat_jabber">Jabber ಬಳಸಿಕೊಂಡು ಚಾಟ್‌ ಮಾಡಿ</string>
+  <string name="chat">ಚಾಟ್</string>
+  <string name="list_filter_all_accounts">ಎಲ್ಲ ಸಂಪರ್ಕಗಳು</string>
+  <string name="listAllContactsInAccount">%s ನಲ್ಲಿ ಸಂಪರ್ಕಗಳು</string>
+  <string name="listCustomView">ಕಸ್ಟಮ್‌ ವೀಕ್ಷಣೆಯಲ್ಲಿನ ಸಂಪರ್ಕಗಳು</string>
+  <string name="listSingleContact">ಏಕೈಕ ಸಂಪರ್ಕ</string>
+  <string name="display_options_sort_list_by">ಈ ಪ್ರಕಾರ ವಿಂಗಡಿಸು</string>
+  <string name="display_options_sort_by_given_name">ಮೊದಲ ಹೆಸರು</string>
+  <string name="display_options_sort_by_family_name">ಕೊನೆಯ ಹೆಸರು</string>
+  <string name="display_options_view_names_as">ಹೆಸರಿನ ಫಾರ್ಮ್ಯಾಟ್‌</string>
+  <string name="display_options_view_given_name_first">ಮೊದಲ ಹೆಸರು ಮೊದಲು</string>
+  <string name="display_options_view_family_name_first">ಕೊನೆಯ ಹೆಸರು ಮೊದಲು</string>
+  <string name="menu_clear_frequents">ಪುನರಾವರ್ತನೆಗಳನ್ನು ತೆರುವುಗೊಳಿಸಿ</string>
+  <string name="action_menu_back_from_search">ಹುಡುಕಾಟವನ್ನು ನಿಲ್ಲಿಸಿ</string>
+  <string name="description_clear_search">ಹುಡುಕಾಟವನ್ನು ತೆರವುಗೊಳಿಸಿ</string>
+  <string name="select_account_dialog_title">ಖಾತೆ</string>
+  <string name="set_default_account">ಕರೆಗಳನ್ನು ಮಾಡಲು ಯಾವಾಗಲೂ ಇದನ್ನು ಬಳಸಿ</string>
+  <string name="select_phone_account_for_calls">ಈ ಕರೆಗಾಗಿ ಸಿಮ್ ಆರಿಸಿ</string>
+  <string name="select_phone_account_for_calls_remember">ಈ ಆಯ್ಕೆಯನ್ನು ನೆನಪಿಡಿ</string>
+  <string name="call_with_a_note">ಟಿಪ್ಪಣಿಯೊಂದಿಗೆ ಕರೆ</string>
+  <string name="call_subject_hint">ಕರೆ ಕಳುಹಿಸಲು ಟಿಪ್ಪಣಿಯನ್ನು ಟೈಪ್ ಮಾಡಿ ...</string>
+  <string name="send_and_call_button">ಕಳುಹಿಸು ಮತ್ತು ಕರೆಮಾಡು</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s ಟ್ಯಾಬ್.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s ಟ್ಯಾಬ್. %2$d ಓದದಿರುವ ಐಟಂಗಳು. </item>
+    <item quantity="other"> %1$s ಟ್ಯಾಬ್. %2$d ಓದದಿರುವ ಐಟಂಗಳು. </item>
+  </plurals>
+  <string name="description_search_video_call">ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="description_search_call_and_share">ಹಂಚಿಕೊಳ್ಳಿ ಮತ್ತು ಕರೆ ಮಾಡಿ</string>
 </resources>

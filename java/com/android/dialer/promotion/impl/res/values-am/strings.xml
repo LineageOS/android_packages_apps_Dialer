@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">በጥሪ ውስጥ የቀጥታ ጊዜ ጽሁፍ መልዕክት መላላክ</string>
+  <string name="rtt_promotion_details">አርቲቲ መስማት ለተሳናቸው፣ የመስማት ችግር ያለባቸው፣ የንግግር አካል ጉዳት ያለባቸው፣ ወይም ከድምፅ ብቻ በላይ ድጋፍ የሚያሻቸው ደዋዮች እገዛ ይሰጣል። የአርቲቲ መልዕክት መላላክ የጽሁፍ ግልባጮች በመሳሪያዎ ላይ በጥሪ ታሪክ ውስጥ ይቀመጣሉ። %1$s</string>
+  <string name="duo_disclosure_title">በDuo የቪዲዮ ጥሪዎችን አድርግ</string>
+  <string name="duo_disclosure_details">የGoogle Duo የቪዲዮ ጥሪ ከጓደኞች እና ቤተሰብ ጋር ፊት ለፊት እንዲወያዩ ያስችልዎታል። የውሂብ ክፍያዎች ሊተገበሩ ይችላሉ። %1$s</string>
+</resources>

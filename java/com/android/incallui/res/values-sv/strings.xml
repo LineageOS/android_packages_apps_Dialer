@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Skicka följande toner?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Ja"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Nej"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Ringer"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Pågående samtal"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Pågående videosamtal"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Pågående videosamtal – videoflödet har pausats"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Pågående jobbsamtal"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Pågående <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Inkommande <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi-samtal"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Wi-Fi-jobbsamtal"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Parkerat"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Inkommande samtal"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Inkommande samtal med foto"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Inkommande samtal med meddelande"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Inkommande samtal med plats"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Inkommande samtal med foto och meddelande"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Inkommande samtal med foto och plats"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Inkommande samtal med meddelande och plats"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Inkommande samtal med foto, meddelande och plats"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Inkommande samtal med bilagor"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Viktigt inkommande samtal"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Viktigt inkommande samtal med foto"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Viktigt inkommande samtal med meddelande"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Viktigt inkommande samtal med plats"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Viktigt inkommande samtal med foto och meddelande"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Viktigt inkommande samtal med foto och plats"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Viktigt inkommande samtal med meddelande och plats"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Viktigt inkommande samtal med foto, meddelande och plats"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Viktigt inkommande samtal med bilagor"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Inkommande jobbsamtal"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Inkommande misstänkt spamsamtal"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Inkommande begäran om videosamtal"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Svara"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Lägg på"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Godkänn"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Avvisa"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Slå på högtalaren"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Stäng av högtalaren"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Pågående samtal på en annan enhet"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Pågående videosamtal på en annan enhet"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Svara på samtal"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Svara på videosamtal"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Tjänsten stöds inte."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"gör privat"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Hantera konferenssamtal"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Nödsamtalsnummer"</string>
-    <string name="child_number" msgid="3398257437107259682">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Inget SIM-kort eller SIM-kortsfel"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Avsluta samtal"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konferenssamtal"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"I samtal"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Samtalet fortsätter med mobildata …"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Det gick inte att växla till Wi-Fi-nätverk"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Videosamtalet förblir i mobilnätverket. Vanliga dataavgifter kan tillkomma."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Visa inte detta igen"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Skicka följande toner?\n</string>
+  <string name="pause_prompt_yes">Ja</string>
+  <string name="pause_prompt_no">Nej</string>
+  <string name="notification_dialing">Ringer</string>
+  <string name="notification_ongoing_call">Pågående samtal</string>
+  <string name="notification_ongoing_video_call">Pågående videosamtal</string>
+  <string name="notification_ongoing_paused_video_call">Pågående videosamtal – videoflödet har pausats</string>
+  <string name="notification_ongoing_work_call">Pågående jobbsamtal</string>
+  <string name="notification_ongoing_call_wifi_template">Pågående %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Inkommande %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi-samtal</string>
+  <string name="notification_call_wifi_work_brand">Wi-Fi-jobbsamtal</string>
+  <string name="notification_on_hold">Parkerat</string>
+  <string name="notification_incoming_call">Inkommande samtal</string>
+  <string name="notification_incoming_video_call">Inkommande videosamtal</string>
+  <string name="notification_incoming_call_mutli_sim">Inkommande samtal på %1$s</string>
+  <string name="notification_incoming_call_with_photo">Inkommande samtal med foto</string>
+  <string name="notification_incoming_call_with_message">Inkommande samtal med meddelande</string>
+  <string name="notification_incoming_call_with_location">Inkommande samtal med plats</string>
+  <string name="notification_incoming_call_with_photo_message">Inkommande samtal med foto och meddelande</string>
+  <string name="notification_incoming_call_with_photo_location">Inkommande samtal med foto och plats</string>
+  <string name="notification_incoming_call_with_message_location">Inkommande samtal med meddelande och plats</string>
+  <string name="notification_incoming_call_with_photo_message_location">Inkommande samtal med foto, meddelande och plats</string>
+  <string name="notification_incoming_call_attachments">Inkommande samtal med bilagor</string>
+  <string name="important_notification_incoming_call">Viktigt inkommande samtal</string>
+  <string name="important_notification_incoming_call_with_photo">Viktigt inkommande samtal med foto</string>
+  <string name="important_notification_incoming_call_with_message">Viktigt inkommande samtal med meddelande</string>
+  <string name="important_notification_incoming_call_with_location">Viktigt inkommande samtal med plats</string>
+  <string name="important_notification_incoming_call_with_photo_message">Viktigt inkommande samtal med foto och meddelande</string>
+  <string name="important_notification_incoming_call_with_photo_location">Viktigt inkommande samtal med foto och plats</string>
+  <string name="important_notification_incoming_call_with_message_location">Viktigt inkommande samtal med meddelande och plats</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Viktigt inkommande samtal med foto, meddelande och plats</string>
+  <string name="important_notification_incoming_call_attachments">Viktigt inkommande samtal med bilagor</string>
+  <string name="notification_incoming_work_call">Inkommande jobbsamtal</string>
+  <string name="notification_incoming_spam_call">Inkommande misstänkt spamsamtal</string>
+  <string name="notification_requesting_video_call">Inkommande begäran om videosamtal</string>
+  <string name="notification_action_answer">Svara</string>
+  <string name="notification_action_end_call">Lägg på</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Godkänn</string>
+  <string name="notification_action_dismiss">Avvisa</string>
+  <string name="notification_action_speaker_on">Slå på högtalaren</string>
+  <string name="notification_action_speaker_off">Stäng av högtalaren</string>
+  <string name="notification_external_call">Pågående samtal på en annan enhet</string>
+  <string name="notification_external_video_call">Pågående videosamtal på en annan enhet</string>
+  <string name="notification_take_call">Svara på samtal</string>
+  <string name="notification_take_video_call">Svara på videosamtal</string>
+  <string name="incall_error_supp_service_unknown">Tjänsten stöds inte.</string>
+  <string name="goPrivate">gör privat</string>
+  <string name="manageConferenceLabel">Hantera konferenssamtal</string>
+  <string name="child_number">via %s</string>
+  <string name="callFailed_simError">Inget SIM-kort eller SIM-kortsfel</string>
+  <string name="conference_caller_disconnect_content_description">Avsluta samtal</string>
+  <string name="conference_call_name">Konferenssamtal</string>
+  <string name="generic_conference_call_name">I samtal</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Samtalet fortsätter med mobildata …</string>
+  <string name="video_call_lte_to_wifi_failed_title">Det gick inte att växla till Wi-Fi-nätverk</string>
+  <string name="video_call_lte_to_wifi_failed_message">Videosamtalet förblir i mobilnätverket. Vanliga dataavgifter kan tillkomma.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Visa inte detta igen</string>
+  <string name="bubble_return_to_call">Tillbaka till samtal</string>
+  <string name="rtt_request_dialog_title">Gå med i RTT-samtal?</string>
+  <string name="rtt_request_dialog_details">%1$s vill använda meddelanden i ditt röstsamtal.</string>
+  <string name="rtt_request_dialog_more_information">RTT hjälper döva, hörselskadade, personer med talsvårigheter eller behöver mer än endast röst.</string>
+  <string name="rtt_button_decline_request">Nej tack</string>
+  <string name="rtt_button_accept_request">Gå med i RTT</string>
 </resources>

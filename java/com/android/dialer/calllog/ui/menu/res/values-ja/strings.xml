@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_details_menu_label">通話の詳細</string>
+  <string name="delete">削除</string>
+</resources>

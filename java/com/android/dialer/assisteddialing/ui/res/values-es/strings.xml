@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Marcación asistida</string>
+  <string name="assisted_dialing_setting_summary">Predecir y añadir un código de país al llamar desde el extranjero</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Detectado automáticamente • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Detectado automáticamente</string>
+  <string name="assisted_dialing_setting_cc_category_title">País de origen</string>
+  <string name="assisted_dialing_setting_cc_title">País de origen predeterminado</string>
+</resources>

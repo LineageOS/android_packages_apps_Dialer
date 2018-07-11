@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filter all suspected spam calls?</string>
+  <string name="spam_blocking_promo_text">Calls like the one that you just blocked will no longer
+      disturb you</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filter Spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Dismiss</string>
+  <string name="spam_blocking_setting_prompt">Settings</string>
+  <string name="spam_blocking_settings_enable_error_text">Problem turning on spam filtering</string>
+  <string name="spam_blocking_settings_disable_error_text">Problem turning off spam filtering</string>
+  <string name="spam_blocking_settings_enable_complete_text">Spam filtering turned on</string>
+  <string name="spam_blocking_settings_disable_complete_text">Spam filtering turned off</string>
+</resources>

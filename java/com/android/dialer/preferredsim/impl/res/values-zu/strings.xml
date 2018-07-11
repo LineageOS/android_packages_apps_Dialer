@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Ayikwazi ukwenza ikholi ngaphandle kwemvume yefoni</string>
+  <string name="pre_call_select_phone_account">Khetha i-SIM yale kholi</string>
+  <string name="pre_call_select_phone_account_remember">Khumbula lokhu okukhethiwe</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Akutholakali uma kusetshenziswa i-%1$s</string>
+</resources>

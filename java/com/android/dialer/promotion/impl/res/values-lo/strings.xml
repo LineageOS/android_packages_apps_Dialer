@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ສົ່ງຂໍ້ຄວາມແບບສົດໆໃນການໂທ</string>
+  <string name="rtt_promotion_details">RTT ຈະຊ່ວຍເຫຼືອຜູ້ໂທທີ່ຫູໜວກ, ມີບັນຫາໃນການໄດ້ຍິນ, ບໍ່ສາມາດເວົ້າໄດ້ ຫຼື ຕ້ອງການໃຊ້ຫຼາຍກວ່າສຽງ. ການຖອດຂໍ້ຄວາມ RTT ຈະຖືກບັນທຶກໄວ້ຢູ່ອຸປະກອນຂອງທ່ານໃນປະຫວັດການໂທ. %1$s</string>
+  <string name="duo_disclosure_title">ໂທວິດີໂອດ້ວຍ Duo</string>
+  <string name="duo_disclosure_details">ການໂທວິດີໂອ Google Duo ເຮັດໃຫ້ທ່ານສາມາດລົມກັບໝູ່ ແລະ ຄອບຄົວໄດ້ແບບເຫັນໜ້າກັນ. ອາດມີການຮຽກເກັບຄ່າອິນເຕີເນັດ. %1$s</string>
+</resources>

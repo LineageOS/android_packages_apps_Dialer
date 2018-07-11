@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Negalima atlikti skambučio be telefono leidimo</string>
+  <string name="pre_call_select_phone_account">Pasir. SIM k., kad gal. atl. šį skamb.</string>
+  <string name="pre_call_select_phone_account_remember">Atsiminti šį pasirinkimą</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Nepasiekiama naudojant %1$s</string>
+</resources>

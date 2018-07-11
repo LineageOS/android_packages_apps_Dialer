@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ဖုန်းပြောနေစဉ် အချိန်နှင့်တစ်ပြေးညီ စာသားမက်ဆေ့ဂျ်ပို့ခြင်း</string>
+  <string name="rtt_promotion_details">RTT သည် နားမကြားသူ၊ နားလေးသူ၊ စကားချို့ယွင်းသူ (သို့) အသံတစ်မျိုးတည်းထက် ပိုမို၍ လိုအပ်သူများကို ကူညီပေးပါသည်။
+ RTT မက်ဆေ့ဂျ်ပို့ခြင်း စာသားမှတ်တမ်းများကို သင့်ကိရိယာရှိ ခေါ်ဆိုမှုမှတ်တမ်းတွင် သိမ်းဆည်းထားပါသည်။ %1$s</string>
+  <string name="duo_disclosure_title">Duo ဖြင့် ဗီဒီယိုခေါ်ဆိုမှုများ ပြုလုပ်ခြင်း</string>
+  <string name="duo_disclosure_details">Google Duo ဗီဒီယိုခေါ်ဆိုမှုက သင့်အား မိတ်ဆွေများ၊ မိသားစုများနှင့် မျက်နှာချင်းဆိုင် ချတ်လုပ်ခွင့်ပေးပါသည်။ ဒေတာသုံးစွဲခများ ကျသင့်နိုင်ပါသည်။ %1$s</string>
+</resources>

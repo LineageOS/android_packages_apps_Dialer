@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">कॉलमध्‍ये रिअल टाइम एसएमएस</string>
+  <string name="rtt_promotion_details">RTT अशा कॉल करणार्‍यांना साहाय्य करते, ज्‍यांना बहिरेपणा आहे, ज्‍यांना कमी ऐकू येते किंवा बोलताना अडखळतात किंवा ज्‍यांना फक्‍त आवाज पुरेसा नसतो. कॉल इतिहासामध्‍ये तुमच्‍या डिव्‍हाइसवर मेसेजिंग प्रतिलेख स्‍टोअर केले आहेत. %1$s</string>
+  <string name="duo_disclosure_title">Duo ने व्हिडिओ कॉल करा</string>
+  <string name="duo_disclosure_details">Google Duo व्हिडिओ कॉलिंग तुम्हाला तुमचे मित्रमैत्रिणी आणि कुटुंबाशी समोरासमोर चॅट करू देते. डेटा शुल्क लागू शकतात. %1$s</string>
+</resources>

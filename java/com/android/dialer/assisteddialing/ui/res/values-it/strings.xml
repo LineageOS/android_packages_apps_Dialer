@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Composizione assistita</string>
+  <string name="assisted_dialing_setting_summary">Riconosci e aggiungi il prefisso internazionale quando chiami mentre ti trovi all\'estero</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Rilevato automaticamente • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Rilevato automaticamente</string>
+  <string name="assisted_dialing_setting_cc_category_title">Paese d\'origine</string>
+  <string name="assisted_dialing_setting_cc_title">Paese d\'origine predefinito</string>
+</resources>

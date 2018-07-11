@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Nepoznato</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Javna telefonska govornica</string>
+  <string name="emergency_number">Broj hitne službe</string>
+  <string name="launcherActivityLabel">Telefon</string>
+  <string name="call">Pozovi</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Poziv se nastavlja putem Wi‑Fi mreže…</string>
+  <string name="rtt_call_not_available_toast">RTT nije dostupan za ovaj poziv</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

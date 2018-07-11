@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">ការហៅទូរសព្ទ​ដោយ​មាន​ជំនួយ</string>
+  <string name="assisted_dialing_setting_summary">ទស្សន៍ទាយ និង​បញ្ចូល​កូដ​ប្រទេស នៅពេល​អ្នក​ហៅ​ទូរសព្ទ ពេល​ធ្វើ​ដំណើរ​ក្រៅ​ប្រទេស</string>
+  <string name="assisted_dialing_setting_cc_default_summary">បាន​រកឃើញ​ដោយ​ស្វ័យប្រវត្តិ • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">បាន​រកឃើញ​ដោយស្វ័យប្រវត្តិ</string>
+  <string name="assisted_dialing_setting_cc_category_title">ប្រទេសកំណើត</string>
+  <string name="assisted_dialing_setting_cc_title">ប្រទេស​កំណើត​លំនាំដើម</string>
+</resources>

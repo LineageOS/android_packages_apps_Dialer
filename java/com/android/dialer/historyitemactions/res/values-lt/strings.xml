@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Balso skambutis</string>
+  <string name="video_call">Vaizdo skambutis</string>
+  <string name="add_to_contacts">Pridėti kontaktą</string>
+  <string name="send_a_message">Pranešimas</string>
+  <string name="not_spam">Ne šlamštas</string>
+  <string name="block_number">Blokuoti</string>
+  <string name="unblock_number">Panaikinti blokavimą</string>
+  <string name="block_and_optionally_report_spam">Blokuoti / pran. apie šlamštą</string>
+  <string name="copy_number">Kopijuoti numerį</string>
+</resources>

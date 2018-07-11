@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Vai filtrēt visus aizdomīgos nevēlamos zvanus?</string>
+  <string name="spam_blocking_promo_text">Jūs vairs netraucēs tādi zvani kā zvans, ko tikko bloķējāt.</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrēt nevēlamus zvanus</string>
+  <string name="spam_blocking_promo_action_dismiss">Nerādīt</string>
+  <string name="spam_blocking_setting_prompt">Iestatījumi</string>
+  <string name="spam_blocking_settings_enable_error_text">Ieslēdzot nevēlamu zvanu filtrēšanu, radās problēma.</string>
+  <string name="spam_blocking_settings_disable_error_text">Izslēdzot nevēlamu zvanu filtrēšanu, radās problēma.</string>
+  <string name="spam_blocking_settings_enable_complete_text">Nevēlamu zvanu filtrēšana ieslēgta</string>
+  <string name="spam_blocking_settings_disable_complete_text">Nevēlamu zvanu filtrēšana izslēgta</string>
+</resources>

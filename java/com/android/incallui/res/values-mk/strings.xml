@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Телефон"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Испрати ги следниве тонови?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Да"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Не"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Бирање"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Тековен повик"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Тековен видеоповик"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Тековен видеоповик ‑ видеото е паузирано"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Тековен работен повик"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Тековен <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Дојдовен <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Повик преку Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Работен повик преку Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"На чекање"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Дојдовен повик"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Дојдовен повик со фотографија"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Дојдовен повик со порака"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Дојдовен повик со локација"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Дојдовен повик со фотографија и порака"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Дојдовен повик со фотографија и локација"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Дојдовен повик со порака и локација"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Дојдовен повик со фотографија, порака и локација"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Дојдовен повик со прилози"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Важен дојдовен повик"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Важен дојдовен повик со фотографија"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Важен дојдовен повик со порака"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Важен дојдовен повик со локација"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Важен дојдовен повик со фотографија и порака"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Важен дојдовен повик со фотографија и локација"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Важен дојдовен повик со порака и локација"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Важен дојдовен повик со фото., порака и локација"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Важен дојдовен повик со прилози"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Дојдовен работен повик"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Дојдовниот повик може да е спам"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Дојдовно побарување за видео"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Одговори"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Спушти"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Видео"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Прифати"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Одбиј"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Вклучете го звучникот"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Исклучете го звучникот"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Повик во тек на друг уред"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Видеоповик во тек на друг уред"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Прифатете повик"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Прифатете видеоповик"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Услугата не е поддржана."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"префли на приватно"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Управувај со конференциски повик"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Број за итни случаи"</string>
-    <string name="child_number" msgid="3398257437107259682">"преку <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Нема SIM или грешка на SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Завршете го повикот"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Конференциски повик"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Повик во тек"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Повикот ќе продолжи преку мобилен интернет…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Не можеше да се префрли на Wi-Fi-мрежа"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Видеоповикот ќе остане на мобилната мрежа. Може да се наплати за мобилен интернет."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Не го прикажувај ова повторно"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Испрати ги следниве тонови?\n</string>
+  <string name="pause_prompt_yes">Да</string>
+  <string name="pause_prompt_no">Не</string>
+  <string name="notification_dialing">Бирање</string>
+  <string name="notification_ongoing_call">Тековен повик</string>
+  <string name="notification_ongoing_video_call">Тековен видеоповик</string>
+  <string name="notification_ongoing_paused_video_call">Тековен видеоповик ‑ видеото е паузирано</string>
+  <string name="notification_ongoing_work_call">Тековен работен повик</string>
+  <string name="notification_ongoing_call_wifi_template">Тековен %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Дојдовен %1$s</string>
+  <string name="notification_call_wifi_brand">Повик преку Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">Работен повик преку Wi-Fi</string>
+  <string name="notification_on_hold">На чекање</string>
+  <string name="notification_incoming_call">Дојдовен повик</string>
+  <string name="notification_incoming_video_call">Дојдовен видеоповик</string>
+  <string name="notification_incoming_call_mutli_sim">Дојдовен повик преку %1$s</string>
+  <string name="notification_incoming_call_with_photo">Дојдовен повик со фотографија</string>
+  <string name="notification_incoming_call_with_message">Дојдовен повик со порака</string>
+  <string name="notification_incoming_call_with_location">Дојдовен повик со локација</string>
+  <string name="notification_incoming_call_with_photo_message">Дојдовен повик со фотографија и порака</string>
+  <string name="notification_incoming_call_with_photo_location">Дојдовен повик со фотографија и локација</string>
+  <string name="notification_incoming_call_with_message_location">Дојдовен повик со порака и локација</string>
+  <string name="notification_incoming_call_with_photo_message_location">Дојдовен повик со фотографија, порака и локација</string>
+  <string name="notification_incoming_call_attachments">Дојдовен повик со прилози</string>
+  <string name="important_notification_incoming_call">Важен дојдовен повик</string>
+  <string name="important_notification_incoming_call_with_photo">Важен дојдовен повик со фотографија</string>
+  <string name="important_notification_incoming_call_with_message">Важен дојдовен повик со порака</string>
+  <string name="important_notification_incoming_call_with_location">Важен дојдовен повик со локација</string>
+  <string name="important_notification_incoming_call_with_photo_message">Важен дојдовен повик со фотографија и порака</string>
+  <string name="important_notification_incoming_call_with_photo_location">Важен дојдовен повик со фотографија и локација</string>
+  <string name="important_notification_incoming_call_with_message_location">Важен дојдовен повик со порака и локација</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Важен дојдовен повик со фото., порака и локација</string>
+  <string name="important_notification_incoming_call_attachments">Важен дојдовен повик со прилози</string>
+  <string name="notification_incoming_work_call">Дојдовен работен повик</string>
+  <string name="notification_incoming_spam_call">Дојдовниот повик може да е спам</string>
+  <string name="notification_requesting_video_call">Дојдовно побарување за видео</string>
+  <string name="notification_action_answer">Одговори</string>
+  <string name="notification_action_end_call">Спушти</string>
+  <string name="notification_action_answer_video">Видео</string>
+  <string name="notification_action_accept">Прифати</string>
+  <string name="notification_action_dismiss">Одбиј</string>
+  <string name="notification_action_speaker_on">Вклучете го звучникот</string>
+  <string name="notification_action_speaker_off">Исклучете го звучникот</string>
+  <string name="notification_external_call">Повик во тек на друг уред</string>
+  <string name="notification_external_video_call">Видеоповик во тек на друг уред</string>
+  <string name="notification_take_call">Прифатете повик</string>
+  <string name="notification_take_video_call">Прифатете видеоповик</string>
+  <string name="incall_error_supp_service_unknown">Услугата не е поддржана.</string>
+  <string name="goPrivate">префли на приватно</string>
+  <string name="manageConferenceLabel">Управувај со конференциски повик</string>
+  <string name="child_number">преку %s</string>
+  <string name="callFailed_simError">Нема SIM или грешка на SIM</string>
+  <string name="conference_caller_disconnect_content_description">Завршете го повикот</string>
+  <string name="conference_call_name">Конференциски повик</string>
+  <string name="generic_conference_call_name">Повик во тек</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Повикот ќе продолжи преку мобилен интернет…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Не можеше да се префрли на Wi-Fi-мрежа</string>
+  <string name="video_call_lte_to_wifi_failed_message">Видеоповикот ќе остане на мобилната мрежа. Може да се наплати за мобилен интернет.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Не го прикажувај ова повторно</string>
+  <string name="bubble_return_to_call">Назад на повикот</string>
+  <string name="rtt_request_dialog_title">Ќе се придружите на RTT-повик?</string>
+  <string name="rtt_request_dialog_details">%1$s сака да користи пораки во рамките на гласовниот повик.</string>
+  <string name="rtt_request_dialog_more_information">RTT им помага на повикувачи коишто се глуви, слабо слушаат, имаат говорна мана или пак, им е потребно многу повеќе од глас.</string>
+  <string name="rtt_button_decline_request">Не, фала</string>
+  <string name="rtt_button_accept_request">Придружи се на RTT</string>
 </resources>

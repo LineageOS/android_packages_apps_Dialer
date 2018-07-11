@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Бардык шектүү спам чалуулар чыпкалансынбы?</string>
+  <string name="spam_blocking_promo_text">Сиз азыр эле бөгөттөгөн чалууга окшош чалуулар мындан ары
+      тынчыңызды албайт</string>
+  <string name="spam_blocking_promo_action_filter_spam">Спамды чыпкалоо</string>
+  <string name="spam_blocking_promo_action_dismiss">Жабуу</string>
+  <string name="spam_blocking_setting_prompt">Жөндөөлөр</string>
+  <string name="spam_blocking_settings_enable_error_text">Спамдын чыпкасын күйгүзүүдө көйгөй келип чыкты</string>
+  <string name="spam_blocking_settings_disable_error_text">Спамдын чыпкасын өчүрүүдө көйгөй келип чыкты</string>
+  <string name="spam_blocking_settings_enable_complete_text">Спам чыпкасы күйгүзүлдү</string>
+  <string name="spam_blocking_settings_disable_complete_text">Спам чыпкасы өчүрүлдү</string>
+</resources>

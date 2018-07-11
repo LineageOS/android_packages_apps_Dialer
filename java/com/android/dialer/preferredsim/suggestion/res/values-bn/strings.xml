@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">একই পরিষেবা প্রদানকারীতে চলে</string>
+  <string name="pre_call_select_phone_account_hint_frequent">সম্প্রতি ব্যবহৃত</string>
+</resources>

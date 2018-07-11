@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s ബ്ലോക്ക് ചെയ്യണോ?</string>
+  <string name="block_number_confirmation_message_new_filtering">നിങ്ങൾക്ക് ഇനി ഈ നമ്പറിൽ നിന്ന് കോളുകളോ ടെക്‌‌സ്‌റ്റോ ലഭിക്കില്ല.</string>
+  <string name="block_number_ok">ബ്ലോക്കുചെയ്യുക</string>
+  <string name="unblock_number_ok">അൺബ്ലോക്കുചെയ്യുക</string>
+  <string name="block_report_number_alert_title">%1$s ബ്ലോക്ക് ചെയ്യണോ?</string>
+  <string name="block_report_number_alert_details">നിങ്ങൾക്ക് ഇനി ഈ നമ്പറിൽ നിന്ന് കോളുകൾ ലഭിക്കില്ല.</string>
+  <string name="block_number_alert_details">%1$s ഈ കോൾ സ്‌പാം ആയി റിപ്പോർട്ട് ചെയ്യും.</string>
+  <string name="unblock_number_alert_details">ഈ നമ്പർ അൺ‌ബ്ലോക്ക് ചെയ്‌ത്, സ്‌പാമല്ലെന്ന് റിപ്പോർട്ട് ചെയ്യും. ഭാവിയിൽ വരാൻ പോകുന്ന കോളുകളെ സ്‌പാം ആയി കണക്കാക്കപ്പെടില്ല.</string>
+  <string name="unblock_report_number_alert_title">%1$s അൺബ്ലോക്ക് ചെയ്യണോ?</string>
+  <string name="report_not_spam_alert_button">റിപ്പോര്‍ട്ട് ചെയ്യുക</string>
+  <string name="report_not_spam_alert_title">ഒരു തെറ്റ് റിപ്പോർട്ട് ചെയ്യണോ?</string>
+  <string name="report_not_spam_alert_details">%1$s നമ്പറിൽ നിന്ന് ഭാവിയിൽ വരാൻ പോകുന്ന കോളുകളെ ഇനി സ്‌പാമെന്ന് കണക്കാക്കില്ല.</string>
+  <string name="checkbox_report_as_spam_action">കോൾ സ്‌പാം ആണെന്ന് റിപ്പോർട്ട് ചെയ്യുക</string>
+  <string name="block_number_failed_toast">ഈ നമ്പർ ബ്ലോക്ക് ചെയ്യുന്നതിൽ പ്രശ്‌നം</string>
+  <string name="unblock_number_failed_toast">ഈ നമ്പർ അൺബ്ലോക്ക് ചെയ്യുന്നതിൽ പ്രശ്‌നം</string>
+</resources>

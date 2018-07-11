@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">Αγαπημένα</string>
+  <string name="suggestions_header">Συχνή επικοινωνία</string>
+  <string name="speed_dial_add_button_text">Προσθήκη</string>
+  <string name="speed_dial_remember_this_choice">Διατήρηση αυτής της ρύθμισης</string>
+  <string name="speed_dial_disambig_dialog_title">Επιλέξτε τύπο κλήσης</string>
+  <string name="disambig_option_video_call">Βιντεοκλήση</string>
+  <string name="disambig_option_voice_call">Κλήση</string>
+  <string name="add_favorite_activity_title">Προσθήκη Αγαπημένου</string>
+  <string name="contact_menu_voice_call">Φωνητική κλήση</string>
+  <string name="contact_menu_video_call">Βιντεοκλήση</string>
+  <string name="contact_menu_message">Μήνυμα</string>
+  <string name="contact_menu_remove">Κατάργηση</string>
+  <string name="contact_menu_contact_info">Στοιχεία επικ.</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">Προσθήκη αγαπημένου</string>
+  <string name="speed_dial_contacts_permission_description">Για να ενεργοποιήσετε την ταχεία κλήση, ενεργοποιήστε την άδεια επαφών.</string>
+  <string name="speed_dial_turn_on_contacts_permission">Ενεργοποίηση</string>
+  <string name="speed_dial_no_contacts_description">Δεν έχετε προσθέσει ακόμα αγαπημένα</string>
+  <string name="speed_dial_no_contacts_action_text">Προσθήκη αγαπημένου</string>
+  <string name="speed_dial_remove_favorites">Κατάργηση από τα αγαπημένα</string>
 </resources>

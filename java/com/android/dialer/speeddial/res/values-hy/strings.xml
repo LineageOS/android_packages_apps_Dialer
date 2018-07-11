@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">Ընտրանի</string>
+  <string name="suggestions_header">Հաճախակի օգտագործվող կոնտակտներ</string>
+  <string name="speed_dial_add_button_text">Ավելացնել</string>
+  <string name="speed_dial_remember_this_choice">Հիշել այս ընտրությունը</string>
+  <string name="speed_dial_disambig_dialog_title">Ընտրեք զանգի տեսակը</string>
+  <string name="disambig_option_video_call">Տեսազանգ</string>
+  <string name="disambig_option_voice_call">Զանգ</string>
+  <string name="add_favorite_activity_title">Ընտրեք կոնտակտ՝ ընտրանիում ավելացնելու համար</string>
+  <string name="contact_menu_voice_call">Զանգ</string>
+  <string name="contact_menu_video_call">Տեսազանգ</string>
+  <string name="contact_menu_message">SMS</string>
+  <string name="contact_menu_remove">Հեռացնել</string>
+  <string name="contact_menu_contact_info">Կոնտակտ</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">Ավելացնել ընտրանուն</string>
+  <string name="speed_dial_contacts_permission_description">Արագ համարհավաքման գործառույթից օգտվելու համար միացրեք «Կոնտակտներ» թույլտվությունը:</string>
+  <string name="speed_dial_turn_on_contacts_permission">Միացնել</string>
+  <string name="speed_dial_no_contacts_description">Ցանկում դեռ նախընտրած կոնտակտներ չեք ավելացրել</string>
+  <string name="speed_dial_no_contacts_action_text">Ավելացնել նախընտրած կոնտակտ</string>
+  <string name="speed_dial_remove_favorites">Հեռացնել ընտրանուց</string>
 </resources>

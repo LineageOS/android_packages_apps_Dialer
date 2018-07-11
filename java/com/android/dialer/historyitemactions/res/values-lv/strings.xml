@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Balss zvans</string>
+  <string name="video_call">Videozvans</string>
+  <string name="add_to_contacts">Pievienot kontaktpersonu</string>
+  <string name="send_a_message">Sūtīt īsziņu</string>
+  <string name="not_spam">Nav nevēlams numurs</string>
+  <string name="block_number">Bloķēt</string>
+  <string name="unblock_number">Atbloķēt</string>
+  <string name="block_and_optionally_report_spam">Bloķēt numuru/ziņot par to</string>
+  <string name="copy_number">Kopēt numuru</string>
+</resources>

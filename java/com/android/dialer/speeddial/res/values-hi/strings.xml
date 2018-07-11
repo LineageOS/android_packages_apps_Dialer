@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">पसंदीदा</string>
+  <string name="suggestions_header">नियमित संपर्क</string>
+  <string name="speed_dial_add_button_text">शामिल करें</string>
+  <string name="speed_dial_remember_this_choice">यह चयन याद रखें</string>
+  <string name="speed_dial_disambig_dialog_title">कॉल का प्रकार चुनें</string>
+  <string name="disambig_option_video_call">वीडियो कॉल</string>
+  <string name="disambig_option_voice_call">कॉल करें</string>
+  <string name="add_favorite_activity_title">पसंदीदा जोड़ें</string>
+  <string name="contact_menu_voice_call">वॉइस कॉल करें</string>
+  <string name="contact_menu_video_call">वीडियो कॉल करें</string>
+  <string name="contact_menu_message">मैसेज भेजें</string>
+  <string name="contact_menu_remove">हटाएं</string>
+  <string name="contact_menu_contact_info">संपर्क जानकारी</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">इन्हें पसंदीदा संपर्क बनाएं</string>
+  <string name="speed_dial_contacts_permission_description">स्पीड डायल चालू करने के लिए, \'संपर्क\' इजाज़त चालू करें.</string>
+  <string name="speed_dial_turn_on_contacts_permission">चालू करें</string>
+  <string name="speed_dial_no_contacts_description">आपने अभी तक कोई भी पसंदीदा संपर्क नहीं जोड़ा है.</string>
+  <string name="speed_dial_no_contacts_action_text">पसंदीदा संपर्क जोड़ें</string>
+  <string name="speed_dial_remove_favorites">पसंदीदा से हटाएं</string>
 </resources>

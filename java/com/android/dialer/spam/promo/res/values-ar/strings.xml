@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">هل تريد تصفية كل المكالمات غير المرغوب فيها؟</string>
+  <string name="spam_blocking_promo_text">لن تزعجك أي مكالمات مثل التي حظرتها لتوك
+      بعد الآن</string>
+  <string name="spam_blocking_promo_action_filter_spam">تصفية المحتوى غير المرغوب فيه</string>
+  <string name="spam_blocking_promo_action_dismiss">رفض</string>
+  <string name="spam_blocking_setting_prompt">الإعدادات</string>
+  <string name="spam_blocking_settings_enable_error_text">حدثت مشكلة أثناء تفعيل تصفية المحتوى غير المرغوب فيه</string>
+  <string name="spam_blocking_settings_disable_error_text">حدثت مشكلة أثناء إيقاف تصفية المحتوى غير المرغوب فيه</string>
+  <string name="spam_blocking_settings_enable_complete_text">تم تفعيل تصفية المحتوى غير المرغوب فيه</string>
+  <string name="spam_blocking_settings_disable_complete_text">تم إيقاف تصفية المحتوى غير المرغوب فيه</string>
+</resources>

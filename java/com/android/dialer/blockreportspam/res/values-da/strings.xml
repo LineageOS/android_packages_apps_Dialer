@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Vil du blokere %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Du modtager ikke længere opkald eller sms-beskeder fra dette nummer.</string>
+  <string name="block_number_ok">BLOKER</string>
+  <string name="unblock_number_ok">FJERN BLOKERING</string>
+  <string name="block_report_number_alert_title">Vil du blokere %1$s?</string>
+  <string name="block_report_number_alert_details">Du modtager ikke længere opkald fra dette nummer.</string>
+  <string name="block_number_alert_details">%1$s Dette opkald rapporteres som spam.</string>
+  <string name="unblock_number_alert_details">Blokeringen af nummeret ophæves, og spam rapporteres ikke. Nye opkald registreres ikke som spam.</string>
+  <string name="unblock_report_number_alert_title">Vil du fjerne blokeringen af %1$s?</string>
+  <string name="report_not_spam_alert_button">Rapportér</string>
+  <string name="report_not_spam_alert_title">Vil du rapportere en fejl?</string>
+  <string name="report_not_spam_alert_details">Nye opkald fra %1$s registreres ikke længere som spam.</string>
+  <string name="checkbox_report_as_spam_action">Rapportér opkaldet som spam</string>
+  <string name="block_number_failed_toast">Der opstod et problem, da dette nummer skulle blokeres</string>
+  <string name="unblock_number_failed_toast">Der opstod et problem, da blokeringen af dette nummer skulle fjernes</string>
+</resources>

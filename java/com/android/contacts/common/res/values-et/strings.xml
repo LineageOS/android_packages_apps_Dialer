@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Tekst on kopeeritud"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Helista numbrile <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Helista kodutelefoninumbrile"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Helista mobiilinumbrile"</string>
-    <string name="call_work" msgid="6040550697395300892">"Helista töönumbrile"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Helista tööfaksinumbrile"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Helista kodufaksinumbrile"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Helista piiparinumbrile"</string>
-    <string name="call_other" msgid="5536385588712587235">"Helista"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Helista tagasihelistusnumbrile"</string>
-    <string name="call_car" msgid="3197417098027764954">"Helista autotelefoninumbrile"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Helista ettevõtte põhinumbrile"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Helista ISDN-telefoninumbrile"</string>
-    <string name="call_main" msgid="3293707608770407814">"Helista põhinumbrile"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Helista faksinumbrile"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Helista raadiotelefoninumbrile"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Helista teleksinumbrile"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Helista TTY-/TDD-numbrile"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Helista töömobiilinumbrile"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Helista tööpiiparinumbrile"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Helista numbrile <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Helista MMS-i numbrile"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Saada sõnum numbrile <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Saada sõnum kodutelefoninumbrile"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Saada sõnum mobiilinumbrile"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Saada sõnum töönumbrile"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Saada sõnum tööfaksinumbrile"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Saada sõnum kodufaksinumbrile"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Saada sõnum piiparinumbrile"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Saada sõnum"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Saada sõnum tagasihelistusnumbrile"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Saada sõnum autotelefoninumbrile"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Saada sõnum ettevõtte põhitelefoninumbrile"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Saada sõnum ISDN-telefoninumbrile"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Saada sõnum põhinumbrile"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Saada sõnum faksinumbrile"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Saada sõnum raadiotelefoninumbrile"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Saada sõnum teleksinumbrile"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Saada sõnum TTY-/TDD-numbrile"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Saada sõnum töömobiilinumbrile"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Saada sõnum tööpiiparinumbrile"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Saada sõnum numbrile <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Saada sõnum MMS-i numbrile"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Kas kustutada sagedased kontaktid?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Kustutate rakendustes Kontaktid ja Telefon sagedaste kontaktide loendi, mistõttu meilirakendused peavad teie adresseerimiseelistused uuesti omandama."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Saged. kontaktide kustutamine ..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Saadaval"</string>
-    <string name="status_away" msgid="2298688367552893953">"Eemal"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Hõivatud"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kontaktid"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Populaarsed soovitused"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Muu"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Kataloog"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Töökontaktide kataloog"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Kõik kontaktid"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Soovitused"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Mina"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Nimi puudub)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Kuva kontakt"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Kõik telefoninumbritega kontaktid"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Tööprofiili kontaktid"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Kuva värskendused"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Ainult seadmes, sünkroonimata"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Nimi"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Hüüdnimi"</string>
-    <string name="full_name" msgid="648186563998465740">"Nimi"</string>
-    <string name="name_given" msgid="5096576006314820536">"Eesnimi"</string>
-    <string name="name_family" msgid="6646235805198547467">"Perekonnanimi"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Nime eesliide"</string>
-    <string name="name_middle" msgid="703755205331582769">"Teine nimi"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Nime järelliide"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Foneetiline nimi"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Foneetiline eesnimi"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Foneetiline keskmine nimi"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Foneetiline perekonnanimi"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Meilimine"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Aadress"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Kiirsuhtlus"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organisatsioon"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Suhe"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Erikuupäev"</string>
-    <string name="sms" msgid="7574344928185328095">"Tekstisõnum"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Aadress"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Ettevõte"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Nimetus"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Märkmed"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Veebisait"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Grupid"</string>
-    <string name="email_home" msgid="889830029388962171">"Saada meilisõnum kodusele aadressile"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Saada meilisõnum mobiilile"</string>
-    <string name="email_work" msgid="4223487303344613528">"Saada meiliaadress tööaadressile"</string>
-    <string name="email_other" msgid="4246411900126012062">"Meilimine"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Saada meilisõnum aadressile <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Meilimine"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Tänav"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Linn"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Osariik"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Sihtnumber"</string>
-    <string name="postal_country" msgid="232670707458768148">"Riik"</string>
-    <string name="map_home" msgid="4181131107392126938">"Kuva kodune aadress"</string>
-    <string name="map_work" msgid="5723471185992684400">"Kuva tööaadress"</string>
-    <string name="map_other" msgid="2253764780863500516">"Kuva aadress"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Kuva aadress (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Vestlus AIM-i kasutades"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Vestlus Windows Live\'i kasutades"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Vestlus Yahood kasutades"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Vestlus Skype\'i kasutades"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Vestlus QQ kasutades"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Vestlus Google Talki kasutades"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Vestlus ICQ-d kasutades"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Vestlus Jabberit kasutades"</string>
-    <string name="chat" msgid="1020428260359370236">"Vestlus"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Kõik kontaktid"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Konto <xliff:g id="NAME">%s</xliff:g> kontaktid"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Kontaktid kohandatud vaates"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Üks kontakt"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sortimisalus"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Eesnimi"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Perekonnanimi"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Nimevorming"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Eesnimi enne"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Perekonnanimi enne"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Sagedaste kustutamine"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"otsimise peatamine"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Otsingu kustutamine"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Konto"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Kasuta helistamiseks alati seda"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Helistamine kontoga"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Kõne koos märkusega"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Sisestage märkus, mis koos kõnega saata ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"SAADA JA HELISTA"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Vahekaart <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> Vahekaart <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> lugemata üksust. </item>
-      <item quantity="one"> Vahekaart <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> lugemata üksus. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videokõne"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Jagamine ja helistamine"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Helista numbrile %s</string>
+  <string name="call_home">Helista kodutelefoninumbrile</string>
+  <string name="call_mobile">Helista mobiilinumbrile</string>
+  <string name="call_work">Helista töönumbrile</string>
+  <string name="call_fax_work">Helista tööfaksinumbrile</string>
+  <string name="call_fax_home">Helista kodufaksinumbrile</string>
+  <string name="call_pager">Helista piiparinumbrile</string>
+  <string name="call_other">Helista</string>
+  <string name="call_callback">Helista tagasihelistusnumbrile</string>
+  <string name="call_car">Helista autotelefoninumbrile</string>
+  <string name="call_company_main">Helista ettevõtte põhinumbrile</string>
+  <string name="call_isdn">Helista ISDN-telefoninumbrile</string>
+  <string name="call_main">Helista põhinumbrile</string>
+  <string name="call_other_fax">Helista faksinumbrile</string>
+  <string name="call_radio">Helista raadiotelefoninumbrile</string>
+  <string name="call_telex">Helista teleksinumbrile</string>
+  <string name="call_tty_tdd">Helista TTY-/TDD-numbrile</string>
+  <string name="call_work_mobile">Helista töömobiilinumbrile</string>
+  <string name="call_work_pager">Helista tööpiiparinumbrile</string>
+  <string name="call_assistant">Helista numbrile %s</string>
+  <string name="call_mms">Helista MMS-i numbrile</string>
+  <string name="sms_custom">Saada sõnum numbrile %s</string>
+  <string name="sms_home">Saada sõnum kodutelefoninumbrile</string>
+  <string name="sms_mobile">Saada sõnum mobiilinumbrile</string>
+  <string name="sms_work">Saada sõnum töönumbrile</string>
+  <string name="sms_fax_work">Saada sõnum tööfaksinumbrile</string>
+  <string name="sms_fax_home">Saada sõnum kodufaksinumbrile</string>
+  <string name="sms_pager">Saada sõnum piiparinumbrile</string>
+  <string name="sms_other">Saada sõnum</string>
+  <string name="sms_callback">Saada sõnum tagasihelistusnumbrile</string>
+  <string name="sms_car">Saada sõnum autotelefoninumbrile</string>
+  <string name="sms_company_main">Saada sõnum ettevõtte põhitelefoninumbrile</string>
+  <string name="sms_isdn">Saada sõnum ISDN-telefoninumbrile</string>
+  <string name="sms_main">Saada sõnum põhinumbrile</string>
+  <string name="sms_other_fax">Saada sõnum faksinumbrile</string>
+  <string name="sms_radio">Saada sõnum raadiotelefoninumbrile</string>
+  <string name="sms_telex">Saada sõnum teleksinumbrile</string>
+  <string name="sms_tty_tdd">Saada sõnum TTY-/TDD-numbrile</string>
+  <string name="sms_work_mobile">Saada sõnum töömobiilinumbrile</string>
+  <string name="sms_work_pager">Saada sõnum tööpiiparinumbrile</string>
+  <string name="sms_assistant">Saada sõnum numbrile %s</string>
+  <string name="sms_mms">Saada sõnum MMS-i numbrile</string>
+  <string name="clearFrequentsConfirmation_title">Kas kustutada sagedased kontaktid?</string>
+  <string name="clearFrequentsConfirmation">Kustutate rakendustes Kontaktid ja Telefon sagedaste kontaktide loendi, mistõttu meilirakendused peavad teie adresseerimiseelistused uuesti omandama.</string>
+  <string name="clearFrequentsProgress_title">Saged. kontaktide kustutamine ...</string>
+  <string name="status_available">Saadaval</string>
+  <string name="status_away">Eemal</string>
+  <string name="status_busy">Hõivatud</string>
+  <string name="contactsList">Kontaktid</string>
+  <string name="contact_suggestions">Populaarsed soovitused</string>
+  <string name="local_invisible_directory">Muu</string>
+  <string name="directory_search_label">Kataloog</string>
+  <string name="directory_search_label_work">Töökontaktide kataloog</string>
+  <string name="local_search_label">Kõik kontaktid</string>
+  <string name="local_suggestions_search_label">Soovitused</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mina</string>
+  <string name="missing_name">(Nimi puudub)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Kuva kontakt</string>
+  <string name="list_filter_phones">Kõik telefoninumbritega kontaktid</string>
+  <string name="list_filter_phones_work">Tööprofiili kontaktid</string>
+  <string name="view_updates_from_group">Kuva värskendused</string>
+  <string name="account_phone">Ainult seadmes, sünkroonimata</string>
+  <string name="nameLabelsGroup">Nimi</string>
+  <string name="nicknameLabelsGroup">Hüüdnimi</string>
+  <string name="full_name">Nimi</string>
+  <string name="name_given">Eesnimi</string>
+  <string name="name_family">Perekonnanimi</string>
+  <string name="name_prefix">Nime eesliide</string>
+  <string name="name_middle">Teine nimi</string>
+  <string name="name_suffix">Nime järelliide</string>
+  <string name="name_phonetic">Foneetiline nimi</string>
+  <string name="name_phonetic_given">Foneetiline eesnimi</string>
+  <string name="name_phonetic_middle">Foneetiline keskmine nimi</string>
+  <string name="name_phonetic_family">Foneetiline perekonnanimi</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">Meilimine</string>
+  <string name="postalLabelsGroup">Aadress</string>
+  <string name="imLabelsGroup">Kiirsuhtlus</string>
+  <string name="organizationLabelsGroup">Organisatsioon</string>
+  <string name="relationLabelsGroup">Suhe</string>
+  <string name="eventLabelsGroup">Erikuupäev</string>
+  <string name="sms">Tekstisõnum</string>
+  <string name="postal_address">Aadress</string>
+  <string name="ghostData_company">Ettevõte</string>
+  <string name="ghostData_title">Nimetus</string>
+  <string name="label_notes">Märkmed</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Veebisait</string>
+  <string name="groupsLabel">Grupid</string>
+  <string name="email_home">Saada meilisõnum kodusele aadressile</string>
+  <string name="email_mobile">Saada meilisõnum mobiilile</string>
+  <string name="email_work">Saada meiliaadress tööaadressile</string>
+  <string name="email_other">Meilimine</string>
+  <string name="email_custom">Saada meilisõnum aadressile %s</string>
+  <string name="email">Meilimine</string>
+  <string name="postal_street">Tänav</string>
+  <string name="postal_city">Linn</string>
+  <string name="postal_region">Osariik</string>
+  <string name="postal_postcode">Sihtnumber</string>
+  <string name="postal_country">Riik</string>
+  <string name="map_home">Kuva kodune aadress</string>
+  <string name="map_work">Kuva tööaadress</string>
+  <string name="map_other">Kuva aadress</string>
+  <string name="map_custom">Kuva aadress (%s)</string>
+  <string name="chat_aim">Vestlus AIM-i kasutades</string>
+  <string name="chat_msn">Vestlus Windows Live\'i kasutades</string>
+  <string name="chat_yahoo">Vestlus Yahood kasutades</string>
+  <string name="chat_skype">Vestlus Skype\'i kasutades</string>
+  <string name="chat_qq">Vestlus QQ kasutades</string>
+  <string name="chat_gtalk">Vestlus Google Talki kasutades</string>
+  <string name="chat_icq">Vestlus ICQ-d kasutades</string>
+  <string name="chat_jabber">Vestlus Jabberit kasutades</string>
+  <string name="chat">Vestlus</string>
+  <string name="list_filter_all_accounts">Kõik kontaktid</string>
+  <string name="listAllContactsInAccount">Konto %s kontaktid</string>
+  <string name="listCustomView">Kontaktid kohandatud vaates</string>
+  <string name="listSingleContact">Üks kontakt</string>
+  <string name="display_options_sort_list_by">Sortimisalus</string>
+  <string name="display_options_sort_by_given_name">Eesnimi</string>
+  <string name="display_options_sort_by_family_name">Perekonnanimi</string>
+  <string name="display_options_view_names_as">Nimevorming</string>
+  <string name="display_options_view_given_name_first">Eesnimi enne</string>
+  <string name="display_options_view_family_name_first">Perekonnanimi enne</string>
+  <string name="menu_clear_frequents">Sagedaste kustutamine</string>
+  <string name="action_menu_back_from_search">otsimise peatamine</string>
+  <string name="description_clear_search">Otsingu kustutamine</string>
+  <string name="select_account_dialog_title">Konto</string>
+  <string name="set_default_account">Kasuta helistamiseks alati seda</string>
+  <string name="select_phone_account_for_calls">Valige selle kõne jaoks SIM-kaart</string>
+  <string name="select_phone_account_for_calls_remember">Jäta valik meelde</string>
+  <string name="call_with_a_note">Kõne koos märkusega</string>
+  <string name="call_subject_hint">Sisestage märkus, mis koos kõnega saata ...</string>
+  <string name="send_and_call_button">SAADA JA HELISTA</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Vahekaart %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Vahekaart %1$s. %2$d lugemata üksus. </item>
+    <item quantity="other"> Vahekaart %1$s. %2$d lugemata üksust. </item>
+  </plurals>
+  <string name="description_search_video_call">Videokõne</string>
+  <string name="description_search_call_and_share">Jagamine ja helistamine</string>
 </resources>

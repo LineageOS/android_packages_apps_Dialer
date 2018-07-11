@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">必須授予電話權限才能撥打電話</string>
+  <string name="pre_call_select_phone_account">選擇本次通話要使用的 SIM 卡</string>
+  <string name="pre_call_select_phone_account_remember">記住這個選擇</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">使用 %1$s 時無法撥打電話</string>
+</resources>

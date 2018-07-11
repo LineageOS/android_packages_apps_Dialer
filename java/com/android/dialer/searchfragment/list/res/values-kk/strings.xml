@@ -1,25 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="new_permission_no_search" msgid="6107959563874740441">"Контактілерді іздеу мүмкін болуы үшін, \"Контактілер\" рұқсаттарын қосыңыз."</string>
-    <string name="search_shortcut_create_new_contact" msgid="1439862712551110400">"Жаңа контакт жасау"</string>
-    <string name="search_shortcut_add_to_contact" msgid="3973534599468326173">"Контактіге қосу"</string>
-    <string name="search_shortcut_send_sms_message" msgid="6871818587632705560">"SMS жіберу"</string>
-    <string name="search_shortcut_make_video_call" msgid="3236284255758156964">"Бейне қоңырау шалу"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="new_permission_no_search">Контактілерді іздеу мүмкін болуы үшін, \"Контактілер\" рұқсаттарын қосыңыз.</string>
+  <string name="search_shortcut_create_new_contact">Жаңа контакт жасау</string>
+  <string name="search_shortcut_add_to_contact">Контактіге қосу</string>
+  <string name="search_shortcut_send_sms_message">SMS жіберу</string>
+  <string name="search_shortcut_make_video_call">Бейне қоңырау шалу</string>
+  <string name="search_shortcut_make_voice_call">Қоңырау шалу: %1$s</string>
 </resources>

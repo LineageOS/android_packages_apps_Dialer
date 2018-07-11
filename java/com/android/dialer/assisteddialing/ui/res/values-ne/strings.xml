@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">सहायताप्राप्त डायल गर्ने सेवा</string>
+  <string name="assisted_dialing_setting_summary">विदेश यात्राको बेला कल गर्दा पूर्वानुमान सुविधाको प्रयोग गरी कुनै देशको कोड थप्नुहोस्</string>
+  <string name="assisted_dialing_setting_cc_default_summary">स्वत: पत्ता लाग्यो • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">स्वत: पत्ता लाग्यो</string>
+  <string name="assisted_dialing_setting_cc_category_title">गृह देश</string>
+  <string name="assisted_dialing_setting_cc_title">पूर्वनिर्धारित गृह देश</string>
+</resources>

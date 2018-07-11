@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtrować wszystkie połączenia podejrzanie o spam?</string>
+  <string name="spam_blocking_promo_text">Połączenia podobne do tego, które właśnie zostało zablokowane, nie będą Ci już przeszkadzać</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtruj spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Odrzuć</string>
+  <string name="spam_blocking_setting_prompt">Ustawienia</string>
+  <string name="spam_blocking_settings_enable_error_text">Nie udało się włączyć filtrowania spamu</string>
+  <string name="spam_blocking_settings_disable_error_text">Nie udało się wyłączyć filtrowania spamu</string>
+  <string name="spam_blocking_settings_enable_complete_text">Włączono filtrowanie spamu</string>
+  <string name="spam_blocking_settings_disable_complete_text">Wyłączono filtrowanie spamu</string>
+</resources>

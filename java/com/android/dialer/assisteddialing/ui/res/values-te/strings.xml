@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">సహాయక డయలింగ్</string>
+  <string name="assisted_dialing_setting_summary">మీరు విదేశాల్లో ప్రయాణిస్తున్నప్పుడు కాల్ చేసేటప్పుడు దేశం కోడ్‌ని ఊహించి, జోడించండి</string>
+  <string name="assisted_dialing_setting_cc_default_summary">స్వయంచాలకంగా గుర్తించబడింది • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">స్వయంచాలకంగా గుర్తించబడింది</string>
+  <string name="assisted_dialing_setting_cc_category_title">స్వదేశం</string>
+  <string name="assisted_dialing_setting_cc_title">డిఫాల్ట్ స్వదేశం</string>
+</resources>

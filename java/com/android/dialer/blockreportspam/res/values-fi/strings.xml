@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Estetäänkö %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Tästä numerosta tulevat puhelut ja tekstiviestit estetään.</string>
+  <string name="block_number_ok">ESTÄ</string>
+  <string name="unblock_number_ok">KUMOA ESTO</string>
+  <string name="block_report_number_alert_title">Estetäänkö %1$s?</string>
+  <string name="block_report_number_alert_details">Tästä numerosta tulevat puhelut estetään.</string>
+  <string name="block_number_alert_details">%1$s. Puhelu ilmoitetaan häirikköpuheluksi.</string>
+  <string name="unblock_number_alert_details">Numeron esto ja häirikkötila kumotaan. Puhelut tästä numerosta eivät enää ole häirikköpuheluja.</string>
+  <string name="unblock_report_number_alert_title">Kumotaanko numeron %1$s esto?</string>
+  <string name="report_not_spam_alert_button">Ilmoita</string>
+  <string name="report_not_spam_alert_title">Haluatko ilmoittaa virheestä?</string>
+  <string name="report_not_spam_alert_details">Puhelut numerosta %1$s eivät enää jatkossa ole häirikköpuheluja.</string>
+  <string name="checkbox_report_as_spam_action">Ilmoita häirikköpuheluksi</string>
+  <string name="block_number_failed_toast">Numeron estäminen epäonnistui.</string>
+  <string name="unblock_number_failed_toast">Numeron eston kumoaminen epäonnistui.</string>
+</resources>

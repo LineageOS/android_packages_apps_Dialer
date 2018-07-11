@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Chaqiruv vaqtida RTT xabar almashinuvi</string>
+  <string name="rtt_promotion_details">RTT kar, eshitish qobiliyati va nutqiy faoliyati buzilgan shaxslarga
+    mo‘ljallangan funksiyadir. RTT xabarlari transkripsiyalari qurilmangizga, chaqiruv
+    jurnaliga saqlanadi. %1$s</string>
+  <string name="duo_disclosure_title">Duo orqali video suhbat qiling</string>
+  <string name="duo_disclosure_details">Google Duo orqali do‘st va yaqinlaringiz bilan onlayn video suhbat qiling. Internet uchun haq olinishi mumkin. %1$s</string>
+</resources>

@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">Saralanganlar</string>
+  <string name="suggestions_header">Tez-tez aloqada</string>
+  <string name="speed_dial_add_button_text">Qo‘shish</string>
+  <string name="speed_dial_remember_this_choice">Shu tanlov eslab qolinsin</string>
+  <string name="speed_dial_disambig_dialog_title">Chaqiruv turini tanlang</string>
+  <string name="disambig_option_video_call">Video chaqiruv</string>
+  <string name="disambig_option_voice_call">Ovozli chaqiruv</string>
+  <string name="add_favorite_activity_title">Sevimlilarga qo‘shing</string>
+  <string name="contact_menu_voice_call">Ovozli chaqiruv</string>
+  <string name="contact_menu_video_call">Video chaqiruv</string>
+  <string name="contact_menu_message">Xabar yozish</string>
+  <string name="contact_menu_remove">Olib tashlash</string>
+  <string name="contact_menu_contact_info">Kontakt axboroti</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">Saralanganlarga kiritish</string>
+  <string name="speed_dial_contacts_permission_description">Tezkor raqam terish uchun Kontaktlar ilovasi ruxsatnomasini yoqing.</string>
+  <string name="speed_dial_turn_on_contacts_permission">Yoqish</string>
+  <string name="speed_dial_no_contacts_description">Birorta kontaktni hali saralanganlarga kiritmagansiz</string>
+  <string name="speed_dial_no_contacts_action_text">Saralanganlarga kiritish</string>
+  <string name="speed_dial_remove_favorites">Saralanganlardan olib tashlash</string>
 </resources>

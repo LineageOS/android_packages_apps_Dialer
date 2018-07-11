@@ -1,164 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Besedilo kopirano"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Pokliči številko <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Pokliči domov"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Pokliči mobilni telefon"</string>
-    <string name="call_work" msgid="6040550697395300892">"Pokliči v službo"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Pokliči službeni faks"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Pokliči domači faks"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Pokliči pozivnik"</string>
-    <string name="call_other" msgid="5536385588712587235">"Pokliči"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Pokliči številko za povratni klic"</string>
-    <string name="call_car" msgid="3197417098027764954">"Pokliči telefon v avtu"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Pokliči glavno telefonsko številko podjetja"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Pokliči številko ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Pokliči glavno telefonsko številko"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Pokliči faks"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Pokliči radijski telefon"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Pokliči teleks"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Pokliči številko TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Pokliči službeni mobilni telefon"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Pokliči službeni pozivnik"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Pokliči številko pomočnika <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Pokliči telefon MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Pošlji SMS na številko <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Pošlji SMS domov"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Pošlji SMS v mobilni telefon"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Pošlji SMS v službeni telefon"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Pošlji SMS v službeni faks"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Pošlji SMS v domači faks"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Pošlji SMS v pozivnik"</string>
-    <string name="sms_other" msgid="1742702947993285933">"SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Pošlji SMS na številko za povratni klic"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Pošlji SMS v telefon v avtu"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Pošlji SMS na glavno telefonsko številko podjetja"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Pošlji SMS na številko ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Pošlji SMS na glavno telefonsko številko"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Pošlji SMS v faks"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Pošlji SMS v radijski telefon"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Pošlji SMS v teleks"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Pošlji SMS na telefonsko številko TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Pošlji SMS v službeni mobilni telefon"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Pošlji SMS v službeni pozivnik"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Pošlji SMS pomočniku na številko <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Pošlji SMS na telefonsko številko MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Želite izbrisati seznam pog. stikov?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Izbrisali boste seznam pogostih stikov v aplikacijah Stiki in Telefon, zato bodo e-poštne aplikacije začele shranjevati pogoste naslovnike od začetka."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Brisanje seznama pogost. stikov ..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Dosegljiv"</string>
-    <string name="status_away" msgid="2298688367552893953">"Odsoten"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Zaseden"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Stiki"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Najboljši predlogi"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Drugo"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Imenik"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Delovni imenik"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Vsi stiki"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Predlogi"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Jaz"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Ni imena)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Ogled stika"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Vsi stiki s telefonskimi številkami"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Stiki za delovni profil"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Prikaži posodobitve"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Samo v napravi; se ne sinhronizira"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Ime"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Vzdevek"</string>
-    <string name="full_name" msgid="648186563998465740">"Ime"</string>
-    <string name="name_given" msgid="5096576006314820536">"Ime"</string>
-    <string name="name_family" msgid="6646235805198547467">"Priimek"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Naziv (pred imenom)"</string>
-    <string name="name_middle" msgid="703755205331582769">"Drugo ime"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Naziv (za imenom)"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Ime – fonetično"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Ime – fonetično"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Drugo ime – fonetično"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Priimek – fonetično"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Pošlji e-poštno sporočilo"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Naslov"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Neposredno sporočanje"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organizacija"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Razmerje"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Posebni datum"</string>
-    <string name="sms" msgid="7574344928185328095">"SMS"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Naslov"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Podjetje"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Naziv"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Zapiski"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Spletno mesto"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Skupine"</string>
-    <string name="email_home" msgid="889830029388962171">"Pošlji e-poštno sporočilo domov"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Pošlji e-poštno sporočilo v mobilno napravo"</string>
-    <string name="email_work" msgid="4223487303344613528">"Pošlji e-poštno sporočilo na službeni naslov"</string>
-    <string name="email_other" msgid="4246411900126012062">"Pošlji e-poštno sporočilo"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Pošlji e-poštno sporočilo na <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Pošlji e-poštno sporočilo"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Ulica"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Kraj"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Zvezna država"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Poštna številka"</string>
-    <string name="postal_country" msgid="232670707458768148">"Država"</string>
-    <string name="map_home" msgid="4181131107392126938">"Prikaži domači naslov"</string>
-    <string name="map_work" msgid="5723471185992684400">"Prikaži službeni naslov"</string>
-    <string name="map_other" msgid="2253764780863500516">"Prikaži naslov"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Prikaži naslov <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Klepet s storitvijo AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Klepet s storitvijo Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Klepet s storitvijo Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Klepet s storitvijo Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Klepet s storitvijo QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Klepet s storitvijo Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Klepet s storitvijo ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Klepet s storitvijo Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Klepet"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Vsi stiki"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Stiki v <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Stiki v pogledu po meri"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Posamezen stik"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Razvrsti glede na"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Ime"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Priimek"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Oblika imena"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Najprej ime"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Najprej priimek"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Izbriši seznam pogostih stikov"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ustavitev iskanja"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Počisti iskalno polje"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Račun"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Vedno uporabi to možnost za klice"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Klicanje z …"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Klic z zapiskom"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Vnesite zapisek, ki ga želite poslati s klicem ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"POŠLJI IN KLIČI"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g>: <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Zavihek »<xliff:g id="TITLE">%1$s</xliff:g>«."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> Zavihek »<xliff:g id="TITLE_2">%1$s</xliff:g>«. <xliff:g id="COUNT_3">%2$d</xliff:g> neprebran element. </item>
-      <item quantity="two"> Zavihek »<xliff:g id="TITLE_2">%1$s</xliff:g>«. <xliff:g id="COUNT_3">%2$d</xliff:g> neprebrana elementa. </item>
-      <item quantity="few"> Zavihek »<xliff:g id="TITLE_2">%1$s</xliff:g>«. <xliff:g id="COUNT_3">%2$d</xliff:g> neprebrani elementi. </item>
-      <item quantity="other"> Zavihek »<xliff:g id="TITLE_2">%1$s</xliff:g>«. <xliff:g id="COUNT_3">%2$d</xliff:g> neprebranih elementov. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videoklic"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Klic s skupno rabo"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Pokliči številko %s</string>
+  <string name="call_home">Pokliči domov</string>
+  <string name="call_mobile">Pokliči mobilni telefon</string>
+  <string name="call_work">Pokliči v službo</string>
+  <string name="call_fax_work">Pokliči službeni faks</string>
+  <string name="call_fax_home">Pokliči domači faks</string>
+  <string name="call_pager">Pokliči pozivnik</string>
+  <string name="call_other">Pokliči</string>
+  <string name="call_callback">Pokliči številko za povratni klic</string>
+  <string name="call_car">Pokliči telefon v avtu</string>
+  <string name="call_company_main">Pokliči glavno telefonsko številko podjetja</string>
+  <string name="call_isdn">Pokliči številko ISDN</string>
+  <string name="call_main">Pokliči glavno telefonsko številko</string>
+  <string name="call_other_fax">Pokliči faks</string>
+  <string name="call_radio">Pokliči radijski telefon</string>
+  <string name="call_telex">Pokliči teleks</string>
+  <string name="call_tty_tdd">Pokliči številko TTY/TDD</string>
+  <string name="call_work_mobile">Pokliči službeni mobilni telefon</string>
+  <string name="call_work_pager">Pokliči službeni pozivnik</string>
+  <string name="call_assistant">Pokliči številko pomočnika %s</string>
+  <string name="call_mms">Pokliči telefon MMS</string>
+  <string name="sms_custom">Pošlji SMS na številko %s</string>
+  <string name="sms_home">Pošlji SMS domov</string>
+  <string name="sms_mobile">Pošlji SMS v mobilni telefon</string>
+  <string name="sms_work">Pošlji SMS v službeni telefon</string>
+  <string name="sms_fax_work">Pošlji SMS v službeni faks</string>
+  <string name="sms_fax_home">Pošlji SMS v domači faks</string>
+  <string name="sms_pager">Pošlji SMS v pozivnik</string>
+  <string name="sms_other">SMS</string>
+  <string name="sms_callback">Pošlji SMS na številko za povratni klic</string>
+  <string name="sms_car">Pošlji SMS v telefon v avtu</string>
+  <string name="sms_company_main">Pošlji SMS na glavno telefonsko številko podjetja</string>
+  <string name="sms_isdn">Pošlji SMS na številko ISDN</string>
+  <string name="sms_main">Pošlji SMS na glavno telefonsko številko</string>
+  <string name="sms_other_fax">Pošlji SMS v faks</string>
+  <string name="sms_radio">Pošlji SMS v radijski telefon</string>
+  <string name="sms_telex">Pošlji SMS v teleks</string>
+  <string name="sms_tty_tdd">Pošlji SMS na telefonsko številko TTY/TDD</string>
+  <string name="sms_work_mobile">Pošlji SMS v službeni mobilni telefon</string>
+  <string name="sms_work_pager">Pošlji SMS v službeni pozivnik</string>
+  <string name="sms_assistant">Pošlji SMS pomočniku na številko %s</string>
+  <string name="sms_mms">Pošlji SMS na telefonsko številko MMS</string>
+  <string name="clearFrequentsConfirmation_title">Želite izbrisati seznam pog. stikov?</string>
+  <string name="clearFrequentsConfirmation">Izbrisali boste seznam pogostih stikov v aplikacijah Stiki in Telefon, zato bodo e-poštne aplikacije začele shranjevati pogoste naslovnike od začetka.</string>
+  <string name="clearFrequentsProgress_title">Brisanje seznama pogost. stikov ...</string>
+  <string name="status_available">Dosegljiv</string>
+  <string name="status_away">Odsoten</string>
+  <string name="status_busy">Zaseden</string>
+  <string name="contactsList">Stiki</string>
+  <string name="contact_suggestions">Najboljši predlogi</string>
+  <string name="local_invisible_directory">Drugo</string>
+  <string name="directory_search_label">Imenik</string>
+  <string name="directory_search_label_work">Delovni imenik</string>
+  <string name="local_search_label">Vsi stiki</string>
+  <string name="local_suggestions_search_label">Predlogi</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jaz</string>
+  <string name="missing_name">(Ni imena)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Ogled stika</string>
+  <string name="list_filter_phones">Vsi stiki s telefonskimi številkami</string>
+  <string name="list_filter_phones_work">Stiki za delovni profil</string>
+  <string name="view_updates_from_group">Prikaži posodobitve</string>
+  <string name="account_phone">Samo v napravi; se ne sinhronizira</string>
+  <string name="nameLabelsGroup">Ime</string>
+  <string name="nicknameLabelsGroup">Vzdevek</string>
+  <string name="full_name">Ime</string>
+  <string name="name_given">Ime</string>
+  <string name="name_family">Priimek</string>
+  <string name="name_prefix">Naziv (pred imenom)</string>
+  <string name="name_middle">Drugo ime</string>
+  <string name="name_suffix">Naziv (za imenom)</string>
+  <string name="name_phonetic">Ime – fonetično</string>
+  <string name="name_phonetic_given">Ime – fonetično</string>
+  <string name="name_phonetic_middle">Drugo ime – fonetično</string>
+  <string name="name_phonetic_family">Priimek – fonetično</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">Pošlji e-poštno sporočilo</string>
+  <string name="postalLabelsGroup">Naslov</string>
+  <string name="imLabelsGroup">Neposredno sporočanje</string>
+  <string name="organizationLabelsGroup">Organizacija</string>
+  <string name="relationLabelsGroup">Razmerje</string>
+  <string name="eventLabelsGroup">Posebni datum</string>
+  <string name="sms">SMS</string>
+  <string name="postal_address">Naslov</string>
+  <string name="ghostData_company">Podjetje</string>
+  <string name="ghostData_title">Naziv</string>
+  <string name="label_notes">Zapiski</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Spletno mesto</string>
+  <string name="groupsLabel">Skupine</string>
+  <string name="email_home">Pošlji e-poštno sporočilo domov</string>
+  <string name="email_mobile">Pošlji e-poštno sporočilo v mobilno napravo</string>
+  <string name="email_work">Pošlji e-poštno sporočilo na službeni naslov</string>
+  <string name="email_other">Pošlji e-poštno sporočilo</string>
+  <string name="email_custom">Pošlji e-poštno sporočilo na %s</string>
+  <string name="email">Pošlji e-poštno sporočilo</string>
+  <string name="postal_street">Ulica</string>
+  <string name="postal_city">Kraj</string>
+  <string name="postal_region">Zvezna država</string>
+  <string name="postal_postcode">Poštna številka</string>
+  <string name="postal_country">Država</string>
+  <string name="map_home">Prikaži domači naslov</string>
+  <string name="map_work">Prikaži službeni naslov</string>
+  <string name="map_other">Prikaži naslov</string>
+  <string name="map_custom">Prikaži naslov %s</string>
+  <string name="chat_aim">Klepet s storitvijo AIM</string>
+  <string name="chat_msn">Klepet s storitvijo Windows Live</string>
+  <string name="chat_yahoo">Klepet s storitvijo Yahoo</string>
+  <string name="chat_skype">Klepet s storitvijo Skype</string>
+  <string name="chat_qq">Klepet s storitvijo QQ</string>
+  <string name="chat_gtalk">Klepet s storitvijo Google Talk</string>
+  <string name="chat_icq">Klepet s storitvijo ICQ</string>
+  <string name="chat_jabber">Klepet s storitvijo Jabber</string>
+  <string name="chat">Klepet</string>
+  <string name="list_filter_all_accounts">Vsi stiki</string>
+  <string name="listAllContactsInAccount">Stiki v %s</string>
+  <string name="listCustomView">Stiki v pogledu po meri</string>
+  <string name="listSingleContact">Posamezen stik</string>
+  <string name="display_options_sort_list_by">Razvrsti glede na</string>
+  <string name="display_options_sort_by_given_name">Ime</string>
+  <string name="display_options_sort_by_family_name">Priimek</string>
+  <string name="display_options_view_names_as">Oblika imena</string>
+  <string name="display_options_view_given_name_first">Najprej ime</string>
+  <string name="display_options_view_family_name_first">Najprej priimek</string>
+  <string name="menu_clear_frequents">Izbriši seznam pogostih stikov</string>
+  <string name="action_menu_back_from_search">ustavitev iskanja</string>
+  <string name="description_clear_search">Počisti iskalno polje</string>
+  <string name="select_account_dialog_title">Račun</string>
+  <string name="set_default_account">Vedno uporabi to možnost za klice</string>
+  <string name="select_phone_account_for_calls">Izbira kartice SIM za ta klic</string>
+  <string name="select_phone_account_for_calls_remember">Zapomni si to izbiro</string>
+  <string name="call_with_a_note">Klic z zapiskom</string>
+  <string name="call_subject_hint">Vnesite zapisek, ki ga želite poslati s klicem ...</string>
+  <string name="send_and_call_button">POŠLJI IN KLIČI</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Zavihek »%1$s«.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Zavihek »%1$s«. %2$d neprebran element. </item>
+    <item quantity="two"> Zavihek »%1$s«. %2$d neprebrana elementa. </item>
+    <item quantity="few"> Zavihek »%1$s«. %2$d neprebrani elementi. </item>
+    <item quantity="other"> Zavihek »%1$s«. %2$d neprebranih elementov. </item>
+  </plurals>
+  <string name="description_search_video_call">Videoklic</string>
+  <string name="description_search_call_and_share">Klic s skupno rabo</string>
 </resources>

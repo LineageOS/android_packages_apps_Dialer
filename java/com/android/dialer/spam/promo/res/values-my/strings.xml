@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">သံသယဖြစ်ဖွဘ် စပမ်းခေါ်ဆိုမှုအားလုံးကို စစ်ထုတ်မလား။</string>
+  <string name="spam_blocking_promo_text">သင်ပိတ်ထားသော ခေါ်ဆိုမှုများသည် သင့်အား အနှောင့်အယှက် ပေးတော့မည်မဟုတ်ပါ</string>
+  <string name="spam_blocking_promo_action_filter_spam">စပမ်းကို စစ်ထုတ်ရန်</string>
+  <string name="spam_blocking_promo_action_dismiss">ပယ်ရန်</string>
+  <string name="spam_blocking_setting_prompt">ဆက်တင်များ</string>
+  <string name="spam_blocking_settings_enable_error_text">စပမ်းစစ်ထုတ်ခြင်းကို ဖွင့်ရာတွင် အခက်အခဲရှိပါသည်</string>
+  <string name="spam_blocking_settings_disable_error_text">စပမ်းစစ်ထုတ်ခြင်းကို ပိတ်ရာတွင် အခက်အခဲရှိပါသည်</string>
+  <string name="spam_blocking_settings_enable_complete_text">စပမ်းစစ်ထုတ်ခြင်းကို ဖွင့်လိုက်ပါပြီ</string>
+  <string name="spam_blocking_settings_disable_complete_text">စပမ်းစစ်ထုတ်ခြင်းကို ပိတ်လိုက်ပါပြီ</string>
+</resources>

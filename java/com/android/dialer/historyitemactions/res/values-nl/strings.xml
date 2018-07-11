@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Spraakoproep</string>
+  <string name="video_call">Videogesprek</string>
+  <string name="add_to_contacts">Contact toevoegen</string>
+  <string name="send_a_message">Bericht</string>
+  <string name="not_spam">Geen spam</string>
+  <string name="block_number">Blokkeren</string>
+  <string name="unblock_number">Blokkeren opheffen</string>
+  <string name="block_and_optionally_report_spam">Blokkeren/spam melden</string>
+  <string name="copy_number">Nummer kopiëren</string>
+</resources>

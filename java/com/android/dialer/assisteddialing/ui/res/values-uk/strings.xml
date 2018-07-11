@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Помічник набору</string>
+  <string name="assisted_dialing_setting_summary">Передбачення й додавання коду країни, коли ви телефонуєте з-за кордону</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Визначено автоматично • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Визначено автоматично</string>
+  <string name="assisted_dialing_setting_cc_category_title">Країна проживання</string>
+  <string name="assisted_dialing_setting_cc_title">Країна проживання за умовчанням</string>
+</resources>

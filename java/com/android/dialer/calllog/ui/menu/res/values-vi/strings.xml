@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_details_menu_label">Chi tiết cuộc gọi</string>
+  <string name="delete">Xóa</string>
+</resources>

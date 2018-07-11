@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Kas soovite blokeerida numbri %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Te ei saa enam sellelt numbrilt kõnesid ega tekstsõnumeid.</string>
+  <string name="block_number_ok">BLOKEERI</string>
+  <string name="unblock_number_ok">DEBLOKEERI</string>
+  <string name="block_report_number_alert_title">Kas soovite blokeerida numbri %1$s?</string>
+  <string name="block_report_number_alert_details">Te ei saa enam sellelt numbrilt kõnesid.</string>
+  <string name="block_number_alert_details">%1$s See kõne liigitatakse rämpspostiks.</string>
+  <string name="unblock_number_alert_details">Number deblokeeritakse ja seda ei liigit. rämpspostiks. Tulevasi kõnesid ei liigitata rämpspostiks.</string>
+  <string name="unblock_report_number_alert_title">Kas soovite deblokeerida numbri %1$s?</string>
+  <string name="report_not_spam_alert_button">Teavita</string>
+  <string name="report_not_spam_alert_title">Kas soovite veast teavitada?</string>
+  <string name="report_not_spam_alert_details">Tulevasi kõnesid numbrilt %1$s ei liigitata enam rämpspostiks.</string>
+  <string name="checkbox_report_as_spam_action">Liigita kõne rämpspostiks</string>
+  <string name="block_number_failed_toast">Probleem selle numbri blokeerimisega</string>
+  <string name="unblock_number_failed_toast">Probleem selle numbri deblokeerimisega</string>
+</resources>

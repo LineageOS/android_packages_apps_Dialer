@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">બધા શંકાસ્પદ સ્પામ કૉલને ફિલ્ટર કરીએ?</string>
+  <string name="spam_blocking_promo_text">તમે હમણાં જ જે કૉલને બ્લૉક કર્યો છે તેવા કૉલ હવેથી તમારા કામમાં ખલેલ
+      પાડી શકશે નહીં</string>
+  <string name="spam_blocking_promo_action_filter_spam">સ્પામ ફિલ્ટર કરો</string>
+  <string name="spam_blocking_promo_action_dismiss">છોડી દો</string>
+  <string name="spam_blocking_setting_prompt">સેટિંગ</string>
+  <string name="spam_blocking_settings_enable_error_text">સ્પામ ફિલ્ટરિંગને ચાલુ કરવામાં સમસ્યા</string>
+  <string name="spam_blocking_settings_disable_error_text">સ્પામ ફિલ્ટરિંગને બંધ કરવામાં સમસ્યા</string>
+  <string name="spam_blocking_settings_enable_complete_text">સ્પામ ફિલ્ટરિંગ ચાલુ કર્યું</string>
+  <string name="spam_blocking_settings_disable_complete_text">સ્પામ ફિલ્ટરિંગ બંધ કર્યું</string>
+</resources>

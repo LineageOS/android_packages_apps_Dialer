@@ -1,179 +1,171 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="applicationLabel" msgid="2202739481132958990">"Telefon"</string>
-    <string name="launcherDialpadActivityLabel" msgid="4170587663888307424">"Telefontastatur"</string>
-    <string name="callHistoryIconLabel" msgid="7493268743411968630">"Anropslogg"</string>
-    <string name="action_copy_number_text" msgid="832682558551502319">"Kopiér nummeret"</string>
-    <string name="copy_transcript_text" msgid="937904189017310829">"Kopiér transkripsjonen"</string>
-    <string name="action_edit_number_before_call" msgid="8017492815878473837">"Endre nummeret før du ringer"</string>
-    <string name="call_log_delete_all" msgid="7852970926906523784">"Slett anropsloggen"</string>
-    <string name="call_log_trash_voicemail" msgid="6118493534178533972">"Slett talepost"</string>
-    <string name="snackbar_voicemail_deleted" msgid="7463166543725496307">"Taleposten er slettet"</string>
-    <string name="snackbar_voicemail_deleted_undo" msgid="6959743982796409941">"ANGRE"</string>
-    <string name="clearCallLogConfirmation_title" msgid="7051888019546472245">"Vil du slette anropsloggen?"</string>
-    <string name="clearCallLogConfirmation" msgid="6844949465815109166">"Dette sletter alle anrop fra loggen"</string>
-    <string name="clearCallLogProgress_title" msgid="995004835687361977">"Sletter anropsloggen …"</string>
-    <string name="notification_missedCallTitle" msgid="8283366068539898486">"Tapt anrop"</string>
-    <string name="notification_missedWorkCallTitle" msgid="8831332957103679183">"Tapt jobbanrop"</string>
-    <string name="notification_missedCallsTitle" msgid="3697442015345089802">"Tapte anrop"</string>
-    <string name="notification_missedCallsMsg" msgid="8176217633929018706">"<xliff:g id="NUM_MISSED_CALLS">%d</xliff:g> tapte anrop"</string>
-    <string name="notification_missedCall_call_back" msgid="3875698110051973965">"Ring tilbake"</string>
-    <string name="notification_missedCall_message" msgid="5086910028988305964">"Melding"</string>
-    <string name="post_call_notification_message" msgid="5417476789860590611">"<xliff:g id="NAME">%1$s</xliff:g>: <xliff:g id="MESSAGE">%2$s</xliff:g>"</string>
-    <string name="notification_voicemail_text_format" msgid="1895667520930252897">"Ring <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
-    <string name="notification_voicemail_no_vm_number" msgid="8942821987929495842">"Mangler nummer til talepostkasse"</string>
-    <plurals name="notification_voicemail_title" formatted="false" msgid="1551847434476438657">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> talemeldinger </item>
-      <item quantity="one">talemelding</item>
-    </plurals>
-    <string name="notification_voicemail_callers_list" msgid="7543659703018479564">"<xliff:g id="NEWER_CALLERS">%1$s</xliff:g>, <xliff:g id="OLDER_CALLER">%2$s</xliff:g>"</string>
-    <string name="notification_new_voicemail_ticker" msgid="6547711461667072303">"Ny talemelding fra <xliff:g id="CALLER">%1$s</xliff:g>"</string>
-    <string name="voicemail_playback_error" msgid="4384373852257757295">"Kunne ikke spille av talepost"</string>
-    <string name="voicemail_fetching_content" msgid="572320120918636014">"Laster inn talepost …"</string>
-    <string name="voicemail_fetching_timout" msgid="2128873915839949783">"Kunne ikke laste inn taleposten"</string>
-    <string name="call_log_item_count_and_date" msgid="723848797957319181">"(<xliff:g id="COUNT">%1$d</xliff:g>) <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="description_playback_speakerphone" msgid="4852027754869750227">"Slå høyttaleren på eller av"</string>
-    <string name="description_playback_seek" msgid="1340910573254132520">"Søk etter avspillingsposisjon"</string>
-    <string name="action_menu_call_history_description" msgid="8829135306925008546">"Anropslogg"</string>
-    <string name="action_menu_overflow_description" msgid="7648679686746517341">"Flere alternativer"</string>
-    <string name="action_menu_dialpad_button" msgid="1970631633457493180">"Tastatur"</string>
-    <string name="dialer_settings_label" msgid="4980176284150290175">"Innstillinger"</string>
-    <string name="simulator_submenu_label" msgid="186156287346615267">"Simulator"</string>
-    <string name="new_ui_launcher_shortcut_label" msgid="7195823535703686736">"Nytt grensesnitt – lag snarvei"</string>
-    <string name="description_entering_bulk_action_mode" msgid="6134916000015585401">"Starter massehandlingsmodus"</string>
-    <string name="description_leaving_bulk_action_mode" msgid="4355853387639765529">"Massehandlingsmodus er avsluttet"</string>
-    <string name="description_selecting_bulk_action_mode" msgid="7228565941043117618">"Du har valgt <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_unselecting_bulk_action_mode" msgid="6450971299622386060">"Du har valgt bort <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_contact_details" msgid="3341280873855253464">"Kontaktinformasjon for <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_spam_contact_details" msgid="5592578752881528368">"Kontaktdetaljer for den potensielt useriøse oppringeren <xliff:g id="NAMEORNUMBER">%1$s</xliff:g>"</string>
-    <string name="description_num_calls" msgid="6483594535796216044">"<xliff:g id="NUMBEROFCALLS">%1$s</xliff:g> samtaler."</string>
-    <string name="description_video_call" msgid="3738199365585751727">"Videoanrop."</string>
-    <string name="description_start_voice_search" msgid="8380022725973015261">"Start talesøk"</string>
-    <string name="voicemail" msgid="8899540969000957954">"Telefonsvarer"</string>
-    <string name="description_cancel_multi_select" msgid="3930475950253360461">"Avbryt massehandlinsmodus"</string>
-    <string name="voicemailMultiSelectDeleteConfirm" msgid="5110048580165845200">"Slett"</string>
-    <string name="voicemailMultiSelectDeleteCancel" msgid="4574287102479485528">"Avbryt"</string>
-    <string name="voicemailMultiSelectActionBarTitle" msgid="5840745438559612431">"<xliff:g id="NUMBER">%1$s</xliff:g> er valgt"</string>
-    <plurals name="delete_voicemails_confirmation_dialog_title" formatted="false" msgid="2452264208706783960">
-      <item quantity="other">"<b>"Vil du slette disse talemeldingene? "</b>"</item>
-      <item quantity="one">"<b>"Vil du slette denne talemeldingen? "</b>"</item>
-    </plurals>
-    <string name="voicemailCallLogToday" msgid="709034597866788854">@string/call_log_header_today</string>
-    <string name="voicemailCallLogDateTimeFormat" msgid="4998985002074131268">"<xliff:g id="DATE">%1$s</xliff:g> kl. <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="voicemailDurationFormat" msgid="5649961568550898382">"<xliff:g id="MINUTES">%1$02d</xliff:g>:<xliff:g id="SECONDS">%2$02d</xliff:g>"</string>
-    <string name="voicemailCallLogDateTimeFormatWithDuration" msgid="7224408726047155205">"<xliff:g id="DATEANDTIME">%1$s</xliff:g> • <xliff:g id="DURATION">%2$s</xliff:g>"</string>
-    <string name="voice_search_not_available" msgid="6546240433719732905">"Talesøk er ikke tilgjengelig"</string>
-    <string name="dialer_hint_find_contact" msgid="2023214799381149808">"Søk i kontakter"</string>
-    <string name="block_number_search_hint" msgid="5377706079015099416">"Legg til nummer eller søk etter kontakter"</string>
-    <string name="call_log_all_empty" msgid="3955572868518162004">"Anropsloggen er tom"</string>
-    <string name="call_log_all_empty_action" msgid="852218280136243014">"Start en samtale"</string>
-    <string name="call_log_missed_empty" msgid="7094936030845062214">"Du har ingen tapte anrop."</string>
-    <string name="call_log_voicemail_empty" msgid="273623903423275178">"Talepostkassen din er tom."</string>
-    <string name="call_log_activity_title" msgid="1275242727244945527">"Anropslogg"</string>
-    <string name="call_log_all_title" msgid="6042262422192020327">"Alle"</string>
-    <string name="call_log_missed_title" msgid="17254005889268015">"Ubesvarte"</string>
-    <string name="tab_speed_dial" msgid="6616404752227561075">"Hurtigvalg"</string>
-    <string name="tab_history" msgid="7420269368689503596">"Anropslogg"</string>
-    <string name="tab_all_contacts" msgid="5531733977693943015">"Kontakter"</string>
-    <string name="tab_voicemail" msgid="2458548090088316246">"Talepostkasse"</string>
-    <string name="search_shortcut_call_number" msgid="8847918845036880688">"Ring <xliff:g id="NUMBER">%s</xliff:g>"</string>
-    <string name="search_shortcut_create_new_contact" msgid="2076374262874775425">"Opprett ny kontakt"</string>
-    <string name="search_shortcut_add_to_contact" msgid="701957016267810766">"Legg til for en kontakt"</string>
-    <string name="search_shortcut_send_sms_message" msgid="1065069206532610854">"Send SMS"</string>
-    <string name="search_shortcut_make_video_call" msgid="3746207985295802095">"Start en videosamtale"</string>
-    <string name="search_shortcut_block_number" msgid="4587283230665805776">"Blokkér nummeret"</string>
-    <string name="speed_dial_empty" msgid="3346406399966039505">"Du har ingen på hurtigoppringning ennå"</string>
-    <string name="speed_dial_empty_add_favorite_action" msgid="3470360584638103033">"Legg til en favoritt"</string>
-    <string name="remove_contact" msgid="2353580570488923668">"Fjern"</string>
-    <string name="select_all" msgid="408601760696146245">"Velg alle"</string>
-    <string name="call_log_action_video_call" msgid="7565549950343850819">"Videoanrop"</string>
-    <string name="call_log_action_send_message" msgid="6948727362660115554">"Send en melding"</string>
-    <string name="call_log_action_details" msgid="2091370737371449501">"Samtaleinformasjon"</string>
-    <string name="call_log_action_share_voicemail" msgid="8888250682433873454">"Send til …"</string>
-    <string name="call_log_action_call" msgid="682724094251540583">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_incoming_missed_call" msgid="8292535799379230029">"Ubesvart anrop fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_incoming_answered_call" msgid="3920182963103160610">"Besvart anrop fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_unread_voicemail" msgid="145170985013419170">"Ulest talepost fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_read_voicemail" msgid="5585559881573227732">"Talepost fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="description_outgoing_call" msgid="543952487882919924">"Ring til <xliff:g id="NAMEORNUMBER">^1</xliff:g>, <xliff:g id="TYPEORLOCATION">^2</xliff:g>, <xliff:g id="TIMEOFCALL">^3</xliff:g>, <xliff:g id="PHONEACCOUNT">^4</xliff:g>."</string>
-    <string name="call_log_via_number" msgid="1340307109806397650">"via <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="call_log_via_number_phone_account" msgid="7698459003033083416">"<xliff:g id="PHONEACCOUNT">%1$s</xliff:g> via <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="description_call_action" msgid="4042796498169106545">"Ring <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_video_call_action" msgid="1237090968588659650">"Start videoanrop med <xliff:g id="NAMEORNUMBER">^1</xliff:g>."</string>
-    <string name="description_voicemail_action" msgid="3290143432403538524">"Lytt til talepostkasse fra <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_create_new_contact_action" msgid="1928282350281564130">"Opprett kontakt for <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="description_add_to_existing_contact_action" msgid="5485618682525057684">"Legg <xliff:g id="NAMEORNUMBER">^1</xliff:g> til en eksisterende kontakt"</string>
-    <string name="description_details_action" msgid="2061866409737706174">"Samtaledetaljer for <xliff:g id="NAMEORNUMBER">^1</xliff:g>"</string>
-    <string name="call_log_header_today" msgid="1576119097475845293">"I dag"</string>
-    <string name="call_log_header_yesterday" msgid="5616077776205329563">"I går"</string>
-    <string name="call_log_header_other" msgid="4940676886254217644">"Eldre"</string>
-    <string name="voicemail_speaker_on" msgid="3151333608926996668">"Slå på høyttaleren."</string>
-    <string name="voicemail_speaker_off" msgid="2530064206962034201">"Slå av høyttaleren."</string>
-    <string name="voicemail_play_start_pause" msgid="3874823480278334664">"Start eller stopp avspillingen."</string>
-    <string name="display_options_title" msgid="3880091801055797975">"Visningsalternativer"</string>
-    <string name="sounds_and_vibration_title" msgid="3075050000721181384">"Lyder og vibrasjon"</string>
-    <string name="accessibility_settings_title" msgid="3329027650429831820">"Tilgjengelighet"</string>
-    <string name="ringtone_title" msgid="8377174189894648486">"Telefonringelyd"</string>
-    <string name="vibrate_on_ring_title" msgid="631441314790960485">"Vibrer også når det ringer"</string>
-    <string name="dtmf_tone_enable_title" msgid="3273762431523939277">"Tastaturlyder"</string>
-    <string name="dtmf_tone_length_title" msgid="534096029202438539">"Lengde på tastaturlyder"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel">Telefon</string>
+  <string name="launcherDialpadActivityLabel">Telefontastatur</string>
+  <string name="callHistoryIconLabel">Anropslogg</string>
+  <string name="action_copy_number_text">Kopiér nummeret</string>
+  <string name="copy_transcript_text">Kopiér transkripsjonen</string>
+  <string name="action_edit_number_before_call">Endre nummeret før du ringer</string>
+  <string name="call_log_delete_all">Slett anropsloggen</string>
+  <string name="call_log_trash_voicemail">Slett talepost</string>
+  <string name="snackbar_voicemail_deleted">Taleposten er slettet</string>
+  <string name="clearCallLogConfirmation_title">Vil du slette anropsloggen?</string>
+  <string name="clearCallLogConfirmation">Dette sletter alle anrop fra loggen</string>
+  <string name="clearCallLogProgress_title">Sletter anropsloggen …</string>
+  <string name="notification_missedCallTitle">Tapt anrop</string>
+  <string name="notification_missedWorkCallTitle">Tapt jobbanrop</string>
+  <string name="notification_missedCallsTitle">Tapte anrop</string>
+  <string name="notification_missedCallsMsg">%d tapte anrop</string>
+  <string name="notification_missedCall_call_back">Ring tilbake</string>
+  <string name="notification_missedCall_message">Melding</string>
+  <string name="post_call_notification_message">%1$s: %2$s</string>
+  <string name="notification_voicemail_text_format">Ring %s</string>
+  <string name="notification_voicemail_no_vm_number">Mangler nummer til talepostkasse</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">talemelding</item>
+    <item quantity="other">%1$d talemeldinger </item>
+  </plurals>
+  <string name="notification_voicemail_callers_list">%1$s, %2$s</string>
+  <string name="notification_new_voicemail_ticker">Ny talemelding fra %1$s</string>
+  <string name="voicemail_playback_error">Kunne ikke spille av talepost</string>
+  <string name="voicemail_fetching_content">Laster inn talepost …</string>
+  <string name="voicemail_fetching_timout">Kunne ikke laste inn taleposten</string>
+  <string name="call_log_item_count_and_date">(%1$d) %2$s</string>
+  <string name="description_playback_speakerphone">Slå høyttaleren på eller av</string>
+  <string name="description_playback_seek">Søk etter avspillingsposisjon</string>
+  <string name="action_menu_call_history_description">Anropslogg</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Flere alternativer</string>
+  <string name="action_menu_dialpad_button">Tastatur</string>
+  <string name="dialer_settings_label">Innstillinger</string>
+  <string name="simulator_submenu_label">Simulator</string>
+  <string name="new_ui_launcher_shortcut_label">Nytt grensesnitt – lag snarvei</string>
+  <string name="description_entering_bulk_action_mode">Starter massehandlingsmodus</string>
+  <string name="description_leaving_bulk_action_mode">Massehandlingsmodus er avsluttet</string>
+  <string name="description_selecting_bulk_action_mode">Du har valgt %1$s</string>
+  <string name="description_unselecting_bulk_action_mode">Du har valgt bort %1$s</string>
+  <string name="description_contact_details">Kontaktinformasjon for %1$s</string>
+  <string name="description_spam_contact_details">Kontaktdetaljer for den potensielt useriøse oppringeren %1$s</string>
+  <string name="description_num_calls">%1$s samtaler.</string>
+  <string name="description_video_call">Videoanrop.</string>
+  <string name="description_start_voice_search">Start talesøk</string>
+  <string name="voicemail">Telefonsvarer</string>
+  <string name="description_cancel_multi_select">Avbryt massehandlinsmodus</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Slett</string>
+  <string name="voicemailMultiSelectDeleteCancel">Avbryt</string>
+  <string name="voicemailMultiSelectActionBarTitle">%1$s er valgt</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>Vil du slette denne talemeldingen? </b></item>
+    <item quantity="other"><b>Vil du slette disse talemeldingene? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat">%1$s kl. %2$s</string>
+  <string name="voicemailDurationFormat">%1$02d:%2$02d</string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
+  <string name="voice_search_not_available">Talesøk er ikke tilgjengelig</string>
+  <string name="dialer_hint_find_contact">Søk i kontakter</string>
+  <string name="block_number_search_hint">Legg til nummer eller søk etter kontakter</string>
+  <string name="call_log_all_empty">Anropsloggen er tom</string>
+  <string name="call_log_all_empty_action">Start en samtale</string>
+  <string name="call_log_missed_empty">Du har ingen tapte anrop.</string>
+  <string name="call_log_voicemail_empty">Talepostkassen din er tom.</string>
+  <string name="call_log_activity_title">Anropslogg</string>
+  <string name="call_log_all_title">Alle</string>
+  <string name="call_log_missed_title">Ubesvarte</string>
+  <string name="tab_speed_dial">Hurtigvalg</string>
+  <string name="tab_history">Anropslogg</string>
+  <string name="tab_all_contacts">Kontakter</string>
+  <string name="tab_voicemail">Talepostkasse</string>
+  <string name="search_shortcut_call_number">Ring %s</string>
+  <string name="search_shortcut_create_new_contact">Opprett ny kontakt</string>
+  <string name="search_shortcut_add_to_contact">Legg til for en kontakt</string>
+  <string name="search_shortcut_send_sms_message">Send SMS</string>
+  <string name="search_shortcut_make_video_call">Start en videosamtale</string>
+  <string name="search_shortcut_block_number">Blokkér nummeret</string>
+  <string name="speed_dial_empty">Du har ingen på hurtigoppringning ennå</string>
+  <string name="speed_dial_empty_add_favorite_action">Legg til en favoritt</string>
+  <string name="remove_contact">Fjern</string>
+  <string name="select_all">Velg alle</string>
+  <string name="call_log_action_video_call">Videoanrop</string>
+  <string name="call_log_action_set_up_video">Konfigurer videoanrop</string>
+  <string name="call_log_action_invite_video">Inviter til videosamtale</string>
+  <string name="call_log_action_send_message">Send en melding</string>
+  <string name="call_log_action_details">Samtaleinformasjon</string>
+  <string name="call_log_action_share_voicemail">Send til …</string>
+  <string name="call_log_action_call">Ring ^1</string>
+  <string name="description_incoming_missed_call">Ubesvart anrop fra ^1, ^2, ^3, ^4.</string>
+  <string name="description_incoming_answered_call">Besvart anrop fra ^1, ^2, ^3, ^4.</string>
+  <string name="description_unread_voicemail">Ulest talepost fra ^1, ^2, ^3, ^4.</string>
+  <string name="description_read_voicemail">Talepost fra ^1, ^2, ^3, ^4.</string>
+  <string name="description_outgoing_call">Ring til ^1, ^2, ^3, ^4.</string>
+  <string name="call_log_via_number">via %1$s</string>
+  <string name="call_log_via_number_phone_account">%1$s via %2$s</string>
+  <string name="description_call_action">Ring ^1</string>
+  <string name="description_video_call_action">Start videoanrop med ^1.</string>
+  <string name="description_voicemail_action">Lytt til talepostkasse fra ^1</string>
+  <string name="description_create_new_contact_action">Opprett kontakt for ^1</string>
+  <string name="description_add_to_existing_contact_action">Legg ^1 til en eksisterende kontakt</string>
+  <string name="description_details_action">Samtaledetaljer for ^1</string>
+  <string name="call_log_header_today">I dag</string>
+  <string name="call_log_header_yesterday">I går</string>
+  <string name="call_log_header_other">Eldre</string>
+  <string name="voicemail_speaker_on">Slå på høyttaleren.</string>
+  <string name="voicemail_speaker_off">Slå av høyttaleren.</string>
+  <string name="voicemail_play_start_pause">Start eller stopp avspillingen.</string>
+  <string name="display_options_title">Visningsalternativer</string>
+  <string name="sounds_and_vibration_title">Lyder og vibrasjon</string>
+  <string name="accessibility_settings_title">Tilgjengelighet</string>
+  <string name="ringtone_title">Telefonringelyd</string>
+  <string name="vibrate_on_ring_title">Vibrer også når det ringer</string>
+  <string name="dtmf_tone_enable_title">Tastaturlyder</string>
+  <string name="dtmf_tone_length_title">Lengde på tastaturlyder</string>
   <string-array name="dtmf_tone_length_entries">
-    <item msgid="3136353015227162823">"Normal"</item>
-    <item msgid="5376841175538523822">"Lang"</item>
+    <item>Normal</item>
+    <item>Lang</item>
   </string-array>
-    <string name="respond_via_sms_setting_title" msgid="8008181606657693452">"Hurtigsvar"</string>
-    <string name="call_settings_label" msgid="7824611757200960807">"Anrop"</string>
-    <string name="manage_blocked_numbers_label" msgid="16823761991832273">"Anropsblokkering"</string>
-    <string name="voicemail_settings_label" msgid="4594299554519920570">"Talepost"</string>
-    <string name="blocked_numbers_disabled_emergency_header_label" msgid="6936696532562923971">"Blokkering av anrop er midlertidig slått av"</string>
-    <string name="blocked_numbers_disabled_emergency_desc" msgid="5484785225285297040">"Blokkering av anrop er slått av fordi du kontaktet nødtjenester fra denne telefonen i løpet av de siste 48 timene. Funksjonen blir automatisk slått på igjen når perioden på 48 timer er utløpt."</string>
-    <string name="import_send_to_voicemail_numbers_label" msgid="7821890095264297681">"Importér numre"</string>
-    <string name="blocked_call_settings_import_description" msgid="1819412052545228965">"Du markerte tidligere noen anropere for automatisk overføring til talepost via andre apper."</string>
-    <string name="blocked_call_settings_view_numbers_button" msgid="3332727948554356704">"Se numre"</string>
-    <string name="blocked_call_settings_import_button" msgid="7319111700387470727">"Importér"</string>
-    <string name="description_blocked_number_list_delete" msgid="2139644216858370740">"Opphev blokkeringen av nummeret"</string>
-    <string name="addBlockedNumber" msgid="3053473735238295551">"Legg til nummer"</string>
-    <string name="block_number_footer_message_vvm" msgid="7955326304033982368">"Anrop fra disse numrene blokkeres, og talepost blir automatisk slettet."</string>
-    <string name="block_number_footer_message_no_vvm" msgid="1152684139070471665">"Anrop fra dette nummeret blokkeres, men du kan fortsatt motta talepost."</string>
-    <string name="block_list" msgid="4701585783411870782">"Blokkerte numre"</string>
-    <string name="alreadyBlocked" msgid="5483253180532475653">"<xliff:g id="NUMBER">%1$s</xliff:g> er allerede blokkert."</string>
-    <string name="phone_account_settings_label" msgid="8372485478006965920">"Ringekontoer"</string>
-    <string name="permission_no_speeddial" msgid="8487215628510596753">"For å slå på hurtigoppringning, slå på Kontakter-tillatelsen."</string>
-    <string name="permission_no_calllog" msgid="4053705651238775784">"For å se samtaleloggen din, slå på Telefon-tillatelsen."</string>
-    <string name="permission_no_search" msgid="2424710404207193826">"For å søke i kontaktene dine, slå på tillatelser for Kontakter."</string>
-    <string name="permission_place_call" msgid="8686908130349369423">"For å ringe, slå på Telefon-tillatelsen."</string>
-    <string name="toast_cannot_write_system_settings" msgid="1108307781918782515">"Telefonappen har ikke tillatelse til å skrive til systeminnstillinger."</string>
-    <string name="blocked_number_call_log_label" msgid="4212282846299997693">"Blokkert"</string>
-    <string name="call_log_action_block_report_number" msgid="7302636538668696729">"Blokkér/rapportér som useriøs"</string>
-    <string name="call_log_action_block_number" msgid="5048188386501998865">"Blokkér nummeret"</string>
-    <string name="call_log_action_remove_spam" msgid="2045319806318398403">"Ikke useriøs"</string>
-    <string name="call_log_action_unblock_number" msgid="6100117033288448758">"Opphev blokkeringen av nummeret"</string>
-    <string name="spam_number_call_log_label" msgid="2678431398326811131">"Nettsøppel"</string>
-    <string name="call_composer_connection_failed" msgid="6776461585447831242">"<xliff:g id="NAME">%1$s</xliff:g> er frakoblet og kan ikke nås"</string>
-    <string name="about_phone_label" msgid="582991354677973731">"Om"</string>
-    <string name="voicemail_transcription_branding_text" msgid="6285228063793541677">"Transkribert av Google"</string>
-    <string name="voicemail_transcription_in_progress" msgid="2933320969613783210">"Google transkriberer …"</string>
-    <string name="voicemail_transcription_failed" msgid="335275303117412706">"Ingen transkripsjon."</string>
-    <string name="voicemail_transcription_failed_language_not_supported" msgid="4210332591050562553">"Ingen transkripsjon. Språket støttes ikke."</string>
-    <string name="voicemail_transcription_failed_no_speech" msgid="9093372879697874852">"Ingen transkripsjon. Ingen tale ble registrert."</string>
-    <string name="view_conversation" msgid="7895904782094119702">"Se"</string>
-    <string name="ec_data_deleted" msgid="4794880345545827107">"Anropet er slettet. Se og slett vedleggene som ble delt i denne samtalen, i Meldinger."</string>
-    <string name="multiple_ec_data_deleted" msgid="2971579891973176316">"Anropene er slettet. Se og slett vedleggene som ble delt i samtalene, i Meldinger."</string>
+  <string name="respond_via_sms_setting_title">Hurtigsvar</string>
+  <string name="call_settings_label">Anrop</string>
+  <string name="manage_blocked_numbers_label">Blokkerte numre</string>
+  <string name="voicemail_settings_label">Talepost</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">Blokkering av anrop er midlertidig slått av</string>
+  <string name="blocked_numbers_disabled_emergency_desc">Blokkering av anrop er slått av fordi du kontaktet nødtjenester fra denne telefonen i løpet av de siste 48 timene. Funksjonen blir automatisk slått på igjen når perioden på 48 timer er utløpt.</string>
+  <string name="import_send_to_voicemail_numbers_label">Importér numre</string>
+  <string name="blocked_call_settings_import_description">Du markerte tidligere noen anropere for automatisk overføring til talepost via andre apper.</string>
+  <string name="blocked_call_settings_view_numbers_button">Se numre</string>
+  <string name="blocked_call_settings_import_button">Importér</string>
+  <string name="description_blocked_number_list_delete">Opphev blokkeringen av nummeret</string>
+  <string name="addBlockedNumber">Legg til nummer</string>
+  <string name="block_number_footer_message_vvm">Anrop fra disse numrene blokkeres, og talepost blir automatisk slettet.</string>
+  <string name="block_number_footer_message_no_vvm">Anrop fra dette nummeret blokkeres, men du kan fortsatt motta talepost.</string>
+  <string name="block_list">Blokkerte numre</string>
+  <string name="alreadyBlocked">%1$s er allerede blokkert.</string>
+  <string name="phone_account_settings_label">Ringekontoer</string>
+  <string name="permission_no_speeddial">For å slå på hurtigoppringning, slå på Kontakter-tillatelsen.</string>
+  <string name="permission_no_calllog">For å se samtaleloggen din, slå på Telefon-tillatelsen.</string>
+  <string name="permission_no_search">For å søke i kontaktene dine, slå på tillatelser for Kontakter.</string>
+  <string name="permission_place_call">For å ringe, slå på Telefon-tillatelsen.</string>
+  <string name="toast_cannot_write_system_settings">Telefonappen har ikke tillatelse til å skrive til systeminnstillinger.</string>
+  <string name="blocked_number_call_log_label">Blokkert</string>
+  <string name="call_log_action_block_report_number">Blokkér/rapportér som useriøs</string>
+  <string name="call_log_action_block_number">Blokkér nummeret</string>
+  <string name="call_log_action_remove_spam">Ikke useriøs</string>
+  <string name="call_log_action_unblock_number">Opphev blokkeringen av nummeret</string>
+  <string name="spam_number_call_log_label">Nettsøppel</string>
+  <string name="call_composer_connection_failed">%1$s er frakoblet og kan ikke nås</string>
+  <string name="about_phone_label">Om</string>
+  <string name="voicemail_transcription_branding_text">Transkribert av Google</string>
+  <string name="voicemail_transcription_in_progress">Transkriberer …</string>
+  <string name="voicemail_transcription_failed">Ingen transkripsjon.</string>
+  <string name="voicemail_transcription_failed_language_not_supported">Ingen transkripsjon. Språket støttes ikke.</string>
+  <string name="voicemail_transcription_failed_no_speech">Ingen transkripsjon. Ingen tale ble registrert.</string>
+  <string name="voicemail_donation_promo_title">Vil du hjelpe oss med å gjøre transkripsjoner mer nøyaktige?</string>
+  <string name="voicemail_donation_promo_content">La Google gå gjennom denne og fremtidige talemeldinger med transkripsjoner. De blir lagret anonymt. Du kan endre innstillingene når som helst. %1$s</string>
+  <string name="voicemail_donation_promo_opt_in">Ja, jeg er med</string>
+  <string name="voicemail_donation_promo_opt_out">Nei takk</string>
+  <string name="voicemail_transcription_rating">Vurder transkripsjonskvalitet</string>
+  <string name="voicemail_transcription_rating_thanks">Takk for tilbakemeldingen</string>
+  <string name="description_rating_good">Liker</string>
+  <string name="description_rating_bad">Liker ikke</string>
+  <string name="view_conversation">Se</string>
+  <string name="ec_data_deleted">Anropet er slettet. Se og slett vedleggene som ble delt i denne samtalen, i Meldinger.</string>
+  <string name="multiple_ec_data_deleted">Anropene er slettet. Se og slett vedleggene som ble delt i samtalene, i Meldinger.</string>
 </resources>

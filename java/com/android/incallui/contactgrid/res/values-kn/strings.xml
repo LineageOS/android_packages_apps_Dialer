@@ -1,44 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2016 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಮೂಲಕ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
-    <string name="incall_connecting" msgid="1708280493198276616">"ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
-    <string name="incall_transferring" msgid="7909128243635579407">"ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ..."</string>
-    <!-- no translation found for incall_video_call_requesting (1560243656749370926) -->
-    <skip />
-    <!-- no translation found for incall_wifi_video_call_requesting (4778821793266688848) -->
-    <skip />
-    <!-- no translation found for incall_video_call_upgrade_request (3225728109481465831) -->
-    <skip />
-    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
-    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"ಕರೆ ನಿರಾಕರಿಸಲಾಗಿದೆ"</string>
-    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"ಕರೆ ಅವಧಿ ಮೀರಿದೆ"</string>
-    <string name="incall_hanging_up" msgid="2166116351937190949">"ಹ್ಯಾಂಗ್ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
-    <string name="incall_call_ended" msgid="6294704948774348480">"ಕರೆ ಅಂತ್ಯಗೊಂಡಿದೆ"</string>
-    <string name="incall_remotely_held" msgid="8561379039177396615">"ಹೋಲ್ಡ್‌ ಮಾಡಲಾಗಿದೆ"</string>
-    <!-- no translation found for contact_grid_incoming_video_call (5848811480775138601) -->
-    <skip />
-    <!-- no translation found for contact_grid_incoming_wifi_video_call (7478797414642594106) -->
-    <skip />
-    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"ಇವರಿಂದ ಕರೆ"</string>
-    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"ಇವರಿಂದ ಕೆಲಸದ ಕರೆ"</string>
-    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> ಮೂಲಕ ಒಳಬರುತ್ತಿರುವ ಕರೆ"</string>
-    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆದಾರರು"</string>
-    <string name="contact_grid_callback_number" msgid="1284649030313415807">"ಮರಳಿಕರೆ ಮಾಡುವ ಸಂಖ್ಯೆ: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_calling_via_template">%s ಮೂಲಕ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
+  <string name="incall_calling_on_same_carrier_template">%s ವಾಹಕದ ಮೂಲಕ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
+  <string name="incall_calling_on_recent_choice_template">ಇತ್ತೀಚಿನ ಆಯ್ಕೆಯ ಆಧಾರದ ಮೇಲೆ %s ನಿಂದ ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
+  <string name="incall_connecting">ಕರೆ ಮಾಡಲಾಗುತ್ತಿದೆ...</string>
+  <string name="incall_connecting_assited_dialed">+%1$s (%2$s) ಬಳಸಿಕೊಂಡು ಕರೆಮಾಡಲಾಗುತ್ತಿದೆ…</string>
+  <string name="incall_connecting_assited_dialed_component">+%1$s (%2$s) ಅನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="incall_transferring">ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ...</string>
+  <string name="incall_video_call_requesting">ವಾಹಕ ವೀಡಿಯೊ ಕರೆ ಮಾಡುವಿಕೆ…</string>
+  <string name="incall_wifi_video_call_requesting">ವೈ-ಫೈ ವಾಹಕ ವೀಡಿಯೊ ಕರೆ ಮಾಡುವಿಕೆ…</string>
+  <string name="incall_video_call_upgrade_request">ವಾಹಕ ವೀಡಿಯೊಗೆ ಬದಲಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="incall_video_call_request_failed">ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
+  <string name="incall_video_call_request_rejected">ಕರೆ ನಿರಾಕರಿಸಲಾಗಿದೆ</string>
+  <string name="incall_video_call_request_timed_out">ಕರೆ ಅವಧಿ ಮೀರಿದೆ</string>
+  <string name="incall_hanging_up">ಹ್ಯಾಂಗ್ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
+  <string name="incall_call_ended">ಕರೆ ಅಂತ್ಯಗೊಂಡಿದೆ</string>
+  <string name="incall_remotely_held">ಹೋಲ್ಡ್‌ ಮಾಡಲಾಗಿದೆ</string>
+  <string name="contact_grid_incoming_video_call">ಇವರಿಂದ ವಾಹಕ ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="contact_grid_incoming_wifi_video_call">ಇವರಿಂದ ವೈ-ಫೈ ವಾಹಕ ವೀಡಿಯೊ ಕರೆ</string>
+  <string name="contact_grid_incoming_voice_call">ಇವರಿಂದ ಕರೆ</string>
+  <string name="contact_grid_incoming_work_call">ಇವರಿಂದ ಕೆಲಸದ ಕರೆ</string>
+  <string name="contact_grid_incoming_via_template">%s ಮೂಲಕ ಒಳಬರುತ್ತಿರುವ ಕರೆ</string>
+  <string name="contact_grid_incoming_suspected_spam">ಶಂಕಿತ ಸ್ಪ್ಯಾಮ್ ಕರೆದಾರರು</string>
+  <string name="contact_grid_callback_number">ಈ ಫೋನ್‌ನ ಸಂಖ್ಯೆ: %1$s</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">שיחה קולית</string>
+  <string name="video_call">שיחת וידאו</string>
+  <string name="add_to_contacts">הוספת איש קשר</string>
+  <string name="send_a_message">הודעה</string>
+  <string name="not_spam">לא ספאם</string>
+  <string name="block_number">חסימה</string>
+  <string name="unblock_number">ביטול החסימה</string>
+  <string name="block_and_optionally_report_spam">חסימה/דיווח על ספאם</string>
+  <string name="copy_number">העתקת המספר</string>
+</resources>

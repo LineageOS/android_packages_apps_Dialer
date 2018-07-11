@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Viltu sía út símtöl sem berast úr hugsanlegum ruslnúmerum?</string>
+  <string name="spam_blocking_promo_text">Þú munt ekki lengur fá símtal eins og það
+      sem þú lokaðir á</string>
+  <string name="spam_blocking_promo_action_filter_spam">Sía símtöl úr ruslnúmerum</string>
+  <string name="spam_blocking_promo_action_dismiss">Hunsa</string>
+  <string name="spam_blocking_setting_prompt">Stillingar</string>
+  <string name="spam_blocking_settings_enable_error_text">Villa við að kveikja á síun símtala úr ruslnúmerum</string>
+  <string name="spam_blocking_settings_disable_error_text">Villa við að slökkva á síun símtala úr ruslnúmerum</string>
+  <string name="spam_blocking_settings_enable_complete_text">Kveikt á síun símtala úr ruslnúmerum</string>
+  <string name="spam_blocking_settings_disable_complete_text">Slökkt á síun símtala úr ruslnúmerum</string>
+</resources>

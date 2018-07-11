@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Hlunga onke amakholi kagaxekile asolisayo?</string>
+  <string name="spam_blocking_promo_text">Amakholi afana nale osanda kuyivimbela ngeke
+      asakuphazamisa</string>
+  <string name="spam_blocking_promo_action_filter_spam">Hlunga ugaxekile</string>
+  <string name="spam_blocking_promo_action_dismiss">Cashisa</string>
+  <string name="spam_blocking_setting_prompt">Izilungiselelo</string>
+  <string name="spam_blocking_settings_enable_error_text">Inkinga ukuvula isihlungi sikagaxekile</string>
+  <string name="spam_blocking_settings_disable_error_text">Inkinga ngokuvala isihlungi sikagaxekile</string>
+  <string name="spam_blocking_settings_enable_complete_text">Ukuhlunga kogaxekile kuvuliwe</string>
+  <string name="spam_blocking_settings_disable_complete_text">Ukuhlunga kogaxekile kuvaliwe</string>
+</resources>

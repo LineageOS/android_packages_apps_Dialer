@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Đã sao chép văn bản"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Gọi <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Gọi số điện thoại nhà riêng"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Gọi số điện thoại di động"</string>
-    <string name="call_work" msgid="6040550697395300892">"Gọi số điện thoại cơ quan"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Gọi số fax cơ quan"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Gọi số fax nhà riêng"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Gọi số máy nhắn tin"</string>
-    <string name="call_other" msgid="5536385588712587235">"Gọi"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Gọi số gọi lại"</string>
-    <string name="call_car" msgid="3197417098027764954">"Gọi số điện thoại trên ô tô"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Gọi số điện thoại chính của công ty"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Gọi ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Gọi số điện thoại chính"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Gọi số fax"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Gọi số điện thoại radio"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Gọi số telex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Gọi số điện thoại TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Gọi số điện thoại di động tại cơ quan"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Gọi số máy nhắn tin cơ quan"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Gọi <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Gọi MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Nhắn tin tới <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Nhắn tin tới số điện thoại nhà riêng"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Nhắn tin tới số điện thoại di động"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Nhắn tin tới số điện thoại cơ quan"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Nhắn tin tới số fax cơ quan"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Nhắn tin tới số fax nhà riêng"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Nhắn tin tới số máy nhắn tin"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Nhắn tin"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Nhắn tin tới số gọi lại"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Nhắn tin tới số điện thoại trên ô tô"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Nhắn tin tới số điện thoại chính của công ty"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Nhắn tin tới số điện thoại ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Nhắn tin tới số điện thoại chính"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Nhắn tin tới số fax"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Nhắn tin tới số điện thoại radio"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Nhắn tin tới số telex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Nhắn tới số TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Nhắn tới số điện thoại di động tại cơ quan"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Nhắn tin tới số máy nhắn tin cơ quan"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Nhắn tin tới <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Nhắn tin tới số điện thoại MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Xóa danh sách liên hệ thường xuyên?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Bạn sẽ xóa danh sách liên hệ thường xuyên trong ứng dụng Danh bạ và điện thoại cũng như buộc các ứng dụng email phải tìm hiểu các tùy chọn gửi của bạn lại từ đầu."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Đang xóa DS liên hệ thường xuyên…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Có mặt"</string>
-    <string name="status_away" msgid="2298688367552893953">"Đã ra ngoài"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Bận"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Danh bạ"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Đề xuất hàng đầu"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Khác"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Thư mục"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Thư mục công việc"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Tất cả liên hệ"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Đề xuất"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Tôi"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Không có tên)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Xem liên hệ"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Tất cả người liên hệ có số điện thoại"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Liên hệ trên hồ sơ công việc"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Xem thông tin cập nhật"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Chỉ trên thiết bị, chưa đồng bộ hóa"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Tên"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Biệt hiệu"</string>
-    <string name="full_name" msgid="648186563998465740">"Tên"</string>
-    <string name="name_given" msgid="5096576006314820536">"Tên"</string>
-    <string name="name_family" msgid="6646235805198547467">"Họ"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Danh xưng"</string>
-    <string name="name_middle" msgid="703755205331582769">"Tên đệm"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Hậu tố tên"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Tên theo phiên âm"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Tên theo phiên âm"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Tên đệm theo phiên âm"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Họ theo phiên âm"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Điện thoại"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Gửi email"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Địa chỉ"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Tổ chức"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Mối quan hệ"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Ngày đặc biệt"</string>
-    <string name="sms" msgid="7574344928185328095">"Tin nhắn văn bản"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Địa chỉ"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Công ty"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Chức danh"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Ghi chú"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Trang web"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Nhóm"</string>
-    <string name="email_home" msgid="889830029388962171">"Gửi email tới địa chỉ email nhà riêng"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Gửi email tới địa chỉ email thiết bị di động"</string>
-    <string name="email_work" msgid="4223487303344613528">"Gửi email tới địa chỉ email cơ quan"</string>
-    <string name="email_other" msgid="4246411900126012062">"Gửi email"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Gửi email cho <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Gửi email"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Đường phố"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Thành phố"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Tiểu bang"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Mã ZIP"</string>
-    <string name="postal_country" msgid="232670707458768148">"Quốc gia"</string>
-    <string name="map_home" msgid="4181131107392126938">"Xem địa chỉ nhà riêng"</string>
-    <string name="map_work" msgid="5723471185992684400">"Xem địa chỉ cơ quan"</string>
-    <string name="map_other" msgid="2253764780863500516">"Xem địa chỉ"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Xem địa chỉ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Trò chuyện sử dụng AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Trò chuyện sử dụng Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Trò chuyện sử dụng Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Trò chuyện sử dụng Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Trò chuyện sử dụng QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Trò chuyện sử dụng Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Trò chuyện sử dụng ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Trò chuyện sử dụng Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Trò chuyện"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Tất cả liên hệ"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Danh bạ trong <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Danh bạ ở chế độ xem tùy chỉnh"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Một liên hệ"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sắp xếp theo"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Tên"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Họ"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Định dạng tên"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Tên trước"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Họ trước"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Xóa DS liên hệ thường xuyên"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ngừng tìm kiếm"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Xóa tìm kiếm"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Tài khoản"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Luôn sử dụng SIM này để gọi"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Gọi bằng"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Gọi điện kèm theo ghi chú"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Nhập ghi chú để gửi kèm cuộc gọi..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"GỬI và GỌI"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Tab <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> Tab <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> mục chưa đọc. </item>
-      <item quantity="one"> Tab <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> mục chưa đọc. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Gọi điện video"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Chia sẻ và gọi"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Gọi %s</string>
+  <string name="call_home">Gọi số điện thoại nhà riêng</string>
+  <string name="call_mobile">Gọi số điện thoại di động</string>
+  <string name="call_work">Gọi số điện thoại cơ quan</string>
+  <string name="call_fax_work">Gọi số fax cơ quan</string>
+  <string name="call_fax_home">Gọi số fax nhà riêng</string>
+  <string name="call_pager">Gọi số máy nhắn tin</string>
+  <string name="call_other">Gọi</string>
+  <string name="call_callback">Gọi số gọi lại</string>
+  <string name="call_car">Gọi số điện thoại trên ô tô</string>
+  <string name="call_company_main">Gọi số điện thoại chính của công ty</string>
+  <string name="call_isdn">Gọi ISDN</string>
+  <string name="call_main">Gọi số điện thoại chính</string>
+  <string name="call_other_fax">Gọi số fax</string>
+  <string name="call_radio">Gọi số điện thoại radio</string>
+  <string name="call_telex">Gọi số telex</string>
+  <string name="call_tty_tdd">Gọi số điện thoại TTY/TDD</string>
+  <string name="call_work_mobile">Gọi số điện thoại di động tại cơ quan</string>
+  <string name="call_work_pager">Gọi số máy nhắn tin cơ quan</string>
+  <string name="call_assistant">Gọi %s</string>
+  <string name="call_mms">Gọi MMS</string>
+  <string name="sms_custom">Nhắn tin tới %s</string>
+  <string name="sms_home">Nhắn tin tới số điện thoại nhà riêng</string>
+  <string name="sms_mobile">Nhắn tin tới số điện thoại di động</string>
+  <string name="sms_work">Nhắn tin tới số điện thoại cơ quan</string>
+  <string name="sms_fax_work">Nhắn tin tới số fax cơ quan</string>
+  <string name="sms_fax_home">Nhắn tin tới số fax nhà riêng</string>
+  <string name="sms_pager">Nhắn tin tới số máy nhắn tin</string>
+  <string name="sms_other">Nhắn tin</string>
+  <string name="sms_callback">Nhắn tin tới số gọi lại</string>
+  <string name="sms_car">Nhắn tin tới số điện thoại trên ô tô</string>
+  <string name="sms_company_main">Nhắn tin tới số điện thoại chính của công ty</string>
+  <string name="sms_isdn">Nhắn tin tới số điện thoại ISDN</string>
+  <string name="sms_main">Nhắn tin tới số điện thoại chính</string>
+  <string name="sms_other_fax">Nhắn tin tới số fax</string>
+  <string name="sms_radio">Nhắn tin tới số điện thoại radio</string>
+  <string name="sms_telex">Nhắn tin tới số telex</string>
+  <string name="sms_tty_tdd">Nhắn tới số TTY/TDD</string>
+  <string name="sms_work_mobile">Nhắn tới số điện thoại di động tại cơ quan</string>
+  <string name="sms_work_pager">Nhắn tin tới số máy nhắn tin cơ quan</string>
+  <string name="sms_assistant">Nhắn tin tới %s</string>
+  <string name="sms_mms">Nhắn tin tới số điện thoại MMS</string>
+  <string name="clearFrequentsConfirmation_title">Xóa danh sách liên hệ thường xuyên?</string>
+  <string name="clearFrequentsConfirmation">Bạn sẽ xóa danh sách liên hệ thường xuyên trong ứng dụng Danh bạ và điện thoại cũng như buộc các ứng dụng email phải tìm hiểu các tùy chọn gửi của bạn lại từ đầu.</string>
+  <string name="clearFrequentsProgress_title">Đang xóa DS liên hệ thường xuyên…</string>
+  <string name="status_available">Có mặt</string>
+  <string name="status_away">Đã ra ngoài</string>
+  <string name="status_busy">Bận</string>
+  <string name="contactsList">Danh bạ</string>
+  <string name="contact_suggestions">Đề xuất hàng đầu</string>
+  <string name="local_invisible_directory">Khác</string>
+  <string name="directory_search_label">Thư mục</string>
+  <string name="directory_search_label_work">Thư mục công việc</string>
+  <string name="local_search_label">Tất cả liên hệ</string>
+  <string name="local_suggestions_search_label">Đề xuất</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Tôi</string>
+  <string name="missing_name">(Không có tên)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Xem liên hệ</string>
+  <string name="list_filter_phones">Tất cả người liên hệ có số điện thoại</string>
+  <string name="list_filter_phones_work">Liên hệ trên hồ sơ công việc</string>
+  <string name="view_updates_from_group">Xem thông tin cập nhật</string>
+  <string name="account_phone">Chỉ trên thiết bị, chưa đồng bộ hóa</string>
+  <string name="nameLabelsGroup">Tên</string>
+  <string name="nicknameLabelsGroup">Biệt hiệu</string>
+  <string name="full_name">Tên</string>
+  <string name="name_given">Tên</string>
+  <string name="name_family">Họ</string>
+  <string name="name_prefix">Danh xưng</string>
+  <string name="name_middle">Tên đệm</string>
+  <string name="name_suffix">Hậu tố tên</string>
+  <string name="name_phonetic">Tên theo phiên âm</string>
+  <string name="name_phonetic_given">Tên theo phiên âm</string>
+  <string name="name_phonetic_middle">Tên đệm theo phiên âm</string>
+  <string name="name_phonetic_family">Họ theo phiên âm</string>
+  <string name="phoneLabelsGroup">Điện thoại</string>
+  <string name="emailLabelsGroup">Gửi email</string>
+  <string name="postalLabelsGroup">Địa chỉ</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Tổ chức</string>
+  <string name="relationLabelsGroup">Mối quan hệ</string>
+  <string name="eventLabelsGroup">Ngày đặc biệt</string>
+  <string name="sms">Tin nhắn văn bản</string>
+  <string name="postal_address">Địa chỉ</string>
+  <string name="ghostData_company">Công ty</string>
+  <string name="ghostData_title">Chức danh</string>
+  <string name="label_notes">Ghi chú</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Trang web</string>
+  <string name="groupsLabel">Nhóm</string>
+  <string name="email_home">Gửi email tới địa chỉ email nhà riêng</string>
+  <string name="email_mobile">Gửi email tới địa chỉ email thiết bị di động</string>
+  <string name="email_work">Gửi email tới địa chỉ email cơ quan</string>
+  <string name="email_other">Gửi email</string>
+  <string name="email_custom">Gửi email cho %s</string>
+  <string name="email">Gửi email</string>
+  <string name="postal_street">Đường phố</string>
+  <string name="postal_city">Thành phố</string>
+  <string name="postal_region">Tiểu bang</string>
+  <string name="postal_postcode">Mã ZIP</string>
+  <string name="postal_country">Quốc gia</string>
+  <string name="map_home">Xem địa chỉ nhà riêng</string>
+  <string name="map_work">Xem địa chỉ cơ quan</string>
+  <string name="map_other">Xem địa chỉ</string>
+  <string name="map_custom">Xem địa chỉ %s</string>
+  <string name="chat_aim">Trò chuyện sử dụng AIM</string>
+  <string name="chat_msn">Trò chuyện sử dụng Windows Live</string>
+  <string name="chat_yahoo">Trò chuyện sử dụng Yahoo</string>
+  <string name="chat_skype">Trò chuyện sử dụng Skype</string>
+  <string name="chat_qq">Trò chuyện sử dụng QQ</string>
+  <string name="chat_gtalk">Trò chuyện sử dụng Google Talk</string>
+  <string name="chat_icq">Trò chuyện sử dụng ICQ</string>
+  <string name="chat_jabber">Trò chuyện sử dụng Jabber</string>
+  <string name="chat">Trò chuyện</string>
+  <string name="list_filter_all_accounts">Tất cả liên hệ</string>
+  <string name="listAllContactsInAccount">Danh bạ trong %s</string>
+  <string name="listCustomView">Danh bạ ở chế độ xem tùy chỉnh</string>
+  <string name="listSingleContact">Một liên hệ</string>
+  <string name="display_options_sort_list_by">Sắp xếp theo</string>
+  <string name="display_options_sort_by_given_name">Tên</string>
+  <string name="display_options_sort_by_family_name">Họ</string>
+  <string name="display_options_view_names_as">Định dạng tên</string>
+  <string name="display_options_view_given_name_first">Tên trước</string>
+  <string name="display_options_view_family_name_first">Họ trước</string>
+  <string name="menu_clear_frequents">Xóa DS liên hệ thường xuyên</string>
+  <string name="action_menu_back_from_search">ngừng tìm kiếm</string>
+  <string name="description_clear_search">Xóa tìm kiếm</string>
+  <string name="select_account_dialog_title">Tài khoản</string>
+  <string name="set_default_account">Luôn sử dụng SIM này để gọi</string>
+  <string name="select_phone_account_for_calls">Chọn SIM cho cuộc gọi này</string>
+  <string name="select_phone_account_for_calls_remember">Nhớ lựa chọn này</string>
+  <string name="call_with_a_note">Gọi điện kèm theo ghi chú</string>
+  <string name="call_subject_hint">Nhập ghi chú để gửi kèm cuộc gọi...</string>
+  <string name="send_and_call_button">GỬI và GỌI</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Tab %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Tab %1$s. %2$d mục chưa đọc. </item>
+    <item quantity="other"> Tab %1$s. %2$d mục chưa đọc. </item>
+  </plurals>
+  <string name="description_search_video_call">Gọi điện video</string>
+  <string name="description_search_call_and_share">Chia sẻ và gọi</string>
 </resources>

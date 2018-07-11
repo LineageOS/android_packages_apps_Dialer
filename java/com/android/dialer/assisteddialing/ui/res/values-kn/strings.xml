@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">ಸಹಾಯಕ ಡಯಲಿಂಗ್</string>
+  <string name="assisted_dialing_setting_summary">ವಿದೇಶಕ್ಕೆ ಪ್ರಯಾಣಿಸುವ ಸಂದರ್ಭದಲ್ಲಿ ಕರೆ ಮಾಡುವಾಗ ಸಂದರ್ಭದಲ್ಲಿ ದೇಶದ ಕೋಡ್ ಅನ್ನು ಅಂದಾಜಿಸಿ ಮತ್ತು ಅದನ್ನು ಸೇರಿಸಿ</string>
+  <string name="assisted_dialing_setting_cc_default_summary">ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪತ್ತೆಹಚ್ಚಲಾಗಿದೆ • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪತ್ತೆಮಾಡಲಾಗಿದೆ</string>
+  <string name="assisted_dialing_setting_cc_category_title">ಸ್ವದೇಶ</string>
+  <string name="assisted_dialing_setting_cc_title">ಡೀಫಾಲ್ಟ್ ಮೂಲ ದೇಶ</string>
+</resources>

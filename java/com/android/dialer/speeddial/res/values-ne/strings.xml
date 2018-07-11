@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">मन पर्ने कुराहरू</string>
+  <string name="suggestions_header">आवृत्ति</string>
+  <string name="speed_dial_add_button_text">थप्नुहोस्</string>
+  <string name="speed_dial_remember_this_choice">यो रोजाइ याद राख्नुहोला</string>
+  <string name="speed_dial_disambig_dialog_title">कलको प्रकार छनौट गर्नुहोस्</string>
+  <string name="disambig_option_video_call">भिडियो कल</string>
+  <string name="disambig_option_voice_call">कल</string>
+  <string name="add_favorite_activity_title">मनपर्नेमा थप्नुहोस्</string>
+  <string name="contact_menu_voice_call">भ्वाइस कल</string>
+  <string name="contact_menu_video_call">भिडियो कल</string>
+  <string name="contact_menu_message">सन्देश</string>
+  <string name="contact_menu_remove">हटाउनुहोस्</string>
+  <string name="contact_menu_contact_info">सम्पर्कबारे जानकारी</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">मन पर्ने सम्पर्कका रूपमा थप्नु…</string>
+  <string name="speed_dial_contacts_permission_description">स्पिड डायल सक्षम पार्न सम्पर्कहरूमाथिको अनुमति सक्रिय गर्नुहोस्।</string>
+  <string name="speed_dial_turn_on_contacts_permission">सक्रिय गर्नुहोस्</string>
+  <string name="speed_dial_no_contacts_description">तपाईंले अहिलेसम्म कुनै पनि मन पर्ने सम्पर्क थप्नुभएको छैन</string>
+  <string name="speed_dial_no_contacts_action_text">मन पर्ने सम्पर्क थप्नुहोस्</string>
+  <string name="speed_dial_remove_favorites">मन पर्ने कुराहरूबाट सम्पर्क ठेगाना हटाउनुहोस्</string>
 </resources>

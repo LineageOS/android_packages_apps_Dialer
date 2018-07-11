@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Blokirati broj %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Više nećete primati pozive i SMS poruke s ovog broja.</string>
+  <string name="block_number_ok">BLOKIRAJ</string>
+  <string name="unblock_number_ok">DEBLOKIRAJ</string>
+  <string name="block_report_number_alert_title">Blokirati broj %1$s?</string>
+  <string name="block_report_number_alert_details">Više nećete primati pozive s ovog broja.</string>
+  <string name="block_number_alert_details">%1$s Ovaj poziv će biti prijavljen kao neželjen.</string>
+  <string name="unblock_number_alert_details">Deblokirat ćemo broj i prijaviti da nije neželjen. Budući pozivi neće biti neželjeni.</string>
+  <string name="unblock_report_number_alert_title">Deblokirati broj %1$s?</string>
+  <string name="report_not_spam_alert_button">Prijavi</string>
+  <string name="report_not_spam_alert_title">Prijaviti grešku?</string>
+  <string name="report_not_spam_alert_details">Budući pozovi s broja %1$s neće biti neželjeni.</string>
+  <string name="checkbox_report_as_spam_action">Prijavi poziv kao neželjen</string>
+  <string name="block_number_failed_toast">Došlo je do problema prilikom blokiranja ovog broja</string>
+  <string name="unblock_number_failed_toast">Došlo je do problema prilikom deblokiranja ovog broja</string>
+</resources>

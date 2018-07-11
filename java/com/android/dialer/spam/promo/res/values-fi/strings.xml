@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Suodatetaanko kaikki häirikköpuheluilta vaikuttavat puhelut?</string>
+  <string name="spam_blocking_promo_text">Estämäsi kaltaiset puhelut eivät enää
+      häiritse sinua</string>
+  <string name="spam_blocking_promo_action_filter_spam">Suodata häirikköpuhelut</string>
+  <string name="spam_blocking_promo_action_dismiss">Ohita</string>
+  <string name="spam_blocking_setting_prompt">Asetukset</string>
+  <string name="spam_blocking_settings_enable_error_text">Häirikköpuhelujen suodatuksen käyttöönotossa oli ongelma</string>
+  <string name="spam_blocking_settings_disable_error_text">Häirikköpuhelujen suodatuksen poistamisessa käytöstä oli ongelma</string>
+  <string name="spam_blocking_settings_enable_complete_text">Häirikköpuhelujen suodatus päällä</string>
+  <string name="spam_blocking_settings_disable_complete_text">Häirikköpuhelujen suodatus pois päältä</string>
+</resources>

@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">නොදනී</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">පේෆෝනය</string>
+  <string name="emergency_number">හදිසි ඇමතුම් අංකය</string>
+  <string name="launcherActivityLabel">දුරකථනය</string>
+  <string name="call">ඇමතුම</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Wi‑Fi භාවිතයෙන් ඇමතුම දිගටම කරගෙන යමින්…</string>
+  <string name="rtt_call_not_available_toast">RTT මෙම ඇමතුම සඳහා ලබා ගත නොහැකිය</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

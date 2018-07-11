@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Vai bloķēt numuru %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Jūs vairs nesaņemsiet zvanus un īsziņas no šī numura.</string>
+  <string name="block_number_ok">BLOĶĒT</string>
+  <string name="unblock_number_ok">ATBLOĶĒT</string>
+  <string name="block_report_number_alert_title">Vai bloķēt numuru %1$s?</string>
+  <string name="block_report_number_alert_details">Jūs vairs nesaņemsiet zvanus no šī numura.</string>
+  <string name="block_number_alert_details">%1$s Šis zvans tiks atzīmēts kā nevēlams.</string>
+  <string name="unblock_number_alert_details">Numurs tiks atbloķēts un netiks atzīmēts kā nevēlams. Turpmākie zvani netiks atzīmēti kā nevēlami.</string>
+  <string name="unblock_report_number_alert_title">Vai atbloķēt numuru %1$s?</string>
+  <string name="report_not_spam_alert_button">Ziņot</string>
+  <string name="report_not_spam_alert_title">Vai ziņot par kļūdu?</string>
+  <string name="report_not_spam_alert_details">Turpmākie zvani no numura %1$s vairs netiks atzīmēti kā nevēlami.</string>
+  <string name="checkbox_report_as_spam_action">Atzīmēt zvanu kā nevēlamu</string>
+  <string name="block_number_failed_toast">Problēma ar šī numura bloķēšanu</string>
+  <string name="unblock_number_failed_toast">Problēma ar šī numura atbloķēšanu</string>
+</resources>
