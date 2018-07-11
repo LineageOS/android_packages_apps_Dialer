@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="build_version_label" msgid="3876300343684966840">"Версия сборки"</string>
-    <string name="open_source_license_detail_label" msgid="2860076509914623912">"Сведения о лицензиях на ПО с открытым исходным кодом"</string>
-    <string name="licenseActivityLabel" msgid="8258726177561826066">"Лицензии открытого ПО"</string>
-    <string name="privacy_policy_label" msgid="6567158248788870442">"Конфиденциальность"</string>
-    <string name="terms_of_service_label" msgid="6788126078040996084">"Условия использования"</string>
+<resources>
+  <string name="build_version_label">Версия сборки</string>
+  <string name="open_source_license_detail_label">Сведения о лицензиях на ПО с открытым исходным кодом</string>
+  <string name="licenseActivityLabel">Лицензии открытого ПО</string>
+  <string name="privacy_policy_label">Конфиденциальность</string>
+  <string name="terms_of_service_label">Условия использования</string>
 </resources>

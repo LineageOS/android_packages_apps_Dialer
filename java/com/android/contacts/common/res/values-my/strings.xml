@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"စာသားကူးယူပြီး"</string>
-    <string name="call_custom" msgid="3041673234638990874">"<xliff:g id="CUSTOM">%s</xliff:g> ကိုခေါ်ပါ"</string>
-    <string name="call_home" msgid="125893483593803791">"အိမ်ကိုခေါ်ပါ"</string>
-    <string name="call_mobile" msgid="967589404494150813">"မိုဘိုင်းကိုခေါ်ပါ"</string>
-    <string name="call_work" msgid="6040550697395300892">"အလုပ်ကိုခေါ်ပါ"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"အလုပ်ဖက်စ်ကိုခေါ်ပါ"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"အိမ်ဖက်စ်ကိုခေါ်ပါ"</string>
-    <string name="call_pager" msgid="6814149227741274161">"ပေဂျာကိုခေါ်ပါ"</string>
-    <string name="call_other" msgid="5536385588712587235">"ခေါ်ပါ"</string>
-    <string name="call_callback" msgid="6314019862718112786">"ပြန်ခေါ်ခြင်းဝန်ဆောင်မှုကို ခေါ်ပါ"</string>
-    <string name="call_car" msgid="3197417098027764954">"ကားကိုခေါ်ပါ"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"ကုမ္ပဏီပင်မနံပါတ်ကို ခေါ်ပါ"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"ISDN ကိုခေါ်ပါ"</string>
-    <string name="call_main" msgid="3293707608770407814">"ပင်မနံပါတ်ကို ခေါ်ပါ"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"ဖက်စ်ကိုခေါ်ပါ"</string>
-    <string name="call_radio" msgid="8942441419845057942">"ရေဒီယိုကိုခေါ်ပါ"</string>
-    <string name="call_telex" msgid="2031514461660668351">"တဲလက်ဇ်နံပါတ်ကိုခေါ်ပါ"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"TTY/TDD ကိုခေါ်ပါ"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"အလုပ်မိုဘိုင်းကိုခေါ်ပါ"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"အလုပ်ပေဂျာကိုခေါ်ပါ"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"<xliff:g id="ASSISTANT">%s</xliff:g> ကိုခေါ်ပါ"</string>
-    <string name="call_mms" msgid="4958811711741872901">"MMS ကိုခေါ်ပါ"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"<xliff:g id="CUSTOM">%s</xliff:g> သို့ စာပို့ပါ"</string>
-    <string name="sms_home" msgid="3527719551060295243">"အိမ်သို့ စာပို့ပါ"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"မိုဘိုင်းသို့ စာပို့ပါ"</string>
-    <string name="sms_work" msgid="4158595439553450966">"အလုပ်နံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"အလုပ်ဖက်စ်သို့ စာပို့ပါ"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"အိမ်ဖက်စ်သို့ စာပို့ပါ"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ပေဂျာနံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_other" msgid="1742702947993285933">"စာတို"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ပြန်ခေါ်မှုနံပါတ်ထံ စာပို့ပါ"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ကားဆီ စာပို့ပါ"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ကုမ္ပဏီ ပင်မနံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ISDN စာပို့ပါ"</string>
-    <string name="sms_main" msgid="8908087742014140774">"အဓိကနံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ဖက်စ်နံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ရေဒီယိုနံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"တဲလက်စ်နံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"TTY/TDD နံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"အလုပ်မိုဘိုင်းသို့ စာပို့ပါ"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"အလုပ်ပေ့ဂျာသို့ စာပို့ပါ"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"<xliff:g id="ASSISTANT">%s</xliff:g>ထံ စာပို့ပါ"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"MMS နံပါတ်သို့ စာပို့ပါ"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"အသုံးများသောလိပ်စာများရှင်းပစ်မလား?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"အသုံးများသော အဆက်အသွယ်စာရင်းအား Contacts နှင့် Phone app များမှ သင် ရှင်းလင်းပစ်မှာဖြစ်ပြီး၊ အီးမေးလ် app များအား သင့်နှစ်သက်ရာ ​ပ​ြောဆိုဆက်ဆံမှုပုံစံကို အစမှပြန်လည် လေ့လာခိုင်းမည်။"</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"အသုံးများသောလိပ်စာများ ရှင်းလင်းနေစဉ်"</string>
-    <string name="status_available" msgid="2648156525685472626">"ဆက်သွယ်နိုင်ပါသည်"</string>
-    <string name="status_away" msgid="2298688367552893953">"အဝေးရောက်နေပါသည်"</string>
-    <string name="status_busy" msgid="5990832098713248503">"အလုပ်များနေသည်"</string>
-    <string name="contactsList" msgid="8806067891419291513">"အဆက်အသွယ်များ"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"ထိပ်တန်း အကြံပြုထားပါသည်"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"တစ်ခြား"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"လမ်းညွှန်"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"အလုပ်လမ်းညွှန်"</string>
-    <string name="local_search_label" msgid="907622822323119235">"လိပ်စာများအားလုံး"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"အကြံပြုချက်များ"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ကျွန်ုပ်"</string>
-    <string name="missing_name" msgid="978606963362745020">"(အမည်မရှိ)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"အဆက်အသွယ်ကိုကြည့်ရန်"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"ဖုန်းနံပါတ်ပါသော လိပ်စာများအားလုံး"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"အလုပ်ပရိုဖိုင် အဆက်အသွယ်များ"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"အဆင့်မြှင့်ခြင်းများပြရန်"</string>
-    <string name="account_phone" msgid="7067809073194061035">"ကိရိယာတွင်သာ၊ စင့်ခ်မလုပ်ပါ"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"အမည်"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"နာမည်ဝှက်"</string>
-    <string name="full_name" msgid="648186563998465740">"အမည်"</string>
-    <string name="name_given" msgid="5096576006314820536">"ပထမ အမည်"</string>
-    <string name="name_family" msgid="6646235805198547467">"နောက်ဆုံး အမည်"</string>
-    <string name="name_prefix" msgid="9215326539658838">"နာမည်ရှေ့ဆောင်"</string>
-    <string name="name_middle" msgid="703755205331582769">"အလယ်နာမည်"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"နာမည်နောက်စွဲ"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"အသံထွက်နာမည်"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"အသံထွက် ပထမ အမည်"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"အသံထွက် အလယ်နာမည်"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"အသံထွက် နောက်ဆုံး အမည်"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"ဖုန်း"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"အီးမေးလ်"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"လိပ်စာ"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"အဖွဲ့အစည်း"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"ပတ်သတ်မှု"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"အထူးနေ့"</string>
-    <string name="sms" msgid="7574344928185328095">"စာတို"</string>
-    <string name="postal_address" msgid="1804707930129674200">"လိပ်စာ"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"ကုမ္ပဏီ"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"ခေါင်းစဉ်"</string>
-    <string name="label_notes" msgid="2050255313694219786">"မှတ်စုများ"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"ဝဘ်ဆိုက်"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"အုပ်စုများ"</string>
-    <string name="email_home" msgid="889830029388962171">"အိမ်ကို အီးမေးလ် ပို့ပါ"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"မိုဘိုင်း ကို အီးမေးလ် ပို့ပါ"</string>
-    <string name="email_work" msgid="4223487303344613528">"အလုပ်ကို အီးမေးလ် ပို့ပါ"</string>
-    <string name="email_other" msgid="4246411900126012062">"အီးမေးလ်"</string>
-    <string name="email_custom" msgid="7246580894327511013">"အီးမေးလ် <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"အီးမေးလ်"</string>
-    <string name="postal_street" msgid="6918171741240802474">"လမ်း"</string>
-    <string name="postal_city" msgid="8674569121430005628">"မြို့"</string>
-    <string name="postal_region" msgid="1730369286225469192">"ပြည်နယ်"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"စာပို့သင်္ကေတ"</string>
-    <string name="postal_country" msgid="232670707458768148">"နိုင်ငံ"</string>
-    <string name="map_home" msgid="4181131107392126938">"အိမ်လိပ်စာအားကြည့်ရန်"</string>
-    <string name="map_work" msgid="5723471185992684400">"အလုပ်လိပ်စာအားကြည့်ရန်"</string>
-    <string name="map_other" msgid="2253764780863500516">"လိပ်စာအားကြည့်ရန်"</string>
-    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> လိပ်စာအားကြည့်ရန်"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"AIM သုံး၍ ချက်တင်လုပ်ခြင်း"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Windows Liveသုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Yahoo သုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Skype သုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat_qq" msgid="786924280665740019">"QQ သုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"ဂူးဂဲလ်တော့သုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ICQ သုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Jabberသုံး၍ ချက်တင်ပြုလုပ်ခြင်း"</string>
-    <string name="chat" msgid="1020428260359370236">"ချက်တင်းပြောသည်"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"ဆက်သွယ်အားလုံး"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g> ထဲမှ အဆက်အသွယ်များ"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"မိမိစိတ်ကြိုက် မြင်ကွင်းမှ"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"အဆက်အသွယ်တစ်ခုတည်း"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"ဖြင့် စီပေးရန်"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"ပထမ အမည်"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"နောက်ဆုံး အမည်"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"အမည် ချထားပုံစံ"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ပထမ အမည် ဦးစွာ"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"နောက်ဆုံး အမည် ဦးစွာ"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"မကြာခဏအရာများအား ဖယ်ရှားရန်"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ရှာဖွေမှုကို ရပ်ရန်"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"ရှာဖွေမှုကို ရှင်းပါ"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"အကောင့်"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"ခေါ်ဆိုမှုများ အတွက် အမြဲတမ်း ဒါကို သုံးရန်"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"ဖြင့် ခေါ်ဆိုရန်"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"မှတ်စုတစ်ခုဖြင့် ခေါ်ဆိုမည်"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"ခေါ်ဆိုမှုဖြင့် ပေးပို့ရန် မှတ်စုတစ်ခု ရိုက်ပါ ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ပေးပို့ပြီး ခေါ်ပါ"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> တဘ်။"</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> တဘ်။ မဖတ်ရသေးသည့် အရာ <xliff:g id="COUNT_3">%2$d</xliff:g> ခု။ </item>
-      <item quantity="one"> <xliff:g id="TITLE_0">%1$s</xliff:g> တဘ်။ မဖတ်ရသေးသည့် အရာ <xliff:g id="COUNT_1">%2$d</xliff:g> ခု။ </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"ဗီဒီယို ခေါ်ဆိုမှု"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"မျှဝေပြီး ခေါ်ဆိုရန်"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">%s ကိုခေါ်ပါ</string>
+  <string name="call_home">အိမ်ကိုခေါ်ပါ</string>
+  <string name="call_mobile">မိုဘိုင်းကိုခေါ်ပါ</string>
+  <string name="call_work">အလုပ်ကိုခေါ်ပါ</string>
+  <string name="call_fax_work">အလုပ်ဖက်စ်ကိုခေါ်ပါ</string>
+  <string name="call_fax_home">အိမ်ဖက်စ်ကိုခေါ်ပါ</string>
+  <string name="call_pager">ပေဂျာကိုခေါ်ပါ</string>
+  <string name="call_other">ခေါ်ပါ</string>
+  <string name="call_callback">ပြန်ခေါ်ခြင်းဝန်ဆောင်မှုကို ခေါ်ပါ</string>
+  <string name="call_car">ကားကိုခေါ်ပါ</string>
+  <string name="call_company_main">ကုမ္ပဏီပင်မနံပါတ်ကို ခေါ်ပါ</string>
+  <string name="call_isdn">ISDN ကိုခေါ်ပါ</string>
+  <string name="call_main">ပင်မနံပါတ်ကို ခေါ်ပါ</string>
+  <string name="call_other_fax">ဖက်စ်ကိုခေါ်ပါ</string>
+  <string name="call_radio">ရေဒီယိုကိုခေါ်ပါ</string>
+  <string name="call_telex">တဲလက်ဇ်နံပါတ်ကိုခေါ်ပါ</string>
+  <string name="call_tty_tdd">TTY/TDD ကိုခေါ်ပါ</string>
+  <string name="call_work_mobile">အလုပ်မိုဘိုင်းကိုခေါ်ပါ</string>
+  <string name="call_work_pager">အလုပ်ပေဂျာကိုခေါ်ပါ</string>
+  <string name="call_assistant">%s ကိုခေါ်ပါ</string>
+  <string name="call_mms">MMS ကိုခေါ်ပါ</string>
+  <string name="sms_custom">%s သို့ စာပို့ပါ</string>
+  <string name="sms_home">အိမ်သို့ စာပို့ပါ</string>
+  <string name="sms_mobile">မိုဘိုင်းသို့ စာပို့ပါ</string>
+  <string name="sms_work">အလုပ်နံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_fax_work">အလုပ်ဖက်စ်သို့ စာပို့ပါ</string>
+  <string name="sms_fax_home">အိမ်ဖက်စ်သို့ စာပို့ပါ</string>
+  <string name="sms_pager">ပေဂျာနံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_other">စာတို</string>
+  <string name="sms_callback">ပြန်ခေါ်မှုနံပါတ်ထံ စာပို့ပါ</string>
+  <string name="sms_car">ကားဆီ စာပို့ပါ</string>
+  <string name="sms_company_main">ကုမ္ပဏီ ပင်မနံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_isdn">ISDN စာပို့ပါ</string>
+  <string name="sms_main">အဓိကနံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_other_fax">ဖက်စ်နံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_radio">ရေဒီယိုနံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_telex">တဲလက်စ်နံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_tty_tdd">TTY/TDD နံပါတ်သို့ စာပို့ပါ</string>
+  <string name="sms_work_mobile">အလုပ်မိုဘိုင်းသို့ စာပို့ပါ</string>
+  <string name="sms_work_pager">အလုပ်ပေ့ဂျာသို့ စာပို့ပါ</string>
+  <string name="sms_assistant">%sထံ စာပို့ပါ</string>
+  <string name="sms_mms">MMS နံပါတ်သို့ စာပို့ပါ</string>
+  <string name="clearFrequentsConfirmation_title">အသုံးများသောလိပ်စာများရှင်းပစ်မလား?</string>
+  <string name="clearFrequentsConfirmation">အသုံးများသော အဆက်အသွယ်စာရင်းအား Contacts နှင့် Phone app များမှ သင် ရှင်းလင်းပစ်မှာဖြစ်ပြီး၊ အီးမေးလ် app များအား သင့်နှစ်သက်ရာ ​ပ​ြောဆိုဆက်ဆံမှုပုံစံကို အစမှပြန်လည် လေ့လာခိုင်းမည်။</string>
+  <string name="clearFrequentsProgress_title">အသုံးများသောလိပ်စာများ ရှင်းလင်းနေစဉ်</string>
+  <string name="status_available">ဆက်သွယ်နိုင်ပါသည်</string>
+  <string name="status_away">အဝေးရောက်နေပါသည်</string>
+  <string name="status_busy">အလုပ်များနေသည်</string>
+  <string name="contactsList">အဆက်အသွယ်များ</string>
+  <string name="contact_suggestions">ထိပ်တန်း အကြံပြုထားပါသည်</string>
+  <string name="local_invisible_directory">တစ်ခြား</string>
+  <string name="directory_search_label">လမ်းညွှန်</string>
+  <string name="directory_search_label_work">အလုပ်လမ်းညွှန်</string>
+  <string name="local_search_label">လိပ်စာများအားလုံး</string>
+  <string name="local_suggestions_search_label">အကြံပြုချက်များ</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ကျွန်ုပ်</string>
+  <string name="missing_name">(အမည်မရှိ)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">အဆက်အသွယ်ကိုကြည့်ရန်</string>
+  <string name="list_filter_phones">ဖုန်းနံပါတ်ပါသော လိပ်စာများအားလုံး</string>
+  <string name="list_filter_phones_work">အလုပ်ပရိုဖိုင် အဆက်အသွယ်များ</string>
+  <string name="view_updates_from_group">အဆင့်မြှင့်ခြင်းများပြရန်</string>
+  <string name="account_phone">ကိရိယာတွင်သာ၊ စင့်ခ်မလုပ်ပါ</string>
+  <string name="nameLabelsGroup">အမည်</string>
+  <string name="nicknameLabelsGroup">နာမည်ဝှက်</string>
+  <string name="full_name">အမည်</string>
+  <string name="name_given">ပထမ အမည်</string>
+  <string name="name_family">နောက်ဆုံး အမည်</string>
+  <string name="name_prefix">နာမည်ရှေ့ဆောင်</string>
+  <string name="name_middle">အလယ်နာမည်</string>
+  <string name="name_suffix">နာမည်နောက်စွဲ</string>
+  <string name="name_phonetic">အသံထွက်နာမည်</string>
+  <string name="name_phonetic_given">အသံထွက် ပထမ အမည်</string>
+  <string name="name_phonetic_middle">အသံထွက် အလယ်နာမည်</string>
+  <string name="name_phonetic_family">အသံထွက် နောက်ဆုံး အမည်</string>
+  <string name="phoneLabelsGroup">ဖုန်း</string>
+  <string name="emailLabelsGroup">အီးမေးလ်</string>
+  <string name="postalLabelsGroup">လိပ်စာ</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">အဖွဲ့အစည်း</string>
+  <string name="relationLabelsGroup">ပတ်သတ်မှု</string>
+  <string name="eventLabelsGroup">အထူးနေ့</string>
+  <string name="sms">စာတို</string>
+  <string name="postal_address">လိပ်စာ</string>
+  <string name="ghostData_company">ကုမ္ပဏီ</string>
+  <string name="ghostData_title">ခေါင်းစဉ်</string>
+  <string name="label_notes">မှတ်စုများ</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">ဝဘ်ဆိုက်</string>
+  <string name="groupsLabel">အုပ်စုများ</string>
+  <string name="email_home">အိမ်ကို အီးမေးလ် ပို့ပါ</string>
+  <string name="email_mobile">မိုဘိုင်း ကို အီးမေးလ် ပို့ပါ</string>
+  <string name="email_work">အလုပ်ကို အီးမေးလ် ပို့ပါ</string>
+  <string name="email_other">အီးမေးလ်</string>
+  <string name="email_custom">အီးမေးလ် %s</string>
+  <string name="email">အီးမေးလ်</string>
+  <string name="postal_street">လမ်း</string>
+  <string name="postal_city">မြို့</string>
+  <string name="postal_region">ပြည်နယ်</string>
+  <string name="postal_postcode">စာပို့သင်္ကေတ</string>
+  <string name="postal_country">နိုင်ငံ</string>
+  <string name="map_home">အိမ်လိပ်စာအားကြည့်ရန်</string>
+  <string name="map_work">အလုပ်လိပ်စာအားကြည့်ရန်</string>
+  <string name="map_other">လိပ်စာအားကြည့်ရန်</string>
+  <string name="map_custom">%s လိပ်စာအားကြည့်ရန်</string>
+  <string name="chat_aim">AIM သုံး၍ ချက်တင်လုပ်ခြင်း</string>
+  <string name="chat_msn">Windows Liveသုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat_yahoo">Yahoo သုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat_skype">Skype သုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat_qq">QQ သုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat_gtalk">ဂူးဂဲလ်တော့သုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat_icq">ICQ သုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat_jabber">Jabberသုံး၍ ချက်တင်ပြုလုပ်ခြင်း</string>
+  <string name="chat">ချက်တင်းပြောသည်</string>
+  <string name="list_filter_all_accounts">ဆက်သွယ်အားလုံး</string>
+  <string name="listAllContactsInAccount">%s ထဲမှ အဆက်အသွယ်များ</string>
+  <string name="listCustomView">မိမိစိတ်ကြိုက် မြင်ကွင်းမှ</string>
+  <string name="listSingleContact">အဆက်အသွယ်တစ်ခုတည်း</string>
+  <string name="display_options_sort_list_by">ဖြင့် စီပေးရန်</string>
+  <string name="display_options_sort_by_given_name">ပထမ အမည်</string>
+  <string name="display_options_sort_by_family_name">နောက်ဆုံး အမည်</string>
+  <string name="display_options_view_names_as">အမည် ချထားပုံစံ</string>
+  <string name="display_options_view_given_name_first">ပထမ အမည် ဦးစွာ</string>
+  <string name="display_options_view_family_name_first">နောက်ဆုံး အမည် ဦးစွာ</string>
+  <string name="menu_clear_frequents">မကြာခဏအရာများအား ဖယ်ရှားရန်</string>
+  <string name="action_menu_back_from_search">ရှာဖွေမှုကို ရပ်ရန်</string>
+  <string name="description_clear_search">ရှာဖွေမှုကို ရှင်းပါ</string>
+  <string name="select_account_dialog_title">အကောင့်</string>
+  <string name="set_default_account">ခေါ်ဆိုမှုများ အတွက် အမြဲတမ်း ဒါကို သုံးရန်</string>
+  <string name="select_phone_account_for_calls">ဤခေါ်ဆိုမှုအတွက် ဆင်းမ်ကဒ် ရွေးချယ်ခြင်း</string>
+  <string name="select_phone_account_for_calls_remember">ဤရွေးချယ်မှုကို မှတ်ထားရန်</string>
+  <string name="call_with_a_note">မှတ်စုတစ်ခုဖြင့် ခေါ်ဆိုမည်</string>
+  <string name="call_subject_hint">ခေါ်ဆိုမှုဖြင့် ပေးပို့ရန် မှတ်စုတစ်ခု ရိုက်ပါ ...</string>
+  <string name="send_and_call_button">ပေးပို့ပြီး ခေါ်ပါ</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s တဘ်။</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s တဘ်။ မဖတ်ရသေးသည့် အရာ %2$d ခု။ </item>
+    <item quantity="other"> %1$s တဘ်။ မဖတ်ရသေးသည့် အရာ %2$d ခု။ </item>
+  </plurals>
+  <string name="description_search_video_call">ဗီဒီယို ခေါ်ဆိုမှု</string>
+  <string name="description_search_call_and_share">မျှဝေပြီး ခေါ်ဆိုရန်</string>
 </resources>

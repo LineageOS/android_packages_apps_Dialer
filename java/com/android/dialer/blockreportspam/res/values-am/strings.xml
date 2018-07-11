@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s አግድ?</string>
+  <string name="block_number_confirmation_message_new_filtering">ከአሁን በኋላ ከዚህ ቁጥር የሚመጡ ጥሪዎችን ወይም ጽሑፎችን አይቀበሉም።</string>
+  <string name="block_number_ok">አግድ</string>
+  <string name="unblock_number_ok">እገዳ አንሳ</string>
+  <string name="block_report_number_alert_title">%1$s ይታገድ?</string>
+  <string name="block_report_number_alert_details">ከአሁን በኋላ ከዚህ ቁጥር ጥሪዎችን ቅይቀበሉም።</string>
+  <string name="block_number_alert_details">%1$s ይህ ጥሪ እንደ አይፈለጌ ሪፖርት ይደረጋል።</string>
+  <string name="unblock_number_alert_details">ይህ ቁጥር እግዱ ይነሳለታል እንዲሁም አይፈለጌ እንዳልሆነ ሪፖርት ይደረጋል። የወደፊት ጥሪዎች እና የድምፅ መልዕክቶች እንደ አይፈለጌ አይቆጠሩም።</string>
+  <string name="unblock_report_number_alert_title">ከ%1$s እግድ ይነሳ?</string>
+  <string name="report_not_spam_alert_button">ሪፖርት አድርግ</string>
+  <string name="report_not_spam_alert_title">ስህተት ሪፖርት ይደረግ?</string>
+  <string name="report_not_spam_alert_details">ወደፊት ከ%1$s የሚመጡ ጥሪዎች ከአሁን በኋላ እንደ አይፈለጌ አይቆጠሩም።</string>
+  <string name="checkbox_report_as_spam_action">ጥሪውን እንደ አይፈለጌ መልዕክት ሪፖርት አድርግ</string>
+  <string name="block_number_failed_toast">ይህን ቁጥር ለማገድ ችግር</string>
+  <string name="unblock_number_failed_toast">ከዚህ ቁጥር እገዳ ለማንሳት ችግር</string>
+</resources>

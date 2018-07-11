@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">לחסום את %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">לא יגיעו אליך יותר שיחות או הודעות טקסט מהמספר הזה.</string>
+  <string name="block_number_ok">חסום</string>
+  <string name="unblock_number_ok">ביטול חסימה</string>
+  <string name="block_report_number_alert_title">לחסום את %1$s?</string>
+  <string name="block_report_number_alert_details">לא יגיעו אליך יותר שיחות מהמספר הזה.</string>
+  <string name="block_number_alert_details">%1$s השיחה הזו תדווח כספאם.</string>
+  <string name="unblock_number_alert_details">החסימה של המספר הזה תבוטל וידווח שהוא אינו ספאם. שיחות שיתקבלו ממנו לא יזוהו כספאם.</string>
+  <string name="unblock_report_number_alert_title">לבטל את החסימה של %1$s?</string>
+  <string name="report_not_spam_alert_button">דיווח</string>
+  <string name="report_not_spam_alert_title">טעינו? רוצה לדווח על זה?</string>
+  <string name="report_not_spam_alert_details">שיחות שיתקבלו מהמספר %1$s לא יזוהו יותר כספאם.</string>
+  <string name="checkbox_report_as_spam_action">דיווח על השיחה כספאם</string>
+  <string name="block_number_failed_toast">לא ניתן היה לחסום את המספר הזה</string>
+  <string name="unblock_number_failed_toast">לא ניתן היה לבטל את החסימה של המספר הזה</string>
+</resources>

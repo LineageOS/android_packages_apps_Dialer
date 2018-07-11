@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">सबै शङ्कास्पद स्प्याम कलहरूलाई फिल्टर गर्ने हो?</string>
+  <string name="spam_blocking_promo_text">तपाईंले भर्खरै रोक लगाउनुभएका जस्ता कलहरूले तपाईंलाई अब उप्रान्त बाधा पुऱ्याउने छैनन्</string>
+  <string name="spam_blocking_promo_action_filter_spam">स्प्यामलाई फिल्टर गर्नुहोस्</string>
+  <string name="spam_blocking_promo_action_dismiss">खारेज गर्नुहोस्</string>
+  <string name="spam_blocking_setting_prompt">सेटिङहरू</string>
+  <string name="spam_blocking_settings_enable_error_text">स्प्यामलाई फिल्टर गर्ने सुविधा सक्रिय गर्दा समस्या भयो</string>
+  <string name="spam_blocking_settings_disable_error_text">स्प्याम फिल्टर गर्ने सुविधा निष्क्रिय पार्दा समस्या भयो</string>
+  <string name="spam_blocking_settings_enable_complete_text">स्प्याम फिल्टर गर्ने सुविधा सक्रिय गरियो</string>
+  <string name="spam_blocking_settings_disable_complete_text">स्प्याम फिल्टर गर्ने सुविधा निष्क्रिय पारियो</string>
+</resources>

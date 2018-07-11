@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Vil du filtrere alle formodede spamopkald?</string>
+  <string name="spam_blocking_promo_text">Opkald som det, du netop har blokeret, forstyrrer dig
+      ikke længere</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrer spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Afvis</string>
+  <string name="spam_blocking_setting_prompt">Indstillinger</string>
+  <string name="spam_blocking_settings_enable_error_text">Der opstod et problem, da filtrering af spamopkald skulle aktiveres</string>
+  <string name="spam_blocking_settings_disable_error_text">Der opstod et problem, da filtrering af spamopkald skulle deaktiveres</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtrering af spamopkald blev aktiveret</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtrering af spamopkald blev deaktiveret</string>
+</resources>

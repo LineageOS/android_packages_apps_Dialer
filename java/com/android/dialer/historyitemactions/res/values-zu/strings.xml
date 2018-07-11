@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Ikholi yezwi</string>
+  <string name="video_call">Ikholi yevidiyo</string>
+  <string name="add_to_contacts">Engeza oxhumana naye</string>
+  <string name="send_a_message">Umlayezo</string>
+  <string name="not_spam">Akusiko okugaxekile</string>
+  <string name="block_number">Vimba</string>
+  <string name="unblock_number">Vulela</string>
+  <string name="block_and_optionally_report_spam">Vimba/bika ugaxekile</string>
+  <string name="copy_number">Kopisha inombolo</string>
+</resources>

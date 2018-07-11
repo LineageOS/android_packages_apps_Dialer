@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="build_version_label" msgid="3876300343684966840">"বিল্ড সংস্করণ"</string>
-    <string name="open_source_license_detail_label" msgid="2860076509914623912">"মুক্ত উৎস সফ্টওয়্যারের লাইসেন্স বিবরণ"</string>
-    <string name="licenseActivityLabel" msgid="8258726177561826066">"মুক্ত উৎস লাইসেন্স"</string>
-    <string name="privacy_policy_label" msgid="6567158248788870442">"গোপনীয়তা নীতি"</string>
-    <string name="terms_of_service_label" msgid="6788126078040996084">"পরিষেবার শর্তাবলী"</string>
+<resources>
+  <string name="build_version_label">বিল্ড সংস্করণ</string>
+  <string name="open_source_license_detail_label">মুক্ত উৎস সফ্টওয়্যারের লাইসেন্স বিবরণ</string>
+  <string name="licenseActivityLabel">ওপেন সোর্স লাইসেন্স</string>
+  <string name="privacy_policy_label">গোপনীয়তা নীতি</string>
+  <string name="terms_of_service_label">পরিষেবার শর্তাবলী</string>
 </resources>

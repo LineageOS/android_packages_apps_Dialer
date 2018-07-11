@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Çağrı sırasında gerçek zamanlı mesaj gönderip alma</string>
+  <string name="rtt_promotion_details">RTT; tam veya kısmi işitme engelli, konuşma engeli olan veya sesten
+    fazlasına ihtiyaç duyan arayanlara yardımcı olur. RTT mesajlarının çeviri yazıları
+    cihazınızdaki çağrı geçmişinde depolanır. %1$s</string>
+  <string name="duo_disclosure_title">Duo ile görüntülü görüşmeler yapın</string>
+  <string name="duo_disclosure_details">Google Duo görüntülü görüşmesi, arkadaşlarınız ve ailenizle yüz yüze sohbet etmenizi sağlar. Veri aktarımı için ücret alınabilir. %1$s</string>
+</resources>

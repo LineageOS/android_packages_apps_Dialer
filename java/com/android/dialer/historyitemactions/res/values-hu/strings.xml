@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Hanghívás</string>
+  <string name="video_call">Videohívás</string>
+  <string name="add_to_contacts">Névjegy felvétele</string>
+  <string name="send_a_message">Üzenetküldés</string>
+  <string name="not_spam">Nem spam</string>
+  <string name="block_number">Letiltás</string>
+  <string name="unblock_number">Letiltás feloldása</string>
+  <string name="block_and_optionally_report_spam">Letiltás/spam bejelentése</string>
+  <string name="copy_number">Szám másolása</string>
+</resources>

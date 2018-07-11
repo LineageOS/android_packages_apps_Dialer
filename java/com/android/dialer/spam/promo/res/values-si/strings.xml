@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">සියලු සැකසහිත අයාචිත ඇමතුම් පෙරන්නද?</string>
+  <string name="spam_blocking_promo_text">ඔබ මේ දැන් අවහිර කළ එක වැනි ඇමතුම් තවදුරටත් ඔබට බාධා නොකරනු ඇත</string>
+  <string name="spam_blocking_promo_action_filter_spam">අයාචිත තැපැල් පෙරහන් කරන්න</string>
+  <string name="spam_blocking_promo_action_dismiss">ඉවත ලන්න</string>
+  <string name="spam_blocking_setting_prompt">සැකසීම්</string>
+  <string name="spam_blocking_settings_enable_error_text">අයාචිත පෙරහන ක්‍රියාත්මක කිරීමේ ගැටලුවකි</string>
+  <string name="spam_blocking_settings_disable_error_text">අයාචිත පෙරහන ක්‍රියාවිරහිත කිරීමේ ගැටලුවකි</string>
+  <string name="spam_blocking_settings_enable_complete_text">අයාචිත පෙරහන ක්‍රියාත්මකයි</string>
+  <string name="spam_blocking_settings_disable_complete_text">අයාචිත පෙරහන ක්‍රියාවිරහිතයි</string>
+</resources>

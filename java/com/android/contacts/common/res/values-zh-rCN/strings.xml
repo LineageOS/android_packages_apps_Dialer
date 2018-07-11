@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"文本已复制"</string>
-    <string name="call_custom" msgid="3041673234638990874">"拨打<xliff:g id="CUSTOM">%s</xliff:g>电话号码"</string>
-    <string name="call_home" msgid="125893483593803791">"拨打住宅电话号码"</string>
-    <string name="call_mobile" msgid="967589404494150813">"拨打手机号码"</string>
-    <string name="call_work" msgid="6040550697395300892">"拨打公司电话号码"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"拨打公司传真号码"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"拨打住宅传真号码"</string>
-    <string name="call_pager" msgid="6814149227741274161">"拨打寻呼机号码"</string>
-    <string name="call_other" msgid="5536385588712587235">"拨打电话"</string>
-    <string name="call_callback" msgid="6314019862718112786">"拨打回拨号码"</string>
-    <string name="call_car" msgid="3197417098027764954">"拨打车载电话号码"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"拨打公司总机号码"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"拨打 ISDN 电话号码"</string>
-    <string name="call_main" msgid="3293707608770407814">"拨打主电话号码"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"拨打传真号码"</string>
-    <string name="call_radio" msgid="8942441419845057942">"拨打无线通讯电话号码"</string>
-    <string name="call_telex" msgid="2031514461660668351">"拨打电报号码"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"拨打 TTY/TDD 号码"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"拨打公司手机号码"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"拨打公司寻呼机号码"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"拨打<xliff:g id="ASSISTANT">%s</xliff:g>的电话"</string>
-    <string name="call_mms" msgid="4958811711741872901">"拨打彩信电话号码"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"向<xliff:g id="CUSTOM">%s</xliff:g>电话号码发短信"</string>
-    <string name="sms_home" msgid="3527719551060295243">"向住宅电话号码发短信"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"向手机发短信"</string>
-    <string name="sms_work" msgid="4158595439553450966">"向公司电话号码发短信"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"向公司传真号码发短信"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"向住宅传真号码发短信"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"向寻呼机号码发短信"</string>
-    <string name="sms_other" msgid="1742702947993285933">"发短信"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"向回拨号码发短信"</string>
-    <string name="sms_car" msgid="4314577266154395174">"向车载电话号码发短信"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"向公司总机号码发短信"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"向 ISDN 电话号码发短信"</string>
-    <string name="sms_main" msgid="8908087742014140774">"向主电话号码发短信"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"向传真号码发短信"</string>
-    <string name="sms_radio" msgid="855555176531704682">"向无线通讯电话号码发短信"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"向电报号码发短信"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"向 TTY/TDD 号码发短信"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"向公司手机发短信"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"向公司寻呼机号码发短信"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"向<xliff:g id="ASSISTANT">%s</xliff:g>发短信"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"向彩信电话号码发短信"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"是否清除常用联系人？"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"此操作会清除“通讯录”和“电话”应用中的常用联系人列表，并强制电子邮件应用重新获取您最常使用的联系地址。"</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"正在清除常用联系人…"</string>
-    <string name="status_available" msgid="2648156525685472626">"在线"</string>
-    <string name="status_away" msgid="2298688367552893953">"离开"</string>
-    <string name="status_busy" msgid="5990832098713248503">"忙碌"</string>
-    <string name="contactsList" msgid="8806067891419291513">"通讯录"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"常用联系人推荐"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"其他"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"目录"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"工作目录"</string>
-    <string name="local_search_label" msgid="907622822323119235">"所有联系人"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"建议"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"我"</string>
-    <string name="missing_name" msgid="978606963362745020">"（无姓名）"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"查看联系人"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"所有拥有电话号码的联系人"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"工作资料联系人"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"查看最新动态"</string>
-    <string name="account_phone" msgid="7067809073194061035">"仅限此设备，不同步"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"姓名"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"昵称"</string>
-    <string name="full_name" msgid="648186563998465740">"名称"</string>
-    <string name="name_given" msgid="5096576006314820536">"名字"</string>
-    <string name="name_family" msgid="6646235805198547467">"姓氏"</string>
-    <string name="name_prefix" msgid="9215326539658838">"姓名前缀"</string>
-    <string name="name_middle" msgid="703755205331582769">"中间名"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"姓名后缀"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"姓名拼音"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"名字拼音"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"中间名拼音"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"姓氏拼音"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"电话"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"发送电子邮件"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"地址"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"聊天工具"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"组织"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"关系"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"特别的日子"</string>
-    <string name="sms" msgid="7574344928185328095">"文字信息"</string>
-    <string name="postal_address" msgid="1804707930129674200">"地址"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"公司"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"职务"</string>
-    <string name="label_notes" msgid="2050255313694219786">"备注"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"网站"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"群组"</string>
-    <string name="email_home" msgid="889830029388962171">"向个人邮箱发送电子邮件"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"向手机发送电子邮件"</string>
-    <string name="email_work" msgid="4223487303344613528">"向工作邮箱发送电子邮件"</string>
-    <string name="email_other" msgid="4246411900126012062">"发送电子邮件"</string>
-    <string name="email_custom" msgid="7246580894327511013">"向<xliff:g id="CUSTOM">%s</xliff:g>邮箱发送电子邮件"</string>
-    <string name="email" msgid="2807318537887091606">"发送电子邮件"</string>
-    <string name="postal_street" msgid="6918171741240802474">"街道"</string>
-    <string name="postal_city" msgid="8674569121430005628">"城市"</string>
-    <string name="postal_region" msgid="1730369286225469192">"省/自治区/直辖市"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"邮编"</string>
-    <string name="postal_country" msgid="232670707458768148">"国家/地区"</string>
-    <string name="map_home" msgid="4181131107392126938">"查看住宅地址"</string>
-    <string name="map_work" msgid="5723471185992684400">"查看工作地址"</string>
-    <string name="map_other" msgid="2253764780863500516">"查看地址"</string>
-    <string name="map_custom" msgid="5581743097882436157">"查看<xliff:g id="CUSTOM">%s</xliff:g>地址"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"使用 AIM 聊天"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"使用 Windows Live 聊天"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"使用雅虎通聊天"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"使用 Skype 聊天"</string>
-    <string name="chat_qq" msgid="786924280665740019">"使用 QQ 聊天"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"使用Google Talk聊天"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"使用 ICQ 聊天"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"使用 Jabber 聊天"</string>
-    <string name="chat" msgid="1020428260359370236">"聊天"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"所有联系人"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g> 中的联系人"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"自定义视图中的联系人"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"单个联系人"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"排序方式"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"名字"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"姓氏"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"姓名格式"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"名字在前"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"姓氏在前"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"清除常用联系人"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"停止搜索"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"清除搜索内容"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"帐号"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"一律使用这张卡进行通话"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"用于外拨电话的帐号"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"拨打电话并发送备注"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"输入要在拨打电话时发送的备注…"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"发送并拨打电话"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g>：<xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g>标签。"</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g>标签。<xliff:g id="COUNT_3">%2$d</xliff:g> 项未读内容。</item>
-      <item quantity="one"> <xliff:g id="TITLE_0">%1$s</xliff:g>标签。<xliff:g id="COUNT_1">%2$d</xliff:g> 项未读内容。</item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"视频通话"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"分享并拨打电话"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">拨打%s电话号码</string>
+  <string name="call_home">拨打住宅电话号码</string>
+  <string name="call_mobile">拨打手机号码</string>
+  <string name="call_work">拨打公司电话号码</string>
+  <string name="call_fax_work">拨打公司传真号码</string>
+  <string name="call_fax_home">拨打住宅传真号码</string>
+  <string name="call_pager">拨打寻呼机号码</string>
+  <string name="call_other">拨打电话</string>
+  <string name="call_callback">拨打回拨号码</string>
+  <string name="call_car">拨打车载电话号码</string>
+  <string name="call_company_main">拨打公司总机号码</string>
+  <string name="call_isdn">拨打 ISDN 电话号码</string>
+  <string name="call_main">拨打主电话号码</string>
+  <string name="call_other_fax">拨打传真号码</string>
+  <string name="call_radio">拨打无线通讯电话号码</string>
+  <string name="call_telex">拨打电报号码</string>
+  <string name="call_tty_tdd">拨打 TTY/TDD 号码</string>
+  <string name="call_work_mobile">拨打公司手机号码</string>
+  <string name="call_work_pager">拨打公司寻呼机号码</string>
+  <string name="call_assistant">拨打%s的电话</string>
+  <string name="call_mms">拨打彩信电话号码</string>
+  <string name="sms_custom">向%s电话号码发短信</string>
+  <string name="sms_home">向住宅电话号码发短信</string>
+  <string name="sms_mobile">向手机发短信</string>
+  <string name="sms_work">向公司电话号码发短信</string>
+  <string name="sms_fax_work">向公司传真号码发短信</string>
+  <string name="sms_fax_home">向住宅传真号码发短信</string>
+  <string name="sms_pager">向寻呼机号码发短信</string>
+  <string name="sms_other">发短信</string>
+  <string name="sms_callback">向回拨号码发短信</string>
+  <string name="sms_car">向车载电话号码发短信</string>
+  <string name="sms_company_main">向公司总机号码发短信</string>
+  <string name="sms_isdn">向 ISDN 电话号码发短信</string>
+  <string name="sms_main">向主电话号码发短信</string>
+  <string name="sms_other_fax">向传真号码发短信</string>
+  <string name="sms_radio">向无线通讯电话号码发短信</string>
+  <string name="sms_telex">向电报号码发短信</string>
+  <string name="sms_tty_tdd">向 TTY/TDD 号码发短信</string>
+  <string name="sms_work_mobile">向公司手机发短信</string>
+  <string name="sms_work_pager">向公司寻呼机号码发短信</string>
+  <string name="sms_assistant">向%s发短信</string>
+  <string name="sms_mms">向彩信电话号码发短信</string>
+  <string name="clearFrequentsConfirmation_title">是否清除常用联系人？</string>
+  <string name="clearFrequentsConfirmation">此操作会清除“通讯录”和“电话”应用中的常用联系人列表，并强制电子邮件应用重新获取您最常使用的联系地址。</string>
+  <string name="clearFrequentsProgress_title">正在清除常用联系人…</string>
+  <string name="status_available">在线</string>
+  <string name="status_away">离开</string>
+  <string name="status_busy">忙碌</string>
+  <string name="contactsList">通讯录</string>
+  <string name="contact_suggestions">常用联系人推荐</string>
+  <string name="local_invisible_directory">其他</string>
+  <string name="directory_search_label">目录</string>
+  <string name="directory_search_label_work">工作目录</string>
+  <string name="local_search_label">所有联系人</string>
+  <string name="local_suggestions_search_label">建议</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">我</string>
+  <string name="missing_name">（无姓名）</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">查看联系人</string>
+  <string name="list_filter_phones">所有拥有电话号码的联系人</string>
+  <string name="list_filter_phones_work">工作资料联系人</string>
+  <string name="view_updates_from_group">查看最新动态</string>
+  <string name="account_phone">仅限此设备，不同步</string>
+  <string name="nameLabelsGroup">姓名</string>
+  <string name="nicknameLabelsGroup">昵称</string>
+  <string name="full_name">名称</string>
+  <string name="name_given">名字</string>
+  <string name="name_family">姓氏</string>
+  <string name="name_prefix">姓名前缀</string>
+  <string name="name_middle">中间名</string>
+  <string name="name_suffix">姓名后缀</string>
+  <string name="name_phonetic">姓名拼音</string>
+  <string name="name_phonetic_given">名字拼音</string>
+  <string name="name_phonetic_middle">中间名拼音</string>
+  <string name="name_phonetic_family">姓氏拼音</string>
+  <string name="phoneLabelsGroup">电话</string>
+  <string name="emailLabelsGroup">发送电子邮件</string>
+  <string name="postalLabelsGroup">地址</string>
+  <string name="imLabelsGroup">聊天工具</string>
+  <string name="organizationLabelsGroup">组织</string>
+  <string name="relationLabelsGroup">关系</string>
+  <string name="eventLabelsGroup">特别的日子</string>
+  <string name="sms">文字信息</string>
+  <string name="postal_address">地址</string>
+  <string name="ghostData_company">公司</string>
+  <string name="ghostData_title">职务</string>
+  <string name="label_notes">备注</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">网站</string>
+  <string name="groupsLabel">群组</string>
+  <string name="email_home">向个人邮箱发送电子邮件</string>
+  <string name="email_mobile">向手机发送电子邮件</string>
+  <string name="email_work">向工作邮箱发送电子邮件</string>
+  <string name="email_other">发送电子邮件</string>
+  <string name="email_custom">向%s邮箱发送电子邮件</string>
+  <string name="email">发送电子邮件</string>
+  <string name="postal_street">街道</string>
+  <string name="postal_city">城市</string>
+  <string name="postal_region">省/自治区/直辖市</string>
+  <string name="postal_postcode">邮编</string>
+  <string name="postal_country">国家/地区</string>
+  <string name="map_home">查看住宅地址</string>
+  <string name="map_work">查看工作地址</string>
+  <string name="map_other">查看地址</string>
+  <string name="map_custom">查看%s地址</string>
+  <string name="chat_aim">使用 AIM 聊天</string>
+  <string name="chat_msn">使用 Windows Live 聊天</string>
+  <string name="chat_yahoo">使用雅虎通聊天</string>
+  <string name="chat_skype">使用 Skype 聊天</string>
+  <string name="chat_qq">使用 QQ 聊天</string>
+  <string name="chat_gtalk">使用Google Talk聊天</string>
+  <string name="chat_icq">使用 ICQ 聊天</string>
+  <string name="chat_jabber">使用 Jabber 聊天</string>
+  <string name="chat">聊天</string>
+  <string name="list_filter_all_accounts">所有联系人</string>
+  <string name="listAllContactsInAccount">%s 中的联系人</string>
+  <string name="listCustomView">自定义视图中的联系人</string>
+  <string name="listSingleContact">单个联系人</string>
+  <string name="display_options_sort_list_by">排序方式</string>
+  <string name="display_options_sort_by_given_name">名字</string>
+  <string name="display_options_sort_by_family_name">姓氏</string>
+  <string name="display_options_view_names_as">姓名格式</string>
+  <string name="display_options_view_given_name_first">名字在前</string>
+  <string name="display_options_view_family_name_first">姓氏在前</string>
+  <string name="menu_clear_frequents">清除常用联系人</string>
+  <string name="action_menu_back_from_search">停止搜索</string>
+  <string name="description_clear_search">清除搜索内容</string>
+  <string name="select_account_dialog_title">帐号</string>
+  <string name="set_default_account">一律使用这张卡进行通话</string>
+  <string name="select_phone_account_for_calls">为此次通话选择 SIM 卡</string>
+  <string name="select_phone_account_for_calls_remember">记住此选择</string>
+  <string name="call_with_a_note">拨打电话并发送备注</string>
+  <string name="call_subject_hint">输入要在拨打电话时发送的备注…</string>
+  <string name="send_and_call_button">发送并拨打电话</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s标签。</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s标签。%2$d 项未读内容。</item>
+    <item quantity="other"> %1$s标签。%2$d 项未读内容。</item>
+  </plurals>
+  <string name="description_search_video_call">视频通话</string>
+  <string name="description_search_call_and_share">分享并拨打电话</string>
 </resources>

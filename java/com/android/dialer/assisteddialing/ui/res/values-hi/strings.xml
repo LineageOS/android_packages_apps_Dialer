@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">डायलिंग में सहायता</string>
+  <string name="assisted_dialing_setting_summary">विदेश यात्रा के दौरान कॉल करते समय अनुमान से देश का कोड जोड़ें</string>
+  <string name="assisted_dialing_setting_cc_default_summary">अपने आप पता लगाया गया • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">अपने आप पता लगाया गया</string>
+  <string name="assisted_dialing_setting_cc_category_title">अपना देश</string>
+  <string name="assisted_dialing_setting_cc_title">डिफ़ॉल्ट रूप से अपना देश</string>
+</resources>

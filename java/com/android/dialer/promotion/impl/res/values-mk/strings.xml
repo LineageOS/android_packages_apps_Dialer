@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Текстуални пораки во реално време во тек на повик</string>
+  <string name="rtt_promotion_details">RTT им помага на повикувачи коишто се глуви, слабо слушаат, имаат говорна
+    мана или пак, им е потребно многу повеќе од глас. Преписите на RTT-пораките се складирани на вашиот уред
+    во историјата на повици. %1$s</string>
+  <string name="duo_disclosure_title">Воспоставувајте видеоповици со Duo</string>
+  <string name="duo_disclosure_details">Видеоповикувањето со Google Duo ви овозможува да разговарате со пријателите и семејството лице в лице. Може да ви се наплати за мобилен интернет. %1$s</string>
+</resources>

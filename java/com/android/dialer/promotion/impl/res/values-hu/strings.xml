@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Valós idejű szöveges üzenetküldés a híváson belül</string>
+  <string name="rtt_promotion_details">Az RTT funkció a siket, hallássérült, beszédzavaros vagy a hangalapú kommunikáción kívül más kommunikációt is igénylő hívóknak lehet segítségére. Az RTT-átiratokat a rendszer az eszköz híváselőzményeiben tárolja. %1$s</string>
+  <string name="duo_disclosure_title">Videohívások indítása a Duóval</string>
+  <string name="duo_disclosure_details">A Google Duo videohívási funkciójával közvetlenül cseveghet ismerőseivel és családtagjaival. A szolgáltató adatforgalmi díjat számíthat fel. %1$s</string>
+</resources>

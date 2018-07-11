@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Mensaxes de texto en tempo real durante unha chamada</string>
+  <string name="rtt_promotion_details">A función de texto en tempo real (RTT) constitúe unha axuda para todos aqueles emisores de chamadas que padezan xordeira ou outros problemas auditivos, teñan algún trastorno
+    da fala ou necesiten algo máis que a voz para comunicarse. As transcricións das mensaxes de RTT almacénanse no historial de chamadas
+    do dispositivo. %1$s</string>
+  <string name="duo_disclosure_title">Facer videochamadas con Duo</string>
+  <string name="duo_disclosure_details">Coas videochamadas de Google Duo, podes chatear cos amigos e a familia cara a cara. É posible que se apliquen tarifas de datos. %1$s</string>
+</resources>

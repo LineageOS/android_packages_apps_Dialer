@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Teks disalin"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Panggil <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Panggil nombor rumah"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Panggil nombor mudah alih"</string>
-    <string name="call_work" msgid="6040550697395300892">"Panggil tempat kerja"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Panggil faks tempat kerja"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Panggil faks rumah"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Panggil alat kelui"</string>
-    <string name="call_other" msgid="5536385588712587235">"Panggil"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Panggil nombor panggil balik"</string>
-    <string name="call_car" msgid="3197417098027764954">"Panggil kereta"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Panggil nombor utama syarikat"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Panggil ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Panggil nombor utama"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Panggil faks"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Panggil radio"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Panggil teleks"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Panggil TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Panggil telefon mudah alih tempat kerja"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Panggil alat kelui tempat kerja"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Panggil <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Panggil MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"SMS <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"SMS rumah"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"SMS telefon mudah alih"</string>
-    <string name="sms_work" msgid="4158595439553450966">"SMS nombor tempat kerja"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"SMS faks tempat kerja"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"SMS faks rumah"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"SMS alat kelui"</string>
-    <string name="sms_other" msgid="1742702947993285933">"SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"SMS nombor panggil balik"</string>
-    <string name="sms_car" msgid="4314577266154395174">"SMS kereta"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"SMS nombor utama syarikat"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"SMS ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"SMS nombor utama"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"SMS nombor faks"</string>
-    <string name="sms_radio" msgid="855555176531704682">"SMS radio"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"SMS nombor teleks"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"SMS TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"SMS telefon mudah alih tempat kerja"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"SMS alat kelui tempat kerja"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"SMS <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"SMS nombor MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Padam bersih senarai kerap dihubungi?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Anda akan mengosongkan senarai yang kerap dihubungi dalam apl Kenalan dan Telefon serta memaksa apl e-mel untuk mempelajari pilihan alamat anda dari awal."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Memadam bersih senarai kerap dihubungi..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Ada"</string>
-    <string name="status_away" msgid="2298688367552893953">"Tiada"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Sibuk"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kenalan"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Teratas Dicadangkan"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Lain-lain"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Direktori"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Direktori kerja"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Semua kenalan"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Cadangan"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Saya"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Tiada nama)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Lihat kenalan"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Semua kenalan dengan nombor telefon"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Kenalan profil kerja"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Lihat kemas kini"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Peranti sahaja, tidak disegerakkan"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Nama"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Nama panggilan"</string>
-    <string name="full_name" msgid="648186563998465740">"Nama"</string>
-    <string name="name_given" msgid="5096576006314820536">"Nama pertama"</string>
-    <string name="name_family" msgid="6646235805198547467">"Nama keluarga"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Awalan nama"</string>
-    <string name="name_middle" msgid="703755205331582769">"Nama tengah"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Akhiran nama"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Nama fonetik"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Nama pertama fonetik"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Nama tengah fonetik"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Nama keluarga fonetik"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"E-mel"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Alamat"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organisasi"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Hubungan"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Tarikh khas"</string>
-    <string name="sms" msgid="7574344928185328095">"Mesej teks"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Alamat"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Syarikat"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Jawatan"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Nota"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Tapak web"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Kumpulan"</string>
-    <string name="email_home" msgid="889830029388962171">"E-mel rumah"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"E-mel telefon mudah alih"</string>
-    <string name="email_work" msgid="4223487303344613528">"E-mel tempat kerja"</string>
-    <string name="email_other" msgid="4246411900126012062">"E-mel"</string>
-    <string name="email_custom" msgid="7246580894327511013">"E-mel <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"E-mel"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Jalan"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Bandar"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Negeri"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Poskod"</string>
-    <string name="postal_country" msgid="232670707458768148">"Negara"</string>
-    <string name="map_home" msgid="4181131107392126938">"Lihat alamat rumah"</string>
-    <string name="map_work" msgid="5723471185992684400">"Lihat alamat tempat kerja"</string>
-    <string name="map_other" msgid="2253764780863500516">"Lihat alamat"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Lihat alamat <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Sembang menggunakan AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Sembang menggunakan Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Sembang menggunakan Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Sembang menggunakan Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Sembang menggunakan QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Sembang menggunakan Bual Google"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Sembang menggunakan ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Sembang menggunakan Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Sembang"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Semua kenalan"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Kenalan dalam <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Kenalan dalam paparan tersuai"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Kenalan tunggal"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Isih mengikut"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Nama pertama"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Nama keluarga"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Format nama"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Nama pertama dahulu"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Nama keluarga dahulu"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Padam bersih kerap dihubungi"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"berhenti mencari"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Kosongkan carian"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Akaun"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Sentiasa gunakan ini untuk panggilan"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Panggil dengan"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Panggilan dengan nota"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Taip nota untuk dihantar dengan panggilan…"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"HANTAR &amp; PANGGIL"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Tab <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other">Tab <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> item belum dibaca. </item>
-      <item quantity="one">Tab <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> item belum dibaca. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Panggilan video"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Kongsi dan panggil"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Panggil %s</string>
+  <string name="call_home">Panggil nombor rumah</string>
+  <string name="call_mobile">Panggil nombor mudah alih</string>
+  <string name="call_work">Panggil tempat kerja</string>
+  <string name="call_fax_work">Panggil faks tempat kerja</string>
+  <string name="call_fax_home">Panggil faks rumah</string>
+  <string name="call_pager">Panggil alat kelui</string>
+  <string name="call_other">Panggil</string>
+  <string name="call_callback">Panggil nombor panggil balik</string>
+  <string name="call_car">Panggil kereta</string>
+  <string name="call_company_main">Panggil nombor utama syarikat</string>
+  <string name="call_isdn">Panggil ISDN</string>
+  <string name="call_main">Panggil nombor utama</string>
+  <string name="call_other_fax">Panggil faks</string>
+  <string name="call_radio">Panggil radio</string>
+  <string name="call_telex">Panggil teleks</string>
+  <string name="call_tty_tdd">Panggil TTY/TDD</string>
+  <string name="call_work_mobile">Panggil telefon mudah alih tempat kerja</string>
+  <string name="call_work_pager">Panggil alat kelui tempat kerja</string>
+  <string name="call_assistant">Panggil %s</string>
+  <string name="call_mms">Panggil MMS</string>
+  <string name="sms_custom">SMS %s</string>
+  <string name="sms_home">SMS rumah</string>
+  <string name="sms_mobile">SMS telefon mudah alih</string>
+  <string name="sms_work">SMS nombor tempat kerja</string>
+  <string name="sms_fax_work">SMS faks tempat kerja</string>
+  <string name="sms_fax_home">SMS faks rumah</string>
+  <string name="sms_pager">SMS alat kelui</string>
+  <string name="sms_other">SMS</string>
+  <string name="sms_callback">SMS nombor panggil balik</string>
+  <string name="sms_car">SMS kereta</string>
+  <string name="sms_company_main">SMS nombor utama syarikat</string>
+  <string name="sms_isdn">SMS ISDN</string>
+  <string name="sms_main">SMS nombor utama</string>
+  <string name="sms_other_fax">SMS nombor faks</string>
+  <string name="sms_radio">SMS radio</string>
+  <string name="sms_telex">SMS nombor teleks</string>
+  <string name="sms_tty_tdd">SMS TTY/TDD</string>
+  <string name="sms_work_mobile">SMS telefon mudah alih tempat kerja</string>
+  <string name="sms_work_pager">SMS alat kelui tempat kerja</string>
+  <string name="sms_assistant">SMS %s</string>
+  <string name="sms_mms">SMS nombor MMS</string>
+  <string name="clearFrequentsConfirmation_title">Padam bersih senarai kerap dihubungi?</string>
+  <string name="clearFrequentsConfirmation">Anda akan mengosongkan senarai yang kerap dihubungi dalam apl Kenalan dan Telefon serta memaksa apl e-mel untuk mempelajari pilihan alamat anda dari awal.</string>
+  <string name="clearFrequentsProgress_title">Memadam bersih senarai kerap dihubungi...</string>
+  <string name="status_available">Ada</string>
+  <string name="status_away">Tiada</string>
+  <string name="status_busy">Sibuk</string>
+  <string name="contactsList">Kenalan</string>
+  <string name="contact_suggestions">Teratas Dicadangkan</string>
+  <string name="local_invisible_directory">Lain-lain</string>
+  <string name="directory_search_label">Direktori</string>
+  <string name="directory_search_label_work">Direktori kerja</string>
+  <string name="local_search_label">Semua kenalan</string>
+  <string name="local_suggestions_search_label">Cadangan</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Saya</string>
+  <string name="missing_name">(Tiada nama)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Lihat kenalan</string>
+  <string name="list_filter_phones">Semua kenalan dengan nombor telefon</string>
+  <string name="list_filter_phones_work">Kenalan profil kerja</string>
+  <string name="view_updates_from_group">Lihat kemas kini</string>
+  <string name="account_phone">Peranti sahaja, tidak disegerakkan</string>
+  <string name="nameLabelsGroup">Nama</string>
+  <string name="nicknameLabelsGroup">Nama panggilan</string>
+  <string name="full_name">Nama</string>
+  <string name="name_given">Nama pertama</string>
+  <string name="name_family">Nama keluarga</string>
+  <string name="name_prefix">Awalan nama</string>
+  <string name="name_middle">Nama tengah</string>
+  <string name="name_suffix">Akhiran nama</string>
+  <string name="name_phonetic">Nama fonetik</string>
+  <string name="name_phonetic_given">Nama pertama fonetik</string>
+  <string name="name_phonetic_middle">Nama tengah fonetik</string>
+  <string name="name_phonetic_family">Nama keluarga fonetik</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">E-mel</string>
+  <string name="postalLabelsGroup">Alamat</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Organisasi</string>
+  <string name="relationLabelsGroup">Hubungan</string>
+  <string name="eventLabelsGroup">Tarikh khas</string>
+  <string name="sms">Mesej teks</string>
+  <string name="postal_address">Alamat</string>
+  <string name="ghostData_company">Syarikat</string>
+  <string name="ghostData_title">Jawatan</string>
+  <string name="label_notes">Nota</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Tapak web</string>
+  <string name="groupsLabel">Kumpulan</string>
+  <string name="email_home">E-mel rumah</string>
+  <string name="email_mobile">E-mel telefon mudah alih</string>
+  <string name="email_work">E-mel tempat kerja</string>
+  <string name="email_other">E-mel</string>
+  <string name="email_custom">E-mel %s</string>
+  <string name="email">E-mel</string>
+  <string name="postal_street">Jalan</string>
+  <string name="postal_city">Bandar</string>
+  <string name="postal_region">Negeri</string>
+  <string name="postal_postcode">Poskod</string>
+  <string name="postal_country">Negara</string>
+  <string name="map_home">Lihat alamat rumah</string>
+  <string name="map_work">Lihat alamat tempat kerja</string>
+  <string name="map_other">Lihat alamat</string>
+  <string name="map_custom">Lihat alamat %s</string>
+  <string name="chat_aim">Sembang menggunakan AIM</string>
+  <string name="chat_msn">Sembang menggunakan Windows Live</string>
+  <string name="chat_yahoo">Sembang menggunakan Yahoo</string>
+  <string name="chat_skype">Sembang menggunakan Skype</string>
+  <string name="chat_qq">Sembang menggunakan QQ</string>
+  <string name="chat_gtalk">Sembang menggunakan Bual Google</string>
+  <string name="chat_icq">Sembang menggunakan ICQ</string>
+  <string name="chat_jabber">Sembang menggunakan Jabber</string>
+  <string name="chat">Sembang</string>
+  <string name="list_filter_all_accounts">Semua kenalan</string>
+  <string name="listAllContactsInAccount">Kenalan dalam %s</string>
+  <string name="listCustomView">Kenalan dalam paparan tersuai</string>
+  <string name="listSingleContact">Kenalan tunggal</string>
+  <string name="display_options_sort_list_by">Isih mengikut</string>
+  <string name="display_options_sort_by_given_name">Nama pertama</string>
+  <string name="display_options_sort_by_family_name">Nama keluarga</string>
+  <string name="display_options_view_names_as">Format nama</string>
+  <string name="display_options_view_given_name_first">Nama pertama dahulu</string>
+  <string name="display_options_view_family_name_first">Nama keluarga dahulu</string>
+  <string name="menu_clear_frequents">Padam bersih kerap dihubungi</string>
+  <string name="action_menu_back_from_search">berhenti mencari</string>
+  <string name="description_clear_search">Kosongkan carian</string>
+  <string name="select_account_dialog_title">Akaun</string>
+  <string name="set_default_account">Sentiasa gunakan ini untuk panggilan</string>
+  <string name="select_phone_account_for_calls">Pilih SIM untuk panggilan ini</string>
+  <string name="select_phone_account_for_calls_remember">Ingat pilihan ini</string>
+  <string name="call_with_a_note">Panggilan dengan nota</string>
+  <string name="call_subject_hint">Taip nota untuk dihantar dengan panggilan…</string>
+  <string name="send_and_call_button">HANTAR &amp; PANGGIL</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Tab %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">Tab %1$s. %2$d item belum dibaca. </item>
+    <item quantity="other">Tab %1$s. %2$d item belum dibaca. </item>
+  </plurals>
+  <string name="description_search_video_call">Panggilan video</string>
+  <string name="description_search_call_and_share">Kongsi dan panggil</string>
 </resources>

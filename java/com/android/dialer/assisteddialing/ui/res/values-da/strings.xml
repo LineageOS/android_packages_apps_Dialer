@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Assisteret opkald</string>
+  <string name="assisted_dialing_setting_summary">Forudsig og tilføj en landekode, når du foretager et opkald, mens du er udenlands</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Fundet automatisk • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Fundet automatisk</string>
+  <string name="assisted_dialing_setting_cc_category_title">Hjemland</string>
+  <string name="assisted_dialing_setting_cc_title">Standardhjemland</string>
+</resources>

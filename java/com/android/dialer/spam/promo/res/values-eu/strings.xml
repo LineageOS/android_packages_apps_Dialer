@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Ustezko spam-dei guztiak iragazi nahi dituzu?</string>
+  <string name="spam_blocking_promo_text">Aurrerantzean, blokeatu berri duzunaren antzeko deiek
+      ez zaituzte molestatuko</string>
+  <string name="spam_blocking_promo_action_filter_spam">Iragazi spama</string>
+  <string name="spam_blocking_promo_action_dismiss">Baztertu</string>
+  <string name="spam_blocking_setting_prompt">Ezarpenak</string>
+  <string name="spam_blocking_settings_enable_error_text">Arazo bat izan da spama iragazteko aukera aktibatzean</string>
+  <string name="spam_blocking_settings_disable_error_text">Arazo bat izan da spama iragazteko aukera desaktibatzean</string>
+  <string name="spam_blocking_settings_enable_complete_text">Aktibatu da spama iragazteko aukera</string>
+  <string name="spam_blocking_settings_disable_complete_text">Desaktibatu da spama iragazteko aukera</string>
+</resources>

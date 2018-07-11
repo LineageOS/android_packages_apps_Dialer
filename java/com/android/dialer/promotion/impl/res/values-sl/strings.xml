@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Sprotna sporočila v klicu</string>
+  <string name="rtt_promotion_details">Funkcija RTT pomaga klicateljem, ki so gluhi, naglušni, imajo govorno
+    motnjo ali potrebujejo več kot samo glas. Prepisi sporočil RTT so shranjeni v vaši napravi
+    v zgodovini klicev. %1$s</string>
+  <string name="duo_disclosure_title">Opravljajte videoklice prek Dua</string>
+  <string name="duo_disclosure_details">Videoklici prek Googla Duo omogočajo, da s prijatelji in družinskimi člani klepetate iz oči v oči. Morda boste morali plačati stroške prenosa podatkov. %1$s</string>
+</resources>

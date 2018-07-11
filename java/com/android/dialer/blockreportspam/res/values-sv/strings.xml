@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Vill du blockera %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Du får inte längre samtal eller sms från det här numret.</string>
+  <string name="block_number_ok">BLOCKERA</string>
+  <string name="unblock_number_ok">HÄV BLOCKERINGEN</string>
+  <string name="block_report_number_alert_title">Blockera %1$s?</string>
+  <string name="block_report_number_alert_details">Du får inte längre samtal från det här numret.</string>
+  <string name="block_number_alert_details">%1$s Det här samtalet rapporteras som spam.</string>
+  <string name="unblock_number_alert_details">Numret avblockeras och rapporteras inte som spam. Framtida samtal identifieras inte som spam.</string>
+  <string name="unblock_report_number_alert_title">Avblockera %1$s?</string>
+  <string name="report_not_spam_alert_button">Rapport</string>
+  <string name="report_not_spam_alert_title">Rapportera ett misstag?</string>
+  <string name="report_not_spam_alert_details">Framtida samtal från %1$s identifieras inte längre som spam.</string>
+  <string name="checkbox_report_as_spam_action">Rapportera samtal som spam</string>
+  <string name="block_number_failed_toast">Numret gick inte att blockera</string>
+  <string name="unblock_number_failed_toast">Numret gick inte att återaktivera</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Blokuoti numerį %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Nebegausite skambučių ar teksto pranešimų iš šio numerio.</string>
+  <string name="block_number_ok">BLOKUOTI</string>
+  <string name="unblock_number_ok">PANAIKINTI BLOKAVIMĄ</string>
+  <string name="block_report_number_alert_title">Blokuoti numerį %1$s?</string>
+  <string name="block_report_number_alert_details">Nebegausite skambučių iš šio numerio.</string>
+  <string name="block_number_alert_details">%1$s Apie šį skambutį bus pranešta kaip apie šlamštą.</string>
+  <string name="unblock_number_alert_details">Šio nr. blok. bus pan. ir apie jį bus pran. kaip ne apie šl. siunt. Būs. sk. nebus nust. kaip šl.</string>
+  <string name="unblock_report_number_alert_title">Panaikinti numerio %1$s blokavimą?</string>
+  <string name="report_not_spam_alert_button">Pranešti</string>
+  <string name="report_not_spam_alert_title">Pranešti apie klaidą?</string>
+  <string name="report_not_spam_alert_details">Būsimi skambučiai iš numerio %1$s nebus nustatyti kaip šlamštas.</string>
+  <string name="checkbox_report_as_spam_action">Pr. apie skamb. kaip apie šl.</string>
+  <string name="block_number_failed_toast">Nepavyko užblokuoti šio numerio</string>
+  <string name="unblock_number_failed_toast">Nepavyko atblokuoti šio numerio</string>
+</resources>

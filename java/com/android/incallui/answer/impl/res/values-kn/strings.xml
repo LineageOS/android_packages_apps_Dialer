@@ -1,38 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"ಸಂದೇಶದ ಜೊತೆಗೆ ನಿರಾಕರಿಸಲು ಐಕಾನ್‌ನಿಂದ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
-    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"ಆಡಿಯೊ ಕರೆ ರೀತಿಯಲ್ಲಿ ಉತ್ತರಿಸಲು ಐಕಾನ್‌ನಿಂದ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
-    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"ಕರೆಯನ್ನು ಉತ್ತರಿಸಲು ಮತ್ತು ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಯನ್ನು ಹೋಲ್ಡ್ ಮಾಡಲು ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
-    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"ಕರೆಯನ್ನು ಉತ್ತರಿಸಲು ಮತ್ತು ಹೋಲ್ಡ್‌ನಲ್ಲಿರುವ ಕರೆಯನ್ನು ಅಂತ್ಯಗೊಳಿಸಲು ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಲು ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಲು ಐಕಾನ್‌ನಿಂದ ಸ್ವೈಪ್ ಮಾಡಿ"</string>
-    <string name="call_incoming_message_custom" msgid="5819492800418293238">"ನಿಮ್ಮ ಸ್ವಂತದ್ದನ್ನು ಬರೆಯಿರಿ…"</string>
-    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"ನಿಮ್ಮ ಸ್ವಂತದ್ದನ್ನು ಬರೆಯಿರಿ…"</string>
-    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"ರದ್ದುಮಾಡಿ"</string>
-    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"ಕಳುಹಿಸು"</string>
-    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"ಸಂದೇಶದ ಮೂಲಕ ಈ ಕರೆಯನ್ನು ತಿರಸ್ಕರಿಸಿ"</string>
-    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"ಆಡಿಯೊ ಕರೆಯಂತೆ ಉತ್ತರಿಸಿ"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಿ ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಿ"</string>
-    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"ಸಂದೇಶದೊಂದಿಗೆ ತಿರಸ್ಕರಿಸು"</string>
-    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"ಆಡಿಯೊ ಕರೆಯಂತೆ ಉತ್ತರಿಸಿ"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಿ ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಿ"</string>
-    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"ವೀಡಿಯೊ ಆಫ್ ಆಗಿದೆ"</string>
-    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"ಉತ್ತರಿಸಲು ಎರಡು ಬೆರಳಿನಿಂದ ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ. ನಿರಾಕರಿಸಲು ಎರಡು ಬೆರಳಿನಿಂದ ಕೆಳಗೆ ಸ್ವೈಪ್ ಮಾಡಿ."</string>
-    <string name="call_incoming_important" msgid="3762352743365137090">"ಪ್ರಮುಖ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">ಸಂದೇಶದ ಜೊತೆಗೆ ನಿರಾಕರಿಸಲು ಐಕಾನ್‌ನಿಂದ ಸ್ವೈಪ್ ಮಾಡಿ</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">ಆಡಿಯೊ ಕರೆ ರೀತಿಯಲ್ಲಿ ಉತ್ತರಿಸಲು ಐಕಾನ್‌ನಿಂದ ಸ್ವೈಪ್ ಮಾಡಿ</string>
+  <string name="call_incoming_default_label_answer_and_release_second">ಕರೆಯನ್ನು ಉತ್ತರಿಸಲು ಮತ್ತು ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಯನ್ನು ಹೋಲ್ಡ್ ಮಾಡಲು ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ</string>
+  <string name="call_incoming_default_label_answer_and_release_third">ಕರೆಯನ್ನು ಉತ್ತರಿಸಲು ಮತ್ತು ಹೋಲ್ಡ್‌ನಲ್ಲಿರುವ ಕರೆಯನ್ನು ಅಂತ್ಯಗೊಳಿಸಲು ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ</string>
+  <string name="call_incoming_swipe_to_answer_and_release">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಲು ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಲು ಐಕಾನ್‌ನಿಂದ ಸ್ವೈಪ್ ಮಾಡಿ</string>
+  <string name="call_incoming_message_custom">ನಿಮ್ಮ ಸ್ವಂತದ್ದನ್ನು ಬರೆಯಿರಿ…</string>
+  <string name="call_incoming_respond_via_sms_custom_message">ನಿಮ್ಮ ಸ್ವಂತದ್ದನ್ನು ಬರೆಯಿರಿ…</string>
+  <string name="call_incoming_custom_message_cancel">ರದ್ದುಮಾಡಿ</string>
+  <string name="call_incoming_custom_message_send">ಕಳುಹಿಸು</string>
+  <string name="a11y_incoming_call_reject_with_sms">ಸಂದೇಶದ ಮೂಲಕ ಈ ಕರೆಯನ್ನು ತಿರಸ್ಕರಿಸಿ</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">ಆಡಿಯೊ ಕರೆಯಂತೆ ಉತ್ತರಿಸಿ</string>
+  <string name="a11y_incoming_call_answer_and_release">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಿ ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಿ</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">ಸಂದೇಶದೊಂದಿಗೆ ತಿರಸ್ಕರಿಸು</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">ಆಡಿಯೊ ಕರೆಯಂತೆ ಉತ್ತರಿಸಿ</string>
+  <string name="a11y_description_incoming_call_answer_and_release">ಚಾಲ್ತಿಯಲ್ಲಿರುವ ಕರೆಗೆ ಉತ್ತರಿಸಿ ಮತ್ತು ಅಂತ್ಯಗೊಳಿಸಿ</string>
+  <string name="call_incoming_video_is_off">ವೀಡಿಯೊ ಆಫ್ ಆಗಿದೆ</string>
+  <string name="a11y_incoming_call_swipe_gesture_prompt">ಉತ್ತರಿಸಲು ಎರಡು ಬೆರಳಿನಿಂದ ಮೇಲಕ್ಕೆ ಸ್ವೈಪ್ ಮಾಡಿ. ನಿರಾಕರಿಸಲು ಎರಡು ಬೆರಳಿನಿಂದ ಕೆಳಗೆ ಸ್ವೈಪ್ ಮಾಡಿ.</string>
+  <string name="call_incoming_important">ಪ್ರಮುಖ</string>
 </resources>

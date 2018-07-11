@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Haijulikani</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Simu ya kulipia</string>
+  <string name="emergency_number">Nambari ya dharura</string>
+  <string name="launcherActivityLabel">Simu</string>
+  <string name="call">Piga simu</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Inaendelea kupiga simu ya video kupitia Wi‑Fi…</string>
+  <string name="rtt_call_not_available_toast">RTT haipatikani kwa ajili ya simu hii</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

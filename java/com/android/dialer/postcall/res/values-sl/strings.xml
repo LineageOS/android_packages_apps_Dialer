@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="post_call_message" msgid="3541277172068556862">"Navedite razlog, da ste poklicali"</string>
-    <string name="post_call_message_1" msgid="4827849136801228106">"To je nujno. Pokliči me."</string>
-    <string name="post_call_message_2" msgid="5310301526176003385">"Ko si lahko vzameš nekaj časa, me pokliči."</string>
-    <string name="post_call_message_3" msgid="3932759658420368056">"Ni nujno, klepetava lahko tudi pozneje."</string>
-    <string name="post_call_add_message" msgid="8298853527467080463">"Dodaj sporočilo"</string>
-    <string name="post_call_send_message" msgid="8039569617234824873">"Pošiljanje sporočila"</string>
-    <string name="post_call_message_sent" msgid="832757977985265036">"Sporočilo je bilo poslano"</string>
-    <string name="view" msgid="8572192949673703830">"Prikaži"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="post_call_message">Navedite razlog, da ste poklicali</string>
+  <string name="post_call_message_1">To je nujno. Pokliči me.</string>
+  <string name="post_call_message_2">Ko si lahko vzameš nekaj časa, me pokliči.</string>
+  <string name="post_call_message_3">Ni nujno, klepetava lahko tudi pozneje.</string>
+  <string name="post_call_add_message">Dodaj sporočilo</string>
+  <string name="post_call_send_message">Pošiljanje sporočila</string>
+  <string name="post_call_message_sent">Sporočilo je bilo poslano</string>
+  <string name="view">Prikaži</string>
 </resources>

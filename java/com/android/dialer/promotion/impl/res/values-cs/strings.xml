@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Posílání zpráv SMS během hovoru</string>
+  <string name="rtt_promotion_details">Funkce SMS během hovoru (RTT) pomáhá volajícím, kteří neslyší, jsou nedoslýchaví, mají řečovou vadu, případně potřebují víc než jen hlas z jiného důvodu. Přepisy těchto zpráv jsou uchovávány ve vašem zařízení v historii hovorů. %1$s</string>
+  <string name="duo_disclosure_title">Provádějte videohovory v aplikaci Duo</string>
+  <string name="duo_disclosure_details">Pomocí videohovorů v aplikaci Google Duo můžete chatovat tváří v tvář s přáteli a rodinou. Mohou vám být účtovány poplatky za data. %1$s</string>
+</resources>

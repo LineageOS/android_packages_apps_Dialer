@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Mensajes de texto en tiempo real en las llamadas</string>
+  <string name="rtt_promotion_details">La función TTR (texto en tiempo real) ofrece asistencia a las personas
+    sordas o con discapacidades auditivas, que tienen algún trastorno del habla o que necesitan una transcripción además de la voz para comunicarse. Las transcripciones de mensajes de TTR se guardan en el
+    historial de llamadas de tu dispositivo. %1$s</string>
+  <string name="duo_disclosure_title">Haz videollamadas con Duo</string>
+  <string name="duo_disclosure_details">Habla cara a cara con tus familiares y amigos con las videollamadas de Google Duo. Es posible que se apliquen cargos por el uso de datos. %1$s</string>
+</resources>

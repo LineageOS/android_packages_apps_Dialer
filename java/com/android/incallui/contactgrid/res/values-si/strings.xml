@@ -1,44 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2016 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> හරහා අමතමින්"</string>
-    <string name="incall_connecting" msgid="1708280493198276616">"අමතමින්…"</string>
-    <string name="incall_transferring" msgid="7909128243635579407">"මාරු කරමින්…"</string>
-    <!-- no translation found for incall_video_call_requesting (1560243656749370926) -->
-    <skip />
-    <!-- no translation found for incall_wifi_video_call_requesting (4778821793266688848) -->
-    <skip />
-    <!-- no translation found for incall_video_call_upgrade_request (3225728109481465831) -->
-    <skip />
-    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"සම්බන්ධ වීමට නොහැකිය"</string>
-    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"ඇමතුම ප්‍රතික්ෂේප කෙරණි"</string>
-    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"ඇමතුම් කාලය නිමා විය"</string>
-    <string name="incall_hanging_up" msgid="2166116351937190949">"විසන්ධි කරමින්"</string>
-    <string name="incall_call_ended" msgid="6294704948774348480">"ඇමතුම අවසන් විය"</string>
-    <string name="incall_remotely_held" msgid="8561379039177396615">"රඳවා ගත්"</string>
-    <!-- no translation found for contact_grid_incoming_video_call (5848811480775138601) -->
-    <skip />
-    <!-- no translation found for contact_grid_incoming_wifi_video_call (7478797414642594106) -->
-    <skip />
-    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"වෙතින් ඇමතුම"</string>
-    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"වෙතින් කාර්යාල ඇමතුම"</string>
-    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> හරහා එන"</string>
-    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"සැකසහිත අයාචිත තැපැල් අමතන්නා"</string>
-    <string name="contact_grid_callback_number" msgid="1284649030313415807">"පසුඇමතුම් අංකය: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_calling_via_template">%s හරහා අමතමින්</string>
+  <string name="incall_calling_on_same_carrier_template">එකම %s වාහකයෙහි අමතමින්</string>
+  <string name="incall_calling_on_recent_choice_template">මෑත %s තේරීමෙහි අමතමින්</string>
+  <string name="incall_connecting">අමතමින්…</string>
+  <string name="incall_connecting_assited_dialed">+%1$s (%2$s) භාවිතයෙන් අමතමින්…</string>
+  <string name="incall_connecting_assited_dialed_component">+%1$s (%2$s) භාවිත කරමින්…</string>
+  <string name="incall_transferring">මාරු කරමින්…</string>
+  <string name="incall_video_call_requesting">වාහක වීඩියෝ ඇමතීම…</string>
+  <string name="incall_wifi_video_call_requesting">Wi-Fi වාහක වීඩියෝ ඇමතීම…</string>
+  <string name="incall_video_call_upgrade_request">වාහක වීඩියෝවට මාරු වෙමින්…</string>
+  <string name="incall_video_call_request_failed">සම්බන්ධ වීමට නොහැකිය</string>
+  <string name="incall_video_call_request_rejected">ඇමතුම ප්‍රතික්ෂේප කෙරණි</string>
+  <string name="incall_video_call_request_timed_out">ඇමතුම් කාලය නිමා විය</string>
+  <string name="incall_hanging_up">විසන්ධි කරමින්</string>
+  <string name="incall_call_ended">ඇමතුම අවසන් විය</string>
+  <string name="incall_remotely_held">රඳවා ගත්</string>
+  <string name="contact_grid_incoming_video_call">වෙතින් වාහක වීඩියෝ ඇමතුම</string>
+  <string name="contact_grid_incoming_wifi_video_call">වෙතින් Wi-Fi වාහක වීඩියෝ ඇමතුම</string>
+  <string name="contact_grid_incoming_voice_call">වෙතින් ඇමතුම</string>
+  <string name="contact_grid_incoming_work_call">වෙතින් කාර්යාල ඇමතුම</string>
+  <string name="contact_grid_incoming_via_template">%s හරහා එන</string>
+  <string name="contact_grid_incoming_suspected_spam">සැකසහිත අයාචිත තැපැල් අමතන්නා</string>
+  <string name="contact_grid_callback_number">මෙම දුරකථනයෙහි අංකය වන්නේ: %1$s</string>
 </resources>

@@ -1,53 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"Indgående opkald"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"Det indgående opkald blev viderestillet til en anden enhed"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"Udgående opkald"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"Det udgående opkald blev viderestillet til en anden enhed"</string>
-    <string name="type_missed" msgid="2997043831022028176">"Ubesvarede opkald"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"Indgående videoopkald"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"Det indgående videoopkald blev viderestillet til anden enhed"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"Udgående videoopkald"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"Det udgående videoopkald blev viderestillet til anden enhed"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"Ubesvaret videoopkald"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"Telefonsvarer"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"Afvist opkald"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"Blokeret opkald"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"min."</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"sek."</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g> \'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g> \'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g> \'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="one">sekund</item>
-      <item quantity="other">sekunder</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="one">minut</item>
-      <item quantity="other">minutter</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"Opkaldet blev besvaret på en anden enhed"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"på <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"via <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"til <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, via <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"Telefonsvarer"</string>
-    <string name="now" msgid="2599778506439006806">"Nu"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">Indgående opkald</string>
+  <string name="type_incoming_pulled">Det indgående opkald blev viderestillet til en anden enhed</string>
+  <string name="type_outgoing">Udgående opkald</string>
+  <string name="type_outgoing_pulled">Det udgående opkald blev viderestillet til en anden enhed</string>
+  <string name="type_missed">Ubesvarede opkald</string>
+  <string name="type_incoming_video">Indgående videoopkald</string>
+  <string name="type_incoming_video_pulled">Det indgående videoopkald blev viderestillet til anden enhed</string>
+  <string name="type_outgoing_video">Udgående videoopkald</string>
+  <string name="type_outgoing_video_pulled">Det udgående videoopkald blev viderestillet til anden enhed</string>
+  <string name="type_missed_video">Ubesvaret videoopkald</string>
+  <string name="type_voicemail">Telefonsvarer</string>
+  <string name="type_rejected">Afvist opkald</string>
+  <string name="type_blocked">Blokeret opkald</string>
+  <string name="call_details_minutes_abbreviation">min.</string>
+  <string name="call_details_seconds_abbreviation">sek.</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s \'%2$s\' %3$s \'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s \'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">sekund</item>
+    <item quantity="other">sekunder</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">minut</item>
+    <item quantity="other">minutter</item>
+  </plurals>
+  <string name="type_answered_elsewhere">Opkaldet blev besvaret på en anden enhed</string>
+  <string name="description_phone_account">på ^1</string>
+  <string name="description_via_number">via %1$s</string>
+  <string name="description_via_number_phone_account">til %1$s, via %2$s</string>
+  <string name="voicemail_string">Telefonsvarer</string>
+  <string name="just_now">Lige nu</string>
+  <string name="new_call_log_carrier_video">Video via mobilselskab</string>
+  <string name="new_call_log_duo_video">Video via Duo</string>
+  <string name="new_call_log_unknown">Ukendt</string>
+  <string name="new_call_log_secondary_blocked">Blokeret</string>
+  <string name="new_call_log_secondary_spam">Spam</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">^1 opkald, og det seneste er et ubesvaret opkald fra ^2</item>
+    <item quantity="other">^1 opkald, og det seneste er et ubesvaret opkald fra ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">^1 opkald, og det seneste er et besvaret opkald fra ^2</item>
+    <item quantity="other">^1 opkald, og det seneste er et besvaret opkald fra ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one">^1 opkald, og det seneste er et udgået opkald til ^2</item>
+    <item quantity="other">^1 opkald, og det seneste er et udgået opkald til ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">^1 opkald, og det seneste er et blokeret opkald fra ^2</item>
+    <item quantity="other">^1 opkald, og det seneste er et blokeret opkald fra ^2</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">på ^1,
+    via ^2</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

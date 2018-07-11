@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Kinopya ang teksto"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Tawagan sa <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Tawagan sa bahay"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Tawagan sa mobile"</string>
-    <string name="call_work" msgid="6040550697395300892">"Tawagan sa trabaho"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Tawagan sa fax sa trabaho"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Tawagan sa fax sa bahay"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Tawagan sa pager"</string>
-    <string name="call_other" msgid="5536385588712587235">"Tawagan"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Tawagan sa callback"</string>
-    <string name="call_car" msgid="3197417098027764954">"Tawagan sa kotse"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Tawagan sa pangunahing kumpanya"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Tawagan sa ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Tawagan sa pangunahin"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Tawagan sa fax"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Tawagan sa radyo"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Tawagan sa telex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Tawagan sa TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Tawagan sa mobile sa trabaho"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Tawagan sa pager sa trabaho"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Tawagan sa <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Tawagan sa MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"I-text sa <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"I-text sa bahay"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"I-text sa mobile"</string>
-    <string name="sms_work" msgid="4158595439553450966">"I-text sa trabaho"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"I-text sa fax sa trabaho"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"I-text sa fax sa bahay"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"I-text sa pager"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Mag-text"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"I-text sa callback"</string>
-    <string name="sms_car" msgid="4314577266154395174">"I-text sa kotse"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"I-text sa pangunahing kumpanya"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"I-text sa ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"I-text sa pangunahin"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"I-text sa fax"</string>
-    <string name="sms_radio" msgid="855555176531704682">"I-text sa radyo"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"I-text sa telex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"I-text sa TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"I-text sa mobile sa trabaho"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"I-text sa pager sa trabaho"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"I-text sa <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"I-text sa MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"I-clear ang madalas na kinontak"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Iki-clear mo ang listahan ng mga madalas na nakakaugnay sa mga app ng Mga Contact at Telepono at pupuwersahin mo ang mga app ng email na matutunan ang iyong mga kagustuhan sa pag-a-address mula sa simula."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Kini-clear madalas na inuugnayan…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Available"</string>
-    <string name="status_away" msgid="2298688367552893953">"Wala"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Abala"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Mga Contact"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Mga Madalas Imungkahi"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Iba pa"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Direktoryo"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Directory sa trabaho"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Lahat ng mga contact"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Mga Mungkahi"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Ako"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Walang pangalan)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Tingnan ang contact"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Lahat ng contact na may mga numero ng telepono"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Mga contact ng profile sa trabaho"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Tingnan ang mga update"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Device lang, inalis sa pagkaka-sync"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Pangalan"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Palayaw"</string>
-    <string name="full_name" msgid="648186563998465740">"Pangalan"</string>
-    <string name="name_given" msgid="5096576006314820536">"Pangalan"</string>
-    <string name="name_family" msgid="6646235805198547467">"Apelyido"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Prefix ng pangalan"</string>
-    <string name="name_middle" msgid="703755205331582769">"Gitnang pangalan"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Suffix ng pangalan"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Phonetic na pangalan"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Phonetic na pangalan"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Phonetic na gitnang pangalan"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Phonetic na apelyido"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telepono"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Mag-email"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Address"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Samahan"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Kaugnayan"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Espesyal na petsa"</string>
-    <string name="sms" msgid="7574344928185328095">"Text message"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Address"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Kumpanya"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Pamagat"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Mga Tala"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Website"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Mga Grupo"</string>
-    <string name="email_home" msgid="889830029388962171">"Mag-email sa bahay"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Mag-email sa mobile"</string>
-    <string name="email_work" msgid="4223487303344613528">"Mag-email sa trabaho"</string>
-    <string name="email_other" msgid="4246411900126012062">"Mag-email"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Mag-email sa <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Mag-email"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Kalye"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Lungsod"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Estado"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"ZIP code"</string>
-    <string name="postal_country" msgid="232670707458768148">"Bansa"</string>
-    <string name="map_home" msgid="4181131107392126938">"Tingnan ang address ng tahanan"</string>
-    <string name="map_work" msgid="5723471185992684400">"Tingnan ang address sa trabaho"</string>
-    <string name="map_other" msgid="2253764780863500516">"Tingnan ang address"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Tingnan ang <xliff:g id="CUSTOM">%s</xliff:g> na address"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Makipag-chat gamit ang AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Makipag-chat gamit ang Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Makipag-chat gamit ang Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Makipag-chat gamit ang Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Makipag-chat gamit ang QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Makipag-chat gamit ang Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Makipag-chat gamit ang ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Makipag-chat gamit ang Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Chat"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Lahat ng contact"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Mga contact sa <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Mga contact sa custom na view"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Iisang contact"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Uriin ayon sa"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Pangalan"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Apelyido"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Format ng pangalan"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Pangalan muna"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Apelyido muna"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"I-clear ang mga frequent"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ihinto ang paghahanap"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"I-clear ang paghahanap"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Account"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Gamitin ito palagi sa mga tawag"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Tumawag gamit ang"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Tumawag nang may kasamang tala"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Mag-type ng isang tala na ipadadala kasama ng tawag ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"IPADALA AT TAWAGAN"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Tab ng <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> Tab ng <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> hindi pa nababasang item. </item>
-      <item quantity="other"> Tab ng <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> na hindi pa nababasang item. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Mag-video call"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Ibahagi at tumawag"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Tawagan sa %s</string>
+  <string name="call_home">Tawagan sa bahay</string>
+  <string name="call_mobile">Tawagan sa mobile</string>
+  <string name="call_work">Tawagan sa trabaho</string>
+  <string name="call_fax_work">Tawagan sa fax sa trabaho</string>
+  <string name="call_fax_home">Tawagan sa fax sa bahay</string>
+  <string name="call_pager">Tawagan sa pager</string>
+  <string name="call_other">Tawagan</string>
+  <string name="call_callback">Tawagan sa callback</string>
+  <string name="call_car">Tawagan sa kotse</string>
+  <string name="call_company_main">Tawagan sa pangunahing kumpanya</string>
+  <string name="call_isdn">Tawagan sa ISDN</string>
+  <string name="call_main">Tawagan sa pangunahin</string>
+  <string name="call_other_fax">Tawagan sa fax</string>
+  <string name="call_radio">Tawagan sa radyo</string>
+  <string name="call_telex">Tawagan sa telex</string>
+  <string name="call_tty_tdd">Tawagan sa TTY/TDD</string>
+  <string name="call_work_mobile">Tawagan sa mobile sa trabaho</string>
+  <string name="call_work_pager">Tawagan sa pager sa trabaho</string>
+  <string name="call_assistant">Tawagan sa %s</string>
+  <string name="call_mms">Tawagan sa MMS</string>
+  <string name="sms_custom">I-text sa %s</string>
+  <string name="sms_home">I-text sa bahay</string>
+  <string name="sms_mobile">I-text sa mobile</string>
+  <string name="sms_work">I-text sa trabaho</string>
+  <string name="sms_fax_work">I-text sa fax sa trabaho</string>
+  <string name="sms_fax_home">I-text sa fax sa bahay</string>
+  <string name="sms_pager">I-text sa pager</string>
+  <string name="sms_other">Mag-text</string>
+  <string name="sms_callback">I-text sa callback</string>
+  <string name="sms_car">I-text sa kotse</string>
+  <string name="sms_company_main">I-text sa pangunahing kumpanya</string>
+  <string name="sms_isdn">I-text sa ISDN</string>
+  <string name="sms_main">I-text sa pangunahin</string>
+  <string name="sms_other_fax">I-text sa fax</string>
+  <string name="sms_radio">I-text sa radyo</string>
+  <string name="sms_telex">I-text sa telex</string>
+  <string name="sms_tty_tdd">I-text sa TTY/TDD</string>
+  <string name="sms_work_mobile">I-text sa mobile sa trabaho</string>
+  <string name="sms_work_pager">I-text sa pager sa trabaho</string>
+  <string name="sms_assistant">I-text sa %s</string>
+  <string name="sms_mms">I-text sa MMS</string>
+  <string name="clearFrequentsConfirmation_title">I-clear ang madalas na kinontak</string>
+  <string name="clearFrequentsConfirmation">Iki-clear mo ang listahan ng mga madalas na nakakaugnay sa mga app ng Mga Contact at Telepono at pupuwersahin mo ang mga app ng email na matutunan ang iyong mga kagustuhan sa pag-a-address mula sa simula.</string>
+  <string name="clearFrequentsProgress_title">Kini-clear madalas na inuugnayan…</string>
+  <string name="status_available">Available</string>
+  <string name="status_away">Wala</string>
+  <string name="status_busy">Abala</string>
+  <string name="contactsList">Mga Contact</string>
+  <string name="contact_suggestions">Mga Madalas Imungkahi</string>
+  <string name="local_invisible_directory">Iba pa</string>
+  <string name="directory_search_label">Direktoryo</string>
+  <string name="directory_search_label_work">Directory sa trabaho</string>
+  <string name="local_search_label">Lahat ng mga contact</string>
+  <string name="local_suggestions_search_label">Mga Mungkahi</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ako</string>
+  <string name="missing_name">(Walang pangalan)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Tingnan ang contact</string>
+  <string name="list_filter_phones">Lahat ng contact na may mga numero ng telepono</string>
+  <string name="list_filter_phones_work">Mga contact ng profile sa trabaho</string>
+  <string name="view_updates_from_group">Tingnan ang mga update</string>
+  <string name="account_phone">Device lang, inalis sa pagkaka-sync</string>
+  <string name="nameLabelsGroup">Pangalan</string>
+  <string name="nicknameLabelsGroup">Palayaw</string>
+  <string name="full_name">Pangalan</string>
+  <string name="name_given">Pangalan</string>
+  <string name="name_family">Apelyido</string>
+  <string name="name_prefix">Prefix ng pangalan</string>
+  <string name="name_middle">Gitnang pangalan</string>
+  <string name="name_suffix">Suffix ng pangalan</string>
+  <string name="name_phonetic">Phonetic na pangalan</string>
+  <string name="name_phonetic_given">Phonetic na pangalan</string>
+  <string name="name_phonetic_middle">Phonetic na gitnang pangalan</string>
+  <string name="name_phonetic_family">Phonetic na apelyido</string>
+  <string name="phoneLabelsGroup">Telepono</string>
+  <string name="emailLabelsGroup">Mag-email</string>
+  <string name="postalLabelsGroup">Address</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Samahan</string>
+  <string name="relationLabelsGroup">Kaugnayan</string>
+  <string name="eventLabelsGroup">Espesyal na petsa</string>
+  <string name="sms">Text message</string>
+  <string name="postal_address">Address</string>
+  <string name="ghostData_company">Kumpanya</string>
+  <string name="ghostData_title">Pamagat</string>
+  <string name="label_notes">Mga Tala</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Website</string>
+  <string name="groupsLabel">Mga Grupo</string>
+  <string name="email_home">Mag-email sa bahay</string>
+  <string name="email_mobile">Mag-email sa mobile</string>
+  <string name="email_work">Mag-email sa trabaho</string>
+  <string name="email_other">Mag-email</string>
+  <string name="email_custom">Mag-email sa %s</string>
+  <string name="email">Mag-email</string>
+  <string name="postal_street">Kalye</string>
+  <string name="postal_city">Lungsod</string>
+  <string name="postal_region">Estado</string>
+  <string name="postal_postcode">ZIP code</string>
+  <string name="postal_country">Bansa</string>
+  <string name="map_home">Tingnan ang address ng tahanan</string>
+  <string name="map_work">Tingnan ang address sa trabaho</string>
+  <string name="map_other">Tingnan ang address</string>
+  <string name="map_custom">Tingnan ang %s na address</string>
+  <string name="chat_aim">Makipag-chat gamit ang AIM</string>
+  <string name="chat_msn">Makipag-chat gamit ang Windows Live</string>
+  <string name="chat_yahoo">Makipag-chat gamit ang Yahoo</string>
+  <string name="chat_skype">Makipag-chat gamit ang Skype</string>
+  <string name="chat_qq">Makipag-chat gamit ang QQ</string>
+  <string name="chat_gtalk">Makipag-chat gamit ang Google Talk</string>
+  <string name="chat_icq">Makipag-chat gamit ang ICQ</string>
+  <string name="chat_jabber">Makipag-chat gamit ang Jabber</string>
+  <string name="chat">Chat</string>
+  <string name="list_filter_all_accounts">Lahat ng contact</string>
+  <string name="listAllContactsInAccount">Mga contact sa %s</string>
+  <string name="listCustomView">Mga contact sa custom na view</string>
+  <string name="listSingleContact">Iisang contact</string>
+  <string name="display_options_sort_list_by">Uriin ayon sa</string>
+  <string name="display_options_sort_by_given_name">Pangalan</string>
+  <string name="display_options_sort_by_family_name">Apelyido</string>
+  <string name="display_options_view_names_as">Format ng pangalan</string>
+  <string name="display_options_view_given_name_first">Pangalan muna</string>
+  <string name="display_options_view_family_name_first">Apelyido muna</string>
+  <string name="menu_clear_frequents">I-clear ang mga frequent</string>
+  <string name="action_menu_back_from_search">ihinto ang paghahanap</string>
+  <string name="description_clear_search">I-clear ang paghahanap</string>
+  <string name="select_account_dialog_title">Account</string>
+  <string name="set_default_account">Gamitin ito palagi sa mga tawag</string>
+  <string name="select_phone_account_for_calls">Pumili ng SIM para sa tawag na ito</string>
+  <string name="select_phone_account_for_calls_remember">Tandaan ang pagpipiliang ito</string>
+  <string name="call_with_a_note">Tumawag nang may kasamang tala</string>
+  <string name="call_subject_hint">Mag-type ng isang tala na ipadadala kasama ng tawag ...</string>
+  <string name="send_and_call_button">IPADALA AT TAWAGAN</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Tab ng %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Tab ng %1$s. %2$d hindi pa nababasang item. </item>
+    <item quantity="other"> Tab ng %1$s. %2$d na hindi pa nababasang item. </item>
+  </plurals>
+  <string name="description_search_video_call">Mag-video call</string>
+  <string name="description_search_call_and_share">Ibahagi at tumawag</string>
 </resources>

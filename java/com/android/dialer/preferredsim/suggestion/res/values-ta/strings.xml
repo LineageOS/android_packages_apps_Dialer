@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">அதே மொபைல் நிறுவனத்தைப் பயன்படுத்தும்</string>
+  <string name="pre_call_select_phone_account_hint_frequent">சமீபத்தில் பயன்படுத்தியது</string>
+</resources>

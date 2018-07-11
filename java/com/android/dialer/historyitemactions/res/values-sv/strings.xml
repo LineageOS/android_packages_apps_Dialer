@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Röstsamtal</string>
+  <string name="video_call">Videosamtal</string>
+  <string name="add_to_contacts">Lägg till kontakt</string>
+  <string name="send_a_message">Meddelande</string>
+  <string name="not_spam">Inte spam</string>
+  <string name="block_number">Blockera</string>
+  <string name="unblock_number">Återaktivera</string>
+  <string name="block_and_optionally_report_spam">Blockera/rapportera spam</string>
+  <string name="copy_number">Kopiera nummer</string>
+</resources>

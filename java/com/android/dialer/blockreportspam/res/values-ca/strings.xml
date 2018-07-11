@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Vols bloquejar el número %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Deixaràs de rebre trucades i missatges de text d\'aquest número.</string>
+  <string name="block_number_ok">BLOQUEJA</string>
+  <string name="unblock_number_ok">DESBLOQUEJA</string>
+  <string name="block_report_number_alert_title">Vols bloquejar el número %1$s?</string>
+  <string name="block_report_number_alert_details">Deixaràs de rebre trucades d\'aquest número.</string>
+  <string name="block_number_alert_details">%1$s Aquesta trucada es marcarà com a brossa.</string>
+  <string name="unblock_number_alert_details">El número es desbloquejarà i s\'indicarà que aquesta trucada (i les properes) no són brossa.</string>
+  <string name="unblock_report_number_alert_title">Vols desbloquejar el número %1$s?</string>
+  <string name="report_not_spam_alert_button">Informa</string>
+  <string name="report_not_spam_alert_title">Vols informar d\'un error?</string>
+  <string name="report_not_spam_alert_details">Les trucades futures del número %1$s ja no es consideraran brossa.</string>
+  <string name="checkbox_report_as_spam_action">Marca la trucada com a brossa</string>
+  <string name="block_number_failed_toast">S\'ha produït un problema en bloquejar aquest número</string>
+  <string name="unblock_number_failed_toast">S\'ha produït un problema en desbloquejar aquest número</string>
+</resources>

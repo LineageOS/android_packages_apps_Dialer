@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">सभी संदिग्ध स्पैम कॉल फ़िल्टर करें?</string>
+  <string name="spam_blocking_promo_text">आपने अभी-अभी जिस तरह के कॉल पर रोक लगाई है, वैसे कॉल अब आपको
+      परेशान नहीं करेंगे</string>
+  <string name="spam_blocking_promo_action_filter_spam">स्पैम फ़िल्टर करें</string>
+  <string name="spam_blocking_promo_action_dismiss">खारिज करें</string>
+  <string name="spam_blocking_setting_prompt">सेटिंग</string>
+  <string name="spam_blocking_settings_enable_error_text">स्पैम फ़िल्टर करने की सुविधा चालू करने में समस्या आई</string>
+  <string name="spam_blocking_settings_disable_error_text">स्पैम फ़िल्टर करने की सुविधा बंद करने में समस्या आई</string>
+  <string name="spam_blocking_settings_enable_complete_text">स्पैम फ़िल्टर चालू किया गया</string>
+  <string name="spam_blocking_settings_disable_complete_text">स्पैम फ़िल्टर बंद किया गया</string>
+</resources>

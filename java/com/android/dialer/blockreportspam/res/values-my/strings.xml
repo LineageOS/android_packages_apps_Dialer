@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s ကို ပိတ်မလား။</string>
+  <string name="block_number_confirmation_message_new_filtering">ဤနံပါတ်ထံမှ ဖုန်းခေါ်ဆိုမှုများနှင့် စာများကို သင် ထပ်မံရရှိတော့မည် မဟုတ်ပါ။</string>
+  <string name="block_number_ok">ပိတ်ဆို့ပါ</string>
+  <string name="unblock_number_ok">ပိတ်ဆို့ခြင်းမှ ဖယ်ရှားပါ</string>
+  <string name="block_report_number_alert_title">%1$sကို ပိတ်မလား။</string>
+  <string name="block_report_number_alert_details">ဤနံပါတ်ထံမှ ဖုန်းခေါ်ဆိုမှုများကို သင်လက်ခံရရှိတော့မည် မဟုတ်ပါ။</string>
+  <string name="block_number_alert_details">%1$s ဤခေါ်ဆိုမှုကို စပမ်းဖြစ်ကြောင်း သတင်းပို့ပါမည်။</string>
+  <string name="unblock_number_alert_details">ဤနံပါတ်ကို ပြန်ဖွင့်၍ စပမ်းမဟုတ်ကြောင်း သတင်းပို့မည်။ နောင်ခေါ်ဆိုမှုများကို စပမ်းအဖြစ် မသတ်မှတ်ပါ။</string>
+  <string name="unblock_report_number_alert_title">%1$s ကို ပြန်ဖွင့်မလား။</string>
+  <string name="report_not_spam_alert_button">သတင်းပို့ရန်</string>
+  <string name="report_not_spam_alert_title">မှားယွင်းမှုကို သတင်းပို့မလား။</string>
+  <string name="report_not_spam_alert_details">%1$s ထံမှ နောင်ဝင်လာမည့် ဖုန်းခေါ်ဆိုမှုများကို စပမ်းအဖြစ် သတ်မှတ်တော့မည် မဟုတ်ပါ။</string>
+  <string name="checkbox_report_as_spam_action">စပမ်းခေါ်ဆိုမှုဟု သတင်းပို့ရန်</string>
+  <string name="block_number_failed_toast">ဤနံပါတ်ကို ပိတ်ရာတွင် လွဲချော်မှုရှိပါသည်</string>
+  <string name="unblock_number_failed_toast">ဤနံပါတ်ကို ပြန်ဖွင့်ရာတွင် လွဲချော်မှုရှိပါသည်</string>
+</resources>

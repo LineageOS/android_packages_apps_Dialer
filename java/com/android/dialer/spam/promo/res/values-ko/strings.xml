@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">의심스러운 스팸 통화를 모두 필터링하시겠습니까?</string>
+  <string name="spam_blocking_promo_text">방금 차단한 통화와 같은 스팸 통화를
+      더 이상 받지 않게 됩니다.</string>
+  <string name="spam_blocking_promo_action_filter_spam">스팸 필터링</string>
+  <string name="spam_blocking_promo_action_dismiss">닫기</string>
+  <string name="spam_blocking_setting_prompt">설정</string>
+  <string name="spam_blocking_settings_enable_error_text">스팸 필터링을 켜는 중에 문제가 발생했습니다.</string>
+  <string name="spam_blocking_settings_disable_error_text">스팸 필터링을 끄는 중에 문제가 발생했습니다.</string>
+  <string name="spam_blocking_settings_enable_complete_text">스팸 필터링이 켜짐</string>
+  <string name="spam_blocking_settings_disable_complete_text">스팸 필터링이 꺼짐</string>
+</resources>

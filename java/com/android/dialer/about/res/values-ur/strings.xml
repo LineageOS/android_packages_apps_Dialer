@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="build_version_label" msgid="3876300343684966840">"بلڈ ورژن"</string>
-    <string name="open_source_license_detail_label" msgid="2860076509914623912">"اوپن سورس سافٹ ویئر کیلئے لائسنس کی تفصیلات"</string>
-    <string name="licenseActivityLabel" msgid="8258726177561826066">"اوپن سورس لائسنسز"</string>
-    <string name="privacy_policy_label" msgid="6567158248788870442">"رازداری کی پالیسی"</string>
-    <string name="terms_of_service_label" msgid="6788126078040996084">"سروس کی شرائط"</string>
+<resources>
+  <string name="build_version_label">بلڈ ورژن</string>
+  <string name="open_source_license_detail_label">اوپن سورس سافٹ ویئر کیلئے لائسنس کی تفصیلات</string>
+  <string name="licenseActivityLabel">اوپن سورس لائسنسز</string>
+  <string name="privacy_policy_label">رازداری کی پالیسی</string>
+  <string name="terms_of_service_label">سروس کی شرائط</string>
 </resources>

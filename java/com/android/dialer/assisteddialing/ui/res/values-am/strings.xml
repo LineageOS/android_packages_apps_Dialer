@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">የታገዘ መደወያ</string>
+  <string name="assisted_dialing_setting_summary">ወደ ውጭ አገር ሲጓዙ በሚደውሉ ጊዜ የአገር ኮድን ይተንብዩና ያክሉ</string>
+  <string name="assisted_dialing_setting_cc_default_summary">በራስ-ሰር ተገኝቷል • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">በራስ-ሰር ተገኝቷል</string>
+  <string name="assisted_dialing_setting_cc_category_title">የትውልድ አገር</string>
+  <string name="assisted_dialing_setting_cc_title">ነባሪ መኖሪያ አገር</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">સહાયિત ડાયલિંગ</string>
+  <string name="assisted_dialing_setting_summary">વિદેશમાં મુસાફરી કરતી વખતે જ્યારે તમે ફોન કરો, ત્યારે દેશના કોડનો અનુમાન લગાવીને તેને ઉમેરો</string>
+  <string name="assisted_dialing_setting_cc_default_summary">આપમેળે શોધાયેલ • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">આપમેળે શોધાયેલ</string>
+  <string name="assisted_dialing_setting_cc_category_title">હોમ દેશ</string>
+  <string name="assisted_dialing_setting_cc_title">ડિફૉલ્ટ હોમ દેશ</string>
+</resources>

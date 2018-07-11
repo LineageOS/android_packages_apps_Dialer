@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Vil du filtrere alle potensielt useriøse anrop?</string>
+  <string name="spam_blocking_promo_text">Anrop som det du akkurat har blokkert, kommer ikke til
+      å forstyrre deg lenger</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrér useriøse anrop</string>
+  <string name="spam_blocking_promo_action_dismiss">Lukk</string>
+  <string name="spam_blocking_setting_prompt">Innstillinger</string>
+  <string name="spam_blocking_settings_enable_error_text">Det oppsto problemer da filtrering av useriøse anrop skulle slås på</string>
+  <string name="spam_blocking_settings_disable_error_text">Det oppsto problemer da filtrering av useriøse anrop skulle slås av</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtrering av useriøse anrop er slått på</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtrering av useriøse anrop er slått av</string>
+</resources>

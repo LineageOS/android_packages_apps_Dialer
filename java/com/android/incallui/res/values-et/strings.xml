@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Kas saata järgmised toonid?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Jah"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Ei"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Valimine"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Käimasolev kõne"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Käimasolev videokõne"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Käimasolev videokõne – video on peatatud"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Käimasolev töökõne"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Käimasolev <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Sissetulev <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"WiFi-kõne"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"WiFi-töökõne"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Ootel"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Sissetulev kõne"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Sissetulev kõne koos fotoga"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Sissetulev kõne koos sõnumiga"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Sissetulev kõne koos asukohaga"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Sissetulev kõne koos foto ja sõnumiga"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Sissetulev kõne koos foto ja asukohaga"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Sissetulev kõne koos sõnumi ja asukohaga"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Sissetulev kõne koos foto, sõnumi ja asukohaga"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Sissetulev kõne koos manustega"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Tähtis sissetulev kõne"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Tähtis sissetulev kõne koos fotoga"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Tähtis sissetulev kõne koos sõnumiga"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Tähtis sissetulev kõne koos asukohaga"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Tähtis sissetulev kõne koos foto ja sõnumiga"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Tähtis sissetulev kõne koos foto ja asukohaga"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Tähtis sissetulev kõne koos sõnumi ja asukohaga"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Tähtis sisset. kõne koos foto, sõnumi ja asukohaga"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Tähtis sissetulev kõne koos manustega"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Sissetulev töökõne"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Arvatav sissetulev rämpskõne"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Sissetulev videotaotlus"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Vastamine"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Lõpeta kõne"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Video"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Nõustu"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Keeldu"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Kõlari sisselülitamine"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Kõlari väljalülitamine"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Pooleliolev kõne teise seadmes"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Pooleliolev videokõne teises seadmes"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Alusta helistamist"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Alusta videokõnet"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Teenust ei toetata."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"aktiveeri privaatrežiim"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Halda konverentskõnet"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Hädaabinumber"</string>
-    <string name="child_number" msgid="3398257437107259682">"numbri <xliff:g id="CHILD_NUMBER">%s</xliff:g> kaudu"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"SIM-kaart puudub või SIM-kaardi viga"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Kõne lõpetamine"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konverentskõne"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Pooleliolev kõne"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Kõnet jätkatakse mobiilse andmeside kaudu …"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"WiFi-võrgule ei saanud lülituda"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Videokõne jääb mobiilsidevõrku. Rakenduda võivad tavapärased andmesidetasud."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ära seda enam näita"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Kas saata järgmised toonid?\n</string>
+  <string name="pause_prompt_yes">Jah</string>
+  <string name="pause_prompt_no">Ei</string>
+  <string name="notification_dialing">Valimine</string>
+  <string name="notification_ongoing_call">Käimasolev kõne</string>
+  <string name="notification_ongoing_video_call">Käimasolev videokõne</string>
+  <string name="notification_ongoing_paused_video_call">Käimasolev videokõne – video on peatatud</string>
+  <string name="notification_ongoing_work_call">Käimasolev töökõne</string>
+  <string name="notification_ongoing_call_wifi_template">Käimasolev %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Sissetulev %1$s</string>
+  <string name="notification_call_wifi_brand">WiFi-kõne</string>
+  <string name="notification_call_wifi_work_brand">WiFi-töökõne</string>
+  <string name="notification_on_hold">Ootel</string>
+  <string name="notification_incoming_call">Sissetulev kõne</string>
+  <string name="notification_incoming_video_call">Sissetulev videokõne</string>
+  <string name="notification_incoming_call_mutli_sim">Sissetulev kõne SIM-kaardi %1$s kaudu</string>
+  <string name="notification_incoming_call_with_photo">Sissetulev kõne koos fotoga</string>
+  <string name="notification_incoming_call_with_message">Sissetulev kõne koos sõnumiga</string>
+  <string name="notification_incoming_call_with_location">Sissetulev kõne koos asukohaga</string>
+  <string name="notification_incoming_call_with_photo_message">Sissetulev kõne koos foto ja sõnumiga</string>
+  <string name="notification_incoming_call_with_photo_location">Sissetulev kõne koos foto ja asukohaga</string>
+  <string name="notification_incoming_call_with_message_location">Sissetulev kõne koos sõnumi ja asukohaga</string>
+  <string name="notification_incoming_call_with_photo_message_location">Sissetulev kõne koos foto, sõnumi ja asukohaga</string>
+  <string name="notification_incoming_call_attachments">Sissetulev kõne koos manustega</string>
+  <string name="important_notification_incoming_call">Tähtis sissetulev kõne</string>
+  <string name="important_notification_incoming_call_with_photo">Tähtis sissetulev kõne koos fotoga</string>
+  <string name="important_notification_incoming_call_with_message">Tähtis sissetulev kõne koos sõnumiga</string>
+  <string name="important_notification_incoming_call_with_location">Tähtis sissetulev kõne koos asukohaga</string>
+  <string name="important_notification_incoming_call_with_photo_message">Tähtis sissetulev kõne koos foto ja sõnumiga</string>
+  <string name="important_notification_incoming_call_with_photo_location">Tähtis sissetulev kõne koos foto ja asukohaga</string>
+  <string name="important_notification_incoming_call_with_message_location">Tähtis sissetulev kõne koos sõnumi ja asukohaga</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Tähtis sisset. kõne koos foto, sõnumi ja asukohaga</string>
+  <string name="important_notification_incoming_call_attachments">Tähtis sissetulev kõne koos manustega</string>
+  <string name="notification_incoming_work_call">Sissetulev töökõne</string>
+  <string name="notification_incoming_spam_call">Arvatav sissetulev rämpskõne</string>
+  <string name="notification_requesting_video_call">Sissetulev videotaotlus</string>
+  <string name="notification_action_answer">Vastamine</string>
+  <string name="notification_action_end_call">Lõpeta kõne</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Nõustu</string>
+  <string name="notification_action_dismiss">Keeldu</string>
+  <string name="notification_action_speaker_on">Kõlari sisselülitamine</string>
+  <string name="notification_action_speaker_off">Kõlari väljalülitamine</string>
+  <string name="notification_external_call">Pooleliolev kõne teise seadmes</string>
+  <string name="notification_external_video_call">Pooleliolev videokõne teises seadmes</string>
+  <string name="notification_take_call">Alusta helistamist</string>
+  <string name="notification_take_video_call">Alusta videokõnet</string>
+  <string name="incall_error_supp_service_unknown">Teenust ei toetata.</string>
+  <string name="goPrivate">aktiveeri privaatrežiim</string>
+  <string name="manageConferenceLabel">Halda konverentskõnet</string>
+  <string name="child_number">numbri %s kaudu</string>
+  <string name="callFailed_simError">SIM-kaart puudub või SIM-kaardi viga</string>
+  <string name="conference_caller_disconnect_content_description">Kõne lõpetamine</string>
+  <string name="conference_call_name">Konverentskõne</string>
+  <string name="generic_conference_call_name">Pooleliolev kõne</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Kõnet jätkatakse mobiilse andmeside kaudu …</string>
+  <string name="video_call_lte_to_wifi_failed_title">WiFi-võrgule ei saanud lülituda</string>
+  <string name="video_call_lte_to_wifi_failed_message">Videokõne jääb mobiilsidevõrku. Rakenduda võivad tavapärased andmesidetasud.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Ära seda enam näita</string>
+  <string name="bubble_return_to_call">Tagasi kõne juurde</string>
+  <string name="rtt_request_dialog_title">Kas liituda RTT-kõnega?</string>
+  <string name="rtt_request_dialog_details">%1$s soovib teie häälkõnes kasutada sõnumsidet.</string>
+  <string name="rtt_request_dialog_more_information">RTT aitab kurte, kuulmis- või kõnepuudega helistajaid või neid, kes vajavad lisaks häälele muud abi.</string>
+  <string name="rtt_button_decline_request">Tänan, ei</string>
+  <string name="rtt_button_accept_request">Liitu RTT-ga</string>
 </resources>

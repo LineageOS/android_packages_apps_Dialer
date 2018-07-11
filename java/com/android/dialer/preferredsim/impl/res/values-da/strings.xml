@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Opkaldet kan ikke foretages uden telefontilladelse</string>
+  <string name="pre_call_select_phone_account">Vælg SIM-kort til dette opkald</string>
+  <string name="pre_call_select_phone_account_remember">Husk dette valg</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Ikke tilgængelig, mens du bruger %1$s</string>
+</resources>

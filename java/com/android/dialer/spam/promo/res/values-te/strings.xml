@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">అనుమానిత స్పామ్ కాల్‌లన్నింటినీ ఫిల్టర్ చేయాలా?</string>
+  <string name="spam_blocking_promo_text">మీరు ఇప్పుడు బ్లాక్ చేసినటువంటి కాల్‌లు
+      మీకు ఇకపై అంతరాయం కలిగించవు</string>
+  <string name="spam_blocking_promo_action_filter_spam">స్పామ్‌ని ఫిల్టర్ చేయి</string>
+  <string name="spam_blocking_promo_action_dismiss">విస్మరించు</string>
+  <string name="spam_blocking_setting_prompt">సెట్టింగ్‌లు</string>
+  <string name="spam_blocking_settings_enable_error_text">స్పామ్ ఫిల్టరింగ్‌ని ఆన్ చేస్తున్నప్పుడు సమస్య ఏర్పడింది</string>
+  <string name="spam_blocking_settings_disable_error_text">స్పామ్ ఫిల్టరింగ్‌ని ఆఫ్ చేస్తున్నప్పుడు సమస్య ఏర్పడింది</string>
+  <string name="spam_blocking_settings_enable_complete_text">స్పామ్ ఫిల్టరింగ్ ఆన్ చేయబడింది</string>
+  <string name="spam_blocking_settings_disable_complete_text">స్పామ్ ఫిల్టరింగ్ ఆఫ్ చేయబడింది</string>
+</resources>

@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"კოპირებული ტექსტი"</string>
-    <string name="call_custom" msgid="3041673234638990874">"დარეკვა <xliff:g id="CUSTOM">%s</xliff:g> ნომერზე"</string>
-    <string name="call_home" msgid="125893483593803791">"დარეკვა სახლში"</string>
-    <string name="call_mobile" msgid="967589404494150813">"დარეკვა მობილურზე"</string>
-    <string name="call_work" msgid="6040550697395300892">"დარეკვა სამსახურში"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"დარეკვა სამსახურის ფაქსზე"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"დარეკვა სახლის ფაქსზე"</string>
-    <string name="call_pager" msgid="6814149227741274161">"დარეკვა პეიჯერზე"</string>
-    <string name="call_other" msgid="5536385588712587235">"დარეკვა"</string>
-    <string name="call_callback" msgid="6314019862718112786">"დარეკვა უკუგამოძახების ნომერზე"</string>
-    <string name="call_car" msgid="3197417098027764954">"დარეკვა მანქანის ტელეფონზე"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"დარეკვა კომპანიის მთავარ ნომერზე"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"დარეკვა ISDN-ის ნომერზე"</string>
-    <string name="call_main" msgid="3293707608770407814">"დარეკვა მთავარ ნომერზე"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"დარეკვა ფაქსზე"</string>
-    <string name="call_radio" msgid="8942441419845057942">"დარეკვა გადამცემზე"</string>
-    <string name="call_telex" msgid="2031514461660668351">"დარეკვა ტელექსზე"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"დარეკვა TTY/TDD-ზე"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"დარეკვა სამსახურის მობილურზე"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"დარეკვა სამსახურის პეიჯერზე"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"დარეკვა <xliff:g id="ASSISTANT">%s</xliff:g>-თან"</string>
-    <string name="call_mms" msgid="4958811711741872901">"დარეკვა MMS-ის ნომერზე"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"ტექსტური შეტყობინების გაგზავნა <xliff:g id="CUSTOM">%s</xliff:g>-ზე"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ტექსტური შეტყობინების გაგზავნა სახლში"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"ტექსტური შეტყობინების გაგზავნა მობილურზე"</string>
-    <string name="sms_work" msgid="4158595439553450966">"ტექსტური შეტყობინების გაგზავნა სამსახურში"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"ტექსტური შეტყობინების გაგზავნა სამუშაო ფაქსზე"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ტექსტური შეტყობინების გაგზავნა სახლის ფაქსზე"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ტექსტური შეტყობინების გაგზავნა პეიჯერზე"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ტექსტური შეტყობინება"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ტექსტური შეტყობინების გაგზავნა უკუგამოძახების ნომერზე"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ტექსტური შეტყობინების გაგზავნა მანქანის ნომერზე"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ტექსტური შეტყობინების გაგზავნა კომპანიის მთავარ ნომერზე"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ტექსტური შეტყობინების გაგზავნა ISDN ნომერზე"</string>
-    <string name="sms_main" msgid="8908087742014140774">"ტექსტური შეტყობინების გაგზავნა მთავარ ნომერზე"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ტექსტური შეტყობინების გაგზავნა ფაქსზე"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ტექსტური შეტყობინების გაგზავნა გადამცემზე"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ტექსტური შეტყობინების გაგზავნა ტელექსზე"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"ტექსტური შეტყობინების გაგზავნა TTY/TDD-ზე"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"ტექსტური შეტყობინების გაგზავნა სამსახურის მობილურზე"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"ტექსტური შეტყობინების გაგზავნა სამსახურის პეიჯერზე"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"ტექსტური შეტყობინების გაგზავნა <xliff:g id="ASSISTANT">%s</xliff:g>-ისთვის"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"ტექსტური შეტყობინების გაგზავნა MMS ნომერზე"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"გსურთ ხშირი კონტაქტების წაშლა?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"თქვენ წაშლით ხშირად დაკავშირებულთა სიას კონტაქტებიდან და ტელეფონის აპლიკაციიდან და აიძულებთ ელ-ფოსტის აპლიკაციებს შეისწავლონ თქვენი ადრესატების პრიორიტეტები ნულიდან."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"ხშირი კონტაქტები იშლება…"</string>
-    <string name="status_available" msgid="2648156525685472626">"ხელმისაწვდომი"</string>
-    <string name="status_away" msgid="2298688367552893953">"გასული"</string>
-    <string name="status_busy" msgid="5990832098713248503">"დაკავებული"</string>
-    <string name="contactsList" msgid="8806067891419291513">"კონტაქტები"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"საუკეთესო შეთავაზებები"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"სხვა"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"კატალოგი"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"სამსახურის კატალოგი"</string>
-    <string name="local_search_label" msgid="907622822323119235">"ყველა კონტაქტი"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"შეთავაზებები"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"მე"</string>
-    <string name="missing_name" msgid="978606963362745020">"(სახელის გარეშე)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"კონტაქტის ნახვა"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"ყველა ტელეფონის ნომრიანი კონტაქტი"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"სამსახურის პროფილის კონტაქტები"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"განახლებების ნახვა"</string>
-    <string name="account_phone" msgid="7067809073194061035">"მხოლოდ მოწყობილობაზე, სინქრონიზაციის გარეშე"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"სახელი"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"მეტსახელი"</string>
-    <string name="full_name" msgid="648186563998465740">"სახელი"</string>
-    <string name="name_given" msgid="5096576006314820536">"სახელი"</string>
-    <string name="name_family" msgid="6646235805198547467">"გვარი"</string>
-    <string name="name_prefix" msgid="9215326539658838">"სახელის პრეფიქსი"</string>
-    <string name="name_middle" msgid="703755205331582769">"მეორე სახელი"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"სახელის სუფიქსი"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"სახელის ტრანსკრიფცია"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"ფონეტიკური სახელი"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"მეორე სახელის ტრანსკრიფცია"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"ფონეტიკური გვარი"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"ტელეფონი"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"ელფოსტის გაგზავნა"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"მისამართი"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"ორგანიზაცია"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"ურთიერთობა"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"სპეციალური თარიღი"</string>
-    <string name="sms" msgid="7574344928185328095">"ტექსტური შეტყობინება"</string>
-    <string name="postal_address" msgid="1804707930129674200">"მისამართი"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"კომპანია"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"პოზიცია"</string>
-    <string name="label_notes" msgid="2050255313694219786">"ჩანიშვნები"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"ვებ-საიტი"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"ჯგუფები"</string>
-    <string name="email_home" msgid="889830029388962171">"ელფოსტის გაგზავნა სახლში"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"ელფოსტის გაგზავნა მობილურზე"</string>
-    <string name="email_work" msgid="4223487303344613528">"ელფოსტის გაგზავნა სამსახურში"</string>
-    <string name="email_other" msgid="4246411900126012062">"ელფოსტის გაგზავნა"</string>
-    <string name="email_custom" msgid="7246580894327511013">"ელფოსტის გაგზავნა <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"ელფოსტის გაგზავნა"</string>
-    <string name="postal_street" msgid="6918171741240802474">"ქუჩა"</string>
-    <string name="postal_city" msgid="8674569121430005628">"ქალაქი"</string>
-    <string name="postal_region" msgid="1730369286225469192">"შტატი"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"ZIP-კოდი"</string>
-    <string name="postal_country" msgid="232670707458768148">"ქვეყანა"</string>
-    <string name="map_home" msgid="4181131107392126938">"სახლის მისამართის ნახვა"</string>
-    <string name="map_work" msgid="5723471185992684400">"სამსახურის მისამართის ნახვა"</string>
-    <string name="map_other" msgid="2253764780863500516">"მისამართის ნახვა"</string>
-    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> მისამართის ნახვა"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"ჩეთი AIM-ით"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"ჩეთი Windows Live-ით"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"ჩეთი Yahoo-ს საშუალებით"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"ჩეთი Skype-ით"</string>
-    <string name="chat_qq" msgid="786924280665740019">"ჩეთი QQ-ით"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"ჩეთი Google Talk-ით"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ჩეთი ICQ-ით"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"ჩეთი Jabber-ით"</string>
-    <string name="chat" msgid="1020428260359370236">"ჩეთი"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"ყველა კონტაქტი"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"კონტაქტები <xliff:g id="NAME">%s</xliff:g>-ში"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"კონტაქტები მორგებულ ხედში"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"ერთი კონტაქტი"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"სორტირება:"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"სახელით"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"გვარით"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"სახელის ფორმატი"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ჯერ სახელი"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"ჯერ გვარი"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"ხშირი კონტაქტების წაშლა"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ძიების შეჩერება"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"ძიების გასუფთავება"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"ანგარიში"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"ზარებისთვის მუდამ ამის გამოყენება"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"დარეკვა ანგარიშით:"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"ზარი შენიშვნასთან ერთად"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"აკრიფეთ შენიშვნა ზართან ერთად გასაგზავნად ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"გაგზავნა და დარეკვა"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> ცხრ."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ცხრ. <xliff:g id="COUNT_3">%2$d</xliff:g> წაუკითხავი ერთეული. </item>
-      <item quantity="one"> <xliff:g id="TITLE_0">%1$s</xliff:g> ცხრ. <xliff:g id="COUNT_1">%2$d</xliff:g> წაუკითხავი ერთეული. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"ვიდეოზარი"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"გაზიარება და დარეკვა"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">დარეკვა %s ნომერზე</string>
+  <string name="call_home">დარეკვა სახლში</string>
+  <string name="call_mobile">დარეკვა მობილურზე</string>
+  <string name="call_work">დარეკვა სამსახურში</string>
+  <string name="call_fax_work">დარეკვა სამსახურის ფაქსზე</string>
+  <string name="call_fax_home">დარეკვა სახლის ფაქსზე</string>
+  <string name="call_pager">დარეკვა პეიჯერზე</string>
+  <string name="call_other">დარეკვა</string>
+  <string name="call_callback">დარეკვა უკუგამოძახების ნომერზე</string>
+  <string name="call_car">დარეკვა მანქანის ტელეფონზე</string>
+  <string name="call_company_main">დარეკვა კომპანიის მთავარ ნომერზე</string>
+  <string name="call_isdn">დარეკვა ISDN-ის ნომერზე</string>
+  <string name="call_main">დარეკვა მთავარ ნომერზე</string>
+  <string name="call_other_fax">დარეკვა ფაქსზე</string>
+  <string name="call_radio">დარეკვა გადამცემზე</string>
+  <string name="call_telex">დარეკვა ტელექსზე</string>
+  <string name="call_tty_tdd">დარეკვა TTY/TDD-ზე</string>
+  <string name="call_work_mobile">დარეკვა სამსახურის მობილურზე</string>
+  <string name="call_work_pager">დარეკვა სამსახურის პეიჯერზე</string>
+  <string name="call_assistant">დარეკვა %s-თან</string>
+  <string name="call_mms">დარეკვა MMS-ის ნომერზე</string>
+  <string name="sms_custom">ტექსტური შეტყობინების გაგზავნა %s-ზე</string>
+  <string name="sms_home">ტექსტური შეტყობინების გაგზავნა სახლში</string>
+  <string name="sms_mobile">ტექსტური შეტყობინების გაგზავნა მობილურზე</string>
+  <string name="sms_work">ტექსტური შეტყობინების გაგზავნა სამსახურში</string>
+  <string name="sms_fax_work">ტექსტური შეტყობინების გაგზავნა სამუშაო ფაქსზე</string>
+  <string name="sms_fax_home">ტექსტური შეტყობინების გაგზავნა სახლის ფაქსზე</string>
+  <string name="sms_pager">ტექსტური შეტყობინების გაგზავნა პეიჯერზე</string>
+  <string name="sms_other">ტექსტური შეტყობინება</string>
+  <string name="sms_callback">ტექსტური შეტყობინების გაგზავნა უკუგამოძახების ნომერზე</string>
+  <string name="sms_car">ტექსტური შეტყობინების გაგზავნა მანქანის ნომერზე</string>
+  <string name="sms_company_main">ტექსტური შეტყობინების გაგზავნა კომპანიის მთავარ ნომერზე</string>
+  <string name="sms_isdn">ტექსტური შეტყობინების გაგზავნა ISDN ნომერზე</string>
+  <string name="sms_main">ტექსტური შეტყობინების გაგზავნა მთავარ ნომერზე</string>
+  <string name="sms_other_fax">ტექსტური შეტყობინების გაგზავნა ფაქსზე</string>
+  <string name="sms_radio">ტექსტური შეტყობინების გაგზავნა გადამცემზე</string>
+  <string name="sms_telex">ტექსტური შეტყობინების გაგზავნა ტელექსზე</string>
+  <string name="sms_tty_tdd">ტექსტური შეტყობინების გაგზავნა TTY/TDD-ზე</string>
+  <string name="sms_work_mobile">ტექსტური შეტყობინების გაგზავნა სამსახურის მობილურზე</string>
+  <string name="sms_work_pager">ტექსტური შეტყობინების გაგზავნა სამსახურის პეიჯერზე</string>
+  <string name="sms_assistant">ტექსტური შეტყობინების გაგზავნა %s-ისთვის</string>
+  <string name="sms_mms">ტექსტური შეტყობინების გაგზავნა MMS ნომერზე</string>
+  <string name="clearFrequentsConfirmation_title">გსურთ ხშირი კონტაქტების წაშლა?</string>
+  <string name="clearFrequentsConfirmation">თქვენ წაშლით ხშირად დაკავშირებულთა სიას კონტაქტებიდან და ტელეფონის აპლიკაციიდან და აიძულებთ ელ-ფოსტის აპლიკაციებს შეისწავლონ თქვენი ადრესატების პრიორიტეტები ნულიდან.</string>
+  <string name="clearFrequentsProgress_title">ხშირი კონტაქტები იშლება…</string>
+  <string name="status_available">ხელმისაწვდომი</string>
+  <string name="status_away">გასული</string>
+  <string name="status_busy">დაკავებული</string>
+  <string name="contactsList">კონტაქტები</string>
+  <string name="contact_suggestions">საუკეთესო შეთავაზებები</string>
+  <string name="local_invisible_directory">სხვა</string>
+  <string name="directory_search_label">კატალოგი</string>
+  <string name="directory_search_label_work">სამსახურის კატალოგი</string>
+  <string name="local_search_label">ყველა კონტაქტი</string>
+  <string name="local_suggestions_search_label">შეთავაზებები</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">მე</string>
+  <string name="missing_name">(სახელის გარეშე)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">კონტაქტის ნახვა</string>
+  <string name="list_filter_phones">ყველა ტელეფონის ნომრიანი კონტაქტი</string>
+  <string name="list_filter_phones_work">სამსახურის პროფილის კონტაქტები</string>
+  <string name="view_updates_from_group">განახლებების ნახვა</string>
+  <string name="account_phone">მხოლოდ მოწყობილობაზე, სინქრონიზაციის გარეშე</string>
+  <string name="nameLabelsGroup">სახელი</string>
+  <string name="nicknameLabelsGroup">მეტსახელი</string>
+  <string name="full_name">სახელი</string>
+  <string name="name_given">სახელი</string>
+  <string name="name_family">გვარი</string>
+  <string name="name_prefix">სახელის პრეფიქსი</string>
+  <string name="name_middle">მეორე სახელი</string>
+  <string name="name_suffix">სახელის სუფიქსი</string>
+  <string name="name_phonetic">სახელის ტრანსკრიფცია</string>
+  <string name="name_phonetic_given">ფონეტიკური სახელი</string>
+  <string name="name_phonetic_middle">მეორე სახელის ტრანსკრიფცია</string>
+  <string name="name_phonetic_family">ფონეტიკური გვარი</string>
+  <string name="phoneLabelsGroup">ტელეფონი</string>
+  <string name="emailLabelsGroup">ელფოსტის გაგზავნა</string>
+  <string name="postalLabelsGroup">მისამართი</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">ორგანიზაცია</string>
+  <string name="relationLabelsGroup">ურთიერთობა</string>
+  <string name="eventLabelsGroup">სპეციალური თარიღი</string>
+  <string name="sms">ტექსტური შეტყობინება</string>
+  <string name="postal_address">მისამართი</string>
+  <string name="ghostData_company">კომპანია</string>
+  <string name="ghostData_title">პოზიცია</string>
+  <string name="label_notes">ჩანიშვნები</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">ვებ-საიტი</string>
+  <string name="groupsLabel">ჯგუფები</string>
+  <string name="email_home">ელფოსტის გაგზავნა სახლში</string>
+  <string name="email_mobile">ელფოსტის გაგზავნა მობილურზე</string>
+  <string name="email_work">ელფოსტის გაგზავნა სამსახურში</string>
+  <string name="email_other">ელფოსტის გაგზავნა</string>
+  <string name="email_custom">ელფოსტის გაგზავნა %s</string>
+  <string name="email">ელფოსტის გაგზავნა</string>
+  <string name="postal_street">ქუჩა</string>
+  <string name="postal_city">ქალაქი</string>
+  <string name="postal_region">შტატი</string>
+  <string name="postal_postcode">ZIP-კოდი</string>
+  <string name="postal_country">ქვეყანა</string>
+  <string name="map_home">სახლის მისამართის ნახვა</string>
+  <string name="map_work">სამსახურის მისამართის ნახვა</string>
+  <string name="map_other">მისამართის ნახვა</string>
+  <string name="map_custom">%s მისამართის ნახვა</string>
+  <string name="chat_aim">ჩეთი AIM-ით</string>
+  <string name="chat_msn">ჩეთი Windows Live-ით</string>
+  <string name="chat_yahoo">ჩეთი Yahoo-ს საშუალებით</string>
+  <string name="chat_skype">ჩეთი Skype-ით</string>
+  <string name="chat_qq">ჩეთი QQ-ით</string>
+  <string name="chat_gtalk">ჩეთი Google Talk-ით</string>
+  <string name="chat_icq">ჩეთი ICQ-ით</string>
+  <string name="chat_jabber">ჩეთი Jabber-ით</string>
+  <string name="chat">ჩეთი</string>
+  <string name="list_filter_all_accounts">ყველა კონტაქტი</string>
+  <string name="listAllContactsInAccount">კონტაქტები %s-ში</string>
+  <string name="listCustomView">კონტაქტები მორგებულ ხედში</string>
+  <string name="listSingleContact">ერთი კონტაქტი</string>
+  <string name="display_options_sort_list_by">სორტირება:</string>
+  <string name="display_options_sort_by_given_name">სახელით</string>
+  <string name="display_options_sort_by_family_name">გვარით</string>
+  <string name="display_options_view_names_as">სახელის ფორმატი</string>
+  <string name="display_options_view_given_name_first">ჯერ სახელი</string>
+  <string name="display_options_view_family_name_first">ჯერ გვარი</string>
+  <string name="menu_clear_frequents">ხშირი კონტაქტების წაშლა</string>
+  <string name="action_menu_back_from_search">ძიების შეჩერება</string>
+  <string name="description_clear_search">ძიების გასუფთავება</string>
+  <string name="select_account_dialog_title">ანგარიში</string>
+  <string name="set_default_account">ზარებისთვის მუდამ ამის გამოყენება</string>
+  <string name="select_phone_account_for_calls">აირჩიეთ SIM ამ ზარისთვის</string>
+  <string name="select_phone_account_for_calls_remember">ამ არჩევანის დამახსოვრება</string>
+  <string name="call_with_a_note">ზარი შენიშვნასთან ერთად</string>
+  <string name="call_subject_hint">აკრიფეთ შენიშვნა ზართან ერთად გასაგზავნად ...</string>
+  <string name="send_and_call_button">გაგზავნა და დარეკვა</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s ცხრ.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s ცხრ. %2$d წაუკითხავი ერთეული. </item>
+    <item quantity="other"> %1$s ცხრ. %2$d წაუკითხავი ერთეული. </item>
+  </plurals>
+  <string name="description_search_video_call">ვიდეოზარი</string>
+  <string name="description_search_call_and_share">გაზიარება და დარეკვა</string>
 </resources>

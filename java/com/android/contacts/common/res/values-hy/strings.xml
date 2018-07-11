@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Տեքսը պատճենված է"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Զանգել <xliff:g id="CUSTOM">%s</xliff:g> համարին"</string>
-    <string name="call_home" msgid="125893483593803791">"Զանգել տուն"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Զանգել շարժականին"</string>
-    <string name="call_work" msgid="6040550697395300892">"Զանգել աշխաատավայր"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Զանգել աշխատավայրի ֆաքսին"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Զանգել տան ֆաքսին"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Զանգել փեյջերին"</string>
-    <string name="call_other" msgid="5536385588712587235">"Զանգել"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Հետզանգել"</string>
-    <string name="call_car" msgid="3197417098027764954">"Զանգել մեքենայի հեռախոսահամարին"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Զանգել ընկերության հիմնական համարին"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Զանգել ISDN համարին"</string>
-    <string name="call_main" msgid="3293707608770407814">"Զանգել հիմնական համարին"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Զանգել ֆաքսին"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Զանգել ռադիո համարին"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Զանգել տելեքս համարին"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Զանգել TTY/TDD համարին"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Զանգել աշխատավայրի բջջայինին"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Զանգել աշխատավայրի փեյջերին"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Զանգել <xliff:g id="ASSISTANT">%s</xliff:g>-ին"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Զանգել MMS համարին"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Հաղորդագրել <xliff:g id="CUSTOM">%s</xliff:g>-ին"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Հաղորդագրել տուն"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Հաղորդագրել բջջայինին"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Հաղորդագրել աշխատանքայինին"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Հաղորդագրել աշխատանքային ֆաքսի համարին"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Հաղորդագրել տան ֆաքսի համարին"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Հաղորդագրել փեյջերին"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Հաղորդագրել"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Հաղորդագրել հետզանգման համարին"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Հաղորդագրել մեքենայի հեռախոսահամարին"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Հաղորդագրել ընկերության հիմնականին"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Հաղորդագրել ISDN համարին"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Հաղորդագրել հիմնական համարին"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Հաղորդագրել ֆաքսի համարին"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Հաղորդագրել ռադիո համարին"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Հաղորդագրել տելեքս համարին"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Հաղորդագրել TTY/TDD համարին"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Հաղորդագրել աշխատանքային բջջայինին"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Հաղորդագրել աշխատանքային փեյջերին"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Հաղորդագրել <xliff:g id="ASSISTANT">%s</xliff:g>-ին"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Հաղորդագրել MMS համարին"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Մաքրե՞լ հաճախակի հաղորդակցվածները"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Դուք կմաքրեք հաճախակի հաղորդակցվողների ցանկը Կոնտակտներ և Հեռախոս հավելվածներում, և ձեր էլփոստի ծրագիրը զրոյից կսովորի ձեր հասցեագրումների նախընտրությունները:"</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Հաճախակի հաղորդակցումների մաքրում..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Հասանելի"</string>
-    <string name="status_away" msgid="2298688367552893953">"Տեղում չէ"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Զբաղված"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Կոնտակտներ"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Լավագույն առաջարկներ"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Այլ"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Գրացուցակ"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Աշխատանքային գրացուցակ"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Բոլոր կոնտակտները"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Առաջարկներ"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Ես"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Անանուն)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Դիտել կոնտակտը"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Բոլոր հեռախոսահամարներով կոնտատկները"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Աշխատանքային պրոֆիլի կոնտակտներ"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Դիտել թարմացումները"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Միայն սարքում, չհամաժամեցված"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Անուն"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Մականուն"</string>
-    <string name="full_name" msgid="648186563998465740">"Անուն"</string>
-    <string name="name_given" msgid="5096576006314820536">"Անվան"</string>
-    <string name="name_family" msgid="6646235805198547467">"Ազգանվան"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Անվան նախածանց"</string>
-    <string name="name_middle" msgid="703755205331582769">"Հայրանուն"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Անվան վերջնածանց"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Անունը՝ տառադարձված"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Անունը՝ տառադարձված"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Հայրանունը՝ տառադարձված"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Ազգանունը՝ տառադարձված"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Հեռախոս"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Էլփոստ"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Հասցեն"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Կազմակերպություն"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Հարաբերություն"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Հատուկ ամսաթիվ"</string>
-    <string name="sms" msgid="7574344928185328095">"Տեքստային հաղորդագրություն"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Հասցեն"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Ընկերությունը"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Պաշտոն"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Գրառումներ"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Վեբ կայք"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Խմբեր"</string>
-    <string name="email_home" msgid="889830029388962171">"Նամակագրել տուն"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Նամակագրել բջջայինին"</string>
-    <string name="email_work" msgid="4223487303344613528">"Նամակագրել աշխատավայր"</string>
-    <string name="email_other" msgid="4246411900126012062">"Էլփոստ"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Նամակագրել <xliff:g id="CUSTOM">%s</xliff:g>-ին"</string>
-    <string name="email" msgid="2807318537887091606">"Էլփոստ"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Փողոց"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Քաղաքը"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Նահանգը"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Փոստային կոդը"</string>
-    <string name="postal_country" msgid="232670707458768148">"Երկիրը"</string>
-    <string name="map_home" msgid="4181131107392126938">"Դիտել տան հասցեն"</string>
-    <string name="map_work" msgid="5723471185992684400">"Դիտել աշխատավայրի հասցեն"</string>
-    <string name="map_other" msgid="2253764780863500516">"Դիտել հասցեն"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Դիտել <xliff:g id="CUSTOM">%s</xliff:g> հասցեն"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Զրույց AIM-ով"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Զրույց Windows Live-ով"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Զրուցել Yahoo-ով"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Զրույց Skype-ով"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Զրույց QQ-ով"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Զրույց Google Talk-ով"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Զրուցել ICQ-ով"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Զրուցել Jabber-ով"</string>
-    <string name="chat" msgid="1020428260359370236">"Զրույց"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Բոլոր կոնտակտները"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g>-ի կոնտակտները"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Հատուկ տեսքով կոնտակտներ"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Մեկ կոնտակտ"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Դասավորել ըստ"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Անվան"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Ազգանվան"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Անվան ձևաչափ"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Սկզբում՝ անունը"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Սկզբում՝ ազգանունը"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Մաքրել հաճախակիները"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"դադարեցնել որոնումը"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Մաքրել որոնման դաշտը"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Հաշիվ"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Միշտ օգտագործել սա՝ զանգերի համար"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Զանգել հետևյալով"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Գրառումով զանգ"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Մուտքագրեք նշում՝ զանգի հետ ուղարկելու համար ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ՈՒՂԱՐԿԵԼ ԵՎ ԶԱՆԳԵԼ"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> ներդիր:"</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> <xliff:g id="TITLE_2">%1$s</xliff:g> tab. <xliff:g id="COUNT_3">%2$d</xliff:g> unread items. </item>
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ներդիր: <xliff:g id="COUNT_3">%2$d</xliff:g> չընթերցված տարր: </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Տեսազանգ"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Կիսվել և զանգել"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Զանգել %s համարին</string>
+  <string name="call_home">Զանգել տուն</string>
+  <string name="call_mobile">Զանգել շարժականին</string>
+  <string name="call_work">Զանգել աշխաատավայր</string>
+  <string name="call_fax_work">Զանգել աշխատավայրի ֆաքսին</string>
+  <string name="call_fax_home">Զանգել տան ֆաքսին</string>
+  <string name="call_pager">Զանգել փեյջերին</string>
+  <string name="call_other">Զանգել</string>
+  <string name="call_callback">Հետզանգել</string>
+  <string name="call_car">Զանգել մեքենայի հեռախոսահամարին</string>
+  <string name="call_company_main">Զանգել ընկերության հիմնական համարին</string>
+  <string name="call_isdn">Զանգել ISDN համարին</string>
+  <string name="call_main">Զանգել հիմնական համարին</string>
+  <string name="call_other_fax">Զանգել ֆաքսին</string>
+  <string name="call_radio">Զանգել ռադիո համարին</string>
+  <string name="call_telex">Զանգել տելեքս համարին</string>
+  <string name="call_tty_tdd">Զանգել TTY/TDD համարին</string>
+  <string name="call_work_mobile">Զանգել աշխատավայրի բջջայինին</string>
+  <string name="call_work_pager">Զանգել աշխատավայրի փեյջերին</string>
+  <string name="call_assistant">Զանգել %s-ին</string>
+  <string name="call_mms">Զանգել MMS համարին</string>
+  <string name="sms_custom">Հաղորդագրել %s-ին</string>
+  <string name="sms_home">Հաղորդագրել տուն</string>
+  <string name="sms_mobile">Հաղորդագրել բջջայինին</string>
+  <string name="sms_work">Հաղորդագրել աշխատանքայինին</string>
+  <string name="sms_fax_work">Հաղորդագրել աշխատանքային ֆաքսի համարին</string>
+  <string name="sms_fax_home">Հաղորդագրել տան ֆաքսի համարին</string>
+  <string name="sms_pager">Հաղորդագրել փեյջերին</string>
+  <string name="sms_other">Հաղորդագրել</string>
+  <string name="sms_callback">Հաղորդագրել հետզանգման համարին</string>
+  <string name="sms_car">Հաղորդագրել մեքենայի հեռախոսահամարին</string>
+  <string name="sms_company_main">Հաղորդագրել ընկերության հիմնականին</string>
+  <string name="sms_isdn">Հաղորդագրել ISDN համարին</string>
+  <string name="sms_main">Հաղորդագրել հիմնական համարին</string>
+  <string name="sms_other_fax">Հաղորդագրել ֆաքսի համարին</string>
+  <string name="sms_radio">Հաղորդագրել ռադիո համարին</string>
+  <string name="sms_telex">Հաղորդագրել տելեքս համարին</string>
+  <string name="sms_tty_tdd">Հաղորդագրել TTY/TDD համարին</string>
+  <string name="sms_work_mobile">Հաղորդագրել աշխատանքային բջջայինին</string>
+  <string name="sms_work_pager">Հաղորդագրել աշխատանքային փեյջերին</string>
+  <string name="sms_assistant">Հաղորդագրել %s-ին</string>
+  <string name="sms_mms">Հաղորդագրել MMS համարին</string>
+  <string name="clearFrequentsConfirmation_title">Մաքրե՞լ հաճախակի հաղորդակցվածները</string>
+  <string name="clearFrequentsConfirmation">Դուք կմաքրեք հաճախակի հաղորդակցվողների ցանկը Կոնտակտներ և Հեռախոս հավելվածներում, և ձեր էլփոստի ծրագիրը զրոյից կսովորի ձեր հասցեագրումների նախընտրությունները:</string>
+  <string name="clearFrequentsProgress_title">Հաճախակի հաղորդակցումների մաքրում...</string>
+  <string name="status_available">Հասանելի</string>
+  <string name="status_away">Տեղում չէ</string>
+  <string name="status_busy">Զբաղված</string>
+  <string name="contactsList">Կոնտակտներ</string>
+  <string name="contact_suggestions">Լավագույն առաջարկներ</string>
+  <string name="local_invisible_directory">Այլ</string>
+  <string name="directory_search_label">Գրացուցակ</string>
+  <string name="directory_search_label_work">Աշխատանքային գրացուցակ</string>
+  <string name="local_search_label">Բոլոր կոնտակտները</string>
+  <string name="local_suggestions_search_label">Առաջարկներ</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ես</string>
+  <string name="missing_name">(Անանուն)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Դիտել կոնտակտը</string>
+  <string name="list_filter_phones">Բոլոր հեռախոսահամարներով կոնտատկները</string>
+  <string name="list_filter_phones_work">Աշխատանքային պրոֆիլի կոնտակտներ</string>
+  <string name="view_updates_from_group">Դիտել թարմացումները</string>
+  <string name="account_phone">Միայն սարքում, չհամաժամեցված</string>
+  <string name="nameLabelsGroup">Անուն</string>
+  <string name="nicknameLabelsGroup">Մականուն</string>
+  <string name="full_name">Անուն</string>
+  <string name="name_given">Անվան</string>
+  <string name="name_family">Ազգանվան</string>
+  <string name="name_prefix">Անվան նախածանց</string>
+  <string name="name_middle">Հայրանուն</string>
+  <string name="name_suffix">Անվան վերջնածանց</string>
+  <string name="name_phonetic">Անունը՝ տառադարձված</string>
+  <string name="name_phonetic_given">Անունը՝ տառադարձված</string>
+  <string name="name_phonetic_middle">Հայրանունը՝ տառադարձված</string>
+  <string name="name_phonetic_family">Ազգանունը՝ տառադարձված</string>
+  <string name="phoneLabelsGroup">Հեռախոս</string>
+  <string name="emailLabelsGroup">Էլփոստ</string>
+  <string name="postalLabelsGroup">Հասցեն</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Կազմակերպություն</string>
+  <string name="relationLabelsGroup">Հարաբերություն</string>
+  <string name="eventLabelsGroup">Հատուկ ամսաթիվ</string>
+  <string name="sms">Տեքստային հաղորդագրություն</string>
+  <string name="postal_address">Հասցեն</string>
+  <string name="ghostData_company">Ընկերությունը</string>
+  <string name="ghostData_title">Պաշտոն</string>
+  <string name="label_notes">Գրառումներ</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Վեբ կայք</string>
+  <string name="groupsLabel">Խմբեր</string>
+  <string name="email_home">Նամակագրել տուն</string>
+  <string name="email_mobile">Նամակագրել բջջայինին</string>
+  <string name="email_work">Նամակագրել աշխատավայր</string>
+  <string name="email_other">Էլփոստ</string>
+  <string name="email_custom">Նամակագրել %s-ին</string>
+  <string name="email">Էլփոստ</string>
+  <string name="postal_street">Փողոց</string>
+  <string name="postal_city">Քաղաքը</string>
+  <string name="postal_region">Նահանգը</string>
+  <string name="postal_postcode">Փոստային կոդը</string>
+  <string name="postal_country">Երկիրը</string>
+  <string name="map_home">Դիտել տան հասցեն</string>
+  <string name="map_work">Դիտել աշխատավայրի հասցեն</string>
+  <string name="map_other">Դիտել հասցեն</string>
+  <string name="map_custom">Դիտել %s հասցեն</string>
+  <string name="chat_aim">Զրույց AIM-ով</string>
+  <string name="chat_msn">Զրույց Windows Live-ով</string>
+  <string name="chat_yahoo">Զրուցել Yahoo-ով</string>
+  <string name="chat_skype">Զրույց Skype-ով</string>
+  <string name="chat_qq">Զրույց QQ-ով</string>
+  <string name="chat_gtalk">Զրույց Google Talk-ով</string>
+  <string name="chat_icq">Զրուցել ICQ-ով</string>
+  <string name="chat_jabber">Զրուցել Jabber-ով</string>
+  <string name="chat">Զրույց</string>
+  <string name="list_filter_all_accounts">Բոլոր կոնտակտները</string>
+  <string name="listAllContactsInAccount">%s-ի կոնտակտները</string>
+  <string name="listCustomView">Հատուկ տեսքով կոնտակտներ</string>
+  <string name="listSingleContact">Մեկ կոնտակտ</string>
+  <string name="display_options_sort_list_by">Դասավորել ըստ</string>
+  <string name="display_options_sort_by_given_name">Անվան</string>
+  <string name="display_options_sort_by_family_name">Ազգանվան</string>
+  <string name="display_options_view_names_as">Անվան ձևաչափ</string>
+  <string name="display_options_view_given_name_first">Սկզբում՝ անունը</string>
+  <string name="display_options_view_family_name_first">Սկզբում՝ ազգանունը</string>
+  <string name="menu_clear_frequents">Մաքրել հաճախակիները</string>
+  <string name="action_menu_back_from_search">դադարեցնել որոնումը</string>
+  <string name="description_clear_search">Մաքրել որոնման դաշտը</string>
+  <string name="select_account_dialog_title">Հաշիվ</string>
+  <string name="set_default_account">Միշտ օգտագործել սա՝ զանգերի համար</string>
+  <string name="select_phone_account_for_calls">Ընտրեք, թե որ SIM քարտով զանգել</string>
+  <string name="select_phone_account_for_calls_remember">Հիշել այս ընտրությունը</string>
+  <string name="call_with_a_note">Գրառումով զանգ</string>
+  <string name="call_subject_hint">Մուտքագրեք նշում՝ զանգի հետ ուղարկելու համար ...</string>
+  <string name="send_and_call_button">ՈՒՂԱՐԿԵԼ ԵՎ ԶԱՆԳԵԼ</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s ներդիր:</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s tab. %2$d unread items. </item>
+    <item quantity="other"> %1$s ներդիր: %2$d չկարդացված տարր: </item>
+  </plurals>
+  <string name="description_search_video_call">Տեսազանգ</string>
+  <string name="description_search_call_and_share">Կիսվել և զանգել</string>
 </resources>

@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"คัดลอกข้อความแล้ว"</string>
-    <string name="call_custom" msgid="3041673234638990874">"โทรหา <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"โทรเข้าบ้าน"</string>
-    <string name="call_mobile" msgid="967589404494150813">"โทรเข้ามือถือ"</string>
-    <string name="call_work" msgid="6040550697395300892">"โทรหาที่ทำงาน"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"โทรหาแฟกซ์ที่ทำงาน"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"โทรเข้าหมายเลขแฟกซ์ที่บ้าน"</string>
-    <string name="call_pager" msgid="6814149227741274161">"โทรหาเพจเจอร์"</string>
-    <string name="call_other" msgid="5536385588712587235">"โทร"</string>
-    <string name="call_callback" msgid="6314019862718112786">"โทรหาหมายเลขติดต่อกลับ"</string>
-    <string name="call_car" msgid="3197417098027764954">"โทรเข้าโทรศัพท์ในรถ"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"โทรหาโทรศัพท์หลักของบริษัท"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"โทรหา ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"โทรเข้าโทรศัพท์หลัก"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"โทรเข้าหมายเลขแฟกซ์"</string>
-    <string name="call_radio" msgid="8942441419845057942">"โทรเข้าวิทยุ"</string>
-    <string name="call_telex" msgid="2031514461660668351">"โทรเข้าหมายเลขเทเล็กซ์"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"โทรหา TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"โทรเข้ามือถือที่ทำงาน"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"โทรเข้าเพจเจอร์ที่ทำงาน"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"โทรหา <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"โทรหา MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"ส่งข้อความถึง <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ส่งข้อความเข้าโทรศัพท์บ้าน"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"ส่งข้อความเข้ามือถือ"</string>
-    <string name="sms_work" msgid="4158595439553450966">"ส่งข้อความถึงโทรศัพท์ที่ทำงาน"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"ส่งข้อความถึงแฟกซ์ที่ทำงาน"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ส่งข้อความเข้าหมายเลขแฟกซ์บ้าน"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ส่งข้อความถึงเพจเจอร์"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ข้อความ"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ส่งข้อความถึงหมายเลขติดต่อกลับ"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ส่งข้อความถึงรถยนต์"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ส่งข้อความเข้าโทรศัพท์หลักของบริษัท"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ส่งข้อความถึง ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"ส่งข้อความถึงโทรศัพท์หลัก"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ส่งข้อความถึงหมายเลขแฟกซ์"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ส่งข้อความถึงวิทยุ"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ส่งข้อความถึงเทเล็กซ์"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"ส่งข้อความถึง TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"ส่งข้อความถึงโทรศัพท์มือถือที่ทำงาน"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"ส่งข้อความเข้าเพจเจอร์ที่ทำงาน"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"ส่งข้อความถึง <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"ส่งข้อความถึง MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"ล้างรายชื่อที่ติดต่อบ่อยไหม"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"คุณจะล้างรายชื่อของผู้ที่ติดต่อด้วยบ่อยๆ ในแอปพลิเคชัน Contacts  และ Phone และบังคับให้แอปพลิเคชันอีเมลเรียนรู้ค่ากำหนดที่อยู่ของคุณใหม่ตั้งแต่ต้น"</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"กำลังล้างรายชื่อที่ติดต่อบ่อย…"</string>
-    <string name="status_available" msgid="2648156525685472626">"พร้อมใช้งาน"</string>
-    <string name="status_away" msgid="2298688367552893953">"ไม่อยู่"</string>
-    <string name="status_busy" msgid="5990832098713248503">"ไม่ว่าง"</string>
-    <string name="contactsList" msgid="8806067891419291513">"รายชื่อติดต่อ"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"รายการแนะนำยอดนิยม"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"อื่นๆ"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"ไดเรกทอรี"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"ไดเรกทอรีที่ทำงาน"</string>
-    <string name="local_search_label" msgid="907622822323119235">"รายชื่อติดต่อทั้งหมด"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"รายการแนะนำ"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ฉัน"</string>
-    <string name="missing_name" msgid="978606963362745020">"(ไม่มีชื่อ)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"ดูผู้ติดต่อ"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"รายชื่อติดต่อทั้งหมดที่มีหมายเลขโทรศัพท์"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"รายชื่อติดต่อในโปรไฟล์งาน"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"ดูการอัปเดต"</string>
-    <string name="account_phone" msgid="7067809073194061035">"อุปกรณ์เท่านั้น ไม่ซิงค์"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"ชื่อ"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"ชื่อเล่น"</string>
-    <string name="full_name" msgid="648186563998465740">"ชื่อ"</string>
-    <string name="name_given" msgid="5096576006314820536">"ชื่อ"</string>
-    <string name="name_family" msgid="6646235805198547467">"นามสกุล"</string>
-    <string name="name_prefix" msgid="9215326539658838">"คำนำหน้าชื่อ"</string>
-    <string name="name_middle" msgid="703755205331582769">"ชื่อกลาง"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"คำต่อท้ายชื่อ"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"คำอ่านชื่อ"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"การออกเสียงชื่อ"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"ชื่อกลางแบบออกเสียง"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"การออกเสียงนามสกุล"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"โทรศัพท์"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"อีเมล"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"ที่อยู่"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"องค์กร"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"ความเกี่ยวข้อง"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"วันที่พิเศษ"</string>
-    <string name="sms" msgid="7574344928185328095">"ข้อความ"</string>
-    <string name="postal_address" msgid="1804707930129674200">"ที่อยู่"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"บริษัท"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"ชื่อ"</string>
-    <string name="label_notes" msgid="2050255313694219786">"บันทึก"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"เว็บไซต์"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"กลุ่ม"</string>
-    <string name="email_home" msgid="889830029388962171">"ส่งไปที่อีเมลส่วนตัว"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"ส่งอีเมลเข้ามือถือ"</string>
-    <string name="email_work" msgid="4223487303344613528">"ส่งอีเมลถึงที่ทำงาน"</string>
-    <string name="email_other" msgid="4246411900126012062">"อีเมล"</string>
-    <string name="email_custom" msgid="7246580894327511013">"ส่งอีเมลถึง <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"อีเมล"</string>
-    <string name="postal_street" msgid="6918171741240802474">"ถนน"</string>
-    <string name="postal_city" msgid="8674569121430005628">"เมือง"</string>
-    <string name="postal_region" msgid="1730369286225469192">"รัฐ"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"รหัสไปรษณีย์"</string>
-    <string name="postal_country" msgid="232670707458768148">"ประเทศ"</string>
-    <string name="map_home" msgid="4181131107392126938">"ดูที่อยู่บ้าน"</string>
-    <string name="map_work" msgid="5723471185992684400">"ดูที่อยู่ที่ทำงาน"</string>
-    <string name="map_other" msgid="2253764780863500516">"ดูที่อยู่"</string>
-    <string name="map_custom" msgid="5581743097882436157">"ดูที่อยู่ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"แชทโดยใช้ AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"แชทโดยใช้ Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"แชทโดยใช้ Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"แชทโดยใช้ Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"แชทโดยใช้ QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"แชทโดยใช้ Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"แชทโดยใช้ ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"แชทโดยใช้ Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"แชท"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"รายชื่อติดต่อทั้งหมด"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"รายชื่อติดต่อใน <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"รายชื่อติดต่อในมุมมองที่กำหนดเอง"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"รายชื่อติดต่อเดียว"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"จัดเรียงตาม"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"ชื่อ"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"นามสกุล"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"รูปแบบชื่อ"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"ชื่อขึ้นก่อน"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"นามสกุลขึ้นก่อน"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"ล้างรายชื่อที่ติดต่อบ่อย"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"หยุดการค้นหา"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"ล้างการค้นหา"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"บัญชี"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"ใช้ในการโทรทุกครั้ง"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"โทรด้วย"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"โทรพร้อมโน้ต"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"พิมพ์โน้ตเพื่อส่งพร้อมการโทร ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ส่งและโทร"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"แท็บ <xliff:g id="TITLE">%1$s</xliff:g>"</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> แท็บ <xliff:g id="TITLE_2">%1$s</xliff:g> ยังไม่อ่าน <xliff:g id="COUNT_3">%2$d</xliff:g> รายการ </item>
-      <item quantity="one"> แท็บ <xliff:g id="TITLE_0">%1$s</xliff:g> ยังไม่อ่าน <xliff:g id="COUNT_1">%2$d</xliff:g> รายการ </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"แฮงเอาท์วิดีโอ"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"แชร์และโทร"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">โทรหา %s</string>
+  <string name="call_home">โทรเข้าบ้าน</string>
+  <string name="call_mobile">โทรเข้ามือถือ</string>
+  <string name="call_work">โทรหาที่ทำงาน</string>
+  <string name="call_fax_work">โทรหาแฟกซ์ที่ทำงาน</string>
+  <string name="call_fax_home">โทรเข้าหมายเลขแฟกซ์ที่บ้าน</string>
+  <string name="call_pager">โทรหาเพจเจอร์</string>
+  <string name="call_other">โทร</string>
+  <string name="call_callback">โทรหาหมายเลขติดต่อกลับ</string>
+  <string name="call_car">โทรเข้าโทรศัพท์ในรถ</string>
+  <string name="call_company_main">โทรหาโทรศัพท์หลักของบริษัท</string>
+  <string name="call_isdn">โทรหา ISDN</string>
+  <string name="call_main">โทรเข้าโทรศัพท์หลัก</string>
+  <string name="call_other_fax">โทรเข้าหมายเลขแฟกซ์</string>
+  <string name="call_radio">โทรเข้าวิทยุ</string>
+  <string name="call_telex">โทรเข้าหมายเลขเทเล็กซ์</string>
+  <string name="call_tty_tdd">โทรหา TTY/TDD</string>
+  <string name="call_work_mobile">โทรเข้ามือถือที่ทำงาน</string>
+  <string name="call_work_pager">โทรเข้าเพจเจอร์ที่ทำงาน</string>
+  <string name="call_assistant">โทรหา %s</string>
+  <string name="call_mms">โทรหา MMS</string>
+  <string name="sms_custom">ส่งข้อความถึง %s</string>
+  <string name="sms_home">ส่งข้อความเข้าโทรศัพท์บ้าน</string>
+  <string name="sms_mobile">ส่งข้อความเข้ามือถือ</string>
+  <string name="sms_work">ส่งข้อความถึงโทรศัพท์ที่ทำงาน</string>
+  <string name="sms_fax_work">ส่งข้อความถึงแฟกซ์ที่ทำงาน</string>
+  <string name="sms_fax_home">ส่งข้อความเข้าหมายเลขแฟกซ์บ้าน</string>
+  <string name="sms_pager">ส่งข้อความถึงเพจเจอร์</string>
+  <string name="sms_other">ส่งข้อความ</string>
+  <string name="sms_callback">ส่งข้อความถึงหมายเลขติดต่อกลับ</string>
+  <string name="sms_car">ส่งข้อความถึงรถยนต์</string>
+  <string name="sms_company_main">ส่งข้อความเข้าโทรศัพท์หลักของบริษัท</string>
+  <string name="sms_isdn">ส่งข้อความถึง ISDN</string>
+  <string name="sms_main">ส่งข้อความถึงโทรศัพท์หลัก</string>
+  <string name="sms_other_fax">ส่งข้อความถึงหมายเลขแฟกซ์</string>
+  <string name="sms_radio">ส่งข้อความถึงวิทยุ</string>
+  <string name="sms_telex">ส่งข้อความถึงเทเล็กซ์</string>
+  <string name="sms_tty_tdd">ส่งข้อความถึง TTY/TDD</string>
+  <string name="sms_work_mobile">ส่งข้อความถึงโทรศัพท์มือถือที่ทำงาน</string>
+  <string name="sms_work_pager">ส่งข้อความเข้าเพจเจอร์ที่ทำงาน</string>
+  <string name="sms_assistant">ส่งข้อความถึง %s</string>
+  <string name="sms_mms">ส่งข้อความถึง MMS</string>
+  <string name="clearFrequentsConfirmation_title">ล้างรายชื่อที่ติดต่อบ่อยไหม</string>
+  <string name="clearFrequentsConfirmation">คุณจะล้างรายชื่อของผู้ที่ติดต่อด้วยบ่อยๆ ในแอปพลิเคชัน Contacts  และ Phone และบังคับให้แอปพลิเคชันอีเมลเรียนรู้ค่ากำหนดที่อยู่ของคุณใหม่ตั้งแต่ต้น</string>
+  <string name="clearFrequentsProgress_title">กำลังล้างรายชื่อที่ติดต่อบ่อย…</string>
+  <string name="status_available">พร้อมใช้งาน</string>
+  <string name="status_away">ไม่อยู่</string>
+  <string name="status_busy">ไม่ว่าง</string>
+  <string name="contactsList">รายชื่อติดต่อ</string>
+  <string name="contact_suggestions">รายการแนะนำยอดนิยม</string>
+  <string name="local_invisible_directory">อื่นๆ</string>
+  <string name="directory_search_label">ไดเรกทอรี</string>
+  <string name="directory_search_label_work">ไดเรกทอรีที่ทำงาน</string>
+  <string name="local_search_label">รายชื่อติดต่อทั้งหมด</string>
+  <string name="local_suggestions_search_label">รายการแนะนำ</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ฉัน</string>
+  <string name="missing_name">(ไม่มีชื่อ)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">ดูผู้ติดต่อ</string>
+  <string name="list_filter_phones">รายชื่อติดต่อทั้งหมดที่มีหมายเลขโทรศัพท์</string>
+  <string name="list_filter_phones_work">รายชื่อติดต่อในโปรไฟล์งาน</string>
+  <string name="view_updates_from_group">ดูการอัปเดต</string>
+  <string name="account_phone">อุปกรณ์เท่านั้น ไม่ซิงค์</string>
+  <string name="nameLabelsGroup">ชื่อ</string>
+  <string name="nicknameLabelsGroup">ชื่อเล่น</string>
+  <string name="full_name">ชื่อ</string>
+  <string name="name_given">ชื่อ</string>
+  <string name="name_family">นามสกุล</string>
+  <string name="name_prefix">คำนำหน้าชื่อ</string>
+  <string name="name_middle">ชื่อกลาง</string>
+  <string name="name_suffix">คำต่อท้ายชื่อ</string>
+  <string name="name_phonetic">คำอ่านชื่อ</string>
+  <string name="name_phonetic_given">การออกเสียงชื่อ</string>
+  <string name="name_phonetic_middle">ชื่อกลางแบบออกเสียง</string>
+  <string name="name_phonetic_family">การออกเสียงนามสกุล</string>
+  <string name="phoneLabelsGroup">โทรศัพท์</string>
+  <string name="emailLabelsGroup">อีเมล</string>
+  <string name="postalLabelsGroup">ที่อยู่</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">องค์กร</string>
+  <string name="relationLabelsGroup">ความเกี่ยวข้อง</string>
+  <string name="eventLabelsGroup">วันที่พิเศษ</string>
+  <string name="sms">ข้อความ</string>
+  <string name="postal_address">ที่อยู่</string>
+  <string name="ghostData_company">บริษัท</string>
+  <string name="ghostData_title">ชื่อ</string>
+  <string name="label_notes">บันทึก</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">เว็บไซต์</string>
+  <string name="groupsLabel">กลุ่ม</string>
+  <string name="email_home">ส่งไปที่อีเมลส่วนตัว</string>
+  <string name="email_mobile">ส่งอีเมลเข้ามือถือ</string>
+  <string name="email_work">ส่งอีเมลถึงที่ทำงาน</string>
+  <string name="email_other">ส่งอีเมล</string>
+  <string name="email_custom">ส่งอีเมลถึง %s</string>
+  <string name="email">ส่งอีเมล</string>
+  <string name="postal_street">ถนน</string>
+  <string name="postal_city">เมือง</string>
+  <string name="postal_region">รัฐ</string>
+  <string name="postal_postcode">รหัสไปรษณีย์</string>
+  <string name="postal_country">ประเทศ</string>
+  <string name="map_home">ดูที่อยู่บ้าน</string>
+  <string name="map_work">ดูที่อยู่ที่ทำงาน</string>
+  <string name="map_other">ดูที่อยู่</string>
+  <string name="map_custom">ดูที่อยู่ %s</string>
+  <string name="chat_aim">แชทโดยใช้ AIM</string>
+  <string name="chat_msn">แชทโดยใช้ Windows Live</string>
+  <string name="chat_yahoo">แชทโดยใช้ Yahoo</string>
+  <string name="chat_skype">แชทโดยใช้ Skype</string>
+  <string name="chat_qq">แชทโดยใช้ QQ</string>
+  <string name="chat_gtalk">แชทโดยใช้ Google Talk</string>
+  <string name="chat_icq">แชทโดยใช้ ICQ</string>
+  <string name="chat_jabber">แชทโดยใช้ Jabber</string>
+  <string name="chat">แชท</string>
+  <string name="list_filter_all_accounts">รายชื่อติดต่อทั้งหมด</string>
+  <string name="listAllContactsInAccount">รายชื่อติดต่อใน %s</string>
+  <string name="listCustomView">รายชื่อติดต่อในมุมมองที่กำหนดเอง</string>
+  <string name="listSingleContact">รายชื่อติดต่อเดียว</string>
+  <string name="display_options_sort_list_by">จัดเรียงตาม</string>
+  <string name="display_options_sort_by_given_name">ชื่อ</string>
+  <string name="display_options_sort_by_family_name">นามสกุล</string>
+  <string name="display_options_view_names_as">รูปแบบชื่อ</string>
+  <string name="display_options_view_given_name_first">ชื่อขึ้นก่อน</string>
+  <string name="display_options_view_family_name_first">นามสกุลขึ้นก่อน</string>
+  <string name="menu_clear_frequents">ล้างรายชื่อที่ติดต่อบ่อย</string>
+  <string name="action_menu_back_from_search">หยุดการค้นหา</string>
+  <string name="description_clear_search">ล้างการค้นหา</string>
+  <string name="select_account_dialog_title">บัญชี</string>
+  <string name="set_default_account">ใช้ในการโทรทุกครั้ง</string>
+  <string name="select_phone_account_for_calls">เลือกซิมสำหรับการโทรนี้</string>
+  <string name="select_phone_account_for_calls_remember">จำตัวเลือกนี้</string>
+  <string name="call_with_a_note">โทรพร้อมโน้ต</string>
+  <string name="call_subject_hint">พิมพ์โน้ตเพื่อส่งพร้อมการโทร ...</string>
+  <string name="send_and_call_button">ส่งและโทร</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">แท็บ %1$s</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> แท็บ %1$s ยังไม่อ่าน %2$d รายการ </item>
+    <item quantity="other"> แท็บ %1$s ยังไม่อ่าน %2$d รายการ </item>
+  </plurals>
+  <string name="description_search_video_call"> Hangouts วิดีโอ</string>
+  <string name="description_search_call_and_share">แชร์และโทร</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">전화번호 도우미</string>
+  <string name="assisted_dialing_setting_summary">해외여행 중 전화를 걸면 국가 코드를 예측하여 추가</string>
+  <string name="assisted_dialing_setting_cc_default_summary">자동으로 감지 • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">자동으로 감지</string>
+  <string name="assisted_dialing_setting_cc_category_title">국가</string>
+  <string name="assisted_dialing_setting_cc_title">기본 국가</string>
+</resources>

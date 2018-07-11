@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Pemesejan teks masa nyata dalam panggilan</string>
+  <string name="rtt_promotion_details">RTT membantu pemanggil yang pekak, pekak labang, mengalami kesukaran bertutur atau memerlukan ciri selain suara. Transkrip pemesejan RTT disimpan pada peranti anda dalam sejarah panggilan. %1$s</string>
+  <string name="duo_disclosure_title">Buat panggilan video dengan Duo</string>
+  <string name="duo_disclosure_details">Panggilan video Google Duo membolehkan anda bersembang dengan rakan dan keluarga secara bersemuka. Caj data mungkin dikenakan. %1$s</string>
+</resources>

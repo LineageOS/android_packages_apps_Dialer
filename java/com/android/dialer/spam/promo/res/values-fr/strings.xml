@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtrer tous les appels potentiellement indésirables ?</string>
+  <string name="spam_blocking_promo_text">Vous ne serez plus dérangé par des appels similaires à celui que vous venez de bloquer.</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrer le spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Ignorer</string>
+  <string name="spam_blocking_setting_prompt">Paramètres</string>
+  <string name="spam_blocking_settings_enable_error_text">Problème lors de l\'activation du fitre antispam</string>
+  <string name="spam_blocking_settings_disable_error_text">Problème lors de la désactivation du filtre antispam</string>
+  <string name="spam_blocking_settings_enable_complete_text">Le filtre antispam est activé</string>
+  <string name="spam_blocking_settings_disable_complete_text">Le filtre antispam est désactivé</string>
+</resources>

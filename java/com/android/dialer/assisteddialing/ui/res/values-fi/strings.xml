@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Avustettu soittaminen</string>
+  <string name="assisted_dialing_setting_summary">Etsi ja lisää maakoodi ulkomailta soitettavia puheluita varten</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Havaittu automaattisesti • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Havaittu automaattisesti</string>
+  <string name="assisted_dialing_setting_cc_category_title">Kotimaa</string>
+  <string name="assisted_dialing_setting_cc_title">Oletuskotimaa</string>
+</resources>

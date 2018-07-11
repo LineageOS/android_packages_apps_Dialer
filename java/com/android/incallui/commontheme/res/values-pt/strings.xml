@@ -1,36 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_content_description_end_call" msgid="8232796487777787200">"Encerrar chamada"</string>
-    <string name="incall_content_description_muted" msgid="2130133443150389474">"Som desativado"</string>
-    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"Som ativado"</string>
-    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"Trocar chamadas"</string>
-    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"Mesclar chamadas"</string>
-    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"Minifone do aparelho"</string>
-    <string name="incall_content_description_speaker" msgid="7837829930201265549">"Alto-falante"</string>
-    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"Bluetooth"</string>
-    <string name="incall_content_description_headset" msgid="3170439802944346719">"Fone de ouvido com fio"</string>
-    <string name="incall_content_description_hold" msgid="3335508251734906019">"Colocar chamada em espera"</string>
-    <string name="incall_content_description_unhold" msgid="3862584118869933593">"Retomar chamada"</string>
-    <string name="incall_content_description_video_on" msgid="899266487647420613">"Vídeo ativado"</string>
-    <string name="incall_content_description_video_off" msgid="762985912616707076">"Vídeo desativado"</string>
-    <string name="incall_content_description_swap_video" msgid="297943299827908998">"Trocar vídeo"</string>
-    <string name="incall_label_speaker" msgid="1814254833253409394">"Alto-falante"</string>
-    <string name="incall_label_audio" msgid="5923781170533336820">"Som"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="incall_content_description_end_call">Encerrar chamada</string>
+  <string name="incall_content_description_muted">Som desativado</string>
+  <string name="incall_content_description_unmuted">Som ativado</string>
+  <string name="incall_content_description_swap_calls">Trocar chamadas</string>
+  <string name="incall_content_description_swap_sim">Alterar SIM</string>
+  <string name="incall_content_description_merge_calls">Mesclar chamadas</string>
+  <string name="incall_content_description_earpiece">Minifone do aparelho</string>
+  <string name="incall_content_description_speaker">Alto-falante</string>
+  <string name="incall_content_description_bluetooth">Bluetooth</string>
+  <string name="incall_content_description_headset">Fone de ouvido com fio</string>
+  <string name="incall_content_description_hold">Colocar chamada em espera</string>
+  <string name="incall_content_description_unhold">Retomar chamada</string>
+  <string name="incall_content_description_video_on">Vídeo ativado</string>
+  <string name="incall_content_description_video_off">Vídeo desativado</string>
+  <string name="incall_content_description_swap_video">Trocar vídeo</string>
+  <string name="incall_label_speaker">Alto-falante</string>
+  <string name="incall_label_audio">Som</string>
 </resources>

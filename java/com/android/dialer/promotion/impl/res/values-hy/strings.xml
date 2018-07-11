@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Զանգի ընթացքում հաղորդագրությունների ուղարկում և ստացում</string>
+  <string name="rtt_promotion_details">RTT-ն օգնում է այն բաժանորդներին, ովքեր լսողության և խոսքի
+    դժվարություններ ունեն, կամ ովքեր լոկ ձայնով չեն բավարարվում: RTT հաղորդագրությունների տառադրումները պահվում են ձեր սարքում՝
+    զանգերի պատմության մեջ: %1$s</string>
+  <string name="duo_disclosure_title">Կատարեք տեսազանգեր Duo-ի միջոցով</string>
+  <string name="duo_disclosure_details">Google Duo տեսազանգի ծառայության օգնությամբ կարող եք երես առ երես զրուցել ընկերների և ընտանիքի անդամների հետ: Բջջային ինտերնետի համար կարող է վճար գանձվել: %1$s</string>
+</resources>

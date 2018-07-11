@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Messages texte en temps réel lors d\'un appel</string>
+  <string name="rtt_promotion_details">La fonctionnalité TTR aide les appelants qui sont sourds ou malentendants, qui ont un trouble
+    de la parole ou pour qui la voix ne suffit pas. Les transcriptions sont stockées sur votre appareil,
+    dans l\'historique des appels. %1$s</string>
+  <string name="duo_disclosure_title">Faites des appels vidéo avec Duo</string>
+  <string name="duo_disclosure_details">Les appels vidéo Google Duo vous permettent de clavarder en face à face avec vos proches. Des frais de données peuvent s\'appliquer. %1$s</string>
+</resources>

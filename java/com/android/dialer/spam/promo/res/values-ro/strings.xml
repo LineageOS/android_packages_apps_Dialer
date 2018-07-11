@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtrați apelurile care ar putea fi spam?</string>
+  <string name="spam_blocking_promo_text">Apelurile precum cel pe care tocmai l-ați blocat
+      nu vă vor mai deranja</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrați mesajele spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Închideți</string>
+  <string name="spam_blocking_setting_prompt">Setări</string>
+  <string name="spam_blocking_settings_enable_error_text">Problemă la activarea filtrării spamului</string>
+  <string name="spam_blocking_settings_disable_error_text">Problemă la dezactivarea filtrării spamului</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtrarea apelurilor spam este activată.</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtrarea mesajelor spam este dezactivată.</string>
+</resources>

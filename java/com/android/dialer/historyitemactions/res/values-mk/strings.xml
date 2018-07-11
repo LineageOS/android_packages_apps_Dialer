@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Гласовен повик</string>
+  <string name="video_call">Видеоповик</string>
+  <string name="add_to_contacts">Додајте контакт</string>
+  <string name="send_a_message">Испратете SMS</string>
+  <string name="not_spam">Не е спам</string>
+  <string name="block_number">Блокирајте</string>
+  <string name="unblock_number">Одблокирајте</string>
+  <string name="block_and_optionally_report_spam">Блокирајте/Пријавете спам</string>
+  <string name="copy_number">Копирајте го бројот</string>
+</resources>

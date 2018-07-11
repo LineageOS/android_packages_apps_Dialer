@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">کال میں ریئل ٹائم ٹیکسٹ پیغام رسانی کی سہولت</string>
+  <string name="rtt_promotion_details">‏RTT ایسے کالرز کی مدد کرتا ہے جو بہرے ہیں، اونچا سنتے ہیں، بولنے سے معذور ہیں یا ان کیلئے صرف آواز ہی کافی نہیں ہے۔ RTT پیغام ٹرانسکرپٹس کو آپ کے آلہ پر کال کی سرگزشت میں اسٹور کیا جاتا ہے۔ %1$s</string>
+  <string name="duo_disclosure_title">‏Duo کے ذریعے ویڈیو کال کریں</string>
+  <string name="duo_disclosure_details">‏Google Duo ویڈیو کالنگ کے ذریعے آپ دوستوں اور فیملی کے ساتھ رو برو چیٹ کر سکتے ہیں۔ ڈیٹا چارجز لاگو ہو سکتے ہیں۔ %1$s</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">پیام‌رسانی نوشتار هم‌زمان درحین تماس</string>
+  <string name="rtt_promotion_details">نوشتار هم‌زمان به تماس گیرندگان ناشنوا، دارای مشکل شنوایی، دارای ناتوانی
+    گفتاری یا افرادی که به چیزی بیش از صدا نیاز دارند کمک می‌کند. آوانویسی‌های پیام‌رسانی نوشتار هم‌زمان، در سابقه تماس
+    دستگاهتان ذخیره می‌شوند. %1$s</string>
+  <string name="duo_disclosure_title">‏برقراری تماس ویدیویی با Duo</string>
+  <string name="duo_disclosure_details">‏تماس ویدیویی Google Duo امکان می‌دهد با دوستان و خانواده گپ رودررو داشته باشید. ممکن است هزینه داده اعمال شود. %1$s</string>
+</resources>

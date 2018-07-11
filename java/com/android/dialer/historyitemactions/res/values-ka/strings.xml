@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">ხმოვანი ზარი</string>
+  <string name="video_call">ვიდეოზარი</string>
+  <string name="add_to_contacts">კონტაქტის დამატება</string>
+  <string name="send_a_message">შეტყობინება</string>
+  <string name="not_spam">არ არის სპამი</string>
+  <string name="block_number">დაბლოკვა</string>
+  <string name="unblock_number">განბლოკვა</string>
+  <string name="block_and_optionally_report_spam">დაბლოკვა/სპამ. შესახებ შეტყობ.</string>
+  <string name="copy_number">ნომრის კოპირება</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ការផ្ញើ​សារ​ជា​អក្សរ​​ក្នុង​ពេល​ជាក់ស្ដែង​នៅ​ក្នុង​ការហៅ​ទូរសព្ទ</string>
+  <string name="rtt_promotion_details">RTT ជួយ​អ្នក​ហៅ​ទូរសព្ទ​ដែល​​ថ្លង់ ពិបាក​ក្នុង​ការស្ដាប់ មិន​អាច​និយាយ​បាន
+    ឬ​មាន​តម្រូវការ​ក្រៅ​ពី​​សំឡេង។ ប្រតិចារឹក​ការផ្ញើ​សារ RTT ​បាន​រក្សាទុក​នៅ​លើ​ឧបករណ៍​របស់​អ្នក​
+    នៅ​ក្នុង​ប្រវត្តិ​ហៅ​ទូរសព្ទ។ %1$s</string>
+  <string name="duo_disclosure_title">ហៅ​ជា​វីដេអូ​ជាមួយ Duo</string>
+  <string name="duo_disclosure_details">ការហៅ​ជា​វីដេអូ​តាម Google Duo អាច​ជួយ​អ្នក​ជជែក​ជាមួយ​មិត្តភក្ដិ និង​គ្រួសារ​ដោយ​ផ្ទាល់។ អាច​នឹង​មាន​ការគិតថ្លៃ​ទិន្នន័យ។ %1$s</string>
+</resources>

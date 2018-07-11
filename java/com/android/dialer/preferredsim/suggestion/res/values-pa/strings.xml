@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">ਇੱਕੋ ਕੈਰੀਅਰ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ</string>
+  <string name="pre_call_select_phone_account_hint_frequent">ਹਾਲ ਹੀ ਵਿੱਚ ਵਰਤਿਆ ਗਿਆ</string>
+</resources>

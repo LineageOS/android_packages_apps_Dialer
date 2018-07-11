@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Trimiteți următoarele tonuri?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Da"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Nu"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Se apelează"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Apel în desfășurare"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Apel video în desfășurare"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Apel video în desfășurare ‑ imaginea video oprită"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Apel de serviciu în desfășurare"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> în desfășurare"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Apel primit de la <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Apel Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Apel de serviciu prin Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"În așteptare"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Apel de intrare"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Apel primit cu fotografie"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Apel primit cu mesaj"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Apel primit cu locație"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Apel primit cu fotografie și mesaj"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Apel primit cu fotografie și locație"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Apel primit cu mesaj și locație"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Apel primit cu fotografie, mesaj și locație"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Apel primit cu atașamente"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Apel primit important"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Apel primit important cu fotografie"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Apel primit important cu mesaj"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Apel primit important cu locație"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Apel primit important cu fotografie și mesaj"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Apel primit important cu fotografie și locație"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Apel primit important cu mesaj și locație"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Apel primit important cu poză, mesaj și locație"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Apel primit important cu atașamente"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Apel de serviciu primit"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Un apel primit posibil spam"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Solicitare de trecere la apel video"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Răspundeți"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Încheiați apelul"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Videoclip"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Acceptați"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Respingeți"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Porniți difuzorul"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Opriți difuzorul"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Apel în curs pe alt dispozitiv"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Apel video în curs pe alt dispozitiv"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Preluați apelul"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Preluați apelul video"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Serviciul nu este acceptat."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"trecerea la modul privat"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Gestionați conferința telefonică"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Număr de urgență"</string>
-    <string name="child_number" msgid="3398257437107259682">"pe <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Nu există SIM sau eroare de SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Încheiați apelul"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Teleconferință"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Apel în desfășurare"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Se continuă apelul folosind datele mobile…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Nu s-a putut comuta la rețeaua Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Apelul video continuă prin rețeaua mobilă. Se pot aplica tarife standard pentru date."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Nu mai afișa acest mesaj"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Trimiteți următoarele tonuri?\n</string>
+  <string name="pause_prompt_yes">Da</string>
+  <string name="pause_prompt_no">Nu</string>
+  <string name="notification_dialing">Se apelează</string>
+  <string name="notification_ongoing_call">Apel în desfășurare</string>
+  <string name="notification_ongoing_video_call">Apel video în desfășurare</string>
+  <string name="notification_ongoing_paused_video_call">Apel video în desfășurare ‑ imaginea video oprită</string>
+  <string name="notification_ongoing_work_call">Apel de serviciu în desfășurare</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s în desfășurare</string>
+  <string name="notification_incoming_call_wifi_template">Apel primit de la %1$s</string>
+  <string name="notification_call_wifi_brand">Apel Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">Apel de serviciu prin Wi-Fi</string>
+  <string name="notification_on_hold">În așteptare</string>
+  <string name="notification_incoming_call">Apel de intrare</string>
+  <string name="notification_incoming_video_call">Apel video primit</string>
+  <string name="notification_incoming_call_mutli_sim">Apel primit prin %1$s</string>
+  <string name="notification_incoming_call_with_photo">Apel primit cu fotografie</string>
+  <string name="notification_incoming_call_with_message">Apel primit cu mesaj</string>
+  <string name="notification_incoming_call_with_location">Apel primit cu locație</string>
+  <string name="notification_incoming_call_with_photo_message">Apel primit cu fotografie și mesaj</string>
+  <string name="notification_incoming_call_with_photo_location">Apel primit cu fotografie și locație</string>
+  <string name="notification_incoming_call_with_message_location">Apel primit cu mesaj și locație</string>
+  <string name="notification_incoming_call_with_photo_message_location">Apel primit cu fotografie, mesaj și locație</string>
+  <string name="notification_incoming_call_attachments">Apel primit cu atașamente</string>
+  <string name="important_notification_incoming_call">Apel primit important</string>
+  <string name="important_notification_incoming_call_with_photo">Apel primit important cu fotografie</string>
+  <string name="important_notification_incoming_call_with_message">Apel primit important cu mesaj</string>
+  <string name="important_notification_incoming_call_with_location">Apel primit important cu locație</string>
+  <string name="important_notification_incoming_call_with_photo_message">Apel primit important cu fotografie și mesaj</string>
+  <string name="important_notification_incoming_call_with_photo_location">Apel primit important cu fotografie și locație</string>
+  <string name="important_notification_incoming_call_with_message_location">Apel primit important cu mesaj și locație</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Apel primit important cu poză, mesaj și locație</string>
+  <string name="important_notification_incoming_call_attachments">Apel primit important cu atașamente</string>
+  <string name="notification_incoming_work_call">Apel de serviciu primit</string>
+  <string name="notification_incoming_spam_call">Un apel primit posibil spam</string>
+  <string name="notification_requesting_video_call">Solicitare de trecere la apel video</string>
+  <string name="notification_action_answer">Răspundeți</string>
+  <string name="notification_action_end_call">Încheiați apelul</string>
+  <string name="notification_action_answer_video">Videoclip</string>
+  <string name="notification_action_accept">Acceptați</string>
+  <string name="notification_action_dismiss">Respingeți</string>
+  <string name="notification_action_speaker_on">Porniți difuzorul</string>
+  <string name="notification_action_speaker_off">Opriți difuzorul</string>
+  <string name="notification_external_call">Apel în curs pe alt dispozitiv</string>
+  <string name="notification_external_video_call">Apel video în curs pe alt dispozitiv</string>
+  <string name="notification_take_call">Preluați apelul</string>
+  <string name="notification_take_video_call">Preluați apelul video</string>
+  <string name="incall_error_supp_service_unknown">Serviciul nu este acceptat.</string>
+  <string name="goPrivate">trecerea la modul privat</string>
+  <string name="manageConferenceLabel">Gestionați conferința telefonică</string>
+  <string name="child_number">pe %s</string>
+  <string name="callFailed_simError">Nu există SIM sau eroare de SIM</string>
+  <string name="conference_caller_disconnect_content_description">Încheiați apelul</string>
+  <string name="conference_call_name">Teleconferință</string>
+  <string name="generic_conference_call_name">Apel în desfășurare</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Se continuă apelul folosind datele mobile…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Nu s-a putut comuta la rețeaua Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Apelul video continuă prin rețeaua mobilă. Se pot aplica tarife standard pentru date.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Nu mai afișa acest mesaj</string>
+  <string name="bubble_return_to_call">Înapoi la apel</string>
+  <string name="rtt_request_dialog_title">Vă conectați la apelul TTR?</string>
+  <string name="rtt_request_dialog_details">%1$s vrea să folosească mesajele text în timpul apelului vocal.</string>
+  <string name="rtt_request_dialog_more_information">TTR oferă asistență apelanților fără auz, cu deficiențe de auz, care au dizabilități de vorbire sau care au nevoie de mai mult decât vocea.</string>
+  <string name="rtt_button_decline_request">Nu</string>
+  <string name="rtt_button_accept_request">Conectați-vă la TTR</string>
 </resources>

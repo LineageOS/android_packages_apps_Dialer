@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Blokovat číslo %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Z tohoto čísla už nebudete přijímat hovory ani zprávy SMS.</string>
+  <string name="block_number_ok">BLOKOVAT</string>
+  <string name="unblock_number_ok">ODBLOKOVAT</string>
+  <string name="block_report_number_alert_title">Blokovat číslo %1$s?</string>
+  <string name="block_report_number_alert_details">Z tohoto čísla už nebudete přijímat hovory.</string>
+  <string name="block_number_alert_details">%1$s Hovor bude nahlášen jako spam.</string>
+  <string name="unblock_number_alert_details">Toto číslo bude odblokováno a bude nahlášeno, že se nejedná o spam. Budoucí hovory nebudou označeny jako spam.</string>
+  <string name="unblock_report_number_alert_title">Odblokovat číslo %1$s?</string>
+  <string name="report_not_spam_alert_button">Nahlásit</string>
+  <string name="report_not_spam_alert_title">Nahlásit omyl?</string>
+  <string name="report_not_spam_alert_details">Budoucí hovory z čísla %1$s už nebudou označeny jako spam.</string>
+  <string name="checkbox_report_as_spam_action">Nahlásit hovor jako spam</string>
+  <string name="block_number_failed_toast">Toto číslo se nepodařilo zablokovat</string>
+  <string name="unblock_number_failed_toast">Toto číslo se nepodařilo odblokovat</string>
+</resources>

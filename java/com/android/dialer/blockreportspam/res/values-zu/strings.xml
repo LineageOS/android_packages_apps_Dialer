@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Vimba %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Ngeke usathola amakholi noma imibhalo kusukela kule nombolo.</string>
+  <string name="block_number_ok">VIMBA</string>
+  <string name="unblock_number_ok">VULELA</string>
+  <string name="block_report_number_alert_title">Vimba %1$s?</string>
+  <string name="block_report_number_alert_details">Ngeke usakwazi ukuthola amakholi kusuka kule nombolo.</string>
+  <string name="block_number_alert_details">%1$s Le kholi izobikwa njengogaxekile</string>
+  <string name="unblock_number_alert_details">Le nombolo izovulelwa futhi ibikwe njengokungayena ugaxekile. Amakholi namavoyisimeyili wasesikhathini esizayo ngeke ahlonzwe njengogaxekile.</string>
+  <string name="unblock_report_number_alert_title">Vulela i-%1$s?</string>
+  <string name="report_not_spam_alert_button">Bika</string>
+  <string name="report_not_spam_alert_title">Bika iphutha?</string>
+  <string name="report_not_spam_alert_details">Amakholi wasesikhathini esizayo asuka ku-%1$s ngeke esahlonzwa njengogaxekile.</string>
+  <string name="checkbox_report_as_spam_action">Bika njengogaxekile</string>
+  <string name="block_number_failed_toast">Inkinga ngokuvimbela le nombolo</string>
+  <string name="unblock_number_failed_toast">Inkinga ngokuvulela le nombolo</string>
+</resources>

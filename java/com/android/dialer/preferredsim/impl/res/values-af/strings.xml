@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Kan nie bel sonder foontoestemming nie</string>
+  <string name="pre_call_select_phone_account">Kies SIM vir hierdie oproep</string>
+  <string name="pre_call_select_phone_account_remember">Onthou hierdie keuse</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Nie beskikbaar tydens die gebruik van %1$s nie</string>
+</resources>

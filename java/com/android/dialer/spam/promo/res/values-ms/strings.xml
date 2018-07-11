@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Tapis semua panggilan yang disyaki spam?</string>
+  <string name="spam_blocking_promo_text">Panggilan seperti yang baru sahaja anda sekat tidak akan mengganggu anda lagi</string>
+  <string name="spam_blocking_promo_action_filter_spam">Tapis Spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Ketepikan</string>
+  <string name="spam_blocking_setting_prompt">Tetapan</string>
+  <string name="spam_blocking_settings_enable_error_text">Masalah semasa menghidupkan penapisan spam</string>
+  <string name="spam_blocking_settings_disable_error_text">Masalah semasa mematikan penapisan spam</string>
+  <string name="spam_blocking_settings_enable_complete_text">Penapisan spam dihidupkan</string>
+  <string name="spam_blocking_settings_disable_complete_text">Penapisan spam dimatikan</string>
+</resources>

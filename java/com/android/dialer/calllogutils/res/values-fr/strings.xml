@@ -1,53 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
- ~ Copyright (C) 2017 The Android Open Source Project
- ~
- ~ Licensed under the Apache License, Version 2.0 (the "License");
- ~ you may not use this file except in compliance with the License.
- ~ You may obtain a copy of the License at
- ~
- ~      http://www.apache.org/licenses/LICENSE-2.0
- ~
- ~ Unless required by applicable law or agreed to in writing, software
- ~ distributed under the License is distributed on an "AS IS" BASIS,
- ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- ~ See the License for the specific language governing permissions and
- ~ limitations under the License
-  -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="type_incoming" msgid="5727636795656199810">"Appel entrant"</string>
-    <string name="type_incoming_pulled" msgid="8434723359163965796">"Appel entrant transféré vers un autre appareil"</string>
-    <string name="type_outgoing" msgid="764896746073942963">"Appel sortant"</string>
-    <string name="type_outgoing_pulled" msgid="1648517538371704193">"Appel sortant transféré vers un autre appareil"</string>
-    <string name="type_missed" msgid="2997043831022028176">"Appel manqué"</string>
-    <string name="type_incoming_video" msgid="7507180294202642554">"Appel vidéo entrant"</string>
-    <string name="type_incoming_video_pulled" msgid="7879031598844023977">"Appel vidéo entrant transféré vers un autre appareil"</string>
-    <string name="type_outgoing_video" msgid="309370072333983910">"Appel vidéo sortant"</string>
-    <string name="type_outgoing_video_pulled" msgid="3924450629684331345">"Appel vidéo sortant transféré vers un autre appareil"</string>
-    <string name="type_missed_video" msgid="4350107016317603785">"Appel vidéo manqué"</string>
-    <string name="type_voicemail" msgid="1877524395253846684">"Messagerie vocale"</string>
-    <string name="type_rejected" msgid="5632107438472996198">"Appel refusé"</string>
-    <string name="type_blocked" msgid="9177237294052244929">"Appel bloqué"</string>
-    <string name="call_details_minutes_abbreviation" msgid="7899774555556720560">"min"</string>
-    <string name="call_details_seconds_abbreviation" msgid="5893806826648947126">"s"</string>
-    <string name="a11y_call_duration_format" msgid="2905525933361674470">"<xliff:g id="MINUTES_0">%d</xliff:g> <xliff:g id="MINUTES_TRANSLATION">%s</xliff:g> et <xliff:g id="SECONDS_1">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="a11y_call_duration_short_format" msgid="5908875871251062453">"<xliff:g id="SECONDS_0">%d</xliff:g> <xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>"</string>
-    <string name="call_duration_format_pattern" msgid="7566375153243313914">"<xliff:g id="MINUTES_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="MINUTES_TRANSLATION">%s</xliff:g>\' <xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <string name="call_duration_short_format_pattern" msgid="1713177000235994790">"<xliff:g id="SECONDS_SPECIAL_CHARACTER">%s</xliff:g>\'<xliff:g id="SECONDS_TRANSLATION">%s</xliff:g>\'"</string>
-    <plurals name="a11y_seconds" formatted="false" msgid="6695730844760611970">
-      <item quantity="one">seconde</item>
-      <item quantity="other">secondes</item>
-    </plurals>
-    <plurals name="a11y_minutes" formatted="false" msgid="6377010096698624038">
-      <item quantity="one">minute</item>
-      <item quantity="other">minutes</item>
-    </plurals>
-    <string name="type_answered_elsewhere" msgid="411958582555881640">"Appel pris sur un autre appareil"</string>
-    <string name="description_phone_account" msgid="4382951172691362244">"sur <xliff:g id="PHONEACCOUNT">^1</xliff:g>"</string>
-    <string name="description_via_number" msgid="7682575124846343076">"au <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="description_via_number_phone_account" msgid="4345445677508018830">"sur <xliff:g id="PHONEACCOUNT">%1$s</xliff:g>, au <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="voicemail_string" msgid="6029775151483803006">"Messagerie vocale"</string>
-    <string name="now" msgid="2599778506439006806">"À l\'instant"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">Appel entrant</string>
+  <string name="type_incoming_pulled">Appel entrant transféré vers un autre appareil</string>
+  <string name="type_outgoing">Appel sortant</string>
+  <string name="type_outgoing_pulled">Appel sortant transféré vers un autre appareil</string>
+  <string name="type_missed">Appel manqué</string>
+  <string name="type_incoming_video">Appel vidéo entrant</string>
+  <string name="type_incoming_video_pulled">Appel vidéo entrant transféré vers un autre appareil</string>
+  <string name="type_outgoing_video">Appel vidéo sortant</string>
+  <string name="type_outgoing_video_pulled">Appel vidéo sortant transféré vers un autre appareil</string>
+  <string name="type_missed_video">Appel vidéo manqué</string>
+  <string name="type_voicemail">Messagerie vocale</string>
+  <string name="type_rejected">Appel refusé</string>
+  <string name="type_blocked">Appel bloqué</string>
+  <string name="call_details_minutes_abbreviation">min</string>
+  <string name="call_details_seconds_abbreviation">s</string>
+  <string name="a11y_call_duration_format">%1$d %2$s %3$d %4$s</string>
+  <string name="a11y_call_duration_short_format">%1$d %2$s</string>
+  <string name="call_duration_format_pattern">%1$s\'%2$s\' %3$s\'%4$s\'</string>
+  <string name="call_duration_short_format_pattern">%1$s\'%2$s\'</string>
+  <plurals name="a11y_seconds">
+    <item quantity="one">seconde</item>
+    <item quantity="other">secondes</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="one">minute</item>
+    <item quantity="other">minutes</item>
+  </plurals>
+  <string name="type_answered_elsewhere">Appel pris sur un autre appareil</string>
+  <string name="description_phone_account">sur ^1</string>
+  <string name="description_via_number">au %1$s</string>
+  <string name="description_via_number_phone_account">sur %1$s, au %2$s</string>
+  <string name="voicemail_string">Messagerie vocale</string>
+  <string name="just_now">À l\'instant</string>
+  <string name="new_call_log_carrier_video">Vidéo via l\'opérateur</string>
+  <string name="new_call_log_duo_video">Vidéo Duo</string>
+  <string name="new_call_log_unknown">Numéro inconnu</string>
+  <string name="new_call_log_secondary_blocked">Appels bloqués</string>
+  <string name="new_call_log_secondary_spam">Indésirables</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="one">^1 appel manqué de ^2</item>
+    <item quantity="other">^1 appels manqués de ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="one">^1 appel, le dernier provenait de ^2 et a bien été reçu</item>
+    <item quantity="other">^1 appels, le dernier provenait de ^2 et a bien été reçu</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="one">^1 appel, le dernier est un appel sortant vers ^2</item>
+    <item quantity="other">^1 appels, le dernier est un appel sortant vers ^2</item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="one">^1 appel, le dernier est un appel bloqué de ^2</item>
+    <item quantity="other">^1 appels, le dernier est un appel bloqué de ^2</item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">dans le compte ^1,
+    avec le numéro ^2</string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

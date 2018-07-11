@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Envoi de messages en cours d\'appel avec la fonctionnalité de texte en temps réel</string>
+  <string name="rtt_promotion_details">Le texte en temps réel (RTT) vient en aide aux personnes sourdes, malentendantes, qui ont un trouble de la parole, ou qui ont besoin d\'une transcription en plus de la voix. La transcription des messages RTT est stockée dans l\'historique des appels de votre appareil. %1$s</string>
+  <string name="duo_disclosure_title">Passez des appels vidéo avec Duo</string>
+  <string name="duo_disclosure_details">L\'application d\'appel vidéo Google Duo vous permet de discuter avec vos proches en face à face. Ce service peut occasionner des frais liés à la consommation de données. %1$s</string>
+</resources>

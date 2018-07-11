@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Барлық күдікті спам қоңырауларды сүзу қажет пе?</string>
+  <string name="spam_blocking_promo_text">Осы сияқты бөгелген қоңыраулар енді мазаңызды алмайды</string>
+  <string name="spam_blocking_promo_action_filter_spam">Спам сүзу</string>
+  <string name="spam_blocking_promo_action_dismiss">Жабу</string>
+  <string name="spam_blocking_setting_prompt">Параметрлер</string>
+  <string name="spam_blocking_settings_enable_error_text">Спам сүзгісі қосылмады</string>
+  <string name="spam_blocking_settings_disable_error_text">Спам сүзгісі өшірілмеді</string>
+  <string name="spam_blocking_settings_enable_complete_text">Спам сүзгісі қосылды</string>
+  <string name="spam_blocking_settings_disable_complete_text">Спам сүзгісі өшірілді</string>
+</resources>

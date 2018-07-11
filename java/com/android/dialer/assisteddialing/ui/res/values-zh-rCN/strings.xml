@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">辅助拨号</string>
+  <string name="assisted_dialing_setting_summary">当您在国外的旅途中拨打电话时，预测并添加国家/地区代码。</string>
+  <string name="assisted_dialing_setting_cc_default_summary">自动检测 • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">自动检测</string>
+  <string name="assisted_dialing_setting_cc_category_title">居住国家/地区</string>
+  <string name="assisted_dialing_setting_cc_title">默认居住国家/地区</string>
+</resources>

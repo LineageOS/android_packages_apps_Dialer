@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Tinutulungan na pag-dial</string>
+  <string name="assisted_dialing_setting_summary">Hulaan at magdagdag ng code ng bansa kapag tumatawag ka habang naglalakbay sa ibang bansa</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Awtomatikong nakita • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Awtomatikong nakita</string>
+  <string name="assisted_dialing_setting_cc_category_title">Sariling bansa</string>
+  <string name="assisted_dialing_setting_cc_title">Default na sariling bansa</string>
+</resources>

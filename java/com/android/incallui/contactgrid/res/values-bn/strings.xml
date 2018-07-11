@@ -1,44 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2016 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_calling_via_template" msgid="3416867359475780924">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> এর মাধ্যমে কল করা হচ্ছে"</string>
-    <string name="incall_connecting" msgid="1708280493198276616">"কল করা হচ্ছে…"</string>
-    <string name="incall_transferring" msgid="7909128243635579407">"স্থানান্তর করা হচ্ছে…"</string>
-    <!-- no translation found for incall_video_call_requesting (1560243656749370926) -->
-    <skip />
-    <!-- no translation found for incall_wifi_video_call_requesting (4778821793266688848) -->
-    <skip />
-    <!-- no translation found for incall_video_call_upgrade_request (3225728109481465831) -->
-    <skip />
-    <string name="incall_video_call_request_failed" msgid="5014067473831870379">"সংযোগ করা গেল না"</string>
-    <string name="incall_video_call_request_rejected" msgid="5357441169519503234">"কল অস্বীকার করা হয়েছে"</string>
-    <string name="incall_video_call_request_timed_out" msgid="6804535684856203120">"কলের সময়সীমা শেষ হয়েছে"</string>
-    <string name="incall_hanging_up" msgid="2166116351937190949">"কল নামিয়ে রাখা হচ্ছে"</string>
-    <string name="incall_call_ended" msgid="6294704948774348480">"কল শেষ হয়েছে"</string>
-    <string name="incall_remotely_held" msgid="8561379039177396615">"হোল্ডে রয়েছে"</string>
-    <!-- no translation found for contact_grid_incoming_video_call (5848811480775138601) -->
-    <skip />
-    <!-- no translation found for contact_grid_incoming_wifi_video_call (7478797414642594106) -->
-    <skip />
-    <string name="contact_grid_incoming_voice_call" msgid="7165853925114955346">"এর থেকে আগত কল"</string>
-    <string name="contact_grid_incoming_work_call" msgid="837605505036615004">"এর থেকে আগত কর্মক্ষেত্রের কল"</string>
-    <string name="contact_grid_incoming_via_template" msgid="7747391077955623969">"<xliff:g id="PROVIDER_NAME">%s</xliff:g> এর মাধ্যমে আগত কল"</string>
-    <string name="contact_grid_incoming_suspected_spam" msgid="285365265897630425">"সন্দেহভাজন স্প্যাম কলার"</string>
-    <string name="contact_grid_callback_number" msgid="1284649030313415807">"কলব্যাক নম্বর: <xliff:g id="DARK_NUMBER">%1$s</xliff:g>"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_calling_via_template">%s এর মাধ্যমে কল করা হচ্ছে</string>
+  <string name="incall_calling_on_same_carrier_template">একই পরিষেবা প্রদানকারীর নেটওয়ার্কে কল করা হচ্ছে: %s</string>
+  <string name="incall_calling_on_recent_choice_template">সম্প্রতি বেছে নেওয়া নেটওয়ার্কে কল করা হচ্ছে: %s</string>
+  <string name="incall_connecting">কল করা হচ্ছে…</string>
+  <string name="incall_connecting_assited_dialed">+%1$s (%2$s) দিয়ে কল করা হচ্ছে...</string>
+  <string name="incall_connecting_assited_dialed_component">+%1$s (%2$s) ব্যবহার করা হচ্ছে…</string>
+  <string name="incall_transferring">স্থানান্তর করা হচ্ছে…</string>
+  <string name="incall_video_call_requesting">মোবাইল ডেটা দিয়ে ভিডিও কল করা হচ্ছে…</string>
+  <string name="incall_wifi_video_call_requesting">ওয়াই-ফাই দিয়ে ভিডিও কল করা হচ্ছে…</string>
+  <string name="incall_video_call_upgrade_request">ভয়েস কল থেকে ভিডিও কলে সুইচ করা হচ্ছে…</string>
+  <string name="incall_video_call_request_failed">সংযোগ করা গেল না</string>
+  <string name="incall_video_call_request_rejected">কল অস্বীকার করা হয়েছে</string>
+  <string name="incall_video_call_request_timed_out">কলের সময়সীমা শেষ হয়েছে</string>
+  <string name="incall_hanging_up">কল নামিয়ে রাখা হচ্ছে</string>
+  <string name="incall_call_ended">কল শেষ হয়েছে</string>
+  <string name="incall_remotely_held">হোল্ডে রয়েছে</string>
+  <string name="contact_grid_incoming_video_call">মোবাইল ডেটা দিয়ে এর ভিডিও কল নিন</string>
+  <string name="contact_grid_incoming_wifi_video_call">ওয়াই-ফাই দিয়ে এর ভিডিও কল নিন</string>
+  <string name="contact_grid_incoming_voice_call">এর থেকে আগত কল</string>
+  <string name="contact_grid_incoming_work_call">এর থেকে আগত কর্মক্ষেত্রের কল</string>
+  <string name="contact_grid_incoming_via_template">%s এর মাধ্যমে আগত কল</string>
+  <string name="contact_grid_incoming_suspected_spam">সন্দেহভাজন স্প্যাম কলার</string>
+  <string name="contact_grid_callback_number">এই ফোনের নম্বর: %1$s</string>
 </resources>

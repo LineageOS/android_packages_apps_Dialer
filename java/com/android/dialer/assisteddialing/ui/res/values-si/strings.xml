@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">සහායක ඇමතීම</string>
+  <string name="assisted_dialing_setting_summary">ඔබ පිටරට සංචාරය කරන අතරතුර ඇමතීමේදී රටේ කේතය පුරෝකථනය කරන්න සහ එක් කරන්න</string>
+  <string name="assisted_dialing_setting_cc_default_summary">ස්වයංක්‍රියව අනාවරණය කර ගන්නා ලද • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">ස්වයංක්‍රියව අනාවරණය කර ගන්නා ලද</string>
+  <string name="assisted_dialing_setting_cc_category_title">මව් රට</string>
+  <string name="assisted_dialing_setting_cc_title">පෙරනිමි මව් රට</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">กรองสายที่สงสัยว่าเป็นสแปมทั้งหมดไหม</string>
+  <string name="spam_blocking_promo_text">จะไม่มีสายแบบเดียวกับที่บล็อกเมื่อสักครู่
+      มารบกวนคุณอีกต่อไป</string>
+  <string name="spam_blocking_promo_action_filter_spam">กรองสแปม</string>
+  <string name="spam_blocking_promo_action_dismiss">ปิด</string>
+  <string name="spam_blocking_setting_prompt">การตั้งค่า</string>
+  <string name="spam_blocking_settings_enable_error_text">มีปัญหาในการเปิดการกรองสแปม</string>
+  <string name="spam_blocking_settings_disable_error_text">มีปัญหาในการปิดการกรองสแปม</string>
+  <string name="spam_blocking_settings_enable_complete_text">เปิดตัวกรองสแปมแล้ว</string>
+  <string name="spam_blocking_settings_disable_complete_text">ปิดตัวกรองสแปมแล้ว</string>
+</resources>
