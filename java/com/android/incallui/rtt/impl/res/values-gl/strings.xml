@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Continúa</string>
+  <string name="rtt_input_hint">Escribe unha mensaxe</string>
+  <string name="content_description_rtt_chat_avatar">Avatar</string>
+  <string name="rtt_button_back">Volver</string>
+  <string name="rtt_status_banner_text">Esperando a que %s se una á chamada RTT…</string>
+  <string name="rtt_transcript_advisory">O outro usuario pode ver se estás escribindo. As transcricións almacénanse no historial de chamadas do teu dispositivo.</string>
+</resources>

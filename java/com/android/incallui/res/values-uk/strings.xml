@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Телефон"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Надісл. наступні сигнали?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Так"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Ні"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Набір номера"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Поточний виклик"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Поточний відеодзвінок"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Поточний відеодзвінок призупинено"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Поточний дзвінок на робочий телефон"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Поточний <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Вхідний <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"дзвінок через Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"робочий дзвінок через Wi‑Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Очікує"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Вхідний виклик"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Вхідний дзвінок із фото"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Вхідний дзвінок із повідомленням"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Вхідний дзвінок з указанням адреси"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Вхідний дзвінок із фото та повідомленням"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Вхідний дзвінок із фото й адресою"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Вхідний дзвінок з указанням адреси й повідомленням"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Вхідний дзвінок із фото, повідомленням й адресою"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Вхідний дзвінок із вкладеними файлами"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Важливий вхідний дзвінок"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Важливий вхідний дзвінок із фото"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Важливий вхідний дзвінок із повідомленням"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Важливий вхідний дзвінок з адресою"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Важливий вхідний дзвінок із фото та повідомленням"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Важливий вхідний дзвінок із фото й адресою"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Важливий вхідний дзвінок з адресою й повідомленням"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Важливий дзвінок із фото, повідомленням і адресою"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Важливий вхідний дзвінок із вкладеними файлами"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Вхідний дзвінок на робочий телефон"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Цей дзвінок може бути спамом"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Запит на вхідний відеодзвінок"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Відповісти"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Завершити виклик"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Відео"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Приймаю"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Відхилити"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Увімкнути динамік"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Вимкнути динамік"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Поточний виклик на іншому пристрої"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Поточний відеодзвінок на іншому пристрої"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Прийняти дзвінок"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Прийняти відеодзвінок"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Служба не підтримується."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"конфіденц."</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Керувати конференц-зв’язком"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Екстрений номер"</string>
-    <string name="child_number" msgid="3398257437107259682">"на номер <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Помилка SIM-карти або SIM-карта відсутня"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Завершити виклик"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Конференц-зв’язок"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Триває виклик"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Продовження виклику з використанням мобільного Інтернету…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Не вдалося перейти на мережу Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Відеодзвінок продовжиться з використанням мобільного Інтернету. Діють стандартні тарифи."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Більше не показувати це"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Надісл. наступні сигнали?\n</string>
+  <string name="pause_prompt_yes">Так</string>
+  <string name="pause_prompt_no">Ні</string>
+  <string name="notification_dialing">Набір номера</string>
+  <string name="notification_ongoing_call">Поточний виклик</string>
+  <string name="notification_ongoing_video_call">Поточний відеодзвінок</string>
+  <string name="notification_ongoing_paused_video_call">Поточний відеодзвінок призупинено</string>
+  <string name="notification_ongoing_work_call">Поточний дзвінок на робочий телефон</string>
+  <string name="notification_ongoing_call_wifi_template">Поточний %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Вхідний %1$s</string>
+  <string name="notification_call_wifi_brand">дзвінок через Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">робочий дзвінок через Wi‑Fi</string>
+  <string name="notification_on_hold">Очікує</string>
+  <string name="notification_incoming_call">Вхідний виклик</string>
+  <string name="notification_incoming_video_call">Вхідний відеодзвінок</string>
+  <string name="notification_incoming_call_mutli_sim">Вхідний виклик через %1$s</string>
+  <string name="notification_incoming_call_with_photo">Вхідний дзвінок із фото</string>
+  <string name="notification_incoming_call_with_message">Вхідний дзвінок із повідомленням</string>
+  <string name="notification_incoming_call_with_location">Вхідний дзвінок з указанням адреси</string>
+  <string name="notification_incoming_call_with_photo_message">Вхідний дзвінок із фото та повідомленням</string>
+  <string name="notification_incoming_call_with_photo_location">Вхідний дзвінок із фото й адресою</string>
+  <string name="notification_incoming_call_with_message_location">Вхідний дзвінок з указанням адреси й повідомленням</string>
+  <string name="notification_incoming_call_with_photo_message_location">Вхідний дзвінок із фото, повідомленням й адресою</string>
+  <string name="notification_incoming_call_attachments">Вхідний дзвінок із вкладеними файлами</string>
+  <string name="important_notification_incoming_call">Важливий вхідний дзвінок</string>
+  <string name="important_notification_incoming_call_with_photo">Важливий вхідний дзвінок із фото</string>
+  <string name="important_notification_incoming_call_with_message">Важливий вхідний дзвінок із повідомленням</string>
+  <string name="important_notification_incoming_call_with_location">Важливий вхідний дзвінок з адресою</string>
+  <string name="important_notification_incoming_call_with_photo_message">Важливий вхідний дзвінок із фото та повідомленням</string>
+  <string name="important_notification_incoming_call_with_photo_location">Важливий вхідний дзвінок із фото й адресою</string>
+  <string name="important_notification_incoming_call_with_message_location">Важливий вхідний дзвінок з адресою й повідомленням</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Важливий дзвінок із фото, повідомленням і адресою</string>
+  <string name="important_notification_incoming_call_attachments">Важливий вхідний дзвінок із вкладеними файлами</string>
+  <string name="notification_incoming_work_call">Вхідний дзвінок на робочий телефон</string>
+  <string name="notification_incoming_spam_call">Цей дзвінок може бути спамом</string>
+  <string name="notification_requesting_video_call">Запит на вхідний відеодзвінок</string>
+  <string name="notification_action_answer">Відповісти</string>
+  <string name="notification_action_end_call">Завершити виклик</string>
+  <string name="notification_action_answer_video">Відео</string>
+  <string name="notification_action_accept">Приймаю</string>
+  <string name="notification_action_dismiss">Відхилити</string>
+  <string name="notification_action_speaker_on">Увімкнути динамік</string>
+  <string name="notification_action_speaker_off">Вимкнути динамік</string>
+  <string name="notification_external_call">Поточний виклик на іншому пристрої</string>
+  <string name="notification_external_video_call">Поточний відеодзвінок на іншому пристрої</string>
+  <string name="notification_take_call">Прийняти дзвінок</string>
+  <string name="notification_take_video_call">Прийняти відеодзвінок</string>
+  <string name="incall_error_supp_service_unknown">Служба не підтримується.</string>
+  <string name="goPrivate">конфіденц.</string>
+  <string name="manageConferenceLabel">Керувати конференц-зв’язком</string>
+  <string name="child_number">на номер %s</string>
+  <string name="callFailed_simError">Помилка SIM-карти або SIM-карта відсутня</string>
+  <string name="conference_caller_disconnect_content_description">Завершити виклик</string>
+  <string name="conference_call_name">Конференц-зв’язок</string>
+  <string name="generic_conference_call_name">Триває виклик</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Продовження виклику з використанням мобільного Інтернету…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Не вдалося перейти на мережу Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Відеодзвінок продовжиться з використанням мобільного Інтернету. Діють стандартні тарифи.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Більше не показувати це</string>
+  <string name="bubble_return_to_call">Назад до дзвінка</string>
+  <string name="rtt_request_dialog_title">Приєднатися до виклику RTT?</string>
+  <string name="rtt_request_dialog_details">%1$s хоче використовувати повідомлення під час вашого голосового виклику.</string>
+  <string name="rtt_request_dialog_more_information">RTT допомагає користувачам із вадами слуху, мовлення та іншим користувачам, для яких голосового спілкування недостатньо.</string>
+  <string name="rtt_button_decline_request">Ні, дякую</string>
+  <string name="rtt_button_accept_request">Приєднатися до RTT</string>
 </resources>

@@ -1,46 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2016 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="migrate_blocked_numbers_dialog_title" msgid="7823962296457673809">"Neue einfache Blockierfunktion"</string>
-    <string name="migrate_blocked_numbers_dialog_message" msgid="8309736147266462485">"Um dich besser schützen zu können, müssen die Einstellungen der Blockierung beim Telefon geändert werden. Von blockierten Nummern erhältst du jetzt keine Anrufe und Nachrichten mehr und diese Nummern können auch an andere Apps weitergegeben werden."</string>
-    <string name="migrate_blocked_numbers_dialog_allow_button" msgid="5192836471557751367">"Zulassen"</string>
-    <string name="block_number_confirmation_title" msgid="2699521227461376076">"<xliff:g id="NUMBER">%1$s</xliff:g> blockieren?"</string>
-    <string name="block_number_confirmation_message_vvm" msgid="6501105244172290939">"Anrufe von dieser Nummer werden blockiert und Mailboxnachrichten automatisch gelöscht."</string>
-    <string name="block_number_confirmation_message_no_vvm" msgid="8236641245709649882">"Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, dir Mailboxnachrichten zu hinterlassen."</string>
-    <string name="block_number_confirmation_message_new_filtering" msgid="8487449683723062644">"Du erhältst von dieser Nummer keine Anrufe oder Nachrichten mehr."</string>
-    <string name="block_number_ok" msgid="739786082788038932">"BLOCKIEREN"</string>
-    <string name="unblock_number_confirmation_title" msgid="7897778825085659941">"Blockierung von <xliff:g id="NUMBER">%1$s</xliff:g> aufheben?"</string>
-    <string name="unblock_number_ok" msgid="5089057152966269355">"BLOCKIERUNG AUFHEBEN"</string>
-    <string name="invalidNumber" msgid="6270918250761754967">"<xliff:g id="NUMBER">%1$s</xliff:g> ist ungültig."</string>
-    <string name="snackbar_number_blocked" msgid="5760234822413921845">"<xliff:g id="NUMBER">%1$s</xliff:g> blockiert"</string>
-    <string name="snackbar_number_unblocked" msgid="7941296274123990585">"Blockierung von <xliff:g id="NUMBER">%1$s</xliff:g> aufgehoben"</string>
-    <string name="block_number_undo" msgid="5158120911892491697">"Rückgängig"</string>
-    <string name="send_to_voicemail_import_failed" msgid="1012752662074208237">"Import fehlgeschlagen"</string>
-    <string name="call_blocking_disabled_notification_title" msgid="7211352205255347489">"Anrufblockierung für 48 Stunden deaktiviert"</string>
-    <string name="call_blocking_disabled_notification_text" msgid="141384084865180722">"Deaktiviert, da ein Notruf getätigt wurde."</string>
-    <string name="block_report_number_alert_title" msgid="2740581989824959611">"<xliff:g id="NUMBER">%1$s</xliff:g> blockieren?"</string>
-    <string name="block_report_number_alert_details" msgid="2652479394593143562">"Du erhältst von dieser Nummer keine Anrufe mehr."</string>
-    <string name="block_number_alert_details" msgid="715942751312046429">"<xliff:g id="TEXT">%1$s</xliff:g> Dieser Anruf wird als Spam gemeldet."</string>
-    <string name="unblock_number_alert_details" msgid="8696070817026870606">"Die Nummer wird nicht mehr blockiert und nicht als Spam gemeldet. Zukünftige Anrufe sind kein Spam."</string>
-    <string name="unblock_report_number_alert_title" msgid="2221901995393696882">"Blockierung von <xliff:g id="NUMBER">%1$s</xliff:g> aufheben?"</string>
-    <string name="report_not_spam_alert_button" msgid="3244953565919894995">"Melden"</string>
-    <string name="report_not_spam_alert_title" msgid="395961923213504916">"Fehler melden?"</string>
-    <string name="report_not_spam_alert_details" msgid="4463730683530824797">"Zukünftige Anrufe von <xliff:g id="NUMBER">%1$s</xliff:g> werden nicht als Spam gekennzeichnet."</string>
-    <string name="checkbox_report_as_spam_action" msgid="1549159682170273798">"Anruf als Spam melden"</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="migrate_blocked_numbers_dialog_title">Neue einfache Blockierfunktion</string>
+  <string name="migrate_blocked_numbers_dialog_message">Um dich besser schützen zu können, müssen die Einstellungen der Blockierung beim Telefon geändert werden. Von blockierten Nummern erhältst du jetzt keine Anrufe und Nachrichten mehr und diese Nummern können auch an andere Apps weitergegeben werden.</string>
+  <string name="migrate_blocked_numbers_dialog_allow_button">Zulassen</string>
+  <string name="old_block_number_confirmation_title">%1$s blockieren?</string>
+  <string name="block_number_confirmation_message_vvm">Anrufe von dieser Nummer werden blockiert und Mailboxnachrichten automatisch gelöscht.</string>
+  <string name="block_number_confirmation_message_no_vvm">Anrufe von dieser Nummer werden blockiert. Der Anrufer hat aber unter Umständen weiterhin die Möglichkeit, dir Mailboxnachrichten zu hinterlassen.</string>
+  <string name="block_number_confirmation_message_new_filtering">Du erhältst von dieser Nummer keine Anrufe oder Nachrichten mehr.</string>
+  <string name="block_number_ok">BLOCKIEREN</string>
+  <string name="unblock_number_confirmation_title">Blockierung von %1$s aufheben?</string>
+  <string name="unblock_number_ok">BLOCKIERUNG AUFHEBEN</string>
+  <string name="invalidNumber">%1$s ist ungültig.</string>
+  <string name="snackbar_number_blocked">%1$s blockiert</string>
+  <string name="snackbar_number_unblocked">Blockierung von %1$s aufgehoben</string>
+  <string name="send_to_voicemail_import_failed">Import fehlgeschlagen</string>
+  <string name="call_blocking_disabled_notification_title">Anrufblockierung für 48 Stunden deaktiviert</string>
+  <string name="call_blocking_disabled_notification_text">Deaktiviert, da ein Notruf getätigt wurde.</string>
 </resources>

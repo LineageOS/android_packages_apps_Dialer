@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Голосовий дзвінок</string>
+  <string name="video_call">Відеодзвінок</string>
+  <string name="add_to_contacts">Додати контакт</string>
+  <string name="send_a_message">Повідомлення</string>
+  <string name="not_spam">Не спам</string>
+  <string name="block_number">Заблокувати</string>
+  <string name="unblock_number">Розблокувати</string>
+  <string name="block_and_optionally_report_spam">Заблокувати/позначити як спам</string>
+  <string name="copy_number">Копіювати номер</string>
+</resources>

@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">Sevimlilər</string>
+  <string name="suggestions_header">Daimi kontaktlar</string>
+  <string name="speed_dial_add_button_text">Əlavə edin</string>
+  <string name="speed_dial_remember_this_choice">Bu seçimi yadda saxlayın</string>
+  <string name="speed_dial_disambig_dialog_title">Zəng növü seçin</string>
+  <string name="disambig_option_video_call">Video zəng</string>
+  <string name="disambig_option_voice_call">Zəng</string>
+  <string name="add_favorite_activity_title">Sevimlilərə əlavə edin</string>
+  <string name="contact_menu_voice_call">Səsli Zəng</string>
+  <string name="contact_menu_video_call">Video Zəng</string>
+  <string name="contact_menu_message">Mesaj</string>
+  <string name="contact_menu_remove">Silin</string>
+  <string name="contact_menu_contact_info">Kontakt məlumatı</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">Sevimlilərə əlavə edin</string>
+  <string name="speed_dial_contacts_permission_description">Sürətli yığımı aktivləşdirmək üçün, Kontakt icazələrini aktivləşdirin.</string>
+  <string name="speed_dial_turn_on_contacts_permission">Aktiv edin</string>
+  <string name="speed_dial_no_contacts_description">Hələ heç bir sevimli element əlavə etməmisiniz</string>
+  <string name="speed_dial_no_contacts_action_text">Sevimlilərə əlavə edin</string>
+  <string name="speed_dial_remove_favorites">Favoritlərdən silin</string>
 </resources>

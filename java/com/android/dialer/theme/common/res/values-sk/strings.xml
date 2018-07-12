@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Neznáme</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Telefónny automat</string>
+  <string name="emergency_number">Číslo tiesňovej linky</string>
+  <string name="launcherActivityLabel">Telefón</string>
+  <string name="call">Volať</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Pokračuje sa v hovore cez Wi‑Fi…</string>
+  <string name="rtt_call_not_available_toast">Pre tento hovor nie je okamžitý text k dispozícii</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

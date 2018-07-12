@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Texte copié."</string>
-    <string name="call_custom" msgid="3041673234638990874">"Appeler le <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Appeler le numéro de téléphone du domicile"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Appeler le numéro de téléphone mobile"</string>
-    <string name="call_work" msgid="6040550697395300892">"Appeler le numéro de téléphone professionnel"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Appeler le numéro de télécopie professionnel"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Appeler le numéro de télécopie du domicile"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Appeler le téléavertisseur"</string>
-    <string name="call_other" msgid="5536385588712587235">"Appeler"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Appeler le numéro de rappel"</string>
-    <string name="call_car" msgid="3197417098027764954">"Appeler le numéro de télphone de la voiture"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Appeler le numéro de téléphone principal de l\'entreprise"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Appeler le numéro de téléphone RNIS"</string>
-    <string name="call_main" msgid="3293707608770407814">"Appeler le numéro de téléphone principal"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Appeler le numéro de télécopie"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Appeler par signal radio"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Appeler par télex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Appeler le numéro TTY/TDD (malentendants)"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Appeler le numéro de téléphone mobile professionnel"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Appeler le téléavertisseur professionnel"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Appeler le <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Appeler le numéro de téléphone MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Envoyer un SMS au <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Envoyer un SMS au numéro de téléphone du domicile"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Envoyer un SMS au numéro de téléphone mobile"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Envoyer un SMS au numéro de téléphone professionnel"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Envoyer un SMS au numéro de télécopie professionnel"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Envoyer un SMS au numéro de télécopie du domicile"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Envoyer un SMS au téléavertisseur"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Envoyer un SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Envoyer un SMS au numéro de rappel"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Envoyer un SMS au numéro de téléphone de la voiture"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Envoyer un SMS au numéro de téléphone principal de l\'entreprise"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Envoyer un SMS au numéro de téléphone RNIS"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Envoyer un SMS au numéro de téléphone principal"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Envoyer un SMS au numéro de télécopie"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Envoyer un SMS par signal radio"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Envoyer un SMS par télex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Envoyer un SMS au numéro TTY/TDD (malentendants)"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Envoyer un SMS au numéro de téléphone mobile professionnel"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Envoyer un SMS au téléavertisseur professionnel"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Envoyer un SMS au <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Envoyer un SMS au numéro de téléph MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Effacer les contacts fréquents?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Cette opération efface la liste des personnes avec qui vous communiquez le plus souvent dans les applications Contacts et Téléphone, et forcera les applications de courriel à mémoriser de nouveau les adresses que vous utilisez le plus."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Suppression des contacts fréquents…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Disponible"</string>
-    <string name="status_away" msgid="2298688367552893953">"Absent"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Occupé(e)"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Contacts"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Meilleures suggestions"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Autre"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Répertoire"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Annuaire professionnel"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Tous les contacts"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Suggestions"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Moi"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Sans nom)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Afficher le contact"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Tous les contacts disposant d\'un numéro de téléphone"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Contacts du profil professionnel"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Afficher les mises à jour"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Appareil uniquement, sans synchronisation"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Nom"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Pseudo"</string>
-    <string name="full_name" msgid="648186563998465740">"Nom"</string>
-    <string name="name_given" msgid="5096576006314820536">"Prénom"</string>
-    <string name="name_family" msgid="6646235805198547467">"Nom de famille"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Préfixe du nom"</string>
-    <string name="name_middle" msgid="703755205331582769">"Deuxième prénom"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Suffixe du nom"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Nom phonétique"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Prononciation du prénom"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Deuxième prénom phonétique"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Prononciation du nom de famille"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Téléphone"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Envoyer un courriel"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adresse"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"MI"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organisation"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Relation"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Date spéciale"</string>
-    <string name="sms" msgid="7574344928185328095">"Message texte"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adresse"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Entreprise"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Titre"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Remarques"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Site Web"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Groupes"</string>
-    <string name="email_home" msgid="889830029388962171">"Envoyer un courriel au domicile"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Envoyer un courriel sur le mobile"</string>
-    <string name="email_work" msgid="4223487303344613528">"Envoyer un courriel au bureau"</string>
-    <string name="email_other" msgid="4246411900126012062">"Envoyer un courriel"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Envoyer un courriel à <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Envoyer un courriel"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Rue"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Ville"</string>
-    <string name="postal_region" msgid="1730369286225469192">"État/province"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Code postal"</string>
-    <string name="postal_country" msgid="232670707458768148">"Pays"</string>
-    <string name="map_home" msgid="4181131107392126938">"Afficher l\'adresse personnelle"</string>
-    <string name="map_work" msgid="5723471185992684400">"Afficher l\'adresse professionnelle"</string>
-    <string name="map_other" msgid="2253764780863500516">"Afficher l\'adresse"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Afficher l\'adresse <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Clavarder via AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Clavarder via Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Clavarder via Yahoo!"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Clavarder via Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Clavarder via QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Clavarder via Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Clavarder via ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Clavarder via Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Clavarder"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Tous les contacts"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Contacts du compte \"<xliff:g id="NAME">%s</xliff:g>\""</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Contacts en affichage personnalisé"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Contact"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Trier par"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Prénom"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Nom de famille"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Format de nom"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Prénom en premier"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Nom de famille en premier"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Effacer les contacts fréquents"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"arrêter la recherche"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Effacer les termes de recherche"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Compte"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Toujours l\'utiliser pour les appels"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Appeler avec"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Appeler avec une note"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Tapez une note à envoyer avec l\'appel..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ENVOYER ET APPELER"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> : <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Onglet <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> Onglet <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> élément non lu. </item>
-      <item quantity="other"> Onglet <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> éléments non lus. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Appel vidéo"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Partager et appeler"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Appeler le %s</string>
+  <string name="call_home">Appeler le numéro de téléphone du domicile</string>
+  <string name="call_mobile">Appeler le numéro de téléphone mobile</string>
+  <string name="call_work">Appeler le numéro de téléphone professionnel</string>
+  <string name="call_fax_work">Appeler le numéro de télécopie professionnel</string>
+  <string name="call_fax_home">Appeler le numéro de télécopie du domicile</string>
+  <string name="call_pager">Appeler le téléavertisseur</string>
+  <string name="call_other">Appeler</string>
+  <string name="call_callback">Appeler le numéro de rappel</string>
+  <string name="call_car">Appeler le numéro de télphone de la voiture</string>
+  <string name="call_company_main">Appeler le numéro de téléphone principal de l\'entreprise</string>
+  <string name="call_isdn">Appeler le numéro de téléphone RNIS</string>
+  <string name="call_main">Appeler le numéro de téléphone principal</string>
+  <string name="call_other_fax">Appeler le numéro de télécopie</string>
+  <string name="call_radio">Appeler par signal radio</string>
+  <string name="call_telex">Appeler par télex</string>
+  <string name="call_tty_tdd">Appeler le numéro TTY/TDD (malentendants)</string>
+  <string name="call_work_mobile">Appeler le numéro de téléphone mobile professionnel</string>
+  <string name="call_work_pager">Appeler le téléavertisseur professionnel</string>
+  <string name="call_assistant">Appeler le %s</string>
+  <string name="call_mms">Appeler le numéro de téléphone MMS</string>
+  <string name="sms_custom">Envoyer un SMS au %s</string>
+  <string name="sms_home">Envoyer un SMS au numéro de téléphone du domicile</string>
+  <string name="sms_mobile">Envoyer un SMS au numéro de téléphone mobile</string>
+  <string name="sms_work">Envoyer un SMS au numéro de téléphone professionnel</string>
+  <string name="sms_fax_work">Envoyer un SMS au numéro de télécopie professionnel</string>
+  <string name="sms_fax_home">Envoyer un SMS au numéro de télécopie du domicile</string>
+  <string name="sms_pager">Envoyer un SMS au téléavertisseur</string>
+  <string name="sms_other">Envoyer un SMS</string>
+  <string name="sms_callback">Envoyer un SMS au numéro de rappel</string>
+  <string name="sms_car">Envoyer un SMS au numéro de téléphone de la voiture</string>
+  <string name="sms_company_main">Envoyer un SMS au numéro de téléphone principal de l\'entreprise</string>
+  <string name="sms_isdn">Envoyer un SMS au numéro de téléphone RNIS</string>
+  <string name="sms_main">Envoyer un SMS au numéro de téléphone principal</string>
+  <string name="sms_other_fax">Envoyer un SMS au numéro de télécopie</string>
+  <string name="sms_radio">Envoyer un SMS par signal radio</string>
+  <string name="sms_telex">Envoyer un SMS par télex</string>
+  <string name="sms_tty_tdd">Envoyer un SMS au numéro TTY/TDD (malentendants)</string>
+  <string name="sms_work_mobile">Envoyer un SMS au numéro de téléphone mobile professionnel</string>
+  <string name="sms_work_pager">Envoyer un SMS au téléavertisseur professionnel</string>
+  <string name="sms_assistant">Envoyer un SMS au %s</string>
+  <string name="sms_mms">Envoyer un SMS au numéro de téléph MMS</string>
+  <string name="clearFrequentsConfirmation_title">Effacer les contacts fréquents?</string>
+  <string name="clearFrequentsConfirmation">Cette opération efface la liste des personnes avec qui vous communiquez le plus souvent dans les applications Contacts et Téléphone, et forcera les applications de courriel à mémoriser de nouveau les adresses que vous utilisez le plus.</string>
+  <string name="clearFrequentsProgress_title">Suppression des contacts fréquents…</string>
+  <string name="status_available">Disponible</string>
+  <string name="status_away">Absent</string>
+  <string name="status_busy">Occupé(e)</string>
+  <string name="contactsList">Contacts</string>
+  <string name="contact_suggestions">Meilleures suggestions</string>
+  <string name="local_invisible_directory">Autre</string>
+  <string name="directory_search_label">Répertoire</string>
+  <string name="directory_search_label_work">Annuaire professionnel</string>
+  <string name="local_search_label">Tous les contacts</string>
+  <string name="local_suggestions_search_label">Suggestions</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Moi</string>
+  <string name="missing_name">(Sans nom)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Afficher le contact</string>
+  <string name="list_filter_phones">Tous les contacts disposant d\'un numéro de téléphone</string>
+  <string name="list_filter_phones_work">Contacts du profil professionnel</string>
+  <string name="view_updates_from_group">Afficher les mises à jour</string>
+  <string name="account_phone">Appareil uniquement, sans synchronisation</string>
+  <string name="nameLabelsGroup">Nom</string>
+  <string name="nicknameLabelsGroup">Pseudo</string>
+  <string name="full_name">Nom</string>
+  <string name="name_given">Prénom</string>
+  <string name="name_family">Nom de famille</string>
+  <string name="name_prefix">Préfixe du nom</string>
+  <string name="name_middle">Deuxième prénom</string>
+  <string name="name_suffix">Suffixe du nom</string>
+  <string name="name_phonetic">Nom phonétique</string>
+  <string name="name_phonetic_given">Prononciation du prénom</string>
+  <string name="name_phonetic_middle">Deuxième prénom phonétique</string>
+  <string name="name_phonetic_family">Prononciation du nom de famille</string>
+  <string name="phoneLabelsGroup">Téléphone</string>
+  <string name="emailLabelsGroup">Envoyer un courriel</string>
+  <string name="postalLabelsGroup">Adresse</string>
+  <string name="imLabelsGroup">MI</string>
+  <string name="organizationLabelsGroup">Organisation</string>
+  <string name="relationLabelsGroup">Relation</string>
+  <string name="eventLabelsGroup">Date spéciale</string>
+  <string name="sms">Message texte</string>
+  <string name="postal_address">Adresse</string>
+  <string name="ghostData_company">Entreprise</string>
+  <string name="ghostData_title">Titre</string>
+  <string name="label_notes">Remarques</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Site Web</string>
+  <string name="groupsLabel">Groupes</string>
+  <string name="email_home">Envoyer un courriel au domicile</string>
+  <string name="email_mobile">Envoyer un courriel sur le mobile</string>
+  <string name="email_work">Envoyer un courriel au bureau</string>
+  <string name="email_other">Envoyer un courriel</string>
+  <string name="email_custom">Envoyer un courriel à %s</string>
+  <string name="email">Envoyer un courriel</string>
+  <string name="postal_street">Rue</string>
+  <string name="postal_city">Ville</string>
+  <string name="postal_region">État/province</string>
+  <string name="postal_postcode">Code postal</string>
+  <string name="postal_country">Pays</string>
+  <string name="map_home">Afficher l\'adresse personnelle</string>
+  <string name="map_work">Afficher l\'adresse professionnelle</string>
+  <string name="map_other">Afficher l\'adresse</string>
+  <string name="map_custom">Afficher l\'adresse %s</string>
+  <string name="chat_aim">Clavarder via AIM</string>
+  <string name="chat_msn">Clavarder via Windows Live</string>
+  <string name="chat_yahoo">Clavarder via Yahoo!</string>
+  <string name="chat_skype">Clavarder via Skype</string>
+  <string name="chat_qq">Clavarder via QQ</string>
+  <string name="chat_gtalk">Clavarder via Google Talk</string>
+  <string name="chat_icq">Clavarder via ICQ</string>
+  <string name="chat_jabber">Clavarder via Jabber</string>
+  <string name="chat">Clavarder</string>
+  <string name="list_filter_all_accounts">Tous les contacts</string>
+  <string name="listAllContactsInAccount">Contacts du compte \"%s\"</string>
+  <string name="listCustomView">Contacts en affichage personnalisé</string>
+  <string name="listSingleContact">Contact</string>
+  <string name="display_options_sort_list_by">Trier par</string>
+  <string name="display_options_sort_by_given_name">Prénom</string>
+  <string name="display_options_sort_by_family_name">Nom de famille</string>
+  <string name="display_options_view_names_as">Format de nom</string>
+  <string name="display_options_view_given_name_first">Prénom en premier</string>
+  <string name="display_options_view_family_name_first">Nom de famille en premier</string>
+  <string name="menu_clear_frequents">Effacer les contacts fréquents</string>
+  <string name="action_menu_back_from_search">arrêter la recherche</string>
+  <string name="description_clear_search">Effacer les termes de recherche</string>
+  <string name="select_account_dialog_title">Compte</string>
+  <string name="set_default_account">Toujours l\'utiliser pour les appels</string>
+  <string name="select_phone_account_for_calls">Choisir une carte SIM pour cet appel</string>
+  <string name="select_phone_account_for_calls_remember">Mémoriser ce choix</string>
+  <string name="call_with_a_note">Appeler avec une note</string>
+  <string name="call_subject_hint">Tapez une note à envoyer avec l\'appel...</string>
+  <string name="send_and_call_button">ENVOYER ET APPELER</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Onglet %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Onglet %1$s. %2$d élément non lu. </item>
+    <item quantity="other"> Onglet %1$s. %2$d éléments non lus. </item>
+  </plurals>
+  <string name="description_search_video_call">Appel vidéo</string>
+  <string name="description_search_call_and_share">Partager et appeler</string>
 </resources>

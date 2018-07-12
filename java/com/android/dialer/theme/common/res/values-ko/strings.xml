@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">알 수 없음</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">공중전화</string>
+  <string name="emergency_number">긴급 전화번호</string>
+  <string name="launcherActivityLabel">휴대전화</string>
+  <string name="call">전화</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Wi‑Fi를 사용하여 계속 통화 중…</string>
+  <string name="rtt_call_not_available_toast">이 통화에서 RTT를 사용할 수 없음</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

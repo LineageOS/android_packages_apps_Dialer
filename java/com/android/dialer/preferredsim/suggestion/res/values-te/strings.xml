@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">అదే క్యారియర్‌ని ఉపయోగిస్తుంది</string>
+  <string name="pre_call_select_phone_account_hint_frequent">ఇటీవల ఉపయోగించినవి</string>
+</resources>

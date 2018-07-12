@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"ໂທລະສັບ"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"ສົ່ງໂທນສຽງຕໍ່ໄປນີ້ບໍ່?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"ຕົກລົງ"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"ບໍ່"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"ກຳລັງໂທ"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"ສາຍທີ່ກຳລັງໂທອອກ"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"ວິດີໂອທີ່ກຳລັງໂທ"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"ສາຍວິດີໂອໂທອອກ - ຢຸດວິດີໂອໄວ້ຊົ່ວຄາວແລ້ວ"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"ສາຍໂທອອກຈາກບ່ອນເຮັດວຽກ"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"ກຳລັງໂທ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"ສາຍໂທເຂົ້າ <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"ການໂທ Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"ສາຍວຽກ Wi‑Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"ພັກສາຍຊົ່ວຄາວ"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"ສາຍໂທເຂົ້າ"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"ສາຍໂທເຂົ້າພ້ອມຂໍ້ຄວາມ"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"ສາຍໂທເຂົ້າພ້ອມສະຖານທີ່"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ ແລະ ຂໍ້ຄວາມ"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ ແລະ ສະຖານທີ່"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"ສາຍໂທເຂົ້າພ້ອມຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"ສາຍໂທເຂົ້າພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"ສາຍໂທເຂົ້າພ້ອມໄຟລ໌ແນບ"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"ສາຍໂທເຂົ້າສຳຄັນ"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຂໍ້ຄວາມ"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມສະຖານທີ່"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ ແລະ ຂໍ້ຄວາມ"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ ແລະ ສະຖານທີ່"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"ສາຍໂທເຂົ້າສຳຄັນພ້ອມໄຟລ໌ແນບ"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"ສາຍໂທເຂົ້າຈາກບ່ອນເຮັດວຽກ"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"ມີການໂທທີ່ຄາດວ່າເປັນສະແປມໂທເຂົ້າມາ"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"​ຄຳ​ຮ້ອງ​ຂໍ​ວິ​ດີ​ໂອ​ເຂົ້າ​ມາ"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"ຄໍາ​ຕອບ"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"ວາງສາຍ"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"ວິດີໂອ"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"ຍອມຮັບ"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"ປະຕິເສດ"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"ເປີດ​ລຳໂພງ"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"ປິດ​ລຳໂພງ"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"ສາຍທີ່ກຳລັງໂທອອກໃນອຸປະກອນອື່ນ"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"ສາຍວິດີໂອທີ່ກຳລັງໂທອອກໃນເຄື່ອງອື່ນ"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"ຮັບສາຍ"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"ຮັບສາຍວິດີໂອ"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"ການ​ບໍ​ລິ​ການ​ບໍ່​ຮອງ​ຮັບ."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"ໃຊ້ແບບສ່ວນໂຕ"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"ຈັດ​ການ​ການ​ປະ​ຊຸມ​ທາງໂທລະສັບ"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"ເບີໂທສຸກເສີນ"</string>
-    <string name="child_number" msgid="3398257437107259682">"ຜ່ານ <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"ບໍ່ມີ​ SIM ຫຼື SIM ຜິດພາດ"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"ວາງສາຍ"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"ການປະຊຸມທາງໂທລະສັບ"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"ຢູ່ໃນສາຍ"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ກຳລັງສືບຕໍ່ສາຍໂດຍໃຊ້ອິນເຕີເນັດມືຖື…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"ບໍ່ສາມາດສະຫຼັບໄປໃຊ້ເຄືອຂ່າຍ Wi-Fi ໄດ້"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"ການໂທວິດີໂອຈະຍັງຄົງຢູ່ໃນເຄືອຂ່າຍມືຖືຕໍ່ໄປ. ອາດມີການຮຽກເກັບຄ່າບໍລິການມາດຕະຖານ."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"ບໍ່ຕ້ອງສະແດງຂໍ້ຄວາມນີ້ອີກ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">ສົ່ງໂທນສຽງຕໍ່ໄປນີ້ບໍ່?\n</string>
+  <string name="pause_prompt_yes">ຕົກລົງ</string>
+  <string name="pause_prompt_no">ບໍ່</string>
+  <string name="notification_dialing">ກຳລັງໂທ</string>
+  <string name="notification_ongoing_call">ສາຍທີ່ກຳລັງໂທອອກ</string>
+  <string name="notification_ongoing_video_call">ວິດີໂອທີ່ກຳລັງໂທ</string>
+  <string name="notification_ongoing_paused_video_call">ສາຍວິດີໂອໂທອອກ - ຢຸດວິດີໂອໄວ້ຊົ່ວຄາວແລ້ວ</string>
+  <string name="notification_ongoing_work_call">ສາຍໂທອອກຈາກບ່ອນເຮັດວຽກ</string>
+  <string name="notification_ongoing_call_wifi_template">ກຳລັງໂທ %1$s</string>
+  <string name="notification_incoming_call_wifi_template">ສາຍໂທເຂົ້າ %1$s</string>
+  <string name="notification_call_wifi_brand">ການໂທ Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">ສາຍວຽກ Wi‑Fi</string>
+  <string name="notification_on_hold">ພັກສາຍຊົ່ວຄາວ</string>
+  <string name="notification_incoming_call">ສາຍໂທເຂົ້າ</string>
+  <string name="notification_incoming_video_call">ສາຍ​ວິດີໂອ​ເຂົ້າ</string>
+  <string name="notification_incoming_call_mutli_sim">ສາຍໂທເຂົ້າຜ່ານ %1$s</string>
+  <string name="notification_incoming_call_with_photo">ສາຍໂທເຂົ້າພ້ອມຮູບພາບ</string>
+  <string name="notification_incoming_call_with_message">ສາຍໂທເຂົ້າພ້ອມຂໍ້ຄວາມ</string>
+  <string name="notification_incoming_call_with_location">ສາຍໂທເຂົ້າພ້ອມສະຖານທີ່</string>
+  <string name="notification_incoming_call_with_photo_message">ສາຍໂທເຂົ້າພ້ອມຮູບພາບ ແລະ ຂໍ້ຄວາມ</string>
+  <string name="notification_incoming_call_with_photo_location">ສາຍໂທເຂົ້າພ້ອມຮູບພາບ ແລະ ສະຖານທີ່</string>
+  <string name="notification_incoming_call_with_message_location">ສາຍໂທເຂົ້າພ້ອມຂໍ້ຄວາມ ແລະ ສະຖານທີ່</string>
+  <string name="notification_incoming_call_with_photo_message_location">ສາຍໂທເຂົ້າພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່</string>
+  <string name="notification_incoming_call_attachments">ສາຍໂທເຂົ້າພ້ອມໄຟລ໌ແນບ</string>
+  <string name="important_notification_incoming_call">ສາຍໂທເຂົ້າສຳຄັນ</string>
+  <string name="important_notification_incoming_call_with_photo">ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ</string>
+  <string name="important_notification_incoming_call_with_message">ສາຍໂທເຂົ້າສຳຄັນພ້ອມຂໍ້ຄວາມ</string>
+  <string name="important_notification_incoming_call_with_location">ສາຍໂທເຂົ້າສຳຄັນພ້ອມສະຖານທີ່</string>
+  <string name="important_notification_incoming_call_with_photo_message">ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ ແລະ ຂໍ້ຄວາມ</string>
+  <string name="important_notification_incoming_call_with_photo_location">ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ ແລະ ສະຖານທີ່</string>
+  <string name="important_notification_incoming_call_with_message_location">ສາຍໂທເຂົ້າສຳຄັນພ້ອມຂໍ້ຄວາມ ແລະ ສະຖານທີ່</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">ສາຍໂທເຂົ້າສຳຄັນພ້ອມຮູບພາບ, ຂໍ້ຄວາມ ແລະ ສະຖານທີ່</string>
+  <string name="important_notification_incoming_call_attachments">ສາຍໂທເຂົ້າສຳຄັນພ້ອມໄຟລ໌ແນບ</string>
+  <string name="notification_incoming_work_call">ສາຍໂທເຂົ້າຈາກບ່ອນເຮັດວຽກ</string>
+  <string name="notification_incoming_spam_call">ມີການໂທທີ່ຄາດວ່າເປັນສະແປມໂທເຂົ້າມາ</string>
+  <string name="notification_requesting_video_call">​ຄຳ​ຮ້ອງ​ຂໍ​ວິ​ດີ​ໂອ​ເຂົ້າ​ມາ</string>
+  <string name="notification_action_answer">ຄໍາ​ຕອບ</string>
+  <string name="notification_action_end_call">ວາງສາຍ</string>
+  <string name="notification_action_answer_video">ວິດີໂອ</string>
+  <string name="notification_action_accept">ຍອມຮັບ</string>
+  <string name="notification_action_dismiss">ປະຕິເສດ</string>
+  <string name="notification_action_speaker_on">ເປີດ​ລຳໂພງ</string>
+  <string name="notification_action_speaker_off">ປິດ​ລຳໂພງ</string>
+  <string name="notification_external_call">ສາຍທີ່ກຳລັງໂທອອກໃນອຸປະກອນອື່ນ</string>
+  <string name="notification_external_video_call">ສາຍວິດີໂອທີ່ກຳລັງໂທອອກໃນເຄື່ອງອື່ນ</string>
+  <string name="notification_take_call">ຮັບສາຍ</string>
+  <string name="notification_take_video_call">ຮັບສາຍວິດີໂອ</string>
+  <string name="incall_error_supp_service_unknown">ການ​ບໍ​ລິ​ການ​ບໍ່​ຮອງ​ຮັບ.</string>
+  <string name="goPrivate">ໃຊ້ແບບສ່ວນໂຕ</string>
+  <string name="manageConferenceLabel">ຈັດ​ການ​ການ​ປະ​ຊຸມ​ທາງໂທລະສັບ</string>
+  <string name="child_number">ຜ່ານ %s</string>
+  <string name="callFailed_simError">ບໍ່ມີ​ SIM ຫຼື SIM ຜິດພາດ</string>
+  <string name="conference_caller_disconnect_content_description">ວາງສາຍ</string>
+  <string name="conference_call_name">ການປະຊຸມທາງໂທລະສັບ</string>
+  <string name="generic_conference_call_name">ຢູ່ໃນສາຍ</string>
+  <string name="video_call_wifi_to_lte_handover_toast">ກຳລັງສືບຕໍ່ສາຍໂດຍໃຊ້ອິນເຕີເນັດມືຖື…</string>
+  <string name="video_call_lte_to_wifi_failed_title">ບໍ່ສາມາດສະຫຼັບໄປໃຊ້ເຄືອຂ່າຍ Wi-Fi ໄດ້</string>
+  <string name="video_call_lte_to_wifi_failed_message">ການໂທວິດີໂອຈະຍັງຄົງຢູ່ໃນເຄືອຂ່າຍມືຖືຕໍ່ໄປ. ອາດມີການຮຽກເກັບຄ່າບໍລິການມາດຕະຖານ.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">ບໍ່ຕ້ອງສະແດງຂໍ້ຄວາມນີ້ອີກ</string>
+  <string name="bubble_return_to_call">ກັບໄປຫາການໂທ</string>
+  <string name="rtt_request_dialog_title">ເຂົ້າຮ່ວມການໂທ RTT ບໍ?</string>
+  <string name="rtt_request_dialog_details">%1$s ຕ້ອງການສົ່ງຂໍ້ຄວາມພາຍໃນການໂທສຽງຂອງທ່ານ.</string>
+  <string name="rtt_request_dialog_more_information">RTT ຈະຊ່ວຍເຫຼືອຜູ້ໂທທີ່ຫູໜວກ, ມີບັນຫາໃນການໄດ້ຍິນ, ບໍ່ສາມາດເວົ້າໄດ້ ຫຼື ຕ້ອງການໃຊ້ຫຼາຍກວ່າສຽງ.</string>
+  <string name="rtt_button_decline_request">ບໍ່, ຂອບໃຈ</string>
+  <string name="rtt_button_accept_request">ເຂົ້າຮ່ວມ RTT</string>
 </resources>

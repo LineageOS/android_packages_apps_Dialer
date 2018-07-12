@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="content_description_rtt_check_button">Tiếp tục</string>
+  <string name="rtt_input_hint">Nhập tin nhắn</string>
+  <string name="content_description_rtt_chat_avatar">Hình đại diện</string>
+  <string name="rtt_button_back">Quay lại</string>
+  <string name="rtt_status_banner_text">Đang chờ %s tham gia cuộc gọi Tin nhắn theo thời gian thực (RTT)...</string>
+  <string name="rtt_transcript_advisory">Bên kia có thể thấy bạn đang nhập. Bản chép lời được lưu trữ trong nhật ký cuộc gọi trên thiết bị của bạn.</string>
+</resources>

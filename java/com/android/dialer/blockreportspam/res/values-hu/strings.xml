@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Letiltja a következő számot: %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">A továbbiakban nem fogad hívásokat vagy SMS-eket erről a számról.</string>
+  <string name="block_number_ok">LETILTÁS</string>
+  <string name="unblock_number_ok">TILTÁS FELOLDÁSA</string>
+  <string name="block_report_number_alert_title">Letiltja a következő számot: %1$s?</string>
+  <string name="block_report_number_alert_details">A jövőben nem fogad hívásokat erről a számról.</string>
+  <string name="block_number_alert_details">%1$s A hívást spamként jelentjük be.</string>
+  <string name="unblock_number_alert_details">A rendszer feloldja a szám tiltását, és nem spamként jelenti be. A hívások nem spamek.</string>
+  <string name="unblock_report_number_alert_title">Feloldja a következő szám tiltását: %1$s?</string>
+  <string name="report_not_spam_alert_button">Bejelentés</string>
+  <string name="report_not_spam_alert_title">Be szeretne jelenteni egy hibát?</string>
+  <string name="report_not_spam_alert_details">A tőle érkező hívásokat a jövőben a rendszer nem azonosítja spamként: %1$s.</string>
+  <string name="checkbox_report_as_spam_action">Hívás bejelentése spamként</string>
+  <string name="block_number_failed_toast">Hiba történt a szám letiltásakor</string>
+  <string name="unblock_number_failed_toast">Hiba történt a szám tiltásának feloldásakor</string>
+</resources>

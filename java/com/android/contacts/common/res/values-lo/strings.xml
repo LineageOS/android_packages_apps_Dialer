@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"ສຳເນົາຂໍ້ຄວາມແລ້ວ"</string>
-    <string name="call_custom" msgid="3041673234638990874">"ໂທຫາ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"ໂທຫາເບີບ້ານ"</string>
-    <string name="call_mobile" msgid="967589404494150813">"ໂທຫາເບີມືຖື"</string>
-    <string name="call_work" msgid="6040550697395300892">"ໂທຫາເບີບ່ອນເຮັດວຽກ"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"ໂທຫາເບີແຟັກບ່ອນເຮັດວຽກ"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"ໂທຫາເບີແຟັກບ້ານ"</string>
-    <string name="call_pager" msgid="6814149227741274161">"ໂທຫາເບີ pager"</string>
-    <string name="call_other" msgid="5536385588712587235">"ໂທ"</string>
-    <string name="call_callback" msgid="6314019862718112786">"ໂທຫາເບີໂທກັບ"</string>
-    <string name="call_car" msgid="3197417098027764954">"ໂທຫາເບີລົດ"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"ໂທຫາເບີຫຼັກຂອງບໍລິສັດ"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"ໂທຫາເບີ ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"ໂທຫາເບີຫຼັກ"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"ໂທຫາເບີແຟັກ"</string>
-    <string name="call_radio" msgid="8942441419845057942">"ໂທຫາເບີວິທະຍຸ"</string>
-    <string name="call_telex" msgid="2031514461660668351">"ໂທຫາເບີ telex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"ໂທຫາເບີ TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"ໂທຫາເບີມືຖືບ່ອນເຮັດວຽກ"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"ໂທຫາ pager ບ່ອນເຮັດວຽກ"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"ໂທ​ຫາ <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"ໂທຫາເບີ MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"ສົ່ງຂໍ້ຄວາມຫາ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ສົ່ງຂໍ້ຄວາມຫາເບີບ້ານ"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"ສົ່ງຂໍ້ຄວາມຫາເບີມືຖື"</string>
-    <string name="sms_work" msgid="4158595439553450966">"ສົ່ງຂໍ້ຄວາມຫາເບີບ່ອນເຮັດວຽກ"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"ສົ່ງຂໍ້ຄວາມຫາເບີແຟັກບ່ອນເຮັດວຽກ"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ສົ່ງຂໍ້ຄວາມຫາເບີແຟັກບ້ານ"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"ສົ່ງຂໍ້ຄວາມຫາເບີ pager"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ສົ່ງຂໍ້ຄວາມ"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"ສົ່ງຂໍ້ຄວາມຫາເບີໂທກັບ"</string>
-    <string name="sms_car" msgid="4314577266154395174">"ສົ່ງຂໍ້ຄວາມຫາເບີລົດ"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"ສົ່ງຂໍ້ຄວາມຫາເບີຫຼັກຂອງບໍລິສັດ"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ສົ່ງຂໍ້ຄວາມຫາເບີ ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"ສົ່ງຂໍ້ຄວາມຫາເບີຫຼັກ"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ສົ່ງຂໍ້ຄວາມຫາເບີແຟັກ"</string>
-    <string name="sms_radio" msgid="855555176531704682">"ສົ່ງຂໍ້ຄວາມຫາເບີວິທະຍຸ"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ສົ່ງຂໍ້ຄວາມຫາເບີ telex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"ສົ່ງຂໍ້ຄວາມຫາເບີ TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"ສົ່ງຂໍ້ຄວາມຫາເບີມືຖືບ່ອນເຮັດວຽກ"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"ສົ່ງຂໍ້ຄວາມຫາເບີ pager ບ່ອນເຮັດວຽກ"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"ສົ່ງຂໍ້ຄວາມຫາ <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"ສົ່ງຂໍ້ຄວາມຫາເບີ MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"ລຶບລາຍຊື່ທີ່ຕິດຕໍ່ເລື້ອຍໆອອກ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"ທ່ານຈະລຶບຂໍ້ມູນລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆຢູ່ໃນແອັບຯລາຍ​ຊື່ ແລະໂທ​ລະ​ສັບ ພ້ອມທັງບັງຄັບໃຫ້ແອັບຯອີເມວເລີ່ມຮຽນຮູ້ຄ່າກຳນົດທີ່ຢູ່ຂອງທ່ານໃໝ່ຕັ້ງແຕ່ຕົ້ນ."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"ກຳລັງລຶບລ້າງລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ..."</string>
-    <string name="status_available" msgid="2648156525685472626">"ສາມາດໃຊ້ໄດ້"</string>
-    <string name="status_away" msgid="2298688367552893953">"ບໍ່ຢູ່"</string>
-    <string name="status_busy" msgid="5990832098713248503">"ບໍ່ຫວ່າງ"</string>
-    <string name="contactsList" msgid="8806067891419291513">"ລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"ແນະນຳຫຼາຍທີ່ສຸດ"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"ອື່ນໆ"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"ໄດເຣັກທໍຣີ"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"ໄດເຣັກທໍຣີບ່ອນເຮັດວຽກ"</string>
-    <string name="local_search_label" msgid="907622822323119235">"ລາຍຊື່ຜູ້ຕິດຕໍ່ທັງໝົດ"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"ຄຳແນະນຳ"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"ຂ້ອຍ"</string>
-    <string name="missing_name" msgid="978606963362745020">"(ບໍ່ມີຊື່)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"ເບິ່ງລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດທີ່ມີເບີໂທລະສັບ"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"ລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"ເບິ່ງອັບເດດ"</string>
-    <string name="account_phone" msgid="7067809073194061035">"ອຸປະກອນເທົ່ານັ້ນ, ບໍ່ຊິ້ງຂໍ້ມູນ"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"ຊື່"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"ຊື່ຫຼິ້ນ"</string>
-    <string name="full_name" msgid="648186563998465740">"ຊື່"</string>
-    <string name="name_given" msgid="5096576006314820536">"ຊື່"</string>
-    <string name="name_family" msgid="6646235805198547467">"ນາມສະກຸນ"</string>
-    <string name="name_prefix" msgid="9215326539658838">"ຄຳນຳໜ້າຊື່"</string>
-    <string name="name_middle" msgid="703755205331582769">"ຊື່ຮອງ"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"ຄຳຕໍ່ທ້າຍຊື່"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"ການອອກສຽງຊື່"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"ການ​ອອກ​ສຽງ​​ຊື່"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"ການອອກສຽງຊື່ຮອງ"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"ການ​ອອກ​ສຽງ​ນາມ​ສະ​ກຸນ​​​"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"ໂທລະສັບ"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"ສົ່ງອີເມວ"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"ທີ່ຢູ່"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"ອົງກອນ"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"ຄວາມສຳພັນ"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"ວັນ​ທີ​ພິ​ເສດ"</string>
-    <string name="sms" msgid="7574344928185328095">"​ຂໍ້​ຄວາມ"</string>
-    <string name="postal_address" msgid="1804707930129674200">"ທີ່ຢູ່"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"ບໍລິສັດ"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"ຊື່"</string>
-    <string name="label_notes" msgid="2050255313694219786">"ບັນທຶກ"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"ເວັບໄຊ"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"ກຸ່ມ"</string>
-    <string name="email_home" msgid="889830029388962171">"ສົ່ງອີ​ເມວຫາອີເມວເຮືອນ"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"ສົ່ງອີ​ເມວຫາອີເມວມືຖື"</string>
-    <string name="email_work" msgid="4223487303344613528">"ສົ່ງອີ​ເມວຫາບ່ອນເຮັດວຽກ"</string>
-    <string name="email_other" msgid="4246411900126012062">"ສົ່ງອີເມວ"</string>
-    <string name="email_custom" msgid="7246580894327511013">"ສົ່ງອີ​ເມວຫາ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"ສົ່ງອີເມວ"</string>
-    <string name="postal_street" msgid="6918171741240802474">"ຖະໜົນ"</string>
-    <string name="postal_city" msgid="8674569121430005628">"ເມືອງ"</string>
-    <string name="postal_region" msgid="1730369286225469192">"ລັດ"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"ລະຫັດ ZIP"</string>
-    <string name="postal_country" msgid="232670707458768148">"ປະເທດ"</string>
-    <string name="map_home" msgid="4181131107392126938">"ເບິ່ງ​ເຮືອນ​ທີ່​ຢູ່ເບິ່ງທີ່ຢູ່ເຮືອນ"</string>
-    <string name="map_work" msgid="5723471185992684400">"ເບິ່ງທີ່ຢູ່ບ່ອນເຮັດວຽກ"</string>
-    <string name="map_other" msgid="2253764780863500516">"ເບິ່ງທີ່ຢູ່"</string>
-    <string name="map_custom" msgid="5581743097882436157">"ເບິ່ງທີ່ຢູ່ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"ສົນທະນາໂດຍໃຊ້ AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"ສົນທະນາໂດຍໃຊ້ Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"ສົນທະນາໂດຍໃຊ້ Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"ສົນທະນາໂດຍໃຊ້ Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"ສົນທະນາໂດຍໃຊ້ QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"ສົນທະນາໂດຍໃຊ້ Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ສົນທະນາໂດຍໃຊ້ ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"ສົນທະນາໂດຍໃຊ້ Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"ສົນທະນາ"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"ລາຍ​ຊື່​ຜູ້ຕິດ​ຕໍ່​ທັງ​ໝົດ"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"ລາຍຊື່ຜູ່ຕິດຕໍ່ໃນ <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"ລາຍຊື່ຜູ່ຕິດຕໍ່ໃນມຸມມອງກຳນົດເອງ"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"ລາຍຊື່ຜູ່ຕິດຕໍ່ດ່ຽວ"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"ຮຽງຕາມ"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"ຊື່"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"ນາມສະກຸນ"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"​ຮູບ​ແບບ​ຊື່"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"​ຊື່​ກ່ອນ"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"​ນາມ​ສະ​ກຸນ​ກ່ອນ"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"ລຶບລາຍຊື່ຄົນທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"ຢຸດ​ການ​ຊອກ​ຫາ"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"ລຶບ​ການ​ຊອກ​ຫາ"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"ບັນຊີ"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"ໃຊ້​ຊິມ​ນີ້​ເພື່ອ​ການໂທທຸກ​ເທື່ອ"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"ໂທ​ດ້ວຍ"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"ໂທ​ດ້ວຍ​ບັນ​ທຶກ"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"ພິມ​ບັນ​ທຶກ ເພື່ອ​ສົ່ງ​ກັບ​ການ​ໂທ ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ສົ່ງ ແລະ ໂທ"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"ແຖບ <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other">ແຖບ <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> ລາຍການບໍ່ທັນໄດ້ອ່ານ. </item>
-      <item quantity="one">ແຖບ <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> ລາຍການບໍ່ທັນໄດ້ອ່ານ. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"ໂທວິດີໂອ"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"ແບ່ງປັນ ແລະ ໂທ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">ໂທຫາ %s</string>
+  <string name="call_home">ໂທຫາເບີບ້ານ</string>
+  <string name="call_mobile">ໂທຫາເບີມືຖື</string>
+  <string name="call_work">ໂທຫາເບີບ່ອນເຮັດວຽກ</string>
+  <string name="call_fax_work">ໂທຫາເບີແຟັກບ່ອນເຮັດວຽກ</string>
+  <string name="call_fax_home">ໂທຫາເບີແຟັກບ້ານ</string>
+  <string name="call_pager">ໂທຫາເບີ pager</string>
+  <string name="call_other">ໂທ</string>
+  <string name="call_callback">ໂທຫາເບີໂທກັບ</string>
+  <string name="call_car">ໂທຫາເບີລົດ</string>
+  <string name="call_company_main">ໂທຫາເບີຫຼັກຂອງບໍລິສັດ</string>
+  <string name="call_isdn">ໂທຫາເບີ ISDN</string>
+  <string name="call_main">ໂທຫາເບີຫຼັກ</string>
+  <string name="call_other_fax">ໂທຫາເບີແຟັກ</string>
+  <string name="call_radio">ໂທຫາເບີວິທະຍຸ</string>
+  <string name="call_telex">ໂທຫາເບີ telex</string>
+  <string name="call_tty_tdd">ໂທຫາເບີ TTY/TDD</string>
+  <string name="call_work_mobile">ໂທຫາເບີມືຖືບ່ອນເຮັດວຽກ</string>
+  <string name="call_work_pager">ໂທຫາ pager ບ່ອນເຮັດວຽກ</string>
+  <string name="call_assistant">ໂທ​ຫາ %s</string>
+  <string name="call_mms">ໂທຫາເບີ MMS</string>
+  <string name="sms_custom">ສົ່ງຂໍ້ຄວາມຫາ %s</string>
+  <string name="sms_home">ສົ່ງຂໍ້ຄວາມຫາເບີບ້ານ</string>
+  <string name="sms_mobile">ສົ່ງຂໍ້ຄວາມຫາເບີມືຖື</string>
+  <string name="sms_work">ສົ່ງຂໍ້ຄວາມຫາເບີບ່ອນເຮັດວຽກ</string>
+  <string name="sms_fax_work">ສົ່ງຂໍ້ຄວາມຫາເບີແຟັກບ່ອນເຮັດວຽກ</string>
+  <string name="sms_fax_home">ສົ່ງຂໍ້ຄວາມຫາເບີແຟັກບ້ານ</string>
+  <string name="sms_pager">ສົ່ງຂໍ້ຄວາມຫາເບີ pager</string>
+  <string name="sms_other">ສົ່ງຂໍ້ຄວາມ</string>
+  <string name="sms_callback">ສົ່ງຂໍ້ຄວາມຫາເບີໂທກັບ</string>
+  <string name="sms_car">ສົ່ງຂໍ້ຄວາມຫາເບີລົດ</string>
+  <string name="sms_company_main">ສົ່ງຂໍ້ຄວາມຫາເບີຫຼັກຂອງບໍລິສັດ</string>
+  <string name="sms_isdn">ສົ່ງຂໍ້ຄວາມຫາເບີ ISDN</string>
+  <string name="sms_main">ສົ່ງຂໍ້ຄວາມຫາເບີຫຼັກ</string>
+  <string name="sms_other_fax">ສົ່ງຂໍ້ຄວາມຫາເບີແຟັກ</string>
+  <string name="sms_radio">ສົ່ງຂໍ້ຄວາມຫາເບີວິທະຍຸ</string>
+  <string name="sms_telex">ສົ່ງຂໍ້ຄວາມຫາເບີ telex</string>
+  <string name="sms_tty_tdd">ສົ່ງຂໍ້ຄວາມຫາເບີ TTY/TDD</string>
+  <string name="sms_work_mobile">ສົ່ງຂໍ້ຄວາມຫາເບີມືຖືບ່ອນເຮັດວຽກ</string>
+  <string name="sms_work_pager">ສົ່ງຂໍ້ຄວາມຫາເບີ pager ບ່ອນເຮັດວຽກ</string>
+  <string name="sms_assistant">ສົ່ງຂໍ້ຄວາມຫາ %s</string>
+  <string name="sms_mms">ສົ່ງຂໍ້ຄວາມຫາເບີ MMS</string>
+  <string name="clearFrequentsConfirmation_title">ລຶບລາຍຊື່ທີ່ຕິດຕໍ່ເລື້ອຍໆອອກ?</string>
+  <string name="clearFrequentsConfirmation">ທ່ານຈະລຶບຂໍ້ມູນລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆຢູ່ໃນແອັບຯລາຍ​ຊື່ ແລະໂທ​ລະ​ສັບ ພ້ອມທັງບັງຄັບໃຫ້ແອັບຯອີເມວເລີ່ມຮຽນຮູ້ຄ່າກຳນົດທີ່ຢູ່ຂອງທ່ານໃໝ່ຕັ້ງແຕ່ຕົ້ນ.</string>
+  <string name="clearFrequentsProgress_title">ກຳລັງລຶບລ້າງລາຍຊື່ທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ...</string>
+  <string name="status_available">ສາມາດໃຊ້ໄດ້</string>
+  <string name="status_away">ບໍ່ຢູ່</string>
+  <string name="status_busy">ບໍ່ຫວ່າງ</string>
+  <string name="contactsList">ລາຍຊື່ຜູ້ຕິດຕໍ່</string>
+  <string name="contact_suggestions">ແນະນຳຫຼາຍທີ່ສຸດ</string>
+  <string name="local_invisible_directory">ອື່ນໆ</string>
+  <string name="directory_search_label">ໄດເຣັກທໍຣີ</string>
+  <string name="directory_search_label_work">ໄດເຣັກທໍຣີບ່ອນເຮັດວຽກ</string>
+  <string name="local_search_label">ລາຍຊື່ຜູ້ຕິດຕໍ່ທັງໝົດ</string>
+  <string name="local_suggestions_search_label">ຄຳແນະນຳ</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ຂ້ອຍ</string>
+  <string name="missing_name">(ບໍ່ມີຊື່)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">ເບິ່ງລາຍຊື່ຜູ້ຕິດຕໍ່</string>
+  <string name="list_filter_phones">ລາຍຊື່ຜູ່ຕິດຕໍ່ທັງໝົດທີ່ມີເບີໂທລະສັບ</string>
+  <string name="list_filter_phones_work">ລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ</string>
+  <string name="view_updates_from_group">ເບິ່ງອັບເດດ</string>
+  <string name="account_phone">ອຸປະກອນເທົ່ານັ້ນ, ບໍ່ຊິ້ງຂໍ້ມູນ</string>
+  <string name="nameLabelsGroup">ຊື່</string>
+  <string name="nicknameLabelsGroup">ຊື່ຫຼິ້ນ</string>
+  <string name="full_name">ຊື່</string>
+  <string name="name_given">ຊື່</string>
+  <string name="name_family">ນາມສະກຸນ</string>
+  <string name="name_prefix">ຄຳນຳໜ້າຊື່</string>
+  <string name="name_middle">ຊື່ຮອງ</string>
+  <string name="name_suffix">ຄຳຕໍ່ທ້າຍຊື່</string>
+  <string name="name_phonetic">ການອອກສຽງຊື່</string>
+  <string name="name_phonetic_given">ການ​ອອກ​ສຽງ​​ຊື່</string>
+  <string name="name_phonetic_middle">ການອອກສຽງຊື່ຮອງ</string>
+  <string name="name_phonetic_family">ການ​ອອກ​ສຽງ​ນາມ​ສະ​ກຸນ​​​</string>
+  <string name="phoneLabelsGroup">ໂທລະສັບ</string>
+  <string name="emailLabelsGroup">ສົ່ງອີເມວ</string>
+  <string name="postalLabelsGroup">ທີ່ຢູ່</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">ອົງກອນ</string>
+  <string name="relationLabelsGroup">ຄວາມສຳພັນ</string>
+  <string name="eventLabelsGroup">ວັນ​ທີ​ພິ​ເສດ</string>
+  <string name="sms">​ຂໍ້​ຄວາມ</string>
+  <string name="postal_address">ທີ່ຢູ່</string>
+  <string name="ghostData_company">ບໍລິສັດ</string>
+  <string name="ghostData_title">ຊື່</string>
+  <string name="label_notes">ບັນທຶກ</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">ເວັບໄຊ</string>
+  <string name="groupsLabel">ກຸ່ມ</string>
+  <string name="email_home">ສົ່ງອີ​ເມວຫາອີເມວເຮືອນ</string>
+  <string name="email_mobile">ສົ່ງອີ​ເມວຫາອີເມວມືຖື</string>
+  <string name="email_work">ສົ່ງອີ​ເມວຫາບ່ອນເຮັດວຽກ</string>
+  <string name="email_other">ສົ່ງອີເມວ</string>
+  <string name="email_custom">ສົ່ງອີ​ເມວຫາ %s</string>
+  <string name="email">ສົ່ງອີເມວ</string>
+  <string name="postal_street">ຖະໜົນ</string>
+  <string name="postal_city">ເມືອງ</string>
+  <string name="postal_region">ລັດ</string>
+  <string name="postal_postcode">ລະຫັດ ZIP</string>
+  <string name="postal_country">ປະເທດ</string>
+  <string name="map_home">ເບິ່ງ​ເຮືອນ​ທີ່​ຢູ່ເບິ່ງທີ່ຢູ່ເຮືອນ</string>
+  <string name="map_work">ເບິ່ງທີ່ຢູ່ບ່ອນເຮັດວຽກ</string>
+  <string name="map_other">ເບິ່ງທີ່ຢູ່</string>
+  <string name="map_custom">ເບິ່ງທີ່ຢູ່ %s</string>
+  <string name="chat_aim">ສົນທະນາໂດຍໃຊ້ AIM</string>
+  <string name="chat_msn">ສົນທະນາໂດຍໃຊ້ Windows Live</string>
+  <string name="chat_yahoo">ສົນທະນາໂດຍໃຊ້ Yahoo</string>
+  <string name="chat_skype">ສົນທະນາໂດຍໃຊ້ Skype</string>
+  <string name="chat_qq">ສົນທະນາໂດຍໃຊ້ QQ</string>
+  <string name="chat_gtalk">ສົນທະນາໂດຍໃຊ້ Google Talk</string>
+  <string name="chat_icq">ສົນທະນາໂດຍໃຊ້ ICQ</string>
+  <string name="chat_jabber">ສົນທະນາໂດຍໃຊ້ Jabber</string>
+  <string name="chat">ສົນທະນາ</string>
+  <string name="list_filter_all_accounts">ລາຍ​ຊື່​ຜູ້ຕິດ​ຕໍ່​ທັງ​ໝົດ</string>
+  <string name="listAllContactsInAccount">ລາຍຊື່ຜູ່ຕິດຕໍ່ໃນ %s</string>
+  <string name="listCustomView">ລາຍຊື່ຜູ່ຕິດຕໍ່ໃນມຸມມອງກຳນົດເອງ</string>
+  <string name="listSingleContact">ລາຍຊື່ຜູ່ຕິດຕໍ່ດ່ຽວ</string>
+  <string name="display_options_sort_list_by">ຮຽງຕາມ</string>
+  <string name="display_options_sort_by_given_name">ຊື່</string>
+  <string name="display_options_sort_by_family_name">ນາມສະກຸນ</string>
+  <string name="display_options_view_names_as">​ຮູບ​ແບບ​ຊື່</string>
+  <string name="display_options_view_given_name_first">​ຊື່​ກ່ອນ</string>
+  <string name="display_options_view_family_name_first">​ນາມ​ສະ​ກຸນ​ກ່ອນ</string>
+  <string name="menu_clear_frequents">ລຶບລາຍຊື່ຄົນທີ່ຕິດຕໍ່ຫາເລື້ອຍໆ</string>
+  <string name="action_menu_back_from_search">ຢຸດ​ການ​ຊອກ​ຫາ</string>
+  <string name="description_clear_search">ລຶບ​ການ​ຊອກ​ຫາ</string>
+  <string name="select_account_dialog_title">ບັນຊີ</string>
+  <string name="set_default_account">ໃຊ້​ຊິມ​ນີ້​ເພື່ອ​ການໂທທຸກ​ເທື່ອ</string>
+  <string name="select_phone_account_for_calls">ເລືອກ SIM ສຳລັບສາຍນີ້</string>
+  <string name="select_phone_account_for_calls_remember">ຈື່ການເລືອກນີ້ໄວ້</string>
+  <string name="call_with_a_note">ໂທ​ດ້ວຍ​ບັນ​ທຶກ</string>
+  <string name="call_subject_hint">ພິມ​ບັນ​ທຶກ ເພື່ອ​ສົ່ງ​ກັບ​ການ​ໂທ ...</string>
+  <string name="send_and_call_button">ສົ່ງ ແລະ ໂທ</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">ແຖບ %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">ແຖບ %1$s. %2$d ລາຍການບໍ່ທັນໄດ້ອ່ານ. </item>
+    <item quantity="other">ແຖບ %1$s. %2$d ລາຍການບໍ່ທັນໄດ້ອ່ານ. </item>
+  </plurals>
+  <string name="description_search_video_call">ໂທວິດີໂອ</string>
+  <string name="description_search_call_and_share">ແບ່ງປັນ ແລະ ໂທ</string>
 </resources>

@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Sekat %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Anda tidak akan menerima panggilan atau teks daripada nombor ini lagi.</string>
+  <string name="block_number_ok">SEKAT</string>
+  <string name="unblock_number_ok">NYAHSEKAT</string>
+  <string name="block_report_number_alert_title">Sekat %1$s?</string>
+  <string name="block_report_number_alert_details">Anda tidak akan menerima panggilan daripada nombor ini lagi.</string>
+  <string name="block_number_alert_details">%1$s Panggilan ini akan dilaporkan sebagai spam.</string>
+  <string name="unblock_number_alert_details">Nombor akn dinyahsekat &amp; dilaporkan bkn spam. Panggilan akan datang tdk akn dikenal pasti sbg spam.</string>
+  <string name="unblock_report_number_alert_title">Nyahsekat %1$s?</string>
+  <string name="report_not_spam_alert_button">Lapor</string>
+  <string name="report_not_spam_alert_title">Laporkan kesilapan?</string>
+  <string name="report_not_spam_alert_details">Panggilan masa hadapan daripada %1$s tidak akan dikenal pasti sebagai spam lagi.</string>
+  <string name="checkbox_report_as_spam_action">Laporkan panggilan sbg spam</string>
+  <string name="block_number_failed_toast">Terdapat masalah semasa menyekat nombor ini</string>
+  <string name="unblock_number_failed_toast">Terdapat masalah semasa menyahsekat nombor ini</string>
+</resources>

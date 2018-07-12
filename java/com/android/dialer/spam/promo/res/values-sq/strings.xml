@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Të filtrohen të gjitha telefonatat e dyshuara si të padëshiruara?</string>
+  <string name="spam_blocking_promo_text">Telefonatat si ajo që sapo bllokove nuk do të të shqetësojnë më</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtro të padëshiruarat</string>
+  <string name="spam_blocking_promo_action_dismiss">Hiq</string>
+  <string name="spam_blocking_setting_prompt">Cilësimet</string>
+  <string name="spam_blocking_settings_enable_error_text">Problem me aktivizimin e filtrimit për të padëshiruarat</string>
+  <string name="spam_blocking_settings_disable_error_text">Problem me çaktivizimin e filtrimit për të padëshiruarat</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtrimi për të padëshiruarat u aktivizua</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtrimi për të padëshiruarat u çaktivizua</string>
+</resources>

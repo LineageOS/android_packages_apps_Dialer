@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Tuntematon</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Maksupuhelin</string>
+  <string name="emergency_number">Hätänumero</string>
+  <string name="launcherActivityLabel">Puhelin</string>
+  <string name="call">Soita</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Jatketaan puhelua Wi‑Fi-yhteydellä…</string>
+  <string name="rtt_call_not_available_toast">RTT ei ole käytettävissä tässä puhelussa.</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

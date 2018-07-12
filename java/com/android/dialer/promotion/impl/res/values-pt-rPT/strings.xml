@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Envio de mensagens em tempo real numa chamada de voz</string>
+  <string name="rtt_promotion_details">A RTT assiste os autores de chamadas surdos, com deficiências auditivas,
+    dificuldades da fala ou que precisem de mais do que apenas a voz. As transcrições de mensagens da RTT são armazenadas no seu dispositivo,
+    no histórico de chamadas. %1$s</string>
+  <string name="duo_disclosure_title">Efetue videochamadas com o Duo</string>
+  <string name="duo_disclosure_details">As videochamadas do Google Duo permitem-lhe conversar no chat com os amigos e a família cara a cara. Poderão ser aplicadas taxas de dados. %1$s</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">හඬ ඇමතුම</string>
+  <string name="video_call">වීඩියෝ ඇමතුම</string>
+  <string name="add_to_contacts">සම්බන්ධතාව එක් කරන්න</string>
+  <string name="send_a_message">පණිවිඩය</string>
+  <string name="not_spam">අයාචිත තැපෑලක් නොවේ</string>
+  <string name="block_number">අවහිර කරන්න</string>
+  <string name="unblock_number">අවහිර කිරීම ඉවත් කරන්න</string>
+  <string name="block_and_optionally_report_spam">අවහිර ක./අයාචිත ලෙස වාර්තා ක.</string>
+  <string name="copy_number">අංකය පිටපත් කරන්න</string>
+</resources>

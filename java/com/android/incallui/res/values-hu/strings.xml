@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefon"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Elküldi a következő hangjelzéseket?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Igen"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Nem"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Tárcsázás"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Hívás folyamatban"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Videohívás folyamatban"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Videohívás folyamatban – videó szüneteltetve"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Folyamatban lévő munkahelyi hívás"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Folyamatban lévő <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Bejövő <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Wi-Fi-hívás"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"munkahelyi Wi‑Fi-hívás"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Tartásban"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Bejövő hívás"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Bejövő hívás fotóval"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Bejövő hívás üzenettel"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Bejövő hívás hellyel"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Bejövő hívás fotóval és üzenettel"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Bejövő hívás fotóval és hellyel"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Bejövő hívás üzenettel és hellyel"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Bejövő hívás fotóval, üzenettel és hellyel"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Bejövő hívás mellékletekkel"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Fontos bejövő hívás"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Fontos bejövő hívás fotóval"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Fontos bejövő hívás üzenettel"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Fontos bejövő hívás hellyel"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Fontos bejövő hívás fotóval és üzenettel"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Fontos bejövő hívás fotóval és hellyel"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Fontos bejövő hívás üzenettel és hellyel"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Fontos bejövő hívás fotóval, üzenettel és hellyel"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Fontos bejövő hívás mellékletekkel"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Bejövő munkahelyi hívás"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Bejövő gyanús spamhívás"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Bejövő videokérés"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Fogadás"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Hívás befejezése"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Videó"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Elfogadás"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Elutasítás"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Hangszóró bekapcsolása"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Hangszóró kikapcsolása"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Folyamatban lévő hívás egy másik eszközön"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Folyamatban lévő videohívás egy másik eszközön"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Hívás fogadása"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Videohívás fogadása"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"A szolgáltatás nem támogatott."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"magánbeszélgetés"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Konferenciahívás kezelése"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Segélyhívó szám"</string>
-    <string name="child_number" msgid="3398257437107259682">"a következő számon keresztül: <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Hiányzó vagy hibás SIM kártya"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Hívás befejezése"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Konferenciahívás"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Hívásban"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Hívás folytatása mobil-adatkapcsolaton keresztül…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Nem sikerült Wi-Fi-hálózatra váltani"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"A videohívást továbbra is a mobilhálózaton folytatja. A mobilszolgáltató a normál adatforgalmi díjat számítja fel."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Ne jelenjen meg többé"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Elküldi a következő hangjelzéseket?\n</string>
+  <string name="pause_prompt_yes">Igen</string>
+  <string name="pause_prompt_no">Nem</string>
+  <string name="notification_dialing">Tárcsázás</string>
+  <string name="notification_ongoing_call">Hívás folyamatban</string>
+  <string name="notification_ongoing_video_call">Videohívás folyamatban</string>
+  <string name="notification_ongoing_paused_video_call">Videohívás folyamatban – videó szüneteltetve</string>
+  <string name="notification_ongoing_work_call">Folyamatban lévő munkahelyi hívás</string>
+  <string name="notification_ongoing_call_wifi_template">Folyamatban lévő %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Bejövő %1$s</string>
+  <string name="notification_call_wifi_brand">Wi-Fi-hívás</string>
+  <string name="notification_call_wifi_work_brand">munkahelyi Wi‑Fi-hívás</string>
+  <string name="notification_on_hold">Tartásban</string>
+  <string name="notification_incoming_call">Bejövő hívás</string>
+  <string name="notification_incoming_video_call">Bejövő videohívás</string>
+  <string name="notification_incoming_call_mutli_sim">Bejövő hívás a következőn: %1$s</string>
+  <string name="notification_incoming_call_with_photo">Bejövő hívás fotóval</string>
+  <string name="notification_incoming_call_with_message">Bejövő hívás üzenettel</string>
+  <string name="notification_incoming_call_with_location">Bejövő hívás hellyel</string>
+  <string name="notification_incoming_call_with_photo_message">Bejövő hívás fotóval és üzenettel</string>
+  <string name="notification_incoming_call_with_photo_location">Bejövő hívás fotóval és hellyel</string>
+  <string name="notification_incoming_call_with_message_location">Bejövő hívás üzenettel és hellyel</string>
+  <string name="notification_incoming_call_with_photo_message_location">Bejövő hívás fotóval, üzenettel és hellyel</string>
+  <string name="notification_incoming_call_attachments">Bejövő hívás mellékletekkel</string>
+  <string name="important_notification_incoming_call">Fontos bejövő hívás</string>
+  <string name="important_notification_incoming_call_with_photo">Fontos bejövő hívás fotóval</string>
+  <string name="important_notification_incoming_call_with_message">Fontos bejövő hívás üzenettel</string>
+  <string name="important_notification_incoming_call_with_location">Fontos bejövő hívás hellyel</string>
+  <string name="important_notification_incoming_call_with_photo_message">Fontos bejövő hívás fotóval és üzenettel</string>
+  <string name="important_notification_incoming_call_with_photo_location">Fontos bejövő hívás fotóval és hellyel</string>
+  <string name="important_notification_incoming_call_with_message_location">Fontos bejövő hívás üzenettel és hellyel</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Fontos bejövő hívás fotóval, üzenettel és hellyel</string>
+  <string name="important_notification_incoming_call_attachments">Fontos bejövő hívás mellékletekkel</string>
+  <string name="notification_incoming_work_call">Bejövő munkahelyi hívás</string>
+  <string name="notification_incoming_spam_call">Bejövő gyanús spamhívás</string>
+  <string name="notification_requesting_video_call">Bejövő videokérés</string>
+  <string name="notification_action_answer">Fogadás</string>
+  <string name="notification_action_end_call">Hívás befejezése</string>
+  <string name="notification_action_answer_video">Videó</string>
+  <string name="notification_action_accept">Elfogadás</string>
+  <string name="notification_action_dismiss">Elutasítás</string>
+  <string name="notification_action_speaker_on">Hangszóró bekapcsolása</string>
+  <string name="notification_action_speaker_off">Hangszóró kikapcsolása</string>
+  <string name="notification_external_call">Folyamatban lévő hívás egy másik eszközön</string>
+  <string name="notification_external_video_call">Folyamatban lévő videohívás egy másik eszközön</string>
+  <string name="notification_take_call">Hívás fogadása</string>
+  <string name="notification_take_video_call">Videohívás fogadása</string>
+  <string name="incall_error_supp_service_unknown">A szolgáltatás nem támogatott.</string>
+  <string name="goPrivate">magánbeszélgetés</string>
+  <string name="manageConferenceLabel">Konferenciahívás kezelése</string>
+  <string name="child_number">a következő számon keresztül: %s</string>
+  <string name="callFailed_simError">Hiányzó vagy hibás SIM kártya</string>
+  <string name="conference_caller_disconnect_content_description">Hívás befejezése</string>
+  <string name="conference_call_name">Konferenciahívás</string>
+  <string name="generic_conference_call_name">Hívásban</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Hívás folytatása mobil-adatkapcsolaton keresztül…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Nem sikerült Wi-Fi-hálózatra váltani</string>
+  <string name="video_call_lte_to_wifi_failed_message">A videohívást továbbra is a mobilhálózaton folytatja. A mobilszolgáltató a normál adatforgalmi díjat számítja fel.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Ne jelenjen meg többé</string>
+  <string name="bubble_return_to_call">Vissza a híváshoz</string>
+  <string name="rtt_request_dialog_title">Csatlakozik az RTT-híváshoz?</string>
+  <string name="rtt_request_dialog_details">%1$s szeretne üzenetet váltani a hanghívásban.</string>
+  <string name="rtt_request_dialog_more_information">Az RTT funkció a siket, hallássérült, beszédzavaros vagy a hangalapú kommunikáción kívül más kommunikációt is igénylő hívóknak lehet segítségére.</string>
+  <string name="rtt_button_decline_request">Nem, köszönöm</string>
+  <string name="rtt_button_accept_request">Csatlakozás</string>
 </resources>

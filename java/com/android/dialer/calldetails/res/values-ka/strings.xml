@@ -1,31 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_details" msgid="5063658079729839605">"ზარის დეტალები"</string>
-    <string name="delete" msgid="2141020674108406737">"წაშლა"</string>
-    <string name="call_details_copy_number" msgid="4265479408878990796">"ნომრის კოპირება"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"ნომრის რედაქტირება დარეკვამდე"</string>
-    <string name="call_details_report_call_id" msgid="8857541295264421217">"არაზუსტი ნომრის შეტყობინება"</string>
-    <string name="sent_a_photo" msgid="3978670717462979502">"ფოტო გაიგზავნა"</string>
-    <string name="received_a_photo" msgid="3528953225576480505">"მიღებულია ფოტო"</string>
-    <string name="message_in_quotes" msgid="3270574830115828365">"„<xliff:g id="MESSAGE">%1$s</xliff:g>“"</string>
-    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"არასწორი ნომრის შეტყობინება"</string>
-    <string name="report_caller_id_failed" msgid="1471904930106125702">"ნომრის შეტყობინება ვერ მოხერხდა"</string>
-    <string name="report_caller_id_toast" msgid="5494870403429969932">"ნომერი შეტყობინებულია"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">ზარის დეტალები</string>
+  <string name="delete">წაშლა</string>
+  <string name="call_details_copy_number">ნომრის კოპირება</string>
+  <string name="call_details_edit_number">ნომრის რედაქტირება დარეკვამდე</string>
+  <string name="call_details_report_call_id">არაზუსტი ნომრის შეტყობინება</string>
+  <string name="sent_a_photo">ფოტო გაიგზავნა</string>
+  <string name="received_a_photo">მიღებულია ფოტო</string>
+  <string name="message_in_quotes">„%1$s“</string>
+  <string name="report_caller_id_dialog_title">არასწორი ნომრის შეტყობინება</string>
+  <string name="report_caller_id_failed">ნომრის შეტყობინება ვერ მოხერხდა</string>
+  <string name="report_caller_id_toast">ნომერი შეტყობინებულია</string>
+  <string name="assisted_dialing_country_code_entry">აკრეფის დახმარება: გამოყენებულია ქვეყნის კოდი +%1$s</string>
+  <string name="assisted_dialing_country_code_entry_failure">გამოყენებულია აკრეფის დახმარება</string>
+  <string name="rtt_transcript_not_available">ტრანსკრიპტები ხელმისაწვდომია მხოლოდ ზარებისთვის შეტყობინებებით</string>
+  <string name="rtt_transcript_link">ტრანსკრიპტის ნახვა</string>
 </resources>

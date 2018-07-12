@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Textaskilaboð í rauntíma meðan á símtali stendur</string>
+  <string name="rtt_promotion_details">RTT-símtöl (með texta í rauntíma) aðstoða heyrnarlausa og fólk með heyrnarskerðingu eða skerta
+    talgetu og þá sem þurfa að styðja sig við meira en bara hljóð. Umritanir RTT-skilaboða eru vistaðar í símtalaferli
+    tækisins þíns. %1$s</string>
+  <string name="duo_disclosure_title">Hringdu myndsímtöl með Duo</string>
+  <string name="duo_disclosure_details">Með myndsímtölum í Google Duo geturðu spjallað við vini og fjölskyldu augliti til auglitis. Gjöld fyrir gagnanotkun geta átt við. %1$s</string>
+</resources>

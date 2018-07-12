@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ফোনে কথা বলতে বলতে রিয়েল-টাইম টেক্সট মেসেজ পাঠানো</string>
+  <string name="rtt_promotion_details">যে কলাররা বধির, কানে কম শোনেন, যাদের কথা বলতে অসুবিধা হয়
+    অথবা যারা কণ্ঠস্বরের সাথে অন্য কোনও উপায়ে নিজেদের প্রকাশ করেন, RTT বৈশিষ্ট্যটি তাদের সাহায্য করে। RTT মেসেজিং 
+ট্রান্সক্রিপ্টগুলি আপনার ডিভাইসের কলের ইতিহাসে সেভ করে রাখা হয়। %1$s</string>
+  <string name="duo_disclosure_title">Duo-তে ভিডিও কল করুন</string>
+  <string name="duo_disclosure_details">Google Duo ভিডিও কলিং এর মাধ্যমে আপনি পরিবারের সদস্য এবং বন্ধুদের সাথে মুখোমুখি চ্যাট করতে পারেন। ডেটা চার্জ প্রযোজ্য হতে পারে। %1$s</string>
+</resources>

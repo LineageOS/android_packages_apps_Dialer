@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Текстът бе копиран"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Обаждане на <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Обаждане на домашен"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Обаждане на мобилен"</string>
-    <string name="call_work" msgid="6040550697395300892">"Обаждане на служебен"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Обаждане на служебен факс"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Обаждане на домашен факс"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Обаждане на пейджър"</string>
-    <string name="call_other" msgid="5536385588712587235">"Обаждане на"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Обаждане на обратно обаждане"</string>
-    <string name="call_car" msgid="3197417098027764954">"Обаждане на номер в кола"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Обаждане на основен служебен"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Обаждане на ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Обаждане на основен"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Обаждане на факс"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Обаждане на радио"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Обаждане на телекс"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Обаждане на TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Обаждане на служебен мобилен"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Обаждане на служебен пейджър"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Обаждане на <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Обаждане на MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Изпращане на SMS на <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Изпращaне на SMS на домашен"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Изпращане на SMS на мобилен"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Изпращане на SMS на служебен"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Изпращане на SMS на служебен факс"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Изпращане на SMS на домашен факс"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Изпращане на SMS на пейджър"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Изпращане на SMS на"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Изпращане на SMS на отговорилия"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Изпращане на SMS на номер в кола"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Изпращaне на SMS на основен служебен"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Изпращaне на SMS на ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Изпращане на SMS на основен"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Изпращане на SMS на факс"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Изпращане на SMS на радиотелефон"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Изпращане на SMS на телекс"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Изпращане на SMS на TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Изпращане на SMS на служебен мобилен"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Изпращане на SMS на служебен пейджър"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Изпращане на SMS на <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Изпращане на SMS на MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Да се изчистят ли често търсените?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Ще изчистите списъка с често търсените в приложенията Контакти и Телефон и ще принудите приложенията за имейл да научат предпочитанията ви за адресите, започвайки отначало."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Често търсените се изчистват…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Налице"</string>
-    <string name="status_away" msgid="2298688367552893953">"Отсъства"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Зает/а"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Контакти"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Водещи предложения"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Други"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Директория"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Служебен указател"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Всички контакти"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Предложения"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Аз"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Няма име)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Преглед на контакта"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Всички контакти с телефонни номера"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Контакти в служебния потребителски профил"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Преглед на актуализациите"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Само на устройството, несинхронизиран"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Име"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Псевдоним"</string>
-    <string name="full_name" msgid="648186563998465740">"Име"</string>
-    <string name="name_given" msgid="5096576006314820536">"Собствено име"</string>
-    <string name="name_family" msgid="6646235805198547467">"Фамилно име"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Обръщение"</string>
-    <string name="name_middle" msgid="703755205331582769">"Презиме"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Титла"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Име (фонетично)"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Собствено име (фонетично)"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Презиме (фонетично)"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Фамилно име (фонетично)"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Телефон"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Изпращане на имейл"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Адрес"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Незабавни съобщения"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Организация"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Връзки"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Специална дата"</string>
-    <string name="sms" msgid="7574344928185328095">"Текстово съобщение"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Адрес"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Фирма"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Наименование"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Бележки"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Уебсайт"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Групи"</string>
-    <string name="email_home" msgid="889830029388962171">"Изпращане на имейл до домашен"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Изпращане на имейл до мобилен"</string>
-    <string name="email_work" msgid="4223487303344613528">"Изпращане на имейл до служебен"</string>
-    <string name="email_other" msgid="4246411900126012062">"Изпращане на имейл"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Изпращане на имейл до <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"Изпращане на имейл"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Улица"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Град"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Щат"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Пощенски код"</string>
-    <string name="postal_country" msgid="232670707458768148">"Държава"</string>
-    <string name="map_home" msgid="4181131107392126938">"Преглед на домашния адрес"</string>
-    <string name="map_work" msgid="5723471185992684400">"Преглед на служебния адрес"</string>
-    <string name="map_other" msgid="2253764780863500516">"Преглед на адреса"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Преглед на адреса: <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Чат по AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Чат по Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Чат по Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Чат по Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Чат по QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Чат по Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Чат по ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Чат по Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Чат"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Всички контакти"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Контакти във: <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Контакти в персонал. изглед"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Един контакт"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Сортиране по"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Собствено име"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Фамилно име"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Формат на името"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Първо собственото име"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Първо фамилното име"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Изчистване на често търсените"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"спиране на търсенето"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Изчистване на търсенето"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Профил"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Винаги да се използва за обаждания"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Обаждане чрез"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Обаждане, включващо бележка"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Напишете придружаваща бележка, която ще се изпрати при извършване на обаждането..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ИЗПРАЩАНЕ И ОБАЖДАНЕ"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Раздел „<xliff:g id="TITLE">%1$s</xliff:g>“."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other">Раздел „<xliff:g id="TITLE_2">%1$s</xliff:g>“. <xliff:g id="COUNT_3">%2$d</xliff:g> непрочетени елемента. </item>
-      <item quantity="one">Раздел „<xliff:g id="TITLE_0">%1$s</xliff:g>“. <xliff:g id="COUNT_1">%2$d</xliff:g> непрочетен елемент. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Видеообаждане"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Споделяне и обаждане"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Обаждане на %s</string>
+  <string name="call_home">Обаждане на домашен</string>
+  <string name="call_mobile">Обаждане на мобилен</string>
+  <string name="call_work">Обаждане на служебен</string>
+  <string name="call_fax_work">Обаждане на служебен факс</string>
+  <string name="call_fax_home">Обаждане на домашен факс</string>
+  <string name="call_pager">Обаждане на пейджър</string>
+  <string name="call_other">Обаждане на</string>
+  <string name="call_callback">Обаждане на обратно обаждане</string>
+  <string name="call_car">Обаждане на номер в кола</string>
+  <string name="call_company_main">Обаждане на основен служебен</string>
+  <string name="call_isdn">Обаждане на ISDN</string>
+  <string name="call_main">Обаждане на основен</string>
+  <string name="call_other_fax">Обаждане на факс</string>
+  <string name="call_radio">Обаждане на радио</string>
+  <string name="call_telex">Обаждане на телекс</string>
+  <string name="call_tty_tdd">Обаждане на TTY/TDD</string>
+  <string name="call_work_mobile">Обаждане на служебен мобилен</string>
+  <string name="call_work_pager">Обаждане на служебен пейджър</string>
+  <string name="call_assistant">Обаждане на %s</string>
+  <string name="call_mms">Обаждане на MMS</string>
+  <string name="sms_custom">Изпращане на SMS на %s</string>
+  <string name="sms_home">Изпращaне на SMS на домашен</string>
+  <string name="sms_mobile">Изпращане на SMS на мобилен</string>
+  <string name="sms_work">Изпращане на SMS на служебен</string>
+  <string name="sms_fax_work">Изпращане на SMS на служебен факс</string>
+  <string name="sms_fax_home">Изпращане на SMS на домашен факс</string>
+  <string name="sms_pager">Изпращане на SMS на пейджър</string>
+  <string name="sms_other">Изпращане на SMS на</string>
+  <string name="sms_callback">Изпращане на SMS на отговорилия</string>
+  <string name="sms_car">Изпращане на SMS на номер в кола</string>
+  <string name="sms_company_main">Изпращaне на SMS на основен служебен</string>
+  <string name="sms_isdn">Изпращaне на SMS на ISDN</string>
+  <string name="sms_main">Изпращане на SMS на основен</string>
+  <string name="sms_other_fax">Изпращане на SMS на факс</string>
+  <string name="sms_radio">Изпращане на SMS на радиотелефон</string>
+  <string name="sms_telex">Изпращане на SMS на телекс</string>
+  <string name="sms_tty_tdd">Изпращане на SMS на TTY/TDD</string>
+  <string name="sms_work_mobile">Изпращане на SMS на служебен мобилен</string>
+  <string name="sms_work_pager">Изпращане на SMS на служебен пейджър</string>
+  <string name="sms_assistant">Изпращане на SMS на %s</string>
+  <string name="sms_mms">Изпращане на SMS на MMS</string>
+  <string name="clearFrequentsConfirmation_title">Да се изчистят ли често търсените?</string>
+  <string name="clearFrequentsConfirmation">Ще изчистите списъка с често търсените в приложенията Контакти и Телефон и ще принудите приложенията за имейл да научат предпочитанията ви за адресите, започвайки отначало.</string>
+  <string name="clearFrequentsProgress_title">Често търсените се изчистват…</string>
+  <string name="status_available">Налице</string>
+  <string name="status_away">Отсъства</string>
+  <string name="status_busy">Зает/а</string>
+  <string name="contactsList">Контакти</string>
+  <string name="contact_suggestions">Водещи предложения</string>
+  <string name="local_invisible_directory">Други</string>
+  <string name="directory_search_label">Директория</string>
+  <string name="directory_search_label_work">Служебен указател</string>
+  <string name="local_search_label">Всички контакти</string>
+  <string name="local_suggestions_search_label">Предложения</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Аз</string>
+  <string name="missing_name">(Няма име)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Преглед на контакта</string>
+  <string name="list_filter_phones">Всички контакти с телефонни номера</string>
+  <string name="list_filter_phones_work">Контакти в служебния потребителски профил</string>
+  <string name="view_updates_from_group">Преглед на актуализациите</string>
+  <string name="account_phone">Само на устройството, несинхронизиран</string>
+  <string name="nameLabelsGroup">Име</string>
+  <string name="nicknameLabelsGroup">Псевдоним</string>
+  <string name="full_name">Име</string>
+  <string name="name_given">Собствено име</string>
+  <string name="name_family">Фамилно име</string>
+  <string name="name_prefix">Обръщение</string>
+  <string name="name_middle">Презиме</string>
+  <string name="name_suffix">Титла</string>
+  <string name="name_phonetic">Име (фонетично)</string>
+  <string name="name_phonetic_given">Собствено име (фонетично)</string>
+  <string name="name_phonetic_middle">Презиме (фонетично)</string>
+  <string name="name_phonetic_family">Фамилно име (фонетично)</string>
+  <string name="phoneLabelsGroup">Телефон</string>
+  <string name="emailLabelsGroup">Изпращане на имейл</string>
+  <string name="postalLabelsGroup">Адрес</string>
+  <string name="imLabelsGroup">Незабавни съобщения</string>
+  <string name="organizationLabelsGroup">Организация</string>
+  <string name="relationLabelsGroup">Връзки</string>
+  <string name="eventLabelsGroup">Специална дата</string>
+  <string name="sms">Текстово съобщение</string>
+  <string name="postal_address">Адрес</string>
+  <string name="ghostData_company">Фирма</string>
+  <string name="ghostData_title">Наименование</string>
+  <string name="label_notes">Бележки</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Уебсайт</string>
+  <string name="groupsLabel">Групи</string>
+  <string name="email_home">Изпращане на имейл до домашен</string>
+  <string name="email_mobile">Изпращане на имейл до мобилен</string>
+  <string name="email_work">Изпращане на имейл до служебен</string>
+  <string name="email_other">Изпращане на имейл</string>
+  <string name="email_custom">Изпращане на имейл до %s</string>
+  <string name="email">Изпращане на имейл</string>
+  <string name="postal_street">Улица</string>
+  <string name="postal_city">Град</string>
+  <string name="postal_region">Щат</string>
+  <string name="postal_postcode">Пощенски код</string>
+  <string name="postal_country">Държава</string>
+  <string name="map_home">Преглед на домашния адрес</string>
+  <string name="map_work">Преглед на служебния адрес</string>
+  <string name="map_other">Преглед на адреса</string>
+  <string name="map_custom">Преглед на адреса: %s</string>
+  <string name="chat_aim">Чат по AIM</string>
+  <string name="chat_msn">Чат по Windows Live</string>
+  <string name="chat_yahoo">Чат по Yahoo</string>
+  <string name="chat_skype">Чат по Skype</string>
+  <string name="chat_qq">Чат по QQ</string>
+  <string name="chat_gtalk">Чат по Google Talk</string>
+  <string name="chat_icq">Чат по ICQ</string>
+  <string name="chat_jabber">Чат по Jabber</string>
+  <string name="chat">Чат</string>
+  <string name="list_filter_all_accounts">Всички контакти</string>
+  <string name="listAllContactsInAccount">Контакти във: %s</string>
+  <string name="listCustomView">Контакти в персонал. изглед</string>
+  <string name="listSingleContact">Един контакт</string>
+  <string name="display_options_sort_list_by">Сортиране по</string>
+  <string name="display_options_sort_by_given_name">Собствено име</string>
+  <string name="display_options_sort_by_family_name">Фамилно име</string>
+  <string name="display_options_view_names_as">Формат на името</string>
+  <string name="display_options_view_given_name_first">Първо собственото име</string>
+  <string name="display_options_view_family_name_first">Първо фамилното име</string>
+  <string name="menu_clear_frequents">Изчистване на често търсените</string>
+  <string name="action_menu_back_from_search">спиране на търсенето</string>
+  <string name="description_clear_search">Изчистване на търсенето</string>
+  <string name="select_account_dialog_title">Профил</string>
+  <string name="set_default_account">Винаги да се използва за обаждания</string>
+  <string name="select_phone_account_for_calls">Изберете SIM карта за това обаждане</string>
+  <string name="select_phone_account_for_calls_remember">Запомняне на този избор</string>
+  <string name="call_with_a_note">Обаждане, включващо бележка</string>
+  <string name="call_subject_hint">Напишете придружаваща бележка, която ще се изпрати при извършване на обаждането...</string>
+  <string name="send_and_call_button">ИЗПРАЩАНЕ И ОБАЖДАНЕ</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Раздел „%1$s“.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">Раздел „%1$s“. %2$d непрочетен елемент. </item>
+    <item quantity="other">Раздел „%1$s“. %2$d непрочетени елемента. </item>
+  </plurals>
+  <string name="description_search_video_call">Видеообаждане</string>
+  <string name="description_search_call_and_share">Споделяне и обаждане</string>
 </resources>

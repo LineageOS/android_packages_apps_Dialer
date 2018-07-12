@@ -1,24 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="videocall_remote_video_off" msgid="2959680546745902547">"Video staat uit"</string>
-    <string name="videocall_remote_video_on" msgid="6011817851703181639">"Zijn video is aan"</string>
-    <string name="videocall_remotely_held" msgid="1295702896355732947">"Gesprek in de wacht"</string>
-    <string name="videocall_remotely_resumed" msgid="3331784411244773788">"Gesprek hervat"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="videocall_remote_video_off">Video staat uit</string>
+  <string name="videocall_remote_video_on">Zijn video is aan</string>
+  <string name="videocall_remotely_held">Gesprek in de wacht</string>
+  <string name="videocall_remotely_resumed">Gesprek hervat</string>
+  <string name="videocall_charges_alert_dialog_description">Videogesprekken via het mobiele netwerk verbruiken zowel data als belminuten. Er kunnen kosten in rekening worden gebracht.</string>
+  <string name="do_not_show_again">Niet opnieuw weergeven</string>
 </resources>

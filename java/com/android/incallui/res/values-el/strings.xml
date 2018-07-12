@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Τηλέφωνο"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Αποστολή των παρακάτω τόνων;\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Ναι"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Όχι"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Κλήση"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Κλήση σε εξέλιξη"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Βιντεοκλήση σε εξέλιξη"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Βιντεοκλήση σε εξέλιξη - βίντεο σε παύση"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Κλήση εργασίας σε εξέλιξη"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"Σε εξέλιξη <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"Εισερχόμενη <xliff:g id="BRAND_NAME">%1$s</xliff:g>"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"κλήση μέσω Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"κλήση εργασίας μέσω Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Σε αναμονή"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Εισερχόμενη κλήση"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Εισερχόμενη κλήση με φωτογραφία"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Εισερχόμενη κλήση με μήνυμα"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Εισερχόμενη κλήση με τοποθεσία"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Εισερχόμενη κλήση με φωτογραφία και μήνυμα"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Εισερχόμενη κλήση με φωτογραφία και τοποθεσία"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Εισερχόμενη κλήση με μήνυμα και τοποθεσία"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Εισερχόμενη κλήση με φωτο, μήνυμα και τοποθεσία"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Εισερχόμενη κλήση με συνημμένα"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Σημαντική εισερχόμενη κλήση"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Σημαντική εισερχόμενη κλήση με φωτογραφία"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Σημαντική εισερχόμενη κλήση με μήνυμα"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Σημαντική εισερχόμενη κλήση με τοποθεσία"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Σημαντική εισερχόμενη κλήση με φωτο και μήνυμα"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Σημαντική εισερχόμενη κλήση με φωτο και τοποθεσία"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Σημαντική εισερχόμ. κλήση με μήνυμα και τοποθεσία"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Σημαντική εισερχ. κλήση με φωτο, μήνυμα, τοποθεσία"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Σημαντική εισερχόμενη κλήση με συνημμένα"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Εισερχόμενη κλήση εργασίας"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Πιθανώς ανεπιθύμητη εισερχόμενη κλήση"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Αίτημα εισερχόμενου βίντεο"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Απάντηση"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Τερματισμός κλήσης"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Βίντεο"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Αποδοχή"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Απόρριψη"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Ενεργοποίηση ηχείου"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Απενεργοποίηση ηχείου"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Κλήση σε εξέλιξη σε άλλη συσκευή"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Τρέχουσα βιντεοκλήση σε άλλη συσκευή"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Λήψη κλήσης"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Λήψη βιντεοκλήσης"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Η υπηρεσία δεν υποστηρίζεται."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"ιδιωτική χρήση"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Διαχείριση κλήσης συνδιάσκεψης"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Αριθμός έκτακτης ανάγκης"</string>
-    <string name="child_number" msgid="3398257437107259682">"μέσω <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Δεν υπάρχει κάρτα SIM ή σφάλμα κάρτας SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Τερματισμός κλήσης"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Κλήση συνδιάσκεψης"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Σε κλήση"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Συνέχιση κλήσης με χρήση δεδομένων κινητής τηλεφωνίας…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Δεν ήταν δυνατή η εναλλαγή σε δίκτυο Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"Η βιντεοκλήση θα παραμείνει σε δίκτυο δεδομένων κινητής τηλεφωνίας; Ενδέχεται να ισχύουν βασικές χρεώσεις δεδομένων."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Να μην εμφανιστεί ξανά αυτό"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Αποστολή των παρακάτω τόνων;\n</string>
+  <string name="pause_prompt_yes">Ναι</string>
+  <string name="pause_prompt_no">Όχι</string>
+  <string name="notification_dialing">Κλήση</string>
+  <string name="notification_ongoing_call">Κλήση σε εξέλιξη</string>
+  <string name="notification_ongoing_video_call">Βιντεοκλήση σε εξέλιξη</string>
+  <string name="notification_ongoing_paused_video_call">Βιντεοκλήση σε εξέλιξη - βίντεο σε παύση</string>
+  <string name="notification_ongoing_work_call">Κλήση εργασίας σε εξέλιξη</string>
+  <string name="notification_ongoing_call_wifi_template">Σε εξέλιξη %1$s</string>
+  <string name="notification_incoming_call_wifi_template">Εισερχόμενη %1$s</string>
+  <string name="notification_call_wifi_brand">κλήση μέσω Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">κλήση εργασίας μέσω Wi-Fi</string>
+  <string name="notification_on_hold">Σε αναμονή</string>
+  <string name="notification_incoming_call">Εισερχόμενη κλήση</string>
+  <string name="notification_incoming_video_call">Εισερχόμενη βιντεοκλήση</string>
+  <string name="notification_incoming_call_mutli_sim">Εισερχόμενη κλήση μέσω %1$s</string>
+  <string name="notification_incoming_call_with_photo">Εισερχόμενη κλήση με φωτογραφία</string>
+  <string name="notification_incoming_call_with_message">Εισερχόμενη κλήση με μήνυμα</string>
+  <string name="notification_incoming_call_with_location">Εισερχόμενη κλήση με τοποθεσία</string>
+  <string name="notification_incoming_call_with_photo_message">Εισερχόμενη κλήση με φωτογραφία και μήνυμα</string>
+  <string name="notification_incoming_call_with_photo_location">Εισερχόμενη κλήση με φωτογραφία και τοποθεσία</string>
+  <string name="notification_incoming_call_with_message_location">Εισερχόμενη κλήση με μήνυμα και τοποθεσία</string>
+  <string name="notification_incoming_call_with_photo_message_location">Εισερχόμενη κλήση με φωτο, μήνυμα και τοποθεσία</string>
+  <string name="notification_incoming_call_attachments">Εισερχόμενη κλήση με συνημμένα</string>
+  <string name="important_notification_incoming_call">Σημαντική εισερχόμενη κλήση</string>
+  <string name="important_notification_incoming_call_with_photo">Σημαντική εισερχόμενη κλήση με φωτογραφία</string>
+  <string name="important_notification_incoming_call_with_message">Σημαντική εισερχόμενη κλήση με μήνυμα</string>
+  <string name="important_notification_incoming_call_with_location">Σημαντική εισερχόμενη κλήση με τοποθεσία</string>
+  <string name="important_notification_incoming_call_with_photo_message">Σημαντική εισερχόμενη κλήση με φωτο και μήνυμα</string>
+  <string name="important_notification_incoming_call_with_photo_location">Σημαντική εισερχόμενη κλήση με φωτο και τοποθεσία</string>
+  <string name="important_notification_incoming_call_with_message_location">Σημαντική εισερχόμ. κλήση με μήνυμα και τοποθεσία</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Σημαντική εισερχ. κλήση με φωτο, μήνυμα, τοποθεσία</string>
+  <string name="important_notification_incoming_call_attachments">Σημαντική εισερχόμενη κλήση με συνημμένα</string>
+  <string name="notification_incoming_work_call">Εισερχόμενη κλήση εργασίας</string>
+  <string name="notification_incoming_spam_call">Πιθανώς ανεπιθύμητη εισερχόμενη κλήση</string>
+  <string name="notification_requesting_video_call">Αίτημα εισερχόμενου βίντεο</string>
+  <string name="notification_action_answer">Απάντηση</string>
+  <string name="notification_action_end_call">Τερματισμός κλήσης</string>
+  <string name="notification_action_answer_video">Βίντεο</string>
+  <string name="notification_action_accept">Αποδοχή</string>
+  <string name="notification_action_dismiss">Απόρριψη</string>
+  <string name="notification_action_speaker_on">Ενεργοποίηση ηχείου</string>
+  <string name="notification_action_speaker_off">Απενεργοποίηση ηχείου</string>
+  <string name="notification_external_call">Κλήση σε εξέλιξη σε άλλη συσκευή</string>
+  <string name="notification_external_video_call">Τρέχουσα βιντεοκλήση σε άλλη συσκευή</string>
+  <string name="notification_take_call">Λήψη κλήσης</string>
+  <string name="notification_take_video_call">Λήψη βιντεοκλήσης</string>
+  <string name="incall_error_supp_service_unknown">Η υπηρεσία δεν υποστηρίζεται.</string>
+  <string name="goPrivate">ιδιωτική χρήση</string>
+  <string name="manageConferenceLabel">Διαχείριση κλήσης συνδιάσκεψης</string>
+  <string name="child_number">μέσω %s</string>
+  <string name="callFailed_simError">Δεν υπάρχει κάρτα SIM ή σφάλμα κάρτας SIM</string>
+  <string name="conference_caller_disconnect_content_description">Τερματισμός κλήσης</string>
+  <string name="conference_call_name">Κλήση συνδιάσκεψης</string>
+  <string name="generic_conference_call_name">Σε κλήση</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Συνέχιση κλήσης με χρήση δεδομένων κινητής τηλεφωνίας…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Δεν ήταν δυνατή η εναλλαγή σε δίκτυο Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Η βιντεοκλήση θα παραμείνει σε δίκτυο δεδομένων κινητής τηλεφωνίας; Ενδέχεται να ισχύουν βασικές χρεώσεις δεδομένων.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Να μην εμφανιστεί ξανά αυτό</string>
+  <string name="bubble_return_to_call">Επιστροφή στην κλήση</string>
+  <string name="rtt_request_dialog_title">Συμμετοχή σε κλήση RTT;</string>
+  <string name="rtt_request_dialog_details">Ο χρήστης %1$s θέλει να χρησιμοποιήσει ανταλλαγή μηνυμάτων κατά τη διάρκεια της φωνητικής κλήσης.</string>
+  <string name="rtt_request_dialog_more_information">Το RTT υποβοηθά καλούντες που είναι κωφοί ή αντιμετωπίζουν προβλήματα ακοής ή ομιλίας, καθώς και όσους χρειάζονται κάτι περισσότερο από απλή φωνητική επικοινωνία.</string>
+  <string name="rtt_button_decline_request">Όχι, ευχαριστώ</string>
+  <string name="rtt_button_accept_request">Συμμετοχή σε RTT</string>
 </resources>

@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">Liên hệ ưa thích</string>
+  <string name="suggestions_header">Liên hệ thường xuyên</string>
+  <string name="speed_dial_add_button_text">Thêm</string>
+  <string name="speed_dial_remember_this_choice">Nhớ lựa chọn này</string>
+  <string name="speed_dial_disambig_dialog_title">Chọn loại cuộc gọi</string>
+  <string name="disambig_option_video_call">Gọi điện video</string>
+  <string name="disambig_option_voice_call">Gọi</string>
+  <string name="add_favorite_activity_title">Thêm liên hệ yêu thích</string>
+  <string name="contact_menu_voice_call">Cuộc gọi thoại</string>
+  <string name="contact_menu_video_call">Gọi điện video</string>
+  <string name="contact_menu_message">Tin nhắn</string>
+  <string name="contact_menu_remove">Xóa</string>
+  <string name="contact_menu_contact_info">Thông tin l.hệ</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">Thêm liên hệ yêu thích</string>
+  <string name="speed_dial_contacts_permission_description">Để bật tính năng quay số nhanh, hãy bật quyền đối với Danh bạ.</string>
+  <string name="speed_dial_turn_on_contacts_permission">Bật</string>
+  <string name="speed_dial_no_contacts_description">Bạn chưa thêm bất kỳ liên hệ yêu thích nào</string>
+  <string name="speed_dial_no_contacts_action_text">Thêm liên hệ yêu thích</string>
+  <string name="speed_dial_remove_favorites">Xóa khỏi mục ưa thích</string>
 </resources>

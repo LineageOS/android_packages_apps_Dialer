@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Səsli zəng</string>
+  <string name="video_call">Video zəng</string>
+  <string name="add_to_contacts">Kontakt əlavə edin</string>
+  <string name="send_a_message">Mesaj</string>
+  <string name="not_spam">Spam deyil</string>
+  <string name="block_number">Blok edin</string>
+  <string name="unblock_number">Blokdan çıxarın</string>
+  <string name="block_and_optionally_report_spam">Spamı blok edin və ya bildirin</string>
+  <string name="copy_number">Nömrəni kopyalayın</string>
+</resources>

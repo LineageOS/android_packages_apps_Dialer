@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Telefon izni olmadan telefon edilemez</string>
+  <string name="pre_call_select_phone_account">Bu görüşme için kullanılacak SIM\'i seçin</string>
+  <string name="pre_call_select_phone_account_remember">Bu tercihi hatırla</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">%1$s üzerinden devam eden çağrı olduğu için kullanılamaz</string>
+</resources>

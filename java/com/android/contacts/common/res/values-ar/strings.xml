@@ -1,166 +1,149 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"تم نسخ النص"</string>
-    <string name="call_custom" msgid="3041673234638990874">"الاتصال بـ <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"الاتصال بهاتف منزلي"</string>
-    <string name="call_mobile" msgid="967589404494150813">"الاتصال بالجوال"</string>
-    <string name="call_work" msgid="6040550697395300892">"الاتصال بهاتف العمل"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"الاتصال بفاكس العمل"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"الاتصال بفاكس المنزل"</string>
-    <string name="call_pager" msgid="6814149227741274161">"الاتصال بجهاز النداء"</string>
-    <string name="call_other" msgid="5536385588712587235">"اتصال"</string>
-    <string name="call_callback" msgid="6314019862718112786">"الاتصال برقم معادوة الاتصال"</string>
-    <string name="call_car" msgid="3197417098027764954">"الاتصال بهاتف السيارة"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"الاتصال بهاتف الشركة الرئيسي"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"‏اتصال بـ ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"الاتصال بالهاتف الرئيسي"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"الاتصال برقم الفاكس"</string>
-    <string name="call_radio" msgid="8942441419845057942">"اتصال بهاتف لاسلكي"</string>
-    <string name="call_telex" msgid="2031514461660668351">"الاتصال بالتلكس"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"‏اتصال بـ TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"الاتصال بجوال العمل"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"الاتصال بجهاز نداء العمل"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"الاتصال بـ <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"اتصال بهاتف رسائل الوسائط المتعددة"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"إرسال رسالة نصية إلى <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"إرسال رسالة نصية إلى هاتف منزلي"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"إرسال رسالة نصية إلى جوال"</string>
-    <string name="sms_work" msgid="4158595439553450966">"إرسال رسالة نصية إلى هاتف العمل"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"إرسال رسالة نصية إلى فاكس العمل"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"إرسال رسالة نصية إلى فاكس المنزل"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"إرسال رسالة نصية إلى جهاز النداء"</string>
-    <string name="sms_other" msgid="1742702947993285933">"إرسال رسالة نصية"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"إرسال رسالة نصية إلى هاتف معاودة الاتصال"</string>
-    <string name="sms_car" msgid="4314577266154395174">"إرسال رسالة نصية إلى هاتف السيارة"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"إرسال رسالة نصية إلى الهاتف الرئيسي للشركة"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"‏إرسال رسالة نصية إلى ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"إرسال رسالة نصية إلى الهاتف الرئيسي"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"إرسال رسالة نصية إلى فاكس"</string>
-    <string name="sms_radio" msgid="855555176531704682">"إرسال رسالة نصية إلى هاتف لاسلكي"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"إرسال رسالة نصية إلى هاتف تلكس"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"‏إرسال رسالة نصية إلى TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"إرسال رسالة نصية إلى جوال العمل"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"إرسال رسالة نصية إلى جهاز نداء العمل"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"إرسال رسالة نصية إلى <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"إرسال رسالة نصية إلى هاتف رسائل الوسائط المتعددة"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"محو قائمة من يتم الاتصال بهم كثيرًا؟"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"ستمحو قائمة من يتم الاتصال بهم كثيرًا في تطبيقي جهات الاتصال والهاتف، وستفرض على تطبيقات البريد الإلكتروني التعرف على تفضيلات توجيه الرسائل من البداية."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"جارٍ محو قائمة المُتصل بهم كثيرًا…"</string>
-    <string name="status_available" msgid="2648156525685472626">"متاح"</string>
-    <string name="status_away" msgid="2298688367552893953">"بالخارج"</string>
-    <string name="status_busy" msgid="5990832098713248503">"مشغول"</string>
-    <string name="contactsList" msgid="8806067891419291513">"جهات الاتصال"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"أهم المقترحات"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"غير ذلك"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"الدليل"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"دليل العمل"</string>
-    <string name="local_search_label" msgid="907622822323119235">"جميع جهات الاتصال"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"الاقتراحات"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"أنا"</string>
-    <string name="missing_name" msgid="978606963362745020">"(بلا اسم)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"عرض جهة الاتصال"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"جميع جهات الاتصال التي لها أرقام هواتف"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"جهات الاتصال للملف الشخصي للعمل"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"عرض التحديثات"</string>
-    <string name="account_phone" msgid="7067809073194061035">"الجهاز فقط، غير متزامنة"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"الاسم"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"اللقب"</string>
-    <string name="full_name" msgid="648186563998465740">"الاسم"</string>
-    <string name="name_given" msgid="5096576006314820536">"الاسم الأول"</string>
-    <string name="name_family" msgid="6646235805198547467">"اسم العائلة"</string>
-    <string name="name_prefix" msgid="9215326539658838">"بادئة الاسم"</string>
-    <string name="name_middle" msgid="703755205331582769">"الاسم الأوسط"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"لاحقة الاسم"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"الاسم صوتيًا"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"الاسم الأول صوتيًا"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"الاسم الصوتي الأوسط"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"اسم العائلة صوتيًا"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"الهاتف"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"إرسال رسالة إلكترونية"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"العنوان"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"المراسلة الفورية"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"المؤسسة"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"العلاقة"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"تاريخ مميز"</string>
-    <string name="sms" msgid="7574344928185328095">"رسالة نصية"</string>
-    <string name="postal_address" msgid="1804707930129674200">"العنوان"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"الشركة"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"العنوان"</string>
-    <string name="label_notes" msgid="2050255313694219786">"ملاحظات"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"موقع ويب"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"المجموعات"</string>
-    <string name="email_home" msgid="889830029388962171">"إرسال رسالة إلكترونية إلى عنوان البريد الإلكتروني للمنزل"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"إرسال رسالة إلكترونية إلى عنوان بريد إلكتروني على الجوال"</string>
-    <string name="email_work" msgid="4223487303344613528">"إرسال رسالة إلكترونية إلى عنوان البريد الإلكتروني للعمل"</string>
-    <string name="email_other" msgid="4246411900126012062">"إرسال رسالة إلكترونية"</string>
-    <string name="email_custom" msgid="7246580894327511013">"البريد الإلكتروني <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"إرسال رسالة إلكترونية"</string>
-    <string name="postal_street" msgid="6918171741240802474">"الشارع"</string>
-    <string name="postal_city" msgid="8674569121430005628">"المدينة"</string>
-    <string name="postal_region" msgid="1730369286225469192">"الولاية"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"الرمز البريدي"</string>
-    <string name="postal_country" msgid="232670707458768148">"البلد"</string>
-    <string name="map_home" msgid="4181131107392126938">"عرض عنوان المنزل"</string>
-    <string name="map_work" msgid="5723471185992684400">"عرض عنوان العمل"</string>
-    <string name="map_other" msgid="2253764780863500516">"عرض العنوان"</string>
-    <string name="map_custom" msgid="5581743097882436157">"عرض عنوان <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"‏الدردشة باستخدام AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"‏الدردشة باستخدام Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"‏الدردشة باستخدام Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"‏الدردشة باستخدام Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"‏الدردشة باستخدام QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"‏الدردشة باستخدام Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"‏الدردشة باستخدام ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"‏الدردشة باستخدام Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"دردشة"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"كل جهات الاتصال"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"جهات الاتصال في <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"جهات الاتصال في عرض مخصص"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"جهة اتصال واحدة"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"ترتيب بحسب"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"الاسم الأول"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"اسم العائلة"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"تنسيق الاسم"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"الاسم الأول أولاً"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"اسم العائلة أوّلًا"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"محو قائمة من يتصل بهم كثيرًا"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"إيقاف البحث"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"محو البحث"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"الحساب"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"استخدام هذا للمكالمات دائمًا"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"الاتصال باستخدام"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"مكالمة مع ملاحظة"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"اكتب ملاحظة لإرسالها مع المكالمة ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"إرسال واتصال"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"علامة تبويب <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="zero"> <xliff:g id="TITLE_2">%1$s</xliff:g> علامة تبويب. <xliff:g id="COUNT_3">%2$d</xliff:g> عناصر غير مقروءة. </item>
-      <item quantity="two"> علامتا تبويب <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> عناصر غير مقروءة. </item>
-      <item quantity="few"> <xliff:g id="TITLE_2">%1$s</xliff:g> علامات تبويب. <xliff:g id="COUNT_3">%2$d</xliff:g> عناصر غير مقروءة. </item>
-      <item quantity="many"> <xliff:g id="TITLE_2">%1$s</xliff:g> علامة تبويب. <xliff:g id="COUNT_3">%2$d</xliff:g> عناصر غير مقروءة. </item>
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> علامة تبويب. <xliff:g id="COUNT_3">%2$d</xliff:g> عناصر غير مقروءة. </item>
-      <item quantity="one"> <xliff:g id="TITLE_0">%1$s</xliff:g> علامة تبويب. عنصر واحد (<xliff:g id="COUNT_1">%2$d</xliff:g>) غير مقروء. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"مكالمة فيديو"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"المشاركة والاتصال"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">الاتصال بـ %s</string>
+  <string name="call_home">الاتصال بهاتف منزلي</string>
+  <string name="call_mobile">الاتصال بالجوال</string>
+  <string name="call_work">الاتصال بهاتف العمل</string>
+  <string name="call_fax_work">الاتصال بفاكس العمل</string>
+  <string name="call_fax_home">الاتصال بفاكس المنزل</string>
+  <string name="call_pager">الاتصال بجهاز النداء</string>
+  <string name="call_other">اتصال</string>
+  <string name="call_callback">الاتصال برقم معادوة الاتصال</string>
+  <string name="call_car">الاتصال بهاتف السيارة</string>
+  <string name="call_company_main">الاتصال بهاتف الشركة الرئيسي</string>
+  <string name="call_isdn">‏اتصال بـ ISDN</string>
+  <string name="call_main">الاتصال بالهاتف الرئيسي</string>
+  <string name="call_other_fax">الاتصال برقم الفاكس</string>
+  <string name="call_radio">اتصال بهاتف لاسلكي</string>
+  <string name="call_telex">الاتصال بالتلكس</string>
+  <string name="call_tty_tdd">‏اتصال بـ TTY/TDD</string>
+  <string name="call_work_mobile">الاتصال بجوال العمل</string>
+  <string name="call_work_pager">الاتصال بجهاز نداء العمل</string>
+  <string name="call_assistant">الاتصال بـ %s</string>
+  <string name="call_mms">اتصال بهاتف رسائل الوسائط المتعددة</string>
+  <string name="sms_custom">إرسال رسالة نصية إلى %s</string>
+  <string name="sms_home">إرسال رسالة نصية إلى هاتف منزلي</string>
+  <string name="sms_mobile">إرسال رسالة نصية إلى جوال</string>
+  <string name="sms_work">إرسال رسالة نصية إلى هاتف العمل</string>
+  <string name="sms_fax_work">إرسال رسالة نصية إلى فاكس العمل</string>
+  <string name="sms_fax_home">إرسال رسالة نصية إلى فاكس المنزل</string>
+  <string name="sms_pager">إرسال رسالة نصية إلى جهاز النداء</string>
+  <string name="sms_other">إرسال رسالة نصية</string>
+  <string name="sms_callback">إرسال رسالة نصية إلى هاتف معاودة الاتصال</string>
+  <string name="sms_car">إرسال رسالة نصية إلى هاتف السيارة</string>
+  <string name="sms_company_main">إرسال رسالة نصية إلى الهاتف الرئيسي للشركة</string>
+  <string name="sms_isdn">‏إرسال رسالة نصية إلى ISDN</string>
+  <string name="sms_main">إرسال رسالة نصية إلى الهاتف الرئيسي</string>
+  <string name="sms_other_fax">إرسال رسالة نصية إلى فاكس</string>
+  <string name="sms_radio">إرسال رسالة نصية إلى هاتف لاسلكي</string>
+  <string name="sms_telex">إرسال رسالة نصية إلى هاتف تلكس</string>
+  <string name="sms_tty_tdd">‏إرسال رسالة نصية إلى TTY/TDD</string>
+  <string name="sms_work_mobile">إرسال رسالة نصية إلى جوال العمل</string>
+  <string name="sms_work_pager">إرسال رسالة نصية إلى جهاز نداء العمل</string>
+  <string name="sms_assistant">إرسال رسالة نصية إلى %s</string>
+  <string name="sms_mms">إرسال رسالة نصية إلى هاتف رسائل الوسائط المتعددة</string>
+  <string name="clearFrequentsConfirmation_title">محو قائمة من يتم الاتصال بهم كثيرًا؟</string>
+  <string name="clearFrequentsConfirmation">ستمحو قائمة من يتم الاتصال بهم كثيرًا في تطبيقي جهات الاتصال والهاتف، وستفرض على تطبيقات البريد الإلكتروني التعرف على تفضيلات توجيه الرسائل من البداية.</string>
+  <string name="clearFrequentsProgress_title">جارٍ محو قائمة المُتصل بهم كثيرًا…</string>
+  <string name="status_available">متاح</string>
+  <string name="status_away">بالخارج</string>
+  <string name="status_busy">مشغول</string>
+  <string name="contactsList">جهات الاتصال</string>
+  <string name="contact_suggestions">أهم المقترحات</string>
+  <string name="local_invisible_directory">غير ذلك</string>
+  <string name="directory_search_label">الدليل</string>
+  <string name="directory_search_label_work">دليل العمل</string>
+  <string name="local_search_label">جميع جهات الاتصال</string>
+  <string name="local_suggestions_search_label">الاقتراحات</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">أنا</string>
+  <string name="missing_name">(بلا اسم)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">عرض جهة الاتصال</string>
+  <string name="list_filter_phones">جميع جهات الاتصال التي لها أرقام هواتف</string>
+  <string name="list_filter_phones_work">جهات الاتصال للملف الشخصي للعمل</string>
+  <string name="view_updates_from_group">عرض التحديثات</string>
+  <string name="account_phone">الجهاز فقط، غير متزامنة</string>
+  <string name="nameLabelsGroup">الاسم</string>
+  <string name="nicknameLabelsGroup">اللقب</string>
+  <string name="full_name">الاسم</string>
+  <string name="name_given">الاسم الأول</string>
+  <string name="name_family">اسم العائلة</string>
+  <string name="name_prefix">بادئة الاسم</string>
+  <string name="name_middle">الاسم الأوسط</string>
+  <string name="name_suffix">لاحقة الاسم</string>
+  <string name="name_phonetic">الاسم صوتيًا</string>
+  <string name="name_phonetic_given">الاسم الأول صوتيًا</string>
+  <string name="name_phonetic_middle">الاسم الصوتي الأوسط</string>
+  <string name="name_phonetic_family">اسم العائلة صوتيًا</string>
+  <string name="phoneLabelsGroup">الهاتف</string>
+  <string name="emailLabelsGroup">إرسال رسالة إلكترونية</string>
+  <string name="postalLabelsGroup">العنوان</string>
+  <string name="imLabelsGroup">المراسلة الفورية</string>
+  <string name="organizationLabelsGroup">المؤسسة</string>
+  <string name="relationLabelsGroup">العلاقة</string>
+  <string name="eventLabelsGroup">تاريخ مميز</string>
+  <string name="sms">رسالة نصية</string>
+  <string name="postal_address">العنوان</string>
+  <string name="ghostData_company">الشركة</string>
+  <string name="ghostData_title">العنوان</string>
+  <string name="label_notes">ملاحظات</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">موقع ويب</string>
+  <string name="groupsLabel">المجموعات</string>
+  <string name="email_home">إرسال رسالة إلكترونية إلى عنوان البريد الإلكتروني للمنزل</string>
+  <string name="email_mobile">إرسال رسالة إلكترونية إلى عنوان بريد إلكتروني على الجوال</string>
+  <string name="email_work">إرسال رسالة إلكترونية إلى عنوان البريد الإلكتروني للعمل</string>
+  <string name="email_other">إرسال رسالة إلكترونية</string>
+  <string name="email_custom">البريد الإلكتروني %s</string>
+  <string name="email">إرسال رسالة إلكترونية</string>
+  <string name="postal_street">الشارع</string>
+  <string name="postal_city">المدينة</string>
+  <string name="postal_region">الولاية</string>
+  <string name="postal_postcode">الرمز البريدي</string>
+  <string name="postal_country">البلد</string>
+  <string name="map_home">عرض عنوان المنزل</string>
+  <string name="map_work">عرض عنوان العمل</string>
+  <string name="map_other">عرض العنوان</string>
+  <string name="map_custom">عرض عنوان %s</string>
+  <string name="chat_aim">‏المحادثة باستخدام AIM</string>
+  <string name="chat_msn">‏المحادثة باستخدام Windows Live</string>
+  <string name="chat_yahoo">‏المحادثة باستخدام Yahoo</string>
+  <string name="chat_skype">‏المحادثة باستخدام Skype</string>
+  <string name="chat_qq">‏المحادثة باستخدام QQ</string>
+  <string name="chat_gtalk">‏المحادثة باستخدام Google Talk</string>
+  <string name="chat_icq">‏المحادثة باستخدام ICQ</string>
+  <string name="chat_jabber">‏المحادثة باستخدام Jabber</string>
+  <string name="chat">محادثة</string>
+  <string name="list_filter_all_accounts">كل جهات الاتصال</string>
+  <string name="listAllContactsInAccount">جهات الاتصال في %s</string>
+  <string name="listCustomView">جهات الاتصال في عرض مخصص</string>
+  <string name="listSingleContact">جهة اتصال واحدة</string>
+  <string name="display_options_sort_list_by">الترتيب بحسب</string>
+  <string name="display_options_sort_by_given_name">الاسم الأول</string>
+  <string name="display_options_sort_by_family_name">اسم العائلة</string>
+  <string name="display_options_view_names_as">تنسيق الاسم</string>
+  <string name="display_options_view_given_name_first">الاسم الأول أولاً</string>
+  <string name="display_options_view_family_name_first">اسم العائلة أوّلًا</string>
+  <string name="menu_clear_frequents">محو قائمة من يتصل بهم كثيرًا</string>
+  <string name="action_menu_back_from_search">إيقاف البحث</string>
+  <string name="description_clear_search">محو البحث</string>
+  <string name="select_account_dialog_title">الحساب</string>
+  <string name="set_default_account">استخدام هذا للمكالمات دائمًا</string>
+  <string name="select_phone_account_for_calls">‏اختيار شريحة SIM لهذه المكالمة</string>
+  <string name="select_phone_account_for_calls_remember">تذكر هذا الاختيار</string>
+  <string name="call_with_a_note">مكالمة مع ملاحظة</string>
+  <string name="call_subject_hint">اكتب ملاحظة لإرسالها مع المكالمة ...</string>
+  <string name="send_and_call_button">إرسال واتصال</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">علامة تبويب %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="zero"> %1$s علامة تبويب. %2$d عناصر غير مقروءة. </item>
+    <item quantity="one"> %1$s علامة تبويب. عنصر واحد (%2$d) غير مقروء. </item>
+    <item quantity="two"> علامتا تبويب %1$s. %2$d عناصر غير مقروءة. </item>
+    <item quantity="few"> %1$s علامات تبويب. %2$d عناصر غير مقروءة. </item>
+    <item quantity="many"> %1$s علامة تبويب. %2$d عناصر غير مقروءة. </item>
+    <item quantity="other"> %1$s علامة تبويب. %2$d عناصر غير مقروءة. </item>
+  </plurals>
+  <string name="description_search_video_call">مكالمة فيديو</string>
+  <string name="description_search_call_and_share">المشاركة والاتصال</string>
 </resources>

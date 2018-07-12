@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Vil du blokkere %1$s?</string>
+  <string name="block_number_confirmation_message_new_filtering">Du kommer ikke lenger til å motta anrop eller SMS-er fra dette nummeret.</string>
+  <string name="block_number_ok">BLOKKÉR</string>
+  <string name="unblock_number_ok">OPPHEV BLOKKERINGEN</string>
+  <string name="block_report_number_alert_title">Vil du blokkere %1$s?</string>
+  <string name="block_report_number_alert_details">Du får ingen flere anrop eller meldinger fra dette telefonnummeret.</string>
+  <string name="block_number_alert_details">%1$s Dette anropet blir rapportert som useriøst.</string>
+  <string name="unblock_number_alert_details">Blokkeringen oppheves, og nummeret rapporteres som «ikke useriøst». Fremtidige anrop blir ikke identifisert som useriøse.</string>
+  <string name="unblock_report_number_alert_title">Vil du oppheve blokkeringen av %1$s?</string>
+  <string name="report_not_spam_alert_button">Rapport</string>
+  <string name="report_not_spam_alert_title">Vil du rapportere en feil?</string>
+  <string name="report_not_spam_alert_details">Fremtidige anrop fra %1$s blir ikke definert som useriøse.</string>
+  <string name="checkbox_report_as_spam_action">Rapportér anropet som useriøst</string>
+  <string name="block_number_failed_toast">Kunne ikke blokkere dette nummeret</string>
+  <string name="unblock_number_failed_toast">Kunne ikke oppheve blokkeringen av dette nummeret</string>
+</resources>

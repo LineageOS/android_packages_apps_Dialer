@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Susirašinėjimas tikralaikiais teksto pranešimais, kai vyksta skambutis</string>
+  <string name="rtt_promotion_details">RTT padeda skambintojams, kurie yra kurti, neprigirdintys, sunkiai
+    kalba arba kuriems reikia ne tik kalbėti. RTT susirašinėjimo nuorašai saugomi įrenginio
+    skambučių istorijoje. %1$s</string>
+  <string name="duo_disclosure_title">Atlikite vaizdo skambučius naudodami „Duo“</string>
+  <string name="duo_disclosure_details">Naudodami „Google Duo“ vaizdo skambučius galite kalbėti su draugais ir šeimos nariais akis į akį. Gali būti taikomi duomenų mokesčiai. %1$s</string>
+</resources>

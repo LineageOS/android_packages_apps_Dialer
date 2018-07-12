@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Відфільтрувати всі виклики, які можуть бути спамом?</string>
+  <string name="spam_blocking_promo_text">Виклики, подібні до щойно заблокованого, більше не надходитимуть</string>
+  <string name="spam_blocking_promo_action_filter_spam">Відфільтрувати спам</string>
+  <string name="spam_blocking_promo_action_dismiss">Відхилити</string>
+  <string name="spam_blocking_setting_prompt">Налаштування</string>
+  <string name="spam_blocking_settings_enable_error_text">Проблема з увімкненням спам-фільтра</string>
+  <string name="spam_blocking_settings_disable_error_text">Проблема з вимкненням спам-фільтра</string>
+  <string name="spam_blocking_settings_enable_complete_text">Спам-фільтр увімкнено</string>
+  <string name="spam_blocking_settings_disable_complete_text">Спам-фільтр вимкнено</string>
+</resources>

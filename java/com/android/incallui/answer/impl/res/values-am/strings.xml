@@ -1,38 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"በመልዕክት ላለመቀበል ከአዶ ያንሸራቱ"</string>
-    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"እንደ ኦዲዮ ጥሪ ለመመለስ ከአዶ ያንሸራቱ"</string>
-    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"በመካሄድ ላይ ያለ ጥሪ ለመመለስ እና ለመያዝ ወደ ላይ ያንሸራትቱ"</string>
-    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"በይቆይ ላይ ያለ ጥሪ ለመመለስ እና ለመጨረስ ወደ ላይ ያንሸራትቱ"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"ለመመለስ እና በመካሄድ ላይ ያለ ጥሪን ለመጨረስ ከአዶ ያንሸራትቱ"</string>
-    <string name="call_incoming_message_custom" msgid="5819492800418293238">"የእራስዎን ይጻፉ…"</string>
-    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"የእራስዎን ይጻፉ…"</string>
-    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"ይቅር"</string>
-    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"ላክ"</string>
-    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"መልዕክት በመላክ ይህን ጥሪ አይቀበሉ"</string>
-    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"እንደ ኦዲዮ ጥሪ ይመልሱ"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"ይመልሱ እና በመካሄድ ላይ ያለ ጥሪን ይጨርሱ"</string>
-    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"መልዕክት በመላክ አይቀበሉ"</string>
-    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"እንደ ኦዲዮ ጥሪ ይመልሱ"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"ይመልሱ እና በመካሄድ ላይ ያለ ጥሪን ይጨርሱ"</string>
-    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"ቪዲዮ ጠፍቷል"</string>
-    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"ለመመለስ በሁለት ጣት ወደ ላይ ያንሸራቱ። ላለመቀበል በሁለት ጣት ወደ ታች ያንሸራቱ።"</string>
-    <string name="call_incoming_important" msgid="3762352743365137090">"አስፈላጊ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">በመልዕክት ላለመቀበል ከአዶ ያንሸራቱ</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">እንደ ኦዲዮ ጥሪ ለመመለስ ከአዶ ያንሸራቱ</string>
+  <string name="call_incoming_default_label_answer_and_release_second">በመካሄድ ላይ ያለ ጥሪ ለመመለስ እና ለመያዝ ወደ ላይ ያንሸራትቱ</string>
+  <string name="call_incoming_default_label_answer_and_release_third">በይቆይ ላይ ያለ ጥሪ ለመመለስ እና ለመጨረስ ወደ ላይ ያንሸራትቱ</string>
+  <string name="call_incoming_swipe_to_answer_and_release">ለመመለስ እና በመካሄድ ላይ ያለ ጥሪን ለመጨረስ ከአዶ ያንሸራትቱ</string>
+  <string name="call_incoming_message_custom">የእራስዎን ይጻፉ…</string>
+  <string name="call_incoming_respond_via_sms_custom_message">የእራስዎን ይጻፉ…</string>
+  <string name="call_incoming_custom_message_cancel">ይቅር</string>
+  <string name="call_incoming_custom_message_send">ላክ</string>
+  <string name="a11y_incoming_call_reject_with_sms">መልዕክት በመላክ ይህን ጥሪ አይቀበሉ</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">እንደ ኦዲዮ ጥሪ ይመልሱ</string>
+  <string name="a11y_incoming_call_answer_and_release">ይመልሱ እና በመካሄድ ላይ ያለ ጥሪን ይጨርሱ</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">መልዕክት በመላክ አይቀበሉ</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">እንደ ኦዲዮ ጥሪ ይመልሱ</string>
+  <string name="a11y_description_incoming_call_answer_and_release">ይመልሱ እና በመካሄድ ላይ ያለ ጥሪን ይጨርሱ</string>
+  <string name="call_incoming_video_is_off">ቪዲዮ ጠፍቷል</string>
+  <string name="a11y_incoming_call_swipe_gesture_prompt">ለመመለስ በሁለት ጣት ወደ ላይ ያንሸራቱ። ላለመቀበል በሁለት ጣት ወደ ታች ያንሸራቱ።</string>
+  <string name="call_incoming_important">አስፈላጊ</string>
 </resources>

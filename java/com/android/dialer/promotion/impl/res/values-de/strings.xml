@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">RTT-Nachrichten während eines Anrufs</string>
+  <string name="rtt_promotion_details">Echtzeittext (Real-Time Text, RTT) dient als Unterstützung für Anrufer, die gehörlos, schwerhörig oder sprachgeschädigt sind oder zusätzlich zur gesprochenen Sprache weitere Informationen benötigen. RTT-Transkripte werden auf Ihrem Gerät in der Anrufliste gespeichert.%1$s</string>
+  <string name="duo_disclosure_title">Mit Duo Videoanrufe führen</string>
+  <string name="duo_disclosure_details">Mit Videoanrufen über Google Duo kannst du dich mit Freunden und Familienmitgliedern von Angesicht zu Angesicht unterhalten. Für die Datenübertragung können Gebühren anfallen. %1$s</string>
+</resources>

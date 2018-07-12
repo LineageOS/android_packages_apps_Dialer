@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Дауыстық қоңырау</string>
+  <string name="video_call">Бейне қоңырау</string>
+  <string name="add_to_contacts">Контакт қосу</string>
+  <string name="send_a_message">Хабар</string>
+  <string name="not_spam">Спам емес</string>
+  <string name="block_number">Бөгеу</string>
+  <string name="unblock_number">Бөгеуді алу</string>
+  <string name="block_and_optionally_report_spam">Спамды бөгеу/хабарлау</string>
+  <string name="copy_number">Нөмірді көшіру</string>
+</resources>

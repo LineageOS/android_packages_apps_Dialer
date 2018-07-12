@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s engellensin mi?</string>
+  <string name="block_number_confirmation_message_new_filtering">Artık bu numaradan sesli arama veya kısa mesaj almayacaksınız.</string>
+  <string name="block_number_ok">ENGELLE</string>
+  <string name="unblock_number_ok">ENGELLEMEYİ KALDIR</string>
+  <string name="block_report_number_alert_title">%1$s engellensin mi?</string>
+  <string name="block_report_number_alert_details">Artık bu numaradan çağrı almayacaksınız.</string>
+  <string name="block_number_alert_details">%1$s Bu çağrı spam olarak bildirilecek.</string>
+  <string name="unblock_number_alert_details">Numaranın engellemesi ve spam durumu kaldırılacak. Gelecekteki çağrılar spam olarak tanımlanmayacak.</string>
+  <string name="unblock_report_number_alert_title">%1$s numaralı telefonun engellemesi kaldırılsın mı?</string>
+  <string name="report_not_spam_alert_button">Bildir</string>
+  <string name="report_not_spam_alert_title">Yanlışlıkla mı bildirim gönderdiniz?</string>
+  <string name="report_not_spam_alert_details">Artık %1$s numarasından gelecek çağrılar spam olarak tanımlanmayacak.</string>
+  <string name="checkbox_report_as_spam_action">Çağrıyı spam olarak bildir</string>
+  <string name="block_number_failed_toast">Bu numara engellenirken sorun oluştu</string>
+  <string name="unblock_number_failed_toast">Bu numaranın engellemesi kaldırılırken sorun oluştu</string>
+</resources>

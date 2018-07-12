@@ -1,38 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_incoming_swipe_to_decline_with_message" msgid="2426342919316424240">"Appuyer sur l\'icône, puis balayer l\'écran pour refuser l\'appel en envoyant un message"</string>
-    <string name="call_incoming_swipe_to_answer_video_as_audio" msgid="2656902519734774070">"Appuyer sur l\'icône, puis balayer l\'écran pour répondre via un appel audio"</string>
-    <string name="call_incoming_default_label_answer_and_release_second" msgid="4543429977872844314">"Balayer l\'écran vers le haut pour répondre et mettre en attente l\'appel en cours"</string>
-    <string name="call_incoming_default_label_answer_and_release_third" msgid="1738895612225349741">"Balayer l\'écran vers le haut pour répondre et mettre fin à l\'appel en attente"</string>
-    <string name="call_incoming_swipe_to_answer_and_release" msgid="662432029870261061">"Appuyer sur l\'icône, puis balayer l\'écran pour répondre ou mettre fin à l\'appel en cours"</string>
-    <string name="call_incoming_message_custom" msgid="5819492800418293238">"Réponse personnalisée"</string>
-    <string name="call_incoming_respond_via_sms_custom_message" msgid="6808438125627371020">"Réponse personnalisée"</string>
-    <string name="call_incoming_custom_message_cancel" msgid="5231860339073505201">"Annuler"</string>
-    <string name="call_incoming_custom_message_send" msgid="3826716354040318205">"Envoyer"</string>
-    <string name="a11y_incoming_call_reject_with_sms" msgid="6101839791429796754">"Refuser cet appel et envoyer un message à l\'appelant"</string>
-    <string name="a11y_incoming_call_answer_video_as_audio" msgid="3890612269318682756">"Répondre via un appel audio"</string>
-    <string name="a11y_incoming_call_answer_and_release" msgid="4896746774725239464">"Répondre ou mettre fin à l\'appel en cours"</string>
-    <string name="a11y_description_incoming_call_reject_with_sms" msgid="4705064921696291310">"Refuser avec envoi de message"</string>
-    <string name="a11y_description_incoming_call_answer_video_as_audio" msgid="1562530317428907884">"Répondre via un appel audio"</string>
-    <string name="a11y_description_incoming_call_answer_and_release" msgid="8511087499748888476">"Répondre ou mettre fin à l\'appel en cours"</string>
-    <string name="call_incoming_video_is_off" msgid="3216603035158629403">"La vidéo est désactivée."</string>
-    <string name="a11y_incoming_call_swipe_gesture_prompt" msgid="8682480557168484972">"Balayez l\'écran avec deux doigts vers le haut pour répondre, ou vers le bas pour refuser l\'appel."</string>
-    <string name="call_incoming_important" msgid="3762352743365137090">"Importants"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">Appuyer sur l\'icône, puis balayer l\'écran pour refuser l\'appel en envoyant un message</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">Appuyer sur l\'icône, puis balayer l\'écran pour répondre via un appel audio</string>
+  <string name="call_incoming_default_label_answer_and_release_second">Balayer l\'écran vers le haut pour répondre et mettre en attente l\'appel en cours</string>
+  <string name="call_incoming_default_label_answer_and_release_third">Balayer l\'écran vers le haut pour répondre et mettre fin à l\'appel en attente</string>
+  <string name="call_incoming_swipe_to_answer_and_release">Appuyer sur l\'icône, puis balayer l\'écran pour répondre ou mettre fin à l\'appel en cours</string>
+  <string name="call_incoming_message_custom">Réponse personnalisée</string>
+  <string name="call_incoming_respond_via_sms_custom_message">Réponse personnalisée</string>
+  <string name="call_incoming_custom_message_cancel">Annuler</string>
+  <string name="call_incoming_custom_message_send">Envoyer</string>
+  <string name="a11y_incoming_call_reject_with_sms">Refuser cet appel et envoyer un message à l\'appelant</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Répondre via un appel audio</string>
+  <string name="a11y_incoming_call_answer_and_release">Répondre ou mettre fin à l\'appel en cours</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">Refuser avec envoi de message</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Répondre via un appel audio</string>
+  <string name="a11y_description_incoming_call_answer_and_release">Répondre ou mettre fin à l\'appel en cours</string>
+  <string name="call_incoming_video_is_off">La vidéo est désactivée.</string>
+  <string name="a11y_incoming_call_swipe_gesture_prompt">Balayez l\'écran avec deux doigts vers le haut pour répondre, ou vers le bas pour refuser l\'appel.</string>
+  <string name="call_incoming_important">Importants</string>
 </resources>

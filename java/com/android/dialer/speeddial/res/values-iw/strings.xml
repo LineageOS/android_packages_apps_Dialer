@@ -1,20 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="favorites_header">מועדפים</string>
+  <string name="suggestions_header">תדירים</string>
+  <string name="speed_dial_add_button_text">הוספה</string>
+  <string name="speed_dial_remember_this_choice">אני רוצה להשתמש באפשרות הזו גם בעתיד</string>
+  <string name="speed_dial_disambig_dialog_title">בחירת סוג השיחה</string>
+  <string name="disambig_option_video_call">שיחת וידאו</string>
+  <string name="disambig_option_voice_call">שיחה</string>
+  <string name="add_favorite_activity_title">הוספה למועדפים</string>
+  <string name="contact_menu_voice_call">שיחה קולית</string>
+  <string name="contact_menu_video_call">שיחת וידאו</string>
+  <string name="contact_menu_message">הודעה</string>
+  <string name="contact_menu_remove">הסרה</string>
+  <string name="contact_menu_contact_info">פרטי התקשרות</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">הוספה למועדפים</string>
+  <string name="speed_dial_contacts_permission_description">כדי להפעיל את החיוג המהיר, צריך להפעיל את ההרשאה \'אנשי קשר\'.</string>
+  <string name="speed_dial_turn_on_contacts_permission">הפעלה</string>
+  <string name="speed_dial_no_contacts_description">לא הוספת עדיין אף אחד לרשימת המועדפים</string>
+  <string name="speed_dial_no_contacts_action_text">הוספה למועדפים</string>
+  <string name="speed_dial_remove_favorites">הסרה מהמועדפים</string>
 </resources>

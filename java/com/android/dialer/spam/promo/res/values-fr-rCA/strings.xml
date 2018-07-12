@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Filtrer tous les appels importuns suspects?</string>
+  <string name="spam_blocking_promo_text">Les appels comme celui que vous venez de bloquer ne vous
+      dérangeront plus</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrer les appels importuns</string>
+  <string name="spam_blocking_promo_action_dismiss">Ignorer</string>
+  <string name="spam_blocking_setting_prompt">Paramètres</string>
+  <string name="spam_blocking_settings_enable_error_text">Problème lors de l\'activation du filtrage des appels importuns</string>
+  <string name="spam_blocking_settings_disable_error_text">Problème lors de la désactivation du filtrage des appels importuns</string>
+  <string name="spam_blocking_settings_enable_complete_text">Filtrage des appels importuns activé</string>
+  <string name="spam_blocking_settings_disable_complete_text">Filtrage des appels importuns désactivé</string>
+</resources>

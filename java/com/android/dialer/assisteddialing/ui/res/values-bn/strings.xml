@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">সহায়তা যুক্ত ডায়ালিং</string>
+  <string name="assisted_dialing_setting_summary">আপনি বিদেশে থাকার সময় কল করলে একটি দেশের কোড অনুমান করে সেটি যোগ করুন</string>
+  <string name="assisted_dialing_setting_cc_default_summary">নিজে থেকে শনাক্ত করা হয় • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">নিজে থেকে শনাক্ত করা হয়</string>
+  <string name="assisted_dialing_setting_cc_category_title">নিজের দেশ</string>
+  <string name="assisted_dialing_setting_cc_title">ডিফল্ট \'নিজের দেশ\'</string>
+</resources>

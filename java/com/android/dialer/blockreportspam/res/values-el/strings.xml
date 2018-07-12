@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">Να αποκλειστεί ο αριθμός %1$s;</string>
+  <string name="block_number_confirmation_message_new_filtering">Δεν θα λαμβάνετε πλέον κλήσεις ή μηνύματα κειμένου από αυτόν τον αριθμό.</string>
+  <string name="block_number_ok">ΑΠΟΚΛΕΙΣΜΟΣ</string>
+  <string name="unblock_number_ok">ΚΑΤΑΡΓΗΣΗ ΑΠΟΚΛΕΙΣΜΟΥ</string>
+  <string name="block_report_number_alert_title">Να αποκλειστεί ο αριθμός %1$s;</string>
+  <string name="block_report_number_alert_details">Δεν θα λαμβάνετε πλέον κλήσεις από αυτόν τον αριθμό.</string>
+  <string name="block_number_alert_details">%1$s Η κλήση αυτή θα αναφερθεί ως ανεπιθύμητη.</string>
+  <string name="unblock_number_alert_details">Ο αποκλ. του αρ. θα καταργηθεί. Θα αναφερθεί ως μη ανεπιθ. Μελλοντικές κλ. δεν θα αναγν. ως ανεπιθ.</string>
+  <string name="unblock_report_number_alert_title">Να καταργηθεί ο αποκλεισμός του αριθμού %1$s;</string>
+  <string name="report_not_spam_alert_button">Αναφορά</string>
+  <string name="report_not_spam_alert_title">Αναφορά λάθους;</string>
+  <string name="report_not_spam_alert_details">Τυχόν μελλοντικές κλήσεις από τον χρήστη %1$s δεν θα αναγνωρίζονται ως ανεπιθύμητες.</string>
+  <string name="checkbox_report_as_spam_action">Αναφορά κλήσ. ως ανεπιθύμητης;</string>
+  <string name="block_number_failed_toast">Παρουσιάστηκε πρόβλημα κατά τον αποκλεισμό αυτού του αριθμού</string>
+  <string name="unblock_number_failed_toast">Παρουσιάστηκε πρόβλημα κατά την κατάργηση αποκλεισμού αυτού του αριθμού</string>
+</resources>

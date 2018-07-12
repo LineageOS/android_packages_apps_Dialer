@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"ટેક્સ્ટ કૉપિ કર્યો"</string>
-    <string name="call_custom" msgid="3041673234638990874">"<xliff:g id="CUSTOM">%s</xliff:g> ને કૉલ કરો"</string>
-    <string name="call_home" msgid="125893483593803791">"ઘરે કૉલ કરો"</string>
-    <string name="call_mobile" msgid="967589404494150813">"મોબાઇલ પર કૉલ કરો"</string>
-    <string name="call_work" msgid="6040550697395300892">"કાર્યાલય પર કૉલ કરો"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"કાર્યાલયના ફૅક્સ પર કૉલ કરો"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"ઘરના ફૅક્સ પર કૉલ કરો"</string>
-    <string name="call_pager" msgid="6814149227741274161">"પેજર પર કૉલ કરો"</string>
-    <string name="call_other" msgid="5536385588712587235">"કૉલ કરો"</string>
-    <string name="call_callback" msgid="6314019862718112786">"કૉલબેક પર કૉલ કરો"</string>
-    <string name="call_car" msgid="3197417098027764954">"કાર પર કૉલ કરો"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"કંપની મુખ્ય પર કૉલ કરો"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"ISDN પર કૉલ કરો"</string>
-    <string name="call_main" msgid="3293707608770407814">"મુખ્ય પર કૉલ કરો"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"ફૅક્સ પર કૉલ કરો"</string>
-    <string name="call_radio" msgid="8942441419845057942">"રેડિઓ પર કૉલ કરો"</string>
-    <string name="call_telex" msgid="2031514461660668351">"ટેલેક્સ પર કૉલ કરો"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"TTY/TDD પર કૉલ કરો"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"કાર્યાલયના મોબાઇલ પર કૉલ કરો"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"કાર્યાલયના પેજર પર કૉલ કરો"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"<xliff:g id="ASSISTANT">%s</xliff:g> ને કૉલ કરો"</string>
-    <string name="call_mms" msgid="4958811711741872901">"MMS પર કૉલ કરો"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"<xliff:g id="CUSTOM">%s</xliff:g> ને ટેક્સ્ટ કરો"</string>
-    <string name="sms_home" msgid="3527719551060295243">"ઘરે ટેક્સ્ટ કરો"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"મોબાઇલ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_work" msgid="4158595439553450966">"કાર્યાલય પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"કાર્યાલયના ફૅક્સ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"ઘરના ફૅક્સ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"પેજર પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_other" msgid="1742702947993285933">"ટેક્સ્ટ કરો"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"કૉલબેક પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_car" msgid="4314577266154395174">"કાર પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"કંપની મુખ્ય પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"ISDN પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_main" msgid="8908087742014140774">"મુખ્ય પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"ફૅક્સ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_radio" msgid="855555176531704682">"રેડિઓ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"ટેલેક્સ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"TTY/TDD પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"કાર્યાલયના મોબાઇલ પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"કાર્યાલયના પેજર પર ટેક્સ્ટ કરો"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"<xliff:g id="ASSISTANT">%s</xliff:g> ને ટેક્સ્ટ કરો"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"MMS પર ટેક્સ્ટ કરો"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"વારંવાર સંપર્ક કરેલા સાફ કરીએ?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"તમે સંપર્કો અને ફોન એપ્લિકેશન્સમાં વારંવાર સંપર્ક કરેલ સૂચિને સાફ કરશો અને ઇમેઇલ એપ્લિકેશન્સને તમારી સંબોધન પસંદગીઓને શરૂઆતથી જાણવા માટે ફરજ પાડશો."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"વારંવાર સંપર્ક કરેલા સાફ કરે છે…"</string>
-    <string name="status_available" msgid="2648156525685472626">"ઉપલબ્ધ"</string>
-    <string name="status_away" msgid="2298688367552893953">"દૂર"</string>
-    <string name="status_busy" msgid="5990832098713248503">"વ્યસ્ત"</string>
-    <string name="contactsList" msgid="8806067891419291513">"સંપર્કો"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"ટોચના સૂચવેલ"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"અન્ય"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"નિર્દેશિકા"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"કાર્ય નિર્દેશિકા"</string>
-    <string name="local_search_label" msgid="907622822323119235">"તમામ સંપર્કો"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"સૂચનો"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"હું"</string>
-    <string name="missing_name" msgid="978606963362745020">"(નામ નથી)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"સંપર્ક જુઓ"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"ફોન નંબર્સ સાથેના તમામ સંપર્કો"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"કાર્ય પ્રોફાઇલના સંપર્કો"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"અપડેટ્સ જુઓ"</string>
-    <string name="account_phone" msgid="7067809073194061035">"ફક્ત-ઉપકરણ, સમન્વયિત ન કરેલ"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"નામ"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"ઉપનામ"</string>
-    <string name="full_name" msgid="648186563998465740">"નામ"</string>
-    <string name="name_given" msgid="5096576006314820536">"પ્રથમ નામ"</string>
-    <string name="name_family" msgid="6646235805198547467">"છેલ્લું નામ"</string>
-    <string name="name_prefix" msgid="9215326539658838">"નામ ઉપસર્ગ"</string>
-    <string name="name_middle" msgid="703755205331582769">"મધ્ય નામ"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"નામ પ્રત્યય"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"ધ્વન્યાત્મક નામ"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"ધ્વન્યાત્મક પ્રથમ નામ"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"ધ્વન્યાત્મક મધ્ય નામ"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"ધ્વન્યાત્મક છેલ્લું નામ"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"ફોન"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"ઇમેઇલ"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"સરનામું"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"સંગઠન"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"સંબંધ"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"વિશિષ્ટ તારીખ"</string>
-    <string name="sms" msgid="7574344928185328095">"ટેક્સ્ટ સંદેશ"</string>
-    <string name="postal_address" msgid="1804707930129674200">"સરનામું"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"કંપની"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"શીર્ષક"</string>
-    <string name="label_notes" msgid="2050255313694219786">"નોંધો"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"વેબસાઇટ"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"જૂથો"</string>
-    <string name="email_home" msgid="889830029388962171">"ઘરે ઇમેઇલ કરો"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"મોબાઇલ પર ઇમેઇલ કરો"</string>
-    <string name="email_work" msgid="4223487303344613528">"કાર્યાલય પર ઇમેઇલ કરો"</string>
-    <string name="email_other" msgid="4246411900126012062">"ઇમેઇલ"</string>
-    <string name="email_custom" msgid="7246580894327511013">"<xliff:g id="CUSTOM">%s</xliff:g> ને ઇમેઇલ કરો"</string>
-    <string name="email" msgid="2807318537887091606">"ઇમેઇલ"</string>
-    <string name="postal_street" msgid="6918171741240802474">"શેરી"</string>
-    <string name="postal_city" msgid="8674569121430005628">"શહેર"</string>
-    <string name="postal_region" msgid="1730369286225469192">"રાજ્ય"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"પિન કોડ"</string>
-    <string name="postal_country" msgid="232670707458768148">"દેશ"</string>
-    <string name="map_home" msgid="4181131107392126938">"ઘરનું સરનામું જુઓ"</string>
-    <string name="map_work" msgid="5723471185992684400">"કાર્યાલયનું સરનામું જુઓ"</string>
-    <string name="map_other" msgid="2253764780863500516">"સરનામું જુઓ"</string>
-    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> સરનામું જુઓ"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"AIM નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Windows Live નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Yahoo નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Skype નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_qq" msgid="786924280665740019">"QQ નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Google Talk નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ICQ નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Jabber નો ઉપયોગ કરીને ચેટ કરો"</string>
-    <string name="chat" msgid="1020428260359370236">"ચેટ"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"તમામ સંપર્કો"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g> માં સંપર્કો"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"કસ્ટમ દૃશ્યમાં સંપર્કો"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"એકલ સંપર્ક"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"આ પ્રમાણે સૉર્ટ કરો"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"પ્રથમ નામ"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"છેલ્લું નામ"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"નામ ફોર્મેટ"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"પ્રથમ નામ પહેલા"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"છેલ્લું નામ પહેલા"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"વારંવારના સાફ કરો"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"શોધવાનું રોકો"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"શોધ સાફ કરો"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"એકાઉન્ટ"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"કૉલ્સ માટે આનો ઉપયોગ હંમેશાં કરો"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"આની સાથે કૉલ કરો"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"નોંધ સાથે કૉલ કરો"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"કૉલ સાથે મોકલવા માટે એક નોંધ લખો ..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"મોકલો અને કૉલ કરો"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> ટૅબ."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="one"> <xliff:g id="TITLE_2">%1$s</xliff:g> ટૅબ. <xliff:g id="COUNT_3">%2$d</xliff:g> વાંચ્યા વગરની આઇટમ. </item>
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> ટૅબ. <xliff:g id="COUNT_3">%2$d</xliff:g> વાંચ્યા વગરની આઇટમ. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"વિડિઓ કૉલ"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"શેર કરો અને કૉલ કરો"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">%s ને કૉલ કરો</string>
+  <string name="call_home">ઘરે કૉલ કરો</string>
+  <string name="call_mobile">મોબાઇલ પર કૉલ કરો</string>
+  <string name="call_work">કાર્યાલય પર કૉલ કરો</string>
+  <string name="call_fax_work">કાર્યાલયના ફૅક્સ પર કૉલ કરો</string>
+  <string name="call_fax_home">ઘરના ફૅક્સ પર કૉલ કરો</string>
+  <string name="call_pager">પેજર પર કૉલ કરો</string>
+  <string name="call_other">કૉલ કરો</string>
+  <string name="call_callback">કૉલબેક પર કૉલ કરો</string>
+  <string name="call_car">કાર પર કૉલ કરો</string>
+  <string name="call_company_main">કંપની મુખ્ય પર કૉલ કરો</string>
+  <string name="call_isdn">ISDN પર કૉલ કરો</string>
+  <string name="call_main">મુખ્ય પર કૉલ કરો</string>
+  <string name="call_other_fax">ફૅક્સ પર કૉલ કરો</string>
+  <string name="call_radio">રેડિઓ પર કૉલ કરો</string>
+  <string name="call_telex">ટેલેક્સ પર કૉલ કરો</string>
+  <string name="call_tty_tdd">TTY/TDD પર કૉલ કરો</string>
+  <string name="call_work_mobile">કાર્યાલયના મોબાઇલ પર કૉલ કરો</string>
+  <string name="call_work_pager">કાર્યાલયના પેજર પર કૉલ કરો</string>
+  <string name="call_assistant">%s ને કૉલ કરો</string>
+  <string name="call_mms">MMS પર કૉલ કરો</string>
+  <string name="sms_custom">%s ને ટેક્સ્ટ કરો</string>
+  <string name="sms_home">ઘરે ટેક્સ્ટ કરો</string>
+  <string name="sms_mobile">મોબાઇલ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_work">કાર્યાલય પર ટેક્સ્ટ કરો</string>
+  <string name="sms_fax_work">કાર્યાલયના ફૅક્સ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_fax_home">ઘરના ફૅક્સ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_pager">પેજર પર ટેક્સ્ટ કરો</string>
+  <string name="sms_other">ટેક્સ્ટ કરો</string>
+  <string name="sms_callback">કૉલબેક પર ટેક્સ્ટ કરો</string>
+  <string name="sms_car">કાર પર ટેક્સ્ટ કરો</string>
+  <string name="sms_company_main">કંપની મુખ્ય પર ટેક્સ્ટ કરો</string>
+  <string name="sms_isdn">ISDN પર ટેક્સ્ટ કરો</string>
+  <string name="sms_main">મુખ્ય પર ટેક્સ્ટ કરો</string>
+  <string name="sms_other_fax">ફૅક્સ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_radio">રેડિઓ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_telex">ટેલેક્સ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_tty_tdd">TTY/TDD પર ટેક્સ્ટ કરો</string>
+  <string name="sms_work_mobile">કાર્યાલયના મોબાઇલ પર ટેક્સ્ટ કરો</string>
+  <string name="sms_work_pager">કાર્યાલયના પેજર પર ટેક્સ્ટ કરો</string>
+  <string name="sms_assistant">%s ને ટેક્સ્ટ કરો</string>
+  <string name="sms_mms">MMS પર ટેક્સ્ટ કરો</string>
+  <string name="clearFrequentsConfirmation_title">વારંવાર સંપર્ક કરેલા સાફ કરીએ?</string>
+  <string name="clearFrequentsConfirmation">તમે સંપર્કો અને ફોન એપ્લિકેશન્સમાં વારંવાર સંપર્ક કરેલ સૂચિને સાફ કરશો અને ઇમેઇલ એપ્લિકેશન્સને તમારી સંબોધન પસંદગીઓને શરૂઆતથી જાણવા માટે ફરજ પાડશો.</string>
+  <string name="clearFrequentsProgress_title">વારંવાર સંપર્ક કરેલા સાફ કરે છે…</string>
+  <string name="status_available">ઉપલબ્ધ</string>
+  <string name="status_away">દૂર</string>
+  <string name="status_busy">વ્યસ્ત</string>
+  <string name="contactsList">સંપર્કો</string>
+  <string name="contact_suggestions">ટોચના સૂચવેલ</string>
+  <string name="local_invisible_directory">અન્ય</string>
+  <string name="directory_search_label">નિર્દેશિકા</string>
+  <string name="directory_search_label_work">કાર્ય નિર્દેશિકા</string>
+  <string name="local_search_label">તમામ સંપર્કો</string>
+  <string name="local_suggestions_search_label">સૂચનો</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">હું</string>
+  <string name="missing_name">(નામ નથી)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">સંપર્ક જુઓ</string>
+  <string name="list_filter_phones">ફોન નંબર્સ સાથેના તમામ સંપર્કો</string>
+  <string name="list_filter_phones_work">કાર્ય પ્રોફાઇલના સંપર્કો</string>
+  <string name="view_updates_from_group">અપડેટ્સ જુઓ</string>
+  <string name="account_phone">ફક્ત-ઉપકરણ, સમન્વયિત ન કરેલ</string>
+  <string name="nameLabelsGroup">નામ</string>
+  <string name="nicknameLabelsGroup">ઉપનામ</string>
+  <string name="full_name">નામ</string>
+  <string name="name_given">પ્રથમ નામ</string>
+  <string name="name_family">છેલ્લું નામ</string>
+  <string name="name_prefix">નામ ઉપસર્ગ</string>
+  <string name="name_middle">મધ્ય નામ</string>
+  <string name="name_suffix">નામ પ્રત્યય</string>
+  <string name="name_phonetic">ધ્વન્યાત્મક નામ</string>
+  <string name="name_phonetic_given">ધ્વન્યાત્મક પ્રથમ નામ</string>
+  <string name="name_phonetic_middle">ધ્વન્યાત્મક મધ્ય નામ</string>
+  <string name="name_phonetic_family">ધ્વન્યાત્મક છેલ્લું નામ</string>
+  <string name="phoneLabelsGroup">ફોન</string>
+  <string name="emailLabelsGroup">ઇમેઇલ</string>
+  <string name="postalLabelsGroup">સરનામું</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">સંગઠન</string>
+  <string name="relationLabelsGroup">સંબંધ</string>
+  <string name="eventLabelsGroup">વિશિષ્ટ તારીખ</string>
+  <string name="sms">ટેક્સ્ટ સંદેશ</string>
+  <string name="postal_address">સરનામું</string>
+  <string name="ghostData_company">કંપની</string>
+  <string name="ghostData_title">શીર્ષક</string>
+  <string name="label_notes">નોંધો</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">વેબસાઇટ</string>
+  <string name="groupsLabel">જૂથો</string>
+  <string name="email_home">ઘરે ઇમેઇલ કરો</string>
+  <string name="email_mobile">મોબાઇલ પર ઇમેઇલ કરો</string>
+  <string name="email_work">કાર્યાલય પર ઇમેઇલ કરો</string>
+  <string name="email_other">ઇમેઇલ</string>
+  <string name="email_custom">%s ને ઇમેઇલ કરો</string>
+  <string name="email">ઇમેઇલ</string>
+  <string name="postal_street">શેરી</string>
+  <string name="postal_city">શહેર</string>
+  <string name="postal_region">રાજ્ય</string>
+  <string name="postal_postcode">પિન કોડ</string>
+  <string name="postal_country">દેશ</string>
+  <string name="map_home">ઘરનું સરનામું જુઓ</string>
+  <string name="map_work">કાર્યાલયનું સરનામું જુઓ</string>
+  <string name="map_other">સરનામું જુઓ</string>
+  <string name="map_custom">%s સરનામું જુઓ</string>
+  <string name="chat_aim">AIM નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_msn">Windows Live નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_yahoo">Yahoo નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_skype">Skype નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_qq">QQ નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_gtalk">Google Talk નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_icq">ICQ નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat_jabber">Jabber નો ઉપયોગ કરીને ચેટ કરો</string>
+  <string name="chat">ચેટ</string>
+  <string name="list_filter_all_accounts">તમામ સંપર્કો</string>
+  <string name="listAllContactsInAccount">%s માં સંપર્કો</string>
+  <string name="listCustomView">કસ્ટમ દૃશ્યમાં સંપર્કો</string>
+  <string name="listSingleContact">એકલ સંપર્ક</string>
+  <string name="display_options_sort_list_by">આ પ્રમાણે સૉર્ટ કરો</string>
+  <string name="display_options_sort_by_given_name">પ્રથમ નામ</string>
+  <string name="display_options_sort_by_family_name">છેલ્લું નામ</string>
+  <string name="display_options_view_names_as">નામ ફોર્મેટ</string>
+  <string name="display_options_view_given_name_first">પ્રથમ નામ પહેલા</string>
+  <string name="display_options_view_family_name_first">છેલ્લું નામ પહેલા</string>
+  <string name="menu_clear_frequents">વારંવારના સાફ કરો</string>
+  <string name="action_menu_back_from_search">શોધવાનું રોકો</string>
+  <string name="description_clear_search">શોધ સાફ કરો</string>
+  <string name="select_account_dialog_title">એકાઉન્ટ</string>
+  <string name="set_default_account">કૉલ્સ માટે આનો ઉપયોગ હંમેશાં કરો</string>
+  <string name="select_phone_account_for_calls">આ કૉલ માટે સિમ પસંદ કરો</string>
+  <string name="select_phone_account_for_calls_remember">આ પસંદ યાદ રાખો</string>
+  <string name="call_with_a_note">નોંધ સાથે કૉલ કરો</string>
+  <string name="call_subject_hint">કૉલ સાથે મોકલવા માટે એક નોંધ લખો ...</string>
+  <string name="send_and_call_button">મોકલો અને કૉલ કરો</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s ટૅબ.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s ટૅબ. %2$d વાંચ્યા વગરની આઇટમ. </item>
+    <item quantity="other"> %1$s ટૅબ. %2$d વાંચ્યા વગરની આઇટમ. </item>
+  </plurals>
+  <string name="description_search_video_call">વિડિઓ કૉલ</string>
+  <string name="description_search_call_and_share">શેર કરો અને કૉલ કરો</string>
 </resources>

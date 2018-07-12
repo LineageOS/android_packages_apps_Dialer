@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">ਕਿਸੇ ਕਾਲ ਦੌਰਾਨ ਅਸਲ-ਸਮੇਂ ਲਿਖਤ ਸੁਨੇਹਾ ਭੇਜਣਾ</string>
+  <string name="rtt_promotion_details">RTT ਬੋਲੇ, ਗੂੰਗੇ, ਸੁਣਨ ਸੰਬੰਧੀ ਪਰੇਸ਼ਾਨੀਆਂ ਵਾਲੇ ਕਾਲਰਾਂ ਜਾਂ ਚੀਜ਼ਾਂ ਨੂੰ ਸਮਝਣ ਲਈ ਅਵਾਜ਼ ਤੋਂ ਇਲਾਵਾ ਹੋਰ ਚੀਜ਼ਾਂ \'ਤੇ ਨਿਰਭਰ ਕਰਨ ਵਾਲੇ ਕਾਲਰਾਂ ਦੀ ਸਹਾਇਤਾ ਕਰਦਾ ਹੈ। RTT ਸੁਨੇਹੇ ਦੀਆਂ ਪ੍ਰਤੀਲਿਪੀਆਂ ਨੂੰ ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਵਿੱਚ ਕਾਲ ਇਤਿਹਾਸ ਵਿੱਚ ਸਟੋਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। %1$s</string>
+  <string name="duo_disclosure_title">Duo ਨਾਲ ਵੀਡੀਓ ਕਾਲਾਂ ਕਰੋ</string>
+  <string name="duo_disclosure_details">Google Duo ਵੀਡੀਓ ਕਾਲਿੰਗ ਤੁਹਾਨੂੰ ਦੋਸਤਾਂ ਅਤੇ ਪਰਿਵਾਰ ਨਾਲ ਆਮ੍ਹੋ-ਸਾਹਮਣੇ ਗੱਲਬਾਤ ਕਰਨ ਦਿੰਦੀ ਹੈ। ਡਾਟਾ ਖਰਚੇ ਲਏ ਜਾ ਸਕਦੇ ਹਨ। %1$s</string>
+</resources>

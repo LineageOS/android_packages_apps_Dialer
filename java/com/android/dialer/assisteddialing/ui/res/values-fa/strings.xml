@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">شماره‌گیری کمکی</string>
+  <string name="assisted_dialing_setting_summary">پیش‌بینی و افزودن کد کشور وقتی در سفر خارجی تماس برقرار می‌کنید</string>
+  <string name="assisted_dialing_setting_cc_default_summary">به‌صورت خودکار شناسایی شد • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">به‌صورت خودکار شناسایی شد</string>
+  <string name="assisted_dialing_setting_cc_category_title">کشور محل سکونت</string>
+  <string name="assisted_dialing_setting_cc_title">کشور محل سکونت پیش‌فرض</string>
+</resources>

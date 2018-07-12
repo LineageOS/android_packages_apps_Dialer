@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Assisted dialling</string>
+  <string name="assisted_dialing_setting_summary">Predict and add a country code when you call while travelling abroad</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Automatically detected • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Automatically detected</string>
+  <string name="assisted_dialing_setting_cc_category_title">Home country</string>
+  <string name="assisted_dialing_setting_cc_title">Default home country</string>
+</resources>

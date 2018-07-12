@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">അസിസ്‌റ്റഡ് ഡയലിംഗ്</string>
+  <string name="assisted_dialing_setting_summary">വിദേശ യാത്രക്കിടയിൽ കോൾ ചെയ്യുമ്പോൾ രാജ്യത്തിന്റെ കോഡ് കണ്ടെത്തി നൽകുക</string>
+  <string name="assisted_dialing_setting_cc_default_summary">സ്വമേധയാ കണ്ടെത്തി • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">സ്വമേധയാ കണ്ടെത്തി</string>
+  <string name="assisted_dialing_setting_cc_category_title">മാതൃ രാജ്യം</string>
+  <string name="assisted_dialing_setting_cc_title">ഡിഫോൾട്ട് ആയ മാതൃ രാജ്യം</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">Deietan testua bidaltzeko eginbidea</string>
+  <string name="rtt_promotion_details">Deietan testua bidaltzeko eginbideak (RTT) deitzaile gorrei,
+    entzumen-arazoak dituztenei, hitz egiteko ezintasunen bat dutenei edota,
+    ahotsaz gain, beste makuluren bat behar dutenei laguntzen die. Gailuko
+    deien historian gordeko dira deietan testu bidez bidaltzen diren mezuen
+    transkripzioak. %1$s</string>
+  <string name="duo_disclosure_title">Egin bideo-deiak Duo-rekin</string>
+  <string name="duo_disclosure_details">Google Duo zerbitzuko bideo-deien bidez, aurrez aurre hitz egin dezakezu lagunekin eta familiarekin. Baliteke datuak erabiltzearen ondorioz zerbait kobratzea. %1$s</string>
+</resources>

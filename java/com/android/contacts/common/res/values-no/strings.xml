@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Tekst kopiert"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Ring <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Ring hjem"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Ring mobilnummer"</string>
-    <string name="call_work" msgid="6040550697395300892">"Ring arbeidsnummer"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Ring faksnummer (arbeid)"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Ring faksnummer (hjemme)"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Ring personsøkernummer"</string>
-    <string name="call_other" msgid="5536385588712587235">"Ring"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Ring tilbakeringingsnummer"</string>
-    <string name="call_car" msgid="3197417098027764954">"Ring til bilnummer"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Ring til firma (hovednummer)"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Ring ISDN-nummer"</string>
-    <string name="call_main" msgid="3293707608770407814">"Ring hovednummer"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Ring faksnummer"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Ring radionummer"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Ring teleksnummer"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Ring TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Ring mobilnummer (arbeid)"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Ring personsøkernummer (arbeid)"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Ring <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Ring multimediemeldingnummer"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Send tekstmelding til <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Send tekstmelding til hjemmenummer"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Send tekstmelding til mobilnummer"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Send tekstmelding til arbeidsnummer"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Send tekstmelding til faksnummer (arbeid)"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Send tekstmelding til faksnummer (hjemme)"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Send tekstmelding til personsøkernummer"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Send tekstmelding"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Send tekstmelding til tilbakeringingsnummer"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Send tekstmelding til bilnummer"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Send tekstmelding til firma (hovednummer)"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Send tekstmelding til ISDN-nummer"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Send tekstmelding til hovednummer"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Send tekstmelding til faksnummer"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Send tekstmelding til radionummer"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Send tekstmelding til teleksnummer"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Send tekstmelding til TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Send tekstmelding til mobilnummer (arbeid)"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Send tekstmelding til personsøkernummer (arbeid)"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Send tekstmelding til <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Send tekstmelding til multimediemeldingnummer"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Vil du fjerne ofte kontaktede personer?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Du fjerner listen over ofte kontaktede personer i Kontakter- og Telefon-appene, og tvinger e-postappene til å lære seg adresseinnstillingene dine på nytt."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Fjerner ofte kontaktede personer ..."</string>
-    <string name="status_available" msgid="2648156525685472626">"Tilgjengelig"</string>
-    <string name="status_away" msgid="2298688367552893953">"Borte"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Opptatt"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kontakter"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Toppforslag"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Annen"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Katalog"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Jobbkatalog"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Alle kontakter"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Forslag"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Meg"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Uten navn)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Se kontakten"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Alle kontakter med telefonnumre"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Jobbprofilkontakter"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Se oppdateringer"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Bare på enheten din, uten synkronisering"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Navn"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Kallenavn"</string>
-    <string name="full_name" msgid="648186563998465740">"Navn"</string>
-    <string name="name_given" msgid="5096576006314820536">"Fornavn"</string>
-    <string name="name_family" msgid="6646235805198547467">"Etternavn"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Navneprefiks"</string>
-    <string name="name_middle" msgid="703755205331582769">"Mellomnavn"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Navnesuffiks"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Fonetisk navn"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Fonetisk fornavn"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Fonetisk mellomnavn"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Fonetisk etternavn"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"Send e-post"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adresse"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Nettprat"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organisasjon"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Tilknytning"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Spesialdato"</string>
-    <string name="sms" msgid="7574344928185328095">"SMS"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adresse"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Firma"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Stilling"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Notater"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Nettsted"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Grupper"</string>
-    <string name="email_home" msgid="889830029388962171">"Send e-post (privat)"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"Send e-post (mobil)"</string>
-    <string name="email_work" msgid="4223487303344613528">"Send e-post (jobb)"</string>
-    <string name="email_other" msgid="4246411900126012062">"Send e-post"</string>
-    <string name="email_custom" msgid="7246580894327511013">"Send e-post (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="email" msgid="2807318537887091606">"Send e-post"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Gate"</string>
-    <string name="postal_city" msgid="8674569121430005628">"By"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Fylke/delstat"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Postnummer"</string>
-    <string name="postal_country" msgid="232670707458768148">"Land"</string>
-    <string name="map_home" msgid="4181131107392126938">"Se hjemmeadressen"</string>
-    <string name="map_work" msgid="5723471185992684400">"Se jobbadressen"</string>
-    <string name="map_other" msgid="2253764780863500516">"Se adressen"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Se <xliff:g id="CUSTOM">%s</xliff:g>-adressen"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Nettprat med AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Nettprat med Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Nettprat med Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Nettprat med Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Nettprat med QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Nettprat med Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Nettprat med ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Nettprat med Jabber"</string>
-    <string name="chat" msgid="1020428260359370236">"Nettprat"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Alle kontakter"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Kontakter i <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Kontakter i tilpasset visning"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Enkeltkontakt"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sortér etter"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Fornavn"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Etternavn"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Navneformat"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Fornavnet først"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Etternavnet først"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Fjern ofte kontaktede personer"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"avslutt søket"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Slett søk"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Konto"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Bruk alltid dette for samtaler"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Ring med"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Ring med et notat"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Skriv et notat du vil sende med anropet …"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"SEND OG RING"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g>-fanen."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g>-fanen. <xliff:g id="COUNT_3">%2$d</xliff:g> uleste elementer. </item>
-      <item quantity="one"> <xliff:g id="TITLE_0">%1$s</xliff:g>-fanen. <xliff:g id="COUNT_1">%2$d</xliff:g> ulest element. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videosamtale"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Del og ring"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Ring %s</string>
+  <string name="call_home">Ring hjem</string>
+  <string name="call_mobile">Ring mobilnummer</string>
+  <string name="call_work">Ring arbeidsnummer</string>
+  <string name="call_fax_work">Ring faksnummer (arbeid)</string>
+  <string name="call_fax_home">Ring faksnummer (hjemme)</string>
+  <string name="call_pager">Ring personsøkernummer</string>
+  <string name="call_other">Ring</string>
+  <string name="call_callback">Ring tilbakeringingsnummer</string>
+  <string name="call_car">Ring til bilnummer</string>
+  <string name="call_company_main">Ring til firma (hovednummer)</string>
+  <string name="call_isdn">Ring ISDN-nummer</string>
+  <string name="call_main">Ring hovednummer</string>
+  <string name="call_other_fax">Ring faksnummer</string>
+  <string name="call_radio">Ring radionummer</string>
+  <string name="call_telex">Ring teleksnummer</string>
+  <string name="call_tty_tdd">Ring TTY/TDD</string>
+  <string name="call_work_mobile">Ring mobilnummer (arbeid)</string>
+  <string name="call_work_pager">Ring personsøkernummer (arbeid)</string>
+  <string name="call_assistant">Ring %s</string>
+  <string name="call_mms">Ring multimediemeldingnummer</string>
+  <string name="sms_custom">Send tekstmelding til %s</string>
+  <string name="sms_home">Send tekstmelding til hjemmenummer</string>
+  <string name="sms_mobile">Send tekstmelding til mobilnummer</string>
+  <string name="sms_work">Send tekstmelding til arbeidsnummer</string>
+  <string name="sms_fax_work">Send tekstmelding til faksnummer (arbeid)</string>
+  <string name="sms_fax_home">Send tekstmelding til faksnummer (hjemme)</string>
+  <string name="sms_pager">Send tekstmelding til personsøkernummer</string>
+  <string name="sms_other">Send tekstmelding</string>
+  <string name="sms_callback">Send tekstmelding til tilbakeringingsnummer</string>
+  <string name="sms_car">Send tekstmelding til bilnummer</string>
+  <string name="sms_company_main">Send tekstmelding til firma (hovednummer)</string>
+  <string name="sms_isdn">Send tekstmelding til ISDN-nummer</string>
+  <string name="sms_main">Send tekstmelding til hovednummer</string>
+  <string name="sms_other_fax">Send tekstmelding til faksnummer</string>
+  <string name="sms_radio">Send tekstmelding til radionummer</string>
+  <string name="sms_telex">Send tekstmelding til teleksnummer</string>
+  <string name="sms_tty_tdd">Send tekstmelding til TTY/TDD</string>
+  <string name="sms_work_mobile">Send tekstmelding til mobilnummer (arbeid)</string>
+  <string name="sms_work_pager">Send tekstmelding til personsøkernummer (arbeid)</string>
+  <string name="sms_assistant">Send tekstmelding til %s</string>
+  <string name="sms_mms">Send tekstmelding til multimediemeldingnummer</string>
+  <string name="clearFrequentsConfirmation_title">Vil du fjerne ofte kontaktede personer?</string>
+  <string name="clearFrequentsConfirmation">Du fjerner listen over ofte kontaktede personer i Kontakter- og Telefon-appene, og tvinger e-postappene til å lære seg adresseinnstillingene dine på nytt.</string>
+  <string name="clearFrequentsProgress_title">Fjerner ofte kontaktede personer ...</string>
+  <string name="status_available">Tilgjengelig</string>
+  <string name="status_away">Borte</string>
+  <string name="status_busy">Opptatt</string>
+  <string name="contactsList">Kontakter</string>
+  <string name="contact_suggestions">Toppforslag</string>
+  <string name="local_invisible_directory">Annen</string>
+  <string name="directory_search_label">Katalog</string>
+  <string name="directory_search_label_work">Jobbkatalog</string>
+  <string name="local_search_label">Alle kontakter</string>
+  <string name="local_suggestions_search_label">Forslag</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Meg</string>
+  <string name="missing_name">(Uten navn)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Se kontakten</string>
+  <string name="list_filter_phones">Alle kontakter med telefonnumre</string>
+  <string name="list_filter_phones_work">Jobbprofilkontakter</string>
+  <string name="view_updates_from_group">Se oppdateringer</string>
+  <string name="account_phone">Bare på enheten din, uten synkronisering</string>
+  <string name="nameLabelsGroup">Navn</string>
+  <string name="nicknameLabelsGroup">Kallenavn</string>
+  <string name="full_name">Navn</string>
+  <string name="name_given">Fornavn</string>
+  <string name="name_family">Etternavn</string>
+  <string name="name_prefix">Navneprefiks</string>
+  <string name="name_middle">Mellomnavn</string>
+  <string name="name_suffix">Navnesuffiks</string>
+  <string name="name_phonetic">Fonetisk navn</string>
+  <string name="name_phonetic_given">Fonetisk fornavn</string>
+  <string name="name_phonetic_middle">Fonetisk mellomnavn</string>
+  <string name="name_phonetic_family">Fonetisk etternavn</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">Send e-post</string>
+  <string name="postalLabelsGroup">Adresse</string>
+  <string name="imLabelsGroup">Nettprat</string>
+  <string name="organizationLabelsGroup">Organisasjon</string>
+  <string name="relationLabelsGroup">Tilknytning</string>
+  <string name="eventLabelsGroup">Spesialdato</string>
+  <string name="sms">SMS</string>
+  <string name="postal_address">Adresse</string>
+  <string name="ghostData_company">Firma</string>
+  <string name="ghostData_title">Stilling</string>
+  <string name="label_notes">Notater</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Nettsted</string>
+  <string name="groupsLabel">Grupper</string>
+  <string name="email_home">Send e-post (privat)</string>
+  <string name="email_mobile">Send e-post (mobil)</string>
+  <string name="email_work">Send e-post (jobb)</string>
+  <string name="email_other">Send e-post</string>
+  <string name="email_custom">Send e-post (%s)</string>
+  <string name="email">Send e-post</string>
+  <string name="postal_street">Gate</string>
+  <string name="postal_city">By</string>
+  <string name="postal_region">Fylke/delstat</string>
+  <string name="postal_postcode">Postnummer</string>
+  <string name="postal_country">Land</string>
+  <string name="map_home">Se hjemmeadressen</string>
+  <string name="map_work">Se jobbadressen</string>
+  <string name="map_other">Se adressen</string>
+  <string name="map_custom">Se %s-adressen</string>
+  <string name="chat_aim">Nettprat med AIM</string>
+  <string name="chat_msn">Nettprat med Windows Live</string>
+  <string name="chat_yahoo">Nettprat med Yahoo</string>
+  <string name="chat_skype">Nettprat med Skype</string>
+  <string name="chat_qq">Nettprat med QQ</string>
+  <string name="chat_gtalk">Nettprat med Google Talk</string>
+  <string name="chat_icq">Nettprat med ICQ</string>
+  <string name="chat_jabber">Nettprat med Jabber</string>
+  <string name="chat">Nettprat</string>
+  <string name="list_filter_all_accounts">Alle kontakter</string>
+  <string name="listAllContactsInAccount">Kontakter i %s</string>
+  <string name="listCustomView">Kontakter i tilpasset visning</string>
+  <string name="listSingleContact">Enkeltkontakt</string>
+  <string name="display_options_sort_list_by">Sortér etter</string>
+  <string name="display_options_sort_by_given_name">Fornavn</string>
+  <string name="display_options_sort_by_family_name">Etternavn</string>
+  <string name="display_options_view_names_as">Navneformat</string>
+  <string name="display_options_view_given_name_first">Fornavnet først</string>
+  <string name="display_options_view_family_name_first">Etternavnet først</string>
+  <string name="menu_clear_frequents">Fjern ofte kontaktede personer</string>
+  <string name="action_menu_back_from_search">avslutt søket</string>
+  <string name="description_clear_search">Slett søk</string>
+  <string name="select_account_dialog_title">Konto</string>
+  <string name="set_default_account">Bruk alltid dette for samtaler</string>
+  <string name="select_phone_account_for_calls">Velg SIM-kort for dette anropet</string>
+  <string name="select_phone_account_for_calls_remember">Husk dette valget</string>
+  <string name="call_with_a_note">Ring med et notat</string>
+  <string name="call_subject_hint">Skriv et notat du vil sende med anropet …</string>
+  <string name="send_and_call_button">SEND OG RING</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s-fanen.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s-fanen. %2$d ulest element. </item>
+    <item quantity="other"> %1$s-fanen. %2$d uleste elementer. </item>
+  </plurals>
+  <string name="description_search_video_call">Videosamtale</string>
+  <string name="description_search_call_and_share">Del og ring</string>
 </resources>

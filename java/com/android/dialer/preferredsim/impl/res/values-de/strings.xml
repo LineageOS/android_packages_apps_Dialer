@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Anruf kann ohne Telefonberechtigung nicht getätigt werden</string>
+  <string name="pre_call_select_phone_account">SIM für diesen Anruf auswählen</string>
+  <string name="pre_call_select_phone_account_remember">Auswahl speichern</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Anruf mit \"%1$s\" nicht möglich</string>
+</resources>

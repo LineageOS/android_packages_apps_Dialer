@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Apelare asistată</string>
+  <string name="assisted_dialing_setting_summary">Sugerați și adăugați un prefix de țară când apelați din străinătate</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Detectată automat • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Detectată automat</string>
+  <string name="assisted_dialing_setting_cc_category_title">Țara de origine</string>
+  <string name="assisted_dialing_setting_cc_title">Țara de origine prestabilită</string>
+</resources>

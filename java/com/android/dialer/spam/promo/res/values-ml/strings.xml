@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">എല്ലാ സംശയാസ്‌പദമായ സ്‌പാം കോളുകളും ഫിൽട്ടർ ചെയ്യണോ?</string>
+  <string name="spam_blocking_promo_text">നിങ്ങൾ ഇപ്പോൾ ബ്ലോക്ക് ചെയ്‌ത പോലുള്ള കോളുകൾ ഇനി നിങ്ങളെ ശല്യപ്പെടുത്തില്ല</string>
+  <string name="spam_blocking_promo_action_filter_spam">സ്‌പാം ഫിൽട്ടർ ചെയ്യുക</string>
+  <string name="spam_blocking_promo_action_dismiss">ഒഴിവാക്കുക</string>
+  <string name="spam_blocking_setting_prompt">ക്രമീകരണം</string>
+  <string name="spam_blocking_settings_enable_error_text">സ്‌പാം ഫിൽട്ടർ ചെയ്യൽ ഓണാക്കുന്നതിൽ പ്രശ്‌നം</string>
+  <string name="spam_blocking_settings_disable_error_text">സ്‌പാം ഫിൽട്ടർ ചെയ്യൽ ഓഫാക്കുന്നതിൽ പ്രശ്‌നം</string>
+  <string name="spam_blocking_settings_enable_complete_text">സ്‌പാം ഫിൽട്ടർ ചെയ്യൽ ഓണാക്കി</string>
+  <string name="spam_blocking_settings_disable_complete_text">സ്‌പാം ഫിൽട്ടർ ചെയ്യൽ ഓഫാക്കി</string>
+</resources>

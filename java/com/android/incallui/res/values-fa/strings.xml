@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"تلفن"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"صداهای زیر ارسال شود؟\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"بله"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"نه"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"شماره‌گیری"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"تماس جاری"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"تماس ویدیویی درحال انجام"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"تماس ویدیویی درحال انجام ‑ ویدیو موقتاً متوقف شد"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"تماس کاری خروجی"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> درحال انجام"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> ورودی"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"‏تماس ازطریق Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"‏تماس کاری ازطریق Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"در انتظار"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"تماس ورودی"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"تماس ورودی به همراه عکس"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"تماس ورودی به همراه پیام"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"تماس ورودی به همراه مکان"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"تماس ورودی به همراه عکس و پیام"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"تماس ورودی به همراه عکس و مکان"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"تماس ورودی به همراه پیام و مکان"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"تماس ورودی به همراه عکس، پیام و مکان"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"تماس ورودی به همراه پیوست"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"تماس ورودی مهم"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"تماس ورودی مهم به همراه عکس"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"تماس ورودی مهم به همراه پیام"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"تماس ورودی مهم به همراه مکان"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"تماس ورودی مهم به همراه عکس و پیام"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"تماس ورودی مهم به همراه عکس و مکان"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"تماس ورودی مهم به همراه پیام و مکان"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"تماس ورودی مهم به همراه عکس، پیام و مکان"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"تماس ورودی مهم به همراه پیوست"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"تماس کاری ورودی"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"تماس هرزنامه احتمالی ورودی"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"درخواست تماس ویدئویی ورودی"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"پاسخ"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"قطع تماس"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"ویدئو"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"پذیرفتن"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"نپذیرفتن"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"روشن کردن بلندگو"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"خاموش کردن بلندگو"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"تماس در حال انجام در دستگاهی دیگر"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"تماس ویدئویی در حال انجام در دستگاهی دیگر"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"انتقال تماس"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"انتقال تماس ویدئویی"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"سرویس پشتیبانی نمی‌شود."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"رفتن به خصوصی"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"مدیریت تماس کنفرانسی"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"شماره اضطراری"</string>
-    <string name="child_number" msgid="3398257437107259682">"از طریق <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"فاقد سیم، یا خطای سیم"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"پایان تماس"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"تماس کنفرانسی"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"در تماس"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"ادامه تماس با استفاده از داده شبکه همراه…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"‏جابجایی به شبکه Wi-Fi انجام نشد"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"تماس ویدیویی همچنان ازطریق شبکه تلفن همراه انجام می‌شود. ممکن است هزینه‌های استاندارد داده اعمال شود."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"دوباره نشان داده نشود"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">‏صداهای زیر ارسال شود؟\n</string>
+  <string name="pause_prompt_yes">بله</string>
+  <string name="pause_prompt_no">نه</string>
+  <string name="notification_dialing">شماره‌گیری</string>
+  <string name="notification_ongoing_call">تماس جاری</string>
+  <string name="notification_ongoing_video_call">تماس ویدیویی درحال انجام</string>
+  <string name="notification_ongoing_paused_video_call">تماس ویدیویی درحال انجام ‑ ویدیو موقتاً متوقف شد</string>
+  <string name="notification_ongoing_work_call">تماس کاری خروجی</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s درحال انجام</string>
+  <string name="notification_incoming_call_wifi_template">%1$s ورودی</string>
+  <string name="notification_call_wifi_brand">‏تماس ازطریق Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">‏تماس کاری ازطریق Wi-Fi</string>
+  <string name="notification_on_hold">در انتظار</string>
+  <string name="notification_incoming_call">تماس ورودی</string>
+  <string name="notification_incoming_video_call">تماس ویدئویی ورودی</string>
+  <string name="notification_incoming_call_mutli_sim">تماس ورودی ازطریق %1$s</string>
+  <string name="notification_incoming_call_with_photo">تماس ورودی به همراه عکس</string>
+  <string name="notification_incoming_call_with_message">تماس ورودی به همراه پیام</string>
+  <string name="notification_incoming_call_with_location">تماس ورودی به همراه مکان</string>
+  <string name="notification_incoming_call_with_photo_message">تماس ورودی به همراه عکس و پیام</string>
+  <string name="notification_incoming_call_with_photo_location">تماس ورودی به همراه عکس و مکان</string>
+  <string name="notification_incoming_call_with_message_location">تماس ورودی به همراه پیام و مکان</string>
+  <string name="notification_incoming_call_with_photo_message_location">تماس ورودی به همراه عکس، پیام و مکان</string>
+  <string name="notification_incoming_call_attachments">تماس ورودی به همراه پیوست</string>
+  <string name="important_notification_incoming_call">تماس ورودی مهم</string>
+  <string name="important_notification_incoming_call_with_photo">تماس ورودی مهم به همراه عکس</string>
+  <string name="important_notification_incoming_call_with_message">تماس ورودی مهم به همراه پیام</string>
+  <string name="important_notification_incoming_call_with_location">تماس ورودی مهم به همراه مکان</string>
+  <string name="important_notification_incoming_call_with_photo_message">تماس ورودی مهم به همراه عکس و پیام</string>
+  <string name="important_notification_incoming_call_with_photo_location">تماس ورودی مهم به همراه عکس و مکان</string>
+  <string name="important_notification_incoming_call_with_message_location">تماس ورودی مهم به همراه پیام و مکان</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">تماس ورودی مهم به همراه عکس، پیام و مکان</string>
+  <string name="important_notification_incoming_call_attachments">تماس ورودی مهم به همراه پیوست</string>
+  <string name="notification_incoming_work_call">تماس کاری ورودی</string>
+  <string name="notification_incoming_spam_call">تماس هرزنامه احتمالی ورودی</string>
+  <string name="notification_requesting_video_call">درخواست تماس ویدئویی ورودی</string>
+  <string name="notification_action_answer">پاسخ</string>
+  <string name="notification_action_end_call">قطع تماس</string>
+  <string name="notification_action_answer_video">ویدئو</string>
+  <string name="notification_action_accept">پذیرفتن</string>
+  <string name="notification_action_dismiss">نپذیرفتن</string>
+  <string name="notification_action_speaker_on">روشن کردن بلندگو</string>
+  <string name="notification_action_speaker_off">خاموش کردن بلندگو</string>
+  <string name="notification_external_call">تماس در حال انجام در دستگاهی دیگر</string>
+  <string name="notification_external_video_call">تماس ویدئویی در حال انجام در دستگاهی دیگر</string>
+  <string name="notification_take_call">انتقال تماس</string>
+  <string name="notification_take_video_call">انتقال تماس ویدئویی</string>
+  <string name="incall_error_supp_service_unknown">سرویس پشتیبانی نمی‌شود.</string>
+  <string name="goPrivate">رفتن به خصوصی</string>
+  <string name="manageConferenceLabel">مدیریت تماس کنفرانسی</string>
+  <string name="child_number">از طریق %s</string>
+  <string name="callFailed_simError">فاقد سیم، یا خطای سیم</string>
+  <string name="conference_caller_disconnect_content_description">پایان تماس</string>
+  <string name="conference_call_name">تماس کنفرانسی</string>
+  <string name="generic_conference_call_name">در تماس</string>
+  <string name="video_call_wifi_to_lte_handover_toast">ادامه تماس با استفاده از داده شبکه همراه…</string>
+  <string name="video_call_lte_to_wifi_failed_title">‏جابجایی به شبکه Wi-Fi انجام نشد</string>
+  <string name="video_call_lte_to_wifi_failed_message">تماس ویدیویی همچنان ازطریق شبکه تلفن همراه انجام می‌شود. ممکن است هزینه‌های استاندارد داده اعمال شود.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">دوباره نشان داده نشود</string>
+  <string name="bubble_return_to_call">برگشت به تماس</string>
+  <string name="rtt_request_dialog_title">به تماس نوشتار هم‌زمان می‌پیوندید؟</string>
+  <string name="rtt_request_dialog_details">%1$s می‌خواهد در تماس صوتی شما از پیام‌رسانی استفاده کند.</string>
+  <string name="rtt_request_dialog_more_information">نوشتار هم‌زمان به تماس گیرندگان ناشنوا، دارای مشکل شنوایی، دارای ناتوانی گفتاری یا افرادی که به چیزی بیش از صدا نیاز دارند کمک می‌کند.</string>
+  <string name="rtt_button_decline_request">نه متشکرم</string>
+  <string name="rtt_button_accept_request">‏پیوستن به RTT</string>
 </resources>

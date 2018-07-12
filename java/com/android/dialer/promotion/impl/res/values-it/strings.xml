@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="rtt_promotion_title">SMS in tempo reale durante una chiamata</string>
+  <string name="rtt_promotion_details">RTT aiuta i chiamanti con disabilità uditive o del linguaggio e le persone che hanno bisogno di un supporto scritto oltre alla voce. Le trascrizioni dei messaggi di RTT vengono memorizzate nella cronologia delle chiamate del tuo dispositivo. %1$s</string>
+  <string name="duo_disclosure_title">Fai videochiamate con Duo</string>
+  <string name="duo_disclosure_details">Le videochiamate di Google Duo ti permettono di chiacchierare con amici e familiari faccia a faccia. Potrebbero essere applicati dei costi per i dati. %1$s</string>
+</resources>

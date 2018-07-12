@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="post_call_message" msgid="3541277172068556862">"మీరు ఎందుకు కాల్ చేసారో చెప్పండి"</string>
-    <string name="post_call_message_1" msgid="4827849136801228106">"అత్యవసరమైన విషయం. నాకు తిరిగి కాల్ చేయండి."</string>
-    <string name="post_call_message_2" msgid="5310301526176003385">"మీకు సమయం ఉన్నప్పుడు నాకు తిరిగి కాల్ చేయండి."</string>
-    <string name="post_call_message_3" msgid="3932759658420368056">"అత్యవసరమేమీ కాదు, మనం తర్వాత చాట్ చేసుకోవచ్చు."</string>
-    <string name="post_call_add_message" msgid="8298853527467080463">"సందేశాన్ని జోడించండి"</string>
-    <string name="post_call_send_message" msgid="8039569617234824873">"సందేశాన్ని పంపండి"</string>
-    <string name="post_call_message_sent" msgid="832757977985265036">"సందేశం పంపబడింది"</string>
-    <string name="view" msgid="8572192949673703830">"వీక్షించండి"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="post_call_message">మీరు ఎందుకు కాల్ చేసారో చెప్పండి</string>
+  <string name="post_call_message_1">అత్యవసరమైన విషయం. నాకు తిరిగి కాల్ చేయండి.</string>
+  <string name="post_call_message_2">మీకు సమయం ఉన్నప్పుడు నాకు తిరిగి కాల్ చేయండి.</string>
+  <string name="post_call_message_3">అత్యవసరమేమీ కాదు, మనం తర్వాత చాట్ చేసుకోవచ్చు.</string>
+  <string name="post_call_add_message">సందేశాన్ని జోడించండి</string>
+  <string name="post_call_send_message">సందేశాన్ని పంపండి</string>
+  <string name="post_call_message_sent">సందేశం పంపబడింది</string>
+  <string name="view">వీక్షించండి</string>
 </resources>

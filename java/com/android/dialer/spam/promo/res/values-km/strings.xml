@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">ត្រង​ការហៅទូរសព្ទ​​​ឥតបាន​ការ​ដែល​សង្ស័យ​ទាំងអស់​ដែរ​ឬ​ទេ?</string>
+  <string name="spam_blocking_promo_text">ការហៅ​ទូរសព្ទ​ដូច​ការហៅដែល​អ្នក​ទើបបាន​ទប់ស្កាត់​នឹង​លែង
+      រំខាន​អ្នក​ទៀត​ហើយ</string>
+  <string name="spam_blocking_promo_action_filter_spam">តម្រង​សារ​ឥត​បានការ</string>
+  <string name="spam_blocking_promo_action_dismiss">បដិសេធ</string>
+  <string name="spam_blocking_setting_prompt">ការកំណត់</string>
+  <string name="spam_blocking_settings_enable_error_text">មាន​បញ្ហា​ក្នុង​ការបើក​តម្រង​ការហៅ​ឥត​បានការ</string>
+  <string name="spam_blocking_settings_disable_error_text">មាន​បញ្ហា​បិទ​តម្រង​ការហៅ​ឥត​បានការ</string>
+  <string name="spam_blocking_settings_enable_complete_text">បាន​បើក​​តម្រង​ការហៅ​ឥត​បានការ</string>
+  <string name="spam_blocking_settings_disable_complete_text">បាន​បិទ​តម្រង​ការហៅ​ឥត​​បានការ</string>
+</resources>

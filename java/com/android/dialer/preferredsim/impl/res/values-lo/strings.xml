@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">ບໍ່ສາມາດໂທໂດຍບໍ່ໄດ້ຮັບສິດອະນຸຍາດໂທລະສັບໄດ້</string>
+  <string name="pre_call_select_phone_account">ເລືອກ SIM ສຳລັບສາຍນີ້</string>
+  <string name="pre_call_select_phone_account_remember">ຈື່ການເລືອກນີ້ໄວ້</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">ບໍ່ສາມາດໃຊ້ໄດ້ໃນລະຫວ່າງໃຊ້ %1$s</string>
+</resources>

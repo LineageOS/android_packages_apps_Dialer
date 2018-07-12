@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Потпомогнуто бирање</string>
+  <string name="assisted_dialing_setting_summary">Предвиди и додај позивни број за земљу кад упућујем позиве из иностранства</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Аутоматски изабрано • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Аутоматски изабрано</string>
+  <string name="assisted_dialing_setting_cc_category_title">Земља боравишта</string>
+  <string name="assisted_dialing_setting_cc_title">Подразумевана земља боравишта</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s번을 차단하시겠습니까?</string>
+  <string name="block_number_confirmation_message_new_filtering">이 번호로부터 수신되는 전화와 문자를 더 이상 받지 않습니다.</string>
+  <string name="block_number_ok">차단</string>
+  <string name="unblock_number_ok">차단 해제</string>
+  <string name="block_report_number_alert_title">%1$s번을 차단하시겠습니까?</string>
+  <string name="block_report_number_alert_details">이 번호로부터 수신되는 전화를 더 이상 받지 않습니다.</string>
+  <string name="block_number_alert_details">%1$s 이 전화는 스팸으로 신고됩니다.</string>
+  <string name="unblock_number_alert_details">이 번호는 차단되지 않으며 스팸이 아닌 것으로 신고됩니다. 앞으로 이 번호에서 전화가 오면 스팸으로 인식되지 않습니다.</string>
+  <string name="unblock_report_number_alert_title">%1$s번을 차단 해제하시겠습니까?</string>
+  <string name="report_not_spam_alert_button">신고</string>
+  <string name="report_not_spam_alert_title">실수임을 신고하시겠습니까?</string>
+  <string name="report_not_spam_alert_details">앞으로 %1$s에서 전화가 오면 스팸으로 인식되지 않습니다.</string>
+  <string name="checkbox_report_as_spam_action">전화를 스팸으로 신고</string>
+  <string name="block_number_failed_toast">이 번호를 차단하는 중에 문제가 발생했습니다.</string>
+  <string name="unblock_number_failed_toast">이 번호를 차단 해제하는 중에 문제가 발생했습니다.</string>
+</resources>

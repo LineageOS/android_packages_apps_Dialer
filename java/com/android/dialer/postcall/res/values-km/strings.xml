@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="post_call_message" msgid="3541277172068556862">"និយាយពីមូលហេតុដែលអ្នកហៅទូរស័ព្ទ"</string>
-    <string name="post_call_message_1" msgid="4827849136801228106">"នេះជាការបន្ទាន់។ សូមហៅទូរស័ព្ទមកខ្ញុំវិញ។"</string>
-    <string name="post_call_message_2" msgid="5310301526176003385">"សូមហៅទូរស័ព្ទមកខ្ញុំវិញនៅពេលអ្នកឆ្លៀតពេលបានខ្លះ។"</string>
-    <string name="post_call_message_3" msgid="3932759658420368056">"មិនបន្ទាន់ទេ យើងអាចជជែកគ្នានៅពេលក្រោយ។"</string>
-    <string name="post_call_add_message" msgid="8298853527467080463">"បន្ថែមសារ"</string>
-    <string name="post_call_send_message" msgid="8039569617234824873">"ផ្ញើ​សារ"</string>
-    <string name="post_call_message_sent" msgid="832757977985265036">"បានផ្ញើសាររួចហើយ"</string>
-    <string name="view" msgid="8572192949673703830">"មើល"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="post_call_message">និយាយពីមូលហេតុដែលអ្នកហៅទូរស័ព្ទ</string>
+  <string name="post_call_message_1">នេះជាការបន្ទាន់។ សូមហៅទូរស័ព្ទមកខ្ញុំវិញ។</string>
+  <string name="post_call_message_2">សូមហៅទូរស័ព្ទមកខ្ញុំវិញនៅពេលអ្នកឆ្លៀតពេលបានខ្លះ។</string>
+  <string name="post_call_message_3">មិនបន្ទាន់ទេ យើងអាចជជែកគ្នានៅពេលក្រោយ។</string>
+  <string name="post_call_add_message">បន្ថែមសារ</string>
+  <string name="post_call_send_message">ផ្ញើ​សារ</string>
+  <string name="post_call_message_sent">បានផ្ញើសាររួចហើយ</string>
+  <string name="view">មើល</string>
 </resources>

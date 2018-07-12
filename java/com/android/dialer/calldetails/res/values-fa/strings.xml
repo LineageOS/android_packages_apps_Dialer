@@ -1,31 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_details" msgid="5063658079729839605">"جزئیات تماس"</string>
-    <string name="delete" msgid="2141020674108406737">"حذف"</string>
-    <string name="call_details_copy_number" msgid="4265479408878990796">"کپی کردن شماره"</string>
-    <string name="call_details_edit_number" msgid="8718476514903513624">"ویرایش شماره قبل از تماس"</string>
-    <string name="call_details_report_call_id" msgid="8857541295264421217">"گزارش شماره نادرست"</string>
-    <string name="sent_a_photo" msgid="3978670717462979502">"عکسی ارسال کرد"</string>
-    <string name="received_a_photo" msgid="3528953225576480505">"عکسی دریافت کرد"</string>
-    <string name="message_in_quotes" msgid="3270574830115828365">"«<xliff:g id="MESSAGE">%1$s</xliff:g>»"</string>
-    <string name="report_caller_id_dialog_title" msgid="145323726250371695">"گزارش شماره نادرست"</string>
-    <string name="report_caller_id_failed" msgid="1471904930106125702">"شماره گزارش نشد"</string>
-    <string name="report_caller_id_toast" msgid="5494870403429969932">"شماره گزارش شد"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_details">جزئیات تماس</string>
+  <string name="delete">حذف</string>
+  <string name="call_details_copy_number">کپی کردن شماره</string>
+  <string name="call_details_edit_number">ویرایش شماره قبل از تماس</string>
+  <string name="call_details_report_call_id">گزارش شماره نادرست</string>
+  <string name="sent_a_photo">عکسی ارسال کرد</string>
+  <string name="received_a_photo">عکسی دریافت کرد</string>
+  <string name="message_in_quotes">«%1$s»</string>
+  <string name="report_caller_id_dialog_title">گزارش شماره نادرست</string>
+  <string name="report_caller_id_failed">شماره گزارش نشد</string>
+  <string name="report_caller_id_toast">شماره گزارش شد</string>
+  <string name="assisted_dialing_country_code_entry">شماره‌گیری کمکی: کد کشور %1$s+ استفاده شد</string>
+  <string name="assisted_dialing_country_code_entry_failure">شماره‌گیری کمکی استفاده شد</string>
+  <string name="rtt_transcript_not_available">ترانویسی فقط برای تماس‌های دارای پیام در دسترس است</string>
+  <string name="rtt_transcript_link">مشاهده ترانویسی</string>
 </resources>

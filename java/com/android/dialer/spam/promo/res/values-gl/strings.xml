@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="spam_blocking_promo_title">Queres filtrar todas as posibles chamadas de spam?</string>
+  <string name="spam_blocking_promo_text">Xa non te amolarán chamadas como a que
+      acabas de bloquear</string>
+  <string name="spam_blocking_promo_action_filter_spam">Filtrar spam</string>
+  <string name="spam_blocking_promo_action_dismiss">Ignorar</string>
+  <string name="spam_blocking_setting_prompt">Configuración</string>
+  <string name="spam_blocking_settings_enable_error_text">Produciuse un problema ao activar o filtrado de spam</string>
+  <string name="spam_blocking_settings_disable_error_text">Produciuse un problema ao desactivar o filtrado de spam</string>
+  <string name="spam_blocking_settings_enable_complete_text">Activouse o filtrado de spam</string>
+  <string name="spam_blocking_settings_disable_complete_text">Desactivouse o filtrado de spam</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="assisted_dialing_setting_title">Жардам берилген терүү</string>
+  <string name="assisted_dialing_setting_summary">Чет өлкөдө саякаттап жүрүп, бирөөгө чалканда өлкө кодун алдын ала айтып, кошот</string>
+  <string name="assisted_dialing_setting_cc_default_summary">Автоматтык түрдө аныкталды • %1$s</string>
+  <string name="assisted_dialing_setting_cc_default_summary_fallback">Автоматтык түрдө аныкталат</string>
+  <string name="assisted_dialing_setting_cc_category_title">Мекени</string>
+  <string name="assisted_dialing_setting_cc_title">Демейки мекени</string>
+</resources>

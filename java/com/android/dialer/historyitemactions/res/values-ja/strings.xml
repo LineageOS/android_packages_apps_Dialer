@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">音声通話</string>
+  <string name="video_call">ビデオ通話</string>
+  <string name="add_to_contacts">連絡先に追加</string>
+  <string name="send_a_message">メッセージ</string>
+  <string name="not_spam">迷惑電話ではない</string>
+  <string name="block_number">ブロック</string>
+  <string name="unblock_number">ブロックを解除</string>
+  <string name="block_and_optionally_report_spam">ブロック / 迷惑電話として報告</string>
+  <string name="copy_number">電話番号をコピー</string>
+</resources>

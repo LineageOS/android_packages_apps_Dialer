@@ -1,79 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2013 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="phoneAppLabel" product="default" msgid="4266606423746318128">"Telefone"</string>
-    <string name="wait_prompt_str" msgid="3509685348904329594">"Enviar os toques a seguir?\n"</string>
-    <string name="pause_prompt_yes" msgid="4642047011233552973">"Sim"</string>
-    <string name="pause_prompt_no" msgid="4691320111774935838">"Não"</string>
-    <string name="notification_dialing" msgid="9072177265772083826">"Discando"</string>
-    <string name="notification_ongoing_call" msgid="8712641937577776125">"Chamada em andamento"</string>
-    <string name="notification_ongoing_video_call" msgid="6331318021321487769">"Videochamada em andamento"</string>
-    <string name="notification_ongoing_paused_video_call" msgid="709950253594606371">"Videochamada em andamento: vídeo pausado"</string>
-    <string name="notification_ongoing_work_call" msgid="3189581218078981547">"Chamada de trabalho em andamento"</string>
-    <string name="notification_ongoing_call_wifi_template" msgid="387925749965565373">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> em andamento"</string>
-    <string name="notification_incoming_call_wifi_template" msgid="6678951047381412864">"<xliff:g id="BRAND_NAME">%1$s</xliff:g> recebida"</string>
-    <string name="notification_call_wifi_brand" msgid="7480874079128972085">"Chamada por Wi-Fi"</string>
-    <string name="notification_call_wifi_work_brand" msgid="8540257660638915570">"Chamada de trabalho por Wi-Fi"</string>
-    <string name="notification_on_hold" msgid="7141827443379205682">"Em espera"</string>
-    <string name="notification_incoming_call" msgid="7520580807513849283">"Chamada recebida"</string>
-    <string name="notification_incoming_call_with_photo" msgid="4360505044807517422">"Chamada recebida com foto"</string>
-    <string name="notification_incoming_call_with_message" msgid="5608687985694956601">"Chamada recebida com mensagem"</string>
-    <string name="notification_incoming_call_with_location" msgid="4519498445081598767">"Chamada recebida com local"</string>
-    <string name="notification_incoming_call_with_photo_message" msgid="316806247057497525">"Chamada recebida com foto e mensagem"</string>
-    <string name="notification_incoming_call_with_photo_location" msgid="3523930283842222367">"Chamada recebida com foto e local"</string>
-    <string name="notification_incoming_call_with_message_location" msgid="319374298517482028">"Chamada recebida com mensagem e local"</string>
-    <string name="notification_incoming_call_with_photo_message_location" msgid="596658237891406809">"Chamada recebida com foto, mensagem e local"</string>
-    <string name="notification_incoming_call_attachments" msgid="3708414495376236948">"Chamada recebida com anexos"</string>
-    <string name="important_notification_incoming_call" msgid="2867013954509930989">"Chamada recebida importante"</string>
-    <string name="important_notification_incoming_call_with_photo" msgid="4908333121583658560">"Chamada recebida importante com foto"</string>
-    <string name="important_notification_incoming_call_with_message" msgid="1614505248246685319">"Chamada recebida importante com mensagem"</string>
-    <string name="important_notification_incoming_call_with_location" msgid="7387284065036564352">"Chamada recebida importante com local"</string>
-    <string name="important_notification_incoming_call_with_photo_message" msgid="4577220919701434817">"Chamada recebida importante com foto e mensagem"</string>
-    <string name="important_notification_incoming_call_with_photo_location" msgid="7172208615619394502">"Chamada recebida importante com foto e local"</string>
-    <string name="important_notification_incoming_call_with_message_location" msgid="7244079127080064796">"Chamada recebida importante com mensagem e local"</string>
-    <string name="important_notification_incoming_call_with_photo_message_location" msgid="513692941317253479">"Chamada recebida importante com foto, mensagem e local"</string>
-    <string name="important_notification_incoming_call_attachments" msgid="4594375776340303751">"Chamada recebida importante com anexos"</string>
-    <string name="notification_incoming_work_call" msgid="5291275092734261918">"Chamada de trabalho recebida"</string>
-    <string name="notification_incoming_spam_call" msgid="7591506944666791937">"Chamada recebida suspeita (spam)"</string>
-    <string name="notification_requesting_video_call" msgid="1807679328811515758">"Recebendo solicitação de vídeo"</string>
-    <string name="notification_action_answer" msgid="8748275902211192568">"Atender"</string>
-    <string name="notification_action_end_call" msgid="7467258454170007765">"Desligar"</string>
-    <string name="notification_action_answer_video" msgid="8488108892919917287">"Vídeo"</string>
-    <string name="notification_action_accept" msgid="1272761514200507143">"Aceitar"</string>
-    <string name="notification_action_dismiss" msgid="3128241581632616226">"Recusar"</string>
-    <string name="notification_action_speaker_on" msgid="1882659234405596540">"Ativar alto-falante"</string>
-    <string name="notification_action_speaker_off" msgid="6340085043115533948">"Desativar alto-falante"</string>
-    <string name="notification_external_call" msgid="2504334597315343920">"Chamada em andamento em outro dispositivo"</string>
-    <string name="notification_external_video_call" msgid="7709394856028436683">"Videochamada em andamento em outro dispositivo"</string>
-    <string name="notification_take_call" msgid="5631659438864492229">"Atender à chamada"</string>
-    <string name="notification_take_video_call" msgid="4473387503712341390">"Atender à videochamada"</string>
-    <string name="incall_error_supp_service_unknown" msgid="3062751096566282959">"Serviço não suportado."</string>
-    <string name="goPrivate" msgid="5269514638004595378">"conversar em particular"</string>
-    <string name="manageConferenceLabel" msgid="3589379023518128318">"Gerenciar teleconferência"</string>
-    <string name="emergency_call_dialog_number_for_display" msgid="461645337084699104">"Número de emergência"</string>
-    <string name="child_number" msgid="3398257437107259682">"via <xliff:g id="CHILD_NUMBER">%s</xliff:g>"</string>
-    <string name="callFailed_simError" msgid="4587775795711340072">"Sem SIM ou erro de SIM"</string>
-    <string name="conference_caller_disconnect_content_description" msgid="2821988368803183644">"Encerrar chamada"</string>
-    <string name="conference_call_name" msgid="8189987124611337174">"Teleconferência"</string>
-    <string name="generic_conference_call_name" msgid="1546941472424243894">"Em chamada"</string>
-    <string name="video_call_wifi_to_lte_handover_toast" msgid="2108633957233856099">"Continuando chamada por dados móveis…"</string>
-    <string name="video_call_lte_to_wifi_failed_title" msgid="1343446383310594456">"Não foi possível alternar para a rede Wi-Fi"</string>
-    <string name="video_call_lte_to_wifi_failed_message" msgid="3703332569739939335">"A videochamada continuará via rede móvel. O uso de dados está sujeito a cobranças padrão."</string>
-    <string name="video_call_lte_to_wifi_failed_do_not_show" msgid="7609115874511223150">"Não exibir novamente"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">Enviar os toques a seguir?\n</string>
+  <string name="pause_prompt_yes">Sim</string>
+  <string name="pause_prompt_no">Não</string>
+  <string name="notification_dialing">Discando</string>
+  <string name="notification_ongoing_call">Chamada em andamento</string>
+  <string name="notification_ongoing_video_call">Videochamada em andamento</string>
+  <string name="notification_ongoing_paused_video_call">Videochamada em andamento: vídeo pausado</string>
+  <string name="notification_ongoing_work_call">Chamada de trabalho em andamento</string>
+  <string name="notification_ongoing_call_wifi_template">%1$s em andamento</string>
+  <string name="notification_incoming_call_wifi_template">%1$s recebida</string>
+  <string name="notification_call_wifi_brand">Chamada por Wi-Fi</string>
+  <string name="notification_call_wifi_work_brand">Chamada de trabalho por Wi-Fi</string>
+  <string name="notification_on_hold">Em espera</string>
+  <string name="notification_incoming_call">Chamada recebida</string>
+  <string name="notification_incoming_video_call">Recebendo videochamada</string>
+  <string name="notification_incoming_call_mutli_sim">Chamada recebida via %1$s</string>
+  <string name="notification_incoming_call_with_photo">Chamada recebida com foto</string>
+  <string name="notification_incoming_call_with_message">Chamada recebida com mensagem</string>
+  <string name="notification_incoming_call_with_location">Chamada recebida com local</string>
+  <string name="notification_incoming_call_with_photo_message">Chamada recebida com foto e mensagem</string>
+  <string name="notification_incoming_call_with_photo_location">Chamada recebida com foto e local</string>
+  <string name="notification_incoming_call_with_message_location">Chamada recebida com mensagem e local</string>
+  <string name="notification_incoming_call_with_photo_message_location">Chamada recebida com foto, mensagem e local</string>
+  <string name="notification_incoming_call_attachments">Chamada recebida com anexos</string>
+  <string name="important_notification_incoming_call">Chamada recebida importante</string>
+  <string name="important_notification_incoming_call_with_photo">Chamada recebida importante com foto</string>
+  <string name="important_notification_incoming_call_with_message">Chamada recebida importante com mensagem</string>
+  <string name="important_notification_incoming_call_with_location">Chamada recebida importante com local</string>
+  <string name="important_notification_incoming_call_with_photo_message">Chamada recebida importante com foto e mensagem</string>
+  <string name="important_notification_incoming_call_with_photo_location">Chamada recebida importante com foto e local</string>
+  <string name="important_notification_incoming_call_with_message_location">Chamada recebida importante com mensagem e local</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Chamada recebida importante com foto, mensagem e local</string>
+  <string name="important_notification_incoming_call_attachments">Chamada recebida importante com anexos</string>
+  <string name="notification_incoming_work_call">Chamada de trabalho recebida</string>
+  <string name="notification_incoming_spam_call">Chamada recebida suspeita (spam)</string>
+  <string name="notification_requesting_video_call">Recebendo solicitação de vídeo</string>
+  <string name="notification_action_answer">Atender</string>
+  <string name="notification_action_end_call">Desligar</string>
+  <string name="notification_action_answer_video">Vídeo</string>
+  <string name="notification_action_accept">Aceitar</string>
+  <string name="notification_action_dismiss">Recusar</string>
+  <string name="notification_action_speaker_on">Ativar alto-falante</string>
+  <string name="notification_action_speaker_off">Desativar alto-falante</string>
+  <string name="notification_external_call">Chamada em andamento em outro dispositivo</string>
+  <string name="notification_external_video_call">Videochamada em andamento em outro dispositivo</string>
+  <string name="notification_take_call">Atender à chamada</string>
+  <string name="notification_take_video_call">Atender à videochamada</string>
+  <string name="incall_error_supp_service_unknown">Serviço não suportado.</string>
+  <string name="goPrivate">conversar em particular</string>
+  <string name="manageConferenceLabel">Gerenciar conferência</string>
+  <string name="child_number">via %s</string>
+  <string name="callFailed_simError">Sem SIM ou erro de SIM</string>
+  <string name="conference_caller_disconnect_content_description">Encerrar chamada</string>
+  <string name="conference_call_name">Conferência</string>
+  <string name="generic_conference_call_name">Em chamada</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Continuando chamada por dados móveis…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Não foi possível alternar para a rede Wi-Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">A videochamada continuará via rede móvel. O uso de dados está sujeito a cobranças padrão.</string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Não exibir novamente</string>
+  <string name="bubble_return_to_call">Voltar à chamada</string>
+  <string name="rtt_request_dialog_title">Participar da chamada RTT?</string>
+  <string name="rtt_request_dialog_details">%1$s quer usar mensagens de texto com sua chamada de voz.</string>
+  <string name="rtt_request_dialog_more_information">A RTT ajuda os autores das chamadas com deficiências como surdez, dificuldade de audição ou fala ou que precisam de outros recursos além de voz.</string>
+  <string name="rtt_button_decline_request">Não</string>
+  <string name="rtt_button_accept_request">Participar da RTT</string>
 </resources>

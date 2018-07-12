@@ -1,164 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Text zkopírován"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Volat číslo <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="call_home" msgid="125893483593803791">"Volat domů"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Volat mobil"</string>
-    <string name="call_work" msgid="6040550697395300892">"Volat do práce"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Volat pracovní fax"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Volat domácí fax"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Volat pager"</string>
-    <string name="call_other" msgid="5536385588712587235">"Volat"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Volat na číslo zpětného volání"</string>
-    <string name="call_car" msgid="3197417098027764954">"Volat do auta"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Volat firmu (hlavní)"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Volat na číslo ISDN"</string>
-    <string name="call_main" msgid="3293707608770407814">"Volat na hlavní číslo"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Volat fax"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Volat radiotelefon"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Volat na číslo Telex"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Volat na číslo TTY/TDD"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Volat na pracovní mobil"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Volat na pracovní pager"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Volat kontakt <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Volat MMS"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"Poslat SMS na číslo <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="sms_home" msgid="3527719551060295243">"Poslat SMS domů"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"Poslat SMS na mobil"</string>
-    <string name="sms_work" msgid="4158595439553450966">"Poslat SMS do práce"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"Poslat SMS na pracovní fax"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"Poslat SMS na domácí fax"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"Poslat SMS na pager"</string>
-    <string name="sms_other" msgid="1742702947993285933">"Poslat SMS"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"Poslat SMS na číslo zpětného volání"</string>
-    <string name="sms_car" msgid="4314577266154395174">"Poslat SMS do auta"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"Poslat SMS do firmy (hlavní)"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"Poslat SMS na číslo ISDN"</string>
-    <string name="sms_main" msgid="8908087742014140774">"Poslat SMS na hlavní číslo"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"Poslat SMS na fax"</string>
-    <string name="sms_radio" msgid="855555176531704682">"Poslat SMS na radiotelefon"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"Poslat SMS na číslo Telex"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"Poslat SMS na číslo TTY/TDD"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"Poslat SMS na pracovní mobil"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"Poslat SMS na pracovní pager"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"Poslat SMS na kontakt <xliff:g id="ASSISTANT">%s</xliff:g>"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"Poslat SMS na číslo MMS"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Vymazat často kontaktované osoby?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Vymažete seznam často kontaktovaných osob v aplikacích Kontakty a Telefon a e-mailové aplikace budou muset nastavení adresátů vytvořit znovu."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Mazání často kontaktovaných osob..."</string>
-    <string name="status_available" msgid="2648156525685472626">"K dispozici"</string>
-    <string name="status_away" msgid="2298688367552893953">"Pryč"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Nemám čas"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kontakty"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"Hlavní návrhy"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Ostatní"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Adresář"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"Pracovní adresář"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Všechny kontakty"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Návrhy"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Já"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Žádné jméno)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Zobrazit kontakt"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Kontakty s telefonními čísly"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"Kontakty z pracovního profilu"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Zobrazit aktualizace"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Pouze na zařízení, nesynchronizováno"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Jméno"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Přezdívka"</string>
-    <string name="full_name" msgid="648186563998465740">"Jméno"</string>
-    <string name="name_given" msgid="5096576006314820536">"Jméno"</string>
-    <string name="name_family" msgid="6646235805198547467">"Příjmení"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Titul před jménem"</string>
-    <string name="name_middle" msgid="703755205331582769">"Druhé jméno"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Titul za jménem"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Jméno (foneticky)"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Jméno (foneticky)"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Druhé jméno (foneticky)"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Příjmení (foneticky)"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"E-mail"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adresa"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"Chat"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Organizace"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"Vztah"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Zvláštní datum"</string>
-    <string name="sms" msgid="7574344928185328095">"Textová zpráva"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adresa"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Společnost"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Pozice"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Poznámky"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Web"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Skupiny"</string>
-    <string name="email_home" msgid="889830029388962171">"E-mail domů"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"E-mail na mobil"</string>
-    <string name="email_work" msgid="4223487303344613528">"E-mail do práce"</string>
-    <string name="email_other" msgid="4246411900126012062">"E-mail"</string>
-    <string name="email_custom" msgid="7246580894327511013">"E-mail <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="email" msgid="2807318537887091606">"E-mail"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Ulice"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Město"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Stát"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"PSČ"</string>
-    <string name="postal_country" msgid="232670707458768148">"Země"</string>
-    <string name="map_home" msgid="4181131107392126938">"Zobrazit adresu domů"</string>
-    <string name="map_work" msgid="5723471185992684400">"Zobrazit adresu do práce"</string>
-    <string name="map_other" msgid="2253764780863500516">"Zobrazit adresu"</string>
-    <string name="map_custom" msgid="5581743097882436157">"Zobrazit adresu <xliff:g id="CUSTOM">%s</xliff:g>"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"Chatovat pomocí AIM"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Chatovat pomocí Windows Live"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Chatovat pomocí Yahoo"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Chatovat pomocí Skype"</string>
-    <string name="chat_qq" msgid="786924280665740019">"Chatovat pomocí QQ"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Chatovat pomocí Google Talk"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"Chatovat pomocí ICQ"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Chatovat pomocí Jabberu"</string>
-    <string name="chat" msgid="1020428260359370236">"Chat"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Všechny kontakty"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"Kontakty v účtu <xliff:g id="NAME">%s</xliff:g>"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Kontakty ve vlastním zobrazení"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Jeden kontakt"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Seřadit podle"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Jméno"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Příjmení"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Formát jména"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Nejprve jméno"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Nejprve příjmení"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Vymazat často kontaktované"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"zastavit vyhledávání"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Vymazat vyhledávání"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Účet"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Vždy používat pro hovory"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Volat pomocí"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Volání s poznámkou"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Zadejte poznámku, která se odešle pomocí volání…"</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"ODESLAT A ZAVOLAT"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g>/<xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"Karta <xliff:g id="TITLE">%1$s</xliff:g>."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="few"> Karta <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> nepřečtené položky. </item>
-      <item quantity="many"> Karta <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> nepřečtené položky. </item>
-      <item quantity="other"> Karta <xliff:g id="TITLE_2">%1$s</xliff:g>. <xliff:g id="COUNT_3">%2$d</xliff:g> nepřečtených položek. </item>
-      <item quantity="one"> Karta <xliff:g id="TITLE_0">%1$s</xliff:g>. <xliff:g id="COUNT_1">%2$d</xliff:g> nepřečtená položka. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Videohovor"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Sdílet a zavolat"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Volat číslo %s</string>
+  <string name="call_home">Volat domů</string>
+  <string name="call_mobile">Volat mobil</string>
+  <string name="call_work">Volat do práce</string>
+  <string name="call_fax_work">Volat pracovní fax</string>
+  <string name="call_fax_home">Volat domácí fax</string>
+  <string name="call_pager">Volat pager</string>
+  <string name="call_other">Volat</string>
+  <string name="call_callback">Volat na číslo zpětného volání</string>
+  <string name="call_car">Volat do auta</string>
+  <string name="call_company_main">Volat firmu (hlavní)</string>
+  <string name="call_isdn">Volat na číslo ISDN</string>
+  <string name="call_main">Volat na hlavní číslo</string>
+  <string name="call_other_fax">Volat fax</string>
+  <string name="call_radio">Volat radiotelefon</string>
+  <string name="call_telex">Volat na číslo Telex</string>
+  <string name="call_tty_tdd">Volat na číslo TTY/TDD</string>
+  <string name="call_work_mobile">Volat na pracovní mobil</string>
+  <string name="call_work_pager">Volat na pracovní pager</string>
+  <string name="call_assistant">Volat kontakt %s</string>
+  <string name="call_mms">Volat MMS</string>
+  <string name="sms_custom">Poslat SMS na číslo %s</string>
+  <string name="sms_home">Poslat SMS domů</string>
+  <string name="sms_mobile">Poslat SMS na mobil</string>
+  <string name="sms_work">Poslat SMS do práce</string>
+  <string name="sms_fax_work">Poslat SMS na pracovní fax</string>
+  <string name="sms_fax_home">Poslat SMS na domácí fax</string>
+  <string name="sms_pager">Poslat SMS na pager</string>
+  <string name="sms_other">Poslat SMS</string>
+  <string name="sms_callback">Poslat SMS na číslo zpětného volání</string>
+  <string name="sms_car">Poslat SMS do auta</string>
+  <string name="sms_company_main">Poslat SMS do firmy (hlavní)</string>
+  <string name="sms_isdn">Poslat SMS na číslo ISDN</string>
+  <string name="sms_main">Poslat SMS na hlavní číslo</string>
+  <string name="sms_other_fax">Poslat SMS na fax</string>
+  <string name="sms_radio">Poslat SMS na radiotelefon</string>
+  <string name="sms_telex">Poslat SMS na číslo Telex</string>
+  <string name="sms_tty_tdd">Poslat SMS na číslo TTY/TDD</string>
+  <string name="sms_work_mobile">Poslat SMS na pracovní mobil</string>
+  <string name="sms_work_pager">Poslat SMS na pracovní pager</string>
+  <string name="sms_assistant">Poslat SMS na kontakt %s</string>
+  <string name="sms_mms">Poslat SMS na číslo MMS</string>
+  <string name="clearFrequentsConfirmation_title">Vymazat často kontaktované osoby?</string>
+  <string name="clearFrequentsConfirmation">Vymažete seznam často kontaktovaných osob v aplikacích Kontakty a Telefon a e-mailové aplikace budou muset nastavení adresátů vytvořit znovu.</string>
+  <string name="clearFrequentsProgress_title">Mazání často kontaktovaných osob...</string>
+  <string name="status_available">K dispozici</string>
+  <string name="status_away">Pryč</string>
+  <string name="status_busy">Nemám čas</string>
+  <string name="contactsList">Kontakty</string>
+  <string name="contact_suggestions">Hlavní návrhy</string>
+  <string name="local_invisible_directory">Ostatní</string>
+  <string name="directory_search_label">Adresář</string>
+  <string name="directory_search_label_work">Pracovní adresář</string>
+  <string name="local_search_label">Všechny kontakty</string>
+  <string name="local_suggestions_search_label">Návrhy</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Já</string>
+  <string name="missing_name">(Žádné jméno)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Zobrazit kontakt</string>
+  <string name="list_filter_phones">Kontakty s telefonními čísly</string>
+  <string name="list_filter_phones_work">Kontakty z pracovního profilu</string>
+  <string name="view_updates_from_group">Zobrazit aktualizace</string>
+  <string name="account_phone">Pouze na zařízení, nesynchronizováno</string>
+  <string name="nameLabelsGroup">Jméno</string>
+  <string name="nicknameLabelsGroup">Přezdívka</string>
+  <string name="full_name">Jméno</string>
+  <string name="name_given">Jméno</string>
+  <string name="name_family">Příjmení</string>
+  <string name="name_prefix">Titul před jménem</string>
+  <string name="name_middle">Druhé jméno</string>
+  <string name="name_suffix">Titul za jménem</string>
+  <string name="name_phonetic">Jméno (foneticky)</string>
+  <string name="name_phonetic_given">Jméno (foneticky)</string>
+  <string name="name_phonetic_middle">Druhé jméno (foneticky)</string>
+  <string name="name_phonetic_family">Příjmení (foneticky)</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">E-mail</string>
+  <string name="postalLabelsGroup">Adresa</string>
+  <string name="imLabelsGroup">Chat</string>
+  <string name="organizationLabelsGroup">Organizace</string>
+  <string name="relationLabelsGroup">Vztah</string>
+  <string name="eventLabelsGroup">Zvláštní datum</string>
+  <string name="sms">Textová zpráva</string>
+  <string name="postal_address">Adresa</string>
+  <string name="ghostData_company">Společnost</string>
+  <string name="ghostData_title">Pozice</string>
+  <string name="label_notes">Poznámky</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Web</string>
+  <string name="groupsLabel">Skupiny</string>
+  <string name="email_home">E-mail domů</string>
+  <string name="email_mobile">E-mail na mobil</string>
+  <string name="email_work">E-mail do práce</string>
+  <string name="email_other">E-mail</string>
+  <string name="email_custom">E-mail %s</string>
+  <string name="email">E-mail</string>
+  <string name="postal_street">Ulice</string>
+  <string name="postal_city">Město</string>
+  <string name="postal_region">Stát</string>
+  <string name="postal_postcode">PSČ</string>
+  <string name="postal_country">Země</string>
+  <string name="map_home">Zobrazit adresu domů</string>
+  <string name="map_work">Zobrazit adresu do práce</string>
+  <string name="map_other">Zobrazit adresu</string>
+  <string name="map_custom">Zobrazit adresu %s</string>
+  <string name="chat_aim">Chatovat pomocí AIM</string>
+  <string name="chat_msn">Chatovat pomocí Windows Live</string>
+  <string name="chat_yahoo">Chatovat pomocí Yahoo</string>
+  <string name="chat_skype">Chatovat pomocí Skype</string>
+  <string name="chat_qq">Chatovat pomocí QQ</string>
+  <string name="chat_gtalk">Chatovat pomocí Google Talk</string>
+  <string name="chat_icq">Chatovat pomocí ICQ</string>
+  <string name="chat_jabber">Chatovat pomocí Jabberu</string>
+  <string name="chat">Chat</string>
+  <string name="list_filter_all_accounts">Všechny kontakty</string>
+  <string name="listAllContactsInAccount">Kontakty v účtu %s</string>
+  <string name="listCustomView">Kontakty ve vlastním zobrazení</string>
+  <string name="listSingleContact">Jeden kontakt</string>
+  <string name="display_options_sort_list_by">Seřadit podle</string>
+  <string name="display_options_sort_by_given_name">Jméno</string>
+  <string name="display_options_sort_by_family_name">Příjmení</string>
+  <string name="display_options_view_names_as">Formát jména</string>
+  <string name="display_options_view_given_name_first">Nejprve jméno</string>
+  <string name="display_options_view_family_name_first">Nejprve příjmení</string>
+  <string name="menu_clear_frequents">Vymazat často kontaktované</string>
+  <string name="action_menu_back_from_search">zastavit vyhledávání</string>
+  <string name="description_clear_search">Vymazat vyhledávání</string>
+  <string name="select_account_dialog_title">Účet</string>
+  <string name="set_default_account">Vždy používat pro hovory</string>
+  <string name="select_phone_account_for_calls">Vyberte SIM kartu na tento hovor</string>
+  <string name="select_phone_account_for_calls_remember">Zapamatovat tuto volbu</string>
+  <string name="call_with_a_note">Volání s poznámkou</string>
+  <string name="call_subject_hint">Zadejte poznámku, která se odešle pomocí volání…</string>
+  <string name="send_and_call_button">ODESLAT A ZAVOLAT</string>
+  <string name="call_subject_limit">%1$s/%2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">Karta %1$s.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> Karta %1$s. %2$d nepřečtená položka. </item>
+    <item quantity="few"> Karta %1$s. %2$d nepřečtené položky. </item>
+    <item quantity="many"> Karta %1$s. %2$d nepřečtené položky. </item>
+    <item quantity="other"> Karta %1$s. %2$d nepřečtených položek. </item>
+  </plurals>
+  <string name="description_search_video_call">Videohovor</string>
+  <string name="description_search_call_and_share">Sdílet a zavolat</string>
 </resources>

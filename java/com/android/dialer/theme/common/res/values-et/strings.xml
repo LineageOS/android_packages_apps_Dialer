@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="unknown">Tundmatu</string>
+  <string name="unknown_counter">%1$s %2$d</string>
+  <string name="payphone">Telefoniautomaat</string>
+  <string name="emergency_number">Hädaabinumber</string>
+  <string name="launcherActivityLabel">Telefon</string>
+  <string name="call">Helista</string>
+  <string name="video_call_lte_to_wifi_handover_toast">Kõnet jätkatakse WiFi kaudu …</string>
+  <string name="rtt_call_not_available_toast">RTT pole selle kõne puhul saadaval</string>
+  <string name="call_subject_type_and_number">%1$s %2$s</string>
+</resources>

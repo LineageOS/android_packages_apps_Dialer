@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pre_call_select_phone_account_hint_intra_carrier">使用相同运营商的 SIM 卡</string>
+  <string name="pre_call_select_phone_account_hint_frequent">最近用过的 SIM 卡</string>
+</resources>

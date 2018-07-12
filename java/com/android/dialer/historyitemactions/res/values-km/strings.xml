@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">ការហៅ​ជា​សំឡេង</string>
+  <string name="video_call">ការហៅ​ជា​វីដេអូ</string>
+  <string name="add_to_contacts">បញ្ចូល​​ទំនាក់ទំនង</string>
+  <string name="send_a_message">សារ</string>
+  <string name="not_spam">មិនមែន​ជា​លេខ​ហៅ​ឥត​បាន​ការ​ទេ</string>
+  <string name="block_number">ទប់ស្កាត់</string>
+  <string name="unblock_number">ឈប់​ទប់ស្កាត់</string>
+  <string name="block_and_optionally_report_spam">ទប់ស្កាត់/រាយការណ៍​ថា​ជា​លេខ​ហៅ​ឥត​បាន​ការ</string>
+  <string name="copy_number">ថត​ចម្លង​លេខ​ទូរសព្ទ</string>
+</resources>

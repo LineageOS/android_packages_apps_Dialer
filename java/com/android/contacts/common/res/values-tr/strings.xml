@@ -1,162 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2012 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="toast_text_copied" msgid="8979281391599667362">"Metin kopyalandı"</string>
-    <string name="call_custom" msgid="3041673234638990874">"Ara (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="call_home" msgid="125893483593803791">"Ara (ev)"</string>
-    <string name="call_mobile" msgid="967589404494150813">"Ara (mobil)"</string>
-    <string name="call_work" msgid="6040550697395300892">"Ara (iş)"</string>
-    <string name="call_fax_work" msgid="5260192771364592922">"Ara (iş faksı)"</string>
-    <string name="call_fax_home" msgid="5174311195081144124">"Ara (ev faksı)"</string>
-    <string name="call_pager" msgid="6814149227741274161">"Ara (çağrı cihazı)"</string>
-    <string name="call_other" msgid="5536385588712587235">"Ara"</string>
-    <string name="call_callback" msgid="6314019862718112786">"Ara (geri arama)"</string>
-    <string name="call_car" msgid="3197417098027764954">"Ara (araç)"</string>
-    <string name="call_company_main" msgid="2557663310028446397">"Ara (şirket santrali)"</string>
-    <string name="call_isdn" msgid="4691270442763649522">"Ara (ISDN)"</string>
-    <string name="call_main" msgid="3293707608770407814">"Ara (santral)"</string>
-    <string name="call_other_fax" msgid="4724521984879021465">"Ara (faks)"</string>
-    <string name="call_radio" msgid="8942441419845057942">"Ara (telsiz)"</string>
-    <string name="call_telex" msgid="2031514461660668351">"Ara (teleks)"</string>
-    <string name="call_tty_tdd" msgid="7807210224965727701">"Ara (TTY/TDD)"</string>
-    <string name="call_work_mobile" msgid="2716342732938578495">"Ara (iş cep telefonu)"</string>
-    <string name="call_work_pager" msgid="3791778749827366574">"Ara (iş çağrı cihazı)"</string>
-    <string name="call_assistant" msgid="4177478845473789294">"Ara (<xliff:g id="ASSISTANT">%s</xliff:g>)"</string>
-    <string name="call_mms" msgid="4958811711741872901">"Ara (MMS)"</string>
-    <string name="sms_custom" msgid="8785368968605026317">"SMS gönder (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="sms_home" msgid="3527719551060295243">"SMS gönder (ev)"</string>
-    <string name="sms_mobile" msgid="8883045857887736518">"SMS gönder (mobil)"</string>
-    <string name="sms_work" msgid="4158595439553450966">"SMS gönder (iş)"</string>
-    <string name="sms_fax_work" msgid="5483726627718055248">"SMS gönder (iş faksı)"</string>
-    <string name="sms_fax_home" msgid="9219265155770746077">"SMS gönder (ev faksı)"</string>
-    <string name="sms_pager" msgid="4901085068525193933">"SMS gönder (çağrı cihazı)"</string>
-    <string name="sms_other" msgid="1742702947993285933">"SMS gönder"</string>
-    <string name="sms_callback" msgid="5833483630377538308">"SMS gönder (geri arama)"</string>
-    <string name="sms_car" msgid="4314577266154395174">"SMS gönder (araç)"</string>
-    <string name="sms_company_main" msgid="2308160928487360705">"SMS gönder (şirket santrali)"</string>
-    <string name="sms_isdn" msgid="6394300346179302542">"SMS gönder (ISDN)"</string>
-    <string name="sms_main" msgid="8908087742014140774">"SMS gönder (santral)"</string>
-    <string name="sms_other_fax" msgid="8768455473295405427">"SMS gönder (faks)"</string>
-    <string name="sms_radio" msgid="855555176531704682">"SMS gönder (telsiz)"</string>
-    <string name="sms_telex" msgid="6269029276223252719">"SMS gönder (teleks)"</string>
-    <string name="sms_tty_tdd" msgid="6229057354509192444">"SMS gönder (TTY/TDD)"</string>
-    <string name="sms_work_mobile" msgid="2155975469329969840">"SMS gönder (iş cep telefonu)"</string>
-    <string name="sms_work_pager" msgid="8500140274906830742">"SMS gönder (iş çağrı cihazı)"</string>
-    <string name="sms_assistant" msgid="8513548482745330818">"SMS gönder (<xliff:g id="ASSISTANT">%s</xliff:g>)"</string>
-    <string name="sms_mms" msgid="5187888900503248542">"SMS gönder (MMS)"</string>
-    <string name="clearFrequentsConfirmation_title" msgid="7465690215775790243">"Sık iletişim kurulanlar silinsin mi?"</string>
-    <string name="clearFrequentsConfirmation" msgid="5750611450893399198">"Kişiler ve Telefon uygulamalarındaki sık iletişim kurulanlar listesini temizleyecek ve e-posta uygulamalarını adres tercihlerinizi en baştan öğrenmeye zorlayacaksınız."</string>
-    <string name="clearFrequentsProgress_title" msgid="2057183487226039454">"Sık iletişim kurulanlar siliniyor…"</string>
-    <string name="status_available" msgid="2648156525685472626">"Müsait"</string>
-    <string name="status_away" msgid="2298688367552893953">"Dışarıda"</string>
-    <string name="status_busy" msgid="5990832098713248503">"Meşgul"</string>
-    <string name="contactsList" msgid="8806067891419291513">"Kişiler"</string>
-    <string name="contact_suggestions" msgid="3324166754807120006">"En Çok Önerilenler"</string>
-    <string name="local_invisible_directory" msgid="4723238462733650090">"Diğer"</string>
-    <string name="directory_search_label" msgid="4621215895484025229">"Dizin"</string>
-    <string name="directory_search_label_work" msgid="7679326282707414897">"İş dizini"</string>
-    <string name="local_search_label" msgid="907622822323119235">"Tüm kişiler"</string>
-    <string name="local_suggestions_search_label" msgid="1178575146224386118">"Öneriler"</string>
-    <string name="user_profile_contacts_list_header" msgid="9180620153828279580">"Ben"</string>
-    <string name="missing_name" msgid="978606963362745020">"(Adsız)"</string>
-    <string name="description_view_contact_detail" msgid="2428742401208561136">"Kişiyi görüntüle"</string>
-    <string name="list_filter_phones" msgid="8763316061763437182">"Telefon numarası olan tüm kişiler"</string>
-    <string name="list_filter_phones_work" msgid="7083575404573422965">"İş profili kişileri"</string>
-    <string name="view_updates_from_group" msgid="9011641093168385729">"Güncellemeleri görüntüle"</string>
-    <string name="account_phone" msgid="7067809073194061035">"Yalnızca cihaz, senkronize edilmemiş"</string>
-    <string name="nameLabelsGroup" msgid="7730465833159557471">"Adı"</string>
-    <string name="nicknameLabelsGroup" msgid="6310556912361840029">"Takma ad"</string>
-    <string name="full_name" msgid="648186563998465740">"Ad"</string>
-    <string name="name_given" msgid="5096576006314820536">"Ad"</string>
-    <string name="name_family" msgid="6646235805198547467">"Soyadı"</string>
-    <string name="name_prefix" msgid="9215326539658838">"Ad öneki"</string>
-    <string name="name_middle" msgid="703755205331582769">"İkinci adı"</string>
-    <string name="name_suffix" msgid="5777083390282548702">"Ad soneki"</string>
-    <string name="name_phonetic" msgid="1650870996361663089">"Fonetik adı"</string>
-    <string name="name_phonetic_given" msgid="618812334274603170">"Fonetik ad"</string>
-    <string name="name_phonetic_middle" msgid="4826820763384625538">"Fonetik ikinci adı"</string>
-    <string name="name_phonetic_family" msgid="379905191212930771">"Fonetik soyadı"</string>
-    <string name="phoneLabelsGroup" msgid="169661929021355548">"Telefon"</string>
-    <string name="emailLabelsGroup" msgid="2249752810477488833">"E-posta gönder"</string>
-    <string name="postalLabelsGroup" msgid="6772000590189142253">"Adres"</string>
-    <string name="imLabelsGroup" msgid="5718066254237364731">"IM"</string>
-    <string name="organizationLabelsGroup" msgid="1101996309241601435">"Kuruluş"</string>
-    <string name="relationLabelsGroup" msgid="53866051664600053">"İlişki"</string>
-    <string name="eventLabelsGroup" msgid="1236970042646618489">"Özel tarih"</string>
-    <string name="sms" msgid="7574344928185328095">"Kısa mesaj"</string>
-    <string name="postal_address" msgid="1804707930129674200">"Adres"</string>
-    <string name="ghostData_company" msgid="2554310786296833424">"Şirket"</string>
-    <string name="ghostData_title" msgid="4994968731830184837">"Unvan"</string>
-    <string name="label_notes" msgid="2050255313694219786">"Notlar"</string>
-    <string name="label_sip_address" msgid="8883266182575965926">"SIP"</string>
-    <string name="websiteLabelsGroup" msgid="1630734286462186790">"Web sitesi"</string>
-    <string name="groupsLabel" msgid="2694002798416868728">"Gruplar"</string>
-    <string name="email_home" msgid="889830029388962171">"E-posta gönder (ev)"</string>
-    <string name="email_mobile" msgid="4487686436743741150">"E-posta gönder (mobil)"</string>
-    <string name="email_work" msgid="4223487303344613528">"E-posta gönder (iş)"</string>
-    <string name="email_other" msgid="4246411900126012062">"E-posta gönder"</string>
-    <string name="email_custom" msgid="7246580894327511013">"E-posta gönder (<xliff:g id="CUSTOM">%s</xliff:g>)"</string>
-    <string name="email" msgid="2807318537887091606">"E-posta gönder"</string>
-    <string name="postal_street" msgid="6918171741240802474">"Cadde"</string>
-    <string name="postal_city" msgid="8674569121430005628">"Şehir"</string>
-    <string name="postal_region" msgid="1730369286225469192">"Eyalet"</string>
-    <string name="postal_postcode" msgid="4450700741261990439">"Posta kodu"</string>
-    <string name="postal_country" msgid="232670707458768148">"Ülke"</string>
-    <string name="map_home" msgid="4181131107392126938">"Ev adresini görüntüle"</string>
-    <string name="map_work" msgid="5723471185992684400">"İş adresini görüntüle"</string>
-    <string name="map_other" msgid="2253764780863500516">"Adresi görüntüle"</string>
-    <string name="map_custom" msgid="5581743097882436157">"<xliff:g id="CUSTOM">%s</xliff:g> adresini görüntüle"</string>
-    <string name="chat_aim" msgid="2954364435497941659">"AIM kullanarak sohbet et"</string>
-    <string name="chat_msn" msgid="3130135239071228678">"Windows Live kullanarak sohbet et"</string>
-    <string name="chat_yahoo" msgid="3233552142326865347">"Yahoo kullanarak sohbet et"</string>
-    <string name="chat_skype" msgid="6486703981390592425">"Skype kullanarak sohbet et"</string>
-    <string name="chat_qq" msgid="786924280665740019">"QQ kullanarak sohbet et"</string>
-    <string name="chat_gtalk" msgid="7914674177243078035">"Google Talk kullanarak sohbet et"</string>
-    <string name="chat_icq" msgid="3292934726414765801">"ICQ kullanarak sohbet et"</string>
-    <string name="chat_jabber" msgid="6701542313597880204">"Jabber kullanarak sohbet et"</string>
-    <string name="chat" msgid="1020428260359370236">"Sohbet"</string>
-    <string name="list_filter_all_accounts" msgid="473782314881473992">"Tüm kişiler"</string>
-    <string name="listAllContactsInAccount" msgid="3486378621592995630">"<xliff:g id="NAME">%s</xliff:g> hesabındaki kişiler"</string>
-    <string name="listCustomView" msgid="5306282632413086731">"Özel görünümdeki kişiler"</string>
-    <string name="listSingleContact" msgid="8620818791932382627">"Tek kişi"</string>
-    <string name="display_options_sort_list_by" msgid="3541875948367831228">"Sıralama ölçütü"</string>
-    <string name="display_options_sort_by_given_name" msgid="4316351826810346915">"Ad"</string>
-    <string name="display_options_sort_by_family_name" msgid="5238820876940079000">"Soyadı"</string>
-    <string name="display_options_view_names_as" msgid="4204204205736735618">"Ad biçimi"</string>
-    <string name="display_options_view_given_name_first" msgid="2308026973021171020">"Önce ad"</string>
-    <string name="display_options_view_family_name_first" msgid="987430497292428242">"Önce soyadı"</string>
-    <string name="menu_clear_frequents" msgid="5358271535047496120">"Sık iletişim kurulanları sil"</string>
-    <string name="action_menu_back_from_search" msgid="3550669942742167644">"aramayı durdur"</string>
-    <string name="description_clear_search" msgid="2347258825265600782">"Aramayı temizle"</string>
-    <string name="select_account_dialog_title" msgid="2673504582803359239">"Hesap"</string>
-    <string name="set_default_account" msgid="7966099951006467572">"Çağrılar için her zaman bunu kullan"</string>
-    <string name="select_phone_account_for_calls" msgid="1784460686103423274">"Çağrıyı şununla yap:"</string>
-    <string name="call_with_a_note" msgid="6242261320491851133">"Notla telefon et"</string>
-    <string name="call_subject_hint" msgid="7233138753650420800">"Çağrıyla göndermek için bir not yazın..."</string>
-    <string name="send_and_call_button" msgid="4735168294120154013">"GÖNDER VE ARA"</string>
-    <string name="call_subject_limit" msgid="8273208736191593939">"<xliff:g id="COUNT">%1$s</xliff:g> / <xliff:g id="LIMIT">%2$s</xliff:g>"</string>
-    <string name="call_subject_type_and_number" msgid="6338030032554019678">"<xliff:g id="TYPE">%1$s</xliff:g> <xliff:g id="NUMBER">%2$s</xliff:g>"</string>
-    <string name="tab_title" msgid="3387876802026074288">"<xliff:g id="TITLE">%1$s</xliff:g> sekmesi."</string>
-    <plurals name="tab_title_with_unread_items" formatted="false" msgid="8548492980702182785">
-      <item quantity="other"> <xliff:g id="TITLE_2">%1$s</xliff:g> sekmesi. <xliff:g id="COUNT_3">%2$d</xliff:g> okunmamış öğe. </item>
-      <item quantity="one"> <xliff:g id="TITLE_0">%1$s</xliff:g> sekmesi. <xliff:g id="COUNT_1">%2$d</xliff:g> okunmamış öğe. </item>
-    </plurals>
-    <string name="description_search_video_call" msgid="4337369876888024909">"Görüntülü görüşme"</string>
-    <string name="description_search_call_and_share" msgid="4912772842755050467">"Paylaşır ve telefon eder"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_custom">Ara (%s)</string>
+  <string name="call_home">Ara (ev)</string>
+  <string name="call_mobile">Ara (mobil)</string>
+  <string name="call_work">Ara (iş)</string>
+  <string name="call_fax_work">Ara (iş faksı)</string>
+  <string name="call_fax_home">Ara (ev faksı)</string>
+  <string name="call_pager">Ara (çağrı cihazı)</string>
+  <string name="call_other">Ara</string>
+  <string name="call_callback">Ara (geri arama)</string>
+  <string name="call_car">Ara (araç)</string>
+  <string name="call_company_main">Ara (şirket santrali)</string>
+  <string name="call_isdn">Ara (ISDN)</string>
+  <string name="call_main">Ara (santral)</string>
+  <string name="call_other_fax">Ara (faks)</string>
+  <string name="call_radio">Ara (telsiz)</string>
+  <string name="call_telex">Ara (teleks)</string>
+  <string name="call_tty_tdd">Ara (TTY/TDD)</string>
+  <string name="call_work_mobile">Ara (iş cep telefonu)</string>
+  <string name="call_work_pager">Ara (iş çağrı cihazı)</string>
+  <string name="call_assistant">Ara (%s)</string>
+  <string name="call_mms">Ara (MMS)</string>
+  <string name="sms_custom">SMS gönder (%s)</string>
+  <string name="sms_home">SMS gönder (ev)</string>
+  <string name="sms_mobile">SMS gönder (mobil)</string>
+  <string name="sms_work">SMS gönder (iş)</string>
+  <string name="sms_fax_work">SMS gönder (iş faksı)</string>
+  <string name="sms_fax_home">SMS gönder (ev faksı)</string>
+  <string name="sms_pager">SMS gönder (çağrı cihazı)</string>
+  <string name="sms_other">SMS gönder</string>
+  <string name="sms_callback">SMS gönder (geri arama)</string>
+  <string name="sms_car">SMS gönder (araç)</string>
+  <string name="sms_company_main">SMS gönder (şirket santrali)</string>
+  <string name="sms_isdn">SMS gönder (ISDN)</string>
+  <string name="sms_main">SMS gönder (santral)</string>
+  <string name="sms_other_fax">SMS gönder (faks)</string>
+  <string name="sms_radio">SMS gönder (telsiz)</string>
+  <string name="sms_telex">SMS gönder (teleks)</string>
+  <string name="sms_tty_tdd">SMS gönder (TTY/TDD)</string>
+  <string name="sms_work_mobile">SMS gönder (iş cep telefonu)</string>
+  <string name="sms_work_pager">SMS gönder (iş çağrı cihazı)</string>
+  <string name="sms_assistant">SMS gönder (%s)</string>
+  <string name="sms_mms">SMS gönder (MMS)</string>
+  <string name="clearFrequentsConfirmation_title">Sık iletişim kurulanlar silinsin mi?</string>
+  <string name="clearFrequentsConfirmation">Kişiler ve Telefon uygulamalarındaki sık iletişim kurulanlar listesini temizleyecek ve e-posta uygulamalarını adres tercihlerinizi en baştan öğrenmeye zorlayacaksınız.</string>
+  <string name="clearFrequentsProgress_title">Sık iletişim kurulanlar siliniyor…</string>
+  <string name="status_available">Müsait</string>
+  <string name="status_away">Dışarıda</string>
+  <string name="status_busy">Meşgul</string>
+  <string name="contactsList">Kişiler</string>
+  <string name="contact_suggestions">En Çok Önerilenler</string>
+  <string name="local_invisible_directory">Diğer</string>
+  <string name="directory_search_label">Dizin</string>
+  <string name="directory_search_label_work">İş dizini</string>
+  <string name="local_search_label">Tüm kişiler</string>
+  <string name="local_suggestions_search_label">Öneriler</string>
+  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ben</string>
+  <string name="missing_name">(Adsız)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Kişiyi görüntüle</string>
+  <string name="list_filter_phones">Telefon numarası olan tüm kişiler</string>
+  <string name="list_filter_phones_work">İş profili kişileri</string>
+  <string name="view_updates_from_group">Güncellemeleri görüntüle</string>
+  <string name="account_phone">Yalnızca cihaz, senkronize edilmemiş</string>
+  <string name="nameLabelsGroup">Adı</string>
+  <string name="nicknameLabelsGroup">Takma ad</string>
+  <string name="full_name">Ad</string>
+  <string name="name_given">Ad</string>
+  <string name="name_family">Soyadı</string>
+  <string name="name_prefix">Ad öneki</string>
+  <string name="name_middle">İkinci adı</string>
+  <string name="name_suffix">Ad soneki</string>
+  <string name="name_phonetic">Fonetik adı</string>
+  <string name="name_phonetic_given">Fonetik ad</string>
+  <string name="name_phonetic_middle">Fonetik ikinci adı</string>
+  <string name="name_phonetic_family">Fonetik soyadı</string>
+  <string name="phoneLabelsGroup">Telefon</string>
+  <string name="emailLabelsGroup">E-posta gönder</string>
+  <string name="postalLabelsGroup">Adres</string>
+  <string name="imLabelsGroup">IM</string>
+  <string name="organizationLabelsGroup">Kuruluş</string>
+  <string name="relationLabelsGroup">İlişki</string>
+  <string name="eventLabelsGroup">Özel tarih</string>
+  <string name="sms">Kısa mesaj</string>
+  <string name="postal_address">Adres</string>
+  <string name="ghostData_company">Şirket</string>
+  <string name="ghostData_title">Unvan</string>
+  <string name="label_notes">Notlar</string>
+  <string name="label_sip_address">SIP</string>
+  <string name="websiteLabelsGroup">Web sitesi</string>
+  <string name="groupsLabel">Gruplar</string>
+  <string name="email_home">E-posta gönder (ev)</string>
+  <string name="email_mobile">E-posta gönder (mobil)</string>
+  <string name="email_work">E-posta gönder (iş)</string>
+  <string name="email_other">E-posta gönder</string>
+  <string name="email_custom">E-posta gönder (%s)</string>
+  <string name="email">E-posta gönder</string>
+  <string name="postal_street">Cadde</string>
+  <string name="postal_city">Şehir</string>
+  <string name="postal_region">Eyalet</string>
+  <string name="postal_postcode">Posta kodu</string>
+  <string name="postal_country">Ülke</string>
+  <string name="map_home">Ev adresini görüntüle</string>
+  <string name="map_work">İş adresini görüntüle</string>
+  <string name="map_other">Adresi görüntüle</string>
+  <string name="map_custom">%s adresini görüntüle</string>
+  <string name="chat_aim">AIM kullanarak sohbet et</string>
+  <string name="chat_msn">Windows Live kullanarak sohbet et</string>
+  <string name="chat_yahoo">Yahoo kullanarak sohbet et</string>
+  <string name="chat_skype">Skype kullanarak sohbet et</string>
+  <string name="chat_qq">QQ kullanarak sohbet et</string>
+  <string name="chat_gtalk">Google Talk kullanarak sohbet et</string>
+  <string name="chat_icq">ICQ kullanarak sohbet et</string>
+  <string name="chat_jabber">Jabber kullanarak sohbet et</string>
+  <string name="chat">Sohbet</string>
+  <string name="list_filter_all_accounts">Tüm kişiler</string>
+  <string name="listAllContactsInAccount">%s hesabındaki kişiler</string>
+  <string name="listCustomView">Özel görünümdeki kişiler</string>
+  <string name="listSingleContact">Tek kişi</string>
+  <string name="display_options_sort_list_by">Sıralama ölçütü</string>
+  <string name="display_options_sort_by_given_name">Ad</string>
+  <string name="display_options_sort_by_family_name">Soyadı</string>
+  <string name="display_options_view_names_as">Ad biçimi</string>
+  <string name="display_options_view_given_name_first">Önce ad</string>
+  <string name="display_options_view_family_name_first">Önce soyadı</string>
+  <string name="menu_clear_frequents">Sık iletişim kurulanları sil</string>
+  <string name="action_menu_back_from_search">aramayı durdur</string>
+  <string name="description_clear_search">Aramayı temizle</string>
+  <string name="select_account_dialog_title">Hesap</string>
+  <string name="set_default_account">Çağrılar için her zaman bunu kullan</string>
+  <string name="select_phone_account_for_calls">Bu görüşme için kullanılacak SIM\'i seçin</string>
+  <string name="select_phone_account_for_calls_remember">Bu tercihi hatırla</string>
+  <string name="call_with_a_note">Notla telefon et</string>
+  <string name="call_subject_hint">Çağrıyla göndermek için bir not yazın...</string>
+  <string name="send_and_call_button">GÖNDER VE ARA</string>
+  <string name="call_subject_limit">%1$s / %2$s</string>
+  <string name="old_call_subject_type_and_number">%1$s %2$s</string>
+  <string name="tab_title">%1$s sekmesi.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one"> %1$s sekmesi. %2$d okunmamış öğe. </item>
+    <item quantity="other"> %1$s sekmesi. %2$d okunmamış öğe. </item>
+  </plurals>
+  <string name="description_search_video_call">Görüntülü görüşme</string>
+  <string name="description_search_call_and_share">Paylaşır ve telefon eder</string>
 </resources>

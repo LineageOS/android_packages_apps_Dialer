@@ -1,36 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-  ~ Copyright (C) 2017 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
-   -->
-
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="incall_content_description_end_call" msgid="8232796487777787200">"કૉલ સમાપ્ત કરો"</string>
-    <string name="incall_content_description_muted" msgid="2130133443150389474">"મ્યૂટ કરેલ"</string>
-    <string name="incall_content_description_unmuted" msgid="4023577547526525202">"અનમ્યૂટ કરેલ"</string>
-    <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"કૉલ્સ સ્વેપ કરો"</string>
-    <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"કૉલ્સ મર્જ કરો"</string>
-    <string name="incall_content_description_earpiece" msgid="2786221842272370555">"હેન્ડસેટ ઇયરપીસ"</string>
-    <string name="incall_content_description_speaker" msgid="7837829930201265549">"સ્પીકર"</string>
-    <string name="incall_content_description_bluetooth" msgid="6988919010980910001">"Bluetooth"</string>
-    <string name="incall_content_description_headset" msgid="3170439802944346719">"વાયર્ડ હેડસેટ"</string>
-    <string name="incall_content_description_hold" msgid="3335508251734906019">"કૉલ હોલ્ડ કરો"</string>
-    <string name="incall_content_description_unhold" msgid="3862584118869933593">"કૉલ ફરી શરૂ કરો"</string>
-    <string name="incall_content_description_video_on" msgid="899266487647420613">"વિડિઓ ચાલુ"</string>
-    <string name="incall_content_description_video_off" msgid="762985912616707076">"વિડિઓ બંધ"</string>
-    <string name="incall_content_description_swap_video" msgid="297943299827908998">"વિડિઓ સ્વેપ કરો"</string>
-    <string name="incall_label_speaker" msgid="1814254833253409394">"સ્પીકર"</string>
-    <string name="incall_label_audio" msgid="5923781170533336820">"ધ્વનિ"</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="incall_content_description_end_call">કૉલ સમાપ્ત કરો</string>
+  <string name="incall_content_description_muted">મ્યૂટ કરેલ</string>
+  <string name="incall_content_description_unmuted">અનમ્યૂટ કરેલ</string>
+  <string name="incall_content_description_swap_calls">કૉલ્સ સ્વેપ કરો</string>
+  <string name="incall_content_description_swap_sim">સિમ બદલો</string>
+  <string name="incall_content_description_merge_calls">કૉલ્સ મર્જ કરો</string>
+  <string name="incall_content_description_earpiece">હેન્ડસેટ ઇયરપીસ</string>
+  <string name="incall_content_description_speaker">સ્પીકર</string>
+  <string name="incall_content_description_bluetooth">Bluetooth</string>
+  <string name="incall_content_description_headset">વાયર્ડ હેડસેટ</string>
+  <string name="incall_content_description_hold">કૉલ હોલ્ડ કરો</string>
+  <string name="incall_content_description_unhold">કૉલ ફરી શરૂ કરો</string>
+  <string name="incall_content_description_video_on">વિડિઓ ચાલુ</string>
+  <string name="incall_content_description_video_off">વિડિઓ બંધ</string>
+  <string name="incall_content_description_swap_video">વિડિઓ સ્વેપ કરો</string>
+  <string name="incall_label_speaker">સ્પીકર</string>
+  <string name="incall_label_audio">ધ્વનિ</string>
 </resources>

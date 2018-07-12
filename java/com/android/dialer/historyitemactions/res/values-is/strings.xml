@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="voice_call">Símtal</string>
+  <string name="video_call">Myndsímtal</string>
+  <string name="add_to_contacts">Bæta tengilið við</string>
+  <string name="send_a_message">Skilaboð</string>
+  <string name="not_spam">Ekki ruslnúmer</string>
+  <string name="block_number">Loka á</string>
+  <string name="unblock_number">Taka af bannlista</string>
+  <string name="block_and_optionally_report_spam">Loka á / tilkynna sem rusl</string>
+  <string name="copy_number">Afrita númer</string>
+</resources>

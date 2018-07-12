@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="pre_call_permission_check_no_phone_permission">Impossible de passer un appel sans l\'autorisation d\'accéder au téléphone</string>
+  <string name="pre_call_select_phone_account">Choisir une carte SIM pour cet appel</string>
+  <string name="pre_call_select_phone_account_remember">Mémoriser ce choix</string>
+  <string name="pre_call_select_phone_account_hint_other_sim_in_use">Non disponible lors de l\'utilisation de la carte SIM %1$s</string>
+</resources>

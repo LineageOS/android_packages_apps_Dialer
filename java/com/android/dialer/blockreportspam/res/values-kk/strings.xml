@@ -1,0 +1,17 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="block_number_confirmation_title">%1$s нөмірін бөгеу қажет пе?</string>
+  <string name="block_number_confirmation_message_new_filtering">Бұдан былай осы нөмірден қоңыраулар немесе мәтіндік хабарлар алмайсыз.</string>
+  <string name="block_number_ok">БӨГЕУ</string>
+  <string name="unblock_number_ok">БӨГЕУДЕН ШЫҒАРУ</string>
+  <string name="block_report_number_alert_title">%1$s нөмірін бөгеу қажет пе?</string>
+  <string name="block_report_number_alert_details">Бұдан былай бұл нөмірден қоңыраулар алмайтын боласыз.</string>
+  <string name="block_number_alert_details">%1$s Бұл қоңырау \"спам\" деп хабарланады.</string>
+  <string name="unblock_number_alert_details">Бұл нөмірдің бөгеуі жойылып, \"спам емес\" деп белгіленеді. Алдағы қоңыраулар спам қалтасына жіберілмейді.</string>
+  <string name="unblock_report_number_alert_title">%1$s бөгеуін алу қажет пе?</string>
+  <string name="report_not_spam_alert_button">Хабарлау</string>
+  <string name="report_not_spam_alert_title">\"Қате\" деп хабарлау қажет пе?</string>
+  <string name="report_not_spam_alert_details">Алдағы %1$s қоңыраулары енді спам қалтасына жіберілмейді.</string>
+  <string name="checkbox_report_as_spam_action">\"Спам\" деп хабарлау</string>
+  <string name="block_number_failed_toast">Бұл нөмір бөгелмеді</string>
+  <string name="unblock_number_failed_toast">Бұл нөмірдің бөгеуін алу мүмкін болмады</string>
+</resources>
