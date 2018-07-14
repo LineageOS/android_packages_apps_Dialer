@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b56e39c6_470eb94e",
+        "filename": "java/com/android/dialer/callstats/res/layout/call_log_spinner_item.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2018-07-14T18:36:09Z",
+      "side": 1,
+      "message": "We should remove this, it looks bad because 100% black is not used anywhere else in dialer",
+      "revId": "de90c020e0b462868c49c1342ce995a91a6275ad",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
