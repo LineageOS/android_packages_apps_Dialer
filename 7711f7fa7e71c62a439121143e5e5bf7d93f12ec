@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "152b8225_50ce139d",
+        "filename": "java/com/android/dialer/callrecord/res/values-mcc262/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2018-07-15T18:55:38Z",
+      "side": 1,
+      "message": "What\u0027s up with this",
+      "revId": "7711f7fa7e71c62a439121143e5e5bf7d93f12ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
