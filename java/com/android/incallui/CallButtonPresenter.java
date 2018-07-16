@@ -152,19 +152,18 @@ public class CallButtonPresenter
       call = callList.getOutgoingCall();
     } else if (newState == InCallState.INCALL) {
       call = callList.getActiveOrBackgroundCall();
-
 //     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
 //     boolean warningPresented = prefs.getBoolean(KEY_RECORDING_WARNING_PRESENTED, false);
 
-    if (!mIsRecording && isEnabled) {
-                mIsRecording = true;
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        callRecordClicked(true);
-                    }
-                }, 500);
-    }
+	    if (!mIsRecording && isEnabled && call != null) {
+	        mIsRecording = true;
+	        new Handler().postDelayed(new Runnable() {
+	            @Override
+	            public void run() {
+	                callRecordClicked(true);
+	            }
+	        }, 500);
+	    }
       // When connected to voice mail, automatically shows the dialpad.
       // (On previous releases we showed it when in-call shows up, before waiting for
       // OUTGOING.  We may want to do that once we start showing "Voice mail" label on
@@ -181,12 +180,12 @@ public class CallButtonPresenter
       call = callList.getIncomingCall();
     } else {
 	    
-    if (isEnabled) {
-        if (recorder.isRecording()) {
-            recorder.finishRecording();
+        if (isEnabled) {
+            if (recorder.isRecording()) {
+                recorder.finishRecording();
+            }
         }
-    }
-    call = null;
+        call = null;
     }
     updateUi(newState, call);
     Trace.endSection();
