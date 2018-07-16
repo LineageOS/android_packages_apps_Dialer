@@ -16,6 +16,24 @@
       "revId": "7711f7fa7e71c62a439121143e5e5bf7d93f12ec",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99e33a76_bf3a1175",
+        "filename": "java/com/android/dialer/callrecord/res/values-mcc262/config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2018-07-16T04:31:36Z",
+      "side": 1,
+      "message": "Oops, this shouldn\u0027t have been committed. This is testing only.",
+      "parentUuid": "152b8225_50ce139d",
+      "revId": "7711f7fa7e71c62a439121143e5e5bf7d93f12ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
