@@ -22,6 +22,30 @@
       "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a737517e_88469b97",
+        "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-07-25T12:05:13Z",
+      "side": 1,
+      "message": "Simple, devices that actually properly support it can enable the feature. See the topic and you\u0027ll get it.",
+      "parentUuid": "c379a80d_3f12d134",
+      "range": {
+        "startLine": 19,
+        "startChar": 40,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
