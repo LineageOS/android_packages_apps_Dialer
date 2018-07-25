@@ -70,6 +70,30 @@
       "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "113aa5c6_8a81099c",
+        "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-07-25T12:27:22Z",
+      "side": 1,
+      "message": "Again, the feature is disabled by default with the purpose of being enabled per device. You should ask your device\u0027s maintainer to enable it, in case it works. Also note, that the feature is blocked for certain countries due to legal constrains.",
+      "parentUuid": "3aff4326_56459a7d",
+      "range": {
+        "startLine": 19,
+        "startChar": 40,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
