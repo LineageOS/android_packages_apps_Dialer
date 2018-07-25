@@ -94,6 +94,30 @@
       "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26f917a8_d1a4ec03",
+        "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 19860
+      },
+      "writtenOn": "2018-07-25T14:40:35Z",
+      "side": 1,
+      "message": "Thank you for explain",
+      "parentUuid": "113aa5c6_8a81099c",
+      "range": {
+        "startLine": 19,
+        "startChar": 40,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
