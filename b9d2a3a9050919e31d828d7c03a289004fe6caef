@@ -46,6 +46,30 @@
       "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3aff4326_56459a7d",
+        "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 19860
+      },
+      "writtenOn": "2018-07-25T12:23:30Z",
+      "side": 1,
+      "message": "Can\u0027t get it yet... What this check for support is? I\u0027m not sure that galaxy s9 does not support this because I don\u0027t have this option in dialer audio settings.",
+      "parentUuid": "a737517e_88469b97",
+      "range": {
+        "startLine": 19,
+        "startChar": 40,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
