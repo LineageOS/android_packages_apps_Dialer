@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c379a80d_3f12d134",
+        "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 19860
+      },
+      "writtenOn": "2018-07-25T12:02:48Z",
+      "side": 1,
+      "message": "Please can you describe why this disabled by hardcode? Right now all this PR feature is useless?",
+      "range": {
+        "startLine": 19,
+        "startChar": 40,
+        "endLine": 19,
+        "endChar": 45
+      },
+      "revId": "b9d2a3a9050919e31d828d7c03a289004fe6caef",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
