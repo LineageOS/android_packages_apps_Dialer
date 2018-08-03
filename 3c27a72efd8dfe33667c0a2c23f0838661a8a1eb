@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91308cc2_b67e7613",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2018-08-03T14:53:42Z",
+      "side": 1,
+      "message": "The whole commit message needs rework:\n1) After the first line: Add an empty line\n2) Remove history of Patchsets\n3) First line doesnt need the author",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 52
+      },
+      "revId": "3c27a72efd8dfe33667c0a2c23f0838661a8a1eb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
