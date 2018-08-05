@@ -27,4 +27,5 @@
   <string name="incall_dnd_dialog_message">Para ativar o modo Não Perturbe, o aplicativo Telefone precisa ter permissão para controlar o modo Não Perturbe.\nPor favor, conceda-a.</string>
   <string name="allow">Permitir</string>
   <string name="deny">Negar</string>
+  <string name="call_recording_format">Formato de áudio</string>
 </resources>

@@ -16,5 +16,6 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="notification_channel_missed_call">Galwadau wedi\'u methu</string>
   <!-- [CHAR LIMIT=NONE] Catch-all channel for notifications that don't fit into one of the others -->
 </resources>

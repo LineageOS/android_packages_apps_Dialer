@@ -27,4 +27,6 @@
   <string name="incall_dnd_dialog_message">Para activar non molestar, a aplicación do teléfono debe ter permiso para controlar o estado de non molestar. \nPermiteo.</string>
   <string name="allow">Permitir</string>
   <string name="deny">Denegar</string>
+  <string name="call_recording_category_title">Gravación das chamadas</string>
+  <string name="call_recording_format">Formato de son</string>
 </resources>

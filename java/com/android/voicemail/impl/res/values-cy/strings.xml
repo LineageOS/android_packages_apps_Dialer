@@ -21,6 +21,7 @@
   <!-- Voicemail notifications title. The user clicks on this preference to select
          which sound to play and whether to vibrate when a voicemail notification is received.
          [CHAR LIMIT=30] -->
+  <string name="voicemail_notifications_preference_title">Hysbysiadau</string>
   <!-- Title for advanced settings in the voicemail settings -->
   <!-- DO NOT TRANSLATE. Internal key for a visual voicemail preference. -->
   <!-- DO NOT TRANSLATE. Internal key for a visual voicemail archive preference. -->
@@ -43,6 +44,7 @@
   <!-- The label for the continue button in change voicemail PIN activity -->
   <!-- The label for the cancel button in change voicemail PIN activity -->
   <!-- The label for the ok button in change voicemail PIN activity -->
+  <string name="change_pin_ok_label">Iawn</string>
   <!-- The title for the enter old pin step in change voicemail PIN activity -->
   <!-- The hint for the enter old pin step in change voicemail PIN activity -->
   <!-- The title for the enter new pin step in change voicemail PIN activity -->

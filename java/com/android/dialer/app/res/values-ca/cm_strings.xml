@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">Per activar no molestar, l\'aplicació telèfon cal que compti amb el permís per controlar l\'estat no molestar.\nPermeteu-ho.</string>
   <string name="allow">Permet</string>
   <string name="deny">Denega</string>
+  <string name="call_recording_category_title">Enregistrament de trucades</string>
+  <string name="call_recording_format">Format d\'àudio</string>
+  <string name="call_via">Truca a través</string>
+  <string name="call_via_dialog_title">Truca a través\u2026</string>
+  <string name="call_log_stats_title">Estadístiques</string>
 </resources>

@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">为能启用勿扰，电话应用需要被授予控制“勿扰”状态的权限。\n请允许此权限。</string>
   <string name="allow">允许</string>
   <string name="deny">拒绝</string>
+  <string name="call_recording_category_title">通话录音</string>
+  <string name="call_recording_format">音频格式</string>
+  <string name="call_via">呼叫途径</string>
+  <string name="call_via_dialog_title">呼叫途径\u2026</string>
+  <string name="call_log_stats_title">统计</string>
 </resources>

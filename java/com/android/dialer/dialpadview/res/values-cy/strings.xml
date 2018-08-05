@@ -17,12 +17,17 @@
   -->
 <resources>
   <!-- String describing the back button in the dialpad. -->
+  <string name="description_dialpad_back">Mynd nôl</string>
   <!-- String describing the overflow menu button in the dialpad. -->
+  <string name="description_dialpad_overflow">Rhagor o ddewisiadau</string>
   <!-- String describing the Delete/Backspace ImageButton.
        Used by AccessibilityService to announce the purpose of the button.
   -->
+  <string name="description_delete_button">bysell backspace</string>
   <!--  String describing the button used to add a plus (+) symbol to the dialpad -->
+  <string name="description_image_button_plus">plws</string>
   <!-- String describing the Voicemail ImageButton.
        Used by AccessibilityService to announce the purpose of the button.
   -->
+  <string name="description_voicemail_button">lleisbost</string>
 </resources>

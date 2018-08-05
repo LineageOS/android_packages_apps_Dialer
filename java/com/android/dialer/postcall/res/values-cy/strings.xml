@@ -20,7 +20,9 @@
   <!-- Premade message to be sent as a text/RCS message -->
   <!-- Premade message to be sent as a text/RCS message -->
   <!-- Premade message to be sent as a text/RCS message -->
+  <string name="post_call_message_3">Dim brys. Gallwn sgwrsio\'n hwyrach.</string>
   <!-- Asks the user if they want to send a post call message -->
   <!-- Asks the user if they want to send a post call message -->
+  <string name="post_call_send_message">Anfon neges</string>
   <!-- Shown to let the user know that their message was sent. -->
 </resources>

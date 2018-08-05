@@ -27,4 +27,8 @@
   <string name="incall_dnd_dialog_message">За да активирате режима \"Не безпокойте\", приложението \"Телефон\" трябва да получи разрешение да контролира състоянието на режима \"Не ме безпокойте\".</string>
   <string name="allow">Разрешаване</string>
   <string name="deny">Забрани</string>
+  <string name="call_recording_category_title">Запис на разговор</string>
+  <string name="call_recording_format">Аудио формат</string>
+  <string name="call_via">Повикване чрез</string>
+  <string name="call_log_stats_title">Статистика</string>
 </resources>

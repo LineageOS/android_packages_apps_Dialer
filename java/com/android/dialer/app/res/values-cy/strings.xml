@@ -39,7 +39,9 @@
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <!-- Menu item used to remove all calls from the call log -->
   <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
+  <string name="call_log_trash_voicemail">Dileu neges lleisbost</string>
   <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
+  <string name="snackbar_voicemail_deleted">Neges lleisbost wedi ei dileu</string>
   <!-- Text for undo button in snackbar for voicemail deletion. [CHAR LIMIT=10] -->
   <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
   <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
@@ -48,9 +50,13 @@
        in activity disambig dialogs -->
   <!-- Notification strings -->
   <!-- Missed call notification label, used when there's exactly one missed call -->
+  <string name="notification_missedCallTitle">Galwad wedi\'i methu</string>
   <!-- Missed call notification label, used when there's exactly one missed call from work contact -->
+  <string name="notification_missedWorkCallTitle">Galwad gwaith wedi\'i methu</string>
   <!-- Missed call notification label, used when there are two or more missed calls -->
+  <string name="notification_missedCallsTitle">Galwadau wedi\'u methu</string>
   <!-- Missed call notification message used when there are multiple missed calls -->
+  <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%d</xliff:g> galwad wedi\'u methu</string>
   <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
        The user will be able to call back to the person or the phone number.
        [CHAR LIMIT=18] -->
@@ -82,6 +88,7 @@
   <!-- The header to show that call log is only showing incoming calls. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing outgoing calls. [CHAR LIMIT=40] -->
   <!-- The header to show that call log is only showing missed calls. [CHAR LIMIT=40] -->
+  <string name="call_log_missed_header">Galwadau wedi\'u methu yn unig</string>
   <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
   <!-- String describing the Search ImageButton
 
@@ -127,6 +134,7 @@
   <!-- Menu item used to show only outgoing in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only incoming in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show only missed in the call log. [CHAR LIMIT=30] -->
+  <string name="menu_show_missed_only">Dangos wedi\'u methu yn unig</string>
   <!-- Menu item used to show only voicemails in the call log. [CHAR LIMIT=30] -->
   <!-- Menu item used to show all calls in the call log. [CHAR LIMIT=30] -->
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
@@ -255,6 +263,7 @@
   <!-- Text displayed when the call log is empty. -->
   <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
   <!-- Text displayed when the list of missed calls is empty -->
+  <string name="call_log_missed_empty">Does dim galwadau wedi eu methu.</string>
   <!-- Text displayed when the list of voicemails is empty -->
   <!--  Menu option to show favorite contacts only -->
   <!--  Title of activity that displays a list of all calls -->
@@ -262,6 +271,7 @@
        [CHAR LIMIT=30] -->
   <!-- Title for the call log tab containing the list of all missed calls only
        [CHAR LIMIT=30] -->
+  <string name="call_log_missed_title">Wedi\'u methu</string>
   <!-- Title for the call log tab containing the list of all voicemail calls only
        [CHAR LIMIT=30] -->
   <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
@@ -277,9 +287,11 @@
   <!-- Shortcut item used to add a number to an existing contact directly from search.
        [CHAR LIMIT=25] -->
   <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
+  <string name="search_shortcut_send_sms_message">Anfon SMS</string>
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
   <!-- Number of missed calls shown on call card [CHAR LIMIT=40] -->
+  <string name="num_missed_calls"><xliff:g id="number">%s</xliff:g> galwad newydd wedi\'u methu</string>
   <!-- Shown when there are no speed dial favorites. -->
   <!-- Shown as an action when there are no speed dial favorites -->
   <!-- Shows up as a tooltip to provide a hint to the user that the profile pic in a contact
@@ -294,6 +306,7 @@
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
        messaging app to send a SMS to the number represented by the call log entry.
        [CHAR LIMIT=30] -->
+  <string name="call_log_action_send_message">Anfon neges</string>
   <!-- Button text for the button displayed underneath an entry in the call log.
        Tapping navigates the user to the call details screen where the user can view details for
        the call log entry. [CHAR LIMIT=30] -->
@@ -304,6 +317,7 @@
   <!-- String describing an incoming missed call entry in the call log.
      Note: AccessibilityServices uses this attribute to announce what the view represents.
      [CHAR LIMIT=NONE] -->
+  <string name="description_incoming_missed_call">Wedi methu galwad oddi wrth <xliff:g example="John Smith" id="nameOrNumber">^ 1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^ 2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^ 3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^ 4</xliff:g>.</string>
   <!-- String describing an incoming answered call entry in the call log.
        Note: AccessibilityServices uses this attribute to announce what the view represents.
        [CHAR LIMIT=NONE] -->
@@ -453,6 +467,7 @@
   <!-- Button text for a button displayed underneath an entry in the call log, which removes the
        phone number represented by the call log entry from the Spam numbers list.
        [CHAR LIMIT=30] -->
+  <string name="call_log_action_remove_spam">Dim yn sbam</string>
   <!-- Button text for a button displayed underneath an entry in the call log, which removes the
        phone number represented by the call log entry from the blacklisted numbers.
        [CHAR LIMIT=30] -->

@@ -31,6 +31,7 @@
        the "PAUSE" character in a phone number to be dialed; this dialog gives
        informative message to the user to show the sending numbers following the "Pause". -->
   <!-- In-call screen: button label on the "wait" prompt dialog -->
+  <string name="send_button">Anfon</string>
   <!-- In-call screen: button label on the "wait" prompt dialog in CDMA Mode-->
   <!-- In-call screen: button label on the "wait" prompt dialog in CDMA Mode-->
   <!-- In-call screen: on the "wild" character dialog, this is the label
@@ -46,6 +47,7 @@
        as the format string for a Chronometer widget. [CHAR LIMIT=60] -->
   <!-- Missed call notification message used for a single missed call, including
        the caller-id info from the missed call -->
+  <string name="notification_missedCallTicker">Galwad wedi\'i methu oddi wrth <xliff:g id="missed_call_from">%s</xliff:g></string>
   <!-- The "label" of the in-call Notification for an ongoing call. [CHAR LIMIT=60] -->
   <!-- The "label" of the in-call Notification for an ongoing work call. [CHAR LIMIT=60] -->
   <!-- The "label" of the in-call Notification for an ongoing call, which is being made over
@@ -94,6 +96,7 @@
   <!-- Label for "Accept" notification action. This is somewhat generic, and may refer to
        scenarios such as accepting an incoming call or accepting a video call request.
        [CHAR LIMIT=12] -->
+  <string name="notification_action_accept">Derbyn</string>
   <!-- Label for "Dismiss" notification action. This is somewhat generic, and may refer to
        scenarios such as declining an incoming call or declining a video call request.
        [CHAR LIMIT=12] -->
@@ -118,7 +121,9 @@
   <!-- In-call screen: call failure message displayed in an error dialog -->
   <!-- In-call screen: call failure message displayed in an error dialog.
        This string is currently unused (see comments in InCallActivity.java.) -->
+  <string name="incall_error_emergency_only">Heb gofrestru ar y rhwydwaith.</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
+  <string name="incall_error_out_of_service">Dim rhwydwaith symudol ar gael.</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
   <!-- In-call screen: call failure message displayed in an error dialog -->
   <!-- In-call screen: status message displayed in a dialog when starting an MMI -->
@@ -184,10 +189,12 @@
   <!-- Text for the reporting spam action in the after call prompt. [CHAR LIMIT=20] -->
   <!-- Text for the adding to contacts action in the after call prompt. [CHAR LIMIT=20] -->
   <!-- Text for the reporting as not spam action in the after call prompt. [CHAR LIMIT=20] -->
+  <string name="spam_notification_not_spam_action_text">Dim yn sbam</string>
   <!-- Text for the blocking spam action in the after call prompt. [CHAR LIMIT=20] -->
   <!-- Text for the adding to contacts action in the after call dialog. [CHAR LIMIT=40] -->
   <!-- Text for the blocking and reporting spam action in the after call dialog. [CHAR LIMIT=40] -->
   <!-- Text for the marking a call as not spam in the after call dialog. [CHAR LIMIT=40] -->
+  <string name="spam_notification_dialog_was_not_spam_action_text">Dim yn sbam</string>
   <!-- Name for a conference call. Shown in the in call UI and in notifications. -->
   <!-- Name for a generic conference call. Shown in the in call UI. This is used in CDMA where we
        don't know the precise state of participants in the conference.  -->

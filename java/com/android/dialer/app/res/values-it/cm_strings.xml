@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">Per attivare la modalità Non disturbare, Telefono deve essere autorizzata a controllare lo stato Non disturbare.\nConsenti l\'accesso per abilitare questa funzione.</string>
   <string name="allow">Consenti</string>
   <string name="deny">Nega</string>
+  <string name="call_recording_category_title">Registrazione chiamata</string>
+  <string name="call_recording_format">Formato audio</string>
+  <string name="call_via">Chiama con</string>
+  <string name="call_via_dialog_title">Chiama con\u2026</string>
+  <string name="call_log_stats_title">Statistiche</string>
 </resources>

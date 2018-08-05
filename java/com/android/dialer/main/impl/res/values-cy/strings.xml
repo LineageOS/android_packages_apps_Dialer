@@ -29,4 +29,5 @@
   <!-- Tab text to show users their voicemails  [CHAR LIMIT=10] -->
   <!-- Show users their settings [CHAR LIMIT=20] -->
   <!-- Send feedback about the app [CHAR LIMIT=20] -->
+  <string name="main_send_feedback">Anfon adborth</string>
 </resources>

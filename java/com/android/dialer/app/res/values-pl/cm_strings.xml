@@ -27,4 +27,6 @@
   <string name="incall_dnd_dialog_message">Aby włączyć tryb Nie przeszkadzać, aplikacja \"Telefon\" musi posiadać przyznane uprawnienia do kontrolowania jego statusu.\nProszę na to zezwolić.</string>
   <string name="allow">Zezwól</string>
   <string name="deny">Odmów</string>
+  <string name="call_recording_category_title">Nagrywanie rozmów</string>
+  <string name="call_recording_format">Format dźwięku</string>
 </resources>

@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">Pentru a permite Nu Deranjaţi, aplicația Telefon are nevoie de permisiunea de a controla modul Nu Deranjaţi.\nVă rugăm acordați această permisiune.</string>
   <string name="allow">Permiteți</string>
   <string name="deny">Refuzați</string>
+  <string name="call_recording_category_title">Înregistrare apel</string>
+  <string name="call_recording_format">Format audio</string>
+  <string name="call_via">Apel prin</string>
+  <string name="call_via_dialog_title">Apel prin\u2026</string>
+  <string name="call_log_stats_title">Statistici</string>
 </resources>

@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">Rahatsız Etmeyin\'i etkinleştirmek için, Telefon uygulamasının Rahatsız Etmeyin durumunu kontrol etme iznine sahip olması gerekir.\nLütfen buna izin verin.</string>
   <string name="allow">İzin ver</string>
   <string name="deny">Reddet</string>
+  <string name="call_recording_category_title">Arama kaydı</string>
+  <string name="call_recording_format">Ses formatı</string>
+  <string name="call_via">ile ara</string>
+  <string name="call_via_dialog_title">\u2026 ile ara</string>
+  <string name="call_log_stats_title">İstatistikler</string>
 </resources>

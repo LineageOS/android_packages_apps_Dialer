@@ -19,6 +19,7 @@
   <!-- Title for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=30]-->
   <!-- Body text for dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
   <!-- Positive confirmation button for the dialog which opens when the user needs to migrate to the framework blocking implementation [CHAR LIMIT=NONE]-->
+  <string name="migrate_blocked_numbers_dialog_allow_button">Caniatáu</string>
   <!-- Do not translate -->
   <!-- Confirmation dialog title for blocking a number. [CHAR LIMIT=NONE] -->
   <!-- Confirmation dialog message for blocking a number with visual voicemail active.

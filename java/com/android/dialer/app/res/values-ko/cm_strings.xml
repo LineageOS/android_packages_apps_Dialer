@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">방해 금지 모드를 사용하려면 앱이 방해 금지 모드를 제어할 수 있어야 합니다.\n권한을 허용해 주세요.</string>
   <string name="allow">허용</string>
   <string name="deny">거부</string>
+  <string name="call_recording_category_title">통화 녹음</string>
+  <string name="call_recording_format">오디오 형식</string>
+  <string name="call_via">앱으로 통화</string>
+  <string name="call_via_dialog_title">다음 앱으로 통화\u2026</string>
+  <string name="call_log_stats_title">통계</string>
 </resources>

@@ -21,6 +21,7 @@
   <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
   <!-- Title for outgoing call which was transferred to another device. [CHAR LIMIT=60] -->
   <!-- Title for missed call type. [CHAR LIMIT=40] -->
+  <string name="type_missed">Galwad wedi\'i methu</string>
   <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
   <!-- Title for incoming video call in call details screen which was transferred to another device.
        [CHAR LIMIT=60] -->
@@ -28,11 +29,13 @@
   <!-- Title for outgoing video call in call details screen which was transferred to another device.
        [CHAR LIMIT=60] -->
   <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
+  <string name="type_missed_video">Galwad fideo wedi\'i methu</string>
   <!-- Title for voicemail details screen -->
   <!-- Title for rejected call type. [CHAR LIMIT=40] -->
   <!-- Title for blocked call type. [CHAR LIMIT=40] -->
   <!-- An abbreviation for minutes. For example "1m" [CHAR LIMIT=NONE] -->
   <!-- An abbreviation for seconds. For example "28s" [CHAR LIMIT=NONE] -->
+  <string name="call_details_seconds_abbreviation">e</string>
   <!-- A string to announce a call duration. For example, in english might say 2 minutes 15 seconds.
        This translation may require the variables to be rearranged for grammars different than
        english. [CHAR LIMIT=NONE] -->

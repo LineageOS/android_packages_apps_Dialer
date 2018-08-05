@@ -38,4 +38,5 @@
      [CHAR LIMIT=12] -->
   <!-- Used to inform the user that the note associated with an outgoing call has been sent.
        [CHAR LIMIT=32] -->
+  <string name="incall_note_sent">Nodyn wedi\'i anfon</string>
 </resources>
