@@ -48,6 +48,11 @@ EXCLUDE_FILES += \
 	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerRootComponent.java \
 	$(BASE_DIR)/dialer/binary/google/GoogleStubDialerApplication.java \
 
+# * b/62875795
+ifneq ($(wildcard packages/apps/Dialer/java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java),)
+$(error Please remove file packages/apps/Dialer/java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java )
+endif
+
 EXCLUDE_RESOURCE_DIRECTORIES := \
 	java/com/android/incallui/maps/impl/res \
 
@@ -131,7 +136,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \
-	android-support-design \
+	$(ANDROID_SUPPORT_DESIGN_TARGETS) \
 	android-support-transition \
 	android-support-v13 \
 	android-support-v4 \
