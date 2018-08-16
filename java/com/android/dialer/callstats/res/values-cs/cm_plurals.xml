@@ -15,4 +15,29 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="hour">
+    <item quantity="one">1 hodina</item>
+    <item quantity="few">%d hodiny</item>
+    <item quantity="many">%d hodin</item>
+    <item quantity="other">%d hodin</item>
+  </plurals>
+  <plurals name="minute">
+    <item quantity="one">1 minuta</item>
+    <item quantity="few">%d minuty</item>
+    <item quantity="many">%d minut</item>
+    <item quantity="other">%d minut</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">1 sekunda</item>
+    <item quantity="few">%d sekundy</item>
+    <item quantity="many">%d sekund</item>
+    <item quantity="other">%d sekund</item>
+  </plurals>
+  <plurals name="call">
+    <item quantity="one">1 hovor</item>
+    <item quantity="few">%d hovory</item>
+    <item quantity="many">%d hovorů</item>
+    <item quantity="other">%d hovorů</item>
+  </plurals>
+</resources>

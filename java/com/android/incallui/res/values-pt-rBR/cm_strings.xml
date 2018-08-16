@@ -15,4 +15,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_recording_failed_message">Falha ao iniciar a gravação da chamada</string>
+  <string name="onscreenCallRecordText">Gravar chamada</string>
+  <string name="onscreenStopCallRecordText">Parar a gravação</string>
+  <string name="recording_time_text">Gravando</string>
+</resources>

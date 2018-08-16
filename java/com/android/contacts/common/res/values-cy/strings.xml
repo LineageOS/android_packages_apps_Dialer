@@ -157,6 +157,7 @@
   <!-- Field title for the city of a structured postal address of a contact -->
   <!-- Field title for the region, or state, of a structured postal address of a contact -->
   <!-- Field title for the postal code of a structured postal address of a contact -->
+  <string name="postal_postcode">Cod post</string>
   <!-- Field title for the country of a structured postal address of a contact -->
   <!-- Action string for viewing a home postal address -->
   <!-- Action string for viewing a work postal address -->

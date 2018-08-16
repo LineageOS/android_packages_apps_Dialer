@@ -21,6 +21,7 @@
   <string name="call_stats_incoming">着信: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_outgoing">発信: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">不在: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">着信拒否: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g> <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>

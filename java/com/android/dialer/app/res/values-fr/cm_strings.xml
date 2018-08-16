@@ -27,4 +27,6 @@
   <string name="incall_dnd_dialog_message">Pour activer le mode Ne pas déranger, vous devez autoriser l\'application Téléphone à contrôler l\'état \"Ne pas déranger\".\nVeuillez accorder cette autorisation.</string>
   <string name="allow">Autoriser</string>
   <string name="deny">Refuser</string>
+  <string name="call_recording_format">Format audio</string>
+  <string name="call_log_stats_title">Statistiques</string>
 </resources>

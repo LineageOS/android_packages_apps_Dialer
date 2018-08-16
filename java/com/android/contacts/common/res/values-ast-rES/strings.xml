@@ -215,6 +215,7 @@
        mention it here. [CHAR LIMIT=NONE] -->
   <!-- The failed reason shown when Contacts app (especially vCard importer/exporter)
        emitted some I/O error. Exact reason will be appended by the system. [CHAR LIMIT=NONE] -->
+  <string name="fail_reason_io_error">Fallu d\'E/S</string>
   <!-- Failure reason show when Contacts app (especially vCard importer) encountered
        low memory problem and could not proceed its import procedure. [CHAR LIMIT=NONE] -->
   <!-- The failed reason shown when vCard parser was not able to be parsed by the current vCard

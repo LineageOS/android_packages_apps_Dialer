@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">Um \"Bitte nicht stören\" zu aktivieren, benötigt die Telefon-App die Berechtigung, den \"Bitte nicht stören\"-Status zu kontrollieren.\nBitte dies erlauben.</string>
   <string name="allow">Erlauben</string>
   <string name="deny">Verweigern</string>
+  <string name="call_recording_category_title">Anrufaufzeichnung</string>
+  <string name="call_recording_format">Aufnahmeformat</string>
+  <string name="call_via">Anruf über</string>
+  <string name="call_via_dialog_title">Anruf über\u2026</string>
+  <string name="call_log_stats_title">Statistiken</string>
 </resources>

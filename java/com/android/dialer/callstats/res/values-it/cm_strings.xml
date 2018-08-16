@@ -34,5 +34,17 @@
   <string name="date_qs_currentyear">Anno corrente</string>
   <string name="date_qs_lastweek">Ultima settimana</string>
   <string name="date_qs_lastmonth">Ultimo mese</string>
+  <string name="date_qs_lastquarter">Ultimo trimestre</string>
+  <string name="date_qs_lastyear">Ultimo anno</string>
+  <string name="call_stats_date_filter">Regola intervallo</string>
+  <string name="call_stats_reset_filter">Reimposta intervallo</string>
+  <string name="call_stats_sort_by_duration">Ordina per durata</string>
+  <string name="call_stats_sort_by_count">Ordina per numero</string>
+  <string name="call_stats_title_for_number">Questo numero</string>
+  <string name="call_stats_title_of_total">In totale</string>
+  <string name="call_stats_title_durations">Durata chiamate</string>
+  <string name="call_stats_title_count">Conteggio chiamate</string>
+  <string name="call_stats_title_average_duration">Durata media chiamata</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
+  <string name="recent_calls_no_items_in_range">Il registro chiamate non contiene nessuna chiamata nel periodo di tempo selezionato.</string>
 </resources>

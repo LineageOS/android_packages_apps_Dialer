@@ -30,11 +30,13 @@
   <string name="call_stats_filter_picker_title">Филтриращ диапазон</string>
   <string name="date_quick_selection">Бърз избор</string>
   <string name="date_qs_currentmonth">Текущ месец</string>
+  <string name="date_qs_currentquarter">Текущото тримесечие</string>
   <string name="date_qs_currentyear">Текущата година</string>
   <string name="date_qs_lastweek">Миналата седмица</string>
   <string name="date_qs_lastmonth">Миналия месец</string>
   <string name="date_qs_lastquarter">Миналото тримесечие</string>
   <string name="date_qs_lastyear">Миналата година</string>
+  <string name="call_stats_date_filter">Филтър за период от време</string>
   <string name="call_stats_reset_filter">Възстанови по подраздиране периода от време</string>
   <string name="call_stats_sort_by_duration">Сортирай по продължителност на разговори</string>
   <string name="call_stats_sort_by_count">Сортирай по брой на обаждания</string>

@@ -15,4 +15,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="play_recordings">
+    <item quantity="one">Prehrať nahrávku</item>
+    <item quantity="few">Prehrať nahrávky</item>
+    <item quantity="many">Prehrať nahrávok</item>
+    <item quantity="other">Prehrať nahrávok</item>
+  </plurals>
+  <string name="call_playback_no_app_found_toast">Nenašla sa žiadna aplikácia pre prehrávanie záznamu.</string>
+</resources>

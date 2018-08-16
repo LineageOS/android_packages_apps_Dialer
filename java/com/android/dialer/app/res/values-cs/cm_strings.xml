@@ -27,4 +27,9 @@
   <string name="incall_dnd_dialog_message">Chcete-li povolit režim Nerušit, musí být telefonní aplikaci udělena oprávnění k ovládání stavu režimu Nerušit.\nProsím povolte jej.</string>
   <string name="allow">Povolit</string>
   <string name="deny">Odepřít</string>
+  <string name="call_recording_category_title">Nahrávání hovorů</string>
+  <string name="call_recording_format">Formát zvuku</string>
+  <string name="call_via">Volat prostřednictvím</string>
+  <string name="call_via_dialog_title">Volat prostřednictvím\u2026</string>
+  <string name="call_log_stats_title">Statistiky</string>
 </resources>
