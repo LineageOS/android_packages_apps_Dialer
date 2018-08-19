@@ -309,7 +309,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	libphonenumber \
 	okhttp \
 	volley \
-	org.lineageos.platform.sdk
+	org.lineageos.platform.internal
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-design \
