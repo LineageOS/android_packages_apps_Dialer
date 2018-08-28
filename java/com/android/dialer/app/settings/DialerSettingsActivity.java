@@ -102,6 +102,7 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
     Header soundSettingsHeader = new Header();
     soundSettingsHeader.titleRes = R.string.sounds_and_vibration_title;
+    soundSettingsHeader.fragment = SoundSettingsFragment.class.getName();
     soundSettingsHeader.id = R.id.settings_header_sounds_and_vibration;
     target.add(soundSettingsHeader);
 
@@ -271,32 +272,22 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         && getResources().getBoolean(R.bool.config_sort_order_user_changeable);
   }
 
-  /**
-   * For the "sounds and vibration" setting, we go directly to the system sound settings fragment.
-   * This helps since:
-   * <li>We don't need a separate Dialer sounds and vibrations fragment, as everything we need is
-   *     present in the system sounds fragment.
-   * <li>OEM's e.g Moto that support dual sim ring-tones no longer need to update the dialer sound
-   *     and settings fragment.
-   *
-   *     <p>For all other settings, we launch our our preferences fragment.
-   */
   @Override
   public void onHeaderClick(Header header, int position) {
     if (header.id == R.id.settings_header_sounds_and_vibration) {
-
+      // If we don't have the permission to write to system settings, go to system sound
+      // settings instead. Otherwise, perform the super implementation (which launches our
+      // own preference fragment.
       if (!Settings.System.canWrite(this)) {
         Toast.makeText(
                 this,
                 getResources().getString(R.string.toast_cannot_write_system_settings),
                 Toast.LENGTH_SHORT)
             .show();
+        startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
+        return;
       }
-
-      startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
-      return;
     }
-
     super.onHeaderClick(header, position);
   }
 
