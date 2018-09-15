@@ -177,9 +177,6 @@ LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_USE_AAPT2 := true
 
-# b/37483961 - Jack Not Compiling Dagger Class Properly
-LOCAL_JACK_ENABLED := javac_frontend
-
 include $(BUILD_PACKAGE)
 
 # Cleanup local state
