@@ -709,13 +709,13 @@ public class StatusBarNotifier
       }
     } else if (call.getState() == DialerCallState.ONHOLD) {
       resId = R.string.notification_on_hold;
+    } else if (DialerCallState.isDialing(call.getState())) {
+      resId = R.string.notification_dialing;
     } else if (call.isVideoCall()) {
       resId =
           call.getVideoTech().isPaused()
               ? R.string.notification_ongoing_paused_video_call
               : R.string.notification_ongoing_video_call;
-    } else if (DialerCallState.isDialing(call.getState())) {
-      resId = R.string.notification_dialing;
     } else if (call.getVideoTech().getSessionModificationState()
         == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
       resId = R.string.notification_requesting_video_call;
