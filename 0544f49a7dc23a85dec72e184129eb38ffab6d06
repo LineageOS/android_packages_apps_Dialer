@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f9bf4af_a41287a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-10-13T08:11:02Z",
+      "side": 1,
+      "message": "This is not a proper commit message.\n\nYou can change to something like:\n\nAllow call recording for Austria\n\n * Call recording is legal in Austria, so it should be available in the UI",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 155
+      },
+      "revId": "0544f49a7dc23a85dec72e184129eb38ffab6d06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b8a9791_95789ee2",
+        "filename": "java/com/android/dialer/callrecord/res/values-mcc232/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-10-13T08:11:02Z",
+      "side": 1,
+      "message": "This line can be deleted.\n\nSee the example: https://github.com/LineageOS/android_packages_apps_Dialer/blob/lineage-15.1/java/com/android/dialer/callrecord/res/values-mcc244/config.xml",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 51
+      },
+      "revId": "0544f49a7dc23a85dec72e184129eb38ffab6d06",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
