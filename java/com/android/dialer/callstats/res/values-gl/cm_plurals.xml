@@ -15,4 +15,21 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="hour">
+    <item quantity="one">1 h</item>
+    <item quantity="other">%d horas</item>
+  </plurals>
+  <plurals name="minute">
+    <item quantity="one">1 min</item>
+    <item quantity="other">%d mins</item>
+  </plurals>
+  <plurals name="second">
+    <item quantity="one">1 seg</item>
+    <item quantity="other">%d seg</item>
+  </plurals>
+  <plurals name="call">
+    <item quantity="one">1 chamada</item>
+    <item quantity="other">%d chamadas</item>
+  </plurals>
+</resources>

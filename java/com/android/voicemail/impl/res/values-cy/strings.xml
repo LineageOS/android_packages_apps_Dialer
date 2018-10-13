@@ -43,6 +43,7 @@
   <!-- The title for the change voicemail PIN activity -->
   <!-- The label for the continue button in change voicemail PIN activity -->
   <!-- The label for the cancel button in change voicemail PIN activity -->
+  <string name="change_pin_cancel_label">Diddymu</string>
   <!-- The label for the ok button in change voicemail PIN activity -->
   <string name="change_pin_ok_label">Iawn</string>
   <!-- The title for the enter old pin step in change voicemail PIN activity -->

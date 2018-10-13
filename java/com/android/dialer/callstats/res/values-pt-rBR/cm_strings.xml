@@ -42,6 +42,7 @@
   <string name="call_stats_title_for_number">Este número</string>
   <string name="call_stats_title_of_total">Do total</string>
   <string name="call_stats_title_durations">Duração das chamadas</string>
+  <string name="call_stats_title_count">Quantidade de chamadas</string>
   <string name="call_stats_title_average_duration">Duração média de chamada</string>
   <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

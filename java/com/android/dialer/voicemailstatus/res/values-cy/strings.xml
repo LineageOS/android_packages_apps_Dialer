@@ -26,6 +26,7 @@
   visual voicemail. [CHAR LIMIT=64] -->
   <!--  Voicemail status message shown at the top of call details screen to notify the user that
   the audio of this voicemail is not available. [CHAR LIMIT=64] -->
+  <string name="voicemail_status_audio_not_available">Sain ddim ar gael</string>
   <!--  User action prompt shown next to a voicemail status message to let the user configure
   visual voicemail. [CHAR LIMIT=20] -->
   <!--  User action prompt shown next to a voicemail status message to let the user call voicemail

@@ -20,4 +20,6 @@
   <string name="incall_vibrate_outgoing_title">Vibrera vid svar</string>
   <string name="incall_vibrate_call_waiting_title">Vibrera vid samtal väntar</string>
   <string name="incall_vibrate_45_title">Vibrera varje minut</string>
+  <string name="call_recording_category_title">Samtalsinspelning</string>
+  <string name="call_recording_format">Ljudformat</string>
 </resources>

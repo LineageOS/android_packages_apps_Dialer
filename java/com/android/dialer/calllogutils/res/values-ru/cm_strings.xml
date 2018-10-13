@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_log_show_all_accounts">Все учетные записи</string>
+  <string name="call_log_show_all_accounts">Все SIM-карты</string>
   <string name="call_log_all_calls_header">Все вызовы</string>
   <string name="call_log_blacklist_header">Только заблокированные вызовы</string>
 </resources>

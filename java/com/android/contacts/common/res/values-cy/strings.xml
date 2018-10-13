@@ -67,7 +67,9 @@
   <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
   <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=35] -->
   <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
+  <string name="status_available">Ar gael</string>
   <!--  Used to display as default status when the contact is away or idle for chat [CHAR LIMIT=19] -->
+  <string name="status_away">I ffwrdd</string>
   <!--  Used to display as default status when the contact is busy or Do not disturb for chat [CHAR LIMIT=19] -->
   <!-- Directory partition name (also exists in contacts) -->
   <!-- Directory partition name for p13n suggestions -->
@@ -75,6 +77,7 @@
   <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
   <!-- The label in section header in the contact list for a work contact directory [CHAR LIMIT=128] -->
   <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
+  <string name="local_search_label">Pob cyswllt</string>
   <!-- The label in section header in the contact list for a local suggested contacts [CHAR LIMIT=128] -->
   <!-- String describing the text on the header of the profile contact in the contacts list
        This may be programatically capitalized. [CHAR LIMIT=20] -->
@@ -91,6 +94,7 @@
             This is especially valuable for views without textual representation like ImageView.
   -->
   <!-- Shown as the display name for a person when the name is missing or unknown. [CHAR LIMIT=18]-->
+  <string name="missing_name">(Dim enw)</string>
   <!-- The text displayed on the divider for the Favorites tab in Phone app indicating that items below it are frequently called as opposed to starred contacts [CHAR LIMIT = 39] -->
   <!-- The text displayed on the divider for the Favorites tab in People app indicating that items below it are frequently contacted [CHAR LIMIT = 39] -->
   <!-- String describing a contact picture that introduces users to the contact detail screen.
@@ -100,6 +104,7 @@
      [CHAR LIMIT=NONE]
   -->
   <!-- Contact list filter selection indicating that the list shows all contacts with phone numbers [CHAR LIMIT=64] -->
+  <string name="list_filter_phones">Pob cyswllt gyda rhif ffôn</string>
   <!-- Contact list filter selection indicating that the list shows all work contacts with phone numbers [CHAR LIMIT=64] -->
   <!-- Button to view the updates from the current group on the group detail page [CHAR LIMIT=25] -->
   <!-- Title for data source when creating or editing a contact that doesn't
@@ -107,13 +112,19 @@
        and will not be synced. -->
   <!-- Header that expands to list all name types when editing a structured name of a contact
        [CHAR LIMIT=20] -->
+  <string name="nameLabelsGroup">Enw</string>
   <!-- Header that expands to list all nickname types when editing a nickname of a contact
        [CHAR LIMIT=20] -->
+  <string name="nicknameLabelsGroup">Llysenw</string>
   <!-- Field title for the full name of a contact [CHAR LIMIT=64]-->
+  <string name="full_name">Enw</string>
   <!-- Field title for the given name of a contact -->
+  <string name="name_given">Enw cyntaf</string>
   <!-- Field title for the family name of a contact -->
+  <string name="name_family">Cyfenw</string>
   <!-- Field title for the prefix name of a contact -->
   <!-- Field title for the middle name of a contact -->
+  <string name="name_middle">Enw canol</string>
   <!-- Field title for the suffix name of a contact -->
   <!-- Field title for the phonetic name of a contact [CHAR LIMIT=64]-->
   <!-- Field title for the phonetic given name of a contact -->
@@ -121,10 +132,13 @@
   <!-- Field title for the phonetic family name of a contact -->
   <!-- Header that expands to list all of the types of phone numbers when editing or creating a
        phone number for a contact [CHAR LIMIT=20] -->
+  <string name="phoneLabelsGroup">Ffôn</string>
   <!-- Header that expands to list all of the types of email addresses when editing or creating
        an email address for a contact [CHAR LIMIT=20] -->
+  <string name="emailLabelsGroup">Ebost</string>
   <!-- Header that expands to list all of the types of postal addresses when editing or creating
        an postal address for a contact [CHAR LIMIT=20] -->
+  <string name="postalLabelsGroup">Cyfeiriad</string>
   <!-- Header that expands to list all of the types of IM account when editing or creating an IM
        account for a contact [CHAR LIMIT=20] -->
   <string name="imLabelsGroup">IM</string>
@@ -136,6 +150,7 @@
   <!-- Generic action string for text messaging a contact. Used by AccessibilityService to
        announce the purpose of the view. [CHAR LIMIT=NONE] -->
   <!-- Field title for the full postal address of a contact [CHAR LIMIT=64]-->
+  <string name="postal_address">Cyfeiriad</string>
   <!-- Hint text for the organization name when editing -->
   <!-- Hint text for the organization title when editing -->
   <!-- The label describing the Notes field of a contact. This field allows free form text entry
@@ -149,8 +164,10 @@
   <!-- Action string for sending an email to a mobile email address -->
   <!-- Action string for sending an email to a work email address -->
   <!-- Action string for sending an email to an other email address -->
+  <string name="email_other">Anfon ebost</string>
   <!-- Action string for sending an email to a custom email address -->
   <!-- Generic action string for sending an email -->
+  <string name="email">Anfon ebost</string>
   <!-- Field title for the street of a structured postal address of a contact -->
   <!-- Field title for the PO box of a structured postal address of a contact -->
   <!-- Field title for the neighborhood of a structured postal address of a contact -->
@@ -186,8 +203,10 @@
        [CHAR LIMIT=NONE] -->
   <!-- Content description for the expand or collapse phonetic name fields button. [CHAR LIMIT=100] -->
   <!-- Contact list filter label indicating that the list is showing all available accounts [CHAR LIMIT=64] -->
+  <string name="list_filter_all_accounts">Pob cyswllt</string>
   <!-- Menu item to indicate you are done editing a contact and want to save the changes you've made -->
   <!-- Menu item to indicate you want to cancel the current editing process and NOT save the changes you've made [CHAR LIMIT=12] -->
+  <string name="menu_doNotSave">Diddymu</string>
   <!-- Displayed at the top of the contacts showing the account filter selected  [CHAR LIMIT=64] -->
   <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=64] -->
   <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=64] -->
@@ -294,13 +313,17 @@
   <!-- Contact preferences related strings -->
   <!-- Label of the "sort by" display option -->
   <!-- An allowable value for the "sort list by" contact display option  -->
+  <string name="display_options_sort_by_given_name">Enw cyntaf</string>
   <!-- An allowable value for the "sort list by" contact display option  -->
+  <string name="display_options_sort_by_family_name">Cyfenw</string>
   <!-- Label of the "name format" display option [CHAR LIMIT=64]-->
+  <string name="display_options_view_names_as">Fformat enw</string>
   <!-- An allowable value for the "view names as" contact display option  -->
   <!-- An allowable value for the "view names as" contact display option  -->
   <!--Label of the "default account" setting option to set default editor account. [CHAR LIMIT=80]-->
   <!--Label of the "Sync contact metadata" setting dialog to set sync account for Lychee. [CHAR LIMIT=80]-->
   <!-- Label of the "About" setting -->
+  <string name="setting_about">Ymghylch Cysylltiadau</string>
   <!-- Title of the settings activity [CHAR LIMIT=64] -->
   <!-- Action that shares visible contacts -->
   <!-- A framework exception (ie, transaction too large) can be thrown while attempting to share all visible contacts. If so, show this toast. -->
@@ -338,6 +361,7 @@
   <!-- The title of the preference section that allows users to configure how they want their
        contacts to be displayed. [CHAR LIMIT=128] -->
   <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
+  <string name="select_account_dialog_title">Cyfrif</string>
   <!-- Label for the check box to toggle default sim card setting [CHAR LIMIT=35]-->
   <!-- Title for dialog to select Phone Account for outgoing call.  [CHAR LIMIT=40] -->
   <!-- String used for actions in the dialer call log and the quick contact card to initiate

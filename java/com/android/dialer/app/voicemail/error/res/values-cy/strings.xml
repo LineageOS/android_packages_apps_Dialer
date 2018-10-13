@@ -16,6 +16,8 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_action_turn_off_airplane_mode">Gosodiadau Modd Awyren</string>
+  <string name="voicemail_action_turn_archive_on">Troi ymlaen</string>
   <string name="voicemail_action_sync">Cysoni</string>
   <string name="vvm3_error_vms_dns_failure_message">Ymddiheuriadau. Cafwyd problem. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9001.</string>
   <string name="vvm3_error_vmg_dns_failure_message">Ymddiheuriadau. Cafwyd problem. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9002.</string>

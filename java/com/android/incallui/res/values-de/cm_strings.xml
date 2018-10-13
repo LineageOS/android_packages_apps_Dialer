@@ -15,4 +15,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="call_recording_failed_message">Starten der Anrufaufzeichnung fehlgeschlagen</string>
+  <string name="call_recording_file_location">Anrufaufzeichnung gespeichert unter <xliff:g id="filename">%s</xliff:g></string>
+  <string name="onscreenCallRecordText">Anruf aufnehmen</string>
+  <string name="onscreenCallRecordingText">Anruf aufnehmen - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+  <string name="onscreenStopCallRecordText">Aufnahme beenden</string>
+  <string name="recording_time_text">Aufnahme läuft</string>
+  <string name="recording_warning_title">Anrufaufzeichnung aktivieren?</string>
+  <string name="recording_warning_text">Hinweis: Sie sind dafür verantwortlich, dass alle Gesetze, Verordnungen und Vorschriften für die Verwendung der Anrufaufnahme und die Verwendung oder Verteilung dieser Aufnahmen eingehalten werden.</string>
+</resources>

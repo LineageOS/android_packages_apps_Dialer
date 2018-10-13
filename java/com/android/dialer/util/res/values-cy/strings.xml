@@ -21,7 +21,9 @@
         Default sound(Capella) in the notification summary.
         [CHAR LIMIT=40] -->
   <!-- Choice in the ringtone picker.  If chosen, there will be silence instead of a ringtone played. -->
+  <string name="ringtone_silent">Dim</string>
   <!-- If there is ever a ringtone set for some setting, but that ringtone can no longer be resolved, this is shown instead.  For example, if the ringtone was on a SD card and it had been removed, this would be shown for ringtones on that SD card. -->
+  <string name="ringtone_unknown">Tôn caniad anhysbys</string>
   <!-- Message displayed when there is no application available to handle a particular action.
        [CHAR LIMIT=NONE] -->
   <!-- Text of warning to be shown when the user attempts to make an outgoing Wireless

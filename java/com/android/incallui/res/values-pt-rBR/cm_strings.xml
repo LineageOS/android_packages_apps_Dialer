@@ -20,4 +20,5 @@
   <string name="onscreenCallRecordText">Gravar chamada</string>
   <string name="onscreenStopCallRecordText">Parar a gravação</string>
   <string name="recording_time_text">Gravando</string>
+  <string name="recording_warning_title">Ativar a gravação de chamadas?</string>
 </resources>

@@ -18,6 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Application name used in Settings/Apps. Default label for activities
        that don't specify a label. -->
+  <string name="applicationLabel">Ffôn</string>
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
   <!-- The description text for the dialer tab.
 
@@ -25,6 +26,7 @@
   This is especially valuable for views without textual representation like ImageView.
 
   [CHAR LIMIT=NONE] -->
+  <string name="dialerIconLabel">Ffôn</string>
   <!-- The description text for the call log tab.
 
   Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -48,6 +50,7 @@
   <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <!-- Title used for the activity for placing a call. This name appears
        in activity disambig dialogs -->
+  <string name="userCallActivityLabel" product="default">Ffonio</string>
   <!-- Notification strings -->
   <!-- Missed call notification label, used when there's exactly one missed call -->
   <string name="notification_missedCallTitle">Galwad wedi\'i methu</string>
@@ -143,9 +146,11 @@
        and testing. [CHAR LIMIT=30]-->
   <!-- Label for the menu item that installs a shortcut for the new UI. [CHAR LIMIT=30] -->
   <!-- Menu item to display all contacts [CHAR LIMIT=30] -->
+  <string name="menu_allContacts">Pob cyswllt</string>
   <!-- Item label: jump to the in-call DTMF dialpad.
        (Part of a list of options shown in the dialer when another call
        is already in progress.) -->
+  <string name="dialer_useDtmfDialpad">Defnyddio pad deialu tonau cyffwrdd</string>
   <!-- Item label: jump to the in-call UI.
        (Part of a list of options shown in the dialer when another call
        is already in progress.) -->
@@ -231,6 +236,7 @@
   <!-- String describing the cancel button in multi select.
        Note: AccessibilityServices uses this attribute to announce what the view represents.
        [CHAR LIMIT=NONE] -->
+  <string name="voicemailMultiSelectDeleteCancel">Diddymu</string>
   <!-- Alert dialog title to accept or decline deleting voicemail(s). -->
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
        explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
@@ -246,6 +252,7 @@
   <!-- Dialog message which is shown when the user tries to check voicemail
        while the system is in airplane mode. The user cannot access to
        voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
+  <string name="dialog_voicemail_airplane_mode_message">I alw\'r rhif lleisbost, rhaid diffodd modd awyren.</string>
   <!-- Message that appears in the favorites tab of the Phone app when the contact list has not fully loaded yet (below the favorite and frequent contacts) [CHAR LIMIT=20] -->
   <!-- The title of a dialog that displays the IMEI of the phone -->
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
@@ -261,6 +268,7 @@
   <!-- String resource for the font-family to use for the call log activity's title -->
   <!-- String resource for the font-family to use for the full call history footer -->
   <!-- Text displayed when the call log is empty. -->
+  <string name="call_log_all_empty">Does dim hanes galwadau.</string>
   <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
   <!-- Text displayed when the list of missed calls is empty -->
   <string name="call_log_missed_empty">Does dim galwadau wedi eu methu.</string>
@@ -409,11 +417,15 @@
        dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
   <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
        aid compatability. [CHAR LIMIT=40] -->
+  <string name="accessibility_settings_title">Hygyrchedd</string>
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
+  <string name="ringtone_title">Tôn caniad y ffôn</string>
   <!-- Setting option name to enable or disable vibration when ringing the phone.
        [CHAR LIMIT=30] -->
   <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
+  <string name="dtmf_tone_enable_title">Tonau pad deialu</string>
   <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
+  <string name="dtmf_tone_length_title">Hyd tonau pad deialu</string>
   <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
   <!-- Label for the call settings section [CHAR LIMIT=30] -->
@@ -432,8 +444,10 @@
        and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
   <!-- Label for button to view numbers of contacts previous marked to be sent to voicemail.
        [CHAR_LIMIT=20] -->
+  <string name="blocked_call_settings_view_numbers_button">Gweld rhifau</string>
   <!-- Label for button to import settings for sending contacts to voicemail into Dialer's block
        list. [CHAR_LIMIT=20] -->
+  <string name="blocked_call_settings_import_button">Mewnforio</string>
   <!-- String describing the delete icon on a blocked number list item.
       When tapped, it will show a dialog confirming the unblocking of the number.
       [CHAR LIMIT=NONE]-->
@@ -456,6 +470,7 @@
   <!-- Shown as a prompt to turn on the phone permission to show voicemails [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
+  <string name="permission_place_call">I wneud galwad, rho ganiatâd i\'r ap Ffôn.</string>
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <!-- Button text for a button displayed underneath an entry in the call log, which marks the
@@ -474,6 +489,7 @@
   <!-- Label under the name of a spam number in the call log. [CHAR LIMIT=15] -->
   <!-- Shown as a message that notifies the user enriched calling isn't working -->
   <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
+  <string name="about_phone_label">Ynghylch</string>
   <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
   <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
         to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->

@@ -18,8 +18,11 @@
 <resources>
   <!-- "Respond via SMS" option that lets you compose a custom response. [CHAR LIMIT=30] -->
   <!-- "Custom Message" Cancel alert dialog button -->
+  <string name="call_incoming_custom_message_cancel">Diddymu</string>
   <!-- "Custom Message" Send alert dialog button -->
   <string name="call_incoming_custom_message_send">Anfon</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Ateb fel galwad llais</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Ateb fel galwad llais</string>
   <!-- Text indicates the video local camera is off. [CHAR LIMIT=40] -->
   <!-- Voice prompt of swipe gesture when accessibility is turned on. -->
 </resources>

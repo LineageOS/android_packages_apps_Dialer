@@ -17,6 +17,7 @@
   -->
 <resources>
   <!-- Name of the main activity. -->
+  <string name="main_activity_label">Ffonio</string>
   <!-- Name of launcher shortcut for the new UI main activity.
        TODO(38502365): Remove this once we're ready to launch the new UI. -->
   <!-- The description text for the call log tab. -->

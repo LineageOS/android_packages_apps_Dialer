@@ -17,9 +17,15 @@
  -->
 <resources>
   <!-- Content description of button to switch to full screen camera -->
+  <string name="description_camera_switch_full_screen">Newid i gamera sgrin llawn</string>
   <!-- Content description of button to resize camera from fullscreen to only a preview -->
+  <string name="description_camera_switch_preview_screen">Newid i ragolwg camera</string>
   <!-- Content description of button when after swapped to front -->
+  <string name="description_camera_switch_camera_facing">Newid i\'r camera blaen</string>
   <!-- Content description of button when after swapped to back -->
+  <string name="description_camera_switch_camera_rear">Newid i\'r camera cefn</string>
   <!-- Content description of button to take a photo -->
+  <string name="description_camera_take_picture">Tynnu llun</string>
   <!-- Content description of button to cancel a photo -->
+  <string name="description_camera_cancel_photo">Ail-dynnu llun</string>
 </resources>

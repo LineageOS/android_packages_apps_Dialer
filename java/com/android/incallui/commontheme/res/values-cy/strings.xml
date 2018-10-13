@@ -24,4 +24,5 @@
      [CHAR LIMIT=12] -->
   <!-- Button shown during a phone to switch the audio route.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_audio">Sain</string>
 </resources>

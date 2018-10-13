@@ -15,4 +15,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="play_recordings">
+    <item quantity="one">Reproduzir a gravação</item>
+    <item quantity="other">Reproduzir as gravações</item>
+  </plurals>
+</resources>

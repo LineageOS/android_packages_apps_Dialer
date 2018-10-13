@@ -18,6 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Official label of the phone app, as seen in "Manage Applications"
        and other settings UIs. -->
+  <string name="phoneAppLabel" product="default">Ffôn</string>
   <!-- Official label for the in-call UI. DO NOT TRANSLATE. -->
   <!-- In-call screen: status label for a conference call -->
   <!-- In-call screen: call lost dialog text -->
@@ -27,9 +28,11 @@
   <!-- In-call screen: body text of the dialog that appears when we encounter
        the "wait" character in a phone number to be dialed; this dialog asks the
        user if it's OK to send the numbers following the "wait". -->
+  <string name="wait_prompt_str">Anfon y tonau canlynol?\n</string>
   <!-- In-call screen: body text of the dialog that appears when we encounter
        the "PAUSE" character in a phone number to be dialed; this dialog gives
        informative message to the user to show the sending numbers following the "Pause". -->
+  <string name="pause_prompt_str">Yn anfon tonau\n</string>
   <!-- In-call screen: button label on the "wait" prompt dialog -->
   <string name="send_button">Anfon</string>
   <!-- In-call screen: button label on the "wait" prompt dialog in CDMA Mode-->
@@ -85,6 +88,7 @@
        operator name set by user -->
   <!-- Label for the "Answer call" action. This is the displayed label for the action that answers
        an incoming call. [CHAR LIMIT=12] -->
+  <string name="notification_action_answer">Ateb</string>
   <!-- Label for "end call" Action.
        It is displayed in the "Ongoing call" notification, which is shown
        when the user is outside the in-call screen while the phone call is still
@@ -119,6 +123,7 @@
        video call to the current device.
        [CHAR LIMIT=30] -->
   <!-- In-call screen: call failure message displayed in an error dialog -->
+  <string name="incall_error_power_off">I wneud galwad, rhaid diffodd modd awyren.</string>
   <!-- In-call screen: call failure message displayed in an error dialog.
        This string is currently unused (see comments in InCallActivity.java.) -->
   <string name="incall_error_emergency_only">Heb gofrestru ar y rhwydwaith.</string>
@@ -156,6 +161,7 @@
   <!-- Title for the category "ringtone", which is shown above ringtone and vibration
        related settings.
        [CHAR LIMIT=30] -->
+  <string name="preference_category_ringtone">Tôn Caniad a Dirgrynu</string>
   <!-- Label for "Manage conference call" panel [CHAR LIMIT=40] -->
   <!-- This can be used in any application wanting to disable the text "Emergency number" -->
   <!-- Used to inform the user that a call was received via a number other than the primary
