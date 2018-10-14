@@ -54,7 +54,7 @@
   <string name="call_stats_incoming">Входящих: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_outgoing">Исходящих: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_missed">Пропущенных: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Заблокированы: <xliff:g id="value">%s</xliff:g></string>
+  <string name="call_stats_blocked">Заблокированных: <xliff:g id="value">%s</xliff:g></string>
   <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
   <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
   <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
@@ -90,7 +90,7 @@
   <string name="speed_dial_delete">Удалить</string>
   <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
   <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Присвоить?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Чтобы использовать Быстрый набор, выключите режим полёта</string>
+  <string name="dialog_speed_dial_airplane_mode_message">Чтобы использовать Быстрый набор, выключите режим полета</string>
   <!-- Speed Dial can not be set for the key used for Emergency number-->
   <string name="speed_dial_can_not_be_set">Закрепить быстрый набор за этой клавишей невозможно</string>
   <string name="yes">Да</string>
@@ -106,7 +106,7 @@
   <string name="clear">Очистить</string>
   <string name="description_clear_search">Очистить условия поиска</string>
   <string name="video_call_welcome_title"><b>Добро пожаловать в новое меню Видеовызовов</b></string>
-  <string name="video_call_welcome_message">Все мы любим слышать знакомый голос в телефонной трубке, но говорить лицом к лицу гораздо лучше! Вот, что нужно знать для использования видеозвонков:\n Необходимо использовать LTE или подключение к сети Wi-Fi\n Устройство, на которое вы звоните, также должно поддерживать видеосвязь\n Видеозвонки потребляют достаточно много интернет-трафика\n Можно также переключить голосовой вызов на видеовызов в процессе разговора\n\n Ознакомьтесь со статьёй <a>https://support.t-mobile.com/docs/DOC-23574</a> для получения дополнительной информации.</string>
+  <string name="video_call_welcome_message">Все мы любим слышать знакомый голос в телефонной трубке, но говорить лицом к лицу гораздо лучше! Вот, что нужно знать для использования видеозвонков:\n Лучше использовать подключение LTE или Wi-Fi\n Устройство, на которое вы звоните, также должно поддерживать видеосвязь\n Видеозвонки потребляют достаточно много интернет-трафика\n Можно переключать голосовой вызов на видеовызов в процессе разговора\n\n Ознакомьтесь со статьей <a>https://support.t-mobile.com/docs/DOC-23574</a> для получения дополнительной информации.</string>
   <string name="video_call_welcome_message_repeat">Показывать это сообщение каждый раз</string>
   <string name="toast_change_video_call_failed">Невозможно совершить видеозвонок — некорректный формат номера</string>
   <string name="toast_make_video_call_failed">Невозможно осуществить видеовызов — некорректный формат номера</string>
@@ -148,5 +148,5 @@
   <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video_wifi">Пропущенный видеозвонок по Wi-Fi</string>
   <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Поисковые запросы могут отправлять запросы по защищенному протоколу (https) на удаленные веб-сайты для сбора информации. Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
+  <string name="lookup_disclaimer">Для сбора информации поисковые запросы могут передаваться на удаленные веб-сайты по защищенному протоколу (https). Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
 </resources>

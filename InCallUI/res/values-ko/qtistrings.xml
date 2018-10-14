@@ -32,58 +32,125 @@
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Call substate label -->
+  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: 통화 하위 상태:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
   <!-- Call substate label for call resumed -->
+  <string name="call_substate_call_resumed">통화 재개됨</string>
   <!-- Call substate label for call connected suspended (audio) -->
+  <string name="call_substate_connected_suspended_audio">통화 연결됨, 오디오 중지됨</string>
   <!-- Call substate label for call connected suspended (video) -->
+  <string name="call_substate_connected_suspended_video">통화 연결됨, 비디오 중지됨</string>
   <!-- Call substate label for avp retry -->
+  <string name="call_substate_avp_retry">영상 화질 확인 중\u2026</string>
   <!-- Video quality changed message -->
+  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: 영상 화질이 <xliff:g id="quality" example="high">%2$s</xliff:g>으로 변경됨</string>
   <!-- Video quality High -->
+  <string name="video_quality_high">높음</string>
   <!-- Video quality Medium -->
+  <string name="video_quality_medium">보통</string>
   <!-- Video quality Low -->
+  <string name="video_quality_low">낮음</string>
   <!-- Video quality Unknown -->
+  <string name="video_quality_unknown">알 수 없음</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">플레이어 시작</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">플레이어 중지</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
+  <string name="camera_not_ready">카메라가 준비되지 않음</string>
   <!-- Message indicating that camera is ready/available -->
+  <string name="camera_ready">카메라 준비됨</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">알 수 없는 통화 세션 이벤트</string>
   <!-- Message indicating data usage -->
+  <string name="wlan_data_usage_label">Wi-Fi 데이터 사용량: <xliff:g id="usage">%1$s</xliff:g></string>
+  <string name="lte_data_usage_label">LTE 데이터 사용량: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
+  <string name="modify_call_option_title">통화 유형 선택</string>
+  <string name="modify_call_option_vt">양방향 영상</string>
+  <string name="modify_call_option_vt_tx">비디오 전송</string>
+  <string name="modify_call_option_vt_rx">영상 수신</string>
+  <string name="modify_call_option_voice">음성만</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">배터리 부족으로 인해 통화를 수정할 수 없습니다.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+  <string name="qti_ims_transfer_num_error">번호가 설정되어 있지 않습니다. IMS 설정에서 번호를 입력하고 다시 시도하세요.</string>
+  <string name="qti_ims_transfer_request_error">통화 전송 요청에 실패했습니다.</string>
+  <string name="qti_ims_transfer_request_success">통화 전송 요청에 성공했습니다.</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">블라인드 전송</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">보증된 전송</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">컨설테이션 전송</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">영상 통화를 사용하려면 TTY 모드를 비활성화해 주세요.</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+  <string name="qti_description_target_deflect">전송</string>
+  <string name="qti_description_deflect_error">번호가 설정되어 있지 않습니다. IMS 설정에서 번호를 입력하고 다시 시도하세요.</string>
+  <string name="qti_description_deflect_service_error">착신 전환 서비스는 지원되지 않습니다.</string>
   <!-- Message indicating call failed due to handover not feasible -->
+  <string name="call_failed_ho_not_feasible">LTE에서 3G/2G로 핸드오버가 불가능하여 통화가 종료되었습니다.</string>
   <!-- Text for the onscreen "Add Participant" button -->
+  <string name="onscreenAddParticipant">참가자 추가</string>
   <!-- Title of the IMS to CS redial dialog -->
+  <string name="cs_redial_option">재다이얼 옵션</string>
   <!-- Message text of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">IMS 영상 통화에 실패했습니다. 비 IMS 음성 통화로 다시 거시겠습니까?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">사용자 요청에 의해 통화 업그레이드됨</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">상대 사용자 요청에 의해 통화 업그레이드됨</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">사용자 요청에 의해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">상대 사용자 요청에 의해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">RTP 시간 초과로 인해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">QoS로 인해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">패킷 손실로 인해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade low thrput -->
+  <string name="session_modify_cause_downgrade_low_thrput">낮은 처리량으로 인해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">과열로 인해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">립싱크로 인해 통화 다운그레이드됨</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">일반 오류로 인해 통화 다운그레이드됨</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">수신 다자간 통화</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">수신 다자간 영상 통화</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">수신 다자간 통화</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template"><xliff:g id="provider_name">%s</xliff:g>에서 걸려온 다자간 통화</string>
   <!-- Message indicating call failed due to low battery -->
+  <string name="call_failed_due_to_low_battery">배터리 부족으로 통화 실패</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">좋은 음성 품질</string>
+  <string name="vowifi_call_quality_fair">적당한 음성 품질</string>
+  <string name="vowifi_call_quality_poor">나쁜 음성 품질</string>
   <!-- Title for low battery alert dialogue -->
+  <string name="low_battery">배터리 부족 경고</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
+  <string name="low_battery_hangup_msg">통화를 끊으시겠습니까?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">배터리 수준이 15% 미만입니다. 영상 통화를 계속하시겠습니까? 아니면 음성 통화로 변환하시겠습니까?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
+  <string name="low_battery_convert">변환</string>
   <!-- International prefix source-->
   <!-- International prefix converted value-->
+  <string name="video_call">영상 통화</string>
+  <string name="video_call_cannot_upgrade">지금은 영상 통화를 받을 수 없습니다.</string>
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_menu_title">사진 모드 선택</string>
+  <string name="video_call_picture_mode_preview_video">카메라 미리보기</string>
+  <string name="video_call_picture_mode_incoming_video">수신 영상 통화</string>
+  <string name="video_call_picture_mode_cancel_option">취소</string>
+  <string name="video_call_picture_mode_save_option">저장</string>
 </resources>

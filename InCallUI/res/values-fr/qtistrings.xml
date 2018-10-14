@@ -128,6 +128,7 @@
   <string name="notification_incoming_conf_call">Réception d’un appel d\'audio-conférence</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">Appel entrant via <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Message indicating call failed due to low battery -->
   <string name="call_failed_due_to_low_battery">L\'appel a échoué car la batterie est faible</string>
   <!-- VoWifi call quality indicators -->

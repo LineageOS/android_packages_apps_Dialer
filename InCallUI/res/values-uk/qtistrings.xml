@@ -78,12 +78,17 @@
   <string name="qti_ims_transfer_request_error">Не вдалося виконати запит на установку переадресації.</string>
   <string name="qti_ims_transfer_request_success">Запит на установку переадресації виконано.</string>
   <!-- Text for the onscreen "blind transfer" button -->
+  <string name="qti_ims_onscreenBlindTransfer">Сліпа передача</string>
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">Гарантована передача</string>
   <!-- Text for the onscreen "consultative transfer" button -->
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
   <string name="qti_description_target_deflect">Відхилити</string>
+  <string name="qti_description_deflect_error">Номер не задано. Вкажіть номер у налаштуваннях IMS і повторіть спробу.</string>
+  <string name="qti_description_deflect_service_error">Служба відхилення викликів не підтримується.</string>
   <!-- Message indicating call failed due to handover not feasible -->
+  <string name="call_failed_ho_not_feasible">Виклик було завершено через невдалий перехід з мережі 4G в 2G/3G.</string>
   <!-- Text for the onscreen "Add Participant" button -->
   <string name="onscreenAddParticipant">Додати учасника</string>
   <!-- Title of the IMS to CS redial dialog -->
@@ -119,4 +124,7 @@
   <!-- International prefix source-->
   <!-- International prefix converted value-->
   <!-- Pop up menu options for picture mode -->
+  <string name="video_call_picture_mode_incoming_video">Вхідне відео</string>
+  <string name="video_call_picture_mode_cancel_option">Скасувати</string>
+  <string name="video_call_picture_mode_save_option">Зберегти</string>
 </resources>

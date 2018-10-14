@@ -72,7 +72,7 @@
   <string name="modify_call_option_vt_rx">Prejemanje videa</string>
   <string name="modify_call_option_voice">Samo glas</string>
   <!-- Modify call error cause -->
-  <string name="modify_call_failed_due_to_low_battery">Spreminjanje klica je spodletelo zaradi nizkega stanja baterije.</string>
+  <string name="modify_call_failed_due_to_low_battery">Spreminjanje klica je spodletelo zaradi nizkega stanja akumulatorja.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
   <string name="qti_ims_transfer_num_error">Številka ni nastavljena. Navedite številko prek nastavitev IMS in poskusite znova.</string>
   <string name="qti_ims_transfer_request_error">Zahteva za prenos klica je spodletela.</string>
@@ -130,17 +130,17 @@
          [CHAR LIMIT=40] -->
   <string name="incoming_conf_via_template">Dohodna konferenca prek <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Message indicating call failed due to low battery -->
-  <string name="call_failed_due_to_low_battery">Klic je spodletel zaradi nizkega stanja baterije</string>
+  <string name="call_failed_due_to_low_battery">Klic je spodletel zaradi nizkega stanja akumulatorja</string>
   <!-- VoWifi call quality indicators -->
   <string name="vowifi_call_quality_good">Dobra kakovost glasu</string>
   <string name="vowifi_call_quality_fair">Zadostna kakovost glasu</string>
   <string name="vowifi_call_quality_poor">Slaba kakovost glasu</string>
   <!-- Title for low battery alert dialogue -->
-  <string name="low_battery">Opozorilo nizkega stanje baterije</string>
+  <string name="low_battery">Opozorilo nizkega stanje akumulatorja</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <string name="low_battery_hangup_msg">Ali želite prekiniti klic?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-  <string name="low_battery_msg">Raven napolnjenosti vaše baterije je pod 15%. Želite nadaljevati z video klicem ali ga želite pretvoriti v glasovni klic?</string>
+  <string name="low_battery_msg">Raven napolnjenosti vašega akumulatorja je pod 15%. Želite nadaljevati z video klicem ali ga želite pretvoriti v glasovni klic?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
   <string name="low_battery_convert">Pretvori</string>
   <!-- International prefix source-->

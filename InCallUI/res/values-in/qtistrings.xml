@@ -52,55 +52,92 @@
   <!-- Video quality Unknown -->
   <string name="video_quality_unknown">tidak diketahui</string>
   <!-- Message indicating that Video Started flowing for IMS-VT calls -->
+  <string name="player_started">Pemutar dimulai</string>
   <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
+  <string name="player_stopped">Pemutar berhenti</string>
   <!-- Message indicating that camera failure has occurred for the selected camera and
          as result camera is not ready -->
   <string name="camera_not_ready">Kamera tidak siap</string>
   <!-- Message indicating that camera is ready/available -->
   <string name="camera_ready">Kamera siap</string>
   <!-- Message indicating unknown call session event -->
+  <string name="unknown_call_session_event">Sesi acara panggilan yang tidak diketahui</string>
   <!-- Message indicating data usage -->
   <string name="wlan_data_usage_label">Penggunaan data Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
   <string name="lte_data_usage_label">Penggunaan data LTE: <xliff:g id="usage">%1$s</xliff:g></string>
   <!-- In-call screen: Modify Call Options for IMS call -->
   <string name="modify_call_option_title">Pilih jenis panggilan</string>
+  <string name="modify_call_option_vt">Video dua arah</string>
+  <string name="modify_call_option_vt_tx">Transmisi video</string>
+  <string name="modify_call_option_vt_rx">Menerima video</string>
   <string name="modify_call_option_voice">Suara saja</string>
   <!-- Modify call error cause -->
+  <string name="modify_call_failed_due_to_low_battery">Gagal mengubah panggilan karena baterai terlalu lemah.</string>
   <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
+  <string name="qti_ims_transfer_num_error">Nomor belum diatur. Tetapkan nomor melalui pengaturan IMS dan cobalah kembali.</string>
+  <string name="qti_ims_transfer_request_error">Permintaan transfer panggilan gagal.</string>
+  <string name="qti_ims_transfer_request_success">Permintaan transfer panggilan berhasil.</string>
   <!-- Text for the onscreen "blind transfer" button -->
   <!-- Text for the onscreen "assured transfer" button -->
+  <string name="qti_ims_onscreenAssuredTransfer">Transfer terjamin</string>
   <!-- Text for the onscreen "consultative transfer" button -->
+  <string name="qti_ims_onscreenConsultativeTransfer">Transfer konsultatif</string>
   <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
+  <string name="video_call_not_allowed_if_tty_enabled">Silakan matikan modus TTY untuk meningkatkan ke panggilan video.</string>
   <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+  <string name="qti_description_target_deflect">Mengalihkan</string>
+  <string name="qti_description_deflect_error">Nomor belum diatur. Tetapkan nomor melalui pengaturan IMS dan cobalah kembali.</string>
+  <string name="qti_description_deflect_service_error">Layanan pengalihan panggilan tidak didukung.</string>
   <!-- Message indicating call failed due to handover not feasible -->
   <!-- Text for the onscreen "Add Participant" button -->
+  <string name="onscreenAddParticipant">Tambahkan peserta</string>
   <!-- Title of the IMS to CS redial dialog -->
+  <string name="cs_redial_option">Pilihan panggilan ulang</string>
   <!-- Message text of the IMS to CS redial dialog -->
+  <string name="cs_redial_msg">Tidak dapat membuat panggilan video IMS, memanggil ulang menggunakan panggilan suara non-IMS?</string>
   <!-- Session modify cause unspecified -->
   <!-- Session modify cause code upgrade local request -->
+  <string name="session_modify_cause_upgrade_local_request">Panggilan ditingkatkan atas permintaan pengguna</string>
   <!-- Session modify cause code upgrade remote request -->
+  <string name="session_modify_cause_upgrade_remote_request">Panggilan ditingkatkan atas permintaan pengguna jarak jauh</string>
   <!-- Session modify cause code downgrade local request -->
+  <string name="session_modify_cause_downgrade_local_request">Panggilan diturunkan atas permintaan pengguna</string>
   <!-- Session modify cause code downgrade remote request -->
+  <string name="session_modify_cause_downgrade_remote_request">Panggilan diturunkan atas permintaan pengguna jarak jauh</string>
   <!-- Session modify cause code downgrade rtp timeout -->
+  <string name="session_modify_cause_downgrade_rtp_timeout">Panggilan diturunkan karena batas waktu RTP</string>
   <!-- Session modify cause code downgrade qos -->
+  <string name="session_modify_cause_downgrade_qos">Panggilan diturunkan dikarenakan kualitas layanan</string>
   <!-- Session modify cause code downgrade packet loss -->
+  <string name="session_modify_cause_downgrade_packet_loss">Panggilan diturunkan dikarenakan kehilangan paket</string>
   <!-- Session modify cause code downgrade low thrput -->
   <!-- Session modify cause code downgrade thermal mitigation -->
+  <string name="session_modify_cause_downgrade_thermal_mitigation">Panggilan diturunkan dikarenakan penanggulangan panas</string>
   <!-- Session modify cause code downgrade lipsync -->
+  <string name="session_modify_cause_downgrade_lipsync">Panggilan diturunkan karena sinkronisasi bibir</string>
   <!-- Session modify cause code downgrade generic error -->
+  <string name="session_modify_cause_downgrade_generic_error">Panggilan diturunkan dikarenakan kesalahan umum</string>
   <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_conf_call">Panggilan konferensi masuk</string>
   <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
+  <string name="card_title_incoming_video_conf_call">Panggilan video konferensi masuk</string>
   <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
+  <string name="notification_incoming_conf_call">Panggilan konferensi masuk</string>
   <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
          [CHAR LIMIT=40] -->
+  <string name="incoming_conf_via_template">Konferensi msuk via <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Message indicating call failed due to low battery -->
   <string name="call_failed_due_to_low_battery">Panggilan gagal karena daya baterai lemah</string>
   <!-- VoWifi call quality indicators -->
+  <string name="vowifi_call_quality_good">Kualitas suara bagus</string>
+  <string name="vowifi_call_quality_fair">Kualitas suara sedang</string>
+  <string name="vowifi_call_quality_poor">Kualitas suara buruk</string>
   <!-- Title for low battery alert dialogue -->
   <string name="low_battery">Peringatan Baterai Lemah</string>
   <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
   <string name="low_battery_hangup_msg">Apakah anda ingin mengakhiri panggilan?</string>
   <!-- Message text of the low battery alert dialog for MO/MT video calls -->
+  <string name="low_battery_msg">Tingkat baterai Anda berada di bawah 15%. Apakah Anda ingin melanjutkan dengan panggilan video atau mengubahnya ke panggilan suara?</string>
   <!-- No option of the low battery alert dialog for MO/MT Video calls -->
   <!-- International prefix source-->
   <!-- International prefix converted value-->

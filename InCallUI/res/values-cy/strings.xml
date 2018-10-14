@@ -68,7 +68,7 @@
   <!-- Used in FakePhoneActivity test code.  DO NOT TRANSLATE. -->
   <!-- Used in FakePhoneActivity test code.  DO NOT TRANSLATE. -->
   <!-- Call settings screen, Set voicemail dialog title -->
-  <string name="voicemail_settings_number_label">Rhif llaisbost</string>
+  <string name="voicemail_settings_number_label">Rhif lleisbost</string>
   <!-- Card titles -->
   <!-- In-call screen: status label for a call in the "dialing" state [CHAR LIMIT=25] -->
   <string name="card_title_dialing">Yn deialu</string>
@@ -98,7 +98,7 @@
   <!-- In-call screen: status label when requesting video. -->
   <string name="card_title_video_call_requesting">Yn gwneud cais am fideo</string>
   <!-- In-call screen: status label when there is a problem connecting a video call. -->
-  <string name="card_title_video_call_error">Methu cysylltu\'r galwad fideo</string>
+  <string name="card_title_video_call_error">Methu â chysylltu\'r galwad fideo</string>
   <!-- In-call screen: status label when the remote party rejects a video call request. -->
   <string name="card_title_video_call_rejected">Gwrthodwyd y cais fideo</string>
   <!-- In-call screen: string shown to the user when their outgoing number is different than the
@@ -159,7 +159,7 @@
   <string name="notification_voicemail_text_format">Deialu <xliff:g id="voicemail_number">%s</xliff:g></string>
   <!-- Message displayed in the "Voicemail" notification item,
          indicating that there's no voicemail number available -->
-  <string name="notification_voicemail_no_vm_number">Dim yn gwybod rhif y llaisbost</string>
+  <string name="notification_voicemail_no_vm_number">Dim yn gwybod rhif y lleisbost</string>
   <!-- Label for the "No service" notification item, when expanded. -->
   <string name="notification_network_selection_title">Dim gwasanaeth</string>
   <!-- Label for the expanded "No service" notification item, including the
@@ -186,7 +186,7 @@
   <!-- Label for "Dismiss" notification action. This is somewhat generic, and may refer to
          scenarios such as declining an incoming call or declining a video call request.
          [CHAR LIMIT=12] -->
-  <string name="notification_action_dismiss">Gwrthod</string>
+  <string name="notification_action_dismiss">Wfftio</string>
   <!-- Message for "call back" Action, which is displayed in the missed call notification.
          The user will be able to call back to the person or the phone number.
          [CHAR LIMIT=12] -->
@@ -207,7 +207,7 @@
          [CHAR LIMIT=30] -->
   <string name="notification_transfer_call">Trosglwyddo\'r Alwad</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
-  <string name="incall_error_power_off">I wneud galwad, diffodda\'r modd awyren.</string>
+  <string name="incall_error_power_off">I wneud galwad, rhaid diffodd modd awyren.</string>
   <!-- In-call screen: call failure message displayed in an error dialog.
          This string is currently unused (see comments in InCallActivity.java.) -->
   <string name="incall_error_emergency_only">Heb gofrestru ar y rhwydwaith.</string>
@@ -216,23 +216,23 @@
   <!-- In-call screen: call failure message displayed in an error dialog -->
   <string name="incall_error_no_phone_number_supplied">I wneud galwad, rho rif dilys.</string>
   <!-- In-call screen: call failure message displayed in an error dialog -->
-  <string name="incall_error_call_failed">Methu galw.</string>
+  <string name="incall_error_call_failed">Methu â galw.</string>
   <!-- In-call screen: status message displayed in a dialog when starting an MMI -->
   <string name="incall_status_dialed_mmi">Yn dechrau rhediad MMI\u2026</string>
   <!-- In-call screen: message displayed in an error dialog -->
   <string name="incall_error_supp_service_unknown">Gwasanaeth heb ei gefnogi.</string>
   <!-- In-call screen: message displayed in an error dialog -->
-  <string name="incall_error_supp_service_switch">Methu newid rhwng galwadau.</string>
+  <string name="incall_error_supp_service_switch">Methu â newid rhwng galwadau.</string>
   <!-- In-call screen: message displayed in an error dialog -->
-  <string name="incall_error_supp_service_separate">Methu gwahanu\'r alwad.</string>
+  <string name="incall_error_supp_service_separate">Methu â gwahanu\'r alwad.</string>
   <!-- In-call screen: message displayed in an error dialog -->
-  <string name="incall_error_supp_service_transfer">Methu trosglwyddo.</string>
+  <string name="incall_error_supp_service_transfer">Methu â throsglwyddo.</string>
   <!-- In-call screen: message displayed in an error dialog -->
-  <string name="incall_error_supp_service_conference">Methu gwneud galwad grŵp</string>
+  <string name="incall_error_supp_service_conference">Methu â gwneud galwad grŵp</string>
   <!-- In-call screen: message displayed in an error dialog -->
-  <string name="incall_error_supp_service_reject">Methu gwrthod yr alwad.</string>
+  <string name="incall_error_supp_service_reject">Methu â gwrthod yr alwad.</string>
   <!-- In-call screen: message displayed in an error dialog -->
-  <string name="incall_error_supp_service_hangup">Methu rhyddhau galwad(au).</string>
+  <string name="incall_error_supp_service_hangup">Methu â rhyddhau galwad(au).</string>
   <!-- In-call screen: "call type" indication for a SIP call [CHAR LIMIT=30]  -->
   <string name="incall_call_type_label_sip">Galwad SIP</string>
   <!-- Dialog title for the "radio enable" UI for emergency calls -->
@@ -243,9 +243,9 @@
   <string name="emergency_enable_radio_dialog_retry">Dim gwasanaeth. Yn ceisio eto\u2026</string>
   <!-- Dialer text on Emergency Dialer -->
   <!-- Emergency dialer: message displayed in an error dialog -->
-  <string name="dial_emergency_error">Methu galw. Dyw <xliff:g id="non_emergency_number">%s</xliff:g> ddim yn rif argyfwng.</string>
+  <string name="dial_emergency_error">Methu â galw. Dyw <xliff:g id="non_emergency_number">%s</xliff:g> ddim yn rif argyfwng.</string>
   <!-- Emergency dialer: message displayed in an error dialog -->
-  <string name="dial_emergency_empty_error">Methu galw. Deiala rif argyfwng.</string>
+  <string name="dial_emergency_empty_error">Methu â galw. Deiala rif argyfwng.</string>
   <!-- Displayed in the text entry box in the dialer when in landscape mode to guide the user
          to dial using the physical keyboard -->
   <string name="dialerKeyboardHintText">Defnyddio bysellfwrdd i ddeialu</string>
@@ -331,7 +331,7 @@
          [CHAR LIMIT=40] -->
   <string name="incoming_via_template">Yn galw trwy <xliff:g id="provider_name">%s</xliff:g></string>
   <!-- Use this as a default to describe the contact photo; currently for screen readers through accessibility. -->
-  <string name="contactPhoto">llyn cyswllt</string>
+  <string name="contactPhoto">llun cyswllt</string>
   <!-- Use this to describe the separate conference call button; currently for screen readers through accessibility. -->
   <string name="goPrivate">mynd yn breifat</string>
   <!--  Use this to describe the select contact button in EditPhoneNumberPreference; currently for screen readers through accessibility. -->
@@ -373,13 +373,13 @@
          [CHAR LIMIT=NONE] -->
   <string name="description_target_decline_upgrade_to_video_receive_request">Gwrthod cais derbyn fideo</string>
   <!-- Description of the up direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
-  <string name="description_direction_up">Llithra i fyny i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+  <string name="description_direction_up">Llusga i fyny i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
   <!-- Description of the left direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
-  <string name="description_direction_left">Llithra i\'r chwith i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+  <string name="description_direction_left">Llusga i\'r chwith i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
   <!-- Description of the right direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
-  <string name="description_direction_right">Llithra i\'r dde i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+  <string name="description_direction_right">Llusga i\'r dde i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
   <!-- Description of the down direction in which one can to slide the handle in the phone answer screen. [CHAR LIMIT=NONE] -->
-  <string name="description_direction_down">Llithra i lawr i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+  <string name="description_direction_down">Llusga i lawr i <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
   <!-- Dialog title for the vibration settings for voicemail notifications [CHAR LIMIT=40] -->
   <string name="voicemail_notification_vibrate_when_title" msgid="8731372580674292759">Dirgrynu</string>
   <!-- Dialog title for the vibration settings for voice mail notifications [CHAR LIMIT=40]-->
@@ -396,7 +396,7 @@
   <!-- The default value value for voicemail notification. -->
   <!-- Actual values used in our code for voicemail notifications. DO NOT TRANSLATE -->
   <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
-  <string name="ringtone_title" msgid="5379026328015343686">Tôn canu\'r ffôn</string>
+  <string name="ringtone_title" msgid="5379026328015343686">Tôn caniad y ffôn</string>
   <!-- Setting option name to enable or disable vibration when ringing
          the phone.
          [CHAR LIMIT=30] -->
@@ -404,7 +404,7 @@
   <!-- Title for the category "ringtone", which is shown above ringtone and vibration
          related settings.
          [CHAR LIMIT=30] -->
-  <string name="preference_category_ringtone">Tôn Canu a Dirgrynu</string>
+  <string name="preference_category_ringtone">Tôn Caniad a Dirgrynu</string>
   <!-- Label for "Manage conference call" panel [CHAR LIMIT=40] -->
   <string name="manageConferenceLabel">Rheoli galwad grŵp</string>
   <!-- This can be used in any application wanting to disable the text "Emergency number" -->

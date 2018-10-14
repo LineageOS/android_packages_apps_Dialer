@@ -17,16 +17,16 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="hour">
-    <item quantity="one">%d ч.</item>
-    <item quantity="few">%d ч.</item>
-    <item quantity="many">%d ч.</item>
-    <item quantity="other">%d ч.</item>
+    <item quantity="one">%d ч</item>
+    <item quantity="few">%d ч</item>
+    <item quantity="many">%d ч</item>
+    <item quantity="other">%d ч</item>
   </plurals>
   <plurals name="minute">
-    <item quantity="one">%d мин.</item>
-    <item quantity="few">%d мин.</item>
-    <item quantity="many">%d мин.</item>
-    <item quantity="other">%d мин.</item>
+    <item quantity="one">%d мин</item>
+    <item quantity="few">%d мин</item>
+    <item quantity="many">%d мин</item>
+    <item quantity="other">%d мин</item>
   </plurals>
   <plurals name="second">
     <item quantity="one">%d сек.</item>
