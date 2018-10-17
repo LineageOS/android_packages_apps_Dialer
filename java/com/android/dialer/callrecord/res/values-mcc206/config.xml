@@ -14,6 +14,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Allow recording for country: Belgium-->
+<!--Legal precedent source: QRVA 50 157, Page 20199, 24/02/2003, https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
