@@ -15,13 +15,14 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Israel
-Eavesdropping law as written: https://www.nevo.co.il/law_html/law01/077_001.htm
-Mirror (same content): https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%90%D7%96%D7%A0%D7%AA_%D7%A1%D7%AA%D7%A8
-The law only disallows recording conversations where neither party is aware.
-Articles explicitly saying it's legal to record your own calls, even without the other party's awareness:
-https://www.globes.co.il/news/article.aspx?did=1001066185
-https://www.ynet.co.il/articles/0,7340,L-3043583,00.html
+<!--
+     Allow recording for country: Israel
+     Eavesdropping law as written: https://www.nevo.co.il/law_html/law01/077_001.htm
+     Mirror (same content): https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%90%D7%96%D7%A0%D7%AA_%D7%A1%D7%AA%D7%A8
+     The law only disallows recording conversations where neither party is aware.
+     Articles explicitly saying it's legal to record your own calls, even without the other party's awareness:
+     https://www.globes.co.il/news/article.aspx?did=1001066185
+     https://www.ynet.co.il/articles/0,7340,L-3043583,00.html
 -->
 
 <resources>
