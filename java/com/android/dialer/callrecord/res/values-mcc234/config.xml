@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,12 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: United Kingdom-->
-<!--Legal precedent source: http://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm -->
+<!--Enable call recording for country: United Kingdom-->
+<!--MCCs that conform to this country's legislation: 234 and 235-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm
+-->
 <resources>
 
 </resources>
