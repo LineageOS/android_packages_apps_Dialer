@@ -14,8 +14,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!--Allow recording for country: Latvia-->
-<!--Legal precedent source: Is not defined in the Criminal Law, https://likumi.lv/doc.php?id=88966, hence it is not a criminal offense. Defined as legal to record your own calls, with the intent to use as evidence, by the spokesperson of the State Police, https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.-->
-<resources>
 
+<!--Forbid recording for country: Iceland-->
+<!--Legal precedent source: According to the Electronic Communications Act (Law 81), Articles 48 and 74, https://www.government.is/Publications/Legislation/Lex/?newsid=86c9a6a9-fab5-11e7-9423-005056bc4d74-->
+<resources>
+    <bool name="call_recording_enabled">false</bool>
 </resources>
