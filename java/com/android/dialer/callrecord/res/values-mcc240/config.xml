@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Sweden-->
-<!--Legal precedent source: https://lagen.nu/begrepp/Olovlig_avlyssning -->
+<!--Enable call recording for country: Sweden-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://lagen.nu/begrepp/Olovlig_avlyssning
+-->
 <resources>
 
 </resources>
