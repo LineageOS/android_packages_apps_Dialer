@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,20 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Estonia-->
+<!--
+     Relevant laws and/or legal precedents:
+     Recording your calls for personal use is not a criminal offense. Sharing said calls with a
+     third party is a criminal offence, hence punishable by law, except in cases where said calls
+     are shared by a journalist.
+     Constitution, Paragraph 43:
+     https://www.pohiseadus.ee/index.php?sid=1&p=43
+     Instructions for call recording (GDPR equivalent):
+     https://www.aki.ee/sites/www.aki.ee/files/elfinder/article_files/Telefonik%C3%B5nede%20salvestamise%20lubatavuse%20juhend.pdf
+     Legal article:
+     https://digi.geenius.ee/rubriik/uudis/millistel-juhtudel-tohib-eestis-telefonikone-salvestada-ja-selle-sisu-avaldada/
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
