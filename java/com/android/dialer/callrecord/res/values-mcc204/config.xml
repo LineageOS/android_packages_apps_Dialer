@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Projectt
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,15 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Netherlands-->
-<!--Legal precedent source: http://blog.wetrecht.nl/telefoongesprekken-opnemen-als-bewijs-kan-dat/ -->
+<!--Enable call recording for country: Netherlands-->
+<!--MCCs that conform to this country's legislation: 204, 362 and 363-->
+<!--
+     Relevant laws and/or legal precedents:
+     Recording your own conversations without the consent of the other party is not punishable by
+     law. Sharing those recordings in itself is punishable in the form of a libel case. This is
+     permitted by Civil law, as long as the recordings are only used privately.
+     https://blog.wetrecht.nl/telefoongesprekken-opnemen-als-bewijs-kan-dat
+-->
 <resources>
 
 </resources>
