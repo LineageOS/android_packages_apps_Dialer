@@ -14,14 +14,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!--Enable call recording for country: Latvia-->
+
+<!--Disable call recording for country: Andorra-->
 <!--
      Relevant laws and/or legal precedents: 
-     Is not defined within the Criminal Law, https://likumi.lv/doc.php?id=88966, hence it is not a
-     criminal offense.
-     Defined as legal to record your own calls, with the intent to use as evidence, by the
-     spokesperson of the State Police, https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.
+     Articles 183 and 185 of the Andorran Penal Code.
+     https://sherloc.unodc.org/res/cld/document/and/2005/penal_code_of_andorra_html/Andorra_Code_Penal_Fr.pdf
 -->
 <resources>
-
+    <bool name="call_recording_enabled">false</bool>
 </resources>

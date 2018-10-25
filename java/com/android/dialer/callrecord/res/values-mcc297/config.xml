@@ -14,13 +14,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!--Enable call recording for country: Latvia-->
+
+<!--Enable call recording for country: Montenegro-->
 <!--
      Relevant laws and/or legal precedents: 
-     Is not defined within the Criminal Law, https://likumi.lv/doc.php?id=88966, hence it is not a
-     criminal offense.
-     Defined as legal to record your own calls, with the intent to use as evidence, by the
-     spokesperson of the State Police, https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.
+     Article 173 of the Criminal Code of Montenegro forbids it for third parties, with an extra 
+     exception for the prevention of crimes, which carry a minimum sentence of 5 years. 
+     http://www.pravda.gov.me/ResourceManager/FileDownload.aspx?rid=256001&rType=2&file=Krivi%C4%8Dni%20zakonik%20Crne%20Gore.pdf
 -->
 <resources>
 
