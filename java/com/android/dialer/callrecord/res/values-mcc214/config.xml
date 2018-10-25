@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Spain-->
-<!--Legal precedent source: http://www.legalisconsultores.es/2014/04/es-legal-realizar-grabacionesse-pueden-aportar-como-prueba-en-juicios/ -->
+<!--Enable call recording for country: Spain-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.legalisconsultores.es/2014/04/es-legal-realizar-grabacionesse-pueden-aportar-como-prueba-en-juicios
+-->
 <resources>
 
 </resources>

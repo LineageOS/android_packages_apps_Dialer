@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Norway-->
-<!--Legal precedent source: https://www.datatilsynet.no/verktoy-skjema/Veiledere/Lydopptak-/ -->
+<!--Enable call recording for country: Norway-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.datatilsynet.no/verktoy-skjema/Veiledere/Lydopptak-
+-->
 <resources>
 
 </resources>

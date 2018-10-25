@@ -15,8 +15,12 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Denmark-->
-<!--Legal precedent source: https://www.retsinformation.dk/Forms/r0710.aspx?id=164192#Kap27 -->
+<!--Enable call recording for country: Denmark-->
+<!--MCCs that conform to this country's legislation: 238, 288 and 290-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.retsinformation.dk/Forms/r0710.aspx?id=164192#Kap27
+-->
 <resources>
 
 </resources>
