@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,24 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: France-->
-<!--Legal precedent source: http://levesquelavoie.com/2011/11/la-legalite-de-lenregistrement-dune-conversation/-->
+<!--Enable call recording for country: France-->
+<!--MCCs that conform to this country's legislation: 208, 308, 340, 543, 547 and 647-->
+<!--
+     Relevant laws and/or legal precedents:
+     While recording calls without consent, as a third party, is punishable, it depends on whether
+     said recording was created or used with a malicious intent. Judges are free to view said
+     recordings as a form of evidence and base their final decisions with their help. Recording your
+     own calls as a private citizen is not a criminal offense. Sharing said recordings, with the
+     intent to harm the other party in any way, is a criminal offense.
+     Penal Code:
+     https://www.legifrance.gouv.fr/affichCode.do;jsessionid=3E84EAC0F63D49FC16A28B8D90EFF1D2.tplgfr44s_2?idSectionTA=LEGISCTA000006165309&cidTexte=LEGITEXT000006070719&dateTexte=20150413
+     Civil Code:
+     https://www.legifrance.gouv.fr/affichCode.do;jsessionid=1A7384A63066DBE1E1D8C732E698F844.tplgfr23s_3?idSectionTA=LEGISCTA000006117610&cidTexte=LEGITEXT000006070721&dateTexte=20190606
+     Legal article on call recordings as evidence:
+     https://www.annuaireavocats.fr/articles/enregistrer-une-conversation-a-linsu-dune-personne-est-ce-legal
+     Legal article on recording in the workplace:
+     https://www.cnil.fr/fr/lecoute-et-lenregistrement-des-appels-sur-le-lieu-de-travail
+-->
 <resources>
 
 </resources>

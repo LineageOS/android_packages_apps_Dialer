@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,15 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Finland-->
-<!--Legal precedent source: http://www.tietosuoja.fi/fi/index/ratkaisut/puheluidennauhoittaminen.html -->
+<!--Enable call recording for country: Finland-->
+<!--
+     Relevant laws and/or legal precedents:
+     As a private citizen, one may record any call they participate in. There is no requirement to
+     make other parties aware of the recording, but the use of said recordings, depending on their
+     content, may be subject to various laws, such as data protection (privacy) legislation,
+     libel laws, laws governing trade and national secrets, non-disclosure agreements and so on.
+     https://web.archive.org/web/20180517050133/http://www.tietosuoja.fi/sv/index/useinkysyttya/puheluidennauhoittaminen.html
+-->
 <resources>
 
 </resources>
