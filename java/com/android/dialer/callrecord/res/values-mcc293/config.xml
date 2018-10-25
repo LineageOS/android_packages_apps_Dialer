@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,23 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Slovenia-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 148 of the Slovenian Criminal Code covers the unlawful eavesdropping and sound
+     recording. Subarticle 1 defines a maximum punishment of no more than one year for the unlawful
+     eavesdropping or recording of a private conversation by use of special devices, or directly
+     transmitting said conversation to a third person. This also includes passing on the gist of
+     said conversation. Subarticle 2 states that recording another person's statement with the
+     intent to misuse it, without his or her consent, is punishable in the way postulated in
+     Subarticle 1. Prosecution is initiated by the aggrieved party for Subarticle 1, while under
+     Subarticle 2 it is initiated upon a private action. Based on Article 148, it is legal to record
+     one's own calls, when not done so with the intent to misuse said recordings. Sharing said
+     recordings in any way may be deemed a criminal or civil offense.
+     Criminal Code:
+     https://www.wipo.int/edocs/lexdocs/laws/en/si/si046en.pdf
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
