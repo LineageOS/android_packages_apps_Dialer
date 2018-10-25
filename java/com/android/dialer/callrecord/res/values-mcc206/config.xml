@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Belgium-->
-<!--Legal precedent source: QRVA 50 157, Page 20199, 24/02/2003, https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf-->
+<!--Enable call recording for country: Belgium-->
+<!--
+     Relevant laws and/or legal precedents:
+     QRVA 50 157, Page 20199, 24/02/2003, https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf
+-->
 <resources>
 
 </resources>
