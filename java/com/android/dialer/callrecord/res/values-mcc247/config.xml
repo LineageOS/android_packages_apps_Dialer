@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,25 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Latvia-->
+<!--
+     Relevant laws and/or legal precedents:
+     There is no clear definition of call recording by itself within the Criminal Law of Latvia.
+     Article 144 of said law covers breach of information secrecy, when said information is in the
+     form of correspondence or data relayed by way of electronic communications networks. Paragraph
+     (1) defines the punishment for 'violating the secret of a person's correspondence' as a term of
+     imprisonment for up to two years, or a fine, or others. In a 2014 e-Consultation, the Deputy
+     Head of the Public Relations Department of the State Police, Tom Sadovsky, defined the
+     recording of calls with the intent to use as evidence as legal. The Personal Data Protection
+     Law does not apply, as it considers the communication between individuals and legal entitites.
+     Latvian Criminal Law:
+     https://likumi.lv/doc.php?id=88966
+     Latvian Personal Data Protection Law:
+     https://likumi.lv/doc.php?id=4042
+     Legal consultation:
+     https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
