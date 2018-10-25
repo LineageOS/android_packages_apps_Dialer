@@ -16,7 +16,10 @@
 -->
 
 <!--Allow recording for country: Finland-->
-<!--Legal precedent source: http://www.tietosuoja.fi/fi/index/ratkaisut/puheluidennauhoittaminen.html -->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.tietosuoja.fi/fi/index/ratkaisut/puheluidennauhoittaminen.html
+-->
 <resources>
 
 </resources>
