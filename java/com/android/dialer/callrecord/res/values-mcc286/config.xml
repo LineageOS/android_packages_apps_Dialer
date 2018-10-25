@@ -14,14 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!--Enable call recording for country: Latvia-->
-<!--
-     Relevant laws and/or legal precedents: 
-     Is not defined within the Criminal Law, https://likumi.lv/doc.php?id=88966, hence it is not a
-     criminal offense.
-     Defined as legal to record your own calls, with the intent to use as evidence, by the
-     spokesperson of the State Police, https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.
+
+<!--Disable call recording for country: Turkey-->
+<!--Relevant laws and/or legal precedents:
+     According to Law 5237, the Turkish Penal Code, Articles 132, 133 and 134, http://www.wipo.int/edocs/lexdocs/laws/en/tr/tr171en.pdf
 -->
 <resources>
-
+    <bool name="call_recording_enabled">false</bool>
 </resources>
