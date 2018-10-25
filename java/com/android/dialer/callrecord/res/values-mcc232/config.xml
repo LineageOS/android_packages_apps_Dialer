@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Austria-->
-<!--Legal precedent source: § 93 TKG 2003 Kommunikationsgeheimnis, https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20002849 -->
+<!--Enable call recording for country: Austria-->
+<!--
+Relevant laws and/or legal precedents:
+§ 93 TKG 2003 Kommunikationsgeheimnis, https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20002849
+-->
 <resources>
 
 </resources>
