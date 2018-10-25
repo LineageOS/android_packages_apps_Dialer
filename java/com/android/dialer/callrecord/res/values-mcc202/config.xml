@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Greece-->
+<!--
+     Relevant laws and/or legal precedents:
+     Section 2 of Article 370A of the Greek Penal Code bans it, Sub-article 4 offers exceptions when
+     no other evidence is present. Decision 53 / 2010 of the Supreme Criminal Court limits evidence
+     submitting to third parties that found the recording 'by accident'. Decision 277/2014 of the
+     Supreme Criminal Court acquitted a guilty party and deemed the recordings admissable. Article 25
+     of the Penal Code states that, any action is not illegal if it is aimed at protecting the person’s
+     or another’s property or safety, provided the crime of sharing the recording is the lesser one.
+     Legal discussion: https://uk.practicallaw.thomsonreuters.com/w-010-1738
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
