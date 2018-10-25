@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,6 +14,96 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+-->
+
+<!--Disable call recording for country: Australia-->
+<!--
+     Relevant laws and/or legal precedents:
+     Australian Capital Territory:
+     Subsection 4(3)(b) Listening Devices Act 1992 (ACT)
+     https://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/act/consol_act/lda1992181/s4.html
+     A person must not use a listening device with the intention of recording a private conversation
+     to which the person is a party. This does not apply when said listening device is used by, or
+     on behalf of, a party to a private conversation if a principal party to the conversation
+     consents to the listening device being so used, and the recording of the conversation is
+     considered by that principal party, on reasonable grounds, to be necessary for the protection
+     of that principal party's lawful interests; or the recording is not made for the purpose of
+     communicating or publishing the conversation, or a report of the conversation, to any person
+     who is not a party to the conversation.
+     New South Wales:
+     Subsection 7(3)(b) Surveillance Devices Act 2007 (NSW)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nsw/consol_act/sda2007210/s7.html
+     A person must not knowingly use a listening device to record a private conversation to which
+     the person is a party. This does not apply when a principal party to the conversation consents
+     to the listening device being so used and the recording of the conversation is reasonably
+     necessary for the protection of the lawful interests of that principal party, or is not made
+     for the purpose of communicating or publishing the conversation, or a report of the
+     conversation, to persons who are not parties to the conversation.
+     Northern Territory:
+     Subsection 11(1)(a) Surveillance Devices Act 2007 (NT)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nt/num_act/sda200719o2007256/s11.html
+     Subsection 43, Emergency use of listening device in public interest
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nt/num_act/sda200719o2007256/s43.html
+     It is an offence to use a listening device to record a private conversation to which the person
+     is not a party and the device is used without the express or implied consent of each party to
+     the conversation. Under Section 43, a person may use a listening device to record a private
+     conversation if at the time of use there are reasonable grounds for believing the circumstances
+     are so serious and the matter is of such urgency that the use of the device is in the public
+     interest.
+     Queensland:
+     Subsection 43(2)(a) Invasion of Privacy Act 1971 (Qld)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/qld/consol_act/iopa1971222/s43.html
+     A person is guilty of an offence, if the person uses a listening device to record a private
+     conversation and is liable to a maximum penalty of 40 penalty units or imprisonment for 2
+     years. This does not apply when the person using the listening device is a party to the
+     private conversation.
+     South Australia:
+     Subsection 4(2)(a)(ii) Surveillance Devices Act 2016 (SA)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/sa/consol_act/sda2016210/s4.html
+     A person must not knowingly use a listening device to record a private conversation to which
+     the person is, or is not a party. The maximum penalty is $15 000 or imprisonment for 3 years.
+     This does not apply if the use of a listening device is done by a party to the private
+     conversation if the use of the device is reasonably necessary for the protection of the lawful
+     interests of that person.
+     Tasmania:
+     Subsection 5(3)(b) Listening Devices Act 1991 (TAS)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/tas/consol_act/lda1991181/s5.html
+     A person shall not use a listening device to record a private conversation to which the person
+     is, or is not, a party. This does not apply when the listening device is used to obtain
+     evidence or information in connection with an imminent threat of serious violence to persons or
+     of substantial damage to property, or a serious narcotics offence, if the person using the
+     listening device believes on reasonable grounds that it was necessary to use the device
+     immediately to obtain that evidence or information. This does not apply if a principal party
+     to the conversation consents to the listening device being so used and the recording of the
+     conversation is reasonably necessary for the protection of the lawful interests of that
+     principal party or the recording of the conversation is not made for the purpose of
+     communicating or publishing the conversation, or a report of the conversation, to persons who
+     are not parties to the conversation.
+     Victoria:
+     Subsection 6(1) Surveillance Devices Act 1999 (NSW)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/vic/consol_act/sda1999210/s6.html
+     A person must not knowingly use a listening device to record a private conversation to which
+     the person is not a party. The penalty is up to 2 years imprisonment and up to 240 penalty
+     units, or both.
+     Western Australia:
+     Subsection 5(3)(d) Surveillance Devices Act 1998 (WA)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/sda1998210/s5.html
+     Subsection 26(1)(2)(3)(b)
+     https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/sda1998210/s26.html
+     A person shall not use a listening device to record a conversation to which that person is, or
+     is not, a party. The penalty is $5 000 or imprisonment for 12 months, or both. This does not
+     apply to the use of a listening device by a party to a private conversation if that principal
+     party consents to its use, as reasonably necessary for the protection of the lawful interests
+     of that principal party. It is also not applicable in cases where a person who is a party to
+     a private conversation, or is acting on behalf of a party to a private conversation, uses a
+     listening device to record said private conversation, believing that the use of the listening
+     device is in the public interest.
+     Summary:
+     Most states and territories allow to make a recording of your personal conversations under
+     specific circumstances. The key exception is the State of South Australia, which does not allow
+     a party to single-handedly record their conversations. Since there is no way to distinguish
+     between the states and territories based on MCC, call recording will continue to be disabled
+     for Australia, until there are changes to the laws of the State of Victoria.
 -->
 <resources>
     <bool name="call_recording_enabled">false</bool>

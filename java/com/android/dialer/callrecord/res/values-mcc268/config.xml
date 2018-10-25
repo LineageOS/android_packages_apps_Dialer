@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,6 +14,42 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+-->
+
+<!--Disable call recording for country: Portugal-->
+<!--
+     Relevant laws and/or legal precedents:
+     Privacy is a fundamental right in Portuguese law, as it is defined in Articles 26(1) and 34 of
+     the Portuguese Constitution. Infringing on said rights constitutes a crime, as defined in
+     Articles 192(1), 194(2) and 199(1) of the Portuguese Penal Code. The punishment is imprisonment
+     for a period of up to one year or a fine equaling 240 days of pay, either of which may be
+     increased by a third, based on Article 197. Lower courts and Higher courts have been ruling
+     both for and against recording one's own calls, no matter the reason, and there have been
+     numerous cases of exceptions being made, despite what the law says. A complaint has been lodged
+     with the European Court of Human Rights, which may lead to a reversal in the current laws and
+     prohibitions. It is noteworthy that in one case, the Supreme Court rendered a decision, which
+     can be translated as such: "The protection of speech that embodies criminal practices or the
+     image that portrays them must yield to the interest of protecting the victim and the efficiency
+     of criminal justice: protection ends when what is protected is a crime."
+     Constitution:
+     https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx
+     Penal Code:
+     http://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=109A0199&nid=109&tabela=leis&pagina=1&ficha=1&nversao=
+     Examples of privacy as a fundamental right:
+     http://www.dgsi.pt/jtrg.nsf/86c25a698e4e7cb7802579ec004d3832/ab509203321d898d802579ea00576d95?OpenDocument (nonsecure)
+     http://www.dgsi.pt/jtre.nsf/134973db04f39bf2802579bf005f080b/be3732dc1664576d8025836100514c19 (nonsecure)
+     Examples of exceptions:
+     https://portal.oa.pt/comunicacao/imprensa/2017/11/12/tribunais-aprovam-videos-de-telemovel-apesar-da-legislacao/
+     http://www.dgsi.pt/jtrp.nsf/-/CC3190F093E769FC80257F69004D9E7B (nonsecure)
+     http://www.dgsi.pt/jtrl.nsf/0/44ed8c6ca2d940d580256f250052bfd8 (nonsecure)
+     Complaint to ECHR:
+     https://hudoc.echr.coe.int/eng#{%22itemid%22:[%22001-184193%22]}
+     Quoted Supreme Court Case:
+     http://www.dgsi.pt/jstj.nsf/954f0ce6ad9dd8b980256b5f003fa814/25cd7aa80cc3adb0802579260032dd4a?OpenDocument (nonsecure)
+     Legal alternatives:
+     http://www.dgsi.pt/jtrc.nsf/c3fb530030ea1c61802568d9005cd5bb/c5bb36d9a0470bdd80257b400048f9f2?OpenDocument (nonsecure)
+     http://www.dgsi.pt/jtrg.nsf/86c25a698e4e7cb7802579ec004d3832/ff947b8a3fda778780257c0000478b5a (nonsecure)
+
 -->
 <resources>
     <bool name="call_recording_enabled">false</bool>
