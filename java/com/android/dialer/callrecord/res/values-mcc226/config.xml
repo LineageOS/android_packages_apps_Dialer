@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,10 +16,13 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Romania-->
-<!--Legal precedent source: http://www.dsclex.ro/coduri/cciv2.htm
-    http://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
-    http://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php -->
+<!--Enable call recording for country: Romania-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.dsclex.ro/coduri/cciv2.htm
+     https://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
+     https://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php
+-->
 <resources>
 
 </resources>
