@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Czech Republic-->
-<!--Legal precedent source: http://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2 -->
+<!--Enable call recording for country: Czech Republic-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2
+-->
 <resources>
 
 </resources>

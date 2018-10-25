@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,22 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Croatia-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 143 of the Croatian Criminal Code, Paragraph 1 notes that the recording of another
+     person's privately uttered words is a criminal offense, when said words are not 'intended for
+     his or her attention' and could lead to imprisonment not exceeding three years. Paragraph 2,
+     which holds the same punishment, indicated that situations in which the recording, its
+     transcription or the 'gist' of said recording being shared as an equal crime. Paragraph 4
+     states that there is no criminal offence if said acts are committed in 'the public interest or
+     another interest prevailing over the interest to protect the privacy of the person being
+     recorded or eavesdropped on'. Prosecution is made per request and the state does not initiate
+     it, which renders the matter to the level of a civil case and not to that of a criminal case.
+     Croatian Criminal Code:
+     https://www.legislationline.org/documents/section/criminal-codes/country/37/Croatia/show
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

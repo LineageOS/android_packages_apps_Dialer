@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,23 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Lithuania-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 166 of the Lithuanian Criminal Code defines that violations of a person's
+     correspondence, by unlawfully wiretapping a person's conversations as a criminal offense, which
+     could lead to a term of imprisonment of up to two years, a fine or community service. The
+     wording of said article is unclear and only mentions electronic communication networks and
+     recording and/or wiretapping as a third party, and not as one of the two parties. Article 61 of
+     the Law on Electronic Communications defines confidentiality of communications, as far as
+     situations like those covered by GDPR, as in the handling of information between individuals
+     and legal entities, and should therefore not be taken into account.
+     Lithuanian Criminal Code:
+     https://e-seimas.lrs.lt/portal/legalActPrint/lt?jfwid=q8i88l10w&documentId=a84fa232877611e5bca4ce385a9b7048&category=TAD
+     Lithuanian Law on Electronic Communications:
+     https://e-seimas.lrs.lt/portal/legalActPrint/lt?jfwid=-wd7z7kkgy&documentId=05cd4e020f0a11e7b6c9f69dc4ecf19f&category=TAD
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

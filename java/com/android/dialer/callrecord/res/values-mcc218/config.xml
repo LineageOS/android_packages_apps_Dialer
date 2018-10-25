@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,34 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Bosnia and Herzegovina-->
+<!--
+     Relevant laws and/or legal precedents:
+     Republika Srpska:
+     Article 155 - Unauthorized eavesdropping and tone recording.
+     Paragraph 1 specifically states 'which is not intended for him', which in context means that a
+     person may record anything which is intended for him or her. Paragraph 2 defines the creation
+     of a record with the intent to abuse and/or misuse it, or the act of sharing it with a third
+     party as a criminal offense.
+     Other Articles that might be relevant:
+     Article 153, Privacy of letters, telegrams and others.
+     Article 157, Unauthorized use of Personal Data.
+     Federation of Bosnia and Herzegovina:
+     Article 188, Unauthorized Tapping and Sound Recording, defines the recording of any call 'which
+     is not intended for public or private knowledge', as a criminal offense.
+     Brčko District:
+     Article 185 of the Criminal Code specifically states 'which was not intended for him', which in
+     context means that a person may record anything which is indended for him or her. Wiretapping
+     is considered a crime and is criminally punishable.
+     Further information:
+     The Criminal Codes of the legal entities of Bosnia and Herzegovina, namely Republika Srpska,
+     the Federation of Bosnia and Herzegovina and the Brčko District, can all be found through the
+     link below. Please note that these three entities currently have separate laws, due to
+     administrative and/or judicial autonomy. It should be noted that these different entities have
+     over 15 unconnected police forces, each with its own jurisdiction.
+     https://www.legislationline.org/documents/section/criminal-codes/country/40/Bosnia%20and%20Herzegovina/show
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
