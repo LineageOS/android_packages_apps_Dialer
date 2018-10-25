@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,12 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Austria-->
-<!--Legal precedent source: § 93 TKG 2003 Kommunikationsgeheimnis, https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20002849 -->
+<!--Enable call recording for country: Austria-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 93, TKG 2003 Kommunikationsgeheimnis:
+     https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20002849
+-->
 <resources>
 
 </resources>
