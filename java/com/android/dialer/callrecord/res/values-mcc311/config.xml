@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Disable call recording for country: United States of America-->
+<!--MCCs that conform to this country's state legislation: 310, 311, 312, 313, 314, 316, 330-->
+<!--MCCs that conform to this country's federal legislation: 544-->
+<!--
+     Relevant laws and/or legal precedents:
+     Currently federal laws state that call recording is legal. On the other hand, each state has
+     its own laws which take priority. Most states allow call recording when one sides agrees, but
+     over 10 require both sides to agree. Since there are no unique MCC codes per state, there is no
+     way to differentiate whether the state you are currently in allows call recording. Due to this,
+     call recording is set as disabled for the United States of America and some of its territories.
+     These include Guam, Northern Mariana Islands, United States Virgin Islands and Puerto Rico.
+     Until a method for properly differentiating between states is created, or a law or precedent
+     emerges which would allow call recording to be legal everywhere, this file and its connected
+     files should remain in their current form.
+     Two-party consent state laws:
+     https://recordinglaw.com/party-two-party-consent-states/
+-->
+<resources>
+    <bool name="call_recording_enabled">false</bool>
+</resources>
