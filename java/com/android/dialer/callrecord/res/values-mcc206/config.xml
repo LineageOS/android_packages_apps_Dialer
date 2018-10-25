@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Belgium-->
-<!--Legal precedent source: QRVA 50 157, Page 20199, 24/02/2003, https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf-->
+<!--Enable call recording for country: Belgium-->
+<!--
+     Relevant laws and/or legal precedents:
+     QRVA 50 157, Page 20199, 24/02/2003, https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf
+-->
 <resources>
 
 </resources>
