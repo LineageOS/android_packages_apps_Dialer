@@ -14,6 +14,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Disable call recording for country: Portugal-->
+<!--
+     Relevant laws and/or legal precedents:
+     If empty, please fill with relevant information that explains the enabled or disabled state.
+-->
 <resources>
     <bool name="call_recording_enabled">false</bool>
 </resources>

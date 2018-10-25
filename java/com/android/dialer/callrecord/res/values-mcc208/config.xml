@@ -15,8 +15,12 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: France-->
-<!--Legal precedent source: http://levesquelavoie.com/2011/11/la-legalite-de-lenregistrement-dune-conversation/-->
+<!--Enable call recording for country: France-->
+<!--MCCs that conform to this country's legislation: 208, 308, 340, 543, 547 and 647-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://levesquelavoie.com/2011/11/la-legalite-de-lenregistrement-dune-conversation
+-->
 <resources>
 
 </resources>
