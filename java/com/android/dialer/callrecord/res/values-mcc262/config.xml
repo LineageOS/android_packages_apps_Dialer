@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +16,11 @@
      limitations under the License.
 -->
 
+<!--Disable call recording for country: Germany-->
+<!--
+     Relevant laws and/or legal precedents:
+     If empty, please fill with relevant information that explains the enabled or disabled state.
+-->
 <resources>
     <bool name="call_recording_enabled">false</bool>
 </resources>
