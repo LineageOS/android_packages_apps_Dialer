@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,10 +16,22 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Romania-->
-<!--Legal precedent source: http://www.dsclex.ro/coduri/cciv2.htm
-    http://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
-    http://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php -->
+<!--Enable call recording for country: Romania-->
+<!--
+     Relevant laws and/or legal precedents:
+     The Telecommunications Act (506/2004) states that the recording of a conversation by a party to
+     that conversation is permitted and not a criminal offense. Nevertheless, while such recordings
+     are legal, making use of them may fall subject to further civil or criminal laws. Admissibility
+     as evidence depends on how the recording was obtained.
+     Telecommunications Act:
+     http://legislatie.just.ro/Public/DetaliiDocument/56973#id_artA88_ttl
+     Civil Procedure Code:
+     https://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
+     Criminal Procedure Code:
+     https://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php
+     Legal article:
+     https://www.dsclex.ro/coduri/cciv2.htm
+-->
 <resources>
 
 </resources>
