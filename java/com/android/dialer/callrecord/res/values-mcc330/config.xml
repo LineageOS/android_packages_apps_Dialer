@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Disable call recording for country: Puerto Rico-->
+<!--
+     Relevant laws and/or legal precedents:
+     Title Thirty-three of the Penal Code, Subtitle 5, the Penal Code of 2004, Special Provisions,
+     Part I: Crimes Against the Person, Chapter 301: Crimes Against Civil Rights, Subchapter II:
+     Crimes Against the Right to Privacy, 33 L.P.R.A § 4809 defines the recording of a private
+     personal conversation, without the express authorization of all parties involved in it, as a
+     misdemeanor, which makes it a criminal offense.
+     https://advance.lexis.com/documentpage/?pdmfid=1000516&crid=b407c0a4-e82f-436f-a45e-c22585767fe9&nodeid=ABMAAFAABAAFAACAAE&nodepath=%2FROOT%2FABM%2FABMAAF%2FABMAAFAAB%2FABMAAFAABAAF%2FABMAAFAABAAFAAC%2FABMAAFAABAAFAACAAE&level=6&haschildren=&populated=false&title=%C2%A7+4809.+Recording+of+communications+by+a+participant&config=00JABkODU1MGI4OC1hMmRkLTQ2MGYtOGY1NS03YjVjOWM4YjJlZjAKAFBvZENhdGFsb2d0HiKld62itjBDGzN8H7lV&pddocfullpath=%2Fshared%2Fdocument%2Fstatutes-legislation%2Furn%3AcontentItem%3A5CFX-3331-66SD-80CP-00008-00&ecomp=-kL8kkk&prid=ef34da7d-b972-4448-af80-ade9dfde017a
+     This territory of the United States conforms with its State Laws.
+     For further information, check values-mcc310/config.xml
+-->
+<resources>
+    <bool name="call_recording_enabled">false</bool>
+</resources>
