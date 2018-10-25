@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Luxembourg-->
+<!--
+     Relevant laws and/or legal precedents:
+     The Luxembourgish Penal Code does not specifically cover the right to privacy and its
+     infringement. Based on this, it is not a criminal offense to record one's personal calls,
+     although doing so in a public manner may lead to a civil case from the aggrieved party. One
+     should consult further with a lawyer whether sharing said recording or recordings would
+     constitute a criminal offense.
+     Penal Code:
+     http://legilux.public.lu/eli/etat/leg/code/penal/20181101
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,24 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Ireland-->
+<!--
+     Relevant laws and/or legal precedents:
+     The Irish Constitution does not specifically state a right to privacy. Subsection (6) of
+     section 98  of the Interception of Postal Packets and Telecommunications Messages (Regulation)
+     Act of 1993 defines interception of a call in such a way, that deems the recording of a call by
+     one party to the call legal. Whether said call recording can be used as evidence or infringes
+     upon a person's privacy is a complicated matter that can only be decided on a case-by-case
+     basis. Subsection (2) of section 98 goes on to elabore on cases in which call recordings are
+     legal, such as in the interests of the security of the State (c), for the prevention or
+     detection of crime or for the purpose of any criminal proceedings (b) and others.
+     Interception of Postal Packets and Telecommunications Messages (Regulation) Act of 1993:
+     http://www.irishstatutebook.ie/eli/1993/act/10/enacted/en/print.html (non-secure link)
+     Legal discussions:
+     https://www.mhc.ie/latest/insights/big-brother-is-watching-but-is-he-listening-too
+     https://www.irishtimes.com/news/crime-and-law/q-a-what-are-the-legal-implications-1.1740070
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
