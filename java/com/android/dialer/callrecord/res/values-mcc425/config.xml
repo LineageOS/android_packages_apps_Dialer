@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Enable call recording for country: Israel-->
+<!--
+     Relevant laws and/or legal precedents:
+     Eavesdropping Law: https://www.nevo.co.il/law_html/law01/077_001.htm
+     Mirror (same content): https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%90%D7%96%D7%A0%D7%AA_%D7%A1%D7%AA%D7%A8
+     The law only disallows recording conversations when neither party is aware.
+     Articles explicitly saying it's legal to record your own calls, without the other party's awareness:
+     https://www.globes.co.il/news/article.aspx?did=1001066185
+     https://www.ynet.co.il/articles/0,7340,L-3043583,00.html
+-->
+ <resources>
+
+ </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,16 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Latvia-->
+<!--
+     Relevant laws and/or legal precedents:
+     No definition in the Criminal Law, hence it is not illegal.
+     https://likumi.lv/doc.php?id=88966,
+     Defined as legal to record your own calls, with the intent to use as evidence, by the
+     spokesperson of the State Police.
+     https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
