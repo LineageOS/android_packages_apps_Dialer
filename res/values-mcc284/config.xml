@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,25 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Bulgaria-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 32(2) of the Bulgarian Constitution states that it is an inviolable right for people to
+     not be followed, photographed, recorded (audio and/or video) without being notified and/or
+     despite his or her explicit disagreement to said actions, except where the law allows for said
+     actions. The Code of Criminal Procedure, Part III, Articles 125 and 126, page 34, deal with the
+     use of recordings as evidence. No law explicitly tackles the issue of consent when recording
+     one's personal telephone calls. Based on the available documentation and the attached example
+     of lack of state prosecution, recording one's own calls is not legal, nor is it a criminal
+     offense. Personal recordings are unlikely to be usable as evidence in a court of law.
+     Constitution:
+     https://www.parliament.bg/bg/const
+     Code of Criminal Procedure:
+     https://www.mvr.bg/docs/default-source/normativnauredba/3da73fed-npk-pdf.pdf
+     Example of lack of state prosecution:
+     https://goo.gl/HQPUup
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

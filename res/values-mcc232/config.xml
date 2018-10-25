@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Austria-->
+<!--
+     Relevant laws and/or legal precedents:
+     According to Article 93 (3) of Austrian Communications Law, known as TKG 2003
+     Kommunikationsgeheimnis, it is illegal to record a call or pass on information about a call,
+     unless you are one of the parties in that call. While recording is not illegal, sharing the
+     recording might be a punishable offense, without the consent of both sides.
+     Communications Law:
+     https://www.jusline.at/gesetz/tkg/paragraf/93
+     https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20002849
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

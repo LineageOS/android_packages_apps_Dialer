@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,16 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Czech Republic-->
-<!--Legal precedent source: http://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2 -->
+<!--Enable call recording for country: Czech Republic-->
+<!--
+     Relevant laws and/or legal precedents:
+     Case Law File Number 21 502/2000 of the Supreme Court specifies that even when evidence is
+     acquired or provided in contravention to legal regulations and/or personal rights, it shall not
+     be deemed as inadmissible. This, as well as other information, is accessible in the
+     Constitutional Court Finding 191/05 of the 13th of September 2006. 
+     Constitutional Court Finding:
+     https://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2
+-->
 <resources>
 
 </resources>

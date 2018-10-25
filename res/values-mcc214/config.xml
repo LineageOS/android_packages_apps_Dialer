@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,22 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Spain-->
-<!--Legal precedent source: http://www.legalisconsultores.es/2014/04/es-legal-realizar-grabacionesse-pueden-aportar-como-prueba-en-juicios/ -->
+<!--Enable call recording for country: Spain-->
+<!--
+     Relevant laws and/or legal precedents:
+     Based on the decision of the Spanish Constitutional Tribunal of November the 29th, 1984, it is
+     legal for a party to record his or her calls without notifying the other party. Sharing said
+     recording with a third party is not protected and may make the party that has shared the
+     recording liable to a civil suit, to be initiated by the aggrieved party. Unless done so for
+     judicial purposes, it is punishable to disclose or share the recording or the gist of the
+     recording to other parties.
+     Decision of the Spanish Constitutional Tribunal:
+     https://hj.tribunalconstitucional.es/eu/Resolucion/Show/367
+     Legal articles:
+     http://belegal.com/blog-by-antonio-flores/validity-of-recorded-telephone-conversations-in-spain/
+     https://www.fonvirtual.com/blog/la-grabacion-de-llamadas/
+     https://www.legalisconsultores.es/2014/04/es-legal-realizar-grabaciones-su-aportacion-en-juicios/
+-->
 <resources>
 
 </resources>
