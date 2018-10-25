@@ -14,6 +14,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Disable call recording for country: United States of America-->
+<!--MCCs that conform to this country's legislation: 310, 311, 312, 313, 314, 316-->
+<!--
+     Relevant laws and/or legal precedents:
+     If empty, please fill with relevant information that explains the enabled or disabled state.
+-->
 <resources>
     <bool name="call_recording_enabled">false</bool>
 </resources>
