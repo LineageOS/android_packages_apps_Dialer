@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--Disable call recording for country: Andorra-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 183 of the Andorran Penal Code sets a prison sentence of one to four years as the
+     punishment for attempting or succeeding to infringe on the privacy of another person without
+     his or her consent. This includes intercepting calls or using technical means to listen,
+     transmit, record or reproduce their calls. Article 185 and 188 of the Andorran Penal Code
+     describe the length of imprisonment when sharing recordings with third parties, even if one has
+     not partaken in their creation, unless the party was unaware of their illicit origin. The
+     attempt to do any of the above is also punishable by law.
+     Penal Code, as of 2014:
+     https://sherloc.unodc.org/res/cld/document/codi_penal_andorra_as_of_2014_html/Andorra_codi_penal_as_of_2014.pdf
+-->
+<resources>
+    <bool name="call_recording_enabled">false</bool>
+</resources>
