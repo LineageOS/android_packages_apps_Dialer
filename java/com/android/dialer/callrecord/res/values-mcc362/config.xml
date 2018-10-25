@@ -14,6 +14,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for countries: Sint Eustatius, Sint Maarten, Bonaire, Saba, Curaçao-->
+<!--
+     Relevant laws and/or legal precedents:
+     Conforms with Dutch legislation. See values-mcc204/config.xml
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Czech Republic-->
-<!--Legal precedent source: http://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2 -->
+<!--Enable call recording for country: Czech Republic-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2
+-->
 <resources>
 
 </resources>

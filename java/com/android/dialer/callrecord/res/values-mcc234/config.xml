@@ -15,8 +15,12 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: United Kingdom-->
-<!--Legal precedent source: http://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm -->
+<!--Enable call recording for country: United Kingdom-->
+<!--MCCs that conform to this country's legislation: 234 and 235-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm
+-->
 <resources>
 
 </resources>
