@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Italy-->
-<!--Legal precedent source: http://www.altalex.com/index.php?idnot=53369 -->
+<!--Enable call recording for country: Italy-->
+<!--
+     Relevant laws and/or legal precedents:
+     https://www.altalex.com/index.php?idnot=53369
+-->
 <resources>
 
 </resources>
