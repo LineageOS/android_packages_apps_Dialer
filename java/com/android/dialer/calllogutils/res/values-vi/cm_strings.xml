@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_log_show_all_accounts">Tất cả tài khoản</string>
-  <string name="call_log_all_calls_header">Tất cả các cuộc gọi</string>
-  <string name="call_log_blacklist_header">Chỉ các cuộc gọi bị chặn</string>
+    <string name="call_log_show_all_accounts">Tất cả tài khoản</string>
+    <string name="call_log_all_calls_header">Tất cả các cuộc gọi</string>
+    <string name="call_log_blacklist_header">Chỉ các cuộc gọi bị chặn</string>
 </resources>

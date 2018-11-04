@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">开启通话录音失败</string>
-  <string name="call_recording_file_location">通话录音已保存到 <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">通话录音</string>
-  <string name="onscreenCallRecordingText">录音中 - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">停止录音</string>
-  <string name="recording_time_text">录音中</string>
-  <string name="recording_warning_title">启用通话录音？</string>
-  <string name="recording_warning_text">注意：您有责任遵守有关通话录音以及录音使用、分发相关的任何法律、法规和规定。</string>
+    <string name="call_recording_failed_message">开启通话录音失败</string>
+    <string name="call_recording_file_location">通话录音已保存到 <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">通话录音</string>
+    <string name="onscreenCallRecordingText">录音中 - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">停止录音</string>
+    <string name="recording_time_text">录音中</string>
+    <string name="recording_warning_title">启用通话录音？</string>
+    <string name="recording_warning_text">注意：您有责任遵守有关通话录音以及录音使用、分发相关的任何法律、法规和规定。</string>
 </resources>

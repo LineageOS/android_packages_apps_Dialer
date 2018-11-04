@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">Em chamada</string>
-  <string name="incall_enable_dnd_title">Ativar o modo Não Incomodar durante as chamadas</string>
-  <string name="incall_vibrate_outgoing_title">Vibrar ao atender</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrar com chamada em espera</string>
-  <string name="incall_vibrate_hangup_title">Vibrar ao terminar a chamada</string>
-  <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
-  <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas efetuadas</string>
-  <string name="incall_dnd_dialog_message">Para poder ativar o modo Não Incomodar, a aplicação do Telefone necessita de permissões para controlar o estado do modo Não Incomodar.\nPor favor, conceda a permissão necessária.</string>
-  <string name="allow">Permitir</string>
-  <string name="deny">Negar</string>
-  <string name="call_recording_category_title">Gravação de chamada</string>
-  <string name="call_recording_format">Formato do áudio</string>
-  <string name="call_via">Chamar através de</string>
-  <string name="call_via_dialog_title">Chamar através de\u2026</string>
-  <string name="call_log_stats_title">Estatísticas</string>
+    <string name="incall_category_title">Em chamada</string>
+    <string name="incall_enable_dnd_title">Ativar o modo Não Incomodar durante as chamadas</string>
+    <string name="incall_vibrate_outgoing_title">Vibrar ao atender</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrar com chamada em espera</string>
+    <string name="incall_vibrate_hangup_title">Vibrar ao terminar a chamada</string>
+    <string name="incall_vibrate_45_title">Vibrar a cada minuto</string>
+    <string name="incall_vibrate_45_summary">Vibrar aos 45 segundos de cada minuto durante chamadas efetuadas</string>
+    <string name="incall_dnd_dialog_message">Para poder ativar o modo Não Incomodar, a aplicação do Telefone necessita de permissões para controlar o estado do modo Não Incomodar.\nPor favor, conceda a permissão necessária.</string>
+    <string name="allow">Permitir</string>
+    <string name="deny">Negar</string>
+    <string name="call_recording_category_title">Gravação de chamada</string>
+    <string name="call_recording_format">Formato do áudio</string>
+    <string name="call_via">Chamar através de</string>
+    <string name="call_via_dialog_title">Chamar através de\u2026</string>
+    <string name="call_log_stats_title">Estatísticas</string>
 </resources>

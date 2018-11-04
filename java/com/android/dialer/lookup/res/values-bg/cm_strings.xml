@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Места наблизо</string>
-  <string name="people">Хора</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Търсене на телефонен номер</string>
-  <string name="enable_forward_lookup_title">Търсене напред</string>
-  <string name="enable_forward_lookup_summary">Покажи местата в близост, при търсене в указателя</string>
-  <string name="enable_people_lookup_title">Търсене на хора</string>
-  <string name="enable_people_lookup_summary">Покажи онлайн резултати за хора, при търсене в указателя</string>
-  <string name="enable_reverse_lookup_title">Обратно търсене</string>
-  <string name="enable_reverse_lookup_summary">Търсене на информация за човек или място за непознати номера при входящи обаждания</string>
-  <string name="forward_lookup_provider_title">Доставчик на информация</string>
-  <string name="people_lookup_provider_title">Доставчик на информация за хора</string>
-  <string name="reverse_lookup_provider_title">Доставчик на информация при обратно търсене</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Търсенето може да изпраща заявки през защитен протокол (https) до отдалечени уеб сайтове, за да събира информация. Искането на другата страна може да включва телефонен номер или заявка за търсене</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Места наблизо</string>
+    <string name="people">Хора</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Търсене на телефонен номер</string>
+    <string name="enable_forward_lookup_title">Търсене напред</string>
+    <string name="enable_forward_lookup_summary">Покажи местата в близост, при търсене в указателя</string>
+    <string name="enable_people_lookup_title">Търсене на хора</string>
+    <string name="enable_people_lookup_summary">Покажи онлайн резултати за хора, при търсене в указателя</string>
+    <string name="enable_reverse_lookup_title">Обратно търсене</string>
+    <string name="enable_reverse_lookup_summary">Търсене на информация за човек или място за непознати номера при входящи обаждания</string>
+    <string name="forward_lookup_provider_title">Доставчик на информация</string>
+    <string name="people_lookup_provider_title">Доставчик на информация за хора</string>
+    <string name="reverse_lookup_provider_title">Доставчик на информация при обратно търсене</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Търсенето може да изпраща заявки през защитен протокол (https) до отдалечени уеб сайтове, за да събира информация. Искането на другата страна може да включва телефонен номер или заявка за търсене</string>
 </resources>

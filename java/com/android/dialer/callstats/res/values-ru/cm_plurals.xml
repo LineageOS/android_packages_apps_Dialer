@@ -16,28 +16,28 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 ч.</item>
-    <item quantity="few">%d ч.</item>
-    <item quantity="many">%d ч.</item>
-    <item quantity="other">%d ч.</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 мин.</item>
-    <item quantity="few">%d мин.</item>
-    <item quantity="many">%d мин.</item>
-    <item quantity="other">%d мин.</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 сек.</item>
-    <item quantity="few">%d сек.</item>
-    <item quantity="many">%d сек.</item>
-    <item quantity="other">%d сек.</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 вызов</item>
-    <item quantity="few">%d вызова</item>
-    <item quantity="many">%d вызовов</item>
-    <item quantity="other">%d вызовов</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 ч.</item>
+        <item quantity="few">%d ч.</item>
+        <item quantity="many">%d ч.</item>
+        <item quantity="other">%d ч.</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 мин.</item>
+        <item quantity="few">%d мин.</item>
+        <item quantity="many">%d мин.</item>
+        <item quantity="other">%d мин.</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 сек.</item>
+        <item quantity="few">%d сек.</item>
+        <item quantity="many">%d сек.</item>
+        <item quantity="other">%d сек.</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 вызов</item>
+        <item quantity="few">%d вызова</item>
+        <item quantity="many">%d вызовов</item>
+        <item quantity="other">%d вызовов</item>
+    </plurals>
 </resources>

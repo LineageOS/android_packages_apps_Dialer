@@ -17,9 +17,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibrate_outgoing_title">Dridhu në përgjigje</string>
-  <string name="incall_vibrate_call_waiting_title">Dridhu kur thirrja vihet në pritje</string>
-  <string name="incall_vibrate_hangup_title">Dridhu në fund të telefonatës</string>
-  <string name="incall_vibrate_45_title">Dridhu çdo minutë</string>
-  <string name="incall_vibrate_45_summary">Dridhet në sekondën e 45-të të çdo minuti gjatë një telefonate</string>
+    <string name="incall_vibrate_outgoing_title">Dridhu në përgjigje</string>
+    <string name="incall_vibrate_call_waiting_title">Dridhu kur thirrja vihet në pritje</string>
+    <string name="incall_vibrate_hangup_title">Dridhu në fund të telefonatës</string>
+    <string name="incall_vibrate_45_title">Dridhu çdo minutë</string>
+    <string name="incall_vibrate_45_summary">Dridhet në sekondën e 45-të të çdo minuti gjatë një telefonate</string>
 </resources>

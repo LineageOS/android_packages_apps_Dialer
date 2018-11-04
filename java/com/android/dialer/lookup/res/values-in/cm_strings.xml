@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Tempat terdekat</string>
-  <string name="people">Orang</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Penelusuran nomor telepon</string>
-  <string name="enable_forward_lookup_title">Penelusuran kedepan</string>
-  <string name="enable_forward_lookup_summary">Tampilkan tempat terdekat ketika mencari di dialer</string>
-  <string name="enable_people_lookup_title">Penelusuran orang</string>
-  <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
-  <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
-  <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
-  <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
-  <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
-  <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Pencarian dapat mengirimkan pertanyaan melalui protokol aman (https) ke remote website untuk mengumpulkan informasi. Kueri mungkin termasuk nomor telepon pihak lain atau kueri penelusuran</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Tempat terdekat</string>
+    <string name="people">Orang</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Penelusuran nomor telepon</string>
+    <string name="enable_forward_lookup_title">Penelusuran kedepan</string>
+    <string name="enable_forward_lookup_summary">Tampilkan tempat terdekat ketika mencari di dialer</string>
+    <string name="enable_people_lookup_title">Penelusuran orang</string>
+    <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
+    <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
+    <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
+    <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
+    <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
+    <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Pencarian dapat mengirimkan pertanyaan melalui protokol aman (https) ke remote website untuk mengumpulkan informasi. Kueri mungkin termasuk nomor telepon pihak lain atau kueri penelusuran</string>
 </resources>

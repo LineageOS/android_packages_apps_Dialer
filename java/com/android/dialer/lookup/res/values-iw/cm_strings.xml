@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">מקומות סמוכים</string>
-  <string name="people">אנשים</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">חיפוש מספר טלפון</string>
-  <string name="enable_forward_lookup_title">חיפוש מקדים</string>
-  <string name="enable_forward_lookup_summary">הצג מקומות סמוכים בעת חיפוש בחייגן</string>
-  <string name="enable_people_lookup_title">חיפוש אנשים</string>
-  <string name="enable_people_lookup_summary">הצג תוצאות מהרשת עבור אנשים בעת חיפוש בחייגן</string>
-  <string name="enable_reverse_lookup_title">חיפוש הפוך</string>
-  <string name="enable_reverse_lookup_summary">חפש מידע אודות אדם או מקום עבור מספרים לא ידועים בשיחות נכנסות</string>
-  <string name="forward_lookup_provider_title">ספק חיפוש מקדים</string>
-  <string name="people_lookup_provider_title">ספק חיפוש אנשים</string>
-  <string name="reverse_lookup_provider_title">ספק חיפוש הפוך</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">החיפוש ישלח מידע בפרוטוקול מוצפן (https) לשרת מרוחק לקבלת מידע. השאילתות יכילו את מספר הפלאפון ו\או שאילתות החיפוש</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">מקומות סמוכים</string>
+    <string name="people">אנשים</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">חיפוש מספר טלפון</string>
+    <string name="enable_forward_lookup_title">חיפוש מקדים</string>
+    <string name="enable_forward_lookup_summary">הצג מקומות סמוכים בעת חיפוש בחייגן</string>
+    <string name="enable_people_lookup_title">חיפוש אנשים</string>
+    <string name="enable_people_lookup_summary">הצג תוצאות מהרשת עבור אנשים בעת חיפוש בחייגן</string>
+    <string name="enable_reverse_lookup_title">חיפוש הפוך</string>
+    <string name="enable_reverse_lookup_summary">חפש מידע אודות אדם או מקום עבור מספרים לא ידועים בשיחות נכנסות</string>
+    <string name="forward_lookup_provider_title">ספק חיפוש מקדים</string>
+    <string name="people_lookup_provider_title">ספק חיפוש אנשים</string>
+    <string name="reverse_lookup_provider_title">ספק חיפוש הפוך</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">החיפוש ישלח מידע בפרוטוקול מוצפן (https) לשרת מרוחק לקבלת מידע. השאילתות יכילו את מספר הפלאפון ו\או שאילתות החיפוש</string>
 </resources>

@@ -16,14 +16,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Platser i närheten</string>
-  <string name="people">Personer</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Telefonnummersökning</string>
-  <string name="enable_forward_lookup_title">Platssökning</string>
-  <string name="enable_people_lookup_title">Personsökning</string>
-  <string name="forward_lookup_provider_title">Platssökningstjänst</string>
-  <string name="people_lookup_provider_title">Personsökningstjänst</string>
-  <!-- Disclaimer -->
+    <!-- Forward lookup -->
+    <string name="nearby_places">Platser i närheten</string>
+    <string name="people">Personer</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Telefonnummersökning</string>
+    <string name="enable_forward_lookup_title">Platssökning</string>
+    <string name="enable_people_lookup_title">Personsökning</string>
+    <string name="forward_lookup_provider_title">Platssökningstjänst</string>
+    <string name="people_lookup_provider_title">Personsökningstjänst</string>
+    <!-- Disclaimer -->
 </resources>

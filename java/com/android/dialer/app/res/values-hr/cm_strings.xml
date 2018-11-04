@@ -17,9 +17,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibrate_outgoing_title">Vibriraj prilikom javljanja</string>
-  <string name="incall_vibrate_call_waiting_title">Vibriraj prilikom poziva na čekanju</string>
-  <string name="incall_vibrate_hangup_title">Vibriraj prilikom prekida</string>
-  <string name="incall_vibrate_45_title">Vibriraj svake minute</string>
-  <string name="incall_vibrate_45_summary">Vibriraj kad istekne prvih 45 sekundi svake minute odlaznog poziva</string>
+    <string name="incall_vibrate_outgoing_title">Vibriraj prilikom javljanja</string>
+    <string name="incall_vibrate_call_waiting_title">Vibriraj prilikom poziva na čekanju</string>
+    <string name="incall_vibrate_hangup_title">Vibriraj prilikom prekida</string>
+    <string name="incall_vibrate_45_title">Vibriraj svake minute</string>
+    <string name="incall_vibrate_45_summary">Vibriraj kad istekne prvih 45 sekundi svake minute odlaznog poziva</string>
 </resources>

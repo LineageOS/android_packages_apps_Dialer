@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">Puhelun aikana</string>
-  <string name="incall_enable_dnd_title">Ota Älä häiritse käyttöön puheluiden aikana</string>
-  <string name="incall_vibrate_outgoing_title">Värinä vastatessa</string>
-  <string name="incall_vibrate_call_waiting_title">Värinä puhelun odottaessa</string>
-  <string name="incall_vibrate_hangup_title">Värinä puhelun loputtua</string>
-  <string name="incall_vibrate_45_title">Värinä minuutin välein</string>
-  <string name="incall_vibrate_45_summary">Värinä joka minuutti 45 sekunnin kohdalla lähtevien puheluiden aikana</string>
-  <string name="incall_dnd_dialog_message">Ottaaksesi \"Älä häiritse\" käyttöön, Puhelin-sovellukselle pitää antaa käyttöoikeus hallita Älä häiritse-tilaa.\nAnna käyttöoikeus.</string>
-  <string name="allow">Salli</string>
-  <string name="deny">Estä</string>
-  <string name="call_recording_category_title">Puhelun äänitys</string>
-  <string name="call_recording_format">Audion muoto</string>
-  <string name="call_via">Soita käyttäen</string>
-  <string name="call_via_dialog_title">Soita käyttäen\u2026</string>
-  <string name="call_log_stats_title">Tilastot</string>
+    <string name="incall_category_title">Puhelun aikana</string>
+    <string name="incall_enable_dnd_title">Ota Älä häiritse käyttöön puheluiden aikana</string>
+    <string name="incall_vibrate_outgoing_title">Värinä vastatessa</string>
+    <string name="incall_vibrate_call_waiting_title">Värinä puhelun odottaessa</string>
+    <string name="incall_vibrate_hangup_title">Värinä puhelun loputtua</string>
+    <string name="incall_vibrate_45_title">Värinä minuutin välein</string>
+    <string name="incall_vibrate_45_summary">Värinä joka minuutti 45 sekunnin kohdalla lähtevien puheluiden aikana</string>
+    <string name="incall_dnd_dialog_message">Ottaaksesi \"Älä häiritse\" käyttöön, Puhelin-sovellukselle pitää antaa käyttöoikeus hallita Älä häiritse-tilaa.\nAnna käyttöoikeus.</string>
+    <string name="allow">Salli</string>
+    <string name="deny">Estä</string>
+    <string name="call_recording_category_title">Puhelun äänitys</string>
+    <string name="call_recording_format">Audion muoto</string>
+    <string name="call_via">Soita käyttäen</string>
+    <string name="call_via_dialog_title">Soita käyttäen\u2026</string>
+    <string name="call_log_stats_title">Tilastot</string>
 </resources>

@@ -17,5 +17,31 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="call_stats_incoming">Inkomend: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Uitgaand: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Gemist: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Geblokkeerd: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totaal: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Begindatum</string>
+    <string name="call_stats_filter_to">Einddatum</string>
+    <string name="call_stats_filter_picker_title">Filterbereik</string>
+    <string name="date_quick_selection">Snelle selectie</string>
+    <string name="date_qs_currentmonth">Huidige maand</string>
+    <string name="date_qs_currentquarter">Huidig kwartaal</string>
+    <string name="date_qs_currentyear">Huidig jaar</string>
+    <string name="date_qs_lastweek">Vorige week</string>
+    <string name="date_qs_lastmonth">Vorige maand</string>
+    <string name="date_qs_lastquarter">Vorig kwartaal</string>
+    <string name="date_qs_lastyear">Vorig jaar</string>
+    <string name="call_stats_date_filter">Tijdsbestek aanpassen</string>
+    <string name="call_stats_reset_filter">Tijdsbestek herstellen</string>
+    <string name="call_stats_sort_by_duration">Sorteren op gespreksduur</string>
+    <string name="call_stats_sort_by_count">Sorteren op gespreksaantal</string>
+    <string name="call_stats_title_for_number">Dit nummer</string>
+    <string name="call_stats_title_of_total">Van in totaal</string>
+    <string name="call_stats_title_durations">Gespreksduur</string>
+    <string name="call_stats_title_count">Aantal gesprekken</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

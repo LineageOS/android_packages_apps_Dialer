@@ -16,10 +16,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="play_recordings">
-    <item quantity="one">Redă înregistrarea</item>
-    <item quantity="few">Redă înregistrările</item>
-    <item quantity="other">Redă înregistrările</item>
-  </plurals>
-  <string name="call_playback_no_app_found_toast">Nu s-a putut găsi nicio aplicație pentru redarea înregistrării selectate.</string>
+    <plurals name="play_recordings">
+        <item quantity="one">Redă înregistrarea</item>
+        <item quantity="few">Redă înregistrările</item>
+        <item quantity="other">Redă înregistrările</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Nu s-a putut găsi nicio aplicație pentru redarea înregistrării selectate.</string>
 </resources>

@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="play_recordings">
-    <item quantity="other">Phát bản ghi</item>
-  </plurals>
-  <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi đã chọn.</string>
+    <plurals name="play_recordings">
+        <item quantity="other">Phát bản ghi</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi đã chọn.</string>
 </resources>

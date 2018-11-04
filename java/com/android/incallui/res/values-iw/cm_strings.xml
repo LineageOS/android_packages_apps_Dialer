@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">התחלת הקלטת השיחה נכשלה</string>
-  <string name="call_recording_file_location">הקלטת השיחה נשמרה ב־<xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">הקלט שיחה</string>
-  <string name="onscreenCallRecordingText">מקליט שיחה – <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">הפסק להקליט</string>
-  <string name="recording_time_text">מקליט</string>
-  <string name="recording_warning_title">להפעיל הקלטת שיחה?</string>
-  <string name="recording_warning_text">לתשומת לבך: באחריותך לציית לכל חוקים, התקנות והכללים החלים על השימוש באפשרות הקלטת השיחות, על השימוש ו/או ההפצה של הקלטות אלה.</string>
+    <string name="call_recording_failed_message">התחלת הקלטת השיחה נכשלה</string>
+    <string name="call_recording_file_location">הקלטת השיחה נשמרה ב־<xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">הקלט שיחה</string>
+    <string name="onscreenCallRecordingText">מקליט שיחה – <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">הפסק להקליט</string>
+    <string name="recording_time_text">מקליט</string>
+    <string name="recording_warning_title">להפעיל הקלטת שיחה?</string>
+    <string name="recording_warning_text">לתשומת לבך: באחריותך לציית לכל חוקים, התקנות והכללים החלים על השימוש באפשרות הקלטת השיחות, על השימוש ו/או ההפצה של הקלטות אלה.</string>
 </resources>

@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">בשיחה</string>
-  <string name="incall_enable_dnd_title">הפעלת \'נא לא להפריע\' במהלך שיחה</string>
-  <string name="incall_vibrate_outgoing_title">רטוט בעת מענה</string>
-  <string name="incall_vibrate_call_waiting_title">רטוט בעת שיחה ממתינה</string>
-  <string name="incall_vibrate_hangup_title">רטוט בניתוק השיחה</string>
-  <string name="incall_vibrate_45_title">רטט כל דקה</string>
-  <string name="incall_vibrate_45_summary">רטוט בשניה ה־45 של כל דקה במהלך שיחה יוצאת</string>
-  <string name="incall_dnd_dialog_message">בשביל להפעיל \'נא לא להפריע\' יישום החייגן צריך הרשאות לשינוי מצב שקט.\nאנא אשר זאת.</string>
-  <string name="allow">אישור</string>
-  <string name="deny">ביטול</string>
-  <string name="call_recording_category_title">הקלטת שיחות</string>
-  <string name="call_recording_format">פורמט שמע</string>
-  <string name="call_via">חיוג דרך</string>
-  <string name="call_via_dialog_title">חיוג דרך\u2026</string>
-  <string name="call_log_stats_title">סטטיסטיקות</string>
+    <string name="incall_category_title">בשיחה</string>
+    <string name="incall_enable_dnd_title">הפעלת \'נא לא להפריע\' במהלך שיחה</string>
+    <string name="incall_vibrate_outgoing_title">רטוט בעת מענה</string>
+    <string name="incall_vibrate_call_waiting_title">רטוט בעת שיחה ממתינה</string>
+    <string name="incall_vibrate_hangup_title">רטוט בניתוק השיחה</string>
+    <string name="incall_vibrate_45_title">רטט כל דקה</string>
+    <string name="incall_vibrate_45_summary">רטוט בשניה ה־45 של כל דקה במהלך שיחה יוצאת</string>
+    <string name="incall_dnd_dialog_message">בשביל להפעיל \'נא לא להפריע\' יישום החייגן צריך הרשאות לשינוי מצב שקט.\nאנא אשר זאת.</string>
+    <string name="allow">אישור</string>
+    <string name="deny">ביטול</string>
+    <string name="call_recording_category_title">הקלטת שיחות</string>
+    <string name="call_recording_format">פורמט שמע</string>
+    <string name="call_via">חיוג דרך</string>
+    <string name="call_via_dialog_title">חיוג דרך\u2026</string>
+    <string name="call_log_stats_title">סטטיסטיקות</string>
 </resources>

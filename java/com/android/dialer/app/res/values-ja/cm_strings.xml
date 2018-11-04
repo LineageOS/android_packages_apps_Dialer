@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">通話中</string>
-  <string name="incall_enable_dnd_title">通話中にマナーモードを有効化</string>
-  <string name="incall_vibrate_outgoing_title">応答時に振動</string>
-  <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
-  <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
-  <string name="incall_vibrate_45_title">1分ごとに振動する</string>
-  <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
-  <string name="incall_dnd_dialog_message">マナーモードを有効化するには、電話アプリにマナーモードの状態を操作する権限を許可する必要があります。\n許可してください。</string>
-  <string name="allow">許可</string>
-  <string name="deny">拒否</string>
-  <string name="call_recording_category_title">通話の録音</string>
-  <string name="call_recording_format">音声フォーマット</string>
-  <string name="call_via">発信方法</string>
-  <string name="call_via_dialog_title">発信方法</string>
-  <string name="call_log_stats_title">統計</string>
+    <string name="incall_category_title">通話中</string>
+    <string name="incall_enable_dnd_title">通話中にマナーモードを有効化</string>
+    <string name="incall_vibrate_outgoing_title">応答時に振動</string>
+    <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
+    <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
+    <string name="incall_vibrate_45_title">1分ごとに振動する</string>
+    <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
+    <string name="incall_dnd_dialog_message">マナーモードを有効化するには、電話アプリにマナーモードの状態を操作する権限を許可する必要があります。\n許可してください。</string>
+    <string name="allow">許可</string>
+    <string name="deny">拒否</string>
+    <string name="call_recording_category_title">通話の録音</string>
+    <string name="call_recording_format">音声フォーマット</string>
+    <string name="call_via">発信方法</string>
+    <string name="call_via_dialog_title">発信方法</string>
+    <string name="call_log_stats_title">統計</string>
 </resources>

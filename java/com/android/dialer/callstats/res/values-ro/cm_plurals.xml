@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 oră</item>
-    <item quantity="few">%d (de) ore</item>
-    <item quantity="other">%d (de) ore</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 minut</item>
-    <item quantity="few">%d (de) minute</item>
-    <item quantity="other">%d (de) minute</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 secundă</item>
-    <item quantity="few">%d (de) secunde</item>
-    <item quantity="other">%d (de) secunde</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 apel</item>
-    <item quantity="few">%d (de) apeluri</item>
-    <item quantity="other">%d (de) apeluri</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 oră</item>
+        <item quantity="few">%d (de) ore</item>
+        <item quantity="other">%d (de) ore</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 minut</item>
+        <item quantity="few">%d (de) minute</item>
+        <item quantity="other">%d (de) minute</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 secundă</item>
+        <item quantity="few">%d (de) secunde</item>
+        <item quantity="other">%d (de) secunde</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 apel</item>
+        <item quantity="few">%d (de) apeluri</item>
+        <item quantity="other">%d (de) apeluri</item>
+    </plurals>
 </resources>

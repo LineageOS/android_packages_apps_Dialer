@@ -17,34 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_stats_detail_title">联系人统计信息</string>
-  <string name="call_stats_incoming">来电：<xliff:g id="value">%s</xliff:g> 次</string>
-  <string name="call_stats_outgoing">去电：<xliff:g id="value">%s</xliff:g> 次</string>
-  <string name="call_stats_missed">未接：<xliff:g id="value">%s</xliff:g> 次</string>
-  <string name="call_stats_blocked">拦截：<xliff:g id="value">%s</xliff:g> 次</string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">总计：<xliff:g id="call_count">%s</xliff:g>，<xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">总计：<xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">开始日期</string>
-  <string name="call_stats_filter_to">结束日期</string>
-  <string name="call_stats_filter_picker_title">范围过滤</string>
-  <string name="date_quick_selection">快速选择</string>
-  <string name="date_qs_currentmonth">本月</string>
-  <string name="date_qs_currentquarter">本季</string>
-  <string name="date_qs_currentyear">本年</string>
-  <string name="date_qs_lastweek">上周</string>
-  <string name="date_qs_lastmonth">上月</string>
-  <string name="date_qs_lastquarter">上季</string>
-  <string name="date_qs_lastyear">去年</string>
-  <string name="call_stats_date_filter">调整时间范围</string>
-  <string name="call_stats_reset_filter">重置时间范围</string>
-  <string name="call_stats_sort_by_duration">以通话时间排序</string>
-  <string name="call_stats_sort_by_count">以通话次数排序</string>
-  <string name="call_stats_title_for_number">此号码</string>
-  <string name="call_stats_title_of_total">总计</string>
-  <string name="call_stats_title_durations">通话时长</string>
-  <string name="call_stats_title_count">通话次数</string>
-  <string name="call_stats_title_average_duration">平均通话时长</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">您所选择的时间范围内不包含任何通话记录。</string>
+    <string name="call_stats_detail_title">联系人统计信息</string>
+    <string name="call_stats_incoming">来电：<xliff:g id="value">%s</xliff:g> 次</string>
+    <string name="call_stats_outgoing">去电：<xliff:g id="value">%s</xliff:g> 次</string>
+    <string name="call_stats_missed">未接：<xliff:g id="value">%s</xliff:g> 次</string>
+    <string name="call_stats_blocked">拦截：<xliff:g id="value">%s</xliff:g> 次</string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">总计：<xliff:g id="call_count">%s</xliff:g>，<xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">总计：<xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">开始日期</string>
+    <string name="call_stats_filter_to">结束日期</string>
+    <string name="call_stats_filter_picker_title">范围过滤</string>
+    <string name="date_quick_selection">快速选择</string>
+    <string name="date_qs_currentmonth">本月</string>
+    <string name="date_qs_currentquarter">本季</string>
+    <string name="date_qs_currentyear">本年</string>
+    <string name="date_qs_lastweek">上周</string>
+    <string name="date_qs_lastmonth">上月</string>
+    <string name="date_qs_lastquarter">上季</string>
+    <string name="date_qs_lastyear">去年</string>
+    <string name="call_stats_date_filter">调整时间范围</string>
+    <string name="call_stats_reset_filter">重置时间范围</string>
+    <string name="call_stats_sort_by_duration">以通话时间排序</string>
+    <string name="call_stats_sort_by_count">以通话次数排序</string>
+    <string name="call_stats_title_for_number">此号码</string>
+    <string name="call_stats_title_of_total">总计</string>
+    <string name="call_stats_title_durations">通话时长</string>
+    <string name="call_stats_title_count">通话次数</string>
+    <string name="call_stats_title_average_duration">平均通话时长</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">您所选择的时间范围内不包含任何通话记录。</string>
 </resources>

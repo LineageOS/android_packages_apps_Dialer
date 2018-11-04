@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="onscreenCallRecordText">Spela in samtalet</string>
-  <string name="onscreenCallRecordingText">Spelar in samtalet - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Stoppa inspelningen</string>
-  <string name="recording_time_text">Inspelning</string>
-  <string name="recording_warning_title">Aktivera samtalsinspelning?</string>
+    <string name="onscreenCallRecordText">Spela in samtalet</string>
+    <string name="onscreenCallRecordingText">Spelar in samtalet - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Stoppa inspelningen</string>
+    <string name="recording_time_text">Inspelning</string>
+    <string name="recording_warning_title">Aktivera samtalsinspelning?</string>
 </resources>

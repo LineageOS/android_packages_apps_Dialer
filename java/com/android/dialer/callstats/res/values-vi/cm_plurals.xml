@@ -16,16 +16,16 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="other">%d giờ</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="other">%d phút</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="other">%d giây</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="other">%d cuộc gọi</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="other">%d giờ</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="other">%d phút</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="other">%d giây</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="other">%d cuộc gọi</item>
+    </plurals>
 </resources>

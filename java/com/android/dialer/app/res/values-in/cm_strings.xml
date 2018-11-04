@@ -17,15 +17,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_enable_dnd_title">Aktifkan Jangan Ganggu selama panggilan</string>
-  <string name="incall_vibrate_outgoing_title">Bergetar saat menjawab</string>
-  <string name="incall_vibrate_call_waiting_title">Bergetar saat panggilan tunggu</string>
-  <string name="incall_vibrate_hangup_title">Bergetar saat tutup telepon</string>
-  <string name="incall_vibrate_45_title">Bergetar setiap menit</string>
-  <string name="incall_vibrate_45_summary">Bergetar pada detik ke-45 menandai tiap menit selama panggilan keluar</string>
-  <string name="allow">Izinkan</string>
-  <string name="deny">Tolak</string>
-  <string name="call_recording_category_title">Rekaman panggilan</string>
-  <string name="call_recording_format">Format audio</string>
-  <string name="call_log_stats_title">Statistik</string>
+    <string name="incall_enable_dnd_title">Aktifkan Jangan Ganggu selama panggilan</string>
+    <string name="incall_vibrate_outgoing_title">Bergetar saat menjawab</string>
+    <string name="incall_vibrate_call_waiting_title">Bergetar saat panggilan tunggu</string>
+    <string name="incall_vibrate_hangup_title">Bergetar saat tutup telepon</string>
+    <string name="incall_vibrate_45_title">Bergetar setiap menit</string>
+    <string name="incall_vibrate_45_summary">Bergetar pada detik ke-45 menandai tiap menit selama panggilan keluar</string>
+    <string name="allow">Izinkan</string>
+    <string name="deny">Tolak</string>
+    <string name="call_recording_category_title">Rekaman panggilan</string>
+    <string name="call_recording_format">Format audio</string>
+    <string name="call_log_stats_title">Statistik</string>
 </resources>

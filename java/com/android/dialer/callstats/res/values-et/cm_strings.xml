@@ -17,5 +17,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

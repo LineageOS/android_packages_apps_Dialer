@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">Αποτυχία έναρξης της καταγραφής κλήσης</string>
-  <string name="call_recording_file_location">Η εγγραφή αποθηκεύτηκε στο <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">Καταγραφή κλήσης</string>
-  <string name="onscreenCallRecordingText">Καταγραφή κλήσης - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Διακοπή καταγραφής</string>
-  <string name="recording_time_text">Γίνεται καταγραφή</string>
-  <string name="recording_warning_title">Ενεργοποίηση καταγραφής κλήσεων;</string>
-  <string name="recording_warning_text">Προσοχή: Είστε υπεύθυνοι για τη συμμόρφωση με οποιουσδήποτε νόμους, κανονισμούς και κανόνες που ισχύουν για τη χρήση της λειτουργίας καταγραφής κλήσεων και τη χρήση ή διανομή των καταγραφών αυτών.</string>
+    <string name="call_recording_failed_message">Αποτυχία έναρξης της καταγραφής κλήσης</string>
+    <string name="call_recording_file_location">Η εγγραφή αποθηκεύτηκε στο <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Καταγραφή κλήσης</string>
+    <string name="onscreenCallRecordingText">Καταγραφή κλήσης - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Διακοπή καταγραφής</string>
+    <string name="recording_time_text">Γίνεται καταγραφή</string>
+    <string name="recording_warning_title">Ενεργοποίηση καταγραφής κλήσεων;</string>
+    <string name="recording_warning_text">Προσοχή: Είστε υπεύθυνοι για τη συμμόρφωση με οποιουσδήποτε νόμους, κανονισμούς και κανόνες που ισχύουν για τη χρήση της λειτουργίας καταγραφής κλήσεων και τη χρήση ή διανομή των καταγραφών αυτών.</string>
 </resources>

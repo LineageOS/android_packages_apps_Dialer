@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">No s\'ha pogut començar l\'enregistrament de la trucada</string>
-  <string name="call_recording_file_location">La trucada enregistrada s\'ha desat a <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">Enregistra la trucada</string>
-  <string name="onscreenCallRecordingText">Enregistrament de trucada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Aturar l\'enregistrament</string>
-  <string name="recording_time_text">S\'està enregistrant</string>
-  <string name="recording_warning_title">Voleu activar l\'enregistrament de trucades?</string>
-  <string name="recording_warning_text">Avís: Sou el responsable del compliment de les lleis, reglaments i regles que s\'apliquen a l\'ús de la funcionalitat d\'enregistrament de trucades i l\'ús o distribució d\'aquests enregistraments.</string>
+    <string name="call_recording_failed_message">No s\'ha pogut començar l\'enregistrament de la trucada</string>
+    <string name="call_recording_file_location">La trucada enregistrada s\'ha desat a <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Enregistra la trucada</string>
+    <string name="onscreenCallRecordingText">Enregistrament de trucada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Aturar l\'enregistrament</string>
+    <string name="recording_time_text">S\'està enregistrant</string>
+    <string name="recording_warning_title">Voleu activar l\'enregistrament de trucades?</string>
+    <string name="recording_warning_text">Avís: Sou el responsable del compliment de les lleis, reglaments i regles que s\'apliquen a l\'ús de la funcionalitat d\'enregistrament de trucades i l\'ús o distribució d\'aquests enregistraments.</string>
 </resources>

@@ -17,34 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_stats_detail_title">Podrobné statistiky kontaktu</string>
-  <string name="call_stats_incoming">Příchozí: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Odchozí: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Blokované: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Celkem: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Celkem: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Datum zahájení</string>
-  <string name="call_stats_filter_to">Datum ukončení</string>
-  <string name="call_stats_filter_picker_title">Rozsah hodnot filtru</string>
-  <string name="date_quick_selection">Rychlý výběr</string>
-  <string name="date_qs_currentmonth">Aktuální měsíc</string>
-  <string name="date_qs_currentquarter">Aktuální čtvrtletí</string>
-  <string name="date_qs_currentyear">Aktuální rok</string>
-  <string name="date_qs_lastweek">Poslední týden</string>
-  <string name="date_qs_lastmonth">Poslední měsíc</string>
-  <string name="date_qs_lastquarter">Poslední čtvrtletí</string>
-  <string name="date_qs_lastyear">Poslední rok</string>
-  <string name="call_stats_date_filter">Změnit časový rozsah</string>
-  <string name="call_stats_reset_filter">Obnovit časový rozsah</string>
-  <string name="call_stats_sort_by_duration">Řadit podle délky hovoru</string>
-  <string name="call_stats_sort_by_count">Řadit podle počtu hovorů</string>
-  <string name="call_stats_title_for_number">Toto číslo</string>
-  <string name="call_stats_title_of_total">Z celkových</string>
-  <string name="call_stats_title_durations">Délky hovorů</string>
-  <string name="call_stats_title_count">Počet hovorů</string>
-  <string name="call_stats_title_average_duration">Průměrná délka hovoru</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Seznam hovorů neobsahuje v daném časovém úseku žádná data.</string>
+    <string name="call_stats_detail_title">Podrobné statistiky kontaktu</string>
+    <string name="call_stats_incoming">Příchozí: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Odchozí: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokované: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Celkem: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Celkem: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Datum zahájení</string>
+    <string name="call_stats_filter_to">Datum ukončení</string>
+    <string name="call_stats_filter_picker_title">Rozsah hodnot filtru</string>
+    <string name="date_quick_selection">Rychlý výběr</string>
+    <string name="date_qs_currentmonth">Aktuální měsíc</string>
+    <string name="date_qs_currentquarter">Aktuální čtvrtletí</string>
+    <string name="date_qs_currentyear">Aktuální rok</string>
+    <string name="date_qs_lastweek">Poslední týden</string>
+    <string name="date_qs_lastmonth">Poslední měsíc</string>
+    <string name="date_qs_lastquarter">Poslední čtvrtletí</string>
+    <string name="date_qs_lastyear">Poslední rok</string>
+    <string name="call_stats_date_filter">Změnit časový rozsah</string>
+    <string name="call_stats_reset_filter">Obnovit časový rozsah</string>
+    <string name="call_stats_sort_by_duration">Řadit podle délky hovoru</string>
+    <string name="call_stats_sort_by_count">Řadit podle počtu hovorů</string>
+    <string name="call_stats_title_for_number">Toto číslo</string>
+    <string name="call_stats_title_of_total">Z celkových</string>
+    <string name="call_stats_title_durations">Délky hovorů</string>
+    <string name="call_stats_title_count">Počet hovorů</string>
+    <string name="call_stats_title_average_duration">Průměrná délka hovoru</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">Seznam hovorů neobsahuje v daném časovém úseku žádná data.</string>
 </resources>

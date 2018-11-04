@@ -16,8 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="call">
-    <item quantity="one">1 samtal</item>
-    <item quantity="other">%d samtal</item>
-  </plurals>
+    <plurals name="call">
+        <item quantity="one">1 samtal</item>
+        <item quantity="other">%d samtal</item>
+    </plurals>
 </resources>

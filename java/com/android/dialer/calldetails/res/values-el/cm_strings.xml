@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="play_recordings">
-    <item quantity="one">Αναπαραγωγή καταγραφής</item>
-    <item quantity="other">Αναπαραγωγή καταγραφών</item>
-  </plurals>
-  <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
+    <plurals name="play_recordings">
+        <item quantity="one">Αναπαραγωγή καταγραφής</item>
+        <item quantity="other">Αναπαραγωγή καταγραφών</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
 </resources>

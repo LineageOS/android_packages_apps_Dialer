@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">Во время вызова</string>
-  <string name="incall_enable_dnd_title">Включать режим \"Не беспокоить\" во время вызова</string>
-  <string name="incall_vibrate_outgoing_title">Вибрировать при ответе</string>
-  <string name="incall_vibrate_call_waiting_title">Вибрировать при ожидании</string>
-  <string name="incall_vibrate_hangup_title">Вибрировать при разъединении</string>
-  <string name="incall_vibrate_45_title">Вибрировать каждую минуту</string>
-  <string name="incall_vibrate_45_summary">Вибрировать на 45-ой секунде каждой минуты во время исходящих вызовов</string>
-  <string name="incall_dnd_dialog_message">Для включения режима \"Не беспокоить\" приложению \"Телефон\" должно быть разрешено управление статусом режима «Не беспокоить».\nПожалуйста, предоставьте разрешение.</string>
-  <string name="allow">Разрешить</string>
-  <string name="deny">Отклонить</string>
-  <string name="call_recording_category_title">Запись вызова</string>
-  <string name="call_recording_format">Формат аудио</string>
-  <string name="call_via">Позвонить через</string>
-  <string name="call_via_dialog_title">Позвонить через\u2026</string>
-  <string name="call_log_stats_title">Статистика</string>
+    <string name="incall_category_title">Во время вызова</string>
+    <string name="incall_enable_dnd_title">Включать режим \"Не беспокоить\" во время вызова</string>
+    <string name="incall_vibrate_outgoing_title">Вибрировать при ответе</string>
+    <string name="incall_vibrate_call_waiting_title">Вибрировать при ожидании</string>
+    <string name="incall_vibrate_hangup_title">Вибрировать при разъединении</string>
+    <string name="incall_vibrate_45_title">Вибрировать каждую минуту</string>
+    <string name="incall_vibrate_45_summary">Вибрировать на 45-ой секунде каждой минуты во время исходящих вызовов</string>
+    <string name="incall_dnd_dialog_message">Для включения режима \"Не беспокоить\" приложению \"Телефон\" должно быть разрешено управление статусом режима «Не беспокоить».\nПожалуйста, предоставьте разрешение.</string>
+    <string name="allow">Разрешить</string>
+    <string name="deny">Отклонить</string>
+    <string name="call_recording_category_title">Запись вызова</string>
+    <string name="call_recording_format">Формат аудио</string>
+    <string name="call_via">Позвонить через</string>
+    <string name="call_via_dialog_title">Позвонить через\u2026</string>
+    <string name="call_log_stats_title">Статистика</string>
 </resources>

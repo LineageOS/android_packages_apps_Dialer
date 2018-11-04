@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="play_recordings">
-    <item quantity="one">Play recording</item>
-    <item quantity="other">Play recordings</item>
-  </plurals>
-  <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
+    <plurals name="play_recordings">
+        <item quantity="one">Play recording</item>
+        <item quantity="other">Play recordings</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">No app could be found for playback of the selected recording.</string>
 </resources>

@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">Deietan</string>
-  <string name="incall_enable_dnd_title">Gaitu \'ez molestatu\' deietan</string>
-  <string name="incall_vibrate_outgoing_title">Bibratu erantzutean</string>
-  <string name="incall_vibrate_call_waiting_title">Bibratu deia zai dagoenean</string>
-  <string name="incall_vibrate_hangup_title">Bibratu esekitzean</string>
-  <string name="incall_vibrate_45_title">Bibratu minuturo</string>
-  <string name="incall_vibrate_45_summary">Egindako deitan minutuero 45. segundoan bibratzen du</string>
-  <string name="incall_dnd_dialog_message">\'Ez molestatu\' gaitzeko, telefono aplikazioak \'Ez molestatu\' egoera kudeatzeko baimena behar du.\nBaimendu ezazu mesedez.</string>
-  <string name="allow">Baimendu</string>
-  <string name="deny">Ukatu</string>
-  <string name="call_recording_category_title">Dei grabaketa</string>
-  <string name="call_recording_format">Audio formatua</string>
-  <string name="call_via">Deitu honen bidez</string>
-  <string name="call_via_dialog_title">Deitu honen bidez\u2026</string>
-  <string name="call_log_stats_title">Estatistikak</string>
+    <string name="incall_category_title">Deietan</string>
+    <string name="incall_enable_dnd_title">Gaitu \'ez molestatu\' deietan</string>
+    <string name="incall_vibrate_outgoing_title">Bibratu erantzutean</string>
+    <string name="incall_vibrate_call_waiting_title">Bibratu deia zai dagoenean</string>
+    <string name="incall_vibrate_hangup_title">Bibratu esekitzean</string>
+    <string name="incall_vibrate_45_title">Bibratu minuturo</string>
+    <string name="incall_vibrate_45_summary">Egindako deitan minutuero 45. segundoan bibratzen du</string>
+    <string name="incall_dnd_dialog_message">\'Ez molestatu\' gaitzeko, telefono aplikazioak \'Ez molestatu\' egoera kudeatzeko baimena behar du.\nBaimendu ezazu mesedez.</string>
+    <string name="allow">Baimendu</string>
+    <string name="deny">Ukatu</string>
+    <string name="call_recording_category_title">Dei grabaketa</string>
+    <string name="call_recording_format">Audio formatua</string>
+    <string name="call_via">Deitu honen bidez</string>
+    <string name="call_via_dialog_title">Deitu honen bidez\u2026</string>
+    <string name="call_log_stats_title">Estatistikak</string>
 </resources>

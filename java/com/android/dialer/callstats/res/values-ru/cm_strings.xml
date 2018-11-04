@@ -17,34 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_stats_detail_title">Сведения о статистике контакта</string>
-  <string name="call_stats_incoming">Входящих: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Исходящих: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Пропущенных: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Заблокированных: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Дата начала</string>
-  <string name="call_stats_filter_to">Дата окончания</string>
-  <string name="call_stats_filter_picker_title">Диапазон выбора</string>
-  <string name="date_quick_selection">Быстрый выбор</string>
-  <string name="date_qs_currentmonth">Текущий месяц</string>
-  <string name="date_qs_currentquarter">Текущий квартал</string>
-  <string name="date_qs_currentyear">Текущий год</string>
-  <string name="date_qs_lastweek">Прошлая неделя</string>
-  <string name="date_qs_lastmonth">Прошлый месяц</string>
-  <string name="date_qs_lastquarter">Прошлый квартал</string>
-  <string name="date_qs_lastyear">Прошлый год</string>
-  <string name="call_stats_date_filter">Диапазон времени</string>
-  <string name="call_stats_reset_filter">Сбросить фильтр</string>
-  <string name="call_stats_sort_by_duration">Сорт. по длительности</string>
-  <string name="call_stats_sort_by_count">Сорт. по количеству</string>
-  <string name="call_stats_title_for_number">Этот номер</string>
-  <string name="call_stats_title_of_total">От общего числа</string>
-  <string name="call_stats_title_durations">Длительность вызовов</string>
-  <string name="call_stats_title_count">Количество вызовов</string>
-  <string name="call_stats_title_average_duration">Средняя продолж. разговора</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">В журнале вызовов нет записей за указанный период времени.</string>
+    <string name="call_stats_detail_title">Сведения о статистике контакта</string>
+    <string name="call_stats_incoming">Входящих: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Исходящих: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Пропущенных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Заблокированных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Дата начала</string>
+    <string name="call_stats_filter_to">Дата окончания</string>
+    <string name="call_stats_filter_picker_title">Диапазон выбора</string>
+    <string name="date_quick_selection">Быстрый выбор</string>
+    <string name="date_qs_currentmonth">Текущий месяц</string>
+    <string name="date_qs_currentquarter">Текущий квартал</string>
+    <string name="date_qs_currentyear">Текущий год</string>
+    <string name="date_qs_lastweek">Прошлая неделя</string>
+    <string name="date_qs_lastmonth">Прошлый месяц</string>
+    <string name="date_qs_lastquarter">Прошлый квартал</string>
+    <string name="date_qs_lastyear">Прошлый год</string>
+    <string name="call_stats_date_filter">Диапазон времени</string>
+    <string name="call_stats_reset_filter">Сбросить фильтр</string>
+    <string name="call_stats_sort_by_duration">Сорт. по длительности</string>
+    <string name="call_stats_sort_by_count">Сорт. по количеству</string>
+    <string name="call_stats_title_for_number">Этот номер</string>
+    <string name="call_stats_title_of_total">От общего числа</string>
+    <string name="call_stats_title_durations">Длительность вызовов</string>
+    <string name="call_stats_title_count">Количество вызовов</string>
+    <string name="call_stats_title_average_duration">Средняя продолж. разговора</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">В журнале вызовов нет записей за указанный период времени.</string>
 </resources>

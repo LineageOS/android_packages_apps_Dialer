@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Locații în apropiere</string>
-  <string name="people">Persoane</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Căutare număr de telefon</string>
-  <string name="enable_forward_lookup_title">Căutare redirecționată</string>
-  <string name="enable_forward_lookup_summary">Arată locațiile din apropiere când se caută în telefon</string>
-  <string name="enable_people_lookup_title">Căutare persoane</string>
-  <string name="enable_people_lookup_summary">Arată rezultatele online pentru persoane când caut în telefon</string>
-  <string name="enable_reverse_lookup_title">Căutare inversă</string>
-  <string name="enable_reverse_lookup_summary">Caută informații despre persoană sau locație pentru numerele necunoscute la primirea apelurilor</string>
-  <string name="forward_lookup_provider_title">Furnizor de căutare redirecționată</string>
-  <string name="people_lookup_provider_title">Furnizor de căutare a persoanelor</string>
-  <string name="reverse_lookup_provider_title">Furnizor de căutare inversă</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Căutările pot trimite interogări peste un protocol securizat (https) la site-uri web de la distanță pentru a colecta informaţii. Interogarea poate include numărul de telefon al celeilalte părţi sau interogarea căutării</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Locații în apropiere</string>
+    <string name="people">Persoane</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Căutare număr de telefon</string>
+    <string name="enable_forward_lookup_title">Căutare redirecționată</string>
+    <string name="enable_forward_lookup_summary">Arată locațiile din apropiere când se caută în telefon</string>
+    <string name="enable_people_lookup_title">Căutare persoane</string>
+    <string name="enable_people_lookup_summary">Arată rezultatele online pentru persoane când caut în telefon</string>
+    <string name="enable_reverse_lookup_title">Căutare inversă</string>
+    <string name="enable_reverse_lookup_summary">Caută informații despre persoană sau locație pentru numerele necunoscute la primirea apelurilor</string>
+    <string name="forward_lookup_provider_title">Furnizor de căutare redirecționată</string>
+    <string name="people_lookup_provider_title">Furnizor de căutare a persoanelor</string>
+    <string name="reverse_lookup_provider_title">Furnizor de căutare inversă</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Căutările pot trimite interogări peste un protocol securizat (https) la site-uri web de la distanță pentru a colecta informaţii. Interogarea poate include numărul de telefon al celeilalte părţi sau interogarea căutării</string>
 </resources>

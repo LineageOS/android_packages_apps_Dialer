@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">Falha ao iniciar a gravação da chamada</string>
-  <string name="call_recording_file_location">A gravação da chamada foi guardada em <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">Gravar chamada</string>
-  <string name="onscreenCallRecordingText">A gravar a chamada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Parar de gravar</string>
-  <string name="recording_time_text">A gravar</string>
-  <string name="recording_warning_title">Ativar a gravação de chamadas?</string>
-  <string name="recording_warning_text">Aviso: Você é responsável pela conformidade com quaisquer leis, regulamentos e regras que se apliquem ao uso da funcionalidade e à utilização ou distribuição dessas gravações de chamadas.</string>
+    <string name="call_recording_failed_message">Falha ao iniciar a gravação da chamada</string>
+    <string name="call_recording_file_location">A gravação da chamada foi guardada em <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Gravar chamada</string>
+    <string name="onscreenCallRecordingText">A gravar a chamada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Parar de gravar</string>
+    <string name="recording_time_text">A gravar</string>
+    <string name="recording_warning_title">Ativar a gravação de chamadas?</string>
+    <string name="recording_warning_text">Aviso: Você é responsável pela conformidade com quaisquer leis, regulamentos e regras que se apliquem ao uso da funcionalidade e à utilização ou distribuição dessas gravações de chamadas.</string>
 </resources>

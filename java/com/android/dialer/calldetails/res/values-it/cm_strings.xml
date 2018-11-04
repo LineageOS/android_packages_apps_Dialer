@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="play_recordings">
-    <item quantity="one">Riproduci registrazione</item>
-    <item quantity="other">Riproduci registrazioni</item>
-  </plurals>
-  <string name="call_playback_no_app_found_toast">Nessun\'app trovata per ascoltare la registrazione selezionata.</string>
+    <plurals name="play_recordings">
+        <item quantity="one">Riproduci registrazione</item>
+        <item quantity="other">Riproduci registrazioni</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Nessun\'app trovata per ascoltare la registrazione selezionata.</string>
 </resources>

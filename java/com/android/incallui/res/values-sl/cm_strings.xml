@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">Začetek snemanja klica je spodletel</string>
-  <string name="call_recording_file_location">Posnetek klica shranjen v <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">Snemaj klic</string>
-  <string name="onscreenCallRecordingText">Snemanje klica - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Ustavi snemanje</string>
-  <string name="recording_time_text">Snemanje</string>
-  <string name="recording_warning_title">Omogoči snemanje klicev?</string>
-  <string name="recording_warning_text">Obvestilo: Odgovorni ste za skladnost z zakoni, predpisi in pravili, ki veljajo za uporabo funkcionalnosti snemanja klicev in uporabo ali distribucijo teh posnetkov.</string>
+    <string name="call_recording_failed_message">Začetek snemanja klica je spodletel</string>
+    <string name="call_recording_file_location">Posnetek klica shranjen v <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Snemaj klic</string>
+    <string name="onscreenCallRecordingText">Snemanje klica - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Ustavi snemanje</string>
+    <string name="recording_time_text">Snemanje</string>
+    <string name="recording_warning_title">Omogoči snemanje klicev?</string>
+    <string name="recording_warning_text">Obvestilo: Odgovorni ste za skladnost z zakoni, predpisi in pravili, ki veljajo za uporabo funkcionalnosti snemanja klicev in uporabo ali distribucijo teh posnetkov.</string>
 </resources>

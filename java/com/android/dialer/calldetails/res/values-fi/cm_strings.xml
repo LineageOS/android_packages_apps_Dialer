@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="play_recordings">
-    <item quantity="one">Toista nauhoitus</item>
-    <item quantity="other">Toista nauhoitukset</item>
-  </plurals>
-  <string name="call_playback_no_app_found_toast">Sovellusta jolla voi toistaa valitun tallenteen ei ole asennettu.</string>
+    <plurals name="play_recordings">
+        <item quantity="one">Toista nauhoitus</item>
+        <item quantity="other">Toista nauhoitukset</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Sovellusta jolla voi toistaa valitun tallenteen ei ole asennettu.</string>
 </resources>

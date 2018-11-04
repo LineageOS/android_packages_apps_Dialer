@@ -17,34 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_stats_detail_title">Kontaktuaren estatistiken xehetasunak</string>
-  <string name="call_stats_incoming">Jasoak: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Eginak: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Galduak: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Blokeatuak: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent">%% <xliff:g id="percent">%d</xliff:g></string>
-  <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Guztira: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Hasiera data</string>
-  <string name="call_stats_filter_to">Amaiera data</string>
-  <string name="call_stats_filter_picker_title">Iragazkiaren barrutia</string>
-  <string name="date_quick_selection">Hautapen azkarra</string>
-  <string name="date_qs_currentmonth">Uneko hilabetea</string>
-  <string name="date_qs_currentquarter">Uneko hiruhilabetea</string>
-  <string name="date_qs_currentyear">Uneko urtea</string>
-  <string name="date_qs_lastweek">Azken astea</string>
-  <string name="date_qs_lastmonth">Azken hilabetea</string>
-  <string name="date_qs_lastquarter">Azken hiruhilabetea</string>
-  <string name="date_qs_lastyear">Azken urtea</string>
-  <string name="call_stats_date_filter">Doitu denbora barrutia</string>
-  <string name="call_stats_reset_filter">Leheneratu denbora barrutia</string>
-  <string name="call_stats_sort_by_duration">Ordenatu deiaren iraupenaren arabera</string>
-  <string name="call_stats_sort_by_count">Ordenatu dei kopuruaren arabera</string>
-  <string name="call_stats_title_for_number">Zenbaki hau</string>
-  <string name="call_stats_title_of_total">Guztira</string>
-  <string name="call_stats_title_durations">Deien iraupenak</string>
-  <string name="call_stats_title_count">Dei kopurua</string>
-  <string name="call_stats_title_average_duration">Batezbesteko dei iraupena</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Zure deien egunkariak ez du deirik aukeratutako denbora tartean.</string>
+    <string name="call_stats_detail_title">Kontaktuaren estatistiken xehetasunak</string>
+    <string name="call_stats_incoming">Jasoak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Eginak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Galduak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokeatuak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent">%% <xliff:g id="percent">%d</xliff:g></string>
+    <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Guztira: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Hasiera data</string>
+    <string name="call_stats_filter_to">Amaiera data</string>
+    <string name="call_stats_filter_picker_title">Iragazkiaren barrutia</string>
+    <string name="date_quick_selection">Hautapen azkarra</string>
+    <string name="date_qs_currentmonth">Uneko hilabetea</string>
+    <string name="date_qs_currentquarter">Uneko hiruhilabetea</string>
+    <string name="date_qs_currentyear">Uneko urtea</string>
+    <string name="date_qs_lastweek">Azken astea</string>
+    <string name="date_qs_lastmonth">Azken hilabetea</string>
+    <string name="date_qs_lastquarter">Azken hiruhilabetea</string>
+    <string name="date_qs_lastyear">Azken urtea</string>
+    <string name="call_stats_date_filter">Doitu denbora barrutia</string>
+    <string name="call_stats_reset_filter">Leheneratu denbora barrutia</string>
+    <string name="call_stats_sort_by_duration">Ordenatu deiaren iraupenaren arabera</string>
+    <string name="call_stats_sort_by_count">Ordenatu dei kopuruaren arabera</string>
+    <string name="call_stats_title_for_number">Zenbaki hau</string>
+    <string name="call_stats_title_of_total">Guztira</string>
+    <string name="call_stats_title_durations">Deien iraupenak</string>
+    <string name="call_stats_title_count">Dei kopurua</string>
+    <string name="call_stats_title_average_duration">Batezbesteko dei iraupena</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">Zure deien egunkariak ez du deirik aukeratutako denbora tartean.</string>
 </resources>

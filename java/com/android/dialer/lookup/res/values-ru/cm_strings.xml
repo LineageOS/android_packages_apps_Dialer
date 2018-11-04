@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Места рядом</string>
-  <string name="people">Люди</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Поиск номеров телефона</string>
-  <string name="enable_forward_lookup_title">Прямой поиск</string>
-  <string name="enable_forward_lookup_summary">Показывать ближайшие организации при поиске в номеронабирателе</string>
-  <string name="enable_people_lookup_title">Поиск контактов</string>
-  <string name="enable_people_lookup_summary">Показывать результаты из сети при поиске людей через номеронабиратель</string>
-  <string name="enable_reverse_lookup_title">Обратный поиск</string>
-  <string name="enable_reverse_lookup_summary">Поиск информации о человеке или месте для входящих с неизвестных номеров</string>
-  <string name="forward_lookup_provider_title">Провайдер прямого поиска</string>
-  <string name="people_lookup_provider_title">Провайдер поиска данных о людях</string>
-  <string name="reverse_lookup_provider_title">Провайдер обратного поиска</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Для сбора информации поисковые запросы могут передаваться на удаленные веб-сайты по защищенному протоколу (https). Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Места рядом</string>
+    <string name="people">Люди</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Поиск номеров телефона</string>
+    <string name="enable_forward_lookup_title">Прямой поиск</string>
+    <string name="enable_forward_lookup_summary">Показывать ближайшие организации при поиске в номеронабирателе</string>
+    <string name="enable_people_lookup_title">Поиск контактов</string>
+    <string name="enable_people_lookup_summary">Показывать результаты из сети при поиске людей через номеронабиратель</string>
+    <string name="enable_reverse_lookup_title">Обратный поиск</string>
+    <string name="enable_reverse_lookup_summary">Поиск информации о человеке или месте для входящих с неизвестных номеров</string>
+    <string name="forward_lookup_provider_title">Провайдер прямого поиска</string>
+    <string name="people_lookup_provider_title">Провайдер поиска данных о людях</string>
+    <string name="reverse_lookup_provider_title">Провайдер обратного поиска</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Для сбора информации поисковые запросы могут передаваться на удаленные веб-сайты по защищенному протоколу (https). Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
 </resources>

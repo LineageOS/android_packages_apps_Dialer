@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_log_show_all_accounts">Kaikki tilit</string>
-  <string name="call_log_all_calls_header">Kaikki puhelut</string>
-  <string name="call_log_blacklist_header">Vain estetyt soittajat</string>
+    <string name="call_log_show_all_accounts">Kaikki tilit</string>
+    <string name="call_log_all_calls_header">Kaikki puhelut</string>
+    <string name="call_log_blacklist_header">Vain estetyt soittajat</string>
 </resources>

@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Κοντινές τοποθεσίες</string>
-  <string name="people">Άτομα</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
-  <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
-  <string name="enable_forward_lookup_summary">Εμφάνιση κοντινών τοποθεσιών κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
-  <string name="enable_people_lookup_title">Αναζήτηση ατόμων</string>
-  <string name="enable_people_lookup_summary">Εμφάνιση online αποτελεσμάτων για τα άτομα κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
-  <string name="enable_reverse_lookup_title">Αντίστροφη αναζήτηση</string>
-  <string name="enable_reverse_lookup_summary">Αναζήτηση πληροφοριών σχετικά με το άτομο ή την τοποθεσία για άγνωστους αριθμούς στις εισερχόμενες κλήσεις</string>
-  <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
-  <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
-  <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Οι αναζητήσεις ενδέχεται να στέλνουν ερωτήματα μέσω ενός ασφαλούς πρωτοκόλλου (https) σε απομακρυσμένους ιστότοπους για τη συλλογή πληροφοριών. Το ερώτημα ενδέχεται να περιλαμβάνει τον αριθμό τηλεφώνου του άλλου μέρους ή το ερώτημα αναζήτησης</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Κοντινές τοποθεσίες</string>
+    <string name="people">Άτομα</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
+    <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
+    <string name="enable_forward_lookup_summary">Εμφάνιση κοντινών τοποθεσιών κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
+    <string name="enable_people_lookup_title">Αναζήτηση ατόμων</string>
+    <string name="enable_people_lookup_summary">Εμφάνιση online αποτελεσμάτων για τα άτομα κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
+    <string name="enable_reverse_lookup_title">Αντίστροφη αναζήτηση</string>
+    <string name="enable_reverse_lookup_summary">Αναζήτηση πληροφοριών σχετικά με το άτομο ή την τοποθεσία για άγνωστους αριθμούς στις εισερχόμενες κλήσεις</string>
+    <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
+    <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
+    <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Οι αναζητήσεις ενδέχεται να στέλνουν ερωτήματα μέσω ενός ασφαλούς πρωτοκόλλου (https) σε απομακρυσμένους ιστότοπους για τη συλλογή πληροφοριών. Το ερώτημα ενδέχεται να περιλαμβάνει τον αριθμό τηλεφώνου του άλλου μέρους ή το ερώτημα αναζήτησης</string>
 </resources>

@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">Puhelun nauhoitus epäonnistui</string>
-  <string name="call_recording_file_location">Puhelu tallennettu nimellä <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">Aloita nauhoitus</string>
-  <string name="onscreenCallRecordingText">Nauhoitetaan puhelua - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Lopeta tallennus</string>
-  <string name="recording_time_text">Nauhoitetaan</string>
-  <string name="recording_warning_title">Ota puheluiden nauhoitus käyttöön?</string>
-  <string name="recording_warning_text">Huomautus: Olet vastuussa lakien, asetuksien ja sääntöjen noudattamisesta, jotka koskevat puheluiden nauhoittamista ja näiden nauhoitteiden käytöstä ja jakelusta.</string>
+    <string name="call_recording_failed_message">Puhelun nauhoitus epäonnistui</string>
+    <string name="call_recording_file_location">Puhelu tallennettu nimellä <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Aloita nauhoitus</string>
+    <string name="onscreenCallRecordingText">Nauhoitetaan puhelua - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Lopeta tallennus</string>
+    <string name="recording_time_text">Nauhoitetaan</string>
+    <string name="recording_warning_title">Ota puheluiden nauhoitus käyttöön?</string>
+    <string name="recording_warning_text">Huomautus: Olet vastuussa lakien, asetuksien ja sääntöjen noudattamisesta, jotka koskevat puheluiden nauhoittamista ja näiden nauhoitteiden käytöstä ja jakelusta.</string>
 </resources>

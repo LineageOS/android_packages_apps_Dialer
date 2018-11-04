@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Miejsca w pobliżu</string>
-  <string name="people">Ludzie</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Wyszukiwanie numeru telefonu</string>
-  <string name="enable_forward_lookup_title">Wyszukiwanie do przodu</string>
-  <string name="enable_forward_lookup_summary">Pokaż miejsca w pobliżu podczas wyszukiwania w dialerze</string>
-  <string name="enable_people_lookup_title">Wyszukiwanie osób</string>
-  <string name="enable_people_lookup_summary">Pokaż wyniki online dla osób podczas wyszukiwania w dialerze</string>
-  <string name="enable_reverse_lookup_title">Wyszukiwanie wstecz</string>
-  <string name="enable_reverse_lookup_summary">Wyszukaj informacje o osobie lub miejscu dla nieznanych numerów połączeń przychodzących</string>
-  <string name="forward_lookup_provider_title">Dostawca wyszukiwania w przód</string>
-  <string name="people_lookup_provider_title">Dostawca wyszukiwania osób</string>
-  <string name="reverse_lookup_provider_title">Dostawca wyszukiwania wstecz</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Wyszukiwania mogą wysyłać zapytania za pomocą protokołu bezpiecznego (https) do zdalnych stron internetowych w celu zbierania informacji. Zapytanie może zawierać numer telefonu lub zapytania wyszukiwania rozmówcy</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Miejsca w pobliżu</string>
+    <string name="people">Ludzie</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Wyszukiwanie numeru telefonu</string>
+    <string name="enable_forward_lookup_title">Wyszukiwanie do przodu</string>
+    <string name="enable_forward_lookup_summary">Pokaż miejsca w pobliżu podczas wyszukiwania w dialerze</string>
+    <string name="enable_people_lookup_title">Wyszukiwanie osób</string>
+    <string name="enable_people_lookup_summary">Pokaż wyniki online dla osób podczas wyszukiwania w dialerze</string>
+    <string name="enable_reverse_lookup_title">Wyszukiwanie wstecz</string>
+    <string name="enable_reverse_lookup_summary">Wyszukaj informacje o osobie lub miejscu dla nieznanych numerów połączeń przychodzących</string>
+    <string name="forward_lookup_provider_title">Dostawca wyszukiwania w przód</string>
+    <string name="people_lookup_provider_title">Dostawca wyszukiwania osób</string>
+    <string name="reverse_lookup_provider_title">Dostawca wyszukiwania wstecz</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Wyszukiwania mogą wysyłać zapytania za pomocą protokołu bezpiecznego (https) do zdalnych stron internetowych w celu zbierania informacji. Zapytanie może zawierać numer telefonu lub zapytania wyszukiwania rozmówcy</string>
 </resources>

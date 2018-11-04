@@ -17,19 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">Počas hovoru</string>
-  <string name="incall_enable_dnd_title">Povoliť režim Nerušiť počas hovoru</string>
-  <string name="incall_vibrate_outgoing_title">Vibrovať po prijatí</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrovať pri čakajúcom hovore</string>
-  <string name="incall_vibrate_hangup_title">Vibrovať po zavesení</string>
-  <string name="incall_vibrate_45_title">Vibrovať každú minútu</string>
-  <string name="incall_vibrate_45_summary">Vibrovať každú 45. sekundu pri odchádzajúcom hovore</string>
-  <string name="incall_dnd_dialog_message">Ak chcete povoliť režim Nerušiť, musí byť telefónnej aplikácii udelené oprávnenie na ovládanie stavu režimu Nerušiť.\nPovoľte to.</string>
-  <string name="allow">Povoliť</string>
-  <string name="deny">Zakázať</string>
-  <string name="call_recording_category_title">Nahrávanie hovorov</string>
-  <string name="call_recording_format">Formát zvuku</string>
-  <string name="call_via">Volať prostredníctvom</string>
-  <string name="call_via_dialog_title">Volať prostredníctvom\u2026</string>
-  <string name="call_log_stats_title">Štatistiky</string>
+    <string name="incall_category_title">Počas hovoru</string>
+    <string name="incall_enable_dnd_title">Povoliť režim Nerušiť počas hovoru</string>
+    <string name="incall_vibrate_outgoing_title">Vibrovať po prijatí</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrovať pri čakajúcom hovore</string>
+    <string name="incall_vibrate_hangup_title">Vibrovať po zavesení</string>
+    <string name="incall_vibrate_45_title">Vibrovať každú minútu</string>
+    <string name="incall_vibrate_45_summary">Vibrovať každú 45. sekundu pri odchádzajúcom hovore</string>
+    <string name="incall_dnd_dialog_message">Ak chcete povoliť režim Nerušiť, musí byť telefónnej aplikácii udelené oprávnenie na ovládanie stavu režimu Nerušiť.\nPovoľte to.</string>
+    <string name="allow">Povoliť</string>
+    <string name="deny">Zakázať</string>
+    <string name="call_recording_category_title">Nahrávanie hovorov</string>
+    <string name="call_recording_format">Formát zvuku</string>
+    <string name="call_via">Volať prostredníctvom</string>
+    <string name="call_via_dialog_title">Volať prostredníctvom\u2026</string>
+    <string name="call_log_stats_title">Štatistiky</string>
 </resources>

@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Lugares próximos</string>
-  <string name="people">Xente</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Busca de número de teléfono</string>
-  <string name="enable_forward_lookup_title">Busca directa</string>
-  <string name="enable_forward_lookup_summary">Amosar lugares próximos ao buscar no dial</string>
-  <string name="enable_people_lookup_title">Procura de persoas</string>
-  <string name="enable_people_lookup_summary">Amosar os resultados da Internet de persoas relacionadas ao procurar no marcador</string>
-  <string name="enable_reverse_lookup_title">Porcura inversa</string>
-  <string name="enable_reverse_lookup_summary">Procurar información sobre persoas ou lugares para números descoñecidos nas chamadas entrantes</string>
-  <string name="forward_lookup_provider_title">Fornecedor de busca avanzada</string>
-  <string name="people_lookup_provider_title">Fornecedor de busca de persoas</string>
-  <string name="reverse_lookup_provider_title">Fornecedor de busca inversa</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">As buscas poden enviar consultas a través dun protocolo seguro (https) a sitios web remotos para recompilar información. A consulta pode incluír o número de teléfono da outra parte ou a consulta de busca</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Lugares próximos</string>
+    <string name="people">Xente</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Busca de número de teléfono</string>
+    <string name="enable_forward_lookup_title">Busca directa</string>
+    <string name="enable_forward_lookup_summary">Amosar lugares próximos ao buscar no dial</string>
+    <string name="enable_people_lookup_title">Procura de persoas</string>
+    <string name="enable_people_lookup_summary">Amosar os resultados da Internet de persoas relacionadas ao procurar no marcador</string>
+    <string name="enable_reverse_lookup_title">Porcura inversa</string>
+    <string name="enable_reverse_lookup_summary">Procurar información sobre persoas ou lugares para números descoñecidos nas chamadas entrantes</string>
+    <string name="forward_lookup_provider_title">Fornecedor de busca avanzada</string>
+    <string name="people_lookup_provider_title">Fornecedor de busca de persoas</string>
+    <string name="reverse_lookup_provider_title">Fornecedor de busca inversa</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">As buscas poden enviar consultas a través dun protocolo seguro (https) a sitios web remotos para recompilar información. A consulta pode incluír o número de teléfono da outra parte ou a consulta de busca</string>
 </resources>

@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">통화 녹음을 시작하지 못했습니다.</string>
-  <string name="call_recording_file_location"><xliff:g id="filename">%s</xliff:g> 파일로 통화 녹음을 저장했습니다.</string>
-  <string name="onscreenCallRecordText">통화 녹음</string>
-  <string name="onscreenCallRecordingText">통화 녹음 - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">녹음 중지</string>
-  <string name="recording_time_text">녹음 중</string>
-  <string name="recording_warning_title">통화 녹음을 사용하시겠습니까?</string>
-  <string name="recording_warning_text">주의 사항: 통화 녹음 기능의 사용과 녹음된 파일의 사용 및 배포에 적용되는 모든 법, 규정 및 규칙을 준수해야 합니다.</string>
+    <string name="call_recording_failed_message">통화 녹음을 시작하지 못했습니다.</string>
+    <string name="call_recording_file_location"><xliff:g id="filename">%s</xliff:g> 파일로 통화 녹음을 저장했습니다.</string>
+    <string name="onscreenCallRecordText">통화 녹음</string>
+    <string name="onscreenCallRecordingText">통화 녹음 - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">녹음 중지</string>
+    <string name="recording_time_text">녹음 중</string>
+    <string name="recording_warning_title">통화 녹음을 사용하시겠습니까?</string>
+    <string name="recording_warning_text">주의 사항: 통화 녹음 기능의 사용과 녹음된 파일의 사용 및 배포에 적용되는 모든 법, 규정 및 규칙을 준수해야 합니다.</string>
 </resources>

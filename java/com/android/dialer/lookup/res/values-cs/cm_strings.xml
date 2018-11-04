@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Blízká místa</string>
-  <string name="people">Lidé</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Vyhledávání telefonního čísla</string>
-  <string name="enable_forward_lookup_title">Předběžné vyhledávání</string>
-  <string name="enable_forward_lookup_summary">Zobrazit blízká místa při vyhledávání v číselníku</string>
-  <string name="enable_people_lookup_title">Vyhledávání lidí</string>
-  <string name="enable_people_lookup_summary">Zobrazit výsledky lidí online při vyhledávání v číselníku</string>
-  <string name="enable_reverse_lookup_title">Zpětné vyhledávání</string>
-  <string name="enable_reverse_lookup_summary">Vyhledávání informací o osobě nebo místě pro neznámá čísla při příchozím hovoru</string>
-  <string name="forward_lookup_provider_title">Poskytovatel předběžného vyhledávání</string>
-  <string name="people_lookup_provider_title">Poskytovatel vyhledávání osob</string>
-  <string name="reverse_lookup_provider_title">Poskytovatel zpětného vyhledávání</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Vyhledávání může odesílat dotazy přes zabezpečený protokol (https) na vzdálené webové stránky pro získání informací. Dotaz může obsahovat telefonní číslo druhé strany nebo vyhledávací dotaz</string>
+    <!-- Forward lookup -->
+    <string name="nearby_places">Blízká místa</string>
+    <string name="people">Lidé</string>
+    <!-- Number lookup -->
+    <string name="lookup_settings_label">Vyhledávání telefonního čísla</string>
+    <string name="enable_forward_lookup_title">Předběžné vyhledávání</string>
+    <string name="enable_forward_lookup_summary">Zobrazit blízká místa při vyhledávání v číselníku</string>
+    <string name="enable_people_lookup_title">Vyhledávání lidí</string>
+    <string name="enable_people_lookup_summary">Zobrazit výsledky lidí online při vyhledávání v číselníku</string>
+    <string name="enable_reverse_lookup_title">Zpětné vyhledávání</string>
+    <string name="enable_reverse_lookup_summary">Vyhledávání informací o osobě nebo místě pro neznámá čísla při příchozím hovoru</string>
+    <string name="forward_lookup_provider_title">Poskytovatel předběžného vyhledávání</string>
+    <string name="people_lookup_provider_title">Poskytovatel vyhledávání osob</string>
+    <string name="reverse_lookup_provider_title">Poskytovatel zpětného vyhledávání</string>
+    <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Vyhledávání může odesílat dotazy přes zabezpečený protokol (https) na vzdálené webové stránky pro získání informací. Dotaz může obsahovat telefonní číslo druhé strany nebo vyhledávací dotaz</string>
 </resources>

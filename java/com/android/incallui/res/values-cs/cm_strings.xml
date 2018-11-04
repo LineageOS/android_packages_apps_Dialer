@@ -16,12 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_recording_failed_message">Selhalo spuštění pořízení záznamu</string>
-  <string name="call_recording_file_location">Hovor uložen do <xliff:g id="filename">%s</xliff:g></string>
-  <string name="onscreenCallRecordText">Nahrát hovor</string>
-  <string name="onscreenCallRecordingText">Nahrávání hovoru - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
-  <string name="onscreenStopCallRecordText">Zastavit nahrávání</string>
-  <string name="recording_time_text">Nahrávání</string>
-  <string name="recording_warning_title">Povolit nahrávání hovoru?</string>
-  <string name="recording_warning_text">Poznámka: Jste zodpovědní za dodržování zákonů, předpisů a pravidel, které se vztahují k použití funkce nahrávání nebo distribuce těchto nahrávek.</string>
+    <string name="call_recording_failed_message">Selhalo spuštění pořízení záznamu</string>
+    <string name="call_recording_file_location">Hovor uložen do <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Nahrát hovor</string>
+    <string name="onscreenCallRecordingText">Nahrávání hovoru - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Zastavit nahrávání</string>
+    <string name="recording_time_text">Nahrávání</string>
+    <string name="recording_warning_title">Povolit nahrávání hovoru?</string>
+    <string name="recording_warning_text">Poznámka: Jste zodpovědní za dodržování zákonů, předpisů a pravidel, které se vztahují k použití funkce nahrávání nebo distribuce těchto nahrávek.</string>
 </resources>

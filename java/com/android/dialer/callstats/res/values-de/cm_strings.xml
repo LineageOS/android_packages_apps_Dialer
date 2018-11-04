@@ -17,34 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_stats_detail_title">Details zur Kontaktstatistik</string>
-  <string name="call_stats_incoming">Eingehend: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Ausgehend: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Verpasst: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Blockiert: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g> %%</string>
-  <string name="call_stats_header_total">Gesamt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Gesamt: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Startdatum</string>
-  <string name="call_stats_filter_to">Enddatum</string>
-  <string name="call_stats_filter_picker_title">Filterbereich</string>
-  <string name="date_quick_selection">Schnellauswahl</string>
-  <string name="date_qs_currentmonth">Aktueller Monat</string>
-  <string name="date_qs_currentquarter">Aktuelles Quartal</string>
-  <string name="date_qs_currentyear">Aktuelles Jahr</string>
-  <string name="date_qs_lastweek">Letzte Woche</string>
-  <string name="date_qs_lastmonth">Letzter Monat</string>
-  <string name="date_qs_lastquarter">Letztes Quartal</string>
-  <string name="date_qs_lastyear">Letztes Jahr</string>
-  <string name="call_stats_date_filter">Zeitraum anpassen</string>
-  <string name="call_stats_reset_filter">Zeitraum zurücksetzen</string>
-  <string name="call_stats_sort_by_duration">Nach Anrufdauer sortieren</string>
-  <string name="call_stats_sort_by_count">Nach Anrufanzahl sortieren</string>
-  <string name="call_stats_title_for_number">Diese Nummer</string>
-  <string name="call_stats_title_of_total">Von insgesamt</string>
-  <string name="call_stats_title_durations">Gesprächsdauer</string>
-  <string name="call_stats_title_count">Gesprächsanzahl</string>
-  <string name="call_stats_title_average_duration">Durchschnittliche Gesprächsdauer</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Das Anrufprotokoll enthält keine Anrufe im ausgewählten Zeitraum.</string>
+    <string name="call_stats_detail_title">Details zur Kontaktstatistik</string>
+    <string name="call_stats_incoming">Eingehend: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Ausgehend: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Verpasst: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blockiert: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g> %%</string>
+    <string name="call_stats_header_total">Gesamt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Gesamt: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Startdatum</string>
+    <string name="call_stats_filter_to">Enddatum</string>
+    <string name="call_stats_filter_picker_title">Filterbereich</string>
+    <string name="date_quick_selection">Schnellauswahl</string>
+    <string name="date_qs_currentmonth">Aktueller Monat</string>
+    <string name="date_qs_currentquarter">Aktuelles Quartal</string>
+    <string name="date_qs_currentyear">Aktuelles Jahr</string>
+    <string name="date_qs_lastweek">Letzte Woche</string>
+    <string name="date_qs_lastmonth">Letzter Monat</string>
+    <string name="date_qs_lastquarter">Letztes Quartal</string>
+    <string name="date_qs_lastyear">Letztes Jahr</string>
+    <string name="call_stats_date_filter">Zeitraum anpassen</string>
+    <string name="call_stats_reset_filter">Zeitraum zurücksetzen</string>
+    <string name="call_stats_sort_by_duration">Nach Anrufdauer sortieren</string>
+    <string name="call_stats_sort_by_count">Nach Anrufanzahl sortieren</string>
+    <string name="call_stats_title_for_number">Diese Nummer</string>
+    <string name="call_stats_title_of_total">Von insgesamt</string>
+    <string name="call_stats_title_durations">Gesprächsdauer</string>
+    <string name="call_stats_title_count">Gesprächsanzahl</string>
+    <string name="call_stats_title_average_duration">Durchschnittliche Gesprächsdauer</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">Das Anrufprotokoll enthält keine Anrufe im ausgewählten Zeitraum.</string>
 </resources>

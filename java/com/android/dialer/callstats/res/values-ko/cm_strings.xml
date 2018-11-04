@@ -17,34 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="call_stats_detail_title">연락처 통계 세부 정보</string>
-  <string name="call_stats_incoming">수신: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">발신: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">부재중: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">차단됨: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">합계: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">합계: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">시작 날짜</string>
-  <string name="call_stats_filter_to">끝 날짜</string>
-  <string name="call_stats_filter_picker_title">필터 범위</string>
-  <string name="date_quick_selection">빠른 선택</string>
-  <string name="date_qs_currentmonth">이번 달</string>
-  <string name="date_qs_currentquarter">이번 분기</string>
-  <string name="date_qs_currentyear">올해</string>
-  <string name="date_qs_lastweek">지난 주</string>
-  <string name="date_qs_lastmonth">지난 달</string>
-  <string name="date_qs_lastquarter">지난 분기</string>
-  <string name="date_qs_lastyear">지난 해</string>
-  <string name="call_stats_date_filter">시간 범위 조정</string>
-  <string name="call_stats_reset_filter">시간 범위 초기화</string>
-  <string name="call_stats_sort_by_duration">통화 시간으로 정렬</string>
-  <string name="call_stats_sort_by_count">통화 횟수로 정렬</string>
-  <string name="call_stats_title_for_number">이 번호는</string>
-  <string name="call_stats_title_of_total">총</string>
-  <string name="call_stats_title_durations">통화 시간</string>
-  <string name="call_stats_title_count">통화 횟수</string>
-  <string name="call_stats_title_average_duration">평균 통화 시간</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">선택된 시간 범위에 존재하는 통화 내역이 없습니다.</string>
+    <string name="call_stats_detail_title">연락처 통계 세부 정보</string>
+    <string name="call_stats_incoming">수신: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">발신: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">부재중: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">차단됨: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">합계: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">합계: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">시작 날짜</string>
+    <string name="call_stats_filter_to">끝 날짜</string>
+    <string name="call_stats_filter_picker_title">필터 범위</string>
+    <string name="date_quick_selection">빠른 선택</string>
+    <string name="date_qs_currentmonth">이번 달</string>
+    <string name="date_qs_currentquarter">이번 분기</string>
+    <string name="date_qs_currentyear">올해</string>
+    <string name="date_qs_lastweek">지난 주</string>
+    <string name="date_qs_lastmonth">지난 달</string>
+    <string name="date_qs_lastquarter">지난 분기</string>
+    <string name="date_qs_lastyear">지난 해</string>
+    <string name="call_stats_date_filter">시간 범위 조정</string>
+    <string name="call_stats_reset_filter">시간 범위 초기화</string>
+    <string name="call_stats_sort_by_duration">통화 시간으로 정렬</string>
+    <string name="call_stats_sort_by_count">통화 횟수로 정렬</string>
+    <string name="call_stats_title_for_number">이 번호는</string>
+    <string name="call_stats_title_of_total">총</string>
+    <string name="call_stats_title_durations">통화 시간</string>
+    <string name="call_stats_title_count">통화 횟수</string>
+    <string name="call_stats_title_average_duration">평균 통화 시간</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">선택된 시간 범위에 존재하는 통화 내역이 없습니다.</string>
 </resources>

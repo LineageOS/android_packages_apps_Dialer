@@ -17,13 +17,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_category_title">I samtale</string>
-  <string name="incall_enable_dnd_title">Skru på \"Ikke-forstyrr\" under samtaler</string>
-  <string name="incall_vibrate_outgoing_title">Vibrasjon ved svar</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrasjon ved ventende samtale</string>
-  <string name="incall_vibrate_hangup_title">Vibrasjon når lagt på</string>
-  <string name="incall_vibrate_45_title">Vibrer hvert minutt</string>
-  <string name="incall_vibrate_45_summary">Vibrerer hvert 45. sekund av hvert minutt under utgående samtale</string>
-  <string name="incall_dnd_dialog_message">For å kunne skru på \"Ikke-forstyrr\", trenger programmet tilgang til å kontrollere dens status.\n</string>
-  <string name="allow">Tillat</string>
+    <string name="incall_category_title">I samtale</string>
+    <string name="incall_enable_dnd_title">Skru på \"Ikke-forstyrr\" under samtaler</string>
+    <string name="incall_vibrate_outgoing_title">Vibrasjon ved svar</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrasjon ved ventende samtale</string>
+    <string name="incall_vibrate_hangup_title">Vibrasjon når lagt på</string>
+    <string name="incall_vibrate_45_title">Vibrer hvert minutt</string>
+    <string name="incall_vibrate_45_summary">Vibrerer hvert 45. sekund av hvert minutt under utgående samtale</string>
+    <string name="incall_dnd_dialog_message">For å kunne skru på \"Ikke-forstyrr\", trenger programmet tilgang til å kontrollere dens status.\n</string>
+    <string name="allow">Tillat</string>
 </resources>

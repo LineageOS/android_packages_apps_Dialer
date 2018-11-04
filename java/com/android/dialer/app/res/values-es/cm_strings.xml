@@ -17,9 +17,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrar en llamada en espera</string>
-  <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
-  <string name="incall_vibrate_45_title">Vibrar cada minuto</string>
-  <string name="incall_vibrate_45_summary">Vibrar en el segundo 45 de cada minuto durante las llamadas salientes</string>
+    <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrar en llamada en espera</string>
+    <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
+    <string name="incall_vibrate_45_title">Vibrar cada minuto</string>
+    <string name="incall_vibrate_45_summary">Vibrar en el segundo 45 de cada minuto durante las llamadas salientes</string>
 </resources>
