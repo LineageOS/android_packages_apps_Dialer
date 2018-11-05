@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45966739_9eee6e40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-11-05T08:20:46Z",
+      "side": 1,
+      "message": "Always add an empty line after commit message\u0027s subject and its body.",
+      "revId": "a5b9ed87c6ec0126cb528d919f476480b70a2315",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
