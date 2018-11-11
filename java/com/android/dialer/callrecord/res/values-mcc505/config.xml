@@ -14,6 +14,47 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Allow recording for country: Australia -->
+<!--All states and territories permit recording one's phone calls,
+subject to certain restrictions. In summary, recording of a phone
+conversation by a person is allowed when, depending on the state:
+ a) the person is a party to the conversation; or
+ b) the person is a principal party (person by whom or to whom words
+ are spoken), and
+  i)  the recording is reasonably necessary for the protection of that
+      person's lawful interests, or
+  ii) the recording is not made for the purpose of communicating or
+      publishing the conversation to persons who are not parties to
+      the conversation.
+
+Legislation:
+ Australian Capital Territory:
+    Subsection 4(3)(b) Listening Devices Act 1992 (ACT)
+    http://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/act/consol_act/lda1992181/s4.html
+ New South Wales:
+	Subsection 7(3)(b) Surveillance Devices Act 2007 (NSW)
+	http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nsw/consol_act/sda2007210/s7.html
+ Northern Territory:
+    Subsection 11(1)(a) Surveillance Devices Act 2007 (NT)
+    http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nt/num_act/sda200719o2007256/s11.html
+ Queensland:
+	Subsection 43(2)(a) Invasion of Privacy Act 1971 (Qld)
+	http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/qld/consol_act/iopa1971222/s43.html
+ South Australia:
+    Subsection 4(2)(a)(ii) Surveillance Devices Act 2016 (SA)
+    http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/sa/consol_act/sda2016210/s4.html
+ Tasmania:
+    Subsection 5(3)(b) Listening Devices Act 1991 (TAS)
+    http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/tas/consol_act/lda1991181/s5.html
+ Victoria:
+	Subsection 6(1) Surveillance Devices Act 1999 (NSW)
+	http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/vic/consol_act/sda1999210/s6.html
+ Western Australia:
+	Subsection 5(3)(d) Surveillance Devices Act 1998 (WA)
+	http://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/sda1998210/s5.html
+-->
+
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
