@@ -17,6 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Forward lookup -->
+    <string name="nearby_places">Ionadan am fagas</string>
+    <string name="people">Daoine</string>
     <!-- Number lookup -->
+    <string name="lookup_settings_label">Rannsachadh àireamhan fòn</string>
+    <string name="enable_forward_lookup_title">Rannsachadh air adhart</string>
+    <string name="enable_forward_lookup_summary">Seall ionadan am fagas nuair a bhios mi a’ lorg rud san daithealair</string>
+    <string name="enable_people_lookup_title">Rannsachadh dhaoine</string>
+    <string name="enable_people_lookup_summary">Seall toraidhean air loidhne airson daoine nuair a bhios mi a’ lorg rud san daithealair</string>
+    <string name="enable_reverse_lookup_title">Rannsachadh contrarra</string>
+    <string name="enable_reverse_lookup_summary">Rannsaich fiosrachadh mun neach no ionad airson àireamh nach aithne dhut nuair a thig gairm a-steach</string>
+    <string name="forward_lookup_provider_title">Solaraiche an rannsachaidh air adhart</string>
+    <string name="people_lookup_provider_title">Solaraiche an rannsachaidh dhaoine</string>
+    <string name="reverse_lookup_provider_title">Solaraiche an rannsachaidh chontrarra</string>
     <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Faodaidh an rannsachadh ceistean a chur a-null gu làraichean-lìn cèine slighe pròtacail thèarainte (https) airson fiosrachadh a chruinneachadh. Faodaidh a’ cheist gabhail a-steach àireamh fòn an neach eile no a’ cheist rannsachaidh</string>
 </resources>

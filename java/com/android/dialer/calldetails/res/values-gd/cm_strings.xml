@@ -15,4 +15,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="play_recordings">
+        <item quantity="one">Cluich an clàradh</item>
+        <item quantity="two">Cluich na clàraidhean</item>
+        <item quantity="few">Cluich na clàraidhean</item>
+        <item quantity="other">Cluich na clàraidhean</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Cha deach aplacaid a lorg airson an clàradh a thagh thu a chluich.</string>
+</resources>

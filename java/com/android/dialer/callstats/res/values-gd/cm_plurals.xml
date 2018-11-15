@@ -15,4 +15,29 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="hour">
+        <item quantity="one">1 uair</item>
+        <item quantity="two">%d uair(ean)</item>
+        <item quantity="few">%d uair(ean)</item>
+        <item quantity="other">%d uair(ean)</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 mhion</item>
+        <item quantity="two">%d mion</item>
+        <item quantity="few">%d mion</item>
+        <item quantity="other">%d m(h)ion</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 diog</item>
+        <item quantity="two">%d d(h)iog</item>
+        <item quantity="few">%d d(h)iog</item>
+        <item quantity="other">%d d(h)iog</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 ghairm</item>
+        <item quantity="two">%d gairm(ean)</item>
+        <item quantity="few">%d gairm(ean)</item>
+        <item quantity="other">%d gairm(ean)</item>
+    </plurals>
+</resources>

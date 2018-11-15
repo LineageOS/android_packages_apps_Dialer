@@ -15,4 +15,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">Cha deach leinn tòiseachadh air an gairm a chlàradh</string>
+    <string name="call_recording_file_location">Chaidh clàradh na gairme a shàbhaladh gu <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Clàraich a’ ghairm</string>
+    <string name="onscreenCallRecordingText">A’ clàradh na gairme – <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Cuir stad air a’ chlàradh</string>
+    <string name="recording_time_text">’Ga chlàradh</string>
+    <string name="recording_warning_title">A bheil thu airson clàradh gairme a chur an comas?</string>
+    <string name="recording_warning_text">An aire: ’S ann an urra dhut fhèin a th’ ann gun gèill thu ri lagh, conn-riaghladh is riaghailt sam bith a bhios an sàs a thaobh cleachdadh gleus a’ chlàraidh agus cleachdadh no sgaoileadh nan clàraidhean a rinn thu leis.</string>
+</resources>

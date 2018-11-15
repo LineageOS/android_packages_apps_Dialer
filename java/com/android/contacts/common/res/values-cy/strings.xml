@@ -64,7 +64,7 @@
   <!-- Action string for sending an SMS to a contact by shortcut -->
   <!-- Title of the confirmation dialog for clearing frequents. [CHAR LIMIT=37] -->
   <!-- Confirmation dialog for clearing frequents. [CHAR LIMIT=NONE] -->
-  <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.</string>
+  <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
   <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=35] -->
   <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
   <string name="status_available">Ar gael</string>
