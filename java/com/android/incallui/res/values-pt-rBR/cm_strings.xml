@@ -19,7 +19,9 @@
     <string name="call_recording_failed_message">Falha ao iniciar a gravação da chamada</string>
     <string name="call_recording_file_location">A gravação da chamada foi salva em <xliff:g id="filename">%s</xliff:g></string>
     <string name="onscreenCallRecordText">Gravar chamada</string>
+    <string name="onscreenCallRecordingText">Gravando chamada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Parar a gravação</string>
     <string name="recording_time_text">Gravando</string>
     <string name="recording_warning_title">Ativar a gravação de chamadas?</string>
+    <string name="recording_warning_text">Aviso: Você é responsável por cumprir as leis, regulamentações e regras que se aplicam ao uso do recurso de gravação de chamadas e da utilização ou distribuição dessas gravações.</string>
 </resources>

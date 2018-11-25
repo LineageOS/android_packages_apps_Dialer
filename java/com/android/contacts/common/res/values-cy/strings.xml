@@ -381,6 +381,7 @@
             This is especially valuable for views without textual representation like ImageView.
   -->
   <!-- Build version title in About preference. [CHAR LIMIT=40]-->
+  <string name="about_build_version">Fersiwn adeiledd</string>
   <!-- Open source licenses title in About preference. [CHAR LIMIT=60] -->
   <!-- Open source licenses summary in About preference. [CHAR LIMIT=NONE] -->
   <!-- Privacy policy title in About preference. [CHAR LIMIT=40]-->

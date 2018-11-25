@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Estatísticas detalhadas do contato</string>
     <string name="call_stats_incoming">Recebidas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_outgoing">Discadas: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_missed">Perdidas: <xliff:g id="value">%s</xliff:g></string>
@@ -45,4 +46,5 @@
     <string name="call_stats_title_count">Quantidade de chamadas</string>
     <string name="call_stats_title_average_duration">Duração média de chamada</string>
     <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">Não há registro de chamadas no intervalo de tempo selecionado.</string>
 </resources>

@@ -22,6 +22,7 @@
   <!-- Official label for the in-call UI. DO NOT TRANSLATE. -->
   <!-- In-call screen: status label for a conference call -->
   <!-- In-call screen: call lost dialog text -->
+  <string name="call_lost">Collwyd yr alwad</string>
   <!-- MMI dialog strings -->
   <!-- Dialog label when an MMI code starts running -->
   <!-- post dial -->

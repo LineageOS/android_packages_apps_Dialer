@@ -16,6 +16,11 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_error_no_data_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_bad_config_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_communication_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_server_connection_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_server_title">Methu â diweddaru lleisbost gweledol</string>
   <string name="voicemail_action_turn_off_airplane_mode">Gosodiadau Modd Awyren</string>
   <string name="voicemail_action_turn_archive_on">Troi ymlaen</string>
   <string name="voicemail_action_sync">Cysoni</string>
