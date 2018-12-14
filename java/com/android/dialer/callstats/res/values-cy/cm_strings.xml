@@ -17,5 +17,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_header_total">Cyfanswm: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Cyfanswm: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Dyddiad dechrau</string>
+    <string name="call_stats_title_for_number">Y rhif hwn</string>
     <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">Nid yw dy log galwadau yn cynnwys unrhyw alwadau yn y cyfnod dan sylw.</string>
 </resources>

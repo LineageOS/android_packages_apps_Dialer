@@ -27,5 +27,7 @@
     <string name="deny">Tolak</string>
     <string name="call_recording_category_title">Rekaman panggilan</string>
     <string name="call_recording_format">Format audio</string>
+    <string name="call_via">Panggil melalui</string>
+    <string name="call_via_dialog_title">Panggil melalui\u2026</string>
     <string name="call_log_stats_title">Statistik</string>
 </resources>
