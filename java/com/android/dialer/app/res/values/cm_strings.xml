@@ -38,6 +38,8 @@
     <string name="call_recording_format">Audio format</string>
     <string name="wb_amr_format" translatable="false">AMR-WB</string>
     <string name="aac_format" translatable="false">AAC</string>
+    <string name="auto_call_recording_title">Auto call recording</string>
+    <string name="auto_call_recording_key" translatable="false">auto_call_recording</string>
 
     <string name="call_via">Call via</string>
     <string name="call_via_dialog_title">Call via\u2026</string>
