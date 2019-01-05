@@ -15,4 +15,37 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="hour">
+        <item quantity="zero">%d ساعات</item>
+        <item quantity="one">%d ساعة</item>
+        <item quantity="two">%d ساعات</item>
+        <item quantity="few">%d ساعات</item>
+        <item quantity="many">%d ساعات</item>
+        <item quantity="other">%d ساعات</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="zero">%d دقائق</item>
+        <item quantity="one">%d دقيقة</item>
+        <item quantity="two">%d دقائق</item>
+        <item quantity="few">%d دقائق</item>
+        <item quantity="many">%d دقائق</item>
+        <item quantity="other">%d دقائق</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="zero">%d ثواني</item>
+        <item quantity="one">%d ثانية</item>
+        <item quantity="two">%d ثواني</item>
+        <item quantity="few">%d ثواني</item>
+        <item quantity="many">%d ثواني</item>
+        <item quantity="other">%d ثواني</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="zero">%d مكالمات</item>
+        <item quantity="one">%d مكالمة</item>
+        <item quantity="two">%d مكالمات</item>
+        <item quantity="few">%d مكالمات</item>
+        <item quantity="many">%d مكالمات</item>
+        <item quantity="other">%d مكالمات</item>
+    </plurals>
+</resources>

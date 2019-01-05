@@ -17,16 +17,27 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Title bar for call detail screen -->
+  <string name="call_details">Manylion yr alwad</string>
   <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
+  <string name="delete">Dileu</string>
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
+  <string name="call_details_copy_number">Copïo\'r rhif</string>
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
+  <string name="call_details_edit_number">Golygu\'r rhif cyn galw</string>
   <!-- Label for action to report a number with inaccurate caller id information. [CHAR LIMIT=48] -->
+  <string name="call_details_report_call_id">Rhoi gwybod am rif anghywir</string>
   <!-- String shown when the call details show a image that was sent -->
+  <string name="sent_a_photo">Anfon llun</string>
   <!-- String shown when the call details show a image that was received -->
+  <string name="received_a_photo">Wedi derbyn llun</string>
   <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
+  <string name="message_in_quotes">\"<xliff:g id="message">%1$s</xliff:g>\"</string>
   <!-- Title of dialog that confirms whether a user wants to report an incorrect number.
        [CHAR LIMIT=NONE] -->
+  <string name="report_caller_id_dialog_title">Rhoi gwybod am rif anghywir</string>
   <!-- Toast that appears when a caller id report fails to send. Could be due to network error or
        authentication error. [CHAR LIMIT=NONE] -->
+  <string name="report_caller_id_failed">Methwyd ag adrodd am y rhif</string>
   <!-- Toast message which appears when a contact's caller id is reported as incorrect. [CHAR LIMIT=NONE] -->
+  <string name="report_caller_id_toast">Wedi adrodd am y rhif</string>
 </resources>

@@ -17,51 +17,97 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
+  <string name="toast_text_copied">Testun wedi\'i gopïo</string>
   <!-- Option displayed in context menu to copy long pressed item to clipboard [CHAR LIMIT=64] -->
+  <string name="copy_text">Copïo i\'r clipfwrdd</string>
   <!-- Action string for calling a custom phone number -->
+  <string name="call_custom">Galw
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
   <!-- Action string for calling a home phone number -->
+  <string name="call_home">Galw cartref</string>
   <!-- Action string for calling a mobile phone number -->
+  <string name="call_mobile">Galw symudol</string>
   <!-- Action string for calling a work phone number -->
+  <string name="call_work">Galw gwaith</string>
   <!-- Action string for calling a work fax phone number -->
+  <string name="call_fax_work">Galw ffacs gwaith</string>
   <!-- Action string for calling a home fax phone number -->
+  <string name="call_fax_home">Galw ffacs cartref</string>
   <!-- Action string for calling a pager phone number -->
+  <string name="call_pager">Galw peiriant galw</string>
   <!-- Action string for calling an other phone number -->
+  <string name="call_other">Galw</string>
   <!-- Action string for calling a callback number -->
+  <string name="call_callback">Galw rhif galw nôl</string>
   <!-- Action string for calling a car phone number -->
+  <string name="call_car">Galw car</string>
   <!-- Action string for calling a company main phone number -->
+  <string name="call_company_main">Galw prif rif gwaith</string>
   <!-- Action string for calling a ISDN phone number -->
+  <string name="call_isdn">Galw ISDN</string>
   <!-- Action string for calling a main phone number -->
+  <string name="call_main">Galw prif rif</string>
   <!-- Action string for calling an other fax phone number -->
+  <string name="call_other_fax">Galw rhif ffacs</string>
   <!-- Action string for calling a radio phone number -->
+  <string name="call_radio">Galw rhif radio</string>
   <!-- Action string for calling a Telex phone number -->
+  <string name="call_telex">Galw rhif telex</string>
   <!-- Action string for calling a TTY/TDD phone number -->
+  <string name="call_tty_tdd">Galw rhif TTY/TDD</string>
   <!-- Action string for calling a work mobile phone number -->
+  <string name="call_work_mobile">Galw symudol gwaith</string>
   <!-- Action string for calling a work pager phone number -->
+  <string name="call_work_pager">Galw peiriant galw gwaith</string>
   <!-- Action string for calling an assistant phone number -->
+  <string name="call_assistant">Galw
+        <xliff:g id="assistant">%s</xliff:g>
+    </string>
   <!-- Action string for calling a MMS phone number -->
+  <string name="call_mms">Galw rhif MMS</string>
   <!-- Action string for calling a contact by shortcut -->
+  <string name="call_by_shortcut"><xliff:g id="contact_name">%s</xliff:g> (Galw)</string>
   <!-- Action string for sending an SMS to a custom phone number -->
+  <string name="sms_custom">Tecstio
+        <xliff:g id="custom">%s</xliff:g>
+    </string>
   <!-- Action string for sending an SMS to a home phone number -->
+  <string name="sms_home">Tecstio cartref</string>
   <!-- Action string for sending an SMS to a mobile phone number -->
+  <string name="sms_mobile">Neges destun i symudol</string>
   <!-- Action string for sending an SMS to a work phone number -->
+  <string name="sms_work">Tecstio gwaith</string>
   <!-- Action string for sending an SMS to a work fax phone number -->
+  <string name="sms_fax_work">Tecstio ffacs gwaith</string>
   <!-- Action string for sending an SMS to a home fax phone number -->
+  <string name="sms_fax_home">Tecstio ffacs cartref</string>
   <!-- Action string for sending an SMS to a pager phone number -->
+  <string name="sms_pager">Tecstio peiriant galw</string>
   <!-- Action string for sending an SMS to an other phone number -->
+  <string name="sms_other">Tecstio</string>
   <!-- Action string for sending an SMS to a callback number -->
   <!-- Action string for sending an SMS to a car phone number -->
+  <string name="sms_car">Tecstio car</string>
   <!-- Action string for sending an SMS to a company main phone number -->
   <!-- Action string for sending an SMS to a ISDN phone number -->
+  <string name="sms_isdn">Tecstio ISDN</string>
   <!-- Action string for sending an SMS to a main phone number -->
+  <string name="sms_main">Tecstio prif rif</string>
   <!-- Action string for sending an SMS to an other fax phone number -->
+  <string name="sms_other_fax">Tecstio rhif ffacs</string>
   <!-- Action string for sending an SMS to a radio phone number -->
+  <string name="sms_radio">Tecstio rhif radio</string>
   <!-- Action string for sending an SMS to a Telex phone number -->
+  <string name="sms_telex">Tecstio rhif telex</string>
   <!-- Action string for sending an SMS to a TTY/TDD phone number -->
   <!-- Action string for sending an SMS to a work mobile phone number -->
   <!-- Action string for sending an SMS to a work pager phone number -->
   <!-- Action string for sending an SMS to an assistant phone number -->
   <!-- Action string for sending an SMS to a MMS phone number -->
+  <string name="sms_mms">Tecstio rhif MMS</string>
   <!-- Action string for sending an SMS to a contact by shortcut -->
+  <string name="sms_by_shortcut"><xliff:g id="contact_name">%s</xliff:g> (Neges)</string>
   <!-- Title of the confirmation dialog for clearing frequents. [CHAR LIMIT=37] -->
   <!-- Confirmation dialog for clearing frequents. [CHAR LIMIT=NONE] -->
   <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
@@ -71,14 +117,18 @@
   <!--  Used to display as default status when the contact is away or idle for chat [CHAR LIMIT=19] -->
   <string name="status_away">I ffwrdd</string>
   <!--  Used to display as default status when the contact is busy or Do not disturb for chat [CHAR LIMIT=19] -->
+  <string name="status_busy">Yn brysur</string>
   <!-- Directory partition name (also exists in contacts) -->
   <!-- Directory partition name for p13n suggestions -->
   <!-- The name of the invisible local contact directory -->
+  <string name="local_invisible_directory">Arall</string>
   <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
+  <string name="directory_search_label">Cyfeiriadur</string>
   <!-- The label in section header in the contact list for a work contact directory [CHAR LIMIT=128] -->
   <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
   <string name="local_search_label">Pob cyswllt</string>
   <!-- The label in section header in the contact list for a local suggested contacts [CHAR LIMIT=128] -->
+  <string name="local_suggestions_search_label">Awgrymiadau</string>
   <!-- String describing the text on the header of the profile contact in the contacts list
        This may be programatically capitalized. [CHAR LIMIT=20] -->
   <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Fi</string>
@@ -87,7 +137,16 @@
   <!-- Displayed at the top of search results indicating that more contacts were found than shown [CHAR LIMIT=64] -->
   <!-- Displayed at the top of the contacts showing the zero total number of contacts found when "Only contacts with phones" not selected. [CHAR LIMIT=30]
        (also in contacts) -->
+  <string name="listFoundAllContactsZero">Dim cysylltiadau</string>
   <!-- Displayed at the top of the contacts showing the total number of contacts found when typing search query -->
+  <plurals name="searchFoundContacts">
+    <item quantity="zero">canfuwyd <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="one">canfuwyd 1</item>
+    <item quantity="two">canfuwyd <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="few">canfuwyd <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="many">canfuwyd <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="other">canfuwyd <xliff:g id="count">%d</xliff:g></item>
+  </plurals>
   <!-- String describing the text for photo of a contact in a contacts list.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -123,9 +182,11 @@
   <!-- Field title for the family name of a contact -->
   <string name="name_family">Cyfenw</string>
   <!-- Field title for the prefix name of a contact -->
+  <string name="name_prefix">Rhagddodiaid enw</string>
   <!-- Field title for the middle name of a contact -->
   <string name="name_middle">Enw canol</string>
   <!-- Field title for the suffix name of a contact -->
+  <string name="name_suffix">Ôl-ddodiad enw</string>
   <!-- Field title for the phonetic name of a contact [CHAR LIMIT=64]-->
   <!-- Field title for the phonetic given name of a contact -->
   <!-- Field title for the phonetic middle name of a contact -->
@@ -152,34 +213,51 @@
   <!-- Field title for the full postal address of a contact [CHAR LIMIT=64]-->
   <string name="postal_address">Cyfeiriad</string>
   <!-- Hint text for the organization name when editing -->
+  <string name="ghostData_company">Cwmni</string>
   <!-- Hint text for the organization title when editing -->
+  <string name="ghostData_title">Teitl</string>
   <!-- The label describing the Notes field of a contact. This field allows free form text entry
        about a contact -->
   <string name="label_notes">Nodiadau</string>
   <!-- The label describing the SIP address field of a contact. [CHAR LIMIT=20] -->
+  <string name="label_sip_address">SIP</string>
   <!-- Header that expands to list all website types when editing a website of a contact
        [CHAR LIMIT=20] -->
+  <string name="websiteLabelsGroup">Gwefan</string>
   <!-- Header for the list of all groups for a contact [CHAR LIMIT=20] -->
+  <string name="groupsLabel">Grwpiau</string>
   <!-- Action string for sending an email to a home email address -->
+  <string name="email_home">Ebost i gartref</string>
   <!-- Action string for sending an email to a mobile email address -->
   <!-- Action string for sending an email to a work email address -->
+  <string name="email_work">Ebost i gwaith</string>
   <!-- Action string for sending an email to an other email address -->
   <string name="email_other">Anfon ebost</string>
   <!-- Action string for sending an email to a custom email address -->
   <!-- Generic action string for sending an email -->
   <string name="email">Anfon ebost</string>
   <!-- Field title for the street of a structured postal address of a contact -->
+  <string name="postal_street">Stryd/Ffordd/Heol</string>
   <!-- Field title for the PO box of a structured postal address of a contact -->
+  <string name="postal_pobox">Blwch post</string>
   <!-- Field title for the neighborhood of a structured postal address of a contact -->
+  <string name="postal_neighborhood">Pentref/Ardal</string>
   <!-- Field title for the city of a structured postal address of a contact -->
+  <string name="postal_city">Tref/Dinas</string>
   <!-- Field title for the region, or state, of a structured postal address of a contact -->
+  <string name="postal_region">Sir/Talaith</string>
   <!-- Field title for the postal code of a structured postal address of a contact -->
   <string name="postal_postcode">Cod post</string>
   <!-- Field title for the country of a structured postal address of a contact -->
+  <string name="postal_country">Gwlad</string>
   <!-- Action string for viewing a home postal address -->
+  <string name="map_home">Gweld cyfeiriad cartref</string>
   <!-- Action string for viewing a work postal address -->
+  <string name="map_work">Gweld cyfeiriad gwaith</string>
   <!-- Action string for viewing an other postal address -->
+  <string name="map_other">Gweld cyfeiriad</string>
   <!-- Action string for viewing a custom postal address -->
+  <string name="map_custom">Gweld cyfeiriad <xliff:g id="custom">%s</xliff:g></string>
   <!-- Action string for starting an IM chat with the AIM protocol -->
   <!-- Action string for starting an IM chat with the MSN or Windows Live protocol -->
   <!-- Action string for starting an IM chat with the Yahoo protocol -->
@@ -189,12 +267,14 @@
   <!-- Action string for starting an IM chat with the ICQ protocol -->
   <!-- Action string for starting an IM chat with the Jabber protocol -->
   <!-- Generic action string for starting an IM chat -->
+  <string name="chat">Sgwrsio</string>
   <!-- String describing the Contact Editor Minus button
 
        Used by AccessibilityService to announce the purpose of the button.
 
        [CHAR LIMIT=NONE]
   -->
+  <string name="description_minus_button">dileu</string>
   <!-- Content description for the expand or collapse name fields button.
        Clicking this button causes the name editor to toggle between showing
        a single field where the entire name is edited at once, or multiple
@@ -205,6 +285,7 @@
   <!-- Contact list filter label indicating that the list is showing all available accounts [CHAR LIMIT=64] -->
   <string name="list_filter_all_accounts">Pob cyswllt</string>
   <!-- Menu item to indicate you are done editing a contact and want to save the changes you've made -->
+  <string name="menu_done">Iawn</string>
   <!-- Menu item to indicate you want to cancel the current editing process and NOT save the changes you've made [CHAR LIMIT=12] -->
   <string name="menu_doNotSave">Diddymu</string>
   <!-- Displayed at the top of the contacts showing the account filter selected  [CHAR LIMIT=64] -->
@@ -218,9 +299,11 @@
   <!-- Message shown in a Dialog confirming a user's cancel request toward existing vCard import.
        The argument is file name for the vCard import the user wants to cancel.
        [CHAR LIMIT=128] -->
+  <string name="cancel_import_confirmation_message">Diddymu mewnforio <xliff:g example="import.vcf" id="filename">%s</xliff:g>?</string>
   <!-- Message shown in a Dialog confirming a user's cancel request toward existing vCard export.
        The argument is file name for the vCard export the user wants to cancel.
        [CHAR LIMIT=128] -->
+  <string name="cancel_export_confirmation_message">Diddymu allforio <xliff:g example="export.vcf" id="filename">%s</xliff:g>?</string>
   <!-- Title shown in a Dialog telling users cancel vCard import/export operation is failed. [CHAR LIMIT=40] -->
   <!-- The failed reason which should not be shown but it may in some buggy condition. [CHAR LIMIT=40] -->
   <!-- The failed reason shown when vCard importer/exporter could not open the file
@@ -234,11 +317,13 @@
        close the current screen and show the user this message. -->
   <!-- The failed reason shown when some error happend during contacts export.
        Some exact reason must follow this. [CHAR LIMIT=NONE] -->
+  <string name="fail_reason_error_occurred_during_export">Bu gwall wrth allforio: \"<xliff:g id="exact_reason">%s</xliff:g>\".</string>
   <!-- The failed reason shown when the given file name is too long for the system.
        The length limit of each file is different in each Android device, so we don't need to
        mention it here. [CHAR LIMIT=NONE] -->
   <!-- The failed reason shown when Contacts app (especially vCard importer/exporter)
        emitted some I/O error. Exact reason will be appended by the system. [CHAR LIMIT=NONE] -->
+  <string name="fail_reason_io_error">Gwall I/O</string>
   <!-- Failure reason show when Contacts app (especially vCard importer) encountered
        low memory problem and could not proceed its import procedure. [CHAR LIMIT=NONE] -->
   <!-- The failed reason shown when vCard parser was not able to be parsed by the current vCard
@@ -249,6 +334,7 @@
   <!-- Fail reason shown when vCard importer failed to look over meta information stored in vCard file(s). -->
   <!-- The failed reason shown when the import of some of vCard files failed during multiple vCard
        files import. It includes the case where all files were failed to be imported. -->
+  <string name="fail_reason_failed_to_read_files">Methwyd â mewnforio un neu ragor o ffeiliau (%s).</string>
   <!-- The title shown when exporting vCard is successfuly finished [CHAR LIMIT=40] -->
   <!-- The title shown when exporting vCard has finished successfully but the destination filename could not be resolved. [CHAR LIMIT=NONE] -->
   <!-- The toast message shown when exporting vCard has finished and vCards are ready to be shared [CHAR LIMIT=150]-->
@@ -284,6 +370,7 @@
        when there are already other import/export requests.
        The argument is file name the user imported.
        [CHAR LIMIT=40] -->
+  <string name="vcard_import_will_start_message">Caiff <xliff:g example="import.vcf" id="filename">%s</xliff:g> ei mewnforio\'n fuan.</string>
   <!-- The message shown when vCard import request is accepted. The system may start that work soon, or do it later when there are already other import/export requests.
        "The file" is what a user selected for importing.
        [CHAR LIMIT=40] -->
@@ -292,18 +379,22 @@
        when there are already other import/export requests.
        The argument is file name the user exported.
        [CHAR LIMIT=40] -->
+  <string name="vcard_export_will_start_message">Caiff <xliff:g example="import.vcf" id="filename">%s</xliff:g> ei allforio\'n fuan.</string>
   <!-- The message shown when a vCard export request is accepted but the destination filename could not be resolved. [CHAR LIMIT=NONE] -->
   <!-- The message shown when a vCard export request is accepted and contacts will be exported shortly. [CHAR LIMIT=70]-->
   <!-- The message shown when a given vCard export request is rejected by the system. [CHAR LIMIT=NONE] -->
   <!-- Used when file name is unknown in vCard processing. It typically happens
        when the file is given outside the Contacts app. [CHAR LIMIT=30] -->
+  <string name="vcard_unknown_filename">cyswllt</string>
   <!-- The message shown when vCard importer is caching files to be imported into local temporary
        data storage. [CHAR LIMIT=NONE] -->
+  <string name="caching_vcard_message">Yn cadw\'r ffeil(iau) vCard i storfa dros dro. Bydd y mewnforio ei hun yn dechrau\'n fuan.</string>
   <!-- Message used when vCard import has failed. [CHAR LIMIT=40] -->
   <!-- The "file name" displayed for vCards received directly via NFC [CHAR LIMIT=16] -->
   <!-- Dialog title shown when a user confirms whether he/she export Contact data. [CHAR LIMIT=32] -->
   <!-- The title shown when vCard importer is caching files to be imported into local temporary
        data storage.  [CHAR LIMIT=40] -->
+  <string name="caching_vcard_title">Cofio dros dro</string>
   <!-- The message shown while importing vCard(s).
        First argument is current index of contacts to be imported.
        Second argument is the total number of contacts.
@@ -312,6 +403,7 @@
   <!-- Action that exports all contacts to a user selected destination. [CHAR LIMIT=25] -->
   <!-- Contact preferences related strings -->
   <!-- Label of the "sort by" display option -->
+  <string name="display_options_sort_list_by">Trefnu yn ôl</string>
   <!-- An allowable value for the "sort list by" contact display option  -->
   <string name="display_options_sort_by_given_name">Enw cyntaf</string>
   <!-- An allowable value for the "sort list by" contact display option  -->
@@ -342,60 +434,98 @@
        This is especially valuable for views without textual representation like ImageView.
 
        [CHAR LIMIT=NONE] -->
+  <string name="contactsFavoritesLabel">Ffefrynnau</string>
   <!-- Displayed at the top of the contacts showing the zero total number of contacts visible when "All contacts" is selected  [CHAR LIMIT=64]-->
+  <string name="listTotalAllContactsZero">Dim cysylltiadau.</string>
   <!-- Displayed at the top of the contacts showing the zero total number of contacts visible when "Custom" is selected  [CHAR LIMIT=64]-->
   <!-- Displayed at the top of the contacts showing the zero total number of contacts visible when starred contact list is selected  [CHAR LIMIT=64]-->
+  <string name="listTotalAllContactsZeroStarred">Dim ffefrynnau</string>
   <!-- Displayed at the top of the contacts showing the zero total number of contacts visible when a group or account is selected  [CHAR LIMIT=64]-->
   <!--  The menu item to clear frequents [CHAR LIMIT=30] -->
   <!-- Menu item to select SIM card -->
   <!-- The menu item to open the list of accounts. [CHAR LIMIT=60]-->
+  <string name="menu_accounts">Rheoli cyfrifon</string>
   <!-- The menu item to bulk import or bulk export contacts from SIM card or SD card.  [CHAR LIMIT=30]-->
+  <string name="menu_import_export">Mewnforio/Allforio</string>
   <!-- The font-family to use for tab text. -->
   <!-- Attribution of a contact status update, when the time of update is unknown -->
+  <string name="contact_status_update_attribution">gyda <xliff:g example="Google Talk" id="source">%1$s</xliff:g></string>
   <!-- Attribution of a contact status update, when the time of update is known -->
+  <string name="contact_status_update_attribution_with_date"><xliff:g example="3 hours ago" id="date">%1$s</xliff:g> gyda <xliff:g example="Google Talk" id="source">%2$s</xliff:g></string>
   <!-- Font family used when drawing letters for letter tile avatars. -->
   <!-- Content description for the fake action menu up button as used
    inside search. [CHAR LIMIT=NONE] -->
+  <string name="action_menu_back_from_search">stopio chwilio</string>
   <!--  String describing the icon used to clear the search field -->
+  <string name="description_clear_search">Clirio\'r chwiliad</string>
   <!-- The font-family to use for the text inside the searchbox. -->
   <!-- The title of the preference section that allows users to configure how they want their
        contacts to be displayed. [CHAR LIMIT=128] -->
+  <string name="settings_contact_display_options_title">Dewisiadau dangos cysylltiadau</string>
   <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
   <string name="select_account_dialog_title">Cyfrif</string>
   <!-- Label for the check box to toggle default sim card setting [CHAR LIMIT=35]-->
+  <string name="set_default_account">Defnyddio hwn bob tro ar gyfer galwadau</string>
   <!-- Title for dialog to select Phone Account for outgoing call.  [CHAR LIMIT=40] -->
+  <string name="select_phone_account_for_calls">Galw gyda</string>
   <!-- String used for actions in the dialer call log and the quick contact card to initiate
        a call to an individual.  The user is prompted to enter a note which is sent along with
        the call (e.g. a call subject). [CHAR LIMIT=40] -->
+  <string name="call_with_a_note">Galw gyda nodyn</string>
   <!-- Hint text shown in the call subject dialog. [CHAR LIMIT=255] -->
   <!-- Button used to start a new call with the user entered subject. [CHAR LIMIT=32] -->
   <string name="send_and_call_button">ANFON A GALW</string>
   <!-- String used to represent the total number of characters entered for a call subject,
        compared to the character limit.  Example: 2 / 64 -->
+  <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
   <!-- String used to build a phone number type and phone number string.
        Example: Mobile 650-555-1212  -->
+  <string name="call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
   <!-- String format to describe a tab e.g.call history tab. -->
+  <string name="tab_title">tab <xliff:g id="title">%1$s</xliff:g>.</string>
   <!-- String format to describe the number of unread items in a tab.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
             This is especially valuable for views without textual representation like ImageView.
   -->
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="zero">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitemau heb eu darllen.
+        </item>
+    <item quantity="one">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitem heb ei darllen.
+        </item>
+    <item quantity="two">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+    <item quantity="few">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+    <item quantity="many">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+    <item quantity="other">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
+        </item>
+  </plurals>
   <!-- Build version title in About preference. [CHAR LIMIT=40]-->
   <string name="about_build_version">Fersiwn adeiledd</string>
   <!-- Open source licenses title in About preference. [CHAR LIMIT=60] -->
+  <string name="about_open_source_licenses">Trwyddedau cod agored</string>
   <!-- Open source licenses summary in About preference. [CHAR LIMIT=NONE] -->
+  <string name="about_open_source_licenses_summary">Manylion trwyddedau ar gyfer meddalwedd cod agored</string>
   <!-- Privacy policy title in About preference. [CHAR LIMIT=40]-->
+  <string name="about_privacy_policy">Polisi preifatrwydd</string>
   <!-- Terms of service title in about preference. [CHAR LIMIT=60]-->
+  <string name="about_terms_of_service">Telerau gwasanaeth</string>
   <!-- Title for the activity that displays licenses for open source libraries. [CHAR LIMIT=100]-->
+  <string name="activity_title_licenses">Trwyddedau cod agored</string>
   <!-- Toast message showing when failed to open the url. [CHAR LIMIT=100]-->
+  <string name="url_open_error_toast">Methwyd ag agor yr Url.</string>
   <!-- Description string for an action button to initiate a video call from search results.
        Note: AccessibilityServices use this attribute to announce what the view represents.
        This is especially valuable for views without textual representation like ImageView.
 
        [CHAR LIMIT=NONE]-->
+  <string name="description_search_video_call">Galwad fideo</string>
   <!-- Description string for an action button to initiate an enriched call from search results.
        Note: AccessibilityServices use this attribute to announce what the view represents.
        This is especially valuable for views without textual representation like ImageView.
 
        [CHAR LIMIT=NONE]-->
+  <string name="description_search_call_and_share">Rhannu a galw</string>
 </resources>

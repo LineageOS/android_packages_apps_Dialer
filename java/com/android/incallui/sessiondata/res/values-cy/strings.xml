@@ -15,4 +15,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources></resources>
+<resources>
+  <string name="spam_photo_text">Ateba i ddatgelu\'r llun</string>
+  <string name="spam_message_text">Ateba i ddatgelu\'r neges</string>
+</resources>

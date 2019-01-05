@@ -16,5 +16,12 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">Methwyd â dechrau recordio\'r galwad</string>
+    <string name="call_recording_file_location">Wedi cadw recordiad yr alwad i <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Recordio\'r galwad</string>
+    <string name="onscreenCallRecordingText">Yn recordio\'r galwad - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Stopio recordio</string>
+    <string name="recording_time_text">Recordio</string>
+    <string name="recording_warning_title">Galluogi recordio galwadau?</string>
+    <string name="recording_warning_text">Nodyn: Ti sy\'n gyfrifol am gydymffurfio gydag unrhyw gyfreithiau, rheoliadau neu reolau sy\'n berthnasol wrth ddefnyddio\'r nodwedd recordio galwadau a hefyd am unrhyw ddefnydd neu rannu o\'r recordiadau.</string>
 </resources>

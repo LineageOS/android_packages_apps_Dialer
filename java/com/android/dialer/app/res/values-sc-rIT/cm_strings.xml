@@ -16,4 +16,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="allow">Permiti</string>
+    <string name="deny">Refuda</string>
+    <string name="call_recording_category_title">Registratzione de sas mutidas</string>
+    <string name="call_via">Muti cun</string>
+    <string name="call_via_dialog_title">Muti cun\u2026</string>
+    <string name="call_log_stats_title">Istatìsticas</string>
+</resources>

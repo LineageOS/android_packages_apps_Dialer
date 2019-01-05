@@ -17,5 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_category_title">Ar ganol galwad</string>
+    <string name="incall_enable_dnd_title">Galluogi Dim Tarfu yn ystod galwadau</string>
+    <string name="incall_vibrate_outgoing_title">Dirgrynu wrth ateb</string>
+    <string name="incall_vibrate_call_waiting_title">Dirgrynu wrth i alwad aros</string>
+    <string name="incall_vibrate_hangup_title">Dirgrynu wrth orffen yr alwad</string>
+    <string name="incall_vibrate_45_title">Dirgrynu pob munud</string>
+    <string name="incall_vibrate_45_summary">Mae\'n dirgrynu ar eiliad 45 o bob munud yn ystod galwadau allan</string>
+    <string name="incall_dnd_dialog_message">Er mwyn galluogi Dim Tarfu, mae\'n rhaid rhoi caniatâd i\'r ap Ffôn medru rheoli statws Dim Tarfu.\nRho ganiatâd iddo.</string>
+    <string name="allow">Caniatáu</string>
+    <string name="deny">Gwrthod</string>
+    <string name="call_recording_category_title">Recordio galwadau</string>
+    <string name="call_recording_format">Fformat sain</string>
+    <string name="call_via">Galw gyda</string>
+    <string name="call_via_dialog_title">Galu gyda\u2026</string>
     <string name="call_log_stats_title">Ystadegau</string>
 </resources>

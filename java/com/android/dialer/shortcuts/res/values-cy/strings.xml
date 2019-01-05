@@ -17,12 +17,17 @@
   -->
 <resources>
   <!-- Text to display in launcher shortcut for adding a new contact. Short version. [CHAR LIMIT=10] -->
+  <string name="dialer_shortcut_add_contact_short">Cyswllt newydd</string>
   <!-- Text to display in launcher shortcut for adding a new contact. Long version. [CHAR LIMIT=25] -->
+  <string name="dialer_shortcut_add_contact_long">Cyswllt newydd</string>
   <!-- Message to display when the user taps a pinned launcher shortcut (on a
        homescreen) which has been disabled. A shortcut may be disabled if the
        contact has been deleted or if it is invalid for some other reason. [CHAR LIMIT=70] -->
+  <string name="dialer_shortcut_disabled_message">Llwybr byr ddim yn gweithio. Llusga i\'w ddileu.</string>
   <!-- Error message to display when a tapping a shortcut fails because the specified contact can't
        be found or doesn't have any phone numbers. [CHAR LIMIT=70] -->
+  <string name="dialer_shortcut_contact_not_found_or_has_no_number">Dyw\'r cyswllt ddim ar gael bellach.</string>
   <!-- Error message to display when a tapping a shortcut fails because permissions are missing.
        [CHAR LIMIT=70] -->
+  <string name="dialer_shortcut_no_permissions">Methu â galw heb ganiatâd.</string>
 </resources>

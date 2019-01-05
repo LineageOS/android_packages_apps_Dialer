@@ -3,4 +3,5 @@
 <resources>
   <!-- Toast to display when the incoming call easter egg is disabled. The easter egg shows a cat or\
    dog paw animation swiping on the screen-->
+  <string name="event_deactivated">Modd anifeiliaid anwes i ffwrdd</string>
 </resources>

@@ -17,21 +17,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Title of the "Voicemail" settings screen, with a text label identifying which SIM the settings are for. -->
   <!-- Call settings screen, setting option name -->
+  <string name="voicemail_settings_title">Lleisbost</string>
   <!-- DO NOT TRANSLATE. Internal key for a voicemail notification preference. -->
   <!-- Voicemail notifications title. The user clicks on this preference to select
          which sound to play and whether to vibrate when a voicemail notification is received.
          [CHAR LIMIT=30] -->
   <string name="voicemail_notifications_preference_title">Hysbysiadau</string>
   <!-- Title for advanced settings in the voicemail settings -->
+  <string name="voicemail_advanced_settings_title">Gosodiadau Uwch</string>
   <!-- DO NOT TRANSLATE. Internal key for a visual voicemail preference. -->
   <!-- DO NOT TRANSLATE. Internal key for a visual voicemail archive preference. -->
   <!-- DO NOT TRANSLATE. Internal key for a voicemail change pin preference. -->
   <!-- Visual voicemail on/off title [CHAR LIMIT=40] -->
   <!-- Visual voicemail archive on/off title [CHAR LIMIT=40] -->
   <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
+  <string name="voicemail_set_pin_preference_title">Gosod PIN</string>
   <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
+  <string name="voicemail_change_pin_preference_title">Newid PIN</string>
   <!-- Hint for the old PIN field in the change vociemail PIN dialog -->
+  <string name="vm_change_pin_old_pin">Hen PIN</string>
   <!-- Hint for the new PIN field in the change vociemail PIN dialog -->
+  <string name="vm_change_pin_new_pin">PIN newydd</string>
   <!-- Message on the dialog when PIN changing is in progress -->
   <!-- Error message for the voicemail PIN change if the PIN is too short -->
   <!-- Error message for the voicemail PIN change if the PIN is too long -->
@@ -47,10 +53,12 @@
   <!-- The label for the ok button in change voicemail PIN activity -->
   <string name="change_pin_ok_label">Iawn</string>
   <!-- The title for the enter old pin step in change voicemail PIN activity -->
+  <string name="change_pin_enter_old_pin_header">Cadarnha dy hen PIN</string>
   <!-- The hint for the enter old pin step in change voicemail PIN activity -->
   <!-- The title for the enter new pin step in change voicemail PIN activity -->
   <!-- The hint for the enter new pin step in change voicemail PIN activity -->
   <!-- The title for the confirm new pin step in change voicemail PIN activity -->
+  <string name="change_pin_confirm_pin_header">Cadarnha dy PIN</string>
   <!-- The error message for th confirm new pin step in change voicemail PIN activity, if the pin doen't match the one previously entered -->
   <!-- The toast to show after the voicemail PIN has been successfully changed -->
   <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->

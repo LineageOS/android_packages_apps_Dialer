@@ -17,6 +17,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Forward lookup -->
+    <string name="nearby_places">Llugares averaos</string>
+    <string name="people">Persones</string>
     <!-- Number lookup -->
+    <string name="lookup_settings_label">Gueta de númberos telefónicos</string>
+    <string name="enable_forward_lookup_title">Gueta direuta</string>
+    <string name="enable_forward_lookup_summary">Amuesa llugares averaos cuando guetes nel marcador</string>
+    <string name="enable_people_lookup_title">Gueta de persones</string>
+    <string name="enable_people_lookup_summary">Amuesa resultaos de persones al guetar nel marcador</string>
+    <string name="enable_reverse_lookup_title">Gueta inversa</string>
+    <string name="enable_reverse_lookup_summary">Gueta información sobre la persona o llugar pa llamaes de númberos desconocíos</string>
+    <string name="forward_lookup_provider_title">Fornidor de gueta direuta</string>
+    <string name="people_lookup_provider_title">Fornidor de gueta de persones</string>
+    <string name="reverse_lookup_provider_title">Fornidor de gueta inversa</string>
     <!-- Disclaimer -->
+    <string name="lookup_disclaimer">Les guetes podríen unviase per un protocolu seguru (https) a sitios web remotos pa recoyer información. La consulta podría incluyir el númberu telefónicu de la otra parte o la consulta de la gueta</string>
 </resources>

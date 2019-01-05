@@ -18,24 +18,36 @@
 <resources>
   <!-- Button shown during a phone call to upgrade to video.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_videocall">Galwad fideo</string>
   <!-- Button shown during a phone call to put the call on hold.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_hold">Aros</string>
   <!-- Button shown during a phone call to add a new phone call.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_add_call">Ychwanegu galwad</string>
   <!-- Button shown during a phone call to mute the microphone.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_mute">Distewi</string>
   <!-- Button shown during a phone call to end the call.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_end_call">Gorffen yr alwad</string>
   <!-- Button shown during a phone call to show the dialpad.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_dialpad">Bysellbad</string>
   <!-- Talkback text for speaker button status. [CHAR LIMIT=12] -->
+  <string name="incall_talkback_speaker_on">, ymlaen</string>
   <!-- Talkback text for speaker button status. [CHAR LIMIT=12] -->
+  <string name="incall_talkback_speaker_off">, i ffwrdd</string>
   <!-- Button shown during a phone to merge two ongoing calls.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_merge">Cyfuno</string>
   <!-- Button shown during a phone to show the manage conference call screen.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_manage">Rheoli</string>
+  <string name="a11y_description_incall_label_manage_content">Rheoli galwyr</string>
   <!-- Button shown during a phone to swap from the foreground call to the background call.
      [CHAR LIMIT=12] -->
+  <string name="incall_label_swap">Cyfnewid</string>
   <!-- Used to inform the user that the note associated with an outgoing call has been sent.
        [CHAR LIMIT=32] -->
   <string name="incall_note_sent">Nodyn wedi\'i anfon</string>

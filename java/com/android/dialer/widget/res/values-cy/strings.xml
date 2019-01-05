@@ -17,11 +17,17 @@
   -->
 <resources>
   <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
+  <string name="custom_message_hint">Ysgrifenna neges dy hun</string>
   <!-- Accessibility string for close/navigation icon in DialerToolbar -->
+  <string name="toolbar_close">Cau</string>
   <!-- [CHAR LIMIT=NONE] Shown when there are no contacts in the all contacts list. -->
+  <string name="all_contacts_empty">Nid oes gennyt unrhyw gysylltiadau eto</string>
   <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
+  <string name="all_contacts_empty_add_contact_action">Creu cyswllt newydd</string>
   <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
   <string name="permission_single_turn_on">Troi ymlaen</string>
   <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
+  <string name="permission_no_contacts">I weld dy gysylltiadau, rho ganiatâd yn yr ap Cysylltiadau.</string>
   <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
+  <string name="add_contact_not_available">Dim ap cysylltiadau ar gael</string>
 </resources>

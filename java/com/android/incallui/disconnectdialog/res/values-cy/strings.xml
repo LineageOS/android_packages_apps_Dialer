@@ -19,7 +19,11 @@
   <!-- Button to enable Wi-Fi calling. This is displayed in a dialog after a phone call disconnects
       because there is no cellular service.
       [CHAR LIMIT=20] -->
+  <string name="incall_enable_wifi_calling_button">Galluogi</string>
   <!-- Title of alert dialog displayed when video call is not available. [CHAR LIMIT=NONE] -->
+  <string name="video_call_not_available_title">Dyw galwad fideo ddim ar gael ar hyn o bryd</string>
   <!-- Message of alert dialog displayed when video call is not available. [CHAR LIMIT=NONE] -->
+  <string name="video_call_not_available_message">Rho gynnig ar alw\'n hwyrach neu barhau gyda\'r alwad fel galwad llais.</string>
   <!-- Voice call button label of alert dialog displayed when video call is not available. [CHAR LIMIT=20] -->
+  <string name="voice_call">Galwad llais</string>
 </resources>

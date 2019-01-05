@@ -15,4 +15,14 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="play_recordings">
+        <item quantity="zero">Chwarae recordiadau</item>
+        <item quantity="one">Chwarae recordiad</item>
+        <item quantity="two">Chwarae recordiadau</item>
+        <item quantity="few">Chwarae recordiadau</item>
+        <item quantity="many">Chwarae recordiadau</item>
+        <item quantity="other">Chwarae recordiadau</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Ni chanfuwyd ap ar gyfer chwarae\'r recordiad dan sylw.</string>
+</resources>

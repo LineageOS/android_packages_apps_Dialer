@@ -17,5 +17,34 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">إحصائيات تفاصيل جهة الاتصال</string>
+    <string name="call_stats_incoming">الواردة: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">الصادرة: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">لم يتم الرد عليها: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">المحظورة: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">الإجمالي: <xliff:g id="call_count">%s</xliff:g><xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">الإجمالي: <xliff:g id="call_count"> %s </xliff:g></string>
+    <string name="call_stats_filter_from">تاريخ البدء</string>
+    <string name="call_stats_filter_to">تاريخ الانتهاء</string>
+    <string name="call_stats_filter_picker_title">نطاق التصفية</string>
+    <string name="date_quick_selection">التحديد السريع</string>
+    <string name="date_qs_currentmonth">الشهر الحالي</string>
+    <string name="date_qs_currentquarter">ربع السنة الحالي</string>
+    <string name="date_qs_currentyear">السنة الحالية</string>
+    <string name="date_qs_lastweek">الأسبوع الماضي</string>
+    <string name="date_qs_lastmonth">الشهر الماضي</string>
+    <string name="date_qs_lastquarter">ربع السنة الأخير</string>
+    <string name="date_qs_lastyear">العام الماضي</string>
+    <string name="call_stats_date_filter">ضبط النطاق الزمني</string>
+    <string name="call_stats_reset_filter">إعادة تعيين النطاق الزمني</string>
+    <string name="call_stats_sort_by_duration">ترتيب حسب مدة المكالمة</string>
+    <string name="call_stats_sort_by_count">ترتيب حسب عدد المكالمات</string>
+    <string name="call_stats_title_for_number">هذا الرقم</string>
+    <string name="call_stats_title_of_total">من الإجمالي</string>
+    <string name="call_stats_title_durations">مدد المكالمات</string>
+    <string name="call_stats_title_count">عدد المكالمات</string>
+    <string name="call_stats_title_average_duration">متوسط مدة المكالمة</string>
     <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="recent_calls_no_items_in_range">سجل مكالماتك لا يحتوي على أي مكالمات في نطاق الوقت المحدد.</string>
 </resources>

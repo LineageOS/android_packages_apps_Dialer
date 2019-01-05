@@ -17,4 +17,5 @@
   -->
 <resources>
   <!-- Label for a list of local search results [CHAR LIMIT=30]-->
+  <string name="nearby_places">Lleoedd cyfagos</string>
 </resources>

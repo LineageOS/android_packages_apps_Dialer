@@ -17,6 +17,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Forward lookup -->
+    <string name="nearby_places">Lleoedd cyfagos</string>
+    <string name="people">Pobol</string>
     <!-- Number lookup -->
     <!-- Disclaimer -->
 </resources>

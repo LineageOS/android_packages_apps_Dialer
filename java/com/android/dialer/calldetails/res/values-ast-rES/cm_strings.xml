@@ -15,4 +15,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="play_recordings">
+        <item quantity="one">Reproducir grabación</item>
+        <item quantity="other">Reproducir grabaciones</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Nun pudo alcontrase denguna aplicación pa reproducir la grabación esbillada.</string>
+</resources>

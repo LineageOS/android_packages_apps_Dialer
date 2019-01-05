@@ -16,5 +16,7 @@
 -->
 <resources>
   <!-- Label next to the checkbox users can use to prevent the associated dialog from showing -->
+  <string name="always_warn">Dangos rhybudd bob tro</string>
   <!-- Main text shown to the user in the dialog -->
+  <string name="details">Rwyt yn galw rhif tramor ac mae\'n bosib bydd costau am yr alwad.</string>
 </resources>
