@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "7126162b_90e14dca",
+        "filename": "java/com/android/incallui/ProximitySensor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 17117
+      },
+      "writtenOn": "2019-02-03T23:43:53Z",
+      "side": 1,
+      "message": "98 symbols iirc",
+      "parentUuid": "cfb659a5_658248e6",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 109
+      },
+      "revId": "98746f40ab1cb5b9b0f246f9f51d4dd8f73577b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f42ef177_6e587c96",
         "filename": "java/com/android/incallui/res/values/lineage_config.xml",
         "patchSetId": 4
