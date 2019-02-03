@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d74451c7_fb03ce1d",
+        "filename": "java/com/android/incallui/ProximitySensor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-02-03T23:40:08Z",
+      "side": 1,
+      "message": "Being a member variable it should start with \"m\".",
+      "range": {
+        "startLine": 61,
+        "startChar": 18,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "98746f40ab1cb5b9b0f246f9f51d4dd8f73577b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfb659a5_658248e6",
+        "filename": "java/com/android/incallui/ProximitySensor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-02-03T23:40:08Z",
+      "side": 1,
+      "message": "Line too long.",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 109
+      },
+      "revId": "98746f40ab1cb5b9b0f246f9f51d4dd8f73577b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f42ef177_6e587c96",
+        "filename": "java/com/android/incallui/res/values/lineage_config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-02-03T23:40:08Z",
+      "side": 1,
+      "message": "This must be false as default. And for this reason, the config must really be renamed.",
+      "range": {
+        "startLine": 19,
+        "startChar": 54,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "98746f40ab1cb5b9b0f246f9f51d4dd8f73577b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
