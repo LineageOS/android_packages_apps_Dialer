@@ -32,6 +32,8 @@ import com.android.incallui.audiomode.AudioModeProvider.AudioModeListener;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 
+import com.android.incallui.R;
+
 /**
  * Class manages the proximity sensor for the in-call UI. We enable the proximity sensor while the
  * user in a phone call. The Proximity sensor turns off the touchscreen and display when the user is
@@ -56,6 +58,7 @@ public class ProximitySensor
   private boolean isAttemptingVideoCall;
   private boolean isVideoCall;
   private boolean isRttCall;
+  private boolean isUltrasoundProximity;
 
   public ProximitySensor(
       @NonNull Context context,
@@ -81,6 +84,8 @@ public class ProximitySensor
     this.audioModeProvider = audioModeProvider;
     this.audioModeProvider.addListener(this);
     Trace.endSection();
+
+    isUltrasoundProximity = context.getResources().getBoolean(R.bool.config_answer_proximity_sensor_enabled);
   }
 
   public void tearDown() {
@@ -190,7 +195,7 @@ public class ProximitySensor
     if (proximityWakeLock != null) {
       if (proximityWakeLock.isHeld()) {
         LogUtil.i("ProximitySensor.turnOffProximitySensor", "releasing wake lock");
-        int flags = (screenOnImmediately ? 0 : PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY);
+        int flags = (screenOnImmediately || isUltrasoundProximity ? 0 : PowerManager.RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY);
         proximityWakeLock.release(flags);
       } else {
         LogUtil.i("ProximitySensor.turnOffProximitySensor", "wake lock already released");
