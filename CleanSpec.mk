@@ -39,3 +39,4 @@
 # ************************************************
 
 $(call add-clean-step, (cd packages/apps/Dialer; git clean -f java/com/android/voicemail/impl/com/google/internal/communications/voicemailtranscription/v1/VoicemailTranscriptionServiceGrpc.java >&2) || true)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/Dialer)
