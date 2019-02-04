@@ -92,6 +92,30 @@
       "revId": "98746f40ab1cb5b9b0f246f9f51d4dd8f73577b9",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "739b195f_00b78792",
+        "filename": "java/com/android/incallui/res/values/lineage_config.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 17117
+      },
+      "writtenOn": "2019-02-04T00:27:08Z",
+      "side": 1,
+      "message": "Yeah didn\u0027t look into resources, sorry",
+      "parentUuid": "f42ef177_6e587c96",
+      "range": {
+        "startLine": 19,
+        "startChar": 54,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "98746f40ab1cb5b9b0f246f9f51d4dd8f73577b9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
