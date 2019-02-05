@@ -166,7 +166,10 @@ public class TopRow {
 
   private static CharSequence getLabelForDialing(Context context, PrimaryCallState state) {
     if (!TextUtils.isEmpty(state.connectionLabel()) && !state.isWifi()) {
-      return context.getString(R.string.incall_calling_via_template, state.connectionLabel());
+      int resId = state.isDialingWaitingForRemote()
+          ? R.string.incall_calling_via_waiting_template
+          : R.string.incall_calling_via_template;
+      return context.getString(resId, state.connectionLabel());
     } else {
       if (state.isVideoCall()) {
         if (state.isWifi()) {
@@ -185,7 +188,10 @@ public class TopRow {
             countryCode,
             state.assistedDialingExtras().userHomeCountryCode());
       }
-      return context.getString(R.string.incall_connecting);
+      int resId = state.isDialingWaitingForRemote()
+          ? R.string.incall_connecting_waiting
+          : R.string.incall_connecting;
+      return context.getString(resId);
     }
   }
 

@@ -19,31 +19,28 @@ package com.android.incallui.disconnectdialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.telecom.DisconnectCause;
-import android.text.TextUtils;
 import android.util.Pair;
+import com.android.dialer.common.Assert;
+import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.DialerCall;
 
-/** Default error dialog shown to user after disconnect. */
-public class DefaultErrorDialog implements DisconnectDialog {
-
+public class RemoteIncomingCallsBarredDialog implements DisconnectDialog {
   @Override
   public boolean shouldShow(DialerCall call, DisconnectCause disconnectCause) {
-    return !TextUtils.isEmpty(disconnectCause.getDescription())
-        && (disconnectCause.getCode() == DisconnectCause.ERROR
-            || disconnectCause.getCode() == DisconnectCause.RESTRICTED);
+    return call.missedBecauseIncomingCallsBarredRemotely();
   }
 
   @Override
-  public Pair<Dialog, CharSequence> createDialog(@NonNull Context context, DialerCall call) {
-    DisconnectCause disconnectCause = call.getDisconnectCause();
-    CharSequence message = disconnectCause.getDescription();
-
+  public Pair<Dialog, CharSequence> createDialog(final @NonNull Context context, DialerCall call) {
+    CharSequence message = context.getString(R.string.callFailed_incoming_cb_enabled);
     Dialog dialog =
         new AlertDialog.Builder(context)
             .setMessage(message)
-            .setPositiveButton(android.R.string.cancel, null)
+            .setPositiveButton(android.R.string.ok, null)
             .create();
     return new Pair<>(dialog, message);
   }

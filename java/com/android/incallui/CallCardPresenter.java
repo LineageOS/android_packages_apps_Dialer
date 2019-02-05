@@ -400,6 +400,9 @@ public class CallCardPresenter
     updatePrimaryDisplayInfo();
   }
 
+  @Override
+  public void onSupplementaryServiceNotification(CharSequence message) {}
+
   /** Handles a change to the child number by refreshing the primary call info. */
   @Override
   public void onDialerCallChildNumberChange() {
@@ -498,6 +501,7 @@ public class CallCardPresenter
                   .setConnectTimeMillis(primary.getConnectTimeMillis())
                   .setIsVoiceMailNumber(primary.isVoiceMailNumber())
                   .setIsRemotelyHeld(primary.isRemotelyHeld())
+                  .setIsDialingWaitingForRemote(primary.isDialingWaitingForRemoteSide())
                   .setIsBusinessNumber(isBusiness)
                   .setSupportsCallOnHold(supports2ndCallOnHold())
                   .setSwapToSecondaryButtonState(getSwapToSecondaryButtonState())

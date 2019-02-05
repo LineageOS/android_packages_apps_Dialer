@@ -192,6 +192,16 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private boolean isMergeInProcess;
 
   /**
+   * Whether dialing is waiting for the busy remote party
+   */
+  private boolean dialingIsWaiting;
+
+  /**
+   * Whether an additional call was forwarded while this call was active
+   */
+  private boolean additionalCallForwarded;
+
+  /**
    * Indicates whether the phone account associated with this call supports specifying a call
    * subject.
    */
@@ -323,6 +333,25 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
             case TelephonyManagerCompat.EVENT_MERGE_COMPLETE:
               LogUtil.i("DialerCall.onConnectionEvent", "merge complete");
               isMergeInProcess = false;
+              break;
+            case TelephonyManagerCompat.EVENT_SUPPLEMENTARY_SERVICE_NOTIFICATION: {
+              CharSequence message = extras != null
+                  ? extras.getCharSequence(TelephonyManagerCompat.EXTRA_NOTIFICATION_MESSAGE)
+                  : null;
+              if (message != null) {
+                for (DialerCallListener listener : listeners) {
+                  listener.onSupplementaryServiceNotification(message);
+                }
+              }
+              break;
+            }
+            case TelephonyManagerCompat.EVENT_DIALING_IS_WAITING:
+              dialingIsWaiting = true;
+              update();
+              break;
+            case TelephonyManagerCompat.EVENT_ADDITIONAL_CALL_FORWARDED:
+              additionalCallForwarded = true;
+              update();
               break;
             case TelephonyManagerCompat.EVENT_CALL_FORWARDED:
               // Only handle this event for P+ since it's unreliable pre-P.
@@ -834,7 +863,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   public boolean isCallForwarded() {
-    return isCallForwarded;
+    return isCallForwarded || hasProperty(Call.Details.PROPERTY_WAS_FORWARDED);
   }
 
   /** @return The call subject, or {@code null} if none specified. */
@@ -907,6 +936,20 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public boolean isConferenceCall() {
     return hasProperty(Call.Details.PROPERTY_CONFERENCE);
+  }
+
+  public boolean isDialingWaitingForRemoteSide() {
+    return state == State.DIALING && dialingIsWaiting;
+  }
+
+  public boolean wasUnansweredForwarded() {
+    return getDisconnectCause().getCode() == DisconnectCause.MISSED
+        && additionalCallForwarded;
+  }
+
+  public boolean missedBecauseIncomingCallsBarredRemotely() {
+    return getDisconnectCause().getCode() == DisconnectCause.RESTRICTED
+        && hasProperty(Call.Details.PROPERTY_REMOTE_INCOMING_CALLS_BARRED);
   }
 
   @Nullable

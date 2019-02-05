@@ -219,6 +219,9 @@ public class AnswerScreenPresenter
 
     @Override
     public void onEnrichedCallSessionUpdate() {}
+
+    @Override
+    public void onSupplementaryServiceNotification(CharSequence message) {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {

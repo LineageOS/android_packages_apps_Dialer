@@ -91,6 +91,8 @@ public abstract class PrimaryCallState {
 
   public abstract boolean isRemotelyHeld();
 
+  public abstract boolean isDialingWaitingForRemote();
+
   public abstract boolean isBusinessNumber();
 
   public abstract boolean supportsCallOnHold();
@@ -121,6 +123,7 @@ public abstract class PrimaryCallState {
         .setConnectTimeMillis(0)
         .setIsVoiceMailNumber(false)
         .setIsRemotelyHeld(false)
+        .setIsDialingWaitingForRemote(false)
         .setIsBusinessNumber(false)
         .setSupportsCallOnHold(true)
         .setSwapToSecondaryButtonState(ButtonState.NOT_SUPPORT)
@@ -168,6 +171,8 @@ public abstract class PrimaryCallState {
     public abstract Builder setIsVoiceMailNumber(boolean isVoiceMailNumber);
 
     public abstract Builder setIsRemotelyHeld(boolean isRemotelyHeld);
+
+    public abstract Builder setIsDialingWaitingForRemote(boolean dialingWaitingForRemote);
 
     public abstract Builder setIsBusinessNumber(boolean isBusinessNumber);
 
