@@ -28,4 +28,16 @@
     android:key="displayOrder"
     android:title="@string/display_options_view_names_as"/>
 
+  <PreferenceCategory
+    android:key="@string/incall_category_key"
+    android:title="@string/incall_category_title">
+
+    <SwitchPreference
+      android:key="@string/incall_show_ssn_key"
+      android:title="@string/incall_show_ssn_label"
+      android:defaultValue="false"
+      android:summary="@string/incall_show_ssn_summary" />
+
+  </PreferenceCategory>
+
 </PreferenceScreen>

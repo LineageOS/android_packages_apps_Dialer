@@ -164,6 +164,9 @@ public class AnswerProximitySensor
   public void onEnrichedCallSessionUpdate() {}
 
   @Override
+  public void onSupplementaryServiceNotification(CharSequence message) {}
+
+  @Override
   public void onDialerCallSessionModificationStateChange() {}
 
   @Override

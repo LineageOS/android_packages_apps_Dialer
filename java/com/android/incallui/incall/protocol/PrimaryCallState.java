@@ -91,6 +91,8 @@ public abstract class PrimaryCallState {
 
   public abstract boolean isRemotelyHeld();
 
+  public abstract boolean isDialingWaitingForRemote();
+
   public abstract boolean isBusinessNumber();
 
   public abstract boolean supportsCallOnHold();
@@ -168,6 +170,8 @@ public abstract class PrimaryCallState {
     public abstract Builder setIsVoiceMailNumber(boolean isVoiceMailNumber);
 
     public abstract Builder setIsRemotelyHeld(boolean isRemotelyHeld);
+
+    public abstract Builder setIsDialingWaitingForRemote(boolean dialingWaitingForRemote);
 
     public abstract Builder setIsBusinessNumber(boolean isBusinessNumber);
 

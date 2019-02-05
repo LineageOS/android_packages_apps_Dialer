@@ -185,6 +185,8 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
   public void onEnrichedCallSessionUpdate() {}
 
   @Override
+  public void onSupplementaryServiceNotification(CharSequence message) {}
+  @Override
   public void onIncomingCall(DialerCall call) {}
 
   @Override

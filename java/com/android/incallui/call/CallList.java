@@ -893,5 +893,8 @@ public class CallList implements DialerCallDelegate {
         listener.onSessionModificationStateChange(call);
       }
     }
+
+    @Override
+    public void onSupplementaryServiceNotification(CharSequence message) {}
   }
 }
