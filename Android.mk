@@ -175,7 +175,9 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_PACKAGE_NAME := Dialer
 LOCAL_CERTIFICATE := shared
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_PRODUCT_MODULE := true
 LOCAL_USE_AAPT2 := true
+LOCAL_REQUIRED_MODULES := privapp_whitelist_com.android.dialer
 
 include $(BUILD_PACKAGE)
 
