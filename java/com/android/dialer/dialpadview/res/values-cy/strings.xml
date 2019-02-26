@@ -34,30 +34,42 @@
 
          Used by AccessibilityService to announce the purpose of the button.
     -->
+  <string name="description_dial_button">deialu</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system is in airplane mode. The user cannot access to
          voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
+  <string name="dialog_voicemail_airplane_mode_message">I alw\'r lleisbost, rhaid yn gyntaf troi modd awyren i ffwrdd.</string>
   <!-- Dialog message which is shown when the user tries to check voicemail
          while the system isn't ready for the access. [CHAR LIMIT=NONE] -->
+  <string name="dialog_voicemail_not_ready_message">I osod y lleisbost, gweler Dewislen &gt; Gosodiadau.</string>
   <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <!-- Item label: jump to the in-call DTMF dialpad.
          (Part of a list of options shown in the dialer when another call
          is already in progress.) -->
+  <string name="dialer_useDtmfDialpad">Defnyddio bysellbad tôn cyffwrdd</string>
   <!-- Item label: jump to the in-call UI.
        (Part of a list of options shown in the dialer when another call
        is already in progress.) -->
+  <string name="dialer_returnToInCallScreen">Dychwelyd i\'r galwad</string>
   <!-- Item label: use the Dialer's keypad to add another call.
        (Part of a list of options shown in the dialer when another call
        is already in progress.) -->
+  <string name="dialer_addAnotherCall">Ychwanegu galwad</string>
   <!-- The title of a dialog that displays the IMEI of the phone -->
+  <string name="imei">IMEI</string>
   <!-- The title of a dialog that displays the MEID of the CDMA phone -->
+  <string name="meid">MEID</string>
   <!-- The label for the hex encoding of the device ID -->
   <!-- The label for the decimal encoding of the device ID -->
   <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
+  <string name="simContacts_emptyLoading">Yn llwytho o gerdyn SIM\u2026</string>
   <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
+  <string name="simContacts_title">Cysylltiadau cerdyn SIM</string>
   <!-- Menu item used to call a contact, containing the number of the contact to call -->
+  <string name="menu_callNumber">Galw <xliff:g id="number">%s</xliff:g></string>
   <!-- Regular expression for prohibiting certain phone numbers in dialpad.
        Ignored if empty. -->
   <!-- Dialog message which is shown when the user tries to make a phone call
        to prohibited phone numbers [CHAR LIMIT=NONE] -->
+  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Methu â galw\'r rhif hwn</string>
 </resources>

@@ -108,8 +108,13 @@
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail_string">Lleisbost</string>
   <!-- String to be displayed to indicate in the call log that a call just now occurred. -->
+  <string name="just_now">Jyst nawr</string>
   <!-- Text to show in call log for a video call. [CHAR LIMIT=16] -->
+  <string name="new_call_log_video">Fideo</string>
   <!-- String used to display calls from unknown numbers in the call log.  [CHAR LIMIT=30] -->
+  <string name="new_call_log_unknown">Anhysybys</string>
   <!-- String used to display calls from blocked numbers in the call log.   [CHAR LIMIT=30] -->
+  <string name="new_call_log_secondary_blocked">Wedi\'u rhwystro</string>
   <!-- String used to display calls from spam numbers in the call log.   [CHAR LIMIT=30] -->
+  <string name="new_call_log_secondary_spam">Sbam</string>
 </resources>

@@ -20,6 +20,7 @@
   <string name="incall_content_description_muted">Wedi\'i distewi</string>
   <string name="incall_content_description_unmuted">Wedi\'i dad-ddistewi</string>
   <string name="incall_content_description_swap_calls">Cyfnewid galwadau</string>
+  <string name="incall_content_description_swap_sim">Newid SIM</string>
   <string name="incall_content_description_merge_calls">Cyfuno galwadau</string>
   <string name="incall_content_description_earpiece">Seinydd clust y ddyfais</string>
   <string name="incall_content_description_speaker">Seinydd</string>

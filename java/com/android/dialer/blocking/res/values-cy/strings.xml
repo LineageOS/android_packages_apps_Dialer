@@ -27,10 +27,15 @@
   </string>
   <!-- Confirmation dialog message for blocking a number with visual voicemail active.
        [CHAR LIMIT=NONE] -->
+  <string name="block_number_confirmation_message_vvm">Caiff galwadau o\'r rhif hwn eu rhwystro a bydd negeseuon llais yn cael eu dileu yn awtomatig.
+  </string>
   <!-- Confirmation dialog message for blocking a number with no visual voicemail.
        [CHAR LIMIT=NONE] -->
+  <string name="block_number_confirmation_message_no_vvm">Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr adael negeseuon llais.
+  </string>
   <!-- Confirmation dialog message for blocking a number with new filtering enabled.
        [CHAR LIMIT=NONE] -->
+  <string name="block_number_confirmation_message_new_filtering">Ni fyddi bellach yn derbyn galwadau na negeseuon testun o\'r rhif hwn.  </string>
   <!-- Block number alert dialog button [CHAR LIMIT=32] -->
   <string name="block_number_ok">RHWYSTRO</string>
   <!-- Confirmation dialog for unblocking a number. [CHAR LIMIT=NONE] -->
@@ -54,7 +59,9 @@
   <string name="send_to_voicemail_import_failed">Methwyd â mewnforio</string>
   <!-- Title of notification telling the user that call blocking has been temporarily disabled.
        [CHAR LIMIT=56] -->
+  <string name="call_blocking_disabled_notification_title">Mae rhwystro galwadau wedi ei analluogi am 48 awr  </string>
   <!-- Text for notification which provides the reason that call blocking has been temporarily
        disabled. Namely, we disable call blocking after an emergency call in case of return
        phone calls made by emergency services. [CHAR LIMIT=64] -->
+  <string name="call_blocking_disabled_notification_text">Wedi\'i analluogi gan fod galwad brys wedi ei gwneud.  </string>
 </resources>

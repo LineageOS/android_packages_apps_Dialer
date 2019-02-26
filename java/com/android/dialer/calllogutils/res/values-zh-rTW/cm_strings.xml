@@ -19,5 +19,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">所有帳戶</string>
     <string name="call_log_all_calls_header">所有來電</string>
+    <string name="call_log_incoming_header">僅顯示來電</string>
+    <string name="call_log_outgoing_header">僅顯示已撥來電</string>
+    <string name="call_log_missed_header">僅顯示未接來電</string>
+    <string name="call_log_voicemail_header">僅顯示語音信箱留言</string>
     <string name="call_log_blacklist_header">僅限已封鎖來電</string>
 </resources>

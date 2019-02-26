@@ -19,6 +19,9 @@
   <!-- Label for a list of local search results [CHAR LIMIT=30]-->
   <string name="nearby_places">Lleoedd cyfagos</string>
   <!-- Shown as a prompt to turn on location permissions and/or enable location to allow nearby places search [CHAR LIMIT=NONE]-->
+  <string name="search_location_permission">I gael manylion cyswllt llefydd gerllaw, rho ganiatâd i gael gwybod dy leoliad.</string>
   <!-- Text on a button asking the user to grant the location permission -->
+  <string name="nearby_places_allow">Caniatáu</string>
   <!-- Text on a button which dismisses a prompt asking to grand the location permission -->
+  <string name="nearby_places_dismiss">Gwrthod</string>
 </resources>

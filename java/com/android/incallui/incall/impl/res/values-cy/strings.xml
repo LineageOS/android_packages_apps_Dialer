@@ -50,6 +50,7 @@
   <string name="incall_label_swap">Cyfnewid</string>
   <!-- Button shown during a call with a multi-SIM device to hang up and call with the other SIM
      instead. [CHAR LIMIT=12] -->
+  <string name="incall_label_swap_sim">Newid SIM</string>
   <!-- Used to inform the user that the note associated with an outgoing call has been sent.
        [CHAR LIMIT=32] -->
   <string name="incall_note_sent">Nodyn wedi\'i anfon</string>

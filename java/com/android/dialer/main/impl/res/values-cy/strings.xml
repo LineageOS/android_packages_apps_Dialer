@@ -22,9 +22,11 @@
        TODO(38502365): Remove this once we're ready to launch the new UI. -->
   <string name="nui_shortcut_name">Rhyngwyneb Ffôn Newydd</string>
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
+  <string name="dialpad_activity_title">Pad Deialu Ffôn</string>
   <!-- The description text for the call log tab. -->
   <string name="main_call_history_tab_description" tools:ignore="UnusedResources">Hanes galwadau</string>
   <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
+  <string name="search">@android:string/search_go</string>
   <!-- A11y announcement to let users know a button will let them search for contacts and places [CHAR LIMIT=NONE] -->
   <string name="description_search">Chwilio cysylltiadau a lleoedd</string>
   <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
@@ -32,6 +34,8 @@
   <!-- A11y announcement to let users know a button will let them view their contacts [CHAR LIMIT=NONE] -->
   <string name="description_contacts">Gweld Cysylltiadau</string>
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
+  <string name="voice_search_not_available">Chwilio llais ddim ar gael</string>
   <!-- Content description for the button that displays the dialpad
        [CHAR LIMIT=NONE] -->
+  <string name="dialpad_button_content_description">pad bysellau</string>
 </resources>

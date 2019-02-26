@@ -20,6 +20,7 @@
        that don't specify a label. -->
   <string name="applicationLabel" tools:ignore="UnusedResources">Ffôn</string>
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
+  <string name="launcherDialpadActivityLabel">Pad Deialu Ffôn</string>
   <!-- The description text for the call log tab.
 
   Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -107,9 +108,11 @@
   <string name="notification_new_voicemail_ticker">Neges lleisbost newydd gan <xliff:g id="caller">%1$s</xliff:g>
     </string>
   <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
+  <string name="voicemail_playback_error">Methwyd â chwarae\'r neges lleisbost</string>
   <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
   <string name="voicemail_fetching_content">Yn llwytho lleisbost\u2026</string>
   <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
+  <string name="voicemail_fetching_timout">Methwyd â llwytho lleisbost</string>
   <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
   <string name="call_log_item_count_and_date">(<xliff:g id="count">%1$d</xliff:g>)
         <xliff:g id="date">%2$s</xliff:g>
@@ -118,10 +121,12 @@
 
        Used by AccessibilityService to announce the purpose of the view.
   -->
+  <string name="description_playback_speakerphone">Troi\'r seinydd uchel ymlaen neu i ffwrdd</string>
   <!-- String describing the seekbar in the voicemail playback to seek playback position.
 
        Used by AccessibilityService to announce the purpose of the view.
   -->
+  <string name="description_playback_seek">Canfod lleoliad chwarae</string>
   <!-- Content description for the fake action menu button that brings up the call history
        activity -->
   <string name="action_menu_call_history_description">Hanes galwadau</string>
@@ -129,6 +134,7 @@
        This should be same as the description for the real action menu
        overflow button available in ActionBar.
        [CHAR LIMIT=NONE] -->
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Rhagor o ddewisiadau</string>
   <!-- Content description for the button that displays the dialpad
        [CHAR LIMIT=NONE] -->
   <string name="action_menu_dialpad_button">pad bysellau</string>
@@ -136,38 +142,46 @@
   <string name="dialer_settings_label">Gosodiadau</string>
   <!-- Label for the simulator submenu. This is used to show actions that are useful for development
        and testing. [CHAR LIMIT=30]-->
+  <string name="simulator_submenu_label">Efelychydd</string>
   <!-- Label for the menu item that installs a shortcut for the new UI. [CHAR LIMIT=30] -->
+  <string name="new_ui_launcher_shortcut_label">Creu Llwybr Byr i\'r Rhyngwyneb Newydd</string>
   <!-- String describing the user entering bulk action mode.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
 -->
+  <string name="description_entering_bulk_action_mode">Yn mynd mewn i fodd swmp weithredu</string>
   <!-- String describing the user leaving bulk action mode.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
           This is especially valuable for views without textual representation like ImageView.
 -->
+  <string name="description_leaving_bulk_action_mode">Wedi gadael modd swmp weithredu</string>
   <!-- String describing the button to select an entry for bulk action.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
             This is especially valuable for views without textual representation like ImageView.
   -->
+  <string name="description_selecting_bulk_action_mode">Dewiswyd <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
   <!-- String describing the button to unselect an entry for bulk action.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
             This is especially valuable for views without textual representation like ImageView.
   -->
+  <string name="description_unselecting_bulk_action_mode">Dad-ddewiswyd <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
   <!-- String describing the button to access the contact details for a name or number.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
             This is especially valuable for views without textual representation like ImageView.
   -->
+  <string name="description_contact_details">Manylion cysylltu ar gyfer <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
   <!-- String describing the button to access the contact details for a name or number when the
        when the number is a suspected spam.
 
       Note: AccessibilityServices use this attribute to announce what the view represents.
             This is especially valuable for views without textual representation like ImageView.
   -->
+  <string name="description_spam_contact_details">Manylion cyswllt galwr <xliff:g id="nameOrNumber">%1$s</xliff:g> sy\'n cael ei amau o fod yn sbamiwr</string>
   <!-- String indicating the number of calls to/from a caller in the call log.
 
   Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -182,18 +196,29 @@
   -->
   <string name="description_video_call">Galwad fideo.</string>
   <!-- String describing the icon used to start a voice search -->
+  <string name="description_start_voice_search">Dechrau chwiliad llais</string>
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail">Lleisbost</string>
   <!-- String describing the cancel button in multi select.
        Note: AccessibilityServices uses this attribute to announce what the view represents.
        [CHAR LIMIT=NONE] -->
+  <string name="description_cancel_multi_select">Diddymu modd swp o weithredoedd</string>
   <string name="voicemailMultiSelectDeleteConfirm">Dileu</string>
   <string name="voicemailMultiSelectDeleteCancel">Diddymu</string>
   <string name="voicemailMultiSelectActionBarTitle"><xliff:g id="number">%1$s</xliff:g> wedi\'u dewis</string>
   <!-- Alert dialog title to accept or decline deleting voicemail(s). -->
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="zero"><b>Dileu\'r negeseuon lleisbost hyn? </b></item>
+    <item quantity="one"><b>Dileu\'r neges lleisbost hon? </b></item>
+    <item quantity="two"><b>Dileu\'r negeseuon lleisbost hyn? </b></item>
+    <item quantity="few"><b>Dileu\'r negeseuon lleisbost hyn? </b></item>
+    <item quantity="many"><b>Dileu\'r negeseuon lleisbost hyn? </b></item>
+    <item quantity="other"><b>Dileu\'r negeseuon lleisbost hyn? </b></item>
+  </plurals>
   <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
        explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
        current day -->
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
   <!-- A format string used for displaying the date and time for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM
        The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
   <string name="voicemailCallLogDateTimeFormat"><xliff:g example="Jul 25, 2014" id="date">%1$s</xliff:g> am <xliff:g example="2:49 PM" id="time">%2$s</xliff:g></string>
@@ -202,6 +227,7 @@
   <!-- A format string used for displaying the date, time and duration for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM • 00:34 -->
   <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g example="Jul 25, 2014 at 2:49PM" id="dateAndTime">%1$s</xliff:g> \u2022 <xliff:g example="01:22" id="duration">%2$s</xliff:g></string>
   <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
+  <string name="voice_search_not_available">Chwilio llais ddim ar gael</string>
   <!-- Hint displayed in dialer search box when there is no query that is currently typed.
        [CHAR LIMIT=30] -->
   <string name="dialer_hint_find_contact">Chwilio cysylltiadau</string>
@@ -264,9 +290,11 @@
   <!-- Button text for the "Set up" video calling option displayed underneath an entry in the call log.
        Tapping causes a the user to be taken to set up video calling.
        [CHAR LIMIT=30] -->
+  <string name="call_log_action_set_up_video">Gosod galwadau fideo</string>
   <!-- Button text for the "Invite" option displayed underneath an entry in the call log.
        Tapping causes a the user to be taken to the messaging app with a message ready to invite them to set up video calling.
        [CHAR LIMIT=30] -->
+  <string name="call_log_action_invite_video">Gwahodd i alwad fideo</string>
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
        messaging app to send a SMS to the number represented by the call log entry.
        [CHAR LIMIT=30] -->
@@ -277,6 +305,7 @@
   <string name="call_log_action_details">Manylion yr alwad</string>
   <!-- Button text for the button displayed underneath an entry in the call log.
        Tapping opens dialog to share voicemail archive with other apps. [CHAR LIMIT=30] -->
+  <string name="call_log_action_share_voicemail">Anfon at &#8230;</string>
   <!-- Button text for the button displayed underneath an entry in the call log, which when
        tapped triggers a return call to the named user. [CHAR LIMIT=30] -->
   <string name="call_log_action_call">        Galw <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
@@ -303,6 +332,7 @@
   <string name="description_outgoing_call">Galwad i <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
   <!-- TextView text item showing the secondary line number the call was received via.
        [CHAR LIMIT=NONE]-->
+  <string name="call_log_via_number">trwy <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
   <!-- The order of the PhoneAccount and via number that a call was received on,
        if both are visible.
        [CHAR LIMIT=NONE]-->
@@ -409,6 +439,7 @@
     </string>
   <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
        [CHAR_LIMIT=30] -->
+  <string name="import_send_to_voicemail_numbers_label">Mewnforio rhifau</string>
   <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
        This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
        and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
@@ -448,11 +479,13 @@
   <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
   <string name="permission_no_speeddial">I alluogi deialu cyflym, rho ganiatâd yn yr ap Cysylltiadau.</string>
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
+  <string name="permission_no_calllog">I weld dy log galwadau, rho ganiatâd yn yr ap Ffôn.</string>
   <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
   <string name="permission_no_search">I chwilio dy gysylltiadau,\nrho ganiatâd i\'r ap Cysylltiadau.</string>
   <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
   <string name="permission_place_call">I wneud galwad, rho ganiatâd i\'r ap Ffôn.</string>
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
+  <string name="toast_cannot_write_system_settings">Nid oes gan yr ap Ffôn ganiatâd i ysgrifennu ar osodiadau\'r system.</string>
   <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <string name="blocked_number_call_log_label">Wedi\'i rhwystro</string>
   <!-- Button text for a button displayed underneath an entry in the call log, which marks the
@@ -470,6 +503,7 @@
   <!-- Button text for a button displayed underneath an entry in the call log, which removes the
        phone number represented by the call log entry from the blacklisted numbers.
        [CHAR LIMIT=30] -->
+  <string name="call_log_action_unblock_number">Dadrwystro\'r rhif</string>
   <!-- Label under the name of a spam number in the call log. [CHAR LIMIT=15] -->
   <string name="spam_number_call_log_label">Sbam</string>
   <!-- Shown as a message that notifies the user enriched calling isn't working -->
@@ -477,29 +511,45 @@
   <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
   <string name="about_phone_label">Ynghylch</string>
   <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_branding_text">Trawsgrifio gan Google</string>
   <!-- Label indicating that a voicemail transcription is in progress [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_in_progress">Yn trawsgrifio&#8230;</string>
   <!-- Label indicating that a voicemail transcription failed [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_failed">Trawsgrifiad dim ar gael.</string>
   <!-- Label indicating that a voicemail transcription failed because it was in an
        unsupported language [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_failed_language_not_supported">Trawsgrifiad dim ar gael. Ni chefnogir yr iaith honno.</string>
   <!-- Label indicating that a voicemail transcription failed because no speech was detected
        [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_failed_no_speech">Trawsgrifiad dim ar gael. Ni adnabuwyd llais.</string>
   <!-- Title of voicemail donation promo dialog
       [CHAR LIMIT=64] -->
+  <string name="voicemail_donation_promo_title">Helpu i wella cywirdeb trawsgrifio?</string>
   <!-- Content of voicemail donation promo dialog
        [CHAR LIMIT=NONE] -->
+  <string name="voicemail_donation_promo_content">Gad i Google adolygu hyn a negeseuon lleisbost gyda thrawsgrifiadau yn y dyfodol.
+Caiff eu cadw\'n ddienw. Gellir newid y Gosodiadau unrhyw bryd.  </string>
   <!-- Text for a 'learn more' link at the end of the voicemail donation promo dialog content -->
+  <string name="voicemail_donation_promo_learn_more">Dysgu&#160;mwy</string>
   <!-- Label for the voicemail donation promo dialog opt-in button
        [CHAR LIMIT=20] -->
+  <string name="voicemail_donation_promo_opt_in">Ie, iawn</string>
   <!-- Label for the voicemail donation promo dialog opt-out button
        [CHAR LIMIT=20] -->
+  <string name="voicemail_donation_promo_opt_out">Dim diolch</string>
   <!-- Prompt asking the user to rate the quality of the voicemail transcription
        [CHAR LIMIT=30] -->
+  <string name="voicemail_transcription_rating">Graddio ansawdd trawsgrifiad</string>
   <!-- Message displayed after user has rated a voicemail transcription [CHAR LIMIT=30] -->
+  <string name="voicemail_transcription_rating_thanks">Diolch am dy adborth</string>
   <!-- Describes the thumbs up, 'good' transcription button. Read by TalkBack.
       [CHAR LIMIT=NONE] -->
+  <string name="description_rating_good">Hoffi</string>
   <!-- Describes the thumbs down, 'bad' transcription button. Read by TalkBack.
       [CHAR LIMIT=NONE] -->
+  <string name="description_rating_bad">Dim yn hoffi</string>
   <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
+  <string name="view_conversation">Gweld</string>
   <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
         to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
   <string name="ec_data_deleted">Dileuwyd yr alwad. Edrycha yn Negeseuon i weld a dileu atodiadau cafwyd eu rhannu yn ystod yr alwad hon.</string>

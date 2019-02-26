@@ -19,5 +19,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">모든 계정</string>
     <string name="call_log_all_calls_header">모든 통화</string>
+    <string name="call_log_incoming_header">수신 전화만</string>
+    <string name="call_log_outgoing_header">발신 전화만</string>
+    <string name="call_log_missed_header">부재중 전화만</string>
+    <string name="call_log_voicemail_header">음성사서함 메시지만</string>
     <string name="call_log_blacklist_header">차단된 통화만</string>
 </resources>

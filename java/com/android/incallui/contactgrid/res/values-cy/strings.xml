@@ -23,10 +23,12 @@
        in the connecting stage. -->
   <string name="incall_connecting">Yn galw…</string>
   <!-- Display information related to assisted dialing, for example Calling using +1 (US)… -->
+  <string name="incall_connecting_assited_dialed">Yn galw gan ddefnyddio +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
   <!-- Displayed above the contact name when an external call is being pulled to the local
        device. -->
   <string name="incall_transferring">Yn trosglwyddo…</string>
   <!-- Displayed above the contact name when the user starts a video call. -->
+  <string name="incall_video_call_requesting">Galwad fideo darparwr symudol…</string>
   <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
        Wi-Fi video call. -->
   <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
@@ -60,4 +62,5 @@
   <string name="contact_grid_incoming_suspected_spam">Galwg sbam posib</string>
   <!-- In-call screen: phone number of the device shown to the users so that users can give their
       number to emergency responders. -->
+  <string name="contact_grid_callback_number">Y rhif ffôn hwn: <xliff:g id="light_number">%1$s</xliff:g></string>
 </resources>

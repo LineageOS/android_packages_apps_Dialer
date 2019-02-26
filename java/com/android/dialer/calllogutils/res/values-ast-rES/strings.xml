@@ -64,6 +64,7 @@
        [CHAR LIMIT=NONE]-->
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <!-- String to be displayed to indicate in the call log that a call just now occurred. -->
+  <string name="just_now">Puramente agora</string>
   <!-- Text to show in call log for a video call. [CHAR LIMIT=16] -->
   <!-- String used to display calls from unknown numbers in the call log.  [CHAR LIMIT=30] -->
   <!-- String used to display calls from blocked numbers in the call log.   [CHAR LIMIT=30] -->
