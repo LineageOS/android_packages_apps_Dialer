@@ -16,19 +16,12 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Shown as a message that notifies asks the user if they want to send a post call message -->
   <string name="post_call_message">Dywedwch pam eich bod wedi galw</string>
-  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_1">Mae\'n fater brys. Galwch fi nôl.</string>
-  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_2">Ffoniwch fi nôl pan gewch chi gyfle.</string>
-  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_3">Dim brys. Gallwn sgwrsio\'n hwyrach.</string>
-  <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_add_message">Ychwanegu neges</string>
-  <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_send_message">Anfon neges</string>
-  <!-- Shown to let the user know that their message was sent. -->
   <string name="post_call_message_sent">Anfonwyd y neges</string>
   <string name="view">Gweld</string>
 </resources>

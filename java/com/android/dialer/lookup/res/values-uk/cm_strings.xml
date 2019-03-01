@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Місця поблизу</string>
     <string name="people">Люди</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Пошук номеру телефона</string>
     <string name="enable_forward_lookup_title">Прямий пошук</string>
     <string name="enable_forward_lookup_summary">Показувати найближчі місця при пошуку в номеронабирачі</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Постачальник прямого пошуку</string>
     <string name="people_lookup_provider_title">Постачальник пошуку даних про людей</string>
     <string name="reverse_lookup_provider_title">Постачальник зворотнього пошуку</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Пошукові запити можуть відправляти запити за захищеним протоколом (https) на віддалені веб-сайти для збору інформації. Запит може включати телефонний номер іншої сторони або пошуковий запит</string>
 </resources>

@@ -16,10 +16,4 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- String used to display calls from private numbers in the call log and in call UI. For
-    example, if the user gets an incoming phone call from an unknown number, the caller ID will
-    read "Restricted". We only show this string if the user is on the Verizon network. -->
-  <!-- String used to display calls from private numbers in the call log. For example, if the user
-    gets an incoming phone call from an unknown number, the caller ID will read "Private number".
-    We only show this string if the user is not on the Verizon network. -->
-</resources>
+  </resources>

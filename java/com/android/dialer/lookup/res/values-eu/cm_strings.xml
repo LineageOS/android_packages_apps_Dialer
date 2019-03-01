@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Inguruko tokiak</string>
     <string name="people">Jendea</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Telefono zenbakien bilaketa</string>
     <string name="enable_forward_lookup_title">Tokien bilaketa</string>
     <string name="enable_forward_lookup_summary">Erakutsi inguruko tokiak markatzailean bilatzean</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Tokien bilaketarako hornitzailea</string>
     <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
     <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Bilaketek protokolo seguru baten bidez (https) galderak bidali ditzakete urruneko webguneetara informazio bila. Galderek beste partearen telefono zenbakia eraman dezakete</string>
 </resources>

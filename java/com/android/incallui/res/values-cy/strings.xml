@@ -16,223 +16,125 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Official label of the phone app, as seen in "Manage Applications"
-       and other settings UIs. -->
   <string name="phoneAppLabel" product="default">Ffôn</string>
-  <!-- Official label for the in-call UI. DO NOT TRANSLATE. -->
-  <!-- In-call screen: status label for a conference call -->
-  <!-- In-call screen: call lost dialog text -->
+  <string name="inCallLabel" translate="false">InCallUI</string>
+  <string name="confCall">Galwad grŵp</string>
   <string name="call_lost">Collwyd yr alwad</string>
-  <!-- MMI dialog strings -->
-  <!-- Dialog label when an MMI code starts running -->
-  <!-- post dial -->
-  <!-- In-call screen: body text of the dialog that appears when we encounter
-       the "wait" character in a phone number to be dialed; this dialog asks the
-       user if it's OK to send the numbers following the "wait". -->
   <string name="wait_prompt_str">Anfon y tonau canlynol?\n</string>
-  <!-- In-call screen: body text of the dialog that appears when we encounter
-       the "PAUSE" character in a phone number to be dialed; this dialog gives
-       informative message to the user to show the sending numbers following the "Pause". -->
   <string name="pause_prompt_str">Yn anfon tonau\n</string>
-  <!-- In-call screen: button label on the "wait" prompt dialog -->
   <string name="send_button">Anfon</string>
-  <!-- In-call screen: button label on the "wait" prompt dialog in CDMA Mode-->
-  <!-- In-call screen: button label on the "wait" prompt dialog in CDMA Mode-->
-  <!-- In-call screen: on the "wild" character dialog, this is the label
-       for a text widget that lets the user enter the digits that should
-       replace the "wild" character. -->
-  <!-- In-call screen: status label for a conference call -->
-  <!-- Used in FakePhoneActivity test code.  DO NOT TRANSLATE. -->
-  <!-- Used in FakePhoneActivity test code.  DO NOT TRANSLATE. -->
-  <!-- Used in FakePhoneActivity test code.  DO NOT TRANSLATE. -->
-  <!-- Call settings screen, Set voicemail dialog title -->
-  <!-- Notification strings -->
-  <!-- The "label" of the in-call Notification for a dialing call, used
-       as the format string for a Chronometer widget. [CHAR LIMIT=60] -->
+  <string name="pause_prompt_yes">Iawn</string>
+  <string name="pause_prompt_no">Na</string>
+  <string name="wild_prompt_str">Newid y nod ar hap gyda</string>
+  <string name="caller_manage_header">Galwad grŵp <xliff:g id="conf_call_time">%s</xliff:g></string>
+  <string name="voicemail_settings_number_label">Rhif lleisbost</string>
   <string name="notification_dialing">Yn deialu</string>
-  <!-- Missed call notification message used for a single missed call, including
-       the caller-id info from the missed call -->
   <string name="notification_missedCallTicker">Galwad wedi\'i methu oddi wrth <xliff:g id="missed_call_from">%s</xliff:g></string>
-  <!-- The "label" of the in-call Notification for an ongoing call. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an ongoing work call. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an ongoing call, which is being made over
-       Wi-Fi. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an ongoing work call, which is being made
-       over Wi-Fi. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for a call that's on hold -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". If still can't meet, replace with "Incoming call with attachments." -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=50] If can't meet limit, remove "Incoming". -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing call,
-       which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing work call,
-       which is being made over Wi-Fi. [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an incoming ringing spam call. -->
-  <!-- The "label" of the in-call Notification for upgrading an existing call to a video call. -->
-  <!-- Label for the "No service" notification item, when expanded. -->
+  <string name="notification_ongoing_call">Galwad ar y gweill</string>
+  <string name="notification_ongoing_work_call">Galwad gwaith ar y gweill</string>
+  <string name="notification_ongoing_call_wifi">Galwad Wi\u2011Fi ar y gweill</string>
+  <string name="notification_ongoing_work_call_wifi">Galwad gwaith Wi\u2011Fi ar y gweill</string>
+  <string name="notification_on_hold">Yn disgwyl</string>
+  <string name="notification_incoming_call">Galwad i mewn</string>
+  <string name="notification_incoming_call_with_photo">Galwad i mewn gyda llun</string>
+  <string name="notification_incoming_call_with_message">Galwad i mewn gyda neges</string>
+  <string name="notification_incoming_call_with_location">Galwad i mewn gyda lleoliad</string>
+  <string name="notification_incoming_call_with_photo_message">Galwad i mewn gyda llun a neges</string>
+  <string name="notification_incoming_call_with_photo_location">Galwad i mewn gyda llun a lleoliad</string>
+  <string name="notification_incoming_call_with_message_location">Galwad i mewn gyda neges a lleoliad</string>
+  <string name="notification_incoming_call_with_photo_message_location">Galwad i mewn gyda llun, neges a lleoliad</string>
+  <string name="notification_incoming_call_attachments">Galwad i mewn gydag atodiadau</string>
+  <string name="important_notification_incoming_call">Galwad pwysig i mewn</string>
+  <string name="important_notification_incoming_call_with_photo">Galwad pwysig i mewn gyda llun</string>
+  <string name="important_notification_incoming_call_with_message">Galwad pwysig i mewn gyda neges</string>
+  <string name="important_notification_incoming_call_with_location">Galwad pwysig i mewn gyda lleoliad</string>
+  <string name="important_notification_incoming_call_with_photo_message">Galwad pwysig i mewn gyda llun a neges</string>
+  <string name="important_notification_incoming_call_with_photo_location">Galwad pwysig i mewn gyda llun a lleoliad</string>
+  <string name="important_notification_incoming_call_with_message_location">Galwad pwysig i mewn gyda neges a lleoliad</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Galwad pwysig i mewn gyda llun, neges a lleoliad</string>
+  <string name="important_notification_incoming_call_attachments">Galwad pwysig i mewn gydag atodiadau</string>
+  <string name="notification_incoming_work_call">Galwad gwaith i mewn</string>
+  <string name="notification_incoming_call_wifi">Galwad Wi\u2011Fi i mewn</string>
+  <string name="notification_incoming_work_call_wifi">Galwad Wi\u2011Fi gwaith i mewn</string>
+  <string name="notification_incoming_spam_call">Galwad sbam bosib i mewn</string>
+  <string name="notification_requesting_video_call">Cais fideo i mewn</string>
   <string name="notification_network_selection_title">Dim gwasanaeth</string>
-  <!-- Label for the expanded "No service" notification item, including the
-       operator name set by user -->
-  <!-- Label for the "Answer call" action. This is the displayed label for the action that answers
-       an incoming call. [CHAR LIMIT=12] -->
+  <string name="notification_network_selection_text">Rhwydwaith a ddewiswyd (<xliff:g id="operator_name">%s</xliff:g>) dim ar gael</string>
   <string name="notification_action_answer">Ateb</string>
-  <!-- Label for "end call" Action.
-       It is displayed in the "Ongoing call" notification, which is shown
-       when the user is outside the in-call screen while the phone call is still
-       active. [CHAR LIMIT=12] -->
-  <!-- Label for "Video Call" notification action. This is a displayed on the notification for an
-       incoming video call, and answers the call as a video call. [CHAR LIMIT=12] -->
+  <string name="notification_action_end_call">Gorffen yr alwad</string>
   <string name="notification_action_answer_video">Fideo</string>
-  <!-- Label for "Voice" notification action. This is a displayed on the notification for an
-       incoming video call, and answers the call as an audio call. [CHAR LIMIT=12] -->
   <string name="notification_action_answer_voice">Llais</string>
-  <!-- Label for "Accept" notification action. This is somewhat generic, and may refer to
-       scenarios such as accepting an incoming call or accepting a video call request.
-       [CHAR LIMIT=12] -->
   <string name="notification_action_accept">Derbyn</string>
-  <!-- Label for "Dismiss" notification action. This is somewhat generic, and may refer to
-       scenarios such as declining an incoming call or declining a video call request.
-       [CHAR LIMIT=12] -->
-  <!-- The "label" of the in-call Notification for an ongoing external call.
-       External calls are a representation of a call which is in progress on the user's other
-       device (e.g. another phone or a watch).
-       [CHAR LIMIT=60] -->
-  <!-- The "label" of the in-call Notification for an ongoing external video call.
-       External calls are a representation of a call which is in progress on the user's other
-       device (e.g. another phone or a watch).
-       [CHAR LIMIT=60] -->
-  <!-- Notification action displayed for external call notifications.  External calls are a
-       representation of a call which is in progress on the user's other device (e.g. another
-       phone or a watch).  The "take call" action initiates the process of pulling an external
-       call to the current device.
-       [CHAR LIMIT=30] -->
-  <!-- Notification action displayed for external call notifications.  External calls are a
-       representation of a call which is in progress on the user's other device (e.g. another
-       phone or a watch).  The "take video call" action initiates the process of pulling an external
-       video call to the current device.
-       [CHAR LIMIT=30] -->
-  <!-- In-call screen: call failure message displayed in an error dialog -->
+  <string name="notification_action_dismiss">Gwrthod</string>
+  <string name="notification_external_call">Galwad ar y gweill ar ddyfais arall</string>
+  <string name="notification_external_video_call">Galwad fideo ar y gweill ar ddyfais arall</string>
+  <string name="notification_take_call">Derbyn Galwad</string>
+  <string name="notification_take_video_call">Derbyn Galwad Fideo</string>
   <string name="incall_error_power_off">I wneud galwad, rhaid diffodd modd awyren.</string>
-  <!-- In-call screen: call failure message displayed in an error dialog.
-       This string is currently unused (see comments in InCallActivity.java.) -->
   <string name="incall_error_emergency_only">Heb gofrestru ar y rhwydwaith.</string>
-  <!-- In-call screen: call failure message displayed in an error dialog -->
   <string name="incall_error_out_of_service">Dim rhwydwaith symudol ar gael.</string>
-  <!-- In-call screen: call failure message displayed in an error dialog -->
-  <!-- In-call screen: call failure message displayed in an error dialog -->
+  <string name="incall_error_no_phone_number_supplied">I wneud galwad, rho rif dilys.</string>
   <string name="incall_error_call_failed">Methu â galw.</string>
-  <!-- In-call screen: status message displayed in a dialog when starting an MMI -->
-  <!-- In-call screen: message displayed in an error dialog -->
-  <!-- In-call screen: message displayed in an error dialog -->
+  <string name="incall_status_dialed_mmi">Yn dechrau rhediad MMI\u2026</string>
+  <string name="incall_error_supp_service_unknown">Gwasanaeth heb ei gefnogi.</string>
   <string name="incall_error_supp_service_switch">Methu â newid rhwng galwadau.</string>
-  <!-- In-call screen: message displayed in an error dialog -->
   <string name="incall_error_supp_service_separate">Methu â gwahanu\'r alwad.</string>
-  <!-- In-call screen: message displayed in an error dialog -->
-  <!-- In-call screen: message displayed in an error dialog -->
+  <string name="incall_error_supp_service_transfer">Methu â throsglwyddo.</string>
   <string name="incall_error_supp_service_conference">Methu â gwneud galwad grŵp.</string>
-  <!-- In-call screen: message displayed in an error dialog -->
   <string name="incall_error_supp_service_reject">Methu â gwrthod yr alwad.</string>
-  <!-- In-call screen: message displayed in an error dialog -->
-  <!-- Dialog title for the "radio enable" UI for emergency calls -->
-  <!-- Status message for the "radio enable" UI for emergency calls -->
+  <string name="incall_error_supp_service_hangup">Methu â rhyddhau galwad(au).</string>
+  <string name="emergency_enable_radio_dialog_title">Galwad brys</string>
   <string name="emergency_enable_radio_dialog_message">Yn troi radio ymlaen\u2026</string>
-  <!-- Status message for the "radio enable" UI for emergency calls -->
-  <!-- Dialer text on Emergency Dialer -->
-  <!-- Emergency dialer: message displayed in an error dialog -->
+  <string name="emergency_enable_radio_dialog_retry">Dim gwasanaeth. Yn ceisio eto\u2026</string>
   <string name="dial_emergency_error">Methu â galw. Dyw <xliff:g id="non_emergency_number">%s</xliff:g> ddim yn rif argyfwng.</string>
-  <!-- Emergency dialer: message displayed in an error dialog -->
   <string name="dial_emergency_empty_error">Methu â galw. Deiala rif argyfwng.</string>
-  <!-- Displayed in the text entry box in the dialer when in landscape mode to guide the user
-       to dial using the physical keyboard -->
-  <!-- Message indicating that Video Started flowing for IMS-VT calls -->
-  <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <!-- Message indicating that camera failure has occurred for the selected camera and
-       as result camera is not ready -->
-  <string name="camera_not_ready">Camera ddim yn barod</string>
-  <!-- Message indicating that camera is ready/available -->
+  <string name="dialerKeyboardHintText">Defnyddio bysellfwrdd i ddeialu</string>
+  <string name="player_started">Chwaraeydd wedi Dechrau</string>
+  <string name="player_stopped">Chwaraeydd wedi Stopio</string>
+  <string name="camera_not_ready">Camera dim yn barod</string>
   <string name="camera_ready">Camera yn barod</string>
-  <!-- Message indicating unknown call session event -->
-  <!-- For incoming calls, this is a string we can get from a CDMA network instead of
-       the actual phone number, to indicate there's no number present.  DO NOT TRANSLATE. -->
-  <!-- Title displayed above settings coming after voicemail in the call features screen -->
-  <!-- Use this to describe the separate conference call button; currently for screen readers through accessibility. -->
+  <string name="unknown_call_session_event">"Digwyddiad sesiwn galwad anhysbys"</string>
+  <string name="other_settings">Gosodiadau galwadau eraill</string>
   <string name="goPrivate">mynd yn breifat</string>
-  <!--  Use this to describe the select contact button in EditPhoneNumberPreference; currently for screen readers through accessibility. -->
-  <!-- Title for the category "ringtone", which is shown above ringtone and vibration
-       related settings.
-       [CHAR LIMIT=30] -->
+  <string name="selectContact">dewis cyswllt</string>
   <string name="preference_category_ringtone">Tôn Caniad a Dirgrynu</string>
-  <!-- Label for "Manage conference call" panel [CHAR LIMIT=40] -->
-  <!-- This can be used in any application wanting to disable the text "Emergency number" -->
-  <!-- Used to inform the user that a call was received via a number other than the primary
-      phone number associated with their device. [CHAR LIMIT=16] -->
-  <!-- Title for the call context with a person-type contact. [CHAR LIMIT=40] -->
-  <!-- Title for the call context with a business-type contact. [CHAR LIMIT=40] -->
+  <string name="manageConferenceLabel">Rheoli galwad grŵp</string>
+  <string name="emergency_call_dialog_number_for_display">Rhif mewn argyfwng</string>
+  <string name="child_number">trwy <xliff:g example="650-555-1212" id="child_number">%s</xliff:g></string>
+  <string name="person_contact_context_title">Negeseuon diweddar</string>
   <string name="business_contact_context_title">Gwybodaeth busnes</string>
-  <!-- Distance strings for business caller ID context. -->
-  <!-- Used to inform the user how far away a location is in miles. [CHAR LIMIT=NONE] -->
   <string name="distance_imperial_away"><xliff:g id="distance">%.1f</xliff:g> milltir i ffwrdd</string>
-  <!-- Used to inform the user how far away a location is in kilometers. [CHAR LIMIT=NONE] -->
   <string name="distance_metric_away"><xliff:g id="distance">%.1f</xliff:g> km i ffwrdd</string>
-  <!-- A shortened way to display a business address. Formatted [street address], [city/locality]. -->
   <string name="display_address"><xliff:g id="street_address">%1$s</xliff:g>, <xliff:g id="locality">%2$s</xliff:g></string>
-  <!-- Used to indicate hours of operation for a location as a time span. e.g. "11 am - 9 pm" [CHAR LIMIT=NONE] -->
   <string name="open_time_span"><xliff:g id="open_time">%1$s</xliff:g> - <xliff:g id="close_time">%2$s</xliff:g></string>
-  <!-- Used to indicate a series of opening hours for a location.
-       This first argument may be one or more time spans. e.g. "11 am - 9 pm, 9 pm - 11 pm"
-       The second argument is an additional time span. e.g. "11 pm - 1 am"
-       The string is used to build a list of opening hours.
-       [CHAR LIMIT=NONE] -->
   <string name="opening_hours"><xliff:g id="earlier_times">%1$s</xliff:g>, <xliff:g id="later_time">%2$s</xliff:g></string>
-  <!-- Used to express when a location will open the next day. [CHAR LIMIT=NONE] -->
-  <!-- Used to express the next time at which a location will be open today. [CHAR LIMIT=NONE] -->
-  <!-- Used to express the next time at which a location will close today. [CHAR LIMIT=NONE] -->
-  <!-- Used to express the next time at which a location closed today if it is already closed. [CHAR LIMIT=NONE] -->
-  <!-- Displayed when a place is open. -->
-  <!-- Displayed when a place is closed. -->
-  <!-- Title for the notification to the user after a call from an unknown number ends. [CHAR LIMIT=100] -->
-  <!-- Title for the notification to the user after a call from an spammer ends. [CHAR LIMIT=100] -->
-  <!-- Text for the toast shown after the user presses block/report spam. [CHAR LIMIT=100] -->
+  <string name="opens_tomorrow_at">Yn agor yfory am <xliff:g id="open_time">%s</xliff:g></string>
+  <string name="opens_today_at">Yn agor heddiw am <xliff:g id="open_time">%s</xliff:g></string>
+  <string name="closes_today_at">Yn cau am <xliff:g id="close_time">%s</xliff:g></string>
+  <string name="closed_today_at">Wedi cau heddiw am <xliff:g id="close_time">%s</xliff:g></string>
+  <string name="open_now">Ar agor nawr</string>
+  <string name="closed_now">Ar gau nawr</string>
+  <string name="non_spam_notification_title">Nabod <xliff:g id="number">%1$s</xliff:g>?</string>
+  <string name="spam_notification_title">Ai sbam yw <xliff:g id="number">%1$s</xliff:g>?</string>
   <string name="spam_notification_block_report_toast_text"><xliff:g id="number">%1$s</xliff:g> wedi\'i rwystro a\'r galwad wedi ei adrodd fel sbam.</string>
-  <!-- Text for the toast shown after the user presses not spam. [CHAR LIMIT=100] -->
   <string name="spam_notification_not_spam_toast_text">Adroddwyd galwad oddi wrth <xliff:g id="number">%1$s</xliff:g> fel sbam.</string>
-  <!-- Text displayed in the collapsed notification to the user after a non-spam call ends. [CHAR LIMIT=100] -->
-  <!-- Text displayed in the expanded notification to the user after a non-spam call ends. [CHAR LIMIT=NONE] -->
-  <!-- Text displayed in the collapsed notification to the user after a spam call ends. [CHAR LIMIT=100] -->
-  <!-- Text displayed in the expanded notification to the user after a spam call ends. [CHAR LIMIT=NONE] -->
-  <!-- Text for the reporting spam action in the after call prompt. [CHAR LIMIT=20] -->
+  <string name="spam_notification_non_spam_call_collapsed_text">Tapia i\'w ychwanegu i\'r cysylltiadau neu rwystro rhif sbam.</string>
+  <string name="spam_notification_non_spam_call_expanded_text">Dyma\'r tro cyntaf i\'r rhif hwn dy alw di. Os mai sbam oedd yr alwad, gellir rhwystro\'r rhif hwn ac anfon adroddiad amdano.</string>
+  <string name="spam_notification_spam_call_collapsed_text">Tapia i\'w adrodd fel NID YN SBAM neu ei rwystro.</string>
+  <string name="spam_notification_spam_call_expanded_text">Rydym yn amau mai sbamiwr yw hwn. Os nad oedd y galwad yn sbam, tara \"DIM SBAM\" i roi gwybod i ni am ein camgymeriad.</string>
   <string name="spam_notification_report_spam_action_text">Rhwystro ac adrodd</string>
-  <!-- Text for the adding to contacts action in the after call prompt. [CHAR LIMIT=20] -->
   <string name="spam_notification_add_contact_action_text">Ychwanegu cyswllt</string>
-  <!-- Text for the reporting as not spam action in the after call prompt. [CHAR LIMIT=20] -->
   <string name="spam_notification_not_spam_action_text">Dim yn sbam</string>
-  <!-- Text for the blocking spam action in the after call prompt. [CHAR LIMIT=20] -->
   <string name="spam_notification_block_spam_action_text">Rhwystro\'r rhif</string>
-  <!-- Text for the adding to contacts action in the after call dialog. [CHAR LIMIT=40] -->
   <string name="spam_notification_dialog_add_contact_action_text">Ychwanegu at gysylltiadau</string>
-  <!-- Text for the blocking and reporting spam action in the after call dialog. [CHAR LIMIT=40] -->
   <string name="spam_notification_dialog_block_report_spam_action_text">Rhwystro ac adrodd am sbam</string>
-  <!-- Text for the marking a call as not spam in the after call dialog. [CHAR LIMIT=40] -->
   <string name="spam_notification_dialog_was_not_spam_action_text">Dim yn sbam</string>
-  <!-- Name for a conference call. Shown in the in call UI and in notifications. -->
-  <!-- Name for a generic conference call. Shown in the in call UI. This is used in CDMA where we
-       don't know the precise state of participants in the conference.  -->
-  <!-- Displayed when handover from WiFi to Lte occurs during a video call -->
-  <!-- Displayed when WiFi handover from LTE fails during a video call. -->
+  <string name="callFailed_simError">Dim SIM neu wall SIM</string>
+  <string name="conference_caller_disconnect_content_description">Gorffen yr alwad</string>
+  <string name="conference_call_name">Galwad grŵp</string>
+  <string name="generic_conference_call_name">Ar ganol galwad</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Yn parhau â\'r alwad gyda data symudol\u2026</string>
+  <string name="video_call_lte_to_wifi_failed_title">Methwyd a newid i rwydwaith Wi\u2011Fi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Bydd yr alwad fideo yn parhau ar y rhwydwaith symudol. Bydd unrhyw gostau defnydd data fel yr arfer.  </string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Peidio â dangos hwn eto</string>
 </resources>

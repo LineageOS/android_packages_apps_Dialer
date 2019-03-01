@@ -16,56 +16,24 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Title displayed in the overlay for outgoing calls which include the name of the provider.
-     [CHAR LIMIT=40] -->
   <string name="incall_calling_via_template">Yn galw gyda <xliff:g id="provider_name">%s</xliff:g></string>
-  <!-- Displayed above the contact name during an outgoing phone call. Indicates that the call is
-       in the connecting stage. -->
   <string name="incall_connecting">Yn galw…</string>
-  <!-- Displayed above the contact name when an external call is being pulled to the local
-       device. -->
   <string name="incall_transferring">Yn trosglwyddo…</string>
-  <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
-       video call. -->
   <string name="incall_video_call_requesting">Yn galw fideo…</string>
-  <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
-       Wi-Fi video call. -->
   <string name="incall_wifi_video_call_requesting">Yn galw fideo Wi-Fi…</string>
-  <!-- Displayed above the contact name when the user's video upgrade failed due to an unknown
-       reason. -->
   <string name="incall_video_call_request_failed">Methu â chysylltu</string>
-  <!-- Displayed above the contact name when the user's video upgrade was declined by the remote
-       party. -->
   <string name="incall_video_call_request_rejected">Gwrthodwyd yr alwad</string>
-  <!-- Displayed above the contact name when no response was received for the user's upgrade
-       requests and we timed out. -->
   <string name="incall_video_call_request_timed_out">Doedd dim ateb</string>
-  <!-- In-call screen: status label for a call that's in the process of hanging up
-       [CHAR LIMIT=25] -->
   <string name="incall_hanging_up">Yn dod a\'r alwad i ben</string>
-  <!-- In-call screen: status label displayed briefly after a call ends [CHAR LIMIT=25] -->
   <string name="incall_call_ended">Galwad wedi dod i ben</string>
-  <!-- In-call screen: label shown at the top of the screen when a call is on hold by the remote
-     party [CHAR LIMIT=25] -->
   <string name="incall_remotely_held">Yn aros</string>
-  <!-- Displayed in the answer call screen for incoming video calls. -->
   <string name="contact_grid_incoming_video_call">Galwad fideo oddi wrth</string>
-  <!-- Displayed in the answer call screen for incoming video calls over Wi-F. -->
   <string name="contact_grid_incoming_wifi_video_call">Galwad fideo Wi-Fi oddi wrth</string>
-  <!-- Displayed in the answer call screen for incoming requests to upgrade to a video call. -->
   <string name="contact_grid_incoming_video_request">Cais i uwchraddio i alwad fideo gan</string>
-  <!-- Displayed in the answer call screen for incoming requests to upgrade to a video call over Wi-F. -->
   <string name="contact_grid_incoming_wifi_video_request">Cais i uwchraddio i alwad fideo Wi-Fi gan</string>
-  <!-- Displayed in the answer call screen for incoming voice calls. -->
   <string name="contact_grid_incoming_voice_call">Galwad oddi wrth</string>
-  <!-- Displayed in the answer call screen for incoming voice calls. -->
   <string name="contact_grid_incoming_work_call">Galwad gwaith oddi wrth</string>
-  <!-- Displayed in the answer call screen for incoming calls via a phone account. -->
   <string name="contact_grid_incoming_via_template">Galwad i mewn trwy <xliff:g id="provider_name">%s</xliff:g></string>
-  <!-- Displayed in the answer call screen for incoming spam calls. -->
   <string name="contact_grid_incoming_suspected_spam">Galwg sbam posib</string>
-  <!-- In-call screen: string shown to the user when their outgoing number is different than the
-     number reported by TelephonyManager#getLine1Number(). This is used for carriers like
-     Project Fi so that users can give their number to emergency responders. -->
   <string name="contact_grid_callback_number">Rhif galw nôl: <xliff:g id="dark_number">%1$s</xliff:g></string>
 </resources>

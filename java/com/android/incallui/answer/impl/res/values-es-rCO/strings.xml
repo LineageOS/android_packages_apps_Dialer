@@ -16,9 +16,4 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- "Respond via SMS" option that lets you compose a custom response. [CHAR LIMIT=30] -->
-  <!-- "Custom Message" Cancel alert dialog button -->
-  <!-- "Custom Message" Send alert dialog button -->
-  <!-- Text indicates the video local camera is off. [CHAR LIMIT=40] -->
-  <!-- Voice prompt of swipe gesture when accessibility is turned on. -->
-</resources>
+  </resources>

@@ -16,11 +16,4 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- String used to display calls from unknown numbers in the call log -->
-  <!-- String to identify an unknown/restricted callers. ex. "Unknown 1", "Restricted 2", ect. -->
-  <!-- String used to display calls from pay phone in the call log -->
-  <!-- Title for the activity that dials the phone.  This is the name
-       used in the Launcher icon. -->
-  <!-- text on a button, Video call, as in to place a video call. -->
-  <!-- Label shown on the 'positive' button for the dialog. Indicates that the call will proceed -->
-</resources>
+  </resources>

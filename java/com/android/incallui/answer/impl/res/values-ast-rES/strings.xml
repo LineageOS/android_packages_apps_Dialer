@@ -16,9 +16,18 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- "Respond via SMS" option that lets you compose a custom response. [CHAR LIMIT=30] -->
-  <!-- "Custom Message" Cancel alert dialog button -->
-  <!-- "Custom Message" Send alert dialog button -->
-  <!-- Text indicates the video local camera is off. [CHAR LIMIT=40] -->
-  <!-- Voice prompt of swipe gesture when accessibility is turned on. -->
+  <string name="call_incoming_message_custom">Escribi la to propia…</string>
+  <string name="call_incoming_audio_handset">Auricular</string>
+  <string name="call_incoming_audio_speakerphone">Altavoz</string>
+  <string name="call_incoming_respond_via_sms_custom_message">Escribi la to propia…</string>
+  <string name="call_incoming_custom_message_cancel">Encaboxar</string>
+  <string name="call_incoming_custom_message_send">Unviar</string>
+  <string name="a11y_incoming_call_reject_with_sms">Refugar esta llamada con un mensaxe</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Contestar como llamada d\'audiu</string>
+  <string name="a11y_incoming_call_answer_and_release">Retrucar y acabar la llamada en cursu</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">Refugar con mensaxe</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Contestar como llamada d\'audiu</string>
+  <string name="a11y_description_incoming_call_answer_and_release">Retrucar y acabar la llamada en cursu</string>
+  <string name="call_incoming_video_is_off">El videu ta apagáu</string>
+  <string name="call_incoming_important">Importante</string>
 </resources>

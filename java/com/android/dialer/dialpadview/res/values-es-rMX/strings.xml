@@ -16,13 +16,4 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- String describing the back button in the dialpad. -->
-  <!-- String describing the overflow menu button in the dialpad. -->
-  <!-- String describing the Delete/Backspace ImageButton.
-       Used by AccessibilityService to announce the purpose of the button.
-  -->
-  <!--  String describing the button used to add a plus (+) symbol to the dialpad -->
-  <!-- String describing the Voicemail ImageButton.
-       Used by AccessibilityService to announce the purpose of the button.
-  -->
-</resources>
+  </resources>

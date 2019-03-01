@@ -16,12 +16,4 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Text for the onscreen "Hold" button when it is not selected. Pressing it will put
-     the call on hold. -->
-  <!-- Text for the onscreen "Hold" button when it is selected. Pressing it will resume
-       the call from a previously held state. -->
-  <!-- Button shown during a phone to route audio from earpiece to speaker phone.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone to switch the audio route.
-     [CHAR LIMIT=12] -->
-</resources>
+  </resources>

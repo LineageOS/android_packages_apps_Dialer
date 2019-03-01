@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Mjesta u blizini</string>
     <string name="people">Osobe</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Pretraživanje telefonskih brojeva</string>
     <string name="enable_forward_lookup_title">Pretraživanje unaprijed</string>
     <string name="enable_forward_lookup_summary">Prikaz obližnjih mjesta prilikom pretraživanja u biraču brojeva</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Pružatelj pretraživanja unaprijed</string>
     <string name="people_lookup_provider_title">Pružatelj pretraživanja ljudi</string>
     <string name="reverse_lookup_provider_title">Pružatelj obrnutog pretraživanja</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Pretraživanja mogu slati upite putem sigurnog protokola (https) udaljenim web-stranicama da bi prikupila informacije. Upit može uključivati telefonski broj drugog korisnika ili upit za pretraživanje</string>
 </resources>

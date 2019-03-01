@@ -16,10 +16,4 @@
  ~ limitations under the License
  -->
 <resources>
-  <!-- Content description of button to switch to full screen camera -->
-  <!-- Content description of button to resize camera from fullscreen to only a preview -->
-  <!-- Content description of button when after swapped to front -->
-  <!-- Content description of button when after swapped to back -->
-  <!-- Content description of button to take a photo -->
-  <!-- Content description of button to cancel a photo -->
-</resources>
+  </resources>

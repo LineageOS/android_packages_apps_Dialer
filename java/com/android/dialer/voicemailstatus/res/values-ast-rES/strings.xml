@@ -16,18 +16,10 @@
   ~ limitations under the License
   -->
 <resources>
-  <!--  Voicemail status message shown at the top of call log to notify the user that no new
-  voicemails are currently available. This can happen when both notification as well as data
-  connection to the voicemail server is lost. [CHAR LIMIT=64] -->
-  <!--  Voicemail status message shown at the top of call log to notify the user that there is no
-    data connection to the voicemail server, but there are new voicemails waiting on the server.
-    [CHAR LIMIT=64] -->
-  <!--  Voicemail status message shown at the top of call log to invite the user to configure
-  visual voicemail. [CHAR LIMIT=64] -->
-  <!--  Voicemail status message shown at the top of call details screen to notify the user that
-  the audio of this voicemail is not available. [CHAR LIMIT=64] -->
-  <!--  User action prompt shown next to a voicemail status message to let the user configure
-  visual voicemail. [CHAR LIMIT=20] -->
-  <!--  User action prompt shown next to a voicemail status message to let the user call voicemail
-  server directly to listen to the voicemails. [CHAR LIMIT=20] -->
+  <string name="voicemail_status_voicemail_not_available">Anovamientos de corréu de voz non disponible</string>
+  <string name="voicemail_status_messages_waiting">Nuevu corréu de voz n\'espera. Nun se puede cargar agora.</string>
+  <string name="voicemail_status_configure_voicemail">Configurar el to corréu de voz</string>
+  <string name="voicemail_status_audio_not_available">Audiu non disponible</string>
+  <string name="voicemail_status_action_configure">Configurar</string>
+  <string name="voicemail_status_action_call_server">Llamar a buzón de voz</string>
 </resources>

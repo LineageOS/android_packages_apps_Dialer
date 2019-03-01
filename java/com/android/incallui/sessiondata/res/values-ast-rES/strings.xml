@@ -15,4 +15,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources></resources>
+<resources>
+  <string name="spam_photo_text">Retrucar pa revelar la semeya</string>
+  <string name="spam_message_text">Retrucar pa revelar el mensax</string>
+</resources>

@@ -16,17 +16,4 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Title bar for call detail screen -->
-  <!-- Menu item in call details used to remove a call or voicemail from the call log. -->
-  <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
-  <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
-  <!-- Label for action to report a number with inaccurate caller id information. [CHAR LIMIT=48] -->
-  <!-- String shown when the call details show a image that was sent -->
-  <!-- String shown when the call details show a image that was received -->
-  <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
-  <!-- Title of dialog that confirms whether a user wants to report an incorrect number.
-       [CHAR LIMIT=NONE] -->
-  <!-- Toast that appears when a caller id report fails to send. Could be due to network error or
-       authentication error. [CHAR LIMIT=NONE] -->
-  <!-- Toast message which appears when a contact's caller id is reported as incorrect. [CHAR LIMIT=NONE] -->
-</resources>
+  </resources>

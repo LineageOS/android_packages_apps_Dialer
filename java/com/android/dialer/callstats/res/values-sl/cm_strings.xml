@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">Trajanje klicev</string>
     <string name="call_stats_title_count">Število klicev</string>
     <string name="call_stats_title_average_duration">Povprečna dolžina klica</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Vaš dnevnik klicev ne vsebuje nobenih klicev v izbranem časovnem obsegu.</string>
 </resources>

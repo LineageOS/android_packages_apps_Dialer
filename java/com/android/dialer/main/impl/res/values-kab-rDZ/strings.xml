@@ -16,17 +16,4 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Name of the main activity. -->
-  <!-- Name of launcher shortcut for the new UI main activity.
-       TODO(38502365): Remove this once we're ready to launch the new UI. -->
-  <!-- The description text for the call log tab. -->
-  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
-  <!-- A11y announcement to let users know a button will let them search for contacts and places [CHAR LIMIT=NONE] -->
-  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
-  <!-- A11y announcement to let users know a button will let them view their contacts [CHAR LIMIT=NONE] -->
-  <!-- Tab text to show users their call log/call history [CHAR LIMIT=10] -->
-  <!-- Tab text to show users their favorite contacts that they can call in 1 click [CHAR LIMIT=10] -->
-  <!-- Tab text to show users their voicemails  [CHAR LIMIT=10] -->
-  <!-- Show users their settings [CHAR LIMIT=20] -->
-  <!-- Send feedback about the app [CHAR LIMIT=20] -->
-</resources>
+  </resources>

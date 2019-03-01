@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">مدد المكالمات</string>
     <string name="call_stats_title_count">عدد المكالمات</string>
     <string name="call_stats_title_average_duration">متوسط مدة المكالمة</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">سجل مكالماتك لا يحتوي على أي مكالمات في نطاق الوقت المحدد.</string>
 </resources>

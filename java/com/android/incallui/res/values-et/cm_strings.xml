@@ -15,4 +15,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">Kõne salvestuse alustamine nurjus</string>
+    <string name="call_recording_file_location">Kõne salvestatud kohta <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Salvesta kõne</string>
+    <string name="onscreenCallRecordingText">Kõne salvestamine - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Lõpeta salvestus</string>
+    <string name="recording_time_text">Salvestamine</string>
+    <string name="recording_warning_title">Lubad kõne salvestamise?</string>
+    <string name="recording_warning_text">Märkus: Teie olete kohustatud järgima seaduseid, määruseid ja reegleid, mis käivad kõnede salvestamise funktsiooni ja nende salvestiste jagamise kohta.</string>
+</resources>

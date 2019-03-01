@@ -25,19 +25,11 @@
   <string name="incall_content_description_speaker">Seinydd</string>
   <string name="incall_content_description_bluetooth">Bluetooth</string>
   <string name="incall_content_description_headset">Clustffonau gwifr</string>
-  <!-- Text for the onscreen "Hold" button when it is not selected. Pressing it will put
-     the call on hold. -->
   <string name="incall_content_description_hold">Rhoi\'r galwr i ddisgwyl</string>
-  <!-- Text for the onscreen "Hold" button when it is selected. Pressing it will resume
-       the call from a previously held state. -->
   <string name="incall_content_description_unhold">Parhau â\'r alwad</string>
   <string name="incall_content_description_video_on">Fideo ymlaen</string>
   <string name="incall_content_description_video_off">Fideo i ffwrdd</string>
   <string name="incall_content_description_swap_video">Cyfnewid fideos</string>
-  <!-- Button shown during a phone to route audio from earpiece to speaker phone.
-     [CHAR LIMIT=12] -->
   <string name="incall_label_speaker">Seinydd</string>
-  <!-- Button shown during a phone to switch the audio route.
-     [CHAR LIMIT=12] -->
   <string name="incall_label_audio">Sain</string>
 </resources>

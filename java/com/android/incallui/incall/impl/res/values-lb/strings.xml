@@ -16,26 +16,4 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Button shown during a phone call to upgrade to video.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone call to put the call on hold.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone call to add a new phone call.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone call to mute the microphone.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone call to end the call.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone call to show the dialpad.
-     [CHAR LIMIT=12] -->
-  <!-- Talkback text for speaker button status. [CHAR LIMIT=12] -->
-  <!-- Talkback text for speaker button status. [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone to merge two ongoing calls.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone to show the manage conference call screen.
-     [CHAR LIMIT=12] -->
-  <!-- Button shown during a phone to swap from the foreground call to the background call.
-     [CHAR LIMIT=12] -->
-  <!-- Used to inform the user that the note associated with an outgoing call has been sent.
-       [CHAR LIMIT=32] -->
-</resources>
+  </resources>

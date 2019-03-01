@@ -16,4 +16,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_log_show_all_accounts">Kõik kontod</string>
+    <string name="call_log_all_calls_header">Kõik kõned</string>
+    <string name="call_log_blacklist_header">Ainult blokeeritud kõned</string>
+</resources>
