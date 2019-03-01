@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Nearby places</string>
     <string name="people">People</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Phone number lookup</string>
     <string name="enable_forward_lookup_title">Forward lookup</string>
     <string name="enable_forward_lookup_summary">Show nearby places when searching in the dialler</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Forward lookup provider</string>
     <string name="people_lookup_provider_title">People lookup provider</string>
     <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Lookups may send queries over a secure protocol (https) to remote websites to gather information. The query may include the other party\'s phone number or the search query</string>
 </resources>

@@ -16,11 +16,5 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
-  <!-- Accessibility string for close/navigation icon in DialerToolbar -->
-  <!-- [CHAR LIMIT=NONE] Shown when there are no contacts in the all contacts list. -->
-  <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
-  <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
-  <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
-  <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
+  <string name="custom_message_hint">Escribi un mensax personalizáu</string>
 </resources>

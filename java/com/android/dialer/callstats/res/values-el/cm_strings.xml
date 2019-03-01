@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">Διάρκεια κλήσεων</string>
     <string name="call_stats_title_count">Αριθμός κλήσεων</string>
     <string name="call_stats_title_average_duration">Μέση διάρκεια κλήσεων</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Το αρχείο καταγραφής κλήσεων δεν περιέχει καμία κλήση στο επιλεγμένο χρονικό εύρος.</string>
 </resources>

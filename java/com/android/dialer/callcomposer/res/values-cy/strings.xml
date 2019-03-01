@@ -16,42 +16,22 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
   <string name="urgent">Pwysig! Atebwch, plîs!</string>
-  <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
   <string name="want_to_chat">Eisiau sgwrs?</string>
-  <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
   <string name="quick_question">Cwestiwn cyflym…</string>
-  <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
   <string name="message_composer_custom_message_hint">Ysgrifenna neges dy hun</string>
-  <!-- Text for a button to make a phone call combined with a text message [CHAR LIMIT=26] -->
   <string name="send_and_call">Anfon a galw</string>
-  <!-- Text for a button to make a phone call combined with a picture or other media [CHAR LIMIT=26] -->
   <string name="share_and_call">Rhannu a galw</string>
-  <!-- Accessibility description for each image in the gallery. For example, "image January 17 2015 1 59 pm". -->
   <string name="gallery_item_description">delwedd <xliff:g id="date">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g></string>
-  <!-- Accessibility description for each image in the gallery when no date is present. -->
   <string name="gallery_item_description_no_date">delwedd</string>
-  <!-- Content description of button to switch camera to picture more -->
   <string name="camera_switch_to_still_mode">Tynnu llun</string>
-  <!-- Error toast message shown when a camera image failed to attach to the message -->
   <string name="camera_media_failure">Methwyd â llwytho llun camera</string>
-  <!-- Text for a button to ask for device permissions -->
   <string name="allow">Caniatáu</string>
-  <!-- Text presented to the user explaining that we need Camera permission to take photos -->
   <string name="camera_permission_text">I dynnu llun, rho fynediad i Camera</string>
-  <!-- Text presented to the user explaining that we need device storage permission to view photos -->
   <string name="gallery_permission_text">I rannu llun, rho fynediad i Cyfryngau</string>
-  <!-- Content description of button to show ui for taking a photo -->
   <string name="description_call_composer_camera">Tynnu llun</string>
-  <!-- Content description of button to show ui for selecting a photo from the user's gallery -->
   <string name="description_call_composer_photo">Dewis llun</string>
-  <!-- Content description of button to show ui for sending a message -->
   <string name="description_call_composer_message">Anfon neges</string>
-  <!-- When a user makes a call with a photo attached, we send the photo through the app "Messages".
-    This string is shown in a toast for privacy reasons. -->
   <string name="image_sent_messages">Anfonwyd y neges gyda Negesu</string>
-  <!-- When a user makes a call with text attached, we send the text through the app "Messages".
-    This string is shown in a toast for privacy reasons. -->
   <string name="message_sent_messages">Anfonwyd y neges gyda Negesu</string>
 </resources>

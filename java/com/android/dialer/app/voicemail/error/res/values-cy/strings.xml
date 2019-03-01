@@ -16,28 +16,53 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_error_turn_off_airplane_mode_title">Troi modd awyren i ffwrdd</string>
+  <string name="voicemail_error_activating_title">Actifadu lleisbost gweledol</string>
+  <string name="voicemail_error_activating_message">Mae\'n bosib na fyddi\'n derbyn hysbysiadau lleisbost nes bod lleisbost gweledol wedi ei actifadu\'n llawn. Galwa lleisbost i glywed unrhyw negeseuon newydd nes bod wedi ei actifadu\'n llawn.</string>
+  <string name="voicemail_error_not_activate_no_signal_title">Methu ag actifadu lleisbost gweledol</string>
+  <string name="voicemail_error_not_activate_no_signal_message">Gwiria bod gan dy ffôn gysylltiad rhwydwaith symudol a cheisio eto.</string>
+  <string name="voicemail_error_not_activate_no_signal_airplane_mode_message">Tro\'r modd awyren i ffwrdd a cheisio eto.</string>
   <string name="voicemail_error_no_signal_title">Dim cysylltiad</string>
+  <string name="voicemail_error_no_signal_message">Ni chei dy hysbysu am negeseuon lleisbost newydd. Os wyt ar gysylltiad Wi\u2011Fi, gellir gwirio dy leisbost gan gysoni nawr.</string>
+  <string name="voicemail_error_no_signal_airplane_mode_message">Ni chei dy hysbysu am negeseuon lleisbost newydd. Tro modd awyren i ffwrdd er mwyn cysoni dy leisbost.</string>
   <string name="voicemail_error_no_signal_cellular_required_message">Mae ar dy ffôn angen cysylltiad data symudol i wirio\'r lleisbost.</string>
+  <string name="voicemail_error_activation_failed_title">Methu ag actifadu lleisbost gweledol</string>
+  <string name="voicemail_error_activation_failed_message">Gellir dal galw i wirio dy leisbost.</string>
   <string name="voicemail_error_no_data_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_no_data_message">Rho gynnig arall arni pan fydd gwell cysylltiad Wi\u2011Fi neu ddata symudol. Mae dal yn bosib galw i wirio lleisbost.</string>
+  <string name="voicemail_error_no_data_cellular_required_message">Rho gynnig arall arni pan fydd gwell cysylltiad Wi-Fi neu ddata symudol. Mae dal yn bosib galw i wirio lleisbost.</string>
   <string name="voicemail_error_bad_config_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_bad_config_message">Gellir dal galw i wirio dy leisbost.</string>
   <string name="voicemail_error_communication_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_communication_message">Gellir dal galw i wirio dy leisbost.</string>
   <string name="voicemail_error_server_connection_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_server_connection_message">Gellir dal galw i wirio dy leisbost.</string>
   <string name="voicemail_error_server_title">Methu â diweddaru lleisbost gweledol</string>
+  <string name="voicemail_error_server_message">Gellir dal galw i wirio dy leisbost.</string>
+  <string name="voicemail_error_inbox_near_full_title">Mewnflwch bron yn llawn</string>
+  <string name="voicemail_error_inbox_near_full_message">Ni fyddi\'n medru derbyn lleisbost newydd os yw\'r blwch lleisbost yn llawn.</string>
   <string name="voicemail_error_inbox_full_title">Methu â derbyn negeseuon lleisbost newydd</string>
   <string name="voicemail_error_inbox_full_message">Mae dy fewnflwch yn llawn. Gellir dileu rhai negeseuon er mwyn derbyn lleisbost newydd.</string>
   <string name="voicemail_error_inbox_full_turn_archive_on_title">Troi storfa ychwanegol a chadw wrth gefn ymlaen</string>
   <string name="voicemail_error_inbox_full_turn_archive_on_message">Mae dy flwch post yn llawn. I ryddhau lle, tro storfa ychwanegol ymlaen fel y gall Google rheoli a chadw copi wrth gefn o dy negeseuon lleisbost.</string>
   <string name="voicemail_error_inbox_almost_full_turn_archive_on_title">Troi storfa ychwanegol a chadw wrth gefn ymlaen</string>
   <string name="voicemail_error_inbox_almost_full_turn_archive_on_message">Mae dy flwch post bron yn llawn. I ryddhau lle, tro storfa ychwanegol ymlaen fel y gall Google rheoli a chadw copi wrth gefn o dy negeseuon lleisbost.</string>
+  <string name="voicemail_error_pin_not_set_title">Gosoda PIN dy leisbost</string>
+  <string name="voicemail_error_pin_not_set_message">Bydd arnat angen PIN lleisbost bob tro rwyt yn galw i glywed dy leisbost.</string>
+  <string name="voicemail_error_unknown_title">Gwall anhysbys</string>
   <string name="voicemail_action_turn_off_airplane_mode">Gosodiadau Modd Awyren</string>
   <string name="voicemail_action_set_pin">Gosod PIN</string>
+  <string name="voicemail_action_retry">Ceisio Eto</string>
   <string name="voicemail_action_turn_archive_on">Troi ymlaen</string>
   <string name="voicemail_action_dimiss">Dim diolch</string>
   <string name="voicemail_action_sync">Cysoni</string>
   <string name="voicemail_action_call_voicemail">Galw lleisbost</string>
   <string name="voicemail_action_call_customer_support">Galw Gwasanaeth Cwsmeriaid</string>
+  <string name="vvm3_error_vms_dns_failure_title">Aeth Rhywbeth o\'i Le</string>
   <string name="vvm3_error_vms_dns_failure_message">Ymddiheuriadau. Cafwyd problem. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9001.</string>
+  <string name="vvm3_error_vmg_dns_failure_title">Aeth Rhywbeth o\'i Le</string>
   <string name="vvm3_error_vmg_dns_failure_message">Ymddiheuriadau. Cafwyd problem. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9002.</string>
+  <string name="vvm3_error_spg_dns_failure_title">Aeth Rhywbeth o\'i Le</string>
   <string name="vvm3_error_spg_dns_failure_message">Ymddiheuriadau. Cafwyd problem. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9003.</string>
   <string name="vvm3_error_vms_no_cellular_title">Methu â Chysylltu â dy Flwch Lleisbost</string>
   <string name="vvm3_error_vms_no_cellular_message">Ymddiheuriadau. Rydym yn cael trafferth cysylltu â dy flwch lleisbost. Os wyt ti mewn ardal gyda signal gwael, arhosa nes dy fod efo signal cryf a rhoi cynnig arall arni. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9004.</string>
@@ -53,21 +78,36 @@
   <string name="vvm3_error_status_sms_timeout_message">Ymddiheuriadau. Rydym yn cael trafferth yn sefydlu dy wasanaeth. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9009.</string>
   <string name="vvm3_error_subscriber_blocked_title">Methu â Chysylltu â dy Flwch Lleisbost</string>
   <string name="vvm3_error_subscriber_blocked_message">Ymddiheuriadau. Rydym yn cael trafferth yn cysylltu â dy flwch lleisbost ar hyn o bryd. Rho gynnig arall arni\'n hwyrach. Os yw\'r broblem yn parhau, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9090.</string>
+  <string name="vvm3_error_unknown_user_title">Gosod Lleisbost</string>
   <string name="vvm3_error_unknown_user_message">Dyw lleisbost heb ei osod ar dy gyfrif. Cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9991.</string>
+  <string name="vvm3_error_unknown_device_title">Lleisbost</string>
   <string name="vvm3_error_unknown_device_message">Nid yw\'n bosib defnyddio lleisbost gweledol ar y ddyfais hon. Cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9992.</string>
+  <string name="vvm3_error_invalid_password_title">Aeth Rhywbeth o\'i Le</string>
   <string name="vvm3_error_invalid_password_message">Cysyllta â gwasanaeth gofal cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9993.</string>
+  <string name="vvm3_error_mailbox_not_initialized_title">Lleisbost Gweledol</string>
   <string name="vvm3_error_mailbox_not_initialized_message">I gwblhau gosod lleisbost gweledol, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9994.</string>
+  <string name="vvm3_error_service_not_provisioned_title">Lleisbost Gweledol</string>
   <string name="vvm3_error_service_not_provisioned_message">I gwblhau gosod lleisbost gweledol, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9995.</string>
+  <string name="vvm3_error_service_not_activated_title">Lleisbost Gweledol</string>
   <string name="vvm3_error_service_not_activated_message">I actifadu lleisbost gweledol, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9996.</string>
   <string name="vvm3_error_user_blocked_title">Aeth rhywbeth o\'i le</string>
   <string name="vvm3_error_user_blocked_message">I gwblhau gosod lleisbost gweledol, cysyllta â gwasanaethau cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9998.</string>
+  <string name="vvm3_error_subscriber_unknown_title">Mae Lleisbost Gweledol wedi\'i Analluogi</string>
+  <string name="vvm3_error_subscriber_unknown_message">Cysyllta â gwasanaeth gofal cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> i actifadu lleisbost gweledol.</string>
   <string name="vvm3_error_imap_getquota_error_title">Aeth rhywbeth o\'i le</string>
   <string name="vvm3_error_imap_getquota_error_message">Cysyllta â gwasanaeth gofal cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9997.</string>
   <string name="vvm3_error_imap_select_error_title">Aeth rhywbeth o\'i le</string>
   <string name="vvm3_error_imap_select_error_message">Cysyllta â gwasanaeth gofal cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9998.</string>
   <string name="vvm3_error_imap_error_title">Aeth rhywbeth o\'i le</string>
   <string name="vvm3_error_imap_error_message">Cysyllta â gwasanaeth gofal cwsmeriaid ar <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a rhoi gwybod iddynt mai\'r cod gwall yw 9999.</string>
+  <string name="verizon_terms_and_conditions_title">Telerau ac Amodau Lleisbost Gweledol</string>
   <string name="verizon_terms_and_conditions_message">%1$s\n\nRhaid derbyn telerau ac amodau Verizon Wireless cyn defnyddio lleisbost gweledol:\n\n%2$s</string>
+  <string name="dialer_terms_and_conditions_title">Troi Lleisbost Gweledol Ymlaen</string>
   <string name="dialer_terms_and_conditions_message">%s</string>
+  <string name="verizon_terms_and_conditions_decline_dialog_message">Caiff y lleisbost gweledol ei analluogi oni bai bod y telerau ac amodau yn cael eu derbyn.</string>
+  <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Analluogi lleisbost gweledol</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_message">Caiff trawsgrifiad lleisbost ei analluogi oni bai bod y telerau ac amodau yn cael eu derbyn.</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Analluogi trawsgrifiad lleisbost</string>
+  <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message">Bydd lleisbost ond ar gael trwy ddeialu *86. Gosoda PIN lleisbost newydd i barhau.</string>
   <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin">Gosod PIN</string>
 </resources>

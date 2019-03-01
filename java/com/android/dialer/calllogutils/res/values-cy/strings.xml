@@ -16,59 +16,29 @@
  ~ limitations under the License
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Title for incoming call type. [CHAR LIMIT=40] -->
   <string name="type_incoming">Galwad i mewn</string>
-  <!-- Title for incoming call which was transferred to another device. [CHAR LIMIT=60] -->
   <string name="type_incoming_pulled">Trosglwyddwyd galwad i mewn at ddyfais arall</string>
-  <!-- Title for outgoing call type. [CHAR LIMIT=40] -->
   <string name="type_outgoing">Galwad allan</string>
-  <!-- Title for outgoing call which was transferred to another device. [CHAR LIMIT=60] -->
   <string name="type_outgoing_pulled">Trosglwyddwyd galwad allan at ddyfais arall</string>
-  <!-- Title for missed call type. [CHAR LIMIT=40] -->
   <string name="type_missed">Galwad wedi\'i methu</string>
-  <!-- Title for incoming video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_incoming_video">Galwad fideo i mewn</string>
-  <!-- Title for incoming video call in call details screen which was transferred to another device.
-       [CHAR LIMIT=60] -->
   <string name="type_incoming_video_pulled">Trosglwyddwyd galwad fideo i mewn at ddyfais arall</string>
-  <!-- Title for outgoing video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_outgoing_video">Galwad fideo allan</string>
-  <!-- Title for outgoing video call in call details screen which was transferred to another device.
-       [CHAR LIMIT=60] -->
   <string name="type_outgoing_video_pulled">Trosglwyddwyd galwad fideo allan at ddyfais arall</string>
-  <!-- Title for missed video call in call details screen [CHAR LIMIT=60] -->
   <string name="type_missed_video">Galwad fideo wedi\'i methu</string>
-  <!-- Title for voicemail details screen -->
   <string name="type_voicemail">Lleisbost</string>
-  <!-- Title for rejected call type. [CHAR LIMIT=40] -->
   <string name="type_rejected">Galwad wedi\'i gwrthod</string>
-  <!-- Title for blocked call type. [CHAR LIMIT=40] -->
   <string name="type_blocked">Galwad wedi\'i rhwystro</string>
-  <!-- An abbreviation for minutes. For example "1m" [CHAR LIMIT=NONE] -->
   <string name="call_details_minutes_abbreviation">m</string>
-  <!-- An abbreviation for seconds. For example "28s" [CHAR LIMIT=NONE] -->
   <string name="call_details_seconds_abbreviation">e</string>
-  <!-- A string to announce a call duration. For example, in english might say 2 minutes 15 seconds.
-       This translation may require the variables to be rearranged for grammars different than
-       english. [CHAR LIMIT=NONE] -->
   <string name="a11y_call_duration_format">    <xliff:g id="minutes">%d</xliff:g> <xliff:g id="minutes_translation">%s</xliff:g> <xliff:g id="seconds">%d</xliff:g> <xliff:g id="seconds_translation">%s</xliff:g>
   </string>
-  <!-- A string to announce a call duration. For example, in english might say 15 seconds.
-       This translation may require the variables to be rearranged for grammars different than
-       english. [CHAR LIMIT=NONE] -->
   <string name="a11y_call_duration_short_format">    <xliff:g id="seconds">%d</xliff:g> <xliff:g id="seconds_translation">%s</xliff:g>
   </string>
-  <!-- A pattern to define the layout of a call duration string. for example, in english might
-        say 2m 15s. Translation should only rearrange the inputs. minutes_translation and
-        seconds_translation should remain in \'quotes\'. [CHAR LIMIT=NONE] -->
   <string name="call_duration_format_pattern">    <xliff:g id="minutes_special_character">%s</xliff:g>\'<xliff:g id="minutes_translation">%s</xliff:g>\' <xliff:g id="seconds_special_character">%s</xliff:g>\'<xliff:g id="seconds_translation">%s</xliff:g>\'
   </string>
-  <!-- A pattern to define the layout of a call duration string. for example, in english might
-        say 2m 15s. Translation should only rearrange the inputs. seconds_translation should
-        remain in \'quotes\'. [CHAR LIMIT=NONE] -->
   <string name="call_duration_short_format_pattern">    <xliff:g id="seconds_special_character">%s</xliff:g>\'<xliff:g id="seconds_translation">%s</xliff:g>\'
   </string>
-  <!-- A full string for seconds (time). [CHAR LIMIT=NONE] -->
   <plurals name="a11y_seconds">
     <item quantity="zero">eiliadau</item>
     <item quantity="one">eiliad</item>
@@ -77,7 +47,6 @@
     <item quantity="many">eiliad</item>
     <item quantity="other">eiliad</item>
   </plurals>
-  <!-- A full string for minutes (time). [CHAR LIMIT=NONE] -->
   <plurals name="a11y_minutes">
     <item quantity="zero">munudau</item>
     <item quantity="one">munud</item>
@@ -86,25 +55,9 @@
     <item quantity="many">munud</item>
     <item quantity="other">munud</item>
   </plurals>
-  <!-- Title for "answered elsewhere" call type. This will happen if a call was ringing
-       simultaneously on multiple devices, and the user answered it on a device other than the
-       current device. [CHAR LIMIT=60] -->
   <string name="type_answered_elsewhere">Atebwyd yr alwad ar ddyfais arall</string>
-  <!-- String describing the phone account the call was made on or to. This string will be used
-         in description_incoming_missed_call, description_incoming_answered_call, and
-         description_outgoing_call.
-         Note: AccessibilityServices uses this attribute to announce what the view represents.
-         [CHAR LIMIT=NONE] -->
   <string name="description_phone_account">ar <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g></string>
-  <!-- String describing the secondary line number the call was received via.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       [CHAR LIMIT=NONE]-->
   <string name="description_via_number">trwy <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
-  <!-- String describing the PhoneAccount and via number that a call was received on, if both are
-       visible.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       [CHAR LIMIT=NONE]-->
   <string name="description_via_number_phone_account">ar <xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g>, trwy <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
-  <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail_string">Lleisbost</string>
 </resources>

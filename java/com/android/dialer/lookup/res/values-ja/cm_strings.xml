@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">近くの場所</string>
     <string name="people">人物</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">電話番号検索</string>
     <string name="enable_forward_lookup_title">正引き検索</string>
     <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示します</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">正引き検索のプロバイダー</string>
     <string name="people_lookup_provider_title">人物検索のプロバイダー</string>
     <string name="reverse_lookup_provider_title">逆引き検索のプロバイダー</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Lookups は情報を収集するために、セキュアなプロトコル (https) 上で外部のウェブサイトにクエリを送信する可能性があります。クエリは相手の電話番号や検索クエリを含むことがあります。</string>
 </resources>

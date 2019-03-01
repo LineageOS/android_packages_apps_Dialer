@@ -17,5 +17,33 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
+    <string name="call_stats_detail_title">Kontaktide statistika andmed</string>
+    <string name="call_stats_incoming">Sissetulev: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Väljuv: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Vastamata: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokeeritud: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Kokku: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Kokku: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Alguskuupäev</string>
+    <string name="call_stats_filter_to">Lõppkuupäev</string>
+    <string name="call_stats_filter_picker_title">Filtri vahemik</string>
+    <string name="date_quick_selection">Kiirvalik</string>
+    <string name="date_qs_currentmonth">Käesolev kuu</string>
+    <string name="date_qs_currentquarter">Käesolev kvartal</string>
+    <string name="date_qs_currentyear">Käesolev aasta</string>
+    <string name="date_qs_lastweek">Eelmine nädal</string>
+    <string name="date_qs_lastmonth">Eelmine kuu</string>
+    <string name="date_qs_lastquarter">Eelmine kvartal</string>
+    <string name="date_qs_lastyear">Eelmine aasta</string>
+    <string name="call_stats_date_filter">Muuda ajavahemikku</string>
+    <string name="call_stats_reset_filter">Lähtesta ajavahemik</string>
+    <string name="call_stats_sort_by_duration">Sorteeri kõne kestvuse järgi</string>
+    <string name="call_stats_sort_by_count">Sorteeri kõnede arvu järgi</string>
+    <string name="call_stats_title_for_number">See number</string>
+    <string name="call_stats_title_of_total">Koguarvust</string>
+    <string name="call_stats_title_durations">Kõnede kestus</string>
+    <string name="call_stats_title_count">Kõnede arv</string>
+    <string name="call_stats_title_average_duration">Keskmine kõne kestus</string>
+    <string name="recent_calls_no_items_in_range">Sinu kõnelogi ei sisalda valitud ajavahemikus ühtegi kõnet.</string>
 </resources>

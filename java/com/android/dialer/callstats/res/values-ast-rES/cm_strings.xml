@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">Duraciones de llamaes</string>
     <string name="call_stats_title_count">Númberu de llamaes</string>
     <string name="call_stats_title_average_duration">Duración media de llamaes</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">El rexistru de llamaes nun contién denguna llamada nel rangu esbilláu de tiempu.</string>
 </resources>

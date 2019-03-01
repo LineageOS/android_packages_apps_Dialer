@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">通話時間</string>
     <string name="call_stats_title_count">通話回数</string>
     <string name="call_stats_title_average_duration">平均通話時間</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">指定した期間には通話履歴がありません。</string>
 </resources>

@@ -15,51 +15,36 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Title of the "Voicemail" settings screen, with a text label identifying which SIM the settings are for. -->
-  <!-- Call settings screen, setting option name -->
+  <string name="voicemail_settings_with_label">Lleisbost (<xliff:g example="Mock Carrier" id="subscriptionlabel">%s</xliff:g>)</string>
   <string name="voicemail_settings_title">Lleisbost</string>
-  <!-- DO NOT TRANSLATE. Internal key for a voicemail notification preference. -->
-  <!-- Voicemail notifications title. The user clicks on this preference to select
-         which sound to play and whether to vibrate when a voicemail notification is received.
-         [CHAR LIMIT=30] -->
   <string name="voicemail_notifications_preference_title">Hysbysiadau</string>
-  <!-- Title for advanced settings in the voicemail settings -->
   <string name="voicemail_advanced_settings_title">Gosodiadau Uwch</string>
-  <!-- DO NOT TRANSLATE. Internal key for a visual voicemail preference. -->
-  <!-- DO NOT TRANSLATE. Internal key for a visual voicemail archive preference. -->
-  <!-- DO NOT TRANSLATE. Internal key for a voicemail change pin preference. -->
-  <!-- Visual voicemail on/off title [CHAR LIMIT=40] -->
-  <!-- Visual voicemail archive on/off title [CHAR LIMIT=40] -->
-  <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
+  <string name="voicemail_visual_voicemail_switch_title">Lleisbost Gweledol</string>
+  <string name="voicemail_visual_voicemail_auto_archive_switch_title">Storfa a chadw wrth gefn ychwanegol  </string>
   <string name="voicemail_set_pin_preference_title">Gosod PIN</string>
-  <!-- Voicemail change PIN dialog title [CHAR LIMIT=40] -->
   <string name="voicemail_change_pin_preference_title">Newid PIN</string>
-  <!-- Hint for the old PIN field in the change vociemail PIN dialog -->
+  <string name="voicemail_change_pin_preference_summary_disable">Rhaid galluogi lleisbost gweledol er mwyn newid y PIN</string>
+  <string name="voicemail_change_pin_preference_summary_not_activated">Nid yw lleisbost gweledol wedi\'i alluogi eto. Ceisia eto\'n hwyrach.</string>
   <string name="vm_change_pin_old_pin">Hen PIN</string>
-  <!-- Hint for the new PIN field in the change vociemail PIN dialog -->
   <string name="vm_change_pin_new_pin">PIN newydd</string>
-  <!-- Message on the dialog when PIN changing is in progress -->
-  <!-- Error message for the voicemail PIN change if the PIN is too short -->
-  <!-- Error message for the voicemail PIN change if the PIN is too long -->
-  <!-- Error message for the voicemail PIN change if the PIN is too weak -->
-  <!-- Error message for the voicemail PIN change if the old PIN entered doesn't match  -->
-  <!-- Error message for the voicemail PIN change if the new PIN contains invalid character -->
-  <!-- Error message for the voicemail PIN change if operation has failed -->
-  <!-- Message to replace the transcription if a visual voicemail message is not supported-->
-  <!-- The title for the change voicemail PIN activity -->
-  <!-- The label for the continue button in change voicemail PIN activity -->
-  <!-- The label for the cancel button in change voicemail PIN activity -->
+  <string name="vm_change_pin_progress_message">Arhosa.</string>
+  <string name="vm_change_pin_error_too_short">Mae\'r PIN newydd rhy fyr.</string>
+  <string name="vm_change_pin_error_too_long">Mae\'r PIN newydd rhy hir.</string>
+  <string name="vm_change_pin_error_too_weak">Mae\'r PIN yn rhy wan. Rhaid osgoi rhediad o rifau neu ailadrodd digidau.</string>
+  <string name="vm_change_pin_error_mismatch">Dyw\'r hen PIN ddim yr un fath.</string>
+  <string name="vm_change_pin_error_invalid">Mae nodau annilys yn y PIN newydd.</string>
+  <string name="vm_change_pin_error_system_error">Methu â newid y PIN</string>
+  <string name="vvm_unsupported_message_format">Math diarth o neges. Galwa <xliff:g example="*86" id="number">%s</xliff:g> i wrando arni.</string>
+  <string name="change_pin_title">Newid PIN Lleisbost</string>
+  <string name="change_pin_continue_label">Parhau</string>
   <string name="change_pin_cancel_label">Diddymu</string>
-  <!-- The label for the ok button in change voicemail PIN activity -->
   <string name="change_pin_ok_label">Iawn</string>
-  <!-- The title for the enter old pin step in change voicemail PIN activity -->
   <string name="change_pin_enter_old_pin_header">Cadarnha dy hen PIN</string>
-  <!-- The hint for the enter old pin step in change voicemail PIN activity -->
-  <!-- The title for the enter new pin step in change voicemail PIN activity -->
-  <!-- The hint for the enter new pin step in change voicemail PIN activity -->
-  <!-- The title for the confirm new pin step in change voicemail PIN activity -->
+  <string name="change_pin_enter_old_pin_hint">Rho PIN dy leisbost i barhau.</string>
+  <string name="change_pin_enter_new_pin_header">Gosod PIN newydd</string>
+  <string name="change_pin_enter_new_pin_hint">Rhaid bod y PIN yn <xliff:g example="4" id="min">%1$d</xliff:g>-<xliff:g example="7" id="max">%2$d</xliff:g> digid.</string>
   <string name="change_pin_confirm_pin_header">Cadarnha dy PIN</string>
-  <!-- The error message for th confirm new pin step in change voicemail PIN activity, if the pin doen't match the one previously entered -->
-  <!-- The toast to show after the voicemail PIN has been successfully changed -->
-  <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
+  <string name="change_pin_confirm_pins_dont_match">Dyw\'r ddau PIN ddim yr un fath</string>
+  <string name="change_pin_succeeded">Diweddarwyd y PIN lleisbost</string>
+  <string name="change_pin_system_error">Methwyd â gosod y PIN</string>
 </resources>

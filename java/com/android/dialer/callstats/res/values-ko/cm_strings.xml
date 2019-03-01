@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">통화 시간</string>
     <string name="call_stats_title_count">통화 횟수</string>
     <string name="call_stats_title_average_duration">평균 통화 시간</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">선택된 시간 범위에 존재하는 통화 내역이 없습니다.</string>
 </resources>

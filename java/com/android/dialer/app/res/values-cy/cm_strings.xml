@@ -23,7 +23,7 @@
     <string name="incall_vibrate_call_waiting_title">Dirgrynu wrth i alwad aros</string>
     <string name="incall_vibrate_hangup_title">Dirgrynu wrth orffen yr alwad</string>
     <string name="incall_vibrate_45_title">Dirgrynu pob munud</string>
-    <string name="incall_vibrate_45_summary">Mae\'n dirgrynu ar eiliad 45 o bob munud yn ystod galwadau allan</string>
+    <string name="incall_vibrate_45_summary">Dirgrynu ar 45ain eiliad pob munud yn ystod galwadau allan</string>
     <string name="incall_dnd_dialog_message">Er mwyn galluogi Dim Tarfu, mae\'n rhaid rhoi caniatâd i\'r ap Ffôn medru rheoli statws Dim Tarfu.\nRho ganiatâd iddo.</string>
     <string name="allow">Caniatáu</string>
     <string name="deny">Gwrthod</string>

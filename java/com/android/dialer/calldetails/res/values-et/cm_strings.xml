@@ -15,4 +15,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"></resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="play_recordings">
+        <item quantity="one">Esita salvestus</item>
+        <item quantity="other">Esita salvestused</item>
+    </plurals>
+    <string name="call_playback_no_app_found_toast">Valitud salvestuse taasesitamiseks ei leitud ühtegi rakendust.</string>
+</resources>

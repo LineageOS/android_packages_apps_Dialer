@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Yakın yerler</string>
     <string name="people">Kişiler</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Telefon numarası arama</string>
     <string name="enable_forward_lookup_title">Yönlendirme araması</string>
     <string name="enable_forward_lookup_summary">Çevirici içinde arama yaparken yakınlardaki yerleri göster</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Arama yönlendirme sağlayıcısı</string>
     <string name="people_lookup_provider_title">Kişi arama sağlayıcısı</string>
     <string name="reverse_lookup_provider_title">Ters arama sağlayıcısı</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Aramalar, bilgi toplamak için uzak web sitelerine güvenli bir protokol (https) üzerinden sorgu gönderebilir. Sorgu, diğer tarafın telefon numarasını veya arama sorgusunu içerebilir</string>
 </resources>

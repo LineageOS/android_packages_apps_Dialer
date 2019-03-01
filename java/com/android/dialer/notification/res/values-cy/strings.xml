@@ -20,6 +20,5 @@
   <string name="notification_channel_ongoing_call">Galwadau ar y gweill</string>
   <string name="notification_channel_missed_call">Galwadau wedi\'u methu</string>
   <string name="notification_channel_voicemail">Negeseuon lleisbost</string>
-  <!-- [CHAR LIMIT=NONE] Catch-all channel for notifications that don't fit into one of the others -->
   <string name="notification_channel_misc">Rhagosodiad</string>
 </resources>

@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">Faidean nan gairmean</string>
     <string name="call_stats_title_count">Cunntas nan gairmean</string>
     <string name="call_stats_title_average_duration">Faide cuibheasach nan gairmean</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Chan eil gairm sam bith ann an loga nan gairmean agad am broinn rainse na h-ama a thagh thu.</string>
 </resources>

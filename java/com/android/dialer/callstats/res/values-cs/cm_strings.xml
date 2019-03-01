@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">Délky hovorů</string>
     <string name="call_stats_title_count">Počet hovorů</string>
     <string name="call_stats_title_average_duration">Průměrná délka hovoru</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Seznam hovorů neobsahuje v daném časovém úseku žádná data.</string>
 </resources>

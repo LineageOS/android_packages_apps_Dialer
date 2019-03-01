@@ -43,5 +43,4 @@
     <string name="call_stats_title_of_total">Van in totaal</string>
     <string name="call_stats_title_durations">Gespreksduur</string>
     <string name="call_stats_title_count">Aantal gesprekken</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

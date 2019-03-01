@@ -16,18 +16,11 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- String used to display calls from unknown numbers in the call log -->
   <string name="unknown">Anhysybys</string>
-  <!-- String to identify an unknown/restricted callers. ex. "Unknown 1", "Restricted 2", ect. -->
   <string name="unknown_counter">    <xliff:g id="unknown">%s</xliff:g> <xliff:g id="id">%d</xliff:g>
   </string>
-  <!-- String used to display calls from pay phone in the call log -->
   <string name="payphone">Ffôn cyhoeddus</string>
-  <!-- Title for the activity that dials the phone.  This is the name
-       used in the Launcher icon. -->
   <string name="launcherActivityLabel">Ffonio</string>
-  <!-- text on a button, Video call, as in to place a video call. -->
   <string name="video_call">Galwad fideo</string>
-  <!-- Label shown on the 'positive' button for the dialog. Indicates that the call will proceed -->
   <string name="call">Galw</string>
 </resources>

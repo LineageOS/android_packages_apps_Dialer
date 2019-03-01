@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Lieux à proximité</string>
     <string name="people">Personnes</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Recherche de numéro de téléphone</string>
     <string name="enable_forward_lookup_title">Recherche directe</string>
     <string name="enable_forward_lookup_summary">Afficher les lieux à proximité lors d\'une recherche à l\'aide du clavier</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Moteur de recherche directe</string>
     <string name="people_lookup_provider_title">Moteur de recherche sur les appelants</string>
     <string name="reverse_lookup_provider_title">Moteur de recherche inversée</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Lorsque vous effectuez des recherches, des requêtes sont susceptibles d\'être envoyées à des sites distants via un protocole sécurisé (https) pour recueillir des informations. Elles peuvent inclure le numéro de téléphone d\'un tiers ou la requête de recherche.</string>
 </resources>
