@@ -279,5 +279,5 @@
   <string name="about_phone_label">Ynghylch</string>
   <string name="view_conversation">Gweld</string>
   <string name="ec_data_deleted">Dileuwyd yr alwad. Edrycha yn Negeseuon i weld a dileu atodiadau cafwyd eu rhannu yn ystod yr alwad hon.</string>
-  <string name="multiple_ec_data_deleted">Dileuwyd y galwadau. Edrycha yn Negeseuon i weld a dileu atodiadau cafwyd eu rhannu yn ystod galwadau.</string>
+  <string name="multiple_ec_data_deleted">Dileuwyd yr alwadau. Edrycha yn Negeseuon i weld a dileu atodiadau cafwyd eu rhannu yn ystod galwadau.</string>
 </resources>

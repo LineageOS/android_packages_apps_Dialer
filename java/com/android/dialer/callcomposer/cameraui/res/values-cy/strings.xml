@@ -16,7 +16,7 @@
  ~ limitations under the License
  -->
 <resources>
-  <string name="description_camera_switch_full_screen">Newid i gamera sgrin llawn</string>
+  <string name="description_camera_switch_full_screen">Newid i gamera sgrin lawn</string>
   <string name="description_camera_switch_preview_screen">Newid i ragolwg camera</string>
   <string name="description_camera_switch_camera_facing">Newid i\'r camera blaen</string>
   <string name="description_camera_switch_camera_rear">Newid i\'r camera cefn</string>

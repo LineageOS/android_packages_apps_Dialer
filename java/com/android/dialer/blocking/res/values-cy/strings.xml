@@ -41,7 +41,7 @@
   <string name="call_blocking_disabled_notification_text">Wedi\'i analluogi gan fod galwad brys wedi ei gwneud.    </string>
   <string name="block_report_number_alert_title">Rhwystro <xliff:g id="number">%1$s</xliff:g>?</string>
   <string name="block_report_number_alert_details">Ni fyddi\'n derbyn galwadau oddi wrth y rhif hwn eto.</string>
-  <string name="block_number_alert_details"><xliff:g id="text">%1$s</xliff:g> Caiff y galwad hwn ei adrodd fel sbam.</string>
+  <string name="block_number_alert_details"><xliff:g id="text">%1$s</xliff:g> Caiff yr alwad hwn ei adrodd fel sbam.</string>
   <string name="unblock_number_alert_details">Caiff y rhif hwn ei ddadrwystro a\'i adrodd fel nad yw yn sbam. Ni chaiff galwadau eu hystyried fel sbam.</string>
   <string name="unblock_report_number_alert_title">Dadrwystro <xliff:g id="number">%1$s</xliff:g>?</string>
   <string name="report_not_spam_alert_button">Anfon Adroddiad</string>

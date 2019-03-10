@@ -121,7 +121,7 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Tapia i\'w ychwanegu i\'r cysylltiadau neu rwystro rhif sbam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dyma\'r tro cyntaf i\'r rhif hwn dy alw di. Os mai sbam oedd yr alwad, gellir rhwystro\'r rhif hwn ac anfon adroddiad amdano.</string>
   <string name="spam_notification_spam_call_collapsed_text">Tapia i\'w adrodd fel NID YN SBAM neu ei rwystro.</string>
-  <string name="spam_notification_spam_call_expanded_text">Rydym yn amau mai sbamiwr yw hwn. Os nad oedd y galwad yn sbam, tara \"DIM SBAM\" i roi gwybod i ni am ein camgymeriad.</string>
+  <string name="spam_notification_spam_call_expanded_text">Rydym yn amau mai sbamiwr yw hwn. Os nad oedd yr alwad yn sbam, tapia \"DIM SBAM\" i roi gwybod i ni am ein camgymeriad.</string>
   <string name="spam_notification_report_spam_action_text">Rhwystro ac adrodd</string>
   <string name="spam_notification_add_contact_action_text">Ychwanegu cyswllt</string>
   <string name="spam_notification_not_spam_action_text">Dim yn sbam</string>

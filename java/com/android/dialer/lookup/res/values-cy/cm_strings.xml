@@ -18,5 +18,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="nearby_places">Lleoedd cyfagos</string>
     <string name="people">Pobol</string>
+    <string name="lookup_settings_label">Chwilio rhif ffôn</string>
+    <string name="enable_forward_lookup_title">Chwiliad dargyfeiriad</string>
     <string name="enable_forward_lookup_summary">Dangos llefydd gerllaw wrth chwilio yn y deialydd</string>
+    <string name="enable_people_lookup_title">Chwilio pobol</string>
+    <string name="enable_people_lookup_summary">Dangos canlyniadau ar-lein wrth chwilio am bobol yn y deialydd</string>
+    <string name="enable_reverse_lookup_title">Chwiliad croes</string>
+    <string name="enable_reverse_lookup_summary">Chwilio am wybodaeth am y person neu leoliad rhifau anhysbys sy\'n dy alw</string>
+    <string name="forward_lookup_provider_title">Darparydd chwiliad dargyfeiriad</string>
+    <string name="people_lookup_provider_title">Darparydd chwiliad pobol</string>
+    <string name="reverse_lookup_provider_title">Darparydd chwiliad croes</string>
+    <string name="lookup_disclaimer">Gall chwiliadau anfon ymholiadau dros brotocol diogel (https) at wefannau pell i gasglu gwybodaeth. Gall yr ymholiad gynnwys rhif ffôn y parti arall neu\'r term chwilio.</string>
 </resources>
