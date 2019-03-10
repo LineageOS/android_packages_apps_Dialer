@@ -16,38 +16,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <!-- dialpad t9 search -->
-  <string name="t9_search_input_locale_default">Predefinidu</string>
-  <!-- Number lookup -->
-  <!-- Chinese Reverse Lookup Provider -->
-  <!-- Call statistics -->
-  <string name="call_stats_sort_by_duration">Òrdina pro longària</string>
-  <string name="call_stats_title_durations">Longària mutidas</string>
-  <string name="call_stats_title_average_duration">Longària mèdia de sas mutidas</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <!-- Speed Dial -->
-  <string name="speed_dial_delete">Iscantzella</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="yes">Eja</string>
-  <string name="no">Nono</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <!-- Text displayed when the call log is empty. -->
-  <string name="clear">Isbòida</string>
-  <!-- Add for enhance videocall ui -->
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Sas chircas diant pòdere imbiare sos datos de chirca pro mèdiu de unu protocollu seguru (https) a sitos remotos pro otènnere sas informatziones. Sos datos diant pòdere incluire su nùmeru de telèfonu de s\'àtera persone o sos tèrmines de chirca</string>
+    <string name="t9_search_input_locale_default">Predefinidu</string>
+    <string name="call_stats_sort_by_duration">Òrdina pro longària</string>
+    <string name="call_stats_title_durations">Longària mutidas</string>
+    <string name="call_stats_title_average_duration">Longària mèdia de sas mutidas</string>
+    <string name="speed_dial_delete">Iscantzella</string>
+    <string name="yes">Eja</string>
+    <string name="no">Nono</string>
+    <string name="clear">Isbòida</string>
+    <string name="lookup_disclaimer">Sas chircas diant pòdere imbiare sos datos de chirca pro mèdiu de unu protocollu seguru (https) a sitos remotos pro otènnere sas informatziones. Sos datos diant pòdere incluire su nùmeru de telèfonu de s\'àtera persone o sos tèrmines de chirca</string>
 </resources>

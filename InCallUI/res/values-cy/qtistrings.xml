@@ -31,60 +31,71 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Call substate label -->
-  <!-- Call substate label for call resumed -->
-  <!-- Call substate label for call connected suspended (audio) -->
-  <!-- Call substate label for call connected suspended (video) -->
-  <!-- Call substate label for avp retry -->
-  <!-- Video quality changed message -->
-  <!-- Video quality High -->
-  <!-- Video quality Medium -->
-  <!-- Video quality Low -->
-  <!-- Video quality Unknown -->
-  <!-- Message indicating that Video Started flowing for IMS-VT calls -->
-  <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <!-- Message indicating that camera failure has occurred for the selected camera and
-         as result camera is not ready -->
-  <!-- Message indicating that camera is ready/available -->
-  <!-- Message indicating unknown call session event -->
-  <!-- Message indicating data usage -->
-  <!-- In-call screen: Modify Call Options for IMS call -->
-  <!-- Modify call error cause -->
-  <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
-  <!-- Text for the onscreen "blind transfer" button -->
-  <!-- Text for the onscreen "assured transfer" button -->
-  <!-- Text for the onscreen "consultative transfer" button -->
-  <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
-  <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
-  <!-- Message indicating call failed due to handover not feasible -->
-  <!-- Text for the onscreen "Add Participant" button -->
-  <!-- Title of the IMS to CS redial dialog -->
-  <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Session modify cause unspecified -->
-  <!-- Session modify cause code upgrade local request -->
-  <!-- Session modify cause code upgrade remote request -->
-  <!-- Session modify cause code downgrade local request -->
-  <!-- Session modify cause code downgrade remote request -->
-  <!-- Session modify cause code downgrade rtp timeout -->
-  <!-- Session modify cause code downgrade qos -->
-  <!-- Session modify cause code downgrade packet loss -->
-  <!-- Session modify cause code downgrade low thrput -->
-  <!-- Session modify cause code downgrade thermal mitigation -->
-  <!-- Session modify cause code downgrade lipsync -->
-  <!-- Session modify cause code downgrade generic error -->
-  <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
-  <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
-  <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
-  <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
-         [CHAR LIMIT=40] -->
-  <!-- Message indicating call failed due to low battery -->
-  <!-- VoWifi call quality indicators -->
-  <!-- Title for low battery alert dialogue -->
-  <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
-  <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-  <!-- No option of the low battery alert dialog for MO/MT Video calls -->
-  <!-- International prefix source-->
-  <!-- International prefix converted value-->
-  <!-- Pop up menu options for picture mode -->
-  <string name="video_call_picture_mode_cancel_option">Diddymu</string>
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Is-statws galwad:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">Wedi parhau</string>
+    <string name="call_substate_connected_suspended_audio">Cysylltwyd, ond mae sain wedi\'i hatal</string>
+    <string name="call_substate_connected_suspended_video">Cysylltwyd, ond mae fideo wedi\'i atal</string>
+    <string name="call_substate_avp_retry">Yn synhwyro ansawdd fideo\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Ansawdd fideo wedi\'i newid i <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">uchel</string>
+    <string name="video_quality_medium">canolig</string>
+    <string name="video_quality_low">isel</string>
+    <string name="video_quality_unknown">anhysbys</string>
+    <string name="player_started">Chwaraeydd wedi dechrau</string>
+    <string name="player_stopped">Chwaraeydd wedi stopio</string>
+    <string name="camera_not_ready">Camera dim yn barod</string>
+    <string name="camera_ready">Camera yn barod</string>
+    <string name="unknown_call_session_event">Digwyddiad sesiwn galwad anhysbys</string>
+    <string name="wlan_data_usage_label">Defnydd data Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">Defnydd data LTE (4G): <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">Dewisa fath o alwad</string>
+    <string name="modify_call_option_vt">Fideo deugyfeiriadol</string>
+    <string name="modify_call_option_vt_tx">Trosglwyddo fideo</string>
+    <string name="modify_call_option_vt_rx">Derbyn fideo</string>
+    <string name="modify_call_option_voice">Llais yn unig</string>
+    <string name="modify_call_failed_due_to_low_battery">Methwyd ag addasu\'r alwad oherwydd batri isel.</string>
+    <string name="qti_ims_transfer_num_error">Rhif heb ei osod. Rho\'r rhif yng ngosodiadau IMS a cheisio eto.</string>
+    <string name="qti_ims_transfer_request_error">Methodd y cais i drosglwyddo\'r alwad.</string>
+    <string name="qti_ims_transfer_request_success">Mae\'r cais i drosglwyddo\'r alwad yn llwyddiannus.</string>
+    <string name="qti_ims_onscreenBlindTransfer">Trosglwyddiad dall</string>
+    <string name="qti_ims_onscreenAssuredTransfer">Trosglwyddiad sicr</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">Trosglwyddiad ymgynghorol</string>
+    <string name="video_call_not_allowed_if_tty_enabled">Rhaid analluogi modd TTY i uwchraddio i alwadau fideo.</string>
+    <string name="qti_description_target_deflect">Gwyro</string>
+    <string name="qti_description_deflect_error">Rhif heb ei osod. Rho\'r rhif yng ngosodiadau IMS a cheisio eto.</string>
+    <string name="qti_description_deflect_service_error">Ni chefnogir y gwasanaeth gwyro galwadau.</string>
+    <string name="call_failed_ho_not_feasible">Daeth yr alwad i ben am nad oedd trosglwyddiad o 4G (LTE) i 3G/2G yn bosib.</string>
+    <string name="onscreenAddParticipant">Ychwanegu cyfranogwr</string>
+    <string name="cs_redial_option">Opsiwn ail-ddeialu</string>
+    <string name="cs_redial_msg">Methu â gwneud galwad fideo IMS. Deialu eto fel galwad llais dim yn IMS?</string>
+    <string name="session_modify_cause_upgrade_local_request">Uwchraddiwyd yr alwad ar gais defnyddiwr</string>
+    <string name="session_modify_cause_upgrade_remote_request">Uwchraddiwyd yr alwad ar gais defnyddiwr pell</string>
+    <string name="session_modify_cause_downgrade_local_request">Israddiwyd yr alwad ar gais defnyddiwr</string>
+    <string name="session_modify_cause_downgrade_remote_request">Israddiwyd yr alwad ar gais defnyddiwr pell</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">Israddiwyd yr alwad oherwydd terfyn amser RTP</string>
+    <string name="session_modify_cause_downgrade_qos">Israddiwyd yr alwad oherwydd diffyg ansawdd gwasanaeth</string>
+    <string name="session_modify_cause_downgrade_packet_loss">Israddiwyd yr alwad oherwydd colled pecyn</string>
+    <string name="session_modify_cause_downgrade_low_thrput">Israddiwyd yr alwad oherwydd trwybwn isel</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">Israddiwyd yr alwad oherwydd lliniariad thermol</string>
+    <string name="session_modify_cause_downgrade_lipsync">Israddiwyd yr alwad oherwydd lipsync</string>
+    <string name="session_modify_cause_downgrade_generic_error">Israddiwyd yr alwad oherwydd gwall generig</string>
+    <string name="card_title_incoming_conf_call">Galwad grŵp i mewn</string>
+    <string name="card_title_incoming_video_conf_call">Galwad grŵp fideo i mewn</string>
+    <string name="notification_incoming_conf_call">Galwad grŵp i mewn</string>
+    <string name="incoming_conf_via_template">Galwad grŵp i mewn trwy <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">Mae\'r alwad wedi methu oherwydd batri isel.</string>
+    <string name="vowifi_call_quality_good">Ansawdd sain dda</string>
+    <string name="vowifi_call_quality_fair">Ansawdd sain gweddol</string>
+    <string name="vowifi_call_quality_poor">Ansawdd llais gwael</string>
+    <string name="low_battery">Rhybudd Batri Isel</string>
+    <string name="low_battery_hangup_msg">Wyt ti eisiau dod â\'r alwad i ben?</string>
+    <string name="low_battery_msg">Mae llai na 15% o dy fatri yn weddill. Wyt ti am barhau gyda\'r galwad fideo yntau newid i alwad llais?</string>
+    <string name="low_battery_convert">Trosi</string>
+    <string name="video_call">Galwadau Fideo</string>
+    <string name="video_call_cannot_upgrade">Methu â derbyn galwadau fideo ar hyn o bryd</string>
+    <string name="video_call_picture_mode_menu_title">Dewis modd lluniau</string>
+    <string name="video_call_picture_mode_preview_video">Rhagolwg camera</string>
+    <string name="video_call_picture_mode_incoming_video">Fideo i mewn</string>
+    <string name="video_call_picture_mode_cancel_option">Diddymu</string>
+    <string name="video_call_picture_mode_save_option">Cadw</string>
 </resources>

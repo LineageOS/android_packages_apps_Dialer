@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 ಗಂಟೆ</item>
-    <item quantity="other">%d ಗಂಟೆಗಳು</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 ನಿಮಿಷ</item>
-    <item quantity="other">%d ನಿಮಿಷಗಳು</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 ಸೆಕೆಂಡ್</item>
-    <item quantity="other">%d ಸೆಕೆಂಡ್‍ಗಳು</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 ಕರೆ</item>
-    <item quantity="other">%d ಕರೆಗಳು</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 ಗಂಟೆ</item>
+        <item quantity="other">%d ಗಂಟೆಗಳು</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 ನಿಮಿಷ</item>
+        <item quantity="other">%d ನಿಮಿಷಗಳು</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 ಸೆಕೆಂಡ್</item>
+        <item quantity="other">%d ಸೆಕೆಂಡ್‍ಗಳು</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 ಕರೆ</item>
+        <item quantity="other">%d ಕರೆಗಳು</item>
+    </plurals>
 </resources>

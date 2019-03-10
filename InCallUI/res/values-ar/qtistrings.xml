@@ -31,59 +31,71 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Call substate label -->
-  <!-- Call substate label for call resumed -->
-  <!-- Call substate label for call connected suspended (audio) -->
-  <!-- Call substate label for call connected suspended (video) -->
-  <!-- Call substate label for avp retry -->
-  <!-- Video quality changed message -->
-  <!-- Video quality High -->
-  <!-- Video quality Medium -->
-  <!-- Video quality Low -->
-  <!-- Video quality Unknown -->
-  <!-- Message indicating that Video Started flowing for IMS-VT calls -->
-  <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <!-- Message indicating that camera failure has occurred for the selected camera and
-         as result camera is not ready -->
-  <!-- Message indicating that camera is ready/available -->
-  <!-- Message indicating unknown call session event -->
-  <!-- Message indicating data usage -->
-  <!-- In-call screen: Modify Call Options for IMS call -->
-  <!-- Modify call error cause -->
-  <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
-  <!-- Text for the onscreen "blind transfer" button -->
-  <!-- Text for the onscreen "assured transfer" button -->
-  <!-- Text for the onscreen "consultative transfer" button -->
-  <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
-  <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
-  <!-- Message indicating call failed due to handover not feasible -->
-  <!-- Text for the onscreen "Add Participant" button -->
-  <!-- Title of the IMS to CS redial dialog -->
-  <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Session modify cause unspecified -->
-  <!-- Session modify cause code upgrade local request -->
-  <!-- Session modify cause code upgrade remote request -->
-  <!-- Session modify cause code downgrade local request -->
-  <!-- Session modify cause code downgrade remote request -->
-  <!-- Session modify cause code downgrade rtp timeout -->
-  <!-- Session modify cause code downgrade qos -->
-  <!-- Session modify cause code downgrade packet loss -->
-  <!-- Session modify cause code downgrade low thrput -->
-  <!-- Session modify cause code downgrade thermal mitigation -->
-  <!-- Session modify cause code downgrade lipsync -->
-  <!-- Session modify cause code downgrade generic error -->
-  <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
-  <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
-  <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
-  <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
-         [CHAR LIMIT=40] -->
-  <!-- Message indicating call failed due to low battery -->
-  <!-- VoWifi call quality indicators -->
-  <!-- Title for low battery alert dialogue -->
-  <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
-  <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-  <!-- No option of the low battery alert dialog for MO/MT Video calls -->
-  <!-- International prefix source-->
-  <!-- International prefix converted value-->
-  <!-- Pop up menu options for picture mode -->
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: حالة المكالمة:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">استئناف</string>
+    <string name="call_substate_connected_suspended_audio">متصل، ولكن تم تعطيل الصوت</string>
+    <string name="call_substate_connected_suspended_video">متصل، ولكن تم تعليق الفيديو</string>
+    <string name="call_substate_avp_retry">جاري الكشف عن جودة الفيديو</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: تم تغيير جودة الفيديو إلى <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">عالية</string>
+    <string name="video_quality_medium">متوسطة</string>
+    <string name="video_quality_low">منخفضة</string>
+    <string name="video_quality_unknown">غير معروف</string>
+    <string name="player_started">بدأ المشغل</string>
+    <string name="player_stopped">توقف المشغل</string>
+    <string name="camera_not_ready">الكاميرا غير جاهزة</string>
+    <string name="camera_ready">الكاميرا جاهزة</string>
+    <string name="unknown_call_session_event">حدث جلسة اتصال غير معروف</string>
+    <string name="wlan_data_usage_label">استخدام بيانات واي-فاي: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">استخدام بيانات الجوال: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">حدد نوع المكالمة</string>
+    <string name="modify_call_option_vt">فيديو ثنائي</string>
+    <string name="modify_call_option_vt_tx">إرسال الفيديو</string>
+    <string name="modify_call_option_vt_rx">استقبال الفيديو</string>
+    <string name="modify_call_option_voice">صوت فقط</string>
+    <string name="modify_call_failed_due_to_low_battery">فشل في تعديل المكالمة بسبب ضعف مستوى البطارية.</string>
+    <string name="qti_ims_transfer_num_error">لم يتم تعيين الرقم. أدخل الرقم عن طريق إعدادات IMS وأعد المحاولة.</string>
+    <string name="qti_ims_transfer_request_error">فشل طلب تحويل المكالمة.</string>
+    <string name="qti_ims_transfer_request_success">نجاح طلب تحويل المكالمة.</string>
+    <string name="qti_ims_onscreenBlindTransfer">نقل أعمى</string>
+    <string name="qti_ims_onscreenAssuredTransfer">نقل مضمون</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">نقل استشاري</string>
+    <string name="video_call_not_allowed_if_tty_enabled">الرجاء تعطيل وضع TTY للسماح بمكالمات الفيديو.</string>
+    <string name="qti_description_target_deflect">ابعاد</string>
+    <string name="qti_description_deflect_error">لم يتم تعيين الرقم. قم بتوفير الرقم عبر إعدادات IMS وأعد المحاولة.</string>
+    <string name="qti_description_deflect_service_error">خدمة تحويل المكالمة غير معتمدة.</string>
+    <string name="call_failed_ho_not_feasible">انتهت المكالمة لأن تسليم LTE إلى 3G/2G لم يكن ممكناً.</string>
+    <string name="onscreenAddParticipant">إضافة مشترك</string>
+    <string name="cs_redial_option">خيار إعادة الطلب</string>
+    <string name="cs_redial_msg">لا يمكن إجراء مكالمة فيديو IMS، أعد الطلب كمكالمة صوتية غير IMS؟</string>
+    <string name="session_modify_cause_upgrade_local_request">تمت ترقية المكالمة بناء على طلب المستخدم</string>
+    <string name="session_modify_cause_upgrade_remote_request">تمت ترقية المكالمة بناء على طلب المستخدم الاخر</string>
+    <string name="session_modify_cause_downgrade_local_request">تم خفض الاتصال بناء على طلب المستخدم</string>
+    <string name="session_modify_cause_downgrade_remote_request">تم خفض الاتصال بناء على طلب المستخدم الأخر</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">تم تنزيل المكالمة بسبب انتهاء مهلة RTP</string>
+    <string name="session_modify_cause_downgrade_qos">تم خفض الاتصال بسبب جودة الخدمة</string>
+    <string name="session_modify_cause_downgrade_packet_loss">تم خفض الاتصال بسبب فقدان الحزمة</string>
+    <string name="session_modify_cause_downgrade_low_thrput">تم خفض الاتصال بسبب انخفاض الإنتاجية</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">تم خفض الاتصال بسبب التخفيف الحراري</string>
+    <string name="session_modify_cause_downgrade_lipsync">تم خفض الاتصال بسبب شفة المزامنة</string>
+    <string name="session_modify_cause_downgrade_generic_error">تم خفض الاتصال بسبب خطأ عام</string>
+    <string name="card_title_incoming_conf_call">مكالمة جماعية واردة</string>
+    <string name="card_title_incoming_video_conf_call">فيديو جماعي وارد</string>
+    <string name="notification_incoming_conf_call">مكالمة جماعية واردة</string>
+    <string name="incoming_conf_via_template">واردة عبر <xliff:g id="Provider_NAME">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">أخفق الاتصال بسبب انخفاض مستوى البطارية</string>
+    <string name="vowifi_call_quality_good">جودة صوت جيدة</string>
+    <string name="vowifi_call_quality_fair">جودة صوت معتدلة</string>
+    <string name="vowifi_call_quality_poor">جودة الصوت ضعيفة</string>
+    <string name="low_battery">تحذير انخفاض البطارية</string>
+    <string name="low_battery_hangup_msg">هل تريد تعليق المكالمة؟</string>
+    <string name="low_battery_msg">مستوى البطارية أقل من 15٪. هل تريد متابعة مكالمة الفيديو أم تحويلها إلى مكالمة صوتية؟</string>
+    <string name="low_battery_convert">تحويل</string>
+    <string name="video_call">مكالمة فيديو</string>
+    <string name="video_call_cannot_upgrade">لا يمكن قبول مكالمات الفيديو في الوقت الحالي</string>
+    <string name="video_call_picture_mode_menu_title">اختر وضع الصورة</string>
+    <string name="video_call_picture_mode_preview_video">معاينة الكاميرا</string>
+    <string name="video_call_picture_mode_incoming_video">مكالمة فيديو واردة</string>
+    <string name="video_call_picture_mode_cancel_option">إلغاء</string>
+    <string name="video_call_picture_mode_save_option">حفظ</string>
 </resources>

@@ -17,13 +17,26 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
-  <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
-  <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
-  <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
-  <!-- In-call screen: status label for an outgoing call that's routed via a specific
-         provider (e.g. MSIM) and is waiting for the busy remote side -->
-  <!-- In-call screen: status label template for an active call that's routed via a specific
-         provider (e.g. MSIM) -->
-  <!-- In-call screen: status label for a call that is held remotely  -->
+    <string name="callFailed_incoming_cb_enabled">حظر الطرف الآخر كافة المكالمات الواردة.</string>
+    <string name="callUnanswered_forwarded">المكالمة لم يتم الرد عليها وتم إعادة توجيهها</string>
+    <string name="incall_call_type_label_forwarded">تحويل المكالمة</string>
+    <string name="card_title_dialing_waiting">جار الطلب (انتظار)</string>
+    <string name="calling_via_waiting_template">جار الاتصال بواسطة <xliff:g id="provider_name">%s</xliff:g> (الانتظار)</string>
+    <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (via <xliff:g id="provider_name">%2$s</xliff:g>)</string>
+    <string name="card_title_waiting_call">انتظار المكالمة</string>
+    <string name="call_recording_failed_message">فشل في بدء تسجيل المكالمة</string>
+    <string name="call_recording_file_location">تم حفظ المكالمة المسجلة في <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">تسجيل المكالمة</string>
+    <string name="onscreenStopCallRecordText">إيقاف التسجيل</string>
+    <string name="recording_time_text">جارٍ التسجيل</string>
+    <string name="recording_warning_title">تمكين تسجيل المكالمات؟</string>
+    <string name="recording_warning_text">إشعار: أنت مسؤول عن الامتثال لأي من القوانين والأنظمة والقواعد التي تنطبق على استخدام خاصية تسجيل اللمكالمات واستخدام أو توزيع تلك التسجيلات.</string>
+    <string name="call_failed_due_to_validate_number">غير قادر على إجراء مكالمة فيديو، تنسيق الرقم غير صحيح</string>
+    <string name="call_state_dialing">جارٍ الطلب</string>
+    <string name="call_state_holding">انتظار</string>
+    <string name="call_state_active">نشط</string>
+    <string name="call_state_unknown">غير معروف</string>
+    <string name="call_state_disconnecting">قطع الاتصال</string>
+    <string name="call_state_disconnected">تم قطع الإتصال</string>
+    <string name="too_many_recipients">لا يمكن لأكثر من 6 أشخاص المشاركة في مكالمة 4G جماعية.</string>
 </resources>

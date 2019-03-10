@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Vibriranje med klicem</string>
-  <string name="incall_vibrate_outgoing_title">Vibriraj ob odgovoru</string>
-  <string name="incall_vibrate_call_waiting_title">Vibriraj ob čakajočem klicu</string>
-  <string name="incall_vibrate_hangup_title">Vibriraj ob prekinitvi klica</string>
-  <string name="incall_vibrate_45_title">Vibriraj vsako minuto</string>
-  <string name="incall_vibrate_45_summary">Vibrira ob preteklih 45 sekundah vsake minute med odhodnimi klici</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Bližnja mesta</string>
-  <string name="people">Osebe</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Iskanje tipkovnice za klicanje T9</string>
-  <string name="t9_search_input_locale">Vnos iskanja T9</string>
-  <string name="t9_search_input_locale_default">Privzeti</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Iskanje telefonske številke</string>
-  <string name="enable_forward_lookup_title">Iskanje naprej</string>
-  <string name="enable_forward_lookup_summary">Prikaži bližnja mesta med iskanjem v klicalniku</string>
-  <string name="enable_people_lookup_title">Išči za osebami</string>
-  <string name="enable_people_lookup_summary">Prikaži spletne rezultate za osebe med iskanjem v klicalniku</string>
-  <string name="enable_reverse_lookup_title">Obratno iskanje</string>
-  <string name="enable_reverse_lookup_summary">Poišči podatke o osebi ali mestu za neznane številke med dohodnimi klici</string>
-  <string name="forward_lookup_provider_title">Ponudnik iskanja naprej</string>
-  <string name="people_lookup_provider_title">Ponudnik iskanja oseb</string>
-  <string name="reverse_lookup_provider_title">Ponudnik obratnega iskanja</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
-  <string name="speed_dial_edit_title">Uredi hitro klicanje <xliff:g id="index" example="2">%1$d</xliff:g></string>
-  <string name="speed_dial_input_hint">Vnesite številko</string>
-  <string name="call_log_show_all_slots">Vse kartice SIM</string>
-  <string name="call_log_all_calls_header">Vsi klici</string>
-  <string name="call_log_blacklist_header">Samo blokirani klici</string>
-  <string name="call_log_blocked_empty">Nimate blokiranih klicev.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistika</string>
-  <string name="callStatsDetailTitle">Podrobnosti statistike klicev</string>
-  <string name="call_stats_incoming">Dohodni: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Odhodni: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Neodgovorjeni: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Blokirani: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g> %%</string>
-  <string name="call_stats_header_total">Skupaj: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Skupaj: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Začetni datum</string>
-  <string name="call_stats_filter_to">Končni datum</string>
-  <string name="call_stats_filter_picker_title">Obseg filtriranja</string>
-  <string name="date_quick_selection">Hitra izbira</string>
-  <string name="date_qs_currentmonth">Tekoči mesec</string>
-  <string name="date_qs_currentquarter">Tekoče četrtletje</string>
-  <string name="date_qs_currentyear">Tekoče leto</string>
-  <string name="date_qs_lastweek">Prejšnji teden</string>
-  <string name="date_qs_lastmonth">Prejšnji mesec</string>
-  <string name="date_qs_lastquarter">Prejšnje četrtletje</string>
-  <string name="date_qs_lastyear">Prejšnje leto</string>
-  <string name="call_stats_date_filter">Prilagodi časovni obseg</string>
-  <string name="call_stats_reset_filter">Ponastavi časovni obseg</string>
-  <string name="call_stats_sort_by_duration">Razvrsti po trajanju klica</string>
-  <string name="call_stats_sort_by_count">Razvrsti po številu klicev</string>
-  <string name="call_stats_title_for_number">Ta številka</string>
-  <string name="call_stats_title_of_total">Od skupno</string>
-  <string name="call_stats_title_durations">Trajanje klicev</string>
-  <string name="call_stats_title_count">Število klicev</string>
-  <string name="call_stats_title_average_duration">Povprečna dolžina klica</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Vaš dnevnik klicev ne vsebuje nobenih klicev v izbranem časovnem obsegu.</string>
-  <string name="call_recording_category_title">Snemanje klicev</string>
-  <string name="call_recording_format">Oblika zvoka</string>
-  <string name="call_playback_no_app_found_toast">Za predvajanje izbranega posnetka ni bila najdena nobena aplikacija.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Nastavitve hitrega klicanja</string>
-  <string name="speed_dial_not_set">(ni nastavljeno)</string>
-  <string name="speed_dial_replace">Nadomesti</string>
-  <string name="speed_dial_delete">Izbriši</string>
-  <string name="speed_dial_unassigned_dialog_title">Nedodeljena tipka</string>
-  <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja, najprej izklopite način za letalo</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Hitrega klicanja ni mogoče nastaviti za ta ključ</string>
-  <string name="yes">Da</string>
-  <string name="no">Ne</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Nimate dohodnih klicev.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Nimate odhodnih klicev.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Vaš dnevnik klicev je prazen</string>
-  <string name="calllog_search_hint">Išči po dnevniku klicev</string>
-  <string name="no_call_log">Ni dnevnika klicev</string>
-  <string name="clear">Počisti</string>
-  <string name="description_clear_search">Počisti iskanje</string>
-  <string name="video_call_welcome_title"><b>Dobrodošli v novem klicalniku za video klice</b></string>
-  <string name="video_call_welcome_message">Vsi radi slišimo znan glas na drugi strani linije, vendar je pogovor iz oči v oči še boljši! To morate vedeti za uporabo vaših realno časovnih povezav:\n Povezani morate biti v 4G LTE ali Wi-Fi omrežje\n Naprava, ki jo kličete mora prav tako biti združljiva z video klici\n Video klici uporabljajo vašo podatkovno povezavo visoke hitrosti\n Glasovni klic lahko nadgradite v video klic\n\n Za več informacij si oglejte <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
-  <string name="video_call_welcome_message_repeat">Vedno prikaži to sporočilo</string>
-  <string name="toast_change_video_call_failed">Sprememba na video klic ni možna, nepravilna oblika številke</string>
-  <string name="toast_make_video_call_failed">Video klic ni možen, nepravilna oblika številke</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Video klic, pokaži me</string>
-  <string name="overflowRXCallMenuItemText">Video klic, skrij me</string>
-  <string name="overflowVOCallMenuItemText">Glasovni klic</string>
-  <string name="video_call">Video klic</string>
-  <string name="call_data_info_label">Števci porabe klicev/podatkov</string>
-  <string name="call_data_info_description">Čas uporabe in poraba podatkov glasovnega klica</string>
-  <string name="alert_call_over_wifi">Klici bodo opravljeni preko omr. Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Na voljo ni nobenega mobilnega omrežja. Za klice se povežite na razpoložljivo omrežje Wi-Fi.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Za klicanje se povežite prek omrežja Wi-Fi.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Tapnite tukaj za ogled razpoložljivih omrežij</string>
-  <string name="menu_add_to_4g_conference_call">Dodaj k konferenčnemu klicu 4G</string>
-  <string name="menu_4g_conference_call">Konferenčni klic 4G</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Dohodni glasovni klic 4G</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Dohodni video klic 4G</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Odhodni glasovni klic 4G</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Odhodni video klic 4G</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Neodgovorjen glasovni klic 4G</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Neodgovorjen video klic 4G</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Dohodni glasovni klic Wi-Fi</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Dohodni video klic Wi-Fi</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Odhodni glasovni klic Wi-Fi</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Odhodni video klic Wi-Fi</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Neodgovorjen glasovni klic Wi-Fi</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Neodgovorjen video klic Wi-Fi</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Iskanja lahko pošiljajo poizvedbe prek varnega protokola (https) oddaljenim spletnim stranem za zbiranje podatkov. Poizvedba lahko vključuje telefonsko številko druge osebe ali poizvedbo iskanja</string>
+    <string name="incall_vibration_category_title">Vibriranje med klicem</string>
+    <string name="incall_vibrate_outgoing_title">Vibriraj ob odgovoru</string>
+    <string name="incall_vibrate_call_waiting_title">Vibriraj ob čakajočem klicu</string>
+    <string name="incall_vibrate_hangup_title">Vibriraj ob prekinitvi klica</string>
+    <string name="incall_vibrate_45_title">Vibriraj vsako minuto</string>
+    <string name="incall_vibrate_45_summary">Vibrira ob preteklih 45 sekundah vsake minute med odhodnimi klici</string>
+    <string name="nearby_places">Bližnja mesta</string>
+    <string name="people">Osebe</string>
+    <string name="preference_category_t9_dialpad_search">Iskanje tipkovnice za klicanje T9</string>
+    <string name="t9_search_input_locale">Vnos iskanja T9</string>
+    <string name="t9_search_input_locale_default">Privzeti</string>
+    <string name="lookup_settings_label">Iskanje telefonske številke</string>
+    <string name="enable_forward_lookup_title">Iskanje naprej</string>
+    <string name="enable_forward_lookup_summary">Prikaži bližnja mesta med iskanjem v klicalniku</string>
+    <string name="enable_people_lookup_title">Išči za osebami</string>
+    <string name="enable_people_lookup_summary">Prikaži spletne rezultate za osebe med iskanjem v klicalniku</string>
+    <string name="enable_reverse_lookup_title">Obratno iskanje</string>
+    <string name="enable_reverse_lookup_summary">Poišči podatke o osebi ali mestu za neznane številke med dohodnimi klici</string>
+    <string name="forward_lookup_provider_title">Ponudnik iskanja naprej</string>
+    <string name="people_lookup_provider_title">Ponudnik iskanja oseb</string>
+    <string name="reverse_lookup_provider_title">Ponudnik obratnega iskanja</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+    <string name="speed_dial_edit_title">Uredi hitro klicanje <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Vnesite številko</string>
+    <string name="call_log_show_all_slots">Vse kartice SIM</string>
+    <string name="call_log_all_calls_header">Vsi klici</string>
+    <string name="call_log_blacklist_header">Samo blokirani klici</string>
+    <string name="call_log_blocked_empty">Nimate blokiranih klicev.</string>
+    <string name="call_log_stats_title">Statistika</string>
+    <string name="callStatsDetailTitle">Podrobnosti statistike klicev</string>
+    <string name="call_stats_incoming">Dohodni: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Odhodni: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Neodgovorjeni: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokirani: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g> %%</string>
+    <string name="call_stats_header_total">Skupaj: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Skupaj: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Začetni datum</string>
+    <string name="call_stats_filter_to">Končni datum</string>
+    <string name="call_stats_filter_picker_title">Obseg filtriranja</string>
+    <string name="date_quick_selection">Hitra izbira</string>
+    <string name="date_qs_currentmonth">Tekoči mesec</string>
+    <string name="date_qs_currentquarter">Tekoče četrtletje</string>
+    <string name="date_qs_currentyear">Tekoče leto</string>
+    <string name="date_qs_lastweek">Prejšnji teden</string>
+    <string name="date_qs_lastmonth">Prejšnji mesec</string>
+    <string name="date_qs_lastquarter">Prejšnje četrtletje</string>
+    <string name="date_qs_lastyear">Prejšnje leto</string>
+    <string name="call_stats_date_filter">Prilagodi časovni obseg</string>
+    <string name="call_stats_reset_filter">Ponastavi časovni obseg</string>
+    <string name="call_stats_sort_by_duration">Razvrsti po trajanju klica</string>
+    <string name="call_stats_sort_by_count">Razvrsti po številu klicev</string>
+    <string name="call_stats_title_for_number">Ta številka</string>
+    <string name="call_stats_title_of_total">Od skupno</string>
+    <string name="call_stats_title_durations">Trajanje klicev</string>
+    <string name="call_stats_title_count">Število klicev</string>
+    <string name="call_stats_title_average_duration">Povprečna dolžina klica</string>
+    <string name="recent_calls_no_items_in_range">Vaš dnevnik klicev ne vsebuje nobenih klicev v izbranem časovnem obsegu.</string>
+    <string name="call_recording_category_title">Snemanje klicev</string>
+    <string name="call_recording_format">Oblika zvoka</string>
+    <string name="call_playback_no_app_found_toast">Za predvajanje izbranega posnetka ni bila najdena nobena aplikacija.</string>
+    <string name="speed_dial_settings">Nastavitve hitrega klicanja</string>
+    <string name="speed_dial_not_set">(ni nastavljeno)</string>
+    <string name="speed_dial_replace">Nadomesti</string>
+    <string name="speed_dial_delete">Izbriši</string>
+    <string name="speed_dial_unassigned_dialog_title">Nedodeljena tipka</string>
+    <string name="speed_dial_unassigned_dialog_message">Nobeno dejanje hitrega klicanja ni dodeljeno tipki številčnice \'<xliff:g id="number">%s</xliff:g>\'. Ali želite dodeliti dejanje zdaj?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Za uporabo hitrega klicanja, najprej izklopite način za letalo</string>
+    <string name="speed_dial_can_not_be_set">Hitrega klicanja ni mogoče nastaviti za ta ključ</string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+    <string name="recentIncoming_empty">Nimate dohodnih klicev.</string>
+    <string name="recentOutgoing_empty">Nimate odhodnih klicev.</string>
+    <string name="recentCalls_empty">Vaš dnevnik klicev je prazen</string>
+    <string name="calllog_search_hint">Išči po dnevniku klicev</string>
+    <string name="no_call_log">Ni dnevnika klicev</string>
+    <string name="clear">Počisti</string>
+    <string name="description_clear_search">Počisti iskanje</string>
+    <string name="video_call_welcome_title"><b>Dobrodošli v novem klicalniku za video klice</b></string>
+    <string name="video_call_welcome_message">Vsi radi slišimo znan glas na drugi strani linije, vendar je pogovor iz oči v oči še boljši! To morate vedeti za uporabo vaših realno časovnih povezav:\n Povezani morate biti v 4G LTE ali Wi-Fi omrežje\n Naprava, ki jo kličete mora prav tako biti združljiva z video klici\n Video klici uporabljajo vašo podatkovno povezavo visoke hitrosti\n Glasovni klic lahko nadgradite v video klic\n\n Za več informacij si oglejte <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+    <string name="video_call_welcome_message_repeat">Vedno prikaži to sporočilo</string>
+    <string name="toast_change_video_call_failed">Sprememba na video klic ni možna, nepravilna oblika številke</string>
+    <string name="toast_make_video_call_failed">Video klic ni možen, nepravilna oblika številke</string>
+    <string name="overflowBothCallMenuItemText">Video klic, pokaži me</string>
+    <string name="overflowRXCallMenuItemText">Video klic, skrij me</string>
+    <string name="overflowVOCallMenuItemText">Glasovni klic</string>
+    <string name="video_call">Video klic</string>
+    <string name="call_data_info_label">Števci porabe klicev/podatkov</string>
+    <string name="call_data_info_description">Čas uporabe in poraba podatkov glasovnega klica</string>
+    <string name="alert_call_over_wifi">Klici bodo opravljeni preko omr. Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Na voljo ni nobenega mobilnega omrežja. Za klice se povežite na razpoložljivo omrežje Wi-Fi.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Za klicanje se povežite prek omrežja Wi-Fi.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Tapnite tukaj za ogled razpoložljivih omrežij</string>
+    <string name="menu_add_to_4g_conference_call">Dodaj k konferenčnemu klicu 4G</string>
+    <string name="menu_4g_conference_call">Konferenčni klic 4G</string>
+    <string name="type_incoming_volte">Dohodni glasovni klic 4G</string>
+    <string name="type_incoming_video_lte">Dohodni video klic 4G</string>
+    <string name="type_outgoing_volte">Odhodni glasovni klic 4G</string>
+    <string name="type_outgoing_video_lte">Odhodni video klic 4G</string>
+    <string name="type_missed_volte">Neodgovorjen glasovni klic 4G</string>
+    <string name="type_missed_video_lte">Neodgovorjen video klic 4G</string>
+    <string name="type_incoming_vowifi">Dohodni glasovni klic Wi-Fi</string>
+    <string name="type_incoming_video_wifi">Dohodni video klic Wi-Fi</string>
+    <string name="type_outgoing_vowifi">Odhodni glasovni klic Wi-Fi</string>
+    <string name="type_outgoing_video_wifi">Odhodni video klic Wi-Fi</string>
+    <string name="type_missed_vowifi">Neodgovorjen glasovni klic Wi-Fi</string>
+    <string name="type_missed_video_wifi">Neodgovorjen video klic Wi-Fi</string>
+    <string name="lookup_disclaimer">Iskanja lahko pošiljajo poizvedbe prek varnega protokola (https) oddaljenim spletnim stranem za zbiranje podatkov. Poizvedba lahko vključuje telefonsko številko druge osebe ali poizvedbo iskanja</string>
 </resources>

@@ -31,76 +31,21 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Call substate label -->
-  <!-- Call substate label for call resumed -->
-  <!-- Call substate label for call connected suspended (audio) -->
-  <!-- Call substate label for call connected suspended (video) -->
-  <!-- Call substate label for avp retry -->
-  <!-- Video quality changed message -->
-  <!-- Video quality High -->
-  <string name="video_quality_high">hög</string>
-  <!-- Video quality Medium -->
-  <string name="video_quality_medium">medel</string>
-  <!-- Video quality Low -->
-  <string name="video_quality_low">låg</string>
-  <!-- Video quality Unknown -->
-  <string name="video_quality_unknown">okänd</string>
-  <!-- Message indicating that Video Started flowing for IMS-VT calls -->
-  <string name="player_started">Spelaren startad</string>
-  <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <string name="player_stopped">Spelaren stoppad</string>
-  <!-- Message indicating that camera failure has occurred for the selected camera and
-         as result camera is not ready -->
-  <string name="camera_not_ready">Kameran är inte redo</string>
-  <!-- Message indicating that camera is ready/available -->
-  <string name="camera_ready">Kameran är redo</string>
-  <!-- Message indicating unknown call session event -->
-  <!-- Message indicating data usage -->
-  <!-- In-call screen: Modify Call Options for IMS call -->
-  <string name="modify_call_option_title">Välj samtalstyp</string>
-  <string name="modify_call_option_vt_tx">Videosändning</string>
-  <string name="modify_call_option_vt_rx">Videomottagning</string>
-  <string name="modify_call_option_voice">Endast röst</string>
-  <!-- Modify call error cause -->
-  <string name="modify_call_failed_due_to_low_battery">Det gick inte att ändra samtalet på grund av låg batterinivå.</string>
-  <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
-  <!-- Text for the onscreen "blind transfer" button -->
-  <!-- Text for the onscreen "assured transfer" button -->
-  <!-- Text for the onscreen "consultative transfer" button -->
-  <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
-  <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
-  <!-- Message indicating call failed due to handover not feasible -->
-  <!-- Text for the onscreen "Add Participant" button -->
-  <!-- Title of the IMS to CS redial dialog -->
-  <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Session modify cause unspecified -->
-  <!-- Session modify cause code upgrade local request -->
-  <!-- Session modify cause code upgrade remote request -->
-  <!-- Session modify cause code downgrade local request -->
-  <!-- Session modify cause code downgrade remote request -->
-  <!-- Session modify cause code downgrade rtp timeout -->
-  <!-- Session modify cause code downgrade qos -->
-  <!-- Session modify cause code downgrade packet loss -->
-  <!-- Session modify cause code downgrade low thrput -->
-  <!-- Session modify cause code downgrade thermal mitigation -->
-  <!-- Session modify cause code downgrade lipsync -->
-  <!-- Session modify cause code downgrade generic error -->
-  <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
-  <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
-  <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_conf_call">Inkommande konferenssamtal</string>
-  <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
-         [CHAR LIMIT=40] -->
-  <!-- Message indicating call failed due to low battery -->
-  <!-- VoWifi call quality indicators -->
-  <!-- Title for low battery alert dialogue -->
-  <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
-  <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-  <!-- No option of the low battery alert dialog for MO/MT Video calls -->
-  <!-- International prefix source-->
-  <!-- International prefix converted value-->
-  <!-- Pop up menu options for picture mode -->
-  <string name="video_call_picture_mode_incoming_video">Inkommande videosamtal</string>
-  <string name="video_call_picture_mode_cancel_option">Avbryt</string>
-  <string name="video_call_picture_mode_save_option">Spara</string>
+    <string name="video_quality_high">hög</string>
+    <string name="video_quality_medium">medel</string>
+    <string name="video_quality_low">låg</string>
+    <string name="video_quality_unknown">okänd</string>
+    <string name="player_started">Spelaren startad</string>
+    <string name="player_stopped">Spelaren stoppad</string>
+    <string name="camera_not_ready">Kameran är inte redo</string>
+    <string name="camera_ready">Kameran är redo</string>
+    <string name="modify_call_option_title">Välj samtalstyp</string>
+    <string name="modify_call_option_vt_tx">Videosändning</string>
+    <string name="modify_call_option_vt_rx">Videomottagning</string>
+    <string name="modify_call_option_voice">Endast röst</string>
+    <string name="modify_call_failed_due_to_low_battery">Det gick inte att ändra samtalet på grund av låg batterinivå.</string>
+    <string name="notification_incoming_conf_call">Inkommande konferenssamtal</string>
+    <string name="video_call_picture_mode_incoming_video">Inkommande videosamtal</string>
+    <string name="video_call_picture_mode_cancel_option">Avbryt</string>
+    <string name="video_call_picture_mode_save_option">Spara</string>
 </resources>

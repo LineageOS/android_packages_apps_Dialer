@@ -16,31 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <!-- dialpad t9 search -->
-  <!-- Number lookup -->
-  <!-- Chinese Reverse Lookup Provider -->
-  <!-- Call statistics -->
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <!-- Speed Dial -->
-  <string name="speed_dial_not_set">(heb ei osod)</string>
-  <string name="dialog_speed_dial_airplane_mode_message">I ddeialu, rhaid diffodd modd awyren.</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <!-- Text displayed when the call log is empty. -->
-  <!-- Add for enhance videocall ui -->
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Disclaimer -->
+    <string name="incall_vibration_category_title">Dirgryniad yn ystod galwad</string>
+    <string name="incall_vibrate_outgoing_title">Dirgrynu wrth ateb</string>
+    <string name="incall_vibrate_call_waiting_title">Dirgrynu wrth i alwad aros</string>
+    <string name="incall_vibrate_hangup_title">Dirgrynu wrth orffen yr alwad</string>
+    <string name="incall_vibrate_45_title">Dirgrynu pob munud</string>
+    <string name="incall_vibrate_45_summary">Dirgrynu ar 45ain eiliad pob munud yn ystod galwadau allan</string>
+    <string name="nearby_places">Lleoedd gerllaw</string>
+    <string name="people">Pobol</string>
+    <string name="preference_category_t9_dialpad_search">Chwiliad pad deialu T9</string>
+    <string name="t9_search_input_locale">Mewnbwn chwiliad T9</string>
+    <string name="t9_search_input_locale_default">Rhagosodiad</string>
+    <string name="lookup_settings_label">Chwilio rhif ffôn</string>
+    <string name="enable_forward_lookup_title">Chwiliad dargyfeiriad</string>
+    <string name="enable_forward_lookup_summary">Dangos llefydd gerllaw wrth chwilio yn y deialydd</string>
+    <string name="enable_people_lookup_title">Chwilio pobol</string>
+    <string name="enable_people_lookup_summary">Dangos canlyniadau ar-lein wrth chwilio am bobol yn y deialydd</string>
+    <string name="enable_reverse_lookup_title">Chwiliad croes</string>
+    <string name="enable_reverse_lookup_summary">Chwilio am wybodaeth am y person neu leoliad rhifau anhysbys sy\'n dy alw</string>
+    <string name="forward_lookup_provider_title">Darparydd chwiliad dargyfeiriad</string>
+    <string name="people_lookup_provider_title">Darparydd chwiliad pobol</string>
+    <string name="reverse_lookup_provider_title">Darparydd chwiliad croes</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Tsieineeg (CN)</string>
+    <string name="speed_dial_edit_title">Golygu deialu cyflym <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Rho rif ffôn dilys</string>
+    <string name="call_log_show_all_slots">Pob SIM</string>
+    <string name="call_log_all_calls_header">Pob galwad</string>
+    <string name="call_log_blacklist_header">Galwadau wedi\'u rhwystro yn unig</string>
+    <string name="call_log_blocked_empty">Does dim galwadau wedi eu rhwystro.</string>
+    <string name="call_log_stats_title">Ystadegau</string>
+    <string name="callStatsDetailTitle">Manylion ystadegau galwad</string>
+    <string name="call_stats_incoming">I mewn: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Allan: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Wedi\'u methu: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Wedi\'u rhwystro: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Cyfanswm: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Cyfanswm: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Dyddiad dechrau</string>
+    <string name="call_stats_filter_to">Dyddiad gorffen</string>
+    <string name="call_stats_filter_picker_title">Ystod hidlydd</string>
+    <string name="date_quick_selection">Dewis cyflym</string>
+    <string name="date_qs_currentmonth">Y mis hwn</string>
+    <string name="date_qs_currentquarter">Y chwarter hwn</string>
+    <string name="date_qs_currentyear">Y flwyddyn hon</string>
+    <string name="date_qs_lastweek">Wythnos diwethaf</string>
+    <string name="date_qs_lastmonth">Mis diwethaf</string>
+    <string name="date_qs_lastquarter">Chwarter diwethaf</string>
+    <string name="date_qs_lastyear">Blwyddyn ddiwethaf</string>
+    <string name="call_stats_date_filter">Addasu ystod amser</string>
+    <string name="call_stats_reset_filter">Ailosod y cyfnod amser</string>
+    <string name="call_stats_sort_by_duration">Trefnu yn ôl hyd alwadau</string>
+    <string name="call_stats_sort_by_count">Trefnu yn ôl nifer galwadau</string>
+    <string name="call_stats_title_for_number">Y rhif hwn</string>
+    <string name="call_stats_title_of_total">O\'r cyfanswm</string>
+    <string name="call_stats_title_durations">Hyd galwadau</string>
+    <string name="call_stats_title_count">Cyfrif galwadau</string>
+    <string name="call_stats_title_average_duration">Hyd galwadau ar gyfartaledd</string>
+    <string name="recent_calls_no_items_in_range">Nid yw dy log galwadau yn cynnwys unrhyw alwadau yn y cyfnod dan sylw.</string>
+    <string name="call_recording_category_title">Recordio galwadau</string>
+    <string name="call_recording_format">Fformat sain</string>
+    <string name="call_playback_no_app_found_toast">Ni chanfuwyd ap i chwarae\'r recordiad dan sylw.</string>
+    <string name="speed_dial_settings">Gosodiadau deialu cyflym</string>
+    <string name="speed_dial_not_set">(heb ei osod)</string>
+    <string name="speed_dial_replace">Disodli</string>
+    <string name="speed_dial_delete">Dileu</string>
+    <string name="speed_dial_unassigned_dialog_title">Bysell heb neilltuo</string>
+    <string name="speed_dial_unassigned_dialog_message">Does dim gweithred deialu gyflym wedi\'i phennu i fysell rhif \'<xliff:g id="number">%s</xliff:g>\'. Wyt ti am osod gweithred nawr?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">I ddeialu, rhaid diffodd modd awyren.</string>
+    <string name="speed_dial_can_not_be_set">Ni ellir gosod deialu cyflym ar gyfer y fysell hon</string>
+    <string name="yes">Iawn</string>
+    <string name="no">Ydw</string>
+    <string name="recentIncoming_empty">Does dim galwadau i mewn.</string>
+    <string name="recentOutgoing_empty">Does dim galwadau allan.</string>
+    <string name="recentCalls_empty">Does dim hanes galwadau.</string>
+    <string name="calllog_search_hint">Chwilio\'r log galwadau</string>
+    <string name="no_call_log">Din log galwadau</string>
+    <string name="clear">Clirio</string>
+    <string name="description_clear_search">Clirio\'r chwiliad</string>
+    <string name="video_call_welcome_title"><b>Croeso i\'r Deialydd Galwadau Fideo newydd</b></string>
+    <string name="video_call_welcome_message">Rydym i gyd yn hoffi clywed y llais cyfarwydd ar ben arall yr alwad, ond mae siarad wyneb yn wyneb cymaint well! Dyma sydd angen ei wybod i gael dy gysylltiadau gwir amser (neu FaceTime?) yn mynd:\n Bydd angen bod ar gysylltiad Wi-Fi neu 4G LTE\n Bydd yn rhaid i\'r ddyfais wyt ti\'n ei galw hefyd medru gwneud galwadau fideo\n Mae galwadau fideo yn defnyddio data cyflymder uchel\n Mae\'n bosib uwchraddio galwad llais i alwad fideo\n\n Gweler <a>https://support.t-mobile.com/docs/DOC-23574</a> am fwy o wybodaeth.</string>
+    <string name="video_call_welcome_message_repeat">Dangos y neges hon pob tro</string>
+    <string name="toast_change_video_call_failed">Methu â newid i alwad fideo - fformat rhif anghywir</string>
+    <string name="toast_make_video_call_failed">Methu â gwneud galwad fideo - fformat rhif anghywir</string>
+    <string name="overflowBothCallMenuItemText">Galwad fideo. Fy nangos i.</string>
+    <string name="overflowRXCallMenuItemText">Galwad fideo. Fy nhuddio i.</string>
+    <string name="overflowVOCallMenuItemText">Galwad llais</string>
+    <string name="video_call">Galwad fideo</string>
+    <string name="call_data_info_label">Amseryddion galwadau/defnydd data</string>
+    <string name="call_data_info_description">Amser defnydd galwadau llais ac amser defnydd data</string>
+    <string name="alert_call_over_wifi">Caiff galwadau eu gwneud dros Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Dim rhwydwaith symudol ar gael. Cysyllta â rhwydwaith Wi-Fi os ar gael i wneud galwadau.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Cysylltu â Wi-Fi i wneud galwadau.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Tapia yma i weld rhwydweithiau sydd ar gael</string>
+    <string name="menu_add_to_4g_conference_call">Ychwanegu at alwad grŵp 4G</string>
+    <string name="menu_4g_conference_call">Galwad grŵp 4G</string>
+    <string name="type_incoming_volte">Galwad llais 4G i mewn</string>
+    <string name="type_incoming_video_lte">Galwad fideo 4G i mewn</string>
+    <string name="type_outgoing_volte">Galwad llais 4G allan</string>
+    <string name="type_outgoing_video_lte">Galwad fideo 4G allan</string>
+    <string name="type_missed_volte">Galwad llais 4G wedi\'i methu</string>
+    <string name="type_missed_video_lte">Galwad fideo 4G wedi\'i methu</string>
+    <string name="type_incoming_vowifi">Galwad llais Wi-Fi i mewn</string>
+    <string name="type_incoming_video_wifi">Galwad fideo Wi-Fi i mewn</string>
+    <string name="type_outgoing_vowifi">Galwad llais Wi-Fi allan</string>
+    <string name="type_outgoing_video_wifi">Galwad fideo Wi-Fi allan</string>
+    <string name="type_missed_vowifi">Galwad llais Wi-Fi wedi\'i methu</string>
+    <string name="type_missed_video_wifi">Galwad fideo Wi-Fi wedi\'i methu</string>
+    <string name="lookup_disclaimer">Gall chwiliadau anfon ymholiadau dros brotocol diogel (https) at wefannau pell i gasglu gwybodaeth. Gall yr ymholiad gynnwys rhif ffôn y parti arall neu\'r term chwilio.</string>
 </resources>

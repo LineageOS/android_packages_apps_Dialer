@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 time</item>
-    <item quantity="other">%d timer</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 min</item>
-    <item quantity="other">%d minutter</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 sek</item>
-    <item quantity="other">%d sekunder</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 samtale</item>
-    <item quantity="other">%d samtaler</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 time</item>
+        <item quantity="other">%d timer</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 min</item>
+        <item quantity="other">%d minutter</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sek</item>
+        <item quantity="other">%d sekunder</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 samtale</item>
+        <item quantity="other">%d samtaler</item>
+    </plurals>
 </resources>

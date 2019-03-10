@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Vibrazioni in chiamata</string>
-  <string name="incall_vibrate_outgoing_title">Vibra alla risposta</string>
-  <string name="incall_vibrate_call_waiting_title">Vibra su messa in attesa</string>
-  <string name="incall_vibrate_hangup_title">Vibra al termine chiamata</string>
-  <string name="incall_vibrate_45_title">Vibra ogni minuto</string>
-  <string name="incall_vibrate_45_summary">Vibra al 45esimo secondo di ogni minuto durante le chiamate in uscita</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Posti nelle vicinanze</string>
-  <string name="people">Persone</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Ricerca T9 tastierino</string>
-  <string name="t9_search_input_locale">Input ricerca T9</string>
-  <string name="t9_search_input_locale_default">Predefinito</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Ricerca numeri telefonici</string>
-  <string name="enable_forward_lookup_title">Ricerca diretta</string>
-  <string name="enable_forward_lookup_summary">Mostra luoghi nelle vicinanze durante la ricerca nel tastierino</string>
-  <string name="enable_people_lookup_title">Ricerca persone</string>
-  <string name="enable_people_lookup_summary">Mostra risultati online durante la ricerca nel tastierino</string>
-  <string name="enable_reverse_lookup_title">Ricerca inversa</string>
-  <string name="enable_reverse_lookup_summary">Cerca informazioni sulla persona o luogo per i numeri sconosciuti delle chiamate in ingresso</string>
-  <string name="forward_lookup_provider_title">Provider di ricerca diretta</string>
-  <string name="people_lookup_provider_title">Provider di ricerca persone</string>
-  <string name="reverse_lookup_provider_title">Provider di ricerca inverso</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Cinese (CN)</string>
-  <string name="speed_dial_edit_title">Modifica composizione rapid <xliff:g id="index" example="2">%1$d </xliff:g></string>
-  <string name="speed_dial_input_hint">Inserisci un numero</string>
-  <string name="call_log_show_all_slots">Tutte le SIM</string>
-  <string name="call_log_all_calls_header">Tutte le chiamate</string>
-  <string name="call_log_blacklist_header">Solo chiamate bloccate</string>
-  <string name="call_log_blocked_empty">Non hai chiamate bloccate.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistiche</string>
-  <string name="callStatsDetailTitle">Dettagli chiamate</string>
-  <string name="call_stats_incoming">In entrata <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">In uscita <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Perse: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Bloccate: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Totale: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Totale: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Da data</string>
-  <string name="call_stats_filter_to">A data</string>
-  <string name="call_stats_filter_picker_title">Intervallo</string>
-  <string name="date_quick_selection">Selezione rapida</string>
-  <string name="date_qs_currentmonth">Mese corrente</string>
-  <string name="date_qs_currentquarter">Trimestre corrente</string>
-  <string name="date_qs_currentyear">Anno corrente</string>
-  <string name="date_qs_lastweek">Ultima settimana</string>
-  <string name="date_qs_lastmonth">Ultimo mese</string>
-  <string name="date_qs_lastquarter">Ultimo trimestre</string>
-  <string name="date_qs_lastyear">Ultimo anno</string>
-  <string name="call_stats_date_filter">Regola intervallo</string>
-  <string name="call_stats_reset_filter">Reimposta intervallo</string>
-  <string name="call_stats_sort_by_duration">Ordina per durata</string>
-  <string name="call_stats_sort_by_count">Ordina per numero</string>
-  <string name="call_stats_title_for_number">Questo numero</string>
-  <string name="call_stats_title_of_total">In totale</string>
-  <string name="call_stats_title_durations">Durata chiamate</string>
-  <string name="call_stats_title_count">Conteggio chiamate</string>
-  <string name="call_stats_title_average_duration">Durata media chiamata</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Il registro chiamate non contiene nessuna chiamata nel periodo di tempo selezionato.</string>
-  <string name="call_recording_category_title">Registrazione chiamata</string>
-  <string name="call_recording_format">Formato audio</string>
-  <string name="call_playback_no_app_found_toast">Nessuna app trovata per la riproduzione della registrazione selezionata.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Impostazioni composizione rapida</string>
-  <string name="speed_dial_not_set">(non impostato)</string>
-  <string name="speed_dial_replace">Sostituisci</string>
-  <string name="speed_dial_delete">Elimina</string>
-  <string name="speed_dial_unassigned_dialog_title">Pulsante non assegnato</string>
-  <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero \'<xliff:g id="number">%s</xliff:g>\'. Vuoi assegnare un\'azione ora?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Per utilizzare la composizione rapida, disattiva la modalità aereo</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">La composizione rapida non può essere utilizzata su questo tasto</string>
-  <string name="yes">Si</string>
-  <string name="no">No</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Non ci sono chiamate in arrivo.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Non ci sono chiamate in uscita.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Il registro delle chiamate è vuoto</string>
-  <string name="calllog_search_hint">Cerca nel registro delle chiamate</string>
-  <string name="no_call_log">Nessun registro chiamate</string>
-  <string name="clear">Pulisci</string>
-  <string name="description_clear_search">Pulisci ricerca</string>
-  <string name="video_call_welcome_title"><b>Benvenuto nel nuovo dialer di videochiamate</b></string>
-  <string name="video_call_welcome_message">Tutti noi amiamo sentire una voce familiare dall\'altro lato della linea, ma parlare faccia a faccia è molto meglio! Ecco quello che devi sapere per avere una connessione pronta per le videochiamate:\nÈ necessaria una connessione 4G LTE o Wi-Fi\nIl dispositivo deve supportare le chiamate vocali\nLe videochiamate utilizzeranno una connessione dati veloce\nPotrai aggiornare una chiamata normale in una videochiamata\n\nVisita <a>https://support.t-mobile.com/docs/DOC-23574</a> per ulteriori informazioni.</string>
-  <string name="video_call_welcome_message_repeat">Mostra questo messaggio ogni volta</string>
-  <string name="toast_change_video_call_failed">Impossibile passare a videochiamata, formato del numero non corretto</string>
-  <string name="toast_make_video_call_failed">Impossibile effetuare videochiamata, formato del numero non corretto</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Videochiamata, mostrami</string>
-  <string name="overflowRXCallMenuItemText">Videochiamata, nascondimi</string>
-  <string name="overflowVOCallMenuItemText">Chiamata vocale</string>
-  <string name="video_call">Video chiamata</string>
-  <string name="call_data_info_label">Timer utilizzo chiamata/dati</string>
-  <string name="call_data_info_description">Tempo utilizzo chiamata vocale e dati</string>
-  <string name="alert_call_over_wifi">Le chiamate saranno fatte via Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Nessuna connessione disponibile. Connettiti al Wi-Fi per effetuare chiamate.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Connetiti al Wi-Fi per effetuare chiamate.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Tocca qui per visualizzare le reti disponibili</string>
-  <string name="menu_add_to_4g_conference_call">Aggiungi alla chiamata in conferenza 4G</string>
-  <string name="menu_4g_conference_call">Chiamata in conferenza 4G</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Chiamata 4G in arrivo</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Videochiamata 4G in arrivo</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Chiamata 4G in uscita</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Videochiamata 4G in uscita</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Chiamata 4G persa</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Videochiamata 4G persa</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Chiamata Wi-Fi in arrivo</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Videochiamata Wi-Fi in arrivo</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Chiamata Wi-Fi in uscita</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Videochiamata Wi-Fi in uscita</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Chiamata Wi-Fi persa</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Videochiamata Wi-Fi persa</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Le ricerche potrebbero inviare query tramite un protocollo sicuro (https) a siti web in remoto per raccogliere le informazioni necessarie. La query può includere il numero di telefono del corrispondente o il testo della ricerca</string>
+    <string name="incall_vibration_category_title">Vibrazioni in chiamata</string>
+    <string name="incall_vibrate_outgoing_title">Vibra alla risposta</string>
+    <string name="incall_vibrate_call_waiting_title">Vibra su messa in attesa</string>
+    <string name="incall_vibrate_hangup_title">Vibra al termine chiamata</string>
+    <string name="incall_vibrate_45_title">Vibra ogni minuto</string>
+    <string name="incall_vibrate_45_summary">Vibra al 45esimo secondo di ogni minuto durante le chiamate in uscita</string>
+    <string name="nearby_places">Posti nelle vicinanze</string>
+    <string name="people">Persone</string>
+    <string name="preference_category_t9_dialpad_search">Ricerca T9 tastierino</string>
+    <string name="t9_search_input_locale">Input ricerca T9</string>
+    <string name="t9_search_input_locale_default">Predefinito</string>
+    <string name="lookup_settings_label">Ricerca numeri telefonici</string>
+    <string name="enable_forward_lookup_title">Ricerca diretta</string>
+    <string name="enable_forward_lookup_summary">Mostra luoghi nelle vicinanze durante la ricerca nel tastierino</string>
+    <string name="enable_people_lookup_title">Ricerca persone</string>
+    <string name="enable_people_lookup_summary">Mostra risultati online durante la ricerca nel tastierino</string>
+    <string name="enable_reverse_lookup_title">Ricerca inversa</string>
+    <string name="enable_reverse_lookup_summary">Cerca informazioni sulla persona o luogo per i numeri sconosciuti delle chiamate in ingresso</string>
+    <string name="forward_lookup_provider_title">Provider di ricerca diretta</string>
+    <string name="people_lookup_provider_title">Provider di ricerca persone</string>
+    <string name="reverse_lookup_provider_title">Provider di ricerca inverso</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Cinese (CN)</string>
+    <string name="speed_dial_edit_title">Modifica composizione rapid <xliff:g id="index" example="2">%1$d </xliff:g></string>
+    <string name="speed_dial_input_hint">Inserisci un numero</string>
+    <string name="call_log_show_all_slots">Tutte le SIM</string>
+    <string name="call_log_all_calls_header">Tutte le chiamate</string>
+    <string name="call_log_blacklist_header">Solo chiamate bloccate</string>
+    <string name="call_log_blocked_empty">Non hai chiamate bloccate.</string>
+    <string name="call_log_stats_title">Statistiche</string>
+    <string name="callStatsDetailTitle">Dettagli chiamate</string>
+    <string name="call_stats_incoming">In entrata <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">In uscita <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Perse: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Bloccate: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totale: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totale: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Da data</string>
+    <string name="call_stats_filter_to">A data</string>
+    <string name="call_stats_filter_picker_title">Intervallo</string>
+    <string name="date_quick_selection">Selezione rapida</string>
+    <string name="date_qs_currentmonth">Mese corrente</string>
+    <string name="date_qs_currentquarter">Trimestre corrente</string>
+    <string name="date_qs_currentyear">Anno corrente</string>
+    <string name="date_qs_lastweek">Ultima settimana</string>
+    <string name="date_qs_lastmonth">Ultimo mese</string>
+    <string name="date_qs_lastquarter">Ultimo trimestre</string>
+    <string name="date_qs_lastyear">Ultimo anno</string>
+    <string name="call_stats_date_filter">Regola intervallo</string>
+    <string name="call_stats_reset_filter">Reimposta intervallo</string>
+    <string name="call_stats_sort_by_duration">Ordina per durata</string>
+    <string name="call_stats_sort_by_count">Ordina per numero</string>
+    <string name="call_stats_title_for_number">Questo numero</string>
+    <string name="call_stats_title_of_total">In totale</string>
+    <string name="call_stats_title_durations">Durata chiamate</string>
+    <string name="call_stats_title_count">Conteggio chiamate</string>
+    <string name="call_stats_title_average_duration">Durata media chiamata</string>
+    <string name="recent_calls_no_items_in_range">Il registro chiamate non contiene nessuna chiamata nel periodo di tempo selezionato.</string>
+    <string name="call_recording_category_title">Registrazione chiamata</string>
+    <string name="call_recording_format">Formato audio</string>
+    <string name="call_playback_no_app_found_toast">Nessuna app trovata per la riproduzione della registrazione selezionata.</string>
+    <string name="speed_dial_settings">Impostazioni composizione rapida</string>
+    <string name="speed_dial_not_set">(non impostato)</string>
+    <string name="speed_dial_replace">Sostituisci</string>
+    <string name="speed_dial_delete">Elimina</string>
+    <string name="speed_dial_unassigned_dialog_title">Pulsante non assegnato</string>
+    <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero \'<xliff:g id="number">%s</xliff:g>\'. Vuoi assegnare un\'azione ora?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Per utilizzare la composizione rapida, disattiva la modalità aereo</string>
+    <string name="speed_dial_can_not_be_set">La composizione rapida non può essere utilizzata su questo tasto</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="recentIncoming_empty">Non ci sono chiamate in arrivo.</string>
+    <string name="recentOutgoing_empty">Non ci sono chiamate in uscita.</string>
+    <string name="recentCalls_empty">Il registro delle chiamate è vuoto</string>
+    <string name="calllog_search_hint">Cerca nel registro delle chiamate</string>
+    <string name="no_call_log">Nessun registro chiamate</string>
+    <string name="clear">Pulisci</string>
+    <string name="description_clear_search">Pulisci ricerca</string>
+    <string name="video_call_welcome_title"><b>Benvenuto nel nuovo dialer di videochiamate</b></string>
+    <string name="video_call_welcome_message">Tutti noi amiamo sentire una voce familiare dall\'altro lato della linea, ma parlare faccia a faccia è molto meglio! Ecco quello che devi sapere per avere una connessione pronta per le videochiamate:\nÈ necessaria una connessione 4G LTE o Wi-Fi\nIl dispositivo deve supportare le chiamate vocali\nLe videochiamate utilizzeranno una connessione dati veloce\nPotrai aggiornare una chiamata normale in una videochiamata\n\nVisita <a>https://support.t-mobile.com/docs/DOC-23574</a> per ulteriori informazioni.</string>
+    <string name="video_call_welcome_message_repeat">Mostra questo messaggio ogni volta</string>
+    <string name="toast_change_video_call_failed">Impossibile passare a videochiamata, formato del numero non corretto</string>
+    <string name="toast_make_video_call_failed">Impossibile effetuare videochiamata, formato del numero non corretto</string>
+    <string name="overflowBothCallMenuItemText">Videochiamata, mostrami</string>
+    <string name="overflowRXCallMenuItemText">Videochiamata, nascondimi</string>
+    <string name="overflowVOCallMenuItemText">Chiamata vocale</string>
+    <string name="video_call">Video chiamata</string>
+    <string name="call_data_info_label">Timer utilizzo chiamata/dati</string>
+    <string name="call_data_info_description">Tempo utilizzo chiamata vocale e dati</string>
+    <string name="alert_call_over_wifi">Le chiamate saranno fatte via Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Nessuna connessione disponibile. Connettiti al Wi-Fi per effetuare chiamate.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Connetiti al Wi-Fi per effetuare chiamate.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Tocca qui per visualizzare le reti disponibili</string>
+    <string name="menu_add_to_4g_conference_call">Aggiungi alla chiamata in conferenza 4G</string>
+    <string name="menu_4g_conference_call">Chiamata in conferenza 4G</string>
+    <string name="type_incoming_volte">Chiamata 4G in arrivo</string>
+    <string name="type_incoming_video_lte">Videochiamata 4G in arrivo</string>
+    <string name="type_outgoing_volte">Chiamata 4G in uscita</string>
+    <string name="type_outgoing_video_lte">Videochiamata 4G in uscita</string>
+    <string name="type_missed_volte">Chiamata 4G persa</string>
+    <string name="type_missed_video_lte">Videochiamata 4G persa</string>
+    <string name="type_incoming_vowifi">Chiamata Wi-Fi in arrivo</string>
+    <string name="type_incoming_video_wifi">Videochiamata Wi-Fi in arrivo</string>
+    <string name="type_outgoing_vowifi">Chiamata Wi-Fi in uscita</string>
+    <string name="type_outgoing_video_wifi">Videochiamata Wi-Fi in uscita</string>
+    <string name="type_missed_vowifi">Chiamata Wi-Fi persa</string>
+    <string name="type_missed_video_wifi">Videochiamata Wi-Fi persa</string>
+    <string name="lookup_disclaimer">Le ricerche potrebbero inviare query tramite un protocollo sicuro (https) a siti web in remoto per raccogliere le informazioni necessarie. La query può includere il numero di telefono del corrispondente o il testo della ricerca</string>
 </resources>

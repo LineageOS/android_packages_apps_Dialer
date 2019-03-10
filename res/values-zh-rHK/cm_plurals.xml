@@ -16,9 +16,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="call">
-    <item quantity="other">1 個通話
+    <plurals name="call">
+        <item quantity="other">1 個通話
 
 %d 個通話</item>
-  </plurals>
+    </plurals>
 </resources>

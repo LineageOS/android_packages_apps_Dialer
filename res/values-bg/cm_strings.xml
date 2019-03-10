@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Вибрация при входящо повикване</string>
-  <string name="incall_vibrate_outgoing_title">Вибрация при отговор</string>
-  <string name="incall_vibrate_call_waiting_title">Вибрация при изчакващо повикване</string>
-  <string name="incall_vibrate_hangup_title">Вибрация при затваряне</string>
-  <string name="incall_vibrate_45_title">Вибрация на всяка минута</string>
-  <string name="incall_vibrate_45_summary">Ще вибрира на всяка 45-та секунда от минутата по време на изходящи повиквания</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Близки места</string>
-  <string name="people">Хора</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Търсене в T9</string>
-  <string name="t9_search_input_locale">Вход в T9 търсене</string>
-  <string name="t9_search_input_locale_default">Стандартен</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Търсене на телефонен номер</string>
-  <string name="enable_forward_lookup_title">Пренасочване на търсенето</string>
-  <string name="enable_forward_lookup_summary">Показване на близките места при търсене с клавиатурата за набиране</string>
-  <string name="enable_people_lookup_title">Търсене на хора</string>
-  <string name="enable_people_lookup_summary">Показване на резултатите за хора от интернет, когато се търси с клавиатурата за набиране</string>
-  <string name="enable_reverse_lookup_title">Обратно търсене</string>
-  <string name="enable_reverse_lookup_summary">Търсене на информация за човек или място за непознати номера от входящите обаждания</string>
-  <string name="forward_lookup_provider_title">Доставчик на информация</string>
-  <string name="people_lookup_provider_title">Доставчик на информация за хора</string>
-  <string name="reverse_lookup_provider_title">Доставчик на информация при обратно търсене</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
-  <string name="speed_dial_edit_title">Редактиране на бързо набиране <xliff:g id="index" example="2">%1$d </xliff:g></string>
-  <string name="speed_dial_input_hint">Въведете номер</string>
-  <string name="call_log_show_all_slots">Всички СИМ карти</string>
-  <string name="call_log_all_calls_header">Всички обаждания</string>
-  <string name="call_log_blacklist_header">Само блокирани обаждания</string>
-  <string name="call_log_blocked_empty">Вие нямате блокирани обаждания.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Статистика</string>
-  <string name="callStatsDetailTitle">Детайли за повикването</string>
-  <string name="call_stats_incoming">Входящи: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_outgoing">Изходящи: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_missed">Пропуснати: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_blocked">Блокирани: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Общо: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Общо: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Начална дата</string>
-  <string name="call_stats_filter_to">Крайна дата</string>
-  <string name="call_stats_filter_picker_title">Филтриращ диапазон</string>
-  <string name="date_quick_selection">Бърз избор</string>
-  <string name="date_qs_currentmonth">Текущ месец</string>
-  <string name="date_qs_currentquarter">Текущото тримесечие</string>
-  <string name="date_qs_currentyear">Текущата година</string>
-  <string name="date_qs_lastweek">Миналата седмица</string>
-  <string name="date_qs_lastmonth">Миналия месец</string>
-  <string name="date_qs_lastquarter">Миналото тримесечие</string>
-  <string name="date_qs_lastyear">Миналата година</string>
-  <string name="call_stats_date_filter">Филтър за период от време</string>
-  <string name="call_stats_reset_filter">Възстанови по подраздиране периода от време</string>
-  <string name="call_stats_sort_by_duration">Сортирай по продължителност на разговори</string>
-  <string name="call_stats_sort_by_count">Сортирай по брой на обаждания</string>
-  <string name="call_stats_title_for_number">Този номер</string>
-  <string name="call_stats_title_of_total">От общо</string>
-  <string name="call_stats_title_durations">Продължителност на разговора</string>
-  <string name="call_stats_title_count">Брой обаждания</string>
-  <string name="call_stats_title_average_duration">Средна продължителност на повикванията</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Няма регистрирани повиквания през зададения период.</string>
-  <string name="call_recording_category_title">Запис на разговор</string>
-  <string name="call_recording_format">Аудио формат</string>
-  <string name="call_playback_no_app_found_toast">Не е намерено приложение за възпроизвеждане на записа.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Настройки за бързо набиране</string>
-  <string name="speed_dial_not_set">(не е зададен)</string>
-  <string name="speed_dial_replace">Замени</string>
-  <string name="speed_dial_delete">Изтриване</string>
-  <string name="speed_dial_unassigned_dialog_title">Бутон без предназначение</string>
-  <string name="speed_dial_unassigned_dialog_message">Няма зададена бърза команда на бутон номер \"<xliff:g id="number">%s </xliff:g>\". Искате ли да зададете команда сега?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">За да използвате за бързо набиране, първо трябва да изключите самолетния режим</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Бързо набиране не може да бъде приложено за този бутон</string>
-  <string name="yes">Да</string>
-  <string name="no">Не</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Вие нямате входящи повиквания.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Вие нямате изходящи повиквания.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Регистъра с повикванията е празен</string>
-  <string name="calllog_search_hint">Търсени в регистъра с повикванията</string>
-  <string name="no_call_log">Няма регистър с повиквания</string>
-  <string name="clear">Изчистване</string>
-  <string name="description_clear_search">Изчисти търсенето</string>
-  <string name="video_call_welcome_title"><b>Добре дошли в новото приложение за видео обаждане</b></string>
-  <string name="video_call_welcome_message">Ние всички обичаме да чуваме познат глас в другия край на линията, но да си говорим лице в лице е толкова по-добре! Ето какво трябва да знаете да е в реално време (или FaceTime?).Връзката ще трябва да бъде 4G LTE или Wi-Fi връзка. Устройство на, която се обаждате трябва да подържа видео обаждане. Видео разговорите използват бърза връзка за данни, също така да надстроите гласово повикване към видео повикване. За повече информация посетете <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
-  <string name="video_call_welcome_message_repeat">Показвай това съобщение всеки път</string>
-  <string name="toast_change_video_call_failed">Не може да премине на видео повикване, неправилен числов формат</string>
-  <string name="toast_make_video_call_failed">Не може да се осъществи на видео повикване, неправилен числов формат</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Видео обаждане, покажи ме</string>
-  <string name="overflowRXCallMenuItemText">Видео обаждане, скрий ме</string>
-  <string name="overflowVOCallMenuItemText">Гласово повикване</string>
-  <string name="video_call">Видео повикване</string>
-  <string name="call_data_info_label">Повикване/таймери за използването на данни</string>
-  <string name="call_data_info_description">Време за ползване на гласови повиквания и данни</string>
-  <string name="alert_call_over_wifi">Разговорите ще бъдат осъщесвени през Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Няма налична клетъчна мрежа. Свържете се към налични Wi-Fi мрежа за да провеждате разговори.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Свързване към Wi-Fi мрежа за провеждате разговори.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Натиснете тук, за да видите наличните мрежи</string>
-  <string name="menu_add_to_4g_conference_call">Добави към 4G конферентен разговор</string>
-  <string name="menu_4g_conference_call">4G конферентен разговор</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Входящо 4G гласово повикване</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Входящо 4G видео повикване</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Изходящо 4G гласово повикване</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Изходящо 4G видео повикване</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Пропуснато 4G гласово повикване</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Пропуснато 4G видео повикване</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Входящо Wi-Fi гласово повикване</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Входящо Wi-Fi видео повикване</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Изходящо Wi-Fi гласово повикване</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Изходящо Wi-Fi видео повикване</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Пропуснато Wi-Fi гласово повикване</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Пропуснато Wi-Fi видео повикване</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Търсенето може да изпраща заявки през защитен протокол (https) до отдалечени уеб сайтове, за да събира информация. Искането на другата страна може да включва телефонен номер или заявка за търсене</string>
+    <string name="incall_vibration_category_title">Вибрация при входящо повикване</string>
+    <string name="incall_vibrate_outgoing_title">Вибрация при отговор</string>
+    <string name="incall_vibrate_call_waiting_title">Вибрация при изчакващо повикване</string>
+    <string name="incall_vibrate_hangup_title">Вибрация при затваряне</string>
+    <string name="incall_vibrate_45_title">Вибрация на всяка минута</string>
+    <string name="incall_vibrate_45_summary">Ще вибрира на всяка 45-та секунда от минутата по време на изходящи повиквания</string>
+    <string name="nearby_places">Близки места</string>
+    <string name="people">Хора</string>
+    <string name="preference_category_t9_dialpad_search">Търсене в T9</string>
+    <string name="t9_search_input_locale">Вход в T9 търсене</string>
+    <string name="t9_search_input_locale_default">Стандартен</string>
+    <string name="lookup_settings_label">Търсене на телефонен номер</string>
+    <string name="enable_forward_lookup_title">Пренасочване на търсенето</string>
+    <string name="enable_forward_lookup_summary">Показване на близките места при търсене с клавиатурата за набиране</string>
+    <string name="enable_people_lookup_title">Търсене на хора</string>
+    <string name="enable_people_lookup_summary">Показване на резултатите за хора от интернет, когато се търси с клавиатурата за набиране</string>
+    <string name="enable_reverse_lookup_title">Обратно търсене</string>
+    <string name="enable_reverse_lookup_summary">Търсене на информация за човек или място за непознати номера от входящите обаждания</string>
+    <string name="forward_lookup_provider_title">Доставчик на информация</string>
+    <string name="people_lookup_provider_title">Доставчик на информация за хора</string>
+    <string name="reverse_lookup_provider_title">Доставчик на информация при обратно търсене</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+    <string name="speed_dial_edit_title">Редактиране на бързо набиране <xliff:g id="index" example="2">%1$d </xliff:g></string>
+    <string name="speed_dial_input_hint">Въведете номер</string>
+    <string name="call_log_show_all_slots">Всички СИМ карти</string>
+    <string name="call_log_all_calls_header">Всички обаждания</string>
+    <string name="call_log_blacklist_header">Само блокирани обаждания</string>
+    <string name="call_log_blocked_empty">Вие нямате блокирани обаждания.</string>
+    <string name="call_log_stats_title">Статистика</string>
+    <string name="callStatsDetailTitle">Детайли за повикването</string>
+    <string name="call_stats_incoming">Входящи: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_outgoing">Изходящи: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_missed">Пропуснати: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_blocked">Блокирани: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Общо: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Общо: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Начална дата</string>
+    <string name="call_stats_filter_to">Крайна дата</string>
+    <string name="call_stats_filter_picker_title">Филтриращ диапазон</string>
+    <string name="date_quick_selection">Бърз избор</string>
+    <string name="date_qs_currentmonth">Текущ месец</string>
+    <string name="date_qs_currentquarter">Текущото тримесечие</string>
+    <string name="date_qs_currentyear">Текущата година</string>
+    <string name="date_qs_lastweek">Миналата седмица</string>
+    <string name="date_qs_lastmonth">Миналия месец</string>
+    <string name="date_qs_lastquarter">Миналото тримесечие</string>
+    <string name="date_qs_lastyear">Миналата година</string>
+    <string name="call_stats_date_filter">Филтър за период от време</string>
+    <string name="call_stats_reset_filter">Възстанови по подраздиране периода от време</string>
+    <string name="call_stats_sort_by_duration">Сортирай по продължителност на разговори</string>
+    <string name="call_stats_sort_by_count">Сортирай по брой на обаждания</string>
+    <string name="call_stats_title_for_number">Този номер</string>
+    <string name="call_stats_title_of_total">От общо</string>
+    <string name="call_stats_title_durations">Продължителност на разговора</string>
+    <string name="call_stats_title_count">Брой обаждания</string>
+    <string name="call_stats_title_average_duration">Средна продължителност на повикванията</string>
+    <string name="recent_calls_no_items_in_range">Няма регистрирани повиквания през зададения период.</string>
+    <string name="call_recording_category_title">Запис на разговор</string>
+    <string name="call_recording_format">Аудио формат</string>
+    <string name="call_playback_no_app_found_toast">Не е намерено приложение за възпроизвеждане на записа.</string>
+    <string name="speed_dial_settings">Настройки за бързо набиране</string>
+    <string name="speed_dial_not_set">(не е зададен)</string>
+    <string name="speed_dial_replace">Замени</string>
+    <string name="speed_dial_delete">Изтриване</string>
+    <string name="speed_dial_unassigned_dialog_title">Бутон без предназначение</string>
+    <string name="speed_dial_unassigned_dialog_message">Няма зададена бърза команда на бутон номер \"<xliff:g id="number">%s </xliff:g>\". Искате ли да зададете команда сега?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">За да използвате за бързо набиране, първо трябва да изключите самолетния режим</string>
+    <string name="speed_dial_can_not_be_set">Бързо набиране не може да бъде приложено за този бутон</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="recentIncoming_empty">Вие нямате входящи повиквания.</string>
+    <string name="recentOutgoing_empty">Вие нямате изходящи повиквания.</string>
+    <string name="recentCalls_empty">Регистъра с повикванията е празен</string>
+    <string name="calllog_search_hint">Търсени в регистъра с повикванията</string>
+    <string name="no_call_log">Няма регистър с повиквания</string>
+    <string name="clear">Изчистване</string>
+    <string name="description_clear_search">Изчисти търсенето</string>
+    <string name="video_call_welcome_title"><b>Добре дошли в новото приложение за видео обаждане</b></string>
+    <string name="video_call_welcome_message">Ние всички обичаме да чуваме познат глас в другия край на линията, но да си говорим лице в лице е толкова по-добре! Ето какво трябва да знаете да е в реално време (или FaceTime?).Връзката ще трябва да бъде 4G LTE или Wi-Fi връзка. Устройство на, която се обаждате трябва да подържа видео обаждане. Видео разговорите използват бърза връзка за данни, също така да надстроите гласово повикване към видео повикване. За повече информация посетете <a>https://support.t-mobile.com/docs/DOC-23574</a>.</string>
+    <string name="video_call_welcome_message_repeat">Показвай това съобщение всеки път</string>
+    <string name="toast_change_video_call_failed">Не може да премине на видео повикване, неправилен числов формат</string>
+    <string name="toast_make_video_call_failed">Не може да се осъществи на видео повикване, неправилен числов формат</string>
+    <string name="overflowBothCallMenuItemText">Видео обаждане, покажи ме</string>
+    <string name="overflowRXCallMenuItemText">Видео обаждане, скрий ме</string>
+    <string name="overflowVOCallMenuItemText">Гласово повикване</string>
+    <string name="video_call">Видео повикване</string>
+    <string name="call_data_info_label">Повикване/таймери за използването на данни</string>
+    <string name="call_data_info_description">Време за ползване на гласови повиквания и данни</string>
+    <string name="alert_call_over_wifi">Разговорите ще бъдат осъщесвени през Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Няма налична клетъчна мрежа. Свържете се към налични Wi-Fi мрежа за да провеждате разговори.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Свързване към Wi-Fi мрежа за провеждате разговори.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Натиснете тук, за да видите наличните мрежи</string>
+    <string name="menu_add_to_4g_conference_call">Добави към 4G конферентен разговор</string>
+    <string name="menu_4g_conference_call">4G конферентен разговор</string>
+    <string name="type_incoming_volte">Входящо 4G гласово повикване</string>
+    <string name="type_incoming_video_lte">Входящо 4G видео повикване</string>
+    <string name="type_outgoing_volte">Изходящо 4G гласово повикване</string>
+    <string name="type_outgoing_video_lte">Изходящо 4G видео повикване</string>
+    <string name="type_missed_volte">Пропуснато 4G гласово повикване</string>
+    <string name="type_missed_video_lte">Пропуснато 4G видео повикване</string>
+    <string name="type_incoming_vowifi">Входящо Wi-Fi гласово повикване</string>
+    <string name="type_incoming_video_wifi">Входящо Wi-Fi видео повикване</string>
+    <string name="type_outgoing_vowifi">Изходящо Wi-Fi гласово повикване</string>
+    <string name="type_outgoing_video_wifi">Изходящо Wi-Fi видео повикване</string>
+    <string name="type_missed_vowifi">Пропуснато Wi-Fi гласово повикване</string>
+    <string name="type_missed_video_wifi">Пропуснато Wi-Fi видео повикване</string>
+    <string name="lookup_disclaimer">Търсенето може да изпраща заявки през защитен протокол (https) до отдалечени уеб сайтове, за да събира информация. Искането на другата страна може да включва телефонен номер или заявка за търсене</string>
 </resources>

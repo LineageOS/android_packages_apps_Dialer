@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Rung trong khi gọi</string>
-  <string name="incall_vibrate_outgoing_title">Rung khi trả lời</string>
-  <string name="incall_vibrate_call_waiting_title">Rung khi chờ cuộc gọi</string>
-  <string name="incall_vibrate_hangup_title">Rung khi gác máy</string>
-  <string name="incall_vibrate_45_title">Rung mỗi phút</string>
-  <string name="incall_vibrate_45_summary">Rung tại giây 45 mỗi phút trong khi gọi đi</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Địa điểm gần kề</string>
-  <string name="people">Mọi người</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Bàn phím tìm kiếm T9</string>
-  <string name="t9_search_input_locale">Ô tìm kiếm T9</string>
-  <string name="t9_search_input_locale_default">Mặc định</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Tra cứu số điện thoại</string>
-  <string name="enable_forward_lookup_title">Tra cứu xuôi</string>
-  <string name="enable_forward_lookup_summary">Hiển thị các địa điểm gần kề khi tìm kiếm trong trình quay số</string>
-  <string name="enable_people_lookup_title">Tra cứu mọi người</string>
-  <string name="enable_people_lookup_summary">Hiển thị kết quả trực tuyến về người khi tìm kiếm trong trình quay số</string>
-  <string name="enable_reverse_lookup_title">Tra cứu ngược</string>
-  <string name="enable_reverse_lookup_summary">Tra cứu thông tin về người hoặc vị trí cho những số gọi đến không biết</string>
-  <string name="forward_lookup_provider_title">Nhà cung cấp tra cứu xuôi</string>
-  <string name="people_lookup_provider_title">Nhà cung cấp tra cứu người</string>
-  <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
-  <string name="speed_dial_edit_title">Chỉnh sửa quay số nhanh <xliff:g id="index" example="2">%1$d </xliff:g></string>
-  <string name="speed_dial_input_hint">Vui lòng nhập một số</string>
-  <string name="call_log_show_all_slots">Tất cả các SIM</string>
-  <string name="call_log_all_calls_header">Tất cả các cuộc gọi</string>
-  <string name="call_log_blacklist_header">Chỉ các cuộc gọi bị chặn</string>
-  <string name="call_log_blocked_empty">Bạn có không có cuộc gọi bị chặn.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Thống kê</string>
-  <string name="callStatsDetailTitle">Chi tiết thống kê cuộc gọi</string>
-  <string name="call_stats_incoming">Cuộc gọi đến: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Cuộc gọi đi: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Cuộc gọi bị nhỡ: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Cuộc gọi bị chặn: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Tổng số: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Tổng số: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Ngày bắt đầu</string>
-  <string name="call_stats_filter_to">Ngày kết thúc</string>
-  <string name="call_stats_filter_picker_title">Phạm vi lọc</string>
-  <string name="date_quick_selection">Chọn nhanh</string>
-  <string name="date_qs_currentmonth">Tháng hiện tại</string>
-  <string name="date_qs_currentquarter">Quý hiện tại</string>
-  <string name="date_qs_currentyear">Năm hiện tại</string>
-  <string name="date_qs_lastweek">Tuần trước</string>
-  <string name="date_qs_lastmonth">Tháng trước</string>
-  <string name="date_qs_lastquarter">Quý trước</string>
-  <string name="date_qs_lastyear">Năm trước</string>
-  <string name="call_stats_date_filter">Điều chỉnh khoảng thời gian</string>
-  <string name="call_stats_reset_filter">Đặt lại khoảng thời gian</string>
-  <string name="call_stats_sort_by_duration">Sắp xếp theo thời lượng cuộc gọi</string>
-  <string name="call_stats_sort_by_count">Sắp xếp theo số lượng cuộc gọi</string>
-  <string name="call_stats_title_for_number">Số này</string>
-  <string name="call_stats_title_of_total">Trong tổng số</string>
-  <string name="call_stats_title_durations">Thời gian gọi</string>
-  <string name="call_stats_title_count">Số cuộc gọi</string>
-  <string name="call_stats_title_average_duration">Thời gian gọi trung bình</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Nhật ký cuộc gọi của bạn không chứa bất kỳ cuộc gọi nào trong khoảng thời gian đã chọn.</string>
-  <string name="call_recording_category_title">Ghi âm cuộc gọi</string>
-  <string name="call_recording_format">Định dạng âm thanh</string>
-  <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi âm đã chọn.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Thiết đặt quay số nhanh</string>
-  <string name="speed_dial_not_set">(không thiết lập)</string>
-  <string name="speed_dial_replace">Thay thế</string>
-  <string name="speed_dial_delete">Xóa</string>
-  <string name="speed_dial_unassigned_dialog_title">Phím chưa ấn định</string>
-  <string name="speed_dial_unassigned_dialog_message">Không có thao tác quay số nhanh nào được ấn định cho phím số \'<xliff:g id="number">%s</xliff:g>\'. Bạn có muốn ấn định một thao tác bây giờ không?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Để sử dụng quay số nhanh, trước tiên hãy tắt chế độ máy bay</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Quay số nhanh không thể thiết lập cho Khoá này</string>
-  <string name="yes">Có</string>
-  <string name="no">Không</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Bạn có không có cuộc gọi đến.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Bạn có không có cuộc gọi đi.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Không có cuộc gọi nào</string>
-  <string name="calllog_search_hint">Tìm kiếm nhật ký cuộc gọi</string>
-  <string name="no_call_log">Không có nhật ký cuộc gọi</string>
-  <string name="clear">Xóa</string>
-  <string name="description_clear_search">Xóa tìm kiếm</string>
-  <string name="video_call_welcome_title"><b>Chào mừng đến với Trình quay số Cuộc gọi Video</b></string>
-  <string name="video_call_welcome_message">Chúng ta đều thích nghe giọng nói quen thuộc ở cuối đường dây, nhưng nói chuyện mặt đối mặt là tốt hơn rất nhiều! Dưới đây là những gì bạn nên biết để có được thời gian thực của các kết nối đi (hoặc FaceTime?) các kết nối đến:\n Bạn sẽ cần phải sử dụng 4G LTE hoặc kết nối Wi-Fi\n Thiết bị mà bạn đang gọi điện thoại cũng phải tương thích với cuộc gọi video\n Các cuộc gọi video sử dụng dữ liệu tốc độ cao của bạn\n Bạn cũng có thể nâng cấp một cuộc gọi thoại thành một cuộc gọi video\n\n Kiểm tra tại <a> https://support.t-mobile.com/docs/DOC-23574 </a> để biết thêm thông tin.</string>
-  <string name="video_call_welcome_message_repeat">Hiển thị thông báo này mỗi lần</string>
-  <string name="toast_change_video_call_failed">Không thể thay đổi thành cuộc gọi video, không đúng định dạng số</string>
-  <string name="toast_make_video_call_failed">Không thể thực hiện cuộc gọi video, không đúng định dạng số</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Cuộc gọi video, hiển thị tôi</string>
-  <string name="overflowRXCallMenuItemText">Cuộc gọi video, ẩn tôi</string>
-  <string name="overflowVOCallMenuItemText">Cuộc gọi thoại</string>
-  <string name="video_call">Cuộc gọi video</string>
-  <string name="call_data_info_label">Bộ đếm sử dụng Cuộc gọi/dữ liệu</string>
-  <string name="call_data_info_description">Thời gian sử dụng cuộc gọi thoại và thời gian sử dụng dữ liệu</string>
-  <string name="alert_call_over_wifi">Cuộc gọi sẽ thực hiện qua Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Mạng di động không có sẵn. Kết nối tới Wi-Fi có sẵn để thực hiện cuộc gọi.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Kết nối tới Wi-Fi để thực hiện cuộc gọi.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Chạm vào đây để xem các mạng có sẵn</string>
-  <string name="menu_add_to_4g_conference_call">Thêm vào cuộc gọi hội nghị 4G</string>
-  <string name="menu_4g_conference_call">Cuộc gọi hội nghị 4G</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Cuộc gọi thoại 4G đến</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Cuộc gọi video 4G đến</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Cuộc gọi thoại 4G đi</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Cuộc gọi video 4G đi</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Cuộc gọi thoại 4G bị nhỡ</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Cuộc gọi video 4G bị nhỡ</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Cuộc gọi thoại WiFi đến</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Cuộc gọi video WiFi đến</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Cuộc gọi thoại WiFi đi</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Cuộc gọi video WiFi đi</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Cuộc gọi thoại WiFi bị nhỡ</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Cuộc gọi video WiFi bị nhỡ</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Tra cứu có thể gửi truy vấn qua giao thức an toàn (https) tới các trang web từ xa để thu thập thông tin. Truy vấn có thể bao gồm số điện thoại của bên kia hoặc truy vấn tìm kiếm</string>
+    <string name="incall_vibration_category_title">Rung trong khi gọi</string>
+    <string name="incall_vibrate_outgoing_title">Rung khi trả lời</string>
+    <string name="incall_vibrate_call_waiting_title">Rung khi chờ cuộc gọi</string>
+    <string name="incall_vibrate_hangup_title">Rung khi gác máy</string>
+    <string name="incall_vibrate_45_title">Rung mỗi phút</string>
+    <string name="incall_vibrate_45_summary">Rung tại giây 45 mỗi phút trong khi gọi đi</string>
+    <string name="nearby_places">Địa điểm gần kề</string>
+    <string name="people">Mọi người</string>
+    <string name="preference_category_t9_dialpad_search">Bàn phím tìm kiếm T9</string>
+    <string name="t9_search_input_locale">Ô tìm kiếm T9</string>
+    <string name="t9_search_input_locale_default">Mặc định</string>
+    <string name="lookup_settings_label">Tra cứu số điện thoại</string>
+    <string name="enable_forward_lookup_title">Tra cứu xuôi</string>
+    <string name="enable_forward_lookup_summary">Hiển thị các địa điểm gần kề khi tìm kiếm trong trình quay số</string>
+    <string name="enable_people_lookup_title">Tra cứu mọi người</string>
+    <string name="enable_people_lookup_summary">Hiển thị kết quả trực tuyến về người khi tìm kiếm trong trình quay số</string>
+    <string name="enable_reverse_lookup_title">Tra cứu ngược</string>
+    <string name="enable_reverse_lookup_summary">Tra cứu thông tin về người hoặc vị trí cho những số gọi đến không biết</string>
+    <string name="forward_lookup_provider_title">Nhà cung cấp tra cứu xuôi</string>
+    <string name="people_lookup_provider_title">Nhà cung cấp tra cứu người</string>
+    <string name="reverse_lookup_provider_title">Nhà cung cấp tra cứu ngược</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Trung Quốc (CN)</string>
+    <string name="speed_dial_edit_title">Chỉnh sửa quay số nhanh <xliff:g id="index" example="2">%1$d </xliff:g></string>
+    <string name="speed_dial_input_hint">Vui lòng nhập một số</string>
+    <string name="call_log_show_all_slots">Tất cả các SIM</string>
+    <string name="call_log_all_calls_header">Tất cả các cuộc gọi</string>
+    <string name="call_log_blacklist_header">Chỉ các cuộc gọi bị chặn</string>
+    <string name="call_log_blocked_empty">Bạn có không có cuộc gọi bị chặn.</string>
+    <string name="call_log_stats_title">Thống kê</string>
+    <string name="callStatsDetailTitle">Chi tiết thống kê cuộc gọi</string>
+    <string name="call_stats_incoming">Cuộc gọi đến: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Cuộc gọi đi: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Cuộc gọi bị nhỡ: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Cuộc gọi bị chặn: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Tổng số: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Tổng số: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ngày bắt đầu</string>
+    <string name="call_stats_filter_to">Ngày kết thúc</string>
+    <string name="call_stats_filter_picker_title">Phạm vi lọc</string>
+    <string name="date_quick_selection">Chọn nhanh</string>
+    <string name="date_qs_currentmonth">Tháng hiện tại</string>
+    <string name="date_qs_currentquarter">Quý hiện tại</string>
+    <string name="date_qs_currentyear">Năm hiện tại</string>
+    <string name="date_qs_lastweek">Tuần trước</string>
+    <string name="date_qs_lastmonth">Tháng trước</string>
+    <string name="date_qs_lastquarter">Quý trước</string>
+    <string name="date_qs_lastyear">Năm trước</string>
+    <string name="call_stats_date_filter">Điều chỉnh khoảng thời gian</string>
+    <string name="call_stats_reset_filter">Đặt lại khoảng thời gian</string>
+    <string name="call_stats_sort_by_duration">Sắp xếp theo thời lượng cuộc gọi</string>
+    <string name="call_stats_sort_by_count">Sắp xếp theo số lượng cuộc gọi</string>
+    <string name="call_stats_title_for_number">Số này</string>
+    <string name="call_stats_title_of_total">Trong tổng số</string>
+    <string name="call_stats_title_durations">Thời gian gọi</string>
+    <string name="call_stats_title_count">Số cuộc gọi</string>
+    <string name="call_stats_title_average_duration">Thời gian gọi trung bình</string>
+    <string name="recent_calls_no_items_in_range">Nhật ký cuộc gọi của bạn không chứa bất kỳ cuộc gọi nào trong khoảng thời gian đã chọn.</string>
+    <string name="call_recording_category_title">Ghi âm cuộc gọi</string>
+    <string name="call_recording_format">Định dạng âm thanh</string>
+    <string name="call_playback_no_app_found_toast">Không tìm thấy ứng dụng để phát lại bản ghi âm đã chọn.</string>
+    <string name="speed_dial_settings">Thiết đặt quay số nhanh</string>
+    <string name="speed_dial_not_set">(không thiết lập)</string>
+    <string name="speed_dial_replace">Thay thế</string>
+    <string name="speed_dial_delete">Xóa</string>
+    <string name="speed_dial_unassigned_dialog_title">Phím chưa ấn định</string>
+    <string name="speed_dial_unassigned_dialog_message">Không có thao tác quay số nhanh nào được ấn định cho phím số \'<xliff:g id="number">%s</xliff:g>\'. Bạn có muốn ấn định một thao tác bây giờ không?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Để sử dụng quay số nhanh, trước tiên hãy tắt chế độ máy bay</string>
+    <string name="speed_dial_can_not_be_set">Quay số nhanh không thể thiết lập cho Khoá này</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="recentIncoming_empty">Bạn có không có cuộc gọi đến.</string>
+    <string name="recentOutgoing_empty">Bạn có không có cuộc gọi đi.</string>
+    <string name="recentCalls_empty">Không có cuộc gọi nào</string>
+    <string name="calllog_search_hint">Tìm kiếm nhật ký cuộc gọi</string>
+    <string name="no_call_log">Không có nhật ký cuộc gọi</string>
+    <string name="clear">Xóa</string>
+    <string name="description_clear_search">Xóa tìm kiếm</string>
+    <string name="video_call_welcome_title"><b>Chào mừng đến với Trình quay số Cuộc gọi Video</b></string>
+    <string name="video_call_welcome_message">Chúng ta đều thích nghe giọng nói quen thuộc ở cuối đường dây, nhưng nói chuyện mặt đối mặt là tốt hơn rất nhiều! Dưới đây là những gì bạn nên biết để có được thời gian thực của các kết nối đi (hoặc FaceTime?) các kết nối đến:\n Bạn sẽ cần phải sử dụng 4G LTE hoặc kết nối Wi-Fi\n Thiết bị mà bạn đang gọi điện thoại cũng phải tương thích với cuộc gọi video\n Các cuộc gọi video sử dụng dữ liệu tốc độ cao của bạn\n Bạn cũng có thể nâng cấp một cuộc gọi thoại thành một cuộc gọi video\n\n Kiểm tra tại <a> https://support.t-mobile.com/docs/DOC-23574 </a> để biết thêm thông tin.</string>
+    <string name="video_call_welcome_message_repeat">Hiển thị thông báo này mỗi lần</string>
+    <string name="toast_change_video_call_failed">Không thể thay đổi thành cuộc gọi video, không đúng định dạng số</string>
+    <string name="toast_make_video_call_failed">Không thể thực hiện cuộc gọi video, không đúng định dạng số</string>
+    <string name="overflowBothCallMenuItemText">Cuộc gọi video, hiển thị tôi</string>
+    <string name="overflowRXCallMenuItemText">Cuộc gọi video, ẩn tôi</string>
+    <string name="overflowVOCallMenuItemText">Cuộc gọi thoại</string>
+    <string name="video_call">Cuộc gọi video</string>
+    <string name="call_data_info_label">Bộ đếm sử dụng Cuộc gọi/dữ liệu</string>
+    <string name="call_data_info_description">Thời gian sử dụng cuộc gọi thoại và thời gian sử dụng dữ liệu</string>
+    <string name="alert_call_over_wifi">Cuộc gọi sẽ thực hiện qua Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Mạng di động không có sẵn. Kết nối tới Wi-Fi có sẵn để thực hiện cuộc gọi.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Kết nối tới Wi-Fi để thực hiện cuộc gọi.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Chạm vào đây để xem các mạng có sẵn</string>
+    <string name="menu_add_to_4g_conference_call">Thêm vào cuộc gọi hội nghị 4G</string>
+    <string name="menu_4g_conference_call">Cuộc gọi hội nghị 4G</string>
+    <string name="type_incoming_volte">Cuộc gọi thoại 4G đến</string>
+    <string name="type_incoming_video_lte">Cuộc gọi video 4G đến</string>
+    <string name="type_outgoing_volte">Cuộc gọi thoại 4G đi</string>
+    <string name="type_outgoing_video_lte">Cuộc gọi video 4G đi</string>
+    <string name="type_missed_volte">Cuộc gọi thoại 4G bị nhỡ</string>
+    <string name="type_missed_video_lte">Cuộc gọi video 4G bị nhỡ</string>
+    <string name="type_incoming_vowifi">Cuộc gọi thoại WiFi đến</string>
+    <string name="type_incoming_video_wifi">Cuộc gọi video WiFi đến</string>
+    <string name="type_outgoing_vowifi">Cuộc gọi thoại WiFi đi</string>
+    <string name="type_outgoing_video_wifi">Cuộc gọi video WiFi đi</string>
+    <string name="type_missed_vowifi">Cuộc gọi thoại WiFi bị nhỡ</string>
+    <string name="type_missed_video_wifi">Cuộc gọi video WiFi bị nhỡ</string>
+    <string name="lookup_disclaimer">Tra cứu có thể gửi truy vấn qua giao thức an toàn (https) tới các trang web từ xa để thu thập thông tin. Truy vấn có thể bao gồm số điện thoại của bên kia hoặc truy vấn tìm kiếm</string>
 </resources>

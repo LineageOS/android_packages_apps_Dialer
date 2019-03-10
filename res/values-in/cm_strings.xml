@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Getaran dalam panggilan</string>
-  <string name="incall_vibrate_outgoing_title">Getar saat menjawab</string>
-  <string name="incall_vibrate_call_waiting_title">Getar pada panggilan tunggu</string>
-  <string name="incall_vibrate_hangup_title">Getar saat tutup telepon</string>
-  <string name="incall_vibrate_45_title">Getar setiap menit</string>
-  <string name="incall_vibrate_45_summary">Getar pada detik ke-45 menandai tiap menit selama panggilan keluar</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Tempat terdekat</string>
-  <string name="people">Orang</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Penelusuran dialpad T9</string>
-  <string name="t9_search_input_locale">Masukan penelusuran T9</string>
-  <string name="t9_search_input_locale_default">Standar</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Penelusuran nomor telepon</string>
-  <string name="enable_forward_lookup_title">Penelusuran kedepan</string>
-  <string name="enable_forward_lookup_summary">Tampilkan tempat terdekat ketika mencari di dialer</string>
-  <string name="enable_people_lookup_title">Penelusuran orang</string>
-  <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
-  <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
-  <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
-  <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
-  <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
-  <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Cina (CN)</string>
-  <string name="speed_dial_edit_title">Sunting panggilan cepat <xliff:g id="index" example="2">%1$d </xliff:g></string>
-  <string name="speed_dial_input_hint">Silahkan masukkan nomor</string>
-  <string name="call_log_show_all_slots">Semua SIM</string>
-  <string name="call_log_all_calls_header">Semua panggilan</string>
-  <string name="call_log_blacklist_header">Hanya panggilan yang diblok saja</string>
-  <string name="call_log_blocked_empty">Anda tidak memiliki panggilan terblokir.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistik</string>
-  <string name="callStatsDetailTitle">Detail statistik panggilan</string>
-  <string name="call_stats_incoming">Masuk: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Keluar: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Tdk terjawab: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Diblokir: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Tanggal mulai</string>
-  <string name="call_stats_filter_to">Tanggal berakhir</string>
-  <string name="call_stats_filter_picker_title">Jarak filter</string>
-  <string name="date_quick_selection">Pilihan cepat</string>
-  <string name="date_qs_currentmonth">Bulan ini</string>
-  <string name="date_qs_currentquarter">Triwulan ini</string>
-  <string name="date_qs_currentyear">Tahun ini</string>
-  <string name="date_qs_lastweek">Minggu lalu</string>
-  <string name="date_qs_lastmonth">Bulan lalu</string>
-  <string name="date_qs_lastquarter">Triwulan lalu</string>
-  <string name="date_qs_lastyear">Tahun lalu</string>
-  <string name="call_stats_date_filter">Sesuaikan rentang waktu</string>
-  <string name="call_stats_reset_filter">Atur kembali rentang waktu</string>
-  <string name="call_stats_sort_by_duration">Urutkan sesuai durasi panggilan</string>
-  <string name="call_stats_sort_by_count">Urutkan sesuai jumlah panggilan</string>
-  <string name="call_stats_title_for_number">Nomor ini</string>
-  <string name="call_stats_title_of_total">Dari total</string>
-  <string name="call_stats_title_durations">Durasi panggilan</string>
-  <string name="call_stats_title_count">Jumlah panggilan</string>
-  <string name="call_stats_title_average_duration">Rata-rata durasi panggilan</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Log panggilan Anda tidak terdapat penggilan dalam rentang waktu yang dipilih.</string>
-  <string name="call_recording_category_title">Rekaman panggilan</string>
-  <string name="call_recording_format">Format audio</string>
-  <string name="call_playback_no_app_found_toast">Tidak ada aplikasi ditemukan untuk memutar kembali rekaman yang terpilih.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
-  <string name="speed_dial_not_set">(tidak ditetapkan)</string>
-  <string name="speed_dial_replace">Ganti</string>
-  <string name="speed_dial_delete">Hapus</string>
-  <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
-  <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditetapkan untuk tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Untuk menggunakan panggilan cepat, matikan mode pesawat terlebih dahulu</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Panggilan cepat tidak dapat ditetapkan untuk kunci ini</string>
-  <string name="yes">Ya</string>
-  <string name="no">Tidak</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Tidak ada panggilan masuk.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Tidak ada panggilan keluar.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Log panggilan kosong</string>
-  <string name="calllog_search_hint">Cari log panggilan</string>
-  <string name="no_call_log">Tidak ada log panggilan</string>
-  <string name="clear">Bersihkan</string>
-  <string name="description_clear_search">Bersihkan pencarian</string>
-  <string name="video_call_welcome_title"><b>Selamat datang di Video Calling Dialer baru</b></string>
-  <string name="video_call_welcome_message">Kita semua senang mendengar suara akrab saat berbicara, tetapi berbicara sambil bertatap muka jauh lebih baik! Inilah yang harus Anda ketahui untuk mendapatkan waktu-nyata Anda (atau FaceTime?)\n Anda harus berada di 4G LTE atau koneksi Wi-Fi\n Perangkat yang Anda telepon juga harus kompatibel dengan panggilan video\n Panggilan video menggunakan data dengan kecepatan tinggi\n Anda juga dapat meningkatkan panggilan suara ke panggilan video\n\n Periksa <a>https://support.t-mobile.com/docs/DOC-23574</a> untuk informasi lebih lanjut.</string>
-  <string name="video_call_welcome_message_repeat">Selalu tampilkan pesan ini</string>
-  <string name="toast_change_video_call_failed">Tidak dapat beralih ke panggilan video, format nomor salah</string>
-  <string name="toast_make_video_call_failed">Tidak dapat melakukan panggilan video, format nomor salah</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Panggilan video, tampilkan saya</string>
-  <string name="overflowRXCallMenuItemText">Panggilan video, sembunyikan saya</string>
-  <string name="overflowVOCallMenuItemText">Panggilan suara</string>
-  <string name="video_call">Panggilan video</string>
-  <string name="call_data_info_label">Penghitung waktu panggilan/penggunaan data</string>
-  <string name="call_data_info_description">Waktu penggunaan panggilan suara dan waktu penggunaan data</string>
-  <string name="alert_call_over_wifi">Panggilan akan dilakukan melalui Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Jaringan seluler tidak tersedia. Sambungkan ke Wi-Fi yang tersedia untuk melakukan panggilan.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Sambungkan ke Wi-Fi untuk melakukan panggilan.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Ketuk di sini untuk melihat jaringan yang tersedia</string>
-  <string name="menu_add_to_4g_conference_call">Tambahkan ke panggilan konferensi 4G</string>
-  <string name="menu_4g_conference_call">Panggilan konferensi 4G</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Panggilan suara masuk 4G</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Panggilan video masuk 4G</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Panggilan suara keluar 4G</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Panggilan video keluar 4G</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Panggilan suara 4G tak terjawab</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Panggilan video 4G tak terjawab</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Panggilan suara masuk melalui Wi-Fi</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Panggilan video masuk melalui Wi-Fi</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Panggilan suara keluar melalui Wi-Fi</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Panggilan video keluar melalui Wi-Fi</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Panggilan suara Wi-Fi tak terjawab</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Panggilan video Wi-Fi tidak terjawab</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Pencarian dapat mengirimkan pertanyaan melalui protokol aman (https) ke remote website untuk mengumpulkan informasi. Kueri mungkin termasuk nomor telepon pihak lain atau kueri penelusuran</string>
+    <string name="incall_vibration_category_title">Getaran dalam panggilan</string>
+    <string name="incall_vibrate_outgoing_title">Getar saat menjawab</string>
+    <string name="incall_vibrate_call_waiting_title">Getar pada panggilan tunggu</string>
+    <string name="incall_vibrate_hangup_title">Getar saat tutup telepon</string>
+    <string name="incall_vibrate_45_title">Getar setiap menit</string>
+    <string name="incall_vibrate_45_summary">Getar pada detik ke-45 menandai tiap menit selama panggilan keluar</string>
+    <string name="nearby_places">Tempat terdekat</string>
+    <string name="people">Orang</string>
+    <string name="preference_category_t9_dialpad_search">Penelusuran dialpad T9</string>
+    <string name="t9_search_input_locale">Masukan penelusuran T9</string>
+    <string name="t9_search_input_locale_default">Standar</string>
+    <string name="lookup_settings_label">Penelusuran nomor telepon</string>
+    <string name="enable_forward_lookup_title">Penelusuran kedepan</string>
+    <string name="enable_forward_lookup_summary">Tampilkan tempat terdekat ketika mencari di dialer</string>
+    <string name="enable_people_lookup_title">Penelusuran orang</string>
+    <string name="enable_people_lookup_summary">Tampilkan hasil online untuk orang-orang saat melakukan penelusuran pada dialer</string>
+    <string name="enable_reverse_lookup_title">Penelusuran terbalik</string>
+    <string name="enable_reverse_lookup_summary">Mencari informasi tentang orang atau tempat untuk panggilan masuk dari nomor tak diketahui</string>
+    <string name="forward_lookup_provider_title">Penyedia penelusuran kedepan</string>
+    <string name="people_lookup_provider_title">Penyedia penelusuran orang</string>
+    <string name="reverse_lookup_provider_title">Penyedia penelusuran terbalik</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Cina (CN)</string>
+    <string name="speed_dial_edit_title">Sunting panggilan cepat <xliff:g id="index" example="2">%1$d </xliff:g></string>
+    <string name="speed_dial_input_hint">Silahkan masukkan nomor</string>
+    <string name="call_log_show_all_slots">Semua SIM</string>
+    <string name="call_log_all_calls_header">Semua panggilan</string>
+    <string name="call_log_blacklist_header">Hanya panggilan yang diblok saja</string>
+    <string name="call_log_blocked_empty">Anda tidak memiliki panggilan terblokir.</string>
+    <string name="call_log_stats_title">Statistik</string>
+    <string name="callStatsDetailTitle">Detail statistik panggilan</string>
+    <string name="call_stats_incoming">Masuk: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Keluar: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Tdk terjawab: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Diblokir: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Total: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Tanggal mulai</string>
+    <string name="call_stats_filter_to">Tanggal berakhir</string>
+    <string name="call_stats_filter_picker_title">Jarak filter</string>
+    <string name="date_quick_selection">Pilihan cepat</string>
+    <string name="date_qs_currentmonth">Bulan ini</string>
+    <string name="date_qs_currentquarter">Triwulan ini</string>
+    <string name="date_qs_currentyear">Tahun ini</string>
+    <string name="date_qs_lastweek">Minggu lalu</string>
+    <string name="date_qs_lastmonth">Bulan lalu</string>
+    <string name="date_qs_lastquarter">Triwulan lalu</string>
+    <string name="date_qs_lastyear">Tahun lalu</string>
+    <string name="call_stats_date_filter">Sesuaikan rentang waktu</string>
+    <string name="call_stats_reset_filter">Atur kembali rentang waktu</string>
+    <string name="call_stats_sort_by_duration">Urutkan sesuai durasi panggilan</string>
+    <string name="call_stats_sort_by_count">Urutkan sesuai jumlah panggilan</string>
+    <string name="call_stats_title_for_number">Nomor ini</string>
+    <string name="call_stats_title_of_total">Dari total</string>
+    <string name="call_stats_title_durations">Durasi panggilan</string>
+    <string name="call_stats_title_count">Jumlah panggilan</string>
+    <string name="call_stats_title_average_duration">Rata-rata durasi panggilan</string>
+    <string name="recent_calls_no_items_in_range">Log panggilan Anda tidak terdapat penggilan dalam rentang waktu yang dipilih.</string>
+    <string name="call_recording_category_title">Rekaman panggilan</string>
+    <string name="call_recording_format">Format audio</string>
+    <string name="call_playback_no_app_found_toast">Tidak ada aplikasi ditemukan untuk memutar kembali rekaman yang terpilih.</string>
+    <string name="speed_dial_settings">Pengaturan panggilan cepat</string>
+    <string name="speed_dial_not_set">(tidak ditetapkan)</string>
+    <string name="speed_dial_replace">Ganti</string>
+    <string name="speed_dial_delete">Hapus</string>
+    <string name="speed_dial_unassigned_dialog_title">Tombol belum ditetapkan</string>
+    <string name="speed_dial_unassigned_dialog_message">Tidak ada tindakan panggilan cepat ditetapkan untuk tombol angka \'<xliff:g id="number">%s</xliff:g>\'. Apakah Anda ingin menentukan sebuah tindakan sekarang?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Untuk menggunakan panggilan cepat, matikan mode pesawat terlebih dahulu</string>
+    <string name="speed_dial_can_not_be_set">Panggilan cepat tidak dapat ditetapkan untuk kunci ini</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="recentIncoming_empty">Tidak ada panggilan masuk.</string>
+    <string name="recentOutgoing_empty">Tidak ada panggilan keluar.</string>
+    <string name="recentCalls_empty">Log panggilan kosong</string>
+    <string name="calllog_search_hint">Cari log panggilan</string>
+    <string name="no_call_log">Tidak ada log panggilan</string>
+    <string name="clear">Bersihkan</string>
+    <string name="description_clear_search">Bersihkan pencarian</string>
+    <string name="video_call_welcome_title"><b>Selamat datang di Video Calling Dialer baru</b></string>
+    <string name="video_call_welcome_message">Kita semua senang mendengar suara akrab saat berbicara, tetapi berbicara sambil bertatap muka jauh lebih baik! Inilah yang harus Anda ketahui untuk mendapatkan waktu-nyata Anda (atau FaceTime?)\n Anda harus berada di 4G LTE atau koneksi Wi-Fi\n Perangkat yang Anda telepon juga harus kompatibel dengan panggilan video\n Panggilan video menggunakan data dengan kecepatan tinggi\n Anda juga dapat meningkatkan panggilan suara ke panggilan video\n\n Periksa <a>https://support.t-mobile.com/docs/DOC-23574</a> untuk informasi lebih lanjut.</string>
+    <string name="video_call_welcome_message_repeat">Selalu tampilkan pesan ini</string>
+    <string name="toast_change_video_call_failed">Tidak dapat beralih ke panggilan video, format nomor salah</string>
+    <string name="toast_make_video_call_failed">Tidak dapat melakukan panggilan video, format nomor salah</string>
+    <string name="overflowBothCallMenuItemText">Panggilan video, tampilkan saya</string>
+    <string name="overflowRXCallMenuItemText">Panggilan video, sembunyikan saya</string>
+    <string name="overflowVOCallMenuItemText">Panggilan suara</string>
+    <string name="video_call">Panggilan video</string>
+    <string name="call_data_info_label">Penghitung waktu panggilan/penggunaan data</string>
+    <string name="call_data_info_description">Waktu penggunaan panggilan suara dan waktu penggunaan data</string>
+    <string name="alert_call_over_wifi">Panggilan akan dilakukan melalui Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Jaringan seluler tidak tersedia. Sambungkan ke Wi-Fi yang tersedia untuk melakukan panggilan.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Sambungkan ke Wi-Fi untuk melakukan panggilan.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Ketuk di sini untuk melihat jaringan yang tersedia</string>
+    <string name="menu_add_to_4g_conference_call">Tambahkan ke panggilan konferensi 4G</string>
+    <string name="menu_4g_conference_call">Panggilan konferensi 4G</string>
+    <string name="type_incoming_volte">Panggilan suara masuk 4G</string>
+    <string name="type_incoming_video_lte">Panggilan video masuk 4G</string>
+    <string name="type_outgoing_volte">Panggilan suara keluar 4G</string>
+    <string name="type_outgoing_video_lte">Panggilan video keluar 4G</string>
+    <string name="type_missed_volte">Panggilan suara 4G tak terjawab</string>
+    <string name="type_missed_video_lte">Panggilan video 4G tak terjawab</string>
+    <string name="type_incoming_vowifi">Panggilan suara masuk melalui Wi-Fi</string>
+    <string name="type_incoming_video_wifi">Panggilan video masuk melalui Wi-Fi</string>
+    <string name="type_outgoing_vowifi">Panggilan suara keluar melalui Wi-Fi</string>
+    <string name="type_outgoing_video_wifi">Panggilan video keluar melalui Wi-Fi</string>
+    <string name="type_missed_vowifi">Panggilan suara Wi-Fi tak terjawab</string>
+    <string name="type_missed_video_wifi">Panggilan video Wi-Fi tidak terjawab</string>
+    <string name="lookup_disclaimer">Pencarian dapat mengirimkan pertanyaan melalui protokol aman (https) ke remote website untuk mengumpulkan informasi. Kueri mungkin termasuk nomor telepon pihak lain atau kueri penelusuran</string>
 </resources>

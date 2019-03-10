@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">通话中震动</string>
-  <string name="incall_vibrate_outgoing_title">对方接听时震动</string>
-  <string name="incall_vibrate_call_waiting_title">呼叫等待时振动</string>
-  <string name="incall_vibrate_hangup_title">通话结束时震动</string>
-  <string name="incall_vibrate_45_title">每分钟震动</string>
-  <string name="incall_vibrate_45_summary">呼出通话达到每分钟的 45 秒时震动</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">附近地点</string>
-  <string name="people">人</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">拨号盘 T9 搜索</string>
-  <string name="t9_search_input_locale">T9 搜索输入</string>
-  <string name="t9_search_input_locale_default">默认</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">号码查询</string>
-  <string name="enable_forward_lookup_title">正向查询</string>
-  <string name="enable_forward_lookup_summary">在拨号器搜索时显示附近地点</string>
-  <string name="enable_people_lookup_title">人名查询</string>
-  <string name="enable_people_lookup_summary">在拨号器中搜索时显示在线人名搜索结果</string>
-  <string name="enable_reverse_lookup_title">反向查询</string>
-  <string name="enable_reverse_lookup_summary">为未知来电号码查询人名或地点信息</string>
-  <string name="forward_lookup_provider_title">正向查询提供商</string>
-  <string name="people_lookup_provider_title">人名查询提供商</string>
-  <string name="reverse_lookup_provider_title">反向查询提供商</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn 中文 (CN)</string>
-  <string name="speed_dial_edit_title">编辑快速拨号 <xliff:g id="index" example="2">%1$d</xliff:g></string>
-  <string name="speed_dial_input_hint">请输入一个号码</string>
-  <string name="call_log_show_all_slots">所有 SIM 卡</string>
-  <string name="call_log_all_calls_header">所有呼叫</string>
-  <string name="call_log_blacklist_header">仅屏蔽呼叫</string>
-  <string name="call_log_blocked_empty">您没有屏蔽来电。</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">统计</string>
-  <string name="callStatsDetailTitle">通话统计详情</string>
-  <string name="call_stats_incoming">来电：<xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">呼出：<xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">未接：<xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">屏蔽：<xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">总计：<xliff:g id="call_count">%s</xliff:g>，<xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">总计：<xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">开始日期</string>
-  <string name="call_stats_filter_to">结束日期</string>
-  <string name="call_stats_filter_picker_title">过滤范围</string>
-  <string name="date_quick_selection">快速选择</string>
-  <string name="date_qs_currentmonth">本月</string>
-  <string name="date_qs_currentquarter">本季度</string>
-  <string name="date_qs_currentyear">今年</string>
-  <string name="date_qs_lastweek">上周</string>
-  <string name="date_qs_lastmonth">上个月</string>
-  <string name="date_qs_lastquarter">上个季度</string>
-  <string name="date_qs_lastyear">去年</string>
-  <string name="call_stats_date_filter">调整时间范围</string>
-  <string name="call_stats_reset_filter">重置时间范围</string>
-  <string name="call_stats_sort_by_duration">以通话时间排序</string>
-  <string name="call_stats_sort_by_count">以通话次数排序</string>
-  <string name="call_stats_title_for_number">此号码</string>
-  <string name="call_stats_title_of_total">总计</string>
-  <string name="call_stats_title_durations">通话时长</string>
-  <string name="call_stats_title_count">通话次数</string>
-  <string name="call_stats_title_average_duration">平均通话时长</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">您所选择的时间范围内不包含任何通话记录。</string>
-  <string name="call_recording_category_title">通话录音</string>
-  <string name="call_recording_format">音频格式</string>
-  <string name="call_playback_no_app_found_toast">没有找到可以回放所选录音的应用。</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">快速拨号设置</string>
-  <string name="speed_dial_not_set">（未设置）</string>
-  <string name="speed_dial_replace">替换</string>
-  <string name="speed_dial_delete">删除</string>
-  <string name="speed_dial_unassigned_dialog_title">按键未分配</string>
-  <string name="speed_dial_unassigned_dialog_message">快速拨号按键“<xliff:g id="number">%s</xliff:g>”尚未被使用。您是否要为它指定一个动作？</string>
-  <string name="dialog_speed_dial_airplane_mode_message">若要使用快速拨号，请先关闭飞行模式</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">快速拨号不能设置为此按键</string>
-  <string name="yes">是</string>
-  <string name="no">否</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">没有来电。</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">您尚无呼出。</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">无通话记录</string>
-  <string name="calllog_search_hint">搜索通话记录</string>
-  <string name="no_call_log">无通话记录</string>
-  <string name="clear">清除</string>
-  <string name="description_clear_search">清除搜索</string>
-  <string name="video_call_welcome_title"><b>欢迎使用新的视频通话拨号器</b></string>
-  <string name="video_call_welcome_message">我们都喜欢听到电话那头那熟悉的声音，但是“面对面”交谈岂不更好？在您进行实时（或者 FaceTime？）通话前，您应该了解：\n您的设备需要连接到 4G LTE 或 Wi-Fi 网络\n被您呼叫的设备也要支持视频通话功能\n视频通话使用您的高速数据连接\n您可以将一通语音通话升级为视频通话。\n\n更多信息请查阅 <a>https://support.t-mobile.com/docs/DOC-23574</a>。</string>
-  <string name="video_call_welcome_message_repeat">每次都显示此消息</string>
-  <string name="toast_change_video_call_failed">无法切换到视频通话，号码格式不正确</string>
-  <string name="toast_make_video_call_failed">无法进行视频通话，号码格式不正确</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">视频通话，显示自己</string>
-  <string name="overflowRXCallMenuItemText">视频通话，隐藏自己</string>
-  <string name="overflowVOCallMenuItemText">语音通话</string>
-  <string name="video_call">视频通话</string>
-  <string name="call_data_info_label">电话/数据使用计时器</string>
-  <string name="call_data_info_description">语音呼叫使用时间和数据使用时间</string>
-  <string name="alert_call_over_wifi">将通过 Wi-Fi 进行呼叫</string>
-  <string name="alert_call_no_cellular_coverage">没有可用的蜂窝网络。连接到可用的无线网络以拨打电话。</string>
-  <string name="alert_user_connect_to_wifi_for_call">连接到 Wi-Fi 网络以进行通话。</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">点按这里查看可用的网络</string>
-  <string name="menu_add_to_4g_conference_call">添加到 4G 电话会议</string>
-  <string name="menu_4g_conference_call">4G 电话会议</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">4G 语音来电</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">4G 视频来电</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">4G 语音呼叫</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">4G 视频呼叫</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">未接 4G 语音来电</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">未接 4G 视频来电</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">WiFi 语音来电</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">WiFi 视频来电</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">WiFi 语音呼叫</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">WiFi 视频呼叫</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">未接 WiFi 语音来电</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">未接 WiFi 视频来电</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">查询将会发送基于安全协议（https）的请求到远程网站以获取信息。此查询可能会包含第三方的电话号码或搜索查询。</string>
+    <string name="incall_vibration_category_title">通话中震动</string>
+    <string name="incall_vibrate_outgoing_title">对方接听时震动</string>
+    <string name="incall_vibrate_call_waiting_title">呼叫等待时振动</string>
+    <string name="incall_vibrate_hangup_title">通话结束时震动</string>
+    <string name="incall_vibrate_45_title">每分钟震动</string>
+    <string name="incall_vibrate_45_summary">呼出通话达到每分钟的 45 秒时震动</string>
+    <string name="nearby_places">附近地点</string>
+    <string name="people">人</string>
+    <string name="preference_category_t9_dialpad_search">拨号盘 T9 搜索</string>
+    <string name="t9_search_input_locale">T9 搜索输入</string>
+    <string name="t9_search_input_locale_default">默认</string>
+    <string name="lookup_settings_label">号码查询</string>
+    <string name="enable_forward_lookup_title">正向查询</string>
+    <string name="enable_forward_lookup_summary">在拨号器搜索时显示附近地点</string>
+    <string name="enable_people_lookup_title">人名查询</string>
+    <string name="enable_people_lookup_summary">在拨号器中搜索时显示在线人名搜索结果</string>
+    <string name="enable_reverse_lookup_title">反向查询</string>
+    <string name="enable_reverse_lookup_summary">为未知来电号码查询人名或地点信息</string>
+    <string name="forward_lookup_provider_title">正向查询提供商</string>
+    <string name="people_lookup_provider_title">人名查询提供商</string>
+    <string name="reverse_lookup_provider_title">反向查询提供商</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn 中文 (CN)</string>
+    <string name="speed_dial_edit_title">编辑快速拨号 <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">请输入一个号码</string>
+    <string name="call_log_show_all_slots">所有 SIM 卡</string>
+    <string name="call_log_all_calls_header">所有呼叫</string>
+    <string name="call_log_blacklist_header">仅屏蔽呼叫</string>
+    <string name="call_log_blocked_empty">您没有屏蔽来电。</string>
+    <string name="call_log_stats_title">统计</string>
+    <string name="callStatsDetailTitle">通话统计详情</string>
+    <string name="call_stats_incoming">来电：<xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">呼出：<xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">未接：<xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">屏蔽：<xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">总计：<xliff:g id="call_count">%s</xliff:g>，<xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">总计：<xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">开始日期</string>
+    <string name="call_stats_filter_to">结束日期</string>
+    <string name="call_stats_filter_picker_title">过滤范围</string>
+    <string name="date_quick_selection">快速选择</string>
+    <string name="date_qs_currentmonth">本月</string>
+    <string name="date_qs_currentquarter">本季度</string>
+    <string name="date_qs_currentyear">今年</string>
+    <string name="date_qs_lastweek">上周</string>
+    <string name="date_qs_lastmonth">上个月</string>
+    <string name="date_qs_lastquarter">上个季度</string>
+    <string name="date_qs_lastyear">去年</string>
+    <string name="call_stats_date_filter">调整时间范围</string>
+    <string name="call_stats_reset_filter">重置时间范围</string>
+    <string name="call_stats_sort_by_duration">以通话时间排序</string>
+    <string name="call_stats_sort_by_count">以通话次数排序</string>
+    <string name="call_stats_title_for_number">此号码</string>
+    <string name="call_stats_title_of_total">总计</string>
+    <string name="call_stats_title_durations">通话时长</string>
+    <string name="call_stats_title_count">通话次数</string>
+    <string name="call_stats_title_average_duration">平均通话时长</string>
+    <string name="recent_calls_no_items_in_range">您所选择的时间范围内不包含任何通话记录。</string>
+    <string name="call_recording_category_title">通话录音</string>
+    <string name="call_recording_format">音频格式</string>
+    <string name="call_playback_no_app_found_toast">没有找到可以回放所选录音的应用。</string>
+    <string name="speed_dial_settings">快速拨号设置</string>
+    <string name="speed_dial_not_set">（未设置）</string>
+    <string name="speed_dial_replace">替换</string>
+    <string name="speed_dial_delete">删除</string>
+    <string name="speed_dial_unassigned_dialog_title">按键未分配</string>
+    <string name="speed_dial_unassigned_dialog_message">快速拨号按键“<xliff:g id="number">%s</xliff:g>”尚未被使用。您是否要为它指定一个动作？</string>
+    <string name="dialog_speed_dial_airplane_mode_message">若要使用快速拨号，请先关闭飞行模式</string>
+    <string name="speed_dial_can_not_be_set">快速拨号不能设置为此按键</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="recentIncoming_empty">没有来电。</string>
+    <string name="recentOutgoing_empty">您尚无呼出。</string>
+    <string name="recentCalls_empty">无通话记录</string>
+    <string name="calllog_search_hint">搜索通话记录</string>
+    <string name="no_call_log">无通话记录</string>
+    <string name="clear">清除</string>
+    <string name="description_clear_search">清除搜索</string>
+    <string name="video_call_welcome_title"><b>欢迎使用新的视频通话拨号器</b></string>
+    <string name="video_call_welcome_message">我们都喜欢听到电话那头那熟悉的声音，但是“面对面”交谈岂不更好？在您进行实时（或者 FaceTime？）通话前，您应该了解：\n您的设备需要连接到 4G LTE 或 Wi-Fi 网络\n被您呼叫的设备也要支持视频通话功能\n视频通话使用您的高速数据连接\n您可以将一通语音通话升级为视频通话。\n\n更多信息请查阅 <a>https://support.t-mobile.com/docs/DOC-23574</a>。</string>
+    <string name="video_call_welcome_message_repeat">每次都显示此消息</string>
+    <string name="toast_change_video_call_failed">无法切换到视频通话，号码格式不正确</string>
+    <string name="toast_make_video_call_failed">无法进行视频通话，号码格式不正确</string>
+    <string name="overflowBothCallMenuItemText">视频通话，显示自己</string>
+    <string name="overflowRXCallMenuItemText">视频通话，隐藏自己</string>
+    <string name="overflowVOCallMenuItemText">语音通话</string>
+    <string name="video_call">视频通话</string>
+    <string name="call_data_info_label">电话/数据使用计时器</string>
+    <string name="call_data_info_description">语音呼叫使用时间和数据使用时间</string>
+    <string name="alert_call_over_wifi">将通过 Wi-Fi 进行呼叫</string>
+    <string name="alert_call_no_cellular_coverage">没有可用的蜂窝网络。连接到可用的无线网络以拨打电话。</string>
+    <string name="alert_user_connect_to_wifi_for_call">连接到 Wi-Fi 网络以进行通话。</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">点按这里查看可用的网络</string>
+    <string name="menu_add_to_4g_conference_call">添加到 4G 电话会议</string>
+    <string name="menu_4g_conference_call">4G 电话会议</string>
+    <string name="type_incoming_volte">4G 语音来电</string>
+    <string name="type_incoming_video_lte">4G 视频来电</string>
+    <string name="type_outgoing_volte">4G 语音呼叫</string>
+    <string name="type_outgoing_video_lte">4G 视频呼叫</string>
+    <string name="type_missed_volte">未接 4G 语音来电</string>
+    <string name="type_missed_video_lte">未接 4G 视频来电</string>
+    <string name="type_incoming_vowifi">WiFi 语音来电</string>
+    <string name="type_incoming_video_wifi">WiFi 视频来电</string>
+    <string name="type_outgoing_vowifi">WiFi 语音呼叫</string>
+    <string name="type_outgoing_video_wifi">WiFi 视频呼叫</string>
+    <string name="type_missed_vowifi">未接 WiFi 语音来电</string>
+    <string name="type_missed_video_wifi">未接 WiFi 视频来电</string>
+    <string name="lookup_disclaimer">查询将会发送基于安全协议（https）的请求到远程网站以获取信息。此查询可能会包含第三方的电话号码或搜索查询。</string>
 </resources>

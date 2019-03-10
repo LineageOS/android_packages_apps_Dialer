@@ -31,59 +31,71 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Call substate label -->
-  <!-- Call substate label for call resumed -->
-  <!-- Call substate label for call connected suspended (audio) -->
-  <!-- Call substate label for call connected suspended (video) -->
-  <!-- Call substate label for avp retry -->
-  <!-- Video quality changed message -->
-  <!-- Video quality High -->
-  <!-- Video quality Medium -->
-  <!-- Video quality Low -->
-  <!-- Video quality Unknown -->
-  <!-- Message indicating that Video Started flowing for IMS-VT calls -->
-  <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <!-- Message indicating that camera failure has occurred for the selected camera and
-         as result camera is not ready -->
-  <!-- Message indicating that camera is ready/available -->
-  <!-- Message indicating unknown call session event -->
-  <!-- Message indicating data usage -->
-  <!-- In-call screen: Modify Call Options for IMS call -->
-  <!-- Modify call error cause -->
-  <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
-  <!-- Text for the onscreen "blind transfer" button -->
-  <!-- Text for the onscreen "assured transfer" button -->
-  <!-- Text for the onscreen "consultative transfer" button -->
-  <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
-  <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
-  <!-- Message indicating call failed due to handover not feasible -->
-  <!-- Text for the onscreen "Add Participant" button -->
-  <!-- Title of the IMS to CS redial dialog -->
-  <!-- Message text of the IMS to CS redial dialog -->
-  <!-- Session modify cause unspecified -->
-  <!-- Session modify cause code upgrade local request -->
-  <!-- Session modify cause code upgrade remote request -->
-  <!-- Session modify cause code downgrade local request -->
-  <!-- Session modify cause code downgrade remote request -->
-  <!-- Session modify cause code downgrade rtp timeout -->
-  <!-- Session modify cause code downgrade qos -->
-  <!-- Session modify cause code downgrade packet loss -->
-  <!-- Session modify cause code downgrade low thrput -->
-  <!-- Session modify cause code downgrade thermal mitigation -->
-  <!-- Session modify cause code downgrade lipsync -->
-  <!-- Session modify cause code downgrade generic error -->
-  <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
-  <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
-  <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
-  <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
-         [CHAR LIMIT=40] -->
-  <!-- Message indicating call failed due to low battery -->
-  <!-- VoWifi call quality indicators -->
-  <!-- Title for low battery alert dialogue -->
-  <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
-  <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-  <!-- No option of the low battery alert dialog for MO/MT Video calls -->
-  <!-- International prefix source-->
-  <!-- International prefix converted value-->
-  <!-- Pop up menu options for picture mode -->
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Soestáu de llamada:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">Reanudada</string>
+    <string name="call_substate_connected_suspended_audio">La llamada ta coneutada, pero\'l soníu ta suspendíu</string>
+    <string name="call_substate_connected_suspended_video">La llamada ta coneutada, pero\'l videu ta suspendíu</string>
+    <string name="call_substate_avp_retry">Deteutando calidá del videu\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Camudóse la calidá del videu a <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">alta</string>
+    <string name="video_quality_medium">media</string>
+    <string name="video_quality_low">baxa</string>
+    <string name="video_quality_unknown">desconocida</string>
+    <string name="player_started">Reproductor aniciáu</string>
+    <string name="player_stopped">Reproductor paráu</string>
+    <string name="camera_not_ready">La cámara nun ta preparada</string>
+    <string name="camera_ready">La cámara ta preparada</string>
+    <string name="unknown_call_session_event">Eventu de sesión de llamada desconocíu</string>
+    <string name="wlan_data_usage_label">Usu de datos: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">Usu de datos: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">Escueyi triba de llamada</string>
+    <string name="modify_call_option_vt">Videollamada bidireicional</string>
+    <string name="modify_call_option_vt_tx">Tresmisión de videu</string>
+    <string name="modify_call_option_vt_rx">Receición de videu</string>
+    <string name="modify_call_option_voice">Namái voz</string>
+    <string name="modify_call_failed_due_to_low_battery">Fallu al modificar la llamada pola mor de la batería baxa.</string>
+    <string name="qti_ims_transfer_num_error">Nun s\'afitó\'l númberu. Apurri\'l númberu pelos axustes d\'IMS y reténtalo.</string>
+    <string name="qti_ims_transfer_request_error">La solicitú de tresferencia de llamada falló.</string>
+    <string name="qti_ims_transfer_request_success">La solicitú de tresferencia de llamada fecha.</string>
+    <string name="qti_ims_onscreenBlindTransfer">Tresferencia ciega</string>
+    <string name="qti_ims_onscreenAssuredTransfer">Tresferencia garantizada</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">Tresferencia consultiva</string>
+    <string name="video_call_not_allowed_if_tty_enabled">Deshabilita\'l mou TTY pa permitir videollamaes.</string>
+    <string name="qti_description_target_deflect">Esviar</string>
+    <string name="qti_description_deflect_error">Nun s\'afitó\'l númberu. Apurri\'l númberu pelos axustes d\'IMS y reténtalo.</string>
+    <string name="qti_description_deflect_service_error">El serviciu d\'esvíu de llamaes nun ta sofitáu.</string>
+    <string name="call_failed_ho_not_feasible">Finó la llamada darréu que\'l cambéu de LTE a 3G/2G nun foi factible.</string>
+    <string name="onscreenAddParticipant">Amestar participante</string>
+    <string name="cs_redial_option">Opción de rellamada</string>
+    <string name="cs_redial_msg">Nun pue facese una llamada de videu IMS, ¿remarcar como una llamada de voz non IMS?</string>
+    <string name="session_modify_cause_upgrade_local_request">Llamada anovada a pidimientu d\'usuariu</string>
+    <string name="session_modify_cause_upgrade_remote_request">Llamada anovada a pidimientu de l\'usuariu remotu</string>
+    <string name="session_modify_cause_downgrade_local_request">Llamada degradada a pidimientu de l\'usuariu</string>
+    <string name="session_modify_cause_downgrade_remote_request">Llamada degradada a pidimientu de l\'usuariu remotu</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">Llamada degradada debío al tiempu d\'espera de RTP</string>
+    <string name="session_modify_cause_downgrade_qos">Llamada degradada pola mor de la calidá del serviciu</string>
+    <string name="session_modify_cause_downgrade_packet_loss">Llamada degradada pola mor de la perda de paquetes</string>
+    <string name="session_modify_cause_downgrade_low_thrput">Llamada degradada pola mor del baxu rindimientu</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">Llamada degradada pola mor del amenorgamientu térmicu</string>
+    <string name="session_modify_cause_downgrade_lipsync">Llamada degradada pola mor del lipsync</string>
+    <string name="session_modify_cause_downgrade_generic_error">Llamada degradada pola mor d\'un fallu xenéricu</string>
+    <string name="card_title_incoming_conf_call">Llamada de conferencia entrante</string>
+    <string name="card_title_incoming_video_conf_call">Videoconferencia entrante</string>
+    <string name="notification_incoming_conf_call">Llamada de conferencia entrante</string>
+    <string name="incoming_conf_via_template">Llamada al traviés de <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">Falló la llamada pola mor de batería baxa</string>
+    <string name="vowifi_call_quality_good">Calidá de voz bono</string>
+    <string name="vowifi_call_quality_fair">Calidá de voz medio</string>
+    <string name="vowifi_call_quality_poor">Calidá de voz malo</string>
+    <string name="low_battery">Avisu de batería baxa</string>
+    <string name="low_battery_hangup_msg">¿Quies colgar la llamada?</string>
+    <string name="low_battery_msg">El nivel de la batería ta per debaxo del 15%. ¿Quies siguir cola videollamada o convertila en llamada de voz?</string>
+    <string name="low_battery_convert">Convertir</string>
+    <string name="video_call">Videollamada</string>
+    <string name="video_call_cannot_upgrade">Nun se pueden aceptar videollamaes nesti momentu</string>
+    <string name="video_call_picture_mode_menu_title">Esbillar el mou d\'imaxe</string>
+    <string name="video_call_picture_mode_preview_video">Vista previa de la cámara</string>
+    <string name="video_call_picture_mode_incoming_video">Videollamada entrante</string>
+    <string name="video_call_picture_mode_cancel_option">Encaboxar</string>
+    <string name="video_call_picture_mode_save_option">Guardar</string>
 </resources>

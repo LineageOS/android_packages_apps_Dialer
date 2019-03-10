@@ -16,138 +16,113 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
-  <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
-  <string name="incall_vibrate_call_waiting_title">Δόνηση στην αναμονή</string>
-  <string name="incall_vibrate_hangup_title">Δόνηση στο κλείσιμο</string>
-  <string name="incall_vibrate_45_title">Δόνηση κάθε 1 λεπτό</string>
-  <string name="incall_vibrate_45_summary">Δόνηση στο 45ο δευτερόλεπτο κάθε λεπτού κατά τη διάρκεια εξερχόμενων κλήσεων</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Κοντινές τοποθεσίες</string>
-  <string name="people">Άτομα</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
-  <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
-  <string name="t9_search_input_locale_default">Προεπιλογή</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
-  <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
-  <string name="enable_forward_lookup_summary">Εμφάνιση κοντινών τοποθεσιών κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
-  <string name="enable_people_lookup_title">Αναζήτηση ατόμων</string>
-  <string name="enable_people_lookup_summary">Εμφάνιση online αποτελεσμάτων για τα άτομα κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
-  <string name="enable_reverse_lookup_title">Αντίστροφη αναζήτηση</string>
-  <string name="enable_reverse_lookup_summary">Αναζήτηση πληροφοριών σχετικά με το άτομο ή την τοποθεσία για άγνωστους αριθμούς στις εισερχόμενες κλήσεις</string>
-  <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
-  <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
-  <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
-  <string name="speed_dial_edit_title">Επεξεργασία ταχείας κλήσης <xliff:g id="index" example="2">%1$d</xliff:g></string>
-  <string name="speed_dial_input_hint">Παρακαλώ εισάγετε έναν αριθμό</string>
-  <string name="call_log_show_all_slots">Όλες οι SIM</string>
-  <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
-  <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
-  <string name="call_log_blocked_empty">Δεν υπάρχουν μπλοκαρισμένες κλήσεις.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Στατιστικά</string>
-  <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
-  <string name="call_stats_incoming">Εισερχόμενες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Αναπάντητες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Αποκλεισμένες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
-  <string name="call_stats_filter_to">Ημερομηνία λήξης</string>
-  <string name="call_stats_filter_picker_title">Εύρος φίλτρου</string>
-  <string name="date_quick_selection">Γρήγορη επιλογή</string>
-  <string name="date_qs_currentmonth">Τρέχων μήνας</string>
-  <string name="date_qs_currentquarter">Τρέχον τρίμηνο</string>
-  <string name="date_qs_currentyear">Τρέχων χρόνος</string>
-  <string name="date_qs_lastweek">Προηγούμενη εβδομάδα</string>
-  <string name="date_qs_lastmonth">Προηγούμενος μήνας</string>
-  <string name="date_qs_lastquarter">Προηγούμενο τρίμηνο</string>
-  <string name="date_qs_lastyear">Προηγούμενος χρόνος</string>
-  <string name="call_stats_date_filter">Ρύθμιση χρονικού εύρους</string>
-  <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
-  <string name="call_stats_sort_by_duration">Ταξινόμηση ανά διάρκεια κλήσεων</string>
-  <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
-  <string name="call_stats_title_for_number">Αυτός ο αριθμός</string>
-  <string name="call_stats_title_of_total">Από το σύνολο</string>
-  <string name="call_stats_title_durations">Διάρκεια κλήσεων</string>
-  <string name="call_stats_title_count">Αριθμός κλήσεων</string>
-  <string name="call_stats_title_average_duration">Μέση διάρκεια κλήσεων</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Το αρχείο καταγραφής κλήσεων δεν περιέχει καμία κλήση στο επιλεγμένο χρονικό εύρος.</string>
-  <string name="call_recording_category_title">Καταγραφή κλήσεων</string>
-  <string name="call_recording_format">Μορφή ήχου</string>
-  <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
-  <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
-  <string name="speed_dial_replace">Αντικατάσταση</string>
-  <string name="speed_dial_delete">Διαγραφή</string>
-  <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
-  <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">H γρήγορη κλήση δεν μπορεί να ρυθμιστεί για αυτό το πλήκτρο</string>
-  <string name="yes">Ναι</string>
-  <string name="no">Όχι</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Δεν υπάρχουν εισερχόμενες κλήσεις.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Δεν υπάρχουν εξερχόμενες κλήσεις.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Το αρχείο καταγραφής κλήσεων είναι κενό</string>
-  <string name="calllog_search_hint">Αναζήτηση αρχείου κλήσεων</string>
-  <string name="no_call_log">Δεν υπάρχει αρχείο καταγραφής κλήσεων</string>
-  <string name="clear">Εκκαθάριση</string>
-  <string name="description_clear_search">Εκκαθάριση αναζητήσεων</string>
-  <string name="video_call_welcome_title"><b>Καλώς ήρθατε στη νέα λειτουργία Βιντεοκλήσεων</b></string>
-  <string name="video_call_welcome_message">Όλοι αγαπάμε να ακούμε αυτή την οικεία φωνή στο τέλος της γραμμής, αλλά μιλώντας πρόσωπο με πρόσωπο είναι πολύ καλύτερο! Για να αξιοποιήσετε την ζωντανή σύνδεση (ή FaceTime) θα πρέπει να ξέρετε τα παρακάτω:\n
+    <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
+    <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
+    <string name="incall_vibrate_call_waiting_title">Δόνηση στην αναμονή</string>
+    <string name="incall_vibrate_hangup_title">Δόνηση στο κλείσιμο</string>
+    <string name="incall_vibrate_45_title">Δόνηση κάθε 1 λεπτό</string>
+    <string name="incall_vibrate_45_summary">Δόνηση στο 45ο δευτερόλεπτο κάθε λεπτού κατά τη διάρκεια εξερχόμενων κλήσεων</string>
+    <string name="nearby_places">Κοντινές τοποθεσίες</string>
+    <string name="people">Άτομα</string>
+    <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
+    <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
+    <string name="t9_search_input_locale_default">Προεπιλογή</string>
+    <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
+    <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
+    <string name="enable_forward_lookup_summary">Εμφάνιση κοντινών τοποθεσιών κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
+    <string name="enable_people_lookup_title">Αναζήτηση ατόμων</string>
+    <string name="enable_people_lookup_summary">Εμφάνιση online αποτελεσμάτων για τα άτομα κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
+    <string name="enable_reverse_lookup_title">Αντίστροφη αναζήτηση</string>
+    <string name="enable_reverse_lookup_summary">Αναζήτηση πληροφοριών σχετικά με το άτομο ή την τοποθεσία για άγνωστους αριθμούς στις εισερχόμενες κλήσεις</string>
+    <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
+    <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
+    <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
+    <string name="speed_dial_edit_title">Επεξεργασία ταχείας κλήσης <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Παρακαλώ εισάγετε έναν αριθμό</string>
+    <string name="call_log_show_all_slots">Όλες οι SIM</string>
+    <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
+    <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
+    <string name="call_log_blocked_empty">Δεν υπάρχουν μπλοκαρισμένες κλήσεις.</string>
+    <string name="call_log_stats_title">Στατιστικά</string>
+    <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
+    <string name="call_stats_incoming">Εισερχόμενες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Αναπάντητες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Αποκλεισμένες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
+    <string name="call_stats_filter_to">Ημερομηνία λήξης</string>
+    <string name="call_stats_filter_picker_title">Εύρος φίλτρου</string>
+    <string name="date_quick_selection">Γρήγορη επιλογή</string>
+    <string name="date_qs_currentmonth">Τρέχων μήνας</string>
+    <string name="date_qs_currentquarter">Τρέχον τρίμηνο</string>
+    <string name="date_qs_currentyear">Τρέχων χρόνος</string>
+    <string name="date_qs_lastweek">Προηγούμενη εβδομάδα</string>
+    <string name="date_qs_lastmonth">Προηγούμενος μήνας</string>
+    <string name="date_qs_lastquarter">Προηγούμενο τρίμηνο</string>
+    <string name="date_qs_lastyear">Προηγούμενος χρόνος</string>
+    <string name="call_stats_date_filter">Ρύθμιση χρονικού εύρους</string>
+    <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
+    <string name="call_stats_sort_by_duration">Ταξινόμηση ανά διάρκεια κλήσεων</string>
+    <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
+    <string name="call_stats_title_for_number">Αυτός ο αριθμός</string>
+    <string name="call_stats_title_of_total">Από το σύνολο</string>
+    <string name="call_stats_title_durations">Διάρκεια κλήσεων</string>
+    <string name="call_stats_title_count">Αριθμός κλήσεων</string>
+    <string name="call_stats_title_average_duration">Μέση διάρκεια κλήσεων</string>
+    <string name="recent_calls_no_items_in_range">Το αρχείο καταγραφής κλήσεων δεν περιέχει καμία κλήση στο επιλεγμένο χρονικό εύρος.</string>
+    <string name="call_recording_category_title">Καταγραφή κλήσεων</string>
+    <string name="call_recording_format">Μορφή ήχου</string>
+    <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
+    <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
+    <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
+    <string name="speed_dial_replace">Αντικατάσταση</string>
+    <string name="speed_dial_delete">Διαγραφή</string>
+    <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
+    <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης</string>
+    <string name="speed_dial_can_not_be_set">H γρήγορη κλήση δεν μπορεί να ρυθμιστεί για αυτό το πλήκτρο</string>
+    <string name="yes">Ναι</string>
+    <string name="no">Όχι</string>
+    <string name="recentIncoming_empty">Δεν υπάρχουν εισερχόμενες κλήσεις.</string>
+    <string name="recentOutgoing_empty">Δεν υπάρχουν εξερχόμενες κλήσεις.</string>
+    <string name="recentCalls_empty">Το αρχείο καταγραφής κλήσεων είναι κενό</string>
+    <string name="calllog_search_hint">Αναζήτηση αρχείου κλήσεων</string>
+    <string name="no_call_log">Δεν υπάρχει αρχείο καταγραφής κλήσεων</string>
+    <string name="clear">Εκκαθάριση</string>
+    <string name="description_clear_search">Εκκαθάριση αναζητήσεων</string>
+    <string name="video_call_welcome_title"><b>Καλώς ήρθατε στη νέα λειτουργία Βιντεοκλήσεων</b></string>
+    <string name="video_call_welcome_message">Όλοι αγαπάμε να ακούμε αυτή την οικεία φωνή στο τέλος της γραμμής, αλλά μιλώντας πρόσωπο με πρόσωπο είναι πολύ καλύτερο! Για να αξιοποιήσετε την ζωντανή σύνδεση (ή FaceTime) θα πρέπει να ξέρετε τα παρακάτω:\n
 Πρέπει να είστε σε δίκτυο 4G/LTE ή σε WiFi σύνδεση\n Η συσκευή που καλείτε θα πρέπει να είναι συμβατή με βιντεοκλήση\n Οι βιντεοκλήσεις απαιτούν υψηλές ταχύτητες δεδομένων\n Μπορείτε επίσης να αναβαθμίσετε μία φωνητική κλήση σε βιντεοκλήση\n\n Ελέγξτε το <a>https://support.t-mobile.com/docs/DOC-23574</a> για περισσότερες πληροφορίες.</string>
-  <string name="video_call_welcome_message_repeat">Εμφάνιση αυτού του μηνύματος κάθε φορά</string>
-  <string name="toast_change_video_call_failed">Δεν μπορεί να γίνει αλλαγή σε βίντεο κλήση, εσφαλμένη μορφή αριθμού</string>
-  <string name="toast_make_video_call_failed">Δεν μπορεί να γίνει κλήση βίντεο, εσφαλμένη μορφή αριθμού</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Βιντεοκλήση, εμφάνισέ με</string>
-  <string name="overflowRXCallMenuItemText">Βιντεοκλήση, απέκρυψέ με</string>
-  <string name="overflowVOCallMenuItemText">Φωνητική κλήση</string>
-  <string name="video_call">Βιντεοκλήση</string>
-  <string name="call_data_info_label">Χρονόμετρο χρήσης κλήσεων/δεδομένων</string>
-  <string name="call_data_info_description">Χρόνος χρήσης κλήσης φωνής και χρόνος χρήσης δεδομένων</string>
-  <string name="alert_call_over_wifi">Οι κλήσεις θα γίνουν μέσω Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Δεν υπάρχει διαθέσιμο δίκτυο κινητής τηλεφωνίας. Συνδεθείτε με διαθέσιμο Wi-Fi για να πραγματοποιήσετε κλήσεις.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Συνδεθείτε με Wi-Fi για να πραγματοποιήσετε κλήσεις.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Πατήστε εδώ για να δείτε τα διαθέσιμα δίκτυα</string>
-  <string name="menu_add_to_4g_conference_call">Προσθήκη σε 4G κλήση συνδιάσκεψης</string>
-  <string name="menu_4g_conference_call">4G κλήση συνδιάσκεψης</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Εισερχόμενη φωνητική κλήση 4G</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Εισερχόμενη βιντεοκλήση 4G</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Εξερχόμενη φωνητική κλήση 4G</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Εξερχόμενη βιντεοκλήση 4G</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Αναπάντητη φωνητική κλήση 4G</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Αναπάντητη βιντεοκλήση 4G</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Εισερχόμενη φωνητική κλήση Wi-Fi</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Εισερχόμενη βιντεοκλήση Wi-Fi</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Εξερχόμενη φωνητική κλήση Wi-Fi</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Εξερχόμενη βιντεοκλήση Wi-Fi</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Αναπάντητη φωνητική κλήση Wi-Fi</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Αναπάντητη βιντεοκλήση Wi-Fi</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Οι αναζητήσεις ενδέχεται να στέλνουν ερωτήματα μέσω ενός ασφαλούς πρωτοκόλλου (https) σε απομακρυσμένους ιστότοπους για τη συλλογή πληροφοριών. Το ερώτημα ενδέχεται να περιλαμβάνει τον αριθμό τηλεφώνου του άλλου μέρους ή το ερώτημα αναζήτησης</string>
+    <string name="video_call_welcome_message_repeat">Εμφάνιση αυτού του μηνύματος κάθε φορά</string>
+    <string name="toast_change_video_call_failed">Δεν μπορεί να γίνει αλλαγή σε βίντεο κλήση, εσφαλμένη μορφή αριθμού</string>
+    <string name="toast_make_video_call_failed">Δεν μπορεί να γίνει κλήση βίντεο, εσφαλμένη μορφή αριθμού</string>
+    <string name="overflowBothCallMenuItemText">Βιντεοκλήση, εμφάνισέ με</string>
+    <string name="overflowRXCallMenuItemText">Βιντεοκλήση, απέκρυψέ με</string>
+    <string name="overflowVOCallMenuItemText">Φωνητική κλήση</string>
+    <string name="video_call">Βιντεοκλήση</string>
+    <string name="call_data_info_label">Χρονόμετρο χρήσης κλήσεων/δεδομένων</string>
+    <string name="call_data_info_description">Χρόνος χρήσης κλήσης φωνής και χρόνος χρήσης δεδομένων</string>
+    <string name="alert_call_over_wifi">Οι κλήσεις θα γίνουν μέσω Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Δεν υπάρχει διαθέσιμο δίκτυο κινητής τηλεφωνίας. Συνδεθείτε με διαθέσιμο Wi-Fi για να πραγματοποιήσετε κλήσεις.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Συνδεθείτε με Wi-Fi για να πραγματοποιήσετε κλήσεις.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Πατήστε εδώ για να δείτε τα διαθέσιμα δίκτυα</string>
+    <string name="menu_add_to_4g_conference_call">Προσθήκη σε 4G κλήση συνδιάσκεψης</string>
+    <string name="menu_4g_conference_call">4G κλήση συνδιάσκεψης</string>
+    <string name="type_incoming_volte">Εισερχόμενη φωνητική κλήση 4G</string>
+    <string name="type_incoming_video_lte">Εισερχόμενη βιντεοκλήση 4G</string>
+    <string name="type_outgoing_volte">Εξερχόμενη φωνητική κλήση 4G</string>
+    <string name="type_outgoing_video_lte">Εξερχόμενη βιντεοκλήση 4G</string>
+    <string name="type_missed_volte">Αναπάντητη φωνητική κλήση 4G</string>
+    <string name="type_missed_video_lte">Αναπάντητη βιντεοκλήση 4G</string>
+    <string name="type_incoming_vowifi">Εισερχόμενη φωνητική κλήση Wi-Fi</string>
+    <string name="type_incoming_video_wifi">Εισερχόμενη βιντεοκλήση Wi-Fi</string>
+    <string name="type_outgoing_vowifi">Εξερχόμενη φωνητική κλήση Wi-Fi</string>
+    <string name="type_outgoing_video_wifi">Εξερχόμενη βιντεοκλήση Wi-Fi</string>
+    <string name="type_missed_vowifi">Αναπάντητη φωνητική κλήση Wi-Fi</string>
+    <string name="type_missed_video_wifi">Αναπάντητη βιντεοκλήση Wi-Fi</string>
+    <string name="lookup_disclaimer">Οι αναζητήσεις ενδέχεται να στέλνουν ερωτήματα μέσω ενός ασφαλούς πρωτοκόλλου (https) σε απομακρυσμένους ιστότοπους για τη συλλογή πληροφοριών. Το ερώτημα ενδέχεται να περιλαμβάνει τον αριθμό τηλεφώνου του άλλου μέρους ή το ερώτημα αναζήτησης</string>
 </resources>

@@ -31,126 +31,71 @@
   -->
 <!-- The xml contains Qti specific resource strings neede for any value added features. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Call substate label -->
-  <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: 通話サブ状態:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
-  <!-- Call substate label for call resumed -->
-  <string name="call_substate_call_resumed">再開しました</string>
-  <!-- Call substate label for call connected suspended (audio) -->
-  <string name="call_substate_connected_suspended_audio">接続されましたが、音声は切断されています</string>
-  <!-- Call substate label for call connected suspended (video) -->
-  <string name="call_substate_connected_suspended_video">接続されましたが、ビデオは切断されています</string>
-  <!-- Call substate label for avp retry -->
-  <string name="call_substate_avp_retry">ビデオの画質を検出中\u2026</string>
-  <!-- Video quality changed message -->
-  <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: ビデオの画質を<xliff:g id="quality" example="high">%2$s</xliff:g>に変更しました</string>
-  <!-- Video quality High -->
-  <string name="video_quality_high">高画質</string>
-  <!-- Video quality Medium -->
-  <string name="video_quality_medium">中画質</string>
-  <!-- Video quality Low -->
-  <string name="video_quality_low">低画質</string>
-  <!-- Video quality Unknown -->
-  <string name="video_quality_unknown">不明</string>
-  <!-- Message indicating that Video Started flowing for IMS-VT calls -->
-  <string name="player_started">プレイヤーが開始しました</string>
-  <!-- Message indicating that Video Stopped flowing for IMS-VT calls -->
-  <string name="player_stopped">プレイヤーが停止しました</string>
-  <!-- Message indicating that camera failure has occurred for the selected camera and
-         as result camera is not ready -->
-  <string name="camera_not_ready">カメラの準備ができていません</string>
-  <!-- Message indicating that camera is ready/available -->
-  <string name="camera_ready">カメラの準備ができています</string>
-  <!-- Message indicating unknown call session event -->
-  <string name="unknown_call_session_event">不明な通話セッションイベント</string>
-  <!-- Message indicating data usage -->
-  <string name="wlan_data_usage_label">Wi-Fi データ使用量: <xliff:g id="usage">%1$s</xliff:g></string>
-  <string name="lte_data_usage_label">LTE データ使用量: <xliff:g id="usage">%1$s</xliff:g></string>
-  <!-- In-call screen: Modify Call Options for IMS call -->
-  <string name="modify_call_option_title">通話の種類を選択</string>
-  <string name="modify_call_option_vt">ビデオ通話</string>
-  <string name="modify_call_option_vt_tx">ビデオの送信</string>
-  <string name="modify_call_option_vt_rx">ビデオの受信</string>
-  <string name="modify_call_option_voice">音声のみ</string>
-  <!-- Modify call error cause -->
-  <string name="modify_call_failed_due_to_low_battery">電池の残量が少なくなっているため、通話を変更できませんでした。</string>
-  <!-- Description of the call transfer related strings [CHAR LIMIT=NONE] -->
-  <string name="qti_ims_transfer_num_error">番号が設定されていません。IMSの設定から番号を入力してから再試行してください。</string>
-  <string name="qti_ims_transfer_request_error">コール転送要求が失敗しました。</string>
-  <string name="qti_ims_transfer_request_success">コール転送要求が成功しました。</string>
-  <!-- Text for the onscreen "blind transfer" button -->
-  <string name="qti_ims_onscreenBlindTransfer">ブラインド転送</string>
-  <!-- Text for the onscreen "assured transfer" button -->
-  <string name="qti_ims_onscreenAssuredTransfer">保証された転送</string>
-  <!-- Text for the onscreen "consultative transfer" button -->
-  <string name="qti_ims_onscreenConsultativeTransfer">コンサルテーションの転送</string>
-  <!-- Message indicating video calls not allowed if user enabled TTY Mode -->
-  <string name="video_call_not_allowed_if_tty_enabled">ビデオ通話を許可するにはTTYモードを無効にしてください。</string>
-  <!-- Description of the deflect target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
-  <string name="qti_description_target_deflect">転送</string>
-  <string name="qti_description_deflect_error">番号が設定されていません。IMSの設定から番号を入力してから再試行してください。</string>
-  <string name="qti_description_deflect_service_error">着信転送サービスはサポートされていません。</string>
-  <!-- Message indicating call failed due to handover not feasible -->
-  <string name="call_failed_ho_not_feasible">LTEから3G/2Gへのハンドオーバーが行えなかったため、通話を終了しました。</string>
-  <!-- Text for the onscreen "Add Participant" button -->
-  <string name="onscreenAddParticipant">参加者を追加</string>
-  <!-- Title of the IMS to CS redial dialog -->
-  <string name="cs_redial_option">リダイヤルオプション</string>
-  <!-- Message text of the IMS to CS redial dialog -->
-  <string name="cs_redial_msg">IMSビデオ通話を発信できませんでした。非IMS音声通話としてリダイヤルしますか？</string>
-  <!-- Session modify cause unspecified -->
-  <!-- Session modify cause code upgrade local request -->
-  <string name="session_modify_cause_upgrade_local_request">ユーザーのリクエストで通話はアップグレードされました</string>
-  <!-- Session modify cause code upgrade remote request -->
-  <string name="session_modify_cause_upgrade_remote_request">リモートのユーザーのリクエストで通話はアップグレードされました</string>
-  <!-- Session modify cause code downgrade local request -->
-  <string name="session_modify_cause_downgrade_local_request">ユーザーのリクエストで通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade remote request -->
-  <string name="session_modify_cause_downgrade_remote_request">リモートのユーザーのリクエストで通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade rtp timeout -->
-  <string name="session_modify_cause_downgrade_rtp_timeout">RTPのタイムアウトによって通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade qos -->
-  <string name="session_modify_cause_downgrade_qos">サービス品質のために通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade packet loss -->
-  <string name="session_modify_cause_downgrade_packet_loss">パケットロスによって通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade low thrput -->
-  <string name="session_modify_cause_downgrade_low_thrput">処理能力が低いために通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade thermal mitigation -->
-  <string name="session_modify_cause_downgrade_thermal_mitigation">温度を低下させるために通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade lipsync -->
-  <string name="session_modify_cause_downgrade_lipsync">音声同期のために通話はダウングレードされました</string>
-  <!-- Session modify cause code downgrade generic error -->
-  <string name="session_modify_cause_downgrade_generic_error">一般的なエラーが原因で通話はダウングレードされました</string>
-  <!-- In-call screen: status label for an incoming conference call [CHAR LIMIT=25] -->
-  <string name="card_title_incoming_conf_call">着信電話会議</string>
-  <!-- In-call screen: status label for an incoming video conference call [CHAR LIMIT=25] -->
-  <string name="card_title_incoming_video_conf_call">ビデオ会議の着信</string>
-  <!-- The "label" of the in-call Notification for an incoming conference ringing call. [CHAR LIMIT=60] -->
-  <string name="notification_incoming_conf_call">着信電話会議</string>
-  <!-- Title displayed in the overlay for incoming conference calls which include the name of the provider.
-         [CHAR LIMIT=40] -->
-  <string name="incoming_conf_via_template"><xliff:g id="provider_name">%s</xliff:g>を介した電話会議の着信</string>
-  <!-- Message indicating call failed due to low battery -->
-  <string name="call_failed_due_to_low_battery">電池の残量が少なくなっているため、通話できませんでした。</string>
-  <!-- VoWifi call quality indicators -->
-  <string name="vowifi_call_quality_good">良好な音声品質</string>
-  <string name="vowifi_call_quality_fair">普通の音声品質</string>
-  <string name="vowifi_call_quality_poor">貧弱な音声品質</string>
-  <!-- Title for low battery alert dialogue -->
-  <string name="low_battery">電池残量低下の警告</string>
-  <!-- Message text of the low battery alert dialog in cases video call doesn't have downgrade capabilities -->
-  <string name="low_battery_hangup_msg">電話を切りますか？</string>
-  <!-- Message text of the low battery alert dialog for MO/MT video calls -->
-  <string name="low_battery_msg">バッテリー残量が15%以下です。ビデオ通話のままにするか音声通話に変更するか選んでください</string>
-  <!-- No option of the low battery alert dialog for MO/MT Video calls -->
-  <string name="low_battery_convert">変換</string>
-  <!-- International prefix source-->
-  <!-- International prefix converted value-->
-  <string name="video_call">ビデオ通話</string>
-  <string name="video_call_cannot_upgrade">現在はビデオ通話の着信に応答できません</string>
-  <!-- Pop up menu options for picture mode -->
-  <string name="video_call_picture_mode_menu_title">画像モードを選択</string>
-  <string name="video_call_picture_mode_preview_video">カメラのプレビュー</string>
-  <string name="video_call_picture_mode_incoming_video">ビデオ通話の着信</string>
-  <string name="video_call_picture_mode_cancel_option">キャンセル</string>
-  <string name="video_call_picture_mode_save_option">保存</string>
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: 通話サブ状態:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">再開しました</string>
+    <string name="call_substate_connected_suspended_audio">接続されましたが、音声は切断されています</string>
+    <string name="call_substate_connected_suspended_video">接続されましたが、ビデオは切断されています</string>
+    <string name="call_substate_avp_retry">ビデオの画質を検出中\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: ビデオの画質を<xliff:g id="quality" example="high">%2$s</xliff:g>に変更しました</string>
+    <string name="video_quality_high">高画質</string>
+    <string name="video_quality_medium">中画質</string>
+    <string name="video_quality_low">低画質</string>
+    <string name="video_quality_unknown">不明</string>
+    <string name="player_started">プレイヤーが開始しました</string>
+    <string name="player_stopped">プレイヤーが停止しました</string>
+    <string name="camera_not_ready">カメラの準備ができていません</string>
+    <string name="camera_ready">カメラの準備ができています</string>
+    <string name="unknown_call_session_event">不明な通話セッションイベント</string>
+    <string name="wlan_data_usage_label">Wi-Fi データ使用量: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">LTE データ使用量: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">通話の種類を選択</string>
+    <string name="modify_call_option_vt">ビデオ通話</string>
+    <string name="modify_call_option_vt_tx">ビデオの送信</string>
+    <string name="modify_call_option_vt_rx">ビデオの受信</string>
+    <string name="modify_call_option_voice">音声のみ</string>
+    <string name="modify_call_failed_due_to_low_battery">電池の残量が少なくなっているため、通話を変更できませんでした。</string>
+    <string name="qti_ims_transfer_num_error">番号が設定されていません。IMSの設定から番号を入力してから再試行してください。</string>
+    <string name="qti_ims_transfer_request_error">コール転送要求が失敗しました。</string>
+    <string name="qti_ims_transfer_request_success">コール転送要求が成功しました。</string>
+    <string name="qti_ims_onscreenBlindTransfer">ブラインド転送</string>
+    <string name="qti_ims_onscreenAssuredTransfer">保証された転送</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">コンサルテーションの転送</string>
+    <string name="video_call_not_allowed_if_tty_enabled">ビデオ通話を許可するにはTTYモードを無効にしてください。</string>
+    <string name="qti_description_target_deflect">転送</string>
+    <string name="qti_description_deflect_error">番号が設定されていません。IMSの設定から番号を入力してから再試行してください。</string>
+    <string name="qti_description_deflect_service_error">着信転送サービスはサポートされていません。</string>
+    <string name="call_failed_ho_not_feasible">LTEから3G/2Gへのハンドオーバーが行えなかったため、通話を終了しました。</string>
+    <string name="onscreenAddParticipant">参加者を追加</string>
+    <string name="cs_redial_option">リダイヤルオプション</string>
+    <string name="cs_redial_msg">IMSビデオ通話を発信できませんでした。非IMS音声通話としてリダイヤルしますか？</string>
+    <string name="session_modify_cause_upgrade_local_request">ユーザーのリクエストで通話はアップグレードされました</string>
+    <string name="session_modify_cause_upgrade_remote_request">リモートのユーザーのリクエストで通話はアップグレードされました</string>
+    <string name="session_modify_cause_downgrade_local_request">ユーザーのリクエストで通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_remote_request">リモートのユーザーのリクエストで通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">RTPのタイムアウトによって通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_qos">サービス品質のために通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_packet_loss">パケットロスによって通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_low_thrput">処理能力が低いために通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">温度を低下させるために通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_lipsync">音声同期のために通話はダウングレードされました</string>
+    <string name="session_modify_cause_downgrade_generic_error">一般的なエラーが原因で通話はダウングレードされました</string>
+    <string name="card_title_incoming_conf_call">着信電話会議</string>
+    <string name="card_title_incoming_video_conf_call">ビデオ会議の着信</string>
+    <string name="notification_incoming_conf_call">着信電話会議</string>
+    <string name="incoming_conf_via_template"><xliff:g id="provider_name">%s</xliff:g>を介した電話会議の着信</string>
+    <string name="call_failed_due_to_low_battery">電池の残量が少なくなっているため、通話できませんでした。</string>
+    <string name="vowifi_call_quality_good">良好な音声品質</string>
+    <string name="vowifi_call_quality_fair">普通の音声品質</string>
+    <string name="vowifi_call_quality_poor">貧弱な音声品質</string>
+    <string name="low_battery">電池残量低下の警告</string>
+    <string name="low_battery_hangup_msg">電話を切りますか？</string>
+    <string name="low_battery_msg">バッテリー残量が15%以下です。ビデオ通話のままにするか音声通話に変更するか選んでください</string>
+    <string name="low_battery_convert">変換</string>
+    <string name="video_call">ビデオ通話</string>
+    <string name="video_call_cannot_upgrade">現在はビデオ通話の着信に応答できません</string>
+    <string name="video_call_picture_mode_menu_title">画像モードを選択</string>
+    <string name="video_call_picture_mode_preview_video">カメラのプレビュー</string>
+    <string name="video_call_picture_mode_incoming_video">ビデオ通話の着信</string>
+    <string name="video_call_picture_mode_cancel_option">キャンセル</string>
+    <string name="video_call_picture_mode_save_option">保存</string>
 </resources>

@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Вибрация во время вызова</string>
-  <string name="incall_vibrate_outgoing_title">Вибрировать при ответе</string>
-  <string name="incall_vibrate_call_waiting_title">Вибрировать при ожидании</string>
-  <string name="incall_vibrate_hangup_title">Вибрировать при отбое</string>
-  <string name="incall_vibrate_45_title">Вибрировать каждую минуту</string>
-  <string name="incall_vibrate_45_summary">Вибрировать на 45-ой секунде каждой минуты во время исходящих вызовов</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Места рядом</string>
-  <string name="people">Люди</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">T9-поиск в номеронабирателе</string>
-  <string name="t9_search_input_locale">Язык поиска</string>
-  <string name="t9_search_input_locale_default">Язык системы</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Поиск номеров телефона</string>
-  <string name="enable_forward_lookup_title">Прямой поиск</string>
-  <string name="enable_forward_lookup_summary">Показывать ближайшие организации при поиске в номеронабирателе</string>
-  <string name="enable_people_lookup_title">Поиск контактов</string>
-  <string name="enable_people_lookup_summary">Показывать результаты из сети при поиске людей через номеронабиратель</string>
-  <string name="enable_reverse_lookup_title">Обратный поиск</string>
-  <string name="enable_reverse_lookup_summary">Поиск информации о человеке или месте для входящих с неизвестных номеров</string>
-  <string name="forward_lookup_provider_title">Провайдер прямого поиска</string>
-  <string name="people_lookup_provider_title">Провайдер поиска данных о людях</string>
-  <string name="reverse_lookup_provider_title">Провайдер обратного поиска</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
-  <string name="speed_dial_edit_title">Измен. быстр. набора для кнопки «<xliff:g id="index" example="2">%1$d</xliff:g>»</string>
-  <string name="speed_dial_input_hint">Введите номер</string>
-  <string name="call_log_show_all_slots">Все SIM-карты</string>
-  <string name="call_log_all_calls_header">Все вызовы</string>
-  <string name="call_log_blacklist_header">Только заблокированные вызовы</string>
-  <string name="call_log_blocked_empty">Нет заблокированных звонков.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Статистика</string>
-  <string name="callStatsDetailTitle">Статистика вызовов</string>
-  <string name="call_stats_incoming">Входящих: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Исходящих: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Пропущенных: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">Заблокированных: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Дата начала</string>
-  <string name="call_stats_filter_to">Дата окончания</string>
-  <string name="call_stats_filter_picker_title">Диапазон выбора</string>
-  <string name="date_quick_selection">Выбор периода</string>
-  <string name="date_qs_currentmonth">Текущий месяц</string>
-  <string name="date_qs_currentquarter">Текущий квартал</string>
-  <string name="date_qs_currentyear">Текущий год</string>
-  <string name="date_qs_lastweek">Прошлая неделя</string>
-  <string name="date_qs_lastmonth">Прошлый месяц</string>
-  <string name="date_qs_lastquarter">Прошлый квартал</string>
-  <string name="date_qs_lastyear">Прошлый год</string>
-  <string name="call_stats_date_filter">Фильтр</string>
-  <string name="call_stats_reset_filter">Сбросить фильтр</string>
-  <string name="call_stats_sort_by_duration">Сорт. по длительности</string>
-  <string name="call_stats_sort_by_count">Сорт. по количеству</string>
-  <string name="call_stats_title_for_number">Этот номер</string>
-  <string name="call_stats_title_of_total">От общего числа</string>
-  <string name="call_stats_title_durations">Длительность вызовов</string>
-  <string name="call_stats_title_count">Число вызовов</string>
-  <string name="call_stats_title_average_duration">Средняя продолж. разговора</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">В журнале вызовов нет записей за указанный период времени.</string>
-  <string name="call_recording_category_title">Запись вызова</string>
-  <string name="call_recording_format">Формат аудио</string>
-  <string name="call_playback_no_app_found_toast">Не найдено приложение, которое может воспроизвести выбранную запись.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Настройки быстрого набора</string>
-  <string name="speed_dial_not_set">(не установлено)</string>
-  <string name="speed_dial_replace">Изменить</string>
-  <string name="speed_dial_delete">Удалить</string>
-  <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
-  <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Присвоить?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Чтобы использовать Быстрый набор, выключите режим полета</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Закрепить быстрый набор за этой клавишей невозможно</string>
-  <string name="yes">Да</string>
-  <string name="no">Нет</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Входящих вызовов еще не было.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Исходящих вызовов еще не было.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Журнал вызовов пуст</string>
-  <string name="calllog_search_hint">Искать в журнале вызовов</string>
-  <string name="no_call_log">Журнал вызовов пуст</string>
-  <string name="clear">Очистить</string>
-  <string name="description_clear_search">Очистить условия поиска</string>
-  <string name="video_call_welcome_title"><b>Добро пожаловать в новое меню Видеовызовов</b></string>
-  <string name="video_call_welcome_message">Все мы любим слышать знакомый голос в телефонной трубке, но говорить лицом к лицу гораздо лучше! Вот, что нужно знать для использования видеозвонков:\n Лучше использовать подключение LTE или Wi-Fi\n Устройство, на которое вы звоните, также должно поддерживать видеосвязь\n Видеозвонки потребляют достаточно много интернет-трафика\n Можно переключать голосовой вызов на видеовызов в процессе разговора\n\n Ознакомьтесь со статьей <a>https://support.t-mobile.com/docs/DOC-23574</a> для получения дополнительной информации.</string>
-  <string name="video_call_welcome_message_repeat">Показывать это сообщение каждый раз</string>
-  <string name="toast_change_video_call_failed">Невозможно совершить видеозвонок — некорректный формат номера</string>
-  <string name="toast_make_video_call_failed">Невозможно осуществить видеовызов — некорректный формат номера</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Видеовызов, показывать меня</string>
-  <string name="overflowRXCallMenuItemText">Видеовызов, скрывать меня</string>
-  <string name="overflowVOCallMenuItemText">Голосовой вызов</string>
-  <string name="video_call">Видеовызов</string>
-  <string name="call_data_info_label">Статистика вызовов и использования данных</string>
-  <string name="call_data_info_description">Длительность вызовов по мобильной сети и сети передачи данных</string>
-  <string name="alert_call_over_wifi">Вызов будет выполнен через сеть Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Мобильная сеть недоступна. Чтобы позвонить, подключитесь к Wi-Fi.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Подключитесь к Wi-Fi, чтобы позвонить.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Для просмотра доступных сетей нажмите здесь</string>
-  <string name="menu_add_to_4g_conference_call">Добавить к 4G-конференции</string>
-  <string name="menu_4g_conference_call">4G-конференция</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Входящий 4G-звонок</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Входящий 4G-видеозвонок</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Исходящий 4G-звонок</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Исходящий 4G-видеозвонок</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Пропущенный 4G-звонок</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Пропущенный 4G-видеозвонок</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Входящий звонок по Wi-Fi</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Входящий видеозвонок по Wi-Fi</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Исходящий звонок по Wi-Fi</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Исходящий видеозвонок по Wi-Fi</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Пропущенный звонок по Wi-Fi</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Пропущенный видеозвонок по Wi-Fi</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Для сбора информации поисковые запросы могут передаваться на удаленные веб-сайты по защищенному протоколу (https). Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
+    <string name="incall_vibration_category_title">Вибрация во время вызова</string>
+    <string name="incall_vibrate_outgoing_title">Вибрировать при ответе</string>
+    <string name="incall_vibrate_call_waiting_title">Вибрировать при ожидании</string>
+    <string name="incall_vibrate_hangup_title">Вибрировать при отбое</string>
+    <string name="incall_vibrate_45_title">Вибрировать каждую минуту</string>
+    <string name="incall_vibrate_45_summary">Вибрировать на 45-ой секунде каждой минуты во время исходящих вызовов</string>
+    <string name="nearby_places">Места рядом</string>
+    <string name="people">Люди</string>
+    <string name="preference_category_t9_dialpad_search">T9-поиск в номеронабирателе</string>
+    <string name="t9_search_input_locale">Язык поиска</string>
+    <string name="t9_search_input_locale_default">Язык системы</string>
+    <string name="lookup_settings_label">Поиск номеров телефона</string>
+    <string name="enable_forward_lookup_title">Прямой поиск</string>
+    <string name="enable_forward_lookup_summary">Показывать ближайшие организации при поиске в номеронабирателе</string>
+    <string name="enable_people_lookup_title">Поиск контактов</string>
+    <string name="enable_people_lookup_summary">Показывать результаты из сети при поиске людей через номеронабиратель</string>
+    <string name="enable_reverse_lookup_title">Обратный поиск</string>
+    <string name="enable_reverse_lookup_summary">Поиск информации о человеке или месте для входящих с неизвестных номеров</string>
+    <string name="forward_lookup_provider_title">Провайдер прямого поиска</string>
+    <string name="people_lookup_provider_title">Провайдер поиска данных о людях</string>
+    <string name="reverse_lookup_provider_title">Провайдер обратного поиска</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+    <string name="speed_dial_edit_title">Измен. быстр. набора для кнопки «<xliff:g id="index" example="2">%1$d</xliff:g>»</string>
+    <string name="speed_dial_input_hint">Введите номер</string>
+    <string name="call_log_show_all_slots">Все SIM-карты</string>
+    <string name="call_log_all_calls_header">Все вызовы</string>
+    <string name="call_log_blacklist_header">Только заблокированные вызовы</string>
+    <string name="call_log_blocked_empty">Нет заблокированных звонков.</string>
+    <string name="call_log_stats_title">Статистика</string>
+    <string name="callStatsDetailTitle">Статистика вызовов</string>
+    <string name="call_stats_incoming">Входящих: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Исходящих: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Пропущенных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Заблокированных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Всего: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Всего: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Дата начала</string>
+    <string name="call_stats_filter_to">Дата окончания</string>
+    <string name="call_stats_filter_picker_title">Диапазон выбора</string>
+    <string name="date_quick_selection">Выбор периода</string>
+    <string name="date_qs_currentmonth">Текущий месяц</string>
+    <string name="date_qs_currentquarter">Текущий квартал</string>
+    <string name="date_qs_currentyear">Текущий год</string>
+    <string name="date_qs_lastweek">Прошлая неделя</string>
+    <string name="date_qs_lastmonth">Прошлый месяц</string>
+    <string name="date_qs_lastquarter">Прошлый квартал</string>
+    <string name="date_qs_lastyear">Прошлый год</string>
+    <string name="call_stats_date_filter">Фильтр</string>
+    <string name="call_stats_reset_filter">Сбросить фильтр</string>
+    <string name="call_stats_sort_by_duration">Сорт. по длительности</string>
+    <string name="call_stats_sort_by_count">Сорт. по количеству</string>
+    <string name="call_stats_title_for_number">Этот номер</string>
+    <string name="call_stats_title_of_total">От общего числа</string>
+    <string name="call_stats_title_durations">Длительность вызовов</string>
+    <string name="call_stats_title_count">Число вызовов</string>
+    <string name="call_stats_title_average_duration">Средняя продолж. разговора</string>
+    <string name="recent_calls_no_items_in_range">В журнале вызовов нет записей за указанный период времени.</string>
+    <string name="call_recording_category_title">Запись вызова</string>
+    <string name="call_recording_format">Формат аудио</string>
+    <string name="call_playback_no_app_found_toast">Не найдено приложение, которое может воспроизвести выбранную запись.</string>
+    <string name="speed_dial_settings">Настройки быстрого набора</string>
+    <string name="speed_dial_not_set">(не установлено)</string>
+    <string name="speed_dial_replace">Изменить</string>
+    <string name="speed_dial_delete">Удалить</string>
+    <string name="speed_dial_unassigned_dialog_title">Нет назначенного номера</string>
+    <string name="speed_dial_unassigned_dialog_message">Клавише «<xliff:g id="number">%s</xliff:g>» не присвоен номер быстрого набора. Присвоить?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Чтобы использовать Быстрый набор, выключите режим полета</string>
+    <string name="speed_dial_can_not_be_set">Закрепить быстрый набор за этой клавишей невозможно</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="recentIncoming_empty">Входящих вызовов еще не было.</string>
+    <string name="recentOutgoing_empty">Исходящих вызовов еще не было.</string>
+    <string name="recentCalls_empty">Журнал вызовов пуст</string>
+    <string name="calllog_search_hint">Искать в журнале вызовов</string>
+    <string name="no_call_log">Журнал вызовов пуст</string>
+    <string name="clear">Очистить</string>
+    <string name="description_clear_search">Очистить условия поиска</string>
+    <string name="video_call_welcome_title"><b>Добро пожаловать в новую версию Видеовызовов</b></string>
+    <string name="video_call_welcome_message">Все мы любим слышать знакомый голос в телефонной трубке, но говорить лицом к лицу гораздо лучше! Вот, что нужно знать для использования видеозвонков:\n Лучше использовать подключение LTE или Wi-Fi\n Устройство, на которое вы звоните, также должно поддерживать видеосвязь\n Видеозвонки потребляют достаточно много интернет-трафика\n Можно переключать голосовой вызов на видеовызов в процессе разговора\n\n Ознакомьтесь со статьей <a>https://support.t-mobile.com/docs/DOC-23574</a> для получения дополнительной информации.</string>
+    <string name="video_call_welcome_message_repeat">Показывать это сообщение каждый раз</string>
+    <string name="toast_change_video_call_failed">Невозможно совершить видеозвонок — некорректный формат номера</string>
+    <string name="toast_make_video_call_failed">Невозможно осуществить видеовызов — некорректный формат номера</string>
+    <string name="overflowBothCallMenuItemText">Видеовызов, показывать меня</string>
+    <string name="overflowRXCallMenuItemText">Видеовызов, скрывать меня</string>
+    <string name="overflowVOCallMenuItemText">Голосовой вызов</string>
+    <string name="video_call">Видеовызов</string>
+    <string name="call_data_info_label">Статистика вызовов и использования данных</string>
+    <string name="call_data_info_description">Длительность вызовов по мобильной сети и сети передачи данных</string>
+    <string name="alert_call_over_wifi">Вызов будет выполнен через сеть Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Мобильная сеть недоступна. Чтобы позвонить, подключитесь к Wi-Fi.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Подключитесь к Wi-Fi, чтобы позвонить.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Для просмотра доступных сетей нажмите здесь</string>
+    <string name="menu_add_to_4g_conference_call">Добавить к 4G-конференции</string>
+    <string name="menu_4g_conference_call">4G-конференция</string>
+    <string name="type_incoming_volte">Входящий 4G-звонок</string>
+    <string name="type_incoming_video_lte">Входящий 4G-видеозвонок</string>
+    <string name="type_outgoing_volte">Исходящий 4G-звонок</string>
+    <string name="type_outgoing_video_lte">Исходящий 4G-видеозвонок</string>
+    <string name="type_missed_volte">Пропущенный 4G-звонок</string>
+    <string name="type_missed_video_lte">Пропущенный 4G-видеозвонок</string>
+    <string name="type_incoming_vowifi">Входящий звонок по Wi-Fi</string>
+    <string name="type_incoming_video_wifi">Входящий видеозвонок по Wi-Fi</string>
+    <string name="type_outgoing_vowifi">Исходящий звонок по Wi-Fi</string>
+    <string name="type_outgoing_video_wifi">Исходящий видеозвонок по Wi-Fi</string>
+    <string name="type_missed_vowifi">Пропущенный звонок по Wi-Fi</string>
+    <string name="type_missed_video_wifi">Пропущенный видеозвонок по Wi-Fi</string>
+    <string name="lookup_disclaimer">Для сбора информации поисковые запросы могут передаваться на удаленные веб-сайты по защищенному протоколу (https). Запрос может включать телефонный номер другой стороны или поисковый запрос</string>
 </resources>

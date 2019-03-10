@@ -16,28 +16,28 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 hodina</item>
-    <item quantity="few">%d hodiny</item>
-    <item quantity="many">%d hodín</item>
-    <item quantity="other">%d hodín</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 minúta</item>
-    <item quantity="few">%d minúty</item>
-    <item quantity="many">%d minút</item>
-    <item quantity="other">%d minút</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 sekunda</item>
-    <item quantity="few">%d sekundy</item>
-    <item quantity="many">%d sekúnd</item>
-    <item quantity="other">%d sekúnd</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 hovor</item>
-    <item quantity="few">%d hovory</item>
-    <item quantity="many">%d hovorov</item>
-    <item quantity="other">%d hovorov</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 hodina</item>
+        <item quantity="few">%d hodiny</item>
+        <item quantity="many">%d hodín</item>
+        <item quantity="other">%d hodín</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 minúta</item>
+        <item quantity="few">%d minúty</item>
+        <item quantity="many">%d minút</item>
+        <item quantity="other">%d minút</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sekunda</item>
+        <item quantity="few">%d sekundy</item>
+        <item quantity="many">%d sekúnd</item>
+        <item quantity="other">%d sekúnd</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 hovor</item>
+        <item quantity="few">%d hovory</item>
+        <item quantity="many">%d hovorov</item>
+        <item quantity="other">%d hovorov</item>
+    </plurals>
 </resources>

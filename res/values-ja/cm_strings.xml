@@ -16,137 +16,112 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">通話中のバイブレーション</string>
-  <string name="incall_vibrate_outgoing_title">応答時に振動</string>
-  <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
-  <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
-  <string name="incall_vibrate_45_title">時間ごとに振動</string>
-  <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">近くの場所</string>
-  <string name="people">人物</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">ダイヤルパッドT9検索</string>
-  <string name="t9_search_input_locale">T9検索の入力</string>
-  <string name="t9_search_input_locale_default">デフォルト</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">電話番号検索</string>
-  <string name="enable_forward_lookup_title">正引き</string>
-  <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示する</string>
-  <string name="enable_people_lookup_title">人物検索</string>
-  <string name="enable_people_lookup_summary">ダイヤル画面で検索しているときに人物のオンラインの検索結果を表示する</string>
-  <string name="enable_reverse_lookup_title">逆引き</string>
-  <string name="enable_reverse_lookup_summary">着信中の不明な番号の人物または場所の情報を検索する</string>
-  <string name="forward_lookup_provider_title">正引き検索プロバイダ</string>
-  <string name="people_lookup_provider_title">人物検索プロバイダ</string>
-  <string name="reverse_lookup_provider_title">逆引きプロバイダ</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
-  <string name="speed_dial_edit_title">スピードダイヤル<xliff:g id="index" example="2">%1$d</xliff:g>を編集</string>
-  <string name="speed_dial_input_hint">番号を入力してください</string>
-  <string name="call_log_show_all_slots">すべてのSIM</string>
-  <string name="call_log_all_calls_header">すべての通話</string>
-  <string name="call_log_blacklist_header">着信拒否した通話のみ</string>
-  <string name="call_log_blocked_empty">着信拒否した通話はありません。</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">統計</string>
-  <string name="callStatsDetailTitle">通話の統計の詳細</string>
-  <string name="call_stats_incoming">着信: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">発信: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">不在: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blocked">着信拒否: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g> <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">開始日</string>
-  <string name="call_stats_filter_to">終了日</string>
-  <string name="call_stats_filter_picker_title">フィルターの範囲</string>
-  <string name="date_quick_selection">クイック選択</string>
-  <string name="date_qs_currentmonth">今月</string>
-  <string name="date_qs_currentquarter">今四半期</string>
-  <string name="date_qs_currentyear">今年</string>
-  <string name="date_qs_lastweek">先週</string>
-  <string name="date_qs_lastmonth">先月</string>
-  <string name="date_qs_lastquarter">下四半期</string>
-  <string name="date_qs_lastyear">昨年</string>
-  <string name="call_stats_date_filter">時間範囲を調整</string>
-  <string name="call_stats_reset_filter">時間範囲をリセット</string>
-  <string name="call_stats_sort_by_duration">通話時間で並べ替え</string>
-  <string name="call_stats_sort_by_count">通話回数で並べ替え</string>
-  <string name="call_stats_title_for_number">この番号</string>
-  <string name="call_stats_title_of_total">合計のうち</string>
-  <string name="call_stats_title_durations">通話時間</string>
-  <string name="call_stats_title_count">通話回数</string>
-  <string name="call_stats_title_average_duration">平均通話時間</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">指定した期間には通話履歴がありません。</string>
-  <string name="call_recording_category_title">通話の録音</string>
-  <string name="call_recording_format">音声フォーマット</string>
-  <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">スピードダイヤルの設定</string>
-  <string name="speed_dial_not_set">（未設定）</string>
-  <string name="speed_dial_replace">書き換える</string>
-  <string name="speed_dial_delete">削除</string>
-  <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
-  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
-  <string name="dialog_speed_dial_airplane_mode_message">スピードダイヤルを使用するには、機内モードを OFF にしてください</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">このキーにはスピードダイヤルを設定できません</string>
-  <string name="yes">はい</string>
-  <string name="no">いいえ</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">着信履歴はありません。</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">発信履歴はありません。</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">通話履歴はありません</string>
-  <string name="calllog_search_hint">通話履歴を検索</string>
-  <string name="no_call_log">通話履歴なし</string>
-  <string name="clear">消去</string>
-  <string name="description_clear_search">検索を消去</string>
-  <string name="video_call_welcome_title"><b>新しいビデオ通話アプリへようこそ</b></string>
-  <string name="video_call_welcome_message">電話で聞き慣れた声を聞くのも良いですが、お互いに顔を合わせて会話できたらもっと良いですよね！リアルタイム（またはFaceTime）接続のために必要な条件は次の通りです。\n 4G LTE または Wi-Fi 接続が必要です。\n 電話をかける相手の端末もビデオ通話に対応している必要があります。\n ビデオ通話は高速データ通信を使用します。\n 音声通話をビデオ通話に変更することもできます。\n\n 詳細は <a>https://support.t-mobile.com/docs/DOC-23574</a> を参照してください。</string>
-  <string name="video_call_welcome_message_repeat">このメッセージを毎回表示する</string>
-  <string name="toast_change_video_call_failed">ビデオ通話に変更できません。番号の形式が間違っています</string>
-  <string name="toast_make_video_call_failed">ビデオ通話の発信ができません。番号の形式が間違っています</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">ビデオ通話に自分を表示する</string>
-  <string name="overflowRXCallMenuItemText">ビデオ通話に自分を表示しない</string>
-  <string name="overflowVOCallMenuItemText">音声通話</string>
-  <string name="video_call">ビデオ通話</string>
-  <string name="call_data_info_label">通話/データ使用タイマー</string>
-  <string name="call_data_info_description">ビデオ通話とデータの使用時間です</string>
-  <string name="alert_call_over_wifi">Wi-Fi を使って発信します。</string>
-  <string name="alert_call_no_cellular_coverage">モバイルネットワークがありません。発信するには Wi-Fi に接続してください。</string>
-  <string name="alert_user_connect_to_wifi_for_call">発信するには Wi-Fi に接続してください。</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">ここをタップすると利用可能なネットワークを表示します</string>
-  <string name="menu_add_to_4g_conference_call">4G グループ通話に追加する</string>
-  <string name="menu_4g_conference_call">4G グループ通話</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">4G 音声通話着信</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">4G ビデオ通話着信</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">4G 音声通話発信</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">4G ビデオ通話発信</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">不在 4G 音声通話</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">不在 4G ビデオ通話</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Wi-Fi 音声通話着信</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Wi-Fi ビデオ通話着信</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Wi-Fi 音声通話発信</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Wi-Fi ビデオ通話発信</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">不在 Wi-Fi 音声通話</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">不在 Wi-Fi ビデオ通話</string>
-  <!-- Disclaimer -->
-  <string name="lookup_disclaimer">Lookups は情報を収集するために、セキュアなプロトコル (https) 上で外部のウェブサイトにクエリを送信する可能性があります。クエリは相手の電話番号や検索クエリを含むことがあります。</string>
+    <string name="incall_vibration_category_title">通話中のバイブレーション</string>
+    <string name="incall_vibrate_outgoing_title">応答時に振動</string>
+    <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
+    <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
+    <string name="incall_vibrate_45_title">時間ごとに振動</string>
+    <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
+    <string name="nearby_places">近くの場所</string>
+    <string name="people">人物</string>
+    <string name="preference_category_t9_dialpad_search">ダイヤルパッドT9検索</string>
+    <string name="t9_search_input_locale">T9検索の入力</string>
+    <string name="t9_search_input_locale_default">デフォルト</string>
+    <string name="lookup_settings_label">電話番号検索</string>
+    <string name="enable_forward_lookup_title">正引き</string>
+    <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示する</string>
+    <string name="enable_people_lookup_title">人物検索</string>
+    <string name="enable_people_lookup_summary">ダイヤル画面で検索しているときに人物のオンラインの検索結果を表示する</string>
+    <string name="enable_reverse_lookup_title">逆引き</string>
+    <string name="enable_reverse_lookup_summary">着信中の不明な番号の人物または場所の情報を検索する</string>
+    <string name="forward_lookup_provider_title">正引き検索プロバイダ</string>
+    <string name="people_lookup_provider_title">人物検索プロバイダ</string>
+    <string name="reverse_lookup_provider_title">逆引きプロバイダ</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
+    <string name="speed_dial_edit_title">スピードダイヤル<xliff:g id="index" example="2">%1$d</xliff:g>を編集</string>
+    <string name="speed_dial_input_hint">番号を入力してください</string>
+    <string name="call_log_show_all_slots">すべてのSIM</string>
+    <string name="call_log_all_calls_header">すべての通話</string>
+    <string name="call_log_blacklist_header">着信拒否した通話のみ</string>
+    <string name="call_log_blocked_empty">着信拒否した通話はありません。</string>
+    <string name="call_log_stats_title">統計</string>
+    <string name="callStatsDetailTitle">通話の統計の詳細</string>
+    <string name="call_stats_incoming">着信: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">発信: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">不在: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">着信拒否: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g> <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">開始日</string>
+    <string name="call_stats_filter_to">終了日</string>
+    <string name="call_stats_filter_picker_title">フィルターの範囲</string>
+    <string name="date_quick_selection">クイック選択</string>
+    <string name="date_qs_currentmonth">今月</string>
+    <string name="date_qs_currentquarter">今四半期</string>
+    <string name="date_qs_currentyear">今年</string>
+    <string name="date_qs_lastweek">先週</string>
+    <string name="date_qs_lastmonth">先月</string>
+    <string name="date_qs_lastquarter">下四半期</string>
+    <string name="date_qs_lastyear">昨年</string>
+    <string name="call_stats_date_filter">時間範囲を調整</string>
+    <string name="call_stats_reset_filter">時間範囲をリセット</string>
+    <string name="call_stats_sort_by_duration">通話時間で並べ替え</string>
+    <string name="call_stats_sort_by_count">通話回数で並べ替え</string>
+    <string name="call_stats_title_for_number">この番号</string>
+    <string name="call_stats_title_of_total">合計のうち</string>
+    <string name="call_stats_title_durations">通話時間</string>
+    <string name="call_stats_title_count">通話回数</string>
+    <string name="call_stats_title_average_duration">平均通話時間</string>
+    <string name="recent_calls_no_items_in_range">指定した期間には通話履歴がありません。</string>
+    <string name="call_recording_category_title">通話の録音</string>
+    <string name="call_recording_format">音声フォーマット</string>
+    <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
+    <string name="speed_dial_settings">スピードダイヤルの設定</string>
+    <string name="speed_dial_not_set">（未設定）</string>
+    <string name="speed_dial_replace">書き換える</string>
+    <string name="speed_dial_delete">削除</string>
+    <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
+    <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
+    <string name="dialog_speed_dial_airplane_mode_message">スピードダイヤルを使用するには、機内モードを OFF にしてください</string>
+    <string name="speed_dial_can_not_be_set">このキーにはスピードダイヤルを設定できません</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="recentIncoming_empty">着信履歴はありません。</string>
+    <string name="recentOutgoing_empty">発信履歴はありません。</string>
+    <string name="recentCalls_empty">通話履歴はありません</string>
+    <string name="calllog_search_hint">通話履歴を検索</string>
+    <string name="no_call_log">通話履歴なし</string>
+    <string name="clear">消去</string>
+    <string name="description_clear_search">検索を消去</string>
+    <string name="video_call_welcome_title"><b>新しいビデオ通話アプリへようこそ</b></string>
+    <string name="video_call_welcome_message">電話で聞き慣れた声を聞くのも良いですが、お互いに顔を合わせて会話できたらもっと良いですよね！リアルタイム（またはFaceTime）接続のために必要な条件は次の通りです。\n 4G LTE または Wi-Fi 接続が必要です。\n 電話をかける相手の端末もビデオ通話に対応している必要があります。\n ビデオ通話は高速データ通信を使用します。\n 音声通話をビデオ通話に変更することもできます。\n\n 詳細は <a>https://support.t-mobile.com/docs/DOC-23574</a> を参照してください。</string>
+    <string name="video_call_welcome_message_repeat">このメッセージを毎回表示する</string>
+    <string name="toast_change_video_call_failed">ビデオ通話に変更できません。番号の形式が間違っています</string>
+    <string name="toast_make_video_call_failed">ビデオ通話の発信ができません。番号の形式が間違っています</string>
+    <string name="overflowBothCallMenuItemText">ビデオ通話に自分を表示する</string>
+    <string name="overflowRXCallMenuItemText">ビデオ通話に自分を表示しない</string>
+    <string name="overflowVOCallMenuItemText">音声通話</string>
+    <string name="video_call">ビデオ通話</string>
+    <string name="call_data_info_label">通話/データ使用タイマー</string>
+    <string name="call_data_info_description">ビデオ通話とデータの使用時間です</string>
+    <string name="alert_call_over_wifi">Wi-Fi を使って発信します。</string>
+    <string name="alert_call_no_cellular_coverage">モバイルネットワークがありません。発信するには Wi-Fi に接続してください。</string>
+    <string name="alert_user_connect_to_wifi_for_call">発信するには Wi-Fi に接続してください。</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">ここをタップすると利用可能なネットワークを表示します</string>
+    <string name="menu_add_to_4g_conference_call">4G グループ通話に追加する</string>
+    <string name="menu_4g_conference_call">4G グループ通話</string>
+    <string name="type_incoming_volte">4G 音声通話着信</string>
+    <string name="type_incoming_video_lte">4G ビデオ通話着信</string>
+    <string name="type_outgoing_volte">4G 音声通話発信</string>
+    <string name="type_outgoing_video_lte">4G ビデオ通話発信</string>
+    <string name="type_missed_volte">不在 4G 音声通話</string>
+    <string name="type_missed_video_lte">不在 4G ビデオ通話</string>
+    <string name="type_incoming_vowifi">Wi-Fi 音声通話着信</string>
+    <string name="type_incoming_video_wifi">Wi-Fi ビデオ通話着信</string>
+    <string name="type_outgoing_vowifi">Wi-Fi 音声通話発信</string>
+    <string name="type_outgoing_video_wifi">Wi-Fi ビデオ通話発信</string>
+    <string name="type_missed_vowifi">不在 Wi-Fi 音声通話</string>
+    <string name="type_missed_video_wifi">不在 Wi-Fi ビデオ通話</string>
+    <string name="lookup_disclaimer">Lookups は情報を収集するために、セキュアなプロトコル (https) 上で外部のウェブサイトにクエリを送信する可能性があります。クエリは相手の電話番号や検索クエリを含むことがあります。</string>
 </resources>

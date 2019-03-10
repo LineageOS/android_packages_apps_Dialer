@@ -17,13 +17,26 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- In-call screen: call failure reason (call denied because call barring is ON on MT side ) -->
-  <!-- In-call screen: status label for an incoming call that is not answered and forwarded  -->
-  <!-- In-call screen: "call type" indication for a forwarded call [CHAR LIMIT=30] -->
-  <!-- In-call screen: status label for a call in the "dialing" state that's waiting for the busy remote side -->
-  <!-- In-call screen: status label for an outgoing call that's routed via a specific
-         provider (e.g. MSIM) and is waiting for the busy remote side -->
-  <!-- In-call screen: status label template for an active call that's routed via a specific
-         provider (e.g. MSIM) -->
-  <!-- In-call screen: status label for a call that is held remotely  -->
+    <string name="callFailed_incoming_cb_enabled">La multi-conferencia tien prohibíes toles llamaes entrantes.</string>
+    <string name="callUnanswered_forwarded">Llamada non respondida y reunviada</string>
+    <string name="incall_call_type_label_forwarded">Llamada esviada</string>
+    <string name="card_title_dialing_waiting">Marcando (esperando\u2026)</string>
+    <string name="calling_via_waiting_template">Llamada al traviés de <xliff:g id="Provider_NAME">%s</xliff:g></string>
+    <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (al traviés de <xliff:g id="provider_name">%2$s</xliff:g>)</string>
+    <string name="card_title_waiting_call">Llamada n\'espera</string>
+    <string name="call_recording_failed_message">Fallu al aniciar la grabación de la llamada</string>
+    <string name="call_recording_file_location">Grabación de llamada guardada en <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Grabar la llamada</string>
+    <string name="onscreenStopCallRecordText">Parar de grabar</string>
+    <string name="recording_time_text">Grabando</string>
+    <string name="recording_warning_title">¿Habilitar grabación de llamada?</string>
+    <string name="recording_warning_text">Avisu: Yes responsable del cumplimientu con cualesquier llei, regulación y regla que s\'aplique al usar la funcionalidá de grabación de llamada y l\'usu o districución d\'eses grabaciones.</string>
+    <string name="call_failed_due_to_validate_number">Nun se puede facer la videollamada, el formatu del númberu nun ye correchu</string>
+    <string name="call_state_dialing">Marcando</string>
+    <string name="call_state_holding">N\'espera</string>
+    <string name="call_state_active">Activa</string>
+    <string name="call_state_unknown">Desconocida</string>
+    <string name="call_state_disconnecting">Desconeutando</string>
+    <string name="call_state_disconnected">Desconeutáu</string>
+    <string name="too_many_recipients">Nun pueden participar más de 6 persones nuna conferencia telefónica en 4G.</string>
 </resources>

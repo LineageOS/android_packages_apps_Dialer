@@ -16,136 +16,111 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Vibrasjon under samtalen</string>
-  <string name="incall_vibrate_outgoing_title">Vibrere på svar</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrere på samtale venter</string>
-  <string name="incall_vibrate_hangup_title">Vibrere på legg på</string>
-  <string name="incall_vibrate_45_title">Vibrere hvert minutt</string>
-  <string name="incall_vibrate_45_summary">Vibrerer på 45 sekunders tiden for å markere hvert minutt under utgående samtale</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Nærliggende steder</string>
-  <string name="people">Folk</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">T9 Tastatursøk</string>
-  <string name="t9_search_input_locale">T9 søke input</string>
-  <string name="t9_search_input_locale_default">Standard</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Telefonnummer oppslag</string>
-  <string name="enable_forward_lookup_title">videresend oppslag</string>
-  <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefon appen</string>
-  <string name="enable_people_lookup_title">Slå opp folk</string>
-  <string name="enable_people_lookup_summary">Vise online resultater for folk når du søker i telefon appen</string>
-  <string name="enable_reverse_lookup_title">Omvendt oppslag</string>
-  <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller sted med ukjent nummer på innkommende samtaler</string>
-  <string name="forward_lookup_provider_title">Plassøketjeneste</string>
-  <string name="people_lookup_provider_title">Personsøketjeneste</string>
-  <string name="reverse_lookup_provider_title">Omvendt oppslag leverandør</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (CN)</string>
-  <string name="speed_dial_edit_title">Endre hurtigoppringing <xliff:g id="index" example="2">%1$d</xliff:g></string>
-  <string name="speed_dial_input_hint">Vennligst angi et nummer</string>
-  <string name="call_log_show_all_slots">Alle SIM-kort</string>
-  <string name="call_log_all_calls_header">Alle samtaler</string>
-  <string name="call_log_blacklist_header">Bare blokkerte samtaler</string>
-  <string name="call_log_blocked_empty">Du har ingen blokkerte anrop.</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistikk</string>
-  <string name="callStatsDetailTitle">Detaljer for samtalestatus</string>
-  <string name="call_stats_incoming">Innkommende: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_outgoing">Utgående: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_missed">Ubesvart: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_blocked">Blokkert: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d </xliff:g>%%</string>
-  <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Startdato</string>
-  <string name="call_stats_filter_to">Sluttdato</string>
-  <string name="call_stats_filter_picker_title">Filtreringsområde</string>
-  <string name="date_quick_selection">Hurtigvalg</string>
-  <string name="date_qs_currentmonth">Gjeldende måned</string>
-  <string name="date_qs_currentquarter">Gjeldende kvartal</string>
-  <string name="date_qs_currentyear">Inneværende år</string>
-  <string name="date_qs_lastweek">Forrige uke</string>
-  <string name="date_qs_lastmonth">Forrige måned</string>
-  <string name="date_qs_lastquarter">Siste kvartal</string>
-  <string name="date_qs_lastyear">I fjor</string>
-  <string name="call_stats_date_filter">Juster tidsområde</string>
-  <string name="call_stats_reset_filter">Tilbakestille tidsområde</string>
-  <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
-  <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
-  <string name="call_stats_title_for_number">Dette nummeret</string>
-  <string name="call_stats_title_of_total">Av totalt</string>
-  <string name="call_stats_title_durations">Samtalevarighet</string>
-  <string name="call_stats_title_count">Antall anrop</string>
-  <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Din anropslogg inneholder ikke noen samtaler innenfor den valgte perioden.</string>
-  <string name="call_recording_category_title">Samtaleinnspilling</string>
-  <string name="call_recording_format">Lydformat</string>
-  <string name="call_playback_no_app_found_toast">Ingen apper kan spille av den valgte innspillingen.</string>
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
-  <string name="speed_dial_not_set">(ikke angitt)</string>
-  <string name="speed_dial_replace">Erstatt</string>
-  <string name="speed_dial_delete">Slett</string>
-  <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
-  <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">For å bruke hurtigoppringing må du skru av flymodus</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="speed_dial_can_not_be_set">Hurtigoppringing kan ikke angis for denne tasten</string>
-  <string name="yes">Ja</string>
-  <string name="no">Nei</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <string name="recentIncoming_empty">Du har ingen innkommende anrop.</string>
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <string name="recentOutgoing_empty">Du har ingen utgående anrop.</string>
-  <!-- Text displayed when the call log is empty. -->
-  <string name="recentCalls_empty">Samtaleloggen din er tom</string>
-  <string name="calllog_search_hint">Søk i samtaleloggen</string>
-  <string name="no_call_log">Ingen samtalelogg</string>
-  <string name="clear">Tøm</string>
-  <string name="description_clear_search">Tøm søk</string>
-  <string name="video_call_welcome_title"><b>Velkommen til den nye Videoanrop-oppringeren</b></string>
-  <string name="video_call_welcome_message">Vi elsker alle å høre den familiestemmen på slutten av linjen, men å snakke ansikt til ansikt er så mye bedre! Her er hva du burde vite for å få i gang dine sanntids (eller FaceTime?) anrop:\n Du må være koblet til et 4G LTE nettverk eller en Wi-Fi kobling\n Enheten du skal ringe må også være videoanrop-kompatibel\n Videoanrop bruker høyhastighetsnettverket ditt\n Du kan også oppgradere et stemmeanrop til et videoanrop\n\n Se <a>https://support.t-mobile.com/docs/DOC-23574</a> for mer informasjon.</string>
-  <string name="video_call_welcome_message_repeat">Vis denne meldingen hver gang</string>
-  <string name="toast_change_video_call_failed">Kunne ikke bytte til videoanrop, feil nummer format</string>
-  <string name="toast_make_video_call_failed">Kunne ikke sette opp videoanrop, feil nummer format</string>
-  <!-- Add for enhance videocall ui -->
-  <string name="overflowBothCallMenuItemText">Videoanrop, vis meg</string>
-  <string name="overflowRXCallMenuItemText">Videoanrop, skjul meg</string>
-  <string name="overflowVOCallMenuItemText">Taleanrop</string>
-  <string name="video_call">Videoanrop</string>
-  <string name="call_data_info_label">Taleanrop og data tidsstatistikk</string>
-  <string name="call_data_info_description">Hvor mye tid brukt på taleanrop og på bruk av data</string>
-  <string name="alert_call_over_wifi">Anrop gjøres over Wi-Fi.</string>
-  <string name="alert_call_no_cellular_coverage">Ingen mobilnettverk tilgjengelig. Koble til tilgjengelige Wi-Fi til å ringe.</string>
-  <string name="alert_user_connect_to_wifi_for_call">Koble til Wi-Fi for å ringe.</string>
-  <string name="alert_user_connect_to_wifi_for_call_text">Trykk her for å se tilgjengelige nettverk</string>
-  <string name="menu_add_to_4g_conference_call">Legg til i 4G konferanseanrop</string>
-  <string name="menu_4g_conference_call">4G konferanseanrop</string>
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_volte">Innkommende 4G taleanrop</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_lte">Innkommende 4G videoanrop</string>
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_volte">Utgående 4G taleanrop</string>
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_lte">Utgående 4G videoanrop</string>
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_volte">Tapt 4G taleanrop</string>
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_lte">Tapt 4G videoanrop</string>
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_vowifi">Innkommende Wi-Fi taleanrop</string>
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_incoming_video_wifi">Innkommende Wi-Fi videoanrop</string>
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_vowifi">Utgående Wi-Fi taleanrop</string>
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_outgoing_video_wifi">Utgående Wi-Fi videoanrop</string>
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_vowifi">Tapt Wi-Fi taleanrop</string>
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <string name="type_missed_video_wifi">Tapt Wi-Fi videoanrop</string>
-  <!-- Disclaimer -->
+    <string name="incall_vibration_category_title">Vibrasjon under samtalen</string>
+    <string name="incall_vibrate_outgoing_title">Vibrere på svar</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrere på samtale venter</string>
+    <string name="incall_vibrate_hangup_title">Vibrere på legg på</string>
+    <string name="incall_vibrate_45_title">Vibrere hvert minutt</string>
+    <string name="incall_vibrate_45_summary">Vibrerer på 45 sekunders tiden for å markere hvert minutt under utgående samtale</string>
+    <string name="nearby_places">Nærliggende steder</string>
+    <string name="people">Folk</string>
+    <string name="preference_category_t9_dialpad_search">T9 Tastatursøk</string>
+    <string name="t9_search_input_locale">T9 søke input</string>
+    <string name="t9_search_input_locale_default">Standard</string>
+    <string name="lookup_settings_label">Telefonnummer oppslag</string>
+    <string name="enable_forward_lookup_title">videresend oppslag</string>
+    <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefon appen</string>
+    <string name="enable_people_lookup_title">Slå opp folk</string>
+    <string name="enable_people_lookup_summary">Vise online resultater for folk når du søker i telefon appen</string>
+    <string name="enable_reverse_lookup_title">Omvendt oppslag</string>
+    <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller sted med ukjent nummer på innkommende samtaler</string>
+    <string name="forward_lookup_provider_title">Plassøketjeneste</string>
+    <string name="people_lookup_provider_title">Personsøketjeneste</string>
+    <string name="reverse_lookup_provider_title">Omvendt oppslag leverandør</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (CN)</string>
+    <string name="speed_dial_edit_title">Endre hurtigoppringing <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Vennligst angi et nummer</string>
+    <string name="call_log_show_all_slots">Alle SIM-kort</string>
+    <string name="call_log_all_calls_header">Alle samtaler</string>
+    <string name="call_log_blacklist_header">Bare blokkerte samtaler</string>
+    <string name="call_log_blocked_empty">Du har ingen blokkerte anrop.</string>
+    <string name="call_log_stats_title">Statistikk</string>
+    <string name="callStatsDetailTitle">Detaljer for samtalestatus</string>
+    <string name="call_stats_incoming">Innkommende: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_outgoing">Utgående: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_missed">Ubesvart: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_blocked">Blokkert: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d </xliff:g>%%</string>
+    <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Startdato</string>
+    <string name="call_stats_filter_to">Sluttdato</string>
+    <string name="call_stats_filter_picker_title">Filtreringsområde</string>
+    <string name="date_quick_selection">Hurtigvalg</string>
+    <string name="date_qs_currentmonth">Gjeldende måned</string>
+    <string name="date_qs_currentquarter">Gjeldende kvartal</string>
+    <string name="date_qs_currentyear">Inneværende år</string>
+    <string name="date_qs_lastweek">Forrige uke</string>
+    <string name="date_qs_lastmonth">Forrige måned</string>
+    <string name="date_qs_lastquarter">Siste kvartal</string>
+    <string name="date_qs_lastyear">I fjor</string>
+    <string name="call_stats_date_filter">Juster tidsområde</string>
+    <string name="call_stats_reset_filter">Tilbakestille tidsområde</string>
+    <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
+    <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
+    <string name="call_stats_title_for_number">Dette nummeret</string>
+    <string name="call_stats_title_of_total">Av totalt</string>
+    <string name="call_stats_title_durations">Samtalevarighet</string>
+    <string name="call_stats_title_count">Antall anrop</string>
+    <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
+    <string name="recent_calls_no_items_in_range">Din anropslogg inneholder ikke noen samtaler innenfor den valgte perioden.</string>
+    <string name="call_recording_category_title">Samtaleinnspilling</string>
+    <string name="call_recording_format">Lydformat</string>
+    <string name="call_playback_no_app_found_toast">Ingen apper kan spille av den valgte innspillingen.</string>
+    <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
+    <string name="speed_dial_not_set">(ikke angitt)</string>
+    <string name="speed_dial_replace">Erstatt</string>
+    <string name="speed_dial_delete">Slett</string>
+    <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
+    <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">For å bruke hurtigoppringing må du skru av flymodus</string>
+    <string name="speed_dial_can_not_be_set">Hurtigoppringing kan ikke angis for denne tasten</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nei</string>
+    <string name="recentIncoming_empty">Du har ingen innkommende anrop.</string>
+    <string name="recentOutgoing_empty">Du har ingen utgående anrop.</string>
+    <string name="recentCalls_empty">Samtaleloggen din er tom</string>
+    <string name="calllog_search_hint">Søk i samtaleloggen</string>
+    <string name="no_call_log">Ingen samtalelogg</string>
+    <string name="clear">Tøm</string>
+    <string name="description_clear_search">Tøm søk</string>
+    <string name="video_call_welcome_title"><b>Velkommen til den nye Videoanrop-oppringeren</b></string>
+    <string name="video_call_welcome_message">Vi elsker alle å høre den familiestemmen på slutten av linjen, men å snakke ansikt til ansikt er så mye bedre! Her er hva du burde vite for å få i gang dine sanntids (eller FaceTime?) anrop:\n Du må være koblet til et 4G LTE nettverk eller en Wi-Fi kobling\n Enheten du skal ringe må også være videoanrop-kompatibel\n Videoanrop bruker høyhastighetsnettverket ditt\n Du kan også oppgradere et stemmeanrop til et videoanrop\n\n Se <a>https://support.t-mobile.com/docs/DOC-23574</a> for mer informasjon.</string>
+    <string name="video_call_welcome_message_repeat">Vis denne meldingen hver gang</string>
+    <string name="toast_change_video_call_failed">Kunne ikke bytte til videoanrop, feil nummer format</string>
+    <string name="toast_make_video_call_failed">Kunne ikke sette opp videoanrop, feil nummer format</string>
+    <string name="overflowBothCallMenuItemText">Videoanrop, vis meg</string>
+    <string name="overflowRXCallMenuItemText">Videoanrop, skjul meg</string>
+    <string name="overflowVOCallMenuItemText">Taleanrop</string>
+    <string name="video_call">Videoanrop</string>
+    <string name="call_data_info_label">Taleanrop og data tidsstatistikk</string>
+    <string name="call_data_info_description">Hvor mye tid brukt på taleanrop og på bruk av data</string>
+    <string name="alert_call_over_wifi">Anrop gjøres over Wi-Fi.</string>
+    <string name="alert_call_no_cellular_coverage">Ingen mobilnettverk tilgjengelig. Koble til tilgjengelige Wi-Fi til å ringe.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Koble til Wi-Fi for å ringe.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Trykk her for å se tilgjengelige nettverk</string>
+    <string name="menu_add_to_4g_conference_call">Legg til i 4G konferanseanrop</string>
+    <string name="menu_4g_conference_call">4G konferanseanrop</string>
+    <string name="type_incoming_volte">Innkommende 4G taleanrop</string>
+    <string name="type_incoming_video_lte">Innkommende 4G videoanrop</string>
+    <string name="type_outgoing_volte">Utgående 4G taleanrop</string>
+    <string name="type_outgoing_video_lte">Utgående 4G videoanrop</string>
+    <string name="type_missed_volte">Tapt 4G taleanrop</string>
+    <string name="type_missed_video_lte">Tapt 4G videoanrop</string>
+    <string name="type_incoming_vowifi">Innkommende Wi-Fi taleanrop</string>
+    <string name="type_incoming_video_wifi">Innkommende Wi-Fi videoanrop</string>
+    <string name="type_outgoing_vowifi">Utgående Wi-Fi taleanrop</string>
+    <string name="type_outgoing_video_wifi">Utgående Wi-Fi videoanrop</string>
+    <string name="type_missed_vowifi">Tapt Wi-Fi taleanrop</string>
+    <string name="type_missed_video_wifi">Tapt Wi-Fi videoanrop</string>
 </resources>

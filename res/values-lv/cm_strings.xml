@@ -16,79 +16,54 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="incall_vibration_category_title">Ienākošā zvana vibrācija</string>
-  <string name="incall_vibrate_outgoing_title">Vibrēt, atbildot</string>
-  <string name="incall_vibrate_hangup_title">Vibrēt, pārtraucot</string>
-  <string name="incall_vibrate_45_title">Vibrēt katru minūti</string>
-  <string name="incall_vibrate_45_summary">Zvana laikā vibrēt katras minūtes 45. sekundē</string>
-  <!-- Forward lookup -->
-  <string name="nearby_places">Tuvākās vietas</string>
-  <string name="people">Cilvēki</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Numuru tastatūras T9 meklēšana</string>
-  <string name="t9_search_input_locale">T9 meklēšanas ievade</string>
-  <string name="t9_search_input_locale_default">Noklusētais</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Telefona numura uzmeklēšana</string>
-  <string name="enable_forward_lookup_title">Pārsūtīšanas uzmeklēšana</string>
-  <string name="enable_forward_lookup_summary">Meklējot numuru sastādītājā, parādīt tuvākās vietas</string>
-  <string name="enable_people_lookup_title">Cilvēku uzmeklēšana</string>
-  <string name="enable_people_lookup_summary">Meklējot numuru sastādītājā, rādīt cilvēku tiešsaistes rezultātus</string>
-  <string name="enable_reverse_lookup_title">Apvērstā meklēšana</string>
-  <string name="enable_reverse_lookup_summary">Ienākošajiem zvaniem no nezināmiem numuriem uzmeklēt informāciju par personu vai vietu</string>
-  <string name="forward_lookup_provider_title">Tiešās uzmeklēšanas piegādātājs</string>
-  <string name="people_lookup_provider_title">Cilvēku uzmeklēšanas piegādātājs</string>
-  <string name="reverse_lookup_provider_title">Apvērstās uzmeklēšanas piegādātājs</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Ķīnas (CN)</string>
-  <string name="call_log_show_all_slots">Visas SIM kartes</string>
-  <string name="call_log_all_calls_header">Visi zvani</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistika</string>
-  <string name="callStatsDetailTitle">Zvanu statistikas detaļas</string>
-  <string name="call_stats_header_total">Kopā: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Kopā: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Sākuma datums</string>
-  <string name="call_stats_filter_to">Beigu datums</string>
-  <string name="call_stats_filter_picker_title">Filtra diapazons</string>
-  <string name="date_quick_selection">Ātrā izvēle</string>
-  <string name="date_qs_currentmonth">Tekošais mēnesis</string>
-  <string name="date_qs_currentquarter">Tekošais ceturksnis</string>
-  <string name="date_qs_currentyear">Tekošais gads</string>
-  <string name="date_qs_lastweek">Iepriekšējā nedēļa</string>
-  <string name="date_qs_lastmonth">Iepriekšējais mēnesis</string>
-  <string name="date_qs_lastquarter">Iepriekšējais ceturksnis</string>
-  <string name="date_qs_lastyear">Iepriekšējais gads</string>
-  <string name="call_stats_date_filter">Pielāgot laika diapazonu</string>
-  <string name="call_stats_reset_filter">Atstatīt laika diapazonu</string>
-  <string name="call_stats_sort_by_duration">Kārtot pēc zvana ilguma</string>
-  <string name="call_stats_sort_by_count">Kārtot pēc zvanu skaita</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <!-- Speed Dial -->
-  <string name="speed_dial_settings">Ātrās zvanīšanas iestatījumi</string>
-  <string name="speed_dial_not_set">(nav iestatīts)</string>
-  <string name="speed_dial_replace">Aizstāt</string>
-  <string name="speed_dial_delete">Dzēst</string>
-  <string name="speed_dial_unassigned_dialog_title">Neiestatīts taustiņš</string>
-  <string name="speed_dial_unassigned_dialog_message">Šim taustiņam \'<xliff:g id="number">%s</xliff:g>\' nav piesaistīts ātrais zvans. Vai piesaistīt tagad?</string>
-  <!-- Speed Dial can not be set for the key used for Emergency number-->
-  <string name="yes">Jā</string>
-  <string name="no">Nē</string>
-  <!-- Text displayed when the list of incoming calls is empty -->
-  <!-- Text displayed when the list of outgoing calls is empty -->
-  <!-- Text displayed when the call log is empty. -->
-  <!-- Add for enhance videocall ui -->
-  <!-- Title for incoming 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed 4G video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for incoming wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for outgoing wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi voice call in call details screen [CHAR LIMIT=60] -->
-  <!-- Title for missed wifi video call in call details screen [CHAR LIMIT=60] -->
-  <!-- Disclaimer -->
+    <string name="incall_vibration_category_title">Ienākošā zvana vibrācija</string>
+    <string name="incall_vibrate_outgoing_title">Vibrēt, atbildot</string>
+    <string name="incall_vibrate_hangup_title">Vibrēt, pārtraucot</string>
+    <string name="incall_vibrate_45_title">Vibrēt katru minūti</string>
+    <string name="incall_vibrate_45_summary">Zvana laikā vibrēt katras minūtes 45. sekundē</string>
+    <string name="nearby_places">Tuvākās vietas</string>
+    <string name="people">Cilvēki</string>
+    <string name="preference_category_t9_dialpad_search">Numuru tastatūras T9 meklēšana</string>
+    <string name="t9_search_input_locale">T9 meklēšanas ievade</string>
+    <string name="t9_search_input_locale_default">Noklusētais</string>
+    <string name="lookup_settings_label">Telefona numura uzmeklēšana</string>
+    <string name="enable_forward_lookup_title">Pārsūtīšanas uzmeklēšana</string>
+    <string name="enable_forward_lookup_summary">Meklējot numuru sastādītājā, parādīt tuvākās vietas</string>
+    <string name="enable_people_lookup_title">Cilvēku uzmeklēšana</string>
+    <string name="enable_people_lookup_summary">Meklējot numuru sastādītājā, rādīt cilvēku tiešsaistes rezultātus</string>
+    <string name="enable_reverse_lookup_title">Apvērstā meklēšana</string>
+    <string name="enable_reverse_lookup_summary">Ienākošajiem zvaniem no nezināmiem numuriem uzmeklēt informāciju par personu vai vietu</string>
+    <string name="forward_lookup_provider_title">Tiešās uzmeklēšanas piegādātājs</string>
+    <string name="people_lookup_provider_title">Cilvēku uzmeklēšanas piegādātājs</string>
+    <string name="reverse_lookup_provider_title">Apvērstās uzmeklēšanas piegādātājs</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Ķīnas (CN)</string>
+    <string name="call_log_show_all_slots">Visas SIM kartes</string>
+    <string name="call_log_all_calls_header">Visi zvani</string>
+    <string name="call_log_stats_title">Statistika</string>
+    <string name="callStatsDetailTitle">Zvanu statistikas detaļas</string>
+    <string name="call_stats_header_total">Kopā: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Kopā: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Sākuma datums</string>
+    <string name="call_stats_filter_to">Beigu datums</string>
+    <string name="call_stats_filter_picker_title">Filtra diapazons</string>
+    <string name="date_quick_selection">Ātrā izvēle</string>
+    <string name="date_qs_currentmonth">Tekošais mēnesis</string>
+    <string name="date_qs_currentquarter">Tekošais ceturksnis</string>
+    <string name="date_qs_currentyear">Tekošais gads</string>
+    <string name="date_qs_lastweek">Iepriekšējā nedēļa</string>
+    <string name="date_qs_lastmonth">Iepriekšējais mēnesis</string>
+    <string name="date_qs_lastquarter">Iepriekšējais ceturksnis</string>
+    <string name="date_qs_lastyear">Iepriekšējais gads</string>
+    <string name="call_stats_date_filter">Pielāgot laika diapazonu</string>
+    <string name="call_stats_reset_filter">Atstatīt laika diapazonu</string>
+    <string name="call_stats_sort_by_duration">Kārtot pēc zvana ilguma</string>
+    <string name="call_stats_sort_by_count">Kārtot pēc zvanu skaita</string>
+    <string name="speed_dial_settings">Ātrās zvanīšanas iestatījumi</string>
+    <string name="speed_dial_not_set">(nav iestatīts)</string>
+    <string name="speed_dial_replace">Aizstāt</string>
+    <string name="speed_dial_delete">Dzēst</string>
+    <string name="speed_dial_unassigned_dialog_title">Neiestatīts taustiņš</string>
+    <string name="speed_dial_unassigned_dialog_message">Šim taustiņam \'<xliff:g id="number">%s</xliff:g>\' nav piesaistīts ātrais zvans. Vai piesaistīt tagad?</string>
+    <string name="yes">Jā</string>
+    <string name="no">Nē</string>
 </resources>

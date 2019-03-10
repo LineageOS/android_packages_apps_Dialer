@@ -16,16 +16,16 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="other">%d시간</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="other">%d분</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="other">%d초</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="other">%d건</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="other">%d시간</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="other">%d분</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="other">%d초</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="other">%d건</item>
+    </plurals>
 </resources>
