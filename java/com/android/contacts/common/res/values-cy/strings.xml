@@ -16,314 +16,148 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Action string for calling a custom phone number -->
   <string name="call_custom">Galw
         <xliff:g id="custom">%s</xliff:g>
     </string>
-  <!-- Action string for calling a home phone number -->
   <string name="call_home">Galw cartref</string>
-  <!-- Action string for calling a mobile phone number -->
   <string name="call_mobile">Galw symudol</string>
-  <!-- Action string for calling a work phone number -->
   <string name="call_work">Galw gwaith</string>
-  <!-- Action string for calling a work fax phone number -->
   <string name="call_fax_work">Galw ffacs gwaith</string>
-  <!-- Action string for calling a home fax phone number -->
   <string name="call_fax_home">Galw ffacs cartref</string>
-  <!-- Action string for calling a pager phone number -->
   <string name="call_pager">Galw peiriant galw</string>
-  <!-- Action string for calling an other phone number -->
   <string name="call_other">Galw</string>
-  <!-- Action string for calling a callback number -->
   <string name="call_callback">Galw rhif galw nôl</string>
-  <!-- Action string for calling a car phone number -->
   <string name="call_car">Galw car</string>
-  <!-- Action string for calling a company main phone number -->
   <string name="call_company_main">Galw prif rif gwaith</string>
-  <!-- Action string for calling a ISDN phone number -->
   <string name="call_isdn">Galw ISDN</string>
-  <!-- Action string for calling a main phone number -->
   <string name="call_main">Galw prif rif</string>
-  <!-- Action string for calling an other fax phone number -->
   <string name="call_other_fax">Galw rhif ffacs</string>
-  <!-- Action string for calling a radio phone number -->
   <string name="call_radio">Galw rhif radio</string>
-  <!-- Action string for calling a Telex phone number -->
   <string name="call_telex">Galw rhif telex</string>
-  <!-- Action string for calling a TTY/TDD phone number -->
   <string name="call_tty_tdd">Galw rhif TTY/TDD</string>
-  <!-- Action string for calling a work mobile phone number -->
   <string name="call_work_mobile">Galw symudol gwaith</string>
-  <!-- Action string for calling a work pager phone number -->
   <string name="call_work_pager">Galw peiriant galw gwaith</string>
-  <!-- Action string for calling an assistant phone number -->
   <string name="call_assistant">Galw
         <xliff:g id="assistant">%s</xliff:g>
     </string>
-  <!-- Action string for calling a MMS phone number -->
   <string name="call_mms">Galw rhif MMS</string>
-  <!-- Action string for sending an SMS to a custom phone number -->
   <string name="sms_custom">Tecstio
         <xliff:g id="custom">%s</xliff:g>
     </string>
-  <!-- Action string for sending an SMS to a home phone number -->
   <string name="sms_home">Tecstio cartref</string>
-  <!-- Action string for sending an SMS to a mobile phone number -->
   <string name="sms_mobile">Neges destun i symudol</string>
-  <!-- Action string for sending an SMS to a work phone number -->
   <string name="sms_work">Tecstio gwaith</string>
-  <!-- Action string for sending an SMS to a work fax phone number -->
   <string name="sms_fax_work">Tecstio ffacs gwaith</string>
-  <!-- Action string for sending an SMS to a home fax phone number -->
   <string name="sms_fax_home">Tecstio ffacs cartref</string>
-  <!-- Action string for sending an SMS to a pager phone number -->
   <string name="sms_pager">Tecstio peiriant galw</string>
-  <!-- Action string for sending an SMS to an other phone number -->
   <string name="sms_other">Tecstio</string>
-  <!-- Action string for sending an SMS to a callback number -->
   <string name="sms_callback">Neges destun â chais i alw nôl</string>
-  <!-- Action string for sending an SMS to a car phone number -->
   <string name="sms_car">Tecstio car</string>
-  <!-- Action string for sending an SMS to a company main phone number -->
   <string name="sms_company_main">Neges destun at brif rif gwmni</string>
-  <!-- Action string for sending an SMS to a ISDN phone number -->
   <string name="sms_isdn">Tecstio ISDN</string>
-  <!-- Action string for sending an SMS to a main phone number -->
   <string name="sms_main">Tecstio prif rif</string>
-  <!-- Action string for sending an SMS to an other fax phone number -->
   <string name="sms_other_fax">Tecstio rhif ffacs</string>
-  <!-- Action string for sending an SMS to a radio phone number -->
   <string name="sms_radio">Tecstio rhif radio</string>
-  <!-- Action string for sending an SMS to a Telex phone number -->
   <string name="sms_telex">Tecstio rhif telex</string>
-  <!-- Action string for sending an SMS to a TTY/TDD phone number -->
   <string name="sms_tty_tdd">Neges destun at rif TTY/TDD</string>
-  <!-- Action string for sending an SMS to a work mobile phone number -->
   <string name="sms_work_mobile">Neges destun at rif symudol gwaith</string>
-  <!-- Action string for sending an SMS to a work pager phone number -->
   <string name="sms_work_pager">Neges destun at beiriant galw gwaith</string>
-  <!-- Action string for sending an SMS to an assistant phone number -->
   <string name="sms_assistant">Neges destun at <xliff:g id="assistant">%s</xliff:g>
     </string>
-  <!-- Action string for sending an SMS to a MMS phone number -->
   <string name="sms_mms">Tecstio rhif MMS</string>
-  <!-- Title of the confirmation dialog for clearing frequents. [CHAR LIMIT=37] -->
   <string name="clearFrequentsConfirmation_title">Clirio\'r cysylltiadau y cysylltir â nhw\'n aml?</string>
-  <!-- Confirmation dialog for clearing frequents. [CHAR LIMIT=NONE] -->
   <string name="clearFrequentsConfirmation">Mi fydd hyn yn clirio\'r rhestr o gysylltiadau rwyt mewn cyswllt gyda nhw amlach o\'r rhestr yn yr apiau Cysylltiadau a Ffôn. Mi fydd hefyd yn gorfodi apiau e-bost i ail-ddysgu dy ddulliau cyfeirio atynt.    </string>
-  <!-- Title of the "Clearing frequently contacted" progress-dialog [CHAR LIMIT=35] -->
   <string name="clearFrequentsProgress_title">Yn clirio\'r cysylltiadau y cysylltir â nhw\'n aml\u2026</string>
-  <!--  Used to display as default status when the contact is available for chat [CHAR LIMIT=19] -->
   <string name="status_available">Ar gael</string>
-  <!--  Used to display as default status when the contact is away or idle for chat [CHAR LIMIT=19] -->
   <string name="status_away">I ffwrdd</string>
-  <!--  Used to display as default status when the contact is busy or Do not disturb for chat [CHAR LIMIT=19] -->
   <string name="status_busy">Yn brysur</string>
-  <!-- Directory partition name (also exists in contacts) -->
   <string name="contactsList">Cysylltiadau</string>
-  <!-- Directory partition name for p13n suggestions -->
   <string name="contact_suggestions">Awgrymiadau Gorau</string>
-  <!-- The name of the invisible local contact directory -->
   <string name="local_invisible_directory">Arall</string>
-  <!-- The label in section header in the contact list for a contact directory [CHAR LIMIT=128] -->
   <string name="directory_search_label">Cyfeiriadur</string>
-  <!-- The label in section header in the contact list for a work contact directory [CHAR LIMIT=128] -->
   <string name="directory_search_label_work">Cyfeiriadur gwaith</string>
-  <!-- The label in section header in the contact list for a local contacts [CHAR LIMIT=128] -->
   <string name="local_search_label">Pob cyswllt</string>
-  <!-- The label in section header in the contact list for a local suggested contacts [CHAR LIMIT=128] -->
   <string name="local_suggestions_search_label">Awgrymiadau</string>
-  <!-- String describing the text on the header of the profile contact in the contacts list
-       This may be programatically capitalized. [CHAR LIMIT=20] -->
   <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Fi</string>
-  <!-- Shown as the display name for a person when the name is missing or unknown. [CHAR LIMIT=18]-->
   <string name="missing_name">(Dim enw)</string>
-  <!-- String describing a contact picture that introduces users to the contact detail screen.
-
-     Used by AccessibilityService to announce the purpose of the button.
-
-     [CHAR LIMIT=NONE]
-  -->
   <string msgid="2795575601596468581" name="description_view_contact_detail">Gweld y cyswllt</string>
-  <!-- Contact list filter selection indicating that the list shows all contacts with phone numbers [CHAR LIMIT=64] -->
   <string name="list_filter_phones">Pob cyswllt gyda rhif ffôn</string>
-  <!-- Contact list filter selection indicating that the list shows all work contacts with phone numbers [CHAR LIMIT=64] -->
   <string name="list_filter_phones_work">Cysylltiadau proffil gwaith</string>
-  <!-- Button to view the updates from the current group on the group detail page [CHAR LIMIT=25] -->
   <string name="view_updates_from_group">Gweld diweddariadau</string>
-  <!-- Title for data source when creating or editing a contact that doesn't
-       belong to a specific account.  This contact will only exist on the device
-       and will not be synced. -->
   <string name="account_phone">Dyfais yn unig, heb gysoni</string>
-  <!-- Header that expands to list all name types when editing a structured name of a contact
-       [CHAR LIMIT=20] -->
   <string name="nameLabelsGroup">Enw</string>
-  <!-- Header that expands to list all nickname types when editing a nickname of a contact
-       [CHAR LIMIT=20] -->
   <string name="nicknameLabelsGroup">Llysenw</string>
-  <!-- Field title for the full name of a contact [CHAR LIMIT=64]-->
   <string name="full_name">Enw</string>
-  <!-- Field title for the given name of a contact -->
   <string name="name_given">Enw cyntaf</string>
-  <!-- Field title for the family name of a contact -->
   <string name="name_family">Cyfenw</string>
-  <!-- Field title for the prefix name of a contact -->
   <string name="name_prefix">Rhagddodiaid enw</string>
-  <!-- Field title for the middle name of a contact -->
   <string name="name_middle">Enw canol</string>
-  <!-- Field title for the suffix name of a contact -->
   <string name="name_suffix">Ôl-ddodiad enw</string>
-  <!-- Field title for the phonetic name of a contact [CHAR LIMIT=64]-->
   <string name="name_phonetic">Enw\'n ffonetig</string>
-  <!-- Field title for the phonetic given name of a contact -->
   <string name="name_phonetic_given">Enw cyntaf yn ffonetig</string>
-  <!-- Field title for the phonetic middle name of a contact -->
   <string name="name_phonetic_middle">Enw canol yn ffonetig</string>
-  <!-- Field title for the phonetic family name of a contact -->
   <string name="name_phonetic_family">Cyfenw yn ffonetig</string>
-  <!-- Header that expands to list all of the types of phone numbers when editing or creating a
-       phone number for a contact [CHAR LIMIT=20] -->
   <string name="phoneLabelsGroup">Ffôn</string>
-  <!-- Header that expands to list all of the types of email addresses when editing or creating
-       an email address for a contact [CHAR LIMIT=20] -->
   <string name="emailLabelsGroup">Ebost</string>
-  <!-- Header that expands to list all of the types of postal addresses when editing or creating
-       an postal address for a contact [CHAR LIMIT=20] -->
   <string name="postalLabelsGroup">Cyfeiriad</string>
-  <!-- Header that expands to list all of the types of IM account when editing or creating an IM
-       account for a contact [CHAR LIMIT=20] -->
   <string name="imLabelsGroup">IM</string>
-  <!-- Header that expands to list all organization types when editing an organization of a
-       contact [CHAR LIMIT=20] -->
   <string name="organizationLabelsGroup">Sefydliad</string>
-  <!-- Header for the list of all relationships for a contact [CHAR LIMIT=20] -->
   <string name="relationLabelsGroup">Perthynas</string>
-  <!-- Header that expands to list all event types when editing an event of a contact
-       [CHAR LIMIT=20] -->
   <string name="eventLabelsGroup">Dyddiad arbennig</string>
-  <!-- Generic action string for text messaging a contact. Used by AccessibilityService to
-       announce the purpose of the view. [CHAR LIMIT=NONE] -->
   <string name="sms">Neges destun</string>
-  <!-- Field title for the full postal address of a contact [CHAR LIMIT=64]-->
   <string name="postal_address">Cyfeiriad</string>
-  <!-- Hint text for the organization name when editing -->
   <string name="ghostData_company">Cwmni</string>
-  <!-- Hint text for the organization title when editing -->
   <string name="ghostData_title">Teitl</string>
-  <!-- The label describing the Notes field of a contact. This field allows free form text entry
-       about a contact -->
   <string name="label_notes">Nodiadau</string>
-  <!-- The label describing the SIP address field of a contact. [CHAR LIMIT=20] -->
   <string name="label_sip_address">SIP</string>
-  <!-- Header that expands to list all website types when editing a website of a contact
-       [CHAR LIMIT=20] -->
   <string name="websiteLabelsGroup">Gwefan</string>
-  <!-- Header for the list of all groups for a contact [CHAR LIMIT=20] -->
   <string name="groupsLabel">Grwpiau</string>
-  <!-- Action string for sending an email to a home email address -->
   <string name="email_home">Ebost i gartref</string>
-  <!-- Action string for sending an email to a mobile email address -->
   <string name="email_mobile">Ebost at symudol</string>
-  <!-- Action string for sending an email to a work email address -->
   <string name="email_work">Ebost i gwaith</string>
-  <!-- Action string for sending an email to an other email address -->
   <string name="email_other">Anfon ebost</string>
-  <!-- Action string for sending an email to a custom email address -->
   <string name="email_custom">Anfon ebost at <xliff:g id="custom">%s</xliff:g></string>
-  <!-- Generic action string for sending an email -->
   <string name="email">Anfon ebost</string>
-  <!-- Field title for the street of a structured postal address of a contact -->
   <string name="postal_street">Stryd/Ffordd/Heol</string>
-  <!-- Field title for the city of a structured postal address of a contact -->
   <string name="postal_city">Tref/Dinas</string>
-  <!-- Field title for the region, or state, of a structured postal address of a contact -->
   <string name="postal_region">Sir/Talaith</string>
-  <!-- Field title for the postal code of a structured postal address of a contact -->
   <string name="postal_postcode">Cod post</string>
-  <!-- Field title for the country of a structured postal address of a contact -->
   <string name="postal_country">Gwlad</string>
-  <!-- Action string for viewing a home postal address -->
   <string name="map_home">Gweld cyfeiriad cartref</string>
-  <!-- Action string for viewing a work postal address -->
   <string name="map_work">Gweld cyfeiriad gwaith</string>
-  <!-- Action string for viewing an other postal address -->
   <string name="map_other">Gweld cyfeiriad</string>
-  <!-- Action string for viewing a custom postal address -->
   <string name="map_custom">Gweld cyfeiriad <xliff:g id="custom">%s</xliff:g></string>
-  <!-- Action string for starting an IM chat with the AIM protocol -->
   <string name="chat_aim">Sgwrsio gydag AIM</string>
-  <!-- Action string for starting an IM chat with the MSN or Windows Live protocol -->
   <string name="chat_msn">Sgwrsio gyda Windows Live</string>
-  <!-- Action string for starting an IM chat with the Yahoo protocol -->
   <string name="chat_yahoo">Sgwrsio gyda Yahoo</string>
-  <!-- Action string for starting an IM chat with the Skype protocol -->
   <string name="chat_skype">Sgwrsio gyda Skype</string>
-  <!-- Action string for starting an IM chat with the QQ protocol -->
   <string name="chat_qq">Sgwrsio gyda QQ</string>
-  <!-- Action string for starting an IM chat with the Google Talk protocol -->
   <string name="chat_gtalk">Sgwrsio gyda Google Talk</string>
-  <!-- Action string for starting an IM chat with the ICQ protocol -->
   <string name="chat_icq">Sgwrsio gydag ICQ</string>
-  <!-- Action string for starting an IM chat with the Jabber protocol -->
   <string name="chat_jabber">Sgwrsio gyda Jabber</string>
-  <!-- Generic action string for starting an IM chat -->
   <string name="chat">Sgwrsio</string>
-  <!-- Contact list filter label indicating that the list is showing all available accounts [CHAR LIMIT=64] -->
   <string name="list_filter_all_accounts">Pob cyswllt</string>
-  <!-- Displayed at the top of the contacts showing the account filter selected  [CHAR LIMIT=64] -->
   <string name="listAllContactsInAccount">Cysylltiadau yn <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
-  <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=64] -->
   <string name="listCustomView">Cysylltiadau mewn golwg addasedig</string>
-  <!-- Displayed at the top of the contacts showing single contact. [CHAR LIMIT=64] -->
   <string name="listSingleContact">Cyswllt sengl</string>
-  <!-- Contact preferences related strings -->
-  <!-- Label of the "sort by" display option -->
   <string name="display_options_sort_list_by">Trefnu yn ôl</string>
-  <!-- An allowable value for the "sort list by" contact display option  -->
   <string name="display_options_sort_by_given_name">Enw cyntaf</string>
-  <!-- An allowable value for the "sort list by" contact display option  -->
   <string name="display_options_sort_by_family_name">Cyfenw</string>
-  <!-- Label of the "name format" display option [CHAR LIMIT=64]-->
   <string name="display_options_view_names_as">Dangos enwau</string>
-  <!-- An allowable value for the "view names as" contact display option  -->
   <string name="display_options_view_given_name_first">Enwau cyntaf yn gyntaf</string>
-  <!-- An allowable value for the "view names as" contact display option  -->
   <string name="display_options_view_family_name_first">Cyfenw yn gyntaf</string>
-  <!--  The menu item to clear frequents [CHAR LIMIT=30] -->
   <string name="menu_clear_frequents">Clirio rhestr galw\'n aml</string>
-  <!-- Content description for the fake action menu up button as used
-   inside search. [CHAR LIMIT=NONE] -->
   <string name="action_menu_back_from_search">stopio chwilio</string>
-  <!--  String describing the icon used to clear the search field -->
   <string name="description_clear_search">Clirio\'r chwiliad</string>
-  <!-- The font-family to use for the text inside the searchbox. -->
-  <!-- Title for Select Account Dialog [CHAR LIMIT=30] -->
   <string name="select_account_dialog_title">Cyfrif</string>
-  <!-- Label for the check box to toggle default sim card setting [CHAR LIMIT=35]-->
   <string name="set_default_account">Defnyddio hwn bob tro ar gyfer galwadau</string>
-  <!-- Title for dialog to select Phone Account for outgoing call.  [CHAR LIMIT=40] -->
   <string name="select_phone_account_for_calls">Galw gyda</string>
-  <!-- String used for actions in the dialer call log and the quick contact card to initiate
-       a call to an individual.  The user is prompted to enter a note which is sent along with
-       the call (e.g. a call subject). [CHAR LIMIT=40] -->
   <string name="call_with_a_note">Galw gyda nodyn</string>
-  <!-- Hint text shown in the call subject dialog. [CHAR LIMIT=255] -->
   <string name="call_subject_hint">Rho nodyn i\'w anfon gyda\'r galwad...</string>
-  <!-- Button used to start a new call with the user entered subject. [CHAR LIMIT=32] -->
   <string name="send_and_call_button">ANFON A GALW</string>
-  <!-- String used to represent the total number of characters entered for a call subject,
-       compared to the character limit.  Example: 2 / 64 -->
   <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
-  <!-- String used to build a phone number type and phone number string.
-       Example: Mobile 650-555-1212  -->
   <string name="call_subject_type_and_number"><xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g></string>
-  <!-- String format to describe a tab e.g.call history tab. -->
   <string name="tab_title">tab <xliff:g id="title">%1$s</xliff:g>.</string>
-  <!-- String format to describe the number of unread items in a tab.
-
-      Note: AccessibilityServices use this attribute to announce what the view represents.
-            This is especially valuable for views without textual representation like ImageView.
-  -->
   <plurals name="tab_title_with_unread_items">
     <item quantity="zero">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitemau heb eu darllen.
         </item>
@@ -338,16 +172,6 @@
     <item quantity="other">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> eitem heb eu darllen.
         </item>
   </plurals>
-  <!-- Description string for an action button to initiate a video call from search results.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       This is especially valuable for views without textual representation like ImageView.
-
-       [CHAR LIMIT=NONE]-->
   <string name="description_search_video_call">Galwad fideo</string>
-  <!-- Description string for an action button to initiate an enriched call from search results.
-       Note: AccessibilityServices use this attribute to announce what the view represents.
-       This is especially valuable for views without textual representation like ImageView.
-
-       [CHAR LIMIT=NONE]-->
   <string name="description_search_call_and_share">Rhannu a galw</string>
 </resources>

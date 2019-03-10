@@ -16,22 +16,12 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- header for a list of contacts that are the users favorites. [CHAR LIMIT=30] -->
   <string name="favorites_header">Ffefrynnau</string>
-  <!-- header for a list of contacts that are suggestions for the user to place calls to. [CHAR LIMIT=30] -->
   <string name="suggestions_header">Awgrymiadau</string>
-  <!-- text for a button that prompts the user to add a contact to their favorites. [CHAR LIMIT=12] -->
   <string name="speed_dial_add_button_text">Ychwanegu</string>
-  <!-- text for a checkbox in a dialog that prompts the user to select a phone number from a list.
-    If the user checks this box, we will remember their selection and never ask for it again. [CHAR LIMIT=NONE]-->
   <string name="speed_dial_remember_this_choice">Cofio\'r dewis hwn</string>
-  <!-- Title of a dialog asking the user to choose their favorite mode of communication for a
-    specific contact where communication modes are video calling and voice calling. [CHAR LIMIT=NONE]-->
   <string name="speed_dial_disambig_dialog_title">Dewisa Hoff Modd</string>
-  <!-- Text for a button that places a video call [CHAR LIMIT=15]-->
   <string name="disambig_option_video_call">Galwad fideo</string>
-  <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
   <string name="disambig_option_voice_call">Galw</string>
-  <!-- Title for screen prompting the user to select a contact to mark as a favorite. [CHAR LIMIT=NONE] -->
   <string name="add_favorite_activity_title">Ychwanegu ffefryn</string>
 </resources>

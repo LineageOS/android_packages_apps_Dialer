@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">Lähellä olevat sijainnit</string>
     <string name="people">Ihmiset</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">Puhelinnumeron haku</string>
     <string name="enable_forward_lookup_title">Paikkahaku</string>
     <string name="enable_forward_lookup_summary">Näytä lähistöllä olevat paikat, kun etsitään numeronvalitsimella</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">Paikkahauntarjoaja</string>
     <string name="people_lookup_provider_title">Henkilön haun tarjoaja</string>
     <string name="reverse_lookup_provider_title">Käänteisen haun tarjoaja</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Haku voi lähettää kyselyjä suojatun protokollan (https) kautta etäsivustoille tietojen keräämiseksi. Kysely voi sisältää toisen osapuolen puhelinnumeron tai hakukyselyn</string>
 </resources>

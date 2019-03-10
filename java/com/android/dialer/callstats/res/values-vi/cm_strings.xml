@@ -45,6 +45,5 @@
     <string name="call_stats_title_durations">Thời gian gọi</string>
     <string name="call_stats_title_count">Số cuộc gọi</string>
     <string name="call_stats_title_average_duration">Thời gian gọi trung bình</string>
-    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Nhật ký cuộc gọi của bạn không chứa bất kỳ cuộc gọi nào trong khoảng thời gian đã chọn.</string>
 </resources>

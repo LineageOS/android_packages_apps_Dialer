@@ -16,10 +16,7 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Title for the sms disambiguation dialog -->
   <string name="sms_disambig_title">Dewis rhif</string>
-  <!-- Title for the call disambiguation dialog -->
   <string name="call_disambig_title">Dewis rhif</string>
-  <!-- Message next to disambiguation dialog check box -->
   <string name="make_primary">Cofio\'r dewis hwn</string>
 </resources>

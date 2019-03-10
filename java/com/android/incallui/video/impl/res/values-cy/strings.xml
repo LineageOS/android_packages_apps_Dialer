@@ -16,12 +16,8 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Text indicates the video from remote party is off. [CHAR LIMIT=40] -->
   <string name="videocall_remote_video_off">Mae ei fideo nhw i ffwrdd</string>
-  <!-- Text indicates the video from remote party is on. [CHAR LIMIT=40] -->
   <string name="videocall_remote_video_on">Mae ei fideo nhw ymlaen</string>
-  <!-- Text indicates the call is held by remote party. [CHAR LIMIT=20] -->
   <string name="videocall_remotely_held">Galwad yn aros</string>
-  <!-- Text indicates the call is resumed from held by remote party. [CHAR LIMIT=20] -->
   <string name="videocall_remotely_resumed">Galwad yn parhau</string>
 </resources>

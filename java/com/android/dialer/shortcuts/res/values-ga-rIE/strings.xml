@@ -16,13 +16,4 @@
   ~ limitations under the License
   -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <!-- Text to display in launcher shortcut for adding a new contact. Short version. [CHAR LIMIT=10] -->
-  <!-- Text to display in launcher shortcut for adding a new contact. Long version. [CHAR LIMIT=25] -->
-  <!-- Message to display when the user taps a pinned launcher shortcut (on a
-       homescreen) which has been disabled. A shortcut may be disabled if the
-       contact has been deleted or if it is invalid for some other reason. [CHAR LIMIT=70] -->
-  <!-- Error message to display when a tapping a shortcut fails because the specified contact can't
-       be found or doesn't have any phone numbers. [CHAR LIMIT=70] -->
-  <!-- Error message to display when a tapping a shortcut fails because permissions are missing.
-       [CHAR LIMIT=70] -->
 </resources>

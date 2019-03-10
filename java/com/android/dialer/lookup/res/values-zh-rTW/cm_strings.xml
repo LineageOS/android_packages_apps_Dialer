@@ -16,10 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Forward lookup -->
     <string name="nearby_places">附近的地點</string>
     <string name="people">聯絡人</string>
-    <!-- Number lookup -->
     <string name="lookup_settings_label">搜尋電話號碼</string>
     <string name="enable_forward_lookup_title">正向搜尋</string>
     <string name="enable_forward_lookup_summary">在撥號程式搜尋時顯示附近的地點</string>
@@ -30,6 +28,5 @@
     <string name="forward_lookup_provider_title">正向搜尋供應商</string>
     <string name="people_lookup_provider_title">聯絡人搜尋供應商</string>
     <string name="reverse_lookup_provider_title">反向搜尋供應商</string>
-    <!-- Disclaimer -->
     <string name="lookup_disclaimer">查找可以透過安全協定 (https) 向遠端網站傳送查詢以收集資訊。查詢可能包括對方的電話號碼或搜尋查詢</string>
 </resources>
