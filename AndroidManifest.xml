@@ -45,6 +45,7 @@
   <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
   <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.BLUETOOTH"/>
   <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
   <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL"/>
   <uses-permission android:name="com.android.voicemail.permission.WRITE_VOICEMAIL"/>
