@@ -17,8 +17,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="hour">
-        <item quantity="one">೧ ಗಂ</item>
-        <item quantity="other">%d ಗಂ</item>
+        <item quantity="one">೧ ಗ</item>
+        <item quantity="other">%d ಗ</item>
     </plurals>
     <plurals name="minute">
         <item quantity="one">೧ ನಿ</item>

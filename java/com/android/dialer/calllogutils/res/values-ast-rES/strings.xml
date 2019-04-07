@@ -17,4 +17,8 @@
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="just_now">Puramente agora</string>
+  <string name="new_call_log_video">Videu</string>
+  <string name="new_call_log_unknown">Desconócense</string>
+  <string name="new_call_log_secondary_blocked">Torgada</string>
+  <string name="new_call_log_secondary_spam">Spam</string>
 </resources>

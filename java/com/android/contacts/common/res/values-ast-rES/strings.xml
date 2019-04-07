@@ -66,4 +66,56 @@
     </string>
   <string name="clearFrequentsProgress_title">Llimpiando contautos frecuentes</string>
   <string name="status_away">Ausente</string>
+  <string name="status_busy">Ocupáu</string>
+  <string name="contact_suggestions">Lo más recomendao</string>
+  <string name="local_invisible_directory">Otres</string>
+  <string name="missing_name">(Nun hai nome)</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Ver contautu</string>
+  <string name="list_filter_phones">Tolos contautos con númberu telefónicu</string>
+  <string name="list_filter_phones_work">Contautos del perfil de trabayu</string>
+  <string name="view_updates_from_group">Ver anovamientos</string>
+  <string name="account_phone">Namái nel preséu, non sincronizáu</string>
+  <string name="email_home">Unviar corréu a casa</string>
+  <string name="email_mobile">Unviar corréu al móvil</string>
+  <string name="email_work">Unviar corréu al trabayu</string>
+  <string name="email_custom">Unviar corréu a <xliff:g id="Custom">%s</xliff:g></string>
+  <string name="map_home">Ver señes de casa</string>
+  <string name="map_work">Ver señes del trabayu</string>
+  <string name="map_other">Ver señes</string>
+  <string name="map_custom">Ver direición de <xliff:g id="Custom">%s</xliff:g></string>
+  <string name="chat_aim">Chat con AIM</string>
+  <string name="chat_msn">Chat con Windows Live</string>
+  <string name="chat_yahoo">Chat con Yahoo</string>
+  <string name="chat_skype">Chat con Skype</string>
+  <string name="chat_qq">Chat con QQ</string>
+  <string name="chat_gtalk">Chat con Google Talk</string>
+  <string name="chat_icq">Chat con ICQ</string>
+  <string name="chat_jabber">Chat con Jabber</string>
+  <string name="chat">Chat</string>
+  <string name="listAllContactsInAccount">Contautos en <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
+  <string name="listCustomView">Contautos en vista personalizada</string>
+  <string name="listSingleContact">Contautu únicu</string>
+  <string name="display_options_sort_list_by">Ordenar por</string>
+  <string name="display_options_sort_by_given_name">Nome</string>
+  <string name="display_options_sort_by_family_name">Apellíu</string>
+  <string name="display_options_view_names_as">Formatu nome</string>
+  <string name="display_options_view_given_name_first">Primero\'l nome</string>
+  <string name="display_options_view_family_name_first">Primeru los apellíos</string>
+  <string name="menu_clear_frequents">Llimpiar frecuentes</string>
+  <string name="action_menu_back_from_search">parar la gueta</string>
+  <string name="description_clear_search">Llimpiar la gueta</string>
+  <string name="select_account_dialog_title">Cuenta</string>
+  <string name="set_default_account">Usar siempres esta pa llamaes</string>
+  <string name="select_phone_account_for_calls">Llamar con</string>
+  <string name="call_with_a_note">Llamar con una nota</string>
+  <string name="call_subject_hint">Teclexa una nota pa unviar cola llamada...</string>
+  <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
+  <string name="tab_title"><xliff:g id="title">%1$s</xliff:g> tab.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> elementu ensin lleer.
+        </item>
+    <item quantity="other">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> elementos ensin lleer.
+        </item>
+  </plurals>
+  <string name="description_search_call_and_share">Compartir y llamar</string>
 </resources>

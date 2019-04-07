@@ -19,5 +19,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">Tots els comptes</string>
     <string name="call_log_all_calls_header">Totes les trucades</string>
+    <string name="call_log_incoming_header">Només trucades entrants</string>
+    <string name="call_log_outgoing_header">Només trucades sortints</string>
+    <string name="call_log_missed_header">Només trucades perdudes</string>
+    <string name="call_log_voicemail_header">Només trucades amb bústia de veu</string>
     <string name="call_log_blacklist_header">Només trucades bloquejades</string>
 </resources>
