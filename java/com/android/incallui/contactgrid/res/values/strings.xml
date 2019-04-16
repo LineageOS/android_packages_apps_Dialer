@@ -65,6 +65,9 @@
        requests and we timed out. -->
   <string name="incall_video_call_request_timed_out">Call timed out</string>
 
+  <!-- Displayed above the contact name when the user's operation for video calling is failed due to an unknown reason. -->
+  <string name="incall_video_call_operation_failed">Unable to operate</string>
+
   <!-- In-call screen: status label for a call that's in the process of hanging up
        [CHAR LIMIT=25] -->
   <string name="incall_hanging_up">Hanging up</string>
