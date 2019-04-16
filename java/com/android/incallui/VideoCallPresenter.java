@@ -431,6 +431,11 @@ public class VideoCallPresenter
     InCallPresenter.getInstance().getInCallCameraManager().onCameraPermissionGranted();
   }
 
+  @Override
+  public boolean isFullscreen() {
+    return InCallPresenter.getInstance().isFullscreen();
+  }
+
   /**
    * Called when the user interacts with the UI. If a fullscreen timer is pending then we start the
    * timer from scratch to avoid having the UI disappear while the user is interacting with it.
