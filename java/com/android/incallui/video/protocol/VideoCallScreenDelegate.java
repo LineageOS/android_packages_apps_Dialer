@@ -48,4 +48,6 @@ public interface VideoCallScreenDelegate {
   void setSurfaceViews(SurfaceView preview, SurfaceView remote);
 
   int getDeviceOrientation();
+
+  boolean isFullscreen();
 }
