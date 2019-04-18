@@ -92,6 +92,8 @@ public class TopRow {
     } else if (VideoUtils.hasSentVideoUpgradeRequest(state.sessionModificationState())
         || VideoUtils.hasReceivedVideoUpgradeRequest(state.sessionModificationState())) {
       label = getLabelForVideoRequest(context, state);
+    } else if (state.sessionModificationState() == SessionModificationState.REQUEST_FAILED) {
+      label = context.getString(R.string.incall_video_call_operation_failed);
     } else if (state.state() == DialerCallState.PULLING) {
       label = context.getString(R.string.incall_transferring);
     } else if (state.state() == DialerCallState.DIALING

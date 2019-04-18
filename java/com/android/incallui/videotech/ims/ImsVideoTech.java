@@ -227,6 +227,7 @@ public class ImsVideoTech implements VideoTech {
     call.getVideoCall()
         .sendSessionModifyRequest(
             new VideoProfile(unpausedVideoState & ~VideoProfile.STATE_TX_ENABLED));
+    setSessionModificationState(SessionModificationState.WAITING_FOR_RESPONSE);
   }
 
   @Override
