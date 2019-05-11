@@ -88,6 +88,7 @@ public class AudioModeProvider {
           hasBluetooth = true;
           continue;
         case AudioDeviceInfo.TYPE_WIRED_HEADSET:
+        case AudioDeviceInfo.TYPE_USB_HEADSET:
           hasHeadset = true;
           continue;
         default:
