@@ -36,7 +36,7 @@
     <string name="date_qs_lastmonth">ಕಳೆದ ತಿಂಗಳು</string>
     <string name="date_qs_lastquarter">ಕಳೆದ ತ್ರೈಮಾಸ</string>
     <string name="date_qs_lastyear">ಕಳೆದ ವರ್ಷ</string>
-    <string name="call_stats_date_filter">ಸಮಯದ ವ್ಯಾಪ್ತಿ ಸರಿಪಡಿಸು</string>
+    <string name="call_stats_date_filter">ಸಮಯ ವ್ಯಾಪ್ತಿ ಸರಿಪಡಿಸು</string>
     <string name="call_stats_reset_filter">ಕಾಲವಧಿ ಮರುಹೊಂದಿಸು</string>
     <string name="call_stats_sort_by_duration">ಕರೆ ಅವಧಿ ಪ್ರಕಾರ ವಿಂಗಡಿಸು</string>
     <string name="call_stats_sort_by_count">ಕರೆ ಎಣಿಕೆ ಪ್ರಕಾರ ವಿಂಗಡಿಸು</string>

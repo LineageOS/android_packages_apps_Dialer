@@ -17,9 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_category_title">Në telefonatë</string>
+    <string name="incall_enable_dnd_title">Aktivizo Mos Më Shqetëso gjatë telefonatave</string>
     <string name="incall_vibrate_outgoing_title">Dridhu në përgjigje</string>
     <string name="incall_vibrate_call_waiting_title">Dridhu kur thirrja vihet në pritje</string>
     <string name="incall_vibrate_hangup_title">Dridhu në fund të telefonatës</string>
     <string name="incall_vibrate_45_title">Dridhu çdo minutë</string>
     <string name="incall_vibrate_45_summary">Dridhet në sekondën e 45-të të çdo minuti gjatë një telefonate</string>
+    <string name="incall_dnd_dialog_message">Për të aktivuar Mos Më Shqetëso, aplikacioni Phone (Telefon) duhet të lejohet të kontrollojë gjendjen e Mos Më Shqetëso.\nTë lutem lejoje.</string>
+    <string name="allow">Lejo</string>
+    <string name="deny">Moho</string>
+    <string name="call_recording_category_title">Regjistrimi i telefonatës</string>
+    <string name="call_recording_format">Formati i zërit</string>
+    <string name="call_via">Telefono nga</string>
+    <string name="call_via_dialog_title">Telefono nga\u2026</string>
+    <string name="call_log_stats_title">Statistikat</string>
 </resources>

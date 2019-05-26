@@ -70,5 +70,140 @@
     </string>
   <string name="clearFrequentsProgress_title">Llimpiando contautos frecuentes</string>
   <string name="status_away">Ausente</string>
+  <string name="status_busy">Ocupáu</string>
+  <string name="contact_suggestions">Lo más recomendao</string>
+  <string name="local_invisible_directory">Otres</string>
+  <string name="foundTooManyContacts">Alcontráronse más de <xliff:g id="Count">%d</xliff:g> contautos.</string>
+  <plurals name="searchFoundContacts">
+    <item quantity="one">1 alcontráu</item>
+    <item quantity="other"><xliff:g id="Count">%d</xliff:g> alcontraos</item>
+  </plurals>
+  <string name="description_quick_contact_for">Contautu rápidu de <xliff:g id="Name">%1$s</xliff:g></string>
+  <string name="missing_name">(Nun hai nome)</string>
+  <string name="favoritesFrequentCalled">Más llamaos</string>
+  <string name="favoritesFrequentContacted">Contautos frecuentes</string>
+  <string msgid="2795575601596468581" name="description_view_contact_detail">Ver contautu</string>
+  <string name="list_filter_phones">Tolos contautos con númberu telefónicu</string>
+  <string name="list_filter_phones_work">Contautos del perfil de trabayu</string>
+  <string name="view_updates_from_group">Ver anovamientos</string>
+  <string name="account_phone">Namái nel preséu, non sincronizáu</string>
+  <string name="email_home">Unviar corréu a casa</string>
+  <string name="email_mobile">Unviar corréu al móvil</string>
+  <string name="email_work">Unviar corréu al trabayu</string>
+  <string name="email_custom">Unviar corréu a <xliff:g id="Custom">%s</xliff:g></string>
+  <string name="postal_pobox">Apartáu postal</string>
+  <string name="postal_neighborhood">Vecindariu</string>
+  <string name="map_home">Ver señes de casa</string>
+  <string name="map_work">Ver señes del trabayu</string>
+  <string name="map_other">Ver señes</string>
+  <string name="map_custom">Ver direición de <xliff:g id="Custom">%s</xliff:g></string>
+  <string name="chat_aim">Chat con AIM</string>
+  <string name="chat_msn">Chat con Windows Live</string>
+  <string name="chat_yahoo">Chat con Yahoo</string>
+  <string name="chat_skype">Chat con Skype</string>
+  <string name="chat_qq">Chat con QQ</string>
+  <string name="chat_gtalk">Chat con Google Talk</string>
+  <string name="chat_icq">Chat con ICQ</string>
+  <string name="chat_jabber">Chat con Jabber</string>
+  <string name="chat">Chat</string>
+  <string name="description_minus_button">desaniciar</string>
+  <string name="expand_collapse_name_fields_description">Enantar o contrayer campos de nome</string>
+  <string name="expand_collapse_phonetic_name_fields_description">Enantar o contrayer los campos
+        de los nomes</string>
+  <string name="listAllContactsInAccount">Contautos en <xliff:g example="abc@gmail.com" id="name">%s</xliff:g></string>
+  <string name="listCustomView">Contautos en vista personalizada</string>
+  <string name="listSingleContact">Contautu únicu</string>
+  <string name="dialog_new_contact_account">Guardar contautos importaos en:</string>
+  <string name="import_from_sim">Importar contautos de la tarxeta SIM</string>
+  <string name="import_from_sim_summary">Importar de la SIM <xliff:g id="sim_name">^1</xliff:g> - <xliff:g id="sim_number">^2</xliff:g></string>
+  <string name="import_from_sim_summary_no_number">Importar de la SIM <xliff:g id="sim_name">%1$s</xliff:g></string>
+  <string name="import_from_vcf_file" product="default">Importar dende ficheru .vcf</string>
+  <string name="cancel_import_confirmation_message">Encaboxar importación de <xliff:g example="import.vcf" id="filename">%s</xliff:g>?</string>
+  <string name="cancel_export_confirmation_message">Encaboxar esportación de <xliff:g example="import.vcf" id="filename">%s</xliff:g>?</string>
+  <string name="cancel_vcard_import_or_export_failed">Fallu al encaboxar la importación/esportación de vCard</string>
+  <string name="fail_reason_too_long_filename">El nome de ficheru ye enforma llargu (\"<xliff:g id="Filename">%s</xliff:g>\").</string>
   <string name="fail_reason_io_error">Fallu d\'E/S</string>
+  <string name="fail_reason_low_memory_during_import">Nun hai bastante espaciu de memoria. El ficheru pue ser enforma grande.</string>
+  <string name="fail_reason_vcard_parse_error">Nun pudo analizase\'l ficheru vCard por un fallu inesperáu.</string>
+  <string name="exporting_vcard_finished_title">Esportación acabada <xliff:g example="export.vcf" id="filename">%s</xliff:g>.</string>
+  <string name="exporting_vcard_finished_title_fallback">Finó la esportación de contautos.</string>
+  <string name="exporting_vcard_finished_toast">Finó la esportación de contautos, primi nel avisu pa compartir contautos.</string>
+  <string name="touch_to_share_contacts">Calca pa compartir contautos.</string>
+  <string name="exporting_vcard_canceled_title">Esportación <xliff:g example="export.vcf" id="filename">%s</xliff:g> encaboxada.</string>
+  <string name="exporting_contact_list_title">Esportando datos de contautu</string>
+  <string name="exporting_contact_list_message">Tán esportándose los datos de contautos.</string>
+  <string name="composer_failed_to_get_database_infomation">Nun pudo obtenese información de la base de datos.</string>
+  <string name="composer_has_no_exportable_contact">Nun hai contautos qu\'esportar. Si yá tienes contautos nel preséu, ye dable que\'l fornidor de datos nun permita que s\'esporten los contautos del preséu.</string>
+  <string name="composer_not_initialized">El redautor de vCard nun s\'anició correutamente.</string>
+  <string name="exporting_contact_failed_title">Fallu al esportar</string>
+  <string name="exporting_contact_failed_message">Nun s\'esportaron los datos de contautu\"\n\"motivu: \"<xliff:g id="Fail_REASON">%s</xliff:g>\"</string>
+  <string name="importing_vcard_description">Importando <xliff:g example="Joe Due" id="name">%s</xliff:g></string>
+  <string name="reading_vcard_failed_title">Fallu al lleer los datos de vCard</string>
+  <string name="reading_vcard_canceled_title">Llectura de datos de vCard encaboxada</string>
+  <string name="importing_vcard_finished_title">Importación de vCard acabada <xliff:g example="import.vcf" id="filename">%s</xliff:g></string>
+  <string name="importing_vcard_canceled_title">Importación <xliff:g example="import.vcf" id="filename">%s</xliff:g> encaboxada</string>
+  <string name="vcard_import_will_start_message"><xliff:g example="import.vcf" id="filename">%s</xliff:g> importaráse darréu.</string>
+  <string name="vcard_import_will_start_message_with_default_name">El ficheru va importase darréu.</string>
+  <string name="vcard_import_request_rejected_message">refugóse la solicitú d\'importación de vCard. Inténtalo de nueves más tarde.</string>
+  <string name="vcard_export_will_start_message"><xliff:g example="import.vcf" id="filename">%s</xliff:g> importaráse darréu.</string>
+  <string name="vcard_export_will_start_message_fallback">El ficheru esportaráse ceo.</string>
+  <string name="contacts_export_will_start_message">Los contautos esportaránse darréu.</string>
+  <string name="vcard_export_request_rejected_message">refugóse la solicitú d\'esportación de vCard. Inténtalo de nueves más tarde.</string>
+  <string name="vcard_unknown_filename">contautu</string>
+  <string name="caching_vcard_message">Atroxando vCard(s) nel almacenamientu temporal llocal. La importación aniciará ceo.</string>
+  <string name="vcard_import_failed">Fallu al importar el ficheru vCard.</string>
+  <string name="nfc_vcard_file_name">Contautu recibíu per NFC</string>
+  <string name="confirm_export_title">¿Esportar contautos?</string>
+  <string name="caching_vcard_title">Atroxando na caché</string>
+  <string name="export_to_vcf_file" product="default">Esportar a ficheru .vcf</string>
+  <string name="display_options_sort_list_by">Ordenar por</string>
+  <string name="display_options_sort_by_given_name">Nome</string>
+  <string name="display_options_sort_by_family_name">Apellíu</string>
+  <string name="display_options_view_names_as">Formatu nome</string>
+  <string name="display_options_view_given_name_first">Primero\'l nome</string>
+  <string name="display_options_view_family_name_first">Primeru los apellíos</string>
+  <string name="default_editor_account">Cuenta por defeutu pa cuentes nueves</string>
+  <string name="sync_contact_metadata_dialog_title">Sincronizar datos meta de contautos</string>
+  <string name="setting_about">Tocante a Contautos</string>
+  <string name="share_visible_contacts">Compartir contautos visibles</string>
+  <string name="share_visible_contacts_failure">Fallu al compartir contautos visibles.</string>
+  <string name="share_favorite_contacts">Compartir contautos favoritos</string>
+  <string name="share_contacts">Compartir tolos contautos</string>
+  <string name="share_contacts_failure">Fallu al compartir los contautos.</string>
+  <string name="dialog_import_export">Importar/esportar contautos</string>
+  <string name="dialog_import">Importar contautos</string>
+  <string name="share_error">Nun pue compartise esti contautu.</string>
+  <string name="no_contact_to_share">Nun hai contautos pa compartir.</string>
+  <string name="menu_search">Guetar</string>
+  <string name="hint_findContacts">Guetar contautos</string>
+  <string name="contactsFavoritesLabel">Favoritos</string>
+  <string name="listTotalAllContactsZero">Nun hai nengún contautu.</string>
+  <string name="listTotalAllContactsZeroCustom">Nun hai contautos visibles.</string>
+  <string name="listTotalAllContactsZeroStarred">Nun hai favoritos</string>
+  <string name="listTotalAllContactsZeroGroup">Nun hai contautos en <xliff:g example="Friends" id="name">%s</xliff:g></string>
+  <string name="menu_clear_frequents">Llimpiar frecuentes</string>
+  <string name="menu_select_sim">Seleicionar tarxeta SIM</string>
+  <string name="menu_accounts">Xestionar cuentes</string>
+  <string name="menu_import_export">Importar/esportar</string>
+  <string name="contact_status_update_attribution">per <xliff:g example="Google Talk" id="source">%1$s</xliff:g></string>
+  <string name="contact_status_update_attribution_with_date"><xliff:g example="3 hours ago" id="date">%1$s</xliff:g> per <xliff:g example="Google Talk" id="source">%2$s</xliff:g></string>
+  <string name="action_menu_back_from_search">parar la gueta</string>
+  <string name="description_clear_search">Llimpiar la gueta</string>
+  <string name="settings_contact_display_options_title">Opciones visualización contautos</string>
+  <string name="select_account_dialog_title">Cuenta</string>
+  <string name="set_default_account">Usar siempres esta pa llamaes</string>
+  <string name="select_phone_account_for_calls">Llamar con</string>
+  <string name="call_with_a_note">Llamar con una nota</string>
+  <string name="call_subject_hint">Teclexa una nota pa unviar cola llamada...</string>
+  <string name="call_subject_limit"><xliff:g example="4" id="count">%1$s</xliff:g> / <xliff:g example="64" id="limit">%2$s</xliff:g></string>
+  <string name="tab_title"><xliff:g id="title">%1$s</xliff:g> tab.</string>
+  <plurals name="tab_title_with_unread_items">
+    <item quantity="one">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> elementu ensin lleer.
+        </item>
+    <item quantity="other">            <xliff:g id="title">%1$s</xliff:g> tab. <xliff:g id="count">%2$d</xliff:g> elementos ensin lleer.
+        </item>
+  </plurals>
+  <string name="about_build_version">Versión de compilación</string>
+  <string name="about_open_source_licenses_summary">Detalles de llicencia pal software de códigu abiertu</string>
+  <string name="description_search_call_and_share">Compartir y llamar</string>
 </resources>

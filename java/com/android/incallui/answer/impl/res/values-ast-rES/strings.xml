@@ -16,6 +16,11 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="call_incoming_swipe_to_decline_with_message">Eslliza l\'íconu pa refugar el mensax</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">Eslliza l\'íconu pa retrucar como una llamada d\'audiu</string>
+  <string name="call_incoming_default_label_answer_and_release_second">Eslliza p\'arriba pa retrucar y caltener la llamada entrante</string>
+  <string name="call_incoming_default_label_answer_and_release_third">Eslliza pa retrucar y acabar la llamada n\'espera</string>
+  <string name="call_incoming_swipe_to_answer_and_release">Eslliza l\'íconu pa retrucar y colgar la llamada n\'espera</string>
   <string name="call_incoming_message_custom">Escribi la to propia…</string>
   <string name="call_incoming_audio_handset">Auricular</string>
   <string name="call_incoming_audio_speakerphone">Altavoz</string>
@@ -29,5 +34,6 @@
   <string name="a11y_description_incoming_call_answer_video_as_audio">Contestar como llamada d\'audiu</string>
   <string name="a11y_description_incoming_call_answer_and_release">Retrucar y acabar la llamada en cursu</string>
   <string name="call_incoming_video_is_off">El videu ta apagáu</string>
+  <string description="The message announced to accessibility assistance on incoming call." name="a11y_incoming_call_swipe_gesture_prompt">Eslliza dos deos p\'arriba pa retrucar. dos deos p\'abaxo pa refugar.</string>
   <string name="call_incoming_important">Importante</string>
 </resources>

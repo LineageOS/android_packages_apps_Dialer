@@ -21,6 +21,7 @@
     <string name="onscreenCallRecordText">Enregistrer l\'appel</string>
     <string name="onscreenCallRecordingText">Enregistrement de l\'appel - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
     <string name="onscreenStopCallRecordText">Arrêter l\'enregistrement</string>
+    <string name="recording_time_text">Enregistrement en cours</string>
     <string name="recording_warning_title">Activer l\'enregistrement d\'appel ?</string>
     <string name="recording_warning_text">Avertissement : Vous êtes responsable de la conformité à la législation, à la réglementation et aux règles applicables à l\'enregistrement d\'appel, ainsi qu\'à l\'utilisation ou à la distribution de ces enregistrements.</string>
 </resources>

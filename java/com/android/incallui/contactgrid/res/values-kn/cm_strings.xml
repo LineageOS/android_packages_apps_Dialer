@@ -19,6 +19,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="callFailed_incoming_cb_enabled">ವ್ಯಕ್ತಿಯು ಎಲ್ಲಾ ಆಗಮಿತ ಕರೆಗಳನ್ನು ನಿಷೇಧಿಸಿದ್ದಾರೆ.</string>
     <string name="callUnanswered_forwarded">ಕರೆ ಉತ್ತರಿಸದೆ ರವಾನಿಸಲಾಗಿದೆ</string>
-    <string name="incall_connecting_waiting">ಕರೆ (ಕಾಯುತ್ತಿದೆ\u2026)</string>
-    <string name="incall_calling_via_waiting_template"><xliff:g id="provider_name">%s</xliff:g> ಮೂಲಕ ಕರೆ (ಕಾಯುತ್ತಿದೆ\u2026)</string>
+    <string name="incall_connecting_waiting">ಕರೆ (ನಿರೀಕ್ಷಣೆ\u2026)</string>
+    <string name="incall_calling_via_waiting_template"><xliff:g id="provider_name">%s</xliff:g> ಮುಖೇನ ಕರೆ (ನಿರೀಕ್ಷಣೆ\u2026)</string>
 </resources>

@@ -73,6 +73,58 @@
   <string name="add_2sec_pause">Amestar posa de 2 segundos</string>
   <string name="add_wait">Amestar espera</string>
   <string name="dialer_settings_label">Axustes</string>
+  <string name="dialer_useDtmfDialpad">Usar tecláu táctil</string>
+  <string name="dialer_returnToInCallScreen">Volver a la llamada en cursu</string>
+  <string name="dialer_addAnotherCall">Amestar llamada</string>
+  <string name="actionIncomingCall">Llamaes entrantes</string>
+  <string name="description_entering_bulk_action_mode">Entrar en mou d\'aición masiva</string>
+  <string name="description_leaving_bulk_action_mode">Dexar el mou d\'aición masiva</string>
+  <string name="description_selecting_bulk_action_mode">Escoyío <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_unselecting_bulk_action_mode">Ensin escoyer <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_call_log_play_button">Reproducir mensaxe de voz</string>
+  <string name="description_view_contact">Ver contautu <xliff:g id="Name">%1$s</xliff:g></string>
+  <string name="description_call">Llamar a <xliff:g id="Name">%1$s</xliff:g></string>
+  <string name="description_contact_details">Detalles de contautu pa <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_spam_contact_details">Detalles de contautu pa sospechosu de spam <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> llamaes.</string>
+  <string name="description_video_call">Videollamada.</string>
+  <string name="description_send_text_message">Mandar SMS a <xliff:g id="name">%1$s</xliff:g></string>
+  <string name="description_call_log_unheard_voicemail">Mensaxe de voz ensin oyer</string>
+  <string name="description_start_voice_search">Aniciar gueta por voz</string>
+  <string name="menu_callNumber">Llamar a <xliff:g id="Number">%s</xliff:g></string>
+  <string name="voicemail">Buzón de voz</string>
+  <string name="callDetailsShortDurationFormat"><xliff:g example="28" id="seconds">%s</xliff:g> seg</string>
+  <string name="callDetailsDurationFormat"><xliff:g example="42" id="minutes">%s</xliff:g> min <xliff:g example="28" id="seconds">%s</xliff:g> seg</string>
+  <string name="description_cancel_multi_select">Encaboxar el mou d\'aiciones por lotes</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Desaniciar</string>
+  <string name="voicemailMultiSelectDeleteCancel">Encaboxar</string>
+  <string name="voicemailMultiSelectDialogTitle">Desaniciu escoyíu <xliff:g id="voicemailorvoicemails">%1$s</xliff:g>?</string>
+  <string name="voicemailMultiSelectActionBarTitle"><xliff:g id="number">%1$s</xliff:g> escoyíu</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>¿Desaniciar esti buzón de vozl? </b></item>
+    <item quantity="other"><b>¿Desaniciar estos buzones de vozl? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat"><xliff:g example="Jul 25, 2014" id="date">%1$s</xliff:g> a <xliff:g example="2:49 PM" id="time">%2$s</xliff:g></string>
+  <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g example="Jul 25, 2014 at 2:49PM" id="dateAndTime">%1$s</xliff:g> \u2022 <xliff:g example="01:22" id="duration">%2$s</xliff:g></string>
+  <string msgid="4313552620858880999" name="dialog_phone_call_prohibited_message">Nun pue llamase a esti númberu</string>
+  <string name="dialog_voicemail_not_ready_message">Pa configurar el buzón de voz, toca la tecla de menú &gt; y, darréu, toca Axustes.</string>
+  <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
+  <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM\u2026</string>
+  <string name="simContacts_title">Contautos de tarxeta SIM</string>
+  <string name="voice_search_not_available">Gueta por voz non disponible</string>
+  <string name="call_not_available">Nun pue facese una llamada porque l\'app Teléfonu ta deshabilitada.</string>
+  <string name="dialer_hint_find_contact">Guetar contautos</string>
+  <string name="block_number_search_hint">Amiesta o gueta contautos</string>
+  <string name="call_log_all_empty">El to historial de llamaes ta baleru</string>
+  <string name="call_log_all_empty_action">Facer una llamada</string>
+  <string name="call_log_missed_empty">Nun tienes llamaes perdíes.</string>
+  <string name="call_log_voicemail_empty">La bandexa d\'entrada del to corréu de voz ta balera.</string>
+  <string name="show_favorites_only">Amosar namái favoritos</string>
+  <string name="call_log_all_title">Too</string>
+  <string name="call_log_missed_title">Perdíes</string>
+  <string name="tab_history">Historial de llamaes</string>
   <string name="favorite_hidden">Desaniciáu de favoritos</string>
   <string name="search_shortcut_call_number">Llamar a <xliff:g id="Number">%s</xliff:g>    </string>
   <string name="search_shortcut_create_new_contact">Crear contautu nuevu</string>
@@ -139,4 +191,35 @@
   <string name="voicemail_settings_label">Mensaxe de voz</string>
   <string name="voicemail_settings_select_sim_title">Escueyi SIM pa los axustes del corréu de voz</string>
   <string name="blocked_numbers_disabled_emergency_header_label">Torga de llamaes apagáu temporalmente    </string>
+  <string name="blocked_numbers_disabled_emergency_desc">El bloquéu de llamaes desactivóse porque contauteste colos servicios d\'emerxencia dende esti teléfonu.
+        Nes últimes 48 hores. Volverá a habilitase automáticamente en pasando 48 hores.
+        gande.    </string>
+  <string name="import_send_to_voicemail_numbers_label">Importar númberos</string>
+  <string name="blocked_call_settings_import_description">Con anterioridá marqueste que delles persones que llamen se manden automáticamente al corréu de voz per otres aplicaciones.    </string>
+  <string name="blocked_call_settings_view_numbers_button">Ver númberos</string>
+  <string name="blocked_call_settings_import_button">Importar</string>
+  <string name="description_blocked_number_list_delete">Desbloquiar númberu</string>
+  <string name="addBlockedNumber">Amestar númberu</string>
+  <string name="block_number_footer_message_vvm">        Bloquiaránse les llamaes d\'estos númberos y los mensaxes de voz desaniciaránse automáticamente.
+    </string>
+  <string name="block_list">Númberos bloquiaos</string>
+  <string name="alreadyBlocked"><xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
+        yá ta torgáu.</string>
+  <string name="phone_account_settings_label">Cuentes de llamaes</string>
+  <string name="permission_no_speeddial">P\'activar el marcáu rápidu, activa\'l permisu de Contautos.</string>
+  <string name="permission_no_calllog">Pa ver el to rexistru de llamaes, activa\'l permisu de Teléfonu.</string>
+  <string name="permission_no_voicemail">P\'acceder al to buzón de voz, activa\'l permisu de Teléfonu.</string>
+  <string name="permission_no_search">Pa guetar los tos contautos, activa\'l permisu de Contautos.</string>
+  <string name="permission_place_call">Pa facer una llamada, activa\'l permisu de Teléfonu.</string>
+  <string name="toast_cannot_write_system_settings">L\'aplicación Teléfonu nun tien permisu pa escribir nos axustes del sistema.</string>
+  <string name="blocked_number_call_log_label">Torgada</string>
+  <string name="call_log_action_block_report_number">Torgar/reportar por spam</string>
+  <string name="call_log_action_block_number">Torgar númberu</string>
+  <string name="call_log_action_remove_spam">Non spam</string>
+  <string name="call_log_action_unblock_number">Desbloquiar númberu</string>
+  <string name="spam_number_call_log_label">Spam</string>
+  <string name="call_composer_connection_failed"><xliff:g id="name">%1$s</xliff:g> ta desconeutáu y nun se puede contautar</string>
+  <string name="view_conversation">Ver</string>
+  <string name="ec_data_deleted">Llamada desaniciada. Ver y desaniciar ficheros axuntos compartíos nesa llamada en Mensaxes.</string>
+  <string name="multiple_ec_data_deleted">Llamaes desaniciaes. Ver y desaniciar ficheros axuntos compartíos neses llamaes en Mensaxes.</string>
 </resources>

@@ -24,12 +24,12 @@
     <string name="incall_vibrate_hangup_title">ಕರೆ ಸ್ಥಗಿತವಾದಾಗ ಕಂಪಿಸು</string>
     <string name="incall_vibrate_45_title">ಪ್ರತಿ ನಿಮಿಷ ಕಂಪಿಸು</string>
     <string name="incall_vibrate_45_summary">ನಿರ್ಗಮಿಸುವ ಕರೆಗಳಲ್ಲಿ ಪ್ರತಿ ನಿಮಿಷದ ೪೫ನೇ ಕ್ಷಣಕೊಮ್ಮೆ ಕಂಪಿಸುವುದು</string>
-    <string name="incall_dnd_dialog_message">\'ನಿರಾಡಚಣೆ\' ಸಶಕ್ತಿಸಲು, ಫೋನ್ ಆಪ್ಗೆ \'ನಿರಾಡಚಣೆ\' ಸ್ಥಿತಿ ನಿಯಂತ್ರಿಸುವ ಅನುಮತಿ ಬೇಕು.\n ದಯವಿಟ್ಟು ಅನುಮತಿ ಕೊಡಿ.</string>
+    <string name="incall_dnd_dialog_message">\'ನಿರಾಡಚಣೆ\' ಸಶಕ್ತಿಸಲು, ಫೋನ್ ಆಪ್ಗೆ \'ನಿರಾಡಚಣೆ\' ಸ್ಥಿತಿ ನಿಯಂತ್ರಿಸುವ ಅನುಮತಿ ಬೇಕು.\n ಅನುಮತಿಸಿ.</string>
     <string name="allow">ಅನುಮತಿಸು</string>
     <string name="deny">ನಿರಾಕರಿಸು</string>
     <string name="call_recording_category_title">ಕರೆ ಧ್ವನಿಮುದ್ರಣ</string>
-    <string name="call_recording_format">ಶೃತಿ ಸ್ವರೂಪ</string>
-    <string name="call_via">ಕರೆ ಮುಖೇನ</string>
-    <string name="call_via_dialog_title">ಕರೆ ಮುಖೇನ\u2026</string>
+    <string name="call_recording_format">ಶ್ರಾವ್ಯ ಸ್ವರೂಪ</string>
+    <string name="call_via">ಮುಖೇನ ಕರೆ</string>
+    <string name="call_via_dialog_title">ಮುಖೇನ ಕರೆ\u2026</string>
     <string name="call_log_stats_title">ಅಂಕ್ಯಾಂಶಗಳು</string>
 </resources>

@@ -17,6 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="callUnanswered_forwarded">Kõne vastamata ja edasi suunatud</string>
     <string name="incall_connecting_waiting">Helistan (ootel\u2026)</string>
     <string name="incall_calling_via_waiting_template">Helistan läbi <xliff:g id="provider_name">%s</xliff:g> (ootel\u2026)</string>
 </resources>
