@@ -22,6 +22,6 @@
     <string name="call_log_incoming_header">المكالمات الواردة فقط</string>
     <string name="call_log_outgoing_header">المكالمات الصادرة فقط</string>
     <string name="call_log_missed_header">المكالمات الفائتة فقط</string>
-    <string name="call_log_voicemail_header">المكالمات مع البريد الصوتي فقط</string>
+    <string name="call_log_voicemail_header">مكالمات البريد الصوتي فقط</string>
     <string name="call_log_blacklist_header">المكالمات المحظورة فقط</string>
 </resources>

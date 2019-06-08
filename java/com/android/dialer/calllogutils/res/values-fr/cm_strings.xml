@@ -19,5 +19,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">Tous les comptes</string>
     <string name="call_log_all_calls_header">Tous les appels</string>
+    <string name="call_log_incoming_header">Appels entrants uniquement</string>
+    <string name="call_log_outgoing_header">Appels sortants uniquement</string>
+    <string name="call_log_missed_header">Appels manqués uniquement</string>
+    <string name="call_log_voicemail_header">Appels avec message vocal uniquement</string>
     <string name="call_log_blacklist_header">Appels bloqués uniquement</string>
 </resources>

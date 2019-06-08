@@ -19,5 +19,9 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">Wszystkie konta</string>
     <string name="call_log_all_calls_header">Wszystkie połączenia</string>
+    <string name="call_log_incoming_header">Tylko połączenia przychodzące</string>
+    <string name="call_log_outgoing_header">Tylko połączenia wychodzące</string>
+    <string name="call_log_missed_header">Tylko połączenia nieodebrane</string>
+    <string name="call_log_voicemail_header">Tylko połączenia z pocztą głosową</string>
     <string name="call_log_blacklist_header">Tylko zablokowani rozmówcy</string>
 </resources>
