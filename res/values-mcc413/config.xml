@@ -16,16 +16,18 @@
      limitations under the License.
 -->
 
-<!--Enable call recording for country: Belgium-->
+<!--Enable call recording for country: Sri Lanka-->
 <!--
      Relevant laws and/or legal precedents:
-     As stated in the official response below, Belgian law does not consider the recording of one's
-     personal communications as a punishable offense. Using said recordings in a fraudulent and/or
-     demeaning way does carry the potential for liability and/or prosecution by the state. The
-     recording of one's own calls might be regarded as a form of personal data processing, depending
-     on the specifics of the case. Specific laws and cases are quoted within the official response.
-     Official Response by Belgian Minister (QRVA 50 157, internal pages 20199-20202, 24/02/2003):
-     https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf
+     Part IV/59 of the Sri Lankan Telecommunications Act defines the penalty for eavesdropping on a
+     call. The Sri Lankan Penal Code does not cover the act of recording one's own calls, hence the
+     act is not criminally punishable.
+     Telecommunications Act:
+     https://www.lawnet.gov.lk/1947/12/31/sri-lanka-telecommunications-2/
+     Penal Code:
+     https://www.lawnet.gov.lk/penal-code-consolidated-2/
+     Article: (nonsecure link)
+     http://www.dailymirror.lk/article/PTL-tampered-with-phone-recording-system-ASG-135574.html
 -->
 <resources>
 
