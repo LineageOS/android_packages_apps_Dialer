@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,17 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Poland-->
-<!--Legal precedent source: http://www.giodo.gov.pl/data/filemanager_pl/467.doc -->
+<!--Enable call recording for country: Poland-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 267 of the Polish Penal Code defines call recording as legal for private citizens,
+     when the recording is made by a party to the call.
+     Penal Code:
+     https://supertrans2014.files.wordpress.com/2014/06/the-criminal-code.pdf
+     Legal articles:
+     https://www.alfatronik.com.pl/info/nagrywanie-rozmow-legalne/
+     https://bezprawnik.pl/legalnosc-nagrywania-rozmowy/
+-->
 <resources>
 
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,23 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Hungary-->
+<!--
+     Relevant laws and/or legal precedents:
+     Sections 413 and 418 define the Breach of Trade and/or Business Secrecy as a criminal offense.
+     There is no mention of wiretapping and/or eavesdropping as a criminal offense.
+     The Hungarian Data Protection and Freedom of Information Agency (DPA) created a Guidance in
+     2016, for cases concerning situations which include an individual as one side of the
+     conversation, and a data processing entity as the other side. This guidance should not be
+     considered relevant, as it does not deal with the communications of individuals. No pertinent
+     articles or paragraphs were found in the Hungarian Criminal Code, which in effect equates to
+     there being no punishment for the recording of personal calls.
+     DPA 2016 Guidance:
+     https://www.naih.hu/files/2016_05_09_tajekoztato_hangfelvetelekrol.pdf
+     Hungarian Criminal Code:
+     https://www.legislationline.org/documents/section/criminal-codes/country/25/Hungary/show
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,18 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Sweden-->
-<!--Legal precedent source: https://lagen.nu/begrepp/Olovlig_avlyssning -->
+<!--Enable call recording for country: Sweden-->
+<!--
+     Relevant laws and/or legal precedents:
+     According to the Swedish Penal Code (Brottsbalken), Chapter 4, 8–9 §§, it is illegal to make
+     unauthorized recordings of telephone conversations as a third party. A court can grant
+     permission for law enforcement agencies to tap telephone lines. Anyone participating in the
+     telephone call may record the conversation. A recording is always admissible as evidence in
+     a court of law, even when obtained in an illegal way.
+     Criminal Code:
+     https://lagen.nu/begrepp/Olovlig_avlyssning
+     http://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/brottsbalk-1962700_sfs-1962-700
+-->
 <resources>
 
 </resources>

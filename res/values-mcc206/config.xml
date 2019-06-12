@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Belgium-->
+<!--
+     Relevant laws and/or legal precedents:
+     As stated in the official response below, Belgian law does not consider the recording of one's
+     personal communications as a punishable offense. Using said recordings in a fraudulent and/or
+     demeaning way does carry the potential for liability and/or prosecution by the state. The
+     recording of one's own calls might be regarded as a form of personal data processing, depending
+     on the specifics of the case. Specific laws and cases are quoted within the official response.
+     Official Response by Belgian Minister (QRVA 50 157, internal pages 20199-20202, 24/02/2003):
+     https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

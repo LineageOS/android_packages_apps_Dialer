@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,21 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Slovakia-->
+<!--
+     Relevant laws and/or legal precedents:
+     Sections 376 and 377 of the Slovakian Criminal Code cover breach of confidentiality of spoken
+     utterance and other forms of personal expression and the breach of secrecy of all types of
+     instruments, recordings and documents. Section 376 states that the breach of secrecy, by way of
+     disclosing or making available to a third party and/or using it to cause serious harm to
+     another party, leads to an imprisonment of up to two years. Section 377 defines breach of
+     confidentiality as the making of an unlawful recording accessible to a third person or using it
+     in any way that would hinder the other side's rights. This is punishable with a term of
+     imprisonment of up to two years.
+     Slovakian Criminal Code:
+     https://www.legislationline.org/documents/section/criminal-codes/country/4/Slovakia/show
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

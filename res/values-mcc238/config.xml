@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,19 @@
      limitations under the License.
 -->
 
-<!--Allow recording for country: Denmark-->
-<!--Legal precedent source: https://www.retsinformation.dk/Forms/r0710.aspx?id=164192#Kap27 -->
+<!--Enable call recording for country: Denmark-->
+<!--MCCs that conform to this country's legislation: 238, 288 and 290-->
+<!--
+     Relevant laws and/or legal precedents:
+     Chapter 27, Article 263(3) of the Criminal Code of Denmark denotes that a person is liable for
+     criminal punishment when he or she intercepts or records telephone conversations to which he or
+     she is not a party. The articles in Chapter 27 cover a lot of different situations, including
+     the dissemination of recordings, which may lead to a fine or prison sentence. The act of
+     recording a conversation that one is a part of is not covered explicitly, hence it is not a
+     criminal offense in the eyes of the law. This, however, does not exclude civil cases.
+     Criminal Code:
+     https://www.retsinformation.dk/Forms/r0710.aspx?id=164192#Kap27
+-->
 <resources>
 
 </resources>
