@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,19 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Cyprus-->
+<!--
+     Relevant laws and/or legal precedents:
+     The Cypriot Penal Code does not explicitly cover the act of wiretapping or recording one's own
+     calls. Based on this, it is not a criminal offense to record personal calls. Article 369 of the
+     Cypriot Penal Code states that anyone who knows that another is planning to commit a criminal
+     offense, yet fails to use any reasonable means to prevent said crime, is guilty of misconduct,
+     which can be used as a reason for recording one's own calls, should the need arise to quote
+     a legal document.
+     Penal Code:
+     http://www.cylaw.org/nomoi/enop/non-ind/0_154/index.html
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>

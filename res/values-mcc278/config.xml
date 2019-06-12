@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2014-2016 The CyanogenMod Project
+     Copyright (C) 2016-2019 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,25 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
+<!--Enable call recording for country: Malta-->
+<!--
+     Relevant laws and/or legal precedents:
+     Article 34 (1)(f) of the Maltese Constitution states that a person may be deprived of his
+     rights in the case of there being suspicion of said person having commited, or being in the
+     process of committing a crime. Effectively this means that recording your own calls is legal
+     when done so to report a crime. There is no mention of the act of recording one's own calls in
+     the Maltese Criminal Code, which means that even if it were to be illegal, it is not a criminal
+     offense. The Media and Defamation Act of 2018 handles all cases of defamation, which may or may
+     not include the act of publishing one's call recordings without the knowledge or consent of the
+     other concerned party.
+     Constitution:
+     http://www.justiceservices.gov.mt/DownloadDocument.aspx?app=lom&itemid=8566&l=1
+     Criminal Code:
+     https://www.justiceservices.gov.mt/DownloadDocument.aspx?app=lom&itemid=8574&l=1 (nonsecure)
+     Media and Defamation Act:
+     http://justiceservices.gov.mt/DownloadDocument.aspx?app=lp&itemid=29045&l=1 (nonsecure)
+-->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+
 </resources>
