@@ -97,6 +97,7 @@ LOCAL_AAPT_FLAGS := $(addprefix --extra-packages , $(LOCAL_AAPT_FLAGS))
 LOCAL_AAPT_FLAGS += \
 	--auto-add-overlay \
 	--extra-packages me.leolin.shortcutbadger \
+	--legacy \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
