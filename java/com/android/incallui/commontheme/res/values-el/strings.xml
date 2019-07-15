@@ -21,6 +21,7 @@
     <string name="incall_content_description_muted" msgid="2130133443150389474">"Σε σίγαση"</string>
     <string name="incall_content_description_unmuted" msgid="4023577547526525202">"Κατάργηση σίγασης"</string>
     <string name="incall_content_description_swap_calls" msgid="5233257839262161417">"Εναλλαγή κλήσεων"</string>
+    <string name="incall_content_description_swap_sim">Εναλλαγή SIM</string>  
     <string name="incall_content_description_merge_calls" msgid="5198778837993669729">"Συγχώνευση κλήσεων"</string>
     <string name="incall_content_description_earpiece" msgid="2786221842272370555">"Ακουστικό"</string>
     <string name="incall_content_description_speaker" msgid="7837829930201265549">"Ηχείο"</string>
