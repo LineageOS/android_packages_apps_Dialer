@@ -38,9 +38,12 @@
     <string name="people_lookup_provider_title">ผู้ให้บริการค้นหาบุคคล</string>
     <string name="reverse_lookup_provider_title">ผู้ให้บริการค้นหาย้อนกลับ</string>
     <string name="cyngn_reverse_lookup_provider_name">Cyngn ภาษาจีน (CN)</string>
+    <string name="speed_dial_edit_title">แก้ไขการโทรด่วน <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">กรุณาใส่หมายเลข</string>
     <string name="call_log_show_all_slots">ทุกซิม</string>
     <string name="call_log_all_calls_header">การใช้สายทั้งหมด</string>
     <string name="call_log_blacklist_header">บล็อคการโทรเท่านั้น</string>
+    <string name="call_log_blocked_empty">คุณไม่มีสายที่บล็อกไว้</string>
     <string name="call_log_stats_title">สถิติ</string>
     <string name="callStatsDetailTitle">รายละเอียดสถิติการโทร</string>
     <string name="call_stats_incoming">สายเข้า: <xliff:g id="value">%s</xliff:g></string>
@@ -80,6 +83,11 @@
     <string name="speed_dial_delete">ลบ</string>
     <string name="speed_dial_unassigned_dialog_title">ไม่ได้ระบุปุ่ม</string>
     <string name="speed_dial_unassigned_dialog_message">ไม่ได้ตั้งการโทรแบบรวดเร็วไว้กับปุ่ม \'<xliff:g id="number">%s</xliff:g>\' ต้องการตั้งเดี๋ยวนี้หรือไม่</string>
+    <string name="dialog_speed_dial_airplane_mode_message">เพื่อใช้การโทรด่วน ต้องปิดโหมดเครื่องบินก่อน</string>
+    <string name="speed_dial_can_not_be_set">ไม่สามารถตั้งค่าการโทรด่วนสำหรับคีย์นี้</string>
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
+    <string name="recentIncoming_empty">คุณไม่มีสายเรียกเข้า</string>
+    <string name="recentOutgoing_empty">คุณไม่มีสายโทรออก</string>
+    <string name="recentCalls_empty">บันทึกการโทรของคุณว่างเปล่า</string>
 </resources>

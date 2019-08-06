@@ -32,11 +32,11 @@
     <string name="enable_forward_lookup_summary">Közeli helyek megjelenítése a tárcsázóban történő kereséskor</string>
     <string name="enable_people_lookup_title">Személy keresés</string>
     <string name="enable_people_lookup_summary">Online eredmények megjelenítése a tárcsázóban történő személy kereséskor</string>
-    <string name="enable_reverse_lookup_title">Névkeresés</string>
+    <string name="enable_reverse_lookup_title">Fordított-lekérdezés</string>
     <string name="enable_reverse_lookup_summary">Személy vagy hely információk megjelenítése ismeretlen számról történő bejövő hívás esetén</string>
     <string name="forward_lookup_provider_title">Címkeresési szolgáltató</string>
     <string name="people_lookup_provider_title">Személy keresési szolgáltató</string>
-    <string name="reverse_lookup_provider_title">Névkeresési szolgáltató</string>
+    <string name="reverse_lookup_provider_title">Fordított-lekérdezési szolgáltató</string>
     <string name="cyngn_reverse_lookup_provider_name">Cyngn Kínai (CN)</string>
     <string name="speed_dial_edit_title">Gyorstárcsázó szerkesztése: <xliff:g id="index" example="2">%1$d</xliff:g></string>
     <string name="speed_dial_input_hint">Adjon meg egy számot</string>
@@ -123,4 +123,5 @@
     <string name="type_outgoing_video_wifi">Kimenő Wi-Fi videohívás</string>
     <string name="type_missed_vowifi">Nem fogadott Wi-Fi hanghívás</string>
     <string name="type_missed_video_wifi">Nem fogadott Wi-Fi videohívás</string>
+    <string name="lookup_disclaimer">A kikeresések lekérdezhetnek egy biztonságos (https) protokollon keresztül távoli webhelyeket az információk összegyűjtésének érdekében. A tudakozódás tartalmazhatja a másik fél telefonszámát vagy lekérdezési keresőkifejezést</string>
 </resources>

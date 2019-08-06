@@ -17,27 +17,27 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="hour">
-        <item quantity="one">1 ч.</item>
-        <item quantity="few">%d ч.</item>
-        <item quantity="many">%d ч.</item>
-        <item quantity="other">%d ч.</item>
+        <item quantity="one">1 h</item>
+        <item quantity="few">%d h</item>
+        <item quantity="many">%d h</item>
+        <item quantity="other">%d h</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 мин.</item>
-        <item quantity="few">%d мин.</item>
-        <item quantity="many">%d мин.</item>
-        <item quantity="other">%d мин.</item>
+        <item quantity="one">1 min</item>
+        <item quantity="few">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 сек.</item>
-        <item quantity="few">%d сек.</item>
-        <item quantity="many">%d сек.</item>
-        <item quantity="other">%d сек.</item>
+        <item quantity="one">1 sek</item>
+        <item quantity="few">%d sek</item>
+        <item quantity="many">%d sek</item>
+        <item quantity="other">%d sek</item>
     </plurals>
     <plurals name="call">
-        <item quantity="one">%d вызов</item>
-        <item quantity="few">%d вызова</item>
-        <item quantity="many">%d вызовов</item>
-        <item quantity="other">%d вызовов</item>
+        <item quantity="one">1 połączenie</item>
+        <item quantity="few">%d połączenia</item>
+        <item quantity="many">%d połączeń</item>
+        <item quantity="other">%d połączeń</item>
     </plurals>
 </resources>

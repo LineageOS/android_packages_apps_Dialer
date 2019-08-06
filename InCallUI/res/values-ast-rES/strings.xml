@@ -70,6 +70,56 @@
     <string name="notification_action_accept">Aceutar</string>
     <string name="notification_action_dismiss">Escartar</string>
     <string name="notification_missedCall_call_back">Llamar</string>
+    <string name="notification_missedCall_message">Mensaxe</string>
+    <string name="notification_external_call">Llamada en cursu n\'otru preséu</string>
+    <string name="notification_transfer_call">Tresferir Llamada</string>
+    <string name="incall_error_power_off">Pa facer una llamada, primero tienes de desactivar el mou avión.</string>
+    <string name="incall_error_emergency_only">Non rexistráu na rede.</string>
+    <string name="incall_error_out_of_service">Rede móvil non disponible.</string>
+    <string name="incall_error_no_phone_number_supplied">Pa facer una llamada, teclexa un númberu válidu.</string>
+    <string name="incall_error_call_failed">Nun pue llamase.</string>
+    <string name="incall_status_dialed_mmi">Aniciando secuencia MMI\u2026</string>
+    <string name="incall_error_supp_service_unknown">Serviciu non sofitáu.</string>
+    <string name="incall_error_supp_service_switch">Nun puen conmutase llamaes.</string>
+    <string name="incall_error_supp_service_separate">Nun pue separtase la llamada.</string>
+    <string name="incall_error_supp_service_transfer">Nun pue tresferise.</string>
+    <string name="incall_error_supp_service_conference">Conferencia fallida.</string>
+    <string name="incall_error_supp_service_reject">Nun pue refugase la llamada.</string>
+    <string name="incall_error_supp_service_hangup">Nun puen lliberase llamada(es).</string>
+    <string name="incall_call_type_label_sip">Llamada SIP</string>
+    <string name="emergency_enable_radio_dialog_title">Llamada d\'emerxencia</string>
+    <string name="emergency_enable_radio_dialog_message">Activando señal radio\u2026</string>
+    <string name="emergency_enable_radio_dialog_retry">Ensin serviciu. Volvi tentalo\u2026</string>
+    <string name="dial_emergency_error">Nun pue llamase. <xliff:g id="non_emergency_number">%s</xliff:g> nun ye un númberu d\'emerxencia.</string>
+    <string name="dial_emergency_empty_error">Nun pue llamase. Marca un númberu d\'emerxencia.</string>
+    <string name="dialerKeyboardHintText">Usar tecláu pa marcar</string>
+    <string name="onscreenHoldText_unselected">Retener llamada</string>
+    <string name="onscreenHoldText_selected">Reanudar llamada</string>
+    <string name="onscreenEndCallText">Finar llamada</string>
+    <string name="onscreenShowDialpadText_unselected">Amosar el marcador</string>
+    <string name="onscreenShowDialpadText_selected">Anubrir el Marcador</string>
+    <string name="onscreenMuteText_unselected">Silenciar</string>
+    <string name="onscreenMuteText_selected">Activar soníu</string>
+    <string name="onscreenAddCallText">Amestar llamada</string>
+    <string name="onscreenMergeCallsText">Mecer llamaes</string>
+    <string name="onscreenSwapCallsText">Intercambiar</string>
+    <string name="onscreenManageCallsText">Alministrar llamaes</string>
+    <string name="onscreenManageConferenceText">Alministrar conferencia telefónica</string>
+    <string name="onscreenConferenceText">Conferencia telefónica</string>
+    <string name="onscreenManageText">Remanar</string>
+    <string name="onscreenAudioText">Audiu</string>
+    <string name="onscreenVideoCallText">Videollamada</string>
+    <string name="onscreenChangeToVoiceText">Cambiar a llamada de voz</string>
+    <string name="onscreenSwitchCameraText">Camudar cámara</string>
+    <string name="onscreenTurnOnCameraText">Prender cámara</string>
+    <string name="onscreenTurnOffCameraText">Apagar cámara</string>
+    <string name="onscreenOverflowText">Más opciones</string>
+    <string name="player_started">Reproductor aniciáu</string>
+    <string name="player_stopped">Reproductor paráu</string>
+    <string name="camera_not_ready">Cámara non tresnada</string>
+    <string name="camera_ready">Cámara tresnada</string>
+    <string name="unknown_call_session_event">"Eventu de sesión de llamada desconocíu"</string>
+    <string name="voicemail_provider">Serviciu</string>
     <string name="voicemail_settings">Configuración</string>
     <string name="voicemail_number_not_set">&lt;Nun s\'afitó&gt;</string>
     <string name="other_settings">Otres opciones de llamada</string>
@@ -129,4 +179,9 @@
     <string name="open_time_span"><xliff:g id="open_time">%1$s</xliff:g> - <xliff:g id="close_time">%2$s</xliff:g></string>
     <string name="opening_hours"><xliff:g id="earlier_times">%1$s</xliff:g>, <xliff:g id="later_time">%2$s</xliff:g></string>
     <string name="opens_tomorrow_at">Abiertu mañana a les <xliff:g id="open_time">%s</xliff:g></string>
+    <string name="opens_today_at">Abiertu güei a les <xliff:g id="open_time">%s</xliff:g></string>
+    <string name="closes_today_at">Pieslla a les <xliff:g id="close_time">%s</xliff:g></string>
+    <string name="closed_today_at">Pieslla güei a les <xliff:g id="close_time">%s</xliff:g></string>
+    <string name="open_now">Abiertu agora</string>
+    <string name="closed_now">Peslláu agora</string>
 </resources>

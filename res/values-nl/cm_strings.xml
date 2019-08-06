@@ -123,4 +123,5 @@
     <string name="type_outgoing_video_wifi">Uitgaande video-oproep via wifi</string>
     <string name="type_missed_vowifi">Gemiste spraakoproep via wifi</string>
     <string name="type_missed_video_wifi">Gemiste video-oproep via wifi</string>
+    <string name="lookup_disclaimer">Zoekopdrachten kunnen gegevens versturen naar externe websites via een beveiligd protocol (https) om informatie te verzamelen. De gegevens kunnen het telefoonnummer van de andere partij of de zoekopdracht bevatten</string>
 </resources>

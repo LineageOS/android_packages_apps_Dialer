@@ -109,4 +109,5 @@
     <string name="type_outgoing_video_wifi">Thirrje me video Wi-Fi në dalje</string>
     <string name="type_missed_vowifi">Thirrje zanore Wi-Fi e humbur</string>
     <string name="type_missed_video_wifi">Thirrje me video Wi-Fi e humbur</string>
+    <string name="lookup_disclaimer">Kërkimet mund të dërgojnë pyetje mbi protokolle të sigurta (https) drejt faqeve të tjera për të marë informacion. Kjo kërkesë mund të përfshijë numrin e personit tjetër ose pse kërkohet</string>
 </resources>

@@ -36,12 +36,16 @@
     <string name="call_log_trash_voicemail">Desaniciar mensaxe de voz</string>
     <string name="call_log_archive_voicemail">Archivar mensaxe de voz</string>
     <string name="call_log_share_voicemail">Compartir mensaxe de voz</string>
+    <string name="snackbar_voicemail_deleted">Desanicióse\'l mensaxe de voz</string>
+    <string name="snackbar_voicemail_archived">Archivóse\'l mensaxe de voz</string>
     <string name="snackbar_voicemail_deleted_undo">DESFACER</string>
+    <string name="snackbar_voicemail_archived_goto">AL FICHERU</string>
     <string name="clearCallLogConfirmation_title">¿Llimpiar historial de llamaes?</string>
     <string name="clearCallLogConfirmation">Esto desaniciará toles llamaes del to historial</string>
     <string name="clearCallLogProgress_title">Llimpiando historial de llamaes\u2026</string>
     <string name="userCallActivityLabel" product="default">Teléfonu</string>
     <string name="notification_missedCallTitle">Llamada perdida</string>
+    <string name="notification_missedWorkCallTitle">Perdióse la llamada\'l trabayu</string>
     <string name="notification_missedCallsTitle">Llamaes perdíes</string>
     <string name="notification_missedCallsMsg"><xliff:g id="num_missed_calls">%s</xliff:g> llamaes perdíes</string>
     <string name="notification_missedCall_call_back">Llamar</string>
@@ -149,20 +153,26 @@
     <string name="call_not_available">Nun pue facese una llamada porque l\'app Teléfonu ta deshabilitada.</string>
     <string name="activity_not_available">Nun hai aplicación pa eso nesti preséu</string>
     <string name="dialer_hint_find_contact">Guetar contautos</string>
+    <string name="block_number_search_hint">Amiesta o gueta contautos</string>
     <string name="call_log_activity_title_font_family">sans-serif-light</string>
     <string name="view_full_call_history_font_family">sans-serif</string>
     <string name="call_log_all_empty">El to historial de llamaes ta baleru</string>
     <string name="call_log_all_empty_action">Facer una llamada</string>
     <string name="call_log_missed_empty">Nun tienes llamaes perdíes.</string>
     <string name="call_log_voicemail_empty">La bandexa d\'entrada del to corréu de voz ta balera.</string>
+    <string name="voicemail_archive_empty">El to archivu de mensaxes de voz ta baleru.</string>
     <string name="show_favorites_only">Amosar namái favoritos</string>
     <string name="call_log_activity_title">Historial de llamaes</string>
+    <string name="voicemail_archive_activity_title">Archivu de mensaxes de voz</string>
     <string name="call_log_all_title">Too</string>
     <string name="call_log_missed_title">Perdíes</string>
     <string name="call_log_voicemail_title">Buzón de voz</string>
+    <string name="migrate_blocked_numbers_dialog_title">Bloquéu nuevu y acencielláu</string>
     <string name="migrate_blocked_numbers_dialog_message">Pa protexete meyor, Teléfonu precisa camudar cómo funciona\'l bloquéu. Los tos númberos bloquiaos agora pararán llamaes y SMS, y quiciabes se compartan con otres aplicaciones.</string>
     <string name="migrate_blocked_numbers_dialog_allow_button">Permitir</string>
     <string name="migrate_blocked_numbers_dialog_cancel_button">@android:string/cancel</string>
+    <string name="block_number_confirmation_title">¿Bloquiar
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
     <string name="block_number_confirmation_message_vvm">        Bloquiaránse les llamaes y desaniciaránse automáticamente los mensaxes de voz.
     </string>
     <string name="block_number_confirmation_message_no_vvm">        Bloquiaránse los númberos d\'esti númberu pero entá sedrá a dexate mensaxes de voz.
@@ -170,6 +180,8 @@
     <string name="block_number_confirmation_message_new_filtering">        Yá nun recibirás llamaes o SMS d\'esti númberu.
     </string>
     <string name="block_number_ok">BLOQUIAR</string>
+    <string name="unblock_number_confirmation_title">¿Desbloquiar
+        <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>?</string>
     <string name="unblock_number_ok">DESBLOQUIAR</string>
     <string name="tab_speed_dial">Marcáu rápidu</string>
     <string name="tab_history">Historial de llamaes</string>
@@ -197,10 +209,13 @@
     </string>
     <string name="description_incoming_missed_call">Llamada perdida de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
     <string name="description_incoming_answered_call">Llamada contestada de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
+    <string name="description_unread_voicemail">Llamada de voz ensin lleer de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
+    <string name="description_read_voicemail">Llamada de voz de <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" example="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" example="2 min ago">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
     <string name="description_outgoing_call">Llamar a <xliff:g id="nameOrNumber" exemplu="John Smith">^1</xliff:g>, <xliff:g id="typeOrLocation" exemplu="Mobile">^2</xliff:g>, <xliff:g id="timeOfCall" exemplu=" fai 2 min">^3</xliff:g>, <xliff:g id="phoneAccount" example="on SIM 1">^4</xliff:g>.</string>
     <string name="description_phone_account">encendíu<xliff:g id="phoneAccount" example="SIM 1">^1</xliff:g></string>
     <string name="description_via_number">per <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
     <string name="call_log_via_number">per <xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g></string>
+    <string name="description_via_number_phone_account">en <xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g>, per <xliff:g id="number" example="(555) 555-5555">%2$s</xliff:g></string>
     <string name="call_log_via_number_phone_account"><xliff:g id="phoneAccount" example="SIM 1">%1$s</xliff:g> per <xliff:g id="number" example="(555) 555-5555">%2$s</xliff:g></string>
     <string name="description_call_log_call_action">Llamar</string>
     <string name="description_call_action">        Llamar a <xliff:g id="nameOrNumber" example="John Smith">^1</xliff:g>
@@ -250,14 +265,27 @@
     <string name="respond_via_sms_setting_title">Rempuestes rápides</string>
     <string name="call_settings_label">Llamaes</string>
     <string name="manage_blocked_numbers_label">Bloquéu de llamaes</string>
+    <string name="blocked_numbers_disabled_emergency_header_label">Torga de llamaes apagáu temporalmente    </string>
+    <string name="blocked_numbers_disabled_emergency_desc">El bloquéu de llamaes desactivóse porque contauteste colos servicios d\'emerxencia dende esti teléfonu.
+        Nes últimes 48 hores. Volverá a habilitase automáticamente en pasando 48 hores.
+        gande.    </string>
     <string name="import_send_to_voicemail_numbers_label">Importar númberos</string>
+    <string name="blocked_call_settings_import_description">Con anterioridá marqueste que delles persones que llamen se manden automáticamente al corréu de voz per otres aplicaciones.    </string>
     <string name="blocked_call_settings_view_numbers_button">Ver númberos</string>
     <string name="blocked_call_settings_import_button">Importar</string>
     <string name="send_to_voicemail_import_failed">Falló la importación</string>
     <string name="voicemail_archive_failed">Fallu al archivar el mensaxe de voz.</string>
     <string name="description_blocked_number_list_delete">Desbloquiar númbery</string>
     <string name="addBlockedNumber">Amestar númberu</string>
+    <string name="block_number_footer_message_vvm">        Bloquiaránse les llamaes d\'estos númberos y los mensaxes de voz desaniciaránse automáticamente.
+    </string>
+    <string name="block_number_footer_message_no_vvm">         Van bloquiase les llamaes dende estos númberos, pero entá podríen ser a dexate mensaxes nel buzón de voz.
+    </string>
     <string name="block_list">Númberos bloquiaos</string>
+    <string name="invalidNumber"><xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
+        nun ye válidu.</string>
+    <string name="alreadyBlocked"><xliff:g id="number" example="(555) 555-5555">%1$s</xliff:g>
+        yá ta bloquiáu.</string>
     <string name="call_blocking_disabled_notification_title">        Desactivóse\'l bloquéu de llamaes por 48 hores
     </string>
     <string name="call_blocking_disabled_notification_text">        Desactivóse porque se fexo una llamada d\'emerxencia.
@@ -272,5 +300,8 @@
     <string name="permission_no_search">Pa guetar los tos contautos, activa\'l permisu de Contautos.</string>
     <string name="permission_place_call">Pa facer una llamada, activa\'l permisu de Teléfonu.</string>
     <string name="toast_cannot_write_system_settings">L\'aplicación Teléfonu nun tien permisu pa escribir nos axustes del sistema.</string>
+    <string name="blocked_number_call_log_label">Torgada</string>
     <string name="accessibility_call_is_active"><xliff:g id="nameOrNumber">^1</xliff:g> ta activu</string>
+    <string name="missing_account_type">(Ensin triba)</string>
+    <string name="missing_account_name">(Ensin nome)</string>
 </resources>
