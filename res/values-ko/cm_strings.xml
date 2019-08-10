@@ -16,132 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">주변 장소</string>
-  <string name="people">사람</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">다이얼패드 T9 검색</string>
-  <string name="t9_search_input_locale">T9 검색 입력</string>
-  <string name="t9_search_input_locale_default">기본</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">전화번호 검색</string>
-  <string name="lookup_settings_description">알 수 없는 전화번호 검색</string>
-  <string name="enable_forward_lookup_title">순서대로 검색</string>
-  <string name="enable_forward_lookup_summary">다이얼러 검색시 근처 장소 표시</string>
-  <string name="enable_people_lookup_title">사람 찾기</string>
-  <string name="enable_people_lookup_summary">다이얼러 검색시 온라인 사람 찾기 결과 표시</string>
-  <string name="enable_reverse_lookup_title">역순 검색</string>
-  <string name="enable_reverse_lookup_summary">모르는 번호로부터 전화 수신시 발신자 정보 검색</string>
-  <string name="forward_lookup_provider_title">정방향 조회 검색 제공자</string>
-  <string name="people_lookup_provider_title">사람 검색 제공자</string>
-  <string name="reverse_lookup_provider_title">역방향 조회 검색 제공자</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn 중국 (CN)</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">블랙 리스트 전화</string>
-  <string name="call_log_action_block">발신자 차단</string>
-  <string name="call_log_action_unblock">발신자 차단함</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">스피드 다이얼 설정</string>
-  <string name="speed_dial_not_set">(설정되지 않음)</string>
-  <string name="speed_dial_replace">바꾸기</string>
-  <string name="speed_dial_delete">삭제</string>
-  <string name="speed_dial_unassigned_dialog_title">할당되지 않은 키</string>
-  <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' 키에 스피드 다이얼 번호가 할당되어 있지 않습니다. 지금 번호를 할당할까요?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">스피드 다이얼을 사용하려면 비행기 모드를 해제하십시오.</string>
-  <string name="yes">예</string>
-  <string name="no">아니오</string>
-  <string name="incall_vibration_category_title">In-call vibration</string>
-  <string name="incall_vibrate_outgoing_title">수신 시 진동</string>
-  <string name="incall_vibrate_call_waiting_title">통화 대기 중 진동</string>
-  <string name="incall_vibrate_hangup_title">통화 종료 시 진동</string>
-  <string name="incall_vibrate_45_title">매 분마다 진동</string>
-  <string name="incall_vibrate_45_summary">발신 통화 중 매 45초마다 진동</string>
-  <string name="call_log_show_all_slots">모든 SIM</string>
-  <string name="call_log_all_calls_header">모든 통화</string>
-  <string name="call_log_blacklist_header">차단된 전화만</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">통계</string>
-  <string name="callStatsDetailTitle">전화 통계 정보</string>
-  <string name="call_stats_incoming">수신: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">발신: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">부재중: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blacklisted">차단됨: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">합계: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">합계: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">시작 날짜</string>
-  <string name="call_stats_filter_to">끝 날짜</string>
-  <string name="call_stats_filter_picker_title">필터 범위</string>
-  <string name="date_quick_selection">빠른 선택</string>
-  <string name="date_qs_currentmonth">이번 달</string>
-  <string name="date_qs_currentquarter">이번 분기</string>
-  <string name="date_qs_currentyear">올해</string>
-  <string name="date_qs_lastweek">지난 주</string>
-  <string name="date_qs_lastmonth">지난 달</string>
-  <string name="date_qs_lastquarter">지난 분기</string>
-  <string name="date_qs_lastyear">지난 해</string>
-  <string name="call_stats_date_filter">시간 범위 조정</string>
-  <string name="call_stats_reset_filter">시간 범위 재설정</string>
-  <string name="call_stats_sort_by_duration">통화 시간으로 정렬</string>
-  <string name="call_stats_sort_by_count">통화 횟수로 정렬</string>
-  <string name="call_stats_title_for_number">이 번호는</string>
-  <string name="call_stats_title_of_total">총</string>
-  <string name="call_stats_title_durations">통화 시간</string>
-  <string name="call_stats_title_count">통화 횟수</string>
-  <string name="call_stats_title_average_duration">평균 통화 시간</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">선택된 시간 범위에 존재하는 통화 내역이 없습니다.</string>
-  <string name="call_recording_category_title">통화 녹음</string>
-  <string name="call_recording_format">오디오 포맷</string>
-  <string name="call_playback_no_app_found_toast">선택된 녹음을 재생할 수 있는 애플리케이션을 찾을 수 없습니다.</string>
-  <string name="invalid_number_text">"%1$s이(가) 이 전화를 할 수 없었습니다. 이 번호가 정확합니까?"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">전화 번호를 입력하거나\n연락처를 검색할 수 있습니다</string>
-  <string name="sign_in_hint_text">%1$s 전화를 하기 위해 로그인</string>
-  <string name="wifi_hint_text">%1$s 통화를 무료로 하기 위해 Wi-Fi에 연결하세요.</string>
-  <string name="roaming_hint_text">%1$s은(는) 로밍입니다. %2$s 통화를 무료로 하기 위해 Wi-Fi에 연결하세요.</string>
-  <string name="emergency_call_hint_text">SIM 카드 없음. 긴급 통화만 가능.</string>
-  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> 전화</string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> 설정</string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g>으(로) 전화
-</string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">예</string>
-  <string name="callerinfo_provider_auth_no_short">아니오</string>
-  <string name="callerinfo_provider_auth_no">아니요</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g>이(가) 당신의 연락처, \'나\' 프로필과 이메일 주소가 포함되어 있을 수 있는 Cyanogen OS 계정 정보에 접근할 수 있습니다.</string>
-  <string name="callerinfo_provider_auth_learn_more">더 알아보기</string>
-  <string name="callerinfo_provider_auth_desc">환영합니다! <xliff:g id="provider_name">%s</xliff:g>을(를) 사용하여 알 수 없는 번호를 식별하고 원치 않는 전화를 차단하시겠습니까?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">환영합니다! <xliff:g id="provider_name">%s</xliff:g>을(를) 사용하여 알 수 없는 번호를 식별하시겠습니까?</string>
-  <string name="callerinfo_provider_summary">알 수 없는 번호와 스팸 전화 식별</string>
-  <string name="callerinfo_provider_summary_no_spam">알 수 없는 번호 식별</string>
-  <string name="silence_spam_title">스팸 전화 무음</string>
-  <string name="silence_spam_summary">스팸 전화가 걸려오면 벨소리를 울리지 않음</string>
-  <string name="block_hidden_title">발신자 표시 제한 번호 차단</string>
-  <string name="block_hidden_summary">발신자 표시 제한 번호를 스팸 전화로 간주합니다</string>
-  <string name="block_dialog_title">이 번호를 차단하겠습니까?</string>
-  <string name="block_dialog_positive">차단</string>
-  <string name="block_dialog_negative">취소</string>
-  <string name="block_dialog_description">더 이상 이 사람이 보내는 전화나 메시지를 받지 않게 됩니다.</string>
-  <string name="block_dialog_report_spam"><xliff:g id="provider">%s</xliff:g>에 스팸으로 신고</string>
-  <string name="provider_disable_title">%1$s을(를) 비활성화합니까?</string>
-  <string name="provider_disable_message">%1$s를 비활성화하면 발신자 정보 확인을 할 수 없습니다.</string>
-  <string name="provider_disable_spam_message">%1$s를 비활성화하면 발신자 정보 확인과 스팸 차단을 할 수 없습니다.</string>
-  <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>이(가) 제공함</string>
-  <string name="provider_help">"여기에서 모드를 전환하여\n%1$s 전화를 하세요"</string>
-  <string name="provider_search_help">"여기에서 모드를 전환하여\n%1$s 연락처 검색을 하세요"</string>
-  <string name="provider_button_help">"확인"</string>
-  <string name="provider_voice_call">"%1$s 음성 통화"</string>
-  <string name="provider_video_call">"%1$s 영상 통화"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">전화를 걸기 위해 전화 권한을 부여하세요.</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">노트 보기</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">어디에서나 노트 작성</string>
-  <string name="callerinfo_provider_status_disabling">비활성화 중</string>
-  <string name="show_dialpad_at_start_title">바로 다이얼패드 보기</string>
+    <string name="nearby_places">주변 장소</string>
+    <string name="people">사람</string>
+    <string name="preference_category_t9_dialpad_search">다이얼패드 T9 검색</string>
+    <string name="t9_search_input_locale">T9 검색 입력</string>
+    <string name="t9_search_input_locale_default">기본</string>
+    <string name="lookup_settings_label">전화번호 검색</string>
+    <string name="lookup_settings_description">알 수 없는 전화번호 검색</string>
+    <string name="enable_forward_lookup_title">순서대로 검색</string>
+    <string name="enable_forward_lookup_summary">다이얼러 검색시 근처 장소 표시</string>
+    <string name="enable_people_lookup_title">사람 찾기</string>
+    <string name="enable_people_lookup_summary">다이얼러 검색시 온라인 사람 찾기 결과 표시</string>
+    <string name="enable_reverse_lookup_title">역순 검색</string>
+    <string name="enable_reverse_lookup_summary">모르는 번호로부터 전화 수신시 발신자 정보 검색</string>
+    <string name="forward_lookup_provider_title">정방향 조회 검색 제공자</string>
+    <string name="people_lookup_provider_title">사람 검색 제공자</string>
+    <string name="reverse_lookup_provider_title">역방향 조회 검색 제공자</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn 중국 (CN)</string>
+    <string name="type_blacklist">블랙 리스트 전화</string>
+    <string name="call_log_action_block">발신자 차단</string>
+    <string name="call_log_action_unblock">발신자 차단함</string>
+    <string name="speed_dial_settings">스피드 다이얼 설정</string>
+    <string name="speed_dial_not_set">(설정되지 않음)</string>
+    <string name="speed_dial_replace">바꾸기</string>
+    <string name="speed_dial_delete">삭제</string>
+    <string name="speed_dial_unassigned_dialog_title">할당되지 않은 키</string>
+    <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' 키에 스피드 다이얼 번호가 할당되어 있지 않습니다. 지금 번호를 할당할까요?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">스피드 다이얼을 사용하려면 비행기 모드를 해제하십시오.</string>
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
+    <string name="incall_vibration_category_title">In-call vibration</string>
+    <string name="incall_vibrate_outgoing_title">수신 시 진동</string>
+    <string name="incall_vibrate_call_waiting_title">통화 대기 중 진동</string>
+    <string name="incall_vibrate_hangup_title">통화 종료 시 진동</string>
+    <string name="incall_vibrate_45_title">매 분마다 진동</string>
+    <string name="incall_vibrate_45_summary">발신 통화 중 매 45초마다 진동</string>
+    <string name="call_log_show_all_slots">모든 SIM</string>
+    <string name="call_log_all_calls_header">모든 통화</string>
+    <string name="call_log_blacklist_header">차단된 전화만</string>
+    <string name="call_log_stats_title">통계</string>
+    <string name="callStatsDetailTitle">전화 통계 정보</string>
+    <string name="call_stats_incoming">수신: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">발신: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">부재중: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">차단됨: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">합계: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">합계: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">시작 날짜</string>
+    <string name="call_stats_filter_to">끝 날짜</string>
+    <string name="call_stats_filter_picker_title">필터 범위</string>
+    <string name="date_quick_selection">빠른 선택</string>
+    <string name="date_qs_currentmonth">이번 달</string>
+    <string name="date_qs_currentquarter">이번 분기</string>
+    <string name="date_qs_currentyear">올해</string>
+    <string name="date_qs_lastweek">지난 주</string>
+    <string name="date_qs_lastmonth">지난 달</string>
+    <string name="date_qs_lastquarter">지난 분기</string>
+    <string name="date_qs_lastyear">지난 해</string>
+    <string name="call_stats_date_filter">시간 범위 조정</string>
+    <string name="call_stats_reset_filter">시간 범위 재설정</string>
+    <string name="call_stats_sort_by_duration">통화 시간으로 정렬</string>
+    <string name="call_stats_sort_by_count">통화 횟수로 정렬</string>
+    <string name="call_stats_title_for_number">이 번호는</string>
+    <string name="call_stats_title_of_total">총</string>
+    <string name="call_stats_title_durations">통화 시간</string>
+    <string name="call_stats_title_count">통화 횟수</string>
+    <string name="call_stats_title_average_duration">평균 통화 시간</string>
+    <string name="recent_calls_no_items_in_range">선택된 시간 범위에 존재하는 통화 내역이 없습니다.</string>
+    <string name="call_recording_category_title">통화 녹음</string>
+    <string name="call_recording_format">오디오 포맷</string>
+    <string name="call_playback_no_app_found_toast">선택된 녹음을 재생할 수 있는 애플리케이션을 찾을 수 없습니다.</string>
+    <string name="invalid_number_text">"%1$s이(가) 이 전화를 할 수 없었습니다. 이 번호가 정확합니까?"</string>
+    <string name="empty_dialpad_t9_example">전화 번호를 입력하거나\n연락처를 검색할 수 있습니다</string>
+    <string name="sign_in_hint_text">%1$s 전화를 하기 위해 로그인</string>
+    <string name="wifi_hint_text">%1$s 통화를 무료로 하기 위해 Wi-Fi에 연결하세요.</string>
+    <string name="roaming_hint_text">%1$s은(는) 로밍입니다. %2$s 통화를 무료로 하기 위해 Wi-Fi에 연결하세요.</string>
+    <string name="emergency_call_hint_text">SIM 카드 없음. 긴급 통화만 가능.</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> 전화</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> 설정</string>
+    <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g>으(로) 전화</string>
+    <string name="callerinfo_provider_auth_yes">예</string>
+    <string name="callerinfo_provider_auth_no_short">아니오</string>
+    <string name="callerinfo_provider_auth_no">아니요</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g>이(가) 당신의 연락처, \'나\' 프로필과 이메일 주소가 포함되어 있을 수 있는 Cyanogen OS 계정 정보에 접근할 수 있습니다.</string>
+    <string name="callerinfo_provider_auth_learn_more">더 알아보기</string>
+    <string name="callerinfo_provider_auth_desc">환영합니다! <xliff:g id="provider_name">%s</xliff:g>을(를) 사용하여 알 수 없는 번호를 식별하고 원치 않는 전화를 차단하시겠습니까?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">환영합니다! <xliff:g id="provider_name">%s</xliff:g>을(를) 사용하여 알 수 없는 번호를 식별하시겠습니까?</string>
+    <string name="callerinfo_provider_summary">알 수 없는 번호와 스팸 전화 식별</string>
+    <string name="callerinfo_provider_summary_no_spam">알 수 없는 번호 식별</string>
+    <string name="silence_spam_title">스팸 전화 무음</string>
+    <string name="silence_spam_summary">스팸 전화가 걸려오면 벨소리를 울리지 않음</string>
+    <string name="block_hidden_title">발신자 표시 제한 번호 차단</string>
+    <string name="block_hidden_summary">발신자 표시 제한 번호를 스팸 전화로 간주합니다</string>
+    <string name="block_dialog_title">이 번호를 차단하겠습니까?</string>
+    <string name="block_dialog_positive">차단</string>
+    <string name="block_dialog_negative">취소</string>
+    <string name="block_dialog_description">더 이상 이 사람이 보내는 전화나 메시지를 받지 않게 됩니다.</string>
+    <string name="block_dialog_report_spam"><xliff:g id="provider">%s</xliff:g>에 스팸으로 신고</string>
+    <string name="provider_disable_title">%1$s을(를) 비활성화합니까?</string>
+    <string name="provider_disable_message">%1$s를 비활성화하면 발신자 정보 확인을 할 수 없습니다.</string>
+    <string name="provider_disable_spam_message">%1$s를 비활성화하면 발신자 정보 확인과 스팸 차단을 할 수 없습니다.</string>
+    <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>이(가) 제공함</string>
+    <string name="provider_help">"여기에서 모드를 전환하여\n%1$s 전화를 하세요"</string>
+    <string name="provider_search_help">"여기에서 모드를 전환하여\n%1$s 연락처 검색을 하세요"</string>
+    <string name="provider_button_help">"확인"</string>
+    <string name="provider_voice_call">"%1$s 음성 통화"</string>
+    <string name="provider_video_call">"%1$s 영상 통화"</string>
+    <string name="cm_permission_place_call">전화를 걸기 위해 전화 권한을 부여하세요.</string>
+    <string name="search_shortcut_view_note">노트 보기</string>
+    <string name="note_mod_settings_summary">어디에서나 노트 작성</string>
+    <string name="callerinfo_provider_status_disabling">비활성화 중</string>
+    <string name="show_dialpad_at_start_title">바로 다이얼패드 보기</string>
 </resources>

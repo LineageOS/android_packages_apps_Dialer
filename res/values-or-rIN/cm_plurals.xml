@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 ଘଣ୍ଟା</item>
-    <item quantity="other">%d ଘଣ୍ଟା</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 ମିନିଟ୍‍</item>
-    <item quantity="other">%d ମିନିଟ୍‍</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 ସେକେଣ୍ଡ</item>
-    <item quantity="other">%d ସେକେଣ୍ଡ</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 କଲ୍‍</item>
-    <item quantity="other">%d କଲ୍‍</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 ଘଣ୍ଟା</item>
+        <item quantity="other">%d ଘଣ୍ଟା</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 ମିନିଟ୍‍</item>
+        <item quantity="other">%d ମିନିଟ୍‍</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 ସେକେଣ୍ଡ</item>
+        <item quantity="other">%d ସେକେଣ୍ଡ</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 କଲ୍‍</item>
+        <item quantity="other">%d କଲ୍‍</item>
+    </plurals>
 </resources>

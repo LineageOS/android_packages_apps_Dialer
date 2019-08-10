@@ -16,131 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Nærliggende steder</string>
-  <string name="people">Folk</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">T9 Tastatursøk</string>
-  <string name="t9_search_input_locale">T9 søke input</string>
-  <string name="t9_search_input_locale_default">Standard</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Telefonnummer oppslag</string>
-  <string name="lookup_settings_description">Oppslag av ukjente telefonnumre</string>
-  <string name="enable_forward_lookup_title">videresend oppslag</string>
-  <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefon appen</string>
-  <string name="enable_people_lookup_title">Slå opp folk</string>
-  <string name="enable_people_lookup_summary">Vise online resultater for folk når du søker i telefon appen</string>
-  <string name="enable_reverse_lookup_title">Omvendt oppslag</string>
-  <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller sted med ukjent nummer på innkommende samtaler</string>
-  <string name="forward_lookup_provider_title">Plassøketjeneste</string>
-  <string name="people_lookup_provider_title">Personsøketjeneste</string>
-  <string name="reverse_lookup_provider_title">Omvendt oppslag leverandør</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (CN)</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Svartelistet samtale</string>
-  <string name="call_log_action_block">Blokker ringer</string>
-  <string name="call_log_action_unblock">Ringer blokkert</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
-  <string name="speed_dial_not_set">(ikke angitt)</string>
-  <string name="speed_dial_replace">Erstatt</string>
-  <string name="speed_dial_delete">Slett</string>
-  <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
-  <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">For å bruke hurtigoppringing må du skru av flymodus.</string>
-  <string name="yes">Ja</string>
-  <string name="no">Nei</string>
-  <string name="incall_vibration_category_title">Vibrasjon under samtalen</string>
-  <string name="incall_vibrate_outgoing_title">Vibrere på svar</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrere på samtale venter</string>
-  <string name="incall_vibrate_hangup_title">Vibrere på legg på</string>
-  <string name="incall_vibrate_45_title">Vibrere hvert minutt</string>
-  <string name="incall_vibrate_45_summary">Vibrerer på 45 sekunders tiden for å markere hvert minutt under utgående samtale</string>
-  <string name="call_log_show_all_slots">Alle SIM-kort</string>
-  <string name="call_log_all_calls_header">Alle samtaler</string>
-  <string name="call_log_blacklist_header">Bare blokkerte samtaler</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistikk</string>
-  <string name="callStatsDetailTitle">Detaljer for samtalestatus</string>
-  <string name="call_stats_incoming">Innkommende: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_outgoing">Utgående: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_missed">Ubesvart: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_blacklisted">Blokkert: <xliff:g id="value">%s </xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d </xliff:g>%%</string>
-  <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Startdato</string>
-  <string name="call_stats_filter_to">Sluttdato</string>
-  <string name="call_stats_filter_picker_title">Filtreringsområde</string>
-  <string name="date_quick_selection">Hurtigvalg</string>
-  <string name="date_qs_currentmonth">Gjeldende måned</string>
-  <string name="date_qs_currentquarter">Gjeldende kvartal</string>
-  <string name="date_qs_currentyear">Inneværende år</string>
-  <string name="date_qs_lastweek">Forrige uke</string>
-  <string name="date_qs_lastmonth">Forrige måned</string>
-  <string name="date_qs_lastquarter">Siste kvartal</string>
-  <string name="date_qs_lastyear">I fjor</string>
-  <string name="call_stats_date_filter">Juster tidsområde</string>
-  <string name="call_stats_reset_filter">Tilbakestille tidsområde</string>
-  <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
-  <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
-  <string name="call_stats_title_for_number">Dette nummeret</string>
-  <string name="call_stats_title_of_total">Av totalt</string>
-  <string name="call_stats_title_durations">Samtalevarighet</string>
-  <string name="call_stats_title_count">Antall anrop</string>
-  <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Din anropslogg inneholder ikke noen samtaler innenfor den valgte perioden.</string>
-  <string name="call_recording_category_title">Samtaleinnspilling</string>
-  <string name="call_recording_format">Lydformat</string>
-  <string name="call_playback_no_app_found_toast">Ingen apper kan spille av den valgte innspillingen.</string>
-  <string name="invalid_number_text">"%1$s kunne ikke sette opp samtalen. Er nummeret korrekt?"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">Du kan ringe et telefonnummer eller\nsøke etter en kontakt</string>
-  <string name="sign_in_hint_text">Logg inn for å ringe %1$s samtaler</string>
-  <string name="wifi_hint_text">Ring gratis %1$s til %1$s samtaler via Wi-Fi.</string>
-  <string name="roaming_hint_text">%1$s er roaming. Ring gratis %2$s til %2$s samtaler via Wi-Fi.</string>
-  <string name="emergency_call_hint_text">Ingen SIM-kort. Bare nødanrop.</string>
-  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> samtale</string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> innstillinger</string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using">Ring med bruk av <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">Ja</string>
-  <string name="callerinfo_provider_auth_no_short">Nei</string>
-  <string name="callerinfo_provider_auth_no">Nei takk</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> kommer til å ha tilgang til kontaktene dine, Me profilen din og Cyanogen OS kontoen din som kan inkludere e-post adressen din.</string>
-  <string name="callerinfo_provider_auth_learn_more">Lær mer</string>
-  <string name="callerinfo_provider_auth_desc">Velkommen! Ønsker du at <xliff:g id="provider_name">%s</xliff:g> skal identifisere ukjente ringere og blokkere uønskede samtaler?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">Velkommen! Ønsker du at <xliff:g id="provider_name">%s</xliff:g> skal identifisere ukjente ringere?</string>
-  <string name="callerinfo_provider_summary">Identifiserer ukjente ringere og spam</string>
-  <string name="callerinfo_provider_summary_no_spam">Identifiserer ukjente ringere</string>
-  <string name="silence_spam_title">Demp spam anrop</string>
-  <string name="silence_spam_summary">La aldri spam anrop ringe imellom</string>
-  <string name="block_hidden_title">Blokker skjulte telefonnummere</string>
-  <string name="block_hidden_summary">Se på skjulte nummere som spam</string>
-  <string name="block_dialog_title">Blokker denne ringeren?</string>
-  <string name="block_dialog_positive">Blokker</string>
-  <string name="block_dialog_negative">Avbryt</string>
-  <string name="block_dialog_description">Du vil ikke lenger motta samtaler eller meldinger fra denne personen.</string>
-  <string name="block_dialog_report_spam">Rapporter som spam til <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">Slå av %1$s?</string>
-  <string name="provider_disable_message">Ved å slå av %1$s, vil du ikke ha ringer ID.</string>
-  <string name="provider_disable_spam_message">Ved å deaktivere %1$s, så vil du ikke ha noe spam beskyttelse eller ringer ID.</string>
-  <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"Ring %1$s ganger ved å\nbytte moduser her"</string>
-  <string name="provider_search_help">"Søk %1$s kontakter ved å\nbytte moduser her"</string>
-  <string name="provider_button_help">"Skjønner"</string>
-  <string name="provider_voice_call">"%1$s stemme-anrop"</string>
-  <string name="provider_video_call">"%1$s video-anrop"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">For å ringe må du slå på Telefon tillatelser.</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">Vis notat</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">Skriv notater hvor som helst</string>
-  <string name="callerinfo_provider_status_disabling">Deaktiverer</string>
-  <string name="show_dialpad_at_start_title">Vis oppringingstastaturet ved start</string>
+    <string name="nearby_places">Nærliggende steder</string>
+    <string name="people">Folk</string>
+    <string name="preference_category_t9_dialpad_search">T9 Tastatursøk</string>
+    <string name="t9_search_input_locale">T9 søke input</string>
+    <string name="t9_search_input_locale_default">Standard</string>
+    <string name="lookup_settings_label">Telefonnummer oppslag</string>
+    <string name="lookup_settings_description">Oppslag av ukjente telefonnumre</string>
+    <string name="enable_forward_lookup_title">videresend oppslag</string>
+    <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefon appen</string>
+    <string name="enable_people_lookup_title">Slå opp folk</string>
+    <string name="enable_people_lookup_summary">Vise online resultater for folk når du søker i telefon appen</string>
+    <string name="enable_reverse_lookup_title">Omvendt oppslag</string>
+    <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller sted med ukjent nummer på innkommende samtaler</string>
+    <string name="forward_lookup_provider_title">Plassøketjeneste</string>
+    <string name="people_lookup_provider_title">Personsøketjeneste</string>
+    <string name="reverse_lookup_provider_title">Omvendt oppslag leverandør</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn kinesisk (CN)</string>
+    <string name="type_blacklist">Svartelistet samtale</string>
+    <string name="call_log_action_block">Blokker ringer</string>
+    <string name="call_log_action_unblock">Ringer blokkert</string>
+    <string name="speed_dial_settings">Innstillinger for hurtigringing</string>
+    <string name="speed_dial_not_set">(ikke angitt)</string>
+    <string name="speed_dial_replace">Erstatt</string>
+    <string name="speed_dial_delete">Slett</string>
+    <string name="speed_dial_unassigned_dialog_title">Nøkkel utilordnet</string>
+    <string name="speed_dial_unassigned_dialog_message">Ingen hurtigringing er angitt til denne nummertasten \'<xliff:g id="number">%s</xliff:g>\'. Vil du angi ett nå?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">For å bruke hurtigoppringing må du skru av flymodus.</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nei</string>
+    <string name="incall_vibration_category_title">Vibrasjon under samtalen</string>
+    <string name="incall_vibrate_outgoing_title">Vibrere på svar</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrere på samtale venter</string>
+    <string name="incall_vibrate_hangup_title">Vibrere på legg på</string>
+    <string name="incall_vibrate_45_title">Vibrere hvert minutt</string>
+    <string name="incall_vibrate_45_summary">Vibrerer på 45 sekunders tiden for å markere hvert minutt under utgående samtale</string>
+    <string name="call_log_show_all_slots">Alle SIM-kort</string>
+    <string name="call_log_all_calls_header">Alle samtaler</string>
+    <string name="call_log_blacklist_header">Bare blokkerte samtaler</string>
+    <string name="call_log_stats_title">Statistikk</string>
+    <string name="callStatsDetailTitle">Detaljer for samtalestatus</string>
+    <string name="call_stats_incoming">Innkommende: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_outgoing">Utgående: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_missed">Ubesvart: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_blacklisted">Blokkert: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d </xliff:g>%%</string>
+    <string name="call_stats_header_total">Totalt: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totalt: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Startdato</string>
+    <string name="call_stats_filter_to">Sluttdato</string>
+    <string name="call_stats_filter_picker_title">Filtreringsområde</string>
+    <string name="date_quick_selection">Hurtigvalg</string>
+    <string name="date_qs_currentmonth">Gjeldende måned</string>
+    <string name="date_qs_currentquarter">Gjeldende kvartal</string>
+    <string name="date_qs_currentyear">Inneværende år</string>
+    <string name="date_qs_lastweek">Forrige uke</string>
+    <string name="date_qs_lastmonth">Forrige måned</string>
+    <string name="date_qs_lastquarter">Siste kvartal</string>
+    <string name="date_qs_lastyear">I fjor</string>
+    <string name="call_stats_date_filter">Juster tidsområde</string>
+    <string name="call_stats_reset_filter">Tilbakestille tidsområde</string>
+    <string name="call_stats_sort_by_duration">Sorter etter samtalevarighet</string>
+    <string name="call_stats_sort_by_count">Sorter etter antall samtaler</string>
+    <string name="call_stats_title_for_number">Dette nummeret</string>
+    <string name="call_stats_title_of_total">Av totalt</string>
+    <string name="call_stats_title_durations">Samtalevarighet</string>
+    <string name="call_stats_title_count">Antall anrop</string>
+    <string name="call_stats_title_average_duration">Gjennomsnittlig samtalevarighet</string>
+    <string name="recent_calls_no_items_in_range">Din anropslogg inneholder ikke noen samtaler innenfor den valgte perioden.</string>
+    <string name="call_recording_category_title">Samtaleinnspilling</string>
+    <string name="call_recording_format">Lydformat</string>
+    <string name="call_playback_no_app_found_toast">Ingen apper kan spille av den valgte innspillingen.</string>
+    <string name="invalid_number_text">"%1$s kunne ikke sette opp samtalen. Er nummeret korrekt?"</string>
+    <string name="empty_dialpad_t9_example">Du kan ringe et telefonnummer eller\nsøke etter en kontakt</string>
+    <string name="sign_in_hint_text">Logg inn for å ringe %1$s samtaler</string>
+    <string name="wifi_hint_text">Ring gratis %1$s til %1$s samtaler via Wi-Fi.</string>
+    <string name="roaming_hint_text">%1$s er roaming. Ring gratis %2$s til %2$s samtaler via Wi-Fi.</string>
+    <string name="emergency_call_hint_text">Ingen SIM-kort. Bare nødanrop.</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> samtale</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> innstillinger</string>
+    <string name="search_shortcut_call_using">Ring med bruk av <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Ja</string>
+    <string name="callerinfo_provider_auth_no_short">Nei</string>
+    <string name="callerinfo_provider_auth_no">Nei takk</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> kommer til å ha tilgang til kontaktene dine, Me profilen din og Cyanogen OS kontoen din som kan inkludere e-post adressen din.</string>
+    <string name="callerinfo_provider_auth_learn_more">Lær mer</string>
+    <string name="callerinfo_provider_auth_desc">Velkommen! Ønsker du at <xliff:g id="provider_name">%s</xliff:g> skal identifisere ukjente ringere og blokkere uønskede samtaler?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Velkommen! Ønsker du at <xliff:g id="provider_name">%s</xliff:g> skal identifisere ukjente ringere?</string>
+    <string name="callerinfo_provider_summary">Identifiserer ukjente ringere og spam</string>
+    <string name="callerinfo_provider_summary_no_spam">Identifiserer ukjente ringere</string>
+    <string name="silence_spam_title">Demp spam anrop</string>
+    <string name="silence_spam_summary">La aldri spam anrop ringe imellom</string>
+    <string name="block_hidden_title">Blokker skjulte telefonnummere</string>
+    <string name="block_hidden_summary">Se på skjulte nummere som spam</string>
+    <string name="block_dialog_title">Blokker denne ringeren?</string>
+    <string name="block_dialog_positive">Blokker</string>
+    <string name="block_dialog_negative">Avbryt</string>
+    <string name="block_dialog_description">Du vil ikke lenger motta samtaler eller meldinger fra denne personen.</string>
+    <string name="block_dialog_report_spam">Rapporter som spam til <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Slå av %1$s?</string>
+    <string name="provider_disable_message">Ved å slå av %1$s, vil du ikke ha ringer ID.</string>
+    <string name="provider_disable_spam_message">Ved å deaktivere %1$s, så vil du ikke ha noe spam beskyttelse eller ringer ID.</string>
+    <string name="powered_by_provider">Drevet av <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"Ring %1$s ganger ved å\nbytte moduser her"</string>
+    <string name="provider_search_help">"Søk %1$s kontakter ved å\nbytte moduser her"</string>
+    <string name="provider_button_help">"Skjønner"</string>
+    <string name="provider_voice_call">"%1$s stemme-anrop"</string>
+    <string name="provider_video_call">"%1$s video-anrop"</string>
+    <string name="cm_permission_place_call">For å ringe må du slå på Telefon tillatelser.</string>
+    <string name="search_shortcut_view_note">Vis notat</string>
+    <string name="note_mod_settings_summary">Skriv notater hvor som helst</string>
+    <string name="callerinfo_provider_status_disabling">Deaktiverer</string>
+    <string name="show_dialpad_at_start_title">Vis oppringingstastaturet ved start</string>
 </resources>

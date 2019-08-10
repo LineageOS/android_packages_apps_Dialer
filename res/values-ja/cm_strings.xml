@@ -16,131 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">近くの場所</string>
-  <string name="people">人物</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">ダイヤルパッドT9検索</string>
-  <string name="t9_search_input_locale">T9検索の入力</string>
-  <string name="t9_search_input_locale_default">デフォルト</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">電話番号検索</string>
-  <string name="lookup_settings_description">不明な電話番号を検索する</string>
-  <string name="enable_forward_lookup_title">正引き</string>
-  <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示する</string>
-  <string name="enable_people_lookup_title">人物検索</string>
-  <string name="enable_people_lookup_summary">ダイヤル画面で検索しているときに人物のオンラインの検索結果を表示する</string>
-  <string name="enable_reverse_lookup_title">逆引き</string>
-  <string name="enable_reverse_lookup_summary">着信中の不明な番号の人物または場所の情報を検索する</string>
-  <string name="forward_lookup_provider_title">正引き検索プロバイダ</string>
-  <string name="people_lookup_provider_title">人物検索プロバイダ</string>
-  <string name="reverse_lookup_provider_title">逆引きプロバイダ</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">着信拒否した通話</string>
-  <string name="call_log_action_block">着信拒否</string>
-  <string name="call_log_action_unblock">発信者を着信拒否しました</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">スピードダイヤルの設定</string>
-  <string name="speed_dial_not_set">（未設定）</string>
-  <string name="speed_dial_replace">書き換える</string>
-  <string name="speed_dial_delete">削除</string>
-  <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
-  <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
-  <string name="dialog_speed_dial_airplane_mode_message">スピードダイヤルを使用するには、機内モードをOFFにしてください。</string>
-  <string name="yes">はい</string>
-  <string name="no">いいえ</string>
-  <string name="incall_vibration_category_title">通話中のバイブレーション</string>
-  <string name="incall_vibrate_outgoing_title">応答時に振動</string>
-  <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
-  <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
-  <string name="incall_vibrate_45_title">時間ごとに振動</string>
-  <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
-  <string name="call_log_show_all_slots">すべてのSIM</string>
-  <string name="call_log_all_calls_header">すべての通話</string>
-  <string name="call_log_blacklist_header">着信拒否した通話のみ</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">統計</string>
-  <string name="callStatsDetailTitle">通話の統計の詳細</string>
-  <string name="call_stats_incoming">着信: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">発信: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">不在: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blacklisted">着信拒否: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g> <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">開始日</string>
-  <string name="call_stats_filter_to">終了日</string>
-  <string name="call_stats_filter_picker_title">フィルターの範囲</string>
-  <string name="date_quick_selection">クイック選択</string>
-  <string name="date_qs_currentmonth">今月</string>
-  <string name="date_qs_currentquarter">今四半期</string>
-  <string name="date_qs_currentyear">今年</string>
-  <string name="date_qs_lastweek">先週</string>
-  <string name="date_qs_lastmonth">先月</string>
-  <string name="date_qs_lastquarter">下四半期</string>
-  <string name="date_qs_lastyear">昨年</string>
-  <string name="call_stats_date_filter">時間範囲を調整</string>
-  <string name="call_stats_reset_filter">時間範囲をリセット</string>
-  <string name="call_stats_sort_by_duration">通話時間で並べ替え</string>
-  <string name="call_stats_sort_by_count">通話回数で並べ替え</string>
-  <string name="call_stats_title_for_number">この番号</string>
-  <string name="call_stats_title_of_total">合計のうち</string>
-  <string name="call_stats_title_durations">通話時間</string>
-  <string name="call_stats_title_count">通話回数</string>
-  <string name="call_stats_title_average_duration">平均通話時間</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">指定した期間には通話履歴がありません。</string>
-  <string name="call_recording_category_title">通話の録音</string>
-  <string name="call_recording_format">音声フォーマット</string>
-  <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
-  <string name="invalid_number_text">"%1$sでこの通話を発信できませんでした。番号は合っていますか？"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">電話番号に発信したり\n連絡先を検索できます</string>
-  <string name="sign_in_hint_text">%1$sで発信するにはログインしてください</string>
-  <string name="wifi_hint_text">無料の%1$sで%1$s通話をWi-Fi経由で発信します。</string>
-  <string name="roaming_hint_text">%1$sはローミングです。無料の%2$sで%2$s通話をWi-Fi経由で発信しましょう。</string>
-  <string name="emergency_call_hint_text">SIMがありません。緊急通報のみです。</string>
-  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g>通話</string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g>の設定</string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g>を使用して発信</string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">はい</string>
-  <string name="callerinfo_provider_auth_no_short">いいえ</string>
-  <string name="callerinfo_provider_auth_no">いいえ</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g>は連絡先、Meプロフィール、Cyanogen OSアカウントにアクセスします。あなたのメールアドレスを含んでいる可能性があります。</string>
-  <string name="callerinfo_provider_auth_learn_more">詳細情報</string>
-  <string name="callerinfo_provider_auth_desc">ようこそ！<xliff:g id="provider_name">%s</xliff:g>で不明な発信者を識別したり、不要な電話を着信拒否しますか？</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">ようこそ！<xliff:g id="provider_name">%s</xliff:g>で不明な発信者を識別しますか？</string>
-  <string name="callerinfo_provider_summary">不明な発信者や迷惑電話を識別する</string>
-  <string name="callerinfo_provider_summary_no_spam">不明な発信者を識別する</string>
-  <string name="silence_spam_title">迷惑電話撃退</string>
-  <string name="silence_spam_summary">迷惑電話を着信しないようにする</string>
-  <string name="block_hidden_title">非通知番号を着信拒否</string>
-  <string name="block_hidden_summary">非通知番号を迷惑電話として認識する</string>
-  <string name="block_dialog_title">この発信者を着信拒否しますか？</string>
-  <string name="block_dialog_positive">着信拒否</string>
-  <string name="block_dialog_negative">キャンセル</string>
-  <string name="block_dialog_description">この人物からの着信やメッセージを受け取らないようになりました。</string>
-  <string name="block_dialog_report_spam">迷惑電話として<xliff:g id="provider">%s</xliff:g>に報告</string>
-  <string name="provider_disable_title">%1$sを無効にしますか？</string>
-  <string name="provider_disable_message">%1$sを無効にすると、発信者の番号が表示できなくなります。</string>
-  <string name="provider_disable_spam_message">%1$sを無効にすると、迷惑電話の着信拒否や、発信者の番号が表示できなくなります。</string>
-  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"ここでモードを切り替えて\n%1$s通話を発信します"</string>
-  <string name="provider_search_help">"ここでモードを切り替えて\n%1$sの連絡先を検索します"</string>
-  <string name="provider_button_help">"わかりました"</string>
-  <string name="provider_voice_call">"%1$s音声通話"</string>
-  <string name="provider_video_call">"%1$sビデオ通話"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">発信するには、電話の権限をONにしてください。</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">メモを表示</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">どの画面からでもメモを取る</string>
-  <string name="callerinfo_provider_status_disabling">無効にしています</string>
-  <string name="show_dialpad_at_start_title">起動時にダイヤルパッドを表示</string>
+    <string name="nearby_places">近くの場所</string>
+    <string name="people">人物</string>
+    <string name="preference_category_t9_dialpad_search">ダイヤルパッドT9検索</string>
+    <string name="t9_search_input_locale">T9検索の入力</string>
+    <string name="t9_search_input_locale_default">デフォルト</string>
+    <string name="lookup_settings_label">電話番号検索</string>
+    <string name="lookup_settings_description">不明な電話番号を検索する</string>
+    <string name="enable_forward_lookup_title">正引き</string>
+    <string name="enable_forward_lookup_summary">ダイヤル画面で検索しているときに近くの場所を表示する</string>
+    <string name="enable_people_lookup_title">人物検索</string>
+    <string name="enable_people_lookup_summary">ダイヤル画面で検索しているときに人物のオンラインの検索結果を表示する</string>
+    <string name="enable_reverse_lookup_title">逆引き</string>
+    <string name="enable_reverse_lookup_summary">着信中の不明な番号の人物または場所の情報を検索する</string>
+    <string name="forward_lookup_provider_title">正引き検索プロバイダ</string>
+    <string name="people_lookup_provider_title">人物検索プロバイダ</string>
+    <string name="reverse_lookup_provider_title">逆引きプロバイダ</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn中国語（CN）</string>
+    <string name="type_blacklist">着信拒否した通話</string>
+    <string name="call_log_action_block">着信拒否</string>
+    <string name="call_log_action_unblock">発信者を着信拒否しました</string>
+    <string name="speed_dial_settings">スピードダイヤルの設定</string>
+    <string name="speed_dial_not_set">（未設定）</string>
+    <string name="speed_dial_replace">書き換える</string>
+    <string name="speed_dial_delete">削除</string>
+    <string name="speed_dial_unassigned_dialog_title">キーに設定がありません</string>
+    <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g>番のキーにはスピードダイアルの動作が設定されていません。動作を設定しますか？</string>
+    <string name="dialog_speed_dial_airplane_mode_message">スピードダイヤルを使用するには、機内モードをOFFにしてください。</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="incall_vibration_category_title">通話中のバイブレーション</string>
+    <string name="incall_vibrate_outgoing_title">応答時に振動</string>
+    <string name="incall_vibrate_call_waiting_title">割込通話時に振動</string>
+    <string name="incall_vibrate_hangup_title">通話終了時に振動</string>
+    <string name="incall_vibrate_45_title">時間ごとに振動</string>
+    <string name="incall_vibrate_45_summary">発信中に45秒ごとに振動する</string>
+    <string name="call_log_show_all_slots">すべてのSIM</string>
+    <string name="call_log_all_calls_header">すべての通話</string>
+    <string name="call_log_blacklist_header">着信拒否した通話のみ</string>
+    <string name="call_log_stats_title">統計</string>
+    <string name="callStatsDetailTitle">通話の統計の詳細</string>
+    <string name="call_stats_incoming">着信: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">発信: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">不在: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">着信拒否: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">合計: <xliff:g id="call_count">%s</xliff:g> <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">開始日</string>
+    <string name="call_stats_filter_to">終了日</string>
+    <string name="call_stats_filter_picker_title">フィルターの範囲</string>
+    <string name="date_quick_selection">クイック選択</string>
+    <string name="date_qs_currentmonth">今月</string>
+    <string name="date_qs_currentquarter">今四半期</string>
+    <string name="date_qs_currentyear">今年</string>
+    <string name="date_qs_lastweek">先週</string>
+    <string name="date_qs_lastmonth">先月</string>
+    <string name="date_qs_lastquarter">下四半期</string>
+    <string name="date_qs_lastyear">昨年</string>
+    <string name="call_stats_date_filter">時間範囲を調整</string>
+    <string name="call_stats_reset_filter">時間範囲をリセット</string>
+    <string name="call_stats_sort_by_duration">通話時間で並べ替え</string>
+    <string name="call_stats_sort_by_count">通話回数で並べ替え</string>
+    <string name="call_stats_title_for_number">この番号</string>
+    <string name="call_stats_title_of_total">合計のうち</string>
+    <string name="call_stats_title_durations">通話時間</string>
+    <string name="call_stats_title_count">通話回数</string>
+    <string name="call_stats_title_average_duration">平均通話時間</string>
+    <string name="recent_calls_no_items_in_range">指定した期間には通話履歴がありません。</string>
+    <string name="call_recording_category_title">通話の録音</string>
+    <string name="call_recording_format">音声フォーマット</string>
+    <string name="call_playback_no_app_found_toast">選択した録音を再生するアプリが見つかりませんでした。</string>
+    <string name="invalid_number_text">"%1$sでこの通話を発信できませんでした。番号は合っていますか？"</string>
+    <string name="empty_dialpad_t9_example">電話番号に発信したり\n連絡先を検索できます</string>
+    <string name="sign_in_hint_text">%1$sで発信するにはログインしてください</string>
+    <string name="wifi_hint_text">無料の%1$sで%1$s通話をWi-Fi経由で発信します。</string>
+    <string name="roaming_hint_text">%1$sはローミングです。無料の%2$sで%2$s通話をWi-Fi経由で発信しましょう。</string>
+    <string name="emergency_call_hint_text">SIMがありません。緊急通報のみです。</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g>通話</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g>の設定</string>
+    <string name="search_shortcut_call_using"><xliff:g id="name">%1$s</xliff:g>を使用して発信</string>
+    <string name="callerinfo_provider_auth_yes">はい</string>
+    <string name="callerinfo_provider_auth_no_short">いいえ</string>
+    <string name="callerinfo_provider_auth_no">いいえ</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g>は連絡先、Meプロフィール、Cyanogen OSアカウントにアクセスします。あなたのメールアドレスを含んでいる可能性があります。</string>
+    <string name="callerinfo_provider_auth_learn_more">詳細情報</string>
+    <string name="callerinfo_provider_auth_desc">ようこそ！<xliff:g id="provider_name">%s</xliff:g>で不明な発信者を識別したり、不要な電話を着信拒否しますか？</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">ようこそ！<xliff:g id="provider_name">%s</xliff:g>で不明な発信者を識別しますか？</string>
+    <string name="callerinfo_provider_summary">不明な発信者や迷惑電話を識別する</string>
+    <string name="callerinfo_provider_summary_no_spam">不明な発信者を識別する</string>
+    <string name="silence_spam_title">迷惑電話撃退</string>
+    <string name="silence_spam_summary">迷惑電話を着信しないようにする</string>
+    <string name="block_hidden_title">非通知番号を着信拒否</string>
+    <string name="block_hidden_summary">非通知番号を迷惑電話として認識する</string>
+    <string name="block_dialog_title">この発信者を着信拒否しますか？</string>
+    <string name="block_dialog_positive">着信拒否</string>
+    <string name="block_dialog_negative">キャンセル</string>
+    <string name="block_dialog_description">この人物からの着信やメッセージを受け取らないようになりました。</string>
+    <string name="block_dialog_report_spam">迷惑電話として<xliff:g id="provider">%s</xliff:g>に報告</string>
+    <string name="provider_disable_title">%1$sを無効にしますか？</string>
+    <string name="provider_disable_message">%1$sを無効にすると、発信者の番号が表示できなくなります。</string>
+    <string name="provider_disable_spam_message">%1$sを無効にすると、迷惑電話の着信拒否や、発信者の番号が表示できなくなります。</string>
+    <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"ここでモードを切り替えて\n%1$s通話を発信します"</string>
+    <string name="provider_search_help">"ここでモードを切り替えて\n%1$sの連絡先を検索します"</string>
+    <string name="provider_button_help">"わかりました"</string>
+    <string name="provider_voice_call">"%1$s音声通話"</string>
+    <string name="provider_video_call">"%1$sビデオ通話"</string>
+    <string name="cm_permission_place_call">発信するには、電話の権限をONにしてください。</string>
+    <string name="search_shortcut_view_note">メモを表示</string>
+    <string name="note_mod_settings_summary">どの画面からでもメモを取る</string>
+    <string name="callerinfo_provider_status_disabling">無効にしています</string>
+    <string name="show_dialpad_at_start_title">起動時にダイヤルパッドを表示</string>
 </resources>

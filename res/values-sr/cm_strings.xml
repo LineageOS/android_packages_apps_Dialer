@@ -16,131 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Места у околини</string>
-  <string name="people">Особе</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Т9 претрага на бројчанику</string>
-  <string name="t9_search_input_locale">Унос Т9 претраге</string>
-  <string name="t9_search_input_locale_default">Подразумевано</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Претрага бројева телефона</string>
-  <string name="lookup_settings_description">Проналажење непознатог телефонског броја</string>
-  <string name="enable_forward_lookup_title">Напредно проналажење</string>
-  <string name="enable_forward_lookup_summary">Приказује места у околини при претрази у бројчанику.</string>
-  <string name="enable_people_lookup_title">Претрага особа</string>
-  <string name="enable_people_lookup_summary">Приказује резултате са интернета при претрази особа у бројчанику.</string>
-  <string name="enable_reverse_lookup_title">Обрнута претрага</string>
-  <string name="enable_reverse_lookup_summary">Претражите информације о особи или месту за долазне позиве са непознатим бројевима.</string>
-  <string name="forward_lookup_provider_title">Добављач директне претраге</string>
-  <string name="people_lookup_provider_title">Добављач претраге особа</string>
-  <string name="reverse_lookup_provider_title">Добављач обрнуте претраге</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Позив са црне листе</string>
-  <string name="call_log_action_block">Блокиран позиваоц</string>
-  <string name="call_log_action_unblock">Позивалац је блокиран</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">Подешавања брзог бирања</string>
-  <string name="speed_dial_not_set">(није постављено)</string>
-  <string name="speed_dial_replace">Замени</string>
-  <string name="speed_dial_delete">Избриши</string>
-  <string name="speed_dial_unassigned_dialog_title">Тастер није додељен</string>
-  <string name="speed_dial_unassigned_dialog_message">Тастер „<xliff:g id="number">%s</xliff:g>“ није додељен за брзо бирање. Желите ли да га доделите?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Да би користио брзо бирање, прво искључи режим рада у авиону.</string>
-  <string name="yes">Да</string>
-  <string name="no">Не</string>
-  <string name="incall_vibration_category_title">Вибрација током позива</string>
-  <string name="incall_vibrate_outgoing_title">Вибрација при јављању</string>
-  <string name="incall_vibrate_call_waiting_title">Вибрација при чекању</string>
-  <string name="incall_vibrate_hangup_title">Вибрација при прекиду</string>
-  <string name="incall_vibrate_45_title">Вибрација сваки пут</string>
-  <string name="incall_vibrate_45_summary">Вибрира на 45. секунди сваког минута током одлазних позива.</string>
-  <string name="call_log_show_all_slots">Све SIM картице</string>
-  <string name="call_log_all_calls_header">Сви позиви</string>
-  <string name="call_log_blacklist_header">Само блокирани позиви</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Статистика</string>
-  <string name="callStatsDetailTitle">Статистика позива</string>
-  <string name="call_stats_incoming">Долазни: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Одлазни: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Пропуштени: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blacklisted">Блокирани: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Укупно: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Укупно: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Датум почетка</string>
-  <string name="call_stats_filter_to">Датум завршетка</string>
-  <string name="call_stats_filter_picker_title">Опсег филтера</string>
-  <string name="date_quick_selection">Избор периода</string>
-  <string name="date_qs_currentmonth">Тренутни месец</string>
-  <string name="date_qs_currentquarter">Тренутни квартал</string>
-  <string name="date_qs_currentyear">Тренутна година</string>
-  <string name="date_qs_lastweek">Прошла недеља</string>
-  <string name="date_qs_lastmonth">Прошли месец</string>
-  <string name="date_qs_lastquarter">Прошли квартал</string>
-  <string name="date_qs_lastyear">Прошла година</string>
-  <string name="call_stats_date_filter">Подеси филтер</string>
-  <string name="call_stats_reset_filter">Поништи филтер</string>
-  <string name="call_stats_sort_by_duration">Сортирај по трајању позива</string>
-  <string name="call_stats_sort_by_count">Сортирај по броју позива</string>
-  <string name="call_stats_title_for_number">Овај број</string>
-  <string name="call_stats_title_of_total">Од укупно</string>
-  <string name="call_stats_title_durations">Трајање позива</string>
-  <string name="call_stats_title_count">Број позива</string>
-  <string name="call_stats_title_average_duration">Просечно трајање позива</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Евиденција позива нема записа у изабраном раздобљу.</string>
-  <string name="call_recording_category_title">Снимање позива</string>
-  <string name="call_recording_format">Аудио-формат</string>
-  <string name="call_playback_no_app_found_toast">Нема апликација које могу да репродукују изабрани снимак.</string>
-  <string name="invalid_number_text">"%1$s не може да направи овај позив. Да ли је број тачан?"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">Можеш бирати телефонски број или\nпретражити контакте</string>
-  <string name="sign_in_hint_text">Пријави се да направиш %1$s позиве</string>
-  <string name="wifi_hint_text">Направи бесплатан %1$s да %1$s позиваш преко Wi-Fi.</string>
-  <string name="roaming_hint_text">%1$s је у ромингу. Направи бесплатан %2$s да %2$s поѕива преко Wi-Fi.</string>
-  <string name="emergency_call_hint_text">Нема SIM-а. Само хитни позиви.</string>
-  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> позив</string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> подешавање</string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using">Позови користећи <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">Да</string>
-  <string name="callerinfo_provider_auth_no_short">Не</string>
-  <string name="callerinfo_provider_auth_no">Не хвала</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> ће приступити твојим контактима, профилу и Cyanogen OS налогу што може укључити и твоју Е-пошту.</string>
-  <string name="callerinfo_provider_auth_learn_more">Сазнај више</string>
-  <string name="callerinfo_provider_auth_desc">Добродошли! Да ли желиш да <xliff:g id="provider_name">%s</xliff:g> идентификује непознате позиваоце и блокира нежељене позиве?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">Добродошли! Да ли желиш да <xliff:g id="provider_name">%s</xliff:g> идентификује непознате позиваоце?</string>
-  <string name="callerinfo_provider_summary">Открива непознате позиваоце и спам</string>
-  <string name="callerinfo_provider_summary_no_spam">Идентификује непознате позиваоце</string>
-  <string name="silence_spam_title">Утишај нежељене позиве</string>
-  <string name="silence_spam_summary">Не дозволи да нежељени позиви звоне</string>
-  <string name="block_hidden_title">Блокирај скривене телефонске бројеве</string>
-  <string name="block_hidden_summary">Сматрај скривене бројеве нежељеним</string>
-  <string name="block_dialog_title">Блокирати овог позиваоца?</string>
-  <string name="block_dialog_positive">Блокирано</string>
-  <string name="block_dialog_negative">Отказано</string>
-  <string name="block_dialog_description">Нећеш више примати позиве или поруке од те особе.</string>
-  <string name="block_dialog_report_spam">Пријави као спам у <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">Онемогући %1$s?</string>
-  <string name="provider_disable_message">Онемогућавањем %1$s, нећеш имати идентификацију позива.</string>
-  <string name="provider_disable_spam_message">Онемогућавањем %1$s, нећеш имати заштиту од спама или идентификацију позива.</string>
-  <string name="powered_by_provider">Омогућено од <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"Направи %1$s позив\nмењањем режима овде"</string>
-  <string name="provider_search_help">"Претражи %1$s контакте\nмењањем режима овде"</string>
-  <string name="provider_button_help">"Схватио"</string>
-  <string name="provider_voice_call">"%1$s гласовни позив"</string>
-  <string name="provider_video_call">"%1$s видео позив"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">Да би позвали, укључите дозволе телефона.</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">Прикажи белешку</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">Белешке са било које локације</string>
-  <string name="callerinfo_provider_status_disabling">Онемогућавање</string>
-  <string name="show_dialpad_at_start_title">Прикажи бирач при покретању</string>
+    <string name="nearby_places">Места у околини</string>
+    <string name="people">Особе</string>
+    <string name="preference_category_t9_dialpad_search">Т9 претрага на бројчанику</string>
+    <string name="t9_search_input_locale">Унос Т9 претраге</string>
+    <string name="t9_search_input_locale_default">Подразумевано</string>
+    <string name="lookup_settings_label">Претрага бројева телефона</string>
+    <string name="lookup_settings_description">Проналажење непознатог телефонског броја</string>
+    <string name="enable_forward_lookup_title">Напредно проналажење</string>
+    <string name="enable_forward_lookup_summary">Приказује места у околини при претрази у бројчанику.</string>
+    <string name="enable_people_lookup_title">Претрага особа</string>
+    <string name="enable_people_lookup_summary">Приказује резултате са интернета при претрази особа у бројчанику.</string>
+    <string name="enable_reverse_lookup_title">Обрнута претрага</string>
+    <string name="enable_reverse_lookup_summary">Претражите информације о особи или месту за долазне позиве са непознатим бројевима.</string>
+    <string name="forward_lookup_provider_title">Добављач директне претраге</string>
+    <string name="people_lookup_provider_title">Добављач претраге особа</string>
+    <string name="reverse_lookup_provider_title">Добављач обрнуте претраге</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Chinese (CN)</string>
+    <string name="type_blacklist">Позив са црне листе</string>
+    <string name="call_log_action_block">Блокиран позиваоц</string>
+    <string name="call_log_action_unblock">Позивалац је блокиран</string>
+    <string name="speed_dial_settings">Подешавања брзог бирања</string>
+    <string name="speed_dial_not_set">(није постављено)</string>
+    <string name="speed_dial_replace">Замени</string>
+    <string name="speed_dial_delete">Избриши</string>
+    <string name="speed_dial_unassigned_dialog_title">Тастер није додељен</string>
+    <string name="speed_dial_unassigned_dialog_message">Тастер „<xliff:g id="number">%s</xliff:g>“ није додељен за брзо бирање. Желите ли да га доделите?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Да би користио брзо бирање, прво искључи режим рада у авиону.</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="incall_vibration_category_title">Вибрација током позива</string>
+    <string name="incall_vibrate_outgoing_title">Вибрација при јављању</string>
+    <string name="incall_vibrate_call_waiting_title">Вибрација при чекању</string>
+    <string name="incall_vibrate_hangup_title">Вибрација при прекиду</string>
+    <string name="incall_vibrate_45_title">Вибрација сваки пут</string>
+    <string name="incall_vibrate_45_summary">Вибрира на 45. секунди сваког минута током одлазних позива.</string>
+    <string name="call_log_show_all_slots">Све SIM картице</string>
+    <string name="call_log_all_calls_header">Сви позиви</string>
+    <string name="call_log_blacklist_header">Само блокирани позиви</string>
+    <string name="call_log_stats_title">Статистика</string>
+    <string name="callStatsDetailTitle">Статистика позива</string>
+    <string name="call_stats_incoming">Долазни: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Одлазни: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Пропуштени: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Блокирани: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Укупно: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Укупно: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Датум почетка</string>
+    <string name="call_stats_filter_to">Датум завршетка</string>
+    <string name="call_stats_filter_picker_title">Опсег филтера</string>
+    <string name="date_quick_selection">Избор периода</string>
+    <string name="date_qs_currentmonth">Тренутни месец</string>
+    <string name="date_qs_currentquarter">Тренутни квартал</string>
+    <string name="date_qs_currentyear">Тренутна година</string>
+    <string name="date_qs_lastweek">Прошла недеља</string>
+    <string name="date_qs_lastmonth">Прошли месец</string>
+    <string name="date_qs_lastquarter">Прошли квартал</string>
+    <string name="date_qs_lastyear">Прошла година</string>
+    <string name="call_stats_date_filter">Подеси филтер</string>
+    <string name="call_stats_reset_filter">Поништи филтер</string>
+    <string name="call_stats_sort_by_duration">Сортирај по трајању позива</string>
+    <string name="call_stats_sort_by_count">Сортирај по броју позива</string>
+    <string name="call_stats_title_for_number">Овај број</string>
+    <string name="call_stats_title_of_total">Од укупно</string>
+    <string name="call_stats_title_durations">Трајање позива</string>
+    <string name="call_stats_title_count">Број позива</string>
+    <string name="call_stats_title_average_duration">Просечно трајање позива</string>
+    <string name="recent_calls_no_items_in_range">Евиденција позива нема записа у изабраном раздобљу.</string>
+    <string name="call_recording_category_title">Снимање позива</string>
+    <string name="call_recording_format">Аудио-формат</string>
+    <string name="call_playback_no_app_found_toast">Нема апликација које могу да репродукују изабрани снимак.</string>
+    <string name="invalid_number_text">"%1$s не може да направи овај позив. Да ли је број тачан?"</string>
+    <string name="empty_dialpad_t9_example">Можеш бирати телефонски број или\nпретражити контакте</string>
+    <string name="sign_in_hint_text">Пријави се да направиш %1$s позиве</string>
+    <string name="wifi_hint_text">Направи бесплатан %1$s да %1$s позиваш преко Wi-Fi.</string>
+    <string name="roaming_hint_text">%1$s је у ромингу. Направи бесплатан %2$s да %2$s поѕива преко Wi-Fi.</string>
+    <string name="emergency_call_hint_text">Нема SIM-а. Само хитни позиви.</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> позив</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> подешавање</string>
+    <string name="search_shortcut_call_using">Позови користећи <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Да</string>
+    <string name="callerinfo_provider_auth_no_short">Не</string>
+    <string name="callerinfo_provider_auth_no">Не хвала</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> ће приступити твојим контактима, профилу и Cyanogen OS налогу што може укључити и твоју Е-пошту.</string>
+    <string name="callerinfo_provider_auth_learn_more">Сазнај више</string>
+    <string name="callerinfo_provider_auth_desc">Добродошли! Да ли желиш да <xliff:g id="provider_name">%s</xliff:g> идентификује непознате позиваоце и блокира нежељене позиве?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Добродошли! Да ли желиш да <xliff:g id="provider_name">%s</xliff:g> идентификује непознате позиваоце?</string>
+    <string name="callerinfo_provider_summary">Открива непознате позиваоце и спам</string>
+    <string name="callerinfo_provider_summary_no_spam">Идентификује непознате позиваоце</string>
+    <string name="silence_spam_title">Утишај нежељене позиве</string>
+    <string name="silence_spam_summary">Не дозволи да нежељени позиви звоне</string>
+    <string name="block_hidden_title">Блокирај скривене телефонске бројеве</string>
+    <string name="block_hidden_summary">Сматрај скривене бројеве нежељеним</string>
+    <string name="block_dialog_title">Блокирати овог позиваоца?</string>
+    <string name="block_dialog_positive">Блокирано</string>
+    <string name="block_dialog_negative">Отказано</string>
+    <string name="block_dialog_description">Нећеш више примати позиве или поруке од те особе.</string>
+    <string name="block_dialog_report_spam">Пријави као спам у <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Онемогући %1$s?</string>
+    <string name="provider_disable_message">Онемогућавањем %1$s, нећеш имати идентификацију позива.</string>
+    <string name="provider_disable_spam_message">Онемогућавањем %1$s, нећеш имати заштиту од спама или идентификацију позива.</string>
+    <string name="powered_by_provider">Омогућено од <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"Направи %1$s позив\nмењањем режима овде"</string>
+    <string name="provider_search_help">"Претражи %1$s контакте\nмењањем режима овде"</string>
+    <string name="provider_button_help">"Схватио"</string>
+    <string name="provider_voice_call">"%1$s гласовни позив"</string>
+    <string name="provider_video_call">"%1$s видео позив"</string>
+    <string name="cm_permission_place_call">Да би позвали, укључите дозволе телефона.</string>
+    <string name="search_shortcut_view_note">Прикажи белешку</string>
+    <string name="note_mod_settings_summary">Белешке са било које локације</string>
+    <string name="callerinfo_provider_status_disabling">Онемогућавање</string>
+    <string name="show_dialpad_at_start_title">Прикажи бирач при покретању</string>
 </resources>

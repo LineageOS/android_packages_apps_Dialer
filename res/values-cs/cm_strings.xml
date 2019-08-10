@@ -16,131 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Blízká místa</string>
-  <string name="people">Lidé</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Vyhledávání na T9 číselníku</string>
-  <string name="t9_search_input_locale">Vstup vyhledávání T9</string>
-  <string name="t9_search_input_locale_default">Výchozí</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Vyhledávání telefonního čísla</string>
-  <string name="lookup_settings_description">Vyhledávání neznámých telefonních čísel</string>
-  <string name="enable_forward_lookup_title">Předběžné vyhledávání</string>
-  <string name="enable_forward_lookup_summary">Zobrazit blízká místa při vyhledávání v číselníku</string>
-  <string name="enable_people_lookup_title">Vyhledávání lidí</string>
-  <string name="enable_people_lookup_summary">Zobrazit výsledky lidí online při vyhledávání v číselníku</string>
-  <string name="enable_reverse_lookup_title">Zpětné vyhledávání</string>
-  <string name="enable_reverse_lookup_summary">Vyhledávání informací o osobě nebo místě pro neznámá čísla při příchozím hovoru</string>
-  <string name="forward_lookup_provider_title">Poskytovatel předběžného vyhledávání</string>
-  <string name="people_lookup_provider_title">Poskytovatel vyhledávání osob</string>
-  <string name="reverse_lookup_provider_title">Poskytovatel zpětného vyhledávání</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Čína (CN)</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Volání z černé listiny</string>
-  <string name="call_log_action_block">Blokovat volajícího</string>
-  <string name="call_log_action_unblock">Volající blokován</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">Nastavení rychlého vytáčení</string>
-  <string name="speed_dial_not_set">(nenastaveno)</string>
-  <string name="speed_dial_replace">Nahradit</string>
-  <string name="speed_dial_delete">Odstranit</string>
-  <string name="speed_dial_unassigned_dialog_title">Klávesa nepřiřazena</string>
-  <string name="speed_dial_unassigned_dialog_message">Akce pro rychlé vytáčení není pro klávesu „<xliff:g id="number">%s</xliff:g>“ přiřazena. Chcete jí nyní přiřadit?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“.</string>
-  <string name="yes">Ano</string>
-  <string name="no">Ne</string>
-  <string name="incall_vibration_category_title">Vibrace příchozího hovoru</string>
-  <string name="incall_vibrate_outgoing_title">Vibrovat při přijmutí hovoru</string>
-  <string name="incall_vibrate_call_waiting_title">Vibrovat při čekajícím hovoru</string>
-  <string name="incall_vibrate_hangup_title">Vibrovat při zavěšení</string>
-  <string name="incall_vibrate_45_title">Vibrovat každou minutu</string>
-  <string name="incall_vibrate_45_summary">Vibrovat každou 45. sekundu každé minuty při odchozím volání</string>
-  <string name="call_log_show_all_slots">Všechny SIM karty</string>
-  <string name="call_log_all_calls_header">Všechny hovory</string>
-  <string name="call_log_blacklist_header">Pouze blokované hovory</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistika</string>
-  <string name="callStatsDetailTitle">Detaily statiskitky hovorů</string>
-  <string name="call_stats_incoming">Příchozí: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Odchozí: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blacklisted">Blokované: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Celkem: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Celkem: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Datum zahájení</string>
-  <string name="call_stats_filter_to">Datum ukončení</string>
-  <string name="call_stats_filter_picker_title">Rozsah hodnot filtru</string>
-  <string name="date_quick_selection">Rychlý výběr</string>
-  <string name="date_qs_currentmonth">Aktuální měsíc</string>
-  <string name="date_qs_currentquarter">Aktuální čtvrtletí</string>
-  <string name="date_qs_currentyear">Aktuální rok</string>
-  <string name="date_qs_lastweek">Poslední týden</string>
-  <string name="date_qs_lastmonth">Poslední měsíc</string>
-  <string name="date_qs_lastquarter">Poslední čtvrtletí</string>
-  <string name="date_qs_lastyear">Poslední rok</string>
-  <string name="call_stats_date_filter">Změnit časový rozsah</string>
-  <string name="call_stats_reset_filter">Obnovit časový rozsah</string>
-  <string name="call_stats_sort_by_duration">Řadit podle délky hovoru</string>
-  <string name="call_stats_sort_by_count">Řadit podle počtu hovorů</string>
-  <string name="call_stats_title_for_number">Toto číslo</string>
-  <string name="call_stats_title_of_total">Z celkových</string>
-  <string name="call_stats_title_durations">Délky hovorů</string>
-  <string name="call_stats_title_count">Počet hovorů</string>
-  <string name="call_stats_title_average_duration">Průměrné délka hovoru</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Seznam hovorů neobsahuje v daném časovém úseku žádná data.</string>
-  <string name="call_recording_category_title">Nahrávání hovorů</string>
-  <string name="call_recording_format">Formát zvuku</string>
-  <string name="call_playback_no_app_found_toast">Nenalezena žádná aplikace pro přehrávání vybraného záznamu.</string>
-  <string name="invalid_number_text">"%1$s nelze volat. Je číslo správné?"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">Můžete vytočit číslo nebo\nvyhledávat kontakt</string>
-  <string name="sign_in_hint_text">Pro volání přihlásit se k %1$s</string>
-  <string name="wifi_hint_text">%1$s k %1$s volání zdarma přes Wi-Fi.</string>
-  <string name="roaming_hint_text">%1$s je v roamingu. %2$s k %2$s volání zdarma přes Wi-Fi.</string>
-  <string name="emergency_call_hint_text">Žádná SIM. Pouze tísňová volání.</string>
-  <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> hovor</string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> nastavení</string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using">Hovor pomocí <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">Ano</string>
-  <string name="callerinfo_provider_auth_no_short">Ne</string>
-  <string name="callerinfo_provider_auth_no">Ne, děkuji</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> má přístup k Vašim kontaktům, profilu Me a účtu Cyanogen OS, který může obsahovat Vaše e-mailové adresy.</string>
-  <string name="callerinfo_provider_auth_learn_more">Dozvědět se více</string>
-  <string name="callerinfo_provider_auth_desc">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající a blokoval nežádoucí hovory?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající?</string>
-  <string name="callerinfo_provider_summary">Rozpoznávání neznámých volajících a spam</string>
-  <string name="callerinfo_provider_summary_no_spam">Rozpoznávání neznámých volajících</string>
-  <string name="silence_spam_title">Ztišit spam hovory</string>
-  <string name="silence_spam_summary">Nedovolit nevyžádaným hovorům vyzvánění</string>
-  <string name="block_hidden_title">Blokovat skrytá čísla</string>
-  <string name="block_hidden_summary">Považovat skrytá čísla za spam</string>
-  <string name="block_dialog_title">Blokovat tento kontakt?</string>
-  <string name="block_dialog_positive">Blokovat</string>
-  <string name="block_dialog_negative">Zrušit</string>
-  <string name="block_dialog_description">Od této osoby již nebudete přijímat hovory a zprávy.</string>
-  <string name="block_dialog_report_spam">Nahlásit jako spam operátoru <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">Zakázat %1$s?</string>
-  <string name="provider_disable_message">Zakázáním %1$s nebudete mít identifikaci volajícího.</string>
-  <string name="provider_disable_spam_message">Zakázáním %1$s nebudete mít ochranu před spamem a identifikaci volajícího.</string>
-  <string name="powered_by_provider">Využívá služby <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"Volat %1$s\npřepnutím režimů zde"</string>
-  <string name="provider_search_help">"Vyhledávat kontakty %1$s\npřepnutím režimů zde"</string>
-  <string name="provider_button_help">"Jasně"</string>
-  <string name="provider_voice_call">"%1$s hlasový hovor"</string>
-  <string name="provider_video_call">"%1$s video hovor"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">Chcete-li volat, povolte oprávnění telefonu.</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">Zobrazit poznámku</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">Vytvářet poznámky odkudkoli</string>
-  <string name="callerinfo_provider_status_disabling">Zakazování</string>
-  <string name="show_dialpad_at_start_title">Zobrazit číselník při spuštění</string>
+    <string name="nearby_places">Blízká místa</string>
+    <string name="people">Lidé</string>
+    <string name="preference_category_t9_dialpad_search">Vyhledávání na T9 číselníku</string>
+    <string name="t9_search_input_locale">Vstup vyhledávání T9</string>
+    <string name="t9_search_input_locale_default">Výchozí</string>
+    <string name="lookup_settings_label">Vyhledávání telefonního čísla</string>
+    <string name="lookup_settings_description">Vyhledávání neznámých telefonních čísel</string>
+    <string name="enable_forward_lookup_title">Předběžné vyhledávání</string>
+    <string name="enable_forward_lookup_summary">Zobrazit blízká místa při vyhledávání v číselníku</string>
+    <string name="enable_people_lookup_title">Vyhledávání lidí</string>
+    <string name="enable_people_lookup_summary">Zobrazit výsledky lidí online při vyhledávání v číselníku</string>
+    <string name="enable_reverse_lookup_title">Zpětné vyhledávání</string>
+    <string name="enable_reverse_lookup_summary">Vyhledávání informací o osobě nebo místě pro neznámá čísla při příchozím hovoru</string>
+    <string name="forward_lookup_provider_title">Poskytovatel předběžného vyhledávání</string>
+    <string name="people_lookup_provider_title">Poskytovatel vyhledávání osob</string>
+    <string name="reverse_lookup_provider_title">Poskytovatel zpětného vyhledávání</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Čína (CN)</string>
+    <string name="type_blacklist">Volání z černé listiny</string>
+    <string name="call_log_action_block">Blokovat volajícího</string>
+    <string name="call_log_action_unblock">Volající blokován</string>
+    <string name="speed_dial_settings">Nastavení rychlého vytáčení</string>
+    <string name="speed_dial_not_set">(nenastaveno)</string>
+    <string name="speed_dial_replace">Nahradit</string>
+    <string name="speed_dial_delete">Odstranit</string>
+    <string name="speed_dial_unassigned_dialog_title">Klávesa nepřiřazena</string>
+    <string name="speed_dial_unassigned_dialog_message">Akce pro rychlé vytáčení není pro klávesu „<xliff:g id="number">%s</xliff:g>“ přiřazena. Chcete jí nyní přiřadit?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Pro použití rychlého vytáčení nejprve vypněte režim „V letadle“.</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="incall_vibration_category_title">Vibrace příchozího hovoru</string>
+    <string name="incall_vibrate_outgoing_title">Vibrovat při přijmutí hovoru</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrovat při čekajícím hovoru</string>
+    <string name="incall_vibrate_hangup_title">Vibrovat při zavěšení</string>
+    <string name="incall_vibrate_45_title">Vibrovat každou minutu</string>
+    <string name="incall_vibrate_45_summary">Vibrovat každou 45. sekundu každé minuty při odchozím volání</string>
+    <string name="call_log_show_all_slots">Všechny SIM karty</string>
+    <string name="call_log_all_calls_header">Všechny hovory</string>
+    <string name="call_log_blacklist_header">Pouze blokované hovory</string>
+    <string name="call_log_stats_title">Statistika</string>
+    <string name="callStatsDetailTitle">Detaily statiskitky hovorů</string>
+    <string name="call_stats_incoming">Příchozí: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Odchozí: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Blokované: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Celkem: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Celkem: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Datum zahájení</string>
+    <string name="call_stats_filter_to">Datum ukončení</string>
+    <string name="call_stats_filter_picker_title">Rozsah hodnot filtru</string>
+    <string name="date_quick_selection">Rychlý výběr</string>
+    <string name="date_qs_currentmonth">Aktuální měsíc</string>
+    <string name="date_qs_currentquarter">Aktuální čtvrtletí</string>
+    <string name="date_qs_currentyear">Aktuální rok</string>
+    <string name="date_qs_lastweek">Poslední týden</string>
+    <string name="date_qs_lastmonth">Poslední měsíc</string>
+    <string name="date_qs_lastquarter">Poslední čtvrtletí</string>
+    <string name="date_qs_lastyear">Poslední rok</string>
+    <string name="call_stats_date_filter">Změnit časový rozsah</string>
+    <string name="call_stats_reset_filter">Obnovit časový rozsah</string>
+    <string name="call_stats_sort_by_duration">Řadit podle délky hovoru</string>
+    <string name="call_stats_sort_by_count">Řadit podle počtu hovorů</string>
+    <string name="call_stats_title_for_number">Toto číslo</string>
+    <string name="call_stats_title_of_total">Z celkových</string>
+    <string name="call_stats_title_durations">Délky hovorů</string>
+    <string name="call_stats_title_count">Počet hovorů</string>
+    <string name="call_stats_title_average_duration">Průměrné délka hovoru</string>
+    <string name="recent_calls_no_items_in_range">Seznam hovorů neobsahuje v daném časovém úseku žádná data.</string>
+    <string name="call_recording_category_title">Nahrávání hovorů</string>
+    <string name="call_recording_format">Formát zvuku</string>
+    <string name="call_playback_no_app_found_toast">Nenalezena žádná aplikace pro přehrávání vybraného záznamu.</string>
+    <string name="invalid_number_text">"%1$s nelze volat. Je číslo správné?"</string>
+    <string name="empty_dialpad_t9_example">Můžete vytočit číslo nebo\nvyhledávat kontakt</string>
+    <string name="sign_in_hint_text">Pro volání přihlásit se k %1$s</string>
+    <string name="wifi_hint_text">%1$s k %1$s volání zdarma přes Wi-Fi.</string>
+    <string name="roaming_hint_text">%1$s je v roamingu. %2$s k %2$s volání zdarma přes Wi-Fi.</string>
+    <string name="emergency_call_hint_text">Žádná SIM. Pouze tísňová volání.</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> hovor</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> nastavení</string>
+    <string name="search_shortcut_call_using">Hovor pomocí <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Ano</string>
+    <string name="callerinfo_provider_auth_no_short">Ne</string>
+    <string name="callerinfo_provider_auth_no">Ne, děkuji</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> má přístup k Vašim kontaktům, profilu Me a účtu Cyanogen OS, který může obsahovat Vaše e-mailové adresy.</string>
+    <string name="callerinfo_provider_auth_learn_more">Dozvědět se více</string>
+    <string name="callerinfo_provider_auth_desc">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající a blokoval nežádoucí hovory?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Vítejte! Chcete, aby Váš operátor <xliff:g id="provider_name">%s</xliff:g> rozpoznával neznámé volající?</string>
+    <string name="callerinfo_provider_summary">Rozpoznávání neznámých volajících a spam</string>
+    <string name="callerinfo_provider_summary_no_spam">Rozpoznávání neznámých volajících</string>
+    <string name="silence_spam_title">Ztišit spam hovory</string>
+    <string name="silence_spam_summary">Nedovolit nevyžádaným hovorům vyzvánění</string>
+    <string name="block_hidden_title">Blokovat skrytá čísla</string>
+    <string name="block_hidden_summary">Považovat skrytá čísla za spam</string>
+    <string name="block_dialog_title">Blokovat tento kontakt?</string>
+    <string name="block_dialog_positive">Blokovat</string>
+    <string name="block_dialog_negative">Zrušit</string>
+    <string name="block_dialog_description">Od této osoby již nebudete přijímat hovory a zprávy.</string>
+    <string name="block_dialog_report_spam">Nahlásit jako spam operátoru <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Zakázat %1$s?</string>
+    <string name="provider_disable_message">Zakázáním %1$s nebudete mít identifikaci volajícího.</string>
+    <string name="provider_disable_spam_message">Zakázáním %1$s nebudete mít ochranu před spamem a identifikaci volajícího.</string>
+    <string name="powered_by_provider">Využívá služby <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"Volat %1$s\npřepnutím režimů zde"</string>
+    <string name="provider_search_help">"Vyhledávat kontakty %1$s\npřepnutím režimů zde"</string>
+    <string name="provider_button_help">"Jasně"</string>
+    <string name="provider_voice_call">"%1$s hlasový hovor"</string>
+    <string name="provider_video_call">"%1$s video hovor"</string>
+    <string name="cm_permission_place_call">Chcete-li volat, povolte oprávnění telefonu.</string>
+    <string name="search_shortcut_view_note">Zobrazit poznámku</string>
+    <string name="note_mod_settings_summary">Vytvářet poznámky odkudkoli</string>
+    <string name="callerinfo_provider_status_disabling">Zakazování</string>
+    <string name="show_dialpad_at_start_title">Zobrazit číselník při spuštění</string>
 </resources>

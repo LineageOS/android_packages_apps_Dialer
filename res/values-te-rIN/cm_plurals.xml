@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 గంట</item>
-    <item quantity="other">%d గంటలు</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 నిమిషం</item>
-    <item quantity="other">%d నిమిషాలు</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 సెకను</item>
-    <item quantity="other">%d సెకన్లు</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 కాల్</item>
-    <item quantity="other">%d  కాల్‌లు</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 గంట</item>
+        <item quantity="other">%d గంటలు</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 నిమిషం</item>
+        <item quantity="other">%d నిమిషాలు</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 సెకను</item>
+        <item quantity="other">%d సెకన్లు</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 కాల్</item>
+        <item quantity="other">%d  కాల్‌లు</item>
+    </plurals>
 </resources>

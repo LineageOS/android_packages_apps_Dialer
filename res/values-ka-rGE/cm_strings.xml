@@ -16,19 +16,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <!-- dialpad t9 search -->
-  <!-- Number lookup -->
-  <!-- Chinese Reverse Lookup Provider -->
-  <!-- Description for incoming calls that were blacklisted -->
-  <!--  for speed dial -->
-  <!-- Call statistics -->
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <!-- T9 Search Text -->
-  <!-- InCall Plugin Settings -->
-  <!-- Search shortcut for "Call using PluginName" -->
-  <!-- CallerInfo Provider Settings strings -->
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <!-- Note DeepLink mod settings summary in Dialer -->
+    <string name="t9_search_input_locale_default">ნაგულისხმევი</string>
 </resources>

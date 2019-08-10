@@ -16,20 +16,20 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 óra</item>
-    <item quantity="other">%d óra</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 perc</item>
-    <item quantity="other">%d perc</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 mp</item>
-    <item quantity="other">%d mp</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 hívás</item>
-    <item quantity="other">%d hívás</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 óra</item>
+        <item quantity="other">%d óra</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 perc</item>
+        <item quantity="other">%d perc</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 mp</item>
+        <item quantity="other">%d mp</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 hívás</item>
+        <item quantity="other">%d hívás</item>
+    </plurals>
 </resources>

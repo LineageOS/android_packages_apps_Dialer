@@ -16,19 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <!-- dialpad t9 search -->
-  <!-- Number lookup -->
-  <!-- Chinese Reverse Lookup Provider -->
-  <!-- Description for incoming calls that were blacklisted -->
-  <!--  for speed dial -->
-  <!-- Call statistics -->
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <!-- T9 Search Text -->
-  <!-- InCall Plugin Settings -->
-  <!-- Search shortcut for "Call using PluginName" -->
-  <!-- CallerInfo Provider Settings strings -->
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <!-- Note DeepLink mod settings summary in Dialer -->
+    <string name="nearby_places">Lleoedd gerllaw</string>
+    <string name="people">Pobol</string>
+    <string name="preference_category_t9_dialpad_search">Chwiliad pad deialu T9</string>
+    <string name="t9_search_input_locale">Mewnbwn chwiliad T9</string>
+    <string name="t9_search_input_locale_default">Rhagosodiad</string>
+    <string name="lookup_settings_label">Chwilio rhif ffôn</string>
+    <string name="lookup_settings_description">Chwilio rhifau anhysbys</string>
+    <string name="enable_forward_lookup_title">Chwiliad dargyfeiriad</string>
+    <string name="enable_forward_lookup_summary">Dangos llefydd gerllaw wrth chwilio yn y deialydd</string>
+    <string name="enable_people_lookup_title">Chwilio pobol</string>
+    <string name="enable_people_lookup_summary">Dangos canlyniadau ar-lein wrth chwilio am bobol yn y deialydd</string>
+    <string name="enable_reverse_lookup_title">Chwiliad croes</string>
+    <string name="enable_reverse_lookup_summary">Chwilio am wybodaeth am y person neu leoliad rhifau anhysbys sy\'n dy alw</string>
+    <string name="forward_lookup_provider_title">Darparydd chwiliad dargyfeiriad</string>
+    <string name="people_lookup_provider_title">Darparydd chwiliad pobol</string>
+    <string name="reverse_lookup_provider_title">Darparydd chwiliad croes</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Tsieineeg (CN)</string>
+    <string name="type_blacklist">Galwad oddi wrth rif wedi\'i rhwystro</string>
+    <string name="call_log_action_block">Rhwystro galwr</string>
+    <string name="call_log_action_unblock">Galwr wedi\'i rwystro</string>
+    <string name="speed_dial_settings">Gosodiadau deialu cyflym</string>
+    <string name="speed_dial_not_set">(heb ei osod)</string>
+    <string name="speed_dial_replace">Disodli</string>
+    <string name="speed_dial_delete">Dileu</string>
+    <string name="speed_dial_unassigned_dialog_title">Bysell heb neilltuo</string>
+    <string name="speed_dial_unassigned_dialog_message">Does dim gweithred deialu gyflym wedi\'i phennu i fysell rhif \'<xliff:g id="number">%s</xliff:g>\'. Wyt ti am osod gweithred nawr?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">I ddeialu, rhaid diffodd modd awyren.</string>
+    <string name="yes">Iawn</string>
+    <string name="no">Ydw</string>
+    <string name="incall_vibration_category_title">Dirgryniad yn ystod galwad</string>
+    <string name="incall_vibrate_outgoing_title">Dirgrynu wrth ateb</string>
+    <string name="incall_vibrate_call_waiting_title">Dirgrynu wrth i alwad aros</string>
+    <string name="incall_vibrate_hangup_title">Dirgrynu wrth orffen yr alwad</string>
+    <string name="incall_vibrate_45_title">Dirgrynu pob munud</string>
+    <string name="incall_vibrate_45_summary">Dirgrynu ar 45ain eiliad pob munud yn ystod galwadau allan</string>
+    <string name="call_log_show_all_slots">Pob SIM</string>
+    <string name="call_log_all_calls_header">Pob galwad</string>
+    <string name="call_log_blacklist_header">Galwadau wedi\'u rhwystro yn unig</string>
+    <string name="call_log_stats_title">Ystadegau</string>
+    <string name="callStatsDetailTitle">Manylion ystadegau galwad</string>
+    <string name="call_stats_incoming">I mewn: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Allan: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Wedi\'u methu: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Wedi\'u rhwystro: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Cyfanswm: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Cyfanswm: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Dyddiad dechrau</string>
+    <string name="call_stats_filter_to">Dyddiad gorffen</string>
+    <string name="call_stats_filter_picker_title">Ystod hidlydd</string>
+    <string name="date_quick_selection">Dewis cyflym</string>
+    <string name="date_qs_currentmonth">Y mis hwn</string>
+    <string name="date_qs_currentquarter">Y chwarter hwn</string>
+    <string name="date_qs_currentyear">Y flwyddyn hon</string>
+    <string name="date_qs_lastweek">Wythnos diwethaf</string>
+    <string name="date_qs_lastmonth">Mis diwethaf</string>
+    <string name="date_qs_lastquarter">Chwarter diwethaf</string>
+    <string name="date_qs_lastyear">Blwyddyn ddiwethaf</string>
+    <string name="call_stats_date_filter">Addasu ystod amser</string>
+    <string name="call_stats_reset_filter">Ailosod y cyfnod amser</string>
+    <string name="call_stats_sort_by_duration">Trefnu yn ôl hyd alwadau</string>
+    <string name="call_stats_sort_by_count">Trefnu yn ôl nifer galwadau</string>
+    <string name="call_stats_title_for_number">Y rhif hwn</string>
+    <string name="call_stats_title_of_total">O\'r cyfanswm</string>
+    <string name="call_stats_title_durations">Hyd galwadau</string>
+    <string name="call_stats_title_count">Cyfrif galwadau</string>
+    <string name="call_stats_title_average_duration">Hyd galwadau ar gyfartaledd</string>
+    <string name="recent_calls_no_items_in_range">Nid yw dy log galwadau yn cynnwys unrhyw alwadau yn y cyfnod dan sylw.</string>
+    <string name="call_recording_category_title">Recordio galwadau</string>
+    <string name="call_recording_format">Fformat sain</string>
+    <string name="call_playback_no_app_found_toast">Ni chanfuwyd ap i chwarae\'r recordiad dan sylw.</string>
+    <string name="invalid_number_text">"Methodd %1$s â gwneud yr alwad hon. Ydy'r rhif yn gywir?"</string>
+    <string name="empty_dialpad_t9_example">Gellir deialu rhif ffôn neu\nchwilio am gyswllt</string>
+    <string name="sign_in_hint_text">Mewngofnoda i wneud galwadau %1$s</string>
+    <string name="wifi_hint_text">Gwna galwadau %1$s i %1$s am ddim dros Wi-Fi.</string>
+    <string name="roaming_hint_text">Mae %1$s yn crwydro. Gwna %2$s am ddim i alwadau %2$s dros Wi-Fi.</string>
+    <string name="emergency_call_hint_text">Dim SIM. Galwadau brys yn unig.</string>
+    <string name="extra_call_method_call_option">Galwad <xliff:g id="provider">%s</xliff:g></string>
+    <string name="incall_plugin_settings">Gosodiadau <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="search_shortcut_call_using">Galw gan ddefnyddio <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Iawn</string>
+    <string name="callerinfo_provider_auth_no_short">Na</string>
+    <string name="callerinfo_provider_auth_no">Dim diolch</string>
+    <string name="callerinfo_provider_auth_access">Bydd gan <xliff:g id="provider_name">%s</xliff:g> fynediad at dy gysylltiadau, proffil Fi, a dy gyfrif LineageOS, ac felly o bosib hefyd dy gyfeiriad e-bost.</string>
+    <string name="callerinfo_provider_auth_learn_more">Dysgu rhagor</string>
+    <string name="callerinfo_provider_auth_desc">Croeso! Hoffet i <xliff:g id="provider_name">%s</xliff:g> adnabod galwyr anhysbys a rhwystro galwadau digroeso?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Croeso! Hoffet i <xliff:g id="provider_name">%s</xliff:g> adnabod galwyr anhysbys?</string>
+    <string name="callerinfo_provider_summary">Mae\'n adnabod galwyr anhysbys a sbam</string>
+    <string name="callerinfo_provider_summary_no_spam">Mae\'n adnabod galwyr anhysbys</string>
+    <string name="silence_spam_title">Distewi galwadau sbam</string>
+    <string name="silence_spam_summary">Peidio byth â gadael galwadau sbam i ganu</string>
+    <string name="block_hidden_title">Rhwystro rhifau sydd wedi\'u cuddio</string>
+    <string name="block_hidden_summary">Ystyried mai sbam yw rhifau wedi\'u cuddio</string>
+    <string name="block_dialog_title">Rhwystro\'r galwr hwn?</string>
+    <string name="block_dialog_positive">Rhwystro</string>
+    <string name="block_dialog_negative">Diddymu</string>
+    <string name="block_dialog_description">Ni fyddi\'n derbyn galwadau na negeseuon oddi wrth y person hwn eto.</string>
+    <string name="block_dialog_report_spam">Adrodd fel sbam i <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Analluogi %1$s?</string>
+    <string name="provider_disable_message">Wrth analluogi %1$s ni fydd gennyt ID galwr.</string>
+    <string name="provider_disable_spam_message">Wrth analluogi %1$s ni fydd gennyt amddiffyniad rhag sbam nac ID galwr.</string>
+    <string name="powered_by_provider">Pwerwyd gan <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"Gwneud galwadau %1$s wrth\nnewid rhwng moddau yma"</string>
+    <string name="provider_search_help">"Chwilio cysylltiadau %1$s wrth\nnewid rhwng moddau yma"</string>
+    <string name="provider_button_help">"Deall yn iawn"</string>
+    <string name="provider_voice_call">"galwad llais %1$s"</string>
+    <string name="provider_video_call">"galwad fideo %1$s"</string>
+    <string name="cm_permission_place_call">I wneud galwad, rho ganiatâd i\'r ap Ffôn.</string>
+    <string name="search_shortcut_view_note">Edrych ar y nodyn</string>
+    <string name="note_mod_settings_summary">Cymera nodiadau o unrhyw le</string>
+    <string name="callerinfo_provider_status_disabling">Yn analluogi</string>
+    <string name="show_dialpad_at_start_title">Dangos y pad deialu wrth ddechrau</string>
 </resources>

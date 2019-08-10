@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 oră</item>
-    <item quantity="few">%d ore</item>
-    <item quantity="other">%d ore</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 min</item>
-    <item quantity="few">%d min</item>
-    <item quantity="other">%d min</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 sec</item>
-    <item quantity="few">%d sec</item>
-    <item quantity="other">%d sec</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 apel</item>
-    <item quantity="few">%d apeluri</item>
-    <item quantity="other">%d apeluri</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 oră</item>
+        <item quantity="few">%d ore</item>
+        <item quantity="other">%d ore</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 min</item>
+        <item quantity="few">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sec</item>
+        <item quantity="few">%d sec</item>
+        <item quantity="other">%d sec</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 apel</item>
+        <item quantity="few">%d apeluri</item>
+        <item quantity="other">%d apeluri</item>
+    </plurals>
 </resources>

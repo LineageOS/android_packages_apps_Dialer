@@ -16,131 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Posti nelle vicinanze</string>
-  <string name="people">Persone</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Ricerca T9 tastierino</string>
-  <string name="t9_search_input_locale">Input ricerca T9</string>
-  <string name="t9_search_input_locale_default">Predefinito</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Ricerca numeri telefonici</string>
-  <string name="lookup_settings_description">Ricerca numeri di telefono sconosciuti</string>
-  <string name="enable_forward_lookup_title">Ricerca diretta</string>
-  <string name="enable_forward_lookup_summary">Mostra luoghi nelle vicinanze durante la ricerca nel tastierino</string>
-  <string name="enable_people_lookup_title">Ricerca persone</string>
-  <string name="enable_people_lookup_summary">Mostra risultati online durante la ricerca nel tastierino</string>
-  <string name="enable_reverse_lookup_title">Ricerca inversa</string>
-  <string name="enable_reverse_lookup_summary">Cerca informazioni sulla persona o luogo per i numeri sconosciuti delle chiamate in ingresso</string>
-  <string name="forward_lookup_provider_title">Provider di ricerca diretta</string>
-  <string name="people_lookup_provider_title">Provider di ricerca persone</string>
-  <string name="reverse_lookup_provider_title">Provider di ricerca inverso</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Cinese (CN)</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Chiamate bloccate</string>
-  <string name="call_log_action_block">Chiamante bloccato</string>
-  <string name="call_log_action_unblock">Chiamante bloccato</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">Impostazioni composizione rapida</string>
-  <string name="speed_dial_not_set">(non impostato)</string>
-  <string name="speed_dial_replace">Sostituisci</string>
-  <string name="speed_dial_delete">Elimina</string>
-  <string name="speed_dial_unassigned_dialog_title">Pulsante non assegnato</string>
-  <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero \'<xliff:g id="number">%s</xliff:g>\'. Vuoi assegnare un\'azione ora?</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Per usare la composizione rapida occorre disattivare la modalità aereo.</string>
-  <string name="yes">Si</string>
-  <string name="no">No</string>
-  <string name="incall_vibration_category_title">Vibrazioni in chiamata</string>
-  <string name="incall_vibrate_outgoing_title">Vibra alla risposta</string>
-  <string name="incall_vibrate_call_waiting_title">Vibra su messa in attesa</string>
-  <string name="incall_vibrate_hangup_title">Vibra al termine chiamata</string>
-  <string name="incall_vibrate_45_title">Vibra ogni minuto</string>
-  <string name="incall_vibrate_45_summary">Vibra al 45esimo secondo di ogni minuto durante le chiamate in uscita</string>
-  <string name="call_log_show_all_slots">Tutte le SIM</string>
-  <string name="call_log_all_calls_header">Tutte le chiamate</string>
-  <string name="call_log_blacklist_header">Solo chiamate bloccate</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Statistiche</string>
-  <string name="callStatsDetailTitle">Dettagli chiamate</string>
-  <string name="call_stats_incoming">In entrata <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">In uscita <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Perse: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blacklisted">Bloccate: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Totale: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Totale: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Da data</string>
-  <string name="call_stats_filter_to">A data</string>
-  <string name="call_stats_filter_picker_title">Intervallo</string>
-  <string name="date_quick_selection">Selezione rapida</string>
-  <string name="date_qs_currentmonth">Mese corrente</string>
-  <string name="date_qs_currentquarter">Trimestre corrente</string>
-  <string name="date_qs_currentyear">Anno corrente</string>
-  <string name="date_qs_lastweek">Ultima settimana</string>
-  <string name="date_qs_lastmonth">Ultimo mese</string>
-  <string name="date_qs_lastquarter">Ultimo trimestre</string>
-  <string name="date_qs_lastyear">Ultimo anno</string>
-  <string name="call_stats_date_filter">Regola intervallo</string>
-  <string name="call_stats_reset_filter">Reimposta intervallo</string>
-  <string name="call_stats_sort_by_duration">Ordina per durata</string>
-  <string name="call_stats_sort_by_count">Ordina per numero</string>
-  <string name="call_stats_title_for_number">Questo numero</string>
-  <string name="call_stats_title_of_total">In totale</string>
-  <string name="call_stats_title_durations">Durata chiamate</string>
-  <string name="call_stats_title_count">Conteggio chiamate</string>
-  <string name="call_stats_title_average_duration">Durata media chiamata</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Il registro chiamate non contiene nessuna chiamata nel periodo di tempo selezionato.</string>
-  <string name="call_recording_category_title">Registrazione chiamata</string>
-  <string name="call_recording_format">Formato audio</string>
-  <string name="call_playback_no_app_found_toast">Nessuna app trovata per la riproduzione della registrazione selezionata.</string>
-  <string name="invalid_number_text">"%1$s non può effettuare questa chiamata. Il numero è corretto?"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">Puoi chiamare un numero di telefono o\ncercare un contatto</string>
-  <string name="sign_in_hint_text">Accedi per effetuare chiamate con %1$s</string>
-  <string name="wifi_hint_text">Fai chiamate %1$s gratis su Wi-Fi.</string>
-  <string name="roaming_hint_text">%1$s è in roaming. Fai chiamate tra %2$s gratis su Wi-Fi.</string>
-  <string name="emergency_call_hint_text">Nessuna SIM. Solo chiamate d\'emergenza.</string>
-  <string name="extra_call_method_call_option">Chiamata <xliff:g id="provider">%s</xliff:g></string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings">Impostazioni <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using">Chiamata con <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">Si</string>
-  <string name="callerinfo_provider_auth_no_short">No</string>
-  <string name="callerinfo_provider_auth_no">No, grazie</string>
-  <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> deve accedere ai tuoi contatti, profilo Me, e l\'account Cyanogen OS, che potrebbe includere il tuo indirizzo email.</string>
-  <string name="callerinfo_provider_auth_learn_more">Ulteriori informazioni</string>
-  <string name="callerinfo_provider_auth_desc">Benvenuto! Vuoi che <xliff:g id="provider_name">%s</xliff:g> identifichi i chiamanti sconosciuti e blocchi le chiamate non desiderate?</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">Benvenuto! Vorresti che <xliff:g id="provider_name">%s</xliff:g> identifichi i chiamanti sconosciuti?</string>
-  <string name="callerinfo_provider_summary">Identifica i chiamanti sconosciuti e spam</string>
-  <string name="callerinfo_provider_summary_no_spam">Identifica chiamanti sconosciuti</string>
-  <string name="silence_spam_title">Silenzia chiamate spam</string>
-  <string name="silence_spam_summary">Non lasciare mai squillare le chiamate spam</string>
-  <string name="block_hidden_title">Blocca numeri nascosti</string>
-  <string name="block_hidden_summary">Considera i numeri nascosti come spam</string>
-  <string name="block_dialog_title">Bloccare questo chiamante?</string>
-  <string name="block_dialog_positive">Blocca</string>
-  <string name="block_dialog_negative">Annulla</string>
-  <string name="block_dialog_description">Non riceverai più chiamate o messaggi da questa persona.</string>
-  <string name="block_dialog_report_spam">Segnala come spam a <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">Disattivare %1$s?</string>
-  <string name="provider_disable_message">Disattivando %1$s, non avrai un ID chiamante.</string>
-  <string name="provider_disable_spam_message">Disattivando %1$s, non avrai protezione da spam o ID chiamante.</string>
-  <string name="powered_by_provider">Offerto da <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"Fai chiamate %1$s\ncambiando modalità qui"</string>
-  <string name="provider_search_help">"Ricerca contatti %1$s\ncambiando modalità qui"</string>
-  <string name="provider_button_help">"Capito"</string>
-  <string name="provider_voice_call">"Chiamata vocale %1$s"</string>
-  <string name="provider_video_call">"Videochiamata %1$s"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">Per effettuare una chiamata, attiva le autorizzazioni del telefono.</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">Vedi note</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">Prendi note da qualunque parte</string>
-  <string name="callerinfo_provider_status_disabling">Disattivazione</string>
-  <string name="show_dialpad_at_start_title">Mostra il tastierino all\'apertura</string>
+    <string name="nearby_places">Posti nelle vicinanze</string>
+    <string name="people">Persone</string>
+    <string name="preference_category_t9_dialpad_search">Ricerca T9 tastierino</string>
+    <string name="t9_search_input_locale">Input ricerca T9</string>
+    <string name="t9_search_input_locale_default">Predefinito</string>
+    <string name="lookup_settings_label">Ricerca numeri telefonici</string>
+    <string name="lookup_settings_description">Ricerca numeri di telefono sconosciuti</string>
+    <string name="enable_forward_lookup_title">Ricerca diretta</string>
+    <string name="enable_forward_lookup_summary">Mostra luoghi nelle vicinanze durante la ricerca nel tastierino</string>
+    <string name="enable_people_lookup_title">Ricerca persone</string>
+    <string name="enable_people_lookup_summary">Mostra risultati online durante la ricerca nel tastierino</string>
+    <string name="enable_reverse_lookup_title">Ricerca inversa</string>
+    <string name="enable_reverse_lookup_summary">Cerca informazioni sulla persona o luogo per i numeri sconosciuti delle chiamate in ingresso</string>
+    <string name="forward_lookup_provider_title">Provider di ricerca diretta</string>
+    <string name="people_lookup_provider_title">Provider di ricerca persone</string>
+    <string name="reverse_lookup_provider_title">Provider di ricerca inverso</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Cinese (CN)</string>
+    <string name="type_blacklist">Chiamate bloccate</string>
+    <string name="call_log_action_block">Chiamante bloccato</string>
+    <string name="call_log_action_unblock">Chiamante bloccato</string>
+    <string name="speed_dial_settings">Impostazioni composizione rapida</string>
+    <string name="speed_dial_not_set">(non impostato)</string>
+    <string name="speed_dial_replace">Sostituisci</string>
+    <string name="speed_dial_delete">Elimina</string>
+    <string name="speed_dial_unassigned_dialog_title">Pulsante non assegnato</string>
+    <string name="speed_dial_unassigned_dialog_message">Nessuna azione di composizione rapida assegnata al pulsante numero \'<xliff:g id="number">%s</xliff:g>\'. Vuoi assegnare un\'azione ora?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Per usare la composizione rapida occorre disattivare la modalità aereo.</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="incall_vibration_category_title">Vibrazioni in chiamata</string>
+    <string name="incall_vibrate_outgoing_title">Vibra alla risposta</string>
+    <string name="incall_vibrate_call_waiting_title">Vibra su messa in attesa</string>
+    <string name="incall_vibrate_hangup_title">Vibra al termine chiamata</string>
+    <string name="incall_vibrate_45_title">Vibra ogni minuto</string>
+    <string name="incall_vibrate_45_summary">Vibra al 45esimo secondo di ogni minuto durante le chiamate in uscita</string>
+    <string name="call_log_show_all_slots">Tutte le SIM</string>
+    <string name="call_log_all_calls_header">Tutte le chiamate</string>
+    <string name="call_log_blacklist_header">Solo chiamate bloccate</string>
+    <string name="call_log_stats_title">Statistiche</string>
+    <string name="callStatsDetailTitle">Dettagli chiamate</string>
+    <string name="call_stats_incoming">In entrata <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">In uscita <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Perse: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Bloccate: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totale: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Totale: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Da data</string>
+    <string name="call_stats_filter_to">A data</string>
+    <string name="call_stats_filter_picker_title">Intervallo</string>
+    <string name="date_quick_selection">Selezione rapida</string>
+    <string name="date_qs_currentmonth">Mese corrente</string>
+    <string name="date_qs_currentquarter">Trimestre corrente</string>
+    <string name="date_qs_currentyear">Anno corrente</string>
+    <string name="date_qs_lastweek">Ultima settimana</string>
+    <string name="date_qs_lastmonth">Ultimo mese</string>
+    <string name="date_qs_lastquarter">Ultimo trimestre</string>
+    <string name="date_qs_lastyear">Ultimo anno</string>
+    <string name="call_stats_date_filter">Regola intervallo</string>
+    <string name="call_stats_reset_filter">Reimposta intervallo</string>
+    <string name="call_stats_sort_by_duration">Ordina per durata</string>
+    <string name="call_stats_sort_by_count">Ordina per numero</string>
+    <string name="call_stats_title_for_number">Questo numero</string>
+    <string name="call_stats_title_of_total">In totale</string>
+    <string name="call_stats_title_durations">Durata chiamate</string>
+    <string name="call_stats_title_count">Conteggio chiamate</string>
+    <string name="call_stats_title_average_duration">Durata media chiamata</string>
+    <string name="recent_calls_no_items_in_range">Il registro chiamate non contiene nessuna chiamata nel periodo di tempo selezionato.</string>
+    <string name="call_recording_category_title">Registrazione chiamata</string>
+    <string name="call_recording_format">Formato audio</string>
+    <string name="call_playback_no_app_found_toast">Nessuna app trovata per la riproduzione della registrazione selezionata.</string>
+    <string name="invalid_number_text">"%1$s non può effettuare questa chiamata. Il numero è corretto?"</string>
+    <string name="empty_dialpad_t9_example">Puoi chiamare un numero di telefono o\ncercare un contatto</string>
+    <string name="sign_in_hint_text">Accedi per effetuare chiamate con %1$s</string>
+    <string name="wifi_hint_text">Fai chiamate %1$s gratis su Wi-Fi.</string>
+    <string name="roaming_hint_text">%1$s è in roaming. Fai chiamate tra %2$s gratis su Wi-Fi.</string>
+    <string name="emergency_call_hint_text">Nessuna SIM. Solo chiamate d\'emergenza.</string>
+    <string name="extra_call_method_call_option">Chiamata <xliff:g id="provider">%s</xliff:g></string>
+    <string name="incall_plugin_settings">Impostazioni <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="search_shortcut_call_using">Chiamata con <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Si</string>
+    <string name="callerinfo_provider_auth_no_short">No</string>
+    <string name="callerinfo_provider_auth_no">No, grazie</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> deve accedere ai tuoi contatti, profilo Me, e l\'account Cyanogen OS, che potrebbe includere il tuo indirizzo email.</string>
+    <string name="callerinfo_provider_auth_learn_more">Ulteriori informazioni</string>
+    <string name="callerinfo_provider_auth_desc">Benvenuto! Vuoi che <xliff:g id="provider_name">%s</xliff:g> identifichi i chiamanti sconosciuti e blocchi le chiamate non desiderate?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Benvenuto! Vorresti che <xliff:g id="provider_name">%s</xliff:g> identifichi i chiamanti sconosciuti?</string>
+    <string name="callerinfo_provider_summary">Identifica i chiamanti sconosciuti e spam</string>
+    <string name="callerinfo_provider_summary_no_spam">Identifica chiamanti sconosciuti</string>
+    <string name="silence_spam_title">Silenzia chiamate spam</string>
+    <string name="silence_spam_summary">Non lasciare mai squillare le chiamate spam</string>
+    <string name="block_hidden_title">Blocca numeri nascosti</string>
+    <string name="block_hidden_summary">Considera i numeri nascosti come spam</string>
+    <string name="block_dialog_title">Bloccare questo chiamante?</string>
+    <string name="block_dialog_positive">Blocca</string>
+    <string name="block_dialog_negative">Annulla</string>
+    <string name="block_dialog_description">Non riceverai più chiamate o messaggi da questa persona.</string>
+    <string name="block_dialog_report_spam">Segnala come spam a <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Disattivare %1$s?</string>
+    <string name="provider_disable_message">Disattivando %1$s, non avrai un ID chiamante.</string>
+    <string name="provider_disable_spam_message">Disattivando %1$s, non avrai protezione da spam o ID chiamante.</string>
+    <string name="powered_by_provider">Offerto da <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"Fai chiamate %1$s\ncambiando modalità qui"</string>
+    <string name="provider_search_help">"Ricerca contatti %1$s\ncambiando modalità qui"</string>
+    <string name="provider_button_help">"Capito"</string>
+    <string name="provider_voice_call">"Chiamata vocale %1$s"</string>
+    <string name="provider_video_call">"Videochiamata %1$s"</string>
+    <string name="cm_permission_place_call">Per effettuare una chiamata, attiva le autorizzazioni del telefono.</string>
+    <string name="search_shortcut_view_note">Vedi note</string>
+    <string name="note_mod_settings_summary">Prendi note da qualunque parte</string>
+    <string name="callerinfo_provider_status_disabling">Disattivazione</string>
+    <string name="show_dialpad_at_start_title">Mostra il tastierino all\'apertura</string>
 </resources>

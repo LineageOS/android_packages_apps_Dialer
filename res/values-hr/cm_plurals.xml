@@ -16,24 +16,24 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <plurals name="hour">
-    <item quantity="one">1 sat</item>
-    <item quantity="few">%d sati</item>
-    <item quantity="other">%d sati</item>
-  </plurals>
-  <plurals name="minute">
-    <item quantity="one">1 minuta</item>
-    <item quantity="few">%d minuta</item>
-    <item quantity="other">%d minuta</item>
-  </plurals>
-  <plurals name="second">
-    <item quantity="one">1 sekunda</item>
-    <item quantity="few">%d sekundi</item>
-    <item quantity="other">%d sekundi</item>
-  </plurals>
-  <plurals name="call">
-    <item quantity="one">1 poziv</item>
-    <item quantity="few">%d poziva</item>
-    <item quantity="other">%d poziva</item>
-  </plurals>
+    <plurals name="hour">
+        <item quantity="one">1 sat</item>
+        <item quantity="few">%d sati</item>
+        <item quantity="other">%d sati</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 minuta</item>
+        <item quantity="few">%d minuta</item>
+        <item quantity="other">%d minuta</item>
+    </plurals>
+    <plurals name="second">
+        <item quantity="one">1 sekunda</item>
+        <item quantity="few">%d sekundi</item>
+        <item quantity="other">%d sekundi</item>
+    </plurals>
+    <plurals name="call">
+        <item quantity="one">1 poziv</item>
+        <item quantity="few">%d poziva</item>
+        <item quantity="other">%d poziva</item>
+    </plurals>
 </resources>

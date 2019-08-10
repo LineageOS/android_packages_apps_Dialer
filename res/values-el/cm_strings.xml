@@ -16,131 +16,116 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <!-- Forward lookup -->
-  <string name="nearby_places">Κοντινές τοποθεσίες</string>
-  <string name="people">Άτομα</string>
-  <!-- dialpad t9 search -->
-  <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
-  <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
-  <string name="t9_search_input_locale_default">Προεπιλογή</string>
-  <!-- Number lookup -->
-  <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
-  <string name="lookup_settings_description">Αναζήτηση γιά άγνωστους αριθμούς τηλεφώνου</string>
-  <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
-  <string name="enable_forward_lookup_summary">Εμφάνιση κοντινών τοποθεσιών κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
-  <string name="enable_people_lookup_title">Αναζήτηση ατόμων</string>
-  <string name="enable_people_lookup_summary">Εμφάνιση online αποτελεσμάτων για τα άτομα κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
-  <string name="enable_reverse_lookup_title">Αντίστροφη αναζήτηση</string>
-  <string name="enable_reverse_lookup_summary">Αναζήτηση πληροφοριών σχετικά με το άτομο ή την τοποθεσία για άγνωστους αριθμούς στις εισερχόμενες κλήσεις</string>
-  <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
-  <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
-  <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
-  <!-- Chinese Reverse Lookup Provider -->
-  <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
-  <!-- Description for incoming calls that were blacklisted -->
-  <string name="type_blacklist">Στη λίστα αποκλεισμένων καλούντων</string>
-  <string name="call_log_action_block">Αποκλεισμός καλούντος</string>
-  <string name="call_log_action_unblock">Ο καλών αποκλείστηκε</string>
-  <!--  for speed dial -->
-  <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
-  <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
-  <string name="speed_dial_replace">Αντικατάσταση</string>
-  <string name="speed_dial_delete">Διαγραφή</string>
-  <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
-  <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
-  <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης.</string>
-  <string name="yes">Ναι</string>
-  <string name="no">Όχι</string>
-  <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
-  <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
-  <string name="incall_vibrate_call_waiting_title">Δόνηση στην αναμονή</string>
-  <string name="incall_vibrate_hangup_title">Δόνηση στο κλείσιμο</string>
-  <string name="incall_vibrate_45_title">Δόνηση κάθε 1 λεπτό</string>
-  <string name="incall_vibrate_45_summary">Δόνηση στο 45ο δευτερόλεπτο κάθε λεπτού κατά τη διάρκεια εξερχόμενων κλήσεων</string>
-  <string name="call_log_show_all_slots">Όλες οι SIM</string>
-  <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
-  <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
-  <!-- Call statistics -->
-  <string name="call_log_stats_title">Στατιστικά</string>
-  <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
-  <string name="call_stats_incoming">Εισερχόμενες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_missed">Αναπάντητες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_blacklisted">Αποκλεισμένες: <xliff:g id="value">%s</xliff:g></string>
-  <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
-  <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
-  <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
-  <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
-  <string name="call_stats_filter_to">Ημερομηνία λήξης</string>
-  <string name="call_stats_filter_picker_title">Εύρος φίλτρου</string>
-  <string name="date_quick_selection">Γρήγορη επιλογή</string>
-  <string name="date_qs_currentmonth">Τρέχων μήνας</string>
-  <string name="date_qs_currentquarter">Τρέχον τρίμηνο</string>
-  <string name="date_qs_currentyear">Τρέχων χρόνος</string>
-  <string name="date_qs_lastweek">Προηγούμενη εβδομάδα</string>
-  <string name="date_qs_lastmonth">Προηγούμενος μήνας</string>
-  <string name="date_qs_lastquarter">Προηγούμενο τρίμηνο</string>
-  <string name="date_qs_lastyear">Προηγούμενος χρόνος</string>
-  <string name="call_stats_date_filter">Ρύθμιση χρονικού εύρους</string>
-  <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
-  <string name="call_stats_sort_by_duration">Ταξινόμηση ανά διάρκεια κλήσεων</string>
-  <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
-  <string name="call_stats_title_for_number">Αυτός ο αριθμός</string>
-  <string name="call_stats_title_of_total">Από το σύνολο</string>
-  <string name="call_stats_title_durations">Διάρκεια κλήσεων</string>
-  <string name="call_stats_title_count">Αριθμός κλήσεων</string>
-  <string name="call_stats_title_average_duration">Μέση διάρκεια κλήσεων</string>
-  <!-- Text displayed when there are no call log entries in the selected time range. -->
-  <string name="recent_calls_no_items_in_range">Το αρχείο καταγραφής κλήσεων δεν περιέχει καμία κλήση στο επιλεγμένο χρονικό εύρος.</string>
-  <string name="call_recording_category_title">Καταγραφή κλήσεων</string>
-  <string name="call_recording_format">Μορφή ήχου</string>
-  <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
-  <string name="invalid_number_text">"Το %1$s δεν μπόρεσε να πραγματοποιήσει αυτή την κλήση. Είναι σωστός ο αριθμός;"</string>
-  <!-- T9 Search Text -->
-  <string name="empty_dialpad_t9_example">Μπορείτε να καλέσετε έναν αριθμό τηλεφώνου ή\nνα αναζητήσετε για μία επαφή</string>
-  <string name="sign_in_hint_text">Συνδεθείτε για να κάνετε κλήσεις %1$s</string>
-  <string name="wifi_hint_text">Κάντε δωρεάν κλήσεις από %1$s σε %1$s μέσω Wi-Fi.</string>
-  <string name="roaming_hint_text">To %1$s είναι σε περιαγωγή. Κάντε δωρεάν κλήσεις από %2$s σε %2$s μέσω Wi-Fi.</string>
-  <string name="emergency_call_hint_text">Δεν υπάρχει SIM. Μόνο κλήσεις έκτακτης ανάγκης.</string>
-  <string name="extra_call_method_call_option">Κλήση <xliff:g id="provider">%s</xliff:g></string>
-  <!-- InCall Plugin Settings -->
-  <string name="incall_plugin_settings">Ρυθμίσεις <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- Search shortcut for "Call using PluginName" -->
-  <string name="search_shortcut_call_using">Κλήση μέσω <xliff:g id="name">%1$s</xliff:g></string>
-  <!-- CallerInfo Provider Settings strings -->
-  <string name="callerinfo_provider_auth_yes">Ναι</string>
-  <string name="callerinfo_provider_auth_no_short">Όχι</string>
-  <string name="callerinfo_provider_auth_no">Όχι, ευχαριστώ</string>
-  <string name="callerinfo_provider_auth_access">Το <xliff:g id="provider_name">%s</xliff:g> θα έχει πρόσβαση στις επαφές, το Me προφίλ, και τον Cyanogen OS λογαριασμό σας, ο οποίος μπορεί να περιλαμβάνει τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.</string>
-  <string name="callerinfo_provider_auth_learn_more">Μάθετε περισσότερα</string>
-  <string name="callerinfo_provider_auth_desc">Καλώς ήλθατε! Θα θέλατε το <xliff:g id="provider_name">%s</xliff:g> να εντοπίζει άγνωστους καλούντες και να μπλοκάρει ανεπιθύμητες κλήσεις;</string>
-  <string name="callerinfo_provider_auth_desc_no_spam">Καλώς ήλθατε! Θα θέλατε το <xliff:g id="provider_name">%s</xliff:g> να εντοπίζει άγνωστους καλούντες;</string>
-  <string name="callerinfo_provider_summary">Εντοπίζει άγνωστους καλούντες και spam</string>
-  <string name="callerinfo_provider_summary_no_spam">Εντοπίζει άγνωστους καλούντες</string>
-  <string name="silence_spam_title">Σίγαση ανεπιθύμητων κλήσεων</string>
-  <string name="silence_spam_summary">Σίγαση όλων των ανεπιθύμητων κλήσεων</string>
-  <string name="block_hidden_title">Αποκλεισμός κρυφών τηλεφωνικών αριθμών</string>
-  <string name="block_hidden_summary">Επισήμανση κρυφών αριθμών ως ανεπιθύμητων</string>
-  <string name="block_dialog_title">Αποκλεισμός αυτού του καλούντος;</string>
-  <string name="block_dialog_positive">Αποκλεισμός</string>
-  <string name="block_dialog_negative">Ακύρωση</string>
-  <string name="block_dialog_description">Δε θα λαμβάνετε πλέον κλήσεις ή μηνύματα από αυτό το άτομο.</string>
-  <string name="block_dialog_report_spam">Αναφορά ως ανεπιθύμητη στο <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_disable_title">Απενεργοποίηση %1$s;</string>
-  <string name="provider_disable_message">Απενεργοποιώντας το %1$s, δεν θα έχετε αναγνώριση κλήσης.</string>
-  <string name="provider_disable_spam_message">Απενεργοποιώντας το %1$s, δεν θα έχετε προστασία spam ή αναγνώριση κλήσης.</string>
-  <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
-  <string name="provider_help">"Κάντε κλήσεις %1$s\nαλλάζοντας τρόπους εδώ"</string>
-  <string name="provider_search_help">"Αναζητήστε επαφές %1$s\nαλλάζοντας τρόπους εδώ"</string>
-  <string name="provider_button_help">"Το έπιασα"</string>
-  <string name="provider_voice_call">"Φωνητική κλήση %1$s"</string>
-  <string name="provider_video_call">"Κλήση βίντεο %1$s"</string>
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed -->
-  <string name="cm_permission_place_call">Για να καλέσετε, ενεργοποιήστε τα δικαιώματα Τηλεφώνου.</string>
-  <!-- Label of the button to view a note from a call log entry with associated DeepLink -->
-  <string name="search_shortcut_view_note">Προβολή σημείωσης</string>
-  <!-- Note DeepLink mod settings summary in Dialer -->
-  <string name="note_mod_settings_summary">Κρατήστε σημειώσεις από οπουδήποτε</string>
-  <string name="callerinfo_provider_status_disabling">Απενεργοποίηση</string>
-  <string name="show_dialpad_at_start_title">Εμφάνιση πληκτρολογίου κλήσης κατά την έναρξη</string>
+    <string name="nearby_places">Κοντινές τοποθεσίες</string>
+    <string name="people">Άτομα</string>
+    <string name="preference_category_t9_dialpad_search">Αναζήτηση πληκτρολογίου T9</string>
+    <string name="t9_search_input_locale">Γλώσσα αναζήτησης T9</string>
+    <string name="t9_search_input_locale_default">Προεπιλογή</string>
+    <string name="lookup_settings_label">Αναζήτηση τηλεφωνικού αριθμού</string>
+    <string name="lookup_settings_description">Αναζήτηση γιά άγνωστους αριθμούς τηλεφώνου</string>
+    <string name="enable_forward_lookup_title">Κανονική αναζήτηση</string>
+    <string name="enable_forward_lookup_summary">Εμφάνιση κοντινών τοποθεσιών κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
+    <string name="enable_people_lookup_title">Αναζήτηση ατόμων</string>
+    <string name="enable_people_lookup_summary">Εμφάνιση online αποτελεσμάτων για τα άτομα κατά την αναζήτηση στην εφαρμογή τηλεφώνου</string>
+    <string name="enable_reverse_lookup_title">Αντίστροφη αναζήτηση</string>
+    <string name="enable_reverse_lookup_summary">Αναζήτηση πληροφοριών σχετικά με το άτομο ή την τοποθεσία για άγνωστους αριθμούς στις εισερχόμενες κλήσεις</string>
+    <string name="forward_lookup_provider_title">Πάροχος κανονικής αναζήτησης</string>
+    <string name="people_lookup_provider_title">Πάροχος αναζήτησης ατόμων</string>
+    <string name="reverse_lookup_provider_title">Πάροχος αντίστροφης αναζήτησης</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Κινέζικα (CN)</string>
+    <string name="type_blacklist">Στη λίστα αποκλεισμένων καλούντων</string>
+    <string name="call_log_action_block">Αποκλεισμός καλούντος</string>
+    <string name="call_log_action_unblock">Ο καλών αποκλείστηκε</string>
+    <string name="speed_dial_settings">Ρυθμίσεις ταχείας κλήσης</string>
+    <string name="speed_dial_not_set">(δεν έχει οριστεί)</string>
+    <string name="speed_dial_replace">Αντικατάσταση</string>
+    <string name="speed_dial_delete">Διαγραφή</string>
+    <string name="speed_dial_unassigned_dialog_title">Μη εκχωρημένο πλήκτρο</string>
+    <string name="speed_dial_unassigned_dialog_message">Καμία ενέργεια ταχείας κλήσης δεν έχει εκχωρηθεί στο πλήκτρο \'<xliff:g id="number">%s</xliff:g>\'. Θέλετε να ορίσετε μια ενέργεια τώρα;</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Για να χρησιμοποιήσετε την ταχεία κλήση, απενεργοποιήστε πρώτα την λειτουργία πτήσης.</string>
+    <string name="yes">Ναι</string>
+    <string name="no">Όχι</string>
+    <string name="incall_vibration_category_title">Δόνηση κατά την κλήση</string>
+    <string name="incall_vibrate_outgoing_title">Δόνηση στην απάντηση</string>
+    <string name="incall_vibrate_call_waiting_title">Δόνηση στην αναμονή</string>
+    <string name="incall_vibrate_hangup_title">Δόνηση στο κλείσιμο</string>
+    <string name="incall_vibrate_45_title">Δόνηση κάθε 1 λεπτό</string>
+    <string name="incall_vibrate_45_summary">Δόνηση στο 45ο δευτερόλεπτο κάθε λεπτού κατά τη διάρκεια εξερχόμενων κλήσεων</string>
+    <string name="call_log_show_all_slots">Όλες οι SIM</string>
+    <string name="call_log_all_calls_header">Όλες οι κλήσεις</string>
+    <string name="call_log_blacklist_header">Μόνο αποκλεισμένες κλήσεις</string>
+    <string name="call_log_stats_title">Στατιστικά</string>
+    <string name="callStatsDetailTitle">Λεπτομέρειες στατιστικών κλήσεων</string>
+    <string name="call_stats_incoming">Εισερχόμενες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Αναπάντητες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Αποκλεισμένες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
+    <string name="call_stats_filter_to">Ημερομηνία λήξης</string>
+    <string name="call_stats_filter_picker_title">Εύρος φίλτρου</string>
+    <string name="date_quick_selection">Γρήγορη επιλογή</string>
+    <string name="date_qs_currentmonth">Τρέχων μήνας</string>
+    <string name="date_qs_currentquarter">Τρέχον τρίμηνο</string>
+    <string name="date_qs_currentyear">Τρέχων χρόνος</string>
+    <string name="date_qs_lastweek">Προηγούμενη εβδομάδα</string>
+    <string name="date_qs_lastmonth">Προηγούμενος μήνας</string>
+    <string name="date_qs_lastquarter">Προηγούμενο τρίμηνο</string>
+    <string name="date_qs_lastyear">Προηγούμενος χρόνος</string>
+    <string name="call_stats_date_filter">Ρύθμιση χρονικού εύρους</string>
+    <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
+    <string name="call_stats_sort_by_duration">Ταξινόμηση ανά διάρκεια κλήσεων</string>
+    <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
+    <string name="call_stats_title_for_number">Αυτός ο αριθμός</string>
+    <string name="call_stats_title_of_total">Από το σύνολο</string>
+    <string name="call_stats_title_durations">Διάρκεια κλήσεων</string>
+    <string name="call_stats_title_count">Αριθμός κλήσεων</string>
+    <string name="call_stats_title_average_duration">Μέση διάρκεια κλήσεων</string>
+    <string name="recent_calls_no_items_in_range">Το αρχείο καταγραφής κλήσεων δεν περιέχει καμία κλήση στο επιλεγμένο χρονικό εύρος.</string>
+    <string name="call_recording_category_title">Καταγραφή κλήσεων</string>
+    <string name="call_recording_format">Μορφή ήχου</string>
+    <string name="call_playback_no_app_found_toast">Δεν βρέθηκε εφαρμογή για αναπαραγωγή της επιλεγμένης καταγραφής.</string>
+    <string name="invalid_number_text">"Το %1$s δεν μπόρεσε να πραγματοποιήσει αυτή την κλήση. Είναι σωστός ο αριθμός;"</string>
+    <string name="empty_dialpad_t9_example">Μπορείτε να καλέσετε έναν αριθμό τηλεφώνου ή\nνα αναζητήσετε για μία επαφή</string>
+    <string name="sign_in_hint_text">Συνδεθείτε για να κάνετε κλήσεις %1$s</string>
+    <string name="wifi_hint_text">Κάντε δωρεάν κλήσεις από %1$s σε %1$s μέσω Wi-Fi.</string>
+    <string name="roaming_hint_text">To %1$s είναι σε περιαγωγή. Κάντε δωρεάν κλήσεις από %2$s σε %2$s μέσω Wi-Fi.</string>
+    <string name="emergency_call_hint_text">Δεν υπάρχει SIM. Μόνο κλήσεις έκτακτης ανάγκης.</string>
+    <string name="extra_call_method_call_option">Κλήση <xliff:g id="provider">%s</xliff:g></string>
+    <string name="incall_plugin_settings">Ρυθμίσεις <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="search_shortcut_call_using">Κλήση μέσω <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Ναι</string>
+    <string name="callerinfo_provider_auth_no_short">Όχι</string>
+    <string name="callerinfo_provider_auth_no">Όχι, ευχαριστώ</string>
+    <string name="callerinfo_provider_auth_access">Το <xliff:g id="provider_name">%s</xliff:g> θα έχει πρόσβαση στις επαφές, το Me προφίλ, και τον Cyanogen OS λογαριασμό σας, ο οποίος μπορεί να περιλαμβάνει τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.</string>
+    <string name="callerinfo_provider_auth_learn_more">Μάθετε περισσότερα</string>
+    <string name="callerinfo_provider_auth_desc">Καλώς ήλθατε! Θα θέλατε το <xliff:g id="provider_name">%s</xliff:g> να εντοπίζει άγνωστους καλούντες και να μπλοκάρει ανεπιθύμητες κλήσεις;</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Καλώς ήλθατε! Θα θέλατε το <xliff:g id="provider_name">%s</xliff:g> να εντοπίζει άγνωστους καλούντες;</string>
+    <string name="callerinfo_provider_summary">Εντοπίζει άγνωστους καλούντες και spam</string>
+    <string name="callerinfo_provider_summary_no_spam">Εντοπίζει άγνωστους καλούντες</string>
+    <string name="silence_spam_title">Σίγαση ανεπιθύμητων κλήσεων</string>
+    <string name="silence_spam_summary">Σίγαση όλων των ανεπιθύμητων κλήσεων</string>
+    <string name="block_hidden_title">Αποκλεισμός κρυφών τηλεφωνικών αριθμών</string>
+    <string name="block_hidden_summary">Επισήμανση κρυφών αριθμών ως ανεπιθύμητων</string>
+    <string name="block_dialog_title">Αποκλεισμός αυτού του καλούντος;</string>
+    <string name="block_dialog_positive">Αποκλεισμός</string>
+    <string name="block_dialog_negative">Ακύρωση</string>
+    <string name="block_dialog_description">Δε θα λαμβάνετε πλέον κλήσεις ή μηνύματα από αυτό το άτομο.</string>
+    <string name="block_dialog_report_spam">Αναφορά ως ανεπιθύμητη στο <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Απενεργοποίηση %1$s;</string>
+    <string name="provider_disable_message">Απενεργοποιώντας το %1$s, δεν θα έχετε αναγνώριση κλήσης.</string>
+    <string name="provider_disable_spam_message">Απενεργοποιώντας το %1$s, δεν θα έχετε προστασία spam ή αναγνώριση κλήσης.</string>
+    <string name="powered_by_provider">Powered by <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_help">"Κάντε κλήσεις %1$s\nαλλάζοντας τρόπους εδώ"</string>
+    <string name="provider_search_help">"Αναζητήστε επαφές %1$s\nαλλάζοντας τρόπους εδώ"</string>
+    <string name="provider_button_help">"Το έπιασα"</string>
+    <string name="provider_voice_call">"Φωνητική κλήση %1$s"</string>
+    <string name="provider_video_call">"Κλήση βίντεο %1$s"</string>
+    <string name="cm_permission_place_call">Για να καλέσετε, ενεργοποιήστε τα δικαιώματα Τηλεφώνου.</string>
+    <string name="search_shortcut_view_note">Προβολή σημείωσης</string>
+    <string name="note_mod_settings_summary">Κρατήστε σημειώσεις από οπουδήποτε</string>
+    <string name="callerinfo_provider_status_disabling">Απενεργοποίηση</string>
+    <string name="show_dialpad_at_start_title">Εμφάνιση πληκτρολογίου κλήσης κατά την έναρξη</string>
 </resources>
