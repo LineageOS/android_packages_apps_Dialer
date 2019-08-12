@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db1b58de_9342e60b",
+        "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2019-08-12T22:08:06Z",
+      "side": 1,
+      "message": "make the key a constant in CallButtonPresenter.java after \"KEY_RECORDING_WARNING_PRESENTED\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 92
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f01998e_65538f0f",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2019-08-12T22:08:06Z",
+      "side": 1,
+      "message": "if[space](...)[space]{",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 31
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8937571_191718e7",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2019-08-12T22:08:06Z",
+      "side": 1,
+      "message": "line length",
+      "range": {
+        "startLine": 154,
+        "startChar": 79,
+        "endLine": 154,
+        "endChar": 150
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b22cc100_385d5f4b",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2019-08-12T22:08:06Z",
+      "side": 1,
+      "message": "needs one more indentation level\nAlso, needs a space between \"if\" and the opening \"(\"",
+      "range": {
+        "startLine": 365,
+        "startChar": 12,
+        "endLine": 367,
+        "endChar": 13
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14a9e929_594d47bd",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2019-08-12T22:08:06Z",
+      "side": 1,
+      "message": "\"if[space](\"",
+      "range": {
+        "startLine": 372,
+        "startChar": 8,
+        "endLine": 372,
+        "endChar": 37
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
