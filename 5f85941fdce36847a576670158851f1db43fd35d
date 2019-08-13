@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "89da262a_5a6f7dab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2019-08-13T00:10:50Z",
+      "side": 1,
+      "message": "Please provide a bit more detail in the commit message body.",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "643f4efd_f965b86c",
+        "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2019-08-13T00:10:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure the wording is as clear as it could be.  How about simply: \"Record all calls\"",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db1b58de_9342e60b",
         "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
         "patchSetId": 1
@@ -19,6 +53,23 @@
         "endLine": 42,
         "endChar": 92
       },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8051319_0c9bce90",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2019-08-13T00:10:50Z",
+      "side": 1,
+      "message": "Should be between Bundle and Trace",
       "revId": "5f85941fdce36847a576670158851f1db43fd35d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
@@ -48,6 +99,23 @@
     },
     {
       "key": {
+        "uuid": "d56ab541_0691b50c",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2019-08-13T00:10:50Z",
+      "side": 1,
+      "message": "Looks like this block could be rewritten as:\n\ninCallButtonUi.setCallRecordingState(recorder.isRecording());",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8937571_191718e7",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 1
@@ -65,6 +133,23 @@
         "endLine": 154,
         "endChar": 150
       },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f66453bc_bfef545c",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 3075
+      },
+      "writtenOn": "2019-08-13T00:10:50Z",
+      "side": 1,
+      "message": "I take it recorder.isRecording() cannot be used here instead ? (and bool isRecording removed altogether)\n\nAlso, the whole block needs one more indent (should be aligned with \"call \u003d\" just above).",
       "revId": "5f85941fdce36847a576670158851f1db43fd35d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
