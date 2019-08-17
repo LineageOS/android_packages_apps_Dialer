@@ -64,7 +64,11 @@
      the person is, or is not a party. The maximum penalty is $15 000 or imprisonment for 3 years.
      This does not apply if the use of a listening device is done by a party to the private
      conversation if the use of the device is reasonably necessary for the protection of the lawful
-     interests of that person.
+     interests of that person (subsection 4(2)(ii)); if the use of a listening device is done on or
+     within premises or a vehicle, if owner or occupier of premises or vehicle agrees and recording
+     is reasonably necessary for the protection of the lawful interests of the owner or occupier
+     of premises or vehicle or of any other person (section 4(2)(c)(ii)); if the use is in the
+     public interest (section 6(1)(a)).
      Tasmania:
      Subsection 5(3)(b) Listening Devices Act 1991 (TAS)
      https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/tas/consol_act/lda1991181/s5.html
@@ -84,7 +88,8 @@
      https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/vic/consol_act/sda1999210/s6.html
      A person must not knowingly use a listening device to record a private conversation to which
      the person is not a party. The penalty is up to 2 years imprisonment and up to 240 penalty
-     units, or both.
+     units, or both. This does not apply when the person using the listening device is a party to
+     the private conversation.
      Western Australia:
      Subsection 5(3)(d) Surveillance Devices Act 1998 (WA)
      https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/sda1998210/s5.html
@@ -99,12 +104,9 @@
      listening device to record said private conversation, believing that the use of the listening
      device is in the public interest.
      Summary:
-     Most states and territories allow to make a recording of your personal conversations under
-     specific circumstances. The key exception is the State of South Australia, which does not allow
-     a party to single-handedly record their conversations. Since there is no way to distinguish
-     between the states and territories based on MCC, call recording will continue to be disabled
-     for Australia, until there are changes to the laws of the State of Victoria.
+     All states and territories allow to make a recording of your personal conversations under
+     specific circumstances. Call recording should be enabled for Australia.
 -->
 <resources>
-    <bool name="call_recording_enabled">false</bool>
+    <bool name="call_recording_enabled">true</bool>
 </resources>
