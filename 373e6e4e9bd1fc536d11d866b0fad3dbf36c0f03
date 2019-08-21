@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "e8bc6406_e9110fe6",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T18:05:00Z",
+      "side": 1,
+      "message": "No, I\u0027m not 100% sure. But it makes sense to me to skip that block, if the recording is already running.",
+      "parentUuid": "4a4a4dac_dfa6e9f3",
+      "range": {
+        "startLine": 158,
+        "startChar": 10,
+        "endLine": 158,
+        "endChar": 22
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d88e6f_f2a94611",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T18:05:00Z",
+      "side": 1,
+      "message": "I belive you. Will be removed in the next patchset.",
+      "parentUuid": "a84effc4_b6e01ea8",
+      "range": {
+        "startLine": 158,
+        "startChar": 39,
+        "endLine": 158,
+        "endChar": 51
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64ef8e4b_7ed198a0",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 3
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "0e210c7f_97297c1a",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T18:05:00Z",
+      "side": 1,
+      "message": "Ack. 2 spaces indent.Will be fixed in next patchset.",
+      "parentUuid": "64ef8e4b_7ed198a0",
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8591665_4506baf4",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 3
@@ -76,6 +142,24 @@
       "writtenOn": "2019-08-21T17:22:46Z",
       "side": 1,
       "message": "This should be moved when switching the toggle to make sure we have all the perms\nSwitch toggle -\u003e checks warningPresented -\u003e Present dialog",
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29f1337c_49df8f86",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T18:05:00Z",
+      "side": 1,
+      "message": "Brainlocked. Can you point me to \"Switch toggle\", please?",
+      "parentUuid": "c8591665_4506baf4",
       "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
