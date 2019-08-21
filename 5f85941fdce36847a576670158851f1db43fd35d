@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5101a02e_01f2982a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89da262a_5a6f7dab",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "643f4efd_f965b86c",
         "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "5f85941fdce36847a576670158851f1db43fd35d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3ab3983_78a55ff7",
+        "filename": "java/com/android/dialer/app/res/values/cm_strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643f4efd_f965b86c",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +112,24 @@
     },
     {
       "key": {
+        "uuid": "c7fc49ac_d8b1cb7a",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8051319_0c9bce90",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f01998e_65538f0f",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 1
@@ -116,6 +170,48 @@
     },
     {
       "key": {
+        "uuid": "8d8d822d_96590148",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d56ab541_0691b50c",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1c5a66d_8359a5f8",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f01998e_65538f0f",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 31
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8937571_191718e7",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 1
@@ -139,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "6d79cf9c_ac833252",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8937571_191718e7",
+      "range": {
+        "startLine": 154,
+        "startChar": 79,
+        "endLine": 154,
+        "endChar": 150
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f66453bc_bfef545c",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 1
@@ -150,6 +270,24 @@
       "writtenOn": "2019-08-13T00:10:50Z",
       "side": 1,
       "message": "I take it recorder.isRecording() cannot be used here instead ? (and bool isRecording removed altogether)\n\nAlso, the whole block needs one more indent (should be aligned with \"call \u003d\" just above).",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23e65134_8b379bca",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Indention corrected.",
+      "parentUuid": "f66453bc_bfef545c",
       "revId": "5f85941fdce36847a576670158851f1db43fd35d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
@@ -179,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "8c7ceacc_68f3a439",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b22cc100_385d5f4b",
+      "range": {
+        "startLine": 365,
+        "startChar": 12,
+        "endLine": 367,
+        "endChar": 13
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14a9e929_594d47bd",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 1
@@ -199,6 +361,30 @@
       "revId": "5f85941fdce36847a576670158851f1db43fd35d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca755987_13c0d066",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-21T13:56:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a9e929_594d47bd",
+      "range": {
+        "startLine": 372,
+        "startChar": 8,
+        "endLine": 372,
+        "endChar": 37
+      },
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
