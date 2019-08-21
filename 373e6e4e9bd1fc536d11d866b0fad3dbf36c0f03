@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a84effc4_b6e01ea8",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-08-21T17:22:46Z",
+      "side": 1,
+      "message": "pretty sure at this point call can\u0027t be null",
+      "range": {
+        "startLine": 158,
+        "startChar": 39,
+        "endLine": 158,
+        "endChar": 51
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a4a4dac_dfa6e9f3",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-08-21T17:22:46Z",
+      "side": 1,
+      "message": "Are you sure this isRecording boolean is needed at all?",
+      "range": {
+        "startLine": 158,
+        "startChar": 10,
+        "endLine": 158,
+        "endChar": 22
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64ef8e4b_7ed198a0",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-08-21T17:22:46Z",
+      "side": 1,
+      "message": "Wrong identation",
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8591665_4506baf4",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-08-21T17:22:46Z",
+      "side": 1,
+      "message": "This should be moved when switching the toggle to make sure we have all the perms\nSwitch toggle -\u003e checks warningPresented -\u003e Present dialog",
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
