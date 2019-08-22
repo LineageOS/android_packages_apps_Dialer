@@ -96,6 +96,54 @@
     },
     {
       "key": {
+        "uuid": "499c7353_0a45ebc9",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-22T17:19:15Z",
+      "side": 1,
+      "message": "If the bool isRecording is removed, Dialer crashes always after auto recorded call is ending:\nlogcat: \n\n--------- beginning of crash\n08-22 17:55:07.000  9074  9074 E AndroidRuntime: FATAL EXCEPTION: main\n08-22 17:55:07.000  9074  9074 E AndroidRuntime: Process: com.android.dialer, PID: 9074\n08-22 17:55:07.000  9074  9074 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method \u0027java.lang.\nString com.android.incallui.call.DialerCall.getNumber()\u0027 on a null object reference\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at com.android.incallui.CallButtonPresenter.startCallRecordingOrAskFo\nrPermission(CallButtonPresenter.java:381)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at com.android.incallui.CallButtonPresenter.callRecordClicked(CallBut\ntonPresenter.java:368)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at com.android.incallui.CallButtonPresenter$2.run(CallButtonPresenter\n.java:161)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at android.os.Handler.handleCallback(Handler.java:873)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at android.os.Handler.dispatchMessage(Handler.java:99)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at android.os.Looper.loop(Looper.java:193)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at android.app.ActivityThread.main(ActivityThread.java:6718)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at java.lang.reflect.Method.invoke(Native Method)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(Runtim\neInit.java:493)\n08-22 17:55:07.000  9074  9074 E AndroidRuntime:        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)\n08-22 17:55:07.004  2346  9600 W ActivityManager:   Force finishing activity com.android.dialer/.DialtactsActivity\n\nSurprisingly this doesn\u0027t happen if just !isRecording is removed from the if clause, but the bool and \"isRecording \u003d true;\" are kept. Hopefully this makes some sense to you...",
+      "parentUuid": "e8bc6406_e9110fe6",
+      "range": {
+        "startLine": 158,
+        "startChar": 10,
+        "endLine": 158,
+        "endChar": 22
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb66b58_edb6318b",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-22T17:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d88e6f_f2a94611",
+      "range": {
+        "startLine": 158,
+        "startChar": 39,
+        "endLine": 158,
+        "endChar": 51
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64ef8e4b_7ed198a0",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 3
@@ -128,6 +176,24 @@
       "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8638456b_d9baa726",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-22T17:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e210c7f_97297c1a",
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     },
     {
       "key": {

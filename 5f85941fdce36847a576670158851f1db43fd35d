@@ -294,6 +294,24 @@
     },
     {
       "key": {
+        "uuid": "3255a975_9f13aa6e",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-08-22T17:19:15Z",
+      "side": 1,
+      "message": "The bool isRecording is needed:\nhttps://review.lineageos.org/c/LineageOS/android_packages_apps_Dialer/+/251235/3/java/com/android/incallui/CallButtonPresenter.java#158",
+      "parentUuid": "23e65134_8b379bca",
+      "revId": "5f85941fdce36847a576670158851f1db43fd35d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b22cc100_385d5f4b",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 1
