@@ -125,7 +125,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	legacy-test \
 	libphonenumber \
 	volley \
-	org.lineageos.platform.internal
+	org.lineageos.platform.internal \
+	services
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \
@@ -135,11 +136,11 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-v4 \
 	android-support-v7-appcompat \
 	android-support-v7-cardview \
-	android-support-v7-recyclerview \
+	android-support-v7-recyclerview
 
 LOCAL_JAVA_LIBRARIES := \
 	dialer-auto-value-target \
-	org.apache.http.legacy \
+	org.apache.http.legacy
 
 LOCAL_ANNOTATION_PROCESSORS := \
 	dialer-auto-value \
