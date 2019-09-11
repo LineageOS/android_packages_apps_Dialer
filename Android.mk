@@ -125,7 +125,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	legacy-test \
 	libphonenumber \
 	volley \
-	org.lineageos.platform.internal
+	org.lineageos.platform.internal \
+	services
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \
