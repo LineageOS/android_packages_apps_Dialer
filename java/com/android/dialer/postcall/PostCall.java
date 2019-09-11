@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar.BaseCallback;
 import android.support.design.widget.Snackbar;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,6 +40,7 @@ import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+import org.lineageos.internal.telephony.SensitivePhoneNumbers;
 
 /** Helper class to handle all post call actions. */
 public class PostCall {
@@ -50,6 +52,7 @@ public class PostCall {
   private static final String KEY_POST_CALL_DISCONNECT_PRESSED = "post_call_disconnect_pressed";
 
   private static Snackbar activeSnackbar;
+  private static SensitivePhoneNumbers sSensitiveNumbers = new SensitivePhoneNumbers();
 
   public static void promptUserForMessageIfNecessary(Activity activity, View rootView) {
     if (isEnabled(activity)) {
@@ -214,6 +217,10 @@ public class PostCall {
     long callDurationMillis = disconnectTimeMillis - connectTimeMillis;
 
     boolean callDisconnectedByUser = manager.getBoolean(KEY_POST_CALL_DISCONNECT_PRESSED, false);
+    String number = manager.getString(KEY_POST_CALL_CALL_NUMBER, null);
+
+    boolean isSensitiveNumber = sSensitiveNumbers.isSensitiveNumber(context, number,
+            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
     ConfigProvider binding = ConfigProviderBindings.get(context);
     return disconnectTimeMillis != -1
@@ -223,7 +230,8 @@ public class PostCall {
         && (connectTimeMillis == 0
             || binding.getLong("postcall_call_duration_threshold", 35_000) > callDurationMillis)
         && getPhoneNumber(context) != null
-        && callDisconnectedByUser;
+        && callDisconnectedByUser
+        && !isSensitiveNumber;
   }
 
   private static boolean shouldPromptUserToViewSentMessage(Context context) {
