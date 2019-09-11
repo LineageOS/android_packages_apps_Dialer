@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +16,8 @@
  */
 
 package com.android.dialer.postcall;
+
+import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,6 +42,8 @@ import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+
+import org.lineageos.lib.phone.SensitivePhoneNumbers;
 
 /** Helper class to handle all post call actions. */
 public class PostCall {
@@ -217,6 +222,10 @@ public class PostCall {
     long callDurationMillis = disconnectTimeMillis - connectTimeMillis;
 
     boolean callDisconnectedByUser = manager.getBoolean(KEY_POST_CALL_DISCONNECT_PRESSED, false);
+    String number = manager.getString(KEY_POST_CALL_CALL_NUMBER, null);
+
+    boolean isSensitiveNumber = SensitivePhoneNumbers.getInstance().isSensitiveNumber(context,
+            number, INVALID_SUBSCRIPTION_ID);
 
     ConfigProvider binding = ConfigProviderComponent.get(context).getConfigProvider();
     return disconnectTimeMillis != -1
@@ -226,7 +235,8 @@ public class PostCall {
         && (connectTimeMillis == 0
             || binding.getLong("postcall_call_duration_threshold", 35_000) > callDurationMillis)
         && getPhoneNumber(context) != null
-        && callDisconnectedByUser;
+        && callDisconnectedByUser
+        && !isSensitiveNumber;
   }
 
   private static boolean shouldPromptUserToViewSentMessage(Context context) {
