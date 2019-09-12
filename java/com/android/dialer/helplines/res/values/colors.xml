@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1565C0</color>
+    <color name="colorPrimaryDark">#003c8f</color>
+    <color name="colorAccent">#1565C0</color>
+    <color name="colorDialogButtons">#1565C0</color>
+    <color name="colorDeactivated">#525252</color>
+
+    <color name="textColor">#000000</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="ic_launcher_background">#1565C0</color>
+
+    <!-- Color of an icon displayed in the action bar -->
+    <color name="colorIconToolbar">#FFFFFF</color>
+    <color name="colorIconDefault">#000000</color>
+    <color name="actionBarTextColor">#FFFFFF</color>
+</resources>

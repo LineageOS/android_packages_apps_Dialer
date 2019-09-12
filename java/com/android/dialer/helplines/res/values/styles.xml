@@ -1,0 +1,67 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeStyle">@style/AppTheme.ActionMode</item>
+        <item name="android:actionBarStyle">@style/AppTheme.AppBarOverlay</item>
+        <item name="actionBarStyle">@style/AppTheme.AppBarOverlay</item>
+        <item name="android:alertDialogTheme">@style/AppTheme.CustomDialogTheme</item>
+        <item name="android:timePickerDialogTheme">@style/AppTheme.CustomDialogTheme</item>
+        <item name="android:datePickerDialogTheme">@style/AppTheme.CustomDialogTheme</item>
+        <item name="android:actionOverflowButtonStyle">@style/AppTheme.Overflow</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColor">@color/actionBarTextColor</item>
+        <item name="android:textColorPrimary">@color/actionBarTextColor</item>
+        <item name="android:textColorSecondary">@color/actionBarTextColor</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.Overflow">
+        <item name="android:textColorSecondary">@color/colorIconToolbar</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:colorPrimary">@color/actionBarTextColor</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/colorPrimaryDark</item>
+        <item name="titleTextStyle">@style/AppTheme.ActionMode.TitleTextStyle</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:actionBarPopupTheme">@style/AppTheme.PopupOverlay</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="AppTheme.ActionMode.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionMode.Title">
+        <!--<item name="background">@color/colorPrimaryDark</item>-->
+        <item name="android:textColor">@color/actionBarTextColor</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">?attr/actionBarSize</item>
+        <item name="android:layout_marginBottom">?attr/actionBarSize</item>
+    </style>
+
+    <style name="AppTheme.CustomDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:colorPrimary">@color/colorDialogButtons</item>
+        <item name="android:colorAccent">@color/colorDialogButtons</item>
+    </style>
+
+</resources>
