@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+* Copyright (C) 2019 The LineageOS Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+-->
+<resources>
+    <string name="helpline_name_addiction_support">Addiction Support</string>
+    <string name="helpline_name_aids_assistance">AIDS Assistance</string>
+    <string name="helpline_name_aids_helpline">AIDS Helpline</string>
+    <string name="helpline_name_alcoholics_anonymous">Alcoholics Anonymous</string>
+    <string name="helpline_name_alcoholics_anonymous_for_family_and_friends_corfu">Alcoholics Anonymous for Family and Friends - Corfu</string>
+    <string name="helpline_name_arab_womens_sexual_assault_hotline">Arab Women\'s Sexual Assault Hotline</string>
+    <string name="helpline_name_cancer_foundation">Cancer Foundation</string>
+    <string name="helpline_name_center_for_victims_of_sexual_assault">Center for Victims of Sexual Assault</string>
+    <string name="helpline_name_center_for_women_victims_of_war">Center for Women Victims of War</string>
+    <string name="helpline_name_child_helpline_international">Child Helpline International</string>
+    <string name="helpline_name_children_and_adolescents_helpline">Children and Adolescents Helpline</string>
+    <string name="helpline_name_civil_servant_unethical_conduct_hotline">Civil Servant Unethical Conduct Hotline</string>
+    <string name="helpline_name_corruption_helpline">Corruption Helpline</string>
+    <string name="helpline_name_crisis_and_suicide_prevention_center">Crisis and Suicide Prevention Center</string>
+    <string name="helpline_name_crisis_support_and_suicide_prevention">Crisis Support and Suicide Prevention</string>
+    <string name="helpline_name_domestic_violence_helpline">Domestic Violence Helpline</string>
+    <string name="helpline_name_drug_addiction_support">Drug Addiction Support</string>
+    <string name="helpline_name_emotional_support">Emotional Support</string>
+    <string name="helpline_name_emotional_support_and_suicide_prevention">Emotionale Unterstützung und Selbstmordprävention</string>
+    <string name="helpline_name_european_emotional_support">Europäische Hotline für Emotionale Unterstützung</string>
+    <string name="helpline_name_european_helpline_for_children_and_adolescents">Europäische Anlaufstelle für Kinder und Jugendliche</string>
+    <string name="helpline_name_european_hotline_for_missing_children">Europäische Hotline für vermisste Kinder</string>
+    <string name="helpline_name_european_victims_of_crime_helpline">Europäische Beratungsstelle für Kriminalitätsopfer</string>
+    <string name="helpline_name_family_drug_addiction_support">Family Drug Addiction Support</string>
+    <string name="helpline_name_family_violence_prevention_centre">Family Violence Prevention Centre</string>
+    <string name="helpline_name_first_psychosocial_aid">First Psychosocial Aid</string>
+    <string name="helpline_name_gambling_addiction_helpline">Gambling Addiction Helpline</string>
+    <string name="helpline_name_helpline_directory_for_selfhelp_groups">Telefonverzeichnis für Selbsthilfegruppen</string>
+    <string name="helpline_name_helpline_for_children_and_adolescents">Helpline for Children and Adolescents</string>
+    <string name="helpline_name_helpline_for_family_and_friends_of_an_alcoholic">Helpline for Family and Friends of an Alcoholic</string>
+    <string name="helpline_name_helpline_for_veterans_family_and_caregivers">Helpline for Veterans, Family and Caregivers</string>
+    <string name="helpline_name_human_trafficking_hotline">Human Trafficking Hotline</string>
+    <string name="helpline_name_justice_of_the_peace_centre">Justice of the Peace Centre</string>
+    <string name="helpline_name_legal_aid">Legal Aid</string>
+    <string name="helpline_name_legal_aid_discrimination_and_sexuality_helpline">Legal Aid, Discrimination and Sexuality Helpline</string>
+    <string name="helpline_name_legal_and_emotional_support">Legal and Emotional Support</string>
+    <string name="helpline_name_men_and_youth_sexual_assault_hotline">Men and Youth Sexual Assault Hotline</string>
+    <string name="helpline_name_mens_emotional_support">Men\'s Emotional Support</string>
+    <string name="helpline_name_mens_helpline">Men\'s Helpline</string>
+    <string name="helpline_name_muslim_emotional_support">Muslim Emotional Support</string>
+    <string name="helpline_name_narcotics_anonymous_helpline_athens">Narcotics Anonymous Helpline - Athens</string>
+    <string name="helpline_name_narcotics_anonymous_helpline_northern_greece">Narcotics Anonymous Helpline - Northern Greece</string>
+    <string name="helpline_name_national_adult_helpline">National Adult Helpline</string>
+    <string name="helpline_name_national_anonymous_crisis_support">National Anonymous Crisis Support</string>
+    <string name="helpline_name_national_anonymous_pregnancy_and_birth_helpline">Nationale Anonyme Schwangerschafts- und Geburtshilfestelle</string>
+    <string name="helpline_name_national_children_and_adolescents_helpline">National Children and Adolescents Helpline</string>
+    <string name="helpline_name_national_childrens_domestic_violence_and_abuse_helpline">National Children\'s Domestic Violence and Abuse Helpline</string>
+    <string name="helpline_name_national_crisis_helpline">National Crisis Helpline</string>
+    <string name="helpline_name_national_crisis_helpline_kirkens">National Crisis Helpline - Kirkens</string>
+    <string name="helpline_name_national_domestic_violence_helpline">National Domestic Violence Helpline</string>
+    <string name="helpline_name_national_emergency_social_assistance">National Emergency Social Assistance</string>
+    <string name="helpline_name_national_emotional_support">Nationale Beratungsstelle für Emotionale Unterstützung</string>
+    <string name="helpline_name_national_emotional_support_for_mothers">Nationale emotionale Unterstützung für Mütter</string>
+    <string name="helpline_name_national_family_relationship_advice_line">National Family Relationship Advice Line</string>
+    <string name="helpline_name_national_helpline">National Helpline</string>
+    <string name="helpline_name_national_helpline_for_children">National Helpline for Children</string>
+    <string name="helpline_name_national_helpline_for_children_and_adolescents">National Helpline for Children and Adolescents</string>
+    <string name="helpline_name_national_helpline_for_children_and_teenagers">National Helpline for Children and Teenagers</string>
+    <string name="helpline_name_national_helpline_for_children_of_addicts">National Helpline for Children of Addicts</string>
+    <string name="helpline_name_national_helpline_for_people_with_cancer">National Helpline for People with Cancer</string>
+    <string name="helpline_name_national_helpline_for_violence_against_women">National Helpline for Violence Against Women</string>
+    <string name="helpline_name_national_hotline_to_report_crime_anonymously">National Hotline to Report Crime Anonymously</string>
+    <string name="helpline_name_national_human_trafficking_hotline">National Human Trafficking Hotline</string>
+    <string name="helpline_name_national_line_for_child_protection">National Line for Child Protection</string>
+    <string name="helpline_name_national_mental_health_helpline">National Mental Health Helpline</string>
+    <string name="helpline_name_national_parents_and_guardians_helpline">National Parents and Guardians Helpline</string>
+    <string name="helpline_name_national_senior_citizen_mistreatment_hotline">National Senior Citizen Mistreatment Hotline</string>
+    <string name="helpline_name_national_senior_citizens_helpline">National Senior Citizen\'s Helpline</string>
+    <string name="helpline_name_national_sexual_abuse_and_domestic_violence_hotline">National Sexual Abuse and Domestic Violence Hotline</string>
+    <string name="helpline_name_national_sexual_abuse_helpline">National Sexual Abuse Helpline</string>
+    <string name="helpline_name_national_sexual_abuse_hotline">National Sexual Abuse Hotline</string>
+    <string name="helpline_name_national_sexual_assault_hotline">National Sexual Assault Hotline</string>
+    <string name="helpline_name_national_suicide_prevention">National Suicide Prevention</string>
+    <string name="helpline_name_national_suicide_prevention_deaf_hard_of_hearing">National Suicide Prevention (Deaf/Hard of hearing)</string>
+    <string name="helpline_name_national_womens_domestic_violence_and_abuse_helpline">National Women\'s Domestic Violence and Abuse Helpline</string>
+    <string name="helpline_name_national_womens_helpline">National Women\'s Helpline</string>
+    <string name="helpline_name_parental_support">Parental Support</string>
+    <string name="helpline_name_parental_support_sids">Parental Support (SIDS)</string>
+    <string name="helpline_name_prevention_of_human_trafficking_resource_helpline">Prevention of Human Trafficking Resource Helpline</string>
+    <string name="helpline_name_prevention_of_violence_against_women_sos_helpline">Prevention of Violence Against Women SOS Helpline</string>
+    <string name="helpline_name_psychological_aid">Psychological Aid</string>
+    <string name="helpline_name_psychological_aid_and_emotional_support">Psychological Aid and Emotional Support</string>
+    <string name="helpline_name_psychological_support">Psychological Support</string>
+    <string name="helpline_name_reception_center_for_abused_women_athens">Reception Center for Abused Women - Athens</string>
+    <string name="helpline_name_reception_center_for_abused_women_piraeus">Reception Center for Abused Women - Piraeus</string>
+    <string name="helpline_name_religious_mens_sexual_assault_hotline">Religious Men\'s Sexual Assault Hotline</string>
+    <string name="helpline_name_religious_womens_sexual_assault_hotline">Religious Women\'s Sexual Assault Hotline</string>
+    <string name="helpline_name_senior_citizens_hotline">Senior Citizen\'s Hotline</string>
+    <string name="helpline_name_sexuality_and_gender_identity_helpline">Sexuality and Gender Identity Helpline</string>
+    <string name="helpline_name_social_solidarity_helpline">Social Solidarity Helpline</string>
+    <string name="helpline_name_soldiers_hotline">Soldier\'s Hotline</string>
+    <string name="helpline_name_suicide_prevention">Suicide Prevention</string>
+    <string name="helpline_name_support_helpline_for_alcoholics_friends_and_families">Support Helpline for Alcoholics\' Friends and Families</string>
+    <string name="helpline_name_victims_of_violence_and_abuse_hotline">Victims of Violence and Abuse Hotline</string>
+    <string name="helpline_name_victim_support">Victim Support</string>
+    <string name="helpline_name_womens_emotional_support">Women\'s Emotional Support</string>
+    <string name="helpline_name_womens_room_center_for_sexual_rights">Women\'s Room Center for Sexual Rights</string>
+    <string name="helpline_name_womens_sexual_assault_hotline">Women\'s Sexual Assault Hotline</string>
+    <string name="helpline_name_womens_shelters_contact_number">Women\'s Shelters Contact Number</string>
+
+</resources>
