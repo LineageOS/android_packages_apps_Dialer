@@ -111,6 +111,7 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.duo.DuoComponent;
+import com.android.dialer.helplines.HelplineActivity;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
 import com.android.dialer.logging.DialerImpression;
@@ -800,6 +801,9 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (resId == R.id.menu_new_ui_launcher_shortcut) {
       MainComponent.createNewUiLauncherShortcut(this);
       return true;
+    } else if (resId == R.id.menu_helplines) {
+      final Intent intent = new Intent(this, HelplineActivity.class);
+      startActivity(intent);
     }
     return false;
   }
