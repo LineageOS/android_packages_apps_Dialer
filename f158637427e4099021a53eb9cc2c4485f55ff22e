@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c9048ff_4c8feaf0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2019-09-15T15:36:03Z",
+      "side": 1,
+      "message": "while I get what you\u0027re doing, this is better to be an integer\nmake an enum class with all the possible options and then or the choices\nthis way it\u0027ll extensible",
+      "revId": "f158637427e4099021a53eb9cc2c4485f55ff22e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
