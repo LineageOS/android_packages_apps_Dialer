@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "191b10fa_34a2bf2e",
+        "filename": "java/com/android/dialer/lookup/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2019-09-27T09:33:31Z",
+      "side": 1,
+      "message": "No ... it more or less serves as documentation.",
+      "parentUuid": "f5f5d0a4_48b18b8b",
+      "revId": "6c0d6f197e02ca9d56d168179238c1b4e97b0e0e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d312ffa_06e47255",
         "filename": "java/com/android/dialer/lookup/auskunft/AuskunftReverseLookup.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-09-27T07:52:30Z",
       "side": 1,
       "message": "Is keeping a TAG part of the coding style? It is not being used anywhere here",
+      "revId": "6c0d6f197e02ca9d56d168179238c1b4e97b0e0e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e2ceacc_dee9a5c4",
+        "filename": "java/com/android/dialer/lookup/auskunft/AuskunftReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2019-09-27T09:33:31Z",
+      "side": 1,
+      "message": "No, this can be dropped.",
+      "parentUuid": "7d312ffa_06e47255",
       "revId": "6c0d6f197e02ca9d56d168179238c1b4e97b0e0e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
