@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "72eeb12c_9ee39679",
+        "filename": "java/com/android/dialer/callrecord/impl/CallRecorderService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2019-10-23T19:07:55Z",
+      "side": 1,
+      "message": "You mean the override via sysprop? I\u0027m fine with removing it, I just carried this over since CM.",
+      "parentUuid": "4fe69531_34718bd0",
+      "revId": "14654e64976bf40ef2a3e45f6df53f070858b72d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c512b5d8_d8d745a0",
         "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "14654e64976bf40ef2a3e45f6df53f070858b72d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44a53a14_e40152d9",
+        "filename": "java/com/android/dialer/callrecord/res/values/config.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2019-10-23T19:07:55Z",
+      "side": 1,
+      "message": "You\u0027re supposed to overlay this in your device tree. You need to enable it in overlay anyway.",
+      "parentUuid": "c512b5d8_d8d745a0",
+      "revId": "14654e64976bf40ef2a3e45f6df53f070858b72d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
