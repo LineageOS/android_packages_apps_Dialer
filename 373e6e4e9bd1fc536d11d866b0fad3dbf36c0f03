@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "65a5c672_f3d2d732",
+        "filename": "java/com/android/incallui/CallButtonPresenter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2019-10-26T17:02:36Z",
+      "side": 1,
+      "message": "It\u0027s null, if an outgoing call is hung up before the remote has picked up the call.",
+      "parentUuid": "aeb66b58_edb6318b",
+      "range": {
+        "startLine": 158,
+        "startChar": 39,
+        "endLine": 158,
+        "endChar": 51
+      },
+      "revId": "373e6e4e9bd1fc536d11d866b0fad3dbf36c0f03",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64ef8e4b_7ed198a0",
         "filename": "java/com/android/incallui/CallButtonPresenter.java",
         "patchSetId": 3
