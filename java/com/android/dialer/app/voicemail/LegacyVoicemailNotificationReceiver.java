@@ -65,7 +65,7 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
               + ", PREVIEW_SDK_INT="
               + Build.VERSION.PREVIEW_SDK_INT
               + ", RELEASE="
-              + Build.VERSION.RELEASE);
+              + Build.VERSION.RELEASE_OR_CODENAME);
       return;
     }
 
