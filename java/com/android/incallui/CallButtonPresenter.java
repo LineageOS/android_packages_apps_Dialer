@@ -501,7 +501,7 @@ public class CallButtonPresenter
             && call.getState() != DialerCall.State.CONNECTING;
 
     final CallRecorder recorder = CallRecorder.getInstance();
-    final boolean showCallRecordOption = recorder.isEnabled()
+    final boolean showCallRecordOption = recorder.canRecordInCurrentCountry()
         && !isVideo && call.getState() == DialerCall.State.ACTIVE;
 
     mInCallButtonUi.showButton(InCallButtonIds.BUTTON_AUDIO, true);
