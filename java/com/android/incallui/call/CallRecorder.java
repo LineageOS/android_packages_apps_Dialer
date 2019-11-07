@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.XmlResourceParser;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -34,10 +35,17 @@ import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.callrecord.CallRecording;
 import com.android.dialer.callrecord.ICallRecorderService;
 import com.android.dialer.callrecord.impl.CallRecorderService;
+import com.android.dialer.location.GeoUtil;
 import com.android.incallui.call.state.DialerCallState;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 
 /**
  * InCall UI's interface to the call recorder
@@ -52,9 +60,9 @@ public class CallRecorder implements CallList.Listener {
     android.Manifest.permission.RECORD_AUDIO,
     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
   };
+  private static final HashMap<String, Boolean> RECORD_ALLOWED_STATE_BY_COUNTRY = new HashMap<>();
 
   private static CallRecorder instance = null;
-
   private Context context;
   private boolean initialized = false;
   private ICallRecorderService service = null;
@@ -84,6 +92,20 @@ public class CallRecorder implements CallList.Listener {
 
   public boolean isEnabled() {
     return CallRecorderService.isEnabled(context);
+  }
+
+  public boolean canRecordInCurrentCountry() {
+      if (!isEnabled()) {
+          return false;
+      }
+      if (RECORD_ALLOWED_STATE_BY_COUNTRY.isEmpty()) {
+          loadAllowedStates();
+      }
+
+      String currentCountryIso = GeoUtil.getCurrentCountryIso(context);
+      Boolean allowedState = RECORD_ALLOWED_STATE_BY_COUNTRY.get(currentCountryIso);
+
+      return allowedState != null && allowedState;
   }
 
   private CallRecorder() {
@@ -277,4 +299,38 @@ public class CallRecorder implements CallList.Listener {
       handler.postDelayed(this, UPDATE_INTERVAL);
     }
   };
+
+  private void loadAllowedStates() {
+    XmlResourceParser parser = context.getResources().getXml(R.xml.call_record_states);
+    try {
+        // Consume all START_DOCUMENT which can appear more than once.
+        while (parser.next() == XmlPullParser.START_DOCUMENT) {}
+
+        parser.require(XmlPullParser.START_TAG, null, "call-record-allowed-flags");
+
+        while (parser.next() != XmlPullParser.END_DOCUMENT) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            parser.require(XmlPullParser.START_TAG, null, "country");
+
+            String iso = parser.getAttributeValue(null, "iso");
+            String allowed = parser.getAttributeValue(null, "allowed");
+            if (iso != null && ("true".equals(allowed) || "false".equals(allowed))) {
+                for (String splittedIso : iso.split(",")) {
+                    RECORD_ALLOWED_STATE_BY_COUNTRY.put(
+                            splittedIso.toUpperCase(Locale.US), Boolean.valueOf(allowed));
+                }
+            } else {
+                throw new XmlPullParserException("Unexpected country specification", parser, null);
+            }
+        }
+        Log.d(TAG, "Loaded " + RECORD_ALLOWED_STATE_BY_COUNTRY.size() + " country records");
+    } catch (XmlPullParserException | IOException e) {
+        Log.e(TAG, "Could not parse allowed country list", e);
+        RECORD_ALLOWED_STATE_BY_COUNTRY.clear();
+    } finally {
+        parser.close();
+    }
+  }
 }
