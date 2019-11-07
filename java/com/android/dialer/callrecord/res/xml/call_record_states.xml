@@ -1,0 +1,1287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright (C) 2019 The LineageOS Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<call-record-allowed-flags>
+    <!-- Disable recording for Andorra:
+         Article 183 of the Andorran Penal Code sets a prison sentence of one to four years as the
+         punishment for attempting or succeeding to infringe on the privacy of another person
+         without his or her consent. This includes intercepting calls or using technical means to
+         listen, transmit, record or reproduce their calls. Article 185 and 188 of the Andorran
+         Penal Code describe the length of imprisonment when sharing recordings with third parties,
+         even if one has not partaken in their creation, unless the party was unaware of their
+         illicit origin. The attempt to do any of the above is also punishable by law.
+
+         Penal Code, as of 2014:
+           https://sherloc.unodc.org/res/cld/document/codi_penal_andorra_as_of_2014_html/Andorra_codi_penal_as_of_2014.pdf
+    -->
+    <country iso="ad" allowed="false" />
+
+    <!-- Enable recording for Albania:
+         Relevant laws and/or legal precedents:
+         Article 121, 122 and 123 of the Albanian Penal Code cover the right to privacy, wiretapping
+         and harming other via dissemination of their secrets. Based on these, it is not a criminal
+         offense to record your own calls, but sharing them with a third party or using them to harm
+         the other party in said calls is a criminal offense.
+
+         Penal Code: (nonencrypted link)
+           http://rai-see.org/wp-content/uploads/2015/08/Criminal-Code-11-06-2015-EN.pdf
+    -->
+    <country iso="al" allowed="true" />
+
+    <!-- Enable recording for Armenia:
+         The Armenian Criminal Code discusses the legality and punishment of call recordings, when
+         recorded by a third party, otherwise known as wiretapping. Since the Criminal Code does not
+         specifically mention call recording done by a person that is a party to the call, with or
+         without consent, then the act of doing so is not a criminal offense, as it carries no
+         punishment whatsoever.
+
+         Criminal Code:
+           https://www.unodc.org/res/cld/document/armenia_criminal_code_html/Armenia_Criminal_Code_of_the_Republic_of_Armenia_2009.pdf
+
+         Two examples of usage of call recordings, without persecution:
+           https://fip.am/803
+           https://fip.am/4500
+    -->
+    <country iso="am" allowed="true" />
+
+    <!-- Enable recording for Argentina:
+         Argentina follows the continental law system. If a law does not exist, which defines
+         something as a crime, it is not a crime. Judges in Argentina make decisions based on their
+         reading of the law, and not on precedents. Call recording is currently not defined as a
+         crime in any law. This is defined in Section 19 of the Constitution of Argentina.
+
+         Constitution: (nonencrypted link)
+           http://www.senadoctes.gov.ar/constitucion-arg/Constitution%20of%20the%20Argentine%20Nation.htm
+
+         Example of usage of call recordings as legal evidence:
+           https://www.scribd.com/document/326647534/H-P-C-F-s-recurso-de-casacion
+    -->
+    <country iso="ar" allowed="true" />
+
+    <!-- Enable recording for American Samoa:
+         Federal Law 18 USC § 2511(2)(d) defines the recording of a call as legal when one party to
+         the call agrees to it, if said call recording is not done with the intention of committing
+         a crime. This territory of the United States conforms with its Federal legislation.
+         For further information, check 'us'.
+
+         U.S. Code: Title 18 - Crimes and Criminal Procedure:
+           https://www.law.cornell.edu/uscode/text/18/2511
+    -->
+    <country iso="as" allowed="true" />
+
+    <!-- Enable call recording for Austria
+         According to Article 93 (3) of Austrian Communications Law, known as TKG 2003
+         Kommunikationsgeheimnis, it is illegal to recordor pass on information about a call, unless
+         you are one of the parties in that call. While recording is not illegal, sharing the
+         recording might be a punishable offense, without the consent of both sides.
+
+         Communications Law:
+           https://www.jusline.at/gesetz/tkg/paragraf/93
+           https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20002849
+    -->
+    <country iso="at" allowed="true" />
+
+    <!-- Disable call recording for Australia:
+         Australian Capital Territory:
+           Subsection 4(3)(b) Listening Devices Act 1992 (ACT)
+             https://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/act/consol_act/lda1992181/s4.html
+           A person must not use a listening device with the intention of recording a private
+           conversation to which the person is a party. This does not apply when said listening
+           device is used by, or on behalf of, a party to a private conversation if a principal
+           party to the conversation consents to the listening device being so used, and the
+           recording of the conversation is considered by that principal party, on reasonable
+           grounds, to be necessary for the protection of that principal party's lawful interests;
+           or the recording is not made for the purpose of communicating or publishing the
+           conversation, or a report of the conversation, to any person who is not a party to the
+           conversation.
+
+         New South Wales:
+           Subsection 7(3)(b) Surveillance Devices Act 2007 (NSW)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nsw/consol_act/sda2007210/s7.html
+           A person must not knowingly use a listening device to record a private conversation to
+           which the person is a party. This does not apply when a principal party to the
+           conversation consents to the listening device being so used and the recording of the
+           conversation is reasonably necessary for the protection of the lawful interests of that
+           principal party, or is not made for the purpose of communicating or publishing the
+           conversation, or a report of the conversation, to persons who are not parties to the
+           conversation.
+
+         Northern Territory:
+           Subsection 11(1)(a) Surveillance Devices Act 2007 (NT)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nt/num_act/sda200719o2007256/s11.html
+           Subsection 43, Emergency use of listening device in public interest
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/nt/num_act/sda200719o2007256/s43.html
+           It is an offence to use a listening device to record a private conversation to which the
+           person is not a party and the device is used without the express or implied consent of
+           each party to the conversation. Under Section 43, a person may use a listening device to
+           record a private conversation if at the time of use there are reasonable grounds for
+           believing the circumstances are so serious and the matter is of such urgency that the use
+           of the device is in the public interest.
+
+         Queensland:
+           Subsection 43(2)(a) Invasion of Privacy Act 1971 (Qld)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/qld/consol_act/iopa1971222/s43.html
+           A person is guilty of an offence, if the person uses a listening device to record a
+           private conversation and is liable to a maximum penalty of 40 penalty units or
+           imprisonment for 2 years. This does not apply when the person using the listening device
+           is a party to the private conversation.
+
+         South Australia:
+           Subsection 4(2)(a)(ii) Surveillance Devices Act 2016 (SA)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/sa/consol_act/sda2016210/s4.html
+           A person must not knowingly use a listening device to record a private conversation to
+           which the person is, or is not a party. The maximum penalty is $15 000 or imprisonment
+           for 3 years. This does not apply if the use of a listening device is done by a party to
+           the private conversation if the use of the device is reasonably necessary for the
+           protection of the lawful interests of that person.
+
+         Tasmania:
+           Subsection 5(3)(b) Listening Devices Act 1991 (TAS)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/tas/consol_act/lda1991181/s5.html
+           A person shall not use a listening device to record a private conversation to which the
+           person is, or is not, a party. This does not apply when the listening device is used to
+           obtain evidence or information in connection with an imminent threat of serious violence
+           to persons or of substantial damage to property, or a serious narcotics offence, if the
+           person using the listening device believes on reasonable grounds that it was necessary to
+           use the device immediately to obtain that evidence or information. This does not apply if
+           a principal party to the conversation consents to the listening device being so used and
+           the recording of the conversation is reasonably necessary for the protection of the
+           lawful interests of that principal party or the recording of the conversation is not made
+           for the purpose of communicating or publishing the conversation, or a report of the
+           conversation, to persons who are not parties to the conversation.
+
+         Victoria:
+           Subsection 6(1) Surveillance Devices Act 1999 (NSW)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/vic/consol_act/sda1999210/s6.html
+           A person must not knowingly use a listening device to record a private conversation to
+           which the person is not a party. The penalty is up to 2 years imprisonment and up to 240
+           penalty units, or both.
+
+         Western Australia:
+           Subsection 5(3)(d) Surveillance Devices Act 1998 (WA)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/sda1998210/s5.html
+           Subsection 26(1)(2)(3)(b)
+             https://www.austlii.edu.au/cgi-bin/viewdoc/au/legis/wa/consol_act/sda1998210/s26.html
+           A person shall not use a listening device to record a conversation to which that person
+           is, or is not, a party. The penalty is $5 000 or imprisonment for 12 months, or both.
+           This does not apply to the use of a listening device by a party to a private conversation
+           if that principal party consents to its use, as reasonably necessary for the protection
+           of the lawful interests of that principal party. It is also not applicable in cases where
+           a person who is a party to a private conversation, or is acting on behalf of a party to a
+           private conversation, uses a listening device to record said private conversation,
+           believing that the use of the listening device is in the public interest.
+
+         Summary:
+           Most states and territories allow to make a recording of your personal conversations
+           under specific circumstances. The wording of the laws themselves are open to
+           legal interpretation and can be used against users. Until the laws above are presented
+           in a more clear way or enough evidence is shown to substantiate how the courts interpret
+           them when prosecuting private citizens, Australia shall not have call recording enabled.
+    -->
+    <country iso="au" allowed="false" />
+
+    <!-- Enable recording for Bosnia and Herzegovina:
+         Republika Srpska:
+           Article 155 - Unauthorized eavesdropping and tone recording.
+           Paragraph 1 specifically states 'which is not intended for him', which in context means
+           that a person may record anything which is intended for him or her. Paragraph 2 defines
+           the creation of a record with the intent to abuse and/or misuse it, or the act of sharing
+           it with a third party as a criminal offense.
+           Other Articles that might be relevant:
+             Article 153, Privacy of letters, telegrams and others.
+             Article 157, Unauthorized use of Personal Data.
+
+         Federation of Bosnia and Herzegovina:
+           Article 188, Unauthorized Tapping and Sound Recording, defines the recording of any call
+           'which is not intended for public or private knowledge', as a criminal offense.
+
+         Brčko District:
+           Article 185 of the Criminal Code specifically states 'which was not intended for him',
+           which in context means that a party may record any call which is indended for said party.
+           Wiretapping is considered a crime and is criminally punishable.
+
+         Further information:
+           The Criminal Codes of the legal entities of Bosnia and Herzegovina, namely Republika
+           Srpska, the Federation of Bosnia and Herzegovina and the Brčko District, can all be found
+           through the link below. Please note that these three entities currently have separate
+           laws, due to administrative and/or judicial autonomy. It should be noted that these
+           different entities have over 15 police forces, each with its own jurisdiction.
+           https://www.legislationline.org/documents/section/criminal-codes/country/40/Bosnia%20and%20Herzegovina/show
+    -->
+    <country iso="ba" allowed="true" />
+
+    <!-- Enable recording for Belgium:
+         As stated in the official response below, Belgian law does not consider the recording of
+         one's personal communications as a punishable offense. Using said recordings in a
+         fraudulent and/or demeaning way does carry the potential for liability and/or prosecution
+         by the state. The recording of one's own calls might be regarded as a form of personal data
+         processing, depending on the specifics of the case. Specific laws and cases are quoted
+         within the official response. The Belgian municipality of Baarle-Hertog, consisting of a
+         number of exclaves, has territory which is within the Dutch province of North Brabant, and
+         as such it may not be within the confines of the Belgian ISO and its inherent laws.
+
+         Official Response by Belgian Minister (QRVA 50 157, pages 20199-20202, 24/02/2003):
+           https://www.lachambre.be/QRVA/pdf/50/50K0157.pdf
+    -->
+    <country iso="be" allowed="true" />
+
+    <!-- Enable recording for Bulgaria:
+         Article 32(2) of the Bulgarian Constitution states that it is an inviolable right for
+         people to not be followed, photographed, recorded (audio and/or video) without being
+         notified and/or despite his or her explicit disagreement to said actions, except where the
+         law allows for said actions. The Code of Criminal Procedure, Part III, Articles 125 and
+         126, page 34, deal with the use of recordings as evidence. No law explicitly tackles the
+         issue of consent when recording one's personal telephone calls. Based on the available
+         documentation and the attached example of lack of state prosecution, recording one's own
+         calls is not legal, nor is it a criminal offense. Personal recordings are unlikely to be
+         a valid form of evidence in a court of law.
+
+         Constitution:
+           https://www.parliament.bg/bg/const
+
+         Code of Criminal Procedure:
+           https://www.mvr.bg/docs/default-source/normativnauredba/3da73fed-npk-pdf.pdf
+
+         Example of lack of state prosecution:
+           https://goo.gl/HQPUup
+    -->
+    <country iso="bg" allowed="true" />
+
+    <!-- Enable recording for Brazil:
+         Call recording is not a criminal offense when it the recording is made by one of the two
+         parties of said call. Interception by a third party is illegal and punishable by law,
+         unless done according to the requirements set out in Law 9296. There may be some debate, as
+         far as the use of a call recording as legitimate evidence. Further information is available
+         in the attached legal discussions below.
+
+         Law 9296 of the 24th of July 1996: (nonencrypted link)
+           http://www.planalto.gov.br/ccivil_03/leis/l9296.htm
+
+         Constitution of Brazil, Art 5º, X and XII:
+           https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-publicacaooriginal-1-pl.html
+
+         Legal discussions:
+           https://direitosbrasil.com/gravar-conversa-e-crime/
+           https://meusitejuridico.com.br/2018/04/02/stj-e-licita-gravacao-de-conversa-feita-pelo-destinatario-de-solicitacao-de-vantagem-indevida
+           https://moisesandrade.jusbrasil.com.br/artigos/121944095/constitucionalidade-do-uso-da-gravacao-clandestina-como-meio-de-prova
+    -->
+    <country iso="br" allowed="true" />
+
+    <!-- Enable recording for Belarus:
+         Article 28 of the Constitution of Belarus covers the right to privacy. Article 179 of the
+         Criminal Code of Belarus covers situations in which a person's privacy is violated by way
+         of any secret being shared without his or her consent, but no specific term of imprisonment
+         or fine is mentioned. The wording of the article is aimed at the collecting and sharing of
+         'a personal or family secret of another person'. Creating a call recording for personal use
+         is not covered by this article, as privacy is not inherently guaranteed. The use of call
+         recordings as evidence in a court of law is dubious. The sharing of a call recording could
+         be considered as punishable by law, depending on the circumstances.
+
+         Belarusian Constitution: (nonencrypted link)
+           http://www.pravo.by/pravovaya-informatsiya/normativnye-dokumenty/konstitutsiya-respubliki-belarus
+
+         Belarusian Criminal Code:
+           https://etalonline.by/?type=text&regnum=HK9900275#load_text_none_1_
+    -->
+    <country iso="by" allowed="true" />
+
+    <!-- Enable recording for Canada:
+         Any intended recipient of a communication is entitled to record it, based on Section 184(2)
+         Subsection (1) of the Criminal Code of Canada. There are numerous legal cases that validate
+         the interception of private communications by parties to the conversation as not illegal.
+         For a more in-depth look, refer to the LegalTree article below.
+
+         Criminal Code:
+           https://laws-lois.justice.gc.ca/eng/acts/C-46/page-1.html
+
+         LegalTree article:
+           https://legaltree.ca/node/908
+
+         Legal articles:
+           https://lambertavocatinc.com/avocat-montreal/enregistrer-conversation-legal/
+           https://www.avocat.qc.ca/affaires/iitelephone.htm
+    -->
+    <country iso="ca" allowed="true" />
+
+    <!-- Disable recording for Switzerland:
+         According to Article 179 of the Swiss Criminal Code of 21 December 1937, it is a criminal
+         offense to store, record, or share the recording of a call, even when one is part of said
+         call. Explicit consent is required by both parties for a recording to be legal.
+
+         Criminal Code:
+           https://www.admin.ch/opc/en/classified-compilation/19370083/index.html#a179ter
+    -->
+    <country iso="ch" allowed="false" />
+
+    <!-- Enable recording for Chile:
+         The Chilean law is considered a type of civil law, hence judges base their decisions on
+         their own reading of the law. The Chilean Supreme Court ruled in favor of accepting
+         one-party consent call recording as a form of legal evidence, hence the act of recording
+         your own calls is not criminally punishable, as can be seen in the Chilean Penal Code.
+
+         Penal Code:
+           https://www.leychile.cl/Navegar?idNorma=1984
+
+         Article on one-party consent:
+           https://radio.uchile.cl/2018/04/22/grabacion-es-aceptada-como-prueba-en-juicio-por-practicas-antisindicales/
+    -->
+    <country iso="cl" allowed="true" />
+
+    <!-- Enable recording for Costa Rica:
+         One may record one's own calls, as long as they are calls between said person and only one
+         other party, that is two say two sides. Calls between 3 or more people can not be legally
+         recorded without all sides agreeing to one person doing so, as long as said person is a
+         part of the call and not wiretapping or eavesdropping. Recording calls with more than 2
+         participants requires the express consent of all other parties. Article 29 of the
+         Communication Law of 1994 specifies under what circumstances one may or may not do so.
+
+         Communication Law: (nonencrypted link)
+           http://www.pgrweb.go.cr/scij/Busqueda/Normativa/Normas/nrm_texto_completo.aspx?param1=NRM&nValor1=1&nValor2=16466&strTipM=FN
+
+         Article:
+           https://www.laprensalibre.cr/Noticias/detalle/75929/ojo-conversaciones-grabadas-pueden-usarse-como-prueba-en-juicio
+    -->
+    <country iso="cr" allowed="true" />
+
+    <!-- Enable recording for Cyprus:
+         The Cypriot Penal Code does not explicitly cover the act of wiretapping or recording one's
+         own calls. Based on this, it is not a criminal offense to record personal calls. Article
+         369 of the Cypriot Penal Code states that anyone who knows that another is planning to
+         commit a criminal offense, yet fails to use any reasonable means to prevent said crime, is
+         guilty of misconduct, which can be used as a reason for recording one's own calls, should
+         the need arise to quote a legal document.
+
+         Penal Code: (nonencrypted link)
+           http://www.cylaw.org/nomoi/enop/non-ind/0_154/index.html
+    -->
+    <country iso="cy" allowed="true" />
+
+    <!-- Enable recording for Czech Republic:
+         Case Law File Number 21 502/2000 of the Supreme Court specifies that even when evidence is
+         acquired or provided in contravention to legal regulations and/or personal rights, it shall
+         not be deemed as inadmissible. This, as well as other information, is accessible in the
+         Constitutional Court Finding 191/05 of the 13th of September 2006.
+
+         Constitutional Court Finding:
+           https://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2
+    -->
+    <country iso="cz" allowed="true" />
+
+    <!-- Disable recording for Germany:
+         According to Section 201 of the German Criminal Code - Violation of the privacy of the
+         spoken word, making an audio recording of the privately spoken words of another or making
+         such a recording accessible by a third party will result in up to three years of
+         imprisonment. Article 10 of the German Constitution explicitly states that the secrecy of
+         telecommunications is inviolable. There are notable exceptions, such as the use of
+         recordings when in a legitimate self-defense situation. Article 227 of the German Civil
+         Code notes that acting in one's own defense is not unlawful, which is also explained in
+         Article 32 of the German Criminal Code. Article 88 of the Telecommunications Act defines
+         telecommunications secrecy. The German municipality of Büsingen am Hochrhein is an exclave
+         within the territorial confines of Switzerland, and as such it may not be within the
+         confines of the German ISO and its inherent laws.
+
+         Civil Code:
+           https://www.gesetze-im-internet.de/bgb/__227.html
+
+         Criminal Code:
+           https://www.gesetze-im-internet.de/stgb/__32.html
+
+         Constitution:
+           https://www.gesetze-im-internet.de/gg/art_10.html
+
+         Telecommunications Act:
+           https://www.gesetze-im-internet.de/tkg_2004/__88.html
+
+         Wikipedia article on self-defense laws in Germany:
+           https://de.wikipedia.org/wiki/Notwehr_(Deutschland)
+
+         Explanation of lawful use of a recording in a legal dispute:
+           https://www.anwalt.de/rechtstipps/gespraechsmitschnitte-als-beweismittel-ungeeignet_057458.html
+    -->
+    <country iso="de" allowed="false" />
+
+    <!-- Enable recording for Denmark, Faroe Islands and Greeenland:
+         Chapter 27, Article 263(3) of the Criminal Code of Denmark denotes that a person is liable
+         for criminal punishment when he or she intercepts or records telephone conversations to
+         which he or she is not a party. The articles in Chapter 27 cover a lot of different
+         situations, including the dissemination of recordings, which may lead to a fine or prison
+         sentence. The act of recording a conversation that one is a part of is not covered
+         explicitly, hence it is not a criminal offense in the eyes of the law.
+
+         Criminal Code:
+           https://www.retsinformation.dk/Forms/r0710.aspx?id=164192#Kap27
+    -->
+    <country iso="dk,fo,gl" allowed="true" />
+
+    <!-- Enable recording for Estonia:
+         Recording your calls for personal use is not a criminal offense. Sharing said calls with a
+         third party is a criminal offence, hence punishable by law, except in cases where said
+         calls are shared by a journalist.
+
+         Constitution, Paragraph 43:
+           https://www.pohiseadus.ee/index.php?sid=1&p=43
+
+         Instructions for call recording (GDPR equivalent):
+           https://www.aki.ee/sites/www.aki.ee/files/elfinder/article_files/Telefonik%C3%B5nede%20salvestamise%20lubatavuse%20juhend.pdf
+
+         Legal article:
+           https://digi.geenius.ee/rubriik/uudis/millistel-juhtudel-tohib-eestis-telefonikone-salvestada-ja-selle-sisu-avaldada/
+    -->
+    <country iso="ee" allowed="true" />
+
+    <!-- Enable recording for Spain:
+         Based on the decision of the Spanish Constitutional Tribunal of November the 29th, 1984, it
+         is legal for a party to record his or her calls without notifying the other party. Sharing
+         said recording with a third party is not protected and may make the party that has shared
+         the recording liable to a civil suit, to be initiated by the aggrieved party. Unless done
+         so for judicial purposes, it is punishable to disclose or share the recording or the gist
+         of the recording to other parties. The town of Llívia is a Spanish exclave within the
+         territory of the Republic of France, and as such, it may not be within the confines of the
+         Spanish ISO and its inherent laws.
+
+         Decision of the Spanish Constitutional Tribunal:
+           https://hj.tribunalconstitucional.es/eu/Resolucion/Show/367
+
+         Legal articles: (nonencrypted link)
+           http://belegal.com/blog-by-antonio-flores/validity-of-recorded-telephone-conversations-in-spain/
+           https://www.fonvirtual.com/blog/la-grabacion-de-llamadas/
+           https://www.legalisconsultores.es/2014/04/es-legal-realizar-grabaciones-su-aportacion-en-juicios/
+    -->
+    <country iso="es" allowed="true" />
+
+    <!-- Enable recording for Finland:
+         As a private citizen, one may record any call they participate in. There is no requirement
+         to make other parties aware of the recording, but the use of said recordings, depending on
+         their content, may be subject to various laws, such as data protection (privacy)
+         legislation, libel laws, laws governing trade and national secrets, non-disclosure
+         agreements and so on.
+
+         Bureau of Data Ombudsman:
+         https://web.archive.org/web/20180517050133/http://www.tietosuoja.fi/sv/index/useinkysyttya/puheluidennauhoittaminen.html
+    -->
+    <country iso="fi" allowed="true" />
+
+    <!-- Enable recording for France, Saint Barthélemy, French Guayana, Guadeloupe, Saint Martin,
+                              Martinique, New Caledonia, French Polynesia, Saint Pierre & Miquelon,
+                              Réunion, Wallis-et-Futuna and Mayotte:
+         While recording calls without consent, as a third party, is punishable, it depends on
+         whether said recording was created or used with a malicious intent. Judges are free to view
+         said recordings as a form of evidence and base their final decisions with their help.
+         Recording your own calls as a private citizen is not a criminal offense. Sharing said
+         recordings, with the intent to harm the other party in any way, is a criminal offense.
+
+         Penal Code:
+           https://www.legifrance.gouv.fr/affichCode.do;jsessionid=3E84EAC0F63D49FC16A28B8D90EFF1D2.tplgfr44s_2?idSectionTA=LEGISCTA000006165309&cidTexte=LEGITEXT000006070719&dateTexte=20150413
+
+         Civil Code:
+           https://www.legifrance.gouv.fr/affichCode.do;jsessionid=1A7384A63066DBE1E1D8C732E698F844.tplgfr23s_3?idSectionTA=LEGISCTA000006117610&cidTexte=LEGITEXT000006070721&dateTexte=20190606
+
+         Legal article on call recordings as evidence:
+           https://www.annuaireavocats.fr/articles/enregistrer-une-conversation-a-linsu-dune-personne-est-ce-legal
+
+         Legal article on recording in the workplace:
+           https://www.cnil.fr/fr/lecoute-et-lenregistrement-des-appels-sur-le-lieu-de-travail
+    -->
+    <country iso="fr,bl,gf,gp,mf,mq,nc,pf,pm,re,wf,yt" allowed="true" />
+
+    <!-- Enable recording for United Kingdom:
+         Recording one's own calls is not a criminal offence and is not prohibited. As long as the
+         recording is for personal use, consent and/or notification of the other party are not
+         required. Call recordings can be used as evidence, since it is based on a trite law.
+         Sharing said call recordings with a third party, without consent, may be a criminal offence
+         and punishable.
+
+         Use as evidence (p. 3):
+           https://www.bailii.org/uk/cases/UKPC/1954/1954_43.pdf
+
+         Legal articles:
+           https://www.computertel.co.uk/article?ref=Call-Recording-Law-in-the-UK-2018-edition
+           https://www.dma-law.co.uk/is-it-illegal-to-record-conversations/
+    -->
+    <country iso="gb" allowed="true" />
+
+    <!-- Enable recording for Georgia:
+         The Constitution of Georgia, Chapter Two - Fundamental Human Rights, Article 15(2) states
+         that personal communication(s) are inviolable and that said right may only be restricted in
+         accordance with the law, to ensure national security or public safety, or to protect the
+         rights of other parties, insofar as it is necessary in a democratic society, based on a
+         court decision or without a court decision in cases of urgent necessity, as provided by the
+         law. Articles 157, 158 and 159 of the Criminal Code of Georgia deal with the disclosure of
+         private information, personal data, the violation of the secrecy of private communication
+         and the violation of secrecy of personal correspondence, phone conversations or other kinds
+         of communication. The document does not specify a situation in which one side of a
+         conversation records without the other side's knowledge or consent, thus the act of
+         recording one's conversations is in a legally gray area. All of the above articles
+         explicitly note that no criminal liability can be incurred if the gathered information is
+         submitted to investigative authorities.
+
+         Constitution:
+           https://matsne.gov.ge/en/document/view/30346?publication=35
+
+         Criminal Code of Georgia:
+           https://matsne.gov.ge/en/document/view/16426?publication=187&scroll=62067
+    -->
+    <country iso="ge" allowed="true" />
+
+    <!-- Enable recording for Greece:
+         Section 2 of Article 370A of the Greek Penal Code bans it, subarticle 4 offers exceptions
+         when no other evidence is present. Decision 53/2010 of the Supreme Criminal Court limits
+         evidence submitting to third parties that found the recording 'by accident'. Decision
+         277/2014 of the Supreme Criminal Court acquitted a guilty party and deemed the presented
+         recordings admissable. Article 25 of the Penal Code states that, any action is not illegal
+         if it was done so to protect the property or safety of oneself or of another party,
+         provided that the crime of sharing the recording is a lesser one in comparison.
+
+         Legal discussion:
+           https://uk.practicallaw.thomsonreuters.com/w-010-1738
+    -->
+    <country iso="gr" allowed="true" />
+
+    <!-- Enable recording for Croatia:
+         Article 143 of the Croatian Criminal Code, Paragraph 1 notes that the recording of another
+         person's privately uttered words is a criminal offense, when said words are not 'intended
+         for his or her attention' and could lead to imprisonment not exceeding three years.
+         Paragraph 2, which holds the same punishment, indicated that situations in which the
+         recording, its transcription or the 'gist' of said recording being shared as an equal
+         crime. Paragraph 4 states that there is no criminal offence if said acts are committed in
+         'the public interest or another interest prevailing over the interest to protect the
+         privacy of the person being recorded or eavesdropped on'. Prosecution is made per request
+         and the state does not initiate it, which renders the matter to the level of a civil case
+         and not to that of a criminal case.
+
+         Croatian Criminal Code:
+           https://www.legislationline.org/documents/section/criminal-codes/country/37/Croatia/show
+    -->
+    <country iso="hr" allowed="true" />
+
+    <!-- Enable recording for Hungary:
+         Sections 413 and 418 define the Breach of Trade and/or Business Secrecy as a criminal
+         offense. There is no mention of wiretapping and/or eavesdropping as a criminal offense.
+         The Hungarian Data Protection and Freedom of Information Agency (DPA) created a Guidance in
+         2016, for cases concerning situations which include an individual as one side of the
+         conversation, and a data processing entity as the other side. This guidance should not be
+         considered relevant, as it does not deal with the communications of individuals. No
+         pertinent articles or paragraphs were found in the Hungarian Criminal Code, which in effect
+         equates to there being no punishment for the recording of personal calls.
+
+         DPA 2016 Guidance:
+           https://www.naih.hu/files/2016_05_09_tajekoztato_hangfelvetelekrol.pdf
+
+         Hungarian Criminal Code:
+           https://www.legislationline.org/documents/section/criminal-codes/country/25/Hungary/show
+    -->
+    <country iso="hu" allowed="true" />
+
+    <!-- Disable recording for Indonesia:
+         Based on Article 26 of both Law Number 11 of 2008 and its revision, Law Number 19 of 2016,
+         call recording is defined on its own and requires one to obtain consent from the other
+         party when recording calls, although it can be used as a form of evidence. Whether
+         recording another person without his or her consent is a criminal offense that is
+         prosecuted by the country itself is not clear and further information should be gathered by
+         a native speaker.
+
+         Law 11 of 2008 (first file):
+           https://www.hukumonline.com/pusatdata/detail/27912/nprt/1011/uu-no-11-tahun-2008-informasi-dan-transaksi-elektronik
+
+         Law 19 of 2016:
+           https://jdih.kominfo.go.id/produk_hukum/view/id/555/t/undangundang+nomor+19+tahun+2016+tanggal+25+november+2016
+    -->
+    <country iso="id" allowed="false" />
+
+    <!-- Enable recording for Ireland:
+         The Irish Constitution does not specifically state a right to privacy. Subsection (6) of
+         section 98  of the Interception of Postal Packets and Telecommunications Messages
+         (Regulation) Act of 1993 defines interception of a call in such a way, that deems the
+         recording of a call by one party to the call legal. Whether said call recording can be used
+         as evidence or infringes upon a person's privacy is a complicated matter that can only be
+         decided on a case-by-case basis. Subsection (2) of section 98 goes on to elabore on cases
+         in which call recordings are legal, such as in the interests of the security of the State
+         (c), for the prevention or detection of crime or for the purpose of any criminal
+         proceedings (b) and others.
+
+         Telecommunications Messages Act of 1993: (nonencrypted link)
+           http://www.irishstatutebook.ie/eli/1993/act/10/enacted/en/print.html
+
+         Legal discussions:
+           https://www.mhc.ie/latest/insights/big-brother-is-watching-but-is-he-listening-too
+           https://www.irishtimes.com/news/crime-and-law/q-a-what-are-the-legal-implications-1.1740070
+    -->
+    <country iso="ie" allowed="true" />
+
+    <!-- Enable recording for Israel and Palestine:
+         Israeli law specifies that call recording is illegal and punishable when neither party in
+         said conversation is aware of said act of recording. Either party in a conversation can
+         record his or her calls without being legally required to inform the other party.
+         Due to legal ambiguity, it is currently impossible to determine which set of laws should be
+         taken under consideration when recording personal calls within the Palestinian territories.
+         This is relevant as the Occupied Palestinian Territory makes use of the Mobile Country Code
+         registered to Israel. Palestine's ISO is set as disabled, since if it is in use there is no
+         legal way to determine which set of laws are being used, due to the differing laws used
+         in parts of it.
+
+         The Wiretapping Law, 5739-1979:
+           https://www.nevo.co.il/law_html/law01/077_001.htm
+
+         Information on State of Palestine:
+           https://en.wikipedia.org/wiki/Palestinian_law#Statutes_and_legislation
+
+         News articles:
+           https://www.globes.co.il/news/article.aspx?did=1001066185
+           https://www.ynet.co.il/articles/0,7340,L-3043583,00.html
+    -->
+    <country iso="il" allowed="true" />
+    <country iso="ps" allowed="false" />
+
+    <!--Enable call recording for India:
+         No clear definition exists on the matter of call recordings being made by one side.
+         Depending on whether said call recording was made and/or published with malicious intent,
+         it may or may not be admissible in court, and/or punishable by law. There are a number of
+         precedents and legal definitions, which are available below.
+
+         Legal discussion:
+           https://copyright.lawmatters.in/2012/02/recording-telephonic-conversations.html
+    -->
+    <country iso="in" allowed="true" />
+
+    <!-- Disable recording for Iceland:
+         According to the Electronic Communications Act, No. 81, recording one's own telephone
+         conversations without notifying the other party can make the recording party liable to
+         fines or imprisonment of up to six months in the case of serious or repeated violations, as
+         explicitly stated in Article 74. Article 48 covers the Recording of telephone calls and
+         states that the party to a telephone conversation that wishes to record said conversation
+         shall, when it commences, notify the opposite party of his or her intent to do so. This is
+         not required when the opposite party can clearly be assumed to be aware of the recording.
+
+         Electronic Communications Act:
+           https://www.government.is/Publications/Legislation/Lex/?newsid=86c9a6a9-fab5-11e7-9423-005056bc4d74
+    -->
+    <country iso="is" allowed="false" />
+
+    <!-- Enable recording for Italy and Vatican City State:
+         It is not illegal to record a conversation, as parties to calls automatically accept the
+         risk that a call may be recorded. Making a recording available to other parties is a
+         criminal offense, when done so for reasons other than protecting either one's own rights or
+         other parties' rights. Articles 23 and 167, in the Privacy Code, deem that the crimes
+         provided for therein are punishable only if said acts result in harm. According to the
+         Supreme Court of Cassation, recorded conversations are legal and can be used as evidence in
+         court, even if the other party is unaware of being recorded, provided that it is not
+         recorded by a third party. The Italian comune of Campione d'Italia features an exclave,
+         situated within the Swiss canton of Ticino, and as such it may not be within the confines
+         of the Italian ISO and its inherent laws.
+
+         Legal articles:
+           https://www.altalex.com/index.php?idnot=53369
+           https://web.archive.org/web/20161011100301/http://notizie.tiscali.it/socialnews/articoli/polimeni/13230/registrare-di-nascosto-per-la-cassazione-e-legale/
+    -->
+    <country iso="it,va" allowed="true" />
+
+    <!-- Enable recording for Japan:
+         Recording one's own calls is neither a criminal offense, nor illegal. Wiretapping and
+         leaking information gained from a recording is illegal and may be criminally punishable.
+         Recording as a third party is a criminal offense, when done so without the consent of at
+         least one party to the conversation. Recordings obtained without consent from both sides
+         will not be admitted as evidence in a criminal case, but are admitted as such in most civil
+         cases, unless it was obtained in a method, which the court deems as unacceptable. If the
+         recording infringes one's personal rights or discloses trade secrets, sharing said
+         recording might lead to civil cases. In work-related instances, one may record and divulge
+         information under the protection of the Whistleblower Protection Act of 2004. The Supreme
+         Court of Japan's Decision of the 12th of July 2000, case number 1999 (A) 96, was in favor
+         of admitting a tape recording as evidence, which was made by one party to a conversation,
+         without the other party's consent.
+
+         Whistleblower Protection Act: (nonencrypted link)
+           http://drasuszodis.lt/userfiles/Japan%20Whistleblower%20Protection%20Act.pdf
+
+         Decision of the Supreme Court of Japan: (nonencrypted link)
+           http://www.courts.go.jp/app/hanrei_en/detail?id=494
+
+         Legal articles: (nonencrypted link)
+           https://www.moneypost.jp/292939
+           https://president.jp/articles/-/15666
+           https://www.hrpro.co.jp/trend_news.php?news_no=636
+           https://kumaben.com/recording-audio-without-consent/
+           https://www.mot-net.com/blog/efficiency-of-operations/6737
+           https://milight-partners-law.hatenablog.com/entry/2015/08/31/152333
+
+         Legal discussion:
+           https://blogs.yahoo.co.jp/unyieldingspirit2007/24529523.html
+    -->
+    <country iso="jp" allowed="true" />
+
+    <!-- Enable recording for South Korea:
+         According to Article 3(1) of the Protection of Communications Secrets Act, it is forbidden
+         to wiretap, record or listen to any conversation between other parties. Article 4 defines
+         recordings obtained by way of illegal recording or wiretapping as inadmissible, hence they
+         can not be used as evidence in a trial or disciplinary procedure. Article 14 goes on to
+         specify that no person shall record a conversation between other parties, that is not
+         public, or listen to said parties' conversation through the use of electronic or mechanical
+         devices. Definitions of recording, wiretapping and other such terms may be found in Article
+         2. The Protection of Communications Secrets Act clearly defines that recording is not legal
+         when done by a third party, but does not specifically discuss whether whether both parties
+         to a conversation need to agree to a recording. Since there is no penalty listed, recording
+         one's own conversations should be in, at worst, a gray area that should still not make the
+         act punishable. Similarly, whether recordings made without consent can be used as evidence
+         is legally unclear.
+
+         Protection of Communications Secrets Act:
+           https://elaw.klri.re.kr/kor_service/lawView.do?hseq=31731&lang=ENG
+    -->
+    <country iso="kr" allowed="true" />
+
+    <!-- Enable recording for Liechtenstein:
+         Recording a call between an organization and an individual is illegal, when done without
+         notification and/or consent. Recording a call between individuals is illegal and punishable
+         when transmitting said recording or information to a third party, and/or when the person
+         that initiates the recording is not part of the conversation. This means that recording a
+         call when you are one of the two parties is legal, even without notifying the other party.
+         Legal action must be initiated by the aggrieved party. The following is defined in Article
+         120 of the Criminal Code of 24 June 1987 (StGB), points 1, 2, 2a and 3. Article 100 of the
+         Constitution may be pertinent to use of call recordings as evidence.
+
+         Criminal Code of 24 June 1987 (StGB):
+           https://www.regierung.li/media/medienarchiv/311_0_11_07_2017_en.pdf.
+
+         Constitution:
+           https://www.regierung.li/media/medienarchiv/101_01_01_2012_en.pdf?t=2.
+    -->
+    <country iso="li" allowed="true" />
+
+    <!-- Enable recording for Sri Lanka:
+         Part IV/59 of the Sri Lankan Telecommunications Act defines the penalty for eavesdropping
+         on a call. The Sri Lankan Penal Code does not cover the act of recording one's own calls,
+         hence the act is not criminally punishable.
+
+         Telecommunications Act:
+           https://www.lawnet.gov.lk/1947/12/31/sri-lanka-telecommunications-2/
+
+         Penal Code:
+           https://www.lawnet.gov.lk/penal-code-consolidated-2/
+
+         Article: (nonencrypted link)
+           http://www.dailymirror.lk/article/PTL-tampered-with-phone-recording-system-ASG-135574.html
+    -->
+    <country iso="lk" allowed="true" />
+
+    <!-- Enable recording for Lithuania:
+         Article 166 of the Lithuanian Criminal Code defines that violations of a person's
+         correspondence, by unlawfully wiretapping a person's conversations as a criminal offense,
+         which could lead to a term of imprisonment of up to two years, a fine or community service.
+         The wording of said article is unclear and only mentions electronic communication networks
+         and recording and/or wiretapping as a third party, and not as one of the two parties.
+         Article 61 of the Law on Electronic Communications defines confidentiality of
+         communications, as far as situations like those covered by GDPR, as in the handling of
+         information between individuals and legal entities, and should therefore not be taken into
+         account.
+
+         Lithuanian Criminal Code:
+           https://e-seimas.lrs.lt/portal/legalActPrint/lt?jfwid=q8i88l10w&documentId=a84fa232877611e5bca4ce385a9b7048&category=TAD
+
+         Lithuanian Law on Electronic Communications:
+            https://e-seimas.lrs.lt/portal/legalActPrint/lt?jfwid=-wd7z7kkgy&documentId=05cd4e020f0a11e7b6c9f69dc4ecf19f&category=TAD
+    -->
+    <country iso="lt" allowed="true" />
+
+    <!-- Enable recording for Luxembourg:
+         The Luxembourgish Penal Code does not specifically cover the right to privacy and its
+         infringement. Based on this, it is not a criminal offense to record one's personal calls,
+         although doing so in a public manner may lead to a civil case from the aggrieved party. One
+         should consult further with a lawyer whether sharing said recording or recordings would
+         constitute a criminal offense.
+
+         Penal Code: (nonencrypted link)
+           http://legilux.public.lu/eli/etat/leg/code/penal/20181101
+    -->
+    <country iso="lu" allowed="true" />
+
+    <!-- Enable call recording for Latvia
+         There is no clear definition of call recording by itself within the Criminal Law of Latvia.
+         Article 144 of said law covers breach of information secrecy, when said information is in
+         the form of correspondence or data relayed by way of electronic communications networks.
+         Paragraph (1) defines the punishment for violating the secret of a person's correspondence
+         as a term of imprisonment for up to two years, or a fine, or others. In a 2014
+         e-Consultation, the Deputy Head of the Public Relations Department of the State Police,
+         Tom Sadovsky, defined the recording of calls with the intent to use as evidence as legal.
+         The Personal Data Protection Law does not apply, as it considers the communication between
+         individuals and legal entitites.
+
+         Latvian Criminal Law:
+           https://likumi.lv/doc.php?id=88966
+
+         Latvian Personal Data Protection Law:
+           https://likumi.lv/doc.php?id=4042
+
+         Legal consultation:
+           https://lvportals.lv/e-konsultacijas/4460-sarunas-drikst-ierakstit-2014.
+    -->
+    <country iso="lv" allowed="true" />
+
+    <!-- Enable recording for Morocco:
+         Call recording is not punishable as one side of a two-party conversation. Recordings are
+         not admissible in court, if the other party is not aware of the recording. Article 447 of
+         the Criminal Law of Morocco, states that the premeditated and unconsented publication of
+         video and/or audio files is a punishable offense.
+
+         Personal Data Law 09-08:
+           https://www.afapdp.org/wp-content/uploads/2018/05/Maroc-Loi-09-08-relative-a-la-protection-des-personnes-physiques-a-legard-du-traitement-des-DCP-2009.pdf
+
+         Moroccan Criminal Law:
+           https://www.h24info.ma/maroc/la-loi-sur-la-protection-des-donnees-personnelles-entre-en-vigueur-le-13-septembre/
+    -->
+    <country iso="ma" allowed="true" />
+
+    <!-- Disable recording for Monaco:
+         According to the Penal Code of Monaco, Article 308-2, a person may be punished with a
+         prison sentence of six months to three years, as well as a fine, for infinging or
+         attempting to infringe on a person's rights to privacy. This includes wiretapping,
+         recording or transmitting the words spoken by a person in a private place. Consent will be
+         presumed when such an action is done during a meeting, with the knowledge of the person
+         that is being recorded. Article 344 of the Penal Code mentions the same punishment for
+         purposeful wiretapping.
+
+         Penal Code:
+           https://www.legimonaco.mc/305/legismclois.nsf/ViewCode!OpenView&Start=1&Count=300&RestrictToCategory=CODE%20P%C3%89NAL
+    -->
+    <country iso="mc" allowed="false" />
+
+    <!-- Enable recording for Moldova:
+         Article 30 of the Constitution of Moldova ensures the privacy of correspondence. No
+         specific law has been enacted that defines recording calls, as an individual, as a criminal
+         offense. There are laws which define this for legal entities and for the government. Please
+         read the attached legal discussion for further information on the subject.
+
+         Constitution of Moldova:
+           https://www.presedinte.md/eng/constitution
+
+         Code of Criminal Procedure:
+           https://www.seepag.info/download/rep_moldova/Criminal%20Procedure%20Code%20RM.pdf
+
+         Regulations for legal entities:
+           https://www.anrceti.md/files/filefield/hca%20nr.48%20din%2010.09.2013%20regulam%20priv%20serv%20CE.pdf
+
+         Legal discussion:
+           https://jsa.md/2017/02/06/inregistrarea-convorbirilor-telefonice-cit-de-legala-este/
+    -->
+    <country iso="md" allowed="true" />
+
+    <!-- Enable recording for Montenegro:
+         Article 173 of the Criminal Code of Montenegro marks call recording as legal if the content
+         of the conversation was 'intended for your use'. It is also legal when it concerns the
+         prevention of crimes, which carry a sentence of 5 years minimum. Sharing a conversation to
+         a third party is a criminal offense.
+
+         Criminal Code of Montenegro:
+           https://www.pravda.gov.me/ResourceManager/FileDownload.aspx?rid=256001&rType=2&file=Krivi%C4%8Dni%20zakonik%20Crne%20Gore.pdf
+    -->
+    <country iso="me" allowed="true" />
+
+    <!-- Enable recording for North Macedonia:
+         As stated in the Macedonian Penal Code, if the recording is made available to a third party
+         or is created and/or distributed with a malicious intent, then the other party can sue you.
+         The state does not prosecute in such cases, unless the act is done by an official state
+         representative of any kind, as mentioned in 151.4 and 151.5.
+
+         North Macedonian Penal Code:
+           https://www.wipo.int/edocs/lexdocs/laws/mk/mk/mk018mk.pdf
+    -->
+    <country iso="mk" allowed="true" />
+
+    <!-- Enable recording for Malta:
+         Relevant laws and/or legal precedents:
+         Article 34 (1)(f) of the Maltese Constitution states that a person may be deprived of his
+         rights in the case of there being suspicion of said person having commited, or being in the
+         process of committing a crime. Effectively this means that recording your own calls is
+         legal when done so to report a crime. There is no mention of the act of recording one's own
+         calls in the Maltese Criminal Code, which means that even if it were to be illegal, it is
+         not a criminal offense. The Media and Defamation Act of 2018 handles all cases of
+         defamation, which may or may not include the act of publishing one's call recordings
+         without the knowledge or consent of the other concerned party.
+
+         Constitution: (nonencrypted link)
+           http://www.justiceservices.gov.mt/DownloadDocument.aspx?app=lom&itemid=8566&l=1
+
+         Criminal Code: (nonencrypted link)
+           https://www.justiceservices.gov.mt/DownloadDocument.aspx?app=lom&itemid=8574&l=1
+
+         Media and Defamation Act: (nonencrypted link)
+           http://justiceservices.gov.mt/DownloadDocument.aspx?app=lp&itemid=29045&l=1
+    -->
+    <country iso="mt" allowed="true" />
+
+    <!-- Enable recording for Netherlands, Bonaire, Sint Eustatius, Saba, Sint Maarten, Curaçao,
+                              Aruba:
+         Recording one's own conversations without the consent of the other party or parties is not
+         in itself punishable by law. Sharing recordings made without consent is punishable in the
+         form of a libel case. This in effect means that the government shall not prosecute anyone
+         for the recording of calls. Call recordings may be used as evidence in criminal and civil
+         cases.
+
+         Legal discussion:
+           https://blog.wetrecht.nl/telefoongesprekken-opnemen-als-bewijs-kan-dat
+    -->
+    <country iso="nl,bq,sx,cw,aw" allowed="true" />
+
+    <!-- Enable recording for Norway:
+         As a private citizen, one may record any call that they participate in. There is no
+         requirement to make other parties aware of the recording, but the use of said recording(s),
+         depending on the content, may be subject to various laws, such as data protection (privacy)
+         legislation, libel laws, laws governing trade and national secrets, non-disclosure
+         agreements and so on. It is, however, prohibited to record calls without the permission of
+         the other party or parties, if you are making the call on behalf of a company or
+         organization. All of the above is outlined in Article 205 of the Norwegian Penal Code.
+
+         Penal Code:
+           https://lovdata.no/dokument/NL/lov/2005-05-20-28/KAPITTEL_2-6#§205
+
+         Legal article:
+           https://www.datatilsynet.no/regelverk-og-verktoy/veiledere/lydopptak/
+    -->
+    <country iso="no" allowed="true" />
+
+    <!-- Enable recording for New Zealand:
+         According to the Crimes Act of 1961, Public Act 216B, Articles 1 and 2(a), anyone is liable
+         to imprisonment for a term not exceeding 2 years for intentionally intercepting any private
+         communication, unless he or she is a party to that private communication. Public Act 216C,
+         subsections (1) and (2) define the prohibition on disclosure of unlawfully intercepted
+         private communications. The recording of one's personal conversations and their publishing
+         or use as evidence without the other party's consent is not explicitly forbidden, nor is it
+         defined as a criminal offense.
+
+         Crimes Act of 1961, Part 9A, Crimes against personal privacy: (nonencrypted link)
+           http://www.legislation.govt.nz/act/public/1961/0043/latest/DLM327382.html#DLM329802
+    -->
+    <country iso="nz" allowed="true" />
+
+    <!-- Enable recording for Peru:
+         The Peruvian Constitution states that people own their own voice and images. If said images
+         or recordings are made for archival purposes, it is allowed. While wiretapping is illegal,
+         it has been used as legal evidence in a court of law. As long as one of the persons talking
+         agrees to the recording, said recording can be used in a court of law. There may be
+         exceptions if the communication contains information that may affect third parties, or if
+         it can be considered as information that should be blocked by medical or legal
+         confidentiality.
+
+         Wiretapping:
+           https://diariouno.pe/columna/chuponeo-prueba-prohibida-o-valida/
+
+         Legal article:
+           https://laley.pe/art/2679/una-grabacion-no-consentida-puede-ser-prueba-de-un-delito-
+
+         Legality of voice recordings and images:
+           https://commons.m.wikimedia.org/wiki/Special:MyLanguage/Commons:Country_specific_consent_requirements#Peru
+    -->
+    <country iso="pe" allowed="true" />
+
+    <!-- Enable recording for Poland:
+         Article 267 of the Polish Penal Code defines call recording as legal for private citizens,
+         when the recording is made by a party to the call.
+
+         Penal Code:
+           https://supertrans2014.files.wordpress.com/2014/06/the-criminal-code.pdf
+
+         Legal articles:
+           https://www.alfatronik.com.pl/info/nagrywanie-rozmow-legalne/
+           https://bezprawnik.pl/legalnosc-nagrywania-rozmowy/
+    -->
+    <country iso="pl" allowed="true" />
+
+    <!-- Disable recording for Puerto Rico:
+         Title Thirty-three of the Penal Code of 2004, Subtitle 5, Special Provisions, Part I:
+         Crimes Against the Person, Chapter 301: Crimes Against Civil Rights, Subchapter II: Crimes
+         Against the Right to Privacy, 33 L.P.R.A § 4809 defines the recording of a private personal
+         conversation, without the express authorization of all parties involved in it, as a
+         misdemeanor. This, in effect, means that recording a phone call as one of the two parties
+         is a criminal offense if done so without the explicit notification and consent of the other
+         party. This territory of the United States conforms with its State Laws. For further
+         information, check 'us'.
+
+         33 L.P.R.A. § 4809. Recording of communications by a participant:
+           https://bit.ly/2UqbrRC
+    -->
+    <country iso="pr" allowed="false" />
+
+    <!-- Disable recording for Portugal:
+         Privacy is a fundamental right in Portuguese law, as it is defined in Articles 26(1) and 34
+         of the Portuguese Constitution. Infringing on said rights constitutes a crime, as defined
+         in Articles 192(1), 194(2) and 199(1) of the Portuguese Penal Code. The punishment is
+         imprisonment for a period of up to one year or a fine equaling 240 days of pay, either of
+         which may be increased by a third, based on Article 197. Lower courts and Higher courts
+         have been ruling both for and against recording one's own calls, no matter the reason, and
+         there have been numerous cases of exceptions being made, despite what the law says. A
+         complaint has been lodged with the European Court of Human Rights, which may lead to a
+         reversal in the current laws and prohibitions. It is noteworthy that in one case, the
+         Supreme Court rendered a decision, which can be translated as such: "The protection of
+         speech that embodies criminal practices or the image that portrays them must yield to the
+         interest of protecting the victim and the efficiency of criminal justice: protection ends
+         when what is protected is a crime."
+
+         Constitution:
+           https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx
+
+         Penal Code: (nonencrypted link)
+           http://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=109A0199&nid=109&tabela=leis&pagina=1&ficha=1&nversao=
+
+         Examples of privacy as a fundamental right: (nonencrypted link)
+           http://www.dgsi.pt/jtrg.nsf/86c25a698e4e7cb7802579ec004d3832/ab509203321d898d802579ea00576d95?OpenDocument
+           http://www.dgsi.pt/jtre.nsf/134973db04f39bf2802579bf005f080b/be3732dc1664576d8025836100514c19
+
+         Examples of exceptions: (nonencrypted links)
+           https://portal.oa.pt/comunicacao/imprensa/2017/11/12/tribunais-aprovam-videos-de-telemovel-apesar-da-legislacao/
+           http://www.dgsi.pt/jtrp.nsf/-/CC3190F093E769FC80257F69004D9E7B
+           http://www.dgsi.pt/jtrl.nsf/0/44ed8c6ca2d940d580256f250052bfd8
+
+         Complaint to ECHR:
+           https://hudoc.echr.coe.int/eng#{%22itemid%22:[%22001-184193%22]}
+
+         Quoted Supreme Court Case: (nonencrypted link)
+           http://www.dgsi.pt/jstj.nsf/954f0ce6ad9dd8b980256b5f003fa814/25cd7aa80cc3adb0802579260032dd4a?OpenDocument
+
+         Legal alternatives: (nonencrypted links)
+           http://www.dgsi.pt/jtrc.nsf/c3fb530030ea1c61802568d9005cd5bb/c5bb36d9a0470bdd80257b400048f9f2?OpenDocument
+           http://www.dgsi.pt/jtrg.nsf/86c25a698e4e7cb7802579ec004d3832/ff947b8a3fda778780257c0000478b5a
+    -->
+    <country iso="pt" allowed="false" />
+
+    <!-- Enable recording for Romania:
+         The Telecommunications Act (506/2004) states that the recording of a conversation by a
+         party to that conversation is permitted and not a criminal offense. Nevertheless, while
+         such recordings are legal, making use of them may fall subject to further civil or criminal
+         laws. Admissibility as evidence depends on how the recording was obtained.
+
+         Telecommunications Act: (nonencrypted link)
+           http://legislatie.just.ro/Public/DetaliiDocument/56973#id_artA88_ttl
+
+         Civil Procedure Code:
+           https://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
+
+         Criminal Procedure Code:
+           https://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php
+
+         Legal article:
+           https://www.dsclex.ro/coduri/cciv2.htm
+    -->
+    <country iso="ro" allowed="true" />
+
+    <!-- Enable recording for Serbia:
+         Article 143 of the Serbian Penal Code covers unauthorized wiretapping and recordings. While
+         it is criminally punishable to share call recordings or wiretap them, the law specifically
+         states recording is only punishable when said recording is 'not meant for him/her', hence
+         it is legal to record your own calls, but not to share them with third parties.
+
+         Serbian Penal Code:
+           https://www.paragraf.rs/propisi/krivicni_zakonik.html
+    -->
+    <country iso="rs" allowed="true" />
+
+    <!-- Enable recording for Russia:
+         Recording a phone call when not one of the two parties participating in said call is
+         illegal and punishable by law. As a party to a phone call, one may record it without
+         notifying the other side, as is evident in the decision of the Supreme Court of Russia for
+         case 35-KG16-18, which was rendered on the 6th of December 2016. This concerns civil cases
+         between two private citizens. Whether this covers cases involving legal entities or people
+         holding a public position has not been researched. The key laws to consider are the Federal
+         Law of 27th July 2006, N 149-FZ, (amended on 18th March 2019) "Information, Information
+         Technologies and Information Security" - Article 9, Subarticle 8, as well as the Civil
+         Procedure Code of 2002, N 138-FZ (amended on the 27th December 2018), article 55. Citations
+         of other pertinent laws may be found in the linked decision, starting at internal document
+         page number 4.
+
+         Supreme Court of Russia, Decision on case number 35-KG16-18: (nonencrypted link)
+           http://www.supcourt.ru/stor_pdf.php?id=1502686
+
+         Federal Law of 27th July 2006, N 149-FZ:
+           https://www.consultant.ru/document/cons_doc_LAW_61798/35f4fb38534799919febebd589466c9838f571b2/
+
+         Civil Procedure Code of 2002, N 138-FZ:
+           https://www.consultant.ru/document/cons_doc_LAW_39570/b48406042a309ee368f395fb6f3be1d43c7cbfc2/
+    -->
+    <country iso="ru" allowed="true" />
+
+    <!-- Enable recording for Sweden:
+         According to the Swedish Penal Code (Brottsbalken), Chapter 4, 8–9 §§, it is illegal to
+         make unauthorized recordings of telephone conversations as a third party. A court can grant
+         permission for law enforcement agencies to tap telephone lines. Anyone participating in the
+         telephone call may record the conversation. A recording is always admissible as evidence in
+         a court of law, even when obtained in an illegal way.
+
+         Criminal Code: (nonencrypted link)
+           https://lagen.nu/begrepp/Olovlig_avlyssning
+           http://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/brottsbalk-1962700_sfs-1962-700
+    -->
+    <country iso="se" allowed="true" />
+
+    <!-- Enable recording for Singapore:
+         Singaporean law does not recognize privacy as a right that can be infringed upon. A party
+         can not be prosecuted or sued for recording a conversation he or she is a part of. The only
+         exception is when said recording contains confidential information, in which case the party
+         may or may not be liable for their actions, if said party makes use of said confidential
+         information in a way that clearly brings him or her gains of any sort, and/or harms the
+         other party in any perceivable way.
+
+         Legal discussion:
+           https://singaporelegaladvice.com/can-i-record-a-conversation-without-consent/
+
+         Personal Data Protection Act 2012:
+           https://sso.agc.gov.sg/Act/PDPA2012
+           https://www.pdpc.gov.sg/Legislation-and-Guidelines/Personal-Data-Protection-Act-Overview
+
+         Copyright Act, Revised Edition 2006:
+           https://sso.agc.gov.sg/Act/CA1987
+    -->
+    <country iso="sg" allowed="true" />
+
+    <!-- Enable recording for Slovenia:
+         Article 148 of the Slovenian Criminal Code covers the unlawful eavesdropping and sound
+         recording. Subarticle 1 defines a maximum punishment of no more than one year for the
+         unlawful eavesdropping or recording of a private conversation by use of special devices,
+         or directly transmitting said conversation to a third person. This also includes passing on
+         the gist of said conversation. Subarticle 2 states that recording another person's
+         statement with the intent to misuse it, without his or her consent, is punishable in the
+         way postulated in Subarticle 1. Prosecution is initiated by the aggrieved party for
+         Subarticle 1, while under Subarticle 2 it is initiated upon a private action. Based on
+         Article 148, it is legal to record one's own calls, when not done so with the intent to
+         misuse said recordings. Sharing said recordings in any way may be deemed a criminal or
+         civil offense.
+
+         Criminal Code:
+           https://www.wipo.int/edocs/lexdocs/laws/en/si/si046en.pdf
+    -->
+    <country iso="si" allowed="true" />
+
+    <!-- Enable recording for Slovakia:
+         Sections 376 and 377 of the Slovakian Criminal Code cover breach of confidentiality of
+         spoken utterance and other forms of personal expression and the breach of secrecy of all
+         types of instruments, recordings and documents. Section 376 states that the breach of
+         secrecy, by way of disclosing or making available to a third party and/or using it to cause
+         serious harm to another party, leads to an imprisonment of up to two years. Section 377
+         defines breach of confidentiality as the making of an unlawful recording accessible to a
+         third person or using it in any way that would hinder the other side's rights. This is
+         punishable with a term of imprisonment of up to two years.
+
+         Slovakian Criminal Code:
+           https://www.legislationline.org/documents/section/criminal-codes/country/4/Slovakia/show
+    -->
+    <country iso="sk" allowed="true" />
+
+    <!-- Enable recording for Turkey:
+         Article 132 of Law 5237, the Turkish Penal Code, sets the punishment for violating the
+         secrecy of communication as six months to two years of imprisonment. If the violation of
+         secrecy is done in the form of a recording, then the punishment is imprisonment of one to
+         three years. The act of unlawfully publishing the contents of a communication is
+         imprisonment of one to three years. Openly disclosing the content of a communication
+         between oneself and others, without the other party or parties' consent, is imprisonment of
+         six months to two years. If disclosure is done by way of the press or broadcast, the
+         punishment is increased by one half. One may listen and record conversations of other
+         parties, with the consent of at least one party. Doing so without consent is punishable
+         with imprisonment of two to six months. Article 135 of the Turkish Penal Code defines
+         punishment in the case of recording personal data and information. It stands to reason that
+         one may record one's own calls without the consent of the other party, but the act of
+         sharing those recordings in any way may result in persecution, either in the form of a
+         criminal or civil case against the party that has recorded his or hew own calls.
+
+         Turkish Penal Code:
+           https://www.wipo.int/edocs/lexdocs/laws/en/tr/tr171en.pdf
+    -->
+    <country iso="tr" allowed="true" />
+
+    <!-- Enable recording for Ukraine:
+         Sharing a call recording without consent is a punishable offense, and can not be used as
+         valid proof in a court of law. Call recordings may be handed over to the authorities, by
+         one of the two parties without the other party's consent, when a crime is mentioned in the
+         recording. In such cases the party that handed over the recording is not liable to fines or
+         punishment, as the authorities will use the recording to initiate an investigation, but not
+         as proof of a crime. The above information is covered in Articles 31 and 32 of the
+         Constitution, as well as Articles 163, 182 and 359 of the Criminal Code.
+
+         Constitution of Ukraine:
+           https://zakon.rada.gov.ua/cgi-bin/laws/main.cgi?nreg=254%EA%2F96%2D%E2%F0
+
+         Ukrainian Criminal Code:
+           https://www.legislationline.org/documents/section/criminal-codes/country/52
+
+         Radio Svoboda legal advice page:
+           https://www.radiosvoboda.org/a/details/28905674.html
+
+         Legal discussion:
+           https://sklaw.com.ua/ua/news/345_pro_naslidki_zapisu_telefonnoi_rozmovi_rozpovila_advokat_ao_spenser
+    -->
+    <country iso="ua" allowed="true" />
+
+    <!-- Disable recording for United States of America, the Northern Mariana Islands, the United
+                               States Virgin Islands, Puerto Rico:
+         Currently federal laws state that call recording is legal. On the other hand, each state
+         has its own laws which take priority. Most states allow call recording when one sides
+         agrees, but over 10 require both sides to agree. Since there are no ISO country codes per
+         state, there is no way to differentiate whether the state you are currently in allows call
+         recording or not. Due to this, call recording is set as disabled for the United States of
+         America and some of its territories. These include Guam, the Northern Mariana Islands, the
+         United States Virgin Islands and Puerto Rico. Until a method for properly differentiating
+         between states is created, or a law or precedent emerges which would allow call recording
+         to be legal in all of the USA and its territories, all aforementioned countries and
+         territories should be set as false. Even if such a method is to be found, there is still
+         the question of Native American Reservations, territories that have a cumulative size of
+         over 200 000 square kilometers and might enforce their own set of laws for call recording.
+
+         Two-party consent state laws:
+           https://recordinglaw.com/party-two-party-consent-states/
+    -->
+    <country iso="us,vi,gu" allowed="false" />
+
+    <!-- Enable recording for Kosovo:
+         Article 36 of the Constitution of Kosovo defines the Right to Privacy. Article 202 of the
+         Criminal Code of Kosovo covers the infringing of privacy in corresepondence and computer
+         databases, which can be best explained as the act of violating and/or sharing a private
+         document with another person. Article 203 covers the unauthorized disclosure of
+         confidential information, when the person disclosing said information is under legal duty
+         to maintain it as confidential. Said person is not liable when the disclosure of the
+         confidential information is done so in the interest of the public. Paragraph 4 describes
+         public interest as the welfare of the general public outweighing the individual interest.
+         It is also permissible to use this as a defense when the disclosed information involves
+         plans, preparation or the commission of crimes against the constitutional order or
+         territorial integrity of the Republic of Kosovo or other criminal offenses that will cause
+         great bodily injury or death to another person. Article 204 covers the unauthorized
+         interception of a conversation or statement. Article 205 covers the unauthorized
+         photographing or video recording of a person 'in his or her personal premises or in any
+         other place where a person has a reasonable expectation of privacy', with paragraph 4
+         offering an exception for liability when the act is done to discover a criminal offence or
+         the perpetrators of a criminal offence, or to present as evidence to the police,
+         prosecution or court, and if the photos or recordings are submitted to these authorities.
+         It is beyond doubt that none of these articles deal with recording personal conversation
+         between two parties, hence the act of doing so is not explicitly punishable and is not a
+         criminal offense that would warrant a criminal case.
+
+         Constitution of Kosovo:
+           https://kuvendikosoves.org/?cid=2,1058
+         Criminal Code of Kosovo:
+           https://assembly-kosova.org/common/docs/ligjet/Criminal%20Code.pdf
+    -->
+    <country iso="xk" allowed="true" />
+
+    <!-- Enable recording for South Africa:
+         Under the Regulation of Interception of Communications and Provision of
+         Communication-related Information Act of 2003, 4(1)(a)(b) as well as 16(5)(a)(b), it is
+         legal for a party of a conversation to record said conversation, when there are reasonable
+         grounds to believe that said act will prevent a crime, prevent bodily harm, is in the
+         interest of public safety or one of the other reasons stated in the previously noted
+         paragraphs.
+
+         Regulation of Interception of Communications Act of 2003:
+           https://www.gov.za/sites/default/files/gcis_document/201409/a70-02.pdf
+    -->
+    <country iso="za" allowed="true" />
+
+</call-record-allowed-flags>
