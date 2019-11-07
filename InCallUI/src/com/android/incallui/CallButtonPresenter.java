@@ -638,7 +638,7 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         final CallRecorder recorder = CallRecorder.getInstance();
-        boolean showCallRecordOption = recorder.isEnabled()
+        boolean showCallRecordOption = recorder.canRecordInCurrentCountry()
                 && !isVideo && call.getState() == Call.State.ACTIVE;
 
         ui.showButton(BUTTON_AUDIO, shouldAudioButtonShow());
