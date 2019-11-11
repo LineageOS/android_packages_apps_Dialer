@@ -67,19 +67,19 @@ public class LinearColorBar extends LinearLayout {
 
       switch (attr) {
         case R.styleable.LinearColorBar_backgroundColor:
-          mBackgroundColor = a.getInt(attr, 0);
+          mBackgroundColor = a.getColor(attr, 0);
           break;
         case R.styleable.LinearColorBar_redColor:
-          mRedColor = a.getInt(attr, 0);
+          mRedColor = a.getColor(attr, 0);
           break;
         case R.styleable.LinearColorBar_greenColor:
-          mGreenColor = a.getInt(attr, 0);
+          mGreenColor = a.getColor(attr, 0);
           break;
         case R.styleable.LinearColorBar_blueColor:
-          mBlueColor = a.getInt(attr, 0);
+          mBlueColor = a.getColor(attr, 0);
           break;
         case R.styleable.LinearColorBar_orangeColor:
-          mOrangeColor = a.getInt(attr, 0);
+          mOrangeColor = a.getColor(attr, 0);
           break;
       }
     }
