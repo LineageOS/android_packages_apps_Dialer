@@ -84,7 +84,7 @@
     -->
     <country iso="as" allowed="true" />
 
-    <!-- Enable call recording for Austria
+    <!-- Enable recording for Austria
          According to Article 93 (3) of Austrian Communications Law, known as TKG 2003
          Kommunikationsgeheimnis, it is illegal to recordor pass on information about a call, unless
          you are one of the parties in that call. While recording is not illegal, sharing the
@@ -96,7 +96,7 @@
     -->
     <country iso="at" allowed="true" />
 
-    <!-- Disable call recording for Australia:
+    <!-- Disable recording for Australia:
          Australian Capital Territory:
            Subsection 4(3)(b) Listening Devices Act 1992 (ACT)
              https://www8.austlii.edu.au/cgi-bin/viewdoc/au/legis/act/consol_act/lda1992181/s4.html
@@ -341,6 +341,20 @@
            https://radio.uchile.cl/2018/04/22/grabacion-es-aceptada-como-prueba-en-juicio-por-practicas-antisindicales/
     -->
     <country iso="cl" allowed="true" />
+
+    <!-- Enable recording for China:
+         No clear definition exists on the matter of call recordings being made by a private
+         citizen within the Criminal Law of the People's Republic of China. Depending on whether
+         said call recording was made and/or published with malicious intent, it may or may not be
+         admissible in court. For further information
+
+         Criminal Law of the People's Republic of China: (nonencrypted link)
+           http://english.court.gov.cn/2015-12/01/content_22595464.htm
+
+         Supreme People's Court Provisions on Evidence in Civil Procedures: (nonencrypted link)
+           http://en.pkulaw.cn/display.aspx?cgid=38083&lib=law
+    -->
+    <country iso="cn" allowed="true" />
 
     <!-- Enable recording for Costa Rica:
          One may record one's own calls, as long as they are calls between said person and only one
@@ -647,7 +661,7 @@
     <country iso="il" allowed="true" />
     <country iso="ps" allowed="false" />
 
-    <!--Enable call recording for India:
+    <!--Enable recording for India:
          No clear definition exists on the matter of call recordings being made by one side.
          Depending on whether said call recording was made and/or published with malicious intent,
          it may or may not be admissible in court, and/or punishable by law. There are a number of
@@ -808,7 +822,7 @@
     -->
     <country iso="lu" allowed="true" />
 
-    <!-- Enable call recording for Latvia
+    <!-- Enable recording for Latvia
          There is no clear definition of call recording by itself within the Criminal Law of Latvia.
          Article 144 of said law covers breach of information secrecy, when said information is in
          the form of correspondence or data relayed by way of electronic communications networks.
@@ -1221,8 +1235,8 @@
     -->
     <country iso="ua" allowed="true" />
 
-    <!-- Disable recording for United States of America, the Northern Mariana Islands, the United
-                               States Virgin Islands, Puerto Rico:
+    <!-- Disable recording for United States of America, Guam, the Northern Mariana Islands, the
+                               United States Virgin Islands, Puerto Rico:
          Currently federal laws state that call recording is legal. On the other hand, each state
          has its own laws which take priority. Most states allow call recording when one sides
          agrees, but over 10 require both sides to agree. Since there are no ISO country codes per
