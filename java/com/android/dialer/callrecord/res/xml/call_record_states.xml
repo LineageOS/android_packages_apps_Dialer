@@ -342,6 +342,16 @@
     -->
     <country iso="cl" allowed="true" />
 
+    <!--Enable call recording for China:
+         No clear definition exists on the matter of call recordings being made by one side.
+         Depending on whether said call recording was made and/or published with malicious intent,
+         it may or may not be admissible in court.
+
+         Judicial Interpretation:
+           http://en.pkulaw.cn/display.aspx?cgid=38083&lib=law
+    -->
+    <country iso="cn" allowed="true" />
+
     <!-- Enable recording for Costa Rica:
          One may record one's own calls, as long as they are calls between said person and only one
          other party, that is two say two sides. Calls between 3 or more people can not be legally
