@@ -33,6 +33,10 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.call.DialerCall;
 import java.util.Arrays;
 
+import org.lineageos.lib.phone.SensitivePhoneNumbers;
+
+import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
 /** Utility methods for contact and caller info related functionality */
 public class CallerInfoUtils {
 
@@ -100,6 +104,7 @@ public class CallerInfoUtils {
         }
         number = modifyForSpecialCnapCases(context, info, number, info.numberPresentation);
       }
+      number = modifyPossibleSensitiveNumber(context, info, number);
       info.phoneNumber = number;
     }
 
@@ -138,6 +143,19 @@ public class CallerInfoUtils {
     CachedContactInfo cacheInfo = lookupService.buildCachedContactInfo(info);
     cacheInfo.setLookupKey(ci.lookupKeyOrNull);
     return cacheInfo;
+  }
+
+  static String modifyPossibleSensitiveNumber(Context context, CallerInfo ci, String number) {
+    if (ci == null || number == null) {
+      return number;
+    }
+    boolean isSensitiveNumber = SensitivePhoneNumbers.getInstance().isSensitiveNumber(context,
+        number, INVALID_SUBSCRIPTION_ID);
+    if (isSensitiveNumber) {
+      number = context.getString(R.string.unknown);
+      ci.numberPresentation = TelecomManager.PRESENTATION_UNKNOWN;
+    }
+    return number;
   }
 
   /**
