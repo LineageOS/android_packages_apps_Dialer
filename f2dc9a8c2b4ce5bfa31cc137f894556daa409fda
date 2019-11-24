@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fac2a20_1455c0d8",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 17656
+      },
+      "writtenOn": "2019-11-24T21:34:57Z",
+      "side": 1,
+      "message": "Compile error \u0027cannot find symbol\u0027 - I suggest replacing with mContext",
+      "range": {
+        "startLine": 106,
+        "startChar": 62,
+        "endLine": 106,
+        "endChar": 69
+      },
+      "revId": "f2dc9a8c2b4ce5bfa31cc137f894556daa409fda",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d4e23b2_2e0a2cfd",
+        "filename": "java/com/android/incallui/call/CallRecorder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 17656
+      },
+      "writtenOn": "2019-11-24T21:34:57Z",
+      "side": 1,
+      "message": "Compile error \u0027cannot find symbol\u0027 - I suggest replacing with mContext",
+      "range": {
+        "startLine": 305,
+        "startChar": 31,
+        "endLine": 305,
+        "endChar": 38
+      },
+      "revId": "f2dc9a8c2b4ce5bfa31cc137f894556daa409fda",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
