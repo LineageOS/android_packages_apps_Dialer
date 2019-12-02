@@ -45,7 +45,7 @@
       android:text="@string/call_stats_title_durations"
       android:layout_marginBottom="@dimen/call_log_vertical_padding"
       android:textColor="?android:attr/colorAccent"
-      style="@android:style/TextAppearance.Material.Subhead" />
+      style="@style/TextAppearance.CallStatsCategoryTitle" />
 
     <TextView
       android:id="@+id/total_duration_total"
@@ -120,7 +120,7 @@
     android:layout_marginBottom="@dimen/call_log_vertical_padding"
     android:text="@string/call_stats_title_count"
     android:textColor="?android:attr/colorAccent"
-    style="@android:style/TextAppearance.Material.Subhead" />
+    style="@style/TextAppearance.CallStatsCategoryTitle" />
 
   <TextView
     android:id="@+id/total_count_total"
@@ -209,7 +209,7 @@
     android:layout_marginBottom="@dimen/call_log_vertical_padding"
     android:text="@string/call_stats_title_average_duration"
     android:textColor="?android:attr/colorAccent"
-    style="@android:style/TextAppearance.Material.Subhead" />
+    style="@style/TextAppearance.CallStatsCategoryTitle" />
 
   <include
     android:id="@+id/in_average"

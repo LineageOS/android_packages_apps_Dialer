@@ -26,4 +26,11 @@
     <item name="redColor">@color/missed_call</item>
     <item name="orangeColor">@color/blocked_call</item>
   </style>
+
+  <style name="TextAppearance.CallStatsCategoryTitle" parent="TextAppearance.AppCompat.Body2">
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textSize">11sp</item>
+    <!-- 0.8 Spacing, 0.8/11 = 0.072727273 -->
+    <item name="android:letterSpacing">0.072727273</item>
+  </style>
 </resources>
