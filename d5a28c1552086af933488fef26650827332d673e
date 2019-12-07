@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0ca7055_071c2c59",
+        "filename": "java/com/android/dialer/callrecord/res/xml/call_record_states.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-12-07T15:22:45Z",
+      "side": 1,
+      "message": "Nice.",
+      "range": {
+        "startLine": 697,
+        "startChar": 36,
+        "endLine": 699,
+        "endChar": 50
+      },
+      "revId": "d5a28c1552086af933488fef26650827332d673e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
