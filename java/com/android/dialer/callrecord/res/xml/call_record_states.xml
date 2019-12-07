@@ -686,6 +686,29 @@
     -->
     <country iso="is" allowed="false" />
 
+    <!-- Enable recording for Iran:
+         Based on Article 25 of the Iranian Constitution, recording one's own calls, as a private
+         citizen for archival reasons, is not illegal. The sharing of said recordings with a third
+         party is forbidden based on the aforementioned legal document. According to Article 730 of
+         the Iranian Cybercrime Law, wiretapping a call which can be defined as non-public is a
+         crime and may lead to a punishment in the form of imprisonment for a period of six months
+         to two years, or a fine of ten to forty million rials, or both. There is currently no
+         punishment for the act of recording one's own calls in the Iranian Penal Code, thus the act
+         itself is not criminally punishable. Sharing said recordings in a way that causes injury to
+         the other party might be criminally punishable. Caution is advised, due to the geopolitical
+         situation surrounding the Islamic Republic of Iran.
+
+         Constitution:
+           https://www.wipo.int/edocs/lexdocs/laws/en/ir/ir001en.pdf
+         Penal Code of 2013 (in Persian):
+           https://www.refworld.org/cgi-bin/texis/vtx/rwmain/opendocpdf.pdf?reldoc=y&docid=5447c9274
+         Cybercrime Law (in Persian):
+           https://www.cyberpolice.ir/page/42981
+         Legal article (in Persian):
+           https://www.irna.ir/news/83268974/%D8%B6%D8%A8%D8%B7-%D9%85%D9%83%D8%A7%D9%84%D9%85%D9%87-%D8%AA%D9%84%D9%81%D9%86%DB%8C-%D8%AC%D8%B1%D9%85-%D9%86%DB%8C%D8%B3%D8%AA
+    -->
+    <country iso="ir" allowed="true" />
+
     <!-- Enable recording for Italy and Vatican City State:
          It is not illegal to record a conversation, as parties to calls automatically accept the
          risk that a call may be recorded. Making a recording available to other parties is a
