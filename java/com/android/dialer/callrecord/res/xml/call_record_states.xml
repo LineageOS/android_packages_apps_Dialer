@@ -686,6 +686,23 @@
     -->
     <country iso="is" allowed="false" />
 
+    <!-- Enable recording for Iran:
+         It is not illegal to record a conversation, as parties to calls automatically accept the
+         risk that a call may be recorded. Making a recording available to other parties is a
+         criminal offense, when done so for reasons other than protecting either one's own rights or
+         other parties' rights. Articles 23 and 167, in the Privacy Code, deem that the crimes
+         provided for therein are punishable only if said acts result in harm. According to the
+         Supreme Court of Cassation, recorded conversations are legal and can be used as evidence in
+         court, even if the other party is unaware of being recorded, provided that it is not
+         recorded by a third party. The Italian comune of Campione d'Italia features an exclave,
+         situated within the Swiss canton of Ticino, and as such it may not be within the confines
+         of the Italian ISO and its inherent laws.
+
+         Iran constitution:
+           https://www.lu.ac.ir/uploads/123456_20436.pdf
+    -->
+    <country iso="ir" allowed="true" />
+
     <!-- Enable recording for Italy and Vatican City State:
          It is not illegal to record a conversation, as parties to calls automatically accept the
          risk that a call may be recorded. Making a recording available to other parties is a
