@@ -686,6 +686,18 @@
     -->
     <country iso="is" allowed="false" />
 
+    <!-- Enable recording for Iran:
+         According to Article 25 of the Iranian Constitution, audio recording of a call is legally
+         permitted for private conversation between each party, in case of not leaking it to public.
+
+         Iran constitution:
+           https://www.wipo.int/edocs/lexdocs/laws/en/ir/ir001en.pdf
+
+         Penal Code of Iran:
+           https://www.refworld.org/docid/518a19404.html
+    -->
+    <country iso="ir" allowed="true" />
+
     <!-- Enable recording for Italy and Vatican City State:
          It is not illegal to record a conversation, as parties to calls automatically accept the
          risk that a call may be recorded. Making a recording available to other parties is a
