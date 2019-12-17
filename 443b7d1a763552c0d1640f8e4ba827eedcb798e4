@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "373e406f_cf91bb25",
+        "filename": "java/com/android/dialer/callstats/res/values/styles.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 16868
+      },
+      "writtenOn": "2019-12-17T06:14:16Z",
+      "side": 1,
+      "message": "Doesn\u0027t Android usually suggest to not go below 12sp for text size?",
+      "revId": "443b7d1a763552c0d1640f8e4ba827eedcb798e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
