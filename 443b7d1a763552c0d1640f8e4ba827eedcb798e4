@@ -16,6 +16,24 @@
       "revId": "443b7d1a763552c0d1640f8e4ba827eedcb798e4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9053847c_932da9d6",
+        "filename": "java/com/android/dialer/callstats/res/values/styles.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2019-12-17T07:11:28Z",
+      "side": 1,
+      "message": "That may be true, but this style is a straight copy of the preference category style, which should be fine, I guess ;-)",
+      "parentUuid": "373e406f_cf91bb25",
+      "revId": "443b7d1a763552c0d1640f8e4ba827eedcb798e4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
