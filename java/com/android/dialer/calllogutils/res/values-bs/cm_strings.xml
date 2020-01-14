@@ -20,4 +20,5 @@
     <string name="call_log_incoming_header">Samo dolazni pozivi</string>
     <string name="call_log_outgoing_header">Samo odlazni pozivi</string>
     <string name="call_log_missed_header">Samo propušteni pozivi</string>
+    <string name="call_log_voicemail_header">Samo pozivi sa govornom porukom</string>
 </resources>
