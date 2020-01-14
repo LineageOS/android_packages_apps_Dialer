@@ -163,7 +163,7 @@ public class PhoneCallDetailsHelper {
     setNameView(views, details);
 
     // Bold if not read
-    Typeface typeface = details.isRead ? Typeface.SANS_SERIF : Typeface.DEFAULT_BOLD;
+    Typeface typeface = details.isRead ? Typeface.DEFAULT : Typeface.DEFAULT_BOLD;
     views.nameView.setTypeface(typeface);
     views.callLocationAndDate.setTypeface(typeface);
     views.callLocationAndDate.setTextColor(

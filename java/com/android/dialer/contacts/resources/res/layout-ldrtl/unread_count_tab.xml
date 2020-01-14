@@ -37,7 +37,7 @@
     android:paddingLeft="@dimen/tab_unread_count_text_padding"
     android:paddingRight="@dimen/tab_unread_count_text_padding"
     android:background="@drawable/unread_count_background"
-    android:fontFamily="sans-serif-medium"
+    android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
     android:importantForAccessibility="no"
     android:layoutDirection="locale"
     android:minWidth="@dimen/tab_unread_count_background_size"

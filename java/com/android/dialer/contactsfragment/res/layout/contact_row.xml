@@ -52,6 +52,6 @@
         android:gravity="center_vertical"
         android:textSize="@dimen/text_size"
         android:textColor="?android:attr/textColorPrimary"
-        android:fontFamily="sans-serif"/>
+        android:fontFamily="@*android:string/config_bodyFontFamily"/>
   </LinearLayout>
 </FrameLayout>
