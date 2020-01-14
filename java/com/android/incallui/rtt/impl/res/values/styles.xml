@@ -17,7 +17,7 @@
 <resources>
 
   <style name="Dialer.Incall.TextAppearance.RttMessage" parent="Dialer.Incall.TextAppearance">
-    <item name="android:fontFamily">sans-serif</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
     <item name="android:textColor">#DD000000</item>
     <item name="android:textSize">16sp</item>
   </style>

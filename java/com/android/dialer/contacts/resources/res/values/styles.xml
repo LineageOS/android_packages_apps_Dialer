@@ -30,7 +30,7 @@
   <style name="DirectoryHeaderStyle" parent="@android:style/TextAppearance.Small">
     <item name="android:textSize">14sp</item>
     <item name="android:textColor">?android:attr/textColorSecondary</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
   </style>
 
   <!-- TextView style used for headers.

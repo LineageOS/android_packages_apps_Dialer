@@ -27,14 +27,14 @@
   </style>
 
   <style name="RttTranscriptLink">
-    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     <item name="android:textColor">@color/dialer_link_color</item>
     <item name="android:textAllCaps">true</item>
     <item name="textAllCaps">true</item>
   </style>
 
   <style name="RttTranscriptMessage" parent="Dialer.TextAppearance.Secondary">
-    <item name="android:fontFamily">sans-serif</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
     <item name="android:textAllCaps">false</item>
     <item name="textAllCaps">false</item>
   </style>

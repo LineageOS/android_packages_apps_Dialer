@@ -22,43 +22,43 @@
   <style name="Dialer.TextAppearance.Header1" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">18sp</item>
-    <item name="android:fontFamily">sans-serif-regular</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
   </style>
 
   <style name="Dialer.TextAppearance.Header2" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">16sp</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
   </style>
 
   <style name="Dialer.TextAppearance.SubHeader" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">16sp</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
   </style>
 
   <style name="Dialer.TextAppearance.Primary" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">16sp</item>
-    <item name="android:fontFamily">sans-serif-regular</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
   </style>
 
   <style name="Dialer.TextAppearance.Secondary" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="android:textSize">14sp</item>
-    <item name="android:fontFamily">sans-serif-regular</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
   </style>
 
   <style name="Dialer.TextAppearance.Secondary2" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="android:textSize">12sp</item>
-    <item name="android:fontFamily">sans-serif-regular</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
   </style>
 
   <style name="Dialer.TextAppearance.OVERLINE" parent="TextAppearance.AppCompat">
     <item name="android:textColor">?android:attr/textColorSecondary</item>
     <item name="android:textSize">14sp</item>
-    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
   </style>
 
   <style name="Dialer.TextAppearance.Header1.Ellipsize">

@@ -58,7 +58,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:backgroundTint="?android:attr/colorBackgroundFloating"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
         android:stateListAnimator="@null"
         android:text="@string/rtt_button_decline_request"
         android:textColor="#757575"/>
@@ -71,7 +71,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:backgroundTint="?android:attr/colorPrimary"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
         android:stateListAnimator="@null"
         android:text="@string/rtt_button_accept_request"
         android:textColor="@android:color/white"/>

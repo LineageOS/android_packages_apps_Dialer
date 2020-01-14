@@ -128,7 +128,7 @@
             android:background="@android:color/transparent"
             android:cursorVisible="false"
             android:focusableInTouchMode="true"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@*android:string/config_bodyFontFamily"
             android:freezesText="true"
             android:gravity="center"
             android:importantForAutofill="no"

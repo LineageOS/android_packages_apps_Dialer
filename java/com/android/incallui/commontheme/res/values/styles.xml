@@ -25,7 +25,7 @@
   <style name="Dialer.Incall.TextAppearance.Large">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
     <item name="android:textSize">36sp</item>
-    <item name="android:fontFamily">sans-serif-light</item>
+    <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
   </style>
 
   <style name="Dialer.Incall.TextAppearance.Label">

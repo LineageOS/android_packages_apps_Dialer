@@ -67,7 +67,7 @@
         android:textSize="12sp"
         android:textColor="?android:attr/textColorPrimaryInverse"
         android:background="@drawable/notification_badge"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
         android:visibility="invisible"/>
   </FrameLayout>
 
