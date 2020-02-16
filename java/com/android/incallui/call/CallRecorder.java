@@ -94,20 +94,6 @@ public class CallRecorder implements CallList.Listener {
     return CallRecorderService.isEnabled(context);
   }
 
-  public boolean canRecordInCurrentCountry() {
-      if (!isEnabled()) {
-          return false;
-      }
-      if (RECORD_ALLOWED_STATE_BY_COUNTRY.isEmpty()) {
-          loadAllowedStates();
-      }
-
-      String currentCountryIso = GeoUtil.getCurrentCountryIso(context);
-      Boolean allowedState = RECORD_ALLOWED_STATE_BY_COUNTRY.get(currentCountryIso);
-
-      return allowedState != null && allowedState;
-  }
-
   private CallRecorder() {
     CallList.getInstance().addListener(this);
   }
@@ -299,38 +285,4 @@ public class CallRecorder implements CallList.Listener {
       handler.postDelayed(this, UPDATE_INTERVAL);
     }
   };
-
-  private void loadAllowedStates() {
-    XmlResourceParser parser = context.getResources().getXml(R.xml.call_record_states);
-    try {
-        // Consume all START_DOCUMENT which can appear more than once.
-        while (parser.next() == XmlPullParser.START_DOCUMENT) {}
-
-        parser.require(XmlPullParser.START_TAG, null, "call-record-allowed-flags");
-
-        while (parser.next() != XmlPullParser.END_DOCUMENT) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            parser.require(XmlPullParser.START_TAG, null, "country");
-
-            String iso = parser.getAttributeValue(null, "iso");
-            String allowed = parser.getAttributeValue(null, "allowed");
-            if (iso != null && ("true".equals(allowed) || "false".equals(allowed))) {
-                for (String splittedIso : iso.split(",")) {
-                    RECORD_ALLOWED_STATE_BY_COUNTRY.put(
-                            splittedIso.toUpperCase(Locale.US), Boolean.valueOf(allowed));
-                }
-            } else {
-                throw new XmlPullParserException("Unexpected country specification", parser, null);
-            }
-        }
-        Log.d(TAG, "Loaded " + RECORD_ALLOWED_STATE_BY_COUNTRY.size() + " country records");
-    } catch (XmlPullParserException | IOException e) {
-        Log.e(TAG, "Could not parse allowed country list", e);
-        RECORD_ALLOWED_STATE_BY_COUNTRY.clear();
-    } finally {
-        parser.close();
-    }
-  }
 }
