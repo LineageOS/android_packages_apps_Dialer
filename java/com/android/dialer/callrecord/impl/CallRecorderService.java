@@ -17,14 +17,17 @@
 package com.android.dialer.callrecord.impl;
 
 import android.app.Service;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
-import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.provider.Settings;
 import android.util.Log;
@@ -43,13 +46,7 @@ public class CallRecorderService extends Service {
   private static final String TAG = "CallRecorderService";
   private static final boolean DBG = false;
 
-  private static enum RecorderState {
-    IDLE,
-    RECORDING
-  };
-
   private MediaRecorder mMediaRecorder = null;
-  private RecorderState mState = RecorderState.IDLE;
   private CallRecording mCurrentRecording = null;
 
   private SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyMMdd_HHmmssSSS");
@@ -57,24 +54,17 @@ public class CallRecorderService extends Service {
   private final ICallRecorderService.Stub mBinder = new ICallRecorderService.Stub() {
     @Override
     public CallRecording stopRecording() {
-      if (getState() == RecorderState.RECORDING) {
-        stopRecordingInternal();
-        return mCurrentRecording;
-      }
-      return null;
+      return stopRecordingInternal();
     }
 
     @Override
     public boolean startRecording(String phoneNumber, long creationTime) throws RemoteException {
-      String fileName = generateFilename(phoneNumber);
-      mCurrentRecording = new CallRecording(phoneNumber, creationTime,
-          fileName, System.currentTimeMillis());
-      return startRecordingInternal(mCurrentRecording.getFile());
+      return startRecordingInternal(phoneNumber, creationTime);
     }
 
     @Override
     public boolean isRecording() throws RemoteException {
-      return getState() == RecorderState.RECORDING;
+      return mMediaRecorder != null;
     }
 
     @Override
@@ -115,7 +105,7 @@ public class CallRecorderService extends Service {
     return 0;
   }
 
-  private synchronized boolean startRecordingInternal(File file) {
+  private synchronized boolean startRecordingInternal(String phoneNumber, long creationTime) {
     if (mMediaRecorder != null) {
       if (DBG) {
         Log.d(TAG, "Start called with recording in progress, stopping  current recording");
@@ -126,11 +116,6 @@ public class CallRecorderService extends Service {
     if (checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)
         != PackageManager.PERMISSION_GRANTED) {
       Log.w(TAG, "Record audio permission not granted, can't record call");
-      return false;
-    }
-    if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        != PackageManager.PERMISSION_GRANTED) {
-      Log.w(TAG, "External storage permission not granted, can't save recorded call");
       return false;
     }
 
@@ -148,33 +133,37 @@ public class CallRecorderService extends Service {
           ? MediaRecorder.AudioEncoder.AMR_WB : MediaRecorder.AudioEncoder.AAC);
     } catch (IllegalStateException e) {
       Log.w(TAG, "Error initializing media recorder", e);
+      mMediaRecorder.reset();
+      mMediaRecorder.release();
+      mMediaRecorder = null;
       return false;
     }
 
-    file.getParentFile().mkdirs();
-    String outputPath = file.getAbsolutePath();
-    if (DBG) Log.d(TAG, "Writing output to file " + outputPath);
+    String fileName = generateFilename(phoneNumber);
+    Uri uri = getContentResolver().insert(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            CallRecording.generateMediaInsertValues(fileName, creationTime));
 
     try {
-      mMediaRecorder.setOutputFile(outputPath);
+      ParcelFileDescriptor pfd = getContentResolver().openFileDescriptor(uri, "w");
+      if (pfd == null) {
+        throw new IOException("Opening file for URI " + uri + " failed");
+      }
+      mMediaRecorder.setOutputFile(pfd.getFileDescriptor());
       mMediaRecorder.prepare();
       mMediaRecorder.start();
-      mState = RecorderState.RECORDING;
+
+      long mediaId = Long.parseLong(uri.getLastPathSegment());
+      mCurrentRecording = new CallRecording(phoneNumber, creationTime,
+              fileName, System.currentTimeMillis(), mediaId);
       return true;
-    } catch (IOException e) {
-      Log.w(TAG, "Could not start recording for file " + outputPath, e);
-      Log.w(TAG, "Deleting failed recording " + outputPath);
-      file.delete();
-    } catch (IllegalStateException e) {
-      Log.w(TAG, "Could not start recording for file " + outputPath, e);
-      Log.w(TAG, "Deleting failed recording " + outputPath);
-      file.delete();
+    } catch (IOException | IllegalStateException e) {
+      Log.w(TAG, "Could not start recording", e);
+      getContentResolver().delete(uri, null, null);
     } catch (RuntimeException e) {
+      getContentResolver().delete(uri, null, null);
       // only catch exceptions thrown by the MediaRecorder JNI code
       if (e.getMessage().indexOf("start failed") >= 0) {
-        Log.w(TAG, "Could not start recording for file " + outputPath, e);
-        Log.w(TAG, "Deleting failed recording " + outputPath);
-        file.delete();
+        Log.w(TAG, "Could not start recording", e);
       } else {
         throw e;
       }
@@ -187,33 +176,32 @@ public class CallRecorderService extends Service {
     return false;
   }
 
-  private synchronized void stopRecordingInternal() {
+  private synchronized CallRecording stopRecordingInternal() {
+    CallRecording recording = mCurrentRecording;
     if (DBG) Log.d(TAG, "Stopping current recording");
     if (mMediaRecorder != null) {
       try {
-        if (getState() == RecorderState.RECORDING) {
-          mMediaRecorder.stop();
-          mMediaRecorder.reset();
-          mMediaRecorder.release();
-        }
+        mMediaRecorder.stop();
+        mMediaRecorder.reset();
+        mMediaRecorder.release();
       } catch (IllegalStateException e) {
         Log.e(TAG, "Exception closing media recorder", e);
       }
-      MediaScannerConnection.scanFile(this,
-          new String[] { mCurrentRecording.fileName }, null, null);
+
+      Uri uri = ContentUris.withAppendedId(
+          MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, mCurrentRecording.mediaId);
+      getContentResolver().update(uri, CallRecording.generateCompletedValues(), null, null);
+
       mMediaRecorder = null;
-      mState = RecorderState.IDLE;
+      mCurrentRecording = null;
     }
+    return recording;
   }
 
   @Override
   public void onDestroy() {
     super.onDestroy();
     if (DBG) Log.d(TAG, "Destroying CallRecorderService");
-  }
-
-  private synchronized RecorderState getState() {
-    return mState;
   }
 
   private String generateFilename(String number) {

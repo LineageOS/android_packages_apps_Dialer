@@ -16,6 +16,7 @@
 
 package com.android.dialer.callrecord;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +25,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.provider.BaseColumns;
 import android.util.Log;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +76,9 @@ public class CallRecordingDataStore {
         CallRecordingsContract.CallRecording.COLUMN_NAME_PHONE_NUMBER + ", " +
         CallRecordingsContract.CallRecording.COLUMN_NAME_CALL_DATE + ", " +
         CallRecordingsContract.CallRecording.COLUMN_NAME_RECORDING_FILENAME + ", " +
-        CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE + ") " +
-        " VALUES (?, ?, ?, ?)";
+        CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE + ", " +
+        CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID + ") " +
+        " VALUES (?, ?, ?, ?, ?)";
 
     try {
       SQLiteStatement stmt = mDatabase.compileStatement(insertSql);
@@ -84,6 +87,7 @@ public class CallRecordingDataStore {
       stmt.bindLong(idx++, recording.creationTime);
       stmt.bindString(idx++, recording.fileName);
       stmt.bindLong(idx++, System.currentTimeMillis());
+      stmt.bindLong(idx++, recording.mediaId);
       long id = stmt.executeInsert();
       Log.i(TAG, "Saved recording " + recording + " with id " + id);
     } catch (SQLiteException e) {
@@ -103,10 +107,12 @@ public class CallRecordingDataStore {
 
     final String query = "SELECT " +
         CallRecordingsContract.CallRecording.COLUMN_NAME_RECORDING_FILENAME + "," +
-        CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE +
+        CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE + "," +
+        CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID +
         " FROM " + CallRecordingsContract.CallRecording.TABLE_NAME +
         " WHERE " + CallRecordingsContract.CallRecording.COLUMN_NAME_PHONE_NUMBER + " = ?" +
         " AND " + CallRecordingsContract.CallRecording.COLUMN_NAME_CALL_DATE + " = ?" +
+        " AND " + CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID + " != 0" +
         " ORDER BY " + CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE;
 
     String args[] = {
@@ -118,11 +124,10 @@ public class CallRecordingDataStore {
       while (cursor.moveToNext()) {
         String fileName = cursor.getString(0);
         long creationDate = cursor.getLong(1);
-        CallRecording recording =
-                new CallRecording(phoneNumber, callCreationDate, fileName, creationDate);
-        if (recording.getFile().exists()) {
-            resultList.add(recording);
-        }
+        long mediaId = cursor.getLong(2);
+        // FIXME: need to check whether media entry still exists?
+        resultList.add(
+            new CallRecording(phoneNumber, callCreationDate, fileName, creationDate, mediaId));
       }
       cursor.close();
     } catch (SQLiteException e) {
@@ -133,6 +138,42 @@ public class CallRecordingDataStore {
     return resultList;
   }
 
+  public SparseArray<CallRecording> getUnmigratedRecordingData() {
+    final String query = "SELECT " +
+        CallRecordingsContract.CallRecording._ID + "," +
+        CallRecordingsContract.CallRecording.COLUMN_NAME_PHONE_NUMBER + "," +
+        CallRecordingsContract.CallRecording.COLUMN_NAME_RECORDING_FILENAME + "," +
+        CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE +
+        " FROM " + CallRecordingsContract.CallRecording.TABLE_NAME +
+        " WHERE " + CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID + " == 0";
+    final SparseArray<CallRecording> result = new SparseArray<>();
+
+    try {
+      Cursor cursor = mDatabase.rawQuery(query, null);
+      while (cursor.moveToNext()) {
+        int id = cursor.getInt(0);
+        String phoneNumber = cursor.getString(1);
+        String fileName = cursor.getString(2);
+        long creationDate = cursor.getLong(3);
+        CallRecording recording = new CallRecording(
+            phoneNumber, creationDate, fileName, creationDate, 0);
+        result.put(id, recording);
+      }
+      cursor.close();
+    } catch (SQLiteException e) {
+      Log.w(TAG, "Failed to fetch recordings for migration", e);
+    }
+
+    return result;
+  }
+
+  public void updateMigratedRecording(int id, int mediaId) {
+    ContentValues cv = new ContentValues(1);
+    cv.put(CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID, mediaId);
+    mDatabase.update(CallRecordingsContract.CallRecording.TABLE_NAME, cv,
+        CallRecordingsContract.CallRecording._ID + " = ?", new String[] { String.valueOf(id) });
+  }
+
   static class CallRecordingsContract {
     static interface CallRecording extends BaseColumns {
       static final String TABLE_NAME = "call_recordings";
@@ -140,11 +181,12 @@ public class CallRecordingDataStore {
       static final String COLUMN_NAME_CALL_DATE = "call_date";
       static final String COLUMN_NAME_RECORDING_FILENAME = "recording_filename";
       static final String COLUMN_NAME_CREATION_DATE = "creation_date";
+      static final String COLUMN_NAME_MEDIA_ID = "media_id";
     }
   }
 
   static class CallRecordingSQLiteOpenHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
     private static final String DB_NAME = "callrecordings.db";
 
     public CallRecordingSQLiteOpenHelper(Context context) {
@@ -158,7 +200,8 @@ public class CallRecordingDataStore {
           CallRecordingsContract.CallRecording.COLUMN_NAME_PHONE_NUMBER + " TEXT," +
           CallRecordingsContract.CallRecording.COLUMN_NAME_CALL_DATE + " LONG," +
           CallRecordingsContract.CallRecording.COLUMN_NAME_RECORDING_FILENAME + " TEXT, " +
-          CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE + " LONG" +
+          CallRecordingsContract.CallRecording.COLUMN_NAME_CREATION_DATE + " LONG," +
+          CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID + " INTEGER DEFAULT 0" +
           ");"
       );
 
@@ -171,7 +214,11 @@ public class CallRecordingDataStore {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // implement if we change the schema
+      if (oldVersion < 2) {
+        db.execSQL("ALTER TABLE " + CallRecordingsContract.CallRecording.TABLE_NAME +
+            " ADD COLUMN " + CallRecordingsContract.CallRecording.COLUMN_NAME_MEDIA_ID +
+            " INTEGER DEFAULT 0;");
+      }
     }
   }
 }
