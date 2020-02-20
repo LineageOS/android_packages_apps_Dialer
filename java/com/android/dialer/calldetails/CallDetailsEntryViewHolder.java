@@ -17,10 +17,12 @@
 package com.android.dialer.calldetails;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
+import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -45,14 +47,13 @@ import com.android.dialer.callrecord.CallRecording;
 import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.constants.Constants;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
-import java.io.File;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -269,9 +270,9 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
  }
 
   private void playRecording(Context context, CallRecording recording) {
-    Uri uri = FileProvider.getUriForFile(context,
-            Constants.get().getFileProviderAuthority(), recording.getFile());
-    String extension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+    Uri uri = ContentUris.withAppendedId(
+        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, recording.mediaId);
+    String extension = MimeTypeMap.getFileExtensionFromUrl(recording.fileName);
     String mime = !TextUtils.isEmpty(extension)
         ? MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension) : "audio/*";
     try {

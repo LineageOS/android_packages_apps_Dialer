@@ -16,9 +16,13 @@
 
 package com.android.dialer.callrecord;
 
+import android.content.ContentValues;
 import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.webkit.MimeTypeMap;
 
 import java.io.File;
 
@@ -27,8 +31,7 @@ public final class CallRecording implements Parcelable {
   public long creationTime;
   public String fileName;
   public long startRecordingTime;
-
-  private static final String PUBLIC_DIRECTORY_NAME = "CallRecordings";
+  public long mediaId;
 
   public static final Parcelable.Creator<CallRecording> CREATOR =
       new Parcelable.Creator<CallRecording>() {
@@ -44,11 +47,12 @@ public final class CallRecording implements Parcelable {
   };
 
   public CallRecording(String phoneNumber, long creationTime,
-      String fileName, long startRecordingTime) {
+      String fileName, long startRecordingTime, long mediaId) {
     this.phoneNumber = phoneNumber;
     this.creationTime = creationTime;
     this.fileName = fileName;
     this.startRecordingTime = startRecordingTime;
+    this.mediaId = mediaId;
   }
 
   public CallRecording(Parcel in) {
@@ -56,11 +60,29 @@ public final class CallRecording implements Parcelable {
     creationTime = in.readLong();
     fileName = in.readString();
     startRecordingTime = in.readLong();
+    mediaId = in.readLong();
   }
 
-  public File getFile() {
-    File dir = Environment.getExternalStoragePublicDirectory(PUBLIC_DIRECTORY_NAME);
-    return new File(dir, fileName);
+  public static ContentValues generateMediaInsertValues(String fileName, long creationTime) {
+    final ContentValues cv = new ContentValues(5);
+
+    cv.put(MediaStore.Audio.Media.RELATIVE_PATH, "Music/Call Recordings");
+    cv.put(MediaStore.Audio.Media.DISPLAY_NAME, fileName);
+    cv.put(MediaStore.Audio.Media.DATE_TAKEN, creationTime);
+    cv.put(MediaStore.Audio.Media.IS_PENDING, 1);
+
+    final String extension = MimeTypeMap.getFileExtensionFromUrl(fileName);
+    final String mime = !TextUtils.isEmpty(extension)
+        ? MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension) : "audio/*";
+    cv.put(MediaStore.Audio.Media.MIME_TYPE, mime);
+
+    return cv;
+  }
+
+  public static ContentValues generateCompletedValues() {
+    final ContentValues cv = new ContentValues(1);
+    cv.put(MediaStore.Audio.Media.IS_PENDING, 0);
+    return cv;
   }
 
   @Override
@@ -69,6 +91,7 @@ public final class CallRecording implements Parcelable {
     out.writeLong(creationTime);
     out.writeString(fileName);
     out.writeLong(startRecordingTime);
+    out.writeLong(mediaId);
   }
 
   @Override

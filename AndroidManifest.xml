@@ -114,7 +114,8 @@
     android:appCategory="social"
     android:supportsRtl="true"
     android:usesCleartextTraffic="false"
-    android:extractNativeLibs="false">
+    android:extractNativeLibs="false"
+    android:requestLegacyExternalStorage="true">
   </application>
 
 </manifest>
