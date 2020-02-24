@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dde3be68_a03c6912",
+        "filename": "java/com/android/dialer/callrecord/CallRecording.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2020-02-24T21:18:28Z",
+      "side": 1,
+      "message": "allowed directories are [Alarms, Music, Notifications, Podcasts, Ringtones]",
+      "revId": "a13917f1b009a37881af6589fe99c116aca4ee3e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
