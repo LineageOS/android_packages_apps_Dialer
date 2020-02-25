@@ -2,6 +2,24 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae53be33_822d37d7",
+        "filename": "java/com/android/dialer/callrecord/CallRecording.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2020-02-25T14:15:26Z",
+      "side": 1,
+      "message": "Need to reset this to 0 on call recording/migration completion.",
+      "parentUuid": "",
+      "revId": "929b7cffe5d0e161581935a87ddb6ed4b52ace6f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74bcdfc3_46a49712",
         "filename": "java/com/android/dialer/callrecord/CallRecordingAutoMigrator.java",
         "patchSetId": 2
@@ -13,6 +31,23 @@
       "writtenOn": "2020-02-25T12:29:51Z",
       "side": 1,
       "message": "Uncomment before shipping.",
+      "revId": "929b7cffe5d0e161581935a87ddb6ed4b52ace6f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7506682_b38e0cf2",
+        "filename": "java/com/android/dialer/callrecord/CallRecordingDataStore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2020-02-25T14:15:26Z",
+      "side": 1,
+      "message": "Unused imports",
       "revId": "929b7cffe5d0e161581935a87ddb6ed4b52ace6f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
