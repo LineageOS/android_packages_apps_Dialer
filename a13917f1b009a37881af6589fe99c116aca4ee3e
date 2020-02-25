@@ -16,6 +16,24 @@
       "revId": "a13917f1b009a37881af6589fe99c116aca4ee3e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1d9dee6_d0cb47d3",
+        "filename": "java/com/android/dialer/callrecord/CallRecording.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8461
+      },
+      "writtenOn": "2020-02-25T10:33:53Z",
+      "side": 1,
+      "message": "We should use Music/Call recordings\nAlarms + Notifications + Ringtones are \"reserved\" for notification sounds pickers\nPodcasts are for podcasts apps to download stuffs for offline consumption",
+      "parentUuid": "dde3be68_a03c6912",
+      "revId": "a13917f1b009a37881af6589fe99c116aca4ee3e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
