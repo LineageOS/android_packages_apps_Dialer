@@ -345,6 +345,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
               // now update the UI to possibly re-enable the Merge button based on the number of
               // currently conferenceable calls available or Connection Capabilities.
             case android.telecom.Connection.EVENT_CALL_MERGE_FAILED:
+              isMergeInProcess = false;
               update();
               break;
             case TelephonyManagerCompat.EVENT_HANDOVER_VIDEO_FROM_WIFI_TO_LTE:
