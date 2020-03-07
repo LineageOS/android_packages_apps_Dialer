@@ -22,10 +22,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.KeyguardManager;
+import android.app.KeyguardManager.KeyguardDismissCallback;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -1052,20 +1057,58 @@ public class AnswerFragment extends Fragment
   }
 
   @Override
+  @TargetApi(VERSION_CODES.O)
   public void smsSelected(@Nullable CharSequence text) {
     LogUtil.i("AnswerFragment.smsSelected", null);
     textResponsesFragment = null;
 
     if (text == null) {
-      createCustomSmsDialogFragment = CreateCustomSmsDialogFragment.newInstance();
-      createCustomSmsDialogFragment.show(getChildFragmentManager(), null);
-      return;
+      if (VERSION.SDK_INT < VERSION_CODES.O) {
+        LogUtil.i("AnswerFragment.smsSelected", "below O, showing dialog directly");
+        showCustomSmsDialog();
+        return;
+      }
+      if (!getContext().getSystemService(KeyguardManager.class).isKeyguardLocked()) {
+        LogUtil.i("AnswerFragment.smsSelected", "not locked, showing dialog directly");
+        showCustomSmsDialog();
+        return;
+      }
+
+      // Show the custom reply dialog only after device is unlocked, as it may cause impersonation
+      // see b/137134588
+      LogUtil.i("AnswerFragment.smsSelected", "dismissing keyguard");
+      getContext()
+          .getSystemService(KeyguardManager.class)
+          .requestDismissKeyguard(
+              getActivity(),
+              new KeyguardDismissCallback() {
+                @Override
+                public void onDismissCancelled() {
+                  LogUtil.i("AnswerFragment.smsSelected", "onDismissCancelled");
+                }
+
+                @Override
+                public void onDismissError() {
+                  LogUtil.i("AnswerFragment.smsSelected", "onDismissError");
+                }
+
+                @Override
+                public void onDismissSucceeded() {
+                  LogUtil.i("AnswerFragment.smsSelected", "onDismissSucceeded");
+                  showCustomSmsDialog();
+                }
+              });return;
     }
 
     if (primaryCallState != null && canRejectCallWithSms()) {
       rejectCall();
       answerScreenDelegate.onRejectCallWithMessage(text.toString());
     }
+  }
+
+  private void showCustomSmsDialog() {
+    createCustomSmsDialogFragment = CreateCustomSmsDialogFragment.newInstance();
+    createCustomSmsDialogFragment.showNow(getChildFragmentManager(), null);
   }
 
   @Override
