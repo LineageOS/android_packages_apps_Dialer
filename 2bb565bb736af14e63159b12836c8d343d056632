@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6bd727c_8e0cd148",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-27T15:09:42Z",
+      "side": 1,
+      "message": "add spacing",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 53
+      },
+      "revId": "2bb565bb736af14e63159b12836c8d343d056632",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ba0c110_f820044b",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-27T15:09:42Z",
+      "side": 1,
+      "message": "static imports go to the top",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 76
+      },
+      "revId": "2bb565bb736af14e63159b12836c8d343d056632",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
