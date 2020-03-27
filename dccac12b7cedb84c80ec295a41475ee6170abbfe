@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "438a9c20_0c677a01",
+        "filename": "java/com/android/incallui/CallerInfoUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-03-27T15:10:25Z",
+      "side": 1,
+      "message": "move to the top",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 76
+      },
+      "revId": "dccac12b7cedb84c80ec295a41475ee6170abbfe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
