@@ -43,6 +43,7 @@ public class CompositeSmartDialMap {
 
   static {
     EXTRA_MAPS.put("bul", BulgarianSmartDialMap.getInstance());
+    EXTRA_MAPS.put("heb", HebrewSmartDialMap.getInstance());
     EXTRA_MAPS.put("rus", RussianSmartDialMap.getInstance());
     EXTRA_MAPS.put("ukr", UkrainianSmartDialMap.getInstance());
   }
