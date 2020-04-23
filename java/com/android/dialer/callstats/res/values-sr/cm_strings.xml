@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Детаљи статистике контакта</string>
+    <string name="call_stats_incoming">Долазних: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Одлазних: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Пропуштених: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Блокираних: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Укупно: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Укупно: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Почетни датум</string>
+    <string name="call_stats_filter_to">Крајњи датум</string>
+    <string name="call_stats_filter_picker_title">Опсег филтера</string>
+    <string name="date_quick_selection">Брзи одабир</string>
+    <string name="date_qs_currentmonth">Тренутни месец</string>
+    <string name="date_qs_currentquarter">Текући квартал</string>
+    <string name="date_qs_currentyear">Текућа година</string>
+    <string name="date_qs_lastweek">Прошла недеља</string>
+    <string name="date_qs_lastmonth">Прошли месец</string>
+    <string name="date_qs_lastquarter">Прошли квартал</string>
+    <string name="date_qs_lastyear">Прошла година</string>
+    <string name="call_stats_date_filter">Подеси временски опсег</string>
+    <string name="call_stats_reset_filter">Ресетуј временски опсег</string>
+    <string name="call_stats_sort_by_duration">Сортирај по трајању позива</string>
+    <string name="call_stats_sort_by_count">Сортирај по броју позива</string>
+    <string name="call_stats_title_for_number">Овај број</string>
+    <string name="call_stats_title_of_total">Од укупно</string>
+    <string name="call_stats_title_durations">Трајања позива</string>
+    <string name="call_stats_title_count">Број позива</string>
+    <string name="call_stats_title_average_duration">Просечно трајање позива</string>
+    <string name="recent_calls_no_items_in_range">Дневник позива не садржи ниједан позив у датим опсегу.</string>
+</resources>

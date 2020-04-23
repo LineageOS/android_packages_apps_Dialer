@@ -22,6 +22,7 @@
     <string name="call_stats_missed">Appels manqués : <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Appels bloqués : <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g> %%</string>
+    <string name="call_stats_header_total">Total : <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Total : <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Date de début</string>
     <string name="call_stats_filter_to">Date de fin</string>
