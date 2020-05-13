@@ -2,7 +2,6 @@ syntax = "proto2";
 
 option java_package = "com.android.dialer.voicemail.model";
 option java_multiple_files = true;
-option optimize_for = LITE_RUNTIME;
 
 
 package com.android.dialer.voicemail.model;
