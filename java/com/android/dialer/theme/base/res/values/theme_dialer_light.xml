@@ -18,6 +18,7 @@
   <!-- Deprecated: ActionBars are clunky and Toolbar (along with Dialer.ThemeBase.NoActionBar)
       should be used in favor-->
   <style name="Dialer.ThemeBase.ActionBar">
+    <item name="android:forceDarkAllowed">true</item>
     <!-- These are used to style all actionbars in Dialer. These aren't needed in Dialer.ThemeBase.NoActionBar -->
     <item name="actionBarStyle">@style/DialerActionBarBaseStyle</item>
     <item name="actionBarSize">@dimen/action_bar_height</item>
@@ -30,6 +31,7 @@
   </style>
 
   <style name="Dialer.ThemeBase.NoActionBar">
+    <item name="android:forceDarkAllowed">true</item>
     <!-- Copied from Theme.AppCompat.Light.NoActionBar. We can remove this and update the Dialer
         base style once none of our activities depend on ActionBar anymore. -->
     <item name="windowActionBar">false</item>
@@ -38,6 +40,7 @@
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
   <style name="Dialer.ThemeBase">
+    <item name="android:forceDarkAllowed">true</item>
     <!-- These values should be used to color all backgrounds. -->
     <item name="android:colorBackground">@color/dialer_background_color</item>
     <item name="android:colorBackgroundFloating">@android:color/white</item>
