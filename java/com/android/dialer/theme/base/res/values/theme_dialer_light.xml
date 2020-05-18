@@ -38,6 +38,7 @@
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
   <style name="Dialer.ThemeBase">
+    <item name="android:forceDarkAllowed">true</item>
     <!-- These values should be used to color all backgrounds. -->
     <item name="android:colorBackground">@color/dialer_background_color</item>
     <item name="android:colorBackgroundFloating">@android:color/white</item>
