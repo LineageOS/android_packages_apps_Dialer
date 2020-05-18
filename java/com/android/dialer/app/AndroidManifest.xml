@@ -56,7 +56,7 @@
 
   <uses-sdk
     android:minSdkVersion="24"
-    android:targetSdkVersion="28"/>
+    android:targetSdkVersion="29"/>
 
   <application>
 
