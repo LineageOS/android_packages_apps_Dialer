@@ -78,7 +78,8 @@
       android:theme="@style/DialtactsTheme">
     </activity>
 
-    <receiver android:name="com.android.dialer.app.calllog.CallLogReceiver">
+    <receiver android:name="com.android.dialer.app.calllog.CallLogReceiver"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.NEW_VOICEMAIL"/>
         <data
@@ -115,6 +116,7 @@
 
     <receiver
       android:directBootAware="true"
+      android:exported="true"
       android:name="com.android.dialer.app.calllog.MissedCallNotificationReceiver">
       <intent-filter>
         <action android:name="android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION"/>
@@ -122,6 +124,7 @@
     </receiver>
     <!-- Handles voicemail notifications from telephony. Requires O -->
     <receiver android:name=".voicemail.LegacyVoicemailNotificationReceiver"
+      android:exported="true"
       android:directBootAware="true">
       <intent-filter>
         <action android:name="android.telephony.action.SHOW_VOICEMAIL_NOTIFICATION"/>
