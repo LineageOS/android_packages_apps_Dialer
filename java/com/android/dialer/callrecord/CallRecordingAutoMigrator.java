@@ -84,8 +84,8 @@ public class CallRecordingAutoMigrator {
         int id = -1;
         long creationTime = System.currentTimeMillis();
         for (int i = 0; i < oldRecordingData.size(); i++) {
-          if (TextUtils.equals(recording.getName(), oldRecordingData.get(i).fileName)) {
-            creationTime = oldRecordingData.get(i).creationTime;
+          if (TextUtils.equals(recording.getName(), oldRecordingData.valueAt(i).fileName)) {
+            creationTime = oldRecordingData.valueAt(i).creationTime;
             id = oldRecordingData.keyAt(i);
             break;
           }
