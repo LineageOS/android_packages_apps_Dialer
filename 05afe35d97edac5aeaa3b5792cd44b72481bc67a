@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73f180fa_1456c393",
+        "filename": "java/com/android/dialer/callrecord/CallRecordingAutoMigrator.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1063
+      },
+      "writtenOn": "2020-06-05T11:09:32Z",
+      "side": 1,
+      "message": "This should become\n\nfor (int i \u003d 0; i \u003c oldRecordingData.size(); i++) {\n    int key \u003d oldRecordingData.keyAt(i);\n    CallRecording recordingEntry \u003d oldRecordingData.get(key);\n    if (TextUtils.equals(recording.getName(), recordingEntry.fileName)) {\n        creationTime \u003d recordingEntry.creationTime;\n        id \u003d key;\n        break;\n    }\n}",
+      "revId": "05afe35d97edac5aeaa3b5792cd44b72481bc67a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
