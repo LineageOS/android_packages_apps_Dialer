@@ -29,7 +29,6 @@
       <item value="20821"/>
       <item value="20888"/>
     </string-array>
-    <string name="feature_flag_name">vvm_carrier_flag_20820</string>
     <int
         name="vvm_port_number_int"
         value="5499"/>
