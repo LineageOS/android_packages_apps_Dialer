@@ -29,6 +29,7 @@ import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCo
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorListener;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
+import com.android.dialer.R;
 import com.android.dialer.util.TransactionSafeActivity;
 
 /** This is the main activity for dialer. It hosts favorites, call log, search, dialpad, etc... */
@@ -72,6 +73,7 @@ public class MainActivity extends TransactionSafeActivity
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    setTheme(R.style.MainActivityTheme);
     super.onCreate(savedInstanceState);
     LogUtil.enterBlock("MainActivity.onCreate");
     // If peer was set by the super, don't reset it.
