@@ -30,7 +30,7 @@
         android:label="@string/main_activity_label"
         android:launchMode="singleTask"
         android:resizeableActivity="true"
-        android:theme="@style/MainActivityTheme"
+        android:theme="@style/LaunchTheme"
         android:windowSoftInputMode="stateAlwaysHidden|adjustNothing">
 
       <intent-filter>
