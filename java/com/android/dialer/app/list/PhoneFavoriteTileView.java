@@ -57,7 +57,7 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
   // make room for the contact name and number label at the bottom of the image.
   private static final float DEFAULT_IMAGE_LETTER_OFFSET = -0.12f;
   private static final float DEFAULT_IMAGE_LETTER_SCALE = 0.70f;
-  // Dummy clip data object that is attached to drag shadows so that text views
+  // Placeholder clip data object that is attached to drag shadows so that text views
   // don't crash with an NPE if the drag shadow is released in their bounds
   private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
   /** View that contains the transparent shadow that is overlaid on top of the contact image. */

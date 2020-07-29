@@ -32,7 +32,7 @@ public class FlingAnimationUtils {
   private static final float MIN_VELOCITY_DP_PER_SECOND = 250;
   private static final float HIGH_VELOCITY_DP_PER_SECOND = 3000;
 
-  /** Crazy math. http://en.wikipedia.org/wiki/B%C3%A9zier_curve */
+  /** Fancy math. http://en.wikipedia.org/wiki/B%C3%A9zier_curve */
   private static final float LINEAR_OUT_SLOW_IN_START_GRADIENT = 1.0f / LINEAR_OUT_SLOW_IN_X2;
 
   private Interpolator linearOutSlowIn;
