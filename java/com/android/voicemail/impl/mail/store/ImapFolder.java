@@ -257,7 +257,7 @@ public class ImapFolder {
      * ENVELOPE  - UID FETCH (INTERNALDATE UID RFC822.SIZE FLAGS BODY.PEEK[
      *                            HEADER.FIELDS (date subject from content-type to cc)])
      * STRUCTURE - UID FETCH (BODYSTRUCTURE)
-     * BODY_SANE - UID FETCH (BODY.PEEK[]<0.N>) where N = max bytes returned
+     * BODY_TRUNCATED - UID FETCH (BODY.PEEK[]<0.N>) where N = max bytes returned
      * BODY      - UID FETCH (BODY.PEEK[])
      * Part      - UID FETCH (BODY.PEEK[ID]) where ID = mime part ID
      */
@@ -277,8 +277,8 @@ public class ImapFolder {
       fetchFields.add(ImapConstants.BODYSTRUCTURE);
     }
 
-    if (fp.contains(FetchProfile.Item.BODY_SANE)) {
-      fetchFields.add(ImapConstants.FETCH_FIELD_BODY_PEEK_SANE);
+    if (fp.contains(FetchProfile.Item.BODY_TRUNCATED)) {
+      fetchFields.add(ImapConstants.FETCH_FIELD_BODY_PEEK_TRUNCATED);
     }
     if (fp.contains(FetchProfile.Item.BODY)) {
       fetchFields.add(ImapConstants.FETCH_FIELD_BODY_PEEK);
@@ -363,7 +363,8 @@ public class ImapFolder {
               }
             }
           }
-          if (fp.contains(FetchProfile.Item.BODY) || fp.contains(FetchProfile.Item.BODY_SANE)) {
+          if (fp.contains(FetchProfile.Item.BODY)
+                  || fp.contains(FetchProfile.Item.BODY_TRUNCATED)) {
             // Body is keyed by "BODY[]...".
             // Previously used "BODY[..." but this can be confused with "BODY[HEADER..."
             // TODO Should we accept "RFC822" as well??

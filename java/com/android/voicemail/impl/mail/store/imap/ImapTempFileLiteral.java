@@ -74,7 +74,7 @@ public class ImapTempFileLiteral extends ImapString {
       // It's probably possible if we're low on storage and the system clears the cache dir.
       LogUtils.w(TAG, "ImapTempFileLiteral: Temp file not found");
 
-      // Return 0 byte stream as a dummy...
+      // Return 0 byte stream as a placeholder...
       return new ByteArrayInputStream(new byte[0]);
     }
   }

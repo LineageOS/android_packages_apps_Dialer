@@ -55,8 +55,8 @@ final class DtmfKeyListener extends DialerKeyListener {
    * necessary to copy the implementation.
    *
    * <p>The Spannable is only used to determine which meta keys are pressed, e.g. shift, alt, see
-   * {@link android.text.method.MetaKeyKeyListener#getMetaState(CharSequence)}, so using a dummy
-   * value is fine here.
+   * {@link android.text.method.MetaKeyKeyListener#getMetaState(CharSequence)}, so using a
+   * placeholder value is fine here.
    */
   private static final Spannable EMPTY_SPANNABLE = new SpannableString("");
 
