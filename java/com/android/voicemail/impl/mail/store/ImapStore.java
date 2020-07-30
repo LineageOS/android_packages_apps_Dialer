@@ -30,9 +30,9 @@ import org.apache.james.mime4j.MimeException;
 public class ImapStore {
   /**
    * A global suggestion to Store implementors on how much of the body should be returned on
-   * FetchProfile.Item.BODY_SANE requests. We'll use 125k now.
+   * FetchProfile.Item.BODY_TRUNCATED requests. We'll use 125k now.
    */
-  public static final int FETCH_BODY_SANE_SUGGESTED_SIZE = (125 * 1024);
+  public static final int FETCH_BODY_TRUNCATED_SUGGESTED_SIZE = (125 * 1024);
 
   private final Context context;
   private final ImapHelper helper;
