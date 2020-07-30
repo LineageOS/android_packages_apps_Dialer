@@ -140,7 +140,7 @@ message PhoneLookupInfo {
   }
   optional PeopleApiInfo people_api_info = 3;
 
-  // Whether a number is blocked or not. Used by both the system blacklist and
+  // Whether a number is blocked or not. Used by both the system block list and
   // dialer fallback
   enum BlockedState {
     UNKNOWN = 0;
