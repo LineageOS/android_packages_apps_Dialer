@@ -85,7 +85,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
 
   private static final int NO_CAMERA_SELECTED = -1;
 
-  private static final Camera.ShutterCallback DUMMY_SHUTTER_CALLBACK =
+  private static final Camera.ShutterCallback NOOP_SHUTTER_CALLBACK =
       new Camera.ShutterCallback() {
         @Override
         public void onShutter() {
@@ -493,7 +493,7 @@ public class CameraManager implements FocusOverlayManager.Listener {
     try {
       this.camera.takePicture(
           // A shutter callback is required to enable shutter sound
-          DUMMY_SHUTTER_CALLBACK, null /* raw */, null /* postView */, jpegCallback);
+              NOOP_SHUTTER_CALLBACK, null /* raw */, null /* postView */, jpegCallback);
     } catch (final RuntimeException e) {
       LogUtil.e("CameraManager.takePicture", "RuntimeException in CameraManager.takePicture", e);
       takingPicture = false;
