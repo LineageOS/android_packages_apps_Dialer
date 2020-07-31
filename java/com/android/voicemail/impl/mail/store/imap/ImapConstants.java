@@ -24,8 +24,8 @@ public final class ImapConstants {
 
   public static final String FETCH_FIELD_BODY_PEEK_BARE = "BODY.PEEK";
   public static final String FETCH_FIELD_BODY_PEEK = FETCH_FIELD_BODY_PEEK_BARE + "[]";
-  public static final String FETCH_FIELD_BODY_PEEK_SANE =
-      String.format(Locale.US, "BODY.PEEK[]<0.%d>", ImapStore.FETCH_BODY_SANE_SUGGESTED_SIZE);
+  public static final String FETCH_FIELD_BODY_PEEK_TRUNCATED =
+      String.format(Locale.US, "BODY.PEEK[]<0.%d>", ImapStore.FETCH_BODY_TRUNCATED_SUGGESTED_SIZE);
   public static final String FETCH_FIELD_HEADERS =
       "BODY.PEEK[HEADER.FIELDS (date subject from content-type to cc message-id content-duration)]";
 

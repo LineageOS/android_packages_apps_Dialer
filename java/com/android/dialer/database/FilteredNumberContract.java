@@ -30,7 +30,7 @@ public final class FilteredNumberContract {
 
   public static final Uri AUTHORITY_URI = Uri.parse("content://" + AUTHORITY);
 
-  /** The type of filtering to be applied, e.g. block the number or whitelist the number. */
+  /** The type of filtering to be applied, e.g. block the number or allow the number. */
   public interface FilteredNumberTypes {
 
     int UNDEFINED = 0;
