@@ -28,6 +28,7 @@
   <string name="incall_video_call_request_failed">Methu â chysylltu</string>
   <string name="incall_video_call_request_rejected">Gwrthodwyd yr alwad</string>
   <string name="incall_video_call_request_timed_out">Doedd dim ateb</string>
+  <string name="incall_video_call_operation_failed">Methu â gweithredu</string>
   <string name="incall_hanging_up">Yn dod a\'r alwad i ben</string>
   <string name="incall_call_ended">Galwad wedi dod i ben</string>
   <string name="incall_remotely_held">Yn aros</string>
