@@ -50,5 +50,7 @@ message SelectPhoneAccountDialogOptions {
     // in a call so the other SIM cannot be used. Hint should also be set to
     // inform the user why the account is unavailable.
     optional bool enabled = 4 [default = true];
+
+    optional bytes user_handle = 5;
   }
 }
