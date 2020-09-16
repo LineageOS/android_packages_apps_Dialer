@@ -16,9 +16,15 @@
 
 package com.android.contacts.common.widget;
 
+import android.os.Parcel;
+import android.os.UserHandle;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.telecom.TelecomUtil;
+
+import com.google.protobuf.ByteString;
+
 import java.util.Collection;
 
 /** Provides common operation on a {@link SelectPhoneAccountDialogOptions} */
@@ -27,9 +33,21 @@ public final class SelectPhoneAccountDialogOptionsUtil {
 
   public static PhoneAccountHandle getPhoneAccountHandle(
       SelectPhoneAccountDialogOptions.Entry entry) {
+    UserHandle userHandle;
+    Parcel parcel = Parcel.obtain();
+    try {
+      byte[] marshalledUserHandle = entry.getUserHandle().toByteArray();
+      parcel.unmarshall(marshalledUserHandle, 0, marshalledUserHandle.length);
+      parcel.setDataPosition(0);
+      userHandle = parcel.readParcelable(UserHandle.class.getClassLoader());
+    } catch (NullPointerException e) {
+      userHandle = null;
+    }
+    parcel.recycle();
     return Assert.isNotNull(
         TelecomUtil.composePhoneAccountHandle(
-            entry.getPhoneAccountHandleComponentName(), entry.getPhoneAccountHandleId()));
+            entry.getPhoneAccountHandleComponentName(), entry.getPhoneAccountHandleId(),
+                userHandle));
   }
 
   public static SelectPhoneAccountDialogOptions.Entry.Builder setPhoneAccountHandle(
@@ -38,6 +56,10 @@ public final class SelectPhoneAccountDialogOptionsUtil {
     entryBuilder.setPhoneAccountHandleComponentName(
         phoneAccountHandle.getComponentName().flattenToString());
     entryBuilder.setPhoneAccountHandleId(phoneAccountHandle.getId());
+    Parcel parcel = Parcel.obtain();
+    parcel.writeParcelable(phoneAccountHandle.getUserHandle(), 0);
+    entryBuilder.setUserHandle(ByteString.copyFrom(parcel.marshall()));
+    parcel.recycle();
     return entryBuilder;
   }
 
