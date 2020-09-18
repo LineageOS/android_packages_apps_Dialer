@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.UserHandle;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -169,6 +170,14 @@ public abstract class TelecomUtil {
   @Nullable
   public static PhoneAccountHandle composePhoneAccountHandle(
       @Nullable String componentString, @Nullable String accountId) {
+    return composePhoneAccountHandle(componentString, accountId, null);
+  }
+
+  /** Compose {@link PhoneAccountHandle} object from component name, account id and user handle. */
+  @Nullable
+  public static PhoneAccountHandle composePhoneAccountHandle(
+          @Nullable String componentString, @Nullable String accountId,
+          @Nullable UserHandle userHandle) {
     if (TextUtils.isEmpty(componentString) || TextUtils.isEmpty(accountId)) {
       return null;
     }
@@ -176,7 +185,11 @@ public abstract class TelecomUtil {
     if (componentName == null) {
       return null;
     }
-    return new PhoneAccountHandle(componentName, accountId);
+    if (userHandle == null) {
+      return new PhoneAccountHandle(componentName, accountId);
+    } else {
+      return new PhoneAccountHandle(componentName, accountId, userHandle);
+    }
   }
 
   /**
