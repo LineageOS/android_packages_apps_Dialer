@@ -100,7 +100,9 @@ final class SimulatorVideoCall
   }
 
   private void showVideoAccountSettings() {
-    context.startActivity(new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS));
+    Intent intent = new Intent(TelecomManager.ACTION_CHANGE_PHONE_ACCOUNTS);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    context.startActivity(intent);
     Toast.makeText(context, "Please enable simulator video provider", Toast.LENGTH_LONG).show();
   }
 
