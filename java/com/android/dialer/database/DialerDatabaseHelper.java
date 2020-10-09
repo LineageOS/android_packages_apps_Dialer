@@ -280,6 +280,34 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     db.execSQL("ALTER TABLE smartdial_table ADD carrier_presence INTEGER NOT NULL DEFAULT 0");
   }
 
+  @Override
+  public void onDowngrade(SQLiteDatabase db, int oldNumber, int newNumber) {
+    // Disregard the old version and new versions provided by SQLiteOpenHelper, we will read
+    // our own from the database.
+
+    int oldVersion;
+
+    oldVersion = getPropertyAsInt(db, DATABASE_VERSION_PROPERTY, 0);
+
+    if (oldVersion == 0) {
+      LogUtil.e(
+          "DialerDatabaseHelper.onDowngrade", "malformed database version..recreating database");
+      setupTables(db);
+      return;
+    }
+
+    if (oldVersion == 70011) {
+      oldVersion = 10;
+    }
+
+    if (oldVersion != DATABASE_VERSION) {
+      throw new IllegalStateException(
+          "error downgrading the database to version " + DATABASE_VERSION);
+    }
+
+    setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
+  }
+
   /** Stores a key-value pair in the {@link Tables#PROPERTIES} table. */
   public void setProperty(String key, String value) {
     setProperty(getWritableDatabase(), key, value);
