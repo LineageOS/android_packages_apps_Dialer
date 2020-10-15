@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2883d183_9f6c481c",
+        "filename": "java/com/android/dialer/lookup/opencnam/OpenCnamReverseLookup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2020-10-15T17:49:31Z",
+      "side": 1,
+      "message": "what do we want to do about that?",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 61
+      },
+      "revId": "19d59a1efa268c63726cb56123a3b45516d9bb30",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
