@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "776ea029_22e70964",
+        "filename": "java/com/android/dialer/app/calllog/CallLogFragment.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2020-11-20T15:25:34Z",
+      "side": 1,
+      "message": "These should move to onCreate() then.\nIn fact, it was changed as part of this commit https://github.com/LineageOS/android_packages_apps_Dialer/commit/76cf7e18da00545145df8a5f215f3a377d605866",
+      "range": {
+        "startLine": 405,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 5
+      },
+      "revId": "baa9381350141e5ddf0d5b469a68581e0e2d36ba",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
