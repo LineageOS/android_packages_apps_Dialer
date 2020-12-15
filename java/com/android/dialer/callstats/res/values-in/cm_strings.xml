@@ -19,7 +19,7 @@
     <string name="call_stats_detail_title">Detail statistik kontak</string>
     <string name="call_stats_incoming">Masuk: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_outgoing">Keluar: <xliff:g id="value">%s</xliff:g></string>
-    <string name="call_stats_missed">Tidak terjawab: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Tak terjawab: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Diblokir: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_header_total">Total: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
