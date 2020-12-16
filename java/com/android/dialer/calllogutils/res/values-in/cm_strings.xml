@@ -22,5 +22,5 @@
     <string name="call_log_outgoing_header">Hanya panggilan keluar</string>
     <string name="call_log_missed_header">Hanya panggilan tidak terjawab</string>
     <string name="call_log_voicemail_header">Hanya panggilan dengan pesan suara</string>
-    <string name="call_log_blacklist_header">Hanya panggilan yang diblokir</string>
+    <string name="call_log_blacklist_header">Panggilan yang diblokir saja</string>
 </resources>
