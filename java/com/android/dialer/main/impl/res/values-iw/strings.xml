@@ -18,8 +18,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="main_activity_label" msgid="3121599977875141886">"טלפון"</string>
-    <string name="nui_shortcut_name" msgid="6370942901789984087">"ממשק משתמש חדש לטלפון"</string>
-    <string name="main_call_history_tab_description" msgid="1705569872650796265">"היסטוריית שיחות"</string>
     <string name="search" msgid="3570654445331155513">"@android:string/search_go"</string>
     <string name="description_search" msgid="3443578912463129718">"חיפוש אנשי קשר ומקומות"</string>
     <string name="contacts" msgid="4464246185723317911">"אנשי קשר"</string>
@@ -28,5 +26,4 @@
     <string name="tab_title_speed_dial" msgid="1968484500112572774">"חיוג מהיר"</string>
     <string name="tab_title_voicemail" msgid="4777655983569268504">"דואר קולי"</string>
     <string name="settings" msgid="7614336599112169779">"הגדרות"</string>
-    <string name="main_send_feedback" msgid="2446919533981327373">"משוב"</string>
 </resources>
