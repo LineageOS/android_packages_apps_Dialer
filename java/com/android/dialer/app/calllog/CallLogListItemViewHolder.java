@@ -1395,6 +1395,9 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
                 Calls.CONTENT_URI,
                 CallLog.Calls._ID + " IN (" + callIdsStr + ")" /* where */,
                 null /* selectionArgs */);
+        context
+            .getContentResolver()
+            .notifyChange(Calls.CONTENT_URI, null);
       }
 
       return null;
