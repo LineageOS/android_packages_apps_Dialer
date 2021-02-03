@@ -101,6 +101,7 @@ public class ClearCallLogDialog extends DialogFragment {
     @Override
     public Void doInBackground(@Nullable Void unused) throws Throwable {
       appContext.getContentResolver().delete(Calls.CONTENT_URI, null, null);
+      appContext.getContentResolver().notifyChange(Calls.CONTENT_URI, null);
       CachedNumberLookupService cachedNumberLookupService =
           PhoneNumberCache.get(appContext).getCachedNumberLookupService();
       if (cachedNumberLookupService != null) {
