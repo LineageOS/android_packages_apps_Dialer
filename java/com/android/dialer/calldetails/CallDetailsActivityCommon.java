@@ -277,6 +277,9 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
       context
           .getContentResolver()
           .delete(Calls.CONTENT_URI, selection.getSelection(), selection.getSelectionArgs());
+      context
+          .getContentResolver()
+          .notifyChange(Calls.CONTENT_URI, null);
       return null;
     }
 
