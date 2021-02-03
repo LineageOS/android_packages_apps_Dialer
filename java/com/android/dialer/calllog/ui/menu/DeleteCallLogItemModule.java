@@ -100,6 +100,9 @@ final class DeleteCallLogItemModule implements HistoryItemActionModule {
           context
               .getContentResolver()
               .delete(Calls.CONTENT_URI, selection.getSelection(), selection.getSelectionArgs());
+      context
+          .getContentResolver()
+          .notifyChange(Calls.CONTENT_URI, null);
 
       if (numRowsDeleted != coalescedIds.getCoalescedIdCount()) {
         LogUtil.e(
