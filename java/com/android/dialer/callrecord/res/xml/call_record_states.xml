@@ -225,6 +225,18 @@
     -->
     <country iso="ba" allowed="true" />
 
+    <!-- Enable recording for Bangladesh:
+        The definition of “document” under the Evidence Act, 1872 has emerged over the decades and the use of
+        audio/tape recorded evidence is admissible evidence when substantiated by deposition of a witness before the Court.
+        In civil cases parties may rely on audio/tape records of relevant conversations to support their versions and with the increasing use of
+        mobile phones, it has almost become a common practice now.
+        In such cases the court has to face various questions regarding admissibility, nature and evidentiary value of such audio/tape recorded conversation.
+        Here is the full explanation : https://www.thedailystar.net/news/your-advocate-2
+        Here is the Evidence act,1872 : https://acc.portal.gov.bd/sites/default/files/files/acc.portal.gov.bd/law/7e753733_a368_471e_aef9_b4525cb5082c/The_Evidence_Act,_1872_(Act_No._I_of_1872).pdf
+        According to these the call recording is legal in country Bangladesh
+    -->
+    <country iso="bd" allowed="true" />
+
     <!-- Enable recording for Belgium:
          As stated in the official response below, Belgian law does not consider the recording of
          one's personal communications as a punishable offense. Using said recordings in a
