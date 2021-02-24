@@ -225,6 +225,23 @@
     -->
     <country iso="ba" allowed="true" />
 
+    <!-- Enable recording for Bangladesh:
+           Based on the Evidence Act of 1872, audio recordings may be admissible as a form of
+           evidence. In civil cases, call recording may be used, but judges decide on when they are
+           admissable. Recordings are considered admissible evidence when a witness is deposed and
+           testifies to their validity before a court. Parties may rely on recordings during civil
+           cases, in order to support their side's version of events. While the use of audio
+           recordings as a form of evidence is common, the Supreme Court has not stated whether
+           recordings can be used as evidence blindly, thus their use is on a case-to-case basis.
+
+           Legal discussion:
+             https://www.thedailystar.net/news/your-advocate-2
+
+           Evidence Act of 1872:
+             https://acc.portal.gov.bd/sites/default/files/files/acc.portal.gov.bd/law/7e753733_a368_471e_aef9_b4525cb5082c/The_Evidence_Act,_1872_(Act_No._I_of_1872).pdf
+    -->
+    <country iso="bd" allowed="true" />
+
     <!-- Enable recording for Belgium:
          As stated in the official response below, Belgian law does not consider the recording of
          one's personal communications as a punishable offense. Using said recordings in a
