@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <string name="incall_content_description_end_call">Gorffen yr alwad</string>
+  <string name="incall_content_description_muted">Wedi\'i distewi</string>
+  <string name="incall_content_description_unmuted">Wedi\'i dad-ddistewi</string>
+  <string name="incall_content_description_swap_calls">Cyfnewid galwadau</string>
+  <string name="incall_content_description_swap_sim">Newid SIM</string>
+  <string name="incall_content_description_merge_calls">Cyfuno galwadau</string>
+  <string name="incall_content_description_earpiece">Seinydd clust y ddyfais</string>
+  <string name="incall_content_description_speaker">Seinydd</string>
+  <string name="incall_content_description_bluetooth">Bluetooth</string>
+  <string name="incall_content_description_headset">Clustffonau gwifr</string>
+  <string name="incall_content_description_hold">Rhoi\'r galwr i ddisgwyl</string>
+  <string name="incall_content_description_unhold">Parhau â\'r alwad</string>
+  <string name="incall_content_description_video_on">Fideo ymlaen</string>
+  <string name="incall_content_description_video_off">Fideo i ffwrdd</string>
+  <string name="incall_content_description_swap_video">Cyfnewid fideos</string>
+  <string name="incall_label_speaker">Seinydd</string>
+  <string name="incall_label_audio">Sain</string>
+</resources>

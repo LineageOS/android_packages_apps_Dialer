@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="notification_ongoing_video_call">Gairm video a’ dol air adhart</string>
+  <string name="notification_ongoing_paused_video_call">Gairm video a’ dol air adhart \u2011 video ’na stad</string>
+  <string name="notification_ongoing_call_wifi_template">&lt;xliff:g id="brand_name”&gt;%1$s&lt;/xliff:g&gt; a’ dol air adhart</string>
+  <string name="notification_incoming_call_wifi_template">&lt;xliff:g id="brand_name”&gt;%1$s&lt;/xliff:g&gt; a’ tighinn a-steach</string>
+  <string name="notification_call_wifi_brand">Gairm WiFi</string>
+  <string name="notification_call_wifi_work_brand">Gairm obrach WiFi</string>
+  <string name="notification_incoming_video_call">Gairm video a’ tighinn a-steach</string>
+  <string name="notification_incoming_call_mutli_sim">Gairm a’ tighinn a-steach slighe <xliff:g id="account">%1$s</xliff:g></string>
+  <string name="notification_action_speaker_on">Cuir an glaodhaire air</string>
+  <string name="notification_action_speaker_off">Cuir an glaodhaire dheth</string>
+  <string name="bubble_return_to_call">Till dhan ghairm</string>
+</resources>

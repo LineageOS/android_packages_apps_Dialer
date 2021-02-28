@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_incoming">Inkomend: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Uitgaand: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Gemist: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Geblokkeerd: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Begindatum</string>
+    <string name="call_stats_filter_to">Einddatum</string>
+    <string name="call_stats_filter_picker_title">Filterbereik</string>
+    <string name="date_quick_selection">Snelle selectie</string>
+    <string name="date_qs_currentmonth">Huidige maand</string>
+    <string name="date_qs_currentquarter">Huidig kwartaal</string>
+    <string name="date_qs_currentyear">Huidig jaar</string>
+    <string name="date_qs_lastweek">Vorige week</string>
+    <string name="date_qs_lastmonth">Vorige maand</string>
+    <string name="date_qs_lastquarter">Vorig kwartaal</string>
+    <string name="date_qs_lastyear">Vorig jaar</string>
+    <string name="call_stats_date_filter">Tijdsbestek aanpassen</string>
+    <string name="call_stats_reset_filter">Tijdsbestek herstellen</string>
+    <string name="call_stats_sort_by_duration">Sorteren op gespreksduur</string>
+    <string name="call_stats_sort_by_count">Sorteren op gespreksaantal</string>
+    <string name="call_stats_title_for_number">Dit nummer</string>
+    <string name="call_stats_title_of_total">Van in totaal</string>
+    <string name="call_stats_title_durations">Gespreksduur</string>
+    <string name="call_stats_title_count">Aantal gesprekken</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <string name="call_incoming_swipe_to_decline_with_message">Llusga oddi wrth yr eicon i wrthod gyda neges</string>
+  <string name="call_incoming_swipe_to_answer_video_as_audio">Llusga oddi wrth yr eicon i ateb fel galwad llais</string>
+  <string name="call_incoming_default_label_answer_and_release_second">Llusga i fyny i ateb a rhoi\'r galwr presennol i ddisgwyl</string>
+  <string name="call_incoming_default_label_answer_and_release_third">Llusga i fyny i ateb a dod â galwad sy\'n disgwyl i ben</string>
+  <string name="call_incoming_swipe_to_answer_and_release">Llusga oddi wrth yr eicon i ateb a dod â\'r alwad bresennol i ben</string>
+  <string name="call_incoming_message_custom">Ysgrifenna neges dy hun…</string>
+  <string name="call_incoming_respond_via_sms_custom_message">Ysgrifenna neges dy hun…</string>
+  <string name="call_incoming_custom_message_cancel">Diddymu</string>
+  <string name="call_incoming_custom_message_send">Anfon</string>
+  <string name="a11y_incoming_call_reject_with_sms">Gwrthod yr alwad hon gyda neges</string>
+  <string name="a11y_incoming_call_answer_video_as_audio">Ateb fel galwad llais</string>
+  <string name="a11y_incoming_call_answer_and_release">Ateb a gorffen yr alwad sydd eisoes ar y gweill</string>
+  <string name="a11y_description_incoming_call_reject_with_sms">Gwrthod gyda neges</string>
+  <string name="a11y_description_incoming_call_answer_video_as_audio">Ateb fel galwad llais</string>
+  <string name="a11y_description_incoming_call_answer_and_release">Ateb a gorffen yr alwad sydd eisoes ar y gweill</string>
+  <string name="call_incoming_video_is_off">Mae fideo i ffwrdd</string>
+  <string description="The message announced to accessibility assistance on incoming call." name="a11y_incoming_call_swipe_gesture_prompt">Llusgo i fyny â dau fys i ateb. Llusgo i lawr a dau fys i wrthod.</string>
+  <string name="call_incoming_important">Pwysig</string>
+</resources>

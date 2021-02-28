@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_connecting_assited_dialed">’Ga ghairm le +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+  <string name="incall_video_call_requesting">Gairm video giùlanair…</string>
+  <string name="incall_wifi_video_call_requesting">Gairm video giùlanair WiFi…</string>
+  <string name="incall_video_call_upgrade_request">A’ gearradh leum gu video a’ ghiùlanair…</string>
+  <string name="contact_grid_incoming_video_call">Gairm video giùlanair o</string>
+  <string name="contact_grid_incoming_wifi_video_call">Gairm video giùlanair WiFi o</string>
+  <string name="contact_grid_callback_number">Àireamh an fhòn seo: <xliff:g id="light_number">%1$s</xliff:g></string>
+</resources>

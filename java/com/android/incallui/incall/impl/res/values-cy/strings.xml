@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <string name="incall_label_videocall">Galwad fideo</string>
+  <string name="incall_label_rttcall">RTT</string>
+  <string name="incall_label_hold">Aros</string>
+  <string name="incall_label_add_call">Ychwanegu galwad</string>
+  <string name="incall_label_mute">Distewi</string>
+  <string name="incall_label_end_call">Gorffen yr alwad</string>
+  <string name="incall_label_dialpad">Bysellbad</string>
+  <string name="incall_talkback_speaker_on">, ymlaen</string>
+  <string name="incall_talkback_speaker_off">, i ffwrdd</string>
+  <string name="incall_label_merge">Cyfuno</string>
+  <string name="incall_label_manage">Rheoli</string>
+  <string name="a11y_description_incall_label_manage_content">Rheoli galwyr</string>
+  <string name="incall_label_swap">Cyfnewid</string>
+  <string name="incall_label_swap_sim">Newid SIM</string>
+  <string name="incall_note_sent">Nodyn wedi\'i anfon</string>
+</resources>

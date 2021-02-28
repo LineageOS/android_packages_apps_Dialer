@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="audioroute_bluetooth">Bluetooth</string>
+  <string name="audioroute_speaker">Seinydd</string>
+  <string name="audioroute_phone">Ffôn</string>
+  <string name="audioroute_headset">Clustffonau gwifr</string>
+</resources>

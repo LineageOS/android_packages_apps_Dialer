@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="urgent">¡Urxente! ¡Recueyi por favor!</string>
+  <string name="quick_question">Entruga rápida…</string>
+  <string name="message_composer_custom_message_hint">Escribi un mensax personalizáu</string>
+  <string name="send_and_call">Mandar y llamar</string>
+  <string name="share_and_call">Compartir y llamar</string>
+  <string name="gallery_item_description">imaxe <xliff:g id="date">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g></string>
+  <string name="description_call_composer_camera">Facer una semeya</string>
+  <string name="description_call_composer_photo">Esbillar una semeya</string>
+  <string name="description_call_composer_message">Unviar un mensaxe</string>
+  <string name="image_sent_messages">Semeya unviada per Messages</string>
+  <string name="message_sent_messages">Mensax unviáu per Messages</string>
+  <string name="call_composer_image_uploading">Unviando imax\u2026</string>
+</resources>

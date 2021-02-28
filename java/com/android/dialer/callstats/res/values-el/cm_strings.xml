@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Στατιστικά στοιχεία επαφών</string>
+    <string name="call_stats_incoming">Εισερχόμενες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Εξερχόμενες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Αναπάντητες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Αποκλεισμένες: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Σύνολο: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Σύνολο: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ημερομηνία έναρξης</string>
+    <string name="call_stats_filter_to">Ημερομηνία λήξης</string>
+    <string name="call_stats_filter_picker_title">Εύρος φίλτρου</string>
+    <string name="date_quick_selection">Γρήγορη επιλογή</string>
+    <string name="date_qs_currentmonth">Τρέχων μήνας</string>
+    <string name="date_qs_currentquarter">Τρέχον τρίμηνο</string>
+    <string name="date_qs_currentyear">Τρέχων χρόνος</string>
+    <string name="date_qs_lastweek">Προηγούμενη εβδομάδα</string>
+    <string name="date_qs_lastmonth">Προηγούμενος μήνας</string>
+    <string name="date_qs_lastquarter">Προηγούμενο τρίμηνο</string>
+    <string name="date_qs_lastyear">Προηγούμενος χρόνος</string>
+    <string name="call_stats_date_filter">Ρύθμιση χρονικού εύρους</string>
+    <string name="call_stats_reset_filter">Επαναφορά χρονικού εύρους</string>
+    <string name="call_stats_sort_by_duration">Ταξινόμηση ανά διάρκεια κλήσεων</string>
+    <string name="call_stats_sort_by_count">Ταξινόμηση ανά αριθμό κλήσεων</string>
+    <string name="call_stats_title_for_number">Αυτός ο αριθμός</string>
+    <string name="call_stats_title_of_total">Από το σύνολο</string>
+    <string name="call_stats_title_durations">Διάρκεια κλήσεων</string>
+    <string name="call_stats_title_count">Αριθμός κλήσεων</string>
+    <string name="call_stats_title_average_duration">Μέση διάρκεια κλήσεων</string>
+    <string name="recent_calls_no_items_in_range">Το αρχείο καταγραφής κλήσεων δεν περιέχει καμία κλήση στο επιλεγμένο χρονικό εύρος.</string>
+</resources>

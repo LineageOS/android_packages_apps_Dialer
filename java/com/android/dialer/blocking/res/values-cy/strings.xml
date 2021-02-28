@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="migrate_blocked_numbers_dialog_title">Dull rhwystro newydd a mwy syml</string>
+  <string name="migrate_blocked_numbers_dialog_message">I dy warchod yn well, mae ar Ffôn angen newid sut mae rhwystro\'n gweithio. Bydd dy rifau sydd wedi\'u rhwystro nawr yn stopio galwadau a negeseuon testun a bydd hefyd yn bosib eu rhannu gydag apiau eraill.</string>
+  <string name="migrate_blocked_numbers_dialog_allow_button">Caniatáu</string>
+  <string name="old_block_number_confirmation_title">    Rhwystro <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
+  </string>
+  <string name="block_number_confirmation_message_vvm">Caiff galwadau o\'r rhif hwn eu rhwystro a bydd negeseuon llais yn cael eu dileu yn awtomatig.
+  </string>
+  <string name="block_number_confirmation_message_no_vvm">Caiff galwadau o\'r rhif hwn eu rhwystro, ond mi fydd dal yn bosib i\'r galwr adael negeseuon llais.
+  </string>
+  <string name="block_number_confirmation_message_new_filtering">Ni fyddi bellach yn derbyn galwadau na negeseuon testun o\'r rhif hwn.  </string>
+  <string name="block_number_ok">RHWYSTRO</string>
+  <string name="unblock_number_confirmation_title">    Dadrwystro <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>?
+  </string>
+  <string name="unblock_number_ok">DADRWYSTRO</string>
+  <string name="invalidNumber">    Mae <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> yn annilys.
+  </string>
+  <string name="snackbar_number_blocked">    Rhwystrwyd <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> 
+  </string>
+  <string name="snackbar_number_unblocked">    Dadrwystrwyd <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
+  </string>
+  <string name="send_to_voicemail_import_failed">Methwyd â mewnforio</string>
+  <string name="call_blocking_disabled_notification_title">Mae rhwystro galwadau wedi ei analluogi am 48 awr  </string>
+  <string name="call_blocking_disabled_notification_text">Wedi\'i analluogi gan fod galwad brys wedi ei gwneud.  </string>
+</resources>

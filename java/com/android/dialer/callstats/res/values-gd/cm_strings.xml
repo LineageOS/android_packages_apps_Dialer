@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Mion-fhiosrachadh air stadastaireachd an neach-aithne</string>
+    <string name="call_stats_incoming">A-steach: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">A-mach: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Air an call: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Air am bacadh: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total_callsonly">Iomlan: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ceann-là tòiseachaidh</string>
+    <string name="call_stats_filter_to">Ceann-là crìochnachaidh</string>
+    <string name="call_stats_filter_picker_title">Rainse na criathraige</string>
+    <string name="date_quick_selection">Grad-thaghadh</string>
+    <string name="date_qs_currentmonth">Am mìos</string>
+    <string name="date_qs_currentquarter">An cairteal seo</string>
+    <string name="date_qs_currentyear">Am bliadhna</string>
+    <string name="date_qs_lastweek">An t-seachdain seo chaidh</string>
+    <string name="date_qs_lastmonth">Am mìos seo chaidh</string>
+    <string name="date_qs_lastquarter">An cairteal seo chaidh</string>
+    <string name="date_qs_lastyear">An-uiridh</string>
+    <string name="call_stats_date_filter">Cuir air gleus rainse na h-ama</string>
+    <string name="call_stats_reset_filter">Ath-shuidhich rainse na h-ama</string>
+    <string name="call_stats_sort_by_duration">Seòrsaich a-rèir faide na gairme</string>
+    <string name="call_stats_sort_by_count">Seòrsaich a-rèir cunntas nan gairmea</string>
+    <string name="call_stats_title_for_number">An àireamh seo</string>
+    <string name="call_stats_title_of_total">Dhen iomlan</string>
+    <string name="call_stats_title_durations">Faidean nan gairmean</string>
+    <string name="call_stats_title_count">Cunntas nan gairmean</string>
+    <string name="call_stats_title_average_duration">Faide cuibheasach nan gairmean</string>
+    <string name="recent_calls_no_items_in_range">Chan eil gairm sam bith ann an loga nan gairmean agad am broinn rainse na h-ama a thagh thu.</string>
+</resources>

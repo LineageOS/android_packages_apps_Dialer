@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">주변 장소</string>
+    <string name="people">사람들</string>
+    <string name="lookup_settings_label">전화번호 검색</string>
+    <string name="enable_forward_lookup_title">순서대로 검색</string>
+    <string name="enable_forward_lookup_summary">다이얼러에서 검색 시 근처 장소 표시</string>
+    <string name="enable_people_lookup_title">사람 검색</string>
+    <string name="enable_people_lookup_summary">다이얼러에서 검색 시 온라인 사람 찾기 결과 표시</string>
+    <string name="enable_reverse_lookup_title">역방향 검색</string>
+    <string name="enable_reverse_lookup_summary">모르는 번호에서 전화가 오면 연락처나 장소에 대한 정보를 검색</string>
+    <string name="forward_lookup_provider_title">정방향 검색 제공자</string>
+    <string name="people_lookup_provider_title">사람 검색 제공자</string>
+    <string name="reverse_lookup_provider_title">역방향 검색 제공자</string>
+    <string name="lookup_disclaimer">검색 기능은 정보 수집을 목적으로 https 보안 프로토콜을 사용하여 원격 웹 사이트에 쿼리를 보낼 수 있습니다. 이 쿼리에는 검색어 또는 상대방의 전화번호가 포함될 수 있습니다.</string>
+</resources>

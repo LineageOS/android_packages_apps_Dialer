@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2017 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="type_incoming">Galwad i mewn</string>
+  <string name="type_incoming_pulled">Trosglwyddwyd galwad i mewn at ddyfais arall</string>
+  <string name="type_outgoing">Galwad allan</string>
+  <string name="type_outgoing_pulled">Trosglwyddwyd galwad allan at ddyfais arall</string>
+  <string name="type_missed">Galwad wedi\'i methu</string>
+  <string name="type_incoming_video">Galwad fideo i mewn</string>
+  <string name="type_incoming_video_pulled">Trosglwyddwyd galwad fideo i mewn at ddyfais arall</string>
+  <string name="type_outgoing_video">Galwad fideo allan</string>
+  <string name="type_outgoing_video_pulled">Trosglwyddwyd galwad fideo allan at ddyfais arall</string>
+  <string name="type_missed_video">Galwad fideo wedi\'i methu</string>
+  <string name="type_voicemail">Lleisbost</string>
+  <string name="type_rejected">Galwad wedi\'i gwrthod</string>
+  <string name="type_blocked">Galwad wedi\'i rhwystro</string>
+  <string name="call_details_minutes_abbreviation">m</string>
+  <string name="call_details_seconds_abbreviation">e</string>
+  <string name="a11y_call_duration_format">    <xliff:g id="minutes">%1$d</xliff:g> <xliff:g id="minutes_translation">%2$s</xliff:g> <xliff:g id="seconds">%3$d</xliff:g> <xliff:g id="seconds_translation">%4$s</xliff:g>
+  </string>
+  <string name="a11y_call_duration_short_format">    <xliff:g id="seconds">%1$d</xliff:g> <xliff:g id="seconds_translation">%2$s</xliff:g>
+  </string>
+  <string name="call_duration_format_pattern">    <xliff:g id="minutes_special_character">%1$s</xliff:g>\'<xliff:g id="minutes_translation">%2$s</xliff:g>\' <xliff:g id="seconds_special_character">%3$s</xliff:g>\'<xliff:g id="seconds_translation">%4$s</xliff:g>\'
+  </string>
+  <string name="call_duration_short_format_pattern">    <xliff:g id="seconds_special_character">%1$s</xliff:g>\'<xliff:g id="seconds_translation">%2$s</xliff:g>\'
+  </string>
+  <plurals name="a11y_seconds">
+    <item quantity="zero">eiliadau</item>
+    <item quantity="one">eiliad</item>
+    <item quantity="two">eiliad</item>
+    <item quantity="few">eiliad</item>
+    <item quantity="many">eiliad</item>
+    <item quantity="other">eiliad</item>
+  </plurals>
+  <plurals name="a11y_minutes">
+    <item quantity="zero">munudau</item>
+    <item quantity="one">munud</item>
+    <item quantity="two">funud</item>
+    <item quantity="few">munud</item>
+    <item quantity="many">munud</item>
+    <item quantity="other">munud</item>
+  </plurals>
+  <string name="type_answered_elsewhere">Atebwyd yr alwad ar ddyfais arall</string>
+  <string name="description_phone_account">ar <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g></string>
+  <string name="description_via_number">trwy <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
+  <string name="description_via_number_phone_account">ar <xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g>, trwy <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
+  <string name="voicemail_string">Lleisbost</string>
+  <string name="just_now">Jyst nawr</string>
+  <string name="new_call_log_carrier_video">Fideo darparwr gwasanaeth</string>
+  <string name="new_call_log_duo_video">Fideo Duo</string>
+  <string name="new_call_log_unknown">Anhysybys</string>
+  <string name="new_call_log_secondary_blocked">Wedi\'u rhwystro</string>
+  <string name="new_call_log_secondary_spam">Sbam</string>
+  <plurals name="a11y_new_call_log_entry_missed_call">
+    <item quantity="zero"><xliff:g example="2" id="count">^1</xliff:g> galwadau. Y diwethaf oedd galwad wedi\'i methu oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="one"><xliff:g example="2" id="count">^1</xliff:g> alwad wedi\'i methu oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="two"><xliff:g example="2" id="count">^1</xliff:g> alwad. Y diwethaf oedd galwad wedi\'i methu oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="few"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i methu oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="many"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i methu oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i methu oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_answered_call">
+    <item quantity="zero"><xliff:g example="2" id="count">^1</xliff:g> galwadau. Y diwethaf oedd galwad wedi\'i ateb oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> alwad wedi\'i ateb oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="two"><xliff:g example="2" id="count">^1</xliff:g> alwad. Y diwethaf oedd galwad wedi\'i ateb oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="few"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i ateb oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="many"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i ateb oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i ateb oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_outgoing_call">
+    <item quantity="zero"><xliff:g example="2" id="count">^1</xliff:g> gawladau. Y diwethaf oedd galwad allan i <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> alwad allan i <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="two"><xliff:g example="2" id="count">^1</xliff:g> alwad. Y diwethaf oedd galwad allan i <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="few"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad allan i <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="many"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad allan i <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad allan i <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <plurals name="a11y_new_call_log_entry_blocked_call">
+    <item quantity="zero"><xliff:g example="2" id="count">^1</xliff:g> galwadau. Y diwethaf oedd galwad wedi\'i rhwystro oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="one"><xliff:g example="1" id="count">^1</xliff:g> alwad wedi\'i rhwystro oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="two"><xliff:g example="2" id="count">^1</xliff:g> alwad. Y diwethaf oedd galwad wedi\'i rhwystro oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="few"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i rhwystro oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="many"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i rhwystro oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+    <item quantity="other"><xliff:g example="2" id="count">^1</xliff:g> galwad. Y diwethaf oedd galwad wedi\'i rhwystro oddi wrth <xliff:g example="Jane Smith" id="primaryInfoForEntry">^2</xliff:g></item>
+  </plurals>
+  <string name="a11y_new_call_log_entry_phone_account">    ar <xliff:g example="SIM 1" id="phoneAccount">^1</xliff:g>,
+    trwy <xliff:g example="(555) 555-5555" id="number">^2</xliff:g>
+  </string>
+  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">    <xliff:g example="A missed call from Jane Smith" id="primaryDescriptionForEntry">^1</xliff:g>, <xliff:g example="mobile, 30 minutes ago" id="secondaryDescriptionForEntry">^2</xliff:g>.
+  </string>
+  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">    <xliff:g example="A missed call from Jane Smith" id="primaryDescriptionForEntry">^1</xliff:g>, <xliff:g example="mobile, 30 minutes ago" id="secondaryDescriptionForEntry">^2</xliff:g>, <xliff:g example="on SIM 1, via (555) 555-5555">^3</xliff:g>.
+  </string>
+</resources>

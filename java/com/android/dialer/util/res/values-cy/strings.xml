@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="default_notification_description">Sain rhagosodedig (<xliff:g id="default_sound_title">%1$s</xliff:g>)</string>
+  <string name="ringtone_silent">Dim</string>
+  <string name="ringtone_unknown">Tôn caniad anhysbys</string>
+  <string name="activity_not_available">Dim ap ar gyfer hynny ar y ddyfais hon</string>
+  <string name="outgoing_wps_warning">Bydd gwneud galwad WPS yn datgysylltu dy alwad presennol.</string>
+  <string name="dialog_continue">Parhau</string>
+  <string name="camera_privacy_text">Galluogwyd caniatâd camera</string>
+</resources>
