@@ -22,6 +22,7 @@
     <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Blokované: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Celkovo:  <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Celkovo: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Dátum začiatku</string>
     <string name="call_stats_filter_to">Dátum konca</string>
