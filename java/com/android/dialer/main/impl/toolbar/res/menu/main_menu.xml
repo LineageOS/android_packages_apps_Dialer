@@ -29,6 +29,10 @@
       android:visible="false"/>
 
   <item
+    android:id="@+id/menu_helplines"
+    android:title="@string/action_menu_helplines"/>
+
+  <item
       android:id="@+id/settings"
       android:title="@string/settings"
       app:showAsAction="collapseActionView"/>
