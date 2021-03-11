@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d7a61fc_04b6a727",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2021-03-11T20:15:54Z",
+      "side": 1,
+      "message": "I think this field might be null for private/weird calls so we better check against it",
+      "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90918056_13611bbd",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2021-03-11T20:15:54Z",
+      "side": 1,
+      "message": "boolean isSensitiveNumber \u003d number !\u003d null \u0026\u0026 SensitivePhoneNumbers.getInstance().isSensitiveNumber(context, number, INVALID_SUBSCRIPTION_ID);\n\nIf makes sense to you",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 45
+      },
+      "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5fae028_9b8f7855",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2021-03-11T20:15:54Z",
+      "side": 1,
+      "message": "if null is this safe?",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 228,
+        "endChar": 18
+      },
+      "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
