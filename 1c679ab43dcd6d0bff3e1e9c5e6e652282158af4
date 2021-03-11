@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c8a0fbe_272d8e91",
+        "filename": "java/com/android/dialer/helplines/HelplineActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2021-03-11T21:24:00Z",
+      "side": 1,
+      "message": "use getResources() directly instead of a local var?",
+      "revId": "1c679ab43dcd6d0bff3e1e9c5e6e652282158af4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d13c7d9_354dcf4b",
+        "filename": "java/com/android/dialer/helplines/HelplineActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2021-03-11T21:24:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1c679ab43dcd6d0bff3e1e9c5e6e652282158af4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
