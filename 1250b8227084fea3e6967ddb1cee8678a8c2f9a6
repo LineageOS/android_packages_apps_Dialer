@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b43c2c6f_de126df7",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2021-03-12T12:28:42Z",
+      "side": 1,
+      "message": "I even have a default value of \"null\" defined in case this field doesn\u0027t contain stuff (second parameter), so I am aware :)",
+      "parentUuid": "7d7a61fc_04b6a727",
+      "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90918056_13611bbd",
         "filename": "java/com/android/dialer/postcall/PostCall.java",
         "patchSetId": 1
@@ -62,6 +80,54 @@
       "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb480940_50024ce5",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2021-03-12T12:28:42Z",
+      "side": 1,
+      "message": "isSensitiveNumber is checking the input already and returns \"false\" for null or any other number or input that isn\u0027t actually a real sensitive number",
+      "parentUuid": "90918056_13611bbd",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 45
+      },
+      "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28afeeaa_a26a0f7b",
+        "filename": "java/com/android/dialer/postcall/PostCall.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2021-03-12T12:28:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5fae028_9b8f7855",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 228,
+        "endChar": 18
+      },
+      "revId": "1250b8227084fea3e6967ddb1cee8678a8c2f9a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
