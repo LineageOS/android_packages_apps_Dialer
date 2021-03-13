@@ -19,7 +19,7 @@ import android.content.res.Resources;
 import android.text.TextUtils;
 
 import com.android.dialer.R;
-import com.android.dialer.helplines.HelplineItem;
+
 import org.lineageos.lib.phone.spn.Item;
 
 import java.util.ArrayList;
@@ -50,9 +50,9 @@ public class HelplineUtils {
     }
 
     /* Split the given categories and translate them, fall back to "generic" if not given */
-    public static String getCategories(Resources res, HelplineItem item) {
+    public static String getCategories(Resources res, Item item) {
         if (item != null) {
-            String str = getDisplayString(res, item.getItem().getCategories(), CATEGORY_STR_FORMAT);
+            String str = getDisplayString(res, item.getCategories(), CATEGORY_STR_FORMAT);
             if (!TextUtils.isEmpty(str)) {
                 return str;
             }
@@ -62,9 +62,9 @@ public class HelplineUtils {
     }
 
     /* Split and translate the given languages, return empty string if not given */
-    public static String getLanguages(Resources res, HelplineItem item) {
+    public static String getLanguages(Resources res, Item item) {
         if (item != null) {
-            return getDisplayString(res, item.getItem().getLanguages(), LANGUAGE_STR_FORMAT);
+            return getDisplayString(res, item.getLanguages(), LANGUAGE_STR_FORMAT);
         }
 
         return "";

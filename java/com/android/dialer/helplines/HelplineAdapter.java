@@ -29,13 +29,15 @@ import android.widget.TextView;
 import com.android.dialer.R;
 import com.android.dialer.helplines.utils.HelplineUtils;
 
+import org.lineageos.lib.phone.spn.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
 
     private Resources mResources;
-    private List<HelplineItem> mList = new ArrayList<>();
+    private List<Item> mList = new ArrayList<>();
     private Listener mListener;
 
     HelplineAdapter(Resources resources, Listener listener) {
@@ -43,7 +45,7 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
         mListener = listener;
     }
 
-    public void update(List<HelplineItem> list) {
+    public void update(List<Item> list) {
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(new Callback(mList, list));
         mList = list;
         result.dispatchUpdatesTo(this);
@@ -69,15 +71,15 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
     public interface Listener {
         void initiateCall(@NonNull String number);
 
-        void onInformationClicked(@NonNull HelplineItem item);
+        void onInformationClicked(@NonNull Item item);
     }
 
     private static class Callback extends DiffUtil.Callback {
-        List<HelplineItem> mOldList;
-        List<HelplineItem> mNewList;
+        List<Item> mOldList;
+        List<Item> mNewList;
 
-        public Callback(List<HelplineItem> oldList,
-                        List<HelplineItem> newList) {
+        public Callback(List<Item> oldList,
+                        List<Item> newList) {
             mOldList = oldList;
             mNewList = newList;
         }
@@ -94,8 +96,8 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
 
         @Override
         public boolean areItemsTheSame(int iOld, int iNew) {
-            String oldNumber = mOldList.get(iOld).getItem().getNumber();
-            String newNumber = mOldList.get(iNew).getItem().getNumber();
+            String oldNumber = mOldList.get(iOld).getNumber();
+            String newNumber = mOldList.get(iNew).getNumber();
             return oldNumber.equals(newNumber);
         }
 
@@ -122,7 +124,7 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
             mCallIcon = itemView.findViewById(R.id.item_helpline_call_icon);
         }
 
-        void bind(HelplineItem item) {
+        void bind(Item item) {
             mItemView.setOnClickListener(v -> {
                 mListener.onInformationClicked(item);
             });
@@ -146,7 +148,7 @@ class HelplineAdapter extends RecyclerView.Adapter<HelplineAdapter.ViewHolder> {
                 mLanguageView.setText(languages);
             }
 
-            String number = item.getItem().getNumber();
+            String number = item.getNumber();
             if (!TextUtils.isEmpty(number)) {
                 mCallIcon.setVisibility(View.VISIBLE);
                 mCallIcon.setOnClickListener(v -> {

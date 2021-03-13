@@ -43,6 +43,8 @@ import com.android.dialer.R;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.helplines.utils.HelplineUtils;
 
+import org.lineageos.lib.phone.spn.Item;
+
 import java.util.List;
 
 import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
@@ -156,7 +158,7 @@ public class HelplineActivity extends Activity {
         }
 
         @Override
-        public void onLoadCompleted(List<HelplineItem> result) {
+        public void onLoadCompleted(List<Item> result) {
             mLoadingView.setVisibility(View.GONE);
             if (result.size() == 0) {
                 mEmptyView.setVisibility(View.VISIBLE);
@@ -178,16 +180,16 @@ public class HelplineActivity extends Activity {
         }
 
         @Override
-        public void onInformationClicked(@NonNull HelplineItem item) {
+        public void onInformationClicked(@NonNull Item item) {
             LayoutInflater inflater = LayoutInflater.from(HelplineActivity.this);
             final View dialogView = inflater.inflate(R.layout.dialog_helpline_details, null);
 
             fillOrHideDialogRow(item.getName(), dialogView, R.id.name_title, R.id.name);
-            fillOrHideDialogRow(item.getItem().getOrganization(), dialogView, R.id.org_title, R.id.org);
+            fillOrHideDialogRow(item.getOrganization(), dialogView, R.id.org_title, R.id.org);
             fillOrHideDialogRow(HelplineUtils.getCategories(getResources(), item),
                     dialogView, R.id.categories_title, R.id.categories);
-            fillOrHideDialogRow(item.getItem().getNumber(), dialogView, R.id.number_title, R.id.number);
-            fillOrHideDialogRow(item.getItem().getWebsite(), dialogView, R.id.website_title, R.id.website,
+            fillOrHideDialogRow(item.getNumber(), dialogView, R.id.number_title, R.id.number);
+            fillOrHideDialogRow(item.getWebsite(), dialogView, R.id.website_title, R.id.website,
                     true);
 
             new AlertDialog.Builder(HelplineActivity.this)
