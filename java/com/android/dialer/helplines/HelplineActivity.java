@@ -183,11 +183,11 @@ public class HelplineActivity extends Activity {
             final View dialogView = inflater.inflate(R.layout.dialog_helpline_details, null);
 
             fillOrHideDialogRow(item.getName(), dialogView, R.id.name_title, R.id.name);
-            fillOrHideDialogRow(item.get("organization"), dialogView, R.id.org_title, R.id.org);
+            fillOrHideDialogRow(item.getItem().getOrganization(), dialogView, R.id.org_title, R.id.org);
             fillOrHideDialogRow(HelplineUtils.getCategories(getResources(), item),
                     dialogView, R.id.categories_title, R.id.categories);
-            fillOrHideDialogRow(item.get("number"), dialogView, R.id.number_title, R.id.number);
-            fillOrHideDialogRow(item.get("website"), dialogView, R.id.website_title, R.id.website,
+            fillOrHideDialogRow(item.getItem().getNumber(), dialogView, R.id.number_title, R.id.number);
+            fillOrHideDialogRow(item.getItem().getWebsite(), dialogView, R.id.website_title, R.id.website,
                     true);
 
             new AlertDialog.Builder(HelplineActivity.this)
