@@ -19,22 +19,25 @@ import android.content.res.Resources;
 
 import com.android.dialer.helplines.utils.HelplineUtils;
 
-import org.lineageos.lib.phone.SensitivePhoneNumberInfo;
+import org.lineageos.lib.phone.spn.Item;
 
+/* In order to be able to store a modified name, we use this little helper class instead of
+ * accessing Item directly
+ */
 public class HelplineItem {
-    private final SensitivePhoneNumberInfo mInfo;
+    private final Item mItem;
     private final String mName;
 
-    public HelplineItem(Resources res, SensitivePhoneNumberInfo info, String countryIso) {
-        mInfo = info;
-        mName = HelplineUtils.getName(res, info, countryIso);
+    public HelplineItem(Resources res, Item item, String countryIso) {
+        mItem = item;
+        mName = HelplineUtils.getName(res, item, countryIso);
+    }
+
+    public Item getItem() {
+        return mItem;
     }
 
     public String getName() {
         return mName;
-    }
-
-    public String get(String key) {
-        return mInfo.get(key);
     }
 }
