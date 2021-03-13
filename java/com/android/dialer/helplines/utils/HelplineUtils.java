@@ -20,7 +20,7 @@ import android.text.TextUtils;
 
 import com.android.dialer.R;
 import com.android.dialer.helplines.HelplineItem;
-import org.lineageos.lib.phone.SensitivePhoneNumberInfo;
+import org.lineageos.lib.phone.spn.Item;
 
 import java.util.ArrayList;
 
@@ -32,12 +32,12 @@ public class HelplineUtils {
     private static final String LANGUAGE_STR_FORMAT = "helpline_language_%s";
 
     /* Get the name of the helpline, fall back to the number if not given */
-    public static String getName(Resources res, SensitivePhoneNumberInfo info, String countryIso) {
-        if (info != null) {
-            String name = info.get("name");
+    public static String getName(Resources res, Item item, String countryIso) {
+        if (item != null) {
+            String name = item.getName();
             String displayName = !TextUtils.isEmpty(name)
                     ? getDisplayString(res, name, NAME_STR_FORMAT)
-                    : info.get("number");
+                    : item.getNumber();
             if (!TextUtils.isEmpty(countryIso)) {
                 return res.getString(R.string.helpline_name_format_country, displayName,
                         countryIso);
@@ -52,7 +52,7 @@ public class HelplineUtils {
     /* Split the given categories and translate them, fall back to "generic" if not given */
     public static String getCategories(Resources res, HelplineItem item) {
         if (item != null) {
-            String str = getDisplayString(res, item.get("categories"), CATEGORY_STR_FORMAT);
+            String str = getDisplayString(res, item.getItem().getCategories(), CATEGORY_STR_FORMAT);
             if (!TextUtils.isEmpty(str)) {
                 return str;
             }
@@ -64,7 +64,7 @@ public class HelplineUtils {
     /* Split and translate the given languages, return empty string if not given */
     public static String getLanguages(Resources res, HelplineItem item) {
         if (item != null) {
-            return getDisplayString(res, item.get("languages"), LANGUAGE_STR_FORMAT);
+            return getDisplayString(res, item.getItem().getLanguages(), LANGUAGE_STR_FORMAT);
         }
 
         return "";
