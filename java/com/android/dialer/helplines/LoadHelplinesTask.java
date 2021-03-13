@@ -23,14 +23,16 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
-import org.lineageos.lib.phone.SensitivePhoneNumberInfo;
+import com.android.dialer.helplines.utils.HelplineUtils;
+
 import org.lineageos.lib.phone.SensitivePhoneNumbers;
+import org.lineageos.lib.phone.spn.Item;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineItem>> {
+public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<Item>> {
 
     @NonNull
     private final Resources mResources;
@@ -47,8 +49,8 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
     }
 
     @Override
-    protected List<HelplineItem> doInBackground(Void... voids) {
-        List<HelplineItem> helplineList = new ArrayList<>();
+    protected List<Item> doInBackground(Void... voids) {
+        List<Item> itemList = new ArrayList<>();
         /* when the network's and the user's country iso differ from each other,
          * include the iso code in the name so one can be sure that the number is the correct one
          * (think of accidential roaming close to the country border) */
@@ -72,20 +74,21 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
                 alreadyProcessedMccs.add(mcc);
 
                 SensitivePhoneNumbers spn = SensitivePhoneNumbers.getInstance();
-                ArrayList<SensitivePhoneNumberInfo> pns = spn.getSensitivePnInfosForMcc(mcc);
+                ArrayList<Item> pns = spn.getSensitivePnInfosForMcc(mcc);
                 int numPns = pns.size();
                 for (int i = 0; i < numPns; i++) {
-                    SensitivePhoneNumberInfo info = pns.get(i);
-                    helplineList.add(new HelplineItem(mResources, info,
-                            addCountryCode ? subCountryIso : ""));
+                    Item item = new Item(pns.get(i));
+                    item.setName(HelplineUtils.getName(
+                           mResources, item, addCountryCode ? subCountryIso : ""));
+                    itemList.add(item);
                     publishProgress(Math.round(i * 100 / numPns / subList.size()));
                 }
             }
         }
 
-        Collections.sort(helplineList, (a, b) -> a.getName().compareTo(b.getName()));
+        Collections.sort(itemList, (a, b) -> a.getName().compareTo(b.getName()));
 
-        return helplineList;
+        return itemList;
     }
 
     private List<SubscriptionInfo> getSubscriptionInfos() {
@@ -109,13 +112,13 @@ public class LoadHelplinesTask extends AsyncTask<Void, Integer, List<HelplineIte
     }
 
     @Override
-    protected void onPostExecute(List<HelplineItem> list) {
+    protected void onPostExecute(List<Item> list) {
         mCallback.onLoadCompleted(list);
     }
 
     interface Callback {
         void onLoadListProgress(int progress);
 
-        void onLoadCompleted(List<HelplineItem> result);
+        void onLoadCompleted(List<Item> result);
     }
 }
