@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0d4d8d6_c81797c9",
+        "filename": "java/com/android/dialer/helplines/HelplineActivity.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2021-03-14T14:45:25Z",
+      "side": 1,
+      "message": "the dialog must be dismissed before \"finish()\"",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 98
+      },
+      "revId": "e5d83509f51933deef1a102aff1e86d537ce895e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
