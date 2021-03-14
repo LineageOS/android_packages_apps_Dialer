@@ -15,6 +15,10 @@
  */
 package com.android.dialer.helplines.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.text.TextUtils;
 
@@ -30,6 +34,8 @@ public class HelplineUtils {
     private static final String NAME_STR_FORMAT = "helpline_name_%s";
     private static final String CATEGORY_STR_FORMAT = "helpline_category_%s";
     private static final String LANGUAGE_STR_FORMAT = "helpline_language_%s";
+
+    private static final String PKG_NAME_JELLY = "org.lineageos.jelly";
 
     /* Get the name of the helpline, fall back to the number if not given */
     public static String getName(Resources res, Item item, String countryIso) {
@@ -87,5 +93,22 @@ public class HelplineUtils {
             return content;
         }
         return "";
+    }
+
+    /* Check if the browser is known and make it launch in incognito mode
+     * Returns true if it succeeded
+     */
+    public static boolean makeIncognito(Context context, Intent intent) {
+        final PackageManager pm = context.getPackageManager();
+        ResolveInfo info = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (info != null) {
+            String pkgName = info.activityInfo.applicationInfo.packageName;
+            if (PKG_NAME_JELLY.equals(pkgName)) {
+                intent.putExtra("extra_incognito", true);
+                return true;
+            }
+        }
+
+        return false;
     }
 }
