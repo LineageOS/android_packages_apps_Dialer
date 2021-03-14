@@ -225,22 +225,31 @@ public class HelplineActivity extends Activity {
             contentView.setText(content);
             if (isUrl) {
                 contentView.setPaintFlags(contentView.getPaintFlags() | UNDERLINE_TEXT_FLAG);
+
                 // We want to warn the user that visiting a link might leave traces
                 contentView.setOnClickListener(v -> {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(content));
+                        boolean isIncognito = HelplineUtils.makeIncognito(HelplineActivity.this,
+                            intent);
+                        if (isIncognito) {
+                            mDialog.dismiss();
+                            finish(); // Finish activity to get rid of own traces
+                            startActivity(intent);
+                        } else {
                             new AlertDialog.Builder(HelplineActivity.this)
                                     .setTitle(R.string.helpline_browser_history_title)
                                     .setMessage(R.string.helpline_browser_history_message)
                                     .setPositiveButton(android.R.string.ok, (dlg, which) -> {
-                                        Intent i = new Intent(Intent.ACTION_VIEW);
-                                        i.setData(Uri.parse(content));
                                         mDialog.dismiss();
                                         dlg.dismiss();
-                                        startActivity(i);
-                                        finish(); // Finish this activity to get rid of own traces
+                                        finish(); // Finish activity to get rid of own traces
+                                        startActivity(intent);
                                     })
                                     .setNegativeButton(android.R.string.cancel, null)
                                     .show();
                         }
+                    }
                 );
             }
         }
