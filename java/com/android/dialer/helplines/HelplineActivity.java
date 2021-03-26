@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,6 +34,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,7 +47,9 @@ import com.android.dialer.helplines.utils.HelplineUtils;
 
 import org.lineageos.lib.phone.spn.Item;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
 
@@ -226,29 +230,41 @@ public class HelplineActivity extends Activity {
             if (isUrl) {
                 contentView.setPaintFlags(contentView.getPaintFlags() | UNDERLINE_TEXT_FLAG);
 
-                // We want to warn the user that visiting a link might leave traces
                 contentView.setOnClickListener(v -> {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(content));
-                        boolean isIncognito = HelplineUtils.makeIncognito(HelplineActivity.this,
-                            intent);
-                        if (isIncognito) {
-                            mDialog.dismiss();
-                            finish(); // Finish activity to get rid of own traces
-                            startActivity(intent);
-                        } else {
-                            new AlertDialog.Builder(HelplineActivity.this)
-                                    .setTitle(R.string.helpline_browser_history_title)
-                                    .setMessage(R.string.helpline_browser_history_message)
-                                    .setPositiveButton(android.R.string.ok, (dlg, which) -> {
-                                        mDialog.dismiss();
-                                        dlg.dismiss();
-                                        finish(); // Finish activity to get rid of own traces
-                                        startActivity(intent);
-                                    })
-                                    .setNegativeButton(android.R.string.cancel, null)
-                                    .show();
-                        }
+                        // Disable cookies
+                        CookieManager.getInstance().setAcceptCookie(false);
+                        // Setup webview
+                        WebView webView = new WebView(HelplineActivity.this);
+                        webView.setWebViewClient(new WebViewClient() {
+                              @Override
+                              public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                  view.loadUrl(url);
+                                  return false;
+                              }
+                        });
+                        // Don't save passwords and form data
+                        webView.getSettings().setSavePassword(false);
+                        webView.getSettings().setSaveFormData(false);
+                        // Override headers to disable cache
+                        Map<String, String> headers = new HashMap<String, String>(2);
+                        headers.put("Pragma", "no-cache");
+                        headers.put("Cache-Control", "no-cache");
+                        // Start loading the URL
+                        webView.loadUrl(content, headers);
+                        new AlertDialog.Builder(HelplineActivity.this)
+                                .setTitle(R.string.helpline_browser_history_title)
+                                .setMessage(R.string.helpline_browser_history_message)
+                                .setView(webView)
+                                .setPositiveButton(android.R.string.ok, (dlg, which) -> {
+                                    // Clear any webview history
+                                    webView.clearHistory();
+                                    // Dismiss all dialogs
+                                    mDialog.dismiss();
+                                    dlg.dismiss();
+                                    // Finish activity to get rid of own traces
+                                    finish();
+                                })
+                                .show();
                     }
                 );
             }
