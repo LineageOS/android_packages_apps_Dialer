@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,6 +34,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,7 +48,9 @@ import com.android.dialer.helplines.utils.HelplineUtils;
 
 import org.lineageos.lib.phone.spn.Item;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
 
@@ -226,31 +231,49 @@ public class HelplineActivity extends Activity {
             if (isUrl) {
                 contentView.setPaintFlags(contentView.getPaintFlags() | UNDERLINE_TEXT_FLAG);
 
-                // We want to warn the user that visiting a link might leave traces
+                LayoutInflater inflater = HelplineActivity.this.getLayoutInflater();
                 contentView.setOnClickListener(v -> {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(content));
-                        boolean isIncognito = HelplineUtils.makeIncognito(HelplineActivity.this,
-                            intent);
-                        if (isIncognito) {
-                            mDialog.dismiss();
-                            finish(); // Finish activity to get rid of own traces
-                            startActivity(intent);
-                        } else {
-                            new AlertDialog.Builder(HelplineActivity.this)
-                                    .setTitle(R.string.helpline_browser_history_title)
-                                    .setMessage(R.string.helpline_browser_history_message)
-                                    .setPositiveButton(android.R.string.ok, (dlg, which) -> {
-                                        mDialog.dismiss();
-                                        dlg.dismiss();
-                                        finish(); // Finish activity to get rid of own traces
-                                        startActivity(intent);
-                                    })
-                                    .setNegativeButton(android.R.string.cancel, null)
-                                    .show();
+                    AlertDialog.Builder dialogBuilder =
+                            new AlertDialog.Builder(HelplineActivity.this);
+                    View webviewDlgView = inflater.inflate(R.layout.dialog_webview, null);
+                    dialogBuilder.setView(webviewDlgView);
+                    LinearLayout loadingLayout = webviewDlgView.findViewById(R.id.webview_loading);
+
+                    // Disable cookies
+                    CookieManager.getInstance().setAcceptCookie(false);
+                    // Setup WebView
+                    WebView webView = webviewDlgView.findViewById(R.id.webview);
+                    webView.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public boolean shouldOverrideUrlLoading(WebView view,
+                                WebResourceRequest request) {
+                          return false;
                         }
-                    }
-                );
+
+                        @Override
+                        public void onPageFinished(WebView view, String url) {
+                            super.onPageFinished(view, url);
+                            loadingLayout.setVisibility(ProgressBar.INVISIBLE);
+                            webView.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    // Override headers to disable cache and add "Do not track"
+                    Map<String, String> headers = new HashMap<>(3);
+                    headers.put("Pragma", "no-cache");
+                    headers.put("Cache-Control", "no-cache");
+                    headers.put("DNT", "1");
+                    // Start loading the URL
+                    webView.loadUrl(content, headers);
+                    // Clear any WebView history
+                    dialogBuilder.setPositiveButton(android.R.string.ok, (dlg, which) -> {
+                        webView.clearHistory();
+                        dlg.dismiss();
+                    });
+                    dialogBuilder.setOnDismissListener(dialog -> webView.clearHistory());
+                    dialogBuilder.show();
+                    // dismiss the dialog, we show a new one already
+                    mDialog.dismiss();
+                });
             }
         }
     };
