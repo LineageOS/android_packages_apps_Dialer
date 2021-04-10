@@ -208,18 +208,22 @@ public class CallButtonPresenter
     int newRoute;
     if (audioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
       newRoute = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
-      Logger.get(context)
-          .logCallImpression(
-              DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_WIRED_OR_EARPIECE,
-              call.getUniqueCallId(),
-              call.getTimeAddedMs());
+      if (call != null) {
+        Logger.get(context)
+                .logCallImpression(
+                        DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_WIRED_OR_EARPIECE,
+                        call.getUniqueCallId(),
+                        call.getTimeAddedMs());
+      }
     } else {
       newRoute = CallAudioState.ROUTE_SPEAKER;
-      Logger.get(context)
-          .logCallImpression(
-              DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_SPEAKERPHONE,
-              call.getUniqueCallId(),
-              call.getTimeAddedMs());
+      if (call != null) {
+        Logger.get(context)
+                .logCallImpression(
+                        DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_SPEAKERPHONE,
+                        call.getUniqueCallId(),
+                        call.getTimeAddedMs());
+      }
     }
 
     setAudioRoute(newRoute);
