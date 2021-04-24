@@ -178,6 +178,9 @@ LOCAL_USE_AAPT2 := true
 LOCAL_REQUIRED_MODULES := privapp_whitelist_com.android.dialer
 LOCAL_USES_LIBRARIES := org.apache.http.legacy
 
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
+LOCAL_LICENSE_CONDITIONS := notice
+LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
 include $(BUILD_PACKAGE)
 
 # Cleanup local state
