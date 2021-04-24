@@ -40,7 +40,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.enrichedcall.simulator \
 	com.android.dialer.feedback \
 	com.android.dialer.glidephotomanager.impl \
-  com.android.dialer.historyitemactions \
+	com.android.dialer.historyitemactions \
 	com.android.dialer.interactions \
 	com.android.dialer.lettertile \
 	com.android.dialer.location \
@@ -98,7 +98,7 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.incall.impl \
 	com.android.incallui.rtt.impl \
 	com.android.incallui.rtt.protocol \
-  com.android.incallui.speakeasy \
+	com.android.incallui.speakeasy \
 	com.android.incallui.sessiondata \
 	com.android.incallui.spam \
 	com.android.incallui.speakerbuttonlogic \
