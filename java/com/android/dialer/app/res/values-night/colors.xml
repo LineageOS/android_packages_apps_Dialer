@@ -15,17 +15,6 @@
 -->
 
 <resources>
-  <color name="voicemail_icon_disabled_tint">#80000000</color>
-  <color name="voicemail_playpause_icon_tint">?colorIcon</color>
-
-  <color name="call_record_playback_icon_color">#8a000000</color>
-
-  <!-- Text color for the "Remove" text when a contact is dragged on top of the remove view -->
-  <color name="remove_highlighted_text_color">#FF3F3B</color>
-
-  <!--  Colors for blocked numbers list -->
-  <color name="blocked_number_block_color">#F44336</color>
-
-  <color name="nav_item">#80666666</color>
-  <color name="nav_item_selected">#666666</color>
+  <color name="nav_item">#80FFFFFF</color>
+  <color name="nav_item_selected">#FFFFFF</color>
 </resources>
