@@ -22,6 +22,7 @@
     <string name="helpline_category_adults">Adults</string>
     <string name="helpline_category_aids">AIDS</string>
     <string name="helpline_category_birth">Birth</string>
+    <string name="helpline_category_bullying">Bullying</string>
     <string name="helpline_category_children">Children</string>
     <string name="helpline_category_crime">Crime</string>
     <string name="helpline_category_crime_victims">Crime Victims</string>
@@ -37,6 +38,7 @@
     <string name="helpline_category_hiv">HIV</string>
     <string name="helpline_category_human_rights">Human rights</string>
     <string name="helpline_category_human_trafficking">Human Trafficking</string>
+    <string name="helpline_category_immigration">Immigration</string>
     <string name="helpline_category_legal_aid">Legal Aid</string>
     <string name="helpline_category_lgbtq">LGBTQ+</string>
     <string name="helpline_category_men">Men</string>
