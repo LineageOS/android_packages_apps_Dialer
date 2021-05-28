@@ -17,7 +17,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="helplines_name">Helplines</string>
     <string name="helplines_loading">Loading\u2026</string>
-    <string name="helplines_empty">No helplines found.\nInsert a sim card and try again</string>
+    <string name="helplines_empty">No helplines found.\nInsert a SIM card and try again</string>
     <string name="helplines_help">Help</string>
     <string name="helplines_help_title">These are safe to call</string>
     <string name="helplines_help_message">None of these numbers appear in your call history.\nYou can click any item for more information</string>
@@ -26,7 +26,7 @@
 
     <string name="helpline_button_more">More</string>
 
-    <string name="unknown_helpline_name">Unknown Organisation</string>
+    <string name="unknown_helpline_name">Unknown organization</string>
 
     <string name="helpline_name">Name</string>
     <string name="helpline_org">Organization</string>
