@@ -27,6 +27,9 @@
     <item name="actionBarWidgetTheme">@null</item>
     <item name="actionBarTheme">@style/DialerActionBarBaseTheme</item>
     <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
+
+    <item name="android:colorPrimaryDark">@color/settings_primary_dark</item>
+    <item name="colorControlHighlight">@color/dialer_ripple_color</item>
   </style>
 
   <style name="Dialer.ThemeBase.NoActionBar">
