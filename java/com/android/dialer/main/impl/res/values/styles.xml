@@ -21,6 +21,7 @@
     <item name="colorPrimary">@color/dialer_theme_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="android:windowLightStatusBar">true</item>
   </style>
 
   <!-- Activities should use this theme as their style -->
@@ -35,6 +36,8 @@
     <item name="actionModeStyle">@style/MainActionModeStyle</item>
     <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     <item name="dialpad_style">@style/Dialpad.Themed</item>
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
   </style>
 
   <style name="MainActivityThemeBase.Dark" parent="Dialer.Dark.ThemeBase.NoActionBar">
