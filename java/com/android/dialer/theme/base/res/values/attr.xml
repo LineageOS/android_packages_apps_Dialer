@@ -15,6 +15,8 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Used to color the search bar background -->
+  <attr name="colorBackgroundSearchBar" format="color"/>
   <!-- Used to style all icons in Dialer. -->
   <attr name="colorIcon" format="color"/>
   <!-- Used to style some icons a little lighter in Dialer. -->
