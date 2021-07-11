@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2018 The Android Open Source Project
+  ~ Copyright (C) 2017 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,12 +15,13 @@
   ~ limitations under the License
   -->
 <resources>
-  <!-- Essential theme colors -->
-  <color name="dialer_theme_color">#2A56C6</color>
-  <color name="dialer_theme_color_20pct">#332A56C6</color>
-  <color name="dialer_theme_color_dark">@color/dialer_background_color</color>
-  <color name="dialer_secondary_color">#F50057</color>
-  <color name="dialer_background_color">#FAFAFA</color>
-  <color name="dialer_ripple_color">#1f000000</color>
-  <color name="settings_primary_dark">#1C3AA9</color>
+
+  <style name="LaunchTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <item name="android:colorPrimary">@color/dialer_theme_color</item>
+    <item name="colorPrimary">@color/dialer_theme_color</item>
+    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="android:windowLightStatusBar">false</item>
+  </style>
+
 </resources>
