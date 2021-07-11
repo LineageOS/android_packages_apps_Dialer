@@ -20,4 +20,5 @@
   <color name="dialer_theme_color_dark">#1C3AA9</color>
   <color name="dialer_secondary_color">#F50057</color>
   <color name="dialer_background_color">#FAFAFA</color>
+  <color name="dialer_ripple_color">#1f000000</color>
 </resources>
