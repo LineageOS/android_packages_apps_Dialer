@@ -17,7 +17,7 @@
   <!-- Essential theme colors -->
   <color name="dialer_theme_color">#5195EA</color>
   <color name="dialer_theme_color_20pct">#335195EA</color>
-  <color name="dialer_theme_color_dark">#2374CE</color>
   <color name="dialer_secondary_color">#5195EA</color>
   <color name="dialer_ripple_color">#33ffffff</color>
+  <color name="settings_primary_dark">#2374CE</color>
 </resources>
