@@ -27,6 +27,8 @@
     <item name="actionBarWidgetTheme">@null</item>
     <item name="actionBarTheme">@style/DialerActionBarBaseTheme</item>
     <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
+
+    <item name="colorControlHighlight">@color/dialer_ripple_color</item>
   </style>
 
   <style name="Dialer.ThemeBase.NoActionBar">
@@ -34,6 +36,7 @@
         base style once none of our activities depend on ActionBar anymore. -->
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
+    <item name="colorControlHighlight">@color/dialer_ripple_color</item>
   </style>
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
