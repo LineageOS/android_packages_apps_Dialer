@@ -27,6 +27,12 @@
     <item name="actionBarWidgetTheme">@null</item>
     <item name="actionBarTheme">@style/DialerActionBarBaseTheme</item>
     <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
+<<<<<<< HEAD   (798070 Automatic translation import)
+=======
+
+    <item name="android:colorPrimaryDark">@color/settings_primary_dark</item>
+    <item name="colorControlHighlight">@color/dialer_ripple_color</item>
+>>>>>>> CHANGE (9f5f0e Dialer: set statusbar color same as activity background)
   </style>
 
   <style name="Dialer.ThemeBase.NoActionBar">

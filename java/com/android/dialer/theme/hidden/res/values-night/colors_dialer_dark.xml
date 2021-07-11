@@ -1,3 +1,5 @@
+<<<<<<< HEAD   (798070 Automatic translation import)
+=======
 <!--
   ~ Copyright (C) 2018 The Android Open Source Project
   ~
@@ -15,14 +17,10 @@
   -->
 <resources>
   <!-- Essential theme colors -->
-  <color name="dialer_theme_color">#2A56C6</color>
-  <color name="dialer_theme_color_20pct">#332A56C6</color>
-  <color name="dialer_theme_color_dark">@color/dialer_background_color</color>
-  <color name="dialer_secondary_color">#F50057</color>
-  <color name="dialer_background_color">#FAFAFA</color>
-<<<<<<< HEAD   (798070 Automatic translation import)
-=======
-  <color name="dialer_ripple_color">#1f000000</color>
-  <color name="settings_primary_dark">#1C3AA9</color>
->>>>>>> CHANGE (9f5f0e Dialer: set statusbar color same as activity background)
+  <color name="dialer_theme_color">#5195EA</color>
+  <color name="dialer_theme_color_20pct">#335195EA</color>
+  <color name="dialer_secondary_color">#5195EA</color>
+  <color name="dialer_ripple_color">#33ffffff</color>
+  <color name="settings_primary_dark">#2374CE</color>
 </resources>
+>>>>>>> CHANGE (9f5f0e Dialer: set statusbar color same as activity background)
