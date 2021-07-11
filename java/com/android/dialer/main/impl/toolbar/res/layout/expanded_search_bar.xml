@@ -29,7 +29,7 @@
       android:background="?attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/action_menu_back_from_search"
       android:src="@drawable/quantum_ic_arrow_back_vd_theme_24"
-      android:tint="?android:attr/colorPrimary"/>
+      android:tint="?colorIcon"/>
 
   <EditText
       android:id="@+id/search_view"
