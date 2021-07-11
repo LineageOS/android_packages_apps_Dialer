@@ -21,5 +21,6 @@
   <color name="dialer_secondary_color">#F50057</color>
   <color name="dialer_background_color">#FAFAFA</color>
   <color name="dialer_ripple_color">#1f000000</color>
+  <color name="dialer_search_bar_color">@color/google_grey_50</color>
   <color name="settings_primary_dark">#1C3AA9</color>
 </resources>
