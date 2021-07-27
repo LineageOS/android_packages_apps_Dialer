@@ -77,7 +77,11 @@ public class VvmNetworkRequest {
         new FutureNetworkRequestCallback(config, handle, status);
     callback.requestNetwork();
     try {
-      return callback.getFuture().get();
+      NetworkWrapper ret = callback.getFuture().get();
+      if (ret != null) {
+          callback.waitForIpv4();
+      }
+      return ret;
     } catch (InterruptedException | ExecutionException e) {
       callback.releaseNetwork();
       VvmLog.e(TAG, "can't get future network", e);
