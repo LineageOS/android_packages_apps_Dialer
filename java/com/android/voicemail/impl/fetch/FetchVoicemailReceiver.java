@@ -202,6 +202,9 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
         new Runnable() {
           @Override
           public void run() {
+            if (networkCallback != null) {
+                networkCallback.waitForIpv4();
+            }
             try {
               while (retryCount > 0) {
                 VvmLog.i(TAG, "fetching voicemail, retry count=" + retryCount);
