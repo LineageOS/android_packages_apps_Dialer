@@ -18,9 +18,12 @@ package com.android.voicemail.impl.sync;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.InetAddresses;
+import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
+import android.os.ConditionVariable;
 import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
@@ -123,6 +126,22 @@ public abstract class VvmNetworkRequestCallback extends ConnectivityManager.Netw
   public void onAvailable(Network network) {
     super.onAvailable(network);
     resultReceived = true;
+  }
+
+  private static final int DEFAULT_IPV4_WAIT_DELAY_MS = 500; // in milliseconds
+  private final ConditionVariable mWaitV4Cv = new ConditionVariable();
+  @Override
+  @CallSuper
+  public void onLinkPropertiesChanged(Network network, LinkProperties lp) {
+    boolean hasIPv4 = (lp != null) &&
+            (lp.isReachable(InetAddresses.parseNumericAddress("8.8.8.8")));
+    if(hasIPv4) {
+        mWaitV4Cv.open();
+    }
+  }
+  public void waitForIpv4() {
+    VvmLog.w(TAG, "Waiting for IPV4 address...");
+    mWaitV4Cv.block(DEFAULT_IPV4_WAIT_DELAY_MS);
   }
 
   @CallSuper
