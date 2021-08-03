@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c33b93c8_89e9cfa6",
+        "filename": "java/com/android/dialer/helplines/res/values/helpline_categories.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2021-08-03T18:48:24Z",
+      "side": 1,
+      "message": "is it though? The majority of people I know who identify in this group don\u0027t have I in the acronym, they would consider that part of the `+`",
+      "range": {
+        "startLine": 43,
+        "startChar": 43,
+        "endLine": 43,
+        "endChar": 50
+      },
+      "revId": "4cec20bac6d7572c8ca0d00589ce315eb92636e2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
