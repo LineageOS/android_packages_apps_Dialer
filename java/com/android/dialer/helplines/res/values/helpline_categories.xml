@@ -16,7 +16,7 @@
 -->
 <resources>
     <string name="helpline_category_abuse">Abuse</string>
-    <string name="helpline_category_acohol">Alcohol</string>
+    <string name="helpline_category_alcohol">Alcohol</string>
     <string name="helpline_category_addiction">Addiction</string>
     <string name="helpline_category_adolescents">Adolescents</string>
     <string name="helpline_category_adults">Adults</string>
