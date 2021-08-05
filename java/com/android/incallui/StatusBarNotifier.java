@@ -653,7 +653,7 @@ public class StatusBarNotifier
     } else if (call.getVideoTech().getSessionModificationState()
             == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST
         || call.isVideoCall()) {
-      return R.drawable.quantum_ic_videocam_vd_white_24;
+      return R.drawable.quantum_ic_videocam_vd_theme_24;
     } else if (call.hasProperty(PROPERTY_HIGH_DEF_AUDIO)
         && MotorolaUtils.shouldShowHdIconInNotification(context)) {
       // Normally when a call is ongoing the status bar displays an icon of a phone. This is a
@@ -865,7 +865,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_ANSWER_VOICE_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_vd_theme_24),
                 getActionText(
                     R.string.notification_action_answer, R.color.notification_action_accept),
                 answerVoicePendingIntent)
@@ -908,7 +908,7 @@ public class StatusBarNotifier
 
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_vd_theme_24),
                 spannable,
                 answerVoicePendingIntent)
             .build());
@@ -922,7 +922,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_DECLINE_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_close_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_close_vd_theme_24),
                 getActionText(
                     R.string.notification_action_dismiss, R.color.notification_action_dismiss),
                 declinePendingIntent)
@@ -937,7 +937,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_HANG_UP_ONGOING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_24),
                 context.getText(R.string.notification_action_end_call),
                 hangupPendingIntent)
             .build());
@@ -992,7 +992,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_ANSWER_VIDEO_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_theme_24),
                 getActionText(
                     R.string.notification_action_answer_video,
                     R.color.notification_action_answer_video),
@@ -1008,7 +1008,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_theme_24),
                 getActionText(
                     R.string.notification_action_accept, R.color.notification_action_accept),
                 acceptVideoPendingIntent)
@@ -1023,7 +1023,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_DECLINE_VIDEO_UPGRADE_REQUEST);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_videocam_vd_theme_24),
                 getActionText(
                     R.string.notification_action_dismiss, R.color.notification_action_dismiss),
                 declineVideoPendingIntent)

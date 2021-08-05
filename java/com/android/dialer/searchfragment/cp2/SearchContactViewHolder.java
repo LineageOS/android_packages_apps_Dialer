@@ -181,7 +181,7 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
       case CallToAction.VIDEO_CALL:
         callToActionView.setVisibility(View.VISIBLE);
         callToActionView.setImageDrawable(
-            context.getDrawable(R.drawable.quantum_ic_videocam_vd_white_24));
+            context.getDrawable(R.drawable.quantum_ic_videocam_vd_theme_24));
         callToActionView.setContentDescription(
             context.getString(R.string.description_search_video_call));
         callToActionView.setOnClickListener(this);
