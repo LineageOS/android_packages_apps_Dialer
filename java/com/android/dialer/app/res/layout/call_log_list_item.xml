@@ -78,7 +78,7 @@
               android:layout_width="@dimen/contact_photo_size"
               android:layout_height="@dimen/contact_photo_size"
               android:visibility="gone"
-              android:src="@drawable/ic_check_mark_48dp" />
+              android:src="@drawable/ic_check_mark" />
 
         </FrameLayout>
 

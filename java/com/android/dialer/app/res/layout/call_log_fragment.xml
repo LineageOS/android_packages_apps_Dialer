@@ -38,7 +38,7 @@
         android:paddingRight="@dimen/select_all_icon_padding"
         android:gravity="center_vertical"
         android:contentDescription="@string/select_all"
-        android:src="@drawable/ic_empty_check_mark_white_24dp"/>
+        android:src="@drawable/ic_empty_check_mark_white"/>
     <TextView
         android:id="@+id/select_all_view_text"
         android:layout_width="wrap_content"

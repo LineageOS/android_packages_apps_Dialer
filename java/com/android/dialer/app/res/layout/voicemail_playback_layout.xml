@@ -79,7 +79,7 @@
       android:id="@+id/playback_speakerphone"
       style="@style/VoicemailPlaybackLayoutButtonStyle"
       android:contentDescription="@string/description_playback_speakerphone"
-      android:src="@drawable/quantum_ic_volume_down_white_24"
+      android:src="@drawable/quantum_ic_volume_up_vd_theme_24"
       android:tint="?colorIcon"/>
 
     <Space
@@ -102,7 +102,7 @@
       android:id="@+id/delete_voicemail"
       style="@style/VoicemailPlaybackLayoutButtonStyle"
       android:contentDescription="@string/call_log_trash_voicemail"
-      android:src="@drawable/quantum_ic_delete_white_24"
+      android:src="@drawable/quantum_ic_delete_vd_theme_24"
       android:tint="?colorIcon"/>
 
     <Space
