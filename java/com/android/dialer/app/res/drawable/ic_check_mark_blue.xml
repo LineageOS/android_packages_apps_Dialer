@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Dirty Unicorns Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24.000000dp"
+    android:height="24.000000dp"
+    android:viewportWidth="512.000000"
+    android:viewportHeight="512.000000">
+
+    <group
+        android:translateY="512.000000"
+        android:scaleX="0.100000"
+        android:scaleY="-0.100000">
+        <path
+            android:fillColor="@android:color/white"
+            android:strokeWidth="1"
+            android:pathData="M2275 5058 c-105 -12 -298 -51 -409 -83 -400 -116 -765 -333 -1066 -635 -407 -406 -658 -928 -719 -1492 -14 -125 -14 -431 0 -556 61 -564 312 -1086 719 -1492 406 -407 928 -658 1492 -719 125 -14 431 -14 556 0 564 61 1086 312 1492 719 407 406 658 928 719 1492 16 142 13 444 -4 588 -69 561 -312 1056 -715 1460 -405 406 -928 658 -1492 719 -115 13 -459 12 -573 -1z" />
+        <path
+            android:fillColor="#2a56c6"
+            android:strokeWidth="1"
+            android:pathData="M2870 2695 l-605 -605 -260 260 c-143 143 -265 260 -270 260 -16 0 -155 -143 -155 -159 0 -8 155 -170 345 -360 l344 -346 696 695 695 695 -82 82 c-46 46 -87 83 -93 83 -5 0 -282 -272 -615 -605z" />
+    </group>
+</vector>
