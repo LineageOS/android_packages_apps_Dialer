@@ -280,7 +280,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
       // Speaker is now on, tapping button will turn it off.
       playbackSpeakerphone.setContentDescription(context.getString(R.string.voicemail_speaker_off));
     } else {
-      playbackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_white_24);
+      playbackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_vd_theme_24);
       // Speaker is now off, tapping button will turn it on.
       playbackSpeakerphone.setContentDescription(context.getString(R.string.voicemail_speaker_on));
     }

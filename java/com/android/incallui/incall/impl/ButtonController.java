@@ -479,7 +479,7 @@ interface ButtonController {
         button.setVisibility(isAllowed ? View.VISIBLE : View.INVISIBLE);
         button.setChecked(isChecked);
         button.setOnClickListener(this);
-        button.setIconDrawable(R.drawable.quantum_ic_record_white_36);
+        button.setIconDrawable(R.drawable.quantum_ic_record_vd_theme_24);
         button.setContentDescription(res.getText(
             isChecked ? R.string.onscreenStopCallRecordText : R.string.onscreenCallRecordText));
         button.setShouldShowMoreIndicator(false);

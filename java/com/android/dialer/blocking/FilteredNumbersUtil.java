@@ -248,7 +248,7 @@ public class FilteredNumbersUtil {
 
             Notification.Builder builder =
                 new Notification.Builder(context)
-                    .setSmallIcon(R.drawable.quantum_ic_block_white_24)
+                    .setSmallIcon(R.drawable.quantum_ic_block_vd_theme_24)
                     .setContentTitle(
                         context.getString(R.string.call_blocking_disabled_notification_title))
                     .setContentText(

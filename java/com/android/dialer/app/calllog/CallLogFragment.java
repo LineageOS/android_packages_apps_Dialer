@@ -695,7 +695,7 @@ public class CallLogFragment extends Fragment
   public void setSelectAllModeToFalse() {
     selectAllMode = false;
     selectUnselectAllIcon.setImageDrawable(
-        getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
+        getContext().getDrawable(R.drawable.ic_empty_check_mark_white));
   }
 
   @Override
@@ -719,11 +719,11 @@ public class CallLogFragment extends Fragment
   private void updateSelectAllIcon() {
     if (selectAllMode) {
       selectUnselectAllIcon.setImageDrawable(
-          getContext().getDrawable(R.drawable.ic_check_mark_blue_24dp));
+          getContext().getDrawable(R.drawable.ic_check_mark_blue));
       getAdapter().onAllSelected();
     } else {
       selectUnselectAllIcon.setImageDrawable(
-          getContext().getDrawable(R.drawable.ic_empty_check_mark_white_24dp));
+          getContext().getDrawable(R.drawable.ic_empty_check_mark_white));
       getAdapter().onAllDeselected();
     }
   }
