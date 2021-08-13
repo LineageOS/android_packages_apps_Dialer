@@ -125,7 +125,7 @@ public final class SpeedDialEntryDatabaseHelper extends SQLiteOpenHelper
               Channel.builder()
                   .setNumber(number)
                   .setPhoneType(cursor.getInt(POSITION_PHONE_TYPE))
-                  .setLabel(Optional.of(cursor.getString(POSITION_PHONE_LABEL)).or(""))
+                  .setLabel(Optional.fromNullable(cursor.getString(POSITION_PHONE_LABEL)).or(""))
                   .setTechnology(cursor.getInt(POSITION_PHONE_TECHNOLOGY))
                   .build();
         }
