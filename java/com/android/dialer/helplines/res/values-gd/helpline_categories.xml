@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Mì-ghnàthachadh</string>
+    <string name="helpline_category_acohol">Deoch-làidir</string>
+    <string name="helpline_category_addiction">Ro-dhèidhealachd</string>
+    <string name="helpline_category_adolescents">Òigridh</string>
+    <string name="helpline_category_adults">Inbhich</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Breith</string>
+    <string name="helpline_category_bullying">Burraidheachd</string>
+    <string name="helpline_category_children">Clann</string>
+    <string name="helpline_category_crime">Eucoir</string>
+    <string name="helpline_category_crime_victims">Fulangaiche eucoir</string>
+    <string name="helpline_category_corruption">Coirbeachd</string>
+    <string name="helpline_category_discrimination">Leth-bhreith</string>
+    <string name="helpline_category_domestic_violence">Ainneart teaghlachail</string>
+    <string name="helpline_category_drugs">Drugaichean</string>
+    <string name="helpline_category_emotional_support">Taic fhaireachail</string>
+    <string name="helpline_category_family">Teaghlach</string>
+    <string name="helpline_category_gambling">Cearrachas</string>
+    <string name="helpline_category_gender">Gnè</string>
+    <string name="helpline_category_generic">Coitcheann</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Còraichean daonna</string>
+    <string name="helpline_category_human_trafficking">Trafaigeachd dhaoine</string>
+    <string name="helpline_category_immigration">In-imrich</string>
+    <string name="helpline_category_legal_aid">Taic laghail</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Fireannaich</string>
+    <string name="helpline_category_mental_health">Slàinte-inntinn</string>
+    <string name="helpline_category_missing_children">Clann a dhìth</string>
+    <string name="helpline_category_mothers">Màthraichean</string>
+    <string name="helpline_category_muslim">Muslamach</string>
+    <string name="helpline_category_parents">Pàrantan</string>
+    <string name="helpline_category_pregnancy">Leatromachd</string>
+    <string name="helpline_category_psychological">Inntinn-eòlasach</string>
+    <string name="helpline_category_religion">Creideamh</string>
+    <string name="helpline_category_senior">Seann-daoine</string>
+    <string name="helpline_category_sexual_abuse">Mì-ghnàthachadh gnèitheasach</string>
+    <string name="helpline_category_sexual_assault">Ionnsaigh ghnèitheasach</string>
+    <string name="helpline_category_sexual_rights">Còraichean gnèitheasach</string>
+    <string name="helpline_category_sexuality">Gnèitheachd</string>
+    <string name="helpline_category_soldiers">Saighdearan</string>
+    <string name="helpline_category_suicide">Seachnadh fèin-mhuirt</string>
+    <string name="helpline_category_trans">Tar-ghnèitheach</string>
+    <string name="helpline_category_veterans">Seann-saighdearan</string>
+    <string name="helpline_category_violence">Ainneart</string>
+    <string name="helpline_category_war">Cogadh</string>
+    <string name="helpline_category_women">Boireannaich</string>
+    <string name="helpline_category_youth">Òigridh</string>
+</resources>

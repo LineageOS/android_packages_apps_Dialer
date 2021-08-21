@@ -15,5 +15,21 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="incall_content_description_end_call">Cuir crìoch air a’ ghairm</string>
+  <string name="incall_content_description_muted">Air a mhùchadh</string>
+  <string name="incall_content_description_unmuted">Neo-mhùchte</string>
+  <string name="incall_content_description_swap_calls">Suaip na gairmean</string>
   <string name="incall_content_description_swap_sim">Atharraich an SIM</string>
+  <string name="incall_content_description_merge_calls">Co-aonaich na gairmean</string>
+  <string name="incall_content_description_earpiece">Cnap-cluaise a’ handset</string>
+  <string name="incall_content_description_speaker">Glaodhaire</string>
+  <string name="incall_content_description_bluetooth">Bluetooth</string>
+  <string name="incall_content_description_headset">Seata-cinn uèirichte</string>
+  <string name="incall_content_description_hold">Cùm a’ ghairm</string>
+  <string name="incall_content_description_unhold">Lean air a’ ghairm</string>
+  <string name="incall_content_description_video_on">Tha video air</string>
+  <string name="incall_content_description_video_off">Tha a’ video dheth</string>
+  <string name="incall_content_description_swap_video">Suaip a’ video</string>
+  <string name="incall_label_speaker">Glaodhaire</string>
+  <string name="incall_label_audio">Fuaim</string>
 </resources>

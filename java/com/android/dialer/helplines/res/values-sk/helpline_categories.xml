@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Zneužívanie</string>
+    <string name="helpline_category_acohol">Alkohol</string>
+    <string name="helpline_category_addiction">Závislosť</string>
+    <string name="helpline_category_adolescents">Dospievajúci</string>
+    <string name="helpline_category_adults">Dospelí</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Narodenie</string>
+    <string name="helpline_category_bullying">Šikanovanie</string>
+    <string name="helpline_category_children">Deti</string>
+    <string name="helpline_category_crime">Zločin</string>
+    <string name="helpline_category_crime_victims">Obete zločinu</string>
+    <string name="helpline_category_corruption">Korupcia</string>
+    <string name="helpline_category_discrimination">Diskriminácia</string>
+    <string name="helpline_category_domestic_violence">Domáce násilie</string>
+    <string name="helpline_category_drugs">Drogy</string>
+    <string name="helpline_category_emotional_support">Emocionálna podpora</string>
+    <string name="helpline_category_family">Rodina</string>
+    <string name="helpline_category_gambling">Hazard</string>
+    <string name="helpline_category_gender">Pohlavie</string>
+    <string name="helpline_category_generic">Všeobecné</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Ľudské práva</string>
+    <string name="helpline_category_human_trafficking">Obchodovanie s ľuďmi</string>
+    <string name="helpline_category_immigration">Emigrácia</string>
+    <string name="helpline_category_legal_aid">Právna pomoc</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Muži</string>
+    <string name="helpline_category_mental_health">Duševné zdravie</string>
+    <string name="helpline_category_missing_children">Stratené deti</string>
+    <string name="helpline_category_mothers">Matky</string>
+    <string name="helpline_category_muslim">Moslimovia</string>
+    <string name="helpline_category_parents">Rodičia</string>
+    <string name="helpline_category_pregnancy">Tehotné</string>
+    <string name="helpline_category_psychological">Psychológia</string>
+    <string name="helpline_category_religion">Náboženstvo</string>
+    <string name="helpline_category_senior">Seniori</string>
+    <string name="helpline_category_sexual_abuse">Sexuálne zneužívanie</string>
+    <string name="helpline_category_sexual_assault">Sexuálny útok</string>
+    <string name="helpline_category_sexual_rights">Sexuálne práva</string>
+    <string name="helpline_category_sexuality">Sexualita</string>
+    <string name="helpline_category_soldiers">Vojaci</string>
+    <string name="helpline_category_suicide">Prevencia pred samovraždou</string>
+    <string name="helpline_category_trans">Transrodové</string>
+    <string name="helpline_category_veterans">Veteráni</string>
+    <string name="helpline_category_violence">Násilie</string>
+    <string name="helpline_category_war">Vojna</string>
+    <string name="helpline_category_women">Ženy</string>
+    <string name="helpline_category_youth">Mládež</string>
+</resources>
