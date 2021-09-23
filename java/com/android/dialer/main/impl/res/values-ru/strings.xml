@@ -17,7 +17,7 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="main_activity_label" msgid="3121599977875141886">"Позвонить"</string>
+    <string name="main_activity_label" msgid="3121599977875141886">"Телефон"</string>
     <string name="search" msgid="3570654445331155513">"@android:string/search_go"</string>
     <string name="description_search" msgid="3443578912463129718">"Поиск контактов и мест"</string>
     <string name="contacts" msgid="4464246185723317911">"Контакты"</string>
