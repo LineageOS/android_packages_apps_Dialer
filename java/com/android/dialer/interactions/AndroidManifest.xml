@@ -8,7 +8,8 @@
       android:exported="false"
       android:name="com.android.dialer.interactions.ContactUpdateService"/>
 
-    <receiver android:name="com.android.dialer.interactions.UndemoteOutgoingCallReceiver">
+    <receiver android:name="com.android.dialer.interactions.UndemoteOutgoingCallReceiver"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
       </intent-filter>
