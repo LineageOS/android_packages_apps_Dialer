@@ -196,11 +196,11 @@ public class GoogleAccountType extends BaseAccountType {
 
   @Override
   public String getViewContactNotifyServiceClassName() {
-    return "com.google.android.syncadapters.contacts." + "SyncHighResPhotoIntentService";
+    return PLUS_EXTENSION_PACKAGE_NAME + ".people.sync.focus.SyncHighResPhotoIntentOperation";
   }
 
   @Override
   public String getViewContactNotifyServicePackageName() {
-    return "com.google.android.syncadapters.contacts";
+    return PLUS_EXTENSION_PACKAGE_NAME;
   }
 }
