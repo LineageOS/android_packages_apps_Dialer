@@ -20,7 +20,7 @@
     <string name="helplines_empty">Nuk u gjet asnje linjë ndihme.\nVendosni një kartë SIM dhe provoni sërish</string>
     <string name="helplines_help">Ndihmë</string>
     <string name="helplines_help_title">Këto janë të sigurta për tu telefonuar</string>
-    <string name="helplines_help_message">Asnjë prej këtyre numrave rezulton në historikun e telefonatave të tua.\nJu mund të shtypni në ndonjë prej artikujve për më shumë informacion</string>
+    <string name="helplines_help_message">Asnjë prej këtyre numrave nuk rezulton në historikun e telefonatave të tua.\nJu mund të shtypni në ndonjë prej artikujve për më shumë informacion</string>
     <string name="helplines_help_more_message">Lista e linjave të ndihmës plotësohet me informacion e cila përditësohet nga kontribuesit. Nëse hasni ndonjë informacion të gabuar ose që mungon, ju lutem na kontaktoni ne tek www.lineageos.org</string>
     <string name="helpline_button_more">Më shumë</string>
     <string name="unknown_helpline_name">Organizatë e pa njohur</string>
@@ -29,7 +29,7 @@
     <string name="helpline_categories">Kategoritë</string>
     <string name="helpline_number">Numri</string>
     <string name="helpline_website">Faqe interneti</string>
-    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Linja e ndihmës për mbështetjen emocionale">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
     <string name="helpline_language_cree">Cree</string>
     <string name="helpline_language_english">Anglisht</string>
     <string name="helpline_language_french">Frëngjisht</string>

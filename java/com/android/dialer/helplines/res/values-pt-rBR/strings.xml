@@ -21,6 +21,8 @@
     <string name="helplines_help_title">Estes números são seguros para chamar</string>
     <string name="helplines_help_message">Nenhum destes números aparecerá no seu histórico de chamadas.\nVocê pode clicar em qualquer um deles para obter mais informações</string>
     <string name="helplines_help_more_message">A lista de linhas de ajuda é preenchida com informações inseridas manualmente por colaboradores. Se você encontrar informações que estão erradas ou faltando, entre em contato conosco em www.lineageos.org</string>
+    <string name="helpline_button_more">Mais</string>
+    <string name="unknown_helpline_name">Organização desconhecida</string>
     <string name="helpline_name">Nome</string>
     <string name="helpline_org">Organização</string>
     <string name="helpline_categories">Categorias</string>
