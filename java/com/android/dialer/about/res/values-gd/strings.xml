@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="build_version_label">Tionndadh an togail</string>
+  <string name="build_version_label">Tionndadh na togail</string>
   <string name="open_source_license_detail_label">Fiosrachadh mun cheadachas airson bathar-bog le còd fosgailte</string>
   <string name="licenseActivityLabel">Ceadachasan Open Source</string>
   <string name="privacy_policy_label">Poileasaidh prìobhaideachd</string>

@@ -31,4 +31,5 @@
     <string name="call_via">Llamar per</string>
     <string name="call_via_dialog_title">Llamar per\u2026</string>
     <string name="call_log_stats_title">Estadístiques</string>
+    <string name="action_menu_helplines">Llinies d\'ayuda</string>
 </resources>
