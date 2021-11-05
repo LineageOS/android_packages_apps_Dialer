@@ -95,7 +95,7 @@ public class LegacyModeSmsHandler {
               CALL_VOICEMAIL_REQUEST_CODE,
               new Intent(
                   Intent.ACTION_CALL, Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null)),
-              PendingIntent.FLAG_UPDATE_CURRENT);
+              PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     } else {
       Intent launchVoicemailSettingsIntent =
           new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
@@ -106,7 +106,7 @@ public class LegacyModeSmsHandler {
               context,
               LAUNCH_VOICEMAIL_SETTINGS_REQUEST_CODE,
               launchVoicemailSettingsIntent,
-              PendingIntent.FLAG_UPDATE_CURRENT);
+              PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     intent.putExtra(TelephonyManager.EXTRA_VOICEMAIL_NUMBER, voicemailNumber);
