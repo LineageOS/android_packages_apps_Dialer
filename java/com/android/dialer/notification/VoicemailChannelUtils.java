@@ -16,6 +16,8 @@
 
 package com.android.dialer.notification;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import android.Manifest.permission;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -38,15 +40,35 @@ import android.util.ArraySet;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 /** Utilities for working with voicemail channels. */
 @TargetApi(VERSION_CODES.O)
-/* package */ final class VoicemailChannelUtils {
+public final class VoicemailChannelUtils {
   @VisibleForTesting static final String GLOBAL_VOICEMAIL_CHANNEL_ID = "phone_voicemail";
   private static final String PER_ACCOUNT_VOICEMAIL_CHANNEL_ID_PREFIX = "phone_voicemail_account_";
+  private static final char[] hexDigits = "0123456789abcdef".toCharArray();
+
+  /**
+   * Returns a String representation of the hashed value of the PhoneAccountHandle's id (the
+   * Sim ICC ID).
+   * In case it fails to hash the id it will return an empty string.
+   */
+  public static String getHashedPhoneAccountId(@NonNull PhoneAccountHandle handle) {
+    byte[] handleBytes = handle.getId().getBytes(UTF_8);
+    try {
+      byte[] hashedBytes = MessageDigest.getInstance("SHA-256").digest(handleBytes);
+      return byteArrayToHexString(hashedBytes);
+    } catch (NoSuchAlgorithmException e) {
+      LogUtil.e("VoicemailChannelUtils.getHashedPhoneAccountId",
+          "NoSuchAlgorithmException throw! Returning empty string!");
+      return "";
+    }
+  }
 
   @SuppressWarnings("MissingPermission") // isSingleSimDevice() returns true if no permission
   static Set<String> getAllChannelIds(@NonNull Context context) {
@@ -124,7 +146,17 @@ import java.util.Set;
 
   private static String getChannelIdForAccount(@NonNull PhoneAccountHandle handle) {
     Assert.isNotNull(handle);
-    return PER_ACCOUNT_VOICEMAIL_CHANNEL_ID_PREFIX + ":" + handle.getId();
+    return PER_ACCOUNT_VOICEMAIL_CHANNEL_ID_PREFIX
+        + ":"
+        + getHashedPhoneAccountId(handle);
+  }
+
+  private static String byteArrayToHexString(byte[] bytes) {
+    StringBuilder sb = new StringBuilder(2 * bytes.length);
+    for (byte b : bytes) {
+      sb.append(hexDigits[(b >> 4) & 0xf]).append(hexDigits[b & 0xf]);
+    }
+    return sb.toString();
   }
 
   /**
