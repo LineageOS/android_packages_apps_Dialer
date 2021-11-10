@@ -146,7 +146,8 @@ public class HelplineActivity extends Activity {
 
     private void showMoreInfo() {
         new AlertDialog.Builder(this)
-                .setMessage(R.string.helplines_help_more_message)
+                .setMessage(getResources().getString(R.string.helplines_help_more_message,
+                        getResources().getString(R.string.helplines_contact_url)))
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
     }

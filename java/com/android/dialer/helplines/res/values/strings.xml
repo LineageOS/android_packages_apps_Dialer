@@ -22,7 +22,8 @@
     <string name="helplines_help_title">These are safe to call</string>
     <string name="helplines_help_message">None of these numbers appear in your call history.\nYou can click any item for more information</string>
 
-    <string name="helplines_help_more_message">The list of helplines is filled with information that is updated manually by contributors. If you encounter any missing or wrong information, please feel free to contact us at www.lineageos.org</string>
+    <string name="helplines_help_more_message">The list of helplines is filled with information that is updated manually by contributors. If you encounter any missing or wrong information, please feel free to contact us at <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helplines_contact_url" translatable="false">www.lineageos.org</string>
 
     <string name="helpline_button_more">More</string>
 
