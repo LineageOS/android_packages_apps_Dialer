@@ -146,13 +146,14 @@ public abstract class IntentProvider {
     };
   }
 
-  public static IntentProvider getReturnVoicemailCallIntentProvider() {
+  public static IntentProvider getReturnVoicemailCallIntentProvider(
+      @Nullable PhoneAccountHandle phoneAccountHandle) {
     return new IntentProvider() {
       @Override
       public Intent getIntent(Context context) {
         return PreCall.getIntent(
             context,
-            CallIntentBuilder.forVoicemail(CallInitiationType.Type.CALL_LOG));
+            CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.CALL_LOG));
       }
     };
   }

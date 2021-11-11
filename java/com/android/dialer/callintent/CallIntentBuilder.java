@@ -113,10 +113,10 @@ public class CallIntentBuilder implements Parcelable {
   }
 
   public static CallIntentBuilder forVoicemail(
-      CallInitiationType.Type callInitiationType) {
+      @Nullable PhoneAccountHandle phoneAccountHandle, CallInitiationType.Type callInitiationType) {
     return new CallIntentBuilder(
             Uri.fromParts(PhoneAccount.SCHEME_VOICEMAIL, "", null), callInitiationType)
-        .setPhoneAccountHandle(null);
+        .setPhoneAccountHandle(phoneAccountHandle);
   }
 
   public void setUri(@NonNull Uri uri) {
