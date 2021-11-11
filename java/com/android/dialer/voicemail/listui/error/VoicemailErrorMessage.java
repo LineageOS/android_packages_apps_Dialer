@@ -159,7 +159,7 @@ public class VoicemailErrorMessage {
 
   @NonNull
   public static Action createCallVoicemailAction(
-      final Context context) {
+      final Context context, final PhoneAccountHandle phoneAccountHandle) {
     return new Action(
         context.getString(R.string.voicemail_action_call_voicemail),
         new OnClickListener() {
@@ -169,7 +169,7 @@ public class VoicemailErrorMessage {
             PreCall.start(
                 context,
                 CallIntentBuilder.forVoicemail(
-                    CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE));
+                    phoneAccountHandle, CallInitiationType.Type.VOICEMAIL_ERROR_MESSAGE));
           }
         });
   }
