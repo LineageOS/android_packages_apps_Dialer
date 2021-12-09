@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35851693_f64c7425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 30088
+      },
+      "writtenOn": "2021-12-09T18:06:24Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e Got screenshots?\nHere you go\n\nhttps://imgur.com/a/Av05vcM",
+      "revId": "fe5ee4a80d6f4c8ce02d64b50a8f3a95af83d670",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
