@@ -36,6 +36,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelManager;
+import com.android.dialer.notification.VoicemailChannelUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.base.ThemeComponent;
@@ -181,7 +182,8 @@ public final class LegacyVoicemailNotifier {
     if (context.getSystemService(TelephonyManager.class).getPhoneCount() <= 1) {
       return NOTIFICATION_TAG;
     }
-    return NOTIFICATION_TAG_PREFIX + phoneAccountHandle.getId();
+    return NOTIFICATION_TAG_PREFIX
+        + VoicemailChannelUtils.getHashedPhoneAccountId(phoneAccountHandle);
   }
 
   private LegacyVoicemailNotifier() {}
