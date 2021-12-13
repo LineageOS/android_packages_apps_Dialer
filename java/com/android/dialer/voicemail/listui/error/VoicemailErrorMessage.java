@@ -150,7 +150,7 @@ public class VoicemailErrorMessage {
           public void onClick(View v) {
             Logger.get(context)
                 .logImpression(DialerImpression.Type.VOICEMAIL_ALERT_SET_PIN_CLICKED);
-            Intent intent = new Intent(VoicemailChangePinActivity.ACTION_CHANGE_PIN);
+            Intent intent = new Intent(context, VoicemailChangePinActivity.class);
             intent.putExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
             context.startActivity(intent);
           }
