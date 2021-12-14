@@ -53,8 +53,12 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
 
   private static final long STATUS_SMS_TIMEOUT_MILLIS = 60_000;
 
+  private static final String PERMISSION_DIALER_ORIGIN =
+    "com.android.dialer.permission.DIALER_ORIGIN";
+
   private static final String ACTION_REQUEST_SENT_INTENT =
       "com.android.voicemailomtp.sms.REQUEST_SENT";
+
   private static final int ACTION_REQUEST_SENT_REQUEST_CODE = 0;
 
   private CompletableFuture<Bundle> future = new CompletableFuture<>();
@@ -67,7 +71,7 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
     this.phoneAccountHandle = phoneAccountHandle;
     IntentFilter filter = new IntentFilter(ACTION_REQUEST_SENT_INTENT);
     filter.addAction(OmtpService.ACTION_SMS_RECEIVED);
-    context.registerReceiver(this, filter);
+    context.registerReceiver(this, filter, PERMISSION_DIALER_ORIGIN, /* scheduler= */ null);
   }
 
   @Override
@@ -89,7 +93,10 @@ public class StatusSmsFetcher extends BroadcastReceiver implements Closeable {
     // Because the receiver is registered dynamically, implicit intent must be used.
     // There should only be a single status SMS request at a time.
     return PendingIntent.getBroadcast(
-        context, ACTION_REQUEST_SENT_REQUEST_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        context,
+        ACTION_REQUEST_SENT_REQUEST_CODE,
+        intent,
+        PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
   }
 
   @Override
