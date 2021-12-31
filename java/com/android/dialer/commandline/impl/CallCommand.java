@@ -72,7 +72,7 @@ public class CallCommand implements Command {
     CallIntentBuilder callIntentBuilder;
     if ("voicemail".equals(number)) {
       callIntentBuilder =
-          CallIntentBuilder.forVoicemail(phoneAccountHandle, CallInitiationType.Type.DIALPAD);
+          CallIntentBuilder.forVoicemail(CallInitiationType.Type.DIALPAD);
     } else {
       callIntentBuilder = new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD);
     }
