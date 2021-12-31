@@ -66,7 +66,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_activating_title),
           context.getString(R.string.voicemail_error_activating_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()));
+          VoicemailErrorMessage.createCallVoicemailAction(context));
     }
 
     if (Status.NOTIFICATION_CHANNEL_STATE_NO_CONNECTION == status.notificationChannelState) {
@@ -77,7 +77,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_activation_failed_title),
           context.getString(R.string.voicemail_error_activation_failed_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
@@ -85,7 +85,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_no_data_title),
           context.getString(R.string.voicemail_error_no_data_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
@@ -93,7 +93,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_no_data_title),
           context.getString(R.string.voicemail_error_no_data_cellular_required_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
@@ -101,7 +101,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_bad_config_title),
           context.getString(R.string.voicemail_error_bad_config_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
@@ -109,7 +109,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_communication_title),
           context.getString(R.string.voicemail_error_communication_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
@@ -117,7 +117,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_server_title),
           context.getString(R.string.voicemail_error_server_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
@@ -125,7 +125,7 @@ public class OmtpVoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_server_connection_title),
           context.getString(R.string.voicemail_error_server_connection_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           VoicemailErrorMessage.createRetryAction(context, status));
     }
 
