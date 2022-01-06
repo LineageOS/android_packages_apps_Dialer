@@ -202,6 +202,9 @@ public class PhoneNumberHelper {
     if (presentation == CallLog.Calls.PRESENTATION_RESTRICTED) {
       return false;
     }
+    if (presentation == CallLog.Calls.PRESENTATION_UNAVAILABLE) {
+      return false;
+    }
     if (presentation == CallLog.Calls.PRESENTATION_PAYPHONE) {
       return false;
     }
