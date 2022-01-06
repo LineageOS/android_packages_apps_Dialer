@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30f7579_727e8f5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-01-06T19:01:04Z",
+      "side": 1,
+      "message": "Not part of the security patch. This commit was already in tree and reverted: https://github.com/LineageOS/android_packages_apps_Dialer/commits/lineage-18.1/java/com/android/dialer/app/voicemail/LegacyVoicemailNotificationReceiver.java",
+      "revId": "f46121b50a5771d610e804493368f905add15bc9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
