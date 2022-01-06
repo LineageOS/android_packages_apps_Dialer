@@ -27,7 +27,7 @@ import android.widget.EditText;
 public final class SimulatorDialogFragment extends DialogFragment {
 
   private final String[] callerIdPresentationItems = {
-    "ALLOWED", "PAYPHONE", "RESTRICTED", "UNKNOWN"
+    "ALLOWED", "PAYPHONE", "RESTRICTED", "UNKNOWN", "UNAVAILABLE"
   };
   private int callerIdPresentationChoice = 1;
 
@@ -67,6 +67,9 @@ public final class SimulatorDialogFragment extends DialogFragment {
                   break;
                 case 3:
                   callerIdPresentationChoice = TelecomManager.PRESENTATION_UNKNOWN;
+                  break;
+                case 4:
+                  callerIdPresentationChoice = TelecomManager.PRESENTATION_UNAVAILABLE;
                   break;
                 default:
                   throw new IllegalStateException("Unknown presentation choice selected!");
