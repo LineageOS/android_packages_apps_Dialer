@@ -34,6 +34,24 @@
       "parentUuid": "d30f7579_727e8f5a",
       "revId": "f46121b50a5771d610e804493368f905add15bc9",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e1bf24_aae18c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15173
+      },
+      "writtenOn": "2022-01-07T03:26:04Z",
+      "side": 1,
+      "message": "Actually, this is a rebase issue. Didn\u0027t compare the (review) rebase against the actual merge.",
+      "parentUuid": "1d3509b6_117fc54e",
+      "revId": "f46121b50a5771d610e804493368f905add15bc9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
