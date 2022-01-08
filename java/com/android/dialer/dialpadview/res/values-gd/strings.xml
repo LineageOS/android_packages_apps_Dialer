@@ -15,6 +15,11 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="description_dialpad_back">Seòl air ais</string>
+  <string name="description_dialpad_overflow">Barrachd roghainnean</string>
+  <string name="description_delete_button">backspace</string>
+  <string name="description_image_button_plus">daitheal plus</string>
+  <string name="description_voicemail_button">cuir fòn gun phost-gutha</string>
   <string name="description_dial_button">daitheal</string>
   <string name="dialog_voicemail_airplane_mode_message">Airson post-gutha a ghairm, cuir am modh itealain dheth an toiseach.</string>
   <string name="dialog_voicemail_not_ready_message">Airson post-gutha a shuidheachadh, rach gu “Clàr-taice” &gt; “Roghainnean”.</string>
@@ -28,5 +33,6 @@
   <string name="simContacts_emptyLoading">’Ga luchdadh o chairt SIM\u2026</string>
   <string name="simContacts_title">Luchd-aithne a’ chairt SIM</string>
   <string name="menu_callNumber">Cuir fòn gu <xliff:g id="number">%s</xliff:g></string>
+  <string name="dialpad_hint_emergency_calling_not_available">Chan urrainn dhut gairm-èiginn a dhèanamh slighe WiFi</string>
   <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Chan urrainn dhut fòn a chur dhan àireamh seo</string>
 </resources>

@@ -16,11 +16,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Gedetailleerde contactstatistieken</string>
     <string name="call_stats_incoming">Inkomend: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_outgoing">Uitgaand: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_missed">Gemist: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Geblokkeerd: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Totaal: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Totaal: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Begindatum</string>
     <string name="call_stats_filter_to">Einddatum</string>
@@ -41,4 +43,6 @@
     <string name="call_stats_title_of_total">Van in totaal</string>
     <string name="call_stats_title_durations">Gespreksduur</string>
     <string name="call_stats_title_count">Aantal gesprekken</string>
+    <string name="call_stats_title_average_duration">Gemiddelde gespreksduur</string>
+    <string name="recent_calls_no_items_in_range">Uw oproepgeschiedenis bevat geen oproepen in het geselecteerde tijdsbereik.</string>
 </resources>

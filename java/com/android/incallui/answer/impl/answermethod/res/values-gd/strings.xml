@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="call_incoming_swipe_to_answer">Grad-shlaighd suas airson fhreagairt</string>
+  <string name="call_incoming_swipe_to_reject">Grad-shlaighd sìos gus a dhiùltadh</string>
+  <string name="a11y_incoming_call_swipe_to_answer">Grad-shlaighd suas le dà chorrag airson freagairt no sìos airson a’ ghairm a dhiùltadh.</string>
+  <string name="call_incoming_will_disconnect">Ma fhreagras tu, cuiridh a’ ghairm seo crìoch air a’ ghairm video agad</string>
+  <string name="a11y_call_incoming_decline_description">Diùlt</string>
+  <string name="call_incoming_decline">Diùlt</string>
+  <string name="a11y_call_incoming_answer_description">Freagair</string>
+  <string name="call_incoming_answer">Freagair</string>
+</resources>

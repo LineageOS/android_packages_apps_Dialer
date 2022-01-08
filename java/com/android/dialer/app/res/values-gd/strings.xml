@@ -15,18 +15,208 @@
   ~ limitations under the License
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="applicationLabel" tools:ignore="UnusedResources">Fòn</string>
+  <string name="launcherDialpadActivityLabel">Pada àireamhan an fhòn</string>
+  <string name="callHistoryIconLabel" tools:ignore="UnusedResources">Eachdraidh nan gairmean</string>
+  <string name="action_copy_number_text">Dèan lethbhreac dhen àireamh</string>
+  <string name="copy_transcript_text">Dèan lethbhreac dhen tar-sgrìobhadh</string>
+  <string name="action_edit_number_before_call">Deasaich an àireamh mus dèan thu gairm</string>
+  <string name="call_log_delete_all">Falamhaich eachdraidh nan gairmean</string>
+  <string name="call_log_trash_voicemail">Sguab às am post-gutha</string>
+  <string name="snackbar_voicemail_deleted">Chaidh am post-gutha a sguabadh às</string>
+  <string name="clearCallLogConfirmation_title">Am falamhaich thu eachdraidh nan gairmean?</string>
+  <string name="clearCallLogConfirmation">Sguabaidh sin a h-uile gairm às on eachdraidh agad</string>
+  <string name="clearCallLogProgress_title">A’ falamhachadh eachdraidh nan gairmean…</string>
+  <string name="notification_missedCallTitle">Gairm a dh’fhalbh ort</string>
+  <string name="notification_missedWorkCallTitle">Gairm na h-obrach a dh’fhalbh ort</string>
+  <string name="notification_missedCallsTitle">Gairmean a dh\'fhalbh ort</string>
+  <string name="notification_missedCallsMsg">Dh’fhalbh gairmean ort (<xliff:g id="num_missed_calls">%d</xliff:g>)</string>
+  <string name="notification_missedCall_call_back">Fònaig air ais</string>
+  <string name="notification_missedCall_message">Cuir teachdaireachd</string>
+  <string name="post_call_notification_message"><xliff:g id="name">%1$s</xliff:g>: <xliff:g id="message">%2$s</xliff:g></string>
+  <string name="notification_voicemail_text_format">Daitheal <xliff:g id="voicemail_number">%s</xliff:g></string>
+  <string name="notification_voicemail_no_vm_number">Chan eil fios dè àireamh a’ phuist-ghutha</string>
+  <plurals name="notification_voicemail_title">
+    <item quantity="one">            <xliff:g id="count">%1$d</xliff:g>
+            phost-gutha</item>
+    <item quantity="two">            <xliff:g id="count">%1$d</xliff:g>
+            phost-gutha
+        </item>
+    <item quantity="few">            <xliff:g id="count">%1$d</xliff:g>
+            puist-ghutha
+        </item>
+    <item quantity="other">            <xliff:g id="count">%1$d</xliff:g>
+            post-gutha
+        </item>
+  </plurals>
+  <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
+        <xliff:g id="older_caller">%2$s</xliff:g>
+    </string>
+  <string name="notification_new_voicemail_ticker">Post-gutha ùr o
+        <xliff:g id="caller">%1$s</xliff:g>
+    </string>
+  <string name="voicemail_playback_error">Cha b’ urrainn dhuinn am post-gutha a chluich</string>
+  <string name="voicemail_fetching_content">A’ luchdadh a’ phuist-ghutha\u2026</string>
+  <string name="voicemail_fetching_timout">Cha b’ urrainn dhuinn am post-gutha a luchdadh</string>
+  <string name="call_log_item_count_and_date">(<xliff:g id="count">%1$d</xliff:g>)
+        <xliff:g id="date">%2$s</xliff:g>
+    </string>
+  <string name="description_playback_speakerphone">Cuir an speakerphone air no dheth</string>
+  <string name="description_playback_seek">Sir ionad cluiche</string>
+  <string name="action_menu_call_history_description">Eachdraidh nan gairmean</string>
+  <string msgid="2295659037509008453" name="action_menu_overflow_description">Barrachd roghainnean</string>
+  <string name="action_menu_dialpad_button">pada nan àireamhan</string>
+  <string name="dialer_settings_label">Roghainnean</string>
+  <string name="simulator_submenu_label">Mas-fhìorachd</string>
+  <string name="new_ui_launcher_shortcut_label">Cruthaich ath-ghoirid ùr dhan eadar-aghaidh</string>
+  <string name="description_entering_bulk_action_mode">A’ cleachdadh modh nam mòr-ghnìomh</string>
+  <string name="description_leaving_bulk_action_mode">Chaidh modh nam mòr-ghnìomh fhàgail</string>
+  <string name="description_selecting_bulk_action_mode">Chaidh <xliff:g id="nameOrNumber">%1$s</xliff:g> a thaghadh</string>
+  <string name="description_unselecting_bulk_action_mode">Chaidh <xliff:g id="nameOrNumber">%1$s</xliff:g> a dhì-thaghadh</string>
+  <string name="description_contact_details">Am fiosrachadh conaltraidh aig <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_spam_contact_details">Am fiosrachadh conaltraidh aig neach fo amharas spama <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> gairm(ean).</string>
+  <string name="description_video_call">Gairm video.</string>
+  <string name="description_start_voice_search">Tòisich air lorg gutha</string>
+  <string name="voicemail">Post-gutha</string>
+  <string name="description_cancel_multi_select">Sguir de mhodh nam mòr-ghnìomh</string>
+  <string name="voicemailMultiSelectDeleteConfirm">Sguab às</string>
+  <string name="voicemailMultiSelectDeleteCancel">Sguir dheth</string>
+  <string name="voicemailMultiSelectActionBarTitle">Chaidh <xliff:g id="number">%1$s</xliff:g> a thaghadh</string>
+  <plurals name="delete_voicemails_confirmation_dialog_title">
+    <item quantity="one"><b>An sguab thu às am post-gutha seo? </b></item>
+    <item quantity="two"><b>An sguab thu às na puist-ghutha seo? </b></item>
+    <item quantity="few"><b>An sguab thu às na puist-ghutha seo? </b></item>
+    <item quantity="other"><b>An sguab thu às na puist-ghutha seo? </b></item>
+  </plurals>
+  <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <string name="voicemailCallLogDateTimeFormat"><xliff:g example="Jul 25, 2014" id="date">%1$s</xliff:g> aig <xliff:g example="2:49 PM" id="time">%2$s</xliff:g></string>
+  <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g example="Jul 25, 2014 at 2:49PM" id="dateAndTime">%1$s</xliff:g> \u2022 <xliff:g example="01:22" id="duration">%2$s</xliff:g></string>
+  <string name="voice_search_not_available">Chan eil lorg gutha ri làimh</string>
+  <string name="dialer_hint_find_contact">Lorg san luchd-aithne</string>
+  <string name="block_number_search_hint">Cuir àireamh ris no lorg san luchd-aithne</string>
+  <string name="call_log_all_empty">Tha eachdraidh nan gairmean agad falamh</string>
+  <string name="call_log_all_empty_action">Cuir fòn</string>
+  <string name="call_log_missed_empty">Cha do dh’fhalbh gairm ort.</string>
+  <string name="call_log_voicemail_empty">Tha bogsa a-steach nam post-gutha agad falamh.</string>
+  <string name="call_log_activity_title" tools:ignore="UnusedResources">Eachdraidh nan gairmean</string>
+  <string name="call_log_all_title">Na h-uile</string>
+  <string name="call_log_missed_title">Na dh’fhalbh ort</string>
+  <string name="tab_speed_dial">Grad-daitheal</string>
+  <string name="tab_history">Eachdraidh nan gairmean</string>
+  <string name="tab_all_contacts">Luchd-aithne</string>
+  <string name="tab_voicemail">Post-gutha</string>
+  <string name="search_shortcut_call_number">Cuir fòn gu
+        <xliff:g id="number">%s</xliff:g>
+    </string>
+  <string name="search_shortcut_create_new_contact">Cruthaich neach-aithne ùr</string>
+  <string name="search_shortcut_add_to_contact">Cuir ri neach-aithne</string>
+  <string name="search_shortcut_send_sms_message">Cuir SMS</string>
+  <string name="search_shortcut_make_video_call">Dèan gairm video</string>
+  <string name="search_shortcut_block_number">Bac an àireamh</string>
+  <string name="speed_dial_empty">Chan eil grad-dhaidheal do dhuine sam bith agad fhathast</string>
+  <string name="speed_dial_empty_add_favorite_action">Cuir annsachd ris</string>
+  <string name="remove_contact">Thoir air falbh</string>
+  <string name="select_all">Tagh na h-uile</string>
+  <string name="call_log_action_video_call">Gairm video</string>
   <string name="call_log_action_set_up_video">Suidhich gairmean video</string>
   <string name="call_log_action_invite_video">Thoir cuireadh do ghairm video</string>
+  <string name="call_log_action_send_message">Cuir teachdaireachd</string>
+  <string name="call_log_action_details">Mion-fhiosrachadh mun ghairm</string>
+  <string name="call_log_action_share_voicemail">Cuir gu …</string>
+  <string name="call_log_action_call">        Cuir fòn gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_incoming_missed_call">Gairm o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> a dh’fhalbh ort, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>.</string>
+  <string name="description_incoming_answered_call">Gairm o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> a fhreagair thu, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>.</string>
+  <string name="description_unread_voicemail">Post-gutha gun leughadh o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="description_read_voicemail">Post-gutha o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <string name="description_outgoing_call">Gairm gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>.</string>
+  <string name="call_log_via_number">slighe <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
+  <string name="call_log_via_number_phone_account"><xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g> slighe <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
+  <string name="description_call_action">        Cuir fòn gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_video_call_action">        Cuir gairm video gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>.
+    </string>
+  <string name="description_voicemail_action">        Èist ri post-gutha o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_create_new_contact_action">        Cruthaich neach-aithne dha <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="description_add_to_existing_contact_action">        Cuir <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> ri neach-aithne a tha ann
+    </string>
+  <string name="description_details_action">        Mion-fhiosrachadh mu ghairm le <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
+    </string>
+  <string name="call_log_header_today">An-diugh</string>
+  <string name="call_log_header_yesterday">An-dè</string>
+  <string name="call_log_header_other">Nas sine</string>
+  <string name="voicemail_speaker_on">Cuir an glaodhaire air.</string>
+  <string name="voicemail_speaker_off">Cuir an glaodhaire dheth.</string>
+  <string name="voicemail_play_start_pause">Cluich no cuir ’na stad.</string>
+  <string name="display_options_title">Roghainnean taisbeanaidh</string>
+  <string name="sounds_and_vibration_title">Na fuaimean ’s a’ chrith</string>
+  <string name="accessibility_settings_title">So-ruigsinneachd</string>
+  <string name="ringtone_title">Seirm an fhòn</string>
+  <string name="vibrate_on_ring_title">\"Dèan crith ach airson gairmean cuideachd</string>
+  <string name="dtmf_tone_enable_title">Fuaimean pada nan iuchraichean</string>
+  <string name="dtmf_tone_length_title">Faide nam fuaimean air pada nan iuchraichean</string>
+  <string-array name="dtmf_tone_length_entries">
+    <item>Àbhaisteach</item>
+    <item>Fada</item>
+  </string-array>
+  <string name="respond_via_sms_setting_title">Grad-fhreagairtean</string>
+  <string name="call_settings_label">Gairmean</string>
+  <string name="manage_blocked_numbers_label">Àireamhan bacte</string>
+  <string name="voicemail_settings_label">Post-gutha</string>
+  <string name="blocked_numbers_disabled_emergency_header_label">        Tha bacadh ghairmean dheth rè seal
+    </string>
+  <string name="blocked_numbers_disabled_emergency_desc">        Chaidh bacadh ghairmean a chur à comas on a rinn thu conaltradh le seirbheisean èiginneach on fhòn seo
+        am broinn an 48 uair a thìde a dh’fhalbh. Thèid a chur an comas a-rithist gu fèin-obrachail
+        nuair a dh’fhalbhas 48 uair a thìde.
+    </string>
+  <string name="import_send_to_voicemail_numbers_label">Ion-phortaich àireamhan</string>
+  <string name="blocked_call_settings_import_description">        Chuir thu comharra ri cuid a luchd-ghairm cheana le aplacaidean eile ach an dèid an cur gu post-gutha gu fèin-obrachail.
+    </string>
+  <string name="blocked_call_settings_view_numbers_button">Seall na h-àireamhan</string>
+  <string name="blocked_call_settings_import_button">Ion-phortaich</string>
+  <string name="description_blocked_number_list_delete">Dì-bhac an àireamh</string>
+  <string name="addBlockedNumber">Cuir àireamh ris</string>
+  <string name="block_number_footer_message_vvm">        Thèid gairmean on na h-àireamhan seo a bhacadh agus thèid teachdaireachdan-gutha a sguabadh às gu fèin-obrachail.
+    </string>
+  <string name="block_number_footer_message_no_vvm">        Thèid gairmean on na h-àireamhan seo a bhacadh ach dh’fhaoidte gum fàgar teachdaireachdan-gutha dhut fhathast.
+    </string>
+  <string name="block_list">Àireamhan bacte</string>
+  <string name="alreadyBlocked">Chaidh <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
+ a bhacadh cheana.</string>
+  <string name="phone_account_settings_label">Cunntasan ghairmean</string>
+  <string name="permission_no_speeddial">Airson grad-daithealadh a chur an comas, cuir air cead an luchd-aithne.</string>
+  <string name="permission_no_calllog">Airson loga nan gairmean agad fhaicinn, cuir air cead an fhòn.</string>
+  <string name="permission_no_search">Airson lorg san luchd-aithne agad, cuir air ceadan an luchd-aithne.</string>
+  <string name="permission_place_call">Airson gairm a dhèanamh, cuir air cead an fhòn.</string>
+  <string name="toast_cannot_write_system_settings">Chan eil cead aig aplacaid an fhòn airson sgrìobhadh gu roghainnean an t-siostaim.</string>
+  <string name="blocked_number_call_log_label">Bacte</string>
+  <string name="call_log_action_block_report_number">Bac/Dèan aithris air spama</string>
+  <string name="call_log_action_block_number">Bac an àireamh</string>
+  <string name="call_log_action_remove_spam">Àireamh chòir</string>
+  <string name="call_log_action_unblock_number">Dì-bhac an àireamh</string>
+  <string name="spam_number_call_log_label">Spama</string>
+  <string name="call_composer_connection_failed">Tha <xliff:g id="name">%1$s</xliff:g> far loidhne is gha ghabh a ruigsinn</string>
+  <string name="about_phone_label">Mu dhèidhinn</string>
   <string name="voicemail_transcription_branding_text">Air a thar-sgrìobhadh le Google</string>
   <string name="voicemail_transcription_in_progress">’Ga thar-sgrìobhadh…</string>
   <string name="voicemail_transcription_failed">Chan eil tar-sgrìobhadh ri làimh.</string>
   <string name="voicemail_transcription_failed_language_not_supported">Chan eil tar-sgrìobhadh ri làimh. Cha chuir sinn taic ris a’ chànan.</string>
   <string name="voicemail_transcription_failed_no_speech">Chan eil tar-sgrìobhadh ri làimh. Cha do mhothaich sinn do chainnt.</string>
   <string name="voicemail_donation_promo_title">An cuidich thu le pongalachd an eadar-theangachaidh?</string>
+  <string name="voicemail_donation_promo_content">    Leig le Google an teachdaireachd-gutha seo le tar-sgrìobhadh ’s an fheadhainn ri teachd a sgrùdadh.
+    Thèid an stòradh gun ainm riutha. ’S urrainn dhut na roghainnean atharrachadh uair sam bith.<xliff:g example="Learn more">%1$s</xliff:g>
+  </string>
   <string name="voicemail_donation_promo_opt_in">Cuidichidh</string>
   <string name="voicemail_donation_promo_opt_out">Cha chuidich</string>
   <string name="voicemail_transcription_rating">Rangaich càileachd an tar-sgrìobhaidh</string>
   <string name="voicemail_transcription_rating_thanks">Mòran taing airson do bheachdan</string>
   <string name="description_rating_good">’S toigh leam seo</string>
   <string name="description_rating_bad">Cha toigh leam seo</string>
+  <string name="view_conversation">Seall</string>
+  <string name="ec_data_deleted">Chaidh a’ ghairm a sguabadh às. Seall is sguab às na ceanglachain a chaidh a cho-roinneadh rè na gairme seo sna “Teachdaireachdan”.</string>
+  <string name="multiple_ec_data_deleted">Chaidh na gairmean a sguabadh às. Seall is sguab às na ceanglachain a chaidh a cho-roinneadh rè nan gairmean seo sna “Teachdaireachdan”.</string>
 </resources>
