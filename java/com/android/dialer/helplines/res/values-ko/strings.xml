@@ -29,6 +29,7 @@
     <string name="helpline_categories">카테고리</string>
     <string name="helpline_number">전화번호</string>
     <string name="helpline_website">웹 사이트</string>
+    <!-- Format for displaying a helpline name with the country - Example will resolve to "Emotional Support Hotline (US)" -->
     <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
     <string name="helpline_language_cree">크리어</string>
     <string name="helpline_language_english">영어</string>

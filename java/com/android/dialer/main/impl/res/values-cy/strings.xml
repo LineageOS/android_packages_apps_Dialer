@@ -15,12 +15,21 @@
   ~ limitations under the License
   -->
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Name of the main activity. -->
   <string name="main_activity_label" tools:ignore="UnusedResources">Ffonio</string>
+  <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
   <string name="dialpad_activity_title">Pad Deialu Ffôn</string>
+  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
   <string name="search">@android:string/search_go</string>
+  <!-- A11y announcement to let users know a button will let them search for contacts and places [CHAR LIMIT=NONE] -->
   <string name="description_search">Chwilio cysylltiadau a lleoedd</string>
+  <!-- Text for a toolbar button that shows the user their contacts [CHAR LIMIT=NONE] -->
   <string name="contacts">Cysylltiadau</string>
+  <!-- A11y announcement to let users know a button will let them view their contacts [CHAR LIMIT=NONE] -->
   <string name="description_contacts">Gweld Cysylltiadau</string>
+  <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <string name="voice_search_not_available">Chwilio llais ddim ar gael</string>
+  <!-- Content description for the button that displays the dialpad
+       [CHAR LIMIT=NONE] -->
   <string name="dialpad_button_content_description">pad bysellau</string>
 </resources>

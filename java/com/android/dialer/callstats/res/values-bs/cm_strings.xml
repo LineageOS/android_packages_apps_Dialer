@@ -17,4 +17,5 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_stats_header_total">Ukupno: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

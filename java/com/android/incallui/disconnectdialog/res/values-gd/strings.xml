@@ -15,8 +15,14 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Button to enable Wi-Fi calling. This is displayed in a dialog after a phone call disconnects
+      because there is no cellular service.
+      [CHAR LIMIT=20] -->
   <string name="incall_enable_wifi_calling_button">Cuir an comas</string>
+  <!-- Title of alert dialog displayed when video call is not available. [CHAR LIMIT=NONE] -->
   <string name="video_call_not_available_title">Chan eil gairmean video ri fhaighinn an-dràsta</string>
+  <!-- Message of alert dialog displayed when video call is not available. [CHAR LIMIT=NONE] -->
   <string name="video_call_not_available_message">Feuch ris a-rithist an ceann greis no lean ris a’ ghairm ’na ghairm-gutha.</string>
+  <!-- Voice call button label of alert dialog displayed when video call is not available. [CHAR LIMIT=20] -->
   <string name="voice_call">Gairm video</string>
 </resources>

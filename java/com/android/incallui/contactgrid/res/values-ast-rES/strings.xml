@@ -15,7 +15,44 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title displayed in the overlay for outgoing calls which include the name of the provider.
+     [CHAR LIMIT=40] -->
+  <!-- Title displayed in the overlay for outgoing calls when the provider is automatically chosen
+         because it is the same provider the callee is using. [CHAR LIMIT=60] -->
+  <!-- Title displayed in the overlay for outgoing calls when the provider is automatically chosen
+         because the user has selected it multiple times.  [CHAR LIMIT=60] -->
+  <!-- Displayed above the contact name during an outgoing phone call. Indicates that the call is
+       in the connecting stage. -->
+  <!-- Display information related to assisted dialing, for example Calling using +1 (US)… -->
+  <!-- String appended to the outgoing call title for additional information related to assisted dialing, for example "Calling via <CARRIER> • Using +1 (US)… "-->
+  <!-- Displayed above the contact name when an external call is being pulled to the local
+       device. -->
+  <!-- Displayed above the contact name when the user starts a video call. -->
   <string name="incall_video_call_requesting">Llamaes de videu de la operadora…</string>
+  <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
+       Wi-Fi video call. -->
+  <!-- Displayed above the contact name when the user requests an upgrade from a voice call to a
+     video call. -->
+  <!-- Displayed above the contact name when the user's video upgrade failed due to an unknown
+       reason. -->
+  <!-- Displayed above the contact name when the user's video upgrade was declined by the remote
+       party. -->
+  <!-- Displayed above the contact name when no response was received for the user's upgrade
+       requests and we timed out. -->
+  <!-- Displayed above the contact name when the user's operation for video calling is failed due to an unknown reason. -->
+  <!-- In-call screen: status label for a call that's in the process of hanging up
+       [CHAR LIMIT=25] -->
+  <!-- In-call screen: status label displayed briefly after a call ends [CHAR LIMIT=25] -->
+  <!-- In-call screen: label shown at the top of the screen when a call is on hold by the remote
+     party [CHAR LIMIT=25] -->
+  <!-- Displayed in the answer call screen for incoming video calls. -->
+  <!-- Displayed in the answer call screen for incoming video calls over Wi-F. -->
+  <!-- Displayed in the answer call screen for incoming voice calls. -->
+  <!-- Displayed in the answer call screen for incoming voice calls. -->
   <string name="contact_grid_incoming_work_call">Llamada de trabayu de</string>
+  <!-- Displayed in the answer call screen for incoming calls via a phone account. -->
+  <!-- Displayed in the answer call screen for incoming spam calls. -->
   <string name="contact_grid_incoming_suspected_spam">El que llama ye sospechosu de spam</string>
+  <!-- In-call screen: phone number of the device shown to the users so that users can give their
+      number to emergency responders. -->
 </resources>

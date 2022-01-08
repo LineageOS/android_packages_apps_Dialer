@@ -15,6 +15,12 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Text indicates the video from remote party is off. [CHAR LIMIT=40] -->
   <string name="videocall_remote_video_off">El to videu ta apagáu</string>
+  <!-- Text indicates the video from remote party is on. [CHAR LIMIT=40] -->
   <string name="videocall_remote_video_on">El to videu ta prendíu</string>
+  <!-- Text indicates the call is held by remote party. [CHAR LIMIT=20] -->
+  <!-- Text indicates the call is resumed from held by remote party. [CHAR LIMIT=20] -->
+  <!-- Instruction text to notify user that charges may apply on video calling. [CHAR LIMIT=NONE] -->
+  <!-- Option to hide the popup dialog if it is not necessary for the user. [CHAR LIMIT=40] -->
 </resources>

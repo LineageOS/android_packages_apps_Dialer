@@ -15,12 +15,19 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Shown as a message that notifies asks the user if they want to send a post call message -->
   <string name="post_call_message">Innis carson an do chuir thu fòn</string>
+  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_1">Tha seo cabhagach. Cuir fòn thugam.</string>
+  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_2">Cuir fòn thugam</string>
+  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_3">Chan eil cabhag ann, bruidhnidh sinn uaireigin eile.</string>
+  <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_add_message">Cuir teachdaireachd ris</string>
+  <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_send_message">Cuir teachdaireachd</string>
+  <!-- Shown to let the user know that their message was sent. -->
   <string name="post_call_message_sent">Chaidh an teachdaireachd a chur</string>
   <string name="view">Seall</string>
 </resources>

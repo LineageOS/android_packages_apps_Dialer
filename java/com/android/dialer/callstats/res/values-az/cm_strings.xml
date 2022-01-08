@@ -44,5 +44,6 @@
     <string name="call_stats_title_durations">Zəng müddətləri</string>
     <string name="call_stats_title_count">Zəng sayı</string>
     <string name="call_stats_title_average_duration">Ortalama zəng müddəti</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Seçilmiş vaxt aralığında zəng jurnalınız heç bir zəng ehtiva etmir.</string>
 </resources>

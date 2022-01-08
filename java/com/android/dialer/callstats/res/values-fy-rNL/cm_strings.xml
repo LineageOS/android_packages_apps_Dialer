@@ -44,5 +44,6 @@
     <string name="call_stats_title_durations">Peteardoer</string>
     <string name="call_stats_title_count">Oantal petearen</string>
     <string name="call_stats_title_average_duration">Gemiddelde peteardoer</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Jo opropskiednis befettet gjin oproppen yn it selektearre tiidrek.</string>
 </resources>

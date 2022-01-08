@@ -15,12 +15,29 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title bar for call detail screen -->
   <string name="call_details">Detalles de la llamada</string>
+  <!-- Text for the action item to remove a call or voicemail from the call log. -->
+  <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
+  <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
+  <!-- Label for action to report a number with inaccurate caller id information. [CHAR LIMIT=48] -->
   <string name="call_details_report_call_id">Informar de númberu imprecisu</string>
+  <!-- String shown when the call details show a image that was sent -->
   <string name="sent_a_photo">Unviar una semeya</string>
+  <!-- String shown when the call details show a image that was received -->
   <string name="received_a_photo">Recibida una semeya</string>
+  <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
   <string name="message_in_quotes">\"<xliff:g id="message">%1$s</xliff:g>\"</string>
+  <!-- Title of dialog that confirms whether a user wants to report an incorrect number.
+       [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_dialog_title">Informar de númberu incorreutu</string>
+  <!-- Toast that appears when a caller id report fails to send. Could be due to network error or
+       authentication error. [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_failed">Nun se puede informar del númberu</string>
+  <!-- Toast message which appears when a contact's caller id is reported as incorrect. [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_toast">Númberu informáu</string>
+  <!-- Assisted dialing section header. [CHAR LIMIT=NONE] -->
+  <!-- A fallback string for the assisted dialing header incase parsing failes.. [CHAR LIMIT=NONE] -->
+  <!-- String shown when RTT transcript is not available for any reason. [CHAR LIMIT=NONE] -->
+  <!-- String shown when RTT transcript is available. [CHAR LIMIT=NONE] -->
 </resources>

@@ -15,10 +15,32 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- header for a list of contacts that are the users favorites. [CHAR LIMIT=30] -->
   <string name="favorites_header">Favoritos</string>
+  <!-- header for a list of contacts that are suggestions for the user to place calls to based on
+    their frequently contacted contacts. [CHAR LIMIT=30] -->
+  <!-- text for a button that prompts the user to add a contact to their favorites. [CHAR LIMIT=12] -->
   <string name="speed_dial_add_button_text">Amestar</string>
+  <!-- text for a checkbox in a dialog that prompts the user to select a phone number from a list.
+    If the user checks this box, we will remember their selection and never ask for it again. [CHAR LIMIT=NONE]-->
   <string name="speed_dial_remember_this_choice">Recordar esta opción</string>
+  <!-- Title of a dialog asking the user to choose their the mode/type of communication for a
+    specific contact where communication modes are video calling and voice calling. [CHAR LIMIT=NONE]-->
+  <!-- Text for a button that places a video call [CHAR LIMIT=15]-->
   <string name="disambig_option_video_call">Videollamada</string>
+  <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
   <string name="disambig_option_voice_call">Llamada</string>
+  <!-- Title for screen prompting the user to select a contact to mark as a favorite. [CHAR LIMIT=NONE] -->
   <string name="add_favorite_activity_title">Amestar Favoritu</string>
+  <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
+  <!-- Text for a button that places a video call [CHAR LIMIT=15]-->
+  <!-- Text for a button that opens the contact in the SMS app [CHAR LIMIT=15]-->
+  <!-- Text for a button that removes the item from the list [CHAR LIMIT=15]-->
+  <!-- Text for a button that opens the contact's info [CHAR LIMIT=15]-->
+  <!-- Text shown to the user in a button to prompt them to mark a contact as a favorite contact [CHAR LIMIT=30]. -->
+  <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
+  <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
+  <!-- [CHAR LIMIT=NONE] Shown when there are no contacts in the all contacts list. -->
+  <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
+  <!-- Text shown on a dragging target that removes the contact from favorites -->
 </resources>

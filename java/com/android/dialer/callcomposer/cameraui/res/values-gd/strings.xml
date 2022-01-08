@@ -15,10 +15,16 @@
  ~ limitations under the License
  -->
 <resources>
+  <!-- Content description of button to switch to full screen camera -->
   <string name="description_camera_switch_full_screen">Geàrr leum gu camara na làn-sgrìn</string>
+  <!-- Content description of button to resize camera from fullscreen to only a preview -->
   <string name="description_camera_switch_preview_screen">Leum gu ro-shealladh a’ chamara</string>
+  <!-- Content description of button when after swapped to front -->
   <string name="description_camera_switch_camera_facing">Leum gun chamara an comhair a bheòil</string>
+  <!-- Content description of button when after swapped to back -->
   <string name="description_camera_switch_camera_rear">Leum gun chamara an comhair a chùil</string>
+  <!-- Content description of button to take a photo -->
   <string name="description_camera_take_picture">Tog dealbh</string>
+  <!-- Content description of button to cancel a photo -->
   <string name="description_camera_cancel_photo">Tog an dealbh a-rithist</string>
 </resources>

@@ -15,7 +15,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Forward lookup -->
+    <!-- Number lookup -->
     <string name="enable_forward_lookup_summary">Vis nærliggende steder, ved søgning i telefonen</string>
     <string name="enable_people_lookup_summary">Vis online-resultater for folk, ved søgning i telefonen</string>
     <string name="enable_reverse_lookup_summary">Slå information op om personen, eller stedet, for ukendte numre, ved indgående opkald</string>
+    <!-- Disclaimer -->
 </resources>

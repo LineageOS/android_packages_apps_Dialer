@@ -15,27 +15,63 @@
   ~ limitations under the License
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Application name used in Settings/Apps. Default label for activities
+       that don't specify a label. -->
   <string name="applicationLabel" tools:ignore="UnusedResources">Fòn</string>
+  <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
   <string name="launcherDialpadActivityLabel">Pada àireamhan an fhòn</string>
+  <!-- The description text for the call log tab.
+
+  Note: AccessibilityServices use this attribute to announce what the view represents.
+  This is especially valuable for views without textual representation like ImageView.
+
+  [CHAR LIMIT=NONE] -->
   <string name="callHistoryIconLabel" tools:ignore="UnusedResources">Eachdraidh nan gairmean</string>
+  <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
   <string name="action_copy_number_text">Dèan lethbhreac dhen àireamh</string>
+  <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
   <string name="copy_transcript_text">Dèan lethbhreac dhen tar-sgrìobhadh</string>
+  <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <string name="action_edit_number_before_call">Deasaich an àireamh mus dèan thu gairm</string>
+  <!-- Menu item used to remove all calls from the call log -->
   <string name="call_log_delete_all">Falamhaich eachdraidh nan gairmean</string>
+  <!-- Menu item used to delete a voicemail. [CHAR LIMIT=30] -->
   <string name="call_log_trash_voicemail">Sguab às am post-gutha</string>
+  <!-- Text for snackbar to undo a voicemail delete. [CHAR LIMIT=30] -->
   <string name="snackbar_voicemail_deleted">Chaidh am post-gutha a sguabadh às</string>
+  <!-- Title of the confirmation dialog for clearing the call log. [CHAR LIMIT=37]  -->
   <string name="clearCallLogConfirmation_title">Am falamhaich thu eachdraidh nan gairmean?</string>
+  <!-- Confirmation dialog for clearing the call log. [CHAR LIMIT=NONE]  -->
   <string name="clearCallLogConfirmation">Sguabaidh sin a h-uile gairm às on eachdraidh agad</string>
+  <!-- Title of the "Clearing call log" progress-dialog [CHAR LIMIT=35] -->
   <string name="clearCallLogProgress_title">A’ falamhachadh eachdraidh nan gairmean…</string>
+  <!-- Notification strings -->
+  <!-- Missed call notification label, used when there's exactly one missed call -->
   <string name="notification_missedCallTitle">Gairm a dh’fhalbh ort</string>
+  <!-- Missed call notification label, used when there's exactly one missed call from work contact -->
   <string name="notification_missedWorkCallTitle">Gairm na h-obrach a dh’fhalbh ort</string>
+  <!-- Missed call notification label, used when there are two or more missed calls -->
   <string name="notification_missedCallsTitle">Gairmean a dh\'fhalbh ort</string>
+  <!-- Missed call notification message used when there are multiple missed calls -->
   <string name="notification_missedCallsMsg">Dh’fhalbh gairmean ort (<xliff:g id="num_missed_calls">%d</xliff:g>)</string>
+  <!-- Message for "call back" Action, which is displayed in the missed call notificaiton.
+       The user will be able to call back to the person or the phone number.
+       [CHAR LIMIT=18] -->
   <string name="notification_missedCall_call_back">Fònaig air ais</string>
+  <!-- Message for "reply via sms" action, which is displayed in the missed call notification.
+       The user will be able to send text messages using the phone number.
+       [CHAR LIMIT=18] -->
   <string name="notification_missedCall_message">Cuir teachdaireachd</string>
+  <!-- Hardcoded number used for restricted incoming phone numbers. -->
+  <!-- Format for a post call message. (ex. John Doe: Give me a call when you're free.) -->
   <string name="post_call_notification_message"><xliff:g id="name">%1$s</xliff:g>: <xliff:g id="message">%2$s</xliff:g></string>
+  <!-- Message displayed in the "Voicemail" notification item, allowing the user
+       to dial the indicated number. -->
   <string name="notification_voicemail_text_format">Daitheal <xliff:g id="voicemail_number">%s</xliff:g></string>
+  <!-- Message displayed in the "Voicemail" notification item,
+       indicating that there's no voicemail number available -->
   <string name="notification_voicemail_no_vm_number">Chan eil fios dè àireamh a’ phuist-ghutha</string>
+  <!-- Title of the notification of new voicemails. [CHAR LIMIT=30] -->
   <plurals name="notification_voicemail_title">
     <item quantity="one">            <xliff:g id="count">%1$d</xliff:g>
             phost-gutha</item>
@@ -49,174 +85,469 @@
             post-gutha
         </item>
   </plurals>
+  <!-- Used to build a list of names or phone numbers, to indicate the callers who left
+       voicemails.
+       The first argument may be one or more callers, the most recent ones.
+       The second argument is an additional callers.
+       This string is used to build a list of callers.
+
+       [CHAR LIMIT=10]
+   -->
   <string name="notification_voicemail_callers_list"><xliff:g id="newer_callers">%1$s</xliff:g>,
         <xliff:g id="older_caller">%2$s</xliff:g>
     </string>
+  <!-- Text used in the ticker to notify the user of the latest voicemail. [CHAR LIMIT=30] -->
   <string name="notification_new_voicemail_ticker">Post-gutha ùr o
         <xliff:g id="caller">%1$s</xliff:g>
     </string>
+  <!-- Message to show when there is an error playing back the voicemail. [CHAR LIMIT=40] -->
   <string name="voicemail_playback_error">Cha b’ urrainn dhuinn am post-gutha a chluich</string>
+  <!-- Message to display whilst we are waiting for the content to be fetched. [CHAR LIMIT=40] -->
   <string name="voicemail_fetching_content">A’ luchdadh a’ phuist-ghutha\u2026</string>
+  <!-- Message to display if we fail to get content within a suitable time period. [CHAR LIMIT=40] -->
   <string name="voicemail_fetching_timout">Cha b’ urrainn dhuinn am post-gutha a luchdadh</string>
+  <!-- The counter for calls in a group and the date of the latest call as shown in the call log [CHAR LIMIT=15] -->
   <string name="call_log_item_count_and_date">(<xliff:g id="count">%1$d</xliff:g>)
         <xliff:g id="date">%2$s</xliff:g>
     </string>
+  <!-- String describing the button in the voicemail playback to switch on/off speakerphone.
+
+       Used by AccessibilityService to announce the purpose of the view.
+  -->
   <string name="description_playback_speakerphone">Cuir an speakerphone air no dheth</string>
+  <!-- String describing the seekbar in the voicemail playback to seek playback position.
+
+       Used by AccessibilityService to announce the purpose of the view.
+  -->
   <string name="description_playback_seek">Sir ionad cluiche</string>
+  <!-- Content description for the fake action menu button that brings up the call history
+       activity -->
   <string name="action_menu_call_history_description">Eachdraidh nan gairmean</string>
+  <!-- Content description for the fake action menu overflow button.
+       This should be same as the description for the real action menu
+       overflow button available in ActionBar.
+       [CHAR LIMIT=NONE] -->
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Barrachd roghainnean</string>
+  <!-- Content description for the button that displays the dialpad
+       [CHAR LIMIT=NONE] -->
   <string name="action_menu_dialpad_button">pada nan àireamhan</string>
+  <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
   <string name="dialer_settings_label">Roghainnean</string>
+  <!-- Label for the simulator submenu. This is used to show actions that are useful for development
+       and testing. [CHAR LIMIT=30]-->
   <string name="simulator_submenu_label">Mas-fhìorachd</string>
+  <!-- Label for the menu item that installs a shortcut for the new UI. [CHAR LIMIT=30] -->
   <string name="new_ui_launcher_shortcut_label">Cruthaich ath-ghoirid ùr dhan eadar-aghaidh</string>
+  <!-- String describing the user entering bulk action mode.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+-->
   <string name="description_entering_bulk_action_mode">A’ cleachdadh modh nam mòr-ghnìomh</string>
+  <!-- String describing the user leaving bulk action mode.
+
+    Note: AccessibilityServices use this attribute to announce what the view represents.
+          This is especially valuable for views without textual representation like ImageView.
+-->
   <string name="description_leaving_bulk_action_mode">Chaidh modh nam mòr-ghnìomh fhàgail</string>
+  <!-- String describing the button to select an entry for bulk action.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
   <string name="description_selecting_bulk_action_mode">Chaidh <xliff:g id="nameOrNumber">%1$s</xliff:g> a thaghadh</string>
+  <!-- String describing the button to unselect an entry for bulk action.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
   <string name="description_unselecting_bulk_action_mode">Chaidh <xliff:g id="nameOrNumber">%1$s</xliff:g> a dhì-thaghadh</string>
+  <!-- String describing the button to access the contact details for a name or number.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
   <string name="description_contact_details">Am fiosrachadh conaltraidh aig <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <!-- String describing the button to access the contact details for a name or number when the
+       when the number is a suspected spam.
+
+      Note: AccessibilityServices use this attribute to announce what the view represents.
+            This is especially valuable for views without textual representation like ImageView.
+  -->
   <string name="description_spam_contact_details">Am fiosrachadh conaltraidh aig neach fo amharas spama <xliff:g id="nameOrNumber">%1$s</xliff:g></string>
+  <!-- String indicating the number of calls to/from a caller in the call log.
+
+  Note: AccessibilityServices use this attribute to announce what the view represents.
+        This is especially valuable for views without textual representation like ImageView.
+  -->
   <string name="description_num_calls"><xliff:g id="numberOfCalls">%1$s</xliff:g> gairm(ean).</string>
+  <!-- String indicating a call log entry had video capabilities.
+
+  Note: AccessibilityServices use this attribute to announce what the view represents.
+        This is especially valuable for views without textual representation like ImageView.
+        [CHAR LIMIT=NONE]
+  -->
   <string name="description_video_call">Gairm video.</string>
+  <!-- String describing the icon used to start a voice search -->
   <string name="description_start_voice_search">Tòisich air lorg gutha</string>
+  <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail">Post-gutha</string>
+  <!-- String describing the cancel button in multi select.
+       Note: AccessibilityServices uses this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE] -->
   <string name="description_cancel_multi_select">Sguir de mhodh nam mòr-ghnìomh</string>
   <string name="voicemailMultiSelectDeleteConfirm">Sguab às</string>
   <string name="voicemailMultiSelectDeleteCancel">Sguir dheth</string>
   <string name="voicemailMultiSelectActionBarTitle">Chaidh <xliff:g id="number">%1$s</xliff:g> a thaghadh</string>
+  <!-- Alert dialog title to accept or decline deleting voicemail(s). -->
   <plurals name="delete_voicemails_confirmation_dialog_title">
     <item quantity="one"><b>An sguab thu às am post-gutha seo? </b></item>
     <item quantity="two"><b>An sguab thu às na puist-ghutha seo? </b></item>
     <item quantity="few"><b>An sguab thu às na puist-ghutha seo? </b></item>
     <item quantity="other"><b>An sguab thu às na puist-ghutha seo? </b></item>
   </plurals>
+  <!-- The string 'Today'. This value is used in the voicemailCallLogDateTimeFormat rather than an
+       explicit date string, e.g. Jul 25, 2014, in the event that a voicemail was created on the
+       current day -->
   <string name="voicemailCallLogToday">@string/call_log_header_today</string>
+  <!-- A format string used for displaying the date and time for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM
+       The date will be replaced by 'Today' for voicemails created on the current day. For example: Today at 2:49 PM -->
   <string name="voicemailCallLogDateTimeFormat"><xliff:g example="Jul 25, 2014" id="date">%1$s</xliff:g> aig <xliff:g example="2:49 PM" id="time">%2$s</xliff:g></string>
+  <!-- Format for duration of voicemails which are displayed when viewing voicemail logs. For example "01:22" -->
   <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <!-- A format string used for displaying the date, time and duration for a voicemail call log. For example: Jul 25, 2014 at 2:49 PM • 00:34 -->
   <string name="voicemailCallLogDateTimeFormatWithDuration"><xliff:g example="Jul 25, 2014 at 2:49PM" id="dateAndTime">%1$s</xliff:g> \u2022 <xliff:g example="01:22" id="duration">%2$s</xliff:g></string>
+  <!-- Message displayed when there is no application available to handle voice search. [CHAR LIMIT=NONE] -->
   <string name="voice_search_not_available">Chan eil lorg gutha ri làimh</string>
+  <!-- Hint displayed in dialer search box when there is no query that is currently typed.
+       [CHAR LIMIT=30] -->
   <string name="dialer_hint_find_contact">Lorg san luchd-aithne</string>
+  <!-- Hint displayed in add blocked number search box when there is no query typed.
+       [CHAR LIMIT=45] -->
   <string name="block_number_search_hint">Cuir àireamh ris no lorg san luchd-aithne</string>
+  <!-- Text displayed when the call log is empty. -->
   <string name="call_log_all_empty">Tha eachdraidh nan gairmean agad falamh</string>
+  <!-- Label of the button displayed when the call history is empty. Allows the user to make a call. -->
   <string name="call_log_all_empty_action">Cuir fòn</string>
+  <!-- Text displayed when the list of missed calls is empty -->
   <string name="call_log_missed_empty">Cha do dh’fhalbh gairm ort.</string>
+  <!-- Text displayed when the list of voicemails is empty -->
   <string name="call_log_voicemail_empty">Tha bogsa a-steach nam post-gutha agad falamh.</string>
+  <!--  Title of activity that displays a list of all calls -->
   <string name="call_log_activity_title" tools:ignore="UnusedResources">Eachdraidh nan gairmean</string>
+  <!-- Title for the call log tab containing the list of all voicemails and calls
+       [CHAR LIMIT=30] -->
   <string name="call_log_all_title">Na h-uile</string>
+  <!-- Title for the call log tab containing the list of all missed calls only
+       [CHAR LIMIT=30] -->
   <string name="call_log_missed_title">Na dh’fhalbh ort</string>
+  <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
+       [CHAR LIMIT=40] -->
   <string name="tab_speed_dial">Grad-daitheal</string>
+  <!-- Accessibility text for the tab showing the call history. [CHAR LIMIT=40] -->
   <string name="tab_history">Eachdraidh nan gairmean</string>
+  <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
   <string name="tab_all_contacts">Luchd-aithne</string>
+  <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
   <string name="tab_voicemail">Post-gutha</string>
+  <!-- Shortcut item used to call a number directly from search -->
   <string name="search_shortcut_call_number">Cuir fòn gu
         <xliff:g id="number">%s</xliff:g>
     </string>
+  <!-- Shortcut item used to add a number directly to a new contact from search.
+       [CHAR LIMIT=25] -->
   <string name="search_shortcut_create_new_contact">Cruthaich neach-aithne ùr</string>
+  <!-- Shortcut item used to add a number to an existing contact directly from search.
+       [CHAR LIMIT=25] -->
   <string name="search_shortcut_add_to_contact">Cuir ri neach-aithne</string>
+  <!-- Shortcut item used to send a text message directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_send_sms_message">Cuir SMS</string>
+  <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_make_video_call">Dèan gairm video</string>
+  <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_block_number">Bac an àireamh</string>
+  <!-- Shown when there are no speed dial favorites. -->
   <string name="speed_dial_empty">Chan eil grad-dhaidheal do dhuine sam bith agad fhathast</string>
+  <!-- Shown as an action when there are no speed dial favorites -->
   <string name="speed_dial_empty_add_favorite_action">Cuir annsachd ris</string>
+  <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
   <string name="remove_contact">Thoir air falbh</string>
+  <!-- Select all text that shows up when in multi select mode. [CHAR LIMIT=NONE] -->
   <string name="select_all">Tagh na h-uile</string>
+  <!-- Button text for the "video call" displayed underneath an entry in the call log.
+       Tapping causes a video call to be placed to the caller represented by the call log entry.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_video_call">Gairm video</string>
+  <!-- Button text for the "Set up" video calling option displayed underneath an entry in the call log.
+       Tapping causes a the user to be taken to set up video calling.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_set_up_video">Suidhich gairmean video</string>
+  <!-- Button text for the "Invite" option displayed underneath an entry in the call log.
+       Tapping causes a the user to be taken to the messaging app with a message ready to invite them to set up video calling.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_invite_video">Thoir cuireadh do ghairm video</string>
+  <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
+       messaging app to send a SMS to the number represented by the call log entry.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_send_message">Cuir teachdaireachd</string>
+  <!-- Button text for the button displayed underneath an entry in the call log.
+       Tapping navigates the user to the call details screen where the user can view details for
+       the call log entry. [CHAR LIMIT=30] -->
   <string name="call_log_action_details">Mion-fhiosrachadh mun ghairm</string>
-  <string name="call_log_action_share_voicemail">Cuir gu …</string>
+  <!-- Button text for the button displayed underneath an entry in the call log.
+       Tapping opens dialog to share voicemail archive with other apps. [CHAR LIMIT=30] -->
+  <string name="call_log_action_share_voicemail">Cuir gu &#8230;</string>
+  <!-- Button text for the button displayed underneath an entry in the call log, which when
+       tapped triggers a return call to the named user. [CHAR LIMIT=30] -->
   <string name="call_log_action_call">        Cuir fòn gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
     </string>
+  <!-- String describing an incoming missed call entry in the call log.
+     Note: AccessibilityServices uses this attribute to announce what the view represents.
+     [CHAR LIMIT=NONE] -->
   <string name="description_incoming_missed_call">Gairm o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> a dh’fhalbh ort, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>.</string>
+  <!-- String describing an incoming answered call entry in the call log.
+       Note: AccessibilityServices uses this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE] -->
   <string name="description_incoming_answered_call">Gairm o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> a fhreagair thu, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>.</string>
+  <!-- String describing an "unread" voicemail entry in the voicemails tab.
+       Note: AccessibilityServices use this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE] -->
   <string name="description_unread_voicemail">Post-gutha gun leughadh o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <!-- String describing a "read" voicemail entry in the voicemails tab.
+   Note: AccessibilityServices use this attribute to announce what the view represents.
+   [CHAR LIMIT=NONE] -->
   <string name="description_read_voicemail">Post-gutha o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>.</string>
+  <!-- String describing an outgoing call entry in the call log.
+       Note: AccessibilityServices uses this attribute to announce what the view represents.
+       [CHAR LIMIT=NONE] -->
   <string name="description_outgoing_call">Gairm gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>, <xliff:g example="Mobile" id="typeOrLocation">^2</xliff:g>, <xliff:g example="on SIM 1" id="phoneAccount">^4</xliff:g>, <xliff:g example="2 min ago" id="timeOfCall">^3</xliff:g>.</string>
+  <!-- TextView text item showing the secondary line number the call was received via.
+       [CHAR LIMIT=NONE]-->
   <string name="call_log_via_number">slighe <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g></string>
+  <!-- The order of the PhoneAccount and via number that a call was received on,
+       if both are visible.
+       [CHAR LIMIT=NONE]-->
   <string name="call_log_via_number_phone_account"><xliff:g example="SIM 1" id="phoneAccount">%1$s</xliff:g> slighe <xliff:g example="(555) 555-5555" id="number">%2$s</xliff:g></string>
+  <!-- String describing the "call" action for an entry in the call log.  The call back
+       action triggers a return call to the named user.
+       Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+       [CHAR LIMIT=NONE] -->
   <string name="description_call_action">        Cuir fòn gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
     </string>
+  <!-- String describing the "video call" action for an entry in the call log.  The video call
+       action triggers a return video call to the named person/number.
+       Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+       [CHAR LIMIT=NONE] -->
   <string name="description_video_call_action">        Cuir gairm video gu <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>.
     </string>
+  <!-- String describing the "listen" action for an entry in the call log.  The listen
+       action is shown for call log entries representing a voicemail message and this button
+       triggers playing back the voicemail.
+       Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+       [CHAR LIMIT=NONE] -->
   <string name="description_voicemail_action">        Èist ri post-gutha o <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
     </string>
+  <!-- Description for the "create new contact" action for an entry in the call log. This action
+       opens a screen for creating a new contact for this name or number. [CHAR LIMIT=NONE] -->
   <string name="description_create_new_contact_action">        Cruthaich neach-aithne dha <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
     </string>
+  <!-- Description for the "add to existing contact" action for an entry in the call log. This
+       action opens a screen for adding this name or number to an existing contact.
+       [CHAR LIMIT=NONE] -->
   <string name="description_add_to_existing_contact_action">        Cuir <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g> ri neach-aithne a tha ann
     </string>
+  <!-- String describing the "details" action for an entry in the call log.  The details action
+       displays the call details screen for an entry in the call log.  This shows the calls to
+       and from the specified number associated with the call log entry.
+       [CHAR LIMIT=NONE] -->
   <string name="description_details_action">        Mion-fhiosrachadh mu ghairm le <xliff:g example="John Smith" id="nameOrNumber">^1</xliff:g>
     </string>
+  <!-- String used as a header in the call log above calls which occurred today.
+       [CHAR LIMIT=65] -->
   <string name="call_log_header_today">An-diugh</string>
+  <!-- String used as a header in the call log above calls which occurred yesterday.
+       [CHAR LIMIT=65] -->
   <string name="call_log_header_yesterday">An-dè</string>
+  <!-- String used as a header in the call log above calls which occurred two days or more ago.
+       [CHAR LIMIT=65] -->
   <string name="call_log_header_other">Nas sine</string>
+  <!-- String describing the "speaker on" button on the playback control used to listen to a
+       voicemail message.  When speaker is on, playback of the voicemail will occur through the
+       phone speaker.
+       Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+       [CHAR LIMIT=NONE] -->
   <string name="voicemail_speaker_on">Cuir an glaodhaire air.</string>
+  <!-- String describing the "speaker off" button on the playback control used to listen to a
+       voicemail message.  When speaker is off, playback of the voicemail will occur through the
+       phone earpiece.
+       Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+       [CHAR LIMIT=NONE] -->
   <string name="voicemail_speaker_off">Cuir an glaodhaire dheth.</string>
+  <!-- String describing the "play/pause" button in the playback control used to listen to a
+       voicemail message.  Starts playback or pauses ongoing playback.
+       Note: AccessibilityServices uses this attribute to announce the purpose of the button.
+       [CHAR LIMIT=NONE] -->
   <string name="voicemail_play_start_pause">Cluich no cuir ’na stad.</string>
+  <!-- Dialer settings related strings-->
+  <!-- Title for "Display options" category, which controls how contacts are shown.
+       [CHAR LIMIT=40] -->
   <string name="display_options_title">Roghainnean taisbeanaidh</string>
+  <!-- Title for the "Sounds and vibration" settings control settings related to ringtones,
+       dialpad tones, and vibration for incoming calls. [CHAR LIMIT=40] -->
   <string name="sounds_and_vibration_title">Na fuaimean ’s a’ chrith</string>
+  <!-- Title for "Accessibility" category, which controls settings such as TTY mode and hearing
+       aid compatability. [CHAR LIMIT=40] -->
   <string name="accessibility_settings_title">So-ruigsinneachd</string>
+  <!-- Setting option name to pick ringtone (a list dialog comes up). [CHAR LIMIT=30] -->
   <string name="ringtone_title">Seirm an fhòn</string>
+  <!-- Setting option name to enable or disable vibration when ringing the phone.
+       [CHAR LIMIT=30] -->
   <string name="vibrate_on_ring_title">\"Dèan crith ach airson gairmean cuideachd</string>
+  <!-- Setting option name to enable or disable DTMF tone sound [CHAR LIMIT=30] -->
   <string name="dtmf_tone_enable_title">Fuaimean pada nan iuchraichean</string>
+  <!-- Label for setting to adjust the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <string name="dtmf_tone_length_title">Faide nam fuaimean air pada nan iuchraichean</string>
+  <!-- Options displayed for the length of DTMF tone sounds. [CHAR LIMIT=40] -->
   <string-array name="dtmf_tone_length_entries">
     <item>Àbhaisteach</item>
     <item>Fada</item>
   </string-array>
+  <!-- Title of settings screen for managing the "Respond via SMS" feature. [CHAR LIMIT=30] -->
   <string name="respond_via_sms_setting_title">Grad-fhreagairtean</string>
+  <!-- Label for the call settings section [CHAR LIMIT=30] -->
   <string name="call_settings_label">Gairmean</string>
+  <!-- Label for the blocked numbers settings section [CHAR LIMIT=30] -->
   <string name="manage_blocked_numbers_label">Àireamhan bacte</string>
+  <!-- Label for the voicemail settings section [CHAR LIMIT=30] -->
   <string name="voicemail_settings_label">Post-gutha</string>
+  <!-- Label for a section describing that call blocking is temporarily disabled because an
+       emergency call was made. [CHAR LIMIT=50] -->
   <string name="blocked_numbers_disabled_emergency_header_label">        Tha bacadh ghairmean dheth rè seal
     </string>
+  <!-- Description that call blocking is temporarily disabled because the user called an
+       emergency number, and explains that call blocking will be re-enabled after a buffer
+       period has passed. [CHAR LIMIT=NONE] -->
   <string name="blocked_numbers_disabled_emergency_desc">        Chaidh bacadh ghairmean a chur à comas on a rinn thu conaltradh le seirbheisean èiginneach on fhòn seo
         am broinn an 48 uair a thìde a dh’fhalbh. Thèid a chur an comas a-rithist gu fèin-obrachail
         nuair a dh’fhalbhas 48 uair a thìde.
     </string>
+  <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
+       [CHAR_LIMIT=30] -->
   <string name="import_send_to_voicemail_numbers_label">Ion-phortaich àireamhan</string>
+  <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
+       This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
+       and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
   <string name="blocked_call_settings_import_description">        Chuir thu comharra ri cuid a luchd-ghairm cheana le aplacaidean eile ach an dèid an cur gu post-gutha gu fèin-obrachail.
     </string>
+  <!-- Label for button to view numbers of contacts previous marked to be sent to voicemail.
+       [CHAR_LIMIT=20] -->
   <string name="blocked_call_settings_view_numbers_button">Seall na h-àireamhan</string>
+  <!-- Label for button to import settings for sending contacts to voicemail into Dialer's block
+       list. [CHAR_LIMIT=20] -->
   <string name="blocked_call_settings_import_button">Ion-phortaich</string>
+  <!-- String describing the delete icon on a blocked number list item.
+      When tapped, it will show a dialog confirming the unblocking of the number.
+      [CHAR LIMIT=NONE]-->
   <string name="description_blocked_number_list_delete">Dì-bhac an àireamh</string>
+  <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
   <string name="addBlockedNumber">Cuir àireamh ris</string>
+  <!-- Footer message of number blocking screen with visual voicemail active.
+      [CHAR LIMIT=NONE] -->
   <string name="block_number_footer_message_vvm">        Thèid gairmean on na h-àireamhan seo a bhacadh agus thèid teachdaireachdan-gutha a sguabadh às gu fèin-obrachail.
     </string>
+  <!-- Footer message of number blocking screen with no visual voicemail.
+       [CHAR LIMIT=NONE] -->
   <string name="block_number_footer_message_no_vvm">        Thèid gairmean on na h-àireamhan seo a bhacadh ach dh’fhaoidte gum fàgar teachdaireachdan-gutha dhut fhathast.
     </string>
+  <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
   <string name="block_list">Àireamhan bacte</string>
+  <!-- Error message shown when user tries to add a number to the block list that was already
+      blocked. [CHAR LIMIT=64] -->
   <string name="alreadyBlocked">Chaidh <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
  a bhacadh cheana.</string>
+  <!-- Label for the phone account settings [CHAR LIMIT=30] -->
   <string name="phone_account_settings_label">Cunntasan ghairmean</string>
+  <!-- Internal key for ringtone preference. -->
+  <!-- Internal key for vibrate when ringing preference. -->
+  <!-- Internal key for vibrate when ringing preference. -->
+  <!-- Internal key for DTMF tone length preference. -->
+  <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
   <string name="permission_no_speeddial">Airson grad-daithealadh a chur an comas, cuir air cead an luchd-aithne.</string>
+  <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
   <string name="permission_no_calllog">Airson loga nan gairmean agad fhaicinn, cuir air cead an fhòn.</string>
+  <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
   <string name="permission_no_search">Airson lorg san luchd-aithne agad, cuir air ceadan an luchd-aithne.</string>
+  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
   <string name="permission_place_call">Airson gairm a dhèanamh, cuir air cead an fhòn.</string>
+  <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <string name="toast_cannot_write_system_settings">Chan eil cead aig aplacaid an fhòn airson sgrìobhadh gu roghainnean an t-siostaim.</string>
+  <!-- Label under the name of a blocked number in the call log. [CHAR LIMIT=15] -->
   <string name="blocked_number_call_log_label">Bacte</string>
+  <!-- Button text for a button displayed underneath an entry in the call log, which marks the
+           phone number represented by the call log entry as a Spam number.
+           [CHAR LIMIT=30] -->
   <string name="call_log_action_block_report_number">Bac/Dèan aithris air spama</string>
+  <!-- Button text for a button displayed underneath an entry in the call log, which marks the
+       phone number represented by the call log entry as a Spam number.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_block_number">Bac an àireamh</string>
+  <!-- Button text for a button displayed underneath an entry in the call log, which removes the
+       phone number represented by the call log entry from the Spam numbers list.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_remove_spam">Àireamh chòir</string>
+  <!-- Button text for a button displayed underneath an entry in the call log, which removes the
+       phone number represented by the call log entry from the blacklisted numbers.
+       [CHAR LIMIT=30] -->
   <string name="call_log_action_unblock_number">Dì-bhac an àireamh</string>
+  <!-- Label under the name of a spam number in the call log. [CHAR LIMIT=15] -->
   <string name="spam_number_call_log_label">Spama</string>
+  <!-- Shown as a message that notifies the user enriched calling isn't working -->
   <string name="call_composer_connection_failed">Tha <xliff:g id="name">%1$s</xliff:g> far loidhne is gha ghabh a ruigsinn</string>
+  <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
   <string name="about_phone_label">Mu dhèidhinn</string>
+  <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_branding_text">Air a thar-sgrìobhadh le Google</string>
-  <string name="voicemail_transcription_in_progress">’Ga thar-sgrìobhadh…</string>
+  <!-- Label indicating that a voicemail transcription is in progress [CHAR LIMIT=64] -->
+  <string name="voicemail_transcription_in_progress">’Ga thar-sgrìobhadh&#8230;</string>
+  <!-- Label indicating that a voicemail transcription failed [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_failed">Chan eil tar-sgrìobhadh ri làimh.</string>
+  <!-- Label indicating that a voicemail transcription failed because it was in an
+       unsupported language [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_failed_language_not_supported">Chan eil tar-sgrìobhadh ri làimh. Cha chuir sinn taic ris a’ chànan.</string>
+  <!-- Label indicating that a voicemail transcription failed because no speech was detected
+       [CHAR LIMIT=64] -->
   <string name="voicemail_transcription_failed_no_speech">Chan eil tar-sgrìobhadh ri làimh. Cha do mhothaich sinn do chainnt.</string>
+  <!-- Title of voicemail donation promo dialog
+      [CHAR LIMIT=64] -->
   <string name="voicemail_donation_promo_title">An cuidich thu le pongalachd an eadar-theangachaidh?</string>
+  <!-- Content of voicemail donation promo dialog
+       [CHAR LIMIT=NONE] -->
   <string name="voicemail_donation_promo_content">    Leig le Google an teachdaireachd-gutha seo le tar-sgrìobhadh ’s an fheadhainn ri teachd a sgrùdadh.
     Thèid an stòradh gun ainm riutha. ’S urrainn dhut na roghainnean atharrachadh uair sam bith.<xliff:g example="Learn more">%1$s</xliff:g>
   </string>
+  <!-- Label for the voicemail donation promo dialog opt-in button
+       [CHAR LIMIT=20] -->
   <string name="voicemail_donation_promo_opt_in">Cuidichidh</string>
+  <!-- Label for the voicemail donation promo dialog opt-out button
+       [CHAR LIMIT=20] -->
   <string name="voicemail_donation_promo_opt_out">Cha chuidich</string>
+  <!-- Prompt asking the user to rate the quality of the voicemail transcription
+       [CHAR LIMIT=30] -->
   <string name="voicemail_transcription_rating">Rangaich càileachd an tar-sgrìobhaidh</string>
+  <!-- Message displayed after user has rated a voicemail transcription [CHAR LIMIT=30] -->
   <string name="voicemail_transcription_rating_thanks">Mòran taing airson do bheachdan</string>
+  <!-- Describes the thumbs up, 'good' transcription button. Read by TalkBack.
+      [CHAR LIMIT=NONE] -->
   <string name="description_rating_good">’S toigh leam seo</string>
+  <!-- Describes the thumbs down, 'bad' transcription button. Read by TalkBack.
+      [CHAR LIMIT=NONE] -->
   <string name="description_rating_bad">Cha toigh leam seo</string>
+  <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
   <string name="view_conversation">Seall</string>
+  <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
+        to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
   <string name="ec_data_deleted">Chaidh a’ ghairm a sguabadh às. Seall is sguab às na ceanglachain a chaidh a cho-roinneadh rè na gairme seo sna “Teachdaireachdan”.</string>
+  <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
+        to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
   <string name="multiple_ec_data_deleted">Chaidh na gairmean a sguabadh às. Seall is sguab às na ceanglachain a chaidh a cho-roinneadh rè nan gairmean seo sna “Teachdaireachdan”.</string>
 </resources>

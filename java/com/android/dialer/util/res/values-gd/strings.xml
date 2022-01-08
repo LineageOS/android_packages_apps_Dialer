@@ -15,11 +15,23 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!--  The string used to describe a notification if it is the default one in the system. For
+        example, if the user selects the default notification, it will appear as something like
+        Default sound(Capella) in the notification summary.
+        [CHAR LIMIT=40] -->
   <string name="default_notification_description">An fhuaim bhunaiteach (<xliff:g id="default_sound_title">%1$s</xliff:g>)</string>
+  <!-- Choice in the ringtone picker.  If chosen, there will be silence instead of a ringtone played. -->
   <string name="ringtone_silent">Gun seirm</string>
+  <!-- If there is ever a ringtone set for some setting, but that ringtone can no longer be resolved, this is shown instead.  For example, if the ringtone was on a SD card and it had been removed, this would be shown for ringtones on that SD card. -->
   <string name="ringtone_unknown">Seirm nach aithne dhuinn</string>
+  <!-- Message displayed when there is no application available to handle a particular action.
+       [CHAR LIMIT=NONE] -->
   <string name="activity_not_available">Chan eil aplacaid dha air an uidheam seo</string>
+  <!-- Text of warning to be shown when the user attempts to make an outgoing Wireless
+       Preferred Service call when there is an VoLTE call in progress -->
   <string name="outgoing_wps_warning">Ma chuireas tu gairm WPS, thèid ceangal a bhriseadh dhan ghairm agad a tha a’ dol air adhart.</string>
+  <!-- Text for button which indicates that the user wants to proceed with an action. -->
   <string name="dialog_continue">Lean air adhart</string>
+  <!-- Text presented to the user explaining that we have enabled the camera permission automatically [CHAR LIMIT=NONE] -->
   <string name="camera_privacy_text">Chaidh cead air a’ chamara a chur an comas</string>
 </resources>

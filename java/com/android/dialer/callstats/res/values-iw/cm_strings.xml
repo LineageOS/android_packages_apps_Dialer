@@ -23,4 +23,5 @@
     <string name="call_stats_blocked">נחסמו: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="call_stats_header_total_callsonly">סך הכול: <xliff:g id="call_count">%s</xliff:g></string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
 </resources>

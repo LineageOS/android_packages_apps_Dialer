@@ -19,5 +19,6 @@
   <string name="notification_channel_ongoing_call">Gairmean a’ dol air adhart</string>
   <string name="notification_channel_missed_call">Gairmean a dh\'fhalbh ort</string>
   <string name="notification_channel_voicemail">Puist-gutha</string>
+  <!-- [CHAR LIMIT=NONE] Catch-all channel for notifications that don't fit into one of the others -->
   <string name="notification_channel_misc">Bun-roghainn</string>
 </resources>

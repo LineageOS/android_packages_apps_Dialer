@@ -15,11 +15,18 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
   <string name="custom_message_hint">Sgrìobh teachdaireachd ghnàthaichte</string>
+  <!-- Accessibility string for close/navigation icon in DialerToolbar -->
   <string name="toolbar_close">Dùin</string>
+  <!-- [CHAR LIMIT=NONE] Shown when there are no contacts in the all contacts list. -->
   <string name="all_contacts_empty">Chan eil neach-aithne agad fhathast</string>
+  <!-- [CHAR LIMIT=NONE] Shown as an action when the all contacts list is empty -->
   <string name="all_contacts_empty_add_contact_action">Cruthaich neach-aithne ùr</string>
+  <!-- The label of the button used to turn on a single permission [CHAR LIMIT=30]-->
   <string name="permission_single_turn_on">Cuir air</string>
+  <!-- Shown as a prompt to turn on the contacts permission to show all contacts [CHAR LIMIT=NONE]-->
   <string name="permission_no_contacts">Airson an luchd-aithne agad fhaicinn, cuir air cead an luchd-aithne.</string>
+  <!-- Message displayed when there is no application available to handle the add contact menu option. [CHAR LIMIT=NONE] -->
   <string name="add_contact_not_available">Chan eil aplacaid luchd-aithne ann</string>
 </resources>

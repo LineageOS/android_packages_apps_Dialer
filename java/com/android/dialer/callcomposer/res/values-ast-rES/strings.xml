@@ -15,16 +15,37 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
   <string name="urgent">¡Urxente! ¡Recueyi por favor!</string>
+  <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
+  <!-- A default message to send with a phone call. [CHAR LIMIT=27] -->
   <string name="quick_question">Entruga rápida…</string>
+  <!-- Hint in a text field to compose a custom message to send with a phone call [CHAR LIMIT=27] -->
   <string name="message_composer_custom_message_hint">Escribi un mensax personalizáu</string>
+  <!-- Text for a button to make a phone call combined with a text message [CHAR LIMIT=26] -->
   <string name="send_and_call">Mandar y llamar</string>
+  <!-- Text for a button to make a phone call combined with a picture or other media [CHAR LIMIT=26] -->
   <string name="share_and_call">Compartir y llamar</string>
+  <!-- Accessibility description for each image in the gallery. For example, "image January 17 2015 1 59 pm". -->
   <string name="gallery_item_description">imaxe <xliff:g id="date">%1$tB %1$te %1$tY %1$tl %1$tM %1$tp</xliff:g></string>
+  <!-- Accessibility description for each image in the gallery when no date is present. -->
+  <!-- Error toast message shown when a camera image failed to attach to the message -->
+  <!-- Text for a button to ask for device permissions -->
+  <!-- Text presented to the user explaining that we need Camera permission to take photos -->
+  <!-- Text presented to the user explaining that we need device storage permission to view photos -->
+  <!-- Content description of button to show ui for taking a photo -->
   <string name="description_call_composer_camera">Facer una semeya</string>
+  <!-- Content description of button to show ui for selecting a photo from the user's gallery -->
   <string name="description_call_composer_photo">Esbillar una semeya</string>
+  <!-- Content description of button to show ui for sending a message -->
   <string name="description_call_composer_message">Unviar un mensaxe</string>
+  <!-- When a user makes a call with a photo attached, we send the photo through the app "Messages".
+    This string is shown in a toast for privacy reasons. -->
   <string name="image_sent_messages">Semeya unviada per Messages</string>
+  <!-- When a user makes a call with text attached, we send the text through the app "Messages".
+    This string is shown in a toast for privacy reasons. -->
   <string name="message_sent_messages">Mensax unviáu per Messages</string>
+  <!-- When a user places a call with an image attached, we show them the in call screen and
+      display this string "Image uploading..." to let them know why the call hasn't started. -->
   <string name="call_composer_image_uploading">Unviando imax\u2026</string>
 </resources>

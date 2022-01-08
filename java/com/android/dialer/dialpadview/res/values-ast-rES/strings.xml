@@ -15,19 +15,60 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- String describing the back button in the dialpad. -->
   <string name="description_dialpad_back">Restolar p\'atrás</string>
+  <!-- String describing the overflow menu button in the dialpad. -->
+  <!-- String describing the Delete/Backspace ImageButton.
+       Used by AccessibilityService to announce the purpose of the button.
+  -->
+  <!--  String describing the button used to add a plus (+) symbol to the dialpad -->
+  <!-- String describing the Voicemail ImageButton.
+       Used by AccessibilityService to announce the purpose of the button.
+  -->
+  <!-- String describing the Dial ImageButton
+
+         Used by AccessibilityService to announce the purpose of the button.
+    -->
   <string name="description_dial_button">marcar</string>
+  <!-- Dialog message which is shown when the user tries to check voicemail
+         while the system is in airplane mode. The user cannot access to
+         voicemail service in Airplane mode. [CHAR LIMI=NONE] -->
   <string name="dialog_voicemail_airplane_mode_message">Pa llamar al buzón de voz, tienes de desactivar el mou avión.</string>
+  <!-- Dialog message which is shown when the user tries to check voicemail
+         while the system isn't ready for the access. [CHAR LIMIT=NONE] -->
   <string name="dialog_voicemail_not_ready_message">Pa configurar el buzón de voz, toca la tecla de menú &gt; y, darréu, toca Axustes.</string>
+  <!-- Menu items for dialpad options as part of Pause and Wait ftr [CHAR LIMIT=30] -->
   <string name="add_2sec_pause">Amestar posa de 2 segundos</string>
   <string name="add_wait">Amestar espera</string>
+  <!-- Item label: jump to the in-call DTMF dialpad.
+         (Part of a list of options shown in the dialer when another call
+         is already in progress.) -->
   <string name="dialer_useDtmfDialpad">Usar tecláu táctil</string>
+  <!-- Item label: jump to the in-call UI.
+       (Part of a list of options shown in the dialer when another call
+       is already in progress.) -->
   <string name="dialer_returnToInCallScreen">Volver a la llamada en cursu</string>
+  <!-- Item label: use the Dialer's keypad to add another call.
+       (Part of a list of options shown in the dialer when another call
+       is already in progress.) -->
   <string name="dialer_addAnotherCall">Amestar llamada</string>
+  <!-- The title of a dialog that displays the IMEI of the phone -->
   <string name="imei">IMEI</string>
+  <!-- The title of a dialog that displays the MEID of the CDMA phone -->
   <string name="meid">MEID</string>
+  <!-- The label for the hex encoding of the device ID -->
+  <!-- The label for the decimal encoding of the device ID -->
+  <!-- Dialog text displayed when loading a phone number from the SIM card for speed dial -->
   <string name="simContacts_emptyLoading">Cargando dende tarxeta SIM\u2026</string>
+  <!-- Dialog title displayed when loading a phone number from the SIM card for speed dial -->
   <string name="simContacts_title">Contautos de tarxeta SIM</string>
+  <!-- Menu item used to call a contact, containing the number of the contact to call -->
   <string name="menu_callNumber">Llamar a <xliff:g id="Number">%s</xliff:g></string>
+  <!-- Regular expression for prohibiting certain phone numbers in dialpad.
+       Ignored if empty. -->
+  <!-- Warning hint shown in the dialpad input field when emergency call (911, etc.) cannot be made over wifi.
+       [CHAR_LIMIT=60] -->
+  <!-- Dialog message which is shown when the user tries to make a phone call
+       to prohibited phone numbers [CHAR LIMIT=NONE] -->
   <string name="dialog_phone_call_prohibited_message" msgid="4313552620858880999">Nun pue llamase a esti númberu</string>
 </resources>

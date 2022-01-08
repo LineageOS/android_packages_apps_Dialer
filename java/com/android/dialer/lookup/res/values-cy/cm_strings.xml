@@ -15,8 +15,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Forward lookup -->
     <string name="nearby_places">Lleoedd cyfagos</string>
     <string name="people">Pobol</string>
+    <!-- Number lookup -->
     <string name="lookup_settings_label">Chwilio rhif ffôn</string>
     <string name="enable_forward_lookup_title">Chwiliad dargyfeiriad</string>
     <string name="enable_forward_lookup_summary">Dangos llefydd gerllaw wrth chwilio yn y deialydd</string>
@@ -27,5 +29,6 @@
     <string name="forward_lookup_provider_title">Darparydd chwiliad dargyfeiriad</string>
     <string name="people_lookup_provider_title">Darparydd chwiliad pobol</string>
     <string name="reverse_lookup_provider_title">Darparydd chwiliad croes</string>
+    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Gall chwiliadau anfon ymholiadau dros brotocol diogel (https) at wefannau pell i gasglu gwybodaeth. Gall yr ymholiad gynnwys rhif ffôn y parti arall neu\'r term chwilio.</string>
 </resources>

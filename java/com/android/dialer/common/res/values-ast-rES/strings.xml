@@ -15,5 +15,8 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Content description for the overflow menu button. [CHAR LIMIT=NONE] -->
   <string name="content_description_overflow">Más opciones</string>
+  <!-- Text for undo button in snackbar for voicemail deletion/blocking/unblocking number. [CHAR LIMIT=10] -->
+  <!-- Text on button of "OK, got it". [CHAR_LIMIT=30] -->
 </resources>

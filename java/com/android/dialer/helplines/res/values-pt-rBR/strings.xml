@@ -28,6 +28,7 @@
     <string name="helpline_categories">Categorias</string>
     <string name="helpline_number">Número</string>
     <string name="helpline_website">Site</string>
+    <!-- Format for displaying a helpline name with the country - Example will resolve to "Emotional Support Hotline (US)" -->
     <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Linha de Ajuda Narcóticos Anônimos">%1$s</xliff:g> (<xliff:g id="helpline_county" example="BR">%2$s</xliff:g>)</string>
     <string name="helpline_language_cree">Cree</string>
     <string name="helpline_language_english">Inglês</string>

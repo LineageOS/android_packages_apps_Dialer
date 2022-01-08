@@ -39,7 +39,7 @@
     <string name="helpline_category_human_rights">İnsan hakları</string>
     <string name="helpline_category_human_trafficking">İnsan kaçakçılığı</string>
     <string name="helpline_category_immigration">Göçmenlik</string>
-    <string name="helpline_category_legal_aid">Legal destek</string>
+    <string name="helpline_category_legal_aid">Yasal destek</string>
     <string name="helpline_category_lgbtq">LGBTQ+</string>
     <string name="helpline_category_men">Erkek</string>
     <string name="helpline_category_mental_health">Akıl sağlığı</string>
@@ -47,7 +47,6 @@
     <string name="helpline_category_mothers">Anneler</string>
     <string name="helpline_category_muslim">Müslüman</string>
     <string name="helpline_category_parents">Ebeveynler</string>
-    <string name="helpline_category_pregnancy">Gebelik</string>
     <string name="helpline_category_psychological">Psikolojik</string>
     <string name="helpline_category_religion">Dini</string>
     <string name="helpline_category_senior">Büyükler</string>

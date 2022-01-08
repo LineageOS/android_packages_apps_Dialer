@@ -15,19 +15,36 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Title bar for call detail screen -->
   <string name="call_details">Mion-fhiosrachadh mun ghairm</string>
+  <!-- Text for the action item to remove a call or voicemail from the call log. -->
   <string name="delete">Sguab às</string>
+  <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
   <string name="call_details_copy_number">Dèan lethbhreac dhen àireamh</string>
+  <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <string name="call_details_edit_number">Deasaich an àireamh mus dèan thu gairm</string>
+  <!-- Label for action to report a number with inaccurate caller id information. [CHAR LIMIT=48] -->
   <string name="call_details_report_call_id">Dèan aithris air mì-aithneachadh àireimh</string>
+  <!-- String shown when the call details show a image that was sent -->
   <string name="sent_a_photo">Chaidh dealbh a chur</string>
+  <!-- String shown when the call details show a image that was received -->
   <string name="received_a_photo">Fhuair thu dealbh</string>
+  <!-- Messages shown to the user are wrapped in quotes, e.g. the user would see "Some text" -->
   <string name="message_in_quotes">“<xliff:g id="message">%1$s</xliff:g>”</string>
+  <!-- Title of dialog that confirms whether a user wants to report an incorrect number.
+       [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_dialog_title">Dèan aithris air àireimh cheàrr</string>
+  <!-- Toast that appears when a caller id report fails to send. Could be due to network error or
+       authentication error. [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_failed">Cha b’ urrainn dhuinn aithris a dhèanamh air an àireamh</string>
+  <!-- Toast message which appears when a contact's caller id is reported as incorrect. [CHAR LIMIT=NONE] -->
   <string name="report_caller_id_toast">Chaidh aithris a dhèanamh air an àireamh</string>
+  <!-- Assisted dialing section header. [CHAR LIMIT=NONE] -->
   <string name="assisted_dialing_country_code_entry">Daithealadh le taic: Chaidh còd-dùthcha +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> a chleachdadh</string>
+  <!-- A fallback string for the assisted dialing header incase parsing failes.. [CHAR LIMIT=NONE] -->
   <string name="assisted_dialing_country_code_entry_failure">Chaidh daithealadh le taic a chleachdadh</string>
+  <!-- String shown when RTT transcript is not available for any reason. [CHAR LIMIT=NONE] -->
   <string name="rtt_transcript_not_available">Chan eil tar-sgrìobhaidhean ri fhaighinn ach airson gairmean le teachdaireachdan</string>
+  <!-- String shown when RTT transcript is available. [CHAR LIMIT=NONE] -->
   <string name="rtt_transcript_link">Seall tar-sgrìobhadh</string>
 </resources>

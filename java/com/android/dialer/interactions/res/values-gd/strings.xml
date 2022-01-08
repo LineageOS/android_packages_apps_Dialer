@@ -15,7 +15,10 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Title for the sms disambiguation dialog -->
   <string name="sms_disambig_title">Tagh àireamh</string>
+  <!-- Title for the call disambiguation dialog -->
   <string name="call_disambig_title">Tagh àireamh</string>
+  <!-- Message next to disambiguation dialog check box -->
   <string name="make_primary">Cuir an roghainn seo an cuimhne</string>
 </resources>

@@ -15,11 +15,18 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Shown as a message that notifies asks the user if they want to send a post call message -->
   <string name="post_call_message">Di pa qué llameste</string>
+  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_1">Ye urxente. Llámame.</string>
+  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_2">Llámame cuando tengas tiempu.</string>
+  <!-- Premade message to be sent as a text/RCS message -->
   <string name="post_call_message_3">Nun ye urxente, falamos dempués.</string>
+  <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_add_message">Amestar mensaxe</string>
+  <!-- Asks the user if they want to send a post call message -->
   <string name="post_call_send_message">Unviar mensaxe</string>
+  <!-- Shown to let the user know that their message was sent. -->
   <string name="post_call_message_sent">Unvióse\'l mensaxe</string>
 </resources>

@@ -25,11 +25,19 @@
   <string name="incall_content_description_speaker">Glaodhaire</string>
   <string name="incall_content_description_bluetooth">Bluetooth</string>
   <string name="incall_content_description_headset">Seata-cinn uèirichte</string>
+  <!-- Text for the onscreen "Hold" button when it is not selected. Pressing it will put
+     the call on hold. -->
   <string name="incall_content_description_hold">Cùm a’ ghairm</string>
+  <!-- Text for the onscreen "Hold" button when it is selected. Pressing it will resume
+       the call from a previously held state. -->
   <string name="incall_content_description_unhold">Lean air a’ ghairm</string>
   <string name="incall_content_description_video_on">Tha video air</string>
   <string name="incall_content_description_video_off">Tha a’ video dheth</string>
   <string name="incall_content_description_swap_video">Suaip a’ video</string>
+  <!-- Button shown during a phone to route audio from earpiece to speaker phone.
+     [CHAR LIMIT=12] -->
   <string name="incall_label_speaker">Glaodhaire</string>
+  <!-- Button shown during a phone to switch the audio route.
+     [CHAR LIMIT=12] -->
   <string name="incall_label_audio">Fuaim</string>
 </resources>

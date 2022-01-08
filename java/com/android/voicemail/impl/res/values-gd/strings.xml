@@ -14,5 +14,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Message to replace the transcription if a visual voicemail message is not supported-->
   <string name="vvm_unsupported_message_format">Cha chuirear taic ris an t-seòrsa de theachdaireachd seo, cuir fòn gu <xliff:g example="*86" id="number">%s</xliff:g> airson èisteachd.</string>
 </resources>

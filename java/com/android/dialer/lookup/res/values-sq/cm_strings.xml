@@ -15,8 +15,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Forward lookup -->
     <string name="nearby_places">Vendet përreth</string>
     <string name="people">Persona</string>
+    <!-- Number lookup -->
     <string name="lookup_settings_label">Kërkim në numrator</string>
     <string name="enable_forward_lookup_title">Kërkim në përparësi</string>
     <string name="enable_forward_lookup_summary">Shfaq vendet përreth kur kërkon me tastierë</string>
@@ -27,5 +29,6 @@
     <string name="forward_lookup_provider_title">Ofruesi i shërbimit të kërkimit të hershëm</string>
     <string name="people_lookup_provider_title">Ofruesi për kërkimet e personave</string>
     <string name="reverse_lookup_provider_title">Ofruesi i shërbimit të kërkimit të anasjelltë</string>
+    <!-- Disclaimer -->
     <string name="lookup_disclaimer">Kërkimet mund të dërgojnë pyetje mbi protokolle të sigurta (https) drejt faqeve të tjera për të marë informacion. Kjo kërkesë mund të përfshijë numrin e personit tjetër ose pse kërkohet</string>
 </resources>

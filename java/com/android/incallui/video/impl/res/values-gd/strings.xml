@@ -15,10 +15,16 @@
   ~ limitations under the License
   -->
 <resources>
+  <!-- Text indicates the video from remote party is off. [CHAR LIMIT=40] -->
   <string name="videocall_remote_video_off">Tha a’ video aca dheth</string>
+  <!-- Text indicates the video from remote party is on. [CHAR LIMIT=40] -->
   <string name="videocall_remote_video_on">Tha a’ video aca air</string>
+  <!-- Text indicates the call is held by remote party. [CHAR LIMIT=20] -->
   <string name="videocall_remotely_held">Gairm ’ga cumail</string>
+  <!-- Text indicates the call is resumed from held by remote party. [CHAR LIMIT=20] -->
   <string name="videocall_remotely_resumed">Chaidh leantainn air adhart leis a’ ghairm</string>
+  <!-- Instruction text to notify user that charges may apply on video calling. [CHAR LIMIT=NONE] -->
   <string name="videocall_charges_alert_dialog_description">Cleachdaich gairmean video air lìonra mobile an dà chuid mionaidean dàta is mionaidean gutha. Dh’fhaoidte gun èirich cosgaisean ’nan lùib.</string>
+  <!-- Option to hide the popup dialog if it is not necessary for the user. [CHAR LIMIT=40] -->
   <string name="do_not_show_again">Na seall seo a-rithist</string>
 </resources>

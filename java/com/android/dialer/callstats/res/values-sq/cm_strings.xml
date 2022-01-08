@@ -44,5 +44,6 @@
     <string name="call_stats_title_durations">Kohëzgjatjet e telefonatave</string>
     <string name="call_stats_title_count">Numërimi i thirrjeve</string>
     <string name="call_stats_title_average_duration">Kohëzgjatja mesatare e telefonatave</string>
+    <!-- Text displayed when there are no call log entries in the selected time range. -->
     <string name="recent_calls_no_items_in_range">Lista e thirrjeve nuk përmban asnjë thirrje gjatë periudhës kohore të zgjedhur.</string>
 </resources>

@@ -16,5 +16,6 @@
   -->
 <resources>
   <string name="notification_channel_voicemail">Mensaxes de voz</string>
+  <!-- [CHAR LIMIT=NONE] Catch-all channel for notifications that don't fit into one of the others -->
   <string name="notification_channel_misc">Por defeutu</string>
 </resources>

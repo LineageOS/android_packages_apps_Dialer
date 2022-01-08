@@ -15,8 +15,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Forward lookup -->
     <string name="nearby_places">สถานที่ใกล้เคียง</string>
     <string name="people">บุคคล</string>
+    <!-- Number lookup -->
     <string name="lookup_settings_label">ค้นหาหมายเลขโทรศัพท์</string>
     <string name="enable_forward_lookup_title">ค้นหาการส่งต่อ</string>
     <string name="enable_forward_lookup_summary">แสดงสถานที่ใกล้เคียงเมื่อค้นหาจากแอปโทรศัพท์</string>
@@ -27,5 +29,6 @@
     <string name="forward_lookup_provider_title">ผู้ให้บริการการค้นหาการส่งต่อ</string>
     <string name="people_lookup_provider_title">ผู้ให้บริการค้นหาบุคคล</string>
     <string name="reverse_lookup_provider_title">ผู้ให้บริการค้นหาย้อนกลับ</string>
+    <!-- Disclaimer -->
     <string name="lookup_disclaimer">ค้นหาอาจส่งแบบสอบถามผ่านโพรโทคอลปลอดภัย (https) ไปยังเว็บไซต์ระยะไกลเพื่อรวบรวมข้อมูล แบบสอบถามอาจรวมถึงหมายเลขโทรศัพท์ของบุคคลอื่นหรือค้นหา</string>
 </resources>
