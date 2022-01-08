@@ -15,5 +15,19 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="incall_label_videocall">Gairm video</string>
+  <string name="incall_label_rttcall">Gairm teacsa fìor-ama (RTT)</string>
+  <string name="incall_label_hold">Cùm</string>
+  <string name="incall_label_add_call">Cuir gairm ris</string>
+  <string name="incall_label_mute">Mùch</string>
+  <string name="incall_label_end_call">Cuir crìoch air a’ ghairm</string>
+  <string name="incall_label_dialpad">Pada-iuchraichean</string>
+  <string name="incall_talkback_speaker_on">, tha e air</string>
+  <string name="incall_talkback_speaker_off">, tha e dheth</string>
+  <string name="incall_label_merge">Co-aonaich</string>
+  <string name="incall_label_manage">Stiùirich</string>
+  <string name="a11y_description_incall_label_manage_content">Stiùirich na gairmearan</string>
+  <string name="incall_label_swap">Suaip</string>
   <string name="incall_label_swap_sim">Atharraich an SIM</string>
+  <string name="incall_note_sent">Chaidh an nòta a chur</string>
 </resources>

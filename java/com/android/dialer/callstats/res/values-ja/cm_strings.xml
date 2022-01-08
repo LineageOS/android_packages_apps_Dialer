@@ -22,6 +22,7 @@
     <string name="call_stats_missed">不在: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">着信拒否: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">合計: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">合計: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">開始日</string>
     <string name="call_stats_filter_to">終了日</string>

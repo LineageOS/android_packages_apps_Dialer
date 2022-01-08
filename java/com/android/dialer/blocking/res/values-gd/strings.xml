@@ -15,7 +15,10 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="old_block_number_confirmation_title">    A bheil thu airson&lt;xliff:g example="(555) 555-5555" id="number”&gt;%1$s&lt;/xliff:g&gt; a bhacadh?
+  <string name="migrate_blocked_numbers_dialog_title">Bacadh sìmplidh ùr</string>
+  <string name="migrate_blocked_numbers_dialog_message">Airson do dhìon nas fheàrr, feumaidh am fòn an dòigh atharrachadh air an obraich am bacadh. Cuiridh na h-àireamhan bacte agad stad an dà chuid air gairmean is teacsaichean a-nis agus gabhadh seo a cho-roinneadh le aplacaidean eile.</string>
+  <string name="migrate_blocked_numbers_dialog_allow_button">Ceadaich</string>
+  <string name="old_block_number_confirmation_title">    A bheil thu airson&lt;xliff:g example="(555) 555-5555" id=id="number"&gt;%1$s&lt;/xliff:g&gt; a bhacadh?
   </string>
   <string name="block_number_confirmation_message_vvm">    Thèid gairmean on àireamh seo a bhacadh agus thèid teachdaireachdan-gutha a sguabadh às gu fèin-obrachail.
   </string>
@@ -23,14 +26,17 @@
   </string>
   <string name="block_number_confirmation_message_new_filtering">    Chan fhaigh thu gairm no teachdaireachd on àireamh seo tuilleadh.
   </string>
-  <string name="unblock_number_confirmation_title">    A bheil thu airson&lt;xliff:g example="(555) 555-5555" id="number”&gt;%1$s&lt;/xliff:g&gt; a dhì-bhacadh?
+  <string name="block_number_ok">BAC</string>
+  <string name="unblock_number_confirmation_title">    A bheil thu airson<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a dhì-bhacadh?
   </string>
-  <string name="invalidNumber">    Chan eil&lt;xliff:g example="(555) 555-5555" id=”number”&gt;%1$s&lt;/xliff:g&gt;dligheach.
+  <string name="unblock_number_ok">DÌ-BHAC</string>
+  <string name="invalidNumber">    Chan eil<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>dligheach.
   </string>
-  <string name="snackbar_number_blocked">    Chaidh&lt;xliff:g example="(555) 555-5555" id="number”&gt;%1$s&lt;/xliff:g&gt; a bhacadh
+  <string name="snackbar_number_blocked">    Chaidh<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> a bhacadh
   </string>
-  <string name="snackbar_number_unblocked">    Chaidh&lt;xliff:g example="(555) 555-5555" id=”number”&gt;%1$s&lt;/xliff:g&gt;a dhì-bhacadh
+  <string name="snackbar_number_unblocked">    Chaidh<xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>a dhì-bhacadh
   </string>
+  <string name="send_to_voicemail_import_failed">Dh’fhàillig leis an ion-phortadh</string>
   <string name="call_blocking_disabled_notification_title">    Chaidh bacadh ghairmean a chur à comas fad 48 uair a thìde
   </string>
   <string name="call_blocking_disabled_notification_text">    Tha seo à comas on a chaidh gairm èiginn a dhèanamh.

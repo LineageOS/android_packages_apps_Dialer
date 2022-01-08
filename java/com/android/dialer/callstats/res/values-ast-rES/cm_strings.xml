@@ -22,10 +22,10 @@
     <string name="call_stats_missed">Perdíes: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_blocked">Bloquiaes: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Total: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
     <string name="call_stats_header_total_callsonly">Total: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_from">Data d\'empiezu</string>
     <string name="call_stats_filter_to">Data de fin</string>
-    <string name="call_stats_filter_picker_title">Rangu de peñera</string>
     <string name="date_quick_selection">Esbilla rápida</string>
     <string name="date_qs_currentmonth">Mes actual</string>
     <string name="date_qs_currentquarter">Trimestre actual</string>

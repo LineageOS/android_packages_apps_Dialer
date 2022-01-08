@@ -15,15 +15,71 @@
   ~ limitations under the License
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="wait_prompt_str">An cuir thu na tònaichean seo?\n</string>
+  <string name="pause_prompt_yes">Cuiridh</string>
+  <string name="pause_prompt_no">Cha chuir</string>
+  <string name="notification_dialing">’Ga dhaithealadh</string>
+  <string name="notification_ongoing_call">Gairm a’ dol air adhart</string>
   <string name="notification_ongoing_video_call">Gairm video a’ dol air adhart</string>
   <string name="notification_ongoing_paused_video_call">Gairm video a’ dol air adhart \u2011 video ’na stad</string>
-  <string name="notification_ongoing_call_wifi_template">&lt;xliff:g id="brand_name”&gt;%1$s&lt;/xliff:g&gt; a’ dol air adhart</string>
-  <string name="notification_incoming_call_wifi_template">&lt;xliff:g id="brand_name”&gt;%1$s&lt;/xliff:g&gt; a’ tighinn a-steach</string>
+  <string name="notification_ongoing_work_call">Gairm na h-obrach a’ dol air adhart</string>
+  <string name="notification_ongoing_call_wifi_template"><xliff:g id="brand_name">%1$s</xliff:g> a’ dol air adhart</string>
+  <string name="notification_incoming_call_wifi_template"><xliff:g id="brand_name">%1$s</xliff:g> a’ tighinn a-steach</string>
   <string name="notification_call_wifi_brand">Gairm WiFi</string>
   <string name="notification_call_wifi_work_brand">Gairm obrach WiFi</string>
+  <string name="notification_on_hold">’Ga chumail</string>
+  <string name="notification_incoming_call">Gairm a-steach</string>
   <string name="notification_incoming_video_call">Gairm video a’ tighinn a-steach</string>
   <string name="notification_incoming_call_mutli_sim">Gairm a’ tighinn a-steach slighe <xliff:g id="account">%1$s</xliff:g></string>
+  <string name="notification_incoming_call_with_photo">Gairm a-steach le dealbh</string>
+  <string name="notification_incoming_call_with_message">Gairm a-steach le teachdaireachd</string>
+  <string name="notification_incoming_call_with_location">Gairm a-steach le ionad</string>
+  <string name="notification_incoming_call_with_photo_message">Gairm a-steach le dealbh ’s teachdaireachd</string>
+  <string name="notification_incoming_call_with_photo_location">Gairm a-steach le dealbh ’s ionad</string>
+  <string name="notification_incoming_call_with_message_location">Gairm a-steach le teachdaireachd ’s ionad</string>
+  <string name="notification_incoming_call_with_photo_message_location">Gairm a-steach le dealbh, teachdaireachd ’s ionad</string>
+  <string name="notification_incoming_call_attachments">Gairm a-steach le ceanglachain</string>
+  <string name="important_notification_incoming_call">Gairm chudromach a-steach</string>
+  <string name="important_notification_incoming_call_with_photo">Gairm chudromach a-steach le dealbh</string>
+  <string name="important_notification_incoming_call_with_message">Gairm chudromach a-steach le teachdaireachd</string>
+  <string name="important_notification_incoming_call_with_location">Gairm chudromach a-steach le ionad</string>
+  <string name="important_notification_incoming_call_with_photo_message">Gairm chudromach a-steach le dealbh ’s teachdaireachd</string>
+  <string name="important_notification_incoming_call_with_photo_location">Gairm chudromach a-steach le dealbh ’s ionad</string>
+  <string name="important_notification_incoming_call_with_message_location">Gairm chudromach a-steach le teachdaireachd ’s ionad</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Gairm chudromach a-steach le dealbh, teachdaireachd ’s ionad</string>
+  <string name="important_notification_incoming_call_attachments">Gairm chudromach a-steach le ceanglachain</string>
+  <string name="notification_incoming_work_call">Gairm na h-obrach a’ tighinn a-steach</string>
+  <string name="notification_incoming_spam_call">Gairm a-steach fo amharas spama</string>
+  <string name="notification_requesting_video_call">Iarrtas video a’ tighinn a-steach</string>
+  <string name="notification_action_answer">Freagair</string>
+  <string name="notification_action_end_call">Cuir crìoch air</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_accept">Gabh ris</string>
+  <string name="notification_action_dismiss">Diùlt</string>
   <string name="notification_action_speaker_on">Cuir an glaodhaire air</string>
   <string name="notification_action_speaker_off">Cuir an glaodhaire dheth</string>
+  <string name="notification_external_call">Gairm a’ dol air adhart air uidheam eile</string>
+  <string name="notification_external_video_call">Gairm video a’ dol air adhart</string>
+  <string name="notification_take_call">Tog a’ ghairm</string>
+  <string name="notification_take_video_call">Tog a’ ghairm video</string>
+  <string name="incall_error_supp_service_unknown">Chan eil taic ann ris an t-seirbheis seo.</string>
+  <string name="goPrivate">dèan prìobhaideach</string>
+  <string name="manageConferenceLabel" tools:ignore="UnusedResources">Stiùir a’ ghairm coinneimh</string>
+  <string name="child_number">slighe <xliff:g example="650-555-1212" id="child_number">%s</xliff:g></string>
+  <string name="callFailed_simError">Gun SIM no mearachd SIM</string>
+  <string name="conference_caller_disconnect_content_description">Cuir crìoch air a’ ghairm</string>
+  <string name="conference_call_name">Gairm coinneimh</string>
+  <string name="generic_conference_call_name">Air an fhòn</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Lean air a’ ghairm le dàta mobile…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Cha b’ urrainn dhuinn leum a ghearradh dhan lìonra WiFi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Fuirichidh a’ ghairm video air an lìonra mobile. Dh’fhaoidte
+    gun èirich tàillean dàta.
+  </string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Na seall</string>
   <string name="bubble_return_to_call">Till dhan ghairm</string>
+  <string name="rtt_request_dialog_title">An gabh tu pàirt sa ghairm teacsa fìor-ama (RTT)?</string>
+  <string name="rtt_request_dialog_details">Bu toigh le <xliff:g id="caller">%1$s</xliff:g> teachdaireachdan a chleachdadh leis a’ ghairm gutha agad.</string>
+  <string name="rtt_request_dialog_more_information">Cuidichidh RTT an luchd-ghairm a tha bodhar, le duilgheadas claisneachd, ciorram bruidhinn no a bhios feumach air barrachd na guth a-mhàin.</string>
+  <string name="rtt_button_decline_request">Cha ghabh</string>
+  <string name="rtt_button_accept_request">Gabh pàirt ann an RTT</string>
 </resources>

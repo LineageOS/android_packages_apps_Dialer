@@ -24,6 +24,8 @@
     <string name="incall_vibrate_45_title">Vibrér hvert minut</string>
     <string name="incall_vibrate_45_summary">Vibrerer ved 45-sekunders mærket i hvert minut, under udgående opkald</string>
     <string name="incall_dnd_dialog_message">For at aktivere Forstyr Ikke, behøver Telefon-app\'en at blive givet tilladelsen til at kontrollere Forstyr Ikke-statussen.\nTillad det venligst.</string>
+    <string name="allow">Tillad</string>
+    <string name="deny">Afvis</string>
     <string name="call_recording_category_title">Opkaldsoptagelse</string>
     <string name="call_recording_format">Lydformat</string>
     <string name="call_via">Ring via</string>

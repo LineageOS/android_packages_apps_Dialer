@@ -15,11 +15,28 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_calling_via_template">A’ cur gairm slighe <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_calling_on_same_carrier_template">’Ga ghairm air an aon ghiùlanair <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_calling_on_recent_choice_template">’Ga ghairm air an taghadh mu dheireadh <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_connecting">A’ cur fòn…</string>
   <string name="incall_connecting_assited_dialed">’Ga ghairm le +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+  <string name="incall_connecting_assited_dialed_component">A’ cleachdadh +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> (<xliff:g example="1" id="ad_user_home_locale">%2$s</xliff:g>)\u2026</string>
+  <string name="incall_transferring">’Ga thar-chur…</string>
   <string name="incall_video_call_requesting">Gairm video giùlanair…</string>
   <string name="incall_wifi_video_call_requesting">Gairm video giùlanair WiFi…</string>
   <string name="incall_video_call_upgrade_request">A’ gearradh leum gu video a’ ghiùlanair…</string>
+  <string name="incall_video_call_request_failed">Cha ghabh ceangal a dhèanamh</string>
+  <string name="incall_video_call_request_rejected">Chaidh a’ ghairm a dhiùltadh</string>
+  <string name="incall_video_call_request_timed_out">Dh’fhalbh an ùine air a’ ghairm</string>
+  <string name="incall_video_call_operation_failed">Chan eil e ag obair</string>
+  <string name="incall_hanging_up">A’ cur crìoch air a’ ghairm</string>
+  <string name="incall_call_ended">Crìoch a\' ghairm</string>
+  <string name="incall_remotely_held">’Ga chumail</string>
   <string name="contact_grid_incoming_video_call">Gairm video giùlanair o</string>
   <string name="contact_grid_incoming_wifi_video_call">Gairm video giùlanair WiFi o</string>
+  <string name="contact_grid_incoming_voice_call">Gairm o</string>
+  <string name="contact_grid_incoming_work_call">Gairm obrach o</string>
+  <string name="contact_grid_incoming_via_template">Gairm slighe <xliff:g id="provider_name">%s</xliff:g> o</string>
+  <string name="contact_grid_incoming_suspected_spam">Tha amharas gur e spama a tha sa ghairm seo</string>
   <string name="contact_grid_callback_number">Àireamh an fhòn seo: <xliff:g id="light_number">%1$s</xliff:g></string>
 </resources>

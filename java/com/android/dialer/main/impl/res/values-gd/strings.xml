@@ -15,7 +15,12 @@
   ~ limitations under the License
   -->
 <resources xmlns:tools="http://schemas.android.com/tools">
+  <string name="main_activity_label" tools:ignore="UnusedResources">Fòn</string>
   <string name="dialpad_activity_title">Pada àireamhan an fhòn</string>
+  <string name="search">@android:string/search_go</string>
+  <string name="description_search">Lorg ann an luchd-aithne ’s àitichean</string>
+  <string name="contacts">Luchd-aithne</string>
+  <string name="description_contacts">Seall an luchd-aithne</string>
   <string name="voice_search_not_available">Chan eil lorg gutha ri làimh</string>
   <string name="dialpad_button_content_description">pada nan àireamhan</string>
 </resources>

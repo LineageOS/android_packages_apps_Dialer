@@ -15,6 +15,19 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="assisted_dialing_country_code_entry">Daithealadh le taic: Chaidh còd-dùthcha +&lt;xliff:g example="1" id="ad_country_code”&gt;%1$s&lt;/xliff:g&gt; a chleachdadh</string>
+  <string name="call_details">Mion-fhiosrachadh mun ghairm</string>
+  <string name="delete">Sguab às</string>
+  <string name="call_details_copy_number">Dèan lethbhreac dhen àireamh</string>
+  <string name="call_details_edit_number">Deasaich an àireamh mus dèan thu gairm</string>
+  <string name="call_details_report_call_id">Dèan aithris air mì-aithneachadh àireimh</string>
+  <string name="sent_a_photo">Chaidh dealbh a chur</string>
+  <string name="received_a_photo">Fhuair thu dealbh</string>
+  <string name="message_in_quotes">“<xliff:g id="message">%1$s</xliff:g>”</string>
+  <string name="report_caller_id_dialog_title">Dèan aithris air àireimh cheàrr</string>
+  <string name="report_caller_id_failed">Cha b’ urrainn dhuinn aithris a dhèanamh air an àireamh</string>
+  <string name="report_caller_id_toast">Chaidh aithris a dhèanamh air an àireamh</string>
+  <string name="assisted_dialing_country_code_entry">Daithealadh le taic: Chaidh còd-dùthcha +<xliff:g example="1" id="ad_country_code">%1$s</xliff:g> a chleachdadh</string>
   <string name="assisted_dialing_country_code_entry_failure">Chaidh daithealadh le taic a chleachdadh</string>
+  <string name="rtt_transcript_not_available">Chan eil tar-sgrìobhaidhean ri fhaighinn ach airson gairmean le teachdaireachdan</string>
+  <string name="rtt_transcript_link">Seall tar-sgrìobhadh</string>
 </resources>

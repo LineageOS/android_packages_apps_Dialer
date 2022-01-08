@@ -16,9 +16,22 @@
   -->
 <resources>
   <string name="favorites_header">Annsachdan</string>
+  <string name="suggestions_header">An fheadhainn thric</string>
   <string name="speed_dial_add_button_text">Cuir ris</string>
   <string name="speed_dial_remember_this_choice">Cuimhnich mo roghainn an-seo</string>
+  <string name="speed_dial_disambig_dialog_title">Tagh seòrsa na gairme</string>
   <string name="disambig_option_video_call">Gairm video</string>
   <string name="disambig_option_voice_call">Cuir fòn</string>
   <string name="add_favorite_activity_title">Cuir annsachd ris</string>
+  <string name="contact_menu_voice_call">Gairm gutha</string>
+  <string name="contact_menu_video_call">Gairm video</string>
+  <string name="contact_menu_message">Cuir teachdaireachd</string>
+  <string name="contact_menu_remove">Thoir air falbh</string>
+  <string name="contact_menu_contact_info">Fiosrachadh conaltraidh</string>
+  <string name="suggested_contact_bottom_sheet_add_favorite_option">Cuir annsachd ris</string>
+  <string name="speed_dial_contacts_permission_description">Airson grad-daithealadh a chur an comas, cuir air cead an luchd-aithne.</string>
+  <string name="speed_dial_turn_on_contacts_permission">Cuir air</string>
+  <string name="speed_dial_no_contacts_description">Cha do chuir thu dad ris na h-annsachdan fhathast</string>
+  <string name="speed_dial_no_contacts_action_text">Cuir annsachd ris</string>
+  <string name="speed_dial_remove_favorites">Thoir air falbh o na h-annsachdan</string>
 </resources>

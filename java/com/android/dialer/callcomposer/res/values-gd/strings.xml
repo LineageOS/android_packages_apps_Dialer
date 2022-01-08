@@ -15,5 +15,22 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="urgent">Cabhagach! Tog e!</string>
+  <string name="want_to_chat">Am bu mhiann leat beagan craic?</string>
+  <string name="quick_question">Ceist bheag…</string>
+  <string name="message_composer_custom_message_hint">Sgrìobh teachdaireachd ghnàthaichte</string>
+  <string name="send_and_call">Cuir is cuir fòn</string>
+  <string name="share_and_call">Co-roinn is cuir fòn</string>
+  <string name="gallery_item_description">dealbh <xliff:g id="date">%1$te %1$tB %1$tY %1$tl %1$tM %1$tp</xliff:g></string>
+  <string name="gallery_item_description_no_date">dealbh</string>
+  <string name="camera_media_failure">Cha b’ urrainn dhuinn dealbh a’ chamara a luchdadh</string>
+  <string name="allow">Ceadaich</string>
+  <string name="camera_permission_text">Airson dealbh a thogail, ceadaich inntrigeadh dhan chamara</string>
+  <string name="gallery_permission_text">Airson dealbh a cho-roinneadh, ceadaich inntrigeadh dha na meadhanan</string>
+  <string name="description_call_composer_camera">Tog dealbh</string>
+  <string name="description_call_composer_photo">Tagh dealbh</string>
+  <string name="description_call_composer_message">Cuir teachdaireachd</string>
+  <string name="image_sent_messages">Chaidh dealbh a chur le “Teachdaireachdan”</string>
+  <string name="message_sent_messages">Chaidh teachdaireachd a chur le “Teachdaireachdan”</string>
   <string name="call_composer_image_uploading">A’ cur an deilbh\u2026</string>
 </resources>
