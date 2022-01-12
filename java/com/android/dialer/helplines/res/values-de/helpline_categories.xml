@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Missbrauch</string>
+    <string name="helpline_category_acohol">Alkohol</string>
+    <string name="helpline_category_addiction">Abhängigkeit</string>
+    <string name="helpline_category_adolescents">Heranwachsende</string>
+    <string name="helpline_category_adults">Erwachsene</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Geburt</string>
+    <string name="helpline_category_bullying">Mobbing</string>
+    <string name="helpline_category_children">Kinder</string>
+    <string name="helpline_category_crime">Kriminalität</string>
+    <string name="helpline_category_crime_victims">Verbrechensopfer</string>
+    <string name="helpline_category_corruption">Korruption</string>
+    <string name="helpline_category_discrimination">Diskriminierung</string>
+    <string name="helpline_category_domestic_violence">Häusliche Gewalt</string>
+    <string name="helpline_category_drugs">Drogen</string>
+    <string name="helpline_category_emotional_support">Emotionale Unterstützung</string>
+    <string name="helpline_category_family">Familie</string>
+    <string name="helpline_category_gambling">Glücksspiel</string>
+    <string name="helpline_category_gender">Geschlecht</string>
+    <string name="helpline_category_generic">Allgemein</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Menschenrechte</string>
+    <string name="helpline_category_human_trafficking">Menschenhandel</string>
+    <string name="helpline_category_immigration">Einwanderung</string>
+    <string name="helpline_category_legal_aid">Rechtsberatung</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Männer</string>
+    <string name="helpline_category_mental_health">Psychische Gesundheit</string>
+    <string name="helpline_category_missing_children">Vermisste Kinder</string>
+    <string name="helpline_category_mothers">Mütter</string>
+    <string name="helpline_category_muslim">Muslim</string>
+    <string name="helpline_category_parents">Eltern</string>
+    <string name="helpline_category_pregnancy">Schwangerschaft</string>
+    <string name="helpline_category_psychological">Psychologisch</string>
+    <string name="helpline_category_religion">Religion</string>
+    <string name="helpline_category_senior">Senioren</string>
+    <string name="helpline_category_sexual_abuse">Sexueller Missbrauch</string>
+    <string name="helpline_category_sexual_assault">Sexuelle Nötigung</string>
+    <string name="helpline_category_sexual_rights">Sexuelle Rechte</string>
+    <string name="helpline_category_sexuality">Sexualität</string>
+    <string name="helpline_category_soldiers">Soldaten</string>
+    <string name="helpline_category_suicide">Selbstmordprävention</string>
+    <string name="helpline_category_trans">Transgender</string>
+    <string name="helpline_category_veterans">Veteranen</string>
+    <string name="helpline_category_violence">Gewalt</string>
+    <string name="helpline_category_war">Krieg</string>
+    <string name="helpline_category_women">Frauen</string>
+    <string name="helpline_category_youth">Jugend</string>
+</resources>

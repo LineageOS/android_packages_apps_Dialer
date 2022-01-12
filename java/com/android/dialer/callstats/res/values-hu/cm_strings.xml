@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">A névjegy-statisztikák részletei</string>
+    <string name="call_stats_incoming">Bejövő: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Kimenő: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Nem fogadott: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokkolt: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Összesen <xliff:g id="call_count">%1$s</xliff:g> db, <xliff:g id="duration">%2$s</xliff:g> hosszban</string>
+    <string name="call_stats_header_total_callsonly">Összesen: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Kezdődátum</string>
+    <string name="call_stats_filter_to">Záródátum</string>
+    <string name="call_stats_filter_picker_title">Szűrési tartomány</string>
+    <string name="date_quick_selection">Gyorskiválasztás</string>
+    <string name="date_qs_currentmonth">Jelenlegi hónap</string>
+    <string name="date_qs_currentquarter">Jelenlegi negyedév</string>
+    <string name="date_qs_currentyear">Jelenlegi év</string>
+    <string name="date_qs_lastweek">Előző hét</string>
+    <string name="date_qs_lastmonth">Előző hónap</string>
+    <string name="date_qs_lastquarter">Előző negyedév</string>
+    <string name="date_qs_lastyear">Előző év</string>
+    <string name="call_stats_date_filter">Időszakbeállítás</string>
+    <string name="call_stats_reset_filter">Időszaktörlés</string>
+    <string name="call_stats_sort_by_duration">Rendezés hívásidőtartam szerint</string>
+    <string name="call_stats_sort_by_count">Rendezés hívások száma szerint</string>
+    <string name="call_stats_title_for_number">Ez a szám</string>
+    <string name="call_stats_title_of_total">Az összesből</string>
+    <string name="call_stats_title_durations">Hívásidőtartam</string>
+    <string name="call_stats_title_count">Hívásszám</string>
+    <string name="call_stats_title_average_duration">Átlagos hívásidőtartam</string>
+    <string name="recent_calls_no_items_in_range">Az Ön hívásnaplója nem tartalmaz semmilyen hívást a kijelölt időtartományban.</string>
+</resources>

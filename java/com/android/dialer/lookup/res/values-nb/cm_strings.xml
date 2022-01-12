@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">Nærliggende steder</string>
+    <string name="people">Folk</string>
+    <string name="lookup_settings_label">Telefonnummeroppleting</string>
+    <string name="enable_forward_lookup_title">Videresendingsoppleting</string>
+    <string name="enable_forward_lookup_summary">Vis nærliggende steder når du søker i telefonappen</string>
+    <string name="enable_people_lookup_title">Oppleting av folk</string>
+    <string name="enable_people_lookup_summary">Vis nettresultater for folk når du søker i telefonappen</string>
+    <string name="enable_reverse_lookup_title">Omvendt oppleting</string>
+    <string name="enable_reverse_lookup_summary">Slå opp informasjon om personen eller stedet når det kommer inn en samtale med ukjent nummer</string>
+    <string name="forward_lookup_provider_title">Tjeneste for oppleting av videresending</string>
+    <string name="people_lookup_provider_title">Tjeneste for oppleting av folk</string>
+    <string name="reverse_lookup_provider_title">Tjeneste for omvendt oppleting</string>
+</resources>

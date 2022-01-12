@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Abuzim</string>
+    <string name="helpline_category_acohol">Alkol</string>
+    <string name="helpline_category_addiction">Varësi</string>
+    <string name="helpline_category_adolescents">Adoleshentë</string>
+    <string name="helpline_category_adults">Të rriturit</string>
+    <string name="helpline_category_aids">SIDA</string>
+    <string name="helpline_category_birth">Lindje</string>
+    <string name="helpline_category_bullying">Ngacmim</string>
+    <string name="helpline_category_children">Fëmijë</string>
+    <string name="helpline_category_crime">Krim</string>
+    <string name="helpline_category_crime_victims">Viktima Krimi</string>
+    <string name="helpline_category_corruption">Korrupsion</string>
+    <string name="helpline_category_discrimination">Diskriminim</string>
+    <string name="helpline_category_domestic_violence">Dhunë në familje</string>
+    <string name="helpline_category_drugs">Droga</string>
+    <string name="helpline_category_emotional_support">Ndihmë Emocionale</string>
+    <string name="helpline_category_family">Familja</string>
+    <string name="helpline_category_gambling">Kumar</string>
+    <string name="helpline_category_gender">Gjinia</string>
+    <string name="helpline_category_generic">Të përgjithshme</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Të drejtat e njeriut</string>
+    <string name="helpline_category_human_trafficking">Trafikim i Qënieve Njerzore</string>
+    <string name="helpline_category_immigration">Imigrim</string>
+    <string name="helpline_category_legal_aid">Ndihmë juridike</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Burra</string>
+    <string name="helpline_category_mental_health">Shëndeti Mendor</string>
+    <string name="helpline_category_missing_children">Fëmijë të humbur</string>
+    <string name="helpline_category_mothers">Nënat</string>
+    <string name="helpline_category_muslim">Musliman</string>
+    <string name="helpline_category_parents">Prindërit</string>
+    <string name="helpline_category_pregnancy">Shtatëzania</string>
+    <string name="helpline_category_psychological">Psikologjike</string>
+    <string name="helpline_category_religion">Besimi</string>
+    <string name="helpline_category_senior">Madhor</string>
+    <string name="helpline_category_sexual_abuse">Abuzim Seksual</string>
+    <string name="helpline_category_sexual_assault">Agresion Seksual</string>
+    <string name="helpline_category_sexual_rights">Të drejtat Seksuale</string>
+    <string name="helpline_category_sexuality">Seksualiteti</string>
+    <string name="helpline_category_soldiers">Ushtarët</string>
+    <string name="helpline_category_suicide">Parandalimi i vetëvrasjeve</string>
+    <string name="helpline_category_trans">Transgjinor</string>
+    <string name="helpline_category_veterans">Veteran</string>
+    <string name="helpline_category_violence">Dhunë</string>
+    <string name="helpline_category_war">Luftë</string>
+    <string name="helpline_category_women">Femra</string>
+    <string name="helpline_category_youth">Rinia</string>
+</resources>

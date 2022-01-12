@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Penyalahgunaan</string>
+    <string name="helpline_category_acohol">Alkohol</string>
+    <string name="helpline_category_addiction">Adiksi</string>
+    <string name="helpline_category_adolescents">Remaja</string>
+    <string name="helpline_category_adults">Dewasa</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Kelahiran</string>
+    <string name="helpline_category_bullying">Perundungan</string>
+    <string name="helpline_category_children">Anak-anak</string>
+    <string name="helpline_category_crime">Kriminal</string>
+    <string name="helpline_category_crime_victims">Korban kejahatan</string>
+    <string name="helpline_category_corruption">Korupsi</string>
+    <string name="helpline_category_discrimination">Diskriminasi</string>
+    <string name="helpline_category_domestic_violence">Kekerasan domestik</string>
+    <string name="helpline_category_drugs">Obat-obatan</string>
+    <string name="helpline_category_emotional_support">Dukungan emosional</string>
+    <string name="helpline_category_family">Keluarga</string>
+    <string name="helpline_category_gambling">Judi</string>
+    <string name="helpline_category_gender">Jenis kelamin</string>
+    <string name="helpline_category_generic">Umum</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Hak asasi manusia</string>
+    <string name="helpline_category_human_trafficking">Penyelundupan manusia</string>
+    <string name="helpline_category_immigration">Imigrasi</string>
+    <string name="helpline_category_legal_aid">Bantuan hukum</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Laki-laki</string>
+    <string name="helpline_category_mental_health">Kesehatan mental</string>
+    <string name="helpline_category_missing_children">Kehilangan anak</string>
+    <string name="helpline_category_mothers">Ibu</string>
+    <string name="helpline_category_muslim">Muslim</string>
+    <string name="helpline_category_parents">Orang tua</string>
+    <string name="helpline_category_pregnancy">Kehamilan</string>
+    <string name="helpline_category_psychological">Psikologi</string>
+    <string name="helpline_category_religion">Agama</string>
+    <string name="helpline_category_senior">Senior</string>
+    <string name="helpline_category_sexual_abuse">Pelecehan seksual</string>
+    <string name="helpline_category_sexual_assault">Kekerasan seksual</string>
+    <string name="helpline_category_sexual_rights">Hak seksual</string>
+    <string name="helpline_category_sexuality">Seksualitas</string>
+    <string name="helpline_category_soldiers">Prajurit</string>
+    <string name="helpline_category_suicide">Pencegahan bunuh diri</string>
+    <string name="helpline_category_trans">Transgender</string>
+    <string name="helpline_category_veterans">Veteran</string>
+    <string name="helpline_category_violence">Kekerasan</string>
+    <string name="helpline_category_war">Perang</string>
+    <string name="helpline_category_women">Perempuan</string>
+    <string name="helpline_category_youth">Pemuda</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Linjat e ndihmës</string>
+    <string name="helplines_loading">Duke u ngarkuar\u2026</string>
+    <string name="helplines_empty">Nuk u gjet asnje linjë ndihme.\nVendosni një kartë SIM dhe provoni sërish</string>
+    <string name="helplines_help">Ndihmë</string>
+    <string name="helplines_help_title">Këto janë të sigurta për tu telefonuar</string>
+    <string name="helplines_help_message">Asnjë prej këtyre numrave nuk rezulton në historikun e telefonatave të tua.\nJu mund të shtypni në ndonjë prej artikujve për më shumë informacion</string>
+    <string name="helplines_help_more_message">Lista e linjave të ndihmës është e mbushur me informacione që përditësohen manualisht nga kontribuesit. Nëse hasni ndonjë informacion të munguar ose të gabuar, ju lutemi mos ngurroni të na kontaktoni në <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">Më shumë</string>
+    <string name="unknown_helpline_name">Organizatë e pa njohur</string>
+    <string name="helpline_name">Emri</string>
+    <string name="helpline_org">Organizata</string>
+    <string name="helpline_categories">Kategoritë</string>
+    <string name="helpline_number">Numri</string>
+    <string name="helpline_website">Faqe interneti</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Linja e ndihmës për mbështetjen emocionale">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Cree</string>
+    <string name="helpline_language_english">Anglisht</string>
+    <string name="helpline_language_french">Frëngjisht</string>
+    <string name="helpline_language_german">Gjermanisht</string>
+    <string name="helpline_language_inuktitut">Inuktitut</string>
+    <string name="helpline_language_ojibway">Ojibway</string>
+    <string name="helpline_language_turkish">Turqisht</string>
+</resources>

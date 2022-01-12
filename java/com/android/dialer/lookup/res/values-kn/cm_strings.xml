@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">ಸಮೀಪದ ಸ್ಥಳಗಳು</string>
+    <string name="people">ಜನರು</string>
+    <string name="lookup_settings_label">ಫೋನ್ ಸಂಖ್ಯೆ ಹುಡುಕು</string>
+    <string name="enable_forward_lookup_title">ಮುಂಚಿತ ಮೇಲ್ವಿಚಾರಣೆ</string>
+    <string name="enable_forward_lookup_summary">ಕರೆ ಘಟಕದಲ್ಲಿ ಹುಡುಕುವುವಾಗ, ಸಮೀಪದ ಸ್ಥಳಗಳನ್ನು ತೋರಿಸು</string>
+    <string name="enable_people_lookup_title">ವ್ಯಕ್ತಿ ಹುಡುಕು</string>
+    <string name="enable_people_lookup_summary">ಕರೆ ಘಟಕದಲ್ಲಿ ಜನರ ಹುಡುಕಿದಾಗ, ಮಿನ್ಕಾಣ್ಕೆಯ ಉತ್ತರವನ್ನು ತೋರಿಸು</string>
+    <string name="enable_reverse_lookup_title">ಉಲ್ಟ ಹುಡುಕು</string>
+    <string name="enable_reverse_lookup_summary">ಆಗಮಿತ ಕರೆಗಳಲ್ಲಿ ಅಪರಿಚಿತ ಸಂಖ್ಯೆಗಳ ವ್ಯಕ್ತಿ ಅಥವ ಸ್ಥಳದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಮೇಲ್ವಿಚಾರಿಸು</string>
+    <string name="forward_lookup_provider_title">ಮುಂಚಿತ ಮೇಲ್ವಿಚಾರಣೆ ಪರಿಚಾರಕ</string>
+    <string name="people_lookup_provider_title">ಜನರ ಹುಡುಕುವ ಪರಿಚಾರಕ</string>
+    <string name="reverse_lookup_provider_title">ಉಲ್ಟ ಹುಡುಕುವ ಪರಿಚಾರಕ</string>
+    <string name="lookup_disclaimer">ಮೇಲ್ವಿಚಾರಣೆ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಲು ದೂರದ ಜಾಲತಾಣಗಳಿಗೆ ಸುರಕ್ಷಿತ ಶಿಷ್ಟಾಚಾರ (https) ಬಳಸಿ ಪ್ರಶ್ನೆಗಳನ್ನು ಕಳುಹಿಸಬಹುದು. ಪರಿಚಾರಕ ಪ್ರಶ್ನೆಯಲ್ಲಿ ಇನ್ನೊಬ್ಬ ವ್ಯಕ್ತಿಯ ದೂರವಾಣಿ ಸಂಖ್ಯೆಯನ್ನೂ ಕಳುಹಿಸಬಹುದು</string>
+</resources>
