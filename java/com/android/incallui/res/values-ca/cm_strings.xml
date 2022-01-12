@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">No s\'ha pogut començar l\'enregistrament de la trucada</string>
+    <string name="call_recording_file_location">La trucada enregistrada s\'ha desat a <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Enregistra la trucada</string>
+    <string name="onscreenCallRecordingText">Enregistrament de trucada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Aturar l\'enregistrament</string>
+    <string name="recording_time_text">S\'està enregistrant</string>
+    <string name="recording_warning_title">Voleu activar l\'enregistrament de trucades?</string>
+    <string name="recording_warning_text">Avís: Sou el responsable del compliment de les lleis, reglaments i regles que s\'apliquen a l\'ús de la funcionalitat d\'enregistrament de trucades i l\'ús o distribució d\'aquests enregistraments.</string>
+</resources>

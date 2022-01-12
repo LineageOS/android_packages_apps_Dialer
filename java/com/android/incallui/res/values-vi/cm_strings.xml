@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">Không thể bắt đầu ghi âm cuộc gọi</string>
+    <string name="call_recording_file_location">Đã lưu ghi âm cuộc gọi vào <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Ghi âm cuộc gọi</string>
+    <string name="onscreenCallRecordingText">Ghi âm cuộc gọi - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Dừng ghi âm</string>
+    <string name="recording_time_text">Đang ghi</string>
+    <string name="recording_warning_title">Cho phép ghi âm cuộc gọi?</string>
+    <string name="recording_warning_text">Thông báo: Bạn có trách nhiệm tuân thủ bất kỳ luật pháp, quy định và quy tắc nào áp dụng cho việc sử dụng chức năng ghi âm cuộc gọi và sử dụng hay phân phối các bản ghi âm đó.</string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Linky pomoci</string>
+    <string name="helplines_loading">Načítání\u2026</string>
+    <string name="helplines_empty">Nebyly nalezeny žádné linky pomoci.\nVložte SIM kartu a zkuste to znovu</string>
+    <string name="helplines_help">Pomoc</string>
+    <string name="helplines_help_title">Volat je bezpečné</string>
+    <string name="helplines_help_message">Žádná z těchto čísel se neobjeví ve vaší historii hovorů.\nPro více informací můžete kliknout na libovolnou položku</string>
+    <string name="helpline_button_more">Více</string>
+    <string name="unknown_helpline_name">Neznámá organizace</string>
+    <string name="helpline_name">Název</string>
+    <string name="helpline_org">Organizace</string>
+    <string name="helpline_categories">Kategorie</string>
+    <string name="helpline_number">Číslo</string>
+    <string name="helpline_website">Webová stránka</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Kríjština</string>
+    <string name="helpline_language_english">Angličtina</string>
+    <string name="helpline_language_french">Francouzština</string>
+    <string name="helpline_language_german">Němčina</string>
+    <string name="helpline_language_inuktitut">Inuktitutština</string>
+    <string name="helpline_language_ojibway">Ojibwayština</string>
+    <string name="helpline_language_turkish">Turečtina</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">الأماكن القريبة</string>
+    <string name="people">الناس</string>
+    <string name="lookup_settings_label">البحث عن رقم الهاتف</string>
+    <string name="enable_forward_lookup_title">البحث الأمامي</string>
+    <string name="enable_forward_lookup_summary">إظهر الأماكن القريبة عند البحث في الهاتف</string>
+    <string name="enable_people_lookup_title">بحث عن أشخاص</string>
+    <string name="enable_people_lookup_summary">إظهار نتائج عبر الإنترنت للناس عند البحث في الهاتف</string>
+    <string name="enable_reverse_lookup_title">بحث عكسي</string>
+    <string name="enable_reverse_lookup_summary">البحث عن معلومات حول شخص أو مكان للأرقام غير المعروفة في المكالمات الواردة</string>
+    <string name="forward_lookup_provider_title">موفر البحث الأمامي</string>
+    <string name="people_lookup_provider_title">موفر البحث عن الأشخاص</string>
+    <string name="reverse_lookup_provider_title">موفر البحث العكسي</string>
+    <string name="lookup_disclaimer">قد ترسل عمليات البحث استعلامات عبر بروتوكول آمن (https) إلى مواقع ويب بعيدة لجمع المعلومات. قد يتضمن الاستعلام رقم هاتف الطرف الآخر أو استعلام البحث</string>
+</resources>

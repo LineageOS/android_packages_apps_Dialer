@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Телефоны доверия</string>
+    <string name="helplines_loading">Загрузка\u2026</string>
+    <string name="helplines_empty">Телефонов доверия не найдено.\nВставьте SIM-карту и повторите попытку</string>
+    <string name="helplines_help">Помощь</string>
+    <string name="helplines_help_title">Это безопасные звонки</string>
+    <string name="helplines_help_message">Ни один из этих номеров не появится в истории звонков.\nДля получения дополнительной информации вы можете нажать на любой элемент.</string>
+    <string name="helplines_help_more_message">Список телефонов доверия содержит информацию, которая обновляется контрибьюторами вручную. Если вы обнаружите недостающую или неверную информацию, пожалуйста, свяжитесь с нами через сайт <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">Еще</string>
+    <string name="unknown_helpline_name">Неизвестная организация</string>
+    <string name="helpline_name">Название</string>
+    <string name="helpline_org">Организация</string>
+    <string name="helpline_categories">Категории</string>
+    <string name="helpline_number">Номер</string>
+    <string name="helpline_website">Веб-сайт</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Кри</string>
+    <string name="helpline_language_english">Английский</string>
+    <string name="helpline_language_french">Французский</string>
+    <string name="helpline_language_german">Немецкий</string>
+    <string name="helpline_language_inuktitut">Инуктитут</string>
+    <string name="helpline_language_ojibway">Оджибве</string>
+    <string name="helpline_language_turkish">Турецкий</string>
+</resources>

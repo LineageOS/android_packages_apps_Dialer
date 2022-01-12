@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">إساءة</string>
+    <string name="helpline_category_acohol">الكحول</string>
+    <string name="helpline_category_addiction">الإدمان</string>
+    <string name="helpline_category_adolescents">المراهقين</string>
+    <string name="helpline_category_adults">البالغين</string>
+    <string name="helpline_category_aids">الإيدز</string>
+    <string name="helpline_category_birth">ولادة</string>
+    <string name="helpline_category_bullying">التنمر</string>
+    <string name="helpline_category_children">الأطفال</string>
+    <string name="helpline_category_crime">جريمة</string>
+    <string name="helpline_category_crime_victims">ضحايا الجريمة</string>
+    <string name="helpline_category_corruption">الفساد</string>
+    <string name="helpline_category_discrimination">التمييز</string>
+    <string name="helpline_category_domestic_violence">العنف المنزلي</string>
+    <string name="helpline_category_drugs">المخدرات</string>
+    <string name="helpline_category_emotional_support">الدعم العاطفي</string>
+    <string name="helpline_category_family">العائلة</string>
+    <string name="helpline_category_gambling">المقامرة</string>
+    <string name="helpline_category_gender">الجنس</string>
+    <string name="helpline_category_generic">عامة</string>
+    <string name="helpline_category_hiv">فيروس نقص المناعة البشرية</string>
+    <string name="helpline_category_human_rights">حقوق الإنسان</string>
+    <string name="helpline_category_human_trafficking">الإتجار بالبشر</string>
+    <string name="helpline_category_immigration">الهجرة</string>
+    <string name="helpline_category_legal_aid">المساعدة القانونية</string>
+    <string name="helpline_category_lgbtq">المثليّة</string>
+    <string name="helpline_category_men">الرجال</string>
+    <string name="helpline_category_mental_health">الصحة النفسية</string>
+    <string name="helpline_category_missing_children">الأطفال المفقودون</string>
+    <string name="helpline_category_mothers">أمهات</string>
+    <string name="helpline_category_muslim">مسلم</string>
+    <string name="helpline_category_parents">الآباء</string>
+    <string name="helpline_category_pregnancy">الحمل</string>
+    <string name="helpline_category_psychological">السيكولوجية</string>
+    <string name="helpline_category_religion">الدين</string>
+    <string name="helpline_category_senior">كبار السن</string>
+    <string name="helpline_category_sexual_abuse">العنف الجنسي</string>
+    <string name="helpline_category_sexual_assault">الاعتداء الجنسي</string>
+    <string name="helpline_category_sexual_rights">الحقوق الجنسية</string>
+    <string name="helpline_category_sexuality">النشاط الجنسي</string>
+    <string name="helpline_category_soldiers">الجنود</string>
+    <string name="helpline_category_suicide">منع الانتحار</string>
+    <string name="helpline_category_trans">المتحولون جنسيا</string>
+    <string name="helpline_category_veterans">مخضرمين</string>
+    <string name="helpline_category_violence">العنف</string>
+    <string name="helpline_category_war">الحرب</string>
+    <string name="helpline_category_women">النساء</string>
+    <string name="helpline_category_youth">الشباب</string>
+</resources>
