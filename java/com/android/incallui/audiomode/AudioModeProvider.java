@@ -85,6 +85,7 @@ public class AudioModeProvider {
       switch (info.getType()) {
         case AudioDeviceInfo.TYPE_BLUETOOTH_A2DP:
         case AudioDeviceInfo.TYPE_BLUETOOTH_SCO:
+        case AudioDeviceInfo.TYPE_BLE_HEADSET:
           hasBluetooth = true;
           continue;
         case AudioDeviceInfo.TYPE_WIRED_HEADSET:
