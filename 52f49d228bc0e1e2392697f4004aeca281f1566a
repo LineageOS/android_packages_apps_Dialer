@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3523a2d5_4411b581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-01-24T16:07:54Z",
+      "side": 1,
+      "message": "We should probably move what we can to the right place or dialer is left with untranslated parts of it.",
+      "revId": "52f49d228bc0e1e2392697f4004aeca281f1566a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
