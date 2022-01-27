@@ -62,6 +62,7 @@
   <uses-permission android:name="android.permission.CONNECTIVITY_USE_RESTRICTED_NETWORKS"/>
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
   <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
   <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE"/>
   <!-- We use this to disable the status bar buttons of home, back and recent
