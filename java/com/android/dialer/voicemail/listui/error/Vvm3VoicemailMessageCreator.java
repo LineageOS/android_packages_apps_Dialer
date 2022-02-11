@@ -167,7 +167,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_unknown_user_title),
           getCustomerSupportString(context, R.string.vvm3_error_unknown_user_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 
@@ -175,7 +175,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_unknown_device_title),
           getCustomerSupportString(context, R.string.vvm3_error_unknown_device_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 
@@ -183,7 +183,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_invalid_password_title),
           getCustomerSupportString(context, R.string.vvm3_error_invalid_password_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 
@@ -219,7 +219,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_subscriber_unknown_title),
           getCustomerSupportString(context, R.string.vvm3_error_subscriber_unknown_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 
@@ -227,7 +227,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_imap_getquota_error_title),
           getCustomerSupportString(context, R.string.vvm3_error_imap_getquota_error_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 
@@ -235,7 +235,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_imap_select_error_title),
           getCustomerSupportString(context, R.string.vvm3_error_imap_select_error_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 
@@ -243,7 +243,7 @@ public class Vvm3VoicemailMessageCreator {
       return new VoicemailErrorMessage(
           context.getString(R.string.vvm3_error_imap_error_title),
           getCustomerSupportString(context, R.string.vvm3_error_imap_error_message),
-          VoicemailErrorMessage.createCallVoicemailAction(context, status.getPhoneAccountHandle()),
+          VoicemailErrorMessage.createCallVoicemailAction(context),
           createCallCustomerSupportAction(context));
     }
 

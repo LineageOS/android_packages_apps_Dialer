@@ -67,7 +67,6 @@ public class VoicemailChangePinActivity extends Activity
     implements OnClickListener, OnEditorActionListener, TextWatcher {
 
   private static final String TAG = "VmChangePinActivity";
-  public static final String ACTION_CHANGE_PIN = "com.android.dialer.action.CHANGE_PIN";
 
   private static final int MESSAGE_HANDLE_RESULT = 1;
 
