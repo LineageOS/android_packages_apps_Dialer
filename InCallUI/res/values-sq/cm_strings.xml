@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (c) 2013, The Linux Foundation. All rights reserved.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="callFailed_incoming_cb_enabled">Personi ka bllokuar të gjitha thirrjet hyrëse.</string>
+    <string name="callUnanswered_forwarded">Telefonatë e pa përgjigjur dhe e transferuar</string>
+    <string name="incall_call_type_label_forwarded">Thirrje e transferuar</string>
+    <string name="card_title_dialing_waiting">Duke telefonuar (në pritje\u2026)</string>
+    <string name="calling_via_waiting_template">Duke telefonuar me <xliff:g id="provider_name">%s</xliff:g> (Në pritje\u2026)</string>
+    <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (me <xliff:g id="provider_name">%2$s</xliff:g>)</string>
+    <string name="card_title_waiting_call">Telefonatë në pritje</string>
+    <string name="call_recording_failed_message">Dështoi të fillojë inçizimin</string>
+    <string name="call_recording_file_location">Inçizimi i telefonatës u ruajt në <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Inçizo telefonatën</string>
+    <string name="onscreenStopCallRecordText">Ndalo inçizimin</string>
+    <string name="recording_time_text">Në inçizim</string>
+    <string name="recording_warning_title">Aktivizo inçizimin e telefonatës?</string>
+    <string name="recording_warning_text">Lajmërim: Ju jeni përgjegjës që të përputheni me çdo ligj apo rregull që ka lidhje me regjistrimin e telefonatave si dhe me përdorimin apo shpërndarjen e këtyre telefonatave.</string>
+    <string name="call_failed_due_to_validate_number">Nuk mund të kryhet video telefonata, formati i numrit është i pa saktë</string>
+    <string name="call_state_dialing">Duke telefonuar</string>
+    <string name="call_state_holding">Në pritje</string>
+    <string name="call_state_active">Aktive</string>
+    <string name="call_state_unknown">E panjohur</string>
+    <string name="call_state_disconnecting">Duke u shkëputur</string>
+    <string name="call_state_disconnected">U shkëput</string>
+    <string name="too_many_recipients">Në një tele-konferencë 4G s\'mund të bashkohen më shumë se 6 persona.</string>
+</resources>

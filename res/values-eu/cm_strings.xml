@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_vibration_category_title">Deian zeharreko bibrazioa</string>
+    <string name="incall_vibrate_outgoing_title">Bibratu erantzutean</string>
+    <string name="incall_vibrate_call_waiting_title">Bibratu deia zai dagoenean</string>
+    <string name="incall_vibrate_hangup_title">Bibratu esekitzean</string>
+    <string name="incall_vibrate_45_title">Bibratu minutuero</string>
+    <string name="incall_vibrate_45_summary">Irteera deietan minutuero bibratzen du 45. segundoan</string>
+    <string name="nearby_places">Inguruko tokiak</string>
+    <string name="people">Jendea</string>
+    <string name="preference_category_t9_dialpad_search">Bilatu T9 markadorean</string>
+    <string name="t9_search_input_locale">T9 bilatzeko sarrera</string>
+    <string name="t9_search_input_locale_default">Lehenetsia</string>
+    <string name="lookup_settings_label">Telefono zenbakien bilaketa</string>
+    <string name="enable_forward_lookup_title">Tokien bilaketa</string>
+    <string name="enable_forward_lookup_summary">Erakutsi inguruko tokiak markatzailean bilatzean</string>
+    <string name="enable_people_lookup_title">Pertsonen bilaketa</string>
+    <string name="enable_people_lookup_summary">Erakutsi sareko emaitzak pertsonak markatzailean bilatzean</string>
+    <string name="enable_reverse_lookup_title">Bilaketa alderantzikatua</string>
+    <string name="enable_reverse_lookup_summary">Bilatu pertsona edo lekuko informazioa zenbaki ezezagunen deientzako</string>
+    <string name="forward_lookup_provider_title">Tokien bilaketarako hornitzailea</string>
+    <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
+    <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn txinatarra (CN)</string>
+    <string name="speed_dial_edit_title">Editatu <xliff:g id="index" example="2">%1$d</xliff:g> markaketa azkarra</string>
+    <string name="speed_dial_input_hint">Idatzi zenbaki bat</string>
+    <string name="call_log_show_all_slots">SIM guztiak</string>
+    <string name="call_log_all_calls_header">Dei guztiak</string>
+    <string name="call_log_blacklist_header">Blokeatutako deiak soilik</string>
+    <string name="call_log_blocked_empty">Ez duzu blokeatutako deirik.</string>
+    <string name="call_log_stats_title">Estatistikak</string>
+    <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
+    <string name="call_stats_incoming">Jasoak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Eginak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Galduak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokeatuak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Guztira: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Hasiera data</string>
+    <string name="call_stats_filter_to">Amaiera data</string>
+    <string name="call_stats_filter_picker_title">Daten heina</string>
+    <string name="date_quick_selection">Hautapen azkarra</string>
+    <string name="date_qs_currentmonth">Uneko hilabetea</string>
+    <string name="date_qs_currentquarter">Uneko hiruhilabetea</string>
+    <string name="date_qs_currentyear">Uneko urtea</string>
+    <string name="date_qs_lastweek">Azken astea</string>
+    <string name="date_qs_lastmonth">Azken hilabetea</string>
+    <string name="date_qs_lastquarter">Azken hiruhilabetea</string>
+    <string name="date_qs_lastyear">Azken urtea</string>
+    <string name="call_stats_date_filter">Data heina ezarri</string>
+    <string name="call_stats_reset_filter">Leheneratu denbora heina</string>
+    <string name="call_stats_sort_by_duration">Iraupenaren arabera sailkatu</string>
+    <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
+    <string name="call_stats_title_for_number">Zenbaki hau</string>
+    <string name="call_stats_title_of_total">Guztira</string>
+    <string name="call_stats_title_durations">Deien iraupenak</string>
+    <string name="call_stats_title_count">Dei kopurua</string>
+    <string name="call_stats_title_average_duration">Batezbesteko dei iraupena</string>
+    <string name="recent_calls_no_items_in_range">Zure deien egunkariak ez du deirik aukeratutako denbora tartean.</string>
+    <string name="call_recording_category_title">Dei grabaketa</string>
+    <string name="call_recording_format">Audio formatua</string>
+    <string name="call_playback_no_app_found_toast">Ezin izan da hautatutako grabaketa erreproduzitzeko aplikaziorik aurkitu.</string>
+    <string name="speed_dial_settings">Markaketa azkarraren ezarpenak</string>
+    <string name="speed_dial_not_set">(ezarri gabe)</string>
+    <string name="speed_dial_replace">Ordeztu</string>
+    <string name="speed_dial_delete">Ezabatu</string>
+    <string name="speed_dial_unassigned_dialog_title">Tekla esleitu gabea</string>
+    <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g> teklari ez zaio kontakturik esleitu. Kontaktu bat esleitu nahi duzu orain?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Markaketa azkarra erabiltzeko, aurretik hegaldi modua ezgaitu</string>
+    <string name="speed_dial_can_not_be_set">Ezin da markaketa azkarra ezarri tekla honentzat</string>
+    <string name="yes">Bai</string>
+    <string name="no">Ez</string>
+    <string name="recentIncoming_empty">Ez duzu jasotako deirik.</string>
+    <string name="recentOutgoing_empty">Ez duzu egindako deirik.</string>
+    <string name="recentCalls_empty">Zure deien erregistroa hutsik dago</string>
+    <string name="calllog_search_hint">Bilatu deien erregistroan</string>
+    <string name="no_call_log">Ez dago deien erregistrorik</string>
+    <string name="clear">Garbitu</string>
+    <string name="description_clear_search">Garbitu bilaketa</string>
+    <string name="video_call_welcome_title"><b>Ongi etorri bideo-deien markatzaile berrira</b></string>
+    <string name="video_call_welcome_message">Nork ez du gustuko telefonoaren bestaldean ahots ezagun hori entzutea? Baina aurpegira hitz-egitea askoz hobea da! Hau da konexioak denbora errealean (zuzenean) egiteko jakin behar duzuna:\n4G LTE edo Wi-Fi konexioa behar duzu\n Gailua bideo deiekin bateragarria izan behar da\n Bideo deiek zure abiadura handiko konexioa erabili dezakete\nAhots-dei bat bideo-dei bihurtu dezakezu\n\nIrakurri <a>https://support.t-mobile.com/docs/DOC-23574</a> informazio gehiagorako.</string>
+    <string name="video_call_welcome_message_repeat">Erakutsi mezu hau beti</string>
+    <string name="toast_change_video_call_failed">Ezin izan da bideo-deira aldatu, zenbaki formatu okerra</string>
+    <string name="toast_make_video_call_failed">Ezin izan da bideo-deia egin, zenbaki formatu okerra</string>
+    <string name="overflowBothCallMenuItemText">Bideo-deia, erakutsi nazazu</string>
+    <string name="overflowRXCallMenuItemText">Bideo-deia, ezkutatu nazazu</string>
+    <string name="overflowVOCallMenuItemText">Ahots-deia</string>
+    <string name="video_call">Bideo-deia</string>
+    <string name="call_data_info_label">Dei/datu erabileraren kronometroak</string>
+    <string name="call_data_info_description">Ahots-deien erabilera denbora eta datuen erabilera denbora</string>
+    <string name="alert_call_over_wifi">Deiak Wi-Fi bitartez egingo dira.</string>
+    <string name="alert_call_no_cellular_coverage">Ez dago sare mugikorrik erabilgarri. Konektatu erabilgarri dagoen Wi-Fi batetara deiak egiteko.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Konektatu Wi-Fira deiak egiteko.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Sakatu hemen sare erabilgarriak ikusteko</string>
+    <string name="menu_add_to_4g_conference_call">Gehitu 4G konferentzia deira</string>
+    <string name="menu_4g_conference_call">4G konferentzia deia</string>
+    <string name="type_incoming_volte">Jasotako 4G ahots-deia</string>
+    <string name="type_incoming_video_lte">Jasotako 4G bideo-deia</string>
+    <string name="type_outgoing_volte">Egindako 4G ahots-deia</string>
+    <string name="type_outgoing_video_lte">Egindako 4G bideo-deia</string>
+    <string name="type_missed_volte">Galdutako 4G ahots-deia</string>
+    <string name="type_missed_video_lte">Galdutako 4G bideo-deia</string>
+    <string name="type_incoming_vowifi">Wifi ahots deia</string>
+    <string name="type_incoming_video_wifi">Wifi bideo-deia</string>
+    <string name="type_outgoing_vowifi">Wifi ahots deia</string>
+    <string name="type_outgoing_video_wifi">Wifi bideo-deia</string>
+    <string name="type_missed_vowifi">Galdutako WiFi ahots-deia</string>
+    <string name="type_missed_video_wifi">Galdutako WiFi bideo-deia</string>
+    <string name="lookup_disclaimer">Bilaketek protokolo seguru baten bidez (https) galderak bidali ditzakete urruneko webguneetara informazio bila. Galderek beste partearen telefono zenbakia eraman dezakete</string>
+</resources>

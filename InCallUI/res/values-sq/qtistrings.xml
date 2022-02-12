@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015, 2016 The Linux Foundation. All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are
+  ~ met:
+  ~      Redistributions of source code must retain the above copyright
+  ~       notice, this list of conditions and the following disclaimer.
+  ~      Redistributions in binary form must reproduce the above
+  ~       copyright notice, this list of conditions and the following
+  ~       disclaimer in the documentation and/or other materials provided
+  ~       with the distribution.
+  ~      Neither the name of The Linux Foundation nor the names of its
+  ~       contributors may be used to endorse or promote products derived
+  ~       from this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+  ~ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+  ~ ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  ~ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  ~ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  ~ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  ~ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  ~ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+  ~ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+  ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~
+  -->
+<!-- The xml contains Qti specific resource strings neede for any value added features. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Gjëndja e telefonatës:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">Rifilluar</string>
+    <string name="call_substate_connected_suspended_audio">E lidhur, por zëri është pezulluar</string>
+    <string name="call_substate_connected_suspended_video">E lidhur, por videoja është pezulluar</string>
+    <string name="call_substate_avp_retry">Duke përcaktuar cilësinë e videos\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Cilësia e videos u ndryshua në <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">e lartë</string>
+    <string name="video_quality_medium">mesatare</string>
+    <string name="video_quality_low">e ulët</string>
+    <string name="video_quality_unknown">e panjohur</string>
+    <string name="player_started">Lexuesi nisi</string>
+    <string name="player_stopped">Lexuesi ndaloi</string>
+    <string name="camera_not_ready">Kamera nuk është gati</string>
+    <string name="camera_ready">Kamera është gati</string>
+    <string name="unknown_call_session_event">Ndodhi e panjohur e telefonatës</string>
+    <string name="wlan_data_usage_label">Përdorimi internetit me Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">Përdorimi internetit me LTE (4G): <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">Zgjidh llojin e thirrjes</string>
+    <string name="modify_call_option_vt">Video e dyanshme</string>
+    <string name="modify_call_option_vt_tx">Transmetim i videos</string>
+    <string name="modify_call_option_vt_rx">Marrje e videos</string>
+    <string name="modify_call_option_voice">Vetëm me zë</string>
+    <string name="modify_call_failed_due_to_low_battery">Modifikimi i thirrjes dështoi për shkak të baterisë së ulët.</string>
+    <string name="qti_ims_transfer_num_error">Nuk u vendos asnjë numër. Jepni numrin nëpërmjet cilësimeve IMS dhe provo sërish.</string>
+    <string name="qti_ims_transfer_request_error">Kërkesa për transferimin e thirjes dështoi.</string>
+    <string name="qti_ims_transfer_request_success">Kërkesa për transferimin e thirjes u krye.</string>
+    <string name="qti_ims_onscreenBlindTransfer">Transfertë e shkujdesur</string>
+    <string name="qti_ims_onscreenAssuredTransfer">Transfertë e garantuar</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">Transfertë e dakortësuar</string>
+    <string name="video_call_not_allowed_if_tty_enabled">Ju lutem caktivizoni metodën TTY për të kaluar në video telefonata.</string>
+    <string name="qti_description_target_deflect">Shmang</string>
+    <string name="qti_description_deflect_error">Nuk u vendos asnjë numër. Jepni numrin nëpërmjet cilësimeve IMS dhe provo sërish.</string>
+    <string name="qti_description_deflect_service_error">Shërbimi i shmangies së thirrjeve nuk është i disponueshëm.</string>
+    <string name="call_failed_ho_not_feasible">Telefonata u mbyll pasi kalimi nga LTE në atë 3G/2G nuk ishte i mundur.</string>
+    <string name="onscreenAddParticipant">Shto pjesëmarrës</string>
+    <string name="cs_redial_option">Opsion Ritelefonimi</string>
+    <string name="cs_redial_msg">E pamundur të realizohej Video Call në IMS, ritelefono si thirje jo IMS?</string>
+    <string name="session_modify_cause_upgrade_local_request">Telefonata u përmirësua në kërkesë të përdoruesit</string>
+    <string name="session_modify_cause_upgrade_remote_request">Telefonata u përmirësua në kërkesë të përdoruesit tjetër</string>
+    <string name="session_modify_cause_downgrade_local_request">Telefonata u degradua në kërkesë të përdoruesit</string>
+    <string name="session_modify_cause_downgrade_remote_request">Telefonata u degradua në kërkesë të përdoruesit tjetër</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">Telefonata u degradua prej vonesave RTP</string>
+    <string name="session_modify_cause_downgrade_qos">Telefonata degradoi prej kualitetit të shërbimit</string>
+    <string name="session_modify_cause_downgrade_packet_loss">Telefonata u degradua prej humbjeve të paketave</string>
+    <string name="session_modify_cause_downgrade_low_thrput">Telefonata u degradua prej kapacitetit të ulët</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">Telefonata degradoi prej temperaturës</string>
+    <string name="session_modify_cause_downgrade_lipsync">Telefonata u degradua prej sinkronizimit</string>
+    <string name="session_modify_cause_downgrade_generic_error">Telefonata degradoi për shkak të një problemi</string>
+    <string name="card_title_incoming_conf_call">Thirje hyrëse në konferencë</string>
+    <string name="card_title_incoming_video_conf_call">Video Konferncë hyrëse</string>
+    <string name="notification_incoming_conf_call">Thirje hyrëse në konferencë</string>
+    <string name="incoming_conf_via_template">Thirje hyrëse në konferencë nëpërmjet <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">Thirrja dështoi për shkak të baterisë së ulët</string>
+    <string name="vowifi_call_quality_good">Cilësi e mirë zëri</string>
+    <string name="vowifi_call_quality_fair">Cilësi e ulët zëri</string>
+    <string name="vowifi_call_quality_poor">Cilësi e dobët zëri</string>
+    <string name="low_battery">Paralmërim i baterisë së ulët</string>
+    <string name="low_battery_hangup_msg">Dëshironi të mbyllni telefonatën?</string>
+    <string name="low_battery_msg">Bateria juaj është nën 15%. Dëshironi të vazhdoni me video telefonatën apo të kaloni në vetëm me zë?</string>
+    <string name="low_battery_convert">Konverto</string>
+    <string name="video_call">Thirrje me video</string>
+    <string name="video_call_cannot_upgrade">Nuk mund të pranojë video telefonata në këtë moment</string>
+    <string name="video_call_picture_mode_menu_title">Zgjidh metodën me imazh</string>
+    <string name="video_call_picture_mode_preview_video">Shfaq kamerën</string>
+    <string name="video_call_picture_mode_incoming_video">Video thirrje hyrëse</string>
+    <string name="video_call_picture_mode_cancel_option">Anullo</string>
+    <string name="video_call_picture_mode_save_option">Ruaj</string>
+</resources>

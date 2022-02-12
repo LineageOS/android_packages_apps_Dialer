@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="default">Fòn</string>
+    <string name="onHold">’Ga chumail</string>
+    <string name="unknown">Chan eil fhios</string>
+    <string name="private_num">Àireamh phrìobhaideach</string>
+    <string name="payphone">Bothan-fòn</string>
+    <string name="confCall">Gairm coinneimh</string>
+    <string name="call_lost">Thuit a’ ghairm</string>
+    <string name="audio_mode_speaker">Glaodhaire</string>
+    <string name="audio_mode_earpiece">Cnap-cluaise a’ handset</string>
+    <string name="audio_mode_wired_headset">Seata-cinn uèirichte</string>
+    <string name="audio_mode_bluetooth">Bluetooth</string>
+    <string name="wait_prompt_str">An cuir thu na tònaichean seo?\n</string>
+    <string name="pause_prompt_str">A’ cur thònaichean\n</string>
+    <string name="send_button">Cuir</string>
+    <string name="pause_prompt_yes">Tha</string>
+    <string name="pause_prompt_no">Chan eil</string>
+    <string name="wild_prompt_str">Cuir seo an àite na saothraige:</string>
+    <string name="caller_manage_header">Gairm coinneimh <xliff:g id="conf_call_time">%s</xliff:g></string>
+    <string name="voicemail_settings_number_label">Àireamh a’ phuist-ghutha</string>
+    <string name="card_title_dialing">’Ga dhaithealadh</string>
+    <string name="card_title_redialing">’Ga dhaithealadh a-rithist</string>
+    <string name="card_title_conf_call">Gairm coinneimh</string>
+    <string name="card_title_incoming_call">Gairm a-steach</string>
+    <string name="card_title_incoming_work_call">Gairm na h-obrach a’ tighinn a-steach</string>
+    <string name="card_title_call_ended">Crìoch na gairm</string>
+    <string name="card_title_on_hold">’Ga chumail</string>
+    <string name="card_title_hanging_up">A’ cur crìoch air a’ ghairm</string>
+    <string name="card_title_in_call">Air an fhòn</string>
+    <string name="card_title_my_phone_number">’S e <xliff:g id="my_phone_number">%s</xliff:g> a tha san àireamh agam</string>
+    <string name="card_title_video_call_connecting">A’ ceangal a’ video</string>
+    <string name="card_title_video_call">Gairm video</string>
+    <string name="card_title_video_call_requesting">Ag iarraidh video</string>
+    <string name="card_title_video_call_error">Chan urrainn dhuinn gairm video a cheangal</string>
+    <string name="card_title_video_call_rejected">Chaidh an t-iarrtas air video a dhiùltadh</string>
+    <string name="card_title_callback_number">Seo an àireamh gairm air ais agad:\n
+        <xliff:g id="dark_number">%1$s</xliff:g>
+    </string>
+    <string name="card_title_callback_number_emergency">Seo àireamh nan gairmean-èiginn air ais agad:\n
+        <xliff:g id="dark_number">%1$s</xliff:g>
+    </string>
+    <string name="notification_dialing">’Ga dhaithealadh</string>
+    <string name="notification_missedCallTitle">Gairm a dh’fhalbh ort</string>
+    <string name="notification_missedCallsTitle">Gairmean a dh’fhalbh ort</string>
+    <string name="notification_missedCallsMsg">Gairmean a dh’fhalbh ort (<xliff:g id="num_missed_calls">%s</xliff:g>)</string>
+    <string name="notification_missedCallTicker">Dh’fhalbh gairm ort o <xliff:g id="missed_call_from">%s</xliff:g></string>
+    <string name="notification_ongoing_call">Gairm a’ dol air adhart</string>
+    <string name="notification_ongoing_work_call">Gairm na h-obrach a’ dol air adhart</string>
+    <string name="notification_ongoing_call_wifi">Gairm WiFi a’ dol air adhart</string>
+    <string name="notification_ongoing_work_call_wifi">Gairm WiFi na h-obrach a’ dol air adhart</string>
+    <string name="notification_on_hold">’Ga chumail</string>
+    <string name="notification_incoming_call">Gairm a-steach</string>
+    <string name="notification_incoming_work_call">Gairm na h-obrach a’ tighinn a-steach</string>
+    <string name="notification_incoming_call_wifi">Gairm WiFi a’ tighinn a-steach</string>
+    <string name="notification_incoming_work_call_wifi">Gairm WiFi na h-obrach a’ tighinn a-steach</string>
+    <string name="notification_incoming_video_call">Gairm video a’ tighinn a-steach</string>
+    <string name="notification_requesting_video_call">Iarrtas video a’ tighinn a-steach</string>
+    <string name="notification_voicemail_title">Teachdaireachd-gutha ùr</string>
+    <string name="notification_voicemail_title_count">Teachdaireachdan-gutha ùra (<xliff:g id="count">%d</xliff:g>)</string>
+    <string name="notification_voicemail_text_format">Daitheal <xliff:g id="voicemail_number">%s</xliff:g></string>
+    <string name="notification_voicemail_no_vm_number">Chan eil fios dè àireamh a’ phuist-ghutha</string>
+    <string name="notification_network_selection_title">Chan eil seirbheis ann</string>
+    <string name="notification_network_selection_text">Chan eil an lìonra a thagh thu (<xliff:g id="operator_name">%s</xliff:g>) ri fhaighinn</string>
+    <string name="notification_action_answer">Freagair</string>
+    <string name="notification_action_end_call">Cuir crìoch air a’ ghairm</string>
+    <string name="notification_action_answer_video">Video</string>
+    <string name="notification_action_answer_voice">Guth</string>
+    <string name="notification_action_accept">Gabh ris</string>
+    <string name="notification_action_dismiss">Leig seachad</string>
+    <string name="notification_missedCall_call_back">Fònaig air ais</string>
+    <string name="notification_missedCall_message">Cuir teachdaireachd</string>
+    <string name="notification_external_call">Gairm a’ dol air adhart air uidheam eile</string>
+    <string name="notification_transfer_call">Sìn air adhart a’ ghairm</string>
+    <string name="incall_error_power_off">Airson gairm a chur, cuir am modh itealain dheth an toiseach.</string>
+    <string name="incall_error_emergency_only">Cha deach a chlàradh air lìonra.</string>
+    <string name="incall_error_out_of_service">Chan eil lìonra mobile ri làimh.</string>
+    <string name="incall_error_no_phone_number_supplied">Airson gairm a chur, cuir a-steach àireamh dhligheach.</string>
+    <string name="incall_error_call_failed">Cha ghabh gairm a dhèanamh.</string>
+    <string name="incall_status_dialed_mmi">A’ tòiseachadh air sreath MMI\u2026</string>
+    <string name="incall_error_supp_service_unknown">Chan eil taic ann ris an t-seirbheis seo.</string>
+    <string name="incall_error_supp_service_switch">Chan urrainn dhuinn leum a ghearradh gu gairm eile.</string>
+    <string name="incall_error_supp_service_separate">Chan urrainn dhuinn a’ ghairm a sgaradh.</string>
+    <string name="incall_error_supp_service_transfer">Cha ghabh a shìneadh air adhart.</string>
+    <string name="incall_error_supp_service_conference">Cha ghabh gairm coinneimh a dhèanamh.</string>
+    <string name="incall_error_supp_service_reject">Cha ghabh a’ ghairm a dhiùltadh.</string>
+    <string name="incall_error_supp_service_hangup">Cha ghabh crìoch a chur air a’ ghairm/na gairmean.</string>
+    <string name="incall_call_type_label_sip">Gairm SIP</string>
+    <string name="emergency_enable_radio_dialog_title">Gairm-èiginn</string>
+    <string name="emergency_enable_radio_dialog_message">A’ cur an rèidio air…</string>
+    <string name="emergency_enable_radio_dialog_retry">Chan eil seirbheis ann. A’ feuchainn ris a-rithist\u2026</string>
+    <string name="dial_emergency_error">Cha ghabh gairm a dhèanamh. Chan eil <xliff:g id="non_emergency_number">%s</xliff:g> ’na h-àireamh-èiginn.</string>
+    <string name="dial_emergency_empty_error">Cha ghabh gairm a dhèanamh. Daitheal àireamh-èiginn.</string>
+    <string name="dialerKeyboardHintText">Cleachd am meur-chlàr airson daithealadh</string>
+    <string name="onscreenHoldText_unselected">Cùm a’ ghairm</string>
+    <string name="onscreenHoldText_selected">Lean air a’ ghairm</string>
+    <string name="onscreenEndCallText">Cuir crìoch air a’ ghairm</string>
+    <string name="onscreenShowDialpadText_unselected">Seall pada nan àireamhan</string>
+    <string name="onscreenShowDialpadText_selected">Falaich pada nan àireamhan</string>
+    <string name="onscreenMuteText_unselected">Mùch</string>
+    <string name="onscreenMuteText_selected">Dì-mhùch</string>
+    <string name="onscreenAddCallText">Cuir gairm ris</string>
+    <string name="onscreenMergeCallsText">Co-aonaich na gairmean</string>
+    <string name="onscreenSwapCallsText">Suaip</string>
+    <string name="onscreenManageCallsText">Stiùir na gairmean</string>
+    <string name="onscreenManageConferenceText">Stiùir a’ ghairm coinneimh</string>
+    <string name="onscreenConferenceText">Gairm coinneimh</string>
+    <string name="onscreenManageText">Stiùir</string>
+    <string name="onscreenAudioText">Fuaimean</string>
+    <string name="onscreenVideoCallText">Gairm video</string>
+    <string name="onscreenChangeToVoiceText">Dèan gairm gutha dhith</string>
+    <string name="onscreenSwitchCameraText">Thoir leum gu camara eile</string>
+    <string name="onscreenTurnOnCameraText">Cuir an camara air</string>
+    <string name="onscreenTurnOffCameraText">Cuir an camara dheth</string>
+    <string name="onscreenOverflowText">Barrachd roghainnean</string>
+    <string name="player_started">Thòisich an cluicheadair</string>
+    <string name="player_stopped">Stad an cluicheadair</string>
+    <string name="camera_not_ready">Chan eil an camara deiseil</string>
+    <string name="camera_ready">Tha an camara deiseil</string>
+    <string name="unknown_call_session_event">"Tachartas seisean gairm nach aithne dhuinn"</string>
+    <string name="voicemail_provider">Seirbheis</string>
+    <string name="voicemail_settings">Suidheachadh</string>
+    <string name="voicemail_number_not_set">&lt;Not set&gt;</string>
+    <string name="other_settings">Roghainnean gairm eile</string>
+    <string name="calling_via_template">A’ cur gairm slighe <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="incoming_via_template">A’ tighinn a-steach slighe <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="contactPhoto">dealbh an neach-aithne</string>
+    <string name="goPrivate">dèan prìobhaideach</string>
+    <string name="selectContact">tagh neach-aithne</string>
+    <string name="respond_via_sms_custom_message">Sgrìobh freagairt agad fhèin…</string>
+    <string name="custom_message_cancel">Sguir dheth</string>
+    <string name="custom_message_send">Cuir</string>
+    <string name="description_target_answer">Freagair</string>
+    <string name="description_target_send_sms">Cuir SMS</string>
+    <string name="description_target_decline">Diùlt</string>
+    <string name="description_target_answer_video_call">Freagair mar ghairm video</string>
+    <string name="description_target_answer_audio_call">Freagair mar ghairm fuaime</string>
+    <string name="description_target_accept_upgrade_to_video_request">Gabh ri iarrtas video</string>
+    <string name="description_target_decline_upgrade_to_video_request">Diùlt iarrtas video</string>
+    <string name="description_target_accept_upgrade_to_video_transmit_request">Gabh ri iarrtas tar-chur video</string>
+    <string name="description_target_decline_upgrade_to_video_transmit_request">Diùlt iarrtas tar-chur video</string>
+    <string name="description_target_accept_upgrade_to_video_receive_request">Gabh ri iarrtas faighinn video</string>
+    <string name="description_target_decline_upgrade_to_video_receive_request">Diùlt iarrtas faighinn video</string>
+    <string name="description_direction_up">Grad-shlaighd suas airson <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+    <string name="description_direction_left">\"Grad-shlaighd dhan taobh chlì airson  <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+    <string name="description_direction_right">Grad-shlaighd dhan taobh deas airson <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+    <string name="description_direction_down">Grad-shlaighd sìos airson <xliff:g id="target_description" example="Unlock">%s</xliff:g>.</string>
+    <string name="voicemail_notification_vibrate_when_title" msgid="8731372580674292759">Crith</string>
+    <string name="voicemail_notification_vibarte_when_dialog_title" msgid="8995274609647451109">Crith</string>
+    <string name="voicemail_notification_ringtone_title">Fuaim</string>
+    <string name="default_notification_description">An fhuaim bhunaiteach (<xliff:g id="default_sound_title">%1$s</xliff:g>)</string>
+    <string name="ringtone_title" msgid="5379026328015343686">Seirm an fhòn</string>
+    <string name="vibrate_on_ring_title">Dèan crith rè seirm</string>
+    <string name="preference_category_ringtone">Seirm ⁊ crith</string>
+    <string name="manageConferenceLabel">Stiùir a’ ghairm coinneimh</string>
+    <string name="emergency_call_dialog_number_for_display">Àireamh èiginn</string>
+    <plurals name="duration_seconds">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> diog</item>
+        <item quantity="two"><xliff:g id="count">%d</xliff:g> dhiog</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> diogan</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> diog</item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> mhionaid</item>
+        <item quantity="two"><xliff:g id="count">%d</xliff:g> mhionaid</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> mionaidean</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> mionaid</item>
+    </plurals>
+    <plurals name="duration_hours">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> uair a thìde</item>
+        <item quantity="two"><xliff:g id="count">%d</xliff:g> uair a thìde</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> uairean a thìde</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> uair a thìde</item>
+    </plurals>
+    <string name="profile_photo_description">Dealbh na pròifil</string>
+    <string name="camera_off_description">Tha an camara dheth</string>
+    <string name="child_number">slighe <xliff:g id="child_number" example="650-555-1212">%s</xliff:g></string>
+    <string name="note_sent">Chaidh an nòta a chur</string>
+    <string name="person_contact_context_title">Teachdaireachdan o chionn goirid</string>
+    <string name="business_contact_context_title">Fiosrachadh gnìomhachais</string>
+    <string name="distance_imperial_away"><xliff:g id="distance">%.1f</xliff:g> mi air falbh</string>
+    <string name="distance_metric_away"><xliff:g id="distance">%.1f</xliff:g> km air falbh</string>
+    <string name="display_address"><xliff:g id="street_address">%1$s</xliff:g>, <xliff:g id="locality">%2$s</xliff:g></string>
+    <string name="open_time_span"><xliff:g id="open_time">%1$s</xliff:g> – <xliff:g id="close_time">%2$s</xliff:g></string>
+    <string name="opening_hours"><xliff:g id="earlier_times">%1$s</xliff:g>, <xliff:g id="later_time">%2$s</xliff:g></string>
+    <string name="opens_tomorrow_at">Fosglaidh e a-màireach aig <xliff:g id="open_time">%s</xliff:g></string>
+    <string name="opens_today_at">Fosglaidh e an-diugh aig <xliff:g id="open_time">%s</xliff:g></string>
+    <string name="closes_today_at">Dùinidh e aig <xliff:g id="close_time">%s</xliff:g></string>
+    <string name="closed_today_at">Dhùin e an-diugh aig <xliff:g id="close_time">%s</xliff:g></string>
+    <string name="open_now">Fosgailte an-dràsta</string>
+    <string name="closed_now">Dùinte an-dràsta</string>
+</resources>

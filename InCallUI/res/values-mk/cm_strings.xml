@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (c) 2013, The Linux Foundation. All rights reserved.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="callFailed_incoming_cb_enabled">Партијата ги забрани сите дојдовни повици.</string>
+    <string name="callUnanswered_forwarded">Повикај неодговорени и пренасочени</string>
+    <string name="incall_call_type_label_forwarded">Пренасочен повик</string>
+    <string name="card_title_dialing_waiting">Бирање (почекајте\u2026)</string>
+    <string name="calling_via_waiting_template">Повикување преку <xliff:g id="provider_name">%s</xliff:g> (Чекање\u2026)</string>
+    <string name="card_title_active_via_template"><xliff:g id="status" example="Call on hold">%1$s</xliff:g> (преку <xliff:g id="provider_name">%2$s</xliff:g>)</string>
+    <string name="card_title_waiting_call">Повик на чекање</string>
+    <string name="call_recording_failed_message">Снимањето на повикот не успеа</string>
+    <string name="call_recording_file_location">Снимање на повикот е зачуван во <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Сними повик</string>
+    <string name="onscreenStopCallRecordText">Запри снимање</string>
+    <string name="recording_time_text">Снимање</string>
+    <string name="recording_warning_title">Овозможи снимање повици?</string>
+    <string name="recording_warning_text">Напомена: Вие сте одговорни за усогласеност со сите закони, регулативи и правила кои се однесуваат на користењето на функцијата за снимање повик и употребата или дистрибуцијата на тие снимки.</string>
+    <string name="call_failed_due_to_validate_number">Не може да се прават видео повици, форматот на бројот не е точен</string>
+    <string name="call_state_dialing">Бирање</string>
+    <string name="call_state_holding">На чекање</string>
+    <string name="call_state_active">Активно</string>
+    <string name="call_state_unknown">Непознат</string>
+    <string name="call_state_disconnecting">Исклучување</string>
+    <string name="call_state_disconnected">Исклучен</string>
+    <string name="too_many_recipients">Не можи повеќе од 6 луѓе да учествуваат во 4G конференциски повик.</string>
+</resources>

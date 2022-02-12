@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015, 2016 The Linux Foundation. All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are
+  ~ met:
+  ~      Redistributions of source code must retain the above copyright
+  ~       notice, this list of conditions and the following disclaimer.
+  ~      Redistributions in binary form must reproduce the above
+  ~       copyright notice, this list of conditions and the following
+  ~       disclaimer in the documentation and/or other materials provided
+  ~       with the distribution.
+  ~      Neither the name of The Linux Foundation nor the names of its
+  ~       contributors may be used to endorse or promote products derived
+  ~       from this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+  ~ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+  ~ ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  ~ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  ~ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  ~ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  ~ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  ~ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+  ~ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+  ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~
+  -->
+<!-- The xml contains Qti specific resource strings neede for any value added features. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Deiaren azpi-egoera:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">Berrekin da</string>
+    <string name="call_substate_connected_suspended_audio">Deia konektatuta dago, baina audioa esekita dago</string>
+    <string name="call_substate_connected_suspended_video">Deia konektatuta dago, baina bideoa esekita dago</string>
+    <string name="call_substate_avp_retry">Bideo kalitatea antzematen\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Bideo kalitatea aldatu da, orain <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">altua</string>
+    <string name="video_quality_medium">ertaina</string>
+    <string name="video_quality_low">baxua</string>
+    <string name="video_quality_unknown">ezezaguna</string>
+    <string name="player_started">Erreproduzigailua hasi da</string>
+    <string name="player_stopped">Erreproduzigailua gelditu da</string>
+    <string name="camera_not_ready">Kamera ez dago prest</string>
+    <string name="camera_ready">Kamera prest dago</string>
+    <string name="unknown_call_session_event">Dei saio gertaera ezezaguna</string>
+    <string name="wlan_data_usage_label">Wi-Fi datu-erabilera: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">LTE datu-erabilera: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">Hautatu dei mota</string>
+    <string name="modify_call_option_vt">Norabide biko bideo-deia</string>
+    <string name="modify_call_option_vt_tx">Bideo igorpena</string>
+    <string name="modify_call_option_vt_rx">Bideo harrera</string>
+    <string name="modify_call_option_voice">Ahotsa besterik ez</string>
+    <string name="modify_call_failed_due_to_low_battery">Huts egin du deia aldatzeak, bateria gutxiegi dagoelako.</string>
+    <string name="qti_ims_transfer_num_error">Ez da zenbakia ezarri. Eman zenbaki bat IMS ezarpenen bidez eta berriro saiatu.</string>
+    <string name="qti_ims_transfer_request_error">Diaren transferentzia eskaerak huts egin du.</string>
+    <string name="qti_ims_transfer_request_success">Deiaren transferentzia eskaera onartu da.</string>
+    <string name="qti_ims_onscreenBlindTransfer">Transferentzia itsua</string>
+    <string name="qti_ims_onscreenAssuredTransfer">Transferentzia bermatua</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">Transferentzia kontsultatua</string>
+    <string name="video_call_not_allowed_if_tty_enabled">Ezgaitu TTY modua bideo-deiak baimentzeko.</string>
+    <string name="qti_description_target_deflect">Desbideratu</string>
+    <string name="qti_description_deflect_error">Ez da zenbakia ezarri. Eman zenbaki bat IMS ezarpenen bidez eta berriro saiatu.</string>
+    <string name="qti_description_deflect_service_error">Ez dago euskarririk deiak desbideratzeko zerbitzuarentzat.</string>
+    <string name="call_failed_ho_not_feasible">Deia eten da LTEtik 3G/2Gra aldatzea ez zelako posible.</string>
+    <string name="onscreenAddParticipant">Gehitu parte hartzailea</string>
+    <string name="cs_redial_option">Birmarkatze aukera</string>
+    <string name="cs_redial_msg">Ezin izan da IMS bideo-dei bat egin, birmarkatu ez-IMS bideo-dei gisa?</string>
+    <string name="session_modify_cause_upgrade_local_request">Deia mailaz igo da erabiltzaileak eskatuta</string>
+    <string name="session_modify_cause_upgrade_remote_request">Deia mailaz igo da urruneko erabiltzaileak eskatuta</string>
+    <string name="session_modify_cause_downgrade_local_request">Deia mailaz jaitsi da erabiltzaileak eskatuta</string>
+    <string name="session_modify_cause_downgrade_remote_request">Deia mailaz jaitsi da urruneko erabiltzaileak eskatuta</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">Deia mailaz jaitsi da RTP denbora muga gainditu delako</string>
+    <string name="session_modify_cause_downgrade_qos">Deia mailaz jaitsi da zerbitzu kalitateagatik</string>
+    <string name="session_modify_cause_downgrade_packet_loss">Deia mailaz jaitsi da paketeen galeragatik</string>
+    <string name="session_modify_cause_downgrade_low_thrput">Deia mailaz jaitsi da abiadura baxuagatik</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">Deia mailaz jaitsi da tenperatura jaisteko</string>
+    <string name="session_modify_cause_downgrade_lipsync">Deia mailaz jaitsi da ezpain sinkronizazioagatik</string>
+    <string name="session_modify_cause_downgrade_generic_error">Deia mailaz jaitsi da errore orokor batengatik</string>
+    <string name="card_title_incoming_conf_call">Konferentzia deia jasotzen</string>
+    <string name="card_title_incoming_video_conf_call">Bideo-konferentzia deia jasotzen</string>
+    <string name="notification_incoming_conf_call">Konferentzia deia jasotzen</string>
+    <string name="incoming_conf_via_template">Konferentzia deia jasotzen <xliff:g id="provider_name">%s</xliff:g> bidez</string>
+    <string name="call_failed_due_to_low_battery">Deiak huts egin du bateria gutxiegi dagoelako</string>
+    <string name="vowifi_call_quality_good">Ahots kalitate ona</string>
+    <string name="vowifi_call_quality_fair">Ahots kalitate onargarria</string>
+    <string name="vowifi_call_quality_poor">Ahots kalitate txarra</string>
+    <string name="low_battery">Bateria baxuaren abisua</string>
+    <string name="low_battery_hangup_msg">Deia eten nahi duzu?</string>
+    <string name="low_battery_msg">Zure bateria %15 azpitik dago. Bideo-deiarekin jarraitu nahi duzu ala ahots-deia bihurtu nahi duzu?</string>
+    <string name="low_battery_convert">Bihurtu</string>
+    <string name="video_call">Bideo-deia</string>
+    <string name="video_call_cannot_upgrade">Ezin dira bideo-deiak onartu orain</string>
+    <string name="video_call_picture_mode_menu_title">Hautatu irudi-modua</string>
+    <string name="video_call_picture_mode_preview_video">Kameraren aurrebista</string>
+    <string name="video_call_picture_mode_incoming_video">Bideoa jasotzen</string>
+    <string name="video_call_picture_mode_cancel_option">Utzi</string>
+    <string name="video_call_picture_mode_save_option">Gorde</string>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="preference_category_t9_dialpad_search">Dialpad T9 leit</string>
+    <string name="t9_search_input_locale">T9 leitarinntak</string>
+    <string name="forward_lookup_provider_title">Framvirk uppflettiþjónusta (forward lookup)</string>
+    <string name="people_lookup_provider_title">Uppflettiþjónusta fyrir fólk</string>
+    <string name="call_log_blocked_empty">Þú ert ekki með neinar útilokaðar hringingar.</string>
+    <string name="callStatsDetailTitle">Nánari tölfræði símtals</string>
+    <string name="recent_calls_no_items_in_range">Símtalaskráin inniheldur engin símtöl á völdu tímabili.</string>
+    <string name="speed_dial_unassigned_dialog_message">Engin flýtivalsaðgerð er úthlutuð á talnalykilinn \'<xliff:g id="number">%s</xliff:g>\'. Myndirðu vilja úthluta aðgerð núna?</string>
+    <string name="recentIncoming_empty">Þú ert ekki með neinar innhringingar.</string>
+    <string name="recentOutgoing_empty">Þú ert ekki með neinar úthringingar.</string>
+    <string name="recentCalls_empty">Símtalaskráin þín er tóm</string>
+    <string name="calllog_search_hint">Leita að símtalaskrá</string>
+    <string name="no_call_log">Engin símtalaskrá</string>
+    <string name="video_call_welcome_title"><b>Velkomin í nýja myndsímtalaforritið</b></string>
+    <string name="video_call_welcome_message">Það er alltaf gaman að heyra kunnuglegar raddir á hinum enda línunnar, en það að tala saman augliti til auglitis er svo mikið betra! Hér er eitthvað sem þú þarft að vita þegar þú ferð að nota rauntímatengingar með myndsendingum:\n Þú þarft að vera á 4G LTE eða Wi-Fi tengingu\n Tækið sem þú hringir í þarf líka að styðja myndsímtöl\n Myndsímtöl éta fljótt upp leyfilegu gagnanotkunina þína\n Þú getur líka stokkið úr venjulegu raddsímtali yfir í myndsímtal\n\n Skoðaðu <a>https://support.t-mobile.com/docs/DOC-23574</a> til að sjá nánari upplýsingar.</string>
+    <string name="toast_change_video_call_failed">Get ekki skipt yfir í myndsímtal, rangt snið á símanúmeri</string>
+    <string name="toast_make_video_call_failed">Get ekki sett í gang myndsímtal, rangt snið á símanúmeri</string>
+    <string name="overflowBothCallMenuItemText">Myndsímtal, sýndu mig</string>
+    <string name="overflowRXCallMenuItemText">Myndsímtal, feldu mig</string>
+    <string name="overflowVOCallMenuItemText">Raddsímtal</string>
+    <string name="call_data_info_label">Tímataka hringi/gagnanotkunar</string>
+    <string name="call_data_info_description">Tímataka og gagnanotkun raddsímtala</string>
+    <string name="alert_call_no_cellular_coverage">Engin farsímanet tiltæk. Tengstu við tiltæk WiFi-net til að hringja símtöl.</string>
+    <string name="menu_add_to_4g_conference_call">Bæta við 4G símafund</string>
+    <string name="menu_4g_conference_call">4G símafundur</string>
+    <string name="type_incoming_volte">Innhringing 4G raddsímtals</string>
+    <string name="type_incoming_video_lte">Innhringing 4G myndsímtals</string>
+    <string name="type_outgoing_volte">Hringt 4G raddsímtal</string>
+    <string name="type_outgoing_video_lte">Hringt 4G myndsímtal</string>
+    <string name="type_incoming_vowifi">Innhringing Wi-Fi raddsímtals</string>
+    <string name="type_incoming_video_wifi">Innhringing Wi-Fi myndsímtals</string>
+    <string name="type_outgoing_vowifi">Hringt Wi-Fi raddsímtal</string>
+    <string name="type_outgoing_video_wifi">Hringt Wi-Fi myndsímtal</string>
+    <string name="lookup_disclaimer">Uppflettingar gætu sent beiðnir í gegnum öruggan samskiptamáta (HTTPS) á fjartengt vefsvæði til að safna upplýsingum. Beiðnir gætu innihaldið símanúmer hins aðilans eða umbeðinn leitarstreng</string>
+</resources>

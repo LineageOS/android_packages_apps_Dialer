@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015, 2016 The Linux Foundation. All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are
+  ~ met:
+  ~      Redistributions of source code must retain the above copyright
+  ~       notice, this list of conditions and the following disclaimer.
+  ~      Redistributions in binary form must reproduce the above
+  ~       copyright notice, this list of conditions and the following
+  ~       disclaimer in the documentation and/or other materials provided
+  ~       with the distribution.
+  ~      Neither the name of The Linux Foundation nor the names of its
+  ~       contributors may be used to endorse or promote products derived
+  ~       from this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+  ~ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+  ~ ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  ~ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  ~ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  ~ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  ~ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  ~ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+  ~ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+  ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~
+  -->
+<!-- The xml contains Qti specific resource strings neede for any value added features. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Subestado da chamada:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">Retomada</string>
+    <string name="call_substate_connected_suspended_audio">Conectada, pero co son suspendido</string>
+    <string name="call_substate_connected_suspended_video">Conectada, pero co vídeo suspendido</string>
+    <string name="call_substate_avp_retry">Detectando a calidade do vídeo\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Calidade do vídeo mudada a <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">alta</string>
+    <string name="video_quality_medium">media</string>
+    <string name="video_quality_low">baixa</string>
+    <string name="video_quality_unknown">descoñecida</string>
+    <string name="player_started">Reprodutor iniciado</string>
+    <string name="player_stopped">Reprodutor detido</string>
+    <string name="camera_not_ready">A cámara non está lista</string>
+    <string name="camera_ready">Cámara lista</string>
+    <string name="unknown_call_session_event">Sesión de chamada descoñecida</string>
+    <string name="wlan_data_usage_label">Uso de datos Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">Uso de datos LTE: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">Seleccionar o tipo de chamada</string>
+    <string name="modify_call_option_vt">Vídeo bidireccional</string>
+    <string name="modify_call_option_vt_tx">Transmisión de vídeo</string>
+    <string name="modify_call_option_vt_rx">Recepción de vídeo</string>
+    <string name="modify_call_option_voice">Só a voz</string>
+    <string name="modify_call_failed_due_to_low_battery">Error ao modificar a chamada debido á batería baixa.</string>
+    <string name="qti_ims_transfer_num_error">Número non establecido. Proporciona o número a través da configuración IMS e volva a intentalo.</string>
+    <string name="qti_ims_transfer_request_error">A solicitude da transferencia da chamada fallou.</string>
+    <string name="qti_ims_transfer_request_success">Solicitud da transferencia da chamada realizada.</string>
+    <string name="qti_ims_onscreenBlindTransfer">Transferencia cega</string>
+    <string name="qti_ims_onscreenAssuredTransfer">Transferencia garantizada</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">Transferencia consultiva</string>
+    <string name="video_call_not_allowed_if_tty_enabled">Por favor desactiva o modo TTY para permitir videochamadas.</string>
+    <string name="qti_description_target_deflect">Cambiar</string>
+    <string name="qti_description_deflect_error">Número non establecido. Proporciona o número a través da configuración IMS e volva a intentalo.</string>
+    <string name="qti_description_deflect_service_error">Non se admite o servicio de desvío da chamada.</string>
+    <string name="call_failed_ho_not_feasible">A chamada terminó porque o cambio de LTE a 3G/2G non era factible.</string>
+    <string name="onscreenAddParticipant">Engadir participante</string>
+    <string name="cs_redial_option">Opción de rechamada</string>
+    <string name="cs_redial_msg">Non se pode facer unha Videochamada IMS, rechama como chamada de voz non-IMS?</string>
+    <string name="session_modify_cause_upgrade_local_request">Chamada actualizada a petición do usuario</string>
+    <string name="session_modify_cause_upgrade_remote_request">Chamada actualizada a petición do usuario remoto</string>
+    <string name="session_modify_cause_downgrade_local_request">Chamada degradada a petición do usuario</string>
+    <string name="session_modify_cause_downgrade_remote_request">Chamada degradada a petición do usuario remoto</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">Chamada degradada debido ao tempo de espera do RTP</string>
+    <string name="session_modify_cause_downgrade_qos">Chamada degradada debido á calidade do servizo</string>
+    <string name="session_modify_cause_downgrade_packet_loss">Chamada degradada debido á pérdida de paquetes</string>
+    <string name="session_modify_cause_downgrade_low_thrput">Chamada degradada debido ao baixo rendemento</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">Chamada degradada debido á reducción térmica</string>
+    <string name="session_modify_cause_downgrade_lipsync">Chamada degradada debido a lipsync</string>
+    <string name="session_modify_cause_downgrade_generic_error">Chamada degradada debido a un error xenérico</string>
+    <string name="card_title_incoming_conf_call">Chamada de conferencia entrante</string>
+    <string name="card_title_incoming_video_conf_call">Videochamada entrante</string>
+    <string name="notification_incoming_conf_call">Chamada de conferencia entrante</string>
+    <string name="incoming_conf_via_template">Conferencia recebida através da <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">A chamada fallou debido á pouca batería</string>
+    <string name="vowifi_call_quality_good">Calidade de voz boa</string>
+    <string name="vowifi_call_quality_fair">Calidade de voz media</string>
+    <string name="vowifi_call_quality_poor">Calidade da voz mala</string>
+    <string name="low_battery">Aviso de batería baixa</string>
+    <string name="low_battery_hangup_msg">Queres colgar a chamada?</string>
+    <string name="low_battery_msg">O nivel de batería e inferior ao 15%. Queres continuar coa videochamada ou pasar a voz?</string>
+    <string name="low_battery_convert">Converter</string>
+    <string name="video_call">Videochamada</string>
+    <string name="video_call_cannot_upgrade">Non é posíblw aceptar videochamadas neste intre</string>
+    <string name="video_call_picture_mode_menu_title">Seleccionar o modo imaxe</string>
+    <string name="video_call_picture_mode_preview_video">Vista previa da cámara</string>
+    <string name="video_call_picture_mode_incoming_video">Videochamada entrante</string>
+    <string name="video_call_picture_mode_cancel_option">Cancelar</string>
+    <string name="video_call_picture_mode_save_option">Gardar</string>
+</resources>

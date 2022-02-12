@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_vibration_category_title">Crith ann an gairmean</string>
+    <string name="incall_vibrate_outgoing_title">Nì freagairt a-steach crith</string>
+    <string name="incall_vibrate_call_waiting_title">Nì gairm a’ feitheamh crith</string>
+    <string name="incall_vibrate_hangup_title">Dèan crith nuair a thig gairm gu crìch</string>
+    <string name="incall_vibrate_45_title">Dèan crith gach mionaid</string>
+    <string name="incall_vibrate_45_summary">Nì seo crith an 45mh diog aig gach mionaid rè gairmean a-mach</string>
+    <string name="nearby_places">Àitichean faisg ort</string>
+    <string name="people">Daoine</string>
+    <string name="preference_category_t9_dialpad_search">Lorg Dialpad T9</string>
+    <string name="t9_search_input_locale">Ion-chur lorg T9</string>
+    <string name="t9_search_input_locale_default">Bun-roghainn</string>
+    <string name="lookup_settings_label">Rannsachadh àireamhan fòn</string>
+    <string name="enable_forward_lookup_title">Rannsachadh air adhart</string>
+    <string name="enable_forward_lookup_summary">Seall ionadan am fagas nuair a bhios mi a’ lorg rud san daithealair</string>
+    <string name="enable_people_lookup_title">Rannsachadh contrarra</string>
+    <string name="enable_people_lookup_summary">Seall toraidhean air loidhne airson daoine nuair a bhios mi a’ lorg rud san daithealair</string>
+    <string name="enable_reverse_lookup_title">Òrdugh contrarra</string>
+    <string name="enable_reverse_lookup_summary">Lorg fiosrachadh mun neach no ionad airson àireamh nach aithne dhut nuair a thig gairm a-steach</string>
+    <string name="forward_lookup_provider_title">Solaraiche an rannsachaidh air adhart</string>
+    <string name="people_lookup_provider_title">Solaraiche an rannsachaidh dhaoine</string>
+    <string name="reverse_lookup_provider_title">Solaraiche an rannsachaidh chontrarra</string>
+    <string name="cyngn_reverse_lookup_provider_name">Sìnis Cyngn (CN)</string>
+    <string name="speed_dial_edit_title">Deasaich grad-daidheal <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Cuir a-steach àireamh</string>
+    <string name="call_log_show_all_slots">Gach SIM</string>
+    <string name="call_log_all_calls_header">Gach gairm</string>
+    <string name="call_log_blacklist_header">Gairmean bacte a-mhàin</string>
+    <string name="call_log_blocked_empty">Chan eil gairm bhacte agad.</string>
+    <string name="call_log_stats_title">Stadastaireachd</string>
+    <string name="callStatsDetailTitle">Mion-fhiosrachadh stadastaireachd nan gairmean</string>
+    <string name="call_stats_incoming">A-steach: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">A-mach: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Air an call: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Air am bacadh: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Iomlan: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Iomlan: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Ceann-là tòiseachaidh</string>
+    <string name="call_stats_filter_to">Ceann-là crìochnachaidh</string>
+    <string name="call_stats_filter_picker_title">Rainse na criathraige</string>
+    <string name="date_quick_selection">Grad-thaghadh</string>
+    <string name="date_qs_currentmonth">Am mìos seo</string>
+    <string name="date_qs_currentquarter">An cairteal seo</string>
+    <string name="date_qs_currentyear">Am bliadhna</string>
+    <string name="date_qs_lastweek">An t-seachdain seo chaidh</string>
+    <string name="date_qs_lastmonth">Am mìos seo chaidh</string>
+    <string name="date_qs_lastquarter">An cairteal seo chaidh</string>
+    <string name="date_qs_lastyear">An-uiridh</string>
+    <string name="call_stats_date_filter">Cuir air gleus rainse na h-ama</string>
+    <string name="call_stats_reset_filter">Ath-shuidhich rainse na h-ama</string>
+    <string name="call_stats_sort_by_duration">Seòrsaich a-rèir faide na gairme</string>
+    <string name="call_stats_sort_by_count">Seòrsaich a-rèir cunntas nan gairmean</string>
+    <string name="call_stats_title_for_number">An àireamh seo</string>
+    <string name="call_stats_title_of_total">Dhen iomlan</string>
+    <string name="call_stats_title_durations">Faidean nan gairmean</string>
+    <string name="call_stats_title_count">Cunntas nan gairmean</string>
+    <string name="call_stats_title_average_duration">Faide cuibheasach nan gairmean</string>
+    <string name="recent_calls_no_items_in_range">Chan eil gairm sam bith ann an loga nan gairmean agad am broinn rainse na h-ama a thagh thu.</string>
+    <string name="call_recording_category_title">Clàradh gairme</string>
+    <string name="call_recording_format">Fòrmat fuaime</string>
+    <string name="call_playback_no_app_found_toast">Cha deach aplacaid a lorg airson an clàradh a thagh thu a chluich.</string>
+    <string name="speed_dial_settings">Roghainnean a’ ghrad-daitheil</string>
+    <string name="speed_dial_not_set">(cha deach a shuidheachadh)</string>
+    <string name="speed_dial_replace">Cuir ’na àite</string>
+    <string name="speed_dial_delete">Sguab às</string>
+    <string name="speed_dial_unassigned_dialog_title">Cha deach an iuchair iomruineadh</string>
+    <string name="speed_dial_unassigned_dialog_message">Cha deach gnìomh air a’ ghrad-daitheal iomruineadh dhan iuchair “<xliff:g id="number">%s</xliff:g>“”. A bheil thu airson gnìomh iomruineadh an-dràsta?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Cuir dheth am modh-itealain mus cleachd thu an grad-daitheal</string>
+    <string name="speed_dial_can_not_be_set">Chan urrainn dhut grad-daitheal a shuidheachadh air an iuchair seo</string>
+    <string name="yes">Tha</string>
+    <string name="no">Chan eil</string>
+    <string name="recentIncoming_empty">Chan eil gairm a-steach agad.</string>
+    <string name="recentOutgoing_empty">Chan eil gairm a-mach agad.</string>
+    <string name="recentCalls_empty">Tha loga nan gairm agad bàn</string>
+    <string name="calllog_search_hint">Lorg ann an loga nan gairm</string>
+    <string name="no_call_log">Chan eil loga na gairm ann</string>
+    <string name="clear">Falamhaich</string>
+    <string name="description_clear_search">Falamhaich an lorg</string>
+    <string name="video_call_welcome_title"><b>Fàilte gu daithealar ùr nan gairmean video</b></string>
+    <string name="video_call_welcome_message">Nach math dhuinn guthan chàirdean a chluinntinn ach tha e nas fheàrr nuair a chì sinn iad! Seo am fiosrachadh a dh’fheumas tu airson nan ceanglaichean fìor-ama (no FaceTime?) a stèidheachadh:\n Feumaidh ceangal 4G LTE no WiFi a bhith agad\n Feumaidh comas gairm video a bhith aig an uidheam thall cuideachd\n Cleachdaidh gairmean video dàta luaths àirde\n ’S urrainn dhut gairm gutha àrdachadh gu gairm video cuideachd\n\n Thoir sùil air <a>https://support.t-mobile.com/docs/DOC-23574</a> airson barrachd fiosrachaidh.</string>
+    <string name="video_call_welcome_message_repeat">Seall an teachdaireachd seo gach turas</string>
+    <string name="toast_change_video_call_failed">Cha gabh gairm video a dhèanamh dheth, chan eil fòrmat na h-àireamh mar bu chòir</string>
+    <string name="toast_make_video_call_failed">Cha gabh gairm video a dhèanamh, chan eil fòrmat na h-àireamh mar bu chòir</string>
+    <string name="overflowBothCallMenuItemText">Gairm video, seall mi</string>
+    <string name="overflowRXCallMenuItemText">Gairm video, falaich mi</string>
+    <string name="overflowVOCallMenuItemText">Gairm video</string>
+    <string name="video_call">Gairm video</string>
+    <string name="call_data_info_label">Tìmearan gairme/caitheamh dàta</string>
+    <string name="call_data_info_description">Ùine cleachdadh ghairmean video ’s ùine caitheamh dàta</string>
+    <string name="alert_call_over_wifi">Thèid gairmean a dhèanamh thar WiFi.</string>
+    <string name="alert_call_no_cellular_coverage">Chan eil lìonra mobile ri làimh. Dèan ceangal ri WiFi ri làimh airson gairm a dhèanamh.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Dèan ceangal ri WiFi airson gairm a dhèanamh.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Thoir gnogag an-seo a shealltainn nan lìonraidhean a tha ri làimh</string>
+    <string name="menu_add_to_4g_conference_call">Cuir ri gairm coinneimh 4G</string>
+    <string name="menu_4g_conference_call">Gairm coinneimh 4G</string>
+    <string name="type_incoming_volte">Gairm gutha 4G a-steach</string>
+    <string name="type_incoming_video_lte">Gairm video 4G a-steach</string>
+    <string name="type_outgoing_volte">Gairm gutha 4G a-mach</string>
+    <string name="type_outgoing_video_lte">Gairm video 4G a-mach</string>
+    <string name="type_missed_volte">Gairm gutha 4G a dh’fhalbh ort</string>
+    <string name="type_missed_video_lte">Gairm video 4G a dh’fhalbh ort</string>
+    <string name="type_incoming_vowifi">Gairm gutha WiFi a-steach</string>
+    <string name="type_incoming_video_wifi">Gairm video WiFi a-steach</string>
+    <string name="type_outgoing_vowifi">Gairm gutha WiFi a-mach</string>
+    <string name="type_outgoing_video_wifi">Gairm video WiFi a-mach</string>
+    <string name="type_missed_vowifi">Gairm gutha WiFi a dh’fhalbh ort</string>
+    <string name="type_missed_video_wifi">Gairm video WiFi a dh’fhalbh ort</string>
+    <string name="lookup_disclaimer">Faodaidh an rannsachadh ceistean a chur a-null gu làraichean-lìn cèine slighe pròtacail thèarainte (https) airson fiosrachadh a chruinneachadh. Faodaidh a’ cheist gabhail a-steach àireamh fòn an neach eile no a’ cheist rannsachaidh</string>
+</resources>

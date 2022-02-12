@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015, 2016 The Linux Foundation. All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are
+  ~ met:
+  ~      Redistributions of source code must retain the above copyright
+  ~       notice, this list of conditions and the following disclaimer.
+  ~      Redistributions in binary form must reproduce the above
+  ~       copyright notice, this list of conditions and the following
+  ~       disclaimer in the documentation and/or other materials provided
+  ~       with the distribution.
+  ~      Neither the name of The Linux Foundation nor the names of its
+  ~       contributors may be used to endorse or promote products derived
+  ~       from this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+  ~ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+  ~ ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  ~ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  ~ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  ~ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  ~ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  ~ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+  ~ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+  ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~
+  -->
+<!-- The xml contains Qti specific resource strings neede for any value added features. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: สถานะของการโทร: \u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">ดำเนินการต่อ</string>
+    <string name="call_substate_connected_suspended_audio">เชื่อมต่อแล้ว แต่เสียงถูกระงับ</string>
+    <string name="call_substate_connected_suspended_video">เชื่อมต่อแล้ว แต่วิดีโอถูกระงับ</string>
+    <string name="call_substate_avp_retry">กำลังหาคุณภาพวิดีโอ\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: คุณภาพวิดีโอเปลี่ยนเป็น <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">สูง</string>
+    <string name="video_quality_medium">ปานกลาง</string>
+    <string name="video_quality_low">ต่ำ</string>
+    <string name="video_quality_unknown">ไม่รู้จัก</string>
+    <string name="player_started">เริ่มเล่น</string>
+    <string name="player_stopped">หยุดเล่น</string>
+    <string name="camera_not_ready">กล้องพร้อมใช้งาน</string>
+    <string name="camera_ready">กล้องพร้อมใช้งาน</string>
+    <string name="unknown_call_session_event">เซสชันการโทรที่ไม่รู้จัก</string>
+    <string name="wlan_data_usage_label">การใช้งานข้อมูล Wi-Fi: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">การใช้งานข้อมูล LTE: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">เลือกประเภทการสนทนา</string>
+    <string name="modify_call_option_vt">วิดีโอแบบสองทิศทาง</string>
+    <string name="modify_call_option_vt_tx">ส่งวีดีโอ</string>
+    <string name="modify_call_option_vt_rx">รับวีดีโอ</string>
+    <string name="modify_call_option_voice">เสียงเท่านั้น</string>
+    <string name="modify_call_failed_due_to_low_battery">ไม่สามารถปรับเปลี่ยนการโทรได้เนื่องจากแบตเตอรี่ต่ำ</string>
+    <string name="qti_ims_transfer_num_error">หมายเลขไม่ได้ถูกตั้งไว้ กรุณาใส่เลขผ่านค่า IMS แล้วลองใหม่</string>
+    <string name="qti_ims_transfer_request_error">คำขอโอนสายล้มเหลว</string>
+    <string name="qti_ims_transfer_request_success">คำขอโอนสายสำเร็จ</string>
+    <string name="video_call_not_allowed_if_tty_enabled">กรุณาปิดโหมด TTY เพื่ออัปเกรดไปการโทรแบบวิดีโอ</string>
+    <string name="qti_description_deflect_service_error">ไม่สนับสนุนบริการเปลี่ยนทิศทางการโทร</string>
+    <string name="onscreenAddParticipant">เพิ่มผู้เข้าร่วม</string>
+    <string name="cs_redial_option">ตัวเลือกโทรออกใหม่</string>
+    <string name="cs_redial_msg">ไม่สามารถโทรด้วยวีดีโอ IMS ได้ โทรอีกครั้งด้วยเสียง โดยไม่ใช้ IMS?</string>
+    <string name="session_modify_cause_upgrade_local_request">การโทรถูกอัปเกรดตามคำขอของผู้ใช้</string>
+    <string name="session_modify_cause_upgrade_remote_request">การโทรถูกอัปเกรดจากคำขอระยะไกล</string>
+    <string name="session_modify_cause_downgrade_local_request">การโทรถูกดาวน์เกรดโดยคำขอของผู้ใช้</string>
+    <string name="session_modify_cause_downgrade_remote_request">การโทรถูกดาวน์เกรดโดยคำขอระยะไกล</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">การโทรถูกดาวน์เกรดเนื่องจากหมดเวลา RTP</string>
+    <string name="session_modify_cause_downgrade_qos">การโทรถูกดาวน์เกรดเนื่องจากคุณภาพของบริการ</string>
+    <string name="session_modify_cause_downgrade_packet_loss">การโทรถูกดาวน์เกรดเนื่องจากแพคเกจสูญหาย</string>
+    <string name="session_modify_cause_downgrade_low_thrput">การโทรถูกดาวน์เกรดเนื่องจากส่งข้อมูลได้น้อย</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">การโทรถูกดาวน์เกรดเนื่องจากปัญหาความร้อน</string>
+    <string name="session_modify_cause_downgrade_lipsync">การโทรถูกดาวน์เกรดเนื่องจากเสียงไม่ตรงกัน</string>
+    <string name="session_modify_cause_downgrade_generic_error">การโทรถูกดาวน์เกรดเนื่องจากข้อผิดพลาดทั่วไป</string>
+    <string name="card_title_incoming_conf_call">สายเรียกเข้าการประชุมทางโทรศัพท์</string>
+    <string name="card_title_incoming_video_conf_call">สายเรียกเข้าการประชุมวีดีโอทางโทรศัพท์</string>
+    <string name="notification_incoming_conf_call">สายเรียกเข้าการประชุมทางโทรศัพท์</string>
+    <string name="incoming_conf_via_template">สายเรียกเข้าการประชุมทางโทรศัพท์ผ่าน <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">การโทรล้มเหลวเนื่องจากแบตเตอรี่ต่ำ</string>
+    <string name="vowifi_call_quality_good">คุณภาพเสียงคุยดี</string>
+    <string name="vowifi_call_quality_fair">คุณภาพเสียงคุยปานกลาง</string>
+    <string name="vowifi_call_quality_poor">คุณภาพเสียงคุยต่ำ</string>
+    <string name="low_battery">แบตเตอรี่ต่ำ</string>
+    <string name="low_battery_hangup_msg">ท่านต้องการวางสายหรือไม่</string>
+    <string name="low_battery_msg">แบตเตอรี่ของคุณต่ำกว่า 15% ท่านต้องการที่จะสนธนาผ่านวีดีโอต่อหรือเปลี่ยนมาสนธนาผ่านเสียงคุยแทน</string>
+    <string name="low_battery_convert">แปลง</string>
+    <string name="video_call">วีดีโอคอล</string>
+    <string name="video_call_cannot_upgrade">ไม่สามารถยอมรับการสนทนาผ่านวิดีโอในเวลานี้</string>
+    <string name="video_call_picture_mode_menu_title">เลือกโหมดรูปภาพ</string>
+    <string name="video_call_picture_mode_preview_video">ภาพตัวอย่างกล้อง</string>
+    <string name="video_call_picture_mode_incoming_video">วีดีโอเรียกเข้า</string>
+    <string name="video_call_picture_mode_cancel_option">ยกเลิก</string>
+    <string name="video_call_picture_mode_save_option">บันทึก</string>
+</resources>

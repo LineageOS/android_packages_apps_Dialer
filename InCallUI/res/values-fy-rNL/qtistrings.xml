@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015, 2016 The Linux Foundation. All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are
+  ~ met:
+  ~      Redistributions of source code must retain the above copyright
+  ~       notice, this list of conditions and the following disclaimer.
+  ~      Redistributions in binary form must reproduce the above
+  ~       copyright notice, this list of conditions and the following
+  ~       disclaimer in the documentation and/or other materials provided
+  ~       with the distribution.
+  ~      Neither the name of The Linux Foundation nor the names of its
+  ~       contributors may be used to endorse or promote products derived
+  ~       from this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+  ~ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+  ~ ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+  ~ BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  ~ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  ~ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+  ~ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  ~ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+  ~ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+  ~ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~
+  -->
+<!-- The xml contains Qti specific resource strings neede for any value added features. -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_substate_label"><xliff:g id="id">%1$s</xliff:g>: Oprop substeat:\u000a <xliff:g id="state" example="Resumed">%2$s</xliff:g></string>
+    <string name="call_substate_call_resumed">Petear ferfette</string>
+    <string name="call_substate_connected_suspended_audio">Petear is ferbûn, mar audio is ûnderbrutsen</string>
+    <string name="call_substate_connected_suspended_video">Petear is ferbûn, mar fideo is ûnderbrutsen</string>
+    <string name="call_substate_avp_retry">Fideokwaliteit detektearje\u2026</string>
+    <string name="video_quality_changed"><xliff:g id="id">%1$s</xliff:g>: Fideokwaliteit wizige nei <xliff:g id="quality" example="high">%2$s</xliff:g></string>
+    <string name="video_quality_high">heech</string>
+    <string name="video_quality_medium">gemiddeld</string>
+    <string name="video_quality_low">leech</string>
+    <string name="video_quality_unknown">ûnbekend</string>
+    <string name="player_started">Spiler start</string>
+    <string name="player_stopped">Spiler stoppe</string>
+    <string name="camera_not_ready">Kamera is net ree</string>
+    <string name="camera_ready">Kamera is ree</string>
+    <string name="unknown_call_session_event">Unbekende opropbarren</string>
+    <string name="wlan_data_usage_label">Gegevensgebrûk fia wifi: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="lte_data_usage_label">Gegevensgebrûk fia LTE: <xliff:g id="usage">%1$s</xliff:g></string>
+    <string name="modify_call_option_title">Soarte petear</string>
+    <string name="modify_call_option_vt">Fideo ferstjoere/ûntfange</string>
+    <string name="modify_call_option_vt_tx">Fideo ferstjoere</string>
+    <string name="modify_call_option_vt_rx">Fideo ûntfange</string>
+    <string name="modify_call_option_voice">Allinnich spraak</string>
+    <string name="modify_call_failed_due_to_low_battery">Oanpassen fan petear mislearre as gefolch fan lege batterijspanning.</string>
+    <string name="qti_ims_transfer_num_error">Nûmer net ynsteld. Folje it nûmer yn fia IMS-ynstellingen om it opnij te probearjen.</string>
+    <string name="qti_ims_transfer_request_error">De opropomlieding is mislearre.</string>
+    <string name="qti_ims_transfer_request_success">De opropomlieding is slagge.</string>
+    <string name="qti_ims_onscreenBlindTransfer">Daliks trochferbine</string>
+    <string name="qti_ims_onscreenAssuredTransfer">Feilige oerdracht</string>
+    <string name="qti_ims_onscreenConsultativeTransfer">Konsultative oerdracht</string>
+    <string name="video_call_not_allowed_if_tty_enabled">Skeakelje TTY-modus út om fideo-oproppen ta te stean.</string>
+    <string name="qti_description_target_deflect">Omliede</string>
+    <string name="qti_description_deflect_error">Nûmer net ynsteld. Folje it nûmer yn fia IMS-ynstellingen om it opnij te probearjen.</string>
+    <string name="qti_description_deflect_service_error">Petear omliede wurdt net stipe.</string>
+    <string name="call_failed_ho_not_feasible">Petear beëinige, omdat LTE-nei-3G/2G-oerdracht mislearre is.</string>
+    <string name="onscreenAddParticipant">Dielnimmer tafoegje</string>
+    <string name="cs_redial_option">Opnij kieze</string>
+    <string name="cs_redial_msg">IMS-fideo-oprop mislearre, opnij probearje as net-IMS-audio-oprop?</string>
+    <string name="session_modify_cause_upgrade_local_request">Oprop opwurdearre op fersyk fan brûker</string>
+    <string name="session_modify_cause_upgrade_remote_request">Oprop opwurdearre op fersyk fan petearpartner</string>
+    <string name="session_modify_cause_downgrade_local_request">Oprop degradearre op fersyk fan brûker</string>
+    <string name="session_modify_cause_downgrade_remote_request">Oprop degradearre op fersyk fan petearpartner</string>
+    <string name="session_modify_cause_downgrade_rtp_timeout">Oprop degradearre as gefolch fan in RTP-time-out</string>
+    <string name="session_modify_cause_downgrade_qos">Oprop degradearre as gefolch fan slimme ferbining</string>
+    <string name="session_modify_cause_downgrade_packet_loss">Oprop degradearre as gefolch fan pakketferlies</string>
+    <string name="session_modify_cause_downgrade_low_thrput">Oprop degradearre as gefolch fan lege trochfiersnelheid</string>
+    <string name="session_modify_cause_downgrade_thermal_mitigation">Oprop degradearre as gefolch fan hjittebeskerming</string>
+    <string name="session_modify_cause_downgrade_lipsync">Oprop degradearre as gefolch fan in lipsyngronisaasje</string>
+    <string name="session_modify_cause_downgrade_generic_error">Oprop degradearre as gefolch fan algemiene flater</string>
+    <string name="card_title_incoming_conf_call">Ynkommend konferinsjepetear</string>
+    <string name="card_title_incoming_video_conf_call">Ynkommende fideokonferinsje</string>
+    <string name="notification_incoming_conf_call">Ynkommend konferinsjepetear</string>
+    <string name="incoming_conf_via_template">Ynkommend konferinsjepetear fia <xliff:g id="provider_name">%s</xliff:g></string>
+    <string name="call_failed_due_to_low_battery">Oprop mislearre as gefolch fan lege batterijspanning</string>
+    <string name="vowifi_call_quality_good">Goede spraakkwaliteit</string>
+    <string name="vowifi_call_quality_fair">Reedlik goede spraakkwaliteit</string>
+    <string name="vowifi_call_quality_poor">Minne spraakkwaliteit</string>
+    <string name="low_battery">Warskôging by lege batterijspanning</string>
+    <string name="low_battery_hangup_msg">Wolle jo de ferbining ferbrekke?</string>
+    <string name="low_battery_msg">Batterijspanning is minder as 15%. Wolle jo trochgean mei de fideo-oprop of dizze omsette yn in spraakoprop?</string>
+    <string name="low_battery_convert">Omsette</string>
+    <string name="video_call">Fideo-oprop</string>
+    <string name="video_call_cannot_upgrade">Kin op dit stuit gjin fideo-oproppen oannimme</string>
+    <string name="video_call_picture_mode_menu_title">Fotomodus</string>
+    <string name="video_call_picture_mode_preview_video">Kamerafoarbyld</string>
+    <string name="video_call_picture_mode_incoming_video">Ynkommend fideopetear</string>
+    <string name="video_call_picture_mode_cancel_option">Annulearje</string>
+    <string name="video_call_picture_mode_save_option">Bewarje</string>
+</resources>

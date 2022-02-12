@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="incall_vibration_category_title">Gələn zəng titrəməsi</string>
+    <string name="incall_vibrate_outgoing_title">Cavab verәrkәn titrət</string>
+    <string name="incall_vibrate_call_waiting_title">Zəng gözlədiləndə titrət</string>
+    <string name="incall_vibrate_hangup_title">Söndürüləndə titrət</string>
+    <string name="incall_vibrate_45_title">Hər dəqiqə titrət</string>
+    <string name="incall_vibrate_45_summary">Gedən zənglərin hər dəqiqəsinin 45-ci saniyəsində titrəyər</string>
+    <string name="nearby_places">Yaxındakı məkanlar</string>
+    <string name="people">İnsanlar</string>
+    <string name="preference_category_t9_dialpad_search">Nömrə yığımı T9 axtarışı</string>
+    <string name="t9_search_input_locale">T9 axtarış daxiletmə</string>
+    <string name="t9_search_input_locale_default">İlkin</string>
+    <string name="lookup_settings_label">Telefon nömrəsi axtar</string>
+    <string name="enable_forward_lookup_title">Yönləndirmə axtarışı</string>
+    <string name="enable_forward_lookup_summary">Nömrə yığımında axtarış edərkən yaxın yerləri göstər</string>
+    <string name="enable_people_lookup_title">Şəxs axtarışı</string>
+    <string name="enable_people_lookup_summary">Nömrə yığımında axtarış edərkən şəxslər üçün xətdə nəticələrini göstər</string>
+    <string name="enable_reverse_lookup_title">Geri axtarış</string>
+    <string name="enable_reverse_lookup_summary">Gələn zənglərdə bilinməyən nömrələr üçün şəxs və ya yer haqqında məlumat axtar</string>
+    <string name="forward_lookup_provider_title">Axtarış yönləndirmə təchizatçısı</string>
+    <string name="people_lookup_provider_title">Şəxs axtarış təchizatçısı</string>
+    <string name="reverse_lookup_provider_title">Geri axtarış təchizatçısı</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Çincə (CN)</string>
+    <string name="speed_dial_edit_title"><xliff:g id="index" example="2">%1$d</xliff:g> Cəld yığıma düzəliş et</string>
+    <string name="speed_dial_input_hint">Zəhmət olmasa nömrə daxil edin</string>
+    <string name="call_log_show_all_slots">Bütün SIMlər</string>
+    <string name="call_log_all_calls_header">Bütün zənglər</string>
+    <string name="call_log_blacklist_header">Yalnız əngəllənən zənglər</string>
+    <string name="call_log_blocked_empty">Əngəllənən zənginiz yoxdur.</string>
+    <string name="call_log_stats_title">Statistika</string>
+    <string name="callStatsDetailTitle">Zəng statistikası təfsilatı</string>
+    <string name="call_stats_incoming">Gələn: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Gedən: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Cavabsız: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Əngəllənən: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Ümumi: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Ümumi: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Başlanğıc tarixi</string>
+    <string name="call_stats_filter_to">Bitmə tarixi</string>
+    <string name="call_stats_filter_picker_title">Filtr aralığı</string>
+    <string name="date_quick_selection">Cəld seçim</string>
+    <string name="date_qs_currentmonth">Hazırki ay</string>
+    <string name="date_qs_currentquarter">Hazırki rüb</string>
+    <string name="date_qs_currentyear">Hazırki il</string>
+    <string name="date_qs_lastweek">Keçən həftə</string>
+    <string name="date_qs_lastmonth">Keçən ay</string>
+    <string name="date_qs_lastquarter">Son rüb</string>
+    <string name="date_qs_lastyear">Keçən il</string>
+    <string name="call_stats_date_filter">Vaxt aralığını nizamla</string>
+    <string name="call_stats_reset_filter">Vaxt aralığını sıfırla</string>
+    <string name="call_stats_sort_by_duration">Zəng müddətinə görə sırala</string>
+    <string name="call_stats_sort_by_count">Zəng sayına görə sırala</string>
+    <string name="call_stats_title_for_number">Bu nömrə</string>
+    <string name="call_stats_title_of_total">Ümumi</string>
+    <string name="call_stats_title_durations">Zəng müddətləri</string>
+    <string name="call_stats_title_count">Zəng sayı</string>
+    <string name="call_stats_title_average_duration">Ortalama zəng müddəti</string>
+    <string name="recent_calls_no_items_in_range">Seçilmiş vaxt aralığında zəng jurnalınız heç bir zəng ehtiva etmir.</string>
+    <string name="call_recording_category_title">Zəng səsyazması</string>
+    <string name="call_recording_format">Səs formatı</string>
+    <string name="call_playback_no_app_found_toast">Seçilmiş səsyazmanı oynatmaq üçün heç bir tətbiq tapılmadı.</string>
+    <string name="speed_dial_settings">Cəld yığım tənzimləmələri</string>
+    <string name="speed_dial_not_set">(tənzimlənməyib)</string>
+    <string name="speed_dial_replace">Dəyişdir</string>
+    <string name="speed_dial_delete">Sil</string>
+    <string name="speed_dial_unassigned_dialog_title">Nömrə təyin edilmədi</string>
+    <string name="speed_dial_unassigned_dialog_message">\'<xliff:g id="number">%s</xliff:g>\' nömrəsinə cəld nömrə yığımı təyin edilmədi. İndi təyin etmək istərdiniz?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Cəld nömrə yığımından istifadə etmək üçün təyyarə rejimini söndürün</string>
+    <string name="speed_dial_can_not_be_set">Cəld yığım bu nömrə üçün tənzimlənə bilmir</string>
+    <string name="yes">Bəli</string>
+    <string name="no">Xeyr</string>
+    <string name="recentIncoming_empty">Gələn zənginiz yoxdur.</string>
+    <string name="recentOutgoing_empty">Gedən zənginiz yoxdur.</string>
+    <string name="recentCalls_empty">Zəng jurnalınız boşdur</string>
+    <string name="calllog_search_hint">Zəng jurnalını axtar</string>
+    <string name="no_call_log">Zəng jurnalı yoxdur</string>
+    <string name="clear">Təmizlə</string>
+    <string name="description_clear_search">Axtarışı təmizlə</string>
+    <string name="video_call_welcome_title"><b>Yeni Görüntülü Zəngə Xoş Gəldiniz</b></string>
+    <string name="video_call_welcome_message">Xəttin sonundakı tanış səsi eşitməyi sevirik, ancaq üz-üzə danışmaq bundan da yaxşıdır! Real vaxt kəsiyində (ya da FaceTime?) bağlantı qurmaq üçün bunları bilməlisiniz:\n 4G LTE və ya Wi-Fi bağlantısı üzərində olmalısınız\n Zəng etdiyiniz cihaz görüntülü zənglə uyğunlaşmalıdır\n Görüntülü zənglər yüksək sürətli verilənlər istifadə edir\n Həmçinin səsli zəngdən görüntülü zəngə yüksəldə bilərsiniz\n\n Ətraflı məlumat üçün <a>https://support.t-mobile.com/docs/DOC-23574</a> nəzər yetirin.</string>
+    <string name="video_call_welcome_message_repeat">Bu mesajı hər dəfə göstər</string>
+    <string name="toast_change_video_call_failed">Görüntülü zəngə keçid edilə bilmir, doğru olmayan nömrə formatı</string>
+    <string name="toast_make_video_call_failed">Görüntülü zəng edilə bilmir, doğru olmayan nömrə formatı</string>
+    <string name="overflowBothCallMenuItemText">Görüntülü zəng, məni göstər</string>
+    <string name="overflowRXCallMenuItemText">Görüntülü zəng, məni gizlət</string>
+    <string name="overflowVOCallMenuItemText">Səsli zəng</string>
+    <string name="video_call">Görüntülü zəng</string>
+    <string name="call_data_info_label">Zəng/verilənlər istifadəsi vaxtölçənləri</string>
+    <string name="call_data_info_description">Səsli zəng və verilənlər istifadəsi müddəti</string>
+    <string name="alert_call_over_wifi">Zənglər Wi-Fi üzərindən ediləcək.</string>
+    <string name="alert_call_no_cellular_coverage">Hüceyrəvi şəbəkə əlçatmazdır. Zəng etmək üçün Wi-Fi şəbəkəsi ilə bağlantı qurun.</string>
+    <string name="alert_user_connect_to_wifi_for_call">Zəng etmək üçün Wi-Fi şəbəkəsi ilə bağlantı qurun.</string>
+    <string name="alert_user_connect_to_wifi_for_call_text">Əlçatan şəbəkələrə baxmaq üçün bura toxunun</string>
+    <string name="menu_add_to_4g_conference_call">4G konferans zənginə əlavə et</string>
+    <string name="menu_4g_conference_call">4G konferans zəngi</string>
+    <string name="type_incoming_volte">Gələn 4G səsli zəngi</string>
+    <string name="type_incoming_video_lte">Gələn 4G görüntülü zəngi</string>
+    <string name="type_outgoing_volte">Gedən 4G səsli zəngi</string>
+    <string name="type_outgoing_video_lte">Gedən 4G görüntülü zəngi</string>
+    <string name="type_missed_volte">Cavabsız 4G səsli zəngi</string>
+    <string name="type_missed_video_lte">Cavabsız 4G görüntülü zəngi</string>
+    <string name="type_incoming_vowifi">Gələn Wi-Fi səsli zəngi</string>
+    <string name="type_incoming_video_wifi">Gələn Wi-Fi görüntülü zəngi</string>
+    <string name="type_outgoing_vowifi">Gedən Wi-Fi səsli zəngi</string>
+    <string name="type_outgoing_video_wifi">Gedən Wi-Fi görüntülü zəngi</string>
+    <string name="type_missed_vowifi">Cavabsız Wi-Fi səsli zəngi</string>
+    <string name="type_missed_video_wifi">Cavabsız Wi-Fi görüntülü zəngi</string>
+    <string name="lookup_disclaimer">Axtarışlar, məlumat yığmaq üçün uzaq veb saytlara təhlükəsiz bir protokol (https) üzərindən sorğu göndərə bilər. Sorğu, digər tərəflərin telefon nömrəsini və ya axtarış sorğusunu ehtiva edə bilər</string>
+</resources>
