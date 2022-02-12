@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">Inguruko tokiak</string>
+    <string name="people">Jendea</string>
+    <string name="preference_category_t9_dialpad_search">Bilatu T9 markadorean</string>
+    <string name="t9_search_input_locale">T9 bilatzeko sarrera</string>
+    <string name="t9_search_input_locale_default">Lehenetsia</string>
+    <string name="lookup_settings_label">Telefono zenbakien bilaketa</string>
+    <string name="lookup_settings_description">Bilatu telefono zenbaki ezezagunak</string>
+    <string name="enable_forward_lookup_title">Tokien bilaketa</string>
+    <string name="enable_forward_lookup_summary">Erakutsi inguruko tokiak markatzailean bilatzean</string>
+    <string name="enable_people_lookup_title">Pertsonen bilaketa</string>
+    <string name="enable_people_lookup_summary">Erakutsi sareko emaitzak pertsonak markatzailean bilatzean</string>
+    <string name="enable_reverse_lookup_title">Bilaketa alderantzikatua</string>
+    <string name="enable_reverse_lookup_summary">Bilatu pertsona edo lekuko informazioa zenbaki ezezagunen deientzako</string>
+    <string name="forward_lookup_provider_title">Tokien bilaketarako hornitzailea</string>
+    <string name="people_lookup_provider_title">Pertsonen bilaketarako hornitzailea</string>
+    <string name="reverse_lookup_provider_title">Bilaketa alderantzikatuaren hornitzailea</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn txinatarra (CN)</string>
+    <string name="type_blacklist">Zerrenda beltzeko deia</string>
+    <string name="call_log_action_block">Blokeatu deitzailea</string>
+    <string name="call_log_action_unblock">Deitzailea blokeatu da</string>
+    <string name="speed_dial_settings">Markaketa azkarraren ezarpenak</string>
+    <string name="speed_dial_not_set">(ezarri gabe)</string>
+    <string name="speed_dial_replace">Ordeztu</string>
+    <string name="speed_dial_delete">Ezabatu</string>
+    <string name="speed_dial_unassigned_dialog_title">Tekla esleitu gabea</string>
+    <string name="speed_dial_unassigned_dialog_message"><xliff:g id="number">%s</xliff:g> teklari ez zaio kontakturik esleitu. Kontaktu bat esleitu nahi duzu orain?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Markaketa azkarra erabiltzeko, aurretik hegaldi modua ezgaitu.</string>
+    <string name="yes">Bai</string>
+    <string name="no">Ez</string>
+    <string name="incall_vibration_category_title">Deian zeharreko bibrazioa</string>
+    <string name="incall_vibrate_outgoing_title">Bibratu erantzutean</string>
+    <string name="incall_vibrate_call_waiting_title">Bibratu deia zai dagoenean</string>
+    <string name="incall_vibrate_hangup_title">Bibratu esekitzean</string>
+    <string name="incall_vibrate_45_title">Bibratu minutuero</string>
+    <string name="incall_vibrate_45_summary">Irteera deietan minutuero bibratzen du 45. segundoan</string>
+    <string name="call_log_show_all_slots">SIM guztiak</string>
+    <string name="call_log_all_calls_header">Dei guztiak</string>
+    <string name="call_log_blacklist_header">Blokeatutako deiak soilik</string>
+    <string name="call_log_stats_title">Estatistikak</string>
+    <string name="callStatsDetailTitle">Deiaren xehetasunak</string>
+    <string name="call_stats_incoming">Jasoak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Eginak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Galduak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Blokeatuak: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Guztira: <xliff:g id="call_count">%s</xliff:g>, <xliff:g id="duration">%s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Guztira: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Hasiera data</string>
+    <string name="call_stats_filter_to">Amaiera data</string>
+    <string name="call_stats_filter_picker_title">Daten heina</string>
+    <string name="date_quick_selection">Hautapen azkarra</string>
+    <string name="date_qs_currentmonth">Uneko hilabetea</string>
+    <string name="date_qs_currentquarter">Uneko hiruhilabetea</string>
+    <string name="date_qs_currentyear">Uneko urtea</string>
+    <string name="date_qs_lastweek">Azken astea</string>
+    <string name="date_qs_lastmonth">Azken hilabetea</string>
+    <string name="date_qs_lastquarter">Azken hiruhilabetea</string>
+    <string name="date_qs_lastyear">Azken urtea</string>
+    <string name="call_stats_date_filter">Data heina ezarri</string>
+    <string name="call_stats_reset_filter">Leheneratu denbora heina</string>
+    <string name="call_stats_sort_by_duration">Iraupenaren arabera sailkatu</string>
+    <string name="call_stats_sort_by_count">Dei kopuruen arabera sailkatu</string>
+    <string name="call_stats_title_for_number">Zenbaki hau</string>
+    <string name="call_stats_title_of_total">Guztira</string>
+    <string name="call_stats_title_durations">Deien iraupenak</string>
+    <string name="call_stats_title_count">Dei kopurua</string>
+    <string name="call_stats_title_average_duration">Batezbesteko dei iraupena</string>
+    <string name="recent_calls_no_items_in_range">Zure deien egunkariak ez du deirik aukeratutako denbora tartean.</string>
+    <string name="call_recording_category_title">Dei grabaketa</string>
+    <string name="call_recording_format">Audio formatua</string>
+    <string name="call_playback_no_app_found_toast">Ezin izan da hautatutako grabaketa erreproduzitzeko aplikaziorik aurkitu.</string>
+    <string name="invalid_number_text">"%1$s(e)k ezin izan du dei hau egin. Telefono zenbakia zuzena da?"</string>
+    <string name="empty_dialpad_t9_example">Telefono zenbaki bat markatu dezakezu edo\nkontaktu bat bilatu</string>
+    <string name="sign_in_hint_text">Hasi saioa %1$s deiak egiteko</string>
+    <string name="wifi_hint_text">Deitu doan %1$s(e)tik %1$s(e)ra Wi-Fi bidez.</string>
+    <string name="roaming_hint_text">%1$s ibiltaritzan dago. Deitu doan %2$s(e)tik %2$s(e)ra Wi-Fi bidez.</string>
+    <string name="emergency_call_hint_text">Ez dago SIM txartelik, emergentziazko deiak besterik ez.</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> deia</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> ezarpenak</string>
+    <string name="search_shortcut_call_using">Deitu <xliff:g id="name">%1$s</xliff:g> erabiliz</string>
+    <string name="callerinfo_provider_auth_yes">Bai</string>
+    <string name="callerinfo_provider_auth_no_short">Ez</string>
+    <string name="callerinfo_provider_auth_no">Ez, eskerrik asko</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> Zure kontaktuak, Me profila eta Cyanogen OS kontua atzitu ditzake, azken hone e-posta helbidea izan dezake ere.</string>
+    <string name="callerinfo_provider_auth_learn_more">Ikasi gehiago</string>
+    <string name="callerinfo_provider_auth_desc">Ongi etorri! <xliff:g id="provider_name">%s</xliff:g>(e)k deitzaile ezezagunak identifikatzea eta jaso nahi ez dituzun deiak blokeatzea nahi duzu?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Ongi etorri! <xliff:g id="provider_name">%s</xliff:g>(e)k deitzaile ezezagunak identifikatzea nahi duzu?</string>
+    <string name="callerinfo_provider_summary">Deitzaile ezezagunak eta spam deiak identifikatzen ditu</string>
+    <string name="callerinfo_provider_summary_no_spam">Deitzaile ezezagunak identifikatzen ditu</string>
+    <string name="silence_spam_title">Isilarazi spam deiak</string>
+    <string name="silence_spam_summary">Eragotzi spam deiei jotzea</string>
+    <string name="block_hidden_title">Blokeatu ezkutuko telefono zenbakiak</string>
+    <string name="block_hidden_summary">Ezkutuko zenbakiak spamtzat hartu</string>
+    <string name="block_dialog_title">Blokeatu deitzaile hau?</string>
+    <string name="block_dialog_positive">Blokeatu</string>
+    <string name="block_dialog_negative">Utzi</string>
+    <string name="block_dialog_description">Ez duzu pertsona honen deirik edo mezurik jasoko aurrerantzean.</string>
+    <string name="block_dialog_report_spam">Spam dela adierazi <xliff:g id="provider">%s</xliff:g>ri</string>
+    <string name="provider_disable_title">%1$s desgaitu?</string>
+    <string name="provider_disable_message">%1$s desgaituz ez duzu deitzailearen identifikazioa izango.</string>
+    <string name="provider_disable_spam_message">%1$s desgaituz ez duzu spam deien aurkako babesa edo dei identifikazioa izango.</string>
+    <string name="powered_by_provider"><xliff:g id="provider">%s</xliff:g>k indartua</string>
+    <string name="provider_help">"Deitu %1$s bidez\nmoduak hemen aldatuz"</string>
+    <string name="provider_search_help">"Bilatu %1$s kontaktuak\nmodual hemen aldatuz"</string>
+    <string name="provider_button_help">"Ulertu dut"</string>
+    <string name="provider_voice_call">"%1$s ahots deia"</string>
+    <string name="provider_video_call">"%1$s bideodeia"</string>
+    <string name="cm_permission_place_call">Deia egiteko, gaitu telefono baimenak.</string>
+    <string name="search_shortcut_view_note">Ikusi oharra</string>
+    <string name="note_mod_settings_summary">Hartu oharrak edonondik</string>
+    <string name="callerinfo_provider_status_disabling">Ezgaitzen</string>
+    <string name="show_dialpad_at_start_title">Erakutsi markadorea abioan</string>
+</resources>

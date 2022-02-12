@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">Lähedased kohad</string>
+    <string name="people">Inimesed</string>
+    <string name="preference_category_t9_dialpad_search">Numbrilaua T9 otsing</string>
+    <string name="t9_search_input_locale">T9 otsingu sisend</string>
+    <string name="t9_search_input_locale_default">Vaikimisi</string>
+    <string name="lookup_settings_label">Numbriotsing</string>
+    <string name="lookup_settings_description">Tundmatute telefoninumbrite otsing</string>
+    <string name="enable_forward_lookup_title">Järgmine</string>
+    <string name="enable_forward_lookup_summary">Näita lähedalasuvaid kohti, kui otsin numbrivalimisrežiimis</string>
+    <string name="enable_people_lookup_title">Kontaktiotsing</string>
+    <string name="enable_people_lookup_summary">Numbrivalimisrežiimis näita kontaktide valikut jooksvalt</string>
+    <string name="enable_reverse_lookup_title">Pööratud otsing</string>
+    <string name="enable_reverse_lookup_summary">Otsi teavet isiku või koha kohta, kui kõne tuleb tundmatult numbrilt</string>
+    <string name="forward_lookup_provider_title">Otsingupakkuja</string>
+    <string name="people_lookup_provider_title">Inimeste otsingupakkuja</string>
+    <string name="reverse_lookup_provider_title">Pöördotsingupakkuja</string>
+    <string name="cyngn_reverse_lookup_provider_name">Cyngn Hiina (CN)</string>
+    <string name="type_blacklist">Musta nimekirja kõne</string>
+    <string name="call_log_action_block">Blokeeri helistaja</string>
+    <string name="call_log_action_unblock">Helistaja blokeeritud</string>
+    <string name="speed_dial_settings">Kiirvalimise seaded</string>
+    <string name="speed_dial_not_set">(määramata)</string>
+    <string name="speed_dial_replace">Muuda</string>
+    <string name="speed_dial_delete">Kustuta</string>
+    <string name="speed_dial_unassigned_dialog_title">Number määramata</string>
+    <string name="speed_dial_unassigned_dialog_message">Kiirvalik numbrile \'<xliff:g id="number">%s</xliff:g>\' on määramata. Kas soovid toimingu nüüd määrata?</string>
+    <string name="dialog_speed_dial_airplane_mode_message">Kiirvalimise kasutamiseks lülitage lennurežiim välja.</string>
+    <string name="yes">Jah</string>
+    <string name="no">Ei</string>
+    <string name="incall_vibration_category_title">Kõne vibratsioon</string>
+    <string name="incall_vibrate_outgoing_title">Vibreeri vastamisel</string>
+    <string name="incall_vibrate_call_waiting_title">Vibreeri kõne koputusel</string>
+    <string name="incall_vibrate_hangup_title">Vibreeri kõne lõppemisel</string>
+    <string name="incall_vibrate_45_title">Vibreeri iga minut</string>
+    <string name="incall_vibrate_45_summary">Vibreerib 45 sekundi täitumisel igas minutis väljaminevate kõnede korral</string>
+    <string name="call_log_show_all_slots">Kõik SIM-kaardid</string>
+    <string name="call_log_all_calls_header">Kõik kõned</string>
+    <string name="call_log_blacklist_header">Ainult blokeeritud kõned</string>
+    <string name="call_log_stats_title">Statistika</string>
+    <string name="callStatsDetailTitle">Detailne kõne statistika</string>
+    <string name="call_stats_incoming">Saabuv kõne: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Väljuv kõne: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Vastamata: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blacklisted">Blokeeritud: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Kokku: <xliff:g id="call_count">%s </xliff:g>, <xliff:g id="duration"> %s </xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Kokku: <xliff:g id="call_count">%s </xliff:g></string>
+    <string name="call_stats_filter_from">Alguskuupäev</string>
+    <string name="call_stats_filter_to">Lõppkuupäev</string>
+    <string name="call_stats_filter_picker_title">Filtri valik</string>
+    <string name="date_quick_selection">Kiirvalik</string>
+    <string name="date_qs_currentmonth">Käesolev kuu</string>
+    <string name="date_qs_currentquarter">Käesolev kvartal</string>
+    <string name="date_qs_currentyear">Käesolev aasta</string>
+    <string name="date_qs_lastweek">Eelmine nädal</string>
+    <string name="date_qs_lastmonth">Eelmine kuu</string>
+    <string name="date_qs_lastquarter">Eelmine kvartal</string>
+    <string name="date_qs_lastyear">Eelmine aasta</string>
+    <string name="call_stats_date_filter">Muuda ajavahemiku</string>
+    <string name="call_stats_reset_filter">Lähtesta ajavahemik</string>
+    <string name="call_stats_sort_by_duration">Kõne kestvuse järgi sortimine</string>
+    <string name="call_stats_sort_by_count">Kõnede arvu järgi sortimine</string>
+    <string name="call_stats_title_for_number">See number</string>
+    <string name="call_stats_title_of_total">Kogu</string>
+    <string name="call_stats_title_durations">Kõnede kestus</string>
+    <string name="call_stats_title_count">Kõnede arv</string>
+    <string name="call_stats_title_average_duration">Keskmine kõne kestus</string>
+    <string name="recent_calls_no_items_in_range">Sinu kõnelogi ei sisalda ühtegi kõnet valitud ajavahemikus.</string>
+    <string name="call_recording_category_title">Kõne salvestamine</string>
+    <string name="call_recording_format">Heli formaat</string>
+    <string name="call_playback_no_app_found_toast">Salvestuse taasesitamiseks ei leidu rakendust.</string>
+    <string name="invalid_number_text">"%1$s ei saanud helistada. Kontrolli numbrit."</string>
+    <string name="empty_dialpad_t9_example">Võite helistada numbrile või\notsida oma kontakte</string>
+    <string name="sign_in_hint_text">Logi sisse %1$s-helistamiseks</string>
+    <string name="wifi_hint_text">Helista tasuta %1$s - %1$s kasutades Wi-Fi-t.</string>
+    <string name="roaming_hint_text">%1$s kasutab rändlusteenust. Helista tasuta %2$s - %2$s kasutades Wi-Fi-t.</string>
+    <string name="emergency_call_hint_text">Pole SIM-kaarti. Üksnes hädaabikõnesid.</string>
+    <string name="extra_call_method_call_option"><xliff:g id="provider">%s</xliff:g> helista</string>
+    <string name="incall_plugin_settings"><xliff:g id="name">%1$s</xliff:g> sätted</string>
+    <string name="search_shortcut_call_using">Helista kasutades <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="callerinfo_provider_auth_yes">Jah</string>
+    <string name="callerinfo_provider_auth_no_short">Ei</string>
+    <string name="callerinfo_provider_auth_no">Ei, aitäh</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> saab ligipääsu sinu kontaktidele, Mina-profiilile ning Cyanogen OS kontole, mis võib sisaldada sinu emaili aadressi.</string>
+    <string name="callerinfo_provider_auth_learn_more">Saa rohkem teada</string>
+    <string name="callerinfo_provider_auth_desc">Tere tulemast! Kas te sooviksite teenusel <xliff:g id="provider_name">%s</xliff:g> tuvastada tundmatud helistajad ja blokeerida soovimatud kõned?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Tere tulemast! Kas te sooviksite teenusel <xliff:g id="provider_name">%s</xliff:g> tuvastada tundmatud helistajad?</string>
+    <string name="callerinfo_provider_summary">Tuvastab tundmatud helistajad ja rämpsposti</string>
+    <string name="callerinfo_provider_summary_no_spam">Tuvastab tundmatud helistajad</string>
+    <string name="silence_spam_title">Vaigista rämpskõned</string>
+    <string name="silence_spam_summary">Ära lase rämpskõnedel heliseda</string>
+    <string name="block_hidden_title">Blokeeri peidetud telefoninumbrid</string>
+    <string name="block_hidden_summary">Käsitle peidetud numbreid kui rämpskõnesid</string>
+    <string name="block_dialog_title">Blokeerida see helistaja?</string>
+    <string name="block_dialog_positive">Blokeeri</string>
+    <string name="block_dialog_negative">Katkesta</string>
+    <string name="block_dialog_description">Te ei saa rohkem kõnesid ega sõnumeid sellelt inimeselt.</string>
+    <string name="block_dialog_report_spam">Teata rämpspostist: <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_title">Keela %1$s?</string>
+    <string name="provider_disable_message">Keelates teenuse %1$s, ei ole teil enam helistaja ID\'d.</string>
+    <string name="provider_disable_spam_message">Keelates teenuse %1$s, ei ole teil enam rämpsposti kaitset ega helistaja ID\'d.</string>
+    <string name="powered_by_provider">Hoitakse töös <xliff:g id="provider">%s</xliff:g> poolt</string>
+    <string name="provider_help">"Tee %1$s kõnesid \nvahetades kõnerežiimi"</string>
+    <string name="provider_search_help">"Otsi %1$s kontakte \nvahetades režiimi"</string>
+    <string name="provider_button_help">"Sain aru"</string>
+    <string name="provider_voice_call">"%1$s kõne"</string>
+    <string name="provider_video_call">"%1$s videokõne"</string>
+    <string name="cm_permission_place_call">Luba teha kõnet.</string>
+    <string name="search_shortcut_view_note">Kuva märkus</string>
+    <string name="note_mod_settings_summary">Tee kõikjal märkmeid</string>
+    <string name="callerinfo_provider_status_disabling">Keelamine</string>
+    <string name="show_dialpad_at_start_title">Näita avades numbrilauda</string>
+</resources>

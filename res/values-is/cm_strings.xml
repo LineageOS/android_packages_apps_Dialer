@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="preference_category_t9_dialpad_search">Dialpad T9 leit</string>
+    <string name="t9_search_input_locale">T9 leitarinntak</string>
+    <string name="forward_lookup_provider_title">Framvirk uppflettiþjónusta (forward lookup)</string>
+    <string name="people_lookup_provider_title">Uppflettiþjónusta fyrir fólk</string>
+    <string name="call_log_action_block">Loka á hringjanda</string>
+    <string name="speed_dial_unassigned_dialog_message">Engin flýtivalsaðgerð er úthlutuð á talnalykilinn \'<xliff:g id="number">%s</xliff:g>\'. Myndirðu vilja úthluta aðgerð núna?</string>
+    <string name="callStatsDetailTitle">Nánari tölfræði símtals</string>
+    <string name="recent_calls_no_items_in_range">Símtalaskráin inniheldur engin símtöl á völdu tímabili.</string>
+    <string name="invalid_number_text">"%1$s gat ekki hringt þetta símtal. Er númerið rétt?"</string>
+    <string name="empty_dialpad_t9_example">Þú getur sett inn símanúmer eða\nleitað að tengilið</string>
+    <string name="callerinfo_provider_auth_access"><xliff:g id="provider_name">%s</xliff:g> mun fá aðgang að tengiliðunum þínum, skilaboðasniði og Cyanogen OS notandaaðgangnum, sem gæti innihaldið tölvupóstfangið þitt.</string>
+    <string name="callerinfo_provider_auth_desc">Velkomin! Myndir þú vilja nota <xliff:g id="provider_name">%s</xliff:g> til að auðkenna óþekkta hringjendur og loka á óumbeðin símtöl?</string>
+    <string name="callerinfo_provider_auth_desc_no_spam">Velkomin! Myndir þú vilja nota <xliff:g id="provider_name">%s</xliff:g> til að auðkenna óþekkta hringjendur?</string>
+    <string name="callerinfo_provider_summary">Auðkennir óþekkta hringjendur og ruslsímtöl</string>
+    <string name="callerinfo_provider_summary_no_spam">Auðkennir óþekkta hringjendur</string>
+    <string name="silence_spam_title">Þagga niður í ruslsímtölum</string>
+    <string name="silence_spam_summary">Aldrei láta ruslsímtöl ná í gegn</string>
+    <string name="block_hidden_title">Útiloka falin símanúmer</string>
+    <string name="block_hidden_summary">Líta á falin símanúmer sem rusl</string>
+    <string name="block_dialog_title">Útiloka þennan hriingjanda?</string>
+    <string name="block_dialog_description">Þú munt ekki lengur fá símtöl eða skilaboð frá þessum notanda.</string>
+    <string name="block_dialog_report_spam">Tilkynna sem ruslpóst til <xliff:g id="provider">%s</xliff:g></string>
+    <string name="provider_disable_message">Með því að gera %1$s óvirkt, muntu ekki vera með hringjandaauðkenni.</string>
+    <string name="provider_disable_spam_message">Með því að gera %1$s óvirkt, muntu ekki vera með varnir gegn ruslhringingum eða vera með hringjandaauðkenni.</string>
+    <string name="provider_help">"Hringdu %1$s með því\nað skipta hér um ham"</string>
+    <string name="provider_search_help">"Leita að tengiliðum %1$s með því\nað skipta hér um ham"</string>
+    <string name="provider_voice_call">"%1$s raddsímtal"</string>
+    <string name="cm_permission_place_call">Til að hringja, skaltu virkja aðgangsheimildir síma.</string>
+    <string name="show_dialpad_at_start_title">Birta númeraskífu í upphafi</string>
+</resources>
