@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_error_activating_title">A’ gnìomhachadh post-gutha lèirsinneach</string>
+  <string name="voicemail_error_activating_message">Dh’fhaoidte nach fhaigh thu brathan air post-gutha gus an deach am post-gutha lèirsinneach a ghnìomhachadh gu slàn. Cuir fòn gun phost-gutha a dh’fhaighinn teachdaireachdan ùra gus am bi am post-gutha lèirsinneach air a ghnìomhachadh gu slàn.</string>
+  <string name="voicemail_error_not_activate_no_signal_title">Cha ghabh am post-gutha lèirsinneach a ghnìomhachadh</string>
+  <string name="voicemail_error_not_activate_no_signal_message">Dèan cinnteach gu bheil ceangal ri lìonra mobile aig an fhòn agad is feuch ris a-rithist.</string>
+  <string name="voicemail_error_not_activate_no_signal_airplane_mode_message">Cuir am modh itealain dheth is feuch ris a-rithist.</string>
+  <string name="voicemail_error_no_signal_title">Chan eil ceangal ann</string>
+  <string name="voicemail_error_no_signal_message">Chan fhaigh thu brathan mu phuist-ghutha ùra. Ma tha thu air WiFi, ’s urrainn dhut sùil a thoirt air a’ phost-ghutha ma nì thu sioncronachadh an-dràsta.</string>
+  <string name="voicemail_error_no_signal_airplane_mode_message">Chan fhaigh thu brathan mu phuist-ghutha ùra. Cuir am modh itealain dheth airson am post-gutha agad a shioncronachadh.</string>
+  <string name="voicemail_error_no_signal_cellular_required_message">Feumaidh am fòn agad ceangal dàta mobile airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_activation_failed_title">Cha ghabh am post-gutha lèirsinneach a ghnìomhachadh</string>
+  <string name="voicemail_error_activation_failed_message">’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_no_data_title">Cha ghabh am post-gutha lèirsinneach ùrachadh</string>
+  <string name="voicemail_error_no_data_message">Feuch ris a-rithist nuair a bhios an ceangal WiFi no dàta mobile nas fheàrr. ’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_no_data_cellular_required_message">Feuch ris a-rithist nuair a bhios an ceangal dàta mobile nas fheàrr. ’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_bad_config_title">Cha ghabh am post-gutha lèirsinneach ùrachadh</string>
+  <string name="voicemail_error_bad_config_message">’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_communication_title">Cha ghabh am post-gutha lèirsinneach ùrachadh</string>
+  <string name="voicemail_error_communication_message">’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_server_connection_title">Cha ghabh am post-gutha lèirsinneach ùrachadh</string>
+  <string name="voicemail_error_server_connection_message">’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_server_title">Cha ghabh am post-gutha lèirsinneach ùrachadh</string>
+  <string name="voicemail_error_server_message">’S urrainn dhut fhathast fòn a chur airson sùil a thoirt air a’ phost-ghutha.</string>
+  <string name="voicemail_error_inbox_near_full_title">Tha am bogsa a-steach agad cha mhòr làn</string>
+  <string name="voicemail_error_inbox_near_full_message">Chan urrainn dhut post-gutha ùr fhaighinn ma tha am bogsa a-steach agad làn.</string>
+  <string name="voicemail_error_inbox_full_title">Cha ghabh am post-gutha ùr fhaighinn</string>
+  <string name="voicemail_error_inbox_full_message">Tha am bogsa a-steach agad làn. Feuch an sguab thu às teachdaireachd no dhà ach am faigh thu post-gutha ùr.</string>
+  <string name="voicemail_error_inbox_full_turn_archive_on_title">Cuir stòras a bharrachd air is dèan lethbhreac-glèidhidh</string>
+  <string name="voicemail_error_inbox_full_turn_archive_on_message">Tha am bogsa-puist agad làn. Airson àite a shaoradh, cuir air stòras a bharrachd ach an urrainn dha Google teachdaireachdan nam post-gutha agad a stiùireadh is lethbhreac-glèidhidh a dhèanamh dhiubh.</string>
+  <string name="voicemail_error_inbox_almost_full_turn_archive_on_title">Cuir stòras a bharrachd air is dèan lethbhreac-glèidhidh</string>
+  <string name="voicemail_error_inbox_almost_full_turn_archive_on_message">Tha am bogsa-puist agad cha mhòr làn. Airson àite a shaoradh, cuir air stòras a bharrachd ach an urrainn dha Google teachdaireachdan nam post-gutha agad a stiùireadh is lethbhreac-glèidhidh a dhèanamh dhiubh.</string>
+  <string name="voicemail_error_pin_not_set_title">Suidhich PIN a’ phuist-ghutha agad</string>
+  <string name="voicemail_error_pin_not_set_message">Feumaidh tu PIN puist-ghutha gach turas a chuireas tu fòn airson am post-gutha agad inntrigeadh.</string>
+  <string name="voicemail_action_turn_off_airplane_mode">Roghainnean a’ mhodh itealain</string>
+  <string name="voicemail_action_set_pin">Suidhich am PIN</string>
+  <string name="voicemail_action_retry">Feuch ris a-rithist</string>
+  <string name="voicemail_action_turn_archive_on">Cuir air</string>
+  <string name="voicemail_action_dimiss">Diùlt</string>
+  <string name="voicemail_action_sync">Sioncronaich</string>
+  <string name="voicemail_action_call_voicemail">Cuir fòn gun phost-gutha</string>
+  <string name="voicemail_action_call_customer_support">Cuir fòn gu sgioba taic nan custamairean</string>
+  <string name="vvm3_error_vms_dns_failure_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vmg_dns_failure_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_spg_dns_failure_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vms_no_cellular_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_vmg_no_cellular_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_spg_no_cellular_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_vms_timeout_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vmg_timeout_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_status_sms_timeout_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_subscriber_blocked_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_unknown_user_title">Suidhich am post-gutha</string>
+  <string name="vvm3_error_unknown_device_title">Post-gutha</string>
+  <string name="vvm3_error_invalid_password_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_mailbox_not_initialized_title">Post-gutha lèirsinneach</string>
+  <string name="vvm3_error_service_not_provisioned_title">Post-gutha lèirsinneach</string>
+  <string name="vvm3_error_service_not_activated_title">Post-gutha lèirsinneach</string>
+  <string name="vvm3_error_user_blocked_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_subscriber_unknown_title">Tha am post-gutha lèirsinneach à comas</string>
+  <string name="vvm3_error_imap_getquota_error_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_imap_select_error_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_imap_error_title">Chaidh rudeigin ceàrr</string>
+  <string name="verizon_terms_and_conditions_title">Cuir am post-gutha lèirsinneach air</string>
+  <string name="dialer_terms_and_conditions_title">Cuir am post-gutha lèirsinneach air</string>
+  <string name="dialer_terms_and_conditions_existing_user_title">Gleus ùr! Leugh am post-gutha agad</string>
+  <string name="dialer_terms_and_conditions_for_verizon_1.0">        Faic na teachdaireachdan agad is èist riutha gun fheum air gairm a chur dhan phost-ghutha.
+  </string>
+  <string name="dialer_terms_and_conditions_existing_user_ack">Ceart ma-thà, tha mi agaibh</string>
+  <string name="dialer_terms_and_conditions_existing_user_decline">Diùlt</string>
+  <string name="terms_and_conditions_decline_dialog_title">A cuir thu am post-gutha lèirsinneach à comas?</string>
+  <string name="verizon_terms_and_conditions_decline_dialog_message">Thèid am post-gutha lèirsinneach a chur à comas ma dhiùltas tu na teirmichean is cumhaichean.</string>
+  <string name="verizon_terms_and_conditions_decline_dialog_downgrade">Cuir à comas</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_message">Thèid am post-gutha lèirsinneach a chur à comas ma chuireas tu am post-gutha lèirsinneach dheth.</string>
+  <string name="dialer_terms_and_conditions_decline_dialog_downgrade">Cuir à comas</string>
+  <string name="verizon_terms_and_conditions_decline_set_pin_dialog_message">Chan fhaigh thu grèim air a’ phost-ghutha ach ma chuireas tu fòn gu *86. Suidhich PIN ùr dhan phost-ghutha airson leantainn air adhart.</string>
+  <string name="verizon_terms_and_conditions_decline_set_pin_dialog_set_pin">Suidhich am PIN</string>
+</resources>

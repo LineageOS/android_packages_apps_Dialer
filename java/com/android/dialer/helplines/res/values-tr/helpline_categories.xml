@@ -34,12 +34,12 @@
     <string name="helpline_category_family">Aile</string>
     <string name="helpline_category_gambling">Kumar</string>
     <string name="helpline_category_gender">Cinsiyet</string>
-    <string name="helpline_category_generic">Genel</string>
+    <string name="helpline_category_generic">Jenerik</string>
     <string name="helpline_category_hiv">HIV</string>
     <string name="helpline_category_human_rights">İnsan hakları</string>
     <string name="helpline_category_human_trafficking">İnsan kaçakçılığı</string>
     <string name="helpline_category_immigration">Göçmenlik</string>
-    <string name="helpline_category_legal_aid">Legal destek</string>
+    <string name="helpline_category_legal_aid">Yasal destek</string>
     <string name="helpline_category_lgbtq">LGBTQ+</string>
     <string name="helpline_category_men">Erkek</string>
     <string name="helpline_category_mental_health">Akıl sağlığı</string>

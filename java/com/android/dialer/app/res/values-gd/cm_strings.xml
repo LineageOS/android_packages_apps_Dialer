@@ -18,8 +18,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_category_title">Am broinn gairme</string>
     <string name="incall_enable_dnd_title">Cuir an comas “Na bris a-steach orm” rè ghairmean</string>
-    <string name="incall_vibrate_outgoing_title">Dèan crith nuair a thig freagairt a-steach</string>
-    <string name="incall_vibrate_call_waiting_title">Dèan crith nuair a bhios gairm a’ feitheamh</string>
+    <string name="incall_vibrate_outgoing_title">Nì freagairt a-steach crith</string>
+    <string name="incall_vibrate_call_waiting_title">Nì gairm a’ feitheamh crith</string>
     <string name="incall_vibrate_hangup_title">Dèan crith nuair a thig gairm gu crìch</string>
     <string name="incall_vibrate_45_title">Dèan crith gach mionaid</string>
     <string name="incall_vibrate_45_summary">Nì seo crith an 45mh diog aig gach mionaid rè gairmean a-mach</string>

@@ -26,6 +26,8 @@
     <string name="helpline_category_children">어린이</string>
     <string name="helpline_category_crime">범죄</string>
     <string name="helpline_category_crime_victims">범죄피해자</string>
+    <string name="helpline_category_corruption">부패</string>
+    <string name="helpline_category_discrimination">차별</string>
     <string name="helpline_category_domestic_violence">가정폭력</string>
     <string name="helpline_category_drugs">약물</string>
     <string name="helpline_category_family">가족</string>
@@ -54,6 +56,7 @@
     <string name="helpline_category_soldiers">군인</string>
     <string name="helpline_category_suicide">자살 예방</string>
     <string name="helpline_category_trans">트랜스젠더</string>
+    <string name="helpline_category_veterans">베테랑</string>
     <string name="helpline_category_violence">폭력</string>
     <string name="helpline_category_war">전쟁</string>
     <string name="helpline_category_women">여성</string>

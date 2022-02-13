@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2012 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_home">Cuir fòn gun dachaigh</string>
+    <string name="call_mobile">Cuir fòn gu àireamh mobile</string>
+    <string name="call_work">Cuir fòn gun obair</string>
+    <string name="call_fax_work">Cuir fòn gu facs na h-obrach</string>
+    <string name="call_fax_home">Cuir fòn gu facs na dachaighe</string>
+    <string name="call_pager">Cuir fòn gu pèidsear</string>
+    <string name="call_other">Cuir fòn</string>
+    <string name="call_callback">Cuir fòn gun àireamh fònaidh air ais</string>
+    <string name="call_car">Cuir fòn gun chàr</string>
+    <string name="call_company_main">Cuir fòn gu prìomh-àireamh na companaidh</string>
+    <string name="call_isdn">Cuir fòn gu ISDN</string>
+    <string name="call_main">Cuir fòn gun phrìomh-àireamh</string>
+    <string name="call_other_fax">Cuir fòn gu facs</string>
+    <string name="call_radio">Cuir fòn gu rèidio</string>
+    <string name="call_telex">Cuir fòn gu telex</string>
+    <string name="call_tty_tdd">Cuir fòn gu TTY/TDD</string>
+    <string name="call_work_mobile">Cuir fòn gu àireamh mobile na h-obrach</string>
+    <string name="call_work_pager">Cuir fòn gu pèidsear na h-obrach</string>
+    <string name="call_mms">Cuir fòn gu àireamh MMS</string>
+    <string name="sms_home">Cuir teacsa dhachaigh</string>
+    <string name="sms_mobile">Cuir teacsa gu àireamh mobile</string>
+    <string name="sms_work">Cuir teacsa gun obair</string>
+    <string name="sms_fax_work">Cuir teacsa gu facs na h-obrach</string>
+    <string name="sms_fax_home">Cuir teacsa gu facs na dachaighe</string>
+    <string name="sms_pager">Cuir teacsa gu pèidsear</string>
+    <string name="sms_other">Cuir teacsa</string>
+    <string name="sms_callback">Cuir teacsa gun àireamh teacsa air ais</string>
+    <string name="sms_car">Cuir teacsa gun chàr</string>
+    <string name="sms_company_main">Cuir teacsa gu prìomh-àireamh na companaidh</string>
+    <string name="sms_isdn">Cuir teacsa gu ISDN</string>
+    <string name="sms_main">Cuir teacsa gun phrìomh-àireamh</string>
+    <string name="sms_other_fax">Cuir teacsa gu facs</string>
+    <string name="sms_radio">Cuir teacsa gu rèidio</string>
+    <string name="sms_telex">Cuir teacsa gu telex</string>
+    <string name="sms_tty_tdd">Cuir teacsa gu TTY/TDD</string>
+    <string name="sms_work_mobile">Cuir teacsa gu àireamh mobile na h-obrach</string>
+    <string name="sms_work_pager">Cuir teacsa gu pèidsear na h-obrach</string>
+    <string name="sms_mms">Cuir teacsa gu àireamh MMS</string>
+    <string name="clearFrequentsConfirmation_title">Am falamhaich thu an conaltradh tric?</string>
+    <string name="clearFrequentsConfirmation">Falamhaichidh tu liosta a’ chonaltraidh thric
+        an an aplacaidean an luchd-aithne ’s an fhòn agus feumaidh aplacaidean puist-d roghainnean nan seòlaidhean agad ionnsachadh
+        a-rithist.
+    </string>
+    <string name="clearFrequentsProgress_title">A’ falamhachadh a’ chonaltraidh thric…</string>
+    <string name="status_available">An làthair</string>
+    <string name="status_away">Air falbh</string>
+    <string name="status_busy">Trang</string>
+    <string name="contactsList">Luchd-aithne</string>
+    <string name="contact_suggestions">Brod nam molaidhean</string>
+    <string name="local_invisible_directory">Eile</string>
+    <string name="directory_search_label">Eòlaire</string>
+    <string name="directory_search_label_work">Eòlaire na h-obrach</string>
+    <string name="local_search_label">A h-uile neach-aithne</string>
+    <string name="local_suggestions_search_label">Molaidhean</string>
+    <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mise</string>
+    <string name="missing_name">(Gun ainm)</string>
+    <string msgid="2795575601596468581" name="description_view_contact_detail">Seall an neach-aithne</string>
+    <string name="list_filter_phones">A h-uile neach-aithne le àireamh fòn</string>
+    <string name="list_filter_phones_work">Luchd-aithne aig pròifil na h-obrach</string>
+    <string name="view_updates_from_group">Seall na h-ùrachaidhean</string>
+    <string name="account_phone">Air an uidheam a-mhàin, gun sioncronachadh</string>
+    <string name="nameLabelsGroup">Ainm</string>
+    <string name="nicknameLabelsGroup">Far-ainm</string>
+    <string name="full_name">Ainm</string>
+    <string name="name_given">Ainm</string>
+    <string name="name_family">Sloinneadh</string>
+    <string name="name_prefix">Ro-leasachan ainm</string>
+    <string name="name_middle">Ainm meadhanach</string>
+    <string name="name_suffix">Iar-leasachan ainm</string>
+    <string name="name_phonetic">Tar-litreachadh an ainm</string>
+    <string name="name_phonetic_given">Tar-litreachadh an ainm</string>
+    <string name="name_phonetic_middle">Tar-litreachadh an ainm mheadhanaich</string>
+    <string name="name_phonetic_family">Tar-litreachadh an t-sloinnidh</string>
+    <string name="phoneLabelsGroup">Fòn</string>
+    <string name="emailLabelsGroup">Post-d</string>
+    <string name="postalLabelsGroup">Seòladh</string>
+    <string name="imLabelsGroup">Grad-theachdaireachd</string>
+    <string name="organizationLabelsGroup">Buidheann</string>
+    <string name="relationLabelsGroup">Dàimh</string>
+    <string name="eventLabelsGroup">Ceann-latha sònraichte</string>
+    <string name="sms">Teachdaireachd teacsa</string>
+    <string name="postal_address">Seòladh</string>
+    <string name="ghostData_company">Companaidh</string>
+    <string name="ghostData_title">Tiotal</string>
+    <string name="label_notes">Nòtaichean</string>
+    <string name="websiteLabelsGroup">Làrach-lìn</string>
+    <string name="groupsLabel">Buidhnean</string>
+    <string name="email_home">Cuir post-d dhachaigh</string>
+    <string name="email_mobile">Cuir post-d gun t-seòladh mobile</string>
+    <string name="email_work">Cuir post-d gu seòladh na h-obrach</string>
+    <string name="email_other">Cuir post-d</string>
+    <string name="email_custom">Cuir post-d gu <xliff:g id="custom">%s</xliff:g></string>
+    <string name="email">Cuir post-d</string>
+    <string name="postal_street">Sràid</string>
+    <string name="postal_city">Baile</string>
+    <string name="postal_region">Stàit</string>
+    <string name="postal_postcode">Còd-puist</string>
+    <string name="postal_country">Dùthaich</string>
+    <string name="map_home">Seall seòladh na dachaighe</string>
+    <string name="map_work">Seall seòladh na h-obrach</string>
+    <string name="map_other">Seall an seòladh</string>
+    <string name="chat_aim">Cabadaich le AIM</string>
+    <string name="chat_msn">Cabadaich le Windows Live</string>
+    <string name="chat_yahoo">Cabadaich le Yahoo</string>
+    <string name="chat_skype">Cabadaich le Skype</string>
+    <string name="chat_qq">Cabadaich le QQ</string>
+    <string name="chat_gtalk">Cabadaich le Google Talk</string>
+    <string name="chat_icq">Cabadaich le ICQ</string>
+    <string name="chat_jabber">Cabadaich le Jabber</string>
+    <string name="chat">Cabadaich</string>
+    <string name="list_filter_all_accounts">A h-uile neach-aithne</string>
+    <string name="listCustomView">An luchd-aithne san t-sealladh ghnàthaichte</string>
+    <string name="listSingleContact">Aon neach-aithne</string>
+    <string name="display_options_sort_list_by">Seòrsaich a-rèir</string>
+    <string name="display_options_sort_by_given_name">Ainm</string>
+    <string name="display_options_sort_by_family_name">Sloinneadh</string>
+    <string name="display_options_view_names_as">Fòrmat an ainm</string>
+    <string name="display_options_view_given_name_first">Ainm an toiseach</string>
+    <string name="display_options_view_family_name_first">Sloinneadh an toiseach</string>
+    <string name="menu_clear_frequents">Falamhaich an fheadhainn thric</string>
+    <string name="action_menu_back_from_search">sguir dhen lorg</string>
+    <string name="description_clear_search">Falamhaich an lorg</string>
+    <string name="select_account_dialog_title">Cunntas</string>
+    <string name="set_default_account">Cleachd seo airson fòn a chur an-còmhnaidh</string>
+    <string name="select_phone_account_for_calls">Tagh SIM dhan ghairm seo</string>
+    <string name="select_phone_account_for_calls_remember">Cuimhnich an roghainn seo</string>
+    <string name="call_with_a_note">Cuir fòn le nòta</string>
+    <string name="call_subject_hint">Sgrìobh nòta a chuireas tu an cois na gairme…</string>
+    <string name="description_search_video_call">Gairm video</string>
+    <string name="description_search_call_and_share">Co-roinn is cuir fòn</string>
+</resources>

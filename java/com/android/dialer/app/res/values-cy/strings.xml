@@ -168,7 +168,7 @@
     <item>Arferol</item>
     <item>Hir</item>
   </string-array>
-  <string name="respond_via_sms_setting_title">Ymatebion cyflym</string>
+  <string name="respond_via_sms_setting_title">Atebion cyflym</string>
   <string name="call_settings_label">Galwadau</string>
   <string name="manage_blocked_numbers_label">Rhifau wedi\'u rhwystro</string>
   <string name="voicemail_settings_label">Lleisbost</string>

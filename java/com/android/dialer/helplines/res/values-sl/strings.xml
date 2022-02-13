@@ -21,7 +21,7 @@
     <string name="helplines_help">Pomoč</string>
     <string name="helplines_help_title">Te so varne za klic</string>
     <string name="helplines_help_message">Nobena od teh številk ne bo prikazana v vaši zgodovini klicev.\nKliknite na kateri koli predmet za več informacij</string>
-    <string name="helplines_help_more_message">Seznam tel. št. za pomoč je izpolnjen s podatki, ki so posodobljeni ročno s strani sodelavcev. Če opazite manjkajoče ali napačne podatke, nas prosim kontaktirajte na www.lineageos.org</string>
+    <string name="helplines_help_more_message">Seznam tel. št. za pomoč je izpolnjen s podatki, ki so posodobljeni ročno s strani sodelavcev. Če opazite manjkajoče ali napačne podatke, nas prosimo kontaktirajte na www.lineageos.org</string>
     <string name="helpline_button_more">Več</string>
     <string name="unknown_helpline_name">Neznana organizacija</string>
     <string name="helpline_name">Ime</string>
