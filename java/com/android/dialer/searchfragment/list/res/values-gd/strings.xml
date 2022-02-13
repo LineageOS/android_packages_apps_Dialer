@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2012 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,11 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<resources>
-  <string name="favorites_header">Favoritos</string>
-  <string name="speed_dial_add_button_text">Amestar</string>
-  <string name="speed_dial_remember_this_choice">Recordar esta opción</string>
-  <string name="disambig_option_video_call">Videollamada</string>
-  <string name="disambig_option_voice_call">Llamada</string>
-  <string name="add_favorite_activity_title">Amestar Favoritu</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="search_shortcut_create_new_contact">Cruthaich neach-aithne ùr</string>
+  <string name="search_shortcut_add_to_contact">Cuir ri neach-aithne</string>
+  <string name="search_shortcut_send_sms_message">Cuir SMS</string>
+  <string name="search_shortcut_make_video_call">Dèan gairm video</string>
 </resources>

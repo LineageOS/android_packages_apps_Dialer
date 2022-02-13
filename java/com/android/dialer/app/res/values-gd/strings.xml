@@ -156,7 +156,7 @@
   <string name="sounds_and_vibration_title">Na fuaimean ’s a’ chrith</string>
   <string name="accessibility_settings_title">So-ruigsinneachd</string>
   <string name="ringtone_title">Seirm an fhòn</string>
-  <string name="vibrate_on_ring_title">\"Dèan crith ach airson gairmean cuideachd</string>
+  <string name="vibrate_on_ring_title">\"Nì gairmean crith cuideachd</string>
   <string name="dtmf_tone_enable_title">Fuaimean pada nan iuchraichean</string>
   <string name="dtmf_tone_length_title">Faide nam fuaimean air pada nan iuchraichean</string>
   <string-array name="dtmf_tone_length_entries">
