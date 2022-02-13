@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="audioroute_bluetooth">Bluetooth</string>
+  <string name="audioroute_speaker">Glaodhaire</string>
+  <string name="audioroute_phone">Fòn</string>
+  <string name="audioroute_headset">Seata-cinn uèirichte</string>
+</resources>

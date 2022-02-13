@@ -15,6 +15,7 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="nearby_places">Àitichean faisg ort</string>
   <string name="search_location_permission">Airson fiosrachadh conaltraidh nan àitichean faisg ort, ceadaich inntrigeadh dhan ionad agad.</string>
   <string name="nearby_places_allow">Ceadaich</string>
   <string name="nearby_places_dismiss">Leig seachad</string>

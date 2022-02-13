@@ -15,5 +15,7 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="network_name_wifi">WiFi</string>
+  <string name="network_name_mobile">Mobile</string>
   <string name="content_description_overflow">Barrachd roghainnean</string>
 </resources>

@@ -25,8 +25,8 @@
   <string name="gallery_item_description_no_date">delwedd</string>
   <string name="camera_media_failure">Methwyd â llwytho llun camera</string>
   <string name="allow">Caniatáu</string>
-  <string name="camera_permission_text">I dynnu llun, rho fynediad i Camera</string>
-  <string name="gallery_permission_text">I rannu llun, rho fynediad i Cyfryngau</string>
+  <string name="camera_permission_text">I dynnu llun, rho fynediad at Camera</string>
+  <string name="gallery_permission_text">I rannu llun, rho fynediad at Cyfryngau</string>
   <string name="description_call_composer_camera">Tynnu llun</string>
   <string name="description_call_composer_photo">Dewis llun</string>
   <string name="description_call_composer_message">Anfon neges</string>
