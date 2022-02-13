@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+  <string name="incall_label_videocall">Gairm video</string>
+  <string name="incall_label_hold">Cùm</string>
+  <string name="incall_label_add_call">Cuir gairm ris</string>
+  <string name="incall_label_mute">Mùch</string>
+  <string name="incall_label_end_call">Cuir crìoch air a’ ghairm</string>
+  <string name="incall_label_dialpad">Pada-iuchraichean</string>
+  <string name="incall_talkback_speaker_on">, tha e air</string>
+  <string name="incall_talkback_speaker_off">, tha e dheth</string>
+  <string name="incall_label_merge">Co-aonaich</string>
+  <string name="incall_label_manage">Stiùirich</string>
+  <string name="a11y_description_incall_label_manage_content">Stiùirich na gairmearan</string>
+  <string name="incall_label_swap">Suaip</string>
+  <string name="incall_note_sent">Chaidh an nòta a chur</string>
+</resources>

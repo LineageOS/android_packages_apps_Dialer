@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="videocall_remote_video_off">Tha a’ video aca dheth</string>
+  <string name="videocall_remote_video_on">Tha a’ video aca air</string>
+  <string name="videocall_remotely_held">Gairm ’ga cumail</string>
+  <string name="videocall_remotely_resumed">Chaidh leantainn air adhart leis a’ ghairm</string>
+  <string name="camera_permission_dialog_title">An ceadaich thu video?</string>
+  <string name="camera_permission_dialog_message">Tha aplacaid an fhòn airson an camara agad a chleachdadh airson gairmean video.</string>
+  <string name="camera_permission_dialog_positive_button">Ceadaich</string>
+  <string name="camera_permission_dialog_negative_button">Diùlt</string>
+</resources>

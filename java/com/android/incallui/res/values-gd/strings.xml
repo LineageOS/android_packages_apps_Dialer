@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2013 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="phoneAppLabel" product="default">Fòn</string>
+  <string name="inCallLabel" translate="false">InCallUI</string>
+  <string name="confCall">Gairm coinneimh</string>
+  <string name="call_lost">Thuit a’ ghairm</string>
+  <string name="wait_prompt_str">An cuir thu na tònaichean seo?\n</string>
+  <string name="pause_prompt_str">A’ cur thònaichean\n</string>
+  <string name="send_button">Cuir</string>
+  <string name="pause_prompt_yes">Cuiridh</string>
+  <string name="pause_prompt_no">Cha chuir</string>
+  <string name="wild_prompt_str">Cuir seo an àite na saothraige:</string>
+  <string name="caller_manage_header">Gairm coinneimh <xliff:g id="conf_call_time">%s</xliff:g></string>
+  <string name="voicemail_settings_number_label">Àireamh a’ phuist-ghutha</string>
+  <string name="notification_dialing">’Ga dhaithealadh</string>
+  <string name="notification_missedCallTicker">Dh’fhalbh gairm o <xliff:g id="missed_call_from">%s</xliff:g> ort</string>
+  <string name="notification_ongoing_call">Gairm a’ dol air adhart</string>
+  <string name="notification_ongoing_work_call">Gairm na h-obrach a’ dol air adhart</string>
+  <string name="notification_ongoing_call_wifi">Gairm WiFi a’ dol air adhart</string>
+  <string name="notification_ongoing_work_call_wifi">Gairm WiFi na h-obrach a’ dol air adhart</string>
+  <string name="notification_on_hold">’Ga chumail</string>
+  <string name="notification_incoming_call">Gairm a-steach</string>
+  <string name="notification_incoming_call_with_photo">Gairm a-steach le dealbh</string>
+  <string name="notification_incoming_call_with_message">Gairm a-steach le teachdaireachd</string>
+  <string name="notification_incoming_call_with_location">Gairm a-steach le ionad</string>
+  <string name="notification_incoming_call_with_photo_message">Gairm a-steach le dealbh ’s teachdaireachd</string>
+  <string name="notification_incoming_call_with_photo_location">Gairm a-steach le dealbh ’s ionad</string>
+  <string name="notification_incoming_call_with_message_location">Gairm a-steach le teachdaireachd ’s ionad</string>
+  <string name="notification_incoming_call_with_photo_message_location">Gairm a-steach le dealbh, teachdaireachd ’s ionad</string>
+  <string name="notification_incoming_call_attachments">Gairm a-steach le ceanglachain</string>
+  <string name="important_notification_incoming_call">Gairm chudromach a-steach</string>
+  <string name="important_notification_incoming_call_with_photo">Gairm chudromach a-steach le dealbh</string>
+  <string name="important_notification_incoming_call_with_message">Gairm chudromach a-steach le teachdaireachd</string>
+  <string name="important_notification_incoming_call_with_location">Gairm chudromach a-steach le ionad</string>
+  <string name="important_notification_incoming_call_with_photo_message">Gairm chudromach a-steach le dealbh ’s teachdaireachd</string>
+  <string name="important_notification_incoming_call_with_photo_location">Gairm chudromach a-steach le dealbh ’s ionad</string>
+  <string name="important_notification_incoming_call_with_message_location">Gairm chudromach a-steach le teachdaireachd ’s ionad</string>
+  <string name="important_notification_incoming_call_with_photo_message_location">Gairm chudromach a-steach le dealbh, teachdaireachd ’s ionad</string>
+  <string name="important_notification_incoming_call_attachments">Gairm chudromach a-steach le ceanglachain</string>
+  <string name="notification_incoming_work_call">Gairm na h-obrach a’ tighinn a-steach</string>
+  <string name="notification_incoming_call_wifi">Gairm WiFi a-steach</string>
+  <string name="notification_incoming_work_call_wifi">Gairm WiFi na h-obrach a-steach</string>
+  <string name="notification_incoming_spam_call">Gairm a-steach fo amharas spama</string>
+  <string name="notification_requesting_video_call">Iarrtas video a’ tighinn a-steach</string>
+  <string name="notification_network_selection_title">Chan eil seirbheis ann</string>
+  <string name="notification_network_selection_text">Chan eil an lìonra a thagh thu (<xliff:g id="operator_name">%s</xliff:g>) ri làimh</string>
+  <string name="notification_action_answer">Freagair</string>
+  <string name="notification_action_end_call">Cuir crìoch air</string>
+  <string name="notification_action_answer_video">Video</string>
+  <string name="notification_action_answer_voice">Guth</string>
+  <string name="notification_action_accept">Gabh ris</string>
+  <string name="notification_action_dismiss">Diùlt</string>
+  <string name="notification_external_call">Gairm a’ dol air adhart air uidheam eile</string>
+  <string name="notification_external_video_call">Gairm video a’ dol air adhart</string>
+  <string name="notification_take_call">Tog a’ ghairm</string>
+  <string name="notification_take_video_call">Tog a’ ghairm video</string>
+  <string name="incall_error_power_off">Airson gairm a chur, cuir am modh itealain dheth an toiseach.</string>
+  <string name="incall_error_emergency_only">Cha deach a chlàradh air lìonra.</string>
+  <string name="incall_error_out_of_service">Chan eil lìonra mobile ri làimh.</string>
+  <string name="incall_error_no_phone_number_supplied">Airson gairm a chur, cuir a-steach àireamh dhligheach.</string>
+  <string name="incall_error_call_failed">Cha ghabh gairm a dhèanamh.</string>
+  <string name="incall_status_dialed_mmi">A’ tòiseachadh air sreath MMI\u2026</string>
+  <string name="incall_error_supp_service_unknown">Chan eil taic ann ris an t-seirbheis seo.</string>
+  <string name="incall_error_supp_service_switch">Chan urrainn dhuinn leum a ghearradh gu gairm eile.</string>
+  <string name="incall_error_supp_service_separate">Chan urrainn dhuinn a’ ghairm a sgaradh.</string>
+  <string name="incall_error_supp_service_transfer">Cha ghabh a shìneadh air adhart.</string>
+  <string name="incall_error_supp_service_conference">Cha ghabh gairm coinneimh a dhèanamh.</string>
+  <string name="incall_error_supp_service_reject">Cha ghabh a’ ghairm a dhiùltadh.</string>
+  <string name="incall_error_supp_service_hangup">Cha ghabh crìoch a chur air a’ ghairm/na gairmean.</string>
+  <string name="emergency_enable_radio_dialog_title">Gairm-èiginn</string>
+  <string name="emergency_enable_radio_dialog_message">A’ cur an rèidio air…</string>
+  <string name="emergency_enable_radio_dialog_retry">Chan eil seirbheis ann. A’ feuchainn ris a-rithist\u2026</string>
+  <string name="dial_emergency_error">Cha ghabh gairm a dhèanamh. Chan eil <xliff:g id="non_emergency_number">%s</xliff:g> ’na h-àireamh-èiginn.</string>
+  <string name="dial_emergency_empty_error">Cha ghabh gairm a dhèanamh. Daitheal àireamh-èiginn.</string>
+  <string name="dialerKeyboardHintText">Cleachd am meur-chlàr airson daithealadh</string>
+  <string name="player_started">Thòisich an cluicheadair</string>
+  <string name="player_stopped">Stad an cluicheadair</string>
+  <string name="camera_not_ready">Chan eil an camara deiseil</string>
+  <string name="camera_ready">Tha an camara deiseil</string>
+  <string name="unknown_call_session_event">"Tachartas seisean gairm nach aithne dhuinn"</string>
+  <string name="other_settings">Roghainnean gairme eile</string>
+  <string name="goPrivate">dèan prìobhaideach</string>
+  <string name="selectContact">tagh neach-aithne</string>
+  <string name="preference_category_ringtone">Seirm ⁊ crith</string>
+  <string name="manageConferenceLabel">Stiùir a’ ghairm coinneimh</string>
+  <string name="emergency_call_dialog_number_for_display">Àireamh èiginn</string>
+  <string name="child_number">slighe <xliff:g example="650-555-1212" id="child_number">%s</xliff:g></string>
+  <string name="person_contact_context_title">Teachdaireachdan o chionn goirid</string>
+  <string name="business_contact_context_title">Fiosrachadh gnìomhachais</string>
+  <string name="distance_imperial_away"><xliff:g id="distance">%.1f</xliff:g> mi air falbh</string>
+  <string name="distance_metric_away"><xliff:g id="distance">%.1f</xliff:g> km air falbh</string>
+  <string name="display_address"><xliff:g id="street_address">%1$s</xliff:g>, <xliff:g id="locality">%2$s</xliff:g></string>
+  <string name="open_time_span"><xliff:g id="open_time">%1$s</xliff:g> – <xliff:g id="close_time">%2$s</xliff:g></string>
+  <string name="opening_hours"><xliff:g id="earlier_times">%1$s</xliff:g>, <xliff:g id="later_time">%2$s</xliff:g></string>
+  <string name="opens_tomorrow_at">Fosglaidh e a-màireach aig <xliff:g id="open_time">%s</xliff:g></string>
+  <string name="opens_today_at">Fosglaidh e an-diugh aig <xliff:g id="open_time">%s</xliff:g></string>
+  <string name="closes_today_at">Dùinidh e aig <xliff:g id="close_time">%s</xliff:g></string>
+  <string name="closed_today_at">Dhùin e an-diugh aig <xliff:g id="close_time">%s</xliff:g></string>
+  <string name="open_now">Fosgail an-dràsta</string>
+  <string name="closed_now">Dùinte an-dràsta</string>
+  <string name="non_spam_notification_title">An aithne dhut <xliff:g id="number">%1$s</xliff:g>?</string>
+  <string name="spam_notification_title">An e spama a th’ ann an <xliff:g id="number">%1$s</xliff:g>?</string>
+  <string name="spam_notification_block_report_toast_text">Chaidh <xliff:g id="number">%1$s</xliff:g> a bhacadh ’s aithris gur e spama a th’ ann.</string>
+  <string name="spam_notification_not_spam_toast_text">Chaidh aithris air <xliff:g id="number">%1$s</xliff:g> nach e spama a th’ ann.</string>
+  <string name="spam_notification_non_spam_call_collapsed_text">Thoir gnogag ’ga chur ris an luchd-aithne no a bhacadh àireamh spama.</string>
+  <string name="spam_notification_non_spam_call_expanded_text">Seo a’ chiad turas a chuir an àireamh seo fòn thugad. Mas e spama a bh’ ann, ’s urrainn dhut an àireamh seo a bhacadh agus aithris a dhèanamh oirre.</string>
+  <string name="spam_notification_spam_call_collapsed_text">Thoir gnogag airson aithris gur e ÀIREAMH CHÒIR a bh’ ann no a bhacadh.</string>
+  <string name="spam_notification_spam_call_expanded_text">Tha amharas oirnn gur e spama a tha seo. Mur e spama a bha sa ghairm seo, thoir gnogag air “ÀIREAMH CHÒIR” a dh’innse dhuinn mun mhearachd againn.</string>
+  <string name="spam_notification_report_spam_action_text">Bac ⁊ aithris</string>
+  <string name="spam_notification_add_contact_action_text">Cuir neach-aithne ris</string>
+  <string name="spam_notification_not_spam_action_text">Àireamh chòir</string>
+  <string name="spam_notification_block_spam_action_text">Bac an àireamh</string>
+  <string name="spam_notification_dialog_add_contact_action_text">Cuir ris an luchd-aithne</string>
+  <string name="spam_notification_dialog_block_report_spam_action_text">Nac ⁊ dèan aithris air spama</string>
+  <string name="spam_notification_dialog_was_not_spam_action_text">Àireamh chòir</string>
+  <string name="callFailed_simError">Gun SIM no mearachd SIM</string>
+  <string name="conference_caller_disconnect_content_description">Cuir crìoch air a’ ghairm</string>
+  <string name="conference_call_name">Gairm coinneimh</string>
+  <string name="generic_conference_call_name">Air an fhòn</string>
+  <string name="video_call_wifi_to_lte_handover_toast">Lean air a’ ghairm le dàta mobile…</string>
+  <string name="video_call_lte_to_wifi_failed_title">Cha b’ urrainn dhuinn leum a ghearradh dhan lìonra WiFi</string>
+  <string name="video_call_lte_to_wifi_failed_message">Fuirichidh a’ ghairm video air an lìonra mobile. Dh’fhaoidte
+    gun èirich tàillean dàta.
+  </string>
+  <string name="video_call_lte_to_wifi_failed_do_not_show">Na seall</string>
+</resources>

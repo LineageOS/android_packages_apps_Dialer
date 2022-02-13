@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="incall_calling_via_template">A’ cur gairm slighe <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="incall_connecting">A’ cur fòn…</string>
+  <string name="incall_transferring">’Ga thar-chur…</string>
+  <string name="incall_video_call_requesting">Gairm video…</string>
+  <string name="incall_wifi_video_call_requesting">Gairm video WiFi…</string>
+  <string name="incall_video_call_request_failed">Cha ghabh ceangal a dhèanamh</string>
+  <string name="incall_video_call_request_rejected">Chaidh a’ ghairm a dhiùltadh</string>
+  <string name="incall_video_call_request_timed_out">Dh’fhalbh an ùine air a’ ghairm</string>
+  <string name="incall_hanging_up">A’ cur crìoch air a’ ghairm</string>
+  <string name="incall_call_ended">Crìoch na gairm</string>
+  <string name="incall_remotely_held">’Ga chumail</string>
+  <string name="contact_grid_incoming_video_call">Gairm video o</string>
+  <string name="contact_grid_incoming_wifi_video_call">Gairm video WiFi o</string>
+  <string name="contact_grid_incoming_video_request">Iarrtas àrdachadh gu video o</string>
+  <string name="contact_grid_incoming_wifi_video_request">Iarrtas àrdachadh gu video WiFi o</string>
+  <string name="contact_grid_incoming_voice_call">Gairm o</string>
+  <string name="contact_grid_incoming_work_call">Gairm obrach o</string>
+  <string name="contact_grid_incoming_via_template">A’ tighinn a-steach slighe <xliff:g id="provider_name">%s</xliff:g></string>
+  <string name="contact_grid_incoming_suspected_spam">Tha amharas gur e spama a tha sa ghairm seo</string>
+  <string name="contact_grid_callback_number">Àireamh gairm air ais: <xliff:g id="dark_number">%1$s</xliff:g></string>
+</resources>
