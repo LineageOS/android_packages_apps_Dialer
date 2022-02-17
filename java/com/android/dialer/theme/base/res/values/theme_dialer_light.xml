@@ -47,7 +47,7 @@
     <item name="android:forceDarkAllowed">true</item>
     <!-- These values should be used to color all backgrounds. -->
     <item name="android:colorBackground">@color/dialer_background_color</item>
-    <item name="android:colorBackgroundFloating">@android:color/white</item>
+    <item name="android:colorBackgroundFloating">@color/dialer_background_floating</item>
     <item name="colorBackgroundSearchBar">@color/dialer_search_bar_color</item>
 
     <!-- These values should be used to set text color. -->
