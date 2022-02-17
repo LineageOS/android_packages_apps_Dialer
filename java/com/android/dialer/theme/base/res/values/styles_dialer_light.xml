@@ -34,6 +34,7 @@
     <item name="android:textColorSecondary">@color/settings_text_color_secondary</item>
     <item name="android:windowBackground">?android:attr/colorBackground</item>
     <item name="android:colorAccent">?android:attr/colorPrimary</item>
+    <item name="colorPrimary">@color/settings_primary</item>
   </style>
 
   <!-- TODO(a bug): This is only actively used in empty_content_view.xml. Move it there. -->
