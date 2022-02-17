@@ -15,12 +15,14 @@
   -->
 <resources>
   <!-- Essential theme colors -->
-  <color name="dialer_theme_color">#2A56C6</color>
+  <color name="dialer_theme_color">@android:color/system_accent1_400</color>
   <color name="dialer_theme_color_20pct">#332A56C6</color>
   <color name="dialer_theme_color_dark">@color/dialer_background_color</color>
-  <color name="dialer_secondary_color">#F50057</color>
-  <color name="dialer_background_color">#FAFAFA</color>
+  <color name="dialer_secondary_color">@android:color/system_accent3_400</color>
+  <color name="dialer_background_color">@android:color/system_neutral1_50</color>
+  <color name="dialer_background_floating">@android:color/system_neutral1_100</color>
   <color name="dialer_ripple_color">#1f000000</color>
-  <color name="dialer_search_bar_color">@color/google_grey_50</color>
-  <color name="settings_primary_dark">#1C3AA9</color>
+  <color name="dialer_search_bar_color">@android:color/system_neutral2_100</color>
+  <color name="settings_primary_dark">@android:color/system_accent2_200</color>
+  <color name="settings_primary">@color/settings_primary_dark</color>
 </resources>
