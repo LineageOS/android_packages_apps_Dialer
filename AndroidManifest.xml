@@ -137,7 +137,7 @@
 
         <activity
             android:name="com.android.contacts.common.dialog.CallSubjectDialog"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.CallSubjectDialogTheme"
             android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
