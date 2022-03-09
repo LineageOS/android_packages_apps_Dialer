@@ -29,10 +29,6 @@
         android:parentActivityName="com.android.dialer.app.settings.DialerSettingsActivity"
         android:theme="@style/SettingsStyle"
         android:windowSoftInputMode="stateVisible|adjustResize">
-      <intent-filter>
-        <action android:name="com.android.dialer.action.CHANGE_PIN"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-      </intent-filter>
     </activity>
     <activity
         android:name=".RecordVoicemailGreetingActivity"

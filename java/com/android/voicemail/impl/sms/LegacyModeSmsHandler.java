@@ -108,7 +108,7 @@ public class LegacyModeSmsHandler {
               PreCall.getIntent(
                   context,
                   CallIntentBuilder.forVoicemail(
-                      phoneAccountHandle, CallInitiationType.Type.LEGACY_VOICEMAIL_NOTIFICATION)),
+                      CallInitiationType.Type.LEGACY_VOICEMAIL_NOTIFICATION)),
               PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     } else {
       Intent launchVoicemailSettingsIntent =
