@@ -16,11 +16,11 @@
 
 package com.android.incallui;
 
-import static android.app.admin.DevicePolicyResources.Strings.Dialer.NOTIFICATION_INCOMING_WORK_CALL_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Dialer.NOTIFICATION_ONGOING_WORK_CALL_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Dialer.NOTIFICATION_WIFI_WORK_CALL_LABEL;
 import static android.telecom.Call.Details.PROPERTY_HIGH_DEF_AUDIO;
 import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENTERPRISE_CALL;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_INCOMING_WORK_CALL_TITLE;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_ONGOING_WORK_CALL_TITLE;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_WIFI_WORK_CALL_LABEL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_SPEAKEASY_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
@@ -737,7 +737,7 @@ public class StatusBarNotifier
   private String getOngoingCallNotificationMessage(boolean isWorkCall) {
     if (isWorkCall) {
       DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-      return dpm.getString(NOTIFICATION_ONGOING_WORK_CALL_TITLE, () ->
+      return dpm.getResources().getString(NOTIFICATION_ONGOING_WORK_CALL_TITLE, () ->
               context.getString(R.string.notification_ongoing_work_call));
     } else {
       return context.getString(R.string.notification_ongoing_call);
@@ -747,7 +747,7 @@ public class StatusBarNotifier
   private String getIncomingCallNotificationMessage(boolean isWorkCall) {
     if (isWorkCall) {
       DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-      return dpm.getString(NOTIFICATION_INCOMING_WORK_CALL_TITLE, () ->
+      return dpm.getResources().getString(NOTIFICATION_INCOMING_WORK_CALL_TITLE, () ->
               context.getString(R.string.notification_incoming_work_call));
     } else {
       return context.getString(R.string.notification_incoming_call);
@@ -757,7 +757,7 @@ public class StatusBarNotifier
   private String getWifiBrand(boolean isWorkCall) {
     if (isWorkCall) {
       DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-      return dpm.getString(NOTIFICATION_WIFI_WORK_CALL_LABEL, () ->
+      return dpm.getResources().getString(NOTIFICATION_WIFI_WORK_CALL_LABEL, () ->
               context.getString(R.string.notification_call_wifi_work_brand));
     } else {
       return context.getString(R.string.notification_call_wifi_brand);
