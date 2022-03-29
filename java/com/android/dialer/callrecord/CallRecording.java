@@ -66,7 +66,7 @@ public final class CallRecording implements Parcelable {
   public static ContentValues generateMediaInsertValues(String fileName, long creationTime) {
     final ContentValues cv = new ContentValues(5);
 
-    cv.put(MediaStore.Audio.Media.RELATIVE_PATH, "Music/Call Recordings");
+    cv.put(MediaStore.Audio.Media.RELATIVE_PATH, "Recordings/Call recordings");
     cv.put(MediaStore.Audio.Media.DISPLAY_NAME, fileName);
     cv.put(MediaStore.Audio.Media.DATE_TAKEN, creationTime);
     cv.put(MediaStore.Audio.Media.IS_PENDING, 1);
