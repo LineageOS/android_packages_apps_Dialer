@@ -15,7 +15,7 @@
  */
 package com.android.dialer.app.calllog;
 
-import static android.app.admin.DevicePolicyResources.Strings.Dialer.NOTIFICATION_MISSED_WORK_CALL_TITLE;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_MISSED_WORK_CALL_TITLE;
 
 import android.app.Notification;
 import android.app.Notification.Builder;
@@ -172,7 +172,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
           callLogNotificationsQueryHelper.getContactInfo(
               call.number, call.numberPresentation, call.countryIso);
       if (contactInfo.userType == ContactsUtils.USER_TYPE_WORK) {
-        titleText = context.getSystemService(DevicePolicyManager.class).getString(
+        titleText = context.getSystemService(DevicePolicyManager.class).getResources().getString(
                 NOTIFICATION_MISSED_WORK_CALL_TITLE,
                 () -> context.getString(R.string.notification_missedWorkCallTitle));
       } else {
