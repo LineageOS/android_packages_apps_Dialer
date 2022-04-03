@@ -16,19 +16,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="hour">
-        <item quantity="one">1 h</item>
-        <item quantity="other">%d h</item>
+        <item quantity="one">1 სთ</item>
+        <item quantity="other">%d სთ</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 m</item>
-        <item quantity="other">%d m</item>
+        <item quantity="one">1 წთ</item>
+        <item quantity="other">%d წთ</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 s</item>
-        <item quantity="other">%d s</item>
+        <item quantity="one">1 წმ</item>
+        <item quantity="other">%d წმ</item>
     </plurals>
     <plurals name="call">
-        <item quantity="one">1 llamada</item>
-        <item quantity="other">%d llamaes</item>
+        <item quantity="one">1 ზარი</item>
+        <item quantity="other">%d ზარი</item>
     </plurals>
 </resources>

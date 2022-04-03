@@ -21,6 +21,7 @@
     <string name="helplines_help">Aiuto</string>
     <string name="helplines_help_title">Questi numeri sono sicuri da chiamare</string>
     <string name="helplines_help_message">Nessuno di questi numeri appare nella cronologia delle chiamate.\nTocca qualsiasi elemento per ottenere ulteriori informazioni</string>
+    <string name="helplines_help_more_message">L\'elenco numeri amico è riempito dalle informazioni che vengono aggiornate manualmente dai contributori. Se si incontrano informazioni mancanti o sbagliate, non esitate a contattarci su <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Altro</string>
     <string name="unknown_helpline_name">Organizzazione sconosciuta</string>
     <string name="helpline_name">Nome</string>

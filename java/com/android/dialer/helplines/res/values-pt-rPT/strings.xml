@@ -21,6 +21,7 @@
     <string name="helplines_help">Ajuda</string>
     <string name="helplines_help_title">São seguras para ligar</string>
     <string name="helplines_help_message">Nenhum destes números aparece no seu histórico de chamadas.\nPode clicar em qualquer item para obter mais informações</string>
+    <string name="helplines_help_more_message">A lista de linhas de ajuda é preenchida com informações que são atualizadas manualmente por colaboradores. Se encontrar qualquer informação errada ou em falta, não hesite em contactar-nos em <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Mais</string>
     <string name="unknown_helpline_name">Organização desconhecida</string>
     <string name="helpline_name">Nome</string>

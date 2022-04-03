@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2013 The CyanogenMod Project
+     Copyright (C) 2013-2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,20 +15,9 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="hour">
-        <item quantity="one">1 h</item>
-        <item quantity="other">%d h</item>
+    <plurals name="play_recordings">
+        <item quantity="one">ჩანაწერის მოსმენა</item>
+        <item quantity="other">ჩანაწერების მოსმენა</item>
     </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 m</item>
-        <item quantity="other">%d m</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 s</item>
-        <item quantity="other">%d s</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 llamada</item>
-        <item quantity="other">%d llamaes</item>
-    </plurals>
+    <string name="call_playback_no_app_found_toast">პროგრამა ვერ მოიძებნა, შერჩეული ჩანაწერის გასაშვებად.</string>
 </resources>

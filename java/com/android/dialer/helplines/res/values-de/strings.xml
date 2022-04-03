@@ -21,6 +21,7 @@
     <string name="helplines_help">Hilfe</string>
     <string name="helplines_help_title">Folgende Angebote sind sicher anzurufen</string>
     <string name="helplines_help_message">Keine dieser Nummern erscheint in deiner Anrufliste.\nFür weitere Informationen kannst du auf einen Eintrag klicken</string>
+    <string name="helplines_help_more_message">Die Liste der Hilfe-Hotlines wird mit Informationen gefüllt, die von den Mitwirkenden manuell aktualisiert werden. Solltest du auf fehlende oder falsche Informationen stoßen, kannst du uns gerne unter <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> kontaktieren.</string>
     <string name="helpline_button_more">Mehr</string>
     <string name="unknown_helpline_name">Unbekannte Organisation</string>
     <string name="helpline_name">Name</string>

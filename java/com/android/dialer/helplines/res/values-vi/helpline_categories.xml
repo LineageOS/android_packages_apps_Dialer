@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Lạm dụng</string>
+    <string name="helpline_category_acohol">Cồn</string>
+    <string name="helpline_category_addiction">Cơn nghiện</string>
+    <string name="helpline_category_adolescents">Thanh niên</string>
+    <string name="helpline_category_adults">Người lớn</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Sinh ra</string>
+    <string name="helpline_category_bullying">Bắt nạt</string>
+    <string name="helpline_category_children">Trẻ em</string>
+    <string name="helpline_category_crime">Tội ác</string>
+    <string name="helpline_category_crime_victims">Bị nạn</string>
+    <string name="helpline_category_corruption">Sự hối lộ</string>
+    <string name="helpline_category_discrimination">Sự phân biệt</string>
+    <string name="helpline_category_domestic_violence">Bạo lực gia đình</string>
+    <string name="helpline_category_drugs">Thuốc</string>
+    <string name="helpline_category_emotional_support">Trợ giúp tinh thần</string>
+    <string name="helpline_category_family">Gia đình</string>
+    <string name="helpline_category_gambling">Cờ bạc</string>
+    <string name="helpline_category_gender">Giới tính</string>
+    <string name="helpline_category_generic">Chung</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Quyền Con người</string>
+    <string name="helpline_category_human_trafficking">Buôn người</string>
+    <string name="helpline_category_immigration">Nhập cư</string>
+    <string name="helpline_category_legal_aid">Trợ giúp pháp lý</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Đàn ông</string>
+    <string name="helpline_category_mental_health">Sức khỏe tâm thần</string>
+    <string name="helpline_category_missing_children">Trẻ em thất lạc</string>
+    <string name="helpline_category_mothers">Mẹ</string>
+    <string name="helpline_category_muslim">Hồi giáo</string>
+    <string name="helpline_category_parents">Phụ huynh</string>
+    <string name="helpline_category_pregnancy">Mang thai</string>
+    <string name="helpline_category_psychological">Tâm lý</string>
+    <string name="helpline_category_religion">Tôn giáo</string>
+    <string name="helpline_category_senior">Người lớn tuổi</string>
+    <string name="helpline_category_sexual_abuse">Lạm dụng tình dục</string>
+    <string name="helpline_category_sexual_assault">Tấn công tình dục</string>
+    <string name="helpline_category_sexual_rights">Quyền tình dục</string>
+    <string name="helpline_category_sexuality">Tình dục</string>
+    <string name="helpline_category_soldiers">Lính</string>
+    <string name="helpline_category_suicide">Phòng chống tự tử</string>
+    <string name="helpline_category_trans">Chuyển giới</string>
+    <string name="helpline_category_veterans">Cựu binh</string>
+    <string name="helpline_category_violence">Bạo lực</string>
+    <string name="helpline_category_war">Chiến tranh</string>
+    <string name="helpline_category_women">Phụ nữ</string>
+    <string name="helpline_category_youth">Tuổi trẻ</string>
+</resources>

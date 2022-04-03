@@ -21,11 +21,12 @@
     <string name="helplines_help">Ayuda</string>
     <string name="helplines_help_title">Son númberos seguros</string>
     <string name="helplines_help_message">Nengún d\'estos númberos apaez nel historial de llamaes.\nPues calcar en cualesquier elementu pa consiguir más información.</string>
+    <string name="helplines_help_more_message">La llista de llinies d\'ayuda rellénase cola información que los collaboradores anueven manualmente. Si atopes dalgún datu que falta o que ye incorreutu, pues ponete en contautu con nós en <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Más</string>
     <string name="unknown_helpline_name">Organización desconocida</string>
     <string name="helpline_name">Nome</string>
     <string name="helpline_org">Organización</string>
-    <string name="helpline_categories">Estayes</string>
+    <string name="helpline_categories">Categoríes</string>
     <string name="helpline_number">Númberu</string>
     <string name="helpline_website">Sitiu web</string>
     <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>

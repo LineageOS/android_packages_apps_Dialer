@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Cam-driniaeth</string>
+    <string name="helpline_category_acohol">Alcohol</string>
+    <string name="helpline_category_addiction">Caethiwed</string>
+    <string name="helpline_category_adolescents">Glasoed</string>
+    <string name="helpline_category_adults">Oedolyn</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Geni</string>
+    <string name="helpline_category_bullying">Bwlio</string>
+    <string name="helpline_category_children">Plant</string>
+    <string name="helpline_category_crime">Trosedd</string>
+    <string name="helpline_category_crime_victims">Dioddefwyr troseddau</string>
+    <string name="helpline_category_corruption">Llygredd</string>
+    <string name="helpline_category_discrimination">Gwahaniaethu</string>
+    <string name="helpline_category_domestic_violence">Trais yn y cartref</string>
+    <string name="helpline_category_drugs">Cyffuriau</string>
+    <string name="helpline_category_emotional_support">Cefnogaeth emosiynol</string>
+    <string name="helpline_category_family">Teulu</string>
+    <string name="helpline_category_gambling">Gamblo</string>
+    <string name="helpline_category_gender">Rhyw</string>
+    <string name="helpline_category_generic">Generig</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Hawliau Dynol</string>
+    <string name="helpline_category_human_trafficking">Masnachu mewn pobl</string>
+    <string name="helpline_category_immigration">Mewnfudo</string>
+    <string name="helpline_category_legal_aid">Cymorth cyfreithiol</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Dynion</string>
+    <string name="helpline_category_mental_health">Iechyd meddwl</string>
+    <string name="helpline_category_missing_children">Plant ar goll</string>
+    <string name="helpline_category_mothers">Mamau</string>
+    <string name="helpline_category_muslim">Mwslim</string>
+    <string name="helpline_category_parents">Rhieni</string>
+    <string name="helpline_category_pregnancy">Beichiogrwydd</string>
+    <string name="helpline_category_psychological">Seicolegol</string>
+    <string name="helpline_category_religion">Crefydd</string>
+    <string name="helpline_category_senior">Hynafwyr</string>
+    <string name="helpline_category_sexual_abuse">Cam-drin rhywiol</string>
+    <string name="helpline_category_sexual_assault">Ymosodiad rhywiol</string>
+    <string name="helpline_category_sexual_rights">Hawliau rhywiol</string>
+    <string name="helpline_category_sexuality">Rhywioldeb</string>
+    <string name="helpline_category_soldiers">Milwyr</string>
+    <string name="helpline_category_suicide">Atal hunanladdiad</string>
+    <string name="helpline_category_trans">Trawsryweddol</string>
+    <string name="helpline_category_veterans">Cyn-filwyr</string>
+    <string name="helpline_category_violence">Trais</string>
+    <string name="helpline_category_war">Rhyfel</string>
+    <string name="helpline_category_women">Menywod</string>
+    <string name="helpline_category_youth">Ieuenctid</string>
+</resources>

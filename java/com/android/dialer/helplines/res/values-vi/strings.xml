@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Đường dây nóng</string>
+    <string name="helplines_loading">Đang tải\u2026</string>
+    <string name="helplines_empty">Không tìm thấy đường dây nóng.\nHãy nhét thẻ SIM và thử lại</string>
+    <string name="helplines_help">Trợ giúp</string>
+    <string name="helplines_help_title">Những số này an toàn để gọi</string>
+    <string name="helplines_help_message">Những số này không xuất hiện trong lịch sử gọi của bạn.\nBạn có thể chạm vào bất cứ mục nào để xem thêm thông tin</string>
+    <string name="helplines_help_more_message">Danh sách đường dây trợ giúp chứa đầy thông tin được cập nhật thủ công bởi những người đóng góp. Nếu bạn gặp bất kỳ thông tin nào bị thiếu hoặc sai, vui lòng liên hệ với chúng tôi tại <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">Thêm</string>
+    <string name="unknown_helpline_name">Tổ chức không xác định</string>
+    <string name="helpline_name">Tên</string>
+    <string name="helpline_org">Tổ chức</string>
+    <string name="helpline_categories">Danh mục</string>
+    <string name="helpline_number">Số</string>
+    <string name="helpline_website">Trang web</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Tiếng Cree</string>
+    <string name="helpline_language_english">Tiếng Anh</string>
+    <string name="helpline_language_french">Tiếng Pháp</string>
+    <string name="helpline_language_german">Tiếng Đức</string>
+    <string name="helpline_language_inuktitut">Tiếng Inuktitut</string>
+    <string name="helpline_language_ojibway">Tiếng Ojibway</string>
+    <string name="helpline_language_turkish">Tiếng Thổ Nhĩ Kỳ</string>
+</resources>

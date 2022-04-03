@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2013 The CyanogenMod Project
+     Copyright (C) 2019-2021 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,20 +15,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="hour">
-        <item quantity="one">1 h</item>
-        <item quantity="other">%d h</item>
-    </plurals>
-    <plurals name="minute">
-        <item quantity="one">1 m</item>
-        <item quantity="other">%d m</item>
-    </plurals>
-    <plurals name="second">
-        <item quantity="one">1 s</item>
-        <item quantity="other">%d s</item>
-    </plurals>
-    <plurals name="call">
-        <item quantity="one">1 llamada</item>
-        <item quantity="other">%d llamaes</item>
-    </plurals>
+    <string name="helplines_help_more_message">হেল্পলাইন এর লিস্টটির তথ্যগুলো বিভিন্ন অবদানকারী হতে ম্যানুয়ালি আপডেট করা হয়। আপনি যদি কোনো ভুল তথ্য খুজে পান, তাহলে আমাদের সাথে যোগাযোগ করতে পারেন। ঠিকানা: <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
 </resources>

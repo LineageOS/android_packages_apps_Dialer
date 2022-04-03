@@ -21,6 +21,7 @@
     <string name="helplines_help">Cobhair</string>
     <string name="helplines_help_title">Tha e sàbhailte fòn a chur thuca</string>
     <string name="helplines_help_message">Chan eil gin dhe na h-àireamhan seo air eachdraidh nan gairmean agad.\n’S urrainn dhut briogadh air nì sam bith airson barrachd fiosrachaidh</string>
+    <string name="helplines_help_more_message">Lìonaidh com-pàirtichean liosta nan loidhnichean-taice le fiosrachadh a thèid ùrachadh a làimh. Ma chì thu fiosrachadh seam bith a tha a dhìth no ceàrr, nach cuir thu fios thugainn air <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g>?</string>
     <string name="helpline_button_more">Barrachd</string>
     <string name="unknown_helpline_name">Buidheann nach aithne dhuinn</string>
     <string name="helpline_name">Ainm</string>
