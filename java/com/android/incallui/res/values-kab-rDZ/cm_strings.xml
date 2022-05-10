@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2013-2014 The CyanogenMod Project
-     Copyright (C) 2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,11 +15,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_log_show_all_accounts">Toles cuentes</string>
-    <string name="call_log_all_calls_header">Toles llamaes</string>
-    <string name="call_log_incoming_header">Namás llamaes entrantes</string>
-    <string name="call_log_outgoing_header">Namás llamaes salientes</string>
-    <string name="call_log_missed_header">Namás llamaes perdíes</string>
-    <string name="call_log_voicemail_header">Namás llamaes con buzón de voz</string>
-    <string name="call_log_blacklist_header">Namás llamaes bloquiaes</string>
+    <string name="call_recording_failed_message">Ur yezmir ara ad yebdu asekles n usiwel</string>
+    <string name="call_recording_file_location">Asiwel yettwasekles di <xliff:g id="filename">%s </xliff:g></string>
+    <string name="onscreenCallRecordText">Sekles asiwel</string>
+    <string name="onscreenStopCallRecordText">Seḥbes asekles</string>
+    <string name="recording_time_text">Asekles</string>
+    <string name="recording_warning_title">Rmed asekles n isawalen?</string>
 </resources>

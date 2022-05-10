@@ -21,6 +21,7 @@
     <string name="helplines_help">Yardım</string>
     <string name="helplines_help_title">Bunları aramak güvenli</string>
     <string name="helplines_help_message">Bu numaralardan hiçbiri arama geçmişinizde görünmüyor.\nDaha fazla bilgi için herhangi bir ögeye tıklayabilirsiniz</string>
+    <string name="helplines_help_more_message">Yardım hatlarının listesi, katkıda bulunanlar tarafından manuel olarak güncellenen bilgilerle doldurulur. Herhangi bir eksik veya yanlış bilgi ile karşılaşırsanız, lütfen  <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> adresinden bizimle iletişime geçmekten çekinmeyin.</string>
     <string name="helpline_button_more">Daha fazla</string>
     <string name="unknown_helpline_name">Bilinmeyen kurum</string>
     <string name="helpline_name">İsim</string>

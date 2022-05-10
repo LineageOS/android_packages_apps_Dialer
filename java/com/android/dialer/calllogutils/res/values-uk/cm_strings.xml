@@ -16,11 +16,11 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_log_show_all_accounts">Toles cuentes</string>
-    <string name="call_log_all_calls_header">Toles llamaes</string>
-    <string name="call_log_incoming_header">Namás llamaes entrantes</string>
-    <string name="call_log_outgoing_header">Namás llamaes salientes</string>
-    <string name="call_log_missed_header">Namás llamaes perdíes</string>
-    <string name="call_log_voicemail_header">Namás llamaes con buzón de voz</string>
-    <string name="call_log_blacklist_header">Namás llamaes bloquiaes</string>
+    <string name="call_log_show_all_accounts">Усі облікові записи</string>
+    <string name="call_log_all_calls_header">Усі виклики</string>
+    <string name="call_log_incoming_header">Лише вхідні виклики</string>
+    <string name="call_log_outgoing_header">Лише вихідні виклики</string>
+    <string name="call_log_missed_header">Лише пропущені виклики</string>
+    <string name="call_log_voicemail_header">Лише виклики з голосовою поштою</string>
+    <string name="call_log_blacklist_header">Лише заблоковані виклики</string>
 </resources>

@@ -20,6 +20,7 @@
     <string name="helplines_empty">Tidak ada saluran bantuan yang ditemukan.\nMasukkan kartu SIM dan coba lagi</string>
     <string name="helplines_help">Bantuan</string>
     <string name="helplines_help_title">Ini aman untuk dihubungi</string>
+    <string name="helplines_help_more_message">Daftar saluran bantuan berisi informasi yang diperbarui secara manual oleh para kontributor. Jika Anda menemukan informasi yang hilang atau salah, jangan ragu untuk menghubungi kami di <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Lainnya</string>
     <string name="unknown_helpline_name">Organisasi tidak dikenal</string>
     <string name="helpline_name">Nama</string>

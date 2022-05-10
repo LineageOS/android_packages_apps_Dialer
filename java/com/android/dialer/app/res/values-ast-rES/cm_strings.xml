@@ -19,12 +19,17 @@
     <string name="incall_category_title">Nes llamaes</string>
     <string name="incall_enable_dnd_title">Activar «Nun molestar» nes llamaes</string>
     <string name="incall_vibrate_outgoing_title">Vibrar al contestar</string>
+    <string name="incall_vibrate_call_waiting_title">Vibrar cuando heba llamaes n\'espera</string>
     <string name="incall_vibrate_hangup_title">Vibrar al colgar</string>
     <string name="incall_vibrate_45_title">Vibrar cada minutu</string>
     <string name="incall_vibrate_45_summary">Nes llamaes salientes, vibra nel segundu 45 de cada minutu</string>
+    <string name="incall_dnd_dialog_message">P\'activar el mou «Nun molestar», l\'aplicación «Teléfonu» tien de tener permisu pa controlar l\'estáu d\'esti mou.\nConcéde-y el permisu.</string>
     <string name="allow">Permitir</string>
     <string name="deny">Negar</string>
+    <string name="call_recording_category_title">Grabación de llamaes</string>
     <string name="call_recording_format">Formatu del audiu</string>
+    <string name="call_via">Llamar per</string>
+    <string name="call_via_dialog_title">Llamada per\u2026</string>
     <string name="call_log_stats_title">Estadístiques</string>
     <string name="action_menu_helplines">Llinies d\'ayuda</string>
 </resources>

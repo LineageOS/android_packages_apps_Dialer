@@ -15,5 +15,52 @@
      limitations under the License.
 -->
 <resources>
-    <string name="helpline_category_human_trafficking">ადამიანით ვაჭრობა</string>
+    <string name="helpline_category_abuse">ძალადობა</string>
+    <string name="helpline_category_acohol">სასმელდამოკიდებულება</string>
+    <string name="helpline_category_addiction">წამალდამოკიდებულება</string>
+    <string name="helpline_category_adolescents">მოზარდები</string>
+    <string name="helpline_category_adults">ზრდასრულები</string>
+    <string name="helpline_category_aids">ᲨᲘᲓᲡᲘ</string>
+    <string name="helpline_category_birth">დაბადება</string>
+    <string name="helpline_category_bullying">ჩაგვრა</string>
+    <string name="helpline_category_children">ბავშვები</string>
+    <string name="helpline_category_crime">დანაშაული</string>
+    <string name="helpline_category_crime_victims">დანაშაულის მსხვერპლნი</string>
+    <string name="helpline_category_corruption">მექრთამეობა</string>
+    <string name="helpline_category_discrimination">შერჩევითი შეუმწყნარებლობა</string>
+    <string name="helpline_category_domestic_violence">ოჯახური ძალადობა</string>
+    <string name="helpline_category_drugs">წამლები</string>
+    <string name="helpline_category_emotional_support">სულიერი მხარდაჭერა</string>
+    <string name="helpline_category_family">ოჯახი</string>
+    <string name="helpline_category_gambling">თამაშდამოკიდებულება</string>
+    <string name="helpline_category_gender">სქესი</string>
+    <string name="helpline_category_generic">ზოგადი</string>
+    <string name="helpline_category_hiv">ᲐᲘᲕ-ᲘᲜᲤᲔᲥᲪᲘᲐ</string>
+    <string name="helpline_category_human_rights">ადამიანის უფლებები</string>
+    <string name="helpline_category_human_trafficking">ადამიანებით ვაჭრობა</string>
+    <string name="helpline_category_immigration">ჩამოსახლება</string>
+    <string name="helpline_category_legal_aid">სამართლებრივი დახმარება</string>
+    <string name="helpline_category_lgbtq">ᲚᲒᲑᲢᲥ+</string>
+    <string name="helpline_category_men">მამაკაცები</string>
+    <string name="helpline_category_mental_health">გონებრივი დარღვევები</string>
+    <string name="helpline_category_missing_children">დაკარგული ბავშვები</string>
+    <string name="helpline_category_mothers">დედები</string>
+    <string name="helpline_category_muslim">მუსლიმანები</string>
+    <string name="helpline_category_parents">მშობლები</string>
+    <string name="helpline_category_pregnancy">ორსულობა</string>
+    <string name="helpline_category_psychological">ფსიქოლოგიური</string>
+    <string name="helpline_category_religion">სარწმუნოება</string>
+    <string name="helpline_category_senior">ასაკოვნები</string>
+    <string name="helpline_category_sexual_abuse">სქესობრივი ძალადობა</string>
+    <string name="helpline_category_sexual_assault">სქესობრივი ზეწოლა</string>
+    <string name="helpline_category_sexual_rights">სქესობრივი უფლებები</string>
+    <string name="helpline_category_sexuality">სქესობრიობა</string>
+    <string name="helpline_category_soldiers">ჯარისკაცები</string>
+    <string name="helpline_category_suicide">თვითმკვლელობის აღკვეთა</string>
+    <string name="helpline_category_trans">ტრანსგენდერი</string>
+    <string name="helpline_category_veterans">ყოფილი სამხედრო</string>
+    <string name="helpline_category_violence">ძალმომრეობა</string>
+    <string name="helpline_category_war">ომი</string>
+    <string name="helpline_category_women">ქალები</string>
+    <string name="helpline_category_youth">ახალგაზრდობა</string>
 </resources>

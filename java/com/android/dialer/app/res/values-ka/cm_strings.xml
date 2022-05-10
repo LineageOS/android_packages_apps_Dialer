@@ -17,7 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="incall_category_title">ზარის დროს</string>
-    <string name="incall_enable_dnd_title">„არ შემაწუხოს“ მითითება საუბრის განმავლობაში</string>
+    <string name="incall_enable_dnd_title">„არ შემაწუხოს“ ამოქმედება საუბრისას</string>
     <string name="incall_vibrate_outgoing_title">ვიბრაცია პასუხისას</string>
     <string name="incall_vibrate_call_waiting_title">ვიბრაცია ზარის ლოდინისას</string>
     <string name="incall_vibrate_hangup_title">ვიბრაცია ზარის გათიშვისას</string>
@@ -31,4 +31,5 @@
     <string name="call_via">დასარეკად გამოიყენოს</string>
     <string name="call_via_dialog_title">დასარეკად გამოიყენოს\u2026</string>
     <string name="call_log_stats_title">სტატისტიკა</string>
+    <string name="action_menu_helplines">ცხელი ხაზი</string>
 </resources>

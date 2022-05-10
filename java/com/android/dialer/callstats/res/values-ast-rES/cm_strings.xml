@@ -28,9 +28,13 @@
     <string name="call_stats_filter_to">Data de fin</string>
     <string name="call_stats_filter_picker_title">Intervalu de peñera</string>
     <string name="date_quick_selection">Esbilla rápida</string>
-    <string name="date_qs_currentmonth">Mes actual</string>
-    <string name="date_qs_currentquarter">Trimestre actual</string>
-    <string name="date_qs_currentyear">Añu actual</string>
+    <string name="date_qs_currentmonth">El mes actual</string>
+    <string name="date_qs_currentquarter">El trimestre actual</string>
+    <string name="date_qs_currentyear">L\'añu actual</string>
+    <string name="date_qs_lastweek">La selmana pasada</string>
+    <string name="date_qs_lastmonth">El mes pasáu</string>
+    <string name="date_qs_lastquarter">El trimestre pasáu</string>
+    <string name="date_qs_lastyear">L\'añu pasáu</string>
     <string name="call_stats_date_filter">Axustar l\'intervalu de tiempu</string>
     <string name="call_stats_reset_filter">Reafitar l\'intervalu de tiempu</string>
     <string name="call_stats_sort_by_duration">Ordenar pola duración de les llamaes</string>
