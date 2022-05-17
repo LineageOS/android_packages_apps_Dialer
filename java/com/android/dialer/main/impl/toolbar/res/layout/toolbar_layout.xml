@@ -48,7 +48,7 @@
             android:importantForAccessibility="no"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_search_vd_theme_24"
-            android:tint="?colorIcon"/>
+            android:tint="@*android:color/system_accent1_400"/>
 
         <TextView
             android:id="@+id/search_box_start_search"
@@ -71,7 +71,7 @@
             android:contentDescription="@string/description_start_voice_search"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_mic_vd_theme_24"
-            android:tint="?colorIcon"/>
+            android:tint="@*android:color/system_accent1_400"/>
 
         <ImageButton
             android:id="@+id/main_options_menu_button"
@@ -82,7 +82,7 @@
             android:contentDescription="@string/action_menu_overflow_description"
             android:scaleType="center"
             android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-            android:tint="?colorIcon"/>
+            android:tint="@*android:color/system_accent1_400"/>
       </RelativeLayout>
 
       <include layout="@layout/expanded_search_bar"/>
