@@ -21,8 +21,8 @@
   <style name="MainActivityTheme" parent="MainActivityThemeBase">
     <!-- Used to change the navigation bar color -->
     <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">?android:attr/colorBackgroundFloating</item>
-    <item name="android:navigationBarDividerColor">#E0E0E0</item>
+    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:navigationBarDividerColor">@null</item>
   </style>
 
   <!-- Used on sdk 27 and above -->
@@ -30,7 +30,7 @@
   <style name="MainActivityTheme.Dark" parent="MainActivityThemeBase.Dark">
     <!-- Used to change the navigation bar color -->
     <item name="android:windowLightNavigationBar">true</item>
-    <item name="android:navigationBarColor">?android:attr/colorBackgroundFloating</item>
-    <item name="android:navigationBarDividerColor">#E0E0E0</item>
+    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:navigationBarDividerColor">@null</item>
   </style>
 </resources>
