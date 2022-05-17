@@ -18,6 +18,6 @@
   <style name="DialtactsTheme" parent="Dialer.ThemeBase.ActionBar">
     <item name="android:windowLightNavigationBar">true</item>
     <item name="android:navigationBarColor">?android:attr/windowBackground</item>
-    <item name="android:navigationBarDividerColor">#E0E0E0</item>
+    <item name="android:navigationBarDividerColor">@null</item>
   </style>
 </resources>
