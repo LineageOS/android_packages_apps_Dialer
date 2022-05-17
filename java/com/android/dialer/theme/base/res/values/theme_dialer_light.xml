@@ -71,8 +71,8 @@
     <!-- Dialer specific attributes. -->
     <item name="colorIcon">@color/google_grey_700</item>
     <item name="colorIconSecondary">@color/google_grey_400</item>
-    <item name="colorTextOnUnthemedDarkBackground">@android:color/white</item>
-    <item name="colorIconOnUnthemedDarkBackground">@android:color/white</item>
+    <item name="colorTextOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
+    <item name="colorIconOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
     <item name="colorMobileTerminatingChatText">@color/google_grey_900</item>
     <item name="colorMobileTerminatingChatBackground">@color/google_grey_100</item>
     <item name="colorMobileOriginatingChatText">@color/google_blue_900</item>
@@ -99,6 +99,6 @@
   </style>
   <style name="DialerActionBarBaseTheme"
       parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="colorControlNormal">@android:color/white</item>
+    <item name="colorControlNormal">@*android:color/system_neutral1_0</item>
   </style>
 </resources>
