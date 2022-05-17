@@ -19,7 +19,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/colorBackgroundFloating"
+    android:background="@color/rounded_dialpad_bg_color"
     android:elevation="8dp">
 
   <include
