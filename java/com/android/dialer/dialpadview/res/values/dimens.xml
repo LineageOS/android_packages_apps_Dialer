@@ -22,7 +22,7 @@
   <dimen name="dialpad_symbol_margin_bottom">13dp</dimen>
   <dimen name="dialpad_digits_text_min_size">24sp</dimen>
   <dimen name="dialpad_digits_padding">16dp</dimen>
-  <dimen name="dialpad_digits_menu_left_padding">8dp</dimen>
+  <dimen name="dialpad_digits_menu_left_padding">10dp</dimen>
   <dimen name="dialpad_digits_menu_right_padding">10dp</dimen>
   <dimen name="dialpad_voicemail_icon_size">18dp</dimen>
   <dimen name="dialpad_key_button_translate_y">100dp</dimen>
