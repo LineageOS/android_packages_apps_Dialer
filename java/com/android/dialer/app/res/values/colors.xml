@@ -26,6 +26,6 @@
   <!--  Colors for blocked numbers list -->
   <color name="blocked_number_block_color">#F44336</color>
 
-  <color name="nav_item">#80666666</color>
-  <color name="nav_item_selected">#666666</color>
+  <color name="nav_item">@*android:color/system_accent1_600</color>
+  <color name="nav_item_selected">@*android:color/system_accent1_600</color>
 </resources>
