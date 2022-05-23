@@ -75,8 +75,9 @@
   <uses-permission android:name="android.permission.STOP_APP_SWITCHES"/>
 
   <!-- Used for sending PendingIntents to dynamically registered receivers -->
-  <uses-permission android:name="com.android.dialer.permission.DIALER_ORIGIN"
+  <permission android:name="com.android.dialer.permission.DIALER_ORIGIN"
     android:protectionLevel="signature" />
+  <uses-permission android:name="com.android.dialer.permission.DIALER_ORIGIN"/>
 
   <!-- Permissions needed for badger count showing on launch icon. -->
 
