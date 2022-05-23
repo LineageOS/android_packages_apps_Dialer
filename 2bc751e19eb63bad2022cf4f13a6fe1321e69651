@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e995157f_bc86fbc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7118
+      },
+      "writtenOn": "2022-05-23T05:25:55Z",
+      "side": 1,
+      "message": "Should fix broken vvm that verizon users have been reporting.\nhttps://gitlab.com/LineageOS/issues/android/-/issues/4523\nNeed to test and upload to aosp.\nHere\u0027s a snippet from log:\n\nPermission Denial: broadcasting Intent { act\u003dcom.android.voicemailomtp.sms.REQUEST_SENT flg\u003d0x10 pkg\u003dcom.android.dialer } from com.android.dialer (pid\u003d-1, uid\u003d10110) requires com.android.dialer.permission.DIALER_ORIGIN due to registered receiver BroadcastFilter{8c67bc0 10110/u0 ReceiverList{41fb943 30642 com.android.dialer/10110/u0 remote:7773ef2}}",
+      "revId": "2bc751e19eb63bad2022cf4f13a6fe1321e69651",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
