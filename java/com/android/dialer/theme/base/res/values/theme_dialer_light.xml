@@ -62,8 +62,8 @@
     <item name="colorPrimary">@color/dialer_theme_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="android:colorAccent">@color/dialer_secondary_color</item>
-    <item name="colorAccent">@color/dialer_secondary_color</item>
+    <item name="android:colorAccent">@color/dialer_theme_color</item>
+    <item name="colorAccent">@color/dialer_theme_color</item>
 
     <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
     <item name="colorControlActivated">?android:attr/colorPrimary</item>
