@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2019-2021 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,10 +14,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="play_recordings">
-        <item quantity="one">Afspil optagelse</item>
-        <item quantity="other">Afspil optagelser</item>
-    </plurals>
-    <string name="call_playback_no_app_found_toast">Ingen app kunne findes til afspilning af den valgte optagelse.</string>
+<resources>
+    <string name="helpline_category_abuse">Yir aseqdec</string>
+    <string name="helpline_category_family">Tawacult</string>
+    <string name="helpline_category_men">Argaz</string>
 </resources>

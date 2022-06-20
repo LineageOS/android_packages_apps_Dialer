@@ -34,6 +34,7 @@
     <string name="date_qs_lastquarter">Tasemhuyt taneggarut</string>
     <string name="date_qs_lastyear">Assegas yezrin</string>
     <string name="call_stats_sort_by_duration">Smizzwer s tnzagt talemmast n isawalen</string>
+    <string name="call_stats_sort_by_count">Smizzwer s umessḍan n isawalan</string>
     <string name="call_stats_title_for_number">Uṭṭun-agi</string>
     <string name="call_stats_title_of_total">G uɣrud</string>
     <string name="call_stats_title_durations">Tinzagin n usiwel</string>

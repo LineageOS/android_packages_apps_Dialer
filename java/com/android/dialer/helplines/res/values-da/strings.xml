@@ -21,6 +21,7 @@
     <string name="helplines_help">Hjælp</string>
     <string name="helplines_help_title">Disse er sikre at ringe op</string>
     <string name="helplines_help_message">Ingen af disse numre vises i din opkaldshistorik.\nDu kan klikke på et element for mere information</string>
+    <string name="helplines_help_more_message">Listen over hjælpelinjer er fyldt med oplysninger, der opdateres manuelt af frivillige. Hvis du møder manglende eller forkerte oplysninger, er du velkommen til at kontakte os på <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Mere</string>
     <string name="unknown_helpline_name">Ukendt organisation</string>
     <string name="helpline_name">Navn</string>

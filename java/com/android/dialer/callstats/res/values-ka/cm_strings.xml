@@ -31,9 +31,9 @@
     <string name="date_qs_currentmonth">მიმდინარე თვე</string>
     <string name="date_qs_currentquarter">მიმდინარე კვარტალი</string>
     <string name="date_qs_currentyear">მიმდინარე წელი</string>
-    <string name="date_qs_lastweek">ბოლო კვირა</string>
-    <string name="date_qs_lastmonth">ბოლო თვე</string>
-    <string name="date_qs_lastquarter">ბოლო კვარტალი</string>
+    <string name="date_qs_lastweek">წინა კვირა</string>
+    <string name="date_qs_lastmonth">წინა თვე</string>
+    <string name="date_qs_lastquarter">წინა კვარტალი</string>
     <string name="date_qs_lastyear">წინა წელი</string>
     <string name="call_stats_date_filter">დროის შუალედის შერჩევა</string>
     <string name="call_stats_reset_filter">დროის შუალედის ჩამოყრა</string>
