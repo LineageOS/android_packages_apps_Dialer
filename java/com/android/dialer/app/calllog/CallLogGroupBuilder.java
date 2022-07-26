@@ -20,7 +20,6 @@ import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
-import android.text.format.Time;
 
 import androidx.annotation.Nullable;
 
@@ -30,6 +29,8 @@ import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
+
+import java.time.ZoneId;
 
 /**
  * Groups together calls in the call log. The primary grouping attempts to group together calls to
@@ -54,7 +55,7 @@ public class CallLogGroupBuilder {
   /** Day grouping for calls which occurred before last week. */
   public static final int DAY_GROUP_OTHER = 2;
   /** Instance of the time object used for time calculations. */
-  private static final Time TIME = new Time();
+  private static final ZoneId TIME_ZONE = ZoneId.systemDefault();
 
   /** The object on which the groups are created. */
   private final GroupCreator groupCreator;
@@ -215,7 +216,7 @@ public class CallLogGroupBuilder {
    * @return The date group the call belongs in.
    */
   private int getDayGroup(long date, long now) {
-    int days = DateUtils.getDayDifference(TIME, date, now);
+    int days = DateUtils.getDayDifference(TIME_ZONE, date, now);
 
     if (days == 0) {
       return DAY_GROUP_TODAY;
