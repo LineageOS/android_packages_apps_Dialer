@@ -21,7 +21,7 @@
     <string name="helplines_help">Kömək</string>
     <string name="helplines_help_title">Bunlara zəng etmək güvənlidir</string>
     <string name="helplines_help_message">Bu nömrələrdən heç biri zəng tarixçənizdə görünmür.\nDaha ətraflı məlumat üçün istənilən bir elementə klikləyə bilərsiniz</string>
-    <string name="helplines_help_more_message">Kömək xətti siyahısı, töhfə verənlər tərəfindən əllə yenilənən məlumatlarla doldurulur. Əgər hər hansısa əskik və ya yanlış məlumatla qarşılaşsanız, zəhmət olmasa <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> üzərindən bizim əlaqə saxlamaqdan çəkinməyin.</string>
+    <string name="helplines_help_more_message">Kömək xətti siyahısı, töhfə verənlər tərəfindən əllə güncəllənən məlumatlarla doldurulur. Əgər hər hansısa əskik və ya yanlış məlumatla qarşılaşsanız, zəhmət olmasa <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> üzərindən bizim əlaqə saxlamaqdan çəkinməyin.</string>
     <string name="helpline_button_more">Daha çox</string>
     <string name="unknown_helpline_name">Bilinməyən təşkilat</string>
     <string name="helpline_name">Ad</string>

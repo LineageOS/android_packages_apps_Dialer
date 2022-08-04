@@ -19,7 +19,7 @@
     <string name="people">ხალხი</string>
     <string name="lookup_settings_label">სატელეფონო ნომრის მონახვა</string>
     <string name="enable_forward_lookup_title">პირდაპირი ძიება</string>
-    <string name="enable_forward_lookup_summary">ახლომდებარე ადგილების ჩვენება, ნომრის ასაკრეფში ძიებისას</string>
+    <string name="enable_forward_lookup_summary">ახლომდებარე ადგილების ჩვენება ნომრის ასაკრეფში ძიებისას</string>
     <string name="enable_people_lookup_title">ხალხის მონახვა</string>
     <string name="enable_people_lookup_summary">შედეგების ჩვენება ინტერნეტიდან, ხალხის ძიებისას ნომრის ასაკრეფში</string>
     <string name="enable_reverse_lookup_title">შებრუნებული ძიება</string>
