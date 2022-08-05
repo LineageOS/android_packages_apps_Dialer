@@ -26,6 +26,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
+import com.android.dialer.R;
 import com.android.incallui.call.DialerCall;
 
 /**
@@ -81,14 +82,6 @@ public class ThemeColorManager {
       backgroundColorMiddle = context.getColor(R.color.incall_background_gradient_middle);
       backgroundColorBottom = context.getColor(R.color.incall_background_gradient_bottom);
       backgroundColorSolid = context.getColor(R.color.incall_background_multiwindow);
-      if (highlightColor != PhoneAccount.NO_HIGHLIGHT_COLOR) {
-        // The default background gradient has a subtle alpha. We grab that alpha and apply it to
-        // the phone account color.
-        backgroundColorTop = applyAlpha(palette.mPrimaryColor, backgroundColorTop);
-        backgroundColorMiddle = applyAlpha(palette.mPrimaryColor, backgroundColorMiddle);
-        backgroundColorBottom = applyAlpha(palette.mPrimaryColor, backgroundColorBottom);
-        backgroundColorSolid = applyAlpha(palette.mPrimaryColor, backgroundColorSolid);
-      }
     }
 
     primaryColor = palette.mPrimaryColor;
@@ -134,10 +127,5 @@ public class ThemeColorManager {
   @ColorInt
   public int getBackgroundColorSolid() {
     return backgroundColorSolid;
-  }
-
-  @ColorInt
-  private static int applyAlpha(@ColorInt int color, @ColorInt int sourceColorWithAlpha) {
-    return ColorUtils.setAlphaComponent(color, Color.alpha(sourceColorWithAlpha));
   }
 }
