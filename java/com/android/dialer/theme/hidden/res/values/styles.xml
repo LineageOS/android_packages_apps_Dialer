@@ -52,10 +52,8 @@
      activity's theme extends from Dialer.ThemeBase(.NoActionBar) or doesn't specify a theme. -->
   <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
     <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
-    <!-- TODO(a bug): figure out why ?android:attr/colorPrimary doesn't work here -->
     <item name="android:colorAccent">@color/dialer_theme_color</item>
     <item name="colorAccent">@color/dialer_theme_color</item>
-    <item name="android:textColorPrimary">@color/dialer_primary_text_color</item>
     <item name="android:textColorSecondary">@color/dialer_secondary_text_color</item>
   </style>
 </resources>
