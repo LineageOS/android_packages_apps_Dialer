@@ -20,8 +20,6 @@
   <!-- Used with some smaller texts in manage conference screen. -->
   <color name="conference_call_manager_secondary_text_color">#999999</color>
 
-  <color name="incall_dialpad_background">#ffffff</color>
-
   <!-- Background color for status bar. For portrait this will be ignored. -->
   <color name="statusbar_background_color">?android:attr/colorPrimary</color>
 
