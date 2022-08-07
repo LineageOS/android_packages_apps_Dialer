@@ -24,11 +24,8 @@
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-
-    <item name="dialpad_key_button_touch_tint">?attr/colorPrimary20pct</item>
     <item name="dialpad_style">@style/InCallDialpad</item>
     <item name="android:windowAnimationStyle">@null</item>
-
     <item name="android:windowBackground">@drawable/incall_background_gradient</item>
     <item name="android:windowShowWallpaper">true</item>
   </style>
@@ -41,11 +38,8 @@
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
-
-    <item name="dialpad_key_button_touch_tint">?attr/colorPrimary20pct</item>
     <item name="dialpad_style">@style/InCallDialpad</item>
     <item name="android:windowAnimationStyle">@null</item>
-
     <item name="android:windowBackground">@drawable/incall_background_gradient</item>
     <item name="android:windowShowWallpaper">true</item>
   </style>
