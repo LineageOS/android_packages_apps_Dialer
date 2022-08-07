@@ -84,7 +84,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   // KeyListener used with the "dialpad digits" EditText widget.
   private DtmfKeyListener dtmfKeyListener;
   private DialpadView dialpadView;
-  private int currentTextColor;
   private View endCallSpace;
   private boolean shouldShowEndCallSpace = true;
 
@@ -142,7 +141,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
     final View parent = layoutInflater.inflate(R.layout.incall_dialpad_fragment, container, false);
     dialpadView = (DialpadView) parent.findViewById(R.id.dialpad_view);
     dialpadView.setCanDigitsBeEdited(false);
-    dialpadView.setBackgroundResource(R.color.incall_dialpad_background);
     dtmfDialerField = (EditText) parent.findViewById(R.id.digits);
     if (dtmfDialerField != null) {
       LogUtil.i("DialpadFragment.onCreateView", "creating dtmfKeyListener");
@@ -165,24 +163,7 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   @Override
   public void onResume() {
     super.onResume();
-    updateColors();
     endCallSpace.setVisibility(shouldShowEndCallSpace ? View.VISIBLE : View.GONE);
-  }
-
-  public void updateColors() {
-    int textColor = InCallPresenter.getInstance().getThemeColorManager().getPrimaryColor();
-
-    if (currentTextColor == textColor) {
-      return;
-    }
-
-    DialpadKeyButton dialpadKey;
-    for (int i = 0; i < buttonIds.length; i++) {
-      dialpadKey = (DialpadKeyButton) dialpadView.findViewById(buttonIds[i]);
-      ((TextView) dialpadKey.findViewById(R.id.dialpad_key_number)).setTextColor(textColor);
-    }
-
-    currentTextColor = textColor;
   }
 
   @Override
