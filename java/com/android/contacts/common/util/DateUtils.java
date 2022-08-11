@@ -16,7 +16,11 @@
 
 package com.android.contacts.common.util;
 
-import android.text.format.Time;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+
 
 /** Utility methods for processing dates. */
 public class DateUtils {
@@ -30,13 +34,9 @@ public class DateUtils {
    * @param date2 Second date to check.
    * @return The absolute difference in days between the two dates.
    */
-  public static int getDayDifference(Time time, long date1, long date2) {
-    time.set(date1);
-    int startDay = Time.getJulianDay(date1, time.gmtoff);
-
-    time.set(date2);
-    int currentDay = Time.getJulianDay(date2, time.gmtoff);
-
-    return Math.abs(currentDay - startDay);
+  public static int getDayDifference(ZoneId timeZone, long date1, long date2) {
+    LocalDate localDate1 = Instant.ofEpochMilli(date1).atZone(timeZone).toLocalDate();
+    LocalDate localDate2 = Instant.ofEpochMilli(date2).atZone(timeZone).toLocalDate();
+    return Math.abs((int) ChronoUnit.DAYS.between(localDate2, localDate1));
   }
 }
