@@ -15,9 +15,12 @@
  */
 package com.android.dialer.app.calllog;
 
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_MISSED_WORK_CALL_TITLE;
+
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.PendingIntent;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -107,7 +110,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   void updateMissedCallNotification(int count, @Nullable String number) {
     LogUtil.enterBlock("MissedCallNotifier.updateMissedCallNotification");
 
-    final int titleResId;
+    final String titleText;
     CharSequence expandedText; // The text in the notification's line 1 and 2.
 
     List<NewCall> newCalls = callLogNotificationsQueryHelper.getNewMissedCalls();
@@ -168,10 +171,13 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       ContactInfo contactInfo =
           callLogNotificationsQueryHelper.getContactInfo(
               call.number, call.numberPresentation, call.countryIso);
-      titleResId =
-          contactInfo.userType == ContactsUtils.USER_TYPE_WORK
-              ? R.string.notification_missedWorkCallTitle
-              : R.string.notification_missedCallTitle;
+      if (contactInfo.userType == ContactsUtils.USER_TYPE_WORK) {
+        titleText = context.getSystemService(DevicePolicyManager.class).getResources().getString(
+                NOTIFICATION_MISSED_WORK_CALL_TITLE,
+                () -> context.getString(R.string.notification_missedWorkCallTitle));
+      } else {
+        titleText = context.getString(R.string.notification_missedCallTitle);
+      }
 
       if (TextUtils.equals(contactInfo.name, contactInfo.formattedNumber)
           || TextUtils.equals(contactInfo.name, contactInfo.number)) {
@@ -189,7 +195,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
         groupSummary.setLargeIcon(photoIcon);
       }
     } else {
-      titleResId = R.string.notification_missedCallsTitle;
+      titleText = context.getString(R.string.notification_missedCallsTitle);
       expandedText = context.getString(R.string.notification_missedCallsMsg, count);
     }
 
@@ -199,14 +205,14 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
     // notification content is hidden.
     Notification.Builder publicSummaryBuilder = createNotificationBuilder();
     publicSummaryBuilder
-        .setContentTitle(context.getText(titleResId))
+        .setContentTitle(titleText)
         .setContentIntent(createCallLogPendingIntent())
         .setDeleteIntent(
             CallLogNotificationsService.createCancelAllMissedCallsPendingIntent(context));
 
     // Create the notification summary suitable for display when sensitive information is showing.
     groupSummary
-        .setContentTitle(context.getText(titleResId))
+        .setContentTitle(titleText)
         .setContentText(expandedText)
         .setContentIntent(createCallLogPendingIntent())
         .setDeleteIntent(

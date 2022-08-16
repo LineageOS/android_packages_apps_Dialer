@@ -51,8 +51,8 @@ public class HighResolutionPhotoRequesterImpl implements HighResolutionPhotoRequ
   @VisibleForTesting
   static final ComponentName SYNC_HIGH_RESOLUTION_PHOTO_SERVICE =
       new ComponentName(
-          "com.google.android.syncadapters.contacts",
-          "com.google.android.syncadapters.contacts.SyncHighResPhotoIntentService");
+          "com.google.android.gms",
+          "com.google.android.gms.people.sync.focus.SyncHighResPhotoIntentOperation");
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
@@ -81,7 +81,8 @@ public class HighResolutionPhotoRequesterImpl implements HighResolutionPhotoRequ
   private void requestInternal(Uri contactUri) throws RequestFailedException {
     for (Long rawContactId : getGoogleRawContactIds(getContactId(contactUri))) {
       Uri rawContactUri = ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId);
-      Intent intent = new Intent(Intent.ACTION_VIEW);
+      Intent intent = new Intent();
+      intent.setAction("com.google.android.gms.people.sync.focus.SYNC_HIGH_RES_PHOTO");
       intent.setComponent(SYNC_HIGH_RESOLUTION_PHOTO_SERVICE);
       intent.setDataAndType(rawContactUri, RawContacts.CONTENT_ITEM_TYPE);
       intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -89,7 +90,7 @@ public class HighResolutionPhotoRequesterImpl implements HighResolutionPhotoRequ
         LogUtil.i(
             "HighResolutionPhotoRequesterImpl.requestInternal",
             "requesting photo for " + rawContactUri);
-        appContext.startService(intent);
+        appContext.sendBroadcast(intent);
       } catch (IllegalStateException | SecurityException e) {
         throw new RequestFailedException("unable to start sync adapter", e);
       }

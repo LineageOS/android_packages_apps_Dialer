@@ -19,8 +19,6 @@ package com.android.dialer.commandline.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.telecom.PhoneAccount;
-import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import com.android.dialer.buildtype.BuildType;
 import com.android.dialer.buildtype.BuildType.Type;
@@ -67,8 +65,6 @@ public class CallCommand implements Command {
     }
     String number = args.expectPositional(0, "number");
     TelecomManager telecomManager = appContext.getSystemService(TelecomManager.class);
-    PhoneAccountHandle phoneAccountHandle =
-        telecomManager.getDefaultOutgoingPhoneAccount(PhoneAccount.SCHEME_TEL);
     CallIntentBuilder callIntentBuilder;
     if ("voicemail".equals(number)) {
       callIntentBuilder =

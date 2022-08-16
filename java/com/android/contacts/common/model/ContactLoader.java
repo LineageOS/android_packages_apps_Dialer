@@ -39,6 +39,7 @@ import android.text.TextUtils;
 import com.android.contacts.common.GroupMetaData;
 import com.android.contacts.common.model.account.AccountType;
 import com.android.contacts.common.model.account.AccountTypeWithDataSet;
+import com.android.contacts.common.model.account.GoogleAccountType;
 import com.android.contacts.common.model.dataitem.DataItem;
 import com.android.contacts.common.model.dataitem.PhoneDataItem;
 import com.android.contacts.common.model.dataitem.PhotoDataItem;
@@ -727,6 +728,10 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
       final String servicePackageName = accountType.getViewContactNotifyServicePackageName();
       if (!TextUtils.isEmpty(serviceName) && !TextUtils.isEmpty(servicePackageName)) {
         final Uri uri = ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId);
+        if (accountType instanceof GoogleAccountType) {
+          ((GoogleAccountType) accountType).handleRawContactViewed(context, uri);
+          continue;
+        }
         final Intent intent = new Intent();
         intent.setClassName(servicePackageName, serviceName);
         intent.setAction(Intent.ACTION_VIEW);
