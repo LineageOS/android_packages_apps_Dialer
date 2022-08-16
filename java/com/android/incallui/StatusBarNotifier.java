@@ -18,6 +18,9 @@ package com.android.incallui;
 
 import static android.telecom.Call.Details.PROPERTY_HIGH_DEF_AUDIO;
 import static com.android.contacts.common.compat.CallCompat.Details.PROPERTY_ENTERPRISE_CALL;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_INCOMING_WORK_CALL_TITLE;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_ONGOING_WORK_CALL_TITLE;
+import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_WIFI_WORK_CALL_LABEL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_SPEAKEASY_CALL;
 import static com.android.incallui.NotificationBroadcastReceiver.ACTION_ANSWER_VIDEO_INCOMING_CALL;
@@ -31,6 +34,7 @@ import static com.android.incallui.NotificationBroadcastReceiver.ACTION_TURN_ON_
 import android.Manifest;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -677,6 +681,10 @@ public class StatusBarNotifier
         call.getState() == DialerCallState.INCOMING
             || call.getState() == DialerCallState.CALL_WAITING;
 
+    // Is the call placed through work connection service.
+    boolean isWorkCall = call.hasProperty(PROPERTY_ENTERPRISE_CALL)
+            || userType == ContactsUtils.USER_TYPE_WORK;
+
     if (isIncomingOrWaiting
         && call.getNumberPresentation() == TelecomManager.PRESENTATION_ALLOWED) {
 
@@ -687,54 +695,73 @@ public class StatusBarNotifier
       }
     }
 
-    int resId = R.string.notification_ongoing_call;
-    String wifiBrand = context.getString(R.string.notification_call_wifi_brand);
+
+    String message = getOngoingCallNotificationMessage(isWorkCall);
+    String wifiBrand = getWifiBrand(isWorkCall);
+
+    // TODO(a bug): Potentially apply this template logic everywhere.
     if (call.hasProperty(Details.PROPERTY_WIFI)) {
-      resId = R.string.notification_ongoing_call_wifi_template;
+      message = context.getString(R.string.notification_ongoing_call_wifi_template, wifiBrand);
     }
 
     if (isIncomingOrWaiting) {
       if (call.isSpam()) {
-        resId = R.string.notification_incoming_spam_call;
+        message = context.getString(R.string.notification_incoming_spam_call);
       } else if (shouldShowEnrichedCallNotification(call.getEnrichedCallSession())) {
-        resId = getECIncomingCallText(call.getEnrichedCallSession());
+        message = context.getString(getECIncomingCallText(call.getEnrichedCallSession()));
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
-        resId = R.string.notification_incoming_call_wifi_template;
+        message = context.getString(R.string.notification_incoming_call_wifi_template, wifiBrand);
       } else if (call.getAccountHandle() != null && hasMultiplePhoneAccounts(call)) {
         return getMultiSimIncomingText(call);
       } else if (call.isVideoCall()) {
-        resId = R.string.notification_incoming_video_call;
+        message = context.getString(R.string.notification_incoming_video_call);
       } else {
-        resId = R.string.notification_incoming_call;
+        message = getIncomingCallNotificationMessage(isWorkCall);
       }
     } else if (call.getState() == DialerCallState.ONHOLD) {
-      resId = R.string.notification_on_hold;
+      message = context.getString(R.string.notification_on_hold);
     } else if (DialerCallState.isDialing(call.getState())) {
-      resId = R.string.notification_dialing;
+      message = context.getString(R.string.notification_dialing);
     } else if (call.isVideoCall()) {
-      resId =
-          call.getVideoTech().isPaused()
+      message = context.getString(call.getVideoTech().isPaused()
               ? R.string.notification_ongoing_paused_video_call
-              : R.string.notification_ongoing_video_call;
+              : R.string.notification_ongoing_video_call);
     } else if (call.getVideoTech().getSessionModificationState()
         == SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-      resId = R.string.notification_requesting_video_call;
+      message = context.getString(R.string.notification_requesting_video_call);
     }
 
-    // Is the call placed through work connection service.
-    boolean isWorkCall = call.hasProperty(PROPERTY_ENTERPRISE_CALL);
-    if (userType == ContactsUtils.USER_TYPE_WORK || isWorkCall) {
-      resId = getWorkStringFromPersonalString(resId);
-      wifiBrand = context.getString(R.string.notification_call_wifi_work_brand);
-    }
+    return message;
+  }
 
-    if (resId == R.string.notification_incoming_call_wifi_template
-        || resId == R.string.notification_ongoing_call_wifi_template) {
-      // TODO(a bug): Potentially apply this template logic everywhere.
-      return context.getString(resId, wifiBrand);
+  private String getOngoingCallNotificationMessage(boolean isWorkCall) {
+    if (isWorkCall) {
+      DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+      return dpm.getResources().getString(NOTIFICATION_ONGOING_WORK_CALL_TITLE, () ->
+              context.getString(R.string.notification_ongoing_work_call));
+    } else {
+      return context.getString(R.string.notification_ongoing_call);
     }
+  }
 
-    return context.getString(resId);
+  private String getIncomingCallNotificationMessage(boolean isWorkCall) {
+    if (isWorkCall) {
+      DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+      return dpm.getResources().getString(NOTIFICATION_INCOMING_WORK_CALL_TITLE, () ->
+              context.getString(R.string.notification_incoming_work_call));
+    } else {
+      return context.getString(R.string.notification_incoming_call);
+    }
+  }
+
+  private String getWifiBrand(boolean isWorkCall) {
+    if (isWorkCall) {
+      DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+      return dpm.getResources().getString(NOTIFICATION_WIFI_WORK_CALL_LABEL, () ->
+              context.getString(R.string.notification_call_wifi_work_brand));
+    } else {
+      return context.getString(R.string.notification_call_wifi_brand);
+    }
   }
 
   private boolean shouldShowEnrichedCallNotification(Session session) {
