@@ -113,7 +113,7 @@
     <ImageButton
         android:id="@+id/incall_end_call"
         style="@style/Incall.Button.End"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:layout_marginBottom="36dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
