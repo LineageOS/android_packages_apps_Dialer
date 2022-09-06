@@ -2,3 +2,7 @@
 # com.google.errorprone.annotations but don't exist on Android.
 -dontwarn java.lang.ClassValue
 -dontwarn javax.lang.model.element.Modifier
+
+-keep public class * extends android.app.Fragment {
+  public <init>();
+}
