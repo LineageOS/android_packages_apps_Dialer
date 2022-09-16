@@ -148,7 +148,7 @@ LOCAL_JAVA_LIBRARIES := \
 
 LOCAL_ANNOTATION_PROCESSORS := \
 	auto_value_plugin \
-	javapoet-prebuilt-jar \
+	javapoet \
 	dialer-dagger2 \
 	dialer-dagger2-compiler \
 	dialer-dagger2-producers \
@@ -535,7 +535,7 @@ LOCAL_SRC_FILES := \
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-guava \
 	dialer-dagger2 \
-	javapoet-prebuilt-jar \
+	javapoet \
 	auto_service_annotations \
 	auto_common \
 	dialer-javax-annotation-api \
