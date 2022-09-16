@@ -127,7 +127,7 @@ LOCAL_JAVA_LIBRARIES := \
 
 LOCAL_ANNOTATION_PROCESSORS := \
 	auto_value_plugin \
-	javapoet-prebuilt-jar \
+	javapoet \
 	dialer-common-m2-host-deps \
 	dialer-dagger2-compiler-deps \
 	dialer-glide-host-deps \
@@ -186,7 +186,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-common-m2-host-deps \
-	javapoet-prebuilt-jar \
+	javapoet \
 	auto_service_annotations \
 	auto_common \
 	error_prone_annotations
