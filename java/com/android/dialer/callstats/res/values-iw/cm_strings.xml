@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">פרטי סטטיסטיקות אנשי קשר</string>
+    <string name="call_stats_incoming">נכנסות: <xliff:g id="value">%s </xliff:g></string>
+    <string name="call_stats_outgoing">יוצאות: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">לא נענו: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">נחסמו: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">סך הכל: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">סך הכול: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">תאריך התחלה</string>
+    <string name="call_stats_filter_to">תאריך סיום</string>
+    <string name="call_stats_filter_picker_title">טווח סינון</string>
+    <string name="date_quick_selection">בחירה מהירה</string>
+    <string name="date_qs_currentmonth">חודש נוכחי</string>
+    <string name="date_qs_currentquarter">רבעון נוכחי</string>
+    <string name="date_qs_currentyear">שנה נוכחית</string>
+    <string name="date_qs_lastweek">שבוע שעבר</string>
+    <string name="date_qs_lastmonth">חודש שעבר</string>
+    <string name="date_qs_lastquarter">רבעון שעבר</string>
+    <string name="date_qs_lastyear">שנה שעברה</string>
+    <string name="call_stats_date_filter">שינוי טווח זמנים</string>
+    <string name="call_stats_reset_filter">איפוס טווח זמן</string>
+    <string name="call_stats_sort_by_duration">מיון לפי משך שיחה</string>
+    <string name="call_stats_sort_by_count">מיון לפי מספר שיחות</string>
+    <string name="call_stats_title_for_number">מספר זה</string>
+    <string name="call_stats_title_of_total">מתוך</string>
+</resources>

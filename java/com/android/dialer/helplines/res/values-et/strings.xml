@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Abinumbrid</string>
+    <string name="helplines_loading">Laadimine\u2026</string>
+    <string name="helplines_help">Abi</string>
+    <string name="helplines_help_title">Nendele on turvaline helistada</string>
+    <string name="helplines_help_message">Ükski neist numbritest ei kajastu sinu kõnelogis.\nRohkema teabe saamiseks klõpsa mistahes üksusele</string>
+    <string name="helpline_button_more">Rohkem</string>
+    <string name="helpline_name">Nimi</string>
+    <string name="helpline_org">Asutus</string>
+    <string name="helpline_categories">Kategooriad</string>
+    <string name="helpline_number">Number</string>
+    <string name="helpline_website">Veebileht</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_english">inglise</string>
+    <string name="helpline_language_french">prantsuse</string>
+    <string name="helpline_language_german">saksa</string>
+    <string name="helpline_language_inuktitut">inuktituti</string>
+    <string name="helpline_language_turkish">türgi</string>
+</resources>

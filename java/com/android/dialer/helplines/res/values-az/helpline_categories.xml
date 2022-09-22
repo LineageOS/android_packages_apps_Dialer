@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Təhqir</string>
+    <string name="helpline_category_acohol">Alkoqol</string>
+    <string name="helpline_category_addiction">Zərərli vərdiş</string>
+    <string name="helpline_category_adolescents">Yeniyetmə</string>
+    <string name="helpline_category_adults">Yetkin</string>
+    <string name="helpline_category_aids">QİÇS</string>
+    <string name="helpline_category_birth">Doğum</string>
+    <string name="helpline_category_bullying">Zorbalıq</string>
+    <string name="helpline_category_children">Uşaq</string>
+    <string name="helpline_category_crime">Cinayət</string>
+    <string name="helpline_category_crime_victims">Cinayət qurbanları</string>
+    <string name="helpline_category_corruption">Rüşvət</string>
+    <string name="helpline_category_discrimination">Ayrı-seçkilik</string>
+    <string name="helpline_category_domestic_violence">Məişət zorakılığı</string>
+    <string name="helpline_category_drugs">Dərmanlar</string>
+    <string name="helpline_category_emotional_support">Emosional dəstək</string>
+    <string name="helpline_category_family">Ailə</string>
+    <string name="helpline_category_gambling">Qumar</string>
+    <string name="helpline_category_gender">Cins</string>
+    <string name="helpline_category_generic">Ümumi</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">İnsan hüquqları</string>
+    <string name="helpline_category_human_trafficking">İnsan alveri</string>
+    <string name="helpline_category_immigration">İmmiqrasiya</string>
+    <string name="helpline_category_legal_aid">Qanuni dəstək</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Kişilər</string>
+    <string name="helpline_category_mental_health">Psixi sağlamlıq</string>
+    <string name="helpline_category_missing_children">İtmiş uşaqlar</string>
+    <string name="helpline_category_mothers">Analar</string>
+    <string name="helpline_category_muslim">Müsəlman</string>
+    <string name="helpline_category_parents">Valideynlər</string>
+    <string name="helpline_category_pregnancy">Hamiləlik</string>
+    <string name="helpline_category_psychological">Psixoloji</string>
+    <string name="helpline_category_religion">Dini</string>
+    <string name="helpline_category_senior">Böyüklər</string>
+    <string name="helpline_category_sexual_abuse">Cinsi istismar</string>
+    <string name="helpline_category_sexual_assault">Cinsi təcavüz</string>
+    <string name="helpline_category_sexual_rights">Cinsi hüquqlar</string>
+    <string name="helpline_category_sexuality">Cinsiyyət</string>
+    <string name="helpline_category_soldiers">Əsgərlər</string>
+    <string name="helpline_category_suicide">İntiharın qarşısını alma</string>
+    <string name="helpline_category_trans">Transseksual</string>
+    <string name="helpline_category_veterans">Qazilər</string>
+    <string name="helpline_category_violence">Şiddət</string>
+    <string name="helpline_category_war">Müharibə</string>
+    <string name="helpline_category_women">Qadınlar</string>
+    <string name="helpline_category_youth">Gənc</string>
+</resources>

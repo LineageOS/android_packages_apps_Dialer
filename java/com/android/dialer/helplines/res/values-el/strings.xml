@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Γραμμές βοήθειας</string>
+    <string name="helplines_loading">Φόρτωση\u2026</string>
+    <string name="helplines_empty">Δεν βρέθηκαν γραμμές βοήθειας.\nΕισάγετε μια κάρτα SIM και προσπαθήστε ξανά</string>
+    <string name="helplines_help">Βοήθεια</string>
+    <string name="helplines_help_title">Αυτά είναι ασφαλή για κλήση</string>
+    <string name="helplines_help_message">Κανένας από αυτούς τους αριθμούς δεν εμφανίζεται στο ιστορικό κλήσεών σας.\nΜπορείτε να κάνετε κλικ σε οποιοδήποτε στοιχείο για περισσότερες πληροφορίες</string>
+    <string name="helplines_help_more_message">Ο κατάλογος των γραμμών βοήθειας αποτελείται από πληροφορίες που ενημερώνονται χειροκίνητα από τους συνεισφέροντες. Εάν αντιμετωπίσετε τυχόν ελλείπουσες ή λανθασμένες πληροφορίες, μη διστάσετε να επικοινωνήσετε μαζί μας στο <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">Περισσότερα</string>
+    <string name="unknown_helpline_name">Άγνωστος οργανισμός</string>
+    <string name="helpline_name">Όνομα</string>
+    <string name="helpline_org">Οργανισμός</string>
+    <string name="helpline_categories">Κατηγορίες</string>
+    <string name="helpline_number">Αριθμός</string>
+    <string name="helpline_website">Ιστοσελίδα</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Κρι</string>
+    <string name="helpline_language_english">Αγγλικά</string>
+    <string name="helpline_language_french">Γαλλικά</string>
+    <string name="helpline_language_german">Γερμανικά</string>
+    <string name="helpline_language_inuktitut">Ινουκτιτούτ</string>
+    <string name="helpline_language_ojibway">Οζιβίγουα</string>
+    <string name="helpline_language_turkish">Τουρκικά</string>
+</resources>

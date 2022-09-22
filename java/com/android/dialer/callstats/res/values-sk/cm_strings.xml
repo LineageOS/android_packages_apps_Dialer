@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Podrobné štatistiky kontaktu</string>
+    <string name="call_stats_incoming">Prichádzajúce: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Odchádzajúce: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Zmeškané: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Blokované: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Celkovo:  <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Celkovo: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">Dátum začiatku</string>
+    <string name="call_stats_filter_to">Dátum konca</string>
+    <string name="call_stats_filter_picker_title">Rozsah filtra</string>
+    <string name="date_quick_selection">Rýchly výber</string>
+    <string name="date_qs_currentmonth">Aktuálny mesiac</string>
+    <string name="date_qs_currentquarter">Aktuálny štvrťrok</string>
+    <string name="date_qs_currentyear">Aktuálny rok</string>
+    <string name="date_qs_lastweek">Posledný týždeň</string>
+    <string name="date_qs_lastmonth">Posledný mesiac</string>
+    <string name="date_qs_lastquarter">Posledný štvrťrok</string>
+    <string name="date_qs_lastyear">Posledný rok</string>
+    <string name="call_stats_date_filter">Nastaviť časový rozsah</string>
+    <string name="call_stats_reset_filter">Resetovať časový rozsah</string>
+    <string name="call_stats_sort_by_duration">Zoradiť podľa dĺžky hovoru</string>
+    <string name="call_stats_sort_by_count">Zoradiť podľa počtu hovorov</string>
+    <string name="call_stats_title_for_number">Toto číslo</string>
+    <string name="call_stats_title_of_total">Z celkových</string>
+    <string name="call_stats_title_durations">Dĺžka hovorov</string>
+    <string name="call_stats_title_count">Počet hovorov</string>
+    <string name="call_stats_title_average_duration">Priemerné trvanie hovoru</string>
+    <string name="recent_calls_no_items_in_range">Váš denník hovorov neobsahuje žiadne hovory vo vybranom časovom rozsahu.</string>
+</resources>

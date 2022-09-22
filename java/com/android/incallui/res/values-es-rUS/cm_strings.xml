@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">Error al iniciar la grabación de la llamada</string>
+    <string name="call_recording_file_location">Grabación de llamada guardada en <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Grabar llamada</string>
+    <string name="onscreenCallRecordingText">Grabación de llamada - <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Parar grabación</string>
+    <string name="recording_time_text">Grabando</string>
+    <string name="recording_warning_title">¿Activar la grabación de llamada?</string>
+    <string name="recording_warning_text">Aviso: Eres responsable de cumplir con todas las leyes, regulaciones y reglas que se aplican al uso de la funcionalidad de grabación de llamadas y al uso o distribución de esas grabaciones.</string>
+</resources>

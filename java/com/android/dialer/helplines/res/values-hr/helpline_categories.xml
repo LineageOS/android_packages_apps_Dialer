@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Zlostavljanje</string>
+    <string name="helpline_category_acohol">Alkohol</string>
+    <string name="helpline_category_addiction">Ovisnost</string>
+    <string name="helpline_category_adolescents">Adolescenti</string>
+    <string name="helpline_category_adults">Odrasli</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Rođenje</string>
+    <string name="helpline_category_bullying">Vršnjačko zlostavljanje</string>
+    <string name="helpline_category_children">Djeca</string>
+    <string name="helpline_category_crime">Zločin</string>
+    <string name="helpline_category_crime_victims">Žrtve zločina</string>
+    <string name="helpline_category_corruption">Mito</string>
+    <string name="helpline_category_discrimination">Diskriminacija</string>
+    <string name="helpline_category_domestic_violence">Nasilje u obitelji</string>
+    <string name="helpline_category_drugs">Droge</string>
+    <string name="helpline_category_emotional_support">Emocionalna podrška</string>
+    <string name="helpline_category_family">Obitelj</string>
+    <string name="helpline_category_gambling">Kockanje</string>
+    <string name="helpline_category_gender">Spol</string>
+    <string name="helpline_category_generic">Općenito</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Ljudska prava</string>
+    <string name="helpline_category_human_trafficking">Trgovanje ljudima</string>
+    <string name="helpline_category_immigration">Imigracija</string>
+    <string name="helpline_category_legal_aid">Pravna pomoć</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Muškarci</string>
+    <string name="helpline_category_mental_health">Mentalno zdravlje</string>
+    <string name="helpline_category_missing_children">Nestala djeca</string>
+    <string name="helpline_category_mothers">Majke</string>
+    <string name="helpline_category_muslim">Musliman</string>
+    <string name="helpline_category_parents">Roditelji</string>
+    <string name="helpline_category_pregnancy">Trudnoća</string>
+    <string name="helpline_category_psychological">Psihološki</string>
+    <string name="helpline_category_religion">Religija</string>
+    <string name="helpline_category_senior">Starije osobe</string>
+    <string name="helpline_category_sexual_abuse">Seksualno zlostavljanje</string>
+    <string name="helpline_category_sexual_assault">Seksualni napad</string>
+    <string name="helpline_category_sexual_rights">Seksualna prava</string>
+    <string name="helpline_category_sexuality">Seksualnost</string>
+    <string name="helpline_category_soldiers">Vojnici</string>
+    <string name="helpline_category_suicide">Prevencija samoubojstava</string>
+    <string name="helpline_category_trans">Transrodna osoba</string>
+    <string name="helpline_category_veterans">Veterani</string>
+    <string name="helpline_category_violence">Nasilje</string>
+    <string name="helpline_category_war">Rat</string>
+    <string name="helpline_category_women">Žene</string>
+    <string name="helpline_category_youth">Mladi</string>
+</resources>

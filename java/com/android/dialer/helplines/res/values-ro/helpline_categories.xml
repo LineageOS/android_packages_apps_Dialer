@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Abuz</string>
+    <string name="helpline_category_acohol">Alcool</string>
+    <string name="helpline_category_addiction">Dependenţă</string>
+    <string name="helpline_category_adolescents">Adolescenţi</string>
+    <string name="helpline_category_adults">Adulți</string>
+    <string name="helpline_category_aids">SIDA</string>
+    <string name="helpline_category_birth">Naștere</string>
+    <string name="helpline_category_bullying">Intimidare</string>
+    <string name="helpline_category_children">Copii</string>
+    <string name="helpline_category_crime">Crimă</string>
+    <string name="helpline_category_crime_victims">Victime ale crimei</string>
+    <string name="helpline_category_corruption">Corupție</string>
+    <string name="helpline_category_discrimination">Discriminare</string>
+    <string name="helpline_category_domestic_violence">Violenţă domestică</string>
+    <string name="helpline_category_drugs">Droguri</string>
+    <string name="helpline_category_emotional_support">Suport emoțional</string>
+    <string name="helpline_category_family">Familie</string>
+    <string name="helpline_category_gambling">Jocuri de noroc</string>
+    <string name="helpline_category_gender">Gen</string>
+    <string name="helpline_category_generic">General</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Drepturile omului</string>
+    <string name="helpline_category_human_trafficking">Trafic de persoane</string>
+    <string name="helpline_category_immigration">Imigrare</string>
+    <string name="helpline_category_legal_aid">Asistență juridică</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Bărbați</string>
+    <string name="helpline_category_mental_health">Sănătate mintală</string>
+    <string name="helpline_category_missing_children">Copii dispăruți</string>
+    <string name="helpline_category_mothers">Mame</string>
+    <string name="helpline_category_muslim">Musulman</string>
+    <string name="helpline_category_parents">Părinți</string>
+    <string name="helpline_category_pregnancy">Sarcină</string>
+    <string name="helpline_category_psychological">Psihologic</string>
+    <string name="helpline_category_religion">Religie</string>
+    <string name="helpline_category_senior">Vârstnici</string>
+    <string name="helpline_category_sexual_abuse">Abuz sexual</string>
+    <string name="helpline_category_sexual_assault">Hărțuire sexuală</string>
+    <string name="helpline_category_sexual_rights">Drepturi sexuale</string>
+    <string name="helpline_category_sexuality">Sexualitate</string>
+    <string name="helpline_category_soldiers">Soldați</string>
+    <string name="helpline_category_suicide">Prevenirea sinuciderilor</string>
+    <string name="helpline_category_trans">Transgen</string>
+    <string name="helpline_category_veterans">Veterani</string>
+    <string name="helpline_category_violence">Violență</string>
+    <string name="helpline_category_war">Război</string>
+    <string name="helpline_category_women">Femei</string>
+    <string name="helpline_category_youth">Tineret</string>
+</resources>

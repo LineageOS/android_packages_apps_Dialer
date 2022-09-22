@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Нарушение</string>
+    <string name="helpline_category_acohol">Алкохол</string>
+    <string name="helpline_category_addiction">Пристрастени</string>
+    <string name="helpline_category_adolescents">Юноши</string>
+    <string name="helpline_category_adults">Пълнолетни</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Рожденици</string>
+    <string name="helpline_category_bullying">Тормоз</string>
+    <string name="helpline_category_children">Деца</string>
+    <string name="helpline_category_crime">Крими</string>
+    <string name="helpline_category_crime_victims">Жертви на престъпления</string>
+    <string name="helpline_category_corruption">Корупция</string>
+    <string name="helpline_category_discrimination">Дискриминация</string>
+    <string name="helpline_category_domestic_violence">Насилие в семейството</string>
+    <string name="helpline_category_drugs">Наркотици</string>
+    <string name="helpline_category_emotional_support">Емоционална подкрепа</string>
+    <string name="helpline_category_family">Семейство</string>
+    <string name="helpline_category_gambling">Хазарт</string>
+    <string name="helpline_category_gender">Пол</string>
+    <string name="helpline_category_generic">Общ</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Човешки права</string>
+    <string name="helpline_category_human_trafficking">Трафик на хора</string>
+    <string name="helpline_category_immigration">Имиграция</string>
+    <string name="helpline_category_legal_aid">Правна помощ</string>
+    <string name="helpline_category_lgbtq">ЛГБТИ+</string>
+    <string name="helpline_category_men">Мъже</string>
+    <string name="helpline_category_mental_health">Психично здраве</string>
+    <string name="helpline_category_missing_children">Изчезнали деца</string>
+    <string name="helpline_category_mothers">Майки</string>
+    <string name="helpline_category_muslim">Ислям</string>
+    <string name="helpline_category_parents">Родители</string>
+    <string name="helpline_category_pregnancy">Бременност</string>
+    <string name="helpline_category_psychological">Психология</string>
+    <string name="helpline_category_religion">Религия</string>
+    <string name="helpline_category_senior">Пенсионери</string>
+    <string name="helpline_category_sexual_abuse">Сексуално насилие</string>
+    <string name="helpline_category_sexual_assault">Изнасилване</string>
+    <string name="helpline_category_sexual_rights">Сексуални права</string>
+    <string name="helpline_category_sexuality">Сексуалност</string>
+    <string name="helpline_category_soldiers">Военослужещи</string>
+    <string name="helpline_category_suicide">Превенция на самоубийството</string>
+    <string name="helpline_category_trans">Трансджендър</string>
+    <string name="helpline_category_veterans">Ветерани</string>
+    <string name="helpline_category_violence">Насилие</string>
+    <string name="helpline_category_war">Война</string>
+    <string name="helpline_category_women">Жени</string>
+    <string name="helpline_category_youth">Младост</string>
+</resources>

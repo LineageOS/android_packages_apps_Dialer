@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Llinellau Cymorth</string>
+    <string name="helplines_loading">Yn llwytho\u2026</string>
+    <string name="helplines_empty">Heb ddarganfod llinellau cymorth.\nGosodwch gerdyn SIM a rhoi cynnig arall arni</string>
+    <string name="helplines_help">Cymorth</string>
+    <string name="helplines_help_title">Mae\'r rhain yn ddiogel i\'w galw</string>
+    <string name="helplines_help_message">Nid oes unrhyw un o\'r rhifau hyn yn ymddangos yn hanes eich galwad. Gallwch glicio ar unrhyw eitem i gael mwy o wybodaeth</string>
+    <string name="helplines_help_more_message">Mae\'r rhestr o linellau cymorth wedi\'i llenwi â gwybodaeth sy\'n cael ei diweddaru â llaw gan gyfranwyr. Os oes unrhyw wybodaeth ar goll neu\'n anghywir, mae croeso i chi gysylltu â ni yn <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
+    <string name="helpline_button_more">Rhagor</string>
+    <string name="unknown_helpline_name">Sefydliad anhysbys</string>
+    <string name="helpline_name">Enw</string>
+    <string name="helpline_org">Sefydliad</string>
+    <string name="helpline_categories">Categorïau</string>
+    <string name="helpline_number">Rhif</string>
+    <string name="helpline_website">Gwefan</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Cree</string>
+    <string name="helpline_language_english">Saesneg</string>
+    <string name="helpline_language_french">Ffrangeg</string>
+    <string name="helpline_language_german">Almaeneg</string>
+    <string name="helpline_language_inuktitut">Inuktitut</string>
+    <string name="helpline_language_ojibway">Ojibway</string>
+    <string name="helpline_language_turkish">Twrceg</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="helplines_name">Loidhnichean-taice</string>
+    <string name="helplines_loading">’Ga luchdadh\u2026</string>
+    <string name="helplines_empty">Cha deach loidhne-taice a lorg.\nCuir a-steach cairt SIM is feuch ris a-rithist</string>
+    <string name="helplines_help">Cobhair</string>
+    <string name="helplines_help_title">Tha e sàbhailte fòn a chur thuca</string>
+    <string name="helplines_help_message">Chan eil gin dhe na h-àireamhan seo air eachdraidh nan gairmean agad.\n’S urrainn dhut briogadh air nì sam bith airson barrachd fiosrachaidh</string>
+    <string name="helplines_help_more_message">Lìonaidh com-pàirtichean liosta nan loidhnichean-taice le fiosrachadh a thèid ùrachadh a làimh. Ma chì thu fiosrachadh seam bith a tha a dhìth no ceàrr, nach cuir thu fios thugainn air <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g>?</string>
+    <string name="helpline_button_more">Barrachd</string>
+    <string name="unknown_helpline_name">Buidheann nach aithne dhuinn</string>
+    <string name="helpline_name">Ainm</string>
+    <string name="helpline_org">Buidheann</string>
+    <string name="helpline_categories">Roinnean-seòrsa</string>
+    <string name="helpline_number">Àireamh</string>
+    <string name="helpline_website">Làrach-lìn</string>
+    <string name="helpline_name_format_country"><xliff:g id="helpline_name" example="Emotional Support Helpline">%1$s</xliff:g> (<xliff:g id="helpline_county" example="US">%2$s</xliff:g>)</string>
+    <string name="helpline_language_cree">Cree</string>
+    <string name="helpline_language_english">Beurla</string>
+    <string name="helpline_language_french">Fraingis</string>
+    <string name="helpline_language_german">Gearmailtis</string>
+    <string name="helpline_language_inuktitut">Inuktitut</string>
+    <string name="helpline_language_ojibway">Ojibwa</string>
+    <string name="helpline_language_turkish">Turcais</string>
+</resources>

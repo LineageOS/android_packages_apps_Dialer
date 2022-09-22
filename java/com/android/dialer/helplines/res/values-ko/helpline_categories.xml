@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">악용</string>
+    <string name="helpline_category_acohol">알코올</string>
+    <string name="helpline_category_addiction">중독</string>
+    <string name="helpline_category_adolescents">청소년</string>
+    <string name="helpline_category_adults">성인</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">출산</string>
+    <string name="helpline_category_bullying">따돌림</string>
+    <string name="helpline_category_children">어린이</string>
+    <string name="helpline_category_crime">범죄</string>
+    <string name="helpline_category_crime_victims">범죄피해자</string>
+    <string name="helpline_category_corruption">부패</string>
+    <string name="helpline_category_discrimination">차별</string>
+    <string name="helpline_category_domestic_violence">가정폭력</string>
+    <string name="helpline_category_drugs">약물</string>
+    <string name="helpline_category_emotional_support">정서적 지원</string>
+    <string name="helpline_category_family">가족</string>
+    <string name="helpline_category_gambling">도박</string>
+    <string name="helpline_category_gender">젠더</string>
+    <string name="helpline_category_generic">일반</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">인권</string>
+    <string name="helpline_category_human_trafficking">인신매매</string>
+    <string name="helpline_category_immigration">이민</string>
+    <string name="helpline_category_legal_aid">법률구조</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">남성</string>
+    <string name="helpline_category_mental_health">정신 건강</string>
+    <string name="helpline_category_missing_children">미아</string>
+    <string name="helpline_category_mothers">어머니</string>
+    <string name="helpline_category_muslim">무슬림</string>
+    <string name="helpline_category_parents">부모</string>
+    <string name="helpline_category_pregnancy">임신</string>
+    <string name="helpline_category_psychological">심리</string>
+    <string name="helpline_category_religion">종교</string>
+    <string name="helpline_category_senior">노년</string>
+    <string name="helpline_category_sexual_abuse">성적 학대</string>
+    <string name="helpline_category_sexual_assault">성폭력</string>
+    <string name="helpline_category_sexual_rights">성적 권리</string>
+    <string name="helpline_category_soldiers">군인</string>
+    <string name="helpline_category_suicide">자살 예방</string>
+    <string name="helpline_category_trans">트랜스젠더</string>
+    <string name="helpline_category_veterans">베테랑</string>
+    <string name="helpline_category_violence">폭력</string>
+    <string name="helpline_category_war">전쟁</string>
+    <string name="helpline_category_women">여성</string>
+</resources>
