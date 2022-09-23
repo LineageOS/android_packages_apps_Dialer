@@ -110,7 +110,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/quantum_ic_content_copy_vd_theme_24"
-        android:text="@string/call_details_copy_number"/>
+        android:text="@string/call_details_copy_number"
+        android:drawableTint="?colorIcon"/>
 
       <TextView
         android:id="@+id/call_detail_action_edit_before_call"
@@ -118,7 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/quantum_ic_edit_vd_theme_24"
-        android:text="@string/call_details_edit_number"/>
+        android:text="@string/call_details_edit_number"
+        android:drawableTint="?colorIcon"/>
 
     </LinearLayout>
 

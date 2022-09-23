@@ -17,8 +17,8 @@
 <resources>
 
   <style name="LaunchTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-    <item name="android:colorPrimary">@color/dialer_theme_color</item>
-    <item name="colorPrimary">@color/dialer_theme_color</item>
+    <item name="android:colorPrimary">@color/dialer_primary_color</item>
+    <item name="colorPrimary">@color/dialer_primary_color</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="android:windowLightStatusBar">true</item>
@@ -44,7 +44,7 @@
     <!-- Required for actionmode/multiselect to render properly. -->
     <!-- TODO(a bug): Check to see if we can remove this after NewVoicemailFragment launches -->
     <item name="actionModeStyle">@style/MainActionModeStyle</item>
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     <item name="dialpad_style">@style/Dialpad.Themed</item>
     <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
     <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>

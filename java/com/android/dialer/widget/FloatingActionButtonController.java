@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 
 import com.android.dialer.R;
@@ -97,6 +98,10 @@ public class FloatingActionButtonController {
     if (!fab.getContentDescription().equals(description)) {
       fab.setContentDescription(description);
     }
+  }
+
+  public void changeIconColor(Context context, @ColorRes int color) {
+    fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(color)));
   }
 
   /**

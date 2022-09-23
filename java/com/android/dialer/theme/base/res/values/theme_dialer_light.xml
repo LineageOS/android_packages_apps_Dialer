@@ -28,8 +28,8 @@
     <item name="actionBarTheme">@style/DialerActionBarBaseTheme</item>
     <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
 
-    <item name="android:colorPrimaryDark">@color/settings_primary_dark</item>
     <item name="colorControlHighlight">@color/dialer_ripple_color</item>
+    <item name="android:windowLightStatusBar">true</item>
   </style>
 
   <style name="Dialer.ThemeBase.NoActionBar">
@@ -38,8 +38,8 @@
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
 
-    <item name="android:colorPrimaryDark">@color/settings_primary_dark</item>
     <item name="colorControlHighlight">@color/dialer_ripple_color</item>
+    <item name="android:windowLightStatusBar">true</item>
   </style>
 
   <!-- Activities and Applications should inherit from one of the themes above. -->
@@ -58,15 +58,15 @@
     <item name="android:textColorHint">@color/google_grey_600</item>
 
     <!-- These will be automatically used to color most Appcompat/Material widgets. -->
-    <item name="android:colorPrimary">@color/dialer_theme_color</item>
-    <item name="colorPrimary">@color/dialer_theme_color</item>
-    <item name="android:colorPrimaryDark">@color/dialer_theme_color_dark</item>
-    <item name="colorPrimaryDark">@color/dialer_theme_color_dark</item>
+    <item name="android:colorPrimary">@color/dialer_primary_color</item>
+    <item name="colorPrimary">@color/dialer_primary_color</item>
+    <item name="android:colorPrimaryDark">@color/dialer_primary_color</item>
+    <item name="colorPrimaryDark">@color/dialer_primary_color</item>
     <item name="android:colorAccent">@color/dialer_theme_color</item>
     <item name="colorAccent">@color/dialer_theme_color</item>
 
     <!-- Used to automatically style check/selected checkbox, switches and radio buttons -->
-    <item name="colorControlActivated">?android:attr/colorPrimary</item>
+    <item name="colorControlActivated">?android:attr/colorAccent</item>
 
     <!-- Dialer specific attributes. -->
     <item name="colorIcon">@color/google_grey_700</item>
@@ -74,6 +74,7 @@
     <item name="colorTextOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
     <item name="colorIconOnUnthemedDarkBackground">@*android:color/system_neutral1_0</item>
     <item name="colorPrimary20pct">@color/dialer_theme_color_20pct</item>
+    <item name="colorCallNotificationBackground">@*android:color/system_accent2_200</item>
   </style>
 
   <!-- TODO(a bug): investigate making this style's parent Dialer.ThemeBase.NoActionBar -->
@@ -88,13 +89,9 @@
   <!-- Deprecated: Use Toolbar instead of ActionBar. -->
   <!-- Used to style all Dialer's action bars. Every actionbar is awarded this for free if the parent
      activity's theme extends from Dialer.ThemeBase.ActionBar or doesn't specify a theme. -->
-  <style name="DialerActionBarBaseStyle"
-      parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+  <style name="DialerActionBarBaseStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
     <item name="android:background">?android:attr/colorPrimary</item>
     <item name="background">?android:attr/colorPrimary</item>
   </style>
-  <style name="DialerActionBarBaseTheme"
-      parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="colorControlNormal">@*android:color/system_neutral1_0</item>
-  </style>
+  <style name="DialerActionBarBaseTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar" />
 </resources>

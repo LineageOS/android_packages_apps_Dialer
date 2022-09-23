@@ -27,10 +27,18 @@
     <item name="orangeColor">@color/blocked_call</item>
   </style>
 
-  <style name="TextAppearance.CallStatsCategoryTitle" parent="TextAppearance.AppCompat.Body2">
-    <item name="android:textAllCaps">true</item>
-    <item name="android:textSize">11sp</item>
-    <!-- 0.8 Spacing, 0.8/11 = 0.072727273 -->
-    <item name="android:letterSpacing">0.072727273</item>
+  <style name="CallStatsDetailBarStyle" parent="CallStatsBarStyle">
+    <item name="android:layout_height">6dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:layout_marginBottom">8dp</item>
+  </style>
+
+  <!-- equals MD3 TitleMedium style -->
+  <style name="TextAppearance.CallStatsCategoryTitle" parent="TextAppearance.AppCompat.Subhead">
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.009375</item>
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 </resources>
