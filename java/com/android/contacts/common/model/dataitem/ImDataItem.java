@@ -22,6 +22,8 @@ import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.text.TextUtils;
 
+import java.util.Objects;
+
 /**
  * Represents an IM data item, wrapping the columns in {@link ContactsContract.CommonDataKinds.Im}.
  */
@@ -97,7 +99,7 @@ public class ImDataItem extends DataItem {
         return that.getProtocol() == Im.PROTOCOL_CUSTOM;
       }
       return true;
-    } else if (getProtocol() != that.getProtocol()) {
+    } else if (!Objects.equals(getProtocol(), that.getProtocol())) {
       return false;
     } else if (getProtocol() == Im.PROTOCOL_CUSTOM
         && !TextUtils.equals(getCustomProtocol(), that.getCustomProtocol())) {
