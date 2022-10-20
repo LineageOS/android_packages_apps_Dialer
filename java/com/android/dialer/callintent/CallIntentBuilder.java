@@ -77,8 +77,7 @@ public class CallIntentBuilder implements Parcelable {
           .setTimeSinceFirstClick(PerformanceReport.getTimeSinceFirstClick())
           .addAllUiActionsSinceAppLaunch(PerformanceReport.getActions())
           .addAllUiActionTimestampsSinceAppLaunch(PerformanceReport.getActionTimestamps())
-          .setStartingTabIndex(PerformanceReport.getStartingTabIndex())
-          .build();
+          .setStartingTabIndex(PerformanceReport.getStartingTabIndex());
       PerformanceReport.stopRecording();
     }
 
