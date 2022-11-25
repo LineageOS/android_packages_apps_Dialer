@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="nearby_places">Месцы побач</string>
+    <string name="people">Людзі</string>
+    <string name="lookup_settings_label">Пошук нумара тэлефона</string>
+    <string name="enable_forward_lookup_title">Прамы пошук</string>
+    <string name="enable_forward_lookup_summary">Паказваць месцы побач пры пошуку ў нумаранабіральніку</string>
+    <string name="enable_people_lookup_title">Пошук людзей</string>
+    <string name="enable_people_lookup_summary">Паказваць вынікі з сеткі пры пошуку людзей у нумаранабіральніку</string>
+    <string name="enable_reverse_lookup_title">Зваротны пошук</string>
+    <string name="enable_reverse_lookup_summary">Пошук інфармацыі пра асобу або месца для ўваходных з невядомых нумароў</string>
+    <string name="forward_lookup_provider_title">Пастаўшчык прамога пошуку</string>
+    <string name="people_lookup_provider_title">Пастаўшчык пошуку даных пра людзей</string>
+    <string name="reverse_lookup_provider_title">Пастаўшчык зваротнага пошуку</string>
+    <string name="lookup_disclaimer">Пошукавыя запыты могуць адпраўляць запыты па абароненаму пратаколу (https) на выдаленыя вэб-сайты для збору інфармацыі. Запыт можа ўключаць тэлефонны нумар іншага боку або пошукавы запыт</string>
+</resources>
