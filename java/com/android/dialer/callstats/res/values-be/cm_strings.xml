@@ -16,6 +16,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">Падрабязная статыстыка кантакту</string>
+    <string name="call_stats_incoming">Уваходных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">Выходных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">Прапушчаных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">Заблакіраваных: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">Усяго: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">Усяго: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_to">Дата завяршэння</string>
     <string name="date_qs_currentyear">Бягучы год</string>
     <string name="date_qs_lastweek">Апошні тыдзень</string>
     <string name="date_qs_lastmonth">Апошні месяц</string>

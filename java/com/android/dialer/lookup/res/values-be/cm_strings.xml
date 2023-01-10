@@ -27,5 +27,5 @@
     <string name="forward_lookup_provider_title">Пастаўшчык прамога пошуку</string>
     <string name="people_lookup_provider_title">Пастаўшчык пошуку даных пра людзей</string>
     <string name="reverse_lookup_provider_title">Пастаўшчык зваротнага пошуку</string>
-    <string name="lookup_disclaimer">Пошукавыя запыты могуць адпраўляць запыты па абароненаму пратаколу (https) на выдаленыя вэб-сайты для збору інфармацыі. Запыт можа ўключаць тэлефонны нумар іншага боку або пошукавы запыт</string>
+    <string name="lookup_disclaimer">Пры пошуку пэўнай інфармацыі запыты адпраўляюцца праз абаронены пратакол (https) на аддаленыя вэб-сайты для збору інфармацыі. Запыт можа ўключаць тэлефонны нумар іншай асобы або пошукавы запыт</string>
 </resources>
