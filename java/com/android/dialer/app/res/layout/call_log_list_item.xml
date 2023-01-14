@@ -45,7 +45,6 @@
       <!-- Primary area containing the contact badge and caller information -->
       <LinearLayout
         android:id="@+id/primary_action_view"
-        android:background="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/call_log_start_margin"

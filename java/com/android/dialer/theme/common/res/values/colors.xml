@@ -16,11 +16,12 @@
   -->
 <!-- The colors in this file aren't configured at the theme level. -->
 <resources>
-  <color name="dialer_call_green">#00C853</color>
-  <color name="dialer_end_call_button_color">#BD2A2A</color>
+  <color name="dialer_call_green">#006c49</color>
+  <color name="dialer_end_call_button_color">#b52425</color>
   <color name="dialer_divider_line_color">#D8D8D8</color>
   <color name="dialer_link_color">#2A56C6</color>
-  <color name="dialer_snackbar_action_text_color">#4285F4</color>
+  <color name="dialer_snackbar_action_text_color">#005ac1</color>
+
 
   <!-- Colors for the notification actions -->
   <color name="notification_action_accept">#097138</color>
@@ -31,4 +32,6 @@
 
   <!-- Legacy -->
   <color name="blue_grey_100">#CFD8DC</color>
+
+  <color name="cardBackgroundColor">@*android:color/system_neutral1_50</color>
 </resources>

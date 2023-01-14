@@ -22,8 +22,9 @@
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_margin">4dp</item>
     <item name="android:baselineAligned">false</item>
-    <item name="cardCornerRadius">2dp</item>
-    <item name="cardBackgroundColor">?android:attr/colorBackgroundFloating</item>
+    <item name="cardCornerRadius">28dp</item>
+    <item name="cardBackgroundColor">?android:attr/colorBackground</item>
+    <item name="cardElevation">0dp</item>
   </style>
 
   <!-- This Checkbox style helps align checkboxes with the common list element layout(Image + text) -->
