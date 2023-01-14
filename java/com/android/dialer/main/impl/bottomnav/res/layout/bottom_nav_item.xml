@@ -32,7 +32,8 @@
         android:id="@+id/bottom_nav_item_image"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"/>
 
     <TextView
         android:id="@+id/notification_badge"
@@ -57,7 +58,7 @@
       android:id="@+id/bottom_nav_item_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
+      android:layout_marginBottom="16dp"
       android:gravity="center_horizontal"
       android:textSize="12sp"
       style="@style/Dialer.TextAppearance.Secondary"/>
