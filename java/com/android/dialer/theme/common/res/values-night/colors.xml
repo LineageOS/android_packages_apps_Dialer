@@ -18,4 +18,9 @@
 <resources>
   <!-- Settings -->
   <color name="dialer_settings_theme_color_dark">#1C3AA9</color>
+
+  <color name="dialer_call_green">#3ee0a0</color>
+  <color name="dialer_end_call_button_color">#ffb3ac</color>
+  <color name="dialer_link_color">#b5c4ff</color>
+  <color name="dialer_snackbar_action_text_color">#adc6ff</color>
 </resources>

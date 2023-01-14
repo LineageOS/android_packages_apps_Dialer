@@ -17,6 +17,12 @@
 package com.android.dialer.app.calllog;
 
 import android.Manifest.permission;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -44,8 +50,12 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.transition.TransitionManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -502,6 +512,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
       sendVoicemailButtonView = actionsView.findViewById(R.id.share_voicemail);
       sendVoicemailButtonView.setOnClickListener(this);
+
+      actionsView.setVisibility(View.GONE);
     }
   }
 
@@ -887,20 +899,86 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         return;
       }
 
+      TransitionManager.beginDelayedTransition((ViewGroup) rootView);
       // Inflate the view stub if necessary, and wire up the event handlers.
       inflateActionViewStub();
       bindActionButtons();
-      actionsView.setVisibility(View.VISIBLE);
-      actionsView.setAlpha(1.0f);
+      animateActions(true);
+      TransitionManager.endTransitions((ViewGroup) rootView);
     } else {
+      TransitionManager.beginDelayedTransition((ViewGroup) rootView);
       // When recycling a view, it is possible the actionsView ViewStub was previously
       // inflated so we should hide it in this case.
       if (actionsView != null) {
-        actionsView.setVisibility(View.GONE);
+        animateActions(false);
       }
+      TransitionManager.endTransitions((ViewGroup) rootView);
+    }
+    updatePrimaryActionButton(show);
+  }
+
+  private void animateActions(boolean shouldExpand) {
+    boolean isExpanded = actionsView.getVisibility() == View.VISIBLE;
+    if (shouldExpand == isExpanded) {
+      return;
+    }
+    Resources res = context.getResources();
+    actionsView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+    int currentHeight = callLogEntryView.getMeasuredHeight();
+    int additionalHeight = actionsView.getMeasuredHeight();
+
+    int targetHeight;
+    int colorFrom, colorTo;
+    TimeInterpolator interpolator;
+    int targetVisibility;
+    float targetElevation;
+    if (shouldExpand) {
+      targetHeight = currentHeight + additionalHeight;
+      colorFrom = res.getColor(android.R.color.transparent, context.getTheme());
+      colorTo  = res.getColor(R.color.cardBackgroundColor, context.getTheme());
+      interpolator = new AccelerateDecelerateInterpolator();
+      targetVisibility = View.VISIBLE;
+      targetElevation = 4f;
+    } else {
+      targetHeight = currentHeight - additionalHeight;
+      colorFrom  = res.getColor(R.color.cardBackgroundColor, context.getTheme());
+      colorTo = res.getColor(android.R.color.transparent, context.getTheme());
+      interpolator = new DecelerateInterpolator();
+      targetVisibility = View.GONE;
+      targetElevation = 0f;
+      // need to do this before animating, otherwise the color changes are weird
+      callLogEntryView.setCardElevation(targetElevation);
     }
 
-    updatePrimaryActionButton(show);
+    ValueAnimator heightAnimator = ValueAnimator.ofInt(currentHeight, targetHeight);
+    heightAnimator.addUpdateListener(animation -> {
+      callLogEntryView.getLayoutParams().height = (int) animation.getAnimatedValue();
+      callLogEntryView.requestLayout();
+    });
+    heightAnimator.setInterpolator(interpolator);
+    heightAnimator.setDuration(200);
+
+    ValueAnimator colorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+    colorAnimator.setDuration(200);
+    colorAnimator.addUpdateListener(animator -> callLogEntryView.setCardBackgroundColor(
+            (int) animator.getAnimatedValue()));
+
+    AnimatorSet animatorSet = new AnimatorSet();
+    animatorSet.playTogether(heightAnimator, colorAnimator);
+    animatorSet.addListener(new AnimatorListenerAdapter() {
+      @Override
+      public void onAnimationEnd(Animator animation) {
+        super.onAnimationEnd(animation);
+        actionsView.setVisibility(targetVisibility);
+        callLogEntryView.setCardElevation(targetElevation);
+
+        // we need to set this so we can expand again
+        ViewGroup.LayoutParams params = callLogEntryView.getLayoutParams();
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        callLogEntryView.setLayoutParams(params);
+      }
+    });
+    animatorSet.start();
   }
 
   private void showOrHideVoicemailTranscriptionView(boolean isExpanded) {
