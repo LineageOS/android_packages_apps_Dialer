@@ -18,7 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="call_log_show_all_accounts">Усе ўліковыя запісы</string>
     <string name="call_log_all_calls_header">Усе выклікі</string>
-    <string name="call_log_incoming_header">Толькі ўваходныя званкі</string>
+    <string name="call_log_incoming_header">Толькі ўваходныя выклікі</string>
     <string name="call_log_outgoing_header">Толькі выходныя званкі</string>
     <string name="call_log_missed_header">Толькі прапушчаныя званкі</string>
     <string name="call_log_voicemail_header">Толькі выклікі з галасавой пошты</string>
