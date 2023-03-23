@@ -17,6 +17,7 @@ package com.android.dialer.app.calllog;
 
 import static com.android.dialer.app.DevicePolicyResources.NOTIFICATION_MISSED_WORK_CALL_TITLE;
 
+import android.app.BroadcastOptions;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.PendingIntent;
@@ -27,6 +28,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.CallLog.Calls;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
@@ -44,6 +46,7 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;
@@ -68,6 +71,7 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -500,6 +504,12 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
   /** Closes open system dialogs and the notification shade. */
   private void closeSystemDialogs(Context context) {
-    context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+    final Intent intent = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
+            .addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+    final Bundle options = BroadcastOptions.makeBasic()
+            .setDeliveryGroupPolicy(BroadcastOptions.DELIVERY_GROUP_POLICY_MOST_RECENT)
+            .setDeferralPolicy(BroadcastOptions.DEFERRAL_POLICY_UNTIL_ACTIVE)
+            .toBundle();
+    context.sendBroadcast(intent, null /* receiverPermission */, options);
   }
 }
