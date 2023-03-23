@@ -21,6 +21,7 @@
     <string name="helplines_help">Aide</string>
     <string name="helplines_help_title">Celles-ci peuvent être appelées en toute sécurité</string>
     <string name="helplines_help_message">Aucun de ces numéros n’apparaît dans votre historique d’appel.\nVous pouvez cliquer sur n’importe quel élément pour plus d’informations</string>
+    <string name="helplines_help_more_message">La liste des services d\'assistance téléphonique est maintenue manuellement par les contributeurs. Si certaines informations sont manquantes ou erronées, n\'hésitez pas à nous contacter sur : <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Plus</string>
     <string name="unknown_helpline_name">Organisation inconnue</string>
     <string name="helpline_name">Nom</string>
