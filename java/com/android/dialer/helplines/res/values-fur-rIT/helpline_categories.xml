@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Abûs</string>
+    <string name="helpline_category_acohol">Alcul</string>
+    <string name="helpline_category_addiction">Dipendence</string>
+    <string name="helpline_category_adolescents">Adolessents</string>
+    <string name="helpline_category_adults">Adults</string>
+    <string name="helpline_category_aids">AIDS</string>
+    <string name="helpline_category_birth">Nassite</string>
+    <string name="helpline_category_bullying">Bulatisim</string>
+    <string name="helpline_category_children">Fruts</string>
+    <string name="helpline_category_crime">Crimin</string>
+    <string name="helpline_category_crime_victims">Vitimis di criminâi</string>
+    <string name="helpline_category_corruption">Coruzion</string>
+    <string name="helpline_category_discrimination">Discriminazion</string>
+    <string name="helpline_category_domestic_violence">Violence domestiche</string>
+    <string name="helpline_category_drugs">Droghis</string>
+    <string name="helpline_category_emotional_support">Supuart emotîf</string>
+    <string name="helpline_category_family">Famee</string>
+    <string name="helpline_category_gambling">Zûc di azart</string>
+    <string name="helpline_category_gender">Gjenar</string>
+    <string name="helpline_category_generic">Gjeneric</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Dirits umans</string>
+    <string name="helpline_category_human_trafficking">Trate di personis</string>
+    <string name="helpline_category_immigration">Imigrazion</string>
+    <string name="helpline_category_legal_aid">Assistence legâl</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Oms</string>
+    <string name="helpline_category_mental_health">Salût mentâl</string>
+    <string name="helpline_category_missing_children">Fruts sparîts</string>
+    <string name="helpline_category_mothers">Maris</string>
+    <string name="helpline_category_muslim">Musulman</string>
+    <string name="helpline_category_parents">Gjenitôrs</string>
+    <string name="helpline_category_pregnancy">Gravidance</string>
+    <string name="helpline_category_psychological">Psicologjic</string>
+    <string name="helpline_category_religion">Religjon</string>
+    <string name="helpline_category_senior">Anzians</string>
+    <string name="helpline_category_sexual_abuse">Abûs sessuâl</string>
+    <string name="helpline_category_sexual_assault">Agression sessuâl</string>
+    <string name="helpline_category_sexual_rights">Dirits sessuâi</string>
+    <string name="helpline_category_sexuality">Sessualitât</string>
+    <string name="helpline_category_soldiers">Soldâts</string>
+    <string name="helpline_category_suicide">Prevenzion dai suicidis</string>
+    <string name="helpline_category_trans">Transessuâl</string>
+    <string name="helpline_category_veterans">Veterans</string>
+    <string name="helpline_category_violence">Violence</string>
+    <string name="helpline_category_war">Vuere</string>
+    <string name="helpline_category_women">Feminis</string>
+    <string name="helpline_category_youth">Zoventût</string>
+</resources>
