@@ -31,4 +31,5 @@
     <string name="call_via">Gọi bằng</string>
     <string name="call_via_dialog_title">Gọi bằng\u2026</string>
     <string name="call_log_stats_title">Thống kê</string>
+    <string name="action_menu_helplines">Đường dây nóng</string>
 </resources>

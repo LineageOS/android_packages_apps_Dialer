@@ -16,7 +16,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_stats_detail_title">Şəxs statistika təfsilatları</string>
+    <string name="call_stats_detail_title">Kontakt statistika detalları</string>
     <string name="call_stats_incoming">Gələn: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_outgoing">Gedən: <xliff:g id="value">%s</xliff:g></string>
     <string name="call_stats_missed">Cavabsız: <xliff:g id="value">%s</xliff:g></string>

@@ -15,7 +15,13 @@
   ~ limitations under the License
   -->
 <resources>
+  <string name="action_menu_back_from_search">sguir dhen lorg</string>
+  <string name="description_clear_search">Falamhaich an lorg</string>
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Barrachd roghainnean</string>
   <string name="description_start_voice_search">Tòisich air lorg gutha</string>
   <string name="dialer_hint_find_contact">Lorg san luchd-aithne</string>
+  <string name="settings">Roghainnean</string>
+  <string name="main_menu_call_history">Eachdraidh nan gairmean</string>
+  <string name="main_menu_clear_frequents">Falamhaich an fheadhainn thric</string>
+  <string name="main_remove_contact">Thoir air falbh</string>
 </resources>

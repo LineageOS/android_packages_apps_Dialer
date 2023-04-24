@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_settings_with_label">Lleisbost (<xliff:g example="Mock Carrier" id="subscriptionlabel">%s</xliff:g>)</string>
+  <string name="voicemail_settings_title">Lleisbost</string>
+  <string name="voicemail_notifications_preference_title">Hysbysiadau</string>
+  <string name="voicemail_change_greeting_preference_title">Cyfarchiad lleisbost</string>
+  <string name="current_voicemail_greeting_record_instruction">Recordio cyfarchiad</string>
+  <string name="current_voicemail_greeting_recording_title">Fy nghyfarchiad lleisbost</string>
+  <string name="change_greeting_text">Tapia i recordio</string>
+  <string name="save_button_text">Cadw</string>
+  <string name="redo_button_text">Ceisio Eto</string>
+  <string name="voicemail_advanced_settings_title">Gosodiadau Uwch</string>
+  <string name="voicemail_visual_voicemail_switch_title">Lleisbost gweledol</string>
+  <string name="voicemail_visual_voicemail_auto_archive_switch_title">Storfa a chadw wrth gefn ychwanegol</string>
+  <string name="voicemail_set_pin_preference_title">Gosod PIN</string>
+  <string name="voicemail_change_pin_preference_title">Newid PIN</string>
+  <string name="voicemail_change_pin_preference_summary_disable">Rhaid galluogi lleisbost gweledol er mwyn newid y PIN</string>
+  <string name="voicemail_change_pin_preference_summary_not_activated">Nid yw lleisbost gweledol wedi\'i alluogi eto. Ceisia eto\'n hwyrach.</string>
+  <string name="vm_change_pin_old_pin">Hen PIN</string>
+  <string name="vm_change_pin_new_pin">PIN newydd</string>
+  <string name="vm_change_pin_progress_message">Arhosa.</string>
+  <string name="vm_change_pin_error_too_short">Mae\'r PIN newydd rhy fyr.</string>
+  <string name="vm_change_pin_error_too_long">Mae\'r PIN newydd rhy hir.</string>
+  <string name="vm_change_pin_error_too_weak">Mae\'r PIN yn rhy wan. Rhaid osgoi rhediad o rifau neu ailadrodd digidau.</string>
+  <string name="vm_change_pin_error_mismatch">Dyw\'r hen PIN ddim yr un fath.</string>
+  <string name="vm_change_pin_error_invalid">Mae nodau annilys yn y PIN newydd.</string>
+  <string name="vm_change_pin_error_system_error">Methu â newid y PIN</string>
+  <string name="change_pin_title">Newid PIN Lleisbost</string>
+  <string name="change_pin_continue_label">Parhau</string>
+  <string name="change_pin_cancel_label">Diddymu</string>
+  <string name="change_pin_ok_label">Iawn</string>
+  <string name="change_pin_enter_old_pin_header">Cadarnha dy hen PIN</string>
+  <string name="change_pin_enter_old_pin_hint">Rho PIN dy leisbost i barhau.</string>
+  <string name="change_pin_enter_new_pin_header">Gosod PIN newydd</string>
+  <string name="change_pin_enter_new_pin_hint">Rhaid bod y PIN yn <xliff:g example="4" id="min">%1$d</xliff:g>-<xliff:g example="7" id="max">%2$d</xliff:g> digid.</string>
+  <string name="change_pin_confirm_pin_header">Cadarnha dy PIN</string>
+  <string name="change_pin_confirm_pins_dont_match">Dyw\'r ddau PIN ddim yr un fath</string>
+  <string name="change_pin_succeeded">Diweddarwyd y PIN lleisbost</string>
+  <string name="change_pin_system_error">Methu â gosod y PIN</string>
+  <string name="voicemail_visual_voicemail_transcription_switch_title">    Trawsgrifio lleisbost
+  </string>
+  <string name="voicemail_visual_voicemail_donation_switch_title">    Dadansoddi trawsgrifiad lleisbost
+  </string>
+  <string name="voicemail_activating_summary_info">Yn rhoi lleisbost ar waith</string>
+  <string name="voicemail_transcription_preference_summary_info">Cael trawsgrifiadau dy negeseuon lleisbost gan ddefnyddio gwasanaeth trawsgrifio Google. <xliff:g example="Learn more">%1$s</xliff:g></string>
+  <string name="voicemail_donate_preference_summary_info">Gadael i Google adolygu dy negeseuon lleisbost er mwyn gwella cywirdeb trawsgrifio. Caiff dy negeseuon lleisbost eu cadw yn ddienw. <xliff:g example="Learn more">%1$s</xliff:g></string>
+  <string name="confirm_disable_voicemail_dialog_title">Troi lleisbost gweledol i ffwrdd</string>
+  <string name="confirm_disable_voicemail_dialog_message">Bydd hyn yn dileu unrhyw negeseuon lleisbost a thrawsgrifiadau Google wedi\'u cadw o fewn yr ap hwn. Gall fod dy ddarparwr gwasanaeth yn cadw ei gopïau ei hun.</string>
+  <string name="confirm_disable_voicemail_accept_dialog_label">TROI I FFWRDD</string>
+</resources>

@@ -15,6 +15,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="hour">
+        <item quantity="one">1 h</item>
+        <item quantity="other">%d h</item>
+    </plurals>
+    <plurals name="minute">
+        <item quantity="one">1 m</item>
+        <item quantity="other">%d m</item>
+    </plurals>
     <plurals name="second">
         <item quantity="one">1 s</item>
         <item quantity="other">%d s</item>

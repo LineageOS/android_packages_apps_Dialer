@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_recording_failed_message">Не вдалося записати виклик</string>
+    <string name="call_recording_file_location">Запис виклику збережено до <xliff:g id="filename">%s</xliff:g></string>
+    <string name="onscreenCallRecordText">Записати виклик</string>
+    <string name="onscreenCallRecordingText">Запис виклику — <xliff:g id="duration" example="00:10">%1$s</xliff:g></string>
+    <string name="onscreenStopCallRecordText">Зупинити запис</string>
+    <string name="recording_time_text">Запис</string>
+    <string name="recording_warning_title">Дозволити запис викликів?</string>
+    <string name="recording_warning_text">Увага: ви несете відповідальність за дотримання всіх законів, правил та обмежень, що стосуються використання функції запису викликів і використання або розповсюдження цих записів.</string>
+</resources>
