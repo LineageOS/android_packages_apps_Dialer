@@ -21,6 +21,7 @@
     <string name="helplines_help">Pomoc</string>
     <string name="helplines_help_title">Volat je bezpečné</string>
     <string name="helplines_help_message">Žádná z těchto čísel se neobjeví ve vaší historii hovorů.\nPro více informací můžete kliknout na libovolnou položku</string>
+    <string name="helplines_help_more_message">Seznam linek pomoci je vyplněn informacemi, které jsou ručně aktualizovány přispěvateli. Pokud narazíte na nějaké chybějící nebo špatné informace, neváhejte nás kontaktovat na adrese <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g></string>
     <string name="helpline_button_more">Více</string>
     <string name="unknown_helpline_name">Neznámá organizace</string>
     <string name="helpline_name">Název</string>
