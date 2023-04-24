@@ -31,4 +31,5 @@
     <string name="call_via">Galw gyda</string>
     <string name="call_via_dialog_title">Galu gyda\u2026</string>
     <string name="call_log_stats_title">Ystadegau</string>
+    <string name="action_menu_helplines">Llinellau Cymorth</string>
 </resources>

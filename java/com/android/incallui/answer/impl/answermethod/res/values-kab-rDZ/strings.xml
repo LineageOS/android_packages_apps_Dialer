@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="a11y_call_incoming_decline_description">Agwi</string>
+  <string name="call_incoming_decline">Agwi</string>
+  <string name="a11y_call_incoming_answer_description">Tiririt</string>
+  <string name="call_incoming_answer">Tiririt</string>
+</resources>

@@ -16,10 +16,14 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="unknown">Chan eil fhios</string>
+  <string name="unknown_counter">    <xliff:g id="unknown">%1$s</xliff:g> <xliff:g id="id">%2$d</xliff:g>
+  </string>
   <string name="payphone">Bothan-fòn</string>
   <string name="emergency_number">Àireamh èiginn</string>
   <string name="launcherActivityLabel">Fòn</string>
   <string name="call">Gairm fòn</string>
   <string name="video_call_lte_to_wifi_handover_toast">Lean air a’ ghairm le WiFi…</string>
   <string name="rtt_call_not_available_toast">Chan eil RTT ri fhaighinn airson na gairme seo</string>
+  <string name="call_subject_type_and_number">    <xliff:g example="Mobile" id="type">%1$s</xliff:g> <xliff:g example="(650) 555-1212" id="number">%2$s</xliff:g>
+  </string>
 </resources>

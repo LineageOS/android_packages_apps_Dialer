@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2013-2014 The CyanogenMod Project
+     Copyright (C) 2018 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="call_stats_detail_title">პირის სტატისტიკა ვრცლად</string>
+    <string name="call_stats_incoming">შემოსული: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_outgoing">გასული: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_missed">გამოტოვებული: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_blocked">შეზღუდული: <xliff:g id="value">%s</xliff:g></string>
+    <string name="call_stats_percent"><xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="call_stats_header_total">სულ: <xliff:g id="call_count">%1$s</xliff:g>, <xliff:g id="duration">%2$s</xliff:g></string>
+    <string name="call_stats_header_total_callsonly">სულ: <xliff:g id="call_count">%s</xliff:g></string>
+    <string name="call_stats_filter_from">დაწყების თარიღი</string>
+    <string name="call_stats_filter_to">დასრულების თარიღი</string>
+    <string name="call_stats_filter_picker_title">შუალედის გამორჩევა</string>
+    <string name="date_quick_selection">სწრაფი შერჩევა</string>
+    <string name="date_qs_currentmonth">მიმდინარე თვე</string>
+    <string name="date_qs_currentquarter">მიმდინარე კვარტალი</string>
+    <string name="date_qs_currentyear">მიმდინარე წელი</string>
+    <string name="date_qs_lastweek">წინა კვირა</string>
+    <string name="date_qs_lastmonth">წინა თვე</string>
+    <string name="date_qs_lastquarter">წინა კვარტალი</string>
+    <string name="date_qs_lastyear">წინა წელი</string>
+    <string name="call_stats_date_filter">დროის შუალედის შერჩევა</string>
+    <string name="call_stats_reset_filter">დროის შუალედის ჩამოყრა</string>
+    <string name="call_stats_sort_by_duration">ზარების ხანგრძლივობით დალაგება</string>
+    <string name="call_stats_sort_by_count">ზარების რაოდენობით დალაგება</string>
+    <string name="call_stats_title_for_number">ამ ნომრის</string>
+    <string name="call_stats_title_of_total">სულ</string>
+    <string name="call_stats_title_durations">ზარების ხანგრძლივობა</string>
+    <string name="call_stats_title_count">ზარების რაოდენობა</string>
+    <string name="call_stats_title_average_duration">ზარის საშუალო ხანგრძლივობა</string>
+    <string name="recent_calls_no_items_in_range">ჩანაწერებში ვერ მოიძებნა ზარები, დროის შერჩეული შუალედისთვის.</string>
+</resources>

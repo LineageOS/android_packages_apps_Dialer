@@ -18,5 +18,5 @@
   <string name="incall_enable_wifi_calling_button">Cuir an comas</string>
   <string name="video_call_not_available_title">Chan eil gairmean video ri fhaighinn an-dràsta</string>
   <string name="video_call_not_available_message">Feuch ris a-rithist an ceann greis no lean ris a’ ghairm ’na ghairm-gutha.</string>
-  <string name="voice_call">Gairm video</string>
+  <string name="voice_call">Gairm gutha</string>
 </resources>
