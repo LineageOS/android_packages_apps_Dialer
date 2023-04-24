@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright (C) 2017 The Android Open Source Project
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="a11y_voicemail_entry_call">Galw rhif</string>
+  <string name="a11y_voicemail_entry_delete">Dileu</string>
+  <string name="a11y_voicemail_entry_expand_menu">    Ehangu dewislen y cofnod lleisbost hon
+  </string>
+  <string name="a11y_voicemail_entry_pause">Seibio</string>
+  <string name="a11y_voicemail_entry_play">Chwarae</string>
+  <string name="a11y_voicemail_entry_speaker">Seinydd</string>
+  <string name="voicemail_entry_unknown">Anhysybys</string>
+  <string name="voicemailDurationFormat"><xliff:g example="10" id="minutes">%1$02d</xliff:g>:<xliff:g example="20" id="seconds">%2$02d</xliff:g></string>
+  <string name="new_voicemail_header_today">Heddiw</string>
+  <string name="new_voicemail_header_yesterday">Ddoe</string>
+  <string name="new_voicemail_header_older">Hŷn</string>
+  <string name="voicemail_transcription_branding_text">Trawsgrifio gan Google</string>
+  <string name="empty_voicemail_tab_text">Mae dy flwch lleisbost yn wag.</string>
+  <string name="snackbar_voicemail_deleted">Neges lleisbost wedi ei dileu</string>
+</resources>

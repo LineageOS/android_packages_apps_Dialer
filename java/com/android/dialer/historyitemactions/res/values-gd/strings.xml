@@ -15,6 +15,13 @@
   ~ limitations under the License
   -->
 <resources>
-  <string name="voice_call">Gairm video</string>
+  <string name="voice_call">Gairm gutha</string>
+  <string name="video_call">Gairm video</string>
+  <string name="add_to_contacts">Cuir neach-aithne ris</string>
+  <string name="send_a_message">Teachdaireachd</string>
+  <string name="not_spam">Àireamh chòir</string>
+  <string name="block_number">Bac</string>
   <string name="unblock_number">Dì-bhac</string>
+  <string name="block_and_optionally_report_spam">Bac/Dèan aithris air spama</string>
+  <string name="copy_number">Dèan lethbhreac dhen àireamh</string>
 </resources>

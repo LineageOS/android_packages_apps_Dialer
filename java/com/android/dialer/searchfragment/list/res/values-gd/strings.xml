@@ -15,8 +15,10 @@
   ~ limitations under the License
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="new_permission_no_search">Airson lorg san luchd-aithne agad, cuir air ceadan an luchd-aithne.</string>
   <string name="search_shortcut_create_new_contact">Cruthaich neach-aithne ùr</string>
   <string name="search_shortcut_add_to_contact">Cuir ri neach-aithne</string>
   <string name="search_shortcut_send_sms_message">Cuir SMS</string>
   <string name="search_shortcut_make_video_call">Dèan gairm video</string>
+  <string name="search_shortcut_make_voice_call">Cuir fòn gu <xliff:g id="phone_number">%1$s</xliff:g></string>
 </resources>

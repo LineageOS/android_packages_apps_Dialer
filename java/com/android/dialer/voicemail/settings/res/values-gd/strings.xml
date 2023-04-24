@@ -14,8 +14,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="voicemail_settings_with_label">Post-gutha (<xliff:g example="Mock Carrier" id="subscriptionlabel">%s</xliff:g>)</string>
+  <string name="voicemail_settings_title">Post-gutha</string>
   <string name="voicemail_notifications_preference_title">Brathan</string>
+  <string name="voicemail_change_greeting_preference_title">Fàilteachadh a’ phuist-ghutha</string>
+  <string name="current_voicemail_greeting_record_instruction">Clàraich fàilteachadh</string>
+  <string name="current_voicemail_greeting_recording_title">Fàilteachadh a’ phuist-ghutha agam</string>
+  <string name="change_greeting_text">Thoir gnogag airson a chlàradh</string>
+  <string name="save_button_text">Sàbhail</string>
+  <string name="redo_button_text">Feuch ris a-rithist</string>
   <string name="voicemail_advanced_settings_title">Roghainnean adhartach</string>
+  <string name="voicemail_visual_voicemail_switch_title">Post-gutha lèirsinneach</string>
+  <string name="voicemail_visual_voicemail_auto_archive_switch_title">Lethbhreac-glèidhidh ’s stòras a bharrachd</string>
+  <string name="voicemail_set_pin_preference_title">Suidhich am PIN</string>
   <string name="voicemail_change_pin_preference_title">Atharraich am PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Feumaidh tu post-gutha lèirsinneach a chur an comas airson am PIN atharrachadh</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Cha deach am post-gutha lèirsinneach a ghnìomhachadh fhathast, feuch ris a-rithist an ceann greis</string>
@@ -29,12 +40,25 @@
   <string name="vm_change_pin_error_invalid">Tha caractaran mì-dhligheach sa PhIN ùr.</string>
   <string name="vm_change_pin_error_system_error">Cha deach leinn am PIN atharrachadh</string>
   <string name="change_pin_title">Atharraich PIN a’ phuist-gutha</string>
+  <string name="change_pin_continue_label">Air adhart</string>
+  <string name="change_pin_cancel_label">Sguir dheth</string>
   <string name="change_pin_ok_label">Ceart ma-thà</string>
   <string name="change_pin_enter_old_pin_header">Dearbh an seann PIN agad</string>
   <string name="change_pin_enter_old_pin_hint">Cuir a-steach PIN a’ phuist-ghutha agad a leantainn air adhart.</string>
   <string name="change_pin_enter_new_pin_header">Suidhich PIN ùr</string>
+  <string name="change_pin_enter_new_pin_hint">Feumaidh am PIN a bhith eadar <xliff:g example="4" id="min">%1$d</xliff:g>–<xliff:g example="7" id="max">%2$d</xliff:g> àireamh(an) a dh’fhaid.</string>
   <string name="change_pin_confirm_pin_header">Dearbh am PIN agad</string>
   <string name="change_pin_confirm_pins_dont_match">Chan eil an dà PhIN co-ionnann</string>
   <string name="change_pin_succeeded">Chaidh PIN a’ phuist-ghutha ùrachadh</string>
   <string name="change_pin_system_error">Cha b’ urrainn dhuinn am PIN a shuidheachadh</string>
+  <string name="voicemail_visual_voicemail_transcription_switch_title">    Tar-sgrìobhadh nam post-gutha
+  </string>
+  <string name="voicemail_visual_voicemail_donation_switch_title">    Sgrùdadh air tar-sgrìobhadh nam post-gutha
+  </string>
+  <string name="voicemail_activating_summary_info">A’ gnìomhachadh a’ phuist-ghutha</string>
+  <string name="voicemail_transcription_preference_summary_info">Faigh tar-sgrìobhaidhean air a’ phost-ghutha agad le seirbheis tar-sgrìobhaidh Google. <xliff:g example="Learn more">%1$s</xliff:g></string>
+  <string name="voicemail_donate_preference_summary_info">Leig le Google lèirmheas a dhèanamh air teachdaireachdan a’ phuist-ghutha agad airson piseach a thoirt air pongalachd nan tar-sgrìobhaidhean. Thèid na teachdaireachdan puist-ghutha agad a stòradh gun urra. <xliff:g example="Learn more">%1$s</xliff:g></string>
+  <string name="confirm_disable_voicemail_dialog_title">Cuir dheth am post-gutha lèirsinneach</string>
+  <string name="confirm_disable_voicemail_dialog_message">Sguabaidh seo às tar-sgrìobhadh puist-ghutha is Google sam bith am broinn na h-aplacaid seo. Dh’fhaoidte gun cùm an giùlanair agad lethbhreacan aige fhèin.</string>
+  <string name="confirm_disable_voicemail_accept_dialog_label">CUIR DHETH</string>
 </resources>

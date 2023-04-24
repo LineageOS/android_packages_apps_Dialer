@@ -56,31 +56,59 @@
   <string name="voicemail_action_call_voicemail">Cuir fòn gun phost-gutha</string>
   <string name="voicemail_action_call_customer_support">Cuir fòn gu sgioba taic nan custamairean</string>
   <string name="vvm3_error_vms_dns_failure_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vms_dns_failure_message">Tha sinn duilich ach thachair sinn ri duilgheadas. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9001 còd na mearachd.</string>
   <string name="vvm3_error_vmg_dns_failure_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vmg_dns_failure_message">Tha sinn duilich ach thachair sinn ri duilgheadas. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9002 còd na mearachd.</string>
   <string name="vvm3_error_spg_dns_failure_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_spg_dns_failure_message">Tha sinn duilich ach thachair sinn ri duilgheadas. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9003 còd na mearachd.</string>
   <string name="vvm3_error_vms_no_cellular_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_vms_no_cellular_message">Tha sinn duilich ach cha deach leinn ceangal ris a’ bhogsa-phuist-ghutha agad. Ma tha thu ann an àite le siognail bhochd, feuch ris a-rithist nuair a bhios siognail làidir ann. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9004 còd na mearachd.</string>
   <string name="vvm3_error_vmg_no_cellular_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_vmg_no_cellular_message">Tha sinn duilich ach cha deach leinn ceangal ris a’ bhogsa-phuist-ghutha agad. Ma tha thu ann an àite le siognail bhochd, feuch ris a-rithist nuair a bhios siognail làidir ann. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9005 còd na mearachd.</string>
   <string name="vvm3_error_spg_no_cellular_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_spg_no_cellular_message">Tha sinn duilich ach cha deach leinn ceangal ris a’ bhogsa-phuist-ghutha agad. Ma tha thu ann an àite le siognail bhochd, feuch ris a-rithist nuair a bhios siognail làidir ann. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9006 còd na mearachd.</string>
   <string name="vvm3_error_vms_timeout_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vms_timeout_message">Tha sinn duilich ach thachair sinn ri duilgheadas. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9007 còd na mearachd.</string>
   <string name="vvm3_error_vmg_timeout_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_vmg_timeout_message">Tha sinn duilich ach thachair sinn ri duilgheadas. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9008 còd na mearachd.</string>
   <string name="vvm3_error_status_sms_timeout_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_status_sms_timeout_message">Tha sinn duilich ach cha deach leinn an t-seirbheis agad a shuidheachadh. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9009 còd na mearachd.</string>
   <string name="vvm3_error_subscriber_blocked_title">Cha ghabh ceangal a dhèanamh ris a bhogsa-phuist-ghutha agad</string>
+  <string name="vvm3_error_subscriber_blocked_message">Tha sinn duilich ach chan urrainn dhuinn ceangal a dhèanamh ris a’ bhogsa-phuist-ghutha agad air an àm seo. Feuch ris a-rithist an ceann greis. Ma mhaireas an duilgheadas, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9990 còd na mearachd.\"</string>
   <string name="vvm3_error_unknown_user_title">Suidhich am post-gutha</string>
+  <string name="vvm3_error_unknown_user_message">Cha deach am post-gutha a shuidheachadh dhan chunntas agad. Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9991 còd na mearachd.</string>
   <string name="vvm3_error_unknown_device_title">Post-gutha</string>
+  <string name="vvm3_error_unknown_device_message">Cha ghabh post-gutha lèirsinneach a chleachdadh air an uidheam seo. Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9992 còd na mearachd.</string>
   <string name="vvm3_error_invalid_password_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_invalid_password_message">Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9993 còd na mearachd.</string>
   <string name="vvm3_error_mailbox_not_initialized_title">Post-gutha lèirsinneach</string>
+  <string name="vvm3_error_mailbox_not_initialized_message">Airson suidheachadh a’ phuist-ghutha lèirsinnich a thoirt gu buil, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9994 còd na mearachd.</string>
   <string name="vvm3_error_service_not_provisioned_title">Post-gutha lèirsinneach</string>
+  <string name="vvm3_error_service_not_provisioned_message">Airson suidheachadh a’ phuist-ghutha lèirsinnich a thoirt gu buil, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9995 còd na mearachd.</string>
   <string name="vvm3_error_service_not_activated_title">Post-gutha lèirsinneach</string>
+  <string name="vvm3_error_service_not_activated_message">Airson am post-gutha a ghnìomhachadh, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9996 còd na mearachd.</string>
   <string name="vvm3_error_user_blocked_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_user_blocked_message">Airson suidheachadh a puist-ghutha lèirsinnich a thoirt gu buil, cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9998 còd na mearachd.</string>
   <string name="vvm3_error_subscriber_unknown_title">Tha am post-gutha lèirsinneach à comas</string>
+  <string name="vvm3_error_subscriber_unknown_message">Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> airson am post-gutha lèirsinneach a ghnìomhachadh.</string>
   <string name="vvm3_error_imap_getquota_error_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_imap_getquota_error_message">Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9997 còd na mearachd.</string>
   <string name="vvm3_error_imap_select_error_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_imap_select_error_message">Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9989 còd na mearachd.</string>
   <string name="vvm3_error_imap_error_title">Chaidh rudeigin ceàrr</string>
+  <string name="vvm3_error_imap_error_message">Cuir fios gu seirbheis taic nan custamairean air <xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g> is innis dhaibh gur e 9999 còd na mearachd.</string>
   <string name="verizon_terms_and_conditions_title">Cuir am post-gutha lèirsinneach air</string>
+  <string name="verizon_terms_and_conditions_message"><xliff:g>%1$s</xliff:g> Nuair a chuireas tu am post-gutha lèirsinneach air, aontaichidh tu ri teirmichean is cumhaichean Verizon Wireless:\n\n<xliff:g>%2$s</xliff:g>.</string>
   <string name="dialer_terms_and_conditions_title">Cuir am post-gutha lèirsinneach air</string>
   <string name="dialer_terms_and_conditions_existing_user_title">Gleus ùr! Leugh am post-gutha agad</string>
+  <string name="dialer_terms_and_conditions_message"><xliff:g>%s</xliff:g></string>
+  <string name="dialer_terms_and_conditions_1.0">  Faic na teachdaireachdan agad is èist riutha gun fheum air gairm a chur dhan phost-ghutha. Gheibh thu tar-sgrìobhaidhean air na puist-ghutha agad le seirbheis tar-sgrìobhaidh Google an-asgaidh. ’S urrainn dhut gin sam bith dhiubh a chur dheth sna roghainnean uair sam bith. <xliff:g>%s</xliff:g>
+  </string>
+  <string name="dialer_terms_and_conditions_existing_user">  Gheibh thu tar-sgrìobhaidhean air na puist-ghutha agad le seirbheis tar-sgrìobhaidh Google an-asgaidh a-nis. ’S urrainn dhut seo a chur dheth sna roghainnean uair sam bith. %s
+  </string>
   <string name="dialer_terms_and_conditions_for_verizon_1.0">        Faic na teachdaireachdan agad is èist riutha gun fheum air gairm a chur dhan phost-ghutha.
   </string>
+  <string name="dialer_terms_and_conditions_learn_more">Barrachd fiosrachaidh</string>
   <string name="dialer_terms_and_conditions_existing_user_ack">Ceart ma-thà, tha mi agaibh</string>
   <string name="dialer_terms_and_conditions_existing_user_decline">Diùlt</string>
   <string name="terms_and_conditions_decline_dialog_title">A cuir thu am post-gutha lèirsinneach à comas?</string>
