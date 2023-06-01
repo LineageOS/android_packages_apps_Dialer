@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2013-2014 The CyanogenMod Project
-     Copyright (C) 2018 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,11 +15,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_log_show_all_accounts">Allir aðgangar</string>
-    <string name="call_log_all_calls_header">Öll símtöl</string>
-    <string name="call_log_incoming_header">Aðeins innhringingar</string>
-    <string name="call_log_outgoing_header">Aðeins úthringingar</string>
-    <string name="call_log_missed_header">Aðeins símtöl sem misst var af</string>
-    <string name="call_log_voicemail_header">Aðeins hringingar með raddskilaboðum</string>
-    <string name="call_log_blacklist_header">Aðeins útilokuð símtöl</string>
+    <string name="call_playback_no_app_found_toast">Ingen app kunde hittas för uppspelning av den valda inspelningen.</string>
 </resources>
