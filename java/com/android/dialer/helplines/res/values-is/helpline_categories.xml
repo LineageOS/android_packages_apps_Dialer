@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2021 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="helpline_category_abuse">Misnotkun</string>
+    <string name="helpline_category_acohol">Áfengi</string>
+    <string name="helpline_category_addiction">Fíkn</string>
+    <string name="helpline_category_adolescents">Unglingar</string>
+    <string name="helpline_category_adults">Fullorðnir</string>
+    <string name="helpline_category_aids">Alnæmi</string>
+    <string name="helpline_category_birth">Fæðingar</string>
+    <string name="helpline_category_bullying">Einelti</string>
+    <string name="helpline_category_children">Börn</string>
+    <string name="helpline_category_crime">Gæpir</string>
+    <string name="helpline_category_crime_victims">Þolendur glæpa</string>
+    <string name="helpline_category_corruption">Spilling</string>
+    <string name="helpline_category_discrimination">Mismunun</string>
+    <string name="helpline_category_domestic_violence">Heimilisofbeldi</string>
+    <string name="helpline_category_drugs">Eiturlyf</string>
+    <string name="helpline_category_emotional_support">Tilfinningalegur stuðningur</string>
+    <string name="helpline_category_family">Fjölskylda</string>
+    <string name="helpline_category_gambling">Fjárhættuspil</string>
+    <string name="helpline_category_gender">Kyn</string>
+    <string name="helpline_category_generic">Almennt</string>
+    <string name="helpline_category_hiv">HIV</string>
+    <string name="helpline_category_human_rights">Mannréttindi</string>
+    <string name="helpline_category_human_trafficking">Mansal</string>
+    <string name="helpline_category_immigration">Innflytjendur</string>
+    <string name="helpline_category_legal_aid">Lögfræðiaðstoð</string>
+    <string name="helpline_category_lgbtq">LGBTQ+</string>
+    <string name="helpline_category_men">Karlar</string>
+    <string name="helpline_category_mental_health">Geðheilsa</string>
+    <string name="helpline_category_missing_children">Horfin börn</string>
+    <string name="helpline_category_mothers">Mæður</string>
+    <string name="helpline_category_muslim">Múslímar</string>
+    <string name="helpline_category_parents">Foreldrar</string>
+    <string name="helpline_category_pregnancy">Meðganga</string>
+    <string name="helpline_category_psychological">Sálfræðiþjónusta</string>
+    <string name="helpline_category_religion">Trúarbrögð</string>
+    <string name="helpline_category_senior">Aldraðir</string>
+    <string name="helpline_category_sexual_abuse">Kynferðisleg misnotkun</string>
+    <string name="helpline_category_sexual_assault">Kynferðislegt ofbeldi</string>
+    <string name="helpline_category_sexual_rights">Kynbundin réttindi</string>
+    <string name="helpline_category_sexuality">Kynhneigð</string>
+    <string name="helpline_category_soldiers">Hermenn</string>
+    <string name="helpline_category_suicide">Sjálfsvígsforvarnir</string>
+    <string name="helpline_category_trans">Kyngerving (trans)</string>
+    <string name="helpline_category_veterans">Uppgjafahermenn</string>
+    <string name="helpline_category_violence">Ofbeldi</string>
+    <string name="helpline_category_war">Stríð</string>
+    <string name="helpline_category_women">Konur</string>
+    <string name="helpline_category_youth">Ungmenni</string>
+</resources>
