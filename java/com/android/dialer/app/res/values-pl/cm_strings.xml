@@ -22,7 +22,7 @@
     <string name="incall_vibrate_call_waiting_title">Wibracja przy połączeniu oczekującym</string>
     <string name="incall_vibrate_hangup_title">Wibracja przy zakończeniu połączenia</string>
     <string name="incall_vibrate_45_title">Wibracja co minutę</string>
-    <string name="incall_vibrate_45_summary">Wibracja podczas 45 sekundy każdej minuty połączenia wychodzącego</string>
+    <string name="incall_vibrate_45_summary">Wibracja w 45 sekundzie każdej minuty połączenia wychodzącego</string>
     <string name="incall_dnd_dialog_message">Aby włączyć tryb Nie przeszkadzać, aplikacja \"Telefon\" musi posiadać przyznane uprawnienia do kontrolowania jego statusu.\nProszę na to zezwolić.</string>
     <string name="allow">Zezwól</string>
     <string name="deny">Odmów</string>

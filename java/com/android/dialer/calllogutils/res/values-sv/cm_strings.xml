@@ -19,4 +19,8 @@
     <string name="call_log_show_all_accounts">Alla konton</string>
     <string name="call_log_all_calls_header">Alla samtal</string>
     <string name="call_log_incoming_header">Endast inkommande samtal</string>
+    <string name="call_log_outgoing_header">Endast utgående samtal</string>
+    <string name="call_log_missed_header">Endast missade samtal</string>
+    <string name="call_log_voicemail_header">Endast samtal med röstmeddelande</string>
+    <string name="call_log_blacklist_header">Endast blockerade samtal</string>
 </resources>

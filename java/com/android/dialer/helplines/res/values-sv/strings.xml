@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2013-2014 The CyanogenMod Project
-     Copyright (C) 2018 The LineageOS Project
+     Copyright (C) 2019-2021 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,10 +15,5 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="call_log_show_all_accounts">Усе ўліковыя запісы</string>
-    <string name="call_log_all_calls_header">Усе выклікі</string>
-    <string name="call_log_incoming_header">Толькі ўваходныя выклікі</string>
-    <string name="call_log_outgoing_header">Толькі выходныя званкі</string>
-    <string name="call_log_voicemail_header">Толькі выклікі з галасавой пошты</string>
-    <string name="call_log_blacklist_header">Толькі заблакіраваныя выклікі</string>
+    <string name="helplines_help_more_message">Listan över hjälplinjer fylls med information som uppdateras manuellt av bidragsgivare. Känn dig fri att kontakta oss på <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> om du stöter på någon information som saknas eller om den är felaktig</string>
 </resources>
