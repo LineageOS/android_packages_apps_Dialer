@@ -16,22 +16,22 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="hour">
-        <item quantity="one">1 godz.</item>
-        <item quantity="few">%d godz.</item>
-        <item quantity="many">%d godz.</item>
-        <item quantity="other">%d godz.</item>
+        <item quantity="one">1 godzina</item>
+        <item quantity="few">%d godziny</item>
+        <item quantity="many">%d godzin</item>
+        <item quantity="other">%d godzin</item>
     </plurals>
     <plurals name="minute">
-        <item quantity="one">1 min.</item>
-        <item quantity="few">%d min.</item>
-        <item quantity="many">%d min.</item>
-        <item quantity="other">%d min.</item>
+        <item quantity="one">1 minuta</item>
+        <item quantity="few">%d minuty</item>
+        <item quantity="many">%d minut</item>
+        <item quantity="other">%d minut</item>
     </plurals>
     <plurals name="second">
-        <item quantity="one">1 sek.</item>
-        <item quantity="few">%d sek.</item>
-        <item quantity="many">%d sek.</item>
-        <item quantity="other">%d sek.</item>
+        <item quantity="one">1 sekunda</item>
+        <item quantity="few">%d sekundy</item>
+        <item quantity="many">%d sekund</item>
+        <item quantity="other">%d sekund</item>
     </plurals>
     <plurals name="call">
         <item quantity="one">1 połączenie</item>
