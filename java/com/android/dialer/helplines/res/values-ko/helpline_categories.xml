@@ -54,6 +54,7 @@
     <string name="helpline_category_sexual_abuse">성적 학대</string>
     <string name="helpline_category_sexual_assault">성폭력</string>
     <string name="helpline_category_sexual_rights">성적 권리</string>
+    <string name="helpline_category_sexuality">성성향</string>
     <string name="helpline_category_soldiers">군인</string>
     <string name="helpline_category_suicide">자살 예방</string>
     <string name="helpline_category_trans">트랜스젠더</string>
@@ -61,4 +62,5 @@
     <string name="helpline_category_violence">폭력</string>
     <string name="helpline_category_war">전쟁</string>
     <string name="helpline_category_women">여성</string>
+    <string name="helpline_category_youth">청소년</string>
 </resources>
