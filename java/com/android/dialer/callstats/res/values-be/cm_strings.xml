@@ -26,6 +26,7 @@
     <string name="call_stats_header_total_callsonly">Усяго: <xliff:g id="call_count">%s</xliff:g></string>
     <string name="call_stats_filter_to">Дата завяршэння</string>
     <string name="call_stats_filter_picker_title">Дыяпазон выбару</string>
+    <string name="date_quick_selection">Хуткі выбар</string>
     <string name="date_qs_currentquarter">Бягучы квартал</string>
     <string name="date_qs_currentyear">Бягучы год</string>
     <string name="date_qs_lastweek">Апошні тыдзень</string>
