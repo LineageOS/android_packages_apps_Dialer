@@ -17,12 +17,10 @@
 
 package com.android.dialer.callrecord;
 
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -65,7 +63,6 @@ public class CallRecordingAutoMigrator {
         .executeParallel(null);
   }
 
-  @TargetApi(26)
   private void autoMigrate(boolean shouldAttemptAutoMigrate) {
     if (!shouldAttemptAutoMigrate) {
       return;
@@ -136,9 +133,6 @@ public class CallRecordingAutoMigrator {
     @Nullable
     @Override
     public Boolean doInBackground(@Nullable Void input) {
-      if (Build.VERSION.SDK_INT < 26) {
-        return false;
-      }
       if (appContext.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
           != PackageManager.PERMISSION_GRANTED) {
         LogUtil.i(TAG, "not attempting auto-migrate: no storage permission");

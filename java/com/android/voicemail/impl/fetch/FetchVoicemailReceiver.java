@@ -15,7 +15,6 @@
  */
 package com.android.voicemail.impl.fetch;
 
-import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -24,12 +23,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Network;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
@@ -45,7 +42,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /** handles {@link VoicemailContract#ACTION_FETCH_VOICEMAIL} */
-@TargetApi(VERSION_CODES.O)
 public class FetchVoicemailReceiver extends BroadcastReceiver {
 
   private static final String TAG = "FetchVoicemailReceiver";
@@ -157,9 +153,6 @@ public class FetchVoicemailReceiver extends BroadcastReceiver {
   @Nullable
   private static PhoneAccountHandle getAccountFromMarshmallowAccount(
       Context context, PhoneAccountHandle oldAccount) {
-    if (!BuildCompat.isAtLeastN()) {
-      return null;
-    }
     for (PhoneAccountHandle handle :
         context.getSystemService(TelecomManager.class).getCallCapablePhoneAccounts()) {
       if (getIccSerialNumberFromFullIccSerialNumber(handle.getId()).equals(oldAccount.getId())) {

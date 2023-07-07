@@ -16,7 +16,6 @@
 package com.android.voicemail.impl.transcribe;
 
 import android.content.Context;
-import android.os.Build;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import java.util.concurrent.TimeUnit;
 
@@ -29,8 +28,7 @@ public class TranscriptionConfigProvider {
   }
 
   public boolean isVoicemailTranscriptionAvailable() {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-        && ConfigProviderComponent.get(context)
+    return ConfigProviderComponent.get(context)
             .getConfigProvider()
             .getBoolean("voicemail_transcription_available", false);
   }

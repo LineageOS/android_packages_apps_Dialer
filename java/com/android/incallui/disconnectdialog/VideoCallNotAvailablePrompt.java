@@ -23,7 +23,7 @@ import android.support.annotation.NonNull;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
 import android.util.Pair;
-import com.android.contacts.common.compat.telecom.TelecomManagerCompat;
+import com.android.dialer.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
@@ -36,7 +36,7 @@ public class VideoCallNotAvailablePrompt implements DisconnectDialog {
   @Override
   public boolean shouldShow(DisconnectCause disconnectCause) {
     if (disconnectCause.getCode() == DisconnectCause.ERROR
-        && TelecomManagerCompat.REASON_IMS_ACCESS_BLOCKED.equals(disconnectCause.getReason())) {
+        && DisconnectCause.REASON_IMS_ACCESS_BLOCKED.equals(disconnectCause.getReason())) {
       LogUtil.i(
           "VideoCallNotAvailablePrompt.shouldShowPrompt",
           "showing prompt for disconnect cause: %s",

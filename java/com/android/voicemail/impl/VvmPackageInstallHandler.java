@@ -16,9 +16,7 @@
 
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build.VERSION_CODES;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
@@ -33,7 +31,6 @@ import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
  * when a VVM SMS is received instead, as it can be a result of the carrier VVM app trying to run
  * activation.
  */
-@TargetApi(VERSION_CODES.O)
 public final class VvmPackageInstallHandler {
 
   /**

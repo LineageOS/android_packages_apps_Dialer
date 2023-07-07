@@ -46,8 +46,6 @@ import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.PermissionsUtil;
-import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler;
-import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import java.util.ArrayList;
@@ -332,9 +330,6 @@ public class ListsFragment extends Fragment
     if (getActivity() == null || paused) {
       return;
     }
-
-    VoicemailStatusCorruptionHandler.maybeFixVoicemailStatus(
-        getContext(), statusCursor, Source.Activity);
 
     // Update hasActiveVoicemailProvider, which controls the number of tabs displayed.
     boolean hasActiveVoicemailProvider =

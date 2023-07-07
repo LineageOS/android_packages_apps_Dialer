@@ -21,18 +21,14 @@ import android.content.pm.ShortcutInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AdaptiveIconDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.WorkerThread;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.util.DrawableConverter;
@@ -88,12 +84,9 @@ class IconFactory {
         ContactsContract.Contacts.openContactPhotoInputStream(
             context.getContentResolver(), lookupUri, false /* preferHighres */);
 
-    return VERSION.SDK_INT >= VERSION_CODES.O
-        ? createAdaptiveIcon(displayName, lookupKey, inputStream)
-        : createFlatIcon(displayName, lookupKey, inputStream);
+    return createAdaptiveIcon(displayName, lookupKey, inputStream);
   }
 
-  @RequiresApi(VERSION_CODES.O)
   private Icon createAdaptiveIcon(
       @NonNull String displayName, @NonNull String lookupKey, @Nullable InputStream inputStream) {
     if (inputStream == null) {
@@ -116,34 +109,5 @@ class IconFactory {
     }
     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
     return Icon.createWithAdaptiveBitmap(bitmap);
-  }
-
-  private Icon createFlatIcon(
-      @NonNull String displayName, @NonNull String lookupKey, @Nullable InputStream inputStream) {
-    Drawable drawable;
-    if (inputStream == null) {
-      // No photo for contact; use a letter tile.
-      LetterTileDrawable letterTileDrawable = new LetterTileDrawable(context.getResources());
-      letterTileDrawable.setCanonicalDialerLetterTileDetails(
-          displayName, lookupKey, LetterTileDrawable.SHAPE_CIRCLE, LetterTileDrawable.TYPE_DEFAULT);
-      drawable = letterTileDrawable;
-    } else {
-      // There's a photo, create a circular drawable from it.
-      Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-      drawable = createCircularDrawable(bitmap);
-    }
-    int iconSize =
-        context.getResources().getDimensionPixelSize(R.dimen.launcher_shortcut_icon_size);
-    return Icon.createWithBitmap(
-        DrawableConverter.drawableToBitmap(drawable, iconSize /* width */, iconSize /* height */));
-  }
-
-  @NonNull
-  private Drawable createCircularDrawable(@NonNull Bitmap bitmap) {
-    RoundedBitmapDrawable roundedBitmapDrawable =
-        RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
-    roundedBitmapDrawable.setCircular(true);
-    roundedBitmapDrawable.setAntiAlias(true);
-    return roundedBitmapDrawable;
   }
 }

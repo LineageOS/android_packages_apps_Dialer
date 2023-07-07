@@ -19,14 +19,14 @@ package com.android.dialer.voicemail.listui.error;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.View.OnClickListener;
+
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.R;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
@@ -35,7 +35,6 @@ import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
  * Create error message from {@link VoicemailStatus} for VVM3 visual voicemail. VVM3 is used only by
  * Verizon Wireless.
  */
-@RequiresApi(VERSION_CODES.N_MR1)
 public class Vvm3VoicemailMessageCreator {
 
   // Copied from com.android.phone.vvm.omtp.protocol.Vvm3EventHandler
