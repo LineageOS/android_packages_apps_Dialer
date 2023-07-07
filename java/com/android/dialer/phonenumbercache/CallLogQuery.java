@@ -16,12 +16,9 @@
 
 package com.android.dialer.phonenumbercache;
 
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,8 +52,6 @@ public final class CallLogQuery {
   public static final int CACHED_PHOTO_URI = 23;
   public static final int POST_DIAL_DIGITS = 24;
   public static final int VIA_NUMBER = 25;
-
-  @RequiresApi(VERSION_CODES.O)
   public static final int TRANSCRIPTION_STATE = 26;
 
   private static final String[] PROJECTION_N =
@@ -86,14 +81,14 @@ public final class CallLogQuery {
         Calls.TRANSCRIPTION, // 22
         Calls.CACHED_PHOTO_URI, // 23
         CallLog.Calls.POST_DIAL_DIGITS, // 24
-        CallLog.Calls.VIA_NUMBER // 25
+        CallLog.Calls.VIA_NUMBER, // 25
       };
 
   private static final String[] PROJECTION_O;
 
   // TODO(mdooley): remove when this becomes a public api
   // Copied from android.provider.CallLog.Calls
-  private static final String TRANSCRIPTION_STATE_COLUMN = "transcription_state";
+  public static final String TRANSCRIPTION_STATE_COLUMN = "transcription_state";
 
   static {
     List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_N));
@@ -103,6 +98,6 @@ public final class CallLogQuery {
 
   @NonNull
   public static String[] getProjection() {
-    return VERSION.SDK_INT >= VERSION_CODES.O ? PROJECTION_O : PROJECTION_N;
+    return PROJECTION_O;
   }
 }

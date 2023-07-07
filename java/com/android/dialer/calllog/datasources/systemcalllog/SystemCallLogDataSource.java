@@ -21,19 +21,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.AnnotatedCallLogDatabaseHelper;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
@@ -382,12 +380,10 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   private void setTranscriptionState(Cursor cursor, ContentValues contentValues) {
-    if (VERSION.SDK_INT >= VERSION_CODES.O) {
-      int transcriptionStateColumn =
-          cursor.getColumnIndexOrThrow(VoicemailCompat.TRANSCRIPTION_STATE);
-      int transcriptionState = cursor.getInt(transcriptionStateColumn);
-      contentValues.put(VoicemailCompat.TRANSCRIPTION_STATE, transcriptionState);
-    }
+    int transcriptionStateColumn =
+        cursor.getColumnIndexOrThrow(VoicemailCompat.TRANSCRIPTION_STATE);
+    int transcriptionState = cursor.getInt(transcriptionStateColumn);
+    contentValues.put(VoicemailCompat.TRANSCRIPTION_STATE, transcriptionState);
   }
 
   private static final String[] PROJECTION_PRE_O =
@@ -412,7 +408,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         Calls.POST_DIAL_DIGITS
       };
 
-  @RequiresApi(VERSION_CODES.O)
   private static final String[] PROJECTION_O_AND_LATER;
 
   static {
@@ -422,10 +417,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   }
 
   private String[] getProjection() {
-    if (VERSION.SDK_INT >= VERSION_CODES.O) {
       return PROJECTION_O_AND_LATER;
-    }
-    return PROJECTION_PRE_O;
   }
 
   private static void handleDeletes(

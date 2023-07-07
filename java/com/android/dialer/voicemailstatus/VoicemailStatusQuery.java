@@ -16,13 +16,7 @@
 
 package com.android.dialer.voicemailstatus;
 
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.VoicemailContract.Status;
-import android.support.annotation.RequiresApi;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /** The query for the call voicemail status table. */
 public class VoicemailStatusQuery {
@@ -36,19 +30,11 @@ public class VoicemailStatusQuery {
   public static final int NOTIFICATION_CHANNEL_STATE_INDEX = 5;
   public static final int QUOTA_OCCUPIED_INDEX = 6;
   public static final int QUOTA_TOTAL_INDEX = 7;
-
-  @RequiresApi(VERSION_CODES.N_MR1)
-  // The PHONE_ACCOUNT columns were added in M, but aren't queryable until N MR1
   public static final int PHONE_ACCOUNT_COMPONENT_NAME = 8;
-
-  @RequiresApi(VERSION_CODES.N_MR1)
   public static final int PHONE_ACCOUNT_ID = 9;
-
-  @RequiresApi(VERSION_CODES.N_MR1)
   public static final int SOURCE_TYPE_INDEX = 10;
 
-  @RequiresApi(VERSION_CODES.N)
-  private static final String[] PROJECTION_N =
+  private static final String[] PROJECTION =
       new String[] {
         Status.SOURCE_PACKAGE, // 0
         Status.SETTINGS_URI, // 1
@@ -57,21 +43,14 @@ public class VoicemailStatusQuery {
         Status.DATA_CHANNEL_STATE, // 4
         Status.NOTIFICATION_CHANNEL_STATE, // 5
         Status.QUOTA_OCCUPIED, // 6
-        Status.QUOTA_TOTAL // 7
+        Status.QUOTA_TOTAL, // 7
+        Status.PHONE_ACCOUNT_COMPONENT_NAME, // 8
+        Status.PHONE_ACCOUNT_ID, // 9
+        Status.SOURCE_TYPE // 10
       };
 
-  @RequiresApi(VERSION_CODES.N_MR1)
-  private static final String[] PROJECTION_NMR1;
-
-  static {
-    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_N));
-    projectionList.add(Status.PHONE_ACCOUNT_COMPONENT_NAME); // 8
-    projectionList.add(Status.PHONE_ACCOUNT_ID); // 9
-    projectionList.add(Status.SOURCE_TYPE); // 10
-    PROJECTION_NMR1 = projectionList.toArray(new String[projectionList.size()]);
-  }
 
   public static String[] getProjection() {
-    return VERSION.SDK_INT >= VERSION_CODES.N_MR1 ? PROJECTION_NMR1 : PROJECTION_N;
+    return PROJECTION;
   }
 }

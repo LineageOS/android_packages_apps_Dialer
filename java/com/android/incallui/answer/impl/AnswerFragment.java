@@ -22,15 +22,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardDismissCallback;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -55,6 +52,8 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
@@ -1057,17 +1056,11 @@ public class AnswerFragment extends Fragment
   }
 
   @Override
-  @TargetApi(VERSION_CODES.O)
   public void smsSelected(@Nullable CharSequence text) {
     LogUtil.i("AnswerFragment.smsSelected", null);
     textResponsesFragment = null;
 
     if (text == null) {
-      if (VERSION.SDK_INT < VERSION_CODES.O) {
-        LogUtil.i("AnswerFragment.smsSelected", "below O, showing dialog directly");
-        showCustomSmsDialog();
-        return;
-      }
       if (!getContext().getSystemService(KeyguardManager.class).isKeyguardLocked()) {
         LogUtil.i("AnswerFragment.smsSelected", "not locked, showing dialog directly");
         showCustomSmsDialog();

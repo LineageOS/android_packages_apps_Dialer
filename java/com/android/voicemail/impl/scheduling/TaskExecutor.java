@@ -16,10 +16,8 @@
 
 package com.android.voicemail.impl.scheduling;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -69,7 +67,6 @@ import java.util.List;
  *   <li>A job cannot be mutated to store information such as retry count.
  * </ul>
  */
-@TargetApi(VERSION_CODES.O)
 final class TaskExecutor {
 
   /**

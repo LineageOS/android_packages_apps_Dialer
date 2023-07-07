@@ -17,8 +17,6 @@
 package com.android.dialer.strictmode.impl;
 
 import android.app.Application;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
@@ -91,12 +89,10 @@ final class SystemDialerStrictMode implements DialerStrictMode {
     StrictMode.VmPolicy.Builder vmPolicyBuilder =
         new StrictMode.VmPolicy.Builder(vmPenalties)
             .detectLeakedClosableObjects()
-            .detectLeakedSqlLiteObjects();
-    if (Build.VERSION.SDK_INT >= VERSION_CODES.O) {
-      vmPolicyBuilder.detectContentUriWithoutPermission();
+            .detectLeakedSqlLiteObjects()
+            .detectContentUriWithoutPermission();
       // TODO(azlatin): Enable detecting untagged sockets once: a bug is fixed.
       // vmPolicyBuilder.detectUntaggedSockets();
-    }
     StrictMode.setVmPolicy(vmPolicyBuilder.build());
   }
 
