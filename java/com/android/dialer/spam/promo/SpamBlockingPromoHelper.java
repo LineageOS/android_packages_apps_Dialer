@@ -25,9 +25,10 @@ import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Icon;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.os.BuildCompat;
 import android.view.View;
 import android.widget.Toast;
+
+import com.android.dialer.R;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -196,11 +197,8 @@ public class SpamBlockingPromoHelper {
                         context.getString(R.string.spam_blocking_promo_action_filter_spam),
                         actionIntent)
                     .build())
-            .setContentTitle(context.getString(R.string.spam_blocking_promo_title));
-
-    if (BuildCompat.isAtLeastO()) {
-      builder.setChannelId(NotificationChannelId.DEFAULT);
-    }
+            .setContentTitle(context.getString(R.string.spam_blocking_promo_title))
+            .setChannelId(NotificationChannelId.DEFAULT);
     return builder.build();
   }
 }

@@ -16,7 +16,6 @@
 
 package com.android.dialer.dialpadview;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -35,8 +34,6 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.Trace;
@@ -81,6 +78,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.contacts.common.util.StopWatch;
+import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimUtils.AnimationCallback;
 import com.android.dialer.callintent.CallInitiationType;
@@ -493,14 +491,10 @@ public class DialpadFragment extends Fragment
    * cannot be inflated in robolectric.
    */
   @SuppressWarnings("missingPermission")
-  @TargetApi(VERSION_CODES.O)
   @VisibleForTesting
   static boolean shouldShowEmergencyCallWarning(Context context) {
     if (showEmergencyCallWarningForTest != null) {
       return showEmergencyCallWarningForTest;
-    }
-    if (VERSION.SDK_INT < VERSION_CODES.O) {
-      return false;
     }
     if (!PermissionsUtil.hasReadPhoneStatePermissions(context)) {
       return false;

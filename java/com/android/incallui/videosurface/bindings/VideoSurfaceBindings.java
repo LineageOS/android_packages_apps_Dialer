@@ -24,12 +24,12 @@ import com.android.incallui.videosurface.protocol.VideoSurfaceTexture;
 /** Bindings for video surface module. */
 public class VideoSurfaceBindings {
 
-  public static VideoSurfaceTexture createLocalVideoSurfaceTexture(boolean isPixel2017) {
-    return new VideoSurfaceTextureImpl(isPixel2017, VideoSurfaceTexture.SURFACE_TYPE_LOCAL);
+  public static VideoSurfaceTexture createLocalVideoSurfaceTexture() {
+    return new VideoSurfaceTextureImpl(VideoSurfaceTexture.SURFACE_TYPE_LOCAL);
   }
 
-  public static VideoSurfaceTexture createRemoteVideoSurfaceTexture(boolean isPixel2017) {
-    return new VideoSurfaceTextureImpl(isPixel2017, VideoSurfaceTexture.SURFACE_TYPE_REMOTE);
+  public static VideoSurfaceTexture createRemoteVideoSurfaceTexture() {
+    return new VideoSurfaceTextureImpl(VideoSurfaceTexture.SURFACE_TYPE_REMOTE);
   }
 
   public static void scaleVideoAndFillView(

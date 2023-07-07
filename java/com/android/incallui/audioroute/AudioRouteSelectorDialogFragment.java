@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.os.BuildCompat;
 import android.telecom.CallAudioState;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +34,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.dialer.R;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
@@ -82,10 +83,7 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     if (Settings.canDrawOverlays(getContext())) {
       dialog
           .getWindow()
-          .setType(
-              BuildCompat.isAtLeastO()
-                  ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-                  : WindowManager.LayoutParams.TYPE_PHONE);
+          .setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
     }
     return dialog;
   }
@@ -98,27 +96,14 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     View view = layoutInflater.inflate(R.layout.audioroute_selector, viewGroup, false);
     CallAudioState audioState = getArguments().getParcelable(ARG_AUDIO_STATE);
 
-    if (BuildCompat.isAtLeastP()) {
-      // Create items for all connected Bluetooth devices
-      Collection<BluetoothDevice> bluetoothDeviceSet = audioState.getSupportedBluetoothDevices();
-      for (BluetoothDevice device : bluetoothDeviceSet) {
-        boolean selected =
-            (audioState.getRoute() == CallAudioState.ROUTE_BLUETOOTH)
-                && (bluetoothDeviceSet.size() == 1
-                    || device.equals(audioState.getActiveBluetoothDevice()));
-        TextView textView = createBluetoothItem(device, selected);
-        ((LinearLayout) view).addView(textView, 0);
-      }
-    } else {
-      // Only create Bluetooth audio route
-      TextView textView =
-          (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
-      textView.setText(getString(R.string.audioroute_bluetooth));
-      initItem(
-          textView,
-          CallAudioState.ROUTE_BLUETOOTH,
-          audioState,
-          DialerImpression.Type.IN_CALL_SWITCH_AUDIO_ROUTE_BLUETOOTH);
+    // Create items for all connected Bluetooth devices
+    Collection<BluetoothDevice> bluetoothDeviceSet = audioState.getSupportedBluetoothDevices();
+    for (BluetoothDevice device : bluetoothDeviceSet) {
+      boolean selected =
+          (audioState.getRoute() == CallAudioState.ROUTE_BLUETOOTH)
+              && (bluetoothDeviceSet.size() == 1
+                  || device.equals(audioState.getActiveBluetoothDevice()));
+      TextView textView = createBluetoothItem(device, selected);
       ((LinearLayout) view).addView(textView, 0);
     }
 

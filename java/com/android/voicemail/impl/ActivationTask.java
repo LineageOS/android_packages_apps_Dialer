@@ -16,10 +16,8 @@
 
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -52,7 +50,6 @@ import java.util.concurrent.TimeoutException;
  * boots, the SIM is inserted, signal returned when VVM is not activated yet, and when the carrier
  * spontaneously sent a STATUS SMS.
  */
-@TargetApi(VERSION_CODES.O)
 @UsedByReflection(value = "Tasks.java")
 public class ActivationTask extends BaseTask {
 
@@ -132,8 +129,6 @@ public class ActivationTask extends BaseTask {
       VvmLog.e(TAG, "null PhoneAccountHandle");
       return;
     }
-
-    PreOMigrationHandler.migrate(getContext(), phoneAccountHandle);
 
     OmtpVvmCarrierConfigHelper helper;
     if (configForTest != null) {

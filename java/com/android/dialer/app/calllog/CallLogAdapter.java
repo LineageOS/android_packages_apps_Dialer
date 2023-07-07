@@ -24,8 +24,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Trace;
 import android.provider.CallLog;
@@ -950,10 +948,7 @@ public class CallLogAdapter extends GroupingListAdapter
     final String viaNumber = cursor.getString(CallLogQuery.VIA_NUMBER);
     final int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(cursor);
-    final int transcriptionState =
-        (VERSION.SDK_INT >= VERSION_CODES.O)
-            ? cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE)
-            : VoicemailCompat.TRANSCRIPTION_NOT_STARTED;
+    final int transcriptionState = cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE);
     final PhoneCallDetails details =
         new PhoneCallDetails(number, numberPresentation, postDialDigits);
     details.viaNumber = viaNumber;

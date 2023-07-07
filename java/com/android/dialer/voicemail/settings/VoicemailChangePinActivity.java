@@ -16,14 +16,12 @@
 
 package com.android.dialer.voicemail.settings;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +42,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -62,7 +62,6 @@ import java.lang.ref.WeakReference;
  * traditional voicemail through phone call. The intent to launch this activity must contain {@link
  * VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE}
  */
-@TargetApi(VERSION_CODES.O)
 public class VoicemailChangePinActivity extends Activity
     implements OnClickListener, OnEditorActionListener, TextWatcher {
 
