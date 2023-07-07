@@ -49,7 +49,6 @@
       style="@style/DialerFlatButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@id/import_description"
       android:layout_toLeftOf="@id/import_button"
       android:text="@android:string/cancel"/>
 

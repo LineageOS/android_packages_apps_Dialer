@@ -33,7 +33,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
-import android.support.v4.os.BuildCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.support.v4.util.Pair;
 import android.telecom.PhoneAccount;
@@ -219,10 +218,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
             CallLogNotificationsService.createCancelAllMissedCallsPendingIntent(context))
         .setGroupSummary(useCallList)
         .setOnlyAlertOnce(useCallList)
-        .setPublicVersion(publicSummaryBuilder.build());
-    if (BuildCompat.isAtLeastO()) {
-      groupSummary.setChannelId(NotificationChannelId.MISSED_CALL);
-    }
+        .setPublicVersion(publicSummaryBuilder.build())
+        .setChannelId(NotificationChannelId.MISSED_CALL);
 
     Notification notification = groupSummary.build();
     configureLedOnNotification(notification);
@@ -417,10 +414,8 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
             .setDeleteIntent(
                 CallLogNotificationsService.createCancelSingleMissedCallPendingIntent(
                     context, call.callsUri))
-            .setContentIntent(createCallLogPendingIntent(call.callsUri));
-    if (BuildCompat.isAtLeastO()) {
-      builder.setChannelId(NotificationChannelId.MISSED_CALL);
-    }
+            .setContentIntent(createCallLogPendingIntent(call.callsUri))
+            .setChannelId(NotificationChannelId.MISSED_CALL);
 
     return builder;
   }

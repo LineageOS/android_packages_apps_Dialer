@@ -15,29 +15,27 @@
  */
 package com.android.dialer.blocking;
 
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.provider.BlockedNumberContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.os.BuildCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.widget.Toast;
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnHasBlockedNumbersListener;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.notification.DialerNotificationManager;
-import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.storage.StorageComponent;
+import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.concurrent.TimeUnit;
 
@@ -150,8 +148,7 @@ public class FilteredNumbersUtil {
                 final String number = phoneCursor.getString(PhoneQuery.NUMBER_COLUMN_INDEX);
                 if (normalizedNumber != null) {
                   // Block the phone number of the contact.
-                  mFilteredNumberAsyncQueryHandler.blockNumber(
-                      null, normalizedNumber, number, null);
+                  mFilteredNumberAsyncQueryHandler.blockNumber(null, number);
                 }
               }
             } finally {
@@ -225,60 +222,7 @@ public class FilteredNumbersUtil {
   }
 
   public static void maybeNotifyCallBlockingDisabled(final Context context) {
-    // The Dialer is not responsible for this notification after migrating
-    if (FilteredNumberCompat.useNewFiltering(context)) {
-      return;
-    }
-    // Skip if the user has already received a notification for the most recent emergency call.
-    if (StorageComponent.get(context)
-        .unencryptedSharedPrefs()
-        .getBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, false)) {
-      return;
-    }
-
-    // If the user has blocked numbers, notify that call blocking is temporarily disabled.
-    FilteredNumberAsyncQueryHandler queryHandler = new FilteredNumberAsyncQueryHandler(context);
-    queryHandler.hasBlockedNumbers(
-        new OnHasBlockedNumbersListener() {
-          @Override
-          public void onHasBlockedNumbers(boolean hasBlockedNumbers) {
-            if (context == null || !hasBlockedNumbers) {
-              return;
-            }
-
-            Notification.Builder builder =
-                new Notification.Builder(context)
-                    .setSmallIcon(R.drawable.quantum_ic_block_white_24)
-                    .setContentTitle(
-                        context.getString(R.string.call_blocking_disabled_notification_title))
-                    .setContentText(
-                        context.getString(R.string.call_blocking_disabled_notification_text))
-                    .setAutoCancel(true);
-
-            if (BuildCompat.isAtLeastO()) {
-              builder.setChannelId(NotificationChannelId.DEFAULT);
-            }
-            builder.setContentIntent(
-                PendingIntent.getActivity(
-                    context,
-                    0,
-                    FilteredNumberCompat.createManageBlockedNumbersIntent(context),
-                    PendingIntent.FLAG_UPDATE_CURRENT));
-
-            DialerNotificationManager.notify(
-                context,
-                CALL_BLOCKING_NOTIFICATION_TAG,
-                CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_NOTIFICATION_ID,
-                builder.build());
-
-            // Record that the user has been notified for this emergency call.
-            StorageComponent.get(context)
-                .unencryptedSharedPrefs()
-                .edit()
-                .putBoolean(NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY, true)
-                .apply();
-          }
-        });
+    return;
   }
 
   /**
@@ -302,9 +246,6 @@ public class FilteredNumbersUtil {
   @Nullable
   public static String getBlockableNumber(
       Context context, @Nullable String e164Number, String number) {
-    if (!FilteredNumberCompat.useNewFiltering(context)) {
-      return e164Number;
-    }
     return TextUtils.isEmpty(e164Number) ? number : e164Number;
   }
 
@@ -316,6 +257,53 @@ public class FilteredNumbersUtil {
       return thresholdMs > 0 ? thresholdMs : RECENT_EMERGENCY_CALL_THRESHOLD_MS;
     } else {
       return RECENT_EMERGENCY_CALL_THRESHOLD_MS;
+    }
+  }
+
+  /**
+   * Method used to determine if block operations are possible.
+   *
+   * @param context The {@link Context}.
+   * @return {@code true} if the app and user can block numbers, {@code false} otherwise.
+   */
+  public static boolean canAttemptBlockOperations(Context context) {
+    // Great Wall blocking, must be primary user and the default or system dialer
+    // TODO(maxwelb): check that we're the system Dialer
+    return TelecomUtil.isDefaultDialer(context)
+            && safeBlockedNumbersContractCanCurrentUserBlockNumbers(context);
+  }
+
+  /**
+   * Used to determine if the call blocking settings can be opened.
+   *
+   * @param context The {@link Context}.
+   * @return {@code true} if the current user can open the call blocking settings, {@code false}
+   *     otherwise.
+   */
+  public static boolean canCurrentUserOpenBlockSettings(Context context) {
+    // BlockedNumberContract blocking, verify through Contract API
+    return TelecomUtil.isDefaultDialer(context)
+            && safeBlockedNumbersContractCanCurrentUserBlockNumbers(context);
+  }
+
+  /**
+   * Calls {@link BlockedNumberContract#canCurrentUserBlockNumbers(Context)} in such a way that it
+   * never throws an exception. While on the CryptKeeper screen, the BlockedNumberContract isn't
+   * available, using this method ensures that the Dialer doesn't crash when on that screen.
+   *
+   * @param context The {@link Context}.
+   * @return the result of BlockedNumberContract#canCurrentUserBlockNumbers, or {@code false} if an
+   *     exception was thrown.
+   */
+  private static boolean safeBlockedNumbersContractCanCurrentUserBlockNumbers(Context context) {
+    try {
+      return BlockedNumberContract.canCurrentUserBlockNumbers(context);
+    } catch (Exception e) {
+      LogUtil.e(
+              "FilteredNumberCompat.safeBlockedNumbersContractCanCurrentUserBlockNumbers",
+              "Exception while querying BlockedNumberContract",
+              e);
+      return false;
     }
   }
 

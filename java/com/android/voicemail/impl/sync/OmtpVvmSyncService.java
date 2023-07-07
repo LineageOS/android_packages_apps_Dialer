@@ -15,12 +15,9 @@
  */
 package com.android.voicemail.impl.sync;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Network;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -48,7 +45,6 @@ import java.util.List;
 import java.util.Map;
 
 /** Sync OMTP visual voicemail. */
-@TargetApi(VERSION_CODES.O)
 public class OmtpVvmSyncService {
 
   private static final String TAG = "OmtpVvmSyncService";
@@ -188,9 +184,6 @@ public class OmtpVvmSyncService {
   }
 
   private void deleteAndArchiveVM(ImapHelper imapHelper, Quota quotaOnServer) {
-    // Archive column should only be used for 0 and above
-    Assert.isTrue(BuildCompat.isAtLeastO());
-
     // The number of voicemails that exceed our threshold and should be deleted from the server
     int numVoicemails =
         quotaOnServer.occupied - (int) (AUTO_DELETE_ARCHIVE_VM_THRESHOLD * quotaOnServer.total);

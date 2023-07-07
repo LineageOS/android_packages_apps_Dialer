@@ -13,11 +13,9 @@
  */
 package com.android.dialer.voicemail.settings;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -33,6 +31,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary;
@@ -53,7 +53,6 @@ import java.lang.annotation.RetentionPolicy;
  * Fragment for voicemail settings. Requires {@link VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE} set
  * in arguments.
  */
-@TargetApi(VERSION_CODES.O)
 public class VoicemailSettingsFragment extends PreferenceFragment
     implements Preference.OnPreferenceChangeListener, ActivationStateListener {
 

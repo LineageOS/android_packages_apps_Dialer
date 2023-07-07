@@ -16,15 +16,11 @@
 
 package com.android.dialer.app.voicemail;
 
-import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.os.BuildCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -42,7 +38,6 @@ import com.android.voicemail.VoicemailComponent;
  * LegacyVoicemailNotifier}. Will ignore the notification if the account has visual voicemail.
  * Legacy voicemail is the traditional, non-visual, dial-in voicemail.
  */
-@TargetApi(VERSION_CODES.O)
 public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
   @VisibleForTesting static final String LEGACY_VOICEMAIL_DISMISSED = "legacy_voicemail_dismissed";
@@ -57,18 +52,6 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
     LogUtil.i(
         "LegacyVoicemailNotificationReceiver.onReceive", "received legacy voicemail notification");
-    if (!BuildCompat.isAtLeastO()) {
-      LogUtil.e(
-          "LegacyVoicemailNotificationReceiver.onReceive",
-          "SDK not finalized: SDK_INT="
-              + Build.VERSION.SDK_INT
-              + ", PREVIEW_SDK_INT="
-              + Build.VERSION.PREVIEW_SDK_INT
-              + ", RELEASE="
-              + Build.VERSION.RELEASE_OR_CODENAME);
-      return;
-    }
-
     PhoneAccountHandle phoneAccountHandle =
         Assert.isNotNull(intent.getParcelableExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE));
     int count = intent.getIntExtra(TelephonyManager.EXTRA_NOTIFICATION_COUNT, -1);

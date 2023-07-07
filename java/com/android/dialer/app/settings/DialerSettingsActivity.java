@@ -19,8 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.preference.PreferenceManager;
@@ -34,11 +32,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import com.android.dialer.about.AboutPhoneFragment;
 import com.android.dialer.app.R;
-import com.android.dialer.assisteddialing.ConcreteCreator;
-import com.android.dialer.blocking.FilteredNumberCompat;
+import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.lookup.LookupSettingsFragment;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.dialer.util.PermissionsUtil;
@@ -52,7 +48,6 @@ import java.util.List;
 public class DialerSettingsActivity extends AppCompatPreferenceActivity {
 
   protected SharedPreferences preferences;
-  private boolean migrationStatusOnBuildHeaders;
   private List<Header> headers;
 
   @Override
@@ -80,13 +75,6 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    /*
-     * The blockedCallsHeader need to be recreated if the migration status changed because
-     * the intent needs to be updated.
-     */
-    if (migrationStatusOnBuildHeaders != FilteredNumberCompat.hasMigratedToNewBlocking(this)) {
-      invalidateHeaders();
-    }
   }
 
   @Override
@@ -142,12 +130,12 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       phoneAccountSettingsHeader.intent = phoneAccountSettingsIntent;
       target.add(phoneAccountSettingsHeader);
     }
-    if (FilteredNumberCompat.canCurrentUserOpenBlockSettings(this)) {
+    if (FilteredNumbersUtil.canCurrentUserOpenBlockSettings(this)) {
       Header blockedCallsHeader = new Header();
       blockedCallsHeader.titleRes = R.string.manage_blocked_numbers_label;
-      blockedCallsHeader.intent = FilteredNumberCompat.createManageBlockedNumbersIntent(this);
+      blockedCallsHeader.intent = getApplicationContext().getSystemService(TelecomManager.class)
+              .createManageBlockedNumbersIntent();
       target.add(blockedCallsHeader);
-      migrationStatusOnBuildHeaders = FilteredNumberCompat.hasMigratedToNewBlocking(this);
     }
 
     addVoicemailSettings(target, isPrimaryUser);
@@ -163,22 +151,6 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
       target.add(accessibilitySettingsHeader);
     }
 
-    boolean isAssistedDialingEnabled =
-        ConcreteCreator.isAssistedDialingEnabled(
-            ConfigProviderComponent.get(getApplicationContext()).getConfigProvider());
-    LogUtil.i(
-        "DialerSettingsActivity.onBuildHeaders",
-        "showing assisted dialing header: " + isAssistedDialingEnabled);
-    if (isAssistedDialingEnabled) {
-
-      Header assistedDialingSettingsHeader = new Header();
-      assistedDialingSettingsHeader.titleRes =
-          com.android.dialer.assisteddialing.ui.R.string.assisted_dialing_setting_title;
-      assistedDialingSettingsHeader.intent =
-          new Intent("com.android.dialer.app.settings.SHOW_ASSISTED_DIALING_SETTINGS");
-      target.add(assistedDialingSettingsHeader);
-    }
-
     if (showAbout()) {
       Header aboutPhoneHeader = new Header();
       aboutPhoneHeader.titleRes = R.string.about_phone_label;
@@ -190,12 +162,6 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
   private void addVoicemailSettings(List<Header> target, boolean isPrimaryUser) {
     if (!isPrimaryUser) {
       LogUtil.i("DialerSettingsActivity.addVoicemailSettings", "user not primary user");
-      return;
-    }
-    if (VERSION.SDK_INT < VERSION_CODES.O) {
-      LogUtil.i(
-          "DialerSettingsActivity.addVoicemailSettings",
-          "Dialer voicemail settings not supported by system");
       return;
     }
 
