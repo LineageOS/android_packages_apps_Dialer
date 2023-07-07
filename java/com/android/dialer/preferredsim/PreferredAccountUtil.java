@@ -18,15 +18,9 @@ package com.android.dialer.preferredsim;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
@@ -66,32 +60,10 @@ public class PreferredAccountUtil {
 
   public static boolean isPhoneAccountValid(
       Context context, PhoneAccountHandle phoneAccountHandle) {
-    if (VERSION.SDK_INT >= VERSION_CODES.O) {
       return context
               .getSystemService(TelephonyManager.class)
               .createForPhoneAccountHandle(phoneAccountHandle)
           != null;
-    }
-
-    PhoneAccount phoneAccount =
-        context.getSystemService(TelecomManager.class).getPhoneAccount(phoneAccountHandle);
-    if (phoneAccount == null) {
-      LogUtil.e("PreferredAccountUtil.isPhoneAccountValid", "invalid phone account");
-      return false;
-    }
-
-    if (!phoneAccount.isEnabled()) {
-      LogUtil.e("PreferredAccountUtil.isPhoneAccountValid", "disabled phone account");
-      return false;
-    }
-    for (SubscriptionInfo info :
-        SubscriptionManager.from(context).getActiveSubscriptionInfoList()) {
-      if (phoneAccountHandle.getId().startsWith(info.getIccId())) {
-        LogUtil.i("PreferredAccountUtil.isPhoneAccountValid", "sim found");
-        return true;
-      }
-    }
-    return false;
   }
 
   /**

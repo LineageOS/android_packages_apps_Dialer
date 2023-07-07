@@ -28,9 +28,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneNumberUtils;
-import com.android.dialer.blocking.BlockedNumbersMigrator;
+
+import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
-import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForReportingNotSpam;
@@ -241,27 +241,21 @@ public class SpamNotificationActivity extends FragmentActivity {
       final String number, final ContactLookupResult.Type contactLookupResultType) {
     if (SpamComponent.get(this).spamSettings().isDialogEnabledForSpamNotification()) {
       String displayNumber = getFormattedNumber(number, this);
-      maybeShowBlockNumberMigrationDialog(
-          new BlockedNumbersMigrator.Listener() {
-            @Override
-            public void onComplete() {
-              DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
-                      displayNumber,
-                      SpamComponent.get(SpamNotificationActivity.this)
-                          .spamSettings()
-                          .isDialogReportSpamCheckedByDefault(),
-                      new BlockReportSpamDialogs.OnSpamDialogClickListener() {
-                        @Override
-                        public void onClick(boolean isSpamChecked) {
-                          blockReportNumber(number, isSpamChecked, contactLookupResultType);
-                        }
-                      },
-                      dismissListener)
-                  .show(
-                      getSupportFragmentManager(),
-                      BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
-            }
-          });
+      DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
+                displayNumber,
+                SpamComponent.get(SpamNotificationActivity.this)
+                        .spamSettings()
+                        .isDialogReportSpamCheckedByDefault(),
+                new BlockReportSpamDialogs.OnSpamDialogClickListener() {
+                  @Override
+                  public void onClick(boolean isSpamChecked) {
+                    blockReportNumber(number, isSpamChecked, contactLookupResultType);
+                  }
+                },
+                dismissListener)
+        .show(
+                getSupportFragmentManager(),
+                BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
     } else {
       blockReportNumber(number, true, contactLookupResultType);
     }
@@ -286,14 +280,6 @@ public class SpamNotificationActivity extends FragmentActivity {
         .show(getFragmentManager(), FirstTimeSpamCallDialogFragment.TAG);
   }
 
-  /** Checks if the user has migrated to the new blocking and display a dialog if necessary. */
-  private void maybeShowBlockNumberMigrationDialog(BlockedNumbersMigrator.Listener listener) {
-    if (!FilteredNumberCompat.maybeShowBlockNumberMigrationDialog(
-        this, getFragmentManager(), listener)) {
-      listener.onComplete();
-    }
-  }
-
   /** Block and report the number as spam. */
   private void blockReportNumber(
       String number, boolean reportAsSpam, ContactLookupResult.Type contactLookupResultType) {
@@ -310,7 +296,7 @@ public class SpamNotificationActivity extends FragmentActivity {
     }
 
     logCallImpression(DialerImpression.Type.SPAM_AFTER_CALL_NOTIFICATION_BLOCK_NUMBER);
-    filteredNumberAsyncQueryHandler.blockNumber(null, number, getCountryIso());
+    filteredNumberAsyncQueryHandler.blockNumber(null, number);
   }
 
   /** Report the number as not spam. */

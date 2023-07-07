@@ -23,8 +23,6 @@ import android.database.Cursor;
 import android.provider.VoicemailContract;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
-import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler;
-import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler.Source;
 
 /**
  * Receiver for call log events.
@@ -55,8 +53,7 @@ public class CallLogReceiver extends BroadcastReceiver {
             new CallLogQueryHandler.Listener() {
               @Override
               public void onVoicemailStatusFetched(Cursor statusCursor) {
-                VoicemailStatusCorruptionHandler.maybeFixVoicemailStatus(
-                    context, statusCursor, Source.Notification);
+                // Do nothing
               }
 
               @Override
