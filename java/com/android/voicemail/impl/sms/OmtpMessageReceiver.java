@@ -15,13 +15,11 @@
  */
 package com.android.voicemail.impl.sms;
 
-import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.telecom.PhoneAccountHandle;
@@ -42,7 +40,6 @@ import com.android.voicemail.impl.sync.VvmAccountManager;
 import com.android.voicemail.impl.utils.VoicemailDatabaseUtil;
 
 /** Receive SMS messages and send for processing by the OMTP visual voicemail source. */
-@TargetApi(VERSION_CODES.O)
 public class OmtpMessageReceiver extends BroadcastReceiver {
 
   private static final String TAG = "OmtpMessageReceiver";

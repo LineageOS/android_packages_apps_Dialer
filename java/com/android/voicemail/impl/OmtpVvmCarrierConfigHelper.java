@@ -15,12 +15,10 @@
  */
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -55,7 +53,6 @@ import java.util.Set;
  *
  * <p>TODO(twyen): refactor this to an interface.
  */
-@TargetApi(VERSION_CODES.O)
 @SuppressWarnings({"missingpermission"})
 public class OmtpVvmCarrierConfigHelper {
 

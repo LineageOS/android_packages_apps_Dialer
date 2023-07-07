@@ -19,9 +19,6 @@ package com.android.dialer.binary.common;
 import android.app.Application;
 import android.os.Trace;
 import android.support.annotation.NonNull;
-import android.support.v4.os.BuildCompat;
-import com.android.dialer.blocking.BlockedNumbersAutoMigrator;
-import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.CallLogFramework;
 import com.android.dialer.calllog.config.CallLogConfig;
@@ -44,21 +41,13 @@ public abstract class DialerApplication extends Application implements HasRootCo
     Trace.beginSection("DialerApplication.onCreate");
     StrictModeComponent.get(this).getDialerStrictMode().onApplicationCreate(this);
     super.onCreate();
-    new BlockedNumbersAutoMigrator(
-            this.getApplicationContext(),
-            new FilteredNumberAsyncQueryHandler(this),
-            DialerExecutorComponent.get(this).dialerExecutorFactory())
-        .asyncAutoMigrate();
     new CallRecordingAutoMigrator(
             this.getApplicationContext(),
             DialerExecutorComponent.get(this).dialerExecutorFactory())
         .asyncAutoMigrate();
     initializeAnnotatedCallLog();
     PersistentLogger.initialize(this);
-
-    if (BuildCompat.isAtLeastO()) {
-      NotificationChannelManager.initChannels(this);
-    }
+    NotificationChannelManager.initChannels(this);
     Trace.endSection();
   }
 

@@ -44,8 +44,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.media.AudioAttributes;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Trace;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -53,7 +51,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.os.BuildCompat;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccount;
@@ -68,6 +65,7 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.ContactsUtils.UserType;
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderComponent;
@@ -356,9 +354,7 @@ public class StatusBarNotifier
     LogUtil.i("StatusBarNotifier.buildAndSendNotification", "notificationType=" + notificationType);
     switch (notificationType) {
       case NOTIFICATION_INCOMING_CALL:
-        if (BuildCompat.isAtLeastO()) {
-          builder.setChannelId(NotificationChannelId.INCOMING_CALL);
-        }
+        builder.setChannelId(NotificationChannelId.INCOMING_CALL);
         // Set the intent as a full screen intent as well if a call is incoming
         configureFullScreenIntent(builder, createLaunchPendingIntent(true /* isFullScreen */));
         // Set the notification category and bump the priority for incoming calls
@@ -375,16 +371,12 @@ public class StatusBarNotifier
         }
         break;
       case NOTIFICATION_INCOMING_CALL_QUIET:
-        if (BuildCompat.isAtLeastO()) {
-          builder.setChannelId(NotificationChannelId.ONGOING_CALL);
-        }
+        builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         break;
       case NOTIFICATION_IN_CALL:
-        if (BuildCompat.isAtLeastO()) {
-          publicBuilder.setColorized(true);
-          builder.setColorized(true);
-          builder.setChannelId(NotificationChannelId.ONGOING_CALL);
-        }
+        publicBuilder.setColorized(true);
+        builder.setColorized(true);
+        builder.setChannelId(NotificationChannelId.ONGOING_CALL);
         break;
       default:
         break;
@@ -874,13 +866,11 @@ public class StatusBarNotifier
 
   private Spannable getActionText(@StringRes int stringRes, @ColorRes int colorRes) {
     Spannable spannable = new SpannableString(context.getText(stringRes));
-    if (VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
-      // This will only work for cases where the Notification.Builder has a fullscreen intent set
-      // Notification.Builder that does not have a full screen intent will take the color of the
-      // app and the following leads to a no-op.
-      spannable.setSpan(
-          new ForegroundColorSpan(context.getColor(colorRes)), 0, spannable.length(), 0);
-    }
+    // This will only work for cases where the Notification.Builder has a fullscreen intent set
+    // Notification.Builder that does not have a full screen intent will take the color of the
+    // app and the following leads to a no-op.
+    spannable.setSpan(
+        new ForegroundColorSpan(context.getColor(colorRes)), 0, spannable.length(), 0);
     return spannable;
   }
 

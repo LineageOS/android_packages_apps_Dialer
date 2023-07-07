@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnBlockNumberListener;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnUnblockNumberListener;
 import com.android.dialer.logging.InteractionEvent;
@@ -140,13 +141,7 @@ public class BlockNumberDialogFragment extends DialogFragment {
           ContactDisplayUtils.getTtsSpannedPhoneNumber(
               getResources(), R.string.old_block_number_confirmation_title, displayNumber);
       okText = getString(R.string.block_number_ok);
-      if (FilteredNumberCompat.useNewFiltering(getContext())) {
-        message = getString(R.string.block_number_confirmation_message_new_filtering);
-      } else if (voicemailEnabledChecker.isVisualVoicemailEnabled()) {
-        message = getString(R.string.block_number_confirmation_message_vvm);
-      } else {
-        message = getString(R.string.block_number_confirmation_message_no_vvm);
-      }
+      message = getString(R.string.block_number_confirmation_message_new_filtering);
     }
 
     AlertDialog.Builder builder =
@@ -252,14 +247,10 @@ public class BlockNumberDialogFragment extends DialogFragment {
             if (callback != null) {
               callback.onFilterNumberSuccess();
             }
-
-            if (FilteredNumbersUtil.hasRecentEmergencyCall(applicationContext)) {
-              FilteredNumbersUtil.maybeNotifyCallBlockingDisabled(applicationContext);
-            }
           }
         };
 
-    handler.blockNumber(onBlockNumberListener, number, countryIso);
+    handler.blockNumber(onBlockNumberListener, number);
   }
 
   private void unblockNumber() {
