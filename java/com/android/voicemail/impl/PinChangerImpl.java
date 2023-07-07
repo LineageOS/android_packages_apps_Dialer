@@ -16,10 +16,8 @@
 
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Network;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
@@ -31,7 +29,6 @@ import com.android.voicemail.impl.sync.VvmNetworkRequest;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.NetworkWrapper;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.RequestFailedException;
 
-@TargetApi(VERSION_CODES.O)
 class PinChangerImpl implements PinChanger {
 
   private final Context context;

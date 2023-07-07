@@ -93,8 +93,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                         .logImpression(DialerImpression.Type.USER_ACTION_BLOCKED_NUMBER);
                     adapter.notifyDataSetChanged();
                   },
-                  number,
-                  countryIso);
+                  number);
 
               if (isSpamChecked) {
                 showSpamBlockingPromoDialog();
@@ -134,8 +133,7 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
                         .logImpression(DialerImpression.Type.USER_ACTION_BLOCKED_NUMBER);
                     adapter.notifyDataSetChanged();
                   },
-                  number,
-                  countryIso);
+                  number);
               showSpamBlockingPromoDialog();
             },
             null)

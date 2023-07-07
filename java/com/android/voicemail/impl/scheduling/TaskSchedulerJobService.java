@@ -16,7 +16,6 @@
 
 package com.android.voicemail.impl.scheduling;
 
-import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
@@ -24,7 +23,6 @@ import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -38,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** A {@link JobService} that will trigger the background execution of {@link TaskExecutor}. */
-@TargetApi(VERSION_CODES.O)
 public class TaskSchedulerJobService extends JobService implements TaskExecutor.Job {
 
   private static final String TAG = "TaskSchedulerJobService";

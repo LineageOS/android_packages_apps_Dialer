@@ -38,10 +38,6 @@ public final class ShortcutRefresher {
     Assert.isMainThread();
     Assert.isNotNull(context);
 
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) {
-      return;
-    }
-
     if (!Shortcuts.areDynamicShortcutsEnabled(context)) {
       return;
     }

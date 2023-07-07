@@ -22,7 +22,6 @@ import android.content.Context;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.BuildCompat;
 import android.text.TextUtils;
 import android.util.Pair;
 import com.android.dialer.common.Assert;
@@ -49,10 +48,7 @@ public final class DialerNotificationManager {
     Assert.isNotNull(context);
     Assert.isNotNull(notification);
     Assert.checkArgument(!TextUtils.isEmpty(tag));
-
-    if (BuildCompat.isAtLeastO()) {
-      Assert.checkArgument(!TextUtils.isEmpty(notification.getChannelId()));
-    }
+    Assert.checkArgument(!TextUtils.isEmpty(notification.getChannelId()));
 
     getNotificationManager(context).notify(tag, id, notification);
     throttledNotificationSet.addAll(NotificationThrottler.throttle(context, notification));
