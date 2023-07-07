@@ -43,7 +43,6 @@ import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contacts.resources.R;
-import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
 import com.android.dialer.util.PermissionsUtil;
@@ -67,7 +66,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    *   0-98   KitKat
    * </pre>
    */
-  public static final int DATABASE_VERSION = 10;
+  public static final int DATABASE_VERSION = 11;
 
   public static final String DATABASE_NAME = "dialer.db";
 
@@ -89,15 +88,9 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   private final Context context;
   private final DialerFutureSerializer dialerFutureSerializer = new DialerFutureSerializer();
 
-  private boolean isTestInstance = false;
-
   protected DialerDatabaseHelper(Context context, String databaseName, int dbVersion) {
     super(context, databaseName, null, dbVersion);
     this.context = Objects.requireNonNull(context, "Context must not be null");
-  }
-
-  public void setIsTestInstance(boolean isTestInstance) {
-    this.isTestInstance = isTestInstance;
   }
 
   /**
@@ -170,45 +163,16 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
             + " TEXT "
             + ");");
 
-    // This will need to also be updated in setupTablesForFilteredNumberTest and onUpgrade.
-    // Hardcoded so we know on glance what columns are updated in setupTables,
-    // and to be able to guarantee the state of the DB at each upgrade step.
-    db.execSQL(
-        "CREATE TABLE "
-            + Tables.FILTERED_NUMBER_TABLE
-            + " ("
-            + FilteredNumberColumns._ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + FilteredNumberColumns.NORMALIZED_NUMBER
-            + " TEXT UNIQUE,"
-            + FilteredNumberColumns.NUMBER
-            + " TEXT,"
-            + FilteredNumberColumns.COUNTRY_ISO
-            + " TEXT,"
-            + FilteredNumberColumns.TIMES_FILTERED
-            + " INTEGER,"
-            + FilteredNumberColumns.LAST_TIME_FILTERED
-            + " LONG,"
-            + FilteredNumberColumns.CREATION_TIME
-            + " LONG,"
-            + FilteredNumberColumns.TYPE
-            + " INTEGER,"
-            + FilteredNumberColumns.SOURCE
-            + " INTEGER"
-            + ");");
-
     setProperty(db, DATABASE_VERSION_PROPERTY, String.valueOf(DATABASE_VERSION));
-    if (!isTestInstance) {
-      resetSmartDialLastUpdatedTime();
-    }
+    resetSmartDialLastUpdatedTime();
   }
 
   public void dropTables(SQLiteDatabase db) {
     db.execSQL("DROP TABLE IF EXISTS " + Tables.PREFIX_TABLE);
     db.execSQL("DROP TABLE IF EXISTS " + Tables.SMARTDIAL_TABLE);
     db.execSQL("DROP TABLE IF EXISTS " + Tables.PROPERTIES);
-    db.execSQL("DROP TABLE IF EXISTS " + Tables.FILTERED_NUMBER_TABLE);
     db.execSQL("DROP TABLE IF EXISTS " + Tables.VOICEMAIL_ARCHIVE_TABLE);
+    db.execSQL("DROP TABLE IF EXISTS filtered_numbers_table");
   }
 
   @Override
@@ -231,30 +195,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     }
 
     if (oldVersion < 7) {
-      db.execSQL("DROP TABLE IF EXISTS " + Tables.FILTERED_NUMBER_TABLE);
-      db.execSQL(
-          "CREATE TABLE "
-              + Tables.FILTERED_NUMBER_TABLE
-              + " ("
-              + FilteredNumberColumns._ID
-              + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-              + FilteredNumberColumns.NORMALIZED_NUMBER
-              + " TEXT UNIQUE,"
-              + FilteredNumberColumns.NUMBER
-              + " TEXT,"
-              + FilteredNumberColumns.COUNTRY_ISO
-              + " TEXT,"
-              + FilteredNumberColumns.TIMES_FILTERED
-              + " INTEGER,"
-              + FilteredNumberColumns.LAST_TIME_FILTERED
-              + " LONG,"
-              + FilteredNumberColumns.CREATION_TIME
-              + " LONG,"
-              + FilteredNumberColumns.TYPE
-              + " INTEGER,"
-              + FilteredNumberColumns.SOURCE
-              + " INTEGER"
-              + ");");
       oldVersion = 7;
     }
 
@@ -266,6 +206,11 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     if (oldVersion < 10) {
       db.execSQL("DROP TABLE IF EXISTS " + Tables.VOICEMAIL_ARCHIVE_TABLE);
       oldVersion = 10;
+    }
+
+    if (oldVersion < 11) {
+      db.execSQL("DROP TABLE IF EXISTS filtered_numbers_table");
+      oldVersion = 11;
     }
 
     if (oldVersion != DATABASE_VERSION) {
@@ -1048,9 +993,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   }
 
   public interface Tables {
-
-    /** Saves a list of numbers to be blocked. */
-    String FILTERED_NUMBER_TABLE = "filtered_numbers_table";
     /** Saves the necessary smart dial information of all contacts. */
     String SMARTDIAL_TABLE = "smartdial_table";
     /** Saves all possible prefixes to refer to a contacts. */

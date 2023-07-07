@@ -49,9 +49,6 @@ public abstract class Constants {
   }
 
   @NonNull
-  public abstract String getFilteredNumberProviderAuthority();
-
-  @NonNull
   public abstract String getFileProviderAuthority();
 
   @NonNull

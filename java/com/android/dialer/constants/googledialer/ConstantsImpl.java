@@ -28,12 +28,6 @@ public class ConstantsImpl extends Constants {
 
   @Override
   @NonNull
-  public String getFilteredNumberProviderAuthority() {
-    return "com.google.android.dialer.blocking.filterednumberprovider";
-  }
-
-  @Override
-  @NonNull
   public String getFileProviderAuthority() {
     return "com.google.android.dialer.files";
   }
