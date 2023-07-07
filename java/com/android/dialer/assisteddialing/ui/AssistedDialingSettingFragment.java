@@ -23,6 +23,8 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.telephony.TelephonyManager;
+
+import com.android.dialer.R;
 import com.android.dialer.assisteddialing.AssistedDialingMediator;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.CountryCodeProvider;

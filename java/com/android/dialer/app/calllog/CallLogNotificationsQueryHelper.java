@@ -389,7 +389,7 @@ public class CallLogNotificationsQueryHelper {
       try (Cursor cursor =
           contentResolver.query(
               Calls.CONTENT_URI_WITH_VOICEMAIL,
-              (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) ? PROJECTION_O : PROJECTION,
+              PROJECTION_O,
               selection.getSelection(),
               selection.getSelectionArgs(),
               Calls.DEFAULT_SORT_ORDER)) {
@@ -428,7 +428,7 @@ public class CallLogNotificationsQueryHelper {
       try (Cursor cursor =
           contentResolver.query(
               Calls.CONTENT_URI_WITH_VOICEMAIL,
-              (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) ? PROJECTION_O : PROJECTION,
+              PROJECTION_O,
               selection.getSelection(),
               selection.getSelectionArgs(),
               null)) {
@@ -459,9 +459,7 @@ public class CallLogNotificationsQueryHelper {
           cursor.getString(TRANSCRIPTION_COLUMN_INDEX),
           cursor.getString(COUNTRY_ISO_COLUMN_INDEX),
           cursor.getLong(DATE_COLUMN_INDEX),
-          Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-              ? cursor.getInt(TRANSCRIPTION_STATE_COLUMN_INDEX)
-              : VoicemailCompat.TRANSCRIPTION_NOT_STARTED);
+          cursor.getInt(TRANSCRIPTION_STATE_COLUMN_INDEX));
     }
   }
 }

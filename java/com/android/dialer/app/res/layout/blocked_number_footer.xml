@@ -27,11 +27,5 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <TextView
-      android:id="@+id/blocked_number_footer_textview"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="@string/block_number_footer_message_vvm"
-      style="@style/Dialer.TextAppearance.Secondary"/>
   </LinearLayout>
 </LinearLayout>

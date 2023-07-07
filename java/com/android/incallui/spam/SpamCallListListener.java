@@ -28,10 +28,11 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.BuildCompat;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumberCompat;
 import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
@@ -183,7 +184,7 @@ public class SpamCallListListener implements CallList.Listener {
         PhoneNumberUtils.formatNumberToE164(
             call.getNumber(), GeoUtil.getCurrentCountryIso(context));
     if (!FilteredNumbersUtil.canBlockNumber(context, e164Number, call.getNumber())
-        || !FilteredNumberCompat.canAttemptBlockOperations(context)) {
+        || !FilteredNumbersUtil.canAttemptBlockOperations(context)) {
       return;
     }
     if (e164Number == null) {
@@ -256,10 +257,8 @@ public class SpamCallListListener implements CallList.Listener {
             .setPriority(Notification.PRIORITY_DEFAULT)
             .setColor(ThemeComponent.get(context).theme().getColorPrimary())
             .setSmallIcon(R.drawable.quantum_ic_call_end_vd_theme_24)
-            .setGroup(GROUP_KEY);
-    if (BuildCompat.isAtLeastO()) {
-      builder.setChannelId(NotificationChannelId.DEFAULT);
-    }
+            .setGroup(GROUP_KEY)
+            .setChannelId(NotificationChannelId.DEFAULT);
     return builder;
   }
 

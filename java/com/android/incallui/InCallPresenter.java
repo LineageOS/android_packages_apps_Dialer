@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.CallConfiguration;
 import com.android.dialer.Mode;
+import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler.OnCheckBlockedListener;
 import com.android.dialer.blocking.FilteredNumberCompat;
@@ -629,15 +630,11 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   public void onCallAdded(final android.telecom.Call call) {
     Trace.beginSection("InCallPresenter.onCallAdded");
     LatencyReport latencyReport = new LatencyReport(call);
-    if (shouldAttemptBlocking(call)) {
-      maybeBlockCall(call, latencyReport);
+    if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
+      externalCallList.onCallAdded(call);
     } else {
-      if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
-        externalCallList.onCallAdded(call);
-      } else {
-        latencyReport.onCallBlockingDone();
-        callList.onCallAdded(context, call, latencyReport);
-      }
+      latencyReport.onCallBlockingDone();
+      callList.onCallAdded(context, call, latencyReport);
     }
 
     // Since a call has been added we are no longer waiting for Telecom to send us a call.
@@ -646,121 +643,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     // TODO(maxwelb): Return the future in recordPhoneLookupInfo and propagate.
     PhoneLookupHistoryRecorder.recordPhoneLookupInfo(context.getApplicationContext(), call);
     Trace.endSection();
-  }
-
-  private boolean shouldAttemptBlocking(android.telecom.Call call) {
-    if (call.getState() != android.telecom.Call.STATE_RINGING) {
-      return false;
-    }
-    if (!UserManagerCompat.isUserUnlocked(context)) {
-      LogUtil.i(
-          "InCallPresenter.shouldAttemptBlocking",
-          "not attempting to block incoming call because user is locked");
-      return false;
-    }
-    if (TelecomCallUtil.isEmergencyCall(call)) {
-      LogUtil.i(
-          "InCallPresenter.shouldAttemptBlocking",
-          "Not attempting to block incoming emergency call");
-      return false;
-    }
-    if (FilteredNumbersUtil.hasRecentEmergencyCall(context)) {
-      LogUtil.i(
-          "InCallPresenter.shouldAttemptBlocking",
-          "Not attempting to block incoming call due to recent emergency call");
-      return false;
-    }
-    if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
-      return false;
-    }
-    if (FilteredNumberCompat.useNewFiltering(context)) {
-      LogUtil.i(
-          "InCallPresenter.shouldAttemptBlocking",
-          "not attempting to block incoming call because framework blocking is in use");
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Checks whether a call should be blocked, and blocks it if so. Otherwise, it adds the call to
-   * the CallList so it can proceed as normal. There is a timeout, so if the function for checking
-   * whether a function is blocked does not return in a reasonable time, we proceed with adding the
-   * call anyways.
-   */
-  private void maybeBlockCall(final android.telecom.Call call, final LatencyReport latencyReport) {
-    final String countryIso = GeoUtil.getCurrentCountryIso(context);
-    final String number = TelecomCallUtil.getNumber(call);
-    final long timeAdded = System.currentTimeMillis();
-
-    // Though AtomicBoolean's can be scary, don't fear, as in this case it is only used on the
-    // main UI thread. It is needed so we can change its value within different scopes, since
-    // that cannot be done with a final boolean.
-    final AtomicBoolean hasTimedOut = new AtomicBoolean(false);
-
-    final Handler handler = new Handler();
-
-    // Proceed if the query is slow; the call may still be blocked after the query returns.
-    final Runnable runnable =
-        new Runnable() {
-          @Override
-          public void run() {
-            hasTimedOut.set(true);
-            latencyReport.onCallBlockingDone();
-            callList.onCallAdded(context, call, latencyReport);
-          }
-        };
-    handler.postDelayed(runnable, BLOCK_QUERY_TIMEOUT_MS);
-
-    OnCheckBlockedListener onCheckBlockedListener =
-        new OnCheckBlockedListener() {
-          @Override
-          public void onCheckComplete(final Integer id) {
-            if (isReadyForTearDown()) {
-              LogUtil.i("InCallPresenter.onCheckComplete", "torn down, not adding call");
-              return;
-            }
-            if (!hasTimedOut.get()) {
-              handler.removeCallbacks(runnable);
-            }
-            if (id == null) {
-              if (!hasTimedOut.get()) {
-                latencyReport.onCallBlockingDone();
-                callList.onCallAdded(context, call, latencyReport);
-              }
-            } else if (id == FilteredNumberAsyncQueryHandler.INVALID_ID) {
-              LogUtil.d(
-                  "InCallPresenter.onCheckComplete", "invalid number, skipping block checking");
-              if (!hasTimedOut.get()) {
-                handler.removeCallbacks(runnable);
-
-                latencyReport.onCallBlockingDone();
-                callList.onCallAdded(context, call, latencyReport);
-              }
-            } else {
-              LogUtil.i(
-                  "InCallPresenter.onCheckComplete", "Rejecting incoming call from blocked number");
-              call.reject(false, null);
-              Logger.get(context).logInteraction(InteractionEvent.Type.CALL_BLOCKED);
-
-              /*
-               * If mContext is null, then the InCallPresenter was torn down before the
-               * block check had a chance to complete. The context is no longer valid, so
-               * don't attempt to remove the call log entry.
-               */
-              if (context == null) {
-                return;
-              }
-              // Register observer to update the call log.
-              // BlockedNumberContentObserver will unregister after successful log or timeout.
-              BlockedNumberContentObserver contentObserver =
-                  new BlockedNumberContentObserver(context, new Handler(), number, timeAdded);
-              contentObserver.register();
-            }
-          }
-        };
-
-    filteredQueryHandler.isBlockedNumber(onCheckBlockedListener, number, countryIso);
   }
 
   public void onCallRemoved(android.telecom.Call call) {
@@ -1892,22 +1774,14 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   VideoSurfaceTexture getLocalVideoSurfaceTexture() {
     if (localVideoSurfaceTexture == null) {
-      boolean isPixel2017 = false;
-      if (context != null) {
-        isPixel2017 = context.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE);
-      }
-      localVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture(isPixel2017);
+      localVideoSurfaceTexture = VideoSurfaceBindings.createLocalVideoSurfaceTexture();
     }
     return localVideoSurfaceTexture;
   }
 
   VideoSurfaceTexture getRemoteVideoSurfaceTexture() {
     if (remoteVideoSurfaceTexture == null) {
-      boolean isPixel2017 = false;
-      if (context != null) {
-        isPixel2017 = context.getPackageManager().hasSystemFeature(PIXEL2017_SYSTEM_FEATURE);
-      }
-      remoteVideoSurfaceTexture = VideoSurfaceBindings.createRemoteVideoSurfaceTexture(isPixel2017);
+      remoteVideoSurfaceTexture = VideoSurfaceBindings.createRemoteVideoSurfaceTexture();
     }
     return remoteVideoSurfaceTexture;
   }

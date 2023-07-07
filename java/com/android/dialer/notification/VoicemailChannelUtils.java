@@ -17,24 +17,23 @@
 package com.android.dialer.notification;
 
 import android.Manifest.permission;
-import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioAttributes;
-import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -43,16 +42,12 @@ import java.util.List;
 import java.util.Set;
 
 /** Utilities for working with voicemail channels. */
-@TargetApi(VERSION_CODES.O)
 /* package */ final class VoicemailChannelUtils {
   @VisibleForTesting static final String GLOBAL_VOICEMAIL_CHANNEL_ID = "phone_voicemail";
   private static final String PER_ACCOUNT_VOICEMAIL_CHANNEL_ID_PREFIX = "phone_voicemail_account_";
 
   @SuppressWarnings("MissingPermission") // isSingleSimDevice() returns true if no permission
   static Set<String> getAllChannelIds(@NonNull Context context) {
-    Assert.checkArgument(BuildCompat.isAtLeastO());
-    Assert.isNotNull(context);
-
     Set<String> result = new ArraySet<>();
     if (isSingleSimDevice(context)) {
       result.add(GLOBAL_VOICEMAIL_CHANNEL_ID);
@@ -66,9 +61,6 @@ import java.util.Set;
 
   @SuppressWarnings("MissingPermission") // isSingleSimDevice() returns true if no permission
   static void createAllChannels(@NonNull Context context) {
-    Assert.checkArgument(BuildCompat.isAtLeastO());
-    Assert.isNotNull(context);
-
     if (isSingleSimDevice(context)) {
       createGlobalVoicemailChannel(context);
     } else {
@@ -80,9 +72,6 @@ import java.util.Set;
 
   @NonNull
   static String getChannelId(@NonNull Context context, @Nullable PhoneAccountHandle handle) {
-    Assert.checkArgument(BuildCompat.isAtLeastO());
-    Assert.isNotNull(context);
-
     // Most devices we deal with have a single SIM slot. No need to distinguish between phone
     // accounts.
     if (isSingleSimDevice(context)) {

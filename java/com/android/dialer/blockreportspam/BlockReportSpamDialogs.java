@@ -27,6 +27,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumberCompat;
 
 /** Creates dialog fragments to block a number and/or report it as spam/not spam. */
@@ -58,13 +60,7 @@ public final class BlockReportSpamDialogs {
   }
 
   private static String getBlockMessage(Context context) {
-    String message;
-    if (FilteredNumberCompat.useNewFiltering(context)) {
-      message = context.getString(R.string.block_number_confirmation_message_new_filtering);
-    } else {
-      message = context.getString(R.string.block_report_number_alert_details);
-    }
-    return message;
+      return context.getString(R.string.block_number_confirmation_message_new_filtering);
   }
 
   /**
