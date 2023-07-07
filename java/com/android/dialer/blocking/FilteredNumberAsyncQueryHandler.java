@@ -17,12 +17,14 @@
 package com.android.dialer.blocking;
 
 import android.content.AsyncQueryHandler;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
+import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
@@ -30,9 +32,8 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.database.FilteredNumberContract.FilteredNumberColumns;
-import com.android.dialer.database.FilteredNumberContract.FilteredNumberTypes;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** TODO(calderwoodra): documentation */
@@ -88,28 +89,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
   }
 
-  void hasBlockedNumbers(final OnHasBlockedNumbersListener listener) {
-    if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
-      listener.onHasBlockedNumbers(false);
-      return;
-    }
-    startQuery(
-        NO_TOKEN,
-        new Listener() {
-          @Override
-          protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-            listener.onHasBlockedNumbers(cursor != null && cursor.getCount() > 0);
-          }
-        },
-        FilteredNumberCompat.getContentUri(context, null),
-        new String[] {FilteredNumberCompat.getIdColumnName(context)},
-        FilteredNumberCompat.useNewFiltering(context)
-            ? null
-            : FilteredNumberColumns.TYPE + "=" + FilteredNumberTypes.BLOCKED_NUMBER,
-        null,
-        null);
-  }
-
   /**
    * Checks if the given number is blocked, calling the given {@link OnCheckBlockedListener} with
    * the id for the blocked number, {@link #INVALID_ID}, or {@code null} based on the result of the
@@ -121,7 +100,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
       listener.onCheckComplete(INVALID_ID);
       return;
     }
-    if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
+    if (!FilteredNumbersUtil.canAttemptBlockOperations(context)) {
       listener.onCheckComplete(null);
       return;
     }
@@ -146,7 +125,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
 
     String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(context, e164Number, number);
+    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(e164Number, number);
     if (TextUtils.isEmpty(formattedNumber)) {
       listener.onCheckComplete(INVALID_ID);
       blockedNumberCache.put(number, INVALID_ID);
@@ -170,25 +149,13 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
               return;
             }
             cursor.moveToFirst();
-            // New filtering doesn't have a concept of type
-            if (!FilteredNumberCompat.useNewFiltering(context)
-                && cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns.TYPE))
-                    != FilteredNumberTypes.BLOCKED_NUMBER) {
-              blockedNumberCache.put(number, BLOCKED_NUMBER_CACHE_NULL_ID);
-              listener.onCheckComplete(null);
-              return;
-            }
-            Integer blockedId = cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID));
+            Integer blockedId = cursor.getInt(cursor.getColumnIndex(BlockedNumbers.COLUMN_ID));
             blockedNumberCache.put(number, blockedId);
             listener.onCheckComplete(blockedId);
           }
         },
-        FilteredNumberCompat.getContentUri(context, null),
-        FilteredNumberCompat.filter(
-            new String[] {
-              FilteredNumberCompat.getIdColumnName(context),
-              FilteredNumberCompat.getTypeColumnName(context)
-            }),
+        BlockedNumbers.CONTENT_URI,
+        new String[] {BlockedNumbers.COLUMN_ID},
         getIsBlockedNumberSelection(e164Number != null) + " = ?",
         new String[] {formattedNumber},
         null);
@@ -205,7 +172,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     if (number == null) {
       return null;
     }
-    if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
+    if (!FilteredNumbersUtil.canAttemptBlockOperations(context)) {
       return null;
     }
     Integer cachedId = blockedNumberCache.get(number);
@@ -217,7 +184,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
 
     String e164Number = PhoneNumberUtils.formatNumberToE164(number, countryIso);
-    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(context, e164Number, number);
+    String formattedNumber = FilteredNumbersUtil.getBlockableNumber(e164Number, number);
     if (TextUtils.isEmpty(formattedNumber)) {
       return null;
     }
@@ -226,12 +193,8 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         context
             .getContentResolver()
             .query(
-                FilteredNumberCompat.getContentUri(context, null),
-                FilteredNumberCompat.filter(
-                    new String[] {
-                      FilteredNumberCompat.getIdColumnName(context),
-                      FilteredNumberCompat.getTypeColumnName(context)
-                    }),
+                BlockedNumbers.CONTENT_URI,
+                new String[] {BlockedNumbers.COLUMN_ID},
                 getIsBlockedNumberSelection(e164Number != null) + " = ?",
                 new String[] {formattedNumber},
                 null)) {
@@ -246,7 +209,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
         return null;
       }
       cursor.moveToFirst();
-      int blockedId = cursor.getInt(cursor.getColumnIndex(FilteredNumberColumns._ID));
+      int blockedId = cursor.getInt(cursor.getColumnIndex(BlockedNumbers.COLUMN_ID));
       blockedNumberCache.put(number, blockedId);
       return blockedId;
     } catch (SecurityException e) {
@@ -266,27 +229,17 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    * number is e164 or not.
    */
   private String getIsBlockedNumberSelection(boolean isE164Number) {
-    if (FilteredNumberCompat.useNewFiltering(context) && !isE164Number) {
-      return FilteredNumberCompat.getOriginalNumberColumnName(context);
+    if (!isE164Number) {
+      return BlockedNumbers.COLUMN_ORIGINAL_NUMBER;
     }
-    return FilteredNumberCompat.getE164NumberColumnName(context);
-  }
-
-  public void blockNumber(
-      final OnBlockNumberListener listener, String number, @Nullable String countryIso) {
-    blockNumber(listener, null, number, countryIso);
+    return BlockedNumbers.COLUMN_E164_NUMBER;
   }
 
   /** Add a number manually blocked by the user. */
-  public void blockNumber(
-      final OnBlockNumberListener listener,
-      @Nullable String normalizedNumber,
-      String number,
-      @Nullable String countryIso) {
-    blockNumber(
-        listener,
-        FilteredNumberCompat.newBlockNumberContentValues(
-            context, number, normalizedNumber, countryIso));
+  public void blockNumber(final OnBlockNumberListener listener, String number) {
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(BlockedNumbers.COLUMN_ORIGINAL_NUMBER, Objects.requireNonNull(number));
+    blockNumber(listener, contentValues);
   }
 
   /**
@@ -295,7 +248,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    */
   public void blockNumber(final OnBlockNumberListener listener, ContentValues values) {
     blockedNumberCache.clear();
-    if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
+    if (!FilteredNumbersUtil.canAttemptBlockOperations(context)) {
       if (listener != null) {
         listener.onBlockComplete(null);
       }
@@ -311,7 +264,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
             }
           }
         },
-        FilteredNumberCompat.getContentUri(context, null),
+        BlockedNumbers.CONTENT_URI,
         values);
   }
 
@@ -326,7 +279,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     if (id == null) {
       throw new IllegalArgumentException("Null id passed into unblock");
     }
-    unblock(listener, FilteredNumberCompat.getContentUri(context, id));
+    unblock(listener, ContentUris.withAppendedId(BlockedNumbers.CONTENT_URI, id));
   }
 
   /**
@@ -338,7 +291,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    */
   public void unblock(@Nullable final OnUnblockNumberListener listener, final Uri uri) {
     blockedNumberCache.clear();
-    if (!FilteredNumberCompat.canAttemptBlockOperations(context)) {
+    if (!FilteredNumbersUtil.canAttemptBlockOperations(context)) {
       if (listener != null) {
         listener.onUnblockComplete(0, null);
       }
@@ -357,7 +310,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
             cursor.moveToFirst();
             final ContentValues values = new ContentValues();
             DatabaseUtils.cursorRowToContentValues(cursor, values);
-            values.remove(FilteredNumberCompat.getIdColumnName(context));
+            values.remove(BlockedNumbers.COLUMN_ID);
 
             startDelete(
                 NO_TOKEN,
@@ -413,16 +366,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
      * @param values The deleted data (used for restoration).
      */
     void onUnblockComplete(int rows, ContentValues values);
-  }
-
-  /** TODO(calderwoodra): documentation */
-  interface OnHasBlockedNumbersListener {
-
-    /**
-     * @param hasBlockedNumbers {@code true} if any blocked numbers are stored. {@code false}
-     *     otherwise.
-     */
-    void onHasBlockedNumbers(boolean hasBlockedNumbers);
   }
 
   /** Methods for FilteredNumberAsyncQueryHandler result returns. */

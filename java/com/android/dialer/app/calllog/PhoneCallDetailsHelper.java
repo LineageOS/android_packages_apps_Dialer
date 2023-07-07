@@ -25,7 +25,6 @@ import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
@@ -173,9 +172,7 @@ public class PhoneCallDetailsHelper
     views.callTypeIcons.setShowAssistedDialed(
         (details.features & TelephonyManagerCompat.FEATURES_ASSISTED_DIALING)
             == TelephonyManagerCompat.FEATURES_ASSISTED_DIALING);
-    if (BuildCompat.isAtLeastP()) {
-      views.callTypeIcons.setShowRtt((details.features & Calls.FEATURES_RTT) == Calls.FEATURES_RTT);
-    }
+    views.callTypeIcons.setShowRtt((details.features & Calls.FEATURES_RTT) == Calls.FEATURES_RTT);
     views.callTypeIcons.requestLayout();
     views.callTypeIcons.setVisibility(View.VISIBLE);
 

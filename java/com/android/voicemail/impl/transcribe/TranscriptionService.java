@@ -93,10 +93,6 @@ public class TranscriptionService extends JobService {
   }
 
   private static boolean canTranscribeVoicemail(Context context, PhoneAccountHandle account) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-      LogUtil.i("TranscriptionService.canTranscribeVoicemail", "not supported by sdk");
-      return false;
-    }
     VoicemailClient client = VoicemailComponent.get(context).getVoicemailClient();
     if (!client.isVoicemailTranscriptionEnabled(context, account)) {
       LogUtil.i("TranscriptionService.canTranscribeVoicemail", "transcription is not enabled");

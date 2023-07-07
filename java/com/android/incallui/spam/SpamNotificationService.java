@@ -128,7 +128,7 @@ public class SpamNotificationService extends Service {
                 CallLog.Calls.INCOMING_TYPE,
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
-        new FilteredNumberAsyncQueryHandler(this).blockNumber(null, number, countryIso);
+        new FilteredNumberAsyncQueryHandler(this).blockNumber(null, number);
         if (shouldShowSpamBlockingPromo) {
           spamBlockingPromoHelper.showSpamBlockingPromoNotification(
               notificationTag,

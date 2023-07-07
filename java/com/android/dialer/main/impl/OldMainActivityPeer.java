@@ -55,6 +55,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.calllog.CallLogAdapter;
@@ -123,8 +124,6 @@ import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.voicemail.listui.NewVoicemailFragment;
-import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler;
-import com.android.dialer.voicemail.listui.error.VoicemailStatusCorruptionHandler.Source;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import com.android.voicemail.VoicemailComponent;
@@ -966,8 +965,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public void onVoicemailStatusFetched(Cursor statusCursor) {
       LogUtil.i("OldMainActivityPeer.MainCallLogFragmentListener", "onVoicemailStatusFetched");
-      VoicemailStatusCorruptionHandler.maybeFixVoicemailStatus(
-          context, statusCursor, Source.Activity);
 
       // Update hasActiveVoicemailProvider, which controls the number of tabs displayed.
       int numberOfActiveVoicemailSources =
