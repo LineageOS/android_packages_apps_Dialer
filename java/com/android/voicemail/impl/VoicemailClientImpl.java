@@ -13,11 +13,9 @@
  */
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build.VERSION_CODES;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract.Status;
@@ -25,9 +23,9 @@ import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.BuildCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.configprovider.ConfigProviderComponent;
@@ -67,9 +65,7 @@ public class VoicemailClientImpl implements VoicemailClient {
   };
 
   @Inject
-  public VoicemailClientImpl() {
-    Assert.checkArgument(BuildCompat.isAtLeastO());
-  }
+  public VoicemailClientImpl() { }
 
   @Override
   public boolean isVoicemailModuleEnabled() {
@@ -100,11 +96,6 @@ public class VoicemailClientImpl implements VoicemailClient {
 
   @Override
   public boolean isVoicemailArchiveAvailable(Context context) {
-    if (!BuildCompat.isAtLeastO()) {
-      LogUtil.i("VoicemailClientImpl.isVoicemailArchiveAllowed", "not running on O or later");
-      return false;
-    }
-
     if (!ConfigProviderComponent.get(context)
         .getConfigProvider()
         .getBoolean(ALLOW_VOICEMAIL_ARCHIVE, false)) {
@@ -130,12 +121,6 @@ public class VoicemailClientImpl implements VoicemailClient {
     if (phoneAccountHandle == null) {
       LogUtil.i(
           "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "phone account handle is null");
-    }
-
-    if (!BuildCompat.isAtLeastO()) {
-      LogUtil.i(
-          "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "not running on O or later");
-      return false;
     }
 
     if (!isVoicemailEnabled(context, phoneAccountHandle)) {
@@ -271,7 +256,6 @@ public class VoicemailClientImpl implements VoicemailClient {
     return new PinChangerImpl(context, phoneAccountHandle);
   }
 
-  @TargetApi(VERSION_CODES.O)
   @Override
   public void appendOmtpVoicemailSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {
@@ -303,7 +287,6 @@ public class VoicemailClientImpl implements VoicemailClient {
     }
   }
 
-  @TargetApi(VERSION_CODES.O)
   @Override
   public void appendOmtpVoicemailStatusSelectionClause(
       Context context, StringBuilder where, List<String> selectionArgs) {

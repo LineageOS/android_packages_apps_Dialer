@@ -177,8 +177,6 @@ public class AnnotatedCallLogContract {
     /**
      * See {@link VoicemailCompat#TRANSCRIPTION_STATE}
      *
-     * <p>Only populated in {@link Build.VERSION_CODES#O} and above
-     *
      * <p>TYPE: INTEGER
      */
     public static final String TRANSCRIPTION_STATE = "transcription_state";

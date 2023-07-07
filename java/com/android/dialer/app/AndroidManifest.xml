@@ -60,18 +60,6 @@
 
   <application>
 
-  <activity
-      android:exported="false"
-      android:label="@string/manage_blocked_numbers_label"
-      android:name="com.android.dialer.app.filterednumber.BlockedNumbersSettingsActivity"
-      android:parentActivityName="com.android.dialer.app.settings.DialerSettingsActivity"
-      android:theme="@style/ManageBlockedNumbersStyle">
-      <intent-filter>
-        <action android:name="com.android.dialer.action.BLOCKED_NUMBERS_SETTINGS"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-      </intent-filter>
-    </activity>
-
     <activity
       android:label="@string/call_log_activity_title"
       android:name="com.android.dialer.app.calllog.CallLogActivity"

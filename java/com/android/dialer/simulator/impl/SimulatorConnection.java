@@ -16,10 +16,8 @@
 
 package com.android.dialer.simulator.impl;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.os.BuildCompat;
 import android.telecom.Connection;
 import android.telecom.Connection.RttTextStream;
 import android.telecom.ConnectionRequest;
@@ -34,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Represents a single phone call on the device. */
-@TargetApi(28)
 public final class SimulatorConnection extends Connection {
   private final List<Listener> listeners = new ArrayList<>();
   private final List<Event> events = new ArrayList<>();
@@ -60,9 +57,7 @@ public final class SimulatorConnection extends Connection {
             getConnectionCapabilities() | CAPABILITY_SEPARATE_FROM_CONFERENCE);
       }
     }
-    if (BuildCompat.isAtLeastP()) {
-      rttTextStream = request.getRttTextStream();
-    }
+    rttTextStream = request.getRttTextStream();
     setVideoProvider(new SimulatorVideoProvider(context, this));
     simulatorConnectionsBank = SimulatorComponent.get(context).getSimulatorConnectionsBank();
   }

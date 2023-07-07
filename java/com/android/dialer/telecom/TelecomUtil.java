@@ -23,8 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.UserHandle;
 import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
@@ -356,11 +354,7 @@ public abstract class TelecomUtil {
         // Dialer is launched.
         // Instead, Dialer should use TelecomManager#isInManagedCall, which only returns true if the
         // device is in a managed call which Dialer would know about.
-        if (VERSION.SDK_INT >= VERSION_CODES.O) {
-          return getTelecomManager(context).isInManagedCall();
-        } else {
-          return getTelecomManager(context).isInCall();
-        }
+        return getTelecomManager(context).isInManagedCall();
       }
       return false;
     }

@@ -16,7 +16,6 @@
 
 package com.android.incallui;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -25,10 +24,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.os.BuildCompat;
 import android.telecom.Call;
 import android.telecom.PhoneAccount;
 import android.telecom.VideoProfile;
@@ -38,6 +35,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import com.android.contacts.common.ContactsUtils;
 import com.android.contacts.common.compat.CallCompat;
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.BitmapUtil;
 import com.android.dialer.contacts.ContactsComponent;
@@ -128,7 +126,6 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
    * @param notificationId The notification ID associated with the external call which is to be
    *     pulled.
    */
-  @TargetApi(VERSION_CODES.N_MR1)
   public void pullExternalCall(int notificationId) {
     for (NotificationInfo info : notifications.values()) {
       if (info.getNotificationId() == notificationId
@@ -239,9 +236,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     builder.setLargeIcon(info.getLargeIcon());
     builder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
     builder.addPerson(info.getPersonReference());
-    if (BuildCompat.isAtLeastO()) {
-      builder.setChannelId(NotificationChannelId.DEFAULT);
-    }
+    builder.setChannelId(NotificationChannelId.DEFAULT);
 
     // Where the external call supports being transferred to the local device, add an action
     // to the notification to initiate the call pull process.
@@ -274,9 +269,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     Notification.Builder publicBuilder = new Notification.Builder(context);
     publicBuilder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
     publicBuilder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
-    if (BuildCompat.isAtLeastO()) {
-      publicBuilder.setChannelId(NotificationChannelId.DEFAULT);
-    }
+    publicBuilder.setChannelId(NotificationChannelId.DEFAULT);
 
     builder.setPublicVersion(publicBuilder.build());
     Notification notification = builder.build();
@@ -451,9 +444,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     summary.setGroup(GROUP_KEY);
     summary.setGroupSummary(true);
     summary.setSmallIcon(R.drawable.quantum_ic_call_white_24);
-    if (BuildCompat.isAtLeastO()) {
-      summary.setChannelId(NotificationChannelId.DEFAULT);
-    }
+    summary.setChannelId(NotificationChannelId.DEFAULT);
     DialerNotificationManager.notify(
         context, GROUP_SUMMARY_NOTIFICATION_TAG, GROUP_SUMMARY_NOTIFICATION_ID, summary.build());
   }

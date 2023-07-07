@@ -21,7 +21,6 @@ import android.app.job.JobWorkItem;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.JobIntentService;
 import com.android.dialer.common.LogUtil;
@@ -39,7 +38,6 @@ public class TranscriptionRatingService extends JobIntentService {
 
   /** Schedule a task to upload transcription rating feedback */
   public static boolean scheduleTask(Context context, SendTranscriptionFeedbackRequest request) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       LogUtil.enterBlock("TranscriptionRatingService.scheduleTask");
       ComponentName componentName = new ComponentName(context, TranscriptionRatingService.class);
       JobInfo.Builder builder =
@@ -48,10 +46,6 @@ public class TranscriptionRatingService extends JobIntentService {
       JobScheduler scheduler = context.getSystemService(JobScheduler.class);
       return scheduler.enqueue(builder.build(), makeWorkItem(request))
           == JobScheduler.RESULT_SUCCESS;
-    } else {
-      LogUtil.i("TranscriptionRatingService.scheduleTask", "not supported");
-      return false;
-    }
   }
 
   public TranscriptionRatingService() {}

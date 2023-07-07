@@ -16,7 +16,6 @@
 
 package com.android.voicemail.impl;
 
-import android.annotation.TargetApi;
 import android.app.job.JobInfo;
 import android.app.job.JobInfo.TriggerContentUri;
 import android.app.job.JobParameters;
@@ -26,7 +25,6 @@ import android.app.job.JobWorkItem;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.support.annotation.VisibleForTesting;
@@ -37,7 +35,6 @@ import com.android.dialer.constants.ScheduledJobIds;
  * JobService triggered when the setup wizard is completed, and rerun all {@link ActivationTask}
  * scheduled during the setup.
  */
-@TargetApi(VERSION_CODES.O)
 public class DeviceProvisionedJobService extends JobService {
 
   @VisibleForTesting static final String EXTRA_PHONE_ACCOUNT_HANDLE = "EXTRA_PHONE_ACCOUNT_HANDLE";
