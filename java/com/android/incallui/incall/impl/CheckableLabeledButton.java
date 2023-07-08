@@ -37,6 +37,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.dialer.R;
+
 /** A button to show on the incall screen */
 public class CheckableLabeledButton extends LinearLayout implements Checkable {
 

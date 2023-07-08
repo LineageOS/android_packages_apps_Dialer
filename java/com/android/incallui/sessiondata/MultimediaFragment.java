@@ -31,6 +31,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.dialer.R;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.multimedia.MultimediaData;
@@ -164,7 +166,7 @@ public class MultimediaFragment extends Fragment implements AvatarPresenter {
         && getImageUri() == null
         && !TextUtils.isEmpty(getSubject())) {
       ((ImageView) view.findViewById(R.id.spam_image))
-          .setImageResource(R.drawable.quantum_ic_message_white_24);
+          .setImageResource(R.drawable.quantum_ic_message_vd_theme_24);
       ((TextView) view.findViewById(R.id.spam_text)).setText(R.string.spam_message_text);
     }
 
