@@ -44,7 +44,7 @@
     android:layout_centerInParent="true"
     android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
     android:drawablePadding="8dp"
-    android:drawableTop="@drawable/quantum_ic_videocam_off_white_36"
+    android:drawableTop="@drawable/quantum_ic_videocam_off_vd_theme_24"
     android:drawableTint="?colorIcon"
     android:padding="64dp"
     android:text="@string/videocall_remote_video_off"

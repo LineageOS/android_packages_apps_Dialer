@@ -116,7 +116,7 @@ public class CameraComposerFragment extends CallComposerFragment
 
       allowPermission.setOnClickListener(this);
       permissionText.setText(R.string.camera_permission_text);
-      permissionImage.setImageResource(R.drawable.quantum_ic_camera_alt_white_48);
+      permissionImage.setImageResource(R.drawable.quantum_ic_camera_vd_theme_24);
       permissionImage.setColorFilter(ThemeComponent.get(getContext()).theme().getColorPrimary());
       permissionView.setVisibility(View.VISIBLE);
     } else {
