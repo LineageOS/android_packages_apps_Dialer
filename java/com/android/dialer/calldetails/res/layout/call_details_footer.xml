@@ -31,7 +31,7 @@
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_content_copy_grey600_24"
+      android:drawableStart="@drawable/quantum_ic_content_copy_vd_theme_24"
       android:tint="?colorIcon"
       android:text="@string/call_details_copy_number"/>
 
@@ -40,7 +40,7 @@
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_edit_grey600_24"
+      android:drawableStart="@drawable/quantum_ic_edit_vd_theme_24"
       android:tint="?colorIcon"
       android:text="@string/call_details_edit_number"/>
 
@@ -49,7 +49,7 @@
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_report_grey600_24"
+      android:drawableStart="@drawable/quantum_ic_report_vd_theme_24"
       android:text="@string/call_details_report_call_id"
       android:tint="?colorIcon"
       android:visibility="gone"/>
