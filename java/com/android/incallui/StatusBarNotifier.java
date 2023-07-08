@@ -882,7 +882,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_ANSWER_VOICE_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_vd_theme_24),
                 getActionText(
                     R.string.notification_action_answer, R.color.notification_action_accept),
                 answerVoicePendingIntent)
@@ -925,7 +925,7 @@ public class StatusBarNotifier
 
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_vd_theme_24),
                 spannable,
                 answerVoicePendingIntent)
             .build());
@@ -939,7 +939,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_DECLINE_INCOMING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_close_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_close_vd_theme_24),
                 getActionText(
                     R.string.notification_action_dismiss, R.color.notification_action_dismiss),
                 declinePendingIntent)
@@ -954,7 +954,7 @@ public class StatusBarNotifier
         createNotificationPendingIntent(context, ACTION_HANG_UP_ONGOING_CALL);
     builder.addAction(
         new Notification.Action.Builder(
-                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_white_24),
+                Icon.createWithResource(context, R.drawable.quantum_ic_call_end_vd_theme_24),
                 context.getText(R.string.notification_action_end_call),
                 hangupPendingIntent)
             .build());

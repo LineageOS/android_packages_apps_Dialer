@@ -39,7 +39,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_call_white_24"/>
+      android:src="@drawable/quantum_ic_call_vd_theme_24"/>
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -106,7 +106,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_person_add_white_24"/>
+      android:src="@drawable/quantum_ic_person_add_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -120,7 +120,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_person_white_24"/>
+      android:src="@drawable/quantum_ic_person_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -134,7 +134,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_message_white_24"/>
+      android:src="@drawable/quantum_ic_message_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -177,7 +177,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/ic_not_spam"/>
+      android:src="@drawable/quantum_ic_report_off_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -191,7 +191,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_block_white_24"/>
+      android:src="@drawable/quantum_ic_block_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -205,7 +205,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_block_white_24"/>
+      android:src="@drawable/quantum_ic_block_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -219,7 +219,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/ic_unblock"/>
+      android:src="@drawable/quantum_ic_unblock_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -232,7 +232,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_info_outline_white_24"/>
+      android:src="@drawable/quantum_ic_info_outline_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
@@ -247,7 +247,7 @@
 
     <ImageView
       style="@style/CallLogActionIconStyle"
-      android:src="@drawable/quantum_ic_send_white_24"/>
+      android:src="@drawable/quantum_ic_send_vd_theme_24"/>
 
     <TextView
       style="@style/CallLogActionTextStyle"
