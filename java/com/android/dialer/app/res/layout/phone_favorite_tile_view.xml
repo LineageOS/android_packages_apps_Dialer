@@ -81,7 +81,7 @@
             android:layout_width="@dimen/favorites_star_icon_size"
             android:layout_height="@dimen/favorites_star_icon_size"
             android:layout_marginStart="3dp"
-            android:src="@drawable/ic_star"
+            android:src="@drawable/quantum_ic_star_vd_theme_24"
             android:visibility="gone"/>
       </LinearLayout>
       <TextView
@@ -123,7 +123,7 @@
           android:background="@drawable/item_background_material_borderless_dark"
           android:contentDescription="@string/description_view_contact_detail"
           android:scaleType="center"
-          android:src="@drawable/quantum_ic_more_vert_white_24"/>
+          android:src="@drawable/quantum_ic_more_vert_vd_theme_24"/>
 
     </FrameLayout>
 

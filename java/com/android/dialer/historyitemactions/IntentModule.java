@@ -98,7 +98,7 @@ public class IntentModule implements HistoryItemActionModule {
       image = R.drawable.quantum_ic_videocam_vd_white_24;
     } else {
       text = R.string.voice_call;
-      image = R.drawable.quantum_ic_call_white_24;
+      image = R.drawable.quantum_ic_call_vd_theme_24;
     }
 
     return new IntentModule(

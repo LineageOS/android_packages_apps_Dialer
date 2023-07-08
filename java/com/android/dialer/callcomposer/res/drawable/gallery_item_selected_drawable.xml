@@ -28,10 +28,8 @@
         android:width="@dimen/gallery_check_size"/>
     </shape>
   </item>
-  <item>
-    <bitmap
+  <item
       android:gravity="center"
-      android:src="@drawable/quantum_ic_check_black_24"
+      android:drawable="@drawable/quantum_ic_check_black_24"
       android:tint="?android:attr/colorPrimary"/>
-  </item>
 </layer-list>
