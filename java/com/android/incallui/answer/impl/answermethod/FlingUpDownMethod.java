@@ -338,7 +338,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     } else if (getParent().isRttCall()) {
       contactPuckIcon.setImageResource(R.drawable.quantum_ic_rtt_vd_theme_24);
     } else {
-      contactPuckIcon.setImageResource(R.drawable.quantum_ic_call_white_24);
+      contactPuckIcon.setImageResource(R.drawable.quantum_ic_call_vd_theme_24);
     }
 
     int size =

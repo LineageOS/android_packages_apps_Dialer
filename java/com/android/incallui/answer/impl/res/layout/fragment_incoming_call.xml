@@ -68,7 +68,7 @@
         android:padding="64dp"
         android:accessibilityTraversalBefore="@+id/videocall_speaker_button"
         android:drawablePadding="8dp"
-        android:drawableTop="@drawable/quantum_ic_videocam_off_white_36"
+        android:drawableTop="@drawable/quantum_ic_videocam_off_vd_theme_24"
         android:gravity="center"
         android:text="@string/call_incoming_video_is_off"
         android:textAppearance="@style/Dialer.Incall.TextAppearance"
@@ -177,7 +177,7 @@
       android:layout_height="56dp"
       android:layout_gravity="bottom|start"
       android:scaleType="center"
-      android:src="@drawable/quantum_ic_message_white_24"
+      android:src="@drawable/quantum_ic_message_vd_theme_24"
       android:visibility="invisible"
       tools:visibility="visible"/>
 
