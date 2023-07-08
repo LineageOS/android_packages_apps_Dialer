@@ -32,8 +32,7 @@
     android:bottom="12dp"
     android:left="10dp"
     android:right="14dp"
-    android:top="12dp">
-      <bitmap android:src="@drawable/quantum_ic_person_add_white_24"
-              android:tint="?android:attr/colorPrimary"/>
-  </item>
+    android:top="12dp"
+    android:drawable="@drawable/quantum_ic_person_add_vd_theme_24"
+    android:tint="?android:attr/colorPrimary"/>
 </layer-list>

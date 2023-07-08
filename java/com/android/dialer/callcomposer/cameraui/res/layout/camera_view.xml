@@ -70,7 +70,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/camera_view_button_margin"
         android:layout_marginBottom="@dimen/camera_view_button_margin"
-        android:src="@drawable/quantum_ic_fullscreen_white_48"
+        android:src="@drawable/quantum_ic_fullscreen_vd_theme_24"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/description_camera_switch_full_screen"/>
 
@@ -81,7 +81,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/camera_view_button_margin"
         android:layout_marginBottom="@dimen/camera_view_button_margin"
-        android:src="@drawable/quantum_ic_fullscreen_exit_white_48"
+        android:src="@drawable/quantum_ic_fullscreen_exit_vd_theme_24"
         android:visibility="gone"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/description_camera_switch_preview_screen"/>
@@ -116,7 +116,7 @@
         android:layout_marginBottom="@dimen/camera_view_button_margin"
         android:visibility="gone"
         android:background="@drawable/transparent_button_background"
-        android:src="@drawable/quantum_ic_undo_white_48"
+        android:src="@drawable/quantum_ic_undo_vd_theme_24"
         android:contentDescription="@string/description_camera_cancel_photo" />
     </FrameLayout>
   </FrameLayout>

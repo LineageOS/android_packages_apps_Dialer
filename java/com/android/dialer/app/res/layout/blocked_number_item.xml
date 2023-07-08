@@ -62,6 +62,6 @@
     android:background="?android:attr/selectableItemBackgroundBorderless"
     android:contentDescription="@string/description_blocked_number_list_delete"
     android:scaleType="center"
-    android:src="@drawable/ic_remove"
+    android:src="@drawable/quantum_ic_clear_vd_theme_24"
     android:tint="?colorIcon"/>
 </LinearLayout>

@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/quantum_ic_dialpad_white_24"
+        android:src="@drawable/quantum_ic_dialpad_vd_theme_24"
         android:contentDescription="@string/dialpad_button_content_description"
         app:backgroundTint="?android:attr/colorAccent"/>
 

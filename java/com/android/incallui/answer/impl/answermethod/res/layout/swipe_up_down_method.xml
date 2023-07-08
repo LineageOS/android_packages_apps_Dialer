@@ -98,7 +98,7 @@
           android:elevation="16dp"
           android:focusable="false"
           android:outlineProvider="none"
-          android:src="@drawable/quantum_ic_call_white_24"
+          android:src="@drawable/quantum_ic_call_vd_theme_24"
           android:tint="@color/dialer_call_green"
           android:tintMode="src_atop"
           tools:outlineProvider="background"/>

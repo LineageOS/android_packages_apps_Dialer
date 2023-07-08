@@ -45,7 +45,7 @@
           android:layout_width="wrap_content"
           android:layout_height="@dimen/dialpad_voicemail_icon_size"
           android:scaleType="fitCenter"
-          android:src="@drawable/quantum_ic_voicemail_white_24"
+          android:src="@drawable/quantum_ic_voicemail_vd_theme_24"
           android:tint="?colorIcon"/>
     </LinearLayout>
   </LinearLayout>

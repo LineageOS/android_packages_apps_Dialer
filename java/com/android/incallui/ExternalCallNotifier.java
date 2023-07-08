@@ -231,7 +231,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
             isVideoCall
                 ? R.string.notification_external_video_call
                 : R.string.notification_external_call));
-    builder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
+    builder.setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24);
     builder.setContentTitle(info.getContentTitle());
     builder.setLargeIcon(info.getLargeIcon());
     builder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
@@ -252,7 +252,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
           NotificationBroadcastReceiver.EXTRA_NOTIFICATION_ID, info.getNotificationId());
       builder.addAction(
           new Notification.Action.Builder(
-                  R.drawable.quantum_ic_call_white_24,
+                  R.drawable.quantum_ic_call_vd_theme_24,
                   context.getString(
                       isVideoCall
                           ? R.string.notification_take_video_call
@@ -267,7 +267,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
      * Notification.Builder#setPublicVersion}.
      */
     Notification.Builder publicBuilder = new Notification.Builder(context);
-    publicBuilder.setSmallIcon(R.drawable.quantum_ic_call_white_24);
+    publicBuilder.setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24);
     publicBuilder.setColor(ThemeComponent.get(context).theme().getColorPrimary());
     publicBuilder.setChannelId(NotificationChannelId.DEFAULT);
 
@@ -443,7 +443,7 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
     summary.setPriority(Notification.PRIORITY_HIGH);
     summary.setGroup(GROUP_KEY);
     summary.setGroupSummary(true);
-    summary.setSmallIcon(R.drawable.quantum_ic_call_white_24);
+    summary.setSmallIcon(R.drawable.quantum_ic_call_vd_theme_24);
     summary.setChannelId(NotificationChannelId.DEFAULT);
     DialerNotificationManager.notify(
         context, GROUP_SUMMARY_NOTIFICATION_TAG, GROUP_SUMMARY_NOTIFICATION_ID, summary.build());
