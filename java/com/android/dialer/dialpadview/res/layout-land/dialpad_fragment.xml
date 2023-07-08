@@ -74,7 +74,7 @@
           android:layout_above="@id/dialpad_floating_action_button_margin_bottom"
           android:layout_centerHorizontal="true"
           android:contentDescription="@string/description_dial_button"
-          android:src="@drawable/quantum_ic_call_white_24"
+          android:src="@drawable/quantum_ic_call_vd_theme_24"
           android:visibility="invisible"
           app:backgroundTint="@color/dialer_call_green"
           app:elevation="@dimen/floating_action_button_translation_z"/>

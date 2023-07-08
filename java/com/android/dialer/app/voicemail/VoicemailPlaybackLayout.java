@@ -241,7 +241,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
   public void onPlaybackStarted(int duration, ScheduledExecutorService executorService) {
     isPlaying = true;
 
-    startStopButton.setImageResource(R.drawable.ic_pause);
+    startStopButton.setImageResource(R.drawable.quantum_ic_pause_vd_theme_24);
 
     if (positionUpdater != null) {
       positionUpdater.stopUpdating();
@@ -255,7 +255,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
   public void onPlaybackStopped() {
     isPlaying = false;
 
-    startStopButton.setImageResource(R.drawable.ic_play_arrow);
+    startStopButton.setImageResource(R.drawable.quantum_ic_play_arrow_vd_theme_24);
 
     if (positionUpdater != null) {
       positionUpdater.stopUpdating();
@@ -280,7 +280,7 @@ public class VoicemailPlaybackLayout extends LinearLayout
       // Speaker is now on, tapping button will turn it off.
       playbackSpeakerphone.setContentDescription(context.getString(R.string.voicemail_speaker_off));
     } else {
-      playbackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_white_24);
+      playbackSpeakerphone.setImageResource(R.drawable.quantum_ic_volume_down_vd_theme_24);
       // Speaker is now off, tapping button will turn it on.
       playbackSpeakerphone.setContentDescription(context.getString(R.string.voicemail_speaker_on));
     }
