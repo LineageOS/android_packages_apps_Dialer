@@ -172,7 +172,7 @@ public class AnswerFragment extends Fragment
 
   private enum SecondaryBehavior {
     REJECT_WITH_SMS(
-        R.drawable.quantum_ic_message_white_24,
+        R.drawable.quantum_ic_message_vd_theme_24,
         R.string.a11y_description_incoming_call_reject_with_sms,
         R.string.a11y_incoming_call_reject_with_sms,
         R.string.call_incoming_swipe_to_decline_with_message) {

@@ -34,12 +34,9 @@
     </ripple>
   </item>
 
-  <!-- This adds a little down arrow to indicate that the button will pop up a menu. Use an explicit
-    <bitmap> to avoid scaling the icon up to the full size of the button. -->
-  <item>
-    <bitmap
-      android:gravity="end"
-      android:tint="@color/incall_button_icon"
-      android:src="@drawable/quantum_ic_arrow_drop_down_white_18"/>
-  </item>
+  <!-- This adds a little down arrow to indicate that the button will pop up a menu. -->
+  <item
+    android:drawable="@drawable/incall_button_background_checked"
+    android:gravity="end"
+    android:tint="@color/incall_button_icon"/>
 </layer-list>
