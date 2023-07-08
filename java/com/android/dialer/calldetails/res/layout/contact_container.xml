@@ -77,7 +77,7 @@
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:contentDescription="@string/call"
       android:scaleType="center"
-      android:src="@drawable/quantum_ic_call_white_24"
+      android:src="@drawable/quantum_ic_call_vd_theme_24"
       android:tint="?colorIcon"/>
 
 

@@ -24,7 +24,7 @@
       style="@style/AudioRouteItem"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_volume_up_grey600_24"
+      android:drawableStart="@drawable/quantum_ic_volume_up_vd_theme_24"
       android:text="@string/audioroute_speaker"
       android:textAlignment="viewStart"/>
   <TextView
@@ -32,7 +32,7 @@
       style="@style/AudioRouteItem"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/ic_phone_audio_grey600_24dp"
+      android:drawableStart="@drawable/quantum_ic_phone_in_talk_vd_theme_24"
       android:text="@string/audioroute_phone"
       android:textAlignment="viewStart"/>
   <TextView
@@ -40,7 +40,7 @@
       style="@style/AudioRouteItem"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_headset_grey600_24"
+      android:drawableStart="@drawable/quantum_ic_headset_vd_theme_24"
       android:text="@string/audioroute_headset"
       android:textAlignment="viewStart"/>
 
