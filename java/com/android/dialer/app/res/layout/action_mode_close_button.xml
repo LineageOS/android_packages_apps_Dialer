@@ -26,6 +26,6 @@
     android:clickable="true"
     android:contentDescription="@string/description_cancel_multi_select"
     android:focusable="true"
-    android:src="@drawable/quantum_ic_close_white_24"/>
+    android:src="@drawable/quantum_ic_close_vd_theme_24"/>
 
 

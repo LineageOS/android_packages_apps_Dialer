@@ -515,7 +515,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (!TextUtils.isEmpty(voicemailUri)) {
       // Treat as voicemail list item; show play button if not expanded.
       if (!isExpanded) {
-        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_play_arrow_white_24);
+        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_play_arrow_vd_theme_24);
         primaryActionButtonView.setContentDescription(
             TextUtils.expandTemplate(
                 context.getString(R.string.description_voicemail_action), validNameOrNumber));

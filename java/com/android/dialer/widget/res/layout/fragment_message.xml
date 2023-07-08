@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:src="@drawable/quantum_ic_send_white_24"
+        android:src="@drawable/quantum_ic_send_vd_theme_24"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:tint="@color/dialer_tint_state"/>
 
