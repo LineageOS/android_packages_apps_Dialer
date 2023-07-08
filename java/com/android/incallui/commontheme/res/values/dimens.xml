@@ -18,5 +18,4 @@
 <resources>
   <dimen name="incall_end_call_button_size">48dp</dimen>
   <dimen name="incall_call_button_elevation">8dp</dimen>
-  <drawable name="incall_end_call_icon">@drawable/quantum_ic_call_end_white_24</drawable>
 </resources>

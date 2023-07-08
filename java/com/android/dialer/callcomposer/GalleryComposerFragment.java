@@ -93,7 +93,7 @@ public class GalleryComposerFragment extends CallComposerFragment
 
       allowPermission.setOnClickListener(this);
       permissionText.setText(R.string.gallery_permission_text);
-      permissionImage.setImageResource(R.drawable.quantum_ic_photo_white_48);
+      permissionImage.setImageResource(R.drawable.quantum_ic_image_vd_theme_24);
       permissionImage.setColorFilter(ThemeComponent.get(getContext()).theme().getColorPrimary());
       permissionView.setVisibility(View.VISIBLE);
     } else {
