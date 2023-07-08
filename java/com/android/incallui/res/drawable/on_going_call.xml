@@ -36,12 +36,6 @@
     android:drawable="@drawable/ic_ongoing_phone_24px_06"
     android:duration="200"/>
   <item
-    android:drawable="@drawable/ic_ongoing_phone_24px_07"
-    android:duration="200"/>
-  <item
-    android:drawable="@drawable/ic_ongoing_phone_24px_08"
-    android:duration="200"/>
-  <item
-    android:drawable="@drawable/ic_ongoing_phone_24px_09"
-    android:duration="200"/>
+    android:drawable="@drawable/ic_ongoing_phone_24px_01"
+    android:duration="600"/>
 </animation-list>

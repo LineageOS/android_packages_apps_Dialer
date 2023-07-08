@@ -379,7 +379,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
           && !TextUtils.equals(call.number, context.getString(R.string.handle_restricted))) {
         builder.addAction(
             new Notification.Action.Builder(
-                    Icon.createWithResource(context, R.drawable.ic_phone_24dp),
+                    Icon.createWithResource(context, R.drawable.quantum_ic_phone_vd_theme_24),
                     context.getString(R.string.notification_missedCall_call_back),
                     createCallBackPendingIntent(call.number, call.callsUri))
                 .build());
@@ -387,7 +387,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
         if (!PhoneNumberHelper.isUriNumber(call.number)) {
           builder.addAction(
               new Notification.Action.Builder(
-                      Icon.createWithResource(context, R.drawable.quantum_ic_message_white_24),
+                      Icon.createWithResource(context, R.drawable.quantum_ic_message_vd_theme_24),
                       context.getString(R.string.notification_missedCall_message),
                       createSendSmsFromNotificationPendingIntent(call.number, call.callsUri))
                   .build());
