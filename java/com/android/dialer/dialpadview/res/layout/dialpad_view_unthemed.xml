@@ -80,7 +80,7 @@
         android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_dialpad_back"
         android:gravity="center"
-        android:src="@drawable/quantum_ic_close_white_24"
+        android:src="@drawable/quantum_ic_close_vd_theme_24"
         android:tint="?colorIcon"
         android:tintMode="src_in"
         android:visibility="gone"/>
@@ -95,7 +95,7 @@
         android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_dialpad_overflow"
         android:gravity="center"
-        android:src="@drawable/quantum_ic_more_vert_white_24"
+        android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
         android:tint="?colorIcon"
         android:tintMode="src_in"
         android:visibility="gone"/>
@@ -140,7 +140,7 @@
         android:paddingRight="@dimen/dialpad_digits_padding"
         android:background="@drawable/btn_dialpad_key"
         android:contentDescription="@string/description_delete_button"
-        android:src="@drawable/quantum_ic_backspace_white_24"
+        android:src="@drawable/quantum_ic_backspace_vd_theme_24"
         android:state_enabled="false"
         android:tint="?colorIcon"
         android:tintMode="src_in"/>

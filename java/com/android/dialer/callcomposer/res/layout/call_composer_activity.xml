@@ -111,7 +111,7 @@
           android:layout_width="@dimen/call_composer_media_actions_width"
           android:layout_height="match_parent"
           android:scaleType="center"
-          android:src="@drawable/quantum_ic_camera_alt_white_24"
+          android:src="@drawable/quantum_ic_camera_vd_theme_24"
           android:background="?android:attr/selectableItemBackgroundBorderless"
           android:contentDescription="@string/description_call_composer_camera"/>
 
@@ -120,7 +120,7 @@
           android:layout_width="@dimen/call_composer_media_actions_width"
           android:layout_height="match_parent"
           android:scaleType="center"
-          android:src="@drawable/quantum_ic_photo_white_24"
+          android:src="@drawable/quantum_ic_image_vd_theme_24"
           android:background="?android:attr/selectableItemBackgroundBorderless"
           android:contentDescription="@string/description_call_composer_photo"/>
 
@@ -129,7 +129,7 @@
           android:layout_width="@dimen/call_composer_media_actions_width"
           android:layout_height="match_parent"
           android:scaleType="center"
-          android:src="@drawable/quantum_ic_message_white_24"
+          android:src="@drawable/quantum_ic_message_vd_theme_24"
           android:background="?android:attr/selectableItemBackgroundBorderless"
           android:contentDescription="@string/description_call_composer_message"/>
     </LinearLayout>
@@ -145,7 +145,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:drawableStart="@drawable/quantum_ic_call_white_18"
+          android:drawableStart="@drawable/quantum_ic_call_vd_theme_24"
           android:drawablePadding="@dimen/send_and_call_drawable_padding"
           android:textAllCaps="true"
           android:text="@string/share_and_call"
