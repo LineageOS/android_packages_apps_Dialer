@@ -55,7 +55,8 @@ public class RemoveView extends FrameLayout {
     final Resources r = getResources();
     unhighlightedColor = r.getColor(android.R.color.white);
     highlightedColor = r.getColor(R.color.remove_highlighted_text_color);
-    removeDrawable = r.getDrawable(R.drawable.ic_remove);
+    removeDrawable = r.getDrawable(R.drawable.quantum_ic_clear_vd_theme_24,
+            getContext().getTheme());
   }
 
   public void setDragDropController(DragDropController controller) {

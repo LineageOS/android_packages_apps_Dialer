@@ -1,0 +1,14 @@
+<!--
+  SPDX-FileCopyrightText: The LineageOS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="42"
+    android:viewportHeight="42">
+    <path
+        android:fillColor="@color/dialer_theme_color"
+        android:fillType="evenOdd"
+        android:pathData="M21 42C32.598 42 42 32.598 42 21C42 9.40201 32.598 0 21 0C9.40198 0 0 9.40201 0 21C0 32.598 9.40198 42 21 42ZM14.275 19.8751L12.85 21.3001L18.5499 27.0001L29.15 16.4001L27.725 14.9751L18.5499 24.1501L14.275 19.8751Z" />
+</vector>
