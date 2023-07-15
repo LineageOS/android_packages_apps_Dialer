@@ -21,6 +21,7 @@
     <string name="helplines_help">説明</string>
     <string name="helplines_help_title">這些是可安全撥打的號碼</string>
     <string name="helplines_help_message">這些號碼不曾出現在您的通話記錄中。\n您可按任何項目取得更多資料</string>
+    <string name="helplines_help_more_message">以下求助熱線提供的資訊是由貢獻者手動更新的。要是您發現闕漏或錯誤的資訊，請於 <xliff:g id="helplines_contact_url" example="www.lineageos.org">%1$s</xliff:g> 聯絡我們</string>
     <string name="helpline_button_more">更多</string>
     <string name="unknown_helpline_name">未知組織</string>
     <string name="helpline_name">名稱</string>
