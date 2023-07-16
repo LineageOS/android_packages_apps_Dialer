@@ -100,16 +100,7 @@ public final class CallLogFramework {
 
     return Futures.transform(
         Futures.allAsList(allFutures),
-        unused -> {
-          // Send a broadcast to the OldMainActivityPeer to remove the NewCallLogFragment and
-          // NewVoicemailFragment if it is currently attached. If this is not done, user interaction
-          // with the fragment could cause call log framework state to be unexpectedly written. For
-          // example scrolling could cause the AnnotatedCallLog to be read (which would trigger
-          // database creation).
-          LocalBroadcastManager.getInstance(appContext)
-              .sendBroadcastSync(new Intent("disableCallLogFramework"));
-          return null;
-        },
+        unused -> null,
         uiExecutor);
   }
 }
