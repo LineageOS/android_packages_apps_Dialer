@@ -50,8 +50,6 @@ public final class ScheduledJobIds {
 
   public static final int VOIP_REGISTRATION = 300;
 
-  public static final int CALL_LOG_CONFIG_POLLING_JOB = 400;
-
   // Job Ids from 10_000 to 10_100 should be reserved for proto upload jobs.
   public static final int PROTO_UPLOAD_JOB_MIN_ID = 10_000;
   public static final int PROTO_UPLOAD_JOB_MAX_ID = 10_100;

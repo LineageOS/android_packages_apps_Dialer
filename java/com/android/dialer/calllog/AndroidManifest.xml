@@ -20,13 +20,6 @@
       android:minSdkVersion="24"
       android:targetSdkVersion="30"/>
 
-  <application>
-
-    <service
-        android:exported="false"
-        android:name=".CallLogConfig$PollingJob"
-        android:permission="android.permission.BIND_JOB_SERVICE"/>
-
-  </application>
+  <application/>
 
 </manifest>
