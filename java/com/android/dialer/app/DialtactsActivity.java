@@ -1431,22 +1431,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     // FAB does not move with the new favorites UI
-    if (newFavoritesIsEnabled()) {
-      return;
-    }
-    int tabIndex = listsFragment.getCurrentTabIndex();
-
-    // Scroll the button from center to end when moving from the Speed Dial to Call History tab.
-    // In RTL, scroll when the current tab is Call History instead, since the order of the tabs
-    // is reversed and the ViewPager returns the left tab position during scroll.
-    boolean isRtl = ViewUtil.isRtl();
-    if (!isRtl && tabIndex == DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL && !isLandscape) {
-      floatingActionButtonController.onPageScrolled(positionOffset);
-    } else if (isRtl && tabIndex == DialtactsPagerAdapter.TAB_INDEX_HISTORY && !isLandscape) {
-      floatingActionButtonController.onPageScrolled(1 - positionOffset);
-    } else if (tabIndex != DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL) {
-      floatingActionButtonController.onPageScrolled(1);
-    }
   }
 
   @Override
@@ -1484,12 +1468,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @VisibleForTesting
   public int getFabAlignment() {
-    if (!newFavoritesIsEnabled()
-        && !isLandscape
-        && !isInSearchUi()
-        && listsFragment.getCurrentTabIndex() == DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL) {
-      return FloatingActionButtonController.ALIGN_MIDDLE;
-    }
     return FloatingActionButtonController.ALIGN_END;
   }
 
@@ -1621,11 +1599,5 @@ public class DialtactsActivity extends TransactionSafeActivity
   @VisibleForTesting
   static void setVoiceSearchEnabledForTest(Optional<Boolean> enabled) {
     voiceSearchEnabledForTest = enabled;
-  }
-
-  private boolean newFavoritesIsEnabled() {
-    return ConfigProviderComponent.get(this)
-        .getConfigProvider()
-        .getBoolean("enable_new_favorites_tab", false);
   }
 }

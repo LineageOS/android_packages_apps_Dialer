@@ -1334,18 +1334,12 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_SPEED_DIAL, activity);
       selectedTab = TabIndex.SPEED_DIAL;
 
-      if (ConfigProviderComponent.get(activity)
-          .getConfigProvider()
-          .getBoolean("enable_new_favorites_tab", false)) {
-        android.support.v4.app.Fragment supportFragment =
-            supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-        showSupportFragment(
-            supportFragment == null ? SpeedDialFragment.newInstance() : supportFragment,
-            SPEED_DIAL_TAG);
-      } else {
-        Fragment fragment = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-        showFragment(fragment == null ? new OldSpeedDialFragment() : fragment, SPEED_DIAL_TAG);
-      }
+      android.support.v4.app.Fragment supportFragment =
+          supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
+      showSupportFragment(
+          supportFragment == null ? SpeedDialFragment.newInstance() : supportFragment,
+          SPEED_DIAL_TAG);
+
       fab.show();
     }
 
