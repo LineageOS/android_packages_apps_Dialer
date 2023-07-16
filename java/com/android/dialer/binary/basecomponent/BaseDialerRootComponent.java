@@ -19,7 +19,6 @@ package com.android.dialer.binary.basecomponent;
 import com.android.bubble.BubbleComponent;
 import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.dialer.calllog.CallLogComponent;
-import com.android.dialer.calllog.config.CallLogConfigComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.ui.CallLogUiComponent;
 import com.android.dialer.commandline.CommandLineComponent;
@@ -58,7 +57,6 @@ public interface BaseDialerRootComponent
         BubbleComponent.HasComponent,
         CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
-        CallLogConfigComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
         ConfigProviderComponent.HasComponent,
