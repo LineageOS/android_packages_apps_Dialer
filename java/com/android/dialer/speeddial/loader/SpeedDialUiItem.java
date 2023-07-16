@@ -23,6 +23,7 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.support.annotation.Nullable;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import com.android.dialer.common.Assert;
@@ -129,8 +130,9 @@ public abstract class SpeedDialUiItem {
     Set<String> numbers = new ArraySet<>();
     do {
       String number = cursor.getString(NUMBER);
+      String normalizedNumber = PhoneNumberUtils.normalizeNumber(number);
       // TODO(78492722): consider using lib phone number to compare numbers
-      if (!numbers.add(number)) {
+      if (!numbers.add(normalizedNumber)) {
         // Number is identical to an existing number, skip this number
         continue;
       }
