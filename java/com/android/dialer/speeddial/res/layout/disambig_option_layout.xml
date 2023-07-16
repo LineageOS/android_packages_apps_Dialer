@@ -14,28 +14,48 @@
  ~ See the License for the specific language governing permissions and
  ~ limitations under the License
  -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/option_container"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="24dp"
     android:paddingEnd="24dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     android:minHeight="56dp"
     android:background="?android:attr/selectableItemBackground">
+
+
+  <TextView
+      android:id="@+id/speed_dial_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="0dp"
+      android:layout_gravity="center_vertical"
+      style="@style/Dialer.TextAppearance.Primary"
+      tools:text="Mobile"/>
+
+  <TextView
+      android:id="@+id/speed_dial_number"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="8dp"
+      android:layout_gravity="center_vertical"
+      android:layout_below="@id/speed_dial_label"
+      style="@style/Dialer.TextAppearance.Primary"
+      tools:text="Mobile"/>
+
 
   <ImageView
       android:id="@+id/disambig_option_image"
       android:layout_width="24dp"
       android:layout_height="24dp"
       android:layout_gravity="center_vertical"
-      android:tint="?colorIcon"/>
-
-  <TextView
-      android:id="@+id/disambig_option_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_gravity="center_vertical"
-      style="@style/Dialer.TextAppearance.Primary"/>
-</LinearLayout>
+      android:tint="?colorIcon"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"/>
+</RelativeLayout>
