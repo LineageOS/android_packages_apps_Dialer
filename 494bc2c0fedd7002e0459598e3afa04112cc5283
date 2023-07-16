@@ -16,6 +16,24 @@
       "message": "oh, been waiting for this for a while... a beer is up for you if you do the favorites list too :)",
       "revId": "494bc2c0fedd7002e0459598e3afa04112cc5283",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6423114_05d0b90c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-07-16T18:04:02Z",
+      "side": 1,
+      "message": "I think you owe me one now: https://review.lineageos.org/c/LineageOS/android_packages_apps_Dialer/+/361824",
+      "parentUuid": "d2e500fb_7d0263df",
+      "revId": "494bc2c0fedd7002e0459598e3afa04112cc5283",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
