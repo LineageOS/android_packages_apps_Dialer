@@ -39,7 +39,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:minHeight="168dp"
-      app:maxHeight="256dp">
+      app:maxHeight="256dp"
+      android:background="?android:attr/colorBackgroundFloating">
 
     <LinearLayout
         android:id="@+id/communication_avenue_container"
