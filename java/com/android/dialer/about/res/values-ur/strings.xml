@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">بلڈ ورژن</string>
-  <string name="open_source_license_detail_label">اوپن سورس سافٹ ویئر کیلئے لائسنس کی تفصیلات</string>
-  <string name="licenseActivityLabel">اوپن سورس لائسنسز</string>
-  <string name="privacy_policy_label">رازداری کی پالیسی</string>
-  <string name="terms_of_service_label">سروس کی شرائط</string>
-</resources>

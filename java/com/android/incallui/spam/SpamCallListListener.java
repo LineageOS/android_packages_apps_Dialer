@@ -272,15 +272,9 @@ public class SpamCallListListener implements CallList.Listener {
     Notification.Builder notificationBuilder =
         createAfterCallNotificationBuilder(call)
             .setContentText(
-                context.getString(
-                    SpamAlternativeExperimentUtil.getResourceIdByName(
-                        "spam_notification_non_spam_call_collapsed_text", context)))
-            .setStyle(
-                new Notification.BigTextStyle()
-                    .bigText(
-                        context.getString(
-                            SpamAlternativeExperimentUtil.getResourceIdByName(
-                                "spam_notification_non_spam_call_expanded_text", context))))
+                context.getString(R.string.spam_notification_non_spam_call_collapsed_text))
+            .setStyle(new Notification.BigTextStyle().bigText(
+                    context.getString(R.string.spam_notification_non_spam_call_expanded_text)))
             // Add contact
             .addAction(
                 new Notification.Action.Builder(
@@ -392,16 +386,12 @@ public class SpamCallListListener implements CallList.Listener {
         createAfterCallNotificationBuilder(call)
             .setLargeIcon(Icon.createWithResource(context, R.drawable.spam_notification_icon))
             .setContentText(
-                context.getString(
-                    SpamAlternativeExperimentUtil.getResourceIdByName(
-                        "spam_notification_spam_call_collapsed_text", context)))
+                context.getString(R.string.spam_notification_spam_call_collapsed_text))
             // Not spam
             .addAction(
                 new Notification.Action.Builder(
                         R.drawable.quantum_ic_close_vd_theme_24,
-                        context.getString(
-                            SpamAlternativeExperimentUtil.getResourceIdByName(
-                                "spam_notification_was_not_spam_action_text", context)),
+                        context.getString(R.string.spam_notification_was_not_spam_action_text),
                         createNotSpamPendingIntent(call))
                     .build())
             // Block/report spam
@@ -411,10 +401,7 @@ public class SpamCallListListener implements CallList.Listener {
                         context.getString(R.string.spam_notification_block_spam_action_text),
                         createBlockReportSpamPendingIntent(call))
                     .build())
-            .setContentTitle(
-                context.getString(
-                    SpamAlternativeExperimentUtil.getResourceIdByName(
-                        "spam_notification_title", context),
+            .setContentTitle(context.getString(R.string.spam_notification_title,
                     getDisplayNumber(call)));
     DialerNotificationManager.notify(
         context, getNotificationTagForCall(call), NOTIFICATION_ID, notificationBuilder.build());

@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Međuverzija aplikacije</string>
-  <string name="open_source_license_detail_label">Detalji o licenci za softver otvorenog koda</string>
-  <string name="licenseActivityLabel">Licence otvorenog koda</string>
-  <string name="privacy_policy_label">Pravila privatnosti</string>
-  <string name="terms_of_service_label">Uslovi korištenja usluge</string>
-</resources>

@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">កំណែបង្កើត</string>
-  <string name="open_source_license_detail_label">ព័ត៌មាន​លម្អិត​អំពី​អាជ្ញាបណ្ណ​សម្រាប់​កម្មវិធី​ប្រភព​កូដ​ចំហ</string>
-  <string name="licenseActivityLabel">អាជ្ញាប័ណ្ណ​កម្មវិធី​​​​​កូដ​ចំហ</string>
-  <string name="privacy_policy_label">គោលការណ៍​ឯកជន​ភាព</string>
-  <string name="terms_of_service_label">លក្ខខណ្ឌ​ប្រើប្រាស់</string>
-</resources>
