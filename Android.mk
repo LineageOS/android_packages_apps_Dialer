@@ -17,11 +17,11 @@ BASE_DIR := java/com/android
 
 # Exclude testing only class, not used anywhere here
 EXCLUDE_FILES += \
-	$(BASE_DIR)/contacts/common/format/testing/SpannedTestUtils.java
+	java/com/android/contacts/common/format/testing/SpannedTestUtils.java
 
 # Exclude rootcomponentgenerator
 EXCLUDE_FILES += \
-	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator) \
+	$(call all-java-files-under, java/com/android/dialer/rootcomponentgenerator) \
 
 # All Dialer resources.
 RES_DIRS := $(call all-subdir-named-dirs,res,.)
@@ -33,9 +33,9 @@ DIALER_MANIFEST_FILES := $(call all-named-files-under,AndroidManifest.xml,.)
 LOCAL_FULL_LIBS_MANIFEST_FILES := \
 	$(addprefix $(LOCAL_PATH)/, $(DIALER_MANIFEST_FILES))
 
-LOCAL_SRC_FILES := $(call all-java-files-under, $(BASE_DIR))
-LOCAL_SRC_FILES += $(call all-proto-files-under, $(BASE_DIR))
-LOCAL_SRC_FILES += $(call all-Iaidl-files-under, $(BASE_DIR))
+LOCAL_SRC_FILES := $(call all-java-files-under, 'java/com/android')
+LOCAL_SRC_FILES += $(call all-proto-files-under, 'java/com/android')
+LOCAL_SRC_FILES += $(call all-Iaidl-files-under, 'java/com/android')
 LOCAL_SRC_FILES := $(filter-out $(EXCLUDE_FILES),$(LOCAL_SRC_FILES))
 
 LOCAL_AIDL_INCLUDES := $(LOCAL_PATH)/java
@@ -117,7 +117,7 @@ LOCAL_ANNOTATION_PROCESSOR_CLASSES := \
   com.google.auto.value.processor.AutoValueProcessor,dagger.internal.codegen.ComponentProcessor,com.bumptech.glide.annotation.compiler.GlideAnnotationProcessor,com.android.dialer.rootcomponentgenerator.RootComponentProcessor
 
 # Proguard includes
-LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(call all-named-files-under,proguard.*flags,$(BASE_DIR))
+LOCAL_PROGUARD_FLAG_FILES := proguard.flags $(call all-named-files-under,proguard.*flags,'java/com/android')
 LOCAL_PROGUARD_ENABLED := custom
 
 LOCAL_PROGUARD_ENABLED += optimization
@@ -475,13 +475,13 @@ LOCAL_IS_HOST_MODULE := true
 BASE_DIR := java/com/android
 
 LOCAL_SRC_FILES := \
-	$(call all-java-files-under, $(BASE_DIR)/dialer/rootcomponentgenerator) \
-        $(BASE_DIR)/dialer/inject/DialerRootComponent.java \
-        $(BASE_DIR)/dialer/inject/DialerVariant.java \
-        $(BASE_DIR)/dialer/inject/HasRootComponent.java \
-        $(BASE_DIR)/dialer/inject/IncludeInDialerRoot.java \
-        $(BASE_DIR)/dialer/inject/InstallIn.java \
-        $(BASE_DIR)/dialer/inject/RootComponentGeneratorMetadata.java
+	$(call all-java-files-under, java/com/android/dialer/rootcomponentgenerator) \
+        java/com/android/dialer/inject/DialerRootComponent.java \
+        java/com/android/dialer/inject/DialerVariant.java \
+        java/com/android/dialer/inject/HasRootComponent.java \
+        java/com/android/dialer/inject/IncludeInDialerRoot.java \
+        java/com/android/dialer/inject/InstallIn.java \
+        java/com/android/dialer/inject/RootComponentGeneratorMetadata.java
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	dialer-guava \
