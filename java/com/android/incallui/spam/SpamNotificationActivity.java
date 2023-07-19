@@ -390,21 +390,16 @@ public class SpamNotificationActivity extends FragmentActivity {
 
       return new AlertDialog.Builder(getActivity())
           .setCancelable(false)
-          .setTitle(
-              getString(
-                  SpamAlternativeExperimentUtil.getResourceIdByName(
-                      "spam_notification_title", applicationContext),
+          .setTitle(getString(R.string.spam_notification_title,
                   getFormattedNumber(number, applicationContext)))
-          .setNeutralButton(
-              getString(R.string.spam_notification_action_dismiss),
+          .setNeutralButton(getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                   dismiss();
                 }
               })
-          .setPositiveButton(
-              getString(R.string.spam_notification_block_spam_action_text),
+          .setPositiveButton(getString(R.string.spam_notification_block_spam_action_text),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -415,10 +410,7 @@ public class SpamNotificationActivity extends FragmentActivity {
                   spamNotificationActivity.maybeShowSpamBlockingPromoAndFinish();
                 }
               })
-          .setNegativeButton(
-              getString(
-                  SpamAlternativeExperimentUtil.getResourceIdByName(
-                      "spam_notification_was_not_spam_action_text", applicationContext)),
+          .setNegativeButton(getString(R.string.spam_notification_was_not_spam_action_text),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -484,10 +476,7 @@ public class SpamNotificationActivity extends FragmentActivity {
           .setTitle(
               getString(R.string.non_spam_notification_title, getFormattedNumber(number, context)))
           .setCancelable(false)
-          .setMessage(
-              getString(
-                  SpamAlternativeExperimentUtil.getResourceIdByName(
-                      "spam_notification_non_spam_call_expanded_text", context)))
+          .setMessage(getString(R.string.spam_notification_non_spam_call_expanded_text))
           .setNeutralButton(
               getString(R.string.spam_notification_action_dismiss),
               new DialogInterface.OnClickListener() {
@@ -507,9 +496,7 @@ public class SpamNotificationActivity extends FragmentActivity {
                 }
               })
           .setNegativeButton(
-              getString(
-                  SpamAlternativeExperimentUtil.getResourceIdByName(
-                      "spam_notification_dialog_block_report_spam_action_text", context)),
+                  getString(R.string.spam_notification_dialog_block_report_spam_action_text),
               new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

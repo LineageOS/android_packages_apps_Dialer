@@ -60,13 +60,10 @@ import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
-import com.android.dialer.metrics.Metrics;
-import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.PreferredAccountWorker.Result;
@@ -258,12 +255,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     pseudoBlackScreenOverlay = findViewById(R.id.psuedo_black_screen_overlay);
     sendBroadcast(CallPendingActivity.getFinishBroadcast());
     Trace.endSection();
-    MetricsComponent.get(this)
-        .metrics()
-        .stopTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
-    MetricsComponent.get(this)
-        .metrics()
-        .stopTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
   }
 
   private void setWindowFlags() {
@@ -499,13 +490,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     pseudoScreenState.addListener(this);
     onPseudoScreenStateChanged(pseudoScreenState.isOn());
     Trace.endSection();
-    // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
-    ThreadUtil.postDelayedOnUiThread(
-        () ->
-            MetricsComponent.get(this)
-                .metrics()
-                .recordMemory(Metrics.INCALL_ACTIVITY_ON_RESUME_MEMORY_EVENT_NAME),
-        1000);
   }
 
   @Override
