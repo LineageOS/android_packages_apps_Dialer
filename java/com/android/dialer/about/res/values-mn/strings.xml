@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Хийгдсэн хувилбар</string>
-  <string name="open_source_license_detail_label">Нээлттэй эхийн програмын лицензийн мэдээлэл</string>
-  <string name="licenseActivityLabel">Нээлттэй эхийн лиценз</string>
-  <string name="privacy_policy_label">Нууцлалын бодлого</string>
-  <string name="terms_of_service_label">Үйлчилгээний нөхцөл</string>
-</resources>

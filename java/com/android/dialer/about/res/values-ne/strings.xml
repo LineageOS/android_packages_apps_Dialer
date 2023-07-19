@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">बिल्ड संस्करण</string>
-  <string name="open_source_license_detail_label">खुला स्रोतका सफ्टवेयरका इजाजतपत्र सम्बन्धी विवरणहरू</string>
-  <string name="licenseActivityLabel">खुला स्रोतका इजाजतपत्रहरू</string>
-  <string name="privacy_policy_label">गोपनीयता नीति</string>
-  <string name="terms_of_service_label">सेवाका सर्तहरू</string>
-</resources>

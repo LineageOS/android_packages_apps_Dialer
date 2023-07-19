@@ -80,7 +80,6 @@ import com.android.dialer.time.Clock;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
-import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.rtt.protocol.RttChatMessage;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
@@ -137,7 +136,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private final String uniqueCallId = UUID.randomUUID().toString();
 
   private final Call telecomCall;
-  private final LatencyReport latencyReport;
   private final String id;
   private final int hiddenId;
   private final List<String> childCallIds = new ArrayList<>();
@@ -389,13 +387,11 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       Context context,
       DialerCallDelegate dialerCallDelegate,
       Call telecomCall,
-      LatencyReport latencyReport,
       boolean registerCallback) {
     Assert.isNotNull(context);
     this.context = context;
     this.dialerCallDelegate = dialerCallDelegate;
     this.telecomCall = telecomCall;
-    this.latencyReport = latencyReport;
     id = ID_PREFIX + Integer.toString(idCounter++);
 
     // Must be after assigning mTelecomCall
@@ -1336,10 +1332,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     // Used in N-OMR1
     return TransformationInfo.newInstanceFromBundle(
         getIntentExtras().getBundle(TelephonyManagerCompat.ASSISTED_DIALING_EXTRAS));
-  }
-
-  public LatencyReport getLatencyReport() {
-    return latencyReport;
   }
 
   public int getAnswerAndReleaseButtonDisplayedTimes() {

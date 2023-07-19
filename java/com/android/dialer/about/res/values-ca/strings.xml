@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Versió de la compilació</string>
-  <string name="open_source_license_detail_label">Detalls de la llicència del programari lliure</string>
-  <string name="licenseActivityLabel">Llicències de programari lliure</string>
-  <string name="privacy_policy_label">Política de privadesa</string>
-  <string name="terms_of_service_label">Condicions del servei</string>
-</resources>

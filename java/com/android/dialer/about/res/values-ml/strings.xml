@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">ബിൽഡ് പതിപ്പ്</string>
-  <string name="open_source_license_detail_label">ഓപ്പൺ സോഴ്‌സ് സോഫ്റ്റ്‌വെയറിനായുള്ള ലൈസൻസ് വിശദാംശങ്ങൾ</string>
-  <string name="licenseActivityLabel">ഓപ്പൺ സോഴ്‌സ് ലൈസൻസുകൾ</string>
-  <string name="privacy_policy_label">സ്വകാര്യതാ നയം</string>
-  <string name="terms_of_service_label">സേവന നിബന്ധനകൾ</string>
-</resources>

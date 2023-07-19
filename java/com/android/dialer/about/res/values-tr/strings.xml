@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Derleme sürümü</string>
-  <string name="open_source_license_detail_label">Açık kaynak yazılımlar için lisans ayrıntıları</string>
-  <string name="licenseActivityLabel">Açık kaynak lisansları</string>
-  <string name="privacy_policy_label">Gizlilik politikası</string>
-  <string name="terms_of_service_label">Hizmet şartları</string>
-</resources>

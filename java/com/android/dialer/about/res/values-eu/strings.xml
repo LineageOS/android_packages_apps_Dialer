@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Konpilazioaren bertsioa</string>
-  <string name="open_source_license_detail_label">Kode irekiko softwarearen lizentziaren xehetasunak</string>
-  <string name="licenseActivityLabel">Kode irekiko lizentziak</string>
-  <string name="privacy_policy_label">Pribatutasun-gidalerroak</string>
-  <string name="terms_of_service_label">Zerbitzu-baldintzak</string>
-</resources>
