@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Versi binaan</string>
-  <string name="open_source_license_detail_label">Butiran lesen untuk perisian sumber terbuka</string>
-  <string name="licenseActivityLabel">Lesen sumber terbuka</string>
-  <string name="privacy_policy_label">Dasar privasi</string>
-  <string name="terms_of_service_label">Syarat perkhidmatan</string>
-</resources>

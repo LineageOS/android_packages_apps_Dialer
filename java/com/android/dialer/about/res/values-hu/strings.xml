@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Build verziószáma</string>
-  <string name="open_source_license_detail_label">A nyílt forráskódú szoftverekhez kapcsolódó licenc részletei</string>
-  <string name="licenseActivityLabel">Nyílt forráskódú licencek</string>
-  <string name="privacy_policy_label">Adatvédelmi irányelvek</string>
-  <string name="terms_of_service_label">Általános Szerződési Feltételek</string>
-</resources>

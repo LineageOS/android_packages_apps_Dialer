@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">ເວີຊັນສ້າງ</string>
-  <string name="open_source_license_detail_label">ລາຍລະອຽດໃບອະນຸຍາດໂອເພນຊອດ</string>
-  <string name="licenseActivityLabel">ໃບອະນຸຍາດໂອເພນຊອດ</string>
-  <string name="privacy_policy_label">ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ</string>
-  <string name="terms_of_service_label">ຂໍ້ກຳນົດບໍລິການ</string>
-</resources>

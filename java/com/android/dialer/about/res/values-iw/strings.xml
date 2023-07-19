@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">‏גרסת Build</string>
-  <string name="open_source_license_detail_label">פרטי רישיון לתוכנות קוד פתוח</string>
-  <string name="licenseActivityLabel">רישיונות קוד פתוח</string>
-  <string name="privacy_policy_label">מדיניות הפרטיות</string>
-  <string name="terms_of_service_label">תנאים והגבלות</string>
-</resources>

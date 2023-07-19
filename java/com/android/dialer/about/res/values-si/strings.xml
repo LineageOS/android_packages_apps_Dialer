@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">නිමැවුම් අනුවාදය</string>
-  <string name="open_source_license_detail_label">විවෘත මූලාශ්‍ර මෘදුකාංග සඳහා බලපත්‍ර විස්තර</string>
-  <string name="licenseActivityLabel">විවෘත මූලාශ්‍ර බලපත්‍ර</string>
-  <string name="privacy_policy_label">රහස්‍යතා ප්‍රතිපත්තිය</string>
-  <string name="terms_of_service_label">සේවා නියම</string>
-</resources>

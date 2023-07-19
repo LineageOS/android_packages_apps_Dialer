@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Жинақ нұсқасы</string>
-  <string name="open_source_license_detail_label">Ашық бастапқы код бағдарламасына арналған лицензия туралы мәліметтер</string>
-  <string name="licenseActivityLabel">Ашық бастапқы код лицензиялары</string>
-  <string name="privacy_policy_label">Құпиялылық саясаты</string>
-  <string name="terms_of_service_label">Қызмет көрсету шарттары</string>
-</resources>

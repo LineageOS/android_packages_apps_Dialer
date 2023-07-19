@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Կառուցման տարբերակը</string>
-  <string name="open_source_license_detail_label">Բաց կոդով ծրագրակազմի արտոնագրերի մանրամասներ</string>
-  <string name="licenseActivityLabel">Բաց կոդով ծրագրակազմի արտոնագրեր</string>
-  <string name="privacy_policy_label">Գաղտնիության քաղաքականություն</string>
-  <string name="terms_of_service_label">Օգտագործման պայմաններ</string>
-</resources>
