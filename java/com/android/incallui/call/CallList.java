@@ -36,15 +36,12 @@ import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
-import com.android.dialer.metrics.Metrics;
-import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.promotion.impl.RttPromotion;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.incallui.call.state.DialerCallState;
-import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.videotech.utils.SessionModificationState;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -121,22 +118,13 @@ public class CallList implements DialerCallDelegate {
   }
 
   public void onCallAdded(
-      final Context context, final android.telecom.Call telecomCall, LatencyReport latencyReport) {
+      final Context context, final android.telecom.Call telecomCall) {
     Trace.beginSection("CallList.onCallAdded");
-    if (telecomCall.getState() == Call.STATE_CONNECTING) {
-      MetricsComponent.get(context)
-          .metrics()
-          .startTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_OUTGOING);
-    } else if (telecomCall.getState() == Call.STATE_RINGING) {
-      MetricsComponent.get(context)
-          .metrics()
-          .startTimer(Metrics.ON_CALL_ADDED_TO_ON_INCALL_UI_SHOWN_INCOMING);
-    }
     if (uiListeners != null) {
       uiListeners.onCallAdded();
     }
     final DialerCall call =
-        new DialerCall(context, this, telecomCall, latencyReport, true /* registerCallback */);
+        new DialerCall(context, this, telecomCall, true /* registerCallback */);
     if (getFirstCall() != null) {
       logSecondIncomingCall(context, getFirstCall(), call);
     }
@@ -732,9 +720,6 @@ public class CallList implements DialerCallDelegate {
   }
 
   public void onInCallUiShown(boolean forFullScreenIntent) {
-    for (DialerCall call : callById.values()) {
-      call.getLatencyReport().onInCallUiShown(forFullScreenIntent);
-    }
     if (uiListeners != null) {
       uiListeners.onInCallUiShown();
     }

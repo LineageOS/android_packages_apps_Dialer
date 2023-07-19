@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">ビルド バージョン</string>
-  <string name="open_source_license_detail_label">オープンソース ソフトウェアのライセンスの詳細</string>
-  <string name="licenseActivityLabel">オープンソース ライセンス</string>
-  <string name="privacy_policy_label">プライバシー ポリシー</string>
-  <string name="terms_of_service_label">利用規約</string>
-</resources>
