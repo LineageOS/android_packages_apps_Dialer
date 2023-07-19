@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Versiunea</string>
-  <string name="open_source_license_detail_label">Detalii privind licența pentru software-ul open source</string>
-  <string name="licenseActivityLabel">Licențe open source</string>
-  <string name="privacy_policy_label">Politică de confidențialitate</string>
-  <string name="terms_of_service_label">Termeni și condiții</string>
-</resources>

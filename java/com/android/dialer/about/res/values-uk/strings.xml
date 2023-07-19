@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Версія складання</string>
-  <string name="open_source_license_detail_label">Деталі ліцензій на програмне забезпечення з відкритим кодом</string>
-  <string name="licenseActivityLabel">Ліцензії з відкритим кодом</string>
-  <string name="privacy_policy_label">Політика конфіденційності</string>
-  <string name="terms_of_service_label">Умови використання</string>
-</resources>

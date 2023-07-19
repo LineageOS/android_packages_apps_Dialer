@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">బిల్డ్ సంస్కరణ</string>
-  <string name="open_source_license_detail_label">ఓపెన్ సోర్స్ సాఫ్ట్‌వేర్ యొక్క లైసెన్స్ వివరాలు</string>
-  <string name="licenseActivityLabel">ఓపెన్ సోర్స్ లైసెన్స్‌లు</string>
-  <string name="privacy_policy_label">గోప్యతా విధానం</string>
-  <string name="terms_of_service_label">సేవా నిబంధనలు</string>
-</resources>

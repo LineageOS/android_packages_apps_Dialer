@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">빌드 버전</string>
-  <string name="open_source_license_detail_label">오픈소스 소프트웨어 라이선스 세부정보</string>
-  <string name="licenseActivityLabel">오픈소스 라이선스</string>
-  <string name="privacy_policy_label">개인정보처리방침</string>
-  <string name="terms_of_service_label">서비스 약관</string>
-</resources>

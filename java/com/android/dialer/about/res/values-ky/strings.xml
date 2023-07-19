@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Курама версиясы</string>
-  <string name="open_source_license_detail_label">Баштапкы коду ачык программанын уруксаттамасынын чоо-жайы</string>
-  <string name="licenseActivityLabel">Ачык программа уруксаттамалары</string>
-  <string name="privacy_policy_label">Купуялык саясаты</string>
-  <string name="terms_of_service_label">Тейлөө шарттары</string>
-</resources>

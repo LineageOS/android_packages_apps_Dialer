@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Верзија</string>
-  <string name="open_source_license_detail_label">Подаци о лиценци за софтвер отвореног кода</string>
-  <string name="licenseActivityLabel">Лиценце отвореног кода</string>
-  <string name="privacy_policy_label">Политика приватности</string>
-  <string name="terms_of_service_label">Услови коришћења услуге</string>
-</resources>

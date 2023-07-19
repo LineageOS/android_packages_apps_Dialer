@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">เวอร์ชันบิวด์</string>
-  <string name="open_source_license_detail_label">รายละเอียดใบอนุญาตสำหรับซอฟต์แวร์โอเพนซอร์ส</string>
-  <string name="licenseActivityLabel">ใบอนุญาตโอเพนซอร์ส</string>
-  <string name="privacy_policy_label">นโยบายความเป็นส่วนตัว</string>
-  <string name="terms_of_service_label">ข้อกำหนดในการให้บริการ</string>
-</resources>

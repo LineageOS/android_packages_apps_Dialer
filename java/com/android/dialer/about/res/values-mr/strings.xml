@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">बिल्ड आवृत्ती</string>
-  <string name="open_source_license_detail_label">मुक्त स्त्रोत सॉफ्टवेअरसाठी परवाना तपशील</string>
-  <string name="licenseActivityLabel">मुक्त स्रोत परवाने</string>
-  <string name="privacy_policy_label">गोपनीयता धोरण</string>
-  <string name="terms_of_service_label">सेवा अटी</string>
-</resources>

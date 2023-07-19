@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Yakha inguqulo</string>
-  <string name="open_source_license_detail_label">Iminingwane yelayisensi yesofthiwe yomthombo ovulelekile</string>
-  <string name="licenseActivityLabel">Amalayisense womthombo ovulekile</string>
-  <string name="privacy_policy_label">Inqubomgomo yemfihlo</string>
-  <string name="terms_of_service_label">Imigomo yesevisi</string>
-</resources>

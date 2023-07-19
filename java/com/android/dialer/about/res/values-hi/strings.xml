@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">बिल्ड वर्शन</string>
-  <string name="open_source_license_detail_label">ओपन सोर्स सॉफ़्टवेयर के लाइसेंस वि‍वरण</string>
-  <string name="licenseActivityLabel">ओपन सोर्स लाइसेंस</string>
-  <string name="privacy_policy_label">निजता नीति</string>
-  <string name="terms_of_service_label">सेवा की शर्तें</string>
-</resources>
