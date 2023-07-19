@@ -10,8 +10,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.assisteddialing \
 	com.android.dialer.assisteddialing.ui \
 	com.android.dialer.backup \
-	com.android.dialer.binary.aosp.testing \
-	com.android.dialer.binary.google \
 	com.android.dialer.blocking \
 	com.android.dialer.blockreportspam \
 	com.android.dialer.callcomposer \
@@ -89,7 +87,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.answer.impl.hint \
 	com.android.incallui.audioroute \
 	com.android.incallui.autoresizetext \
-	com.android.incallui.calllocation.impl \
 	com.android.incallui.callpending \
 	com.android.incallui.commontheme \
 	com.android.incallui.contactgrid \
