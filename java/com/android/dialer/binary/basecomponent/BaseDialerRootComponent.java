@@ -44,7 +44,6 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
-import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.voicemail.VoicemailComponent;
 
@@ -67,7 +66,6 @@ public interface BaseDialerRootComponent
         EnrichedCallComponent.HasComponent,
         FeedbackComponent.HasComponent,
         GlidePhotoManagerComponent.HasComponent,
-        MapsComponent.HasComponent,
         MetricsComponent.HasComponent,
         PhoneLookupComponent.HasComponent,
         PhoneLookupDatabaseComponent.HasComponent,
