@@ -84,7 +84,6 @@ import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.incalluilock.InCallUiLock;
-import com.android.incallui.maps.MapsComponent;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
 import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
@@ -591,8 +590,7 @@ public class AnswerFragment extends Fragment
     MultimediaData multimediaData = getSessionData();
     if (multimediaData != null
         && (!TextUtils.isEmpty(multimediaData.getText())
-            || (multimediaData.getImageUri() != null)
-            || (multimediaData.getLocation() != null && canShowMap()))) {
+            || (multimediaData.getImageUri() != null))) {
       // Need message fragment
       String subject = multimediaData.getText();
       Uri imageUri = multimediaData.getImageUri();
@@ -636,10 +634,6 @@ public class AnswerFragment extends Fragment
 
   private boolean shouldShowAvatar() {
     return !isVideoCall() && !isVideoUpgradeRequest();
-  }
-
-  private boolean canShowMap() {
-    return MapsComponent.get(getContext()).getMaps().isAvailable();
   }
 
   @Override
