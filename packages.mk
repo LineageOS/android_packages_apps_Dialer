@@ -10,8 +10,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.assisteddialing \
 	com.android.dialer.assisteddialing.ui \
 	com.android.dialer.backup \
-	com.android.dialer.binary.aosp.testing \
-	com.android.dialer.binary.google \
 	com.android.dialer.blocking \
 	com.android.dialer.blockreportspam \
 	com.android.dialer.callcomposer \
