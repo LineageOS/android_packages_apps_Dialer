@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Bersyon ng build</string>
-  <string name="open_source_license_detail_label">Mga detalye ng lisensya para sa open source na software</string>
-  <string name="licenseActivityLabel">Mga open source na lisensya</string>
-  <string name="privacy_policy_label">Patakaran sa privacy</string>
-  <string name="terms_of_service_label">Mga tuntunin ng serbisyo</string>
-</resources>
