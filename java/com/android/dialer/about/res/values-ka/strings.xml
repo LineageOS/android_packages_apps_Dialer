@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Build-ის ვერსია</string>
-  <string name="open_source_license_detail_label">ღია კოდის პროგრამული უზრუნველყოფის ლიცენზირების დეტალები</string>
-  <string name="licenseActivityLabel">ღია კოდის ლიცენზიები</string>
-  <string name="privacy_policy_label">კონფიდენციალურობის დებულება</string>
-  <string name="terms_of_service_label">მომსახურების პირობები</string>
-</resources>

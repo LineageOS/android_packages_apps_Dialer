@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Версія зборкі</string>
-  <string name="open_source_license_detail_label">Звесткі аб ліцэнзіі на праграмнае забеспячэнне з адкрытым зыходным кодам</string>
-  <string name="licenseActivityLabel">Ліцэнзіі на ПЗ з адкрытым зыходным кодам</string>
-  <string name="privacy_policy_label">Палітыка прыватнасці</string>
-  <string name="terms_of_service_label">Умовы абслугоўвання</string>
-</resources>

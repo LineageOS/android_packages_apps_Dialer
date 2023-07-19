@@ -16,14 +16,8 @@
 
 package com.android.dialer.lookup;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.provider.Settings;
-
-import java.util.List;
 
 public final class LookupSettings {
   private static final String TAG = LookupSettings.class.getSimpleName();
@@ -123,9 +117,5 @@ public final class LookupSettings {
 
   public static String getOpenCnamAuthToken(Context context) {
     return getSharedPreferences(context).getString(OPENCNAM_AUTH_TOKEN, null);
-  }
-
-  public static void setOpenCnamAuthToken(Context context, String value) {
-    getSharedPreferences(context).edit().putString(OPENCNAM_AUTH_TOKEN, value).commit();
   }
 }
