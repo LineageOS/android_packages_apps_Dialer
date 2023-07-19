@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Delversjon</string>
-  <string name="open_source_license_detail_label">Lisensdetaljer for programvare med åpen kildekode</string>
-  <string name="licenseActivityLabel">Lisenser for åpen kildekode</string>
-  <string name="privacy_policy_label">Personvernregler</string>
-  <string name="terms_of_service_label">Vilkår for bruk</string>
-</resources>

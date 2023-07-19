@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">ਨਿਰਮਾਣ ਰੂਪ</string>
-  <string name="open_source_license_detail_label">ਖੁੱਲ੍ਹੇ ਸਰੋਤ ਸਾਫਟਵੇਅਰ ਲਈ ਲਾਇਸੰਸ ਵੇਰਵੇ</string>
-  <string name="licenseActivityLabel">ਖੁੱਲ੍ਹੇ ਸਰੋਤ ਲਾਇਸੰਸ</string>
-  <string name="privacy_policy_label">ਪਰਦੇਦਾਰੀ ਨੀਤੀ</string>
-  <string name="terms_of_service_label">ਸੇਵਾ ਦੀਆਂ ਮਦਾਂ</string>
-</resources>

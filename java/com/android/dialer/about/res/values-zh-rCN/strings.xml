@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">版本号</string>
-  <string name="open_source_license_detail_label">开放源代码软件的许可详情</string>
-  <string name="licenseActivityLabel">开放源代码许可</string>
-  <string name="privacy_policy_label">隐私权政策</string>
-  <string name="terms_of_service_label">服务条款</string>
-</resources>
