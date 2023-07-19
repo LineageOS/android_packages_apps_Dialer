@@ -60,8 +60,8 @@ import com.android.dialer.util.ViewUtil;
 import com.android.incallui.answer.impl.answermethod.FlingUpDownTouchHandler.OnProgressChangedListener;
 import com.android.incallui.answer.impl.classifier.FalsingManager;
 import com.android.incallui.answer.impl.hint.AnswerHint;
-import com.android.incallui.answer.impl.hint.AnswerHintFactory;
-import com.android.incallui.answer.impl.hint.PawImageLoaderImpl;
+import com.android.incallui.answer.impl.hint.EmptyAnswerHint;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -240,9 +240,7 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
 
     touchHandler = FlingUpDownTouchHandler.attach(view, this, falsingManager);
 
-    answerHint =
-        new AnswerHintFactory(new PawImageLoaderImpl())
-            .create(getContext(), ANIMATE_DURATION_LONG_MILLIS, BOUNCE_ANIMATION_DELAY);
+    answerHint = new EmptyAnswerHint();
     answerHint.onCreateView(
         layoutInflater,
         (ViewGroup) view.findViewById(R.id.hint_container),

@@ -46,7 +46,6 @@ import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallDelegate;
 import com.android.incallui.call.ExternalCallList;
-import com.android.incallui.latencyreport.LatencyReport;
 import java.util.Map;
 
 /**
@@ -151,7 +150,6 @@ public class ExternalCallNotifier implements ExternalCallList.ExternalCallListen
             context,
             new DialerCallDelegateStub(),
             info.getCall(),
-            new LatencyReport(),
             false /* registerCallback */);
 
     contactInfoCache.findInfo(

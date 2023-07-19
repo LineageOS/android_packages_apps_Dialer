@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Koontiversio</string>
-  <string name="open_source_license_detail_label">Avoimen lähdekoodin ohjelmiston käyttöoikeustiedot</string>
-  <string name="licenseActivityLabel">Avoimen lähdekoodin käyttöoikeudet</string>
-  <string name="privacy_policy_label">Tietosuojakäytäntö</string>
-  <string name="terms_of_service_label">Käyttöehdot</string>
-</resources>

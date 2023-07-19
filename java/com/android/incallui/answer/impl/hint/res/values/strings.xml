@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string translatable="false" name="event_activated">&#x1f408;&#x1F415;</string>
-  <!-- Toast to display when the incoming call easter egg is disabled. The easter egg shows a cat or\
-   dog paw animation swiping on the screen-->
-  <string name="event_deactivated">Pet mode off</string>
-</resources>
