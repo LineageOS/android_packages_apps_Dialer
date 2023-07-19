@@ -66,7 +66,6 @@ import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.disconnectdialog.DisconnectMessage;
 import com.android.incallui.incalluilock.InCallUiLock;
-import com.android.incallui.latencyreport.LatencyReport;
 import com.android.incallui.spam.SpamCallListListener;
 import com.android.incallui.speakeasy.SpeakEasyCallManager;
 import com.android.incallui.telecomeventui.InternationalCallOnWifiDialogActivity;
@@ -236,11 +235,8 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
         @Override
         public void onExternalCallPulled(android.telecom.Call call) {
-          // Note: keep this code in sync with InCallPresenter#onCallAdded
-          LatencyReport latencyReport = new LatencyReport(call);
-          latencyReport.onCallBlockingDone();
           // Note: External calls do not require spam checking.
-          callList.onCallAdded(context, call, latencyReport);
+          callList.onCallAdded(context, call);
           call.registerCallback(callCallback);
         }
 
@@ -617,12 +613,10 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   public void onCallAdded(final android.telecom.Call call) {
     Trace.beginSection("InCallPresenter.onCallAdded");
-    LatencyReport latencyReport = new LatencyReport(call);
     if (call.getDetails().hasProperty(CallCompat.Details.PROPERTY_IS_EXTERNAL_CALL)) {
       externalCallList.onCallAdded(call);
     } else {
-      latencyReport.onCallBlockingDone();
-      callList.onCallAdded(context, call, latencyReport);
+      callList.onCallAdded(context, call);
     }
 
     // Since a call has been added we are no longer waiting for Telecom to send us a call.

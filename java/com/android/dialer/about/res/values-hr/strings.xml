@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Trenutačna međuverzija</string>
-  <string name="open_source_license_detail_label">Pojedinosti o licenci za softver otvorenog koda</string>
-  <string name="licenseActivityLabel">Licence otvorenog koda</string>
-  <string name="privacy_policy_label">Pravila o privatnosti</string>
-  <string name="terms_of_service_label">Uvjeti pružanja usluge</string>
-</resources>
