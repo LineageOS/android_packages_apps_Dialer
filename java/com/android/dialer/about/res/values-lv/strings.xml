@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Versija</string>
-  <string name="open_source_license_detail_label">Licences informācija par atklātā pirmkoda programmatūru</string>
-  <string name="licenseActivityLabel">Atklātā pirmkoda licences</string>
-  <string name="privacy_policy_label">Konfidencialitātes politika</string>
-  <string name="terms_of_service_label">Pakalpojumu sniegšanas noteikumi</string>
-</resources>

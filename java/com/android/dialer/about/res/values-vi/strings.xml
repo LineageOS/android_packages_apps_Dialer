@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Phiên bản đóng gói</string>
-  <string name="open_source_license_detail_label">Chi tiết giấy phép cho phần mềm nguồn mở</string>
-  <string name="licenseActivityLabel">Giấy phép nguồn mở</string>
-  <string name="privacy_policy_label">Chính sách bảo mật</string>
-  <string name="terms_of_service_label">Điều khoản dịch vụ</string>
-</resources>

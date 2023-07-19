@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Verze sestavení</string>
-  <string name="open_source_license_detail_label">Podrobnosti o licencích pro software open source</string>
-  <string name="licenseActivityLabel">Licence open source</string>
-  <string name="privacy_policy_label">Zásady ochrany soukromí</string>
-  <string name="terms_of_service_label">Smluvní podmínky</string>
-</resources>

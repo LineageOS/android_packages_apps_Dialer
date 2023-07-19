@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Έκδοση build</string>
-  <string name="open_source_license_detail_label">Λεπτομέρειες άδειας λογισμικού ανοικτού κώδικα</string>
-  <string name="licenseActivityLabel">Άδειες λογισμικού ανοικτού κώδικα</string>
-  <string name="privacy_policy_label">Πολιτική απορρήτου</string>
-  <string name="terms_of_service_label">Όροι Παροχής Υπηρεσιών</string>
-</resources>

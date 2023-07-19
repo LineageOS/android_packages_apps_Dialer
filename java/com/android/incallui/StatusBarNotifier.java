@@ -427,7 +427,6 @@ public class StatusBarNotifier
     TelecomAdapter.getInstance().startForegroundNotification(NOTIFICATION_ID, notification);
 
     Trace.endSection();
-    call.getLatencyReport().onNotificationShown();
     currentNotification = notificationType;
     Trace.endSection();
   }
