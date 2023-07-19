@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Quruluş versiyası</string>
-  <string name="open_source_license_detail_label">Açıq mənbəli proqram təminatı üçün lisenziya detalları</string>
-  <string name="licenseActivityLabel">Mənbə lisenziyalarını açın</string>
-  <string name="privacy_policy_label">Məxfilik siyasəti</string>
-  <string name="terms_of_service_label">Xidmət şərtləri</string>
-</resources>

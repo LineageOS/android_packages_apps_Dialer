@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">نسخه ساخت</string>
-  <string name="open_source_license_detail_label">جزئیات مجوز برای نرم‌افزار متن‌باز</string>
-  <string name="licenseActivityLabel">مجوزهای متن‌باز</string>
-  <string name="privacy_policy_label">خط‌مشی رازداری</string>
-  <string name="terms_of_service_label">شرایط و ضوابط</string>
-</resources>

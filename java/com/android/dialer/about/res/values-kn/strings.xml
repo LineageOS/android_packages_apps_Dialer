@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">ಬಿಲ್ಡ್ ಆವೃತ್ತಿ</string>
-  <string name="open_source_license_detail_label">ತೆರೆದ ಮೂಲ ಸಾಫ್ಟ್‌ವೇರ್‌ಗಾಗಿ ಪರವಾನಗಿ ವಿವರಗಳು</string>
-  <string name="licenseActivityLabel">ತೆರೆದ ಮೂಲ ಪರವಾನಗಿಗಳು</string>
-  <string name="privacy_policy_label">ಗೌಪ್ಯತೆ ನೀತಿ</string>
-  <string name="terms_of_service_label">ಸೇವಾ ನಿಯಮಗಳು</string>
-</resources>

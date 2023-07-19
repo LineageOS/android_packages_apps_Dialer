@@ -111,8 +111,6 @@ import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.logging.UiAction;
-import com.android.dialer.metrics.Metrics;
-import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
@@ -579,13 +577,6 @@ public class DialtactsActivity extends TransactionSafeActivity
         LogUtil.i("DialtactsActivity.onResume", "clearing all new voicemails");
         CallLogNotificationsService.markAllNewVoicemailsAsOld(this);
       }
-      // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
-      ThreadUtil.postDelayedOnUiThread(
-          () ->
-              MetricsComponent.get(this)
-                  .metrics()
-                  .recordMemory(Metrics.DIALTACTS_ON_RESUME_MEMORY_EVENT_NAME),
-          1000);
     }
 
     firstLaunch = false;

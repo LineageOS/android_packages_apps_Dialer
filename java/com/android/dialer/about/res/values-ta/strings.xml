@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">நடப்புப் பதிப்பு</string>
-  <string name="open_source_license_detail_label">ஓப்பன் சோர்ஸ் மென்பொருளுக்கான உரிம விவரங்கள்</string>
-  <string name="licenseActivityLabel">ஓப்பன் சோர்ஸ் உரிமங்கள்</string>
-  <string name="privacy_policy_label">தனியுரிமைக் கொள்கை</string>
-  <string name="terms_of_service_label">சேவை விதிமுறைகள்</string>
-</resources>

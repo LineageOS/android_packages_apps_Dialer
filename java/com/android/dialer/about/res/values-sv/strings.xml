@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Programversion</string>
-  <string name="open_source_license_detail_label">Licensinformation för programvara med öppen källkod</string>
-  <string name="licenseActivityLabel">Licenser för öppen källkod</string>
-  <string name="privacy_policy_label">Sekretesspolicy</string>
-  <string name="terms_of_service_label">Användarvillkor</string>
-</resources>

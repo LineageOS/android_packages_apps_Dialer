@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">တည်ဆောက်မှု ဗားရှင်း</string>
-  <string name="open_source_license_detail_label">အခမဲ့ရင်းမြစ်ဆော့ဖ်ဝဲအတွက် လိုင်စင်အသေးစိတ်များ</string>
-  <string name="licenseActivityLabel">အခမဲ့ရင်းမြစ်လိုင်စင်များ</string>
-  <string name="privacy_policy_label">ပုဂ္ဂိုလ်ရေးဆိုင်ရာ မူဝါဒ</string>
-  <string name="terms_of_service_label">ဝန်ဆောင်မှု စည်းမျဉ်းများ</string>
-</resources>
