@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Toleo la muundo</string>
-  <string name="open_source_license_detail_label">Maelezo ya leseni za programu huria</string>
-  <string name="licenseActivityLabel">Leseni za programu huria</string>
-  <string name="privacy_policy_label">Sera ya faragha</string>
-  <string name="terms_of_service_label">Sheria na masharti</string>
-</resources>

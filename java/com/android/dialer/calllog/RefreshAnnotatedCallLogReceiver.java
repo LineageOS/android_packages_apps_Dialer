@@ -28,9 +28,7 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.LoggingBindings;
-import com.android.dialer.metrics.FutureTimer;
 import com.android.dialer.metrics.Metrics;
-import com.android.dialer.metrics.MetricsComponent;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -51,7 +49,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   private static final long REFRESH_ANNOTATED_CALL_LOG_WAIT_MILLIS = 100L;
 
   private final RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
-  private final FutureTimer futureTimer;
   private final LoggingBindings logger;
 
   @Nullable private Runnable refreshAnnotatedCallLogRunnable;
@@ -67,7 +64,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   public RefreshAnnotatedCallLogReceiver(Context context) {
     refreshAnnotatedCallLogWorker =
         CallLogComponent.get(context).getRefreshAnnotatedCallLogWorker();
-    futureTimer = MetricsComponent.get(context).futureTimer();
     logger = Logger.get(context);
   }
 
@@ -131,7 +127,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
                 }
               },
               MoreExecutors.directExecutor());
-          futureTimer.applyTiming(future, new EventNameFromResultFunction(checkDirty));
         };
 
     ThreadUtil.getUiThreadHandler()

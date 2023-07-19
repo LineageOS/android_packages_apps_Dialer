@@ -19,14 +19,11 @@ package com.android.incallui.answer.impl.answermethod;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
-import com.android.dialer.common.LogUtil;
 import com.android.incallui.util.AccessibilityUtil;
 
 /** Creates the appropriate {@link AnswerMethod} for the circumstances. */
 public class AnswerMethodFactory {
-  private static boolean shouldUseTwoButtonMethodForTesting;
 
   @NonNull
   public static AnswerMethod createAnswerMethod(@NonNull Activity activity) {
@@ -47,17 +44,7 @@ public class AnswerMethodFactory {
     return !(answerMethod instanceof TwoButtonMethod) && needTwoButton(answerMethod.getActivity());
   }
 
-  @VisibleForTesting
-  public static void setShouldUseTwoButtonMethodForTesting(boolean shouldUse) {
-    shouldUseTwoButtonMethodForTesting = shouldUse;
-  }
-
   private static boolean needTwoButton(@NonNull Activity activity) {
-    if (shouldUseTwoButtonMethodForTesting) {
-      LogUtil.i("AnswerMethodFactory.needTwoButton", "enabled for testing");
-      return true;
-    }
-
     return AccessibilityUtil.isTouchExplorationEnabled(activity) || activity.isInMultiWindowMode();
   }
 }

@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">Versão da compilação</string>
-  <string name="open_source_license_detail_label">Detalhes da licença para software de código aberto</string>
-  <string name="licenseActivityLabel">Licenças de código aberto</string>
-  <string name="privacy_policy_label">Política de Privacidade</string>
-  <string name="terms_of_service_label">Termos de Utilização</string>
-</resources>

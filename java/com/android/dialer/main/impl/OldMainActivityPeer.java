@@ -74,7 +74,6 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
@@ -98,8 +97,6 @@ import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelecte
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.main.impl.bottomnav.MissedCallCountObserver;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
-import com.android.dialer.metrics.Metrics;
-import com.android.dialer.metrics.MetricsComponent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.promotion.Promotion;
@@ -489,14 +486,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     } else {
       bottomNav.setVisibility(View.VISIBLE);
     }
-
-    // add 1 sec delay to get memory snapshot so that dialer wont react slowly on resume.
-    ThreadUtil.postDelayedOnUiThread(
-        () ->
-            MetricsComponent.get(activity)
-                .metrics()
-                .recordMemory(Metrics.OLD_MAIN_ACTIVITY_PEER_ON_RESUME_MEMORY_EVENT_NAME),
-        1000);
   }
 
   @Override
