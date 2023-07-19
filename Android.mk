@@ -56,7 +56,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
 	android-support-dynamic-animation \
 	com.android.vcard \
-	dialer-animal-sniffer-annotations-target \
 	dialer-commons-io-target \
 	dialer-dagger2-target \
 	dialer-disklrucache-target \
@@ -461,19 +460,6 @@ LOCAL_LICENSE_CONDITIONS := notice
 LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
 LOCAL_SDK_VERSION := current
 LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar
-LOCAL_UNINSTALLABLE_MODULE := true
-
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE_CLASS := JAVA_LIBRARIES
-LOCAL_MODULE := dialer-animal-sniffer-annotations-target
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
-LOCAL_LICENSE_CONDITIONS := notice
-LOCAL_NOTICE_FILE := $(LOCAL_PATH)/LICENSE
-LOCAL_SDK_VERSION := current
-LOCAL_SRC_FILES := ../../../prebuilts/tools/common/m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar
 LOCAL_UNINSTALLABLE_MODULE := true
 
 include $(BUILD_PREBUILT)
