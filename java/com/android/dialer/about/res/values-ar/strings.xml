@@ -1,7 +1,0 @@
-<resources>
-  <string name="build_version_label">نسخة الإصدار</string>
-  <string name="open_source_license_detail_label">تفاصيل الترخيص للبرامج مفتوحة المصدر</string>
-  <string name="licenseActivityLabel">تراخيص البرامج المفتوحة المصدر</string>
-  <string name="privacy_policy_label">سياسة الخصوصية</string>
-  <string name="terms_of_service_label">بنود الخدمة</string>
-</resources>
