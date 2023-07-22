@@ -66,7 +66,7 @@ public class SpeakerButtonInfo {
       } else {
         icon = R.drawable.quantum_ic_phone_in_talk_vd_theme_24;
         contentDescription = R.string.incall_content_description_earpiece;
-        isChecked = false;
+        isChecked = true;
       }
     } else {
       nonBluetoothMode = true;

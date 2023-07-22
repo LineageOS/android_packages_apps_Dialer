@@ -17,6 +17,7 @@
 <!-- A layout representing key "1" in the dialpad -->
 <com.android.dialer.dialpadview.DialpadKeyButton
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/one"
     style="@style/DialpadKeyButtonStyle">
 
@@ -46,7 +47,8 @@
           android:layout_height="@dimen/dialpad_voicemail_icon_size"
           android:scaleType="fitCenter"
           android:src="@drawable/quantum_ic_voicemail_vd_theme_24"
-          android:tint="?colorIcon"/>
+          app:tint="?attr/dialpad_text_color_secondary"
+          android:tint="?attr/dialpad_text_color_secondary"/>
     </LinearLayout>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>
