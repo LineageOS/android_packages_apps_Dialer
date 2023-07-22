@@ -70,6 +70,9 @@
       @dimen/incall_end_call_spacing
     </item>
     <item name="dialpad_elevation">10dp</item>
+    <item name="dialpad_text_color">@color/dialer_dark_secondary_text_color</item>
+    <item name="dialpad_text_color_primary">@color/dialer_theme_color</item>
+    <item name="dialpad_text_color_secondary">@color/dialer_dark_secondary_text_color</item>
   </style>
 
   <style name="AfterCallNotificationTheme" parent="Dialer.ThemeBase.NoActionBar">
