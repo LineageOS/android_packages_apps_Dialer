@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.FloatingActionButton.OnVisibilityChangedListener;
@@ -94,6 +95,10 @@ public class FloatingActionButtonController {
     if (!fab.getContentDescription().equals(description)) {
       fab.setContentDescription(description);
     }
+  }
+
+  public void changeIconColor(Context context, @ColorRes int color) {
+    fab.setImageTintList(ColorStateList.valueOf(context.getResources().getColor(color)));
   }
 
   /**
