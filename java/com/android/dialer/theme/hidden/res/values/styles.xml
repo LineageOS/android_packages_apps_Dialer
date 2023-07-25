@@ -55,5 +55,6 @@
     <item name="android:colorAccent">@color/dialer_theme_color</item>
     <item name="colorAccent">@color/dialer_theme_color</item>
     <item name="android:textColorSecondary">@color/dialer_secondary_text_color</item>
+    <item name="android:windowBackground">@drawable/dialog_background</item>
   </style>
 </resources>
