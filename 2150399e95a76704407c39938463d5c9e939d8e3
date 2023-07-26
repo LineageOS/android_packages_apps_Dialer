@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eaf6ec4_67522321",
+        "filename": "java/com/android/dialer/simulator/impl/SimulatorVideoCall.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-26T16:58:29Z",
+      "side": 1,
+      "message": "elsewhere FLAG_ACTIVITY_CLEAR_TOP is used, can you try?",
+      "range": {
+        "startLine": 104,
+        "startChar": 27,
+        "endLine": 104,
+        "endChar": 49
+      },
+      "revId": "2150399e95a76704407c39938463d5c9e939d8e3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
