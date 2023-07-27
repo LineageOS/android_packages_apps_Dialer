@@ -36,7 +36,6 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
@@ -310,15 +309,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   }
 
   private void setupChangeGreetingPreference() {
-    if (!ConfigProviderComponent.get(getContext())
-        .getConfigProvider()
-        .getBoolean("voicemail_change_greeting_enabled", false)) {
-      getPreferenceScreen().removePreference(changeGreetingPreference);
-      return;
-    }
-
-    Intent changeGreetingIntent = new Intent(getContext(), CurrentVoicemailGreetingActivity.class);
-    changeGreetingPreference.setIntent(changeGreetingIntent);
+    getPreferenceScreen().removePreference(changeGreetingPreference);
   }
 
   private void setupAdvancedSettingsPreference() {

@@ -26,11 +26,7 @@ import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
-import com.android.dialer.common.concurrent.Annotations.NonUiSerial;
-import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
@@ -43,9 +39,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
 import javax.inject.Inject;
 
@@ -63,25 +56,19 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
       "cp2_extended_directory_phone_lookup_timout_millis";
 
   private final Context appContext;
-  private final ConfigProvider configProvider;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
   private final MissingPermissionsOperations missingPermissionsOperations;
-  private final ScheduledExecutorService scheduledExecutorService;
 
   @Inject
   Cp2ExtendedDirectoryPhoneLookup(
       @ApplicationContext Context appContext,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService,
-      @NonUiSerial ScheduledExecutorService scheduledExecutorService,
-      ConfigProvider configProvider,
       MissingPermissionsOperations missingPermissionsOperations) {
     this.appContext = appContext;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
-    this.scheduledExecutorService = scheduledExecutorService;
-    this.configProvider = configProvider;
     this.missingPermissionsOperations = missingPermissionsOperations;
   }
 
@@ -91,31 +78,9 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
       return Futures.immediateFuture(Cp2Info.getDefaultInstance());
     }
 
-    ListenableFuture<Cp2Info> cp2InfoFuture =
-        Futures.transformAsync(
+    return Futures.transformAsync(
             queryCp2ForExtendedDirectoryIds(),
             directoryIds -> queryCp2ForDirectoryContact(dialerPhoneNumber, directoryIds),
-            lightweightExecutorService);
-
-    long timeoutMillis =
-        configProvider.getLong(CP2_EXTENDED_DIRECTORY_PHONE_LOOKUP_TIMEOUT_MILLIS, Long.MAX_VALUE);
-
-    // Do not pass Long.MAX_VALUE to Futures.withTimeout as it will cause the internal
-    // ScheduledExecutorService for timing to keep waiting even after "cp2InfoFuture" is done.
-    // Do not pass 0 or a negative value to Futures.withTimeout either as it will cause the timeout
-    // event to be triggered immediately.
-    return timeoutMillis == Long.MAX_VALUE
-        ? cp2InfoFuture
-        : Futures.catching(
-            Futures.withTimeout(
-                cp2InfoFuture, timeoutMillis, TimeUnit.MILLISECONDS, scheduledExecutorService),
-            TimeoutException.class,
-            unused -> {
-              LogUtil.w("Cp2ExtendedDirectoryPhoneLookup.lookup", "Time out!");
-              Logger.get(appContext)
-                  .logImpression(DialerImpression.Type.CP2_EXTENDED_DIRECTORY_PHONE_LOOKUP_TIMEOUT);
-              return Cp2Info.getDefaultInstance();
-            },
             lightweightExecutorService);
   }
 

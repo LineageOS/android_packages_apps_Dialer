@@ -46,14 +46,11 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.ActionMode;
-import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.R;
-import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
@@ -61,12 +58,6 @@ import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
-import com.android.dialer.app.list.DragDropController;
-import com.android.dialer.app.list.OldSpeedDialFragment;
-import com.android.dialer.app.list.OnDragDropListener;
-import com.android.dialer.app.list.OnListFragmentScrolledListener;
-import com.android.dialer.app.list.PhoneFavoriteSquareTileView;
-import com.android.dialer.app.list.RemoveView;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -87,7 +78,6 @@ import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.i18n.LocaleUtils;
-import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
@@ -98,7 +88,6 @@ import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.android.dialer.main.impl.bottomnav.MissedCallCountObserver;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.postcall.PostCall;
-import com.android.dialer.precall.PreCall;
 import com.android.dialer.promotion.Promotion;
 import com.android.dialer.promotion.Promotion.PromotionType;
 import com.android.dialer.promotion.PromotionComponent;
@@ -109,7 +98,6 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.base.Theme;
 import com.android.dialer.theme.base.ThemeComponent;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
@@ -156,11 +144,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   // Call Log
   private MainCallLogHost callLogHostInterface;
   private MainCallLogFragmentListener callLogFragmentListener;
-  private MainOnListFragmentScrolledListener onListFragmentScrolledListener;
 
   // Speed Dial
-  private MainOnPhoneNumberPickerActionListener onPhoneNumberPickerActionListener;
-  private MainOldSpeedDialFragmentHost oldSpeedDialFragmentHost;
   private MainSpeedDialFragmentHost speedDialFragmentHost;
 
   /** Language the device was in last time {@link #onSaveInstanceState(Bundle)} was called. */
@@ -175,14 +160,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private UiListener<String> getLastOutgoingCallListener;
   private UiListener<Integer> missedCallObserverUiListener;
   private View bottomSheet;
-
-  public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
-    Intent intent = new Intent(context, MainActivity.class);
-    intent.setAction(ACTION_SHOW_TAB);
-    intent.putExtra(EXTRA_SHOW_TAB, tabIndex);
-    // TODO(calderwoodra): Do we need to set some URI data here
-    return intent;
-  }
 
   static boolean isShowTabIntent(Intent intent) {
     return ACTION_SHOW_TAB.equals(intent.getAction()) && intent.hasExtra(EXTRA_SHOW_TAB);
@@ -291,17 +268,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         new MainCallLogAdapterOnActionModeStateChangedListener();
     callLogHostInterface = new MainCallLogHost(searchController, fab);
 
-    onListFragmentScrolledListener = new MainOnListFragmentScrolledListener(snackbarContainer);
-    onPhoneNumberPickerActionListener = new MainOnPhoneNumberPickerActionListener(activity);
-    oldSpeedDialFragmentHost =
-        new MainOldSpeedDialFragmentHost(
-            activity,
-            activity.findViewById(R.id.root_layout),
-            bottomNav,
-            activity.findViewById(R.id.contact_tile_drag_shadow_overlay),
-            activity.findViewById(R.id.remove_view),
-            activity.findViewById(R.id.search_view_container),
-            toolbar);
     speedDialFragmentHost =
         new MainSpeedDialFragmentHost(
             toolbar,
@@ -612,12 +578,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       return (T) callLogHostInterface;
     } else if (callbackInterface.isInstance(callLogFragmentListener)) {
       return (T) callLogFragmentListener;
-    } else if (callbackInterface.isInstance(onListFragmentScrolledListener)) {
-      return (T) onListFragmentScrolledListener;
-    } else if (callbackInterface.isInstance(onPhoneNumberPickerActionListener)) {
-      return (T) onPhoneNumberPickerActionListener;
-    } else if (callbackInterface.isInstance(oldSpeedDialFragmentHost)) {
-      return (T) oldSpeedDialFragmentHost;
     } else if (callbackInterface.isInstance(searchController)) {
       return (T) searchController;
     } else if (callbackInterface.isInstance(speedDialFragmentHost)) {
@@ -1013,157 +973,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       return currentTab == TabIndex.CALL_LOG
           && timeSelected != -1
           && System.currentTimeMillis() - timeSelected > TimeUnit.SECONDS.toMillis(3);
-    }
-  }
-
-  /** @see OnListFragmentScrolledListener */
-  private static final class MainOnListFragmentScrolledListener
-      implements OnListFragmentScrolledListener {
-
-    private final View parentLayout;
-
-    MainOnListFragmentScrolledListener(View parentLayout) {
-      this.parentLayout = parentLayout;
-    }
-
-    @Override
-    public void onListFragmentScrollStateChange(int scrollState) {
-      DialerUtils.hideInputMethod(parentLayout);
-    }
-
-    @Override
-    public void onListFragmentScroll(
-        int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-      // TODO: No-op for now. This should eventually show/hide the actionBar based on
-      // interactions with the ListsFragments.
-    }
-  }
-
-  /** @see OnPhoneNumberPickerActionListener */
-  private static final class MainOnPhoneNumberPickerActionListener
-      implements OnPhoneNumberPickerActionListener {
-
-    private final TransactionSafeActivity activity;
-
-    MainOnPhoneNumberPickerActionListener(TransactionSafeActivity activity) {
-      this.activity = activity;
-    }
-
-    @Override
-    public void onPickDataUri(
-        Uri dataUri, boolean isVideoCall, CallSpecificAppData callSpecificAppData) {
-      PhoneNumberInteraction.startInteractionForPhoneCall(
-          activity, dataUri, isVideoCall, callSpecificAppData);
-    }
-
-    @Override
-    public void onPickPhoneNumber(
-        String phoneNumber, boolean isVideoCall, CallSpecificAppData callSpecificAppData) {
-      if (phoneNumber == null) {
-        // Invalid phone number, but let the call go through so that InCallUI can show
-        // an error message.
-        phoneNumber = "";
-      }
-      PreCall.start(
-          activity,
-          new CallIntentBuilder(phoneNumber, callSpecificAppData)
-              .setIsVideoCall(isVideoCall)
-              .setAllowAssistedDial(callSpecificAppData.getAllowAssistedDialing()));
-    }
-
-    @Override
-    public void onHomeInActionBarSelected() {
-      // TODO(calderwoodra): investigate if we need to exit search here
-      // PhoneNumberPickerFragment#onOptionsItemSelected
-    }
-  }
-
-  /**
-   * Handles the callbacks for {@link OldSpeedDialFragment} and drag/drop logic for drag to remove.
-   *
-   * @see OldSpeedDialFragment.HostInterface
-   * @see OnDragDropListener
-   */
-  private static final class MainOldSpeedDialFragmentHost
-      implements OldSpeedDialFragment.HostInterface, OnDragDropListener {
-
-    private final Context context;
-    private final View rootLayout;
-    private final BottomNavBar bottomNavBar;
-    private final ImageView dragShadowOverlay;
-    private final RemoveView removeView;
-    private final View removeViewContent;
-    private final View searchViewContainer;
-    private final MainToolbar toolbar;
-
-    MainOldSpeedDialFragmentHost(
-        Context context,
-        View rootLayout,
-        BottomNavBar bottomNavBar,
-        ImageView dragShadowOverlay,
-        RemoveView removeView,
-        View searchViewContainer,
-        MainToolbar toolbar) {
-      this.context = context;
-      this.rootLayout = rootLayout;
-      this.bottomNavBar = bottomNavBar;
-      this.dragShadowOverlay = dragShadowOverlay;
-      this.removeView = removeView;
-      this.searchViewContainer = searchViewContainer;
-      this.toolbar = toolbar;
-      removeViewContent = removeView.findViewById(R.id.remove_view_content);
-    }
-
-    @Override
-    public void setDragDropController(DragDropController dragDropController) {
-      removeView.setDragDropController(dragDropController);
-      rootLayout.setOnDragListener(
-          (v, event) -> {
-            if (event.getAction() == DragEvent.ACTION_DRAG_LOCATION) {
-              dragDropController.handleDragHovered(v, (int) event.getX(), (int) event.getY());
-            }
-            return true;
-          });
-    }
-
-    @Override
-    public void showAllContactsTab() {
-      bottomNavBar.selectTab(TabIndex.CONTACTS);
-      Logger.get(context).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_TAB_CONTACTS);
-    }
-
-    @Override
-    public ImageView getDragShadowOverlay() {
-      return dragShadowOverlay;
-    }
-
-    @Override
-    public void setHasFrequents(boolean hasFrequents) {
-      toolbar.showClearFrequents(hasFrequents);
-    }
-
-    @Override
-    public void onDragStarted(int x, int y, PhoneFavoriteSquareTileView view) {
-      showRemoveView(true);
-    }
-
-    @Override
-    public void onDragHovered(int x, int y, PhoneFavoriteSquareTileView view) {}
-
-    @Override
-    public void onDragFinished(int x, int y) {
-      showRemoveView(false);
-    }
-
-    @Override
-    public void onDroppedOnRemove() {}
-
-    private void showRemoveView(boolean show) {
-      if (show) {
-        AnimUtils.crossFadeViews(removeViewContent, searchViewContainer, 300);
-      } else {
-        AnimUtils.crossFadeViews(searchViewContainer, removeViewContent, 300);
-      }
     }
   }
 

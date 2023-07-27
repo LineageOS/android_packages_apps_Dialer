@@ -41,7 +41,6 @@ import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.DialerFutureSerializer;
 import com.android.dialer.common.database.Selection;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contacts.resources.R;
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.smartdial.util.SmartDialPrefix;
@@ -654,13 +653,8 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
     final SharedPreferences databaseLastUpdateSharedPref =
         context.getSharedPreferences(DATABASE_LAST_CREATED_SHARED_PREF, Context.MODE_PRIVATE);
 
-    long defaultLastUpdateMillis =
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getLong(DEFAULT_LAST_UPDATED_CONFIG_KEY, 0);
-
     long sharedPrefLastUpdateMillis =
-        databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, defaultLastUpdateMillis);
+        databaseLastUpdateSharedPref.getLong(LAST_UPDATED_MILLIS, 0);
 
     final String lastUpdateMillis = String.valueOf(forceUpdate ? 0 : sharedPrefLastUpdateMillis);
 
