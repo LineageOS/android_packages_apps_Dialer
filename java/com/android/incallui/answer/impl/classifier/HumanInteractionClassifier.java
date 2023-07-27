@@ -20,18 +20,13 @@ import android.content.Context;
 import android.hardware.SensorEvent;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 
 /** An classifier trying to determine whether it is a human interacting with the phone or not. */
 class HumanInteractionClassifier extends Classifier {
 
-  private static final String CONFIG_ANSWER_FALSE_TOUCH_DETECTION_ENABLED =
-      "answer_false_touch_detection_enabled";
-
   private final StrokeClassifier[] strokeClassifiers;
   private final GestureClassifier[] gestureClassifiers;
   private final HistoryEvaluator historyEvaluator;
-  private final boolean enabled;
 
   HumanInteractionClassifier(Context context) {
     DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -43,10 +38,6 @@ class HumanInteractionClassifier extends Classifier {
     float dpi = (displayMetrics.xdpi + displayMetrics.ydpi) / 2.0f;
     classifierData = new ClassifierData(dpi, displayMetrics.heightPixels);
     historyEvaluator = new HistoryEvaluator();
-    enabled =
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getBoolean(CONFIG_ANSWER_FALSE_TOUCH_DETECTION_ENABLED, true);
 
     strokeClassifiers =
         new StrokeClassifier[] {
@@ -133,7 +124,7 @@ class HumanInteractionClassifier extends Classifier {
   }
 
   public boolean isEnabled() {
-    return enabled;
+    return true;
   }
 
   @Override

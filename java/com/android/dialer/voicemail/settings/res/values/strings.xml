@@ -30,9 +30,6 @@
          [CHAR LIMIT=30] -->
   <string name="voicemail_notifications_preference_title">Notifications</string>
 
-  <!-- Internal key for a preference to change greeting -->
-  <string name="voicemail_change_greeting_key" translatable="false">voicemail_change_greeting_key</string>
-
   <!-- Title for changing voicemail greeting activity [CHAR LIMIT=40] -->
   <string name="voicemail_change_greeting_preference_title">Voicemail greeting</string>
 

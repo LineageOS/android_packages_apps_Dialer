@@ -28,7 +28,6 @@ import android.telephony.TelephonyManager;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.voicemail.PinChanger;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
@@ -96,17 +95,11 @@ public class VoicemailClientImpl implements VoicemailClient {
 
   @Override
   public boolean isVoicemailArchiveAvailable(Context context) {
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean(ALLOW_VOICEMAIL_ARCHIVE, false)) {
-      LogUtil.i(
-          "VoicemailClientImpl.isVoicemailArchiveAllowed",
-          "feature disabled by config: %s",
-          ALLOW_VOICEMAIL_ARCHIVE);
-      return false;
-    }
-
-    return true;
+    LogUtil.i(
+        "VoicemailClientImpl.isVoicemailArchiveAllowed",
+        "feature disabled by config: %s",
+        ALLOW_VOICEMAIL_ARCHIVE);
+    return false;
   }
 
   @Override
@@ -118,68 +111,23 @@ public class VoicemailClientImpl implements VoicemailClient {
   @Override
   public boolean isVoicemailTranscriptionAvailable(
       Context context, PhoneAccountHandle phoneAccountHandle) {
-    if (phoneAccountHandle == null) {
-      LogUtil.i(
-          "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "phone account handle is null");
-    }
-
-    if (!isVoicemailEnabled(context, phoneAccountHandle)) {
-      LogUtil.i(
-          "VoicemailClientImpl.isVoicemailTranscriptionAvailable",
-          "visual voicemail is not enabled");
-      return false;
-    }
-
-    if (!isActivated(context, phoneAccountHandle)) {
-      LogUtil.i(
-          "VoicemailClientImpl.isVoicemailTranscriptionAvailable",
-          "visual voicemail is not activated");
-      return false;
-    }
-
-    TranscriptionConfigProvider provider = new TranscriptionConfigProvider(context);
-    if (!provider.isVoicemailTranscriptionAvailable()) {
-      LogUtil.i(
-          "VoicemailClientImpl.isVoicemailTranscriptionAvailable", "feature disabled by config");
-      return false;
-    }
-
-    return true;
+    return false;
   }
 
   @Override
   public boolean isVoicemailTranscriptionEnabled(Context context, PhoneAccountHandle account) {
-    return isVoicemailTranscriptionAvailable(context, account)
-        && VisualVoicemailSettingsUtil.isVoicemailTranscriptionEnabled(context, account);
+    return false;
   }
 
   @Override
   public boolean isVoicemailDonationAvailable(
       Context context, PhoneAccountHandle phoneAccountHandle) {
-    if (!isVoicemailTranscriptionAvailable(context, phoneAccountHandle)) {
-      LogUtil.i("VoicemailClientImpl.isVoicemailDonationAvailable", "transcription not available");
-      return false;
-    }
-
-    if (!isVoicemailTranscriptionEnabled(context, phoneAccountHandle)) {
-      LogUtil.i("VoicemailClientImpl.isVoicemailDonationAvailable", "transcription not enabled");
-      return false;
-    }
-
-    TranscriptionConfigProvider provider = new TranscriptionConfigProvider(context);
-    if (!provider.isVoicemailDonationAvailable()) {
-      LogUtil.i("VoicemailClientImpl.isVoicemailDonationAvailable", "feature disabled by config");
-      return false;
-    }
-
-    return true;
+    return false;
   }
 
   @Override
   public boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account) {
-    return isVoicemailTranscriptionEnabled(context, account)
-        && isVoicemailDonationAvailable(context, account)
-        && VisualVoicemailSettingsUtil.isVoicemailDonationEnabled(context, account);
+    return false;
   }
 
   @Override

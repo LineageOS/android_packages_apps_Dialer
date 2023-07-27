@@ -36,7 +36,6 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
@@ -71,7 +70,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   private VoicemailClient voicemailClient;
   // Settings that are independent of the carrier configurations
   private Preference voicemailNotificationPreference;
-  private Preference changeGreetingPreference;
   private PreferenceScreen advancedSettingsPreference;
   // Settings that are supported by dialer only if the carrier configurations are valid.
   private SwitchPreference visualVoicemailPreference;
@@ -106,7 +104,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     setupVisualVoicemailPreferences();
 
     setupNotificationsPreference();
-    setupChangeGreetingPreference();
     setupAdvancedSettingsPreference();
   }
 
@@ -231,9 +228,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         findPreference(getString(R.string.voicemail_notifications_key));
     voicemailNotificationPreference.setOrder(VMSettingOrdering.NOTIFICATIONS);
 
-    changeGreetingPreference = findPreference(getString(R.string.voicemail_change_greeting_key));
-    changeGreetingPreference.setOrder(VMSettingOrdering.CHANGE_GREETING);
-
     advancedSettingsPreference =
         (PreferenceScreen) findPreference(getString(R.string.voicemail_advanced_settings_key));
     advancedSettingsPreference.setOrder(VMSettingOrdering.ADVANCED_SETTING);
@@ -307,18 +301,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
             return false;
           }
         });
-  }
-
-  private void setupChangeGreetingPreference() {
-    if (!ConfigProviderComponent.get(getContext())
-        .getConfigProvider()
-        .getBoolean("voicemail_change_greeting_enabled", false)) {
-      getPreferenceScreen().removePreference(changeGreetingPreference);
-      return;
-    }
-
-    Intent changeGreetingIntent = new Intent(getContext(), CurrentVoicemailGreetingActivity.class);
-    changeGreetingPreference.setIntent(changeGreetingIntent);
   }
 
   private void setupAdvancedSettingsPreference() {
@@ -524,8 +506,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     VMSettingOrdering.VOICEMAIL_TRANSCRIPTION_DONATION,
     VMSettingOrdering.VOICEMAIL_CHANGE_PIN,
     VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE,
-    VMSettingOrdering.ADVANCED_SETTING,
-    VMSettingOrdering.CHANGE_GREETING
+    VMSettingOrdering.ADVANCED_SETTING
   })
   private @interface VMSettingOrdering {
     int NOTIFICATIONS = 1;
@@ -535,6 +516,5 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     int VOICEMAIL_CHANGE_PIN = 5;
     int VOICEMAIL_AUTO_ARCHIVE = 6;
     int ADVANCED_SETTING = 7;
-    int CHANGE_GREETING = 8;
   }
 }
