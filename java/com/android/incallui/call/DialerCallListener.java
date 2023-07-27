@@ -31,8 +31,6 @@ public interface DialerCallListener {
 
   default void onDialerCallUpgradeToRtt(int rttRequestId) {}
 
-  default void onDialerCallSpeakEasyStateChange() {}
-
   void onDialerCallSessionModificationStateChange();
 
   void onWiFiToLteHandover();
