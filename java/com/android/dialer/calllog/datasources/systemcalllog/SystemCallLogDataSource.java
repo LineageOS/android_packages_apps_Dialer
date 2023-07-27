@@ -41,7 +41,6 @@ import com.android.dialer.calllog.observer.MarkDirtyObserver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
-import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.phonenumberproto.DialerPhoneNumberUtil;
@@ -267,7 +266,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
       int countryIsoColumn = cursor.getColumnIndexOrThrow(Calls.COUNTRY_ISO);
       int durationsColumn = cursor.getColumnIndexOrThrow(Calls.DURATION);
       int dataUsageColumn = cursor.getColumnIndexOrThrow(Calls.DATA_USAGE);
-      int transcriptionColumn = cursor.getColumnIndexOrThrow(Calls.TRANSCRIPTION);
       int voicemailUriColumn = cursor.getColumnIndexOrThrow(Calls.VOICEMAIL_URI);
       int isReadColumn = cursor.getColumnIndexOrThrow(Calls.IS_READ);
       int newColumn = cursor.getColumnIndexOrThrow(Calls.NEW);
@@ -300,7 +298,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         String countryIso = cursor.getString(countryIsoColumn);
         int duration = cursor.getInt(durationsColumn);
         int dataUsage = cursor.getInt(dataUsageColumn);
-        String transcription = cursor.getString(transcriptionColumn);
         String voicemailUri = cursor.getString(voicemailUriColumn);
         int isRead = cursor.getInt(isReadColumn);
         int isNew = cursor.getInt(newColumn);
@@ -345,12 +342,9 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         contentValues.put(AnnotatedCallLog.FEATURES, features);
         contentValues.put(AnnotatedCallLog.DURATION, duration);
         contentValues.put(AnnotatedCallLog.DATA_USAGE, dataUsage);
-        contentValues.put(AnnotatedCallLog.TRANSCRIPTION, transcription);
         contentValues.put(AnnotatedCallLog.VOICEMAIL_URI, voicemailUri);
 
         contentValues.put(AnnotatedCallLog.CALL_MAPPING_ID, String.valueOf(date));
-
-        setTranscriptionState(cursor, contentValues);
 
         if (existingAnnotatedCallLogIds.contains(id)) {
           mutations.update(id, contentValues);
@@ -379,14 +373,7 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         && ((features & Calls.FEATURES_VIDEO) != Calls.FEATURES_VIDEO);
   }
 
-  private void setTranscriptionState(Cursor cursor, ContentValues contentValues) {
-    int transcriptionStateColumn =
-        cursor.getColumnIndexOrThrow(VoicemailCompat.TRANSCRIPTION_STATE);
-    int transcriptionState = cursor.getInt(transcriptionStateColumn);
-    contentValues.put(VoicemailCompat.TRANSCRIPTION_STATE, transcriptionState);
-  }
-
-  private static final String[] PROJECTION_PRE_O =
+  private static final String[] PROJECTION =
       new String[] {
         Calls._ID,
         Calls.DATE,
@@ -397,7 +384,6 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         Calls.COUNTRY_ISO,
         Calls.DURATION,
         Calls.DATA_USAGE,
-        Calls.TRANSCRIPTION,
         Calls.VOICEMAIL_URI,
         Calls.IS_READ,
         Calls.NEW,
@@ -408,16 +394,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
         Calls.POST_DIAL_DIGITS
       };
 
-  private static final String[] PROJECTION_O_AND_LATER;
-
-  static {
-    List<String> projectionList = new ArrayList<>(Arrays.asList(PROJECTION_PRE_O));
-    projectionList.add(VoicemailCompat.TRANSCRIPTION_STATE);
-    PROJECTION_O_AND_LATER = projectionList.toArray(new String[projectionList.size()]);
-  }
-
   private String[] getProjection() {
-      return PROJECTION_O_AND_LATER;
+      return PROJECTION;
   }
 
   private static void handleDeletes(

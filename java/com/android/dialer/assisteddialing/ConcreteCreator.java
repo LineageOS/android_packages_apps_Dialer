@@ -16,19 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.content.Context;
-import android.os.Build;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v4.os.UserManagerCompat;
-import android.telephony.TelephonyManager;
-
-import com.android.dialer.R;
-import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProvider;
-import com.android.dialer.configprovider.ConfigProviderComponent;
-import com.android.dialer.strictmode.StrictModeUtils;
-
 /**
  * A Creator for AssistedDialingMediators.
  *
@@ -40,25 +27,16 @@ public final class ConcreteCreator {
   /**
    * Creates a new AssistedDialingMediator
    *
-   * @param telephonyManager The telephony manager used to determine user location.
-   * @param context The context used to determine whether or not a provided number is an emergency
-   *     number.
    * @return An AssistedDialingMediator
    */
-  public static AssistedDialingMediator createNewAssistedDialingMediator(
-      @NonNull TelephonyManager telephonyManager, @NonNull Context context) {
+  public static AssistedDialingMediator createNewAssistedDialingMediator() {
     return new AssistedDialingMediatorStub();
   }
 
   /**
    * Returns a CountryCodeProvider responsible for providing countries eligible for assisted Dialing
    */
-  public static CountryCodeProvider getCountryCodeProvider(ConfigProvider configProvider) {
-    if (configProvider == null) {
-      LogUtil.i("ConcreteCreator.getCountryCodeProvider", "provided configProvider was null");
-      throw new NullPointerException("Provided configProvider was null");
-    }
-
-    return new CountryCodeProvider(configProvider);
+  public static CountryCodeProvider getCountryCodeProvider() {
+    return new CountryCodeProvider();
   }
 }
