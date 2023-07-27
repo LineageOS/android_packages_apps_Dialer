@@ -60,7 +60,6 @@ import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
@@ -346,9 +345,7 @@ public class CallComposerActivity extends AppCompatActivity
 
   @VisibleForTesting
   public long getSessionStartedTimeoutMillis() {
-    return ConfigProviderComponent.get(this)
-        .getConfigProvider()
-        .getLong("ec_session_started_timeout", 10_000);
+    return 10_000;
   }
 
   @Override
@@ -443,11 +440,7 @@ public class CallComposerActivity extends AppCompatActivity
 
     getEnrichedCallManager().sendCallComposerData(sessionId, data);
     maybeShowPrivacyToast(data);
-    if (data.hasImageData()
-        && ConfigProviderComponent.get(this)
-            .getConfigProvider()
-            .getBoolean("enable_delayed_ec_images", true)
-        && !TelecomUtil.isInManagedCall(this)) {
+    if (data.hasImageData() && !TelecomUtil.isInManagedCall(this)) {
       timeoutHandler.postDelayed(placeTelecomCallRunnable, getRCSTimeoutMillis());
       startActivity(
           CallPendingActivity.getIntent(
@@ -481,9 +474,7 @@ public class CallComposerActivity extends AppCompatActivity
 
   @VisibleForTesting
   public long getRCSTimeoutMillis() {
-    return ConfigProviderComponent.get(this)
-        .getConfigProvider()
-        .getLong("ec_image_upload_timeout", 15_000);
+    return 15_000;
   }
 
   private void placeTelecomCall() {

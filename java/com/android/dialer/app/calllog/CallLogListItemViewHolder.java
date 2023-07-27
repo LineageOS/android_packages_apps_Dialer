@@ -76,7 +76,6 @@ import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
@@ -152,8 +151,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
   public View callButtonView;
   public View videoCallButtonView;
-  public View setUpVideoButtonView;
-  public View inviteVideoButtonView;
   public View createNewContactButtonView;
   public View addToExistingContactButtonView;
   public View sendMessageView;
@@ -317,12 +314,7 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     primaryActionButtonView.setOnClickListener(this);
     primaryActionButtonView.setOnLongClickListener(this);
     primaryActionView.setOnClickListener(this.expandCollapseListener);
-    if (this.voicemailPlaybackPresenter != null
-        && ConfigProviderComponent.get(this.context)
-            .getConfigProvider()
-            .getBoolean(
-                CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT,
-                CallLogAdapter.ENABLE_CALL_LOG_MULTI_SELECT_FLAG)) {
+    if (this.voicemailPlaybackPresenter != null) {
       primaryActionView.setOnLongClickListener(longPressListener);
       quickContactView.setOnLongClickListener(longPressListener);
       quickContactView.setMulitSelectListeners(
@@ -361,53 +353,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         (ImageView) view.findViewById(R.id.primary_action_button));
   }
 
-  public static CallLogListItemViewHolder createForTest(Context context) {
-    return createForTest(context, null, null, new CallLogCache(context));
-  }
-
-  public static CallLogListItemViewHolder createForTest(
-      Context context,
-      View.OnClickListener expandCollapseListener,
-      VoicemailPlaybackPresenter voicemailPlaybackPresenter,
-      CallLogCache callLogCache) {
-    Resources resources = context.getResources();
-    PhoneCallDetailsHelper phoneCallDetailsHelper =
-        new PhoneCallDetailsHelper(context, resources, callLogCache);
-
-    CallLogListItemViewHolder viewHolder =
-        new CallLogListItemViewHolder(
-            context,
-            null,
-            expandCollapseListener /* expandCollapseListener */,
-            null,
-            null,
-            callLogCache,
-            new CallLogListItemHelper(phoneCallDetailsHelper, resources, callLogCache),
-            voicemailPlaybackPresenter,
-            LayoutInflater.from(context).inflate(R.layout.call_log_list_item, null),
-            new DialerQuickContactBadge(context),
-            new View(context),
-            PhoneCallDetailsViews.createForTest(context),
-            new CardView(context),
-            new TextView(context),
-            new ImageView(context));
-    viewHolder.detailsButtonView = new TextView(context);
-    viewHolder.actionsView = new View(context);
-    viewHolder.voicemailPlaybackView = new VoicemailPlaybackLayout(context);
-    viewHolder.workIconView = new ImageButton(context);
-    viewHolder.checkBoxView = new ImageButton(context);
-    return viewHolder;
-  }
-
   @Override
   public boolean onMenuItemClick(MenuItem item) {
     int resId = item.getItemId();
     if (resId == R.id.context_menu_copy_to_clipboard) {
       ClipboardUtils.copyText(context, null, number, true);
-      return true;
-    } else if (resId == R.id.context_menu_copy_transcript_to_clipboard) {
-      ClipboardUtils.copyText(
-          context, null, phoneCallDetailsViews.voicemailTranscriptionView.getText(), true);
       return true;
     } else if (resId == R.id.context_menu_edit_before_call) {
       final Intent intent = new Intent(Intent.ACTION_DIAL, CallUtil.getCallUri(number));
@@ -458,12 +408,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
       videoCallButtonView = actionsView.findViewById(R.id.video_call_action);
       videoCallButtonView.setOnClickListener(this);
-
-      setUpVideoButtonView = actionsView.findViewById(R.id.set_up_video_action);
-      setUpVideoButtonView.setOnClickListener(this);
-
-      inviteVideoButtonView = actionsView.findViewById(R.id.invite_video_action);
-      inviteVideoButtonView.setOnClickListener(this);
 
       createNewContactButtonView = actionsView.findViewById(R.id.create_new_contact_action);
       createNewContactButtonView.setOnClickListener(this);
@@ -596,8 +540,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     // This saves us having to remember to set it to GONE in multiple places.
     callButtonView.setVisibility(View.GONE);
     videoCallButtonView.setVisibility(View.GONE);
-    setUpVideoButtonView.setVisibility(View.GONE);
-    inviteVideoButtonView.setVisibility(View.GONE);
 
     // For an emergency number, show "Call details" only.
     if (PhoneNumberHelper.isLocalEmergencyNumber(context, number)) {
@@ -703,43 +645,11 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
           break;
         }
 
-        boolean identifiedSpamCall = isSpamFeatureEnabled && isSpam;
         if (duo.isReachable(context, number)) {
           videoCallButtonView.setTag(
               IntentProvider.getDuoVideoIntentProvider(number, isNonContactEntry(info)));
           videoCallButtonView.setVisibility(View.VISIBLE);
           CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
-        } else if (duo.isActivated(context) && !identifiedSpamCall) {
-          if (ConfigProviderComponent.get(context)
-              .getConfigProvider()
-              .getBoolean("enable_call_log_duo_invite_button", false)) {
-            inviteVideoButtonView.setTag(IntentProvider.getDuoInviteIntentProvider(number));
-            inviteVideoButtonView.setVisibility(View.VISIBLE);
-            Logger.get(context).logImpression(DialerImpression.Type.DUO_CALL_LOG_INVITE_SHOWN);
-            CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
-          }
-        } else if (duo.isEnabled(context) && !identifiedSpamCall) {
-          if (!duo.isInstalled(context)) {
-            if (ConfigProviderComponent.get(context)
-                .getConfigProvider()
-                .getBoolean("enable_call_log_install_duo_button", false)) {
-              setUpVideoButtonView.setTag(IntentProvider.getInstallDuoIntentProvider());
-              setUpVideoButtonView.setVisibility(View.VISIBLE);
-              Logger.get(context)
-                  .logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_INSTALL_SHOWN);
-              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
-            }
-          } else {
-            if (ConfigProviderComponent.get(context)
-                .getConfigProvider()
-                .getBoolean("enable_call_log_activate_duo_button", false)) {
-              setUpVideoButtonView.setTag(IntentProvider.getSetUpDuoIntentProvider());
-              setUpVideoButtonView.setVisibility(View.VISIBLE);
-              Logger.get(context)
-                  .logImpression(DialerImpression.Type.DUO_CALL_LOG_SET_UP_ACTIVATE_SHOWN);
-              CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
-            }
-          }
         }
         break;
       default:

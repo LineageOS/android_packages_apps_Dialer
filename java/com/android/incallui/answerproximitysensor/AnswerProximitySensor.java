@@ -22,7 +22,6 @@ import android.os.PowerManager;
 import android.os.Trace;
 import android.view.Display;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.DialerCallListener;
 import com.android.incallui.call.state.DialerCallState;
@@ -37,11 +36,6 @@ import com.android.incallui.R;
 public class AnswerProximitySensor
     implements DialerCallListener, AnswerProximityWakeLock.ScreenOnListener {
 
-  private static final String CONFIG_ANSWER_PROXIMITY_SENSOR_ENABLED =
-      "answer_proximity_sensor_enabled";
-  private static final String CONFIG_ANSWER_PSEUDO_PROXIMITY_WAKE_LOCK_ENABLED =
-      "answer_pseudo_proximity_wake_lock_enabled";
-
   private final DialerCall call;
   private final AnswerProximityWakeLock answerProximityWakeLock;
 
@@ -51,14 +45,6 @@ public class AnswerProximitySensor
     // handled by the general ProximitySensor code.
     if (call.getState() != DialerCallState.INCOMING) {
       LogUtil.i("AnswerProximitySensor.shouldUse", "call state is not incoming");
-      Trace.endSection();
-      return false;
-    }
-
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean(CONFIG_ANSWER_PROXIMITY_SENSOR_ENABLED, true)) {
-      LogUtil.i("AnswerProximitySensor.shouldUse", "disabled by config");
       Trace.endSection();
       return false;
     }
@@ -92,17 +78,7 @@ public class AnswerProximitySensor
     this.call = call;
 
     LogUtil.i("AnswerProximitySensor.constructor", "acquiring lock");
-    if (ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean(CONFIG_ANSWER_PSEUDO_PROXIMITY_WAKE_LOCK_ENABLED, true)) {
-      answerProximityWakeLock = new PseudoProximityWakeLock(context, pseudoScreenState);
-    } else {
-      // TODO(twyen): choose a wake lock implementation base on framework/device.
-      // These bugs requires the PseudoProximityWakeLock workaround:
-      // a bug Proximity sensor not working on M
-      // a bug fautly touch input when screen is off on marlin/sailfish
-      answerProximityWakeLock = new SystemProximityWakeLock(context);
-    }
+    answerProximityWakeLock = new PseudoProximityWakeLock(context, pseudoScreenState);
     answerProximityWakeLock.setScreenOnListener(this);
     answerProximityWakeLock.acquire();
 
