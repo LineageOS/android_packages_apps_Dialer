@@ -19,7 +19,6 @@ package com.android.dialer.precall.impl;
 import android.content.Context;
 import android.telephony.PhoneNumberUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.precall.impl.MalformedNumberRectifier.MalformedNumberHandler;
 import com.google.common.base.Optional;
 
@@ -37,11 +36,6 @@ class UkRegionPrefixInInternationalFormatHandler implements MalformedNumberHandl
 
   @Override
   public Optional<String> handle(Context context, String number) {
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("uk_region_prefix_in_international_format_fix_enabled", true)) {
-      return Optional.absent();
-    }
     if (!PhoneNumberUtils.normalizeNumber(number).startsWith(MALFORMED_PREFIX)) {
       return Optional.absent();
     }

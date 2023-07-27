@@ -46,7 +46,6 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
@@ -98,19 +97,11 @@ public class CallCardPresenter
    */
   private static final long ACCESSIBILITY_ANNOUNCEMENT_DELAY_MILLIS = 500;
 
-  /** Flag to allow the user's current location to be shown during emergency calls. */
-  private static final String CONFIG_ENABLE_EMERGENCY_LOCATION = "config_enable_emergency_location";
-
-  private static final boolean CONFIG_ENABLE_EMERGENCY_LOCATION_DEFAULT = true;
-
   /**
    * Make it possible to not get location during an emergency call if the battery is too low, since
    * doing so could trigger gps and thus potentially cause the phone to die in the middle of the
    * call.
    */
-  private static final String CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION =
-      "min_battery_percent_for_emergency_location";
-
   private static final long CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT = 10;
 
   private final Context context;
@@ -764,12 +755,6 @@ public class CallCardPresenter
   }
 
   private boolean shouldShowLocation() {
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean(CONFIG_ENABLE_EMERGENCY_LOCATION, CONFIG_ENABLE_EMERGENCY_LOCATION_DEFAULT)) {
-      LogUtil.i("CallCardPresenter.getLocationFragment", "disabled by config.");
-      return false;
-    }
     if (!isPotentialEmergencyCall()) {
       LogUtil.i("CallCardPresenter.getLocationFragment", "shouldn't show location");
       return false;
@@ -836,12 +821,7 @@ public class CallCardPresenter
     int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
     int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
     float batteryPercent = (100f * level) / scale;
-    long threshold =
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getLong(
-                CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION,
-                CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT);
+    long threshold = CONFIG_MIN_BATTERY_PERCENT_FOR_EMERGENCY_LOCATION_DEFAULT;
     LogUtil.i(
         "CallCardPresenter.isBatteryTooLowForEmergencyLocation",
         "percent charged: " + batteryPercent + ", min required charge: " + threshold);
