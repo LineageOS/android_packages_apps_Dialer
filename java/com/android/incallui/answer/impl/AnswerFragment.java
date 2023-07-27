@@ -86,8 +86,6 @@ import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.incalluilock.InCallUiLock;
 import com.android.incallui.sessiondata.AvatarPresenter;
 import com.android.incallui.sessiondata.MultimediaFragment;
-import com.android.incallui.speakeasy.Annotations.SpeakEasyChipResourceId;
-import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.incallui.util.AccessibilityUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.videotech.utils.VideoUtils;
@@ -123,8 +121,6 @@ public class AnswerFragment extends Fragment
 
   @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_IS_SELF_MANAGED_CAMERA = "is_self_managed_camera";
-
-  static final String ARG_ALLOW_SPEAK_EASY = "allow_speak_easy";
 
   private static final String STATE_HAS_ANIMATED_ENTRY = "hasAnimated";
 
@@ -225,11 +221,6 @@ public class AnswerFragment extends Fragment
       view.setImageResource(icon);
       view.setContentDescription(view.getContext().getText(contentDescription));
     }
-  }
-
-  private void performSpeakEasy(View unused) {
-    answerScreenDelegate.onSpeakEasyCall();
-    buttonAcceptClicked = true;
   }
 
   private void performAnswerAndRelease() {
@@ -365,8 +356,7 @@ public class AnswerFragment extends Fragment
       boolean isVideoUpgradeRequest,
       boolean isSelfManagedCamera,
       boolean allowAnswerAndRelease,
-      boolean hasCallOnHold,
-      boolean allowSpeakEasy) {
+      boolean hasCallOnHold) {
     Bundle bundle = new Bundle();
     bundle.putString(ARG_CALL_ID, Assert.isNotNull(callId));
     bundle.putBoolean(ARG_IS_RTT_CALL, isRttCall);
@@ -375,7 +365,6 @@ public class AnswerFragment extends Fragment
     bundle.putBoolean(ARG_IS_SELF_MANAGED_CAMERA, isSelfManagedCamera);
     bundle.putBoolean(ARG_ALLOW_ANSWER_AND_RELEASE, allowAnswerAndRelease);
     bundle.putBoolean(ARG_HAS_CALL_ON_HOLD, hasCallOnHold);
-    bundle.putBoolean(ARG_ALLOW_SPEAK_EASY, allowSpeakEasy);
 
     AnswerFragment instance = new AnswerFragment();
     instance.setArguments(bundle);
@@ -466,34 +455,12 @@ public class AnswerFragment extends Fragment
 
   /** Initialize chip buttons */
   private void initChips() {
-
-    if (!allowSpeakEasy()) {
-      chipContainer.setVisibility(View.GONE);
-      return;
-    }
-    chipContainer.setVisibility(View.VISIBLE);
-
-    @SpeakEasyChipResourceId
-    Optional<Integer> chipLayoutOptional = SpeakEasyComponent.get(getContext()).speakEasyChip();
-    if (chipLayoutOptional.isPresent()) {
-
-      LinearLayout chipLayout =
-          (LinearLayout) getLayoutInflater().inflate(chipLayoutOptional.get(), null);
-
-      chipLayout.setOnClickListener(this::performSpeakEasy);
-
-      chipContainer.addView(chipLayout);
-    }
+    chipContainer.setVisibility(View.GONE);
   }
 
   @Override
   public boolean allowAnswerAndRelease() {
     return getArguments().getBoolean(ARG_ALLOW_ANSWER_AND_RELEASE);
-  }
-
-  @Override
-  public boolean allowSpeakEasy() {
-    return getArguments().getBoolean(ARG_ALLOW_SPEAK_EASY);
   }
 
   private boolean hasCallOnHold() {

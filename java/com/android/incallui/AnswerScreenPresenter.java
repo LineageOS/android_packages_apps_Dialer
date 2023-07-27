@@ -94,17 +94,7 @@ public class AnswerScreenPresenter
 
   @Override
   public void onAnswer(boolean answerVideoAsAudio) {
-
-    DialerCall incomingCall = CallList.getInstance().getIncomingCall();
-    InCallActivity inCallActivity =
-        (InCallActivity) answerScreen.getAnswerScreenFragment().getActivity();
-    ListenableFuture<Void> answerPrecondition;
-
-    if (incomingCall != null && inCallActivity != null) {
-      answerPrecondition = inCallActivity.getSpeakEasyCallManager().onNewIncomingCall(incomingCall);
-    } else {
-      answerPrecondition = Futures.immediateFuture(null);
-    }
+    ListenableFuture<Void> answerPrecondition = Futures.immediateFuture(null);
 
     Futures.addCallback(
         answerPrecondition,
@@ -165,17 +155,6 @@ public class AnswerScreenPresenter
       call.reject(false /* rejectWithMessage */, null);
     }
     addTimeoutCheck();
-  }
-
-  @Override
-  public void onSpeakEasyCall() {
-    LogUtil.enterBlock("AnswerScreenPresenter.onSpeakEasyCall");
-    DialerCall incomingCall = CallList.getInstance().getIncomingCall();
-    if (incomingCall == null) {
-      LogUtil.i("AnswerScreenPresenter.onSpeakEasyCall", "incomingCall == null");
-      return;
-    }
-    incomingCall.setIsSpeakEasyCall(true);
   }
 
   @Override

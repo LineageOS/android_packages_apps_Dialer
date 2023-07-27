@@ -44,7 +44,6 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
       "has_active_voicemail_provider";
   private SharedPreferences prefs;
   private boolean hasActiveVoicemailProvider;
-  private CallLogQueryHandler callLogQueryHandler;
   private Context context;
   private Callback callback;
 
@@ -53,23 +52,6 @@ public class VisualVoicemailEnabledChecker implements CallLogQueryHandler.Listen
     this.callback = callback;
     prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
     hasActiveVoicemailProvider = prefs.getBoolean(PREF_KEY_HAS_ACTIVE_VOICEMAIL_PROVIDER, false);
-  }
-
-  /**
-   * @return whether visual voicemail is enabled. Result is cached, call asyncUpdate() to update the
-   *     result.
-   */
-  public boolean isVisualVoicemailEnabled() {
-    return hasActiveVoicemailProvider;
-  }
-
-  /**
-   * Perform an async query into the system to check the status of visual voicemail. If the status
-   * has changed, Callback.onVisualVoicemailEnabledStatusChanged() will be called.
-   */
-  public void asyncUpdate() {
-    callLogQueryHandler = new CallLogQueryHandler(context, context.getContentResolver(), this);
-    callLogQueryHandler.fetchVoicemailStatus();
   }
 
   @Override
