@@ -38,7 +38,6 @@ import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedConta
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.strictmode.StrictModeUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -188,7 +187,7 @@ public class CallerInfoAsyncQuery {
       OnQueryCompleteListener listener,
       Object cookie) {
     Trace.beginSection("CallerInfoAsyncQuery.startOtherDirectoriesQuery");
-    long[] directoryIds = StrictModeUtils.bypass(() -> getDirectoryIds(context));
+    long[] directoryIds = getDirectoryIds(context);
     int size = directoryIds.length;
     if (size == 0) {
       Trace.endSection();

@@ -46,7 +46,6 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutRefresher;
-import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.common.collect.ComparisonChain;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -513,7 +512,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
       if (changed && dropEntryIndex < PIN_LIMIT) {
         ArrayList<ContentProviderOperation> operations =
             getReflowedPinningOperations(contactEntries, draggedEntryIndex, dropEntryIndex);
-        StrictModeUtils.bypass(() -> updateDatabaseWithPinnedPositions(operations));
+        updateDatabaseWithPinnedPositions(operations);
       }
       draggedEntry = null;
     }
@@ -540,8 +539,7 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     final ContentValues values = new ContentValues(2);
     values.put(Contacts.STARRED, false);
     values.put(Contacts.PINNED, PinnedPositions.DEMOTED);
-    StrictModeUtils.bypass(
-        () -> context.getContentResolver().update(contactUri, values, null, null));
+    context.getContentResolver().update(contactUri, values, null, null);
   }
 
   /**

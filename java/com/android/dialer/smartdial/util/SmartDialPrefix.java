@@ -566,15 +566,6 @@ public class SmartDialPrefix {
     return result;
   }
 
-  /**
-   * Returns whether the user is in a region that uses Nanp format based on the sim location.
-   *
-   * @return Whether user is in Nanp region.
-   */
-  public static boolean getUserInNanpRegion() {
-    return userInNanpRegion;
-  }
-
   /** Explicitly setting the user Nanp to the given boolean */
   @VisibleForTesting
   public static void setUserInNanpRegion(boolean userInNanpRegion) {
