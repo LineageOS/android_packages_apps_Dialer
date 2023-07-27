@@ -34,7 +34,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
-import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonelookup.PhoneLookup;
@@ -73,7 +72,6 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   private final SharedPreferences sharedPreferences;
   private final ListeningExecutorService backgroundExecutorService;
   private final ListeningExecutorService lightweightExecutorService;
-  private final ConfigProvider configProvider;
   private final MissingPermissionsOperations missingPermissionsOperations;
 
   @Nullable private Long currentLastTimestampProcessed;
@@ -84,13 +82,11 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
       @Unencrypted SharedPreferences sharedPreferences,
       @BackgroundExecutor ListeningExecutorService backgroundExecutorService,
       @LightweightExecutor ListeningExecutorService lightweightExecutorService,
-      ConfigProvider configProvider,
       MissingPermissionsOperations missingPermissionsOperations) {
     this.appContext = appContext;
     this.sharedPreferences = sharedPreferences;
     this.backgroundExecutorService = backgroundExecutorService;
     this.lightweightExecutorService = lightweightExecutorService;
-    this.configProvider = configProvider;
     this.missingPermissionsOperations = missingPermissionsOperations;
   }
 
@@ -971,6 +967,6 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
    * if there are too many we fall back to querying CP2 at render time.
    */
   private long getMaxSupportedInvalidNumbers() {
-    return configProvider.getLong("cp2_phone_lookup_max_invalid_numbers", 5);
+    return 5;
   }
 }

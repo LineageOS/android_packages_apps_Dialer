@@ -30,7 +30,7 @@ public abstract class PromotionModule {
 
   @Provides
   static ImmutableList<Promotion> providePriorityPromotionList(
-      RttPromotion rttPromotion, DuoPromotion duoPromotion) {
-    return ImmutableList.of(rttPromotion, duoPromotion);
+      RttPromotion rttPromotion) {
+    return ImmutableList.of(rttPromotion);
   }
 }

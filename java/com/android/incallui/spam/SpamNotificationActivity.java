@@ -43,8 +43,6 @@ import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.spam.SpamComponent;
-import com.android.dialer.spam.SpamSettings;
-import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 import com.android.incallui.call.DialerCall;
 
 /** Creates the after call notification dialogs. */
@@ -60,12 +58,6 @@ public class SpamNotificationActivity extends FragmentActivity {
   /** Action to mark a number as not spam. */
   static final String ACTION_MARK_NUMBER_AS_NOT_SPAM =
       "com.android.incallui.spam.ACTION_MARK_NUMBER_AS_NOT_SPAM";
-
-  static final String ACTION_ENABLE_SPAM_BLOCKING =
-      "com.android.incallui.spam.ACTION_ENABLE_SPAM_BLOCKING";
-
-  static final String ACTION_SHOW_SPAM_BLOCKING_PROMO_DIALOG =
-      "com.android.incallui.spam.ACTION_SHOW_SPAM_BLOCKING_PROMO_DIALOG";
 
   private static final String TAG = "SpamNotifications";
   private static final String EXTRA_NOTIFICATION_TAG = "notification_tag";
@@ -87,8 +79,6 @@ public class SpamNotificationActivity extends FragmentActivity {
         }
       };
   private FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
-  private SpamSettings spamSettings;
-  private SpamBlockingPromoHelper spamBlockingPromoHelper;
 
   /**
    * Creates an intent to start this activity.
@@ -163,8 +153,6 @@ public class SpamNotificationActivity extends FragmentActivity {
     super.onCreate(savedInstanceState);
     setFinishOnTouchOutside(true);
     filteredNumberAsyncQueryHandler = new FilteredNumberAsyncQueryHandler(this);
-    spamSettings = SpamComponent.get(this).spamSettings();
-    spamBlockingPromoHelper = new SpamBlockingPromoHelper(getApplicationContext(), spamSettings);
     cancelNotification();
   }
 
@@ -198,9 +186,6 @@ public class SpamNotificationActivity extends FragmentActivity {
         } else {
           showNonSpamDialog();
         }
-        break;
-      case ACTION_SHOW_SPAM_BLOCKING_PROMO_DIALOG:
-        showSpamBlockingPromoDialog();
         break;
       default: // fall out
     }
@@ -512,35 +497,6 @@ public class SpamNotificationActivity extends FragmentActivity {
   }
 
   private void maybeShowSpamBlockingPromoAndFinish() {
-    if (!spamBlockingPromoHelper.shouldShowAfterCallSpamBlockingPromo()) {
-      finish();
-      return;
-    }
-    Logger.get(this)
-        .logImpression(DialerImpression.Type.SPAM_BLOCKING_AFTER_CALL_NOTIFICATION_PROMO_SHOWN);
-    showSpamBlockingPromoDialog();
-  }
-
-  private void showSpamBlockingPromoDialog() {
-    spamBlockingPromoHelper.showSpamBlockingPromoDialog(
-        getSupportFragmentManager(),
-        () -> {
-          Logger.get(this)
-              .logImpression(
-                  DialerImpression.Type
-                      .SPAM_BLOCKING_ENABLED_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
-          spamSettings.modifySpamBlockingSetting(
-              true,
-              success -> {
-                if (!success) {
-                  Logger.get(this)
-                      .logImpression(
-                          DialerImpression.Type
-                              .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
-                }
-                spamBlockingPromoHelper.showModifySettingOnCompleteToast(success);
-              });
-        },
-        dialog -> finish());
+    finish();
   }
 }
