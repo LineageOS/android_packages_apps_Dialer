@@ -16,7 +16,6 @@
 
 package com.android.voicemail.impl.protocol;
 
-import android.content.Context;
 import android.net.Network;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.ArrayMap;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.voicemail.impl.ActivationTask;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.OmtpEvents;
@@ -216,7 +214,7 @@ public class Vvm3Subscriber {
       String gatewayUrl = getSelfProvisioningGateway();
       String selfProvisionResponse = getSelfProvisionResponse(gatewayUrl);
       String subscribeLink =
-          findSubscribeLink(getSubscribeLinkPatterns(helper.getContext()), selfProvisionResponse);
+          findSubscribeLink(getSubscribeLinkPatterns(), selfProvisionResponse);
       clickSubscribeLink(subscribeLink);
     } catch (ProvisioningException e) {
       VvmLog.e(TAG, e.toString());
@@ -321,12 +319,8 @@ public class Vvm3Subscriber {
   }
 
   @VisibleForTesting
-  static List<Pattern> getSubscribeLinkPatterns(Context context) {
-    String patternsJsonString =
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getString(
-                VVM3_SUBSCRIBE_LINK_PATTERNS_JSON_ARRAY, VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS);
+  static List<Pattern> getSubscribeLinkPatterns() {
+    String patternsJsonString = VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS;
     List<Pattern> patterns = new ArrayList<>();
     try {
       JSONArray patternsArray = new JSONArray(patternsJsonString);

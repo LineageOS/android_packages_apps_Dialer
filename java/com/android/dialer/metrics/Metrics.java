@@ -23,7 +23,6 @@ import android.support.annotation.Nullable;
 public interface Metrics {
 
   // Events related to refreshing the annotated call log.
-  String NEW_CALL_LOG_COALESCE = "NewCallLog.Coalesce";
   String ANNOTATED_CALL_LOG_NOT_DIRTY = "RefreshAnnotatedCallLogReceiver.NotDirty";
   String ANNOTATED_CALL_LOG_CHANGES_NEEDED = "RefreshAnnotatedCallLogReceiver.ChangesNeeded";
   String ANNOTATED_LOG_NO_CHANGES_NEEDED = "RefreshAnnotatedCallLogReceiver.NoChangesNeeded";

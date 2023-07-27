@@ -45,14 +45,9 @@ public class CallContactActivity extends TransactionSafeActivity
     super.onCreate(savedInstanceState);
 
     if ("com.android.dialer.shortcuts.CALL_CONTACT".equals(getIntent().getAction())) {
-      if (Shortcuts.areDynamicShortcutsEnabled(this)) {
         LogUtil.i("CallContactActivity.onCreate", "shortcut clicked");
         contactUri = getIntent().getData();
         makeCall();
-      } else {
-        LogUtil.i("CallContactActivity.onCreate", "dynamic shortcuts disabled");
-        finish();
-      }
     }
   }
 

@@ -24,7 +24,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
-import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -55,7 +54,7 @@ final class Constraints {
     }
 
     this.countryCodeProvider = countryCodeProvider;
-    this.phoneNumberUtil = StrictModeUtils.bypass(() -> PhoneNumberUtil.getInstance());
+    this.phoneNumberUtil = PhoneNumberUtil.getInstance();
   }
 
   /**
@@ -144,18 +143,15 @@ final class Constraints {
    */
   private Optional<PhoneNumber> parsePhoneNumber(
       @NonNull String numberToParse, @NonNull String userHomeCountryCode) {
-    return StrictModeUtils.bypass(
-        () -> {
-          try {
-            return Optional.of(
-                phoneNumberUtil.parseAndKeepRawInput(numberToParse, userHomeCountryCode));
-          } catch (NumberParseException e) {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.ASSISTED_DIALING_CONSTRAINT_PARSING_FAILURE);
-            LogUtil.i("Constraints.parsePhoneNumber", "could not parse the number");
-            return Optional.empty();
-          }
-        });
+    try {
+      return Optional.of(
+          phoneNumberUtil.parseAndKeepRawInput(numberToParse, userHomeCountryCode));
+    } catch (NumberParseException e) {
+      Logger.get(context)
+          .logImpression(DialerImpression.Type.ASSISTED_DIALING_CONSTRAINT_PARSING_FAILURE);
+      LogUtil.i("Constraints.parsePhoneNumber", "could not parse the number");
+      return Optional.empty();
+    }
   }
 
   /** Returns a boolean indicating if the provided number is already internationally formatted. */
@@ -193,8 +189,7 @@ final class Constraints {
 
   /** Returns a boolean indicating if the provided number is considered to be a valid number. */
   private boolean isValidNumber(@NonNull Optional<PhoneNumber> parsedPhoneNumber) {
-    boolean result =
-        StrictModeUtils.bypass(() -> phoneNumberUtil.isValidNumber(parsedPhoneNumber.get()));
+    boolean result = phoneNumberUtil.isValidNumber(parsedPhoneNumber.get());
     LogUtil.i("Constraints.isValidNumber", String.valueOf(result));
 
     return result;
