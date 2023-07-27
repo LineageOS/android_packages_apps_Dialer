@@ -22,6 +22,30 @@
       },
       "revId": "0c6f1eee44b59c617ee6b19545dc51519c1269bb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc181e3e_cabfc7c8",
+        "filename": "java/com/android/dialer/speeddial/loader/SpeedDialUiItem.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-07-27T21:28:52Z",
+      "side": 1,
+      "message": "This approach works for now. Just for normalisation, the code would grow even more, since normalize() takes a PhoneNumber, not a string",
+      "parentUuid": "cd0115ee_3f937f9e",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 75
+      },
+      "revId": "0c6f1eee44b59c617ee6b19545dc51519c1269bb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
