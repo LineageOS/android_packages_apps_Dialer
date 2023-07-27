@@ -17,6 +17,7 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
@@ -106,7 +107,9 @@ public class SimulatorMainPortal {
                     .put(
                         "Enriched call simulator",
                         () ->
-                            context.startActivity(EnrichedCallSimulatorActivity.newIntent(context)))
+                            context.startActivity(EnrichedCallSimulatorActivity.newIntent(context)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                            | Intent.FLAG_ACTIVITY_CLEAR_TOP)))
                     .put(
                         "Enable simulator mode",
                         () -> {
