@@ -64,15 +64,6 @@ public final class ContactLoaderUtils {
       throw new IllegalArgumentException("uri format is unknown");
     }
 
-    // Legacy Style? Convert to RawContact
-    final String OBSOLETE_AUTHORITY = Contacts.AUTHORITY;
-    if (OBSOLETE_AUTHORITY.equals(authority)) {
-      // Legacy Format. Convert to RawContact-Uri and then lookup the contact
-      final long rawContactId = ContentUris.parseId(uri);
-      return RawContacts.getContactLookupUri(
-          resolver, ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId));
-    }
-
     throw new IllegalArgumentException("uri authority is unknown");
   }
 }

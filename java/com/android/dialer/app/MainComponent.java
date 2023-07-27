@@ -59,6 +59,6 @@ public class MainComponent {
   }
 
   private static String getComponentName() {
-    return "com.android.dialer.app.DialtactsActivity";
+    return "com.android.dialer.main.impl.MainActivity";
   }
 }

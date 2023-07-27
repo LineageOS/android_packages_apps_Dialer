@@ -16,7 +16,6 @@
 package com.android.voicemail.impl.transcribe;
 
 import android.content.Context;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import java.util.concurrent.TimeUnit;
 
 /** Provides configuration values needed to connect to the transcription server. */
@@ -28,25 +27,17 @@ public class TranscriptionConfigProvider {
   }
 
   public boolean isVoicemailTranscriptionAvailable() {
-    return ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getBoolean("voicemail_transcription_available", false);
+    return false;
   }
 
   public String getServerAddress() {
     // Private voicemail transcription service
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getString(
-            "voicemail_transcription_server_address", "voicemailtranscription-pa.googleapis.com");
+    return "";
   }
 
   public String getApiKey() {
     // Android API key restricted to com.google.android.dialer
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getString(
-            "voicemail_transcription_client_api_key", "AIzaSyAXdDnif6B7sBYxU8hzw9qAp3pRPVHs060");
+    return "";
   }
 
   public String getAuthToken() {
@@ -54,56 +45,35 @@ public class TranscriptionConfigProvider {
   }
 
   public boolean shouldUsePlaintext() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("voicemail_transcription_server_use_plaintext", false);
+    return false;
   }
 
   public boolean shouldUseSyncApi() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("voicemail_transcription_server_use_sync_api", false);
+    return false;
   }
 
   public long getMaxTranscriptionRetries() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getLong("voicemail_transcription_max_transcription_retries", 2L);
+    return 2L;
   }
 
   public int getMaxGetTranscriptPolls() {
-    return (int)
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getLong("voicemail_transcription_max_get_transcript_polls", 20L);
+    return 20;
   }
 
   public long getInitialGetTranscriptPollDelayMillis() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getLong(
-            "voicemail_transcription_get_initial_transcript_poll_delay_millis",
-            TimeUnit.SECONDS.toMillis(1));
+    return TimeUnit.SECONDS.toMillis(1);
   }
 
   public long getMaxGetTranscriptPollTimeMillis() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getLong(
-            "voicemail_transcription_get_max_transcript_poll_time_millis",
-            TimeUnit.MINUTES.toMillis(20));
+    return TimeUnit.MINUTES.toMillis(20);
   }
 
   public boolean isVoicemailDonationAvailable() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("voicemail_transcription_donation_available", false);
+    return false;
   }
 
   public boolean useClientGeneratedVoicemailIds() {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("voicemail_transcription_client_generated_voicemail_ids", false);
+    return false;
   }
 
   @Override

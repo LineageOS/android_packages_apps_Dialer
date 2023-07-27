@@ -47,40 +47,17 @@ public class MainActivity extends TransactionSafeActivity
    */
   private ShowBlockReportSpamDialogReceiver showBlockReportSpamDialogReceiver;
 
-  public static Intent getShowCallLogIntent(Context context) {
-    return getShowTabIntent(context, TabIndex.CALL_LOG);
-  }
-
-  /** Returns intent that will open MainActivity to the specified tab. */
-  public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
-    return OldMainActivityPeer.getShowTabIntent(context, tabIndex);
-  }
-
-  /**
-   * @param context Context of the application package implementing MainActivity class.
-   * @return intent for MainActivity.class
-   */
-  public static Intent getIntent(Context context) {
-    return new Intent(context, MainActivity.class)
-        .setAction(Intent.ACTION_VIEW)
-        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-  }
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     setTheme(R.style.MainActivityTheme);
     super.onCreate(savedInstanceState);
     LogUtil.enterBlock("MainActivity.onCreate");
-    // If peer was set by the super, don't reset it.
-    activePeer = getNewPeer();
+
+    activePeer = new OldMainActivityPeer(this);
     activePeer.onActivityCreate(savedInstanceState);
 
     showBlockReportSpamDialogReceiver =
         new ShowBlockReportSpamDialogReceiver(getSupportFragmentManager());
-  }
-
-  protected MainActivityPeer getNewPeer() {
-    return new OldMainActivityPeer(this);
   }
 
   @Override

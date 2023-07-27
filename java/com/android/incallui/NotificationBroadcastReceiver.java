@@ -32,7 +32,6 @@ import com.android.dialer.logging.Logger;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.TelecomAdapter;
-import com.android.incallui.speakeasy.SpeakEasyCallManager;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -65,8 +64,6 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
   public static final String ACTION_TURN_ON_SPEAKER = "com.android.incallui.ACTION_TURN_ON_SPEAKER";
   public static final String ACTION_TURN_OFF_SPEAKER =
       "com.android.incallui.ACTION_TURN_OFF_SPEAKER";
-  public static final String ACTION_ANSWER_SPEAKEASY_CALL =
-      "com.android.incallui.ACTION_ANSWER_SPEAKEASY_CALL";
 
   public static final String ACTION_PULL_EXTERNAL_CALL =
       "com.android.incallui.ACTION_PULL_EXTERNAL_CALL";
@@ -83,9 +80,6 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     if (action.equals(ACTION_ANSWER_VIDEO_INCOMING_CALL)) {
       answerIncomingCall(VideoProfile.STATE_BIDIRECTIONAL, context);
     } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
-      answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY, context);
-    } else if (action.equals(ACTION_ANSWER_SPEAKEASY_CALL)) {
-      markIncomingCallAsSpeakeasyCall();
       answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY, context);
     } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
       Logger.get(context)
@@ -152,19 +146,6 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     }
   }
 
-  private void markIncomingCallAsSpeakeasyCall() {
-    CallList callList = InCallPresenter.getInstance().getCallList();
-    if (callList == null) {
-      LogUtil.e(
-          "NotificationBroadcastReceiver.markIncomingCallAsSpeakeasyCall", "call list is empty");
-    } else {
-      DialerCall call = callList.getIncomingCall();
-      if (call != null) {
-        call.setIsSpeakEasyCall(true);
-      }
-    }
-  }
-
   private void answerIncomingCall(int videoState, @NonNull Context context) {
     CallList callList = InCallPresenter.getInstance().getCallList();
     if (callList == null) {
@@ -174,18 +155,8 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
       DialerCall call = callList.getIncomingCall();
       if (call != null) {
 
-        SpeakEasyCallManager speakEasyCallManager =
-            InCallPresenter.getInstance().getSpeakEasyCallManager();
-        ListenableFuture<Void> answerPrecondition;
-
-        if (speakEasyCallManager != null) {
-          answerPrecondition = speakEasyCallManager.onNewIncomingCall(call);
-        } else {
-          answerPrecondition = Futures.immediateFuture(null);
-        }
-
         Futures.addCallback(
-            answerPrecondition,
+            Futures.immediateFuture(null),
             new FutureCallback<Void>() {
               @Override
               public void onSuccess(Void result) {
