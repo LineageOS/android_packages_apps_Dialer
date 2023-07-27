@@ -28,7 +28,6 @@ import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import com.android.dialer.constants.ScheduledJobIds;
-import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.scheduling.Tasks.TaskCreationException;
@@ -56,9 +55,8 @@ public class TaskSchedulerJobService extends JobService implements TaskExecutor.
   @MainThread
   public boolean onStartJob(JobParameters params) {
     int jobId = params.getTransientExtras().getInt(EXTRA_JOB_ID);
-    int expectedJobId =
-        StrictModeUtils.bypass(
-            () -> PreferenceManager.getDefaultSharedPreferences(this).getInt(EXPECTED_JOB_ID, 0));
+    int expectedJobId = PreferenceManager.getDefaultSharedPreferences(this)
+            .getInt(EXPECTED_JOB_ID, 0);
     if (jobId != expectedJobId) {
       VvmLog.e(
           TAG, "Job " + jobId + " is not the last scheduled job " + expectedJobId + ", ignoring");

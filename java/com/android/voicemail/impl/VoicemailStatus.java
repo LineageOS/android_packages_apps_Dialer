@@ -24,7 +24,6 @@ import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Status;
 import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
-import com.android.dialer.strictmode.StrictModeUtils;
 
 public class VoicemailStatus {
 
@@ -100,7 +99,7 @@ public class VoicemailStatus {
       ContentResolver contentResolver = context.getContentResolver();
       Uri statusUri = VoicemailContract.Status.buildSourceUri(context.getPackageName());
       try {
-        StrictModeUtils.bypass(() -> contentResolver.insert(statusUri, values));
+        contentResolver.insert(statusUri, values);
       } catch (IllegalArgumentException iae) {
         VvmLog.e(TAG, "apply :: failed to insert content resolver ", iae);
         values.clear();

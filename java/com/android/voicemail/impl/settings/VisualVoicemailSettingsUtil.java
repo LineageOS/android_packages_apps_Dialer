@@ -168,20 +168,6 @@ public class VisualVoicemailSettingsUtil {
     return prefs.getBoolean(DONATE_VOICEMAILS_KEY, false);
   }
 
-  /**
-   * Whether the client enabled status is explicitly set by user or by default(Whether carrier VVM
-   * app is installed). This is used to determine whether to disable the client when the carrier VVM
-   * app is installed. If the carrier VVM app is installed the client should give priority to it if
-   * the settings are not touched.
-   */
-  public static boolean isEnabledUserSet(Context context, PhoneAccountHandle phoneAccount) {
-    if (phoneAccount == null) {
-      return false;
-    }
-    VisualVoicemailPreferences prefs = new VisualVoicemailPreferences(context, phoneAccount);
-    return prefs.contains(IS_ENABLED_KEY);
-  }
-
   /** Delete all the voicemails whose source_package field matches this package */
   private static class VoicemailDeleteWorker implements Worker<Void, Void> {
     private final Context context;
