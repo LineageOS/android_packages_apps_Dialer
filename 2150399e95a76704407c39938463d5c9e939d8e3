@@ -22,6 +22,30 @@
       },
       "revId": "2150399e95a76704407c39938463d5c9e939d8e3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cfc4b54_afe856c3",
+        "filename": "java/com/android/dialer/simulator/impl/SimulatorVideoCall.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-07-27T21:26:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eaf6ec4_67522321",
+      "range": {
+        "startLine": 104,
+        "startChar": 27,
+        "endLine": 104,
+        "endChar": 49
+      },
+      "revId": "2150399e95a76704407c39938463d5c9e939d8e3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
