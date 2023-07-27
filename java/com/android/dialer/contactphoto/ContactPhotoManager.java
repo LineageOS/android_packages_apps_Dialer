@@ -40,7 +40,6 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   public static final float SCALE_DEFAULT = 1.0f;
 
   public static final float OFFSET_DEFAULT = 0.0f;
-  public static final boolean IS_CIRCULAR_DEFAULT = false;
   // TODO: Use LogUtil.isVerboseEnabled for DEBUG branches instead of a lint check.
   // LINT.DoNotSubmitIf(true)
   static final boolean DEBUG = false;
@@ -55,60 +54,8 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
   private static final String OFFSET_PARAM_KEY = "offset";
   private static final String IS_CIRCULAR_PARAM_KEY = "is_circular";
   private static final String DEFAULT_IMAGE_URI_SCHEME = "defaultimage";
-  private static final Uri DEFAULT_IMAGE_URI = Uri.parse(DEFAULT_IMAGE_URI_SCHEME + "://");
   public static final DefaultImageProvider DEFAULT_AVATAR = new LetterTileDefaultImageProvider();
   private static ContactPhotoManager instance;
-
-  /**
-   * Given a {@link DefaultImageRequest}, returns an Uri that can be used to request a letter tile
-   * avatar when passed to the {@link ContactPhotoManager}. The internal implementation of this uri
-   * is not guaranteed to remain the same across application versions, so the actual uri should
-   * never be persisted in long-term storage and reused.
-   *
-   * @param request A {@link DefaultImageRequest} object with the fields configured to return a
-   * @return A Uri that when later passed to the {@link ContactPhotoManager} via {@link
-   *     #loadPhoto(ImageView, Uri, int, boolean, boolean, DefaultImageRequest)}, can be used to
-   *     request a default contact image, drawn as a letter tile using the parameters as configured
-   *     in the provided {@link DefaultImageRequest}
-   */
-  public static Uri getDefaultAvatarUriForContact(DefaultImageRequest request) {
-    final Builder builder = DEFAULT_IMAGE_URI.buildUpon();
-    if (request != null) {
-      if (!TextUtils.isEmpty(request.displayName)) {
-        builder.appendQueryParameter(DISPLAY_NAME_PARAM_KEY, request.displayName);
-      }
-      if (!TextUtils.isEmpty(request.identifier)) {
-        builder.appendQueryParameter(IDENTIFIER_PARAM_KEY, request.identifier);
-      }
-      if (request.contactType != LetterTileDrawable.TYPE_DEFAULT) {
-        builder.appendQueryParameter(CONTACT_TYPE_PARAM_KEY, String.valueOf(request.contactType));
-      }
-      if (request.scale != SCALE_DEFAULT) {
-        builder.appendQueryParameter(SCALE_PARAM_KEY, String.valueOf(request.scale));
-      }
-      if (request.offset != OFFSET_DEFAULT) {
-        builder.appendQueryParameter(OFFSET_PARAM_KEY, String.valueOf(request.offset));
-      }
-      if (request.isCircular != IS_CIRCULAR_DEFAULT) {
-        builder.appendQueryParameter(IS_CIRCULAR_PARAM_KEY, String.valueOf(request.isCircular));
-      }
-    }
-    return builder.build();
-  }
-
-  /**
-   * Adds a business contact type encoded fragment to the URL. Used to ensure photo URLS from Nearby
-   * Places can be identified as business photo URLs rather than URLs for personal contact photos.
-   *
-   * @param photoUrl The photo URL to modify.
-   * @return URL with the contact type parameter added and set to TYPE_BUSINESS.
-   */
-  public static String appendBusinessContactType(String photoUrl) {
-    Uri uri = Uri.parse(photoUrl);
-    Builder builder = uri.buildUpon();
-    builder.encodedFragment(String.valueOf(LetterTileDrawable.TYPE_BUSINESS));
-    return builder.build().toString();
-  }
 
   /**
    * Removes the contact type information stored in the photo URI encoded fragment.

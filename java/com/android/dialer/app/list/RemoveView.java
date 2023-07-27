@@ -29,7 +29,6 @@ import com.android.dialer.app.R;
 
 public class RemoveView extends FrameLayout {
 
-  DragDropController dragDropController;
   TextView removeText;
   ImageView removeIcon;
   int unhighlightedColor;
@@ -58,10 +57,6 @@ public class RemoveView extends FrameLayout {
     removeDrawable = r.getDrawable(R.drawable.quantum_ic_clear_vd_theme_24);
   }
 
-  public void setDragDropController(DragDropController controller) {
-    dragDropController = controller;
-  }
-
   @Override
   public boolean onDragEvent(DragEvent event) {
     final int action = event.getAction();
@@ -76,15 +71,9 @@ public class RemoveView extends FrameLayout {
         setAppearanceNormal();
         break;
       case DragEvent.ACTION_DRAG_LOCATION:
-        if (dragDropController != null) {
-          dragDropController.handleDragHovered(this, (int) event.getX(), (int) event.getY());
-        }
         break;
       case DragEvent.ACTION_DROP:
         sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-        if (dragDropController != null) {
-          dragDropController.handleDragFinished((int) event.getX(), (int) event.getY(), true);
-        }
         setAppearanceNormal();
         break;
     }

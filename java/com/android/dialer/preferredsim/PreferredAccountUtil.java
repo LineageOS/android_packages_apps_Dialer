@@ -24,7 +24,6 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 
@@ -72,12 +71,9 @@ public class PreferredAccountUtil {
    * com.android.contacts.common.model.AccountTypeManager#getAccountTypes(boolean)}. External
    * accounts are not supported.
    */
-  public static ImmutableSet<String> getValidAccountTypes(Context context) {
+  public static ImmutableSet<String> getValidAccountTypes() {
     return ImmutableSet.copyOf(
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getString(
-                "preferred_sim_valid_account_types",
+            (
                 "com.google;"
                     + "com.osp.app.signin;"
                     + "com.android.exchange;"
