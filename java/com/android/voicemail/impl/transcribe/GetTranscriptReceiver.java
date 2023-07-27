@@ -289,16 +289,7 @@ public class GetTranscriptReceiver extends BroadcastReceiver {
     }
   }
 
-  private static TranscriptionClientFactory transcriptionClientFactoryForTesting;
-
-  static void setTranscriptionClientFactoryForTesting(TranscriptionClientFactory factory) {
-    transcriptionClientFactoryForTesting = factory;
-  }
-
   static TranscriptionClientFactory getTranscriptionClientFactory(Context context) {
-    if (transcriptionClientFactoryForTesting != null) {
-      return transcriptionClientFactoryForTesting;
-    }
     return new TranscriptionClientFactory(context, new TranscriptionConfigProvider(context));
   }
 }

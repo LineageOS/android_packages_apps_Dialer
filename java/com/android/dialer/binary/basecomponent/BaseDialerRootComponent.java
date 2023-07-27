@@ -23,7 +23,6 @@ import com.android.dialer.calllog.database.CallLogDatabaseComponent;
 import com.android.dialer.calllog.ui.CallLogUiComponent;
 import com.android.dialer.commandline.CommandLineComponent;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -43,7 +42,6 @@ import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.strictmode.StrictModeComponent;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.calllocation.CallLocationComponent;
-import com.android.incallui.speakeasy.SpeakEasyComponent;
 import com.android.voicemail.VoicemailComponent;
 
 /**
@@ -57,7 +55,6 @@ public interface BaseDialerRootComponent
         CallLogComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
         CallLogUiComponent.HasComponent,
-        ConfigProviderComponent.HasComponent,
         CommandLineComponent.HasComponent,
         ContactsComponent.HasComponent,
         DialerExecutorComponent.HasComponent,
@@ -75,7 +72,6 @@ public interface BaseDialerRootComponent
         SimSuggestionComponent.HasComponent,
         SimulatorComponent.HasComponent,
         SpamComponent.HasComponent,
-        SpeakEasyComponent.HasComponent,
         StorageComponent.HasComponent,
         StrictModeComponent.HasComponent,
         ThemeComponent.HasComponent,

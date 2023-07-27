@@ -27,7 +27,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.common \
 	com.android.dialer.common.concurrent.testing \
 	com.android.dialer.common.preference \
-	com.android.dialer.configprovider \
 	com.android.dialer.contacts.displaypreference \
 	com.android.dialer.contacts.resources \
 	com.android.dialer.contactphoto \
@@ -65,7 +64,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.shortcuts \
 	com.android.dialer.simulator.impl \
 	com.android.dialer.simulator.service \
-	com.android.dialer.spam.promo \
 	com.android.dialer.speeddial \
 	com.android.dialer.spannable \
 	com.android.dialer.theme \
@@ -95,7 +93,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.incallui.incall.impl \
 	com.android.incallui.rtt.impl \
 	com.android.incallui.rtt.protocol \
-  com.android.incallui.speakeasy \
 	com.android.incallui.sessiondata \
 	com.android.incallui.spam \
 	com.android.incallui.speakerbuttonlogic \

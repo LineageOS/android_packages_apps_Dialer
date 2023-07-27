@@ -44,7 +44,6 @@ import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
@@ -264,8 +263,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
       if (cursor == null) {
         return Optional.absent();
       }
-      ImmutableSet<String> validAccountTypes =
-          PreferredAccountUtil.getValidAccountTypes(appContext);
+      ImmutableSet<String> validAccountTypes = PreferredAccountUtil.getValidAccountTypes();
       String result = null;
       while (cursor.moveToNext()) {
         Optional<String> accountType =
@@ -357,11 +355,6 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
   @WorkerThread
   private static boolean isPreferredSimEnabled(Context context) {
     Assert.isWorkerThread();
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("preferred_sim_enabled", true)) {
-      return false;
-    }
 
     Intent quickContactIntent = getQuickContactIntent();
     ResolveInfo resolveInfo =

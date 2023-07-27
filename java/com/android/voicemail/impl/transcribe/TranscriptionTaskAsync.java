@@ -125,8 +125,7 @@ public class TranscriptionTaskAsync extends TranscriptionTask {
                 isDonationEnabled() ? DonationPreference.DONATE : DonationPreference.DO_NOT_DONATE);
     // Generate the transcript id locally if configured to do so, or if voicemail donation is
     // available (because rating donating voicemails requires locally generated voicemail ids).
-    if (configProvider.useClientGeneratedVoicemailIds()
-        || VoicemailComponent.get(context)
+    if (VoicemailComponent.get(context)
             .getVoicemailClient()
             .isVoicemailDonationAvailable(context, phoneAccountHandle)) {
       // The server currently can't handle repeated transcription id's so if we add the Uri to the

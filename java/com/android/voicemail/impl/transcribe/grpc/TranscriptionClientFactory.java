@@ -84,11 +84,6 @@ public class TranscriptionClientFactory {
   private static ManagedChannel getManagedChannel(TranscriptionConfigProvider configProvider) {
     ManagedChannelBuilder<OkHttpChannelBuilder> builder =
         OkHttpChannelBuilder.forTarget(configProvider.getServerAddress());
-    // Only use plaintext for debugging
-    if (configProvider.shouldUsePlaintext()) {
-      // Just passing 'false' doesnt have the same effect as not setting this field
-      builder.usePlaintext(true);
-    }
     return builder.build();
   }
 

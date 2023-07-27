@@ -141,19 +141,8 @@ public class TranscriptionService extends JobService {
   public boolean onStartJob(JobParameters params) {
     Assert.isMainThread();
     LogUtil.enterBlock("TranscriptionService.onStartJob");
-    if (!getConfigProvider().isVoicemailTranscriptionAvailable()) {
-      LogUtil.i("TranscriptionService.onStartJob", "transcription not available, exiting.");
-      return false;
-    } else if (TextUtils.isEmpty(getConfigProvider().getServerAddress())) {
-      LogUtil.i("TranscriptionService.onStartJob", "transcription server not configured, exiting.");
-      return false;
-    } else {
-      LogUtil.i(
-          "TranscriptionService.onStartJob",
-          "transcription server address: " + configProvider.getServerAddress());
-      jobParameters = params;
-      return checkForWork();
-    }
+    LogUtil.i("TranscriptionService.onStartJob", "transcription not available, exiting.");
+    return false;
   }
 
   @Override
@@ -200,12 +189,8 @@ public class TranscriptionService extends JobService {
     JobWorkItem workItem = jobParameters.dequeueWork();
     if (workItem != null) {
       Assert.checkState(activeTask == null);
-      activeTask =
-          configProvider.shouldUseSyncApi()
-              ? new TranscriptionTaskSync(
-                  this, new Callback(), workItem, getClientFactory(), configProvider)
-              : new TranscriptionTaskAsync(
-                  this, new Callback(), workItem, getClientFactory(), configProvider);
+      activeTask = new TranscriptionTaskAsync(
+              this, new Callback(), workItem, getClientFactory(), configProvider);
       getExecutorService().execute(activeTask);
       return true;
     } else {
