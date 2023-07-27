@@ -32,7 +32,6 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression.Type;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
@@ -64,12 +63,6 @@ public class CallingAccountSelector implements PreCallAction {
 
   @Override
   public boolean requiresUi(Context context, CallIntentBuilder builder) {
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean("precall_calling_account_selector_enabled", true)) {
-      return false;
-    }
-
     if (builder.getPhoneAccountHandle() != null) {
       return false;
     }

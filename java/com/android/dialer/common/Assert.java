@@ -24,12 +24,6 @@ import javax.annotation.CheckReturnValue;
 /** Assertions which will result in program termination unless disabled by flags. */
 public class Assert {
 
-  private static boolean areThreadAssertsEnabled = true;
-
-  public static void setAreThreadAssertsEnabled(boolean areThreadAssertsEnabled) {
-    Assert.areThreadAssertsEnabled = areThreadAssertsEnabled;
-  }
-
   /**
    * Called when a truly exceptional case occurs.
    *
@@ -182,9 +176,6 @@ public class Assert {
    * @throws IllegalStateException if called on a background thread
    */
   public static void isMainThread(@Nullable String messageTemplate, Object... args) {
-    if (!areThreadAssertsEnabled) {
-      return;
-    }
     checkState(Looper.getMainLooper().equals(Looper.myLooper()), messageTemplate, args);
   }
 
@@ -205,9 +196,6 @@ public class Assert {
    * @throws IllegalStateException if called on the main thread
    */
   public static void isWorkerThread(@Nullable String messageTemplate, Object... args) {
-    if (!areThreadAssertsEnabled) {
-      return;
-    }
     checkState(!Looper.getMainLooper().equals(Looper.myLooper()), messageTemplate, args);
   }
 

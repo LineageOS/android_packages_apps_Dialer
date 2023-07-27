@@ -73,7 +73,6 @@ import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.list.DialtactsPagerAdapter;
-import com.android.dialer.app.list.DialtactsPagerAdapter.TabIndex;
 import com.android.dialer.app.list.DragDropController;
 import com.android.dialer.app.list.ListsFragment;
 import com.android.dialer.app.list.OldSpeedDialFragment;
@@ -93,7 +92,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
@@ -247,8 +245,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   public boolean isMultiSelectModeEnabled;
 
-  private boolean isLastTabEnabled;
-
   AnimationListenerAdapter slideInListener =
       new AnimationListenerAdapter() {
         @Override
@@ -365,8 +361,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     super.onCreate(savedInstanceState);
 
     firstLaunch = true;
-    isLastTabEnabled =
-        ConfigProviderComponent.get(this).getConfigProvider().getBoolean("last_tab_enabled", false);
 
     final Resources resources = getResources();
     actionBarHeight = resources.getDimensionPixelSize(R.dimen.action_bar_height_large);
@@ -1050,20 +1044,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       dialpadFragment.setStartedFromNewIntent(true);
       if (showDialpadChooser && !dialpadFragment.isVisible()) {
         inCallDialpadUp = true;
-      }
-    } else if (isLastTabEnabled) {
-      @TabIndex
-      int tabIndex =
-          StorageComponent.get(this)
-              .unencryptedSharedPrefs()
-              .getInt(KEY_LAST_TAB, DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
-      // If voicemail tab is saved and its availability changes, we still move to the voicemail tab
-      // but it is quickly removed and shown the contacts tab.
-      if (listsFragment != null) {
-        listsFragment.showTab(tabIndex);
-        PerformanceReport.setStartingTabIndex(tabIndex);
-      } else {
-        PerformanceReport.setStartingTabIndex(DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL);
       }
     }
   }
