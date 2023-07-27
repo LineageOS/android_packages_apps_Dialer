@@ -29,8 +29,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.dialer.common.Assert;
-import com.android.dialer.configprovider.ConfigProviderComponent;
-import com.android.dialer.theme.base.ThemeComponent;
 
 /** Navigation item in a bottom nav. */
 final class BottomNavItem extends LinearLayout {
@@ -74,15 +72,7 @@ final class BottomNavItem extends LinearLayout {
     } else {
       String countString = String.format(Integer.toString(count));
 
-      boolean use99PlusCount =
-          ConfigProviderComponent.get(getContext())
-              .getConfigProvider()
-              .getBoolean("use_99_plus", false);
-      boolean use9Plus = !use99PlusCount;
-
-      if (use99PlusCount && count > 99) {
-        countString = getContext().getString(R.string.bottom_nav_count_99_plus);
-      } else if (use9Plus && count > 9) {
+      if (count > 9) {
         countString = getContext().getString(R.string.bottom_nav_count_9_plus);
       }
       notificationBadge.setVisibility(View.VISIBLE);

@@ -38,10 +38,6 @@ public final class ShortcutRefresher {
     Assert.isMainThread();
     Assert.isNotNull(context);
 
-    if (!Shortcuts.areDynamicShortcutsEnabled(context)) {
-      return;
-    }
-
     DialerExecutorComponent.get(context)
         .dialerExecutorFactory()
         .createNonUiTaskBuilder(new RefreshWorker(context))

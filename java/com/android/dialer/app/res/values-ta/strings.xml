@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ஃபோன் விசைத்தளம்</string>
   <string name="callHistoryIconLabel">அழைப்பு பதிவு</string>
   <string name="action_copy_number_text">எண்ணை நகலெடு</string>
-  <string name="copy_transcript_text">டிரான்ஸ்கிரிப்ஷனை நகலெடு</string>
   <string name="action_edit_number_before_call">அழைக்கும் முன் எண்ணை மாற்று</string>
   <string name="call_log_delete_all">அழைப்பு வரலாற்றை அழி</string>
   <string name="call_log_trash_voicemail">குரலஞ்சலை நீக்கு</string>

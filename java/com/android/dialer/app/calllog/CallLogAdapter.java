@@ -68,8 +68,6 @@ import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
-import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
@@ -118,11 +116,6 @@ public class CallLogAdapter extends GroupingListAdapter
   private static final String KEY_ACTION_MODE = "action_mode_selected_items";
 
   public static final String LOAD_DATA_TASK_IDENTIFIER = "load_data";
-
-  public static final String ENABLE_CALL_LOG_MULTI_SELECT = "enable_call_log_multiselect";
-  public static final boolean ENABLE_CALL_LOG_MULTI_SELECT_FLAG = true;
-
-  @VisibleForTesting static final String FILTER_EMERGENCY_CALLS_FLAG = "filter_emergency_calls";
 
   protected final Activity activity;
   protected final VoicemailPlaybackPresenter voicemailPlaybackPresenter;
@@ -289,10 +282,7 @@ public class CallLogAdapter extends GroupingListAdapter
       new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-          if (ConfigProviderComponent.get(v.getContext())
-                  .getConfigProvider()
-                  .getBoolean(ENABLE_CALL_LOG_MULTI_SELECT, ENABLE_CALL_LOG_MULTI_SELECT_FLAG)
-              && voicemailPlaybackPresenter != null) {
+          if (voicemailPlaybackPresenter != null) {
             if (v.getId() == R.id.primary_action_view || v.getId() == R.id.quick_contact_photo) {
               if (actionMode == null) {
                 Logger.get(activity)
@@ -840,22 +830,10 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   private boolean isHiddenRow(@Nullable String number, long rowId) {
-    if (isHideableEmergencyNumberRow(number)) {
-      return true;
-    }
     if (hiddenRowIds.contains(rowId)) {
       return true;
     }
     return false;
-  }
-
-  private boolean isHideableEmergencyNumberRow(@Nullable String number) {
-    if (!ConfigProviderComponent.get(activity)
-        .getConfigProvider()
-        .getBoolean(FILTER_EMERGENCY_CALLS_FLAG, false)) {
-      return false;
-    }
-    return number != null && PhoneNumberUtils.isEmergencyNumber(number);
   }
 
   private void loadAndRender(
@@ -948,7 +926,6 @@ public class CallLogAdapter extends GroupingListAdapter
     final String viaNumber = cursor.getString(CallLogQuery.VIA_NUMBER);
     final int numberPresentation = cursor.getInt(CallLogQuery.NUMBER_PRESENTATION);
     final ContactInfo cachedContactInfo = ContactInfoHelper.getContactInfo(cursor);
-    final int transcriptionState = cursor.getInt(CallLogQuery.TRANSCRIPTION_STATE);
     final PhoneCallDetails details =
         new PhoneCallDetails(number, numberPresentation, postDialDigits);
     details.viaNumber = viaNumber;
@@ -957,8 +934,6 @@ public class CallLogAdapter extends GroupingListAdapter
     details.duration = cursor.getLong(CallLogQuery.DURATION);
     details.features = getCallFeatures(cursor, count);
     details.geocode = cursor.getString(CallLogQuery.GEOCODED_LOCATION);
-    details.transcription = cursor.getString(CallLogQuery.TRANSCRIPTION);
-    details.transcriptionState = transcriptionState;
     details.callTypes = getCallTypes(cursor, count);
 
     details.accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
@@ -1054,10 +1029,7 @@ public class CallLogAdapter extends GroupingListAdapter
               details.number + details.postDialDigits,
               details.countryIso,
               details.cachedContactInfo,
-              position
-                  < ConfigProviderComponent.get(activity)
-                      .getConfigProvider()
-                      .getLong("number_of_call_to_do_remote_lookup", 5L));
+              position < 5L);
       logCp2Metrics(details, info);
     }
     CharSequence formattedNumber =

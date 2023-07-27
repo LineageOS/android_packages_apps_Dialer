@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefon Klaviaturası</string>
   <string name="callHistoryIconLabel">Zəng tarixçəsi</string>
   <string name="action_copy_number_text">Nömrəni kopyalayın</string>
-  <string name="copy_transcript_text">Transkripsiyanı kopyalayın</string>
   <string name="action_edit_number_before_call">Zəng etmədən öncə nömrəyə düzəliş edin</string>
   <string name="call_log_delete_all">Zəng tarixçəsini təmizlə</string>
   <string name="call_log_trash_voicemail">Səsli məktubu silin</string>

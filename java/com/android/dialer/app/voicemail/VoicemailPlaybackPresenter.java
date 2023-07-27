@@ -51,12 +51,10 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.constants.Constants;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CallLogQuery;
-import com.android.dialer.strictmode.StrictModeUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.common.io.ByteStreams;
@@ -519,7 +517,7 @@ public class VoicemailPlaybackPresenter
       handleError(new IllegalStateException("Cannot play voicemail when call is in progress"));
       return;
     }
-    StrictModeUtils.bypass(this::prepareMediaPlayer);
+    prepareMediaPlayer();
   }
 
   private void prepareMediaPlayer() {
@@ -859,19 +857,13 @@ public class VoicemailPlaybackPresenter
     if (context == null) {
       return;
     }
-    if (isShareVoicemailAllowed(context) && shareVoicemailButtonView != null) {
+    if (shareVoicemailButtonView != null) {
       if (show) {
         Logger.get(context).logImpression(DialerImpression.Type.VVM_SHARE_VISIBLE);
       }
       LogUtil.d("VoicemailPlaybackPresenter.showShareVoicemailButton", "show: %b", show);
       shareVoicemailButtonView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-  }
-
-  private static boolean isShareVoicemailAllowed(Context context) {
-    return ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean(CONFIG_SHARE_VOICEMAIL_ALLOWED, true);
   }
 
   private static class ShareVoicemailWorker

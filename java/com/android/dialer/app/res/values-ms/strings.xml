@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Pad Kekunci Telefon</string>
   <string name="callHistoryIconLabel">Sejarah panggilan</string>
   <string name="action_copy_number_text">Salin nombor</string>
-  <string name="copy_transcript_text">Salin transkripsi</string>
   <string name="action_edit_number_before_call">Edit nombor sebelum memanggil</string>
   <string name="call_log_delete_all">Kosongkan sejarah panggilan</string>
   <string name="call_log_trash_voicemail">Padamkan mel suara</string>

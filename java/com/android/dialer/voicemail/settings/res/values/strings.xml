@@ -30,9 +30,6 @@
          [CHAR LIMIT=30] -->
   <string name="voicemail_notifications_preference_title">Notifications</string>
 
-  <!-- Internal key for a preference to change greeting -->
-  <string name="voicemail_change_greeting_key" translatable="false">voicemail_change_greeting_key</string>
-
   <!-- Title for changing voicemail greeting activity [CHAR LIMIT=40] -->
   <string name="voicemail_change_greeting_preference_title">Voicemail greeting</string>
 
@@ -123,9 +120,6 @@
   <string name="change_pin_succeeded">Voicemail PIN updated</string>
   <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
   <string name="change_pin_system_error">Unable to set PIN</string>
-
-  <string name="voicemail_visual_voicemail_transcription_key" translatable="false">transcribe_voicemails</string>
-  <string name="voicemail_visual_voicemail_donation_key" translatable="false">donate_voicemails</string>
 
   <!-- Title for visual voicemail setting that enables users voicemails to be transcribed by Google.
        [CHAR LIMIT=40] -->

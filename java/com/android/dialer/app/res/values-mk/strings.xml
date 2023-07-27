@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Тастатура за бирање на телефон</string>
   <string name="callHistoryIconLabel">Историја на повици</string>
   <string name="action_copy_number_text">Копирај го бројот</string>
-  <string name="copy_transcript_text">Копирај транскрипција</string>
   <string name="action_edit_number_before_call">Уредете го бројот пред повикот</string>
   <string name="call_log_delete_all">Избришете историја на повици?</string>
   <string name="call_log_trash_voicemail">Избришете ја говорната пошта</string>

@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Foonsleutelblok</string>
   <string name="callHistoryIconLabel">Oproepgeskiedenis</string>
   <string name="action_copy_number_text">Kopieer nommer</string>
-  <string name="copy_transcript_text">Kopieer transkripsie</string>
   <string name="action_edit_number_before_call">Wysig nommer voor oproep</string>
   <string name="call_log_delete_all">Vee oproepgeskiedenis uit</string>
   <string name="call_log_trash_voicemail">Vee stemboodskap uit</string>
