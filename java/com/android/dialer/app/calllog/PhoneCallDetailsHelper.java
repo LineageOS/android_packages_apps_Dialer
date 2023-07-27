@@ -79,8 +79,6 @@ public class PhoneCallDetailsHelper
   private final Calendar calendar;
 
   private final CachedNumberLookupService cachedNumberLookupService;
-  /** The injected current time in milliseconds since the epoch. Used only by tests. */
-  private Long currentTimeMillisForTest;
 
   private CharSequence phoneTypeLabelForTest;
   /** List of items to be concatenated together for accessibility descriptions */
@@ -570,11 +568,7 @@ public class PhoneCallDetailsHelper
    * <p>It can be injected in tests using {@link #setCurrentTimeForTest(long)}.
    */
   private long getCurrentTimeMillis() {
-    if (currentTimeMillisForTest == null) {
-      return System.currentTimeMillis();
-    } else {
-      return currentTimeMillisForTest;
-    }
+    return System.currentTimeMillis();
   }
 
   /** Sets the call count, date, and if it is a voicemail, sets the duration. */

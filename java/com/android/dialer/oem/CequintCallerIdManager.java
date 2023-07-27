@@ -28,7 +28,6 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.google.auto.value.AutoValue;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -110,11 +109,6 @@ public class CequintCallerIdManager {
   /** Check whether Cequint Caller ID provider package is available and enabled. */
   @AnyThread
   public static synchronized boolean isCequintCallerIdEnabled(@NonNull Context context) {
-    if (!ConfigProviderComponent.get(context)
-        .getConfigProvider()
-        .getBoolean(CONFIG_CALLER_ID_ENABLED, true)) {
-      return false;
-    }
     if (!hasAlreadyCheckedCequintCallerIdPackage) {
       hasAlreadyCheckedCequintCallerIdPackage = true;
 

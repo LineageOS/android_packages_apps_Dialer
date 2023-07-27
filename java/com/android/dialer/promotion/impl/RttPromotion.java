@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.DrawableRes;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProvider;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.promotion.Promotion;
 import com.android.dialer.spannable.ContentWithLearnMoreSpanner;
@@ -34,7 +33,6 @@ public final class RttPromotion implements Promotion {
   private static final String SHARED_PREFERENCE_KEY_DISMISSED = "rtt_promotion_dismissed";
   private final Context appContext;
   private final SharedPreferences sharedPreferences;
-  private final ConfigProvider configProvider;
 
   @Override
   public int getType() {
@@ -44,11 +42,9 @@ public final class RttPromotion implements Promotion {
   @Inject
   RttPromotion(
       @ApplicationContext Context context,
-      @Unencrypted SharedPreferences sharedPreferences,
-      ConfigProvider configProvider) {
+      @Unencrypted SharedPreferences sharedPreferences) {
     appContext = context;
     this.sharedPreferences = sharedPreferences;
-    this.configProvider = configProvider;
   }
 
   @Override
@@ -67,9 +63,7 @@ public final class RttPromotion implements Promotion {
     return new ContentWithLearnMoreSpanner(appContext)
         .create(
             appContext.getString(R.string.rtt_promotion_details),
-            configProvider.getString(
-                "rtt_promo_learn_more_link_full_url",
-                "http://support.google.com/pixelphone/?p=dialer_rtt"));
+                "http://support.google.com/pixelphone/?p=dialer_rtt");
   }
 
   @Override

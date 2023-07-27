@@ -23,7 +23,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
@@ -38,24 +37,17 @@ import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.compat.android.provider.VoicemailCompat;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /** Helper class operating on call log notifications. */
 public class CallLogNotificationsQueryHelper {
-
-  @VisibleForTesting
-  static final String CONFIG_NEW_VOICEMAIL_NOTIFICATION_THRESHOLD_OFFSET =
-      "new_voicemail_notification_threshold";
-
   private final Context context;
   private final NewCallsQuery newCallsQuery;
   private final ContactInfoHelper contactInfoHelper;
@@ -164,11 +156,7 @@ public class CallLogNotificationsQueryHelper {
   public List<NewCall> getNewVoicemails() {
     return newCallsQuery.query(
         Calls.VOICEMAIL_TYPE,
-        System.currentTimeMillis()
-            - ConfigProviderComponent.get(context)
-                .getConfigProvider()
-                .getLong(
-                    CONFIG_NEW_VOICEMAIL_NOTIFICATION_THRESHOLD_OFFSET, TimeUnit.DAYS.toMillis(7)));
+        System.currentTimeMillis() - TimeUnit.DAYS.toMillis(7));
   }
 
   /**

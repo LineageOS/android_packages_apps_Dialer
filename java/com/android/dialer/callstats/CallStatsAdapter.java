@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.dialer.R;
-import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.contactinfo.NumberWithCountryIso;
 import com.android.dialer.clipboard.ClipboardUtils;

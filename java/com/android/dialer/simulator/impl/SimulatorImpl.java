@@ -18,8 +18,6 @@ package com.android.dialer.simulator.impl;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.ActionProvider;
-import com.android.dialer.buildtype.BuildType;
-import com.android.dialer.buildtype.BuildType.Type;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.simulator.Simulator;
 import javax.inject.Inject;
@@ -34,7 +32,7 @@ final class SimulatorImpl implements Simulator {
 
   @Override
   public boolean shouldShow() {
-    return BuildType.get() == Type.BUGFOOD || LogUtil.isDebugEnabled();
+    return LogUtil.isDebugEnabled();
   }
 
   @Override
