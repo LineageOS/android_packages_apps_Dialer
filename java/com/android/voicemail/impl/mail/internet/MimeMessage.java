@@ -156,11 +156,6 @@ public class MimeMessage extends Message {
   }
 
   @Override
-  public Date getReceivedDate() throws MessagingException {
-    return null;
-  }
-
-  @Override
   public Date getSentDate() throws MessagingException {
     if (sentDate == null) {
       try {
@@ -190,12 +185,6 @@ public class MimeMessage extends Message {
       }
     }
     return sentDate;
-  }
-
-  @Override
-  public void setSentDate(Date sentDate) throws MessagingException {
-    setHeader("Date", DATE_FORMAT.format(sentDate));
-    this.sentDate = sentDate;
   }
 
   @Override
@@ -256,66 +245,6 @@ public class MimeMessage extends Message {
     return size;
   }
 
-  /**
-   * Returns a list of the given recipient type from this message. If no addresses are found the
-   * method returns an empty array.
-   */
-  @Override
-  public Address[] getRecipients(String type) throws MessagingException {
-    if (type == RECIPIENT_TYPE_TO) {
-      if (to == null) {
-        to = Address.parse(MimeUtility.unfold(getFirstHeader("To")));
-      }
-      return to;
-    } else if (type == RECIPIENT_TYPE_CC) {
-      if (cc == null) {
-        cc = Address.parse(MimeUtility.unfold(getFirstHeader("CC")));
-      }
-      return cc;
-    } else if (type == RECIPIENT_TYPE_BCC) {
-      if (bcc == null) {
-        bcc = Address.parse(MimeUtility.unfold(getFirstHeader("BCC")));
-      }
-      return bcc;
-    } else {
-      throw new MessagingException("Unrecognized recipient type.");
-    }
-  }
-
-  @Override
-  public void setRecipients(String type, Address[] addresses) throws MessagingException {
-    final int toLength = 4; // "To: "
-    final int ccLength = 4; // "Cc: "
-    final int bccLength = 5; // "Bcc: "
-    if (type == RECIPIENT_TYPE_TO) {
-      if (addresses == null || addresses.length == 0) {
-        removeHeader("To");
-        this.to = null;
-      } else {
-        setHeader("To", MimeUtility.fold(Address.toHeader(addresses), toLength));
-        this.to = addresses;
-      }
-    } else if (type == RECIPIENT_TYPE_CC) {
-      if (addresses == null || addresses.length == 0) {
-        removeHeader("CC");
-        this.cc = null;
-      } else {
-        setHeader("CC", MimeUtility.fold(Address.toHeader(addresses), ccLength));
-        this.cc = addresses;
-      }
-    } else if (type == RECIPIENT_TYPE_BCC) {
-      if (addresses == null || addresses.length == 0) {
-        removeHeader("BCC");
-        this.bcc = null;
-      } else {
-        setHeader("BCC", MimeUtility.fold(Address.toHeader(addresses), bccLength));
-        this.bcc = addresses;
-      }
-    } else {
-      throw new MessagingException("Unrecognized recipient type.");
-    }
-  }
-
   /** Returns the unfolded, decoded value of the Subject header. */
   @Override
   public String getSubject() throws MessagingException {
@@ -351,26 +280,6 @@ public class MimeMessage extends Message {
     }
   }
 
-  @Override
-  public Address[] getReplyTo() throws MessagingException {
-    if (replyTo == null) {
-      replyTo = Address.parse(MimeUtility.unfold(getFirstHeader("Reply-to")));
-    }
-    return replyTo;
-  }
-
-  @Override
-  public void setReplyTo(Address[] replyTo) throws MessagingException {
-    final int replyToLength = 10; // "Reply-to: "
-    if (replyTo == null || replyTo.length == 0) {
-      removeHeader("Reply-to");
-      this.replyTo = null;
-    } else {
-      setHeader("Reply-to", MimeUtility.fold(Address.toHeader(replyTo), replyToLength));
-      this.replyTo = replyTo;
-    }
-  }
-
   /**
    * Set the mime "Message-ID" header
    *
@@ -397,11 +306,6 @@ public class MimeMessage extends Message {
       setMessageId(messageId);
     }
     return messageId;
-  }
-
-  @Override
-  public void saveChanges() throws MessagingException {
-    throw new MessagingException("saveChanges not yet implemented");
   }
 
   @Override
