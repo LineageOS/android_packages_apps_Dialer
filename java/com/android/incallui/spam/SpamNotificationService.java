@@ -16,7 +16,6 @@
 
 package com.android.incallui.spam;
 
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +31,6 @@ import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.spam.SpamComponent;
-import com.android.dialer.spam.SpamSettings;
-import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 import com.android.incallui.call.DialerCall;
 
 /**
@@ -103,18 +100,9 @@ public class SpamNotificationService extends Service {
     ContactLookupResult.Type contactLookupResultType =
         ContactLookupResult.Type.forNumber(intent.getIntExtra(EXTRA_CONTACT_LOOKUP_RESULT_TYPE, 0));
 
-    SpamSettings spamSettings = SpamComponent.get(this).spamSettings();
-    SpamBlockingPromoHelper spamBlockingPromoHelper =
-        new SpamBlockingPromoHelper(this, SpamComponent.get(this).spamSettings());
-    boolean shouldShowSpamBlockingPromo =
-        SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM.equals(intent.getAction())
-            && spamBlockingPromoHelper.shouldShowAfterCallSpamBlockingPromo();
-
     // Cancel notification only if we are not showing spam blocking promo. Otherwise we will show
     // spam blocking promo notification in place.
-    if (!shouldShowSpamBlockingPromo) {
-      DialerNotificationManager.cancel(this, notificationTag, notificationId);
-    }
+    DialerNotificationManager.cancel(this, notificationTag, notificationId);
 
     switch (intent.getAction()) {
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM:
@@ -129,13 +117,6 @@ public class SpamNotificationService extends Service {
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
         new FilteredNumberAsyncQueryHandler(this).blockNumber(null, number);
-        if (shouldShowSpamBlockingPromo) {
-          spamBlockingPromoHelper.showSpamBlockingPromoNotification(
-              notificationTag,
-              notificationId,
-              createPromoActivityPendingIntent(),
-              createEnableSpamBlockingPendingIntent());
-        }
         break;
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_NOT_SPAM:
         logCallImpression(
@@ -148,22 +129,6 @@ public class SpamNotificationService extends Service {
                 CallLog.Calls.INCOMING_TYPE,
                 ReportingLocation.Type.FEEDBACK_PROMPT,
                 contactLookupResultType);
-        break;
-      case SpamNotificationActivity.ACTION_ENABLE_SPAM_BLOCKING:
-        Logger.get(this)
-            .logImpression(
-                DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
-        spamSettings.modifySpamBlockingSetting(
-            true,
-            success -> {
-              if (!success) {
-                Logger.get(this)
-                    .logImpression(
-                        DialerImpression.Type
-                            .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_AFTER_CALL_NOTIFICATION_PROMO);
-              }
-              spamBlockingPromoHelper.showModifySettingOnCompleteToast(success);
-            });
         break;
       default: // fall out
     }
@@ -184,29 +149,5 @@ public class SpamNotificationService extends Service {
             impression,
             intent.getStringExtra(EXTRA_CALL_ID),
             intent.getLongExtra(EXTRA_CALL_START_TIME_MILLIS, 0));
-  }
-
-  private PendingIntent createPromoActivityPendingIntent() {
-    Intent intent =
-        SpamNotificationActivity.createActivityIntent(
-            this,
-            null,
-            SpamNotificationActivity.ACTION_SHOW_SPAM_BLOCKING_PROMO_DIALOG,
-            notificationTag,
-            notificationId);
-    return PendingIntent.getActivity(
-        this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
-  }
-
-  private PendingIntent createEnableSpamBlockingPendingIntent() {
-    Intent intent =
-        SpamNotificationService.createServiceIntent(
-            this,
-            null,
-            SpamNotificationActivity.ACTION_ENABLE_SPAM_BLOCKING,
-            notificationTag,
-            notificationId);
-    return PendingIntent.getService(
-        this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
   }
 }

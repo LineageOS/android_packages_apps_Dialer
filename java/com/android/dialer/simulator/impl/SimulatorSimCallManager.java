@@ -30,7 +30,6 @@ import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.strictmode.StrictModeUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -67,23 +66,19 @@ public class SimulatorSimCallManager {
   public static void register(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorSimCallManager.register");
     Assert.isNotNull(context);
-    StrictModeUtils.bypass(
-        () -> {
-          TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
-          telecomManager.registerPhoneAccount(buildSimCallManagerAccount(context));
-          telecomManager.registerPhoneAccount(buildVideoProviderAccount(context));
-        });
+
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+    telecomManager.registerPhoneAccount(buildSimCallManagerAccount(context));
+    telecomManager.registerPhoneAccount(buildVideoProviderAccount(context));
   }
 
   public static void unregister(@NonNull Context context) {
     LogUtil.enterBlock("SimulatorSimCallManager.unregister");
     Assert.isNotNull(context);
-    StrictModeUtils.bypass(
-        () -> {
-          TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
-          telecomManager.unregisterPhoneAccount(getSimCallManagerHandle(context));
-          telecomManager.unregisterPhoneAccount(getVideoProviderHandle(context));
-        });
+
+    TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+    telecomManager.unregisterPhoneAccount(getSimCallManagerHandle(context));
+    telecomManager.unregisterPhoneAccount(getVideoProviderHandle(context));
   }
 
   @NonNull

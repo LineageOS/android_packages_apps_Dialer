@@ -23,7 +23,6 @@ import android.text.TextUtils;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.spam.Spam;
-import com.android.dialer.time.Clock;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import java.util.ArrayList;
@@ -78,94 +77,7 @@ public final class CallLogEntryText {
   }
 
   /**
-   * The secondary text to be shown in the main call log entry list.
-   *
-   * <p>This method first obtains a list of strings to be shown in order and then concatenates them
-   * with " • ".
-   *
-   * <p>Examples:
-   *
-   * <ul>
-   *   <li>Mobile, Duo video • 10 min ago
-   *   <li>Spam • Mobile • Now
-   *   <li>Blocked • Spam • Mobile • Now
-   * </ul>
-   *
-   * @see #buildSecondaryTextListForEntries(Context, Clock, CoalescedRow, boolean) for details.
-   */
-  public static CharSequence buildSecondaryTextForEntries(
-      Context context, Clock clock, CoalescedRow row) {
-    return joinSecondaryTextComponents(
-        buildSecondaryTextListForEntries(context, clock, row, /* abbreviateDateTime = */ true));
-  }
-
-  /**
-   * Returns a list of strings to be shown in order as the main call log entry's secondary text.
-   *
-   * <p>Rules:
-   *
-   * <ul>
-   *   <li>An emergency number: [{Date}]
-   *   <li>Number - not blocked, call - not spam:
-   *       <p>[{$Label(, Duo video|Carrier video)?|$Location}, {Date}]
-   *   <li>Number - blocked, call - not spam:
-   *       <p>["Blocked", {$Label(, Duo video|Carrier video)?|$Location}, {Date}]
-   *   <li>Number - not blocked, call - spam:
-   *       <p>["Spam", {$Label(, Duo video|Carrier video)?}, {Date}]
-   *   <li>Number - blocked, call - spam:
-   *       <p>["Blocked, Spam", {$Label(, Duo video|Carrier video)?}, {Date}]
-   * </ul>
-   *
-   * <p>Examples:
-   *
-   * <ul>
-   *   <li>["Mobile, Duo video", "Now"]
-   *   <li>["Duo video", "10 min ago"]
-   *   <li>["Mobile", "11:45 PM"]
-   *   <li>["Mobile", "Sun"]
-   *   <li>["Blocked", "Mobile, Duo video", "Now"]
-   *   <li>["Blocked", "Brooklyn, NJ", "10 min ago"]
-   *   <li>["Spam", "Mobile", "Now"]
-   *   <li>["Spam", "Now"]
-   *   <li>["Blocked", "Spam", "Mobile", "Now"]
-   *   <li>["Brooklyn, NJ", "Jan 15"]
-   * </ul>
-   *
-   * <p>See {@link CallLogDates#newCallLogTimestampLabel(Context, long, long, boolean)} for date
-   * rules.
-   */
-  static List<CharSequence> buildSecondaryTextListForEntries(
-      Context context, Clock clock, CoalescedRow row, boolean abbreviateDateTime) {
-    // For emergency numbers, the secondary text should contain only the timestamp.
-    if (row.getNumberAttributes().getIsEmergencyNumber()) {
-      return Collections.singletonList(
-          CallLogDates.newCallLogTimestampLabel(
-              context, clock.currentTimeMillis(), row.getTimestamp(), abbreviateDateTime));
-    }
-
-    List<CharSequence> components = new ArrayList<>();
-
-    if (row.getNumberAttributes().getIsBlocked()) {
-      components.add(context.getText(R.string.new_call_log_secondary_blocked));
-    }
-    if (Spam.shouldShowAsSpam(row.getNumberAttributes().getIsSpam(), row.getCallType())) {
-      components.add(context.getText(R.string.new_call_log_secondary_spam));
-    }
-
-    components.add(getNumberTypeLabel(context, row));
-
-    components.add(
-        CallLogDates.newCallLogTimestampLabel(
-            context, clock.currentTimeMillis(), row.getTimestamp(), abbreviateDateTime));
-    return components;
-  }
-
-  /**
    * The secondary text to show in the top item of the bottom sheet.
-   *
-   * <p>This is basically the same as {@link #buildSecondaryTextForEntries(Context, Clock,
-   * CoalescedRow)} except that instead of suffixing with the time of the call, we suffix with the
-   * formatted number.
    */
   public static CharSequence buildSecondaryTextForBottomSheet(Context context, CoalescedRow row) {
     /*

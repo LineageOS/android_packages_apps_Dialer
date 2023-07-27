@@ -29,7 +29,6 @@ import com.android.dialer.assisteddialing.AssistedDialingMediator;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.CountryCodeProvider;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.google.auto.value.AutoValue;
@@ -63,13 +62,8 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    assistedDialingMediator =
-        ConcreteCreator.createNewAssistedDialingMediator(
-            getContext().getSystemService(TelephonyManager.class), getContext());
-
-    countryCodeProvider =
-        ConcreteCreator.getCountryCodeProvider(
-            ConfigProviderComponent.get(getContext()).getConfigProvider());
+    assistedDialingMediator = ConcreteCreator.createNewAssistedDialingMediator();
+    countryCodeProvider = ConcreteCreator.getCountryCodeProvider();
 
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.assisted_dialing_setting);

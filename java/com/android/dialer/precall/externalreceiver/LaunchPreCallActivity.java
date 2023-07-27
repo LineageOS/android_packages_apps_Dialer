@@ -27,8 +27,6 @@ import android.telecom.VideoProfile;
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.configprovider.ConfigProvider;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
@@ -42,8 +40,6 @@ import com.google.common.collect.ImmutableList;
  * @see CallIntentBuilder
  */
 public class LaunchPreCallActivity extends Activity {
-
-  public static final String ACTION_LAUNCH_PRE_CALL = "com.android.dialer.LAUNCH_PRE_CALL";
 
   public static final String EXTRA_PHONE_ACCOUNT_HANDLE = "phone_account_handle";
 
@@ -69,8 +65,6 @@ public class LaunchPreCallActivity extends Activity {
     super.onCreate(savedInstanceState);
     Logger.get(this).logImpression(DialerImpression.Type.PRECALL_INITIATED_EXTERNAL);
 
-    ConfigProvider configProvider =
-        ConfigProviderComponent.get(getApplicationContext()).getConfigProvider();
     Intent intent = getIntent();
     CallIntentBuilder builder = new CallIntentBuilder(intent.getData(), Type.EXTERNAL_INITIATION);
 
@@ -83,10 +77,7 @@ public class LaunchPreCallActivity extends Activity {
         .setPhoneAccountHandle(phoneAccountHandle)
         .setIsVideoCall(intent.getBooleanExtra(EXTRA_IS_VIDEO_CALL, false))
         .setCallSubject(intent.getStringExtra(EXTRA_CALL_SUBJECT))
-        .setAllowAssistedDial(
-            intent.getBooleanExtra(
-                EXTRA_ALLOW_ASSISTED_DIAL,
-                configProvider.getBoolean("assisted_dialing_default_precall_state", false)));
+        .setAllowAssistedDial(intent.getBooleanExtra(EXTRA_ALLOW_ASSISTED_DIAL, false));
     filterExtras(intent.getExtras(), builder);
     PreCall.start(this, builder);
     finish();
