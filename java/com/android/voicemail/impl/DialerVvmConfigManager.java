@@ -23,7 +23,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.voicemail.impl.utils.XmlUtils;
 import com.google.common.collect.ComparisonChain;
 import java.io.IOException;
@@ -132,10 +131,7 @@ public class DialerVvmConfigManager {
         }
         PersistableBundle bundle = (PersistableBundle) object;
 
-        if (bundle.containsKey(KEY_FEATURE_FLAG_NAME)
-            && !ConfigProviderComponent.get(context)
-                .getConfigProvider()
-                .getBoolean(bundle.getString(KEY_FEATURE_FLAG_NAME), false)) {
+        if (bundle.containsKey(KEY_FEATURE_FLAG_NAME)) {
           continue;
         }
 

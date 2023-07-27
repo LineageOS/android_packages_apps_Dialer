@@ -125,10 +125,6 @@
         android:exported="false"
         android:name="com.android.incallui.NotificationBroadcastReceiver"/>
 
-    <receiver
-        android:exported="false"
-        android:name=".ReturnToCallActionReceiver"/>
-
   </application>
 
 </manifest>

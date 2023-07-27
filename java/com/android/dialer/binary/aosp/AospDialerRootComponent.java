@@ -22,7 +22,6 @@ import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
 import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
-import com.android.dialer.configprovider.SharedPrefConfigProviderModule;
 import com.android.dialer.contacts.ContactsModule;
 import com.android.dialer.duo.stub.StubDuoModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
@@ -39,10 +38,8 @@ import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.simulator.stub.StubSimulatorEnrichedCallModule;
 import com.android.dialer.spam.stub.StubSpamModule;
 import com.android.dialer.storage.StorageModule;
-import com.android.dialer.strictmode.impl.SystemStrictModeModule;
 import com.android.dialer.theme.base.impl.AospThemeModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
-import com.android.incallui.speakeasy.StubSpeakEasyModule;
 import com.android.voicemail.impl.VoicemailModule;
 import dagger.Component;
 import javax.inject.Singleton;
@@ -63,7 +60,6 @@ import javax.inject.Singleton;
       PreCallModule.class,
       PreferredSimModule.class,
       PromotionModule.class,
-      SharedPrefConfigProviderModule.class,
       SimulatorModule.class,
       StubSimulatorEnrichedCallModule.class,
       StorageModule.class,
@@ -74,8 +70,6 @@ import javax.inject.Singleton;
       StubFeedbackModule.class,
       StubSimSuggestionModule.class,
       StubSpamModule.class,
-      StubSpeakEasyModule.class,
-      SystemStrictModeModule.class,
       AospThemeModule.class,
       VoicemailModule.class,
     })
