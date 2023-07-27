@@ -18,7 +18,6 @@ package com.android.dialer.assisteddialing;
 
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.strictmode.StrictModeUtils;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -32,7 +31,7 @@ final class NumberTransformer {
 
   NumberTransformer(Constraints constraints) {
     this.constraints = constraints;
-    this.phoneNumberUtil = StrictModeUtils.bypass(PhoneNumberUtil::getInstance);
+    this.phoneNumberUtil = PhoneNumberUtil.getInstance();
   }
 
   /**
@@ -53,27 +52,21 @@ final class NumberTransformer {
       return Optional.empty();
     }
 
-    PhoneNumber phoneNumber =
-        StrictModeUtils.bypass(
-            () -> {
-              try {
-                return phoneNumberUtil.parse(numbertoTransform, userHomeCountryCode);
-              } catch (NumberParseException e) {
-                LogUtil.i(
-                    "NumberTransformer.doAssistedDialingTransformation", "number failed to parse");
-                return null;
-              }
-            });
+    PhoneNumber phoneNumber;
+    try {
+      phoneNumber = phoneNumberUtil.parse(numbertoTransform, userHomeCountryCode);
+    } catch (NumberParseException e) {
+      LogUtil.i(
+          "NumberTransformer.doAssistedDialingTransformation", "number failed to parse");
+      phoneNumber = null;
+    }
 
     if (phoneNumber == null) {
       return Optional.empty();
     }
 
-    String transformedNumber =
-        StrictModeUtils.bypass(
-            () ->
-                phoneNumberUtil.formatNumberForMobileDialing(
-                    phoneNumber, userRoamingCountryCode, true));
+    String transformedNumber = phoneNumberUtil.formatNumberForMobileDialing(
+            phoneNumber, userRoamingCountryCode, true);
 
     // formatNumberForMobileDialing may return an empty String.
     if (TextUtils.isEmpty(transformedNumber)) {

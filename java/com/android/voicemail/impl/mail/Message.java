@@ -51,38 +51,18 @@ public abstract class Message implements Part, Body {
 
   public abstract void setSubject(String subject) throws MessagingException;
 
-  public Date getInternalDate() {
-    return internalDate;
-  }
-
   public void setInternalDate(Date internalDate) {
     this.internalDate = internalDate;
   }
 
-  public abstract Date getReceivedDate() throws MessagingException;
-
   public abstract Date getSentDate() throws MessagingException;
-
-  public abstract void setSentDate(Date sentDate) throws MessagingException;
 
   @Nullable
   public abstract Long getDuration() throws MessagingException;
 
-  public abstract Address[] getRecipients(String type) throws MessagingException;
-
-  public abstract void setRecipients(String type, Address[] addresses) throws MessagingException;
-
-  public void setRecipient(String type, Address address) throws MessagingException {
-    setRecipients(type, new Address[] {address});
-  }
-
   public abstract Address[] getFrom() throws MessagingException;
 
   public abstract void setFrom(Address from) throws MessagingException;
-
-  public abstract Address[] getReplyTo() throws MessagingException;
-
-  public abstract void setReplyTo(Address[] from) throws MessagingException;
 
   // Always use these instead of getHeader("Message-ID") or setHeader("Message-ID");
   public abstract void setMessageId(String messageId) throws MessagingException;
@@ -136,12 +116,6 @@ public abstract class Message implements Part, Body {
       setFlag(flag, set);
     }
   }
-
-  public boolean isSet(String flag) {
-    return getFlagSet().contains(flag);
-  }
-
-  public abstract void saveChanges() throws MessagingException;
 
   @Override
   public String toString() {
