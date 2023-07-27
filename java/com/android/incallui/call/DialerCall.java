@@ -45,9 +45,7 @@ import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.contacts.common.compat.CallCompat;
-import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.TransformationInfo;
-import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -55,7 +53,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.configprovider.ConfigProviderComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -76,7 +73,6 @@ import com.android.dialer.spam.status.SpamStatus;
 import com.android.dialer.telecom.TelecomCallUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.theme.common.R;
-import com.android.dialer.time.Clock;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
@@ -114,10 +110,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   private static final String ID_PREFIX = "DialerCall_";
 
-  @VisibleForTesting
-  public static final String CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS =
-      "emergency_callback_window_millis";
-
   private static int idCounter = 0;
 
   public static final int UNKNOWN_PEER_DIMENSIONS = -1;
@@ -146,8 +138,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private final List<CannedTextResponsesLoadedListener> cannedTextResponsesLoadedListeners =
       new CopyOnWriteArrayList<>();
   private final VideoTechManager videoTechManager;
-
-  private boolean isSpeakEasyCall;
   private boolean isEmergencyCall;
   private Uri handle;
   private int state = DialerCallState.INVALID;
@@ -191,8 +181,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String countryIso;
 
   private volatile boolean feedbackRequested = false;
-
-  private Clock clock = System::currentTimeMillis;
 
   @Nullable private PreferredAccountRecorder preferredAccountRecorder;
   private boolean isCallRemoved;
@@ -826,10 +814,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   boolean isInEmergencyCallbackWindow(long timestampMillis) {
-    long emergencyCallbackWindowMillis =
-        ConfigProviderComponent.get(context)
-            .getConfigProvider()
-            .getLong(CONFIG_EMERGENCY_CALLBACK_WINDOW_MILLIS, TimeUnit.MINUTES.toMillis(5));
+    long emergencyCallbackWindowMillis = TimeUnit.MINUTES.toMillis(5);
     return System.currentTimeMillis() - timestampMillis < emergencyCallbackWindowMillis;
   }
 
@@ -860,13 +845,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
         LogUtil.i("DialerCall.updateCallTiming", "state is already active");
         return;
       }
-      logState.dialerConnectTimeMillis = clock.currentTimeMillis();
+      logState.dialerConnectTimeMillis = System.currentTimeMillis();
       logState.dialerConnectTimeMillisElapsedRealtime = SystemClock.elapsedRealtime();
     }
 
     if (newState == DialerCallState.DISCONNECTED) {
       long newDuration =
-          getConnectTimeMillis() == 0 ? 0 : clock.currentTimeMillis() - getConnectTimeMillis();
+          getConnectTimeMillis() == 0 ? 0 : System.currentTimeMillis() - getConnectTimeMillis();
       if (this.state == DialerCallState.DISCONNECTED) {
         LogUtil.i(
             "DialerCall.setState",
@@ -880,7 +865,7 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       logState.dialerDurationMillis =
           logState.dialerConnectTimeMillis == 0
               ? 0
-              : clock.currentTimeMillis() - logState.dialerConnectTimeMillis;
+              : System.currentTimeMillis() - logState.dialerConnectTimeMillis;
       logState.dialerDurationMillisElapsedRealtime =
           logState.dialerConnectTimeMillisElapsedRealtime == 0
               ? 0
@@ -888,11 +873,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     } else if (state == DialerCallState.DIALING || state == DialerCallState.CONNECTING) {
       isOutgoing = true;
     }
-  }
-
-  @VisibleForTesting
-  void setClock(Clock clock) {
-    this.clock = clock;
   }
 
   public boolean isOutgoing() {
@@ -1670,66 +1650,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
   public void setPreferredAccountRecorder(PreferredAccountRecorder preferredAccountRecorder) {
     this.preferredAccountRecorder = preferredAccountRecorder;
-  }
-
-  /** Indicates the call is eligible for SpeakEasy */
-  public boolean isSpeakEasyEligible() {
-
-    PhoneAccount phoneAccount = getPhoneAccount();
-
-    if (phoneAccount == null) {
-      return false;
-    }
-
-    if (!phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
-      return false;
-    }
-
-    return !isPotentialEmergencyCallback()
-        && !isEmergencyCall()
-        && !isActiveRttCall()
-        && !isConferenceCall()
-        && !isVideoCall()
-        && !isVoiceMailNumber()
-        && !hasReceivedVideoUpgradeRequest()
-        && !isVoipCallNotSupportedBySpeakeasy();
-  }
-
-  private boolean isVoipCallNotSupportedBySpeakeasy() {
-    Bundle extras = getIntentExtras();
-
-    if (extras == null) {
-      return false;
-    }
-
-    // Indicates an VOIP call.
-    String callid = extras.getString("callid");
-
-    if (TextUtils.isEmpty(callid)) {
-      LogUtil.i("DialerCall.isVoipCallNotSupportedBySpeakeasy", "callid was empty");
-      return false;
-    }
-
-    LogUtil.i("DialerCall.isVoipCallNotSupportedBySpeakeasy", "call is not eligible");
-    return true;
-  }
-
-  /** Indicates the user has selected SpeakEasy */
-  public boolean isSpeakEasyCall() {
-    if (!isSpeakEasyEligible()) {
-      return false;
-    }
-    return isSpeakEasyCall;
-  }
-
-  /** Sets the user preference for SpeakEasy */
-  public void setIsSpeakEasyCall(boolean isSpeakEasyCall) {
-    this.isSpeakEasyCall = isSpeakEasyCall;
-    if (listeners != null) {
-      for (DialerCallListener listener : listeners) {
-        listener.onDialerCallSpeakEasyStateChange();
-      }
-    }
   }
 
   /**

@@ -22,10 +22,6 @@
       android:key="@string/voicemail_notifications_key"
       android:title="@string/voicemail_notifications_preference_title"/>
 
-  <Preference
-    android:key="@string/voicemail_change_greeting_key"
-    android:title = "@string/voicemail_change_greeting_preference_title"/>
-
   <SwitchPreference
       android:key="@string/voicemail_visual_voicemail_key"
       android:title="@string/voicemail_visual_voicemail_switch_title"/>"
@@ -34,18 +30,6 @@
       android:dependency="@string/voicemail_visual_voicemail_key"
       android:key="@string/voicemail_visual_voicemail_archive_key"
       android:title="@string/voicemail_visual_voicemail_auto_archive_switch_title"/>"
-
-  <com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary
-      android:dependency="@string/voicemail_visual_voicemail_key"
-      android:key="@string/voicemail_visual_voicemail_transcription_key"
-      android:title="@string/voicemail_visual_voicemail_transcription_switch_title"
-      app:urlToOpen="@string/transcription_learn_more_url"/>
-
-  <com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary
-      android:dependency="@string/voicemail_visual_voicemail_transcription_key"
-      android:key="@string/voicemail_visual_voicemail_donation_key"
-      android:title="@string/voicemail_visual_voicemail_donation_switch_title"
-      app:urlToOpen="@string/donation_learn_more_url"/>
 
   <Preference
       android:key="@string/voicemail_change_pin_key"

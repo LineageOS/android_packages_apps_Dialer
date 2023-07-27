@@ -28,7 +28,6 @@ import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.Assert;
-import com.android.voicemail.impl.NeededForTesting;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +56,6 @@ public abstract class BaseTask implements Task {
   @NonNull private final List<Policy> policies = new ArrayList<>();
 
   private long executionTime;
-
-  private static Clock clock = new Clock();
 
   protected BaseTask(int id) {
     this.id = id;
@@ -123,7 +120,7 @@ public abstract class BaseTask implements Task {
   }
 
   public long getTimeMillis() {
-    return clock.getTimeMillis();
+    return SystemClock.elapsedRealtime();
   }
 
   /**
@@ -208,19 +205,5 @@ public abstract class BaseTask implements Task {
     for (Policy policy : policies) {
       policy.onDuplicatedTaskAdded();
     }
-  }
-
-  @NeededForTesting
-  static class Clock {
-
-    public long getTimeMillis() {
-      return SystemClock.elapsedRealtime();
-    }
-  }
-
-  /** Used to replace the clock with an deterministic clock */
-  @NeededForTesting
-  static void setClockForTesting(Clock clock) {
-    BaseTask.clock = clock;
   }
 }

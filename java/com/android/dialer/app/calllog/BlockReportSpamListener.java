@@ -33,7 +33,6 @@ import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.spam.SpamSettings;
-import com.android.dialer.spam.promo.SpamBlockingPromoHelper;
 
 /** Listener to show dialogs for block and report spam actions. */
 public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClickListener {
@@ -45,7 +44,6 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
   private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
   private final Spam spam;
   private final SpamSettings spamSettings;
-  private final SpamBlockingPromoHelper spamBlockingPromoHelper;
 
   public BlockReportSpamListener(
       Context context,
@@ -60,7 +58,6 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
     this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
     spam = SpamComponent.get(context).spam();
     spamSettings = SpamComponent.get(context).spamSettings();
-    spamBlockingPromoHelper = new SpamBlockingPromoHelper(context, spamSettings);
   }
 
   @Override
@@ -204,28 +201,5 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
   }
 
   private void showSpamBlockingPromoDialog() {
-    if (!spamBlockingPromoHelper.shouldShowSpamBlockingPromo()) {
-      return;
-    }
-
-    Logger.get(context).logImpression(DialerImpression.Type.SPAM_BLOCKING_CALL_LOG_PROMO_SHOWN);
-    spamBlockingPromoHelper.showSpamBlockingPromoDialog(
-        fragmentManager,
-        () -> {
-          Logger.get(context)
-              .logImpression(DialerImpression.Type.SPAM_BLOCKING_ENABLED_THROUGH_CALL_LOG_PROMO);
-          spamSettings.modifySpamBlockingSetting(
-              true,
-              success -> {
-                if (!success) {
-                  Logger.get(context)
-                      .logImpression(
-                          DialerImpression.Type
-                              .SPAM_BLOCKING_MODIFY_FAILURE_THROUGH_CALL_LOG_PROMO);
-                }
-                spamBlockingPromoHelper.showModifySettingOnCompleteSnackbar(rootView, success);
-              });
-        },
-        null /* onDismissListener */);
   }
 }
