@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdcaba33_ab4818f7",
+        "filename": "java/com/android/dialer/app/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-28T20:15:46Z",
+      "side": 1,
+      "message": "zap",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 87
+      },
+      "revId": "a5944eeda4b2196e65e18fb04bdda49b20ecaad6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb15544_84f68fb3",
+        "filename": "java/com/android/dialer/simulator/impl/SimulatorImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-28T20:15:46Z",
+      "side": 1,
+      "message": "you sure?",
+      "revId": "a5944eeda4b2196e65e18fb04bdda49b20ecaad6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
