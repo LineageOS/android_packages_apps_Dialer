@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +20,6 @@ package com.android.dialer.dialpadview;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,7 +40,6 @@ import android.provider.Contacts.People;
 import android.provider.Contacts.Phones;
 import android.provider.Contacts.PhonesColumns;
 import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -76,6 +74,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.dialer.R;
@@ -99,8 +99,9 @@ import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.base.Ascii;
-import com.google.common.base.Optional;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -373,7 +374,7 @@ public class DialpadFragment extends Fragment
         DialerExecutorComponent.get(getContext())
             .dialerExecutorFactory()
             .createUiTaskBuilder(
-                getFragmentManager(),
+                getParentFragmentManager(),
                 "DialpadFragment.initPhoneNumberFormattingTextWatcher",
                 new InitPhoneNumberFormattingTextWatcherWorker())
             .onSuccess(watcher -> dialpadView.getDigits().addTextChangedListener(watcher))
@@ -1077,11 +1078,12 @@ public class DialpadFragment extends Fragment
           if (isAirplaneModeOn) {
             DialogFragment dialogFragment =
                 ErrorDialogFragment.newInstance(R.string.dialog_voicemail_airplane_mode_message);
-            dialogFragment.show(getFragmentManager(), "voicemail_request_during_airplane_mode");
+            dialogFragment.show(getParentFragmentManager(),
+                    "voicemail_request_during_airplane_mode");
           } else {
             DialogFragment dialogFragment =
                 ErrorDialogFragment.newInstance(R.string.dialog_voicemail_not_ready_message);
-            dialogFragment.show(getFragmentManager(), "voicemail_not_ready");
+            dialogFragment.show(getParentFragmentManager(), "voicemail_not_ready");
           }
         }
         return true;

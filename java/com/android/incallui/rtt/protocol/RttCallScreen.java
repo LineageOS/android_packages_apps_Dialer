@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +17,12 @@
 
 package com.android.incallui.rtt.protocol;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.incallui.incall.protocol.InCallScreen;
+
 import java.util.List;
 
 /** Interface for call RTT call module. */

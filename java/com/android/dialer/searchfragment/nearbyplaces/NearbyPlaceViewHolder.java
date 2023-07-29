@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +21,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.contacts.common.util.Constants;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.lettertile.LetterTileDrawable;

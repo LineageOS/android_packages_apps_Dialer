@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +18,16 @@ package com.android.dialer.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
+
 import com.android.dialer.inject.ApplicationContext;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 
 /** Module for the storage component. */
 @Module

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +17,6 @@
 
 package com.android.dialer.voicemail.settings;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -43,6 +43,7 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
@@ -54,6 +55,7 @@ import com.android.voicemail.PinChanger.ChangePinResult;
 import com.android.voicemail.PinChanger.PinSpecification;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -61,7 +63,7 @@ import java.lang.ref.WeakReference;
  * traditional voicemail through phone call. The intent to launch this activity must contain {@link
  * VoicemailClient#PARAM_PHONE_ACCOUNT_HANDLE}
  */
-public class VoicemailChangePinActivity extends Activity
+public class VoicemailChangePinActivity extends AppCompatActivity
     implements OnClickListener, OnEditorActionListener, TextWatcher {
 
   private static final String TAG = "VmChangePinActivity";
@@ -355,7 +357,7 @@ public class VoicemailChangePinActivity extends Activity
     changePinExecutor =
         DialerExecutorComponent.get(this)
             .dialerExecutorFactory()
-            .createUiTaskBuilder(getFragmentManager(), "changePin", new ChangePinWorker())
+            .createUiTaskBuilder(getSupportFragmentManager(), "changePin", new ChangePinWorker())
             .onSuccess(this::sendResult)
             .onFailure((tr) -> sendResult(PinChanger.CHANGE_PIN_SYSTEM_ERROR))
             .build();

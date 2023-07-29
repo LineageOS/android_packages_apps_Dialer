@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +18,6 @@
 package com.android.dialer.speeddial;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -30,6 +27,10 @@ import android.widget.FrameLayout;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -40,6 +41,7 @@ import com.android.dialer.speeddial.SuggestionViewHolder.SuggestedContactsListen
 import com.android.dialer.speeddial.draghelper.SpeedDialItemTouchHelperCallback.ItemTouchHelperAdapter;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.google.common.collect.ImmutableList;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -214,8 +216,8 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     return ImmutableList.copyOf(speedDialUiItems);
   }
 
-  public SpanSizeLookup getSpanSizeLookup() {
-    return new SpanSizeLookup() {
+  public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
+    return new GridLayoutManager.SpanSizeLookup() {
       @Override
       public int getSpanSize(int position) {
         switch (getItemViewType(position)) {

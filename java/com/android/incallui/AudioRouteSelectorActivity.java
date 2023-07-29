@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +18,11 @@
 package com.android.incallui;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.telecom.CallAudioState;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;

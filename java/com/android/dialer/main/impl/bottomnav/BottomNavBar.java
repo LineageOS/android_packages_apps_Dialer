@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,12 +41,14 @@ public final class BottomNavBar extends LinearLayout {
   /** Index for each tab in the bottom nav. */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
+    TabIndex.NONE,
     TabIndex.SPEED_DIAL,
     TabIndex.CALL_LOG,
     TabIndex.CONTACTS,
     TabIndex.VOICEMAIL,
   })
   public @interface TabIndex {
+    int NONE = -1;
     int SPEED_DIAL = 0;
     int CALL_LOG = 1;
     int CONTACTS = 2;

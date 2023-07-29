@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +19,6 @@ package com.android.dialer.rtt;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -26,11 +26,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.dialer.R;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 
 /** ViewHolder class for RTT chat message bubble. */
-public class RttTranscriptMessageViewHolder extends ViewHolder {
+public class RttTranscriptMessageViewHolder extends RecyclerView.ViewHolder {
 
   private final TextView messageTextView;
   private final Resources resources;

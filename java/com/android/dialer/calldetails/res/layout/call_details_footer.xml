@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2015 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,7 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/footer_container"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
@@ -31,37 +33,37 @@
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_content_copy_vd_theme_24"
       android:tint="?colorIcon"
-      android:text="@string/call_details_copy_number"/>
+      android:text="@string/call_details_copy_number"
+      app:drawableStartCompat="@drawable/quantum_ic_content_copy_vd_theme_24" />
 
   <TextView
       android:id="@+id/call_detail_action_edit_before_call"
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_edit_vd_theme_24"
-      android:drawableTint="?colorIcon"
       android:tint="?colorIcon"
-      android:text="@string/call_details_edit_number"/>
+      android:text="@string/call_details_edit_number"
+      app:drawableStartCompat="@drawable/quantum_ic_edit_vd_theme_24"
+      app:drawableTint="?colorIcon" />
 
   <TextView
       android:id="@+id/call_detail_action_report_caller_id"
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_report_vd_theme_24"
       android:text="@string/call_details_report_call_id"
       android:tint="?colorIcon"
-      android:visibility="gone"/>
+      android:visibility="gone"
+      app:drawableStartCompat="@drawable/quantum_ic_report_vd_theme_24" />
 
   <TextView
       android:id="@+id/call_detail_action_delete"
       style="@style/CallDetailsActionItemStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:drawableStart="@drawable/quantum_ic_delete_vd_theme_24"
-      android:drawableTint="?colorIcon"
       android:tint="?colorIcon"
-      android:text="@string/delete"/>
+      android:text="@string/delete"
+      app:drawableTint="?colorIcon"
+      app:drawableStartCompat="@drawable/quantum_ic_delete_vd_theme_24" />
 </LinearLayout>

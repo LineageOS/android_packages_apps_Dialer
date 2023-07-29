@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +20,6 @@ package com.android.dialer.speeddial;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +29,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.dialer.R;
 import com.android.dialer.callintent.CallInitiationType;
@@ -47,6 +48,7 @@ import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.List;
 import java.util.Set;
 
