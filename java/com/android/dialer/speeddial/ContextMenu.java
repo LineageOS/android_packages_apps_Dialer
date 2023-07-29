@@ -18,7 +18,6 @@ package com.android.dialer.speeddial;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.text.TextUtils;
@@ -115,13 +114,7 @@ public class ContextMenu extends PopupMenu implements OnMenuItemClickListener {
     return true;
   }
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public boolean isVisible() {
-    return visible;
-  }
-
   /** Listener to report user clicks on menu items. */
-  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public interface ContextMenuItemListener {
 
     /** Called when the user selects "voice call" or "video call" option from the context menu. */

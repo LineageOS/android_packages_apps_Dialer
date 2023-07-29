@@ -20,7 +20,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.Time;
@@ -194,8 +193,7 @@ public class CallLogGroupBuilder {
    * Returns true when the two input numbers can be considered identical enough for caller ID
    * purposes and put in a call log group.
    */
-  @VisibleForTesting
-  boolean equalNumbers(@Nullable String number1, @Nullable String number2) {
+  private boolean equalNumbers(@Nullable String number1, @Nullable String number2) {
     if (PhoneNumberHelper.isUriNumber(number1) || PhoneNumberHelper.isUriNumber(number2)) {
       return compareSipAddresses(number1, number2);
     }
@@ -216,8 +214,7 @@ public class CallLogGroupBuilder {
     return TextUtils.equals(name1, name2) && TextUtils.equals(id1, id2);
   }
 
-  @VisibleForTesting
-  boolean compareSipAddresses(@Nullable String number1, @Nullable String number2) {
+  private boolean compareSipAddresses(@Nullable String number1, @Nullable String number2) {
     if (number1 == null || number2 == null) {
       return Objects.equals(number1, number2);
     }

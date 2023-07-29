@@ -36,7 +36,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
@@ -1131,11 +1130,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
   public void setDetailedPhoneDetails(CallDetailsEntries callDetailsEntries) {
     this.callDetailsEntries = callDetailsEntries;
-  }
-
-  @VisibleForTesting
-  public CallDetailsEntries getDetailedPhoneDetails() {
-    return callDetailsEntries;
   }
 
   @Override

@@ -37,7 +37,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
@@ -51,8 +50,7 @@ import java.util.List;
 /** Utility class to help with runtime permissions. */
 public class PermissionsUtil {
 
-  @VisibleForTesting
-  public static final String PREFERENCE_CAMERA_ALLOWED_BY_USER = "camera_allowed_by_user";
+  private static final String PREFERENCE_CAMERA_ALLOWED_BY_USER = "camera_allowed_by_user";
 
   private static final String PERMISSION_PREFERENCE = "dialer_permissions";
   private static final String CEQUINT_PERMISSION = "com.cequint.ecid.CALLER_ID_LOOKUP";

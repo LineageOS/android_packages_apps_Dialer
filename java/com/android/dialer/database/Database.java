@@ -42,8 +42,4 @@ public class Database {
     }
     return databaseBindings;
   }
-
-  public static void setForTesting(DatabaseBindings databaseBindings) {
-    Database.databaseBindings = databaseBindings;
-  }
 }

@@ -24,7 +24,6 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.VoicemailContract;
-import android.support.annotation.VisibleForTesting;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,8 +185,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     getActivity().sendBroadcast(intent);
   }
 
-  @VisibleForTesting
-  boolean shouldAutoSync(
+  private boolean shouldAutoSync(
       VoicemailErrorMessageCreator errorMessageCreator, List<VoicemailStatus> statuses) {
     for (VoicemailStatus status : statuses) {
       if (!status.isActive(getContext())) {

@@ -21,8 +21,7 @@ import java.util.concurrent.Executor;
 /**
  * Executor that can be used to easily synchronize testing and production code. Production code
  * should call {@link #milestone()} at points in the code where the state of the system is worthy of
- * testing. In a test scenario, this method will pause execution until the test acknowledges the
- * milestone through the use of {@link #ackMilestoneForTesting()}.
+ * testing.
  */
 public interface PausableExecutor extends Executor {
 
@@ -33,24 +32,4 @@ public interface PausableExecutor extends Executor {
    * this should be a no-op.
    */
   void milestone();
-
-  /**
-   * Method called from the test code to inform this executor that the state of the production
-   * system at the current milestone has been sufficiently tested. Every milestone must be
-   * acknowledged.
-   */
-  void ackMilestoneForTesting();
-
-  /**
-   * Method called from the test code to inform this executor that the tests are finished with all
-   * milestones. Future calls to {@link #milestone()} or {@link #awaitMilestoneForTesting()} should
-   * return immediately.
-   */
-  void ackAllMilestonesForTesting();
-
-  /**
-   * Method called from the test code to block until a milestone has been reached in the production
-   * code.
-   */
-  void awaitMilestoneForTesting() throws InterruptedException;
 }
