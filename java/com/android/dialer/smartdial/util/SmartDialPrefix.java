@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +19,11 @@ package com.android.dialer.smartdial.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.preference.PreferenceManager;
+
 import com.android.dialer.smartdial.map.CompositeSmartDialMap;
 import java.util.ArrayList;
 import java.util.HashSet;

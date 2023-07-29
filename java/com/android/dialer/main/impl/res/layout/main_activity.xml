@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -26,7 +27,7 @@
       android:id="@+id/toolbar"
       layout="@layout/toolbar_layout"/>
 
-  <android.support.design.widget.CoordinatorLayout
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
       android:id="@+id/coordinator_layout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -59,7 +60,7 @@
 
     <include android:id="@+id/promotion_bottom_sheet"
         layout="@layout/promotion_bottom_sheet"/>
-  </android.support.design.widget.CoordinatorLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
   <!-- BottomNavBar -->
   <include

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2007 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +16,7 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/call_log_list_item"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
@@ -33,7 +35,7 @@
     android:paddingBottom="@dimen/call_log_day_group_padding_bottom"
     style="@style/Dialer.TextAppearance.OVERLINE.Ellipsize"/>
 
-  <android.support.v7.widget.CardView
+  <androidx.cardview.widget.CardView
     android:id="@+id/call_log_row"
     style="@style/CallLogCardStyle">
 
@@ -148,8 +150,8 @@
           android:layout_gravity="center_vertical"
           android:background="?android:attr/selectableItemBackgroundBorderless"
           android:scaleType="center"
-          android:tint="?colorIcon"
-          android:visibility="gone"/>
+          android:visibility="gone"
+          app:tint="?colorIcon" />
 
       </LinearLayout>
 
@@ -164,6 +166,6 @@
 
     </LinearLayout>
 
-  </android.support.v7.widget.CardView>
+  </androidx.cardview.widget.CardView>
 
 </LinearLayout>

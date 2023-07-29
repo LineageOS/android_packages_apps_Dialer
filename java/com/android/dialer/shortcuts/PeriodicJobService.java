@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +23,10 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
-import android.support.v4.os.UserManagerCompat;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
+import androidx.core.os.UserManagerCompat;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;

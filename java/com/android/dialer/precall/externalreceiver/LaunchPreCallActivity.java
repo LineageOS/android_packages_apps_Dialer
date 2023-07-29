@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +26,7 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -39,7 +41,7 @@ import com.google.common.collect.ImmutableList;
  *
  * @see CallIntentBuilder
  */
-public class LaunchPreCallActivity extends Activity {
+public class LaunchPreCallActivity extends AppCompatActivity {
 
   public static final String EXTRA_PHONE_ACCOUNT_HANDLE = "phone_account_handle";
 

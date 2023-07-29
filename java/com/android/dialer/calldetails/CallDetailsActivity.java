@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +17,14 @@
 
 package com.android.dialer.calldetails;
 
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import com.android.dialer.CoalescedIds;
 import com.android.dialer.calldetails.CallDetailsEntryViewHolder.CallDetailsEntryListener;
 import com.android.dialer.calldetails.CallDetailsFooterViewHolder.DeleteCallDetailsListener;
@@ -83,8 +86,7 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
         ProtoParsers.getTrusted(
             intent, EXTRA_HEADER_INFO, CallDetailsHeaderInfo.getDefaultInstance());
 
-    getLoaderManager()
-        .initLoader(
+    LoaderManager.getInstance(this).initLoader(
             CALL_DETAILS_LOADER_ID, /* args = */ null, new CallDetailsLoaderCallbacks(this));
   }
 
@@ -112,10 +114,11 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
   }
 
   /**
-   * {@link LoaderCallbacks} for {@link CallDetailsCursorLoader}, which loads call detail entries
-   * from {@link AnnotatedCallLog}.
+   * {@link LoaderManager.LoaderCallbacks} for {@link CallDetailsCursorLoader}, which loads call
+   * detail entries from {@link AnnotatedCallLog}.
    */
-  private static final class CallDetailsLoaderCallbacks implements LoaderCallbacks<Cursor> {
+  private static final class CallDetailsLoaderCallbacks implements
+          LoaderManager.LoaderCallbacks<Cursor> {
     private final CallDetailsActivity activity;
 
     CallDetailsLoaderCallbacks(CallDetailsActivity callDetailsActivity) {

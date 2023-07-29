@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +22,6 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -39,6 +39,7 @@ import com.android.dialer.phonenumbercache.PhoneNumberCache;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +20,6 @@ package com.android.voicemail.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
-import android.preference.PreferenceManager;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.telephony.VisualVoicemailService;
@@ -27,6 +27,7 @@ import android.telephony.VisualVoicemailSms;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;

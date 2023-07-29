@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +20,15 @@ package com.android.dialer.calllog.notifier;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.content.LocalBroadcastManager;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.android.dialer.calllog.constants.IntentNames;
 import com.android.dialer.calllog.constants.SharedPrefKeys;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.storage.Unencrypted;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 

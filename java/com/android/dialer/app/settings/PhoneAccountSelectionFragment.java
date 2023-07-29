@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +21,16 @@ import android.app.Fragment;
 import android.content.Context;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
 import java.util.List;
 
 /**
@@ -35,7 +39,7 @@ import java.util.List;
  */
 public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
 
-  /** The {@link PreferenceFragment} to launch after the account is selected. */
+  /** The {@link PreferenceFragmentCompat} to launch after the account is selected. */
   public static final String PARAM_TARGET_FRAGMENT = "target_fragment";
 
   /**
@@ -71,6 +75,11 @@ public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
     titleRes = getArguments().getInt(PARAM_TARGET_TITLE_RES, 0);
   }
 
+  @Override
+  public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+
+  }
+
   final class AccountPreference extends Preference {
     private final PhoneAccountHandle phoneAccountHandle;
 
@@ -89,9 +98,10 @@ public class PhoneAccountSelectionFragment extends DialerPreferenceFragment {
     @Override
     protected void onClick() {
       super.onClick();
-      PreferenceActivity preferenceActivity = (PreferenceActivity) getActivity();
+      // TODO BadDaemon: fix this
+      /*PreferenceActivity preferenceActivity = (PreferenceActivity) getActivity();
       arguments.putParcelable(phoneAccountHandleKey, phoneAccountHandle);
-      preferenceActivity.startWithFragment(targetFragment, arguments, null, 0, titleRes, 0);
+      preferenceActivity.startWithFragment(targetFragment, arguments, null, 0, titleRes, 0);*/
     }
   }
 

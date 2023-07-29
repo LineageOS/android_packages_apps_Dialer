@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +26,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.v4.os.UserManagerCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.os.UserManagerCompat;
 
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.database.Selection;
@@ -42,6 +43,7 @@ import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.PermissionsUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

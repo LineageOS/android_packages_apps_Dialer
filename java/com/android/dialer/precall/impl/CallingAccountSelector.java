@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +27,7 @@ import android.telephony.PhoneNumberUtils;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment;
 import com.android.contacts.common.widget.SelectPhoneAccountDialogFragment.SelectPhoneAccountListener;
@@ -179,7 +181,7 @@ public class CallingAccountSelector implements PreCallAction {
                 pendingAction,
                 new PreferredAccountRecorder(number, suggestion, dataId)));
     selectPhoneAccountDialogFragment.show(
-        coordinator.getActivity().getFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
+        ((FragmentActivity) coordinator.getActivity()).getSupportFragmentManager(), TAG_CALLING_ACCOUNT_SELECTOR);
   }
 
   @MainThread
