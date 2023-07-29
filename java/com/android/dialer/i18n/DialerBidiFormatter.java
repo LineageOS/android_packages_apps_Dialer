@@ -16,12 +16,14 @@
 
 package com.android.dialer.i18n;
 
-import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.SpannableStringBuilder;
 import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Patterns;
+
+import androidx.annotation.Nullable;
+
 import java.util.regex.Matcher;
 
 /** A formatter that applies bidirectional formatting to phone numbers in text. */

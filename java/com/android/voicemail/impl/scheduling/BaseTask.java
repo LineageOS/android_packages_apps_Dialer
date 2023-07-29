@@ -20,11 +20,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.CallSuper;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.Assert;
 import java.util.ArrayList;
@@ -51,7 +53,8 @@ public abstract class BaseTask implements Task {
   private boolean hasStarted;
   private volatile boolean hasFailed;
 
-  @NonNull private final List<Policy> policies = new ArrayList<>();
+  @NonNull
+  private final List<Policy> policies = new ArrayList<>();
 
   private long executionTime;
 

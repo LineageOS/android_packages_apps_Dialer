@@ -19,8 +19,10 @@ package com.android.dialer.simulator.impl;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.support.annotation.MainThread;
 import android.telecom.Connection.RttTextStream;
+
+import androidx.annotation.MainThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.rtt.protocol.Constants;

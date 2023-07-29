@@ -17,8 +17,10 @@
 package com.android.dialer.common.concurrent;
 
 import android.app.FragmentManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.NonUiParallel;
@@ -85,7 +87,8 @@ public class DefaultDialerExecutorFactory implements DialerExecutorFactory {
         throwable -> {
           throw new RuntimeException(throwable);
         };
-    @Nullable final ScheduledExecutorService serialExecutorService;
+    @Nullable
+    final ScheduledExecutorService serialExecutorService;
     @Nullable final Executor parallelExecutor;
 
     BaseTaskBuilder(

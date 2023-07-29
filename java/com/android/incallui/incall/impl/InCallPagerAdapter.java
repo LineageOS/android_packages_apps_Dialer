@@ -16,11 +16,13 @@
 
 package com.android.incallui.incall.impl;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.incallui.sessiondata.MultimediaFragment;
@@ -28,7 +30,8 @@ import com.android.incallui.sessiondata.MultimediaFragment;
 /** View pager adapter for in call ui. */
 public class InCallPagerAdapter extends FragmentStatePagerAdapter {
 
-  @Nullable private MultimediaData attachments;
+  @Nullable
+  private MultimediaData attachments;
   private final boolean showInCallButtonGrid;
 
   public InCallPagerAdapter(

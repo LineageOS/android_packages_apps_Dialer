@@ -16,9 +16,11 @@
 
 package com.android.dialer.simulator.impl;
 
-import android.support.annotation.NonNull;
 import android.telecom.Connection.RttModifyStatus;
 import android.telecom.DisconnectCause;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;

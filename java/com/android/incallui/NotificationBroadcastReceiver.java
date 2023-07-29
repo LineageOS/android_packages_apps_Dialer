@@ -19,9 +19,11 @@ package com.android.incallui;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.telecom.CallAudioState;
 import android.telecom.VideoProfile;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.logging.DialerImpression;

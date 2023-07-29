@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
@@ -33,6 +32,10 @@ import android.widget.ImageView;
 import android.widget.Space;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
+
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
@@ -95,7 +98,7 @@ public class ContactGridManager {
   private boolean isInMultiWindowMode;
 
   public ContactGridManager(
-      View view, @Nullable ImageView avatarImageView, int avatarSize, boolean showAnonymousAvatar) {
+          View view, @Nullable ImageView avatarImageView, int avatarSize, boolean showAnonymousAvatar) {
     context = view.getContext();
     Assert.isNotNull(context);
 

@@ -19,8 +19,10 @@ package com.android.dialer.calllog.ui;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
-import android.support.annotation.MainThread;
 import android.util.ArrayMap;
+
+import androidx.annotation.MainThread;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.model.CoalescedRow;
 import com.android.dialer.calllogutils.NumberAttributesBuilder;

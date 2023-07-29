@@ -17,10 +17,12 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -32,7 +34,8 @@ final class SimulatorRttCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
 
   @NonNull private final Context context;
-  @Nullable private String connectionTag;
+  @Nullable
+  private String connectionTag;
   private RttChatBot rttChatBot;
 
   SimulatorRttCall(@NonNull Context context) {

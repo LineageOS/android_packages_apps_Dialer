@@ -19,10 +19,12 @@ package com.android.dialer.persistentlog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.annotation.AnyThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
+
+import androidx.annotation.AnyThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.io.IOException;
