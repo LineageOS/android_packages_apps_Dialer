@@ -24,7 +24,6 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -40,9 +39,6 @@ import com.google.protobuf.InvalidProtocolBufferException;
 /** Creates an intent to start a new outgoing call. */
 @AutoValue
 public abstract class CallIntent implements Parcelable {
-  private static int lightbringerButtonAppearInExpandedCallLogItemCount = 0;
-  private static int lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
-  private static int lightbringerButtonAppearInSearchCount = 0;
 
   abstract Uri number();
 
@@ -137,14 +133,9 @@ public abstract class CallIntent implements Parcelable {
     public Intent build() {
       CallSpecificAppData.Builder builder =
           CallSpecificAppData.newBuilder(callSpecificAppData())
-              .setLightbringerButtonAppearInExpandedCallLogItemCount(
-                  lightbringerButtonAppearInExpandedCallLogItemCount)
-              .setLightbringerButtonAppearInCollapsedCallLogItemCount(
-                  lightbringerButtonAppearInCollapsedCallLogItemCount)
-              .setLightbringerButtonAppearInSearchCount(lightbringerButtonAppearInSearchCount);
-      lightbringerButtonAppearInExpandedCallLogItemCount = 0;
-      lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
-      lightbringerButtonAppearInSearchCount = 0;
+              .setLightbringerButtonAppearInExpandedCallLogItemCount(0)
+              .setLightbringerButtonAppearInCollapsedCallLogItemCount(0)
+              .setLightbringerButtonAppearInSearchCount(0);
 
       if (PerformanceReport.isRecording()) {
         builder
@@ -211,40 +202,6 @@ public abstract class CallIntent implements Parcelable {
     longPlaceCallExtras().forEach(bundle::putLong);
     CallIntentParser.putCallSpecificAppData(bundle, callSpecificAppData());
     return bundle;
-  }
-
-  public static void increaseLightbringerCallButtonAppearInExpandedCallLogItemCount() {
-    CallIntent.lightbringerButtonAppearInExpandedCallLogItemCount++;
-  }
-
-  public static void increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount() {
-    CallIntent.lightbringerButtonAppearInCollapsedCallLogItemCount++;
-  }
-
-  public static void increaseLightbringerCallButtonAppearInSearchCount() {
-    CallIntent.lightbringerButtonAppearInSearchCount++;
-  }
-
-  @VisibleForTesting
-  public static int getLightbringerButtonAppearInExpandedCallLogItemCount() {
-    return lightbringerButtonAppearInExpandedCallLogItemCount;
-  }
-
-  @VisibleForTesting
-  public static int getLightbringerButtonAppearInCollapsedCallLogItemCount() {
-    return lightbringerButtonAppearInCollapsedCallLogItemCount;
-  }
-
-  @VisibleForTesting
-  public static int getLightbringerButtonAppearInSearchCount() {
-    return lightbringerButtonAppearInSearchCount;
-  }
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void clearLightbringerCounts() {
-    lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
-    lightbringerButtonAppearInExpandedCallLogItemCount = 0;
-    lightbringerButtonAppearInSearchCount = 0;
   }
 
   @Override

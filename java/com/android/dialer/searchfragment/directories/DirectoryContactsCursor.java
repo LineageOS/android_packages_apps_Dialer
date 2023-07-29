@@ -21,7 +21,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.cp2.DirectoryUtils;
 import com.android.dialer.searchfragment.common.SearchCursor;
@@ -39,7 +38,6 @@ import java.util.List;
  * <p>This cursor merges them together with a header at the start of each cursor/list using {@link
  * Directory#getDisplayName()} as the header text.
  */
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 public final class DirectoryContactsCursor extends MergeCursor implements SearchCursor {
 
   /**
@@ -57,7 +55,6 @@ public final class DirectoryContactsCursor extends MergeCursor implements Search
    * empty, null or closed, this method returns null.
    */
   @Nullable
-  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public static DirectoryContactsCursor newInstance(
       Context context, Cursor[] cursors, List<Directory> directories) {
     Assert.checkArgument(

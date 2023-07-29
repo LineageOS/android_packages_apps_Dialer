@@ -26,7 +26,6 @@ import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
 import android.provider.BlockedNumberContract.BlockedNumbers;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -42,10 +41,9 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
 
   public static final int INVALID_ID = -1;
   // Id used to replace null for blocked id since ConcurrentHashMap doesn't allow null key/value.
-  @VisibleForTesting static final int BLOCKED_NUMBER_CACHE_NULL_ID = -1;
+  private static final int BLOCKED_NUMBER_CACHE_NULL_ID = -1;
 
-  @VisibleForTesting
-  static final Map<String, Integer> blockedNumberCache = new ConcurrentHashMap<>();
+  private static final Map<String, Integer> blockedNumberCache = new ConcurrentHashMap<>();
 
   private static final int NO_TOKEN = 0;
   private final Context context;
@@ -218,7 +216,6 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
     }
   }
 
-  @VisibleForTesting
   public void clearCache() {
     blockedNumberCache.clear();
   }

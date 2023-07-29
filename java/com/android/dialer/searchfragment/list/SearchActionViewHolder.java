@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -111,12 +110,6 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
       default:
         throw Assert.createIllegalStateFailException("Invalid action: " + action);
     }
-  }
-
-  @VisibleForTesting
-  @Action
-  int getAction() {
-    return action;
   }
 
   @Override

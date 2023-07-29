@@ -22,7 +22,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.annotation.MainThread;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.InCallService;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -49,10 +48,6 @@ public class TelecomAdapter implements InCallServiceListener {
     return instance;
   }
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setInstanceForTesting(TelecomAdapter telecomAdapter) {
-    instance = telecomAdapter;
-  }
 
   @Override
   public void setInCallService(InCallService inCallService) {

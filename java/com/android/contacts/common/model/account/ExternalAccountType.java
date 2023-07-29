@@ -27,7 +27,6 @@ import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
@@ -241,8 +240,7 @@ public class ExternalAccountType extends BaseAccountType {
    * @param packageName name of the package containing the resource.
    * @param xmlAttributeName attribute name which the resource came from. Used for logging.
    */
-  @VisibleForTesting
-  static int resolveExternalResId(
+  private static int resolveExternalResId(
       Context context, String resourceName, String packageName, String xmlAttributeName) {
     if (TextUtils.isEmpty(resourceName)) {
       return -1; // Empty text is okay.
