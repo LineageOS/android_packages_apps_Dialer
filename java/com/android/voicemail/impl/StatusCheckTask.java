@@ -19,13 +19,11 @@ import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
-import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sms.StatusSmsFetcher;
 import com.android.voicemail.impl.sync.VvmAccountManager;
-import com.android.voicemail.impl.utils.LoggerUtils;
 import java.io.IOException;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -109,16 +107,12 @@ public class StatusCheckTask extends BaseTask {
       VvmLog.i(
           "StatusCheckTask.onExecuteInBackgroundThread",
           "subscriber ready, no activation required");
-      LoggerUtils.logImpressionOnMainThread(
-          getContext(), DialerImpression.Type.VVM_STATUS_CHECK_READY);
       VvmAccountManager.addAccount(getContext(), getPhoneAccountHandle(), message);
     } else {
       VvmLog.i(
           "StatusCheckTask.onExecuteInBackgroundThread",
           "subscriber not ready, attempting reactivation");
       VvmAccountManager.removeAccount(getContext(), getPhoneAccountHandle());
-      LoggerUtils.logImpressionOnMainThread(
-          getContext(), DialerImpression.Type.VVM_STATUS_CHECK_REACTIVATION);
       ActivationTask.start(getContext(), getPhoneAccountHandle(), data);
     }
   }

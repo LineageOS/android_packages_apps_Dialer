@@ -28,8 +28,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.incallui.answer.protocol.AnswerScreen;
 import com.android.incallui.answer.protocol.AnswerScreenDelegate;
 import com.android.incallui.answerproximitysensor.AnswerProximitySensor;
@@ -122,18 +120,8 @@ public class AnswerScreenPresenter
 
     if (answerScreen.isVideoUpgradeRequest()) {
       if (answerVideoAsAudio) {
-        Logger.get(context)
-            .logCallImpression(
-                DialerImpression.Type.VIDEO_CALL_REQUEST_ACCEPTED_AS_AUDIO,
-                call.getUniqueCallId(),
-                call.getTimeAddedMs());
         call.getVideoTech().acceptVideoRequestAsAudio();
       } else {
-        Logger.get(context)
-            .logCallImpression(
-                DialerImpression.Type.VIDEO_CALL_REQUEST_ACCEPTED,
-                call.getUniqueCallId(),
-                call.getTimeAddedMs());
         call.getVideoTech().acceptVideoRequest(context);
       }
     } else {
@@ -148,11 +136,6 @@ public class AnswerScreenPresenter
   @Override
   public void onReject() {
     if (answerScreen.isVideoUpgradeRequest()) {
-      Logger.get(context)
-          .logCallImpression(
-              DialerImpression.Type.VIDEO_CALL_REQUEST_DECLINED,
-              call.getUniqueCallId(),
-              call.getTimeAddedMs());
       call.getVideoTech().declineVideoRequest();
     } else {
       call.reject(false /* rejectWithMessage */, null);

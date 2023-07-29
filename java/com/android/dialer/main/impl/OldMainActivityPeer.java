@@ -90,9 +90,6 @@ import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListe
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.OnBottomNavTabSelectedListener;
@@ -246,7 +243,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     FloatingActionButton fab = activity.findViewById(R.id.fab);
     fab.setOnClickListener(
         v -> {
-          Logger.get(activity).logImpression(DialerImpression.Type.MAIN_CLICK_FAB_TO_OPEN_DIALPAD);
           searchController.showDialpad(true);
           if (callLogAdapterOnActionModeStateChangedListener.isEnabled) {
             LogUtil.i("OldMainActivityPeer.onFabClicked", "closing multiselect");
@@ -407,7 +403,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
         LogUtil.i("OldMainActivityPeer.onHandleIntent", "Voicemail content type intent");
         tabToSelect = TabIndex.VOICEMAIL;
-        Logger.get(activity).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
       } else {
         LogUtil.i("OldMainActivityPeer.onHandleIntent", "Call log content type intent");
         tabToSelect = TabIndex.CALL_LOG;
@@ -420,34 +415,17 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       LogUtil.i("OldMainActivityPeer.onHandleIntent", "Show last tab");
       tabToSelect = lastTabController.getLastTab();
     }
-    logImpressionForSelectedTab(tabToSelect);
     bottomNav.selectTab(tabToSelect);
 
     if (isDialOrAddCallIntent(intent)) {
       LogUtil.i("OldMainActivityPeer.onHandleIntent", "Dial or add call intent");
       // Dialpad will grab the intent and populate the number
       searchController.showDialpadFromNewIntent();
-      Logger.get(activity).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_DIALPAD);
     }
 
     if (intent.getBooleanExtra(MainComponent.EXTRA_CLEAR_NEW_VOICEMAILS, false)) {
       LogUtil.i("OldMainActivityPeer.onHandleIntent", "clearing all new voicemails");
       CallLogNotificationsService.markAllNewVoicemailsAsOld(activity);
-    }
-  }
-
-  /** Log impression for non user tab selection. */
-  private void logImpressionForSelectedTab(@TabIndex int tab) {
-    if (tab == TabIndex.SPEED_DIAL) {
-      Logger.get(activity).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_TAB_FAVORITE);
-    } else if (tab == TabIndex.CALL_LOG) {
-      Logger.get(activity).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_TAB_CALL_LOG);
-    } else if (tab == TabIndex.CONTACTS) {
-      Logger.get(activity).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_TAB_CONTACTS);
-    } else if (tab == TabIndex.VOICEMAIL) {
-      Logger.get(activity).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_TAB_VOICEMAIL);
-    } else {
-      throw new IllegalStateException("Invalid tab: " + tab);
     }
   }
 
@@ -911,7 +889,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
               numberOfActiveVoicemailSources));
 
       if (hasActiveVoicemailProvider) {
-        Logger.get(context).logImpression(DialerImpression.Type.MAIN_VVM_TAB_VISIBLE);
         bottomNavBar.showVoicemail(true);
         callLogQueryHandler.fetchVoicemailUnreadCount();
       } else {
@@ -1131,7 +1108,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     @Override
     public void showAllContactsTab() {
       bottomNavBar.selectTab(TabIndex.CONTACTS);
-      Logger.get(context).logImpression(DialerImpression.Type.MAIN_OPEN_WITH_TAB_CONTACTS);
     }
 
     @Override
@@ -1247,7 +1223,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.SPEED_DIAL) {
         return;
       }
-      Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_SPEED_DIAL, activity);
       selectedTab = TabIndex.SPEED_DIAL;
 
       android.support.v4.app.Fragment supportFragment =
@@ -1265,7 +1240,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.CALL_LOG) {
         return;
       }
-      Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_CALL_LOG, activity);
       selectedTab = TabIndex.CALL_LOG;
 
       Fragment fragment = fragmentManager.findFragmentByTag(CALL_LOG_TAG);
@@ -1311,7 +1285,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.CONTACTS) {
         return;
       }
-      Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_CONTACTS, activity);
       selectedTab = TabIndex.CONTACTS;
       Fragment fragment = fragmentManager.findFragmentByTag(CONTACTS_TAG);
       showFragment(
@@ -1326,7 +1299,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       if (selectedTab == TabIndex.VOICEMAIL) {
         return;
       }
-      Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_VOICEMAIL, activity);
       selectedTab = TabIndex.VOICEMAIL;
 
       VisualVoicemailCallLogFragment fragment =

@@ -106,12 +106,6 @@ import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.interactions.PhoneNumberInteraction;
 import com.android.dialer.interactions.PhoneNumberInteraction.InteractionErrorCode;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
-import com.android.dialer.logging.UiAction;
-import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.proguard.UsedByReflection;
@@ -276,10 +270,6 @@ public class DialtactsActivity extends TransactionSafeActivity
             return;
           }
 
-          if (count != 0) {
-            PerformanceReport.recordClick(UiAction.Type.TEXT_CHANGE_WITH_INPUT);
-          }
-
           LogUtil.v("DialtactsActivity.onTextChanged", "called with new query: " + newText);
           LogUtil.v("DialtactsActivity.onTextChanged", "previous query: " + searchQuery);
           searchQuery = newText;
@@ -309,7 +299,6 @@ public class DialtactsActivity extends TransactionSafeActivity
         @Override
         public void onClick(View v) {
           if (!isInSearchUi()) {
-            PerformanceReport.recordClick(UiAction.Type.OPEN_SEARCH);
             actionBarController.onSearchBoxTapped();
             enterSearchUi(
                 false /* smartDialSearch */, searchView.getText().toString(), true /* animate */);
@@ -478,13 +467,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     Trace.beginSection(TAG + " onResume");
     super.onResume();
 
-    // Some calls may not be recorded (eg. from quick contact),
-    // so we should restart recording after these calls. (Recorded call is stopped)
-    PostCall.restartPerformanceRecordingIfARecentCallExist(this);
-    if (!PerformanceReport.isRecording()) {
-      PerformanceReport.startRecording();
-    }
-
     stateSaved = false;
     if (firstLaunch) {
       LogUtil.i("DialtactsActivity.onResume", "mFirstLaunch true, displaying fragment");
@@ -520,9 +502,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     if (isRestarting) {
       // This is only called when the activity goes from resumed -> paused -> resumed, so it
       // will not cause an extra view to be sent out on rotation
-      if (isDialpadShown) {
-        Logger.get(this).logScreenView(ScreenEvent.Type.DIALPAD, this);
-      }
       isRestarting = false;
     }
 
@@ -551,7 +530,6 @@ public class DialtactsActivity extends TransactionSafeActivity
         final Bundle extras = getIntent().getExtras();
         if (extras != null && extras.getInt(Calls.EXTRA_CALL_TYPE_FILTER) == Calls.VOICEMAIL_TYPE) {
           listsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_VOICEMAIL);
-          Logger.get(this).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CLICKED);
         } else {
           listsFragment.showTab(DialtactsPagerAdapter.TAB_INDEX_HISTORY);
         }
@@ -667,7 +645,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       if (!isDialpadShown) {
         LogUtil.i(
             "DialtactsActivity.onClick", "floating action button clicked, going to show dialpad");
-        PerformanceReport.recordClick(UiAction.Type.OPEN_DIALPAD);
         inCallDialpadUp = false;
         showDialpadFragment(true);
         PostCall.closePrompt();
@@ -701,16 +678,13 @@ public class DialtactsActivity extends TransactionSafeActivity
 
     int resId = item.getItemId();
     if (resId == R.id.menu_history) {
-      PerformanceReport.recordClick(UiAction.Type.OPEN_CALL_HISTORY);
       final Intent intent = new Intent(this, CallLogActivity.class);
       startActivity(intent);
     } else if (resId == R.id.menu_clear_frequents) {
       ClearFrequentsDialog.show(getFragmentManager());
-      Logger.get(this).logScreenView(ScreenEvent.Type.CLEAR_FREQUENTS, this);
       return true;
     } else if (resId == R.id.menu_call_settings) {
       handleMenuSettings();
-      Logger.get(this).logScreenView(ScreenEvent.Type.SETTINGS, this);
       return true;
     }
     return false;
@@ -805,7 +779,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
 
     dialpadFragment.setAnimate(animate);
-    Logger.get(this).logScreenView(ScreenEvent.Type.DIALPAD, this);
     ft.commit();
 
     if (animate) {
@@ -885,8 +858,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     }
     isDialpadShown = false;
     dialpadFragment.setAnimate(animate);
-    listsFragment.setUserVisibleHint(true);
-    listsFragment.sendScreenViewForCurrentPosition();
 
     updateSearchFragmentPosition();
 
@@ -1170,7 +1141,6 @@ public class DialtactsActivity extends TransactionSafeActivity
       // If the dialpad fragment wasn't previously visible, then send a screen view because
       // we are exiting regular search. Otherwise, the screen view will be sent by
       // {@link #hideDialpadFragment}.
-      listsFragment.sendScreenViewForCurrentPosition();
       listsFragment.setUserVisibleHint(true);
     }
     onPageSelected(listsFragment.getCurrentTabIndex());
@@ -1180,8 +1150,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onBackPressed() {
-    PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
-
     if (stateSaved) {
       return;
     }
@@ -1193,7 +1161,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     } else if (isInSearchUi()) {
       if (isKeyboardOpen) {
         DialerUtils.hideInputMethod(parentLayout);
-        PerformanceReport.recordClick(UiAction.Type.HIDE_KEYBOARD_IN_SEARCH);
       } else {
         exitSearchUi();
       }
@@ -1269,7 +1236,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   @Override
   public void onSearchListTouch() {
     if (isDialpadShown) {
-      PerformanceReport.recordClick(UiAction.Type.CLOSE_DIALPAD);
       hideDialpadFragment(true, false);
       if (TextUtils.isEmpty(dialpadQuery)) {
         exitSearchUi();
@@ -1281,7 +1247,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onListFragmentScrollStateChange(int scrollState) {
-    PerformanceReport.recordScrollStateChange(scrollState);
     if (scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
       hideDialpadFragment(true, false);
       DialerUtils.hideInputMethod(parentLayout);
@@ -1510,8 +1475,6 @@ public class DialtactsActivity extends TransactionSafeActivity
 
   @Override
   public void onContactSelected(ImageView photo, Uri contactUri, long contactId) {
-    Logger.get(this)
-        .logInteraction(InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_ITEM);
     QuickContact.showQuickContact(
         this, photo, contactUri, QuickContact.MODE_LARGE, null /* excludeMimes */);
   }

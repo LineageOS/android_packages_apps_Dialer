@@ -60,8 +60,6 @@ import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
@@ -554,12 +552,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         final PhoneItem phoneItem = phoneList.get(which);
         final CheckBox checkBox = (CheckBox) alertDialog.findViewById(R.id.setPrimary);
         if (checkBox.isChecked()) {
-          if (callSpecificAppData.getCallInitiationType() == CallInitiationType.Type.SPEED_DIAL) {
-            Logger.get(getContext())
-                .logInteraction(
-                    InteractionEvent.Type.SPEED_DIAL_SET_DEFAULT_NUMBER_FOR_AMBIGUOUS_CONTACT);
-          }
-
           // Request to mark the data as primary in the background.
           final Intent serviceIntent =
               ContactUpdateService.createSetSuperPrimaryIntent(activity, phoneItem.id);

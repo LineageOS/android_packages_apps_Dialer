@@ -25,8 +25,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.app.R;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.widget.BidiTextView;
 
 /** Displays the contact's picture overlaid with their name and number type in a tile. */
@@ -79,8 +77,6 @@ public class PhoneFavoriteSquareTileView extends PhoneFavoriteTileView {
           new OnClickListener() {
             @Override
             public void onClick(View v) {
-              Logger.get(getContext())
-                  .logInteraction(InteractionEvent.Type.SPEED_DIAL_OPEN_CONTACT_CARD);
               launchQuickContact();
             }
           });
