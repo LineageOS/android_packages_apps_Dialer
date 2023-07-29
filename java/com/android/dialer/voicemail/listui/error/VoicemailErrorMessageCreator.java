@@ -17,7 +17,9 @@
 package com.android.dialer.voicemail.listui.error;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 
 /**

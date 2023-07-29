@@ -17,9 +17,11 @@
 package com.android.dialer.widget;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.i18n.DialerBidiFormatter;
 
 /** A {@link TextView} that applies bidirectional formatting to its text. */

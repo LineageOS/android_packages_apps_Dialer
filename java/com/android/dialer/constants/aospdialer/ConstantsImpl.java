@@ -17,7 +17,9 @@
 package com.android.dialer.constants;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.proguard.UsedByReflection;
 
 /** Provider config values for AOSP Dialer. */

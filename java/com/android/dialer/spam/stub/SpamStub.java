@@ -16,7 +16,8 @@
 
 package com.android.dialer.spam.stub;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.logging.ContactLookupResult;

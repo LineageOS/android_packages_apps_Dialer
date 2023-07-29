@@ -16,9 +16,10 @@
 
 package com.android.dialer.glidephotomanager;
 
-import android.support.annotation.MainThread;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
+
+import androidx.annotation.MainThread;
 
 /** Class to load photo for call/contacts */
 public interface GlidePhotoManager {

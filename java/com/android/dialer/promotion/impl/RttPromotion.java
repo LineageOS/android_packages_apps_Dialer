@@ -18,7 +18,10 @@ package com.android.dialer.promotion.impl;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.DrawableRes;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.promotion.Promotion;

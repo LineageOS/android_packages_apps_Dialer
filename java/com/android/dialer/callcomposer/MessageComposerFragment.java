@@ -17,7 +17,6 @@
 package com.android.dialer.callcomposer;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -30,6 +29,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 
 /** Fragment used to compose call with message fragment. */
 public class MessageComposerFragment extends CallComposerFragment

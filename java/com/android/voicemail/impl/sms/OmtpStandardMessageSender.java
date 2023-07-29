@@ -17,9 +17,11 @@ package com.android.voicemail.impl.sms;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+
 import com.android.voicemail.impl.OmtpConstants;
 
 /** A implementation of the OmtpMessageSender using the standard OMTP sms protocol. */

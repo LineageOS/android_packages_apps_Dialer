@@ -17,8 +17,10 @@
 package com.android.dialer.searchfragment.list;
 
 import android.database.MatrixCursor;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import java.lang.annotation.Retention;

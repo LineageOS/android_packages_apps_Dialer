@@ -16,8 +16,9 @@
 
 package com.android.dialer.util;
 
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
 
 /** Static utility methods for Strings. */
 public class MoreStrings {

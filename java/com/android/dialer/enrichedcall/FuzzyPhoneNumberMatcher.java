@@ -15,7 +15,7 @@
  */
 package com.android.dialer.enrichedcall;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /** Utility for comparing phone numbers. */
 public class FuzzyPhoneNumberMatcher {

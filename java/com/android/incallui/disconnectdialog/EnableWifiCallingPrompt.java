@@ -21,9 +21,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.telecom.DisconnectCause;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.DialerCall;

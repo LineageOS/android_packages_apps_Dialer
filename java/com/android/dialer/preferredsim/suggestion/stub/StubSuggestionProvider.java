@@ -17,9 +17,11 @@
 package com.android.dialer.preferredsim.suggestion.stub;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider;
 import com.google.common.base.Optional;
 import javax.inject.Inject;

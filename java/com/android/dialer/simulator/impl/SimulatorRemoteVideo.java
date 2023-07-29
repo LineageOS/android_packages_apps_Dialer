@@ -21,9 +21,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.view.Surface;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 
@@ -33,7 +35,8 @@ import com.android.dialer.common.LogUtil;
  * green screen with a ball bouncing around.
  */
 final class SimulatorRemoteVideo {
-  @NonNull private final RenderThread thread;
+  @NonNull
+  private final RenderThread thread;
   private boolean isStopped;
 
   SimulatorRemoteVideo(@NonNull Surface surface) {

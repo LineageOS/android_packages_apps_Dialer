@@ -33,9 +33,6 @@ import android.os.AsyncTask;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
@@ -48,7 +45,6 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.transition.TransitionManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -56,9 +52,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+
 import com.android.contacts.common.dialog.CallSubjectDialog;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
@@ -134,7 +134,8 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public final ImageView primaryActionButtonView;
 
   private final Context context;
-  @Nullable private final PhoneAccountHandle defaultPhoneAccountHandle;
+  @Nullable
+  private final PhoneAccountHandle defaultPhoneAccountHandle;
   private final CallLogCache callLogCache;
   private final CallLogListItemHelper callLogListItemHelper;
   private final CachedNumberLookupService cachedNumberLookupService;

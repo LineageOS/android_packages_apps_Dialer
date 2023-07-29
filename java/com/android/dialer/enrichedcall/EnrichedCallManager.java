@@ -17,9 +17,11 @@
 package com.android.dialer.enrichedcall;
 
 import android.content.BroadcastReceiver.PendingResult;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
