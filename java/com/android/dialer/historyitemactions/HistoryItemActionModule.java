@@ -16,8 +16,8 @@
 
 package com.android.dialer.historyitemactions;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 /**
  * Modules used to build {@link HistoryItemActionBottomSheet}.

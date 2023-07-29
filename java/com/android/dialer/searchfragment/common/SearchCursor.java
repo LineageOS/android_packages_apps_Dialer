@@ -17,7 +17,8 @@
 package com.android.dialer.searchfragment.common;
 
 import android.database.Cursor;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /** Base cursor interface needed for all cursors used in search. */
 public interface SearchCursor extends Cursor {

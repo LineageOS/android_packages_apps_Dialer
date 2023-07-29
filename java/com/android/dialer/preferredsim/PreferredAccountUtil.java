@@ -18,11 +18,13 @@ package com.android.dialer.preferredsim;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
@@ -39,7 +41,7 @@ public class PreferredAccountUtil {
    */
   @NonNull
   public static Optional<PhoneAccountHandle> getValidPhoneAccount(
-      @NonNull Context context, @Nullable String componentNameString, @Nullable String idString) {
+          @NonNull Context context, @Nullable String componentNameString, @Nullable String idString) {
     if (TextUtils.isEmpty(componentNameString) || TextUtils.isEmpty(idString)) {
       LogUtil.i("PreferredAccountUtil.getValidPhoneAccount", "empty componentName or id");
       return Optional.absent();

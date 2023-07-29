@@ -18,8 +18,10 @@ package com.android.dialer.backup;
 import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
 import android.util.ArrayMap;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.DialerImpression;
@@ -37,7 +39,8 @@ public class DialerPersistentBackupAgent extends PersistentBackupAgentHelper {
     "com.google.android.dialer_preferences", "com.google.android.dialer", "com.android.dialer"
   };
 
-  @NonNull private final String[] sharedPreferencesToBackup;
+  @NonNull
+  private final String[] sharedPreferencesToBackup;
 
   DialerPersistentBackupAgent(@NonNull String[] sharedPrefs) {
     this.sharedPreferencesToBackup = Assert.isNotNull(sharedPrefs);

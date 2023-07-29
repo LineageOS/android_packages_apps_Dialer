@@ -23,12 +23,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;

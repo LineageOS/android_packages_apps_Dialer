@@ -16,13 +16,15 @@
 
 package com.android.incallui;
 
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.method.DialerKeyListener;
 import android.view.KeyEvent;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.LogUtil;
 
 /**

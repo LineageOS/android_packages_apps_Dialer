@@ -16,8 +16,10 @@
 
 package com.android.dialer.commandline.impl;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.commandline.Arguments;
 import com.android.dialer.commandline.Command;
 import com.google.common.util.concurrent.Futures;

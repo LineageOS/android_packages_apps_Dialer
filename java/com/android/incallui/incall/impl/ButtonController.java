@@ -18,15 +18,17 @@ package com.android.incallui.incall.impl;
 
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
-import android.support.annotation.CallSuper;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.telecom.CallAudioState;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
 import com.android.dialer.common.Assert;
 import com.android.incallui.incall.impl.CheckableLabeledButton.OnCheckedChangeListener;
 import com.android.incallui.incall.protocol.InCallButtonIds;
@@ -64,10 +66,12 @@ interface ButtonController {
 
   abstract class CheckableButtonController implements ButtonController, OnCheckedChangeListener {
 
-    @NonNull protected final InCallButtonUiDelegate delegate;
+    @NonNull
+    protected final InCallButtonUiDelegate delegate;
     @InCallButtonIds protected final int buttonId;
     @StringRes protected final int checkedDescription;
-    @StringRes protected final int uncheckedDescription;
+    @StringRes
+    protected final int uncheckedDescription;
     protected boolean isEnabled;
     protected boolean isAllowed;
     protected boolean isChecked;
@@ -156,7 +160,8 @@ interface ButtonController {
   abstract class SimpleCheckableButtonController extends CheckableButtonController {
 
     @StringRes private final int label;
-    @DrawableRes private final int icon;
+    @DrawableRes
+    private final int icon;
 
     protected SimpleCheckableButtonController(
         @NonNull InCallButtonUiDelegate delegate,

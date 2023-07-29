@@ -25,9 +25,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.Trace;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.Call.RttCall;
@@ -43,6 +40,11 @@ import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.assisteddialing.TransformationInfo;
 import com.android.dialer.callintent.CallInitiationType;
@@ -150,7 +152,8 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String lastForwardedNumber;
   private boolean isCallForwarded;
   private String callSubject;
-  @Nullable private PhoneAccountHandle phoneAccountHandle;
+  @Nullable
+  private PhoneAccountHandle phoneAccountHandle;
   @CallHistoryStatus private int callHistoryStatus = CALL_HISTORY_STATUS_UNKNOWN;
 
   @Nullable private SpamStatus spamStatus;
