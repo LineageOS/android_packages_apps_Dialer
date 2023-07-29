@@ -17,9 +17,13 @@
 package com.android.dialer.contacts.displaypreference;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import com.android.dialer.R;
+
 import java.util.Arrays;
 
 /** Handles name ordering of a contact (Given name first or family name first.) */

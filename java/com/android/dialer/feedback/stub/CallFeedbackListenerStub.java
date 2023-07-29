@@ -17,7 +17,9 @@
 package com.android.dialer.feedback.stub;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.incallui.call.CallList;
@@ -29,7 +31,8 @@ import javax.inject.Inject;
  */
 public class CallFeedbackListenerStub implements CallList.Listener {
 
-  @NonNull private final Context context;
+  @NonNull
+  private final Context context;
 
   @Inject
   public CallFeedbackListenerStub(@ApplicationContext @NonNull Context context) {

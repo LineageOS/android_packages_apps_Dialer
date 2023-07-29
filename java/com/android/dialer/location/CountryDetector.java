@@ -27,11 +27,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
@@ -243,7 +245,8 @@ public class CountryDetector {
 
   /** Worker that given a {@link Location} returns an ISO 3166-1 two letter country code. */
   private static class GeocodeCountryWorker implements Worker<Location, String> {
-    @NonNull private final Geocoder geocoder;
+    @NonNull
+    private final Geocoder geocoder;
 
     GeocodeCountryWorker(@NonNull Geocoder geocoder) {
       this.geocoder = Assert.isNotNull(geocoder);

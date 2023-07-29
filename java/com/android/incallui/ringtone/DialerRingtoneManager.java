@@ -19,9 +19,12 @@ package com.android.incallui.ringtone;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.incallui.call.CallList;
+import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.state.DialerCallState;
 import java.util.Objects;
 
@@ -47,7 +50,7 @@ public class DialerRingtoneManager {
    * @throws NullPointerException if inCallTonePlayer or callList are null
    */
   public DialerRingtoneManager(
-      @NonNull InCallTonePlayer inCallTonePlayer, @NonNull CallList callList) {
+          @NonNull InCallTonePlayer inCallTonePlayer, @NonNull CallList callList) {
     this.inCallTonePlayer = Objects.requireNonNull(inCallTonePlayer);
     this.callList = Objects.requireNonNull(callList);
   }

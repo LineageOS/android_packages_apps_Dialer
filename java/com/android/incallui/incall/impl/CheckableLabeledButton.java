@@ -25,9 +25,6 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -36,6 +33,12 @@ import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+
+import com.android.dialer.R;
 
 /** A button to show on the incall screen */
 public class CheckableLabeledButton extends LinearLayout implements Checkable {
@@ -46,7 +49,8 @@ public class CheckableLabeledButton extends LinearLayout implements Checkable {
   private boolean isChecked;
   private OnCheckedChangeListener onCheckedChangeListener;
   private ImageView iconView;
-  @DrawableRes private int iconResource = 0;
+  @DrawableRes
+  private int iconResource = 0;
   private TextView labelView;
   private Drawable background;
   private Drawable backgroundMore;

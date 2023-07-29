@@ -17,8 +17,10 @@
 package com.android.dialer.callintent;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.protos.ProtoParsers;
 
@@ -48,7 +50,7 @@ public class CallIntentParser {
   }
 
   public static void putCallSpecificAppData(
-      @NonNull Bundle extras, @NonNull CallSpecificAppData callSpecificAppData) {
+          @NonNull Bundle extras, @NonNull CallSpecificAppData callSpecificAppData) {
     ProtoParsers.put(extras, Constants.EXTRA_CALL_SPECIFIC_APP_DATA, callSpecificAppData);
   }
 

@@ -20,8 +20,10 @@ import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManager.DisplayListener;
 import android.os.PowerManager;
-import android.support.annotation.Nullable;
 import android.view.Display;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 
 /** The normal PROXIMITY_SCREEN_OFF_WAKE_LOCK provided by the OS. */
@@ -32,7 +34,8 @@ public class SystemProximityWakeLock implements AnswerProximityWakeLock, Display
   private final Context context;
   private final PowerManager.WakeLock wakeLock;
 
-  @Nullable private ScreenOnListener listener;
+  @Nullable
+  private ScreenOnListener listener;
 
   public SystemProximityWakeLock(Context context) {
     this.context = context;

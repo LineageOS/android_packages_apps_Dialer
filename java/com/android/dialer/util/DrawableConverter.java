@@ -21,10 +21,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 
 /** Provides utilities for bitmaps and drawables. */
@@ -82,7 +84,7 @@ public class DrawableConverter {
 
   @Nullable
   public static Drawable getRoundedDrawable(
-      @NonNull Context context, @Nullable Drawable photo, int width, int height) {
+          @NonNull Context context, @Nullable Drawable photo, int width, int height) {
     Bitmap bitmap = drawableToBitmap(photo);
     if (bitmap != null) {
       Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);

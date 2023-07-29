@@ -16,8 +16,9 @@
 
 package com.android.dialer.promotion;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

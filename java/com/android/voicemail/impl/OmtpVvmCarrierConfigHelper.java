@@ -21,14 +21,16 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.VisualVoicemailSmsFilterSettings;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.configui.ConfigOverrideFragment;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
@@ -93,7 +95,8 @@ public class OmtpVvmCarrierConfigHelper {
   private final VisualVoicemailProtocol protocol;
   private final PersistableBundle telephonyConfig;
 
-  @Nullable private final PersistableBundle overrideConfig;
+  @Nullable
+  private final PersistableBundle overrideConfig;
 
   private PhoneAccountHandle phoneAccountHandle;
 
