@@ -25,7 +25,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -42,6 +41,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;

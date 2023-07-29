@@ -16,7 +16,8 @@ package com.android.contacts.common.extensions;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 /** An interface for adding extended phone directories. */
 public interface PhoneDirectoryExtender {

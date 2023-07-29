@@ -16,7 +16,8 @@
 
 package com.android.dialer.oem;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

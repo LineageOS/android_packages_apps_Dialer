@@ -17,8 +17,10 @@
 package com.android.dialer.common.concurrent;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.concurrent.FallibleAsyncTask.FallibleTaskResult;
 import com.google.auto.value.AutoValue;
 

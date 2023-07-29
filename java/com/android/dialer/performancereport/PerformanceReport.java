@@ -17,9 +17,11 @@
 package com.android.dialer.performancereport;
 
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.widget.AbsListView;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.UiAction;
 import java.util.ArrayList;
@@ -51,7 +53,8 @@ public final class PerformanceReport {
   private static long firstClickTimeMillis = INVALID_TIME;
   private static long lastActionTimeMillis = INVALID_TIME;
 
-  @Nullable private static UiAction.Type ignoreActionOnce = null;
+  @Nullable
+  private static UiAction.Type ignoreActionOnce = null;
 
   private static int startingTabIndex = -1; // UNKNOWN
 

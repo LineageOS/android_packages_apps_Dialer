@@ -17,8 +17,10 @@
 package com.android.dialer.dialpadview;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.i18n.LocaleUtils;
 

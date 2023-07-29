@@ -17,8 +17,9 @@ package com.android.voicemail.impl.sms;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.Nullable;
 
 public class Vvm3MessageSender extends OmtpMessageSender {
 

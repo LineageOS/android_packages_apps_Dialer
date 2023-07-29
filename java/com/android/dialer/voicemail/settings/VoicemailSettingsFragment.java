@@ -23,13 +23,14 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -61,7 +62,8 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       "com.android.phone.settings.SubscriptionInfoHelper.SubscriptionLabel";
 
   private static final String TAG = "VmSettingsActivity";
-  @Nullable private PhoneAccountHandle phoneAccountHandle;
+  @Nullable
+  private PhoneAccountHandle phoneAccountHandle;
   private VoicemailClient voicemailClient;
   // Settings that are independent of the carrier configurations
   private Preference voicemailNotificationPreference;

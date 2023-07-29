@@ -32,8 +32,6 @@ import android.os.Message;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
 import android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +43,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.app.Bindings;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogAdapter.CallFetcher;

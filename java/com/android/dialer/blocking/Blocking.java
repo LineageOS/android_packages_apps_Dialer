@@ -26,9 +26,11 @@ import android.database.Cursor;
 import android.os.RemoteException;
 import android.provider.BlockedNumberContract;
 import android.provider.BlockedNumberContract.BlockedNumbers;
-import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.util.ArrayMap;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.database.Selection;
 import com.google.common.collect.ImmutableCollection;

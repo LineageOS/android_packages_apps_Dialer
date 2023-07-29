@@ -18,9 +18,11 @@ package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -38,7 +40,8 @@ final class SimulatorConferenceCreator
         SimulatorConference.Listener {
   private static final String EXTRA_CALL_COUNT = "call_count";
   private static final String RECONNECT = "reconnect";
-  @NonNull private final Context context;
+  @NonNull
+  private final Context context;
 
   private final SimulatorConnectionsBank simulatorConnectionsBank;
 

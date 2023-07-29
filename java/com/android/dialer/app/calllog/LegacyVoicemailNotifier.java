@@ -20,13 +20,15 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.app.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
