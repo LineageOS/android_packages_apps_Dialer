@@ -70,6 +70,19 @@
       android:theme="@style/TransparentTheme"
       android:exported="false" />
 
+    <activity
+        android:name="com.android.dialer.app.settings.DialerSettingsActivity"
+        android:exported="false"
+        android:label="@string/dialer_settings_label"
+        android:parentActivityName="com.android.dialer.main.impl.MainActivity"
+        android:theme="@style/SettingsStyle">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:scheme="header"/>
+      </intent-filter>
+    </activity>
+
     <receiver android:name="com.android.dialer.app.calllog.CallLogReceiver"
         android:exported="true">
       <intent-filter>

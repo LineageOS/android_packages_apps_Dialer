@@ -62,7 +62,6 @@
   <uses-permission android:name="android.permission.CONNECTIVITY_USE_RESTRICTED_NETWORKS"/>
   <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
   <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
-  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
   <uses-permission android:name="android.permission.CONTROL_INCALL_EXPERIENCE"/>
   <!-- We use this to disable the status bar buttons of home, back and recent
@@ -114,6 +113,9 @@
   <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
   <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
 
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+
   <application
     android:hardwareAccelerated="true"
     android:icon="@mipmap/ic_launcher"
@@ -124,6 +126,20 @@
     android:usesCleartextTraffic="false"
     android:extractNativeLibs="false"
     android:requestLegacyExternalStorage="true">
+
+    <activity android:name=".callstats.CallStatsDetailActivity"
+        android:label="@string/call_stats_detail_title"
+        android:theme="@style/Dialer.ThemeBase.NoActionBar"
+        android:exported="true"
+        android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+
+    <service android:name="com.android.dialer.callrecord.impl.CallRecorderService"
+        android:process="com.android.incallui" />
   </application>
 
 </manifest>
