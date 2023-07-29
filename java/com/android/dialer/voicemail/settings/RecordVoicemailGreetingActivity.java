@@ -18,10 +18,14 @@ package com.android.dialer.voicemail.settings;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.IntDef;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import androidx.annotation.IntDef;
+
+import com.android.dialer.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

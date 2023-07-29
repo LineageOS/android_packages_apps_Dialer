@@ -14,7 +14,7 @@
 
 package com.android.contacts.common.extensions;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * This interface should be implemented by the Application subclass. It allows the contacts module

@@ -33,7 +33,6 @@ import android.os.Trace;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.speech.RecognizerIntent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.FloatingActionButton.OnVisibilityChangedListener;
@@ -62,8 +61,12 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
+import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.animation.AnimationListenerAdapter;
 import com.android.dialer.app.calllog.CallLogActivity;

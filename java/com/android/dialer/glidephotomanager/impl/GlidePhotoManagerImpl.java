@@ -22,12 +22,15 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.glide.GlideApp;
 import com.android.dialer.glide.GlideRequest;

@@ -16,7 +16,8 @@
 
 package com.android.incallui.rtt.protocol;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;

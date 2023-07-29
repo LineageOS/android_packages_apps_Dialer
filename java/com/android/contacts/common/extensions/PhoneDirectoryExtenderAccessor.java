@@ -15,7 +15,9 @@
 package com.android.contacts.common.extensions;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 
 /** Accessor for the phone directory extender singleton. */

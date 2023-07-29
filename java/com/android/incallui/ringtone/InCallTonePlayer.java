@@ -18,8 +18,10 @@ package com.android.incallui.ringtone;
 
 import android.media.AudioManager;
 import android.media.ToneGenerator;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.incallui.Log;
 import com.android.incallui.async.PausableExecutor;
 import java.util.Objects;
@@ -36,7 +38,8 @@ public class InCallTonePlayer {
 
   public static final int VOLUME_RELATIVE_HIGH_PRIORITY = 80;
 
-  @NonNull private final ToneGeneratorFactory toneGeneratorFactory;
+  @NonNull
+  private final ToneGeneratorFactory toneGeneratorFactory;
   @NonNull private final PausableExecutor executor;
   private @Nullable CountDownLatch numPlayingTones;
 

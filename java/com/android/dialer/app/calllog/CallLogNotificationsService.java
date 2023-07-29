@@ -21,10 +21,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.app.voicemail.LegacyVoicemailNotificationReceiver;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -101,7 +103,7 @@ public class CallLogNotificationsService extends IntentService {
   }
 
   public static PendingIntent createMarkSingleNewVoicemailAsOldIntent(
-      @NonNull Context context, @Nullable Uri voicemailUri) {
+          @NonNull Context context, @Nullable Uri voicemailUri) {
     Intent intent = new Intent(context, CallLogNotificationsService.class);
     intent.setAction(CallLogNotificationsService.ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD);
     intent.setData(voicemailUri);

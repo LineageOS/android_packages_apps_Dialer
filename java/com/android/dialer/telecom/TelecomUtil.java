@@ -25,9 +25,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.CallLog.Calls;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -36,6 +33,11 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+
 import com.android.dialer.common.LogUtil;
 import com.google.common.base.Optional;
 import java.util.ArrayList;
@@ -189,7 +191,7 @@ public abstract class TelecomUtil {
    *     valid SIM. Absent otherwise.
    */
   public static Optional<SubscriptionInfo> getSubscriptionInfo(
-      @NonNull Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
+          @NonNull Context context, @NonNull PhoneAccountHandle phoneAccountHandle) {
     if (TextUtils.isEmpty(phoneAccountHandle.getId())) {
       return Optional.absent();
     }

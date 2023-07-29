@@ -17,8 +17,9 @@
 package com.android.incallui.calllocation;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+
+import androidx.annotation.NonNull;
 
 /** Used to show the user's location during an emergency call. */
 public interface CallLocation {

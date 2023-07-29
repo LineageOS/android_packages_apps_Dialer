@@ -17,8 +17,10 @@
 package com.android.dialer.app.legacybindings;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.contactinfo.ContactInfoCache;

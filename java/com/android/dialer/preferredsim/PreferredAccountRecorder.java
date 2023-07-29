@@ -18,10 +18,12 @@ package com.android.dialer.preferredsim;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -35,7 +37,8 @@ import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
 public class PreferredAccountRecorder {
 
   @Nullable private final String number;
-  @Nullable private final Suggestion suggestion;
+  @Nullable
+  private final Suggestion suggestion;
   @Nullable private final String dataId;
 
   public PreferredAccountRecorder(
@@ -88,7 +91,7 @@ public class PreferredAccountRecorder {
     private final boolean remember;
 
     public UserSelectionReporter(
-        @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number, boolean remember) {
+            @NonNull PhoneAccountHandle phoneAccountHandle, @Nullable String number, boolean remember) {
       this.phoneAccountHandle = Assert.isNotNull(phoneAccountHandle);
       this.number = Assert.isNotNull(number);
       this.remember = remember;

@@ -24,9 +24,12 @@ import android.database.MergeCursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Directory;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
@@ -44,7 +47,7 @@ public final class SearchContactsCursorLoader extends CursorLoader {
 
   /** @param query Contacts cursor will be filtered based on this query. */
   public SearchContactsCursorLoader(
-      Context context, @Nullable String query, boolean isRegularSearch) {
+          Context context, @Nullable String query, boolean isRegularSearch) {
     super(
         context,
         buildUri(query),

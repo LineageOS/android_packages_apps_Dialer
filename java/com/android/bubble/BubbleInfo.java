@@ -19,10 +19,12 @@ package com.android.bubble;
 import android.app.PendingIntent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.Px;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.Px;
+
 import com.google.auto.value.AutoValue;
 import java.util.Collections;
 import java.util.List;
