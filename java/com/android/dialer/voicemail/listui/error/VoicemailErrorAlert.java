@@ -17,7 +17,6 @@
 package com.android.dialer.voicemail.listui.error;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
@@ -98,16 +97,6 @@ public class VoicemailErrorAlert {
         alertManager.add(view);
       }
     }
-  }
-
-  @VisibleForTesting
-  public View getView() {
-    return view;
-  }
-
-  @VisibleForTesting
-  public View getModalView() {
-    return modalView;
   }
 
   void loadMessage(VoicemailErrorMessage message) {

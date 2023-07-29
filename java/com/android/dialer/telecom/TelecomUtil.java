@@ -28,7 +28,6 @@ import android.provider.CallLog.Calls;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -64,11 +63,6 @@ public abstract class TelecomUtil {
    */
   private static final Map<Pair<PhoneAccountHandle, String>, Boolean> isVoicemailNumberCache =
       new ConcurrentHashMap<>();
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setInstanceForTesting(TelecomUtilImpl instanceForTesting) {
-    instance = instanceForTesting;
-  }
 
   public static void showInCallScreen(Context context, boolean showDialpad) {
     if (hasReadPhoneStatePermission(context)) {
@@ -341,8 +335,7 @@ public abstract class TelecomUtil {
   }
 
   /** Contains an implementation for {@link TelecomUtil} methods */
-  @VisibleForTesting()
-  public static class TelecomUtilImpl {
+  private static class TelecomUtilImpl {
 
     public boolean isInManagedCall(Context context) {
       if (hasReadPhoneStatePermission(context)) {

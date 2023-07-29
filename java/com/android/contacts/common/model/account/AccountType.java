@@ -24,7 +24,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.util.ArrayMap;
 import android.view.inputmethod.EditorInfo;
@@ -95,8 +94,7 @@ public abstract class AccountType {
    *
    * <p>(The behavior is undefined if the resource or package doesn't exist.)
    */
-  @VisibleForTesting
-  static CharSequence getResourceText(
+  private static CharSequence getResourceText(
       Context context, String packageName, int resId, String defaultValue) {
     if (resId != -1 && packageName != null) {
       final PackageManager pm = context.getPackageManager();
