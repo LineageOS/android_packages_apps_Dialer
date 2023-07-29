@@ -26,14 +26,17 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Size;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.video.protocol.VideoCallScreen;
@@ -50,7 +53,8 @@ public class SelfManagedAnswerVideoCallScreen extends StateCallback implements V
   private static final float ASPECT_TOLERANCE = 0.1f;
   private static final float TARGET_ASPECT = 16.f / 9.f;
 
-  @NonNull private final String callId;
+  @NonNull
+  private final String callId;
   @NonNull private final Fragment fragment;
   @NonNull private final FixedAspectSurfaceView surfaceView;
   private final Context context;

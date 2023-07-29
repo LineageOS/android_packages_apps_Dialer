@@ -23,9 +23,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -42,6 +39,12 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
@@ -89,7 +92,8 @@ public class InCallFragment extends Fragment
   private InCallScreenDelegate inCallScreenDelegate;
   private InCallButtonUiDelegate inCallButtonUiDelegate;
   private InCallButtonGridFragment inCallButtonGridFragment;
-  @Nullable private ButtonChooser buttonChooser;
+  @Nullable
+  private ButtonChooser buttonChooser;
   private SecondaryInfo savedSecondaryInfo;
   private int voiceNetworkType;
   private int phoneType;

@@ -17,8 +17,10 @@
 package com.android.dialer.phonelookup;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
 import android.telecom.Call;
+
+import androidx.annotation.MainThread;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.location.GeoUtil;

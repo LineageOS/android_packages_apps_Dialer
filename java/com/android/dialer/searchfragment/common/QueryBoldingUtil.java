@@ -18,12 +18,14 @@ package com.android.dialer.searchfragment.common;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,7 +58,7 @@ public class QueryBoldingUtil {
    * @return name with query bolded if query can be found in the name.
    */
   public static CharSequence getNameWithQueryBolded(
-      @Nullable String query, @NonNull String name, @NonNull Context context) {
+          @Nullable String query, @NonNull String name, @NonNull Context context) {
     if (TextUtils.isEmpty(query)) {
       return name;
     }
@@ -126,7 +128,7 @@ public class QueryBoldingUtil {
    * @return number with query bolded if query can be found in the number.
    */
   public static CharSequence getNumberWithQueryBolded(
-      @Nullable String query, @NonNull String number) {
+          @Nullable String query, @NonNull String number) {
     if (TextUtils.isEmpty(query) || !QueryFilteringUtil.numberMatchesNumberQuery(query, number)) {
       return number;
     }
