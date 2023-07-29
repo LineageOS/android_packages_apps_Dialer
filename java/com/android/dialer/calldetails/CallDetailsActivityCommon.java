@@ -24,16 +24,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.annotation.CallSuper;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+
+import com.android.dialer.R;
 import com.android.dialer.assisteddialing.ui.AssistedDialingSettingActivity;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.callintent.CallInitiationType;
@@ -497,7 +500,7 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
     @NonNull
     private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
-        @Nullable String number, @NonNull CallDetailsEntries entries) {
+            @Nullable String number, @NonNull CallDetailsEntries entries) {
       if (number == null) {
         return Collections.emptyMap();
       }

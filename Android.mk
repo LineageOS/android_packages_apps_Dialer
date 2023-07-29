@@ -65,7 +65,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	libphonenumber \
 	volley \
 	zxing-core-1.7 \
-	org.lineageos.lib.phone
+	org.lineageos.lib.phone \
+	androidx.annotation_annotation \
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \

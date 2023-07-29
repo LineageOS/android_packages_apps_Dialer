@@ -18,7 +18,9 @@ package com.android.dialer.binary.common;
 
 import android.app.Application;
 import android.os.Trace;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.callrecord.CallRecordingAutoMigrator;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.inject.HasRootComponent;

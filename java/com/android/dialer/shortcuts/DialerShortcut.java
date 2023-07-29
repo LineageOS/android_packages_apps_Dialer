@@ -19,7 +19,9 @@ package com.android.dialer.shortcuts;
 import android.content.pm.ShortcutInfo;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.google.auto.value.AutoValue;
 
 /**

@@ -18,8 +18,10 @@ package com.android.voicemail.impl.scheduling;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.scheduling.Task.TaskId;
@@ -104,7 +106,8 @@ class TaskQueue implements Iterable<Task> {
    * tasks at all both will be {@code null}.
    */
   static final class NextTask {
-    @Nullable final Task task;
+    @Nullable
+    final Task task;
     @Nullable final Long minimalWaitTimeMillis;
 
     NextTask(@Nullable Task task, @Nullable Long minimalWaitTimeMillis) {

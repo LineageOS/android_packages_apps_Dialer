@@ -24,9 +24,6 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.os.Bundle;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -34,6 +31,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.answer.impl.answermethod.FlingUpDownTouchHandler.OnProgressChangedListener;
@@ -54,7 +57,8 @@ public class TwoButtonMethod extends AnswerMethod
   private boolean incomingWillDisconnect;
   private boolean buttonClicked;
   private CharSequence hintText;
-  @Nullable private FlingUpDownTouchHandler touchHandler;
+  @Nullable
+  private FlingUpDownTouchHandler touchHandler;
 
   @Override
   public void onCreate(@Nullable Bundle bundle) {

@@ -18,8 +18,10 @@ package com.android.dialer.precall.impl;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.MainThread;
 import android.telecom.PhoneAccount;
+
+import androidx.annotation.MainThread;
+
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;

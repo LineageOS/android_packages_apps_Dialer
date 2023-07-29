@@ -20,7 +20,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.calllog.RefreshAnnotatedCallLogWorker.RefreshResult;
 import com.android.dialer.calllog.constants.IntentNames;
 import com.android.dialer.common.LogUtil;
@@ -51,7 +53,8 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   private final RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
   private final LoggingBindings logger;
 
-  @Nullable private Runnable refreshAnnotatedCallLogRunnable;
+  @Nullable
+  private Runnable refreshAnnotatedCallLogRunnable;
 
   /** Returns an {@link IntentFilter} containing all actions accepted by this broadcast receiver. */
   public static IntentFilter getIntentFilter() {

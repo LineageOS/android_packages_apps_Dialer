@@ -21,11 +21,15 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.annotation.Nullable;
+import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.ContactsUtils.UserType;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.R;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.phonenumbercache.ContactInfo;
@@ -156,7 +160,7 @@ public class PhoneCallDetails {
    * @return The description of the account that this call has been placed on.
    */
   public static CharSequence createAccountLabelDescription(
-      Resources resources, @Nullable String viaNumber, @Nullable CharSequence accountLabel) {
+          Resources resources, @Nullable String viaNumber, @Nullable CharSequence accountLabel) {
 
     if ((!TextUtils.isEmpty(viaNumber)) && !TextUtils.isEmpty(accountLabel)) {
       String msg =
