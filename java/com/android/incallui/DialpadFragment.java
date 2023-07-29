@@ -31,12 +31,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.dialpadview.DialpadKeyButton;
 import com.android.dialer.dialpadview.DialpadKeyButton.OnPressedListener;
 import com.android.dialer.dialpadview.DialpadView;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.incallui.DialpadPresenter.DialpadUi;
 import com.android.incallui.baseui.BaseFragment;
 import java.util.Map;
@@ -90,8 +90,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   @Override
   public void onClick(View v) {
     if (v.getId() == R.id.dialpad_back) {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.IN_CALL_DIALPAD_CLOSE_BUTTON_PRESSED);
       getActivity().onBackPressed();
     }
   }
@@ -245,8 +243,6 @@ public class DialpadFragment extends BaseFragment<DialpadPresenter, DialpadUi>
   @Override
   public void onPressed(View view, boolean pressed) {
     if (pressed && displayMap.containsKey(view.getId())) {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.IN_CALL_DIALPAD_NUMBER_BUTTON_PRESSED);
       Log.d(this, "onPressed: " + pressed + " " + displayMap.get(view.getId()));
       getPresenter().processDtmf(displayMap.get(view.getId()));
     }

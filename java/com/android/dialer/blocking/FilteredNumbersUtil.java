@@ -24,7 +24,6 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.InteractionEvent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.concurrent.TimeUnit;
