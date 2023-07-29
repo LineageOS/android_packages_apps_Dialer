@@ -18,7 +18,6 @@ package com.android.incallui.contactgrid;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.Spannable;
@@ -27,6 +26,10 @@ import android.text.Spanned;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.call.state.DialerCallState;
@@ -51,7 +54,8 @@ public class TopRow {
   /** Content of the top row. */
   public static class Info {
 
-    @Nullable public final CharSequence label;
+    @Nullable
+    public final CharSequence label;
     @Nullable public final Drawable icon;
     public final boolean labelIsSingleLine;
 

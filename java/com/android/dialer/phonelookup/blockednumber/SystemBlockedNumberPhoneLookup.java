@@ -19,9 +19,11 @@ package com.android.dialer.phonelookup.blockednumber;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.BlockedNumberContract.BlockedNumbers;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.util.ArraySet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.observer.MarkDirtyObserver;
 import com.android.dialer.common.Assert;

@@ -16,7 +16,7 @@
 
 package com.android.incallui.answer.impl.answermethod;
 
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 
 /** Defines callbacks {@link AnswerMethod AnswerMethods} may use to update their parent. */
 public interface AnswerMethodHolder {

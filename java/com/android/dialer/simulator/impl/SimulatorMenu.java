@@ -17,11 +17,13 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.ActionProvider;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import java.util.Map.Entry;
 

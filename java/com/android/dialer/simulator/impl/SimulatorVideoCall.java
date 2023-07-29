@@ -18,12 +18,14 @@ package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.Connection;
 import android.telecom.DisconnectCause;
 import android.telecom.TelecomManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
@@ -32,10 +34,12 @@ import com.android.dialer.simulator.Simulator.Event;
 /** Entry point in the simulator to create video calls. */
 final class SimulatorVideoCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
-  @NonNull private final Context context;
+  @NonNull
+  private final Context context;
   private final int initialVideoCapability;
   private final int initialVideoState;
-  @Nullable private String connectionTag;
+  @Nullable
+  private String connectionTag;
 
   SimulatorVideoCall(@NonNull Context context, int initialVideoState) {
     this.context = Assert.isNotNull(context);

@@ -16,8 +16,9 @@
 
 package com.android.incallui.sessiondata;
 
-import android.support.annotation.Nullable;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 /** Interface for interacting with Fragments that can be put in the data container */
 public interface AvatarPresenter {

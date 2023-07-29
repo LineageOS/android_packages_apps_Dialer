@@ -16,9 +16,11 @@
 
 package com.android.voicemail.impl.mail.store.imap;
 
-import android.support.annotation.Nullable;
 import android.util.ArrayMap;
 import android.util.Base64;
+
+import androidx.annotation.Nullable;
+
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.mail.MailTransport;
 import com.android.voicemail.impl.mail.MessagingException;

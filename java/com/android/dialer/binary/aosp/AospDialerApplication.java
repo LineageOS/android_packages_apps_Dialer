@@ -18,8 +18,10 @@ package com.android.dialer.binary.aosp;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.extensions.PhoneDirectoryExtender;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderFactory;
 import com.android.dialer.binary.common.DialerApplication;
@@ -35,8 +37,6 @@ import com.android.incallui.bindings.InCallUiBindings;
 import com.android.incallui.bindings.InCallUiBindingsFactory;
 import com.android.incallui.bindings.InCallUiBindingsStub;
 import com.android.incallui.bindings.PhoneNumberService;
-
-import java.util.List;
 
 /**
  * The application class for the AOSP Dialer. This is a version of the Dialer app that has no

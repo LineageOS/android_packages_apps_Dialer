@@ -17,9 +17,10 @@
 package com.android.dialer.shortcuts;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+
 import com.android.contacts.common.list.ContactEntry;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;

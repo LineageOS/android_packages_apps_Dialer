@@ -28,10 +28,6 @@ import android.os.Bundle;
 import android.os.Trace;
 import android.provider.CallLog;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +45,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
@@ -124,7 +126,8 @@ public class CallLogAdapter extends GroupingListAdapter
   private final CallFetcher callFetcher;
   private final OnActionModeStateChangedListener actionModeStateChangedListener;
   private final MultiSelectRemoveView multiSelectRemoveView;
-  @NonNull private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
+  @NonNull
+  private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
   private final int activityType;
 
   /** Instance of helper class for managing views. */

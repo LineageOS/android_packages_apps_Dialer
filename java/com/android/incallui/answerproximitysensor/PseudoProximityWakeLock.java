@@ -21,7 +21,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 
 /**
@@ -34,7 +36,8 @@ public class PseudoProximityWakeLock implements AnswerProximityWakeLock, SensorE
   private final PseudoScreenState pseudoScreenState;
   private final Sensor proximitySensor;
 
-  @Nullable private ScreenOnListener listener;
+  @Nullable
+  private ScreenOnListener listener;
   private boolean isHeld;
 
   public PseudoProximityWakeLock(Context context, PseudoScreenState pseudoScreenState) {
