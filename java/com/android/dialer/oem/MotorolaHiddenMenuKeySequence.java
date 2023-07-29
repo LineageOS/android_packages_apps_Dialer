@@ -22,7 +22,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.support.annotation.VisibleForTesting;
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,11 +37,11 @@ public class MotorolaHiddenMenuKeySequence {
 
   private static MotorolaHiddenMenuKeySequence instance = null;
 
-  @VisibleForTesting final List<String> hiddenKeySequences = new ArrayList<>();
-  @VisibleForTesting final List<String> hiddenKeySequenceIntents = new ArrayList<>();
-  @VisibleForTesting final List<String> hiddenKeyPatterns = new ArrayList<>();
-  @VisibleForTesting final List<String> hiddenKeyPatternIntents = new ArrayList<>();
-  @VisibleForTesting boolean featureHiddenMenuEnabled = false;
+  final List<String> hiddenKeySequences = new ArrayList<>();
+  final List<String> hiddenKeySequenceIntents = new ArrayList<>();
+  final List<String> hiddenKeyPatterns = new ArrayList<>();
+  final List<String> hiddenKeyPatternIntents = new ArrayList<>();
+  boolean featureHiddenMenuEnabled = false;
 
   /**
    * Handle input char sequence.
@@ -70,12 +70,6 @@ public class MotorolaHiddenMenuKeySequence {
     return instance;
   }
 
-  @VisibleForTesting
-  static void setInstanceForTest(MotorolaHiddenMenuKeySequence instance) {
-    MotorolaHiddenMenuKeySequence.instance = instance;
-  }
-
-  @VisibleForTesting
   MotorolaHiddenMenuKeySequence(
       Context context, SystemPropertiesAccessor systemPropertiesAccessor) {
     if (MotorolaUtils.isSupportingHiddenMenu(context)) {

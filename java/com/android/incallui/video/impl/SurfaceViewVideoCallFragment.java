@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
@@ -87,7 +86,6 @@ public class SurfaceViewVideoCallFragment extends Fragment
         AudioRouteSelectorPresenter,
         OnSystemUiVisibilityChangeListener {
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
   static final String ARG_CALL_ID = "call_id";
 
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;

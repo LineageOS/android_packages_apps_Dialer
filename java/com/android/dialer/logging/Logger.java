@@ -42,8 +42,4 @@ public class Logger {
     }
     return loggingBindings;
   }
-
-  public static void setForTesting(LoggingBindings loggingBindings) {
-    Logger.loggingBindings = loggingBindings;
-  }
 }

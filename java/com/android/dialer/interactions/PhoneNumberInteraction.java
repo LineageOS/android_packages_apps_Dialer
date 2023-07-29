@@ -39,7 +39,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +87,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
   public static final int REQUEST_CALL_PHONE = 2;
 
-  @VisibleForTesting
   public static final String[] PHONE_NUMBER_PROJECTION =
       new String[] {
         Phone._ID,
@@ -350,11 +348,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         || ((TransactionSafeActivity) context).isSafeToCommitTransactions();
   }
 
-  @VisibleForTesting
-  /* package */ CursorLoader getLoader() {
-    return loader;
-  }
-
   private void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
     // TODO(a bug): don't leak the activity
     final Activity activity = (Activity) context;
@@ -384,7 +377,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
   }
 
   /** A model object for capturing a phone number for a given contact. */
-  @VisibleForTesting
   /* package */ static class PhoneItem implements Parcelable, Collapsible<PhoneItem> {
 
     public static final Parcelable.Creator<PhoneItem> CREATOR =
