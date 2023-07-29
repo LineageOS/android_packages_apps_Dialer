@@ -28,7 +28,6 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -48,8 +47,7 @@ public class ConfigOverrideFragment extends PreferenceFragment
    * Any preference with key that starts with this prefix will be written to the dialer carrier
    * config.
    */
-  @VisibleForTesting
-  public static final String CONFIG_OVERRIDE_KEY_PREFIX = "vvm_config_override_key_";
+  private static final String CONFIG_OVERRIDE_KEY_PREFIX = "vvm_config_override_key_";
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {

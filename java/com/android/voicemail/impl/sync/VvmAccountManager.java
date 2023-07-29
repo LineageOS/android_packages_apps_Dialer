@@ -19,7 +19,6 @@ import android.content.Context;
 import android.os.UserManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.util.ArraySet;
@@ -48,7 +47,7 @@ import java.util.Set;
 public class VvmAccountManager {
   public static final String TAG = "VvmAccountManager";
 
-  @VisibleForTesting static final String IS_ACCOUNT_ACTIVATED = "is_account_activated";
+  private static final String IS_ACCOUNT_ACTIVATED = "is_account_activated";
 
   private static final Set<ActivationStateListener> listeners = new ArraySet<>();
 

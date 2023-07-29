@@ -18,7 +18,6 @@ package com.android.dialer.phonelookup.composite;
 
 import android.content.Context;
 import android.support.annotation.MainThread;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.CallLogState;
@@ -60,7 +59,6 @@ public final class CompositePhoneLookup {
   private final CallLogState callLogState;
   private final ListeningExecutorService lightweightExecutorService;
 
-  @VisibleForTesting
   @Inject
   public CompositePhoneLookup(
       @ApplicationContext Context appContext,

@@ -18,13 +18,12 @@ package com.android.dialer.callcomposer.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 
 /** Utility class for resizing images before sending them as enriched call attachments. */
 public final class BitmapResizer {
-  @VisibleForTesting static final int MAX_OUTPUT_RESOLUTION = 640;
+  private static final int MAX_OUTPUT_RESOLUTION = 640;
 
   /**
    * Returns a bitmap that is a resized version of the parameter image. The image will only be

@@ -32,7 +32,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Directory;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import com.android.contacts.common.util.StopWatch;
@@ -77,9 +76,6 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
   private static final String DATABASE_LAST_CREATED_SHARED_PREF = "com.android.dialer";
 
   private static final String LAST_UPDATED_MILLIS = "last_updated_millis";
-
-  @VisibleForTesting
-  static final String DEFAULT_LAST_UPDATED_CONFIG_KEY = "smart_dial_default_last_update_millis";
 
   private static final String DATABASE_VERSION_PROPERTY = "database_version";
   private static final int MAX_ENTRIES = 20;
@@ -435,8 +431,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * @param db Database pointer to the smartdial database
    * @param updatedContactCursor Cursor pointing to the list of recently updated contacts.
    */
-  @VisibleForTesting
-  void removeUpdatedContacts(SQLiteDatabase db, Cursor updatedContactCursor) {
+  private void removeUpdatedContacts(SQLiteDatabase db, Cursor updatedContactCursor) {
     db.beginTransaction();
     try {
       updatedContactCursor.moveToPosition(-1);
@@ -467,8 +462,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * @param updatedContactCursor Cursor pointing to the list of recently updated contacts.
    * @param currentMillis Current time to be recorded in the smartdial table as update timestamp.
    */
-  @VisibleForTesting
-  protected void insertUpdatedContactsAndNumberPrefix(
+  private void insertUpdatedContactsAndNumberPrefix(
       SQLiteDatabase db, Cursor updatedContactCursor, Long currentMillis) {
     db.beginTransaction();
     try {
@@ -588,8 +582,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
    * @param db Database pointer to the smartdial database.
    * @param nameCursor Cursor pointing to the list of distinct updated contacts.
    */
-  @VisibleForTesting
-  void insertNamePrefixes(SQLiteDatabase db, Cursor nameCursor) {
+  private void insertNamePrefixes(SQLiteDatabase db, Cursor nameCursor) {
     final int columnIndexName = nameCursor.getColumnIndex(SmartDialDbColumns.DISPLAY_NAME_PRIMARY);
     final int columnIndexContactId = nameCursor.getColumnIndex(SmartDialDbColumns.CONTACT_ID);
 

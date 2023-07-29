@@ -39,7 +39,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +51,7 @@ import com.android.contacts.common.Collapser;
 import com.android.contacts.common.Collapser.Collapsible;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
+import com.android.dialer.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallIntentParser;
@@ -88,8 +88,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
   public static final int REQUEST_CALL_PHONE = 2;
 
-  @VisibleForTesting
-  public static final String[] PHONE_NUMBER_PROJECTION =
+  private static final String[] PHONE_NUMBER_PROJECTION =
       new String[] {
         Phone._ID,
         Phone.NUMBER,
@@ -350,11 +349,6 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
         || ((TransactionSafeActivity) context).isSafeToCommitTransactions();
   }
 
-  @VisibleForTesting
-  /* package */ CursorLoader getLoader() {
-    return loader;
-  }
-
   private void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
     // TODO(a bug): don't leak the activity
     final Activity activity = (Activity) context;
@@ -384,8 +378,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
   }
 
   /** A model object for capturing a phone number for a given contact. */
-  @VisibleForTesting
-  /* package */ static class PhoneItem implements Parcelable, Collapsible<PhoneItem> {
+  private static class PhoneItem implements Parcelable, Collapsible<PhoneItem> {
 
     public static final Parcelable.Creator<PhoneItem> CREATOR =
         new Parcelable.Creator<PhoneItem>() {

@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import com.android.dialer.app.R;
@@ -66,8 +65,7 @@ public class ContactPhotoLoader {
     return drawableToBitmap(getIcon(), photoSize, photoSize);
   }
 
-  @VisibleForTesting
-  Drawable getIcon() {
+  private Drawable getIcon() {
     Drawable drawable = createPhotoIconDrawable();
     if (drawable == null) {
       drawable = createLetterTileDrawable();
