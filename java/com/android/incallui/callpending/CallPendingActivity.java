@@ -23,9 +23,10 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.telecom.CallAudioState;
 import android.telecom.TelecomManager;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
