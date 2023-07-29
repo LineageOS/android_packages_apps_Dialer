@@ -17,11 +17,11 @@
 package com.android.dialer.voicemail.listui.error;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
 import android.provider.VoicemailContract.Status;
 import android.telecom.PhoneAccountHandle;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;

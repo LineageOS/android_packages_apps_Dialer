@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -29,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;

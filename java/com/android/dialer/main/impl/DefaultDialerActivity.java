@@ -9,9 +9,10 @@ import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.telecom.TelecomManager;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
 import com.android.dialer.widget.EmptyContentView;

@@ -25,9 +25,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 
 import androidx.annotation.MainThread;
+import androidx.preference.PreferenceManager;
 
 import com.android.dialer.constants.ScheduledJobIds;
 import com.android.voicemail.impl.Assert;

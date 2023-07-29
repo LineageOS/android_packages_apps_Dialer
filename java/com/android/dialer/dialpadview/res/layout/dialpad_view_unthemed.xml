@@ -13,7 +13,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.dialer.dialpadview.DialpadView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.dialer.dialpadview.DialpadView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialpad_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -83,7 +84,7 @@
         android:src="@drawable/quantum_ic_close_vd_theme_24"
         android:tint="@color/dialer_theme_color_light"
         android:tintMode="src_in"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <ImageButton
         android:id="@+id/dialpad_overflow"
@@ -98,7 +99,7 @@
         android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
         android:tint="@color/dialer_theme_color_light"
         android:tintMode="src_in"
-        android:visibility="gone"/>
+        android:visibility="gone" />
       <FrameLayout android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1">
@@ -151,13 +152,13 @@
       android:layout_height="1dp"
       android:background="@android:color/transparent"/>
 
-  <Space
+  <androidx.legacy.widget.Space
       android:layout_width="match_parent"
       android:layout_height="@dimen/dialpad_space_above_keys"/>
 
   <include layout="@layout/dialpad"/>
 
-  <Space
+  <androidx.legacy.widget.Space
       android:layout_width="match_parent"
       android:layout_height="@dimen/dialpad_space_below_keys"/>
 
