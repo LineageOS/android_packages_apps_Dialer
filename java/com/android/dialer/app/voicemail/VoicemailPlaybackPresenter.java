@@ -35,7 +35,6 @@ import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -213,7 +212,7 @@ public class VoicemailPlaybackPresenter
     }
 
     if (this.activity != null) {
-      if (isPlaying()) {
+      if (isPlaying) {
         this.activity.getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
       } else {
         this.activity.getWindow().clearFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -812,16 +811,6 @@ public class VoicemailPlaybackPresenter
     }
   }
 
-  @VisibleForTesting
-  public boolean isPlaying() {
-    return isPlaying;
-  }
-
-  @VisibleForTesting
-  public boolean isSpeakerphoneOn() {
-    return isSpeakerphoneOn;
-  }
-
   /**
    * This method only handles app-level changes to the speakerphone. Audio layer changes should be
    * handled separately. This is so that the VoicemailAudioManager can trigger changes to the
@@ -846,11 +835,6 @@ public class VoicemailPlaybackPresenter
         enableProximitySensor();
       }
     }
-  }
-
-  @VisibleForTesting
-  public void clearInstance() {
-    instance = null;
   }
 
   private void showShareVoicemailButton(boolean show) {

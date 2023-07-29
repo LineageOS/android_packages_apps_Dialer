@@ -21,7 +21,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
 import com.android.dialer.common.Assert;
@@ -52,8 +51,8 @@ public final class PersistentLogger {
   private static final String LOG_FOLDER = "plain_text";
   private static final int MESSAGE_FLUSH = 1;
 
-  @VisibleForTesting static final int LOG_FILE_SIZE_LIMIT = 64 * 1024;
-  @VisibleForTesting static final int LOG_FILE_COUNT_LIMIT = 8;
+  private static final int LOG_FILE_SIZE_LIMIT = 64 * 1024;
+  private static final int LOG_FILE_COUNT_LIMIT = 8;
 
   private static PersistentLogFileHandler fileHandler;
 
@@ -103,21 +102,10 @@ public final class PersistentLogger {
     log(buildTextLog(tag, string));
   }
 
-  @VisibleForTesting
   @AnyThread
   static void log(byte[] data) {
     messageQueue.add(data);
     loggerThreadHandler.sendEmptyMessageDelayed(MESSAGE_FLUSH, FLUSH_DELAY_MILLIS);
-  }
-
-  @VisibleForTesting
-  /** write raw bytes directly to the log file, likely corrupting it. */
-  static void rawLogForTest(byte[] data) {
-    try {
-      fileHandler.writeRawLogsForTest(data);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   /** Dump the log as human readable string. Blocks until the dump is finished. */
@@ -170,7 +158,6 @@ public final class PersistentLogger {
 
   @NonNull
   @WorkerThread
-  @VisibleForTesting
   static List<byte[]> readLogs() throws IOException {
     Assert.isWorkerThread();
     return fileHandler.getLogs();

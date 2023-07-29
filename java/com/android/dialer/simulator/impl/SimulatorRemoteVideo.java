@@ -22,7 +22,6 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.view.Surface;
 import com.android.dialer.common.Assert;
@@ -51,11 +50,6 @@ final class SimulatorRemoteVideo {
     LogUtil.enterBlock("SimulatorRemoteVideo.stopVideo");
     isStopped = true;
     thread.quitSafely();
-  }
-
-  @VisibleForTesting
-  Runnable getRenderer() {
-    return thread.getRenderer();
   }
 
   private static class Renderer implements Runnable {
@@ -155,9 +149,5 @@ final class SimulatorRemoteVideo {
       renderer.schedule();
     }
 
-    @VisibleForTesting
-    Runnable getRenderer() {
-      return renderer;
-    }
   }
 }

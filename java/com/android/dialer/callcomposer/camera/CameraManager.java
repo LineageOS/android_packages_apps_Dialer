@@ -24,7 +24,6 @@ import android.os.AsyncTask;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
@@ -308,7 +307,6 @@ public class CameraManager implements FocusOverlayManager.Listener {
   }
 
   @Nullable
-  @VisibleForTesting
   public CameraInfo getCameraInfo() {
     if (cameraIndex == NO_CAMERA_SELECTED) {
       return null;
@@ -536,7 +534,6 @@ public class CameraManager implements FocusOverlayManager.Listener {
    * @return rotation that images returned from {@link
    *     android.hardware.Camera.PictureCallback#onPictureTaken(byte[], Camera)} will be rotated.
    */
-  @VisibleForTesting
   static int updateCameraRotation(
       @NonNull Camera camera,
       int screenRotation,
@@ -853,10 +850,5 @@ public class CameraManager implements FocusOverlayManager.Listener {
     LogUtil.i(
         "CameraManager.logCameraSize",
         prefix + size.width + "x" + size.height + " (" + (size.width / (float) size.height) + ")");
-  }
-
-  @VisibleForTesting
-  public void resetCameraManager() {
-    instance = null;
   }
 }

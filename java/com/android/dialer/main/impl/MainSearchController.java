@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -578,15 +577,5 @@ public class MainSearchController implements SearchBarListener {
     void onSearchOpen();
 
     void onSearchClose();
-  }
-
-  @VisibleForTesting
-  void setDialpadFragment(DialpadFragment dialpadFragment) {
-    this.dialpadFragment = dialpadFragment;
-  }
-
-  @VisibleForTesting
-  void setSearchFragment(NewSearchFragment searchFragment) {
-    this.searchFragment = searchFragment;
   }
 }

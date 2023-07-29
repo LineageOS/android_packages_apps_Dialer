@@ -16,7 +16,6 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.support.annotation.VisibleForTesting;
 import android.util.ArraySet;
 import com.android.dialer.common.LogUtil;
 import java.util.Arrays;
@@ -31,8 +30,7 @@ public final class CountryCodeProvider {
   // TODO(erfanian): Ensure the below standard is consistent between libphonenumber and the
   // platform.
   // ISO 3166-1 alpha-2 Country Codes that are eligible for assisted dialing.
-  @VisibleForTesting
-  static final List<String> DEFAULT_COUNTRY_CODES =
+  private static final List<String> DEFAULT_COUNTRY_CODES =
       Arrays.asList(
           "CA" /* Canada */,
           "GB" /* United Kingdom */,
