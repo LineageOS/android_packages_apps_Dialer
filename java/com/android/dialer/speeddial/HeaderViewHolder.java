@@ -16,13 +16,13 @@
 
 package com.android.dialer.speeddial;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
 

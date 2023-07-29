@@ -16,19 +16,19 @@
 
 package com.android.dialer.calldetails;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.util.Pair;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
@@ -105,7 +105,7 @@ public class ReportDialogFragment extends DialogFragment {
     SuccessListener<CachedContactInfo> successListener = this::setCachedContactInfo;
     DialerExecutorComponent.get(getContext())
         .dialerExecutorFactory()
-        .createUiTaskBuilder(getFragmentManager(), "lookup_contact_info", worker)
+        .createUiTaskBuilder(getParentFragmentManager(), "lookup_contact_info", worker)
         .onSuccess(successListener)
         .build()
         .executeParallel(number);
@@ -127,7 +127,7 @@ public class ReportDialogFragment extends DialogFragment {
     SuccessListener<Pair<Context, Boolean>> successListener = this::onReportCallerId;
     DialerExecutorComponent.get(getContext())
         .dialerExecutorFactory()
-        .createUiTaskBuilder(getFragmentManager(), "report_caller_id", worker)
+        .createUiTaskBuilder(getParentFragmentManager(), "report_caller_id", worker)
         .onSuccess(successListener)
         .build()
         .executeParallel(getActivity());

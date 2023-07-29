@@ -18,7 +18,9 @@ package com.android.dialer.calllog.ui;
 
 import android.content.Context;
 import android.provider.CallLog.Calls;
-import android.support.v4.content.CursorLoader;
+
+import androidx.loader.content.CursorLoader;
+
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 
 /** Cursor loader for {@link AnnotatedCallLog}. */

@@ -16,7 +16,7 @@
 
 package com.android.incallui.video.protocol;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /** Interface for call video call module. */
 public interface VideoCallScreen {

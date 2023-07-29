@@ -23,9 +23,12 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+
+import androidx.preference.PreferenceManager;
+
+import com.android.dialer.R;
 
 public class SettingsUtil {
 
