@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -62,8 +61,6 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
 
   private final int timeoutMillis;
 
-  private CountDownLatch latchForTest;
-
   @MainThread
   public SwapSimWorker(
       Context context,
@@ -74,7 +71,6 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
     this(context, call, callList, otherAccount, lock, DEFAULT_TIMEOUT_MILLIS);
   }
 
-  @VisibleForTesting
   SwapSimWorker(
       Context context,
       DialerCall call,
@@ -118,9 +114,6 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
       extras.putParcelable(TelecomManager.EXTRA_PHONE_ACCOUNT_HANDLE, otherAccount);
       callList.addListener(this);
       telecomManager.placeCall(Uri.fromParts(PhoneAccount.SCHEME_TEL, number, null), extras);
-      if (latchForTest != null) {
-        latchForTest.countDown();
-      }
       if (!dialingLatch.await(timeoutMillis, TimeUnit.MILLISECONDS)) {
         LogUtil.e("SwapSimWorker.doInBackground", "timeout waiting for call to dial");
       }
@@ -150,11 +143,6 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
     if (callList.getOutgoingCall() != null) {
       dialingLatch.countDown();
     }
-  }
-
-  @VisibleForTesting
-  void setLatchForTest(CountDownLatch latch) {
-    latchForTest = latch;
   }
 
   @Override

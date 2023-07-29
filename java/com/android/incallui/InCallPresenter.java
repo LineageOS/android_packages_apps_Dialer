@@ -25,7 +25,6 @@ import android.provider.BlockedNumberContract;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.DisconnectCause;
@@ -260,7 +259,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
   private boolean automaticallyMutedByAddCall = false;
 
   /** Inaccessible constructor. Must use getRunningInstance() to get this singleton. */
-  @VisibleForTesting
   InCallPresenter() {}
 
   public static synchronized InCallPresenter getInstance() {
@@ -270,11 +268,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
       Trace.endSection();
     }
     return inCallPresenter;
-  }
-
-  @VisibleForTesting
-  public static synchronized void setInstanceForTesting(InCallPresenter inCallPresenter) {
-    InCallPresenter.inCallPresenter = inCallPresenter;
   }
 
   /**
@@ -1631,11 +1624,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
   public ThemeColorManager getThemeColorManager() {
     return themeColorManager;
-  }
-
-  @VisibleForTesting
-  public void setThemeColorManager(ThemeColorManager themeColorManager) {
-    this.themeColorManager = themeColorManager;
   }
 
   /** Called when the foreground call changes. */

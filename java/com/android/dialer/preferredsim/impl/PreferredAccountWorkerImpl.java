@@ -31,7 +31,6 @@ import android.provider.ContactsContract.QuickContact;
 import android.provider.ContactsContract.RawContacts;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -72,8 +71,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutor;
 
-  @VisibleForTesting
-  public static final String METADATA_SUPPORTS_PREFERRED_SIM =
+  private static final String METADATA_SUPPORTS_PREFERRED_SIM =
       "supports_per_number_preferred_account";
 
   @Inject
@@ -378,7 +376,6 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
     return true;
   }
 
-  @VisibleForTesting
   public static Intent getQuickContactIntent() {
     Intent intent = new Intent(QuickContact.ACTION_QUICK_CONTACT);
     intent.addCategory(Intent.CATEGORY_DEFAULT);
