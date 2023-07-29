@@ -22,7 +22,6 @@ import android.graphics.Paint;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
@@ -30,6 +29,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
 import java.util.Locale;
 
 /** Provides static functions to work with views */
@@ -101,7 +103,7 @@ public class ViewUtil {
   }
 
   public static void doOnPreDraw(
-      @NonNull final View view, final boolean drawNextFrame, final ViewRunnable runnable) {
+          @NonNull final View view, final boolean drawNextFrame, final ViewRunnable runnable) {
     view.getViewTreeObserver()
         .addOnPreDrawListener(
             new OnPreDrawListener() {

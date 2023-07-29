@@ -19,9 +19,12 @@ package com.android.voicemail.impl;
 import android.content.Context;
 import android.net.Uri;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.ArrayMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.voicemail.impl.utils.XmlUtils;
 import com.google.common.collect.ComparisonChain;
 import java.io.IOException;

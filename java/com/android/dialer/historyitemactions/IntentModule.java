@@ -18,8 +18,11 @@ package com.android.dialer.historyitemactions;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+
+import com.android.dialer.R;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;

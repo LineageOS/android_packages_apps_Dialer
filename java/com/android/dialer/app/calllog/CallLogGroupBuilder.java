@@ -19,10 +19,12 @@ package com.android.dialer.app.calllog;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
-import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.Time;
+
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.util.DateUtils;
 import com.android.dialer.calllogutils.CallbackActionHelper;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;

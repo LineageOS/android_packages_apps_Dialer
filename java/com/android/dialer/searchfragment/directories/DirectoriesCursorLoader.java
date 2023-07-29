@@ -21,7 +21,9 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.google.auto.value.AutoValue;

@@ -29,8 +29,6 @@ import android.hardware.display.DisplayManager;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Trace;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.telecom.Call.Details;
@@ -43,7 +41,12 @@ import android.view.Display;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.ContactsUtils;
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contacts.ContactsComponent;
@@ -118,7 +121,8 @@ public class CallCardPresenter
   private boolean isInCallScreenReady;
   private boolean shouldSendAccessibilityEvent;
 
-  @NonNull private final CallLocation callLocation;
+  @NonNull
+  private final CallLocation callLocation;
   private final Runnable sendAccessibilityEventRunnable =
       new Runnable() {
         @Override

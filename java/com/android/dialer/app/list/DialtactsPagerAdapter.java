@@ -18,9 +18,11 @@ package com.android.dialer.app.list;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.annotation.IntDef;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
+
+import androidx.annotation.IntDef;
+
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
 import com.android.dialer.common.Assert;

@@ -22,8 +22,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Status;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.Nullable;
 
 public class VoicemailStatus {
 
@@ -32,7 +33,8 @@ public class VoicemailStatus {
   public static class Editor {
 
     private final Context context;
-    @Nullable private final PhoneAccountHandle phoneAccountHandle;
+    @Nullable
+    private final PhoneAccountHandle phoneAccountHandle;
 
     private ContentValues values = new ContentValues();
 

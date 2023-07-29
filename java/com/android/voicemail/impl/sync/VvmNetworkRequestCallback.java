@@ -25,9 +25,11 @@ import android.net.NetworkRequest;
 import android.os.ConditionVariable;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.CallSuper;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.CallSuper;
+
 import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.OmtpEvents;
 import com.android.voicemail.impl.OmtpVvmCarrierConfigHelper;

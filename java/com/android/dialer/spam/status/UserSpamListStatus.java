@@ -16,7 +16,8 @@
 
 package com.android.dialer.spam.status;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
+
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
 import java.lang.annotation.Retention;

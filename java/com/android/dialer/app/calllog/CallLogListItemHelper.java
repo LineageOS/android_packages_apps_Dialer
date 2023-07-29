@@ -18,9 +18,11 @@ package com.android.dialer.app.calllog;
 
 import android.content.res.Resources;
 import android.provider.CallLog.Calls;
-import android.support.annotation.WorkerThread;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.calllogutils.PhoneCallDetails;

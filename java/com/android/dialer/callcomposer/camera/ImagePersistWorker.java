@@ -20,8 +20,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.callcomposer.camera.ImagePersistWorker.Result;
 import com.android.dialer.callcomposer.camera.exif.ExifInterface;
 import com.android.dialer.callcomposer.util.BitmapResizer;

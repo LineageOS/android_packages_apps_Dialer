@@ -18,9 +18,11 @@ package com.android.voicemail.impl.scheduling;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
+
 import java.util.Objects;
 
 /**
