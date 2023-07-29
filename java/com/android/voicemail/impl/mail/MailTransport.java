@@ -18,7 +18,6 @@ package com.android.voicemail.impl.mail;
 import android.content.Context;
 import android.net.Network;
 import android.net.TrafficStats;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.constants.TrafficStatsTags;
 import com.android.voicemail.impl.OmtpEvents;
 import com.android.voicemail.impl.imap.ImapHelper;
@@ -61,7 +60,6 @@ public class MailTransport {
   private BufferedInputStream in;
   private BufferedOutputStream out;
   private final int flags;
-  private SocketCreator socketCreator;
   private InetSocketAddress address;
 
   public MailTransport(
@@ -166,23 +164,7 @@ public class MailTransport {
     }
   }
 
-  // For testing. We need something that can replace the behavior of "new Socket()"
-  @VisibleForTesting
-  interface SocketCreator {
-
-    Socket createSocket() throws MessagingException;
-  }
-
-  @VisibleForTesting
-  void setSocketCreator(SocketCreator creator) {
-    socketCreator = creator;
-  }
-
   protected Socket createSocket() throws MessagingException {
-    if (socketCreator != null) {
-      return socketCreator.createSocket();
-    }
-
     if (network == null) {
       LogUtils.v(TAG, "createSocket: network not specified");
       return new Socket();

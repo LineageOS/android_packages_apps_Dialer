@@ -20,7 +20,6 @@ import android.net.Network;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -114,10 +113,6 @@ public class Vvm3Subscriber {
   private static final String SPG_LANGUAGE_PARAM = "SPG_LANGUAGE_PARAM";
   private static final String SPG_LANGUAGE_EN = "ENGLISH";
 
-  @VisibleForTesting
-  static final String VVM3_SUBSCRIBE_LINK_PATTERNS_JSON_ARRAY =
-      "vvm3_subscribe_link_pattern_json_array";
-
   private static final String VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS =
       "["
           + "\"(?i)Subscribe to Basic Visual Voice Mail\","
@@ -136,7 +131,6 @@ public class Vvm3Subscriber {
 
   private RequestQueue requestQueue;
 
-  @VisibleForTesting
   static class ProvisioningException extends Exception {
 
     public ProvisioningException(String message) {
@@ -318,7 +312,6 @@ public class Vvm3Subscriber {
     }
   }
 
-  @VisibleForTesting
   static List<Pattern> getSubscribeLinkPatterns() {
     String patternsJsonString = VVM3_SUBSCRIBE_LINK_DEFAULT_PATTERNS;
     List<Pattern> patterns = new ArrayList<>();
@@ -333,7 +326,6 @@ public class Vvm3Subscriber {
     return patterns;
   }
 
-  @VisibleForTesting
   static String findSubscribeLink(@NonNull List<Pattern> patterns, String response)
       throws ProvisioningException {
     if (patterns.isEmpty()) {

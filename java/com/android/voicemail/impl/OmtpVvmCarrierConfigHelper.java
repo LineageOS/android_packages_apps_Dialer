@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
@@ -88,8 +87,6 @@ public class OmtpVvmCarrierConfigHelper {
   public static final String KEY_VVM_CLIENT_PREFIX_STRING = "vvm_client_prefix_string";
   private static final String KEY_IGNORE_TRANSCRIPTION_BOOL = "vvm_ignore_transcription";
 
-  @Nullable private static PersistableBundle overrideConfigForTest;
-
   private final Context context;
   private final PersistableBundle carrierConfig;
   private final String vvmType;
@@ -103,51 +100,30 @@ public class OmtpVvmCarrierConfigHelper {
   public OmtpVvmCarrierConfigHelper(Context context, @Nullable PhoneAccountHandle handle) {
     this.context = context;
     phoneAccountHandle = handle;
-    if (overrideConfigForTest != null) {
-      overrideConfig = overrideConfigForTest;
-      carrierConfig = new PersistableBundle();
-      telephonyConfig = new PersistableBundle();
+    Optional<CarrierIdentifier> carrierIdentifier = CarrierIdentifier.forHandle(context, handle);
+    TelephonyManager telephonyManager =
+        context
+            .getSystemService(TelephonyManager.class)
+            .createForPhoneAccountHandle(phoneAccountHandle);
+    if (telephonyManager == null || !carrierIdentifier.isPresent()) {
+      VvmLog.e(TAG, "PhoneAccountHandle is invalid");
+      carrierConfig = null;
+      telephonyConfig = null;
+      overrideConfig = null;
+      vvmType = null;
+      protocol = null;
+      return;
+    }
+    if (ConfigOverrideFragment.isOverridden(context)) {
+      overrideConfig = ConfigOverrideFragment.getConfig(context);
+      VvmLog.w(TAG, "Config override is activated: " + overrideConfig);
     } else {
-      Optional<CarrierIdentifier> carrierIdentifier = CarrierIdentifier.forHandle(context, handle);
-      TelephonyManager telephonyManager =
-          context
-              .getSystemService(TelephonyManager.class)
-              .createForPhoneAccountHandle(phoneAccountHandle);
-      if (telephonyManager == null || !carrierIdentifier.isPresent()) {
-        VvmLog.e(TAG, "PhoneAccountHandle is invalid");
-        carrierConfig = null;
-        telephonyConfig = null;
-        overrideConfig = null;
-        vvmType = null;
-        protocol = null;
-        return;
-      }
-      if (ConfigOverrideFragment.isOverridden(context)) {
-        overrideConfig = ConfigOverrideFragment.getConfig(context);
-        VvmLog.w(TAG, "Config override is activated: " + overrideConfig);
-      } else {
-        overrideConfig = null;
-      }
-
-      carrierConfig = getCarrierConfig(telephonyManager);
-      telephonyConfig = new DialerVvmConfigManager(context).getConfig(carrierIdentifier.get());
+      overrideConfig = null;
     }
 
-    vvmType = getVvmType();
-    protocol = VisualVoicemailProtocolFactory.create(this.context.getResources(), vvmType);
-  }
+    carrierConfig = getCarrierConfig(telephonyManager);
+    telephonyConfig = new DialerVvmConfigManager(context).getConfig(carrierIdentifier.get());
 
-  @VisibleForTesting
-  OmtpVvmCarrierConfigHelper(
-      Context context,
-      PersistableBundle carrierConfig,
-      PersistableBundle telephonyConfig,
-      @Nullable PhoneAccountHandle phoneAccountHandle) {
-    this.context = context;
-    this.carrierConfig = carrierConfig;
-    this.telephonyConfig = telephonyConfig;
-    this.phoneAccountHandle = phoneAccountHandle;
-    overrideConfig = null;
     vvmType = getVvmType();
     protocol = VisualVoicemailProtocolFactory.create(this.context.getResources(), vvmType);
   }
@@ -493,11 +469,6 @@ public class OmtpVvmCarrierConfigHelper {
       }
     }
     return defaultValue;
-  }
-
-  @VisibleForTesting
-  public static void setOverrideConfigForTest(PersistableBundle config) {
-    overrideConfigForTest = config;
   }
 
   /** Checks if the carrier VVM app is installed. */

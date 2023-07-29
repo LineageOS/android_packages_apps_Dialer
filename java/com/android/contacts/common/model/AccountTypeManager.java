@@ -37,7 +37,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -90,19 +89,6 @@ public abstract class AccountTypeManager {
       }
     }
     return mAccountTypeManager;
-  }
-
-  /**
-   * Set the instance of account type manager. This is only for and should only be used by unit
-   * tests. While having this method is not ideal, it's simpler than the alternative of holding this
-   * as a service in the ContactsApplication context class.
-   *
-   * @param mockManager The mock AccountTypeManager.
-   */
-  public static void setInstanceForTest(AccountTypeManager mockManager) {
-    synchronized (mInitializationLock) {
-      mAccountTypeManager = mockManager;
-    }
   }
 
   /**
@@ -328,7 +314,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
    * Return all {@link AccountType}s with at least one account which supports "invite", i.e. its
    * {@link AccountType#getInviteContactActivityClassName()} is not empty.
    */
-  @VisibleForTesting
   static Map<AccountTypeWithDataSet, AccountType> findAllInvitableAccountTypes(
       Context context,
       Collection<AccountWithDataSet> accounts,
