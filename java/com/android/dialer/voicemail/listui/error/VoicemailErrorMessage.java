@@ -27,12 +27,11 @@ import android.view.View.OnClickListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.dialer.R;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.voicemail.settings.VoicemailChangePinActivity;
 import com.android.voicemail.VoicemailClient;
@@ -134,8 +133,6 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.VVM_CHANGE_AIRPLANE_MODE_CLICKED);
             Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
             context.startActivity(intent);
           }
@@ -150,8 +147,6 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.VOICEMAIL_ALERT_SET_PIN_CLICKED);
             Intent intent = new Intent(context, VoicemailChangePinActivity.class);
             intent.putExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
             context.startActivity(intent);
@@ -167,7 +162,6 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            Logger.get(context).logImpression(DialerImpression.Type.VVM_CALL_VOICEMAIL_CLICKED);
             PreCall.start(
                 context,
                 CallIntentBuilder.forVoicemail(
@@ -183,7 +177,6 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            Logger.get(context).logImpression(DialerImpression.Type.VVM_USER_SYNC);
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
             context.sendBroadcast(intent);
@@ -198,7 +191,6 @@ public class VoicemailErrorMessage {
         new OnClickListener() {
           @Override
           public void onClick(View v) {
-            Logger.get(context).logImpression(DialerImpression.Type.VVM_USER_RETRY);
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
             context.sendBroadcast(intent);
@@ -209,7 +201,6 @@ public class VoicemailErrorMessage {
   @NonNull
   public static Action createTurnArchiveOnAction(
       final Context context,
-      DialerImpression.Type impressionToLog,
       final VoicemailStatus status,
       VoicemailStatusReader statusReader,
       VoicemailClient voicemailClient,
@@ -223,7 +214,6 @@ public class VoicemailErrorMessage {
                 VoicemailComponent.get(context)
                     .getVoicemailClient()
                     .isVoicemailArchiveAvailable(context));
-            Logger.get(context).logImpression(impressionToLog);
             voicemailClient.setVoicemailArchiveEnabled(context, phoneAccountHandle, true);
             Intent intent = new Intent(VoicemailContract.ACTION_SYNC_VOICEMAIL);
             intent.setPackage(status.sourcePackage);
@@ -236,7 +226,6 @@ public class VoicemailErrorMessage {
   @NonNull
   public static Action createDismissTurnArchiveOnAction(
       final Context context,
-      DialerImpression.Type impressionToLog,
       VoicemailStatusReader statusReader,
       PerAccountSharedPreferences sharedPreferenceForAccount,
       String preferenceKeyToUpdate) {
@@ -249,7 +238,6 @@ public class VoicemailErrorMessage {
                 VoicemailComponent.get(context)
                     .getVoicemailClient()
                     .isVoicemailArchiveAvailable(context));
-            Logger.get(context).logImpression(impressionToLog);
             sharedPreferenceForAccount.edit().putBoolean(preferenceKeyToUpdate, true).apply();
             statusReader.refresh();
           }

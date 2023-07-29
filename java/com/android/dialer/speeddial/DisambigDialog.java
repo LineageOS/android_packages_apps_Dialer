@@ -39,8 +39,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
@@ -139,14 +137,7 @@ public class DisambigDialog extends DialogFragment {
 
   private void onVideoOptionClicked(Channel channel) {
     if (rememberThisChoice.isChecked()) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.FAVORITE_SET_VIDEO_DEFAULT);
       setDefaultChannel(getContext().getApplicationContext(), speedDialUiItem, channel);
-    }
-
-    if (channel.technology() == Channel.DUO) {
-      Logger.get(getContext())
-          .logImpression(
-              DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT_DISAMBIG);
     }
 
     PreCall.start(
@@ -160,7 +151,6 @@ public class DisambigDialog extends DialogFragment {
 
   private void onVoiceOptionClicked(Channel channel) {
     if (rememberThisChoice.isChecked()) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.FAVORITE_SET_VOICE_DEFAULT);
       setDefaultChannel(getContext().getApplicationContext(), speedDialUiItem, channel);
     }
 

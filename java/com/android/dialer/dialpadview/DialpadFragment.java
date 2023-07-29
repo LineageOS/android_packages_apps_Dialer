@@ -91,9 +91,7 @@ import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.location.GeoUtil;
-import com.android.dialer.logging.UiAction;
 import com.android.dialer.oem.MotorolaUtils;
-import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.proguard.UsedByReflection;
@@ -1170,7 +1168,6 @@ public class DialpadFragment extends Fragment
   private void handleDialButtonPressed() {
     if (isDigitsEmpty()) { // No number entered.
       // No real call made, so treat it as a click
-      PerformanceReport.recordClick(UiAction.Type.PRESS_CALL_BUTTON_WITHOUT_CALLING);
       handleDialButtonClickWithEmptyDigits();
     } else {
       final String number = digits.getText().toString();
@@ -1181,7 +1178,6 @@ public class DialpadFragment extends Fragment
       if (number != null
           && !TextUtils.isEmpty(prohibitedPhoneNumberRegexp)
           && number.matches(prohibitedPhoneNumberRegexp)) {
-        PerformanceReport.recordClick(UiAction.Type.PRESS_CALL_BUTTON_WITHOUT_CALLING);
         LogUtil.i(
             "DialpadFragment.handleDialButtonPressed",
             "The phone number is prohibited explicitly by a rule.");
@@ -1219,10 +1215,6 @@ public class DialpadFragment extends Fragment
       startActivity(newFlashIntent());
     } else {
       if (!TextUtils.isEmpty(lastNumberDialed)) {
-        // Dialpad will be filled with last called number,
-        // but we don't want to record it as user action
-        PerformanceReport.setIgnoreActionOnce(UiAction.Type.TEXT_CHANGE_WITH_INPUT);
-
         // Recall the last number dialed.
         digits.setText(lastNumberDialed);
 
