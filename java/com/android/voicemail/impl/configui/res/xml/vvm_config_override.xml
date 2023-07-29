@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2017 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@
     android:key="@string/vvm_config_override_load_current_key"
     android:title="Load current"/>
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
       android:key="@string/vvm_config_override_enabled_key"
       android:title="Override enabled"
       android:defaultValue="false"/>
@@ -45,12 +46,12 @@
       android:title="vvm package name (CSV)"
       />
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
       android:key="vvm_config_override_key_vvm_prefetch_bool"
       android:title="prefetch"
       android:defaultValue="true"/>
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
       android:key="vvm_config_override_key_vvm_cellular_data_required_bool"
       android:title="cellular data required"
       android:defaultValue="false"/>
@@ -59,7 +60,7 @@
       android:title="SSL port"
       />
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
       android:key="vvm_config_override_key_vvm_legacy_mode_enabled_bool"
       android:title="legacy mode"
       android:defaultValue="false"/>

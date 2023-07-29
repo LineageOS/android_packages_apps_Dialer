@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +28,10 @@ import android.provider.VoicemailContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.dialer.app.R;
 import com.android.dialer.app.voicemail.VoicemailAudioManager;
 import com.android.dialer.app.voicemail.VoicemailErrorManager;
@@ -40,6 +45,7 @@ import com.android.dialer.voicemail.listui.error.VoicemailErrorMessageCreator;
 import com.android.dialer.voicemail.listui.error.VoicemailStatus;
 import com.android.dialer.voicemail.listui.error.VoicemailStatusWorker;
 import com.android.dialer.widget.EmptyContentView;
+
 import java.util.List;
 
 public class VisualVoicemailCallLogFragment extends CallLogFragment {
@@ -61,8 +67,8 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
-    voicemailPlaybackPresenter =
-        VoicemailPlaybackPresenter.getInstance(getActivity(), savedInstanceState);
+    voicemailPlaybackPresenter = VoicemailPlaybackPresenter.getInstance(
+            (AppCompatActivity) getActivity(), savedInstanceState);
     if (PermissionsUtil.hasReadVoicemailPermissions(getContext())
         && PermissionsUtil.hasAddVoicemailPermissions(getContext())) {
       getActivity()
@@ -80,7 +86,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
         DialerExecutorComponent.get(getContext())
             .dialerExecutorFactory()
             .createUiTaskBuilder(
-                getActivity().getFragmentManager(),
+                getActivity().getSupportFragmentManager(),
                 "fetchVoicemailStatus",
                 new VoicemailStatusWorker())
             .onSuccess(this::onPreSyncVoicemailStatusChecked)
@@ -147,7 +153,7 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     if (voicemailPlaybackPresenter != null) {
       voicemailPlaybackPresenter.onSaveInstanceState(outState);

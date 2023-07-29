@@ -1,5 +1,6 @@
 <!--
   ~ Copyright (C) 2017 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -17,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
       android:defaultValue="true"
       android:key="@string/assisted_dialing_setting_toggle_key"
       android:summary="@string/assisted_dialing_setting_summary"

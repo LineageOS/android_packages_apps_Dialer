@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +22,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.telecom.DisconnectCause;
+
+import androidx.preference.PreferenceManager;
 
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -44,9 +46,9 @@ public class InCallVibrationHandler extends Handler implements
   private DialerCall activeCall;
 
   public InCallVibrationHandler(Context context) {
+    String name = context.getPackageName() + "_preferences";
     prefs = context.createDeviceProtectedStorageContext()
-            .getSharedPreferences(PreferenceManager.getDefaultSharedPreferencesName(context),
-                    Context.MODE_PRIVATE);
+            .getSharedPreferences(name, Context.MODE_PRIVATE);
     vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
   }
 

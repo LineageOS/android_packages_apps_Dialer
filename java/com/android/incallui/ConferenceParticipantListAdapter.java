@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +19,6 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v4.util.ArrayMap;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -32,6 +32,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.collection.ArrayMap;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
@@ -40,6 +44,7 @@ import com.android.incallui.ContactInfoCache.ContactCacheEntry;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.state.DialerCallState;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;

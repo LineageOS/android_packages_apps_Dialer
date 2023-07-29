@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2009 The Android Open Source Project
+     Copyright (C) 2023 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +15,7 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/call_stats_detail"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -77,9 +79,9 @@
       android:background="?android:attr/selectableItemBackgroundBorderless"
       android:src="@drawable/quantum_ic_call_vd_theme_24"
       android:scaleType="center"
-      android:tint="?android:attr/textColorSecondary"
       android:contentDescription="@string/call"
-      android:visibility="gone" />
+      android:visibility="gone"
+      app:tint="?android:attr/textColorSecondary" />
 
   </LinearLayout>
 

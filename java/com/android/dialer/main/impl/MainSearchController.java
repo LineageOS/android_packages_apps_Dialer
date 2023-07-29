@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +17,10 @@
 
 package com.android.dialer.main.impl;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +30,9 @@ import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.contacts.common.dialog.ClearFrequentsDialog;
 import com.android.dialer.R;
@@ -53,7 +53,9 @@ import com.android.dialer.searchfragment.list.NewSearchFragment.SearchFragmentLi
 import com.android.dialer.smartdial.util.SmartDialNameMatcher;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.TransactionSafeActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.base.Optional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,10 +116,10 @@ public class MainSearchController implements SearchBarListener {
     this.toolbar = toolbar;
     this.fragmentContainer = fragmentContainer;
 
-    dialpadFragment =
-        (DialpadFragment) activity.getFragmentManager().findFragmentByTag(DIALPAD_FRAGMENT_TAG);
-    searchFragment =
-        (NewSearchFragment) activity.getFragmentManager().findFragmentByTag(SEARCH_FRAGMENT_TAG);
+    dialpadFragment = (DialpadFragment) activity.getSupportFragmentManager()
+            .findFragmentByTag(DIALPAD_FRAGMENT_TAG);
+    searchFragment = (NewSearchFragment) activity.getSupportFragmentManager()
+            .findFragmentByTag(SEARCH_FRAGMENT_TAG);
   }
 
   /** Should be called if we're showing the dialpad because of a new ACTION_DIAL intent. */
@@ -153,7 +155,7 @@ public class MainSearchController implements SearchBarListener {
 
     activity.setTitle(R.string.dialpad_activity_title);
 
-    FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+    FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
 
     // Show Search
     if (searchFragment == null) {
@@ -226,7 +228,10 @@ public class MainSearchController implements SearchBarListener {
           public void onAnimationEnd(Animation animation) {
             if (activity.isSafeToCommitTransactions()
                 && !(activity.isFinishing() || activity.isDestroyed())) {
-              activity.getFragmentManager().beginTransaction().hide(dialpadFragment).commit();
+              activity.getSupportFragmentManager()
+                      .beginTransaction()
+                      .hide(dialpadFragment)
+                      .commit();
             }
           }
 
@@ -322,7 +327,7 @@ public class MainSearchController implements SearchBarListener {
     showBottomNav();
     updateStatusBarColor(android.R.attr.statusBarColor);
     toolbar.collapse(animate);
-    activity.getFragmentManager().beginTransaction().hide(searchFragment).commit();
+    activity.getSupportFragmentManager().beginTransaction().hide(searchFragment).commit();
 
     // Clear the dialpad so the phone number isn't persisted between search sessions.
     if (dialpadFragment != null) {
@@ -388,7 +393,7 @@ public class MainSearchController implements SearchBarListener {
     hideBottomNav();
     updateStatusBarColor(android.R.attr.colorBackgroundFloating);
 
-    FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+    FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
     // Show Search
     if (searchFragment == null) {
       searchFragment = NewSearchFragment.newInstance();
@@ -447,7 +452,7 @@ public class MainSearchController implements SearchBarListener {
       activity.startActivity(new Intent(activity, DialerSettingsActivity.class));
       return true;
     } else if (menuItem.getItemId() == R.id.clear_frequents) {
-      ClearFrequentsDialog.show(activity.getFragmentManager());
+      ClearFrequentsDialog.show(activity.getSupportFragmentManager());
       return true;
     } else if (menuItem.getItemId() == R.id.menu_call_history) {
       final Intent intent = new Intent(activity, CallLogActivity.class);

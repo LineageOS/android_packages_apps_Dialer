@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,8 +35,6 @@ import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -45,23 +44,25 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
-import android.view.ContextMenu;
 import android.transition.TransitionManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.contacts.common.dialog.CallSubjectDialog;
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.voicemail.VoicemailPlaybackLayout;
@@ -88,6 +89,7 @@ import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.UriUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +22,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * This is a custom text view intended for rendering text on the dialpad. TextView has built-in
@@ -31,7 +33,7 @@ import android.widget.TextView;
  * to a larger default, for the dialpad we use this class to more precisely render characters
  * according to the precise amount of space they need.
  */
-public class DialpadTextView extends TextView {
+public class DialpadTextView extends AppCompatTextView {
 
   private Rect textBounds = new Rect();
   private String textStr;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +20,19 @@ package com.android.dialer.callstats;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
-import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.dialer.R;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +28,6 @@ import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.Trace;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.telecom.Call.Details;
 import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
@@ -41,6 +40,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.R;
@@ -71,6 +72,7 @@ import com.android.incallui.incall.protocol.PrimaryCallState.ButtonState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
 import com.android.incallui.incall.protocol.SecondaryInfo;
 import com.android.incallui.videotech.utils.SessionModificationState;
+
 import java.lang.ref.WeakReference;
 
 /**

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +20,6 @@ package com.android.dialer.calldetails;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
 import com.android.dialer.app.AccountSelectionActivity;
