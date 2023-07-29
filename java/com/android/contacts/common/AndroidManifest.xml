@@ -27,6 +27,9 @@
         <action android:name="android.intent.action.VIEW"/>
       </intent-filter>
     </activity>
+
+    <!-- Broadcast receiver that passively listens to location updates -->
+    <receiver android:name="com.android.dialer.location.CountryDetector$LocationChangedReceiver"/>
   </application>
 </manifest>
 
