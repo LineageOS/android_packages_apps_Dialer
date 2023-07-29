@@ -19,7 +19,6 @@ import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -40,7 +39,6 @@ public class DialerPersistentBackupAgent extends PersistentBackupAgentHelper {
 
   @NonNull private final String[] sharedPreferencesToBackup;
 
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
   DialerPersistentBackupAgent(@NonNull String[] sharedPrefs) {
     this.sharedPreferencesToBackup = Assert.isNotNull(sharedPrefs);
     Logger.get(this).logImpression(DialerImpression.Type.BACKUP_KEY_VALUE_BACKUP_AGENT_CONSTRUCTOR);

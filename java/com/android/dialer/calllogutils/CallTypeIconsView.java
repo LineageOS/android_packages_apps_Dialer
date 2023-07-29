@@ -24,7 +24,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.CallLog.Calls;
-import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
 import com.android.dialer.theme.base.Theme;
@@ -121,11 +120,6 @@ public class CallTypeIconsView extends View {
     }
   }
 
-  @VisibleForTesting
-  public boolean isHdShown() {
-    return showHd;
-  }
-
   public void setShowWifi(boolean showWifi) {
     this.showWifi = showWifi;
     if (showWifi) {
@@ -133,10 +127,6 @@ public class CallTypeIconsView extends View {
       height = Math.max(height, resources.wifiCall.getIntrinsicHeight());
       invalidate();
     }
-  }
-
-  public boolean isAssistedDialedShown() {
-    return showAssistedDialed;
   }
 
   public void setShowAssistedDialed(boolean showAssistedDialed) {
@@ -159,10 +149,6 @@ public class CallTypeIconsView extends View {
 
   public int getCount() {
     return callTypes.size();
-  }
-
-  public int getCallType(int index) {
-    return callTypes.get(index);
   }
 
   private Drawable getCallTypeDrawable(int callType) {

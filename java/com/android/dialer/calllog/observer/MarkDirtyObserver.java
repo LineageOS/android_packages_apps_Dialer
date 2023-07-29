@@ -19,7 +19,6 @@ package com.android.dialer.calllog.observer;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.support.annotation.MainThread;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.calllog.notifier.RefreshAnnotatedCallLogNotifier;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -34,7 +33,6 @@ public final class MarkDirtyObserver extends ContentObserver {
 
   private final RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier;
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   @Inject
   public MarkDirtyObserver(RefreshAnnotatedCallLogNotifier refreshAnnotatedCallLogNotifier) {
     super(ThreadUtil.getUiThreadHandler());

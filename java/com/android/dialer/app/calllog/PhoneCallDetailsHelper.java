@@ -58,7 +58,6 @@ public class PhoneCallDetailsHelper {
 
   private final CachedNumberLookupService cachedNumberLookupService;
 
-  private CharSequence phoneTypeLabelForTest;
   /** List of items to be concatenated together for accessibility descriptions */
   private ArrayList<CharSequence> descriptionItems = new ArrayList<>();
 
@@ -287,19 +286,13 @@ public class PhoneCallDetailsHelper {
           && TextUtils.isEmpty(details.numberLabel))) {
         // Get type label only if it will not be "Custom" because of an empty number label.
         numberFormattedLabel =
-            phoneTypeLabelForTest != null
-                ? phoneTypeLabelForTest
-                : Phone.getTypeLabel(resources, details.numberType, details.numberLabel);
+                Phone.getTypeLabel(resources, details.numberType, details.numberLabel);
       }
     }
     if (!TextUtils.isEmpty(details.namePrimary) && TextUtils.isEmpty(numberFormattedLabel)) {
       numberFormattedLabel = details.displayNumber;
     }
     return numberFormattedLabel;
-  }
-
-  public void setPhoneTypeLabelForTest(CharSequence phoneTypeLabel) {
-    this.phoneTypeLabelForTest = phoneTypeLabel;
   }
 
   /**
@@ -369,8 +362,6 @@ public class PhoneCallDetailsHelper {
 
   /**
    * Returns the current time in milliseconds since the epoch.
-   *
-   * <p>It can be injected in tests using {@link #setCurrentTimeForTest(long)}.
    */
   private long getCurrentTimeMillis() {
     return System.currentTimeMillis();

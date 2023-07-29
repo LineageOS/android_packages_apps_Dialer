@@ -20,7 +20,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource.Type;
@@ -319,12 +318,6 @@ public class ContactInfoCache {
   /** Sets whether processing of requests for contact details should be enabled. */
   public void disableRequestProcessing() {
     requestProcessingDisabled = true;
-  }
-
-  @VisibleForTesting
-  public void injectContactInfoForTest(String number, String countryIso, ContactInfo contactInfo) {
-    NumberWithCountryIso numberCountryIso = new NumberWithCountryIso(number, countryIso);
-    cache.put(numberCountryIso, contactInfo);
   }
 
   public interface OnContactInfoChangedListener {
