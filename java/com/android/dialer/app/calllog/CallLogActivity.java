@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +16,26 @@
  */
 package com.android.dialer.app.calllog;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.design.widget.Snackbar;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.android.contacts.common.list.ViewPagerTabs;
-import com.android.dialer.app.R;
-import com.android.dialer.calldetails.OldCallDetailsActivity;
+import com.android.dialer.R;
 import com.android.dialer.callstats.CallStatsFragment;
 import com.android.dialer.callstats.DoubleDatePickerDialog;
 import com.android.dialer.common.Assert;
-import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
@@ -88,7 +88,7 @@ public class CallLogActivity extends TransactionSafeActivity implements
 
     viewPager = (ViewPager) findViewById(R.id.call_log_pager);
 
-    viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+    viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
     viewPager.setAdapter(viewPagerAdapter);
     viewPager.setOffscreenPageLimit(1);
     viewPager.setOnPageChangeListener(this);
@@ -151,7 +151,7 @@ public class CallLogActivity extends TransactionSafeActivity implements
       startActivity(intent);
       return true;
     } else if (item.getItemId() == R.id.delete_all) {
-      ClearCallLogDialog.show(getFragmentManager());
+      ClearCallLogDialog.show(getSupportFragmentManager());
       return true;
     }
     return super.onOptionsItemSelected(item);

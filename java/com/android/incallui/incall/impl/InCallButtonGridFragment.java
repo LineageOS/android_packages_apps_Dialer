@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +18,6 @@
 package com.android.incallui.incall.impl;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +25,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.incallui.incall.protocol.InCallButtonIds;
+
 import java.util.List;
 import java.util.Set;
 

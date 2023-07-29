@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +18,11 @@
 package com.android.dialer.voicemail.listui.error;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
 import android.provider.VoicemailContract.Status;
 import android.telecom.PhoneAccountHandle;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
@@ -29,6 +30,7 @@ import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 
