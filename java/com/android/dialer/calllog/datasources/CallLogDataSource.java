@@ -16,7 +16,8 @@
 
 package com.android.dialer.calllog.datasources;
 
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
+
 import com.google.common.util.concurrent.ListenableFuture;
 
 /**

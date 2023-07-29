@@ -17,8 +17,9 @@
 package com.android.dialer.enrichedcall.videoshare;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 
 /** Receives updates when video share status has changed. */
 public interface VideoShareListener {

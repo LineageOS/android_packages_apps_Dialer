@@ -17,10 +17,12 @@ package com.android.voicemail.impl.sms;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.Nullable;
+
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.VvmLog;
 

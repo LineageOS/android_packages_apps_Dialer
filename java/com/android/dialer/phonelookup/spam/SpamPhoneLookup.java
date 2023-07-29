@@ -17,7 +17,9 @@
 package com.android.dialer.phonelookup.spam;
 
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -48,7 +50,8 @@ public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
   private final SharedPreferences sharedPreferences;
   private final Spam spam;
 
-  @Nullable private Long currentLastTimestampProcessed;
+  @Nullable
+  private Long currentLastTimestampProcessed;
 
   @Inject
   SpamPhoneLookup(

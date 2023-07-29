@@ -29,10 +29,13 @@ import android.os.Message;
 import android.os.Trace;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Directory;
-import android.support.annotation.MainThread;
-import android.support.annotation.RequiresPermission;
-import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.RequiresPermission;
+import androidx.annotation.WorkerThread;
+
+import com.android.dialer.R;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;

@@ -17,7 +17,9 @@
 package com.android.dialer.commandline.impl;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.blocking.Blocking;
 import com.android.dialer.commandline.Arguments;

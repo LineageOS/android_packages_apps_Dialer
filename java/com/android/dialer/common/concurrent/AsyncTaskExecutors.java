@@ -17,7 +17,9 @@
 package com.android.dialer.common.concurrent;
 
 import android.os.AsyncTask;
-import android.support.annotation.MainThread;
+
+import androidx.annotation.MainThread;
+
 import com.android.dialer.common.Assert;
 import java.util.concurrent.Executor;
 

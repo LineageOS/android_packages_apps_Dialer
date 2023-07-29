@@ -16,7 +16,8 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.LogUtil;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ final class AssistedDialingMediatorImpl implements AssistedDialingMediator {
   private final NumberTransformer numberTransformer;
 
   AssistedDialingMediatorImpl(
-      @NonNull LocationDetector locationDetector, @NonNull NumberTransformer numberTransformer) {
+          @NonNull LocationDetector locationDetector, @NonNull NumberTransformer numberTransformer) {
     if (locationDetector == null) {
       throw new NullPointerException("locationDetector was null");
     }
