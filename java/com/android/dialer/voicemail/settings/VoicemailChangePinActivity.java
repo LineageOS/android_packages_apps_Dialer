@@ -49,8 +49,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.voicemail.PinChanger;
 import com.android.voicemail.PinChanger.ChangePinResult;
 import com.android.voicemail.PinChanger.PinSpecification;
@@ -270,7 +268,6 @@ public class VoicemailChangePinActivity extends Activity
           activity.pinChanger.setScrambledPin(null);
 
           activity.finish();
-          Logger.get(activity).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_COMPLETED);
           Toast.makeText(
                   activity, activity.getString(R.string.change_pin_succeeded), Toast.LENGTH_SHORT)
               .show();

@@ -28,8 +28,6 @@ import androidx.annotation.Nullable;
 
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
 
 /**
@@ -248,7 +246,6 @@ public class Vvm3VoicemailMessageCreator {
     }
 
     if (PIN_NOT_SET == status.configurationState) {
-      Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_ALERT_SET_PIN_SHOWN);
       return new VoicemailErrorMessage(
           context.getString(R.string.voicemail_error_pin_not_set_title),
           getCustomerSupportString(context, R.string.voicemail_error_pin_not_set_message),

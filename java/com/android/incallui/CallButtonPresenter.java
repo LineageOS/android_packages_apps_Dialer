@@ -28,12 +28,10 @@ import android.support.v4.os.UserManagerCompat;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
 import com.android.contacts.common.compat.CallCompat;
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.DialerImpression.Type;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.incallui.InCallCameraManager.Listener;
 import com.android.incallui.InCallPresenter.CanAddCallListener;
@@ -241,22 +239,8 @@ public class CallButtonPresenter
     int newRoute;
     if (audioState.getRoute() == CallAudioState.ROUTE_SPEAKER) {
       newRoute = CallAudioState.ROUTE_WIRED_OR_EARPIECE;
-      if (call != null) {
-        Logger.get(context)
-                .logCallImpression(
-                        DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_WIRED_OR_EARPIECE,
-                        call.getUniqueCallId(),
-                        call.getTimeAddedMs());
-      }
     } else {
       newRoute = CallAudioState.ROUTE_SPEAKER;
-      if (call != null) {
-        Logger.get(context)
-                .logCallImpression(
-                        DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_SPEAKERPHONE,
-                        call.getUniqueCallId(),
-                        call.getTimeAddedMs());
-      }
     }
 
     setAudioRoute(newRoute);
@@ -266,15 +250,6 @@ public class CallButtonPresenter
   public void muteClicked(boolean checked, boolean clickedByUser) {
     LogUtil.i(
         "CallButtonPresenter", "turning on mute: %s, clicked by user: %s", checked, clickedByUser);
-    if (clickedByUser) {
-      Logger.get(context)
-          .logCallImpression(
-              checked
-                  ? DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_MUTE
-                  : DialerImpression.Type.IN_CALL_SCREEN_TURN_OFF_MUTE,
-              call.getUniqueCallId(),
-              call.getTimeAddedMs());
-    }
     TelecomAdapter.getInstance().mute(checked);
   }
 
@@ -304,31 +279,16 @@ public class CallButtonPresenter
 
   @Override
   public void mergeClicked() {
-    Logger.get(context)
-        .logCallImpression(
-            DialerImpression.Type.IN_CALL_MERGE_BUTTON_PRESSED,
-            call.getUniqueCallId(),
-            call.getTimeAddedMs());
     TelecomAdapter.getInstance().merge(call.getId());
   }
 
   @Override
   public void addCallClicked() {
-    Logger.get(context)
-        .logCallImpression(
-            DialerImpression.Type.IN_CALL_ADD_CALL_BUTTON_PRESSED,
-            call.getUniqueCallId(),
-            call.getTimeAddedMs());
     InCallPresenter.getInstance().addCallClicked();
   }
 
   @Override
   public void showDialpadClicked(boolean checked) {
-    Logger.get(context)
-        .logCallImpression(
-            DialerImpression.Type.IN_CALL_SHOW_DIALPAD_BUTTON_PRESSED,
-            call.getUniqueCallId(),
-            call.getTimeAddedMs());
     LogUtil.v("CallButtonPresenter", "show dialpad " + String.valueOf(checked));
     getActivity().showDialpadFragment(checked /* show */, true /* animate */);
   }
@@ -382,11 +342,6 @@ public class CallButtonPresenter
   @Override
   public void changeToVideoClicked() {
     LogUtil.enterBlock("CallButtonPresenter.changeToVideoClicked");
-    Logger.get(context)
-        .logCallImpression(
-            DialerImpression.Type.VIDEO_CALL_UPGRADE_REQUESTED,
-            call.getUniqueCallId(),
-            call.getTimeAddedMs());
     call.getVideoTech().upgradeToVideo(context);
   }
 
@@ -412,7 +367,6 @@ public class CallButtonPresenter
   @Override
   public void swapSimClicked() {
     LogUtil.enterBlock("CallButtonPresenter.swapSimClicked");
-    Logger.get(getContext()).logImpression(Type.DUAL_SIM_CHANGE_SIM_PRESSED);
     SwapSimWorker worker =
         new SwapSimWorker(
             getContext(),
@@ -444,11 +398,6 @@ public class CallButtonPresenter
     if (call == null) {
       return;
     }
-    Logger.get(context)
-        .logCallImpression(
-            DialerImpression.Type.IN_CALL_SCREEN_SWAP_CAMERA,
-            call.getUniqueCallId(),
-            call.getTimeAddedMs());
     switchCameraClicked(
         !InCallPresenter.getInstance().getInCallCameraManager().isUsingFrontFacingCamera());
   }
@@ -462,14 +411,6 @@ public class CallButtonPresenter
   @Override
   public void pauseVideoClicked(boolean pause) {
     LogUtil.i("CallButtonPresenter.pauseVideoClicked", "%s", pause ? "pause" : "unpause");
-
-    Logger.get(context)
-        .logCallImpression(
-            pause
-                ? DialerImpression.Type.IN_CALL_SCREEN_TURN_OFF_VIDEO
-                : DialerImpression.Type.IN_CALL_SCREEN_TURN_ON_VIDEO,
-            call.getUniqueCallId(),
-            call.getTimeAddedMs());
 
     if (pause) {
       call.getVideoTech().stopTransmission();

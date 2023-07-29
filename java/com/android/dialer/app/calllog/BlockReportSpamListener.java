@@ -29,12 +29,6 @@ import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentF
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForUnblockingNumberAndReportingAsNotSpam;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ReportingLocation;
-import com.android.dialer.spam.Spam;
-import com.android.dialer.spam.SpamComponent;
-import com.android.dialer.spam.SpamSettings;
 
 /** Listener to show dialogs for block and report spam actions. */
 public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClickListener {
@@ -44,8 +38,6 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
   private final FragmentManager fragmentManager;
   private final RecyclerView.Adapter adapter;
   private final FilteredNumberAsyncQueryHandler filteredNumberAsyncQueryHandler;
-  private final Spam spam;
-  private final SpamSettings spamSettings;
 
   public BlockReportSpamListener(
       Context context,
@@ -58,8 +50,6 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
     this.fragmentManager = fragmentManager;
     this.adapter = adapter;
     this.filteredNumberAsyncQueryHandler = filteredNumberAsyncQueryHandler;
-    spam = SpamComponent.get(context).spam();
-    spamSettings = SpamComponent.get(context).spamSettings();
   }
 
   @Override
@@ -71,27 +61,11 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
             displayNumber,
-            spamSettings.isDialogReportSpamCheckedByDefault(),
+            false,
             isSpamChecked -> {
               LogUtil.i("BlockReportSpamListener.onBlockReportSpam", "onClick");
-              if (isSpamChecked && spamSettings.isSpamEnabled()) {
-                Logger.get(context)
-                    .logImpression(
-                        DialerImpression.Type
-                            .REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG);
-                spam.reportSpamFromCallHistory(
-                    number,
-                    countryIso,
-                    callType,
-                    ReportingLocation.Type.CALL_LOG_HISTORY,
-                    contactSourceType);
-              }
               filteredNumberAsyncQueryHandler.blockNumber(
-                  uri -> {
-                    Logger.get(context)
-                        .logImpression(DialerImpression.Type.USER_ACTION_BLOCKED_NUMBER);
-                    adapter.notifyDataSetChanged();
-                  },
+                  uri -> adapter.notifyDataSetChanged(),
                   number);
 
               if (isSpamChecked) {
@@ -111,27 +85,10 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
       @NonNull final ContactSource.Type contactSourceType) {
     BlockReportSpamDialogs.DialogFragmentForBlockingNumberAndReportingAsSpam.newInstance(
             displayNumber,
-            spamSettings.isSpamEnabled(),
             () -> {
               LogUtil.i("BlockReportSpamListener.onBlock", "onClick");
-              if (spamSettings.isSpamEnabled()) {
-                Logger.get(context)
-                    .logImpression(
-                        DialerImpression.Type
-                            .DIALOG_ACTION_CONFIRM_NUMBER_SPAM_INDIRECTLY_VIA_BLOCK_NUMBER);
-                spam.reportSpamFromCallHistory(
-                    number,
-                    countryIso,
-                    callType,
-                    ReportingLocation.Type.CALL_LOG_HISTORY,
-                    contactSourceType);
-              }
               filteredNumberAsyncQueryHandler.blockNumber(
-                  uri -> {
-                    Logger.get(context)
-                        .logImpression(DialerImpression.Type.USER_ACTION_BLOCKED_NUMBER);
-                    adapter.notifyDataSetChanged();
-                  },
+                  uri -> adapter.notifyDataSetChanged(),
                   number);
               showSpamBlockingPromoDialog();
             },
@@ -153,20 +110,8 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
             isSpam,
             () -> {
               LogUtil.i("BlockReportSpamListener.onUnblock", "onClick");
-              if (isSpam && spamSettings.isSpamEnabled()) {
-                Logger.get(context)
-                    .logImpression(DialerImpression.Type.REPORT_AS_NOT_SPAM_VIA_UNBLOCK_NUMBER);
-                spam.reportNotSpamFromCallHistory(
-                    number,
-                    countryIso,
-                    callType,
-                    ReportingLocation.Type.CALL_LOG_HISTORY,
-                    contactSourceType);
-              }
               filteredNumberAsyncQueryHandler.unblock(
                   (rows, values) -> {
-                    Logger.get(context)
-                        .logImpression(DialerImpression.Type.USER_ACTION_UNBLOCKED_NUMBER);
                     adapter.notifyDataSetChanged();
                   },
                   blockId);
@@ -186,16 +131,6 @@ public class BlockReportSpamListener implements CallLogListItemViewHolder.OnClic
             displayNumber,
             () -> {
               LogUtil.i("BlockReportSpamListener.onReportNotSpam", "onClick");
-              if (spamSettings.isSpamEnabled()) {
-                Logger.get(context)
-                    .logImpression(DialerImpression.Type.DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM);
-                spam.reportNotSpamFromCallHistory(
-                    number,
-                    countryIso,
-                    callType,
-                    ReportingLocation.Type.CALL_LOG_HISTORY,
-                    contactSourceType);
-              }
               adapter.notifyDataSetChanged();
             },
             null)

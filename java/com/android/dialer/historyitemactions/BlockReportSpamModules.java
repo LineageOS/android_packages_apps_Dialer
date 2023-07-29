@@ -17,11 +17,10 @@
 package com.android.dialer.historyitemactions;
 
 import android.content.Context;
+
+import com.android.dialer.R;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogNotifier;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import java.util.Optional;
 
 /** Modules for blocking/unblocking a number and/or reporting it as spam/not spam. */
 final class BlockReportSpamModules {
@@ -30,8 +29,7 @@ final class BlockReportSpamModules {
 
   static HistoryItemActionModule moduleForMarkingNumberAsNotSpam(
       Context context,
-      BlockReportSpamDialogInfo blockReportSpamDialogInfo,
-      Optional<DialerImpression.Type> impression) {
+      BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
 
     return new HistoryItemActionModule() {
       @Override
@@ -48,8 +46,6 @@ final class BlockReportSpamModules {
       public boolean onClick() {
         ShowBlockReportSpamDialogNotifier.notifyShowDialogToReportNotSpam(
             context, blockReportSpamDialogInfo);
-
-        impression.ifPresent(Logger.get(context)::logImpression);
         return true; // Close the bottom sheet.
       }
     };
@@ -57,8 +53,7 @@ final class BlockReportSpamModules {
 
   static HistoryItemActionModule moduleForBlockingNumber(
       Context context,
-      BlockReportSpamDialogInfo blockReportSpamDialogInfo,
-      Optional<DialerImpression.Type> impression) {
+      BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
 
     return new HistoryItemActionModule() {
       @Override
@@ -75,8 +70,6 @@ final class BlockReportSpamModules {
       public boolean onClick() {
         ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumber(
             context, blockReportSpamDialogInfo);
-
-        impression.ifPresent(Logger.get(context)::logImpression);
         return true; // Close the bottom sheet.
       }
     };
@@ -84,8 +77,7 @@ final class BlockReportSpamModules {
 
   static HistoryItemActionModule moduleForUnblockingNumber(
       Context context,
-      BlockReportSpamDialogInfo blockReportSpamDialogInfo,
-      Optional<DialerImpression.Type> impression) {
+      BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
 
     return new HistoryItemActionModule() {
       @Override
@@ -102,8 +94,6 @@ final class BlockReportSpamModules {
       public boolean onClick() {
         ShowBlockReportSpamDialogNotifier.notifyShowDialogToUnblockNumber(
             context, blockReportSpamDialogInfo);
-
-        impression.ifPresent(Logger.get(context)::logImpression);
         return true; // Close the bottom sheet.
       }
     };
@@ -111,8 +101,7 @@ final class BlockReportSpamModules {
 
   static HistoryItemActionModule moduleForBlockingNumberAndOptionallyReportingSpam(
       Context context,
-      BlockReportSpamDialogInfo blockReportSpamDialogInfo,
-      Optional<DialerImpression.Type> impression) {
+      BlockReportSpamDialogInfo blockReportSpamDialogInfo) {
 
     return new HistoryItemActionModule() {
       @Override
@@ -129,8 +118,6 @@ final class BlockReportSpamModules {
       public boolean onClick() {
         ShowBlockReportSpamDialogNotifier.notifyShowDialogToBlockNumberAndOptionallyReportSpam(
             context, blockReportSpamDialogInfo);
-
-        impression.ifPresent(Logger.get(context)::logImpression);
         return true; // Close the bottom sheet.
       }
     };

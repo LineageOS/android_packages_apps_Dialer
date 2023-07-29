@@ -28,15 +28,12 @@ import androidx.annotation.NonNull;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
 import com.android.incallui.call.TelecomAdapter;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 
 /**
  * Accepts broadcast Intents which will be prepared by {@link StatusBarNotifier} and thus sent from
@@ -83,8 +80,6 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
     } else if (action.equals(ACTION_ANSWER_VOICE_INCOMING_CALL)) {
       answerIncomingCall(VideoProfile.STATE_AUDIO_ONLY, context);
     } else if (action.equals(ACTION_DECLINE_INCOMING_CALL)) {
-      Logger.get(context)
-          .logImpression(DialerImpression.Type.REJECT_INCOMING_CALL_FROM_NOTIFICATION);
       declineIncomingCall();
     } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
       hangUpOngoingCall();
