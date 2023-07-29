@@ -20,13 +20,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.PhoneAccountHandle;
-import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.Voicemail;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.scheduling.BaseTask;
 import com.android.voicemail.impl.scheduling.RetryPolicy;
-import com.android.voicemail.impl.utils.LoggerUtils;
 
 /**
  * Task to download a single voicemail from the server. This task is initiated by a SMS notifying
@@ -71,7 +69,6 @@ public class SyncOneTask extends BaseTask {
 
   @Override
   public Intent createRestartIntent() {
-    LoggerUtils.logImpressionOnMainThread(getContext(), DialerImpression.Type.VVM_AUTO_RETRY_SYNC);
     Intent intent = super.createRestartIntent();
     intent.putExtra(EXTRA_PHONE_ACCOUNT_HANDLE, phone);
     intent.putExtra(EXTRA_VOICEMAIL, voicemail);
