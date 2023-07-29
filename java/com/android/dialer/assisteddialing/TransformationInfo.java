@@ -17,7 +17,9 @@
 package com.android.dialer.assisteddialing;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.google.auto.value.AutoValue;
 
 /**
@@ -26,7 +28,8 @@ import com.google.auto.value.AutoValue;
  */
 @AutoValue
 public abstract class TransformationInfo {
-  @NonNull private static final String ORIGINAL_NUBMER_KEY = "TRANSFORMATION_INFO_ORIGINAL_NUMBER";
+  @NonNull
+  private static final String ORIGINAL_NUBMER_KEY = "TRANSFORMATION_INFO_ORIGINAL_NUMBER";
 
   @NonNull
   private static final String TRANSFORMED_NUMBER_KEY = "TRANSFORMATION_INFO_TRANSFORMED_NUMBER";

@@ -17,7 +17,9 @@
 package com.android.dialer.searchfragment.cp2;
 
 import android.database.Cursor;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.searchfragment.common.Projections;
 import com.google.auto.value.AutoValue;
 

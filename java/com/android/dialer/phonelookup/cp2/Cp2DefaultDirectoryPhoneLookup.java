@@ -25,10 +25,12 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DeletedContacts;
 import android.provider.ContactsContract.Directory;
-import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -74,7 +76,8 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
   private final ListeningExecutorService lightweightExecutorService;
   private final MissingPermissionsOperations missingPermissionsOperations;
 
-  @Nullable private Long currentLastTimestampProcessed;
+  @Nullable
+  private Long currentLastTimestampProcessed;
 
   @Inject
   Cp2DefaultDirectoryPhoneLookup(

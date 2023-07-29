@@ -18,7 +18,8 @@ package com.android.incallui.bindings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 /** Default implementation for InCallUi bindings. */
 public class InCallUiBindingsStub implements InCallUiBindings {

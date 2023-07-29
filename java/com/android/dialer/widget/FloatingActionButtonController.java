@@ -20,12 +20,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.support.annotation.DrawableRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.FloatingActionButton.OnVisibilityChangedListener;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+
+import androidx.annotation.DrawableRes;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 
 /** Controls the movement and appearance of the FAB (Floating Action Button). */

@@ -17,8 +17,10 @@
 package com.android.dialer.common;
 
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import javax.annotation.CheckReturnValue;
 
 /** Assertions which will result in program termination unless disabled by flags. */
@@ -96,7 +98,7 @@ public class Assert {
    * @throws IllegalArgumentException if {@code expression} is false
    */
   public static void checkArgument(
-      boolean expression, @Nullable String messageTemplate, Object... args) {
+          boolean expression, @Nullable String messageTemplate, Object... args) {
     if (!expression) {
       throw new IllegalArgumentException(format(messageTemplate, args));
     }

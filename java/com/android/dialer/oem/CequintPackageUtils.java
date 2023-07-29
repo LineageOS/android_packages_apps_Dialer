@@ -20,7 +20,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.Signature;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -232,7 +234,7 @@ final class CequintPackageUtils {
 
   @SuppressLint("PackageManagerGetSignatures")
   static boolean isCallerIdInstalled(
-      @Nullable PackageManager packageManager, @Nullable String authority) {
+          @Nullable PackageManager packageManager, @Nullable String authority) {
     if (packageManager == null) {
       LogUtil.i("CequintPackageUtils.isCallerIdInstalled", "failed to get PackageManager!");
       return false;

@@ -19,7 +19,9 @@ package com.android.dialer.commandline.impl;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.commandline.Arguments;
 import com.android.dialer.commandline.Command;
 import com.android.dialer.inject.ApplicationContext;

@@ -16,7 +16,8 @@
 
 package com.android.dialer.commandline;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.commandline.Command.IllegalCommandLineArgumentException;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
