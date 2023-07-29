@@ -184,11 +184,8 @@ public final class BlockReportSpamDialogs {
   public static class DialogFragmentForBlockingNumberAndReportingAsSpam
       extends CommonDialogsFragment {
 
-    private boolean isSpamEnabled;
-
     public static DialogFragment newInstance(
         String displayNumber,
-        boolean isSpamEnabled,
         OnConfirmListener positiveListener,
         @Nullable DialogInterface.OnDismissListener dismissListener) {
       DialogFragmentForBlockingNumberAndReportingAsSpam fragment =
@@ -196,7 +193,6 @@ public final class BlockReportSpamDialogs {
       fragment.displayNumber = displayNumber;
       fragment.positiveListener = positiveListener;
       fragment.dismissListener = dismissListener;
-      fragment.isSpamEnabled = isSpamEnabled;
       return fragment;
     }
 
@@ -208,11 +204,7 @@ public final class BlockReportSpamDialogs {
       Dialog dialog =
           alertDialogBuilder
               .setTitle(getString(R.string.block_number_confirmation_title, displayNumber))
-              .setMessage(
-                  isSpamEnabled
-                      ? getString(
-                          R.string.block_number_alert_details, getBlockMessage(getContext()))
-                      : getString(R.string.block_report_number_alert_details))
+              .setMessage(getString(R.string.block_report_number_alert_details))
               .setPositiveButton(
                   R.string.block_number_ok, createGenericOnClickListener(this, positiveListener))
               .create();

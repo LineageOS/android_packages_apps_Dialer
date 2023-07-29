@@ -26,7 +26,6 @@ import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.feedback.FeedbackComponent;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
 import com.android.dialer.phonelookup.PhoneLookupComponent;
 import com.android.dialer.phonelookup.database.PhoneLookupDatabaseComponent;
@@ -36,7 +35,6 @@ import com.android.dialer.preferredsim.PreferredSimComponent;
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.promotion.PromotionComponent;
 import com.android.dialer.simulator.SimulatorComponent;
-import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.speeddial.loader.UiItemLoaderComponent;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.theme.base.ThemeComponent;
@@ -59,7 +57,6 @@ public interface BaseDialerRootComponent
         DialerExecutorComponent.HasComponent,
         DuoComponent.HasComponent,
         EnrichedCallComponent.HasComponent,
-        FeedbackComponent.HasComponent,
         GlidePhotoManagerComponent.HasComponent,
         PhoneLookupComponent.HasComponent,
         PhoneLookupDatabaseComponent.HasComponent,
@@ -70,7 +67,6 @@ public interface BaseDialerRootComponent
         UiItemLoaderComponent.HasComponent,
         SimSuggestionComponent.HasComponent,
         SimulatorComponent.HasComponent,
-        SpamComponent.HasComponent,
         StorageComponent.HasComponent,
         ThemeComponent.HasComponent,
         VoicemailComponent.HasComponent {}

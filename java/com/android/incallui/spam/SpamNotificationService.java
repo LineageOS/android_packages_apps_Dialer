@@ -28,11 +28,7 @@ import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.notification.DialerNotificationManager;
-import com.android.dialer.spam.SpamComponent;
 import com.android.incallui.call.DialerCall;
 
 /**
@@ -108,29 +104,9 @@ public class SpamNotificationService extends Service {
 
     switch (intent.getAction()) {
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_SPAM:
-        logCallImpression(
-            intent, DialerImpression.Type.SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_SPAM);
-        SpamComponent.get(this)
-            .spam()
-            .reportSpamFromAfterCallNotification(
-                number,
-                countryIso,
-                CallLog.Calls.INCOMING_TYPE,
-                ReportingLocation.Type.FEEDBACK_PROMPT,
-                contactLookupResultType);
         new FilteredNumberAsyncQueryHandler(this).blockNumber(null, number);
         break;
       case SpamNotificationActivity.ACTION_MARK_NUMBER_AS_NOT_SPAM:
-        logCallImpression(
-            intent, DialerImpression.Type.SPAM_NOTIFICATION_SERVICE_ACTION_MARK_NUMBER_AS_NOT_SPAM);
-        SpamComponent.get(this)
-            .spam()
-            .reportNotSpamFromAfterCallNotification(
-                number,
-                countryIso,
-                CallLog.Calls.INCOMING_TYPE,
-                ReportingLocation.Type.FEEDBACK_PROMPT,
-                contactLookupResultType);
         break;
       default: // fall out
     }
@@ -143,13 +119,5 @@ public class SpamNotificationService extends Service {
   public void onDestroy() {
     super.onDestroy();
     LogUtil.d(TAG, "onDestroy");
-  }
-
-  private void logCallImpression(Intent intent, DialerImpression.Type impression) {
-    Logger.get(this)
-        .logCallImpression(
-            impression,
-            intent.getStringExtra(EXTRA_CALL_ID),
-            intent.getLongExtra(EXTRA_CALL_START_TIME_MILLIS, 0));
   }
 }
