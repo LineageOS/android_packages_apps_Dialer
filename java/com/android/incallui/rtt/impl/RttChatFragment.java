@@ -52,8 +52,6 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.UiUtil;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.dialer.util.DrawableConverter;
@@ -228,7 +226,6 @@ public class RttChatFragment extends Fragment
     submitButton = view.findViewById(R.id.rtt_chat_submit_button);
     submitButton.setOnClickListener(
         v -> {
-          Logger.get(getContext()).logImpression(DialerImpression.Type.RTT_SEND_BUTTON_CLICKED);
           adapter.submitLocalMessage();
           resumeInput("");
           rttCallScreenDelegate.onLocalMessage(Constants.BUBBLE_BREAKER);
@@ -264,8 +261,6 @@ public class RttChatFragment extends Fragment
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
     if (actionId == EditorInfo.IME_ACTION_SEND) {
       if (!TextUtils.isEmpty(editText.getText())) {
-        Logger.get(getContext())
-            .logImpression(DialerImpression.Type.RTT_KEYBOARD_SEND_BUTTON_CLICKED);
         submitButton.performClick();
       }
       return true;

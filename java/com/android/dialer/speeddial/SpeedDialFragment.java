@@ -56,8 +56,6 @@ import com.android.dialer.historyitemactions.HistoryItemActionBottomSheet;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
 import com.android.dialer.historyitemactions.HistoryItemBottomSheetHeaderInfo;
 import com.android.dialer.historyitemactions.IntentModule;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.shortcuts.ShortcutRefresher;
 import com.android.dialer.speeddial.ContextMenu.ContextMenuItemListener;
@@ -257,7 +255,6 @@ public class SpeedDialFragment extends Fragment {
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == ActivityRequestCodes.SPEED_DIAL_ADD_FAVORITE) {
       if (resultCode == AppCompatActivity.RESULT_OK && data.getData() != null) {
-        Logger.get(getContext()).logImpression(DialerImpression.Type.FAVORITE_ADD_FAVORITE);
         updateSpeedDialItemsOnResume = false;
         speedDialLoaderListener.listen(
             getContext(),
@@ -378,17 +375,11 @@ public class SpeedDialFragment extends Fragment {
         return;
       }
 
-      Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_OPEN_DISAMBIG_DIALOG);
       DisambigDialog.show(speedDialUiItem, childFragmentManager);
     }
 
     @Override
     public void onClick(Channel channel) {
-      if (channel.technology() == Channel.DUO) {
-        Logger.get(activity)
-            .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-      }
-
       PreCall.start(
           activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
@@ -399,7 +390,6 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void showContextMenu(View view, SpeedDialUiItem speedDialUiItem) {
-      Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_OPEN_FAVORITE_MENU);
       layoutManager.setScrollEnabled(false);
       contextMenu =
           ContextMenu.show(activity, view, speedDialContextMenuItemListener, speedDialUiItem);
@@ -417,8 +407,6 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void onRequestRemove(SpeedDialUiItem speedDialUiItem) {
-      Logger.get(activity)
-          .logImpression(DialerImpression.Type.FAVORITE_REMOVE_FAVORITE_BY_DRAG_AND_DROP);
       speedDialContextMenuItemListener.removeFavoriteContact(speedDialUiItem);
     }
 
@@ -437,11 +425,6 @@ public class SpeedDialFragment extends Fragment {
 
       @Override
       public void placeCall(Channel channel) {
-        if (channel.technology() == Channel.DUO) {
-          Logger.get(activity)
-              .logImpression(
-                  DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_FAVORITE_CONTACT);
-        }
         PreCall.start(
             activity,
             new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
@@ -452,13 +435,11 @@ public class SpeedDialFragment extends Fragment {
 
       @Override
       public void openSmsConversation(String number) {
-        Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_SEND_MESSAGE);
         activity.startActivity(IntentUtil.getSendSmsIntent(number));
       }
 
       @Override
       public void removeFavoriteContact(SpeedDialUiItem speedDialUiItem) {
-        Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_REMOVE_FAVORITE);
         speedDialLoaderListener.listen(
             activity,
             UiItemLoaderComponent.get(activity)
@@ -472,7 +453,6 @@ public class SpeedDialFragment extends Fragment {
 
       @Override
       public void openContactInfo(SpeedDialUiItem speedDialUiItem) {
-        Logger.get(activity).logImpression(DialerImpression.Type.FAVORITE_OPEN_CONTACT_CARD);
         activity.startActivity(
             new Intent(
                 Intent.ACTION_VIEW,
@@ -540,11 +520,6 @@ public class SpeedDialFragment extends Fragment {
 
     @Override
     public void onRowClicked(Channel channel) {
-      if (channel.technology() == Channel.DUO) {
-        Logger.get(getContext())
-            .logImpression(
-                DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FOR_SUGGESTED_CONTACT);
-      }
       PreCall.start(
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)

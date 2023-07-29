@@ -27,8 +27,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.main.impl.MainActivity;
 
 import java.lang.annotation.Retention;
@@ -79,38 +77,10 @@ public final class BottomNavBar extends LinearLayout {
     contacts.setup(R.string.tab_all_contacts, R.drawable.quantum_ic_people_vd_theme_24);
     voicemail.setup(R.string.tab_title_voicemail, R.drawable.quantum_ic_voicemail_vd_theme_24);
 
-    speedDial.setOnClickListener(
-        v -> {
-          if (selectedTab != TabIndex.SPEED_DIAL) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_FAVORITE);
-          }
-          selectTab(TabIndex.SPEED_DIAL);
-        });
-    callLog.setOnClickListener(
-        v -> {
-          if (selectedTab != TabIndex.CALL_LOG) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_CALL_LOG);
-          }
-          selectTab(TabIndex.CALL_LOG);
-        });
-    contacts.setOnClickListener(
-        v -> {
-          if (selectedTab != TabIndex.CONTACTS) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_CONTACTS);
-          }
-          selectTab(TabIndex.CONTACTS);
-        });
-    voicemail.setOnClickListener(
-        v -> {
-          if (selectedTab != TabIndex.VOICEMAIL) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.MAIN_SWITCH_TAB_TO_VOICEMAIL);
-          }
-          selectTab(TabIndex.VOICEMAIL);
-        });
+    speedDial.setOnClickListener(v -> selectTab(TabIndex.SPEED_DIAL));
+    callLog.setOnClickListener(v -> selectTab(TabIndex.CALL_LOG));
+    contacts.setOnClickListener(v -> selectTab(TabIndex.CONTACTS));
+    voicemail.setOnClickListener(v -> selectTab(TabIndex.VOICEMAIL));
   }
 
   private void setSelected(View view) {
