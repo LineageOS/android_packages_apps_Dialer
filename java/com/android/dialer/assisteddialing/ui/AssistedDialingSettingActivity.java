@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +18,9 @@
 package com.android.dialer.assisteddialing.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /** The Settings Activity for Assisted Dialing. */
 public class AssistedDialingSettingActivity extends AppCompatActivity {
@@ -27,7 +29,7 @@ public class AssistedDialingSettingActivity extends AppCompatActivity {
   protected void onCreate(Bundle bundle) {
     super.onCreate(bundle);
 
-    getFragmentManager()
+    getSupportFragmentManager()
         .beginTransaction()
         .replace(android.R.id.content, new AssistedDialingSettingFragment())
         .commit();

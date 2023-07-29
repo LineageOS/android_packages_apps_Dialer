@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +18,13 @@
 package com.android.dialer.speeddial;
 
 import android.content.Context;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -32,7 +32,7 @@ import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
 import com.android.dialer.speeddial.loader.SpeedDialUiItem;
 
 /** {@link PopupMenu} which presents contact options for starred contacts. */
-public class ContextMenu extends PopupMenu implements OnMenuItemClickListener {
+public class ContextMenu extends PopupMenu implements PopupMenu.OnMenuItemClickListener {
 
   private final ContextMenuItemListener listener;
 

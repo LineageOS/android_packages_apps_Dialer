@@ -54,7 +54,6 @@ LOCAL_AAPT_FLAGS += \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	android-common \
-	android-support-dynamic-animation \
 	dialer-common-m2-target-deps \
 	dialer-glide-target-deps \
 	error_prone_annotations \
@@ -63,16 +62,15 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	volley \
 	org.lineageos.lib.phone \
 	androidx.annotation_annotation \
-
-LOCAL_STATIC_ANDROID_LIBRARIES := \
-	android-support-core-ui \
-	$(ANDROID_SUPPORT_DESIGN_TARGETS) \
-	android-support-transition \
-	android-support-v13 \
-	android-support-v4 \
-	android-support-v7-appcompat \
-	android-support-v7-cardview \
-	android-support-v7-recyclerview \
+	androidx.cardview_cardview \
+	androidx.collection_collection \
+	androidx.coordinatorlayout_coordinatorlayout \
+	androidx.core_core \
+	androidx.dynamicanimation_dynamicanimation \
+	androidx.localbroadcastmanager_localbroadcastmanager \
+	androidx.preference_preference \
+	androidx.recyclerview_recyclerview \
+	com.google.android.material_material
 
 LOCAL_JAVA_LIBRARIES := \
 	auto_value_annotations \

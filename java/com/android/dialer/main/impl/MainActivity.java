@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +17,16 @@
 
 package com.android.dialer.main.impl;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
+
+import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.android.dialer.R;
 import com.android.dialer.blockreportspam.ShowBlockReportSpamDialogReceiver;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.main.MainActivityPeer;
-import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
-import com.android.dialer.R;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TransactionSafeActivity;
 
@@ -98,7 +100,7 @@ public class MainActivity extends TransactionSafeActivity
   }
 
   @Override
-  protected void onSaveInstanceState(Bundle bundle) {
+  protected void onSaveInstanceState(@NonNull Bundle bundle) {
     super.onSaveInstanceState(bundle);
     activePeer.onSaveInstanceState(bundle);
   }

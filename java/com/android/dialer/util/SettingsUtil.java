@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
- *
+ * Copyright (C) 2023 The LineageOS Project
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,9 +24,12 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+
+import androidx.preference.PreferenceManager;
+
+import com.android.dialer.R;
 
 public class SettingsUtil {
 

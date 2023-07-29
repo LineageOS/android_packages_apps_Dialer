@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +19,6 @@ package com.android.dialer.dialpadview;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -46,6 +44,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.common.io.MoreCloseables;
 import com.android.contacts.common.database.NoNullCursorAsyncQueryHandler;
@@ -61,6 +62,7 @@ import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.oem.TranssionUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -233,7 +235,8 @@ public class SpecialCharSequenceMgr {
                           subscriptionAccountHandles)
                       .build(),
                   callback);
-          dialogFragment.show(((Activity) context).getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
+          dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),
+                  TAG_SELECT_ACCT_FRAGMENT);
         }
 
         return true;
@@ -290,7 +293,8 @@ public class SpecialCharSequenceMgr {
                 SelectPhoneAccountDialogOptionsUtil.builderWithAccounts(subscriptionAccountHandles)
                     .build(),
                 listener);
-        dialogFragment.show(((Activity) context).getFragmentManager(), TAG_SELECT_ACCT_FRAGMENT);
+        dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),
+                TAG_SELECT_ACCT_FRAGMENT);
       }
       return true;
     }
