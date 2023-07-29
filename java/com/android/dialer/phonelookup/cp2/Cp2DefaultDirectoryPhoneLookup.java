@@ -25,11 +25,11 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DeletedContacts;
 import android.provider.ContactsContract.Directory;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
+import androidx.collection.ArraySet;
 
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;

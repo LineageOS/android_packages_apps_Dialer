@@ -25,7 +25,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.dialer.app.R;
+
+import com.android.dialer.R;
 
 public class RemoveView extends FrameLayout {
 
@@ -49,6 +50,7 @@ public class RemoveView extends FrameLayout {
 
   @Override
   protected void onFinishInflate() {
+    super.onFinishInflate();
     removeText = (TextView) findViewById(R.id.remove_view_text);
     removeIcon = (ImageView) findViewById(R.id.remove_view_icon);
     final Resources r = getResources();

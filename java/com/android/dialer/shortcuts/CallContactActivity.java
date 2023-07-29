@@ -19,7 +19,9 @@ package com.android.dialer.shortcuts;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import android.widget.Toast;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -105,7 +107,7 @@ public class CallContactActivity extends TransactionSafeActivity
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putParcelable(CONTACT_URI_KEY, contactUri);
   }

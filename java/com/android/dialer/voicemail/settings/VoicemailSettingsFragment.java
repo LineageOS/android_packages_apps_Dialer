@@ -17,10 +17,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -30,6 +26,10 @@ import android.telephony.TelephonyManager;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.app.settings.DialerPreferenceFragment;
@@ -67,8 +67,8 @@ public class VoicemailSettingsFragment extends DialerPreferenceFragment
   private Preference voicemailNotificationPreference;
   private PreferenceScreen advancedSettingsPreference;
   // Settings that are supported by dialer only if the carrier configurations are valid.
-  private SwitchPreference visualVoicemailPreference;
-  private SwitchPreference voicemailAutoArchivePreference;
+  private SwitchPreferenceCompat visualVoicemailPreference;
+  private SwitchPreferenceCompat voicemailAutoArchivePreference;
   private Preference voicemailChangePinPreference;
 
   @Override
@@ -150,11 +150,11 @@ public class VoicemailSettingsFragment extends DialerPreferenceFragment
     advancedSettingsPreference.setOrder(VMSettingOrdering.ADVANCED_SETTING);
 
     visualVoicemailPreference =
-        (SwitchPreference) findPreference(getString(R.string.voicemail_visual_voicemail_key));
+        (SwitchPreferenceCompat) findPreference(getString(R.string.voicemail_visual_voicemail_key));
     visualVoicemailPreference.setOrder(VMSettingOrdering.VISUAL_VOICEMAIL);
 
     voicemailAutoArchivePreference =
-        (SwitchPreference)
+        (SwitchPreferenceCompat)
             findPreference(getString(R.string.voicemail_visual_voicemail_archive_key));
     voicemailAutoArchivePreference.setOrder(VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE);
 
