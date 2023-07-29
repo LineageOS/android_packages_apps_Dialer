@@ -19,19 +19,11 @@ package com.android.dialer.common;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import com.android.dialer.main.MainActivityPeer;
 
 /** Utility methods for working with Fragments */
 public class FragmentUtils {
-
-  private static Object parentForTesting;
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setParentForTesting(Object parentForTesting) {
-    FragmentUtils.parentForTesting = parentForTesting;
-  }
 
   /**
    * Returns an instance of the {@code callbackInterface} that is defined in the parent of the
@@ -40,12 +32,6 @@ public class FragmentUtils {
   @CheckResult(suggest = "#checkParent(Fragment, Class)}")
   @Nullable
   public static <T> T getParent(@NonNull Fragment fragment, @NonNull Class<T> callbackInterface) {
-    if (callbackInterface.isInstance(parentForTesting)) {
-      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-      T parent = (T) parentForTesting;
-      return parent;
-    }
-
     Fragment parentFragment = fragment.getParentFragment();
     if (callbackInterface.isInstance(parentFragment)) {
       @SuppressWarnings("unchecked") // Casts are checked using runtime methods
@@ -76,12 +62,6 @@ public class FragmentUtils {
   @Nullable
   public static <T> T getParent(
       @NonNull android.app.Fragment fragment, @NonNull Class<T> callbackInterface) {
-    if (callbackInterface.isInstance(parentForTesting)) {
-      @SuppressWarnings("unchecked") // Casts are checked using runtime methods
-      T parent = (T) parentForTesting;
-      return parent;
-    }
-
     android.app.Fragment parentFragment = fragment.getParentFragment();
     if (callbackInterface.isInstance(parentFragment)) {
       @SuppressWarnings("unchecked") // Casts are checked using runtime methods
@@ -130,9 +110,6 @@ public class FragmentUtils {
    */
   public static void checkParent(@NonNull Fragment frag, @NonNull Class<?> callbackInterface)
       throws IllegalStateException {
-    if (parentForTesting != null) {
-      return;
-    }
     if (FragmentUtils.getParent(frag, callbackInterface) == null) {
       String parent =
           frag.getParentFragment() == null

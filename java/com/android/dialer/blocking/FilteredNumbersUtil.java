@@ -19,7 +19,6 @@ import android.content.Context;
 import android.provider.BlockedNumberContract;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
@@ -34,8 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class FilteredNumbersUtil {
 
   // Pref key for storing the time of end of the last emergency call in milliseconds after epoch.\
-  @VisibleForTesting
-  public static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
+  private static final String LAST_EMERGENCY_CALL_MS_PREF_KEY = "last_emergency_call_ms";
   // Pref key for storing whether a notification has been dispatched to notify the user that call
   // blocking has been disabled because of a recent emergency call.
   protected static final String NOTIFIED_CALL_BLOCKING_DISABLED_BY_EMERGENCY_CALL_PREF_KEY =

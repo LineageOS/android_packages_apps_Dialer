@@ -37,7 +37,6 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
@@ -104,23 +103,19 @@ public class AnswerFragment extends Fragment
         AnswerMethodHolder,
         MultimediaFragment.Holder {
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_CALL_ID = "call_id";
+  private static final String ARG_CALL_ID = "call_id";
 
-  static final String ARG_IS_RTT_CALL = "is_rtt_call";
+  private static final String ARG_IS_RTT_CALL = "is_rtt_call";
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_IS_VIDEO_CALL = "is_video_call";
+  private static final String ARG_IS_VIDEO_CALL = "is_video_call";
 
-  static final String ARG_ALLOW_ANSWER_AND_RELEASE = "allow_answer_and_release";
+  private static final String ARG_ALLOW_ANSWER_AND_RELEASE = "allow_answer_and_release";
 
-  static final String ARG_HAS_CALL_ON_HOLD = "has_call_on_hold";
+  private static final String ARG_HAS_CALL_ON_HOLD = "has_call_on_hold";
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_IS_VIDEO_UPGRADE_REQUEST = "is_video_upgrade_request";
+  private static final String ARG_IS_VIDEO_UPGRADE_REQUEST = "is_video_upgrade_request";
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_IS_SELF_MANAGED_CAMERA = "is_self_managed_camera";
+  private static final String ARG_IS_SELF_MANAGED_CAMERA = "is_self_managed_camera";
 
   private static final String STATE_HAS_ANIMATED_ENTRY = "hasAnimated";
 

@@ -18,7 +18,6 @@ package com.android.dialer.metrics;
 
 import android.os.SystemClock;
 import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.google.common.base.Function;
@@ -34,7 +33,7 @@ import javax.inject.Inject;
 public final class FutureTimer {
 
   /** Operations which exceed this threshold will have logcat warnings printed. */
-  @VisibleForTesting static final long LONG_OPERATION_LOGCAT_THRESHOLD_MILLIS = 100L;
+  private static final long LONG_OPERATION_LOGCAT_THRESHOLD_MILLIS = 100L;
 
   private final ListeningExecutorService lightweightExecutorService;
 

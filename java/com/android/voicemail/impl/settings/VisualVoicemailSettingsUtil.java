@@ -17,7 +17,6 @@ package com.android.voicemail.impl.settings;
 
 import android.content.Context;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -32,7 +31,7 @@ import com.android.voicemail.impl.sync.VvmAccountManager;
 /** Save whether or not a particular account is enabled in shared to be retrieved later. */
 public class VisualVoicemailSettingsUtil {
 
-  @VisibleForTesting public static final String IS_ENABLED_KEY = "is_enabled";
+  private static final String IS_ENABLED_KEY = "is_enabled";
   private static final String ARCHIVE_ENABLED_KEY = "archive_is_enabled";
 
   public static void setEnabled(

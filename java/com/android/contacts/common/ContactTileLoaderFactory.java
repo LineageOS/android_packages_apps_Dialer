@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.support.annotation.VisibleForTesting;
 
 /**
  * Used to create {@link CursorLoader} which finds contacts information from the strequents table.
@@ -35,8 +34,7 @@ public final class ContactTileLoaderFactory {
    * because the query is performed on the data table. In order to obtain the contact id for
    * strequent items, use Phone.contact_id instead.
    */
-  @VisibleForTesting
-  public static final String[] COLUMNS_PHONE_ONLY =
+  private static final String[] COLUMNS_PHONE_ONLY =
       new String[] {
         Contacts._ID,
         Contacts.DISPLAY_NAME_PRIMARY,

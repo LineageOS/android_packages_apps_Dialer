@@ -20,7 +20,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -40,7 +39,7 @@ import com.android.voicemail.VoicemailComponent;
  */
 public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
 
-  @VisibleForTesting static final String LEGACY_VOICEMAIL_DISMISSED = "legacy_voicemail_dismissed";
+  private static final String LEGACY_VOICEMAIL_DISMISSED = "legacy_voicemail_dismissed";
 
   @Override
   public void onReceive(Context context, Intent intent) {
@@ -119,7 +118,6 @@ public class LegacyVoicemailNotificationReceiver extends BroadcastReceiver {
         .apply();
   }
 
-  @VisibleForTesting
   static PerAccountSharedPreferences getSharedPreferences(
       Context context, PhoneAccountHandle phoneAccountHandle) {
     return new PerAccountSharedPreferences(

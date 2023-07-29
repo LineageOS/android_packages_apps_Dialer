@@ -31,7 +31,6 @@ import android.provider.CallLog.Calls;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v4.os.UserManagerCompat;
 import android.support.v4.util.Pair;
@@ -76,8 +75,7 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
   private final Context context;
   private final CallLogNotificationsQueryHelper callLogNotificationsQueryHelper;
 
-  @VisibleForTesting
-  MissedCallNotifier(
+  private MissedCallNotifier(
       Context context, CallLogNotificationsQueryHelper callLogNotificationsQueryHelper) {
     this.context = context;
     this.callLogNotificationsQueryHelper = callLogNotificationsQueryHelper;
@@ -103,7 +101,6 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
    * @param number the phone number of the most recent call to display if the call log cannot be
    *     accessed. May be null if unknown.
    */
-  @VisibleForTesting
   @WorkerThread
   void updateMissedCallNotification(int count, @Nullable String number) {
     LogUtil.enterBlock("MissedCallNotifier.updateMissedCallNotification");
