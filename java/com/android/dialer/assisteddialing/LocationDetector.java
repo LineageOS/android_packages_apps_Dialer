@@ -16,10 +16,12 @@
 
 package com.android.dialer.assisteddialing;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import java.util.Locale;
 import java.util.Optional;
@@ -35,7 +37,7 @@ final class LocationDetector {
   private final String userProvidedHomeCountry;
 
   LocationDetector(
-      @NonNull TelephonyManager telephonyManager, @Nullable String userProvidedHomeCountry) {
+          @NonNull TelephonyManager telephonyManager, @Nullable String userProvidedHomeCountry) {
     if (telephonyManager == null) {
       throw new NullPointerException("Provided TelephonyManager was null");
     }

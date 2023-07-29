@@ -19,7 +19,9 @@ package com.android.dialer.protos;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.MessageLite;
@@ -32,7 +34,7 @@ public final class ProtoParsers {
   /** Retrieve a proto from a Bundle which was not created within the current executable/version. */
   @SuppressWarnings("unchecked") // We want to eventually optimize away parser classes, so cast
   public static <T extends MessageLite> T get(
-      @NonNull Bundle bundle, @NonNull String key, @NonNull T defaultInstance)
+          @NonNull Bundle bundle, @NonNull String key, @NonNull T defaultInstance)
       throws InvalidProtocolBufferException {
 
     Assert.isNotNull(bundle);

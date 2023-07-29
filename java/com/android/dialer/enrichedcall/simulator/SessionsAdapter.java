@@ -16,10 +16,13 @@
 
 package com.android.dialer.enrichedcall.simulator;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import java.util.List;
 

@@ -17,7 +17,9 @@
 package com.android.dialer.duo;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.inject.HasRootComponent;
 import com.android.dialer.inject.IncludeInDialerRoot;
 import dagger.Subcomponent;

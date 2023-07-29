@@ -18,13 +18,16 @@ package com.android.dialer.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.StringRes;
+
+import com.android.dialer.R;
 import com.android.dialer.theme.base.ThemeComponent;
 
 public class EmptyContentView extends LinearLayout implements View.OnClickListener {

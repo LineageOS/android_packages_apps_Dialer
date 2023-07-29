@@ -25,11 +25,12 @@ import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.database.AnnotatedCallLogDatabaseHelper;
@@ -74,7 +75,8 @@ public class SystemCallLogDataSource implements CallLogDataSource {
   private final AnnotatedCallLogDatabaseHelper annotatedCallLogDatabaseHelper;
   private final Duo duo;
 
-  @Nullable private Long lastTimestampProcessed;
+  @Nullable
+  private Long lastTimestampProcessed;
   private boolean isCallLogContentObserverRegistered = false;
 
   @Inject

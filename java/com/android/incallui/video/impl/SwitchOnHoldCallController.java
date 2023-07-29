@@ -16,10 +16,12 @@
 
 package com.android.incallui.video.impl;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.incallui.incall.protocol.InCallScreenDelegate;
 import com.android.incallui.incall.protocol.SecondaryInfo;
@@ -28,7 +30,8 @@ import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 /** Manages the swap button and on hold banner. */
 public class SwitchOnHoldCallController implements OnClickListener {
 
-  @NonNull private InCallScreenDelegate inCallScreenDelegate;
+  @NonNull
+  private InCallScreenDelegate inCallScreenDelegate;
   @NonNull private VideoCallScreenDelegate videoCallScreenDelegate;
 
   @NonNull private View switchOnHoldButton;
@@ -39,7 +42,8 @@ public class SwitchOnHoldCallController implements OnClickListener {
 
   private boolean isEnabled;
 
-  @Nullable private SecondaryInfo secondaryInfo;
+  @Nullable
+  private SecondaryInfo secondaryInfo;
 
   public SwitchOnHoldCallController(
       @NonNull View switchOnHoldButton,

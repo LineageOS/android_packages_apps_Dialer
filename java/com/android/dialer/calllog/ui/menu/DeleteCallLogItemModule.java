@@ -20,9 +20,12 @@ import android.Manifest.permission;
 import android.content.Context;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+
 import com.android.dialer.CoalescedIds;
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;

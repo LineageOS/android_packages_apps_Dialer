@@ -19,7 +19,8 @@ package com.android.dialer.common;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /** Utility class for package management. */
 public class PackageUtils {

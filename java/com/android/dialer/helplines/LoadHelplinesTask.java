@@ -15,13 +15,13 @@
  */
 package com.android.dialer.helplines;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import org.lineageos.lib.phone.SensitivePhoneNumbers;
 import org.lineageos.lib.phone.spn.Item;
