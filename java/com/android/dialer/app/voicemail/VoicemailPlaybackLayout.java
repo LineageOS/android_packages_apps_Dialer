@@ -32,8 +32,6 @@ import android.widget.TextView;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.app.calllog.CallLogListItemViewHolder;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -76,7 +74,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
       new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_DELETE_ENTRY);
           if (presenter == null) {
             return;
           }
@@ -139,8 +136,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
           if (isPlaying) {
             presenter.pausePlayback();
           } else {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.VOICEMAIL_PLAY_AUDIO_AFTER_EXPANDING_ENTRY);
             presenter.resumePlayback();
           }
         }

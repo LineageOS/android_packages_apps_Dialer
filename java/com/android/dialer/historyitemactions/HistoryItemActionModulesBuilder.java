@@ -23,8 +23,6 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 
-import androidx.annotation.IntDef;
-
 import com.android.dialer.R;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogInfo;
 import com.android.dialer.callintent.CallInitiationType;
@@ -33,19 +31,12 @@ import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.util.CallUtil;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.UriUtils;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Builds a list of {@link HistoryItemActionModule HistoryItemActionModules}.
@@ -85,54 +76,6 @@ import java.util.Optional;
  * </code></pre>
  */
 public final class HistoryItemActionModulesBuilder {
-
-  /** Represents events when a module is tapped by the user. */
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({
-    Event.ADD_TO_CONTACT,
-    Event.BLOCK_NUMBER,
-    Event.BLOCK_NUMBER_AND_REPORT_SPAM,
-    Event.REPORT_NOT_SPAM,
-    Event.REQUEST_CARRIER_VIDEO_CALL,
-    Event.REQUEST_DUO_VIDEO_CALL,
-    Event.REQUEST_DUO_VIDEO_CALL_FOR_NON_CONTACT,
-    Event.SEND_TEXT_MESSAGE,
-    Event.UNBLOCK_NUMBER
-  })
-  @interface Event {
-    int ADD_TO_CONTACT = 1;
-    int BLOCK_NUMBER = 2;
-    int BLOCK_NUMBER_AND_REPORT_SPAM = 3;
-    int REPORT_NOT_SPAM = 4;
-    int REQUEST_CARRIER_VIDEO_CALL = 5;
-    int REQUEST_DUO_VIDEO_CALL = 6;
-    int REQUEST_DUO_VIDEO_CALL_FOR_NON_CONTACT = 7;
-    int SEND_TEXT_MESSAGE = 8;
-    int UNBLOCK_NUMBER = 9;
-  }
-
-  /**
-   * Maps each {@link Event} to a {@link DialerImpression.Type} to be logged when the modules are
-   * hosted by the call log.
-   */
-  private static final ImmutableMap<Integer, DialerImpression.Type> CALL_LOG_IMPRESSIONS =
-      new ImmutableMap.Builder<Integer, DialerImpression.Type>()
-          .put(Event.ADD_TO_CONTACT, DialerImpression.Type.ADD_TO_A_CONTACT_FROM_CALL_LOG)
-          .put(Event.BLOCK_NUMBER, DialerImpression.Type.CALL_LOG_BLOCK_NUMBER)
-          .put(Event.BLOCK_NUMBER_AND_REPORT_SPAM, DialerImpression.Type.CALL_LOG_BLOCK_REPORT_SPAM)
-          .put(Event.REPORT_NOT_SPAM, DialerImpression.Type.CALL_LOG_REPORT_AS_NOT_SPAM)
-          .put(
-              Event.REQUEST_CARRIER_VIDEO_CALL,
-              DialerImpression.Type.IMS_VIDEO_REQUESTED_FROM_CALL_LOG)
-          .put(
-              Event.REQUEST_DUO_VIDEO_CALL,
-              DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_CALL_LOG)
-          .put(
-              Event.REQUEST_DUO_VIDEO_CALL_FOR_NON_CONTACT,
-              DialerImpression.Type.LIGHTBRINGER_NON_CONTACT_VIDEO_REQUESTED_FROM_CALL_LOG)
-          .put(Event.SEND_TEXT_MESSAGE, DialerImpression.Type.CALL_LOG_SEND_MESSAGE)
-          .put(Event.UNBLOCK_NUMBER, DialerImpression.Type.CALL_LOG_UNBLOCK_NUMBER)
-          .build();
 
   private final Context context;
   private final HistoryItemActionModuleInfo moduleInfo;
@@ -217,13 +160,8 @@ public final class HistoryItemActionModulesBuilder {
     // If the module info is for a video call, add an appropriate video call module.
     if ((moduleInfo.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
       boolean isDuoCall = isDuoCall();
-      modules.add(
-          IntentModule.newCallModule(
-              context,
-              callIntentBuilder.setIsDuoCall(isDuoCall),
-              isDuoCall
-                  ? getImpressionsForDuoVideoCall()
-                  : getImpressions(Event.REQUEST_CARRIER_VIDEO_CALL)));
+      modules.add(IntentModule.newCallModule(context,
+              callIntentBuilder.setIsDuoCall(isDuoCall)));
       return this;
     }
 
@@ -232,27 +170,15 @@ public final class HistoryItemActionModulesBuilder {
     //
     // The carrier video call module takes precedence over the Duo module.
     if (canPlaceCarrierVideoCall()) {
-      modules.add(
-          IntentModule.newCallModule(
-              context, callIntentBuilder, getImpressions(Event.REQUEST_CARRIER_VIDEO_CALL)));
+      modules.add(IntentModule.newCallModule(
+              context, callIntentBuilder));
     } else if (canPlaceDuoCall()) {
-      modules.add(
-          IntentModule.newCallModule(
-              context, callIntentBuilder.setIsDuoCall(true), getImpressionsForDuoVideoCall()));
+      modules.add(IntentModule.newCallModule(
+              context, callIntentBuilder.setIsDuoCall(true)));
     }
     return this;
   }
 
-  /**
-   * Returns a list of impressions to be logged when the user taps the module that attempts to
-   * initiate a Duo video call.
-   */
-  private ImmutableList<DialerImpression.Type> getImpressionsForDuoVideoCall() {
-    return isExistingContact()
-        ? getImpressions(Event.REQUEST_DUO_VIDEO_CALL)
-        : getImpressions(
-            Event.REQUEST_DUO_VIDEO_CALL, Event.REQUEST_DUO_VIDEO_CALL_FOR_NON_CONTACT);
-  }
 
   /**
    * Adds a module for sending text messages.
@@ -278,9 +204,8 @@ public final class HistoryItemActionModulesBuilder {
       return this;
     }
 
-    modules.add(
-        IntentModule.newModuleForSendingTextMessage(
-            context, moduleInfo.getNormalizedNumber(), getImpressions(Event.SEND_TEXT_MESSAGE)));
+    modules.add(IntentModule.newModuleForSendingTextMessage(context,
+            moduleInfo.getNormalizedNumber()));
     return this;
   }
 
@@ -337,8 +262,7 @@ public final class HistoryItemActionModulesBuilder {
             context,
             intent,
             R.string.add_to_contacts,
-            R.drawable.quantum_ic_person_add_vd_theme_24,
-            getImpressions(Event.ADD_TO_CONTACT)));
+            R.drawable.quantum_ic_person_add_vd_theme_24));
     return this;
   }
 
@@ -374,7 +298,6 @@ public final class HistoryItemActionModulesBuilder {
             .setNormalizedNumber(moduleInfo.getNormalizedNumber())
             .setCountryIso(moduleInfo.getCountryIso())
             .setCallType(moduleInfo.getCallType())
-            .setReportingLocation(getReportingLocation())
             .setContactSource(moduleInfo.getContactSource())
             .build();
 
@@ -384,13 +307,13 @@ public final class HistoryItemActionModulesBuilder {
     if (Spam.shouldShowAsSpam(moduleInfo.getIsSpam(), moduleInfo.getCallType())) {
       modules.add(
           BlockReportSpamModules.moduleForMarkingNumberAsNotSpam(
-              context, blockReportSpamDialogInfo, getImpression(Event.REPORT_NOT_SPAM)));
+              context, blockReportSpamDialogInfo));
       modules.add(
           moduleInfo.getIsBlocked()
               ? BlockReportSpamModules.moduleForUnblockingNumber(
-                  context, blockReportSpamDialogInfo, getImpression(Event.UNBLOCK_NUMBER))
+                  context, blockReportSpamDialogInfo)
               : BlockReportSpamModules.moduleForBlockingNumber(
-                  context, blockReportSpamDialogInfo, getImpression(Event.BLOCK_NUMBER)));
+                  context, blockReportSpamDialogInfo));
       return this;
     }
 
@@ -399,7 +322,7 @@ public final class HistoryItemActionModulesBuilder {
     if (moduleInfo.getIsBlocked()) {
       modules.add(
           BlockReportSpamModules.moduleForUnblockingNumber(
-              context, blockReportSpamDialogInfo, getImpression(Event.UNBLOCK_NUMBER)));
+              context, blockReportSpamDialogInfo));
       return this;
     }
 
@@ -407,7 +330,7 @@ public final class HistoryItemActionModulesBuilder {
     // spam, add the "Block/Report spam" module.
     modules.add(
         BlockReportSpamModules.moduleForBlockingNumberAndOptionallyReportingSpam(
-            context, blockReportSpamDialogInfo, getImpression(Event.BLOCK_NUMBER_AND_REPORT_SPAM)));
+            context, blockReportSpamDialogInfo));
     return this;
   }
 
@@ -501,52 +424,6 @@ public final class HistoryItemActionModulesBuilder {
         return CallInitiationType.Type.CALL_LOG;
       case VOICEMAIL:
         return CallInitiationType.Type.VOICEMAIL_LOG;
-      default:
-        throw Assert.createUnsupportedOperationFailException(
-            String.format("Unsupported host: %s", moduleInfo.getHost()));
-    }
-  }
-
-  /**
-   * Maps the value of {@link HistoryItemActionModuleInfo#getHost()} to {@link
-   * ReportingLocation.Type}, which is for logging where a spam number is reported.
-   */
-  private ReportingLocation.Type getReportingLocation() {
-    switch (moduleInfo.getHost()) {
-      case CALL_LOG:
-        return ReportingLocation.Type.CALL_LOG_HISTORY;
-      case VOICEMAIL:
-        return ReportingLocation.Type.VOICEMAIL_HISTORY;
-      default:
-        throw Assert.createUnsupportedOperationFailException(
-            String.format("Unsupported host: %s", moduleInfo.getHost()));
-    }
-  }
-
-  /** Returns a list of impressions to be logged for the given {@link Event events}. */
-  private ImmutableList<DialerImpression.Type> getImpressions(@Event int... events) {
-    Assert.isNotNull(events);
-
-    ImmutableList.Builder<DialerImpression.Type> impressionListBuilder =
-        new ImmutableList.Builder<>();
-    for (@Event int event : events) {
-      getImpression(event).ifPresent(impressionListBuilder::add);
-    }
-
-    return impressionListBuilder.build();
-  }
-
-  /**
-   * Returns an impression to be logged for the given {@link Event}, or {@link Optional#empty()} if
-   * no impression is available for the event.
-   */
-  private Optional<DialerImpression.Type> getImpression(@Event int event) {
-    switch (moduleInfo.getHost()) {
-      case CALL_LOG:
-        return Optional.of(CALL_LOG_IMPRESSIONS.get(event));
-      case VOICEMAIL:
-        // TODO(a bug): Return proper impressions for voicemail.
-        return Optional.empty();
       default:
         throw Assert.createUnsupportedOperationFailException(
             String.format("Unsupported host: %s", moduleInfo.getHost()));
