@@ -32,11 +32,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Trace;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
@@ -51,6 +46,12 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -194,8 +195,10 @@ public class AnswerFragment extends Fragment
       }
     };
 
-    @DrawableRes public int icon;
-    @StringRes public final int contentDescription;
+    @DrawableRes
+    public int icon;
+    @StringRes
+    public final int contentDescription;
     @StringRes public final int accessibilityLabel;
     @StringRes public final int hintText;
 

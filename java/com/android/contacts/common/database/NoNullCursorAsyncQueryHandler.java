@@ -20,7 +20,9 @@ import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -30,7 +32,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class NoNullCursorAsyncQueryHandler extends AsyncQueryHandler {
   private static final AtomicInteger pendingQueryCount = new AtomicInteger();
-  @Nullable private static PendingQueryCountChangedListener pendingQueryCountChangedListener;
+  @Nullable
+  private static PendingQueryCountChangedListener pendingQueryCountChangedListener;
 
   public NoNullCursorAsyncQueryHandler(ContentResolver cr) {
     super(cr);

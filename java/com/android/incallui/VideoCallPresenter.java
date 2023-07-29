@@ -20,13 +20,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.telecom.VideoProfile.CameraCapabilities;
 import android.view.Surface;
 import android.view.SurfaceView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;

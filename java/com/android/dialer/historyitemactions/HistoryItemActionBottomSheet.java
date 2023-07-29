@@ -19,7 +19,6 @@ package com.android.dialer.historyitemactions;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
 import android.support.design.widget.BottomSheetDialog;
@@ -34,6 +33,10 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.compat.android.support.design.bottomsheet.BottomSheetStateCompat;
 import com.android.dialer.theme.base.ThemeComponent;
