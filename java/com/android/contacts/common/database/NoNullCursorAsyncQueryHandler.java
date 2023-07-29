@@ -21,7 +21,6 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -73,17 +72,6 @@ public abstract class NoNullCursorAsyncQueryHandler extends AsyncQueryHandler {
   }
 
   protected abstract void onNotNullableQueryComplete(int token, Object cookie, Cursor cursor);
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setPendingQueryCountChangedListener(
-      @Nullable PendingQueryCountChangedListener listener) {
-    pendingQueryCountChangedListener = listener;
-  }
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static int getPendingQueryCount() {
-    return pendingQueryCount.get();
-  }
 
   /** Callback to listen for changes in the number of queries that have not completed. */
   public interface PendingQueryCountChangedListener {

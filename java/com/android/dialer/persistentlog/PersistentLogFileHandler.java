@@ -125,21 +125,6 @@ final class PersistentLogFileHandler {
     }
   }
 
-  void writeRawLogsForTest(byte[] data) throws IOException {
-    if (outputFile == null) {
-      selectNextFileToWrite();
-    }
-    outputFile.createNewFile();
-    try (DataOutputStream outputStream =
-        new DataOutputStream(new FileOutputStream(outputFile, true))) {
-      outputStream.write(data);
-      outputStream.close();
-      if (outputFile.length() > fileSizeLimit) {
-        selectNextFileToWrite();
-      }
-    }
-  }
-
   /** Concatenate all log files in chronicle order and return a byte array. */
   @WorkerThread
   @NonNull

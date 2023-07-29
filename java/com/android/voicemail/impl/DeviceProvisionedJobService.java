@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.constants.ScheduledJobIds;
 
@@ -37,7 +36,7 @@ import com.android.dialer.constants.ScheduledJobIds;
  */
 public class DeviceProvisionedJobService extends JobService {
 
-  @VisibleForTesting static final String EXTRA_PHONE_ACCOUNT_HANDLE = "EXTRA_PHONE_ACCOUNT_HANDLE";
+  private static final String EXTRA_PHONE_ACCOUNT_HANDLE = "EXTRA_PHONE_ACCOUNT_HANDLE";
 
   /** Queue the phone account to be reactivated after the setup wizard has completed. */
   public static void activateAfterProvisioned(

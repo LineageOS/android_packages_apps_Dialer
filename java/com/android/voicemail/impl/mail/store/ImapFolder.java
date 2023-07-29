@@ -17,7 +17,6 @@ package com.android.voicemail.impl.mail.store;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Base64DataException;
@@ -167,7 +166,6 @@ public class ImapFolder {
     return uids.toArray(Utility.EMPTY_STRINGS);
   }
 
-  @VisibleForTesting
   String[] searchForUids(String searchCriteria) throws MessagingException {
     checkOpen();
     try {
@@ -203,7 +201,6 @@ public class ImapFolder {
     return null;
   }
 
-  @VisibleForTesting
   protected static boolean isAsciiString(String str) {
     int len = str.length();
     for (int i = 0; i < len; i++) {

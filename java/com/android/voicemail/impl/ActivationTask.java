@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.ServiceState;
@@ -58,11 +57,9 @@ public class ActivationTask extends BaseTask {
   private static final int RETRY_TIMES = 4;
   private static final int RETRY_INTERVAL_MILLIS = 5_000;
 
-  @VisibleForTesting static final String EXTRA_MESSAGE_DATA_BUNDLE = "extra_message_data_bundle";
+  private static final String EXTRA_MESSAGE_DATA_BUNDLE = "extra_message_data_bundle";
 
   private final RetryPolicy retryPolicy;
-
-  @Nullable private OmtpVvmCarrierConfigHelper configForTest;
 
   private Bundle messageData;
 
@@ -130,12 +127,8 @@ public class ActivationTask extends BaseTask {
       return;
     }
 
-    OmtpVvmCarrierConfigHelper helper;
-    if (configForTest != null) {
-      helper = configForTest;
-    } else {
-      helper = new OmtpVvmCarrierConfigHelper(getContext(), phoneAccountHandle);
-    }
+    OmtpVvmCarrierConfigHelper helper = new OmtpVvmCarrierConfigHelper(getContext(),
+            phoneAccountHandle);
     if (!helper.isValid()) {
       VvmLog.i(TAG, "VVM not supported on phoneAccountHandle " + phoneAccountHandle);
       VvmAccountManager.removeAccount(getContext(), phoneAccountHandle);
@@ -291,10 +284,5 @@ public class ActivationTask extends BaseTask {
             .getSystemService(TelephonyManager.class)
             .createForPhoneAccountHandle(phoneAccountHandle);
     return telephonyManager.getServiceState().getState() == ServiceState.STATE_IN_SERVICE;
-  }
-
-  @VisibleForTesting
-  void setConfigForTest(OmtpVvmCarrierConfigHelper config) {
-    configForTest = config;
   }
 }

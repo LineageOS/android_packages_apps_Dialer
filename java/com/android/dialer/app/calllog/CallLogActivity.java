@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.Snackbar;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -50,8 +49,8 @@ import com.android.dialer.util.ViewUtil;
 public class CallLogActivity extends TransactionSafeActivity implements
     ViewPager.OnPageChangeListener, DoubleDatePickerDialog.OnDateSetListener {
 
-  @VisibleForTesting static final int TAB_INDEX_ALL = 0;
-  @VisibleForTesting static final int TAB_INDEX_MISSED = 1;
+  private static final int TAB_INDEX_ALL = 0;
+  private static final int TAB_INDEX_MISSED = 1;
   private static final int TAB_INDEX_STATS = 2;
   private static final int TAB_INDEX_COUNT = 3;
   private ViewPager viewPager;
