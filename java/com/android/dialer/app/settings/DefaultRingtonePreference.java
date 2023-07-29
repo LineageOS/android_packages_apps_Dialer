@@ -24,7 +24,8 @@ import android.preference.RingtonePreference;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.widget.Toast;
-import com.android.dialer.app.R;
+
+import com.android.dialer.R;
 
 /** RingtonePreference which doesn't show default ringtone setting. */
 public class DefaultRingtonePreference extends RingtonePreference {

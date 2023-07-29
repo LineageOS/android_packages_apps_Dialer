@@ -16,12 +16,12 @@
 
 package com.android.dialer.simulator;
 
-import android.support.v7.app.AppCompatActivity;
 import android.view.ActionProvider;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringDef;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

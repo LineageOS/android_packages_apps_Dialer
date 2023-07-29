@@ -18,11 +18,12 @@ package com.android.dialer.assisteddialing.ui;
 import android.icu.util.ULocale;
 import android.icu.util.ULocale.Builder;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.SwitchPreference;
-import android.telephony.TelephonyManager;
+
+import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.assisteddialing.AssistedDialingMediator;
@@ -30,12 +31,13 @@ import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.CountryCodeProvider;
 import com.android.dialer.common.LogUtil;
 import com.google.auto.value.AutoValue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /** The setting for Assisted Dialing */
-public class AssistedDialingSettingFragment extends PreferenceFragment {
+public class AssistedDialingSettingFragment extends PreferenceFragmentCompat {
 
   private CountryCodeProvider countryCodeProvider;
   private AssistedDialingMediator assistedDialingMediator;
@@ -62,15 +64,15 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
 
     assistedDialingMediator = ConcreteCreator.createNewAssistedDialingMediator();
     countryCodeProvider = ConcreteCreator.getCountryCodeProvider();
+  }
 
+  @Override
+  public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.assisted_dialing_setting);
-    SwitchPreference switchPref =
-        (SwitchPreference)
-            findPreference(getContext().getString(R.string.assisted_dialing_setting_toggle_key));
+    SwitchPreferenceCompat switchPref = findPreference(getContext().getString(R.string.assisted_dialing_setting_toggle_key));
 
     ListPreference countryChooserPref =
-        (ListPreference)
             findPreference(getContext().getString(R.string.assisted_dialing_setting_cc_key));
 
     updateCountryChoices(countryChooserPref);

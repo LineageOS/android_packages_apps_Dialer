@@ -19,7 +19,8 @@ package com.android.dialer.app.calllog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.dialer.app.R;
+
+import com.android.dialer.R;
 import com.android.dialer.app.alert.AlertManager;
 
 /**

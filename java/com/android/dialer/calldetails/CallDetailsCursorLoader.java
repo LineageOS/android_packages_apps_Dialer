@@ -17,8 +17,10 @@
 package com.android.dialer.calldetails;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
+
+import androidx.loader.content.CursorLoader;
+
 import com.android.dialer.CoalescedIds;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;

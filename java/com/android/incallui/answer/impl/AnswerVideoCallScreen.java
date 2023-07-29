@@ -18,11 +18,11 @@ package com.android.incallui.answer.impl;
 
 import android.content.res.Configuration;
 import android.graphics.Point;
-import android.support.v4.app.Fragment;
 import android.view.TextureView;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;

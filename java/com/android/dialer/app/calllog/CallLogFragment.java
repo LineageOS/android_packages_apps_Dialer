@@ -19,24 +19,18 @@ package com.android.dialer.app.calllog;
 import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
-import android.support.v13.app.FragmentCompat;
-import android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,9 +39,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 import com.android.dialer.app.calllog.CallLogAdapter.CallFetcher;
 import com.android.dialer.app.calllog.CallLogAdapter.MultiSelectRemoveView;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
@@ -67,6 +65,7 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+
 import java.util.Arrays;
 
 /**
@@ -78,7 +77,6 @@ public class CallLogFragment extends Fragment
         CallFetcher,
         MultiSelectRemoveView,
         OnEmptyViewActionButtonClickedListener,
-        OnRequestPermissionsResultCallback,
         CallLogModalAlertManager.Listener,
         OnClickListener {
   private static final String KEY_FILTER_TYPE = "filter_type";
@@ -140,7 +138,7 @@ public class CallLogFragment extends Fragment
   private boolean isCallLogActivity = false;
   private boolean selectAllMode;
   private final Handler displayUpdateHandler =
-      new Handler() {
+      new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
           switch (msg.what) {
@@ -213,7 +211,7 @@ public class CallLogFragment extends Fragment
       selectAllMode = state.getBoolean(KEY_SELECT_ALL_MODE, false);
     }
 
-    final Activity activity = getActivity();
+    final Activity activity = requireActivity();
     final ContentResolver resolver = activity.getContentResolver();
     callLogQueryHandler = new CallLogQueryHandler(activity, resolver, this, logLimit);
     setHasOptionsMenu(true);
@@ -318,7 +316,7 @@ public class CallLogFragment extends Fragment
 
     contactInfoCache =
         new ContactInfoCache(
-            ExpirableCacheHeadlessFragment.attach((AppCompatActivity) getActivity())
+            ExpirableCacheHeadlessFragment.attach(getChildFragmentManager())
                 .getRetainedCache(),
             new ContactInfoHelper(getActivity(), currentCountryIso),
             onContactInfoChangedListener);
@@ -334,7 +332,7 @@ public class CallLogFragment extends Fragment
             new CallLogCache(getActivity()),
             contactInfoCache,
             getVoicemailPlaybackPresenter(),
-            new FilteredNumberAsyncQueryHandler(getActivity()),
+            new FilteredNumberAsyncQueryHandler(requireActivity()),
             activityType);
     recyclerView.setAdapter(adapter);
     if (adapter.getOnScrollListener() != null) {
@@ -348,15 +346,6 @@ public class CallLogFragment extends Fragment
     return null;
   }
 
-  @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
-    LogUtil.enterBlock("CallLogFragment.onActivityCreated");
-    super.onActivityCreated(savedInstanceState);
-    setupData();
-    updateSelectAllState(savedInstanceState);
-    adapter.onRestoreInstanceState(savedInstanceState);
-  }
-
   private void updateSelectAllState(Bundle savedInstanceState) {
     if (savedInstanceState != null) {
       if (savedInstanceState.getBoolean(KEY_SELECT_ALL_MODE, false)) {
@@ -366,9 +355,19 @@ public class CallLogFragment extends Fragment
   }
 
   @Override
-  public void onViewCreated(View view, Bundle savedInstanceState) {
+  public void onAttach(@NonNull Context context) {
+    LogUtil.enterBlock("CallLogFragment.onAttach");
+    super.onAttach(context);
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    LogUtil.enterBlock("CallLogFragment.onViewCreated");
     super.onViewCreated(view, savedInstanceState);
     updateEmptyMessage(callTypeFilter);
+    setupData();
+    updateSelectAllState(savedInstanceState);
+    adapter.onRestoreInstanceState(savedInstanceState);
   }
 
   @Override
@@ -385,7 +384,7 @@ public class CallLogFragment extends Fragment
       updateEmptyMessage(callTypeFilter);
     }
 
-    ContentResolver resolver = getActivity().getContentResolver();
+    ContentResolver resolver = requireActivity().getContentResolver();
     if (PermissionsUtil.hasCallLogReadPermissions(getContext())) {
       resolver.registerContentObserver(CallLog.CONTENT_URI, true, callLogObserver);
     } else {
@@ -406,15 +405,18 @@ public class CallLogFragment extends Fragment
     rescheduleDisplayUpdate();
     // onResume() may also be called as a "side" page on the ViewPager, which is not visible.
     if (getUserVisibleHint()) {
+      LogUtil.w("CallLogFragment.onResume", "on visible hint");
       onVisible();
+    } else {
+      LogUtil.w("CallLogFragment.onResume", "not visible hint");
     }
   }
 
   @Override
   public void onPause() {
     LogUtil.enterBlock("CallLogFragment.onPause");
-    getActivity().getContentResolver().unregisterContentObserver(callLogObserver);
-    getActivity().getContentResolver().unregisterContentObserver(contactsObserver);
+    requireActivity().getContentResolver().unregisterContentObserver(callLogObserver);
+    requireActivity().getContentResolver().unregisterContentObserver(contactsObserver);
     if (getUserVisibleHint()) {
       onNotVisible();
     }
@@ -428,7 +430,7 @@ public class CallLogFragment extends Fragment
     LogUtil.enterBlock("CallLogFragment.onStart");
     super.onStart();
     CequintCallerIdManager cequintCallerIdManager = null;
-    if (CequintCallerIdManager.isCequintCallerIdEnabled(getContext())) {
+    if (CequintCallerIdManager.isCequintCallerIdEnabled(requireContext())) {
       cequintCallerIdManager = new CequintCallerIdManager();
     }
     contactInfoCache.setCequintCallerIdManager(cequintCallerIdManager);
@@ -452,7 +454,7 @@ public class CallLogFragment extends Fragment
   }
 
   @Override
-  public void onSaveInstanceState(Bundle outState) {
+  public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt(KEY_FILTER_TYPE, callTypeFilter);
     outState.putInt(KEY_LOG_LIMIT, logLimit);
@@ -562,14 +564,15 @@ public class CallLogFragment extends Fragment
       LogUtil.i(
           "CallLogFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      FragmentCompat.requestPermissions(this, deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
+      requestPermissions(deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
     } else if (!isCallLogActivity) {
       LogUtil.i("CallLogFragment.onEmptyViewActionButtonClicked", "showing dialpad");
       // Show dialpad if we are not in the call log activity.
       FragmentUtils.getParentUnsafe(this, HostInterface.class).showDialpad();
     }
   }
-
+  //TODO: BadDaemon: Reimplement this
+/*
   @Override
   public void onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {
@@ -579,7 +582,7 @@ public class CallLogFragment extends Fragment
         refreshDataRequired = true;
       }
     }
-  }
+  }*/
 
   /** Schedules an update to the relative call times (X mins ago). */
   private void rescheduleDisplayUpdate() {

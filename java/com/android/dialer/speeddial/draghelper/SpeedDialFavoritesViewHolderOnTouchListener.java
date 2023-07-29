@@ -16,13 +16,15 @@
 
 package com.android.dialer.speeddial.draghelper;
 
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
+
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.dialer.common.Assert;
 
 /** OnTouchListener for the {@link com.android.dialer.speeddial.FavoritesViewHolder}. */
@@ -30,7 +32,7 @@ public class SpeedDialFavoritesViewHolderOnTouchListener implements OnTouchListe
 
   private final ViewConfiguration configuration;
   private final ItemTouchHelper itemTouchHelper;
-  private final ViewHolder viewHolder;
+  private final RecyclerView.ViewHolder viewHolder;
   private final OnTouchFinishCallback onTouchFinishCallback;
 
   private boolean hasPerformedLongClick;
@@ -40,7 +42,7 @@ public class SpeedDialFavoritesViewHolderOnTouchListener implements OnTouchListe
   public SpeedDialFavoritesViewHolderOnTouchListener(
       ViewConfiguration configuration,
       ItemTouchHelper itemTouchHelper,
-      ViewHolder viewHolder,
+      RecyclerView.ViewHolder viewHolder,
       OnTouchFinishCallback onTouchFinishCallback) {
     this.configuration = configuration;
     this.itemTouchHelper = itemTouchHelper;

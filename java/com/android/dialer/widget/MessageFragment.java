@@ -17,7 +17,6 @@
 package com.android.dialer.widget;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -34,6 +33,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;

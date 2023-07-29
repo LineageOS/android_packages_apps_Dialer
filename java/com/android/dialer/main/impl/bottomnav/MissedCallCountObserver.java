@@ -25,7 +25,7 @@ import android.provider.CallLog.Calls;
 import androidx.annotation.RequiresPermission;
 
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.UiListener;
+import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -37,10 +37,10 @@ import com.google.common.util.concurrent.ListenableFuture;
 public final class MissedCallCountObserver extends ContentObserver {
   private final Context appContext;
   private final BottomNavBar bottomNavBar;
-  private final UiListener<Integer> uiListener;
+  private final SupportUiListener<Integer> uiListener;
 
   public MissedCallCountObserver(
-      Context appContext, BottomNavBar bottomNavBar, UiListener<Integer> uiListener) {
+      Context appContext, BottomNavBar bottomNavBar, SupportUiListener<Integer> uiListener) {
     super(null);
     this.appContext = appContext;
     this.bottomNavBar = bottomNavBar;

@@ -19,9 +19,6 @@ package com.android.dialer.historyitemactions;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback;
-import android.support.design.widget.BottomSheetDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +38,10 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.compat.android.support.design.bottomsheet.BottomSheetStateCompat;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.widget.ContactPhotoView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.common.collect.ImmutableSet;
+
 import java.util.List;
 
 /**
@@ -72,8 +72,8 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
   private final OnPreDrawListener onPreDrawListenerForContactLayout =
       () -> {
         View contactLayout = findViewById(R.id.contact_layout_root);
-        View background = findViewById(android.support.design.R.id.touch_outside);
-        View bottomSheet = findViewById(android.support.design.R.id.design_bottom_sheet);
+        View background = findViewById(com.google.android.material.R.id.touch_outside);
+        View bottomSheet = findViewById(com.google.android.material.R.id.design_bottom_sheet);
 
         BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
 
@@ -114,6 +114,7 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
 
   @Override
   protected void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
     contactLayout = Assert.isNotNull(findViewById(R.id.contact_layout_root));
 
     initBottomSheetState();
@@ -148,8 +149,8 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
     // be fully expanded because sometimes services like TalkBack won't read all items when the
     // bottom sheet is not fully expanded.
     if (isTouchExplorationEnabled()) {
-      BottomSheetBehavior<View> behavior =
-          BottomSheetBehavior.from(findViewById(android.support.design.R.id.design_bottom_sheet));
+      BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(
+              findViewById(com.google.android.material.R.id.design_bottom_sheet));
       behavior.setState(BottomSheetStateCompat.STATE_EXPANDED);
     }
   }
@@ -166,10 +167,10 @@ public class HistoryItemActionBottomSheet extends BottomSheetDialog implements O
    * BottomSheetBehavior#STATE_HIDDEN}.
    */
   private void setupBottomSheetBehavior() {
-    BottomSheetBehavior<View> behavior =
-        BottomSheetBehavior.from(findViewById(android.support.design.R.id.design_bottom_sheet));
+    BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(
+            findViewById(com.google.android.material.R.id.design_bottom_sheet));
     behavior.setBottomSheetCallback(
-        new BottomSheetCallback() {
+        new BottomSheetBehavior.BottomSheetCallback() {
           @Override
           public void onStateChanged(@NonNull View bottomSheet, int newState) {
             ImmutableSet<Integer> statesToCancelBottomSheet =

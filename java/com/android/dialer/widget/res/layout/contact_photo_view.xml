@@ -17,6 +17,7 @@
 <!-- A FrameLayout for displaying a contact photo and its optional badge -->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="56dp"
     android:layout_height="48dp"
@@ -68,7 +69,7 @@
         android:layout_height="13dp"
         android:layout_gravity="center"
         android:src="@drawable/quantum_ic_rtt_vd_theme_24"
-        android:tint="?android:attr/colorBackground"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription"
+        app:tint="?android:attr/colorBackground" />
   </FrameLayout>
 </FrameLayout>

@@ -17,7 +17,9 @@ package com.android.dialer.util;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * A common superclass that keeps track of whether an {@link Activity} has saved its state yet or
@@ -46,7 +48,7 @@ public abstract class TransactionSafeActivity extends AppCompatActivity {
   }
 
   @Override
-  protected void onSaveInstanceState(Bundle outState) {
+  protected void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     isSafeToCommitTransactions = false;
   }

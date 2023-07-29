@@ -16,8 +16,10 @@
 package com.android.voicemail.impl;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.preference.PreferenceManager;
+
 import com.android.dialer.common.PerAccountSharedPreferences;
 
 /**

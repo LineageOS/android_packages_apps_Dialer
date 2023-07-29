@@ -20,8 +20,9 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Handler;
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Maintains a list that groups items into groups of consecutive elements which are disjoint, that

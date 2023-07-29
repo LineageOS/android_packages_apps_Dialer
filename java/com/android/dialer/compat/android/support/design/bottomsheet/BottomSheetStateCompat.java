@@ -16,7 +16,7 @@
 
 package com.android.dialer.compat.android.support.design.bottomsheet;
 
-import android.support.design.widget.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 /** Provides access to bottom sheet states. */
 public final class BottomSheetStateCompat {

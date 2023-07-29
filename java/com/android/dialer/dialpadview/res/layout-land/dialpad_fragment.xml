@@ -67,7 +67,7 @@
           android:layout_height="@dimen/floating_action_button_margin_bottom"
           android:layout_alignParentBottom="true"/>
 
-      <android.support.design.widget.FloatingActionButton
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
           android:id="@+id/dialpad_floating_action_button"
           android:layout_width="@dimen/floating_action_button_width"
           android:layout_height="@dimen/floating_action_button_height"

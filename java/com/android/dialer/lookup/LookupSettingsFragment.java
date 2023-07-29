@@ -18,14 +18,14 @@ package com.android.dialer.lookup;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.ListPreference;
-import android.preference.SwitchPreference;
+
+import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.app.settings.DialerPreferenceFragment;
-
-import java.util.Arrays;
 
 public class LookupSettingsFragment extends DialerPreferenceFragment
     implements Preference.OnPreferenceChangeListener {
@@ -35,8 +35,8 @@ public class LookupSettingsFragment extends DialerPreferenceFragment
   private static final String KEY_FORWARD_LOOKUP_PROVIDER = "forward_lookup_provider";
   private static final String KEY_REVERSE_LOOKUP_PROVIDER = "reverse_lookup_provider";
 
-  private SwitchPreference enableForwardLookup;
-  private SwitchPreference enableReverseLookup;
+  private SwitchPreferenceCompat enableForwardLookup;
+  private SwitchPreferenceCompat enableReverseLookup;
   private ListPreference forwardLookupProvider;
   private ListPreference reverseLookupProvider;
 
@@ -44,11 +44,14 @@ public class LookupSettingsFragment extends DialerPreferenceFragment
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getPreferenceManager().setStorageDeviceProtected();
+  }
 
+  @Override
+  public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
     addPreferencesFromResource(R.xml.lookup_settings);
 
-    enableForwardLookup = (SwitchPreference) findPreference(KEY_ENABLE_FORWARD_LOOKUP);
-    enableReverseLookup = (SwitchPreference) findPreference(KEY_ENABLE_REVERSE_LOOKUP);
+    enableForwardLookup = (SwitchPreferenceCompat) findPreference(KEY_ENABLE_FORWARD_LOOKUP);
+    enableReverseLookup = (SwitchPreferenceCompat) findPreference(KEY_ENABLE_REVERSE_LOOKUP);
 
     enableForwardLookup.setOnPreferenceChangeListener(this);
     enableReverseLookup.setOnPreferenceChangeListener(this);

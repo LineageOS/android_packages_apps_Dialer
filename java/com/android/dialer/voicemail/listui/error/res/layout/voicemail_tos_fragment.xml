@@ -82,7 +82,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/verizon_terms_and_conditions_decline_english"/>
-    <android.support.v4.widget.Space
+    <androidx.core.widget.Space
       android:layout_width="8dp"
       android:layout_height="match_parent"
       android:layout_weight="1"/>

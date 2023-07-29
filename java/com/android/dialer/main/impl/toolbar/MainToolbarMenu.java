@@ -17,11 +17,14 @@
 package com.android.dialer.main.impl.toolbar;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.dialer.R;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.SimulatorComponent;
 

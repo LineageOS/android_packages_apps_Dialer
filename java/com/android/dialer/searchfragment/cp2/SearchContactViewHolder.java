@@ -22,7 +22,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
@@ -42,11 +41,13 @@ import com.android.dialer.searchfragment.common.R;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import com.android.dialer.widget.BidiTextView;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /** ViewHolder for a contact row. */
-public final class SearchContactViewHolder extends ViewHolder implements OnClickListener {
+public final class SearchContactViewHolder extends RecyclerView.ViewHolder
+        implements OnClickListener {
 
   /** IntDef for the different types of actions that can be shown. */
   @Retention(RetentionPolicy.SOURCE)

@@ -18,16 +18,9 @@ package com.android.dialer.searchfragment.list;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -41,8 +34,13 @@ import android.widget.FrameLayout.LayoutParams;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.contacts.common.extensions.PhoneDirectoryExtender;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
@@ -53,7 +51,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
@@ -64,11 +61,11 @@ import com.android.dialer.searchfragment.directories.DirectoryContactsCursorLoad
 import com.android.dialer.searchfragment.list.SearchActionViewHolder.Action;
 import com.android.dialer.searchfragment.nearbyplaces.NearbyPlacesCursorLoader;
 import com.android.dialer.util.CallUtil;
-import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -76,7 +73,7 @@ import java.util.List;
 
 /** Fragment used for searching contacts. */
 public final class NewSearchFragment extends Fragment
-    implements LoaderCallbacks<Cursor>,
+    implements LoaderManager.LoaderCallbacks<Cursor>,
         OnEmptyViewActionButtonClickedListener,
         OnTouchListener,
         RowClickListener {
@@ -116,19 +113,19 @@ public final class NewSearchFragment extends Fragment
   private final Runnable loaderCp2ContactsRunnable =
       () -> {
         if (getHost() != null) {
-          getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
+          LoaderManager.getInstance(this).restartLoader(CONTACTS_LOADER_ID, null, this);
         }
       };
   private final Runnable loadNearbyPlacesRunnable =
       () -> {
         if (getHost() != null) {
-          getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
+          LoaderManager.getInstance(this).restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
         }
       };
   private final Runnable loadDirectoryContactsRunnable =
       () -> {
         if (getHost() != null) {
-          getLoaderManager().restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
+          LoaderManager.getInstance(this).restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
         }
       };
   private final Runnable capabilitiesUpdatedRunnable = () -> adapter.notifyDataSetChanged();
@@ -184,7 +181,7 @@ public final class NewSearchFragment extends Fragment
   }
 
   private void initLoaders() {
-    getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
+    LoaderManager.getInstance(this).initLoader(CONTACTS_LOADER_ID, null, this);
     loadDirectoriesCursor();
   }
 
@@ -365,7 +362,7 @@ public final class NewSearchFragment extends Fragment
 
   /** Loads info about all directories (local & remote). */
   private void loadDirectoriesCursor() {
-    getLoaderManager().initLoader(DIRECTORIES_LOADER_ID, null, this);
+    LoaderManager.getInstance(this).initLoader(DIRECTORIES_LOADER_ID, null, this);
   }
 
   /**
@@ -441,7 +438,7 @@ public final class NewSearchFragment extends Fragment
   @Override
   public void onResume() {
     super.onResume();
-    getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
+    LoaderManager.getInstance(this).restartLoader(CONTACTS_LOADER_ID, null, this);
   }
 
   @Override

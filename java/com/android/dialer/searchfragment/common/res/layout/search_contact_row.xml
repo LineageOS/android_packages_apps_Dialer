@@ -16,6 +16,7 @@
   -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_row_height"
@@ -62,9 +63,9 @@
       android:layout_height="@dimen/search_row_height"
       android:layout_alignParentEnd="true"
       android:padding="@dimen/call_to_action_padding"
-      android:tint="?colorIcon"
       android:visibility="gone"
-      android:scaleType="center"/>
+      android:scaleType="center"
+      app:tint="?colorIcon" />
 
   <ImageView
       android:id="@+id/work_icon"
@@ -74,7 +75,7 @@
       android:layout_centerVertical="true"
       android:padding="@dimen/call_to_action_padding"
       android:src="@drawable/ic_work_profile"
-      android:tint="?colorIcon"
       android:scaleType="centerInside"
-      android:visibility="gone"/>
+      android:visibility="gone"
+      app:tint="?colorIcon" />
 </RelativeLayout>

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.QuickContactBadge;
+
 import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
 
 /** Allows us to click the contact badge for non multi select mode. */

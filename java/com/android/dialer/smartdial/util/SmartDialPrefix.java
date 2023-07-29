@@ -18,9 +18,11 @@ package com.android.dialer.smartdial.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.preference.PreferenceManager;
+
 import com.android.dialer.smartdial.map.CompositeSmartDialMap;
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -16,9 +16,12 @@
 
 package com.android.dialer.searchfragment.list;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.dialer.R;
 
 /** ViewHolder for header rows in {@link NewSearchFragment}. */
 final class HeaderViewHolder extends RecyclerView.ViewHolder {

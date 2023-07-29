@@ -16,14 +16,14 @@
 
 package com.android.dialer.common.concurrent;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -40,7 +40,7 @@ import com.google.common.util.concurrent.ListenableFuture;
  * <p>Callbacks are only executed if the UI component is still alive.
  *
  * <p>Example usage: <code><pre>
- * public class MyActivity extends Activity {
+ * public class MyActivity extends AppCompatActivity {
  *
  *   private UiListener&lt;MyOutputType&gt uiListener;
  *

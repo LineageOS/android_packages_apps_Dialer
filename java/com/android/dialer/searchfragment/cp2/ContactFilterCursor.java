@@ -28,15 +28,16 @@ import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Nickname;
 import android.provider.ContactsContract.CommonDataKinds.Organization;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
+import androidx.collection.ArraySet;
 
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryFilteringUtil;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;

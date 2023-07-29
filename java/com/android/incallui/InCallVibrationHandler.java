@@ -21,8 +21,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.telecom.DisconnectCause;
+
+import androidx.preference.PreferenceManager;
 
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;
@@ -44,9 +45,9 @@ public class InCallVibrationHandler extends Handler implements
   private DialerCall activeCall;
 
   public InCallVibrationHandler(Context context) {
+    String name = context.getPackageName() + "_preferences";
     prefs = context.createDeviceProtectedStorageContext()
-            .getSharedPreferences(PreferenceManager.getDefaultSharedPreferencesName(context),
-                    Context.MODE_PRIVATE);
+            .getSharedPreferences(name, Context.MODE_PRIVATE);
     vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
   }
 

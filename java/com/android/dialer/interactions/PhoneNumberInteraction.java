@@ -20,14 +20,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
-import android.content.Loader.OnLoadCompleteListener;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,7 +33,6 @@ import android.provider.ContactsContract.CommonDataKinds.SipAddress;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
-import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,13 +42,18 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import com.android.contacts.common.Collapser;
 import com.android.contacts.common.Collapser.Collapsible;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.R;
-import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallIntentParser;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -64,6 +63,7 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.util.TransactionSafeActivity;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ import java.util.List;
  * <p>TODO: clean up code and documents since it is quite confusing to use "phone numbers" or "phone
  * calls" here while they can be SIP addresses or SIP calls (See also issue 5039627).
  */
-public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
+public class PhoneNumberInteraction implements Loader.OnLoadCompleteListener<Cursor> {
 
   static final String TAG = PhoneNumberInteraction.class.getSimpleName();
   /** The identifier for a permissions request if one is generated. */
@@ -351,7 +351,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
   private void showDisambiguationDialog(ArrayList<PhoneItem> phoneList) {
     // TODO(a bug): don't leak the activity
-    final Activity activity = (Activity) context;
+    final FragmentActivity activity = (FragmentActivity) context;
     if (activity.isFinishing()) {
       LogUtil.i("PhoneNumberInteraction.showDisambiguationDialog", "activity finishing");
       return;
@@ -365,7 +365,7 @@ public class PhoneNumberInteraction implements OnLoadCompleteListener<Cursor> {
 
     try {
       PhoneDisambiguationDialogFragment.show(
-          activity.getFragmentManager(),
+          activity.getSupportFragmentManager(),
           phoneList,
           interactionType,
           isVideoCall,

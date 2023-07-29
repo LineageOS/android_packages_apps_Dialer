@@ -16,7 +16,8 @@
 
 package com.android.dialer.smartdial.map;
 
-import android.support.v4.util.SimpleArrayMap;
+import androidx.collection.SimpleArrayMap;
+
 import com.google.common.base.Optional;
 
 /** Definition for utilities that supports smart dial in different languages. */

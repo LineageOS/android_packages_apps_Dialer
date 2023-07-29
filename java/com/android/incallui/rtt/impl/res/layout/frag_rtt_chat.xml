@@ -15,11 +15,12 @@
   ~ limitations under the License
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-  <android.support.v7.widget.RecyclerView
+  <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rtt_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -66,8 +67,8 @@
         android:backgroundTintMode="multiply"
         android:contentDescription="@string/content_description_rtt_check_button"
         android:src="@drawable/quantum_ic_done_vd_theme_24"
-        android:tint="@color/submit_button_color"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:tint="@color/submit_button_color" />
   </LinearLayout>
 
   <FrameLayout

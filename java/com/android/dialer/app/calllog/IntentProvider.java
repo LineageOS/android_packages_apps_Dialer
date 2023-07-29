@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
 import com.android.contacts.common.model.Contact;
 import com.android.contacts.common.model.ContactLoader;
 import com.android.dialer.app.AccountSelectionActivity;
@@ -33,6 +34,7 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
+
 import java.util.ArrayList;
 
 /**

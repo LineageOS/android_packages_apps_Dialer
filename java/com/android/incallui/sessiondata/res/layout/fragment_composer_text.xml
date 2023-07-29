@@ -23,7 +23,7 @@
     android:paddingStart="@dimen/answer_message_margin_start_end"
     android:paddingEnd="@dimen/answer_message_margin_start_end">
 
-  <android.support.v7.widget.AppCompatTextView
+  <androidx.appcompat.widget.AppCompatTextView
       android:id="@id/answer_message_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

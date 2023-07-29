@@ -17,14 +17,17 @@
 package com.android.dialer.contactsfragment;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.dialer.R;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 
 /** ViewHolder for {@link ContactsFragment} to display add contact row. */
-final class AddContactViewHolder extends ViewHolder implements OnClickListener {
+final class AddContactViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
   private final Context context;
 

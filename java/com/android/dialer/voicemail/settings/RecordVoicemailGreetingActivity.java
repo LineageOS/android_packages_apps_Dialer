@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import androidx.annotation.IntDef;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.R;
 
@@ -30,7 +31,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /** Activity for recording a new voicemail greeting */
-public class RecordVoicemailGreetingActivity extends Activity implements OnClickListener {
+public class RecordVoicemailGreetingActivity extends AppCompatActivity implements OnClickListener {
 
   /** Possible states of RecordButton and RecordVoicemailGreetingActivity */
   @Retention(RetentionPolicy.SOURCE)

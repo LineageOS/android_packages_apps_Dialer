@@ -26,14 +26,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
+
 import com.android.dialer.app.R;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.util.SettingsUtil;
@@ -70,10 +73,10 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
           updateRingtonePreferenceSummary();
         }
       };
-  private SwitchPreference vibrateWhenRinging;
-  private SwitchPreference playDtmfTone;
+  private SwitchPreferenceCompat vibrateWhenRinging;
+  private SwitchPreferenceCompat playDtmfTone;
   private ListPreference dtmfToneLength;
-  private SwitchPreference enableDndInCall;
+  private SwitchPreferenceCompat enableDndInCall;
 
   private NotificationManager notificationManager;
 
@@ -86,33 +89,36 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getPreferenceManager().setStorageDeviceProtected();
+  }
 
+  @Override
+  public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
     addPreferencesFromResource(R.xml.sound_settings);
 
     Context context = getActivity();
 
     ringtonePreference = findPreference(context.getString(R.string.ringtone_preference_key));
     vibrateWhenRinging =
-        (SwitchPreference) findPreference(context.getString(R.string.vibrate_on_preference_key));
+            (SwitchPreferenceCompat) findPreference(context.getString(R.string.vibrate_on_preference_key));
     playDtmfTone =
-        (SwitchPreference) findPreference(context.getString(R.string.play_dtmf_preference_key));
+            (SwitchPreferenceCompat) findPreference(context.getString(R.string.play_dtmf_preference_key));
     dtmfToneLength =
-        (ListPreference)
-            findPreference(context.getString(R.string.dtmf_tone_length_preference_key));
-    enableDndInCall = (SwitchPreference) findPreference("incall_enable_dnd");
+            (ListPreference)
+                    findPreference(context.getString(R.string.dtmf_tone_length_preference_key));
+    enableDndInCall = (SwitchPreferenceCompat) findPreference("incall_enable_dnd");
 
     if (hasVibrator()) {
       vibrateWhenRinging.setOnPreferenceChangeListener(this);
     } else {
       PreferenceScreen ps = getPreferenceScreen();
       Preference inCallVibrateOutgoing = findPreference(
-          context.getString(R.string.incall_vibrate_outgoing_key));
+              context.getString(R.string.incall_vibrate_outgoing_key));
       Preference inCallVibrateCallWaiting = findPreference(
-          context.getString(R.string.incall_vibrate_call_waiting_key));
+              context.getString(R.string.incall_vibrate_call_waiting_key));
       Preference inCallVibrateHangup = findPreference(
-          context.getString(R.string.incall_vibrate_hangup_key));
+              context.getString(R.string.incall_vibrate_hangup_key));
       Preference inCallVibrate45Secs = findPreference(
-          context.getString(R.string.incall_vibrate_45_key));
+              context.getString(R.string.incall_vibrate_45_key));
       ps.removePreference(vibrateWhenRinging);
       ps.removePreference(inCallVibrateOutgoing);
       ps.removePreference(inCallVibrateCallWaiting);
@@ -127,22 +133,22 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
     enableDndInCall.setOnPreferenceChangeListener(this);
 
     TelephonyManager telephonyManager =
-        (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+            (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
     if (telephonyManager.canChangeDtmfToneLength()
-        && (telephonyManager.isWorldPhone() || !shouldHideCarrierSettings())) {
+            && (telephonyManager.isWorldPhone() || !shouldHideCarrierSettings())) {
       dtmfToneLength.setOnPreferenceChangeListener(this);
       dtmfToneLength.setValueIndex(
-          Settings.System.getInt(
-              context.getContentResolver(),
-              Settings.System.DTMF_TONE_TYPE_WHEN_DIALING,
-              DTMF_TONE_TYPE_NORMAL));
+              Settings.System.getInt(
+                      context.getContentResolver(),
+                      Settings.System.DTMF_TONE_TYPE_WHEN_DIALING,
+                      DTMF_TONE_TYPE_NORMAL));
     } else {
       getPreferenceScreen().removePreference(dtmfToneLength);
       dtmfToneLength = null;
     }
     if (!CallRecorderService.isEnabled(getActivity())) {
       getPreferenceScreen().removePreference(
-          findPreference(context.getString(R.string.call_recording_category_key)));
+              findPreference(context.getString(R.string.call_recording_category_key)));
     }
     notificationManager = context.getSystemService(NotificationManager.class);
   }
@@ -223,7 +229,7 @@ public class SoundSettingsFragment extends DialerPreferenceFragment
 
   /** Click listener for toggle events. */
   @Override
-  public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+  public boolean onPreferenceTreeClick(Preference preference) {
     if (!Settings.System.canWrite(getContext())) {
       Toast.makeText(
               getContext(),

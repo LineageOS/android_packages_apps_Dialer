@@ -20,8 +20,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.FloatingActionButton.OnVisibilityChangedListener;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -31,6 +29,7 @@ import androidx.annotation.DrawableRes;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /** Controls the movement and appearance of the FAB (Floating Action Button). */
 public class FloatingActionButtonController {
@@ -164,7 +163,7 @@ public class FloatingActionButtonController {
     fab.hide();
   }
 
-  public void scaleOut(OnVisibilityChangedListener listener) {
+  public void scaleOut(FloatingActionButton.OnVisibilityChangedListener listener) {
     fab.hide(listener);
   }
 

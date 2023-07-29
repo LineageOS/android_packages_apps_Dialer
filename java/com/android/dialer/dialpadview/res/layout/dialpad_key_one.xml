@@ -47,8 +47,7 @@
           android:layout_height="@dimen/dialpad_voicemail_icon_size"
           android:scaleType="fitCenter"
           android:src="@drawable/quantum_ic_voicemail_vd_theme_24"
-          app:tint="?attr/dialpad_text_color_secondary"
-          android:tint="?attr/dialpad_text_color_secondary"/>
+          app:tint="?attr/dialpad_text_color_secondary"/>
     </LinearLayout>
   </LinearLayout>
 </com.android.dialer.dialpadview.DialpadKeyButton>

@@ -19,7 +19,6 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 

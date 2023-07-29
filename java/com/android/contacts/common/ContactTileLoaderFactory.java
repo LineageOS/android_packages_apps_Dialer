@@ -16,11 +16,12 @@
 package com.android.contacts.common;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
+
+import androidx.loader.content.CursorLoader;
 
 /**
  * Used to create {@link CursorLoader} which finds contacts information from the strequents table.
@@ -56,7 +57,6 @@ public final class ContactTileLoaderFactory {
             .buildUpon()
             .appendQueryParameter(ContactsContract.STREQUENT_PHONE_ONLY, "true")
             .build();
-
     return new CursorLoader(context, uri, COLUMNS_PHONE_ONLY, null, null, null);
   }
 }

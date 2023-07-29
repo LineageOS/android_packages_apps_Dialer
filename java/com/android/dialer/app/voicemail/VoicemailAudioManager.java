@@ -21,7 +21,9 @@ import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.telecom.CallAudioState;
+
 import com.android.dialer.common.LogUtil;
+
 import java.util.concurrent.RejectedExecutionException;
 
 /** This class manages all audio changes for voicemail playback. */

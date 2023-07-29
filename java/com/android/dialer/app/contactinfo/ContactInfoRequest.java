@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import androidx.annotation.IntDef;
 
 import com.android.dialer.phonenumbercache.ContactInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
