@@ -18,7 +18,9 @@ package com.android.incallui.incall.protocol;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.multimedia.MultimediaData;
 import com.google.auto.value.AutoValue;

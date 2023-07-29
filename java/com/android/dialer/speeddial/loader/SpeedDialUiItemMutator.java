@@ -27,10 +27,12 @@ import android.os.Trace;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;

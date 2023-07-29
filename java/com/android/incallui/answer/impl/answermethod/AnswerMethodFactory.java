@@ -17,9 +17,11 @@
 package com.android.incallui.answer.impl.answermethod;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.incallui.util.AccessibilityUtil;
 
 /** Creates the appropriate {@link AnswerMethod} for the circumstances. */

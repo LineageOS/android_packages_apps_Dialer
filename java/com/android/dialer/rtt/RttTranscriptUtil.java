@@ -19,7 +19,9 @@ package com.android.dialer.rtt;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.annotation.WorkerThread;
+
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.database.Selection;

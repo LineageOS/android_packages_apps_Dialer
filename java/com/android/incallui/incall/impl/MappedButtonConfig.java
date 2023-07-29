@@ -16,9 +16,11 @@
 
 package com.android.incallui.incall.impl;
 
-import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
 import android.util.ArraySet;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.incallui.incall.protocol.InCallButtonIds;
 import com.android.incallui.incall.protocol.InCallButtonIdsExtension;
@@ -46,7 +48,8 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 final class MappedButtonConfig {
 
-  @NonNull private final Map<Integer, MappingInfo> mapping;
+  @NonNull
+  private final Map<Integer, MappingInfo> mapping;
   @NonNull private final List<Integer> orderedMappedSlots;
 
   /**

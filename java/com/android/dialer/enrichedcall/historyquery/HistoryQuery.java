@@ -15,7 +15,8 @@
  */
 package com.android.dialer.enrichedcall.historyquery;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.LogUtil;
 import com.google.auto.value.AutoValue;
 
