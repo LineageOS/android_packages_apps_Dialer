@@ -16,7 +16,6 @@ package com.android.contacts.common.extensions;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 
 /** Accessor for the phone directory extender singleton. */
@@ -25,11 +24,6 @@ public final class PhoneDirectoryExtenderAccessor {
   private static PhoneDirectoryExtender instance;
 
   private PhoneDirectoryExtenderAccessor() {}
-
-  @VisibleForTesting
-  public static void setForTesting(PhoneDirectoryExtender extender) {
-    instance = extender;
-  }
 
   @NonNull
   public static PhoneDirectoryExtender get(@NonNull Context context) {

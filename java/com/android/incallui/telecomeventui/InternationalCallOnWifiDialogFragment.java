@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.os.UserManagerCompat;
 import android.view.View;
@@ -80,8 +79,7 @@ public class InternationalCallOnWifiDialogFragment extends DialogFragment {
    * Key to the preference used to determine if the user wants to see {@link
    * InternationalCallOnWifiDialogFragment InternationalCallOnWifiDialogFragments}.
    */
-  @VisibleForTesting
-  public static final String ALWAYS_SHOW_WARNING_PREFERENCE_KEY =
+  private static final String ALWAYS_SHOW_WARNING_PREFERENCE_KEY =
       "ALWAYS_SHOW_INTERNATIONAL_CALL_ON_WIFI_WARNING";
 
   /** Key in the arguments bundle for call id. */
