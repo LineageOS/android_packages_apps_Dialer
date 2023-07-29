@@ -47,8 +47,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.logging.DialerImpression.Type;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.preferredsim.PreferredAccountUtil;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.PreferredAccountWorker.Result.Builder;
@@ -142,10 +140,8 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
       PhoneAccountHandle preferred, List<PhoneAccountHandle> candidates, String dataId) {
     Builder resultBuilder;
     if (isSelectable(preferred)) {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_USED);
       resultBuilder = Result.builder(preferred);
     } else {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_PREFERRED_NOT_SELECTABLE);
       LogUtil.i("CallingAccountSelector.usePreferredAccount", "preferred account not selectable");
       resultBuilder = Result.builder(createDialogOptionsBuilder(candidates, dataId, null));
     }
@@ -158,10 +154,8 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
       List<PhoneAccountHandle> candidates,
       @Nullable String dataId) {
     if (isSelectable(defaultPhoneAccount)) {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_GLOBAL_USED);
       return Result.builder(defaultPhoneAccount).build();
     } else {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_GLOBAL_NOT_SELECTABLE);
       LogUtil.i("CallingAccountSelector.usePreferredAccount", "global account not selectable");
       return Result.builder(createDialogOptionsBuilder(candidates, dataId, null)).build();
     }
@@ -173,9 +167,7 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
     PhoneAccountHandle suggestedPhoneAccount = suggestion.phoneAccountHandle;
     if (isSelectable(suggestedPhoneAccount)) {
       resultBuilder = Result.builder(suggestedPhoneAccount);
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_SELECTED);
     } else {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AUTO_NOT_SELECTABLE);
       LogUtil.i("CallingAccountSelector.usePreferredAccount", "global account not selectable");
       resultBuilder = Result.builder(createDialogOptionsBuilder(candidates, dataId, suggestion));
       return resultBuilder.build();
@@ -188,22 +180,6 @@ public class PreferredAccountWorkerImpl implements PreferredAccountWorker {
       List<PhoneAccountHandle> candidates,
       @Nullable String dataId,
       @Nullable Suggestion suggestion) {
-    Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_SHOWN);
-    if (dataId != null) {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_IN_CONTACTS);
-    }
-    if (suggestion != null) {
-      Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTION_AVAILABLE);
-      switch (suggestion.reason) {
-        case INTRA_CARRIER:
-          Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTED_CARRIER);
-          break;
-        case FREQUENT:
-          Logger.get(appContext).logImpression(Type.DUAL_SIM_SELECTION_SUGGESTED_FREQUENCY);
-          break;
-        default:
-      }
-    }
     SelectPhoneAccountDialogOptions.Builder optionsBuilder =
         SelectPhoneAccountDialogOptions.newBuilder()
             .setTitle(R.string.pre_call_select_phone_account)

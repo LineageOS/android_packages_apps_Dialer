@@ -37,11 +37,6 @@ import com.android.dialer.callstats.DoubleDatePickerDialog;
 import com.android.dialer.common.Assert;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.database.CallLogQueryHandler;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
-import com.android.dialer.logging.UiAction;
-import com.android.dialer.performancereport.PerformanceReport;
-import com.android.dialer.postcall.PostCall;
 import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.util.ViewUtil;
 
@@ -106,16 +101,8 @@ public class CallLogActivity extends TransactionSafeActivity implements
 
   @Override
   protected void onResume() {
-    // Some calls may not be recorded (eg. from quick contact),
-    // so we should restart recording after these calls. (Recorded call is stopped)
-    PostCall.restartPerformanceRecordingIfARecentCallExist(this);
-    if (!PerformanceReport.isRecording()) {
-      PerformanceReport.startRecording();
-    }
-
     isResumed = true;
     super.onResume();
-    sendScreenViewForChildFragment();
   }
 
   @Override
@@ -159,7 +146,6 @@ public class CallLogActivity extends TransactionSafeActivity implements
     }
 
     if (item.getItemId() == android.R.id.home) {
-      PerformanceReport.recordClick(UiAction.Type.CLOSE_CALL_HISTORY_WITH_CANCEL_BUTTON);
       final Intent intent = new Intent("com.android.dialer.main.impl.MAIN");
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(intent);
@@ -180,9 +166,6 @@ public class CallLogActivity extends TransactionSafeActivity implements
   public void onPageSelected(int position) {
     updateMissedCalls(position);
     selectedPageIndex = position;
-    if (isResumed) {
-      sendScreenViewForChildFragment();
-    }
     viewPagerTabs.onPageSelected(position);
   }
 
@@ -198,10 +181,6 @@ public class CallLogActivity extends TransactionSafeActivity implements
         statsFragment.onDateSet(from, to);
         break;
     }
-  }
-
-  private void sendScreenViewForChildFragment() {
-    Logger.get(this).logScreenView(ScreenEvent.Type.CALL_LOG_FILTER, this);
   }
 
   private int getRtlPosition(int position) {
@@ -235,7 +214,6 @@ public class CallLogActivity extends TransactionSafeActivity implements
 
   @Override
   public void onBackPressed() {
-    PerformanceReport.recordClick(UiAction.Type.PRESS_ANDROID_BACK_BUTTON);
     super.onBackPressed();
   }
 

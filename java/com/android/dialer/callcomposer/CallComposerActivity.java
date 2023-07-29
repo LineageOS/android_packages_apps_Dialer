@@ -70,8 +70,6 @@ import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.enrichedcall.Session.State;
 import com.android.dialer.enrichedcall.extensions.StateExtension;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.protos.ProtoParsers;
@@ -377,10 +375,6 @@ public class CallComposerActivity extends AppCompatActivity
       sendAndCallReady = true;
       showLoadingUi();
       LogUtil.i("CallComposerActivity.onClick", "sendAndCall pressed, but the session isn't ready");
-      Logger.get(this)
-          .logImpression(
-              DialerImpression.Type
-                  .CALL_COMPOSER_ACTIVITY_SEND_AND_CALL_PRESSED_WHEN_SESSION_NOT_READY);
       return;
     }
     sendAndCall.setEnabled(false);
@@ -436,7 +430,6 @@ public class CallComposerActivity extends AppCompatActivity
   public void placeRCSCall(MultimediaData.Builder builder) {
     MultimediaData data = builder.build();
     LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call, data: " + data);
-    Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
 
     getEnrichedCallManager().sendCallComposerData(sessionId, data);
     maybeShowPrivacyToast(data);

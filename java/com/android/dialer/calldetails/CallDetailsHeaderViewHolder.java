@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.android.dialer.R;
 import com.android.dialer.app.AccountSelectionActivity;
 import com.android.dialer.calldetails.CallDetailsActivityCommon.AssistedDialingNumberParseWorker;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
@@ -42,8 +44,6 @@ import com.android.dialer.compat.telephony.TelephonyManagerCompat;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerComponent;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.widget.BidiTextView;
@@ -96,10 +96,6 @@ public class CallDetailsHeaderViewHolder extends RecyclerView.ViewHolder
     this.number = number;
     this.postDialDigits = postDialDigits;
     this.callDetailsHeaderListener = callDetailsHeaderListener;
-
-    Logger.get(context)
-        .logQuickContactOnTouch(
-            contactPhoto, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CALL_DETAILS, true);
   }
 
   private boolean hasAssistedDialingFeature(Integer features) {
