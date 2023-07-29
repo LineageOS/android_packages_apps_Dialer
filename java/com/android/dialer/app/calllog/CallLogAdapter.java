@@ -29,10 +29,6 @@ import android.os.Trace;
 import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -51,9 +47,13 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.contacts.common.ContactsUtils;
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogGroupBuilder.GroupCreator;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
@@ -80,6 +80,7 @@ import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
@@ -611,7 +612,7 @@ public class CallLogAdapter extends GroupingListAdapter
    * @param parent the parent view.
    * @return The {@link ViewHolder}.
    */
-  private ViewHolder createCallLogEntryViewHolder(ViewGroup parent) {
+  private RecyclerView.ViewHolder createCallLogEntryViewHolder(ViewGroup parent) {
     LayoutInflater inflater = LayoutInflater.from(activity);
     View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
     CallLogListItemViewHolder viewHolder =

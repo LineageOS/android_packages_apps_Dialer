@@ -38,6 +38,7 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.MathUtil;
 import com.android.dialer.util.DialerUtils;
 import com.android.incallui.answer.impl.utils.Interpolators;
+import com.google.android.material.navigation.NavigationBarItemView;
 
 /** Navigation item in a bottom nav. */
 final class BottomNavItem extends LinearLayout {

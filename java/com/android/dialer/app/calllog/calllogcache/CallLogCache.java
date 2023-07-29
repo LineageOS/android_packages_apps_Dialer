@@ -27,7 +27,9 @@ import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.calllogutils.PhoneAccountUtils;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.CallUtil;
+
 import java.util.Map;
+
 import javax.annotation.concurrent.ThreadSafe;
 
 /**

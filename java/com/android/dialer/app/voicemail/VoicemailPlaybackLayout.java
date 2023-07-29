@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,10 +32,13 @@ import android.widget.TextView;
 import com.android.dialer.R;
 import com.android.dialer.app.calllog.CallLogAsyncTaskUtil;
 import com.android.dialer.app.calllog.CallLogListItemViewHolder;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;

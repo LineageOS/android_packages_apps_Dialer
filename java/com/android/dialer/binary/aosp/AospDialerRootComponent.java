@@ -33,8 +33,10 @@ import com.android.dialer.simulator.impl.SimulatorModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.theme.base.impl.AospThemeModule;
 import com.android.voicemail.impl.VoicemailModule;
-import dagger.Component;
+
 import javax.inject.Singleton;
+
+import dagger.Component;
 
 /** Root component for the AOSP Dialer application. */
 @Singleton

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
-import android.support.v4.view.ViewCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
@@ -34,6 +33,7 @@ import android.widget.TextView;
 import android.widget.ViewAnimator;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -45,6 +45,7 @@ import com.android.dialer.widget.BidiTextView;
 import com.android.incallui.incall.protocol.ContactPhotoType;
 import com.android.incallui.incall.protocol.PrimaryCallState;
 import com.android.incallui.incall.protocol.PrimaryInfo;
+
 import java.util.List;
 
 /** Utility to manage the Contact grid */

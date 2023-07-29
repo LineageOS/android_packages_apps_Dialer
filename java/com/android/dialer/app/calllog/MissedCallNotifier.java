@@ -29,8 +29,6 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.service.notification.StatusBarNotification;
-import android.support.v4.os.UserManagerCompat;
-import android.support.v4.util.Pair;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -43,6 +41,8 @@ import android.util.ArraySet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.os.UserManagerCompat;
+import androidx.core.util.Pair;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.app.MainComponent;
@@ -64,6 +64,7 @@ import com.android.dialer.precall.PreCall;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;

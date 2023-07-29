@@ -18,6 +18,7 @@ package com.android.dialer.app.calllog;
 
 import android.view.View;
 import android.widget.TextView;
+
 import com.android.dialer.app.R;
 import com.android.dialer.calllogutils.CallTypeIconsView;
 import com.android.dialer.widget.BidiTextView;

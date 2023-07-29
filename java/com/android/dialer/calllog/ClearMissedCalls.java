@@ -21,7 +21,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
-import android.support.v4.os.UserManagerCompat;
+
+import androidx.core.os.UserManagerCompat;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.Ui;

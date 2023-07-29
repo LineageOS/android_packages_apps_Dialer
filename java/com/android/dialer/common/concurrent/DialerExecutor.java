@@ -53,7 +53,7 @@ import java.util.concurrent.ExecutorService;
  *
  * <pre><code>
  *
- * public class MyActivity extends Activity {
+ * public class MyActivity extends AppCompatActivity {
  *
  *   private final DialerExecutor&lt;MyInputType&gt; myExecutor;
  *

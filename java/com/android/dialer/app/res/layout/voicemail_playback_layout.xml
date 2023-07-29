@@ -16,6 +16,7 @@
 
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_marginStart="64dp"
@@ -80,7 +81,7 @@
       style="@style/VoicemailPlaybackLayoutButtonStyle"
       android:contentDescription="@string/description_playback_speakerphone"
       android:src="@drawable/quantum_ic_volume_down_vd_theme_24"
-      android:tint="?colorIcon"/>
+      app:tint="?colorIcon"/>
 
     <Space
       android:layout_width="0dp"
@@ -103,7 +104,7 @@
       style="@style/VoicemailPlaybackLayoutButtonStyle"
       android:contentDescription="@string/call_log_trash_voicemail"
       android:src="@drawable/quantum_ic_delete_vd_theme_24"
-      android:tint="?colorIcon"/>
+      app:tint="?colorIcon"/>
 
     <Space
       android:layout_width="0dp"

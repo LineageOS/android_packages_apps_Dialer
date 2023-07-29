@@ -21,6 +21,7 @@ import android.os.AsyncTask;
 import androidx.annotation.MainThread;
 
 import com.android.dialer.common.Assert;
+
 import java.util.concurrent.Executor;
 
 /**

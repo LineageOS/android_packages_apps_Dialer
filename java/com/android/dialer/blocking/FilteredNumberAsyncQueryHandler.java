@@ -23,7 +23,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BlockedNumberContract;
 import android.provider.BlockedNumberContract.BlockedNumbers;
-import android.support.v4.os.UserManagerCompat;
 
 import java.util.Objects;
 
