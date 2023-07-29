@@ -18,21 +18,13 @@ package com.android.dialer.contactsfragment;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v13.app.FragmentCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Recycler;
-import android.support.v7.widget.RecyclerView.State;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnScrollChangeListener;
@@ -41,7 +33,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -58,7 +56,7 @@ import java.util.Arrays;
 
 /** Fragment containing a list of all contacts. */
 public class ContactsFragment extends Fragment
-    implements LoaderCallbacks<Cursor>,
+    implements LoaderManager.LoaderCallbacks<Cursor>,
         OnScrollChangeListener,
         OnEmptyViewActionButtonClickedListener {
 
@@ -190,7 +188,7 @@ public class ContactsFragment extends Fragment
     manager =
         new LinearLayoutManager(getContext()) {
           @Override
-          public void onLayoutChildren(Recycler recycler, State state) {
+          public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
             super.onLayoutChildren(recycler, state);
             int itemsShown = findLastVisibleItemPosition() - findFirstVisibleItemPosition() + 1;
             if (adapter.getItemCount() > itemsShown) {
@@ -225,7 +223,7 @@ public class ContactsFragment extends Fragment
     if (getActivity() != null
         && isAdded()
         && PermissionsUtil.hasContactsReadPermissions(getContext())) {
-      getLoaderManager().restartLoader(0, null, this);
+      LoaderManager.getInstance(this).restartLoader(0, null, this);
     }
   }
 
@@ -239,7 +237,7 @@ public class ContactsFragment extends Fragment
 
   public void updateQuery(String query) {
     this.query = query;
-    getLoaderManager().restartLoader(0, null, this);
+    LoaderManager.getInstance(this).restartLoader(0, null, this);
   }
 
   @Override
@@ -329,8 +327,7 @@ public class ContactsFragment extends Fragment
         LogUtil.i(
             "ContactsFragment.onEmptyViewActionButtonClicked",
             "Requesting permissions: " + Arrays.toString(deniedPermissions));
-        FragmentCompat.requestPermissions(
-            this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+        requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
       }
 
     } else if (emptyContentView.getActionLabel()
@@ -365,7 +362,7 @@ public class ContactsFragment extends Fragment
   }
 
   private void loadContacts() {
-    getLoaderManager().initLoader(0, null, this);
+    LoaderManager.getInstance(this).initLoader(0, null, this);
     recyclerView.setVisibility(View.VISIBLE);
     emptyContentView.setVisibility(View.GONE);
   }

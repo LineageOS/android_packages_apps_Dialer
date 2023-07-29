@@ -27,7 +27,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
-import android.support.v4.os.UserManagerCompat;
+import androidx.core.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 

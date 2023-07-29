@@ -28,12 +28,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.util.Pair;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v7.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
@@ -50,7 +45,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.util.Pair;
 import androidx.annotation.NonNull;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.viewpager.widget.ViewPager;
 
 import com.android.dialer.R;
 import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
@@ -97,7 +98,7 @@ import java.io.File;
  */
 public class CallComposerActivity extends AppCompatActivity
     implements OnClickListener,
-        OnPageChangeListener,
+        ViewPager.OnPageChangeListener,
         CallComposerListener,
         EnrichedCallManager.StateChangedListener {
 
@@ -227,7 +228,7 @@ public class CallComposerActivity extends AppCompatActivity
         DialerExecutorComponent.get(getApplicationContext())
             .dialerExecutorFactory()
             .createUiTaskBuilder(
-                getFragmentManager(),
+                getSupportFragmentManager(),
                 "copyAndResizeImageToSend",
                 new CopyAndResizeImageWorker(this.getApplicationContext()))
             .onSuccess(this::onCopyAndResizeImageSuccess)

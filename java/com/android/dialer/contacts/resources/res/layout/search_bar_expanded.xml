@@ -15,6 +15,7 @@
 -->
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/search_box_expanded"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -29,7 +30,7 @@
     android:background="?attr/selectableItemBackgroundBorderless"
     android:contentDescription="@string/action_menu_back_from_search"
     android:src="@drawable/back_arrow"
-    android:tint="?colorTextOnUnthemedDarkBackground"/>
+    app:tint="?colorTextOnUnthemedDarkBackground" />
 
   <EditText
     android:id="@+id/search_view"
@@ -60,5 +61,5 @@
     android:clickable="true"
     android:contentDescription="@string/description_clear_search"
     android:src="@drawable/quantum_ic_close_vd_theme_24"
-    android:tint="?colorIcon"/>
+    app:tint="?colorIcon" />
 </RelativeLayout>

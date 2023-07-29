@@ -21,17 +21,19 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 
 /**
  * This is the view class for incall paginator visible when a user has EC data attached to their
  * call. It contains animation methods when the swipe gesture is performed.
  */
-public class InCallPaginator extends View implements OnPageChangeListener {
+public class InCallPaginator extends View implements ViewPager.OnPageChangeListener {
 
   private int dotRadius;
   private int dotsSeparation;

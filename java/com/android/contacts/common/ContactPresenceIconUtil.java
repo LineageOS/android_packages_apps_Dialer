@@ -19,7 +19,7 @@ package com.android.contacts.common;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract.StatusUpdates;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 /** Define the contact present show policy in Contacts */
 public class ContactPresenceIconUtil {

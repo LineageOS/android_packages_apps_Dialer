@@ -22,12 +22,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.UiListener;
+import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.function.Consumer;
 import com.android.dialer.precall.PreCallAction;
@@ -58,7 +59,7 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
   private PendingAction pendingAction;
   private boolean aborted = false;
 
-  private UiListener<Object> uiListener;
+  private SupportUiListener<Object> uiListener;
 
   PreCallCoordinatorImpl(@NonNull Activity activity) {
     this.activity = Assert.isNotNull(activity);
@@ -74,7 +75,8 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
     }
     uiListener =
         DialerExecutorComponent.get(activity)
-            .createUiListener(activity.getFragmentManager(), "PreCallCoordinatorImpl.uiListener");
+            .createUiListener(((FragmentActivity)activity).getSupportFragmentManager(),
+                    "PreCallCoordinatorImpl.uiListener");
   }
 
   void onRestoreInstanceState(Bundle savedInstanceState) {

@@ -18,13 +18,13 @@ package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.telecom.Connection;
 import android.telecom.Connection.RttModifyStatus;
 import android.telecom.DisconnectCause;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;

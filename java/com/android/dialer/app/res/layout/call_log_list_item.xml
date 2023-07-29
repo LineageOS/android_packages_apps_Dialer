@@ -15,7 +15,8 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/call_log_list_item"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/call_log_list_item"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical">
@@ -33,7 +34,7 @@
     android:paddingBottom="@dimen/call_log_day_group_padding_bottom"
     style="@style/Dialer.TextAppearance.OVERLINE.Ellipsize"/>
 
-  <android.support.v7.widget.CardView
+  <androidx.cardview.widget.CardView
     android:id="@+id/call_log_row"
     style="@style/CallLogCardStyle">
 
@@ -177,8 +178,8 @@
           android:layout_gravity="center_vertical"
           android:background="?android:attr/selectableItemBackgroundBorderless"
           android:scaleType="center"
-          android:tint="?colorIcon"
-          android:visibility="gone"/>
+          android:visibility="gone"
+          app:tint="?colorIcon" />
 
       </LinearLayout>
 
@@ -193,6 +194,6 @@
 
     </LinearLayout>
 
-  </android.support.v7.widget.CardView>
+  </androidx.cardview.widget.CardView>
 
 </LinearLayout>

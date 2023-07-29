@@ -16,9 +16,10 @@
 
 package com.android.dialer.callcomposer;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.android.dialer.common.Assert;
 
 /** ViewPager adapter for call compose UI. */

@@ -16,7 +16,8 @@
 
 package com.android.incallui.answer.protocol;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import java.util.List;
 
 /** Interface for the answer module. */

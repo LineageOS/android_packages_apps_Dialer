@@ -25,7 +25,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.CallLog.Calls;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;

@@ -18,16 +18,11 @@ package com.android.dialer.searchfragment.list;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -41,6 +36,11 @@ import android.widget.FrameLayout.LayoutParams;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.R;
@@ -78,7 +78,7 @@ import java.util.List;
 
 /** Fragment used for searching contacts. */
 public final class NewSearchFragment extends Fragment
-    implements LoaderCallbacks<Cursor>,
+    implements LoaderManager.LoaderCallbacks<Cursor>,
         OnEmptyViewActionButtonClickedListener,
         CapabilitiesListener,
         OnTouchListener,
@@ -122,19 +122,19 @@ public final class NewSearchFragment extends Fragment
   private final Runnable loaderCp2ContactsRunnable =
       () -> {
         if (getHost() != null) {
-          getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
+          LoaderManager.getInstance(this).restartLoader(CONTACTS_LOADER_ID, null, this);
         }
       };
   private final Runnable loadNearbyPlacesRunnable =
       () -> {
         if (getHost() != null) {
-          getLoaderManager().restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
+          LoaderManager.getInstance(this).restartLoader(NEARBY_PLACES_LOADER_ID, null, this);
         }
       };
   private final Runnable loadDirectoryContactsRunnable =
       () -> {
         if (getHost() != null) {
-          getLoaderManager().restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
+          LoaderManager.getInstance(this).restartLoader(DIRECTORY_CONTACTS_LOADER_ID, null, this);
         }
       };
   private final Runnable capabilitiesUpdatedRunnable = () -> adapter.notifyDataSetChanged();
@@ -190,7 +190,7 @@ public final class NewSearchFragment extends Fragment
   }
 
   private void initLoaders() {
-    getLoaderManager().initLoader(CONTACTS_LOADER_ID, null, this);
+    LoaderManager.getInstance(this).initLoader(CONTACTS_LOADER_ID, null, this);
     loadDirectoriesCursor();
   }
 
@@ -370,7 +370,7 @@ public final class NewSearchFragment extends Fragment
 
   /** Loads info about all directories (local & remote). */
   private void loadDirectoriesCursor() {
-    getLoaderManager().initLoader(DIRECTORIES_LOADER_ID, null, this);
+    LoaderManager.getInstance(this).initLoader(DIRECTORIES_LOADER_ID, null, this);
   }
 
   /**
@@ -449,7 +449,7 @@ public final class NewSearchFragment extends Fragment
     EnrichedCallComponent.get(getContext())
         .getEnrichedCallManager()
         .registerCapabilitiesListener(this);
-    getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
+    LoaderManager.getInstance(this).restartLoader(CONTACTS_LOADER_ID, null, this);
   }
 
   @Override

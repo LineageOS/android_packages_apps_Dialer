@@ -25,7 +25,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.v4.os.UserManagerCompat;
+import androidx.core.os.UserManagerCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 

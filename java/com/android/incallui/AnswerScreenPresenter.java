@@ -18,7 +18,7 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.v4.os.UserManagerCompat;
+import androidx.core.os.UserManagerCompat;
 import android.telecom.VideoProfile;
 
 import androidx.annotation.FloatRange;

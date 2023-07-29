@@ -19,7 +19,6 @@ package com.android.dialer.callstats;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -27,8 +26,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.dialer.R;
-import com.android.dialer.app.DialtactsActivity;
 import com.android.dialer.app.contactinfo.ContactInfoCache;
 import com.android.dialer.app.contactinfo.NumberWithCountryIso;
 import com.android.dialer.clipboard.ClipboardUtils;

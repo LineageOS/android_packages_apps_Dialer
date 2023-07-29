@@ -21,7 +21,6 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v4.content.ContextCompat;
 import android.telecom.PhoneAccount;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;

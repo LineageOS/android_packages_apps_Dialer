@@ -17,9 +17,6 @@
 package com.android.dialer.main.impl;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,12 +29,6 @@ import android.os.Handler;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.VoicemailContract;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
@@ -52,6 +43,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.contacts.common.list.OnPhoneNumberPickerActionListener;
 import com.android.dialer.R;
@@ -76,7 +73,7 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.common.concurrent.UiListener;
+import com.android.dialer.common.concurrent.SupportUiListener;
 import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactsfragment.ContactsFragment;
 import com.android.dialer.contactsfragment.ContactsFragment.Header;
@@ -114,6 +111,9 @@ import com.android.dialer.util.TransactionSafeActivity;
 import com.android.dialer.voicemailstatus.VisualVoicemailEnabledChecker;
 import com.android.dialer.voicemailstatus.VoicemailStatusHelper;
 import com.android.voicemail.VoicemailComponent;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.common.util.concurrent.ListenableFuture;
 import java.util.Locale;
 import java.util.Optional;
@@ -171,8 +171,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private MainBottomNavBarBottomNavTabListener bottomNavTabListener;
   private View snackbarContainer;
   private MissedCallCountObserver missedCallCountObserver;
-  private UiListener<String> getLastOutgoingCallListener;
-  private UiListener<Integer> missedCallObserverUiListener;
+  private SupportUiListener<String> getLastOutgoingCallListener;
+  private SupportUiListener<Integer> missedCallObserverUiListener;
   private View bottomSheet;
 
   public static Intent getShowTabIntent(Context context, @TabIndex int tabIndex) {
@@ -225,10 +225,10 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
   private void initUiListeners() {
     getLastOutgoingCallListener =
         DialerExecutorComponent.get(activity)
-            .createUiListener(activity.getFragmentManager(), "Query last phone number");
+            .createUiListener(activity.getSupportFragmentManager(), "Query last phone number");
     missedCallObserverUiListener =
         DialerExecutorComponent.get(activity)
-            .createUiListener(activity.getFragmentManager(), "Missed call observer");
+            .createUiListener(activity.getSupportFragmentManager(), "Missed call observer");
   }
 
   private void initLayout(Bundle savedInstanceState) {
@@ -258,7 +258,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     bottomNavTabListener =
         new MainBottomNavBarBottomNavTabListener(
             activity,
-            activity.getFragmentManager(),
+            activity.getSupportFragmentManager(),
             activity.getSupportFragmentManager(),
             fab,
             bottomSheet);
@@ -660,10 +660,11 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     private final MainSearchController searchController;
     private final Context context;
-    private final UiListener<String> listener;
+    private final SupportUiListener<String> listener;
 
     MainDialpadListener(
-        Context context, MainSearchController searchController, UiListener<String> uiListener) {
+        Context context, MainSearchController searchController,
+        SupportUiListener<String> uiListener) {
       this.context = context;
       this.searchController = searchController;
       this.listener = uiListener;
@@ -1198,7 +1199,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
     private final TransactionSafeActivity activity;
     private final FragmentManager fragmentManager;
-    private final android.support.v4.app.FragmentManager supportFragmentManager;
+    private final FragmentManager supportFragmentManager;
     private final FloatingActionButton fab;
     private final View bottomSheet;
 
@@ -1207,7 +1208,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     private MainBottomNavBarBottomNavTabListener(
         TransactionSafeActivity activity,
         FragmentManager fragmentManager,
-        android.support.v4.app.FragmentManager supportFragmentManager,
+        FragmentManager supportFragmentManager,
         FloatingActionButton fab,
         View bottomSheet) {
       this.activity = activity;
@@ -1225,7 +1226,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
       }
       selectedTab = TabIndex.SPEED_DIAL;
 
-      android.support.v4.app.Fragment supportFragment =
+      Fragment supportFragment =
           supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
       showSupportFragment(
           supportFragment == null ? SpeedDialFragment.newInstance() : supportFragment,
@@ -1328,7 +1329,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
      */
     private void showFragment(
         @Nullable Fragment fragment,
-        @Nullable android.support.v4.app.Fragment supportFragment,
+        @Nullable Fragment supportFragment,
         String tag) {
       LogUtil.enterBlock("MainBottomNavBarBottomNavTabListener.showFragment");
       Fragment oldSpeedDial = fragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
@@ -1353,14 +1354,14 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
 
       // Handle support fragments.
       // TODO(calderwoodra): Handle other new fragments.
-      android.support.v4.app.Fragment speedDial =
+      Fragment speedDial =
           supportFragmentManager.findFragmentByTag(SPEED_DIAL_TAG);
-      android.support.v4.app.Fragment newCallLog =
+      Fragment newCallLog =
           supportFragmentManager.findFragmentByTag(CALL_LOG_TAG);
-      android.support.v4.app.Fragment newVoicemail =
+      Fragment newVoicemail =
           supportFragmentManager.findFragmentByTag(VOICEMAIL_TAG);
 
-      android.support.v4.app.FragmentTransaction supportTransaction =
+      FragmentTransaction supportTransaction =
           supportFragmentManager.beginTransaction();
       boolean supportFragmentShown =
           showIfEqualElseHideSupport(supportTransaction, supportFragment, speedDial);
@@ -1381,7 +1382,7 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
     }
 
     private void showSupportFragment(
-        @NonNull android.support.v4.app.Fragment supportFragment, String tag) {
+            @NonNull Fragment supportFragment, String tag) {
       showFragment(null, supportFragment, tag);
     }
 
@@ -1412,9 +1413,9 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
      * @return {@code true} if {@code fragment1} was shown
      */
     private boolean showIfEqualElseHideSupport(
-        android.support.v4.app.FragmentTransaction supportTransaction,
-        android.support.v4.app.Fragment supportFragment1,
-        android.support.v4.app.Fragment supportFragment2) {
+        FragmentTransaction supportTransaction,
+        Fragment supportFragment1,
+        Fragment supportFragment2) {
       boolean shown = false;
       if (supportFragment1 != null && supportFragment1.equals(supportFragment2)) {
         supportTransaction.show(supportFragment1);

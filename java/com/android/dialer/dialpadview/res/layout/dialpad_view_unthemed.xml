@@ -14,6 +14,7 @@
      limitations under the License.
 -->
 <com.android.dialer.dialpadview.DialpadView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialpad_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -81,9 +82,9 @@
         android:contentDescription="@string/description_dialpad_back"
         android:gravity="center"
         android:src="@drawable/quantum_ic_close_vd_theme_24"
-        android:tint="@*android:color/system_accent1_400"
         android:tintMode="src_in"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:tint="@*android:color/system_accent1_400" />
 
     <ImageButton
         android:id="@+id/dialpad_overflow"
@@ -96,9 +97,9 @@
         android:contentDescription="@string/description_dialpad_overflow"
         android:gravity="center"
         android:src="@drawable/quantum_ic_more_vert_vd_theme_24"
-        android:tint="@*android:color/system_accent1_400"
         android:tintMode="src_in"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:tint="@*android:color/system_accent1_400" />
       <FrameLayout android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1">
@@ -142,8 +143,8 @@
         android:contentDescription="@string/description_delete_button"
         android:src="@drawable/quantum_ic_backspace_vd_theme_24"
         android:state_enabled="false"
-        android:tint="@*android:color/system_accent1_400"
-        android:tintMode="src_in"/>
+        android:tintMode="src_in"
+        app:tint="@*android:color/system_accent1_400" />
   </LinearLayout>
 
   <View

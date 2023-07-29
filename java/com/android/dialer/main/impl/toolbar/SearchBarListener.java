@@ -17,8 +17,9 @@
 package com.android.dialer.main.impl.toolbar;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /** Useful callback for {@link SearchBarView} listeners. */
 public interface SearchBarListener {

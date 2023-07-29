@@ -17,9 +17,10 @@
 package com.android.dialer.app.list;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /** Class that handles enabling/disabling swiping between @{ViewPagerTabs}. */
 public class DialerViewPager extends ViewPager {

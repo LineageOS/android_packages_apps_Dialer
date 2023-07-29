@@ -20,6 +20,7 @@
          This is required since drag and drop event is only sent to views are visible when drag
          starts. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/favorite_remove_view"
     android:layout_width="match_parent"
     android:layout_height="@dimen/expanded_search_bar_height"
@@ -37,7 +38,7 @@
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
       android:src="@drawable/quantum_ic_close_vd_theme_24"
-      android:tint="?colorIconOnUnthemedDarkBackground"/>
+      app:tint="?colorIconOnUnthemedDarkBackground" />
 
   <TextView
       android:id="@+id/remove_view_text"

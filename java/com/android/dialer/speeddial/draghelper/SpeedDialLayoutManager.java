@@ -17,7 +17,8 @@
 package com.android.dialer.speeddial.draghelper;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 
 /** {@link GridLayoutManager} that allows disabling scrolling. */
 public class SpeedDialLayoutManager extends GridLayoutManager {

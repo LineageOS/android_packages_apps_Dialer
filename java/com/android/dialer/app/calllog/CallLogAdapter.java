@@ -28,10 +28,6 @@ import android.os.Bundle;
 import android.os.Trace;
 import android.provider.CallLog;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -50,6 +46,10 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.app.R;
@@ -653,7 +653,7 @@ public class CallLogAdapter extends GroupingListAdapter
    * @param parent the parent view.
    * @return The {@link ViewHolder}.
    */
-  private ViewHolder createCallLogEntryViewHolder(ViewGroup parent) {
+  private RecyclerView.ViewHolder createCallLogEntryViewHolder(ViewGroup parent) {
     LayoutInflater inflater = LayoutInflater.from(activity);
     View view = inflater.inflate(R.layout.call_log_list_item, parent, false);
     CallLogListItemViewHolder viewHolder =

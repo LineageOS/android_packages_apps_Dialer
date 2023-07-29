@@ -16,10 +16,10 @@
 
 package com.android.incallui.incall.impl;
 
-import android.support.v4.util.ArrayMap;
 import android.util.ArraySet;
 
 import androidx.annotation.NonNull;
+import androidx.collection.ArrayMap;
 
 import com.android.dialer.common.Assert;
 import com.android.incallui.incall.protocol.InCallButtonIds;

@@ -20,18 +20,20 @@ import static android.Manifest.permission.READ_CONTACTS;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Fragment;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Trace;
-import android.support.v13.app.FragmentCompat;
-import android.support.v4.util.LongSparseArray;
+
+import androidx.core.app.ActivityCompat;
+import androidx.collection.LongSparseArray;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +65,7 @@ public class OldSpeedDialFragment extends Fragment
     implements OnItemClickListener,
         PhoneFavoritesTileAdapter.OnDataSetChangedForAnimationListener,
         EmptyContentView.OnEmptyViewActionButtonClickedListener,
-        FragmentCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback {
 
   private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
 
@@ -114,11 +116,12 @@ public class OldSpeedDialFragment extends Fragment
     Trace.beginSection(TAG + " onResume");
     super.onResume();
     if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
-      if (getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE) == null) {
-        getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
-
+      Loader loader = LoaderManager.getInstance(this).getLoader(LOADER_ID_CONTACT_TILE);
+      if (loader == null) {
+        LoaderManager.getInstance(this).initLoader(LOADER_ID_CONTACT_TILE, null,
+                contactTileLoaderListener);
       } else {
-        getLoaderManager().getLoader(LOADER_ID_CONTACT_TILE).forceLoad();
+        loader.forceLoad();
       }
 
       emptyView.setDescription(R.string.speed_dial_empty);
@@ -204,7 +207,7 @@ public class OldSpeedDialFragment extends Fragment
     // This method call implicitly assures ContactTileLoaderListener's onLoadFinished() will
     // be called, on which we'll check if "all" contacts should be reloaded again or not.
     if (PermissionsUtil.hasContactsReadPermissions(getContext())) {
-      getLoaderManager().initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
+      LoaderManager.getInstance(this).initLoader(LOADER_ID_CONTACT_TILE, null, contactTileLoaderListener);
     } else {
       setEmptyViewVisibility(true);
     }
@@ -353,8 +356,7 @@ public class OldSpeedDialFragment extends Fragment
       LogUtil.i(
           "OldSpeedDialFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      FragmentCompat.requestPermissions(
-          this, deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
+      requestPermissions(deniedPermissions, READ_CONTACTS_PERMISSION_REQUEST_CODE);
     } else {
       // Switch tabs
       FragmentUtils.getParentUnsafe(this, HostInterface.class).showAllContactsTab();

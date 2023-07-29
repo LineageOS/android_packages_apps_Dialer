@@ -18,10 +18,12 @@ package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.view.ActionProvider;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity;
 import com.android.dialer.simulator.Simulator;

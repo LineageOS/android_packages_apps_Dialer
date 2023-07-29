@@ -26,9 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,8 +34,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.loader.content.Loader;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
@@ -51,7 +51,7 @@ import java.util.List;
 
 /** Fragment used to compose call with image from the user's gallery. */
 public class GalleryComposerFragment extends CallComposerFragment
-    implements LoaderCallbacks<Cursor>, OnClickListener {
+    implements LoaderManager.LoaderCallbacks<Cursor>, OnClickListener {
 
   private static final String SELECTED_DATA_KEY = "selected_data";
   private static final String IS_COPY_KEY = "is_copy";
@@ -115,7 +115,7 @@ public class GalleryComposerFragment extends CallComposerFragment
         DialerExecutorComponent.get(getContext())
             .dialerExecutorFactory()
             .createUiTaskBuilder(
-                getActivity().getFragmentManager(),
+                getActivity().getSupportFragmentManager(),
                 "copyAndResizeImage",
                 new CopyAndResizeImageWorker(getActivity().getApplicationContext()))
             .onSuccess(
@@ -137,7 +137,8 @@ public class GalleryComposerFragment extends CallComposerFragment
   private void setupGallery() {
     adapter = new GalleryGridAdapter(getContext(), null, this);
     galleryGridView.setAdapter(adapter);
-    getLoaderManager().initLoader(0 /* id */, null /* args */, this /* loaderCallbacks */);
+    LoaderManager.getInstance(this).initLoader(0 /* id */, null /* args */,
+            this /* loaderCallbacks */);
   }
 
   @Override

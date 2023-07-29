@@ -16,6 +16,7 @@
  -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/click_target"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -34,8 +35,8 @@
       android:layout_width="@dimen/photo_size"
       android:layout_height="@dimen/photo_size"
       android:src="@drawable/quantum_ic_person_add_vd_theme_24"
-      android:tint="?android:attr/colorPrimary"
-      android:scaleType="center"/>
+      android:scaleType="center"
+      app:tint="?android:attr/colorPrimary" />
 
   <TextView
       android:id="@+id/contact_name"

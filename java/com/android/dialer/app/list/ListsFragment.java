@@ -16,9 +16,8 @@
 
 package com.android.dialer.app.list;
 
-import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
+import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_SETTLING;
 
-import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -27,10 +26,13 @@ import android.os.Handler;
 import android.os.Trace;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
+
 import com.android.contacts.common.list.ViewPagerTabs;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogFragment;
@@ -53,7 +55,7 @@ import java.util.ArrayList;
  * containing the lists up above the search bar and pin it against the top of the screen.
  */
 public class ListsFragment extends Fragment
-    implements OnPageChangeListener, Listener, CallLogFragmentListener {
+    implements ViewPager.OnPageChangeListener, Listener, CallLogFragmentListener {
 
   private static final String TAG = "ListsFragment";
 
@@ -66,7 +68,7 @@ public class ListsFragment extends Fragment
   private SharedPreferences prefs;
   private boolean hasFetchedVoicemailStatus;
   private boolean showVoicemailTabAfterVoicemailStatusIsFetched;
-  private final ArrayList<OnPageChangeListener> onPageChangeListeners = new ArrayList<>();
+  private final ArrayList<ViewPager.OnPageChangeListener> onPageChangeListeners = new ArrayList<>();
   /** The position of the currently selected tab. */
   private int tabIndex = DialtactsPagerAdapter.TAB_INDEX_SPEED_DIAL;
 
@@ -197,7 +199,7 @@ public class ListsFragment extends Fragment
     super.onDestroy();
   }
 
-  public void addOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+  public void addOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
     if (!onPageChangeListeners.contains(onPageChangeListener)) {
       onPageChangeListeners.add(onPageChangeListener);
     }

@@ -15,6 +15,7 @@
   ~ limitations under the License
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="48dp">
@@ -26,7 +27,7 @@
       android:layout_marginStart="8dp"
       android:layout_gravity="center_vertical|start"
       android:padding="12dp"
-      android:tint="?android:attr/colorPrimary"/>
+      app:tint="?android:attr/colorPrimary" />
 
   <TextView
       android:id="@+id/search_action_text"
