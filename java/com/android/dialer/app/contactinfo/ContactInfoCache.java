@@ -19,8 +19,10 @@ package com.android.dialer.app.contactinfo;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.ContactSource.Type;
 import com.android.dialer.oem.CequintCallerIdManager;

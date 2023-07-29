@@ -18,10 +18,12 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.VideoProfile;
+
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -45,7 +47,8 @@ public class AnswerScreenPresenter
     implements AnswerScreenDelegate, DialerCall.CannedTextResponsesLoadedListener {
   private static final int ACCEPT_REJECT_CALL_TIME_OUT_IN_MILLIS = 5000;
 
-  @NonNull private final Context context;
+  @NonNull
+  private final Context context;
   @NonNull private final AnswerScreen answerScreen;
   @NonNull private final DialerCall call;
   private long actionPerformedTimeMillis;

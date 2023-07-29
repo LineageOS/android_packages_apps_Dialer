@@ -33,16 +33,20 @@ import android.os.PowerManager;
 import android.provider.CallLog;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.webkit.MimeTypeMap;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+
 import com.android.common.io.MoreCloseables;
 import com.android.dialer.app.R;
+import com.android.dialer.app.calllog.CallLogAdapter;
+import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogListItemViewHolder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;

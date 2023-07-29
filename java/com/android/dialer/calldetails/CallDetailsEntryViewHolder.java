@@ -23,8 +23,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.provider.MediaStore;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -37,6 +35,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 
 import com.android.dialer.R;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;

@@ -16,11 +16,13 @@
 
 package com.android.dialer.phonenumberproto;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -122,7 +124,7 @@ public class DialerPhoneNumberUtil {
    */
   @WorkerThread
   public boolean isMatch(
-      @NonNull DialerPhoneNumber firstNumberIn, @NonNull DialerPhoneNumber secondNumberIn) {
+          @NonNull DialerPhoneNumber firstNumberIn, @NonNull DialerPhoneNumber secondNumberIn) {
     Assert.isWorkerThread();
 
     // An empty number should not be combined with any other number.

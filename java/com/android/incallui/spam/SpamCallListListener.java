@@ -26,11 +26,12 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.drawable.Icon;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.DisconnectCause;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumbersUtil;

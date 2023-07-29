@@ -17,7 +17,9 @@
 package com.android.dialer.metrics;
 
 import android.os.SystemClock;
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.google.common.base.Function;

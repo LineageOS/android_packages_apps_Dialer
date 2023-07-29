@@ -17,11 +17,13 @@ package com.android.voicemail.impl.sync;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.util.ArraySet;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.common.concurrent.ThreadUtil;

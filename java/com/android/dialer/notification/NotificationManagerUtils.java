@@ -19,8 +19,10 @@ package com.android.dialer.notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.service.notification.StatusBarNotification;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 
 /** Utilities to manage notifications. */

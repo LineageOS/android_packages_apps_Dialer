@@ -21,9 +21,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.app.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;

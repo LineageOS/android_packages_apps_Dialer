@@ -23,12 +23,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.SmsManager;
 import android.telephony.VisualVoicemailSms;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.OmtpConstants;
 import com.android.voicemail.impl.OmtpService;

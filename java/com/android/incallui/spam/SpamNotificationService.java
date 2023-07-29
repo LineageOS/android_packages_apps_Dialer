@@ -21,7 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.provider.CallLog;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.location.GeoUtil;

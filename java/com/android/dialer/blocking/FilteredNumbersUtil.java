@@ -18,9 +18,10 @@ package com.android.dialer.blocking;
 import android.content.Context;
 import android.provider.BlockedNumberContract;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.logging.InteractionEvent;

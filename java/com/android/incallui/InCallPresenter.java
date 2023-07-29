@@ -22,9 +22,6 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Trace;
 import android.provider.BlockedNumberContract;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.DisconnectCause;
@@ -38,6 +35,11 @@ import android.util.ArraySet;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.CallConfiguration;
 import com.android.dialer.Mode;
