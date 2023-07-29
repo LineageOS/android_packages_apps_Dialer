@@ -15,16 +15,16 @@
  */
 package com.android.dialer.helplines;
 
+
+import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.SubscriptionManager;
@@ -42,6 +42,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.R;
 import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.helplines.utils.HelplineUtils;
@@ -51,8 +54,6 @@ import org.lineageos.lib.phone.spn.Item;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static android.graphics.Paint.UNDERLINE_TEXT_FLAG;
 
 public class HelplineActivity extends Activity {
 

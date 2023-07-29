@@ -18,8 +18,10 @@ package com.android.dialer.precall;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.util.DialerUtils;
 

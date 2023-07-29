@@ -17,8 +17,10 @@
 package com.android.dialer.speeddial.database;
 
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
+
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Optional;
 import java.lang.annotation.Retention;

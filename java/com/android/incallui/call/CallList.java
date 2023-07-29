@@ -20,13 +20,15 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Trace;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -222,7 +224,7 @@ public class CallList implements DialerCallDelegate {
   }
 
   private void logSecondIncomingCall(
-      @NonNull Context context, @NonNull DialerCall firstCall, @NonNull DialerCall incomingCall) {
+          @NonNull Context context, @NonNull DialerCall firstCall, @NonNull DialerCall incomingCall) {
     DialerImpression.Type impression;
     if (firstCall.isVideoCall()) {
       if (incomingCall.isVideoCall()) {

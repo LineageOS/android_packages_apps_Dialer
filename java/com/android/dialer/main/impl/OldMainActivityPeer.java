@@ -32,8 +32,6 @@ import android.os.Handler;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.provider.VoicemailContract;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -50,6 +48,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.R;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.calllog.CallLogAdapter;

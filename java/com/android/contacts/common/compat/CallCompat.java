@@ -16,8 +16,9 @@
 
 package com.android.contacts.common.compat;
 
-import android.support.annotation.NonNull;
 import android.telecom.Call;
+
+import androidx.annotation.NonNull;
 
 /** Compatibility utilities for android.telecom.Call */
 public class CallCompat {

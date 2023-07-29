@@ -19,11 +19,13 @@ package com.android.voicemail;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.List;
 
 /** Public interface for the voicemail module */

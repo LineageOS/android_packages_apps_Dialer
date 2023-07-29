@@ -16,7 +16,8 @@
 
 package com.android.dialer.activecalls;
 
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
+
 import com.google.common.collect.ImmutableList;
 
 /** Exposes information about current active calls to the whole dialer. */
