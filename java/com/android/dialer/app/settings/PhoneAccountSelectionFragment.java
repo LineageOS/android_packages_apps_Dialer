@@ -24,7 +24,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -85,11 +84,6 @@ public class PhoneAccountSelectionFragment extends PreferenceFragment {
       if (icon != null) {
         setIcon(icon.loadDrawable(context));
       }
-    }
-
-    @VisibleForTesting
-    void click() {
-      onClick();
     }
 
     @Override

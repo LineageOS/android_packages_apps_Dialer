@@ -34,7 +34,6 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -101,7 +100,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /** Version of {@link InCallActivity} that shows the new UI */
 public class InCallActivity extends TransactionSafeFragmentActivity
@@ -123,8 +121,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   private static final int DIALPAD_REQUEST_NONE = 1;
   private static final int DIALPAD_REQUEST_SHOW = 2;
   private static final int DIALPAD_REQUEST_HIDE = 3;
-
-  private static Optional<Integer> audioRouteForTesting = Optional.empty();
 
   private SelectPhoneAccountListener selectPhoneAccountListener;
   private UiListener<Result> preferredAccountWorkerResultListener;
@@ -270,16 +266,7 @@ public class InCallActivity extends TransactionSafeFragmentActivity
   }
 
   private static int getAudioRoute() {
-    if (audioRouteForTesting.isPresent()) {
-      return audioRouteForTesting.get();
-    }
-
     return AudioModeProvider.getInstance().getAudioState().getRoute();
-  }
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void setAudioRouteForTesting(int audioRoute) {
-    audioRouteForTesting = Optional.of(audioRoute);
   }
 
   private void internalResolveIntent(Intent intent) {
@@ -606,7 +593,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
   }
 
-  @VisibleForTesting
   void onNewIntent(Intent intent, boolean isRecreating) {
     this.isRecreating = isRecreating;
 

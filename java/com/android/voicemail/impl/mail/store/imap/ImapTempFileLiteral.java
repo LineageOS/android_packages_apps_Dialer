@@ -112,8 +112,4 @@ public class ImapTempFileLiteral extends ImapString {
   public String toString() {
     return String.format("{%d byte literal(file)}", size);
   }
-
-  public boolean tempFileExistsForTest() {
-    return file.exists();
-  }
 }

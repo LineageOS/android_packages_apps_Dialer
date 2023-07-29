@@ -25,10 +25,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import com.android.voicemail.impl.Assert;
-import com.android.voicemail.impl.NeededForTesting;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.scheduling.TaskQueue.NextTask;
 import java.util.List;
@@ -118,12 +116,6 @@ final class TaskExecutor {
 
   private static TaskExecutor instance;
 
-  /**
-   * Used by tests to turn task handling into a single threaded process by calling {@link
-   * Handler#handleMessage(Message)} directly
-   */
-  private MessageSender messageSender = new MessageSender();
-
   private final MainThreadHandler mainThreadHandler;
 
   private final Context appContext;
@@ -187,11 +179,7 @@ final class TaskExecutor {
     }
   };
 
-  /** Should attempt to run the next task when a task has finished or been added. */
-  private boolean taskAutoRunDisabledForTesting = false;
-
   /** Handles execution of the background task in teh worker thread. */
-  @VisibleForTesting
   final class WorkerThreadHandler extends Handler {
 
     public WorkerThreadHandler(Looper looper) {
@@ -211,12 +199,11 @@ final class TaskExecutor {
 
       Message schedulerMessage = mainThreadHandler.obtainMessage();
       schedulerMessage.obj = task;
-      messageSender.send(schedulerMessage);
+      schedulerMessage.sendToTarget();
     }
   }
 
   /** Handles completion of the background task in the main thread. */
-  @VisibleForTesting
   final class MainThreadHandler extends Handler {
 
     public MainThreadHandler(Looper looper) {
@@ -264,7 +251,6 @@ final class TaskExecutor {
     mainThreadHandler = new MainThreadHandler(Looper.getMainLooper());
   }
 
-  @VisibleForTesting
   void terminate() {
     VvmLog.i(TAG, "terminated");
     Assert.isMainThread();
@@ -284,7 +270,6 @@ final class TaskExecutor {
   }
 
   @MainThread
-  @VisibleForTesting
   TaskQueue getTasks() {
     Assert.isMainThread();
     return tasks;
@@ -297,16 +282,10 @@ final class TaskExecutor {
     if (isWorkerThreadBusy) {
       return;
     }
-    if (taskAutoRunDisabledForTesting) {
-      // If taskAutoRunDisabledForTesting is true, runNextTask() must be explicitly called
-      // to run the next task.
-      return;
-    }
 
     runNextTask();
   }
 
-  @VisibleForTesting
   @MainThread
   void runNextTask() {
     Assert.isMainThread();
@@ -321,11 +300,11 @@ final class TaskExecutor {
       Message message = workerThreadHandler.obtainMessage();
       message.obj = nextTask.task;
       isWorkerThreadBusy = true;
-      messageSender.send(message);
+      message.sendToTarget();
       return;
     }
     VvmLog.i(TAG, "minimal wait time:" + nextTask.minimalWaitTimeMillis);
-    if (!taskAutoRunDisabledForTesting && nextTask.minimalWaitTimeMillis != null) {
+    if (nextTask.minimalWaitTimeMillis != null) {
       // No tasks are currently ready. Sleep until the next one should be.
       // If a new task is added during the sleep the service will wake immediately.
       sleep(nextTask.minimalWaitTimeMillis);
@@ -360,24 +339,6 @@ final class TaskExecutor {
             + STOP_DELAY_MILLISECONDS
             + " millis");
     mainThreadHandler.postDelayed(stopServiceWithDelay, STOP_DELAY_MILLISECONDS);
-  }
-
-  @NeededForTesting
-  static class MessageSender {
-
-    public void send(Message message) {
-      message.sendToTarget();
-    }
-  }
-
-  @NeededForTesting
-  void setTaskAutoRunDisabledForTest(boolean value) {
-    taskAutoRunDisabledForTesting = value;
-  }
-
-  @NeededForTesting
-  void setMessageSenderForTest(MessageSender sender) {
-    messageSender = sender;
   }
 
   /**
@@ -415,7 +376,6 @@ final class TaskExecutor {
    * @param isNewJob a new job will be requested to run immediately, bypassing all requirements.
    */
   @MainThread
-  @VisibleForTesting
   void scheduleJobAndTerminate(long delayMillis, boolean isNewJob) {
     Assert.isMainThread();
     finishJobAsync();

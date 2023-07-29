@@ -34,7 +34,6 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -98,7 +97,6 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
       AnimationState.COMPLETED
     }
   )
-  @VisibleForTesting
   @interface AnimationState {
 
     int NONE = 0;
@@ -516,7 +514,6 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     contactPuckIcon.animate().alpha(shouldShowPhotoInPuck() ? 0 : alpha);
   }
 
-  @VisibleForTesting
   void setAnimationState(@AnimationState int state) {
     if (state != AnimationState.HINT && animationState == state) {
       return;
@@ -549,12 +546,6 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
         endAnimation();
       }
     }
-  }
-
-  @AnimationState
-  @VisibleForTesting
-  int getAnimationState() {
-    return animationState;
   }
 
   private void updateAnimationState() {
@@ -692,7 +683,6 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     lockEntryAnim.start();
   }
 
-  @VisibleForTesting
   void onEntryAnimationDone() {
     LogUtil.i("FlingUpDownMethod.onEntryAnimationDone", "Swipe entry anim ends.");
     if (animationState == AnimationState.ENTRY) {
@@ -893,7 +883,6 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     lockSettleAnim.start();
   }
 
-  @VisibleForTesting
   void onSettleAnimationDone() {
     if (afterSettleAnimationState != AnimationState.NONE) {
       int nextState = afterSettleAnimationState;
@@ -1041,7 +1030,6 @@ public class FlingUpDownMethod extends AnswerMethod implements OnProgressChanged
     rejectHintHide.start();
   }
 
-  @VisibleForTesting
   void onHintAnimationDone(boolean canceled) {
     if (!canceled && animationState == AnimationState.HINT) {
       setAnimationState(AnimationState.BOUNCE);
