@@ -44,9 +44,6 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
 import com.android.dialer.helplines.HelplineActivity;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
 import com.android.dialer.main.impl.toolbar.MainToolbar;
 import com.android.dialer.main.impl.toolbar.SearchBarListener;
@@ -151,8 +148,6 @@ public class MainSearchController implements SearchBarListener {
       LogUtil.e("MainSearchController.showDialpad", "Dialpad is already visible.");
       return;
     }
-
-    Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_DIALPAD, activity);
 
     fab.hide();
     toolbar.slideUp(animate, fragmentContainer);
@@ -272,23 +267,14 @@ public class MainSearchController implements SearchBarListener {
     LogUtil.enterBlock("MainSearchController.onSearchListTouched");
     if (isDialpadVisible()) {
       if (TextUtils.isEmpty(dialpadFragment.getQuery())) {
-        Logger.get(activity)
-            .logImpression(
-                DialerImpression.Type.MAIN_TOUCH_DIALPAD_SEARCH_LIST_TO_CLOSE_SEARCH_AND_DIALPAD);
         closeSearch(true);
       } else {
-        Logger.get(activity)
-            .logImpression(DialerImpression.Type.MAIN_TOUCH_DIALPAD_SEARCH_LIST_TO_HIDE_DIALPAD);
         hideDialpad(/* animate=*/ true);
       }
     } else if (isSearchVisible()) {
       if (TextUtils.isEmpty(toolbar.getQuery())) {
-        Logger.get(activity)
-            .logImpression(DialerImpression.Type.MAIN_TOUCH_SEARCH_LIST_TO_CLOSE_SEARCH);
         closeSearch(true);
       } else {
-        Logger.get(activity)
-            .logImpression(DialerImpression.Type.MAIN_TOUCH_SEARCH_LIST_TO_HIDE_KEYBOARD);
         closeKeyboard();
       }
     }
@@ -302,17 +288,10 @@ public class MainSearchController implements SearchBarListener {
   public boolean onBackPressed() {
     if (isDialpadVisible() && !TextUtils.isEmpty(dialpadFragment.getQuery())) {
       LogUtil.i("MainSearchController.onBackPressed", "Dialpad visible with query");
-      Logger.get(activity)
-          .logImpression(DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_HIDE_DIALPAD);
       hideDialpad(/* animate=*/ true);
       return true;
     } else if (isSearchVisible()) {
       LogUtil.i("MainSearchController.onBackPressed", "Search is visible");
-      Logger.get(activity)
-          .logImpression(
-              isDialpadVisible()
-                  ? DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH_AND_DIALPAD
-                  : DialerImpression.Type.MAIN_PRESS_BACK_BUTTON_TO_CLOSE_SEARCH);
       closeSearch(true);
       return true;
     } else {
@@ -400,14 +379,11 @@ public class MainSearchController implements SearchBarListener {
   @Override
   public void onSearchBarClicked() {
     LogUtil.enterBlock("MainSearchController.onSearchBarClicked");
-    Logger.get(activity).logImpression(DialerImpression.Type.MAIN_CLICK_SEARCH_BAR);
     openSearch(Optional.absent());
   }
 
   private void openSearch(Optional<String> query) {
     LogUtil.enterBlock("MainSearchController.openSearch");
-
-    Logger.get(activity).logScreenView(ScreenEvent.Type.MAIN_SEARCH, activity);
 
     fab.hide();
     toolbar.expand(/* animate=*/ true, query, /* requestFocus */ true);
@@ -460,7 +436,6 @@ public class MainSearchController implements SearchBarListener {
 
   @Override
   public void onVoiceButtonClicked(VoiceSearchResultCallback voiceSearchResultCallback) {
-    Logger.get(activity).logImpression(DialerImpression.Type.MAIN_CLICK_SEARCH_BAR_VOICE_BUTTON);
     try {
       Intent voiceIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
       activity.startActivityForResult(voiceIntent, ActivityRequestCodes.DIALTACTS_VOICE_SEARCH);
@@ -473,11 +448,9 @@ public class MainSearchController implements SearchBarListener {
   public boolean onMenuItemClicked(MenuItem menuItem) {
     if (menuItem.getItemId() == R.id.settings) {
       activity.startActivity(new Intent(activity, DialerSettingsActivity.class));
-      Logger.get(activity).logScreenView(ScreenEvent.Type.SETTINGS, activity);
       return true;
     } else if (menuItem.getItemId() == R.id.clear_frequents) {
       ClearFrequentsDialog.show(activity.getFragmentManager());
-      Logger.get(activity).logScreenView(ScreenEvent.Type.CLEAR_FREQUENTS, activity);
       return true;
     } else if (menuItem.getItemId() == R.id.menu_call_history) {
       final Intent intent = new Intent(activity, CallLogActivity.class);

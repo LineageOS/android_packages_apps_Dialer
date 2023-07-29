@@ -29,8 +29,6 @@ import androidx.annotation.StringRes;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -119,14 +117,12 @@ final class SearchActionViewHolder extends RecyclerView.ViewHolder implements On
   public void onClick(View v) {
     switch (action) {
       case Action.ADD_TO_CONTACT:
-        Logger.get(context).logImpression(DialerImpression.Type.ADD_TO_A_CONTACT_FROM_DIALPAD);
         Intent intent = IntentUtil.getAddToExistingContactIntent(query);
         @StringRes int errorString = R.string.add_contact_not_available;
         DialerUtils.startActivityWithErrorToast(context, intent, errorString);
         break;
 
       case Action.CREATE_NEW_CONTACT:
-        Logger.get(context).logImpression(DialerImpression.Type.CREATE_NEW_CONTACT_FROM_DIALPAD);
         intent = IntentUtil.getNewContactIntent(query);
         DialerUtils.startActivityWithErrorToast(context, intent);
         break;

@@ -30,12 +30,11 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.SuccessListener;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService;
 import com.android.dialer.phonenumbercache.CachedNumberLookupService.CachedContactInfo;
 import com.android.dialer.phonenumbercache.PhoneNumberCache;
@@ -149,10 +148,8 @@ public class ReportDialogFragment extends DialogFragment {
     Context context = output.first;
     boolean wasReport = output.second;
     if (wasReport) {
-      Logger.get(context).logImpression(DialerImpression.Type.CALLER_ID_REPORTED);
       Toast.makeText(context, R.string.report_caller_id_toast, Toast.LENGTH_SHORT).show();
     } else {
-      Logger.get(context).logImpression(DialerImpression.Type.CALLER_ID_REPORT_FAILED);
       Toast.makeText(context, R.string.report_caller_id_failed, Toast.LENGTH_SHORT).show();
     }
   }

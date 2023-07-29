@@ -47,7 +47,6 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -256,7 +255,6 @@ public class ContactsFragment extends Fragment
       recyclerView.setVisibility(View.VISIBLE);
       adapter.updateCursor(cursor);
 
-      PerformanceReport.logOnScrollStateChange(recyclerView);
       fastScroller.setup(adapter, manager);
     }
   }

@@ -21,8 +21,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.QuickContactBadge;
 import com.android.dialer.app.calllog.CallLogAdapter.OnActionModeStateChangedListener;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 
 /** Allows us to click the contact badge for non multi select mode. */
 class DialerQuickContactBadge extends QuickContactBadge {
@@ -46,8 +44,6 @@ class DialerQuickContactBadge extends QuickContactBadge {
   public void onClick(View v) {
     if (extraOnClickListener != null
         && onActionModeStateChangeListener.isActionModeStateEnabled()) {
-      Logger.get(v.getContext())
-          .logImpression(DialerImpression.Type.MULTISELECT_SINGLE_PRESS_TAP_VIA_CONTACT_BADGE);
       extraOnClickListener.onClick(v);
     } else {
       super.onClick(v);

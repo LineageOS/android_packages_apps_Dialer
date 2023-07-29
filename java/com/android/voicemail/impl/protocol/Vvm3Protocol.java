@@ -25,7 +25,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.android.dialer.logging.DialerImpression;
 import com.android.voicemail.PinChanger;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.ActivationTask;
@@ -45,7 +44,6 @@ import com.android.voicemail.impl.sms.Vvm3MessageSender;
 import com.android.voicemail.impl.sync.VvmNetworkRequest;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.NetworkWrapper;
 import com.android.voicemail.impl.sync.VvmNetworkRequest.RequestFailedException;
-import com.android.voicemail.impl.utils.LoggerUtils;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Locale;
@@ -125,8 +123,6 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
       return;
     }
 
-    LoggerUtils.logImpressionOnMainThread(
-        config.getContext(), DialerImpression.Type.VVM_PROVISIONING_STARTED);
     if (OmtpConstants.SUBSCRIBER_UNKNOWN.equals(message.getProvisioningStatus())) {
       VvmLog.i(TAG, "Provisioning status: Unknown");
       if (VVM3_UNKNOWN_SUBSCRIBER_CAN_SUBSCRIBE_RESPONSE_CODE.equals(message.getReturnCode())) {
@@ -239,8 +235,6 @@ public class Vvm3Protocol extends VisualVoicemailProtocol {
           // Only close new user tutorial if the PIN has been changed.
           helper.closeNewUserTutorial();
           VvmLog.i(TAG, "new user: NUT closed");
-          LoggerUtils.logImpressionOnMainThread(
-              config.getContext(), DialerImpression.Type.VVM_PROVISIONING_COMPLETED);
           config.requestStatus(null);
         }
       } catch (InitializingException | MessagingException | IOException e) {
