@@ -25,7 +25,6 @@ import android.os.RemoteException;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.NumberAttributes;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
@@ -57,7 +56,7 @@ public final class CallLogCacheUpdater {
    * trigger a call log refresh, so the updater can only do a single batch. If there are more
    * operations it will be truncated. Under normal circumstances there will only be 1 operation
    */
-  @VisibleForTesting static final int CACHE_UPDATE_LIMIT = 100;
+  private static final int CACHE_UPDATE_LIMIT = 100;
 
   @Inject
   CallLogCacheUpdater(

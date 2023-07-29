@@ -25,15 +25,6 @@ public class PausableExecutorImpl implements PausableExecutor {
   public void milestone() {}
 
   @Override
-  public void ackMilestoneForTesting() {}
-
-  @Override
-  public void ackAllMilestonesForTesting() {}
-
-  @Override
-  public void awaitMilestoneForTesting() {}
-
-  @Override
   public void execute(Runnable command) {
     Executors.newSingleThreadExecutor().execute(command);
   }
