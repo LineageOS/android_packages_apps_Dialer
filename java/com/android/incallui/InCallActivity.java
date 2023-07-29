@@ -63,8 +63,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
 import com.android.dialer.preferredsim.PreferredAccountRecorder;
 import com.android.dialer.preferredsim.PreferredAccountWorker;
 import com.android.dialer.preferredsim.PreferredAccountWorker.Result;
@@ -798,7 +796,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     transaction.commitAllowingStateLoss();
     dialpadFragmentManager.executePendingTransactions();
 
-    Logger.get(this).logScreenView(ScreenEvent.Type.INCALL_DIALPAD, this);
     getInCallOrRttCallScreen().onInCallScreenDialpadVisibilityChange(true);
   }
 
@@ -1233,7 +1230,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
       Trace.beginSection("InCallActivity.commitTransaction");
       transaction.commitNow();
       Trace.endSection();
-      Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     }
     isInShowMainInCallFragment = false;
     Trace.endSection();
@@ -1353,8 +1349,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             shouldAllowAnswerAndRelease(call),
             CallList.getInstance().getBackgroundCall() != null);
     transaction.add(R.id.main, answerScreen.getAnswerScreenFragment(), Tags.ANSWER_SCREEN);
-
-    Logger.get(this).logScreenView(ScreenEvent.Type.INCOMING_CALL, this);
     didShowAnswerScreen = true;
     return true;
   }
@@ -1396,7 +1390,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
     InCallScreen inCallScreen = InCallBindings.createInCallScreen();
     transaction.add(R.id.main, inCallScreen.getInCallScreenFragment(), Tags.IN_CALL_SCREEN);
-    Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     didShowInCallScreen = true;
     return true;
   }
@@ -1423,7 +1416,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
     }
     RttCallScreen rttCallScreen = RttBindings.createRttCallScreen(call.getId());
     transaction.add(R.id.main, rttCallScreen.getRttCallScreenFragment(), Tags.RTT_CALL_SCREEN);
-    Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     didShowRttCallScreen = true;
     // In some cases such as VZW, RTT request will be automatically accepted by modem. So the dialog
     // won't make any sense and should be dismissed if it's already switched to RTT.
@@ -1466,8 +1458,6 @@ public class InCallActivity extends TransactionSafeFragmentActivity
             call.getId(), call.getVideoTech().shouldUseSurfaceView());
     transaction.add(
         R.id.main, videoCallScreen.getVideoCallScreenFragment(), Tags.VIDEO_CALL_SCREEN);
-
-    Logger.get(this).logScreenView(ScreenEvent.Type.INCALL, this);
     didShowVideoCallScreen = true;
     return true;
   }

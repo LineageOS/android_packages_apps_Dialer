@@ -37,8 +37,6 @@ import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.notification.NotificationManagerUtils;
@@ -179,7 +177,6 @@ final class VisualVoicemailNotifier {
       builder.setLargeIcon(photoIcon);
     }
     builder.setContentIntent(newVoicemailIntent(context, voicemail));
-    Logger.get(context).logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED);
     return builder.build();
   }
 

@@ -35,8 +35,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.voicemail.VoicemailClient;
@@ -84,7 +82,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   @Override
   public void onResume() {
     super.onResume();
-    Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_SETTINGS_VIEWED);
     voicemailClient.addActivationStateListener(this);
     PreferenceScreen preferenceScreen = getPreferenceScreen();
     if (preferenceScreen != null) {
@@ -178,15 +175,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     changePinIntent.putExtra(VoicemailClient.PARAM_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
 
     voicemailChangePinPreference.setIntent(changePinIntent);
-    voicemailChangePinPreference.setOnPreferenceClickListener(
-        new OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick(Preference preference) {
-            Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_CHANGE_PIN_CLICKED);
-            // Let the preference handle the click.
-            return false;
-          }
-        });
     if (VoicemailChangePinActivity.isPinScrambled(getContext(), phoneAccountHandle)) {
       voicemailChangePinPreference.setTitle(R.string.voicemail_set_pin_preference_title);
     } else {
@@ -197,17 +185,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
   private void setupNotificationsPreference() {
     voicemailNotificationPreference.setIntent(getNotificationSettingsIntent());
-
-    voicemailNotificationPreference.setOnPreferenceClickListener(
-        new OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick(Preference preference) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.VVM_NOTIFICATIONS_SETTING_CLICKED);
-            // Let the preference handle the click.
-            return false;
-          }
-        });
   }
 
   private void setupAdvancedSettingsPreference() {
@@ -229,17 +206,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     }
 
     advancedSettingsPreference.setIntent(advancedSettingsIntent);
-
-    advancedSettingsPreference.setOnPreferenceClickListener(
-        new OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick(Preference preference) {
-            Logger.get(getContext())
-                .logImpression(DialerImpression.Type.VVM_ADVANCED_SETINGS_CLICKED);
-            // Let the preference handle the click.
-            return false;
-          }
-        });
   }
 
   @Override
@@ -267,7 +233,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         updateVoicemailEnabled(true);
       }
     } else if (preference.getKey().equals(voicemailAutoArchivePreference.getKey())) {
-      logArchiveToggle((boolean) objValue);
       voicemailClient.setVoicemailArchiveEnabled(
           getContext(), phoneAccountHandle, (boolean) objValue);
     }
@@ -280,11 +245,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     voicemailClient.setVoicemailEnabled(getContext(), phoneAccountHandle, isEnabled);
     visualVoicemailPreference.setChecked(isEnabled);
 
-    if (isEnabled) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_ENABLED_IN_SETTINGS);
-    } else {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_DISABLED_IN_SETTINGS);
-    }
     updateVoicemailSummaryMessage();
     updateChangePinPreference();
   }
@@ -301,16 +261,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     } else {
       voicemailChangePinPreference.setSummary(null);
       voicemailChangePinPreference.setEnabled(true);
-    }
-  }
-
-  private void logArchiveToggle(boolean userTurnedOn) {
-    if (userTurnedOn) {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.VVM_USER_TURNED_ARCHIVE_ON_FROM_SETTINGS);
-    } else {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.VVM_USER_TURNED_ARCHIVE_OFF_FROM_SETTINGS);
     }
   }
 

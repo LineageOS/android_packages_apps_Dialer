@@ -28,7 +28,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoListener;
-import com.android.dialer.logging.DialerImpression;
 import com.android.incallui.video.protocol.VideoCallScreen;
 import com.android.incallui.video.protocol.VideoCallScreenDelegate;
 import com.android.incallui.videotech.VideoTech;
@@ -132,7 +131,6 @@ public class DuoVideoTech implements VideoTech, DuoListener {
 
   @Override
   public void upgradeToVideo(@NonNull Context context) {
-    listener.onImpressionLoggingNeeded(DialerImpression.Type.LIGHTBRINGER_UPGRADE_REQUESTED);
     duo.requestUpgrade(context, call);
   }
 
@@ -179,8 +177,6 @@ public class DuoVideoTech implements VideoTech, DuoListener {
 
   @Override
   public void becomePrimary() {
-    listener.onImpressionLoggingNeeded(
-        DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN_FOR_LIGHTBRINGER);
   }
 
   @Override
@@ -189,10 +185,5 @@ public class DuoVideoTech implements VideoTech, DuoListener {
   @Override
   public void onDuoStateChanged() {
     listener.onVideoTechStateChanged();
-  }
-
-  @Override
-  public com.android.dialer.logging.VideoTech.Type getVideoTechType() {
-    return com.android.dialer.logging.VideoTech.Type.LIGHTBRINGER_VIDEO_TECH;
   }
 }

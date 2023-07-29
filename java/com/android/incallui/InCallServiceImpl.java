@@ -23,7 +23,6 @@ import android.os.Trace;
 import android.telecom.Call;
 import android.telecom.CallAudioState;
 import android.telecom.InCallService;
-import com.android.dialer.feedback.FeedbackComponent;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.CallRecorder;
@@ -37,8 +36,6 @@ import com.android.incallui.call.TelecomAdapter;
  * service triggering InCallActivity (via CallList) to finish soon after.
  */
 public class InCallServiceImpl extends InCallService {
-
-  private CallList.Listener feedbackListener;
 
   @Override
   public void onCallAudioStateChanged(CallAudioState audioState) {
@@ -101,8 +98,6 @@ public class InCallServiceImpl extends InCallService {
     InCallPresenter.getInstance().maybeStartRevealAnimation(intent);
     TelecomAdapter.getInstance().setInCallService(this);
     CallRecorder.getInstance().setUp(context);
-    feedbackListener = FeedbackComponent.get(context).getCallFeedbackListener();
-    CallList.getInstance().addListener(feedbackListener);
 
     IBinder iBinder = super.onBind(intent);
     Trace.endSection();
@@ -127,10 +122,6 @@ public class InCallServiceImpl extends InCallService {
     // Tear down the InCall system
     InCallPresenter.getInstance().tearDown();
     TelecomAdapter.getInstance().clearInCallService();
-    if (feedbackListener != null) {
-      CallList.getInstance().removeListener(feedbackListener);
-      feedbackListener = null;
-    }
     Trace.endSection();
   }
 }

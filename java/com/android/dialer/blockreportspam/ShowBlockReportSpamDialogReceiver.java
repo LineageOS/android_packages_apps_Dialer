@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
+
+import com.android.dialer.R;
 import com.android.dialer.blocking.Blocking;
 import com.android.dialer.blocking.Blocking.BlockingFailedException;
 import com.android.dialer.blockreportspam.BlockReportSpamDialogs.DialogFragmentForBlockingNumber;
@@ -33,13 +35,7 @@ import com.android.dialer.blockreportspam.BlockReportSpamDialogs.OnSpamDialogCli
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.DialerImpression.Type;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.protos.ProtoParsers;
-import com.android.dialer.spam.Spam;
-import com.android.dialer.spam.SpamComponent;
-import com.android.dialer.spam.SpamSettings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -107,9 +103,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
         ProtoParsers.getTrusted(
             intent, EXTRA_DIALOG_INFO, BlockReportSpamDialogInfo.getDefaultInstance());
 
-    Spam spam = SpamComponent.get(context).spam();
-    SpamSettings spamSettings = SpamComponent.get(context).spamSettings();
-
     // Set up the positive listener for the dialog.
     OnSpamDialogClickListener onSpamDialogClickListener =
         reportSpam -> {
@@ -117,29 +110,13 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
               "ShowBlockReportSpamDialogReceiver.showDialogToBlockNumberAndOptionallyReportSpam",
               "confirmed");
 
-          if (reportSpam && spamSettings.isSpamEnabled()) {
-            LogUtil.i(
-                "ShowBlockReportSpamDialogReceiver.showDialogToBlockNumberAndOptionallyReportSpam",
-                "report spam");
-            Logger.get(context)
-                .logImpression(
-                    DialerImpression.Type
-                        .REPORT_CALL_AS_SPAM_VIA_CALL_LOG_BLOCK_REPORT_SPAM_SENT_VIA_BLOCK_NUMBER_DIALOG);
-            spam.reportSpamFromCallHistory(
-                dialogInfo.getNormalizedNumber(),
-                dialogInfo.getCountryIso(),
-                dialogInfo.getCallType(),
-                dialogInfo.getReportingLocation(),
-                dialogInfo.getContactSource());
-          }
-
           blockNumber(context, dialogInfo);
         };
 
     // Create and show the dialog.
     DialogFragmentForBlockingNumberAndOptionallyReportingAsSpam.newInstance(
             dialogInfo.getNormalizedNumber(),
-            spamSettings.isDialogReportSpamCheckedByDefault(),
+            false,
             onSpamDialogClickListener,
             /* dismissListener = */ null)
         .show(fragmentManager, BlockReportSpamDialogs.BLOCK_REPORT_SPAM_DIALOG_TAG);
@@ -178,19 +155,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
     OnConfirmListener onConfirmListener =
         () -> {
           LogUtil.i("ShowBlockReportSpamDialogReceiver.showDialogToReportNotSpam", "confirmed");
-
-          if (SpamComponent.get(context).spamSettings().isSpamEnabled()) {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.DIALOG_ACTION_CONFIRM_NUMBER_NOT_SPAM);
-            SpamComponent.get(context)
-                .spam()
-                .reportNotSpamFromCallHistory(
-                    dialogInfo.getNormalizedNumber(),
-                    dialogInfo.getCountryIso(),
-                    dialogInfo.getCallType(),
-                    dialogInfo.getReportingLocation(),
-                    dialogInfo.getContactSource());
-          }
         };
 
     // Create & show the dialog.
@@ -222,7 +186,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
   }
 
   private static void blockNumber(Context context, BlockReportSpamDialogInfo dialogInfo) {
-    Logger.get(context).logImpression(Type.USER_ACTION_BLOCKED_NUMBER);
     Futures.addCallback(
         Blocking.block(
             context,
@@ -237,7 +200,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
           @Override
           public void onFailure(Throwable throwable) {
             if (throwable instanceof BlockingFailedException) {
-              Logger.get(context).logImpression(Type.USER_ACTION_BLOCK_NUMBER_FAILED);
               Toast.makeText(context, R.string.block_number_failed_toast, Toast.LENGTH_LONG).show();
             } else {
               throw new RuntimeException(throwable);
@@ -248,7 +210,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
   }
 
   private static void unblockNumber(Context context, BlockReportSpamDialogInfo dialogInfo) {
-    Logger.get(context).logImpression(Type.USER_ACTION_UNBLOCKED_NUMBER);
     Futures.addCallback(
         Blocking.unblock(
             context,
@@ -263,7 +224,6 @@ public final class ShowBlockReportSpamDialogReceiver extends BroadcastReceiver {
           @Override
           public void onFailure(Throwable throwable) {
             if (throwable instanceof BlockingFailedException) {
-              Logger.get(context).logImpression(Type.USER_ACTION_UNBLOCK_NUMBER_FAILED);
               Toast.makeText(context, R.string.unblock_number_failed_toast, Toast.LENGTH_LONG)
                   .show();
             } else {

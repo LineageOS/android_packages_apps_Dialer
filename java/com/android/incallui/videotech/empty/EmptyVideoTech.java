@@ -111,9 +111,4 @@ public class EmptyVideoTech implements VideoTech {
 
   @Override
   public void becomePrimary() {}
-
-  @Override
-  public com.android.dialer.logging.VideoTech.Type getVideoTechType() {
-    return com.android.dialer.logging.VideoTech.Type.NONE;
-  }
 }
