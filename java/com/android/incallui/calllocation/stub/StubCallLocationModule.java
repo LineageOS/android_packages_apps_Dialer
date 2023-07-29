@@ -17,9 +17,9 @@
 package com.android.incallui.calllocation.stub;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.android.dialer.common.Assert;
 import com.android.incallui.calllocation.CallLocation;

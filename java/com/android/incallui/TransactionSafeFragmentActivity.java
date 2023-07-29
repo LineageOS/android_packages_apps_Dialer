@@ -16,8 +16,10 @@
 
 package com.android.incallui;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * A common superclass that keeps track of whether an {@link Activity} has saved its state yet or

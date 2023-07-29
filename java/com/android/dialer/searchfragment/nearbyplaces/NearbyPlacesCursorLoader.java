@@ -17,12 +17,12 @@
 package com.android.dialer.searchfragment.nearbyplaces;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
 import androidx.annotation.NonNull;
+import androidx.loader.content.CursorLoader;
 
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.common.LogUtil;

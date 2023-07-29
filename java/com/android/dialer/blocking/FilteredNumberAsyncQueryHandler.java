@@ -25,11 +25,11 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
 import android.provider.BlockedNumberContract.BlockedNumbers;
-import android.support.v4.os.UserManagerCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
+import androidx.core.os.UserManagerCompat;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
