@@ -21,7 +21,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Directory;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -49,11 +48,6 @@ import javax.inject.Inject;
  * <p>Contacts in these directories are accessible only by specifying a directory ID.
  */
 public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Info> {
-
-  /** Config flag for timeout (in ms). */
-  @VisibleForTesting
-  static final String CP2_EXTENDED_DIRECTORY_PHONE_LOOKUP_TIMEOUT_MILLIS =
-      "cp2_extended_directory_phone_lookup_timout_millis";
 
   private final Context appContext;
   private final ListeningExecutorService backgroundExecutorService;
@@ -188,8 +182,7 @@ public final class Cp2ExtendedDirectoryPhoneLookup implements PhoneLookup<Cp2Inf
         });
   }
 
-  @VisibleForTesting
-  static Uri getContentUriForContacts(String number, long directoryId) {
+  private static Uri getContentUriForContacts(String number, long directoryId) {
     Uri.Builder builder =
         ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI
             .buildUpon()

@@ -24,7 +24,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.database.Selection;
@@ -48,8 +47,7 @@ public class HighResolutionPhotoRequesterImpl implements HighResolutionPhotoRequ
     }
   }
 
-  @VisibleForTesting
-  static final ComponentName SYNC_HIGH_RESOLUTION_PHOTO_SERVICE =
+  private static final ComponentName SYNC_HIGH_RESOLUTION_PHOTO_SERVICE =
       new ComponentName(
           "com.google.android.gms",
           "com.google.android.gms.people.sync.focus.SyncHighResPhotoIntentOperation");

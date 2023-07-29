@@ -38,7 +38,6 @@ public class DialerRingtoneManager {
   private static final boolean IS_DIALER_RINGING_ENABLED = false;
   private final InCallTonePlayer inCallTonePlayer;
   private final CallList callList;
-  private Boolean isDialerRingingEnabledForTesting;
 
   /**
    * Creates the DialerRingtoneManager with the given {@link InCallTonePlayer}.
@@ -92,9 +91,7 @@ public class DialerRingtoneManager {
   }
 
   private boolean isDialerRingingEnabled() {
-    return isDialerRingingEnabledForTesting != null
-        ? isDialerRingingEnabledForTesting
-        : IS_DIALER_RINGING_ENABLED;
+    return IS_DIALER_RINGING_ENABLED;
   }
 
   /**
@@ -124,9 +121,5 @@ public class DialerRingtoneManager {
       return;
     }
     inCallTonePlayer.stop();
-  }
-
-  void setDialerRingingEnabledForTesting(boolean status) {
-    isDialerRingingEnabledForTesting = status;
   }
 }

@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.voicemail.impl.utils.XmlUtils;
 import com.google.common.collect.ComparisonChain;
@@ -80,7 +79,7 @@ public class DialerVvmConfigManager {
    *
    * @see #KEY_GID1
    */
-  @VisibleForTesting static final String KEY_MCCMNC = "mccmnc";
+  private static final String KEY_MCCMNC = "mccmnc";
 
   /**
    * Additional query parameter in {@link #KEY_MCCMNC} to filter by the Group ID level 1.
@@ -100,11 +99,6 @@ public class DialerVvmConfigManager {
       cachedConfigs = loadConfigs(context, context.getResources().getXml(R.xml.vvm_config));
     }
     configs = cachedConfigs;
-  }
-
-  @VisibleForTesting
-  DialerVvmConfigManager(Context context, XmlPullParser parser) {
-    configs = loadConfigs(context, parser);
   }
 
   @Nullable

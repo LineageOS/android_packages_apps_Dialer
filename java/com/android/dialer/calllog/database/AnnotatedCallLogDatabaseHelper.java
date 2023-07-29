@@ -20,7 +20,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.CallLog.Calls;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -35,7 +34,7 @@ import javax.inject.Singleton;
 @Singleton
 public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
 
-  @VisibleForTesting static final int VERSION = 4;
+  private static final int VERSION = 4;
 
   private static final String FILENAME = "annotated_call_log.db";
 

@@ -61,15 +61,6 @@ public class FallbackAccountType extends BaseAccountType {
     this(context, null);
   }
 
-  /**
-   * Used to compare with an {@link ExternalAccountType} built from a test contacts.xml. In order to
-   * build {@link DataKind}s with the same resource package name, {@code resPackageName} is
-   * injectable.
-   */
-  static AccountType createWithPackageNameForTest(Context context, String resPackageName) {
-    return new FallbackAccountType(context, resPackageName);
-  }
-
   @Override
   public boolean areContactsWritable() {
     return true;

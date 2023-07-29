@@ -19,7 +19,6 @@ package com.android.dialer.precall;
 import android.app.Activity;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.function.Consumer;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -30,7 +29,7 @@ import com.google.common.util.concurrent.ListenableFuture;
  */
 public interface PreCallCoordinator {
 
-  @VisibleForTesting public String EXTRA_CALL_INTENT_BUILDER = "extra_call_intent_builder";
+  String EXTRA_CALL_INTENT_BUILDER = "extra_call_intent_builder";
 
   @NonNull
   CallIntentBuilder getBuilder();

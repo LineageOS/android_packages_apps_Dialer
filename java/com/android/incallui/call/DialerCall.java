@@ -28,7 +28,6 @@ import android.os.Trace;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.Call.RttCall;
@@ -1777,15 +1776,13 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   }
 
   /** Coordinates the available VideoTech implementations for a call. */
-  @VisibleForTesting
-  public static class VideoTechManager {
+  private static class VideoTechManager {
     private final Context context;
     private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
     private final VideoTech rcsVideoShare;
     private final List<VideoTech> videoTechs;
     private VideoTech savedTech;
 
-    @VisibleForTesting
     public VideoTechManager(DialerCall call) {
       this.context = call.context;
 
@@ -1814,7 +1811,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       savedTech = emptyVideoTech;
     }
 
-    @VisibleForTesting
     public VideoTech getVideoTech(PhoneAccountHandle phoneAccountHandle) {
       if (savedTech == emptyVideoTech) {
         for (VideoTech tech : videoTechs) {
@@ -1836,7 +1832,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       return savedTech;
     }
 
-    @VisibleForTesting
     public void dispatchCallStateChanged(int newState, PhoneAccountHandle phoneAccountHandle) {
       for (VideoTech videoTech : videoTechs) {
         videoTech.onCallStateChanged(context, newState, phoneAccountHandle);

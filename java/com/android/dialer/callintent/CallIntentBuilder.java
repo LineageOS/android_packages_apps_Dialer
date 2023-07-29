@@ -24,7 +24,6 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -238,32 +237,6 @@ public class CallIntentBuilder implements Parcelable {
 
   public static void increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount() {
     CallIntentBuilder.lightbringerButtonAppearInCollapsedCallLogItemCount++;
-  }
-
-  public static void increaseLightbringerCallButtonAppearInSearchCount() {
-    CallIntentBuilder.lightbringerButtonAppearInSearchCount++;
-  }
-
-  @VisibleForTesting
-  public static int getLightbringerButtonAppearInExpandedCallLogItemCount() {
-    return lightbringerButtonAppearInExpandedCallLogItemCount;
-  }
-
-  @VisibleForTesting
-  public static int getLightbringerButtonAppearInCollapsedCallLogItemCount() {
-    return lightbringerButtonAppearInCollapsedCallLogItemCount;
-  }
-
-  @VisibleForTesting
-  public static int getLightbringerButtonAppearInSearchCount() {
-    return lightbringerButtonAppearInSearchCount;
-  }
-
-  @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-  public static void clearLightbringerCounts() {
-    lightbringerButtonAppearInCollapsedCallLogItemCount = 0;
-    lightbringerButtonAppearInExpandedCallLogItemCount = 0;
-    lightbringerButtonAppearInSearchCount = 0;
   }
 
   @Override

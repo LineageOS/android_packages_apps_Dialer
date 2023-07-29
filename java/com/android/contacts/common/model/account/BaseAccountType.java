@@ -631,10 +631,6 @@ public abstract class BaseAccountType extends AccountType {
           + " mColumnName"
           + mColumnName;
     }
-
-    public String getColumnNameForTest() {
-      return mColumnName;
-    }
   }
 
   public abstract static class CommonInflater implements StringInflater {

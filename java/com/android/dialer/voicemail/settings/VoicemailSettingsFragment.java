@@ -25,7 +25,6 @@ import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -55,12 +54,10 @@ public class VoicemailSettingsFragment extends PreferenceFragment
 
   // Extras copied from com.android.phone.settings.VoicemailSettingsActivity,
   // it does not recognize EXTRA_PHONE_ACCOUNT_HANDLE in O.
-  @VisibleForTesting
-  static final String SUB_ID_EXTRA =
+  private static final String SUB_ID_EXTRA =
       "com.android.phone.settings.SubscriptionInfoHelper.SubscriptionId";
   // Extra on intent containing the label of a subscription.
-  @VisibleForTesting
-  static final String SUB_LABEL_EXTRA =
+  private static final String SUB_LABEL_EXTRA =
       "com.android.phone.settings.SubscriptionInfoHelper.SubscriptionLabel";
 
   private static final String TAG = "VmSettingsActivity";
