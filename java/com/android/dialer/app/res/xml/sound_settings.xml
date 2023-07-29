@@ -2,6 +2,7 @@
 
 <!--
   ~ Copyright (C) 2014 The Android Open Source Project
+  ~ Copyright (C) 2023 The LineageOS Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -25,13 +26,13 @@
     android:ringtoneType="ringtone"
     android:title="@string/ringtone_title"/>
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
     android:defaultValue="false"
     android:key="@string/vibrate_on_preference_key"
     android:persistent="false"
     android:title="@string/vibrate_on_ring_title"/>
 
-  <SwitchPreference
+  <SwitchPreferenceCompat
     android:defaultValue="true"
     android:key="@string/play_dtmf_preference_key"
     android:persistent="false"
@@ -47,24 +48,24 @@
     android:key="@string/incall_category_key"
     android:title="@string/incall_category_title">
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="incall_enable_dnd"
         android:title="@string/incall_enable_dnd_title"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
       android:key="@string/incall_vibrate_outgoing_key"
       android:title="@string/incall_vibrate_outgoing_title" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
       android:key="@string/incall_vibrate_call_waiting_key"
       android:title="@string/incall_vibrate_call_waiting_title" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
       android:key="@string/incall_vibrate_hangup_key"
       android:title="@string/incall_vibrate_hangup_title" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
       android:key="@string/incall_vibrate_45_key"
       android:title="@string/incall_vibrate_45_title"
       android:summary="@string/incall_vibrate_45_summary" />

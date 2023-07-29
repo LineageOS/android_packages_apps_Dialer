@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +19,12 @@ package com.android.dialer.common.concurrent;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
@@ -67,7 +68,7 @@ public class SupportUiListener<OutputT> extends Fragment {
 
   @MainThread
   static <OutputT> SupportUiListener<OutputT> create(
-      FragmentManager fragmentManager, String taskId) {
+          FragmentManager fragmentManager, String taskId) {
     @SuppressWarnings("unchecked")
     SupportUiListener<OutputT> uiListener =
         (SupportUiListener<OutputT>) fragmentManager.findFragmentByTag(taskId);

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +21,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -43,7 +44,7 @@ import com.android.voicemail.VoicemailComponent;
  * Fragment to edit the override values for the {@link import
  * com.android.voicemail.impl.OmtpVvmCarrierConfigHelper}
  */
-public class ConfigOverrideFragment extends PreferenceFragment
+public class ConfigOverrideFragment extends PreferenceFragmentCompat
     implements OnPreferenceChangeListener {
 
   /**
@@ -81,12 +82,23 @@ public class ConfigOverrideFragment extends PreferenceFragment
   }
 
   @Override
-  public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-    if (TextUtils.equals(
-        preference.getKey(), getString(R.string.vvm_config_override_load_current_key))) {
-      loadCurrentConfig();
-    }
-    return super.onPreferenceTreeClick(preferenceScreen, preference);
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+      setPreferencesFromResource(R.xml.vvm_config_override, rootKey);
+
+      for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+        Preference preference = getPreferenceScreen().getPreference(i);
+        preference.setOnPreferenceChangeListener(this);
+        updatePreference(preference);
+      }
+  }
+
+  @Override
+  public boolean onPreferenceTreeClick(Preference preference) {
+      if (TextUtils.equals(
+          preference.getKey(), getString(R.string.vvm_config_override_load_current_key))) {
+        loadCurrentConfig();
+      }
+      return super.onPreferenceTreeClick(preference);
   }
 
   /**
@@ -113,7 +125,7 @@ public class ConfigOverrideFragment extends PreferenceFragment
       String configKey = key.substring(CONFIG_OVERRIDE_KEY_PREFIX.length());
 
       if (configKey.endsWith("bool")) {
-        ((SwitchPreference) preference).setChecked(config.getBoolean(configKey));
+        ((SwitchPreferenceCompat) preference).setChecked(config.getBoolean(configKey));
       } else if (configKey.endsWith("int")) {
         ((EditTextPreference) preference).setText(String.valueOf(config.getInt(configKey)));
       } else if (configKey.endsWith("string")) {

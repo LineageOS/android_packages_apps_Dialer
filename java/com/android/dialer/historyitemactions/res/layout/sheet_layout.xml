@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
  ~ Copyright (C) 2017 The Android Open Source Project
+ ~ Copyright (C) 2023 The LineageOS Project
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -23,7 +24,7 @@
 
   <include layout="@layout/contact_layout"/>
 
-  <android.support.v4.widget.NestedScrollView
+  <androidx.core.widget.NestedScrollView
       android:id="@+id/history_actions_scroll_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
@@ -35,5 +36,5 @@
           android:layout_height="wrap_content"
           android:paddingBottom="4dp"
           android:clipToPadding="false"/>
-  </android.support.v4.widget.NestedScrollView>
+  </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +19,6 @@ package com.android.incallui.rtt.impl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,19 +26,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.incallui.rtt.protocol.RttChatMessage;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Adapter class for holding RTT chat data. */
-public class RttChatAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class RttChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   /** IntDef for the different types of rows that can be shown in the call log. */
   @Retention(RetentionPolicy.SOURCE)
@@ -77,7 +78,7 @@ public class RttChatAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   @Override
-  public ViewHolder onCreateViewHolder(ViewGroup parent, @RowType int viewType) {
+  public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, @RowType int viewType) {
     LayoutInflater layoutInflater = LayoutInflater.from(context);
     switch (viewType) {
       case RowType.ADVISORY:
@@ -101,7 +102,7 @@ public class RttChatAdapter extends RecyclerView.Adapter<ViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder(ViewHolder viewHolder, int itemPosition) {
+  public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int itemPosition) {
     switch (getItemViewType(itemPosition)) {
       case RowType.ADVISORY:
         return;

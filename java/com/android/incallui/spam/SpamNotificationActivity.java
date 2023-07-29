@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2023 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +18,18 @@
 package com.android.incallui.spam;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneNumberUtils;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.dialer.R;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
@@ -200,7 +201,7 @@ public class SpamNotificationActivity extends FragmentActivity {
    */
   private void showNonSpamDialog() {
     FirstTimeNonSpamCallDialogFragment.newInstance(getCallInfo())
-        .show(getFragmentManager(), FirstTimeNonSpamCallDialogFragment.TAG);
+        .show(getSupportFragmentManager(), FirstTimeNonSpamCallDialogFragment.TAG);
   }
 
   /**
@@ -208,7 +209,7 @@ public class SpamNotificationActivity extends FragmentActivity {
    */
   private void showSpamFullDialog() {
     FirstTimeSpamCallDialogFragment.newInstance(getCallInfo())
-        .show(getFragmentManager(), FirstTimeSpamCallDialogFragment.TAG);
+        .show(getSupportFragmentManager(), FirstTimeSpamCallDialogFragment.TAG);
   }
 
   /** Block and report the number as spam. */
