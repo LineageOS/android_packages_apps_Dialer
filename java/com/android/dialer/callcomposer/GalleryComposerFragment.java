@@ -44,8 +44,6 @@ import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
@@ -88,7 +86,6 @@ public class GalleryComposerFragment extends CallComposerFragment
     permissionView = view.findViewById(R.id.permission_view);
 
     if (!PermissionsUtil.hasPermission(getContext(), permission.READ_EXTERNAL_STORAGE)) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.STORAGE_PERMISSION_DISPLAYED);
       LogUtil.i("GalleryComposerFragment.onCreateView", "Permission view shown.");
       ImageView permissionImage = (ImageView) permissionView.findViewById(R.id.permission_icon);
       TextView permissionText = (TextView) permissionView.findViewById(R.id.permission_text);
@@ -172,11 +169,9 @@ public class GalleryComposerFragment extends CallComposerFragment
       if (PermissionsUtil.isFirstRequest(getContext(), permissions[0])
           || shouldShowRequestPermissionRationale(permissions[0])) {
         LogUtil.i("GalleryComposerFragment.onClick", "Storage permission requested.");
-        Logger.get(getContext()).logImpression(DialerImpression.Type.STORAGE_PERMISSION_REQUESTED);
         requestPermissions(permissions, STORAGE_PERMISSION);
       } else {
         LogUtil.i("GalleryComposerFragment.onClick", "Settings opened to enable permission.");
-        Logger.get(getContext()).logImpression(DialerImpression.Type.STORAGE_PERMISSION_SETTINGS);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + getContext().getPackageName()));
@@ -260,12 +255,10 @@ public class GalleryComposerFragment extends CallComposerFragment
     if (requestCode == STORAGE_PERMISSION
         && grantResults.length > 0
         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.STORAGE_PERMISSION_GRANTED);
       LogUtil.i("GalleryComposerFragment.onRequestPermissionsResult", "Permission granted.");
       permissionView.setVisibility(View.GONE);
       setupGallery();
     } else if (requestCode == STORAGE_PERMISSION) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.STORAGE_PERMISSION_DENIED);
       LogUtil.i("GalleryComposerFragment.onRequestPermissionsResult", "Permission denied.");
     }
   }

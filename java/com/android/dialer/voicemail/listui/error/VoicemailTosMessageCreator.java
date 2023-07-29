@@ -40,8 +40,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessage.Action;
 import com.android.voicemail.VisualVoicemailTypeExtensions;
 import com.android.voicemail.VoicemailClient;
@@ -77,7 +75,6 @@ public class VoicemailTosMessageCreator {
     if (!canShowTos()) {
       return null;
     } else if (shouldShowTos()) {
-      logTosCreatedImpression();
       return getTosMessage();
     } else {
       return null;
@@ -98,7 +95,6 @@ public class VoicemailTosMessageCreator {
                         new PhoneAccountHandle(
                             ComponentName.unflattenFromString(status.phoneAccountComponentName),
                             status.phoneAccountId);
-                    logTosDeclinedImpression();
                     showDeclineTosDialog(handle);
                   }
                 }),
@@ -111,7 +107,6 @@ public class VoicemailTosMessageCreator {
                     recordTosAcceptance();
                     // Accepting the TOS also acknowledges the latest features
                     recordFeatureAcknowledgement();
-                    logTosAcceptedImpression();
                     statusReader.refresh();
                   }
                 },
@@ -182,7 +177,6 @@ public class VoicemailTosMessageCreator {
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINED);
             VoicemailClient voicemailClient = VoicemailComponent.get(context).getVoicemailClient();
             if (voicemailClient.isVoicemailModuleEnabled()) {
               voicemailClient.setVoicemailEnabled(context, status.getPhoneAccountHandle(), false);
@@ -213,8 +207,6 @@ public class VoicemailTosMessageCreator {
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-            Logger.get(context)
-                .logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_DECLINE_CHANGE_PIN_SHOWN);
             Intent intent = new Intent(TelephonyManager.ACTION_CONFIGURE_VOICEMAIL);
             intent.putExtra(TelephonyManager.EXTRA_PHONE_ACCOUNT_HANDLE, phoneAccountHandle);
             context.startActivity(intent);
@@ -283,31 +275,6 @@ public class VoicemailTosMessageCreator {
             VoicemailVersionConstants.PREF_DIALER_FEATURE_VERSION_ACKNOWLEDGED_KEY,
             VoicemailVersionConstants.CURRENT_VOICEMAIL_FEATURE_VERSION)
         .apply();
-  }
-
-  private void logTosCreatedImpression() {
-    if (isVvm3()) {
-      Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_V2_CREATED);
-    } else {
-      Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_DIALER_TOS_CREATED);
-    }
-  }
-
-  private void logTosDeclinedImpression() {
-    if (isVvm3()) {
-      Logger.get(context)
-          .logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_V2_DECLINE_CLICKED);
-    } else {
-      Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_DIALER_TOS_DECLINE_CLICKED);
-    }
-  }
-
-  private void logTosAcceptedImpression() {
-    if (isVvm3()) {
-      Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_VVM3_TOS_V2_ACCEPTED);
-    } else {
-      Logger.get(context).logImpression(DialerImpression.Type.VOICEMAIL_DIALER_TOS_ACCEPTED);
-    }
   }
 
   private CharSequence getVvm3Tos() {

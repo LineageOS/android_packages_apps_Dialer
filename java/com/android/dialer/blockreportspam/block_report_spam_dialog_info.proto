@@ -7,11 +7,10 @@ option java_multiple_files = true;
 package com.android.dialer.blockreportspam;
 
 import "java/com/android/dialer/logging/contact_source.proto";
-import "java/com/android/dialer/logging/reporting_location.proto";
 
 // Contains information needed in dialogs that allow a user to block a number
 // and/or report it as spam/not spam.
-// Next ID: 6
+// Next ID: 5
 message BlockReportSpamDialogInfo {
   // A dialer-normalized version of the number used in the dialogs.
   // See DialerPhoneNumber#normalized_number.
@@ -24,10 +23,6 @@ message BlockReportSpamDialogInfo {
   // android.provider.CallLog.Calls
   optional int32 call_type = 3;
 
-  // The location where the number is reported.
-  optional com.android.dialer.logging.ReportingLocation.Type
-      reporting_location = 4;
-
   // The source where contact info is associated with the number.
-  optional com.android.dialer.logging.ContactSource.Type contact_source = 5;
+  optional com.android.dialer.logging.ContactSource.Type contact_source = 4;
 }

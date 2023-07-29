@@ -37,7 +37,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
 import com.android.dialer.common.concurrent.Annotations.LightweightExecutor;
 import com.android.dialer.inject.ApplicationContext;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.phonelookup.PhoneLookup;
 import com.android.dialer.phonelookup.PhoneLookupInfo;
 import com.android.dialer.phonelookup.PhoneLookupInfo.Cp2Info;
@@ -555,7 +554,6 @@ public final class Cp2DefaultDirectoryPhoneLookup implements PhoneLookup<Cp2Info
     PartitionedNumbers partitionedNumbers = new PartitionedNumbers(existingInfoMap.keySet());
 
     int invalidNumberCount = partitionedNumbers.invalidNumbers().size();
-    Logger.get(appContext).logAnnotatedCallLogMetrics(invalidNumberCount);
 
     if (invalidNumberCount > getMaxSupportedInvalidNumbers()) {
       for (String invalidNumber : partitionedNumbers.invalidNumbers()) {

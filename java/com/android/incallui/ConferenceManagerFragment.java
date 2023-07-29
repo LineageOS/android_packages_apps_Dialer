@@ -21,9 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.android.dialer.R;
 import com.android.dialer.contactphoto.ContactPhotoManager;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.ScreenEvent;
 import com.android.incallui.ConferenceManagerPresenter.ConferenceManagerUi;
 import com.android.incallui.baseui.BaseFragment;
 import com.android.incallui.call.CallList;
@@ -52,9 +52,6 @@ public class ConferenceManagerFragment
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    if (savedInstanceState != null) {
-      Logger.get(getContext()).logScreenView(ScreenEvent.Type.CONFERENCE_MANAGEMENT, getActivity());
-    }
   }
 
   @Override
