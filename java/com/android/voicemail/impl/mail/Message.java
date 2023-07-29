@@ -16,7 +16,6 @@
 package com.android.voicemail.impl.mail;
 
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -88,22 +87,7 @@ public abstract class Message implements Part, Body {
     return getFlagSet().toArray(new String[] {});
   }
 
-  /**
-   * Set/clear a flag directly, without involving overrides of {@link #setFlag} in subclasses. Only
-   * used for testing.
-   */
-  @VisibleForTesting
-  private final void setFlagDirectlyForTest(String flag, boolean set) throws MessagingException {
-    if (set) {
-      getFlagSet().add(flag);
-    } else {
-      getFlagSet().remove(flag);
-    }
-  }
-
-  public void setFlag(String flag, boolean set) throws MessagingException {
-    setFlagDirectlyForTest(flag, set);
-  }
+  public void setFlag(String flag, boolean set) throws MessagingException { }
 
   /**
    * This method calls setFlag(String, boolean)

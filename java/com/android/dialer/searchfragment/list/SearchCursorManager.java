@@ -19,7 +19,6 @@ package com.android.dialer.searchfragment.list;
 import android.database.MatrixCursor;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.Assert;
 import com.android.dialer.searchfragment.common.SearchCursor;
 import java.lang.annotation.Retention;
@@ -48,7 +47,6 @@ import java.util.List;
  *   <li>{@link #getRowType(int)}
  * </ul>
  */
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 public final class SearchCursorManager {
 
   /** IntDef for the different types of rows that can be shown when searching. */

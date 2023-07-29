@@ -19,7 +19,6 @@ package com.android.dialer.speeddial;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -55,13 +54,13 @@ import java.util.Set;
 /** Disambiguation dialog for favorite contacts in {@link SpeedDialFragment}. */
 public class DisambigDialog extends DialogFragment {
 
-  @VisibleForTesting public static final String FRAGMENT_TAG = "disambig_dialog";
+  private static final String FRAGMENT_TAG = "disambig_dialog";
   private final Set<String> phoneNumbers = new ArraySet<>();
 
   private SpeedDialUiItem speedDialUiItem;
-  @VisibleForTesting public List<Channel> channels;
-  @VisibleForTesting public LinearLayout container;
-  @VisibleForTesting public CheckBox rememberThisChoice;
+  private  List<Channel> channels;
+  private LinearLayout container;
+  private CheckBox rememberThisChoice;
 
   /** Show a disambiguation dialog for a starred contact without a favorite communication avenue. */
   public static DisambigDialog show(SpeedDialUiItem speedDialUiItem, FragmentManager manager) {
