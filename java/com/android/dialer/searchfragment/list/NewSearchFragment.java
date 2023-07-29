@@ -55,8 +55,6 @@ import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
@@ -544,8 +542,6 @@ public final class NewSearchFragment extends Fragment
 
   @Override
   public void placeDuoCall(String phoneNumber) {
-    Logger.get(getContext())
-        .logImpression(DialerImpression.Type.LIGHTBRINGER_VIDEO_REQUESTED_FROM_SEARCH);
     PreCall.start(
         getContext(),
         new CallIntentBuilder(phoneNumber, CallInitiationType.Type.REGULAR_SEARCH)

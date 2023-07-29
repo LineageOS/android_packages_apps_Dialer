@@ -37,9 +37,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -95,11 +92,7 @@ public class PostCall {
             : activity.getString(R.string.post_call_send_message);
 
     OnClickListener onClickListener =
-        v -> {
-          Logger.get(activity)
-              .logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_SEND_MESSAGE_CLICKED);
-          activity.startActivity(PostCallActivity.newIntent(activity, number, isRcsPostCall));
-        };
+        v -> activity.startActivity(PostCallActivity.newIntent(activity, number, isRcsPostCall));
 
     int durationMs = 8_000;
     activeSnackbar =
@@ -108,7 +101,6 @@ public class PostCall {
             .setActionTextColor(
                 activity.getResources().getColor(R.color.dialer_snackbar_action_text_color));
     activeSnackbar.show();
-    Logger.get(activity).logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_SEND_MESSAGE);
     StorageComponent.get(activity)
         .unencryptedSharedPrefs()
         .edit()
@@ -125,9 +117,6 @@ public class PostCall {
     String number = Assert.isNotNull(getPhoneNumber(activity));
     OnClickListener onClickListener =
         v -> {
-          Logger.get(activity)
-              .logImpression(
-                  DialerImpression.Type.POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE_CLICKED);
           Intent intent = IntentUtil.getSendSmsIntent(number);
           DialerUtils.startActivityWithErrorToast(activity, intent);
         };
@@ -146,8 +135,6 @@ public class PostCall {
                   }
                 });
     activeSnackbar.show();
-    Logger.get(activity)
-        .logImpression(DialerImpression.Type.POST_CALL_PROMPT_USER_TO_VIEW_SENT_MESSAGE);
     StorageComponent.get(activity)
         .unencryptedSharedPrefs()
         .edit()
@@ -180,20 +167,6 @@ public class PostCall {
         .putString(KEY_POST_CALL_CALL_NUMBER, number)
         .putBoolean(KEY_POST_CALL_MESSAGE_SENT, true)
         .apply();
-  }
-
-  /**
-   * Restart performance recording if there is a recent call (disconnect time to now is under
-   * threshold)
-   */
-  public static void restartPerformanceRecordingIfARecentCallExist(Context context) {
-    long disconnectTimeMillis =
-        StorageComponent.get(context)
-            .unencryptedSharedPrefs()
-            .getLong(PostCall.KEY_POST_CALL_CALL_DISCONNECT_TIME, -1);
-    if (disconnectTimeMillis != -1 && PerformanceReport.isRecording()) {
-      PerformanceReport.startRecording();
-    }
   }
 
   private static void clear(Context context) {

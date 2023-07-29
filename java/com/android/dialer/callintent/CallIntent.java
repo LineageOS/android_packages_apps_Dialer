@@ -32,7 +32,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.dialer.common.Assert;
-import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.util.CallUtil;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
@@ -138,17 +137,6 @@ public abstract class CallIntent implements Parcelable {
               .setLightbringerButtonAppearInExpandedCallLogItemCount(0)
               .setLightbringerButtonAppearInCollapsedCallLogItemCount(0)
               .setLightbringerButtonAppearInSearchCount(0);
-
-      if (PerformanceReport.isRecording()) {
-        builder
-            .setTimeSinceAppLaunch(PerformanceReport.getTimeSinceAppLaunch())
-            .setTimeSinceFirstClick(PerformanceReport.getTimeSinceFirstClick())
-            .addAllUiActionsSinceAppLaunch(PerformanceReport.getActions())
-            .addAllUiActionTimestampsSinceAppLaunch(PerformanceReport.getActionTimestamps())
-            .setStartingTabIndex(PerformanceReport.getStartingTabIndex())
-            .build();
-        PerformanceReport.stopRecording();
-      }
 
       setCallSpecificAppData(builder.build());
 
