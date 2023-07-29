@@ -29,8 +29,6 @@ import com.android.dialer.assisteddialing.AssistedDialingMediator;
 import com.android.dialer.assisteddialing.ConcreteCreator;
 import com.android.dialer.assisteddialing.CountryCodeProvider;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +77,6 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
     updateCountryChooserSummary(countryChooserPref);
 
     countryChooserPref.setOnPreferenceChangeListener(this::updateListSummary);
-    switchPref.setOnPreferenceChangeListener(this::logIfUserDisabledFeature);
   }
 
   private void updateCountryChooserSummary(ListPreference countryChooserPref) {
@@ -189,15 +186,6 @@ public class AssistedDialingSettingFragment extends PreferenceFragment {
     ListPreference listPref = (ListPreference) pref;
     CharSequence[] entries = listPref.getEntries();
     listPref.setSummary(entries[listPref.findIndexOfValue(newValue.toString())]);
-    return true;
-  }
-
-  boolean logIfUserDisabledFeature(Preference pref, Object newValue) {
-    if (!((boolean) newValue)) {
-      Logger.get(getActivity().getApplicationContext())
-          .logImpression(DialerImpression.Type.ASSISTED_DIALING_FEATURE_DISABLED_BY_USER);
-    }
-
     return true;
   }
 }
