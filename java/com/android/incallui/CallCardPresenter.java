@@ -50,8 +50,6 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contacts.ContactsComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
@@ -189,26 +187,9 @@ public class CallCardPresenter
     InCallPresenter.getInstance().addInCallEventListener(this);
     isInCallScreenReady = true;
 
-    // Log location impressions
-    if (isOutgoingEmergencyCall(primary)) {
-      Logger.get(context).logImpression(DialerImpression.Type.EMERGENCY_NEW_EMERGENCY_CALL);
-    } else if (isIncomingEmergencyCall(primary) || isIncomingEmergencyCall(secondary)) {
-      Logger.get(context).logImpression(DialerImpression.Type.EMERGENCY_CALLBACK);
-    }
-
     // Showing the location may have been skipped if the UI wasn't ready during previous layout.
     if (shouldShowLocation()) {
       inCallScreen.showLocationUi(getLocationFragment());
-
-      // Log location impressions
-      if (!hasLocationPermission()) {
-        Logger.get(context).logImpression(DialerImpression.Type.EMERGENCY_NO_LOCATION_PERMISSION);
-      } else if (isBatteryTooLowForEmergencyLocation()) {
-        Logger.get(context)
-            .logImpression(DialerImpression.Type.EMERGENCY_BATTERY_TOO_LOW_TO_GET_LOCATION);
-      } else if (!callLocation.canGetLocation(context)) {
-        Logger.get(context).logImpression(DialerImpression.Type.EMERGENCY_CANT_GET_LOCATION);
-      }
     }
   }
 
@@ -986,11 +967,6 @@ public class CallCardPresenter
       return;
     }
 
-    Logger.get(context)
-        .logCallImpression(
-            DialerImpression.Type.IN_CALL_SWAP_SECONDARY_BUTTON_PRESSED,
-            primary.getUniqueCallId(),
-            primary.getTimeAddedMs());
     LogUtil.i(
         "CallCardPresenter.onSecondaryInfoClicked", "swapping call to foreground: " + secondary);
     secondary.unhold();

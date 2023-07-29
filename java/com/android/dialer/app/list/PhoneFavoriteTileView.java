@@ -36,8 +36,6 @@ import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.callintent.SpeedDialContactType;
 import com.android.dialer.contactphoto.ContactPhotoManager.DefaultImageRequest;
 import com.android.dialer.lettertile.LetterTileDrawable;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 
 /**
  * A light version of the {@link com.android.contacts.common.list.ContactTileView} that is used in
@@ -144,8 +142,6 @@ public abstract class PhoneFavoriteTileView extends ContactTileView {
           // Don't set performance report now, since user may spend some time on picking a number
 
           // Copy "superclass" implementation
-          Logger.get(getContext())
-              .logInteraction(InteractionEvent.Type.SPEED_DIAL_CLICK_CONTACT_WITH_AMBIGUOUS_NUMBER);
           mListener.onContactSelected(
               getLookupUri(),
               MoreContactUtils.getTargetRectFromView(PhoneFavoriteTileView.this),

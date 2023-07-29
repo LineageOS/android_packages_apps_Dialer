@@ -55,8 +55,6 @@ import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.constants.Constants;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.phonenumbercache.CallLogQuery;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.PermissionsUtil;
@@ -846,9 +844,6 @@ public class VoicemailPlaybackPresenter
       return;
     }
     if (shareVoicemailButtonView != null) {
-      if (show) {
-        Logger.get(context).logImpression(DialerImpression.Type.VVM_SHARE_VISIBLE);
-      }
       LogUtil.d("VoicemailPlaybackPresenter.showShareVoicemailButton", "show: %b", show);
       shareVoicemailButtonView.setVisibility(show ? View.VISIBLE : View.GONE);
     }

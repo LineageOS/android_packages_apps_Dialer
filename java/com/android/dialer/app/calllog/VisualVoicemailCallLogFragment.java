@@ -35,8 +35,6 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.voicemail.listui.error.VoicemailErrorMessageCreator;
 import com.android.dialer.voicemail.listui.error.VoicemailStatus;
@@ -170,7 +168,6 @@ public class VisualVoicemailCallLogFragment extends CallLogFragment {
     super.onVisible();
     if (getActivity() != null && preSyncVoicemailStatusCheckExecutor != null) {
       preSyncVoicemailStatusCheckExecutor.executeParallel(getActivity());
-      Logger.get(getActivity()).logImpression(DialerImpression.Type.VVM_TAB_VIEWED);
       getActivity().setVolumeControlStream(VoicemailAudioManager.PLAYBACK_STREAM);
     }
   }
