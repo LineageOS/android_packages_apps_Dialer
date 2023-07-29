@@ -26,8 +26,6 @@ import androidx.annotation.NonNull;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -79,8 +77,6 @@ class NotificationThrottler {
           "app has %d notifications, system may suppress future notifications",
           activeNotifications.length);
       didLogHighGlobalNotificationCountReached = true;
-      Logger.get(context)
-          .logImpression(DialerImpression.Type.HIGH_GLOBAL_NOTIFICATION_COUNT_REACHED);
     }
 
     // Count the number of notificatons for this group (excluding the summary).

@@ -27,7 +27,6 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.impl.protocol.VisualVoicemailProtocol;
@@ -38,7 +37,6 @@ import com.android.voicemail.impl.sms.StatusMessage;
 import com.android.voicemail.impl.sms.StatusSmsFetcher;
 import com.android.voicemail.impl.sync.SyncTask;
 import com.android.voicemail.impl.sync.VvmAccountManager;
-import com.android.voicemail.impl.utils.LoggerUtils;
 import java.io.IOException;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -109,8 +107,6 @@ public class ActivationTask extends BaseTask {
 
   @Override
   public Intent createRestartIntent() {
-    LoggerUtils.logImpressionOnMainThread(
-        getContext(), DialerImpression.Type.VVM_AUTO_RETRY_ACTIVATION);
     Intent intent = super.createRestartIntent();
     // mMessageData is discarded, request a fresh STATUS SMS for retries.
     return intent;
@@ -120,8 +116,6 @@ public class ActivationTask extends BaseTask {
   @WorkerThread
   public void onExecuteInBackgroundThread() {
     Assert.isNotMainThread();
-    LoggerUtils.logImpressionOnMainThread(
-        getContext(), DialerImpression.Type.VVM_ACTIVATION_STARTED);
     PhoneAccountHandle phoneAccountHandle = getPhoneAccountHandle();
     if (phoneAccountHandle == null) {
       // This should never happen
@@ -241,8 +235,6 @@ public class ActivationTask extends BaseTask {
         helper.handleEvent(status, OmtpEvents.CONFIG_SERVICE_NOT_AVAILABLE);
       }
     }
-    LoggerUtils.logImpressionOnMainThread(
-        getContext(), DialerImpression.Type.VVM_ACTIVATION_COMPLETED);
   }
 
   private static void updateSource(

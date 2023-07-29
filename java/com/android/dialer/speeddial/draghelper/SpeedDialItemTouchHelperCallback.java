@@ -25,9 +25,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-
 /** {@link ItemTouchHelper} for Speed Dial favorite contacts. */
 public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
@@ -106,8 +103,6 @@ public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
       int toPos,
       int x,
       int y) {
-    Logger.get(context)
-        .logImpression(DialerImpression.Type.FAVORITE_MOVE_FAVORITE_BY_DRAG_AND_DROP);
     super.onMoved(recyclerView, viewHolder, fromPos, viewHolder1, toPos, x, y);
   }
 
