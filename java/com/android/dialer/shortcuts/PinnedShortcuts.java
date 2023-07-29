@@ -24,11 +24,11 @@ import android.content.pm.ShortcutManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.Contacts;
-import android.support.v4.content.ContextCompat;
 import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;

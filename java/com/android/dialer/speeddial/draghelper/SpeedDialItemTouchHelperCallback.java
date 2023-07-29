@@ -18,12 +18,12 @@ package com.android.dialer.speeddial.draghelper;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 /** {@link ItemTouchHelper} for Speed Dial favorite contacts. */
 public class SpeedDialItemTouchHelperCallback extends ItemTouchHelper.Callback {
