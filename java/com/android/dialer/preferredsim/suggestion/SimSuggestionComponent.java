@@ -17,7 +17,9 @@
 package com.android.dialer.preferredsim.suggestion;
 
 import android.content.Context;
-import android.support.annotation.WorkerThread;
+
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.inject.HasRootComponent;
 import dagger.Subcomponent;

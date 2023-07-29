@@ -20,7 +20,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.cp2.DirectoryUtils;
 import com.android.dialer.searchfragment.common.SearchCursor;

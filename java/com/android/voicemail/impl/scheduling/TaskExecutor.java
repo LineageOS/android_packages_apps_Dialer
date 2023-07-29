@@ -23,9 +23,11 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.MainThread;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.voicemail.impl.Assert;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.scheduling.TaskQueue.NextTask;

@@ -18,9 +18,11 @@ package com.android.dialer.compat.telephony;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.telecom.TelecomUtil;
 import java.lang.reflect.InvocationTargetException;

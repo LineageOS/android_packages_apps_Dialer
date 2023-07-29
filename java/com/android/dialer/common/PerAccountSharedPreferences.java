@@ -17,8 +17,10 @@ package com.android.dialer.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.Nullable;
+
 import java.util.Set;
 
 /**

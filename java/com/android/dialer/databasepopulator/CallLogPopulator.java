@@ -23,8 +23,10 @@ import android.content.OperationApplicationException;
 import android.os.RemoteException;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
-import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.common.Assert;
 import com.google.auto.value.AutoValue;
 import java.util.ArrayList;

@@ -25,12 +25,14 @@ import android.net.Network;
 import android.net.Uri;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.VoicemailStatus;
 import com.android.voicemail.impl.VvmLog;

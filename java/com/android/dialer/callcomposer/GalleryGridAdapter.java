@@ -20,12 +20,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+
+import androidx.annotation.NonNull;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.util.ArrayList;
@@ -34,7 +37,8 @@ import java.util.List;
 /** Bridges between the image cursor loaded by GalleryBoundCursorLoader and the GalleryGridView. */
 public class GalleryGridAdapter extends CursorAdapter {
 
-  @NonNull private final OnClickListener onClickListener;
+  @NonNull
+  private final OnClickListener onClickListener;
   @NonNull private final List<GalleryGridItemView> views = new ArrayList<>();
   @NonNull private final Context context;
 

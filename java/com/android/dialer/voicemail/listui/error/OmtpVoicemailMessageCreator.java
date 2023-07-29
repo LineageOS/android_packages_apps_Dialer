@@ -19,8 +19,11 @@ package com.android.dialer.voicemail.listui.error;
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.provider.VoicemailContract.Status;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.PerAccountSharedPreferences;
 import com.android.dialer.logging.DialerImpression;

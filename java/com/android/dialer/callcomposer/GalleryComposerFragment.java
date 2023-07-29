@@ -26,8 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -38,6 +36,11 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -79,7 +82,7 @@ public class GalleryComposerFragment extends CallComposerFragment
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle bundle) {
+          LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle bundle) {
     View view = inflater.inflate(R.layout.fragment_gallery_composer, container, false);
     galleryGridView = (GridView) view.findViewById(R.id.gallery_grid_view);
     permissionView = view.findViewById(R.id.permission_view);
@@ -250,7 +253,7 @@ public class GalleryComposerFragment extends CallComposerFragment
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+          int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     if (permissions.length > 0 && permissions[0].equals(this.permissions[0])) {
       PermissionsUtil.permissionRequested(getContext(), permissions[0]);
     }

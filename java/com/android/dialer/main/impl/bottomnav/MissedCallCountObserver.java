@@ -21,7 +21,9 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.provider.CallLog.Calls;
-import android.support.annotation.RequiresPermission;
+
+import androidx.annotation.RequiresPermission;
+
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar.TabIndex;

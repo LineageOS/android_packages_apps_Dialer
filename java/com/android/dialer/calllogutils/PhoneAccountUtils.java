@@ -17,9 +17,11 @@
 package com.android.dialer.calllogutils;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.telecom.TelecomUtil;
 
 /** Methods to help extract {@code PhoneAccount} information from database and Telecomm sources. */

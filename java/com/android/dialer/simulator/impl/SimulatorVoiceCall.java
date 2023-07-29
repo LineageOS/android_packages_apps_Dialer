@@ -18,12 +18,14 @@ package com.android.dialer.simulator.impl;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.telecom.Connection;
 import android.telecom.Connection.RttModifyStatus;
 import android.telecom.DisconnectCause;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
@@ -38,8 +40,10 @@ import com.android.dialer.simulator.SimulatorEnrichedCall;
 /** Entry point in the simulator to create voice calls. */
 final class SimulatorVoiceCall
     implements SimulatorConnectionService.Listener, SimulatorConnection.Listener {
-  @NonNull private final Context context;
-  @Nullable private String connectionTag;
+  @NonNull
+  private final Context context;
+  @Nullable
+  private String connectionTag;
   private final SimulatorEnrichedCall simulatorEnrichedCall;
 
   SimulatorVoiceCall(@NonNull Context context) {

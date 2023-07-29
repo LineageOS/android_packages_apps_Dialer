@@ -17,7 +17,6 @@
 package com.android.dialer.metrics;
 
 import android.app.Application;
-import android.support.annotation.Nullable;
 
 /** Logs metrics. */
 public interface Metrics {

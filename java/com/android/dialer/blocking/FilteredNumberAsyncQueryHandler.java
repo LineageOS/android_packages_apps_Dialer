@@ -25,10 +25,12 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabaseCorruptException;
 import android.net.Uri;
 import android.provider.BlockedNumberContract.BlockedNumbers;
-import android.support.annotation.Nullable;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import java.util.Map;
@@ -93,7 +95,7 @@ public class FilteredNumberAsyncQueryHandler extends AsyncQueryHandler {
    * check.
    */
   public void isBlockedNumber(
-      final OnCheckBlockedListener listener, @Nullable final String number, String countryIso) {
+          final OnCheckBlockedListener listener, @Nullable final String number, String countryIso) {
     if (number == null) {
       listener.onCheckComplete(INVALID_ID);
       return;

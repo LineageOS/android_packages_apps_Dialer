@@ -29,7 +29,9 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.Process;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.android.dialer.simulator.impl.SimulatorMainPortal;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
