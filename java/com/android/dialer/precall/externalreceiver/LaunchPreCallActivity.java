@@ -29,8 +29,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.callintent.CallInitiationType.Type;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.google.common.collect.ImmutableList;
 
@@ -65,7 +63,6 @@ public class LaunchPreCallActivity extends Activity {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Logger.get(this).logImpression(DialerImpression.Type.PRECALL_INITIATED_EXTERNAL);
 
     Intent intent = getIntent();
     CallIntentBuilder builder = new CallIntentBuilder(intent.getData(), Type.EXTERNAL_INITIATION);

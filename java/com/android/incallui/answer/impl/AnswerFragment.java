@@ -58,8 +58,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.MathUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.ViewUtil;
@@ -956,10 +954,7 @@ public class AnswerFragment extends Fragment
       if (context == null) {
         LogUtil.w(
             "AnswerFragment.rejectCall",
-            "Null context when rejecting call. Logger call was skipped");
-      } else {
-        Logger.get(context)
-            .logImpression(DialerImpression.Type.REJECT_INCOMING_CALL_FROM_ANSWER_SCREEN);
+            "Null context when rejecting call");
       }
       buttonRejectClicked = true;
       answerScreenDelegate.onReject();

@@ -24,10 +24,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactsfragment.ContactsFragment.OnContactSelectedListener;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.widget.BidiTextView;
 
 /** View holder for a contact. */
@@ -71,10 +71,6 @@ final class ContactViewHolder extends RecyclerView.ViewHolder implements OnClick
     name.setText(displayName);
     header.setText(headerText);
     header.setVisibility(showHeader ? View.VISIBLE : View.INVISIBLE);
-
-    Logger.get(context)
-        .logQuickContactOnTouch(
-            photo, InteractionEvent.Type.OPEN_QUICK_CONTACT_FROM_CONTACTS_FRAGMENT_BADGE, true);
   }
 
   public QuickContactBadge getPhoto() {

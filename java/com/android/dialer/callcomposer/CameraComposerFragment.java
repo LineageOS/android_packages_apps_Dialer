@@ -49,8 +49,6 @@ import com.android.dialer.callcomposer.camera.camerafocus.RenderOverlay;
 import com.android.dialer.callcomposer.cameraui.CameraMediaChooserView;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.dialer.util.PermissionsUtil;
 
@@ -112,7 +110,6 @@ public class CameraComposerFragment extends CallComposerFragment
 
     if (!PermissionsUtil.hasCameraPermissions(getContext())) {
       LogUtil.i("CameraComposerFragment.onCreateView", "Permission view shown.");
-      Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_DISPLAYED);
       ImageView permissionImage = permissionView.findViewById(R.id.permission_icon);
       TextView permissionText = permissionView.findViewById(R.id.permission_text);
       allowPermission = permissionView.findViewById(R.id.allow);
@@ -198,11 +195,9 @@ public class CameraComposerFragment extends CallComposerFragment
       // settings in order enable the permission.
       if (PermissionsUtil.isFirstRequest(getContext(), permissions[0])
           || shouldShowRequestPermissionRationale(permissions[0])) {
-        Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_REQUESTED);
         LogUtil.i("CameraComposerFragment.onClick", "Camera permission requested.");
         requestPermissions(permissions, CAMERA_PERMISSION);
       } else {
-        Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_SETTINGS);
         LogUtil.i("CameraComposerFragment.onClick", "Settings opened to enable permission.");
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -396,13 +391,11 @@ public class CameraComposerFragment extends CallComposerFragment
     if (requestCode == CAMERA_PERMISSION
         && grantResults.length > 0
         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_GRANTED);
       LogUtil.i("CameraComposerFragment.onRequestPermissionsResult", "Permission granted.");
       permissionView.setVisibility(View.GONE);
       PermissionsUtil.setCameraPrivacyToastShown(getContext());
       setupCamera();
     } else if (requestCode == CAMERA_PERMISSION) {
-      Logger.get(getContext()).logImpression(DialerImpression.Type.CAMERA_PERMISSION_DENIED);
       LogUtil.i("CameraComposerFragment.onRequestPermissionsResult", "Permission denied.");
     }
   }

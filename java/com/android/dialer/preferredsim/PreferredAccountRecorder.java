@@ -27,8 +27,6 @@ import androidx.annotation.WorkerThread;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.preferredsim.PreferredSimFallbackContract.PreferredSim;
 import com.android.dialer.preferredsim.suggestion.SimSuggestionComponent;
 import com.android.dialer.preferredsim.suggestion.SuggestionProvider.Suggestion;
@@ -54,19 +52,7 @@ public class PreferredAccountRecorder {
    */
   public void record(
       Context context, PhoneAccountHandle selectedAccountHandle, boolean setDefault) {
-
-    if (suggestion != null) {
-      if (suggestion.phoneAccountHandle.equals(selectedAccountHandle)) {
-        Logger.get(context)
-            .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_SUGGESTED_SIM_SELECTED);
-      } else {
-        Logger.get(context)
-            .logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_NON_SUGGESTED_SIM_SELECTED);
-      }
-    }
-
     if (dataId != null && setDefault) {
-      Logger.get(context).logImpression(DialerImpression.Type.DUAL_SIM_SELECTION_PREFERRED_SET);
       DialerExecutorComponent.get(context)
           .dialerExecutorFactory()
           .createNonUiTaskBuilder(new WritePreferredAccountWorker())

@@ -33,8 +33,6 @@ import com.android.contacts.common.widget.SelectPhoneAccountDialogOptions;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression.Type;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
 import com.android.dialer.precall.PreCallCoordinator.PendingAction;
@@ -99,7 +97,6 @@ public class CallingAccountSelector implements PreCallAction {
             null,
             null,
             null);
-        Logger.get(coordinator.getActivity()).logImpression(Type.DUAL_SIM_SELECTION_VOICEMAIL);
         break;
       case PhoneAccount.SCHEME_TEL:
         processPreferredAccount(coordinator);
