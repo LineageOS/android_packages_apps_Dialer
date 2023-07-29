@@ -17,11 +17,11 @@
 package com.android.incallui.telecomeventui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;

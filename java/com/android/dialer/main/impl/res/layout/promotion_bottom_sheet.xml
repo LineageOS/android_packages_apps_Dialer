@@ -37,7 +37,7 @@
       android:id="@+id/promotion_icon"
       android:layout_width="36dp"
       android:layout_height="36dp"
-      android:tint="?android:attr/colorPrimary"/>
+      app:tint="?android:attr/colorPrimary" />
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

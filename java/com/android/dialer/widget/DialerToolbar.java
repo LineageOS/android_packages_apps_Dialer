@@ -18,12 +18,12 @@ package com.android.dialer.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.dialer.R;
 import com.android.dialer.theme.base.ThemeComponent;

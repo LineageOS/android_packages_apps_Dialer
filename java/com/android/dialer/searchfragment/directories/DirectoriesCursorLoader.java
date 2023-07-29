@@ -18,11 +18,11 @@
 package com.android.dialer.searchfragment.directories;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 
 import androidx.annotation.Nullable;
+import androidx.loader.content.CursorLoader;
 
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.util.PermissionsUtil;

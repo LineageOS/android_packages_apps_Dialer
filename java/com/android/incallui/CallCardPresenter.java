@@ -29,8 +29,7 @@ import android.hardware.display.DisplayManager;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Trace;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.telecom.Call.Details;
 import android.telecom.StatusHints;
 import android.telecom.TelecomManager;
@@ -44,6 +43,7 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.android.contacts.common.ContactsUtils;
 import com.android.dialer.R;

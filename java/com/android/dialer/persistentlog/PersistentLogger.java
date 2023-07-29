@@ -19,7 +19,7 @@ package com.android.dialer.persistentlog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.v4.os.UserManagerCompat;
+import androidx.core.os.UserManagerCompat;
 
 import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;

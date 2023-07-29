@@ -17,10 +17,6 @@
 package com.android.dialer.speeddial;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager.SpanSizeLookup;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -30,6 +26,10 @@ import android.widget.FrameLayout;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
@@ -214,8 +214,8 @@ public final class SpeedDialAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     return ImmutableList.copyOf(speedDialUiItems);
   }
 
-  public SpanSizeLookup getSpanSizeLookup() {
-    return new SpanSizeLookup() {
+  public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
+    return new GridLayoutManager.SpanSizeLookup() {
       @Override
       public int getSpanSize(int position) {
         switch (getItemViewType(position)) {

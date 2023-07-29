@@ -23,10 +23,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Trace;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.os.UserManagerCompat;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.core.os.UserManagerCompat;
+import androidx.fragment.app.Fragment;
+
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;

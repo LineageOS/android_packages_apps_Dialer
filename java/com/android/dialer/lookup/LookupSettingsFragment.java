@@ -18,14 +18,14 @@ package com.android.dialer.lookup;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.ListPreference;
-import android.preference.SwitchPreference;
+
+import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.dialer.R;
 import com.android.dialer.app.settings.DialerPreferenceFragment;
-
-import java.util.Arrays;
 
 public class LookupSettingsFragment extends DialerPreferenceFragment
     implements Preference.OnPreferenceChangeListener {
@@ -44,7 +44,10 @@ public class LookupSettingsFragment extends DialerPreferenceFragment
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getPreferenceManager().setStorageDeviceProtected();
+  }
 
+  @Override
+  public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
     addPreferencesFromResource(R.xml.lookup_settings);
 
     enableForwardLookup = (SwitchPreference) findPreference(KEY_ENABLE_FORWARD_LOOKUP);
