@@ -34,11 +34,8 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.phonenumbercache.ContactInfo;
-import com.android.dialer.spam.SpamComponent;
 import com.android.dialer.telecom.TelecomUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -199,30 +196,7 @@ class VisualVoicemailUpdateTask implements Worker<VisualVoicemailUpdateTask.Inpu
   @WorkerThread
   private static List<NewCall> filterSpamNumbers(Context context, List<NewCall> newCalls) {
     Assert.isWorkerThread();
-    if (!SpamComponent.get(context).spamSettings().isSpamBlockingEnabled()) {
-      return newCalls;
-    }
-
-    List<NewCall> result = new ArrayList<>();
-    for (NewCall newCall : newCalls) {
-      Logger.get(context).logImpression(DialerImpression.Type.INCOMING_VOICEMAIL_SCREENED);
-      if (SpamComponent.get(context)
-          .spam()
-          .checkSpamStatusSynchronous(newCall.number, newCall.countryIso)) {
-        LogUtil.i(
-            "VisualVoicemailUpdateTask.filterSpamNumbers",
-            "found voicemail from spam number, suppressing notification");
-        Logger.get(context)
-            .logImpression(DialerImpression.Type.INCOMING_VOICEMAIL_AUTO_BLOCKED_AS_SPAM);
-        if (newCall.voicemailUri != null) {
-          // Mark auto blocked voicemail as old so that we don't process it again.
-          VoicemailQueryHandler.markSingleNewVoicemailAsOld(context, newCall.voicemailUri);
-        }
-      } else {
-        result.add(newCall);
-      }
-    }
-    return result;
+    return newCalls;
   }
 
   /** Updates the voicemail notifications displayed. */

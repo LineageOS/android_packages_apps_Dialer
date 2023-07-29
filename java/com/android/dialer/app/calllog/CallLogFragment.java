@@ -63,10 +63,7 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.database.CallLogQueryHandler;
 import com.android.dialer.database.CallLogQueryHandler.Listener;
 import com.android.dialer.location.GeoUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.oem.CequintCallerIdManager;
-import com.android.dialer.performancereport.PerformanceReport;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
@@ -298,7 +295,6 @@ public class CallLogFragment extends Fragment
     recyclerView.setHasFixedSize(true);
     layoutManager = new LinearLayoutManager(getActivity());
     recyclerView.setLayoutManager(layoutManager);
-    PerformanceReport.logOnScrollStateChange(recyclerView);
     emptyListView = (EmptyContentView) view.findViewById(R.id.empty_list_view);
     emptyListView.setImage(R.drawable.empty_call_log);
     emptyListView.setActionClickedListener(this);
@@ -698,11 +694,6 @@ public class CallLogFragment extends Fragment
   @Override
   public void onClick(View v) {
     selectAllMode = !selectAllMode;
-    if (selectAllMode) {
-      Logger.get(v.getContext()).logImpression(DialerImpression.Type.MULTISELECT_SELECT_ALL);
-    } else {
-      Logger.get(v.getContext()).logImpression(DialerImpression.Type.MULTISELECT_UNSELECT_ALL);
-    }
     updateSelectAllIcon();
   }
 

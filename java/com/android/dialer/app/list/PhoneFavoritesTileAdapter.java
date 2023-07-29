@@ -42,8 +42,6 @@ import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.duo.Duo;
 import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.logging.InteractionEvent;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.shortcuts.ShortcutRefresher;
 import com.google.common.collect.ComparisonChain;
 import java.util.ArrayList;
@@ -301,16 +299,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
         lightbringerReachableContactsCount++;
       }
     }
-
-    Logger.get(context)
-        .logSpeedDialContactComposition(
-            counter,
-            starredContactsCount,
-            pinnedContactsCount,
-            multipleNumbersContactsCount,
-            contactsWithPhotoCount,
-            contactsWithNameCount,
-            lightbringerReachableContactsCount);
     // Logs for manual testing
     LogUtil.v("PhoneFavoritesTileAdapter.saveCursorToCache", "counter: %d", counter);
     LogUtil.v(
@@ -524,7 +512,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     }
     try {
       context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, operations);
-      Logger.get(context).logInteraction(InteractionEvent.Type.SPEED_DIAL_PIN_CONTACT);
     } catch (RemoteException | OperationApplicationException e) {
       LogUtil.e(TAG, "Exception thrown when pinning contacts", e);
     }
@@ -673,7 +660,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
     if (draggedEntry != null) {
       unstarAndUnpinContact(draggedEntry.lookupUri);
       awaitingRemove = true;
-      Logger.get(context).logInteraction(InteractionEvent.Type.SPEED_DIAL_REMOVE_CONTACT);
     }
   }
 
