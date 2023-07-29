@@ -17,7 +17,8 @@
 
 package com.android.dialer.callstats;
 
-import android.app.Fragment;
+import static android.Manifest.permission.READ_CALL_LOG;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -26,12 +27,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.telecom.PhoneAccountHandle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +36,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.dialer.R;
 import com.android.dialer.app.contactinfo.ExpirableCacheHeadlessFragment;
@@ -49,8 +51,6 @@ import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.EmptyContentView;
 
 import java.util.Map;
-
-import static android.Manifest.permission.READ_CALL_LOG;
 
 public class CallStatsFragment extends Fragment implements
     CallStatsQueryHandler.Listener, FilterSpinnerHelper.OnFilterChangedListener,
@@ -157,7 +157,7 @@ public class CallStatsFragment extends Fragment implements
             new DoubleDatePickerDialog.Fragment();
         fragment.setArguments(
             DoubleDatePickerDialog.Fragment.createArguments(mFilterFrom, mFilterTo));
-        fragment.show(getFragmentManager(), "filter");
+        fragment.show(getParentFragmentManager(), "filter");
         break;
       }
       case R.id.reset_date_filter: {

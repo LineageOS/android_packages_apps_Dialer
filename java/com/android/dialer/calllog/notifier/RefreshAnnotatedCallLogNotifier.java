@@ -19,7 +19,9 @@ package com.android.dialer.calllog.notifier;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.content.LocalBroadcastManager;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.android.dialer.calllog.constants.IntentNames;
 import com.android.dialer.calllog.constants.SharedPrefKeys;
 import com.android.dialer.common.LogUtil;

@@ -40,12 +40,14 @@ public final class BottomNavBar extends LinearLayout {
   /** Index for each tab in the bottom nav. */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
+    TabIndex.NONE,
     TabIndex.SPEED_DIAL,
     TabIndex.CALL_LOG,
     TabIndex.CONTACTS,
     TabIndex.VOICEMAIL,
   })
   public @interface TabIndex {
+    int NONE = -1;
     int SPEED_DIAL = 0;
     int CALL_LOG = 1;
     int CONTACTS = 2;
