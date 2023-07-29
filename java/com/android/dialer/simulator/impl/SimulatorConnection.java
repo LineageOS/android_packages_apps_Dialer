@@ -17,11 +17,13 @@
 package com.android.dialer.simulator.impl;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.telecom.Connection;
 import android.telecom.Connection.RttTextStream;
 import android.telecom.ConnectionRequest;
 import android.telecom.VideoProfile;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.simulator.Simulator;

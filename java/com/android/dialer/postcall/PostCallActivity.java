@@ -23,10 +23,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
@@ -46,7 +49,7 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
   private boolean useRcs;
 
   public static Intent newIntent(
-      @NonNull Context context, @NonNull String number, boolean isRcsPostCall) {
+          @NonNull Context context, @NonNull String number, boolean isRcsPostCall) {
     Intent intent = new Intent(Assert.isNotNull(context), PostCallActivity.class);
     intent.putExtra(KEY_PHONE_NUMBER, Assert.isNotNull(number));
     intent.putExtra(KEY_RCS_POST_CALL, isRcsPostCall);

@@ -18,9 +18,11 @@ package com.android.incallui.call;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
 import android.telecom.Call;
 import android.util.ArraySet;
+
+import androidx.annotation.NonNull;
+
 import com.android.contacts.common.compat.CallCompat;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;

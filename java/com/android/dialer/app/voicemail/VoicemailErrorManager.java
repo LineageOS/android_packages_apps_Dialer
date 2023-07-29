@@ -20,12 +20,14 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Handler;
-import android.support.annotation.MainThread;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
+
+import androidx.annotation.MainThread;
+
 import com.android.dialer.app.calllog.CallLogAlertManager;
 import com.android.dialer.app.calllog.CallLogModalAlertManager;
 import com.android.dialer.common.Assert;

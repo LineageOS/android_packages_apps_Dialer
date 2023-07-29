@@ -23,8 +23,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
-import android.support.annotation.NonNull;
 import android.telecom.PhoneAccountHandle;
+
+import androidx.annotation.NonNull;
+
 import com.android.dialer.common.Assert;
 import com.android.voicemail.impl.Voicemail;
 import java.util.ArrayList;
@@ -87,7 +89,7 @@ public class VoicemailsQueryHelper {
    * @return A list of voicemails according to the selection statement.
    */
   private List<Voicemail> getLocalVoicemails(
-      @NonNull PhoneAccountHandle unusedPhoneAccountHandle, String selection) {
+          @NonNull PhoneAccountHandle unusedPhoneAccountHandle, String selection) {
     Cursor cursor = contentResolver.query(sourceUri, PROJECTION, selection, null, null);
     if (cursor == null) {
       return null;

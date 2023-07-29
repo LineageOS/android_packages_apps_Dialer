@@ -21,8 +21,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
 import android.os.RemoteException;
-import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
+
+import androidx.annotation.WorkerThread;
+
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.calllog.datasources.CallLogMutations;

@@ -17,7 +17,8 @@
 package com.android.dialer.notification.missedcalls;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /** Static methods related to missed call notification tags. */
 public final class MissedCallNotificationTags {

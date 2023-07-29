@@ -27,11 +27,6 @@ import android.os.Trace;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.DisplayNameSources;
-import android.support.annotation.AnyThread;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.os.UserManagerCompat;
 import android.telecom.TelecomManager;
@@ -39,7 +34,15 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
+import androidx.annotation.AnyThread;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import com.android.contacts.common.ContactsUtils;
+import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.DialerExecutor;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;

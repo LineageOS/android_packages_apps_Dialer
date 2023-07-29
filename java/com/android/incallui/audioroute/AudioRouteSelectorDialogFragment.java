@@ -25,7 +25,6 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.telecom.CallAudioState;
 import android.view.LayoutInflater;
@@ -34,6 +33,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.android.dialer.R;
 import com.android.dialer.common.FragmentUtils;

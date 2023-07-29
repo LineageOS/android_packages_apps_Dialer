@@ -16,7 +16,8 @@
 
 package com.android.dialer.commandline;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Handles a Command from {@link CommandLineReceiver}. */

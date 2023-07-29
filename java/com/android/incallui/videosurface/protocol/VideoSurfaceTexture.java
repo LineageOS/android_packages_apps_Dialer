@@ -17,9 +17,11 @@
 package com.android.incallui.videosurface.protocol;
 
 import android.graphics.Point;
-import android.support.annotation.IntDef;
 import android.view.Surface;
 import android.view.TextureView;
+
+import androidx.annotation.IntDef;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

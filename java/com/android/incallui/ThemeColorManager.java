@@ -18,12 +18,14 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
 import android.support.v4.graphics.ColorUtils;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
+
 import com.android.contacts.common.util.MaterialColorMapUtils;
 import com.android.contacts.common.util.MaterialColorMapUtils.MaterialPalette;
 import com.android.dialer.R;
