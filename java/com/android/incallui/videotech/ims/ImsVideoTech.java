@@ -19,7 +19,6 @@ package com.android.incallui.videotech.ims;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.Call.Details;
 import android.telecom.PhoneAccountHandle;
@@ -39,7 +38,7 @@ public class ImsVideoTech implements VideoTech {
   private final LoggingBindings logger;
   private final Call call;
   private final VideoTechListener listener;
-  @VisibleForTesting ImsVideoCallCallback callback;
+  private ImsVideoCallCallback callback;
   private @SessionModificationState int sessionModificationState =
       SessionModificationState.NO_REQUEST;
   private int previousVideoState = VideoProfile.STATE_AUDIO_ONLY;

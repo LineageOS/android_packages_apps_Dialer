@@ -20,7 +20,6 @@ package com.android.incallui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.LogUtil;
 import com.android.incallui.InCallPresenter.InCallState;
 import com.android.incallui.InCallPresenter.InCallStateListener;
@@ -33,14 +32,12 @@ import com.android.incallui.call.CallList;
  */
 public class MotorolaInCallUiNotifier implements InCallUiListener, InCallStateListener {
 
-  @VisibleForTesting static final String EXTRA_VISIBLE_KEY = "visible";
+  private static final String EXTRA_VISIBLE_KEY = "visible";
 
-  @VisibleForTesting
-  static final String ACTION_INCOMING_CALL_VISIBILITY_CHANGED =
+  private static final String ACTION_INCOMING_CALL_VISIBILITY_CHANGED =
       "com.motorola.incallui.action.INCOMING_CALL_VISIBILITY_CHANGED";
 
-  @VisibleForTesting
-  static final String PERMISSION_INCOMING_CALL_VISIBILITY_CHANGED =
+  private static final String PERMISSION_INCOMING_CALL_VISIBILITY_CHANGED =
       "com.motorola.incallui.permission.INCOMING_CALL_VISIBILITY_CHANGED";
 
   private final Context context;

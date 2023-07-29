@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -366,11 +365,6 @@ public class VoicemailPlaybackLayout extends LinearLayout
       minutes = 99;
     }
     return String.format("%02d:%02d", minutes, seconds);
-  }
-
-  @VisibleForTesting
-  public String getStateText() {
-    return stateText.getText().toString();
   }
 
   /** Controls the animation of the playback slider. */

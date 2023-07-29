@@ -20,7 +20,6 @@ import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.MainThread;
-import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.calllog.model.CoalescedRow;
@@ -65,7 +64,7 @@ public final class RealtimeRowProcessor {
   /*
    * The time to wait between writing batches of records to PhoneLookupHistory.
    */
-  @VisibleForTesting static final long BATCH_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
+  private static final long BATCH_WAIT_MILLIS = TimeUnit.SECONDS.toMillis(3);
 
   private final Context appContext;
   private final CompositePhoneLookup compositePhoneLookup;

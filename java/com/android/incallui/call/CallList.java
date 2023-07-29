@@ -22,7 +22,6 @@ import android.os.Message;
 import android.os.Trace;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
@@ -67,7 +66,7 @@ public class CallList implements DialerCallDelegate {
 
   private static final int EVENT_DISCONNECTED_TIMEOUT = 1;
 
-  private static CallList instance = new CallList();
+  private static final CallList instance = new CallList();
 
   private final Map<String, DialerCall> callById = new ArrayMap<>();
   private final Map<android.telecom.Call, DialerCall> callByTelecomCall = new ArrayMap<>();
@@ -104,13 +103,7 @@ public class CallList implements DialerCallDelegate {
    * USED ONLY FOR TESTING Testing-only constructor. Instance should only be acquired through
    * getRunningInstance().
    */
-  @VisibleForTesting
   public CallList() {}
-
-  @VisibleForTesting
-  public static void setCallListInstance(CallList callList) {
-    instance = callList;
-  }
 
   /** Static singleton accessor method. */
   public static CallList getInstance() {
@@ -588,7 +581,6 @@ public class CallList implements DialerCallDelegate {
    *
    * @param call The call to update.
    */
-  @VisibleForTesting
   void onUpdateCall(DialerCall call) {
     Trace.beginSection("CallList.onUpdateCall");
     LogUtil.d("CallList.onUpdateCall", String.valueOf(call));

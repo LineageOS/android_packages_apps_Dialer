@@ -31,7 +31,6 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -302,11 +301,6 @@ public class CallLogAdapter extends GroupingListAdapter
           return true;
         }
       };
-
-  @VisibleForTesting
-  public View.OnClickListener getExpandCollapseListener() {
-    return expandCollapseListener;
-  }
 
   /** The OnClickListener used to expand or collapse the action buttons of a call log entry. */
   private final View.OnClickListener expandCollapseListener =
@@ -690,8 +684,7 @@ public class CallLogAdapter extends GroupingListAdapter
     return callLogAlertManager;
   }
 
-  @VisibleForTesting
-  /* package */ void pauseCache() {
+  private void pauseCache() {
     contactInfoCache.stop();
     callLogCache.reset();
   }
@@ -1310,24 +1303,6 @@ public class CallLogAdapter extends GroupingListAdapter
     }
     cursor.moveToPosition(position);
     return features;
-  }
-
-  /**
-   * Sets whether processing of requests for contact details should be enabled.
-   *
-   * <p>This method should be called in tests to disable such processing of requests when not
-   * needed.
-   */
-  @VisibleForTesting
-  void disableRequestProcessingForTest() {
-    // TODO: Remove this and test the cache directly.
-    contactInfoCache.disableRequestProcessing();
-  }
-
-  @VisibleForTesting
-  void injectContactInfoForTest(String number, String countryIso, ContactInfo contactInfo) {
-    // TODO: Remove this and test the cache directly.
-    contactInfoCache.injectContactInfoForTest(number, countryIso, contactInfo);
   }
 
   /**
