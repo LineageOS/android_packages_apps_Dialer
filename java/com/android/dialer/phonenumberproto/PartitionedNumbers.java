@@ -16,11 +16,10 @@
 
 package com.android.dialer.phonenumberproto;
 
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.ArraySet;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
+import androidx.collection.ArrayMap;
+import androidx.collection.ArraySet;
 
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;

@@ -24,7 +24,6 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.telecom.PhoneAccount;
@@ -33,6 +32,7 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;

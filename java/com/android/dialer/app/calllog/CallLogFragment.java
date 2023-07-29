@@ -19,11 +19,9 @@ package com.android.dialer.app.calllog;
 import static android.Manifest.permission.READ_CALL_LOG;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -32,11 +30,6 @@ import android.os.Message;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.provider.ContactsContract;
-import android.support.v13.app.FragmentCompat;
-import android.support.v13.app.FragmentCompat.OnRequestPermissionsResultCallback;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,8 +39,12 @@ import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.dialer.app.R;
+import com.android.dialer.R;
 import com.android.dialer.app.calllog.CallLogAdapter.CallFetcher;
 import com.android.dialer.app.calllog.CallLogAdapter.MultiSelectRemoveView;
 import com.android.dialer.app.calllog.calllogcache.CallLogCache;
@@ -78,7 +75,6 @@ public class CallLogFragment extends Fragment
         CallFetcher,
         MultiSelectRemoveView,
         OnEmptyViewActionButtonClickedListener,
-        OnRequestPermissionsResultCallback,
         CallLogModalAlertManager.Listener,
         OnClickListener {
   private static final String KEY_FILTER_TYPE = "filter_type";
@@ -567,14 +563,15 @@ public class CallLogFragment extends Fragment
       LogUtil.i(
           "CallLogFragment.onEmptyViewActionButtonClicked",
           "Requesting permissions: " + Arrays.toString(deniedPermissions));
-      FragmentCompat.requestPermissions(this, deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
+      requestPermissions(deniedPermissions, PHONE_PERMISSIONS_REQUEST_CODE);
     } else if (!isCallLogActivity) {
       LogUtil.i("CallLogFragment.onEmptyViewActionButtonClicked", "showing dialpad");
       // Show dialpad if we are not in the call log activity.
       FragmentUtils.getParentUnsafe(this, HostInterface.class).showDialpad();
     }
   }
-
+  //TODO: BadDaemon: Reimplement this
+/*
   @Override
   public void onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {
@@ -584,7 +581,7 @@ public class CallLogFragment extends Fragment
         refreshDataRequired = true;
       }
     }
-  }
+  }*/
 
   /** Schedules an update to the relative call times (X mins ago). */
   private void rescheduleDisplayUpdate() {

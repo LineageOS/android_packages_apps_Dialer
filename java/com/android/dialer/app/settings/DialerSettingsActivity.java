@@ -15,13 +15,14 @@
  */
 package com.android.dialer.app.settings;
 
+import static android.os.Build.VERSION_CODES.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -31,6 +32,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.android.dialer.app.R;
 import com.android.dialer.blocking.FilteredNumbersUtil;

@@ -18,14 +18,14 @@ package com.android.dialer.persistentlog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v4.os.UserManagerCompat;
 
 import androidx.annotation.AnyThread;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.os.UserManagerCompat;
+import androidx.preference.PreferenceManager;
 
 import com.android.dialer.common.LogUtil;
 import java.io.ByteArrayInputStream;

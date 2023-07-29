@@ -16,13 +16,13 @@
 
 package com.android.incallui.rtt.impl;
 
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /** ViewHolder class for RTT advisory text. */
-public class AdvisoryViewHolder extends ViewHolder {
+public class AdvisoryViewHolder extends RecyclerView.ViewHolder {
 
   public AdvisoryViewHolder(@NonNull View itemView) {
     super(itemView);
