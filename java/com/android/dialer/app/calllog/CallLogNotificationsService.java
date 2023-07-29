@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.app.voicemail.LegacyVoicemailNotificationReceiver;
@@ -51,15 +50,13 @@ import com.android.dialer.util.PermissionsUtil;
  */
 public class CallLogNotificationsService extends IntentService {
 
-  @VisibleForTesting
-  static final String ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD =
+  private static final String ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD =
       "com.android.dialer.calllog.ACTION_MARK_ALL_NEW_VOICEMAILS_AS_OLD";
 
   private static final String ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD =
       "com.android.dialer.calllog.ACTION_MARK_SINGLE_NEW_VOICEMAIL_AS_OLD ";
 
-  @VisibleForTesting
-  static final String ACTION_CANCEL_ALL_MISSED_CALLS =
+  private static final String ACTION_CANCEL_ALL_MISSED_CALLS =
       "com.android.dialer.calllog.ACTION_CANCEL_ALL_MISSED_CALLS";
 
   private static final String ACTION_CANCEL_SINGLE_MISSED_CALL =

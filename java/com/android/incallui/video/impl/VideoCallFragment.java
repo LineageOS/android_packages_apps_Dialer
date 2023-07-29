@@ -33,7 +33,6 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
@@ -95,13 +94,12 @@ public class VideoCallFragment extends Fragment
         AudioRouteSelectorPresenter,
         OnSystemUiVisibilityChangeListener {
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-  static final String ARG_CALL_ID = "call_id";
+  private static final String ARG_CALL_ID = "call_id";
 
   private static final String TAG_VIDEO_CHARGES_ALERT = "tag_video_charges_alert";
 
-  @VisibleForTesting static final float BLUR_PREVIEW_RADIUS = 16.0f;
-  @VisibleForTesting static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
+  private static final float BLUR_PREVIEW_RADIUS = 16.0f;
+  private static final float BLUR_PREVIEW_SCALE_FACTOR = 1.0f;
   private static final float BLUR_REMOTE_RADIUS = 25.0f;
   private static final float BLUR_REMOTE_SCALE_FACTOR = 0.25f;
   private static final float ASPECT_RATIO_MATCH_THRESHOLD = 0.2f;
@@ -1202,7 +1200,6 @@ public class VideoCallFragment extends Fragment
         BLUR_REMOTE_SCALE_FACTOR);
   }
 
-  @VisibleForTesting
   void updateBlurredImageView(
       TextureView textureView,
       ImageView blurredImageView,

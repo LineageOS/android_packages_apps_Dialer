@@ -17,7 +17,6 @@
 package com.android.voicemail.impl.mail.store.imap;
 
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.util.ArrayMap;
 import android.util.Base64;
 import com.android.voicemail.impl.VvmLog;
@@ -61,11 +60,6 @@ public class DigestMd5Utils {
     public String cnonce;
     public String digestUri;
     public String qop;
-
-    @VisibleForTesting
-    Data() {
-      // Do nothing
-    }
 
     public Data(ImapStore imapStore, MailTransport transport, Map<String, String> challenge) {
       username = imapStore.getUsername();
@@ -151,7 +145,6 @@ public class DigestMd5Utils {
   * @param isResponseAuth is the response the one the server is returning us. response-auth has
   * different a2 format.
   */
-  @VisibleForTesting
   static String getResponse(Data data, boolean isResponseAuth) {
     StringBuilder a1 = new StringBuilder();
     a1.append(

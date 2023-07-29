@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -57,7 +56,7 @@ import com.google.common.base.Optional;
  */
 public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
-  @VisibleForTesting public static final String ARG_OPTIONS = "options";
+  private static final String ARG_OPTIONS = "options";
 
   private static final String ARG_IS_DEFAULT_CHECKED = "is_default_checked";
 
@@ -81,17 +80,6 @@ public class SelectPhoneAccountDialogFragment extends DialogFragment {
 
   public void setListener(SelectPhoneAccountListener listener) {
     this.listener = listener;
-  }
-
-  @Nullable
-  @VisibleForTesting
-  public SelectPhoneAccountListener getListener() {
-    return listener;
-  }
-
-  @VisibleForTesting
-  public boolean canSetDefault() {
-    return options.getCanSetDefault();
   }
 
   @Override

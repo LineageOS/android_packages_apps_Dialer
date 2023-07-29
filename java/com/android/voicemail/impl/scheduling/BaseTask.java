@@ -23,12 +23,10 @@ import android.os.SystemClock;
 import android.support.annotation.CallSuper;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.proguard.UsedByReflection;
 import com.android.voicemail.impl.Assert;
-import com.android.voicemail.impl.NeededForTesting;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,6 @@ import java.util.List;
 @UsedByReflection(value = "Tasks.java")
 public abstract class BaseTask implements Task {
 
-  @VisibleForTesting
   public static final String EXTRA_PHONE_ACCOUNT_HANDLE = "extra_phone_account_handle";
 
   private static final String EXTRA_EXECUTION_TIME = "extra_execution_time";
@@ -57,8 +54,6 @@ public abstract class BaseTask implements Task {
   @NonNull private final List<Policy> policies = new ArrayList<>();
 
   private long executionTime;
-
-  private static Clock clock = new Clock();
 
   protected BaseTask(int id) {
     this.id = id;
@@ -123,7 +118,7 @@ public abstract class BaseTask implements Task {
   }
 
   public long getTimeMillis() {
-    return clock.getTimeMillis();
+    return SystemClock.elapsedRealtime();
   }
 
   /**
@@ -208,19 +203,5 @@ public abstract class BaseTask implements Task {
     for (Policy policy : policies) {
       policy.onDuplicatedTaskAdded();
     }
-  }
-
-  @NeededForTesting
-  static class Clock {
-
-    public long getTimeMillis() {
-      return SystemClock.elapsedRealtime();
-    }
-  }
-
-  /** Used to replace the clock with an deterministic clock */
-  @NeededForTesting
-  static void setClockForTesting(Clock clock) {
-    BaseTask.clock = clock;
   }
 }

@@ -18,7 +18,6 @@ package com.android.dialer.searchfragment.list;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.text.TextUtils;
@@ -36,7 +35,6 @@ import com.android.dialer.searchfragment.nearbyplaces.NearbyPlaceViewHolder;
 import java.util.List;
 
 /** RecyclerView adapter for {@link NewSearchFragment}. */
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
 
   private final SearchCursorManager searchCursorManager;
@@ -50,7 +48,6 @@ public final class SearchAdapter extends RecyclerView.Adapter<ViewHolder> {
   private OnClickListener dismissClickListener;
   private RowClickListener rowClickListener;
 
-  @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
   public SearchAdapter(
       Context context, SearchCursorManager searchCursorManager, RowClickListener rowClickListener) {
     this.context = context;

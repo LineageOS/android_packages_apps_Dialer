@@ -23,28 +23,14 @@ import java.util.concurrent.Executor;
 
 /**
  * Factory methods for creating AsyncTaskExecutors.
- *
- * <p>All of the factory methods on this class check first to see if you have set a static {@link
- * AsyncTaskExecutorFactory} set through the {@link #setFactoryForTest(AsyncTaskExecutorFactory)}
- * method, and if so delegate to that instead, which is one way of injecting dependencies for
- * testing classes whose construction cannot be controlled such as {@link android.app.Activity}.
  */
 public final class AsyncTaskExecutors {
-
-  /**
-   * A single instance of the {@link AsyncTaskExecutorFactory}, to which we delegate if it is
-   * non-null, for injecting when testing.
-   */
-  private static AsyncTaskExecutorFactory injectedAsyncTaskExecutorFactory = null;
 
   /**
    * Creates an AsyncTaskExecutor that submits tasks to run with {@link AsyncTask#SERIAL_EXECUTOR}.
    */
   public static AsyncTaskExecutor createAsyncTaskExecutor() {
     synchronized (AsyncTaskExecutors.class) {
-      if (injectedAsyncTaskExecutorFactory != null) {
-        return injectedAsyncTaskExecutorFactory.createAsyncTaskExeuctor();
-      }
       return new SimpleAsyncTaskExecutor(AsyncTask.SERIAL_EXECUTOR);
     }
   }
@@ -55,23 +41,8 @@ public final class AsyncTaskExecutors {
    */
   public static AsyncTaskExecutor createThreadPoolExecutor() {
     synchronized (AsyncTaskExecutors.class) {
-      if (injectedAsyncTaskExecutorFactory != null) {
-        return injectedAsyncTaskExecutorFactory.createAsyncTaskExeuctor();
-      }
       return new SimpleAsyncTaskExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
-  }
-
-  public static void setFactoryForTest(AsyncTaskExecutorFactory factory) {
-    synchronized (AsyncTaskExecutors.class) {
-      injectedAsyncTaskExecutorFactory = factory;
-    }
-  }
-
-  /** Interface for creating AsyncTaskExecutor objects. */
-  public interface AsyncTaskExecutorFactory {
-
-    AsyncTaskExecutor createAsyncTaskExeuctor();
   }
 
   static class SimpleAsyncTaskExecutor implements AsyncTaskExecutor {
