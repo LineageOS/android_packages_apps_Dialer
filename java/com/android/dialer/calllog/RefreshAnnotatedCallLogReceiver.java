@@ -27,9 +27,6 @@ import com.android.dialer.calllog.RefreshAnnotatedCallLogWorker.RefreshResult;
 import com.android.dialer.calllog.constants.IntentNames;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
-import com.android.dialer.logging.LoggingBindings;
 import com.android.dialer.metrics.Metrics;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.FutureCallback;
@@ -51,7 +48,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   private static final long REFRESH_ANNOTATED_CALL_LOG_WAIT_MILLIS = 100L;
 
   private final RefreshAnnotatedCallLogWorker refreshAnnotatedCallLogWorker;
-  private final LoggingBindings logger;
 
   @Nullable
   private Runnable refreshAnnotatedCallLogRunnable;
@@ -67,7 +63,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
   public RefreshAnnotatedCallLogReceiver(Context context) {
     refreshAnnotatedCallLogWorker =
         CallLogComponent.get(context).getRefreshAnnotatedCallLogWorker();
-    logger = Logger.get(context);
   }
 
   @Override
@@ -117,7 +112,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
               new FutureCallback<RefreshResult>() {
                 @Override
                 public void onSuccess(RefreshResult refreshResult) {
-                  logger.logImpression(getImpressionType(checkDirty, refreshResult));
                 }
 
                 @Override
@@ -170,24 +164,6 @@ public final class RefreshAnnotatedCallLogReceiver extends BroadcastReceiver {
         default:
           throw new IllegalStateException("Unsupported result: " + refreshResult);
       }
-    }
-  }
-
-  private static DialerImpression.Type getImpressionType(
-      boolean checkDirty, RefreshResult refreshResult) {
-    switch (refreshResult) {
-      case NOT_DIRTY:
-        return DialerImpression.Type.ANNOTATED_CALL_LOG_NOT_DIRTY;
-      case REBUILT_BUT_NO_CHANGES_NEEDED:
-        return checkDirty
-            ? DialerImpression.Type.ANNOTATED_CALL_LOG_NO_CHANGES_NEEDED
-            : DialerImpression.Type.ANNOTATED_CALL_LOG_FORCE_REFRESH_NO_CHANGES_NEEDED;
-      case REBUILT_AND_CHANGES_NEEDED:
-        return checkDirty
-            ? DialerImpression.Type.ANNOTATED_CALL_LOG_CHANGES_NEEDED
-            : DialerImpression.Type.ANNOTATED_CALL_LOG_FORCE_REFRESH_CHANGES_NEEDED;
-      default:
-        throw new IllegalStateException("Unsupported result: " + refreshResult);
     }
   }
 }

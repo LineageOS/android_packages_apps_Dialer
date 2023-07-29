@@ -48,8 +48,6 @@ import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.widget.LockableViewPager;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;
@@ -265,8 +263,6 @@ public class InCallFragment extends Fragment
   public void onClick(View view) {
     if (view == endCallButton) {
       LogUtil.i("InCallFragment.onClick", "end call button clicked");
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.IN_CALL_DIALPAD_HANG_UP_BUTTON_PRESSED);
       inCallScreenDelegate.onEndCallClicked();
     } else {
       LogUtil.e("InCallFragment.onClick", "unknown view: " + view);
@@ -426,10 +422,6 @@ public class InCallFragment extends Fragment
         show);
     if (isSupportedButton(buttonId)) {
       getButtonController(buttonId).setAllowed(show);
-      if (buttonId == InCallButtonIds.BUTTON_UPGRADE_TO_VIDEO && show) {
-        Logger.get(getContext())
-            .logImpression(DialerImpression.Type.UPGRADE_TO_VIDEO_CALL_BUTTON_SHOWN);
-      }
     }
   }
 

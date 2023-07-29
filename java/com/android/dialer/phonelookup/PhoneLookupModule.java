@@ -24,7 +24,6 @@ import com.android.dialer.phonelookup.cnap.CnapPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2DefaultDirectoryPhoneLookup;
 import com.android.dialer.phonelookup.cp2.Cp2ExtendedDirectoryPhoneLookup;
 import com.android.dialer.phonelookup.emergency.EmergencyPhoneLookup;
-import com.android.dialer.phonelookup.spam.SpamPhoneLookup;
 import com.google.common.collect.ImmutableList;
 import dagger.Module;
 import dagger.Provides;
@@ -42,15 +41,13 @@ public abstract class PhoneLookupModule {
       Cp2DefaultDirectoryPhoneLookup cp2DefaultDirectoryPhoneLookup,
       Cp2ExtendedDirectoryPhoneLookup cp2ExtendedDirectoryPhoneLookup,
       EmergencyPhoneLookup emergencyPhoneLookup,
-      SystemBlockedNumberPhoneLookup systemBlockedNumberPhoneLookup,
-      SpamPhoneLookup spamPhoneLookup) {
+      SystemBlockedNumberPhoneLookup systemBlockedNumberPhoneLookup) {
     return ImmutableList.of(
         cequintPhoneLookup,
         cnapPhoneLookup,
         cp2DefaultDirectoryPhoneLookup,
         cp2ExtendedDirectoryPhoneLookup,
         emergencyPhoneLookup,
-        systemBlockedNumberPhoneLookup,
-        spamPhoneLookup);
+        systemBlockedNumberPhoneLookup);
   }
 }
