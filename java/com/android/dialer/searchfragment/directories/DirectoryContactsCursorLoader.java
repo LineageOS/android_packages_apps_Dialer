@@ -24,7 +24,6 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.common.cp2.DirectoryUtils;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.directories.DirectoriesCursorLoader.Directory;
@@ -141,7 +140,6 @@ public final class DirectoryContactsCursorLoader extends CursorLoader {
     return values;
   }
 
-  @VisibleForTesting
   static Uri getContentFilterUri(String query, long directoryId) {
     return ENTERPRISE_CONTENT_FILTER_URI
         .buildUpon()

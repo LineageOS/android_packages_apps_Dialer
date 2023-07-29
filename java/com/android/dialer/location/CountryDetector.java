@@ -29,7 +29,6 @@ import android.location.LocationManager;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.os.UserManagerCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -73,14 +72,13 @@ public class CountryDetector {
   // exceedingly rare event that the device does not have a default locale set for some reason.
   private static final String DEFAULT_COUNTRY_ISO = "US";
 
-  @VisibleForTesting public static CountryDetector instance;
+  public static CountryDetector instance;
 
   private final TelephonyManager telephonyManager;
   private final LocaleProvider localeProvider;
   private final Geocoder geocoder;
   private final Context appContext;
 
-  @VisibleForTesting
   public CountryDetector(
       Context appContext,
       TelephonyManager telephonyManager,

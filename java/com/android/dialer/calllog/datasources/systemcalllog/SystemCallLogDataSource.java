@@ -26,7 +26,6 @@ import android.provider.CallLog.Calls;
 import android.provider.VoicemailContract;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -67,7 +66,6 @@ import javax.inject.Singleton;
 @SuppressWarnings("MissingPermission")
 public class SystemCallLogDataSource implements CallLogDataSource {
 
-  @VisibleForTesting
   static final String PREF_LAST_TIMESTAMP_PROCESSED = "systemCallLogLastTimestampProcessed";
 
   private final Context appContext;

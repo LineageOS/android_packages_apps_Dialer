@@ -49,7 +49,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.StringRes;
-import android.support.annotation.VisibleForTesting;
 import android.telecom.Call.Details;
 import android.telecom.CallAudioState;
 import android.telecom.PhoneAccount;
@@ -532,7 +531,6 @@ public class StatusBarNotifier
   }
 
   /** Returns the main string to use in the notification. */
-  @VisibleForTesting
   @Nullable
   String getContentTitle(ContactCacheEntry contactInfo, DialerCall call) {
     if (call.isConferenceCall()) {
@@ -618,7 +616,6 @@ public class StatusBarNotifier
    * Returns the appropriate icon res Id to display based on the call for which we want to display
    * information.
    */
-  @VisibleForTesting
   public int getIconToDisplay(DialerCall call) {
     // Even if both lines are in use, we only show a single item in
     // the expanded Notifications UI.  It's labeled "Ongoing call"

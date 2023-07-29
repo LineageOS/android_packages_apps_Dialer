@@ -17,7 +17,6 @@ package com.android.voicemail.impl.sms;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import com.android.voicemail.impl.NeededForTesting;
 import com.android.voicemail.impl.OmtpConstants;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -93,7 +92,6 @@ public class SyncMessage {
   }
 
   /** @return the number of new messages stored on the voicemail server. */
-  @NeededForTesting
   public int getNewMessageCount() {
     return newMessageCount;
   }
@@ -110,7 +108,6 @@ public class SyncMessage {
    * @return the content type of the new message.
    *     <p>Expected to be set only for {@link OmtpConstants#NEW_MESSAGE}
    */
-  @NeededForTesting
   public String getContentType() {
     return contentType;
   }

@@ -17,7 +17,6 @@
 package com.android.dialer.smartdial.map;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.util.SimpleArrayMap;
 import com.android.dialer.i18n.LocaleUtils;
 import com.google.common.base.Optional;
@@ -155,7 +154,6 @@ public class CompositeSmartDialMap {
     return normalizedChar.isPresent() ? normalizedChar.get() : ch;
   }
 
-  @VisibleForTesting
   static Optional<SmartDialMap> getExtraMap(Context context) {
     String languageCode = LocaleUtils.getLocale(context).getISO3Language();
     return EXTRA_MAPS.containsKey(languageCode)

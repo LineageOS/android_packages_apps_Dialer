@@ -45,8 +45,4 @@ public class Bindings {
     }
     return instance;
   }
-
-  public static void setForTesting(InCallUiBindings testInstance) {
-    instance = testInstance;
-  }
 }

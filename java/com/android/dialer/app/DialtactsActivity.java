@@ -34,7 +34,6 @@ import android.provider.CallLog.Calls;
 import android.provider.ContactsContract.QuickContact;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.FloatingActionButton.OnVisibilityChangedListener;
@@ -158,9 +157,9 @@ public class DialtactsActivity extends TransactionSafeActivity
         OnContactSelectedListener {
 
   public static final boolean DEBUG = false;
-  @VisibleForTesting public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
+  public static final String TAG_DIALPAD_FRAGMENT = "dialpad";
   private static final String ACTION_SHOW_TAB = "ACTION_SHOW_TAB";
-  @VisibleForTesting public static final String EXTRA_SHOW_TAB = "EXTRA_SHOW_TAB";
+  public static final String EXTRA_SHOW_TAB = "EXTRA_SHOW_TAB";
   public static final String EXTRA_CLEAR_NEW_VOICEMAILS = "EXTRA_CLEAR_NEW_VOICEMAILS";
   private static final String KEY_LAST_TAB = "last_tab";
   private static final String TAG = "DialtactsActivity";
@@ -185,8 +184,6 @@ public class DialtactsActivity extends TransactionSafeActivity
    * Minimum time the history tab must have been selected for it to be marked as seen in onStop()
    */
   private static final long HISTORY_TAB_SEEN_TIMEOUT = TimeUnit.SECONDS.toMillis(3);
-
-  private static Optional<Boolean> voiceSearchEnabledForTest = Optional.absent();
 
   /** Fragment containing the dialpad that slides into view */
   protected DialpadFragment dialpadFragment;
@@ -953,9 +950,6 @@ public class DialtactsActivity extends TransactionSafeActivity
   }
 
   private boolean isVoiceSearchEnabled() {
-    if (voiceSearchEnabledForTest.isPresent()) {
-      return voiceSearchEnabledForTest.get();
-    }
     return canIntentBeHandled(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
   }
 
@@ -1437,7 +1431,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     return actionBarHeight;
   }
 
-  @VisibleForTesting
   public int getFabAlignment() {
     return FloatingActionButtonController.ALIGN_END;
   }
@@ -1565,10 +1558,5 @@ public class DialtactsActivity extends TransactionSafeActivity
       }
       return true;
     }
-  }
-
-  @VisibleForTesting
-  static void setVoiceSearchEnabledForTest(Optional<Boolean> enabled) {
-    voiceSearchEnabledForTest = enabled;
   }
 }

@@ -28,7 +28,6 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PinnedPositions;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.LongSparseArray;
 import android.view.View;
@@ -552,7 +551,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    * entries are read from the database, it is possible for them to have overlapping pin positions
    * due to sync or modifications by third party apps.
    */
-  @VisibleForTesting
   private void arrangeContactsByPinnedPosition(ArrayList<ContactEntry> toArrange) {
     final PriorityQueue<ContactEntry> pinnedQueue =
         new PriorityQueue<>(PIN_LIMIT, contactEntryComparator);
@@ -612,7 +610,6 @@ public class PhoneFavoritesTileAdapter extends BaseAdapter implements OnDragDrop
    * updated by {@link #arrangeContactsByPinnedPosition}, so we can assume that all pinned
    * positions(within {@link #PIN_LIMIT} are unique positive integers.
    */
-  @VisibleForTesting
   private ArrayList<ContentProviderOperation> getReflowedPinningOperations(
       ArrayList<ContactEntry> list, int oldPos, int newPinPos) {
     final ArrayList<ContentProviderOperation> positions = new ArrayList<>();
