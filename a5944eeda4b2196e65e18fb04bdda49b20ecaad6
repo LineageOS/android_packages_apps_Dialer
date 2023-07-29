@@ -48,6 +48,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a998ae83_c3c44e2f",
+        "filename": "java/com/android/dialer/app/calllog/PhoneCallDetailsHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-07-29T12:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40637dbf_b2684eea",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 87
+      },
+      "revId": "a5944eeda4b2196e65e18fb04bdda49b20ecaad6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bb15544_84f68fb3",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "nope, figured on my test already but am away from my PC rn",
       "parentUuid": "0bb15544_84f68fb3",
+      "revId": "a5944eeda4b2196e65e18fb04bdda49b20ecaad6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11a12220_0f607c51",
+        "filename": "java/com/android/dialer/simulator/impl/SimulatorImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2023-07-29T12:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd50fa30_08ed4693",
       "revId": "a5944eeda4b2196e65e18fb04bdda49b20ecaad6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
