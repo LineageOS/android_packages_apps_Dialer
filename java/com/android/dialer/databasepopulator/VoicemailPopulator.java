@@ -22,7 +22,6 @@ import android.content.Context;
 import android.provider.VoicemailContract.Status;
 import android.provider.VoicemailContract.Voicemails;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.telecom.PhoneAccountHandle;
 import com.android.dialer.common.Assert;
@@ -110,8 +109,7 @@ public final class VoicemailPopulator {
         .delete(Voicemails.buildSourceUri(context.getPackageName()), null, null);
   }
 
-  @VisibleForTesting
-  public static void enableVoicemail(@NonNull Context context) {
+  private static void enableVoicemail(@NonNull Context context) {
     PhoneAccountHandle handle =
         new PhoneAccountHandle(new ComponentName(context, VoicemailPopulator.class), ACCOUNT_ID);
     componentName = handle.getComponentName().toString();

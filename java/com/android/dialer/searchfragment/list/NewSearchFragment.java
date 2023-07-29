@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.PhoneNumberUtils;
@@ -93,8 +92,8 @@ public final class NewSearchFragment extends Fragment
 
   private static final String KEY_LOCATION_PROMPT_DISMISSED = "search_location_prompt_dismissed";
 
-  @VisibleForTesting public static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
-  @VisibleForTesting private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
+  private static final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 1;
+  private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
 
   private static final int CONTACTS_LOADER_ID = 0;
   private static final int NEARBY_PLACES_LOADER_ID = 1;
@@ -115,7 +114,6 @@ public final class NewSearchFragment extends Fragment
   // for actions to add contact or send sms.
   private String rawNumber;
   private CallInitiationType.Type callInitiationType = CallInitiationType.Type.UNKNOWN_INITIATION;
-  private boolean directoriesDisabledForTesting;
 
   // Information about all local & remote directories (including ID, display name, etc, but not
   // the contacts in them).
@@ -263,11 +261,6 @@ public final class NewSearchFragment extends Fragment
     this.rawNumber = rawNumber;
   }
 
-  @VisibleForTesting
-  public String getRawNumber() {
-    return rawNumber;
-  }
-
   public void setQuery(String query, CallInitiationType.Type callInitiationType) {
     this.query = query;
     this.callInitiationType = callInitiationType;
@@ -376,9 +369,7 @@ public final class NewSearchFragment extends Fragment
 
   /** Loads info about all directories (local & remote). */
   private void loadDirectoriesCursor() {
-    if (!directoriesDisabledForTesting) {
-      getLoaderManager().initLoader(DIRECTORIES_LOADER_ID, null, this);
-    }
+    getLoaderManager().initLoader(DIRECTORIES_LOADER_ID, null, this);
   }
 
   /**
@@ -387,10 +378,6 @@ public final class NewSearchFragment extends Fragment
    * <p>Should not be called before finishing loading info about all directories (local & remote).
    */
   private void loadDirectoryContactsCursors() {
-    if (directoriesDisabledForTesting) {
-      return;
-    }
-
     // Cancel existing load if one exists.
     ThreadUtil.getUiThreadHandler().removeCallbacks(loadDirectoryContactsRunnable);
     ThreadUtil.getUiThreadHandler()
@@ -442,7 +429,6 @@ public final class NewSearchFragment extends Fragment
     requestPermissions(deniedPermissions, LOCATION_PERMISSION_REQUEST_CODE);
   }
 
-  @VisibleForTesting
   public void dismissLocationPermission() {
     PreferenceManager.getDefaultSharedPreferences(getContext())
         .edit()
@@ -480,13 +466,6 @@ public final class NewSearchFragment extends Fragment
         .postDelayed(capabilitiesUpdatedRunnable, ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY);
   }
 
-  // Currently, setting up multiple FakeContentProviders doesn't work and results in this fragment
-  // being untestable while it can query multiple datasources. This is a temporary fix.
-  // TODO(a bug): Remove this method and test this fragment with multiple data sources
-  @VisibleForTesting
-  public void setDirectoriesDisabled(boolean disabled) {
-    directoriesDisabledForTesting = disabled;
-  }
 
   /**
    * Returns a list of search actions to be shown in the search results.

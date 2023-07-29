@@ -29,7 +29,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.util.Pair;
@@ -51,6 +50,8 @@ import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.dialer.R;
 import com.android.dialer.callcomposer.CallComposerFragment.CallComposerListener;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
@@ -343,8 +344,7 @@ public class CallComposerActivity extends AppCompatActivity
     }
   }
 
-  @VisibleForTesting
-  public long getSessionStartedTimeoutMillis() {
+  private long getSessionStartedTimeoutMillis() {
     return 10_000;
   }
 
@@ -432,8 +432,7 @@ public class CallComposerActivity extends AppCompatActivity
     return session != null && session.getState() == Session.STATE_STARTED;
   }
 
-  @VisibleForTesting
-  public void placeRCSCall(MultimediaData.Builder builder) {
+  private void placeRCSCall(MultimediaData.Builder builder) {
     MultimediaData data = builder.build();
     LogUtil.i("CallComposerActivity.placeRCSCall", "placing enriched call, data: " + data);
     Logger.get(this).logImpression(DialerImpression.Type.CALL_COMPOSER_ACTIVITY_PLACE_RCS_CALL);
@@ -472,7 +471,6 @@ public class CallComposerActivity extends AppCompatActivity
     }
   }
 
-  @VisibleForTesting
   public long getRCSTimeoutMillis() {
     return 15_000;
   }

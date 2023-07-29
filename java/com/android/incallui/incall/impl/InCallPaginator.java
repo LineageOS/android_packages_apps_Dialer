@@ -21,7 +21,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
@@ -76,8 +75,7 @@ public class InCallPaginator extends View implements OnPageChangeListener {
     transitionAnimator.addUpdateListener(animation -> invalidate());
   }
 
-  @VisibleForTesting
-  public void setProgress(float progress, boolean toFirstPage) {
+  private void setProgress(float progress, boolean toFirstPage) {
     this.progress = progress;
     this.toFirstPage = toFirstPage;
 

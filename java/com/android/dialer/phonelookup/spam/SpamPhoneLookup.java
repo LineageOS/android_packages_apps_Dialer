@@ -18,7 +18,6 @@ package com.android.dialer.phonelookup.spam;
 
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import com.android.dialer.DialerPhoneNumber;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.concurrent.Annotations.BackgroundExecutor;
@@ -41,8 +40,8 @@ import javax.inject.Inject;
 /** PhoneLookup implementation for Spam info. */
 public final class SpamPhoneLookup implements PhoneLookup<SpamInfo> {
 
-  @VisibleForTesting
-  static final String PREF_LAST_TIMESTAMP_PROCESSED = "spamPhoneLookupLastTimestampProcessed";
+  private static final String PREF_LAST_TIMESTAMP_PROCESSED =
+          "spamPhoneLookupLastTimestampProcessed";
 
   private final ListeningExecutorService lightweightExecutorService;
   private final ListeningExecutorService backgroundExecutorService;

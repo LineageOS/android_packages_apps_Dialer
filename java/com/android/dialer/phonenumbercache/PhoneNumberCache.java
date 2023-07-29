@@ -43,8 +43,4 @@ public class PhoneNumberCache {
     }
     return phoneNumberCacheBindings;
   }
-
-  public static void setForTesting(PhoneNumberCacheBindings phoneNumberCacheBindings) {
-    PhoneNumberCache.phoneNumberCacheBindings = phoneNumberCacheBindings;
-  }
 }

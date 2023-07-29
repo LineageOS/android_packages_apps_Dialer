@@ -19,7 +19,6 @@ package com.android.dialer.smartdial.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import com.android.dialer.smartdial.map.CompositeSmartDialMap;
@@ -526,8 +525,7 @@ public class SmartDialPrefix {
    * @see <a href="https://en.wikipedia.org/wiki/North_American_Numbering_Plan">
    *     https://en.wikipedia.org/wiki/North_American_Numbering_Plan</a>
    */
-  @VisibleForTesting
-  public static boolean isCountryNanp(String country) {
+  private static boolean isCountryNanp(String country) {
     if (TextUtils.isEmpty(country)) {
       return false;
     }
@@ -564,12 +562,6 @@ public class SmartDialPrefix {
     result.add("TC"); // Turks and Caicos Islands
     result.add("VI"); // U.S. Virgin Islands
     return result;
-  }
-
-  /** Explicitly setting the user Nanp to the given boolean */
-  @VisibleForTesting
-  public static void setUserInNanpRegion(boolean userInNanpRegion) {
-    SmartDialPrefix.userInNanpRegion = userInNanpRegion;
   }
 
   /** Class to record phone number parsing information. */
