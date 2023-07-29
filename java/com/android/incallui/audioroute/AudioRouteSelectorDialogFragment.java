@@ -25,7 +25,6 @@ import android.content.res.ColorStateList;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.telecom.CallAudioState;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +41,8 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.theme.base.ThemeComponent;
 import com.android.incallui.call.TelecomAdapter;
 import com.android.incallui.util.BluetoothUtil;
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Collection;
 

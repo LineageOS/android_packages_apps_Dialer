@@ -17,11 +17,11 @@
 package com.android.incallui;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.telecom.CallAudioState;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.audioroute.AudioRouteSelectorDialogFragment;

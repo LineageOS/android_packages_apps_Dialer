@@ -16,7 +16,8 @@
 
 package com.android.incallui.rtt.protocol;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import com.android.dialer.rtt.RttTranscript;
 import com.android.dialer.rtt.RttTranscriptMessage;
 import com.android.incallui.incall.protocol.InCallScreen;

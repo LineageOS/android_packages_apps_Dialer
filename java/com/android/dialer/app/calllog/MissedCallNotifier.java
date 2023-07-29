@@ -29,8 +29,9 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.provider.CallLog.Calls;
 import android.service.notification.StatusBarNotification;
-import android.support.v4.os.UserManagerCompat;
-import android.support.v4.util.Pair;
+
+import androidx.core.os.UserManagerCompat;
+import androidx.core.util.Pair;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;

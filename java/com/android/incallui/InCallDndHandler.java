@@ -19,7 +19,8 @@ package com.android.incallui;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 import com.android.incallui.call.CallList;
 import com.android.incallui.call.DialerCall;

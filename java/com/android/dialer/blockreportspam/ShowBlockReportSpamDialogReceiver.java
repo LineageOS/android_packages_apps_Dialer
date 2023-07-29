@@ -20,8 +20,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.android.dialer.R;
 import com.android.dialer.blocking.Blocking;

@@ -143,11 +143,16 @@
       android:authorities="com.android.dialer.files"
       android:exported="false"
       android:grantUriPermissions="true"
-      android:name="android.support.v4.content.FileProvider">
+      android:name="androidx.core.content.FileProvider">
       <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/file_paths"/>
     </provider>
+
+    <provider xmlns:tools="http://schemas.android.com/tools"
+        android:name="androidx.startup.InitializationProvider"
+        android:authorities="${applicationId}.androidx-startup"
+        tools:replace="android:authorities" />
     <meta-data android:name="supports_per_number_preferred_account" android:value="true" />
   </application>
 </manifest>
