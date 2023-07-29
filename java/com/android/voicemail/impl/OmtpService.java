@@ -28,8 +28,6 @@ import android.telephony.VisualVoicemailSms;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.voicemail.VoicemailComponent;
 import com.android.voicemail.impl.settings.VisualVoicemailSettingsUtil;
 import com.android.voicemail.impl.sms.LegacyModeSmsHandler;
@@ -68,7 +66,6 @@ public class OmtpService extends VisualVoicemailService {
       return;
     }
 
-    Logger.get(this).logImpression(DialerImpression.Type.VVM_UNBUNDLED_EVENT_RECEIVED);
     ActivationTask.start(OmtpService.this, phoneAccountHandle, null);
     task.finish();
   }
@@ -95,8 +92,6 @@ public class OmtpService extends VisualVoicemailService {
     }
 
     // isUserUnlocked() is not checked. OmtpMessageReceiver will handle the locked case.
-
-    Logger.get(this).logImpression(DialerImpression.Type.VVM_UNBUNDLED_EVENT_RECEIVED);
     Intent intent = new Intent(ACTION_SMS_RECEIVED);
     intent.setPackage(getPackageName());
     intent.putExtra(EXTRA_VOICEMAIL_SMS, sms);
@@ -125,8 +120,6 @@ public class OmtpService extends VisualVoicemailService {
       task.finish();
       return;
     }
-
-    Logger.get(this).logImpression(DialerImpression.Type.VVM_UNBUNDLED_EVENT_RECEIVED);
     VvmAccountManager.removeAccount(this, phoneAccountHandle);
     task.finish();
   }
@@ -144,7 +137,6 @@ public class OmtpService extends VisualVoicemailService {
       task.finish();
       return;
     }
-    Logger.get(this).logImpression(DialerImpression.Type.VVM_UNBUNDLED_EVENT_RECEIVED);
   }
 
   @MainThread

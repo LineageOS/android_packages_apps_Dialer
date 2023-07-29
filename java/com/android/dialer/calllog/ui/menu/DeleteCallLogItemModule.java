@@ -32,8 +32,6 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.database.Selection;
 import com.android.dialer.historyitemactions.HistoryItemActionModule;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +65,6 @@ final class DeleteCallLogItemModule implements HistoryItemActionModule {
         .createNonUiTaskBuilder(new CallLogItemDeletionWorker(context))
         .build()
         .executeSerial(coalescedIds);
-
-    Logger.get(context).logImpression(DialerImpression.Type.USER_DELETED_CALL_LOG_ITEM);
     return true;
   }
 

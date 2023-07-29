@@ -23,8 +23,6 @@ import androidx.annotation.NonNull;
 
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.logging.DialerImpression;
-import com.android.dialer.logging.Logger;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallCoordinator;
@@ -44,7 +42,6 @@ public class PreCallImpl implements PreCall {
   @NonNull
   @Override
   public Intent buildIntent(Context context, CallIntentBuilder builder) {
-    Logger.get(context).logImpression(DialerImpression.Type.PRECALL_INITIATED);
     if (!requiresUi(context, builder)) {
       LogUtil.i("PreCallImpl.buildIntent", "No UI requested, running pre-call directly");
       for (PreCallAction action : actions) {
