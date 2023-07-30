@@ -16,7 +16,6 @@
 
 package com.android.dialer.binary.aosp;
 
-import com.android.bubble.stub.StubBubbleModule;
 import com.android.dialer.activecalls.ActiveCallsModule;
 import com.android.dialer.binary.basecomponent.BaseDialerRootComponent;
 import com.android.dialer.calllog.CallLogModule;
@@ -64,7 +63,6 @@ import javax.inject.Singleton;
       StubCallLocationModule.class,
       StubDuoModule.class,
       StubEnrichedCallModule.class,
-      StubBubbleModule.class,
       StubSimSuggestionModule.class,
       AospThemeModule.class,
       VoicemailModule.class,
