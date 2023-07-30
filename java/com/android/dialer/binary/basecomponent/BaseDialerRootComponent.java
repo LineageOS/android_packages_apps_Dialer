@@ -16,7 +16,6 @@
 
 package com.android.dialer.binary.basecomponent;
 
-import com.android.bubble.BubbleComponent;
 import com.android.dialer.activecalls.ActiveCallsComponent;
 import com.android.dialer.calllog.CallLogComponent;
 import com.android.dialer.calllog.database.CallLogDatabaseComponent;
@@ -47,7 +46,6 @@ import com.android.voicemail.VoicemailComponent;
  */
 public interface BaseDialerRootComponent
     extends ActiveCallsComponent.HasComponent,
-        BubbleComponent.HasComponent,
         CallLocationComponent.HasComponent,
         CallLogComponent.HasComponent,
         CallLogDatabaseComponent.HasComponent,
