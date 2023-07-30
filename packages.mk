@@ -2,7 +2,6 @@
 LOCAL_AAPT_FLAGS := \
 	com.android.assets.product \
 	com.android.assets.quantum \
-	com.android.bubble \
 	com.android.contacts.common \
 	com.android.dialer.about \
 	com.android.dialer.app \
