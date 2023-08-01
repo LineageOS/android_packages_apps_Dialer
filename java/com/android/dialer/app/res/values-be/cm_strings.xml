@@ -20,9 +20,13 @@
     <string name="incall_enable_dnd_title">Уключаць рэжым \"Не турбаваць\" падчас выкліку</string>
     <string name="incall_vibrate_outgoing_title">Вібрацыя пры адказе</string>
     <string name="incall_vibrate_call_waiting_title">Вібрацыя падчас чакання выкліку</string>
+    <string name="incall_vibrate_hangup_title">Вібрацыя пры завяршэнні</string>
     <string name="incall_vibrate_45_title">Вібрыраваць штохвіліну</string>
     <string name="incall_vibrate_45_summary">Вібрыраваць на 45-ай секундзе кожнай хвіліны падчас выходных выклікаў</string>
+    <string name="incall_dnd_dialog_message">Для ўключэння рэжыму \"Не турбаваць\", у праграме \"Тэлефон\" неабходна атрымаць дазвол на кіраванне статусам рэжыму \"Не турбаваць\".\nЗабяспечце неабходны дазвол.</string>
     <string name="allow">Дазволіць</string>
+    <string name="deny">Адхіліць</string>
+    <string name="call_recording_category_title">Запіс выклікаў</string>
     <string name="call_recording_format">Фармат аўдыя</string>
     <string name="call_via">Выклікаць праз</string>
     <string name="call_via_dialog_title">Выклікаць праз\u2026</string>
