@@ -28,6 +28,7 @@
     <string name="call_stats_filter_to">Дата завяршэння</string>
     <string name="call_stats_filter_picker_title">Дыяпазон выбару</string>
     <string name="date_quick_selection">Хуткі выбар</string>
+    <string name="date_qs_currentmonth">Бягучы месяц</string>
     <string name="date_qs_currentquarter">Бягучы квартал</string>
     <string name="date_qs_currentyear">Бягучы год</string>
     <string name="date_qs_lastweek">Апошні тыдзень</string>
@@ -36,7 +37,6 @@
     <string name="date_qs_lastyear">Апошні год</string>
     <string name="call_stats_date_filter">Карэкціраваць дыяпазон часу</string>
     <string name="call_stats_reset_filter">Скінуць дыяпазон часу</string>
-    <string name="call_stats_sort_by_duration">Сартаваць па працягласці</string>
     <string name="call_stats_sort_by_count">Сартаваць па колькасці выклікаў</string>
     <string name="call_stats_title_for_number">Гэты нумар</string>
     <string name="call_stats_title_of_total">З усіх</string>
