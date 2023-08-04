@@ -323,6 +323,7 @@ interface ButtonController {
     private CharSequence contentDescription;
     private CharSequence isOnContentDescription;
     private CharSequence isOffContentDescription;
+    private CharSequence deviceName;
 
     public SpeakerButtonController(@NonNull InCallButtonUiDelegate delegate) {
       this.delegate = delegate;
@@ -381,6 +382,9 @@ interface ButtonController {
         button.setContentDescription(
             (nonBluetoothMode && !isChecked) ? isOffContentDescription : isOnContentDescription);
         button.setShouldShowMoreIndicator(!nonBluetoothMode);
+        if (!TextUtils.isEmpty(deviceName)) {
+          button.setLabelText(deviceName);
+        }
       }
     }
 
@@ -392,6 +396,7 @@ interface ButtonController {
       label = info.label;
       icon = info.icon;
       @StringRes int contentDescriptionResId = info.contentDescription;
+      deviceName = info.deviceName;
 
       contentDescription = delegate.getContext().getText(contentDescriptionResId);
       isOnContentDescription =

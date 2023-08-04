@@ -20,10 +20,11 @@
   android:versionName="23.0">
 
   <uses-sdk
-    android:minSdkVersion="27"
+    android:minSdkVersion="30"
     android:targetSdkVersion="30"/>
 
 
+  <uses-permission android:name="android.permission.BLUETOOTH" />
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
   <uses-permission android:name="android.permission.CALL_PHONE"/>
   <uses-permission android:name="android.permission.READ_CONTACTS"/>
