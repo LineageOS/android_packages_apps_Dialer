@@ -130,7 +130,6 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     boolean isPulledCall =
         (entry.getFeatures() & Calls.FEATURES_PULLED_EXTERNALLY)
             == Calls.FEATURES_PULLED_EXTERNALLY;
-    boolean isDuoCall = entry.getIsDuoCall();
     boolean isRttCall = (entry.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT;
 
     callTime.setTextColor(getColorForCallType(context, callType));
@@ -144,7 +143,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callTypeIcon.setShowRtt((entry.getFeatures() & Calls.FEATURES_RTT) == Calls.FEATURES_RTT);
 
     callTypeText.setText(
-        callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall, isDuoCall));
+        callTypeHelper.getCallTypeText(callType, isVideoCall, isPulledCall));
     callTime.setText(CallLogDates.formatDate(context, entry.getDate()));
 
     if (CallTypeHelper.isMissedCallType(callType)) {
