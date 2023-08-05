@@ -28,7 +28,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.function.Consumer;
 import com.android.dialer.precall.PreCallAction;
 import com.android.dialer.precall.PreCallComponent;
@@ -181,18 +180,6 @@ public class PreCallCoordinatorImpl implements PreCallCoordinator {
   }
 
   private void placeCall() {
-    if (builder.isDuoCall()) {
-      Optional<Intent> intent =
-          DuoComponent.get(activity)
-              .getDuo()
-              .getCallIntent(builder.getUri().getSchemeSpecificPart());
-      if (intent.isPresent()) {
-        activity.startActivityForResult(intent.get(), 0);
-        return;
-      } else {
-        LogUtil.e("PreCallCoordinatorImpl.placeCall", "duo.getCallIntent() returned absent");
-      }
-    }
     TelecomUtil.placeCall(activity, builder.build());
   }
 }
