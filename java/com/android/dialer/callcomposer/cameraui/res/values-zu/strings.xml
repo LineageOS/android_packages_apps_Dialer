@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Shintshela kukhamera yesikrini esigcwele</string>
-  <string name="description_camera_switch_preview_screen">Shintshela ekuhloleni kuqala kwekhamera</string>
-  <string name="description_camera_switch_camera_facing">Shintshela kwikhamera yangaphambili</string>
-  <string name="description_camera_switch_camera_rear">Shintshela kwikhamera ebheke emuva</string>
-  <string name="description_camera_take_picture">Thatha isithombe</string>
-  <string name="description_camera_cancel_photo">Thatha kabusha isithombe</string>
-</resources>
