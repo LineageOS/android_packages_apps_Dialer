@@ -23,7 +23,6 @@ import com.android.dialer.CoalescedIds;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.common.Assert;
-import com.android.dialer.duo.DuoComponent;
 
 /**
  * A {@link CursorLoader} that loads call detail entries from {@link AnnotatedCallLog} for {@link
@@ -145,7 +144,6 @@ public final class CallDetailsCursorLoader extends CursorLoader {
         .setCallMappingId(cursor.getString(CALL_MAPPING_ID));
 
     String phoneAccountComponentName = cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME);
-    entry.setIsDuoCall(DuoComponent.get(context).getDuo().isDuoAccount(phoneAccountComponentName));
 
     return entry.build();
   }

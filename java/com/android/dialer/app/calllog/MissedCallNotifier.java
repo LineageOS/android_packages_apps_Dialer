@@ -56,7 +56,6 @@ import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.FuzzyPhoneNumberMatcher;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
@@ -281,10 +280,6 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
       PhoneAccountHandle phoneAccountHandle = new PhoneAccountHandle(componentName, call.accountId);
       PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
       if (phoneAccount == null) {
-        continue;
-      }
-      if (DuoComponent.get(context).getDuo().isDuoAccount(phoneAccountHandle)) {
-        iterator.remove();
         continue;
       }
       if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SELF_MANAGED)) {

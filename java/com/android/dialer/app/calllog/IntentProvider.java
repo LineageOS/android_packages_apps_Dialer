@@ -31,7 +31,6 @@ import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.util.IntentUtil;
 import java.util.ArrayList;
@@ -96,46 +95,6 @@ public abstract class IntentProvider {
             new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
                 .setPhoneAccountHandle(accountHandle)
                 .setIsVideoCall(true));
-      }
-    };
-  }
-
-  public static IntentProvider getDuoVideoIntentProvider(String number, boolean isNonContact) {
-    return new IntentProvider() {
-      @Override
-      public Intent getClickIntent(Context context) {
-        return PreCall.getIntent(
-            context,
-            new CallIntentBuilder(number, CallInitiationType.Type.CALL_LOG)
-                .setIsDuoCall(true)
-                .setIsVideoCall(true));
-      }
-    };
-  }
-
-  public static IntentProvider getInstallDuoIntentProvider() {
-    return new IntentProvider() {
-      @Override
-      public Intent getClickIntent(Context context) {
-        return DuoComponent.get(context).getDuo().getInstallDuoIntent().orNull();
-      }
-    };
-  }
-
-  public static IntentProvider getSetUpDuoIntentProvider() {
-    return new IntentProvider() {
-      @Override
-      public Intent getClickIntent(Context context) {
-        return DuoComponent.get(context).getDuo().getActivateIntent().orNull();
-      }
-    };
-  }
-
-  public static IntentProvider getDuoInviteIntentProvider(String number) {
-    return new IntentProvider() {
-      @Override
-      public Intent getClickIntent(Context context) {
-        return DuoComponent.get(context).getDuo().getInviteIntent(number).orNull();
       }
     };
   }
