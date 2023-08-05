@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Chuyển sang máy ảnh toàn màn hình</string>
-  <string name="description_camera_switch_preview_screen">Chuyển sang chế độ xem trước máy ảnh</string>
-  <string name="description_camera_switch_camera_facing">Chuyển sang máy ảnh mặt trước</string>
-  <string name="description_camera_switch_camera_rear">Chuyển sang máy ảnh mặt sau</string>
-  <string name="description_camera_take_picture">Chụp ảnh</string>
-  <string name="description_camera_cancel_photo">Chụp lại ảnh</string>
-</resources>

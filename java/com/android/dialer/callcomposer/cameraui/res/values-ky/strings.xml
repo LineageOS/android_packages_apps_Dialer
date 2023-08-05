@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Камераны толук экранга которуу</string>
-  <string name="description_camera_switch_preview_screen">Камераны алдын ала көрүү режимине которуу</string>
-  <string name="description_camera_switch_camera_facing">Маңдайкы камерага которуу</string>
-  <string name="description_camera_switch_camera_rear">Арткы камерага которуу</string>
-  <string name="description_camera_take_picture">Сүрөткө тартуу</string>
-  <string name="description_camera_cancel_photo">Кайра сүрөткө тартуу</string>
-</resources>

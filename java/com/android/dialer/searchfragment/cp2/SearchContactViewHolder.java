@@ -35,9 +35,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.searchfragment.common.Projections;
 import com.android.dialer.searchfragment.common.QueryBoldingUtil;
@@ -55,13 +52,11 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
   @Retention(RetentionPolicy.SOURCE)
   @IntDef({
     CallToAction.NONE,
-    CallToAction.VIDEO_CALL,
-    CallToAction.SHARE_AND_CALL
+    CallToAction.VIDEO_CALL
   })
   @interface CallToAction {
     int NONE = 0;
     int VIDEO_CALL = 1;
-    int SHARE_AND_CALL = 3;
   }
 
   private final RowClickListener listener;
@@ -168,14 +163,6 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
         callToActionView.setVisibility(View.GONE);
         callToActionView.setOnClickListener(null);
         break;
-      case CallToAction.SHARE_AND_CALL:
-        callToActionView.setVisibility(View.VISIBLE);
-        callToActionView.setImageDrawable(
-            context.getDrawable(com.android.dialer.contacts.resources.R.drawable.ic_phone_attach));
-        callToActionView.setContentDescription(
-            context.getString(R.string.description_search_call_and_share));
-        callToActionView.setOnClickListener(this);
-        break;
       case CallToAction.VIDEO_CALL:
         callToActionView.setVisibility(View.VISIBLE);
         callToActionView.setImageDrawable(
@@ -198,52 +185,13 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
       return CallToAction.VIDEO_CALL;
     }
 
-    EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
-    EnrichedCallCapabilities capabilities = manager.getCapabilities(number);
-    if (capabilities != null && capabilities.isCallComposerCapable()) {
-      return CallToAction.SHARE_AND_CALL;
-    } else if (shouldRequestCapabilities(cursor, capabilities, query)) {
-      manager.requestCapabilities(number);
-    }
     return CallToAction.NONE;
-  }
-
-  /**
-   * An RPC is initiated for each number we request capabilities for, so to limit the network load
-   * and latency on slow networks, we only want to request capabilities for potential contacts the
-   * user is interested in calling. The requirements are that:
-   *
-   * <ul>
-   *   <li>The search query must be 3 or more characters; OR
-   *   <li>There must be 4 or fewer contacts listed in the cursor.
-   * </ul>
-   */
-  private static boolean shouldRequestCapabilities(
-      SearchCursor cursor,
-      @Nullable EnrichedCallCapabilities capabilities,
-      @Nullable String query) {
-    if (capabilities != null) {
-      return false;
-    }
-
-    if (query != null && query.length() >= 3) {
-      return true;
-    }
-
-    // TODO(calderwoodra): implement SearchCursor#getHeaderCount
-    if (cursor.getCount() <= 5) { // 4 contacts + 1 header row element
-      return true;
-    }
-    return false;
   }
 
   @Override
   public void onClick(View view) {
     if (view == callToActionView) {
       switch (currentAction) {
-        case CallToAction.SHARE_AND_CALL:
-          listener.openCallAndShare(dialerContact);
-          break;
         case CallToAction.VIDEO_CALL:
           listener.placeVideoCall(number, position);
           break;

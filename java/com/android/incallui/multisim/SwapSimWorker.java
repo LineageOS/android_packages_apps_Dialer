@@ -172,9 +172,6 @@ public class SwapSimWorker implements Worker<Void, Void>, DialerCallListener, Ca
   public void onInternationalCallOnWifi() {}
 
   @Override
-  public void onEnrichedCallSessionUpdate() {}
-
-  @Override
   public void onIncomingCall(DialerCall call) {}
 
   @Override

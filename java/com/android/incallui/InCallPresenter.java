@@ -50,7 +50,6 @@ import com.android.dialer.blocking.FilteredNumbersUtil;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.dialer.util.TouchPointManager;
@@ -334,9 +333,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
     this.statusBarNotifier = statusBarNotifier;
     this.externalCallNotifier = externalCallNotifier;
     addListener(this.statusBarNotifier);
-    EnrichedCallComponent.get(this.context)
-        .getEnrichedCallManager()
-        .registerStateChangedListener(this.statusBarNotifier);
 
     vibrationHandler = new InCallVibrationHandler(context);
     addListener(vibrationHandler);
@@ -1426,9 +1422,6 @@ public class InCallPresenter implements CallList.Listener, AudioModeProvider.Aud
 
       if (statusBarNotifier != null) {
         removeListener(statusBarNotifier);
-        EnrichedCallComponent.get(context)
-            .getEnrichedCallManager()
-            .unregisterStateChangedListener(statusBarNotifier);
       }
 
       if (externalCallNotifier != null && externalCallList != null) {

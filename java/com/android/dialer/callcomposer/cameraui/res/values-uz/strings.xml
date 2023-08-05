@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">To‘liq ekranli rejimga o‘tish</string>
-  <string name="description_camera_switch_preview_screen">Razm solish rejimiga o‘tish</string>
-  <string name="description_camera_switch_camera_facing">Old kamerani yoqish</string>
-  <string name="description_camera_switch_camera_rear">Orqa kamerani yoqish</string>
-  <string name="description_camera_take_picture">Rasmga olish</string>
-  <string name="description_camera_cancel_photo">Yangi rasmga olish</string>
-</resources>
