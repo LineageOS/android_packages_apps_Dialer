@@ -318,15 +318,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
     }
 
     @Override
-    public void placeDuoVideoCall(String phoneNumber) {
-      PreCall.start(
-          getActivity(),
-          new CallIntentBuilder(phoneNumber, CallInitiationType.Type.CALL_DETAILS)
-              .setIsDuoCall(true)
-              .setIsVideoCall(true));
-    }
-
-    @Override
     public void placeVoiceCall(String phoneNumber, String postDialDigits) {
       boolean canSupportedAssistedDialing =
           getActivity()
