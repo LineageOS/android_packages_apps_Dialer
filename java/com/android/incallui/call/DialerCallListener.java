@@ -38,6 +38,4 @@ public interface DialerCallListener {
   void onHandoverToWifiFailure();
 
   void onInternationalCallOnWifi();
-
-  void onEnrichedCallSessionUpdate();
 }

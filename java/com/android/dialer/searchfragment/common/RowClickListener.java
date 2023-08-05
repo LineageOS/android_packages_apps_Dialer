@@ -34,7 +34,4 @@ public interface RowClickListener {
    * @param ranking position in the list relative to the other elements
    */
   void placeVideoCall(String phoneNumber, int ranking);
-
-  /** Opens the enriched calling/call composer interface. */
-  void openCallAndShare(DialerContact dialerContact);
 }

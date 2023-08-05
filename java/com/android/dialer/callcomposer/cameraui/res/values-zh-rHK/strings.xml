@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">切換至全螢幕相機</string>
-  <string name="description_camera_switch_preview_screen">切換至相機預覽</string>
-  <string name="description_camera_switch_camera_facing">切換至前置鏡頭</string>
-  <string name="description_camera_switch_camera_rear">切換至後置鏡頭</string>
-  <string name="description_camera_take_picture">拍照</string>
-  <string name="description_camera_cancel_photo">重新拍照</string>
-</resources>
