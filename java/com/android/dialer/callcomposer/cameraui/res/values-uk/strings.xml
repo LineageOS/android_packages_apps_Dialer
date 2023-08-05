@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Показ зображення з камери на весь екран</string>
-  <string name="description_camera_switch_preview_screen">Попередній перегляд зображення з камери</string>
-  <string name="description_camera_switch_camera_facing">Перейти до фронтальної камери</string>
-  <string name="description_camera_switch_camera_rear">Перейти до задньої камери</string>
-  <string name="description_camera_take_picture">Зробити фото</string>
-  <string name="description_camera_cancel_photo">Зробити фото ще раз</string>
-</resources>

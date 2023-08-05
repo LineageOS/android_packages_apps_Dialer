@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Switch to full-screen camera</string>
-  <string name="description_camera_switch_preview_screen">Switch to camera preview</string>
-  <string name="description_camera_switch_camera_facing">Switch to front-facing camera</string>
-  <string name="description_camera_switch_camera_rear">Switch to rear-facing camera</string>
-  <string name="description_camera_take_picture">Take photo</string>
-  <string name="description_camera_cancel_photo">Retake photo</string>
-</resources>

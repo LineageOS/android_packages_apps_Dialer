@@ -129,20 +129,6 @@
   </LinearLayout>
 
   <LinearLayout
-    android:id="@+id/call_compose_action"
-    style="@style/CallLogActionStyle">
-
-    <ImageView
-      style="@style/CallLogActionIconStyle"
-      android:src="@drawable/ic_phone_attach"/>
-
-    <TextView
-      style="@style/CallLogActionTextStyle"
-      android:text="@string/share_and_call"/>
-
-  </LinearLayout>
-
-  <LinearLayout
     android:id="@+id/report_not_spam_action"
     style="@style/CallLogActionStyle"
     android:visibility="gone">

@@ -53,10 +53,8 @@ import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
-import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DialerExecutor.Worker;
-import com.android.dialer.enrichedcall.FuzzyPhoneNumberMatcher;
 import com.android.dialer.notification.DialerNotificationManager;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.notification.missedcalls.MissedCallConstants;
@@ -293,28 +291,6 @@ public class MissedCallNotifier implements Worker<Pair<Integer, String>, Void> {
 
   private static String getNotificationTagForCall(@NonNull NewCall call) {
     return MissedCallNotificationTags.getNotificationTagForCallUri(call.callsUri);
-  }
-
-  @WorkerThread
-  public void insertPostCallNotification(@NonNull String number, @NonNull String note) {
-    Assert.isWorkerThread();
-    LogUtil.enterBlock("MissedCallNotifier.insertPostCallNotification");
-    List<NewCall> newCalls = callLogNotificationsQueryHelper.getNewMissedCalls();
-    if (newCalls != null && !newCalls.isEmpty()) {
-      for (NewCall call : newCalls) {
-        if (FuzzyPhoneNumberMatcher.matches(call.number, number.replace("tel:", ""))) {
-          LogUtil.i("MissedCallNotifier.insertPostCallNotification", "Notification updated");
-          // Update the first notification that matches our post call note sender.
-          DialerNotificationManager.notify(
-              context,
-              getNotificationTagForCall(call),
-              MissedCallConstants.NOTIFICATION_ID,
-              getNotificationForCall(call, note));
-          return;
-        }
-      }
-    }
-    LogUtil.i("MissedCallNotifier.insertPostCallNotification", "notification not found");
   }
 
   private Notification getNotificationForCall(

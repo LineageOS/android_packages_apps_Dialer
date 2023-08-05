@@ -58,10 +58,7 @@ import com.android.dialer.app.calllog.CallLogAdapter;
 import com.android.dialer.app.calllog.CallLogFragment;
 import com.android.dialer.app.calllog.CallLogFragment.CallLogFragmentListener;
 import com.android.dialer.app.calllog.CallLogNotificationsService;
-import com.android.dialer.app.calllog.IntentProvider;
 import com.android.dialer.app.calllog.VisualVoicemailCallLogFragment;
-import com.android.dialer.callcomposer.CallComposerActivity;
-import com.android.dialer.calldetails.OldCallDetailsActivity;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
 import com.android.dialer.common.FragmentUtils.FragmentUtilListener;
@@ -485,38 +482,8 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
         resultCode);
     if (requestCode == ActivityRequestCodes.DIALTACTS_VOICE_SEARCH) {
       searchController.onVoiceResults(resultCode, data);
-    } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_COMPOSER) {
-      if (resultCode == AppCompatActivity.RESULT_FIRST_USER) {
-        LogUtil.i(
-            "OldMainActivityPeer.onActivityResult", "returned from call composer, error occurred");
-        String message =
-            activity.getString(
-                R.string.call_composer_connection_failed,
-                data.getStringExtra(CallComposerActivity.KEY_CONTACT_NAME));
-        Snackbar.make(snackbarContainer, message, Snackbar.LENGTH_LONG).show();
-      } else {
-        LogUtil.i("OldMainActivityPeer.onActivityResult", "returned from call composer, no error");
-      }
-
     } else if (requestCode == ActivityRequestCodes.DIALTACTS_CALL_DETAILS) {
-      if (resultCode == AppCompatActivity.RESULT_OK
-          && data != null
-          && data.getBooleanExtra(OldCallDetailsActivity.EXTRA_HAS_ENRICHED_CALL_DATA, false)) {
-        String number = data.getStringExtra(OldCallDetailsActivity.EXTRA_PHONE_NUMBER);
-        int snackbarDurationMillis = 5_000;
-        Snackbar.make(
-                snackbarContainer,
-                activity.getString(R.string.ec_data_deleted),
-                snackbarDurationMillis)
-            .setAction(
-                R.string.view_conversation,
-                v ->
-                    activity.startActivity(
-                        IntentProvider.getSendSmsIntentProvider(number).getClickIntent(activity)))
-            .setActionTextColor(
-                ContextCompat.getColor(activity, R.color.dialer_snackbar_action_text_color))
-            .show();
-      }
+      // ignored
 
     } else {
       LogUtil.e("OldMainActivityPeer.onActivityResult", "Unknown request code: " + requestCode);
