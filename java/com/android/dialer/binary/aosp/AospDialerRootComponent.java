@@ -22,7 +22,6 @@ import com.android.dialer.calllog.CallLogModule;
 import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.contacts.ContactsModule;
-import com.android.dialer.duo.stub.StubDuoModule;
 import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerModule;
 import com.android.dialer.inject.ContextModule;
@@ -61,7 +60,6 @@ import javax.inject.Singleton;
       StubSimulatorEnrichedCallModule.class,
       StorageModule.class,
       StubCallLocationModule.class,
-      StubDuoModule.class,
       StubEnrichedCallModule.class,
       StubSimSuggestionModule.class,
       AospThemeModule.class,

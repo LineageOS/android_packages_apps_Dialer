@@ -144,8 +144,7 @@ public class DisambigDialog extends DialogFragment {
         getContext(),
         new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL_DISAMBIG_DIALOG)
             .setAllowAssistedDial(true)
-            .setIsVideoCall(true)
-            .setIsDuoCall(channel.technology() == Channel.DUO));
+            .setIsVideoCall(true));
     dismiss();
   }
 
