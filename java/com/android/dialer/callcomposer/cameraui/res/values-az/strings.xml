@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Tam ekranlı kameraya keçin</string>
-  <string name="description_camera_switch_preview_screen">Kamera önizləməsinə keçin</string>
-  <string name="description_camera_switch_camera_facing">Ön kameraya keçin</string>
-  <string name="description_camera_switch_camera_rear">Arxa kameraya keçin</string>
-  <string name="description_camera_take_picture">Foto çəkin</string>
-  <string name="description_camera_cancel_photo">Fotonu yenidən çəkin</string>
-</resources>

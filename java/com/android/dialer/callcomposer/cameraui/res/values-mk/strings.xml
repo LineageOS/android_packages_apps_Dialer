@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Префрлете на камера на цел екран</string>
-  <string name="description_camera_switch_preview_screen">Префрлете на преглед на камера</string>
-  <string name="description_camera_switch_camera_facing">Префрлете на предна камера</string>
-  <string name="description_camera_switch_camera_rear">Префрлете на задна камера</string>
-  <string name="description_camera_take_picture">Фотографирај</string>
-  <string name="description_camera_cancel_photo">Фотографирај пак</string>
-</resources>

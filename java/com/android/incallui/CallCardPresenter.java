@@ -361,12 +361,6 @@ public class CallCardPresenter
   @Override
   public void onInternationalCallOnWifi() {}
 
-  @Override
-  public void onEnrichedCallSessionUpdate() {
-    LogUtil.enterBlock("CallCardPresenter.onEnrichedCallSessionUpdate");
-    updatePrimaryDisplayInfo();
-  }
-
   /** Handles a change to the child number by refreshing the primary call info. */
   @Override
   public void onDialerCallChildNumberChange() {
@@ -630,10 +624,6 @@ public class CallCardPresenter
     boolean hasWorkCallProperty = primary.hasProperty(PROPERTY_ENTERPRISE_CALL);
 
     MultimediaData multimediaData = null;
-    if (primary.getEnrichedCallSession() != null) {
-      multimediaData = primary.getEnrichedCallSession().getMultimediaData();
-    }
-
     if (primary.isConferenceCall()) {
       LogUtil.v(
           "CallCardPresenter.updatePrimaryDisplayInfo",

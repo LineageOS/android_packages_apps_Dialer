@@ -11,10 +11,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.backup \
 	com.android.dialer.blocking \
 	com.android.dialer.blockreportspam \
-	com.android.dialer.callcomposer \
-	com.android.dialer.callcomposer.camera \
-	com.android.dialer.callcomposer.camera.camerafocus \
-	com.android.dialer.callcomposer.cameraui \
 	com.android.dialer.calldetails \
 	com.android.dialer.calllog.config \
 	com.android.dialer.calllog.database \
@@ -33,7 +29,6 @@ LOCAL_AAPT_FLAGS := \
 	com.android.dialer.databasepopulator \
 	com.android.dialer.dialpadview \
 	com.android.dialer.dialpadview.theme \
-	com.android.dialer.enrichedcall.simulator \
 	com.android.dialer.glidephotomanager.impl \
   com.android.dialer.historyitemactions \
 	com.android.dialer.interactions \

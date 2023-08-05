@@ -30,7 +30,6 @@ import com.android.dialer.calldetails.CallDetailsHeaderViewHolder.CallDetailsHea
 import com.android.dialer.calllog.database.contract.AnnotatedCallLogContract.AnnotatedCallLog;
 import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.common.Assert;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.protos.ProtoParsers;
 
 /**
@@ -141,9 +140,6 @@ public final class CallDetailsActivity extends CallDetailsActivityCommon {
 
     private void updateCallDetailsEntries(CallDetailsEntries newEntries) {
       activity.setCallDetailsEntries(newEntries);
-      EnrichedCallComponent.get(activity)
-          .getEnrichedCallManager()
-          .requestAllHistoricalData(activity.getNumber(), newEntries);
     }
   }
 }
