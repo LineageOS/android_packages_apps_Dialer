@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">မျက်နှာပြင်အပြည့်ကင်မရာသို့ ပြောင်းရန်</string>
-  <string name="description_camera_switch_preview_screen">ကင်မရာအစမ်းကြည့်ရှုမှုသို့ ပြောင်းရန်</string>
-  <string name="description_camera_switch_camera_facing">အရှေ့ကင်မရာသို့ ပြောင်းရန်</string>
-  <string name="description_camera_switch_camera_rear">အနောက်ကင်မရာသို့ ပြောင်းရန်</string>
-  <string name="description_camera_take_picture">ဓာတ်ပုံရိုက်ရန်</string>
-  <string name="description_camera_cancel_photo">ဓာတ်ပုံပြန်ရိုက်ရန်</string>
-</resources>

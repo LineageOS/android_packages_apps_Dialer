@@ -34,9 +34,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.storage.StorageComponent;
 import com.android.dialer.util.DialerUtils;
 import com.android.dialer.util.IntentUtil;
@@ -77,22 +74,15 @@ public class PostCall {
     LogUtil.i("PostCall.promptUserToSendMessage", "returned from call, showing post call SnackBar");
     String number = Assert.isNotNull(getPhoneNumber(activity));
     String message = activity.getString(R.string.post_call_message);
-    EnrichedCallManager manager = EnrichedCallComponent.get(activity).getEnrichedCallManager();
-    EnrichedCallCapabilities capabilities = manager.getCapabilities(number);
     LogUtil.i(
         "PostCall.promptUserToSendMessage",
-        "number: %s, capabilities: %s",
-        LogUtil.sanitizePhoneNumber(number),
-        capabilities);
+        "number: %s",
+        LogUtil.sanitizePhoneNumber(number));
 
-    boolean isRcsPostCall = capabilities != null && capabilities.isPostCallCapable();
-    String actionText =
-        isRcsPostCall
-            ? activity.getString(R.string.post_call_add_message)
-            : activity.getString(R.string.post_call_send_message);
+    String actionText =activity.getString(R.string.post_call_send_message);
 
     OnClickListener onClickListener =
-        v -> activity.startActivity(PostCallActivity.newIntent(activity, number, isRcsPostCall));
+        v -> activity.startActivity(PostCallActivity.newIntent(activity, number, false));
 
     int durationMs = 8_000;
     activeSnackbar =

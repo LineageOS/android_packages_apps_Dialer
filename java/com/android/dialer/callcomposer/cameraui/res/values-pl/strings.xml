@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Przełącz na aparat pełnoekranowy</string>
-  <string name="description_camera_switch_preview_screen">Przełącz na podgląd aparatu</string>
-  <string name="description_camera_switch_camera_facing">Przełącz na przedni aparat</string>
-  <string name="description_camera_switch_camera_rear">Przełącz na tylny aparat</string>
-  <string name="description_camera_take_picture">Zrób zdjęcie</string>
-  <string name="description_camera_cancel_photo">Zrób nowe zdjęcie</string>
-</resources>

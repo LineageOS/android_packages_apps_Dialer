@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Cambiar a la cámara en pantalla completa</string>
-  <string name="description_camera_switch_preview_screen">Cambiar a la vista previa de la cámara</string>
-  <string name="description_camera_switch_camera_facing">Cambiar a la cámara frontal</string>
-  <string name="description_camera_switch_camera_rear">Cambiar a la cámara trasera</string>
-  <string name="description_camera_take_picture">Hacer una foto</string>
-  <string name="description_camera_cancel_photo">Repetir la foto</string>
-</resources>
