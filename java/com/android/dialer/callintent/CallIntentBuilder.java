@@ -44,7 +44,6 @@ public class CallIntentBuilder implements Parcelable {
   @Nullable
   private PhoneAccountHandle phoneAccountHandle;
   private boolean isVideoCall;
-  private boolean isDuoCall;
   private String callSubject;
   private boolean allowAssistedDial;
 
@@ -100,7 +99,6 @@ public class CallIntentBuilder implements Parcelable {
     callSpecificAppData = data;
     phoneAccountHandle = parcel.readParcelable(classLoader);
     isVideoCall = parcel.readInt() != 0;
-    isDuoCall = parcel.readInt() != 0;
     callSubject = parcel.readString();
     allowAssistedDial = parcel.readInt() != 0;
     inCallUiIntentExtras.putAll(parcel.readBundle(classLoader));
@@ -142,15 +140,6 @@ public class CallIntentBuilder implements Parcelable {
 
   public boolean isVideoCall() {
     return isVideoCall;
-  }
-
-  public CallIntentBuilder setIsDuoCall(boolean isDuoCall) {
-    this.isDuoCall = isDuoCall;
-    return this;
-  }
-
-  public boolean isDuoCall() {
-    return isDuoCall;
   }
 
   /** Default false. Should only be set to true if the number has a lookup URI. */
@@ -242,7 +231,6 @@ public class CallIntentBuilder implements Parcelable {
     dest.writeByteArray(callSpecificAppData.toByteArray());
     dest.writeParcelable(phoneAccountHandle, flags);
     dest.writeInt(isVideoCall ? 1 : 0);
-    dest.writeInt(isDuoCall ? 1 : 0);
     dest.writeString(callSubject);
     dest.writeInt(allowAssistedDial ? 1 : 0);
     dest.writeBundle(inCallUiIntentExtras);

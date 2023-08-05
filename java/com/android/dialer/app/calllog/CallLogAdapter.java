@@ -70,9 +70,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.contacts.ContactsComponent;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
-import com.android.dialer.duo.DuoListener;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -94,7 +91,7 @@ import java.util.Set;
 
 /** Adapter class to fill in data for the Call Log. */
 public class CallLogAdapter extends GroupingListAdapter
-    implements GroupCreator, OnVoicemailDeletedListener, DuoListener {
+    implements GroupCreator, OnVoicemailDeletedListener {
 
   // Types of activities the call log adapter is used for
   public static final int ACTIVITY_TYPE_CALL_LOG = 1;
@@ -609,12 +606,10 @@ public class CallLogAdapter extends GroupingListAdapter
     if (PermissionsUtil.hasPermission(activity, android.Manifest.permission.READ_CONTACTS)) {
       contactInfoCache.start();
     }
-    getDuo().registerListener(this);
     notifyDataSetChanged();
   }
 
   public void onPause() {
-    getDuo().unregisterListener(this);
     pauseCache();
     for (Uri uri : hiddenItemUris) {
       CallLogAsyncTaskUtil.deleteVoicemail(activity, uri, null);
@@ -911,9 +906,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
 
       String phoneAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
-      if (DuoComponent.get(activity).getDuo().isDuoAccount(phoneAccountComponentName)) {
-        entry.setIsDuoCall(true);
-      }
 
       entries.addEntries(entry.build());
       cursor.moveToNext();
@@ -1307,16 +1299,6 @@ public class CallLogAdapter extends GroupingListAdapter
   @NonNull
   private EnrichedCallManager getEnrichedCallManager() {
     return EnrichedCallComponent.get(activity).getEnrichedCallManager();
-  }
-
-  @NonNull
-  private Duo getDuo() {
-    return DuoComponent.get(activity).getDuo();
-  }
-
-  @Override
-  public void onDuoStateChanged() {
-    notifyDataSetChanged();
   }
 
   public void onAllSelected() {

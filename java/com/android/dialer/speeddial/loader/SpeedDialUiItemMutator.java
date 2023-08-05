@@ -44,7 +44,6 @@ import com.android.dialer.contacts.ContactsComponent;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences;
 import com.android.dialer.contacts.displaypreference.ContactDisplayPreferences.DisplayOrder;
 import com.android.dialer.contacts.hiresphoto.HighResolutionPhotoRequester;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.inject.ApplicationContext;
 import com.android.dialer.speeddial.database.SpeedDialEntry;
 import com.android.dialer.speeddial.database.SpeedDialEntry.Channel;
@@ -626,61 +625,6 @@ public final class SpeedDialUiItemMutator {
           "Exception thrown when pinning contacts",
           e);
     }
-  }
-
-  /**
-   * Returns a new list with duo reachable channels inserted. Duo channels won't replace ViLTE
-   * channels.
-   */
-  @MainThread
-  public ImmutableList<SpeedDialUiItem> insertDuoChannels(
-      Context context, ImmutableList<SpeedDialUiItem> speedDialUiItems) {
-    Assert.isMainThread();
-
-    ImmutableList.Builder<SpeedDialUiItem> newSpeedDialItemList = ImmutableList.builder();
-    // for each existing item
-    for (SpeedDialUiItem item : speedDialUiItems) {
-      if (item.defaultChannel() == null) {
-        // If the contact is starred and doesn't have a default channel, insert duo channels
-        newSpeedDialItemList.add(insertDuoChannelsToStarredContact(context, item));
-      } else {
-        // if starred and has a default channel, leave it as is, the user knows what they want.
-        newSpeedDialItemList.add(item);
-      }
-    }
-    return newSpeedDialItemList.build();
-  }
-
-  @MainThread
-  private SpeedDialUiItem insertDuoChannelsToStarredContact(Context context, SpeedDialUiItem item) {
-    Assert.isMainThread();
-    Assert.checkArgument(item.isStarred());
-
-    // build a new list of channels
-    ImmutableList.Builder<Channel> newChannelsList = ImmutableList.builder();
-    Channel previousChannel = item.channels().get(0);
-    newChannelsList.add(previousChannel);
-
-    for (int i = 1; i < item.channels().size(); i++) {
-      Channel currentChannel = item.channels().get(i);
-      // If the previous and current channel are voice channels, that means the previous number
-      // didn't have a video channel.
-      // If the previous number is duo reachable, insert a duo channel.
-      if (!previousChannel.isVideoTechnology()
-          && !currentChannel.isVideoTechnology()
-          && DuoComponent.get(context).getDuo().isReachable(context, previousChannel.number())) {
-        newChannelsList.add(previousChannel.toBuilder().setTechnology(Channel.DUO).build());
-      }
-      newChannelsList.add(currentChannel);
-      previousChannel = currentChannel;
-    }
-
-    // Check the last channel
-    if (!previousChannel.isVideoTechnology()
-        && DuoComponent.get(context).getDuo().isReachable(context, previousChannel.number())) {
-      newChannelsList.add(previousChannel.toBuilder().setTechnology(Channel.DUO).build());
-    }
-    return item.toBuilder().setChannels(newChannelsList.build()).build();
   }
 
   private SpeedDialEntryDao getSpeedDialEntryDao() {
