@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">სრულეკრანიან კამერაზე გადართვა</string>
-  <string name="description_camera_switch_preview_screen">კამერის წინასწარ ხედზე გადართვა</string>
-  <string name="description_camera_switch_camera_facing">წინა კამერაზე გადართვა</string>
-  <string name="description_camera_switch_camera_rear">უკანა კამერაზე გადართვა</string>
-  <string name="description_camera_take_picture">ფოტოს გადაღება</string>
-  <string name="description_camera_cancel_photo">ფოტოს ხელახლა გადაღება</string>
-</resources>

@@ -32,8 +32,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.util.PermissionsUtil;
 import com.android.dialer.widget.DialerToolbar;
 import com.android.dialer.widget.MessageFragment;
@@ -94,7 +92,6 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
 
     if (useRcs) {
       LogUtil.i("PostCallActivity.onMessageFragmentSendMessage", "sending post call Rcs.");
-      getEnrichedCallManager().sendPostCallNote(number, message);
       PostCall.onMessageSent(this, number);
       finish();
     } else if (PermissionsUtil.hasPermission(this, permission.SEND_SMS)) {
@@ -133,10 +130,5 @@ public class PostCallActivity extends AppCompatActivity implements MessageFragme
         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
       onMessageFragmentSendMessage(getIntent().getStringExtra(KEY_MESSAGE));
     }
-  }
-
-  @NonNull
-  private EnrichedCallManager getEnrichedCallManager() {
-    return EnrichedCallComponent.get(this).getEnrichedCallManager();
   }
 }

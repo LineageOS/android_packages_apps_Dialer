@@ -54,13 +54,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
-import com.android.dialer.enrichedcall.EnrichedCallManager.Filter;
-import com.android.dialer.enrichedcall.EnrichedCallManager.StateChangedListener;
-import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.logging.ContactLookupResult;
 import com.android.dialer.logging.ContactLookupResult.Type;
@@ -94,7 +87,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 /** Describes a single call and its state. */
-public class DialerCall implements VideoTechListener, StateChangedListener, CapabilitiesListener {
+public class DialerCall implements VideoTechListener {
 
   public static final int CALL_HISTORY_STATUS_UNKNOWN = 0;
   public static final int CALL_HISTORY_STATUS_PRESENT = 1;
@@ -160,8 +153,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private String callProviderLabel;
   private String callbackNumber;
   private int cameraDirection = CameraDirection.CAMERA_DIRECTION_UNKNOWN;
-  private EnrichedCallCapabilities enrichedCallCapabilities;
-  private Session enrichedCallSession;
 
   private int answerAndReleaseButtonDisplayedTimes = 0;
   private boolean releasedByAnsweringSecondCall = false;
@@ -385,8 +376,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
 
     timeAddedMs = System.currentTimeMillis();
     parseCallSpecificAppData();
-
-    updateEnrichedCallSession();
   }
 
   private static int translateState(int state) {
@@ -540,12 +529,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       for (DialerCallListener listener : listeners) {
         listener.onDialerCallDisconnect();
       }
-      EnrichedCallComponent.get(context)
-          .getEnrichedCallManager()
-          .unregisterCapabilitiesListener(this);
-      EnrichedCallComponent.get(context)
-          .getEnrichedCallManager()
-          .unregisterStateChangedListener(this);
     } else {
       for (DialerCallListener listener : listeners) {
         listener.onDialerCallUpdate();
@@ -1298,25 +1281,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     secondCallWithoutAnswerAndReleasedButtonTimes++;
   }
 
-  @Nullable
-  public EnrichedCallCapabilities getEnrichedCallCapabilities() {
-    return enrichedCallCapabilities;
-  }
-
-  public void setEnrichedCallCapabilities(
-      @Nullable EnrichedCallCapabilities mEnrichedCallCapabilities) {
-    this.enrichedCallCapabilities = mEnrichedCallCapabilities;
-  }
-
-  @Nullable
-  public Session getEnrichedCallSession() {
-    return enrichedCallSession;
-  }
-
-  public void setEnrichedCallSession(@Nullable Session mEnrichedCallSession) {
-    this.enrichedCallSession = mEnrichedCallSession;
-  }
-
   public void unregisterCallback() {
     telecomCall.unregisterCallback(telecomCallCallback);
   }
@@ -1490,66 +1454,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
     TelecomAdapter.getInstance().setAudioRoute(CallAudioState.ROUTE_SPEAKER);
   }
 
-  @Override
-  public void onCapabilitiesUpdated() {
-    if (getNumber() == null) {
-      return;
-    }
-    EnrichedCallCapabilities capabilities =
-        EnrichedCallComponent.get(context).getEnrichedCallManager().getCapabilities(getNumber());
-    if (capabilities != null) {
-      setEnrichedCallCapabilities(capabilities);
-      update();
-    }
-  }
-
-  @Override
-  public void onEnrichedCallStateChanged() {
-    updateEnrichedCallSession();
-  }
-
-  private void updateEnrichedCallSession() {
-    if (getNumber() == null) {
-      return;
-    }
-    if (getEnrichedCallSession() != null) {
-      // State changes to existing sessions are currently handled by the UI components (which have
-      // their own listeners). Someday instead we could remove those and just call update() here and
-      // have the usual onDialerCallUpdate update the UI.
-      dispatchOnEnrichedCallSessionUpdate();
-      return;
-    }
-
-    EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
-
-    Filter filter =
-        isIncoming()
-            ? manager.createIncomingCallComposerFilter()
-            : manager.createOutgoingCallComposerFilter();
-
-    Session session = manager.getSession(getUniqueCallId(), getNumber(), filter);
-    if (session == null) {
-      return;
-    }
-
-    session.setUniqueDialerCallId(getUniqueCallId());
-    setEnrichedCallSession(session);
-
-    LogUtil.i(
-        "DialerCall.updateEnrichedCallSession",
-        "setting session %d's dialer id to %s",
-        session.getSessionId(),
-        getUniqueCallId());
-
-    dispatchOnEnrichedCallSessionUpdate();
-  }
-
-  private void dispatchOnEnrichedCallSessionUpdate() {
-    for (DialerCallListener listener : listeners) {
-      listener.onEnrichedCallSessionUpdate();
-    }
-  }
-
   void onRemovedFromCallList() {
     LogUtil.enterBlock("DialerCall.onRemovedFromCallList");
     // Ensure we clean up when this call is removed.
@@ -1712,7 +1616,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
   private static class VideoTechManager {
     private final Context context;
     private final EmptyVideoTech emptyVideoTech = new EmptyVideoTech();
-    private final VideoTech rcsVideoShare;
     private final List<VideoTech> videoTechs;
     private VideoTech savedTech;
 
@@ -1727,15 +1630,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
       videoTechs = new ArrayList<>();
 
       videoTechs.add(new ImsVideoTech(call, call.telecomCall));
-
-      rcsVideoShare =
-          EnrichedCallComponent.get(call.context)
-              .getRcsVideoShareFactory()
-              .newRcsVideoShare(
-                  EnrichedCallComponent.get(call.context).getEnrichedCallManager(),
-                  call,
-                  phoneNumber);
-      videoTechs.add(rcsVideoShare);
 
       savedTech = emptyVideoTech;
     }

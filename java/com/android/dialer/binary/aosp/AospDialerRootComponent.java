@@ -22,7 +22,6 @@ import com.android.dialer.calllog.CallLogModule;
 import com.android.dialer.commandline.CommandLineModule;
 import com.android.dialer.common.concurrent.DialerExecutorModule;
 import com.android.dialer.contacts.ContactsModule;
-import com.android.dialer.enrichedcall.stub.StubEnrichedCallModule;
 import com.android.dialer.glidephotomanager.GlidePhotoManagerModule;
 import com.android.dialer.inject.ContextModule;
 import com.android.dialer.phonelookup.PhoneLookupModule;
@@ -32,7 +31,6 @@ import com.android.dialer.preferredsim.PreferredSimModule;
 import com.android.dialer.preferredsim.suggestion.stub.StubSimSuggestionModule;
 import com.android.dialer.promotion.impl.PromotionModule;
 import com.android.dialer.simulator.impl.SimulatorModule;
-import com.android.dialer.simulator.stub.StubSimulatorEnrichedCallModule;
 import com.android.dialer.storage.StorageModule;
 import com.android.dialer.theme.base.impl.AospThemeModule;
 import com.android.incallui.calllocation.stub.StubCallLocationModule;
@@ -57,10 +55,8 @@ import javax.inject.Singleton;
       PreferredSimModule.class,
       PromotionModule.class,
       SimulatorModule.class,
-      StubSimulatorEnrichedCallModule.class,
       StorageModule.class,
       StubCallLocationModule.class,
-      StubEnrichedCallModule.class,
       StubSimSuggestionModule.class,
       AospThemeModule.class,
       VoicemailModule.class,

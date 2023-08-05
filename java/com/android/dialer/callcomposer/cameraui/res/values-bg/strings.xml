@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Превключване към камера на цял екран</string>
-  <string name="description_camera_switch_preview_screen">Превключване към визуализация на камерата</string>
-  <string name="description_camera_switch_camera_facing">Превключване към предната камера</string>
-  <string name="description_camera_switch_camera_rear">Превключване към задната камера.</string>
-  <string name="description_camera_take_picture">Снимане</string>
-  <string name="description_camera_cancel_photo">Повторно снимане</string>
-</resources>
