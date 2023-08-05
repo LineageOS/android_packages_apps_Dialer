@@ -69,11 +69,8 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.contactphoto.BitmapUtil;
 import com.android.dialer.contacts.ContactsComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.Session;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
-import com.android.dialer.multimedia.MultimediaData;
 import com.android.dialer.notification.NotificationChannelId;
 import com.android.dialer.oem.MotorolaUtils;
 import com.android.dialer.theme.base.ThemeComponent;
@@ -97,7 +94,6 @@ import java.util.Objects;
 /** This class adds Notifications to the status bar for the in-call experience. */
 public class StatusBarNotifier
     implements InCallPresenter.InCallStateListener,
-        EnrichedCallManager.StateChangedListener,
         ContactInfoCacheCallback {
 
   private static final int NOTIFICATION_ID = 1;
@@ -177,12 +173,6 @@ public class StatusBarNotifier
   @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
   public void onStateChange(InCallState oldState, InCallState newState, CallList callList) {
     LogUtil.d("StatusBarNotifier.onStateChange", "%s->%s", oldState, newState);
-    updateNotification();
-  }
-
-  @Override
-  public void onEnrichedCallStateChanged() {
-    LogUtil.enterBlock("StatusBarNotifier.onEnrichedCallStateChanged");
     updateNotification();
   }
 
@@ -676,8 +666,6 @@ public class StatusBarNotifier
     if (isIncomingOrWaiting) {
       if (call.isSpam()) {
         message = context.getString(R.string.notification_incoming_spam_call);
-      } else if (shouldShowEnrichedCallNotification(call.getEnrichedCallSession())) {
-        message = context.getString(getECIncomingCallText(call.getEnrichedCallSession()));
       } else if (call.hasProperty(Details.PROPERTY_WIFI)) {
         message = context.getString(R.string.notification_incoming_call_wifi_template, wifiBrand);
       } else if (call.getAccountHandle() != null && hasMultiplePhoneAccounts(call)) {
@@ -731,75 +719,6 @@ public class StatusBarNotifier
     } else {
       return context.getString(R.string.notification_call_wifi_brand);
     }
-  }
-
-  private boolean shouldShowEnrichedCallNotification(Session session) {
-    if (session == null) {
-      return false;
-    }
-    return session.getMultimediaData().hasData() || session.getMultimediaData().isImportant();
-  }
-
-  private int getECIncomingCallText(Session session) {
-    int resId;
-    MultimediaData data = session.getMultimediaData();
-    boolean hasImage = data.hasImageData();
-    boolean hasSubject = !TextUtils.isEmpty(data.getText());
-    boolean hasMap = data.getLocation() != null;
-    if (data.isImportant()) {
-      if (hasMap) {
-        if (hasImage) {
-          if (hasSubject) {
-            resId = R.string.important_notification_incoming_call_with_photo_message_location;
-          } else {
-            resId = R.string.important_notification_incoming_call_with_photo_location;
-          }
-        } else if (hasSubject) {
-          resId = R.string.important_notification_incoming_call_with_message_location;
-        } else {
-          resId = R.string.important_notification_incoming_call_with_location;
-        }
-      } else if (hasImage) {
-        if (hasSubject) {
-          resId = R.string.important_notification_incoming_call_with_photo_message;
-        } else {
-          resId = R.string.important_notification_incoming_call_with_photo;
-        }
-      } else if (hasSubject) {
-        resId = R.string.important_notification_incoming_call_with_message;
-      } else {
-        resId = R.string.important_notification_incoming_call;
-      }
-      if (context.getString(resId).length() > 50) {
-        resId = R.string.important_notification_incoming_call_attachments;
-      }
-    } else {
-      if (hasMap) {
-        if (hasImage) {
-          if (hasSubject) {
-            resId = R.string.notification_incoming_call_with_photo_message_location;
-          } else {
-            resId = R.string.notification_incoming_call_with_photo_location;
-          }
-        } else if (hasSubject) {
-          resId = R.string.notification_incoming_call_with_message_location;
-        } else {
-          resId = R.string.notification_incoming_call_with_location;
-        }
-      } else if (hasImage) {
-        if (hasSubject) {
-          resId = R.string.notification_incoming_call_with_photo_message;
-        } else {
-          resId = R.string.notification_incoming_call_with_photo;
-        }
-      } else {
-        resId = R.string.notification_incoming_call_with_message;
-      }
-    }
-    if (context.getString(resId).length() > 50) {
-      resId = R.string.notification_incoming_call_attachments;
-    }
-    return resId;
   }
 
   private CharSequence getMultiSimIncomingText(DialerCall call) {
@@ -1097,9 +1016,6 @@ public class StatusBarNotifier
 
     @Override
     public void onInternationalCallOnWifi() {}
-
-    @Override
-    public void onEnrichedCallSessionUpdate() {}
 
     /**
      * Responds to changes in the session modification state for the call by dismissing the status

@@ -71,25 +71,6 @@
       android:visibility="gone"
       style="@style/Dialer.TextAppearance.Secondary"/>
 
-  <include
-      android:id="@+id/ec_container"
-      layout="@layout/ec_data_container"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/ec_container_height"
-      android:layout_below="@id/play_recordings"
-      android:visibility="gone"/>
-
-  <TextView
-      android:id="@+id/post_call_note"
-      style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/ec_container_height"
-      android:layout_below="@+id/ec_container"
-      android:paddingStart="@dimen/call_entry_text_left_margin"
-      android:background="?attr/selectableItemBackground"
-      android:gravity="center_vertical"
-      android:maxLines="2"
-      android:visibility="gone"/>
   <TextView
       android:id="@+id/rtt_transcript"
       style="@style/Dialer.TextAppearance.Secondary.Ellipsize"
@@ -98,18 +79,7 @@
       android:layout_marginBottom="@dimen/call_entry_bottom_padding"
       android:layout_marginStart="@dimen/call_entry_text_left_margin"
       android:layout_marginEnd="@dimen/call_entry_padding"
-      android:layout_below="@id/post_call_note"
+      android:layout_below="@id/play_recordings"
       android:maxLines="2"
-      android:visibility="gone"/>
-
-  <View
-      android:id="@+id/divider"
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginTop="@dimen/ec_divider_top_bottom_margin"
-      android:layout_marginBottom="@dimen/ec_divider_top_bottom_margin"
-      android:layout_marginStart="@dimen/call_entry_text_left_margin"
-      android:layout_below="@id/rtt_transcript"
-      android:background="@color/dialer_divider_line_color"
       android:visibility="gone"/>
 </RelativeLayout>
