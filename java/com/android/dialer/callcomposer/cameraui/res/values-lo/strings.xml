@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">ສະຫຼັບໄປໃຊ້ກ້ອງແບບເຕັມຈໍ</string>
-  <string name="description_camera_switch_preview_screen">ສະຫຼັບໄປໃຊ້ຕົວຢ່າງກ້ອງ</string>
-  <string name="description_camera_switch_camera_facing">ສະຫຼັບໄປໃຊ້ກ້ອງໜ້າ</string>
-  <string name="description_camera_switch_camera_rear">ສະຫຼັບໄປໃຊ້ກ້ອງຫຼັງ</string>
-  <string name="description_camera_take_picture">ຖ່າຍຮູບ</string>
-  <string name="description_camera_cancel_photo">ຖ່າຍຮູບໃໝ່</string>
-</resources>

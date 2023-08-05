@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">முழுத் திரை கேமராவிற்கு மாறும் பொத்தான்</string>
-  <string name="description_camera_switch_preview_screen">கேமரா மாதிரிக்காட்சிக்கு மாறும் பொத்தான்</string>
-  <string name="description_camera_switch_camera_facing">முன்பக்க கேமராவிற்கு மாறும் பொத்தான்</string>
-  <string name="description_camera_switch_camera_rear">பின்பக்க கேமராவிற்கு மாறும் பொத்தான்</string>
-  <string name="description_camera_take_picture">படமெடுக்கும் பொத்தான்</string>
-  <string name="description_camera_cancel_photo">மீண்டும் படமெடுக்கும் பொத்தான்</string>
-</resources>

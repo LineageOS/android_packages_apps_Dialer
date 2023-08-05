@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Prepnúť na fotoaparát na celej obrazovke</string>
-  <string name="description_camera_switch_preview_screen">Prepnúť na ukážku z fotoaparátu</string>
-  <string name="description_camera_switch_camera_facing">Prepnúť na predný fotoaparát</string>
-  <string name="description_camera_switch_camera_rear">Prepnúť na zadný fotoaparát</string>
-  <string name="description_camera_take_picture">Odfotiť</string>
-  <string name="description_camera_cancel_photo">Znova odfotiť</string>
-</resources>

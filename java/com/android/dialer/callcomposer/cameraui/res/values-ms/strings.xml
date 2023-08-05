@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Beralih ke kamera skrin penuh</string>
-  <string name="description_camera_switch_preview_screen">Beralih ke pratonton kamera</string>
-  <string name="description_camera_switch_camera_facing">Beralih ke kamera menghadap depan</string>
-  <string name="description_camera_switch_camera_rear">Beralih ke kamera menghadap belakang</string>
-  <string name="description_camera_take_picture">Ambil foto</string>
-  <string name="description_camera_cancel_photo">Ambil semula foto</string>
-</resources>

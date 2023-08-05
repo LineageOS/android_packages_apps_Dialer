@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">全画面カメラに切り替えます</string>
-  <string name="description_camera_switch_preview_screen">カメラのプレビューに切り替えます</string>
-  <string name="description_camera_switch_camera_facing">前面カメラに切り替えます</string>
-  <string name="description_camera_switch_camera_rear">背面カメラに切り替えます</string>
-  <string name="description_camera_take_picture">写真を撮影します</string>
-  <string name="description_camera_cancel_photo">写真を撮り直します</string>
-</resources>
