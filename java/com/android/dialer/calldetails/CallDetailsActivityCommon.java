@@ -50,9 +50,6 @@ import com.android.dialer.common.concurrent.DialerExecutor.Worker;
 import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.UiListener;
 import com.android.dialer.common.database.Selection;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
-import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.postcall.PostCall;
 import com.android.dialer.precall.PreCall;
@@ -66,9 +63,7 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Contains common logic shared between {@link OldCallDetailsActivity} and {@link
@@ -77,7 +72,6 @@ import java.util.Map;
 abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
   public static final String EXTRA_PHONE_NUMBER = "phone_number";
-  public static final String EXTRA_HAS_ENRICHED_CALL_DATA = "has_enriched_call_data";
   public static final String EXTRA_CAN_REPORT_CALLER_ID = "can_report_caller_id";
   public static final String EXTRA_CAN_SUPPORT_ASSISTED_DIALING = "can_support_assisted_dialing";
 
@@ -89,9 +83,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
       new DeleteCallDetailsListener(this);
   private final CallDetailsFooterViewHolder.ReportCallIdListener reportCallIdListener =
       new ReportCallIdListener(this);
-  private final EnrichedCallManager.HistoricalDataChangedListener
-      enrichedCallHistoricalDataChangedListener =
-          new EnrichedCallHistoricalDataChangedListener(this);
 
   private CallDetailsAdapterCommon adapter;
   private CallDetailsEntries callDetailsEntries;
@@ -144,13 +135,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
     PostCall.promptUserForMessageIfNecessary(this, findViewById(R.id.recycler_view));
-
-    EnrichedCallComponent.get(this)
-        .getEnrichedCallManager()
-        .registerHistoricalDataChangedListener(enrichedCallHistoricalDataChangedListener);
-    EnrichedCallComponent.get(this)
-        .getEnrichedCallManager()
-        .requestAllHistoricalData(getNumber(), callDetailsEntries);
   }
 
   protected void loadRttTranscriptAvailability() {
@@ -182,10 +166,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
   @CallSuper
   protected void onPause() {
     super.onPause();
-
-    EnrichedCallComponent.get(this)
-        .getEnrichedCallManager()
-        .unregisterHistoricalDataChangedListener(enrichedCallHistoricalDataChangedListener);
   }
 
   @Override
@@ -398,13 +378,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
               unused -> {
                 Intent data = new Intent();
                 data.putExtra(EXTRA_PHONE_NUMBER, activity.getNumber());
-                for (CallDetailsEntry entry : activity.getCallDetailsEntries().getEntriesList()) {
-                  if (entry.getHistoryResultsCount() > 0) {
-                    data.putExtra(EXTRA_HAS_ENRICHED_CALL_DATA, true);
-                    break;
-                  }
-                }
-
                 activity.setResult(RESULT_OK, data);
                 activity.finish();
               })
@@ -438,70 +411,6 @@ abstract class CallDetailsActivityCommon extends AppCompatActivity {
 
     private Activity getActivity() {
       return Preconditions.checkNotNull(activityWeakReference.get());
-    }
-  }
-
-  private static final class EnrichedCallHistoricalDataChangedListener
-      implements EnrichedCallManager.HistoricalDataChangedListener {
-    private final WeakReference<CallDetailsActivityCommon> activityWeakReference;
-
-    EnrichedCallHistoricalDataChangedListener(CallDetailsActivityCommon activity) {
-      this.activityWeakReference = new WeakReference<>(activity);
-    }
-
-    @Override
-    public void onHistoricalDataChanged() {
-      CallDetailsActivityCommon activity = getActivity();
-      Map<CallDetailsEntry, List<HistoryResult>> mappedResults =
-          getAllHistoricalData(activity.getNumber(), activity.callDetailsEntries);
-
-      activity.setCallDetailsEntries(
-          generateAndMapNewCallDetailsEntriesHistoryResults(
-              activity.getNumber(), activity.callDetailsEntries, mappedResults));
-    }
-
-    private CallDetailsActivityCommon getActivity() {
-      return Preconditions.checkNotNull(activityWeakReference.get());
-    }
-
-    @NonNull
-    private Map<CallDetailsEntry, List<HistoryResult>> getAllHistoricalData(
-            @Nullable String number, @NonNull CallDetailsEntries entries) {
-      if (number == null) {
-        return Collections.emptyMap();
-      }
-
-      Map<CallDetailsEntry, List<HistoryResult>> historicalData =
-          EnrichedCallComponent.get(getActivity())
-              .getEnrichedCallManager()
-              .getAllHistoricalData(number, entries);
-      if (historicalData == null) {
-        return Collections.emptyMap();
-      }
-      return historicalData;
-    }
-
-    private static CallDetailsEntries generateAndMapNewCallDetailsEntriesHistoryResults(
-        @Nullable String number,
-        @NonNull CallDetailsEntries callDetailsEntries,
-        @NonNull Map<CallDetailsEntry, List<HistoryResult>> mappedResults) {
-      if (number == null) {
-        return callDetailsEntries;
-      }
-      CallDetailsEntries.Builder mutableCallDetailsEntries = CallDetailsEntries.newBuilder();
-      for (CallDetailsEntry entry : callDetailsEntries.getEntriesList()) {
-        CallDetailsEntry.Builder newEntry = CallDetailsEntry.newBuilder().mergeFrom(entry);
-        List<HistoryResult> results = mappedResults.get(entry);
-        if (results != null) {
-          newEntry.addAllHistoryResults(mappedResults.get(entry));
-          LogUtil.v(
-              "CallDetailsActivityCommon.generateAndMapNewCallDetailsEntriesHistoryResults",
-              "mapped %d results",
-              newEntry.getHistoryResultsList().size());
-        }
-        mutableCallDetailsEntries.addEntries(newEntry.build());
-      }
-      return mutableCallDetailsEntries.build();
     }
   }
 }

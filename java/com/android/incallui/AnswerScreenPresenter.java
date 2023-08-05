@@ -228,9 +228,6 @@ public class AnswerScreenPresenter
 
     @Override
     public void onInternationalCallOnWifi() {}
-
-    @Override
-    public void onEnrichedCallSessionUpdate() {}
   }
 
   private boolean isSmsResponseAllowed(DialerCall call) {

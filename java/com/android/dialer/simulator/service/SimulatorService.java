@@ -52,8 +52,6 @@ public class SimulatorService extends Service {
   private static final String NOTIFICATIONS = "Notifications";
   private static final String CUSTOMIZED_INCOMING_CALL = "Customized incoming call";
   private static final String CUSTOMIZED_OUTGOING_CALL = "Customized outgoing call";
-  private static final String INCOMING_ENRICHED_CALL = "Incoming enriched call";
-  private static final String OUTGOING_ENRICHED_CALL = "Outgoing enriched call";
   private static final String MISSED_CALL = "Missed calls (few)";
 
   // Certificates that used for checking whether a client is a trusted client.
@@ -118,22 +116,6 @@ public class SimulatorService extends Service {
           doSecurityCheck(
               () -> {
                 simulatorMainPortal.execute(new String[] {DISABLE_SIMULATOR_MODE});
-              });
-        }
-
-        @Override
-        public void makeIncomingEnrichedCall() throws RemoteException {
-          doSecurityCheck(
-              () -> {
-                simulatorMainPortal.execute(new String[] {VOICECALL, INCOMING_ENRICHED_CALL});
-              });
-        }
-
-        @Override
-        public void makeOutgoingEnrichedCall() throws RemoteException {
-          doSecurityCheck(
-              () -> {
-                simulatorMainPortal.execute(new String[] {VOICECALL, OUTGOING_ENRICHED_CALL});
               });
         }
 
