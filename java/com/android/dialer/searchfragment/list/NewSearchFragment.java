@@ -45,7 +45,6 @@ import androidx.annotation.Nullable;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
-import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.callintent.CallSpecificAppData;
@@ -54,8 +53,6 @@ import com.android.dialer.common.FragmentUtils;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager.CapabilitiesListener;
 import com.android.dialer.precall.PreCall;
 import com.android.dialer.searchfragment.common.RowClickListener;
 import com.android.dialer.searchfragment.common.SearchCursor;
@@ -80,16 +77,12 @@ import java.util.List;
 public final class NewSearchFragment extends Fragment
     implements LoaderCallbacks<Cursor>,
         OnEmptyViewActionButtonClickedListener,
-        CapabilitiesListener,
         OnTouchListener,
         RowClickListener {
 
   // Since some of our queries can generate network requests, we should delay them until the user
   // stops typing to prevent generating too much network traffic.
   private static final int NETWORK_SEARCH_DELAY_MILLIS = 300;
-  // To prevent constant capabilities updates refreshing the adapter, we want to add a delay between
-  // updates so they are bundled together
-  private static final int ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY = 400;
 
   private static final String KEY_LOCATION_PROMPT_DISMISSED = "search_location_prompt_dismissed";
 
@@ -446,27 +439,13 @@ public final class NewSearchFragment extends Fragment
   @Override
   public void onResume() {
     super.onResume();
-    EnrichedCallComponent.get(getContext())
-        .getEnrichedCallManager()
-        .registerCapabilitiesListener(this);
     getLoaderManager().restartLoader(CONTACTS_LOADER_ID, null, this);
   }
 
   @Override
   public void onPause() {
     super.onPause();
-    EnrichedCallComponent.get(getContext())
-        .getEnrichedCallManager()
-        .unregisterCapabilitiesListener(this);
   }
-
-  @Override
-  public void onCapabilitiesUpdated() {
-    ThreadUtil.getUiThreadHandler().removeCallbacks(capabilitiesUpdatedRunnable);
-    ThreadUtil.getUiThreadHandler()
-        .postDelayed(capabilitiesUpdatedRunnable, ENRICHED_CALLING_CAPABILITIES_UPDATED_DELAY);
-  }
-
 
   /**
    * Returns a list of search actions to be shown in the search results.
@@ -539,12 +518,6 @@ public final class NewSearchFragment extends Fragment
             .setIsVideoCall(isVideoCall)
             .setAllowAssistedDial(true));
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
-  }
-
-  @Override
-  public void openCallAndShare(DialerContact contact) {
-    Intent intent = CallComposerActivity.newIntent(getContext(), contact);
-    DialerUtils.startActivityWithErrorToast(getContext(), intent);
   }
 
   /** Callback to {@link NewSearchFragment}'s parent to be notified of important events. */

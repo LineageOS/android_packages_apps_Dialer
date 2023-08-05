@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Alternar para câmera em tela cheia</string>
-  <string name="description_camera_switch_preview_screen">Alternar para visualização da câmera</string>
-  <string name="description_camera_switch_camera_facing">Alternar para câmera frontal</string>
-  <string name="description_camera_switch_camera_rear">Alternar para câmera traseira</string>
-  <string name="description_camera_take_picture">Tirar foto</string>
-  <string name="description_camera_cancel_photo">Tirar foto novamente</string>
-</resources>

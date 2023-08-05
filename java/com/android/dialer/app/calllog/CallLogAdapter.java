@@ -70,9 +70,6 @@ import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.AsyncTaskExecutor;
 import com.android.dialer.common.concurrent.AsyncTaskExecutors;
 import com.android.dialer.contacts.ContactsComponent;
-import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.logging.ContactSource;
 import com.android.dialer.logging.ContactSource.Type;
 import com.android.dialer.main.MainActivityPeer;
@@ -299,33 +296,6 @@ public class CallLogAdapter extends GroupingListAdapter
           if (voicemailPlaybackPresenter != null) {
             // Always reset the voicemail playback state on expand or collapse.
             voicemailPlaybackPresenter.resetAll();
-          }
-
-          // If enriched call capabilities were unknown on the initial load,
-          // viewHolder.isCallComposerCapable may be unset. Check here if we have the capabilities
-          // as a last attempt at getting them before showing the expanded view to the user
-          EnrichedCallCapabilities capabilities = null;
-
-          if (viewHolder.number != null) {
-            capabilities = getEnrichedCallManager().getCapabilities(viewHolder.number);
-          }
-
-          if (capabilities == null) {
-            capabilities = EnrichedCallCapabilities.NO_CAPABILITIES;
-          }
-
-          viewHolder.isCallComposerCapable = capabilities.isCallComposerCapable();
-
-          if (capabilities.isTemporarilyUnavailable()) {
-            LogUtil.i(
-                "mExpandCollapseListener.onClick",
-                "%s is temporarily unavailable, requesting capabilities",
-                LogUtil.sanitizePhoneNumber(viewHolder.number));
-            // Refresh the capabilities when temporarily unavailable.
-            // Similarly to when we request capabilities the first time, the 'Share and call' button
-            // won't pop in with the new capabilities. Instead the row needs to be collapsed and
-            // expanded again.
-            getEnrichedCallManager().requestCapabilities(viewHolder.number);
           }
 
           if (viewHolder.rowId == currentlyExpandedRowId) {
@@ -617,7 +587,6 @@ public class CallLogAdapter extends GroupingListAdapter
   }
 
   public void onStop() {
-    getEnrichedCallManager().clearCachedData();
   }
 
   public CallLogAlertManager getAlertManager() {
@@ -780,10 +749,6 @@ public class CallLogAdapter extends GroupingListAdapter
     viewHolder.isSpam = false;
     viewHolder.blockId = null;
 
-    // Attempt to set the isCallComposerCapable field. If capabilities are unknown for this number,
-    // the value will be false while capabilities are requested. mExpandCollapseListener will
-    // attempt to set the field properly in that case
-    viewHolder.isCallComposerCapable = isCallComposerCapable(viewHolder.number);
     viewHolder.setDetailedPhoneDetails(callDetailsEntries);
     final AsyncTask<Void, Void, Boolean> loadDataTask =
         new AsyncTask<Void, Void, Boolean>() {
@@ -818,20 +783,6 @@ public class CallLogAdapter extends GroupingListAdapter
 
     viewHolder.asyncTask = loadDataTask;
     asyncTaskExecutor.submit(LOAD_DATA_TASK_IDENTIFIER, loadDataTask);
-  }
-
-  @MainThread
-  private boolean isCallComposerCapable(@Nullable String number) {
-    if (number == null) {
-      return false;
-    }
-
-    EnrichedCallCapabilities capabilities = getEnrichedCallManager().getCapabilities(number);
-    if (capabilities == null) {
-      getEnrichedCallManager().requestCapabilities(number);
-      return false;
-    }
-    return capabilities.isCallComposerCapable();
   }
 
   /**
@@ -1294,11 +1245,6 @@ public class CallLogAdapter extends GroupingListAdapter
     } else {
       return activity.getResources().getString(R.string.call_log_header_other);
     }
-  }
-
-  @NonNull
-  private EnrichedCallManager getEnrichedCallManager() {
-    return EnrichedCallComponent.get(activity).getEnrichedCallManager();
   }
 
   public void onAllSelected() {

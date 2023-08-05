@@ -27,9 +27,6 @@ public final class ActivityRequestCodes {
   /** Request code for {@link android.speech.RecognizerIntent#ACTION_RECOGNIZE_SPEECH} intent. */
   public static final int DIALTACTS_VOICE_SEARCH = 1;
 
-  /** Request code for {@link com.android.dialer.callcomposer.CallComposerActivity} intent. */
-  public static final int DIALTACTS_CALL_COMPOSER = 2;
-
   /** Request code for {@link com.android.dialer.calldetails.OldCallDetailsActivity} intent. */
   public static final int DIALTACTS_CALL_DETAILS = 4;
 
