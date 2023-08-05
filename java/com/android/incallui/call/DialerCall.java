@@ -54,7 +54,6 @@ import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.concurrent.DefaultFutureCallback;
 import com.android.dialer.compat.telephony.TelephonyManagerCompat;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -77,7 +76,6 @@ import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.rtt.protocol.RttChatMessage;
 import com.android.incallui.videotech.VideoTech;
 import com.android.incallui.videotech.VideoTech.VideoTechListener;
-import com.android.incallui.videotech.duo.DuoVideoTech;
 import com.android.incallui.videotech.empty.EmptyVideoTech;
 import com.android.incallui.videotech.ims.ImsVideoTech;
 import com.android.incallui.videotech.utils.VideoUtils;
@@ -1739,10 +1737,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
                   phoneNumber);
       videoTechs.add(rcsVideoShare);
 
-      videoTechs.add(
-          new DuoVideoTech(
-              DuoComponent.get(call.context).getDuo(), call, call.telecomCall, phoneNumber));
-
       savedTech = emptyVideoTech;
     }
 
@@ -1755,13 +1749,6 @@ public class DialerCall implements VideoTechListener, StateChangedListener, Capa
             break;
           }
         }
-      } else if (savedTech instanceof DuoVideoTech
-          && rcsVideoShare.isAvailable(context, phoneAccountHandle)) {
-        // RCS Video Share will become available after the capability exchange which is slower than
-        // Duo reading local contacts for reachability. If Video Share becomes available and we are
-        // not in the middle of any session changes, let it take over.
-        savedTech = rcsVideoShare;
-        rcsVideoShare.becomePrimary();
       }
 
       return savedTech;

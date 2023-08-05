@@ -35,9 +35,6 @@ public interface RowClickListener {
    */
   void placeVideoCall(String phoneNumber, int ranking);
 
-  /** Places a Duo video call. */
-  void placeDuoCall(String phoneNumber);
-
   /** Opens the enriched calling/call composer interface. */
   void openCallAndShare(DialerContact dialerContact);
 }
