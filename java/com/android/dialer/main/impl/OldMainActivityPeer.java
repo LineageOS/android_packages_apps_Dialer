@@ -78,7 +78,6 @@ import com.android.dialer.dialpadview.DialpadFragment;
 import com.android.dialer.dialpadview.DialpadFragment.DialpadListener;
 import com.android.dialer.dialpadview.DialpadFragment.LastOutgoingCallCallback;
 import com.android.dialer.dialpadview.DialpadFragment.OnDialpadQueryChangedListener;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.i18n.LocaleUtils;
 import com.android.dialer.main.MainActivityPeer;
 import com.android.dialer.main.impl.bottomnav.BottomNavBar;
@@ -518,11 +517,6 @@ public class OldMainActivityPeer implements MainActivityPeer, FragmentUtilListen
                 ContextCompat.getColor(activity, R.color.dialer_snackbar_action_text_color))
             .show();
       }
-
-    } else if (requestCode == ActivityRequestCodes.DIALTACTS_DUO) {
-      // We just returned from starting Duo for a task. Reload our reachability data since it
-      // may have changed after a user finished activating Duo.
-      DuoComponent.get(activity).getDuo().reloadReachability(activity);
 
     } else {
       LogUtil.e("OldMainActivityPeer.onActivityResult", "Unknown request code: " + requestCode);
