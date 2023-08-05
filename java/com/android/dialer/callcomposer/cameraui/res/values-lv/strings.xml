@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Pārslēgt uz pilnekrāna kameru</string>
-  <string name="description_camera_switch_preview_screen">Pārslēgt uz kameras priekšskatījumu</string>
-  <string name="description_camera_switch_camera_facing">Pārslēgt uz priekšējo kameru</string>
-  <string name="description_camera_switch_camera_rear">Pārslēgt uz aizmugurējo kameru</string>
-  <string name="description_camera_take_picture">Uzņemt fotoattēlu</string>
-  <string name="description_camera_cancel_photo">Atkārtoti uzņemt fotoattēlu</string>
-</resources>

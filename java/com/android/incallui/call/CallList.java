@@ -32,8 +32,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.blocking.FilteredNumberAsyncQueryHandler;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.promotion.impl.RttPromotion;
 import com.android.dialer.shortcuts.ShortcutUsageReporter;
 import com.android.incallui.call.state.DialerCallState;
@@ -112,10 +110,6 @@ public class CallList implements DialerCallDelegate {
     final DialerCall call =
         new DialerCall(context, this, telecomCall, true /* registerCallback */);
 
-    EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
-    manager.registerCapabilitiesListener(call);
-    manager.registerStateChangedListener(call);
-
     Trace.beginSection("checkSpam");
     call.addListener(new DialerCallListenerImpl(call));
     LogUtil.d("CallList.onCallAdded", "callState=" + call.getState());
@@ -169,10 +163,6 @@ public class CallList implements DialerCallDelegate {
     if (callByTelecomCall.containsKey(telecomCall)) {
       DialerCall call = callByTelecomCall.get(telecomCall);
       Assert.checkArgument(!call.isExternalCall());
-
-      EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
-      manager.unregisterCapabilitiesListener(call);
-      manager.unregisterStateChangedListener(call);
 
       // Don't log an already logged call. logCall() might be called multiple times
       // for the same call due to a bug.
@@ -762,9 +752,6 @@ public class CallList implements DialerCallDelegate {
         listener.onInternationalCallOnWifi(call);
       }
     }
-
-    @Override
-    public void onEnrichedCallSessionUpdate() {}
 
     @Override
     public void onDialerCallSessionModificationStateChange() {

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">ਬਦਲੀ ਕਰਕੇ ਸੰਪੂਰਨ ਸਕ੍ਰੀਨ ਕੈਮਰੇ \'ਤੇ ਜਾਓ</string>
-  <string name="description_camera_switch_preview_screen">ਬਦਲੀ ਕਰਕੇ ਕੈਮਰਾ ਪੂਰਵ-ਝਲਕ \'ਤੇ ਜਾਓ</string>
-  <string name="description_camera_switch_camera_facing">ਬਦਲੀ ਕਰਕੇ ਮੂਹਰਲੇ ਕੈਮਰੇ \'ਤੇ ਜਾਓ</string>
-  <string name="description_camera_switch_camera_rear">ਬਦਲੀ ਕਰਕੇ ਪਿਛਲੇ ਕੈਮਰੇ \'ਤੇ ਜਾਓ</string>
-  <string name="description_camera_take_picture">ਫ਼ੋਟੋ ਖਿੱਚੋ</string>
-  <string name="description_camera_cancel_photo">ਫ਼ੋਟੋ ਮੁੜ-ਖਿੱਚੋ</string>
-</resources>

@@ -31,8 +31,6 @@
   <dimen name="call_entry_text_left_margin">72dp</dimen>
 
   <!-- EC container -->
-  <dimen name="ec_container_height">48dp</dimen>
-  <dimen name="ec_photo_size">40dp</dimen>
   <dimen name="ec_divider_top_bottom_margin">8dp</dimen>
 
   <!-- Assisted Dialing -->
