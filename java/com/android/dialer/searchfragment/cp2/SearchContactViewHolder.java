@@ -35,7 +35,6 @@ import androidx.annotation.Nullable;
 import com.android.dialer.common.Assert;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.enrichedcall.EnrichedCallCapabilities;
 import com.android.dialer.enrichedcall.EnrichedCallComponent;
 import com.android.dialer.enrichedcall.EnrichedCallManager;
@@ -57,13 +56,11 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
   @IntDef({
     CallToAction.NONE,
     CallToAction.VIDEO_CALL,
-    CallToAction.DUO_CALL,
     CallToAction.SHARE_AND_CALL
   })
   @interface CallToAction {
     int NONE = 0;
     int VIDEO_CALL = 1;
-    int DUO_CALL = 2;
     int SHARE_AND_CALL = 3;
   }
 
@@ -179,7 +176,6 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
             context.getString(R.string.description_search_call_and_share));
         callToActionView.setOnClickListener(this);
         break;
-      case CallToAction.DUO_CALL:
       case CallToAction.VIDEO_CALL:
         callToActionView.setVisibility(View.VISIBLE);
         callToActionView.setImageDrawable(
@@ -200,10 +196,6 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
     String number = cursor.getString(Projections.PHONE_NUMBER);
     if ((carrierPresence & Phone.CARRIER_PRESENCE_VT_CAPABLE) == 1) {
       return CallToAction.VIDEO_CALL;
-    }
-
-    if (DuoComponent.get(context).getDuo().isReachable(context, number)) {
-      return CallToAction.DUO_CALL;
     }
 
     EnrichedCallManager manager = EnrichedCallComponent.get(context).getEnrichedCallManager();
@@ -254,9 +246,6 @@ public final class SearchContactViewHolder extends ViewHolder implements OnClick
           break;
         case CallToAction.VIDEO_CALL:
           listener.placeVideoCall(number, position);
-          break;
-        case CallToAction.DUO_CALL:
-          listener.placeDuoCall(number);
           break;
         case CallToAction.NONE:
         default:

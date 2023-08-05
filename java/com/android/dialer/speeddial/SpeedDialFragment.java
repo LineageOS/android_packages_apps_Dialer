@@ -272,10 +272,7 @@ public class SpeedDialFragment extends Fragment {
   private void onSpeedDialUiItemListLoaded(ImmutableList<SpeedDialUiItem> speedDialUiItems) {
     LogUtil.enterBlock("SpeedDialFragment.onSpeedDialUiItemListLoaded");
     // TODO(calderwoodra): Use DiffUtil to properly update and animate the change
-    adapter.setSpeedDialUiItems(
-        UiItemLoaderComponent.get(getContext())
-            .speedDialUiItemMutator()
-            .insertDuoChannels(getContext(), speedDialUiItems));
+    adapter.setSpeedDialUiItems(speedDialUiItems);
     adapter.notifyDataSetChanged();
     maybeShowNoContactsEmptyContentView();
 
@@ -384,8 +381,7 @@ public class SpeedDialFragment extends Fragment {
           activity,
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
               .setAllowAssistedDial(true)
-              .setIsVideoCall(channel.isVideoTechnology())
-              .setIsDuoCall(channel.technology() == Channel.DUO));
+              .setIsVideoCall(channel.isVideoTechnology()));
     }
 
     @Override
@@ -429,8 +425,7 @@ public class SpeedDialFragment extends Fragment {
             activity,
             new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
                 .setAllowAssistedDial(true)
-                .setIsVideoCall(channel.isVideoTechnology())
-                .setIsDuoCall(channel.technology() == Channel.DUO));
+                .setIsVideoCall(channel.isVideoTechnology()));
       }
 
       @Override
@@ -524,8 +519,7 @@ public class SpeedDialFragment extends Fragment {
           getContext(),
           new CallIntentBuilder(channel.number(), CallInitiationType.Type.SPEED_DIAL)
               .setAllowAssistedDial(true)
-              .setIsVideoCall(channel.isVideoTechnology())
-              .setIsDuoCall(channel.technology() == Channel.DUO));
+              .setIsVideoCall(channel.isVideoTechnology()));
     }
 
     private final class StarContactModule implements HistoryItemActionModule {
