@@ -65,18 +65,11 @@ public interface Simulator {
   @StringDef({
     IS_VOLTE,
     PRESENTATION_CHOICE,
-    IS_ENRICHED_CALL,
   })
   @interface BundleKey {}
 
   public final String IS_VOLTE = "ISVOLTE";
   public final String PRESENTATION_CHOICE = "PRESENTATIONCHOICE";
-  public final String IS_ENRICHED_CALL = "ISENRICHEDCALL";
-
-  /** Phone numbers for outgoing and incoming enriched call scenario. */
-  public static final String ENRICHED_CALL_OUTGOING_NUMBER = "+55-31-2128-6800";
-
-  public static final String ENRICHED_CALL_INCOMING_NUMBER = "+44 (0) 20 7031 3000";
 
   boolean isSimulatorMode();
 

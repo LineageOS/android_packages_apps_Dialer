@@ -66,10 +66,8 @@ import com.android.dialer.app.calllog.calllogcache.CallLogCache;
 import com.android.dialer.app.voicemail.VoicemailPlaybackLayout;
 import com.android.dialer.app.voicemail.VoicemailPlaybackPresenter;
 import com.android.dialer.blocking.FilteredNumbersUtil;
-import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.calldetails.CallDetailsEntries;
 import com.android.dialer.calldetails.OldCallDetailsActivity;
-import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.calllogutils.CallbackActionHelper.CallbackAction;
 import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.LogUtil;
@@ -151,7 +149,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public View reportNotSpamView;
   public View detailsButtonView;
   public View callWithNoteButtonView;
-  public View callComposeButtonView;
   public View sendVoicemailButtonView;
   public ImageView workIconView;
   public ImageView checkBoxView;
@@ -219,8 +216,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
   public volatile ContactInfo info;
   /** Whether the current log entry is a spam number or not. */
   public boolean isSpam;
-
-  public boolean isCallComposerCapable;
 
   private View.OnClickListener expandCollapseListener;
   private final OnActionModeStateChangedListener onActionModeStateChangedListener;
@@ -410,9 +405,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       callWithNoteButtonView = actionsView.findViewById(R.id.call_with_note_action);
       callWithNoteButtonView.setOnClickListener(this);
 
-      callComposeButtonView = actionsView.findViewById(R.id.call_compose_action);
-      callComposeButtonView.setOnClickListener(this);
-
       sendVoicemailButtonView = actionsView.findViewById(R.id.share_voicemail);
       sendVoicemailButtonView.setOnClickListener(this);
 
@@ -506,7 +498,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       addToExistingContactButtonView.setVisibility(View.GONE);
       sendMessageView.setVisibility(View.GONE);
       callWithNoteButtonView.setVisibility(View.GONE);
-      callComposeButtonView.setVisibility(View.GONE);
       blockReportView.setVisibility(View.GONE);
       blockView.setVisibility(View.GONE);
       unblockView.setVisibility(View.GONE);
@@ -532,7 +523,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       addToExistingContactButtonView.setVisibility(View.GONE);
       sendMessageView.setVisibility(View.GONE);
       callWithNoteButtonView.setVisibility(View.GONE);
-      callComposeButtonView.setVisibility(View.GONE);
       blockReportView.setVisibility(View.GONE);
       blockView.setVisibility(View.GONE);
       unblockView.setVisibility(View.GONE);
@@ -668,8 +658,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     boolean supportsCallSubject = callLogCache.doesAccountSupportCallSubject(accountHandle);
     callWithNoteButtonView.setVisibility(
         supportsCallSubject && !isVoicemailNumber && info != null ? View.VISIBLE : View.GONE);
-
-    callComposeButtonView.setVisibility(isCallComposerCapable ? View.VISIBLE : View.GONE);
 
     updateBlockReportActions(canPlaceCallToNumber, isVoicemailNumber);
   }
@@ -890,15 +878,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
     if (view.getId() == R.id.report_not_spam_action) {
       blockReportListener.onReportNotSpam(
           displayNumber, number, countryIso, callType, info.sourceType);
-      return;
-    }
-
-    if (view.getId() == R.id.call_compose_action) {
-      LogUtil.i("CallLogListItemViewHolder.onClick", "share and call pressed");
-      Activity activity = (Activity) context;
-      activity.startActivityForResult(
-          CallComposerActivity.newIntent(activity, buildContact()),
-          ActivityRequestCodes.DIALTACTS_CALL_COMPOSER);
       return;
     }
 

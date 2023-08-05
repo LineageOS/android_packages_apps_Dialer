@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Lumipat sa camera na full screen</string>
-  <string name="description_camera_switch_preview_screen">Lumipat sa preview ng camera</string>
-  <string name="description_camera_switch_camera_facing">Lumipat sa camera na nasa harap</string>
-  <string name="description_camera_switch_camera_rear">Lumipat sa camera na nasa likod</string>
-  <string name="description_camera_take_picture">Kumuha ng larawan</string>
-  <string name="description_camera_cancel_photo">Kunang muli</string>
-</resources>

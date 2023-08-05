@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Passer en mode plein écran</string>
-  <string name="description_camera_switch_preview_screen">Passer en mode aperçu</string>
-  <string name="description_camera_switch_camera_facing">Utiliser la caméra avant</string>
-  <string name="description_camera_switch_camera_rear">Utiliser la caméra arrière</string>
-  <string name="description_camera_take_picture">Prendre une photo</string>
-  <string name="description_camera_cancel_photo">Reprendre la photo</string>
-</resources>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">מעבר למצלמה במסך מלא</string>
-  <string name="description_camera_switch_preview_screen">מעבר לתצוגה מקדימה של המצלמה</string>
-  <string name="description_camera_switch_camera_facing">מעבר למצלמה הקדמית</string>
-  <string name="description_camera_switch_camera_rear">מעבר למצלמה האחורית</string>
-  <string name="description_camera_take_picture">צילום תמונה</string>
-  <string name="description_camera_cancel_photo">צילום מחדש של התמונה</string>
-</resources>

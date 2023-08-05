@@ -28,14 +28,9 @@ import androidx.annotation.Nullable;
 
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.concurrent.DialerExecutorComponent;
 import com.android.dialer.common.concurrent.ThreadUtil;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.EnrichedCallManager;
 import com.android.dialer.simulator.Simulator;
 import com.android.dialer.simulator.Simulator.Event;
-import com.android.dialer.simulator.SimulatorComponent;
-import com.android.dialer.simulator.SimulatorEnrichedCall;
 
 /** Entry point in the simulator to create voice calls. */
 final class SimulatorVoiceCall
@@ -44,49 +39,12 @@ final class SimulatorVoiceCall
   private final Context context;
   @Nullable
   private String connectionTag;
-  private final SimulatorEnrichedCall simulatorEnrichedCall;
 
   SimulatorVoiceCall(@NonNull Context context) {
     this.context = Assert.isNotNull(context);
-    simulatorEnrichedCall = SimulatorComponent.get(context).getSimulatorEnrichedCall();
     SimulatorConnectionService.addListener(this);
     SimulatorConnectionService.addListener(
         new SimulatorConferenceCreator(context, Simulator.CONFERENCE_TYPE_GSM));
-  }
-
-  void incomingEnrichedCall() {
-    simulatorEnrichedCall
-        .setupIncomingEnrichedCall(Simulator.ENRICHED_CALL_INCOMING_NUMBER)
-        .addListener(
-            () -> {
-              Bundle extras = new Bundle();
-              extras.putBoolean(Simulator.IS_ENRICHED_CALL, true);
-              connectionTag =
-                  SimulatorSimCallManager.addNewIncomingCall(
-                      context,
-                      Simulator.ENRICHED_CALL_INCOMING_NUMBER,
-                      SimulatorSimCallManager.CALL_TYPE_VOICE,
-                      extras);
-            },
-            DialerExecutorComponent.get(context).uiExecutor());
-  }
-
-  void outgoingEnrichedCall() {
-    getEnrichedCallManager().registerStateChangedListener(simulatorEnrichedCall);
-    simulatorEnrichedCall
-        .setupOutgoingEnrichedCall(Simulator.ENRICHED_CALL_OUTGOING_NUMBER)
-        .addListener(
-            () -> {
-              Bundle extras = new Bundle();
-              extras.putBoolean(Simulator.IS_ENRICHED_CALL, true);
-              connectionTag =
-                  SimulatorSimCallManager.addNewOutgoingCall(
-                      context,
-                      Simulator.ENRICHED_CALL_OUTGOING_NUMBER,
-                      SimulatorSimCallManager.CALL_TYPE_VOICE,
-                      extras);
-            },
-            DialerExecutorComponent.get(context).uiExecutor());
   }
 
   void addNewIncomingCall() {
@@ -210,9 +168,6 @@ final class SimulatorVoiceCall
         break;
       case Event.DISCONNECT:
         connection.setDisconnected(new DisconnectCause(DisconnectCause.LOCAL));
-        if (connection.getExtras().getBoolean(Simulator.IS_ENRICHED_CALL)) {
-          getEnrichedCallManager().unregisterStateChangedListener(simulatorEnrichedCall);
-        }
         break;
       case Event.SESSION_MODIFY_REQUEST:
         ThreadUtil.postDelayedOnUiThread(() -> connection.handleSessionModifyRequest(event), 2000);
@@ -230,10 +185,5 @@ final class SimulatorVoiceCall
         LogUtil.i("SimulatorVoiceCall.onEvent", "unexpected event: " + event.type);
         break;
     }
-  }
-
-  @NonNull
-  private EnrichedCallManager getEnrichedCallManager() {
-    return EnrichedCallComponent.get(context).getEnrichedCallManager();
   }
 }

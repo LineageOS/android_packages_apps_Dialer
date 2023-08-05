@@ -26,10 +26,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.telecom.CallAudioState;
 import android.telecom.TelecomManager;
+
+import com.android.dialer.R;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.EnrichedCallComponent;
-import com.android.dialer.enrichedcall.Session;
-import com.android.dialer.multimedia.MultimediaData;
 import com.android.incallui.audiomode.AudioModeProvider;
 import com.android.incallui.call.state.DialerCallState;
 import com.android.incallui.incall.bindings.InCallBindings;
@@ -54,7 +53,6 @@ import java.io.InputStream;
  * <ul>
  *   <li>Contact info
  *   <li>"Dialing..." call state
- *   <li>Enriched calling data
  * </ul>
  *
  * If the user presses the back or disconnect buttons, {@link #finish()} is called.
@@ -66,7 +64,6 @@ public class CallPendingActivity extends FragmentActivity
   private static final String ACTION_FINISH_BROADCAST =
       "dialer.intent.action.CALL_PENDING_ACTIVITY_FINISH";
 
-  private static final String EXTRA_SESSION_ID = "extra_session_id";
   private static final String EXTRA_NUMBER = "extra_number";
   private static final String EXTRA_NAME = "extra_name";
   private static final String EXTRA_LABEL = "extra_label";
@@ -96,8 +93,7 @@ public class CallPendingActivity extends FragmentActivity
       String label,
       String lookupKey,
       String callPendingLabel,
-      Uri photoUri,
-      long sessionId) {
+      Uri photoUri) {
     Intent intent = new Intent(context, CallPendingActivity.class);
     intent.putExtra(EXTRA_NAME, name);
     intent.putExtra(EXTRA_NUMBER, number);
@@ -105,7 +101,6 @@ public class CallPendingActivity extends FragmentActivity
     intent.putExtra(EXTRA_LOOKUP_KEY, lookupKey);
     intent.putExtra(EXTRA_CALL_PENDING_LABEL, callPendingLabel);
     intent.putExtra(EXTRA_PHOTO_URI, photoUri);
-    intent.putExtra(EXTRA_SESSION_ID, sessionId);
     return intent;
   }
 
@@ -155,16 +150,6 @@ public class CallPendingActivity extends FragmentActivity
   }
 
   private PrimaryInfo createPrimaryInfo() {
-    Session session =
-        EnrichedCallComponent.get(this).getEnrichedCallManager().getSession(getSessionId());
-    MultimediaData multimediaData;
-    if (session == null) {
-      LogUtil.i("CallPendingActivity.createPrimaryInfo", "Null session.");
-      multimediaData = null;
-    } else {
-      multimediaData = session.getMultimediaData();
-    }
-
     Drawable photo = null;
     Uri photoUri = getPhotoUri();
     try {
@@ -195,7 +180,7 @@ public class CallPendingActivity extends FragmentActivity
         .setAnsweringDisconnectsOngoingCall(false)
         .setShouldShowLocation(false)
         .setContactInfoLookupKey(getLookupKey())
-        .setMultimediaData(multimediaData)
+        .setMultimediaData(null)
         .setShowInCallButtonGrid(false)
         .setNumberPresentation(TelecomManager.PRESENTATION_ALLOWED)
         .build();
@@ -334,10 +319,6 @@ public class CallPendingActivity extends FragmentActivity
           @Override
           public void onInCallScreenPaused() {}
         };
-  }
-
-  private long getSessionId() {
-    return getIntent().getLongExtra(EXTRA_SESSION_ID, -1);
   }
 
   private String getNumber() {

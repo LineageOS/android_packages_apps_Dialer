@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Badili utumie kamera ya skrini nzima</string>
-  <string name="description_camera_switch_preview_screen">Badili utumie onyesha la kuchungulia la kamera</string>
-  <string name="description_camera_switch_camera_facing">Badili utumie kamera ya mbele</string>
-  <string name="description_camera_switch_camera_rear">Badili utumie kamera ya nyuma</string>
-  <string name="description_camera_take_picture">Piga picha</string>
-  <string name="description_camera_cancel_photo">Piga picha tena</string>
-</resources>
