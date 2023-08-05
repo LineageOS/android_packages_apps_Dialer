@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Passa alla fotocamera a schermo intero</string>
-  <string name="description_camera_switch_preview_screen">Passa all\'anteprima della fotocamera</string>
-  <string name="description_camera_switch_camera_facing">Passa alla fotocamera anteriore</string>
-  <string name="description_camera_switch_camera_rear">Passa alla fotocamera posteriore</string>
-  <string name="description_camera_take_picture">Scatta foto</string>
-  <string name="description_camera_cancel_photo">Scatta foto di nuovo</string>
-</resources>
