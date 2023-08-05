@@ -23,7 +23,6 @@ import android.text.TextUtils;
 
 import com.android.dialer.R;
 import com.android.dialer.calllog.model.CoalescedRow;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.spam.Spam;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
@@ -168,11 +167,8 @@ public final class CallLogEntryText {
         secondaryText.append(", ");
       }
 
-      boolean isDuoCall =
-          DuoComponent.get(context).getDuo().isDuoAccount(row.getPhoneAccountComponentName());
       secondaryText.append(
-          context.getText(
-              isDuoCall ? R.string.new_call_log_duo_video : R.string.new_call_log_carrier_video));
+          context.getText(R.string.new_call_log_carrier_video));
     }
 
     // Show the location if

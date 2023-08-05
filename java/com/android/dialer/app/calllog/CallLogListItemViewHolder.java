@@ -78,8 +78,6 @@ import com.android.dialer.constants.ActivityRequestCodes;
 import com.android.dialer.contactphoto.ContactPhotoManager;
 import com.android.dialer.dialercontact.DialerContact;
 import com.android.dialer.dialercontact.SimDetails;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.lettertile.LetterTileDrawable;
 import com.android.dialer.lettertile.LetterTileDrawable.ContactType;
 import com.android.dialer.logging.ContactSource;
@@ -463,20 +461,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
         primaryActionButtonView.setVisibility(View.VISIBLE);
         break;
-      case CallbackAction.DUO:
-        if (showDuoPrimaryButton()) {
-          CallIntentBuilder.increaseLightbringerCallButtonAppearInCollapsedCallLogItemCount();
-          primaryActionButtonView.setTag(
-              IntentProvider.getDuoVideoIntentProvider(number, isNonContactEntry(info)));
-        } else {
-          primaryActionButtonView.setTag(IntentProvider.getReturnVideoCallIntentProvider(number));
-        }
-        primaryActionButtonView.setContentDescription(
-            TextUtils.expandTemplate(
-                context.getString(R.string.description_video_call_action), validNameOrNumber));
-        primaryActionButtonView.setImageResource(R.drawable.quantum_ic_videocam_vd_theme_24);
-        primaryActionButtonView.setVisibility(View.VISIBLE);
-        break;
       case CallbackAction.VOICE:
         if (callLogCache.isVoicemailNumber(accountHandle, number)) {
           // Call to generic voicemail number, in case there are multiple accounts
@@ -599,14 +583,12 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
     switch (callbackAction) {
       case CallbackAction.IMS_VIDEO:
-      case CallbackAction.DUO:
-        // For an IMS video call or a Duo call, the secondary action should always be a
+        // For an IMS video call, the secondary action should always be a
         // voice callback.
         callButtonView.setVisibility(View.VISIBLE);
         videoCallButtonView.setVisibility(View.GONE);
         break;
       case CallbackAction.VOICE:
-        Duo duo = DuoComponent.get(context).getDuo();
         // For a voice call, set the secondary callback action to be an IMS video call if it is
         // available. Otherwise try to set it as a Duo call.
         if (CallUtil.isVideoEnabled(context)
@@ -618,13 +600,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
 
         if (isVoicemailNumber) {
           break;
-        }
-
-        if (duo.isReachable(context, number)) {
-          videoCallButtonView.setTag(
-              IntentProvider.getDuoVideoIntentProvider(number, isNonContactEntry(info)));
-          videoCallButtonView.setVisibility(View.VISIBLE);
-          CallIntentBuilder.increaseLightbringerCallButtonAppearInExpandedCallLogItemCount();
         }
         break;
       default:
@@ -706,13 +681,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       }
     }
     return false;
-  }
-
-  private boolean showDuoPrimaryButton() {
-    Duo duo = DuoComponent.get(context).getDuo();
-    return accountHandle != null
-        && duo.isDuoAccount(accountHandle)
-        && duo.isReachable(context, number);
   }
 
   private static boolean hasDialableChar(CharSequence number) {

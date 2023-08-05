@@ -43,6 +43,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
+import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
 import com.android.dialer.callcomposer.CallComposerActivity;
 import com.android.dialer.callintent.CallInitiationType;
@@ -537,16 +538,6 @@ public final class NewSearchFragment extends Fragment
         new CallIntentBuilder(phoneNumber, callSpecificAppData)
             .setIsVideoCall(isVideoCall)
             .setAllowAssistedDial(true));
-    FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
-  }
-
-  @Override
-  public void placeDuoCall(String phoneNumber) {
-    PreCall.start(
-        getContext(),
-        new CallIntentBuilder(phoneNumber, CallInitiationType.Type.REGULAR_SEARCH)
-            .setIsVideoCall(true)
-            .setIsDuoCall(true));
     FragmentUtils.getParentUnsafe(this, SearchFragmentListener.class).onCallPlacedFromSearch();
   }
 
