@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">පූර්ණ තිර කැමරාව වෙත මාරුවීම</string>
-  <string name="description_camera_switch_preview_screen">කැමරා පෙරදසුන වෙත මාරුවීම</string>
-  <string name="description_camera_switch_camera_facing">ඉදිරිපසට මුහුණලා ඇති කැමරාව වෙත මාරුවීම</string>
-  <string name="description_camera_switch_camera_rear">පසුපසට මුහුණලා ඇති කැමරාව වෙත මාරුවීම</string>
-  <string name="description_camera_take_picture">ඡායාරූපය ගැනීම</string>
-  <string name="description_camera_cancel_photo">ඡායාරූපය නැවත ගැනීම</string>
-</resources>

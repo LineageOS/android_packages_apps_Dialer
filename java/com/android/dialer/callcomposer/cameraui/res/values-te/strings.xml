@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">పూర్తి స్క్రీన్ కెమెరాకు మారుస్తుంది</string>
-  <string name="description_camera_switch_preview_screen">కెమెరా పరిదృశ్యానికి మారుస్తుంది</string>
-  <string name="description_camera_switch_camera_facing">ముందువైపు కెమెరాకు మారుస్తుంది</string>
-  <string name="description_camera_switch_camera_rear">వెనుకవైపు కెమెరాకు మారుస్తుంది</string>
-  <string name="description_camera_take_picture">ఫోటో తీస్తుంది</string>
-  <string name="description_camera_cancel_photo">ఫోటోను మళ్లీ తీస్తుంది</string>
-</resources>

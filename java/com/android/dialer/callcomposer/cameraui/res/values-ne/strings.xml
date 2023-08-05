@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">पूर्ण स्क्रिन क्यामेरामा बदल्नुहोस्</string>
-  <string name="description_camera_switch_preview_screen">क्यामेराको पूर्वावलोकन मोडमा बदल्नुहोस्</string>
-  <string name="description_camera_switch_camera_facing">अगाडिपट्टिको क्यामेरामा बदल्नुहोस्</string>
-  <string name="description_camera_switch_camera_rear">पछाडिपट्टिको क्यामेरामा बदल्नुहोस्</string>
-  <string name="description_camera_take_picture">तस्बिर खिच्नुहोस्</string>
-  <string name="description_camera_cancel_photo">पुन: तस्बिर खिच्नुहोस्</string>
-</resources>

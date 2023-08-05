@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">પૂર્ણ સ્ક્રીન કૅમેરા પર સ્વિચ કરો</string>
-  <string name="description_camera_switch_preview_screen">કૅમેરા પૂર્વાવલોકન પર સ્વીચ કરો</string>
-  <string name="description_camera_switch_camera_facing">ફ્ર્ન્ટ ફેસિંગ કૅમેરા પર સ્વિચ કરો</string>
-  <string name="description_camera_switch_camera_rear">પાછળના કૅમેરા પર સ્વિચ કરો</string>
-  <string name="description_camera_take_picture">ફોટો લો</string>
-  <string name="description_camera_cancel_photo">ફોટો ફરીથી લો</string>
-</resources>

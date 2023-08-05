@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Prebaci na kameru preko cijelog ekrana</string>
-  <string name="description_camera_switch_preview_screen">Prebaci na pregled kamere</string>
-  <string name="description_camera_switch_camera_facing">Prebaci na prednju kameru</string>
-  <string name="description_camera_switch_camera_rear">Prebaci na zadnju kameru</string>
-  <string name="description_camera_take_picture">Snimi fotografiju</string>
-  <string name="description_camera_cancel_photo">Ponovo snimi fotografiju</string>
-</resources>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Εναλλαγή σε κάμερα πλήρους οθόνης</string>
-  <string name="description_camera_switch_preview_screen">Εναλλαγή σε προεπισκόπηση κάμερας</string>
-  <string name="description_camera_switch_camera_facing">Εναλλαγή σε κάμερα πρόσοψης</string>
-  <string name="description_camera_switch_camera_rear">Εναλλαγή σε πίσω κάμερα</string>
-  <string name="description_camera_take_picture">Λήψη φωτογραφίας</string>
-  <string name="description_camera_cancel_photo">Επανάληψη λήψης φωτογραφίας</string>
-</resources>

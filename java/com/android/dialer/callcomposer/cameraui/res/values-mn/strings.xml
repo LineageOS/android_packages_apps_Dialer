@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Бүтэн дэлгэцийн камер руу сэлгэх</string>
-  <string name="description_camera_switch_preview_screen">Камерын урьдчилан үзэх рүү сэлгэх</string>
-  <string name="description_camera_switch_camera_facing">Урд талын камер руу сэлгэх</string>
-  <string name="description_camera_switch_camera_rear">Ар талын камер руу сэлгэх</string>
-  <string name="description_camera_take_picture">Зураг авах</string>
-  <string name="description_camera_cancel_photo">Зураг дахин авах</string>
-</resources>

@@ -37,7 +37,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 
 import com.android.dialer.R;
 import com.android.dialer.calldetails.CallDetailsEntries.CallDetailsEntry;
@@ -49,12 +48,8 @@ import com.android.dialer.callrecord.CallRecording;
 import com.android.dialer.callrecord.CallRecordingDataStore;
 import com.android.dialer.callrecord.impl.CallRecorderService;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult;
-import com.android.dialer.enrichedcall.historyquery.proto.HistoryResult.Type;
 import com.android.dialer.glidephotomanager.PhotoInfo;
 import com.android.dialer.oem.MotorolaUtils;
-import com.android.dialer.util.DialerUtils;
-import com.android.dialer.util.IntentUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,21 +71,10 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
   private final TextView callTypeText;
   private final TextView callTime;
   private final TextView callDuration;
-
-  private final View multimediaImageContainer;
   private final View multimediaDetailsContainer;
   private final View multimediaDivider;
-
-  private final TextView multimediaDetails;
-  private final TextView postCallNote;
   private final TextView rttTranscript;
-
-  private final ImageView multimediaImage;
   private final TextView playbackButton;
-
-  // TODO(maxwelb): Display this when location is stored - a bug
-  @SuppressWarnings("unused")
-  private final TextView multimediaAttachmentsNumber;
 
   private final Context context;
 
@@ -105,14 +89,8 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
     callDuration = (TextView) container.findViewById(R.id.call_duration);
 
     playbackButton = (TextView) container.findViewById(R.id.play_recordings);
-    multimediaImageContainer = container.findViewById(R.id.multimedia_image_container);
     multimediaDetailsContainer = container.findViewById(R.id.ec_container);
     multimediaDivider = container.findViewById(R.id.divider);
-    multimediaDetails = (TextView) container.findViewById(R.id.multimedia_details);
-    postCallNote = (TextView) container.findViewById(R.id.post_call_note);
-    multimediaImage = (ImageView) container.findViewById(R.id.multimedia_image);
-    multimediaAttachmentsNumber =
-        (TextView) container.findViewById(R.id.multimedia_attachments_number);
     rttTranscript = container.findViewById(R.id.rtt_transcript);
     this.callDetailsEntryListener = callDetailsEntryListener;
   }
@@ -123,8 +101,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       PhotoInfo photoInfo,
       CallDetailsEntry entry,
       CallTypeHelper callTypeHelper,
-      CallRecordingDataStore callRecordingDataStore,
-      boolean showMultimediaDivider) {
+      CallRecordingDataStore callRecordingDataStore) {
     int callType = entry.getCallType();
     boolean isVideoCall = (entry.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO;
     boolean isPulledCall =
@@ -173,7 +150,7 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
         context.getResources().getQuantityString(R.plurals.play_recordings, count, count));
     playbackButton.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
 
-    setMultimediaDetails(number, entry, showMultimediaDivider);
+    setMultimediaDetails(number, entry, false);
     if (isRttCall) {
       if (entry.getHasRttTranscript()) {
         rttTranscript.setText(R.string.rtt_transcript_link);
@@ -196,51 +173,9 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
 
   private void setMultimediaDetails(String number, CallDetailsEntry entry, boolean showDivider) {
     multimediaDivider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
-    if (entry.getHistoryResultsList().isEmpty()) {
-      LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no data, hiding UI");
-      multimediaDetailsContainer.setVisibility(View.GONE);
-    } else {
 
-      HistoryResult historyResult = entry.getHistoryResults(0);
-      multimediaDetailsContainer.setVisibility(View.VISIBLE);
-      multimediaDetailsContainer.setOnClickListener((v) -> startSmsIntent(context, number));
-      multimediaImageContainer.setOnClickListener((v) -> startSmsIntent(context, number));
-      multimediaImageContainer.setClipToOutline(true);
-
-      if (!TextUtils.isEmpty(historyResult.getImageUri())) {
-        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "setting image");
-        multimediaImageContainer.setVisibility(View.VISIBLE);
-        multimediaImage.setImageURI(Uri.parse(historyResult.getImageUri()));
-        multimediaDetails.setText(
-            isIncoming(historyResult) ? R.string.received_a_photo : R.string.sent_a_photo);
-      } else {
-        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no image");
-      }
-
-      // Set text after image to overwrite the received/sent a photo text
-      if (!TextUtils.isEmpty(historyResult.getText())) {
-        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "showing text");
-        multimediaDetails.setText(
-            context.getString(R.string.message_in_quotes, historyResult.getText()));
-      } else {
-        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no text");
-      }
-
-      if (entry.getHistoryResultsList().size() > 1
-          && !TextUtils.isEmpty(entry.getHistoryResults(1).getText())) {
-        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "showing post call note");
-        postCallNote.setVisibility(View.VISIBLE);
-        postCallNote.setText(
-            context.getString(R.string.message_in_quotes, entry.getHistoryResults(1).getText()));
-        postCallNote.setOnClickListener((v) -> startSmsIntent(context, number));
-      } else {
-        LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no post call note");
-      }
-    }
-  }
-
-  private void startSmsIntent(Context context, String number) {
-    DialerUtils.startActivityWithErrorToast(context, IntentUtil.getSendSmsIntent(number));
+    LogUtil.i("CallDetailsEntryViewHolder.setMultimediaDetails", "no data, hiding UI");
+    multimediaDetailsContainer.setVisibility(View.GONE);
   }
 
   private void handleRecordingClick(View v, List<CallRecording> recordings) {
@@ -281,11 +216,6 @@ public class CallDetailsEntryViewHolder extends ViewHolder {
       Toast.makeText(context, R.string.call_playback_no_app_found_toast, Toast.LENGTH_LONG)
           .show();
     }
-  }
-
-  private static boolean isIncoming(@NonNull HistoryResult historyResult) {
-    return historyResult.getType() == Type.INCOMING_POST_CALL
-        || historyResult.getType() == Type.INCOMING_CALL_COMPOSER;
   }
 
   private static @ColorInt int getColorForCallType(Context context, int callType) {
