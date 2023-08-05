@@ -31,8 +31,6 @@ import com.android.dialer.callintent.CallInitiationType;
 import com.android.dialer.callintent.CallIntentBuilder;
 import com.android.dialer.clipboard.ClipboardUtils;
 import com.android.dialer.common.Assert;
-import com.android.dialer.duo.Duo;
-import com.android.dialer.duo.DuoComponent;
 import com.android.dialer.logging.ReportingLocation;
 import com.android.dialer.spam.Spam;
 import com.android.dialer.util.CallUtil;
@@ -189,9 +187,7 @@ public final class HistoryItemActionModulesBuilder {
 
     // If the module info is for a video call, add an appropriate video call module.
     if ((moduleInfo.getFeatures() & Calls.FEATURES_VIDEO) == Calls.FEATURES_VIDEO) {
-      boolean isDuoCall = isDuoCall();
-      modules.add(IntentModule.newCallModule(context,
-              callIntentBuilder.setIsDuoCall(isDuoCall)));
+      modules.add(IntentModule.newCallModule(context, callIntentBuilder));
       return this;
     }
 
@@ -202,9 +198,6 @@ public final class HistoryItemActionModulesBuilder {
     if (canPlaceCarrierVideoCall()) {
       modules.add(IntentModule.newCallModule(
               context, callIntentBuilder));
-    } else if (canPlaceDuoCall()) {
-      modules.add(IntentModule.newCallModule(
-              context, callIntentBuilder.setIsDuoCall(true)));
     }
     return this;
   }
@@ -412,21 +405,6 @@ public final class HistoryItemActionModulesBuilder {
     return isCarrierVideoCallingEnabled
         && canRelyOnCarrierVideoPresence
         && moduleInfo.getCanSupportCarrierVideoCall();
-  }
-
-  private boolean isDuoCall() {
-    return DuoComponent.get(context)
-        .getDuo()
-        .isDuoAccount(moduleInfo.getPhoneAccountComponentName());
-  }
-
-  private boolean canPlaceDuoCall() {
-    Duo duo = DuoComponent.get(context).getDuo();
-
-    return duo.isInstalled(context)
-        && duo.isEnabled(context)
-        && duo.isActivated(context)
-        && duo.isReachable(context, moduleInfo.getNormalizedNumber());
   }
 
   /**
