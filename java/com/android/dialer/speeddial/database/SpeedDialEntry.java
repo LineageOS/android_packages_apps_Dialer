@@ -86,15 +86,14 @@ public abstract class SpeedDialEntry {
     public static final int UNKNOWN = 0;
     public static final int VOICE = 1;
     public static final int IMS_VIDEO = 2;
-    public static final int DUO = 3;
 
     /** Whether the Channel is for an audio or video call. */
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({UNKNOWN, VOICE, IMS_VIDEO, DUO})
+    @IntDef({UNKNOWN, VOICE, IMS_VIDEO})
     public @interface Technology {}
 
     public boolean isVideoTechnology() {
-      return technology() == IMS_VIDEO || technology() == DUO;
+      return technology() == IMS_VIDEO;
     }
 
     /**

@@ -102,9 +102,7 @@ public class CallLogGroupBuilder {
     String groupNumber = cursor.getString(CallLogQuery.NUMBER);
     String groupAccountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
     int groupFeatures = cursor.getInt(CallLogQuery.FEATURES);
-    int groupCallbackAction =
-        CallbackActionHelper.getCallbackAction(
-            appContext, groupNumber, groupFeatures, groupAccountComponentName);
+    int groupCallbackAction = CallbackActionHelper.getCallbackAction(groupNumber, groupFeatures);
     groupCreator.setCallbackAction(firstRowId, groupCallbackAction);
 
     // Instantiate other group values to those of the first call in the cursor.
@@ -132,9 +130,7 @@ public class CallLogGroupBuilder {
       callFeatures = cursor.getInt(CallLogQuery.FEATURES);
       accountComponentName = cursor.getString(CallLogQuery.ACCOUNT_COMPONENT_NAME);
       accountId = cursor.getString(CallLogQuery.ACCOUNT_ID);
-      callbackAction =
-          CallbackActionHelper.getCallbackAction(
-              appContext, number, callFeatures, accountComponentName);
+      callbackAction = CallbackActionHelper.getCallbackAction(number, callFeatures);
 
       final boolean isSameNumber = equalNumbers(groupNumber, number);
       final boolean isSamePostDialDigits = groupPostDialDigits.equals(numberPostDialDigits);
