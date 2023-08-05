@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="description_camera_switch_full_screen">Canvia a la càmera en pantalla completa</string>
-  <string name="description_camera_switch_preview_screen">Canvia a la previsualització de la càmera</string>
-  <string name="description_camera_switch_camera_facing">Canvia a la càmera frontal</string>
-  <string name="description_camera_switch_camera_rear">Canvia a la càmera posterior</string>
-  <string name="description_camera_take_picture">Fes una foto</string>
-  <string name="description_camera_cancel_photo">Torna a fer la foto</string>
-</resources>

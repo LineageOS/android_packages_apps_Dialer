@@ -27,10 +27,5 @@
         android:exported="false"
         android:name="com.android.dialer.calldetails.CallDetailsActivity">
     </activity>
-    <activity
-        android:label="@string/enriched_call_simulator_activity"
-        android:name="com.android.dialer.enrichedcall.simulator.EnrichedCallSimulatorActivity"
-        android:theme="@style/Dialer.ThemeBase.NoActionBar">
-    </activity>
   </application>
 </manifest>
