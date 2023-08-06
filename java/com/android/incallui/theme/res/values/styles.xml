@@ -28,6 +28,7 @@
     <item name="android:windowAnimationStyle">@null</item>
     <item name="android:windowBackground">@drawable/incall_background_gradient</item>
     <item name="android:windowShowWallpaper">true</item>
+    <item name="bottomSheetDialogTheme">@style/TransparentBottomSheetDialogTheme</item>
   </style>
 
   <style name="Theme.InCallScreen.ManageConference" parent="Dialer.ThemeBase.ActionBar">
@@ -73,6 +74,8 @@
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+    <item name="bottomSheetDialogTheme">@style/TransparentBottomSheetDialogTheme</item>
   </style>
 
 </resources>
