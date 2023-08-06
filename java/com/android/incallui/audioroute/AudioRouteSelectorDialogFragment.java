@@ -77,6 +77,8 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
     LogUtil.i("AudioRouteSelectorDialogFragment.onCreateDialog", null);
     Dialog dialog = super.onCreateDialog(savedInstanceState);
     dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+    dialog.setCancelable(true);
+    dialog.setCanceledOnTouchOutside(true);
     if (Settings.canDrawOverlays(getContext())) {
       dialog
           .getWindow()
@@ -133,14 +135,13 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
       TextView item,
       final int itemRoute,
       CallAudioState audioState) {
-    int selectedColor = ThemeComponent.get(getContext()).theme().getColorPrimary();
     if ((audioState.getSupportedRouteMask() & itemRoute) == 0) {
       item.setVisibility(View.GONE);
     } else if (audioState.getRoute() == itemRoute) {
       item.setSelected(true);
-      item.setTextColor(selectedColor);
-      item.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
-      item.setCompoundDrawableTintMode(Mode.SRC_ATOP);
+      setColor(item, true);
+    } else {
+      setColor(item, false);
     }
     item.setOnClickListener(
         (v) -> {
@@ -152,16 +153,13 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
   }
 
   private TextView createBluetoothItem(BluetoothDevice bluetoothDevice, boolean selected) {
-    int selectedColor = ThemeComponent.get(getContext()).theme().getColorPrimary();
     TextView textView =
         (TextView) getLayoutInflater().inflate(R.layout.audioroute_item, null, false);
     textView.setText(BluetoothUtil.getAliasName(bluetoothDevice));
     if (selected) {
       textView.setSelected(true);
-      textView.setTextColor(selectedColor);
-      textView.setCompoundDrawableTintList(ColorStateList.valueOf(selectedColor));
-      textView.setCompoundDrawableTintMode(Mode.SRC_ATOP);
     }
+    setColor(textView, selected);
     textView.setOnClickListener(
         (v) -> {
           // Set Bluetooth audio route
@@ -174,5 +172,14 @@ public class AudioRouteSelectorDialogFragment extends BottomSheetDialogFragment 
         });
 
     return textView;
+  }
+
+  private void setColor(TextView item, boolean isSelected) {
+    int color = isSelected
+            ? ThemeComponent.get(getContext()).theme().getColorPrimary()
+            : getContext().getColor(R.color.nav_item);
+    item.setTextColor(color);
+    item.setCompoundDrawableTintList(ColorStateList.valueOf(color));
+    item.setCompoundDrawableTintMode(Mode.SRC_ATOP);
   }
 }
