@@ -47,7 +47,6 @@ import android.widget.TextView;
 import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
 
-import com.android.dialer.app.Bindings;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogAdapter.CallFetcher;
 import com.android.dialer.app.calllog.CallLogAdapter.MultiSelectRemoveView;
@@ -323,22 +322,20 @@ public class CallLogFragment extends Fragment
                 .getRetainedCache(),
             new ContactInfoHelper(getActivity(), currentCountryIso),
             onContactInfoChangedListener);
-    adapter =
-        Bindings.getLegacy(getActivity())
-            .newCallLogAdapter(
-                getActivity(),
-                recyclerView,
-                this,
-                this,
-                // We aren't calling getParentUnsafe because CallLogActivity doesn't need to
-                // implement this listener
-                FragmentUtils.getParent(
+    adapter = new CallLogAdapter(
+            getActivity(),
+            recyclerView,
+            this,
+            this,
+            // We aren't calling getParentUnsafe because CallLogActivity doesn't need to
+            // implement this listener
+            FragmentUtils.getParent(
                     this, CallLogAdapter.OnActionModeStateChangedListener.class),
-                new CallLogCache(getActivity()),
-                contactInfoCache,
-                getVoicemailPlaybackPresenter(),
-                new FilteredNumberAsyncQueryHandler(getActivity()),
-                activityType);
+            new CallLogCache(getActivity()),
+            contactInfoCache,
+            getVoicemailPlaybackPresenter(),
+            new FilteredNumberAsyncQueryHandler(getActivity()),
+            activityType);
     recyclerView.setAdapter(adapter);
     if (adapter.getOnScrollListener() != null) {
       recyclerView.addOnScrollListener(adapter.getOnScrollListener());
