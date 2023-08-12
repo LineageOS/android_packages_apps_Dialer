@@ -16,20 +16,18 @@
   -->
 <resources>
   <array name="letter_tile_colors">
-    <item>#DB4437</item>
-    <item>#E91E63</item>
-    <item>#9C27B0</item>
-    <item>#673AB7</item>
-    <item>#3F51B5</item>
-    <item>#4285F4</item>
-    <item>#039BE5</item>
-    <item>#0097A7</item>
-    <item>#009688</item>
-    <item>#0F9D58</item>
-    <item>#689F38</item>
-    <item>#EF6C00</item>
-    <item>#FF5722</item>
-    <item>#757575</item>
+    <item>@*android:color/system_accent1_300</item>
+    <item>@*android:color/system_accent2_300</item>
+    <item>@*android:color/system_accent3_300</item>
+    <item>@*android:color/system_accent1_400</item>
+    <item>@*android:color/system_accent2_400</item>
+    <item>@*android:color/system_accent3_400</item>
+    <item>@*android:color/system_accent1_500</item>
+    <item>@*android:color/system_accent2_500</item>
+    <item>@*android:color/system_accent3_500</item>
+    <item>@*android:color/system_accent1_600</item>
+    <item>@*android:color/system_accent2_600</item>
+    <item>@*android:color/system_accent3_600</item>
   </array>
 
   <color name="spam_contact_background">#A52714</color>
