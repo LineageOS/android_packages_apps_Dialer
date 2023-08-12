@@ -508,7 +508,7 @@ public class SpeedDialFragment extends Fragment {
                   Uri.withAppendedPath(
                       Contacts.CONTENT_URI, String.valueOf(speedDialUiItem.contactId()))),
               R.string.contact_menu_contact_info,
-              R.drawable.context_menu_contact_icon));
+              R.drawable.quantum_ic_person_vd_theme_24));
 
       bottomSheet = HistoryItemActionBottomSheet.show(getContext(), headerInfo, modules);
     }
