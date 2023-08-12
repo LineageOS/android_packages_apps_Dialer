@@ -24,11 +24,9 @@ import android.support.annotation.Nullable;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import com.android.dialer.common.Assert;
-import com.android.dialer.common.concurrent.ThreadUtil;
 import com.android.voicemail.impl.R;
 import com.android.voicemail.impl.VvmLog;
 import com.android.voicemail.impl.imap.VoicemailPayload;
-import com.android.voicemail.impl.transcribe.TranscriptionService;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.apache.commons.io.IOUtils;
@@ -94,15 +92,7 @@ public class VoicemailFetchedCallback {
     ContentValues values = new ContentValues();
     values.put(Voicemails.MIME_TYPE, voicemailPayload.getMimeType());
     values.put(Voicemails.HAS_CONTENT, true);
-    if (updateVoicemail(values)) {
-      ThreadUtil.postOnUiThread(
-          () -> {
-            if (!TranscriptionService.scheduleNewVoicemailTranscriptionJob(
-                context, uri, phoneAccountHandle, true)) {
-              VvmLog.w(TAG, String.format("Failed to schedule transcription for %s", uri));
-            }
-          });
-    }
+    updateVoicemail(values);
   }
 
   private boolean updateVoicemail(ContentValues values) {

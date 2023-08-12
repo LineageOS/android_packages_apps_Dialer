@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Телефондун номер тергичи</string>
   <string name="callHistoryIconLabel">Чалуулар таржымалы</string>
   <string name="action_copy_number_text">Номерди көчүрүү</string>
-  <string name="copy_transcript_text">Транскрипцияны көчүрүү</string>
   <string name="action_edit_number_before_call">Чалуудан мурун номерди түзөтүү</string>
   <string name="call_log_delete_all">Чалуулар таржымалын тазалоо</string>
   <string name="call_log_trash_voicemail">Үн почтасын жок кылуу</string>

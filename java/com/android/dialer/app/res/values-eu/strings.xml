@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefonoko teklatua</string>
   <string name="callHistoryIconLabel">Deien historia</string>
   <string name="action_copy_number_text">Kopiatu zenbakia</string>
-  <string name="copy_transcript_text">Kopiatu transkripzioa</string>
   <string name="action_edit_number_before_call">Editatu zenbakia deitu aurretik</string>
   <string name="call_log_delete_all">Garbitu deien historia</string>
   <string name="call_log_trash_voicemail">Ezabatu ahots-mezua</string>

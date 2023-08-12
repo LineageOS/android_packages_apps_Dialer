@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefontastatur</string>
   <string name="callHistoryIconLabel">Opkaldshistorik</string>
   <string name="action_copy_number_text">Kopiér nummeret</string>
-  <string name="copy_transcript_text">Kopiér transskriptionen</string>
   <string name="action_edit_number_before_call">Rediger nummeret før opkald</string>
   <string name="call_log_delete_all">Ryd opkaldshistorik</string>
   <string name="call_log_trash_voicemail">Slet talemeddelelsen</string>
