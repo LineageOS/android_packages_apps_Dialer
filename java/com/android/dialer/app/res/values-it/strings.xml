@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Tastierino del telefono</string>
   <string name="callHistoryIconLabel">Cronologia chiamate</string>
   <string name="action_copy_number_text">Copia numero</string>
-  <string name="copy_transcript_text">Copia trascrizione</string>
   <string name="action_edit_number_before_call">Modifica numero prima di chiamare</string>
   <string name="call_log_delete_all">Cancella cronologia chiamate</string>
   <string name="call_log_trash_voicemail">Elimina messaggi della segreteria</string>

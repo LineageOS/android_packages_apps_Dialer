@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefontastatur</string>
   <string name="callHistoryIconLabel">Anropslogg</string>
   <string name="action_copy_number_text">Kopiér nummeret</string>
-  <string name="copy_transcript_text">Kopiér transkripsjonen</string>
   <string name="action_edit_number_before_call">Endre nummeret før du ringer</string>
   <string name="call_log_delete_all">Slett anropsloggen</string>
   <string name="call_log_trash_voicemail">Slett talepost</string>

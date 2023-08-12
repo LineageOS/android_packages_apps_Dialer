@@ -36,14 +36,12 @@ import com.android.dialer.app.R;
 import com.android.dialer.calllogutils.PhoneNumberDisplayUtil;
 import com.android.dialer.common.LogUtil;
 import com.android.dialer.common.database.Selection;
-import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.location.GeoUtil;
 import com.android.dialer.phonenumbercache.ContactInfo;
 import com.android.dialer.phonenumbercache.ContactInfoHelper;
 import com.android.dialer.phonenumberutil.PhoneNumberHelper;
 import com.android.dialer.util.PermissionsUtil;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -259,10 +257,8 @@ public class CallLogNotificationsQueryHelper {
     public final int numberPresentation;
     public final String accountComponentName;
     public final String accountId;
-    public final String transcription;
     public final String countryIso;
     public final long dateMs;
-    public final int transcriptionState;
 
     public NewCall(
         Uri callsUri,
@@ -271,20 +267,16 @@ public class CallLogNotificationsQueryHelper {
         int numberPresentation,
         String accountComponentName,
         String accountId,
-        String transcription,
         String countryIso,
-        long dateMs,
-        int transcriptionState) {
+        long dateMs) {
       this.callsUri = callsUri;
       this.voicemailUri = voicemailUri;
       this.number = number;
       this.numberPresentation = numberPresentation;
       this.accountComponentName = accountComponentName;
       this.accountId = accountId;
-      this.transcription = transcription;
       this.countryIso = countryIso;
       this.dateMs = dateMs;
-      this.transcriptionState = transcriptionState;
     }
   }
 
@@ -301,19 +293,9 @@ public class CallLogNotificationsQueryHelper {
       Calls.NUMBER_PRESENTATION,
       Calls.PHONE_ACCOUNT_COMPONENT_NAME,
       Calls.PHONE_ACCOUNT_ID,
-      Calls.TRANSCRIPTION,
       Calls.COUNTRY_ISO,
       Calls.DATE
     };
-
-    private static final String[] PROJECTION_O;
-
-    static {
-      List<String> list = new ArrayList<>();
-      list.addAll(Arrays.asList(PROJECTION));
-      list.add(VoicemailCompat.TRANSCRIPTION_STATE);
-      PROJECTION_O = list.toArray(new String[list.size()]);
-    }
 
     private static final int ID_COLUMN_INDEX = 0;
     private static final int NUMBER_COLUMN_INDEX = 1;
@@ -321,10 +303,8 @@ public class CallLogNotificationsQueryHelper {
     private static final int NUMBER_PRESENTATION_COLUMN_INDEX = 3;
     private static final int PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX = 4;
     private static final int PHONE_ACCOUNT_ID_COLUMN_INDEX = 5;
-    private static final int TRANSCRIPTION_COLUMN_INDEX = 6;
-    private static final int COUNTRY_ISO_COLUMN_INDEX = 7;
-    private static final int DATE_COLUMN_INDEX = 8;
-    private static final int TRANSCRIPTION_STATE_COLUMN_INDEX = 9;
+    private static final int COUNTRY_ISO_COLUMN_INDEX = 6;
+    private static final int DATE_COLUMN_INDEX = 7;
 
     private final ContentResolver contentResolver;
     private final Context context;
@@ -378,7 +358,7 @@ public class CallLogNotificationsQueryHelper {
       try (Cursor cursor =
           contentResolver.query(
               Calls.CONTENT_URI_WITH_VOICEMAIL,
-              PROJECTION_O,
+              PROJECTION,
               selection.getSelection(),
               selection.getSelectionArgs(),
               Calls.DEFAULT_SORT_ORDER)) {
@@ -417,7 +397,7 @@ public class CallLogNotificationsQueryHelper {
       try (Cursor cursor =
           contentResolver.query(
               Calls.CONTENT_URI_WITH_VOICEMAIL,
-              PROJECTION_O,
+              PROJECTION,
               selection.getSelection(),
               selection.getSelectionArgs(),
               null)) {
@@ -445,10 +425,8 @@ public class CallLogNotificationsQueryHelper {
           cursor.getInt(NUMBER_PRESENTATION_COLUMN_INDEX),
           cursor.getString(PHONE_ACCOUNT_COMPONENT_NAME_COLUMN_INDEX),
           cursor.getString(PHONE_ACCOUNT_ID_COLUMN_INDEX),
-          cursor.getString(TRANSCRIPTION_COLUMN_INDEX),
           cursor.getString(COUNTRY_ISO_COLUMN_INDEX),
-          cursor.getLong(DATE_COLUMN_INDEX),
-          cursor.getInt(TRANSCRIPTION_STATE_COLUMN_INDEX));
+          cursor.getLong(DATE_COLUMN_INDEX));
     }
   }
 }

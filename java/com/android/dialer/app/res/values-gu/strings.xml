@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ફોન કીપેડ</string>
   <string name="callHistoryIconLabel">કૉલ ઇતિહાસ</string>
   <string name="action_copy_number_text">નંબર કૉપિ કરો</string>
-  <string name="copy_transcript_text">ટ્રાંસ્ક્રિપ્શન કૉપિ કરો</string>
   <string name="action_edit_number_before_call">કૉલ કરતાં પહેલાં નંબર સંપાદિત કરો</string>
   <string name="call_log_delete_all">કૉલ ઇતિહાસ સાફ કરો</string>
   <string name="call_log_trash_voicemail">વૉઇસમેઇલ કાઢી નાખો</string>
