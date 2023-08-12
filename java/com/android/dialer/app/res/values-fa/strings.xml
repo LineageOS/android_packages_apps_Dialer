@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">صفحه کلید تلفن</string>
   <string name="callHistoryIconLabel">سابقه تماس</string>
   <string name="action_copy_number_text">کپی کردن شماره</string>
-  <string name="copy_transcript_text">کپی کردن ترانویسی</string>
   <string name="action_edit_number_before_call">ویرایش شماره قبل از تماس</string>
   <string name="call_log_delete_all">پاک کردن سابقه تماس</string>
   <string name="call_log_trash_voicemail">حذف پست صوتی</string>

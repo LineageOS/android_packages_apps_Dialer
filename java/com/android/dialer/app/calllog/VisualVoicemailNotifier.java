@@ -29,14 +29,12 @@ import android.support.v4.app.NotificationCompat;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import com.android.contacts.common.util.ContactDisplayUtils;
 import com.android.dialer.app.MainComponent;
 import com.android.dialer.app.R;
 import com.android.dialer.app.calllog.CallLogNotificationsQueryHelper.NewCall;
 import com.android.dialer.app.contactinfo.ContactPhotoLoader;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.compat.android.provider.VoicemailCompat;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.DialerNotificationManager;
@@ -163,46 +161,6 @@ final class VisualVoicemailNotifier {
             .setWhen(voicemail.dateMs)
             .setSound(getVoicemailRingtoneUri(context, handle))
             .setDefaults(getNotificationDefaultFlags(context, handle));
-
-    if (!TextUtils.isEmpty(voicemail.transcription)) {
-      Logger.get(context)
-          .logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION);
-      builder
-          .setContentText(voicemail.transcription)
-          .setStyle(new NotificationCompat.BigTextStyle().bigText(voicemail.transcription));
-    } else {
-      switch (voicemail.transcriptionState) {
-        case VoicemailCompat.TRANSCRIPTION_IN_PROGRESS:
-          Logger.get(context)
-              .logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_IN_PROGRESS);
-          builder.setContentText(context.getString(R.string.voicemail_transcription_in_progress));
-          break;
-        case VoicemailCompat.TRANSCRIPTION_FAILED_NO_SPEECH_DETECTED:
-          Logger.get(context)
-              .logImpression(
-                  DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION_FAILURE);
-          builder.setContentText(
-              context.getString(R.string.voicemail_transcription_failed_no_speech));
-          break;
-        case VoicemailCompat.TRANSCRIPTION_FAILED_LANGUAGE_NOT_SUPPORTED:
-          Logger.get(context)
-              .logImpression(
-                  DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION_FAILURE);
-          builder.setContentText(
-              context.getString(R.string.voicemail_transcription_failed_language_not_supported));
-          break;
-        case VoicemailCompat.TRANSCRIPTION_FAILED:
-          Logger.get(context)
-              .logImpression(
-                  DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_TRANSCRIPTION_FAILURE);
-          builder.setContentText(context.getString(R.string.voicemail_transcription_failed));
-          break;
-        default:
-          Logger.get(context)
-              .logImpression(DialerImpression.Type.VVM_NOTIFICATION_CREATED_WITH_NO_TRANSCRIPTION);
-          break;
-      }
-    }
 
     if (voicemail.voicemailUri != null) {
       builder.setDeleteIntent(

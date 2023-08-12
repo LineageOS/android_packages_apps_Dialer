@@ -781,8 +781,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
    * <p>If the action views have never been shown yet for this view, inflate the view stub.
    */
   public void showActions(boolean show) {
-    showOrHideVoicemailTranscriptionView(show);
-
     if (show) {
       if (!isLoaded) {
         // a bug for some unidentified reason showActions() can be called before the item is
@@ -875,39 +873,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
       }
     });
     animatorSet.start();
-  }
-
-  private void showOrHideVoicemailTranscriptionView(boolean isExpanded) {
-    if (callType != Calls.VOICEMAIL_TYPE) {
-      return;
-    }
-
-    View transcriptContainerView = phoneCallDetailsViews.transcriptionView;
-    TextView transcriptView = phoneCallDetailsViews.voicemailTranscriptionView;
-    TextView transcriptBrandingView = phoneCallDetailsViews.voicemailTranscriptionBrandingView;
-    if (!isExpanded) {
-      transcriptContainerView.setVisibility(View.GONE);
-      return;
-    }
-
-    boolean show = false;
-    if (TextUtils.isEmpty(transcriptView.getText())) {
-      transcriptView.setVisibility(View.GONE);
-    } else {
-      transcriptView.setVisibility(View.VISIBLE);
-      show = true;
-    }
-    if (TextUtils.isEmpty(transcriptBrandingView.getText())) {
-      transcriptBrandingView.setVisibility(View.GONE);
-    } else {
-      transcriptBrandingView.setVisibility(View.VISIBLE);
-      show = true;
-    }
-    if (show) {
-      transcriptContainerView.setVisibility(View.VISIBLE);
-    } else {
-      transcriptContainerView.setVisibility(View.GONE);
-    }
   }
 
   public void updatePhoto() {
@@ -1208,16 +1173,6 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
               R.id.context_menu_edit_before_call,
               ContextMenu.NONE,
               R.string.action_edit_number_before_call)
-          .setOnMenuItemClickListener(this);
-    }
-
-    if (callType == CallLog.Calls.VOICEMAIL_TYPE
-        && phoneCallDetailsViews.voicemailTranscriptionView.length() > 0) {
-      menu.add(
-              ContextMenu.NONE,
-              R.id.context_menu_copy_transcript_to_clipboard,
-              ContextMenu.NONE,
-              R.string.copy_transcript_text)
           .setOnMenuItemClickListener(this);
     }
 

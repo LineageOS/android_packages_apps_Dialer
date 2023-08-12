@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">फोन कीपॅड</string>
   <string name="callHistoryIconLabel">कॉल इतिहास</string>
   <string name="action_copy_number_text">नंबर कॉपी करा</string>
-  <string name="copy_transcript_text">प्रतिलेखन कॉपी करा</string>
   <string name="action_edit_number_before_call">कॉल करण्यापूर्वी नंबर संपादित करा</string>
   <string name="call_log_delete_all">कॉल इतिहास साफ करा</string>
   <string name="call_log_trash_voicemail">व्हॉइसमेल हटवा</string>
