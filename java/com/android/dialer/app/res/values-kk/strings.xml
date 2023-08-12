@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Телефон пернетақтасы</string>
   <string name="callHistoryIconLabel">Қоңыраулар тарихы</string>
   <string name="action_copy_number_text">Нөмірді көшіру</string>
-  <string name="copy_transcript_text">Транскрипцияны көшіру</string>
   <string name="action_edit_number_before_call">Қоңырау алдында нөмірді өзгерту</string>
   <string name="call_log_delete_all">Қоңыраулар тарихын тазалау</string>
   <string name="call_log_trash_voicemail">Дауыстық хабарды жою</string>

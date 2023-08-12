@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ปุ่มกดโทรศัพท์</string>
   <string name="callHistoryIconLabel">ประวัติการโทร</string>
   <string name="action_copy_number_text">คัดลอกหมายเลข</string>
-  <string name="copy_transcript_text">คัดลอกการถอดเสียงเป็นคำ</string>
   <string name="action_edit_number_before_call">แก้ไขหมายเลขก่อนโทร</string>
   <string name="call_log_delete_all">ล้างประวัติการโทร</string>
   <string name="call_log_trash_voicemail">ลบข้อความเสียง</string>

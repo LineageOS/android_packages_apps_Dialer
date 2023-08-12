@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Клавіятура тэлефона</string>
   <string name="callHistoryIconLabel">Гісторыя выклікаў</string>
   <string name="action_copy_number_text">Скапіраваць нумар</string>
-  <string name="copy_transcript_text">Капіраваць транскрыпцыю</string>
   <string name="action_edit_number_before_call">Змяніць нумар перад тым, як тэлефанаваць</string>
   <string name="call_log_delete_all">Ачысціць гісторыю выклікаў</string>
   <string name="call_log_trash_voicemail">Выдаліць галас. паведамленне</string>

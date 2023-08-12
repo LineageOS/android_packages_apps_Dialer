@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Телефонна клавиатура</string>
   <string name="callHistoryIconLabel">История на обажданията</string>
   <string name="action_copy_number_text">Копиране на номера</string>
-  <string name="copy_transcript_text">Копиране на преписа</string>
   <string name="action_edit_number_before_call">Редактиране на номера преди обаждане</string>
   <string name="call_log_delete_all">Изчистване на историята на обажд.</string>
   <string name="call_log_trash_voicemail">Изтриване на гласова поща</string>

@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Ikhiphedi yefoni</string>
   <string name="callHistoryIconLabel">Umlando wekholi</string>
   <string name="action_copy_number_text">Kopisha inombolo</string>
-  <string name="copy_transcript_text">Kopisha ukukhiphela</string>
   <string name="action_edit_number_before_call">Hlela inombolo ngaphambi kwekholi</string>
   <string name="call_log_delete_all">Sula umlando wekholi</string>
   <string name="call_log_trash_voicemail">Susa ivoyisimeyili</string>
