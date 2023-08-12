@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefon klaviaturasi</string>
   <string name="callHistoryIconLabel">Chaqiruvlar tarixi</string>
   <string name="action_copy_number_text">Raqamdan nusxa olish</string>
-  <string name="copy_transcript_text">Transkripsiyadan nusxa olish</string>
   <string name="action_edit_number_before_call">Tahrirlash va telefon qilish</string>
   <string name="call_log_delete_all">Qo‘ng‘iroqlar tarixini tozalash</string>
   <string name="call_log_trash_voicemail">Ovozli xabarni o‘chirish</string>

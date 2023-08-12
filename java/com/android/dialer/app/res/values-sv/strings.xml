@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefonens knappsats</string>
   <string name="callHistoryIconLabel">Samtalshistorik</string>
   <string name="action_copy_number_text">Kopiera nummer</string>
-  <string name="copy_transcript_text">Kopiera transkription</string>
   <string name="action_edit_number_before_call">Redigera nummer före samtal</string>
   <string name="call_log_delete_all">Rensa samtalshistorik</string>
   <string name="call_log_trash_voicemail">Radera röstmeddelande</string>

@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">電話撥號鍵盤</string>
   <string name="callHistoryIconLabel">通話記錄</string>
   <string name="action_copy_number_text">複製號碼</string>
-  <string name="copy_transcript_text">複製留言轉錄內容</string>
   <string name="action_edit_number_before_call">撥打前編輯號碼</string>
   <string name="call_log_delete_all">清除通話記錄</string>
   <string name="call_log_trash_voicemail">刪除語音留言</string>
