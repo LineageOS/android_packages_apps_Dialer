@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ಫೋನ್ ಕೀಪ್ಯಾಡ್</string>
   <string name="callHistoryIconLabel">ಕರೆ ಇತಿಹಾಸ</string>
   <string name="action_copy_number_text">ಸಂಖ್ಯೆಯನ್ನು ನಕಲಿಸಿ</string>
-  <string name="copy_transcript_text">ಟ್ರಾನ್ಸ್‌ಕ್ರಿಪ್ಶನ್ ನಕಲಿಸಿ</string>
   <string name="action_edit_number_before_call">ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಎಡಿಟ್ ಮಾಡಿ</string>
   <string name="call_log_delete_all">ಕರೆ ಇತಿಹಾಸ ತೆರವುಗೊಳಿಸಿ</string>
   <string name="call_log_trash_voicemail">ಧ್ವನಿಮೇಲ್‌ ಅಳಿಸಿ</string>

@@ -36,9 +36,6 @@
   <!-- Option displayed in context menu to copy long pressed phone number. [CHAR LIMIT=48] -->
   <string name="action_copy_number_text">Copy number</string>
 
-  <!-- Option displayed in context menu to copy long pressed voicemail transcription. [CHAR LIMIT=48] -->
-  <string name="copy_transcript_text">Copy transcription</string>
-
   <!-- Label for action to edit a number before calling it. [CHAR LIMIT=48] -->
   <string name="action_edit_number_before_call">Edit number before call</string>
 

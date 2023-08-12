@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Clavier téléphonique</string>
   <string name="callHistoryIconLabel">Historique des appels</string>
   <string name="action_copy_number_text">Copier le numéro</string>
-  <string name="copy_transcript_text">Copier la transcription</string>
   <string name="action_edit_number_before_call">Modifier numéro avant d\'appeler</string>
   <string name="call_log_delete_all">Supprimer l\'historique des appels</string>
   <string name="call_log_trash_voicemail">Supprimer le message vocal</string>

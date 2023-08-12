@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">スマートフォンのキーパッド</string>
   <string name="callHistoryIconLabel">通話履歴</string>
   <string name="action_copy_number_text">番号をコピー</string>
-  <string name="copy_transcript_text">音声文字変換をコピー</string>
   <string name="action_edit_number_before_call">発信前に番号を編集</string>
   <string name="call_log_delete_all">通話履歴を消去</string>
   <string name="call_log_trash_voicemail">ボイスメールを削除</string>

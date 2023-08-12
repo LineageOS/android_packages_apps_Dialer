@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Tālruņa cipartastatūra</string>
   <string name="callHistoryIconLabel">Zvanu vēsture</string>
   <string name="action_copy_number_text">Kopēt numuru</string>
-  <string name="copy_transcript_text">Kopēt transkripciju</string>
   <string name="action_edit_number_before_call">Rediģēt numuru pirms zvanīšanas</string>
   <string name="call_log_delete_all">Dzēst zvanu vēsturi</string>
   <string name="call_log_trash_voicemail">Dzēst balss pasta ziņojumu</string>

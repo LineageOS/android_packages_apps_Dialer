@@ -35,11 +35,9 @@ import android.telephony.TelephonyManager;
 import com.android.dialer.R;
 import com.android.dialer.common.Assert;
 import com.android.dialer.common.LogUtil;
-import com.android.dialer.common.preference.SwitchPreferenceWithClickableSummary;
 import com.android.dialer.logging.DialerImpression;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.notification.NotificationChannelManager;
-import com.android.dialer.spannable.ContentWithLearnMoreSpanner;
 import com.android.dialer.telecom.TelecomUtil;
 import com.android.voicemail.VoicemailClient;
 import com.android.voicemail.VoicemailClient.ActivationStateListener;
@@ -70,14 +68,10 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   private VoicemailClient voicemailClient;
   // Settings that are independent of the carrier configurations
   private Preference voicemailNotificationPreference;
-  private Preference changeGreetingPreference;
   private PreferenceScreen advancedSettingsPreference;
   // Settings that are supported by dialer only if the carrier configurations are valid.
   private SwitchPreference visualVoicemailPreference;
   private SwitchPreference voicemailAutoArchivePreference;
-  private SwitchPreferenceWithClickableSummary transcribeVoicemailPreference;
-  // Voicemail transcription analysis toggle
-  private SwitchPreferenceWithClickableSummary donateTranscribedVoicemailPreference;
   private Preference voicemailChangePinPreference;
 
   @Override
@@ -105,7 +99,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     setupVisualVoicemailPreferences();
 
     setupNotificationsPreference();
-    setupChangeGreetingPreference();
     setupAdvancedSettingsPreference();
   }
 
@@ -125,84 +118,10 @@ public class VoicemailSettingsFragment extends PreferenceFragment
   private void setupVisualVoicemailFeaturePreferences() {
     if (!voicemailClient.isVoicemailEnabled(getContext(), phoneAccountHandle)
         || !voicemailClient.isActivated(getContext(), phoneAccountHandle)) {
-      removeAllTranscriptionPreferences();
       getPreferenceScreen().removePreference(voicemailAutoArchivePreference);
       return;
     }
     setupAutoArchivePreference();
-    updateTranscriptionPreferences();
-  }
-
-  private void updateTranscriptionPreferences() {
-    if (!VoicemailComponent.get(getContext())
-        .getVoicemailClient()
-        .isVoicemailTranscriptionAvailable(getContext(), phoneAccountHandle)) {
-      removeAllTranscriptionPreferences();
-      return;
-    } else {
-      showTranscriptionEnabledPreference();
-      updateTranscriptionDonationPreference();
-    }
-  }
-
-  private void showTranscriptionEnabledPreference() {
-    transcribeVoicemailPreference.setOnPreferenceChangeListener(this);
-    transcribeVoicemailPreference.setChecked(
-        voicemailClient.isVoicemailTranscriptionEnabled(getContext(), phoneAccountHandle));
-    transcribeVoicemailPreference.setSummary(getVoicemailTranscriptionInformationalText());
-    transcribeVoicemailPreference.setEnabled(true);
-    getPreferenceScreen().addPreference(transcribeVoicemailPreference);
-  }
-
-  /**
-   * Builds a spannable string containing the voicemail transcription informational text containing
-   * the appropriate "Learn More" urls.
-   *
-   * @return The voicemail transcription information text.
-   */
-  private CharSequence getVoicemailTranscriptionInformationalText() {
-    return new ContentWithLearnMoreSpanner(getContext())
-        .create(
-            getContext().getString(R.string.voicemail_transcription_preference_summary_info),
-            getContext().getString(R.string.transcription_learn_more_url));
-  }
-
-  private void updateTranscriptionDonationPreference() {
-    if (!VoicemailComponent.get(getContext())
-        .getVoicemailClient()
-        .isVoicemailDonationAvailable(getContext(), phoneAccountHandle)) {
-      getPreferenceScreen().removePreference(donateTranscribedVoicemailPreference);
-    } else {
-      showTranscriptionDonationEnabledPreferences();
-    }
-  }
-
-  private void showTranscriptionDonationEnabledPreferences() {
-    donateTranscribedVoicemailPreference.setEnabled(true);
-    donateTranscribedVoicemailPreference.setChecked(
-        voicemailClient.isVoicemailDonationEnabled(getContext(), phoneAccountHandle));
-    donateTranscribedVoicemailPreference.setOnPreferenceChangeListener(this);
-    donateTranscribedVoicemailPreference.setSummary(
-        getVoicemailTranscriptionDonationInformationalText());
-    getPreferenceScreen().addPreference(donateTranscribedVoicemailPreference);
-  }
-
-  /**
-   * Builds a spannable string containing the voicemail donation informational text containing the
-   * appropriate "Learn More" urls.
-   *
-   * @return The voicemail donation information text.
-   */
-  private CharSequence getVoicemailTranscriptionDonationInformationalText() {
-    return new ContentWithLearnMoreSpanner(getContext())
-        .create(
-            getContext().getString(R.string.voicemail_donate_preference_summary_info),
-            getContext().getString(R.string.donation_learn_more_url));
-  }
-
-  private void removeAllTranscriptionPreferences() {
-    getPreferenceScreen().removePreference(transcribeVoicemailPreference);
-    getPreferenceScreen().removePreference(donateTranscribedVoicemailPreference);
   }
 
   private void setupAutoArchivePreference() {
@@ -230,9 +149,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
         findPreference(getString(R.string.voicemail_notifications_key));
     voicemailNotificationPreference.setOrder(VMSettingOrdering.NOTIFICATIONS);
 
-    changeGreetingPreference = findPreference(getString(R.string.voicemail_change_greeting_key));
-    changeGreetingPreference.setOrder(VMSettingOrdering.CHANGE_GREETING);
-
     advancedSettingsPreference =
         (PreferenceScreen) findPreference(getString(R.string.voicemail_advanced_settings_key));
     advancedSettingsPreference.setOrder(VMSettingOrdering.ADVANCED_SETTING);
@@ -246,17 +162,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
             findPreference(getString(R.string.voicemail_visual_voicemail_archive_key));
     voicemailAutoArchivePreference.setOrder(VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE);
 
-    transcribeVoicemailPreference =
-        (SwitchPreferenceWithClickableSummary)
-            findPreference(getString(R.string.voicemail_visual_voicemail_transcription_key));
-    transcribeVoicemailPreference.setOrder(VMSettingOrdering.VOICEMAIL_TRANSCRIPTION);
-
-    donateTranscribedVoicemailPreference =
-        (SwitchPreferenceWithClickableSummary)
-            findPreference(getString(R.string.voicemail_visual_voicemail_donation_key));
-    donateTranscribedVoicemailPreference.setOrder(
-        VMSettingOrdering.VOICEMAIL_TRANSCRIPTION_DONATION);
-
     voicemailChangePinPreference = findPreference(getString(R.string.voicemail_change_pin_key));
     voicemailChangePinPreference.setOrder(VMSettingOrdering.VOICEMAIL_CHANGE_PIN);
   }
@@ -266,8 +171,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     PreferenceScreen prefSet = getPreferenceScreen();
     prefSet.removePreference(visualVoicemailPreference);
     prefSet.removePreference(voicemailAutoArchivePreference);
-    prefSet.removePreference(transcribeVoicemailPreference);
-    prefSet.removePreference(donateTranscribedVoicemailPreference);
     prefSet.removePreference(voicemailChangePinPreference);
   }
 
@@ -306,10 +209,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
             return false;
           }
         });
-  }
-
-  private void setupChangeGreetingPreference() {
-    getPreferenceScreen().removePreference(changeGreetingPreference);
   }
 
   private void setupAdvancedSettingsPreference() {
@@ -372,15 +271,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       logArchiveToggle((boolean) objValue);
       voicemailClient.setVoicemailArchiveEnabled(
           getContext(), phoneAccountHandle, (boolean) objValue);
-    } else if (preference.getKey().equals(transcribeVoicemailPreference.getKey())) {
-      logTranscribeToggle((boolean) objValue);
-      voicemailClient.setVoicemailTranscriptionEnabled(
-          getContext(), phoneAccountHandle, (boolean) objValue);
-      updateTranscriptionDonationPreference();
-    } else if (preference.getKey().equals(donateTranscribedVoicemailPreference.getKey())) {
-      logDonationToggle((boolean) objValue);
-      voicemailClient.setVoicemailDonationEnabled(
-          getContext(), phoneAccountHandle, (boolean) objValue);
     }
 
     // Let the preference setting proceed.
@@ -397,7 +287,6 @@ public class VoicemailSettingsFragment extends PreferenceFragment
       Logger.get(getContext()).logImpression(DialerImpression.Type.VVM_USER_DISABLED_IN_SETTINGS);
     }
     updateVoicemailSummaryMessage();
-    updateTranscriptionPreferences();
     updateChangePinPreference();
   }
 
@@ -426,31 +315,10 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     }
   }
 
-  private void logTranscribeToggle(boolean userTurnedOn) {
-    if (userTurnedOn) {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.VVM_USER_TURNED_TRANSCRIBE_ON_FROM_SETTINGS);
-    } else {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.VVM_USER_TURNED_TRANSCRIBE_OFF_FROM_SETTINGS);
-    }
-  }
-
-  private void logDonationToggle(boolean userTurnedOn) {
-    if (userTurnedOn) {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.VVM_USER_TURNED_TRANSCRIBE_ON_FROM_SETTINGS);
-    } else {
-      Logger.get(getContext())
-          .logImpression(DialerImpression.Type.VVM_USER_TURNED_TRANSCRIBE_OFF_FROM_SETTINGS);
-    }
-  }
-
   @Override
   public void onActivationStateChanged(PhoneAccountHandle phoneAccountHandle, boolean isActivated) {
     if (this.phoneAccountHandle.equals(phoneAccountHandle)) {
       updateVoicemailSummaryMessage();
-      updateTranscriptionPreferences();
       updateChangePinPreference();
     }
   }
@@ -515,8 +383,7 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     VMSettingOrdering.VOICEMAIL_TRANSCRIPTION_DONATION,
     VMSettingOrdering.VOICEMAIL_CHANGE_PIN,
     VMSettingOrdering.VOICEMAIL_AUTO_ARCHIVE,
-    VMSettingOrdering.ADVANCED_SETTING,
-    VMSettingOrdering.CHANGE_GREETING
+    VMSettingOrdering.ADVANCED_SETTING
   })
   private @interface VMSettingOrdering {
     int NOTIFICATIONS = 1;
@@ -526,6 +393,5 @@ public class VoicemailSettingsFragment extends PreferenceFragment
     int VOICEMAIL_CHANGE_PIN = 5;
     int VOICEMAIL_AUTO_ARCHIVE = 6;
     int ADVANCED_SETTING = 7;
-    int CHANGE_GREETING = 8;
   }
 }

@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Wähltasten für Telefon</string>
   <string name="callHistoryIconLabel">Anrufliste</string>
   <string name="action_copy_number_text">Nummer kopieren</string>
-  <string name="copy_transcript_text">Transkription kopieren</string>
   <string name="action_edit_number_before_call">Nummer vor Anruf bearbeiten</string>
   <string name="call_log_delete_all">Anrufliste löschen</string>
   <string name="call_log_trash_voicemail">Mailboxnachricht löschen</string>
