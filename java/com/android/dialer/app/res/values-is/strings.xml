@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Talnaborð á síma</string>
   <string name="callHistoryIconLabel">Símtalaferill</string>
   <string name="action_copy_number_text">Afrita númer</string>
-  <string name="copy_transcript_text">Afrita umritun</string>
   <string name="action_edit_number_before_call">Breyta númeri áður en hringt er</string>
   <string name="call_log_delete_all">Hreinsa símtalaferil</string>
   <string name="call_log_trash_voicemail">Eyða talhólfsskilaboðum</string>

@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ఫోన్ కీప్యాడ్</string>
   <string name="callHistoryIconLabel">కాల్ చరిత్ర</string>
   <string name="action_copy_number_text">నంబర్‌ను కాపీ చేయి</string>
-  <string name="copy_transcript_text">లిప్యంతరీకరణను కాపీ చేయి</string>
   <string name="action_edit_number_before_call">కాల్ చేయడానికి ముందు నంబర్‌ను సవరించు</string>
   <string name="call_log_delete_all">కాల్ చరిత్రను క్లియర్ చేయి</string>
   <string name="call_log_trash_voicemail">వాయిస్ మెయిల్‌ను తొలగించు</string>

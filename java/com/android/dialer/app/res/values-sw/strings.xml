@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Vitufe vya Simu</string>
   <string name="callHistoryIconLabel">Rekodi ya simu zilizopigwa</string>
   <string name="action_copy_number_text">Nakili nambari</string>
-  <string name="copy_transcript_text">Nakili unukuzi</string>
   <string name="action_edit_number_before_call">Badilisha nambari kabla ya kupiga simu</string>
   <string name="call_log_delete_all">Futa rekodi ya simu zilizopigwa</string>
   <string name="call_log_trash_voicemail">Futa ujumbe wa sauti</string>

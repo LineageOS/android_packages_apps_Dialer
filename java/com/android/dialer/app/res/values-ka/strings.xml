@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ტელეფონის კლავიატურა</string>
   <string name="callHistoryIconLabel">საუბრის ისტორია</string>
   <string name="action_copy_number_text">ნომრის კოპირება</string>
-  <string name="copy_transcript_text">ტრანსკრიპტის კოპირება</string>
   <string name="action_edit_number_before_call">ნომრის რედაქტირება დარეკვამდე</string>
   <string name="call_log_delete_all">ზარის ისტორიის გასუფთავება</string>
   <string name="call_log_trash_voicemail">ხმოვანი ფოსტის წაშლა</string>

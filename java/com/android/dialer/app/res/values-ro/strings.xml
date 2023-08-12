@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Tastatura telefonului</string>
   <string name="callHistoryIconLabel">Istoricul apelurilor</string>
   <string name="action_copy_number_text">Copiați numărul</string>
-  <string name="copy_transcript_text">Copiați transcrierea</string>
   <string name="action_edit_number_before_call">Modificați numărul înainte de apelare</string>
   <string name="call_log_delete_all">Ștergeți istoricul apelurilor</string>
   <string name="call_log_trash_voicemail">Ștergeți mesajul vocal</string>

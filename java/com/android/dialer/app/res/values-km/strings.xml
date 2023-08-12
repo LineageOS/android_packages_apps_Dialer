@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">បន្ទះ​ចុច​លេខទូរសព្ទ</string>
   <string name="callHistoryIconLabel">ប្រវត្តិ​ហៅ</string>
   <string name="action_copy_number_text">ថតចម្លងលេខទូរស័ព្ទ</string>
-  <string name="copy_transcript_text">ថតចម្លងសំណៅពីសារសម្លេង</string>
   <string name="action_edit_number_before_call">កែ​លេខ​មុន​ពេល​ហៅ</string>
   <string name="call_log_delete_all">ជម្រះប្រវត្តិហៅ</string>
   <string name="call_log_trash_voicemail">លុប​សារ​ជា​សំឡេង</string>
