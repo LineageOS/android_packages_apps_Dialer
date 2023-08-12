@@ -71,35 +71,6 @@ public final class StubVoicemailClient implements VoicemailClient {
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value) {}
 
   @Override
-  public boolean isVoicemailTranscriptionAvailable(
-      Context context, PhoneAccountHandle phoneAccountHandle) {
-    return false;
-  }
-
-  @Override
-  public boolean isVoicemailTranscriptionEnabled(Context context, PhoneAccountHandle account) {
-    return false;
-  }
-
-  @Override
-  public boolean isVoicemailDonationAvailable(Context context, PhoneAccountHandle account) {
-    return false;
-  }
-
-  @Override
-  public boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account) {
-    return false;
-  }
-
-  @Override
-  public void setVoicemailTranscriptionEnabled(
-      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {}
-
-  @Override
-  public void setVoicemailDonationEnabled(
-      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled) {}
-
-  @Override
   public boolean isActivated(Context context, PhoneAccountHandle phoneAccountHandle) {
     return false;
   }

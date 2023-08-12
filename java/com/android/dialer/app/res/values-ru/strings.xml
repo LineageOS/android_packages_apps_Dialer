@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Набор номера</string>
   <string name="callHistoryIconLabel">Журнал звонков.</string>
   <string name="action_copy_number_text">Скопировать номер</string>
-  <string name="copy_transcript_text">Скопировать транскрипцию</string>
   <string name="action_edit_number_before_call">Изменить номер и позвонить</string>
   <string name="call_log_delete_all">Очистить журнал звонков</string>
   <string name="call_log_trash_voicemail">Удалить голосовое сообщение</string>
