@@ -83,10 +83,6 @@ public class LetterTileDrawable extends Drawable {
 
   public static final int SHAPE_RECTANGLE = 2;
 
-  /** 54% opacity */
-  private static final int ALPHA = 138;
-  /** 100% opacity */
-  private static final int SPAM_ALPHA = 255;
   /** Default icon scale for vector drawable. */
   private static final float VECTOR_ICON_SCALE = 0.7f;
 
@@ -126,8 +122,7 @@ public class LetterTileDrawable extends Drawable {
     defaultColor = res.getColor(R.color.letter_tile_default_color);
     tileFontColor = res.getColor(R.color.letter_tile_font_color);
     letterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
-    defaultPersonAvatar =
-        res.getDrawable(R.drawable.product_logo_avatar_anonymous_white_color_120, null);
+    defaultPersonAvatar = res.getDrawable(R.drawable.quantum_ic_person_vd_theme_24, null);
     defaultBusinessAvatar = res.getDrawable(R.drawable.quantum_ic_business_vd_theme_24, null);
     defaultVoicemailAvatar = res.getDrawable(R.drawable.quantum_ic_voicemail_vd_theme_24, null);
     defaultSpamAvatar = res.getDrawable(R.drawable.quantum_ic_report_vd_theme_24, null);
@@ -173,6 +168,7 @@ public class LetterTileDrawable extends Drawable {
       case TYPE_PERSON:
       case TYPE_GENERIC_AVATAR:
       default:
+        scale = VECTOR_ICON_SCALE;
         return defaultPersonAvatar;
     }
   }
@@ -222,7 +218,6 @@ public class LetterTileDrawable extends Drawable {
       paint.getTextBounds(firstChar, 0, 1, rect);
       paint.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
       paint.setColor(tileFontColor);
-      paint.setAlpha(ALPHA);
 
       // Draw the letter in the canvas, vertically shifted up or down by the user-defined
       // offset
@@ -242,7 +237,6 @@ public class LetterTileDrawable extends Drawable {
       }
 
       drawable.setBounds(getScaledBounds(scale, offset));
-      drawable.setAlpha(drawable == defaultSpamAvatar ? SPAM_ALPHA : ALPHA);
       drawable.draw(canvas);
     }
   }
