@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">לוח החיוג של הטלפון</string>
   <string name="callHistoryIconLabel">היסטוריית שיחות</string>
   <string name="action_copy_number_text">העתק מספר</string>
-  <string name="copy_transcript_text">העתק תמלול</string>
   <string name="action_edit_number_before_call">ערוך את המספר לפני השיחה</string>
   <string name="call_log_delete_all">נקה את היסטוריית השיחות</string>
   <string name="call_log_trash_voicemail">מחק דואר קולי</string>

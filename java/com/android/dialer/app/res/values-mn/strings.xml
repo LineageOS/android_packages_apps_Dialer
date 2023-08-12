@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Утасны товчлуур</string>
   <string name="callHistoryIconLabel">Дуудлагын түүх</string>
   <string name="action_copy_number_text">Дугаар хуулах</string>
-  <string name="copy_transcript_text">Галиглалыг хуулах</string>
   <string name="action_edit_number_before_call">Залгахын өмнө дугаар засах</string>
   <string name="call_log_delete_all">Дуудлагын түүхийг устгах уу?</string>
   <string name="call_log_trash_voicemail">Дуут шууданг устгах</string>

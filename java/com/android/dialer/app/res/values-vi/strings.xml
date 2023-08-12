@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Bàn phím điện thoại</string>
   <string name="callHistoryIconLabel">Nhật ký cuộc gọi</string>
   <string name="action_copy_number_text">Sao chép số</string>
-  <string name="copy_transcript_text">Sao chép bản ghi âm</string>
   <string name="action_edit_number_before_call">Chỉnh sửa số trước khi gọi</string>
   <string name="call_log_delete_all">Xóa nhật ký cuộc gọi</string>
   <string name="call_log_trash_voicemail">Xóa thư thoại</string>

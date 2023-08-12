@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Клавіатура телефона</string>
   <string name="callHistoryIconLabel">Історія дзвінків</string>
   <string name="action_copy_number_text">Копіювати номер</string>
-  <string name="copy_transcript_text">Копіювати транскрипцію</string>
   <string name="action_edit_number_before_call">Редагувати номер перед викликом</string>
   <string name="call_log_delete_all">Очистити історію дзвінків</string>
   <string name="call_log_trash_voicemail">Видалити голосову пошту</string>

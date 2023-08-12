@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ဖုန်းခလုတ်ခုံ</string>
   <string name="callHistoryIconLabel">ခေါ်ဆိုမှု မှတ်တမ်း</string>
   <string name="action_copy_number_text">နံပါတ်ကိုကူးရန်</string>
-  <string name="copy_transcript_text">အသံမှစာအဖြစ်ဘာသာပြန်ခြင်းကို ကူးရန်</string>
   <string name="action_edit_number_before_call">မခေါ်ဆိုမီ နံပါတ်ကိုတည်းဖြတ်ရန်</string>
   <string name="call_log_delete_all">ခေါ်ဆိုမှု မှတ်တမ်း ရှင်းရန်</string>
   <string name="call_log_trash_voicemail">အသံပို့စာ အားဖျက်ရန်</string>

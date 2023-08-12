@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefoni klaviatuur</string>
   <string name="callHistoryIconLabel">Kõneajalugu</string>
   <string name="action_copy_number_text">Kopeeri number</string>
-  <string name="copy_transcript_text">Kopeeri transkribeerimine</string>
   <string name="action_edit_number_before_call">Muuda enne helistamist numbrit</string>
   <string name="call_log_delete_all">Kõneajaloo kustutamine</string>
   <string name="call_log_trash_voicemail">Kustuta kõnepost</string>

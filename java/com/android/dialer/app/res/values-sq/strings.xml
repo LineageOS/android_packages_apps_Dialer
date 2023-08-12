@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Blloku i tasteve i telefonit</string>
   <string name="callHistoryIconLabel">Historiku i telefonatave</string>
   <string name="action_copy_number_text">Kopjo numrin</string>
-  <string name="copy_transcript_text">Kopjo transkriptimin</string>
   <string name="action_edit_number_before_call">Redakto numrin para telefonatës</string>
   <string name="call_log_delete_all">Pastro historikun e telefonatave</string>
   <string name="call_log_trash_voicemail">Fshije postën zanore</string>

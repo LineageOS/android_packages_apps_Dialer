@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Telefonbillenyűzet</string>
   <string name="callHistoryIconLabel">Híváslista</string>
   <string name="action_copy_number_text">Szám másolása</string>
-  <string name="copy_transcript_text">Átírás másolása</string>
   <string name="action_edit_number_before_call">Szám szerkesztése hívás előtt</string>
   <string name="call_log_delete_all">A híváslista törlése</string>
   <string name="call_log_trash_voicemail">Hangposta törlése</string>

@@ -30,9 +30,6 @@
          [CHAR LIMIT=30] -->
   <string name="voicemail_notifications_preference_title">Notifications</string>
 
-  <!-- Internal key for a preference to change greeting -->
-  <string name="voicemail_change_greeting_key" translatable="false">voicemail_change_greeting_key</string>
-
   <!-- Title for changing voicemail greeting activity [CHAR LIMIT=40] -->
   <string name="voicemail_change_greeting_preference_title">Voicemail greeting</string>
 
@@ -124,9 +121,6 @@
   <!-- The error message to show if the server reported an error while attempting to change the voicemail PIN -->
   <string name="change_pin_system_error">Unable to set PIN</string>
 
-  <string name="voicemail_visual_voicemail_transcription_key" translatable="false">transcribe_voicemails</string>
-  <string name="voicemail_visual_voicemail_donation_key" translatable="false">donate_voicemails</string>
-
   <!-- Title for visual voicemail setting that enables users voicemails to be transcribed by Google.
        [CHAR LIMIT=40] -->
   <string name="voicemail_visual_voicemail_transcription_switch_title">
@@ -151,8 +145,5 @@
   <string name="confirm_disable_voicemail_dialog_message">This will delete any voicemail and Google transcripts stored within this app. Your carrier may keep its own copies.</string>
   <!-- The label for the confirm-disable-voicemail button [CHAR LIMIT=16] -->
   <string name="confirm_disable_voicemail_accept_dialog_label">TURN OFF</string>
-
-  <string name="transcription_learn_more_url" translatable="false">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
-  <string name="donation_learn_more_url" translatable="false">https://support.google.com/phoneapp/answer/2811844#voicemail_transcript</string>
 
 </resources>
