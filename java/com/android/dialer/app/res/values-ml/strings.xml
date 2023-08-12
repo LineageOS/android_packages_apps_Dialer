@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ഫോൺ കീപാഡ്</string>
   <string name="callHistoryIconLabel">കോള്‍‌ ചരിത്രം</string>
   <string name="action_copy_number_text">നമ്പർ പകർത്തുക</string>
-  <string name="copy_transcript_text">ട്രാൻസ്ക്രിപ്ഷൻ പകർത്തുക</string>
   <string name="action_edit_number_before_call">കോൾ ചെയ്യുംമുമ്പ് നമ്പർ എഡിറ്റുചെയ്യൂ</string>
   <string name="call_log_delete_all">കോൾ ചരിത്രം മായ്‌ക്കുക</string>
   <string name="call_log_trash_voicemail">വോയ്‌സ്മെയിൽ ഇല്ലാതാക്കുക</string>

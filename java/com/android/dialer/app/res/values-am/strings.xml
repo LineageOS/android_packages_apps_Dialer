@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">የስልክ የቁልፍ ሰሌዳ</string>
   <string name="callHistoryIconLabel">የጥሪ ታሪክ</string>
   <string name="action_copy_number_text">ቁጥር ቅዳ</string>
-  <string name="copy_transcript_text">ወደ ጽሑፍ የተገለበጠውን ቅዳ</string>
   <string name="action_edit_number_before_call">ከመደወል በፊት ቁጥር አርትዕ</string>
   <string name="call_log_delete_all">የጥሪ ታሪክን አጽዳ</string>
   <string name="call_log_trash_voicemail">የድምፅ መልዕክት ሰርዝ</string>

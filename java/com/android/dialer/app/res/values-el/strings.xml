@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Πληκτρολόγιο τηλεφώνου</string>
   <string name="callHistoryIconLabel">Ιστορικό κλήσεων</string>
   <string name="action_copy_number_text">Αντιγραφή αριθμού</string>
-  <string name="copy_transcript_text">Αντιγραφή μεταγραφής</string>
   <string name="action_edit_number_before_call">Επεξεργασία αριθμού πριν την κλήση</string>
   <string name="call_log_delete_all">Διαγραφή ιστορικού κλήσεων</string>
   <string name="call_log_trash_voicemail">Διαγραφή αυτόματου τηλεφωνητή</string>

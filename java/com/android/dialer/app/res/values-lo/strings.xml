@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ແປ້ນກົດໂທລະສັບ</string>
   <string name="callHistoryIconLabel">ປະຫວັດການໂທ</string>
   <string name="action_copy_number_text">ອັດ​ສຳ​ເນົາ​ໝາຍເລກ</string>
-  <string name="copy_transcript_text">ອັດ​ສຳ​ເນົາ​ການ​ກ່າຍ​ເປັນ​ໜັງ​ສື</string>
   <string name="action_edit_number_before_call">ແກ້ໄຂໝາຍເລກກ່ອນໂທ</string>
   <string name="call_log_delete_all">ລຶບ​ປະ​ຫວັດ​ການ​ໂທ​</string>
   <string name="call_log_trash_voicemail">ລຶບຂໍ້ຄວາມສຽງ</string>

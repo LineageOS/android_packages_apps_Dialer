@@ -84,13 +84,11 @@ public class AnnotatedCallLogDatabaseHelper extends SQLiteOpenHelper {
           + (AnnotatedCallLog.PHONE_ACCOUNT_COMPONENT_NAME + " text, ")
           + (AnnotatedCallLog.PHONE_ACCOUNT_ID + " text, ")
           + (AnnotatedCallLog.FEATURES + " integer, ")
-          + (AnnotatedCallLog.TRANSCRIPTION + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_URI + " text, ")
           + (AnnotatedCallLog.CALL_TYPE + " integer, ")
           + (AnnotatedCallLog.NUMBER_ATTRIBUTES + " blob, ")
           + (AnnotatedCallLog.IS_VOICEMAIL_CALL + " integer, ")
           + (AnnotatedCallLog.VOICEMAIL_CALL_TAG + " text, ")
-          + (AnnotatedCallLog.TRANSCRIPTION_STATE + " integer, ")
           + (AnnotatedCallLog.CALL_MAPPING_ID + " text")
           + ");";
 
