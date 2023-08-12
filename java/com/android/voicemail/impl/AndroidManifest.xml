@@ -86,22 +86,6 @@
         android:name="com.android.voicemail.impl.DeviceProvisionedJobService"
         android:permission="android.permission.BIND_JOB_SERVICE"
         android:exported="false"/>
-
-    <service
-        android:name="com.android.voicemail.impl.transcribe.TranscriptionService"
-        android:permission="android.permission.BIND_JOB_SERVICE"
-        android:exported="false"/>
-
-    <service
-        android:name="com.android.voicemail.impl.transcribe.TranscriptionBackfillService"
-        android:permission="android.permission.BIND_JOB_SERVICE"
-        android:exported="false"/>
-
-    <service
-        android:name="com.android.voicemail.impl.transcribe.TranscriptionRatingService"
-        android:permission="android.permission.BIND_JOB_SERVICE"
-        android:exported="false"/>
-
     <service
         android:name="com.android.voicemail.impl.OmtpService"
         android:permission="android.permission.BIND_VISUAL_VOICEMAIL_SERVICE"
@@ -132,14 +116,6 @@
         <!-- system dialer only broadcast -->
         <action
             android:name="com.android.internal.telephony.CARRIER_VVM_PACKAGE_INSTALLED" />
-      </intent-filter>
-    </receiver>
-
-    <receiver android:name="com.android.voicemail.impl.transcribe.GetTranscriptReceiver"
-        android:exported="false">
-      <intent-filter>
-        <action
-            android:name="com.android.voicemail.impl.transcribe.GetTranscriptReceiver.POLL_ALARM" />
       </intent-filter>
     </receiver>
   </application>

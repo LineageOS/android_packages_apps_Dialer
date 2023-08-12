@@ -118,28 +118,6 @@ public interface VoicemailClient {
       Context context, PhoneAccountHandle phoneAccountHandle, boolean value);
 
   /**
-   * @return if the voicemail transcription feature is available on the current device. This depends
-   *     on whether the server side flag is turned on for the feature, visual voicemail is activated
-   *     and enabled and if the OS meets the requirement for this feature.
-   */
-  boolean isVoicemailTranscriptionAvailable(Context context, PhoneAccountHandle account);
-
-  /** @return if the voicemail transcription setting has been enabled by the user. */
-  boolean isVoicemailTranscriptionEnabled(Context context, PhoneAccountHandle account);
-
-  /** @return if the voicemail donation feature is available. */
-  boolean isVoicemailDonationAvailable(Context context, PhoneAccountHandle account);
-
-  /** @return if the voicemail donation setting has been enabled by the user. */
-  boolean isVoicemailDonationEnabled(Context context, PhoneAccountHandle account);
-
-  void setVoicemailTranscriptionEnabled(
-      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled);
-
-  void setVoicemailDonationEnabled(
-      Context context, PhoneAccountHandle phoneAccountHandle, boolean enabled);
-
-  /**
    * Whether the client is activated and handling visual voicemail for the {@code
    * phoneAccountHandle}. "Enable" is the intention to use VVM. For example VVM can be enabled but
    * prevented from working because the carrier blocked it, or a connection problem is blocking the

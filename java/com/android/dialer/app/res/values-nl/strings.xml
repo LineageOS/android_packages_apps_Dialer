@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Toetsenblok van telefoon</string>
   <string name="callHistoryIconLabel">Oproepgeschiedenis</string>
   <string name="action_copy_number_text">Nummer kopiëren</string>
-  <string name="copy_transcript_text">Transcriptie kopiëren</string>
   <string name="action_edit_number_before_call">Nummer bewerken vóór bellen</string>
   <string name="call_log_delete_all">Oproepgeschiedenis wissen</string>
   <string name="call_log_trash_voicemail">Voicemail verwijderen</string>

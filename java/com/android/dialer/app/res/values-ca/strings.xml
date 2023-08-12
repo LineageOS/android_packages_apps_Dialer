@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Teclat del telèfon</string>
   <string name="callHistoryIconLabel">Historial de trucades</string>
   <string name="action_copy_number_text">Copia el número</string>
-  <string name="copy_transcript_text">Copia la transcripció</string>
   <string name="action_edit_number_before_call">Edita el número abans de trucar</string>
   <string name="call_log_delete_all">Esborra l\'historial de trucades</string>
   <string name="call_log_trash_voicemail">Suprimeix la bústia de veu</string>
