@@ -201,10 +201,7 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
         context.getResources().getDimensionPixelSize(R.dimen.contact_browser_list_item_photo_size);
 
     // Get a user agent string to use for URI photo requests.
-    userAgent = Constants.get().getUserAgent(context);
-    if (userAgent == null) {
-      userAgent = "";
-    }
+    userAgent = "";
   }
 
   /** Converts bytes to K bytes, rounding up. Used only for debug log. */
