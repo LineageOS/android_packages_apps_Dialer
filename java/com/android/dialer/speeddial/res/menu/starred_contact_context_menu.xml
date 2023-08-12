@@ -47,6 +47,6 @@
   <item
       android:id="@+id/contact_info_container"
       android:title="@string/contact_menu_contact_info"
-      android:icon="@drawable/context_menu_contact_icon"
+      android:icon="@drawable/quantum_ic_person_vd_theme_24"
       android:iconTint="#FFFFFF"/>
 </menu>
