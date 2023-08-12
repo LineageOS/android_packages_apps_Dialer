@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">දුරකථන යතුරු පුවරුව</string>
   <string name="callHistoryIconLabel">ඇමතුම් ඉතිහාසය</string>
   <string name="action_copy_number_text">අංකය පිටපත් කරන්න</string>
-  <string name="copy_transcript_text">පිටපත් කිරීම පිටපත් කරන්න</string>
   <string name="action_edit_number_before_call">ඇමතුමට පෙර අංකය සංස්කරණය</string>
   <string name="call_log_delete_all">ඇමතුම් ඉතිහාසය හිස් කරන්න</string>
   <string name="call_log_trash_voicemail">හඬ තැපෑල මකන්න</string>

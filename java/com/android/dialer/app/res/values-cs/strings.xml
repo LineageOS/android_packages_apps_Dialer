@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Klávesnice telefonu</string>
   <string name="callHistoryIconLabel">Historie volání</string>
   <string name="action_copy_number_text">Kopírovat číslo</string>
-  <string name="copy_transcript_text">Kopírovat přepis</string>
   <string name="action_edit_number_before_call">Před voláním upravit číslo</string>
   <string name="call_log_delete_all">Vymazat historii volání</string>
   <string name="call_log_trash_voicemail">Smazat hlasovou zprávu</string>

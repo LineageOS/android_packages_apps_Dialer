@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">ফোনের কীপ্যাড</string>
   <string name="callHistoryIconLabel">পুরোনো কলের তালিকা</string>
   <string name="action_copy_number_text">নম্বর কপি করুন</string>
-  <string name="copy_transcript_text">ট্রান্সক্রিপশান কপি করুন</string>
   <string name="action_edit_number_before_call">কল করার আগে নম্বর সম্পাদনা করুন</string>
   <string name="call_log_delete_all">পুরোনো কলের তালিকা সাফ করুন</string>
   <string name="call_log_trash_voicemail">ভয়েসমেল মুছুন</string>

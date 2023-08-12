@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Keypad Ponsel</string>
   <string name="callHistoryIconLabel">Histori panggilan</string>
   <string name="action_copy_number_text">Salin nomor</string>
-  <string name="copy_transcript_text">Salin transkripsi</string>
   <string name="action_edit_number_before_call">Edit nomor sebelum memanggil</string>
   <string name="call_log_delete_all">Hapus histori panggilan</string>
   <string name="call_log_trash_voicemail">Hapus pesan suara</string>

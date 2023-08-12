@@ -4,7 +4,6 @@
   <string name="launcherDialpadActivityLabel">Tipkovnica telefona</string>
   <string name="callHistoryIconLabel">Zgodovina klicev</string>
   <string name="action_copy_number_text">Kopiranje številke</string>
-  <string name="copy_transcript_text">Kopiraj prepis</string>
   <string name="action_edit_number_before_call">Urejanje številke pred klicem</string>
   <string name="call_log_delete_all">Izbriši zgodovino klicev</string>
   <string name="call_log_trash_voicemail">Brisanje sporočil iz odzivnika</string>
