@@ -32,4 +32,9 @@
     <item name="android:layout_marginStart">20dp</item>
     <item name="android:paddingLeft">12dp</item>
   </style>
+
+  <style name="LocationPermCardStyle" parent="CallLogCardStyle">
+    <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
+    <item name="android:layout_margin">8dp</item>
+  </style>
 </resources>
