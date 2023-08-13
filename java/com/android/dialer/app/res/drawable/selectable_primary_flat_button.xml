@@ -21,11 +21,13 @@
   <item android:state_enabled="false">
     <shape>
       <solid android:color="@color/material_grey_300"/>
+      <corners android:radius="28dp"/>
     </shape>
   </item>
   <item>
     <shape>
       <solid android:color="?android:attr/colorPrimary"/>
+      <corners android:radius="28dp"/>
     </shape>
   </item>
 </selector>
