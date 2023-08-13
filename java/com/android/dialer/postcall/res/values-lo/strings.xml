@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ເລື່ອງດ່ວນ. ໂທກັບແດ່.</string>
   <string name="post_call_message_2">ຖ້າຫວ່າງແລ້ວໂທກັບແດ່.</string>
   <string name="post_call_message_3">ບໍ່ດ່ວນປານໃດ, ໄວ້ຄ່ອຍລົມກໍໄດ້.</string>
-  <string name="post_call_add_message">ເພີ່ມຂໍ້ຄວາມ</string>
-  <string name="post_call_send_message">ສົ່ງຂໍ້ຄວາມ</string>
+    <string name="post_call_send_message">ສົ່ງຂໍ້ຄວາມ</string>
   <string name="post_call_message_sent">ສົ່ງຂໍ້ຄວາມແລ້ວ</string>
   <string name="view">ເບິ່ງ</string>
 </resources>

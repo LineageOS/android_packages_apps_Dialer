@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">BLOKDAN CHIQARISH</string>
   <string name="block_report_number_alert_title">%1$s raqami bloklansinmi?</string>
   <string name="block_report_number_alert_details">Sizga bu raqamdan endi chaqiruv kelmaydi.</string>
-  <string name="block_number_alert_details">%1$s Bu spam chaqiruv deb xabar beriladi.</string>
   <string name="unblock_number_alert_details">Bu raqam blokdan chiqariladi va undan keluvchi chaqiruvlar spam emas deb aniqlanadi.</string>
   <string name="unblock_report_number_alert_title">%1$s raqami blokdan chiqarilsinmi?</string>
   <string name="report_not_spam_alert_button">Xabar berish</string>

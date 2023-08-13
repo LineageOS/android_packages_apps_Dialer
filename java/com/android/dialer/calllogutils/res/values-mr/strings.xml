@@ -34,27 +34,7 @@
   <string name="voicemail_string">व्हॉइसमेल</string>
   <string name="just_now">आत्ताच</string>
   <string name="new_call_log_carrier_video">वाहक व्हिडिओ</string>
-  <string name="new_call_log_duo_video">Duo व्हिडिओ</string>
   <string name="new_call_log_unknown">अज्ञात</string>
   <string name="new_call_log_secondary_blocked">ब्लॉक केला</string>
   <string name="new_call_log_secondary_spam">स्पॅम</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 कॉल, सर्वात नवीन ^2 चा सुटलेला कॉल आहे</item>
-    <item quantity="other">^1 कॉल, सर्वात नवीन ^2 चा सुटलेला कॉल आहे</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 कॉल, सर्वात नवीन ^2 चा उत्तर दिलेला कॉल</item>
-    <item quantity="other">^1 कॉल, सर्वात नवीन ^2 चा उत्तर दिलेला कॉल</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 कॉल, सर्वात नवीन ^2 ला केलेला आउटगोइंग कॉल</item>
-    <item quantity="other">^1 कॉल, सर्वात नवीन ^2 ला केलेला आउटगोइंग कॉल</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 कॉल, सर्वात नवीन ^2 चा ब्लॉक केलेला कॉल</item>
-    <item quantity="other">^1 कॉल, आत्ता ^2 चे ब्लॉक केलेले कॉल</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 वर, ^2 द्वारे</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

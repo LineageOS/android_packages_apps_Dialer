@@ -34,28 +34,7 @@
   <string name="voicemail_string">குரலஞ்சல்</string>
   <string name="just_now">சற்றுமுன்</string>
   <string name="new_call_log_carrier_video">தொலைத்தொடர்பு நிறுவன வீடியோ</string>
-  <string name="new_call_log_duo_video">Duo வீடியோ</string>
   <string name="new_call_log_unknown">தெரியாத எண்கள்</string>
   <string name="new_call_log_secondary_blocked">தடுக்கப்பட்டது</string>
   <string name="new_call_log_secondary_spam">ஸ்பேம்</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2 இடமிருந்து வந்த ^1 தவறிய அழைப்பு</item>
-    <item quantity="other">^1 தவறிய அழைப்புகள், ^2 இடமிருந்து வந்த சமீபத்திய தவறிய அழைப்பு</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2 இடமிருந்து வந்த ^1 பதிலளித்த அழைப்பு</item>
-    <item quantity="other">^1 அழைப்புகள், சமீபத்திய அழைப்பானது ^2 இடமிருந்து வந்த பதிலளித்த அழைப்பு</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2க்கான ^1 வெளிச்செல்லும் அழைப்பு</item>
-    <item quantity="other">^1 அழைப்புகள், சமீபத்திய அழைப்பானது ^2க்கான வெளிச்செல்லும் அழைப்பு</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2 இடமிருந்து வந்த ^1 தடுக்கப்பட்ட அழைப்பு</item>
-    <item quantity="other">^1 அழைப்புகள், சமீபத்திய அழைப்பானது ^2 இடமிருந்து தடுக்கப்பட்ட அழைப்பு</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 இல்,
-    ^2 மூலம்</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

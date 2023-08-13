@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Це терміново. Передзвоніть мені.</string>
   <string name="post_call_message_2">Передзвоніть мені, коли матимете час.</string>
   <string name="post_call_message_3">Нічого термінового, поспілкуємося пізніше.</string>
-  <string name="post_call_add_message">Додати повідомлення</string>
-  <string name="post_call_send_message">Надіслати повідомлення</string>
+    <string name="post_call_send_message">Надіслати повідомлення</string>
   <string name="post_call_message_sent">Повідомлення надіслано</string>
   <string name="view">Переглянути</string>
 </resources>

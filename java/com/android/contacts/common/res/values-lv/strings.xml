@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Vai dzēst bieži lietotos kontaktus?</string>
   <string name="clearFrequentsConfirmation">Tiks dzēsts bieži lietoto kontaktpersonu saraksts lietotnēs Kontaktpersonas un Tālrunis, un e-pasta lietotnēs no jauna tiks sākta adrešu preferenču saglabāšana.</string>
   <string name="clearFrequentsProgress_title">Bieži lietoto kontaktu dzēšana...</string>
-  <string name="status_available">Pieejams</string>
-  <string name="status_away">Prombūtnē</string>
-  <string name="status_busy">Aizņemts</string>
-  <string name="contactsList">Kontaktpersonas</string>
-  <string name="contact_suggestions">Populārākie ieteikumi</string>
-  <string name="local_invisible_directory">Cits</string>
   <string name="directory_search_label">Katalogs</string>
   <string name="directory_search_label_work">Darba katalogs</string>
-  <string name="local_search_label">Visas kontaktpersonas</string>
-  <string name="local_suggestions_search_label">Ieteikumi</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Es</string>
   <string name="missing_name">(Nav vārda)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Skatīt kontaktpersonu</string>
-  <string name="list_filter_phones">Visas kontaktpersonas ar tālruņa numuriem</string>
-  <string name="list_filter_phones_work">Kontaktpersonas darba profilā</string>
   <string name="view_updates_from_group">Skatīt atjauninājumus</string>
   <string name="account_phone">Tikai ierīcē, netiek sinhronizēta</string>
   <string name="nameLabelsGroup">Vārds un uzvārds</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Tērzēt, izmantojot ICQ</string>
   <string name="chat_jabber">Tērzēt, izmantojot Jabber</string>
   <string name="chat">Tērzēt</string>
-  <string name="list_filter_all_accounts">Visas kontaktpersonas</string>
-  <string name="listAllContactsInAccount">Kontaktpersonas sarakstā %s</string>
-  <string name="listCustomView">Lietotāju filtrs</string>
-  <string name="listSingleContact">Viena kontaktpersona</string>
   <string name="display_options_sort_list_by">Kārtot pēc</string>
   <string name="display_options_sort_by_given_name">Vārds</string>
   <string name="display_options_sort_by_family_name">Uzvārds</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Notīrīt meklēšanas lauku</string>
   <string name="select_account_dialog_title">Konts</string>
   <string name="set_default_account">Vienmēr izmantot zvaniem</string>
-  <string name="select_phone_account_for_calls">SIM kartes izvēle šim zvanam</string>
-  <string name="select_phone_account_for_calls_remember">Atcerēties šo izvēli</string>
   <string name="call_with_a_note">Zvanīt ar piezīmi</string>
   <string name="call_subject_hint">Ierakstiet piezīmi, ko nosūtīt ar zvanu...</string>
   <string name="send_and_call_button">SŪTĪT UN ZVANĪT</string>
@@ -142,5 +124,4 @@
     <item quantity="other"> Cilne “%1$s”. %2$d nelasīti vienumi. </item>
   </plurals>
   <string name="description_search_video_call">Videozvans</string>
-  <string name="description_search_call_and_share">Kopīgot un zvanīt</string>
 </resources>

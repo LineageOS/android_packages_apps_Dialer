@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Es ist dringend. Bitte zurückrufen.</string>
   <string name="post_call_message_2">Bitte bei Gelegenheit zurückrufen.</string>
   <string name="post_call_message_3">Nicht dringend, wir können später sprechen.</string>
-  <string name="post_call_add_message">Nachricht hinzufügen</string>
-  <string name="post_call_send_message">Nachricht senden</string>
+    <string name="post_call_send_message">Nachricht senden</string>
   <string name="post_call_message_sent">Nachricht gesendet</string>
   <string name="view">Ansehen</string>
 </resources>

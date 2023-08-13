@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">محو قائمة من يتم الاتصال بهم كثيرًا؟</string>
   <string name="clearFrequentsConfirmation">ستمحو قائمة من يتم الاتصال بهم كثيرًا في تطبيقي جهات الاتصال والهاتف، وستفرض على تطبيقات البريد الإلكتروني التعرف على تفضيلات توجيه الرسائل من البداية.</string>
   <string name="clearFrequentsProgress_title">جارٍ محو قائمة المُتصل بهم كثيرًا…</string>
-  <string name="status_available">متاح</string>
-  <string name="status_away">بالخارج</string>
-  <string name="status_busy">مشغول</string>
-  <string name="contactsList">جهات الاتصال</string>
-  <string name="contact_suggestions">أهم المقترحات</string>
-  <string name="local_invisible_directory">غير ذلك</string>
   <string name="directory_search_label">الدليل</string>
   <string name="directory_search_label_work">دليل العمل</string>
-  <string name="local_search_label">جميع جهات الاتصال</string>
-  <string name="local_suggestions_search_label">الاقتراحات</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">أنا</string>
   <string name="missing_name">(بلا اسم)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">عرض جهة الاتصال</string>
-  <string name="list_filter_phones">جميع جهات الاتصال التي لها أرقام هواتف</string>
-  <string name="list_filter_phones_work">جهات الاتصال للملف الشخصي للعمل</string>
   <string name="view_updates_from_group">عرض التحديثات</string>
   <string name="account_phone">الجهاز فقط، غير متزامنة</string>
   <string name="nameLabelsGroup">الاسم</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">‏المحادثة باستخدام ICQ</string>
   <string name="chat_jabber">‏المحادثة باستخدام Jabber</string>
   <string name="chat">محادثة</string>
-  <string name="list_filter_all_accounts">كل جهات الاتصال</string>
-  <string name="listAllContactsInAccount">جهات الاتصال في %s</string>
-  <string name="listCustomView">جهات الاتصال في عرض مخصص</string>
-  <string name="listSingleContact">جهة اتصال واحدة</string>
   <string name="display_options_sort_list_by">الترتيب بحسب</string>
   <string name="display_options_sort_by_given_name">الاسم الأول</string>
   <string name="display_options_sort_by_family_name">اسم العائلة</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">محو البحث</string>
   <string name="select_account_dialog_title">الحساب</string>
   <string name="set_default_account">استخدام هذا للمكالمات دائمًا</string>
-  <string name="select_phone_account_for_calls">‏اختيار شريحة SIM لهذه المكالمة</string>
-  <string name="select_phone_account_for_calls_remember">تذكر هذا الاختيار</string>
   <string name="call_with_a_note">مكالمة مع ملاحظة</string>
   <string name="call_subject_hint">اكتب ملاحظة لإرسالها مع المكالمة ...</string>
   <string name="send_and_call_button">إرسال واتصال</string>
@@ -145,5 +127,4 @@
     <item quantity="other"> %1$s علامة تبويب. %2$d عناصر غير مقروءة. </item>
   </plurals>
   <string name="description_search_video_call">مكالمة فيديو</string>
-  <string name="description_search_call_and_share">المشاركة والاتصال</string>
 </resources>

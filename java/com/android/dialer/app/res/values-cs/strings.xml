@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Klávesnice telefonu</string>
   <string name="callHistoryIconLabel">Historie volání</string>
   <string name="action_copy_number_text">Kopírovat číslo</string>
   <string name="action_edit_number_before_call">Před voláním upravit číslo</string>
@@ -38,8 +37,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Více možností</string>
   <string name="action_menu_dialpad_button">klávesnice</string>
   <string name="dialer_settings_label">Nastavení</string>
-  <string name="simulator_submenu_label">Simulátor</string>
-  <string name="new_ui_launcher_shortcut_label">Vytv. zkratku na nové rozhraní</string>
   <string name="description_entering_bulk_action_mode">Vstupování do režimu hromadných akcí</string>
   <string name="description_leaving_bulk_action_mode">Opustili jste režim hromadných akcí</string>
   <string name="description_selecting_bulk_action_mode">Položka %1$s je vybrána</string>
@@ -50,7 +47,6 @@
   <string name="description_video_call">Videohovor</string>
   <string name="description_start_voice_search">Spustit hlasové vyhledávání</string>
   <string name="voicemail">Hlasová schránka</string>
-  <string name="description_cancel_multi_select">Zrušit režim hromadných akcí</string>
   <string name="voicemailMultiSelectDeleteConfirm">Smazat</string>
   <string name="voicemailMultiSelectDeleteCancel">Zrušit</string>
   <string name="voicemailMultiSelectActionBarTitle">Vybráno: %1$s</string>
@@ -66,7 +62,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Hlasové vyhledávání není k dispozici.</string>
   <string name="dialer_hint_find_contact">Vyhledat kontakty</string>
-  <string name="block_number_search_hint">Přidejte číslo nebo vyhledejte kontakty</string>
   <string name="call_log_all_empty">Historie volání je prázdná</string>
   <string name="call_log_all_empty_action">Zavolat</string>
   <string name="call_log_missed_empty">Nemáte žádné zmeškané hovory.</string>
@@ -74,23 +69,13 @@
   <string name="call_log_activity_title">Historie volání</string>
   <string name="call_log_all_title">Všechny</string>
   <string name="call_log_missed_title">Zmeškané</string>
-  <string name="tab_speed_dial">Rychlá volba</string>
-  <string name="tab_history">Historie volání</string>
   <string name="tab_all_contacts">Kontakty</string>
-  <string name="tab_voicemail">Hlasová schránka</string>
-  <string name="search_shortcut_call_number">Zavolat %s</string>
   <string name="search_shortcut_create_new_contact">Vytvořit nový kontakt</string>
   <string name="search_shortcut_add_to_contact">Přidat ke kontaktu</string>
   <string name="search_shortcut_send_sms_message">Odeslat SMS</string>
   <string name="search_shortcut_make_video_call">Uskutečnit videohovor</string>
-  <string name="search_shortcut_block_number">Blokovat číslo</string>
-  <string name="speed_dial_empty">V rychlém vytáčení zatím nemáte žádný kontakt.</string>
-  <string name="speed_dial_empty_add_favorite_action">Přidat oblíbený kontakt</string>
-  <string name="remove_contact">Odstranit</string>
   <string name="select_all">Vybrat všechny</string>
   <string name="call_log_action_video_call">Videohovor</string>
-  <string name="call_log_action_set_up_video">Nastavit videohovory</string>
-  <string name="call_log_action_invite_video">Pozvat na videohovor</string>
   <string name="call_log_action_send_message">Odeslat zprávu</string>
   <string name="call_log_action_details">Podrobnosti hovoru</string>
   <string name="call_log_action_share_voicemail">Poslat přes aplikaci…</string>
@@ -129,23 +114,8 @@
   <string name="call_settings_label">Volání</string>
   <string name="manage_blocked_numbers_label">Blokovaná čísla</string>
   <string name="voicemail_settings_label">Hlasová schránka</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Blokování hovorů je dočasně vypnuto</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Protože jste z tohoto telefonu během posledních 48 hodin volali na tísňovou linku, bylo blokování hovorů vypnuto. Po uplynutí 48 hodin se automaticky znovu zapne.</string>
-  <string name="import_send_to_voicemail_numbers_label">Importovat čísla</string>
-  <string name="blocked_call_settings_import_description">Pomocí dalších aplikací jste dříve některé volající označili k automatickému přesměrování do hlasové schránky.</string>
-  <string name="blocked_call_settings_view_numbers_button">Zobrazit čísla</string>
-  <string name="blocked_call_settings_import_button">Importovat</string>
-  <string name="description_blocked_number_list_delete">Zrušit blokování čísla</string>
-  <string name="addBlockedNumber">Přidat číslo</string>
-  <string name="block_number_footer_message_vvm">Volání z těchto čísel budou zablokována. Hlasové zprávy budou automaticky smazány.</string>
-  <string name="block_number_footer_message_no_vvm">Volání z těchto čísel budou zablokována, avšak volající vám budou moci zanechat hlasovou zprávu.</string>
-  <string name="block_list">Blokovaná čísla</string>
-  <string name="alreadyBlocked">Číslo %1$s je již blokováno.</string>
   <string name="phone_account_settings_label">Účty pro volání</string>
-  <string name="permission_no_speeddial">Chcete-li povolit rychlé vytáčení, aktivujte oprávnění Kontakty.</string>
   <string name="permission_no_calllog">Chcete-li zobrazit seznam hovorů, aktivujte oprávnění Telefon.</string>
-  <string name="permission_no_search">Chcete-li vyhledat kontakty, zapněte oprávnění Kontakty.</string>
-  <string name="permission_place_call">Chcete-li uskutečnit hovor, aktivujte oprávnění Telefon.</string>
   <string name="toast_cannot_write_system_settings">Aplikace Telefon nemá oprávnění provádět zápis do nastavení systému.</string>
   <string name="blocked_number_call_log_label">Zablokováno</string>
   <string name="call_log_action_block_report_number">Zablokovat / nahlásit spam</string>
@@ -153,22 +123,4 @@
   <string name="call_log_action_remove_spam">Není spam</string>
   <string name="call_log_action_unblock_number">Zrušit blokování čísla</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">Uživatel %1$s je offline a není možné se s ním spojit</string>
-  <string name="about_phone_label">O aplikaci</string>
-  <string name="voicemail_transcription_branding_text">Přepsáno Googlem</string>
-  <string name="voicemail_transcription_in_progress">Přepisování…</string>
-  <string name="voicemail_transcription_failed">Přepis není k dispozici.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Přepis není k dispozici. Jazyk není podporován.</string>
-  <string name="voicemail_transcription_failed_no_speech">Přepis není k dispozici. Nebyla zaznamenána žádná řeč.</string>
-  <string name="voicemail_donation_promo_title">Pomozte vylepšit přesnost přepisu!</string>
-  <string name="voicemail_donation_promo_content">Dovolte Googlu kontrolovat vaše hlasové zprávy (počínaje touto) s jejich přepisy. Zprávy se budou ukládat anonymně. Nastavení můžete kdykoli změnit. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Ano, souhlasím</string>
-  <string name="voicemail_donation_promo_opt_out">Ne, díky</string>
-  <string name="voicemail_transcription_rating">Ohodnoťte kvalitu přepisu</string>
-  <string name="voicemail_transcription_rating_thanks">Děkujeme za zpětnou vazbu</string>
-  <string name="description_rating_good">Líbí se mi</string>
-  <string name="description_rating_bad">Nelíbí se</string>
-  <string name="view_conversation">Zobrazit</string>
-  <string name="ec_data_deleted">Hovor byl smazán. Přílohy sdílené během něj můžete zobrazit a smazat v aplikaci Zprávy.</string>
-  <string name="multiple_ec_data_deleted">Hovory byly smazány. Přílohy sdílené během nich můžete zobrazit a smazat v aplikaci Zprávy.</string>
 </resources>

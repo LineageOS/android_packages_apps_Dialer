@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">ビデオが OFF になっています</string>
   <string name="incall_content_description_swap_video">ビデオを切り替える</string>
   <string name="incall_label_speaker">スピーカー</string>
-  <string name="incall_label_audio">音声</string>
 </resources>

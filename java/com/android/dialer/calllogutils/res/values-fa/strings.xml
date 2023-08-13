@@ -34,28 +34,7 @@
   <string name="voicemail_string">پست صوتی</string>
   <string name="just_now">لحظاتی پیش</string>
   <string name="new_call_log_carrier_video">تماس ویدیویی با شرکت مخابراتی</string>
-  <string name="new_call_log_duo_video">‏تماس ویدیویی Duo</string>
   <string name="new_call_log_unknown">نامشخص</string>
   <string name="new_call_log_secondary_blocked">مسدودشده</string>
   <string name="new_call_log_secondary_spam">هرزنامه</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 تماس، آخرین مورد تماس بی‌پاسخی از ^2 است</item>
-    <item quantity="other">^1 تماس، آخرین مورد تماس بی‌پاسخی از ^2 است</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 تماس، آخرین مورد تماس پاسخ داده شده‌ای از ^2 است</item>
-    <item quantity="other">^1 تماس، آخرین مورد تماس پاسخ داده شده‌ای از ^2 است</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 تماس، آخرین مورد تماسی خروجی با ^2 است</item>
-    <item quantity="other">^1 تماس، آخرین مورد تماسی خروجی با ^2 است</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 تماس، آخرین مورد تماس مسدودشده‌ای از ^2 است</item>
-    <item quantity="other">^1 تماس، آخرین مورد تماس مسدودشده‌ای از ^2 است</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">در ^1،
-    ازطریق ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1، ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1، ^2، ^3.</string>
 </resources>

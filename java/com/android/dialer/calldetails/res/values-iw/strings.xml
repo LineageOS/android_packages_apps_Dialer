@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">העתק את המספר</string>
   <string name="call_details_edit_number">ערוך את המספר לפני השיחה</string>
   <string name="call_details_report_call_id">דיווח על מספר לא מדויק</string>
-  <string name="sent_a_photo">נשלחה תמונה</string>
-  <string name="received_a_photo">התקבלה תמונה</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">דיווח על מספר שגוי</string>
   <string name="report_caller_id_failed">לא ניתן היה לדווח על המספר</string>
   <string name="report_caller_id_toast">המספר דיווח</string>

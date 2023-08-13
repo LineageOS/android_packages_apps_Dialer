@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">ថតចម្លងលេខទូរសព្ទ</string>
   <string name="call_details_edit_number">កែ​លេខ​ មុន​ពេល​ហៅទូរសព្ទ</string>
   <string name="call_details_report_call_id">រាយការណ៍លេខមិនត្រឹមត្រូវ</string>
-  <string name="sent_a_photo">បានផ្ញើរូបថត</string>
-  <string name="received_a_photo">បាន​ទទួល​រូបថត</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">រាយការណ៍​លេខ​មិន​ត្រឹមត្រូវ</string>
   <string name="report_caller_id_failed">មិន​អាច​រាយការណ៍​លេខ​បាន​ទេ</string>
   <string name="report_caller_id_toast">បាន​រាយការណ៍​លេខ</string>

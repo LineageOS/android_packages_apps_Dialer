@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">取消屏蔽</string>
   <string name="block_report_number_alert_title">要屏蔽 %1$s 吗？</string>
   <string name="block_report_number_alert_details">您将不会再收到此号码的来电。</string>
-  <string name="block_number_alert_details">%1$s此次来电将被举报为骚扰电话。</string>
   <string name="unblock_number_alert_details">系统将取消屏蔽此号码，并停止将其列为骚扰电话号码。此号码日后的来电不会再被识别为骚扰电话。</string>
   <string name="unblock_report_number_alert_title">要取消屏蔽 %1$s 吗？</string>
   <string name="report_not_spam_alert_button">报告</string>

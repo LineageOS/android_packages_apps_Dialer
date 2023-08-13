@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Энэ бол яаралтай. Над руу буцааж залгана уу.</string>
   <string name="post_call_message_2">Завтай болоод над руу буцааж залгана уу.</string>
   <string name="post_call_message_3">Яаралтай биш, бид дараа чатлаж болно.</string>
-  <string name="post_call_add_message">Зурвас нэмэх</string>
-  <string name="post_call_send_message">Зурвас илгээх</string>
+    <string name="post_call_send_message">Зурвас илгээх</string>
   <string name="post_call_message_sent">Зурвас илгээсэн</string>
   <string name="view">Үзэх</string>
 </resources>

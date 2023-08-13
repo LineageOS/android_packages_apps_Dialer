@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Cuộc gọi này là khẩn cấp. Hãy gọi lại cho tôi.</string>
   <string name="post_call_message_2">Hãy gọi lại cho tôi khi bạn có thời gian.</string>
   <string name="post_call_message_3">Không khẩn cấp, chúng ta có thể trò chuyện sau.</string>
-  <string name="post_call_add_message">Thêm tin nhắn</string>
-  <string name="post_call_send_message">Gửi tin nhắn</string>
+    <string name="post_call_send_message">Gửi tin nhắn</string>
   <string name="post_call_message_sent">Đã gửi tin nhắn</string>
   <string name="view">Xem</string>
 </resources>

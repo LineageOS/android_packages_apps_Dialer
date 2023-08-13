@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Голосова пошта (%s)</string>
   <string name="voicemail_settings_title">Голосова пошта</string>
   <string name="voicemail_notifications_preference_title">Сповіщення</string>
   <string name="voicemail_change_greeting_preference_title">Привітання в голосовій пошті</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Змінити PIN-код</string>
   <string name="voicemail_change_pin_preference_summary_disable">Щоб змінити PIN-код, потрібно ввімкнути візуальну голосову пошту</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Візуальну голосову пошту ще не активовано, повторіть спробу пізніше</string>
-  <string name="vm_change_pin_old_pin">Старий PIN-код</string>
-  <string name="vm_change_pin_new_pin">Новий PIN-код</string>
   <string name="vm_change_pin_progress_message">Зачекайте.</string>
   <string name="vm_change_pin_error_too_short">Новий PIN-код закороткий.</string>
   <string name="vm_change_pin_error_too_long">Новий PIN-код задовгий.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-коди не збігаються</string>
   <string name="change_pin_succeeded">PIN-код голосової пошти змінено</string>
   <string name="change_pin_system_error">Не вдалося встановити PIN-код</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Транскрипція голосової пошти</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Аналіз транскрипції голосової пошти</string>
   <string name="voicemail_activating_summary_info">Увімкнення голосової пошти</string>
-  <string name="voicemail_transcription_preference_summary_info">Отримуйте тексти повідомлень голосової пошти за допомогою сервісу транскрипції від Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Дозвольте Google перевіряти ваші повідомлення голосової пошти, щоб покращувати точність транскрипції. Ваші повідомлення голосової пошти зберігатимуться анонімно. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Вимкнути візуальну голосову пошту</string>
   <string name="confirm_disable_voicemail_dialog_message">Буде видалено всю голосову пошту та транскрипції Google, які зберігаються в цьому додатку. Ваш оператор може зберегти для себе копії.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ВИМКНУТИ</string>

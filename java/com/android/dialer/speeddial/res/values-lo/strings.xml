@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">ເລືອກປະເພດການໂທ</string>
   <string name="disambig_option_video_call">ໂທດ້ວຍວິດີໂອ</string>
   <string name="disambig_option_voice_call">ໂທ</string>
-  <string name="add_favorite_activity_title">ເພີ່ມລາຍການທີ່ມັກ</string>
   <string name="contact_menu_voice_call">ການໂທດ້ວຍສຽງ</string>
   <string name="contact_menu_video_call">ໂທດ້ວຍວິດີໂອ</string>
   <string name="contact_menu_message">ຂໍ້ຄວາມ</string>

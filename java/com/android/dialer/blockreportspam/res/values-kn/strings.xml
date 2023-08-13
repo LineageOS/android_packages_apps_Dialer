@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ನಿರ್ಬಂಧ ತೆಗೆ</string>
   <string name="block_report_number_alert_title">%1$s ನಿರ್ಬಂಧಿಸುವುದೇ?</string>
   <string name="block_report_number_alert_details">ನೀವು ಇನ್ನು ಮುಂದೆ ಈ ಸಂಖ್ಯೆಯಿಂದ ಕರೆಗಳನ್ನು ಸ್ವೀಕರಿಸುವುದಿಲ್ಲ.</string>
-  <string name="block_number_alert_details">%1$s ಈ ಕರೆಯನ್ನು ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿ ಮಾಡಲಾಗುತ್ತದೆ.</string>
   <string name="unblock_number_alert_details">ಈ ಸಂಖ್ಯೆಗೆ ನಿರ್ಬಂಧ ತೆಗೆಯಲಾಗುತ್ತದೆ ಮತ್ತು ಸ್ಪ್ಯಾಮ್ ಎಂದು ವರದಿ ಮಾಡಲಾಗುವುದಿಲ್ಲ. ಭವಿಷ್ಯದ ಕರೆಗಳನ್ನು ಸ್ಪ್ಯಾಮ್ ಎಂದು ಗುರುತಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ.</string>
   <string name="unblock_report_number_alert_title">%1$s ನಿರ್ಬಂಧವನ್ನು ತೆಗೆಯುವುದೇ?</string>
   <string name="report_not_spam_alert_button">ವರದಿ</string>

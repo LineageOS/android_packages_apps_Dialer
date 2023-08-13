@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Մաքրե՞լ հաճախակի հաղորդակցվածները</string>
   <string name="clearFrequentsConfirmation">Դուք կմաքրեք հաճախակի հաղորդակցվողների ցանկը Կոնտակտներ և Հեռախոս հավելվածներում, և ձեր էլփոստի ծրագիրը զրոյից կսովորի ձեր հասցեագրումների նախընտրությունները:</string>
   <string name="clearFrequentsProgress_title">Հաճախակի հաղորդակցումների մաքրում...</string>
-  <string name="status_available">Հասանելի</string>
-  <string name="status_away">Տեղում չէ</string>
-  <string name="status_busy">Զբաղված</string>
-  <string name="contactsList">Կոնտակտներ</string>
-  <string name="contact_suggestions">Լավագույն առաջարկներ</string>
-  <string name="local_invisible_directory">Այլ</string>
   <string name="directory_search_label">Գրացուցակ</string>
   <string name="directory_search_label_work">Աշխատանքային գրացուցակ</string>
-  <string name="local_search_label">Բոլոր կոնտակտները</string>
-  <string name="local_suggestions_search_label">Առաջարկներ</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ես</string>
   <string name="missing_name">(Անանուն)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Դիտել կոնտակտը</string>
-  <string name="list_filter_phones">Բոլոր հեռախոսահամարներով կոնտատկները</string>
-  <string name="list_filter_phones_work">Աշխատանքային պրոֆիլի կոնտակտներ</string>
   <string name="view_updates_from_group">Դիտել թարմացումները</string>
   <string name="account_phone">Միայն սարքում, չհամաժամեցված</string>
   <string name="nameLabelsGroup">Անուն</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Զրուցել ICQ-ով</string>
   <string name="chat_jabber">Զրուցել Jabber-ով</string>
   <string name="chat">Զրույց</string>
-  <string name="list_filter_all_accounts">Բոլոր կոնտակտները</string>
-  <string name="listAllContactsInAccount">%s-ի կոնտակտները</string>
-  <string name="listCustomView">Հատուկ տեսքով կոնտակտներ</string>
-  <string name="listSingleContact">Մեկ կոնտակտ</string>
   <string name="display_options_sort_list_by">Դասավորել ըստ</string>
   <string name="display_options_sort_by_given_name">Անվան</string>
   <string name="display_options_sort_by_family_name">Ազգանվան</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Մաքրել որոնման դաշտը</string>
   <string name="select_account_dialog_title">Հաշիվ</string>
   <string name="set_default_account">Միշտ օգտագործել սա՝ զանգերի համար</string>
-  <string name="select_phone_account_for_calls">Ընտրեք, թե որ SIM քարտով զանգել</string>
-  <string name="select_phone_account_for_calls_remember">Հիշել այս ընտրությունը</string>
   <string name="call_with_a_note">Գրառումով զանգ</string>
   <string name="call_subject_hint">Մուտքագրեք նշում՝ զանգի հետ ուղարկելու համար ...</string>
   <string name="send_and_call_button">ՈՒՂԱՐԿԵԼ ԵՎ ԶԱՆԳԵԼ</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ներդիր: %2$d չկարդացված տարր: </item>
   </plurals>
   <string name="description_search_video_call">Տեսազանգ</string>
-  <string name="description_search_call_and_share">Կիսվել և զանգել</string>
 </resources>

@@ -4,8 +4,7 @@
   <string name="post_call_message_1">અગત્યનું કામ છે. મને ફરી કૉલ કરો.</string>
   <string name="post_call_message_2">તમારી પાસે થોડો સમય હોય ત્યારે મને ફરી કૉલ કરો.</string>
   <string name="post_call_message_3">કોઇ ખાસ કામ નથી, આપણે પછી ચેટ કરી શકીએ.</string>
-  <string name="post_call_add_message">સંદેશ ઉમેરો</string>
-  <string name="post_call_send_message">સંદેશ મોકલો</string>
+    <string name="post_call_send_message">સંદેશ મોકલો</string>
   <string name="post_call_message_sent">સંદેશ મોકલ્યો</string>
   <string name="view">જુઓ</string>
 </resources>

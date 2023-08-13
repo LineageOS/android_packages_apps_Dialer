@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">דואר קולי (%s)</string>
   <string name="voicemail_settings_title">דואר קולי</string>
   <string name="voicemail_notifications_preference_title">עדכונים</string>
   <string name="voicemail_change_greeting_preference_title">פתיח לתא הקולי</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">שינוי קוד הגישה</string>
   <string name="voicemail_change_pin_preference_summary_disable">צריך להפעיל את הדואר הקולי הוויזואלי כדי לשנות את קוד הגישה</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">הדואר הקולי הוויזואלי לא הופעל עדיין. אפשר לנסות שוב מאוחר יותר</string>
-  <string name="vm_change_pin_old_pin">קוד הגישה הישן</string>
-  <string name="vm_change_pin_new_pin">קוד הגישה החדש</string>
   <string name="vm_change_pin_progress_message">רק רגע בבקשה.</string>
   <string name="vm_change_pin_error_too_short">קוד הגישה החדש קצר מדי.</string>
   <string name="vm_change_pin_error_too_long">קוד הגישה החדש ארוך מדי.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">קודי הגישה אינם תואמים</string>
   <string name="change_pin_succeeded">קוד הגישה לדואר הקולי עודכן</string>
   <string name="change_pin_system_error">לא ניתן היה להגדיר את קוד הגישה</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">תמלול הודעות קוליות</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">ניתוח התמלולים של ההודעות הקוליות</string>
   <string name="voicemail_activating_summary_info">הפעלת הדואר הקולי מתבצעת</string>
-  <string name="voicemail_transcription_preference_summary_info">‏תמלול ההודעות הקוליות באמצעות שירותי התמלול של Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">‏אם נוכל לבדוק את ההודעות הקוליות שלך דיוק התמלול של Google ישתפר. ההודעות הקוליות נשמרות באופן אנונימי. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">השבתת הדואר הקולי הוויזואלי</string>
   <string name="confirm_disable_voicemail_dialog_message">‏כל ההודעות הקוליות והתמלולים של Google שנשמרו באפליקציה יימחקו. ייתכן שיישארו עותקים שלהם אצל הספק הסלולרי שלך.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">השבתה</string>

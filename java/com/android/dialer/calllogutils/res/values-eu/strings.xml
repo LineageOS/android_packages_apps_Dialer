@@ -34,28 +34,7 @@
   <string name="voicemail_string">Erantzungailua</string>
   <string name="just_now">Oraintxe</string>
   <string name="new_call_log_carrier_video">Operadorearen bideo-deia</string>
-  <string name="new_call_log_duo_video">Duo bideo-deia</string>
   <string name="new_call_log_unknown">Ezezaguna</string>
   <string name="new_call_log_secondary_blocked">Blokeatutakoak</string>
   <string name="new_call_log_secondary_spam">Spama</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 dei galdu (^2)</item>
-    <item quantity="other">^1 dei (azken deia ^2 erabiltzailearen dei galdua da)</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">Erantzundako ^1 dei (^2)</item>
-    <item quantity="other">^1 dei (azken deia ^2 erabiltzaileari erantzundako deia da)</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">Egindako ^1 dei (^2)</item>
-    <item quantity="other">^1 dei (azken deia ^2 erabiltzaileari egindako deia da)</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">Blokeatutako ^1 dei (^2)</item>
-    <item quantity="other">^1 dei (azken deia ^2 erabiltzailearen blokeatutako deia da)</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1 txartela,
-    ^2 zenbakiaren bidez</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

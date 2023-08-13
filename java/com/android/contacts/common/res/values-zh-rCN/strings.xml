@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">是否清除常用联系人？</string>
   <string name="clearFrequentsConfirmation">此操作会清除“通讯录”和“电话”应用中的常用联系人列表，并强制电子邮件应用重新获取您最常使用的联系地址。</string>
   <string name="clearFrequentsProgress_title">正在清除常用联系人…</string>
-  <string name="status_available">在线</string>
-  <string name="status_away">离开</string>
-  <string name="status_busy">忙碌</string>
-  <string name="contactsList">通讯录</string>
-  <string name="contact_suggestions">常用联系人推荐</string>
-  <string name="local_invisible_directory">其他</string>
   <string name="directory_search_label">目录</string>
   <string name="directory_search_label_work">工作目录</string>
-  <string name="local_search_label">所有联系人</string>
-  <string name="local_suggestions_search_label">建议</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">我</string>
   <string name="missing_name">（无姓名）</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">查看联系人</string>
-  <string name="list_filter_phones">所有拥有电话号码的联系人</string>
-  <string name="list_filter_phones_work">工作资料联系人</string>
   <string name="view_updates_from_group">查看最新动态</string>
   <string name="account_phone">仅限此设备，不同步</string>
   <string name="nameLabelsGroup">姓名</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">使用 ICQ 聊天</string>
   <string name="chat_jabber">使用 Jabber 聊天</string>
   <string name="chat">聊天</string>
-  <string name="list_filter_all_accounts">所有联系人</string>
-  <string name="listAllContactsInAccount">%s 中的联系人</string>
-  <string name="listCustomView">自定义视图中的联系人</string>
-  <string name="listSingleContact">单个联系人</string>
   <string name="display_options_sort_list_by">排序方式</string>
   <string name="display_options_sort_by_given_name">名字</string>
   <string name="display_options_sort_by_family_name">姓氏</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">清除搜索内容</string>
   <string name="select_account_dialog_title">帐号</string>
   <string name="set_default_account">一律使用这张卡进行通话</string>
-  <string name="select_phone_account_for_calls">为此次通话选择 SIM 卡</string>
-  <string name="select_phone_account_for_calls_remember">记住此选择</string>
   <string name="call_with_a_note">拨打电话并发送备注</string>
   <string name="call_subject_hint">输入要在拨打电话时发送的备注…</string>
   <string name="send_and_call_button">发送并拨打电话</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s标签。%2$d 项未读内容。</item>
   </plurals>
   <string name="description_search_video_call">视频通话</string>
-  <string name="description_search_call_and_share">分享并拨打电话</string>
 </resources>

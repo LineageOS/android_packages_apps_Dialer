@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Скапіраваць нумар</string>
   <string name="call_details_edit_number">Рэдагаваць нумар перад выклікам</string>
   <string name="call_details_report_call_id">Падаць заяву аб недакладным нумары</string>
-  <string name="sent_a_photo">Адпраўлена фота</string>
-  <string name="received_a_photo">Атрымана фота</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Падаць заяву аб няправільным нумары</string>
   <string name="report_caller_id_failed">Не ўдалося падаць заяву аб нумары</string>
   <string name="report_caller_id_toast">Аб нумары пададзена заява</string>

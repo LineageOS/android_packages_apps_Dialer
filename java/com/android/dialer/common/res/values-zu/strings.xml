@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="network_name_wifi">I-Wi-Fi</string>
-  <string name="network_name_mobile">Iselula</string>
   <string name="content_description_overflow">Ezinye izinketho</string>
   <string name="snackbar_undo">HLEHLISA</string>
   <string name="ok_got_it">KULUNGILE, ngiyezwa</string>

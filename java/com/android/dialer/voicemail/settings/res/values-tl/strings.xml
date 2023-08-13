@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Voicemail (%s)</string>
   <string name="voicemail_settings_title">Voicemail</string>
   <string name="voicemail_notifications_preference_title">Mga Notification</string>
   <string name="voicemail_change_greeting_preference_title">Voicemail greeting</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Palitan ang PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Dapat naka-enable ang visual na voicemail upang palitan ang PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Hindi pa naka-activate ang visual na voicemail, pakisubukang muli sa ibang pagkakataon</string>
-  <string name="vm_change_pin_old_pin">Lumang PIN</string>
-  <string name="vm_change_pin_new_pin">Bagong PIN</string>
   <string name="vm_change_pin_progress_message">Pakihintay.</string>
   <string name="vm_change_pin_error_too_short">Masyadong maikli ang bagong PIN.</string>
   <string name="vm_change_pin_error_too_long">Masyadong mahaba ang bagong PIN.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Hindi tugma ang mga PIN</string>
   <string name="change_pin_succeeded">In-update ang PIN sa voicemail</string>
   <string name="change_pin_system_error">Hindi naitakda ang PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transkripsyon ng voicemail</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Pagsusuri ng transkripsyon ng voicemail</string>
   <string name="voicemail_activating_summary_info">Ina-activate ang voicemail</string>
-  <string name="voicemail_transcription_preference_summary_info">Kumuha ng mga transcript ng iyong voicemail gamit ang serbisyo ng transcription ng Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Hayaang suriin ng Google ang iyong mga mensahe sa voicemail para mapaganda ang katumpakan ng transkripsyon. Ini-store nang anonymous ang iyong mga mensahe sa voicemail. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">I-off ang visual na voicemail</string>
   <string name="confirm_disable_voicemail_dialog_message">Ide-delete nito ang anumang voicemail at mga transcript ng Google na naka-store sa app na ito. Maaaring magpanatili ang iyong carrier ng sarili nitong mga kopya.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">I-OFF</string>

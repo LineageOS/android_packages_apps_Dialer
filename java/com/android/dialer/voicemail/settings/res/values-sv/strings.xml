@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Röstbrevlåda (%s)</string>
   <string name="voicemail_settings_title">Röstbrevlåda</string>
   <string name="voicemail_notifications_preference_title">Aviseringar</string>
   <string name="voicemail_change_greeting_preference_title">Hälsningsmeddelande</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Ändra pinkod</string>
   <string name="voicemail_change_pin_preference_summary_disable">Visuell röstbrevlåda måste vara aktiverad för att ändra pinkoden</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visuell röstbrevlåda är ännu inte aktiverad, försök igen senare</string>
-  <string name="vm_change_pin_old_pin">Gammal pinkod</string>
-  <string name="vm_change_pin_new_pin">Ny pinkod</string>
   <string name="vm_change_pin_progress_message">Vänta.</string>
   <string name="vm_change_pin_error_too_short">Den nya pinkoden är för kort.</string>
   <string name="vm_change_pin_error_too_long">Den nya pinkoden är för lång.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Pinkoderna matchar inte</string>
   <string name="change_pin_succeeded">Röstbrevlådans pinkod bekräftad</string>
   <string name="change_pin_system_error">Det går inte att ställa in pinkod</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transkribering av röstmeddelanden</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Transkriptionsanalys för röstbrevlåda</string>
   <string name="voicemail_activating_summary_info">Aktiverar röstbrevlåda</string>
-  <string name="voicemail_transcription_preference_summary_info">Transkribera röstmeddelanden med Googles kostnadsfria transkriberingstjänst. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Låt Google granska dina röstmeddelanden för att förbättra transkriptionsnoggrannheten. Röstmeddelandena lagras anonymt. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Stäng av visuell röstbrevlåda</string>
   <string name="confirm_disable_voicemail_dialog_message">Det tar bort alla röstmeddelanden och lagrade Google-transkript i den här appen. Din operatör kanske behåller egna kopior.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">INAKTIVERA</string>

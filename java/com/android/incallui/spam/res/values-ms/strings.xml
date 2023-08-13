@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Ketik untuk menambahkan nombor pada kenalan atau sekat nombor spam.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Ini merupakan kali pertama nombor ini memanggil anda. Jika panggilan ini spam, anda boleh menyekat nombor ini dan melaporkannya.</string>
   <string name="spam_notification_spam_call_collapsed_text">Ketik untuk melaporkan sebagai bukan spam atau sekat nombor</string>
-  <string name="spam_notification_report_spam_action_text">Sekat &amp; lapor</string>
-  <string name="spam_notification_add_contact_action_text">Tambah kenalan</string>
   <string name="spam_notification_dialog_add_contact_action_text">Tambahkan pada kenalan</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Sekat &amp; laporkan spam</string>
   <string name="spam_notification_was_not_spam_action_text">Tidak, bukan spam</string>

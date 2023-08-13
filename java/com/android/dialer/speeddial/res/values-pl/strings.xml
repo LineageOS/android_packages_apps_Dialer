@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Wybierz typ połączenia</string>
   <string name="disambig_option_video_call">Rozmowa wideo</string>
   <string name="disambig_option_voice_call">Zadzwoń</string>
-  <string name="add_favorite_activity_title">Dodaj do ulubionych</string>
   <string name="contact_menu_voice_call">Rozmowa głosowa</string>
   <string name="contact_menu_video_call">Rozmowa wideo</string>
   <string name="contact_menu_message">SMS</string>

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">HÄV BLOCKERINGEN</string>
   <string name="block_report_number_alert_title">Blockera %1$s?</string>
   <string name="block_report_number_alert_details">Du får inte längre samtal från det här numret.</string>
-  <string name="block_number_alert_details">%1$s Det här samtalet rapporteras som spam.</string>
   <string name="unblock_number_alert_details">Numret avblockeras och rapporteras inte som spam. Framtida samtal identifieras inte som spam.</string>
   <string name="unblock_report_number_alert_title">Avblockera %1$s?</string>
   <string name="report_not_spam_alert_button">Rapport</string>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Vymazať často kontaktované osoby?</string>
   <string name="clearFrequentsConfirmation">Vymažete zoznam často kontaktovaných osôb v aplikáciách Kontakty a Telefón a e-mailové aplikácie budú musieť odznova vytvoriť predvoľby adresátov.</string>
   <string name="clearFrequentsProgress_title">Mazanie často kontaktov. osôb...</string>
-  <string name="status_available">Som tu</string>
-  <string name="status_away">Som preč</string>
-  <string name="status_busy">Nemám čas</string>
-  <string name="contactsList">Kontakty</string>
-  <string name="contact_suggestions">Najviac odporúčané</string>
-  <string name="local_invisible_directory">Iné</string>
   <string name="directory_search_label">Adresár</string>
   <string name="directory_search_label_work">Pracovný adresár</string>
-  <string name="local_search_label">Všetky kontakty</string>
-  <string name="local_suggestions_search_label">Návrhy</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Ja</string>
   <string name="missing_name">(Bez mena)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Zobraziť kontakt</string>
-  <string name="list_filter_phones">Všetky kontakty s telefónnymi číslami</string>
-  <string name="list_filter_phones_work">Kontakty v pracovnom profile</string>
   <string name="view_updates_from_group">Zobraziť aktualizácie</string>
   <string name="account_phone">Len v zariadení, bez synchronizácie</string>
   <string name="nameLabelsGroup">Meno</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Zhovárať sa pomocou služby ICQ</string>
   <string name="chat_jabber">Zhovárať sa pomocou služby Jabber</string>
   <string name="chat">Četovať</string>
-  <string name="list_filter_all_accounts">Všetky kontakty</string>
-  <string name="listAllContactsInAccount">Kontakty v účte %s</string>
-  <string name="listCustomView">Kontakty vo vlastnom zobrazení</string>
-  <string name="listSingleContact">Jednotlivý kontakt</string>
   <string name="display_options_sort_list_by">Zoradiť podľa</string>
   <string name="display_options_sort_by_given_name">Krstné meno</string>
   <string name="display_options_sort_by_family_name">Priezvisko</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Vymazať vyhľadávanie</string>
   <string name="select_account_dialog_title">Účet</string>
   <string name="set_default_account">Vždy používať pre hovory</string>
-  <string name="select_phone_account_for_calls">Vyberte SIM kartu na tento hovor</string>
-  <string name="select_phone_account_for_calls_remember">Zapamätať si túto voľbu</string>
   <string name="call_with_a_note">Hovor s poznámkou</string>
   <string name="call_subject_hint">Napíšte poznámku, ktorá sa odošle s hovorom...</string>
   <string name="send_and_call_button">ODOSLAŤ A VOLAŤ</string>
@@ -143,5 +125,4 @@
     <item quantity="other"> Karta %1$s. %2$d neprečítaných položiek. </item>
   </plurals>
   <string name="description_search_video_call">Videohovor</string>
-  <string name="description_search_call_and_share">Zdieľať a volať</string>
 </resources>

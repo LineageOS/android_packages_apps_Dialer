@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">ទូរស័ព្ទ</string>
-  <string name="launcherDialpadActivityLabel">បន្ទះ​ចុច​លេខទូរសព្ទ</string>
   <string name="callHistoryIconLabel">ប្រវត្តិ​ហៅ</string>
   <string name="action_copy_number_text">ថតចម្លងលេខទូរស័ព្ទ</string>
   <string name="action_edit_number_before_call">កែ​លេខ​មុន​ពេល​ហៅ</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ជម្រើស​បន្ថែម</string>
   <string name="action_menu_dialpad_button">បន្ទះ​​ចុច​លេខ</string>
   <string name="dialer_settings_label">ការកំណត់</string>
-  <string name="simulator_submenu_label">កម្មវិធីធ្វើ​ដូច​មែនទែន</string>
-  <string name="new_ui_launcher_shortcut_label">បង្កើត​ផ្លូវកាត់ UI ថ្មី</string>
   <string name="description_entering_bulk_action_mode">ចូល​មុខងារ​សកម្មភាព​ច្រើន</string>
   <string name="description_leaving_bulk_action_mode">បាន​ចាកចេញ​ពី​មុខងារ​សកម្មភាព​ច្រើន</string>
   <string name="description_selecting_bulk_action_mode">បាន​ជ្រើសរើស %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">ការ​ហៅ​ជា​វីដេអូ​។</string>
   <string name="description_start_voice_search">ចាប់ផ្ដើម​ស្វែងរក​ជា​សំឡេង</string>
   <string name="voicemail">សារ​ជា​សំឡេង</string>
-  <string name="description_cancel_multi_select">បោះបង់​មុខងារ​សកម្មភាព​ជា​ក្រុម</string>
   <string name="voicemailMultiSelectDeleteConfirm">លុប</string>
   <string name="voicemailMultiSelectDeleteCancel">បោះបង់</string>
   <string name="voicemailMultiSelectActionBarTitle">បាន​ជ្រើសរើស %1$s</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">ការស្វែងរកជាសម្លេងមិនមានទេ</string>
   <string name="dialer_hint_find_contact">រក​ទំនាក់ទំនង</string>
-  <string name="block_number_search_hint">បន្ថែមលេខទូរស័ព្ទ ឬស្វែងរកទំនាក់ទំនង</string>
   <string name="call_log_all_empty">ប្រវត្តិហៅរបស់អ្នកទទេ</string>
   <string name="call_log_all_empty_action">ហៅទូរសព្ទ</string>
   <string name="call_log_missed_empty">អ្នកមិនមានការខកខានទទួលទូរសព្ទទេ។</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">ប្រវត្តិ​ហៅ</string>
   <string name="call_log_all_title">ទាំង​អស់</string>
   <string name="call_log_missed_title">ខកខាន​ទទួល</string>
-  <string name="tab_speed_dial">ហៅទូរស័ព្ទល្បឿនលឿន</string>
-  <string name="tab_history">ប្រវត្តិហៅ</string>
   <string name="tab_all_contacts">ទំនាក់ទំនង</string>
-  <string name="tab_voicemail">សារជាសំឡេង</string>
-  <string name="search_shortcut_call_number">ហៅ %s</string>
   <string name="search_shortcut_create_new_contact">បង្កើតទំនាក់ទំនងថ្មី</string>
   <string name="search_shortcut_add_to_contact">បន្ថែមទៅទំនាក់ទំនង</string>
   <string name="search_shortcut_send_sms_message">ផ្ញើសារ SMS</string>
   <string name="search_shortcut_make_video_call">ការ​ហៅ​ជា​វីដេអូ</string>
-  <string name="search_shortcut_block_number">រារាំងលេខ</string>
-  <string name="speed_dial_empty">គ្មាននរណាម្នាក់នៅក្នុងការហៅរហ័សរបស់អ្នកនៅឡើយទេ</string>
-  <string name="speed_dial_empty_add_favorite_action">បញ្ចូលសំណព្វ</string>
-  <string name="remove_contact">លុបចេញ</string>
   <string name="select_all">ជ្រើសរើស​​ទាំងអស់</string>
   <string name="call_log_action_video_call">ហៅជាវីដេអូ</string>
-  <string name="call_log_action_set_up_video">រៀបចំការហៅ​ជា​វីដេអូ​</string>
-  <string name="call_log_action_invite_video">អញ្ជើញ​ចូលរួម​ការហៅ​តាម​​វីដេអូ</string>
   <string name="call_log_action_send_message">ផ្ញើសារ</string>
   <string name="call_log_action_details">ព័ត៌មានលម្អិតអំពីការហៅ</string>
   <string name="call_log_action_share_voicemail">ផ្ញើទៅ...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">ការហៅ</string>
   <string name="manage_blocked_numbers_label">លេខ​ដែល​ទប់ស្កាត់</string>
   <string name="voicemail_settings_label">សារ​ជា​សំឡេង</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">ការរារាំងការហៅត្រូវបានបិទជាបណ្តោះអាសន្ន</string>
-  <string name="blocked_numbers_disabled_emergency_desc">ការរារាំងការហៅត្រូវបានបិទដំណើរការ ដោយសារតែអ្នកបានទាក់ទងទៅសេវាអាសន្នចេញពីទូរស័ព្ទនេះក្នុងចន្លោះពេល 48 ម៉ោងកន្លងមកនេះ។ វានឹងបើកដំណើរការឡើងវិញ បន្ទាប់ពីរយៈពេល 48 ម៉ោងផុតកំណត់។</string>
-  <string name="import_send_to_voicemail_numbers_label">នាំចូលលេខ</string>
-  <string name="blocked_call_settings_import_description">កាលពីមុនអ្នកបានដាក់សម្គាល់ឲ្យបញ្ជូនអ្នកហៅមួយចំនួនដោយស្វ័យប្រវត្តិទៅកាន់សារជាសំឡេងតាមរយៈកម្មវិធីផ្សេងទៀត។</string>
-  <string name="blocked_call_settings_view_numbers_button">មើលលេខ</string>
-  <string name="blocked_call_settings_import_button">នាំចូល</string>
-  <string name="description_blocked_number_list_delete">ឈប់ទប់ស្កាត់លេខ</string>
-  <string name="addBlockedNumber">បន្ថែមលេខ</string>
-  <string name="block_number_footer_message_vvm">ការហៅចេញពីលេខទាំងនេះនឹងត្រូវបានរារាំង ហើយសារជាសំឡេងនឹងត្រូវបានលុបដោយស្វ័យប្រវត្តិ។</string>
-  <string name="block_number_footer_message_no_vvm">ការហៅចេញពីលេខទាំងនេះនឹងត្រូវបានរារាំង ប៉ុន្តែពួកគេនៅតែអាចទុកសារជាសំឡេងឲ្យអ្នកបាន។</string>
-  <string name="block_list">លេខបានរារាំង</string>
-  <string name="alreadyBlocked">%1$s ត្រូវបានទប់ស្កាត់រួចហើយ</string>
   <string name="phone_account_settings_label">គណនីហៅទូរសព្ទ</string>
-  <string name="permission_no_speeddial">ដើម្បីបើកដំណើរការហៅរហ័ស សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីទំនាក់ទំនង។</string>
   <string name="permission_no_calllog">ដើម្បីមើលកំណត់ហេតុហៅទូរស័ព្ទរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីហៅទូរស័ព្ទ។</string>
-  <string name="permission_no_search">ដើម្បីស្វែងរកទំនាក់ទំនងរបស់អ្នក សូមបើកសិទ្ធិអនុញ្ញាតទំនាក់ទំនង។</string>
-  <string name="permission_place_call">ដើម្បីធ្វើការហៅទូរស័ព្ទ សូមបើកសិទ្ធិអនុញ្ញាតកម្មវិធីហៅទូរស័ព្ទ។</string>
   <string name="toast_cannot_write_system_settings">កម្មវិធីទូរស័ព្ទមិនមានសិទ្ធិអនុញ្ញាតដើម្បីសរសេរការកំណត់ប្រព័ន្ធទេ។</string>
   <string name="blocked_number_call_log_label">បាន​ទប់ស្កាត់</string>
   <string name="call_log_action_block_report_number">រារាំង/រាយការណ៍សារដែលមិនចង់បាន</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">មិនមែន​សារ​ឥតបានការ</string>
   <string name="call_log_action_unblock_number">ឈប់ទប់ស្កាត់លេខ</string>
   <string name="spam_number_call_log_label">សារ​ឥតបានការ</string>
-  <string name="call_composer_connection_failed">%1$s មិន​នៅ​លើ​អ៊ីនធឺណិត និង​មិន​អាច​ទាក់ទង​បាន​ទេ</string>
-  <string name="about_phone_label">អំពី</string>
-  <string name="voicemail_transcription_branding_text">បាន​ធ្វើ​ប្រតិចារឹក​ដោយ Google</string>
-  <string name="voicemail_transcription_in_progress">កំពុងធ្វើប្រតិចារឹក...</string>
-  <string name="voicemail_transcription_failed">មិន​មាន​ប្រតិចារឹក​ទេ</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transcript not available. Language not supported.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transcript not available. No speech detected.</string>
-  <string name="voicemail_donation_promo_title">ជួយ​ធ្វើ​ឱ្យ​ភាពត្រឹមត្រូវ​នៃ​ប្រតិចារឹក​ប្រសើរ​ឡើង​ទេ?</string>
-  <string name="voicemail_donation_promo_content">អនុញ្ញាត​ឱ្យ Google ពិនិត្យ​មើល​វា និង​សារ​ជា​សំឡេងអនាគត​ដែល​មាន​ប្រតិចារឹក​។ សារ​ទាំង​នេះ​នឹង​ត្រូវ​បាន​រក្សា​ទុក​ជា​លក្ខណៈ​អនាមិក។ ផ្លាស់ប្ដូរ​ការកំណត់​បាន​គ្រប់​ពេល។ %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">បាទ/ចាស ខ្ញុំយល់ព្រម</string>
-  <string name="voicemail_donation_promo_opt_out">ទេ អរគុណ</string>
-  <string name="voicemail_transcription_rating">វាយតម្លៃ​គុណភាព​ប្រតិចារឹក</string>
-  <string name="voicemail_transcription_rating_thanks">អរគុណ​ចំពោះ​ការ​ផ្ដល់​មតិ​កែលម្អ</string>
-  <string name="description_rating_good">ចូលចិត្ត</string>
-  <string name="description_rating_bad">មិន​ចូលចិត្ត</string>
-  <string name="view_conversation">មើល</string>
-  <string name="ec_data_deleted">បាន​លុប​ការហៅទូរសព្ទ។ មើល និង​លុប​ឯកសារ​ភ្ជាប់​ដែល​បាន​ចែករំលែក​នៅ​អំឡុង​ពេល​ហៅ​ទូរសព្ទ​នេះ​នៅ​ក្នុង Messages ។</string>
-  <string name="multiple_ec_data_deleted">បាន​លុប​ការហៅទូរសព្ទ។ មើល និង​លុប​ឯកសារ​ភ្ជាប់​ដែល​បាន​ចែករំលែក​នៅ​អំឡុង​ពេល​ហៅ​ទូរសព្ទ​នៅ​ក្នុង Messages ។</string>
 </resources>

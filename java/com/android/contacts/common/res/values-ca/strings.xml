@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Vols esborrar els contactes freqüents?</string>
   <string name="clearFrequentsConfirmation">S\'esborrarà la llista de contactes més freqüents a les aplicacions Contactes i Telèfon i es forçarà les aplicacions de correu electrònic a obtenir informació nova sobre les teves preferències pel que fa a adreces.</string>
   <string name="clearFrequentsProgress_title">S\'estan esborrant contactes freq...</string>
-  <string name="status_available">Disponible</string>
-  <string name="status_away">Absent</string>
-  <string name="status_busy">Ocupat</string>
-  <string name="contactsList">Contactes</string>
-  <string name="contact_suggestions">Suggeriments principals</string>
-  <string name="local_invisible_directory">Altres</string>
   <string name="directory_search_label">Directori</string>
   <string name="directory_search_label_work">Directori de la feina</string>
-  <string name="local_search_label">Tots els contactes</string>
-  <string name="local_suggestions_search_label">Suggeriments</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jo</string>
   <string name="missing_name">(Sense nom)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Visualitza el contacte</string>
-  <string name="list_filter_phones">Tots els contactes que tenen números de telèfon</string>
-  <string name="list_filter_phones_work">Contactes del perfil professional</string>
   <string name="view_updates_from_group">Mostra les actualitzacions</string>
   <string name="account_phone">Només al dispositiu, no se sincronitza</string>
   <string name="nameLabelsGroup">Nom</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Xateja amb ICQ</string>
   <string name="chat_jabber">Xateja amb Jabber</string>
   <string name="chat">Xat</string>
-  <string name="list_filter_all_accounts">Tots els contactes</string>
-  <string name="listAllContactsInAccount">Contactes a %s</string>
-  <string name="listCustomView">Contactes en visualització personalitzada</string>
-  <string name="listSingleContact">Un sol contacte</string>
   <string name="display_options_sort_list_by">Ordena per</string>
   <string name="display_options_sort_by_given_name">Nom</string>
   <string name="display_options_sort_by_family_name">Cognoms</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Esborra la cerca</string>
   <string name="select_account_dialog_title">Compte</string>
   <string name="set_default_account">Utilitza sempre per a les trucades</string>
-  <string name="select_phone_account_for_calls">Tria la SIM per a aquesta trucada</string>
-  <string name="select_phone_account_for_calls_remember">Recorda aquesta selecció</string>
   <string name="call_with_a_note">Trucada amb una nota</string>
   <string name="call_subject_hint">Escriu una nota per enviar-la juntament amb la trucada...</string>
   <string name="send_and_call_button">ENVIA I TRUCA</string>
@@ -141,5 +123,4 @@
     <item quantity="other">Pestanya %1$s: %2$d elements no llegits </item>
   </plurals>
   <string name="description_search_video_call">Videotrucada</string>
-  <string name="description_search_call_and_share">Comparteix i truca</string>
 </resources>

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">БӨГӨТТӨН ЧЫГАРУУ</string>
   <string name="block_report_number_alert_title">%1$s бөгөттөлсүнбү?</string>
   <string name="block_report_number_alert_details">Мындан ары бул номерден келген чалуулар кабыл алынбайт.</string>
-  <string name="block_number_alert_details">%1$s Бул чалуу спам деп белгиленет.</string>
   <string name="unblock_number_alert_details">Номер бөгөттөн чыгарылып, спам эмес деп белгиленет. Кийинки чалуулар спам деп белгиленбейт.</string>
   <string name="unblock_report_number_alert_title">%1$s бөгөттөн чыгарылсынбы?</string>
   <string name="report_not_spam_alert_button">Арыздануу</string>

@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸಲು ಅಥವಾ ಸ್ಪ್ಯಾಮ್ ಸಂಖ್ಯೆಯನ್ನು ನಿರ್ಬಂಧಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ.</string>
   <string name="spam_notification_non_spam_call_expanded_text">ಇದೇ ಮೊದಲ ಬಾರಿಗೆ ಈ ಸಂಖ್ಯೆಯಿಂದ ನಿಮಗೆ ಕರೆ ಮಾಡಲಾಗಿದೆ. ಈ ಕರೆಯು ಸ್ಪ್ಯಾಮ್ ಎನಿಸಿದರೆ, ನೀವು ಈ ಕರೆಯನ್ನು ನಿರ್ಬಂಧಿಸಬಹುದು ಮತ್ತು ವರದಿ ಮಾಡಿ.</string>
   <string name="spam_notification_spam_call_collapsed_text">ಸ್ಪ್ಯಾಮ್ ಅಲ್ಲ ಎಂದು ವರದಿ ಮಾಡಲು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ಇದನ್ನು ನಿರ್ಬಂಧಿಸಿ.</string>
-  <string name="spam_notification_report_spam_action_text">ನಿರ್ಬಂಧಿಸಿ ಮತ್ತು ವರದಿ ಮಾಡಿ</string>
-  <string name="spam_notification_add_contact_action_text">ಸಂಪರ್ಕ ಸೇರಿಸಿ</string>
   <string name="spam_notification_dialog_add_contact_action_text">ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸಿ</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">ನಿರ್ಬಂಧಿಸಿ ಮತ್ತು ಸ್ಪ್ಯಾಮ್ ವರದಿ ಮಾಡಿ</string>
   <string name="spam_notification_was_not_spam_action_text">ಇಲ್ಲ, ಸ್ಪ್ಯಾಮ್‌ ಅಲ್ಲ</string>

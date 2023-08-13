@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">ቁጥር ቅዳ</string>
   <string name="call_details_edit_number">ከመደወል በፊት ቁጥር አርትዕ ያድርጉ</string>
   <string name="call_details_report_call_id">ትክክለኛ ያልሆነ ቁጥርን ሪፓርት አድርግ</string>
-  <string name="sent_a_photo">አንድ ፎቶ ተልኳል</string>
-  <string name="received_a_photo">አንድ ፎቶ ደርሷል</string>
-  <string name="message_in_quotes">«%1$s»</string>
   <string name="report_caller_id_dialog_title">የተሳሳተ ቁጥርን ሪፖርት ያድርጉ</string>
   <string name="report_caller_id_failed">ቁጥሩን ሪፖርት ማድረግ አልተቻለም</string>
   <string name="report_caller_id_toast">ቁጥሩ ሪፖርት ተደርጓል</string>

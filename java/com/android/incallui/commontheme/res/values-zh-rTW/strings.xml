@@ -16,5 +16,4 @@
   <string name="incall_content_description_video_off">關閉視訊畫面</string>
   <string name="incall_content_description_swap_video">切換視訊畫面</string>
   <string name="incall_label_speaker">擴音</string>
-  <string name="incall_label_audio">音訊</string>
 </resources>

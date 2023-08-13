@@ -34,28 +34,7 @@
   <string name="voicemail_string">వాయిస్ మెయిల్</string>
   <string name="just_now">ఇప్పుడే</string>
   <string name="new_call_log_carrier_video">క్యారియర్ వీడియో</string>
-  <string name="new_call_log_duo_video">Duo వీడియో</string>
   <string name="new_call_log_unknown">తెలియదు</string>
   <string name="new_call_log_secondary_blocked">బ్లాక్ చేయబడింది</string>
   <string name="new_call_log_secondary_spam">స్పామ్</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2 నుండి ^1 మిస్డ్ కాల్</item>
-    <item quantity="other">^2 నుండి ^1 కాల్‌లు, తాజాది మిస్డ్ కాల్</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2 నుండి ^1 సమాధానం ఇచ్చిన కాల్</item>
-    <item quantity="other">^2 నుండి ^1 కాల్‌లు, తాజాది సమాధానం ఇచ్చిన కాల్</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2కు ^1 అవుట్‌గోయింగ్ కాల్</item>
-    <item quantity="other">^2కు ^1 కాల్‌లు, తాజాది అవుట్‌గోయింగ్ కాల్‌లు</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2 నుండి ^1 బ్లాక్ చేయబడిన కాల్</item>
-    <item quantity="other">^2 నుండి ^1 కాల్‌లు, తాజాది బ్లాక్ చేయబడిన కాల్</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1లో,
-    ^2 ద్వారా</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

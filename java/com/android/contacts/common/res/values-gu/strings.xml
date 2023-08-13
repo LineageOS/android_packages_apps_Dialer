@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">વારંવાર સંપર્ક કરેલા સાફ કરીએ?</string>
   <string name="clearFrequentsConfirmation">તમે સંપર્કો અને ફોન એપ્લિકેશન્સમાં વારંવાર સંપર્ક કરેલ સૂચિને સાફ કરશો અને ઇમેઇલ એપ્લિકેશન્સને તમારી સંબોધન પસંદગીઓને શરૂઆતથી જાણવા માટે ફરજ પાડશો.</string>
   <string name="clearFrequentsProgress_title">વારંવાર સંપર્ક કરેલા સાફ કરે છે…</string>
-  <string name="status_available">ઉપલબ્ધ</string>
-  <string name="status_away">દૂર</string>
-  <string name="status_busy">વ્યસ્ત</string>
-  <string name="contactsList">સંપર્કો</string>
-  <string name="contact_suggestions">ટોચના સૂચવેલ</string>
-  <string name="local_invisible_directory">અન્ય</string>
   <string name="directory_search_label">નિર્દેશિકા</string>
   <string name="directory_search_label_work">કાર્ય નિર્દેશિકા</string>
-  <string name="local_search_label">તમામ સંપર્કો</string>
-  <string name="local_suggestions_search_label">સૂચનો</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">હું</string>
   <string name="missing_name">(નામ નથી)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">સંપર્ક જુઓ</string>
-  <string name="list_filter_phones">ફોન નંબર્સ સાથેના તમામ સંપર્કો</string>
-  <string name="list_filter_phones_work">કાર્ય પ્રોફાઇલના સંપર્કો</string>
   <string name="view_updates_from_group">અપડેટ્સ જુઓ</string>
   <string name="account_phone">ફક્ત-ઉપકરણ, સમન્વયિત ન કરેલ</string>
   <string name="nameLabelsGroup">નામ</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ નો ઉપયોગ કરીને ચેટ કરો</string>
   <string name="chat_jabber">Jabber નો ઉપયોગ કરીને ચેટ કરો</string>
   <string name="chat">ચેટ</string>
-  <string name="list_filter_all_accounts">તમામ સંપર્કો</string>
-  <string name="listAllContactsInAccount">%s માં સંપર્કો</string>
-  <string name="listCustomView">કસ્ટમ દૃશ્યમાં સંપર્કો</string>
-  <string name="listSingleContact">એકલ સંપર્ક</string>
   <string name="display_options_sort_list_by">આ પ્રમાણે સૉર્ટ કરો</string>
   <string name="display_options_sort_by_given_name">પ્રથમ નામ</string>
   <string name="display_options_sort_by_family_name">છેલ્લું નામ</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">શોધ સાફ કરો</string>
   <string name="select_account_dialog_title">એકાઉન્ટ</string>
   <string name="set_default_account">કૉલ્સ માટે આનો ઉપયોગ હંમેશાં કરો</string>
-  <string name="select_phone_account_for_calls">આ કૉલ માટે સિમ પસંદ કરો</string>
-  <string name="select_phone_account_for_calls_remember">આ પસંદ યાદ રાખો</string>
   <string name="call_with_a_note">નોંધ સાથે કૉલ કરો</string>
   <string name="call_subject_hint">કૉલ સાથે મોકલવા માટે એક નોંધ લખો ...</string>
   <string name="send_and_call_button">મોકલો અને કૉલ કરો</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ટૅબ. %2$d વાંચ્યા વગરની આઇટમ. </item>
   </plurals>
   <string name="description_search_video_call">વિડિઓ કૉલ</string>
-  <string name="description_search_call_and_share">શેર કરો અને કૉલ કરો</string>
 </resources>

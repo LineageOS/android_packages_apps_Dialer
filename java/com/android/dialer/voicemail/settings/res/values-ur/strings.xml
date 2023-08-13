@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">صوتی میل (%s)</string>
   <string name="voicemail_settings_title">صوتی میل</string>
   <string name="voicemail_notifications_preference_title">اطلاعات</string>
   <string name="voicemail_change_greeting_preference_title">صوتی میل استقبالیہ</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">‏PIN تبدیل کریں</string>
   <string name="voicemail_change_pin_preference_summary_disable">‏PIN تبدیل کرنے کیلئے بصری صوتی میل کا فعال ہونا لازمی ہے</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">بصری صوتی میل ابھی فعال نہیں ہے، براہ کرم بعد میں دوبارہ کوشش کریں</string>
-  <string name="vm_change_pin_old_pin">‏پرانا PIN</string>
-  <string name="vm_change_pin_new_pin">‏نیا PIN</string>
   <string name="vm_change_pin_progress_message">براہ کرم انتظار کریں۔</string>
   <string name="vm_change_pin_error_too_short">‏نیا PIN بہت مختصر ہے۔</string>
   <string name="vm_change_pin_error_too_long">‏نیا PIN بہت طویل ہے۔</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">‏PINs مماثل نہیں ہیں</string>
   <string name="change_pin_succeeded">‏صوتی میل کا PIN اپ ڈیٹ ہو گیا</string>
   <string name="change_pin_system_error">‏PIN سیٹ کرنے سے قاصر</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">صوتی میل کی ٹرانسکرپشن</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">صوتی میل کی نقل حرفی کا تجزیہ</string>
   <string name="voicemail_activating_summary_info">صوتی میل کو فعال کیا جا رہا ہے</string>
-  <string name="voicemail_transcription_preference_summary_info">‏Google کی ٹرانسکرپشن سروس کا استعمال کر کے اپنے صوتی میل کی ٹرانسکرپٹس حاصل کریں۔ %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">‏ٹرانسکرپشن کی درستگی بہتر بنانے کیلئے Google کو اپنے صوتی میل کے پیغامات کا جائزہ لینے دیں۔ آپ کے صوتی میل کے پیغامات گمنام طریقے سے اسٹور کئے جاتے ہیں۔ %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">بصری صوتی میل آف کریں</string>
   <string name="confirm_disable_voicemail_dialog_message">‏یہ اس ایپ میں اسٹور کردہ کسی بھی صوتی میل اور Google ٹرانسکرپٹ کو حذف کر دے گا۔ آپ کا کیریئر خود اپنی کاپیاں رکھ سکتا ہے۔</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">آف کریں</string>

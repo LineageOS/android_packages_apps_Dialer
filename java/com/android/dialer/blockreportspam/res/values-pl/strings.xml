@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ODBLOKUJ</string>
   <string name="block_report_number_alert_title">Zablokować numer %1$s?</string>
   <string name="block_report_number_alert_details">Nie będziesz już otrzymywać połączeń z tego numeru.</string>
-  <string name="block_number_alert_details">%1$s To połączenie zostanie zgłoszone jako spam.</string>
   <string name="unblock_number_alert_details">Ten numer zostanie odblokowany i usunięty z listy nadawców spamu. Połączenia nie będą już blokowane.</string>
   <string name="unblock_report_number_alert_title">Odblokować numer %1$s?</string>
   <string name="report_not_spam_alert_button">Zgłoś</string>
