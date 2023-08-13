@@ -34,28 +34,7 @@
   <string name="voicemail_string">Kõnepost</string>
   <string name="just_now">Äsja</string>
   <string name="new_call_log_carrier_video">Operaatori video</string>
-  <string name="new_call_log_duo_video">Duo video</string>
   <string name="new_call_log_unknown">Tundmatu</string>
   <string name="new_call_log_secondary_blocked">Blokeeritud</string>
   <string name="new_call_log_secondary_spam">Rämpskõned</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 vastamata kõne kasutajalt ^2</item>
-    <item quantity="other">^1 kõnet, viimane on vastamata kõne kasutajalt ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 vastatud kõne kasutajalt ^2</item>
-    <item quantity="other">^1 kõnet, viimane on vastatud kõne kasutajalt ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 väljuv kõne kasutajale ^2</item>
-    <item quantity="other">^1 kõnet, viimane on väljuv kõne kasutajale ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 blokeeritud kõne kasutajalt ^2</item>
-    <item quantity="other">^1 kõnet, viimane on blokeeritud kõne kasutajalt ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">kontol ^1,
-    numbri ^2 kaudu</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

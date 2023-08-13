@@ -25,9 +25,19 @@
   </style>
 
   <!-- Activities should use this theme as their style -->
-  <style name="MainActivityTheme" parent="MainActivityThemeBase"/>
+  <style name="MainActivityTheme" parent="MainActivityThemeBase">
+    <!-- Used to change the navigation bar color -->
+    <item name="android:windowLightNavigationBar">true</item>
+    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:navigationBarDividerColor">@null</item>
+  </style>
 
-  <style name="MainActivityTheme.Dark" parent="MainActivityTheme.Dark"/>
+  <style name="MainActivityTheme.Dark" parent="MainActivityThemeBase.Dark">
+    <!-- Used to change the navigation bar color -->
+    <item name="android:windowLightNavigationBar">true</item>
+    <item name="android:navigationBarColor">@color/rounded_dialpad_bg_color</item>
+    <item name="android:navigationBarDividerColor">@null</item>
+  </style>
 
   <!-- Used as a procy for values-v27/styles.xml -->
   <style name="MainActivityThemeBase" parent="Dialer.ThemeBase.NoActionBar">

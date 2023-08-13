@@ -355,9 +355,6 @@ public class DialpadFragment extends Fragment
 
     firstLaunch = state == null;
 
-    prohibitedPhoneNumberRegexp =
-        getResources().getString(R.string.config_prohibited_phone_number_regexp);
-
     if (state != null) {
       digitsFilledByIntent = state.getBoolean(PREF_DIGITS_FILLED_BY_INTENT);
       isDialpadSlideUp = state.getBoolean(PREF_IS_DIALPAD_SLIDE_OUT);
@@ -1155,29 +1152,10 @@ public class DialpadFragment extends Fragment
     } else {
       final String number = digits.getText().toString();
 
-      // "persist.radio.otaspdial" is a temporary hack needed for one carrier's automated
-      // test equipment.
-      // TODO: clean it up.
-      if (number != null
-          && !TextUtils.isEmpty(prohibitedPhoneNumberRegexp)
-          && number.matches(prohibitedPhoneNumberRegexp)) {
-        LogUtil.i(
-            "DialpadFragment.handleDialButtonPressed",
-            "The phone number is prohibited explicitly by a rule.");
-        if (getActivity() != null) {
-          DialogFragment dialogFragment =
-              ErrorDialogFragment.newInstance(R.string.dialog_phone_call_prohibited_message);
-          dialogFragment.show(getFragmentManager(), "phone_prohibited_dialog");
-        }
-
-        // Clear the digits just in case.
-        clearDialpad();
-      } else {
-        CallIntentBuilder builder = new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD)
-            .setPhoneAccountHandle(selectedAccount);
-        PreCall.start(getContext(), builder);
-        hideAndClearDialpad();
-      }
+      CallIntentBuilder builder = new CallIntentBuilder(number, CallInitiationType.Type.DIALPAD)
+          .setPhoneAccountHandle(selectedAccount);
+      PreCall.start(getContext(), builder);
+      hideAndClearDialpad();
     }
   }
 

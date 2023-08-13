@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">अनवरोधित करें</string>
   <string name="block_report_number_alert_title">%1$s पर रोक लगाएं?</string>
   <string name="block_report_number_alert_details">अब आपको इस नंबर से कॉल नहीं आएंगे.</string>
-  <string name="block_number_alert_details">%1$s इस कॉल को स्पैम के रूप में रिपोर्ट किया जाएगा.</string>
   <string name="unblock_number_alert_details">इस नंबर पर से रोक हटा दी जाएगी और इसे स्पैम नहीं माना जाएगा. इससे आने वाले कॉल स्पैम नहीं माने जाएंगे.</string>
   <string name="unblock_report_number_alert_title">%1$s पर से रोक हटाएं?</string>
   <string name="report_not_spam_alert_button">रिपोर्ट करें</string>

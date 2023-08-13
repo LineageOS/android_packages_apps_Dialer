@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Vil du rydde de ofte kontaktede?</string>
   <string name="clearFrequentsConfirmation">Hvis du gør dette, rydder du listen over personer, som du ofte kontakter, i appene Kontaktpersoner og Opkald. Du vil samtidig tvinge e-mailapps til at lære dine adressepræferencer fra bunden.</string>
   <string name="clearFrequentsProgress_title">Ofte kontaktede personer ryddes…</string>
-  <string name="status_available">Tilgængelig</string>
-  <string name="status_away">Ikke til stede</string>
-  <string name="status_busy">Optaget</string>
-  <string name="contactsList">Kontakter</string>
-  <string name="contact_suggestions">Populære forslag</string>
-  <string name="local_invisible_directory">Andre</string>
   <string name="directory_search_label">Indeks</string>
   <string name="directory_search_label_work">Indeks for arbejde</string>
-  <string name="local_search_label">Alle kontakter</string>
-  <string name="local_suggestions_search_label">Forslag</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mig</string>
   <string name="missing_name">(Intet navn)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Se kontaktperson</string>
-  <string name="list_filter_phones">Alle kontaktpersoner med telefonnumre</string>
-  <string name="list_filter_phones_work">Kontaktpersoner for arbejdsprofil</string>
   <string name="view_updates_from_group">Se opdateringer</string>
   <string name="account_phone">Kun enhed, ikke synkroniseret</string>
   <string name="nameLabelsGroup">Navn</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chat ved hjælp af ICQ</string>
   <string name="chat_jabber">Chat ved hjælp af Jabber</string>
   <string name="chat">Chat</string>
-  <string name="list_filter_all_accounts">Alle kontaktpersoner</string>
-  <string name="listAllContactsInAccount">Kontaktpersoner i %s</string>
-  <string name="listCustomView">Kontakter i tilpasset visning</string>
-  <string name="listSingleContact">Enkelt kontaktperson</string>
   <string name="display_options_sort_list_by">Sortér efter</string>
   <string name="display_options_sort_by_given_name">Fornavn</string>
   <string name="display_options_sort_by_family_name">Efternavn</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Ryd søgning</string>
   <string name="select_account_dialog_title">Konto</string>
   <string name="set_default_account">Brug altid ved opkald</string>
-  <string name="select_phone_account_for_calls">Vælg SIM-kort til dette opkald</string>
-  <string name="select_phone_account_for_calls_remember">Husk dette valg</string>
   <string name="call_with_a_note">Ring med en note</string>
   <string name="call_subject_hint">Angiv en note, som skal sendes ved opkald...</string>
   <string name="send_and_call_button">SEND OG RING</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Fanen %1$s. %2$d ulæste elementer. </item>
   </plurals>
   <string name="description_search_video_call">Videoopkald</string>
-  <string name="description_search_call_and_share">Del og ring</string>
 </resources>

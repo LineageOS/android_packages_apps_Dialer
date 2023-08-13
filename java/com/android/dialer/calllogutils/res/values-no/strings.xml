@@ -34,27 +34,7 @@
   <string name="voicemail_string">Talepost</string>
   <string name="just_now">Nå nettopp</string>
   <string name="new_call_log_carrier_video">Video via mobiloperatør</string>
-  <string name="new_call_log_duo_video">Video via Duo</string>
   <string name="new_call_log_unknown">Ukjent</string>
   <string name="new_call_log_secondary_blocked">Blokkert</string>
   <string name="new_call_log_secondary_spam">Nettsøppel</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 tapt anrop fra ^2</item>
-    <item quantity="other">^1 anrop, det nyeste er et tapt anrop fra ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 besvart anrop fra ^2</item>
-    <item quantity="other">^1 anrop, det nyeste er et besvart anrop fra ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 utgående anrop til ^2</item>
-    <item quantity="other">^1 anrop, det nyeste er et utgående anrop til ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 blokkert anrop fra ^2</item>
-    <item quantity="other">^1 anrop, det nyeste er et blokkert anrop fra ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">på ^1 via ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

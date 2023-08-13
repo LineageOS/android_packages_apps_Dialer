@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Bústia de veu (%s)</string>
   <string name="voicemail_settings_title">Bústia de veu</string>
   <string name="voicemail_notifications_preference_title">Notificacions</string>
   <string name="voicemail_change_greeting_preference_title">Salutació de la bústia de veu</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Canvia el PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">La bústia de veu visual ha d\'estar activada per poder canviar el PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">La bústia de veu visual encara no està activada; torna-ho a provar més tard</string>
-  <string name="vm_change_pin_old_pin">PIN antic</string>
-  <string name="vm_change_pin_new_pin">PIN nou</string>
   <string name="vm_change_pin_progress_message">Un moment.</string>
   <string name="vm_change_pin_error_too_short">El PIN nou és massa curt.</string>
   <string name="vm_change_pin_error_too_long">El PIN nou és massa llarg.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Els PIN no coincideixen</string>
   <string name="change_pin_succeeded">S\'ha actualitzat el PIN de la bústia de veu</string>
   <string name="change_pin_system_error">No s\'ha pogut definir el PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transcripció de missatges de veu</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Anàlisi de transcripció (missatges de veu)</string>
   <string name="voicemail_activating_summary_info">S\'està activant la bústia de veu</string>
-  <string name="voicemail_transcription_preference_summary_info">Obtén transcripcions dels missatges de veu utilitzant el servei de transcripció de Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Permet que Google accedeixi als missatges de la teva bústia de veu per millorar la precisió de les transcripcions. Aquests missatges s\'emmagatzemen de manera anònima. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Desactiva la bústia de veu visual</string>
   <string name="confirm_disable_voicemail_dialog_message">Se suprimiran els missatges de veu i les transcripcions de Google desats en aquesta aplicació. És possible que l\'operador de telefonia mòbil en conservi còpies.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">DESACTIVA</string>

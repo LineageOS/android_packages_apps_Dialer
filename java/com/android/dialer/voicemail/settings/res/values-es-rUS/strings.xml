@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Buzón de voz (%s)</string>
   <string name="voicemail_settings_title">Buzón de voz</string>
   <string name="voicemail_notifications_preference_title">Notificaciones</string>
   <string name="voicemail_change_greeting_preference_title">Saludo del buzón de voz</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Cambiar PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">El buzón de voz visual debe estar habilitado para cambiar el PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">El buzón de voz visual aún no está activado. Vuelve a intentarlo más tarde.</string>
-  <string name="vm_change_pin_old_pin">PIN anterior</string>
-  <string name="vm_change_pin_new_pin">PIN nuevo</string>
   <string name="vm_change_pin_progress_message">Espera un momento.</string>
   <string name="vm_change_pin_error_too_short">El PIN nuevo es demasiado corto.</string>
   <string name="vm_change_pin_error_too_long">El PIN nuevo es demasiado largo.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Los PIN no coinciden</string>
   <string name="change_pin_succeeded">Se actualizó el PIN del buzón de voz</string>
   <string name="change_pin_system_error">No se puede establecer el PIN</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transcripción del buzón de voz</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Análisis de transcr. del buzón de voz</string>
   <string name="voicemail_activating_summary_info">Activando el buzón de voz</string>
-  <string name="voicemail_transcription_preference_summary_info">Recibir las transcripciones de tu buzón de voz por medio del servicio de transcripciones de Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Permitir que Google acceda a los mensajes de tu buzón de voz para mejorar la calidad de las transcripciones. Estos mensajes se almacenan de forma anónima. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Desactivar el buzón de voz visual</string>
   <string name="confirm_disable_voicemail_dialog_message">Esta acción borrará todas las transcripciones de Google y los correos de voz almacenados en esta app. Es posible que tu proveedor conserve sus propias copias.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">DESACTIVAR</string>

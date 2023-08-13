@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Tas ir steidzami. Piezvaniet man!</string>
   <string name="post_call_message_2">Piezvaniet man, kad būs brīdis laika.</string>
   <string name="post_call_message_3">Tas nav steidzami. Varam parunāt vēlāk.</string>
-  <string name="post_call_add_message">Pievienojiet ziņojumu</string>
-  <string name="post_call_send_message">Sūtīt ziņojumu</string>
+    <string name="post_call_send_message">Sūtīt ziņojumu</string>
   <string name="post_call_message_sent">Ziņojums nosūtīts</string>
   <string name="view">Skatīt</string>
 </resources>

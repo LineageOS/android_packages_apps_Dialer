@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Padam bersih senarai kerap dihubungi?</string>
   <string name="clearFrequentsConfirmation">Anda akan mengosongkan senarai yang kerap dihubungi dalam apl Kenalan dan Telefon serta memaksa apl e-mel untuk mempelajari pilihan alamat anda dari awal.</string>
   <string name="clearFrequentsProgress_title">Memadam bersih senarai kerap dihubungi...</string>
-  <string name="status_available">Ada</string>
-  <string name="status_away">Tiada</string>
-  <string name="status_busy">Sibuk</string>
-  <string name="contactsList">Kenalan</string>
-  <string name="contact_suggestions">Teratas Dicadangkan</string>
-  <string name="local_invisible_directory">Lain-lain</string>
   <string name="directory_search_label">Direktori</string>
   <string name="directory_search_label_work">Direktori kerja</string>
-  <string name="local_search_label">Semua kenalan</string>
-  <string name="local_suggestions_search_label">Cadangan</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Saya</string>
   <string name="missing_name">(Tiada nama)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Lihat kenalan</string>
-  <string name="list_filter_phones">Semua kenalan dengan nombor telefon</string>
-  <string name="list_filter_phones_work">Kenalan profil kerja</string>
   <string name="view_updates_from_group">Lihat kemas kini</string>
   <string name="account_phone">Peranti sahaja, tidak disegerakkan</string>
   <string name="nameLabelsGroup">Nama</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Sembang menggunakan ICQ</string>
   <string name="chat_jabber">Sembang menggunakan Jabber</string>
   <string name="chat">Sembang</string>
-  <string name="list_filter_all_accounts">Semua kenalan</string>
-  <string name="listAllContactsInAccount">Kenalan dalam %s</string>
-  <string name="listCustomView">Kenalan dalam paparan tersuai</string>
-  <string name="listSingleContact">Kenalan tunggal</string>
   <string name="display_options_sort_list_by">Isih mengikut</string>
   <string name="display_options_sort_by_given_name">Nama pertama</string>
   <string name="display_options_sort_by_family_name">Nama keluarga</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Kosongkan carian</string>
   <string name="select_account_dialog_title">Akaun</string>
   <string name="set_default_account">Sentiasa gunakan ini untuk panggilan</string>
-  <string name="select_phone_account_for_calls">Pilih SIM untuk panggilan ini</string>
-  <string name="select_phone_account_for_calls_remember">Ingat pilihan ini</string>
   <string name="call_with_a_note">Panggilan dengan nota</string>
   <string name="call_subject_hint">Taip nota untuk dihantar dengan panggilan…</string>
   <string name="send_and_call_button">HANTAR &amp; PANGGIL</string>
@@ -141,5 +123,4 @@
     <item quantity="other">Tab %1$s. %2$d item belum dibaca. </item>
   </plurals>
   <string name="description_search_video_call">Panggilan video</string>
-  <string name="description_search_call_and_share">Kongsi dan panggil</string>
 </resources>

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">解除封鎖</string>
   <string name="block_report_number_alert_title">要封鎖 %1$s 嗎？</string>
   <string name="block_report_number_alert_details">你不會再收到這組號碼的來電。</string>
-  <string name="block_number_alert_details">%1$s系統會將本次來電回報為騷擾/廣告電話。</string>
   <string name="unblock_number_alert_details">系統會解除封鎖這組號碼並回報為非騷擾/廣告電話，該號碼日後的來電不會歸類為騷擾/廣告電話。</string>
   <string name="unblock_report_number_alert_title">要解除封鎖 %1$s 嗎？</string>
   <string name="report_not_spam_alert_button">回報</string>

@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Shikilia</string>
   <string name="incall_label_add_call">Ongeza simu</string>
   <string name="incall_label_mute">Zima maikrofoni</string>
-  <string name="incall_label_end_call">Kata simu</string>
   <string name="incall_label_dialpad">Vitufe vya Simu</string>
   <string name="incall_talkback_speaker_on">, kimewashwa</string>
   <string name="incall_talkback_speaker_off">, kimezimwa</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Telefoni klaviatuur</string>
   <string name="callHistoryIconLabel">Kõneajalugu</string>
   <string name="action_copy_number_text">Kopeeri number</string>
   <string name="action_edit_number_before_call">Muuda enne helistamist numbrit</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Rohkem valikuid</string>
   <string name="action_menu_dialpad_button">klaviatuur</string>
   <string name="dialer_settings_label">Seaded</string>
-  <string name="simulator_submenu_label">Simulaator</string>
-  <string name="new_ui_launcher_shortcut_label">Loo uue kasutajaliid. otsetee</string>
   <string name="description_entering_bulk_action_mode">Sisenemine hulgitoimingute režiimi</string>
   <string name="description_leaving_bulk_action_mode">Lahkumine hulgitoimingute režiimist</string>
   <string name="description_selecting_bulk_action_mode">%1$s on valitud</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Videokõne.</string>
   <string name="description_start_voice_search">Häälotsingu alustamine</string>
   <string name="voicemail">Kõnepost</string>
-  <string name="description_cancel_multi_select">Mitme toimigu režiimi tühistamine</string>
   <string name="voicemailMultiSelectDeleteConfirm">Kustuta</string>
   <string name="voicemailMultiSelectDeleteCancel">Tühista</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s on valitud</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Häälotsing ei ole saadaval</string>
   <string name="dialer_hint_find_contact">Otsige kontakte</string>
-  <string name="block_number_search_hint">Lisage nr või otsige kontakte</string>
   <string name="call_log_all_empty">Teie kõneajalugu on tühi</string>
   <string name="call_log_all_empty_action">Helista</string>
   <string name="call_log_missed_empty">Vastamata kõnesid pole.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Kõneajalugu</string>
   <string name="call_log_all_title">Kõik</string>
   <string name="call_log_missed_title">Vastamata</string>
-  <string name="tab_speed_dial">Kiirvalimine</string>
-  <string name="tab_history">Kõneajalugu</string>
   <string name="tab_all_contacts">Kontaktid</string>
-  <string name="tab_voicemail">Kõnepost</string>
-  <string name="search_shortcut_call_number">Helista: %s</string>
   <string name="search_shortcut_create_new_contact">Loo uus kontakt</string>
   <string name="search_shortcut_add_to_contact">Lisa kontaktile</string>
   <string name="search_shortcut_send_sms_message">Saada SMS</string>
   <string name="search_shortcut_make_video_call">Videokõne tegemine</string>
-  <string name="search_shortcut_block_number">Blokeeri number</string>
-  <string name="speed_dial_empty">Te pole veel kedagi kiirvalimisse lisanud</string>
-  <string name="speed_dial_empty_add_favorite_action">Lisa lemmik</string>
-  <string name="remove_contact">Eemalda</string>
   <string name="select_all">Vali kõik</string>
   <string name="call_log_action_video_call">Videokõne</string>
-  <string name="call_log_action_set_up_video">Videokõne seadistamine</string>
-  <string name="call_log_action_invite_video">Videokõnesse kutsumine</string>
   <string name="call_log_action_send_message">Saada sõnum</string>
   <string name="call_log_action_details">Kõne üksikasjad</string>
   <string name="call_log_action_share_voicemail">Saada: …</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Kõned</string>
   <string name="manage_blocked_numbers_label">Blokeeritud numbrid</string>
   <string name="voicemail_settings_label">Kõnepost</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Kõnede blokeerimine on ajutiselt väljas</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Kõnede blokeerimine on keelatud, kuna võtsite sellelt telefonilt viimase 48 tunni jooksul ühendust hädaabiteenustega. See lubatakse 48 tunni möödumisel automaatselt uuesti.</string>
-  <string name="import_send_to_voicemail_numbers_label">Impordi numbrid</string>
-  <string name="blocked_call_settings_import_description">Märkisite varem, et osad helistajad saadetaks muude rakenduste kaudu automaatselt kõneposti.</string>
-  <string name="blocked_call_settings_view_numbers_button">Vaata numbreid</string>
-  <string name="blocked_call_settings_import_button">Impordi</string>
-  <string name="description_blocked_number_list_delete">Numbri deblokeerimine</string>
-  <string name="addBlockedNumber">Lisa number</string>
-  <string name="block_number_footer_message_vvm">Kõned nendelt numbritelt blokeeritakse ja kõnepostisõnumid kustutatakse automaatselt.</string>
-  <string name="block_number_footer_message_no_vvm">Kõned nendelt numbritelt blokeeritakse, kuid helistajad saavad võib-olla siiski teile kõnepostisõnumeid jätta.</string>
-  <string name="block_list">Blokeeritud numbrid</string>
-  <string name="alreadyBlocked">%1$s on juba blokeeritud.</string>
   <string name="phone_account_settings_label">Helistamiskontod</string>
-  <string name="permission_no_speeddial">Kiirvalimise lubamiseks lülitage sisse kontaktiluba.</string>
   <string name="permission_no_calllog">Kõnelogi vaatamiseks lülitage sisse telefoniluba.</string>
-  <string name="permission_no_search">Kontaktide otsimiseks lülitage sisse kontaktiload.</string>
-  <string name="permission_place_call">Helistamiseks lülitage sisse telefoniluba.</string>
   <string name="toast_cannot_write_system_settings">Telefonirakendusel pole luba süsteemiseadetesse kirjutada.</string>
   <string name="blocked_number_call_log_label">Blokeeritud</string>
   <string name="call_log_action_block_report_number">Blokeeri / teavita rämpssisust</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Pole rämpssisu</string>
   <string name="call_log_action_unblock_number">Numbri deblokeerimine</string>
   <string name="spam_number_call_log_label">Rämpspost</string>
-  <string name="call_composer_connection_failed">%1$s ei ole võrgus ja temaga ei saa ühendust</string>
-  <string name="about_phone_label">Teave</string>
-  <string name="voicemail_transcription_branding_text">Google\'i transkribeeritud</string>
-  <string name="voicemail_transcription_in_progress">Transkribeerimine …</string>
-  <string name="voicemail_transcription_failed">Transkribeerimine pole saadaval.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkribeerimine pole saadaval. Keelt ei toetata.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkribeerimine pole saadaval. Kõnet ei tuvastatud.</string>
-  <string name="voicemail_donation_promo_title">Kas soovite aidata parandada transkriptsiooni täpsust?</string>
-  <string name="voicemail_donation_promo_content">Lubage Google\'il see ja tulevased kõnepostisõnumid transkriptsioonidega üle vaadata. Need salvestatakse anonüümselt. Seadeid saab alati muuta. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Jah, sobib</string>
-  <string name="voicemail_donation_promo_opt_out">Tänan, ei</string>
-  <string name="voicemail_transcription_rating">Hinnake transkript. kvaliteeti</string>
-  <string name="voicemail_transcription_rating_thanks">Suur tänu tagasiside eest</string>
-  <string name="description_rating_good">Meeldib</string>
-  <string name="description_rating_bad">Ei meeldi</string>
-  <string name="view_conversation">Kuva</string>
-  <string name="ec_data_deleted">Kõne kustutati. Selle kõne ajal jagatud manuseid saate vaadata ja kustutada rakenduses Messages.</string>
-  <string name="multiple_ec_data_deleted">Kõned kustutati. Nende kõnede ajal jagatud manuseid saate vaadata ja kustutada rakenduses Messages.</string>
 </resources>

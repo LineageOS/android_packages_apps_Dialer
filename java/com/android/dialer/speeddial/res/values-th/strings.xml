@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">เลือกประเภทการโทร</string>
   <string name="disambig_option_video_call">วิดีโอคอล</string>
   <string name="disambig_option_voice_call">โทร</string>
-  <string name="add_favorite_activity_title">เพิ่มรายการโปรด</string>
   <string name="contact_menu_voice_call">การโทรด้วยเสียง</string>
   <string name="contact_menu_video_call">วิดีโอคอล</string>
   <string name="contact_menu_message">ข้อความ</string>

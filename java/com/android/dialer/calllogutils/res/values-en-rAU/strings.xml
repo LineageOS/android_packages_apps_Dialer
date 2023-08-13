@@ -34,28 +34,7 @@
   <string name="voicemail_string">Voicemail</string>
   <string name="just_now">Just now</string>
   <string name="new_call_log_carrier_video">Operator video</string>
-  <string name="new_call_log_duo_video">Duo video</string>
   <string name="new_call_log_unknown">Unknown</string>
   <string name="new_call_log_secondary_blocked">Blocked</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 missed call from ^2</item>
-    <item quantity="other">^1 calls, the latest of which is a missed call from ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 answered call from ^2</item>
-    <item quantity="other">^1 calls, the latest of which is an answered call from ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 outgoing call to ^2</item>
-    <item quantity="other">^1 calls, the latest of which is an outgoing call to ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 blocked call from ^2</item>
-    <item quantity="other">^1 calls, the latest of which is a blocked call from ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">on ^1,
-    via ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

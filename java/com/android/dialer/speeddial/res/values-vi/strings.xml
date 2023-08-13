@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Chọn loại cuộc gọi</string>
   <string name="disambig_option_video_call">Gọi điện video</string>
   <string name="disambig_option_voice_call">Gọi</string>
-  <string name="add_favorite_activity_title">Thêm liên hệ yêu thích</string>
   <string name="contact_menu_voice_call">Cuộc gọi thoại</string>
   <string name="contact_menu_video_call">Gọi điện video</string>
   <string name="contact_menu_message">Tin nhắn</string>

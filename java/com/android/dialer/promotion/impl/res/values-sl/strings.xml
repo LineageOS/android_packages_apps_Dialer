@@ -4,6 +4,4 @@
   <string name="rtt_promotion_details">Funkcija RTT pomaga klicateljem, ki so gluhi, naglušni, imajo govorno
     motnjo ali potrebujejo več kot samo glas. Prepisi sporočil RTT so shranjeni v vaši napravi
     v zgodovini klicev. %1$s</string>
-  <string name="duo_disclosure_title">Opravljajte videoklice prek Dua</string>
-  <string name="duo_disclosure_details">Videoklici prek Googla Duo omogočajo, da s prijatelji in družinskimi člani klepetate iz oči v oči. Morda boste morali plačati stroške prenosa podatkov. %1$s</string>
 </resources>

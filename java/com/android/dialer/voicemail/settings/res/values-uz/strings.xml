@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Ovozli pochta (%s)</string>
   <string name="voicemail_settings_title">Ovozli pochta</string>
   <string name="voicemail_notifications_preference_title">Bildirishnomalar</string>
   <string name="voicemail_change_greeting_preference_title">Ovozli pochta salomlashuvi</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN kodni o‘zgartirish</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN kodni o‘zgartirish uchun vizual ovozli pochtani yoqing.</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Vizual ovozli pochta hali yoqilmadi. Keyinroq qayta urining.</string>
-  <string name="vm_change_pin_old_pin">Eski PIN kod</string>
-  <string name="vm_change_pin_new_pin">Yangi PIN kod</string>
   <string name="vm_change_pin_progress_message">Iltimos, kuting…</string>
   <string name="vm_change_pin_error_too_short">Yangi PIN kod juda qisqa.</string>
   <string name="vm_change_pin_error_too_long">Yangi PIN kod juda uzun.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN kodlar bir-biriga mos kelmayapti.</string>
   <string name="change_pin_succeeded">Ovozli pochta PIN kodi yangilandi.</string>
   <string name="change_pin_system_error">PIN kodni o‘rnatib bo‘lmadi.</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Ovozli xabarlar transkripsiyasi</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Ovozli xabarlar transkripsiyasi tahlili</string>
   <string name="voicemail_activating_summary_info">Ovozli pochta yoqilmoqda</string>
-  <string name="voicemail_transcription_preference_summary_info">Ovozli xabarlarni maxsus Google xizmati yordamida transkripsiya qilishga ruxsat berilsin. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Transkripsiya sifatini yaxshilash maqsadida Googlega ovozli xabarlaringizni tekshirishiga ruxsat bering. Ovozli xabarlar anonim saqlanadi.%1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Vizual ovozli pochtani o‘chirib qo‘yish</string>
   <string name="confirm_disable_voicemail_dialog_message">Shu ilovada saqlanayotgan barcha ovozli xabarlar va Google transkripsiyalari o‘chirib tashlanadi. Operatoringiz ularning nusxalarini saqlab qolishi mumkin.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">O‘CHIRIB QO‘YISH</string>

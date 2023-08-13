@@ -5,7 +5,6 @@
   <string name="incall_label_hold">המתנה</string>
   <string name="incall_label_add_call">הוסף שיחה</string>
   <string name="incall_label_mute">השתק</string>
-  <string name="incall_label_end_call">סיום השיחה</string>
   <string name="incall_label_dialpad">לוח חיוג</string>
   <string name="incall_talkback_speaker_on">, מופעל</string>
   <string name="incall_talkback_speaker_off">, מושבת</string>

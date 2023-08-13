@@ -3,7 +3,6 @@
   <string name="unknown_counter">%1$s %2$d</string>
   <string name="payphone">Τηλέφωνο με χρέωση</string>
   <string name="emergency_number">Αριθμός έκτακτης ανάγκης</string>
-  <string name="launcherActivityLabel">Τηλέφωνο</string>
   <string name="call">Κλήση</string>
   <string name="video_call_lte_to_wifi_handover_toast">Συνέχιση κλήσης μέσω Wi‑Fi…</string>
   <string name="rtt_call_not_available_toast">Το RTT δεν είναι διαθέσιμο για αυτήν την κλήση</string>

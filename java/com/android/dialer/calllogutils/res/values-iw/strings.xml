@@ -38,36 +38,7 @@
   <string name="voicemail_string">דואר קולי</string>
   <string name="just_now">הרגע</string>
   <string name="new_call_log_carrier_video">שיחות וידאו דרך הספק הסלולרי</string>
-  <string name="new_call_log_duo_video">‏שיחות וידאו דרך Duo</string>
   <string name="new_call_log_unknown">לא ידוע</string>
   <string name="new_call_log_secondary_blocked">חסום</string>
   <string name="new_call_log_secondary_spam">ספאם</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">שיחה אחת (^1) לא נענתה. מקור השיחה: ^2</item>
-    <item quantity="two">^1 שיחות. השיחה האחרונה לא נענתה. מקור השיחה: ^2</item>
-    <item quantity="many">^1 שיחות. השיחה האחרונה לא נענתה. מקור השיחה: ^2</item>
-    <item quantity="other">^1 שיחות. השיחה האחרונה לא נענתה. מקור השיחה: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">שיחה אחת (^1) נענתה. מקור השיחה: ^2</item>
-    <item quantity="two">^1 שיחות. השיחה האחרונה נענתה. מקור השיחה: ^2</item>
-    <item quantity="many">^1 שיחות. השיחה האחרונה נענתה. מקור השיחה: ^2</item>
-    <item quantity="other">^1 שיחות. השיחה האחרונה נענתה. מקור השיחה: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">שיחה יוצאת אחת (^1). יעד השיחה: ^2</item>
-    <item quantity="two">^1 שיחות. השיחה האחרונה הייתה שיחה יוצאת. יעד השיחה: ^2</item>
-    <item quantity="many">^1 שיחות. השיחה האחרונה הייתה שיחה יוצאת. יעד השיחה: ^2</item>
-    <item quantity="other">^1 שיחות. השיחה האחרונה הייתה שיחה יוצאת. יעד השיחה: ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">שיחה אחת (^1) נחסמה. מקור השיחה: ^2</item>
-    <item quantity="two">^1 שיחות. השיחה האחרונה נחסמה. מקור השיחה: ^2</item>
-    <item quantity="many">^1 שיחות. השיחה האחרונה נחסמה. מקור השיחה: ^2</item>
-    <item quantity="other">^1 שיחות. השיחה האחרונה נחסמה. מקור השיחה: ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">בחשבון ^1,
-    דרך ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

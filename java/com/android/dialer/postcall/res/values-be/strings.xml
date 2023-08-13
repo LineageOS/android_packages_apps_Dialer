@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Гэта тэрмінова. Перазваніце мне.</string>
   <string name="post_call_message_2">Перазваніце мне, калі будзеце мець час.</string>
   <string name="post_call_message_3">Не тэрмінова. Можам пагаварыць пазней.</string>
-  <string name="post_call_add_message">Дадаць паведамленне</string>
-  <string name="post_call_send_message">Адправіць паведамленне</string>
+    <string name="post_call_send_message">Адправіць паведамленне</string>
   <string name="post_call_message_sent">Паведамленне адпраўлена</string>
   <string name="view">Праглядзець</string>
 </resources>

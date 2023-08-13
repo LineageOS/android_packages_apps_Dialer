@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Изберете тип повик</string>
   <string name="disambig_option_video_call">Видеоповик</string>
   <string name="disambig_option_voice_call">Повикај</string>
-  <string name="add_favorite_activity_title">Додавање во омилени</string>
   <string name="contact_menu_voice_call">Гласовен повик</string>
   <string name="contact_menu_video_call">Видеоповик</string>
   <string name="contact_menu_message">Порака</string>

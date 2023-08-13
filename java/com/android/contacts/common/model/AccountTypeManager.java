@@ -40,7 +40,6 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.TimingLogger;
 import com.android.contacts.common.MoreContactUtils;
 import com.android.contacts.common.list.ContactListFilterController;
 import com.android.contacts.common.model.account.AccountType;
@@ -386,7 +385,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
     if (Log.isLoggable(Constants.PERFORMANCE_TAG, Log.DEBUG)) {
       Log.d(Constants.PERFORMANCE_TAG, "AccountTypeManager.loadAccountsInBackground start");
     }
-    TimingLogger timings = new TimingLogger(TAG, "loadAccountsInBackground");
     final long startTime = SystemClock.currentThreadTimeMillis();
     final long startTimeWall = SystemClock.elapsedRealtime();
 
@@ -434,7 +432,7 @@ class AccountTypeManagerImpl extends AccountTypeManager
       } else {
         Log.d(
             TAG, "Registering external account type=" + type + ", packageName=" + auth.packageName);
-        accountType = new ExternalAccountType(mContext, auth.packageName, false);
+        accountType = new ExternalAccountType(mContext, auth.packageName);
       }
       if (!accountType.isInitialized()) {
         if (accountType.isEmbedded()) {
@@ -461,7 +459,7 @@ class AccountTypeManagerImpl extends AccountTypeManager
     if (!extensionPackages.isEmpty()) {
       Log.d(TAG, "Registering " + extensionPackages.size() + " extension packages");
       for (String extensionPackage : extensionPackages) {
-        ExternalAccountType accountType = new ExternalAccountType(mContext, extensionPackage, true);
+        ExternalAccountType accountType = new ExternalAccountType(mContext, extensionPackage);
         if (!accountType.isInitialized()) {
           // Skip external account types that couldn't be initialized.
           continue;
@@ -497,7 +495,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
         addAccountType(accountType, accountTypesByTypeAndDataSet, accountTypesByType);
       }
     }
-    timings.addSplit("Loaded account types");
 
     // Map in accounts to associate the account names with each account type entry.
     Account[] accounts = mAccountManager.getAccounts();
@@ -528,8 +525,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
     Collections.sort(contactWritableAccounts, ACCOUNT_COMPARATOR);
     Collections.sort(groupWritableAccounts, ACCOUNT_COMPARATOR);
 
-    timings.addSplit("Loaded accounts");
-
     synchronized (this) {
       mAccountTypesWithDataSets = accountTypesByTypeAndDataSet;
       mAccounts = allAccounts;
@@ -539,7 +534,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
           findAllInvitableAccountTypes(mContext, allAccounts, accountTypesByTypeAndDataSet);
     }
 
-    timings.dumpToLog();
     final long endTimeWall = SystemClock.elapsedRealtime();
     final long endTime = SystemClock.currentThreadTimeMillis();
 

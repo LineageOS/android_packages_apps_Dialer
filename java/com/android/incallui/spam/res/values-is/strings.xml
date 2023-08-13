@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Ýttu til að bæta í tengiliði eða setja á bannlista.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Þetta er í fyrsta sinn sem hringt er í þig úr þessu númeri. Ef þetta símtal var úr ruslnúmeri geturðu sett það á bannlista og tilkynnt það.</string>
   <string name="spam_notification_spam_call_collapsed_text">Ýttu til að tilkynna að þetta sé ekki ruslnúmer eða til að setja það á bannlista</string>
-  <string name="spam_notification_report_spam_action_text">Banna og tilkynna</string>
-  <string name="spam_notification_add_contact_action_text">Bæta tengilið við</string>
   <string name="spam_notification_dialog_add_contact_action_text">Bæta við tengiliði</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Banna og tilkynna sem ruslnúmer</string>
   <string name="spam_notification_was_not_spam_action_text">Nei, ekki ruslnúmer</string>

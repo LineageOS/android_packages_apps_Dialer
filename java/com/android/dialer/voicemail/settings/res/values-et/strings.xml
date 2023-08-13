@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Kõnepost (%s)</string>
   <string name="voicemail_settings_title">Kõnepost</string>
   <string name="voicemail_notifications_preference_title">Märguanded</string>
   <string name="voicemail_change_greeting_preference_title">Kõneposti tervitus</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN-koodi muutmine</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN-koodi muutmiseks peab olema lubatud visuaalne kõnepost</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Visuaalne kõnepost pole veel aktiveeritud, proovige hiljem uuesti</string>
-  <string name="vm_change_pin_old_pin">Vana PIN-kood</string>
-  <string name="vm_change_pin_new_pin">Uus PIN-kood</string>
   <string name="vm_change_pin_progress_message">Oodake.</string>
   <string name="vm_change_pin_error_too_short">Uus PIN-kood on liiga lühike.</string>
   <string name="vm_change_pin_error_too_long">Uus PIN-kood on liiga pikk.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN-koodid ei ühti</string>
   <string name="change_pin_succeeded">Kõneposti PIN-koodi värskendati</string>
   <string name="change_pin_system_error">PIN-koodi ei saa määrata</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Kõnepostisõnumite transkribeerimine</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Kõnepostisõn. transkribeerimise analüüs</string>
   <string name="voicemail_activating_summary_info">Kõneposti aktiveerimine</string>
-  <string name="voicemail_transcription_preference_summary_info">Hankige oma kõnepostisõnumite transkriptsioonid, kasutades Google\'i transkribeerimisteenust. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Lubage Google\'il transkribeerimise täpsuse parandamiseks oma kõnepostisõnumid üle vaadata. Teie kõnepostisõnumid salvestatakse anonüümselt. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Visuaalse kõneposti väljalülitamine</string>
   <string name="confirm_disable_voicemail_dialog_message">See kustutab kõik selles rakenduses salvestatud kõnepostisõnumid ja Google\'i transkriptsioonid. Teie operaator võib säilitada oma koopiad.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">LÜLITA VÄLJA</string>

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">TAKA AF BANNLISTA</string>
   <string name="block_report_number_alert_title">Setja %1$s á bannlista?</string>
   <string name="block_report_number_alert_details">Þú munt ekki lengur fá símtöl úr þessu númeri.</string>
-  <string name="block_number_alert_details">%1$s Þetta símtal verður tilkynnt sem úr ruslnúmeri.</string>
   <string name="unblock_number_alert_details">Þetta númer verður tekið af bannlista og ekki tilkynnt sem ruslnúmer. Ekki er lokað á símtöl.</string>
   <string name="unblock_report_number_alert_title">Taka %1$s af bannlista?</string>
   <string name="report_not_spam_alert_button">Tilkynna</string>

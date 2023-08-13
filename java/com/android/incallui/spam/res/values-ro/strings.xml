@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Atingeți pentru a adăuga numărul în agendă sau pentru a-l raporta ca spam și a-l bloca.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Aceasta este prima dată când ați primit apel de la acest număr. Dacă apelul a fost spam, puteți să blocați numărul și să îl raportați.</string>
   <string name="spam_notification_spam_call_collapsed_text">Atingeți pentru a raporta ca nu este spam sau blocați-l.</string>
-  <string name="spam_notification_report_spam_action_text">Blocați și raportați</string>
-  <string name="spam_notification_add_contact_action_text">Adăugați o persoană</string>
   <string name="spam_notification_dialog_add_contact_action_text">Adăugați în agendă</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blocați și raportați spam</string>
   <string name="spam_notification_was_not_spam_action_text">Nu, nu este spam</string>

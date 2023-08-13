@@ -7,7 +7,6 @@
   <string name="speed_dial_disambig_dialog_title">Επιλέξτε τύπο κλήσης</string>
   <string name="disambig_option_video_call">Βιντεοκλήση</string>
   <string name="disambig_option_voice_call">Κλήση</string>
-  <string name="add_favorite_activity_title">Προσθήκη Αγαπημένου</string>
   <string name="contact_menu_voice_call">Φωνητική κλήση</string>
   <string name="contact_menu_video_call">Βιντεοκλήση</string>
   <string name="contact_menu_message">Μήνυμα</string>

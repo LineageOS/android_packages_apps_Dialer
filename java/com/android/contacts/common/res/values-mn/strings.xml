@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Байнга холбоо барьдаг харилцагчдын жагсаалтыг устгах уу?</string>
   <string name="clearFrequentsConfirmation">Та холбоо барих хэсэг болон утасны програмд байгаа тогтмол холбоо баридаг хаягуудыг устгах ба имэйл програмуудыг таны холбоо барих хаягуудыг эрэмбэлэх үйлдлийг идэвхжүүлэх болно.</string>
   <string name="clearFrequentsProgress_title">Байнга холбоо барьдаг харилцагчдын жагсаалтыг устгаж байна…</string>
-  <string name="status_available">Холбогдсон</string>
-  <string name="status_away">Холдсон</string>
-  <string name="status_busy">Завгүй</string>
-  <string name="contactsList">Харилцагчид</string>
-  <string name="contact_suggestions">Санал болгосон шилдэг</string>
-  <string name="local_invisible_directory">Бусад</string>
   <string name="directory_search_label">Директор</string>
   <string name="directory_search_label_work">Ажлын лавлагаа</string>
-  <string name="local_search_label">Бүх харилцагчид</string>
-  <string name="local_suggestions_search_label">Санал болголт</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Би</string>
   <string name="missing_name">(нэр байхгүй)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Харилцагчийг харах</string>
-  <string name="list_filter_phones">Утасны дугаартай бүх харилцагчид</string>
-  <string name="list_filter_phones_work">Ажлын профайлын харилцагч</string>
   <string name="view_updates_from_group">Шинэчлэлтүүдийг харах</string>
   <string name="account_phone">Зөвхөн төхөөрөмжид, синк хийгээгүй</string>
   <string name="nameLabelsGroup">Нэр</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ ашиглан чатлах</string>
   <string name="chat_jabber">Jabber ашиглан чатлах</string>
   <string name="chat">Чат</string>
-  <string name="list_filter_all_accounts">Бүх харилцагч</string>
-  <string name="listAllContactsInAccount">%s доторх харилцагчид</string>
-  <string name="listCustomView">Хувийн тохиргоотой харагдац дахь харилцагчид</string>
-  <string name="listSingleContact">Ганц харилцагч</string>
   <string name="display_options_sort_list_by">Эрэмбэлэх</string>
   <string name="display_options_sort_by_given_name">Өөрийн нэр</string>
   <string name="display_options_sort_by_family_name">Овог</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Хайлтыг цэвэрлэх</string>
   <string name="select_account_dialog_title">Бүртгэл</string>
   <string name="set_default_account">Дуудлагад байнга үүнийг ашиглах</string>
-  <string name="select_phone_account_for_calls">Энэ дуудлагд ашиглах SIM сонгоно уу</string>
-  <string name="select_phone_account_for_calls_remember">Энэ сонголтыг санах</string>
   <string name="call_with_a_note">Тэмдэглэл бүхий дуудлага хийх</string>
   <string name="call_subject_hint">Дуудлаганд илгээх тэмдэглэл бичнэ үү...</string>
   <string name="send_and_call_button">ИЛГЭЭХ, ДУУДЛАГА</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s таб. %2$d уншаагүй зүйл. </item>
   </plurals>
   <string name="description_search_video_call">Видео дуудлага</string>
-  <string name="description_search_call_and_share">Хуваалцаад залгах</string>
 </resources>

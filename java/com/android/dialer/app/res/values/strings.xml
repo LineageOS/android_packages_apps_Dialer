@@ -23,7 +23,6 @@
   <string name="applicationLabel" tools:ignore="UnusedResources">Phone</string>
 
   <!-- Title for the activity that dials the phone, when launched directly into the dialpad -->
-  <string name="launcherDialpadActivityLabel">Phone Keypad</string>
 
   <!-- The description text for the call log tab.
 
@@ -154,13 +153,6 @@
   <!-- Label for the dialer app setting page [CHAR LIMIT=30]-->
   <string name="dialer_settings_label">Settings</string>
 
-  <!-- Label for the simulator submenu. This is used to show actions that are useful for development
-       and testing. [CHAR LIMIT=30]-->
-  <string name="simulator_submenu_label">Simulator</string>
-
-  <!-- Label for the menu item that installs a shortcut for the new UI. [CHAR LIMIT=30] -->
-  <string name="new_ui_launcher_shortcut_label">Create New UI Shortcut</string>
-
   <!-- String describing the user entering bulk action mode.
 
     Note: AccessibilityServices use this attribute to announce what the view represents.
@@ -225,11 +217,6 @@
   <!-- String used for displaying calls to the voicemail number in the call log -->
   <string name="voicemail">Voicemail</string>
 
-  <!-- String describing the cancel button in multi select.
-       Note: AccessibilityServices uses this attribute to announce what the view represents.
-       [CHAR LIMIT=NONE] -->
-  <string name="description_cancel_multi_select">Cancel batch actions mode</string>
-
   <string name="voicemailMultiSelectDeleteConfirm">Delete</string>
   <string name="voicemailMultiSelectDeleteCancel">Cancel</string>
 
@@ -263,10 +250,6 @@
        [CHAR LIMIT=30] -->
   <string name="dialer_hint_find_contact">Search contacts</string>
 
-  <!-- Hint displayed in add blocked number search box when there is no query typed.
-       [CHAR LIMIT=45] -->
-  <string name="block_number_search_hint">Add number or search contacts</string>
-
   <!-- Text displayed when the call log is empty. -->
   <string name="call_log_all_empty">Your call history is empty</string>
 
@@ -290,23 +273,8 @@
        [CHAR LIMIT=30] -->
   <string name="call_log_missed_title">Missed</string>
 
-  <!-- Accessibility text for the tab showing recent and favorite contacts who can be called.
-       [CHAR LIMIT=40] -->
-  <string name="tab_speed_dial">Speed dial</string>
-
-  <!-- Accessibility text for the tab showing the call history. [CHAR LIMIT=40] -->
-  <string name="tab_history">Call History</string>
-
   <!-- Accessibility text for the tab showing the user's contacts. [CHAR LIMIT=40] -->
   <string name="tab_all_contacts">Contacts</string>
-
-  <!-- Accessibility text for the tab showing the user's voicemails. [CHAR LIMIT=40] -->
-  <string name="tab_voicemail">Voicemail</string>
-
-  <!-- Shortcut item used to call a number directly from search -->
-  <string name="search_shortcut_call_number">Call
-        <xliff:g id="number">%s</xliff:g>
-    </string>
 
   <!-- Shortcut item used to add a number directly to a new contact from search.
        [CHAR LIMIT=25] -->
@@ -322,18 +290,6 @@
   <!-- Shortcut item used to make a video call directly from search. [CHAR LIMIT=25] -->
   <string name="search_shortcut_make_video_call">Make video call</string>
 
-  <!-- Shortcut item used to block a number directly from search. [CHAR LIMIT=25] -->
-  <string name="search_shortcut_block_number">Block number</string>
-
-  <!-- Shown when there are no speed dial favorites. -->
-  <string name="speed_dial_empty">No one is on your speed dial yet</string>
-
-  <!-- Shown as an action when there are no speed dial favorites -->
-  <string name="speed_dial_empty_add_favorite_action">Add a favorite</string>
-
-  <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
-  <string name="remove_contact">Remove</string>
-
   <!-- Select all text that shows up when in multi select mode. [CHAR LIMIT=NONE] -->
   <string name="select_all">Select all</string>
 
@@ -341,16 +297,6 @@
        Tapping causes a video call to be placed to the caller represented by the call log entry.
        [CHAR LIMIT=30] -->
   <string name="call_log_action_video_call">Video call</string>
-
-  <!-- Button text for the "Set up" video calling option displayed underneath an entry in the call log.
-       Tapping causes a the user to be taken to set up video calling.
-       [CHAR LIMIT=30] -->
-  <string name="call_log_action_set_up_video">Set up video calling</string>
-
-  <!-- Button text for the "Invite" option displayed underneath an entry in the call log.
-       Tapping causes a the user to be taken to the messaging app with a message ready to invite them to set up video calling.
-       [CHAR LIMIT=30] -->
-  <string name="call_log_action_invite_video">Invite to video call</string>
 
   <!-- Button text for a button displayed underneath an entry in the call log, which opens up a
        messaging app to send a SMS to the number represented by the call log entry.
@@ -531,68 +477,6 @@
   <!-- Label for the voicemail settings section [CHAR LIMIT=30] -->
   <string name="voicemail_settings_label">Voicemail</string>
 
-  <!-- Label for a section describing that call blocking is temporarily disabled because an
-       emergency call was made. [CHAR LIMIT=50] -->
-  <string name="blocked_numbers_disabled_emergency_header_label">
-        Call blocking temporarily off
-    </string>
-
-  <!-- Description that call blocking is temporarily disabled because the user called an
-       emergency number, and explains that call blocking will be re-enabled after a buffer
-       period has passed. [CHAR LIMIT=NONE] -->
-  <string name="blocked_numbers_disabled_emergency_desc">
-        Call blocking has been disabled because you contacted emergency services from this phone
-        within the last 48 hours. It will be automatically reenabled once the 48 hour period
-        expires.
-    </string>
-
-  <!-- Label for fragment to import numbers from contacts marked as send to voicemail.
-       [CHAR_LIMIT=30] -->
-  <string name="import_send_to_voicemail_numbers_label">Import numbers</string>
-
-  <!-- Text informing the user they have previously marked contacts to be sent to voicemail.
-       This will be followed by two buttons, 1) to view who is marked to be sent to voicemail
-       and 2) importing these settings to Dialer's block list. [CHAR LIMIT=NONE] -->
-  <string name="blocked_call_settings_import_description">
-        You previously marked some callers to be automatically sent to voicemail via other apps.
-    </string>
-
-  <!-- Label for button to view numbers of contacts previous marked to be sent to voicemail.
-       [CHAR_LIMIT=20] -->
-  <string name="blocked_call_settings_view_numbers_button">View Numbers</string>
-
-  <!-- Label for button to import settings for sending contacts to voicemail into Dialer's block
-       list. [CHAR_LIMIT=20] -->
-  <string name="blocked_call_settings_import_button">Import</string>
-
-  <!-- String describing the delete icon on a blocked number list item.
-      When tapped, it will show a dialog confirming the unblocking of the number.
-      [CHAR LIMIT=NONE]-->
-  <string name="description_blocked_number_list_delete">Unblock number</string>
-
-  <!-- Button to bring up UI to add a number to the blocked call list. [CHAR LIMIT=40] -->
-  <string name="addBlockedNumber">Add number</string>
-
-  <!-- Footer message of number blocking screen with visual voicemail active.
-      [CHAR LIMIT=NONE] -->
-  <string name="block_number_footer_message_vvm">
-        Calls from these numbers will be blocked and voicemails will be automatically deleted.
-    </string>
-
-  <!-- Footer message of number blocking screen with no visual voicemail.
-       [CHAR LIMIT=NONE] -->
-  <string name="block_number_footer_message_no_vvm">
-         Calls from these numbers will be blocked, but they may still be able to leave you voicemails.
-    </string>
-
-  <!-- Heading for the block list in the "Spam and blocked cal)ls" settings. [CHAR LIMIT=64] -->
-  <string name="block_list">Blocked numbers</string>
-
-  <!-- Error message shown when user tries to add a number to the block list that was already
-      blocked. [CHAR LIMIT=64] -->
-  <string name="alreadyBlocked"><xliff:g example="(555) 555-5555" id="number">%1$s</xliff:g>
-        is already blocked.</string>
-
   <!-- Label for the phone account settings [CHAR LIMIT=30] -->
   <string name="phone_account_settings_label">Calling accounts</string>
 
@@ -605,17 +489,8 @@
   <!-- Internal key for DTMF tone length preference. -->
   <string name="dtmf_tone_length_preference_key" translatable="false">button_dtmf_settings</string>
 
-  <!-- Shown as a prompt to turn on the contacts permission to enable speed dial [CHAR LIMIT=NONE]-->
-  <string name="permission_no_speeddial">To enable speed dial, turn on the Contacts permission.</string>
-
   <!-- Shown as a prompt to turn on the phone permission to enable the call log [CHAR LIMIT=NONE]-->
   <string name="permission_no_calllog">To see your call log, turn on the Phone permission.</string>
-
-  <!-- Shown as a prompt to turn on contacts permissions to allow contact search [CHAR LIMIT=NONE]-->
-  <string name="permission_no_search">To search your contacts, turn on the Contacts permissions.</string>
-
-  <!-- Shown as a prompt to turn on the phone permission to allow a call to be placed [CHAR LIMIT=NONE]-->
-  <string name="permission_place_call">To place a call, turn on the Phone permission.</string>
 
   <!-- Shown as a message that notifies the user that the Phone app cannot write to system settings, which is why the system settings app is being launched directly instead. [CHAR LIMIT=NONE]-->
   <string name="toast_cannot_write_system_settings">Phone app does not have permission to write to system settings.</string>
@@ -645,74 +520,4 @@
 
   <!-- Label under the name of a spam number in the call log. [CHAR LIMIT=15] -->
   <string name="spam_number_call_log_label">Spam</string>
-
-  <!-- Shown as a message that notifies the user enriched calling isn't working -->
-  <string name="call_composer_connection_failed"><xliff:g id="name">%1$s</xliff:g> is offline and can\'t be reached</string>
-
-  <!-- Label for setting that shows more information about the Phone app [CHAR LIMIT=30] -->
-  <string name="about_phone_label">About</string>
-
-  <!-- Label indicating who provided the voicemail transcription [CHAR LIMIT=64] -->
-  <string name="voicemail_transcription_branding_text">Transcribed by Google</string>
-
-  <!-- Label indicating that a voicemail transcription is in progress [CHAR LIMIT=64] -->
-  <string name="voicemail_transcription_in_progress">Transcribing&#8230;</string>
-
-  <!-- Label indicating that a voicemail transcription failed [CHAR LIMIT=64] -->
-  <string name="voicemail_transcription_failed">Transcript not available.</string>
-
-  <!-- Label indicating that a voicemail transcription failed because it was in an
-       unsupported language [CHAR LIMIT=64] -->
-  <string name="voicemail_transcription_failed_language_not_supported">Transcript not available. Language not supported.</string>
-
-  <!-- Label indicating that a voicemail transcription failed because no speech was detected
-       [CHAR LIMIT=64] -->
-  <string name="voicemail_transcription_failed_no_speech">Transcript not available. No speech detected.</string>
-
-  <!-- Title of voicemail donation promo dialog
-      [CHAR LIMIT=64] -->
-  <string name="voicemail_donation_promo_title">Help improve transcription accuracy?</string>
-
-  <!-- Content of voicemail donation promo dialog
-       [CHAR LIMIT=NONE] -->
-  <string name="voicemail_donation_promo_content">
-    Let Google review this and future voicemail messages with transcripts.
-    They\'ll be stored anonymously. Change Settings any time. <xliff:g example="Learn more">%1$s</xliff:g>
-  </string>
-
-  <string translatable="false" name="voicemail_donation_promo_learn_more_url">https://support.google.com/phoneapp/answer/2811844?hl=en%26ref_topic=7539039</string>
-
-  <!-- Label for the voicemail donation promo dialog opt-in button
-       [CHAR LIMIT=20] -->
-  <string name="voicemail_donation_promo_opt_in">Yes, I\'m in</string>
-
-  <!-- Label for the voicemail donation promo dialog opt-out button
-       [CHAR LIMIT=20] -->
-  <string name="voicemail_donation_promo_opt_out">No thanks</string>
-
-  <!-- Prompt asking the user to rate the quality of the voicemail transcription
-       [CHAR LIMIT=30] -->
-  <string name="voicemail_transcription_rating">Rate transcription quality</string>
-
-  <!-- Message displayed after user has rated a voicemail transcription [CHAR LIMIT=30] -->
-  <string name="voicemail_transcription_rating_thanks">Thanks for your feedback</string>
-
-  <!-- Describes the thumbs up, 'good' transcription button. Read by TalkBack.
-      [CHAR LIMIT=NONE] -->
-  <string name="description_rating_good">Like</string>
-
-  <!-- Describes the thumbs down, 'bad' transcription button. Read by TalkBack.
-      [CHAR LIMIT=NONE] -->
-  <string name="description_rating_bad">Dislike</string>
-
-  <!-- Button text to prompt a user to open an sms conversation [CHAR LIMIT=NONE] -->
-  <string name="view_conversation">View</string>
-
-  <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
-        to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
-  <string name="ec_data_deleted">Call deleted. View and delete attachments shared during this call in Messages.</string>
-
-  <!-- If a user deletes a call that has attachments (photo, message, ect) bundled with it, they need
-        to be told that they need to go to the SMS app to delete the attachments. [CHAR LIMIT=NONE] -->
-  <string name="multiple_ec_data_deleted">Calls deleted. View and delete attachments shared during calls in Messages.</string>
 </resources>

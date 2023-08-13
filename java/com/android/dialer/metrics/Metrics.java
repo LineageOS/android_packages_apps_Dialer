@@ -21,15 +21,6 @@ import android.app.Application;
 /** Logs metrics. */
 public interface Metrics {
 
-  // Events related to refreshing the annotated call log.
-  String ANNOTATED_CALL_LOG_NOT_DIRTY = "RefreshAnnotatedCallLogReceiver.NotDirty";
-  String ANNOTATED_CALL_LOG_CHANGES_NEEDED = "RefreshAnnotatedCallLogReceiver.ChangesNeeded";
-  String ANNOTATED_LOG_NO_CHANGES_NEEDED = "RefreshAnnotatedCallLogReceiver.NoChangesNeeded";
-  String ANNOTATED_CALL_LOG_FORCE_REFRESH_CHANGES_NEEDED =
-      "RefreshAnnotatedCallLogReceiver.ForceRefreshChangesNeeded";
-  String NEW_CALL_LOG_FORCE_REFRESH_NO_CHANGES_NEEDED =
-      "RefreshAnnotatedCallLogReceiver.ForceRefreshNoChangesNeeded";
-
   String INITIAL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.Fill";
   String INITIAL_ON_SUCCESSFUL_FILL_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.OnSuccessfulFill";
   String INITIAL_APPLY_MUTATIONS_EVENT_NAME = "RefreshAnnotatedCallLog.Initial.ApplyMutations";

@@ -34,28 +34,7 @@
   <string name="voicemail_string">음성사서함</string>
   <string name="just_now">조금 전</string>
   <string name="new_call_log_carrier_video">이동통신사 동영상</string>
-  <string name="new_call_log_duo_video">Duo 동영상</string>
   <string name="new_call_log_unknown">알 수 없음</string>
   <string name="new_call_log_secondary_blocked">차단됨</string>
   <string name="new_call_log_secondary_spam">스팸</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^2님의 부재중 전화가 ^1건 있습니다</item>
-    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님의 부재중 전화입니다</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^2님이 걸어서 받은 전화가 ^1건 있습니다</item>
-    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님이 걸어서 받은 전화입니다</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^2님에게 건 전화가 ^1건 있습니다</item>
-    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님에게 건 전화입니다</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^2님이 걸었지만 차단된 전화가 ^1건 있습니다</item>
-    <item quantity="other">전화 ^1건 중 최근 전화는 ^2님이 걸었지만 차단된 전화입니다</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">전화 계정: ^1,
-    전화번호: ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

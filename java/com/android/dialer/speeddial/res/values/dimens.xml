@@ -15,23 +15,6 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="scrollview_max_height">280dp</dimen>
-  <dimen name="speed_dial_context_menu_width">200dp</dimen>
-  <dimen name="context_menu_elevation">4dp</dimen>
-  <dimen name="speed_dial_recyclerview_horizontal_padding">16dp</dimen>
-
-  <!--
-   ~ This value expands the context menu to allow space for more text w/o being flush with the edge
-   ~ of the screen. Calculated with 2 * (speed_dial_recyclerview_horizontal_padding - 2dp)
-   -->
-  <dimen name="speed_dial_context_menu_extra_width">28dp</dimen>
-  <!--
-   ~ This value centers the context menu with the favorite item layout.
-   ~ Calculated with -1 * (speed_dial_context_menu_extra_width * 1.75)
-   -->
-  <dimen name="speed_dial_context_menu_x_offset">-24dp</dimen>
-  <dimen name="speed_dial_context_menu_corner_radius">16dp</dimen>
-  <dimen name="disambig_dialog_width">280dp</dimen>
   <dimen name="expanded_search_bar_height">64dp</dimen>
   <dimen name="expanded_search_bar_height_minus">-64dp</dimen>
 </resources>

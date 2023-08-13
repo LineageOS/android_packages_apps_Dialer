@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopiera nummer</string>
   <string name="call_details_edit_number">Redigera nummer före samtal</string>
   <string name="call_details_report_call_id">Rapportera felaktigt nummer</string>
-  <string name="sent_a_photo">Skickade ett foto</string>
-  <string name="received_a_photo">Tog emot ett foto</string>
-  <string name="message_in_quotes">%1$s</string>
   <string name="report_caller_id_dialog_title">Rapportera felaktigt nummer</string>
   <string name="report_caller_id_failed">Det gick inte att rapportera nummer</string>
   <string name="report_caller_id_toast">Nummer rapporterat</string>

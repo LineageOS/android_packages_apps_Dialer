@@ -39,9 +39,6 @@
   <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
   <string name="disambig_option_voice_call">Call</string>
 
-  <!-- Title for screen prompting the user to select a contact to mark as a favorite. [CHAR LIMIT=NONE] -->
-  <string name="add_favorite_activity_title">Add Favorite</string>
-
   <!-- Text for a button that places a phone/voice call [CHAR LIMIT=15]-->
   <string name="contact_menu_voice_call">Voice Call</string>
 

@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">ಸಂಖ್ಯೆಯನ್ನು ನಕಲಿಸಿ</string>
   <string name="call_details_edit_number">ಕರೆ ಮಾಡುವ ಮೊದಲು ಸಂಖ್ಯೆಯನ್ನು ಎಡಿಟ್ ಮಾಡಿ</string>
   <string name="call_details_report_call_id">ನಿಖರವಾಗಿಲ್ಲದ ಸಂಖ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ</string>
-  <string name="sent_a_photo">ಫೋಟೋ ಕಳುಹಿಸಲಾಗಿದೆ</string>
-  <string name="received_a_photo">ಫೋಟೋ ಸ್ವೀಕರಿಸಲಾಗಿದೆ</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">ತಪ್ಪಾದ ಸಂಖ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ</string>
   <string name="report_caller_id_failed">ಸಂಖ್ಯೆಯನ್ನು ವರದಿ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
   <string name="report_caller_id_toast">ವರದಿ ಮಾಡಲಾದ ಸಂಖ್ಯೆ</string>

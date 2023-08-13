@@ -15,6 +15,5 @@
   ~ limitations under the License
   -->
 <resources>
-  <dimen name="launcher_shortcut_icon_size">48dp</dimen>
   <dimen name="launcher_shortcut_adaptive_icon_size">108dp</dimen>
 </resources>

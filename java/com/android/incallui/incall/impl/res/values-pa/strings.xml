@@ -5,7 +5,6 @@
   <string name="incall_label_hold">ਰੋਕ ਕੇ ਰੱਖੋ</string>
   <string name="incall_label_add_call">ਕਾਲ ਸ਼ਾਮਲ ਕਰੋ</string>
   <string name="incall_label_mute">ਮਿਊਟ ਕਰੋ</string>
-  <string name="incall_label_end_call">ਕਾਲ ਖਤਮ ਕਰੋ</string>
   <string name="incall_label_dialpad">ਕੀਪੈਡ</string>
   <string name="incall_talkback_speaker_on">, ਚਾਲੂ ਹੈ</string>
   <string name="incall_talkback_speaker_off">, ਬੰਦ ਹੈ</string>

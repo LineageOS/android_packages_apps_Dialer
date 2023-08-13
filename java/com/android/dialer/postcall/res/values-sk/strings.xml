@@ -4,8 +4,7 @@
   <string name="post_call_message_1">Je to súrne. Zavolaj mi späť.</string>
   <string name="post_call_message_2">Zavolaj mi späť, keď budeš mať čas.</string>
   <string name="post_call_message_3">Nie je to súrne, môžeme sa porozprávať neskôr.</string>
-  <string name="post_call_add_message">Pridať správu</string>
-  <string name="post_call_send_message">Odoslanie správy</string>
+    <string name="post_call_send_message">Odoslanie správy</string>
   <string name="post_call_message_sent">Správa bola odoslaná</string>
   <string name="view">Zobraziť</string>
 </resources>

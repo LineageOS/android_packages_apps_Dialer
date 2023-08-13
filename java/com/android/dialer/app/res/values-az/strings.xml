@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Telefon</string>
-  <string name="launcherDialpadActivityLabel">Telefon Klaviaturası</string>
   <string name="callHistoryIconLabel">Zəng tarixçəsi</string>
   <string name="action_copy_number_text">Nömrəni kopyalayın</string>
   <string name="action_edit_number_before_call">Zəng etmədən öncə nömrəyə düzəliş edin</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Daha çox seçim</string>
   <string name="action_menu_dialpad_button">klaviatura</string>
   <string name="dialer_settings_label">Ayarlar</string>
-  <string name="simulator_submenu_label">Stimulyator</string>
-  <string name="new_ui_launcher_shortcut_label">Yeni İİ Qısayolu yaradın</string>
   <string name="description_entering_bulk_action_mode">Toplu əməliyyat rejiminə daxil olunur</string>
   <string name="description_leaving_bulk_action_mode">Toplu əməliyyat rejimi tərk edilir</string>
   <string name="description_selecting_bulk_action_mode">%1$s seçildi</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Video çağrı.</string>
   <string name="description_start_voice_search">Səs axtarışına başlayın</string>
   <string name="voicemail">Səsli poçt</string>
-  <string name="description_cancel_multi_select">Qrup əməliyyatları rejimini ləğv edin</string>
   <string name="voicemailMultiSelectDeleteConfirm">Silin</string>
   <string name="voicemailMultiSelectDeleteCancel">Ləğv edin</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s seçilib</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Səsli axtarış mövcud deyil</string>
   <string name="dialer_hint_find_contact">Kontakt axtarın</string>
-  <string name="block_number_search_hint">Nömrə əlavə edin və ya kontaktlarda axtarın</string>
   <string name="call_log_all_empty">Zəng tarixçəniz boşdur</string>
   <string name="call_log_all_empty_action">Zəng edin</string>
   <string name="call_log_missed_empty">Buraxılmış heç bir zənginiz yoxdur.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Çağrı Tarixçəsi</string>
   <string name="call_log_all_title">Bütün</string>
   <string name="call_log_missed_title">Buraxılmış</string>
-  <string name="tab_speed_dial">Sürətli nömrə yığımı</string>
-  <string name="tab_history">Zəng Tarixçəsi</string>
   <string name="tab_all_contacts">Kontaktlar</string>
-  <string name="tab_voicemail">Səsli poçt</string>
-  <string name="search_shortcut_call_number">%s zəng edin</string>
   <string name="search_shortcut_create_new_contact">Yeni kontakt yaradın</string>
   <string name="search_shortcut_add_to_contact">Kontakta əlavə edin</string>
   <string name="search_shortcut_send_sms_message">SMS göndərin</string>
   <string name="search_shortcut_make_video_call">Video zəng edin</string>
-  <string name="search_shortcut_block_number">Nömrəni blok edin</string>
-  <string name="speed_dial_empty">Hələ sürətli zəng siyahınızda hec kim yoxdur</string>
-  <string name="speed_dial_empty_add_favorite_action">Sevimlilərə əlavə edin</string>
-  <string name="remove_contact">Yığışdır</string>
   <string name="select_all">Hamısını seçin</string>
   <string name="call_log_action_video_call">Video zəng</string>
-  <string name="call_log_action_set_up_video">Video zəngi quraşdırın</string>
-  <string name="call_log_action_invite_video">Video zəngə dəvət edin</string>
   <string name="call_log_action_send_message">Mesaj göndərin</string>
   <string name="call_log_action_details">Zəng detalları</string>
   <string name="call_log_action_share_voicemail">Bu şəxsə göndərin:</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Zənglər</string>
   <string name="manage_blocked_numbers_label">Blok edilmiş nömrələr</string>
   <string name="voicemail_settings_label">Səsli e-məktub</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Çağrının blok edilməsi müvəqqəti olaraq deaktiv edilib</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Son 48 saat ərzində bu telefondan təcili yardım xidmətləri ilə əlaqə saxladığınız üçün Çağrı Bloklanması deaktiv edildi. 48 saatlıq müddət başa çatdıqda avtomatik olaraq yenidən aktiv ediləcək.</string>
-  <string name="import_send_to_voicemail_numbers_label">Nömrələri import edin</string>
-  <string name="blocked_call_settings_import_description">Əvvəlcədən qeyd etdiyiniz bəzi zəng edənlər digər tətbiqlərin vasiyəsilə avtomatik olaraq səsli mesaja yönləndiriləcək.</string>
-  <string name="blocked_call_settings_view_numbers_button">Rəqəmlərə baxın</string>
-  <string name="blocked_call_settings_import_button">İmport</string>
-  <string name="description_blocked_number_list_delete">Nömrəni blokdan çıxarın</string>
-  <string name="addBlockedNumber">Nömrə əlavə edin</string>
-  <string name="block_number_footer_message_vvm">Bu nömrələrdən zənglər blok ediləcək və səsli məktublar avtomatik silinəcək.</string>
-  <string name="block_number_footer_message_no_vvm">Bu nömrələrdən zənglər blok ediləcək, amma yenə də səsli məktub qoya bilərsiniz.</string>
-  <string name="block_list">Bloklanmış nömrələr</string>
-  <string name="alreadyBlocked">%1$s artıq bloklanıb.</string>
   <string name="phone_account_settings_label">Hesabların çağrılması</string>
-  <string name="permission_no_speeddial">Sürətli yığımı aktivləşdirmək üçün, Kontakt icazələrini aktivləşdirin.</string>
   <string name="permission_no_calllog">Çağrı jurnalınızı görmək üçün Telefon icazəsini aktivləşdirin.</string>
-  <string name="permission_no_search">Kontaktlarınızı axtarmaq üçün, Kontakt icazələrini aktiv edin.</string>
-  <string name="permission_place_call">Zəng etmək üçün, Telefon icazəsini aktivləşdirin.</string>
   <string name="toast_cannot_write_system_settings">Telefon tətbiqinin sistem ayarlarına yazmaq icazəsi yoxdur.</string>
   <string name="blocked_number_call_log_label">Bloklanmış</string>
   <string name="call_log_action_block_report_number">Spamı blok edin/bildirin</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Spam deyil</string>
   <string name="call_log_action_unblock_number">Nömrəni blokdan çıxarın</string>
   <string name="spam_number_call_log_label">Spam</string>
-  <string name="call_composer_connection_failed">%1$s oflayn olduğu üçün əlaqə saxlamaq mümkün deyil</string>
-  <string name="about_phone_label">Haqqında</string>
-  <string name="voicemail_transcription_branding_text">Google tərəfindən kopyalandı</string>
-  <string name="voicemail_transcription_in_progress">Transkripsiya edilir...</string>
-  <string name="voicemail_transcription_failed">Transkripsiya əlçatan deyil.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Transkripsiya əlçatan deyil. Dil dəstəklənmir.</string>
-  <string name="voicemail_transcription_failed_no_speech">Transkripsiya əlçatan deyil. Nitq seçilməyib.</string>
-  <string name="voicemail_donation_promo_title">Transkripsiya dəqiqliyi təkmilləşdirilsin?</string>
-  <string name="voicemail_donation_promo_content">Google\'a transkripsiyası olan bu və gələcək səsli e-poçt mesajlarını nəzərdən keçirmək icazəsi verin. Onlar anonim şəkildə saxlanılacaq. İstənilan vaxt Ayarları dəyişin. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Bəli, razıyam</string>
-  <string name="voicemail_donation_promo_opt_out">Xeyr, təşəkkürlər</string>
-  <string name="voicemail_transcription_rating">Keyfiyyəti qiymətləndirin</string>
-  <string name="voicemail_transcription_rating_thanks">Rəyiniz üçün təşəkkür edirik</string>
-  <string name="description_rating_good">Bəyənin</string>
-  <string name="description_rating_bad">Bəyənməyin</string>
-  <string name="view_conversation">Baxın</string>
-  <string name="ec_data_deleted">Zəng silindi. Bu zəng zamanı paylaşılan qoşmalara Mesajlaşma tətbiqində baxın və silin.</string>
-  <string name="multiple_ec_data_deleted">Zənglər silindi. Bu zənglər zamanı paylaşılan qoşmalara Mesajlaşma tətbiqində baxın və silin.</string>
 </resources>

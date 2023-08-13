@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">БЛОКООС ГАРГАХ</string>
   <string name="block_report_number_alert_title">%1$s-г хориглох уу?</string>
   <string name="block_report_number_alert_details">Та энэ дугаараас цаашид дуудлага хүлээж авахгүй.</string>
-  <string name="block_number_alert_details">%1$s Энэ дуудлагыг спам гэж мэдээлэх болно.</string>
   <string name="unblock_number_alert_details">Энэ дугаарын хоригийг авч, спам биш гэж мэдээлэх болно. Цаашид ирэх дуудлагыг спам гэж үзэхгүй.</string>
   <string name="unblock_report_number_alert_title">%1$s-г хоригоос гаргах уу?</string>
   <string name="report_not_spam_alert_button">Мэдэгдэх</string>

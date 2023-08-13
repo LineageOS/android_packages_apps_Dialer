@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Appuyez pour ajouter le numéro à vos contacts ou le bloquer s\'il s\'agit d\'un numéro indésirable.</string>
   <string name="spam_notification_non_spam_call_expanded_text">C\'est la première fois que vous recevez un appel de ce numéro. S\'il s\'agit d\'un appel indésirable, vous pouvez bloquer le numéro et signaler ce dernier.</string>
   <string name="spam_notification_spam_call_collapsed_text">Appuyez pour signaler ce numéro comme fiable ou pour le bloquer</string>
-  <string name="spam_notification_report_spam_action_text">Bloquer et signaler</string>
-  <string name="spam_notification_add_contact_action_text">Ajouter</string>
   <string name="spam_notification_dialog_add_contact_action_text">Ajouter aux contacts</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Bloquer et signaler comme indésirable</string>
   <string name="spam_notification_was_not_spam_action_text">Non, le numéro est fiable</string>
