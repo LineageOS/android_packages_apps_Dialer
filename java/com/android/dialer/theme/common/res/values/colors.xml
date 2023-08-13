@@ -33,5 +33,5 @@
   <!-- Legacy -->
   <color name="blue_grey_100">#CFD8DC</color>
 
-  <color name="cardBackgroundColor">@*android:color/system_neutral1_50</color>
+  <color name="cardBackgroundColor">@*android:color/system_neutral1_100</color>
 </resources>
