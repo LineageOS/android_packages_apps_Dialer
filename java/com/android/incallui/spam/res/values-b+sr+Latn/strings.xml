@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Dodirnite da biste dodali kontakte ili blokirali nepoželjan broj.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Prvi put ste primili poziv sa ovog broja. Ako je nepoželjan, možete da ga blokirate i prijavite.</string>
   <string name="spam_notification_spam_call_collapsed_text">Dodirnite da biste prijavili da poziv nije nepoželjan ili blokirali broj</string>
-  <string name="spam_notification_report_spam_action_text">Blokiraj i prijavi</string>
-  <string name="spam_notification_add_contact_action_text">Dodaj kontakt</string>
   <string name="spam_notification_dialog_add_contact_action_text">Dodaj u kontakte</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokiraj i prijavi nepoželjan poziv</string>
   <string name="spam_notification_was_not_spam_action_text">Ne, nije nepoželjan</string>

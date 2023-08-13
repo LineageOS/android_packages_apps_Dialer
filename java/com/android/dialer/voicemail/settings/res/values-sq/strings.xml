@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Posta zanore (%s)</string>
   <string name="voicemail_settings_title">Posta zanore</string>
   <string name="voicemail_notifications_preference_title">Njoftimet</string>
   <string name="voicemail_change_greeting_preference_title">Përshëndetja e postës zanore</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">Ndrysho kodin PIN</string>
   <string name="voicemail_change_pin_preference_summary_disable">Duhet të aktivizohet posta zanore vizuale për të ndryshuar kodin PIN</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Posta zanore vizuale nuk është aktivizuar ende. Provo përsëri më vonë</string>
-  <string name="vm_change_pin_old_pin">Kodi PIN i vjetër</string>
-  <string name="vm_change_pin_new_pin">Kodi PIN i ri</string>
   <string name="vm_change_pin_progress_message">Prit...</string>
   <string name="vm_change_pin_error_too_short">Kodi i ri PIN është shumë i shkurtër.</string>
   <string name="vm_change_pin_error_too_long">Kodi i ri PIN është shumë i gjatë.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">Kodet PIN nuk përputhen</string>
   <string name="change_pin_succeeded">Kodi PIN i postës zanore u përditësua</string>
   <string name="change_pin_system_error">Kodi PIN nuk mund të caktohet</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Transkriptimi i postës zanore</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Analiza e transkriptimit të postës zanore</string>
   <string name="voicemail_activating_summary_info">Posta zanore po aktivizohet</string>
-  <string name="voicemail_transcription_preference_summary_info">Merr transkriptet e postës zanore duke përdorur shërbimin e transkriptimit të Google. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Lejo që Google të rishikojë mesazhet e postës zanore për të përmirësuar saktësinë e transkriptimit. Mesazhet e tua të postës zanore ruhen në mënyrë anonime. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Çaktivizo postën zanore vizuale</string>
   <string name="confirm_disable_voicemail_dialog_message">Kjo do të fshijë çdo postë zanore dhe transkriptet e Google të ruajtura në këtë aplikacion. Operatori yt celular mund të mbajë kopjet e veta.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">ÇAKTIVIZO</string>

@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Нажмите, чтобы добавить номер в контакты или заблокировать его за распространение спама.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Это был первый вызов с указанного номера. Если он использовался для распространения спама, вы можете сообщить об этом и заблокировать этот номер.</string>
   <string name="spam_notification_spam_call_collapsed_text">Нажмите, чтобы сообщить, что это не спам, или заблокировать номер</string>
-  <string name="spam_notification_report_spam_action_text">Блокировать/сообщить</string>
-  <string name="spam_notification_add_contact_action_text">Добавить в контакты</string>
   <string name="spam_notification_dialog_add_contact_action_text">Добавить в контакты</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Заблокировать и сообщить о спаме</string>
   <string name="spam_notification_was_not_spam_action_text">Это не спам</string>

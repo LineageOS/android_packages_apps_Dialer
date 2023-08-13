@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">Trykk for å legge til kontakter eller blokkere det useriøse nummeret.</string>
   <string name="spam_notification_non_spam_call_expanded_text">Dette er den første gangen du blir oppringt fra dette nummeret. Hvis dette anropet var useriøst, kan du blokkere nummeret og rapportere det.</string>
   <string name="spam_notification_spam_call_collapsed_text">Trykk for å rapportere nummeret som ikke useriøst eller blokkere det.</string>
-  <string name="spam_notification_report_spam_action_text">Blokkér og rapportér</string>
-  <string name="spam_notification_add_contact_action_text">Legg til kontakt</string>
   <string name="spam_notification_dialog_add_contact_action_text">Legg til i kontakter</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">Blokkér og rapportér som useriøst</string>
   <string name="spam_notification_was_not_spam_action_text">Nei, ikke useriøst</string>

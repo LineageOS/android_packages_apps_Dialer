@@ -7,8 +7,6 @@
   <string name="spam_notification_non_spam_call_collapsed_text">స్పామ్ నంబర్‌ను పరిచయాలకు జోడించడానికి లేదా బ్లాక్ చేయడానికి నొక్కండి.</string>
   <string name="spam_notification_non_spam_call_expanded_text">ఈ నంబర్ నుండి మీకు కాల్ రావడం ఇదే మొదటిసారి. ఈ కాల్ స్పామ్ అయితే, మీరు ఈ నంబర్‌ను బ్లాక్ చేసి, నివేదించవచ్చు.</string>
   <string name="spam_notification_spam_call_collapsed_text">స్పామ్ కాదని నివేదించడానికి లేదా దాన్ని బ్లాక్ చేయడానికి నొక్కండి</string>
-  <string name="spam_notification_report_spam_action_text">బ్లాక్ చేసి, నివేదించండి</string>
-  <string name="spam_notification_add_contact_action_text">పరిచయాన్ని జోడించండి</string>
   <string name="spam_notification_dialog_add_contact_action_text">పరిచయాలకు జోడించండి</string>
   <string name="spam_notification_dialog_block_report_spam_action_text">బ్లాక్ చేసి, స్పామ్ అని నివేదించండి</string>
   <string name="spam_notification_was_not_spam_action_text">లేదు, స్పామ్ కాదు</string>

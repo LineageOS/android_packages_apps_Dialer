@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">โทรศัพท์</string>
-  <string name="launcherDialpadActivityLabel">ปุ่มกดโทรศัพท์</string>
   <string name="callHistoryIconLabel">ประวัติการโทร</string>
   <string name="action_copy_number_text">คัดลอกหมายเลข</string>
   <string name="action_edit_number_before_call">แก้ไขหมายเลขก่อนโทร</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">ตัวเลือกเพิ่มเติม</string>
   <string name="action_menu_dialpad_button">ปุ่มกด</string>
   <string name="dialer_settings_label">การตั้งค่า</string>
-  <string name="simulator_submenu_label">เครื่องมือจำลอง</string>
-  <string name="new_ui_launcher_shortcut_label">สร้างทางลัด UI ใหม่</string>
   <string name="description_entering_bulk_action_mode">กำลังเข้าสู่โหมดการดำเนินการแบบกลุ่ม</string>
   <string name="description_leaving_bulk_action_mode">ออกจากโหมดการทำงานแบบกลุ่มแล้ว</string>
   <string name="description_selecting_bulk_action_mode">เลือก %1$s แล้ว</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call"> Hangouts วิดีโอ</string>
   <string name="description_start_voice_search">เริ่มต้นการค้นหาด้วยเสียง</string>
   <string name="voicemail">ข้อความเสียง</string>
-  <string name="description_cancel_multi_select">ยกเลิกโหมดการทำงานแบบกลุ่ม</string>
   <string name="voicemailMultiSelectDeleteConfirm">ลบ</string>
   <string name="voicemailMultiSelectDeleteCancel">ยกเลิก</string>
   <string name="voicemailMultiSelectActionBarTitle">เลือกไว้ %1$s รายการ</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">การค้นหาด้วยเสียงไม่พร้อมใช้งาน</string>
   <string name="dialer_hint_find_contact">ค้นหารายชื่อติดต่อ</string>
-  <string name="block_number_search_hint">เพิ่มหมายเลขหรือค้นหาผู้ติดต่อ</string>
   <string name="call_log_all_empty">ประวัติการโทรว่างเปล่า</string>
   <string name="call_log_all_empty_action">โทรออก</string>
   <string name="call_log_missed_empty">คุณไม่มีสายที่ไม่ได้รับ</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">ประวัติการโทร</string>
   <string name="call_log_all_title">ทั้งหมด</string>
   <string name="call_log_missed_title">ไม่ได้รับ</string>
-  <string name="tab_speed_dial">การโทรด่วน</string>
-  <string name="tab_history">ประวัติการโทร</string>
   <string name="tab_all_contacts">รายชื่อติดต่อ</string>
-  <string name="tab_voicemail">ข้อความเสียง</string>
-  <string name="search_shortcut_call_number">โทร %s</string>
   <string name="search_shortcut_create_new_contact">สร้างรายชื่อติดต่อใหม่</string>
   <string name="search_shortcut_add_to_contact">เพิ่มในรายชื่อติดต่อ</string>
   <string name="search_shortcut_send_sms_message">ส่ง SMS</string>
   <string name="search_shortcut_make_video_call">ใช้ Hangouts วิดีโอ</string>
-  <string name="search_shortcut_block_number">บล็อกหมายเลข</string>
-  <string name="speed_dial_empty">ยังไม่ได้กำหนดผู้ใดในการโทรด่วน</string>
-  <string name="speed_dial_empty_add_favorite_action">เพิ่มรายการโปรด</string>
-  <string name="remove_contact">ลบ</string>
   <string name="select_all">เลือกทั้งหมด</string>
   <string name="call_log_action_video_call"> Hangouts วิดีโอ</string>
-  <string name="call_log_action_set_up_video">ตั้งค่าวิดีโอคอล</string>
-  <string name="call_log_action_invite_video">เชิญเข้าร่วมวิดีโอคอล</string>
   <string name="call_log_action_send_message">ส่งข้อความ</string>
   <string name="call_log_action_details">รายละเอียดการโทร</string>
   <string name="call_log_action_share_voicemail">ส่งไปที่…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">การโทร</string>
   <string name="manage_blocked_numbers_label">หมายเลขที่ถูกบล็อก</string>
   <string name="voicemail_settings_label">ข้อความเสียง</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">การบล็อกสายเรียกเข้าปิดชั่วคราว</string>
-  <string name="blocked_numbers_disabled_emergency_desc">ระบบปิดใช้การบล็อกสายเรียกเข้าเนื่องจากคุณติดต่อบริการฉุกเฉินจากโทรศัพท์เครื่องนี้ภายใน 48 ชั่วโมงที่ผ่านมา ระบบจะเปิดใช้ฟีเจอร์นี้อีกครั้งโดยอัตโนมัติเมื่อครบ 48 ชั่วโมง</string>
-  <string name="import_send_to_voicemail_numbers_label">นำเข้าหมายเลข</string>
-  <string name="blocked_call_settings_import_description">ก่อนหน้านี้คุณได้ทำเครื่องหมายว่าให้ส่งผู้โทรบางคนไปยังข้อความเสียงโดยอัตโนมัติผ่านแอปอื่นๆ</string>
-  <string name="blocked_call_settings_view_numbers_button">ดูหมายเลข</string>
-  <string name="blocked_call_settings_import_button">นำเข้า</string>
-  <string name="description_blocked_number_list_delete">เลิกบล็อกหมายเลข</string>
-  <string name="addBlockedNumber">เพิ่มหมายเลข</string>
-  <string name="block_number_footer_message_vvm">ระบบจะบล็อกสายเรียกเข้าจากหมายเลขเหล่านี้และลบข้อความเสียงโดยอัตโนมัติ</string>
-  <string name="block_number_footer_message_no_vvm">ระบบจะบล็อกสายเรียกเข้าจากหมายเลขเหล่านี้ แต่ผู้โทรอาจยังฝากข้อความเสียงถึงคุณได้อยู่</string>
-  <string name="block_list">หมายเลขที่ถูกบล็อก</string>
-  <string name="alreadyBlocked">%1$s ถูกบล็อกอยู่แล้ว</string>
   <string name="phone_account_settings_label">บัญชีการโทร</string>
-  <string name="permission_no_speeddial">หากต้องการเปิดใช้การโทรด่วน ให้เปิดสิทธิ์เข้าถึงรายชื่อติดต่อ</string>
   <string name="permission_no_calllog">หากต้องการดูประวัติการโทร ให้เปิดสิทธิ์เข้าถึงโทรศัพท์</string>
-  <string name="permission_no_search">หากต้องการค้นหารายชื่อติดต่อ ให้เปิดสิทธิ์เข้าถึงรายชื่อติดต่อ</string>
-  <string name="permission_place_call">หากต้องการโทรออก ให้เปิดสิทธิ์เข้าถึงโทรศัพท์</string>
   <string name="toast_cannot_write_system_settings">แอปโทรศัพท์ไม่ได้รับอนุญาตให้เขียนไปยังการตั้งค่าระบบ</string>
   <string name="blocked_number_call_log_label">ถูกบล็อก</string>
   <string name="call_log_action_block_report_number">บล็อก/รายงานจดหมายขยะ</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">ไม่ใช่จดหมายขยะ</string>
   <string name="call_log_action_unblock_number">เลิกบล็อกหมายเลข</string>
   <string name="spam_number_call_log_label">สแปม</string>
-  <string name="call_composer_connection_failed">%1$s ออฟไลน์อยู่และไม่สามารถติดต่อได้</string>
-  <string name="about_phone_label">เกี่ยวกับ</string>
-  <string name="voicemail_transcription_branding_text">ถอดเสียงโดย Google</string>
-  <string name="voicemail_transcription_in_progress">กำลังถอดเสียง…</string>
-  <string name="voicemail_transcription_failed">การถอดเสียงไม่พร้อมใช้งาน</string>
-  <string name="voicemail_transcription_failed_language_not_supported">การถอดเสียงไม่พร้อมใช้งาน ไม่รองรับภาษานี้</string>
-  <string name="voicemail_transcription_failed_no_speech">การถอดเสียงไม่พร้อมใช้งาน ไม่พบเสียง</string>
-  <string name="voicemail_donation_promo_title">ต้องการช่วยปรับปรุงความถูกต้องของการถอดเสียงใช่ไหม</string>
-  <string name="voicemail_donation_promo_content">ให้ Google ตรวจสอบข้อความเสียงนี้และข้อความอื่นๆ ในอนาคตด้วยการถอดเสียง ระบบจะจัดเก็บข้อมูลไว้โดยไม่ระบุชื่อ ซึ่งคุณสามารถเปลี่ยนแปลงการตั้งค่าได้ทุกเมื่อ%1$s</string>
-  <string name="voicemail_donation_promo_opt_in">ได้สิ ตกลง</string>
-  <string name="voicemail_donation_promo_opt_out">ไม่เป็นไร</string>
-  <string name="voicemail_transcription_rating">ให้คะแนนคุณภาพการถอดเสียง</string>
-  <string name="voicemail_transcription_rating_thanks">ขอขอบคุณสำหรับความคิดเห็นของคุณ</string>
-  <string name="description_rating_good">ชอบ</string>
-  <string name="description_rating_bad">ไม่ชอบ</string>
-  <string name="view_conversation">ดู</string>
-  <string name="ec_data_deleted">ลบการโทรแล้ว ดูและลบไฟล์แนบที่แชร์ระหว่างการโทรนี้ใน Messages</string>
-  <string name="multiple_ec_data_deleted">ลบการโทรแล้ว ดูและลบไฟล์แนบที่แชร์ระหว่างการโทรใน Messages</string>
 </resources>

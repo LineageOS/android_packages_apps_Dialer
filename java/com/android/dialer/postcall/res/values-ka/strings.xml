@@ -4,8 +4,7 @@
   <string name="post_call_message_1">ეს სასწრაფოა. გადმომირეკე.</string>
   <string name="post_call_message_2">დამირეკე, როცა დრო გექნება.</string>
   <string name="post_call_message_3">სასწრაფო არ არის, შეგვიძლია ვისაუბროთ მოგვიანებით.</string>
-  <string name="post_call_add_message">შეტყობინების დამატება</string>
-  <string name="post_call_send_message">შეტყობინების გაგზავნა</string>
+    <string name="post_call_send_message">შეტყობინების გაგზავნა</string>
   <string name="post_call_message_sent">შეტყობინება გაიგზავნა</string>
   <string name="view">ნახვა</string>
 </resources>

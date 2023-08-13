@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">സ്ഥിരംവിളിക്കുന്നവരെ മായ്‌ക്കണോ?</string>
   <string name="clearFrequentsConfirmation">നിങ്ങൾ കോൺടാക്‌റ്റുകളുടെയും ഫോണിന്റെയും അപ്ലിക്കേഷനുകളിലെ പതിവായി കോൺടാക്റ്റുചെയ്യുന്നവരുടെ ലിസ്റ്റ് മായ്‌ക്കുകയും സ്‌ക്രാച്ചിൽ നിന്നും ബന്ധപ്പെടൽ മുൻഗണനകൾ അറിയാൻ ഇമെയിൽ അപ്ലിക്കേഷനുകളെ പ്രേരിപ്പിക്കുകയും ചെയ്യും.</string>
   <string name="clearFrequentsProgress_title">സ്ഥിരംവിളിക്കുന്നവരെ മായ്‌ക്കുന്നു…</string>
-  <string name="status_available">ലഭ്യം</string>
-  <string name="status_away">ലഭ്യമല്ല</string>
-  <string name="status_busy">തിരക്കിലാണ്</string>
-  <string name="contactsList">കോണ്ടാക്റ്റ്</string>
-  <string name="contact_suggestions">കൂടുതൽ നിർദ്ദേശിച്ചിരിക്കുന്നവ</string>
-  <string name="local_invisible_directory">മറ്റുള്ളവ</string>
   <string name="directory_search_label">ഡയറക്‌ടറി</string>
   <string name="directory_search_label_work">ഔദ്യോഗിക ഡയറക്‌ടറി</string>
-  <string name="local_search_label">എല്ലാ കോൺടാക്റ്റുകളും</string>
-  <string name="local_suggestions_search_label">നിര്‍ദ്ദേശങ്ങള്‍</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">ഞാന്‍</string>
   <string name="missing_name">(പേരില്ല)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">കോൺടാക്റ്റ് കാണുക</string>
-  <string name="list_filter_phones">ഫോൺ നമ്പറുകളുള്ള എല്ലാ കോൺടാക്റ്റുകളും</string>
-  <string name="list_filter_phones_work">ഔദ്യോഗിക പ്രൊഫൈൽ കോൺടാക്റ്റുകൾ</string>
   <string name="view_updates_from_group">അപ്‌ഡേറ്റുകള്‍ കാണുക</string>
   <string name="account_phone">ഉപകരണത്തിൽ മാത്രം, സമന്വയിപ്പിക്കില്ല</string>
   <string name="nameLabelsGroup">പേര്</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ ഉപയോഗിച്ച് ചാറ്റുചെയ്യുക</string>
   <string name="chat_jabber">Jabber ഉപയോഗിച്ച് ചാറ്റുചെയ്യുക</string>
   <string name="chat">ചാറ്റുചെയ്യുക</string>
-  <string name="list_filter_all_accounts">എല്ലാ കോൺടാക്റ്റുകളും</string>
-  <string name="listAllContactsInAccount">%s എന്നതിലെ കോൺടാക്റ്റുകൾ</string>
-  <string name="listCustomView">ഇഷ്‌ടാനുസൃതകാഴ്‌ചയിലെ കോൺടാക്റ്റ്</string>
-  <string name="listSingleContact">സിംഗിൾ കോൺടാക്റ്റ്</string>
   <string name="display_options_sort_list_by">ഇതുപ്രകാരം അടുക്കുക</string>
   <string name="display_options_sort_by_given_name">ഫസ്റ്റ് നെയിം</string>
   <string name="display_options_sort_by_family_name">ലാസ്റ്റ് നെയിം</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">തിരയൽ മായ്ക്കുക</string>
   <string name="select_account_dialog_title">അക്കൗണ്ട്</string>
   <string name="set_default_account">ഇത് എല്ലായ്‌പ്പോഴും കോളുകൾക്കായി ഉപയോഗിക്കുക</string>
-  <string name="select_phone_account_for_calls">ഈ കോളിനായി സിം തിരഞ്ഞെടുക്കുക</string>
-  <string name="select_phone_account_for_calls_remember">ഈ തിരഞ്ഞെടുക്കൽ ഓർക്കുക</string>
   <string name="call_with_a_note">കുറിപ്പിനൊപ്പം വിളിക്കുക</string>
   <string name="call_subject_hint">കോളിനൊപ്പം അയയ്ക്കുന്നതിന് ഒരു കുറിപ്പ് ടൈപ്പുചെയ്യുക ...</string>
   <string name="send_and_call_button">അയയ്‌ക്കുകയും വിളിക്കുകയും ചെയ്യുക</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s ടാബ്. %2$d വായിക്കാത്ത ഇനങ്ങൾ. </item>
   </plurals>
   <string name="description_search_video_call">വീഡിയോ കോള്‍</string>
-  <string name="description_search_call_and_share">പങ്കിടുക, കോൾ ചെയ്യുക</string>
 </resources>

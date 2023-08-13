@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">BEBASKAN</string>
   <string name="block_report_number_alert_title">Blokir %1$s?</string>
   <string name="block_report_number_alert_details">Anda tidak akan menerima telepon dari nomor ini lagi.</string>
-  <string name="block_number_alert_details">%1$s Panggilan ini akan dilaporkan sebagai spam.</string>
   <string name="unblock_number_alert_details">Nomor akan dibebaskan &amp; dilaporkan bukan spam. Telepon mendatang dari nomor ini dianggap bukan spam.</string>
   <string name="unblock_report_number_alert_title">Batalkan pemblokiran %1$s?</string>
   <string name="report_not_spam_alert_button">Laporan</string>

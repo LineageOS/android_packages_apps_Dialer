@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Tez-tez ünsiyyət qurulanlar silinsin?</string>
   <string name="clearFrequentsConfirmation">Əlaqələr və Telefon proqramlarında tez-tez əlaqə saxlanılanların siyahısını siləcəksiniz və fraqmentdən ünvanlama seçimlərinizi öyrənmək üçün e-poçt proqramlarını məcbur edəcəksiniz.</string>
   <string name="clearFrequentsProgress_title">Tez-tez ünsiyyət qurulanlar silinir...</string>
-  <string name="status_available">Əlçatımlı</string>
-  <string name="status_away">Kənar</string>
-  <string name="status_busy">Məşğul</string>
-  <string name="contactsList">Kontaktlar</string>
-  <string name="contact_suggestions">Ən yaxşı Təkliflər</string>
-  <string name="local_invisible_directory">Digər</string>
   <string name="directory_search_label">Kataloq</string>
   <string name="directory_search_label_work">İş kataloqu</string>
-  <string name="local_search_label">Bütün kontaktlar</string>
-  <string name="local_suggestions_search_label">Təkliflər</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mən</string>
   <string name="missing_name">(ad yoxdur)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Kontakta baxın</string>
-  <string name="list_filter_phones">Telefon nömrələri olan bütün kontaktlar</string>
-  <string name="list_filter_phones_work">İş profili kontaktları</string>
   <string name="view_updates_from_group">Güncəlləşmələri göstər</string>
   <string name="account_phone">Yalnız cihaz, sinxronizasiya edilmir</string>
   <string name="nameLabelsGroup">Ad</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQ üzərindən çat</string>
   <string name="chat_jabber">Jabber üzərindən çat</string>
   <string name="chat">Çat</string>
-  <string name="list_filter_all_accounts">Bütün kontaktlar</string>
-  <string name="listAllContactsInAccount">%s adındakı kontaktlar</string>
-  <string name="listCustomView">Fərdi baxışdan kontakt</string>
-  <string name="listSingleContact">Tək kontakt</string>
   <string name="display_options_sort_list_by">Bunlardan biri üzrə sırala</string>
   <string name="display_options_sort_by_given_name">Ad</string>
   <string name="display_options_sort_by_family_name">Soyad</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Axtarışı təmizləyin</string>
   <string name="select_account_dialog_title">Hesab</string>
   <string name="set_default_account">Həmişə bu zənglər üçün istifadə edin</string>
-  <string name="select_phone_account_for_calls">Bu zəng üçün SIM seçin</string>
-  <string name="select_phone_account_for_calls_remember">Bu seçimi yadda saxlayın</string>
   <string name="call_with_a_note">Qeyd ilə zəng edin</string>
   <string name="call_subject_hint">Zəng ilə göndərmək üçün qeyd yazın...</string>
   <string name="send_and_call_button">GÖNDƏRİN VƏ ZƏNG EDİN</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s tabel. %2$d oxunmamış element. </item>
   </plurals>
   <string name="description_search_video_call">Video zəng</string>
-  <string name="description_search_call_and_share">Paylaşın və zəng edin</string>
 </resources>

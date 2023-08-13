@@ -38,13 +38,6 @@
   <!-- Show users their settings [CHAR LIMIT=20] -->
   <string name="settings">Settings</string>
 
-  <!-- Content description for the fake action menu button that brings up the call history
-       activity [CHAR LIMIT=20] -->
-  <string name="main_menu_call_history">Call history</string>
-
-  <!--  The menu item to clear frequents [CHAR LIMIT=30] -->
-  <string name="main_menu_clear_frequents">Clear frequents</string>
-
   <!-- Remove button that shows up when contact is long-pressed. [CHAR LIMIT=NONE] -->
   <string name="main_remove_contact">Remove</string>
 

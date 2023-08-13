@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Kas kustutada sagedased kontaktid?</string>
   <string name="clearFrequentsConfirmation">Kustutate rakendustes Kontaktid ja Telefon sagedaste kontaktide loendi, mistõttu meilirakendused peavad teie adresseerimiseelistused uuesti omandama.</string>
   <string name="clearFrequentsProgress_title">Saged. kontaktide kustutamine ...</string>
-  <string name="status_available">Saadaval</string>
-  <string name="status_away">Eemal</string>
-  <string name="status_busy">Hõivatud</string>
-  <string name="contactsList">Kontaktid</string>
-  <string name="contact_suggestions">Populaarsed soovitused</string>
-  <string name="local_invisible_directory">Muu</string>
   <string name="directory_search_label">Kataloog</string>
   <string name="directory_search_label_work">Töökontaktide kataloog</string>
-  <string name="local_search_label">Kõik kontaktid</string>
-  <string name="local_suggestions_search_label">Soovitused</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Mina</string>
   <string name="missing_name">(Nimi puudub)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Kuva kontakt</string>
-  <string name="list_filter_phones">Kõik telefoninumbritega kontaktid</string>
-  <string name="list_filter_phones_work">Tööprofiili kontaktid</string>
   <string name="view_updates_from_group">Kuva värskendused</string>
   <string name="account_phone">Ainult seadmes, sünkroonimata</string>
   <string name="nameLabelsGroup">Nimi</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Vestlus ICQ-d kasutades</string>
   <string name="chat_jabber">Vestlus Jabberit kasutades</string>
   <string name="chat">Vestlus</string>
-  <string name="list_filter_all_accounts">Kõik kontaktid</string>
-  <string name="listAllContactsInAccount">Konto %s kontaktid</string>
-  <string name="listCustomView">Kontaktid kohandatud vaates</string>
-  <string name="listSingleContact">Üks kontakt</string>
   <string name="display_options_sort_list_by">Sortimisalus</string>
   <string name="display_options_sort_by_given_name">Eesnimi</string>
   <string name="display_options_sort_by_family_name">Perekonnanimi</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Otsingu kustutamine</string>
   <string name="select_account_dialog_title">Konto</string>
   <string name="set_default_account">Kasuta helistamiseks alati seda</string>
-  <string name="select_phone_account_for_calls">Valige selle kõne jaoks SIM-kaart</string>
-  <string name="select_phone_account_for_calls_remember">Jäta valik meelde</string>
   <string name="call_with_a_note">Kõne koos märkusega</string>
   <string name="call_subject_hint">Sisestage märkus, mis koos kõnega saata ...</string>
   <string name="send_and_call_button">SAADA JA HELISTA</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> Vahekaart %1$s. %2$d lugemata üksust. </item>
   </plurals>
   <string name="description_search_video_call">Videokõne</string>
-  <string name="description_search_call_and_share">Jagamine ja helistamine</string>
 </resources>

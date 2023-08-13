@@ -20,7 +20,6 @@
     <string name="unknown" msgid="7932659017139013277">"അജ്ഞാതം"</string>
     <string name="unknown_counter" msgid="7452889151953704159">"<xliff:g id="UNKNOWN">%1$s</xliff:g> <xliff:g id="ID">%2$d</xliff:g>"</string>
     <string name="payphone" msgid="7106361320283710387">"പണം നൽകി ഉപയോഗിക്കുന്ന ഫോൺ"</string>
-    <string name="launcherActivityLabel" msgid="9034868428899993166">"ഫോണ്‍"</string>
     <string name="video_call" msgid="8914878391104612532">"വീഡിയോ കോള്‍"</string>
     <string name="call" msgid="3699617769606114168">"വിളിക്കുക"</string>
 </resources>

@@ -34,28 +34,7 @@
   <string name="voicemail_string">Talhólf</string>
   <string name="just_now">Rétt í þessu</string>
   <string name="new_call_log_carrier_video">Myndsímtal símafyrirtækis</string>
-  <string name="new_call_log_duo_video">Myndsímtal Duo</string>
   <string name="new_call_log_unknown">Óþekkt</string>
   <string name="new_call_log_secondary_blocked">Á bannlista</string>
   <string name="new_call_log_secondary_spam">Ruslefni</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 símtal, það nýjasta er ósvarað símtal frá ^2</item>
-    <item quantity="other">^1 símtöl, það nýjasta er ósvarað símtal frá ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 símtal, það nýjasta er ósvarað símtal frá ^2</item>
-    <item quantity="other">^1 símtöl, það nýjasta er svarað símtal frá ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 símtal, það nýjasta er hringt símtal til ^2</item>
-    <item quantity="other">^1 símtöl, það nýjasta er hringt símtal til ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 símtal, það nýjasta er símtal frá ^2 sem lokað var á</item>
-    <item quantity="other">^1 símtöl, það nýjasta er símtal frá ^2 sem lokað var á</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">í ^1,
-    með ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

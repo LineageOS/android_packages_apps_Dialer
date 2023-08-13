@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">ΚΑΤΑΡΓΗΣΗ ΑΠΟΚΛΕΙΣΜΟΥ</string>
   <string name="block_report_number_alert_title">Να αποκλειστεί ο αριθμός %1$s;</string>
   <string name="block_report_number_alert_details">Δεν θα λαμβάνετε πλέον κλήσεις από αυτόν τον αριθμό.</string>
-  <string name="block_number_alert_details">%1$s Η κλήση αυτή θα αναφερθεί ως ανεπιθύμητη.</string>
   <string name="unblock_number_alert_details">Ο αποκλ. του αρ. θα καταργηθεί. Θα αναφερθεί ως μη ανεπιθ. Μελλοντικές κλ. δεν θα αναγν. ως ανεπιθ.</string>
   <string name="unblock_report_number_alert_title">Να καταργηθεί ο αποκλεισμός του αριθμού %1$s;</string>
   <string name="report_not_spam_alert_button">Αναφορά</string>

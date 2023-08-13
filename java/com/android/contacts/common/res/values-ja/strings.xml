@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">よく使う連絡先を消去しますか？</string>
   <string name="clearFrequentsConfirmation">連絡帳アプリや電話アプリのよく使う連絡先リストを消去し、メールアプリがアドレス設定を初めから保存していくようにします。</string>
   <string name="clearFrequentsProgress_title">よく使う連絡先を消去しています…</string>
-  <string name="status_available">オンライン</string>
-  <string name="status_away">不在</string>
-  <string name="status_busy">取り込み中</string>
-  <string name="contactsList">連絡先</string>
-  <string name="contact_suggestions">おすすめ</string>
-  <string name="local_invisible_directory">その他</string>
   <string name="directory_search_label">ディレクトリ</string>
   <string name="directory_search_label_work">仕事用の連絡先リスト</string>
-  <string name="local_search_label">すべての連絡先</string>
-  <string name="local_suggestions_search_label">候補</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">自分</string>
   <string name="missing_name">（名前なし）</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">連絡先を表示</string>
-  <string name="list_filter_phones">電話番号のあるすべての連絡先</string>
-  <string name="list_filter_phones_work">仕事用プロファイルの連絡先</string>
   <string name="view_updates_from_group">更新情報を表示</string>
   <string name="account_phone">端末のみ、未同期</string>
   <string name="nameLabelsGroup">名前</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">ICQでチャット</string>
   <string name="chat_jabber">Jabberでチャット</string>
   <string name="chat">チャット</string>
-  <string name="list_filter_all_accounts">すべての連絡先</string>
-  <string name="listAllContactsInAccount">%sの連絡先</string>
-  <string name="listCustomView">連絡先のカスタム表示</string>
-  <string name="listSingleContact">単独の連絡先</string>
   <string name="display_options_sort_list_by">並べ替え順序</string>
   <string name="display_options_sort_by_given_name">名</string>
   <string name="display_options_sort_by_family_name">姓</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">検索をクリア</string>
   <string name="select_account_dialog_title">アカウント</string>
   <string name="set_default_account">このSIMを常に通話に使用する</string>
-  <string name="select_phone_account_for_calls">この通話で使用する SIM の選択</string>
-  <string name="select_phone_account_for_calls_remember">この設定を記憶する</string>
   <string name="call_with_a_note">メモを添付して発信</string>
   <string name="call_subject_hint">発信時に送信するメモを入力...</string>
   <string name="send_and_call_button">送信 / 通話</string>
@@ -141,5 +123,4 @@
     <item quantity="other"> %1$s タブ。%2$d 件の未読項目。</item>
   </plurals>
   <string name="description_search_video_call">ビデオ通話</string>
-  <string name="description_search_call_and_share">共有して発信</string>
 </resources>

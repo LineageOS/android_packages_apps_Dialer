@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Sulaikyti</string>
   <string name="incall_label_add_call">Pr. skambutį</string>
   <string name="incall_label_mute">Nutildyti</string>
-  <string name="incall_label_end_call">Baig. skamb.</string>
   <string name="incall_label_dialpad">Klaviatūra</string>
   <string name="incall_talkback_speaker_on">, įjungtas</string>
   <string name="incall_talkback_speaker_off">, išjungtas</string>

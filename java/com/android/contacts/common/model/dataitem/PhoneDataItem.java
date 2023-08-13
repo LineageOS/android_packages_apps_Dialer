@@ -42,10 +42,6 @@ public class PhoneDataItem extends DataItem {
     return getContentValues().getAsString(Phone.NORMALIZED_NUMBER);
   }
 
-  public String getFormattedPhoneNumber() {
-    return getContentValues().getAsString(KEY_FORMATTED_PHONE_NUMBER);
-  }
-
   public String getLabel() {
     return getContentValues().getAsString(Phone.LABEL);
   }
@@ -57,20 +53,6 @@ public class PhoneDataItem extends DataItem {
           PhoneNumberHelper.formatNumber(
               context, phoneNumber, getNormalizedNumber(), defaultCountryIso);
       getContentValues().put(KEY_FORMATTED_PHONE_NUMBER, formattedPhoneNumber);
-    }
-  }
-
-  /**
-   * Returns the formatted phone number (if already computed using {@link
-   * #computeFormattedPhoneNumber}). Otherwise this method returns the unformatted phone number.
-   */
-  @Override
-  public String buildDataStringForDisplay(Context context, DataKind kind) {
-    final String formatted = getFormattedPhoneNumber();
-    if (formatted != null) {
-      return formatted;
-    } else {
-      return getNumber();
     }
   }
 }

@@ -5,7 +5,6 @@
   <string name="unblock_number_ok">TILTÁS FELOLDÁSA</string>
   <string name="block_report_number_alert_title">Letiltja a következő számot: %1$s?</string>
   <string name="block_report_number_alert_details">A jövőben nem fogad hívásokat erről a számról.</string>
-  <string name="block_number_alert_details">%1$s A hívást spamként jelentjük be.</string>
   <string name="unblock_number_alert_details">A rendszer feloldja a szám tiltását, és nem spamként jelenti be. A hívások nem spamek.</string>
   <string name="unblock_report_number_alert_title">Feloldja a következő szám tiltását: %1$s?</string>
   <string name="report_not_spam_alert_button">Bejelentés</string>

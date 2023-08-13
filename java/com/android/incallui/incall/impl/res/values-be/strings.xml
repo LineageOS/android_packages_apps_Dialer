@@ -5,7 +5,6 @@
   <string name="incall_label_hold">Утрымліваць</string>
   <string name="incall_label_add_call">Дадаць выклік</string>
   <string name="incall_label_mute">Адключыць мікрафон</string>
-  <string name="incall_label_end_call">Сконч. выкл.</string>
   <string name="incall_label_dialpad">Клавіятура</string>
   <string name="incall_talkback_speaker_on">, уключана</string>
   <string name="incall_talkback_speaker_off">, выключана</string>

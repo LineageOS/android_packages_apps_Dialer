@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">எண்ணை நகலெடு</string>
   <string name="call_details_edit_number">அழைப்பதற்கு முன் எண்ணைத் திருத்து</string>
   <string name="call_details_report_call_id">துல்லியமற்ற எண் எனப் புகாரளி</string>
-  <string name="sent_a_photo">படம் அனுப்பப்பட்டது</string>
-  <string name="received_a_photo">படம் பெறப்பட்டது</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">தவறான எண் எனப் புகாரளி</string>
   <string name="report_caller_id_failed">எண்ணைப் புகாரளிக்க முடியவில்லை</string>
   <string name="report_caller_id_toast">எண் புகாரளிக்கப்பட்டது</string>

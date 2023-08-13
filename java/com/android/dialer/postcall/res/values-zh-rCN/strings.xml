@@ -4,8 +4,7 @@
   <string name="post_call_message_1">情况紧急，请回电。</string>
   <string name="post_call_message_2">有空时给我回电。</string>
   <string name="post_call_message_3">不着急，稍后再聊。</string>
-  <string name="post_call_add_message">添加信息</string>
-  <string name="post_call_send_message">发送短信</string>
+    <string name="post_call_send_message">发送短信</string>
   <string name="post_call_message_sent">信息已发送</string>
   <string name="view">查看</string>
 </resources>

@@ -45,21 +45,9 @@
   <string name="clearFrequentsConfirmation_title">Vill du rensa listan?</string>
   <string name="clearFrequentsConfirmation">Du rensar listan över personer som du kontaktar ofta i apparna Kontakter och Telefon. E-postappar tvingas lära sig dina mottagarinställningar från början.</string>
   <string name="clearFrequentsProgress_title">Listan rensas …</string>
-  <string name="status_available">Tillgänglig</string>
-  <string name="status_away">Borta</string>
-  <string name="status_busy">Upptagen</string>
-  <string name="contactsList">Kontakter</string>
-  <string name="contact_suggestions">Bästa förslagen</string>
-  <string name="local_invisible_directory">Övrigt</string>
   <string name="directory_search_label">Katalog</string>
   <string name="directory_search_label_work">Jobbkatalog</string>
-  <string name="local_search_label">Alla kontakter</string>
-  <string name="local_suggestions_search_label">Förslag</string>
-  <string msgid="9154761216179882405" name="user_profile_contacts_list_header">Jag</string>
   <string name="missing_name">(Inget namn)</string>
-  <string msgid="2795575601596468581" name="description_view_contact_detail">Visa kontakten</string>
-  <string name="list_filter_phones">Alla kontakter med telefonnummer</string>
-  <string name="list_filter_phones_work">Kontakter i jobbprofilen</string>
   <string name="view_updates_from_group">Visa uppdateringar</string>
   <string name="account_phone">Endast enhet, osynkroniserad</string>
   <string name="nameLabelsGroup">Namn</string>
@@ -113,10 +101,6 @@
   <string name="chat_icq">Chatta med ICQ</string>
   <string name="chat_jabber">Chatta med Jabber</string>
   <string name="chat">Chatt</string>
-  <string name="list_filter_all_accounts">Alla kontakter</string>
-  <string name="listAllContactsInAccount">Kontakter i %s</string>
-  <string name="listCustomView">Kontakter i anpassad vy</string>
-  <string name="listSingleContact">En kontakt</string>
   <string name="display_options_sort_list_by">Sortera efter</string>
   <string name="display_options_sort_by_given_name">Förnamn</string>
   <string name="display_options_sort_by_family_name">Efternamn</string>
@@ -128,8 +112,6 @@
   <string name="description_clear_search">Rensa sökning</string>
   <string name="select_account_dialog_title">Konto</string>
   <string name="set_default_account">Använd alltid för samtal</string>
-  <string name="select_phone_account_for_calls">Välj SIM-kort till det här samtalet</string>
-  <string name="select_phone_account_for_calls_remember">Kom ihåg det här valet</string>
   <string name="call_with_a_note">Ring med anteckning</string>
   <string name="call_subject_hint">Gör en anteckning som skickas när du ringer …</string>
   <string name="send_and_call_button">SKICKA OCH RING</string>
@@ -141,5 +123,4 @@
     <item quantity="other">Fliken %1$s. %2$d olästa poster. </item>
   </plurals>
   <string name="description_search_video_call">Videosamtal</string>
-  <string name="description_search_call_and_share">Dela och ring</string>
 </resources>

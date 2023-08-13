@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">Телефон</string>
-  <string name="launcherDialpadActivityLabel">Тастатура за бирање на телефон</string>
   <string name="callHistoryIconLabel">Историја на повици</string>
   <string name="action_copy_number_text">Копирај го бројот</string>
   <string name="action_edit_number_before_call">Уредете го бројот пред повикот</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">Повеќе опции</string>
   <string name="action_menu_dialpad_button">тастатура за бирање</string>
   <string name="dialer_settings_label">Поставки</string>
-  <string name="simulator_submenu_label">Симулатор</string>
-  <string name="new_ui_launcher_shortcut_label">Создај крат. за нов интерфејс</string>
   <string name="description_entering_bulk_action_mode">Влегувате во режим на групно дејство</string>
   <string name="description_leaving_bulk_action_mode">Излеговте од режим на групно дејство</string>
   <string name="description_selecting_bulk_action_mode">Избрано е %1$s</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">Видеоповик.</string>
   <string name="description_start_voice_search">Започни гласовно пребарување</string>
   <string name="voicemail">Говорна пошта</string>
-  <string name="description_cancel_multi_select">Откажи го режимот на групни дејства</string>
   <string name="voicemailMultiSelectDeleteConfirm">Избриши</string>
   <string name="voicemailMultiSelectDeleteCancel">Откажи</string>
   <string name="voicemailMultiSelectActionBarTitle">Избрани се %1$s</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">Гласовното пребарување не е достапно</string>
   <string name="dialer_hint_find_contact">Пребарај контакти</string>
-  <string name="block_number_search_hint">Додајте број или побарајте контакти</string>
   <string name="call_log_all_empty">Историјата на повици е празна</string>
   <string name="call_log_all_empty_action">Повикај</string>
   <string name="call_log_missed_empty">Немате пропуштени повици.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">Историја на повици</string>
   <string name="call_log_all_title">Сите</string>
   <string name="call_log_missed_title">Пропуштени</string>
-  <string name="tab_speed_dial">Брзо бирање</string>
-  <string name="tab_history">Историја на повици</string>
   <string name="tab_all_contacts">Контакти</string>
-  <string name="tab_voicemail">Говорна пошта</string>
-  <string name="search_shortcut_call_number">Повикај %s</string>
   <string name="search_shortcut_create_new_contact">Создај нов контакт</string>
   <string name="search_shortcut_add_to_contact">Додај на контакт</string>
   <string name="search_shortcut_send_sms_message">Испрати SMS</string>
   <string name="search_shortcut_make_video_call">Остварете видеоповик</string>
-  <string name="search_shortcut_block_number">Блокирај го бројот</string>
-  <string name="speed_dial_empty">Сè уште немате никого на брзо бирање</string>
-  <string name="speed_dial_empty_add_favorite_action">Додај омилено</string>
-  <string name="remove_contact">Отстрани</string>
   <string name="select_all">Изберете ги сите</string>
   <string name="call_log_action_video_call">Видеоповик</string>
-  <string name="call_log_action_set_up_video">Поставете видеоповикување</string>
-  <string name="call_log_action_invite_video">Испратете покана за видеоповик</string>
   <string name="call_log_action_send_message">Испрати порака</string>
   <string name="call_log_action_details">Детали на повик</string>
   <string name="call_log_action_share_voicemail">Испрати на…</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">Повици</string>
   <string name="manage_blocked_numbers_label">Блокирани броеви</string>
   <string name="voicemail_settings_label">Говорна пошта</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">Блокирањето повик е привремено исклучено</string>
-  <string name="blocked_numbers_disabled_emergency_desc">Блокирањето повици е исклучено бидејќи ја контактиравте службата за итни случаи од телефонов во изминатите 48 часа. Повторно ќе се овозможи автоматски откако ќе истече периодот од 48 часа.</string>
-  <string name="import_send_to_voicemail_numbers_label">Увези броеви</string>
-  <string name="blocked_call_settings_import_description">Претходно означивте некои повикувачи да се испратат автоматски на говорната пошта преку други апликации.</string>
-  <string name="blocked_call_settings_view_numbers_button">Прикажи броеви</string>
-  <string name="blocked_call_settings_import_button">Увези</string>
-  <string name="description_blocked_number_list_delete">Одблокирај го бројот</string>
-  <string name="addBlockedNumber">Додај број</string>
-  <string name="block_number_footer_message_vvm">Повиците од овие броеви ќе се блокираат, а говорната пошта автоматски ќе се брише.</string>
-  <string name="block_number_footer_message_no_vvm">Повиците од овие броеви ќе се блокираат, но можно е сѐ уште да може да ви оставаат говорна пошта.</string>
-  <string name="block_list">Блокирани броеви</string>
-  <string name="alreadyBlocked">%1$s веќе е блокиран.</string>
   <string name="phone_account_settings_label">Сметки за повикување</string>
-  <string name="permission_no_speeddial">За да овозможите брзо бирање, вклучете ја дозволата за контакти.</string>
   <string name="permission_no_calllog">За да ја видите евиденцијата на повици, вклучете ја дозволата за телефон.</string>
-  <string name="permission_no_search">За да ги пребарувате контактите, вклучете ги дозволите за контакти.</string>
-  <string name="permission_place_call">За да воспоставите повик, вклучете ја дозволата за телефон.</string>
   <string name="toast_cannot_write_system_settings">Апликацијата на телефонот нема дозвола да пишува во поставките на системот.</string>
   <string name="blocked_number_call_log_label">Блокирано</string>
   <string name="call_log_action_block_report_number">Блокирај/пријави спам</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">Не е спам</string>
   <string name="call_log_action_unblock_number">Одблокирај го бројот</string>
   <string name="spam_number_call_log_label">Спам</string>
-  <string name="call_composer_connection_failed">Контактот %1$s е офлајн и недостапен</string>
-  <string name="about_phone_label">За</string>
-  <string name="voicemail_transcription_branding_text">Транскрибирано од Google</string>
-  <string name="voicemail_transcription_in_progress">Се транскрибира…</string>
-  <string name="voicemail_transcription_failed">Не е достапна транскрипција.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">Не е достапна транскрипција. Јазикот не е поддржан.</string>
-  <string name="voicemail_transcription_failed_no_speech">Не е достапна транскрипција. Нема откриен говор.</string>
-  <string name="voicemail_donation_promo_title">Ќе помогнете да се зголеми прецизноста на транскрипцијата?</string>
-  <string name="voicemail_donation_promo_content">Дозволете Google да ги прегледува оваа и идните пораки од говорната пошта со преписи. Ќе се складираат анонимно. Променете во „Поставки“ во секое време. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">Да, прифаќам</string>
-  <string name="voicemail_donation_promo_opt_out">Не, фала</string>
-  <string name="voicemail_transcription_rating">Оценете го квалит. на преписот</string>
-  <string name="voicemail_transcription_rating_thanks">Ви благодариме за повратните информации</string>
-  <string name="description_rating_good">Ми се допаѓа</string>
-  <string name="description_rating_bad">Не ми се допаѓа</string>
-  <string name="view_conversation">Прикажи</string>
-  <string name="ec_data_deleted">Повикот е избришан. За преглед и бришење на прилозите споделени во текот на разговоров, одете во „Пораки“.</string>
-  <string name="multiple_ec_data_deleted">Повиците се избришани. За преглед и бришење на прилозите споделени во текот на разговорите, одете во „Пораки“.</string>
 </resources>

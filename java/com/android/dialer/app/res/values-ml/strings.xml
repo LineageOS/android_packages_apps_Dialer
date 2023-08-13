@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">ഫോണ്‍</string>
-  <string name="launcherDialpadActivityLabel">ഫോൺ കീപാഡ്</string>
   <string name="callHistoryIconLabel">കോള്‍‌ ചരിത്രം</string>
   <string name="action_copy_number_text">നമ്പർ പകർത്തുക</string>
   <string name="action_edit_number_before_call">കോൾ ചെയ്യുംമുമ്പ് നമ്പർ എഡിറ്റുചെയ്യൂ</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">കൂടുതൽ‍ ഓപ്‌ഷനുകള്‍</string>
   <string name="action_menu_dialpad_button">കീപാഡ്</string>
   <string name="dialer_settings_label">ക്രമീകരണം</string>
-  <string name="simulator_submenu_label">സിമുലേറ്റർ</string>
-  <string name="new_ui_launcher_shortcut_label">പുതിയ UI കുറുക്കുവഴി സൃഷ്‌ടിക്കുക</string>
   <string name="description_entering_bulk_action_mode">ബൾക്ക് പ്രവർത്തന മോഡിലേക്ക് പ്രവേശിക്കുന്നു</string>
   <string name="description_leaving_bulk_action_mode">ബൾക്ക് പ്രവർത്തന മോഡ് വിട്ടു</string>
   <string name="description_selecting_bulk_action_mode">%1$s തിരഞ്ഞെടുത്തു</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">വീഡിയോ കോൾ.</string>
   <string name="description_start_voice_search">ശബ്ദ തിരയൽ ആരംഭിക്കുക</string>
   <string name="voicemail">വോയ്‌സ്‌മെയിൽ</string>
-  <string name="description_cancel_multi_select">\'ബാച്ച് പ്രവർത്തനങ്ങൾ\' മോഡ് റദ്ദാക്കുക</string>
   <string name="voicemailMultiSelectDeleteConfirm">ഇല്ലാതാക്കുക</string>
   <string name="voicemailMultiSelectDeleteCancel">റദ്ദാക്കൂ</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s എണ്ണം തിരഞ്ഞെടുത്തു</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">വോയ്‌സ് തിരയൽ ലഭ്യമല്ല</string>
   <string name="dialer_hint_find_contact">കോണ്‍‌ടാക്റ്റുകള്‍ തിരയുക</string>
-  <string name="block_number_search_hint">നമ്പർ ചേർക്കുക അല്ലെങ്കിൽ കോൺടാക്റ്റുകൾ തിരയുക</string>
   <string name="call_log_all_empty">നിങ്ങളുടെ കോൾ ചരിത്രം ശൂന്യമാണ്</string>
   <string name="call_log_all_empty_action">ഒരു കോൾ ചെയ്യുക</string>
   <string name="call_log_missed_empty">നിങ്ങൾക്ക് മിസ്‌ഡ് കോളുകളൊന്നുമില്ല.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">കോള്‍‌ ചരിത്രം</string>
   <string name="call_log_all_title">എല്ലാം</string>
   <string name="call_log_missed_title">മിസ്‌ഡ്</string>
-  <string name="tab_speed_dial">സ്‌പീഡ് ഡയൽ</string>
-  <string name="tab_history">കോൾ ചരിത്രം</string>
   <string name="tab_all_contacts">കോണ്‍ടാക്റ്റുകള്‍</string>
-  <string name="tab_voicemail">വോയ്‌സ്‌മെയിൽ</string>
-  <string name="search_shortcut_call_number">വിളിക്കുക %s</string>
   <string name="search_shortcut_create_new_contact">പുതിയകോൺടാക്റ്റ് സൃഷ്‌ടിക്കൂ</string>
   <string name="search_shortcut_add_to_contact">ഒരുകോൺടാക്റ്റിൽ ചേർക്കൂ</string>
   <string name="search_shortcut_send_sms_message">SMS അയയ്ക്കുക</string>
   <string name="search_shortcut_make_video_call">വീഡിയോ കോൾ ചെയ്യുക</string>
-  <string name="search_shortcut_block_number">നമ്പർ ബ്ലോക്കുചെയ്യുക</string>
-  <string name="speed_dial_empty">ഇതുവരെ ആരും നിങ്ങളുടെ സ്പീഡ് ഡയലിൽ ഇല്ല</string>
-  <string name="speed_dial_empty_add_favorite_action">പ്രിയപ്പെട്ടത് ചേർക്കുക</string>
-  <string name="remove_contact">നീക്കംചെയ്യുക</string>
   <string name="select_all">എല്ലാം തിരഞ്ഞെടുക്കുക</string>
   <string name="call_log_action_video_call">വീഡിയോ കോള്‍</string>
-  <string name="call_log_action_set_up_video">വീഡിയോ കോളിംഗ് സജ്ജമാക്കുക</string>
-  <string name="call_log_action_invite_video">വീഡിയോ കോളിലേക്ക് ക്ഷണിക്കുക</string>
   <string name="call_log_action_send_message">ഒരു സന്ദേശം അയയ്‌ക്കുക</string>
   <string name="call_log_action_details">കോൾ വിശദാംശങ്ങൾ</string>
   <string name="call_log_action_share_voicemail">ഇതിലേക്ക് അയയ്‌ക്കുക ...</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">കോളുകൾ</string>
   <string name="manage_blocked_numbers_label">ബ്ലോക്ക് ചെയ്‌ത നമ്പറുകൾ</string>
   <string name="voicemail_settings_label">വോയ്സ് മെയില്‍</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">കോൾ ബ്ലോക്കുചെയ്യൽ താൽക്കാലികമായി ഓഫാണ്</string>
-  <string name="blocked_numbers_disabled_emergency_desc">കഴിഞ്ഞ 48 മണിക്കൂറിനുള്ളിൽ നിങ്ങൾ ഈ ഫോണിൽ നിന്ന് അടിയന്തിര സേവനങ്ങളുമായി ബന്ധപ്പെട്ടതിനാൽ കോൾ ബ്ലോക്കുചെയ്യൽ പ്രവർത്തനരഹിതമാക്കി. 48 മണിക്കൂർ സമയപരിധി കഴിഞ്ഞയുടൻ ഇത് സ്വയമേവ പ്രവർത്തനക്ഷമമാക്കപ്പെടും.</string>
-  <string name="import_send_to_voicemail_numbers_label">നമ്പറുകൾ ഇമ്പോർട്ടുചെയ്യുക</string>
-  <string name="blocked_call_settings_import_description">മറ്റ് ആപ്സ് വഴി വോയ്സ്‌മെയിൽ സ്വയമേവ അയയ്ക്കുന്നതിന് കോൾ ചെയ്യുന്നവരിൽ ചിലരെ നിങ്ങൾ മുമ്പ് അടയാളപ്പെടുത്തി.</string>
-  <string name="blocked_call_settings_view_numbers_button">നമ്പറുകൾ കാണുക</string>
-  <string name="blocked_call_settings_import_button">ഇമ്പോർട്ടുചെയ്യുക</string>
-  <string name="description_blocked_number_list_delete">നമ്പർ അൺബ്ലോക്കുചെയ്യുക</string>
-  <string name="addBlockedNumber">നമ്പർ ചേർക്കുക</string>
-  <string name="block_number_footer_message_vvm">ഈ നമ്പറുകളിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, വോയ്സ്മെയിലുകളെ സ്വയമേവ ഇല്ലാതാക്കും.</string>
-  <string name="block_number_footer_message_no_vvm">ഈ നമ്പറുകളിൽ നിന്നുള്ള കോളുകൾ ബ്ലോക്കുചെയ്യും, എന്നാൽ വിളിക്കുന്നവർക്ക് അപ്പോഴും നിങ്ങൾക്ക് വോയ്സ്‌മെയിലുകൾ അയയ്ക്കാൻ കഴിഞ്ഞേക്കാം.</string>
-  <string name="block_list">ബ്ലോക്കുചെയ്ത നമ്പറുകൾ</string>
-  <string name="alreadyBlocked">ഇതിനകം തന്നെ %1$s ബ്ലോക്കുചെയ്തിരിക്കുന്നു</string>
   <string name="phone_account_settings_label">കോളിംഗ് അക്കൗണ്ട്</string>
-  <string name="permission_no_speeddial">സ്പീഡ് ഡയൽ പ്രവർത്തനക്ഷമാക്കുന്നതിന്, \'കോൺടാക്റ്റുകൾ\' അനുമതി ഓണാക്കുക.</string>
   <string name="permission_no_calllog">നിങ്ങളുടെ കോൾ ലോഗ് കാണുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക.</string>
-  <string name="permission_no_search">നിങ്ങളുടെ കോൺടാക്റ്റുകൾ തിരയുന്നതിന് കോൺടാക്റ്റുകൾക്കുള്ള അനുമതികൾ ഓണാക്കുക.</string>
-  <string name="permission_place_call">കോൾ വിളിക്കുന്നതിന്, \'ഫോൺ\' അനുമതി ഓണാക്കുക.</string>
   <string name="toast_cannot_write_system_settings">സിസ്റ്റം ക്രമീകരണത്തിലേക്ക് എഴുതാൻ ഫോൺ ആപ്പിന് അനുമതിയില്ല.</string>
   <string name="blocked_number_call_log_label">തടഞ്ഞിരിക്കുന്നു</string>
   <string name="call_log_action_block_report_number">ബ്ലോക്കുചെയ്യുക/സ്പാമാണെന്ന് റിപ്പോർട്ടുചെയ്യുക</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">സ്പാം അല്ല</string>
   <string name="call_log_action_unblock_number">നമ്പർ അൺബ്ലോക്കുചെയ്യുക</string>
   <string name="spam_number_call_log_label">സ്‌പാം</string>
-  <string name="call_composer_connection_failed">%1$s ഓഫ്‌ലൈനായതിനാൽ കോൾ ചെയ്യാനാവില്ല</string>
-  <string name="about_phone_label">ആമുഖം</string>
-  <string name="voicemail_transcription_branding_text">Google ട്രാൻസ്‌ക്രൈബ് ചെയ്‌തത്</string>
-  <string name="voicemail_transcription_in_progress">കേട്ടെഴുതുന്നു...</string>
-  <string name="voicemail_transcription_failed">ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല. ഭാഷ പിന്തുണയ്‌ക്കുന്നില്ല.</string>
-  <string name="voicemail_transcription_failed_no_speech">ട്രാൻസ്‌ക്രിപ്‌റ്റ് ലഭ്യമല്ല. സംഭാഷണമൊന്നും കണ്ടെത്തിയില്ല.</string>
-  <string name="voicemail_donation_promo_title">ട്രാൻസ്‌ക്രിപ്ഷൻ കൃത്യത മെച്ചപ്പെടുത്താൻ സഹായിക്കണോ?</string>
-  <string name="voicemail_donation_promo_content">ട്രാൻസ്‌ക്രിപ്‌റ്റുകൾ ഉപയോഗിച്ച് ഇതും ഭാവി വോയ്‌സ്‌മെയിൽ സന്ദേശങ്ങളും അവലോകനം ചെയ്യാൻ Google-നെ അനുവദിക്കുക. അവ അജ്ഞാതമായാണ് സംഭരിക്കുക. ഏത് സമയത്തും ക്രമീകരണം മാറ്റാം. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">ഞാൻ തയ്യാറാണ്</string>
-  <string name="voicemail_donation_promo_opt_out">വേണ്ട</string>
-  <string name="voicemail_transcription_rating">ട്രാൻസ്‌ക്രിപ്ഷൻ റേറ്റ് ചെയ്യൂ</string>
-  <string name="voicemail_transcription_rating_thanks">നിങ്ങളുടെ ഫീഡ്‌ബാക്കിന് നന്ദി</string>
-  <string name="description_rating_good">ലൈക്ക് ചെയ്യുക</string>
-  <string name="description_rating_bad">ഡിസ്‌ലൈക്ക് ചെയ്യുക</string>
-  <string name="view_conversation">കാണുക</string>
-  <string name="ec_data_deleted">കോൾ ഇല്ലാതാക്കി. ഈ കോൾ ചെയ്യുമ്പോൾ പങ്കിട്ട അറ്റാച്ച്‌മെന്റുകൾ മെസേജിൽ കാണുകയും ഇല്ലാതാക്കുകയും ചെയ്യുക.</string>
-  <string name="multiple_ec_data_deleted">കോളുകൾ ഇല്ലാതാക്കി. ഈ കോളുകൾ ചെയ്യുമ്പോൾ പങ്കിട്ട അറ്റാച്ച്‌മെന്റുകൾ മെസേജിൽ കാണുകയും ഇല്ലാതാക്കുകയും ചെയ്യുക.</string>
 </resources>

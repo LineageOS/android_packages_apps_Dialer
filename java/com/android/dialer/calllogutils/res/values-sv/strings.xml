@@ -34,28 +34,7 @@
   <string name="voicemail_string">Röstbrevlåda</string>
   <string name="just_now">Nyss</string>
   <string name="new_call_log_carrier_video">Operatörsvideo</string>
-  <string name="new_call_log_duo_video">Duo-video</string>
   <string name="new_call_log_unknown">Okänd</string>
   <string name="new_call_log_secondary_blocked">Blockerad</string>
   <string name="new_call_log_secondary_spam">Spam</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1 missat samtal från ^2</item>
-    <item quantity="other">^1 samtal, det senaste är ett missat samtal från ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1 besvarat samtal från ^2</item>
-    <item quantity="other">^1 samtal, det senaste är ett besvarat samtal från ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1 utgående samtal till ^2</item>
-    <item quantity="other">^1 samtal, det senaste är ett utgående samtal till ^2</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1 blockerat samtal från ^2</item>
-    <item quantity="other">^1 samtal, det senaste är ett blockerat samtal från ^2</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">med ^1,
-    på ^2</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2.</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3.</string>
 </resources>

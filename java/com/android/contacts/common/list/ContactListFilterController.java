@@ -45,16 +45,6 @@ public abstract class ContactListFilterController {
   public abstract ContactListFilter getFilter();
 
   /**
-   * @param filter the filter
-   * @param persistent True when the given filter should be saved soon. False when the filter should
-   *     not be saved. The latter case may happen when some Intent requires a certain type of UI
-   *     (e.g. single contact) temporarily.
-   */
-  public abstract void setContactListFilter(ContactListFilter filter, boolean persistent);
-
-  public abstract void selectCustomFilter();
-
-  /**
    * Checks if the current filter is valid and reset the filter if not. It may happen when an
    * account is removed while the filter points to the account with {@link
    * ContactListFilter#FILTER_TYPE_ACCOUNT} type, for example. It may also happen if the current
@@ -105,11 +95,6 @@ class ContactListFilterControllerImpl extends ContactListFilterController {
     return PreferenceManager.getDefaultSharedPreferences(mAppContext);
   }
 
-  @Override
-  public void setContactListFilter(ContactListFilter filter, boolean persistent) {
-    setContactListFilter(filter, persistent, true);
-  }
-
   private void setContactListFilter(
       ContactListFilter filter, boolean persistent, boolean notifyListeners) {
     if (!filter.equals(mFilter)) {
@@ -121,12 +106,6 @@ class ContactListFilterControllerImpl extends ContactListFilterController {
         notifyContactListFilterChanged();
       }
     }
-  }
-
-  @Override
-  public void selectCustomFilter() {
-    setContactListFilter(
-        ContactListFilter.createFilterWithType(ContactListFilter.FILTER_TYPE_CUSTOM), true);
   }
 
   private void notifyContactListFilterChanged() {

@@ -34,28 +34,7 @@
   <string name="voicemail_string">ভয়েসমেল</string>
   <string name="just_now">এখনই</string>
   <string name="new_call_log_carrier_video">পরিষেবা প্রদানকারীতে ভিডিও</string>
-  <string name="new_call_log_duo_video">Duo ভিডিও</string>
   <string name="new_call_log_unknown">অজানা</string>
   <string name="new_call_log_secondary_blocked">ব্লক করা নম্বর</string>
   <string name="new_call_log_secondary_spam">স্প্যাম</string>
-  <plurals name="a11y_new_call_log_entry_missed_call">
-    <item quantity="one">^1টি কল, শেষ কলটি ^2-এর, যেটি মিস করেছেন</item>
-    <item quantity="other">^1টি কল, শেষ কলটি ^2-এর, যেটি মিস করেছেন</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_answered_call">
-    <item quantity="one">^1টি কল, শেষ কলটি ^2-এর, যেটির উত্তর দিয়েছেন</item>
-    <item quantity="other">^1টি কল, শেষ কলটি ^2-এর, যেটির উত্তর দিয়েছেন</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_outgoing_call">
-    <item quantity="one">^1টি কল করেছেন, শেষ কলটি ^2-কে</item>
-    <item quantity="other">^1টি কল করেছেন, শেষ কলটি ^2-কে</item>
-  </plurals>
-  <plurals name="a11y_new_call_log_entry_blocked_call">
-    <item quantity="one">^1টি কল, শেষ কলটি ^2-এর, যেটি আপনি ব্লক করেছেন</item>
-    <item quantity="other">^1টি কল, শেষ কলটি ^2-এর, যেটি আপনি ব্লক করেছেন</item>
-  </plurals>
-  <string name="a11y_new_call_log_entry_phone_account">^1-এ,
-    ^2-এর মাধ্যমে</string>
-  <string name="a11y_new_call_log_entry_full_description_without_phone_account_info">^1, ^2।</string>
-  <string name="a11y_new_call_log_entry_full_description_with_phone_account_info">^1, ^2, ^3।</string>
 </resources>

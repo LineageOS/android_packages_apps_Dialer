@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">Kopieer nommer</string>
   <string name="call_details_edit_number">Wysig nommer voordat jy bel</string>
   <string name="call_details_report_call_id">Gee foutiewe nommer aan</string>
-  <string name="sent_a_photo">Het \'n foto gestuur</string>
-  <string name="received_a_photo">Het \'n foto ontvang</string>
-  <string name="message_in_quotes">\"%1$s\"</string>
   <string name="report_caller_id_dialog_title">Gee verkeerde nommer aan</string>
   <string name="report_caller_id_failed">Kon nie nommer aangee nie</string>
   <string name="report_caller_id_toast">Nommer is aangegee</string>

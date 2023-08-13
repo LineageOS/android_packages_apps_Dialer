@@ -5,9 +5,6 @@
   <string name="call_details_copy_number">複製號碼</string>
   <string name="call_details_edit_number">撥打電話前編輯號碼</string>
   <string name="call_details_report_call_id">回報號碼錯誤</string>
-  <string name="sent_a_photo">傳送了 1 張相片</string>
-  <string name="received_a_photo">收到了 1 張相片</string>
-  <string name="message_in_quotes">「%1$s」</string>
   <string name="report_caller_id_dialog_title">回報不正確的號碼</string>
   <string name="report_caller_id_failed">無法回報號碼</string>
   <string name="report_caller_id_toast">已回報號碼</string>

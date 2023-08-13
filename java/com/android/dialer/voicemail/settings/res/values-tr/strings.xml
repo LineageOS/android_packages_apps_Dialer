@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="voicemail_settings_with_label">Sesli mesaj (%s)</string>
   <string name="voicemail_settings_title">Sesli mesaj</string>
   <string name="voicemail_notifications_preference_title">Bildirimler</string>
   <string name="voicemail_change_greeting_preference_title">Sesli karşılama mesajı</string>
@@ -14,8 +13,6 @@
   <string name="voicemail_change_pin_preference_title">PIN\'i değiştirin</string>
   <string name="voicemail_change_pin_preference_summary_disable">PIN\'i değiştirebilmek için görsel sesli mesaj etkinleştirilmelidir</string>
   <string name="voicemail_change_pin_preference_summary_not_activated">Görsel sesli mesaj henüz etkinleştirilmedi. Lütfen daha sonra tekrar deneyin.</string>
-  <string name="vm_change_pin_old_pin">Eski PIN</string>
-  <string name="vm_change_pin_new_pin">Yeni PIN</string>
   <string name="vm_change_pin_progress_message">Lütfen bekleyin.</string>
   <string name="vm_change_pin_error_too_short">Yeni PIN çok kısa.</string>
   <string name="vm_change_pin_error_too_long">Yeni PIN çok uzun.</string>
@@ -35,11 +32,7 @@
   <string name="change_pin_confirm_pins_dont_match">PIN\'ler eşleşmiyor</string>
   <string name="change_pin_succeeded">Sesli mesaj PIN\'i güncellendi</string>
   <string name="change_pin_system_error">PIN belirlenemedi</string>
-  <string name="voicemail_visual_voicemail_transcription_switch_title">Sesli mesaj çeviri yazısı</string>
-  <string name="voicemail_visual_voicemail_donation_switch_title">Sesli mesaj çeviri yazısı analizi</string>
   <string name="voicemail_activating_summary_info">Sesli mesaj etkinleştiriliyor</string>
-  <string name="voicemail_transcription_preference_summary_info">Google\'ın çeviri yazı hizmetini kullanarak sesli mesajlarınızın çeviri yazılarını alın. %1$s</string>
-  <string name="voicemail_donate_preference_summary_info">Çeviri yazı doğruluğunun iyileştirilmesi için Google\'a sesli mesajlarınızı inceleme izni verin. Sesli mesajlarınız anonim olarak depolanır. %1$s</string>
   <string name="confirm_disable_voicemail_dialog_title">Görsel sesli mesaj özelliğini kapatın</string>
   <string name="confirm_disable_voicemail_dialog_message">Bu işlemle, bu uygulamada depolanan tüm sesli mesajlar ve Google çeviri yazıları silinecek. Operatörünüz bunların birer kopyasını saklayabilir.</string>
   <string name="confirm_disable_voicemail_accept_dialog_label">KAPAT</string>

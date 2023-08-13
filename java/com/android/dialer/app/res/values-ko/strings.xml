@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="applicationLabel">전화</string>
-  <string name="launcherDialpadActivityLabel">휴대전화 키패드</string>
   <string name="callHistoryIconLabel">통화 기록</string>
   <string name="action_copy_number_text">전화번호 복사</string>
   <string name="action_edit_number_before_call">통화하기 전에 번호 수정</string>
@@ -36,8 +35,6 @@
   <string msgid="2295659037509008453" name="action_menu_overflow_description">옵션 더보기</string>
   <string name="action_menu_dialpad_button">키패드</string>
   <string name="dialer_settings_label">설정</string>
-  <string name="simulator_submenu_label">시뮬레이터</string>
-  <string name="new_ui_launcher_shortcut_label">새 UI 바로가기 만들기</string>
   <string name="description_entering_bulk_action_mode">일괄 작업 모드 시작 중</string>
   <string name="description_leaving_bulk_action_mode">일괄 작업 모드 종료됨</string>
   <string name="description_selecting_bulk_action_mode">%1$s 선택됨</string>
@@ -48,7 +45,6 @@
   <string name="description_video_call">화상 통화</string>
   <string name="description_start_voice_search">음성 검색 시작</string>
   <string name="voicemail">음성사서함</string>
-  <string name="description_cancel_multi_select">일괄 작업 모드 취소</string>
   <string name="voicemailMultiSelectDeleteConfirm">삭제</string>
   <string name="voicemailMultiSelectDeleteCancel">취소</string>
   <string name="voicemailMultiSelectActionBarTitle">%1$s개 선택됨</string>
@@ -62,7 +58,6 @@
   <string name="voicemailCallLogDateTimeFormatWithDuration">%1$s • %2$s</string>
   <string name="voice_search_not_available">음성검색이 지원되지 않습니다.</string>
   <string name="dialer_hint_find_contact">주소록 검색</string>
-  <string name="block_number_search_hint">번호 추가 또는 연락처 검색</string>
   <string name="call_log_all_empty">통화 기록이 비어있습니다.</string>
   <string name="call_log_all_empty_action">전화 걸기</string>
   <string name="call_log_missed_empty">부재중 전화가 없습니다.</string>
@@ -70,23 +65,13 @@
   <string name="call_log_activity_title">통화 기록</string>
   <string name="call_log_all_title">전체</string>
   <string name="call_log_missed_title">부재중 전화</string>
-  <string name="tab_speed_dial">단축번호</string>
-  <string name="tab_history">통화 기록</string>
   <string name="tab_all_contacts">주소록</string>
-  <string name="tab_voicemail">음성사서함</string>
-  <string name="search_shortcut_call_number">%s에 전화</string>
   <string name="search_shortcut_create_new_contact">새 연락처 만들기</string>
   <string name="search_shortcut_add_to_contact">연락처에 추가</string>
   <string name="search_shortcut_send_sms_message">SMS 보내기</string>
   <string name="search_shortcut_make_video_call">화상 통화하기</string>
-  <string name="search_shortcut_block_number">번호 차단</string>
-  <string name="speed_dial_empty">아직 단축 다이얼이 설정된 연락처가 없습니다.</string>
-  <string name="speed_dial_empty_add_favorite_action">단축 다이얼 추가</string>
-  <string name="remove_contact">삭제</string>
   <string name="select_all">모두 선택</string>
   <string name="call_log_action_video_call">화상 통화</string>
-  <string name="call_log_action_set_up_video">화상 통화 설정</string>
-  <string name="call_log_action_invite_video">화상 통화에 초대</string>
   <string name="call_log_action_send_message">메시지 보내기</string>
   <string name="call_log_action_details">통화 세부정보</string>
   <string name="call_log_action_share_voicemail">수신자</string>
@@ -125,23 +110,8 @@
   <string name="call_settings_label">통화</string>
   <string name="manage_blocked_numbers_label">차단된 번호</string>
   <string name="voicemail_settings_label">음성사서함</string>
-  <string name="blocked_numbers_disabled_emergency_header_label">통화 차단 기능이 일시적으로 중지됨</string>
-  <string name="blocked_numbers_disabled_emergency_desc">지난 48시간 이내에 이 휴대전화를 사용해 응급 서비스에 연락했으므로 통화 차단 기능이 중지되었습니다. 48시간이 지나면 통화 차단 기능이 자동으로 다시 사용 설정됩니다.</string>
-  <string name="import_send_to_voicemail_numbers_label">번호 가져오기</string>
-  <string name="blocked_call_settings_import_description">이전에 다른 앱을 통해 일부 발신자를 자동으로 음성사서함으로 보내도록 표시했습니다.</string>
-  <string name="blocked_call_settings_view_numbers_button">개수 보기</string>
-  <string name="blocked_call_settings_import_button">가져오기</string>
-  <string name="description_blocked_number_list_delete">번호 차단 해제</string>
-  <string name="addBlockedNumber">번호 추가</string>
-  <string name="block_number_footer_message_vvm">이러한 번호에서 걸려오는 전화가 차단되며 음성사서함이 자동으로 삭제됩니다.</string>
-  <string name="block_number_footer_message_no_vvm">이러한 번호에서 걸려오는 전화가 차단되지만, 발신자가 음성사서함에 메시지를 남길 수는 있습니다.</string>
-  <string name="block_list">차단된 번호</string>
-  <string name="alreadyBlocked">%1$s번은 이미 차단되었습니다.</string>
   <string name="phone_account_settings_label">통화 계정</string>
-  <string name="permission_no_speeddial">단축번호를 사용하려면 주소록 권한을 사용하도록 설정하세요.</string>
   <string name="permission_no_calllog">통화 기록을 보려면 전화 권한을 사용하도록 설정하세요.</string>
-  <string name="permission_no_search">주소록을 검색하려면 주소록 권한을 사용하도록 설정하세요.</string>
-  <string name="permission_place_call">전화를 걸려면 전화 권한을 사용하도록 설정하세요.</string>
   <string name="toast_cannot_write_system_settings">전화 앱은 시스템 설정에 쓸 수 있는 권한이 없습니다.</string>
   <string name="blocked_number_call_log_label">차단됨</string>
   <string name="call_log_action_block_report_number">스팸 차단/신고</string>
@@ -149,22 +119,4 @@
   <string name="call_log_action_remove_spam">스팸 해제</string>
   <string name="call_log_action_unblock_number">번호 차단 해제</string>
   <string name="spam_number_call_log_label">스팸</string>
-  <string name="call_composer_connection_failed">%1$s님은 오프라인 상태이며 연락할 수 없습니다.</string>
-  <string name="about_phone_label">정보</string>
-  <string name="voicemail_transcription_branding_text">텍스트 변환 Google 제공</string>
-  <string name="voicemail_transcription_in_progress">텍스트 변환 중…</string>
-  <string name="voicemail_transcription_failed">텍스트 변환을 사용할 수 없습니다.</string>
-  <string name="voicemail_transcription_failed_language_not_supported">텍스트 변환을 사용할 수 없습니다. 지원되지 않는 언어입니다.</string>
-  <string name="voicemail_transcription_failed_no_speech">텍스트 변환을 사용할 수 없습니다. 감지된 음성이 없습니다.</string>
-  <string name="voicemail_donation_promo_title">텍스트 변환 정확성 개선에 참여하시겠습니까?</string>
-  <string name="voicemail_donation_promo_content">Google에서 이번 및 향후 음성사서함 메시지와 스크립트를 검토하도록 허용해 주세요. 정보는 익명으로 저장되며 설정은 언제든지 변경할 수 있습니다. %1$s</string>
-  <string name="voicemail_donation_promo_opt_in">사용</string>
-  <string name="voicemail_donation_promo_opt_out">사용 안함</string>
-  <string name="voicemail_transcription_rating">텍스트 변환 품질 평가</string>
-  <string name="voicemail_transcription_rating_thanks">의견을 보내 주셔서 감사합니다</string>
-  <string name="description_rating_good">좋아요</string>
-  <string name="description_rating_bad">싫어요</string>
-  <string name="view_conversation">보기</string>
-  <string name="ec_data_deleted">통화가 삭제되었습니다. 메시지에서 이 통화 중에 공유된 첨부파일을 확인하고 삭제하세요.</string>
-  <string name="multiple_ec_data_deleted">통화가 삭제되었습니다. 메시지에서 통화 중에 공유된 첨부파일을 확인하고 삭제하세요.</string>
 </resources>

@@ -5,7 +5,6 @@
   <string name="incall_label_hold">ခဏရပ်ထားရန်</string>
   <string name="incall_label_add_call">ထပ်ခေါ်ရန်</string>
   <string name="incall_label_mute">အသံပိတ်ရန်</string>
-  <string name="incall_label_end_call">ဖုန်းချရန်</string>
   <string name="incall_label_dialpad">ခလုတ်ခုံ</string>
   <string name="incall_talkback_speaker_on">၊ ပွင့်နေသည်</string>
   <string name="incall_talkback_speaker_off">၊ ပိတ်နေသည်</string>
