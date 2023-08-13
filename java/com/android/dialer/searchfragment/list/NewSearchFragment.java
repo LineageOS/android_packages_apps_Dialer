@@ -42,6 +42,7 @@ import android.widget.FrameLayout.LayoutParams;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.contacts.common.extensions.PhoneDirectoryExtender;
 import com.android.contacts.common.extensions.PhoneDirectoryExtenderAccessor;
 import com.android.dialer.R;
 import com.android.dialer.animation.AnimUtils;
@@ -276,6 +277,7 @@ public final class NewSearchFragment extends Fragment
 
     if (getContext() == null
         || PermissionsUtil.hasLocationPermissions(getContext())
+        || !PhoneDirectoryExtenderAccessor.get(getContext()).isEnabled(getContext())
         || hasBeenDismissed()
         || !isRegularSearch()) {
       adapter.hideLocationPermissionRequest();
